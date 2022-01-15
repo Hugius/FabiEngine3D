@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const auto newDirectoryPath = string(directoryPath + args[0].getString());
 
-			auto result = Tools::isDirectoryExisting(newDirectoryPath);
+			const auto result = Tools::isDirectoryExisting(newDirectoryPath);
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const auto filePath = (directoryPath + args[0].getString());
 
-			auto result = Tools::isFileExisting(filePath);
+			const auto result = Tools::isFileExisting(filePath);
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}

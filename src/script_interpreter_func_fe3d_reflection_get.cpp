@@ -15,7 +15,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 				return true;
 			}
 
-			auto result = _fe3d->reflection_isExisting(args[0].getString());
+			const auto result = _fe3d->reflection_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -46,7 +46,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d->reflection_getIDs();
+			const auto result = _fe3d->reflection_getIDs();
 
 			for(const auto& ID : result)
 			{
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0].getString()))
 			{
-				auto result = _fe3d->reflection_isVisible(args[0].getString());
+				const auto result = _fe3d->reflection_isVisible(args[0].getString());
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0].getString()))
 			{
-				auto result = _fe3d->reflection_getPosition(args[0].getString()).x;
+				const auto result = _fe3d->reflection_getPosition(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0].getString()))
 			{
-				auto result = _fe3d->reflection_getPosition(args[0].getString()).y;
+				const auto result = _fe3d->reflection_getPosition(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0].getString()))
 			{
-				auto result = _fe3d->reflection_getPosition(args[0].getString()).z;
+				const auto result = _fe3d->reflection_getPosition(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}

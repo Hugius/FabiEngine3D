@@ -12,6 +12,7 @@ const sockaddr_in NetworkingUtils::composeSocketAddress(const string& IP, const 
 	socketAddress.sin_family = AF_INET;
 	InetPton(AF_INET, IP.c_str(), &socketAddress.sin_addr.s_addr);
 	socketAddress.sin_port = htons(static_cast<u_short>(stoi(port)));
+
 	return socketAddress;
 }
 
@@ -19,6 +20,7 @@ const string NetworkingUtils::extractAddressIP(sockaddr_in* address)
 {
 	char IP[IPV4_ADDRESS_LENGTH];
 	inet_ntop(AF_INET, &(address->sin_addr), IP, sizeof(IP));
+
 	return string(IP);
 }
 
@@ -32,6 +34,7 @@ const string NetworkingUtils::extractSocketIP(SOCKET socket)
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+
 	return extractAddressIP(&socketAddress);
 }
 
@@ -40,6 +43,7 @@ const string NetworkingUtils::extractSocketPort(SOCKET socket)
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+
 	return extractAddressPort(&socketAddress);
 }
 
@@ -48,6 +52,7 @@ const string NetworkingUtils::extractPeerIP(SOCKET socket)
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+
 	return extractAddressIP(&socketAddress);
 }
 
@@ -56,6 +61,7 @@ const string NetworkingUtils::extractPeerPort(SOCKET socket)
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+
 	return extractAddressPort(&socketAddress);
 }
 
@@ -63,7 +69,8 @@ const bool NetworkingUtils::isValidIP(const string& IP)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	socketAddress.sin_family = AF_INET;
-	auto result = InetPton(AF_INET, IP.c_str(), &socketAddress.sin_addr.s_addr);
+	const auto result = InetPton(AF_INET, IP.c_str(), &socketAddress.sin_addr.s_addr);
+
 	return (result > 0);
 }
 
@@ -73,6 +80,7 @@ const bool NetworkingUtils::isMessageReadyUDP(SOCKET socket)
 	timeval timeInterval = {0, 1};
 	FD_ZERO(&socketSet);
 	FD_SET(socket, &socketSet);
+
 	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
 }
 

@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				return true;
 			}
 
-			auto result = _fe3d->aabb_isExisting(args[0].getString());
+			const auto result = _fe3d->aabb_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -65,8 +65,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_isVisible(args[0].getString());
-
+				const auto result = _fe3d->aabb_isVisible(args[0].getString());
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -85,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_getPosition(args[0].getString()).x;
+				const auto result = _fe3d->aabb_getPosition(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -104,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_getPosition(args[0].getString()).y;
+				const auto result = _fe3d->aabb_getPosition(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -123,7 +122,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_getPosition(args[0].getString()).z;
+				const auto result = _fe3d->aabb_getPosition(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -142,7 +141,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_getSize(args[0].getString()).x;
+				const auto result = _fe3d->aabb_getSize(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -161,7 +160,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_getSize(args[0].getString()).y;
+				const auto result = _fe3d->aabb_getSize(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -180,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_getSize(args[0].getString()).z;
+				const auto result = _fe3d->aabb_getSize(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -189,7 +188,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d->aabb_getIDs();
+			const auto result = _fe3d->aabb_getIDs();
 
 			for(const auto& ID : result)
 			{
@@ -217,7 +216,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_getSize(args[0].getString()).z;
+				const auto result = _fe3d->aabb_getSize(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -236,7 +235,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_getColor(args[0].getString()).r;
+				const auto result = _fe3d->aabb_getColor(args[0].getString()).r;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -255,7 +254,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_getColor(args[0].getString()).g;
+				const auto result = _fe3d->aabb_getColor(args[0].getString()).g;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -274,7 +273,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				auto result = _fe3d->aabb_getColor(args[0].getString()).b;
+				const auto result = _fe3d->aabb_getColor(args[0].getString()).b;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}

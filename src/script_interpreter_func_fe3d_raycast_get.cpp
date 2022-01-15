@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d->raycast_getCursorRay().getPosition().x;
+			const auto result = _fe3d->raycast_getCursorRay().getPosition().x;
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d->raycast_getCursorRay().getPosition().y;
+			const auto result = _fe3d->raycast_getCursorRay().getPosition().y;
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d->raycast_getCursorRay().getPosition().z;
+			const auto result = _fe3d->raycast_getCursorRay().getPosition().z;
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d->raycast_getCursorRay().getDirection().x;
+			const auto result = _fe3d->raycast_getCursorRay().getDirection().x;
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -40,7 +40,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d->raycast_getCursorRay().getDirection().y;
+			const auto result = _fe3d->raycast_getCursorRay().getDirection().y;
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d->raycast_getCursorRay().getDirection().z;
+			const auto result = _fe3d->raycast_getCursorRay().getDirection().z;
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		{
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d->raycast_getPointOnTerrain().x;
+				const auto result = _fe3d->raycast_getPointOnTerrain().x;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		{
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d->raycast_getPointOnTerrain().y;
+				const auto result = _fe3d->raycast_getPointOnTerrain().y;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		{
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d->raycast_getPointOnTerrain().z;
+				const auto result = _fe3d->raycast_getPointOnTerrain().z;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		{
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d->raycast_isPointOnTerrainValid();
+				const auto result = _fe3d->raycast_isPointOnTerrainValid();
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}

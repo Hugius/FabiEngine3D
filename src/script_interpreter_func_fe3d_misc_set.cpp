@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d->misc_stopMillisecondTimer();
+			const auto result = _fe3d->misc_stopMillisecondTimer();
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto result = _fe3d->misc_checkInterval(args[0].getInteger());
+			const auto result = _fe3d->misc_checkInterval(args[0].getInteger());
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}

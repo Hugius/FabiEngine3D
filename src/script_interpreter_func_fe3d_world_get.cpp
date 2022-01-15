@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _worldEditor->getLoadedWorldID();
+			const auto result = _worldEditor->getLoadedWorldID();
 			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\custom\\");
 			const auto filePath = string(directoryPath + args[0].getString() + ".fe3d");
 
-			auto result = Tools::isFileExisting(filePath);
+			const auto result = Tools::isFileExisting(filePath);
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}

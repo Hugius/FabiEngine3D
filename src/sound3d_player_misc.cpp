@@ -25,25 +25,21 @@ void Sound3dPlayer::update()
 	{
 		if(isSoundStarted(sound))
 		{
-			auto cameraPosition = _camera->getPosition();
-			float xDifference = fabsf(sound.getPosition().x - cameraPosition.x);
-			float yDifference = fabsf(sound.getPosition().y - cameraPosition.y);
-			float zDifference = fabsf(sound.getPosition().z - cameraPosition.z);
-			float maxDifference = max(xDifference, max(yDifference, zDifference));
-			float volume = sound.getMaxVolume() - ((maxDifference / sound.getMaxDistance()) * sound.getMaxVolume());
-			volume = clamp(volume, 0.0f, sound.getMaxVolume());
-			sound.setVolume(volume);
+			const auto cameraPosition = _camera->getPosition();
+			const auto difference = Math::calculateDifference(cameraPosition, sound.getPosition());
+			const auto maxDifference = max(cameraPosition.x, max(cameraPosition.y, cameraPosition.z));
+			const auto volume = sound.getMaxVolume() - ((maxDifference / sound.getMaxDistance()) * sound.getMaxVolume());
+			sound.setVolume(clamp(volume, 0.0f, sound.getMaxVolume()));
 
-			auto cameraDirection = _camera->getFrontVector();
-			auto rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
-			auto soundDirection = (cameraPosition - sound.getPosition());
-			auto result = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
-			soundDirection = fvec3(result.x, result.y, result.z);
-			soundDirection = Math::normalize(soundDirection);
-			auto dot = Math::calculateDotProduct(soundDirection, cameraDirection);
-			auto range = ((dot / 2.0f) + 0.5f);
-			auto leftStrength = Uint8(255.0f * range);
-			auto rightStrength = Uint8(255 - leftStrength);
+			const auto cameraDirection = _camera->getFrontVector();
+			const auto soundDirection = (cameraPosition - sound.getPosition());
+			const auto rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
+			const auto rotatedSoundDirection = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
+			const auto normalizedSoundDirection = Math::normalize(fvec3(rotatedSoundDirection.x, rotatedSoundDirection.y, rotatedSoundDirection.z));
+			const auto dotProduct = Math::calculateDotProduct(normalizedSoundDirection, cameraDirection);
+			const auto panningRange = ((dotProduct / 2.0f) + 0.5f);
+			const auto leftStrength = Uint8(255.0f * panningRange);
+			const auto rightStrength = Uint8(255 - leftStrength);
 
 			for(const auto& channel : _findChannels(sound))
 			{

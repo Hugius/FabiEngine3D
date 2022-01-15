@@ -99,8 +99,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				auto position = _convertPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				_fe3d->quad_setPosition(args[0].getString(), position);
+				_fe3d->quad_setPosition(args[0].getString(), _convertPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -113,8 +112,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				fvec2 change = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				_fe3d->quad_move(args[0].getString(), change);
+				_fe3d->quad_move(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -127,9 +125,8 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				fvec2 target = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				fvec2 speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
-				_fe3d->quad_moveTo(args[0].getString(), target, speed.x);
+				auto speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad_moveTo(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -181,8 +178,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				fvec2 size = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				_fe3d->quad_setSize(args[0].getString(), size);
+				_fe3d->quad_setSize(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -195,8 +191,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				fvec2 change = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				_fe3d->quad_scale(args[0].getString(), change);
+				_fe3d->quad_scale(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -209,9 +204,8 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				fvec2 target = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				fvec2 speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
-				_fe3d->quad_scaleTo(args[0].getString(), target, speed.x);
+				auto speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad_scaleTo(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -224,8 +218,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setColor(args[0].getString(),
-									 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad_setColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -238,8 +231,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setWireframeColor(args[0].getString(),
-											  fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad_setWireframeColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

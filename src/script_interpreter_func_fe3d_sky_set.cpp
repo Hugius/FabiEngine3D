@@ -51,10 +51,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string& functionName, 
 		{
 			if(_validateFe3dSky())
 			{
-				_fe3d->sky_setColor(_fe3d->sky_getSelectedID(), fvec3(
-					args[0].getDecimal(),
-					args[1].getDecimal(),
-					args[2].getDecimal()));
+				_fe3d->sky_setColor(_fe3d->sky_getSelectedID(), fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -67,10 +64,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string& functionName, 
 		{
 			if(_validateFe3dSky())
 			{
-				_fe3d->sky_setWireframeColor(_fe3d->sky_getSelectedID(), fvec3(
-					args[0].getDecimal(),
-					args[1].getDecimal(),
-					args[2].getDecimal()));
+				_fe3d->sky_setWireframeColor(_fe3d->sky_getSelectedID(), fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

@@ -100,8 +100,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 					return true;
 				}
 
-				_fe3d->aabb_setBasePosition(args[0].getString(),
-											fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->aabb_setBasePosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -121,8 +120,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 					return true;
 				}
 
-				_fe3d->aabb_setBaseSize(args[0].getString(),
-										fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->aabb_setBaseSize(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -142,8 +140,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 					return true;
 				}
 
-				_fe3d->aabb_move(args[0].getString(),
-								 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->aabb_move(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -163,8 +160,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 					return true;
 				}
 
-				_fe3d->aabb_scale(args[0].getString(),
-								  fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->aabb_scale(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -184,8 +180,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 					return true;
 				}
 
-				_fe3d->aabb_moveTo(args[0].getString(),
-								   fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+				_fe3d->aabb_moveTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -205,8 +200,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 					return true;
 				}
 
-				_fe3d->aabb_scaleTo(args[0].getString(),
-									fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+				_fe3d->aabb_scaleTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -226,8 +220,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 					return true;
 				}
 
-				_fe3d->aabb_setColor(args[0].getString(),
-									 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->aabb_setColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

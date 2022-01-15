@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 				return true;
 			}
 
-			auto result = _fe3d->sound2d_isExisting(args[0].getString());
+			const auto result = _fe3d->sound2d_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d->sound2d_getIDs();
+			const auto result = _fe3d->sound2d_getIDs();
 
 			for(const auto& ID : result)
 			{
@@ -67,7 +67,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				auto result = _fe3d->sound2d_isStarted(args[0].getString());
+				const auto result = _fe3d->sound2d_isStarted(args[0].getString());
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				auto result = _fe3d->sound2d_isPlaying(args[0].getString());
+				const auto result = _fe3d->sound2d_isPlaying(args[0].getString());
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				auto result = _fe3d->sound2d_isPaused(args[0].getString());
+				const auto result = _fe3d->sound2d_isPaused(args[0].getString());
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				auto result = _fe3d->sound2d_getVolume(args[0].getString());
+				const auto result = _fe3d->sound2d_getVolume(args[0].getString());
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}

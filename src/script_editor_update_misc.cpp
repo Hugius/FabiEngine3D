@@ -184,7 +184,7 @@ void ScriptEditor::_updateScriptSearching()
 
 		if(_gui->getOverlay()->checkValueForm("search", keyword))
 		{
-			auto result = _script->findKeyword(keyword);
+			const const auto result = _script->findKeyword(keyword);
 
 			if(result.empty())
 			{

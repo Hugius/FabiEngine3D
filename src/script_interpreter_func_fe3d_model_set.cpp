@@ -24,8 +24,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 			if(_validateFe3dModel(args[1].getString(), true))
 			{
-				_worldEditor->copyTemplateModel(args[0].getString(), ("@" + args[1].getString()),
-												fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+				_worldEditor->copyTemplateModel(args[0].getString(), ("@" + args[1].getString()), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

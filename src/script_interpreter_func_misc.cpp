@@ -97,7 +97,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			auto result = listVariable.getValueCount();
+			const auto result = listVariable.getValueCount();
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -276,7 +276,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 					rawValues.push_back(listVariable.getValue(i).getInteger());
 				}
 
-				auto result = *min_element(begin(rawValues), end(rawValues));
+				const auto result = *min_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 			else if(type == ScriptValueType::DECIMAL)
@@ -287,7 +287,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 					rawValues.push_back(listVariable.getValue(i).getDecimal());
 				}
 
-				auto result = *min_element(begin(rawValues), end(rawValues));
+				const auto result = *min_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 			else
@@ -342,7 +342,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 					rawValues.push_back(listVariable.getValue(i).getInteger());
 				}
 
-				auto result = *max_element(begin(rawValues), end(rawValues));
+				const auto result = *max_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 			else if(type == ScriptValueType::DECIMAL)
@@ -353,7 +353,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 					rawValues.push_back(listVariable.getValue(i).getDecimal());
 				}
 
-				auto result = *max_element(begin(rawValues), end(rawValues));
+				const auto result = *max_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 			else
@@ -406,7 +406,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto result = args[0].getString().size();
+			const auto result = args[0].getString().size();
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -416,7 +416,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto result = (args[0].getString().find(args[1].getString()) != string::npos);
+			const auto result = (args[0].getString().find(args[1].getString()) != string::npos);
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -434,7 +434,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			auto result = args[0].getString().substr(args[1].getInteger(), args[2].getInteger());
+			const auto result = args[0].getString().substr(args[1].getInteger(), args[2].getInteger());
 			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
@@ -495,7 +495,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto result = Math::getRandomNumber(args[0].getInteger(), args[1].getInteger());
+			const auto result = Math::getRandomNumber(args[0].getInteger(), args[1].getInteger());
 			returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 		}
 	}
@@ -505,7 +505,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto result = Math::getRandomNumber(args[0].getDecimal(), args[1].getDecimal());
+			const auto result = Math::getRandomNumber(args[0].getDecimal(), args[1].getDecimal());
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}

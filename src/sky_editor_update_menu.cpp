@@ -77,7 +77,5 @@ void SkyEditor::_updateChoiceMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuMiscellaneous");
 		}
-
-		screen->getButton("miscellaneous")->setHoverable(_fe3d->sky_isExisting(_currentSkyID));
 	}
 }

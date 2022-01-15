@@ -6,18 +6,19 @@ void ModelEditor::_updateLightingMenu()
 
 	if(screen->getID() == "modelEditorMenuLighting")
 	{
-		auto isSpecular = _fe3d->model_isSpecular(_currentModelID, _currentPartID);
-		auto isReflective = _fe3d->model_isReflective(_currentModelID, _currentPartID);
-		auto reflectionType = _fe3d->model_getReflectionType(_currentModelID, _currentPartID);
-		auto reflectivity = _fe3d->model_getReflectivity(_currentModelID, _currentPartID);
-		auto specularShininess = _fe3d->model_getSpecularShininess(_currentModelID, _currentPartID);
-		auto specularIntensity = _fe3d->model_getSpecularIntensity(_currentModelID, _currentPartID);
-		auto lightness = _fe3d->model_getLightness(_currentModelID, _currentPartID);
-		auto color = _fe3d->model_getColor(_currentModelID, _currentPartID);
+		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
+
+		auto isSpecular = (isPartSelected ? _fe3d->model_isSpecular(_currentModelID, _currentPartID) : false);
+		auto isReflective = (isPartSelected ? _fe3d->model_isReflective(_currentModelID, _currentPartID) : false);
+		auto reflectionType = (isPartSelected ? _fe3d->model_getReflectionType(_currentModelID, _currentPartID) : ReflectionType::CUBE);
+		auto reflectivity = (isPartSelected ? _fe3d->model_getReflectivity(_currentModelID, _currentPartID) : 0.0f);
+		auto specularShininess = (isPartSelected ? _fe3d->model_getSpecularShininess(_currentModelID, _currentPartID) : 0.0f);
+		auto specularIntensity = (isPartSelected ? _fe3d->model_getSpecularIntensity(_currentModelID, _currentPartID) : 0.0f);
+		auto lightness = (isPartSelected ? _fe3d->model_getLightness(_currentModelID, _currentPartID) : 0.0f);
+		auto color = (isPartSelected ? _fe3d->model_getColor(_currentModelID, _currentPartID) : fvec3(0.0f));
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
@@ -101,10 +102,14 @@ void ModelEditor::_updateLightingMenu()
 			_fe3d->model_setReflectivity(_currentModelID, _currentPartID, reflectivity);
 		}
 
-		screen->getButton("specularShininess")->setHoverable(isSpecular);
-		screen->getButton("specularIntensity")->setHoverable(isSpecular);
-		screen->getButton("reflectionType")->setHoverable(isReflective);
-		screen->getButton("reflectivity")->setHoverable(isReflective);
+		screen->getButton("color")->setHoverable(isPartSelected);
+		screen->getButton("lightness")->setHoverable(isPartSelected);
+		screen->getButton("isSpecular")->setHoverable(isPartSelected);
+		screen->getButton("specularShininess")->setHoverable(isPartSelected && isSpecular);
+		screen->getButton("specularIntensity")->setHoverable(isPartSelected && isSpecular);
+		screen->getButton("isReflective")->setHoverable(isPartSelected);
+		screen->getButton("reflectionType")->setHoverable(isPartSelected && isReflective);
+		screen->getButton("reflectivity")->setHoverable(isPartSelected && isReflective);
 
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");

@@ -10,11 +10,17 @@ void ModelEditor::_updateTexturingMenu()
 
 	if(screen->getID() == "modelEditorMenuTexturing")
 	{
-		auto textureRepeat = _fe3d->model_getTextureRepeat(_currentModelID, _currentPartID);
+		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
+
+		auto hasDiffuseMap = (isPartSelected ? _fe3d->model_hasDiffuseMap(_currentModelID, _currentPartID) : false);
+		auto hasEmissionMap = (isPartSelected ? _fe3d->model_hasEmissionMap(_currentModelID, _currentPartID) : false);
+		auto hasSpecularMap = (isPartSelected ? _fe3d->model_hasSpecularMap(_currentModelID, _currentPartID) : false);
+		auto hasReflectionMap = (isPartSelected ? _fe3d->model_hasReflectionMap(_currentModelID, _currentPartID) : false);
+		auto hasNormalMap = (isPartSelected ? _fe3d->model_hasNormalMap(_currentModelID, _currentPartID) : false);
+		auto textureRepeat = (isPartSelected ? _fe3d->model_getTextureRepeat(_currentModelID, _currentPartID) : 0.0f);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
@@ -200,5 +206,13 @@ void ModelEditor::_updateTexturingMenu()
 		{
 			_fe3d->model_setTextureRepeat(_currentModelID, _currentPartID, textureRepeat);
 		}
+
+		screen->getButton("diffuseMap")->setHoverable(isPartSelected);
+		screen->getButton("emissionMap")->setHoverable(isPartSelected);
+		screen->getButton("specularMap")->setHoverable(isPartSelected);
+		screen->getButton("reflectionMap")->setHoverable(isPartSelected);
+		screen->getButton("normalMap")->setHoverable(isPartSelected);
+		screen->getButton("clearMaps")->setHoverable(isPartSelected && (hasDiffuseMap || hasEmissionMap || hasSpecularMap || hasReflectionMap || hasNormalMap));
+		screen->getButton("textureRepeat")->setHoverable(isPartSelected && (hasDiffuseMap || hasEmissionMap || hasSpecularMap || hasReflectionMap || hasNormalMap));
 	}
 }

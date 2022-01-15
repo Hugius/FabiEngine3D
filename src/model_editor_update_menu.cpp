@@ -74,6 +74,7 @@ void ModelEditor::_updateChoiceMenu()
 			_fe3d->model_setVisible(_currentModelID, false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
+			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
 			_currentModelID = "";
 			_currentPartID = "";
 			return;
@@ -113,8 +114,6 @@ void ModelEditor::_updateChoiceMenu()
 		}
 
 		screen->getButton("part")->setHoverable(_fe3d->model_isMultiParted(_currentModelID));
-		screen->getButton("texturing")->setHoverable(!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
-		screen->getButton("lighting")->setHoverable(!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
 
 		screen->getButton("part")->changeTextContent(_currentPartID.empty() ? "Select Part" : "Unselect Part");
 	}

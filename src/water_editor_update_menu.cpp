@@ -83,8 +83,5 @@ void WaterEditor::_updateChoiceMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuMiscellaneous");
 		}
-
-		screen->getButton("lighting")->setHoverable(_fe3d->water_isExisting(_currentWaterID));
-		screen->getButton("miscellaneous")->setHoverable(_fe3d->water_isExisting(_currentWaterID));
 	}
 }

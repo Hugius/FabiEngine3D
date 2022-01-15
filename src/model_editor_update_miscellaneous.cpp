@@ -7,11 +7,14 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "modelEditorMenuMiscellaneous")
 	{
-		auto size = _fe3d->model_getBaseSize(_currentModelID);
-		auto isFaceCulled = ((_fe3d->model_isMultiParted(_currentModelID) && _currentPartID.empty()) ? false : _fe3d->model_isFaceCulled(_currentModelID, _currentPartID));
-		auto levelOfDetailEntityID = _fe3d->model_getLevelOfDetailEntityID(_currentModelID);
-		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(_currentModelID);
-		auto rotationOrder = _fe3d->model_getRotationOrder(_currentModelID);
+		const auto isNoPartSelected = _currentPartID.empty();
+		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
+
+		auto size = (isNoPartSelected ? _fe3d->model_getBaseSize(_currentModelID) : fvec3(0.0f));
+		auto isFaceCulled = (isPartSelected ? _fe3d->model_isFaceCulled(_currentModelID, _currentPartID) : false);
+		auto levelOfDetailEntityID = (isNoPartSelected ? _fe3d->model_getLevelOfDetailEntityID(_currentModelID) : "");
+		auto levelOfDetailDistance = (isNoPartSelected ? _fe3d->model_getLevelOfDetailDistance(_currentModelID) : 0.0f);
+		auto rotationOrder = (isNoPartSelected ? _fe3d->model_getRotationOrder(_currentModelID) : DirectionOrder::XYZ);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -102,7 +105,11 @@ void ModelEditor::_updateMiscellaneousMenu()
 			_fe3d->model_setLevelOfDetailDistance(_currentModelID, levelOfDetailDistance);
 		}
 
-		screen->getButton("isFaceCulled")->setHoverable(!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
+		screen->getButton("size")->setHoverable(isNoPartSelected);
+		screen->getButton("isFaceCulled")->setHoverable(isPartSelected);
+		screen->getButton("levelOfDetailEntityID")->setHoverable(isNoPartSelected);
+		screen->getButton("levelOfDetailDistance")->setHoverable(isNoPartSelected);
+		screen->getButton("rotationOrder")->setHoverable(isNoPartSelected);
 
 		screen->getButton("isFaceCulled")->changeTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");
 		if(rotationOrder == DirectionOrder::XYZ)

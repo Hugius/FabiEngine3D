@@ -7,8 +7,8 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "modelEditorMenuMiscellaneous")
 	{
-		const auto isNoPartSelected = _currentPartID.empty();
 		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
+		const auto isNoPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || _currentPartID.empty());
 
 		auto size = (isNoPartSelected ? _fe3d->model_getBaseSize(_currentModelID) : fvec3(0.0f));
 		auto isFaceCulled = (isPartSelected ? _fe3d->model_isFaceCulled(_currentModelID, _currentPartID) : false);

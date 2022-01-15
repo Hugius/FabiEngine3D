@@ -214,6 +214,21 @@
     <Filter Include="Base">
       <UniqueIdentifier>{b047c6b1-8ea5-4051-aec8-8206cf6e491b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Text Editor">
+      <UniqueIdentifier>{6e6d9451-17f4-4711-9e99-c72041411867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text Editor\Base">
+      <UniqueIdentifier>{4de6ae59-0dde-4b45-8b36-76909ae57f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text Editor\Miscellaneous">
+      <UniqueIdentifier>{96cd2441-9cb1-4132-9674-a95c6674ff85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text Editor\Persistence">
+      <UniqueIdentifier>{f293a477-e83b-4e97-9897-7a05f007d99b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text Editor\Update">
+      <UniqueIdentifier>{c91c1b82-5ca3-4973-b6de-e4e68627847a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -591,6 +606,24 @@
     <ClCompile Include="..\..\..\src\base_editor.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\text_editor_lifecycle.cpp">
+      <Filter>Text Editor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text_editor_loading.cpp">
+      <Filter>Text Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text_editor_saving.cpp">
+      <Filter>Text Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text_editor_misc.cpp">
+      <Filter>Text Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text_editor_update_misc.cpp">
+      <Filter>Text Editor\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text_editor_update_menu.cpp">
+      <Filter>Text Editor\Update</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
@@ -637,6 +670,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\base_editor.hpp">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\text_editor.hpp">
+      <Filter>Text Editor\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

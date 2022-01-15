@@ -129,15 +129,15 @@ void TopViewportController::_updateGameScreenManagement()
 		}
 
 		static bool wasInMainMenu = false;
-		bool isInMainMenu = (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getID() == "main");
+		const bool isInMainMenu = (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getID() == "main");
 		screen->getButton("start")->setHoverable(isInMainMenu && !_script->isEmpty() && !isScriptRunning());
 		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d->server_isRunning());
 		screen->getButton("restart")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
 		screen->getButton("stop")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
 		screen->getButton("debug")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
 
-		bool cameIntoMenu = (!wasInMainMenu && isInMainMenu);
-		if(cameIntoMenu || (isInMainMenu && !isScriptStarted() && _fe3d->misc_checkInterval(Config::UPDATES_PER_SECOND)))
+		const bool cameIntoMainMenu = (!wasInMainMenu && isInMainMenu);
+		if(cameIntoMainMenu || (isInMainMenu && !isScriptStarted() && _fe3d->misc_checkInterval(Config::UPDATES_PER_SECOND)))
 		{
 			_scriptEditor->loadScriptFiles(false);
 		}
@@ -241,6 +241,6 @@ void TopViewportController::_updateMiscScreenManagement()
 		ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
 	}
 
-	screen->getButton("uncache")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted());
-	screen->getButton("export")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted());
+	screen->getButton("uncache")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getID() == "main"));
+	screen->getButton("export")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getID() == "main"));
 }

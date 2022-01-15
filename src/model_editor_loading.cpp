@@ -282,9 +282,15 @@ const bool ModelEditor::loadFromFile()
 				{
 					string partID;
 					iss >> partID;
+
 					if(partID.empty())
 					{
 						break;
+					}
+
+					if(!_fe3d->model_hasPart(modelID, partID))
+					{
+						continue;
 					}
 
 					string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;

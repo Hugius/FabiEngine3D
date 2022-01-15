@@ -14,11 +14,6 @@ void ModelEditor::_updateTexturingMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
-			{
-				_fe3d->model_setTransparency(_currentModelID, partID, 1.0f);
-			}
-
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;

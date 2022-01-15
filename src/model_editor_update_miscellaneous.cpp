@@ -8,7 +8,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 	if(screen->getID() == "modelEditorMenuMiscellaneous")
 	{
 		auto size = _fe3d->model_getBaseSize(_currentModelID);
-		auto isFaceCulled = _fe3d->model_isFaceCulled(_currentModelID, _currentPartID);
+		auto isFaceCulled = ((_fe3d->model_isMultiParted(_currentModelID) && _currentPartID.empty()) ? false : _fe3d->model_isFaceCulled(_currentModelID, _currentPartID));
 		auto levelOfDetailEntityID = _fe3d->model_getLevelOfDetailEntityID(_currentModelID);
 		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(_currentModelID);
 		auto rotationOrder = _fe3d->model_getRotationOrder(_currentModelID);
@@ -102,8 +102,9 @@ void ModelEditor::_updateMiscellaneousMenu()
 			_fe3d->model_setLevelOfDetailDistance(_currentModelID, levelOfDetailDistance);
 		}
 
-		screen->getButton("isFaceCulled")->changeTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");
+		screen->getButton("isFaceCulled")->setHoverable(!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
 
+		screen->getButton("isFaceCulled")->changeTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");
 		if(rotationOrder == DirectionOrder::XYZ)
 		{
 			screen->getButton("rotationOrder")->changeTextContent("Rotation: X Y Z");

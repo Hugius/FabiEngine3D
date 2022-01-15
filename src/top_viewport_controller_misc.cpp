@@ -85,6 +85,7 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("modelEditor")->setHoverable(isHoverable);
 	screen->getButton("billboardEditor")->setHoverable(isHoverable);
 	screen->getButton("quadEditor")->setHoverable(isHoverable);
+	screen->getButton("textEditor")->setHoverable(isHoverable);
 	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation3dEditor")->setHoverable(isHoverable);
 	screen->getButton("soundEditor")->setHoverable(isHoverable);
@@ -153,6 +154,11 @@ void TopViewportController::_applyProjectChange()
 		_quadEditor->unload();
 	}
 
+	if(_textEditor->isLoaded())
+	{
+		_textEditor->unload();
+	}
+
 	if(_animation2dEditor->isLoaded())
 	{
 		_animation2dEditor->unload();
@@ -184,6 +190,7 @@ void TopViewportController::_applyProjectChange()
 	_modelEditor->setCurrentProjectID(_currentProjectID);
 	_billboardEditor->setCurrentProjectID(_currentProjectID);
 	_quadEditor->setCurrentProjectID(_currentProjectID);
+	_textEditor->setCurrentProjectID(_currentProjectID);
 	_animation2dEditor->setCurrentProjectID(_currentProjectID);
 	_animation3dEditor->setCurrentProjectID(_currentProjectID);
 	_soundEditor->setCurrentProjectID(_currentProjectID);
@@ -213,6 +220,7 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sky.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sound.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\terrain.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\text.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\water.fe3d"))
 	{
 		return true;
@@ -234,6 +242,7 @@ void TopViewportController::_saveCurrentProject()
 	_modelEditor->saveToFile();
 	_billboardEditor->saveToFile();
 	_quadEditor->saveToFile();
+	_textEditor->saveToFile();
 	_animation2dEditor->saveToFile();
 	_animation3dEditor->saveToFile();
 	_soundEditor->saveToFile();
@@ -271,6 +280,11 @@ void TopViewportController::inject(shared_ptr<BillboardEditor> billboardEditor)
 void TopViewportController::inject(shared_ptr<QuadEditor> quadEditor)
 {
 	_quadEditor = quadEditor;
+}
+
+void TopViewportController::inject(shared_ptr<TextEditor> textEditor)
+{
+	_textEditor = textEditor;
 }
 
 void TopViewportController::inject(shared_ptr<Animation2dEditor> animation2dEditor)

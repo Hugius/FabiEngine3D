@@ -38,6 +38,7 @@ private:
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 	shared_ptr<BillboardEditor> _billboardEditor = nullptr;
 	shared_ptr<QuadEditor> _quadEditor = nullptr;
+	shared_ptr<TextEditor> _textEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<SoundEditor> _soundEditor = nullptr;

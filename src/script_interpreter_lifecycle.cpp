@@ -125,6 +125,7 @@ void ScriptInterpreter::load()
 		auto modelTexturePaths = _modelEditor->getImagePathsFromFile();
 		auto billboardTexturePaths = _billboardEditor->getImagePathsFromFile();
 		auto quadTexturePaths = _quadEditor->getImagePathsFromFile();
+		auto textTexturePaths = _textEditor->getImagePathsFromFile();
 		auto audioPaths = _soundEditor->getAudioPathsFromFile();
 
 		_fe3d->misc_cacheMeshes(modelMeshPaths);
@@ -143,23 +144,15 @@ void ScriptInterpreter::load()
 		_fe3d->misc_cacheAudios(audioPaths);
 	}
 
-	_fe3d->sky_selectMainSky("");
-
 	_skyEditor->loadFromFile();
-
 	_terrainEditor->loadFromFile();
-
 	_waterEditor->loadFromFile();
-
 	_modelEditor->loadFromFile();
-
 	_billboardEditor->loadFromFile();
-
 	_quadEditor->loadFromFile();
-
+	_textEditor->loadFromFile();
 	_animation2dEditor->loadFromFile(false);
 	_animation3dEditor->loadFromFile(false);
-
 	_soundEditor->loadFromFile();
 
 	_fe3d->camera_reset();

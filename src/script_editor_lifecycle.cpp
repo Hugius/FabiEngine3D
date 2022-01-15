@@ -23,7 +23,6 @@ void ScriptEditor::load()
 	_fe3d->gfx_setBloomBlurCount(2);
 	_fe3d->gfx_setBloomQuality(BLOOM_QUALITY);
 
-	_fe3d->sky_selectMainSky("");
 	_fe3d->misc_setBackgroundColor(BACKGROUND_COLOR);
 
 	_isEditorLoaded = true;

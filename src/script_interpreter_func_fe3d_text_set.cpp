@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 {
 	if(functionName == "fe3d:text_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -23,26 +23,17 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 				return true;
 			}
 
-			_fe3d->text_create(args[0].getString(), true);
-
-			const auto isExported = Config::getInst().isApplicationExported();
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\entity\\text\\font_map\\" + args[1].getString());
-			_fe3d->text_setFontMap(args[0].getString(), filePath);
-
-			_fe3d->text_setPosition(args[0].getString(), _convertPositionToViewport(fvec2(args[3].getDecimal(), args[4].getDecimal())));
-			_fe3d->text_setSize(args[0].getString(), _convertSizeToViewport(fvec2(args[5].getDecimal(), args[6].getDecimal())));
-			_fe3d->text_setContent(args[0].getString(), args[2].getString());
-
-			if(!Config::getInst().isApplicationExported())
+			if(_validateFe3dText(args[1].getString(), true))
 			{
-				auto minPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
-				auto maxPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
-				_fe3d->text_setMinPosition(args[0].getString(), minPosition);
-				_fe3d->text_setMaxPosition(args[0].getString(), maxPosition);
-			}
+				_fe3d->text_create(args[0].getString(), true);
+				_fe3d->text_setFontMap(args[0].getString(), _fe3d->text_getFontMapPath("@" + args[1].getString()));
+				_fe3d->text_setPosition(args[0].getString(), _convertPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
+				_fe3d->text_setSize(args[0].getString(), _convertSizeToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
+				_fe3d->text_setMinPosition(args[0].getString(), _calculateMinViewportPosition());
+				_fe3d->text_setMaxPosition(args[0].getString(), _calculateMaxViewportPosition());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
 		}
 	}
 	else if(functionName == "fe3d:text_delete")

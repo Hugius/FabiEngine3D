@@ -88,6 +88,7 @@ void TopViewportController::_updateProjectCreating()
 				auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
 				auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound.fe3d");
 				auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
+				auto textFile = ofstream(newProjectDirectoryPath + "data\\text.fe3d");
 				auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
 				animation2dFile.close();
 				animation3dFile.close();
@@ -138,6 +139,7 @@ void TopViewportController::_updateProjectLoading()
 			auto modelTexturePaths = _modelEditor->getImagePathsFromFile();
 			auto billboardTexturePaths = _billboardEditor->getImagePathsFromFile();
 			auto quadTexturePaths = _quadEditor->getImagePathsFromFile();
+			auto textTexturePaths = _textEditor->getImagePathsFromFile();
 			auto audioPaths = _soundEditor->getAudioPathsFromFile();
 
 			_fe3d->misc_cacheMeshes(modelMeshPaths);

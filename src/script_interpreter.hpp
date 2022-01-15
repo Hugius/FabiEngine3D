@@ -11,6 +11,7 @@
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
 #include "quad_editor.hpp"
+#include "text_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
 #include "sound_editor.hpp"
@@ -27,6 +28,7 @@ public:
 	void inject(shared_ptr<ModelEditor> modelEditor);
 	void inject(shared_ptr<BillboardEditor> billboardEditor);
 	void inject(shared_ptr<QuadEditor> quadEditor);
+	void inject(shared_ptr<TextEditor> textEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<SoundEditor> soundEditor);
@@ -236,6 +238,7 @@ private:
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 	shared_ptr<BillboardEditor> _billboardEditor = nullptr;
 	shared_ptr<QuadEditor> _quadEditor = nullptr;
+	shared_ptr<TextEditor> _textEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<SoundEditor> _soundEditor = nullptr;

@@ -9,6 +9,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->server_isRunning();
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -19,6 +20,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = _fe3d->server_isClientConnected(args[0].getString());
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -27,6 +29,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto IP = _fe3d->server_getNewClientIP();
+
 			returnValues.push_back(ScriptValue(SVT::STRING, IP));
 		}
 	}
@@ -35,6 +38,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto username = _fe3d->server_getNewClientUsername();
+
 			returnValues.push_back(ScriptValue(SVT::STRING, username));
 		}
 	}
@@ -43,6 +47,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto IP = _fe3d->server_getOldClientIP();
+
 			returnValues.push_back(ScriptValue(SVT::STRING, IP));
 		}
 	}
@@ -51,6 +56,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto username = _fe3d->server_getOldClientUsername();
+
 			returnValues.push_back(ScriptValue(SVT::STRING, username));
 		}
 	}

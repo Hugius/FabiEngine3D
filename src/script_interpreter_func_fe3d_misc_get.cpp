@@ -22,6 +22,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 			}
 
 			const auto result = _fe3d->misc_isCursorVisible();
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -36,6 +37,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 			}
 
 			const auto result = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPositionRelativeToViewport())).x;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, clamp(result, -1.0f, 1.0f)));
 		}
 	}
@@ -50,6 +52,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 			}
 
 			const auto result = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPositionRelativeToViewport())).y;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, clamp(result, -1.0f, 1.0f)));
 		}
 	}
@@ -64,6 +67,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 			}
 
 			const auto result = Config::getInst().getWindowSize().x;
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 		}
 	}
@@ -78,6 +82,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 			}
 
 			const auto result = Config::getInst().getWindowSize().y;
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 		}
 	}
@@ -86,6 +91,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->misc_isMillisecondTimerStarted();
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -100,6 +106,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 			}
 
 			const auto result = _fe3d->misc_isVsyncEnabled();
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}

@@ -9,6 +9,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getPosition().x;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -17,6 +18,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getPosition().y;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -25,6 +27,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getPosition().z;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -33,6 +36,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getUpVector().x;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -41,6 +45,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getUpVector().y;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -49,6 +54,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getUpVector().z;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -57,6 +63,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getFrontVector().x;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -65,6 +72,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getFrontVector().y;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -73,6 +81,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getFrontVector().z;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -81,6 +90,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getRightVector().x;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -89,6 +99,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getRightVector().y;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -97,6 +108,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getRightVector().z;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -105,6 +117,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getYaw();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -113,6 +126,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getPitch();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -121,6 +135,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getFOV();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -129,6 +144,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_isFirstPersonViewEnabled();
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -137,6 +153,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getFirstPersonYaw();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -145,6 +162,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getFirstPersonPitch();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -153,6 +171,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getMinFirstPersonPitch();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -161,6 +180,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getMaxFirstPersonPitch();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -169,6 +189,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_isThirdPersonViewEnabled();
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -177,6 +198,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getThirdPersonYaw();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -185,6 +207,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getThirdPersonPitch();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -193,6 +216,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getMinThirdPersonPitch();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -201,6 +225,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getMaxThirdPersonPitch();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -209,6 +234,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getThirdPersonDistance();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -217,6 +243,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getThirdPersonLookat().x;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -225,6 +252,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getThirdPersonLookat().y;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -233,6 +261,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getThirdPersonLookat().z;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -241,6 +270,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getCursorSensitivity();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -249,6 +279,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getNearDistance();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -257,6 +288,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->camera_getFarDistance();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}

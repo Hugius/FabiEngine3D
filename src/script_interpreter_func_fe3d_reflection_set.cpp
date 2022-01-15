@@ -36,6 +36,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				_fe3d->reflection_delete(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -77,6 +78,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				_fe3d->reflection_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -90,6 +92,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				_fe3d->reflection_move(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -103,6 +106,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				_fe3d->reflection_moveTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -116,6 +120,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				_fe3d->reflection_capture(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

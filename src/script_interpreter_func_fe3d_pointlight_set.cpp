@@ -40,6 +40,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				_fe3d->pointlight_delete(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -68,6 +69,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				_fe3d->pointlight_setVisible(args[0].getString(), args[1].getBoolean());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -81,6 +83,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				_fe3d->pointlight_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -94,6 +97,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				_fe3d->pointlight_move(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -107,6 +111,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				_fe3d->pointlight_moveTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -120,6 +125,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				_fe3d->pointlight_setRadius(args[0].getString(), args[1].getDecimal());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -133,6 +139,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				_fe3d->pointlight_setColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -146,6 +153,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				_fe3d->pointlight_setIntensity(args[0].getString(), args[1].getDecimal());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -161,16 +169,19 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 				if(args[1].getString() == "CIRCLE")
 				{
 					_fe3d->pointlight_setShape(args[0].getString(), PointlightShape::CIRCLE);
+
 					returnValues.push_back(ScriptValue(SVT::EMPTY));
 				}
 				else if(args[1].getString() == "SQUARE")
 				{
 					_fe3d->pointlight_setShape(args[0].getString(), PointlightShape::SQUARE);
+
 					returnValues.push_back(ScriptValue(SVT::EMPTY));
 				}
 				else
 				{
 					Logger::throwWarning("invalid shape!");
+
 					returnValues.push_back(ScriptValue(SVT::EMPTY));
 				}
 			}

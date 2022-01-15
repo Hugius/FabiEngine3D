@@ -48,6 +48,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 			}
 
 			const auto result = _fe3d->aabb_isExisting(args[0].getString());
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -66,6 +67,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_isVisible(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -85,6 +87,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_getPosition(args[0].getString()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -104,6 +107,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_getPosition(args[0].getString()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -123,6 +127,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_getPosition(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -142,6 +147,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_getSize(args[0].getString()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -161,6 +167,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_getSize(args[0].getString()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -180,6 +187,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_getSize(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -217,6 +225,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_getSize(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -236,6 +245,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_getColor(args[0].getString()).r;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -255,6 +265,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_getColor(args[0].getString()).g;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -274,6 +285,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				}
 
 				const auto result = _fe3d->aabb_getColor(args[0].getString()).b;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}

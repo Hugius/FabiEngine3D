@@ -16,6 +16,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			}
 
 			const auto result = _fe3d->reflection_isExisting(args[0].getString());
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -66,6 +67,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				const auto result = _fe3d->reflection_isVisible(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -79,6 +81,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				const auto result = _fe3d->reflection_getPosition(args[0].getString()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -92,6 +95,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				const auto result = _fe3d->reflection_getPosition(args[0].getString()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -105,6 +109,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				const auto result = _fe3d->reflection_getPosition(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}

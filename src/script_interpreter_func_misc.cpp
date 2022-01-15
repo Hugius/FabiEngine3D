@@ -37,8 +37,8 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto firstName = args[0].getString();
-			auto secondName = args[1].getString();
+			const auto firstName = args[0].getString();
+			const auto secondName = args[1].getString();
 
 			if(!_isLocalVariableExisting(firstName) && !_isGlobalVariableExisting(firstName))
 			{
@@ -98,6 +98,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			const auto result = listVariable.getValueCount();
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -277,6 +278,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 
 				const auto result = *min_element(begin(rawValues), end(rawValues));
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 			else if(type == ScriptValueType::DECIMAL)
@@ -288,6 +290,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 
 				const auto result = *min_element(begin(rawValues), end(rawValues));
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 			else
@@ -343,6 +346,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 
 				const auto result = *max_element(begin(rawValues), end(rawValues));
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 			else if(type == ScriptValueType::DECIMAL)
@@ -354,6 +358,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 
 				const auto result = *max_element(begin(rawValues), end(rawValues));
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 			else
@@ -407,6 +412,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = args[0].getString().size();
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -417,6 +423,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = (args[0].getString().find(args[1].getString()) != string::npos);
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -435,6 +442,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			const auto result = args[0].getString().substr(args[1].getInteger(), args[2].getInteger());
+
 			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
@@ -450,8 +458,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			string fullString = args[0].getString();
-			string splitter = args[1].getString();
+			const auto fullString = args[0].getString();
+			const auto splitter = args[1].getString();
+
 			string stringPart = "";
 			for(size_t i = 0; i < fullString.size(); i++)
 			{
@@ -496,6 +505,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = Math::getRandomNumber(args[0].getInteger(), args[1].getInteger());
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 		}
 	}
@@ -506,6 +516,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = Math::getRandomNumber(args[0].getDecimal(), args[1].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}

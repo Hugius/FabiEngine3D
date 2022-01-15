@@ -16,6 +16,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			}
 
 			const auto result = _fe3d->spotlight_isExisting(args[0].getString());
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -66,6 +67,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_isVisible(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -79,6 +81,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getPosition(args[0].getString()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -92,6 +95,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getPosition(args[0].getString()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -105,6 +109,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getPosition(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -118,6 +123,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getFrontVector(args[0].getString()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -131,6 +137,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getFrontVector(args[0].getString()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -144,6 +151,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getFrontVector(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -157,6 +165,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getColor(args[0].getString()).r;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -170,6 +179,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getColor(args[0].getString()).g;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -183,6 +193,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getColor(args[0].getString()).b;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -196,6 +207,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getYaw(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -209,6 +221,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getPitch(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -222,6 +235,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getIntensity(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -235,6 +249,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getAngle(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -248,6 +263,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			if(_validateFe3dSpotlight(args[0].getString()))
 			{
 				const auto result = _fe3d->spotlight_getDistance(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}

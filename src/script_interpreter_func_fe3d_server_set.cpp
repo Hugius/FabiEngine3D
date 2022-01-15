@@ -23,6 +23,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 			}
 
 			_fe3d->server_start(args[0].getInteger());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -33,6 +34,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->server_sendTcpMessage(args[0].getString(), args[1].getString());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -43,6 +45,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->server_sendUdpMessage(args[0].getString(), args[1].getString());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -53,6 +56,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->server_broadcastTcpMessage(args[0].getString(), args[1].getString());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -63,6 +67,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->server_broadcastUdpMessage(args[0].getString(), args[1].getString());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -73,6 +78,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->server_disconnectClient(args[0].getString());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -81,6 +87,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d->server_disconnectClients();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}

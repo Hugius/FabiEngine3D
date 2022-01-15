@@ -9,6 +9,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			bool result = _fe3d->collision_checkCameraWithTerrain();
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}

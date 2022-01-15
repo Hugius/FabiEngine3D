@@ -16,6 +16,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			}
 
 			const auto result = _fe3d->text_isExisting(args[0].getString());
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -66,6 +67,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_isVisible(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -79,6 +81,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _convertPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -92,6 +95,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _convertPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -105,6 +109,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_getRotation(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -118,6 +123,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _convertSizeFromViewport(_fe3d->text_getSize(args[0].getString())).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -131,6 +137,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _convertSizeFromViewport(_fe3d->text_getSize(args[0].getString())).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -144,6 +151,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_getColor(args[0].getString()).r;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -157,6 +165,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_getColor(args[0].getString()).g;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -170,6 +179,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_getColor(args[0].getString()).b;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -183,6 +193,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_getWireframeColor(args[0].getString()).r;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -196,6 +207,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_getColor(args[0].getString()).g;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -209,6 +221,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_getColor(args[0].getString()).b;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -222,6 +235,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_getContent(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
@@ -235,6 +249,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_getTransparency(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -248,6 +263,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_isWireframed(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -261,6 +277,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_isHorizontallyMirrored(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -274,6 +291,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_isVerticallyMirrored(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -287,6 +305,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_isWireframed(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -300,6 +319,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text_getFontMapPath(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}

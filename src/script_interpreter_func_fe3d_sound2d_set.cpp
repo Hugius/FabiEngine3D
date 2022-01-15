@@ -39,6 +39,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
 				_fe3d->sound2d_delete(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -67,6 +68,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
 				_fe3d->sound2d_start(args[0].getString(), args[1].getInteger(), args[2].getInteger(), args[3].getBoolean());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -80,6 +82,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
 				_fe3d->sound2d_pause(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -89,6 +92,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d->sound2d_pauseAll();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -101,6 +105,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
 				_fe3d->sound2d_resume(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -110,6 +115,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d->sound2d_resumeAll();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -122,6 +128,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
 				_fe3d->sound2d_stop(args[0].getString(), args[1].getInteger());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -131,6 +138,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d->sound2d_stopAll();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -143,11 +151,11 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
 				_fe3d->sound2d_setVolume(args[0].getString(), args[1].getDecimal());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-
 	else
 	{
 		return false;

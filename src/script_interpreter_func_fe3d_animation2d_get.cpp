@@ -13,6 +13,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->isBillboardAnimationStarted(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -26,6 +27,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->isBillboardAnimationPlaying(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -39,6 +41,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->isBillboardAnimationPaused(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -52,6 +55,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->isBillboardAnimationAutopaused(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -65,6 +69,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getBillboardAnimationRowCount(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -78,6 +83,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getBillboardAnimationColumnCount(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -91,6 +97,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getBillboardAnimationRowIndex(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -104,6 +111,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getBillboardAnimationColumnIndex(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -117,6 +125,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getBillboardAnimationPlayCount(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 		}
@@ -130,6 +139,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getBillboardAnimationFramestep(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -143,6 +153,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->isQuadAnimationStarted(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -156,6 +167,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->isQuadAnimationPlaying(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -169,6 +181,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->isQuadAnimationPaused(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -182,6 +195,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->isQuadAnimationAutopaused(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -195,6 +209,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getQuadAnimationRowCount(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -208,6 +223,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getQuadAnimationColumnCount(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -221,6 +237,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getQuadAnimationRowIndex(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -234,6 +251,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getQuadAnimationColumnIndex(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -247,6 +265,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getQuadAnimationPlayCount(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 		}
@@ -260,6 +279,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				const auto result = _animation2dEditor->getQuadAnimationFramestep(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}

@@ -11,6 +11,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_move(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -21,6 +22,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setPosition(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -31,6 +33,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setThirdPersonLookat(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -41,6 +44,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_moveFollowX(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -51,6 +55,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_moveFollowZ(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -61,6 +66,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_moveFollowZY(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -71,6 +77,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setYaw(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -81,6 +88,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setPitch(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -91,6 +99,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setFOV(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -101,6 +110,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setCursorSensitivity(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -111,6 +121,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_enableFirstPersonView(args[0].getDecimal(), args[1].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -119,6 +130,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d->camera_disableFirstPersonView();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -129,6 +141,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setMinFirstPersonPitch(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -139,6 +152,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setMaxFirstPersonPitch(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -149,6 +163,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_enableThirdPersonView(args[0].getDecimal(), args[1].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -157,6 +172,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d->camera_disableThirdPersonView();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -167,6 +183,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setMinThirdPersonPitch(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -177,6 +194,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setMaxThirdPersonPitch(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -187,6 +205,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setThirdPersonDistance(args[0].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -197,6 +216,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->camera_setThirdPersonLookat(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}

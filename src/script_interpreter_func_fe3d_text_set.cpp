@@ -45,6 +45,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_delete(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -73,6 +74,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setVisible(args[0].getString(), args[1].getBoolean());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -86,6 +88,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setHorizontallyMirrored(args[0].getString(), args[1].getBoolean());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -99,6 +102,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setVerticallyMirrored(args[0].getString(), args[1].getBoolean());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -112,6 +116,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setWireframed(args[0].getString(), args[1].getBoolean());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -125,6 +130,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setFontMap(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -138,6 +144,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setPosition(args[0].getString(), _convertPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -151,6 +158,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_move(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -165,6 +173,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			{
 				auto speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
 				_fe3d->text_moveTo(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -178,6 +187,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_rotateTo(args[0].getString(), args[1].getDecimal(), args[2].getDecimal());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -192,6 +202,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			{
 				auto speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
 				_fe3d->text_scaleTo(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -205,6 +216,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setRotation(args[0].getString(), args[1].getDecimal());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -218,6 +230,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_rotate(args[0].getString(), args[1].getDecimal());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -231,6 +244,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setSize(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -244,6 +258,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_scale(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -257,6 +272,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -270,6 +286,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setWireframeColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -283,6 +300,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setContent(args[0].getString(), args[1].getString());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -296,6 +314,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setTransparency(args[0].getString(), args[1].getDecimal());
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

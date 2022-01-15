@@ -22,6 +22,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			_fe3d->application_pause();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -36,6 +37,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			_fe3d->application_resume();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -97,6 +99,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			_fe3d->misc_setCursorVisible(args[0].getBoolean());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -111,6 +114,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			_fe3d->misc_centerCursor();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -119,6 +123,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d->misc_startMillisecondTimer();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -127,6 +132,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->misc_stopMillisecondTimer();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -141,6 +147,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			_fe3d->misc_enableWireframeRendering();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -155,6 +162,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			_fe3d->misc_disableWireframeRendering();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -169,6 +177,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			_fe3d->misc_enableAabbFrameRendering();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -183,6 +192,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			_fe3d->misc_disableAabbFrameRendering();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -193,6 +203,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = _fe3d->misc_checkInterval(args[0].getInteger());
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -207,6 +218,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			_fe3d->misc_enableVsync();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -221,6 +233,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			_fe3d->misc_disableVsync();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}

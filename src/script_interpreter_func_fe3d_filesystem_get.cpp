@@ -22,6 +22,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			const auto newDirectoryPath = string(directoryPath + args[0].getString());
 
 			const auto result = Tools::isDirectoryExisting(newDirectoryPath);
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -37,6 +38,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			const auto filePath = (directoryPath + args[0].getString());
 
 			const auto result = Tools::isFileExisting(filePath);
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -62,6 +64,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			while(!file.eof())
 			{
 				getline(file, line);
+
 				returnValues.push_back(ScriptValue(SVT::STRING, line));
 			}
 

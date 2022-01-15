@@ -11,6 +11,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getDudvMapPath(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
@@ -22,6 +23,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getDisplacementMapPath(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
@@ -33,6 +35,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getNormalMapPath(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
@@ -44,6 +47,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_hasDudvMap(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -55,6 +59,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_hasDisplacementMap(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -66,6 +71,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_hasNormalMap(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -77,6 +83,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getSpeed(_fe3d->water_getSelectedID()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -88,6 +95,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getSpeed(_fe3d->water_getSelectedID()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -99,6 +107,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getHeight(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -110,6 +119,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getColor(_fe3d->water_getSelectedID()).r;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -121,6 +131,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getColor(_fe3d->water_getSelectedID()).g;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -132,6 +143,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getColor(_fe3d->water_getSelectedID()).b;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -143,6 +155,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getWireframeColor(_fe3d->water_getSelectedID()).r;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -154,6 +167,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getWireframeColor(_fe3d->water_getSelectedID()).g;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -165,6 +179,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getWireframeColor(_fe3d->water_getSelectedID()).b;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -176,6 +191,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getTransparency(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -187,6 +203,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getSize(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -198,6 +215,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getTextureRepeat(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -209,6 +227,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getWaveHeight(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -220,6 +239,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getSpecularShininess(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -231,6 +251,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_getSpecularIntensity(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -242,6 +263,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_isReflective(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -253,6 +275,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_isRefractive(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -264,6 +287,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_isSpecular(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -275,6 +299,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_isWireframed(_fe3d->water_getSelectedID());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -285,22 +310,31 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				const auto result = _fe3d->water_getQuality(_fe3d->water_getSelectedID());
-				if(result == WaterQuality::SKY)
+				const auto quality = _fe3d->water_getQuality(_fe3d->water_getSelectedID());
+
+				if(quality == WaterQuality::SKY)
 				{
-					returnValues.push_back(ScriptValue(SVT::STRING, "SKY"));
+					const auto result = "SKY";
+
+					returnValues.push_back(ScriptValue(SVT::STRING, result));
 				}
-				if(result == WaterQuality::SKY_TERRAIN)
+				if(quality == WaterQuality::SKY_TERRAIN)
 				{
-					returnValues.push_back(ScriptValue(SVT::STRING, "SKY_TERRAIN"));
+					const auto result = "SKY_TERRAIN";
+
+					returnValues.push_back(ScriptValue(SVT::STRING, result));
 				}
-				if(result == WaterQuality::SKY_TERRAIN_MODEL)
+				if(quality == WaterQuality::SKY_TERRAIN_MODEL)
 				{
-					returnValues.push_back(ScriptValue(SVT::STRING, "SKY_TERRAIN_MODELS"));
+					const auto result = "SKY_TERRAIN_MODEL";
+
+					returnValues.push_back(ScriptValue(SVT::STRING, result));
 				}
-				if(result == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
+				if(quality == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 				{
-					returnValues.push_back(ScriptValue(SVT::STRING, "SKY_TERRAIN_MODELS_BILLBOARDS"));
+					const auto result = "SKY_TERRAIN_MODEL_BILLBOARD";
+
+					returnValues.push_back(ScriptValue(SVT::STRING, result));
 				}
 			}
 		}

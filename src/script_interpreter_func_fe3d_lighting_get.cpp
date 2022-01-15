@@ -9,6 +9,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_isAmbientLightingEnabled();
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -17,6 +18,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getAmbientLightingColor().r;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -25,6 +27,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getAmbientLightingColor().g;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -33,6 +36,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getAmbientLightingColor().b;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -41,6 +45,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getAmbientLightingIntensity();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -49,6 +54,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_isDirectionalLightingEnabled();
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -57,6 +63,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingPosition().x;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -65,6 +72,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingPosition().y;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -73,6 +81,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingPosition().z;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -81,6 +90,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingColor().r;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -89,6 +99,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingColor().g;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -97,6 +108,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingColor().b;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -105,6 +117,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingIntensity();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -113,6 +126,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getCubeReflectionQuality();
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -121,6 +135,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getPlanarReflectionQuality();
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -129,6 +144,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getPlanarRefractionQuality();
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -137,6 +153,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getPlanarReflectionHeight();
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -145,6 +162,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getShadowEyePosition().x;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -153,6 +171,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getShadowEyePosition().y;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -161,6 +180,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getShadowEyePosition().z;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -169,6 +189,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getShadowCenterPosition().x;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -177,6 +198,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getShadowCenterPosition().y;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -185,6 +207,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getShadowCenterPosition().z;
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -193,6 +216,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getShadowSize();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -201,6 +225,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getShadowLightness();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
@@ -209,6 +234,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getShadowQuality();
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -217,6 +243,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_getShadowInterval();
+
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -225,6 +252,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto result = _fe3d->gfx_isShadowFollowingCamera();
+
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}

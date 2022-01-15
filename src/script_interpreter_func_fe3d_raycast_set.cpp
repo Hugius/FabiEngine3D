@@ -11,6 +11,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string& functionNa
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->raycast_enableTerrainPointing(args[0].getDecimal(), args[1].getDecimal());
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
@@ -19,6 +20,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string& functionNa
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d->raycast_disableTerrainPointing();
+
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}

@@ -16,6 +16,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 
 			const auto result = _fe3d->model_isExisting(args[0].getString());
+
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
@@ -66,6 +67,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_isVisible(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -79,6 +81,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBasePosition(args[0].getString()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -92,6 +95,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBasePosition(args[0].getString()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -105,6 +109,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBasePosition(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -118,6 +123,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBaseRotation(args[0].getString()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -131,6 +137,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBaseRotation(args[0].getString()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -144,6 +151,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBaseRotation(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -157,6 +165,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBaseRotationOrigin(args[0].getString()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -170,6 +179,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBaseRotationOrigin(args[0].getString()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -183,6 +193,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBaseRotationOrigin(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -196,6 +207,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBaseSize(args[0].getString()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -209,6 +221,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBaseSize(args[0].getString()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -222,6 +235,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getBaseSize(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -237,6 +251,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartPosition(args[0].getString(), args[1].getString()).x;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -253,6 +268,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartPosition(args[0].getString(), args[1].getString()).y;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -269,6 +285,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartPosition(args[0].getString(), args[1].getString()).z;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -285,6 +302,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartRotation(args[0].getString(), args[1].getString()).x;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -301,6 +319,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartRotation(args[0].getString(), args[1].getString()).y;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -317,6 +336,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartRotation(args[0].getString(), args[1].getString()).z;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -333,6 +353,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartRotationOrigin(args[0].getString(), args[1].getString()).x;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -349,6 +370,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartRotationOrigin(args[0].getString(), args[1].getString()).y;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -365,6 +387,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartRotationOrigin(args[0].getString(), args[1].getString()).z;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -381,6 +404,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartSize(args[0].getString(), args[1].getString()).x;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -397,6 +421,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartSize(args[0].getString(), args[1].getString()).y;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -413,6 +438,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getPartSize(args[0].getString(), args[1].getString()).z;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -428,6 +454,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getMinHeight(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -441,6 +468,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getMaxHeight(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -456,6 +484,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getLightness(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -472,6 +501,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getColor(args[0].getString(), args[1].getString()).r;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -488,6 +518,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getColor(args[0].getString(), args[1].getString()).g;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -504,6 +535,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getColor(args[0].getString(), args[1].getString()).b;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -520,6 +552,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getWireframeColor(args[0].getString(), args[1].getString()).r;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -536,6 +569,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getWireframeColor(args[0].getString(), args[1].getString()).g;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -552,6 +586,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getWireframeColor(args[0].getString(), args[1].getString()).b;
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -568,6 +603,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getTransparency(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -584,6 +620,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getEmissionIntensity(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -600,6 +637,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getTextureRepeat(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -616,6 +654,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getSpecularShininess(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -632,6 +671,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getSpecularIntensity(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -648,6 +688,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getReflectivity(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}
 			}
@@ -662,6 +703,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getLevelOfDetailDistance(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -675,6 +717,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getLevelOfDetailSize(args[0].getString()).x;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -688,6 +731,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getLevelOfDetailSize(args[0].getString()).y;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -701,6 +745,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getLevelOfDetailSize(args[0].getString()).z;
+
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -714,6 +759,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getLevelOfDetailEntityID(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
@@ -727,6 +773,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_getMeshPath(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
@@ -742,6 +789,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getDiffuseMapPath(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::STRING, result));
 				}
 			}
@@ -758,6 +806,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getEmissionMapPath(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::STRING, result));
 				}
 			}
@@ -774,6 +823,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getSpecularMapPath(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::STRING, result));
 				}
 			}
@@ -806,6 +856,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_getNormalMapPath(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::STRING, result));
 				}
 			}
@@ -822,6 +873,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_hasDiffuseMap(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 				}
 			}
@@ -838,6 +890,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_hasEmissionMap(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 				}
 			}
@@ -854,6 +907,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_hasSpecularMap(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 				}
 			}
@@ -870,6 +924,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_hasReflectionMap(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 				}
 			}
@@ -886,6 +941,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_hasNormalMap(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 				}
 			}
@@ -900,6 +956,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_isShadowed(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -913,6 +970,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_isFrozen(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -926,6 +984,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
 				const auto result = _fe3d->model_isReflected(args[0].getString());
+
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
@@ -941,6 +1000,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_isBright(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 				}
 			}
@@ -957,6 +1017,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_isFaceCulled(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 				}
 			}
@@ -973,6 +1034,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_isReflective(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 				}
 			}
@@ -988,14 +1050,19 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			{
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					const auto result = _fe3d->model_getReflectionType(args[0].getString(), args[1].getString());
-					if(result == ReflectionType::CUBE)
+					const auto reflectionType = _fe3d->model_getReflectionType(args[0].getString(), args[1].getString());
+
+					if(reflectionType == ReflectionType::CUBE)
 					{
-						returnValues.push_back(ScriptValue(SVT::STRING, "CUBE"));
+						const auto result = "CUBE";
+
+						returnValues.push_back(ScriptValue(SVT::STRING, result));
 					}
-					if(result == ReflectionType::PLANAR)
+					if(reflectionType == ReflectionType::PLANAR)
 					{
-						returnValues.push_back(ScriptValue(SVT::STRING, "PLANAR"));
+						const auto result = "PLANAR";
+
+						returnValues.push_back(ScriptValue(SVT::STRING, result));
 					}
 				}
 			}
@@ -1012,6 +1079,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_isSpecular(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 				}
 			}
@@ -1028,6 +1096,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
 					const auto result = _fe3d->model_isWireframed(args[0].getString(), args[1].getString());
+
 					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 				}
 			}
@@ -1041,37 +1110,56 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				const auto result = _fe3d->model_getRotationOrder(args[0].getString());
-				switch(result)
+				const auto rotationOrder = _fe3d->model_getRotationOrder(args[0].getString());
+
+				switch(rotationOrder)
 				{
 					case DirectionOrder::XYZ:
 					{
-						returnValues.push_back(ScriptValue(SVT::STRING, "XYZ"));
+						const auto result = "XYZ";
+
+						returnValues.push_back(ScriptValue(SVT::STRING, result));
+
 						break;
 					}
 					case DirectionOrder::XZY:
 					{
-						returnValues.push_back(ScriptValue(SVT::STRING, "XYZ"));
+						const auto result = "XZY";
+
+						returnValues.push_back(ScriptValue(SVT::STRING, result));
+
 						break;
 					}
 					case DirectionOrder::YXZ:
 					{
-						returnValues.push_back(ScriptValue(SVT::STRING, "XYZ"));
+						const auto result = "YXZ";
+
+						returnValues.push_back(ScriptValue(SVT::STRING, result));
+
 						break;
 					}
 					case DirectionOrder::YZX:
 					{
-						returnValues.push_back(ScriptValue(SVT::STRING, "XYZ"));
+						const auto result = "YZX";
+
+						returnValues.push_back(ScriptValue(SVT::STRING, result));
+
 						break;
 					}
 					case DirectionOrder::ZXY:
 					{
-						returnValues.push_back(ScriptValue(SVT::STRING, "XYZ"));
+						const auto result = "ZXY";
+
+						returnValues.push_back(ScriptValue(SVT::STRING, result));
+
 						break;
 					}
 					case DirectionOrder::ZYX:
 					{
-						returnValues.push_back(ScriptValue(SVT::STRING, "XYZ"));
+						const auto result = "ZYX";
+
+						returnValues.push_back(ScriptValue(SVT::STRING, result));
+
 						break;
 					}
 				}

@@ -91,27 +91,31 @@ void ModelEditor::_updateMiscellaneous()
 		}
 	}
 
-	auto partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
-	if(partID.empty())
+	if(!_currentModelID.empty())
 	{
-		_selectedPartHighlightDirection = 1;
-	}
-	else
-	{
-		const auto transparency = _fe3d->model_getTransparency(_currentModelID, partID);
+		auto& partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
 
-		if(transparency == 0.0f)
+		if(partID.empty())
 		{
-			_selectedPartHighlightDirection *= -1;
+			_selectedPartHighlightDirection = 1;
 		}
-
-		if(transparency == 1.0f)
+		else
 		{
-			_selectedPartHighlightDirection *= -1;
-		}
+			const auto transparency = _fe3d->model_getTransparency(_currentModelID, partID);
 
-		const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
-		_fe3d->model_setTransparency(_currentModelID, partID, (transparency + speed));
+			if(transparency == 0.0f)
+			{
+				_selectedPartHighlightDirection *= -1;
+			}
+
+			if(transparency == 1.0f)
+			{
+				_selectedPartHighlightDirection *= -1;
+			}
+
+			const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
+			_fe3d->model_setTransparency(_currentModelID, partID, (transparency + speed));
+		}
 	}
 }
 
@@ -282,12 +286,12 @@ void ModelEditor::_updatePartChoosing()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentPartID = selectedButtonID;
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen(_nextActiveScreenID);
+				_hoveredPartID = "";
+
 				_fe3d->text_setContent(_gui->getOverlay()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), true);
+
 				_gui->getOverlay()->deleteChoiceForm("partList");
-				_hoveredPartID = "";
-				_nextActiveScreenID = "";
 				_isChoosingPart = false;
 			}
 		}
@@ -299,6 +303,7 @@ void ModelEditor::_updatePartChoosing()
 		else
 		{
 			_hoveredPartID = "";
+
 			for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
 			{
 				_fe3d->model_setTransparency(_currentModelID, partID, 1.0f);

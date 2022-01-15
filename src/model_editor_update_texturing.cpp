@@ -18,7 +18,7 @@ void ModelEditor::_updateTexturingMenu()
 			{
 				_fe3d->model_setTransparency(_currentModelID, partID, 1.0f);
 			}
-			_currentPartID = "";
+
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;

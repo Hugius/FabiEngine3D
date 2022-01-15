@@ -7,7 +7,8 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "modelEditorMenuMiscellaneous")
 	{
-		auto isFaceCulled = _fe3d->model_isFaceCulled(_currentModelID);
+		auto size = _fe3d->model_getBaseSize(_currentModelID);
+		auto isFaceCulled = _fe3d->model_isFaceCulled(_currentModelID, _currentPartID);
 		auto levelOfDetailEntityID = _fe3d->model_getLevelOfDetailEntityID(_currentModelID);
 		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(_currentModelID);
 		auto rotationOrder = _fe3d->model_getRotationOrder(_currentModelID);
@@ -17,10 +18,16 @@ void ModelEditor::_updateMiscellaneousMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		{
+			_gui->getOverlay()->createValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
 			isFaceCulled = !isFaceCulled;
-			_fe3d->model_setFaceCulled(_currentModelID, isFaceCulled);
+			_fe3d->model_setFaceCulled(_currentModelID, _currentPartID, isFaceCulled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityID")->isHovered())
 		{
@@ -60,6 +67,21 @@ void ModelEditor::_updateMiscellaneousMenu()
 			_fe3d->model_setRotationOrder(_currentModelID, rotationOrder);
 		}
 
+		if(_gui->getOverlay()->checkValueForm("sizeX", size.x))
+		{
+			size.x /= 100.0f;
+			_fe3d->model_setBaseSize(_currentModelID, size);
+		}
+		if(_gui->getOverlay()->checkValueForm("sizeY", size.y))
+		{
+			size.y /= 100.0f;
+			_fe3d->model_setBaseSize(_currentModelID, size);
+		}
+		if(_gui->getOverlay()->checkValueForm("sizeZ", size.z))
+		{
+			size.z /= 100.0f;
+			_fe3d->model_setBaseSize(_currentModelID, size);
+		}
 		if(_gui->getOverlay()->checkValueForm("levelOfDetailEntityID", levelOfDetailEntityID, {}))
 		{
 			if(levelOfDetailEntityID == "@")
@@ -81,6 +103,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		}
 
 		screen->getButton("isFaceCulled")->changeTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");
+
 		if(rotationOrder == DirectionOrder::XYZ)
 		{
 			screen->getButton("rotationOrder")->changeTextContent("Rotation: X Y Z");

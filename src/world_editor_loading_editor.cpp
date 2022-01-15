@@ -234,7 +234,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->model_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
 				_fe3d->model_setShadowed(newModelID, false);
 				_fe3d->model_setReflected(newModelID, false);
-				_fe3d->model_setBright(newModelID, true);
+				_fe3d->model_setBright(newModelID, "", true);
 
 				_fe3d->aabb_create(newModelID, true);
 				_fe3d->aabb_setParentEntityID(newModelID, newModelID);
@@ -280,7 +280,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->model_setColor(newModelID, "", color);
 				_fe3d->model_setShadowed(newModelID, false);
 				_fe3d->model_setReflected(newModelID, false);
-				_fe3d->model_setBright(newModelID, true);
+				_fe3d->model_setBright(newModelID, "", true);
 
 				_fe3d->aabb_create(newModelID, true);
 				_fe3d->aabb_setParentEntityID(newModelID, newModelID);
@@ -327,7 +327,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->model_setColor(newModelID, "", color);
 				_fe3d->model_setShadowed(newModelID, false);
 				_fe3d->model_setReflected(newModelID, false);
-				_fe3d->model_setBright(newModelID, true);
+				_fe3d->model_setBright(newModelID, "", true);
 
 				_fe3d->aabb_create(newModelID, true);
 				_fe3d->aabb_setParentEntityID(newModelID, newModelID);
@@ -365,7 +365,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->model_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
 				_fe3d->model_setShadowed(newModelID, false);
 				_fe3d->model_setReflected(newModelID, false);
-				_fe3d->model_setBright(newModelID, true);
+				_fe3d->model_setBright(newModelID, "", true);
 
 				_fe3d->aabb_create(newModelID, true);
 				_fe3d->aabb_setParentEntityID(newModelID, newModelID);

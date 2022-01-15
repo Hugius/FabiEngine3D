@@ -24,7 +24,6 @@ public:
 private:
 	void _loadGUI();
 	void _unloadGUI();
-	void _tryPartChoosing(const string& nextActiveScreenID);
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateTexturingMenu();
@@ -49,7 +48,6 @@ private:
 	string _currentAabbID = "";
 	string _hoveredModelID = "";
 	string _hoveredPartID = "";
-	string _nextActiveScreenID = "";
 
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;

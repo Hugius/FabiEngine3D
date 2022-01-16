@@ -34,7 +34,7 @@ const vector<string> BillboardEditor::getImagePathsFromFile() const
 		string billboardID, diffuseMapPath, emissionMapPath;
 		fvec2 size;
 		fvec3 color;
-		bool facingX, facingY;
+		bool isFacingX, isFacingY;
 
 		istringstream iss(line);
 
@@ -45,8 +45,8 @@ const vector<string> BillboardEditor::getImagePathsFromFile() const
 			color.r >>
 			color.g >>
 			color.b >>
-			facingX >>
-			facingY >>
+			isFacingX >>
+			isFacingY >>
 			diffuseMapPath >>
 			emissionMapPath;
 
@@ -108,8 +108,8 @@ const bool BillboardEditor::loadFromFile()
 		string billboardID, diffuseMapPath, emissionMapPath, fontMapPath, textContent;
 		fvec2 size;
 		fvec3 color;
-		float lightness, textureRepeat;
-		bool isFacingX, isFacingY, isReflected, isShadowed;
+		float lightness, textureRepeat, transparency, emissionIntensity;
+		bool isFacingX, isFacingY, isReflected, isShadowed, isBright;
 
 		istringstream iss(line);
 
@@ -129,7 +129,10 @@ const bool BillboardEditor::loadFromFile()
 			fontMapPath >>
 			textContent >>
 			lightness >>
-			textureRepeat;
+			textureRepeat >>
+			isBright >>
+			emissionIntensity >>
+			transparency;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -188,6 +191,9 @@ const bool BillboardEditor::loadFromFile()
 			_fe3d->billboard_setShadowed(billboardID, isShadowed);
 			_fe3d->billboard_setReflected(billboardID, isReflected);
 			_fe3d->billboard_setTextureRepeat(billboardID, textureRepeat);
+			_fe3d->billboard_setBright(billboardID, isBright);
+			_fe3d->billboard_setTransparency(billboardID, transparency);
+			_fe3d->billboard_setEmissionIntensity(billboardID, emissionIntensity);
 		}
 	}
 

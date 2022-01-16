@@ -36,6 +36,9 @@ const bool BillboardEditor::saveToFile() const
 		auto isShadowed = _fe3d->billboard_isShadowed(billboardID);
 		auto lightness = _fe3d->billboard_getLightness(billboardID);
 		auto textureRepeat = _fe3d->billboard_getTextureRepeat(billboardID);
+		auto isBright = _fe3d->billboard_isBright(billboardID);
+		auto emissionIntensity = _fe3d->billboard_getEmissionIntensity(billboardID);
+		auto transparency = _fe3d->billboard_getTransparency(billboardID);
 
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
@@ -67,7 +70,10 @@ const bool BillboardEditor::saveToFile() const
 			fontPath << " " <<
 			textContent << " " <<
 			lightness << " " <<
-			textureRepeat << endl;
+			textureRepeat << " " <<
+			isBright << " " <<
+			emissionIntensity << " " <<
+			transparency << endl;
 	}
 
 	file.close();

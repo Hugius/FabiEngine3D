@@ -78,22 +78,19 @@ void BillboardEntityManager::update()
 
 		if(entity->isVisible())
 		{
-			auto facingX = entity->isFacingCameraX();
-			auto facingY = entity->isFacingCameraY();
-			fvec3 rotation = entity->getRotation();
+			const auto facingX = entity->isFacingCameraX();
+			const auto facingY = entity->isFacingCameraY();
+
 			if(facingX || facingY)
 			{
-				fvec3 position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
+				auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
+				auto direction = (position - _renderBus->getCameraPosition());
 
-				fvec3 direction = (position - _renderBus->getCameraPosition());
+				auto degreesX = Math::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
+				auto degreesY = Math::convertToDegrees(atan2f(direction.z, direction.x));
 
-				float degreesZ = atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z));
-				float degreesY = atan2f(direction.z, direction.x);
-
-				degreesZ = Math::convertToDegrees(degreesZ);
-				degreesY = Math::convertToDegrees(degreesY);
-
-				rotation.z = (degreesZ) * static_cast<float>(facingX);
+				auto rotation = entity->getRotation();
+				rotation.x = (degreesX) * static_cast<float>(facingX);
 				rotation.y = (-degreesY - 90.0f) * static_cast<float>(facingY);
 
 				entity->setRotation(rotation);

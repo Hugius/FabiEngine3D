@@ -14,12 +14,9 @@ void Animation3dEditor::_updateFrameMenu()
 		auto speed = frame.getSpeeds().at(_currentPartID);
 		auto speedType = frame.getSpeedTypes().at(_currentPartID);
 		auto transformationType = frame.getTransformationTypes().at(_currentPartID);
-
-		float multiplier = (transformationType == TransformationType::MOVEMENT) ? 1000.0f :
-			(transformationType == TransformationType::SCALING) ? 100.0f : 1.0f;
+		auto multiplier = (transformationType == TransformationType::MOVEMENT) ? 1000.0f : (transformationType == TransformationType::SCALING) ? 100.0f : 1.0f;
 
 		screen->getButton("rotationOrigin")->setHoverable(transformationType == TransformationType::ROTATION);
-
 		screen->getButton("speed")->setHoverable(speedType != Animation3dSpeedType::INSTANTLY);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))

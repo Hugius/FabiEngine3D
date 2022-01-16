@@ -161,9 +161,9 @@ void MasterRenderer::renderApplication()
 	_renderBus->setTriangleCountingEnabled(false);
 
 	_worldColorCaptor->unbind();
-	_renderBus->setFinalSceneMap(_worldColorCaptor->getTexture(0));
 	_renderBus->setPrimarySceneMap(_worldColorCaptor->getTexture(0));
 	_renderBus->setSecondarySceneMap(_worldColorCaptor->getTexture(1));
+	_renderBus->setFinalSceneMap(_renderBus->getPrimarySceneMap());
 
 	_timer->startDeltaPart("postProcessing");
 	_captureAntiAliasing();
@@ -189,7 +189,7 @@ void MasterRenderer::reloadBloomBlurCaptureBuffer()
 {
 	const auto viewportSize = Config::getInst().getViewportSize();
 
-	_bloomBlurCaptorHighQuality = make_shared<CaptureBuffer>(ivec2(0), viewportSize / _renderBus->getBloomQuality(), 1, true);
+	_bloomBlurCaptorHighQuality = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderBus->getBloomQuality()), 1, true);
 	_bloomBlurCaptorLowQuality = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / (_renderBus->getBloomQuality() * 2)), 1, true);
 }
 

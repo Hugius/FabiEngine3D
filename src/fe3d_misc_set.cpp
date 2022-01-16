@@ -230,8 +230,3 @@ void EngineInterface::misc_startMillisecondTimer()
 
 	_core->getTimer()->start();
 }
-
-void EngineInterface::misc_setBackgroundColor(fvec4 color)
-{
-	_core->getMasterRenderer()->setBackgroundColor(color);
-}

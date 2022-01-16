@@ -134,8 +134,6 @@ void EngineController::initialize()
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
 
-		_fe3d->misc_setBackgroundColor(RENDER_COLOR);
-
 		_scriptEditor->loadScriptFiles(true);
 		_scriptExecutor->load();
 
@@ -182,8 +180,6 @@ void EngineController::initialize()
 		imagePaths.push_back(fontMapDirectoryPath + "font.tga");
 		_fe3d->misc_cacheImages(imagePaths);
 
-		_fe3d->misc_setBackgroundColor(RENDER_COLOR);
-
 		_fe3d->quad_create("@@cursor", true);
 		_fe3d->quad_setSize("@@cursor", fvec2(CURSOR_QUAD_SIZE, (CURSOR_QUAD_SIZE * Tools::getWindowAspectRatio())));
 		_fe3d->quad_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.tga");
@@ -223,8 +219,6 @@ void EngineController::update()
 		string activeScreen = _guiManager->getLeftViewport()->getWindow("main")->getActiveScreen()->getID();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
-			_fe3d->misc_setBackgroundColor(RENDER_COLOR);
-
 			_fe3d->camera_reset();
 		}
 		lastScreen = activeScreen;

@@ -181,6 +181,7 @@ void EngineCore::start()
 		if(!Config::getInst().isApplicationExported())
 		{
 			_renderWindow->disableColorKeying(keyingColor);
+			_masterRenderer->setBackgroundColor(fvec4(0.0f, 0.0f, 0.0f, 1.0f));
 		}
 
 		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_networkingServer->isRunning()))

@@ -64,7 +64,7 @@ public:
 	void reloadWaterReflectionCaptureBuffer();
 	void reloadWaterRefractionCaptureBuffer();
 	void reloadShadowCaptureBuffer();
-	void setBackgroundColor(fvec4 color);
+	void setBackgroundColor(fvec3 color);
 
 	const string getCpuName() const;
 	const string getGpuName() const;

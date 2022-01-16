@@ -868,7 +868,6 @@ public:
 	void misc_clearImagesCache();
 	void misc_clearAudiosCache();
 	void misc_startMillisecondTimer();
-	void misc_setBackgroundColor(fvec4 color);
 
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics() const;
 	const vector<pair<string, int>> misc_getRenderProfilingStatistics() const;

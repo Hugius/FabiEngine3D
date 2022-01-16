@@ -1,8 +1,8 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::setBackgroundColor(fvec4 color)
+void MasterRenderer::setBackgroundColor(fvec3 color)
 {
-	glClearColor(color.r, color.g, color.b, color.a);
+	glClearColor(color.r, color.g, color.b, 1.0f);
 }
 
 /* https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine */

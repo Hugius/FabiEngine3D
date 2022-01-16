@@ -217,7 +217,7 @@ void MasterRenderer::_captureAntiAliasing()
 
 void MasterRenderer::_captureBloom()
 {
-	if(_renderBus->isBloomEnabled() && _renderBus->getBloomBlurCount() > 0 && _renderBus->getBloomIntensity() > 0.0f)
+	if(_renderBus->isBloomEnabled() && (_renderBus->getBloomBlurCount() > 0) && (_renderBus->getBloomIntensity() > 0.0f))
 	{
 		shared_ptr<TextureBuffer> textureToBlur = nullptr;
 		if(_renderBus->getBloomType() == BloomType::EVERYTHING)
@@ -230,13 +230,11 @@ void MasterRenderer::_captureBloom()
 		}
 
 		_bloomBlurRendererHighQuality.bind();
-		_renderBus->setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_renderQuad, textureToBlur,
-								_renderBus->getBloomBlurCount(), _renderBus->getBloomIntensity(), BlurDirection::BOTH));
+		_renderBus->setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_renderQuad, textureToBlur, _renderBus->getBloomBlurCount(), _renderBus->getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererHighQuality.unbind();
 
 		_bloomBlurRendererLowQuality.bind();
-		_renderBus->setBloomMap(_bloomBlurRendererLowQuality.blurTexture(_renderQuad, _renderBus->getBloomMap(),
-								_renderBus->getBloomBlurCount(), _renderBus->getBloomIntensity(), BlurDirection::BOTH));
+		_renderBus->setBloomMap(_bloomBlurRendererLowQuality.blurTexture(_renderQuad, _renderBus->getBloomMap(), _renderBus->getBloomBlurCount(), _renderBus->getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererLowQuality.unbind();
 
 		_bloomCaptor->bind();

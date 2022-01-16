@@ -241,9 +241,10 @@ const bool ModelEditor::loadFromFile()
 		if(lineType == "MODEL")
 		{
 			string modelID, meshPath, levelOfDetailEntityID;
+			fvec3 size;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
-			fvec3 size;
+			bool isShadowed, isReflected;
 
 			iss >>
 				modelID >>
@@ -253,7 +254,9 @@ const bool ModelEditor::loadFromFile()
 				size.z >>
 				levelOfDetailEntityID >>
 				levelOfDetailDistance >>
-				rotationOrder;
+				rotationOrder >>
+				isShadowed >>
+				isReflected;
 
 			meshPath = (meshPath == "?") ? "" : meshPath;
 			levelOfDetailEntityID = (levelOfDetailEntityID == "?") ? "" : levelOfDetailEntityID;
@@ -295,9 +298,9 @@ const bool ModelEditor::loadFromFile()
 
 					string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
 					fvec3 color;
-					float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness;
+					float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness, emissionIntensity;
 					unsigned int reflectionType;
-					bool isSpecular, isReflective, isFaceCulled;
+					bool isSpecular, isReflective, isFaceCulled, isBright;
 
 					iss >>
 						diffuseMapPath >>
@@ -316,7 +319,9 @@ const bool ModelEditor::loadFromFile()
 						color.g >>
 						color.b >>
 						textureRepeat >>
-						isFaceCulled;
+						isFaceCulled >>
+						isBright >>
+						emissionIntensity;
 
 					partID = (partID == "?") ? "" : partID;
 					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -341,6 +346,9 @@ const bool ModelEditor::loadFromFile()
 					_fe3d->model_setReflective(modelID, partID, isReflective);
 					_fe3d->model_setReflectionType(modelID, partID, ReflectionType(reflectionType));
 					_fe3d->model_setFaceCulled(modelID, partID, isFaceCulled);
+					_fe3d->model_setBright(modelID, partID, isBright);
+					_fe3d->model_setEmissionIntensity(modelID, partID, emissionIntensity);
+					std::cout << emissionIntensity << std::endl;
 
 					if(!diffuseMapPath.empty())
 					{

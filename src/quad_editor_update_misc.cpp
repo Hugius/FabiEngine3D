@@ -60,14 +60,14 @@ void QuadEditor::_updateQuadCreating()
 
 			if(_fe3d->quad_isExisting(newQuadID))
 			{
+				_fe3d->quad_setPosition(newQuadID, Tools::_convertPositionToViewport(fvec2(0.0f)));
+				_fe3d->quad_setSize(newQuadID, Tools::_convertSizeToViewport(fvec2(0.5f, (0.5f * Tools::getWindowAspectRatio()))));
+
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quadEditorMenuChoice");
 
 				_currentQuadID = newQuadID;
 				_loadedQuadIDs.push_back(newQuadID);
 
-				_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
-
-				_fe3d->quad_setVisible(newQuadID, false);
 				_fe3d->text_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad: " + newQuadID.substr(1), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
 				_isCreatingQuad = false;
@@ -82,8 +82,7 @@ void QuadEditor::_updateQuadChoosing()
 	{
 		if(!_hoveredQuadID.empty())
 		{
-			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+			_fe3d->quad_setVisible(_hoveredQuadID, false);
 		}
 
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("quadList");
@@ -100,14 +99,11 @@ void QuadEditor::_updateQuadChoosing()
 				if(!_isDeletingQuad)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quadEditorMenuChoice");
-
-					_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _fe3d->quad_getDiffuseMapPath(_currentQuadID));
-					_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
-
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
 				}
 
+				_fe3d->quad_setVisible(_currentQuadID, true);
 				_gui->getOverlay()->deleteChoiceForm("quadList");
 				_isChoosingQuad = false;
 			}
@@ -125,8 +121,7 @@ void QuadEditor::_updateQuadChoosing()
 
 		if(!_hoveredQuadID.empty())
 		{
-			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _fe3d->quad_getDiffuseMapPath(_hoveredQuadID));
-			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
+			_fe3d->quad_setVisible(_hoveredQuadID, true);
 		}
 	}
 }
@@ -142,9 +137,6 @@ void QuadEditor::_updateQuadDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
-
 			_fe3d->quad_delete(_currentQuadID);
 
 			_loadedQuadIDs.erase(remove(_loadedQuadIDs.begin(), _loadedQuadIDs.end(), _currentQuadID), _loadedQuadIDs.end());

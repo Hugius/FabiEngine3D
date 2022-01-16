@@ -95,6 +95,10 @@ const bool QuadEditor::loadFromFile()
 		{
 			_loadedQuadIDs.push_back(quadID);
 
+			_fe3d->quad_setPosition(quadID, Tools::_convertPositionToViewport(fvec2(0.0f)));
+			_fe3d->quad_setSize(quadID, Tools::_convertSizeToViewport(fvec2(0.5f, (0.5f * Tools::getWindowAspectRatio()))));
+			_fe3d->quad_setVisible(quadID, false);
+
 			if(!diffuseMapPath.empty())
 			{
 				if(!Config::getInst().isApplicationExported())
@@ -104,8 +108,6 @@ const bool QuadEditor::loadFromFile()
 
 				_fe3d->quad_setDiffuseMap(quadID, diffuseMapPath);
 			}
-
-			_fe3d->quad_setVisible(quadID, false);
 		}
 	}
 

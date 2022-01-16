@@ -28,10 +28,10 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			{
 				_fe3d->quad_create(args[0].getString(), true);
 				_fe3d->quad_setDiffuseMap(args[0].getString(), _fe3d->quad_getDiffuseMapPath("@" + args[1].getString()));
-				_fe3d->quad_setPosition(args[0].getString(), _convertPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
-				_fe3d->quad_setSize(args[0].getString(), _convertSizeToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
-				_fe3d->quad_setMinPosition(args[0].getString(), _calculateMinViewportPosition());
-				_fe3d->quad_setMaxPosition(args[0].getString(), _calculateMaxViewportPosition());
+				_fe3d->quad_setPosition(args[0].getString(), Tools::_convertPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
+				_fe3d->quad_setSize(args[0].getString(), Tools::_convertSizeToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
+				_fe3d->quad_setMinPosition(args[0].getString(), Tools::_calculateMinViewportPosition());
+				_fe3d->quad_setMaxPosition(args[0].getString(), Tools::_calculateMaxViewportPosition());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setPosition(args[0].getString(), _convertPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+				_fe3d->quad_setPosition(args[0].getString(), Tools::_convertPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -114,7 +114,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_move(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+				_fe3d->quad_move(args[0].getString(), Tools::_convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -128,8 +128,8 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				auto speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
-				_fe3d->quad_moveTo(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
+				auto speed = Tools::_convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad_moveTo(args[0].getString(), Tools::_convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -185,7 +185,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setSize(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+				_fe3d->quad_setSize(args[0].getString(), Tools::_convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -199,7 +199,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_scale(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+				_fe3d->quad_scale(args[0].getString(), Tools::_convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -213,8 +213,8 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				auto speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
-				_fe3d->quad_scaleTo(args[0].getString(), _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
+				auto speed = Tools::_convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad_scaleTo(args[0].getString(), Tools::_convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

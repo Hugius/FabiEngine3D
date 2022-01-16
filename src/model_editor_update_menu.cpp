@@ -72,9 +72,9 @@ void ModelEditor::_updateChoiceMenu()
 			}
 
 			_fe3d->model_setVisible(_currentModelID, false);
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			_currentModelID = "";
 			_currentPartID = "";
 			return;

@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "tools.hpp"
 
 using SVT = ScriptValueType;
 
@@ -80,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				const auto result = _convertPositionFromViewport(_fe3d->quad_getPosition(args[0].getString())).x;
+				const auto result = Tools::_convertPositionFromViewport(_fe3d->quad_getPosition(args[0].getString())).x;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -94,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				const auto result = _convertPositionFromViewport(_fe3d->quad_getPosition(args[0].getString())).y;
+				const auto result = Tools::_convertPositionFromViewport(_fe3d->quad_getPosition(args[0].getString())).y;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -122,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				const auto result = _convertSizeFromViewport(_fe3d->quad_getSize(args[0].getString())).x;
+				const auto result = Tools::_convertSizeFromViewport(_fe3d->quad_getSize(args[0].getString())).x;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -136,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				const auto result = _convertSizeFromViewport(_fe3d->quad_getSize(args[0].getString())).y;
+				const auto result = Tools::_convertSizeFromViewport(_fe3d->quad_getSize(args[0].getString())).y;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}

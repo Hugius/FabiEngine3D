@@ -331,6 +331,17 @@ const bool ModelEditor::loadFromFile()
 					replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 					replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
+					_fe3d->model_setColor(modelID, partID, color);
+					_fe3d->model_setSpecular(modelID, partID, isSpecular);
+					_fe3d->model_setSpecularShininess(modelID, partID, specularShininess);
+					_fe3d->model_setSpecularIntensity(modelID, partID, specularIntensity);
+					_fe3d->model_setReflectivity(modelID, partID, reflectivity);
+					_fe3d->model_setLightness(modelID, partID, lightness);
+					_fe3d->model_setTextureRepeat(modelID, partID, textureRepeat);
+					_fe3d->model_setReflective(modelID, partID, isReflective);
+					_fe3d->model_setReflectionType(modelID, partID, ReflectionType(reflectionType));
+					_fe3d->model_setFaceCulled(modelID, partID, isFaceCulled);
+
 					if(!diffuseMapPath.empty())
 					{
 						if(!Config::getInst().isApplicationExported())
@@ -380,17 +391,6 @@ const bool ModelEditor::loadFromFile()
 
 						_fe3d->model_setNormalMap(modelID, partID, normalMapPath);
 					}
-
-					_fe3d->model_setColor(modelID, partID, color);
-					_fe3d->model_setSpecular(modelID, partID, isSpecular);
-					_fe3d->model_setSpecularShininess(modelID, partID, specularShininess);
-					_fe3d->model_setSpecularIntensity(modelID, partID, specularIntensity);
-					_fe3d->model_setReflectivity(modelID, partID, reflectivity);
-					_fe3d->model_setLightness(modelID, partID, lightness);
-					_fe3d->model_setTextureRepeat(modelID, partID, textureRepeat);
-					_fe3d->model_setReflective(modelID, partID, isReflective);
-					_fe3d->model_setReflectionType(modelID, partID, ReflectionType(reflectionType));
-					_fe3d->model_setFaceCulled(modelID, partID, isFaceCulled);
 				}
 			}
 		}

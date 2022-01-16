@@ -153,6 +153,20 @@ const bool WaterEditor::loadFromFile()
 		{
 			_loadedWaterIDs.push_back(waterID);
 
+			_fe3d->water_setHeight(waterID, height);
+			_fe3d->water_setSize(waterID, size);
+			_fe3d->water_setSpecular(waterID, isSpecular);
+			_fe3d->water_setReflective(waterID, isReflective);
+			_fe3d->water_setRefractive(waterID, isRefractive);
+			_fe3d->water_setWaveHeight(waterID, waveHeight);
+			_fe3d->water_setQuality(waterID, static_cast<WaterQuality>(quality));
+			_fe3d->water_setSpecularShininess(waterID, specularShininess);
+			_fe3d->water_setSpecularIntensity(waterID, specularIntensity);
+			_fe3d->water_setTransparency(waterID, transparency);
+			_fe3d->water_setColor(waterID, color);
+			_fe3d->water_setTextureRepeat(waterID, textureRepeat);
+			_fe3d->water_setSpeed(waterID, speed);
+
 			if(!dudvMapPath.empty())
 			{
 				if(!Config::getInst().isApplicationExported())
@@ -182,20 +196,6 @@ const bool WaterEditor::loadFromFile()
 
 				_fe3d->water_setDisplacementMap(waterID, displacementMapPath);
 			}
-
-			_fe3d->water_setHeight(waterID, height);
-			_fe3d->water_setSize(waterID, size);
-			_fe3d->water_setSpecular(waterID, isSpecular);
-			_fe3d->water_setReflective(waterID, isReflective);
-			_fe3d->water_setRefractive(waterID, isRefractive);
-			_fe3d->water_setWaveHeight(waterID, waveHeight);
-			_fe3d->water_setQuality(waterID, static_cast<WaterQuality>(quality));
-			_fe3d->water_setSpecularShininess(waterID, specularShininess);
-			_fe3d->water_setSpecularIntensity(waterID, specularIntensity);
-			_fe3d->water_setTransparency(waterID, transparency);
-			_fe3d->water_setColor(waterID, color);
-			_fe3d->water_setTextureRepeat(waterID, textureRepeat);
-			_fe3d->water_setSpeed(waterID, speed);
 		}
 	}
 

@@ -25,6 +25,7 @@ const bool TextEditor::saveToFile() const
 	{
 		auto fontMapPath = _fe3d->text_getFontMapPath(textID);
 		auto color = _fe3d->text_getColor(textID);
+		auto transparency = _fe3d->text_getTransparency(textID);
 
 		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
@@ -32,7 +33,7 @@ const bool TextEditor::saveToFile() const
 
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
-		file << textID << " " << fontMapPath << " " << color.r << " " << color.g << " " << color.b << endl;
+		file << textID << " " << fontMapPath << " " << color.r << " " << color.g << " " << color.b << " " << transparency << endl;
 	}
 
 	file.close();

@@ -271,6 +271,16 @@ const bool TerrainEditor::loadFromFile()
 		{
 			_loadedTerrainIDs.push_back(terrainID);
 
+			_fe3d->terrain_setMaxHeight(terrainID, maxHeight);
+			_fe3d->terrain_setTextureRepeat(terrainID, textureRepeat);
+			_fe3d->terrain_setLightness(terrainID, lightness);
+			_fe3d->terrain_setRedTextureRepeat(terrainID, redTextureRepeat);
+			_fe3d->terrain_setGreenTextureRepeat(terrainID, greenTextureRepeat);
+			_fe3d->terrain_setBlueTextureRepeat(terrainID, blueTextureRepeat);
+			_fe3d->terrain_setSpecular(terrainID, isSpecular);
+			_fe3d->terrain_setSpecularShininess(terrainID, specularShininess);
+			_fe3d->terrain_setSpecularIntensity(terrainID, specularIntensity);
+
 			if(!diffuseMapPath.empty())
 			{
 				if(!Config::getInst().isApplicationExported())
@@ -360,16 +370,6 @@ const bool TerrainEditor::loadFromFile()
 
 				_fe3d->terrain_setBlueDiffuseMap(terrainID, blueDiffuseMapPath);
 			}
-
-			_fe3d->terrain_setMaxHeight(terrainID, maxHeight);
-			_fe3d->terrain_setTextureRepeat(terrainID, textureRepeat);
-			_fe3d->terrain_setLightness(terrainID, lightness);
-			_fe3d->terrain_setRedTextureRepeat(terrainID, redTextureRepeat);
-			_fe3d->terrain_setGreenTextureRepeat(terrainID, greenTextureRepeat);
-			_fe3d->terrain_setBlueTextureRepeat(terrainID, blueTextureRepeat);
-			_fe3d->terrain_setSpecular(terrainID, isSpecular);
-			_fe3d->terrain_setSpecularShininess(terrainID, specularShininess);
-			_fe3d->terrain_setSpecularIntensity(terrainID, specularIntensity);
 		}
 	}
 

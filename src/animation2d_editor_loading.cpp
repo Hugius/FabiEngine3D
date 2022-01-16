@@ -52,8 +52,8 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 		}
 
 		auto newAnimation = make_shared<Animation2d>(animationID);
-		newAnimation->setPreviewTexturePath(previewTexturePath);
 
+		newAnimation->setPreviewTexturePath(previewTexturePath);
 		newAnimation->setRowCount(rowCount);
 		newAnimation->setColumnCount(columnCount);
 		newAnimation->setFramestep(framestep);

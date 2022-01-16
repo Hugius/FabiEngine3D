@@ -25,6 +25,7 @@ const bool QuadEditor::saveToFile() const
 	{
 		auto diffuseMapPath = _fe3d->quad_getDiffuseMapPath(quadID);
 		auto color = _fe3d->quad_getColor(quadID);
+		auto transparency = _fe3d->quad_getTransparency(quadID);
 
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
@@ -32,7 +33,7 @@ const bool QuadEditor::saveToFile() const
 
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 
-		file << quadID << " " << diffuseMapPath << " " << color.r << " " << color.g << " " << color.b << endl;
+		file << quadID << " " << diffuseMapPath << " " << color.r << " " << color.g << " " << color.b << " " << transparency << endl;
 	}
 
 	file.close();

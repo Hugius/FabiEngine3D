@@ -81,10 +81,11 @@ const bool QuadEditor::loadFromFile()
 	{
 		string quadID, diffuseMapPath;
 		fvec3 color;
+		float transparency;
 
 		istringstream iss(line);
 
-		iss >> quadID >> diffuseMapPath >> color.r >> color.g >> color.b;
+		iss >> quadID >> diffuseMapPath >> color.r >> color.g >> color.b >> transparency;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 
@@ -100,6 +101,7 @@ const bool QuadEditor::loadFromFile()
 			_fe3d->quad_setPosition(quadID, Tools::convertPositionToViewport(fvec2(0.0f)));
 			_fe3d->quad_setSize(quadID, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->quad_setColor(quadID, color);
+			_fe3d->quad_setTransparency(quadID, transparency);
 
 			if(!diffuseMapPath.empty())
 			{

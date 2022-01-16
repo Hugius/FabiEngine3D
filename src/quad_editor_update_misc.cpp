@@ -80,13 +80,22 @@ void QuadEditor::_updateQuadChoosing()
 {
 	if(_isChoosingQuad)
 	{
+		if(!_hoveredQuadID.empty())
+		{
+			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
+			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+		}
+
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("quadList");
 
 		if(!selectedButtonID.empty())
 		{
+			_hoveredQuadID = ("@" + selectedButtonID);
+
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentQuadID = ("@" + selectedButtonID);
+				_hoveredQuadID = "";
 
 				if(!_isDeletingQuad)
 				{
@@ -108,6 +117,16 @@ void QuadEditor::_updateQuadChoosing()
 			_gui->getOverlay()->deleteChoiceForm("quadList");
 			_isChoosingQuad = false;
 			_isDeletingQuad = false;
+		}
+		else
+		{
+			_hoveredQuadID = "";
+		}
+
+		if(!_hoveredQuadID.empty())
+		{
+			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _fe3d->quad_getDiffuseMapPath(_hoveredQuadID));
+			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
 		}
 	}
 }

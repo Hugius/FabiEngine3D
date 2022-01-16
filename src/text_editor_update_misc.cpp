@@ -80,13 +80,22 @@ void TextEditor::_updateTextChoosing()
 {
 	if(_isChoosingText)
 	{
+		if(!_hoveredTextID.empty())
+		{
+			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
+			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+		}
+
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("textList");
 
 		if(!selectedButtonID.empty())
 		{
+			_hoveredTextID = ("@" + selectedButtonID);
+
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentTextID = ("@" + selectedButtonID);
+				_hoveredTextID = "";
 
 				if(!_isDeletingText)
 				{
@@ -108,6 +117,16 @@ void TextEditor::_updateTextChoosing()
 			_gui->getOverlay()->deleteChoiceForm("textList");
 			_isChoosingText = false;
 			_isDeletingText = false;
+		}
+		else
+		{
+			_hoveredTextID = "";
+		}
+
+		if(!_hoveredTextID.empty())
+		{
+			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _fe3d->text_getFontMapPath(_hoveredTextID));
+			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
 		}
 	}
 }

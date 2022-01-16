@@ -166,10 +166,6 @@ void BillboardEditor::_updateBillboardChoosing()
 				_gui->getOverlay()->deleteChoiceForm("billboardList");
 				_isChoosingBillboard = false;
 			}
-			else
-			{
-				_hoveredBillboardID = ("@" + selectedButtonID);
-			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("billboardList"))
 		{

@@ -122,11 +122,10 @@ void BillboardEditor::_updateBillboardCreating()
 
 			if(_fe3d->billboard_isExisting(newBillboardID))
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
-
 				_currentBillboardID = newBillboardID;
 				_loadedBillboardIDs.push_back(newBillboardID);
 
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 				_fe3d->text_setContent(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), "Billboard: " + newBillboardID.substr(1), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
 				_isCreatingBillboard = false;

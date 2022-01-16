@@ -217,12 +217,11 @@ void Animation3dEditor::_updateAnimationCreating()
 				return;
 			}
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-
 			_animations.push_back(make_shared<Animation3d>(newAnimationID));
 
 			_currentAnimationID = newAnimationID;
 
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 			_fe3d->text_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), true);
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityID(), true);

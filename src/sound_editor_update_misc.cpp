@@ -87,11 +87,10 @@ void SoundEditor::_updateSoundCreating()
 
 			if(_fe3d->sound2d_isExisting(newSoundID))
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
-
 				_currentSoundID = newSoundID;
 				_loadedSoundIDs.push_back(newSoundID);
 
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 				_fe3d->text_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + newSoundID.substr(1), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), true);
 				_isCreatingSound = false;

@@ -260,7 +260,7 @@ const fvec2 Tools::convertFromScreenCoords(ivec2 position)
 	return fvec2(x, y);
 }
 
-const fvec2 Tools::_calculateMinViewportPosition()
+const fvec2 Tools::calculateMinViewportPosition()
 {
 	if(Config::getInst().isApplicationExported())
 	{
@@ -273,7 +273,7 @@ const fvec2 Tools::_calculateMinViewportPosition()
 	return convertedPosition;
 }
 
-const fvec2 Tools::_calculateMaxViewportPosition()
+const fvec2 Tools::calculateMaxViewportPosition()
 {
 	if(Config::getInst().isApplicationExported())
 	{
@@ -286,7 +286,7 @@ const fvec2 Tools::_calculateMaxViewportPosition()
 	return convertedPosition;
 }
 
-const fvec2 Tools::_convertPositionToViewport(fvec2 position)
+const fvec2 Tools::convertPositionToViewport(fvec2 position)
 {
 	if(Config::getInst().isApplicationExported())
 	{
@@ -303,7 +303,7 @@ const fvec2 Tools::_convertPositionToViewport(fvec2 position)
 	return position;
 }
 
-const fvec2 Tools::_convertPositionFromViewport(fvec2 position)
+const fvec2 Tools::convertPositionFromViewport(fvec2 position)
 {
 	if(Config::getInst().isApplicationExported())
 	{
@@ -322,7 +322,7 @@ const fvec2 Tools::_convertPositionFromViewport(fvec2 position)
 	return position;
 }
 
-const fvec2 Tools::_convertSizeToViewport(fvec2 size)
+const fvec2 Tools::convertSizeToViewport(fvec2 size)
 {
 	if(Config::getInst().isApplicationExported())
 	{
@@ -336,7 +336,7 @@ const fvec2 Tools::_convertSizeToViewport(fvec2 size)
 	return size;
 }
 
-const fvec2 Tools::_convertSizeFromViewport(fvec2 size)
+const fvec2 Tools::convertSizeFromViewport(fvec2 size)
 {
 	if(!Config::getInst().isApplicationExported())
 	{

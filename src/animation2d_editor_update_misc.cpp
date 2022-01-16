@@ -43,10 +43,13 @@ void Animation2dEditor::_updateAnimationCreating()
 				return;
 			}
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 			_animations.push_back(make_shared<Animation2d>(newAnimationID));
+
 			_currentAnimationID = newAnimationID;
+
 			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
+
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 			_fe3d->text_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), true);
 			_isCreatingAnimation = false;

@@ -183,11 +183,10 @@ void ModelEditor::_updateModelCreating()
 
 			if(_fe3d->model_isExisting(newModelID))
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-
 				_currentModelID = newModelID;
 				_loadedModelIDs.push_back(newModelID);
 
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 				_fe3d->text_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
 				_isCreatingModel = false;

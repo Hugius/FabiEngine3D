@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = Tools::_convertPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).x;
+				const auto result = Tools::convertPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).x;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = Tools::_convertPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).y;
+				const auto result = Tools::convertPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).y;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = Tools::_convertSizeFromViewport(_fe3d->text_getSize(args[0].getString())).x;
+				const auto result = Tools::convertSizeFromViewport(_fe3d->text_getSize(args[0].getString())).x;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -137,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = Tools::_convertSizeFromViewport(_fe3d->text_getSize(args[0].getString())).y;
+				const auto result = Tools::convertSizeFromViewport(_fe3d->text_getSize(args[0].getString())).y;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}

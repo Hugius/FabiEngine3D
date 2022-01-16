@@ -85,12 +85,12 @@ void SkyEditor::_updateSkyCreating()
 
 			if(_fe3d->sky_isExisting(newSkyID))
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+				_fe3d->sky_selectMainSky(newSkyID);
 
 				_currentSkyID = newSkyID;
 				_loadedSkyIDs.push_back(newSkyID);
-				_fe3d->sky_selectMainSky(newSkyID);
 
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 				_fe3d->text_setContent(_gui->getOverlay()->getTextField("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("skyID")->getEntityID(), true);
 				_isCreatingSky = false;

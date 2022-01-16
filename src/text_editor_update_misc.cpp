@@ -60,14 +60,10 @@ void TextEditor::_updateTextCreating()
 
 			if(_fe3d->text_isExisting(newTextID))
 			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("textEditorMenuChoice");
-
 				_currentTextID = newTextID;
 				_loadedTextIDs.push_back(newTextID);
 
-				_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
-
-				_fe3d->text_setVisible(newTextID, false);
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("textEditorMenuChoice");
 				_fe3d->text_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text: " + newTextID.substr(1), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
 				_isCreatingText = false;

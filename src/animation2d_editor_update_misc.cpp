@@ -72,8 +72,10 @@ void Animation2dEditor::_updateAnimationChoosing()
 				if(!_isDeletingAnimation)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
+
 					_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _getAnimation(_currentAnimationID)->getPreviewTexturePath());
 					_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
+
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), true);
 				}

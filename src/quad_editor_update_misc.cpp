@@ -61,7 +61,7 @@ void QuadEditor::_updateQuadCreating()
 			if(_fe3d->quad_isExisting(newQuadID))
 			{
 				_fe3d->quad_setPosition(newQuadID, Tools::convertPositionToViewport(fvec2(0.0f)));
-				_fe3d->quad_setSize(newQuadID, Tools::convertSizeToViewport(fvec2(QUAD_SIZE, (QUAD_SIZE * Tools::getWindowAspectRatio()))));
+				_fe3d->quad_setSize(newQuadID, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
 
 				_currentQuadID = newQuadID;
 				_loadedQuadIDs.push_back(newQuadID);
@@ -98,6 +98,7 @@ void QuadEditor::_updateQuadChoosing()
 				if(!_isDeletingQuad)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quadEditorMenuChoice");
+
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
 				}

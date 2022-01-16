@@ -29,15 +29,13 @@ private:
 	void _updateQuadDeleting();
 	void _updateMiscellaneous();
 
-	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_billboard";
 	vector<string> _loadedQuadIDs;
 	string _currentQuadID = "";
 	string _hoveredQuadID = "";
 	string _currentProjectID = "";
 
-	static inline const fvec3 PREVIEW_BILLBOARD_POSITION = fvec3(0.0f, 0.0f, -0.75f);
+	static inline const fvec2 QUAD_SIZE = fvec2(0.75f);
 
-	static inline const float QUAD_SIZE = 0.75f;
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 

@@ -14,10 +14,6 @@ void TextEditor::load()
 	_fe3d->camera_reset();
 	_fe3d->camera_setYaw(270.0f);
 
-	_fe3d->billboard_create(PREVIEW_BILLBOARD_ID, true);
-	_fe3d->billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
-	_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
-
 	_gui->getOverlay()->createTextField("textID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
@@ -31,8 +27,6 @@ void TextEditor::unload()
 	}
 
 	_unloadGUI();
-
-	_fe3d->billboard_delete(PREVIEW_BILLBOARD_ID);
 
 	_gui->getOverlay()->deleteTextField("textID");
 
@@ -59,7 +53,7 @@ void TextEditor::_loadGUI()
 	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("textEditorMenuChoice");
 	leftWindow->getScreen("textEditorMenuChoice")->createButton("fontMap", fvec2(0.0f, positions[0]), fvec2(TW("Font Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Font Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quadEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[1]), fvec2(TW("Color"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Color", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("textEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[1]), fvec2(TW("Color"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Color", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("textEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[2]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 }
 

@@ -147,6 +147,8 @@ const bool BillboardEditor::loadFromFile()
 		{
 			_loadedBillboardIDs.push_back(billboardID);
 
+			_fe3d->billboard_setVisible(billboardID, false);
+
 			if(!diffuseMapPath.empty())
 			{
 				if(!Config::getInst().isApplicationExported())
@@ -178,7 +180,6 @@ const bool BillboardEditor::loadFromFile()
 				_fe3d->billboard_setTextContent(billboardID, textContent);
 			}
 
-			_fe3d->billboard_setVisible(billboardID, false);
 			_fe3d->billboard_setSize(billboardID, size);
 			_fe3d->billboard_setColor(billboardID, color);
 			_fe3d->billboard_setLightness(billboardID, lightness);

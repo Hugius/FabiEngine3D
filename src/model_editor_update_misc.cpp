@@ -218,6 +218,7 @@ void ModelEditor::_updateModelChoosing()
 				if(!_isDeletingModel)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
 				}

@@ -179,6 +179,7 @@ void ModelEditor::_updateAabbChoosing()
 				if(!_isDeletingAabb)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
+
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), true);
 				}

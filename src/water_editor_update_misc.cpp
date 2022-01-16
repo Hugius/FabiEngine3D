@@ -135,6 +135,7 @@ void WaterEditor::_updateWaterChoosing()
 				if(!_isDeletingWater)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("waterID")->getEntityID(), "Water: " + _currentWaterID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("waterID")->getEntityID(), true);
 				}

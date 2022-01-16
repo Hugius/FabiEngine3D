@@ -157,6 +157,7 @@ void BillboardEditor::_updateBillboardChoosing()
 				if(!_isDeletingBillboard)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentBillboardID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
 				}

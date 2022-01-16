@@ -95,6 +95,10 @@ const bool TextEditor::loadFromFile()
 		{
 			_loadedTextIDs.push_back(textID);
 
+			_fe3d->text_setVisible(textID, false);
+			_fe3d->text_setPosition(textID, Tools::convertPositionToViewport(fvec2(0.0f)));
+			_fe3d->text_setSize(textID, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+
 			if(!fontMapPath.empty())
 			{
 				if(!Config::getInst().isApplicationExported())
@@ -103,9 +107,8 @@ const bool TextEditor::loadFromFile()
 				}
 
 				_fe3d->text_setFontMap(textID, fontMapPath);
+				_fe3d->text_setContent(textID, "Text123");
 			}
-
-			_fe3d->text_setVisible(textID, false);
 		}
 	}
 

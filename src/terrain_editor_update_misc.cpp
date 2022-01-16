@@ -170,6 +170,7 @@ void TerrainEditor::_updateTerrainChoosing()
 				if(!_isDeletingTerrain)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("terrainID")->getEntityID(), true);
 				}

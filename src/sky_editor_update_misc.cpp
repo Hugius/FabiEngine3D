@@ -118,6 +118,7 @@ void SkyEditor::_updateSkyChoosing()
 				if(!_isDeletingSky)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("skyID")->getEntityID(), "Sky: " + _currentSkyID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("skyID")->getEntityID(), true);
 				}

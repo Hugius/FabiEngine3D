@@ -60,6 +60,9 @@ void TextEditor::_updateTextCreating()
 
 			if(_fe3d->text_isExisting(newTextID))
 			{
+				_fe3d->text_setPosition(newTextID, Tools::convertPositionToViewport(fvec2(0.0f)));
+				_fe3d->text_setSize(newTextID, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+
 				_currentTextID = newTextID;
 				_loadedTextIDs.push_back(newTextID);
 
@@ -78,8 +81,7 @@ void TextEditor::_updateTextChoosing()
 	{
 		if(!_hoveredTextID.empty())
 		{
-			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+			_fe3d->text_setVisible(_hoveredTextID, false);
 		}
 
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("textList");
@@ -97,13 +99,11 @@ void TextEditor::_updateTextChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("textEditorMenuChoice");
 
-					_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _fe3d->text_getFontMapPath(_currentTextID));
-					_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
-
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
 				}
 
+				_fe3d->text_setVisible(_currentTextID, true);
 				_gui->getOverlay()->deleteChoiceForm("textList");
 				_isChoosingText = false;
 			}
@@ -121,8 +121,7 @@ void TextEditor::_updateTextChoosing()
 
 		if(!_hoveredTextID.empty())
 		{
-			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _fe3d->text_getFontMapPath(_hoveredTextID));
-			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
+			_fe3d->text_setVisible(_hoveredTextID, true);
 		}
 	}
 }
@@ -138,9 +137,6 @@ void TextEditor::_updateTextDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
-
 			_fe3d->text_delete(_currentTextID);
 
 			_loadedTextIDs.erase(remove(_loadedTextIDs.begin(), _loadedTextIDs.end(), _currentTextID), _loadedTextIDs.end());

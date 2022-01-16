@@ -80,10 +80,11 @@ const bool TextEditor::loadFromFile()
 	while(getline(file, line))
 	{
 		string textID, fontMapPath;
+		fvec3 color;
 
 		istringstream iss(line);
 
-		iss >> textID >> fontMapPath;
+		iss >> textID >> fontMapPath >> color.r >> color.g >> color.b;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -98,6 +99,7 @@ const bool TextEditor::loadFromFile()
 			_fe3d->text_setVisible(textID, false);
 			_fe3d->text_setPosition(textID, Tools::convertPositionToViewport(fvec2(0.0f)));
 			_fe3d->text_setSize(textID, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->text_setColor(textID, color);
 
 			if(!fontMapPath.empty())
 			{

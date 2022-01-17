@@ -82,9 +82,9 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 	_billboardAnimationsToStart.clear();
 }
 
-void Animation2dEditor::_updateQuadAnimationExecution()
+void Animation2dEditor::_updateQuad2dAnimationExecution()
 {
-	for(auto& [key, animation] : _startedQuadAnimations)
+	for(auto& [key, animation] : _startedQuad2dAnimations)
 	{
 		if(!animation.isPaused())
 		{
@@ -100,8 +100,8 @@ void Animation2dEditor::_updateQuadAnimationExecution()
 					{
 						if(animation.getPlayCount() == -1)
 						{
-							_quadAnimationsToStop.insert(key);
-							_quadAnimationsToStart.insert(key);
+							_quad2dAnimationsToStop.insert(key);
+							_quad2dAnimationsToStart.insert(key);
 						}
 						else
 						{
@@ -109,7 +109,7 @@ void Animation2dEditor::_updateQuadAnimationExecution()
 
 							if(animation.getPlayCount() == 0)
 							{
-								_quadAnimationsToStop.insert(key);
+								_quad2dAnimationsToStop.insert(key);
 							}
 							else
 							{
@@ -140,21 +140,21 @@ void Animation2dEditor::_updateQuadAnimationExecution()
 		_fe3d->quad2d_setUvOffset(key.second, uvOffset);
 	}
 
-	for(const auto& key : _quadAnimationsToStop)
+	for(const auto& key : _quad2dAnimationsToStop)
 	{
-		if(isQuadAnimationStarted(key.first, key.second))
+		if(isQuad2dAnimationStarted(key.first, key.second))
 		{
-			stopQuadAnimation(key.first, key.second);
+			stopQuad2dAnimation(key.first, key.second);
 		}
 	}
-	_quadAnimationsToStop.clear();
+	_quad2dAnimationsToStop.clear();
 
-	for(const auto& key : _quadAnimationsToStart)
+	for(const auto& key : _quad2dAnimationsToStart)
 	{
-		if(!isQuadAnimationStarted(key.first, key.second))
+		if(!isQuad2dAnimationStarted(key.first, key.second))
 		{
-			startQuadAnimation(key.first, key.second, -1);
+			startQuad2dAnimation(key.first, key.second, -1);
 		}
 	}
-	_quadAnimationsToStart.clear();
+	_quad2dAnimationsToStart.clear();
 }

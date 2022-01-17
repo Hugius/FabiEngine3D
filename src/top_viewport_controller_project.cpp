@@ -55,8 +55,8 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\normal_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\reflection_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\specular_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad\\diffuse_map\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad2d\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad2d\\diffuse_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\sky\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\sky\\cube_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\");
@@ -83,7 +83,7 @@ void TopViewportController::_updateProjectCreating()
 				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
 				auto billboardFile = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
 				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
-				auto quadFile = ofstream(newProjectDirectoryPath + "data\\quad.fe3d");
+				auto quad2dFile = ofstream(newProjectDirectoryPath + "data\\quad2d.fe3d");
 				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
 				auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
 				auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound.fe3d");
@@ -93,7 +93,7 @@ void TopViewportController::_updateProjectCreating()
 				animation2dFile.close();
 				animation3dFile.close();
 				billboardFile.close();
-				quadFile.close();
+				quad2dFile.close();
 				modelFile.close();
 				settingsFile.close();
 				skyFile.close();

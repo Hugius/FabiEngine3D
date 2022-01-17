@@ -34,7 +34,7 @@ private:
 	string _hoveredQuadID = "";
 	string _currentProjectID = "";
 
-	static inline const fvec2 QUAD_SIZE = fvec2(0.75f);
+	static inline const fvec2 QUAD2D_SIZE = fvec2(0.75f);
 
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;

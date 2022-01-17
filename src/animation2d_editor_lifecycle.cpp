@@ -38,11 +38,11 @@ void Animation2dEditor::unload()
 
 	_animations.clear();
 	_startedBillboardAnimations.clear();
-	_startedQuadAnimations.clear();
+	_startedQuad2dAnimations.clear();
 	_billboardAnimationsToStop.clear();
 	_billboardAnimationsToStart.clear();
-	_quadAnimationsToStop.clear();
-	_quadAnimationsToStart.clear();
+	_quad2dAnimationsToStop.clear();
+	_quad2dAnimationsToStart.clear();
 	_hoveredAnimationID = "";
 	_currentAnimationID = "";
 	_isCreatingAnimation = false;
@@ -82,7 +82,7 @@ void Animation2dEditor::_unloadGUI()
 void Animation2dEditor::update()
 {
 	_updateBillboardAnimationExecution();
-	_updateQuadAnimationExecution();
+	_updateQuad2dAnimationExecution();
 
 	if(_isEditorLoaded)
 	{

@@ -106,7 +106,7 @@ void Animation2dEditor::_updateChoiceMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto entityType = (isConfirmed ? "billboard" : "quad");
+			const auto entityType = (isConfirmed ? "billboard" : "quad2d");
 			const auto targetDirectoryPath = string("projects\\" + _currentProjectID +
 													"\\assets\\image\\entity\\" + entityType + "\\diffuse_map\\");
 

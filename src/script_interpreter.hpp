@@ -136,7 +136,7 @@ private:
 	const bool _validateFe3dSound3d(const string& ID, bool isTemplate);
 	const bool _validateFe3dSound2d(const string& ID, bool isTemplate);
 	const bool _validateFe3dAabb(const string& ID);
-	const bool _validateFe3dQuad(const string& ID, bool isTemplate);
+	const bool _validateFe3dQuad2d(const string& ID, bool isTemplate);
 	const bool _validateFe3dText(const string& ID, bool isTemplate);
 	const bool _validateFe3dPointlight(const string& ID);
 	const bool _validateFe3dSpotlight(const string& ID);

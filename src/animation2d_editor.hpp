@@ -22,36 +22,36 @@ public:
 	void resumeBillboardAnimations();
 	void stopBillboardAnimations();
 	void setBillboardAnimationFramestep(const string& animationID, const string& billboardID, unsigned int value);
-	void startQuadAnimation(const string& animationID, const string& quadID, int playCount);
-	void pauseQuadAnimation(const string& animationID, const string& quadID);
-	void autopauseQuadAnimation(const string& animationID, const string& quadID);
-	void resumeQuadAnimation(const string& animationID, const string& quadID);
-	void stopQuadAnimation(const string& animationID, const string& quadID);
-	void pauseQuadAnimations();
-	void autopauseQuadAnimations();
-	void resumeQuadAnimations();
-	void stopQuadAnimations();
-	void setQuadAnimationFramestep(const string& animationID, const string& quadID, unsigned int value);
+	void startQuad2dAnimation(const string& animationID, const string& quadID, int playCount);
+	void pauseQuad2dAnimation(const string& animationID, const string& quadID);
+	void autopauseQuad2dAnimation(const string& animationID, const string& quadID);
+	void resumeQuad2dAnimation(const string& animationID, const string& quadID);
+	void stopQuad2dAnimation(const string& animationID, const string& quadID);
+	void pauseQuad2dAnimations();
+	void autopauseQuad2dAnimations();
+	void resumeQuad2dAnimations();
+	void stopQuad2dAnimations();
+	void setQuad2dAnimationFramestep(const string& animationID, const string& quadID, unsigned int value);
 
 	const vector<string> getAnimationIDs();
 	const vector<string> getStartedBillboardAnimationIDs() const;
-	const vector<string> getStartedQuadAnimationIDs() const;
+	const vector<string> getStartedQuad2dAnimationIDs() const;
 	const vector<string> getStartedBillboardAnimationIDs(const string& billboardID) const;
-	const vector<string> getStartedQuadAnimationIDs(const string& billboardID) const;
+	const vector<string> getStartedQuad2dAnimationIDs(const string& billboardID) const;
 
 	const int getBillboardAnimationPlayCount(const string& animationID, const string& billboardID) const;
-	const int getQuadAnimationPlayCount(const string& animationID, const string& quadID) const;
+	const int getQuad2dAnimationPlayCount(const string& animationID, const string& quadID) const;
 
 	const unsigned int getBillboardAnimationRowCount(const string& animationID, const string& billboardID) const;
 	const unsigned int getBillboardAnimationColumnCount(const string& animationID, const string& billboardID) const;
 	const unsigned int getBillboardAnimationRowIndex(const string& animationID, const string& billboardID) const;
 	const unsigned int getBillboardAnimationColumnIndex(const string& animationID, const string& billboardID) const;
 	const unsigned int getBillboardAnimationFramestep(const string& animationID, const string& billboardID) const;
-	const unsigned int getQuadAnimationRowCount(const string& animationID, const string& quadID) const;
-	const unsigned int getQuadAnimationColumnCount(const string& animationID, const string& quadID) const;
-	const unsigned int getQuadAnimationRowIndex(const string& animationID, const string& quadID) const;
-	const unsigned int getQuadAnimationColumnIndex(const string& animationID, const string& quadID) const;
-	const unsigned int getQuadAnimationFramestep(const string& animationID, const string& quadID) const;
+	const unsigned int getQuad2dAnimationRowCount(const string& animationID, const string& quadID) const;
+	const unsigned int getQuad2dAnimationColumnCount(const string& animationID, const string& quadID) const;
+	const unsigned int getQuad2dAnimationRowIndex(const string& animationID, const string& quadID) const;
+	const unsigned int getQuad2dAnimationColumnIndex(const string& animationID, const string& quadID) const;
+	const unsigned int getQuad2dAnimationFramestep(const string& animationID, const string& quadID) const;
 
 	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& ID) const;
@@ -59,10 +59,10 @@ public:
 	const bool isBillboardAnimationPlaying(const string& animationID, const string& billboardID) const;
 	const bool isBillboardAnimationPaused(const string& animationID, const string& billboardID) const;
 	const bool isBillboardAnimationAutopaused(const string& animationID, const string& billboardID) const;
-	const bool isQuadAnimationStarted(const string& animationID, const string& quadID) const;
-	const bool isQuadAnimationPlaying(const string& animationID, const string& quadID) const;
-	const bool isQuadAnimationPaused(const string& animationID, const string& quadID) const;
-	const bool isQuadAnimationAutopaused(const string& animationID, const string& quadID) const;
+	const bool isQuad2dAnimationStarted(const string& animationID, const string& quadID) const;
+	const bool isQuad2dAnimationPlaying(const string& animationID, const string& quadID) const;
+	const bool isQuad2dAnimationPaused(const string& animationID, const string& quadID) const;
+	const bool isQuad2dAnimationAutopaused(const string& animationID, const string& quadID) const;
 	const bool loadFromFile(bool mustCheckPreviewTexture);
 	const bool saveToFile() const;
 
@@ -75,7 +75,7 @@ private:
 	void _updateAnimationChoosing();
 	void _updateAnimationDeleting();
 	void _updateBillboardAnimationExecution();
-	void _updateQuadAnimationExecution();
+	void _updateQuad2dAnimationExecution();
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
 
@@ -84,8 +84,8 @@ private:
 	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_billboard";
 	set<pair<string, string>> _billboardAnimationsToStop;
 	set<pair<string, string>> _billboardAnimationsToStart;
-	set<pair<string, string>> _quadAnimationsToStop;
-	set<pair<string, string>> _quadAnimationsToStart;
+	set<pair<string, string>> _quad2dAnimationsToStop;
+	set<pair<string, string>> _quad2dAnimationsToStart;
 	string _hoveredAnimationID = "";
 	string _currentAnimationID = "";
 	string _currentProjectID = "";
@@ -101,6 +101,6 @@ private:
 	bool _isEditorLoaded = false;
 
 	map<pair<string, string>, Animation2d> _startedBillboardAnimations;
-	map<pair<string, string>, Animation2d> _startedQuadAnimations;
+	map<pair<string, string>, Animation2d> _startedQuad2dAnimations;
 	vector<shared_ptr<Animation2d>> _animations;
 };

@@ -1,4 +1,4 @@
-#include "quad_entity_color_renderer.hpp"
+#include "quad2d_entity_color_renderer.hpp"
 #include "configuration.hpp"
 #include "text_entity.hpp"
 

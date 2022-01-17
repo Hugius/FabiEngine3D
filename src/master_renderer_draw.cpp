@@ -192,10 +192,10 @@ void MasterRenderer::_renderAabbEntities()
 
 void MasterRenderer::_renderFinalSceneMap()
 {
-	_renderQuad->setDiffuseMap(_renderBus->getFinalSceneMap());
+	_renderSurface->setDiffuseMap(_renderBus->getFinalSceneMap());
 
 	_quad2dEntityColorRenderer.bind();
-	_quad2dEntityColorRenderer.render(_renderQuad);
+	_quad2dEntityColorRenderer.render(_renderSurface);
 	_quad2dEntityColorRenderer.unbind();
 }
 

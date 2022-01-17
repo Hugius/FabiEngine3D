@@ -13,9 +13,9 @@ MasterRenderer::MasterRenderer()
 {
 	const auto viewportSize = Config::getInst().getViewportSize();
 
-	_renderQuad = make_shared<Quad2dEntity>("renderQuad");
-	_renderQuad->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	_renderQuad->setCentered(true);
+	_renderSurface = make_shared<Quad2dEntity>("renderQuad");
+	_renderSurface->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
+	_renderSurface->setCentered(true);
 
 	_skyEntityColorShader = make_shared<ShaderBuffer>("sky_entity_color_shader.vert", "sky_entity_color_shader.frag");
 	_terrainEntityColorShader = make_shared<ShaderBuffer>("terrain_entity_color_shader.vert", "terrain_entity_color_shader.frag");
@@ -28,7 +28,7 @@ MasterRenderer::MasterRenderer()
 	_billboardEntityDepthShader = make_shared<ShaderBuffer>("billboard_entity_depth_shader.vert", "billboard_entity_depth_shader.frag");
 	_billboardEntityShadowShader = make_shared<ShaderBuffer>("billboard_entity_shadow_shader.vert", "billboard_entity_shadow_shader.frag");
 	_aabbEntityColorShader = make_shared<ShaderBuffer>("aabb_entity_color_shader.vert", "aabb_entity_color_shader.frag");
-	_quad2dEntityColorShader = make_shared<ShaderBuffer>("quad_entity_color_shader.vert", "quad_entity_color_shader.frag");
+	_quad2dEntityColorShader = make_shared<ShaderBuffer>("quad2d_entity_color_shader.vert", "quad2d_entity_color_shader.frag");
 	_antiAliasingShader = make_shared<ShaderBuffer>("anti_aliasing_shader.vert", "anti_aliasing_shader.frag");
 	_bloomShader = make_shared<ShaderBuffer>("bloom_shader.vert", "bloom_shader.frag");
 	_dofShader = make_shared<ShaderBuffer>("dof_shader.vert", "dof_shader.frag");

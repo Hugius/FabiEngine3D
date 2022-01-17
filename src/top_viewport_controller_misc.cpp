@@ -215,7 +215,7 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\animation2d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\billboard.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\model.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\quad.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\quad2d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\settings.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sky.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sound.fe3d") ||

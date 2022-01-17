@@ -33,13 +33,13 @@ void Quad2dEditor::_updateQuadCreating()
 		{
 			if(newQuadID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Quad ID cannot contain any spaces!");
+				Logger::throwWarning("quad ID cannot contain any spaces!");
 				return;
 			}
 
 			if(newQuadID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Quad ID cannot contain '@'!");
+				Logger::throwWarning("quad ID cannot contain '@'!");
 				return;
 			}
 
@@ -47,7 +47,7 @@ void Quad2dEditor::_updateQuadCreating()
 
 			if(find(_loadedQuadIDs.begin(), _loadedQuadIDs.end(), newQuadID) != _loadedQuadIDs.end())
 			{
-				Logger::throwWarning("Quad with ID \"" + newQuadID.substr(1) + "\" already exists!");
+				Logger::throwWarning("quad with ID \"" + newQuadID.substr(1) + "\" already exists!");
 				return;
 			}
 
@@ -61,13 +61,13 @@ void Quad2dEditor::_updateQuadCreating()
 			if(_fe3d->quad2d_isExisting(newQuadID))
 			{
 				_fe3d->quad2d_setPosition(newQuadID, Tools::convertPositionToViewport(fvec2(0.0f)));
-				_fe3d->quad2d_setSize(newQuadID, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
+				_fe3d->quad2d_setSize(newQuadID, Tools::convertSizeToViewport(fvec2(QUAD2D_SIZE.x, (QUAD2D_SIZE.y * Tools::getWindowAspectRatio()))));
 
 				_currentQuadID = newQuadID;
 				_loadedQuadIDs.push_back(newQuadID);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
-				_fe3d->text_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad: " + newQuadID.substr(1), 0.025f);
+				_fe3d->text_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad2D: " + newQuadID.substr(1), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
 				_isCreatingQuad = false;
 			}
@@ -99,7 +99,7 @@ void Quad2dEditor::_updateQuadChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
 
-					_fe3d->text_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad: " + selectedButtonID.substr(1), 0.025f);
+					_fe3d->text_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad2D: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
 				}
 

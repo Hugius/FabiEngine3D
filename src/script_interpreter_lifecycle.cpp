@@ -169,7 +169,7 @@ void ScriptInterpreter::load()
 void ScriptInterpreter::unload()
 {
 	_animation2dEditor->stopBillboardAnimations();
-	_animation2dEditor->stopQuadAnimations();
+	_animation2dEditor->stopQuad2dAnimations();
 	_animation3dEditor->stopModelAnimations();
 
 	_fe3d->sky_selectMainSky("");

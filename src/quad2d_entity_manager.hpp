@@ -2,7 +2,7 @@
 
 #include "base_entity_manager.hpp"
 #include "render_bus.hpp"
-#include "quad_entity.hpp"
+#include "quad2d_entity.hpp"
 
 #include <unordered_map>
 

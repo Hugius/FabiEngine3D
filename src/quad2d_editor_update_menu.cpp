@@ -14,7 +14,7 @@ void Quad2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("quadCreate", "Create Quad", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("quadCreate", "Create Quad2D", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingQuad = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -24,7 +24,7 @@ void Quad2dEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("quadList", "Edit Quad", fvec2(-0.5f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("quadList", "Edit Quad2D", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingQuad = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -34,7 +34,7 @@ void Quad2dEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("quadList", "Delete Quad", fvec2(-0.5f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("quadList", "Delete Quad2D", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingQuad = true;
 			_isDeletingQuad = true;
 		}
@@ -80,7 +80,7 @@ void Quad2dEditor::_updateChoiceMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\quad\\diffuse_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\quad2d\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

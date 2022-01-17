@@ -17,12 +17,12 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\quad.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\quad2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `quad.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `quad2d.fe3d` missing!");
 		return {};
 	}
 
@@ -67,12 +67,12 @@ const bool Quad2dEditor::loadFromFile()
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\quad.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\quad2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `quad.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `quad2d.fe3d` missing!");
 		return false;
 	}
 
@@ -99,7 +99,7 @@ const bool Quad2dEditor::loadFromFile()
 
 			_fe3d->quad2d_setVisible(quadID, false);
 			_fe3d->quad2d_setPosition(quadID, Tools::convertPositionToViewport(fvec2(0.0f)));
-			_fe3d->quad2d_setSize(quadID, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->quad2d_setSize(quadID, Tools::convertSizeToViewport(fvec2(QUAD2D_SIZE.x, (QUAD2D_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->quad2d_setColor(quadID, color);
 			_fe3d->quad2d_setTransparency(quadID, transparency);
 
@@ -117,7 +117,7 @@ const bool Quad2dEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Quad editor data loaded!");
+	Logger::throwInfo("Quad2D editor data loaded!");
 
 	return true;
 }

@@ -119,7 +119,7 @@ private:
 	BlurRenderer _dofBlurRenderer;
 	BlurRenderer _motionBlurBlurRenderer;
 
-	shared_ptr<Quad2dEntity> _renderQuad = nullptr;
+	shared_ptr<Quad2dEntity> _renderSurface = nullptr;
 
 	shared_ptr<ShaderBuffer> _skyEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _terrainEntityColorShader = nullptr;

@@ -3,14 +3,12 @@
 
 const string EngineInterface::sky_getSelectedID() const
 {
-	if(_core->getSkyEntityManager()->getSelectedMainSky() != nullptr)
-	{
-		return _core->getSkyEntityManager()->getSelectedMainSky()->getID();
-	}
-	else
+	if(_core->getSkyEntityManager()->getSelectedMainSky() == nullptr)
 	{
 		return "";
 	}
+
+	return _core->getSkyEntityManager()->getSelectedMainSky()->getID();
 }
 
 const string EngineInterface::sky_getMixID() const

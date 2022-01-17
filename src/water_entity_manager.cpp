@@ -12,10 +12,8 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 	{
 		Logger::throwError("WaterEntityManager::getEntity");
 	}
-	else
-	{
-		return iterator->second;
-	}
+
+	return iterator->second;
 }
 
 shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()
@@ -24,10 +22,8 @@ shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()
 	{
 		return nullptr;
 	}
-	else
-	{
-		return getEntity(_selectedID);
-	}
+
+	return getEntity(_selectedID);
 }
 
 const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEntities()
@@ -37,14 +33,12 @@ const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEnt
 
 void WaterEntityManager::selectWater(const string& ID)
 {
-	if(isEntityExisting(ID) || ID.empty())
-	{
-		_selectedID = ID;
-	}
-	else
+	if(!isEntityExisting(ID) && !ID.empty())
 	{
 		Logger::throwError("WaterEntityManager::selectWater");
 	}
+
+	_selectedID = ID;
 }
 
 void WaterEntityManager::createEntity(const string& ID)

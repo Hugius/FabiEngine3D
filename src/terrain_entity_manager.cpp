@@ -12,10 +12,8 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 	{
 		Logger::throwError("TerrainEntityManager::getEntity");
 	}
-	else
-	{
-		return iterator->second;
-	}
+
+	return iterator->second;
 }
 
 shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedTerrain()
@@ -24,10 +22,8 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedTerrain()
 	{
 		return nullptr;
 	}
-	else
-	{
-		return getEntity(_selectedID);
-	}
+
+	return getEntity(_selectedID);
 }
 
 const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::getEntities()
@@ -66,9 +62,15 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 	}
 
 	vector<float> pixels;
-	for(unsigned int i = 0; i < (image->getWidth() * image->getHeight()); i++)
+	for(unsigned int i = 0; i < (image->getWidth() * image->getHeight()); i += 3)
 	{
-		pixels.push_back(static_cast<float>(image->getPixels()[i]) / 255.0f);
+		auto r = (static_cast<float>(image->getPixels()[i + 0]) / 255.0f);
+		auto g = (static_cast<float>(image->getPixels()[i + 1]) / 255.0f);
+		auto b = (static_cast<float>(image->getPixels()[i + 2]) / 255.0f);
+
+		auto intensity = ((r + g + b) / 3.0f);
+
+		pixels.push_back(intensity);
 	}
 
 	_loadMesh(entity, size, 0.0f, pixels);
@@ -80,14 +82,12 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 void TerrainEntityManager::selectTerrain(const string& ID)
 {
-	if(isEntityExisting(ID) || ID.empty())
-	{
-		_selectedID = ID;
-	}
-	else
+	if(!isEntityExisting(ID) && !ID.empty())
 	{
 		Logger::throwError("TerrainEntityManager::selectTerrain");
 	}
+
+	_selectedID = ID;
 }
 
 void TerrainEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
@@ -128,26 +128,22 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	vector<fvec3> tempPositions;
 	vector<fvec2> tempUvs;
 	vector<fvec3> tempNormals;
-	for(float x = -halfSize; x < halfSize; x++)
+	for(float x = 0.0f; x < size; x++)
 	{
-		for(float z = -halfSize; z < halfSize; z++)
+		for(float z = 0.0f; z < size; z++)
 		{
-			float positionX = x;
-			float positionY = _getPixelHeight(x + halfSize, z + halfSize, size, maxHeight, pixels);
-			float positionZ = z;
+			auto height = _getPixelHeight(x, z, size, maxHeight, pixels);
+			auto leftHeight = _getPixelHeight((x - 1), z, size, maxHeight, pixels);
+			auto rightHeight = _getPixelHeight((x + 1), z, size, maxHeight, pixels);
+			auto upHeight = _getPixelHeight(x, (z + 1), size, maxHeight, pixels);
+			auto downHeight = _getPixelHeight(x, (z - 1), size, maxHeight, pixels);
 
-			float uvX = ((x + halfSize) / size);
-			float uvY = ((z + halfSize) / size);
+			auto position = fvec3((x - halfSize), height, (z - halfSize));
+			auto uv = fvec2(((x) / size), ((z) / size));
+			auto normal = Math::normalize(fvec3((leftHeight - rightHeight), 3.0f, (downHeight - upHeight)));
 
-			float LH = _getPixelHeight(x + halfSize - 1, z + halfSize, size, maxHeight, pixels);
-			float RH = _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixels);
-			float UH = _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixels);
-			float DH = _getPixelHeight(x + halfSize, z + halfSize - 1, size, maxHeight, pixels);
-			fvec3 normal = fvec3(LH - RH, 3.0f, DH - UH);
-			normal = Math::normalize(normal);
-
-			tempPositions.push_back(fvec3(positionX, positionY, positionZ));
-			tempUvs.push_back(fvec2(uvX, uvY));
+			tempPositions.push_back(position);
+			tempUvs.push_back(uv);
 			tempNormals.push_back(normal);
 		}
 	}
@@ -159,10 +155,10 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	{
 		for(unsigned int z = 0; z < uSize - 1; z++)
 		{
-			unsigned int topLeftIndex = (z * uSize) + x;
-			unsigned int topRightIndex = topLeftIndex + 1;
-			unsigned int bottomLeftIndex = ((z + 1) * uSize) + x;
-			unsigned int bottomRightIndex = bottomLeftIndex + 1;
+			auto topLeftIndex = (z * uSize) + x;
+			auto topRightIndex = topLeftIndex + 1;
+			auto bottomLeftIndex = ((z + 1) * uSize) + x;
+			auto bottomRightIndex = bottomLeftIndex + 1;
 
 			positions.push_back(tempPositions[topLeftIndex]);
 			uvs.push_back(tempUvs[topLeftIndex]);
@@ -193,22 +189,23 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	vector<fvec3> tangents;
 	for(size_t i = 0; i < positions.size(); i += 3)
 	{
-		fvec3 v0 = positions[i + 0];
-		fvec3 v1 = positions[i + 1];
-		fvec3 v2 = positions[i + 2];
+		auto v0 = positions[i + 0];
+		auto v1 = positions[i + 1];
+		auto v2 = positions[i + 2];
 
-		fvec2 uv0 = uvs[i + 0];
-		fvec2 uv1 = uvs[i + 1];
-		fvec2 uv2 = uvs[i + 2];
+		auto uv0 = uvs[i + 0];
+		auto uv1 = uvs[i + 1];
+		auto uv2 = uvs[i + 2];
 
-		fvec3 deltaPos1 = v1 - v0;
-		fvec3 deltaPos2 = v2 - v0;
+		auto deltaPos1 = (v1 - v0);
+		auto deltaPos2 = (v2 - v0);
 
-		fvec2 deltaUv1 = uv1 - uv0;
-		fvec2 deltaUv2 = uv2 - uv0;
+		auto deltaUv1 = (uv1 - uv0);
+		auto deltaUv2 = (uv2 - uv0);
 
-		float r = 1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x);
-		fvec3 tangent = (deltaPos1 * deltaUv2.y - deltaPos2 * deltaUv1.y) * r;
+		auto r = (1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x));
+
+		auto tangent = ((deltaPos1 * deltaUv2.y - deltaPos2 * deltaUv1.y) * r);
 
 		tangents.push_back(tangent);
 		tangents.push_back(tangent);
@@ -273,6 +270,7 @@ float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float 
 		return 0.0f;
 	}
 
-	int index = (static_cast<int>(x) * static_cast<int>(size)) + static_cast<int>(z);
+	auto index = (static_cast<unsigned int>(z) * static_cast<unsigned int>(size)) + static_cast<unsigned int>(x);
+
 	return (pixels[index] * maxHeight);
 }

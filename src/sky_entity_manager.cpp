@@ -72,10 +72,8 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 	{
 		Logger::throwError("SkyEntityManager::getEntity");
 	}
-	else
-	{
-		return iterator->second;
-	}
+
+	return iterator->second;
 }
 
 shared_ptr<SkyEntity> SkyEntityManager::getSelectedMainSky()
@@ -84,10 +82,8 @@ shared_ptr<SkyEntity> SkyEntityManager::getSelectedMainSky()
 	{
 		return nullptr;
 	}
-	else
-	{
-		return getEntity(_selectedMainID);
-	}
+
+	return getEntity(_selectedMainID);
 }
 
 shared_ptr<SkyEntity> SkyEntityManager::getSelectedMixSky()
@@ -96,10 +92,8 @@ shared_ptr<SkyEntity> SkyEntityManager::getSelectedMixSky()
 	{
 		return nullptr;
 	}
-	else
-	{
-		return getEntity(_selectedMixID);
-	}
+
+	return getEntity(_selectedMixID);
 }
 
 const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntities()
@@ -109,26 +103,22 @@ const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntitie
 
 void SkyEntityManager::selectMainSky(const string& ID)
 {
-	if(isEntityExisting(ID) || ID.empty())
-	{
-		_selectedMainID = ID;
-	}
-	else
+	if(!isEntityExisting(ID) && !ID.empty())
 	{
 		Logger::throwError("SkyEntityManager::selectMainSky");
 	}
+
+	_selectedMainID = ID;
 }
 
 void SkyEntityManager::selectMixSky(const string& ID)
 {
-	if(isEntityExisting(ID) || ID.empty())
-	{
-		_selectedMixID = ID;
-	}
-	else
+	if(!isEntityExisting(ID) && !ID.empty())
 	{
 		Logger::throwError("SkyEntityManager::selectMixSky");
 	}
+
+	_selectedMixID = ID;
 }
 
 void SkyEntityManager::createEntity(const string& ID)

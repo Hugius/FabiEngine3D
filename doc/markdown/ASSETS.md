@@ -89,7 +89,9 @@
 
 - Displacement map assets must be placed in `~\projects\<your_project>\assets\image\displacement_map\`
 - Recommended bit depth: `24`
-- DUDV maps are used to create waves in a water mesh.
+- Displacement maps are used to create waves in a water mesh.
+- RGB pixels are automatically averaged to calculate their intensity.
+- The intensity of each pixel corresponds to a vertex height.
 
 ### 4.5 DUDV Map
 
@@ -97,7 +99,7 @@
 
 - DUDV map assets must be placed in `~\projects\<your_project>\assets\image\dudv_map\`
 - Recommended bit depth: `24`
-- Displacement maps are used to create ripples in a water texture.
+- DUDV maps are used to create ripples in a water texture.
 
 ### 4.6 Emission Map
 
@@ -131,7 +133,8 @@
 - Height map assets must be placed in `~\projects\<your_project>\assets\image\height_map\`.
 - Recommended bit depth: `24`
 - Height maps are used to generate a terrain mesh.
-- Each pixel of the height map corresponds to a vertex height.
+- RGB pixels are automatically averaged to calculate their intensity.
+- The intensity of each pixel corresponds to a vertex height.
 
 ### 4.10 Normal Map
 

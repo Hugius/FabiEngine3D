@@ -48,14 +48,12 @@ const bool EngineInterface::water_hasDisplacementMap(const string& ID) const
 
 const string EngineInterface::water_getSelectedID() const
 {
-	if(_core->getWaterEntityManager()->getSelectedWater() != nullptr)
-	{
-		return _core->getWaterEntityManager()->getSelectedWater()->getID();
-	}
-	else
+	if(_core->getWaterEntityManager()->getSelectedWater() == nullptr)
 	{
 		return "";
 	}
+
+	return _core->getWaterEntityManager()->getSelectedWater()->getID();
 }
 
 const fvec3 EngineInterface::water_getWireframeColor(const string& ID) const

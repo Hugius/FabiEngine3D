@@ -103,14 +103,12 @@ const float EngineInterface::terrain_getSpecularIntensity(const string& ID) cons
 
 const string EngineInterface::terrain_getSelectedID() const
 {
-	if(_core->getTerrainEntityManager()->getSelectedTerrain() != nullptr)
-	{
-		return _core->getTerrainEntityManager()->getSelectedTerrain()->getID();
-	}
-	else
+	if(_core->getTerrainEntityManager()->getSelectedTerrain() == nullptr)
 	{
 		return "";
 	}
+
+	return _core->getTerrainEntityManager()->getSelectedTerrain()->getID();
 }
 
 const vector<string> EngineInterface::terrain_getIDs() const

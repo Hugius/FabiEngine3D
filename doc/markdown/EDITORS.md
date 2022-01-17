@@ -4,7 +4,7 @@
 - [Terrain Editor](TERRAIN_EDITOR.md)
 - [Water Editor](WATER_EDITOR.md)
 - [Model Editor](MODEL_EDITOR.md)
-- [Billboard Editor](BILLBOARD_EDITOR.md)
+- [Quad3D Editor](QUAD3D_EDITOR.md)
 - [Quad2D Editor](QUAD2D_EDITOR.md)
 - [Text2D Editor](TEXT2D_EDITOR.md)
 - [Animation2D Editor](ANIMATION2D_EDITOR.md)

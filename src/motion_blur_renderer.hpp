@@ -8,5 +8,5 @@ class MotionBlurRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void render(const shared_ptr<QuadEntity> entity);
+	void render(const shared_ptr<Quad2dEntity> entity);
 };

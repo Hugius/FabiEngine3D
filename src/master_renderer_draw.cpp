@@ -194,23 +194,23 @@ void MasterRenderer::_renderFinalSceneMap()
 {
 	_renderQuad->setDiffuseMap(_renderBus->getFinalSceneMap());
 
-	_quadEntityColorRenderer.bind();
-	_quadEntityColorRenderer.render(_renderQuad);
-	_quadEntityColorRenderer.unbind();
+	_quad2dEntityColorRenderer.bind();
+	_quad2dEntityColorRenderer.render(_renderQuad);
+	_quad2dEntityColorRenderer.unbind();
 }
 
 void MasterRenderer::_renderGUI()
 {
-	if(!_quadEntityManager->getEntities().empty() || !_textEntityManager->getEntities().empty())
+	if(!_quad2dEntityManager->getEntities().empty() || !_textEntityManager->getEntities().empty())
 	{
-		_quadEntityColorRenderer.bind();
+		_quad2dEntityColorRenderer.bind();
 
 		map<unsigned int, shared_ptr<BaseEntity>> orderedEntityMap;
-		for(const auto& [key, quadEntity] : _quadEntityManager->getEntities())
+		for(const auto& [key, quad2dEntity] : _quad2dEntityManager->getEntities())
 		{
-			if(quadEntity->getID() != _renderBus->getCursorEntityID())
+			if(quad2dEntity->getID() != _renderBus->getCursorEntityID())
 			{
-				orderedEntityMap.insert(make_pair(quadEntity->getDepth(), quadEntity));
+				orderedEntityMap.insert(make_pair(quad2dEntity->getDepth(), quad2dEntity));
 			}
 		}
 		for(const auto& [key, textEntity] : _textEntityManager->getEntities())
@@ -220,36 +220,36 @@ void MasterRenderer::_renderGUI()
 
 		for(const auto& [key, entity] : orderedEntityMap)
 		{
-			auto castedQuadEntity = dynamic_pointer_cast<QuadEntity>(entity);
+			auto castedQuad2dEntity = dynamic_pointer_cast<Quad2dEntity>(entity);
 			auto castedTextEntity = dynamic_pointer_cast<TextEntity>(entity);
 
-			if(castedQuadEntity != nullptr)
+			if(castedQuad2dEntity != nullptr)
 			{
-				_quadEntityColorRenderer.render(castedQuadEntity);
+				_quad2dEntityColorRenderer.render(castedQuad2dEntity);
 			}
 
 			if(castedTextEntity != nullptr)
 			{
 				for(const auto& characterEntity : castedTextEntity->getCharacterEntities())
 				{
-					_quadEntityColorRenderer.render(characterEntity);
+					_quad2dEntityColorRenderer.render(characterEntity);
 				}
 			}
 		}
 
-		_quadEntityColorRenderer.unbind();
+		_quad2dEntityColorRenderer.unbind();
 	}
 }
 
 void MasterRenderer::_renderCursor()
 {
-	for(const auto& [key, entity] : _quadEntityManager->getEntities())
+	for(const auto& [key, entity] : _quad2dEntityManager->getEntities())
 	{
 		if(entity->getID() == _renderBus->getCursorEntityID())
 		{
-			_quadEntityColorRenderer.bind();
-			_quadEntityColorRenderer.render(entity);
-			_quadEntityColorRenderer.unbind();
+			_quad2dEntityColorRenderer.bind();
+			_quad2dEntityColorRenderer.render(entity);
+			_quad2dEntityColorRenderer.unbind();
 		}
 	}
 }

@@ -67,7 +67,7 @@ public:
 	const shared_ptr<ModelEntityManager> getModelEntityManager() const;
 	const shared_ptr<BillboardEntityManager> getBillboardEntityManager() const;
 	const shared_ptr<AabbEntityManager> getAabbEntityManager() const;
-	const shared_ptr<QuadEntityManager> getQuadEntityManager() const;
+	const shared_ptr<Quad2dEntityManager> getQuad2dEntityManager() const;
 	const shared_ptr<TextEntityManager> getTextEntityManager() const;
 	const shared_ptr<PointlightEntityManager> getPointlightEntityManager() const;
 	const shared_ptr<SpotlightEntityManager> getSpotlightEntityManager() const;
@@ -107,7 +107,7 @@ private:
 	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
 	shared_ptr<BillboardEntityManager> _billboardEntityManager = nullptr;
 	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
-	shared_ptr<QuadEntityManager> _quadEntityManager = nullptr;
+	shared_ptr<Quad2dEntityManager> _quad2dEntityManager = nullptr;
 	shared_ptr<TextEntityManager> _textEntityManager = nullptr;
 	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
 	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;

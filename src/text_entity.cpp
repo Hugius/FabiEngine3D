@@ -21,7 +21,7 @@ void TextEntity::setContent(const string& value)
 			auto uvMultiplier = fvec2((1.0f / 16.0f), (1.0f / 6.0f));
 			auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
 
-			auto characterEntity = make_shared<QuadEntity>("dummy");
+			auto characterEntity = make_shared<Quad2dEntity>("dummy");
 			characterEntity->setMesh(_mesh);
 			characterEntity->setUvMultiplier(uvMultiplier);
 			characterEntity->setUvOffset(uvOffset);
@@ -99,7 +99,7 @@ void TextEntity::updateCharacterEntities()
 	}
 }
 
-const vector<shared_ptr<QuadEntity>>& TextEntity::getCharacterEntities() const
+const vector<shared_ptr<Quad2dEntity>>& TextEntity::getCharacterEntities() const
 {
 	return _characterEntities;
 }

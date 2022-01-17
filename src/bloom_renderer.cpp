@@ -37,7 +37,7 @@ void BloomRenderer::unbind()
 	_shader->unbind();
 }
 
-void BloomRenderer::render(const shared_ptr<QuadEntity> entity)
+void BloomRenderer::render(const shared_ptr<Quad2dEntity> entity)
 {
 	const auto buffer = entity->getMesh();
 

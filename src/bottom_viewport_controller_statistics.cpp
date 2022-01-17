@@ -179,7 +179,7 @@ void BottomViewportController::_updateStatistics()
 			}
 		}
 
-		string textID = statisticsScreen->getTextField("quadEntityCount")->getEntityID();
+		string textID = statisticsScreen->getTextField("quad2dEntityCount")->getEntityID();
 		string text = "GUI Entities: " + to_string(entityCount);
 		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}

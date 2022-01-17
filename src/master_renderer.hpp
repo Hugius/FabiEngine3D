@@ -44,7 +44,7 @@ public:
 	void inject(shared_ptr<ModelEntityManager> modelEntityManager);
 	void inject(shared_ptr<BillboardEntityManager> billboardEntityManager);
 	void inject(shared_ptr<AabbEntityManager> aabbEntityManager);
-	void inject(shared_ptr<QuadEntityManager> quadEntityManager);
+	void inject(shared_ptr<Quad2dEntityManager> quad2dEntityManager);
 	void inject(shared_ptr<TextEntityManager> textEntityManager);
 	void inject(shared_ptr<PointlightEntityManager> pointlightEntityManager);
 	void inject(shared_ptr<SpotlightEntityManager> spotlightEntityManager);
@@ -54,7 +54,7 @@ public:
 	void inject(shared_ptr<ShadowGenerator> shadowGenerator);
 	void inject(shared_ptr<Timer> timer);
 	void update();
-	void renderLogo(shared_ptr<QuadEntity> logo, ivec2 viewport);
+	void renderLogo(shared_ptr<Quad2dEntity> logo, ivec2 viewport);
 	void renderApplication();
 	void reloadBloomBlurCaptureBuffer();
 	void reloadDofBlurCaptureBuffer();
@@ -108,7 +108,7 @@ private:
 	BillboardEntityDepthRenderer _billboardEntityDepthRenderer;
 	BillboardEntityShadowRenderer _billboardEntityShadowRenderer;
 	AabbEntityColorRenderer _aabbEntityColorRenderer;
-	QuadEntityColorRenderer _quadEntityColorRenderer;
+	Quad2dEntityColorRenderer _quad2dEntityColorRenderer;
 	AntiAliasingRenderer _antiAliasingRenderer;
 	BloomRenderer _bloomRenderer;
 	DofRenderer _dofRenderer;
@@ -119,7 +119,7 @@ private:
 	BlurRenderer _dofBlurRenderer;
 	BlurRenderer _motionBlurBlurRenderer;
 
-	shared_ptr<QuadEntity> _renderQuad = nullptr;
+	shared_ptr<Quad2dEntity> _renderQuad = nullptr;
 
 	shared_ptr<ShaderBuffer> _skyEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _terrainEntityColorShader = nullptr;
@@ -132,7 +132,7 @@ private:
 	shared_ptr<ShaderBuffer> _billboardEntityDepthShader = nullptr;
 	shared_ptr<ShaderBuffer> _billboardEntityShadowShader = nullptr;
 	shared_ptr<ShaderBuffer> _aabbEntityColorShader = nullptr;
-	shared_ptr<ShaderBuffer> _quadEntityColorShader = nullptr;
+	shared_ptr<ShaderBuffer> _quad2dEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _antiAliasingShader = nullptr;
 	shared_ptr<ShaderBuffer> _bloomShader = nullptr;
 	shared_ptr<ShaderBuffer> _dofShader = nullptr;
@@ -163,7 +163,7 @@ private:
 	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
 	shared_ptr<BillboardEntityManager> _billboardEntityManager = nullptr;
 	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
-	shared_ptr<QuadEntityManager> _quadEntityManager = nullptr;
+	shared_ptr<Quad2dEntityManager> _quad2dEntityManager = nullptr;
 	shared_ptr<TextEntityManager> _textEntityManager = nullptr;
 	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
 	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;

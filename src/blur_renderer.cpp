@@ -21,7 +21,7 @@ void BlurRenderer::unbind()
 	_shader->unbind();
 }
 
-const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<QuadEntity> entity,
+const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2dEntity> entity,
 														  shared_ptr<TextureBuffer> texture, unsigned int blurCount,
 														  float intensity, BlurDirection direction)
 {
@@ -56,7 +56,7 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<QuadE
 	return texture;
 }
 
-void BlurRenderer::_render(const shared_ptr<QuadEntity> entity, shared_ptr<TextureBuffer> texture)
+void BlurRenderer::_render(const shared_ptr<Quad2dEntity> entity, shared_ptr<TextureBuffer> texture)
 {
 	const auto buffer = entity->getMesh();
 

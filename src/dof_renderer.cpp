@@ -53,7 +53,7 @@ void DofRenderer::unbind()
 	_shader->unbind();
 }
 
-void DofRenderer::render(const shared_ptr<QuadEntity> entity)
+void DofRenderer::render(const shared_ptr<Quad2dEntity> entity)
 {
 	const auto buffer = entity->getMesh();
 

@@ -22,7 +22,7 @@ EngineCore::EngineCore()
 	_modelEntityManager = make_shared<ModelEntityManager>();
 	_billboardEntityManager = make_shared<BillboardEntityManager>();
 	_aabbEntityManager = make_shared<AabbEntityManager>();
-	_quadEntityManager = make_shared<QuadEntityManager>();
+	_quad2dEntityManager = make_shared<Quad2dEntityManager>();
 	_textEntityManager = make_shared<TextEntityManager>();
 	_pointlightEntityManager = make_shared<PointlightEntityManager>();
 	_spotlightEntityManager = make_shared<SpotlightEntityManager>();
@@ -55,7 +55,7 @@ EngineCore::EngineCore()
 	_billboardEntityManager->inject(_renderBus);
 	_aabbEntityManager->inject(_modelEntityManager);
 	_aabbEntityManager->inject(_billboardEntityManager);
-	_quadEntityManager->inject(_renderBus);
+	_quad2dEntityManager->inject(_renderBus);
 	_textEntityManager->inject(_renderBus);
 	_masterRenderer->inject(_renderBus);
 	_masterRenderer->inject(_camera);
@@ -67,7 +67,7 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_modelEntityManager);
 	_masterRenderer->inject(_billboardEntityManager);
 	_masterRenderer->inject(_aabbEntityManager);
-	_masterRenderer->inject(_quadEntityManager);
+	_masterRenderer->inject(_quad2dEntityManager);
 	_masterRenderer->inject(_textEntityManager);
 	_masterRenderer->inject(_pointlightEntityManager);
 	_masterRenderer->inject(_spotlightEntityManager);
@@ -148,7 +148,7 @@ void EngineCore::start()
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
 
-	shared_ptr<QuadEntity> logo = make_shared<QuadEntity>("logo");
+	shared_ptr<Quad2dEntity> logo = make_shared<Quad2dEntity>("logo");
 	logo->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader->loadImage("engine\\assets\\image\\diffuse_map\\logo.tga")));
 	logo->setCentered(true);
@@ -327,7 +327,7 @@ void EngineCore::update()
 		}
 
 		_timer->startDeltaPart("guiEntityUpdate");
-		_quadEntityManager->update();
+		_quad2dEntityManager->update();
 		_textEntityManager->update();
 		_timer->stopDeltaPart();
 	}
@@ -469,9 +469,9 @@ const shared_ptr<AabbEntityManager> EngineCore::getAabbEntityManager() const
 	return _aabbEntityManager;
 }
 
-const shared_ptr<QuadEntityManager> EngineCore::getQuadEntityManager() const
+const shared_ptr<Quad2dEntityManager> EngineCore::getQuad2dEntityManager() const
 {
-	return _quadEntityManager;
+	return _quad2dEntityManager;
 }
 
 const shared_ptr<TextEntityManager> EngineCore::getTextEntityManager() const

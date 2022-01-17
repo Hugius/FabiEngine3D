@@ -4,7 +4,7 @@
 
 using std::make_shared;
 
-QuadEntityManager::QuadEntityManager()
+Quad2dEntityManager::Quad2dEntityManager()
 	:
 	_centeredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
 	_corneredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
@@ -12,13 +12,13 @@ QuadEntityManager::QuadEntityManager()
 
 }
 
-shared_ptr<QuadEntity> QuadEntityManager::getEntity(const string& ID)
+shared_ptr<Quad2dEntity> Quad2dEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("QuadEntityManager::getEntity");
+		Logger::throwError("Quad2dEntityManager::getEntity");
 	}
 	else
 	{
@@ -26,14 +26,14 @@ shared_ptr<QuadEntity> QuadEntityManager::getEntity(const string& ID)
 	}
 }
 
-const unordered_map<string, shared_ptr<QuadEntity>>& QuadEntityManager::getEntities()
+const unordered_map<string, shared_ptr<Quad2dEntity>>& Quad2dEntityManager::getEntities()
 {
 	return _entities;
 }
 
-void QuadEntityManager::createEntity(const string& ID, bool isCentered)
+void Quad2dEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	auto entity = make_shared<QuadEntity>(ID);
+	auto entity = make_shared<Quad2dEntity>(ID);
 
 	_entities.insert(make_pair(ID, entity));
 
@@ -44,32 +44,32 @@ void QuadEntityManager::createEntity(const string& ID, bool isCentered)
 	_renderBus->setGuiDepth(_renderBus->getGuiDepth() + 1);
 }
 
-void QuadEntityManager::deleteEntity(const string& ID)
+void Quad2dEntityManager::deleteEntity(const string& ID)
 {
 	if(!isEntityExisting(ID))
 	{
-		Logger::throwError("QuadEntityManager::deleteEntity");
+		Logger::throwError("Quad2dEntityManager::deleteEntity");
 	}
 
 	_entities.erase(ID);
 }
 
-void QuadEntityManager::deleteEntities()
+void Quad2dEntityManager::deleteEntities()
 {
 	_entities.clear();
 }
 
-const bool QuadEntityManager::isEntityExisting(const string& ID) const
+const bool Quad2dEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }
 
-void QuadEntityManager::inject(shared_ptr<RenderBus> renderBus)
+void Quad2dEntityManager::inject(shared_ptr<RenderBus> renderBus)
 {
 	_renderBus = renderBus;
 }
 
-void QuadEntityManager::update()
+void Quad2dEntityManager::update()
 {
 	for(const auto& [key, entity] : _entities)
 	{

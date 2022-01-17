@@ -94,9 +94,9 @@ void MasterRenderer::inject(shared_ptr<AabbEntityManager> aabbEntityManager)
 	_aabbEntityManager = aabbEntityManager;
 }
 
-void MasterRenderer::inject(shared_ptr<QuadEntityManager> quadEntityManager)
+void MasterRenderer::inject(shared_ptr<Quad2dEntityManager> quad2dEntityManager)
 {
-	_quadEntityManager = quadEntityManager;
+	_quad2dEntityManager = quad2dEntityManager;
 }
 
 void MasterRenderer::inject(shared_ptr<TextEntityManager> textEntityManager)
@@ -132,7 +132,7 @@ void MasterRenderer::inject(shared_ptr<RenderBus> renderBus)
 	_billboardEntityDepthRenderer.inject(renderBus);
 	_billboardEntityShadowRenderer.inject(renderBus);
 	_aabbEntityColorRenderer.inject(renderBus);
-	_quadEntityColorRenderer.inject(renderBus);
+	_quad2dEntityColorRenderer.inject(renderBus);
 	_antiAliasingRenderer.inject(renderBus);
 	_bloomRenderer.inject(renderBus);
 	_dofRenderer.inject(renderBus);

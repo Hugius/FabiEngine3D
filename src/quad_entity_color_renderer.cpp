@@ -2,7 +2,7 @@
 #include "configuration.hpp"
 #include "text_entity.hpp"
 
-void QuadEntityColorRenderer::bind()
+void Quad2dEntityColorRenderer::bind()
 {
 	_shader->bind();
 
@@ -14,14 +14,14 @@ void QuadEntityColorRenderer::bind()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void QuadEntityColorRenderer::unbind()
+void Quad2dEntityColorRenderer::unbind()
 {
 	glDisable(GL_BLEND);
 
 	_shader->unbind();
 }
 
-void QuadEntityColorRenderer::render(const shared_ptr<QuadEntity> entity)
+void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 {
 	if(entity->isVisible() &&
 	   ((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&

@@ -3,29 +3,29 @@
 
 const bool EngineInterface::quad_isExisting(const string& ID) const
 {
-	return _core->getQuadEntityManager()->isEntityExisting(ID);
+	return _core->getQuad2dEntityManager()->isEntityExisting(ID);
 }
 
 const fvec2 EngineInterface::quad_getPosition(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getPosition();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getPosition();
 }
 
 const float EngineInterface::quad_getRotation(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getRotation();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getRotation();
 }
 
 const float EngineInterface::quad_getTransparency(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getTransparency();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getTransparency();
 }
 
 const vector<string> EngineInterface::quad_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [key, entity] : _core->getQuadEntityManager()->getEntities())
+	for(const auto& [key, entity] : _core->getQuad2dEntityManager()->getEntities())
 	{
 		result.push_back(entity->getID());
 	}
@@ -35,70 +35,70 @@ const vector<string> EngineInterface::quad_getIDs() const
 
 const string& EngineInterface::quad_getDiffuseMapPath(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getDiffuseMapPath();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getDiffuseMapPath();
 }
 
 const fvec3 EngineInterface::quad_getWireframeColor(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getWireframeColor();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getWireframeColor();
 }
 
 const fvec2 EngineInterface::quad_getSize(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getSize();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getSize();
 }
 
 const fvec2 EngineInterface::quad_getMinPosition(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getMinPosition();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getMinPosition();
 }
 
 const fvec2 EngineInterface::quad_getMaxPosition(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getMaxPosition();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getMaxPosition();
 }
 
 const fvec2 EngineInterface::quad_getUvMultiplier(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getUvMultiplier();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getUvMultiplier();
 }
 
 const fvec2 EngineInterface::quad_getUvOffset(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getUvOffset();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getUvOffset();
 }
 
 const fvec3 EngineInterface::quad_getColor(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->getColor();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getColor();
 }
 
 const bool EngineInterface::quad_isVisible(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->isVisible();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->isVisible();
 }
 
 const bool EngineInterface::quad_isCentered(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->isCentered();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->isCentered();
 }
 
 const bool EngineInterface::quad_hasDiffuseMap(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->hasDiffuseMap();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->hasDiffuseMap();
 }
 
 const bool EngineInterface::quad_isWireframed(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->isWireframed();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->isWireframed();
 }
 
 const bool EngineInterface::quad_isHorizontallyMirrored(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->isMirroredHorizonally();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->isMirroredHorizonally();
 }
 
 const bool EngineInterface::quad_isVerticallyMirrored(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->isVerticallyMirrored();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->isVerticallyMirrored();
 }

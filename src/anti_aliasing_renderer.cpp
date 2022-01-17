@@ -26,7 +26,7 @@ void AntiAliasingRenderer::unbind()
 	_shader->unbind();
 }
 
-void AntiAliasingRenderer::render(const shared_ptr<QuadEntity> entity)
+void AntiAliasingRenderer::render(const shared_ptr<Quad2dEntity> entity)
 {
 	const auto buffer = entity->getMesh();
 

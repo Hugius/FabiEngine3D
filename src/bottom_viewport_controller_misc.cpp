@@ -40,7 +40,7 @@ void BottomViewportController::initialize()
 	statisticsScreen->createTextField("aabbEntityCount", fvec2(-1.0f, -0.5f), fvec2(0.0f), "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("lightEntityCount", fvec2(-1.0f, -0.65f), fvec2(0.0f), "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("reflectionEntityCount", fvec2(-1.0f, -0.8f), fvec2(0.0f), "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("quadEntityCount", fvec2(-1.0f, -0.95f), fvec2(0.0f), "", fvec3(1.0f), false);
+	statisticsScreen->createTextField("quad2dEntityCount", fvec2(-1.0f, -0.95f), fvec2(0.0f), "", fvec3(1.0f), false);
 
 	auto updateStatistics = _fe3d->misc_getUpdateProfilingStatistics();
 	int uCounter = 1;

@@ -8,10 +8,10 @@
 
 using std::unordered_map;
 
-class QuadEntityManager final : public BaseEntityManager
+class Quad2dEntityManager final : public BaseEntityManager
 {
 public:
-	QuadEntityManager();
+	Quad2dEntityManager();
 
 	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
@@ -21,14 +21,14 @@ public:
 
 	const bool isEntityExisting(const string& ID) const;
 
-	const unordered_map<string, shared_ptr<QuadEntity>>& getEntities();
-	shared_ptr<QuadEntity> getEntity(const string& ID);
+	const unordered_map<string, shared_ptr<Quad2dEntity>>& getEntities();
+	shared_ptr<Quad2dEntity> getEntity(const string& ID);
 
 private:
 	const shared_ptr<VertexBuffer> _centeredMesh;
 	const shared_ptr<VertexBuffer> _corneredMesh;
 
-	unordered_map<string, shared_ptr<QuadEntity>> _entities;
+	unordered_map<string, shared_ptr<Quad2dEntity>> _entities;
 
 	shared_ptr<RenderBus> _renderBus = nullptr;
 };

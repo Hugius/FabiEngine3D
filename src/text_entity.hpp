@@ -61,7 +61,7 @@ public:
 	const bool isMirroredHorizonally() const;
 	const bool isVerticallyMirrored() const;
 
-	const vector<shared_ptr<QuadEntity>>& getCharacterEntities() const;
+	const vector<shared_ptr<Quad2dEntity>>& getCharacterEntities() const;
 	const shared_ptr<VertexBuffer> getMesh() const;
 	const shared_ptr<TextureBuffer> getFontMap() const;
 
@@ -191,7 +191,7 @@ private:
 	bool _isVerticallyMirrored = false;
 	bool _isWireframed = false;
 
-	vector<shared_ptr<QuadEntity>> _characterEntities;
+	vector<shared_ptr<Quad2dEntity>> _characterEntities;
 	shared_ptr<VertexBuffer> _mesh = nullptr;
 	shared_ptr<TextureBuffer> _fontMap = nullptr;
 };

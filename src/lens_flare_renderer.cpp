@@ -46,7 +46,7 @@ void LensFlareRenderer::unbind()
 	_shader->unbind();
 }
 
-void LensFlareRenderer::render(const shared_ptr<QuadEntity> entity)
+void LensFlareRenderer::render(const shared_ptr<Quad2dEntity> entity)
 {
 	const auto buffer = entity->getMesh();
 

@@ -8,7 +8,7 @@
 
 using std::shared_ptr;
 
-class QuadEntity : public BaseEntity
+class Quad2dEntity : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

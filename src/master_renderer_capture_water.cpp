@@ -100,7 +100,7 @@ void MasterRenderer::_captureWaterReflections()
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
-			_renderBillboardEntities();
+			_renderQuad3dEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
@@ -214,7 +214,7 @@ void MasterRenderer::_captureWaterRefractions()
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
-			_renderBillboardEntities();
+			_renderQuad3dEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 

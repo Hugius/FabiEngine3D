@@ -307,11 +307,11 @@ const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string
 
 	if(isFromOutside)
 	{
-		_outsideLoadedBillboardIDs[newID] = templateID;
+		_outsideLoadedQuad3dIDs[newID] = templateID;
 	}
 	else
 	{
-		_loadedBillboardIDs[newID] = templateID;
+		_loadedQuad3dIDs[newID] = templateID;
 	}
 
 	return true;

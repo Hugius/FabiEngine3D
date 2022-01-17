@@ -25,16 +25,16 @@ void WorldEditor::_updateBillboardMenu()
 
 			auto IDs = _fe3d->quad3d_getIDs();
 			sort(IDs.begin(), IDs.end());
-			for(auto& billboardID : IDs)
+			for(auto& quad3dID : IDs)
 			{
-				if(billboardID[0] != '@')
+				if(quad3dID[0] != '@')
 				{
-					reverse(billboardID.begin(), billboardID.end());
-					string rawID = billboardID.substr(billboardID.find('_') + 1);
+					reverse(quad3dID.begin(), quad3dID.end());
+					string rawID = quad3dID.substr(quad3dID.find('_') + 1);
 					reverse(rawID.begin(), rawID.end());
-					reverse(billboardID.begin(), billboardID.end());
+					reverse(quad3dID.begin(), quad3dID.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->createButton(billboardID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->createButton(quad3dID, rawID);
 				}
 			}
 		}
@@ -49,11 +49,11 @@ void WorldEditor::_updateBillboardPlacingMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateBillboardID.empty())
+			if(!_currentTemplateQuad3dID.empty())
 			{
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
-				_fe3d->quad3d_setVisible(_currentTemplateBillboardID, false);
-				_currentTemplateBillboardID = "";
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), false);
+				_fe3d->quad3d_setVisible(_currentTemplateQuad3dID, false);
+				_currentTemplateQuad3dID = "";
 			}
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuBillboard");
@@ -61,11 +61,11 @@ void WorldEditor::_updateBillboardPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& billboardID : _quad3dEditor->getLoadedIDs())
+			for(const auto& quad3dID : _quad3dEditor->getLoadedIDs())
 			{
-				if(_fe3d->quad3d_isExisting(billboardID))
+				if(_fe3d->quad3d_isExisting(quad3dID))
 				{
-					if(screen->getScrollingList("billboardList")->getButton(billboardID)->isHovered())
+					if(screen->getScrollingList("billboardList")->getButton(quad3dID)->isHovered())
 					{
 						_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
@@ -75,11 +75,11 @@ void WorldEditor::_updateBillboardPlacingMenu()
 						_deactivatePointlight();
 						_deactivateReflection();
 
-						_currentTemplateBillboardID = billboardID;
-						_fe3d->quad3d_setPosition(_currentTemplateBillboardID, fvec3(0.0f));
-						_fe3d->quad3d_setVisible(_currentTemplateBillboardID, true);
-						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
-						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentTemplateBillboardID.substr(1), 0.025f);
+						_currentTemplateQuad3dID = quad3dID;
+						_fe3d->quad3d_setPosition(_currentTemplateQuad3dID, fvec3(0.0f));
+						_fe3d->quad3d_setVisible(_currentTemplateQuad3dID, true);
+						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), true);
+						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), "Billboard: " + _currentTemplateQuad3dID.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedID().empty())
@@ -112,20 +112,20 @@ void WorldEditor::_updateBillboardChoosingMenu()
 			}
 		}
 
-		for(const auto& billboardID : _fe3d->quad3d_getIDs())
+		for(const auto& quad3dID : _fe3d->quad3d_getIDs())
 		{
-			if(billboardID[0] != '@')
+			if(quad3dID[0] != '@')
 			{
-				if(screen->getScrollingList("billboardList")->getButton(billboardID)->isHovered())
+				if(screen->getScrollingList("billboardList")->getButton(quad3dID)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activateBillboard(billboardID);
+						_activateBillboard(quad3dID);
 					}
 					else
 					{
 						_dontResetSelectedBillboard = true;
-						_selectBillboard(billboardID);
+						_selectBillboard(quad3dID);
 					}
 
 					break;

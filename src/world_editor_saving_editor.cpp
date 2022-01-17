@@ -138,26 +138,26 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& billboardID : _fe3d->quad3d_getIDs())
+	for(const auto& quad3dID : _fe3d->quad3d_getIDs())
 	{
-		if(billboardID[0] != '@')
+		if(quad3dID[0] != '@')
 		{
-			auto startedAnimations = _animation2dEditor->getStartedBillboardAnimationIDs(billboardID);
+			auto startedAnimations = _animation2dEditor->getStartedQuad3dAnimationIDs(quad3dID);
 
-			auto position = _fe3d->quad3d_getPosition(billboardID);
-			auto rotation = _fe3d->quad3d_getRotation(billboardID);
-			auto size = _fe3d->quad3d_getSize(billboardID);
+			auto position = _fe3d->quad3d_getPosition(quad3dID);
+			auto rotation = _fe3d->quad3d_getRotation(quad3dID);
+			auto size = _fe3d->quad3d_getSize(quad3dID);
 			auto animationID = (startedAnimations.empty() ? "" : startedAnimations[0]);
 
 			animationID = (animationID.empty()) ? "?" : animationID;
 
 			replace(animationID.begin(), animationID.end(), ' ', '?');
 
-			string templateID = _loadedBillboardIDs.at(billboardID);
+			string templateID = _loadedQuad3dIDs.at(quad3dID);
 
 			file <<
 				"BILLBOARD " <<
-				billboardID << " " <<
+				quad3dID << " " <<
 				templateID << " " <<
 				position.x << " " <<
 				position.y << " " <<

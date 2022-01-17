@@ -4,7 +4,7 @@ void WorldEditor::_updateModelEditing()
 {
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelID.empty() && _currentTemplateQuad3dID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		if(!_dontResetSelectedModel)
 		{

@@ -179,12 +179,12 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "BILLBOARD")
 		{
-			string billboardID, templateID, animationID;
+			string quad3dID, templateID, animationID;
 			fvec3 position, rotation;
 			fvec2 size;
 
 			iss >>
-				billboardID >>
+				quad3dID >>
 				templateID >>
 				position.x >>
 				position.y >>
@@ -200,14 +200,14 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			replace(animationID.begin(), animationID.end(), '?', ' ');
 
-			if(_copyTemplateBillboard(billboardID, templateID, position, false))
+			if(_copyTemplateBillboard(quad3dID, templateID, position, false))
 			{
-				_fe3d->quad3d_setRotation(billboardID, rotation);
-				_fe3d->quad3d_setSize(billboardID, size);
+				_fe3d->quad3d_setRotation(quad3dID, rotation);
+				_fe3d->quad3d_setSize(quad3dID, size);
 
 				if(!animationID.empty())
 				{
-					_animation2dEditor->startBillboardAnimation(animationID, billboardID, -1);
+					_animation2dEditor->startQuad3dAnimation(animationID, quad3dID, -1);
 				}
 			}
 		}

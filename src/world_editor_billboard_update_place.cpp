@@ -3,37 +3,37 @@
 
 void WorldEditor::_updateBillboardPlacing()
 {
-	if(!_currentTemplateBillboardID.empty())
+	if(!_currentTemplateQuad3dID.empty())
 	{
 		if(_fe3d->terrain_getSelectedID().empty())
 		{
-			auto newPosition = _fe3d->quad3d_getPosition(_currentTemplateBillboardID);
+			auto newPosition = _fe3d->quad3d_getPosition(_currentTemplateQuad3dID);
 
 			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
 			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
 			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 
-			_fe3d->quad3d_setPosition(_currentTemplateBillboardID, newPosition);
+			_fe3d->quad3d_setPosition(_currentTemplateQuad3dID, newPosition);
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				BEGIN1:;
 				int randomSerial = Math::getRandomNumber(0, INT_MAX);
-				const auto newID = (_currentTemplateBillboardID.substr(1) + "_" + to_string(randomSerial));
+				const auto newID = (_currentTemplateQuad3dID.substr(1) + "_" + to_string(randomSerial));
 
 				if(_fe3d->quad3d_isExisting(newID))
 				{
 					goto BEGIN1;
 				}
 
-				_copyTemplateBillboard(newID, _currentTemplateBillboardID, newPosition, false);
+				_copyTemplateBillboard(newID, _currentTemplateQuad3dID, newPosition, false);
 			}
 
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
-				_fe3d->quad3d_setVisible(_currentTemplateBillboardID, false);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
-				_currentTemplateBillboardID = "";
+				_fe3d->quad3d_setVisible(_currentTemplateQuad3dID, false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), false);
+				_currentTemplateQuad3dID = "";
 			}
 		}
 		else
@@ -44,44 +44,44 @@ void WorldEditor::_updateBillboardPlacing()
 				{
 					if(_fe3d->raycast_isPointOnTerrainValid())
 					{
-						_fe3d->quad3d_setVisible(_currentTemplateBillboardID, true);
+						_fe3d->quad3d_setVisible(_currentTemplateQuad3dID, true);
 
-						_fe3d->quad3d_setPosition(_currentTemplateBillboardID, (_fe3d->raycast_getPointOnTerrain() + BILLBOARD_TERRAIN_OFFSET));
+						_fe3d->quad3d_setPosition(_currentTemplateQuad3dID, (_fe3d->raycast_getPointOnTerrain() + BILLBOARD_TERRAIN_OFFSET));
 					}
 					else
 					{
-						_fe3d->quad3d_setVisible(_currentTemplateBillboardID, false);
+						_fe3d->quad3d_setVisible(_currentTemplateQuad3dID, false);
 					}
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d->raycast_isPointOnTerrainValid())
 					{
-						const auto newPosition = _fe3d->quad3d_getPosition(_currentTemplateBillboardID);
+						const auto newPosition = _fe3d->quad3d_getPosition(_currentTemplateQuad3dID);
 
 						BEGIN2:;
-						const auto newID = (_currentTemplateBillboardID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+						const auto newID = (_currentTemplateQuad3dID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						if(_fe3d->quad3d_isExisting(newID))
 						{
 							goto BEGIN2;
 						}
 
-						_copyTemplateBillboard(newID, _currentTemplateBillboardID, newPosition, false);
+						_copyTemplateBillboard(newID, _currentTemplateQuad3dID, newPosition, false);
 					}
 					else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 					{
-						_fe3d->quad3d_setVisible(_currentTemplateBillboardID, false);
-						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
-						_currentTemplateBillboardID = "";
+						_fe3d->quad3d_setVisible(_currentTemplateQuad3dID, false);
+						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), false);
+						_currentTemplateQuad3dID = "";
 					}
 				}
 				else
 				{
-					_fe3d->quad3d_setVisible(_currentTemplateBillboardID, false);
+					_fe3d->quad3d_setVisible(_currentTemplateQuad3dID, false);
 				}
 			}
 			else
 			{
-				_fe3d->quad3d_setVisible(_currentTemplateBillboardID, false);
+				_fe3d->quad3d_setVisible(_currentTemplateQuad3dID, false);
 			}
 		}
 	}

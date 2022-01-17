@@ -1,8 +1,8 @@
 #include "animation2d_editor.hpp"
 
-void Animation2dEditor::_updateBillboardAnimationExecution()
+void Animation2dEditor::_updateQuad3dAnimationExecution()
 {
-	for(auto& [key, animation] : _startedBillboardAnimations)
+	for(auto& [key, animation] : _startedQuad3dAnimations)
 	{
 		if(!animation.isPaused())
 		{
@@ -18,8 +18,8 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 					{
 						if(animation.getPlayCount() == -1)
 						{
-							_billboardAnimationsToStop.insert(key);
-							_billboardAnimationsToStart.insert(key);
+							_quad3dAnimationsToStop.insert(key);
+							_quad3dAnimationsToStart.insert(key);
 						}
 						else
 						{
@@ -27,7 +27,7 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 
 							if(animation.getPlayCount() == 0)
 							{
-								_billboardAnimationsToStop.insert(key);
+								_quad3dAnimationsToStop.insert(key);
 							}
 							else
 							{
@@ -63,23 +63,23 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 		_fe3d->quad3d_setUvOffset(key.second, uvOffset);
 	}
 
-	for(const auto& key : _billboardAnimationsToStop)
+	for(const auto& key : _quad3dAnimationsToStop)
 	{
-		if(isBillboardAnimationStarted(key.first, key.second))
+		if(isQuad3dAnimationStarted(key.first, key.second))
 		{
-			stopBillboardAnimation(key.first, key.second);
+			stopQuad3dAnimation(key.first, key.second);
 		}
 	}
-	_billboardAnimationsToStop.clear();
+	_quad3dAnimationsToStop.clear();
 
-	for(const auto& key : _billboardAnimationsToStart)
+	for(const auto& key : _quad3dAnimationsToStart)
 	{
-		if(!isBillboardAnimationStarted(key.first, key.second))
+		if(!isQuad3dAnimationStarted(key.first, key.second))
 		{
-			startBillboardAnimation(key.first, key.second, -1);
+			startQuad3dAnimation(key.first, key.second, -1);
 		}
 	}
-	_billboardAnimationsToStart.clear();
+	_quad3dAnimationsToStart.clear();
 }
 
 void Animation2dEditor::_updateQuad2dAnimationExecution()

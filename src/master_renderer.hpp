@@ -88,7 +88,7 @@ private:
 	void _renderTerrainEntity();
 	void _renderWaterEntity();
 	void _renderModelEntities();
-	void _renderBillboardEntities();
+	void _renderQuad3dEntities();
 	void _renderAabbEntities();
 	void _renderFinalSceneMap();
 	void _renderGUI();

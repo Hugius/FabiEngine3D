@@ -73,14 +73,14 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
-	for(const auto& [key, templateID] : _loadedBillboardIDs)
+	for(const auto& [key, templateID] : _loadedQuad3dIDs)
 	{
 		_fe3d->quad3d_delete(key);
 
-		auto animationID = _animation2dEditor->getStartedBillboardAnimationIDs(key);
+		auto animationID = _animation2dEditor->getStartedQuad3dAnimationIDs(key);
 		if(!animationID.empty())
 		{
-			_animation2dEditor->stopBillboardAnimation(animationID.back(), key);
+			_animation2dEditor->stopQuad3dAnimation(animationID.back(), key);
 		}
 	}
 
@@ -129,7 +129,7 @@ void WorldEditor::unloadEditorWorld()
 	_loadedTerrainID = "";
 	_loadedWaterID = "";
 	_loadedModelIDs.clear();
-	_loadedBillboardIDs.clear();
+	_loadedQuad3dIDs.clear();
 	_loadedSoundIDs.clear();
 	_loadedPointlightIDs.clear();
 	_loadedSpotlightIDs.clear();

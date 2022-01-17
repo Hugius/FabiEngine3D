@@ -47,14 +47,14 @@ void Quad3dEditor::load()
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d->model_setShadowed("@@grid", false);
 
-	_gui->getOverlay()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("quad3dID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }
 
 void Quad3dEditor::unload()
 {
-	for(const auto& ID : _loadedBillboardIDs)
+	for(const auto& ID : _loadedQuad3dIDs)
 	{
 		_fe3d->quad3d_delete(ID);
 	}
@@ -76,11 +76,11 @@ void Quad3dEditor::unload()
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
 
-	_gui->getOverlay()->deleteTextField("billboardID");
+	_gui->getOverlay()->deleteTextField("quad3dID");
 
-	_loadedBillboardIDs.clear();
-	_hoveredBillboardID = "";
-	_currentBillboardID = "";
+	_loadedQuad3dIDs.clear();
+	_hoveredQuad3dID = "";
+	_currentQuad3dID = "";
 	_isCreatingBillboard = false;
 	_isChoosingBillboard = false;
 	_isDeletingBillboard = false;

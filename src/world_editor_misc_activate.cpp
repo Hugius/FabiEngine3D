@@ -25,10 +25,10 @@ void WorldEditor::_activateModel(const string& ID)
 
 void WorldEditor::_activateBillboard(const string& ID)
 {
-	_activeBillboardID = ID;
+	_activeQuad3dID = ID;
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->quad3d_getPosition(_activeBillboardID);
+	auto position = _fe3d->quad3d_getPosition(_activeQuad3dID);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
@@ -42,8 +42,8 @@ void WorldEditor::_activateBillboard(const string& ID)
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), "Active billboard: " + rawID, 0.025f);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), true);
+	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), "Active billboard: " + rawID, 0.025f);
 }
 
 void WorldEditor::_activateSound(const string& ID)
@@ -125,13 +125,13 @@ void WorldEditor::_deactivateModel()
 
 void WorldEditor::_deactivateBillboard()
 {
-	if(!_activeBillboardID.empty())
+	if(!_activeQuad3dID.empty())
 	{
-		_unselectBillboard(_activeBillboardID);
+		_unselectBillboard(_activeQuad3dID);
 	}
 
-	_activeBillboardID = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
+	_activeQuad3dID = "";
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), false);
 }
 
 void WorldEditor::_deactivateSound()

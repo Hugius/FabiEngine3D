@@ -33,9 +33,9 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedBillboardIDs;
-	string _hoveredBillboardID = "";
-	string _currentBillboardID = "";
+	vector<string> _loadedQuad3dIDs;
+	string _hoveredQuad3dID = "";
+	string _currentQuad3dID = "";
 	string _currentProjectID = "";
 
 	static inline const float CW = 0.115f;

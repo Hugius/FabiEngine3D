@@ -255,50 +255,50 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	//for(const auto& billboardID : _fe3d->quad3d_getIDs())
+	//for(const auto& quad3dID : _fe3d->quad3d_getIDs())
 	//{
 	//	bool isCustomWorldBillboard =
-	//		find(_customWorldBillboardIDs.begin(), _customWorldBillboardIDs.end(), billboardID) != _customWorldBillboardIDs.end();
-	//	if((billboardID[0] != '@') && isCustomWorldBillboard)
+	//		find(_customWorldQuad3dIDs.begin(), _customWorldQuad3dIDs.end(), quad3dID) != _customWorldQuad3dIDs.end();
+	//	if((quad3dID[0] != '@') && isCustomWorldBillboard)
 	//	{
-	//		auto aabbIDs = _fe3d->aabb_getChildIDs(billboardID, AabbParentEntityType::QUAD3D);
+	//		auto aabbIDs = _fe3d->aabb_getChildIDs(quad3dID, AabbParentEntityType::QUAD3D);
 
-	//		auto isVisible = _fe3d->quad3d_isVisible(billboardID);
+	//		auto isVisible = _fe3d->quad3d_isVisible(quad3dID);
 	//		auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d->aabb_isRaycastResponsive(aabbIDs[0]);
 	//		auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d->aabb_isCollisionResponsive(aabbIDs[0]);
-	//		auto isFacingX = _fe3d->quad3d_isFacingCameraX(billboardID);
-	//		auto isFacingY = _fe3d->quad3d_isFacingCameraY(billboardID);
-	//		//auto isAnimationPlaying = _fe3d->quad3d_isSpriteAnimationStarted(billboardID);
-	//		//auto isAnimationPaused = _fe3d->quad3d_isSpriteAnimationPaused(billboardID);
-	//		auto position = _fe3d->quad3d_getPosition(billboardID);
-	//		auto rotation = _fe3d->quad3d_getRotation(billboardID);
-	//		auto size = _fe3d->quad3d_getSize(billboardID);
-	//		auto color = _fe3d->quad3d_getColor(billboardID);
-	//		//auto textContent = _fe3d->quad3d_getTextContent(billboardID);
-	//		auto lightness = _fe3d->quad3d_getLightness(billboardID);
-	//		auto minHeight = _fe3d->quad3d_getMinHeight(billboardID);
-	//		auto maxHeight = _fe3d->quad3d_getMaxHeight(billboardID);
-	//		//auto remainingAnimationLoops = _fe3d->quad3d_getRemainingSpriteAnimationLoops(billboardID);
-	//		//auto animationRowIndex = _fe3d->quad3d_getSpriteAnimationRowIndex(billboardID);
-	//		//auto animationColumnIndex = _fe3d->quad3d_getSpriteAnimationColumnIndex(billboardID);
+	//		auto isFacingX = _fe3d->quad3d_isFacingCameraX(quad3dID);
+	//		auto isFacingY = _fe3d->quad3d_isFacingCameraY(quad3dID);
+	//		//auto isAnimationPlaying = _fe3d->quad3d_isSpriteAnimationStarted(quad3dID);
+	//		//auto isAnimationPaused = _fe3d->quad3d_isSpriteAnimationPaused(quad3dID);
+	//		auto position = _fe3d->quad3d_getPosition(quad3dID);
+	//		auto rotation = _fe3d->quad3d_getRotation(quad3dID);
+	//		auto size = _fe3d->quad3d_getSize(quad3dID);
+	//		auto color = _fe3d->quad3d_getColor(quad3dID);
+	//		//auto textContent = _fe3d->quad3d_getTextContent(quad3dID);
+	//		auto lightness = _fe3d->quad3d_getLightness(quad3dID);
+	//		auto minHeight = _fe3d->quad3d_getMinHeight(quad3dID);
+	//		auto maxHeight = _fe3d->quad3d_getMaxHeight(quad3dID);
+	//		//auto remainingAnimationLoops = _fe3d->quad3d_getRemainingSpriteAnimationLoops(quad3dID);
+	//		//auto animationRowIndex = _fe3d->quad3d_getSpriteAnimationRowIndex(quad3dID);
+	//		//auto animationColumnIndex = _fe3d->quad3d_getSpriteAnimationColumnIndex(quad3dID);
 
 	//		//textContent = (textContent.empty()) ? "?" : textContent;
 
 	//		//replace(textContent.begin(), textContent.end(), ' ', '?');
 
 	//		string templateID;
-	//		if(_loadedBillboardIDs.find(billboardID) == _loadedBillboardIDs.end())
+	//		if(_loadedQuad3dIDs.find(quad3dID) == _loadedQuad3dIDs.end())
 	//		{
-	//			templateID = _outsideLoadedBillboardIDs.at(billboardID);
+	//			templateID = _outsideLoadedQuad3dIDs.at(quad3dID);
 	//		}
 	//		else
 	//		{
-	//			templateID = _loadedBillboardIDs.at(billboardID);
+	//			templateID = _loadedQuad3dIDs.at(quad3dID);
 	//		}
 
 	//		file <<
 	//			"BILLBOARD " <<
-	//			billboardID << " " <<
+	//			quad3dID << " " <<
 	//			templateID << " " <<
 	//			isVisible << " " <<
 	//			isAabbRaycastResponsive << " " <<
@@ -593,7 +593,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//_hasCustomWorldTerrain = false;
 	//_hasCustomWorldWater = false;
 	//_customWorldModelIDs.clear();
-	//_customWorldBillboardIDs.clear();
+	//_customWorldQuad3dIDs.clear();
 	//_customWorldAabbIDs.clear();
 	//_customWorldSoundIDs.clear();
 	//_customWorldPointlightIDs.clear();

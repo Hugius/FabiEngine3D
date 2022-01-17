@@ -100,7 +100,7 @@ void AabbEntityManager::createEntity(const string& ID, bool isCentered)
 void AabbEntityManager::update()
 {
 	const auto& modelEntities = _modelEntityManager->getEntities();
-	const auto& billboardEntities = _quad3dEntityManager->getEntities();
+	const auto& quad3dEntities = _quad3dEntityManager->getEntities();
 
 	for(const auto& [key, entity] : _entities)
 	{
@@ -228,8 +228,8 @@ void AabbEntityManager::update()
 		}
 		else
 		{
-			auto foundPair = billboardEntities.find(entity->getParentEntityID());
-			if(foundPair == billboardEntities.end())
+			auto foundPair = quad3dEntities.find(entity->getParentEntityID());
+			if(foundPair == quad3dEntities.end())
 			{
 				Logger::throwError("AabbEntityManager::update::2");
 			}

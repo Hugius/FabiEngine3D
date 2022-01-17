@@ -280,7 +280,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//	}
 	//	else if(lineType == "BILLBOARD")
 	//	{
-	//		string billboardID, templateID, textContent;
+	//		string quad3dID, templateID, textContent;
 	//		fvec3 position, rotation, color;
 	//		fvec2 size;
 	//		float lightness, minHeight, maxHeight;
@@ -289,7 +289,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		bool isVisible, isAabbRaycastResponsive, isAabbCollisionResponsive, isFacingX, isFacingY, isAnimationPlaying, isAnimationPaused;
 
 	//		iss >>
-	//			billboardID >>
+	//			quad3dID >>
 	//			templateID >>
 	//			isVisible >>
 	//			isAabbRaycastResponsive >>
@@ -321,19 +321,19 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		replace(textContent.begin(), textContent.end(), '?', ' ');
 
-	//		if(_copyTemplateBillboard(billboardID, templateID, position, false))
+	//		if(_copyTemplateBillboard(quad3dID, templateID, position, false))
 	//		{
-	//			_fe3d->quad3d_setRotation(billboardID, rotation);
-	//			_fe3d->quad3d_setSize(billboardID, size);
-	//			_fe3d->quad3d_setFacingCameraX(billboardID, isFacingX);
-	//			_fe3d->quad3d_setFacingCameraY(billboardID, isFacingY);
-	//			_fe3d->quad3d_setColor(billboardID, color);
-	//			//_fe3d->quad3d_setTextContent(billboardID, textContent);
-	//			_fe3d->quad3d_setLightness(billboardID, lightness);
-	//			_fe3d->quad3d_setMinHeight(billboardID, minHeight);
-	//			_fe3d->quad3d_setMaxHeight(billboardID, maxHeight);
-	//			_fe3d->quad3d_setVisible(billboardID, isVisible);
-	//			for(const auto& ID : _fe3d->aabb_getChildIDs(billboardID, AabbParentEntityType::QUAD3D))
+	//			_fe3d->quad3d_setRotation(quad3dID, rotation);
+	//			_fe3d->quad3d_setSize(quad3dID, size);
+	//			_fe3d->quad3d_setFacingCameraX(quad3dID, isFacingX);
+	//			_fe3d->quad3d_setFacingCameraY(quad3dID, isFacingY);
+	//			_fe3d->quad3d_setColor(quad3dID, color);
+	//			//_fe3d->quad3d_setTextContent(quad3dID, textContent);
+	//			_fe3d->quad3d_setLightness(quad3dID, lightness);
+	//			_fe3d->quad3d_setMinHeight(quad3dID, minHeight);
+	//			_fe3d->quad3d_setMaxHeight(quad3dID, maxHeight);
+	//			_fe3d->quad3d_setVisible(quad3dID, isVisible);
+	//			for(const auto& ID : _fe3d->aabb_getChildIDs(quad3dID, AabbParentEntityType::QUAD3D))
 	//			{
 	//				_fe3d->aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
 	//				_fe3d->aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);

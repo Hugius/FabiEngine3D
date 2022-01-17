@@ -11,7 +11,7 @@ void WorldEditor::createCustomWorld(const string& ID)
 	_hasCustomWorldWater = false;
 	_hasCustomWorldGraphics = false;
 	_customWorldModelIDs.clear();
-	_customWorldBillboardIDs.clear();
+	_customWorldQuad3dIDs.clear();
 	_customWorldAabbIDs.clear();
 	_customWorldSoundIDs.clear();
 	_customWorldPointlightIDs.clear();
@@ -94,7 +94,7 @@ void WorldEditor::addBillboardToCustomWorld(const string& ID)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldBillboardIDs.push_back(ID);
+		_customWorldQuad3dIDs.push_back(ID);
 	}
 	else
 	{

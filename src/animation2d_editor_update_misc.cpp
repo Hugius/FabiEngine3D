@@ -5,7 +5,7 @@ void Animation2dEditor::_updateMiscellaneous()
 {
 	if(!_currentAnimationID.empty())
 	{
-		if(!isBillboardAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID))
+		if(!isQuad3dAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID))
 		{
 			if(_isEditorLoaded)
 			{

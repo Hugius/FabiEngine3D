@@ -22,21 +22,21 @@ const bool Quad3dEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\billboard.fe3d");
 
-	for(const auto& billboardID : _loadedBillboardIDs)
+	for(const auto& quad3dID : _loadedQuad3dIDs)
 	{
-		auto size = _fe3d->quad3d_getSize(billboardID);
-		auto color = _fe3d->quad3d_getColor(billboardID);
-		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(billboardID);
-		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(billboardID);
-		auto isFacingX = _fe3d->quad3d_isFacingCameraX(billboardID);
-		auto isFacingY = _fe3d->quad3d_isFacingCameraY(billboardID);
-		auto isReflected = _fe3d->quad3d_isReflected(billboardID);
-		auto isShadowed = _fe3d->quad3d_isShadowed(billboardID);
-		auto lightness = _fe3d->quad3d_getLightness(billboardID);
-		auto textureRepeat = _fe3d->quad3d_getTextureRepeat(billboardID);
-		auto isBright = _fe3d->quad3d_isBright(billboardID);
-		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(billboardID);
-		auto transparency = _fe3d->quad3d_getTransparency(billboardID);
+		auto size = _fe3d->quad3d_getSize(quad3dID);
+		auto color = _fe3d->quad3d_getColor(quad3dID);
+		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quad3dID);
+		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quad3dID);
+		auto isFacingX = _fe3d->quad3d_isFacingCameraX(quad3dID);
+		auto isFacingY = _fe3d->quad3d_isFacingCameraY(quad3dID);
+		auto isReflected = _fe3d->quad3d_isReflected(quad3dID);
+		auto isShadowed = _fe3d->quad3d_isShadowed(quad3dID);
+		auto lightness = _fe3d->quad3d_getLightness(quad3dID);
+		auto textureRepeat = _fe3d->quad3d_getTextureRepeat(quad3dID);
+		auto isBright = _fe3d->quad3d_isBright(quad3dID);
+		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(quad3dID);
+		auto transparency = _fe3d->quad3d_getTransparency(quad3dID);
 
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
@@ -48,7 +48,7 @@ const bool Quad3dEditor::saveToFile() const
 		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 
 		file <<
-			billboardID << " " <<
+			quad3dID << " " <<
 			size.x << " " <<
 			size.y << " " <<
 			color.r << " " <<

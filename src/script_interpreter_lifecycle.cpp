@@ -167,7 +167,7 @@ void ScriptInterpreter::load()
 
 void ScriptInterpreter::unload()
 {
-	_animation2dEditor->stopBillboardAnimations();
+	_animation2dEditor->stopQuad3dAnimations();
 	_animation2dEditor->stopQuad2dAnimations();
 	_animation3dEditor->stopModelAnimations();
 

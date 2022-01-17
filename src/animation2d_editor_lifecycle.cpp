@@ -37,10 +37,10 @@ void Animation2dEditor::unload()
 	_gui->getOverlay()->deleteTextField("animationID");
 
 	_animations.clear();
-	_startedBillboardAnimations.clear();
+	_startedQuad3dAnimations.clear();
 	_startedQuad2dAnimations.clear();
-	_billboardAnimationsToStop.clear();
-	_billboardAnimationsToStart.clear();
+	_quad3dAnimationsToStop.clear();
+	_quad3dAnimationsToStart.clear();
 	_quad2dAnimationsToStop.clear();
 	_quad2dAnimationsToStart.clear();
 	_hoveredAnimationID = "";
@@ -81,7 +81,7 @@ void Animation2dEditor::_unloadGUI()
 
 void Animation2dEditor::update()
 {
-	_updateBillboardAnimationExecution();
+	_updateQuad3dAnimationExecution();
 	_updateQuad2dAnimationExecution();
 
 	if(_isEditorLoaded)

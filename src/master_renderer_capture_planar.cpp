@@ -94,7 +94,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	glEnable(GL_CLIP_DISTANCE2);
 	_renderModelEntities();
-	_renderBillboardEntities();
+	_renderQuad3dEntities();
 	glDisable(GL_CLIP_DISTANCE2);
 
 	_planarReflectionCaptor->unbind();

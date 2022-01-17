@@ -6,7 +6,7 @@ void WorldEditor::_selectModel(const string& ID)
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
-	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelID.empty() && _activeQuad3dID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = _selectedModelID;
 		reverse(tempID.begin(), tempID.end());
@@ -19,18 +19,18 @@ void WorldEditor::_selectModel(const string& ID)
 
 void WorldEditor::_selectBillboard(const string& ID)
 {
-	_selectedBillboardID = ID;
+	_selectedQuad3dID = ID;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
-	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelID.empty() && _activeQuad3dID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = ID;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
-		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
-		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), "Selected billboard: " + rawID, 0.025f);
+		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), true);
+		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), "Selected billboard: " + rawID, 0.025f);
 	}
 }
 
@@ -40,7 +40,7 @@ void WorldEditor::_selectSound(const string& ID)
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
-	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelID.empty() && _activeQuad3dID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = ID;
 		reverse(tempID.begin(), tempID.end());

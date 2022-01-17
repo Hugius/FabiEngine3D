@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->startBillboardAnimation(args[0].getString(), args[1].getString(), args[2].getInteger());
+				_animation2dEditor->startQuad3dAnimation(args[0].getString(), args[1].getString(), args[2].getInteger());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->pauseBillboardAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->pauseQuad3dAnimation(args[0].getString(), args[1].getString());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->pauseBillboardAnimations();
+				_animation2dEditor->pauseQuad3dAnimations();
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->autopauseBillboardAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->autopauseQuad3dAnimation(args[0].getString(), args[1].getString());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->autopauseBillboardAnimations();
+				_animation2dEditor->autopauseQuad3dAnimations();
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->resumeBillboardAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->resumeQuad3dAnimation(args[0].getString(), args[1].getString());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->resumeBillboardAnimations();
+				_animation2dEditor->resumeQuad3dAnimations();
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->stopBillboardAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->stopQuad3dAnimation(args[0].getString(), args[1].getString());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->stopBillboardAnimations();
+				_animation2dEditor->stopQuad3dAnimations();
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -130,7 +130,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->setBillboardAnimationFramestep(args[0].getString(), args[1].getString(), args[1].getInteger());
+				_animation2dEditor->setQuad3dAnimationFramestep(args[0].getString(), args[1].getString(), args[1].getInteger());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

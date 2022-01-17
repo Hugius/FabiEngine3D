@@ -51,7 +51,7 @@ void EngineInterface::text2d_setContent(const string& ID, const string& value, f
 	auto fontMapPath = entity->getFontMapPath();
 	if(fontMapPath.empty())
 	{
-		Logger::throwWarning("Tried to set text content of text with ID \"" + ID + "\": no font loaded!");
+		Logger::throwWarning("Tried to set text content of Text2D with ID \"" + ID + "\": no font loaded!");
 		return;
 	}
 

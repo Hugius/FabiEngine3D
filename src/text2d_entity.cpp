@@ -1,4 +1,4 @@
-#include "text_entity.hpp"
+#include "text2d_entity.hpp"
 #include <iostream>
 
 #include <algorithm>

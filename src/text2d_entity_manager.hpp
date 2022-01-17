@@ -2,7 +2,7 @@
 
 #include "base_entity_manager.hpp"
 #include "image_loader.hpp"
-#include "text_entity.hpp"
+#include "text2d_entity.hpp"
 
 #include <unordered_map>
 

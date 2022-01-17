@@ -1,4 +1,4 @@
-#include "text_editor.hpp"
+#include "text2d_editor.hpp"
 
 #include <algorithm>
 

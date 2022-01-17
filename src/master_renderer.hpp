@@ -31,7 +31,7 @@
 #include "spotlight_entity_manager.hpp"
 #include "reflection_entity_manager.hpp"
 #include "quad2d_entity_manager.hpp"
-#include "text_entity_manager.hpp"
+#include "text2d_entity_manager.hpp"
 
 class MasterRenderer final
 {

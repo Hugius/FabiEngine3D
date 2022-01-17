@@ -1,5 +1,5 @@
-#include "text_entity_manager.hpp"
-#include "text_entity_manager.hpp"
+#include "text2d_entity_manager.hpp"
+#include "text2d_entity_manager.hpp"
 #include "logger.hpp"
 
 using std::make_shared;

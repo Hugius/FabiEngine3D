@@ -1,6 +1,6 @@
 #include "quad2d_entity_color_renderer.hpp"
 #include "configuration.hpp"
-#include "text_entity.hpp"
+#include "text2d_entity.hpp"
 
 void Quad2dEntityColorRenderer::bind()
 {

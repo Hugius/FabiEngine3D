@@ -1,6 +1,6 @@
 #include "anti_aliasing_renderer.hpp"
 #include "configuration.hpp"
-#include "text_entity.hpp"
+#include "text2d_entity.hpp"
 
 void AntiAliasingRenderer::bind()
 {

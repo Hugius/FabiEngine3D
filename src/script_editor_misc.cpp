@@ -6,17 +6,17 @@ using std::istringstream;
 
 void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 {
-	_fe3d->billboard_deleteAll();
+	_fe3d->quad3d_deleteAll();
 	_fe3d->aabb_deleteAll();
 
 	float lineCount = static_cast<float>(_script->getScriptFile(_currentScriptFileID)->getLineCount());
 	fvec2 separatorSize = fvec2((TEXT_CHARACTER_SIZE.x / 4.0f), (lineCount * VERTICAL_LINE_OFFSET));
 	fvec3 separatorPosition = SCRIPT_TEXT_STARTING_POSITION + fvec3(HORIZONTAL_LINE_OFFSET / 2.0f, -(((lineCount - 1) / 2.0f) * VERTICAL_LINE_OFFSET), 0.0f);
-	_fe3d->billboard_create("separator", false);
-	_fe3d->billboard_setPosition("separator", (separatorPosition - fvec3(0.0f, separatorSize.y / 2.0f, 0.0f)));
-	_fe3d->billboard_setSize("separator", separatorSize);
-	_fe3d->billboard_setColor("separator", SEPARATOR_COLOR);
-	_fe3d->billboard_setBright("separator", true);
+	_fe3d->quad3d_create("separator", false);
+	_fe3d->quad3d_setPosition("separator", (separatorPosition - fvec3(0.0f, separatorSize.y / 2.0f, 0.0f)));
+	_fe3d->quad3d_setSize("separator", separatorSize);
+	_fe3d->quad3d_setColor("separator", SEPARATOR_COLOR);
+	_fe3d->quad3d_setBright("separator", true);
 
 	for(unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 	{
@@ -32,13 +32,13 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			fvec3((lineTextString.size() - 1) * (TEXT_CHARACTER_SIZE.x / 2.0f), -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f) +
 			fvec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
-		_fe3d->billboard_create(lineNumberID, false);
-		//_fe3d->billboard_setFont(lineNumberID, FONT_MAP_PATH);
-		//_fe3d->billboard_setTextContent(lineNumberID, lineNumberString);
-		_fe3d->billboard_setPosition(lineNumberID, (lineNumberPosition - fvec3(0.0f, lineNumberSize.y / 2.0f, 0.0f)));
-		_fe3d->billboard_setSize(lineNumberID, lineNumberSize);
-		_fe3d->billboard_setColor(lineNumberID, LINE_NUMBER_COLOR);
-		_fe3d->billboard_setBright(lineNumberID, true);
+		_fe3d->quad3d_create(lineNumberID, false);
+		//_fe3d->quad3d_setFont(lineNumberID, FONT_MAP_PATH);
+		//_fe3d->quad3d_setTextContent(lineNumberID, lineNumberString);
+		_fe3d->quad3d_setPosition(lineNumberID, (lineNumberPosition - fvec3(0.0f, lineNumberSize.y / 2.0f, 0.0f)));
+		_fe3d->quad3d_setSize(lineNumberID, lineNumberSize);
+		_fe3d->quad3d_setColor(lineNumberID, LINE_NUMBER_COLOR);
+		_fe3d->quad3d_setBright(lineNumberID, true);
 
 		const fvec3 lineAabbPosition = (lineNumberPosition - fvec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, AABB_DEPTH));
 		const fvec3 lineAabbSize = fvec3(TEXT_CHARACTER_SIZE.x * static_cast<float>(MAX_CHARACTERS_PER_LINE * 2) * 1.1f, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
@@ -50,23 +50,23 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		string noWhiteSpace;
 		iss >> noWhiteSpace;
 		bool isComment = (noWhiteSpace.substr(0, 3) == "///");
-		_fe3d->billboard_create(lineTextID, false);
-		//_fe3d->billboard_setFont(lineTextID, FONT_MAP_PATH);
-		//_fe3d->billboard_setTextContent(lineTextID, lineTextString);
-		_fe3d->billboard_setPosition(lineTextID, (lineTextPosition - fvec3(0.0f, lineTextSize.y / 2.0f, 0.0f)));
-		_fe3d->billboard_setSize(lineTextID, lineTextSize);
-		_fe3d->billboard_setColor(lineTextID, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
-		_fe3d->billboard_setBright(lineTextID, true);
+		_fe3d->quad3d_create(lineTextID, false);
+		//_fe3d->quad3d_setFont(lineTextID, FONT_MAP_PATH);
+		//_fe3d->quad3d_setTextContent(lineTextID, lineTextString);
+		_fe3d->quad3d_setPosition(lineTextID, (lineTextPosition - fvec3(0.0f, lineTextSize.y / 2.0f, 0.0f)));
+		_fe3d->quad3d_setSize(lineTextID, lineTextSize);
+		_fe3d->quad3d_setColor(lineTextID, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
+		_fe3d->quad3d_setBright(lineTextID, true);
 
 		for(unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
 		{
 			const string characterID = (lineNumberID + "_" + to_string(charIndex));
 			const float characterX = (HORIZONTAL_LINE_OFFSET + (HORIZONTAL_CHARACTER_OFFSET * static_cast<float>(charIndex)));
 			const fvec3 characterPosition = (SCRIPT_TEXT_STARTING_POSITION + fvec3(characterX, -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f));
-			_fe3d->billboard_create(characterID, false);
-			_fe3d->billboard_setPosition(characterID, (characterPosition - fvec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f)));
-			_fe3d->billboard_setSize(characterID, TEXT_CHARACTER_SIZE);
-			_fe3d->billboard_setVisible(characterID, false);
+			_fe3d->quad3d_create(characterID, false);
+			_fe3d->quad3d_setPosition(characterID, (characterPosition - fvec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f)));
+			_fe3d->quad3d_setSize(characterID, TEXT_CHARACTER_SIZE);
+			_fe3d->quad3d_setVisible(characterID, false);
 
 			if(reloadAabbs)
 			{

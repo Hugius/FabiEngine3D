@@ -255,32 +255,32 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	//for(const auto& billboardID : _fe3d->billboard_getIDs())
+	//for(const auto& billboardID : _fe3d->quad3d_getIDs())
 	//{
 	//	bool isCustomWorldBillboard =
 	//		find(_customWorldBillboardIDs.begin(), _customWorldBillboardIDs.end(), billboardID) != _customWorldBillboardIDs.end();
 	//	if((billboardID[0] != '@') && isCustomWorldBillboard)
 	//	{
-	//		auto aabbIDs = _fe3d->aabb_getChildIDs(billboardID, AabbParentEntityType::BILLBOARD);
+	//		auto aabbIDs = _fe3d->aabb_getChildIDs(billboardID, AabbParentEntityType::QUAD3D);
 
-	//		auto isVisible = _fe3d->billboard_isVisible(billboardID);
+	//		auto isVisible = _fe3d->quad3d_isVisible(billboardID);
 	//		auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d->aabb_isRaycastResponsive(aabbIDs[0]);
 	//		auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d->aabb_isCollisionResponsive(aabbIDs[0]);
-	//		auto isFacingX = _fe3d->billboard_isFacingCameraX(billboardID);
-	//		auto isFacingY = _fe3d->billboard_isFacingCameraY(billboardID);
-	//		//auto isAnimationPlaying = _fe3d->billboard_isSpriteAnimationStarted(billboardID);
-	//		//auto isAnimationPaused = _fe3d->billboard_isSpriteAnimationPaused(billboardID);
-	//		auto position = _fe3d->billboard_getPosition(billboardID);
-	//		auto rotation = _fe3d->billboard_getRotation(billboardID);
-	//		auto size = _fe3d->billboard_getSize(billboardID);
-	//		auto color = _fe3d->billboard_getColor(billboardID);
-	//		//auto textContent = _fe3d->billboard_getTextContent(billboardID);
-	//		auto lightness = _fe3d->billboard_getLightness(billboardID);
-	//		auto minHeight = _fe3d->billboard_getMinHeight(billboardID);
-	//		auto maxHeight = _fe3d->billboard_getMaxHeight(billboardID);
-	//		//auto remainingAnimationLoops = _fe3d->billboard_getRemainingSpriteAnimationLoops(billboardID);
-	//		//auto animationRowIndex = _fe3d->billboard_getSpriteAnimationRowIndex(billboardID);
-	//		//auto animationColumnIndex = _fe3d->billboard_getSpriteAnimationColumnIndex(billboardID);
+	//		auto isFacingX = _fe3d->quad3d_isFacingCameraX(billboardID);
+	//		auto isFacingY = _fe3d->quad3d_isFacingCameraY(billboardID);
+	//		//auto isAnimationPlaying = _fe3d->quad3d_isSpriteAnimationStarted(billboardID);
+	//		//auto isAnimationPaused = _fe3d->quad3d_isSpriteAnimationPaused(billboardID);
+	//		auto position = _fe3d->quad3d_getPosition(billboardID);
+	//		auto rotation = _fe3d->quad3d_getRotation(billboardID);
+	//		auto size = _fe3d->quad3d_getSize(billboardID);
+	//		auto color = _fe3d->quad3d_getColor(billboardID);
+	//		//auto textContent = _fe3d->quad3d_getTextContent(billboardID);
+	//		auto lightness = _fe3d->quad3d_getLightness(billboardID);
+	//		auto minHeight = _fe3d->quad3d_getMinHeight(billboardID);
+	//		auto maxHeight = _fe3d->quad3d_getMaxHeight(billboardID);
+	//		//auto remainingAnimationLoops = _fe3d->quad3d_getRemainingSpriteAnimationLoops(billboardID);
+	//		//auto animationRowIndex = _fe3d->quad3d_getSpriteAnimationRowIndex(billboardID);
+	//		//auto animationColumnIndex = _fe3d->quad3d_getSpriteAnimationColumnIndex(billboardID);
 
 	//		//textContent = (textContent.empty()) ? "?" : textContent;
 

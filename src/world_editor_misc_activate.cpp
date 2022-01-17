@@ -28,7 +28,7 @@ void WorldEditor::_activateBillboard(const string& ID)
 	_activeBillboardID = ID;
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->billboard_getPosition(_activeBillboardID);
+	auto position = _fe3d->quad3d_getPosition(_activeBillboardID);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);

@@ -269,41 +269,41 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 
 const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
 {
-	if(_fe3d->billboard_isExisting(newID))
+	if(_fe3d->quad3d_isExisting(newID))
 	{
 		Logger::throwWarning("Billboard with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d->billboard_isExisting(templateID))
+	if(!_fe3d->quad3d_isExisting(templateID))
 	{
 		Logger::throwWarning("Editor billboard of billboard with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
-	_fe3d->billboard_create(newID, false);
+	_fe3d->quad3d_create(newID, false);
 
 	_fe3d->aabb_create(newID, false);
 	_fe3d->aabb_setParentEntityID(newID, newID);
-	_fe3d->aabb_setParentEntityType(newID, AabbParentEntityType::BILLBOARD);
+	_fe3d->aabb_setParentEntityType(newID, AabbParentEntityType::QUAD3D);
 
-	if(_fe3d->billboard_hasDiffuseMap(templateID))
+	if(_fe3d->quad3d_hasDiffuseMap(templateID))
 	{
-		_fe3d->billboard_setDiffuseMap(newID, _fe3d->billboard_getDiffuseMapPath(templateID));
+		_fe3d->quad3d_setDiffuseMap(newID, _fe3d->quad3d_getDiffuseMapPath(templateID));
 	}
 
-	if(_fe3d->billboard_hasEmissionMap(templateID))
+	if(_fe3d->quad3d_hasEmissionMap(templateID))
 	{
-		_fe3d->billboard_setEmissionMap(newID, _fe3d->billboard_getEmissionMapPath(templateID));
+		_fe3d->quad3d_setEmissionMap(newID, _fe3d->quad3d_getEmissionMapPath(templateID));
 	}
 
-	_fe3d->billboard_setPosition(newID, position);
-	_fe3d->billboard_setSize(newID, _fe3d->billboard_getSize(templateID));
-	_fe3d->billboard_setFacingCameraX(newID, _fe3d->billboard_isFacingCameraX(templateID));
-	_fe3d->billboard_setFacingCameraY(newID, _fe3d->billboard_isFacingCameraY(templateID));
-	_fe3d->billboard_setColor(newID, _fe3d->billboard_getColor(templateID));
-	_fe3d->billboard_setShadowed(newID, _fe3d->billboard_isShadowed(templateID));
-	_fe3d->billboard_setReflected(newID, _fe3d->billboard_isReflected(templateID));
-	_fe3d->billboard_setLightness(newID, _fe3d->billboard_getLightness(templateID));
+	_fe3d->quad3d_setPosition(newID, position);
+	_fe3d->quad3d_setSize(newID, _fe3d->quad3d_getSize(templateID));
+	_fe3d->quad3d_setFacingCameraX(newID, _fe3d->quad3d_isFacingCameraX(templateID));
+	_fe3d->quad3d_setFacingCameraY(newID, _fe3d->quad3d_isFacingCameraY(templateID));
+	_fe3d->quad3d_setColor(newID, _fe3d->quad3d_getColor(templateID));
+	_fe3d->quad3d_setShadowed(newID, _fe3d->quad3d_isShadowed(templateID));
+	_fe3d->quad3d_setReflected(newID, _fe3d->quad3d_isReflected(templateID));
+	_fe3d->quad3d_setLightness(newID, _fe3d->quad3d_getLightness(templateID));
 
 	if(isFromOutside)
 	{

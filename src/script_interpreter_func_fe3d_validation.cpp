@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 
 	if(isTemplate)
 	{
-		if(!_fe3d->billboard_isExisting("@" + ID))
+		if(!_fe3d->quad3d_isExisting("@" + ID))
 		{
 			_throwScriptError("template billboard entity does not exist!");
 			return false;
@@ -33,7 +33,7 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 	}
 	else
 	{
-		if(!_fe3d->billboard_isExisting(ID))
+		if(!_fe3d->quad3d_isExisting(ID))
 		{
 			_throwScriptError("billboard entity does not exist!");
 			return false;

@@ -230,7 +230,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			if(!foundAabbID.empty())
 			{
 				if(_fe3d->aabb_hasParent(foundAabbID) &&
-				   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::BILLBOARD))
+				   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::QUAD3D))
 				{
 					result = _fe3d->aabb_getParentEntityID(foundAabbID);
 				}
@@ -249,7 +249,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			if(!foundAabbID.empty())
 			{
 				if(_fe3d->aabb_hasParent(foundAabbID) &&
-				   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::BILLBOARD))
+				   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::QUAD3D))
 				{
 					result = _fe3d->aabb_getParentEntityID(foundAabbID);
 				}
@@ -270,7 +270,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			if(!intersection.first.empty())
 			{
 				if(_fe3d->aabb_hasParent(intersection.first) &&
-				   (_fe3d->aabb_getParentEntityType(intersection.first) == AabbParentEntityType::BILLBOARD))
+				   (_fe3d->aabb_getParentEntityType(intersection.first) == AabbParentEntityType::QUAD3D))
 				{
 					result = intersection.second;
 				}
@@ -289,7 +289,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			if(!intersection.first.empty())
 			{
 				if(_fe3d->aabb_hasParent(intersection.first) &&
-				   (_fe3d->aabb_getParentEntityType(intersection.first) == AabbParentEntityType::BILLBOARD))
+				   (_fe3d->aabb_getParentEntityType(intersection.first) == AabbParentEntityType::QUAD3D))
 				{
 					result = intersection.second;
 				}

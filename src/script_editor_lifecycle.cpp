@@ -32,7 +32,7 @@ void ScriptEditor::unload()
 
 	_fe3d->gfx_disableBloom(true);
 
-	_fe3d->billboard_deleteAll();
+	_fe3d->quad3d_deleteAll();
 
 	_fe3d->aabb_deleteAll();
 

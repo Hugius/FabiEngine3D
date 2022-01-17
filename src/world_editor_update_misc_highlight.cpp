@@ -38,7 +38,7 @@ void WorldEditor::_updateBillboardHighlighting(const string& ID, int& direction)
 
 	if(!ID.empty())
 	{
-		auto transparency = _fe3d->billboard_getTransparency(ID);
+		auto transparency = _fe3d->quad3d_getTransparency(ID);
 
 		if(transparency == 0.0f)
 		{
@@ -50,7 +50,7 @@ void WorldEditor::_updateBillboardHighlighting(const string& ID, int& direction)
 		}
 
 		const float speed = (BILLBOARD_HIGHLIGHT_SPEED * static_cast<float>(direction));
-		_fe3d->billboard_setTransparency(ID, (transparency + speed));
+		_fe3d->quad3d_setTransparency(ID, (transparency + speed));
 	}
 }
 

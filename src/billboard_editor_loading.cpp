@@ -138,24 +138,24 @@ const bool Quad3dEditor::loadFromFile()
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-		_fe3d->billboard_create(billboardID, false);
+		_fe3d->quad3d_create(billboardID, false);
 
-		if(_fe3d->billboard_isExisting(billboardID))
+		if(_fe3d->quad3d_isExisting(billboardID))
 		{
 			_loadedBillboardIDs.push_back(billboardID);
 
-			_fe3d->billboard_setVisible(billboardID, false);
-			_fe3d->billboard_setSize(billboardID, size);
-			_fe3d->billboard_setColor(billboardID, color);
-			_fe3d->billboard_setLightness(billboardID, lightness);
-			_fe3d->billboard_setFacingCameraX(billboardID, isFacingX);
-			_fe3d->billboard_setFacingCameraY(billboardID, isFacingY);
-			_fe3d->billboard_setShadowed(billboardID, isShadowed);
-			_fe3d->billboard_setReflected(billboardID, isReflected);
-			_fe3d->billboard_setTextureRepeat(billboardID, textureRepeat);
-			_fe3d->billboard_setBright(billboardID, isBright);
-			_fe3d->billboard_setTransparency(billboardID, transparency);
-			_fe3d->billboard_setEmissionIntensity(billboardID, emissionIntensity);
+			_fe3d->quad3d_setVisible(billboardID, false);
+			_fe3d->quad3d_setSize(billboardID, size);
+			_fe3d->quad3d_setColor(billboardID, color);
+			_fe3d->quad3d_setLightness(billboardID, lightness);
+			_fe3d->quad3d_setFacingCameraX(billboardID, isFacingX);
+			_fe3d->quad3d_setFacingCameraY(billboardID, isFacingY);
+			_fe3d->quad3d_setShadowed(billboardID, isShadowed);
+			_fe3d->quad3d_setReflected(billboardID, isReflected);
+			_fe3d->quad3d_setTextureRepeat(billboardID, textureRepeat);
+			_fe3d->quad3d_setBright(billboardID, isBright);
+			_fe3d->quad3d_setTransparency(billboardID, transparency);
+			_fe3d->quad3d_setEmissionIntensity(billboardID, emissionIntensity);
 
 			if(!diffuseMapPath.empty())
 			{
@@ -164,7 +164,7 @@ const bool Quad3dEditor::loadFromFile()
 					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 				}
 
-				_fe3d->billboard_setDiffuseMap(billboardID, diffuseMapPath);
+				_fe3d->quad3d_setDiffuseMap(billboardID, diffuseMapPath);
 			}
 
 			if(!emissionMapPath.empty())
@@ -174,7 +174,7 @@ const bool Quad3dEditor::loadFromFile()
 					emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 				}
 
-				_fe3d->billboard_setEmissionMap(billboardID, emissionMapPath);
+				_fe3d->quad3d_setEmissionMap(billboardID, emissionMapPath);
 			}
 		}
 	}

@@ -56,7 +56,7 @@ void Quad3dEditor::unload()
 {
 	for(const auto& ID : _loadedBillboardIDs)
 	{
-		_fe3d->billboard_delete(ID);
+		_fe3d->quad3d_delete(ID);
 	}
 
 	_unloadGUI();

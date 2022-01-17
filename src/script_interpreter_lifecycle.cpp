@@ -179,7 +179,7 @@ void ScriptInterpreter::unload()
 	_fe3d->terrain_deleteAll();
 	_fe3d->water_deleteAll();
 	_fe3d->model_deleteAll();
-	_fe3d->billboard_deleteAll();
+	_fe3d->quad3d_deleteAll();
 	_fe3d->aabb_deleteAll();
 	_fe3d->sound2d_deleteAll();
 	_fe3d->sound3d_deleteAll();

@@ -202,8 +202,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_copyTemplateBillboard(billboardID, templateID, position, false))
 			{
-				_fe3d->billboard_setRotation(billboardID, rotation);
-				_fe3d->billboard_setSize(billboardID, size);
+				_fe3d->quad3d_setRotation(billboardID, rotation);
+				_fe3d->quad3d_setSize(billboardID, size);
 
 				if(!animationID.empty())
 				{

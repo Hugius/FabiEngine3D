@@ -8,7 +8,7 @@ void Animation2dEditor::startBillboardAnimation(const string& animationID, const
 		Logger::throwWarning("animation not existing!");
 	}
 
-	if(!_fe3d->billboard_isExisting(billboardID))
+	if(!_fe3d->quad3d_isExisting(billboardID))
 	{
 		Logger::throwWarning("animation not existing!");
 	}

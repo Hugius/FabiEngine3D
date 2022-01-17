@@ -138,15 +138,15 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& billboardID : _fe3d->billboard_getIDs())
+	for(const auto& billboardID : _fe3d->quad3d_getIDs())
 	{
 		if(billboardID[0] != '@')
 		{
 			auto startedAnimations = _animation2dEditor->getStartedBillboardAnimationIDs(billboardID);
 
-			auto position = _fe3d->billboard_getPosition(billboardID);
-			auto rotation = _fe3d->billboard_getRotation(billboardID);
-			auto size = _fe3d->billboard_getSize(billboardID);
+			auto position = _fe3d->quad3d_getPosition(billboardID);
+			auto rotation = _fe3d->quad3d_getRotation(billboardID);
+			auto size = _fe3d->quad3d_getSize(billboardID);
 			auto animationID = (startedAnimations.empty() ? "" : startedAnimations[0]);
 
 			animationID = (animationID.empty()) ? "?" : animationID;

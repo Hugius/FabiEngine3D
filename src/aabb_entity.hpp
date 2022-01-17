@@ -82,6 +82,6 @@ private:
 	bool _hasCollided = false;
 
 	shared_ptr<VertexBuffer> _mesh = nullptr;
-	AabbParentEntityType _parentEntityType = AabbParentEntityType::BILLBOARD;
+	AabbParentEntityType _parentEntityType = AabbParentEntityType::QUAD3D;
 	Direction _collisionDirection = Direction::X;
 };

@@ -323,17 +323,17 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		if(_copyTemplateBillboard(billboardID, templateID, position, false))
 	//		{
-	//			_fe3d->billboard_setRotation(billboardID, rotation);
-	//			_fe3d->billboard_setSize(billboardID, size);
-	//			_fe3d->billboard_setFacingCameraX(billboardID, isFacingX);
-	//			_fe3d->billboard_setFacingCameraY(billboardID, isFacingY);
-	//			_fe3d->billboard_setColor(billboardID, color);
-	//			//_fe3d->billboard_setTextContent(billboardID, textContent);
-	//			_fe3d->billboard_setLightness(billboardID, lightness);
-	//			_fe3d->billboard_setMinHeight(billboardID, minHeight);
-	//			_fe3d->billboard_setMaxHeight(billboardID, maxHeight);
-	//			_fe3d->billboard_setVisible(billboardID, isVisible);
-	//			for(const auto& ID : _fe3d->aabb_getChildIDs(billboardID, AabbParentEntityType::BILLBOARD))
+	//			_fe3d->quad3d_setRotation(billboardID, rotation);
+	//			_fe3d->quad3d_setSize(billboardID, size);
+	//			_fe3d->quad3d_setFacingCameraX(billboardID, isFacingX);
+	//			_fe3d->quad3d_setFacingCameraY(billboardID, isFacingY);
+	//			_fe3d->quad3d_setColor(billboardID, color);
+	//			//_fe3d->quad3d_setTextContent(billboardID, textContent);
+	//			_fe3d->quad3d_setLightness(billboardID, lightness);
+	//			_fe3d->quad3d_setMinHeight(billboardID, minHeight);
+	//			_fe3d->quad3d_setMaxHeight(billboardID, maxHeight);
+	//			_fe3d->quad3d_setVisible(billboardID, isVisible);
+	//			for(const auto& ID : _fe3d->aabb_getChildIDs(billboardID, AabbParentEntityType::QUAD3D))
 	//			{
 	//				_fe3d->aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
 	//				_fe3d->aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);

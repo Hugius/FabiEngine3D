@@ -121,7 +121,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			if(!foundAabbID.empty())
 			{
 				if(_fe3d->aabb_hasParent(foundAabbID) &&
-				   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::BILLBOARD))
+				   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::QUAD3D))
 				{
 					auto directionX = _fe3d->collision_checkCameraWithEntityDirection(foundAabbID, Direction::X);
 					auto directionY = _fe3d->collision_checkCameraWithEntityDirection(foundAabbID, Direction::Y);
@@ -158,7 +158,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			if(!foundAabbID.empty())
 			{
 				if(_fe3d->aabb_hasParent(foundAabbID) &&
-				   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::BILLBOARD))
+				   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::QUAD3D))
 				{
 					auto directionX = _fe3d->collision_checkCameraWithAnyDirection(Direction::X);
 					auto directionY = _fe3d->collision_checkCameraWithAnyDirection(Direction::Y);
@@ -339,14 +339,14 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 			if(args[1].getString().empty())
 			{
-				for(const auto& selfSearchID : _fe3d->aabb_getChildIDs(args[0].getString(), AabbParentEntityType::BILLBOARD))
+				for(const auto& selfSearchID : _fe3d->aabb_getChildIDs(args[0].getString(), AabbParentEntityType::QUAD3D))
 				{
 					auto foundAabbID = _fe3d->collision_checkEntityWithEntities(selfSearchID, args[2].getString());
 
 					if(!foundAabbID.empty())
 					{
 						if(_fe3d->aabb_hasParent(foundAabbID) &&
-						   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::BILLBOARD))
+						   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::QUAD3D))
 						{
 							result = foundAabbID;
 							break;
@@ -368,7 +368,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				if(!foundAabbID.empty())
 				{
 					if(_fe3d->aabb_hasParent(foundAabbID) &&
-					   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::BILLBOARD))
+					   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::QUAD3D))
 					{
 						result = foundAabbID;
 					}

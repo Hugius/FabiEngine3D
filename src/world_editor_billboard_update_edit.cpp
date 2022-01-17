@@ -15,7 +15,7 @@ void WorldEditor::_updateBillboardEditing()
 
 	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
-		for(const auto& ID : _fe3d->billboard_getIDs())
+		for(const auto& ID : _fe3d->quad3d_getIDs())
 		{
 			if(ID[0] != '@')
 			{
@@ -94,7 +94,7 @@ void WorldEditor::_updateBillboardEditing()
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
-					_fe3d->billboard_setFrozen(_activeBillboardID, !_fe3d->billboard_isFrozen(_activeBillboardID));
+					_fe3d->quad3d_setFrozen(_activeBillboardID, !_fe3d->quad3d_isFrozen(_activeBillboardID));
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
@@ -102,7 +102,7 @@ void WorldEditor::_updateBillboardEditing()
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d->billboard_delete(_activeBillboardID);
+					_fe3d->quad3d_delete(_activeBillboardID);
 					rightWindow->setActiveScreen("main");
 					_activeBillboardID = "";
 					return;
@@ -129,15 +129,15 @@ void WorldEditor::_updateBillboardEditing()
 
 			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d->billboard_delete(_activeBillboardID);
+				_fe3d->quad3d_delete(_activeBillboardID);
 				rightWindow->setActiveScreen("main");
 				_activeBillboardID = "";
 				return;
 			}
 
-			auto position = _fe3d->billboard_getPosition(_activeBillboardID);
-			auto rotation = _fe3d->billboard_getRotation(_activeBillboardID);
-			auto size = _fe3d->billboard_getSize(_activeBillboardID);
+			auto position = _fe3d->quad3d_getPosition(_activeBillboardID);
+			auto rotation = _fe3d->quad3d_getRotation(_activeBillboardID);
+			auto size = _fe3d->quad3d_getSize(_activeBillboardID);
 
 			screen->getButton("xMinus")->setHoverable(true);
 			screen->getButton("xPlus")->setHoverable(true);
@@ -164,7 +164,7 @@ void WorldEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / BILLBOARD_POSITION_DIVIDER));
 				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / BILLBOARD_POSITION_DIVIDER));
 				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / BILLBOARD_POSITION_DIVIDER));
-				_fe3d->billboard_setPosition(_activeBillboardID, position);
+				_fe3d->quad3d_setPosition(_activeBillboardID, position);
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
@@ -174,7 +174,7 @@ void WorldEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -BILLBOARD_ROTATION_SPEED);
 				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, BILLBOARD_ROTATION_SPEED);
 				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -BILLBOARD_ROTATION_SPEED);
-				_fe3d->billboard_setRotation(_activeBillboardID, rotation);
+				_fe3d->quad3d_setRotation(_activeBillboardID, rotation);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
@@ -182,10 +182,10 @@ void WorldEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / BILLBOARD_SIZE_DIVIDER), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", size.y, (_editorSpeed / BILLBOARD_SIZE_DIVIDER), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", size.y, -(_editorSpeed / BILLBOARD_SIZE_DIVIDER), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-				_fe3d->billboard_setSize(_activeBillboardID, size);
+				_fe3d->quad3d_setSize(_activeBillboardID, size);
 			}
 
-			screen->getButton("freeze")->changeTextContent(_fe3d->billboard_isFrozen(_activeBillboardID) ? "Unfreeze" : "Freeze");
+			screen->getButton("freeze")->changeTextContent(_fe3d->quad3d_isFrozen(_activeBillboardID) ? "Unfreeze" : "Freeze");
 		}
 
 		if(_selectedBillboardID.empty() && _activeBillboardID.empty())

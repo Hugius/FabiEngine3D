@@ -22,10 +22,10 @@ void SoundEditor::load()
 	_fe3d->camera_reset();
 	_fe3d->camera_setYaw(270.0f);
 
-	_fe3d->billboard_create("@@icon", true);
-	_fe3d->billboard_setPosition("@@icon", ICON_BILLBOARD_POSITION);
-	_fe3d->billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
-	_fe3d->billboard_setBright("@@icon", true);
+	_fe3d->quad3d_create("@@icon", true);
+	_fe3d->quad3d_setPosition("@@icon", ICON_BILLBOARD_POSITION);
+	_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
+	_fe3d->quad3d_setBright("@@icon", true);
 
 	_gui->getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
@@ -45,7 +45,7 @@ void SoundEditor::unload()
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->gfx_disableBloom(true);
 
-	_fe3d->billboard_delete("@@icon");
+	_fe3d->quad3d_delete("@@icon");
 
 	_gui->getOverlay()->deleteTextField("soundID");
 

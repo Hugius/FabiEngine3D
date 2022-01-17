@@ -77,13 +77,13 @@ void Quad3dEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->billboard_isWireframed(_currentBillboardID))
+				if(_fe3d->quad3d_isWireframed(_currentBillboardID))
 				{
-					_fe3d->billboard_setWireframed(_currentBillboardID, false);
+					_fe3d->quad3d_setWireframed(_currentBillboardID, false);
 				}
 				else
 				{
-					_fe3d->billboard_setWireframed(_currentBillboardID, true);
+					_fe3d->quad3d_setWireframed(_currentBillboardID, true);
 				}
 			}
 		}
@@ -118,9 +118,9 @@ void Quad3dEditor::_updateBillboardCreating()
 				return;
 			}
 
-			_fe3d->billboard_create(newBillboardID, false);
+			_fe3d->quad3d_create(newBillboardID, false);
 
-			if(_fe3d->billboard_isExisting(newBillboardID))
+			if(_fe3d->quad3d_isExisting(newBillboardID))
 			{
 				_currentBillboardID = newBillboardID;
 				_loadedBillboardIDs.push_back(newBillboardID);
@@ -140,7 +140,7 @@ void Quad3dEditor::_updateBillboardChoosing()
 	{
 		if(!_hoveredBillboardID.empty())
 		{
-			_fe3d->billboard_setVisible(_hoveredBillboardID, false);
+			_fe3d->quad3d_setVisible(_hoveredBillboardID, false);
 		}
 
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("billboardList");
@@ -162,7 +162,7 @@ void Quad3dEditor::_updateBillboardChoosing()
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
 				}
 
-				_fe3d->billboard_setVisible(_currentBillboardID, true);
+				_fe3d->quad3d_setVisible(_currentBillboardID, true);
 				_gui->getOverlay()->deleteChoiceForm("billboardList");
 				_isChoosingBillboard = false;
 			}
@@ -180,7 +180,7 @@ void Quad3dEditor::_updateBillboardChoosing()
 
 		if(!_hoveredBillboardID.empty())
 		{
-			_fe3d->billboard_setVisible(_hoveredBillboardID, true);
+			_fe3d->quad3d_setVisible(_hoveredBillboardID, true);
 		}
 	}
 }
@@ -196,7 +196,7 @@ void Quad3dEditor::_updateBillboardDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->billboard_delete(_currentBillboardID);
+			_fe3d->quad3d_delete(_currentBillboardID);
 
 			_loadedBillboardIDs.erase(remove(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), _currentBillboardID), _loadedBillboardIDs.end());
 			_currentBillboardID = "";
@@ -204,7 +204,7 @@ void Quad3dEditor::_updateBillboardDeleting()
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_fe3d->billboard_setVisible(_currentBillboardID, false);
+			_fe3d->quad3d_setVisible(_currentBillboardID, false);
 
 			_currentBillboardID = "";
 			_isDeletingBillboard = false;

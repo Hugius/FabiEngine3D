@@ -75,7 +75,7 @@ void WorldEditor::unloadEditorWorld()
 
 	for(const auto& [key, templateID] : _loadedBillboardIDs)
 	{
-		_fe3d->billboard_delete(key);
+		_fe3d->quad3d_delete(key);
 
 		auto animationID = _animation2dEditor->getStartedBillboardAnimationIDs(key);
 		if(!animationID.empty())

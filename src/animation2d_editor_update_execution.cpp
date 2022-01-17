@@ -59,8 +59,8 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 		auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())), (1.0f / static_cast<float>(animation.getRowCount())));
 		auto uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x), (static_cast<float>(animation.getRowCount() - animation.getRowIndex() - 1) * uvMultiplier.y));
 
-		_fe3d->billboard_setUvMultiplier(key.second, uvMultiplier);
-		_fe3d->billboard_setUvOffset(key.second, uvOffset);
+		_fe3d->quad3d_setUvMultiplier(key.second, uvMultiplier);
+		_fe3d->quad3d_setUvOffset(key.second, uvOffset);
 	}
 
 	for(const auto& key : _billboardAnimationsToStop)

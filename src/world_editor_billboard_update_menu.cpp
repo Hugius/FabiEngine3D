@@ -23,7 +23,7 @@ void WorldEditor::_updateBillboardMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButtons();
 
-			auto IDs = _fe3d->billboard_getIDs();
+			auto IDs = _fe3d->quad3d_getIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& billboardID : IDs)
 			{
@@ -52,7 +52,7 @@ void WorldEditor::_updateBillboardPlacingMenu()
 			if(!_currentTemplateBillboardID.empty())
 			{
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
-				_fe3d->billboard_setVisible(_currentTemplateBillboardID, false);
+				_fe3d->quad3d_setVisible(_currentTemplateBillboardID, false);
 				_currentTemplateBillboardID = "";
 			}
 
@@ -63,7 +63,7 @@ void WorldEditor::_updateBillboardPlacingMenu()
 		{
 			for(const auto& billboardID : _quad3dEditor->getLoadedIDs())
 			{
-				if(_fe3d->billboard_isExisting(billboardID))
+				if(_fe3d->quad3d_isExisting(billboardID))
 				{
 					if(screen->getScrollingList("billboardList")->getButton(billboardID)->isHovered())
 					{
@@ -76,8 +76,8 @@ void WorldEditor::_updateBillboardPlacingMenu()
 						_deactivateReflection();
 
 						_currentTemplateBillboardID = billboardID;
-						_fe3d->billboard_setPosition(_currentTemplateBillboardID, fvec3(0.0f));
-						_fe3d->billboard_setVisible(_currentTemplateBillboardID, true);
+						_fe3d->quad3d_setPosition(_currentTemplateBillboardID, fvec3(0.0f));
+						_fe3d->quad3d_setVisible(_currentTemplateBillboardID, true);
 						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
 						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentTemplateBillboardID.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
@@ -105,14 +105,14 @@ void WorldEditor::_updateBillboardChoosingMenu()
 	{
 		for(const auto& button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->getButtons())
 		{
-			if(!_fe3d->billboard_isExisting(button->getID()))
+			if(!_fe3d->quad3d_isExisting(button->getID()))
 			{
 				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButton(button->getID());
 				break;
 			}
 		}
 
-		for(const auto& billboardID : _fe3d->billboard_getIDs())
+		for(const auto& billboardID : _fe3d->quad3d_getIDs())
 		{
 			if(billboardID[0] != '@')
 			{

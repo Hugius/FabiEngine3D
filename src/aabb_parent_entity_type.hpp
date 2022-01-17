@@ -3,5 +3,5 @@
 enum class AabbParentEntityType
 {
 	MODEL,
-	BILLBOARD
+	QUAD3D
 };

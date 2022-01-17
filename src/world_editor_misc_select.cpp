@@ -82,7 +82,7 @@ void WorldEditor::_unselectModel(const string& ID)
 
 void WorldEditor::_unselectBillboard(const string& ID)
 {
-	_fe3d->billboard_setTransparency(ID, 1.0f);
+	_fe3d->quad3d_setTransparency(ID, 1.0f);
 }
 
 void WorldEditor::_unselectSound(const string& ID)

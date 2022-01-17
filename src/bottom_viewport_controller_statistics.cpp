@@ -93,9 +93,9 @@ void BottomViewportController::_updateStatistics()
 	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d->billboard_getIDs())
+		for(const auto& entityID : _fe3d->quad3d_getIDs())
 		{
-			if(_fe3d->billboard_isVisible(entityID))
+			if(_fe3d->quad3d_isVisible(entityID))
 			{
 				entityCount++;
 			}

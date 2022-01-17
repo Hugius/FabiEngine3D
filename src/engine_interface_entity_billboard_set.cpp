@@ -1,12 +1,12 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::billboard_create(const string& ID, bool isCentered)
+void EngineInterface::quad3d_create(const string& ID, bool isCentered)
 {
 	_core->getQuad3dEntityManager()->createEntity(ID, isCentered);
 }
 
-void EngineInterface::billboard_deleteAll()
+void EngineInterface::quad3d_deleteAll()
 {
 	for(const auto& [key, entity] : _core->getQuad3dEntityManager()->getEntities())
 	{
@@ -14,9 +14,9 @@ void EngineInterface::billboard_deleteAll()
 	}
 }
 
-void EngineInterface::billboard_delete(const string& ID)
+void EngineInterface::quad3d_delete(const string& ID)
 {
-	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::BILLBOARD))
+	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::QUAD3D))
 	{
 		_core->getAabbEntityManager()->deleteEntity(aabbID);
 	}
@@ -24,7 +24,7 @@ void EngineInterface::billboard_delete(const string& ID)
 	_core->getQuad3dEntityManager()->deleteEntity(ID);
 }
 
-void EngineInterface::billboard_deleteGroup(const string& ID)
+void EngineInterface::quad3d_deleteGroup(const string& ID)
 {
 	for(const auto& [key, entity] : _core->getQuad3dEntityManager()->getEntities())
 	{
@@ -40,77 +40,77 @@ void EngineInterface::billboard_deleteGroup(const string& ID)
 	}
 }
 
-void EngineInterface::billboard_setVisible(const string& ID, bool value)
+void EngineInterface::quad3d_setVisible(const string& ID, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setVisible(value);
 }
 
-void EngineInterface::billboard_move(const string& ID, fvec3 change)
+void EngineInterface::quad3d_move(const string& ID, fvec3 change)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->move(change);
 }
 
-void EngineInterface::billboard_rotate(const string& ID, fvec3 change)
+void EngineInterface::quad3d_rotate(const string& ID, fvec3 change)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->rotate(change);
 }
 
-void EngineInterface::billboard_scale(const string& ID, fvec2 change)
+void EngineInterface::quad3d_scale(const string& ID, fvec2 change)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->scale(change);
 }
 
-void EngineInterface::billboard_moveTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::quad3d_moveTo(const string& ID, fvec3 target, float speed)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->moveTo(target, speed);
 }
 
-void EngineInterface::billboard_rotateTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::quad3d_rotateTo(const string& ID, fvec3 target, float speed)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->rotateTo(target, speed);
 }
 
-void EngineInterface::billboard_scaleTo(const string& ID, fvec2 target, float speed)
+void EngineInterface::quad3d_scaleTo(const string& ID, fvec2 target, float speed)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->scaleTo(target, speed);
 }
 
-void EngineInterface::billboard_setPosition(const string& ID, fvec3 value)
+void EngineInterface::quad3d_setPosition(const string& ID, fvec3 value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setPosition(value);
 }
 
-void EngineInterface::billboard_setRotation(const string& ID, fvec3 value)
+void EngineInterface::quad3d_setRotation(const string& ID, fvec3 value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setRotation(value);
 }
 
-void EngineInterface::billboard_setSize(const string& ID, fvec2 value)
+void EngineInterface::quad3d_setSize(const string& ID, fvec2 value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setSize(value);
 }
 
-void EngineInterface::billboard_setColor(const string& ID, fvec3 value)
+void EngineInterface::quad3d_setColor(const string& ID, fvec3 value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setColor(value);
 }
 
-void EngineInterface::billboard_setWireframeColor(const string& ID, fvec3 value)
+void EngineInterface::quad3d_setWireframeColor(const string& ID, fvec3 value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
 
-void EngineInterface::billboard_setUvMultiplier(const string& ID, fvec2 value)
+void EngineInterface::quad3d_setUvMultiplier(const string& ID, fvec2 value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setUvMultiplier(value);
 }
 
-void EngineInterface::billboard_setUvOffset(const string& ID, fvec2 value)
+void EngineInterface::quad3d_setUvOffset(const string& ID, fvec2 value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setUvOffset(value);
 }
 
-void EngineInterface::billboard_setDiffuseMap(const string& ID, const string& value)
+void EngineInterface::quad3d_setDiffuseMap(const string& ID, const string& value)
 {
 	if(value.empty())
 	{
@@ -135,7 +135,7 @@ void EngineInterface::billboard_setDiffuseMap(const string& ID, const string& va
 	}
 }
 
-void EngineInterface::billboard_setEmissionMap(const string& ID, const string& value)
+void EngineInterface::quad3d_setEmissionMap(const string& ID, const string& value)
 {
 	if(value.empty())
 	{
@@ -160,72 +160,72 @@ void EngineInterface::billboard_setEmissionMap(const string& ID, const string& v
 	}
 }
 
-void EngineInterface::billboard_setWireframed(const string& ID, bool value)
+void EngineInterface::quad3d_setWireframed(const string& ID, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setWireframed(value);
 }
 
-void EngineInterface::billboard_setFrozen(const string& ID, bool value)
+void EngineInterface::quad3d_setFrozen(const string& ID, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setFrozen(value);
 }
 
-void EngineInterface::billboard_setFacingCameraX(const string& ID, bool value)
+void EngineInterface::quad3d_setFacingCameraX(const string& ID, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setFacingCameraX(value);
 }
 
-void EngineInterface::billboard_setFacingCameraY(const string& ID, bool value)
+void EngineInterface::quad3d_setFacingCameraY(const string& ID, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setFacingCameraY(value);
 }
 
-void EngineInterface::billboard_setDepthMapIncluded(const string& ID, bool value)
+void EngineInterface::quad3d_setDepthMapIncluded(const string& ID, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setDepthMapIncluded(value);
 }
 
-void EngineInterface::billboard_setShadowed(const string& ID, bool value)
+void EngineInterface::quad3d_setShadowed(const string& ID, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setShadowed(value);
 }
 
-void EngineInterface::billboard_setReflected(const string& ID, bool value)
+void EngineInterface::quad3d_setReflected(const string& ID, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setReflected(value);
 }
 
-void EngineInterface::billboard_setBright(const string& ID, bool value)
+void EngineInterface::quad3d_setBright(const string& ID, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setBright(value);
 }
 
-void EngineInterface::billboard_setMinHeight(const string& ID, float value)
+void EngineInterface::quad3d_setMinHeight(const string& ID, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setMinHeight(value);
 }
 
-void EngineInterface::billboard_setMaxHeight(const string& ID, float value)
+void EngineInterface::quad3d_setMaxHeight(const string& ID, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setMaxHeight(value);
 }
 
-void EngineInterface::billboard_setLightness(const string& ID, float value)
+void EngineInterface::quad3d_setLightness(const string& ID, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setLightness(value);
 }
 
-void EngineInterface::billboard_setTransparency(const string& ID, float value)
+void EngineInterface::quad3d_setTransparency(const string& ID, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setTransparency(value);
 }
 
-void EngineInterface::billboard_setTextureRepeat(const string& ID, float value)
+void EngineInterface::quad3d_setTextureRepeat(const string& ID, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setTextureRepeat(value);
 }
 
-void EngineInterface::billboard_setEmissionIntensity(const string& ID, float value)
+void EngineInterface::quad3d_setEmissionIntensity(const string& ID, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setEmissionIntensity(value);
 }

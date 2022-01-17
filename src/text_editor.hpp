@@ -2,7 +2,7 @@
 
 #include "base_editor.hpp"
 
-class TextEditor final : public BaseEditor
+class Text2dEditor final : public BaseEditor
 {
 public:
 	using BaseEditor::inject;

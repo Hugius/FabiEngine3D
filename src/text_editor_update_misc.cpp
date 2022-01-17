@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-void TextEditor::_updateMiscellaneous()
+void Text2dEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
@@ -23,7 +23,7 @@ void TextEditor::_updateMiscellaneous()
 	}
 }
 
-void TextEditor::_updateTextCreating()
+void Text2dEditor::_updateTextCreating()
 {
 	if(_isCreatingText)
 	{
@@ -53,7 +53,7 @@ void TextEditor::_updateTextCreating()
 
 			if(_currentProjectID.empty())
 			{
-				Logger::throwError("TextEditor::_updateTextCreating");
+				Logger::throwError("Text2dEditor::_updateTextCreating");
 			}
 
 			_fe3d->text_create(newTextID, true);
@@ -66,7 +66,7 @@ void TextEditor::_updateTextCreating()
 				_currentTextID = newTextID;
 				_loadedTextIDs.push_back(newTextID);
 
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("textEditorMenuChoice");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 				_fe3d->text_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text: " + newTextID.substr(1), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
 				_isCreatingText = false;
@@ -75,7 +75,7 @@ void TextEditor::_updateTextCreating()
 	}
 }
 
-void TextEditor::_updateTextChoosing()
+void Text2dEditor::_updateTextChoosing()
 {
 	if(_isChoosingText)
 	{
@@ -97,7 +97,7 @@ void TextEditor::_updateTextChoosing()
 
 				if(!_isDeletingText)
 				{
-					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("textEditorMenuChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
@@ -126,7 +126,7 @@ void TextEditor::_updateTextChoosing()
 	}
 }
 
-void TextEditor::_updateTextDeleting()
+void Text2dEditor::_updateTextDeleting()
 {
 	if(_isDeletingText && !_currentTextID.empty())
 	{

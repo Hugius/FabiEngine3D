@@ -16,7 +16,7 @@ EngineController::EngineController()
 	_modelEditor = make_shared<ModelEditor>();
 	_billboardEditor = make_shared<BillboardEditor>();
 	_quad2dEditor = make_shared<Quad2dEditor>();
-	_textEditor = make_shared<TextEditor>();
+	_text2dEditor = make_shared<Text2dEditor>();
 	_animation2dEditor = make_shared<Animation2dEditor>();
 	_animation3dEditor = make_shared<Animation3dEditor>();
 	_soundEditor = make_shared<SoundEditor>();
@@ -33,7 +33,7 @@ EngineController::EngineController()
 	_leftViewportController->inject(_modelEditor);
 	_leftViewportController->inject(_billboardEditor);
 	_leftViewportController->inject(_quad2dEditor);
-	_leftViewportController->inject(_textEditor);
+	_leftViewportController->inject(_text2dEditor);
 	_leftViewportController->inject(_animation2dEditor);
 	_leftViewportController->inject(_animation3dEditor);
 	_leftViewportController->inject(_soundEditor);
@@ -50,7 +50,7 @@ EngineController::EngineController()
 	_topViewportController->inject(_modelEditor);
 	_topViewportController->inject(_billboardEditor);
 	_topViewportController->inject(_quad2dEditor);
-	_topViewportController->inject(_textEditor);
+	_topViewportController->inject(_text2dEditor);
 	_topViewportController->inject(_animation2dEditor);
 	_topViewportController->inject(_animation3dEditor);
 	_topViewportController->inject(_soundEditor);
@@ -64,7 +64,7 @@ EngineController::EngineController()
 	_modelEditor->inject(_guiManager);
 	_billboardEditor->inject(_guiManager);
 	_quad2dEditor->inject(_guiManager);
-	_textEditor->inject(_guiManager);
+	_text2dEditor->inject(_guiManager);
 	_animation2dEditor->inject(_guiManager);
 	_animation3dEditor->inject(_guiManager);
 	_animation3dEditor->inject(_modelEditor);
@@ -88,7 +88,7 @@ EngineController::EngineController()
 	_scriptInterpreter->inject(_modelEditor);
 	_scriptInterpreter->inject(_billboardEditor);
 	_scriptInterpreter->inject(_quad2dEditor);
-	_scriptInterpreter->inject(_textEditor);
+	_scriptInterpreter->inject(_text2dEditor);
 	_scriptInterpreter->inject(_animation2dEditor);
 	_scriptInterpreter->inject(_animation3dEditor);
 	_scriptInterpreter->inject(_soundEditor);
@@ -113,7 +113,7 @@ void EngineController::initialize()
 	_modelEditor->inject(_fe3d);
 	_billboardEditor->inject(_fe3d);
 	_quad2dEditor->inject(_fe3d);
-	_textEditor->inject(_fe3d);
+	_text2dEditor->inject(_fe3d);
 	_animation2dEditor->inject(_fe3d);
 	_animation3dEditor->inject(_fe3d);
 	_soundEditor->inject(_fe3d);

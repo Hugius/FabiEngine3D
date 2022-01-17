@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_validateFe3dQuad2d(const string& ID, bool isTempl
 	{
 		if(!_fe3d->quad2d_isExisting("@" + ID))
 		{
-			_throwScriptError("template quad2d entity does not exist!");
+			_throwScriptError("template Quad2D entity does not exist!");
 			return false;
 		}
 	}
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_validateFe3dText(const string& ID, bool isTemplat
 	{
 		if(!_fe3d->text_isExisting("@" + ID))
 		{
-			_throwScriptError("template text entity does not exist!");
+			_throwScriptError("template Text2D entity does not exist!");
 			return false;
 		}
 	}
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_validateFe3dText(const string& ID, bool isTemplat
 	{
 		if(!_fe3d->text_isExisting(ID))
 		{
-			_throwScriptError("text entity does not exist!");
+			_throwScriptError("Text2D entity does not exist!");
 			return false;
 		}
 	}

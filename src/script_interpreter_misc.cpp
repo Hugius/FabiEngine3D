@@ -195,9 +195,9 @@ void ScriptInterpreter::inject(shared_ptr<Quad2dEditor> quad2dEditor)
 	_quad2dEditor = quad2dEditor;
 }
 
-void ScriptInterpreter::inject(shared_ptr<TextEditor> textEditor)
+void ScriptInterpreter::inject(shared_ptr<Text2dEditor> text2dEditor)
 {
-	_textEditor = textEditor;
+	_text2dEditor = text2dEditor;
 }
 
 void ScriptInterpreter::inject(shared_ptr<WorldEditor> worldEditor)

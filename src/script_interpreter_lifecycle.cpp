@@ -124,7 +124,7 @@ void ScriptInterpreter::load()
 		auto modelImagePaths = _modelEditor->getImagePathsFromFile();
 		auto billboardImagePaths = _billboardEditor->getImagePathsFromFile();
 		auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
-		auto textImagePaths = _textEditor->getImagePathsFromFile();
+		auto textImagePaths = _text2dEditor->getImagePathsFromFile();
 		auto audioPaths = _soundEditor->getAudioPathsFromFile();
 
 		_fe3d->misc_cacheMeshes(modelMeshPaths);
@@ -149,7 +149,7 @@ void ScriptInterpreter::load()
 	_modelEditor->loadFromFile();
 	_billboardEditor->loadFromFile();
 	_quad2dEditor->loadFromFile();
-	_textEditor->loadFromFile();
+	_text2dEditor->loadFromFile();
 	_animation2dEditor->loadFromFile(false);
 	_animation3dEditor->loadFromFile(false);
 	_soundEditor->loadFromFile();

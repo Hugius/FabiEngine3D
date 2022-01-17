@@ -6,7 +6,7 @@
 
 using std::ofstream;
 
-const bool TextEditor::saveToFile() const
+const bool Text2dEditor::saveToFile() const
 {
 	if(!_isEditorLoaded)
 	{
@@ -15,11 +15,11 @@ const bool TextEditor::saveToFile() const
 
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("TextEditor::saveToFile");
+		Logger::throwError("Text2dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\text.fe3d");
+	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\text2d.fe3d");
 
 	for(const auto& textID : _loadedTextIDs)
 	{
@@ -38,7 +38,7 @@ const bool TextEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Text editor data saved!");
+	Logger::throwInfo("Text2D editor data saved!");
 
 	return true;
 }

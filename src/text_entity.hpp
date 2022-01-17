@@ -9,7 +9,7 @@
 using std::shared_ptr;
 using std::map;
 
-class TextEntity final : public BaseEntity
+class Text2dEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

@@ -23,7 +23,7 @@ EngineCore::EngineCore()
 	_billboardEntityManager = make_shared<BillboardEntityManager>();
 	_aabbEntityManager = make_shared<AabbEntityManager>();
 	_quad2dEntityManager = make_shared<Quad2dEntityManager>();
-	_textEntityManager = make_shared<TextEntityManager>();
+	_text2dEntityManager = make_shared<Text2dEntityManager>();
 	_pointlightEntityManager = make_shared<PointlightEntityManager>();
 	_spotlightEntityManager = make_shared<SpotlightEntityManager>();
 	_reflectionEntityManager = make_shared<ReflectionEntityManager>();
@@ -56,7 +56,7 @@ EngineCore::EngineCore()
 	_aabbEntityManager->inject(_modelEntityManager);
 	_aabbEntityManager->inject(_billboardEntityManager);
 	_quad2dEntityManager->inject(_renderBus);
-	_textEntityManager->inject(_renderBus);
+	_text2dEntityManager->inject(_renderBus);
 	_masterRenderer->inject(_renderBus);
 	_masterRenderer->inject(_camera);
 	_masterRenderer->inject(_shadowGenerator);
@@ -68,7 +68,7 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_billboardEntityManager);
 	_masterRenderer->inject(_aabbEntityManager);
 	_masterRenderer->inject(_quad2dEntityManager);
-	_masterRenderer->inject(_textEntityManager);
+	_masterRenderer->inject(_text2dEntityManager);
 	_masterRenderer->inject(_pointlightEntityManager);
 	_masterRenderer->inject(_spotlightEntityManager);
 	_masterRenderer->inject(_reflectionEntityManager);
@@ -328,7 +328,7 @@ void EngineCore::update()
 
 		_timer->startDeltaPart("guiEntityUpdate");
 		_quad2dEntityManager->update();
-		_textEntityManager->update();
+		_text2dEntityManager->update();
 		_timer->stopDeltaPart();
 	}
 
@@ -474,9 +474,9 @@ const shared_ptr<Quad2dEntityManager> EngineCore::getQuad2dEntityManager() const
 	return _quad2dEntityManager;
 }
 
-const shared_ptr<TextEntityManager> EngineCore::getTextEntityManager() const
+const shared_ptr<Text2dEntityManager> EngineCore::getText2dEntityManager() const
 {
-	return _textEntityManager;
+	return _text2dEntityManager;
 }
 
 const shared_ptr<PointlightEntityManager> EngineCore::getPointlightEntityManager() const

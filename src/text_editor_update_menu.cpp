@@ -2,11 +2,11 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-void TextEditor::_updateMainMenu()
+void Text2dEditor::_updateMainMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "textEditorMenuMain")
+	if(screen->getID() == "text2dEditorMenuMain")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -55,11 +55,11 @@ void TextEditor::_updateMainMenu()
 	}
 }
 
-void TextEditor::_updateChoiceMenu()
+void Text2dEditor::_updateChoiceMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "textEditorMenuChoice")
+	if(screen->getID() == "text2dEditorMenuChoice")
 	{
 		auto color = _fe3d->text_getColor(_currentTextID);
 		auto transparency = _fe3d->text_getTransparency(_currentTextID);
@@ -68,7 +68,7 @@ void TextEditor::_updateChoiceMenu()
 		{
 			_fe3d->text_setVisible(_currentTextID, false);
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), false);
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("textEditorMenuMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuMain");
 			_currentTextID = "";
 			return;
 		}
@@ -76,7 +76,7 @@ void TextEditor::_updateChoiceMenu()
 		{
 			if(_currentProjectID.empty())
 			{
-				Logger::throwError("TextEditor::_updateChoiceMenu");
+				Logger::throwError("Text2dEditor::_updateChoiceMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

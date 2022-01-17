@@ -2,17 +2,17 @@
 
 #include <algorithm>
 
-void TextEditor::setCurrentProjectID(const string& projectID)
+void Text2dEditor::setCurrentProjectID(const string& projectID)
 {
 	_currentProjectID = projectID;
 }
 
-const bool TextEditor::isLoaded() const
+const bool Text2dEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }
 
-const vector<string>& TextEditor::getLoadedIDs()
+const vector<string>& Text2dEditor::getLoadedIDs()
 {
 	sort(_loadedTextIDs.begin(), _loadedTextIDs.end());
 	return _loadedTextIDs;

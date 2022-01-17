@@ -99,9 +99,9 @@ void MasterRenderer::inject(shared_ptr<Quad2dEntityManager> quad2dEntityManager)
 	_quad2dEntityManager = quad2dEntityManager;
 }
 
-void MasterRenderer::inject(shared_ptr<TextEntityManager> textEntityManager)
+void MasterRenderer::inject(shared_ptr<Text2dEntityManager> text2dEntityManager)
 {
-	_textEntityManager = textEntityManager;
+	_text2dEntityManager = text2dEntityManager;
 }
 
 void MasterRenderer::inject(shared_ptr<PointlightEntityManager> pointlightEntityManager)

@@ -68,7 +68,7 @@ public:
 	const shared_ptr<BillboardEntityManager> getBillboardEntityManager() const;
 	const shared_ptr<AabbEntityManager> getAabbEntityManager() const;
 	const shared_ptr<Quad2dEntityManager> getQuad2dEntityManager() const;
-	const shared_ptr<TextEntityManager> getTextEntityManager() const;
+	const shared_ptr<Text2dEntityManager> getText2dEntityManager() const;
 	const shared_ptr<PointlightEntityManager> getPointlightEntityManager() const;
 	const shared_ptr<SpotlightEntityManager> getSpotlightEntityManager() const;
 	const shared_ptr<ReflectionEntityManager> getReflectionEntityManager() const;
@@ -108,7 +108,7 @@ private:
 	shared_ptr<BillboardEntityManager> _billboardEntityManager = nullptr;
 	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
 	shared_ptr<Quad2dEntityManager> _quad2dEntityManager = nullptr;
-	shared_ptr<TextEntityManager> _textEntityManager = nullptr;
+	shared_ptr<Text2dEntityManager> _text2dEntityManager = nullptr;
 	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
 	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
 	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;

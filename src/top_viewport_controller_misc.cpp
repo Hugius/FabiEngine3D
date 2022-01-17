@@ -85,7 +85,7 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("modelEditor")->setHoverable(isHoverable);
 	screen->getButton("billboardEditor")->setHoverable(isHoverable);
 	screen->getButton("quad2dEditor")->setHoverable(isHoverable);
-	screen->getButton("textEditor")->setHoverable(isHoverable);
+	screen->getButton("text2dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation3dEditor")->setHoverable(isHoverable);
 	screen->getButton("soundEditor")->setHoverable(isHoverable);
@@ -154,9 +154,9 @@ void TopViewportController::_applyProjectChange()
 		_quad2dEditor->unload();
 	}
 
-	if(_textEditor->isLoaded())
+	if(_text2dEditor->isLoaded())
 	{
-		_textEditor->unload();
+		_text2dEditor->unload();
 	}
 
 	if(_animation2dEditor->isLoaded())
@@ -190,7 +190,7 @@ void TopViewportController::_applyProjectChange()
 	_modelEditor->setCurrentProjectID(_currentProjectID);
 	_billboardEditor->setCurrentProjectID(_currentProjectID);
 	_quad2dEditor->setCurrentProjectID(_currentProjectID);
-	_textEditor->setCurrentProjectID(_currentProjectID);
+	_text2dEditor->setCurrentProjectID(_currentProjectID);
 	_animation2dEditor->setCurrentProjectID(_currentProjectID);
 	_animation3dEditor->setCurrentProjectID(_currentProjectID);
 	_soundEditor->setCurrentProjectID(_currentProjectID);
@@ -220,7 +220,7 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sky.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sound.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\terrain.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\text.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\text2d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\water.fe3d"))
 	{
 		return true;
@@ -242,7 +242,7 @@ void TopViewportController::_saveCurrentProject()
 	_modelEditor->saveToFile();
 	_billboardEditor->saveToFile();
 	_quad2dEditor->saveToFile();
-	_textEditor->saveToFile();
+	_text2dEditor->saveToFile();
 	_animation2dEditor->saveToFile();
 	_animation3dEditor->saveToFile();
 	_soundEditor->saveToFile();
@@ -282,9 +282,9 @@ void TopViewportController::inject(shared_ptr<Quad2dEditor> quad2dEditor)
 	_quad2dEditor = quad2dEditor;
 }
 
-void TopViewportController::inject(shared_ptr<TextEditor> textEditor)
+void TopViewportController::inject(shared_ptr<Text2dEditor> text2dEditor)
 {
-	_textEditor = textEditor;
+	_text2dEditor = text2dEditor;
 }
 
 void TopViewportController::inject(shared_ptr<Animation2dEditor> animation2dEditor)

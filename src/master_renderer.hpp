@@ -45,7 +45,7 @@ public:
 	void inject(shared_ptr<BillboardEntityManager> billboardEntityManager);
 	void inject(shared_ptr<AabbEntityManager> aabbEntityManager);
 	void inject(shared_ptr<Quad2dEntityManager> quad2dEntityManager);
-	void inject(shared_ptr<TextEntityManager> textEntityManager);
+	void inject(shared_ptr<Text2dEntityManager> text2dEntityManager);
 	void inject(shared_ptr<PointlightEntityManager> pointlightEntityManager);
 	void inject(shared_ptr<SpotlightEntityManager> spotlightEntityManager);
 	void inject(shared_ptr<ReflectionEntityManager> reflectionEntityManager);
@@ -164,7 +164,7 @@ private:
 	shared_ptr<BillboardEntityManager> _billboardEntityManager = nullptr;
 	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
 	shared_ptr<Quad2dEntityManager> _quad2dEntityManager = nullptr;
-	shared_ptr<TextEntityManager> _textEntityManager = nullptr;
+	shared_ptr<Text2dEntityManager> _text2dEntityManager = nullptr;
 	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
 	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
 	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;

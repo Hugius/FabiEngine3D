@@ -8,21 +8,21 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> TextEditor::getImagePathsFromFile() const
+const vector<string> Text2dEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("TextEditor::getImagePathsFromFile");
+		Logger::throwError("Text2dEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\text.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\text2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `text.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `text2d.fe3d` missing!");
 		return {};
 	}
 
@@ -56,23 +56,23 @@ const vector<string> TextEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool TextEditor::loadFromFile()
+const bool Text2dEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("TextEditor::loadFromFile");
+		Logger::throwError("Text2dEditor::loadFromFile");
 	}
 
 	_loadedTextIDs.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\text.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\text2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `text.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `text2d.fe3d` missing!");
 		return false;
 	}
 
@@ -118,7 +118,7 @@ const bool TextEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Text editor data loaded!");
+	Logger::throwInfo("Text2D editor data loaded!");
 
 	return true;
 }

@@ -201,7 +201,7 @@ void MasterRenderer::_renderFinalSceneMap()
 
 void MasterRenderer::_renderGUI()
 {
-	if(!_quad2dEntityManager->getEntities().empty() || !_textEntityManager->getEntities().empty())
+	if(!_quad2dEntityManager->getEntities().empty() || !_text2dEntityManager->getEntities().empty())
 	{
 		_quad2dEntityColorRenderer.bind();
 
@@ -213,24 +213,24 @@ void MasterRenderer::_renderGUI()
 				orderedEntityMap.insert(make_pair(quad2dEntity->getDepth(), quad2dEntity));
 			}
 		}
-		for(const auto& [key, textEntity] : _textEntityManager->getEntities())
+		for(const auto& [key, text2dEntity] : _text2dEntityManager->getEntities())
 		{
-			orderedEntityMap.insert(make_pair(textEntity->getDepth(), textEntity));
+			orderedEntityMap.insert(make_pair(text2dEntity->getDepth(), text2dEntity));
 		}
 
 		for(const auto& [key, entity] : orderedEntityMap)
 		{
 			auto castedQuad2dEntity = dynamic_pointer_cast<Quad2dEntity>(entity);
-			auto castedTextEntity = dynamic_pointer_cast<TextEntity>(entity);
+			auto castedText2dEntity = dynamic_pointer_cast<Text2dEntity>(entity);
 
 			if(castedQuad2dEntity != nullptr)
 			{
 				_quad2dEntityColorRenderer.render(castedQuad2dEntity);
 			}
 
-			if(castedTextEntity != nullptr)
+			if(castedText2dEntity != nullptr)
 			{
-				for(const auto& characterEntity : castedTextEntity->getCharacterEntities())
+				for(const auto& characterEntity : castedText2dEntity->getCharacterEntities())
 				{
 					_quad2dEntityColorRenderer.render(characterEntity);
 				}

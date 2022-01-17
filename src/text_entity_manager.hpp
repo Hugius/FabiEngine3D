@@ -8,10 +8,10 @@
 
 using std::unordered_map;
 
-class TextEntityManager final : public BaseEntityManager
+class Text2dEntityManager final : public BaseEntityManager
 {
 public:
-	TextEntityManager();
+	Text2dEntityManager();
 
 	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
@@ -21,13 +21,13 @@ public:
 
 	const bool isEntityExisting(const string& ID) const;
 
-	const unordered_map<string, shared_ptr<TextEntity>>& getEntities();
-	shared_ptr<TextEntity> getEntity(const string& ID);
+	const unordered_map<string, shared_ptr<Text2dEntity>>& getEntities();
+	shared_ptr<Text2dEntity> getEntity(const string& ID);
 
 private:
 	const shared_ptr<VertexBuffer> _mesh;
 
-	unordered_map<string, shared_ptr<TextEntity>> _entities;
+	unordered_map<string, shared_ptr<Text2dEntity>> _entities;
 
 	shared_ptr<RenderBus> _renderBus = nullptr;
 };

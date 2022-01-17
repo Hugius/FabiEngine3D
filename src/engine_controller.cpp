@@ -181,7 +181,7 @@ void EngineController::initialize()
 		_fe3d->misc_cacheImages(imagePaths);
 
 		_fe3d->quad2d_create("@@cursor", true);
-		_fe3d->quad2d_setSize("@@cursor", fvec2(CURSOR_QUAD2D_SIZE.x, (CURSOR_QUAD2D_SIZE.y * Tools::getWindowAspectRatio())));
+		_fe3d->quad2d_setSize("@@cursor", fvec2(CURSOR_SIZE.x, (CURSOR_SIZE.y * Tools::getWindowAspectRatio())));
 		_fe3d->quad2d_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.tga");
 		_fe3d->misc_setCursorEntityID("@@cursor");
 		_fe3d->misc_setCursorVisible(false);

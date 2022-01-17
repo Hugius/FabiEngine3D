@@ -27,7 +27,7 @@ const vector<string> BillboardEditor::getImagePathsFromFile() const
 		return {};
 	}
 
-	vector<string> texturePaths;
+	vector<string> imagePaths;
 	string line;
 	while(getline(file, line))
 	{
@@ -63,7 +63,7 @@ const vector<string> BillboardEditor::getImagePathsFromFile() const
 				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 			}
 
-			texturePaths.push_back(diffuseMapPath);
+			imagePaths.push_back(diffuseMapPath);
 		}
 
 		if(!emissionMapPath.empty())
@@ -73,13 +73,13 @@ const vector<string> BillboardEditor::getImagePathsFromFile() const
 				emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 			}
 
-			texturePaths.push_back(emissionMapPath);
+			imagePaths.push_back(emissionMapPath);
 		}
 	}
 
 	file.close();
 
-	return texturePaths;
+	return imagePaths;
 }
 
 const bool BillboardEditor::loadFromFile()

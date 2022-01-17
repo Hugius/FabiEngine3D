@@ -26,7 +26,7 @@ const vector<string> TextEditor::getImagePathsFromFile() const
 		return {};
 	}
 
-	vector<string> texturePaths;
+	vector<string> imagePaths;
 	string line;
 	while(getline(file, line))
 	{
@@ -47,13 +47,13 @@ const vector<string> TextEditor::getImagePathsFromFile() const
 				fontMapPath = string("projects\\" + _currentProjectID + "\\" + fontMapPath);
 			}
 
-			texturePaths.push_back(fontMapPath);
+			imagePaths.push_back(fontMapPath);
 		}
 	}
 
 	file.close();
 
-	return texturePaths;
+	return imagePaths;
 }
 
 const bool TextEditor::loadFromFile()

@@ -26,7 +26,7 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 		return {};
 	}
 
-	vector<string> texturePaths;
+	vector<string> imagePaths;
 	string line;
 	while(getline(file, line))
 	{
@@ -47,13 +47,13 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 			}
 
-			texturePaths.push_back(diffuseMapPath);
+			imagePaths.push_back(diffuseMapPath);
 		}
 	}
 
 	file.close();
 
-	return texturePaths;
+	return imagePaths;
 }
 
 const bool Quad2dEditor::loadFromFile()
@@ -99,7 +99,7 @@ const bool Quad2dEditor::loadFromFile()
 
 			_fe3d->quad2d_setVisible(quadID, false);
 			_fe3d->quad2d_setPosition(quadID, Tools::convertPositionToViewport(fvec2(0.0f)));
-			_fe3d->quad2d_setSize(quadID, Tools::convertSizeToViewport(fvec2(QUAD2D_SIZE.x, (QUAD2D_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->quad2d_setSize(quadID, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->quad2d_setColor(quadID, color);
 			_fe3d->quad2d_setTransparency(quadID, transparency);
 

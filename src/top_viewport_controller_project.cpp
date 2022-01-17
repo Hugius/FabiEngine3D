@@ -131,15 +131,15 @@ void TopViewportController::_updateProjectLoading()
 			_currentProjectID = clickedButtonID;
 			_applyProjectChange();
 
-			auto skyTexturePaths = _skyEditor->getImagePathsFromFile();
+			auto skyImagePaths = _skyEditor->getImagePathsFromFile();
 			auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
-			auto terrainTexturePaths = _terrainEditor->getImagePathsFromFile();
-			auto waterTexturePaths = _waterEditor->getImagePathsFromFile();
+			auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
+			auto waterImagePaths = _waterEditor->getImagePathsFromFile();
 			auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
-			auto modelTexturePaths = _modelEditor->getImagePathsFromFile();
-			auto billboardTexturePaths = _billboardEditor->getImagePathsFromFile();
-			auto quadTexturePaths = _quad2dEditor->getImagePathsFromFile();
-			auto textTexturePaths = _textEditor->getImagePathsFromFile();
+			auto modelImagePaths = _modelEditor->getImagePathsFromFile();
+			auto billboardImagePaths = _billboardEditor->getImagePathsFromFile();
+			auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
+			auto textImagePaths = _textEditor->getImagePathsFromFile();
 			auto audioPaths = _soundEditor->getAudioPathsFromFile();
 
 			_fe3d->misc_cacheMeshes(modelMeshPaths);
@@ -147,12 +147,12 @@ void TopViewportController::_updateProjectLoading()
 			_fe3d->misc_cacheImages(terrainImagePaths);
 
 			vector<string> imagePaths;
-			imagePaths.insert(imagePaths.end(), skyTexturePaths.begin(), skyTexturePaths.end());
-			imagePaths.insert(imagePaths.end(), terrainTexturePaths.begin(), terrainTexturePaths.end());
-			imagePaths.insert(imagePaths.end(), waterTexturePaths.begin(), waterTexturePaths.end());
-			imagePaths.insert(imagePaths.end(), modelTexturePaths.begin(), modelTexturePaths.end());
-			imagePaths.insert(imagePaths.end(), billboardTexturePaths.begin(), billboardTexturePaths.end());
-			imagePaths.insert(imagePaths.end(), quadTexturePaths.begin(), quadTexturePaths.end());
+			imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
+			imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
+			imagePaths.insert(imagePaths.end(), waterImagePaths.begin(), waterImagePaths.end());
+			imagePaths.insert(imagePaths.end(), modelImagePaths.begin(), modelImagePaths.end());
+			imagePaths.insert(imagePaths.end(), billboardImagePaths.begin(), billboardImagePaths.end());
+			imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
 			_fe3d->misc_cacheImages(imagePaths);
 
 			_fe3d->misc_cacheAudios(audioPaths);

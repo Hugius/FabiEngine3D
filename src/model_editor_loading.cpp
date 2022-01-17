@@ -80,7 +80,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 		return {};
 	}
 
-	vector<string> texturePaths;
+	vector<string> imagePaths;
 	string line;
 	while(getline(file, line))
 	{
@@ -164,7 +164,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 						diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 					}
 
-					texturePaths.push_back(diffuseMapPath);
+					imagePaths.push_back(diffuseMapPath);
 				}
 
 				if(!emissionMapPath.empty())
@@ -174,7 +174,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 						emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 					}
 
-					texturePaths.push_back(emissionMapPath);
+					imagePaths.push_back(emissionMapPath);
 				}
 
 				if(!specularMapPath.empty())
@@ -184,7 +184,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 						specularMapPath = string("projects\\" + _currentProjectID + "\\" + specularMapPath);
 					}
 
-					texturePaths.push_back(specularMapPath);
+					imagePaths.push_back(specularMapPath);
 				}
 
 				if(!reflectionMapPath.empty())
@@ -194,7 +194,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 						reflectionMapPath = string("projects\\" + _currentProjectID + "\\" + reflectionMapPath);
 					}
 
-					texturePaths.push_back(reflectionMapPath);
+					imagePaths.push_back(reflectionMapPath);
 				}
 
 				if(!normalMapPath.empty())
@@ -204,7 +204,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 						normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 					}
 
-					texturePaths.push_back(normalMapPath);
+					imagePaths.push_back(normalMapPath);
 				}
 			}
 		}
@@ -212,7 +212,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 	file.close();
 
-	return texturePaths;
+	return imagePaths;
 }
 
 const bool ModelEditor::loadFromFile()

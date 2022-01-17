@@ -27,7 +27,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		return {};
 	}
 
-	vector<string> texturePaths;
+	vector<string> imagePaths;
 	string line;
 	while(getline(file, line))
 	{
@@ -86,7 +86,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 				heightMapPath = string("projects\\" + _currentProjectID + "\\" + heightMapPath);
 			}
 
-			texturePaths.push_back(heightMapPath);
+			imagePaths.push_back(heightMapPath);
 		}
 
 		if(!diffuseMapPath.empty())
@@ -96,7 +96,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 			}
 
-			texturePaths.push_back(diffuseMapPath);
+			imagePaths.push_back(diffuseMapPath);
 		}
 
 		if(!normalMapPath.empty())
@@ -106,7 +106,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 				normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 			}
 
-			texturePaths.push_back(normalMapPath);
+			imagePaths.push_back(normalMapPath);
 		}
 
 		if(!redNormalMapPath.empty())
@@ -116,7 +116,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 				redNormalMapPath = string("projects\\" + _currentProjectID + "\\" + redNormalMapPath);
 			}
 
-			texturePaths.push_back(redNormalMapPath);
+			imagePaths.push_back(redNormalMapPath);
 		}
 
 		if(!greenNormalMapPath.empty())
@@ -126,7 +126,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 				greenNormalMapPath = string("projects\\" + _currentProjectID + "\\" + greenNormalMapPath);
 			}
 
-			texturePaths.push_back(greenNormalMapPath);
+			imagePaths.push_back(greenNormalMapPath);
 		}
 
 		if(!blueNormalMapPath.empty())
@@ -136,7 +136,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 				blueNormalMapPath = string("projects\\" + _currentProjectID + "\\" + blueNormalMapPath);
 			}
 
-			texturePaths.push_back(blueNormalMapPath);
+			imagePaths.push_back(blueNormalMapPath);
 		}
 
 		if(!blendMapPath.empty())
@@ -146,7 +146,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 				blendMapPath = string("projects\\" + _currentProjectID + "\\" + blendMapPath);
 			}
 
-			texturePaths.push_back(blendMapPath);
+			imagePaths.push_back(blendMapPath);
 		}
 
 		if(!redDiffuseMapPath.empty())
@@ -156,7 +156,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 				redDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + redDiffuseMapPath);
 			}
 
-			texturePaths.push_back(redDiffuseMapPath);
+			imagePaths.push_back(redDiffuseMapPath);
 		}
 
 		if(!greenDiffuseMapPath.empty())
@@ -166,7 +166,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 				greenDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + greenDiffuseMapPath);
 			}
 
-			texturePaths.push_back(greenDiffuseMapPath);
+			imagePaths.push_back(greenDiffuseMapPath);
 		}
 
 		if(!blueDiffuseMapPath.empty())
@@ -176,13 +176,13 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 				blueDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + blueDiffuseMapPath);
 			}
 
-			texturePaths.push_back(blueDiffuseMapPath);
+			imagePaths.push_back(blueDiffuseMapPath);
 		}
 	}
 
 	file.close();
 
-	return texturePaths;
+	return imagePaths;
 }
 
 const bool TerrainEditor::loadFromFile()

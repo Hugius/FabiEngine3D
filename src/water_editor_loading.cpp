@@ -27,7 +27,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 		return {};
 	}
 
-	vector<string> texturePaths;
+	vector<string> imagePaths;
 	string line;
 	while(getline(file, line))
 	{
@@ -56,7 +56,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 				dudvMapPath = string("projects\\" + _currentProjectID + "\\" + dudvMapPath);
 			}
 
-			texturePaths.push_back(dudvMapPath);
+			imagePaths.push_back(dudvMapPath);
 		}
 
 		if(!normalMapPath.empty())
@@ -66,7 +66,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 				normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 			}
 
-			texturePaths.push_back(normalMapPath);
+			imagePaths.push_back(normalMapPath);
 		}
 
 		if(!displacementMapPath.empty())
@@ -76,13 +76,13 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 				displacementMapPath = string("projects\\" + _currentProjectID + "\\" + displacementMapPath);
 			}
 
-			texturePaths.push_back(displacementMapPath);
+			imagePaths.push_back(displacementMapPath);
 		}
 	}
 
 	file.close();
 
-	return texturePaths;
+	return imagePaths;
 }
 
 const bool WaterEditor::loadFromFile()

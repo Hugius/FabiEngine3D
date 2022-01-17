@@ -5,7 +5,7 @@
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
 #include "model_editor.hpp"
-#include "billboard_editor.hpp"
+#include "quad3d_editor.hpp"
 #include "quad2d_editor.hpp"
 #include "text2d_editor.hpp"
 #include "animation3d_editor.hpp"

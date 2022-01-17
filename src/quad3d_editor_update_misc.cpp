@@ -1,4 +1,4 @@
-#include "billboard_editor.hpp"
+#include "quad3d_editor.hpp"
 #include "logger.hpp"
 
 using std::max;

@@ -84,7 +84,7 @@
     <ClCompile Include="..\..\..\src\aabb_entity_color_renderer.cpp">
       <Filter>Renderer\Entity\Color</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_entity_color_renderer.cpp">
+    <ClCompile Include="..\..\..\src\quad3d_entity_color_renderer.cpp">
       <Filter>Renderer\Entity\Color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_entity_color_renderer.cpp">
@@ -108,13 +108,13 @@
     <ClCompile Include="..\..\..\src\model_entity_depth_renderer.cpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_entity_depth_renderer.cpp">
+    <ClCompile Include="..\..\..\src\quad3d_entity_depth_renderer.cpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_entity_shadow_renderer.cpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_entity_shadow_renderer.cpp">
+    <ClCompile Include="..\..\..\src\quad3d_entity_shadow_renderer.cpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\bloom_renderer.cpp">
@@ -182,7 +182,7 @@
     <ClInclude Include="..\..\..\src\aabb_entity_color_renderer.hpp">
       <Filter>Renderer\Entity\Color</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\billboard_entity_color_renderer.hpp">
+    <ClInclude Include="..\..\..\src\quad3d_entity_color_renderer.hpp">
       <Filter>Renderer\Entity\Color</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad2d_entity_color_renderer.hpp">
@@ -206,13 +206,13 @@
     <ClInclude Include="..\..\..\src\model_entity_depth_renderer.hpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\billboard_entity_depth_renderer.hpp">
+    <ClInclude Include="..\..\..\src\quad3d_entity_depth_renderer.hpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\model_entity_shadow_renderer.hpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\billboard_entity_shadow_renderer.hpp">
+    <ClInclude Include="..\..\..\src\quad3d_entity_shadow_renderer.hpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\bloom_renderer.hpp">
@@ -292,10 +292,10 @@
     <None Include="..\..\..\app\engine\shaders\aabb_entity_color_shader.vert">
       <Filter>Shaders\Entity\Color</Filter>
     </None>
-    <None Include="..\..\..\app\engine\shaders\billboard_entity_color_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\quad3d_entity_color_shader.frag">
       <Filter>Shaders\Entity\Color</Filter>
     </None>
-    <None Include="..\..\..\app\engine\shaders\billboard_entity_color_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\quad3d_entity_color_shader.vert">
       <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\quad2d_entity_color_shader.frag">
@@ -340,16 +340,16 @@
     <None Include="..\..\..\app\engine\shaders\model_entity_depth_shader.frag">
       <Filter>Shaders\Entity\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\engine\shaders\billboard_entity_depth_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\quad3d_entity_depth_shader.vert">
       <Filter>Shaders\Entity\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\engine\shaders\billboard_entity_depth_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\quad3d_entity_depth_shader.frag">
       <Filter>Shaders\Entity\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\engine\shaders\billboard_entity_shadow_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\quad3d_entity_shadow_shader.vert">
       <Filter>Shaders\Entity\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\engine\shaders\billboard_entity_shadow_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\quad3d_entity_shadow_shader.frag">
       <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\model_entity_shadow_shader.vert">

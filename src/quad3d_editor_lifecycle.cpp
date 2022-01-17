@@ -1,6 +1,6 @@
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
-#include "billboard_editor.hpp"
+#include "quad3d_editor.hpp"
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 

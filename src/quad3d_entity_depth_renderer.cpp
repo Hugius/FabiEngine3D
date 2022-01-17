@@ -1,4 +1,4 @@
-#include "billboard_entity_depth_renderer.hpp"
+#include "quad3d_entity_depth_renderer.hpp"
 
 void Quad3dEntityDepthRenderer::bind()
 {

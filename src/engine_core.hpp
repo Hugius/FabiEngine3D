@@ -12,7 +12,7 @@
 #include "terrain_entity_manager.hpp"
 #include "water_entity_manager.hpp"
 #include "model_entity_manager.hpp"
-#include "billboard_entity_manager.hpp"
+#include "quad3d_entity_manager.hpp"
 #include "aabb_entity_manager.hpp"
 #include "pointlight_entity_manager.hpp"
 #include "spotlight_entity_manager.hpp"

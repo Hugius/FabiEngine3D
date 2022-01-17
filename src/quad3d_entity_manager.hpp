@@ -3,7 +3,7 @@
 #include "base_entity_manager.hpp"
 #include "vertex_buffer.hpp"
 #include "camera.hpp"
-#include "billboard_entity.hpp"
+#include "quad3d_entity.hpp"
 
 #include <unordered_map>
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_renderer.hpp"
-#include "billboard_entity.hpp"
+#include "quad3d_entity.hpp"
 
 class Quad3dEntityDepthRenderer final : public BaseRenderer
 {

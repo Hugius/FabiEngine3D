@@ -1,4 +1,4 @@
-#include "billboard_entity_color_renderer.hpp"
+#include "quad3d_entity_color_renderer.hpp"
 #include "configuration.hpp"
 
 void Quad3dEntityColorRenderer::bind()

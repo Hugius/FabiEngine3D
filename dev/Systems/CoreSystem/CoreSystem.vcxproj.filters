@@ -69,7 +69,7 @@
     <ClCompile Include="..\..\..\src\engine_interface_entity_aabb_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_billboard_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_quad3d_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_entity_quad2d_get.cpp">
@@ -90,7 +90,7 @@
     <ClCompile Include="..\..\..\src\engine_interface_entity_spotlight_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_billboard_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_quad3d_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_entity_model_set.cpp">

@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Billboard Editor">
-      <UniqueIdentifier>{063d7b87-4367-42d9-9cd8-ec43b6c6859d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Billboard Editor\Miscellaneous">
-      <UniqueIdentifier>{98e7159a-73c1-46c3-b837-f2fd96b8cf0a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Model Editor">
       <UniqueIdentifier>{d6928243-9010-4c7a-a3c8-82d952906238}</UniqueIdentifier>
     </Filter>
@@ -67,12 +61,6 @@
     <Filter Include="Water Editor\Persistence">
       <UniqueIdentifier>{9cd6b5a4-b16f-40e7-afdb-1170458e9ec6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Billboard Editor\Persistence">
-      <UniqueIdentifier>{56c13b35-dfec-489b-8bb5-898cc76156f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Billboard Editor\Update">
-      <UniqueIdentifier>{4ff3dc37-6430-4a6e-b964-a56600422763}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Model Editor\Update">
       <UniqueIdentifier>{8e81a6c6-f9b1-4f97-9869-cc4660b85b01}</UniqueIdentifier>
     </Filter>
@@ -90,9 +78,6 @@
     </Filter>
     <Filter Include="World Editor\Update">
       <UniqueIdentifier>{e1dc405a-d92b-442e-a58f-85a3da39f3ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World Editor\Update\Billboard">
-      <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
     </Filter>
     <Filter Include="World Editor\Update\Pointlight">
       <UniqueIdentifier>{6ec4ef62-8c51-427c-9abf-329dbdc1b9b2}</UniqueIdentifier>
@@ -135,9 +120,6 @@
     </Filter>
     <Filter Include="Sound Editor\Update">
       <UniqueIdentifier>{e2ab1721-0c9c-494a-9bf7-5e9c85a34bef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Billboard Editor\Base">
-      <UniqueIdentifier>{def1ca50-9deb-4baf-be73-c5b864aeb462}</UniqueIdentifier>
     </Filter>
     <Filter Include="Model Editor\Base">
       <UniqueIdentifier>{c81a28c3-8641-4386-a44f-2e55a8e40ff8}</UniqueIdentifier>
@@ -229,6 +211,24 @@
     <Filter Include="Animation2d Editor\Base">
       <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quad3d Editor">
+      <UniqueIdentifier>{063d7b87-4367-42d9-9cd8-ec43b6c6859d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad3d Editor\Miscellaneous">
+      <UniqueIdentifier>{98e7159a-73c1-46c3-b837-f2fd96b8cf0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad3d Editor\Persistence">
+      <UniqueIdentifier>{56c13b35-dfec-489b-8bb5-898cc76156f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad3d Editor\Update">
+      <UniqueIdentifier>{4ff3dc37-6430-4a6e-b964-a56600422763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad3d Editor\Base">
+      <UniqueIdentifier>{def1ca50-9deb-4baf-be73-c5b864aeb462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Update\Quad3d">
+      <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -255,17 +255,17 @@
     <ClCompile Include="..\..\..\src\sound_editor_update_menu.cpp">
       <Filter>Sound Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_editor_lifecycle.cpp">
-      <Filter>Billboard Editor\Base</Filter>
+    <ClCompile Include="..\..\..\src\quad3d_editor_lifecycle.cpp">
+      <Filter>Quad3d Editor\Base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_editor_misc.cpp">
-      <Filter>Billboard Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\quad3d_editor_misc.cpp">
+      <Filter>Quad3d Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_editor_update_menu.cpp">
-      <Filter>Billboard Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_menu.cpp">
+      <Filter>Quad3d Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_editor_update_texturing.cpp">
-      <Filter>Billboard Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_texturing.cpp">
+      <Filter>Quad3d Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_editor_misc.cpp">
       <Filter>Sky Editor\Miscellaneous</Filter>
@@ -330,14 +330,14 @@
     <ClCompile Include="..\..\..\src\world_editor_misc_other.cpp">
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_billboard_update_edit.cpp">
-      <Filter>World Editor\Update\Billboard</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_edit.cpp">
+      <Filter>World Editor\Update\Quad3d</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_billboard_update_menu.cpp">
-      <Filter>World Editor\Update\Billboard</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_menu.cpp">
+      <Filter>World Editor\Update\Quad3d</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_billboard_update_place.cpp">
-      <Filter>World Editor\Update\Billboard</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_place.cpp">
+      <Filter>World Editor\Update\Quad3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_model_update_edit.cpp">
       <Filter>World Editor\Update\Model</Filter>
@@ -375,8 +375,8 @@
     <ClCompile Include="..\..\..\src\animation3d_editor_update_misc.cpp">
       <Filter>Animation3d Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_editor_update_misc.cpp">
-      <Filter>Billboard Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_misc.cpp">
+      <Filter>Quad3d Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_editor_update_menu.cpp">
       <Filter>Terrain Editor\Update</Filter>
@@ -450,11 +450,11 @@
     <ClCompile Include="..\..\..\src\world_editor_terrain_update.cpp">
       <Filter>World Editor\Update\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_editor_update_lighting.cpp">
-      <Filter>Billboard Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_lighting.cpp">
+      <Filter>Quad3d Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_editor_update_miscellaneous.cpp">
-      <Filter>Billboard Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_miscellaneous.cpp">
+      <Filter>Quad3d Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_settings_update_lighting.cpp">
       <Filter>World Editor\Update\Settings</Filter>
@@ -498,8 +498,8 @@
     <ClCompile Include="..\..\..\src\water_editor_saving.cpp">
       <Filter>Water Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_editor_saving.cpp">
-      <Filter>Billboard Editor\Persistence</Filter>
+    <ClCompile Include="..\..\..\src\quad3d_editor_saving.cpp">
+      <Filter>Quad3d Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound_editor_saving.cpp">
       <Filter>Sound Editor\Persistence</Filter>
@@ -528,8 +528,8 @@
     <ClCompile Include="..\..\..\src\water_editor_loading.cpp">
       <Filter>Water Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_editor_loading.cpp">
-      <Filter>Billboard Editor\Persistence</Filter>
+    <ClCompile Include="..\..\..\src\quad3d_editor_loading.cpp">
+      <Filter>Quad3d Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_editor_loading.cpp">
       <Filter>Animation3d Editor\Persistence</Filter>
@@ -638,8 +638,8 @@
     <ClInclude Include="..\..\..\src\sound_editor.hpp">
       <Filter>Sound Editor\Base</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\billboard_editor.hpp">
-      <Filter>Billboard Editor\Base</Filter>
+    <ClInclude Include="..\..\..\src\quad3d_editor.hpp">
+      <Filter>Quad3d Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sky_editor.hpp">
       <Filter>Sky Editor\Base</Filter>

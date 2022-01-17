@@ -1,4 +1,4 @@
-#include "billboard_entity.hpp"
+#include "quad3d_entity.hpp"
 #include "logger.hpp"
 
 #include <algorithm>

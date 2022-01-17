@@ -4,7 +4,7 @@
 #include "vertex_buffer.hpp"
 #include "aabb_entity.hpp"
 #include "model_entity_manager.hpp"
-#include "billboard_entity_manager.hpp"
+#include "quad3d_entity_manager.hpp"
 
 #include <unordered_map>
 

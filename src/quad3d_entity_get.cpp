@@ -1,4 +1,4 @@
-#include "billboard_entity.hpp"
+#include "quad3d_entity.hpp"
 
 const shared_ptr<VertexBuffer> Quad3dEntity::getMesh() const
 {

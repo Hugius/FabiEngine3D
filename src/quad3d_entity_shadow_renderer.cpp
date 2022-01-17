@@ -1,4 +1,4 @@
-#include "billboard_entity_shadow_renderer.hpp"
+#include "quad3d_entity_shadow_renderer.hpp"
 
 void Quad3dEntityShadowRenderer::bind()
 {

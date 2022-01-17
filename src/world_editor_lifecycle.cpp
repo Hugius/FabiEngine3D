@@ -82,7 +82,7 @@ void WorldEditor::load()
 		_fe3d->sound3d_setMaxDistance(ID, DEFAULT_SOUND_MAX_DISTANCE);
 
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundPlace");
-		screen->getScrollingList("sounds")->createButton(ID, ID.substr(1));
+		screen->getScrollingList("soundList")->createButton(ID, ID.substr(1));
 	}
 
 	_gui->getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);

@@ -48,7 +48,7 @@ void WorldEditor::_updatePointlightMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlights")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteButtons();
 
 			auto IDs = _fe3d->pointlight_getIDs();
 			sort(IDs.begin(), IDs.end());
@@ -61,7 +61,7 @@ void WorldEditor::_updatePointlightMenu()
 					reverse(rawID.begin(), rawID.end());
 					reverse(pointlightID.begin(), pointlightID.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlights")->createButton(pointlightID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createButton(pointlightID, rawID);
 				}
 			}
 		}
@@ -74,11 +74,11 @@ void WorldEditor::_updatePointlightChoosingMenu()
 
 	if(screen->getID() == "worldEditorMenuPointlightChoice")
 	{
-		for(const auto& button : screen->getScrollingList("pointlights")->getButtons())
+		for(const auto& button : screen->getScrollingList("pointlightList")->getButtons())
 		{
 			if(!_fe3d->pointlight_isExisting(button->getID()))
 			{
-				screen->getScrollingList("pointlights")->deleteButton(button->getID());
+				screen->getScrollingList("pointlightList")->deleteButton(button->getID());
 				break;
 			}
 		}
@@ -87,7 +87,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 		{
 			if(pointlightID[0] != '@')
 			{
-				if(screen->getScrollingList("pointlights")->getButton(pointlightID)->isHovered())
+				if(screen->getScrollingList("pointlightList")->getButton(pointlightID)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{

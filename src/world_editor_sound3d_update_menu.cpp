@@ -21,7 +21,7 @@ void WorldEditor::_updateSoundMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSoundChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("sounds")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->deleteButtons();
 
 			auto IDs = _fe3d->sound3d_getIDs();
 			sort(IDs.begin(), IDs.end());
@@ -34,7 +34,7 @@ void WorldEditor::_updateSoundMenu()
 					reverse(rawID.begin(), rawID.end());
 					reverse(soundID.begin(), soundID.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("sounds")->createButton(soundID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->createButton(soundID, rawID);
 				}
 			}
 		}
@@ -69,7 +69,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 		{
 			for(const auto& soundID : _soundEditor->getLoadedIDs())
 			{
-				if(screen->getScrollingList("sounds")->getButton(soundID)->isHovered())
+				if(screen->getScrollingList("soundList")->getButton(soundID)->isHovered())
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
@@ -108,11 +108,11 @@ void WorldEditor::_updateSoundChoosingMenu()
 
 	if(screen->getID() == "worldEditorMenuSoundChoice")
 	{
-		for(const auto& button : screen->getScrollingList("sounds")->getButtons())
+		for(const auto& button : screen->getScrollingList("soundList")->getButtons())
 		{
 			if(!_fe3d->sound3d_isExisting(button->getID()))
 			{
-				screen->getScrollingList("sounds")->deleteButton(button->getID());
+				screen->getScrollingList("soundList")->deleteButton(button->getID());
 				break;
 			}
 		}
@@ -121,7 +121,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 		{
 			if(soundID[0] != '@')
 			{
-				if(screen->getScrollingList("sounds")->getButton(soundID)->isHovered())
+				if(screen->getScrollingList("soundList")->getButton(soundID)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{

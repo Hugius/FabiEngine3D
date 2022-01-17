@@ -46,7 +46,7 @@ void WorldEditor::_updateReflectionMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuReflectionChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflections")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->deleteButtons();
 
 			auto IDs = _fe3d->reflection_getIDs();
 			sort(IDs.begin(), IDs.end());
@@ -59,7 +59,7 @@ void WorldEditor::_updateReflectionMenu()
 					reverse(rawID.begin(), rawID.end());
 					reverse(reflectionID.begin(), reflectionID.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflections")->createButton(reflectionID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->createButton(reflectionID, rawID);
 				}
 			}
 		}
@@ -72,11 +72,11 @@ void WorldEditor::_updateReflectionChoosingMenu()
 
 	if(screen->getID() == "worldEditorMenuReflectionChoice")
 	{
-		for(const auto& button : screen->getScrollingList("reflections")->getButtons())
+		for(const auto& button : screen->getScrollingList("reflectionList")->getButtons())
 		{
 			if(!_fe3d->reflection_isExisting(button->getID()))
 			{
-				screen->getScrollingList("reflections")->deleteButton(button->getID());
+				screen->getScrollingList("reflectionList")->deleteButton(button->getID());
 				break;
 			}
 		}
@@ -85,7 +85,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 		{
 			if(reflectionID[0] != '@')
 			{
-				if(screen->getScrollingList("reflections")->getButton(reflectionID)->isHovered())
+				if(screen->getScrollingList("reflectionList")->getButton(reflectionID)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{

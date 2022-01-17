@@ -15,7 +15,7 @@ void LeftViewportController::initialize()
 	window->getScreen("main")->createButton("terrainEditor", fvec2(0.0f, positions[1]), fvec2(TW("Terrain"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("waterEditor", fvec2(0.0f, positions[2]), fvec2(TW("Water"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("modelEditor", fvec2(0.0f, positions[3]), fvec2(TW("Model"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Model", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("quad3dEditor", fvec2(0.0f, positions[4]), fvec2(TW("Quad3d"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Quad3d", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("quad3dEditor", fvec2(0.0f, positions[4]), fvec2(TW("Quad3D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Quad3D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("quad2dEditor", fvec2(0.0f, positions[5]), fvec2(TW("Quad2D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Quad2D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("text2dEditor", fvec2(0.0f, positions[6]), fvec2(TW("Text2D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Text2D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[7]), fvec2(TW("Animation2D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animation2D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);

@@ -145,21 +145,6 @@
     <Filter Include="Base">
       <UniqueIdentifier>{b047c6b1-8ea5-4051-aec8-8206cf6e491b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quad2d Editor">
-      <UniqueIdentifier>{cf5d8c21-2c15-4c9b-8562-61f1520e05ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quad2d Editor\Base">
-      <UniqueIdentifier>{b4a13230-0910-4df3-bf23-455149a99feb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quad2d Editor\Miscellaneous">
-      <UniqueIdentifier>{7866e10d-8438-4b1b-a551-903bad71e8e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quad2d Editor\Update">
-      <UniqueIdentifier>{eab4366f-6527-4205-8b0c-f19839736203}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quad2d Editor\Persistence">
-      <UniqueIdentifier>{1a8f2de0-976d-4e2e-961a-fa167895339c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Text2D Editor">
       <UniqueIdentifier>{6e6d9451-17f4-4711-9e99-c72041411867}</UniqueIdentifier>
     </Filter>
@@ -228,6 +213,21 @@
     </Filter>
     <Filter Include="World Editor\Update\Quad3d">
       <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad2D Editor">
+      <UniqueIdentifier>{cf5d8c21-2c15-4c9b-8562-61f1520e05ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad2D Editor\Base">
+      <UniqueIdentifier>{b4a13230-0910-4df3-bf23-455149a99feb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad2D Editor\Miscellaneous">
+      <UniqueIdentifier>{7866e10d-8438-4b1b-a551-903bad71e8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad2D Editor\Update">
+      <UniqueIdentifier>{eab4366f-6527-4205-8b0c-f19839736203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad2D Editor\Persistence">
+      <UniqueIdentifier>{1a8f2de0-976d-4e2e-961a-fa167895339c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -583,22 +583,22 @@
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_editor_lifecycle.cpp">
-      <Filter>Quad2d Editor\Base</Filter>
+      <Filter>Quad2D Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_editor_loading.cpp">
-      <Filter>Quad2d Editor\Persistence</Filter>
+      <Filter>Quad2D Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_editor_saving.cpp">
-      <Filter>Quad2d Editor\Persistence</Filter>
+      <Filter>Quad2D Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_editor_misc.cpp">
-      <Filter>Quad2d Editor\Miscellaneous</Filter>
+      <Filter>Quad2D Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_editor_update_misc.cpp">
-      <Filter>Quad2d Editor\Update</Filter>
+      <Filter>Quad2D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_editor_update_menu.cpp">
-      <Filter>Quad2d Editor\Update</Filter>
+      <Filter>Quad2D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_update_misc_highlight.cpp">
       <Filter>World Editor\Update\Miscellaneous</Filter>
@@ -666,7 +666,7 @@
       <Filter>Animation2d Editor\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad2d_editor.hpp">
-      <Filter>Quad2d Editor\Base</Filter>
+      <Filter>Quad2D Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\base_editor.hpp">
       <Filter>Base</Filter>

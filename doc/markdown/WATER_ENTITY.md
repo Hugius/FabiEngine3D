@@ -66,4 +66,4 @@
   - Constraints: none
 - **Quality**: determines what is captured by reflections/refractions
   - Type: `enumeration`
-  - Constraints: `SKY` or `SKY_TERRAIN` or `SKY_TERRAIN_MODELS` or `SKY_TERRAIN_MODELS_BILLBOARDS`
+  - Constraints: `SKY` or `SKY_TERRAIN` or `SKY_TERRAIN_MODEL` or `SKY_TERRAIN_MODELS_QUAD3D`

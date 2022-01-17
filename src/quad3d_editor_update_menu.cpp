@@ -12,7 +12,7 @@ void Quad3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("quad3dCreate", "Create Quad3d", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("quad3dCreate", "Create Quad3D", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingQuad3d = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -22,7 +22,7 @@ void Quad3dEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("quad3dList", "Edit Quad3d", fvec2(-0.5f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("quad3dList", "Edit Quad3D", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingQuad3d = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -32,7 +32,7 @@ void Quad3dEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("quad3dList", "Delete Quad3d", fvec2(-0.5f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("quad3dList", "Delete Quad3D", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingQuad3d = true;
 			_isDeletingQuad3d = true;
 		}

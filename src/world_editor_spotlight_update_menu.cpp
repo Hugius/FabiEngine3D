@@ -47,7 +47,7 @@ void WorldEditor::_updateSpotlightMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightChoice");
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlights")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->deleteButtons();
 
 			auto IDs = _fe3d->spotlight_getIDs();
 			sort(IDs.begin(), IDs.end());
@@ -60,7 +60,7 @@ void WorldEditor::_updateSpotlightMenu()
 					reverse(rawID.begin(), rawID.end());
 					reverse(spotlightID.begin(), spotlightID.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlights")->createButton(spotlightID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createButton(spotlightID, rawID);
 				}
 			}
 		}
@@ -73,11 +73,11 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 
 	if(screen->getID() == "worldEditorMenuSpotlightChoice")
 	{
-		for(const auto& button : screen->getScrollingList("spotlights")->getButtons())
+		for(const auto& button : screen->getScrollingList("spotlightList")->getButtons())
 		{
 			if(!_fe3d->spotlight_isExisting(button->getID()))
 			{
-				screen->getScrollingList("spotlights")->deleteButton(button->getID());
+				screen->getScrollingList("spotlightList")->deleteButton(button->getID());
 				break;
 			}
 		}
@@ -86,7 +86,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 		{
 			if(spotlightID[0] != '@')
 			{
-				if(screen->getScrollingList("spotlights")->getButton(spotlightID)->isHovered())
+				if(screen->getScrollingList("spotlightList")->getButton(spotlightID)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{

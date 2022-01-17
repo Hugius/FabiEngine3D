@@ -91,8 +91,8 @@ void SkyEditor::_updateSkyCreating()
 				_loadedSkyIDs.push_back(newSkyID);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-				_fe3d->text_setContent(_gui->getOverlay()->getTextField("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
-				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("skyID")->getEntityID(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyID")->getEntityID(), true);
 				_isCreatingSky = false;
 			}
 		}
@@ -119,8 +119,8 @@ void SkyEditor::_updateSkyChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 
-					_fe3d->text_setContent(_gui->getOverlay()->getTextField("skyID")->getEntityID(), "Sky: " + _currentSkyID.substr(1), 0.025f);
-					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("skyID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("skyID")->getEntityID(), "Sky: " + _currentSkyID.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyID")->getEntityID(), true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("skyList");

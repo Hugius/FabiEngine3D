@@ -13,7 +13,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 			if(_isEditorLoaded)
 			{
-				_fe3d->text_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(animation.getFrameIndex() + 1), 0.025f);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(animation.getFrameIndex() + 1), 0.025f);
 			}
 
 			const auto frameIndex = animation.getFrameIndex();

@@ -10,13 +10,13 @@ void Text2dEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->text_isWireframed(_currentTextID))
+				if(_fe3d->text2d_isWireframed(_currentTextID))
 				{
-					_fe3d->text_setWireframed(_currentTextID, false);
+					_fe3d->text2d_setWireframed(_currentTextID, false);
 				}
 				else
 				{
-					_fe3d->text_setWireframed(_currentTextID, true);
+					_fe3d->text2d_setWireframed(_currentTextID, true);
 				}
 			}
 		}
@@ -56,19 +56,19 @@ void Text2dEditor::_updateTextCreating()
 				Logger::throwError("Text2dEditor::_updateTextCreating");
 			}
 
-			_fe3d->text_create(newTextID, true);
+			_fe3d->text2d_create(newTextID, true);
 
-			if(_fe3d->text_isExisting(newTextID))
+			if(_fe3d->text2d_isExisting(newTextID))
 			{
-				_fe3d->text_setPosition(newTextID, Tools::convertPositionToViewport(fvec2(0.0f)));
-				_fe3d->text_setSize(newTextID, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+				_fe3d->text2d_setPosition(newTextID, Tools::convertPositionToViewport(fvec2(0.0f)));
+				_fe3d->text2d_setSize(newTextID, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
 
 				_currentTextID = newTextID;
 				_loadedTextIDs.push_back(newTextID);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
-				_fe3d->text_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text: " + newTextID.substr(1), 0.025f);
-				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text: " + newTextID.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
 				_isCreatingText = false;
 			}
 		}
@@ -81,7 +81,7 @@ void Text2dEditor::_updateTextChoosing()
 	{
 		if(!_hoveredTextID.empty())
 		{
-			_fe3d->text_setVisible(_hoveredTextID, false);
+			_fe3d->text2d_setVisible(_hoveredTextID, false);
 		}
 
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("textList");
@@ -99,11 +99,11 @@ void Text2dEditor::_updateTextChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 
-					_fe3d->text_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text: " + selectedButtonID.substr(1), 0.025f);
-					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text: " + selectedButtonID.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
 				}
 
-				_fe3d->text_setVisible(_currentTextID, true);
+				_fe3d->text2d_setVisible(_currentTextID, true);
 				_gui->getOverlay()->deleteChoiceForm("textList");
 				_isChoosingText = false;
 			}
@@ -121,7 +121,7 @@ void Text2dEditor::_updateTextChoosing()
 
 		if(!_hoveredTextID.empty())
 		{
-			_fe3d->text_setVisible(_hoveredTextID, true);
+			_fe3d->text2d_setVisible(_hoveredTextID, true);
 		}
 	}
 }
@@ -137,7 +137,7 @@ void Text2dEditor::_updateTextDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->text_delete(_currentTextID);
+			_fe3d->text2d_delete(_currentTextID);
 
 			_loadedTextIDs.erase(remove(_loadedTextIDs.begin(), _loadedTextIDs.end(), _currentTextID), _loadedTextIDs.end());
 			_currentTextID = "";

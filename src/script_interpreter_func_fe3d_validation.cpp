@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_validateFe3dText(const string& ID, bool isTemplat
 
 	if(isTemplate)
 	{
-		if(!_fe3d->text_isExisting("@" + ID))
+		if(!_fe3d->text2d_isExisting("@" + ID))
 		{
 			_throwScriptError("template Text2D entity does not exist!");
 			return false;
@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_validateFe3dText(const string& ID, bool isTemplat
 	}
 	else
 	{
-		if(!_fe3d->text_isExisting(ID))
+		if(!_fe3d->text2d_isExisting(ID))
 		{
 			_throwScriptError("Text2D entity does not exist!");
 			return false;

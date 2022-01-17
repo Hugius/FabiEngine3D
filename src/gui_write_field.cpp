@@ -12,7 +12,7 @@ GuiWriteField::GuiWriteField(shared_ptr<EngineInterface> fe3d, const string& par
 	_noLetters(noLetters),
 	_minusAllowed(minusAllowed)
 {
-	_fe3d->text_setContent(_textField->getEntityID(), "|", CHAR_WIDTH);
+	_fe3d->text2d_setContent(_textField->getEntityID(), "|", CHAR_WIDTH);
 }
 
 void GuiWriteField::update(bool isHoverable)
@@ -196,7 +196,7 @@ void GuiWriteField::_updateTyping()
 			passedBackspaceFrames = MAX_PASSED_BACKSPACE_FRAMES;
 		}
 
-		_fe3d->text_setContent(_textField->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
+		_fe3d->text2d_setContent(_textField->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
 
 		if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 		{
@@ -209,7 +209,7 @@ void GuiWriteField::_updateTyping()
 	}
 	else
 	{
-		_fe3d->text_setContent(_textField->getEntityID(), _currentTextContent, CHAR_WIDTH);
+		_fe3d->text2d_setContent(_textField->getEntityID(), _currentTextContent, CHAR_WIDTH);
 		_confirmedInput = false;
 	}
 }

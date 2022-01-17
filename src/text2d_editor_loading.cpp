@@ -91,17 +91,17 @@ const bool Text2dEditor::loadFromFile()
 
 		replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
 
-		_fe3d->text_create(textID, true);
+		_fe3d->text2d_create(textID, true);
 
-		if(_fe3d->text_isExisting(textID))
+		if(_fe3d->text2d_isExisting(textID))
 		{
 			_loadedTextIDs.push_back(textID);
 
-			_fe3d->text_setVisible(textID, false);
-			_fe3d->text_setPosition(textID, Tools::convertPositionToViewport(fvec2(0.0f)));
-			_fe3d->text_setSize(textID, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
-			_fe3d->text_setColor(textID, color);
-			_fe3d->text_setTransparency(textID, transparency);
+			_fe3d->text2d_setVisible(textID, false);
+			_fe3d->text2d_setPosition(textID, Tools::convertPositionToViewport(fvec2(0.0f)));
+			_fe3d->text2d_setSize(textID, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->text2d_setColor(textID, color);
+			_fe3d->text2d_setTransparency(textID, transparency);
 
 			if(!fontMapPath.empty())
 			{
@@ -110,8 +110,8 @@ const bool Text2dEditor::loadFromFile()
 					fontMapPath = string("projects\\" + _currentProjectID + "\\" + fontMapPath);
 				}
 
-				_fe3d->text_setFontMap(textID, fontMapPath);
-				_fe3d->text_setContent(textID, "Text123");
+				_fe3d->text2d_setFontMap(textID, fontMapPath);
+				_fe3d->text2d_setContent(textID, "Text123");
 			}
 		}
 	}

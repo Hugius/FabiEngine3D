@@ -195,11 +195,11 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	for(const auto& ID : _fe3d->text_getIDs())
+	for(const auto& ID : _fe3d->text2d_getIDs())
 	{
 		if(ID[0] != '@')
 		{
-			_fe3d->text_delete(ID);
+			_fe3d->text2d_delete(ID);
 		}
 	}
 

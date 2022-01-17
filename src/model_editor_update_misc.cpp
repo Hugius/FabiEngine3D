@@ -187,8 +187,8 @@ void ModelEditor::_updateModelCreating()
 				_loadedModelIDs.push_back(newModelID);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-				_fe3d->text_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
-				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
 				_isCreatingModel = false;
 			}
 		}
@@ -219,8 +219,8 @@ void ModelEditor::_updateModelChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
-					_fe3d->text_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
-					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
 				}
 
 				_fe3d->model_setVisible(_currentModelID, true);
@@ -288,8 +288,8 @@ void ModelEditor::_updatePartChoosing()
 				_currentPartID = selectedButtonID;
 				_hoveredPartID = "";
 
-				_fe3d->text_setContent(_gui->getOverlay()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
-				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), true);
 
 				_gui->getOverlay()->deleteChoiceForm("partList");
 				_isChoosingPart = false;

@@ -23,7 +23,7 @@ void Text2dEditor::unload()
 {
 	for(const auto& ID : _loadedTextIDs)
 	{
-		_fe3d->text_delete(ID);
+		_fe3d->text2d_delete(ID);
 	}
 
 	_unloadGUI();

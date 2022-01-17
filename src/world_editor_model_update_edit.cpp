@@ -245,7 +245,7 @@ void WorldEditor::_updateModelEditing()
 
 		if(_selectedModelID.empty() && _activeModelID.empty())
 		{
-			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
 		}
 	}
 }

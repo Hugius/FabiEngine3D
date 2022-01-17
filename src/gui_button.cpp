@@ -63,7 +63,7 @@ void GuiButton::_updateHovering(bool isHoverable)
 
 					if(_textField != nullptr)
 					{
-						_fe3d->text_setColor(_textField->getEntityID(), _textHoverColor);
+						_fe3d->text2d_setColor(_textField->getEntityID(), _textHoverColor);
 					}
 				}
 			}
@@ -75,7 +75,7 @@ void GuiButton::_updateHovering(bool isHoverable)
 
 			if(_textField != nullptr)
 			{
-				_fe3d->text_setColor(_textField->getEntityID(), _textField->getInitialColor());
+				_fe3d->text2d_setColor(_textField->getEntityID(), _textField->getInitialColor());
 			}
 		}
 	}
@@ -96,7 +96,7 @@ void GuiButton::setHoverable(bool isHoverable)
 
 		if(_textField != nullptr)
 		{
-			_fe3d->text_setTransparency(_textField->getEntityID(), 1.0f);
+			_fe3d->text2d_setTransparency(_textField->getEntityID(), 1.0f);
 		}
 	}
 	else
@@ -105,7 +105,7 @@ void GuiButton::setHoverable(bool isHoverable)
 
 		if(_textField != nullptr)
 		{
-			_fe3d->text_setTransparency(_textField->getEntityID(), 0.25f);
+			_fe3d->text2d_setTransparency(_textField->getEntityID(), 0.25f);
 		}
 	}
 }
@@ -114,11 +114,11 @@ void GuiButton::changeTextContent(const string& content)
 {
 	auto text2dEntityID = getTextField()->getEntityID();
 
-	if(content != _fe3d->text_getContent(text2dEntityID))
+	if(content != _fe3d->text2d_getContent(text2dEntityID))
 	{
-		auto charWidth = (getTextField()->getInitialSize().x / static_cast<float>(_fe3d->text_getContent(text2dEntityID).size()));
+		auto charWidth = (getTextField()->getInitialSize().x / static_cast<float>(_fe3d->text2d_getContent(text2dEntityID).size()));
 		auto charHeight = getTextField()->getInitialSize().y;
-		_fe3d->text_setContent(text2dEntityID, content, charWidth, charHeight);
+		_fe3d->text2d_setContent(text2dEntityID, content, charWidth, charHeight);
 		getTextField()->updateInitialSize();
 
 		auto newRectangleSize = fvec2(getTextField()->getInitialSize() / fvec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));

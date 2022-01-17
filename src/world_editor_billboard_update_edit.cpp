@@ -190,7 +190,7 @@ void WorldEditor::_updateBillboardEditing()
 
 		if(_selectedBillboardID.empty() && _activeBillboardID.empty())
 		{
-			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
 		}
 	}
 }

@@ -38,9 +38,9 @@ void GuiScrollingList::createButton(const string& ID, string textContent)
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
 	string textID = _buttons.back()->getTextField()->getEntityID();
 	_fe3d->quad2d_setMinPosition(rectangleID, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
-	_fe3d->text_setMinPosition(textID, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
+	_fe3d->text2d_setMinPosition(textID, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
 	_fe3d->quad2d_setMaxPosition(rectangleID, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
-	_fe3d->text_setMaxPosition(textID, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
+	_fe3d->text2d_setMaxPosition(textID, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
 }
 
 void GuiScrollingList::deleteButton(const string& ID)
@@ -56,7 +56,7 @@ void GuiScrollingList::deleteButton(const string& ID)
 			for(size_t j = 0; j < _buttons.size(); j++)
 			{
 				buttonIDs.push_back(_buttons[j]->getID());
-				textContents.push_back(_fe3d->text_getContent(_buttons[j]->getTextField()->getEntityID()));
+				textContents.push_back(_fe3d->text2d_getContent(_buttons[j]->getTextField()->getEntityID()));
 			}
 
 			deleteButtons();
@@ -162,12 +162,12 @@ void GuiScrollingList::_updateScrolling()
 			if(mustReset)
 			{
 				_fe3d->quad2d_setPosition(rectangleID, button->getRectangle()->getInitialPosition());
-				_fe3d->text_setPosition(textID, button->getTextField()->getInitialPosition());
+				_fe3d->text2d_setPosition(textID, button->getTextField()->getInitialPosition());
 			}
 			else
 			{
 				_fe3d->quad2d_move(rectangleID, fvec2(0.0f, _scrollingSpeed));
-				_fe3d->text_move(textID, fvec2(0.0f, _scrollingSpeed));
+				_fe3d->text2d_move(textID, fvec2(0.0f, _scrollingSpeed));
 			}
 		}
 	}

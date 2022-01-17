@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 				return true;
 			}
 
-			const auto result = _fe3d->text_isExisting(args[0].getString());
+			const auto result = _fe3d->text2d_isExisting(args[0].getString());
 
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 				return true;
 			}
 
-			for(const auto& ID : _fe3d->text_getIDs())
+			for(const auto& ID : _fe3d->text2d_getIDs())
 			{
 				if(args[0].getString() == ID.substr(0, args[0].getString().size()))
 				{
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->text_getIDs();
+			const auto result = _fe3d->text2d_getIDs();
 
 			for(const auto& ID : result)
 			{
@@ -67,7 +67,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_isVisible(args[0].getString());
+				const auto result = _fe3d->text2d_isVisible(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = Tools::convertPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).x;
+				const auto result = Tools::convertPositionFromViewport(_fe3d->text2d_getPosition(args[0].getString())).x;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = Tools::convertPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).y;
+				const auto result = Tools::convertPositionFromViewport(_fe3d->text2d_getPosition(args[0].getString())).y;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_getRotation(args[0].getString());
+				const auto result = _fe3d->text2d_getRotation(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = Tools::convertSizeFromViewport(_fe3d->text_getSize(args[0].getString())).x;
+				const auto result = Tools::convertSizeFromViewport(_fe3d->text2d_getSize(args[0].getString())).x;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -137,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = Tools::convertSizeFromViewport(_fe3d->text_getSize(args[0].getString())).y;
+				const auto result = Tools::convertSizeFromViewport(_fe3d->text2d_getSize(args[0].getString())).y;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -151,7 +151,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_getColor(args[0].getString()).r;
+				const auto result = _fe3d->text2d_getColor(args[0].getString()).r;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -165,7 +165,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_getColor(args[0].getString()).g;
+				const auto result = _fe3d->text2d_getColor(args[0].getString()).g;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -179,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_getColor(args[0].getString()).b;
+				const auto result = _fe3d->text2d_getColor(args[0].getString()).b;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_getWireframeColor(args[0].getString()).r;
+				const auto result = _fe3d->text2d_getWireframeColor(args[0].getString()).r;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -207,7 +207,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_getColor(args[0].getString()).g;
+				const auto result = _fe3d->text2d_getColor(args[0].getString()).g;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -221,7 +221,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_getColor(args[0].getString()).b;
+				const auto result = _fe3d->text2d_getColor(args[0].getString()).b;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -235,7 +235,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_getContent(args[0].getString());
+				const auto result = _fe3d->text2d_getContent(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
@@ -249,7 +249,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_getTransparency(args[0].getString());
+				const auto result = _fe3d->text2d_getTransparency(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
@@ -263,7 +263,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_isWireframed(args[0].getString());
+				const auto result = _fe3d->text2d_isWireframed(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
@@ -277,7 +277,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_isHorizontallyMirrored(args[0].getString());
+				const auto result = _fe3d->text2d_isHorizontallyMirrored(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
@@ -291,7 +291,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_isVerticallyMirrored(args[0].getString());
+				const auto result = _fe3d->text2d_isVerticallyMirrored(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
@@ -305,7 +305,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_isWireframed(args[0].getString());
+				const auto result = _fe3d->text2d_isWireframed(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
@@ -319,7 +319,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text_getFontMapPath(args[0].getString());
+				const auto result = _fe3d->text2d_getFontMapPath(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}

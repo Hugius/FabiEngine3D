@@ -51,7 +51,7 @@ void WorldEditor::_updateBillboardPlacingMenu()
 		{
 			if(!_currentTemplateBillboardID.empty())
 			{
-				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
 				_fe3d->billboard_setVisible(_currentTemplateBillboardID, false);
 				_currentTemplateBillboardID = "";
 			}
@@ -78,8 +78,8 @@ void WorldEditor::_updateBillboardPlacingMenu()
 						_currentTemplateBillboardID = billboardID;
 						_fe3d->billboard_setPosition(_currentTemplateBillboardID, fvec3(0.0f));
 						_fe3d->billboard_setVisible(_currentTemplateBillboardID, true);
-						_fe3d->text_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
-						_fe3d->text_setContent(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentTemplateBillboardID.substr(1), 0.025f);
+						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
+						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentTemplateBillboardID.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedID().empty())

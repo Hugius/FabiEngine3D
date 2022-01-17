@@ -86,8 +86,8 @@ void Animation3dEditor::_updateChoiceMenu()
 
 			_currentAnimationID = "";
 			_currentFrameIndex = 0;
-			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), false);
-			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityID(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 			return;
 		}
@@ -210,7 +210,7 @@ void Animation3dEditor::_updateChoiceMenu()
 
 		if(!isStarted)
 		{
-			_fe3d->text_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
+			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 		}
 
 		if(_fe3d->model_isExisting(currentAnimation->getPreviewModelID()))

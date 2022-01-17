@@ -34,7 +34,7 @@ void WorldEditor::_updateModelPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
 				_fe3d->model_setVisible(_currentTemplateModelID, false);
-				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
 				_currentTemplateModelID = "";
 			}
 		}
@@ -73,7 +73,7 @@ void WorldEditor::_updateModelPlacing()
 					else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_fe3d->model_setVisible(_currentTemplateModelID, false);
-						_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
+						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
 						_currentTemplateModelID = "";
 					}
 				}

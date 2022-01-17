@@ -81,7 +81,7 @@
     <ClCompile Include="..\..\..\src\engine_interface_entity_model_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_text_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text2d_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_entity_reflection_get.cpp">
@@ -123,7 +123,7 @@
     <ClCompile Include="..\..\..\src\engine_interface_entity_spotlight_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_text_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text2d_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_entity_water_set.cpp">

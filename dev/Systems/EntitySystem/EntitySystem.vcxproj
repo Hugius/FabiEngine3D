@@ -41,8 +41,8 @@
     <ClCompile Include="..\..\..\src\terrain_entity_get.cpp" />
     <ClCompile Include="..\..\..\src\terrain_entity_manager.cpp" />
     <ClCompile Include="..\..\..\src\terrain_entity_set.cpp" />
-    <ClCompile Include="..\..\..\src\text_entity.cpp" />
-    <ClCompile Include="..\..\..\src\text_entity_manager.cpp" />
+    <ClCompile Include="..\..\..\src\text2d_entity.cpp" />
+    <ClCompile Include="..\..\..\src\text2d_entity_manager.cpp" />
     <ClCompile Include="..\..\..\src\water_entity.cpp" />
     <ClCompile Include="..\..\..\src\water_entity_manager.cpp" />
   </ItemGroup>
@@ -68,8 +68,8 @@
     <ClInclude Include="..\..\..\src\spotlight_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\terrain_entity.hpp" />
     <ClInclude Include="..\..\..\src\terrain_entity_manager.hpp" />
-    <ClInclude Include="..\..\..\src\text_entity.hpp" />
-    <ClInclude Include="..\..\..\src\text_entity_manager.hpp" />
+    <ClInclude Include="..\..\..\src\text2d_entity.hpp" />
+    <ClInclude Include="..\..\..\src\text2d_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\water_entity.hpp" />
     <ClInclude Include="..\..\..\src\water_entity_manager.hpp" />
   </ItemGroup>

@@ -88,10 +88,10 @@ private:
 	const bool _executeFe3dBillboardGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dAabbSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dAabbGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dQuadSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dQuadGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dTextSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dTextGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dQuad2dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dQuad2dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dText2dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dText2dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dPointlightSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dPointlightGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dSpotlightSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);

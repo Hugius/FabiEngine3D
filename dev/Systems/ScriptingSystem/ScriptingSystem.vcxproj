@@ -73,8 +73,8 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_set.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_set.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text_set.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text2d_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text2d_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_validation.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_set.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_get.cpp" />

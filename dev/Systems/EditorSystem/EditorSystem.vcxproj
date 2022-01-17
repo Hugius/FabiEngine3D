@@ -61,12 +61,12 @@
     <ClCompile Include="..\..\..\src\animation2d_editor_update_execution.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_update_misc.cpp" />
-    <ClCompile Include="..\..\..\src\text_editor_lifecycle.cpp" />
-    <ClCompile Include="..\..\..\src\text_editor_loading.cpp" />
-    <ClCompile Include="..\..\..\src\text_editor_misc.cpp" />
-    <ClCompile Include="..\..\..\src\text_editor_saving.cpp" />
-    <ClCompile Include="..\..\..\src\text_editor_update_menu.cpp" />
-    <ClCompile Include="..\..\..\src\text_editor_update_misc.cpp" />
+    <ClCompile Include="..\..\..\src\text2d_editor_lifecycle.cpp" />
+    <ClCompile Include="..\..\..\src\text2d_editor_loading.cpp" />
+    <ClCompile Include="..\..\..\src\text2d_editor_misc.cpp" />
+    <ClCompile Include="..\..\..\src\text2d_editor_saving.cpp" />
+    <ClCompile Include="..\..\..\src\text2d_editor_update_menu.cpp" />
+    <ClCompile Include="..\..\..\src\text2d_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_activate.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_update_misc_highlight.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_custom.cpp" />
@@ -163,7 +163,7 @@
     <ClInclude Include="..\..\..\src\model_editor.hpp" />
     <ClInclude Include="..\..\..\src\animation2d.hpp" />
     <ClInclude Include="..\..\..\src\animation2d_editor.hpp" />
-    <ClInclude Include="..\..\..\src\text_editor.hpp" />
+    <ClInclude Include="..\..\..\src\text2d_editor.hpp" />
     <ClInclude Include="..\..\..\src\world_editor.hpp" />
     <ClInclude Include="..\..\..\src\script_editor.hpp" />
     <ClInclude Include="..\..\..\src\terrain_editor.hpp" />

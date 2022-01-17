@@ -141,7 +141,7 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text_set.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text2d_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_set.cpp">
@@ -171,7 +171,7 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text_get.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text2d_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_get.cpp">

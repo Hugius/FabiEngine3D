@@ -1,8 +1,8 @@
-# Text Entity
+# Text2D Entity
 
 ## 1. General
 
-- The text entity is a composition of Quad2D entities.
+- The Text2D entity is a composition of Quad2D entities.
 - Every Quad2D entity represents a text character.
 - A font map is used to form a line of text.
 
@@ -15,7 +15,7 @@
 - **Font Map Path**: the path of the font map file
   - Type: `string`
   - Constraints: none
-- **Text Content**: the text content of the diffuse map
+- **Content**: the content of the characters
   - Type: `string`
   - Constraints: none
 - **Color**: the RGB color multiplier of the fragments
@@ -36,10 +36,10 @@
 - **Transparency**: the transparency of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Horizontally Mirrored**: the diffuse map is horizontally mirrored
+- **Horizontally Mirrored**: the characters horizontally mirrored
   - Type: `boolean`
   - Constraints: none
-- **Vertically Mirrored**: the diffuse map is vertically mirrored
+- **Vertically Mirrored**: the characters are vertically mirrored
   - Type: `boolean`
   - Constraints: none
 - **Wireframed**: the mesh is rendered as a wireframe

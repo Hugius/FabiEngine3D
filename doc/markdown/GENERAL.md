@@ -80,7 +80,7 @@
             └── quad2d
             └── sky
             └── terrain
-            └── text
+            └── text2d
             └── water
           └── misc
             └── flare_map
@@ -102,7 +102,7 @@
   - `projects\`: contains all your projects
     - `assets\`: contains all project assets
       - `audio\`: contains all project audio files
-      - `image\`: contains all project texture files
+      - `image\`: contains all project image files
       - `mesh\`: contains all project mesh files
     - `data\`: contains all project editor data
     - `saves\`: contains all project save files

@@ -175,8 +175,8 @@
     <ClCompile Include="..\..\..\src\engine_interface_entity_spotlight_get.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_terrain_get.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_terrain_set.cpp" />
-    <ClCompile Include="..\..\..\src\engine_interface_entity_text_get.cpp" />
-    <ClCompile Include="..\..\..\src\engine_interface_entity_text_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text2d_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text2d_set.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_water_get.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_water_set.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_graphics_get.cpp" />

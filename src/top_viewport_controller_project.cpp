@@ -63,8 +63,8 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\blend_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\diffuse_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\height_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text\\font_map\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text2d\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text2d\\font_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\displacement_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\dudv_map\\");

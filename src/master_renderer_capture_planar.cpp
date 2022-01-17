@@ -51,13 +51,13 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	vector<string> savedBillboardEntityIDs;
-	for(const auto& [key, entity] : _billboardEntityManager->getEntities())
+	vector<string> savedQuad3dEntityIDs;
+	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
-			savedBillboardEntityIDs.push_back(entity->getID());
+			savedQuad3dEntityIDs.push_back(entity->getID());
 		}
 	}
 
@@ -112,9 +112,9 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	for(const auto& [key, entity] : _billboardEntityManager->getEntities())
+	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 	{
-		for(const auto& savedID : savedBillboardEntityIDs)
+		for(const auto& savedID : savedQuad3dEntityIDs)
 		{
 			if(entity->getID() == savedID)
 			{

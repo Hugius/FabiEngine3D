@@ -170,9 +170,9 @@ void ScriptInterpreter::inject(shared_ptr<ModelEditor> modelEditor)
 	_modelEditor = modelEditor;
 }
 
-void ScriptInterpreter::inject(shared_ptr<BillboardEditor> billboardEditor)
+void ScriptInterpreter::inject(shared_ptr<Quad3dEditor> quad3dEditor)
 {
-	_billboardEditor = billboardEditor;
+	_quad3dEditor = quad3dEditor;
 }
 
 void ScriptInterpreter::inject(shared_ptr<Animation2dEditor> animation2dEditor)

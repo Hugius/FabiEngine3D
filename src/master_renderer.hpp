@@ -42,7 +42,7 @@ public:
 	void inject(shared_ptr<TerrainEntityManager> terrainEntityManager);
 	void inject(shared_ptr<WaterEntityManager> waterEntityManager);
 	void inject(shared_ptr<ModelEntityManager> modelEntityManager);
-	void inject(shared_ptr<BillboardEntityManager> billboardEntityManager);
+	void inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager);
 	void inject(shared_ptr<AabbEntityManager> aabbEntityManager);
 	void inject(shared_ptr<Quad2dEntityManager> quad2dEntityManager);
 	void inject(shared_ptr<Text2dEntityManager> text2dEntityManager);
@@ -104,9 +104,9 @@ private:
 	ModelEntityColorRenderer _modelEntityColorRenderer;
 	ModelEntityDepthRenderer _modelEntityDepthRenderer;
 	ModelEntityShadowRenderer _modelEntityShadowRenderer;
-	BillboardEntityColorRenderer _billboardEntityColorRenderer;
-	BillboardEntityDepthRenderer _billboardEntityDepthRenderer;
-	BillboardEntityShadowRenderer _billboardEntityShadowRenderer;
+	Quad3dEntityColorRenderer _quad3dEntityColorRenderer;
+	Quad3dEntityDepthRenderer _quad3dEntityDepthRenderer;
+	Quad3dEntityShadowRenderer _quad3dEntityShadowRenderer;
 	AabbEntityColorRenderer _aabbEntityColorRenderer;
 	Quad2dEntityColorRenderer _quad2dEntityColorRenderer;
 	AntiAliasingRenderer _antiAliasingRenderer;
@@ -128,9 +128,9 @@ private:
 	shared_ptr<ShaderBuffer> _modelEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _modelEntityDepthShader = nullptr;
 	shared_ptr<ShaderBuffer> _modelEntityShadowShader = nullptr;
-	shared_ptr<ShaderBuffer> _billboardEntityColorShader = nullptr;
-	shared_ptr<ShaderBuffer> _billboardEntityDepthShader = nullptr;
-	shared_ptr<ShaderBuffer> _billboardEntityShadowShader = nullptr;
+	shared_ptr<ShaderBuffer> _quad3dEntityColorShader = nullptr;
+	shared_ptr<ShaderBuffer> _quad3dEntityDepthShader = nullptr;
+	shared_ptr<ShaderBuffer> _quad3dEntityShadowShader = nullptr;
 	shared_ptr<ShaderBuffer> _aabbEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _quad2dEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _antiAliasingShader = nullptr;
@@ -161,7 +161,7 @@ private:
 	shared_ptr<TerrainEntityManager> _terrainEntityManager = nullptr;
 	shared_ptr<WaterEntityManager> _waterEntityManager = nullptr;
 	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
-	shared_ptr<BillboardEntityManager> _billboardEntityManager = nullptr;
+	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;
 	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
 	shared_ptr<Quad2dEntityManager> _quad2dEntityManager = nullptr;
 	shared_ptr<Text2dEntityManager> _text2dEntityManager = nullptr;

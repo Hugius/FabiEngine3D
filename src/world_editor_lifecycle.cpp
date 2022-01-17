@@ -24,8 +24,8 @@ void WorldEditor::load()
 		screen->getScrollingList("modelList")->createButton(ID, ID.substr(1));
 	}
 
-	_billboardEditor->loadFromFile();
-	for(const auto& ID : _billboardEditor->getLoadedIDs())
+	_quad3dEditor->loadFromFile();
+	for(const auto& ID : _quad3dEditor->getLoadedIDs())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardPlace");
 		screen->getScrollingList("billboardList")->createButton(ID, ID.substr(1));
@@ -124,7 +124,7 @@ void WorldEditor::unload()
 		_fe3d->model_delete(ID);
 	}
 
-	for(const auto& ID : _billboardEditor->getLoadedIDs())
+	for(const auto& ID : _quad3dEditor->getLoadedIDs())
 	{
 		_fe3d->billboard_delete(ID);
 	}

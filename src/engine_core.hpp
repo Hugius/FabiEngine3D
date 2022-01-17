@@ -65,7 +65,7 @@ public:
 	const shared_ptr<TerrainEntityManager> getTerrainEntityManager() const;
 	const shared_ptr<WaterEntityManager> getWaterEntityManager() const;
 	const shared_ptr<ModelEntityManager> getModelEntityManager() const;
-	const shared_ptr<BillboardEntityManager> getBillboardEntityManager() const;
+	const shared_ptr<Quad3dEntityManager> getQuad3dEntityManager() const;
 	const shared_ptr<AabbEntityManager> getAabbEntityManager() const;
 	const shared_ptr<Quad2dEntityManager> getQuad2dEntityManager() const;
 	const shared_ptr<Text2dEntityManager> getText2dEntityManager() const;
@@ -105,7 +105,7 @@ private:
 	shared_ptr<TerrainEntityManager> _terrainEntityManager = nullptr;
 	shared_ptr<WaterEntityManager> _waterEntityManager = nullptr;
 	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
-	shared_ptr<BillboardEntityManager> _billboardEntityManager = nullptr;
+	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;
 	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
 	shared_ptr<Quad2dEntityManager> _quad2dEntityManager = nullptr;
 	shared_ptr<Text2dEntityManager> _text2dEntityManager = nullptr;

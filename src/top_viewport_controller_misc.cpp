@@ -83,7 +83,7 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("terrainEditor")->setHoverable(isHoverable);
 	screen->getButton("waterEditor")->setHoverable(isHoverable);
 	screen->getButton("modelEditor")->setHoverable(isHoverable);
-	screen->getButton("billboardEditor")->setHoverable(isHoverable);
+	screen->getButton("quad3dEditor")->setHoverable(isHoverable);
 	screen->getButton("quad2dEditor")->setHoverable(isHoverable);
 	screen->getButton("text2dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
@@ -144,9 +144,9 @@ void TopViewportController::_applyProjectChange()
 		_modelEditor->unload();
 	}
 
-	if(_billboardEditor->isLoaded())
+	if(_quad3dEditor->isLoaded())
 	{
-		_billboardEditor->unload();
+		_quad3dEditor->unload();
 	}
 
 	if(_quad2dEditor->isLoaded())
@@ -188,7 +188,7 @@ void TopViewportController::_applyProjectChange()
 	_terrainEditor->setCurrentProjectID(_currentProjectID);
 	_waterEditor->setCurrentProjectID(_currentProjectID);
 	_modelEditor->setCurrentProjectID(_currentProjectID);
-	_billboardEditor->setCurrentProjectID(_currentProjectID);
+	_quad3dEditor->setCurrentProjectID(_currentProjectID);
 	_quad2dEditor->setCurrentProjectID(_currentProjectID);
 	_text2dEditor->setCurrentProjectID(_currentProjectID);
 	_animation2dEditor->setCurrentProjectID(_currentProjectID);
@@ -240,7 +240,7 @@ void TopViewportController::_saveCurrentProject()
 	_terrainEditor->saveToFile();
 	_waterEditor->saveToFile();
 	_modelEditor->saveToFile();
-	_billboardEditor->saveToFile();
+	_quad3dEditor->saveToFile();
 	_quad2dEditor->saveToFile();
 	_text2dEditor->saveToFile();
 	_animation2dEditor->saveToFile();
@@ -272,9 +272,9 @@ void TopViewportController::inject(shared_ptr<ModelEditor> modelEditor)
 	_modelEditor = modelEditor;
 }
 
-void TopViewportController::inject(shared_ptr<BillboardEditor> billboardEditor)
+void TopViewportController::inject(shared_ptr<Quad3dEditor> quad3dEditor)
 {
-	_billboardEditor = billboardEditor;
+	_quad3dEditor = quad3dEditor;
 }
 
 void TopViewportController::inject(shared_ptr<Quad2dEditor> quad2dEditor)

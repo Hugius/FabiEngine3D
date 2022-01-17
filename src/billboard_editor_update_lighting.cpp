@@ -1,11 +1,11 @@
 #include "billboard_editor.hpp"
 #include "logger.hpp"
 
-void BillboardEditor::_updateLightingMenu()
+void Quad3dEditor::_updateLightingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "billboardEditorMenuLighting")
+	if(screen->getID() == "quad3dEditorMenuLighting")
 	{
 		auto emissionIntensity = _fe3d->billboard_getEmissionIntensity(_currentBillboardID);
 		auto lightness = _fe3d->billboard_getLightness(_currentBillboardID);
@@ -16,7 +16,7 @@ void BillboardEditor::_updateLightingMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())

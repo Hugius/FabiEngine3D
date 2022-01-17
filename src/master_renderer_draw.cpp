@@ -155,18 +155,18 @@ void MasterRenderer::_renderModelEntities()
 
 void MasterRenderer::_renderBillboardEntities()
 {
-	auto billboardEntities = _billboardEntityManager->getEntities();
+	auto billboardEntities = _quad3dEntityManager->getEntities();
 
 	if(!billboardEntities.empty())
 	{
-		_billboardEntityColorRenderer.bind();
+		_quad3dEntityColorRenderer.bind();
 
 		for(const auto& [key, entity] : billboardEntities)
 		{
-			_billboardEntityColorRenderer.render(entity);
+			_quad3dEntityColorRenderer.render(entity);
 		}
 
-		_billboardEntityColorRenderer.unbind();
+		_quad3dEntityColorRenderer.unbind();
 	}
 }
 

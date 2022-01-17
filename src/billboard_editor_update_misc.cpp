@@ -3,7 +3,7 @@
 
 using std::max;
 
-void BillboardEditor::_updateCamera()
+void Quad3dEditor::_updateCamera()
 {
 	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
@@ -57,7 +57,7 @@ void BillboardEditor::_updateCamera()
 	}
 }
 
-void BillboardEditor::_updateMiscellaneous()
+void Quad3dEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
@@ -90,7 +90,7 @@ void BillboardEditor::_updateMiscellaneous()
 	}
 }
 
-void BillboardEditor::_updateBillboardCreating()
+void Quad3dEditor::_updateBillboardCreating()
 {
 	if(_isCreatingBillboard)
 	{
@@ -125,7 +125,7 @@ void BillboardEditor::_updateBillboardCreating()
 				_currentBillboardID = newBillboardID;
 				_loadedBillboardIDs.push_back(newBillboardID);
 
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), "Billboard: " + newBillboardID.substr(1), 0.025f);
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
 				_isCreatingBillboard = false;
@@ -134,7 +134,7 @@ void BillboardEditor::_updateBillboardCreating()
 	}
 }
 
-void BillboardEditor::_updateBillboardChoosing()
+void Quad3dEditor::_updateBillboardChoosing()
 {
 	if(_isChoosingBillboard)
 	{
@@ -156,7 +156,7 @@ void BillboardEditor::_updateBillboardChoosing()
 
 				if(!_isDeletingBillboard)
 				{
-					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 
 					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentBillboardID.substr(1), 0.025f);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), true);
@@ -185,7 +185,7 @@ void BillboardEditor::_updateBillboardChoosing()
 	}
 }
 
-void BillboardEditor::_updateBillboardDeleting()
+void Quad3dEditor::_updateBillboardDeleting()
 {
 	if(_isDeletingBillboard && !_currentBillboardID.empty())
 	{

@@ -1,7 +1,7 @@
 #include "billboard_entity_color_renderer.hpp"
 #include "configuration.hpp"
 
-void BillboardEntityColorRenderer::bind()
+void Quad3dEntityColorRenderer::bind()
 {
 	_shader->bind();
 
@@ -26,7 +26,7 @@ void BillboardEntityColorRenderer::bind()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void BillboardEntityColorRenderer::unbind()
+void Quad3dEntityColorRenderer::unbind()
 {
 	glDisable(GL_BLEND);
 
@@ -38,7 +38,7 @@ void BillboardEntityColorRenderer::unbind()
 	_shader->unbind();
 }
 
-void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> entity)
+void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 {
 	if(entity->isVisible())
 	{

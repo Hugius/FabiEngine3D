@@ -14,7 +14,7 @@ EngineController::EngineController()
 	_terrainEditor = make_shared<TerrainEditor>();
 	_waterEditor = make_shared<WaterEditor>();
 	_modelEditor = make_shared<ModelEditor>();
-	_billboardEditor = make_shared<BillboardEditor>();
+	_quad3dEditor = make_shared<Quad3dEditor>();
 	_quad2dEditor = make_shared<Quad2dEditor>();
 	_text2dEditor = make_shared<Text2dEditor>();
 	_animation2dEditor = make_shared<Animation2dEditor>();
@@ -31,7 +31,7 @@ EngineController::EngineController()
 	_leftViewportController->inject(_terrainEditor);
 	_leftViewportController->inject(_waterEditor);
 	_leftViewportController->inject(_modelEditor);
-	_leftViewportController->inject(_billboardEditor);
+	_leftViewportController->inject(_quad3dEditor);
 	_leftViewportController->inject(_quad2dEditor);
 	_leftViewportController->inject(_text2dEditor);
 	_leftViewportController->inject(_animation2dEditor);
@@ -48,7 +48,7 @@ EngineController::EngineController()
 	_topViewportController->inject(_terrainEditor);
 	_topViewportController->inject(_waterEditor);
 	_topViewportController->inject(_modelEditor);
-	_topViewportController->inject(_billboardEditor);
+	_topViewportController->inject(_quad3dEditor);
 	_topViewportController->inject(_quad2dEditor);
 	_topViewportController->inject(_text2dEditor);
 	_topViewportController->inject(_animation2dEditor);
@@ -62,7 +62,7 @@ EngineController::EngineController()
 	_terrainEditor->inject(_guiManager);
 	_waterEditor->inject(_guiManager);
 	_modelEditor->inject(_guiManager);
-	_billboardEditor->inject(_guiManager);
+	_quad3dEditor->inject(_guiManager);
 	_quad2dEditor->inject(_guiManager);
 	_text2dEditor->inject(_guiManager);
 	_animation2dEditor->inject(_guiManager);
@@ -74,7 +74,7 @@ EngineController::EngineController()
 	_worldEditor->inject(_terrainEditor);
 	_worldEditor->inject(_waterEditor);
 	_worldEditor->inject(_modelEditor);
-	_worldEditor->inject(_billboardEditor);
+	_worldEditor->inject(_quad3dEditor);
 	_worldEditor->inject(_animation2dEditor);
 	_worldEditor->inject(_animation3dEditor);
 	_worldEditor->inject(_soundEditor);
@@ -86,7 +86,7 @@ EngineController::EngineController()
 	_scriptInterpreter->inject(_terrainEditor);
 	_scriptInterpreter->inject(_waterEditor);
 	_scriptInterpreter->inject(_modelEditor);
-	_scriptInterpreter->inject(_billboardEditor);
+	_scriptInterpreter->inject(_quad3dEditor);
 	_scriptInterpreter->inject(_quad2dEditor);
 	_scriptInterpreter->inject(_text2dEditor);
 	_scriptInterpreter->inject(_animation2dEditor);
@@ -111,7 +111,7 @@ void EngineController::initialize()
 	_terrainEditor->inject(_fe3d);
 	_waterEditor->inject(_fe3d);
 	_modelEditor->inject(_fe3d);
-	_billboardEditor->inject(_fe3d);
+	_quad3dEditor->inject(_fe3d);
 	_quad2dEditor->inject(_fe3d);
 	_text2dEditor->inject(_fe3d);
 	_animation2dEditor->inject(_fe3d);

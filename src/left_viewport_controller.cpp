@@ -15,7 +15,7 @@ void LeftViewportController::initialize()
 	window->getScreen("main")->createButton("terrainEditor", fvec2(0.0f, positions[1]), fvec2(TW("Terrain"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("waterEditor", fvec2(0.0f, positions[2]), fvec2(TW("Water"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("modelEditor", fvec2(0.0f, positions[3]), fvec2(TW("Model"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Model", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("billboardEditor", fvec2(0.0f, positions[4]), fvec2(TW("Billboard"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboard", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("quad3dEditor", fvec2(0.0f, positions[4]), fvec2(TW("Billboard"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboard", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("quad2dEditor", fvec2(0.0f, positions[5]), fvec2(TW("Quad2D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Quad2D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("text2dEditor", fvec2(0.0f, positions[6]), fvec2(TW("Text2D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Text2D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[7]), fvec2(TW("Animation2D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animation2D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
@@ -66,12 +66,12 @@ void LeftViewportController::update()
 				window->setActiveScreen("modelEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("billboardEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quad3dEditor")->isHovered())
 		{
-			if(_billboardEditor->loadFromFile())
+			if(_quad3dEditor->loadFromFile())
 			{
-				_billboardEditor->load();
-				window->setActiveScreen("billboardEditorMenuMain");
+				_quad3dEditor->load();
+				window->setActiveScreen("quad3dEditorMenuMain");
 			}
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quad2dEditor")->isHovered())
@@ -133,7 +133,7 @@ void LeftViewportController::update()
 	_terrainEditor->update();
 	_waterEditor->update();
 	_modelEditor->update();
-	_billboardEditor->update();
+	_quad3dEditor->update();
 	_quad2dEditor->update();
 	_text2dEditor->update();
 	_animation2dEditor->update();
@@ -163,9 +163,9 @@ void LeftViewportController::inject(shared_ptr<ModelEditor> modelEditor)
 	_modelEditor = modelEditor;
 }
 
-void LeftViewportController::inject(shared_ptr<BillboardEditor> billboardEditor)
+void LeftViewportController::inject(shared_ptr<Quad3dEditor> quad3dEditor)
 {
-	_billboardEditor = billboardEditor;
+	_quad3dEditor = quad3dEditor;
 }
 
 void LeftViewportController::inject(shared_ptr<Quad2dEditor> quad2dEditor)

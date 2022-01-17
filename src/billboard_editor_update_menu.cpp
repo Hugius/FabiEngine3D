@@ -1,10 +1,10 @@
 #include "billboard_editor.hpp"
 
-void BillboardEditor::_updateMainMenu()
+void Quad3dEditor::_updateMainMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "billboardEditorMenuMain")
+	if(screen->getID() == "quad3dEditorMenuMain")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -53,11 +53,11 @@ void BillboardEditor::_updateMainMenu()
 	}
 }
 
-void BillboardEditor::_updateChoiceMenu()
+void Quad3dEditor::_updateChoiceMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "billboardEditorMenuChoice")
+	if(screen->getID() == "quad3dEditorMenuChoice")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -65,20 +65,20 @@ void BillboardEditor::_updateChoiceMenu()
 			_fe3d->billboard_setVisible(_currentBillboardID, false);
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
 			_currentBillboardID = "";
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuMain");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuTexturing");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuTexturing");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuLighting");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuLighting");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuMiscellaneous");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuMiscellaneous");
 		}
 	}
 }

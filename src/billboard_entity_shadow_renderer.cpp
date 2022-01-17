@@ -1,6 +1,6 @@
 #include "billboard_entity_shadow_renderer.hpp"
 
-void BillboardEntityShadowRenderer::bind()
+void Quad3dEntityShadowRenderer::bind()
 {
 	_shader->bind();
 
@@ -14,7 +14,7 @@ void BillboardEntityShadowRenderer::bind()
 	glDepthFunc(GL_LEQUAL);
 }
 
-void BillboardEntityShadowRenderer::unbind()
+void Quad3dEntityShadowRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 
@@ -24,7 +24,7 @@ void BillboardEntityShadowRenderer::unbind()
 	_shader->unbind();
 }
 
-void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> entity)
+void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
 {
 	if(entity->isVisible() && entity->isShadowed())
 	{

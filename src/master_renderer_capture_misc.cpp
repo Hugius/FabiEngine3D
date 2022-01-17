@@ -4,7 +4,7 @@
 void MasterRenderer::_captureWorldDepth()
 {
 	auto modelEntities = _modelEntityManager->getEntities();
-	auto billboardEntities = _billboardEntityManager->getEntities();
+	auto billboardEntities = _quad3dEntityManager->getEntities();
 	float clippingY = numeric_limits<float>::lowest();
 	const bool waterDepthNeeded = (_waterEntityManager->getSelectedWater() != nullptr) && (_waterEntityManager->getSelectedWater()->getTransparency() > 0.0f);
 	bool isUnderWater = false;
@@ -94,17 +94,17 @@ void MasterRenderer::_captureWorldDepth()
 
 		if(!billboardEntities.empty())
 		{
-			_billboardEntityDepthRenderer.bind();
+			_quad3dEntityDepthRenderer.bind();
 
 			for(const auto& [key, entity] : billboardEntities)
 			{
 				if(entity->isDepthMapIncluded())
 				{
-					_billboardEntityDepthRenderer.render(entity, clippingY, isUnderWater);
+					_quad3dEntityDepthRenderer.render(entity, clippingY, isUnderWater);
 				}
 			}
 
-			_billboardEntityDepthRenderer.unbind();
+			_quad3dEntityDepthRenderer.unbind();
 		}
 
 		_worldDepthCaptor->unbind();
@@ -255,7 +255,7 @@ void MasterRenderer::_captureShadows()
 	if(_renderBus->isShadowsEnabled())
 	{
 		auto modelEntities = _modelEntityManager->getEntities();
-		auto billboardEntities = _billboardEntityManager->getEntities();
+		auto billboardEntities = _quad3dEntityManager->getEntities();
 
 		_shadowCaptor->bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
@@ -308,14 +308,14 @@ void MasterRenderer::_captureShadows()
 
 		if(!billboardEntities.empty())
 		{
-			_billboardEntityShadowRenderer.bind();
+			_quad3dEntityShadowRenderer.bind();
 
-			for(const auto& [key, entity] : _billboardEntityManager->getEntities())
+			for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 			{
-				_billboardEntityShadowRenderer.render(entity);
+				_quad3dEntityShadowRenderer.render(entity);
 			}
 
-			_billboardEntityShadowRenderer.unbind();
+			_quad3dEntityShadowRenderer.unbind();
 		}
 
 		_shadowCaptor->unbind();

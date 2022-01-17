@@ -61,7 +61,7 @@ void WorldEditor::_updateBillboardPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& billboardID : _billboardEditor->getLoadedIDs())
+			for(const auto& billboardID : _quad3dEditor->getLoadedIDs())
 			{
 				if(_fe3d->billboard_isExisting(billboardID))
 				{

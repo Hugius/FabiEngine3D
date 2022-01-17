@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool BillboardEditor::saveToFile() const
+const bool Quad3dEditor::saveToFile() const
 {
 	if(!_isEditorLoaded)
 	{
@@ -16,7 +16,7 @@ const bool BillboardEditor::saveToFile() const
 
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("BillboardEditor::saveToFile");
+		Logger::throwError("Quad3dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();

@@ -9,11 +9,11 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> BillboardEditor::getImagePathsFromFile() const
+const vector<string> Quad3dEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("BillboardEditor::getImagePathsFromFile");
+		Logger::throwError("Quad3dEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -82,11 +82,11 @@ const vector<string> BillboardEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool BillboardEditor::loadFromFile()
+const bool Quad3dEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("BillboardEditor::loadFromFile");
+		Logger::throwError("Quad3dEditor::loadFromFile");
 	}
 
 	_loadedBillboardIDs.clear();

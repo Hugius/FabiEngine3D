@@ -36,7 +36,7 @@ void BottomViewportController::initialize()
 	statisticsScreen->createTextField("cursorPosition", fvec2(-1.0f, 0.1f), fvec2(0.0f), "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("triangleCount", fvec2(-1.0f, -0.05f), fvec2(0.0f), "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("modelEntityCount", fvec2(-1.0f, -0.2f), fvec2(0.0f), "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("billboardEntityCount", fvec2(-1.0f, -0.35f), fvec2(0.0f), "", fvec3(1.0f), false);
+	statisticsScreen->createTextField("quad3dEntityCount", fvec2(-1.0f, -0.35f), fvec2(0.0f), "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("aabbEntityCount", fvec2(-1.0f, -0.5f), fvec2(0.0f), "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("lightEntityCount", fvec2(-1.0f, -0.65f), fvec2(0.0f), "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("reflectionEntityCount", fvec2(-1.0f, -0.8f), fvec2(0.0f), "", fvec3(1.0f), false);

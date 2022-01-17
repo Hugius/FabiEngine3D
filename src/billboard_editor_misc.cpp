@@ -2,17 +2,17 @@
 
 #include <algorithm>
 
-void BillboardEditor::setCurrentProjectID(const string& projectID)
+void Quad3dEditor::setCurrentProjectID(const string& projectID)
 {
 	_currentProjectID = projectID;
 }
 
-const bool BillboardEditor::isLoaded() const
+const bool Quad3dEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }
 
-const vector<string>& BillboardEditor::getLoadedIDs()
+const vector<string>& Quad3dEditor::getLoadedIDs()
 {
 	sort(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end());
 	return _loadedBillboardIDs;

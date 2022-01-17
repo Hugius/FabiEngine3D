@@ -9,10 +9,10 @@
 
 using std::unordered_map;
 
-class BillboardEntityManager final : public BaseEntityManager
+class Quad3dEntityManager final : public BaseEntityManager
 {
 public:
-	BillboardEntityManager();
+	Quad3dEntityManager();
 
 	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
@@ -22,14 +22,14 @@ public:
 
 	const bool isEntityExisting(const string& ID) const;
 
-	const unordered_map<string, shared_ptr<BillboardEntity>>& getEntities();
-	shared_ptr<BillboardEntity> getEntity(const string& ID);
+	const unordered_map<string, shared_ptr<Quad3dEntity>>& getEntities();
+	shared_ptr<Quad3dEntity> getEntity(const string& ID);
 
 private:
 	const shared_ptr<VertexBuffer> _centeredMesh;
 	const shared_ptr<VertexBuffer> _standingMesh;
 
-	unordered_map<string, shared_ptr<BillboardEntity>> _entities;
+	unordered_map<string, shared_ptr<Quad3dEntity>> _entities;
 
 	shared_ptr<RenderBus> _renderBus = nullptr;
 };

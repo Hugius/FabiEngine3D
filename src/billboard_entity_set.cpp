@@ -6,12 +6,12 @@
 using std::clamp;
 using std::max;
 
-void BillboardEntity::setMesh(shared_ptr<VertexBuffer> value)
+void Quad3dEntity::setMesh(shared_ptr<VertexBuffer> value)
 {
 	_mesh = value;
 }
 
-void BillboardEntity::updateTransformation()
+void Quad3dEntity::updateTransformation()
 {
 	if(_position != _positionTarget)
 	{
@@ -76,7 +76,7 @@ void BillboardEntity::updateTransformation()
 	}
 }
 
-void BillboardEntity::updateTransformationMatrix()
+void Quad3dEntity::updateTransformationMatrix()
 {
 	_transformationMatrix = mat44(1.0f);
 
@@ -105,51 +105,51 @@ void BillboardEntity::updateTransformationMatrix()
 	_transformationMatrix = (_transformationMatrix * scalingMatrix);
 }
 
-void BillboardEntity::setFacingCameraX(bool value)
+void Quad3dEntity::setFacingCameraX(bool value)
 {
 	_isFacingCameraX = value;
 }
 
-void BillboardEntity::setFacingCameraY(bool value)
+void Quad3dEntity::setFacingCameraY(bool value)
 {
 	_isFacingCameraY = value;
 }
 
-void BillboardEntity::setDiffuseMap(shared_ptr<TextureBuffer> value)
+void Quad3dEntity::setDiffuseMap(shared_ptr<TextureBuffer> value)
 {
 	_diffuseMap = value;
 }
 
-void BillboardEntity::setEmissionMap(shared_ptr<TextureBuffer> value)
+void Quad3dEntity::setEmissionMap(shared_ptr<TextureBuffer> value)
 {
 	_emissionMap = value;
 }
 
-void BillboardEntity::setPosition(fvec3 value)
+void Quad3dEntity::setPosition(fvec3 value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void BillboardEntity::setRotation(fvec3 value)
+void Quad3dEntity::setRotation(fvec3 value)
 {
 	_rotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 	_rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
-void BillboardEntity::setSize(fvec2 value)
+void Quad3dEntity::setSize(fvec2 value)
 {
 	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void BillboardEntity::move(fvec3 value)
+void Quad3dEntity::move(fvec3 value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void BillboardEntity::rotate(fvec3 value)
+void Quad3dEntity::rotate(fvec3 value)
 {
 	_rotation += value;
 	_rotationTarget += value;
@@ -157,7 +157,7 @@ void BillboardEntity::rotate(fvec3 value)
 	_rotationTarget = fvec3(Math::limitAngle(_rotationTarget.x), Math::limitAngle(_rotationTarget.y), Math::limitAngle(_rotationTarget.z));
 }
 
-void BillboardEntity::scale(fvec2 value)
+void Quad3dEntity::scale(fvec2 value)
 {
 	_size += value;
 	_sizeTarget += value;
@@ -165,115 +165,115 @@ void BillboardEntity::scale(fvec2 value)
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void BillboardEntity::moveTo(fvec3 target, float speed)
+void Quad3dEntity::moveTo(fvec3 target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void BillboardEntity::rotateTo(fvec3 target, float speed)
+void Quad3dEntity::rotateTo(fvec3 target, float speed)
 {
 	_rotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 	_rotationTargetSpeed = speed;
 }
 
-void BillboardEntity::scaleTo(fvec2 target, float speed)
+void Quad3dEntity::scaleTo(fvec2 target, float speed)
 {
 	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
 }
 
-void BillboardEntity::setColor(fvec3 value)
+void Quad3dEntity::setColor(fvec3 value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void BillboardEntity::setUvMultiplier(fvec2 value)
+void Quad3dEntity::setUvMultiplier(fvec2 value)
 {
 	_uvMultiplier = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void BillboardEntity::setUvOffset(fvec2 value)
+void Quad3dEntity::setUvOffset(fvec2 value)
 {
 	_uvOffset = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void BillboardEntity::setWireframeColor(fvec3 value)
+void Quad3dEntity::setWireframeColor(fvec3 value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void BillboardEntity::setDiffuseMapPath(const string& value)
+void Quad3dEntity::setDiffuseMapPath(const string& value)
 {
 	_diffuseMapPath = value;
 }
 
-void BillboardEntity::setEmissionMapPath(const string& value)
+void Quad3dEntity::setEmissionMapPath(const string& value)
 {
 	_emissionMapPath = value;
 }
 
-void BillboardEntity::setDepthMapIncluded(bool value)
+void Quad3dEntity::setDepthMapIncluded(bool value)
 {
 	_isDepthMapIncluded = value;
 }
 
-void BillboardEntity::setReflected(bool value)
+void Quad3dEntity::setReflected(bool value)
 {
 	_isReflected = value;
 }
 
-void BillboardEntity::setBright(bool value)
+void Quad3dEntity::setBright(bool value)
 {
 	_isBright = value;
 }
 
-void BillboardEntity::setWireframed(bool value)
+void Quad3dEntity::setWireframed(bool value)
 {
 	_isWireframed = value;
 }
 
-void BillboardEntity::setShadowed(bool value)
+void Quad3dEntity::setShadowed(bool value)
 {
 	_isShadowed = value;
 }
 
-void BillboardEntity::setCentered(bool value)
+void Quad3dEntity::setCentered(bool value)
 {
 	_isCentered = value;
 }
 
-void BillboardEntity::setLightness(float value)
+void Quad3dEntity::setLightness(float value)
 {
 	_lightness = max(0.0f, value);
 }
 
-void BillboardEntity::setTransparency(float value)
+void Quad3dEntity::setTransparency(float value)
 {
 	_transparency = clamp(value, 0.0f, 1.0f);
 }
 
-void BillboardEntity::setMinHeight(float value)
+void Quad3dEntity::setMinHeight(float value)
 {
 	_minHeight = value;
 }
 
-void BillboardEntity::setMaxHeight(float value)
+void Quad3dEntity::setMaxHeight(float value)
 {
 	_maxHeight = value;
 }
 
-void BillboardEntity::setTextureRepeat(float value)
+void Quad3dEntity::setTextureRepeat(float value)
 {
 	_textureRepeat = max(0.0f, value);
 }
 
-void BillboardEntity::setEmissionIntensity(float value)
+void Quad3dEntity::setEmissionIntensity(float value)
 {
 	_emissionIntensity = value;
 }
 
-void BillboardEntity::setFrozen(bool value)
+void Quad3dEntity::setFrozen(bool value)
 {
 	_isFrozen = value;
 }

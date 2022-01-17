@@ -254,9 +254,9 @@ void WorldEditor::inject(shared_ptr<ModelEditor> modelEditor)
 	_modelEditor = modelEditor;
 }
 
-void WorldEditor::inject(shared_ptr<BillboardEditor> billboardEditor)
+void WorldEditor::inject(shared_ptr<Quad3dEditor> quad3dEditor)
 {
-	_billboardEditor = billboardEditor;
+	_quad3dEditor = quad3dEditor;
 }
 
 void WorldEditor::inject(shared_ptr<Animation2dEditor> animation2dEditor)

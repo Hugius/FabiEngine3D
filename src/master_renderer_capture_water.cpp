@@ -39,15 +39,15 @@ void MasterRenderer::_captureWaterReflections()
 			}
 		}
 
-		vector<string> savedBillboardEntityIDs;
+		vector<string> savedQuad3dEntityIDs;
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
-			for(const auto& [key, entity] : _billboardEntityManager->getEntities())
+			for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 			{
 				if(!entity->isReflected() && entity->isVisible())
 				{
 					entity->setVisible(false);
-					savedBillboardEntityIDs.push_back(entity->getID());
+					savedQuad3dEntityIDs.push_back(entity->getID());
 				}
 			}
 		}
@@ -119,9 +119,9 @@ void MasterRenderer::_captureWaterReflections()
 			}
 		}
 
-		for(const auto& savedID : savedBillboardEntityIDs)
+		for(const auto& savedID : savedQuad3dEntityIDs)
 		{
-			for(const auto& [key, entity] : _billboardEntityManager->getEntities())
+			for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 			{
 				if(entity->getID() == savedID)
 				{

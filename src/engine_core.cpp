@@ -20,7 +20,7 @@ EngineCore::EngineCore()
 	_terrainEntityManager = make_shared<TerrainEntityManager>();
 	_waterEntityManager = make_shared<WaterEntityManager>();
 	_modelEntityManager = make_shared<ModelEntityManager>();
-	_billboardEntityManager = make_shared<BillboardEntityManager>();
+	_quad3dEntityManager = make_shared<Quad3dEntityManager>();
 	_aabbEntityManager = make_shared<AabbEntityManager>();
 	_quad2dEntityManager = make_shared<Quad2dEntityManager>();
 	_text2dEntityManager = make_shared<Text2dEntityManager>();
@@ -52,9 +52,9 @@ EngineCore::EngineCore()
 	_modelEntityManager->inject(_reflectionEntityManager);
 	_modelEntityManager->inject(_meshLoader);
 	_modelEntityManager->inject(_vertexBufferCache);
-	_billboardEntityManager->inject(_renderBus);
+	_quad3dEntityManager->inject(_renderBus);
 	_aabbEntityManager->inject(_modelEntityManager);
-	_aabbEntityManager->inject(_billboardEntityManager);
+	_aabbEntityManager->inject(_quad3dEntityManager);
 	_quad2dEntityManager->inject(_renderBus);
 	_text2dEntityManager->inject(_renderBus);
 	_masterRenderer->inject(_renderBus);
@@ -65,7 +65,7 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_terrainEntityManager);
 	_masterRenderer->inject(_waterEntityManager);
 	_masterRenderer->inject(_modelEntityManager);
-	_masterRenderer->inject(_billboardEntityManager);
+	_masterRenderer->inject(_quad3dEntityManager);
 	_masterRenderer->inject(_aabbEntityManager);
 	_masterRenderer->inject(_quad2dEntityManager);
 	_masterRenderer->inject(_text2dEntityManager);
@@ -300,8 +300,8 @@ void EngineCore::update()
 			_timer->startDeltaPart("modelEntityUpdate");
 			_modelEntityManager->update();
 			_timer->stopDeltaPart();
-			_timer->startDeltaPart("billboardEntityUpdate");
-			_billboardEntityManager->update();
+			_timer->startDeltaPart("quad3dEntityUpdate");
+			_quad3dEntityManager->update();
 			_timer->stopDeltaPart();
 			_timer->startDeltaPart("aabbEntityUpdate");
 			_aabbEntityManager->update();
@@ -459,9 +459,9 @@ const shared_ptr<ModelEntityManager> EngineCore::getModelEntityManager() const
 	return _modelEntityManager;
 }
 
-const shared_ptr<BillboardEntityManager> EngineCore::getBillboardEntityManager() const
+const shared_ptr<Quad3dEntityManager> EngineCore::getQuad3dEntityManager() const
 {
-	return _billboardEntityManager;
+	return _quad3dEntityManager;
 }
 
 const shared_ptr<AabbEntityManager> EngineCore::getAabbEntityManager() const

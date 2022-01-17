@@ -1,11 +1,11 @@
 #include "billboard_editor.hpp"
 #include "logger.hpp"
 
-void BillboardEditor::_updateMiscellaneousMenu()
+void Quad3dEditor::_updateMiscellaneousMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "billboardEditorMenuMiscellaneous")
+	if(screen->getID() == "quad3dEditorMenuMiscellaneous")
 	{
 		auto size = _fe3d->billboard_getSize(_currentBillboardID);
 		auto isFacingX = _fe3d->billboard_isFacingCameraX(_currentBillboardID);
@@ -14,7 +14,7 @@ void BillboardEditor::_updateMiscellaneousMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())

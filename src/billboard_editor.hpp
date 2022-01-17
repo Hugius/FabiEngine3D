@@ -2,7 +2,7 @@
 
 #include "base_editor.hpp"
 
-class BillboardEditor final : public BaseEditor
+class Quad3dEditor final : public BaseEditor
 {
 public:
 	using BaseEditor::inject;

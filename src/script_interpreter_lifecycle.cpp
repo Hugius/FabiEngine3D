@@ -122,7 +122,7 @@ void ScriptInterpreter::load()
 		auto waterImagePaths = _waterEditor->getImagePathsFromFile();
 		auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
 		auto modelImagePaths = _modelEditor->getImagePathsFromFile();
-		auto billboardImagePaths = _billboardEditor->getImagePathsFromFile();
+		auto billboardImagePaths = _quad3dEditor->getImagePathsFromFile();
 		auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
 		auto textImagePaths = _text2dEditor->getImagePathsFromFile();
 		auto audioPaths = _soundEditor->getAudioPathsFromFile();
@@ -147,7 +147,7 @@ void ScriptInterpreter::load()
 	_terrainEditor->loadFromFile();
 	_waterEditor->loadFromFile();
 	_modelEditor->loadFromFile();
-	_billboardEditor->loadFromFile();
+	_quad3dEditor->loadFromFile();
 	_quad2dEditor->loadFromFile();
 	_text2dEditor->loadFromFile();
 	_animation2dEditor->loadFromFile(false);

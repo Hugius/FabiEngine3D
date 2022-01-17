@@ -28,7 +28,7 @@ constexpr float standingBufferData[] =
 constexpr unsigned int centeredBufferDataCount = static_cast<unsigned int>(sizeof(centeredBufferData) / sizeof(float));
 constexpr unsigned int standingBufferDataCount = static_cast<unsigned int>(sizeof(standingBufferData) / sizeof(float));
 
-BillboardEntityManager::BillboardEntityManager()
+Quad3dEntityManager::Quad3dEntityManager()
 	:
 	_centeredMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
 	_standingMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
@@ -36,18 +36,18 @@ BillboardEntityManager::BillboardEntityManager()
 
 }
 
-void BillboardEntityManager::inject(shared_ptr<RenderBus> renderBus)
+void Quad3dEntityManager::inject(shared_ptr<RenderBus> renderBus)
 {
 	_renderBus = renderBus;
 }
 
-shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
+shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("BillboardEntityManager::getEntity");
+		Logger::throwError("Quad3dEntityManager::getEntity");
 	}
 	else
 	{
@@ -55,14 +55,14 @@ shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
 	}
 }
 
-const unordered_map<string, shared_ptr<BillboardEntity>>& BillboardEntityManager::getEntities()
+const unordered_map<string, shared_ptr<Quad3dEntity>>& Quad3dEntityManager::getEntities()
 {
 	return _entities;
 }
 
-void BillboardEntityManager::createEntity(const string& ID, bool isCentered)
+void Quad3dEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	auto entity = make_shared<BillboardEntity>(ID);
+	auto entity = make_shared<Quad3dEntity>(ID);
 
 	_entities.insert(make_pair(ID, entity));
 
@@ -70,7 +70,7 @@ void BillboardEntityManager::createEntity(const string& ID, bool isCentered)
 	entity->setCentered(isCentered);
 }
 
-void BillboardEntityManager::update()
+void Quad3dEntityManager::update()
 {
 	for(const auto& [key, entity] : _entities)
 	{
@@ -101,22 +101,22 @@ void BillboardEntityManager::update()
 	}
 }
 
-void BillboardEntityManager::deleteEntity(const string& ID)
+void Quad3dEntityManager::deleteEntity(const string& ID)
 {
 	if(!isEntityExisting(ID))
 	{
-		Logger::throwError("BillboardEntityManager::deleteEntity");
+		Logger::throwError("Quad3dEntityManager::deleteEntity");
 	}
 
 	_entities.erase(ID);
 }
 
-void BillboardEntityManager::deleteEntities()
+void Quad3dEntityManager::deleteEntities()
 {
 	_entities.clear();
 }
 
-const bool BillboardEntityManager::isEntityExisting(const string& ID) const
+const bool Quad3dEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }

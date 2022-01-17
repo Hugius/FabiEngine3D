@@ -1,6 +1,6 @@
 #include "billboard_entity_depth_renderer.hpp"
 
-void BillboardEntityDepthRenderer::bind()
+void Quad3dEntityDepthRenderer::bind()
 {
 	_shader->bind();
 
@@ -16,7 +16,7 @@ void BillboardEntityDepthRenderer::bind()
 	glDepthFunc(GL_LEQUAL);
 }
 
-void BillboardEntityDepthRenderer::unbind()
+void Quad3dEntityDepthRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 
@@ -27,7 +27,7 @@ void BillboardEntityDepthRenderer::unbind()
 	_shader->unbind();
 }
 
-void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clippingY, bool isUnderWater)
+void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity, float clippingY, bool isUnderWater)
 {
 	if(entity->isVisible())
 	{

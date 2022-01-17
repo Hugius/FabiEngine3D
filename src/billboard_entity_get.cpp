@@ -1,151 +1,151 @@
 #include "billboard_entity.hpp"
 
-const shared_ptr<VertexBuffer> BillboardEntity::getMesh() const
+const shared_ptr<VertexBuffer> Quad3dEntity::getMesh() const
 {
 	return _mesh;
 }
 
-const mat44& BillboardEntity::getTransformationMatrix() const
+const mat44& Quad3dEntity::getTransformationMatrix() const
 {
 	return _transformationMatrix;
 }
 
-const shared_ptr<TextureBuffer> BillboardEntity::getDiffuseMap() const
+const shared_ptr<TextureBuffer> Quad3dEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
 }
 
-const shared_ptr<TextureBuffer> BillboardEntity::getEmissionMap() const
+const shared_ptr<TextureBuffer> Quad3dEntity::getEmissionMap() const
 {
 	return _emissionMap;
 }
 
-const fvec3 BillboardEntity::getPosition() const
+const fvec3 Quad3dEntity::getPosition() const
 {
 	return _position;
 }
 
-const fvec3 BillboardEntity::getRotation() const
+const fvec3 Quad3dEntity::getRotation() const
 {
 	return _rotation;
 }
 
-const fvec2 BillboardEntity::getSize() const
+const fvec2 Quad3dEntity::getSize() const
 {
 	return _size;
 }
 
-const fvec2 BillboardEntity::getUvMultiplier() const
+const fvec2 Quad3dEntity::getUvMultiplier() const
 {
 	return _uvMultiplier;
 }
 
-const fvec2 BillboardEntity::getUvOffset() const
+const fvec2 Quad3dEntity::getUvOffset() const
 {
 	return _uvOffset;
 }
 
-const fvec3 BillboardEntity::getColor() const
+const fvec3 Quad3dEntity::getColor() const
 {
 	return _color;
 }
 
-const fvec3 BillboardEntity::getWireframeColor() const
+const fvec3 Quad3dEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const string& BillboardEntity::getDiffuseMapPath() const
+const string& Quad3dEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
 }
 
-const string& BillboardEntity::getEmissionMapPath() const
+const string& Quad3dEntity::getEmissionMapPath() const
 {
 	return _emissionMapPath;
 }
 
-const float BillboardEntity::getLightness() const
+const float Quad3dEntity::getLightness() const
 {
 	return _lightness;
 }
 
-const float BillboardEntity::getTransparency() const
+const float Quad3dEntity::getTransparency() const
 {
 	return _transparency;
 }
 
-const float BillboardEntity::getMinHeight() const
+const float Quad3dEntity::getMinHeight() const
 {
 	return _minHeight;
 }
 
-const float BillboardEntity::getMaxHeight() const
+const float Quad3dEntity::getMaxHeight() const
 {
 	return _maxHeight;
 }
 
-const float BillboardEntity::getTextureRepeat() const
+const float Quad3dEntity::getTextureRepeat() const
 {
 	return _textureRepeat;
 }
 
-const float BillboardEntity::getEmissionIntensity() const
+const float Quad3dEntity::getEmissionIntensity() const
 {
 	return _emissionIntensity;
 }
 
-const bool BillboardEntity::isFacingCameraX() const
+const bool Quad3dEntity::isFacingCameraX() const
 {
 	return _isFacingCameraX;
 }
 
-const bool BillboardEntity::isFacingCameraY() const
+const bool Quad3dEntity::isFacingCameraY() const
 {
 	return _isFacingCameraY;
 }
 
-const bool BillboardEntity::isDepthMapIncluded() const
+const bool Quad3dEntity::isDepthMapIncluded() const
 {
 	return _isDepthMapIncluded;
 }
 
-const bool BillboardEntity::isShadowed() const
+const bool Quad3dEntity::isShadowed() const
 {
 	return _isShadowed;
 }
 
-const bool BillboardEntity::isReflected() const
+const bool Quad3dEntity::isReflected() const
 {
 	return _isReflected;
 }
 
-const bool BillboardEntity::isBright() const
+const bool Quad3dEntity::isBright() const
 {
 	return _isBright;
 }
 
-const bool BillboardEntity::isWireframed() const
+const bool Quad3dEntity::isWireframed() const
 {
 	return _isWireframed;
 }
 
-const bool BillboardEntity::hasDiffuseMap() const
+const bool Quad3dEntity::hasDiffuseMap() const
 {
 	return (_diffuseMap != nullptr);
 }
 
-const bool BillboardEntity::hasEmissionMap() const
+const bool Quad3dEntity::hasEmissionMap() const
 {
 	return (_emissionMap != nullptr);
 }
 
-const bool BillboardEntity::isCentered() const
+const bool Quad3dEntity::isCentered() const
 {
 	return _isCentered;
 }
 
-const bool BillboardEntity::isFrozen() const
+const bool Quad3dEntity::isFrozen() const
 {
 	return _isFrozen;
 }

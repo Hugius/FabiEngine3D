@@ -16,7 +16,7 @@ public:
 	AabbEntityManager();
 
 	void inject(shared_ptr<ModelEntityManager> modelEntityManager);
-	void inject(shared_ptr<BillboardEntityManager> billboardEntityManager);
+	void inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager);
 	void createEntity(const string& ID, bool isCentered);
 	void update();
 	void deleteEntity(const string& ID);
@@ -37,5 +37,5 @@ private:
 	unordered_map<string, shared_ptr<AabbEntity>> _entities;
 
 	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
-	shared_ptr<BillboardEntityManager> _billboardEntityManager = nullptr;
+	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;
 };

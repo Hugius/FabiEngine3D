@@ -9,7 +9,7 @@
 using std::shared_ptr;
 using std::numeric_limits;
 
-class BillboardEntity final : public BaseEntity
+class Quad3dEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

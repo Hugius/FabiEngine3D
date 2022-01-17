@@ -63,9 +63,9 @@ void AabbEntityManager::inject(shared_ptr<ModelEntityManager> modelEntityManager
 	_modelEntityManager = modelEntityManager;
 }
 
-void AabbEntityManager::inject(shared_ptr<BillboardEntityManager> billboardEntityManager)
+void AabbEntityManager::inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager)
 {
-	_billboardEntityManager = billboardEntityManager;
+	_quad3dEntityManager = quad3dEntityManager;
 }
 
 shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
@@ -100,7 +100,7 @@ void AabbEntityManager::createEntity(const string& ID, bool isCentered)
 void AabbEntityManager::update()
 {
 	const auto& modelEntities = _modelEntityManager->getEntities();
-	const auto& billboardEntities = _billboardEntityManager->getEntities();
+	const auto& billboardEntities = _quad3dEntityManager->getEntities();
 
 	for(const auto& [key, entity] : _entities)
 	{

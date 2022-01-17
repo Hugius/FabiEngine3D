@@ -27,8 +27,8 @@ void WorldEditor::load()
 	_quad3dEditor->loadFromFile();
 	for(const auto& ID : _quad3dEditor->getLoadedIDs())
 	{
-		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardPlace");
-		screen->getScrollingList("billboardList")->createButton(ID, ID.substr(1));
+		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace");
+		screen->getScrollingList("quad3dList")->createButton(ID, ID.substr(1));
 	}
 
 	_animation2dEditor->loadFromFile(false);
@@ -86,7 +86,7 @@ void WorldEditor::load()
 	}
 
 	_gui->getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("quad3dID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("quadID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_fe3d->collision_enableCameraResponse(true, true, true);
@@ -147,15 +147,15 @@ void WorldEditor::unload()
 
 	_loadedModelIDs.clear();
 	_outsideLoadedModelIDs.clear();
-	_loadedQuad3dIDs.clear();
-	_outsideLoadedQuad3dIDs.clear();
+	_loadedQuadIDs.clear();
+	_outsideLoadedQuadIDs.clear();
 	_loadedSoundIDs.clear();
 	_outsideLoadedSoundIDs.clear();
 	_initialModelPosition.clear();
 	_initialModelRotation.clear();
 	_initialModelSize.clear();
 	_customWorldModelIDs.clear();
-	_customWorldQuad3dIDs.clear();
+	_customWorldQuadIDs.clear();
 	_customWorldAabbIDs.clear();
 	_customWorldSoundIDs.clear();
 	_customWorldPointlightIDs.clear();
@@ -175,9 +175,9 @@ void WorldEditor::unload()
 	_currentTemplateModelID = "";
 	_selectedModelID = "";
 	_activeModelID = "";
-	_currentTemplateQuad3dID = "";
-	_selectedQuad3dID = "";
-	_activeQuad3dID = "";
+	_currentTemplateQuadID = "";
+	_selectedQuadID = "";
+	_activeQuadID = "";
 	_currentTemplateSoundID = "";
 	_selectedSpeakerID = "";
 	_activeSpeakerID = "";
@@ -192,8 +192,8 @@ void WorldEditor::unload()
 	_editorSpeed = 1.0f;
 	_selectedModelHighlightDirection = 1;
 	_activeModelHighlightDirection = 1;
-	_selectedBillboardHighlightDirection = 1;
-	_activeBillboardHighlightDirection = 1;
+	_selectedQuad3dHighlightDirection = 1;
+	_activeQuad3dHighlightDirection = 1;
 	_selectedSpeakerHighlightDirection = 1;
 	_activeSpeakerHighlightDirection = 1;
 	_selectedLampHighlightDirection = 1;
@@ -208,7 +208,7 @@ void WorldEditor::unload()
 	_hasCustomWorldTerrain = false;
 	_hasCustomWorldWater = false;
 	_dontResetSelectedModel = false;
-	_dontResetSelectedBillboard = false;
+	_dontResetSelectedQuad3d = false;
 	_dontResetSelectedSpeaker = false;
 	_dontResetSelectedLamp = false;
 	_dontResetSelectedTorch = false;
@@ -222,7 +222,7 @@ void WorldEditor::unload()
 	_isDeletingWorld = false;
 
 	_gui->getOverlay()->deleteTextField("modelID");
-	_gui->getOverlay()->deleteTextField("quad3dID");
+	_gui->getOverlay()->deleteTextField("quadID");
 	_gui->getOverlay()->deleteTextField("soundID");
 
 	_fe3d->collision_disableCameraResponse();
@@ -284,23 +284,23 @@ void WorldEditor::update()
 	}
 	if(_isEditorLoaded)
 	{
-		_updateBillboardMenu();
+		_updateQuad3dMenu();
 	}
 	if(_isEditorLoaded)
 	{
-		_updateBillboardPlacingMenu();
+		_updateQuad3dPlacingMenu();
 	}
 	if(_isEditorLoaded)
 	{
-		_updateBillboardChoosingMenu();
+		_updateQuad3dChoosingMenu();
 	}
 	if(_isEditorLoaded)
 	{
-		_updateBillboardPlacing();
+		_updateQuad3dPlacing();
 	}
 	if(_isEditorLoaded)
 	{
-		_updateBillboardEditing();
+		_updateQuad3dEditing();
 	}
 	if(_isEditorLoaded)
 	{

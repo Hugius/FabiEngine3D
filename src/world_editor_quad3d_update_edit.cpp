@@ -1,19 +1,19 @@
 #include "world_editor.hpp"
 
-void WorldEditor::_updateBillboardEditing()
+void WorldEditor::_updateQuad3dEditing()
 {
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	if(!_dontResetSelectedBillboard)
+	if(!_dontResetSelectedQuad3d)
 	{
-		_selectedQuad3dID = "";
+		_selectedQuadID = "";
 	}
 	else
 	{
-		_dontResetSelectedBillboard = false;
+		_dontResetSelectedQuad3d = false;
 	}
 
-	if(_currentTemplateModelID.empty() && _currentTemplateQuad3dID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
+	if(_currentTemplateModelID.empty() && _currentTemplateQuadID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
 		for(const auto& ID : _fe3d->quad3d_getIDs())
 		{
@@ -25,21 +25,21 @@ void WorldEditor::_updateBillboardEditing()
 				if(hovered && _fe3d->misc_isCursorInsideViewport() &&
 				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					_selectBillboard(ID);
+					_selectQuad3d(ID);
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						if(_selectedQuad3dID != _activeQuad3dID)
+						if(_selectedQuadID != _activeQuadID)
 						{
-							_activateBillboard(_selectedQuad3dID);
+							_activateQuad3d(_selectedQuadID);
 						}
 					}
 				}
 				else
 				{
-					if((ID != _selectedQuad3dID) && (ID != _activeQuad3dID))
+					if((ID != _selectedQuadID) && (ID != _activeQuadID))
 					{
-						_unselectBillboard(ID);
+						_unselectQuad3d(ID);
 					}
 				}
 			}
@@ -49,28 +49,28 @@ void WorldEditor::_updateBillboardEditing()
 		{
 			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
-				if(!_activeQuad3dID.empty())
+				if(!_activeQuadID.empty())
 				{
-					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedQuad3dID.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedQuadID.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
-						_activeQuad3dID = "";
+						_activeQuadID = "";
 						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
 		}
 
-		if(_selectedQuad3dID != _activeQuad3dID)
+		if(_selectedQuadID != _activeQuadID)
 		{
-			_updateBillboardHighlighting(_selectedQuad3dID, _selectedBillboardHighlightDirection);
+			_updateQuad3dHighlighting(_selectedQuadID, _selectedQuad3dHighlightDirection);
 		}
-		_updateBillboardHighlighting(_activeQuad3dID, _activeBillboardHighlightDirection);
+		_updateQuad3dHighlighting(_activeQuadID, _activeQuad3dHighlightDirection);
 
-		if(!_activeQuad3dID.empty())
+		if(!_activeQuadID.empty())
 		{
-			auto screen = rightWindow->getScreen("billboardPropertiesMenu");
+			auto screen = rightWindow->getScreen("quad3dPropertiesMenu");
 
-			rightWindow->setActiveScreen("billboardPropertiesMenu");
+			rightWindow->setActiveScreen("quad3dPropertiesMenu");
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -94,7 +94,7 @@ void WorldEditor::_updateBillboardEditing()
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
-					_fe3d->quad3d_setFrozen(_activeQuad3dID, !_fe3d->quad3d_isFrozen(_activeQuad3dID));
+					_fe3d->quad3d_setFrozen(_activeQuadID, !_fe3d->quad3d_isFrozen(_activeQuadID));
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
@@ -102,23 +102,23 @@ void WorldEditor::_updateBillboardEditing()
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d->quad3d_delete(_activeQuad3dID);
+					_fe3d->quad3d_delete(_activeQuadID);
 					rightWindow->setActiveScreen("main");
-					_activeQuad3dID = "";
+					_activeQuadID = "";
 					return;
 				}
 			}
 
-			auto lastAnimationID = _animation2dEditor->getStartedQuad3dAnimationIDs(_activeQuad3dID);
+			auto lastAnimationID = _animation2dEditor->getStartedQuad3dAnimationIDs(_activeQuadID);
 			auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("animationList");
 			if(!selectedButtonID.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if(!lastAnimationID.empty())
 				{
-					_animation2dEditor->stopQuad3dAnimation(lastAnimationID.back(), _activeQuad3dID);
+					_animation2dEditor->stopQuad3dAnimation(lastAnimationID.back(), _activeQuadID);
 				}
 
-				_animation2dEditor->startQuad3dAnimation(selectedButtonID, _activeQuad3dID, -1);
+				_animation2dEditor->startQuad3dAnimation(selectedButtonID, _activeQuadID, -1);
 
 				_gui->getOverlay()->deleteChoiceForm("animationList");
 			}
@@ -129,15 +129,15 @@ void WorldEditor::_updateBillboardEditing()
 
 			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d->quad3d_delete(_activeQuad3dID);
+				_fe3d->quad3d_delete(_activeQuadID);
 				rightWindow->setActiveScreen("main");
-				_activeQuad3dID = "";
+				_activeQuadID = "";
 				return;
 			}
 
-			auto position = _fe3d->quad3d_getPosition(_activeQuad3dID);
-			auto rotation = _fe3d->quad3d_getRotation(_activeQuad3dID);
-			auto size = _fe3d->quad3d_getSize(_activeQuad3dID);
+			auto position = _fe3d->quad3d_getPosition(_activeQuadID);
+			auto rotation = _fe3d->quad3d_getRotation(_activeQuadID);
+			auto size = _fe3d->quad3d_getSize(_activeQuadID);
 
 			screen->getButton("xMinus")->setHoverable(true);
 			screen->getButton("xPlus")->setHoverable(true);
@@ -158,39 +158,39 @@ void WorldEditor::_updateBillboardEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / BILLBOARD_POSITION_DIVIDER));
-				_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / BILLBOARD_POSITION_DIVIDER));
-				_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / BILLBOARD_POSITION_DIVIDER));
-				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / BILLBOARD_POSITION_DIVIDER));
-				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / BILLBOARD_POSITION_DIVIDER));
-				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / BILLBOARD_POSITION_DIVIDER));
-				_fe3d->quad3d_setPosition(_activeQuad3dID, position);
+				_handleValueChanging("quad3dPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / QUAD3D_POSITION_DIVIDER));
+				_handleValueChanging("quad3dPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / QUAD3D_POSITION_DIVIDER));
+				_handleValueChanging("quad3dPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / QUAD3D_POSITION_DIVIDER));
+				_handleValueChanging("quad3dPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / QUAD3D_POSITION_DIVIDER));
+				_handleValueChanging("quad3dPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / QUAD3D_POSITION_DIVIDER));
+				_handleValueChanging("quad3dPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / QUAD3D_POSITION_DIVIDER));
+				_fe3d->quad3d_setPosition(_activeQuadID, position);
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
-				_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", rotation.x, BILLBOARD_ROTATION_SPEED);
-				_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", rotation.x, -BILLBOARD_ROTATION_SPEED);
-				_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", rotation.y, BILLBOARD_ROTATION_SPEED);
-				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -BILLBOARD_ROTATION_SPEED);
-				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, BILLBOARD_ROTATION_SPEED);
-				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -BILLBOARD_ROTATION_SPEED);
-				_fe3d->quad3d_setRotation(_activeQuad3dID, rotation);
+				_handleValueChanging("quad3dPropertiesMenu", "xPlus", "x", rotation.x, QUAD3D_ROTATION_SPEED);
+				_handleValueChanging("quad3dPropertiesMenu", "xMinus", "x", rotation.x, -QUAD3D_ROTATION_SPEED);
+				_handleValueChanging("quad3dPropertiesMenu", "yPlus", "y", rotation.y, QUAD3D_ROTATION_SPEED);
+				_handleValueChanging("quad3dPropertiesMenu", "yMinus", "y", rotation.y, -QUAD3D_ROTATION_SPEED);
+				_handleValueChanging("quad3dPropertiesMenu", "zPlus", "z", rotation.z, QUAD3D_ROTATION_SPEED);
+				_handleValueChanging("quad3dPropertiesMenu", "zMinus", "z", rotation.z, -QUAD3D_ROTATION_SPEED);
+				_fe3d->quad3d_setRotation(_activeQuadID, rotation);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
-				_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", size.x, (_editorSpeed / BILLBOARD_SIZE_DIVIDER), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-				_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / BILLBOARD_SIZE_DIVIDER), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-				_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", size.y, (_editorSpeed / BILLBOARD_SIZE_DIVIDER), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", size.y, -(_editorSpeed / BILLBOARD_SIZE_DIVIDER), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-				_fe3d->quad3d_setSize(_activeQuad3dID, size);
+				_handleValueChanging("quad3dPropertiesMenu", "xPlus", "x", size.x, (_editorSpeed / QUAD3D_SIZE_DIVIDER), QUAD3D_SIZE_MULTIPLIER, 0.0f);
+				_handleValueChanging("quad3dPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / QUAD3D_SIZE_DIVIDER), QUAD3D_SIZE_MULTIPLIER, 0.0f);
+				_handleValueChanging("quad3dPropertiesMenu", "yPlus", "y", size.y, (_editorSpeed / QUAD3D_SIZE_DIVIDER), QUAD3D_SIZE_MULTIPLIER, 0.0f);
+				_handleValueChanging("quad3dPropertiesMenu", "yMinus", "y", size.y, -(_editorSpeed / QUAD3D_SIZE_DIVIDER), QUAD3D_SIZE_MULTIPLIER, 0.0f);
+				_fe3d->quad3d_setSize(_activeQuadID, size);
 			}
 
-			screen->getButton("freeze")->changeTextContent(_fe3d->quad3d_isFrozen(_activeQuad3dID) ? "Unfreeze" : "Freeze");
+			screen->getButton("freeze")->changeTextContent(_fe3d->quad3d_isFrozen(_activeQuadID) ? "Unfreeze" : "Freeze");
 		}
 
-		if(_selectedQuad3dID.empty() && _activeQuad3dID.empty())
+		if(_selectedQuadID.empty() && _activeQuadID.empty())
 		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
 		}
 	}
 }

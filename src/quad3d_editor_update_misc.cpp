@@ -73,121 +73,121 @@ void Quad3dEditor::_updateMiscellaneous()
 			}
 		}
 
-		if(!_currentQuad3dID.empty())
+		if(!_currentQuadID.empty())
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->quad3d_isWireframed(_currentQuad3dID))
+				if(_fe3d->quad3d_isWireframed(_currentQuadID))
 				{
-					_fe3d->quad3d_setWireframed(_currentQuad3dID, false);
+					_fe3d->quad3d_setWireframed(_currentQuadID, false);
 				}
 				else
 				{
-					_fe3d->quad3d_setWireframed(_currentQuad3dID, true);
+					_fe3d->quad3d_setWireframed(_currentQuadID, true);
 				}
 			}
 		}
 	}
 }
 
-void Quad3dEditor::_updateBillboardCreating()
+void Quad3dEditor::_updateQuad3dCreating()
 {
-	if(_isCreatingBillboard)
+	if(_isCreatingQuad3d)
 	{
-		string newQuad3dID;
+		string newQuadID;
 
-		if(_gui->getOverlay()->checkValueForm("billboardCreate", newQuad3dID, {_currentQuad3dID}))
+		if(_gui->getOverlay()->checkValueForm("quad3dCreate", newQuadID, {_currentQuadID}))
 		{
-			if(newQuad3dID.find(' ') != string::npos)
+			if(newQuadID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Billboard ID cannot contain any spaces!");
+				Logger::throwWarning("Quad3d ID cannot contain any spaces!");
 				return;
 			}
 
-			if(newQuad3dID.find('@') != string::npos)
+			if(newQuadID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Billboard ID cannot contain '@'!");
+				Logger::throwWarning("Quad3d ID cannot contain '@'!");
 				return;
 			}
 
-			newQuad3dID = ("@" + newQuad3dID);
+			newQuadID = ("@" + newQuadID);
 
-			if(find(_loadedQuad3dIDs.begin(), _loadedQuad3dIDs.end(), newQuad3dID) != _loadedQuad3dIDs.end())
+			if(find(_loadedQuadIDs.begin(), _loadedQuadIDs.end(), newQuadID) != _loadedQuadIDs.end())
 			{
-				Logger::throwWarning("Billboard with ID \"" + newQuad3dID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Quad3d with ID \"" + newQuadID.substr(1) + "\" already exists!");
 				return;
 			}
 
-			_fe3d->quad3d_create(newQuad3dID, false);
+			_fe3d->quad3d_create(newQuadID, false);
 
-			if(_fe3d->quad3d_isExisting(newQuad3dID))
+			if(_fe3d->quad3d_isExisting(newQuadID))
 			{
-				_currentQuad3dID = newQuad3dID;
-				_loadedQuad3dIDs.push_back(newQuad3dID);
+				_currentQuadID = newQuadID;
+				_loadedQuadIDs.push_back(newQuadID);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), "Billboard: " + newQuad3dID.substr(1), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), true);
-				_isCreatingBillboard = false;
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad3d: " + newQuadID.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
+				_isCreatingQuad3d = false;
 			}
 		}
 	}
 }
 
-void Quad3dEditor::_updateBillboardChoosing()
+void Quad3dEditor::_updateQuad3dChoosing()
 {
-	if(_isChoosingBillboard)
+	if(_isChoosingQuad3d)
 	{
-		if(!_hoveredQuad3dID.empty())
+		if(!_hoveredQuadID.empty())
 		{
-			_fe3d->quad3d_setVisible(_hoveredQuad3dID, false);
+			_fe3d->quad3d_setVisible(_hoveredQuadID, false);
 		}
 
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("billboardList");
+		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("quad3dList");
 
 		if(!selectedButtonID.empty())
 		{
-			_hoveredQuad3dID = ("@" + selectedButtonID);
+			_hoveredQuadID = ("@" + selectedButtonID);
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentQuad3dID = ("@" + selectedButtonID);
-				_hoveredQuad3dID = "";
+				_currentQuadID = ("@" + selectedButtonID);
+				_hoveredQuadID = "";
 
-				if(!_isDeletingBillboard)
+				if(!_isDeletingQuad3d)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), "Billboard: " + _currentQuad3dID.substr(1), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad3d: " + _currentQuadID.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
 				}
 
-				_fe3d->quad3d_setVisible(_currentQuad3dID, true);
-				_gui->getOverlay()->deleteChoiceForm("billboardList");
-				_isChoosingBillboard = false;
+				_fe3d->quad3d_setVisible(_currentQuadID, true);
+				_gui->getOverlay()->deleteChoiceForm("quad3dList");
+				_isChoosingQuad3d = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("billboardList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled("quad3dList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("billboardList");
-			_isChoosingBillboard = false;
-			_isDeletingBillboard = false;
+			_gui->getOverlay()->deleteChoiceForm("quad3dList");
+			_isChoosingQuad3d = false;
+			_isDeletingQuad3d = false;
 		}
 		else
 		{
-			_hoveredQuad3dID = "";
+			_hoveredQuadID = "";
 		}
 
-		if(!_hoveredQuad3dID.empty())
+		if(!_hoveredQuadID.empty())
 		{
-			_fe3d->quad3d_setVisible(_hoveredQuad3dID, true);
+			_fe3d->quad3d_setVisible(_hoveredQuadID, true);
 		}
 	}
 }
 
-void Quad3dEditor::_updateBillboardDeleting()
+void Quad3dEditor::_updateQuad3dDeleting()
 {
-	if(_isDeletingBillboard && !_currentQuad3dID.empty())
+	if(_isDeletingQuad3d && !_currentQuadID.empty())
 	{
 		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
@@ -196,18 +196,18 @@ void Quad3dEditor::_updateBillboardDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->quad3d_delete(_currentQuad3dID);
+			_fe3d->quad3d_delete(_currentQuadID);
 
-			_loadedQuad3dIDs.erase(remove(_loadedQuad3dIDs.begin(), _loadedQuad3dIDs.end(), _currentQuad3dID), _loadedQuad3dIDs.end());
-			_currentQuad3dID = "";
-			_isDeletingBillboard = false;
+			_loadedQuadIDs.erase(remove(_loadedQuadIDs.begin(), _loadedQuadIDs.end(), _currentQuadID), _loadedQuadIDs.end());
+			_currentQuadID = "";
+			_isDeletingQuad3d = false;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_fe3d->quad3d_setVisible(_currentQuad3dID, false);
+			_fe3d->quad3d_setVisible(_currentQuadID, false);
 
-			_currentQuad3dID = "";
-			_isDeletingBillboard = false;
+			_currentQuadID = "";
+			_isDeletingQuad3d = false;
 		}
 	}
 }

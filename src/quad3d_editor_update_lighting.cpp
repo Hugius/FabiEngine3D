@@ -7,12 +7,12 @@ void Quad3dEditor::_updateLightingMenu()
 
 	if(screen->getID() == "quad3dEditorMenuLighting")
 	{
-		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(_currentQuad3dID);
-		auto lightness = _fe3d->quad3d_getLightness(_currentQuad3dID);
-		auto isBright = _fe3d->quad3d_isBright(_currentQuad3dID);
-		auto isReflected = _fe3d->quad3d_isReflected(_currentQuad3dID);
-		auto isShadowed = _fe3d->quad3d_isShadowed(_currentQuad3dID);
-		auto color = _fe3d->quad3d_getColor(_currentQuad3dID);
+		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(_currentQuadID);
+		auto lightness = _fe3d->quad3d_getLightness(_currentQuadID);
+		auto isBright = _fe3d->quad3d_isBright(_currentQuadID);
+		auto isReflected = _fe3d->quad3d_isReflected(_currentQuadID);
+		auto isShadowed = _fe3d->quad3d_isShadowed(_currentQuadID);
+		auto color = _fe3d->quad3d_getColor(_currentQuadID);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -36,43 +36,43 @@ void Quad3dEditor::_updateLightingMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
 		{
 			isBright = !isBright;
-			_fe3d->quad3d_setBright(_currentQuad3dID, isBright);
+			_fe3d->quad3d_setBright(_currentQuadID, isBright);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isShadowed")->isHovered())
 		{
 			isShadowed = !isShadowed;
-			_fe3d->quad3d_setShadowed(_currentQuad3dID, isShadowed);
+			_fe3d->quad3d_setShadowed(_currentQuadID, isShadowed);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflected")->isHovered())
 		{
 			isReflected = !isReflected;
-			_fe3d->quad3d_setReflected(_currentQuad3dID, isReflected);
+			_fe3d->quad3d_setReflected(_currentQuadID, isReflected);
 		}
 
 		if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
-			_fe3d->quad3d_setColor(_currentQuad3dID, color);
+			_fe3d->quad3d_setColor(_currentQuadID, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("colorG", color.g, {}))
 		{
 			color.g /= 255.0f;
-			_fe3d->quad3d_setColor(_currentQuad3dID, color);
+			_fe3d->quad3d_setColor(_currentQuadID, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("colorB", color.b, {}))
 		{
 			color.b /= 255.0f;
-			_fe3d->quad3d_setColor(_currentQuad3dID, color);
+			_fe3d->quad3d_setColor(_currentQuadID, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("lightness", lightness, {}))
 		{
 			lightness /= 100.0f;
-			_fe3d->quad3d_setLightness(_currentQuad3dID, lightness);
+			_fe3d->quad3d_setLightness(_currentQuadID, lightness);
 		}
 		if(_gui->getOverlay()->checkValueForm("emissionIntensity", emissionIntensity, {}))
 		{
 			emissionIntensity /= 100.0f;
-			_fe3d->quad3d_setEmissionIntensity(_currentQuad3dID, emissionIntensity);
+			_fe3d->quad3d_setEmissionIntensity(_currentQuadID, emissionIntensity);
 		}
 
 		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");

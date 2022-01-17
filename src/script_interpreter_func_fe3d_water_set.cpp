@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				_fe3d->water_setDudvMap(_fe3d->water_getSelectedID(), args[0].getString());
-				
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				_fe3d->water_setNormalMap(_fe3d->water_getSelectedID(), args[0].getString());
-				
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				_fe3d->water_setDisplacementMap(_fe3d->water_getSelectedID(), args[0].getString());
-				
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				_fe3d->water_setColor(_fe3d->water_getSelectedID(), fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
-				
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				_fe3d->water_setWireframeColor(_fe3d->water_getSelectedID(), fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
-				
+
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -269,9 +269,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 
 					returnValues.push_back(ScriptValue(SVT::EMPTY));
 				}
-				else if(args[0].getString() == "SKY_TERRAIN_MODELS_BILLBOARDS")
+				else if(args[0].getString() == "SKY_TERRAIN_MODELS_QUAD3DS")
 				{
-					_fe3d->water_setQuality(_fe3d->water_getSelectedID(), WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD);
+					_fe3d->water_setQuality(_fe3d->water_getSelectedID(), WaterQuality::SKY_TERRAIN_MODEL_QUAD3D);
 
 					returnValues.push_back(ScriptValue(SVT::EMPTY));
 				}

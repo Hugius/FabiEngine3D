@@ -14,6 +14,6 @@ const bool Quad3dEditor::isLoaded() const
 
 const vector<string>& Quad3dEditor::getLoadedIDs()
 {
-	sort(_loadedQuad3dIDs.begin(), _loadedQuad3dIDs.end());
-	return _loadedQuad3dIDs;
+	sort(_loadedQuadIDs.begin(), _loadedQuadIDs.end());
+	return _loadedQuadIDs;
 }

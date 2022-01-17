@@ -23,7 +23,7 @@ void SoundEditor::load()
 	_fe3d->camera_setYaw(270.0f);
 
 	_fe3d->quad3d_create("@@icon", true);
-	_fe3d->quad3d_setPosition("@@icon", ICON_BILLBOARD_POSITION);
+	_fe3d->quad3d_setPosition("@@icon", ICON_QUAD_POSITION);
 	_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
 	_fe3d->quad3d_setBright("@@icon", true);
 

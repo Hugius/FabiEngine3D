@@ -65,9 +65,9 @@ void WorldEditor::_updateChoiceMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuModel");
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("billboards")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quad3ds")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuBillboard");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3d");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sounds")->isHovered())
 		{
@@ -93,7 +93,7 @@ void WorldEditor::_updateChoiceMenu()
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_currentTemplateModelID = "";
-			_currentTemplateQuad3dID = "";
+			_currentTemplateQuadID = "";
 			_currentTemplateSoundID = "";
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;
@@ -116,7 +116,7 @@ void WorldEditor::_updateChoiceMenu()
 		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
 			_currentTemplateModelID = "";
-			_currentTemplateQuad3dID = "";
+			_currentTemplateQuadID = "";
 			_currentTemplateSoundID = "";
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;

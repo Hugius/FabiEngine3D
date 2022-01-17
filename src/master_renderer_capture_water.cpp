@@ -13,7 +13,7 @@ void MasterRenderer::_captureWaterReflections()
 
 		vector<string> savedModelEntityIDs;
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL ||
-		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
+		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
 		{
 			for(const auto& [key, entity] : _modelEntityManager->getEntities())
 			{
@@ -40,7 +40,7 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		vector<string> savedQuad3dEntityIDs;
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
 		{
 			for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 			{
@@ -90,14 +90,14 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL ||
-		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
+		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderQuad3dEntities();
@@ -204,14 +204,14 @@ void MasterRenderer::_captureWaterRefractions()
 		}
 
 		if((waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL) ||
-		   (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD))
+		   (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D))
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderQuad3dEntities();

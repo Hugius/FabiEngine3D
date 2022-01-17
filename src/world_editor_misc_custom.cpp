@@ -11,7 +11,7 @@ void WorldEditor::createCustomWorld(const string& ID)
 	_hasCustomWorldWater = false;
 	_hasCustomWorldGraphics = false;
 	_customWorldModelIDs.clear();
-	_customWorldQuad3dIDs.clear();
+	_customWorldQuadIDs.clear();
 	_customWorldAabbIDs.clear();
 	_customWorldSoundIDs.clear();
 	_customWorldPointlightIDs.clear();
@@ -90,15 +90,15 @@ void WorldEditor::addModelToCustomWorld(const string& ID)
 	}
 }
 
-void WorldEditor::addBillboardToCustomWorld(const string& ID)
+void WorldEditor::addQuad3dToCustomWorld(const string& ID)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldQuad3dIDs.push_back(ID);
+		_customWorldQuadIDs.push_back(ID);
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add billboard to custom world!");
+		Logger::throwWarning("Cannot add quad3d to custom world!");
 	}
 }
 

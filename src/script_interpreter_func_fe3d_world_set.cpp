@@ -76,13 +76,13 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:world_add_custom_billboard")
+	else if(functionName == "fe3d:world_add_custom_quad3d")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor->addBillboardToCustomWorld(args[0].getString());
+			_worldEditor->addQuad3dToCustomWorld(args[0].getString());
 
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}

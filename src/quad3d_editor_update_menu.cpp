@@ -12,8 +12,8 @@ void Quad3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("billboardCreate", "Create Billboard", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
-			_isCreatingBillboard = true;
+			_gui->getOverlay()->createValueForm("quad3dCreate", "Create Quad3d", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_isCreatingQuad3d = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -22,8 +22,8 @@ void Quad3dEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("billboardList", "Edit Billboard", fvec2(-0.5f, 0.1f), IDs);
-			_isChoosingBillboard = true;
+			_gui->getOverlay()->createChoiceForm("quad3dList", "Edit Quad3d", fvec2(-0.5f, 0.1f), IDs);
+			_isChoosingQuad3d = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -32,9 +32,9 @@ void Quad3dEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("billboardList", "Delete Billboard", fvec2(-0.5f, 0.1f), IDs);
-			_isChoosingBillboard = true;
-			_isDeletingBillboard = true;
+			_gui->getOverlay()->createChoiceForm("quad3dList", "Delete Quad3d", fvec2(-0.5f, 0.1f), IDs);
+			_isChoosingQuad3d = true;
+			_isDeletingQuad3d = true;
 		}
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
@@ -61,10 +61,10 @@ void Quad3dEditor::_updateChoiceMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->quad3d_setWireframed(_currentQuad3dID, false);
-			_fe3d->quad3d_setVisible(_currentQuad3dID, false);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), false);
-			_currentQuad3dID = "";
+			_fe3d->quad3d_setWireframed(_currentQuadID, false);
+			_fe3d->quad3d_setVisible(_currentQuadID, false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
+			_currentQuadID = "";
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuMain");
 			return;
 		}

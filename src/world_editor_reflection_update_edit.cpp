@@ -5,7 +5,7 @@ void WorldEditor::_updateReflectionEditing()
 {
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	if(_currentTemplateModelID.empty() && _currentTemplateQuad3dID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelID.empty() && _currentTemplateQuadID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		if(!_dontResetSelectedCamera)
 		{

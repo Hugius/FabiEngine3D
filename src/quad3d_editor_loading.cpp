@@ -18,12 +18,12 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\quad3d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` missing!");
 		return {};
 	}
 
@@ -31,7 +31,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string quad3dID, diffuseMapPath, emissionMapPath;
+		string quadID, diffuseMapPath, emissionMapPath;
 		fvec2 size;
 		fvec3 color;
 		bool isFacingX, isFacingY;
@@ -39,7 +39,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 		istringstream iss(line);
 
 		iss >>
-			quad3dID >>
+			quadID >>
 			size.x >>
 			size.y >>
 			color.r >>
@@ -89,23 +89,23 @@ const bool Quad3dEditor::loadFromFile()
 		Logger::throwError("Quad3dEditor::loadFromFile");
 	}
 
-	_loadedQuad3dIDs.clear();
+	_loadedQuadIDs.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\quad3d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` missing!");
 		return false;
 	}
 
 	string line;
 	while(getline(file, line))
 	{
-		string quad3dID, diffuseMapPath, emissionMapPath;
+		string quadID, diffuseMapPath, emissionMapPath;
 		fvec2 size;
 		fvec3 color;
 		float lightness, textureRepeat, transparency, emissionIntensity;
@@ -114,7 +114,7 @@ const bool Quad3dEditor::loadFromFile()
 		istringstream iss(line);
 
 		iss >>
-			quad3dID >>
+			quadID >>
 			size.x >>
 			size.y >>
 			color.r >>
@@ -138,24 +138,24 @@ const bool Quad3dEditor::loadFromFile()
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-		_fe3d->quad3d_create(quad3dID, false);
+		_fe3d->quad3d_create(quadID, false);
 
-		if(_fe3d->quad3d_isExisting(quad3dID))
+		if(_fe3d->quad3d_isExisting(quadID))
 		{
-			_loadedQuad3dIDs.push_back(quad3dID);
+			_loadedQuadIDs.push_back(quadID);
 
-			_fe3d->quad3d_setVisible(quad3dID, false);
-			_fe3d->quad3d_setSize(quad3dID, size);
-			_fe3d->quad3d_setColor(quad3dID, color);
-			_fe3d->quad3d_setLightness(quad3dID, lightness);
-			_fe3d->quad3d_setFacingCameraX(quad3dID, isFacingX);
-			_fe3d->quad3d_setFacingCameraY(quad3dID, isFacingY);
-			_fe3d->quad3d_setShadowed(quad3dID, isShadowed);
-			_fe3d->quad3d_setReflected(quad3dID, isReflected);
-			_fe3d->quad3d_setTextureRepeat(quad3dID, textureRepeat);
-			_fe3d->quad3d_setBright(quad3dID, isBright);
-			_fe3d->quad3d_setTransparency(quad3dID, transparency);
-			_fe3d->quad3d_setEmissionIntensity(quad3dID, emissionIntensity);
+			_fe3d->quad3d_setVisible(quadID, false);
+			_fe3d->quad3d_setSize(quadID, size);
+			_fe3d->quad3d_setColor(quadID, color);
+			_fe3d->quad3d_setLightness(quadID, lightness);
+			_fe3d->quad3d_setFacingCameraX(quadID, isFacingX);
+			_fe3d->quad3d_setFacingCameraY(quadID, isFacingY);
+			_fe3d->quad3d_setShadowed(quadID, isShadowed);
+			_fe3d->quad3d_setReflected(quadID, isReflected);
+			_fe3d->quad3d_setTextureRepeat(quadID, textureRepeat);
+			_fe3d->quad3d_setBright(quadID, isBright);
+			_fe3d->quad3d_setTransparency(quadID, transparency);
+			_fe3d->quad3d_setEmissionIntensity(quadID, emissionIntensity);
 
 			if(!diffuseMapPath.empty())
 			{
@@ -164,7 +164,7 @@ const bool Quad3dEditor::loadFromFile()
 					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 				}
 
-				_fe3d->quad3d_setDiffuseMap(quad3dID, diffuseMapPath);
+				_fe3d->quad3d_setDiffuseMap(quadID, diffuseMapPath);
 			}
 
 			if(!emissionMapPath.empty())
@@ -174,14 +174,14 @@ const bool Quad3dEditor::loadFromFile()
 					emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 				}
 
-				_fe3d->quad3d_setEmissionMap(quad3dID, emissionMapPath);
+				_fe3d->quad3d_setEmissionMap(quadID, emissionMapPath);
 			}
 		}
 	}
 
 	file.close();
 
-	Logger::throwInfo("Billboard editor data loaded!");
+	Logger::throwInfo("Quad3d editor data loaded!");
 
 	return true;
 }

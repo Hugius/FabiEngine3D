@@ -330,9 +330,9 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 
 					returnValues.push_back(ScriptValue(SVT::STRING, result));
 				}
-				if(quality == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
+				if(quality == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
 				{
-					const auto result = "SKY_TERRAIN_MODEL_BILLBOARD";
+					const auto result = "SKY_TERRAIN_MODEL_QUAD3D";
 
 					returnValues.push_back(ScriptValue(SVT::STRING, result));
 				}

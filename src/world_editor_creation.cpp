@@ -6,9 +6,9 @@ void WorldEditor::copyTemplateModel(const string& newID, const string& templateI
 	_copyTemplateModel(newID, templateID, position, true);
 }
 
-void WorldEditor::copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position)
+void WorldEditor::copyTemplateQuad3d(const string& newID, const string& templateID, fvec3 position)
 {
-	_copyTemplateBillboard(newID, templateID, position, true);
+	_copyTemplateQuad3d(newID, templateID, position, true);
 }
 
 void WorldEditor::copyTemplateSound(const string& newID, const string& templateID, fvec3 position)
@@ -267,16 +267,16 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateQuad3d(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
 {
 	if(_fe3d->quad3d_isExisting(newID))
 	{
-		Logger::throwWarning("Billboard with ID \"" + newID + "\" already exists!");
+		Logger::throwWarning("Quad3d with ID \"" + newID + "\" already exists!");
 		return false;
 	}
 	if(!_fe3d->quad3d_isExisting(templateID))
 	{
-		Logger::throwWarning("Editor billboard of billboard with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Editor quad3d of quad3d with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -307,11 +307,11 @@ const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string
 
 	if(isFromOutside)
 	{
-		_outsideLoadedQuad3dIDs[newID] = templateID;
+		_outsideLoadedQuadIDs[newID] = templateID;
 	}
 	else
 	{
-		_loadedQuad3dIDs[newID] = templateID;
+		_loadedQuadIDs[newID] = templateID;
 	}
 
 	return true;

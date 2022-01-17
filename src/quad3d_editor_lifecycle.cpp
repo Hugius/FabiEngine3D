@@ -47,14 +47,14 @@ void Quad3dEditor::load()
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d->model_setShadowed("@@grid", false);
 
-	_gui->getOverlay()->createTextField("quad3dID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("quadID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }
 
 void Quad3dEditor::unload()
 {
-	for(const auto& ID : _loadedQuad3dIDs)
+	for(const auto& ID : _loadedQuadIDs)
 	{
 		_fe3d->quad3d_delete(ID);
 	}
@@ -76,14 +76,14 @@ void Quad3dEditor::unload()
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
 
-	_gui->getOverlay()->deleteTextField("quad3dID");
+	_gui->getOverlay()->deleteTextField("quadID");
 
-	_loadedQuad3dIDs.clear();
-	_hoveredQuad3dID = "";
-	_currentQuad3dID = "";
-	_isCreatingBillboard = false;
-	_isChoosingBillboard = false;
-	_isDeletingBillboard = false;
+	_loadedQuadIDs.clear();
+	_hoveredQuadID = "";
+	_currentQuadID = "";
+	_isCreatingQuad3d = false;
+	_isChoosingQuad3d = false;
+	_isDeletingQuad3d = false;
 	_isEditorLoaded = false;
 }
 
@@ -93,9 +93,9 @@ void Quad3dEditor::_loadGUI()
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("quad3dEditorMenuMain");
-	leftWindow->getScreen("quad3dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), fvec2(TW("Create Billboard"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Create Billboard", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad3dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), fvec2(TW("Edit Billboard"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Billboard", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad3dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), fvec2(TW("Delete Billboard"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Billboard", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad3dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), fvec2(TW("Create Quad3d"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Create Quad3d", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad3dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), fvec2(TW("Edit Quad3d"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Quad3d", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad3dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), fvec2(TW("Delete Quad3d"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Quad3d", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("quad3dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
 	positions = VPC::calculateButtonPositions(4, CH);
@@ -165,15 +165,15 @@ void Quad3dEditor::update()
 	}
 	if(_isEditorLoaded)
 	{
-		_updateBillboardCreating();
+		_updateQuad3dCreating();
 	}
 	if(_isEditorLoaded)
 	{
-		_updateBillboardChoosing();
+		_updateQuad3dChoosing();
 	}
 	if(_isEditorLoaded)
 	{
-		_updateBillboardDeleting();
+		_updateQuad3dDeleting();
 	}
 	if(_isEditorLoaded)
 	{

@@ -73,7 +73,7 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
-	for(const auto& [key, templateID] : _loadedQuad3dIDs)
+	for(const auto& [key, templateID] : _loadedQuadIDs)
 	{
 		_fe3d->quad3d_delete(key);
 
@@ -129,7 +129,7 @@ void WorldEditor::unloadEditorWorld()
 	_loadedTerrainID = "";
 	_loadedWaterID = "";
 	_loadedModelIDs.clear();
-	_loadedQuad3dIDs.clear();
+	_loadedQuadIDs.clear();
 	_loadedSoundIDs.clear();
 	_loadedPointlightIDs.clear();
 	_loadedSpotlightIDs.clear();

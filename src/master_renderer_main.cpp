@@ -24,9 +24,9 @@ MasterRenderer::MasterRenderer()
 	_modelEntityColorShader = make_shared<ShaderBuffer>("model_entity_color_shader.vert", "model_entity_color_shader.frag");
 	_modelEntityDepthShader = make_shared<ShaderBuffer>("model_entity_depth_shader.vert", "model_entity_depth_shader.frag");
 	_modelEntityShadowShader = make_shared<ShaderBuffer>("model_entity_shadow_shader.vert", "model_entity_shadow_shader.frag");
-	_quad3dEntityColorShader = make_shared<ShaderBuffer>("billboard_entity_color_shader.vert", "billboard_entity_color_shader.frag");
-	_quad3dEntityDepthShader = make_shared<ShaderBuffer>("billboard_entity_depth_shader.vert", "billboard_entity_depth_shader.frag");
-	_quad3dEntityShadowShader = make_shared<ShaderBuffer>("billboard_entity_shadow_shader.vert", "billboard_entity_shadow_shader.frag");
+	_quad3dEntityColorShader = make_shared<ShaderBuffer>("quad3d_entity_color_shader.vert", "quad3d_entity_color_shader.frag");
+	_quad3dEntityDepthShader = make_shared<ShaderBuffer>("quad3d_entity_depth_shader.vert", "quad3d_entity_depth_shader.frag");
+	_quad3dEntityShadowShader = make_shared<ShaderBuffer>("quad3d_entity_shadow_shader.vert", "quad3d_entity_shadow_shader.frag");
 	_aabbEntityColorShader = make_shared<ShaderBuffer>("aabb_entity_color_shader.vert", "aabb_entity_color_shader.frag");
 	_quad2dEntityColorShader = make_shared<ShaderBuffer>("quad2d_entity_color_shader.vert", "quad2d_entity_color_shader.frag");
 	_antiAliasingShader = make_shared<ShaderBuffer>("anti_aliasing_shader.vert", "anti_aliasing_shader.frag");

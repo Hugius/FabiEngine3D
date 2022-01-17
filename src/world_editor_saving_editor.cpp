@@ -138,26 +138,26 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& quad3dID : _fe3d->quad3d_getIDs())
+	for(const auto& quadID : _fe3d->quad3d_getIDs())
 	{
-		if(quad3dID[0] != '@')
+		if(quadID[0] != '@')
 		{
-			auto startedAnimations = _animation2dEditor->getStartedQuad3dAnimationIDs(quad3dID);
+			auto startedAnimations = _animation2dEditor->getStartedQuad3dAnimationIDs(quadID);
 
-			auto position = _fe3d->quad3d_getPosition(quad3dID);
-			auto rotation = _fe3d->quad3d_getRotation(quad3dID);
-			auto size = _fe3d->quad3d_getSize(quad3dID);
+			auto position = _fe3d->quad3d_getPosition(quadID);
+			auto rotation = _fe3d->quad3d_getRotation(quadID);
+			auto size = _fe3d->quad3d_getSize(quadID);
 			auto animationID = (startedAnimations.empty() ? "" : startedAnimations[0]);
 
 			animationID = (animationID.empty()) ? "?" : animationID;
 
 			replace(animationID.begin(), animationID.end(), ' ', '?');
 
-			string templateID = _loadedQuad3dIDs.at(quad3dID);
+			string templateID = _loadedQuadIDs.at(quadID);
 
 			file <<
-				"BILLBOARD " <<
-				quad3dID << " " <<
+				"QUAD3D " <<
+				quadID << " " <<
 				templateID << " " <<
 				position.x << " " <<
 				position.y << " " <<

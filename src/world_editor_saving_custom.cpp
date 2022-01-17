@@ -255,50 +255,50 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	//for(const auto& quad3dID : _fe3d->quad3d_getIDs())
+	//for(const auto& quadID : _fe3d->quad3d_getIDs())
 	//{
-	//	bool isCustomWorldBillboard =
-	//		find(_customWorldQuad3dIDs.begin(), _customWorldQuad3dIDs.end(), quad3dID) != _customWorldQuad3dIDs.end();
-	//	if((quad3dID[0] != '@') && isCustomWorldBillboard)
+	//	bool isCustomWorldQuad3d =
+	//		find(_customWorldQuadIDs.begin(), _customWorldQuadIDs.end(), quadID) != _customWorldQuadIDs.end();
+	//	if((quadID[0] != '@') && isCustomWorldQuad3d)
 	//	{
-	//		auto aabbIDs = _fe3d->aabb_getChildIDs(quad3dID, AabbParentEntityType::QUAD3D);
+	//		auto aabbIDs = _fe3d->aabb_getChildIDs(quadID, AabbParentEntityType::QUAD3D);
 
-	//		auto isVisible = _fe3d->quad3d_isVisible(quad3dID);
+	//		auto isVisible = _fe3d->quad3d_isVisible(quadID);
 	//		auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d->aabb_isRaycastResponsive(aabbIDs[0]);
 	//		auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d->aabb_isCollisionResponsive(aabbIDs[0]);
-	//		auto isFacingX = _fe3d->quad3d_isFacingCameraX(quad3dID);
-	//		auto isFacingY = _fe3d->quad3d_isFacingCameraY(quad3dID);
-	//		//auto isAnimationPlaying = _fe3d->quad3d_isSpriteAnimationStarted(quad3dID);
-	//		//auto isAnimationPaused = _fe3d->quad3d_isSpriteAnimationPaused(quad3dID);
-	//		auto position = _fe3d->quad3d_getPosition(quad3dID);
-	//		auto rotation = _fe3d->quad3d_getRotation(quad3dID);
-	//		auto size = _fe3d->quad3d_getSize(quad3dID);
-	//		auto color = _fe3d->quad3d_getColor(quad3dID);
-	//		//auto textContent = _fe3d->quad3d_getTextContent(quad3dID);
-	//		auto lightness = _fe3d->quad3d_getLightness(quad3dID);
-	//		auto minHeight = _fe3d->quad3d_getMinHeight(quad3dID);
-	//		auto maxHeight = _fe3d->quad3d_getMaxHeight(quad3dID);
-	//		//auto remainingAnimationLoops = _fe3d->quad3d_getRemainingSpriteAnimationLoops(quad3dID);
-	//		//auto animationRowIndex = _fe3d->quad3d_getSpriteAnimationRowIndex(quad3dID);
-	//		//auto animationColumnIndex = _fe3d->quad3d_getSpriteAnimationColumnIndex(quad3dID);
+	//		auto isFacingX = _fe3d->quad3d_isFacingCameraX(quadID);
+	//		auto isFacingY = _fe3d->quad3d_isFacingCameraY(quadID);
+	//		//auto isAnimationPlaying = _fe3d->quad3d_isSpriteAnimationStarted(quadID);
+	//		//auto isAnimationPaused = _fe3d->quad3d_isSpriteAnimationPaused(quadID);
+	//		auto position = _fe3d->quad3d_getPosition(quadID);
+	//		auto rotation = _fe3d->quad3d_getRotation(quadID);
+	//		auto size = _fe3d->quad3d_getSize(quadID);
+	//		auto color = _fe3d->quad3d_getColor(quadID);
+	//		//auto textContent = _fe3d->quad3d_getTextContent(quadID);
+	//		auto lightness = _fe3d->quad3d_getLightness(quadID);
+	//		auto minHeight = _fe3d->quad3d_getMinHeight(quadID);
+	//		auto maxHeight = _fe3d->quad3d_getMaxHeight(quadID);
+	//		//auto remainingAnimationLoops = _fe3d->quad3d_getRemainingSpriteAnimationLoops(quadID);
+	//		//auto animationRowIndex = _fe3d->quad3d_getSpriteAnimationRowIndex(quadID);
+	//		//auto animationColumnIndex = _fe3d->quad3d_getSpriteAnimationColumnIndex(quadID);
 
 	//		//textContent = (textContent.empty()) ? "?" : textContent;
 
 	//		//replace(textContent.begin(), textContent.end(), ' ', '?');
 
 	//		string templateID;
-	//		if(_loadedQuad3dIDs.find(quad3dID) == _loadedQuad3dIDs.end())
+	//		if(_loadedQuadIDs.find(quadID) == _loadedQuadIDs.end())
 	//		{
-	//			templateID = _outsideLoadedQuad3dIDs.at(quad3dID);
+	//			templateID = _outsideLoadedQuadIDs.at(quadID);
 	//		}
 	//		else
 	//		{
-	//			templateID = _loadedQuad3dIDs.at(quad3dID);
+	//			templateID = _loadedQuadIDs.at(quadID);
 	//		}
 
 	//		file <<
-	//			"BILLBOARD " <<
-	//			quad3dID << " " <<
+	//			"QUAD3D " <<
+	//			quadID << " " <<
 	//			templateID << " " <<
 	//			isVisible << " " <<
 	//			isAabbRaycastResponsive << " " <<
@@ -593,7 +593,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//_hasCustomWorldTerrain = false;
 	//_hasCustomWorldWater = false;
 	//_customWorldModelIDs.clear();
-	//_customWorldQuad3dIDs.clear();
+	//_customWorldQuadIDs.clear();
 	//_customWorldAabbIDs.clear();
 	//_customWorldSoundIDs.clear();
 	//_customWorldPointlightIDs.clear();

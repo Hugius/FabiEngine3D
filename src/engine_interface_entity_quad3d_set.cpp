@@ -10,7 +10,7 @@ void EngineInterface::quad3d_deleteAll()
 {
 	for(const auto& [key, entity] : _core->getQuad3dEntityManager()->getEntities())
 	{
-		billboard_delete(entity->getID());
+		quad3d_delete(entity->getID());
 	}
 }
 
@@ -34,7 +34,7 @@ void EngineInterface::quad3d_deleteGroup(const string& ID)
 
 			if(subString == ID)
 			{
-				billboard_delete(entity->getID());
+				quad3d_delete(entity->getID());
 			}
 		}
 	}

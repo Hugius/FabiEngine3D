@@ -2,11 +2,11 @@
 
 #include <algorithm>
 
-void WorldEditor::_updateBillboardMenu()
+void WorldEditor::_updateQuad3dMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuBillboard")
+	if(screen->getID() == "worldEditorMenuQuad3d")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -15,71 +15,71 @@ void WorldEditor::_updateBillboardMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuBillboardPlace");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3dPlace");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuBillboardChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3dChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButtons();
 
 			auto IDs = _fe3d->quad3d_getIDs();
 			sort(IDs.begin(), IDs.end());
-			for(auto& quad3dID : IDs)
+			for(auto& quadID : IDs)
 			{
-				if(quad3dID[0] != '@')
+				if(quadID[0] != '@')
 				{
-					reverse(quad3dID.begin(), quad3dID.end());
-					string rawID = quad3dID.substr(quad3dID.find('_') + 1);
+					reverse(quadID.begin(), quadID.end());
+					string rawID = quadID.substr(quadID.find('_') + 1);
 					reverse(rawID.begin(), rawID.end());
-					reverse(quad3dID.begin(), quad3dID.end());
+					reverse(quadID.begin(), quadID.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->createButton(quad3dID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createButton(quadID, rawID);
 				}
 			}
 		}
 	}
 }
 
-void WorldEditor::_updateBillboardPlacingMenu()
+void WorldEditor::_updateQuad3dPlacingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuBillboardPlace")
+	if(screen->getID() == "worldEditorMenuQuad3dPlace")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateQuad3dID.empty())
+			if(!_currentTemplateQuadID.empty())
 			{
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), false);
-				_fe3d->quad3d_setVisible(_currentTemplateQuad3dID, false);
-				_currentTemplateQuad3dID = "";
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
+				_fe3d->quad3d_setVisible(_currentTemplateQuadID, false);
+				_currentTemplateQuadID = "";
 			}
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuBillboard");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3d");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& quad3dID : _quad3dEditor->getLoadedIDs())
+			for(const auto& quadID : _quad3dEditor->getLoadedIDs())
 			{
-				if(_fe3d->quad3d_isExisting(quad3dID))
+				if(_fe3d->quad3d_isExisting(quadID))
 				{
-					if(screen->getScrollingList("billboardList")->getButton(quad3dID)->isHovered())
+					if(screen->getScrollingList("quad3dList")->getButton(quadID)->isHovered())
 					{
 						_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 						_deactivateModel();
-						_deactivateBillboard();
+						_deactivateQuad3d();
 						_deactivateSound();
 						_deactivatePointlight();
 						_deactivateReflection();
 
-						_currentTemplateQuad3dID = quad3dID;
-						_fe3d->quad3d_setPosition(_currentTemplateQuad3dID, fvec3(0.0f));
-						_fe3d->quad3d_setVisible(_currentTemplateQuad3dID, true);
-						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), true);
-						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), "Billboard: " + _currentTemplateQuad3dID.substr(1), 0.025f);
+						_currentTemplateQuadID = quadID;
+						_fe3d->quad3d_setPosition(_currentTemplateQuadID, fvec3(0.0f));
+						_fe3d->quad3d_setVisible(_currentTemplateQuadID, true);
+						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
+						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad3d: " + _currentTemplateQuadID.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedID().empty())
@@ -97,35 +97,35 @@ void WorldEditor::_updateBillboardPlacingMenu()
 	}
 }
 
-void WorldEditor::_updateBillboardChoosingMenu()
+void WorldEditor::_updateQuad3dChoosingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuBillboardChoice")
+	if(screen->getID() == "worldEditorMenuQuad3dChoice")
 	{
-		for(const auto& button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->getButtons())
+		for(const auto& button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->getButtons())
 		{
 			if(!_fe3d->quad3d_isExisting(button->getID()))
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButton(button->getID());
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButton(button->getID());
 				break;
 			}
 		}
 
-		for(const auto& quad3dID : _fe3d->quad3d_getIDs())
+		for(const auto& quadID : _fe3d->quad3d_getIDs())
 		{
-			if(quad3dID[0] != '@')
+			if(quadID[0] != '@')
 			{
-				if(screen->getScrollingList("billboardList")->getButton(quad3dID)->isHovered())
+				if(screen->getScrollingList("quad3dList")->getButton(quadID)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activateBillboard(quad3dID);
+						_activateQuad3d(quadID);
 					}
 					else
 					{
-						_dontResetSelectedBillboard = true;
-						_selectBillboard(quad3dID);
+						_dontResetSelectedQuad3d = true;
+						_selectQuad3d(quadID);
 					}
 
 					break;
@@ -135,7 +135,7 @@ void WorldEditor::_updateBillboardChoosingMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuBillboard");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3d");
 			return;
 		}
 	}

@@ -102,7 +102,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "fe3d:collision_check_camera_billboard")
+	else if(functionName == "fe3d:collision_check_camera_quad3d")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -139,7 +139,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "fe3d:collision_check_camera_billboards")
+	else if(functionName == "fe3d:collision_check_camera_quad3ds")
 	{
 		auto types = {SVT::STRING};
 
@@ -329,7 +329,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "fe3d:collision_check_model_billboards")
+	else if(functionName == "fe3d:collision_check_model_quad3ds")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 

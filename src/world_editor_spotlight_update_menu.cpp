@@ -25,7 +25,7 @@ void WorldEditor::_updateSpotlightMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 			_deactivateModel();
-			_deactivateBillboard();
+			_deactivateQuad3d();
 			_deactivateSound();
 			_deactivatePointlight();
 			_deactivateSpotlight();

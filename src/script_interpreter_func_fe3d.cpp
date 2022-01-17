@@ -34,8 +34,8 @@ const vector<ScriptValue> ScriptInterpreter::_processFe3dFunctionCall(const stri
 		isExecuted = (isExecuted || _executeFe3dWaterGetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dModelSetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dModelGetter(functionName, args, returnValues));
-		isExecuted = (isExecuted || _executeFe3dBillboardSetter(functionName, args, returnValues));
-		isExecuted = (isExecuted || _executeFe3dBillboardGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dQuad3dSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dQuad3dGetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dAabbSetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dAabbGetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dQuad2dSetter(functionName, args, returnValues));

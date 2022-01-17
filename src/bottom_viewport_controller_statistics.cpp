@@ -102,7 +102,7 @@ void BottomViewportController::_updateStatistics()
 		}
 
 		string textID = statisticsScreen->getTextField("quad3dEntityCount")->getEntityID();
-		string text = "Billboard Entities: " + to_string(entityCount);
+		string text = "Quad3d Entities: " + to_string(entityCount);
 		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

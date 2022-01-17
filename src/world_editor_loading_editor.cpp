@@ -177,14 +177,14 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				}
 			}
 		}
-		else if(lineType == "BILLBOARD")
+		else if(lineType == "QUAD3D")
 		{
-			string quad3dID, templateID, animationID;
+			string quadID, templateID, animationID;
 			fvec3 position, rotation;
 			fvec2 size;
 
 			iss >>
-				quad3dID >>
+				quadID >>
 				templateID >>
 				position.x >>
 				position.y >>
@@ -200,14 +200,14 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			replace(animationID.begin(), animationID.end(), '?', ' ');
 
-			if(_copyTemplateBillboard(quad3dID, templateID, position, false))
+			if(_copyTemplateQuad3d(quadID, templateID, position, false))
 			{
-				_fe3d->quad3d_setRotation(quad3dID, rotation);
-				_fe3d->quad3d_setSize(quad3dID, size);
+				_fe3d->quad3d_setRotation(quadID, rotation);
+				_fe3d->quad3d_setSize(quadID, size);
 
 				if(!animationID.empty())
 				{
-					_animation2dEditor->startQuad3dAnimation(animationID, quad3dID, -1);
+					_animation2dEditor->startQuad3dAnimation(animationID, quadID, -1);
 				}
 			}
 		}
@@ -404,7 +404,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "LIGHTING_DIRECTIONAL")
 		{
 			fvec3 position, color;
-			float intensity, billboardSize;
+			float intensity, quad3dSize;
 
 			iss >>
 				position.x >>
@@ -414,7 +414,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				color.g >>
 				color.b >>
 				intensity >>
-				billboardSize;
+				quad3dSize;
 
 			_fe3d->gfx_enableDirectionalLighting();
 			_fe3d->gfx_setDirectionalLightingPosition(position);

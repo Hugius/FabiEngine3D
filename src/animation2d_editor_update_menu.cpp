@@ -58,13 +58,13 @@ void Animation2dEditor::_updateChoiceMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(isQuad3dAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID))
+			if(isQuad3dAnimationStarted(_currentAnimationID, PREVIEW_QUAD_ID))
 			{
-				stopQuad3dAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID);
+				stopQuad3dAnimation(_currentAnimationID, PREVIEW_QUAD_ID);
 			}
 
-			_fe3d->quad3d_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-			_fe3d->quad3d_setVisible(PREVIEW_BILLBOARD_ID, false);
+			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, "");
+			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
 
 			_currentAnimationID = "";
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), false);
@@ -73,7 +73,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
 		{
-			_gui->getOverlay()->createAnswerForm("preview", "Billboard Entity?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->createAnswerForm("preview", "Quad3d Entity?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rows")->isHovered())
 		{
@@ -89,11 +89,11 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
-			startQuad3dAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID, 1);
+			startQuad3dAnimation(_currentAnimationID, PREVIEW_QUAD_ID, 1);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
-			stopQuad3dAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID);
+			stopQuad3dAnimation(_currentAnimationID, PREVIEW_QUAD_ID);
 		}
 
 		const auto isConfirmed = _gui->getOverlay()->isAnswerFormConfirmed("preview");
@@ -106,7 +106,7 @@ void Animation2dEditor::_updateChoiceMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto entityType = (isConfirmed ? "billboard" : "quad2d");
+			const auto entityType = (isConfirmed ? "quad3d" : "quad2d");
 			const auto targetDirectoryPath = string("projects\\" + _currentProjectID +
 													"\\assets\\image\\entity\\" + entityType + "\\diffuse_map\\");
 
@@ -131,7 +131,7 @@ void Animation2dEditor::_updateChoiceMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->quad3d_setDiffuseMap(PREVIEW_BILLBOARD_ID, finalFilePath);
+			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, finalFilePath);
 			currentAnimation->setPreviewTexturePath(finalFilePath);
 		}
 
@@ -149,7 +149,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 
 		auto hasPreviewTexture = !currentAnimation->getPreviewTexturePath().empty();
-		auto isStarted = isQuad3dAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID);
+		auto isStarted = isQuad3dAnimationStarted(_currentAnimationID, PREVIEW_QUAD_ID);
 		screen->getButton("preview")->setHoverable(!isStarted);
 		screen->getButton("rows")->setHoverable(hasPreviewTexture && !isStarted);
 		screen->getButton("columns")->setHoverable(hasPreviewTexture && !isStarted);

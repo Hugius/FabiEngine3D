@@ -218,7 +218,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_billboard")
+	else if(functionName == "fe3d:raycast_into_quad3d")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -239,7 +239,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_billboards")
+	else if(functionName == "fe3d:raycast_into_quad3ds")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -258,7 +258,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_billboard_distance")
+	else if(functionName == "fe3d:raycast_into_quad3d_distance")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -279,7 +279,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_billboards_distance")
+	else if(functionName == "fe3d:raycast_into_quad3ds_distance")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{

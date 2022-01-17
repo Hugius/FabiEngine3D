@@ -46,9 +46,9 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\audio\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\billboard\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\billboard\\diffuse_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\billboard\\emission_map\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\diffuse_map\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\emission_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\diffuse_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\emission_map\\");
@@ -81,7 +81,7 @@ void TopViewportController::_updateProjectCreating()
 
 				auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
 				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
-				auto billboardFile = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
+				auto quad3dFile = ofstream(newProjectDirectoryPath + "data\\quad3d.fe3d");
 				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
 				auto quad2dFile = ofstream(newProjectDirectoryPath + "data\\quad2d.fe3d");
 				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
@@ -92,7 +92,7 @@ void TopViewportController::_updateProjectCreating()
 				auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
 				animation2dFile.close();
 				animation3dFile.close();
-				billboardFile.close();
+				quad3dFile.close();
 				quad2dFile.close();
 				modelFile.close();
 				settingsFile.close();
@@ -136,7 +136,7 @@ void TopViewportController::_updateProjectLoading()
 			auto waterImagePaths = _waterEditor->getImagePathsFromFile();
 			auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
 			auto modelImagePaths = _modelEditor->getImagePathsFromFile();
-			auto billboardImagePaths = _quad3dEditor->getImagePathsFromFile();
+			auto quad3dImagePaths = _quad3dEditor->getImagePathsFromFile();
 			auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
 			auto textImagePaths = _text2dEditor->getImagePathsFromFile();
 			auto audioPaths = _soundEditor->getAudioPathsFromFile();
@@ -150,7 +150,7 @@ void TopViewportController::_updateProjectLoading()
 			imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
 			imagePaths.insert(imagePaths.end(), waterImagePaths.begin(), waterImagePaths.end());
 			imagePaths.insert(imagePaths.end(), modelImagePaths.begin(), modelImagePaths.end());
-			imagePaths.insert(imagePaths.end(), billboardImagePaths.begin(), billboardImagePaths.end());
+			imagePaths.insert(imagePaths.end(), quad3dImagePaths.begin(), quad3dImagePaths.end());
 			imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
 			_fe3d->misc_cacheImages(imagePaths);
 

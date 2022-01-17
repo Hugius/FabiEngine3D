@@ -2,15 +2,15 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:billboard_is_visible")
+	if(functionName == "fe3d:quad3d_is_visible")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_isVisible(args[0].getString());
 
@@ -18,13 +18,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_position_x")
+	else if(functionName == "fe3d:quad3d_get_position_x")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getPosition(args[0].getString()).x;
 
@@ -32,13 +32,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_position_y")
+	else if(functionName == "fe3d:quad3d_get_position_y")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getPosition(args[0].getString()).y;
 
@@ -46,13 +46,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_position_z")
+	else if(functionName == "fe3d:quad3d_get_position_z")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getPosition(args[0].getString()).z;
 
@@ -60,13 +60,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_rotation_x")
+	else if(functionName == "fe3d:quad3d_get_rotation_x")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getRotation(args[0].getString()).x;
 
@@ -74,13 +74,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_rotation_y")
+	else if(functionName == "fe3d:quad3d_get_rotation_y")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getRotation(args[0].getString()).y;
 
@@ -88,13 +88,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_rotation_z")
+	else if(functionName == "fe3d:quad3d_get_rotation_z")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getRotation(args[0].getString()).z;
 
@@ -102,13 +102,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_size_x")
+	else if(functionName == "fe3d:quad3d_get_size_x")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getSize(args[0].getString()).x;
 
@@ -116,13 +116,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_size_y")
+	else if(functionName == "fe3d:quad3d_get_size_y")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getSize(args[0].getString()).y;
 
@@ -130,13 +130,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_color_r")
+	else if(functionName == "fe3d:quad3d_get_color_r")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getColor(args[0].getString()).r;
 
@@ -144,13 +144,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_color_g")
+	else if(functionName == "fe3d:quad3d_get_color_g")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getColor(args[0].getString()).g;
 
@@ -158,13 +158,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_color_b")
+	else if(functionName == "fe3d:quad3d_get_color_b")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getColor(args[0].getString()).b;
 
@@ -172,13 +172,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_wireframe_color_r")
+	else if(functionName == "fe3d:quad3d_get_wireframe_color_r")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getWireframeColor(args[0].getString()).r;
 
@@ -186,13 +186,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_wireframe_color_g")
+	else if(functionName == "fe3d:quad3d_get_wireframe_color_g")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getWireframeColor(args[0].getString()).g;
 
@@ -200,13 +200,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_wireframe_color_b")
+	else if(functionName == "fe3d:quad3d_get_wireframe_color_b")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getWireframeColor(args[0].getString()).b;
 
@@ -214,13 +214,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_min_height")
+	else if(functionName == "fe3d:quad3d_get_min_height")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getMinHeight(args[0].getString());
 
@@ -228,13 +228,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_max_height")
+	else if(functionName == "fe3d:quad3d_get_max_height")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getMaxHeight(args[0].getString());
 
@@ -242,13 +242,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_transparency")
+	else if(functionName == "fe3d:quad3d_get_transparency")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getTransparency(args[0].getString());
 
@@ -256,13 +256,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_emission_intensity")
+	else if(functionName == "fe3d:quad3d_get_emission_intensity")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getEmissionIntensity(args[0].getString());
 
@@ -270,13 +270,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_texture_repeat")
+	else if(functionName == "fe3d:quad3d_get_texture_repeat")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getTextureRepeat(args[0].getString());
 
@@ -284,13 +284,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_lightness")
+	else if(functionName == "fe3d:quad3d_get_lightness")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getLightness(args[0].getString());
 
@@ -298,13 +298,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_is_facing_camera_x")
+	else if(functionName == "fe3d:quad3d_is_facing_camera_x")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_isFacingCameraX(args[0].getString());
 
@@ -312,13 +312,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_is_facing_camera_y")
+	else if(functionName == "fe3d:quad3d_is_facing_camera_y")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_isFacingCameraY(args[0].getString());
 
@@ -326,13 +326,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_is_shadowed")
+	else if(functionName == "fe3d:quad3d_is_shadowed")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_isShadowed(args[0].getString());
 
@@ -340,13 +340,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_is_reflected")
+	else if(functionName == "fe3d:quad3d_is_reflected")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_isReflected(args[0].getString());
 
@@ -354,13 +354,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_is_bright")
+	else if(functionName == "fe3d:quad3d_is_bright")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_isBright(args[0].getString());
 
@@ -368,13 +368,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_is_wireframed")
+	else if(functionName == "fe3d:quad3d_is_wireframed")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_isWireframed(args[0].getString());
 
@@ -382,13 +382,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_is_frozen")
+	else if(functionName == "fe3d:quad3d_is_frozen")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_isFrozen(args[0].getString());
 
@@ -396,7 +396,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_is_existing")
+	else if(functionName == "fe3d:quad3d_is_existing")
 	{
 		auto types = {SVT::STRING};
 
@@ -412,7 +412,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
-	else if(functionName == "fe3d:billboard_find_ids")
+	else if(functionName == "fe3d:quad3d_find_ids")
 	{
 		auto types = {SVT::STRING};
 
@@ -435,7 +435,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_ids")
+	else if(functionName == "fe3d:quad3d_get_ids")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -450,13 +450,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_diffuse_map_path")
+	else if(functionName == "fe3d:quad3d_get_diffuse_map_path")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getDiffuseMapPath(args[0].getString());
 
@@ -464,13 +464,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_emission_map_path")
+	else if(functionName == "fe3d:quad3d_get_emission_map_path")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getEmissionMapPath(args[0].getString());
 
@@ -478,13 +478,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_has_diffuse_map")
+	else if(functionName == "fe3d:quad3d_has_diffuse_map")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_hasDiffuseMap(args[0].getString());
 
@@ -492,13 +492,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_has_emission_map")
+	else if(functionName == "fe3d:quad3d_has_emission_map")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_hasEmissionMap(args[0].getString());
 
@@ -506,26 +506,26 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_uv_multiplier_x")
+	else if(functionName == "fe3d:quad3d_get_uv_multiplier_x")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getUvMultiplier(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_uv_multiplier_y")
+	else if(functionName == "fe3d:quad3d_get_uv_multiplier_y")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getUvMultiplier(args[0].getString()).y;
 
@@ -533,13 +533,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_uv_offset_x")
+	else if(functionName == "fe3d:quad3d_get_uv_offset_x")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getUvOffset(args[0].getString()).x;
 
@@ -547,13 +547,13 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_uv_offset_y")
+	else if(functionName == "fe3d:quad3d_get_uv_offset_y")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->quad3d_getUvOffset(args[0].getString()).y;
 
@@ -568,7 +568,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:billboard` functionality as networking server!");
+		_throwScriptError("cannot access `fe3d:quad3d` functionality as networking server!");
 	}
 
 	return true;

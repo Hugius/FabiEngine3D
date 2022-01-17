@@ -122,7 +122,7 @@ void ScriptInterpreter::load()
 		auto waterImagePaths = _waterEditor->getImagePathsFromFile();
 		auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
 		auto modelImagePaths = _modelEditor->getImagePathsFromFile();
-		auto billboardImagePaths = _quad3dEditor->getImagePathsFromFile();
+		auto quad3dImagePaths = _quad3dEditor->getImagePathsFromFile();
 		auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
 		auto textImagePaths = _text2dEditor->getImagePathsFromFile();
 		auto audioPaths = _soundEditor->getAudioPathsFromFile();
@@ -136,7 +136,7 @@ void ScriptInterpreter::load()
 		imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
 		imagePaths.insert(imagePaths.end(), waterImagePaths.begin(), waterImagePaths.end());
 		imagePaths.insert(imagePaths.end(), modelImagePaths.begin(), modelImagePaths.end());
-		imagePaths.insert(imagePaths.end(), billboardImagePaths.begin(), billboardImagePaths.end());
+		imagePaths.insert(imagePaths.end(), quad3dImagePaths.begin(), quad3dImagePaths.end());
 		imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
 		_fe3d->misc_cacheImages(imagePaths);
 

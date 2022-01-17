@@ -278,9 +278,9 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		//	}
 	//		//}
 	//	}
-	//	else if(lineType == "BILLBOARD")
+	//	else if(lineType == "QUAD3D")
 	//	{
-	//		string quad3dID, templateID, textContent;
+	//		string quadID, templateID, textContent;
 	//		fvec3 position, rotation, color;
 	//		fvec2 size;
 	//		float lightness, minHeight, maxHeight;
@@ -289,7 +289,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		bool isVisible, isAabbRaycastResponsive, isAabbCollisionResponsive, isFacingX, isFacingY, isAnimationPlaying, isAnimationPaused;
 
 	//		iss >>
-	//			quad3dID >>
+	//			quadID >>
 	//			templateID >>
 	//			isVisible >>
 	//			isAabbRaycastResponsive >>
@@ -321,19 +321,19 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		replace(textContent.begin(), textContent.end(), '?', ' ');
 
-	//		if(_copyTemplateBillboard(quad3dID, templateID, position, false))
+	//		if(_copyTemplateQuad3d(quadID, templateID, position, false))
 	//		{
-	//			_fe3d->quad3d_setRotation(quad3dID, rotation);
-	//			_fe3d->quad3d_setSize(quad3dID, size);
-	//			_fe3d->quad3d_setFacingCameraX(quad3dID, isFacingX);
-	//			_fe3d->quad3d_setFacingCameraY(quad3dID, isFacingY);
-	//			_fe3d->quad3d_setColor(quad3dID, color);
-	//			//_fe3d->quad3d_setTextContent(quad3dID, textContent);
-	//			_fe3d->quad3d_setLightness(quad3dID, lightness);
-	//			_fe3d->quad3d_setMinHeight(quad3dID, minHeight);
-	//			_fe3d->quad3d_setMaxHeight(quad3dID, maxHeight);
-	//			_fe3d->quad3d_setVisible(quad3dID, isVisible);
-	//			for(const auto& ID : _fe3d->aabb_getChildIDs(quad3dID, AabbParentEntityType::QUAD3D))
+	//			_fe3d->quad3d_setRotation(quadID, rotation);
+	//			_fe3d->quad3d_setSize(quadID, size);
+	//			_fe3d->quad3d_setFacingCameraX(quadID, isFacingX);
+	//			_fe3d->quad3d_setFacingCameraY(quadID, isFacingY);
+	//			_fe3d->quad3d_setColor(quadID, color);
+	//			//_fe3d->quad3d_setTextContent(quadID, textContent);
+	//			_fe3d->quad3d_setLightness(quadID, lightness);
+	//			_fe3d->quad3d_setMinHeight(quadID, minHeight);
+	//			_fe3d->quad3d_setMaxHeight(quadID, maxHeight);
+	//			_fe3d->quad3d_setVisible(quadID, isVisible);
+	//			for(const auto& ID : _fe3d->aabb_getChildIDs(quadID, AabbParentEntityType::QUAD3D))
 	//			{
 	//				_fe3d->aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
 	//				_fe3d->aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
@@ -476,7 +476,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//	else if(lineType == "LIGHTING_DIRECTIONAL")
 	//	{
 	//		fvec3 position, color;
-	//		float intensity, billboardSize;
+	//		float intensity, quad3dSize;
 
 	//		iss >>
 	//			position.x >>
@@ -486,7 +486,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			color.g >>
 	//			color.b >>
 	//			intensity >>
-	//			billboardSize;
+	//			quad3dSize;
 
 	//		_fe3d->gfx_enableDirectionalLighting();
 	//		_fe3d->gfx_setDirectionalLightingPosition(position);

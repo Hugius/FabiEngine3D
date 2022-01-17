@@ -23,27 +23,27 @@ void WorldEditor::_activateModel(const string& ID)
 	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Active model: " + rawID, 0.025f);
 }
 
-void WorldEditor::_activateBillboard(const string& ID)
+void WorldEditor::_activateQuad3d(const string& ID)
 {
-	_activeQuad3dID = ID;
+	_activeQuadID = ID;
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->quad3d_getPosition(_activeQuad3dID);
+	auto position = _fe3d->quad3d_getPosition(_activeQuadID);
 
-	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(false);
-	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(true);
+	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("position")->setHoverable(false);
+	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
 	string tempID = ID;
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), "Active billboard: " + rawID, 0.025f);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
+	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Active quad3d: " + rawID, 0.025f);
 }
 
 void WorldEditor::_activateSound(const string& ID)
@@ -123,15 +123,15 @@ void WorldEditor::_deactivateModel()
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
 }
 
-void WorldEditor::_deactivateBillboard()
+void WorldEditor::_deactivateQuad3d()
 {
-	if(!_activeQuad3dID.empty())
+	if(!_activeQuadID.empty())
 	{
-		_unselectBillboard(_activeQuad3dID);
+		_unselectQuad3d(_activeQuadID);
 	}
 
-	_activeQuad3dID = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quad3dID")->getEntityID(), false);
+	_activeQuadID = "";
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
 }
 
 void WorldEditor::_deactivateSound()

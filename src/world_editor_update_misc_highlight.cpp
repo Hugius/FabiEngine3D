@@ -29,7 +29,7 @@ void WorldEditor::_updateModelHighlighting(const string& ID, int& direction)
 	}
 }
 
-void WorldEditor::_updateBillboardHighlighting(const string& ID, int& direction)
+void WorldEditor::_updateQuad3dHighlighting(const string& ID, int& direction)
 {
 	if(ID.empty())
 	{
@@ -49,7 +49,7 @@ void WorldEditor::_updateBillboardHighlighting(const string& ID, int& direction)
 			direction *= -1;
 		}
 
-		const float speed = (BILLBOARD_HIGHLIGHT_SPEED * static_cast<float>(direction));
+		const float speed = (QUAD3D_HIGHLIGHT_SPEED * static_cast<float>(direction));
 		_fe3d->quad3d_setTransparency(ID, (transparency + speed));
 	}
 }

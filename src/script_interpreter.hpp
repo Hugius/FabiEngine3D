@@ -84,8 +84,8 @@ private:
 	const bool _executeFe3dWaterGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dModelSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dModelGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dBillboardSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dBillboardGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dQuad3dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dQuad3dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dAabbSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dAabbGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dQuad2dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
@@ -132,7 +132,7 @@ private:
 	const bool _validateFe3dWater();
 	const bool _validateFe3dModel(const string& ID, bool isTemplate);
 	const bool _validateFe3dModelPart(const string& modelID, const string& partID);
-	const bool _validateFe3dBillboard(const string& ID, bool isTemplate);
+	const bool _validateFe3dQuad3d(const string& ID, bool isTemplate);
 	const bool _validateFe3dSound3d(const string& ID, bool isTemplate);
 	const bool _validateFe3dSound2d(const string& ID, bool isTemplate);
 	const bool _validateFe3dAabb(const string& ID);

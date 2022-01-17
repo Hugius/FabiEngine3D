@@ -24,7 +24,7 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("terrain", fvec2(0.0f, positions[1]), fvec2(TW("Terrain"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("water", fvec2(0.0f, positions[2]), fvec2(TW("Water"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("models", fvec2(0.0f, positions[3]), fvec2(TW("Models"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Models", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuChoice")->createButton("billboards", fvec2(0.0f, positions[4]), fvec2(TW("Billboards"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboards", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuChoice")->createButton("quad3ds", fvec2(0.0f, positions[4]), fvec2(TW("Quad3ds"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Quad3ds", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("pointlights", fvec2(0.0f, positions[5]), fvec2(TW("Pointlights"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Pointlights", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("spotlights", fvec2(0.0f, positions[6]), fvec2(TW("Spotlights"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Spotlights", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("reflections", fvec2(0.0f, positions[7]), fvec2(TW("Reflections"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflections", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
@@ -67,18 +67,18 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("worldEditorMenuModelChoice")->createButton("back", fvec2(0.0f, -0.9f), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
 	positions = VPC::calculateButtonPositions(3, CH);
-	leftWindow->createScreen("worldEditorMenuBillboard");
-	leftWindow->getScreen("worldEditorMenuBillboard")->createButton("place", fvec2(0.0f, positions[0]), fvec2(TW("Place Billboard"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place Billboard", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuBillboard")->createButton("choice", fvec2(0.0f, positions[1]), fvec2(TW("Choose Billboard"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Billboard", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuBillboard")->createButton("back", fvec2(0.0f, positions[2]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->createScreen("worldEditorMenuQuad3d");
+	leftWindow->getScreen("worldEditorMenuQuad3d")->createButton("place", fvec2(0.0f, positions[0]), fvec2(TW("Place Quad3d"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place Quad3d", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuQuad3d")->createButton("choice", fvec2(0.0f, positions[1]), fvec2(TW("Choose Quad3d"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Quad3d", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuQuad3d")->createButton("back", fvec2(0.0f, positions[2]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
-	leftWindow->createScreen("worldEditorMenuBillboardPlace");
-	leftWindow->getScreen("worldEditorMenuBillboardPlace")->createScrollingList("billboardList", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, fvec2(0.15f, 0.1f), true);
-	leftWindow->getScreen("worldEditorMenuBillboardPlace")->createButton("back", fvec2(0.0f, -0.9f), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->createScreen("worldEditorMenuQuad3dPlace");
+	leftWindow->getScreen("worldEditorMenuQuad3dPlace")->createScrollingList("quad3dList", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, fvec2(0.15f, 0.1f), true);
+	leftWindow->getScreen("worldEditorMenuQuad3dPlace")->createButton("back", fvec2(0.0f, -0.9f), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
-	leftWindow->createScreen("worldEditorMenuBillboardChoice");
-	leftWindow->getScreen("worldEditorMenuBillboardChoice")->createScrollingList("billboardList", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, fvec2(0.15f, 0.1f), true);
-	leftWindow->getScreen("worldEditorMenuBillboardChoice")->createButton("back", fvec2(0.0f, -0.9f), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->createScreen("worldEditorMenuQuad3dChoice");
+	leftWindow->getScreen("worldEditorMenuQuad3dChoice")->createScrollingList("quad3dList", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, fvec2(0.15f, 0.1f), true);
+	leftWindow->getScreen("worldEditorMenuQuad3dChoice")->createButton("back", fvec2(0.0f, -0.9f), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
 	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("worldEditorMenuPointlight");
@@ -251,26 +251,26 @@ void WorldEditor::_loadGUI()
 	rightWindow->getScreen("modelPropertiesMenu")->createButton("freeze", fvec2(0.0f, -0.775f), fvec2(1.0f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("modelPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(1.0f, 0.1f), fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
-	rightWindow->createScreen("billboardPropertiesMenu");
-	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.75f, 0.1f), "Billboard Menu", fvec3(0.0f, 1.0f, 0.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("position", fvec2(0.0f, 0.8f), fvec2(0.75f, 0.2f), "position.tga", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("rotation", fvec2(0.0f, 0.55f), fvec2(0.75f, 0.2f), "rotation.tga", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("size", fvec2(0.0f, 0.3f), fvec2(0.75f, 0.2f), "size.tga", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("x", fvec2(0.0f, 0.135f), fvec2(0.25f, 0.1f), "X", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("y", fvec2(0.0f, -0.115f), fvec2(0.25f, 0.1f), "Y", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("z", fvec2(0.0f, -0.365f), fvec2(0.25f, 0.1f), "Z", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("xPlus", fvec2(0.75f, 0.025f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("yPlus", fvec2(0.75f, -0.225f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("zPlus", fvec2(0.75f, -0.475f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("xMinus", fvec2(-0.75f, 0.025f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("yMinus", fvec2(-0.75f, -0.225f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("zMinus", fvec2(-0.75f, -0.475f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createWriteField("x", fvec2(0.0f, 0.025f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createWriteField("y", fvec2(0.0f, -0.225f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createWriteField("z", fvec2(0.0f, -0.475f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("animation", fvec2(0.0f, -0.625f), fvec2(1.5f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("freeze", fvec2(0.0f, -0.775f), fvec2(1.0f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(1.0f, 0.1f), fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	rightWindow->createScreen("quad3dPropertiesMenu");
+	rightWindow->getScreen("quad3dPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.75f, 0.1f), "Quad3d Menu", fvec3(0.0f, 1.0f, 0.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("position", fvec2(0.0f, 0.8f), fvec2(0.75f, 0.2f), "position.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("rotation", fvec2(0.0f, 0.55f), fvec2(0.75f, 0.2f), "rotation.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("size", fvec2(0.0f, 0.3f), fvec2(0.75f, 0.2f), "size.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createTextField("x", fvec2(0.0f, 0.135f), fvec2(0.25f, 0.1f), "X", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createTextField("y", fvec2(0.0f, -0.115f), fvec2(0.25f, 0.1f), "Y", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createTextField("z", fvec2(0.0f, -0.365f), fvec2(0.25f, 0.1f), "Z", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("xPlus", fvec2(0.75f, 0.025f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("yPlus", fvec2(0.75f, -0.225f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("zPlus", fvec2(0.75f, -0.475f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("xMinus", fvec2(-0.75f, 0.025f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("yMinus", fvec2(-0.75f, -0.225f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("zMinus", fvec2(-0.75f, -0.475f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createWriteField("x", fvec2(0.0f, 0.025f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createWriteField("y", fvec2(0.0f, -0.225f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createWriteField("z", fvec2(0.0f, -0.475f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("animation", fvec2(0.0f, -0.625f), fvec2(1.5f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("freeze", fvec2(0.0f, -0.775f), fvec2(1.0f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(1.0f, 0.1f), fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
 	rightWindow->createScreen("pointlightPropertiesMenu");
 	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.875f, 0.1f), "Pointlight Menu", fvec3(0.0f, 1.0f, 0.0f), true);
@@ -386,9 +386,9 @@ void WorldEditor::_unloadGUI()
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuModel");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuModelPlace");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuModelChoice");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuBillboard");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuBillboardPlace");
-	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuBillboardChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuQuad3d");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuQuad3dPlace");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuQuad3dChoice");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSound");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSoundPlace");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSoundChoice");
@@ -412,7 +412,7 @@ void WorldEditor::_unloadGUI()
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsSkyExposure");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsBloom");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("modelPropertiesMenu");
-	_gui->getRightViewport()->getWindow("main")->deleteScreen("billboardPropertiesMenu");
+	_gui->getRightViewport()->getWindow("main")->deleteScreen("quad3dPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("soundPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("pointlightPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("spotlightPropertiesMenu");

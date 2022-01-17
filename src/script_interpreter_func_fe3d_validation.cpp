@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dQuad3d(const string& ID, bool isTemplate)
 {
 	if(!_validateFe3dID(ID))
 	{
@@ -27,7 +27,7 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 	{
 		if(!_fe3d->quad3d_isExisting("@" + ID))
 		{
-			_throwScriptError("template billboard entity does not exist!");
+			_throwScriptError("template quad3d entity does not exist!");
 			return false;
 		}
 	}
@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 	{
 		if(!_fe3d->quad3d_isExisting(ID))
 		{
-			_throwScriptError("billboard entity does not exist!");
+			_throwScriptError("quad3d entity does not exist!");
 			return false;
 		}
 	}

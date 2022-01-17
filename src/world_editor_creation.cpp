@@ -286,7 +286,7 @@ const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string
 	_fe3d->aabb_setParentEntityID(newID, newID);
 	_fe3d->aabb_setParentEntityType(newID, AabbParentEntityType::BILLBOARD);
 
-	if(_fe3d->billboard_hasDiffuseMap(templateID) && !_fe3d->billboard_isTextual(templateID))
+	if(_fe3d->billboard_hasDiffuseMap(templateID))
 	{
 		_fe3d->billboard_setDiffuseMap(newID, _fe3d->billboard_getDiffuseMapPath(templateID));
 	}
@@ -294,12 +294,6 @@ const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string
 	if(_fe3d->billboard_hasEmissionMap(templateID))
 	{
 		_fe3d->billboard_setEmissionMap(newID, _fe3d->billboard_getEmissionMapPath(templateID));
-	}
-
-	if(_fe3d->billboard_isTextual(templateID))
-	{
-		_fe3d->billboard_setFont(newID, _fe3d->billboard_getFontPath(templateID));
-		_fe3d->billboard_setTextContent(newID, _fe3d->billboard_getTextContent(templateID));
 	}
 
 	_fe3d->billboard_setPosition(newID, position);

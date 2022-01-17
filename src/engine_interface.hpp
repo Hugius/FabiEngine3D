@@ -325,8 +325,6 @@ public:
 	void billboard_deleteGroup(const string& ID);
 	void billboard_setDiffuseMap(const string& ID, const string& value);
 	void billboard_setEmissionMap(const string& ID, const string& value);
-	void billboard_setFont(const string& ID, const string& value);
-	void billboard_setTextContent(const string& ID, const string& value);
 	void billboard_setPosition(const string& ID, fvec3 value);
 	void billboard_setRotation(const string& ID, fvec3 value);
 	void billboard_setSize(const string& ID, fvec2 size);
@@ -359,8 +357,6 @@ public:
 	const vector<string> billboard_getIDs() const;
 	const string& billboard_getDiffuseMapPath(const string& ID) const;
 	const string& billboard_getEmissionMapPath(const string& ID) const;
-	const string& billboard_getFontPath(const string& ID) const;
-	const string& billboard_getTextContent(const string& ID) const;
 	const fvec3 billboard_getPosition(const string& ID) const;
 	const fvec3 billboard_getRotation(const string& ID) const;
 	const fvec3 billboard_getColor(const string& ID) const;
@@ -385,7 +381,6 @@ public:
 	const bool billboard_isWireframed(const string& ID) const;
 	const bool billboard_hasDiffuseMap(const string& ID) const;
 	const bool billboard_hasEmissionMap(const string& ID) const;
-	const bool billboard_isTextual(const string& ID) const;
 	const bool billboard_isFrozen(const string& ID) const;
 
 	void aabb_create(const string& ID, bool isCentered);

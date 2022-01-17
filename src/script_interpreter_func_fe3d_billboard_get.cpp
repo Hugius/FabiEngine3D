@@ -396,20 +396,6 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_is_textual")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
-			{
-				const auto result = _fe3d->billboard_isTextual(args[0].getString());
-
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
-			}
-		}
-	}
 	else if(functionName == "fe3d:billboard_is_existing")
 	{
 		auto types = {SVT::STRING};
@@ -461,26 +447,6 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 				{
 					returnValues.push_back(ScriptValue(SVT::STRING, ID));
 				}
-			}
-		}
-	}
-	else if(functionName == "fe3d:billboard_get_text_content")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
-			{
-				if(!_fe3d->billboard_isTextual(args[0].getString()))
-				{
-					_throwScriptError("billboard with ID \"" + args[0].getString() + "\" is not of type text!");
-					return true;
-				}
-
-				const auto result = _fe3d->billboard_getTextContent(args[0].getString());
-
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}

@@ -33,8 +33,8 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			fvec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
 		_fe3d->billboard_create(lineNumberID, false);
-		_fe3d->billboard_setFont(lineNumberID, FONT_MAP_PATH);
-		_fe3d->billboard_setTextContent(lineNumberID, lineNumberString);
+		//_fe3d->billboard_setFont(lineNumberID, FONT_MAP_PATH);
+		//_fe3d->billboard_setTextContent(lineNumberID, lineNumberString);
 		_fe3d->billboard_setPosition(lineNumberID, (lineNumberPosition - fvec3(0.0f, lineNumberSize.y / 2.0f, 0.0f)));
 		_fe3d->billboard_setSize(lineNumberID, lineNumberSize);
 		_fe3d->billboard_setColor(lineNumberID, LINE_NUMBER_COLOR);
@@ -51,8 +51,8 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		iss >> noWhiteSpace;
 		bool isComment = (noWhiteSpace.substr(0, 3) == "///");
 		_fe3d->billboard_create(lineTextID, false);
-		_fe3d->billboard_setFont(lineTextID, FONT_MAP_PATH);
-		_fe3d->billboard_setTextContent(lineTextID, lineTextString);
+		//_fe3d->billboard_setFont(lineTextID, FONT_MAP_PATH);
+		//_fe3d->billboard_setTextContent(lineTextID, lineTextString);
 		_fe3d->billboard_setPosition(lineTextID, (lineTextPosition - fvec3(0.0f, lineTextSize.y / 2.0f, 0.0f)));
 		_fe3d->billboard_setSize(lineTextID, lineTextSize);
 		_fe3d->billboard_setColor(lineTextID, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));

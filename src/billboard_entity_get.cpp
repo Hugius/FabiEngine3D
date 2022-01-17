@@ -55,16 +55,6 @@ const fvec3 BillboardEntity::getWireframeColor() const
 	return _wireframeColor;
 }
 
-const string& BillboardEntity::getTextContent() const
-{
-	return _textContent;
-}
-
-const string& BillboardEntity::getFontPath() const
-{
-	return _fontPath;
-}
-
 const string& BillboardEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
@@ -153,11 +143,6 @@ const bool BillboardEntity::hasEmissionMap() const
 const bool BillboardEntity::isCentered() const
 {
 	return _isCentered;
-}
-
-const bool BillboardEntity::isTextual() const
-{
-	return _isTextual;
 }
 
 const bool BillboardEntity::isFrozen() const

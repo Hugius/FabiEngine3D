@@ -486,28 +486,6 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_set_text")
-	{
-		auto types = {SVT::STRING, SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
-			{
-				if(!_fe3d->billboard_isTextual(args[0].getString()))
-				{
-					_throwScriptError("billboard with ID \"" + args[0].getString() + "\" is not of type text!");
-					return true;
-				}
-				else
-				{
-					_fe3d->billboard_setTextContent(args[0].getString(), args[1].getString());
-
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
-				}
-			}
-		}
-	}
 	else if(functionName == "fe3d:billboard_set_uv_multiplier")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};

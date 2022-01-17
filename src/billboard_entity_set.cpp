@@ -115,10 +115,9 @@ void BillboardEntity::setFacingCameraY(bool value)
 	_isFacingCameraY = value;
 }
 
-void BillboardEntity::setDiffuseMap(shared_ptr<TextureBuffer> value, bool isTextual)
+void BillboardEntity::setDiffuseMap(shared_ptr<TextureBuffer> value)
 {
 	_diffuseMap = value;
-	_isTextual = isTextual;
 }
 
 void BillboardEntity::setEmissionMap(shared_ptr<TextureBuffer> value)
@@ -202,16 +201,6 @@ void BillboardEntity::setUvOffset(fvec2 value)
 void BillboardEntity::setWireframeColor(fvec3 value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
-}
-
-void BillboardEntity::setTextContent(const string& value)
-{
-	_textContent = value;
-}
-
-void BillboardEntity::setFontPath(const string& value)
-{
-	_fontPath = value;
 }
 
 void BillboardEntity::setDiffuseMapPath(const string& value)

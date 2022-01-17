@@ -105,7 +105,7 @@ const bool BillboardEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string billboardID, diffuseMapPath, emissionMapPath, fontMapPath, textContent;
+		string billboardID, diffuseMapPath, emissionMapPath;
 		fvec2 size;
 		fvec3 color;
 		float lightness, textureRepeat, transparency, emissionIntensity;
@@ -126,8 +126,6 @@ const bool BillboardEditor::loadFromFile()
 			emissionMapPath >>
 			isReflected >>
 			isShadowed >>
-			fontMapPath >>
-			textContent >>
 			lightness >>
 			textureRepeat >>
 			isBright >>
@@ -136,13 +134,9 @@ const bool BillboardEditor::loadFromFile()
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
-		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
-		textContent = (textContent == "?") ? "" : textContent;
 
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
-		replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
-		replace(textContent.begin(), textContent.end(), '?', ' ');
 
 		_fe3d->billboard_create(billboardID, false);
 
@@ -181,17 +175,6 @@ const bool BillboardEditor::loadFromFile()
 				}
 
 				_fe3d->billboard_setEmissionMap(billboardID, emissionMapPath);
-			}
-
-			if(!fontMapPath.empty())
-			{
-				if(!Config::getInst().isApplicationExported())
-				{
-					fontMapPath = string("projects\\" + _currentProjectID + "\\" + fontMapPath);
-				}
-
-				_fe3d->billboard_setFont(billboardID, fontMapPath);
-				_fe3d->billboard_setTextContent(billboardID, textContent);
 			}
 		}
 	}

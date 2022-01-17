@@ -118,16 +118,6 @@ const bool EngineInterface::billboard_isBright(const string& ID) const
 	return _core->getBillboardEntityManager()->getEntity(ID)->isBright();
 }
 
-const string& EngineInterface::billboard_getFontPath(const string& ID) const
-{
-	return _core->getBillboardEntityManager()->getEntity(ID)->getFontPath();
-}
-
-const string& EngineInterface::billboard_getTextContent(const string& ID) const
-{
-	return _core->getBillboardEntityManager()->getEntity(ID)->getTextContent();
-}
-
 const string& EngineInterface::billboard_getDiffuseMapPath(const string& ID) const
 {
 	return _core->getBillboardEntityManager()->getEntity(ID)->getDiffuseMapPath();
@@ -146,11 +136,6 @@ const bool EngineInterface::billboard_hasDiffuseMap(const string& ID) const
 const bool EngineInterface::billboard_hasEmissionMap(const string& ID) const
 {
 	return _core->getBillboardEntityManager()->getEntity(ID)->hasEmissionMap();
-}
-
-const bool EngineInterface::billboard_isTextual(const string& ID) const
-{
-	return _core->getBillboardEntityManager()->getEntity(ID)->isTextual();
 }
 
 const bool EngineInterface::billboard_isFrozen(const string& ID) const

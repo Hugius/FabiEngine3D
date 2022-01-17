@@ -114,7 +114,7 @@ void EngineInterface::billboard_setDiffuseMap(const string& ID, const string& va
 {
 	if(value.empty())
 	{
-		_core->getBillboardEntityManager()->getEntity(ID)->setDiffuseMap(nullptr, false);
+		_core->getBillboardEntityManager()->getEntity(ID)->setDiffuseMap(nullptr);
 		_core->getBillboardEntityManager()->getEntity(ID)->setDiffuseMapPath("");
 	}
 	else
@@ -130,7 +130,7 @@ void EngineInterface::billboard_setDiffuseMap(const string& ID, const string& va
 			_core->getTextureBufferCache()->store2dBuffer(value, texture);
 		}
 
-		_core->getBillboardEntityManager()->getEntity(ID)->setDiffuseMap(texture, false);
+		_core->getBillboardEntityManager()->getEntity(ID)->setDiffuseMap(texture);
 		_core->getBillboardEntityManager()->getEntity(ID)->setDiffuseMapPath(value);
 	}
 }
@@ -228,36 +228,4 @@ void EngineInterface::billboard_setTextureRepeat(const string& ID, float value)
 void EngineInterface::billboard_setEmissionIntensity(const string& ID, float value)
 {
 	_core->getBillboardEntityManager()->getEntity(ID)->setEmissionIntensity(value);
-}
-
-void EngineInterface::billboard_setFont(const string& ID, const string& value)
-{
-	auto entity = _core->getBillboardEntityManager()->getEntity(ID);
-
-	entity->setFontPath(value);
-
-	auto textContent = entity->getTextContent();
-	if(!textContent.empty())
-	{
-		//entity->setDiffuseMap(_core->getImageLoader()->load2dTexture(textContent, value), true);
-	}
-}
-
-void EngineInterface::billboard_setTextContent(const string& ID, const string& value)
-{
-	auto entity = _core->getBillboardEntityManager()->getEntity(ID);
-
-	auto fontPath = entity->getFontPath();
-	if(fontPath.empty())
-	{
-		Logger::throwWarning("Tried to set text content of billboard with ID \"" + ID + "\": no font loaded!");
-		return;
-	}
-
-	if(entity->getTextContent() != value)
-	{
-		entity->setTextContent(value);
-
-		//entity->setDiffuseMap(_core->getImageLoader()->load2dTexture(value, fontPath), true);
-	}
 }

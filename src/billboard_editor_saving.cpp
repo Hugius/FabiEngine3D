@@ -28,8 +28,6 @@ const bool BillboardEditor::saveToFile() const
 		auto color = _fe3d->billboard_getColor(billboardID);
 		auto diffuseMapPath = _fe3d->billboard_getDiffuseMapPath(billboardID);
 		auto emissionMapPath = _fe3d->billboard_getEmissionMapPath(billboardID);
-		auto fontPath = _fe3d->billboard_getFontPath(billboardID);
-		auto textContent = _fe3d->billboard_getTextContent(billboardID);
 		auto isFacingX = _fe3d->billboard_isFacingCameraX(billboardID);
 		auto isFacingY = _fe3d->billboard_isFacingCameraY(billboardID);
 		auto isReflected = _fe3d->billboard_isReflected(billboardID);
@@ -42,17 +40,12 @@ const bool BillboardEditor::saveToFile() const
 
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		fontPath = string(fontPath.empty() ? "" : fontPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
-		fontPath = (fontPath.empty()) ? "?" : fontPath;
-		textContent = (textContent.empty()) ? "?" : textContent;
 
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
-		replace(fontPath.begin(), fontPath.end(), ' ', '?');
-		replace(textContent.begin(), textContent.end(), ' ', '?');
 
 		file <<
 			billboardID << " " <<
@@ -67,8 +60,6 @@ const bool BillboardEditor::saveToFile() const
 			emissionMapPath << " " <<
 			isReflected << " " <<
 			isShadowed << " " <<
-			fontPath << " " <<
-			textContent << " " <<
 			lightness << " " <<
 			textureRepeat << " " <<
 			isBright << " " <<

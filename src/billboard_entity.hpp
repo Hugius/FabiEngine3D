@@ -25,7 +25,7 @@ public:
 	void setReflected(bool value);
 	void setBright(bool value);
 	void setWireframed(bool value);
-	void setDiffuseMap(shared_ptr<TextureBuffer> value, bool isTextual);
+	void setDiffuseMap(shared_ptr<TextureBuffer> value);
 	void setEmissionMap(shared_ptr<TextureBuffer> value);
 	void setPosition(fvec3 value);
 	void setRotation(fvec3 value);
@@ -40,8 +40,6 @@ public:
 	void setUvMultiplier(fvec2 value);
 	void setUvOffset(fvec2 value);
 	void setWireframeColor(fvec3 value);
-	void setTextContent(const string& value);
-	void setFontPath(const string& value);
 	void setDiffuseMapPath(const string& value);
 	void setEmissionMapPath(const string& value);
 	void setLightness(float value);
@@ -52,8 +50,6 @@ public:
 	void setEmissionIntensity(float value);
 	void setFrozen(bool value);
 
-	const string& getTextContent() const;
-	const string& getFontPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getEmissionMapPath() const;
 
@@ -81,7 +77,6 @@ public:
 	const bool isShadowed() const;
 	const bool isReflected() const;
 	const bool isBright() const;
-	const bool isTextual() const;
 	const bool isFrozen() const;
 	const bool isWireframed() const;
 	const bool hasDiffuseMap() const;
@@ -93,10 +88,8 @@ public:
 	const shared_ptr<TextureBuffer> getEmissionMap() const;
 
 private:
-	string _textContent = "";
 	string _diffuseMapPath = "";
 	string _emissionMapPath = "";
-	string _fontPath = "";
 
 	mat44 _transformationMatrix = mat44(1.0f);
 
@@ -129,7 +122,6 @@ private:
 	bool _isReflected = true;
 	bool _isBright = false;
 	bool _isWireframed = false;
-	bool _isTextual = false;
 	bool _isFrozen = false;
 	bool _isCentered = false;
 

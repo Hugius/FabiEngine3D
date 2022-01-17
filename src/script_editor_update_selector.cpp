@@ -92,7 +92,8 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 
 			if(!_fe3d->billboard_isExisting(selectionID) && _fe3d->billboard_isExisting(textID))
 			{
-				if(_fe3d->billboard_getTextContent(textID).empty())
+				//if(_fe3d->billboard_getTextContent(textID).empty())
+				if(true)
 				{
 					fvec3 lineTextPosition = (_fe3d->billboard_getPosition(textID));
 					lineTextPosition.x = (SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);

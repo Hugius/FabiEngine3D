@@ -398,7 +398,7 @@ void ScriptEditor::_updateTextWriter()
 		if(!_fe3d->billboard_isExisting("cursor"))
 		{
 			_fe3d->billboard_create("cursor", false);
-			_fe3d->billboard_setFont("cursor", FONT_MAP_PATH);
+			//_fe3d->billboard_setFont("cursor", FONT_MAP_PATH);
 			_fe3d->billboard_setSize("cursor", TEXT_CHARACTER_SIZE);
 		}
 
@@ -415,7 +415,7 @@ void ScriptEditor::_updateTextWriter()
 		position += fvec3(TEXT_CHARACTER_SIZE.x / 2.0f, 0.0f, 0.0f);
 		_fe3d->billboard_setPosition("cursor", position);
 		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
-		_fe3d->billboard_setTextContent("cursor", (showBar ? "|" : " "));
+		//_fe3d->billboard_setTextContent("cursor", (showBar ? "|" : " "));
 
 		_script->getScriptFile(_currentScriptFileID)->setCursorLineIndex(cursorLineIndex);
 		_script->getScriptFile(_currentScriptFileID)->setCursorCharIndex(cursorCharIndex);

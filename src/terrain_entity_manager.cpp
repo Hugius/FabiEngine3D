@@ -62,7 +62,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 	}
 
 	vector<float> pixels;
-	for(unsigned int i = 0; i < (image->getWidth() * image->getHeight()); i += 3)
+	for(unsigned int i = 0; i < (image->getWidth() * image->getHeight() * 3); i += 3)
 	{
 		auto r = (static_cast<float>(image->getPixels()[i + 0]) / 255.0f);
 		auto g = (static_cast<float>(image->getPixels()[i + 1]) / 255.0f);
@@ -128,9 +128,9 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	vector<fvec3> tempPositions;
 	vector<fvec2> tempUvs;
 	vector<fvec3> tempNormals;
-	for(float x = 0.0f; x < size; x++)
+	for(float z = 0.0f; z < size; z++)
 	{
-		for(float z = 0.0f; z < size; z++)
+		for(float x = 0.0f; x < size; x++)
 		{
 			auto height = _getPixelHeight(x, z, size, maxHeight, pixels);
 			auto leftHeight = _getPixelHeight((x - 1), z, size, maxHeight, pixels);
@@ -139,6 +139,7 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 			auto downHeight = _getPixelHeight(x, (z - 1), size, maxHeight, pixels);
 
 			auto position = fvec3((x - halfSize), height, (z - halfSize));
+
 			auto uv = fvec2(((x) / size), ((z) / size));
 			auto normal = Math::normalize(fvec3((leftHeight - rightHeight), 3.0f, (downHeight - upHeight)));
 
@@ -151,34 +152,34 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	vector<fvec3> positions;
 	vector<fvec2> uvs;
 	vector<fvec3> normals;
-	for(unsigned int x = 0; x < uSize - 1; x++)
+	for(unsigned int z = 0; z < uSize - 1; z++)
 	{
-		for(unsigned int z = 0; z < uSize - 1; z++)
+		for(unsigned int x = 0; x < uSize - 1; x++)
 		{
-			auto topLeftIndex = (z * uSize) + x;
+			auto topLeftIndex = ((z * uSize) + x);
 			auto topRightIndex = topLeftIndex + 1;
-			auto bottomLeftIndex = ((z + 1) * uSize) + x;
+			auto bottomLeftIndex = (((z + 1) * uSize) + x);
 			auto bottomRightIndex = bottomLeftIndex + 1;
 
 			positions.push_back(tempPositions[topLeftIndex]);
 			uvs.push_back(tempUvs[topLeftIndex]);
 			normals.push_back(tempNormals[topLeftIndex]);
 
-			positions.push_back(tempPositions[topRightIndex]);
-			uvs.push_back(tempUvs[topRightIndex]);
-			normals.push_back(tempNormals[topRightIndex]);
-
-			positions.push_back(tempPositions[bottomRightIndex]);
-			uvs.push_back(tempUvs[bottomRightIndex]);
-			normals.push_back(tempNormals[bottomRightIndex]);
-
-			positions.push_back(tempPositions[bottomRightIndex]);
-			uvs.push_back(tempUvs[bottomRightIndex]);
-			normals.push_back(tempNormals[bottomRightIndex]);
-
 			positions.push_back(tempPositions[bottomLeftIndex]);
 			uvs.push_back(tempUvs[bottomLeftIndex]);
 			normals.push_back(tempNormals[bottomLeftIndex]);
+
+			positions.push_back(tempPositions[bottomRightIndex]);
+			uvs.push_back(tempUvs[bottomRightIndex]);
+			normals.push_back(tempNormals[bottomRightIndex]);
+
+			positions.push_back(tempPositions[bottomRightIndex]);
+			uvs.push_back(tempUvs[bottomRightIndex]);
+			normals.push_back(tempNormals[bottomRightIndex]);
+
+			positions.push_back(tempPositions[topRightIndex]);
+			uvs.push_back(tempUvs[topRightIndex]);
+			normals.push_back(tempNormals[topRightIndex]);
 
 			positions.push_back(tempPositions[topLeftIndex]);
 			uvs.push_back(tempUvs[topLeftIndex]);
@@ -265,7 +266,7 @@ float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float 
 		z--;
 	}
 
-	if(x < 0 || x > size || z < 0 || z > size)
+	if((x < 0) || (x > size) || (z < 0) || (z > size))
 	{
 		return 0.0f;
 	}

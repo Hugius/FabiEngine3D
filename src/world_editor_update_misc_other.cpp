@@ -146,7 +146,6 @@ void WorldEditor::_updateWorldChoosing()
 {
 	if(_isChoosingWorld)
 	{
-		std::cout << "hoi";
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("worldList");
 
 		if(!selectedButtonID.empty())

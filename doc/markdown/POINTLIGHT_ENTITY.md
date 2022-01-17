@@ -2,7 +2,7 @@
 
 ## 1. General
 
-- The pointlight entity is 3D light in 3D space.
+- The pointlight entity is a 3D light in 3D space.
 - Emitted light is casted in all directions from a position.
 - Only a maximum of 64 pointlight entities can exist.
 

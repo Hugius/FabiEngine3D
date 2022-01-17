@@ -11,8 +11,8 @@
 
 ### 1.2 Rendering
 
-- **3D Rendering**: sky, terrain, water, model, billboard
-- **2D Rendering**: quad, text
+- **3D Entities**: Sky,Terrain, Water, Model, Billboard
+- **2D Entities**: Quad2D, Text2D
 - **Textures**: blend, cube, diffuse, displacement, dudv, emission, flare, font, height, normal, reflection, specular
 - **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting
 - **Post Processing**: bloom, DOF, motion blur, anti aliasing, lens flare, gamma correction
@@ -77,7 +77,7 @@
           └── entity
             └── billboard
             └── model
-            └── quad
+            └── quad2d
             └── sky
             └── terrain
             └── text

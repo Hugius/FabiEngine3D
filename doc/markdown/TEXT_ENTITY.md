@@ -2,8 +2,8 @@
 
 ## 1. General
 
-- The text entity is a composition of quad entities.
-- Every quad entity represents a text character.
+- The text entity is a composition of Quad2D entities.
+- Every Quad2D entity represents a text character.
 - A font map is used to form a line of text.
 
 ## 2. Assets

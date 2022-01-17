@@ -119,7 +119,6 @@ void ScriptInterpreter::load()
 	{
 		auto skyImagePaths = _skyEditor->getImagePathsFromFile();
 		auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
-		auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
 		auto waterImagePaths = _waterEditor->getImagePathsFromFile();
 		auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
 		auto modelImagePaths = _modelEditor->getImagePathsFromFile();

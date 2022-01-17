@@ -23,7 +23,7 @@ public:
 	void inject(shared_ptr<WaterEditor> waterEditor);
 	void inject(shared_ptr<ModelEditor> modelEditor);
 	void inject(shared_ptr<BillboardEditor> billboardEditor);
-	void inject(shared_ptr<QuadEditor> quadEditor);
+	void inject(shared_ptr<Quad2dEditor> quad2dEditor);
 	void inject(shared_ptr<TextEditor> textEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
@@ -71,7 +71,7 @@ private:
 	shared_ptr<WaterEditor> _waterEditor = nullptr;
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 	shared_ptr<BillboardEditor> _billboardEditor = nullptr;
-	shared_ptr<QuadEditor> _quadEditor = nullptr;
+	shared_ptr<Quad2dEditor> _quad2dEditor = nullptr;
 	shared_ptr<TextEditor> _textEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;

@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-void QuadEditor::_updateMiscellaneous()
+void Quad2dEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
@@ -10,20 +10,20 @@ void QuadEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->quad_isWireframed(_currentQuadID))
+				if(_fe3d->quad2d_isWireframed(_currentQuadID))
 				{
-					_fe3d->quad_setWireframed(_currentQuadID, false);
+					_fe3d->quad2d_setWireframed(_currentQuadID, false);
 				}
 				else
 				{
-					_fe3d->quad_setWireframed(_currentQuadID, true);
+					_fe3d->quad2d_setWireframed(_currentQuadID, true);
 				}
 			}
 		}
 	}
 }
 
-void QuadEditor::_updateQuadCreating()
+void Quad2dEditor::_updateQuadCreating()
 {
 	if(_isCreatingQuad)
 	{
@@ -53,20 +53,20 @@ void QuadEditor::_updateQuadCreating()
 
 			if(_currentProjectID.empty())
 			{
-				Logger::throwError("QuadEditor::_updateQuadCreating");
+				Logger::throwError("Quad2dEditor::_updateQuadCreating");
 			}
 
-			_fe3d->quad_create(newQuadID, true);
+			_fe3d->quad2d_create(newQuadID, true);
 
-			if(_fe3d->quad_isExisting(newQuadID))
+			if(_fe3d->quad2d_isExisting(newQuadID))
 			{
-				_fe3d->quad_setPosition(newQuadID, Tools::convertPositionToViewport(fvec2(0.0f)));
-				_fe3d->quad_setSize(newQuadID, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
+				_fe3d->quad2d_setPosition(newQuadID, Tools::convertPositionToViewport(fvec2(0.0f)));
+				_fe3d->quad2d_setSize(newQuadID, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
 
 				_currentQuadID = newQuadID;
 				_loadedQuadIDs.push_back(newQuadID);
 
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quadEditorMenuChoice");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
 				_fe3d->text_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad: " + newQuadID.substr(1), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
 				_isCreatingQuad = false;
@@ -75,13 +75,13 @@ void QuadEditor::_updateQuadCreating()
 	}
 }
 
-void QuadEditor::_updateQuadChoosing()
+void Quad2dEditor::_updateQuadChoosing()
 {
 	if(_isChoosingQuad)
 	{
 		if(!_hoveredQuadID.empty())
 		{
-			_fe3d->quad_setVisible(_hoveredQuadID, false);
+			_fe3d->quad2d_setVisible(_hoveredQuadID, false);
 		}
 
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("quadList");
@@ -97,13 +97,13 @@ void QuadEditor::_updateQuadChoosing()
 
 				if(!_isDeletingQuad)
 				{
-					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quadEditorMenuChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
 
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
 				}
 
-				_fe3d->quad_setVisible(_currentQuadID, true);
+				_fe3d->quad2d_setVisible(_currentQuadID, true);
 				_gui->getOverlay()->deleteChoiceForm("quadList");
 				_isChoosingQuad = false;
 			}
@@ -121,12 +121,12 @@ void QuadEditor::_updateQuadChoosing()
 
 		if(!_hoveredQuadID.empty())
 		{
-			_fe3d->quad_setVisible(_hoveredQuadID, true);
+			_fe3d->quad2d_setVisible(_hoveredQuadID, true);
 		}
 	}
 }
 
-void QuadEditor::_updateQuadDeleting()
+void Quad2dEditor::_updateQuadDeleting()
 {
 	if(_isDeletingQuad && !_currentQuadID.empty())
 	{
@@ -137,7 +137,7 @@ void QuadEditor::_updateQuadDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->quad_delete(_currentQuadID);
+			_fe3d->quad2d_delete(_currentQuadID);
 
 			_loadedQuadIDs.erase(remove(_loadedQuadIDs.begin(), _loadedQuadIDs.end(), _currentQuadID), _loadedQuadIDs.end());
 			_currentQuadID = "";

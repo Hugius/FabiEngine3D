@@ -8,11 +8,11 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> QuadEditor::getImagePathsFromFile() const
+const vector<string> Quad2dEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("QuadEditor::getImagePathsFromFile");
+		Logger::throwError("Quad2dEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -56,11 +56,11 @@ const vector<string> QuadEditor::getImagePathsFromFile() const
 	return texturePaths;
 }
 
-const bool QuadEditor::loadFromFile()
+const bool Quad2dEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("QuadEditor::loadFromFile");
+		Logger::throwError("Quad2dEditor::loadFromFile");
 	}
 
 	_loadedQuadIDs.clear();
@@ -91,17 +91,17 @@ const bool QuadEditor::loadFromFile()
 
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
-		_fe3d->quad_create(quadID, true);
+		_fe3d->quad2d_create(quadID, true);
 
-		if(_fe3d->quad_isExisting(quadID))
+		if(_fe3d->quad2d_isExisting(quadID))
 		{
 			_loadedQuadIDs.push_back(quadID);
 
-			_fe3d->quad_setVisible(quadID, false);
-			_fe3d->quad_setPosition(quadID, Tools::convertPositionToViewport(fvec2(0.0f)));
-			_fe3d->quad_setSize(quadID, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
-			_fe3d->quad_setColor(quadID, color);
-			_fe3d->quad_setTransparency(quadID, transparency);
+			_fe3d->quad2d_setVisible(quadID, false);
+			_fe3d->quad2d_setPosition(quadID, Tools::convertPositionToViewport(fvec2(0.0f)));
+			_fe3d->quad2d_setSize(quadID, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->quad2d_setColor(quadID, color);
+			_fe3d->quad2d_setTransparency(quadID, transparency);
 
 			if(!diffuseMapPath.empty())
 			{
@@ -110,7 +110,7 @@ const bool QuadEditor::loadFromFile()
 					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 				}
 
-				_fe3d->quad_setDiffuseMap(quadID, diffuseMapPath);
+				_fe3d->quad2d_setDiffuseMap(quadID, diffuseMapPath);
 			}
 		}
 	}

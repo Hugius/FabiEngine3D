@@ -182,11 +182,11 @@ void WorldEditor::_updatePointlightEditing()
 			const auto quad2dEntityID = screen->getButton("shape")->getRectangle()->getEntityID();
 			if(_fe3d->pointlight_getShape(activePointlightID) == PointlightShape::CIRCLE)
 			{
-				_fe3d->quad_setDiffuseMap(quad2dEntityID, "engine\\assets\\image\\diffuse_map\\shape_circle.tga");
+				_fe3d->quad2d_setDiffuseMap(quad2dEntityID, "engine\\assets\\image\\diffuse_map\\shape_circle.tga");
 			}
 			else
 			{
-				_fe3d->quad_setDiffuseMap(quad2dEntityID, "engine\\assets\\image\\diffuse_map\\shape_square.tga");
+				_fe3d->quad2d_setDiffuseMap(quad2dEntityID, "engine\\assets\\image\\diffuse_map\\shape_square.tga");
 			}
 		}
 	}

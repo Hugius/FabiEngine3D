@@ -5,7 +5,7 @@ void SkyEditor::_updateCamera()
 {
 	if(_fe3d->camera_isFirstPersonViewEnabled())
 	{
-		_fe3d->quad_setVisible("@@cursor", false);
+		_fe3d->quad2d_setVisible("@@cursor", false);
 	}
 
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())

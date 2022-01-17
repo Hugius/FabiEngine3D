@@ -84,7 +84,7 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("waterEditor")->setHoverable(isHoverable);
 	screen->getButton("modelEditor")->setHoverable(isHoverable);
 	screen->getButton("billboardEditor")->setHoverable(isHoverable);
-	screen->getButton("quadEditor")->setHoverable(isHoverable);
+	screen->getButton("quad2dEditor")->setHoverable(isHoverable);
 	screen->getButton("textEditor")->setHoverable(isHoverable);
 	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation3dEditor")->setHoverable(isHoverable);
@@ -149,9 +149,9 @@ void TopViewportController::_applyProjectChange()
 		_billboardEditor->unload();
 	}
 
-	if(_quadEditor->isLoaded())
+	if(_quad2dEditor->isLoaded())
 	{
-		_quadEditor->unload();
+		_quad2dEditor->unload();
 	}
 
 	if(_textEditor->isLoaded())
@@ -189,7 +189,7 @@ void TopViewportController::_applyProjectChange()
 	_waterEditor->setCurrentProjectID(_currentProjectID);
 	_modelEditor->setCurrentProjectID(_currentProjectID);
 	_billboardEditor->setCurrentProjectID(_currentProjectID);
-	_quadEditor->setCurrentProjectID(_currentProjectID);
+	_quad2dEditor->setCurrentProjectID(_currentProjectID);
 	_textEditor->setCurrentProjectID(_currentProjectID);
 	_animation2dEditor->setCurrentProjectID(_currentProjectID);
 	_animation3dEditor->setCurrentProjectID(_currentProjectID);
@@ -241,7 +241,7 @@ void TopViewportController::_saveCurrentProject()
 	_waterEditor->saveToFile();
 	_modelEditor->saveToFile();
 	_billboardEditor->saveToFile();
-	_quadEditor->saveToFile();
+	_quad2dEditor->saveToFile();
 	_textEditor->saveToFile();
 	_animation2dEditor->saveToFile();
 	_animation3dEditor->saveToFile();
@@ -277,9 +277,9 @@ void TopViewportController::inject(shared_ptr<BillboardEditor> billboardEditor)
 	_billboardEditor = billboardEditor;
 }
 
-void TopViewportController::inject(shared_ptr<QuadEditor> quadEditor)
+void TopViewportController::inject(shared_ptr<Quad2dEditor> quad2dEditor)
 {
-	_quadEditor = quadEditor;
+	_quad2dEditor = quad2dEditor;
 }
 
 void TopViewportController::inject(shared_ptr<TextEditor> textEditor)

@@ -2,11 +2,11 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-void QuadEditor::_updateMainMenu()
+void Quad2dEditor::_updateMainMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "quadEditorMenuMain")
+	if(screen->getID() == "quad2dEditorMenuMain")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -55,20 +55,20 @@ void QuadEditor::_updateMainMenu()
 	}
 }
 
-void QuadEditor::_updateChoiceMenu()
+void Quad2dEditor::_updateChoiceMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "quadEditorMenuChoice")
+	if(screen->getID() == "quad2dEditorMenuChoice")
 	{
-		auto color = _fe3d->quad_getColor(_currentQuadID);
-		auto transparency = _fe3d->quad_getTransparency(_currentQuadID);
+		auto color = _fe3d->quad2d_getColor(_currentQuadID);
+		auto transparency = _fe3d->quad2d_getTransparency(_currentQuadID);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->quad_setVisible(_currentQuadID, false);
+			_fe3d->quad2d_setVisible(_currentQuadID, false);
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quadEditorMenuMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuMain");
 			_currentQuadID = "";
 			return;
 		}
@@ -76,7 +76,7 @@ void QuadEditor::_updateChoiceMenu()
 		{
 			if(_currentProjectID.empty())
 			{
-				Logger::throwError("QuadEditor::_updateChoiceMenu");
+				Logger::throwError("Quad2dEditor::_updateChoiceMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -103,7 +103,7 @@ void QuadEditor::_updateChoiceMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->quad_setDiffuseMap(_currentQuadID, finalFilePath);
+			_fe3d->quad2d_setDiffuseMap(_currentQuadID, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
@@ -119,22 +119,22 @@ void QuadEditor::_updateChoiceMenu()
 		if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
-			_fe3d->quad_setColor(_currentQuadID, color);
+			_fe3d->quad2d_setColor(_currentQuadID, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("colorG", color.g, {}))
 		{
 			color.g /= 255.0f;
-			_fe3d->quad_setColor(_currentQuadID, color);
+			_fe3d->quad2d_setColor(_currentQuadID, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("colorB", color.b, {}))
 		{
 			color.b /= 255.0f;
-			_fe3d->quad_setColor(_currentQuadID, color);
+			_fe3d->quad2d_setColor(_currentQuadID, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("transparency", transparency, {}))
 		{
 			transparency /= 100.0f;
-			_fe3d->quad_setTransparency(_currentQuadID, transparency);
+			_fe3d->quad2d_setTransparency(_currentQuadID, transparency);
 		}
 	}
 }

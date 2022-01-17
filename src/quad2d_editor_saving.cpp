@@ -6,7 +6,7 @@
 
 using std::ofstream;
 
-const bool QuadEditor::saveToFile() const
+const bool Quad2dEditor::saveToFile() const
 {
 	if(!_isEditorLoaded)
 	{
@@ -15,7 +15,7 @@ const bool QuadEditor::saveToFile() const
 
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("QuadEditor::saveToFile");
+		Logger::throwError("Quad2dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -23,9 +23,9 @@ const bool QuadEditor::saveToFile() const
 
 	for(const auto& quadID : _loadedQuadIDs)
 	{
-		auto diffuseMapPath = _fe3d->quad_getDiffuseMapPath(quadID);
-		auto color = _fe3d->quad_getColor(quadID);
-		auto transparency = _fe3d->quad_getTransparency(quadID);
+		auto diffuseMapPath = _fe3d->quad2d_getDiffuseMapPath(quadID);
+		auto color = _fe3d->quad2d_getColor(quadID);
+		auto transparency = _fe3d->quad2d_getTransparency(quadID);
 
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 

@@ -13,7 +13,7 @@ void TerrainEditor::_updateCamera()
 		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED));
 		_fe3d->camera_setThirdPersonDistance(cameraDistance);
 
-		_fe3d->quad_setVisible("@@cursor", false);
+		_fe3d->quad2d_setVisible("@@cursor", false);
 	}
 
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())

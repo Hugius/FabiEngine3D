@@ -15,7 +15,7 @@ EngineController::EngineController()
 	_waterEditor = make_shared<WaterEditor>();
 	_modelEditor = make_shared<ModelEditor>();
 	_billboardEditor = make_shared<BillboardEditor>();
-	_quadEditor = make_shared<QuadEditor>();
+	_quad2dEditor = make_shared<Quad2dEditor>();
 	_textEditor = make_shared<TextEditor>();
 	_animation2dEditor = make_shared<Animation2dEditor>();
 	_animation3dEditor = make_shared<Animation3dEditor>();
@@ -32,7 +32,7 @@ EngineController::EngineController()
 	_leftViewportController->inject(_waterEditor);
 	_leftViewportController->inject(_modelEditor);
 	_leftViewportController->inject(_billboardEditor);
-	_leftViewportController->inject(_quadEditor);
+	_leftViewportController->inject(_quad2dEditor);
 	_leftViewportController->inject(_textEditor);
 	_leftViewportController->inject(_animation2dEditor);
 	_leftViewportController->inject(_animation3dEditor);
@@ -49,7 +49,7 @@ EngineController::EngineController()
 	_topViewportController->inject(_waterEditor);
 	_topViewportController->inject(_modelEditor);
 	_topViewportController->inject(_billboardEditor);
-	_topViewportController->inject(_quadEditor);
+	_topViewportController->inject(_quad2dEditor);
 	_topViewportController->inject(_textEditor);
 	_topViewportController->inject(_animation2dEditor);
 	_topViewportController->inject(_animation3dEditor);
@@ -63,7 +63,7 @@ EngineController::EngineController()
 	_waterEditor->inject(_guiManager);
 	_modelEditor->inject(_guiManager);
 	_billboardEditor->inject(_guiManager);
-	_quadEditor->inject(_guiManager);
+	_quad2dEditor->inject(_guiManager);
 	_textEditor->inject(_guiManager);
 	_animation2dEditor->inject(_guiManager);
 	_animation3dEditor->inject(_guiManager);
@@ -87,7 +87,7 @@ EngineController::EngineController()
 	_scriptInterpreter->inject(_waterEditor);
 	_scriptInterpreter->inject(_modelEditor);
 	_scriptInterpreter->inject(_billboardEditor);
-	_scriptInterpreter->inject(_quadEditor);
+	_scriptInterpreter->inject(_quad2dEditor);
 	_scriptInterpreter->inject(_textEditor);
 	_scriptInterpreter->inject(_animation2dEditor);
 	_scriptInterpreter->inject(_animation3dEditor);
@@ -112,7 +112,7 @@ void EngineController::initialize()
 	_waterEditor->inject(_fe3d);
 	_modelEditor->inject(_fe3d);
 	_billboardEditor->inject(_fe3d);
-	_quadEditor->inject(_fe3d);
+	_quad2dEditor->inject(_fe3d);
 	_textEditor->inject(_fe3d);
 	_animation2dEditor->inject(_fe3d);
 	_animation3dEditor->inject(_fe3d);
@@ -180,9 +180,9 @@ void EngineController::initialize()
 		imagePaths.push_back(fontMapDirectoryPath + "font.tga");
 		_fe3d->misc_cacheImages(imagePaths);
 
-		_fe3d->quad_create("@@cursor", true);
-		_fe3d->quad_setSize("@@cursor", fvec2(CURSOR_QUAD_SIZE.x, (CURSOR_QUAD_SIZE.y * Tools::getWindowAspectRatio())));
-		_fe3d->quad_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.tga");
+		_fe3d->quad2d_create("@@cursor", true);
+		_fe3d->quad2d_setSize("@@cursor", fvec2(CURSOR_QUAD_SIZE.x, (CURSOR_QUAD_SIZE.y * Tools::getWindowAspectRatio())));
+		_fe3d->quad2d_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.tga");
 		_fe3d->misc_setCursorEntityID("@@cursor");
 		_fe3d->misc_setCursorVisible(false);
 
@@ -223,9 +223,9 @@ void EngineController::update()
 		}
 		lastScreen = activeScreen;
 
-		_fe3d->quad_setPosition("@@cursor", Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition())));
-		_fe3d->quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
-		_fe3d->quad_setVisible("@@cursor", _fe3d->misc_isCursorInsideWindow());
+		_fe3d->quad2d_setPosition("@@cursor", Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition())));
+		_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
+		_fe3d->quad2d_setVisible("@@cursor", _fe3d->misc_isCursorInsideWindow());
 
 		_guiManager->update();
 

@@ -124,7 +124,7 @@ void ScriptInterpreter::load()
 		auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
 		auto modelTexturePaths = _modelEditor->getImagePathsFromFile();
 		auto billboardTexturePaths = _billboardEditor->getImagePathsFromFile();
-		auto quadTexturePaths = _quadEditor->getImagePathsFromFile();
+		auto quadTexturePaths = _quad2dEditor->getImagePathsFromFile();
 		auto textTexturePaths = _textEditor->getImagePathsFromFile();
 		auto audioPaths = _soundEditor->getAudioPathsFromFile();
 
@@ -149,7 +149,7 @@ void ScriptInterpreter::load()
 	_waterEditor->loadFromFile();
 	_modelEditor->loadFromFile();
 	_billboardEditor->loadFromFile();
-	_quadEditor->loadFromFile();
+	_quad2dEditor->loadFromFile();
 	_textEditor->loadFromFile();
 	_animation2dEditor->loadFromFile(false);
 	_animation3dEditor->loadFromFile(false);
@@ -188,11 +188,11 @@ void ScriptInterpreter::unload()
 	_fe3d->spotlight_deleteAll();
 	_fe3d->reflection_deleteAll();
 
-	for(const auto& ID : _fe3d->quad_getIDs())
+	for(const auto& ID : _fe3d->quad2d_getIDs())
 	{
 		if(ID[0] != '@')
 		{
-			_fe3d->quad_delete(ID);
+			_fe3d->quad2d_delete(ID);
 		}
 	}
 

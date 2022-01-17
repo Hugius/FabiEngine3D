@@ -136,8 +136,8 @@ void Animation2dEditor::_updateQuadAnimationExecution()
 		auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())), (1.0f / static_cast<float>(animation.getRowCount())));
 		auto uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x), (static_cast<float>(animation.getRowIndex()) * uvMultiplier.y));
 
-		_fe3d->quad_setUvMultiplier(key.second, uvMultiplier);
-		_fe3d->quad_setUvOffset(key.second, uvOffset);
+		_fe3d->quad2d_setUvMultiplier(key.second, uvMultiplier);
+		_fe3d->quad2d_setUvOffset(key.second, uvOffset);
 	}
 
 	for(const auto& key : _quadAnimationsToStop)

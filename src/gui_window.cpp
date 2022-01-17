@@ -12,15 +12,15 @@ GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, c
 	_initialSize(size),
 	_initialColor(color)
 {
-	_fe3d->quad_create(_entityID, true);
-	_fe3d->quad_setPosition(_entityID, position);
-	_fe3d->quad_setSize(_entityID, size);
-	_fe3d->quad_setColor(_entityID, color);
+	_fe3d->quad2d_create(_entityID, true);
+	_fe3d->quad2d_setPosition(_entityID, position);
+	_fe3d->quad2d_setSize(_entityID, size);
+	_fe3d->quad2d_setColor(_entityID, color);
 }
 
 GuiWindow::~GuiWindow()
 {
-	_fe3d->quad_delete(_entityID);
+	_fe3d->quad2d_delete(_entityID);
 }
 
 void GuiWindow::update(bool isHoverable)
@@ -33,11 +33,11 @@ void GuiWindow::update(bool isHoverable)
 
 const bool GuiWindow::isHovered() const
 {
-	if(_fe3d->quad_isVisible(_entityID))
+	if(_fe3d->quad2d_isVisible(_entityID))
 	{
 		fvec2 cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()));
-		fvec2 buttonPosition = _fe3d->quad_getPosition(_entityID);
-		fvec2 buttonSize = _fe3d->quad_getSize(_entityID);
+		fvec2 buttonPosition = _fe3d->quad2d_getPosition(_entityID);
+		fvec2 buttonSize = _fe3d->quad2d_getSize(_entityID);
 
 		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f))
 		{
@@ -91,8 +91,8 @@ void GuiWindow::createScreen(const string& ID)
 		}
 	}
 
-	auto windowPosition = _fe3d->quad_getPosition(_entityID);
-	auto windowSize = _fe3d->quad_getSize(_entityID);
+	auto windowPosition = _fe3d->quad2d_getPosition(_entityID);
+	auto windowSize = _fe3d->quad2d_getSize(_entityID);
 
 	_screens.push_back(make_shared<GuiScreen>(_fe3d, _parentID + "_" + _ID, ID, windowPosition, windowSize));
 }

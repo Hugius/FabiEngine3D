@@ -21,7 +21,7 @@ void Animation3dEditor::_updateCamera()
 		}
 		_fe3d->camera_setThirdPersonLookat(cameraLookat);
 
-		_fe3d->quad_setVisible("@@cursor", false);
+		_fe3d->quad2d_setVisible("@@cursor", false);
 
 		const auto distance = _fe3d->camera_getThirdPersonDistance();
 		_fe3d->gfx_setShadowEyePosition(fvec3(cameraLookat + fvec3(distance * 2.0f)));

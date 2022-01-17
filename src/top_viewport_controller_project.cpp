@@ -138,7 +138,7 @@ void TopViewportController::_updateProjectLoading()
 			auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
 			auto modelTexturePaths = _modelEditor->getImagePathsFromFile();
 			auto billboardTexturePaths = _billboardEditor->getImagePathsFromFile();
-			auto quadTexturePaths = _quadEditor->getImagePathsFromFile();
+			auto quadTexturePaths = _quad2dEditor->getImagePathsFromFile();
 			auto textTexturePaths = _textEditor->getImagePathsFromFile();
 			auto audioPaths = _soundEditor->getAudioPathsFromFile();
 

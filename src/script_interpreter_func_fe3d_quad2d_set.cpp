@@ -7,7 +7,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:quad_place")
+	if(functionName == "fe3d:quad2d_place")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 				return true;
 			}
 
-			if(_fe3d->quad_isExisting(args[0].getString()))
+			if(_fe3d->quad2d_isExisting(args[0].getString()))
 			{
 				_throwScriptError("quad already exists!");
 				return true;
@@ -26,18 +26,18 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 			if(_validateFe3dQuad(args[1].getString(), true))
 			{
-				_fe3d->quad_create(args[0].getString(), true);
-				_fe3d->quad_setDiffuseMap(args[0].getString(), _fe3d->quad_getDiffuseMapPath("@" + args[1].getString()));
-				_fe3d->quad_setPosition(args[0].getString(), Tools::convertPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
-				_fe3d->quad_setSize(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
-				_fe3d->quad_setMinPosition(args[0].getString(), Tools::calculateMinViewportPosition());
-				_fe3d->quad_setMaxPosition(args[0].getString(), Tools::calculateMaxViewportPosition());
+				_fe3d->quad2d_create(args[0].getString(), true);
+				_fe3d->quad2d_setDiffuseMap(args[0].getString(), _fe3d->quad2d_getDiffuseMapPath("@" + args[1].getString()));
+				_fe3d->quad2d_setPosition(args[0].getString(), Tools::convertPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
+				_fe3d->quad2d_setSize(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
+				_fe3d->quad2d_setMinPosition(args[0].getString(), Tools::calculateMinViewportPosition());
+				_fe3d->quad2d_setMaxPosition(args[0].getString(), Tools::calculateMaxViewportPosition());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_delete")
+	else if(functionName == "fe3d:quad2d_delete")
 	{
 		auto types = {SVT::STRING};
 
@@ -45,27 +45,27 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_delete(args[0].getString());
+				_fe3d->quad2d_delete(args[0].getString());
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_delete_all")
+	else if(functionName == "fe3d:quad2d_delete_all")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& ID : _fe3d->quad_getIDs())
+			for(const auto& ID : _fe3d->quad2d_getIDs())
 			{
 				if(ID[0] != '@')
 				{
-					_fe3d->quad_delete(ID);
+					_fe3d->quad2d_delete(ID);
 				}
 			}
 
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:quad_set_visible")
+	else if(functionName == "fe3d:quad2d_set_visible")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -73,13 +73,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setVisible(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad2d_setVisible(args[0].getString(), args[1].getBoolean());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_diffuse_map")
+	else if(functionName == "fe3d:quad2d_set_diffuse_map")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -87,13 +87,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setDiffuseMap(args[0].getString(), args[1].getString());
+				_fe3d->quad2d_setDiffuseMap(args[0].getString(), args[1].getString());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_position")
+	else if(functionName == "fe3d:quad2d_set_position")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -101,12 +101,12 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setPosition(args[0].getString(), Tools::convertPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+				_fe3d->quad2d_setPosition(args[0].getString(), Tools::convertPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_move")
+	else if(functionName == "fe3d:quad2d_move")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -114,13 +114,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_move(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+				_fe3d->quad2d_move(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_move_to")
+	else if(functionName == "fe3d:quad2d_move_to")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -129,13 +129,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto speed = Tools::convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
-				_fe3d->quad_moveTo(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
+				_fe3d->quad2d_moveTo(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_rotation")
+	else if(functionName == "fe3d:quad2d_set_rotation")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
@@ -143,13 +143,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setRotation(args[0].getString(), args[1].getDecimal());
+				_fe3d->quad2d_setRotation(args[0].getString(), args[1].getDecimal());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_rotate")
+	else if(functionName == "fe3d:quad2d_rotate")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
@@ -157,13 +157,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_rotate(args[0].getString(), args[1].getDecimal());
+				_fe3d->quad2d_rotate(args[0].getString(), args[1].getDecimal());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_rotate_to")
+	else if(functionName == "fe3d:quad2d_rotate_to")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -171,13 +171,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_rotateTo(args[0].getString(), args[1].getDecimal(), args[2].getDecimal());
+				_fe3d->quad2d_rotateTo(args[0].getString(), args[1].getDecimal(), args[2].getDecimal());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_size")
+	else if(functionName == "fe3d:quad2d_set_size")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -185,13 +185,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setSize(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+				_fe3d->quad2d_setSize(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_scale")
+	else if(functionName == "fe3d:quad2d_scale")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -199,13 +199,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_scale(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
+				_fe3d->quad2d_scale(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_scale_to")
+	else if(functionName == "fe3d:quad2d_scale_to")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -214,13 +214,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto speed = Tools::convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
-				_fe3d->quad_scaleTo(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
+				_fe3d->quad2d_scaleTo(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_color")
+	else if(functionName == "fe3d:quad2d_set_color")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -228,13 +228,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad2d_setColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_wireframe_color")
+	else if(functionName == "fe3d:quad2d_set_wireframe_color")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -242,13 +242,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setWireframeColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad2d_setWireframeColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_transparency")
+	else if(functionName == "fe3d:quad2d_set_transparency")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
@@ -256,13 +256,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setTransparency(args[0].getString(), args[1].getDecimal());
+				_fe3d->quad2d_setTransparency(args[0].getString(), args[1].getDecimal());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_wireframed")
+	else if(functionName == "fe3d:quad2d_set_wireframed")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -270,13 +270,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setWireframed(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad2d_setWireframed(args[0].getString(), args[1].getBoolean());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_horizontally_mirrored")
+	else if(functionName == "fe3d:quad2d_set_horizontally_mirrored")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -284,13 +284,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setHorizontallyMirrored(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad2d_setHorizontallyMirrored(args[0].getString(), args[1].getBoolean());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_vertically_mirrored")
+	else if(functionName == "fe3d:quad2d_set_vertically_mirrored")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -298,13 +298,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setVerticallyMirrored(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad2d_setVerticallyMirrored(args[0].getString(), args[1].getBoolean());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_uv_multiplier")
+	else if(functionName == "fe3d:quad2d_set_uv_multiplier")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -312,13 +312,13 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setUvMultiplier(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->quad2d_setUvMultiplier(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_uv_offset")
+	else if(functionName == "fe3d:quad2d_set_uv_offset")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -326,7 +326,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setUvOffset(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->quad2d_setUvOffset(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -339,7 +339,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:quad` functionality as networking server!");
+		_throwScriptError("cannot access `fe3d:quad2d` functionality as networking server!");
 	}
 
 	return true;

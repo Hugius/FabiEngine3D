@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_validateFe3dQuad(const string& ID, bool isTemplat
 
 	if(isTemplate)
 	{
-		if(!_fe3d->quad_isExisting("@" + ID))
+		if(!_fe3d->quad2d_isExisting("@" + ID))
 		{
 			_throwScriptError("template quad entity does not exist!");
 			return false;
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_validateFe3dQuad(const string& ID, bool isTemplat
 	}
 	else
 	{
-		if(!_fe3d->quad_isExisting(ID))
+		if(!_fe3d->quad2d_isExisting(ID))
 		{
 			_throwScriptError("quad entity does not exist!");
 			return false;

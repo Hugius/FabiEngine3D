@@ -142,7 +142,7 @@ void Animation2dEditor::startQuadAnimation(const string& animationID, const stri
 		Logger::throwWarning("animation not existing!");
 	}
 
-	if(!_fe3d->quad_isExisting(quadID))
+	if(!_fe3d->quad2d_isExisting(quadID))
 	{
 		Logger::throwWarning("quad not existing!");
 	}

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_renderer.hpp"
-#include "quad_entity.hpp"
+#include "quad2d_entity.hpp"
 
 class DofRenderer final : public BaseRenderer
 {

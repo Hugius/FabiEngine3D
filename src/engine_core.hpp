@@ -17,7 +17,7 @@
 #include "pointlight_entity_manager.hpp"
 #include "spotlight_entity_manager.hpp"
 #include "reflection_entity_manager.hpp"
-#include "quad_entity_manager.hpp"
+#include "quad2d_entity_manager.hpp"
 #include "text_entity_manager.hpp"
 #include "shadow_generator.hpp"
 #include "raycaster.hpp"

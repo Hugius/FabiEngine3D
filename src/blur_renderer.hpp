@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_renderer.hpp"
-#include "quad_entity.hpp"
+#include "quad2d_entity.hpp"
 #include "capture_buffer.hpp"
 #include "blur_direction.hpp"
 

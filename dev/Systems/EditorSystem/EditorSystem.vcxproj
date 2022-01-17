@@ -31,12 +31,12 @@
     <ClCompile Include="..\..\..\src\animation3d_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_frame.cpp" />
     <ClCompile Include="..\..\..\src\base_editor.cpp" />
-    <ClCompile Include="..\..\..\src\quad_editor_lifecycle.cpp" />
-    <ClCompile Include="..\..\..\src\quad_editor_loading.cpp" />
-    <ClCompile Include="..\..\..\src\quad_editor_misc.cpp" />
-    <ClCompile Include="..\..\..\src\quad_editor_saving.cpp" />
-    <ClCompile Include="..\..\..\src\quad_editor_update_menu.cpp" />
-    <ClCompile Include="..\..\..\src\quad_editor_update_misc.cpp" />
+    <ClCompile Include="..\..\..\src\quad2d_editor_lifecycle.cpp" />
+    <ClCompile Include="..\..\..\src\quad2d_editor_loading.cpp" />
+    <ClCompile Include="..\..\..\src\quad2d_editor_misc.cpp" />
+    <ClCompile Include="..\..\..\src\quad2d_editor_saving.cpp" />
+    <ClCompile Include="..\..\..\src\quad2d_editor_update_menu.cpp" />
+    <ClCompile Include="..\..\..\src\quad2d_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\sound_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\sound_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\sound_editor_misc.cpp" />
@@ -156,7 +156,7 @@
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp" />
     <ClInclude Include="..\..\..\src\animation3d_frame.hpp" />
     <ClInclude Include="..\..\..\src\base_editor.hpp" />
-    <ClInclude Include="..\..\..\src\quad_editor.hpp" />
+    <ClInclude Include="..\..\..\src\quad2d_editor.hpp" />
     <ClInclude Include="..\..\..\src\sound_editor.hpp" />
     <ClInclude Include="..\..\..\src\billboard_editor.hpp" />
     <ClInclude Include="..\..\..\src\sky_editor.hpp" />

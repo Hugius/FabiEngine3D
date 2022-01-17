@@ -11,7 +11,7 @@
 #include "billboard_entity_depth_renderer.hpp"
 #include "billboard_entity_shadow_renderer.hpp"
 #include "aabb_entity_color_renderer.hpp"
-#include "quad_entity_color_renderer.hpp"
+#include "quad2d_entity_color_renderer.hpp"
 #include "anti_aliasing_renderer.hpp"
 #include "bloom_renderer.hpp"
 #include "dof_renderer.hpp"
@@ -30,7 +30,7 @@
 #include "pointlight_entity_manager.hpp"
 #include "spotlight_entity_manager.hpp"
 #include "reflection_entity_manager.hpp"
-#include "quad_entity_manager.hpp"
+#include "quad2d_entity_manager.hpp"
 #include "text_entity_manager.hpp"
 
 class MasterRenderer final

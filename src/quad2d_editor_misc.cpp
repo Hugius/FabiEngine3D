@@ -1,4 +1,4 @@
-#include "quad_editor.hpp"
+#include "quad2d_editor.hpp"
 
 #include <algorithm>
 

@@ -1,4 +1,4 @@
-#include "quad_editor.hpp"
+#include "quad2d_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 #include "configuration.hpp"

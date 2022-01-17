@@ -25,8 +25,8 @@
     <ClCompile Include="..\..\..\src\billboard_entity_get.cpp" />
     <ClCompile Include="..\..\..\src\billboard_entity_manager.cpp" />
     <ClCompile Include="..\..\..\src\billboard_entity_set.cpp" />
-    <ClCompile Include="..\..\..\src\quad_entity.cpp" />
-    <ClCompile Include="..\..\..\src\quad_entity_manager.cpp" />
+    <ClCompile Include="..\..\..\src\quad2d_entity.cpp" />
+    <ClCompile Include="..\..\..\src\quad2d_entity_manager.cpp" />
     <ClCompile Include="..\..\..\src\pointlight_entity.cpp" />
     <ClCompile Include="..\..\..\src\pointlight_entity_manager.cpp" />
     <ClCompile Include="..\..\..\src\model_entity_get.cpp" />
@@ -53,8 +53,8 @@
     <ClInclude Include="..\..\..\src\base_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\billboard_entity.hpp" />
     <ClInclude Include="..\..\..\src\billboard_entity_manager.hpp" />
-    <ClInclude Include="..\..\..\src\quad_entity.hpp" />
-    <ClInclude Include="..\..\..\src\quad_entity_manager.hpp" />
+    <ClInclude Include="..\..\..\src\quad2d_entity.hpp" />
+    <ClInclude Include="..\..\..\src\quad2d_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\model_entity_part.hpp" />
     <ClInclude Include="..\..\..\src\pointlight_entity.hpp" />
     <ClInclude Include="..\..\..\src\pointlight_entity_manager.hpp" />

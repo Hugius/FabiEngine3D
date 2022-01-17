@@ -582,22 +582,22 @@
     <ClCompile Include="..\..\..\src\world_editor_gui.cpp">
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad_editor_lifecycle.cpp">
+    <ClCompile Include="..\..\..\src\quad2d_editor_lifecycle.cpp">
       <Filter>Quad Editor\Base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\quad2d_editor_loading.cpp">
       <Filter>Quad Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\quad2d_editor_saving.cpp">
       <Filter>Quad Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad_editor_misc.cpp">
+    <ClCompile Include="..\..\..\src\quad2d_editor_misc.cpp">
       <Filter>Quad Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad_editor_update_misc.cpp">
+    <ClCompile Include="..\..\..\src\quad2d_editor_update_misc.cpp">
       <Filter>Quad Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad_editor_update_menu.cpp">
+    <ClCompile Include="..\..\..\src\quad2d_editor_update_menu.cpp">
       <Filter>Quad Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_update_misc_highlight.cpp">
@@ -665,7 +665,7 @@
     <ClInclude Include="..\..\..\src\animation2d.hpp">
       <Filter>Animation2D Editor\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\quad_editor.hpp">
+    <ClInclude Include="..\..\..\src\quad2d_editor.hpp">
       <Filter>Quad Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\base_editor.hpp">

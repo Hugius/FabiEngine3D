@@ -6,7 +6,7 @@
 #include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
-#include "quad_editor.hpp"
+#include "quad2d_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
 #include "sound_editor.hpp"

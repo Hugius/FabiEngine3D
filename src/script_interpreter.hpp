@@ -195,6 +195,7 @@ private:
 	static inline const string SUBTRACTION_KEYWORD = "DECR";
 	static inline const string MULTIPLICATION_KEYWORD = "MUL";
 	static inline const string DIVISION_KEYWORD = "DIV";
+	static inline const string MODULO_KEYWORD = "MOD";
 	static inline const string NEGATION_KEYWORD = "NEG";
 	static inline const string CASTING_KEYWORD = "CAST";
 	static inline const string PUSHING_KEYWORD = "PUSH";

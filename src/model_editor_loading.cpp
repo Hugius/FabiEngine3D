@@ -92,9 +92,10 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 		if(lineType == "MODEL")
 		{
 			string modelID, meshPath, levelOfDetailEntityID;
+			fvec3 size;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
-			fvec3 size;
+			bool isShadowed, isReflected;
 
 			iss >>
 				modelID >>
@@ -104,7 +105,9 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				size.z >>
 				levelOfDetailEntityID >>
 				levelOfDetailDistance >>
-				rotationOrder;
+				rotationOrder >>
+				isShadowed >>
+				isReflected;
 
 			while(true)
 			{
@@ -117,9 +120,9 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 				string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
 				fvec3 color;
-				float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness;
+				float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness, emissionIntensity;
 				unsigned int reflectionType;
-				bool isSpecular, isReflective, isFaceCulled;
+				bool isSpecular, isReflective, isFaceCulled, isBright;
 
 				iss >>
 					diffuseMapPath >>
@@ -138,7 +141,9 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 					color.g >>
 					color.b >>
 					textureRepeat >>
-					isFaceCulled;
+					isFaceCulled >>
+					isBright >>
+					emissionIntensity;
 
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -291,11 +296,6 @@ const bool ModelEditor::loadFromFile()
 						break;
 					}
 
-					if(!_fe3d->model_hasPart(modelID, partID))
-					{
-						continue;
-					}
-
 					string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
 					fvec3 color;
 					float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness, emissionIntensity;
@@ -348,7 +348,6 @@ const bool ModelEditor::loadFromFile()
 					_fe3d->model_setFaceCulled(modelID, partID, isFaceCulled);
 					_fe3d->model_setBright(modelID, partID, isBright);
 					_fe3d->model_setEmissionIntensity(modelID, partID, emissionIntensity);
-					std::cout << emissionIntensity << std::endl;
 
 					if(!diffuseMapPath.empty())
 					{

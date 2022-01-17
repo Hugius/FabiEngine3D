@@ -30,6 +30,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		SUBTRACTION_KEYWORD,
 		MULTIPLICATION_KEYWORD,
 		DIVISION_KEYWORD,
+		MODULO_KEYWORD,
 		NEGATION_KEYWORD,
 		CASTING_KEYWORD,
 		PUSHING_KEYWORD,

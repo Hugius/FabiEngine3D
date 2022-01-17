@@ -26,6 +26,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	   operatorString != SUBTRACTION_KEYWORD &&
 	   operatorString != MULTIPLICATION_KEYWORD &&
 	   operatorString != DIVISION_KEYWORD &&
+	   operatorString != MODULO_KEYWORD &&
 	   operatorString != NEGATION_KEYWORD)
 	{
 		_throwScriptError("invalid arithmetic operator!");
@@ -224,6 +225,10 @@ void ScriptInterpreter::_performArithmeticOperation(ScriptValue& leftValue, cons
 		{
 			result /= rightValue.getInteger();
 		}
+		else if(operatorString == MODULO_KEYWORD)
+		{
+			result %= rightValue.getInteger();
+		}
 
 		result = ((result < 0) ? max(result, -1000000000) : min(result, 1000000000));
 
@@ -248,6 +253,10 @@ void ScriptInterpreter::_performArithmeticOperation(ScriptValue& leftValue, cons
 		else if(operatorString == DIVISION_KEYWORD)
 		{
 			result /= rightValue.getDecimal();
+		}
+		else if(operatorString == MODULO_KEYWORD)
+		{
+			result = fmodf(result, rightValue.getDecimal());
 		}
 
 		result = ((result < 0) ? max(result, -1000000000.0f) : min(result, 1000000000.0f));

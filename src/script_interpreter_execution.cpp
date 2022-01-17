@@ -405,6 +405,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			scriptLineText.substr(0, SUBTRACTION_KEYWORD.size() + 1) == SUBTRACTION_KEYWORD + " " ||
 			scriptLineText.substr(0, MULTIPLICATION_KEYWORD.size() + 1) == MULTIPLICATION_KEYWORD + " " ||
 			scriptLineText.substr(0, DIVISION_KEYWORD.size() + 1) == DIVISION_KEYWORD + " " ||
+			scriptLineText.substr(0, MODULO_KEYWORD.size() + 1) == MODULO_KEYWORD + " " ||
 			scriptLineText.substr(0, NEGATION_KEYWORD.size() + 1) == NEGATION_KEYWORD + " "
 			)
 		{

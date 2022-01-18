@@ -89,6 +89,11 @@ void MasterRenderer::inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager)
 	_quad3dEntityManager = quad3dEntityManager;
 }
 
+void MasterRenderer::inject(shared_ptr<Text3dEntityManager> text3dEntityManager)
+{
+	_text3dEntityManager = text3dEntityManager;
+}
+
 void MasterRenderer::inject(shared_ptr<AabbEntityManager> aabbEntityManager)
 {
 	_aabbEntityManager = aabbEntityManager;

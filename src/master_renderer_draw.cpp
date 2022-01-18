@@ -1,4 +1,5 @@
 #include "master_renderer.hpp"
+#include "master_renderer.hpp"
 #include "render_bus.hpp"
 
 #include <functional>
@@ -170,6 +171,26 @@ void MasterRenderer::_renderQuad3dEntities()
 	}
 }
 
+void MasterRenderer::_renderText3dEntities()
+{
+	auto text3dEntities = _text3dEntityManager->getEntities();
+
+	if(!text3dEntities.empty())
+	{
+		_quad3dEntityColorRenderer.bind();
+
+		for(const auto& [key, textEntity] : text3dEntities)
+		{
+			for(const auto& characterEntity : textEntity->getCharacterEntities())
+			{
+				_quad3dEntityColorRenderer.render(characterEntity);
+			}
+		}
+
+		_quad3dEntityColorRenderer.unbind();
+	}
+}
+
 void MasterRenderer::_renderAabbEntities()
 {
 	if(_renderBus->isAabbFrameRenderingEnabled())
@@ -206,16 +227,16 @@ void MasterRenderer::_renderGUI()
 		_quad2dEntityColorRenderer.bind();
 
 		map<unsigned int, shared_ptr<BaseEntity>> orderedEntityMap;
-		for(const auto& [key, quad2dEntity] : _quad2dEntityManager->getEntities())
+		for(const auto& [key, entity] : _quad2dEntityManager->getEntities())
 		{
-			if(quad2dEntity->getID() != _renderBus->getCursorEntityID())
+			if(entity->getID() != _renderBus->getCursorEntityID())
 			{
-				orderedEntityMap.insert(make_pair(quad2dEntity->getDepth(), quad2dEntity));
+				orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
 			}
 		}
-		for(const auto& [key, text2dEntity] : _text2dEntityManager->getEntities())
+		for(const auto& [key, entity] : _text2dEntityManager->getEntities())
 		{
-			orderedEntityMap.insert(make_pair(text2dEntity->getDepth(), text2dEntity));
+			orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
 		}
 
 		for(const auto& [key, entity] : orderedEntityMap)

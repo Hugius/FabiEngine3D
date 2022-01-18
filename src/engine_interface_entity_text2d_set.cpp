@@ -48,16 +48,10 @@ void EngineInterface::text2d_setContent(const string& ID, const string& value, f
 {
 	auto entity = _core->getText2dEntityManager()->getEntity(ID);
 
-	auto fontMapPath = entity->getFontMapPath();
-	if(fontMapPath.empty())
-	{
-		Logger::throwWarning("Tried to set text content of Text2D with ID \"" + ID + "\": no font loaded!");
-		return;
-	}
-
 	entity->setContent(value);
 
 	fvec2 newSize = entity->getSize();
+
 	if(charWidth >= 0.0f)
 	{
 		newSize.x = (charWidth * static_cast<float>(value.size()));
@@ -66,6 +60,7 @@ void EngineInterface::text2d_setContent(const string& ID, const string& value, f
 	{
 		newSize.y = charHeight;
 	}
+
 	entity->setSize(newSize);
 }
 

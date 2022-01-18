@@ -24,22 +24,6 @@ void EngineInterface::model_delete(const string& ID)
 	_core->getModelEntityManager()->deleteEntity(ID);
 }
 
-void EngineInterface::model_deleteGroup(const string& ID)
-{
-	for(const auto& [key, entity] : _core->getModelEntityManager()->getEntities())
-	{
-		if(entity->getID().size() >= ID.size())
-		{
-			auto subString = entity->getID().substr(0, ID.size());
-
-			if(subString == ID)
-			{
-				model_delete(entity->getID());
-			}
-		}
-	}
-}
-
 void EngineInterface::model_setVisible(const string& ID, bool value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setVisible(value);

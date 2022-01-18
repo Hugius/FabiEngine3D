@@ -26,6 +26,7 @@
 #include "water_entity_manager.hpp"
 #include "model_entity_manager.hpp"
 #include "quad3d_entity_manager.hpp"
+#include "text3d_entity_manager.hpp"
 #include "aabb_entity_manager.hpp"
 #include "pointlight_entity_manager.hpp"
 #include "spotlight_entity_manager.hpp"
@@ -43,9 +44,10 @@ public:
 	void inject(shared_ptr<WaterEntityManager> waterEntityManager);
 	void inject(shared_ptr<ModelEntityManager> modelEntityManager);
 	void inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager);
-	void inject(shared_ptr<AabbEntityManager> aabbEntityManager);
+	void inject(shared_ptr<Text3dEntityManager> text3dEntityManager);
 	void inject(shared_ptr<Quad2dEntityManager> quad2dEntityManager);
 	void inject(shared_ptr<Text2dEntityManager> text2dEntityManager);
+	void inject(shared_ptr<AabbEntityManager> aabbEntityManager);
 	void inject(shared_ptr<PointlightEntityManager> pointlightEntityManager);
 	void inject(shared_ptr<SpotlightEntityManager> spotlightEntityManager);
 	void inject(shared_ptr<ReflectionEntityManager> reflectionEntityManager);
@@ -89,6 +91,7 @@ private:
 	void _renderWaterEntity();
 	void _renderModelEntities();
 	void _renderQuad3dEntities();
+	void _renderText3dEntities();
 	void _renderAabbEntities();
 	void _renderFinalSceneMap();
 	void _renderGUI();
@@ -107,9 +110,9 @@ private:
 	Quad3dEntityColorRenderer _quad3dEntityColorRenderer;
 	Quad3dEntityDepthRenderer _quad3dEntityDepthRenderer;
 	Quad3dEntityShadowRenderer _quad3dEntityShadowRenderer;
-	AabbEntityColorRenderer _aabbEntityColorRenderer;
 	Quad2dEntityColorRenderer _quad2dEntityColorRenderer;
 	AntiAliasingRenderer _antiAliasingRenderer;
+	AabbEntityColorRenderer _aabbEntityColorRenderer;
 	BloomRenderer _bloomRenderer;
 	DofRenderer _dofRenderer;
 	LensFlareRenderer _lensFlareRenderer;
@@ -131,8 +134,8 @@ private:
 	shared_ptr<ShaderBuffer> _quad3dEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _quad3dEntityDepthShader = nullptr;
 	shared_ptr<ShaderBuffer> _quad3dEntityShadowShader = nullptr;
-	shared_ptr<ShaderBuffer> _aabbEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _quad2dEntityColorShader = nullptr;
+	shared_ptr<ShaderBuffer> _aabbEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _antiAliasingShader = nullptr;
 	shared_ptr<ShaderBuffer> _bloomShader = nullptr;
 	shared_ptr<ShaderBuffer> _dofShader = nullptr;
@@ -162,9 +165,10 @@ private:
 	shared_ptr<WaterEntityManager> _waterEntityManager = nullptr;
 	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
 	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;
-	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
+	shared_ptr<Text3dEntityManager> _text3dEntityManager = nullptr;
 	shared_ptr<Quad2dEntityManager> _quad2dEntityManager = nullptr;
 	shared_ptr<Text2dEntityManager> _text2dEntityManager = nullptr;
+	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
 	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
 	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
 	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;

@@ -148,6 +148,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\engine_core.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text3d_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text3d_set.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_sound3d_get.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_sound2d_get.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_sound3d_set.cpp" />

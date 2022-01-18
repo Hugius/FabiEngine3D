@@ -113,6 +113,7 @@ void MasterRenderer::renderApplication()
 		_renderWaterEntity();
 		_renderModelEntities();
 		_renderQuad3dEntities();
+		_renderText3dEntities();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
 		_renderGUI();
@@ -151,6 +152,7 @@ void MasterRenderer::renderApplication()
 	_timer->stopDeltaPart();
 	_timer->startDeltaPart("quad3dEntityRender");
 	_renderQuad3dEntities();
+	_renderText3dEntities();
 	_timer->stopDeltaPart();
 	_timer->startDeltaPart("aabbEntityRender");
 	_renderAabbEntities();

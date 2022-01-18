@@ -21,9 +21,10 @@ EngineCore::EngineCore()
 	_waterEntityManager = make_shared<WaterEntityManager>();
 	_modelEntityManager = make_shared<ModelEntityManager>();
 	_quad3dEntityManager = make_shared<Quad3dEntityManager>();
-	_aabbEntityManager = make_shared<AabbEntityManager>();
+	_text3dEntityManager = make_shared<Text3dEntityManager>();
 	_quad2dEntityManager = make_shared<Quad2dEntityManager>();
 	_text2dEntityManager = make_shared<Text2dEntityManager>();
+	_aabbEntityManager = make_shared<AabbEntityManager>();
 	_pointlightEntityManager = make_shared<PointlightEntityManager>();
 	_spotlightEntityManager = make_shared<SpotlightEntityManager>();
 	_reflectionEntityManager = make_shared<ReflectionEntityManager>();
@@ -53,10 +54,11 @@ EngineCore::EngineCore()
 	_modelEntityManager->inject(_meshLoader);
 	_modelEntityManager->inject(_vertexBufferCache);
 	_quad3dEntityManager->inject(_renderBus);
-	_aabbEntityManager->inject(_modelEntityManager);
-	_aabbEntityManager->inject(_quad3dEntityManager);
+	_text3dEntityManager->inject(_renderBus);
 	_quad2dEntityManager->inject(_renderBus);
 	_text2dEntityManager->inject(_renderBus);
+	_aabbEntityManager->inject(_modelEntityManager);
+	_aabbEntityManager->inject(_quad3dEntityManager);
 	_masterRenderer->inject(_renderBus);
 	_masterRenderer->inject(_camera);
 	_masterRenderer->inject(_shadowGenerator);
@@ -66,9 +68,10 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_waterEntityManager);
 	_masterRenderer->inject(_modelEntityManager);
 	_masterRenderer->inject(_quad3dEntityManager);
-	_masterRenderer->inject(_aabbEntityManager);
+	_masterRenderer->inject(_text3dEntityManager);
 	_masterRenderer->inject(_quad2dEntityManager);
 	_masterRenderer->inject(_text2dEntityManager);
+	_masterRenderer->inject(_aabbEntityManager);
 	_masterRenderer->inject(_pointlightEntityManager);
 	_masterRenderer->inject(_spotlightEntityManager);
 	_masterRenderer->inject(_reflectionEntityManager);
@@ -268,13 +271,12 @@ void EngineCore::update()
 {
 	static ivec2 lastCursorPosition = _renderWindow->getCursorPosition();
 
+	_timer->startDeltaPart("coreUpdate");
 	if(_inputHandler->isKeyDown(InputType::WINDOW_X_BUTTON))
 	{
 		stop();
 		return;
 	}
-
-	_timer->startDeltaPart("coreUpdate");
 	_fe3d->_isRaycastUpdated = false;
 	_fe3d->_hoveredAabbID = "";
 	_engineController->update();
@@ -291,26 +293,15 @@ void EngineCore::update()
 			_camera->updateMatrices();
 			_timer->stopDeltaPart();
 
-			_timer->startDeltaPart("skyEntityUpdate");
+			_timer->startDeltaPart("3dEntityUpdate");
 			_skyEntityManager->update();
-			_timer->stopDeltaPart();
-			_timer->startDeltaPart("waterEntityUpdate");
 			_waterEntityManager->update();
-			_timer->stopDeltaPart();
-			_timer->startDeltaPart("modelEntityUpdate");
 			_modelEntityManager->update();
-			_timer->stopDeltaPart();
-			_timer->startDeltaPart("quad3dEntityUpdate");
 			_quad3dEntityManager->update();
-			_timer->stopDeltaPart();
-			_timer->startDeltaPart("aabbEntityUpdate");
+			_text3dEntityManager->update();
 			_aabbEntityManager->update();
-			_timer->stopDeltaPart();
-			_timer->startDeltaPart("lightEntityUpdate");
 			_pointlightEntityManager->update();
 			_spotlightEntityManager->update();
-			_timer->stopDeltaPart();
-			_timer->startDeltaPart("reflectionEntityUpdate");
 			_reflectionEntityManager->update();
 			_timer->stopDeltaPart();
 
@@ -326,7 +317,7 @@ void EngineCore::update()
 			_timer->stopDeltaPart();
 		}
 
-		_timer->startDeltaPart("guiEntityUpdate");
+		_timer->startDeltaPart("2dEntityUpdate");
 		_quad2dEntityManager->update();
 		_text2dEntityManager->update();
 		_timer->stopDeltaPart();
@@ -337,8 +328,8 @@ void EngineCore::update()
 	_networkingClient->update();
 	_timer->stopDeltaPart();
 
+	_timer->startDeltaPart("renderUpdate");
 	_masterRenderer->update();
-
 	if(!Config::getInst().isApplicationExported())
 	{
 		static float opacity = 0.0f;
@@ -354,8 +345,8 @@ void EngineCore::update()
 			_renderWindow->setOpacity(opacity);
 		}
 	}
-
 	lastCursorPosition = _renderWindow->getCursorPosition();
+	_timer->stopDeltaPart();
 }
 
 void EngineCore::render()
@@ -462,6 +453,11 @@ const shared_ptr<ModelEntityManager> EngineCore::getModelEntityManager() const
 const shared_ptr<Quad3dEntityManager> EngineCore::getQuad3dEntityManager() const
 {
 	return _quad3dEntityManager;
+}
+
+const shared_ptr<Text3dEntityManager> EngineCore::getText3dEntityManager() const
+{
+	return _text3dEntityManager;
 }
 
 const shared_ptr<AabbEntityManager> EngineCore::getAabbEntityManager() const

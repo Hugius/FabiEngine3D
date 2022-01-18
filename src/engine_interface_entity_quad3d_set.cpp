@@ -24,22 +24,6 @@ void EngineInterface::quad3d_delete(const string& ID)
 	_core->getQuad3dEntityManager()->deleteEntity(ID);
 }
 
-void EngineInterface::quad3d_deleteGroup(const string& ID)
-{
-	for(const auto& [key, entity] : _core->getQuad3dEntityManager()->getEntities())
-	{
-		if(entity->getID().size() >= ID.size())
-		{
-			auto subString = entity->getID().substr(0, ID.size());
-
-			if(subString == ID)
-			{
-				quad3d_delete(entity->getID());
-			}
-		}
-	}
-}
-
 void EngineInterface::quad3d_setVisible(const string& ID, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setVisible(value);

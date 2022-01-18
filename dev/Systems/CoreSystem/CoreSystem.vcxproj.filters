@@ -159,6 +159,12 @@
     <ClCompile Include="..\..\..\src\fe3d_sound3d_set.cpp">
       <Filter>Interface\Sound</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text3d_set.cpp">
+      <Filter>Interface\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text3d_get.cpp">
+      <Filter>Interface\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\engine_core.hpp">

@@ -122,23 +122,17 @@ const vector<pair<string, int>> EngineInterface::misc_getUpdateProfilingStatisti
 	{
 		pair<string, int>("coreUpdate", 0),
 		pair<string, int>("physicsUpdate", 0),
-		pair<string, int>("skyEntityUpdate", 0),
-		pair<string, int>("waterEntityUpdate", 0),
-		pair<string, int>("modelEntityUpdate", 0),
-		pair<string, int>("quad3dEntityUpdate", 0),
-		pair<string, int>("aabbEntityUpdate", 0),
-		pair<string, int>("lightEntityUpdate", 0),
-		pair<string, int>("reflectionEntityUpdate", 0),
-		pair<string, int>("guiEntityUpdate", 0),
+		pair<string, int>("3dEntityUpdate", 0),
+		pair<string, int>("2dEntityUpdate", 0),
 		pair<string, int>("shadowUpdate", 0),
 		pair<string, int>("soundUpdate", 0),
-		pair<string, int>("networkUpdate", 0)
+		pair<string, int>("networkUpdate", 0),
+		pair<string, int>("renderUpdate", 0)
 	};
 
 	for(auto& [key, percentage] : result)
 	{
-		int newPercentage = static_cast<int>((_core->getTimer()->getDeltaPart(key) / _core->getTimer()->getDeltaPartSum()) * 100.0f);
-		percentage = newPercentage;
+		percentage = static_cast<int>((_core->getTimer()->getDeltaPart(key) / _core->getTimer()->getDeltaPartSum()) * 100.0f);
 	}
 
 	return result;

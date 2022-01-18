@@ -9,7 +9,7 @@ class BaseEntity
 public:
 	BaseEntity(const string& ID);
 
-	void setVisible(bool value);
+	virtual void setVisible(bool value);
 
 	const string& getID() const;
 

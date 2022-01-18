@@ -1,70 +1,79 @@
 #pragma once
 
-#include "quad2d_entity.hpp"
+#include "base_entity.hpp"
 #include "vertex_buffer.hpp"
+#include "texture_buffer.hpp"
 
-#include <memory>
 #include <map>
+#include <memory>
 
-using std::shared_ptr;
 using std::map;
+using std::shared_ptr;
+using std::numeric_limits;
 
-class Text2dEntity final : public BaseEntity
+class Text3dEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
 
 	void updateTransformation();
-	void updateCharacterEntities();
+	void updateTransformationMatrix();
 	void setMesh(shared_ptr<VertexBuffer> value);
 	void setContent(const string& value);
 	void setFontMapPath(const string& value);
 	void setFontMap(shared_ptr<TextureBuffer> value);
-	void setHorizontallyMirrored(bool value);
-	void setVerticallyMirrored(bool value);
-	void setTransparency(float value);
-	void setWireframeColor(fvec3 value);
-	void setColor(fvec3 value);
-	void setMinPosition(fvec2 value);
-	void setMaxPosition(fvec2 value);
-	void setPosition(fvec2 value);
-	void setRotation(float value);
-	void setSize(fvec2 value);
-	void move(fvec2 value);
-	void rotate(float value);
-	void scale(fvec2 value);
-	void moveTo(fvec2 target, float speed);
-	void rotateTo(float target, float speed);
-	void scaleTo(fvec2 target, float speed);
-	void setDepth(unsigned int value);
-	void setWireframed(bool value);
+	void setFacingCameraX(bool value);
+	void setFacingCameraY(bool value);
+	void setDepthMapIncluded(bool value);
+	void setShadowed(bool value);
 	void setCentered(bool value);
-	void setVisible(bool value);
+	void setReflected(bool value);
+	void setBright(bool value);
+	void setWireframed(bool value);
+	void setPosition(fvec3 value);
+	void setRotation(fvec3 value);
+	void setSize(fvec2 value);
+	void move(fvec3 value);
+	void rotate(fvec3 value);
+	void scale(fvec2 value);
+	void moveTo(fvec3 target, float speed);
+	void rotateTo(fvec3 target, float speed);
+	void scaleTo(fvec2 target, float speed);
+	void setColor(fvec3 value);
+	void setWireframeColor(fvec3 value);
+	void setLightness(float value);
+	void setTransparency(float value);
+	void setMinHeight(float value);
+	void setMaxHeight(float value);
+	void setFrozen(bool value);
 
-	const string& getContent() const;
-	const string& getFontMapPath() const;
+	const mat44& getTransformationMatrix() const;
 
-	const fvec3 getWireframeColor() const;
+	const fvec3 getPosition() const;
+	const fvec3 getRotation() const;
 	const fvec3 getColor() const;
+	const fvec3 getWireframeColor() const;
 
-	const fvec2 getPosition() const;
 	const fvec2 getSize() const;
-	const fvec2 getMinPosition() const;
-	const fvec2 getMaxPosition() const;
+	const fvec2 getUvMultiplier() const;
+	const fvec2 getUvOffset() const;
 
+	const float getLightness() const;
 	const float getTransparency() const;
-	const float getRotation() const;
+	const float getMinHeight() const;
+	const float getMaxHeight() const;
 
-	const unsigned int getDepth() const;
-
+	const bool isFacingCameraX() const;
+	const bool isFacingCameraY() const;
+	const bool isDepthMapIncluded() const;
+	const bool isShadowed() const;
+	const bool isReflected() const;
+	const bool isBright() const;
+	const bool isFrozen() const;
 	const bool isWireframed() const;
 	const bool isCentered() const;
-	const bool isMirroredHorizonally() const;
-	const bool isVerticallyMirrored() const;
 
-	const vector<shared_ptr<Quad2dEntity>>& getCharacterEntities() const;
 	const shared_ptr<VertexBuffer> getMesh() const;
-	const shared_ptr<TextureBuffer> getFontMap() const;
 
 private:
 	static inline const map<char, ivec2> _fontMapIndices =
@@ -168,33 +177,40 @@ private:
 	string _content = "";
 	string _fontMapPath = "";
 
+	mat44 _transformationMatrix = mat44(1.0f);
+
+	fvec3 _position = fvec3(0.0f);
+	fvec3 _rotation = fvec3(0.0f);
+	fvec3 _positionTarget = fvec3(0.0f);
+	fvec3 _rotationTarget = fvec3(0.0f);
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
 
-	fvec2 _minPosition = fvec2(-1.0f);
-	fvec2 _maxPosition = fvec2(1.0f);
-	fvec2 _position = fvec2(0.0f);
 	fvec2 _size = fvec2(1.0f);
-	fvec2 _positionTarget = fvec2(0.0f);
 	fvec2 _sizeTarget = fvec2(1.0f);
+	fvec2 _uvMultiplier = fvec2(1.0f);
+	fvec2 _uvOffset = fvec2(0.0f);
 
-	float _rotation = 0.0f;
-	float _rotationTarget = 0.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
+	float _lightness = 1.0f;
 	float _transparency = 1.0f;
+	float _minHeight = numeric_limits<float>::lowest();
+	float _maxHeight = numeric_limits<float>::max();
 
 	static inline const unsigned int FONT_MAP_ROW_COUNT = 6;
 	static inline const unsigned int FONT_MAP_COLUMN_COUNT = 16;
-	unsigned int _depth = 0;
 
-	bool _isCentered = false;
-	bool _isHorizontallyMirrored = false;
-	bool _isVerticallyMirrored = false;
+	bool _isFacingCameraX = false;
+	bool _isFacingCameraY = false;
+	bool _isDepthMapIncluded = true;
+	bool _isShadowed = true;
+	bool _isReflected = true;
+	bool _isBright = false;
 	bool _isWireframed = false;
+	bool _isFrozen = false;
+	bool _isCentered = false;
 
-	vector<shared_ptr<Quad2dEntity>> _characterEntities;
 	shared_ptr<VertexBuffer> _mesh = nullptr;
-	shared_ptr<TextureBuffer> _fontMap = nullptr;
 };

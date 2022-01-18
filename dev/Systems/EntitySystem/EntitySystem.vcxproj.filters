@@ -27,10 +27,7 @@
     <ClCompile Include="..\..\..\src\aabb_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_entity_get.cpp">
-      <Filter>Data\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_entity_set.cpp">
+    <ClCompile Include="..\..\..\src\quad3d_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_entity.cpp">
@@ -42,16 +39,13 @@
     <ClCompile Include="..\..\..\src\model_entity_get.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\model_entity_set.cpp">
+    <ClCompile Include="..\..\..\src\model_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\terrain_entity_get.cpp">
-      <Filter>Data\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\terrain_entity_set.cpp">
+    <ClCompile Include="..\..\..\src\terrain_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\text2d_entity.cpp">
@@ -98,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\water_entity_manager.cpp">
       <Filter>Manager\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text3d_entity.cpp">
+      <Filter>Data\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\base_entity_manager.hpp">
       <Filter>Manager\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\text3d_entity.hpp">
+      <Filter>Data\Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

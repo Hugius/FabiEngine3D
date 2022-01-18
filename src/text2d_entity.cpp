@@ -7,113 +7,6 @@ using std::max;
 using std::clamp;
 using std::make_shared;
 
-void Text2dEntity::setContent(const string& value)
-{
-	if(value != _content)
-	{
-		_content = value;
-		_characterEntities.clear();
-
-		for(const auto& character : _content)
-		{
-			auto xIndex = _fontMapIndices.at(character).x;
-			auto yIndex = _fontMapIndices.at(character).y;
-			auto uvMultiplier = fvec2((1.0f / 16.0f), (1.0f / 6.0f));
-			auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
-
-			auto characterEntity = make_shared<Quad2dEntity>("dummy");
-			characterEntity->setMesh(_mesh);
-			characterEntity->setUvMultiplier(uvMultiplier);
-			characterEntity->setUvOffset(uvOffset);
-
-			_characterEntities.push_back(characterEntity);
-		}
-	}
-}
-
-void Text2dEntity::setFontMapPath(const string& value)
-{
-	_fontMapPath = value;
-}
-
-const string& Text2dEntity::getContent() const
-{
-	return _content;
-}
-
-const string& Text2dEntity::getFontMapPath() const
-{
-	return _fontMapPath;
-}
-
-void Text2dEntity::updateCharacterEntities()
-{
-	const auto rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(_rotation));
-	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
-	unsigned int index = 0;
-
-	if(_isHorizontallyMirrored)
-	{
-		reverse(_characterEntities.begin(), _characterEntities.end());
-	}
-
-	for(const auto& character : _characterEntities)
-	{
-		auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
-
-		if(_isCentered)
-		{
-			offset.x -= (this->getSize().x / 2.0f);
-			offset.y -= (characterSize.y / 2.0f);
-		}
-
-		character->setPosition(_position + (rotationMatrix * offset));
-		character->setRotation(_rotation);
-		character->setSize(characterSize);
-		character->setColor(_color);
-		character->setWireframeColor(_wireframeColor);
-		character->setHorizontallyMirrored(_isHorizontallyMirrored);
-		character->setVerticallyMirrored(_isVerticallyMirrored);
-		character->setTransparency(_transparency);
-		character->setMinPosition(_minPosition);
-		character->setMaxPosition(_maxPosition);
-		character->setVisible(_isVisible);
-		character->setMesh(_mesh);
-		character->setCentered(_isCentered);
-		character->setDepth(_depth);
-		character->setDiffuseMap(_fontMap);
-		character->setDiffuseMapPath(_fontMapPath);
-		character->setWireframed(_isWireframed);
-
-		if(_isVisible)
-		{
-			character->updateTransformationMatrix();
-		}
-
-		index++;
-	}
-
-	if(_isHorizontallyMirrored)
-	{
-		reverse(_characterEntities.begin(), _characterEntities.end());
-	}
-}
-
-const vector<shared_ptr<Quad2dEntity>>& Text2dEntity::getCharacterEntities() const
-{
-	return _characterEntities;
-}
-
-const shared_ptr<VertexBuffer> Text2dEntity::getMesh() const
-{
-	return _mesh;
-}
-
-const shared_ptr<TextureBuffer> Text2dEntity::getFontMap() const
-{
-	return _fontMap;
-}
-
 void Text2dEntity::updateTransformation()
 {
 	if(_position != _positionTarget)
@@ -162,39 +55,220 @@ void Text2dEntity::updateTransformation()
 	}
 }
 
+void Text2dEntity::updateCharacterEntities()
+{
+	const auto rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(_rotation));
+	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
+	unsigned int index = 0;
+
+	if(_isHorizontallyMirrored)
+	{
+		reverse(_characterEntities.begin(), _characterEntities.end());
+	}
+
+	for(const auto& character : _characterEntities)
+	{
+		auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
+
+		if(_isCentered)
+		{
+			offset.x -= (this->getSize().x / 2.0f);
+			offset.y -= (characterSize.y / 2.0f);
+		}
+
+		character->setPosition(_position + (rotationMatrix * offset));
+		character->setRotation(_rotation);
+		character->setSize(characterSize);
+
+		if(_isVisible)
+		{
+			character->updateTransformationMatrix();
+		}
+
+		index++;
+	}
+
+	if(_isHorizontallyMirrored)
+	{
+		reverse(_characterEntities.begin(), _characterEntities.end());
+	}
+}
+
+void Text2dEntity::setContent(const string& value)
+{
+	if(value != _content)
+	{
+		_content = value;
+		_characterEntities.clear();
+
+		for(const auto& character : _content)
+		{
+			auto xIndex = _fontMapIndices.at(character).x;
+			auto yIndex = _fontMapIndices.at(character).y;
+			auto uvMultiplier = fvec2((1.0f / static_cast<float>(FONT_MAP_COLUMN_COUNT)), (1.0f / static_cast<float>(FONT_MAP_ROW_COUNT)));
+			auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
+
+			auto characterEntity = make_shared<Quad2dEntity>("dummy");
+			characterEntity->setMesh(_mesh);
+			characterEntity->setDiffuseMapPath(_fontMapPath);
+			characterEntity->setDiffuseMap(_fontMap);
+			characterEntity->setHorizontallyMirrored(_isHorizontallyMirrored);
+			characterEntity->setVerticallyMirrored(_isVerticallyMirrored);
+			characterEntity->setTransparency(_transparency);
+			characterEntity->setWireframeColor(_wireframeColor);
+			characterEntity->setColor(_color);
+			characterEntity->setMinPosition(_minPosition);
+			characterEntity->setMaxPosition(_maxPosition);
+			characterEntity->setDepth(_depth);
+			characterEntity->setWireframed(_isWireframed);
+			characterEntity->setCentered(_isCentered);
+			characterEntity->setVisible(_isVisible);
+			characterEntity->setUvMultiplier(uvMultiplier);
+			characterEntity->setUvOffset(uvOffset);
+
+			_characterEntities.push_back(characterEntity);
+		}
+	}
+}
+
+void Text2dEntity::setMinPosition(fvec2 value)
+{
+	_minPosition = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setMinPosition(_minPosition);
+	}
+}
+
+void Text2dEntity::setMaxPosition(fvec2 value)
+{
+	_maxPosition = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setMaxPosition(_maxPosition);
+	}
+}
+
+void Text2dEntity::setDepth(unsigned int value)
+{
+	_depth = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setDepth(_depth);
+	}
+}
+
+void Text2dEntity::setWireframed(bool value)
+{
+	_isWireframed = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setWireframed(_isWireframed);
+	}
+}
+
+void Text2dEntity::setCentered(bool value)
+{
+	_isCentered = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setCentered(_isCentered);
+	}
+}
+
+void Text2dEntity::setVisible(bool value)
+{
+	_isVisible = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setVisible(_isVisible);
+	}
+}
+
+void Text2dEntity::setFontMapPath(const string& value)
+{
+	_fontMapPath = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setDiffuseMapPath(_fontMapPath);
+	}
+}
+
 void Text2dEntity::setMesh(shared_ptr<VertexBuffer> value)
 {
 	_mesh = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setMesh(_mesh);
+	}
 }
 
 void Text2dEntity::setFontMap(shared_ptr<TextureBuffer> value)
 {
 	_fontMap = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setDiffuseMap(_fontMap);
+	}
 }
 
 void Text2dEntity::setColor(fvec3 value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setColor(_color);
+	}
 }
 
 void Text2dEntity::setHorizontallyMirrored(bool value)
 {
 	_isHorizontallyMirrored = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setHorizontallyMirrored(_isHorizontallyMirrored);
+	}
 }
 
 void Text2dEntity::setVerticallyMirrored(bool value)
 {
 	_isVerticallyMirrored = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setVerticallyMirrored(_isVerticallyMirrored);
+	}
 }
 
 void Text2dEntity::setTransparency(float value)
 {
 	_transparency = clamp(value, 0.0f, 1.0f);
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setTransparency(_transparency);
+	}
 }
 
 void Text2dEntity::setWireframeColor(fvec3 value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setWireframeColor(_wireframeColor);
+	}
 }
 
 void Text2dEntity::setPosition(fvec2 value)
@@ -255,19 +329,29 @@ void Text2dEntity::scaleTo(fvec2 target, float speed)
 	_sizeTargetSpeed = speed;
 }
 
-void Text2dEntity::setMinPosition(fvec2 value)
+const string& Text2dEntity::getContent() const
 {
-	_minPosition = value;
+	return _content;
 }
 
-void Text2dEntity::setMaxPosition(fvec2 value)
+const string& Text2dEntity::getFontMapPath() const
 {
-	_maxPosition = value;
+	return _fontMapPath;
 }
 
-void Text2dEntity::setDepth(unsigned int value)
+const vector<shared_ptr<Quad2dEntity>>& Text2dEntity::getCharacterEntities() const
 {
-	_depth = value;
+	return _characterEntities;
+}
+
+const shared_ptr<VertexBuffer> Text2dEntity::getMesh() const
+{
+	return _mesh;
+}
+
+const shared_ptr<TextureBuffer> Text2dEntity::getFontMap() const
+{
+	return _fontMap;
 }
 
 const fvec3 Text2dEntity::getWireframeColor() const
@@ -333,14 +417,4 @@ const fvec2 Text2dEntity::getMaxPosition() const
 const unsigned int Text2dEntity::getDepth() const
 {
 	return _depth;
-}
-
-void Text2dEntity::setWireframed(bool value)
-{
-	_isWireframed = value;
-}
-
-void Text2dEntity::setCentered(bool value)
-{
-	_isCentered = value;
 }

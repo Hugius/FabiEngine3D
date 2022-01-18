@@ -36,9 +36,6 @@
     <ClCompile Include="..\..\..\src\pointlight_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\model_entity_get.cpp">
-      <Filter>Data\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\model_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>

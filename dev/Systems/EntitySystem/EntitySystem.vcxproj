@@ -29,7 +29,6 @@
     <ClCompile Include="..\..\..\src\quad2d_entity_manager.cpp" />
     <ClCompile Include="..\..\..\src\pointlight_entity.cpp" />
     <ClCompile Include="..\..\..\src\pointlight_entity_manager.cpp" />
-    <ClCompile Include="..\..\..\src\model_entity_get.cpp" />
     <ClCompile Include="..\..\..\src\model_entity_manager.cpp" />
     <ClCompile Include="..\..\..\src\model_entity.cpp" />
     <ClCompile Include="..\..\..\src\reflection_entity.cpp" />

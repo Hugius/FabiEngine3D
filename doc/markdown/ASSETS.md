@@ -125,6 +125,8 @@
 - Font map assets must be placed in `~\projects\<your_project>\assets\image\font_map\`
 - Recommended bit depth: `32`
 - Font maps are used to render text.
+- A [font generator](http://www.codehead.co.uk/cbfg/) must be used to create font maps.
+- Each font map must have 6 rows and 16 columns.
 
 ### 4.9 Height Map
 

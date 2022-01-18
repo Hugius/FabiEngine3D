@@ -17,11 +17,11 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 		   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_V)) ||
 		   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_X)))
 		{
-			for(const auto& ID : _fe3d->quad3d_getIDs())
+			for(const auto& ID : _fe3d->text3d_getIDs())
 			{
 				if(ID.substr(0, string("selection_").size()) == "selection_")
 				{
-					_fe3d->quad3d_delete(ID);
+					_fe3d->text3d_delete(ID);
 				}
 			}
 
@@ -90,27 +90,26 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			string selectionID = ("selection_" + to_string(hoveredLineIndex));
 			string textID = ("text_" + to_string(hoveredLineIndex));
 
-			if(!_fe3d->quad3d_isExisting(selectionID) && _fe3d->quad3d_isExisting(textID))
+			if(!_fe3d->text3d_isExisting(selectionID) && _fe3d->text3d_isExisting(textID))
 			{
-				//if(_fe3d->quad3d_getTextContent(textID).empty())
-				if(true)
+				if(_fe3d->text3d_getContent(textID).empty())
 				{
-					fvec3 lineTextPosition = (_fe3d->quad3d_getPosition(textID));
+					fvec3 lineTextPosition = (_fe3d->text3d_getPosition(textID));
 					lineTextPosition.x = (SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
 					lineTextPosition.z -= SELECTION_DEPTH;
-					_fe3d->quad3d_create(selectionID, false);
-					_fe3d->quad3d_setColor(selectionID, SELECTION_COLOR);
-					_fe3d->quad3d_setPosition(selectionID, lineTextPosition);
-					_fe3d->quad3d_setSize(selectionID, TEXT_CHARACTER_SIZE);
+					_fe3d->text3d_create(selectionID, false);
+					_fe3d->text3d_setColor(selectionID, SELECTION_COLOR);
+					_fe3d->text3d_setPosition(selectionID, lineTextPosition);
+					_fe3d->text3d_setSize(selectionID, TEXT_CHARACTER_SIZE);
 				}
 				else
 				{
-					const fvec3 lineTextPosition = (_fe3d->quad3d_getPosition(textID) - fvec3(0.0f, 0.0f, SELECTION_DEPTH));
-					const auto lineTextSize = (_fe3d->quad3d_getSize(textID));
-					_fe3d->quad3d_create(selectionID, false);
-					_fe3d->quad3d_setColor(selectionID, SELECTION_COLOR);
-					_fe3d->quad3d_setPosition(selectionID, lineTextPosition);
-					_fe3d->quad3d_setSize(selectionID, lineTextSize);
+					const fvec3 lineTextPosition = (_fe3d->text3d_getPosition(textID) - fvec3(0.0f, 0.0f, SELECTION_DEPTH));
+					const auto lineTextSize = (_fe3d->text3d_getSize(textID));
+					_fe3d->text3d_create(selectionID, false);
+					_fe3d->text3d_setColor(selectionID, SELECTION_COLOR);
+					_fe3d->text3d_setPosition(selectionID, lineTextPosition);
+					_fe3d->text3d_setSize(selectionID, lineTextSize);
 				}
 			}
 
@@ -128,7 +127,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					if((lastDirection < 0 && currentDirection > 0) ||
 					   (currentDirection < 0 && lastDirection > 0))
 					{
-						_fe3d->quad3d_delete("selection_" + to_string(_lastSelectedLineIndex));
+						_fe3d->text3d_delete("selection_" + to_string(_lastSelectedLineIndex));
 					}
 				}
 

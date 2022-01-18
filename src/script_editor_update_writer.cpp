@@ -23,16 +23,16 @@ void ScriptEditor::_updateTextWriter()
 		unsigned int cursorCharIndex = _script->getScriptFile(_currentScriptFileID)->getCursorCharIndex();
 		string newCharacters = "";
 
-		auto hoveredQuadID = _fe3d->raycast_checkCursorInAny().first;
+		auto hoveredTextID = _fe3d->raycast_checkCursorInAny().first;
 		int hoveredLineIndex = -1;
 		int hoveredCharacterIndex = -1;
-		if(!hoveredQuadID.empty())
+		if(!hoveredTextID.empty())
 		{
 			bool extractingLineNumber = true;
 			string lineIndexString = "";
 			string charIndexString = "";
 
-			for(const auto& c : hoveredQuadID)
+			for(const auto& c : hoveredTextID)
 			{
 				if(extractingLineNumber)
 				{
@@ -90,7 +90,7 @@ void ScriptEditor::_updateTextWriter()
 
 		if(_hasClickedLMB)
 		{
-			if(!hoveredQuadID.empty())
+			if(!hoveredTextID.empty())
 			{
 				cursorLineIndex = hoveredLineIndex;
 
@@ -395,27 +395,27 @@ void ScriptEditor::_updateTextWriter()
 			passedBarFrames++;
 		}
 
-		if(!_fe3d->quad3d_isExisting("cursor"))
+		if(!_fe3d->text3d_isExisting("cursor"))
 		{
-			_fe3d->quad3d_create("cursor", false);
-			//_fe3d->quad3d_setFont("cursor", FONT_MAP_PATH);
-			_fe3d->quad3d_setSize("cursor", TEXT_CHARACTER_SIZE);
+			_fe3d->text3d_create("cursor", false);
+			_fe3d->text3d_setFontMap("cursor", FONT_MAP_PATH);
+			_fe3d->text3d_setSize("cursor", TEXT_CHARACTER_SIZE);
 		}
 
 		fvec3 position;
 		if(cursorCharIndex == 0)
 		{
-			fvec3 linePosition = _fe3d->quad3d_getPosition(to_string(cursorLineIndex));
+			fvec3 linePosition = _fe3d->text3d_getPosition(to_string(cursorLineIndex));
 			position = fvec3(SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET, linePosition.y, linePosition.z);
 		}
 		else
 		{
-			position = _fe3d->quad3d_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
+			position = _fe3d->text3d_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
 		}
 		position += fvec3(TEXT_CHARACTER_SIZE.x / 2.0f, 0.0f, 0.0f);
-		_fe3d->quad3d_setPosition("cursor", position);
+		_fe3d->text3d_setPosition("cursor", position);
 		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
-		//_fe3d->quad3d_setTextContent("cursor", (showBar ? "|" : " "));
+		_fe3d->text3d_setContent("cursor", (showBar ? "|" : " "));
 
 		_script->getScriptFile(_currentScriptFileID)->setCursorLineIndex(cursorLineIndex);
 		_script->getScriptFile(_currentScriptFileID)->setCursorCharIndex(cursorCharIndex);

@@ -38,7 +38,7 @@ void ScriptEditor::_updateGUI()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_scriptFileNamesToDelete.push_back(_currentScriptFileID);
-			_fe3d->quad3d_deleteAll();
+			_fe3d->text3d_deleteAll();
 			_script->deleteScriptFile(_currentScriptFileID);
 			_isWritingScript = false;
 			_currentScriptFileID = "";
@@ -210,7 +210,7 @@ void ScriptEditor::_updateMiscellaneous()
 	{
 		const unsigned int currentLineIndex = _script->getScriptFile(_currentScriptFileID)->getCursorLineIndex();
 		const unsigned int lineCount = _script->getScriptFile(_currentScriptFileID)->getLineCount();
-		const float lastLineHeight = _fe3d->quad3d_getPosition(to_string(lineCount - 1)).y;
+		const float lastLineHeight = _fe3d->text3d_getPosition(to_string(lineCount - 1)).y;
 
 		if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 		{
@@ -256,7 +256,7 @@ void ScriptEditor::_updateMiscellaneous()
 		if((currentLineIndex > (MAX_VISIBLE_LINES - 1)) && (currentLineIndex != lastLineIndex) && (currentLineIndex == lineCount - 1))
 		{
 			_scrollingAcceleration = 0.0f;
-			float currentLineHeight = _fe3d->quad3d_getPosition(to_string(currentLineIndex)).y;
+			float currentLineHeight = _fe3d->text3d_getPosition(to_string(currentLineIndex)).y;
 			_fe3d->camera_setPosition(fvec3(CAMERA_POSITION.x, currentLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
 		}
 		lastLineIndex = currentLineIndex;

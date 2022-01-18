@@ -258,19 +258,11 @@ void MasterRenderer::_renderGUI()
 			}
 		}
 
-		_quad2dEntityColorRenderer.unbind();
-	}
-}
-
-void MasterRenderer::_renderCursor()
-{
-	for(const auto& [key, entity] : _quad2dEntityManager->getEntities())
-	{
-		if(entity->getID() == _renderBus->getCursorEntityID())
+		if(!_renderBus->getCursorEntityID().empty())
 		{
-			_quad2dEntityColorRenderer.bind();
-			_quad2dEntityColorRenderer.render(entity);
-			_quad2dEntityColorRenderer.unbind();
+			_quad2dEntityColorRenderer.render(_quad2dEntityManager->getEntities().at(_renderBus->getCursorEntityID()));
 		}
+
+		_quad2dEntityColorRenderer.unbind();
 	}
 }

@@ -117,7 +117,6 @@ void MasterRenderer::renderApplication()
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
 		_renderGUI();
-		_renderCursor();
 		return;
 	}
 
@@ -182,7 +181,6 @@ void MasterRenderer::renderApplication()
 	_timer->startDeltaPart("guiEntityRender");
 	_renderBus->setTriangleCountingEnabled(true);
 	_renderGUI();
-	_renderCursor();
 	_renderBus->setTriangleCountingEnabled(false);
 	_timer->stopDeltaPart();
 }

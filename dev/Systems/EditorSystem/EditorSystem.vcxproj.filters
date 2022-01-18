@@ -639,32 +639,32 @@
     <ClCompile Include="..\..\..\src\text2d_editor_update_menu.cpp">
       <Filter>Text2D Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_editor_lifecycle - Copy.cpp">
-      <Filter>Text3D Editor</Filter>
+    <ClCompile Include="..\..\..\src\text3d_editor_lifecycle.cpp">
+      <Filter>Text3D Editor\Base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_editor_loading - Copy.cpp">
-      <Filter>Text3D Editor</Filter>
+    <ClCompile Include="..\..\..\src\text3d_editor_loading.cpp">
+      <Filter>Text3D Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_editor_misc - Copy.cpp">
-      <Filter>Text3D Editor</Filter>
+    <ClCompile Include="..\..\..\src\text3d_editor_saving.cpp">
+      <Filter>Text3D Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_editor_saving - Copy.cpp">
-      <Filter>Text3D Editor</Filter>
+    <ClCompile Include="..\..\..\src\text3d_editor_update_lighting.cpp">
+      <Filter>Text3D Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_editor_update_lighting - Copy.cpp">
-      <Filter>Text3D Editor</Filter>
+    <ClCompile Include="..\..\..\src\text3d_editor_update_menu.cpp">
+      <Filter>Text3D Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_editor_update_menu - Copy.cpp">
-      <Filter>Text3D Editor</Filter>
+    <ClCompile Include="..\..\..\src\text3d_editor_update_misc.cpp">
+      <Filter>Text3D Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_editor_update_misc - Copy.cpp">
-      <Filter>Text3D Editor</Filter>
+    <ClCompile Include="..\..\..\src\text3d_editor_update_miscellaneous.cpp">
+      <Filter>Text3D Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_editor_update_miscellaneous - Copy.cpp">
-      <Filter>Text3D Editor</Filter>
+    <ClCompile Include="..\..\..\src\text3d_editor_update_texturing.cpp">
+      <Filter>Text3D Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_editor_update_texturing - Copy.cpp">
-      <Filter>Text3D Editor</Filter>
+    <ClCompile Include="..\..\..\src\text3d_editor_misc.cpp">
+      <Filter>Text3D Editor\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -716,8 +716,8 @@
     <ClInclude Include="..\..\..\src\text2d_editor.hpp">
       <Filter>Text2D Editor\Base</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\text3d_editor - Copy.hpp">
-      <Filter>Text3D Editor</Filter>
+    <ClInclude Include="..\..\..\src\text3d_editor.hpp">
+      <Filter>Text3D Editor\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

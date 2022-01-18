@@ -39,8 +39,7 @@
     <ClCompile Include="..\..\..\src\quad2d_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\model_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\vertex_buffer.cpp" />
-    <ClCompile Include="..\..\..\src\render_bus_get.cpp" />
-    <ClCompile Include="..\..\..\src\render_bus_set.cpp" />
+    <ClCompile Include="..\..\..\src\render_bus.cpp" />
     <ClCompile Include="..\..\..\src\capture_buffer.cpp" />
     <ClCompile Include="..\..\..\src\master_renderer_capture_cube.cpp" />
     <ClCompile Include="..\..\..\src\master_renderer_capture_misc.cpp" />

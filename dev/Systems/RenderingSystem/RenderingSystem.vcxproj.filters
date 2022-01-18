@@ -63,10 +63,7 @@
     <ClCompile Include="..\..\..\src\master_renderer_main.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\render_bus_get.cpp">
-      <Filter>Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\render_bus_set.cpp">
+    <ClCompile Include="..\..\..\src\render_bus.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\shadow_generator.cpp">

@@ -95,7 +95,6 @@ private:
 	void _renderAabbEntities();
 	void _renderFinalSceneMap();
 	void _renderGUI();
-	void _renderCursor();
 
 	float _cameraYawDifference = 0.0f;
 	float _cameraPitchDifference = 0.0f;

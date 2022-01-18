@@ -6,7 +6,8 @@ using std::make_shared;
 
 Text2dEntityManager::Text2dEntityManager()
 	:
-	_mesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
+	_centeredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
+	_corneredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
 
 }
@@ -36,7 +37,7 @@ void Text2dEntityManager::createEntity(const string& ID, bool isCentered)
 
 	_entities.insert(make_pair(ID, entity));
 
-	entity->setMesh(_mesh);
+	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
 	entity->setCentered(isCentered);
 	entity->setDepth(_renderBus->getGuiDepth());
 
@@ -73,6 +74,10 @@ void Text2dEntityManager::update()
 	for(const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
-		entity->updateCharacterEntities();
+
+		if(entity->isVisible())
+		{
+			entity->updateCharacterEntities();
+		}
 	}
 }

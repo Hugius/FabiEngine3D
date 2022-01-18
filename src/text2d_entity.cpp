@@ -73,7 +73,7 @@ void Text2dEntity::updateCharacterEntities()
 		if(_isCentered)
 		{
 			offset.x -= (this->getSize().x / 2.0f);
-			offset.y -= (characterSize.y / 2.0f);
+			offset.x += (characterSize.x / 2.0f);
 		}
 
 		character->setPosition(_position + (rotationMatrix * offset));

@@ -14,9 +14,9 @@ class Quad3dEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setMesh(shared_ptr<VertexBuffer> value);
 	void updateTransformation();
 	void updateTransformationMatrix();
+	void setMesh(shared_ptr<VertexBuffer> value);
 	void setFacingCameraX(bool value);
 	void setFacingCameraY(bool value);
 	void setDepthMapIncluded(bool value);

@@ -1,17 +1,17 @@
 #pragma once
 
 #include "base_entity_manager.hpp"
-#include "image_loader.hpp"
-#include "text2d_entity.hpp"
+#include "camera.hpp"
+#include "text3d_entity.hpp"
 
 #include <unordered_map>
 
 using std::unordered_map;
 
-class Text2dEntityManager final : public BaseEntityManager
+class Text3dEntityManager final : public BaseEntityManager
 {
 public:
-	Text2dEntityManager();
+	Text3dEntityManager();
 
 	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
@@ -21,14 +21,14 @@ public:
 
 	const bool isEntityExisting(const string& ID) const;
 
-	const unordered_map<string, shared_ptr<Text2dEntity>>& getEntities();
-	shared_ptr<Text2dEntity> getEntity(const string& ID);
+	const unordered_map<string, shared_ptr<Text3dEntity>>& getEntities();
+	shared_ptr<Text3dEntity> getEntity(const string& ID);
 
 private:
 	const shared_ptr<VertexBuffer> _centeredMesh;
-	const shared_ptr<VertexBuffer> _corneredMesh;
+	const shared_ptr<VertexBuffer> _standingMesh;
 
-	unordered_map<string, shared_ptr<Text2dEntity>> _entities;
+	unordered_map<string, shared_ptr<Text3dEntity>> _entities;
 
 	shared_ptr<RenderBus> _renderBus = nullptr;
 };

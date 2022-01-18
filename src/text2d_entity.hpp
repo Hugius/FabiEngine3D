@@ -1,7 +1,6 @@
 #pragma once
 
 #include "quad2d_entity.hpp"
-#include "vertex_buffer.hpp"
 
 #include <memory>
 #include <map>

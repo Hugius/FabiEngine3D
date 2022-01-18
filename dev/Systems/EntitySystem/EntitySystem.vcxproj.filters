@@ -96,6 +96,9 @@
     <ClCompile Include="..\..\..\src\text3d_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\text3d_entity_manager.cpp">
+      <Filter>Manager\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\base_entity.hpp">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\text3d_entity.hpp">
       <Filter>Data\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\text3d_entity_manager.hpp">
+      <Filter>Manager\Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

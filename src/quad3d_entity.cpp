@@ -16,6 +16,7 @@ void Quad3dEntity::updateTransformation()
 	if(_position != _positionTarget)
 	{
 		auto speedMultiplier = Math::normalize(_positionTarget - _position);
+
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
@@ -35,16 +36,15 @@ void Quad3dEntity::updateTransformation()
 	if(_rotation != _rotationTarget)
 	{
 		auto difference = Math::calculateDifference(_rotation, _rotationTarget);
-		fvec3 multiplier = fvec3(
-			((difference.x < 180.0f) ? 1.0f : -1.0f),
-			((difference.y < 180.0f) ? 1.0f : -1.0f),
-			((difference.z < 180.0f) ? 1.0f : -1.0f));
-		fvec3 speed = (fvec3(_rotationTargetSpeed) * multiplier);
+		auto multiplier = fvec3(((difference.x < 180.0f) ? 1.0f : -1.0f), ((difference.y < 180.0f) ? 1.0f : -1.0f), ((difference.z < 180.0f) ? 1.0f : -1.0f));
+		auto speed = (fvec3(_rotationTargetSpeed) * multiplier);
+
 		_rotation.x += ((_rotation.x < _rotationTarget.x) ? speed.x : (_rotation.x > _rotationTarget.x) ? -speed.x : 0.0f);
 		_rotation.y += ((_rotation.y < _rotationTarget.y) ? speed.y : (_rotation.y > _rotationTarget.y) ? -speed.y : 0.0f);
 		_rotation.z += ((_rotation.z < _rotationTarget.z) ? speed.z : (_rotation.z > _rotationTarget.z) ? -speed.z : 0.0f);
 
 		_rotation = fvec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
+
 		if(Math::calculateAngleDifference(_rotation.x, _rotationTarget.x) <= _rotationTargetSpeed)
 		{
 			_rotation.x = _rotationTarget.x;
@@ -62,9 +62,11 @@ void Quad3dEntity::updateTransformation()
 	if(_size != _sizeTarget)
 	{
 		auto speedMultiplier = Math::normalize(_sizeTarget - _size);
+
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
 		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
+
 		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
 		{
 			_size.x = _positionTarget.x;

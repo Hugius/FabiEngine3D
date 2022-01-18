@@ -1,7 +1,6 @@
 #pragma once
 
 #include "base_entity_manager.hpp"
-#include "vertex_buffer.hpp"
 #include "camera.hpp"
 #include "quad3d_entity.hpp"
 

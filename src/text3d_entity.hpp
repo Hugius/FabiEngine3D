@@ -1,8 +1,6 @@
 #pragma once
 
-#include "base_entity.hpp"
-#include "vertex_buffer.hpp"
-#include "texture_buffer.hpp"
+#include "quad3d_entity.hpp"
 
 #include <map>
 #include <memory>
@@ -17,7 +15,7 @@ public:
 	using BaseEntity::BaseEntity;
 
 	void updateTransformation();
-	void updateTransformationMatrix();
+	void updateCharacterEntities();
 	void setMesh(shared_ptr<VertexBuffer> value);
 	void setContent(const string& value);
 	void setFontMapPath(const string& value);
@@ -47,6 +45,9 @@ public:
 	void setMaxHeight(float value);
 	void setFrozen(bool value);
 
+	const string& getContent() const;
+	const string& getFontMapPath() const;
+
 	const mat44& getTransformationMatrix() const;
 
 	const fvec3 getPosition() const;
@@ -73,7 +74,9 @@ public:
 	const bool isWireframed() const;
 	const bool isCentered() const;
 
+	const vector<shared_ptr<Quad3dEntity>>& getCharacterEntities() const;
 	const shared_ptr<VertexBuffer> getMesh() const;
+	const shared_ptr<TextureBuffer> getFontMap() const;
 
 private:
 	static inline const map<char, ivec2> _fontMapIndices =
@@ -212,5 +215,7 @@ private:
 	bool _isFrozen = false;
 	bool _isCentered = false;
 
+	vector<shared_ptr<Quad3dEntity>> _characterEntities;
 	shared_ptr<VertexBuffer> _mesh = nullptr;
+	shared_ptr<TextureBuffer> _fontMap = nullptr;
 };

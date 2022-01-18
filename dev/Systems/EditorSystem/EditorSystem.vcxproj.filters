@@ -229,6 +229,21 @@
     <Filter Include="Quad2D Editor\Persistence">
       <UniqueIdentifier>{1a8f2de0-976d-4e2e-961a-fa167895339c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Text3D Editor">
+      <UniqueIdentifier>{d607ada6-d098-4b33-aa83-eddaa3ea3abf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text3D Editor\Base">
+      <UniqueIdentifier>{1a1a0ac7-7349-4515-8ece-a2916d32b804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text3D Editor\Miscellaneous">
+      <UniqueIdentifier>{7c054309-e85e-4b15-be7a-e3e745b07af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text3D Editor\Persistence">
+      <UniqueIdentifier>{c8c019c5-4b0c-4271-ae7d-91546237070c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text3D Editor\Update">
+      <UniqueIdentifier>{4e32693d-6add-4779-8f69-fa7232b8dafe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -624,6 +639,33 @@
     <ClCompile Include="..\..\..\src\text2d_editor_update_menu.cpp">
       <Filter>Text2D Editor\Update</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_editor_lifecycle - Copy.cpp">
+      <Filter>Text3D Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_editor_loading - Copy.cpp">
+      <Filter>Text3D Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_editor_misc - Copy.cpp">
+      <Filter>Text3D Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_editor_saving - Copy.cpp">
+      <Filter>Text3D Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_lighting - Copy.cpp">
+      <Filter>Text3D Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_menu - Copy.cpp">
+      <Filter>Text3D Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_misc - Copy.cpp">
+      <Filter>Text3D Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_miscellaneous - Copy.cpp">
+      <Filter>Text3D Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_texturing - Copy.cpp">
+      <Filter>Text3D Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
@@ -673,6 +715,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\text2d_editor.hpp">
       <Filter>Text2D Editor\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\text3d_editor - Copy.hpp">
+      <Filter>Text3D Editor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

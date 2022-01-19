@@ -15,6 +15,7 @@ EngineController::EngineController()
 	_waterEditor = make_shared<WaterEditor>();
 	_modelEditor = make_shared<ModelEditor>();
 	_quad3dEditor = make_shared<Quad3dEditor>();
+	_text3dEditor = make_shared<Text3dEditor>();
 	_quad2dEditor = make_shared<Quad2dEditor>();
 	_text2dEditor = make_shared<Text2dEditor>();
 	_animation2dEditor = make_shared<Animation2dEditor>();
@@ -32,6 +33,7 @@ EngineController::EngineController()
 	_leftViewportController->inject(_waterEditor);
 	_leftViewportController->inject(_modelEditor);
 	_leftViewportController->inject(_quad3dEditor);
+	_leftViewportController->inject(_text3dEditor);
 	_leftViewportController->inject(_quad2dEditor);
 	_leftViewportController->inject(_text2dEditor);
 	_leftViewportController->inject(_animation2dEditor);
@@ -112,6 +114,7 @@ void EngineController::initialize()
 	_waterEditor->inject(_fe3d);
 	_modelEditor->inject(_fe3d);
 	_quad3dEditor->inject(_fe3d);
+	_text3dEditor->inject(_fe3d);
 	_quad2dEditor->inject(_fe3d);
 	_text2dEditor->inject(_fe3d);
 	_animation2dEditor->inject(_fe3d);

@@ -1,20 +1,20 @@
-#include "quad3d_editor.hpp"
+#include "text3d_editor.hpp"
 #include "logger.hpp"
 
-void Quad3dEditor::_updateMiscellaneousMenu()
+void Text3dEditor::_updateMiscellaneousMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "quad3dEditorMenuMiscellaneous")
+	if(screen->getID() == "text3dEditorMenuMiscellaneous")
 	{
-		auto size = _fe3d->quad3d_getSize(_currentQuadID);
-		auto isFacingX = _fe3d->quad3d_isFacingCameraX(_currentQuadID);
-		auto isFacingY = _fe3d->quad3d_isFacingCameraY(_currentQuadID);
-		auto transparency = _fe3d->quad3d_getTransparency(_currentQuadID);
+		auto size = _fe3d->text3d_getSize(_currentTextID);
+		auto isFacingX = _fe3d->text3d_isFacingCameraX(_currentTextID);
+		auto isFacingY = _fe3d->text3d_isFacingCameraY(_currentTextID);
+		auto transparency = _fe3d->text3d_getTransparency(_currentTextID);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
@@ -25,12 +25,12 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingX")->isHovered())
 		{
 			isFacingX = !isFacingX;
-			_fe3d->quad3d_setFacingCameraX(_currentQuadID, isFacingX);
+			_fe3d->text3d_setFacingCameraX(_currentTextID, isFacingX);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingY")->isHovered())
 		{
 			isFacingY = !isFacingY;
-			_fe3d->quad3d_setFacingCameraY(_currentQuadID, isFacingY);
+			_fe3d->text3d_setFacingCameraY(_currentTextID, isFacingY);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transparency")->isHovered())
 		{
@@ -40,23 +40,23 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		if(_gui->getOverlay()->checkValueForm("sizeX", size.x, {0.0f}))
 		{
 			size.x /= 100.0f;
-			_fe3d->quad3d_setSize(_currentQuadID, size);
+			_fe3d->text3d_setSize(_currentTextID, size);
 		}
 		if(_gui->getOverlay()->checkValueForm("sizeY", size.y, {0.0f}))
 		{
 			size.y /= 100.0f;
-			_fe3d->quad3d_setSize(_currentQuadID, size);
+			_fe3d->text3d_setSize(_currentTextID, size);
 		}
 		if(_gui->getOverlay()->checkValueForm("transparency", transparency, {0.0f}))
 		{
 			transparency /= 100.0f;
-			_fe3d->quad3d_setTransparency(_currentQuadID, transparency);
+			_fe3d->text3d_setTransparency(_currentTextID, transparency);
 		}
 
 		screen->getButton("isFacingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
 		screen->getButton("isFacingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
 
-		auto rotation = _fe3d->quad3d_getRotation(_currentQuadID);
+		auto rotation = _fe3d->text3d_getRotation(_currentTextID);
 		if(!isFacingX)
 		{
 			rotation.x = 0.0f;
@@ -66,6 +66,6 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		{
 			rotation.y = 0.0f;
 		}
-		_fe3d->quad3d_setRotation(_currentQuadID, rotation);
+		_fe3d->text3d_setRotation(_currentTextID, rotation);
 	}
 }

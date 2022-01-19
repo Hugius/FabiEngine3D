@@ -2,7 +2,7 @@
 
 #include "base_editor.hpp"
 
-class Quad3dEditor final : public BaseEditor
+class Text3dEditor final : public BaseEditor
 {
 public:
 	using BaseEditor::inject;
@@ -27,15 +27,15 @@ private:
 	void _updateTexturingMenu();
 	void _updateLightingMenu();
 	void _updateMiscellaneousMenu();
-	void _updateQuad3dCreating();
-	void _updateQuad3dChoosing();
-	void _updateQuad3dDeleting();
+	void _updateText3dCreating();
+	void _updateText3dChoosing();
+	void _updateText3dDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedQuadIDs;
-	string _hoveredQuadID = "";
-	string _currentQuadID = "";
+	vector<string> _loadedTextIDs;
+	string _hoveredTextID = "";
+	string _currentTextID = "";
 	string _currentProjectID = "";
 
 	static inline const float CW = 0.115f;
@@ -52,8 +52,8 @@ private:
 	static inline const float CAMERA_DISTANCE_SPEED = 0.125f;
 	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
 
-	bool _isCreatingQuad3d = false;
-	bool _isChoosingQuad3d = false;
-	bool _isDeletingQuad3d = false;
+	bool _isCreatingText3d = false;
+	bool _isChoosingText3d = false;
+	bool _isDeletingText3d = false;
 	bool _isEditorLoaded = false;
 };

@@ -46,9 +46,6 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\audio\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\diffuse_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\emission_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\diffuse_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\emission_map\\");
@@ -57,6 +54,9 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\specular_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad2d\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad2d\\diffuse_map\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\diffuse_map\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\emission_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\sky\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\sky\\cube_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\");
@@ -65,6 +65,8 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\height_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text2d\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text2d\\font_map\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text3d\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text3d\\font_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\displacement_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\dudv_map\\");

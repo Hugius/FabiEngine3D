@@ -1,4 +1,4 @@
-#include "quad3d_editor.hpp"
+#include "text3d_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 #include "configuration.hpp"
@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool Quad3dEditor::saveToFile() const
+const bool Text3dEditor::saveToFile() const
 {
 	if(!_isEditorLoaded)
 	{
@@ -16,39 +16,33 @@ const bool Quad3dEditor::saveToFile() const
 
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("Quad3dEditor::saveToFile");
+		Logger::throwError("Text3dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\quad3d.fe3d");
+	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\text3d.fe3d");
 
-	for(const auto& quadID : _loadedQuadIDs)
+	for(const auto& textID : _loadedTextIDs)
 	{
-		auto size = _fe3d->quad3d_getSize(quadID);
-		auto color = _fe3d->quad3d_getColor(quadID);
-		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quadID);
-		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quadID);
-		auto isFacingX = _fe3d->quad3d_isFacingCameraX(quadID);
-		auto isFacingY = _fe3d->quad3d_isFacingCameraY(quadID);
-		auto isReflected = _fe3d->quad3d_isReflected(quadID);
-		auto isShadowed = _fe3d->quad3d_isShadowed(quadID);
-		auto lightness = _fe3d->quad3d_getLightness(quadID);
-		auto textureRepeat = _fe3d->quad3d_getTextureRepeat(quadID);
-		auto isBright = _fe3d->quad3d_isBright(quadID);
-		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(quadID);
-		auto transparency = _fe3d->quad3d_getTransparency(quadID);
+		auto size = _fe3d->text3d_getSize(textID);
+		auto color = _fe3d->text3d_getColor(textID);
+		auto fontMapPath = _fe3d->text3d_getFontMapPath(textID);
+		auto isFacingX = _fe3d->text3d_isFacingCameraX(textID);
+		auto isFacingY = _fe3d->text3d_isFacingCameraY(textID);
+		auto isReflected = _fe3d->text3d_isReflected(textID);
+		auto isShadowed = _fe3d->text3d_isShadowed(textID);
+		auto lightness = _fe3d->text3d_getLightness(textID);
+		auto isBright = _fe3d->text3d_isBright(textID);
+		auto transparency = _fe3d->text3d_getTransparency(textID);
 
-		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
-		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
-		emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
+		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
 
-		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
-		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
+		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
 		file <<
-			quadID << " " <<
+			textID << " " <<
 			size.x << " " <<
 			size.y << " " <<
 			color.r << " " <<
@@ -56,20 +50,17 @@ const bool Quad3dEditor::saveToFile() const
 			color.b << " " <<
 			isFacingX << " " <<
 			isFacingY << " " <<
-			diffuseMapPath << " " <<
-			emissionMapPath << " " <<
+			fontMapPath << " " <<
 			isReflected << " " <<
 			isShadowed << " " <<
 			lightness << " " <<
-			textureRepeat << " " <<
 			isBright << " " <<
-			emissionIntensity << " " <<
 			transparency << endl;
 	}
 
 	file.close();
 
-	Logger::throwInfo("Quad3d editor data saved!");
+	Logger::throwInfo("Text3d editor data saved!");
 
 	return true;
 }

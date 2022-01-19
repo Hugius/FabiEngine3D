@@ -1,9 +1,9 @@
-#include "quad3d_editor.hpp"
+#include "text3d_editor.hpp"
 #include "logger.hpp"
 
 using std::max;
 
-void Quad3dEditor::_updateCamera()
+void Text3dEditor::_updateCamera()
 {
 	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
@@ -24,7 +24,7 @@ void Quad3dEditor::_updateCamera()
 		cameraLookat.y = max(-GRID_Y_OFFSET, cameraLookat.y);
 		_fe3d->camera_setThirdPersonLookat(cameraLookat);
 
-		_fe3d->quad2d_setVisible("@@cursor", false);
+		_fe3d->text2d_setVisible("@@cursor", false);
 
 		const auto distance = _fe3d->camera_getThirdPersonDistance();
 		_fe3d->gfx_setShadowEyePosition(fvec3(cameraLookat + fvec3(distance * 2.0f)));
@@ -57,7 +57,7 @@ void Quad3dEditor::_updateCamera()
 	}
 }
 
-void Quad3dEditor::_updateMiscellaneous()
+void Text3dEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
@@ -73,121 +73,121 @@ void Quad3dEditor::_updateMiscellaneous()
 			}
 		}
 
-		if(!_currentQuadID.empty())
+		if(!_currentTextID.empty())
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->quad3d_isWireframed(_currentQuadID))
+				if(_fe3d->text3d_isWireframed(_currentTextID))
 				{
-					_fe3d->quad3d_setWireframed(_currentQuadID, false);
+					_fe3d->text3d_setWireframed(_currentTextID, false);
 				}
 				else
 				{
-					_fe3d->quad3d_setWireframed(_currentQuadID, true);
+					_fe3d->text3d_setWireframed(_currentTextID, true);
 				}
 			}
 		}
 	}
 }
 
-void Quad3dEditor::_updateQuad3dCreating()
+void Text3dEditor::_updateText3dCreating()
 {
-	if(_isCreatingQuad3d)
+	if(_isCreatingText3d)
 	{
-		string newQuadID;
+		string newTextID;
 
-		if(_gui->getOverlay()->checkValueForm("quad3dCreate", newQuadID, {_currentQuadID}))
+		if(_gui->getOverlay()->checkValueForm("text3dCreate", newTextID, {_currentTextID}))
 		{
-			if(newQuadID.find(' ') != string::npos)
+			if(newTextID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Quad3d ID cannot contain any spaces!");
+				Logger::throwWarning("Text3d ID cannot contain any spaces!");
 				return;
 			}
 
-			if(newQuadID.find('@') != string::npos)
+			if(newTextID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Quad3d ID cannot contain '@'!");
+				Logger::throwWarning("Text3d ID cannot contain '@'!");
 				return;
 			}
 
-			newQuadID = ("@" + newQuadID);
+			newTextID = ("@" + newTextID);
 
-			if(find(_loadedQuadIDs.begin(), _loadedQuadIDs.end(), newQuadID) != _loadedQuadIDs.end())
+			if(find(_loadedTextIDs.begin(), _loadedTextIDs.end(), newTextID) != _loadedTextIDs.end())
 			{
-				Logger::throwWarning("Quad3d with ID \"" + newQuadID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Text3d with ID \"" + newTextID.substr(1) + "\" already exists!");
 				return;
 			}
 
-			_fe3d->quad3d_create(newQuadID, false);
+			_fe3d->text3d_create(newTextID, false);
 
-			if(_fe3d->quad3d_isExisting(newQuadID))
+			if(_fe3d->text3d_isExisting(newTextID))
 			{
-				_currentQuadID = newQuadID;
-				_loadedQuadIDs.push_back(newQuadID);
+				_currentTextID = newTextID;
+				_loadedTextIDs.push_back(newTextID);
 
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad3d: " + newQuadID.substr(1), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
-				_isCreatingQuad3d = false;
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text3d: " + newTextID.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
+				_isCreatingText3d = false;
 			}
 		}
 	}
 }
 
-void Quad3dEditor::_updateQuad3dChoosing()
+void Text3dEditor::_updateText3dChoosing()
 {
-	if(_isChoosingQuad3d)
+	if(_isChoosingText3d)
 	{
-		if(!_hoveredQuadID.empty())
+		if(!_hoveredTextID.empty())
 		{
-			_fe3d->quad3d_setVisible(_hoveredQuadID, false);
+			_fe3d->text3d_setVisible(_hoveredTextID, false);
 		}
 
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("quad3dList");
+		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("text3dList");
 
 		if(!selectedButtonID.empty())
 		{
-			_hoveredQuadID = ("@" + selectedButtonID);
+			_hoveredTextID = ("@" + selectedButtonID);
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentQuadID = ("@" + selectedButtonID);
-				_hoveredQuadID = "";
+				_currentTextID = ("@" + selectedButtonID);
+				_hoveredTextID = "";
 
-				if(!_isDeletingQuad3d)
+				if(!_isDeletingText3d)
 				{
-					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad3d: " + _currentQuadID.substr(1), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text3d: " + _currentTextID.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
 				}
 
-				_fe3d->quad3d_setVisible(_currentQuadID, true);
-				_gui->getOverlay()->deleteChoiceForm("quad3dList");
-				_isChoosingQuad3d = false;
+				_fe3d->text3d_setVisible(_currentTextID, true);
+				_gui->getOverlay()->deleteChoiceForm("text3dList");
+				_isChoosingText3d = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("quad3dList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled("text3dList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("quad3dList");
-			_isChoosingQuad3d = false;
-			_isDeletingQuad3d = false;
+			_gui->getOverlay()->deleteChoiceForm("text3dList");
+			_isChoosingText3d = false;
+			_isDeletingText3d = false;
 		}
 		else
 		{
-			_hoveredQuadID = "";
+			_hoveredTextID = "";
 		}
 
-		if(!_hoveredQuadID.empty())
+		if(!_hoveredTextID.empty())
 		{
-			_fe3d->quad3d_setVisible(_hoveredQuadID, true);
+			_fe3d->text3d_setVisible(_hoveredTextID, true);
 		}
 	}
 }
 
-void Quad3dEditor::_updateQuad3dDeleting()
+void Text3dEditor::_updateText3dDeleting()
 {
-	if(_isDeletingQuad3d && !_currentQuadID.empty())
+	if(_isDeletingText3d && !_currentTextID.empty())
 	{
 		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
@@ -196,18 +196,18 @@ void Quad3dEditor::_updateQuad3dDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->quad3d_delete(_currentQuadID);
+			_fe3d->text3d_delete(_currentTextID);
 
-			_loadedQuadIDs.erase(remove(_loadedQuadIDs.begin(), _loadedQuadIDs.end(), _currentQuadID), _loadedQuadIDs.end());
-			_currentQuadID = "";
-			_isDeletingQuad3d = false;
+			_loadedTextIDs.erase(remove(_loadedTextIDs.begin(), _loadedTextIDs.end(), _currentTextID), _loadedTextIDs.end());
+			_currentTextID = "";
+			_isDeletingText3d = false;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_fe3d->quad3d_setVisible(_currentQuadID, false);
+			_fe3d->text3d_setVisible(_currentTextID, false);
 
-			_currentQuadID = "";
-			_isDeletingQuad3d = false;
+			_currentTextID = "";
+			_isDeletingText3d = false;
 		}
 	}
 }

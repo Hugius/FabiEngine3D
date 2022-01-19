@@ -145,6 +145,7 @@ const bool Text3dEditor::loadFromFile()
 				}
 
 				_fe3d->text3d_setFontMap(textID, fontMapPath);
+				_fe3d->text3d_setContent(textID, TEXT_CONTENT);
 			}
 		}
 	}

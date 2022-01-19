@@ -102,6 +102,7 @@ const bool Text2dEditor::loadFromFile()
 			_fe3d->text2d_setSize(textID, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->text2d_setColor(textID, color);
 			_fe3d->text2d_setTransparency(textID, transparency);
+			_fe3d->text2d_setContent(textID, TEXT_CONTENT);
 
 			if(!fontMapPath.empty())
 			{
@@ -111,7 +112,6 @@ const bool Text2dEditor::loadFromFile()
 				}
 
 				_fe3d->text2d_setFontMap(textID, fontMapPath);
-				_fe3d->text2d_setContent(textID, "Text123");
 			}
 		}
 	}

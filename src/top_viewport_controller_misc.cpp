@@ -84,6 +84,7 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("waterEditor")->setHoverable(isHoverable);
 	screen->getButton("modelEditor")->setHoverable(isHoverable);
 	screen->getButton("quad3dEditor")->setHoverable(isHoverable);
+	screen->getButton("text3dEditor")->setHoverable(isHoverable);
 	screen->getButton("quad2dEditor")->setHoverable(isHoverable);
 	screen->getButton("text2dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
@@ -149,6 +150,11 @@ void TopViewportController::_applyProjectChange()
 		_quad3dEditor->unload();
 	}
 
+	if(_text3dEditor->isLoaded())
+	{
+		_text3dEditor->unload();
+	}
+
 	if(_quad2dEditor->isLoaded())
 	{
 		_quad2dEditor->unload();
@@ -189,6 +195,7 @@ void TopViewportController::_applyProjectChange()
 	_waterEditor->setCurrentProjectID(_currentProjectID);
 	_modelEditor->setCurrentProjectID(_currentProjectID);
 	_quad3dEditor->setCurrentProjectID(_currentProjectID);
+	_text3dEditor->setCurrentProjectID(_currentProjectID);
 	_quad2dEditor->setCurrentProjectID(_currentProjectID);
 	_text2dEditor->setCurrentProjectID(_currentProjectID);
 	_animation2dEditor->setCurrentProjectID(_currentProjectID);
@@ -213,14 +220,15 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 
 	if(!Tools::isFileExisting(projectDirectoryPath + "data\\animation3d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\animation2d.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\quad3d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\model.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\quad2d.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\quad3d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\settings.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sky.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sound.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\terrain.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\text2d.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\text3d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\water.fe3d"))
 	{
 		return true;
@@ -241,6 +249,7 @@ void TopViewportController::_saveCurrentProject()
 	_waterEditor->saveToFile();
 	_modelEditor->saveToFile();
 	_quad3dEditor->saveToFile();
+	_text3dEditor->saveToFile();
 	_quad2dEditor->saveToFile();
 	_text2dEditor->saveToFile();
 	_animation2dEditor->saveToFile();
@@ -275,6 +284,11 @@ void TopViewportController::inject(shared_ptr<ModelEditor> modelEditor)
 void TopViewportController::inject(shared_ptr<Quad3dEditor> quad3dEditor)
 {
 	_quad3dEditor = quad3dEditor;
+}
+
+void TopViewportController::inject(shared_ptr<Text3dEditor> text3dEditor)
+{
+	_text3dEditor = text3dEditor;
 }
 
 void TopViewportController::inject(shared_ptr<Quad2dEditor> quad2dEditor)

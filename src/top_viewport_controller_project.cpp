@@ -83,24 +83,27 @@ void TopViewportController::_updateProjectCreating()
 
 				auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
 				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
-				auto quad3dFile = ofstream(newProjectDirectoryPath + "data\\quad3d.fe3d");
 				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
 				auto quad2dFile = ofstream(newProjectDirectoryPath + "data\\quad2d.fe3d");
+				auto quad3dFile = ofstream(newProjectDirectoryPath + "data\\quad3d.fe3d");
 				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
 				auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
 				auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound.fe3d");
 				auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
-				auto textFile = ofstream(newProjectDirectoryPath + "data\\text2d.fe3d");
+				auto text2dFile = ofstream(newProjectDirectoryPath + "data\\text2d.fe3d");
+				auto text3dFile = ofstream(newProjectDirectoryPath + "data\\text3d.fe3d");
 				auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
 				animation2dFile.close();
 				animation3dFile.close();
-				quad3dFile.close();
-				quad2dFile.close();
 				modelFile.close();
+				quad2dFile.close();
+				quad3dFile.close();
 				settingsFile.close();
 				skyFile.close();
 				soundFile.close();
 				terrainFile.close();
+				text2dFile.close();
+				text3dFile.close();
 				waterFile.close();
 
 				_currentProjectID = newProjectID;

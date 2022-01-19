@@ -51,6 +51,7 @@ EngineController::EngineController()
 	_topViewportController->inject(_waterEditor);
 	_topViewportController->inject(_modelEditor);
 	_topViewportController->inject(_quad3dEditor);
+	_topViewportController->inject(_text3dEditor);
 	_topViewportController->inject(_quad2dEditor);
 	_topViewportController->inject(_text2dEditor);
 	_topViewportController->inject(_animation2dEditor);
@@ -65,6 +66,7 @@ EngineController::EngineController()
 	_waterEditor->inject(_guiManager);
 	_modelEditor->inject(_guiManager);
 	_quad3dEditor->inject(_guiManager);
+	_text3dEditor->inject(_guiManager);
 	_quad2dEditor->inject(_guiManager);
 	_text2dEditor->inject(_guiManager);
 	_animation2dEditor->inject(_guiManager);

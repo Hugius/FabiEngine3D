@@ -9,7 +9,7 @@ void LeftViewportController::initialize()
 	_gui->getLeftViewport()->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), LVPC::FRAME_COLOR);
 	auto window = _gui->getLeftViewport()->getWindow("main");
 
-	auto positions = calculateButtonPositions(12, CH);
+	auto positions = calculateButtonPositions(13, CH);
 	window->createScreen("main");
 	window->getScreen("main")->createButton("skyEditor", fvec2(0.0f, positions[0]), fvec2(TW("Sky"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("terrainEditor", fvec2(0.0f, positions[1]), fvec2(TW("Terrain"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
@@ -22,7 +22,7 @@ void LeftViewportController::initialize()
 	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[8]), fvec2(TW("Animation2D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animation2D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, positions[9]), fvec2(TW("Animation3D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animation3D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("soundEditor", fvec2(0.0f, positions[10]), fvec2(TW("Sound"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[12]), fvec2(TW("World"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "World", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[11]), fvec2(TW("World"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "World", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[12]), fvec2(TW("Script"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Script", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
 	window->setActiveScreen("main");

@@ -6,7 +6,9 @@
 #include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "quad3d_editor.hpp"
+#include "text3d_editor.hpp"
 #include "quad2d_editor.hpp"
+#include "text2d_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
 #include "sound_editor.hpp"
@@ -23,6 +25,7 @@ public:
 	void inject(shared_ptr<WaterEditor> waterEditor);
 	void inject(shared_ptr<ModelEditor> modelEditor);
 	void inject(shared_ptr<Quad3dEditor> quad3dEditor);
+	void inject(shared_ptr<Text3dEditor> text3dEditor);
 	void inject(shared_ptr<Quad2dEditor> quad2dEditor);
 	void inject(shared_ptr<Text2dEditor> text2dEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
@@ -71,6 +74,7 @@ private:
 	shared_ptr<WaterEditor> _waterEditor = nullptr;
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 	shared_ptr<Quad3dEditor> _quad3dEditor = nullptr;
+	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
 	shared_ptr<Quad2dEditor> _quad2dEditor = nullptr;
 	shared_ptr<Text2dEditor> _text2dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;

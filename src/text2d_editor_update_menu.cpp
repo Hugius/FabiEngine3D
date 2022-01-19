@@ -104,7 +104,7 @@ void Text2dEditor::_updateChoiceMenu()
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->text2d_setFontMap(_currentTextID, finalFilePath);
-			_fe3d->text2d_setContent(_currentTextID, "Text123");
+			_fe3d->text2d_setContent(_currentTextID, TEXT_CONTENT);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{

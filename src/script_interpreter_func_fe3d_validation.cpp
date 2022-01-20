@@ -43,6 +43,33 @@ const bool ScriptInterpreter::_validateFe3dQuad3d(const string& ID, bool isTempl
 	return true;
 }
 
+const bool ScriptInterpreter::_validateFe3dText3d(const string& ID, bool isTemplate)
+{
+	if(!_validateFe3dID(ID))
+	{
+		return false;
+	}
+
+	if(isTemplate)
+	{
+		if(!_fe3d->text3d_isExisting("@" + ID))
+		{
+			_throwScriptError("template text3d entity does not exist!");
+			return false;
+		}
+	}
+	else
+	{
+		if(!_fe3d->text3d_isExisting(ID))
+		{
+			_throwScriptError("text3d entity does not exist!");
+			return false;
+		}
+	}
+
+	return true;
+}
+
 const bool ScriptInterpreter::_validateFe3dQuad2d(const string& ID, bool isTemplate)
 {
 	if(!_validateFe3dID(ID))
@@ -70,7 +97,7 @@ const bool ScriptInterpreter::_validateFe3dQuad2d(const string& ID, bool isTempl
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dText(const string& ID, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dText2d(const string& ID, bool isTemplate)
 {
 	if(!_validateFe3dID(ID))
 	{

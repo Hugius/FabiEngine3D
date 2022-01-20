@@ -261,6 +261,12 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_validation.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text3d_set.cpp">
+      <Filter>Interpreter\Function\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text3d_get.cpp">
+      <Filter>Interpreter\Function\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\script_variable.hpp">

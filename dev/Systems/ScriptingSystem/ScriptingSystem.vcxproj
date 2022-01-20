@@ -60,6 +60,8 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound3d_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound3d_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text3d_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text3d_set.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_world_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_set.cpp" />

@@ -91,6 +91,7 @@ EngineController::EngineController()
 	_scriptInterpreter->inject(_waterEditor);
 	_scriptInterpreter->inject(_modelEditor);
 	_scriptInterpreter->inject(_quad3dEditor);
+	_scriptInterpreter->inject(_text3dEditor);
 	_scriptInterpreter->inject(_quad2dEditor);
 	_scriptInterpreter->inject(_text2dEditor);
 	_scriptInterpreter->inject(_animation2dEditor);

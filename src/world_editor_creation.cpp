@@ -1,4 +1,5 @@
 #include "world_editor.hpp"
+#include "world_editor.hpp"
 #include "logger.hpp"
 
 void WorldEditor::copyTemplateModel(const string& newID, const string& templateID, fvec3 position)
@@ -9,6 +10,11 @@ void WorldEditor::copyTemplateModel(const string& newID, const string& templateI
 void WorldEditor::copyTemplateQuad3d(const string& newID, const string& templateID, fvec3 position)
 {
 	_copyTemplateQuad3d(newID, templateID, position, true);
+}
+
+void WorldEditor::copyTemplateText3d(const string& newID, const string& templateID, fvec3 position)
+{
+	_copyTemplateText3d(newID, templateID, position, true);
 }
 
 void WorldEditor::copyTemplateSound(const string& newID, const string& templateID, fvec3 position)
@@ -312,6 +318,47 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newID, const string& t
 	else
 	{
 		_loadedQuadIDs[newID] = templateID;
+	}
+
+	return true;
+}
+
+const bool WorldEditor::_copyTemplateText3d(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
+{
+	if(_fe3d->text3d_isExisting(newID))
+	{
+		Logger::throwWarning("Text3d with ID \"" + newID + "\" already exists!");
+		return false;
+	}
+	if(!_fe3d->text3d_isExisting(templateID))
+	{
+		Logger::throwWarning("Editor text3d of text3d with ID \"" + newID + "\" not existing anymore!");
+		return false;
+	}
+
+	_fe3d->text3d_create(newID, _fe3d->text3d_getFontMapPath(templateID), false);
+
+	_fe3d->aabb_create(newID, false);
+	_fe3d->aabb_setParentEntityID(newID, newID);
+	_fe3d->aabb_setParentEntityType(newID, AabbParentEntityType::QUAD3D);
+
+	_fe3d->text3d_setPosition(newID, position);
+	_fe3d->text3d_setSize(newID, _fe3d->text3d_getSize(templateID));
+	_fe3d->text3d_setFacingCameraX(newID, _fe3d->text3d_isFacingCameraX(templateID));
+	_fe3d->text3d_setFacingCameraY(newID, _fe3d->text3d_isFacingCameraY(templateID));
+	_fe3d->text3d_setColor(newID, _fe3d->text3d_getColor(templateID));
+	_fe3d->text3d_setShadowed(newID, _fe3d->text3d_isShadowed(templateID));
+	_fe3d->text3d_setReflected(newID, _fe3d->text3d_isReflected(templateID));
+	_fe3d->text3d_setLightness(newID, _fe3d->text3d_getLightness(templateID));
+	_fe3d->text3d_setContent(newID, _fe3d->text3d_getContent(templateID));
+
+	if(isFromOutside)
+	{
+		//_outsideLoadedTextIDs[newID] = templateID;
+	}
+	else
+	{
+		//_loadedTextIDs[newID] = templateID;
 	}
 
 	return true;

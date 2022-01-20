@@ -5,7 +5,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:text_is_existing")
+	if(functionName == "fe3d:text2d_is_existing")
 	{
 		auto types = {SVT::STRING};
 
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
-	else if(functionName == "fe3d:text_find_ids")
+	else if(functionName == "fe3d:text2d_find_ids")
 	{
 		auto types = {SVT::STRING};
 
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_ids")
+	else if(functionName == "fe3d:text2d_get_ids")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -59,13 +59,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_is_visible")
+	else if(functionName == "fe3d:text2d_is_visible")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_isVisible(args[0].getString());
 
@@ -73,13 +73,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_position_x")
+	else if(functionName == "fe3d:text2d_get_position_x")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = Tools::convertPositionFromViewport(_fe3d->text2d_getPosition(args[0].getString())).x;
 
@@ -87,13 +87,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_position_y")
+	else if(functionName == "fe3d:text2d_get_position_y")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = Tools::convertPositionFromViewport(_fe3d->text2d_getPosition(args[0].getString())).y;
 
@@ -101,13 +101,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_rotation")
+	else if(functionName == "fe3d:text2d_get_rotation")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_getRotation(args[0].getString());
 
@@ -115,13 +115,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_size_x")
+	else if(functionName == "fe3d:text2d_get_size_x")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = Tools::convertSizeFromViewport(_fe3d->text2d_getSize(args[0].getString())).x;
 
@@ -129,13 +129,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_size_y")
+	else if(functionName == "fe3d:text2d_get_size_y")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = Tools::convertSizeFromViewport(_fe3d->text2d_getSize(args[0].getString())).y;
 
@@ -143,13 +143,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_color_r")
+	else if(functionName == "fe3d:text2d_get_color_r")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_getColor(args[0].getString()).r;
 
@@ -157,13 +157,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_color_g")
+	else if(functionName == "fe3d:text2d_get_color_g")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_getColor(args[0].getString()).g;
 
@@ -171,13 +171,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_color_b")
+	else if(functionName == "fe3d:text2d_get_color_b")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_getColor(args[0].getString()).b;
 
@@ -185,13 +185,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_wireframe_color_r")
+	else if(functionName == "fe3d:text2d_get_wireframe_color_r")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_getWireframeColor(args[0].getString()).r;
 
@@ -199,13 +199,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_wireframe_color_g")
+	else if(functionName == "fe3d:text2d_get_wireframe_color_g")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_getColor(args[0].getString()).g;
 
@@ -213,13 +213,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_wireframe_color_b")
+	else if(functionName == "fe3d:text2d_get_wireframe_color_b")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_getColor(args[0].getString()).b;
 
@@ -227,13 +227,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_content")
+	else if(functionName == "fe3d:text2d_get_content")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_getContent(args[0].getString());
 
@@ -241,13 +241,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_transparency")
+	else if(functionName == "fe3d:text2d_get_transparency")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_getTransparency(args[0].getString());
 
@@ -255,13 +255,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_is_wireframed")
+	else if(functionName == "fe3d:text2d_is_wireframed")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_isWireframed(args[0].getString());
 
@@ -269,13 +269,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_is_horizontally_mirrored")
+	else if(functionName == "fe3d:text2d_is_horizontally_mirrored")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_isHorizontallyMirrored(args[0].getString());
 
@@ -283,13 +283,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_is_vertically_mirrored")
+	else if(functionName == "fe3d:text2d_is_vertically_mirrored")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_isVerticallyMirrored(args[0].getString());
 
@@ -297,13 +297,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_is_wireframed")
+	else if(functionName == "fe3d:text2d_is_wireframed")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_isWireframed(args[0].getString());
 
@@ -311,13 +311,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_font_path")
+	else if(functionName == "fe3d:text2d_get_font_path")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				const auto result = _fe3d->text2d_getFontMapPath(args[0].getString());
 
@@ -332,7 +332,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:text` functionality as networking server!");
+		_throwScriptError("cannot access `fe3d:text2d` functionality as networking server!");
 	}
 
 	return true;

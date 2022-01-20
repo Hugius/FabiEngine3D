@@ -10,6 +10,7 @@
 #include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "quad3d_editor.hpp"
+#include "text3d_editor.hpp"
 #include "quad2d_editor.hpp"
 #include "text2d_editor.hpp"
 #include "animation3d_editor.hpp"
@@ -27,6 +28,7 @@ public:
 	void inject(shared_ptr<WaterEditor> waterEditor);
 	void inject(shared_ptr<ModelEditor> modelEditor);
 	void inject(shared_ptr<Quad3dEditor> quad3dEditor);
+	void inject(shared_ptr<Text3dEditor> text3dEditor);
 	void inject(shared_ptr<Quad2dEditor> quad2dEditor);
 	void inject(shared_ptr<Text2dEditor> text2dEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
@@ -86,12 +88,14 @@ private:
 	const bool _executeFe3dModelGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dQuad3dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dQuad3dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dAabbSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dAabbGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dText3dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dText3dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dQuad2dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dQuad2dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dText2dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dText2dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dAabbSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dAabbGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dPointlightSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dPointlightGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dSpotlightSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
@@ -133,14 +137,15 @@ private:
 	const bool _validateFe3dModel(const string& ID, bool isTemplate);
 	const bool _validateFe3dModelPart(const string& modelID, const string& partID);
 	const bool _validateFe3dQuad3d(const string& ID, bool isTemplate);
-	const bool _validateFe3dSound3d(const string& ID, bool isTemplate);
-	const bool _validateFe3dSound2d(const string& ID, bool isTemplate);
-	const bool _validateFe3dAabb(const string& ID);
+	const bool _validateFe3dText3d(const string& ID, bool isTemplate);
 	const bool _validateFe3dQuad2d(const string& ID, bool isTemplate);
-	const bool _validateFe3dText(const string& ID, bool isTemplate);
+	const bool _validateFe3dText2d(const string& ID, bool isTemplate);
+	const bool _validateFe3dAabb(const string& ID);
 	const bool _validateFe3dPointlight(const string& ID);
 	const bool _validateFe3dSpotlight(const string& ID);
 	const bool _validateFe3dReflection(const string& ID);
+	const bool _validateFe3dSound3d(const string& ID, bool isTemplate);
+	const bool _validateFe3dSound2d(const string& ID, bool isTemplate);
 	const bool _validateFe3dAnimation2d(const string& ID);
 	const bool _validateFe3dAnimation3d(const string& ID);
 	const bool _validateFe3dID(const string& ID);
@@ -231,6 +236,7 @@ private:
 	shared_ptr<WaterEditor> _waterEditor = nullptr;
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 	shared_ptr<Quad3dEditor> _quad3dEditor = nullptr;
+	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
 	shared_ptr<Quad2dEditor> _quad2dEditor = nullptr;
 	shared_ptr<Text2dEditor> _text2dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;

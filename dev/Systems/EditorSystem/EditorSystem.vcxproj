@@ -76,6 +76,9 @@
     <ClCompile Include="..\..\..\src\text2d_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\text2d_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_activate.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_text3d_update_edit.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_text3d_update_menu.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_text3d_update_place.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_update_misc_highlight.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_custom.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_reflection_update_edit.cpp" />

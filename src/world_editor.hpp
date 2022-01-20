@@ -6,6 +6,7 @@
 #include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "quad3d_editor.hpp"
+#include "text3d_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
 #include "sound_editor.hpp"
@@ -26,6 +27,7 @@ public:
 	void inject(shared_ptr<WaterEditor> waterEditor);
 	void inject(shared_ptr<ModelEditor> modelEditor);
 	void inject(shared_ptr<Quad3dEditor> quad3dEditor);
+	void inject(shared_ptr<Text3dEditor> text3dEditor);
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<SoundEditor> soundEditor);
@@ -42,6 +44,7 @@ public:
 	void addWaterToCustomWorld();
 	void addModelToCustomWorld(const string& ID);
 	void addQuad3dToCustomWorld(const string& ID);
+	void addText3dToCustomWorld(const string& ID);
 	void addAabbToCustomWorld(const string& ID);
 	void addSoundToCustomWorld(const string& ID);
 	void addPointlightToCustomWorld(const string& ID);
@@ -80,6 +83,11 @@ private:
 	void _updateQuad3dChoosingMenu();
 	void _updateQuad3dPlacing();
 	void _updateQuad3dEditing();
+	void _updateText3dMenu();
+	void _updateText3dPlacingMenu();
+	void _updateText3dChoosingMenu();
+	void _updateText3dPlacing();
+	void _updateText3dEditing();
 	void _updatePointlightMenu();
 	void _updatePointlightChoosingMenu();
 	void _updatePointlightPlacing();
@@ -117,6 +125,7 @@ private:
 	void _updateMiscellaneous();
 	void _updateModelHighlighting(const string& ID, int& direction);
 	void _updateQuad3dHighlighting(const string& ID, int& direction);
+	void _updateText3dHighlighting(const string& ID, int& direction);
 	void _updateLampHighlighting(const string& ID, int& direction);
 	void _updateTorchHighlighting(const string& ID, int& direction);
 	void _updateCameraHighlighting(const string& ID, int& direction);
@@ -124,24 +133,28 @@ private:
 	void _deleteWorldFile(const string& ID);
 	void _selectModel(const string& ID);
 	void _selectQuad3d(const string& ID);
+	void _selectText3d(const string& ID);
 	void _selectPointlight(const string& ID);
 	void _selectSpotlight(const string& ID);
 	void _selectReflection(const string& ID);
 	void _selectSound(const string& ID);
 	void _unselectModel(const string& ID);
 	void _unselectQuad3d(const string& ID);
+	void _unselectText3d(const string& ID);
 	void _unselectPointlight(const string& ID);
 	void _unselectSpotlight(const string& ID);
 	void _unselectReflection(const string& ID);
 	void _unselectSound(const string& ID);
 	void _activateModel(const string& ID);
 	void _activateQuad3d(const string& ID);
+	void _activateText3d(const string& ID);
 	void _activatePointlight(const string& ID);
 	void _activateSpotlight(const string& ID);
 	void _activateReflection(const string& ID);
 	void _activateSound(const string& ID);
 	void _deactivateModel();
 	void _deactivateQuad3d();
+	void _deactivateText3d();
 	void _deactivatePointlight();
 	void _deactivateSpotlight();
 	void _deactivateReflection();
@@ -170,6 +183,8 @@ private:
 	map<string, string> _outsideLoadedModelIDs;
 	map<string, string> _loadedQuadIDs;
 	map<string, string> _outsideLoadedQuadIDs;
+	map<string, string> _loadedTextIDs;
+	map<string, string> _outsideLoadedTextIDs;
 	map<string, string> _loadedSoundIDs;
 	map<string, string> _outsideLoadedSoundIDs;
 	map<string, fvec3> _initialModelPosition;
@@ -177,6 +192,7 @@ private:
 	map<string, fvec3> _initialModelSize;
 	vector<string> _customWorldModelIDs;
 	vector<string> _customWorldQuadIDs;
+	vector<string> _customWorldTextIDs;
 	vector<string> _customWorldAabbIDs;
 	vector<string> _customWorldPointlightIDs;
 	vector<string> _customWorldSpotlightIDs;
@@ -199,6 +215,9 @@ private:
 	string _currentTemplateQuadID = "";
 	string _selectedQuadID = "";
 	string _activeQuadID = "";
+	string _currentTemplateTextID = "";
+	string _selectedTextID = "";
+	string _activeTextID = "";
 	string _selectedLampID = "";
 	string _activeLampID = "";
 	string _selectedTorchID = "";
@@ -223,6 +242,7 @@ private:
 	static inline const fvec3 DEFAULT_SPEAKER_AABB_SIZE = fvec3(1.05f, 1.05f, 0.9f);
 	static inline const fvec3 MODEL_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 QUAD3D_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
+	static inline const fvec3 TEXT3D_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
 	static inline const fvec3 POINTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
 	static inline const fvec3 SPOTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
 	static inline const fvec3 REFLECTION_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
@@ -241,6 +261,11 @@ private:
 	static inline const float QUAD3D_SIZE_DIVIDER = 100.0f;
 	static inline const float QUAD3D_SIZE_MULTIPLIER = 100.0f;
 	static inline const float QUAD3D_HIGHLIGHT_SPEED = 0.025f;
+	static inline const float TEXT3D_POSITION_DIVIDER = 100.0f;
+	static inline const float TEXT3D_ROTATION_SPEED = 0.5f;
+	static inline const float TEXT3D_SIZE_DIVIDER = 100.0f;
+	static inline const float TEXT3D_SIZE_MULTIPLIER = 100.0f;
+	static inline const float TEXT3D_HIGHLIGHT_SPEED = 0.025f;
 	static inline const float POINTLIGHT_POSITION_DIVIDER = 100.0f;
 	static inline const float POINTLIGHT_RADIUS_DIVIDER = 100.0f;
 	static inline const float POINTLIGHT_COLOR_SPEED = 0.005f;
@@ -281,6 +306,8 @@ private:
 	int _activeModelHighlightDirection = 1;
 	int _selectedQuad3dHighlightDirection = 1;
 	int _activeQuad3dHighlightDirection = 1;
+	int _selectedText3dHighlightDirection = 1;
+	int _activeText3dHighlightDirection = 1;
 	int _selectedLampHighlightDirection = 1;
 	int _activeLampHighlightDirection = 1;
 	int _selectedTorchHighlightDirection = 1;
@@ -297,6 +324,7 @@ private:
 	bool _hasCustomWorldWater = false;
 	bool _dontResetSelectedModel = false;
 	bool _dontResetSelectedQuad3d = false;
+	bool _dontResetSelectedText3d = false;
 	bool _dontResetSelectedLamp = false;
 	bool _dontResetSelectedTorch = false;
 	bool _dontResetSelectedCamera = false;
@@ -314,6 +342,7 @@ private:
 	shared_ptr<WaterEditor> _waterEditor = nullptr;
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 	shared_ptr<Quad3dEditor> _quad3dEditor = nullptr;
+	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<SoundEditor> _soundEditor = nullptr;

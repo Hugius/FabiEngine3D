@@ -46,6 +46,29 @@ void WorldEditor::_activateQuad3d(const string& ID)
 	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Active quad3d: " + rawID, 0.025f);
 }
 
+void WorldEditor::_activateText3d(const string& ID)
+{
+	_activeTextID = ID;
+
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	auto position = _fe3d->text3d_getPosition(_activeTextID);
+
+	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("position")->setHoverable(false);
+	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("size")->setHoverable(true);
+
+	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+
+	string tempID = ID;
+	reverse(tempID.begin(), tempID.end());
+	string rawID = tempID.substr(tempID.find('_') + 1);
+	reverse(rawID.begin(), rawID.end());
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
+	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Active text3d: " + rawID, 0.025f);
+}
+
 void WorldEditor::_activateSound(const string& ID)
 {
 	_activeSpeakerID = ("@@speaker_" + ID);
@@ -132,6 +155,17 @@ void WorldEditor::_deactivateQuad3d()
 
 	_activeQuadID = "";
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
+}
+
+void WorldEditor::_deactivateText3d()
+{
+	if(!_activeTextID.empty())
+	{
+		_unselectText3d(_activeTextID);
+	}
+
+	_activeTextID = "";
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), false);
 }
 
 void WorldEditor::_deactivateSound()

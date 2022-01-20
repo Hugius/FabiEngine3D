@@ -76,7 +76,7 @@ void Text3dEntity::updateTransformation()
 
 void Text3dEntity::updateCharacterEntities()
 {
-	auto rotationMatrix = Math::createRotationMatrix(
+	const auto rotationMatrix = Math::createRotationMatrix(
 		Math::convertToRadians(_rotation.x),
 		Math::convertToRadians(_rotation.y),
 		Math::convertToRadians(_rotation.z), DirectionOrder::YXZ);

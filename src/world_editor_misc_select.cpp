@@ -34,6 +34,23 @@ void WorldEditor::_selectQuad3d(const string& ID)
 	}
 }
 
+void WorldEditor::_selectText3d(const string& ID)
+{
+	_selectedTextID = ID;
+
+	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+
+	if(_activeModelID.empty() && _activeTextID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	{
+		string tempID = ID;
+		reverse(tempID.begin(), tempID.end());
+		string rawID = tempID.substr(tempID.find('_') + 1);
+		reverse(rawID.begin(), rawID.end());
+		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
+		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Selected text3d: " + rawID, 0.025f);
+	}
+}
+
 void WorldEditor::_selectSound(const string& ID)
 {
 	_selectedSpeakerID = ("@@speaker_" + ID);
@@ -83,6 +100,11 @@ void WorldEditor::_unselectModel(const string& ID)
 void WorldEditor::_unselectQuad3d(const string& ID)
 {
 	_fe3d->quad3d_setTransparency(ID, 1.0f);
+}
+
+void WorldEditor::_unselectText3d(const string& ID)
+{
+	_fe3d->text3d_setTransparency(ID, 1.0f);
 }
 
 void WorldEditor::_unselectSound(const string& ID)

@@ -102,6 +102,18 @@ void WorldEditor::addQuad3dToCustomWorld(const string& ID)
 	}
 }
 
+void WorldEditor::addText3dToCustomWorld(const string& ID)
+{
+	if(!_customWorldID.empty())
+	{
+		_customWorldTextIDs.push_back(ID);
+	}
+	else
+	{
+		Logger::throwWarning("Cannot add text3d to custom world!");
+	}
+}
+
 void WorldEditor::addAabbToCustomWorld(const string& ID)
 {
 	if(!_customWorldID.empty())

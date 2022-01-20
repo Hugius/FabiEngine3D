@@ -4,7 +4,7 @@
 
 - The Text3D entity is a composition of Quad3D entities.
 - Every Quad3D entity represents a text character.
-- A font map is used to form a line of text.
+- The text is generated using a font map.
 
 ## 2. Assets
 
@@ -14,7 +14,7 @@
 
 - **Font Map Path**: the path of the font map file
   - Type: `string`
-  - Constraints: none
+  - Constraints: cannot be changed
 - **Content**: the content of the characters
   - Type: `string`
   - Constraints: none

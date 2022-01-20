@@ -84,6 +84,11 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
+	for(const auto& [key, templateID] : _loadedTextIDs)
+	{
+		_fe3d->text3d_delete(key);
+	}
+
 	for(const auto& ID : _loadedPointlightIDs)
 	{
 		_fe3d->pointlight_delete(ID);
@@ -257,6 +262,11 @@ void WorldEditor::inject(shared_ptr<ModelEditor> modelEditor)
 void WorldEditor::inject(shared_ptr<Quad3dEditor> quad3dEditor)
 {
 	_quad3dEditor = quad3dEditor;
+}
+
+void WorldEditor::inject(shared_ptr<Text3dEditor> text3dEditor)
+{
+	_text3dEditor = text3dEditor;
 }
 
 void WorldEditor::inject(shared_ptr<Animation2dEditor> animation2dEditor)

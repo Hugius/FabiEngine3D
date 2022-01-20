@@ -31,6 +31,13 @@ void WorldEditor::load()
 		screen->getScrollingList("quad3dList")->createButton(ID, ID.substr(1));
 	}
 
+	_text3dEditor->loadFromFile();
+	for(const auto& ID : _text3dEditor->getLoadedIDs())
+	{
+		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace");
+		screen->getScrollingList("text3dList")->createButton(ID, ID.substr(1));
+	}
+
 	_animation2dEditor->loadFromFile(false);
 	_animation3dEditor->loadFromFile(false);
 
@@ -129,6 +136,11 @@ void WorldEditor::unload()
 		_fe3d->quad3d_delete(ID);
 	}
 
+	for(const auto& ID : _text3dEditor->getLoadedIDs())
+	{
+		_fe3d->text3d_delete(ID);
+	}
+
 	_fe3d->model_delete(TEMPLATE_LAMP_ID);
 	_fe3d->pointlight_delete(TEMPLATE_LAMP_ID);
 
@@ -194,6 +206,8 @@ void WorldEditor::unload()
 	_activeModelHighlightDirection = 1;
 	_selectedQuad3dHighlightDirection = 1;
 	_activeQuad3dHighlightDirection = 1;
+	_selectedText3dHighlightDirection = 1;
+	_activeText3dHighlightDirection = 1;
 	_selectedSpeakerHighlightDirection = 1;
 	_activeSpeakerHighlightDirection = 1;
 	_selectedLampHighlightDirection = 1;
@@ -209,6 +223,7 @@ void WorldEditor::unload()
 	_hasCustomWorldWater = false;
 	_dontResetSelectedModel = false;
 	_dontResetSelectedQuad3d = false;
+	_dontResetSelectedText3d = false;
 	_dontResetSelectedSpeaker = false;
 	_dontResetSelectedLamp = false;
 	_dontResetSelectedTorch = false;
@@ -301,6 +316,26 @@ void WorldEditor::update()
 	if(_isEditorLoaded)
 	{
 		_updateQuad3dEditing();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateText3dMenu();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateText3dPlacingMenu();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateText3dChoosingMenu();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateText3dPlacing();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateText3dEditing();
 	}
 	if(_isEditorLoaded)
 	{

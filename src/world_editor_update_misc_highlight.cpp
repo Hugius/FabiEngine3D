@@ -54,6 +54,31 @@ void WorldEditor::_updateQuad3dHighlighting(const string& ID, int& direction)
 	}
 }
 
+void WorldEditor::_updateText3dHighlighting(const string& ID, int& direction)
+{
+	if(ID.empty())
+	{
+		direction = 1;
+	}
+
+	if(!ID.empty())
+	{
+		auto transparency = _fe3d->text3d_getTransparency(ID);
+
+		if(transparency == 0.0f)
+		{
+			direction *= -1;
+		}
+		if(transparency == 1.0f)
+		{
+			direction *= -1;
+		}
+
+		const float speed = (TEXT3D_HIGHLIGHT_SPEED * static_cast<float>(direction));
+		_fe3d->text3d_setTransparency(ID, (transparency + speed));
+	}
+}
+
 void WorldEditor::_updateSpeakerHighlighting(const string& ID, int& direction)
 {
 	if(ID.empty())

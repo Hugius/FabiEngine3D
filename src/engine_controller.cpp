@@ -79,6 +79,7 @@ EngineController::EngineController()
 	_worldEditor->inject(_waterEditor);
 	_worldEditor->inject(_modelEditor);
 	_worldEditor->inject(_quad3dEditor);
+	_worldEditor->inject(_text3dEditor);
 	_worldEditor->inject(_animation2dEditor);
 	_worldEditor->inject(_animation3dEditor);
 	_worldEditor->inject(_soundEditor);

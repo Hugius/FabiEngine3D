@@ -18,19 +18,20 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("worldEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), fvec2(TW("Delete World"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete World", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
-	positions = VPC::calculateButtonPositions(11, CH);
+	positions = VPC::calculateButtonPositions(12, CH);
 	leftWindow->createScreen("worldEditorMenuChoice");
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("sky", fvec2(0.0f, positions[0]), fvec2(TW("Sky"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("terrain", fvec2(0.0f, positions[1]), fvec2(TW("Terrain"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("water", fvec2(0.0f, positions[2]), fvec2(TW("Water"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("model", fvec2(0.0f, positions[3]), fvec2(TW("Model"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Model", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("quad3d", fvec2(0.0f, positions[4]), fvec2(TW("Quad3d"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Quad3d", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuChoice")->createButton("pointlight", fvec2(0.0f, positions[5]), fvec2(TW("Pointlight"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Pointlight", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuChoice")->createButton("spotlight", fvec2(0.0f, positions[6]), fvec2(TW("Spotlight"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Spotlight", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuChoice")->createButton("reflection", fvec2(0.0f, positions[7]), fvec2(TW("Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuChoice")->createButton("sound", fvec2(0.0f, positions[8]), fvec2(TW("Sound"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuChoice")->createButton("settings", fvec2(0.0f, positions[9]), fvec2(TW("Settings"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[10]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuChoice")->createButton("text3d", fvec2(0.0f, positions[5]), fvec2(TW("Text3d"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Text3d", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuChoice")->createButton("pointlight", fvec2(0.0f, positions[6]), fvec2(TW("Pointlight"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Pointlight", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuChoice")->createButton("spotlight", fvec2(0.0f, positions[7]), fvec2(TW("Spotlight"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Spotlight", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuChoice")->createButton("reflection", fvec2(0.0f, positions[8]), fvec2(TW("Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuChoice")->createButton("sound", fvec2(0.0f, positions[9]), fvec2(TW("Sound"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuChoice")->createButton("settings", fvec2(0.0f, positions[10]), fvec2(TW("Settings"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[11]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
 	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("worldEditorMenuSky");
@@ -79,6 +80,20 @@ void WorldEditor::_loadGUI()
 	leftWindow->createScreen("worldEditorMenuQuad3dChoice");
 	leftWindow->getScreen("worldEditorMenuQuad3dChoice")->createScrollingList("quad3dList", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, fvec2(0.15f, 0.1f), true);
 	leftWindow->getScreen("worldEditorMenuQuad3dChoice")->createButton("back", fvec2(0.0f, -0.9f), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+
+	positions = VPC::calculateButtonPositions(3, CH);
+	leftWindow->createScreen("worldEditorMenuText3d");
+	leftWindow->getScreen("worldEditorMenuText3d")->createButton("place", fvec2(0.0f, positions[0]), fvec2(TW("Place Text3D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place Text3D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuText3d")->createButton("choice", fvec2(0.0f, positions[1]), fvec2(TW("Choose Text3D"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Text3D", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuText3d")->createButton("back", fvec2(0.0f, positions[2]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+
+	leftWindow->createScreen("worldEditorMenuText3dPlace");
+	leftWindow->getScreen("worldEditorMenuText3dPlace")->createScrollingList("text3dList", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, fvec2(0.15f, 0.1f), true);
+	leftWindow->getScreen("worldEditorMenuText3dPlace")->createButton("back", fvec2(0.0f, -0.9f), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+
+	leftWindow->createScreen("worldEditorMenuText3dChoice");
+	leftWindow->getScreen("worldEditorMenuText3dChoice")->createScrollingList("text3dList", fvec2(0.0f, 0.1f), fvec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, fvec2(0.15f, 0.1f), true);
+	leftWindow->getScreen("worldEditorMenuText3dChoice")->createButton("back", fvec2(0.0f, -0.9f), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
 	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("worldEditorMenuPointlight");
@@ -272,6 +287,27 @@ void WorldEditor::_loadGUI()
 	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("freeze", fvec2(0.0f, -0.775f), fvec2(1.0f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(1.0f, 0.1f), fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
+	rightWindow->createScreen("text3dPropertiesMenu");
+	rightWindow->getScreen("text3dPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.75f, 0.1f), "Text3d Menu", fvec3(0.0f, 1.0f, 0.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("position", fvec2(0.0f, 0.8f), fvec2(0.75f, 0.2f), "position.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("rotation", fvec2(0.0f, 0.55f), fvec2(0.75f, 0.2f), "rotation.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("size", fvec2(0.0f, 0.3f), fvec2(0.75f, 0.2f), "size.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createTextField("x", fvec2(0.0f, 0.135f), fvec2(0.25f, 0.1f), "X", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createTextField("y", fvec2(0.0f, -0.115f), fvec2(0.25f, 0.1f), "Y", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createTextField("z", fvec2(0.0f, -0.365f), fvec2(0.25f, 0.1f), "Z", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("xPlus", fvec2(0.75f, 0.025f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("yPlus", fvec2(0.75f, -0.225f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("zPlus", fvec2(0.75f, -0.475f), fvec2(0.5f, 0.15f), "plus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("xMinus", fvec2(-0.75f, 0.025f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("yMinus", fvec2(-0.75f, -0.225f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("zMinus", fvec2(-0.75f, -0.475f), fvec2(0.5f, 0.15f), "minus.tga", fvec3(1.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createWriteField("x", fvec2(0.0f, 0.025f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createWriteField("y", fvec2(0.0f, -0.225f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createWriteField("z", fvec2(0.0f, -0.475f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("animation", fvec2(0.0f, -0.625f), fvec2(1.5f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("freeze", fvec2(0.0f, -0.775f), fvec2(1.0f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(1.0f, 0.1f), fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+
 	rightWindow->createScreen("pointlightPropertiesMenu");
 	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.875f, 0.1f), "Pointlight Menu", fvec3(0.0f, 1.0f, 0.0f), true);
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("position", fvec2(0.0f, 0.8f), fvec2(0.75f, 0.2f), "position.tga", fvec3(1.0f), true);
@@ -389,6 +425,9 @@ void WorldEditor::_unloadGUI()
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuQuad3d");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuQuad3dPlace");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuQuad3dChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuText3d");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuText3dPlace");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuText3dChoice");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSound");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSoundPlace");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSoundChoice");
@@ -413,6 +452,7 @@ void WorldEditor::_unloadGUI()
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsBloom");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("modelPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("quad3dPropertiesMenu");
+	_gui->getRightViewport()->getWindow("main")->deleteScreen("text3dPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("soundPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("pointlightPropertiesMenu");
 	_gui->getRightViewport()->getWindow("main")->deleteScreen("spotlightPropertiesMenu");

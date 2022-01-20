@@ -76,6 +76,11 @@ void Text3dEntity::updateTransformation()
 
 void Text3dEntity::updateCharacterEntities()
 {
+	auto rotationMatrix = Math::createRotationMatrix(
+		Math::convertToRadians(_rotation.x),
+		Math::convertToRadians(_rotation.y),
+		Math::convertToRadians(_rotation.z), DirectionOrder::YXZ);
+
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
@@ -85,7 +90,7 @@ void Text3dEntity::updateCharacterEntities()
 		offset.x -= (this->getSize().x / 2.0f);
 		offset.x += (characterSize.x / 2.0f);
 
-		character->setPosition(_position + offset);
+		character->setPosition(_position + (rotationMatrix * offset));
 		character->setRotation(_rotation);
 		character->setSize(characterSize);
 

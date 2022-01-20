@@ -660,9 +660,6 @@
     <ClCompile Include="..\..\..\src\text3d_editor_update_miscellaneous.cpp">
       <Filter>Text3D Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\text3d_editor_update_texturing.cpp">
-      <Filter>Text3D Editor\Update</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\text3d_editor_misc.cpp">
       <Filter>Text3D Editor\Miscellaneous</Filter>
     </ClCompile>

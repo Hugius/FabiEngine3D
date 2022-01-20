@@ -55,6 +55,8 @@ EngineCore::EngineCore()
 	_modelEntityManager->inject(_vertexBufferCache);
 	_quad3dEntityManager->inject(_renderBus);
 	_text3dEntityManager->inject(_renderBus);
+	_text3dEntityManager->inject(_imageLoader);
+	_text3dEntityManager->inject(_textureBufferCache);
 	_quad2dEntityManager->inject(_renderBus);
 	_text2dEntityManager->inject(_renderBus);
 	_aabbEntityManager->inject(_modelEntityManager);

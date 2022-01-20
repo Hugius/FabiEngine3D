@@ -320,6 +320,16 @@ void Text3dEntity::setFrozen(bool value)
 	}
 }
 
+void Text3dEntity::setVisible(bool value)
+{
+	_isVisible = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setVisible(_isVisible);
+	}
+}
+
 void Text3dEntity::setPosition(fvec3 value)
 {
 	_position = value;

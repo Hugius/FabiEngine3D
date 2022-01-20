@@ -381,10 +381,9 @@ public:
 	const bool quad3d_hasEmissionMap(const string& ID) const;
 	const bool quad3d_isFrozen(const string& ID) const;
 
-	void text3d_create(const string& ID, bool isCentered);
+	void text3d_create(const string& ID, const string& fontMapPath, bool isCentered);
 	void text3d_delete(const string& ID);
 	void text3d_deleteAll();
-	void text3d_setFontMap(const string& ID, const string& value);
 	void text3d_setContent(const string& ID, const string& value, float charWidth = -1.0f, float charHeight = -1.0f);
 	void text3d_setPosition(const string& ID, fvec3 value);
 	void text3d_setRotation(const string& ID, fvec3 value);

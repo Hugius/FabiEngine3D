@@ -1,9 +1,9 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::text3d_create(const string& ID, bool isCentered)
+void EngineInterface::text3d_create(const string& ID, const string& fontMapPath, bool isCentered)
 {
-	_core->getText3dEntityManager()->createEntity(ID, isCentered);
+	_core->getText3dEntityManager()->createEntity(ID, fontMapPath, isCentered);
 }
 
 void EngineInterface::text3d_deleteAll()
@@ -11,30 +11,6 @@ void EngineInterface::text3d_deleteAll()
 	for(const auto& [key, entity] : _core->getText3dEntityManager()->getEntities())
 	{
 		text3d_delete(entity->getID());
-	}
-}
-
-void EngineInterface::text3d_setFontMap(const string& ID, const string& value)
-{
-	if(value.empty())
-	{
-		_core->getText3dEntityManager()->getEntity(ID)->setFontMap(nullptr);
-		_core->getText3dEntityManager()->getEntity(ID)->setFontMapPath("");
-	}
-	else
-	{
-		auto texture = _core->getTextureBufferCache()->get2dBuffer(value);
-
-		if(texture == nullptr)
-		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
-
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
-		}
-
-		_core->getText3dEntityManager()->getEntity(ID)->setFontMap(_core->getTextureBufferCache()->get2dBuffer(value));
-		_core->getText3dEntityManager()->getEntity(ID)->setFontMapPath(value);
 	}
 }
 

@@ -40,6 +40,16 @@ void Text3dEntityManager::inject(shared_ptr<RenderBus> renderBus)
 	_renderBus = renderBus;
 }
 
+void Text3dEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
+{
+	_imageLoader = imageLoader;
+}
+
+void Text3dEntityManager::inject(shared_ptr<TextureBufferCache> textureBufferCache)
+{
+	_textureBufferCache = textureBufferCache;
+}
+
 shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
@@ -59,14 +69,27 @@ const unordered_map<string, shared_ptr<Text3dEntity>>& Text3dEntityManager::getE
 	return _entities;
 }
 
-void Text3dEntityManager::createEntity(const string& ID, bool isCentered)
+void Text3dEntityManager::createEntity(const string& ID, const string& fontMapPath, bool isCentered)
 {
 	auto entity = make_shared<Text3dEntity>(ID);
 
 	_entities.insert(make_pair(ID, entity));
 
+	auto texture = _textureBufferCache->get2dBuffer(fontMapPath);
+
+	if(texture == nullptr)
+	{
+		texture = make_shared<TextureBuffer>(_imageLoader->loadImage(fontMapPath));
+		texture->loadAnisotropicFiltering(_renderBus->getAnisotropicFilteringQuality());
+
+		_textureBufferCache->store2dBuffer(fontMapPath, texture);
+	}
+
 	entity->setMesh(isCentered ? _centeredMesh : _standingMesh);
 	entity->setCentered(isCentered);
+	entity->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
+	entity->setFontMapPath(fontMapPath);
+	entity->setContent("text");
 }
 
 void Text3dEntityManager::update()

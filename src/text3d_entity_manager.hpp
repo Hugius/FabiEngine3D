@@ -3,6 +3,8 @@
 #include "base_entity_manager.hpp"
 #include "camera.hpp"
 #include "text3d_entity.hpp"
+#include "texture_buffer_cache.hpp"
+#include "image_loader.hpp"
 
 #include <unordered_map>
 
@@ -14,8 +16,10 @@ public:
 	Text3dEntityManager();
 
 	void inject(shared_ptr<RenderBus> renderBus);
+	void inject(shared_ptr<ImageLoader> imageLoader);
+	void inject(shared_ptr<TextureBufferCache> textureBufferCache);
 	void update();
-	void createEntity(const string& ID, bool isCentered);
+	void createEntity(const string& ID, const string& fontMapPath, bool isCentered);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 
@@ -31,4 +35,6 @@ private:
 	unordered_map<string, shared_ptr<Text3dEntity>> _entities;
 
 	shared_ptr<RenderBus> _renderBus = nullptr;
+	shared_ptr<ImageLoader> _imageLoader = nullptr;
+	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;
 };

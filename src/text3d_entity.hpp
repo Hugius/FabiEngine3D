@@ -44,6 +44,7 @@ public:
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
 	void setFrozen(bool value);
+	void setVisible(bool value);
 
 	const string& getContent() const;
 	const string& getFontMapPath() const;

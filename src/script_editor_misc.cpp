@@ -12,11 +12,11 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 	float lineCount = static_cast<float>(_script->getScriptFile(_currentScriptFileID)->getLineCount());
 	fvec2 separatorSize = fvec2((TEXT_CHARACTER_SIZE.x / 4.0f), (lineCount * VERTICAL_LINE_OFFSET));
 	fvec3 separatorPosition = SCRIPT_TEXT_STARTING_POSITION + fvec3(HORIZONTAL_LINE_OFFSET / 2.0f, -(((lineCount - 1) / 2.0f) * VERTICAL_LINE_OFFSET), 0.0f);
-	_fe3d->text3d_create("separator", false);
-	_fe3d->text3d_setPosition("separator", (separatorPosition - fvec3(0.0f, separatorSize.y / 2.0f, 0.0f)));
-	_fe3d->text3d_setSize("separator", separatorSize);
-	_fe3d->text3d_setColor("separator", SEPARATOR_COLOR);
-	_fe3d->text3d_setBright("separator", true);
+	_fe3d->quad3d_create("separator", false);
+	_fe3d->quad3d_setPosition("separator", (separatorPosition - fvec3(0.0f, separatorSize.y / 2.0f, 0.0f)));
+	_fe3d->quad3d_setSize("separator", separatorSize);
+	_fe3d->quad3d_setColor("separator", SEPARATOR_COLOR);
+	_fe3d->quad3d_setBright("separator", true);
 
 	for(unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 	{
@@ -32,8 +32,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			fvec3((lineTextString.size() - 1) * (TEXT_CHARACTER_SIZE.x / 2.0f), -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f) +
 			fvec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
-		_fe3d->text3d_create(lineNumberID, false);
-		_fe3d->text3d_setFontMap(lineNumberID, FONT_MAP_PATH);
+		_fe3d->text3d_create(lineNumberID, FONT_MAP_PATH, false);
 		_fe3d->text3d_setContent(lineNumberID, lineNumberString);
 		_fe3d->text3d_setPosition(lineNumberID, (lineNumberPosition - fvec3(0.0f, lineNumberSize.y / 2.0f, 0.0f)));
 		_fe3d->text3d_setSize(lineNumberID, lineNumberSize);
@@ -50,8 +49,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		string noWhiteSpace;
 		iss >> noWhiteSpace;
 		bool isComment = (noWhiteSpace.substr(0, 3) == "///");
-		_fe3d->text3d_create(lineTextID, false);
-		_fe3d->text3d_setFontMap(lineTextID, FONT_MAP_PATH);
+		_fe3d->text3d_create(lineTextID, FONT_MAP_PATH, false);
 		_fe3d->text3d_setContent(lineTextID, lineTextString);
 		_fe3d->text3d_setPosition(lineTextID, (lineTextPosition - fvec3(0.0f, lineTextSize.y / 2.0f, 0.0f)));
 		_fe3d->text3d_setSize(lineTextID, lineTextSize);
@@ -63,7 +61,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			const string characterID = (lineNumberID + "_" + to_string(charIndex));
 			const float characterX = (HORIZONTAL_LINE_OFFSET + (HORIZONTAL_CHARACTER_OFFSET * static_cast<float>(charIndex)));
 			const fvec3 characterPosition = (SCRIPT_TEXT_STARTING_POSITION + fvec3(characterX, -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f));
-			_fe3d->text3d_create(characterID, false);
+			_fe3d->text3d_create(characterID, FONT_MAP_PATH, false);
 			_fe3d->text3d_setPosition(characterID, (characterPosition - fvec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f)));
 			_fe3d->text3d_setSize(characterID, TEXT_CHARACTER_SIZE);
 			_fe3d->text3d_setVisible(characterID, false);

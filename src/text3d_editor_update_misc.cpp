@@ -1,5 +1,6 @@
 #include "text3d_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 using std::max;
 
@@ -118,7 +119,40 @@ void Text3dEditor::_updateText3dCreating()
 				return;
 			}
 
-			_fe3d->text3d_create(newTextID, false);
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("Text3dEditor::_updateText3dCreating");
+			}
+
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\text3d\\font_map\\");
+
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+			{
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				_isCreatingText3d = false;
+				return;
+			}
+
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
+			if(filePath.empty())
+			{
+				_isCreatingText3d = false;
+				return;
+			}
+
+			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			{
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				_isCreatingText3d = false;
+				return;
+			}
+
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d->misc_clearImageCache(finalFilePath);
+
+			_fe3d->text3d_create(newTextID, finalFilePath, false);
 
 			if(_fe3d->text3d_isExisting(newTextID))
 			{

@@ -91,7 +91,12 @@ const bool Text2dEditor::loadFromFile()
 
 		replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
 
-		_fe3d->text2d_create(textID, true);
+		if(!Config::getInst().isApplicationExported())
+		{
+			fontMapPath = string("projects\\" + _currentProjectID + "\\" + fontMapPath);
+		}
+
+		_fe3d->text2d_create(textID, fontMapPath, true);
 
 		if(_fe3d->text2d_isExisting(textID))
 		{
@@ -103,16 +108,6 @@ const bool Text2dEditor::loadFromFile()
 			_fe3d->text2d_setColor(textID, color);
 			_fe3d->text2d_setTransparency(textID, transparency);
 			_fe3d->text2d_setContent(textID, TEXT_CONTENT);
-
-			if(!fontMapPath.empty())
-			{
-				if(!Config::getInst().isApplicationExported())
-				{
-					fontMapPath = string("projects\\" + _currentProjectID + "\\" + fontMapPath);
-				}
-
-				_fe3d->text2d_setFontMap(textID, fontMapPath);
-			}
 		}
 	}
 

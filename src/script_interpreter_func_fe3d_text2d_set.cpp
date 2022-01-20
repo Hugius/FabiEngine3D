@@ -25,8 +25,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 
 			if(_validateFe3dText(args[1].getString(), true))
 			{
-				_fe3d->text2d_create(args[0].getString(), true);
-				_fe3d->text2d_setFontMap(args[0].getString(), _fe3d->text2d_getFontMapPath("@" + args[1].getString()));
+				_fe3d->text2d_create(args[0].getString(), _fe3d->text2d_getFontMapPath("@" + args[1].getString()), true);
 				_fe3d->text2d_setPosition(args[0].getString(), Tools::convertPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
 				_fe3d->text2d_setSize(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
 				_fe3d->text2d_setMinPosition(args[0].getString(), Tools::calculateMinViewportPosition());
@@ -116,20 +115,6 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text2d_setWireframed(args[0].getString(), args[1].getBoolean());
-
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:text_set_font_map")
-	{
-		auto types = {SVT::STRING, SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dText(args[0].getString(), false))
-			{
-				_fe3d->text2d_setFontMap(args[0].getString(), args[1].getString());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

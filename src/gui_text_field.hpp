@@ -27,6 +27,7 @@ private:
 	const string _ID;
 	const string _entityID;
 	const string _parentID;
+	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 
 	fvec3 _initialColor;
 

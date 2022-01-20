@@ -31,14 +31,26 @@ const unordered_map<string, shared_ptr<Text2dEntity>>& Text2dEntityManager::getE
 	return _entities;
 }
 
-void Text2dEntityManager::createEntity(const string& ID, bool isCentered)
+void Text2dEntityManager::createEntity(const string& ID, const string& fontMapPath, bool isCentered)
 {
 	auto entity = make_shared<Text2dEntity>(ID);
 
 	_entities.insert(make_pair(ID, entity));
 
+	auto texture = _textureBufferCache->get2dBuffer(fontMapPath);
+
+	if(texture == nullptr)
+	{
+		texture = make_shared<TextureBuffer>(_imageLoader->loadImage(fontMapPath));
+
+		_textureBufferCache->store2dBuffer(fontMapPath, texture);
+	}
+
 	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
+	entity->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
+	entity->setFontMapPath(fontMapPath);
 	entity->setCentered(isCentered);
+	entity->setContent("text");
 	entity->setDepth(_renderBus->getGuiDepth());
 
 	_renderBus->setGuiDepth(_renderBus->getGuiDepth() + 1);
@@ -80,4 +92,14 @@ void Text2dEntityManager::update()
 			entity->updateCharacterEntities();
 		}
 	}
+}
+
+void Text2dEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
+{
+	_imageLoader = imageLoader;
+}
+
+void Text2dEntityManager::inject(shared_ptr<TextureBufferCache> textureBufferCache)
+{
+	_textureBufferCache = textureBufferCache;
 }

@@ -481,11 +481,10 @@ public:
 	const bool quad2d_hasDiffuseMap(const string& ID) const;
 	const bool quad2d_isWireframed(const string& ID) const;
 
-	void text2d_create(const string& ID, bool isCentered);
+	void text2d_create(const string& ID, const string& fontMapPath, bool isCentered);
 	void text2d_delete(const string& ID);
 	void text2d_deleteAll();
 	void text2d_setVisible(const string& ID, bool value);
-	void text2d_setFontMap(const string& ID, const string& value);
 	void text2d_setContent(const string& ID, const string& value, float charWidth = -1.0f, float charHeight = -1.0f);
 	void text2d_setColor(const string& ID, fvec3 value);
 	void text2d_setTransparency(const string& ID, float value);

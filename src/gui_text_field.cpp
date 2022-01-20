@@ -10,11 +10,10 @@ GuiTextField::GuiTextField(shared_ptr<EngineInterface> fe3d, const string& paren
 	_initialSize(size),
 	_initialColor(color)
 {
-	_fe3d->text2d_create(_entityID, isCentered);
+	_fe3d->text2d_create(_entityID, FONT_MAP_PATH, isCentered);
 	_fe3d->text2d_setPosition(_entityID, position);
 	_fe3d->text2d_setSize(_entityID, size);
 	_fe3d->text2d_setColor(_entityID, color);
-	_fe3d->text2d_setFontMap(_entityID, "engine\\assets\\image\\font_map\\font.tga");
 	_fe3d->text2d_setContent(_entityID, textContent);
 }
 

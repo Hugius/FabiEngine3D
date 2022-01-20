@@ -72,40 +72,6 @@ void Text2dEditor::_updateChoiceMenu()
 			_currentTextID = "";
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("fontMap")->isHovered())
-		{
-			if(_currentProjectID.empty())
-			{
-				Logger::throwError("Text2dEditor::_updateChoiceMenu");
-			}
-
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\text2d\\font_map\\");
-
-			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
-			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
-				return;
-			}
-
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
-			if(filePath.empty())
-			{
-				return;
-			}
-
-			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
-			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
-				return;
-			}
-
-			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->text2d_setFontMap(_currentTextID, finalFilePath);
-			_fe3d->text2d_setContent(_currentTextID, TEXT_CONTENT);
-		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
 			_gui->getOverlay()->createValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));

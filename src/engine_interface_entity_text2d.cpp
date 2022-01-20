@@ -6,9 +6,9 @@ void EngineInterface::text2d_deleteAll()
 	_core->getText2dEntityManager()->deleteEntities();
 }
 
-void EngineInterface::text2d_create(const string& ID, bool isCentered)
+void EngineInterface::text2d_create(const string& ID, const string& fontMapPath, bool isCentered)
 {
-	_core->getText2dEntityManager()->createEntity(ID, isCentered);
+	_core->getText2dEntityManager()->createEntity(ID, fontMapPath, isCentered);
 }
 
 void EngineInterface::text2d_delete(const string& ID)
@@ -19,29 +19,6 @@ void EngineInterface::text2d_delete(const string& ID)
 void EngineInterface::text2d_setVisible(const string& ID, bool value)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->setVisible(value);
-}
-
-void EngineInterface::text2d_setFontMap(const string& ID, const string& value)
-{
-	if(value.empty())
-	{
-		_core->getText2dEntityManager()->getEntity(ID)->setFontMap(nullptr);
-		_core->getText2dEntityManager()->getEntity(ID)->setFontMapPath("");
-	}
-	else
-	{
-		auto texture = _core->getTextureBufferCache()->get2dBuffer(value);
-
-		if(texture == nullptr)
-		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
-		}
-
-		_core->getText2dEntityManager()->getEntity(ID)->setFontMap(_core->getTextureBufferCache()->get2dBuffer(value));
-		_core->getText2dEntityManager()->getEntity(ID)->setFontMapPath(value);
-	}
 }
 
 void EngineInterface::text2d_setContent(const string& ID, const string& value, float charWidth, float charHeight)

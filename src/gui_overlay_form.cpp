@@ -1,27 +1,27 @@
 #include "gui_overlay.hpp"
 #include "logger.hpp"
 
-void GuiOverlay::createValueForm(const string& ID, string title, unsigned int value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
+void GuiOverlay::createValueForm(const string& ID, const string& title, unsigned int value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, false);
 }
 
-void GuiOverlay::createValueForm(const string& ID, string title, int value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
+void GuiOverlay::createValueForm(const string& ID, const string& title, int value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(value), position, size, buttonsPosition, true, true);
 }
 
-void GuiOverlay::createValueForm(const string& ID, string title, float value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
+void GuiOverlay::createValueForm(const string& ID, const string& title, float value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, true);
 }
 
-void GuiOverlay::createValueForm(const string& ID, string title, double value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
+void GuiOverlay::createValueForm(const string& ID, const string& title, double value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, true);
 }
 
-void GuiOverlay::createValueForm(const string& ID, string title, string value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
+void GuiOverlay::createValueForm(const string& ID, const string& title, const string& value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition)
 {
 	_createValueForm(ID, title, value, position, size, buttonsPosition, false, false);
 }
@@ -106,7 +106,7 @@ const bool GuiOverlay::isValueFormExisting(const string& ID) const
 	return find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end();
 }
 
-void GuiOverlay::_createValueForm(const string& ID, string title, string valueString, fvec2 position, fvec2 size, fvec2 buttonsPosition, bool onlyNumbers, bool minusAllowed)
+void GuiOverlay::_createValueForm(const string& ID, const string& title, const string& valueString, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition, bool onlyNumbers, bool minusAllowed)
 {
 	if(isValueFormExisting(ID))
 	{
@@ -182,7 +182,7 @@ const bool GuiOverlay::_checkValueForm(const string& ID, string& valueString, co
 	return changed;
 }
 
-void GuiOverlay::createChoiceForm(const string& ID, string title, fvec2 position, const vector<string>& buttonTitles)
+void GuiOverlay::createChoiceForm(const string& ID, const string& title, const fvec2& position, const vector<string>& buttonTitles)
 {
 	if(!_choiceFormID.empty())
 	{
@@ -257,7 +257,7 @@ const bool GuiOverlay::isChoiceFormExisting(const string& ID) const
 	return (ID == _choiceFormID);
 }
 
-void GuiOverlay::createAnswerForm(const string& ID, string title, fvec2 position)
+void GuiOverlay::createAnswerForm(const string& ID, const string& title, const fvec2& position)
 {
 	if(!_answerFormID.empty())
 	{

@@ -45,7 +45,7 @@ void WaterEntity::setDisplacementMapPath(const string& value)
 	_displacementMapPath = value;
 }
 
-void WaterEntity::setRippleOffset(fvec2 value)
+void WaterEntity::setRippleOffset(const fvec2& value)
 {
 	_rippleOffset = value;
 }
@@ -70,12 +70,12 @@ void WaterEntity::setQuality(WaterQuality quality)
 	_quality = quality;
 }
 
-void WaterEntity::setSpeed(fvec2 value)
+void WaterEntity::setSpeed(const fvec2& value)
 {
 	_speed = value;
 }
 
-void WaterEntity::setWaveOffset(fvec2 value)
+void WaterEntity::setWaveOffset(const fvec2& value)
 {
 	_waveOffset = value;
 }
@@ -170,7 +170,7 @@ const string& WaterEntity::getDisplacementMapPath() const
 	return _displacementMapPath;
 }
 
-const fvec2 WaterEntity::getRippleOffset() const
+const fvec2& WaterEntity::getRippleOffset() const
 {
 	return _rippleOffset;
 }
@@ -195,12 +195,12 @@ const WaterQuality WaterEntity::getQuality() const
 	return _quality;
 }
 
-const fvec2 WaterEntity::getSpeed() const
+const fvec2& WaterEntity::getSpeed() const
 {
 	return _speed;
 }
 
-const fvec2 WaterEntity::getWaveOffset() const
+const fvec2& WaterEntity::getWaveOffset() const
 {
 	return _waveOffset;
 }

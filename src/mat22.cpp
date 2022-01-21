@@ -59,31 +59,31 @@ mat22::mat22(const float value)
 
 const mat22 mat22::operator+(const mat22& other) const
 {
-	mat22 newMatrix;
+	mat22 result;
 
 	for(int i = 0; i < 4; i++)
 	{
-		newMatrix.f[i] = (this->f[i] + other.f[i]);
+		result.f[i] = (this->f[i] + other.f[i]);
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat22 mat22::operator-(const mat22& other) const
 {
-	mat22 newMatrix;
+	mat22 result;
 
 	for(int i = 0; i < 4; i++)
 	{
-		newMatrix.f[i] = (this->f[i] - other.f[i]);
+		result.f[i] = (this->f[i] - other.f[i]);
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat22 mat22::operator*(const mat22& other) const
 {
-	mat22 newMatrix(0.0f);
+	mat22 result(0.0f);
 
 	for(int column = 0; column < 2; column++)
 	{
@@ -91,20 +91,20 @@ const mat22 mat22::operator*(const mat22& other) const
 		{
 			for(int inner = 0; inner < 2; inner++)
 			{
-				newMatrix.m[row][column] += (this->m[inner][column] * other.m[row][inner]);
+				result.m[row][column] += (this->m[inner][column] * other.m[row][inner]);
 			}
 		}
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const fvec2 mat22::operator*(const fvec2& other) const
 {
-	fvec2 newVector;
+	fvec2 result;
 
-	newVector.x = ((this->m[0][0] * other.x) + (this->m[1][0] * other.y));
-	newVector.y = ((this->m[0][1] * other.x) + (this->m[1][1] * other.y));
+	result.x = ((this->m[0][0] * other.x) + (this->m[1][0] * other.y));
+	result.y = ((this->m[0][1] * other.x) + (this->m[1][1] * other.y));
 
-	return newVector;
+	return result;
 }

@@ -139,7 +139,7 @@ void Quad3dEntity::setRotation(const fvec3& value)
 	_rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
-void Quad3dEntity::setSize(fvec2 value)
+void Quad3dEntity::setSize(const fvec2& value)
 {
 	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
@@ -159,7 +159,7 @@ void Quad3dEntity::rotate(const fvec3& value)
 	_rotationTarget = fvec3(Math::limitAngle(_rotationTarget.x), Math::limitAngle(_rotationTarget.y), Math::limitAngle(_rotationTarget.z));
 }
 
-void Quad3dEntity::scale(fvec2 value)
+void Quad3dEntity::scale(const fvec2& value)
 {
 	_size += value;
 	_sizeTarget += value;
@@ -179,7 +179,7 @@ void Quad3dEntity::rotateTo(const fvec3& target, float speed)
 	_rotationTargetSpeed = speed;
 }
 
-void Quad3dEntity::scaleTo(fvec2 target, float speed)
+void Quad3dEntity::scaleTo(const fvec2& target, float speed)
 {
 	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
@@ -190,12 +190,12 @@ void Quad3dEntity::setColor(const fvec3& value)
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void Quad3dEntity::setUvMultiplier(fvec2 value)
+void Quad3dEntity::setUvMultiplier(const fvec2& value)
 {
 	_uvMultiplier = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Quad3dEntity::setUvOffset(fvec2 value)
+void Quad3dEntity::setUvOffset(const fvec2& value)
 {
 	_uvOffset = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
@@ -310,17 +310,17 @@ const fvec3& Quad3dEntity::getRotation() const
 	return _rotation;
 }
 
-const fvec2 Quad3dEntity::getSize() const
+const fvec2& Quad3dEntity::getSize() const
 {
 	return _size;
 }
 
-const fvec2 Quad3dEntity::getUvMultiplier() const
+const fvec2& Quad3dEntity::getUvMultiplier() const
 {
 	return _uvMultiplier;
 }
 
-const fvec2 Quad3dEntity::getUvOffset() const
+const fvec2& Quad3dEntity::getUvOffset() const
 {
 	return _uvOffset;
 }

@@ -51,7 +51,7 @@ void EngineInterface::text2d_setTransparency(const string& ID, float value)
 	_core->getText2dEntityManager()->getEntity(ID)->setTransparency(value);
 }
 
-void EngineInterface::text2d_setPosition(const string& ID, fvec2 value)
+void EngineInterface::text2d_setPosition(const string& ID, const fvec2& value)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->setPosition(value);
 }
@@ -61,12 +61,12 @@ void EngineInterface::text2d_setRotation(const string& ID, float value)
 	_core->getText2dEntityManager()->getEntity(ID)->setRotation(value);
 }
 
-void EngineInterface::text2d_setSize(const string& ID, fvec2 value)
+void EngineInterface::text2d_setSize(const string& ID, const fvec2& value)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->setSize(value);
 }
 
-void EngineInterface::text2d_move(const string& ID, fvec2 position)
+void EngineInterface::text2d_move(const string& ID, const fvec2& position)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->move(position);
 }
@@ -76,12 +76,12 @@ void EngineInterface::text2d_rotate(const string& ID, float rotation)
 	_core->getText2dEntityManager()->getEntity(ID)->rotate(rotation);
 }
 
-void EngineInterface::text2d_scale(const string& ID, fvec2 size)
+void EngineInterface::text2d_scale(const string& ID, const fvec2& size)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->scale(size);
 }
 
-void EngineInterface::text2d_moveTo(const string& ID, fvec2 target, float speed)
+void EngineInterface::text2d_moveTo(const string& ID, const fvec2& target, float speed)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->moveTo(target, speed);
 }
@@ -91,7 +91,7 @@ void EngineInterface::text2d_rotateTo(const string& ID, float target, float spee
 	_core->getText2dEntityManager()->getEntity(ID)->rotateTo(target, speed);
 }
 
-void EngineInterface::text2d_scaleTo(const string& ID, fvec2 target, float speed)
+void EngineInterface::text2d_scaleTo(const string& ID, const fvec2& target, float speed)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->scaleTo(target, speed);
 }
@@ -116,12 +116,12 @@ void EngineInterface::text2d_setWireframeColor(const string& ID, const fvec3& va
 	_core->getText2dEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
 
-void EngineInterface::text2d_setMinPosition(const string& ID, fvec2 value)
+void EngineInterface::text2d_setMinPosition(const string& ID, const fvec2& value)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->setMinPosition(value);
 }
 
-void EngineInterface::text2d_setMaxPosition(const string& ID, fvec2 value)
+void EngineInterface::text2d_setMaxPosition(const string& ID, const fvec2& value)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->setMaxPosition(value);
 }
@@ -161,7 +161,7 @@ const bool EngineInterface::text2d_hasFontMap(const string& ID) const
 	return (_core->getText2dEntityManager()->getEntity(ID)->getFontMap() != nullptr);
 }
 
-const fvec2 EngineInterface::text2d_getPosition(const string& ID) const
+const fvec2& EngineInterface::text2d_getPosition(const string& ID) const
 {
 	return _core->getText2dEntityManager()->getEntity(ID)->getPosition();
 }
@@ -176,17 +176,17 @@ const float EngineInterface::text2d_getTransparency(const string& ID) const
 	return _core->getText2dEntityManager()->getEntity(ID)->getTransparency();
 }
 
-const fvec2 EngineInterface::text2d_getSize(const string& ID) const
+const fvec2& EngineInterface::text2d_getSize(const string& ID) const
 {
 	return _core->getText2dEntityManager()->getEntity(ID)->getSize();
 }
 
-const fvec2 EngineInterface::text2d_getMinPosition(const string& ID) const
+const fvec2& EngineInterface::text2d_getMinPosition(const string& ID) const
 {
 	return  _core->getText2dEntityManager()->getEntity(ID)->getMinPosition();
 }
 
-const fvec2 EngineInterface::text2d_getMaxPosition(const string& ID) const
+const fvec2& EngineInterface::text2d_getMaxPosition(const string& ID) const
 {
 	return  _core->getText2dEntityManager()->getEntity(ID)->getMaxPosition();
 }

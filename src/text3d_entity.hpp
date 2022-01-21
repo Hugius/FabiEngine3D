@@ -30,13 +30,13 @@ public:
 	void setWireframed(bool value);
 	void setPosition(const fvec3& value);
 	void setRotation(const fvec3& value);
-	void setSize(fvec2 value);
+	void setSize(const fvec2& value);
 	void move(const fvec3& value);
 	void rotate(const fvec3& value);
-	void scale(fvec2 value);
+	void scale(const fvec2& value);
 	void moveTo(const fvec3& target, float speed);
 	void rotateTo(const fvec3& target, float speed);
-	void scaleTo(fvec2 target, float speed);
+	void scaleTo(const fvec2& target, float speed);
 	void setColor(const fvec3& value);
 	void setWireframeColor(const fvec3& value);
 	void setLightness(float value);
@@ -56,9 +56,9 @@ public:
 	const fvec3& getColor() const;
 	const fvec3& getWireframeColor() const;
 
-	const fvec2 getSize() const;
-	const fvec2 getUvMultiplier() const;
-	const fvec2 getUvOffset() const;
+	const fvec2& getSize() const;
+	const fvec2& getUvMultiplier() const;
+	const fvec2& getUvOffset() const;
 
 	const float getLightness() const;
 	const float getTransparency() const;

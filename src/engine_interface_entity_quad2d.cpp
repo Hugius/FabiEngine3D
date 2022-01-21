@@ -44,7 +44,7 @@ void EngineInterface::quad2d_setDiffuseMap(const string& ID, const string& value
 	}
 }
 
-void EngineInterface::quad2d_setPosition(const string& ID, fvec2 position)
+void EngineInterface::quad2d_setPosition(const string& ID, const fvec2& position)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->setPosition(position);
 }
@@ -54,12 +54,12 @@ void EngineInterface::quad2d_setRotation(const string& ID, float rotation)
 	_core->getQuad2dEntityManager()->getEntity(ID)->setRotation(rotation);
 }
 
-void EngineInterface::quad2d_setSize(const string& ID, fvec2 size)
+void EngineInterface::quad2d_setSize(const string& ID, const fvec2& size)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->setSize(size);
 }
 
-void EngineInterface::quad2d_move(const string& ID, fvec2 position)
+void EngineInterface::quad2d_move(const string& ID, const fvec2& position)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->move(position);
 }
@@ -69,12 +69,12 @@ void EngineInterface::quad2d_rotate(const string& ID, float rotation)
 	_core->getQuad2dEntityManager()->getEntity(ID)->rotate(rotation);
 }
 
-void EngineInterface::quad2d_scale(const string& ID, fvec2 size)
+void EngineInterface::quad2d_scale(const string& ID, const fvec2& size)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->scale(size);
 }
 
-void EngineInterface::quad2d_moveTo(const string& ID, fvec2 target, float speed)
+void EngineInterface::quad2d_moveTo(const string& ID, const fvec2& target, float speed)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->moveTo(target, speed);
 }
@@ -84,7 +84,7 @@ void EngineInterface::quad2d_rotateTo(const string& ID, float target, float spee
 	_core->getQuad2dEntityManager()->getEntity(ID)->rotateTo(target, speed);
 }
 
-void EngineInterface::quad2d_scaleTo(const string& ID, fvec2 target, float speed)
+void EngineInterface::quad2d_scaleTo(const string& ID, const fvec2& target, float speed)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->scaleTo(target, speed);
 }
@@ -99,12 +99,12 @@ void EngineInterface::quad2d_setTransparency(const string& ID, float value)
 	_core->getQuad2dEntityManager()->getEntity(ID)->setTransparency(value);
 }
 
-void EngineInterface::quad2d_setMinPosition(const string& ID, fvec2 value)
+void EngineInterface::quad2d_setMinPosition(const string& ID, const fvec2& value)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->setMinPosition(value);
 }
 
-void EngineInterface::quad2d_setMaxPosition(const string& ID, fvec2 value)
+void EngineInterface::quad2d_setMaxPosition(const string& ID, const fvec2& value)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->setMaxPosition(value);
 }
@@ -119,12 +119,12 @@ void EngineInterface::quad2d_setWireframeColor(const string& ID, const fvec3& va
 	_core->getQuad2dEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
 
-void EngineInterface::quad2d_setUvMultiplier(const string& ID, fvec2 value)
+void EngineInterface::quad2d_setUvMultiplier(const string& ID, const fvec2& value)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->setUvMultiplier(value);
 }
 
-void EngineInterface::quad2d_setUvOffset(const string& ID, fvec2 value)
+void EngineInterface::quad2d_setUvOffset(const string& ID, const fvec2& value)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->setUvOffset(value);
 }
@@ -144,7 +144,7 @@ const bool EngineInterface::quad2d_isExisting(const string& ID) const
 	return _core->getQuad2dEntityManager()->isEntityExisting(ID);
 }
 
-const fvec2 EngineInterface::quad2d_getPosition(const string& ID) const
+const fvec2& EngineInterface::quad2d_getPosition(const string& ID) const
 {
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getPosition();
 }
@@ -181,27 +181,27 @@ const fvec3& EngineInterface::quad2d_getWireframeColor(const string& ID) const
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getWireframeColor();
 }
 
-const fvec2 EngineInterface::quad2d_getSize(const string& ID) const
+const fvec2& EngineInterface::quad2d_getSize(const string& ID) const
 {
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getSize();
 }
 
-const fvec2 EngineInterface::quad2d_getMinPosition(const string& ID) const
+const fvec2& EngineInterface::quad2d_getMinPosition(const string& ID) const
 {
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getMinPosition();
 }
 
-const fvec2 EngineInterface::quad2d_getMaxPosition(const string& ID) const
+const fvec2& EngineInterface::quad2d_getMaxPosition(const string& ID) const
 {
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getMaxPosition();
 }
 
-const fvec2 EngineInterface::quad2d_getUvMultiplier(const string& ID) const
+const fvec2& EngineInterface::quad2d_getUvMultiplier(const string& ID) const
 {
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getUvMultiplier();
 }
 
-const fvec2 EngineInterface::quad2d_getUvOffset(const string& ID) const
+const fvec2& EngineInterface::quad2d_getUvOffset(const string& ID) const
 {
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getUvOffset();
 }

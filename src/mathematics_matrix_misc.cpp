@@ -14,13 +14,13 @@ const mat22 Math::invertMatrix(const mat22& matrix)
 	tempMatrix.f[2] = -matrix.f[2];
 	tempMatrix.f[3] = matrix.f[0];
 
-	mat22 newMatrix;
+	mat22 result;
 	for(unsigned int i = 0; i < 4; i++)
 	{
-		newMatrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
+		result.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat33 Math::invertMatrix(const mat33& matrix)
@@ -43,13 +43,13 @@ const mat33 Math::invertMatrix(const mat33& matrix)
 	tempMatrix.f[7] = ((matrix.m[2][0] * matrix.m[0][1]) - (matrix.m[0][0] * matrix.m[2][1]));
 	tempMatrix.f[8] = ((matrix.m[0][0] * matrix.m[1][1]) - (matrix.m[1][0] * matrix.m[0][1]));
 
-	mat33 newMatrix;
+	mat33 result;
 	for(unsigned int i = 0; i < 9; i++)
 	{
-		newMatrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
+		result.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::invertMatrix(const mat44& matrix)
@@ -174,43 +174,43 @@ const mat44 Math::invertMatrix(const mat44& matrix)
 		matrix.f[8] * matrix.f[1] * matrix.f[6] -
 		matrix.f[8] * matrix.f[2] * matrix.f[5];
 
-	mat44 newMatrix;
+	mat44 result;
 	for(unsigned int i = 0; i < 16; i++)
 	{
-		newMatrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
+		result.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat33 Math::transposeMatrix(const mat33& matrix)
 {
-	mat33 newMatrix;
+	mat33 result;
 
 	for(unsigned int r = 0; r < 3; r++)
 	{
 		for(unsigned c = 0; c < 3; c++)
 		{
-			newMatrix.m[r][c] = matrix.m[c][r];
+			result.m[r][c] = matrix.m[c][r];
 		}
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::transposeMatrix(const mat44& matrix)
 {
-	mat44 newMatrix;
+	mat44 result;
 
 	for(unsigned int r = 0; r < 4; r++)
 	{
 		for(unsigned int c = 0; c < 4; c++)
 		{
-			newMatrix.m[r][c] = matrix.m[c][r];
+			result.m[r][c] = matrix.m[c][r];
 		}
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const float Math::calculateDeterminant(const mat22& matrix)

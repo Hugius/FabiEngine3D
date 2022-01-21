@@ -111,43 +111,43 @@ mat44::mat44(const mat44& other)
 
 const fvec4 mat44::operator*(const fvec4& other) const
 {
-	fvec4 newVector;
+	fvec4 result;
 
-	newVector.x = ((this->m[0][0] * other.x) + (this->m[1][0] * other.y) + (this->m[2][0] * other.z) + (this->m[3][0] * other.w));
-	newVector.y = ((this->m[0][1] * other.x) + (this->m[1][1] * other.y) + (this->m[2][1] * other.z) + (this->m[3][1] * other.w));
-	newVector.z = ((this->m[0][2] * other.x) + (this->m[1][2] * other.y) + (this->m[2][2] * other.z) + (this->m[3][2] * other.w));
-	newVector.w = ((this->m[0][3] * other.x) + (this->m[1][3] * other.y) + (this->m[2][3] * other.z) + (this->m[3][3] * other.w));
+	result.x = ((this->m[0][0] * other.x) + (this->m[1][0] * other.y) + (this->m[2][0] * other.z) + (this->m[3][0] * other.w));
+	result.y = ((this->m[0][1] * other.x) + (this->m[1][1] * other.y) + (this->m[2][1] * other.z) + (this->m[3][1] * other.w));
+	result.z = ((this->m[0][2] * other.x) + (this->m[1][2] * other.y) + (this->m[2][2] * other.z) + (this->m[3][2] * other.w));
+	result.w = ((this->m[0][3] * other.x) + (this->m[1][3] * other.y) + (this->m[2][3] * other.z) + (this->m[3][3] * other.w));
 
-	return newVector;
+	return result;
 }
 
 const mat44 mat44::operator+(const mat44& other) const
 {
-	mat44 newMatrix;
+	mat44 result;
 
 	for(int i = 0; i < 16; i++)
 	{
-		newMatrix.f[i] = (this->f[i] + other.f[i]);
+		result.f[i] = (this->f[i] + other.f[i]);
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 mat44::operator-(const mat44& other) const
 {
-	mat44 newMatrix;
+	mat44 result;
 
 	for(int i = 0; i < 16; i++)
 	{
-		newMatrix.f[i] = (this->f[i] - other.f[i]);
+		result.f[i] = (this->f[i] - other.f[i]);
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 mat44::operator*(const mat44& other) const
 {
-	mat44 newMatrix(0.0f);
+	mat44 result(0.0f);
 
 	for(int column = 0; column < 4; column++)
 	{
@@ -155,10 +155,10 @@ const mat44 mat44::operator*(const mat44& other) const
 		{
 			for(int inner = 0; inner < 4; inner++)
 			{
-				newMatrix.m[row][column] += (this->m[inner][column] * other.m[row][inner]);
+				result.m[row][column] += (this->m[inner][column] * other.m[row][inner]);
 			}
 		}
 	}
 
-	return newMatrix;
+	return result;
 }

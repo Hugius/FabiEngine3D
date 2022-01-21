@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const fvec3& color)
+GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -71,12 +71,12 @@ const fvec3& GuiWindow::getInitialColor() const
 	return _initialColor;
 }
 
-const fvec2 GuiWindow::getInitialPosition() const
+const fvec2& GuiWindow::getInitialPosition() const
 {
 	return _initialPosition;
 }
 
-const fvec2 GuiWindow::getInitialSize() const
+const fvec2& GuiWindow::getInitialSize() const
 {
 	return _initialSize;
 }

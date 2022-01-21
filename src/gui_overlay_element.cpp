@@ -1,39 +1,39 @@
 #include "gui_overlay.hpp"
 #include "logger.hpp"
 
-void GuiOverlay::createScrollingList(const string& ID, fvec2 position, fvec2 size, const fvec3& color,
-									 const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, fvec2 charSize, bool isCentered)
+void GuiOverlay::createScrollingList(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color,
+									 const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
 {
 	_scrollingLists.push_back(make_shared<GuiScrollingList>(_fe3d, "overlay", ID, position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize, isCentered));
 }
 
-void GuiOverlay::createWriteField(const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor,
+void GuiOverlay::createWriteField(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor,
 								  bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 {
 	_writeFields.push_back(make_shared<GuiWriteField>(_fe3d, "overlay", ID, position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered));
 }
 
-void GuiOverlay::createButton(const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& hoverColor, string textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
+void GuiOverlay::createButton(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
 {
 	_buttons.push_back(make_shared<GuiButton>(_fe3d, "overlay", ID, position, size, color, hoverColor, textContent, textColor, textHoverColor, isCentered));
 }
 
-void GuiOverlay::createButton(const string& ID, fvec2 position, fvec2 size, const string& texturePath, const fvec3& hoverColor, bool isCentered)
+void GuiOverlay::createButton(const string& ID, const fvec2& position, const fvec2& size, const string& texturePath, const fvec3& hoverColor, bool isCentered)
 {
 	_buttons.push_back(make_shared<GuiButton>(_fe3d, "overlay", ID, position, size, texturePath, hoverColor, isCentered));
 }
 
-void GuiOverlay::createRectangle(const string& ID, fvec2 position, fvec2 size, const fvec3& color, bool isCentered)
+void GuiOverlay::createRectangle(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
 {
 	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, "overlay", ID, position, size, color, isCentered));
 }
 
-void GuiOverlay::createRectangle(const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered)
+void GuiOverlay::createRectangle(const string& ID, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
 {
 	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, "overlay", ID, position, size, texturePath, isCentered));
 }
 
-void GuiOverlay::createTextField(const string& ID, fvec2 position, fvec2 size, string textContent, const fvec3& textColor, bool isCentered)
+void GuiOverlay::createTextField(const string& ID, const fvec2& position, const fvec2& size, string textContent, const fvec3& textColor, bool isCentered)
 {
 	_textFields.push_back(make_shared<GuiTextField>(_fe3d, "overlay", ID, position, size, textContent, textColor, isCentered));
 }

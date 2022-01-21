@@ -131,7 +131,7 @@ void Text2dEntity::setContent(const string& value)
 	}
 }
 
-void Text2dEntity::setMinPosition(fvec2 value)
+void Text2dEntity::setMinPosition(const fvec2& value)
 {
 	_minPosition = value;
 
@@ -141,7 +141,7 @@ void Text2dEntity::setMinPosition(fvec2 value)
 	}
 }
 
-void Text2dEntity::setMaxPosition(fvec2 value)
+void Text2dEntity::setMaxPosition(const fvec2& value)
 {
 	_maxPosition = value;
 
@@ -271,7 +271,7 @@ void Text2dEntity::setWireframeColor(const fvec3& value)
 	}
 }
 
-void Text2dEntity::setPosition(fvec2 value)
+void Text2dEntity::setPosition(const fvec2& value)
 {
 	_position = value;
 	_positionTarget = value;
@@ -283,13 +283,13 @@ void Text2dEntity::setRotation(float value)
 	_rotationTarget = Math::limitAngle(value);
 }
 
-void Text2dEntity::setSize(fvec2 value)
+void Text2dEntity::setSize(const fvec2& value)
 {
 	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Text2dEntity::move(fvec2 value)
+void Text2dEntity::move(const fvec2& value)
 {
 	_position += value;
 	_positionTarget += value;
@@ -303,7 +303,7 @@ void Text2dEntity::rotate(float value)
 	_rotationTarget = Math::limitAngle(_rotationTarget);
 }
 
-void Text2dEntity::scale(fvec2 value)
+void Text2dEntity::scale(const fvec2& value)
 {
 	_size += value;
 	_sizeTarget += value;
@@ -311,7 +311,7 @@ void Text2dEntity::scale(fvec2 value)
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void Text2dEntity::moveTo(fvec2 target, float speed)
+void Text2dEntity::moveTo(const fvec2& target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
@@ -323,7 +323,7 @@ void Text2dEntity::rotateTo(float target, float speed)
 	_rotationTargetSpeed = speed;
 }
 
-void Text2dEntity::scaleTo(fvec2 target, float speed)
+void Text2dEntity::scaleTo(const fvec2& target, float speed)
 {
 	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
@@ -389,7 +389,7 @@ const bool Text2dEntity::isVerticallyMirrored() const
 	return _isVerticallyMirrored;
 }
 
-const fvec2 Text2dEntity::getPosition() const
+const fvec2& Text2dEntity::getPosition() const
 {
 	return _position;
 }
@@ -399,17 +399,17 @@ const float Text2dEntity::getRotation() const
 	return _rotation;
 }
 
-const fvec2 Text2dEntity::getSize() const
+const fvec2& Text2dEntity::getSize() const
 {
 	return _size;
 }
 
-const fvec2 Text2dEntity::getMinPosition() const
+const fvec2& Text2dEntity::getMinPosition() const
 {
 	return _minPosition;
 }
 
-const fvec2 Text2dEntity::getMaxPosition() const
+const fvec2& Text2dEntity::getMaxPosition() const
 {
 	return _maxPosition;
 }

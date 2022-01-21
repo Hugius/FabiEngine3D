@@ -2,172 +2,172 @@
 
 const mat44 Math::createTranslationMatrixX(float value)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[3][0] = value;
+	result.m[3][0] = value;
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createTranslationMatrixY(float value)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[3][1] = value;
+	result.m[3][1] = value;
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createTranslationMatrixZ(float value)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[3][2] = value;
+	result.m[3][2] = value;
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createTranslationMatrix(float x, float y, float z)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[3][0] = x;
-	newMatrix.m[3][1] = y;
-	newMatrix.m[3][2] = z;
+	result.m[3][0] = x;
+	result.m[3][1] = y;
+	result.m[3][2] = z;
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createScalingMatrix(float x, float y, float z)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[0][0] = x;
-	newMatrix.m[1][1] = y;
-	newMatrix.m[2][2] = z;
+	result.m[0][0] = x;
+	result.m[1][1] = y;
+	result.m[2][2] = z;
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createScalingMatrixX(float value)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[0][0] = value;
+	result.m[0][0] = value;
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createScalingMatrixY(float value)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[1][1] = value;
+	result.m[1][1] = value;
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createScalingMatrixZ(float value)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[2][2] = value;
+	result.m[2][2] = value;
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createRotationMatrix(float x, float y, float z, DirectionOrder order)
 {
-	mat44 newMatrix;
+	mat44 result;
 
 	if(order == DirectionOrder::XYZ)
 	{
-		newMatrix = (newMatrix * createRotationMatrixX(x));
-		newMatrix = (newMatrix * createRotationMatrixY(y));
-		newMatrix = (newMatrix * createRotationMatrixZ(z));
+		result = (result * createRotationMatrixX(x));
+		result = (result * createRotationMatrixY(y));
+		result = (result * createRotationMatrixZ(z));
 	}
 	else if(order == DirectionOrder::XZY)
 	{
-		newMatrix = (newMatrix * createRotationMatrixX(x));
-		newMatrix = (newMatrix * createRotationMatrixZ(z));
-		newMatrix = (newMatrix * createRotationMatrixY(y));
+		result = (result * createRotationMatrixX(x));
+		result = (result * createRotationMatrixZ(z));
+		result = (result * createRotationMatrixY(y));
 	}
 	else if(order == DirectionOrder::YXZ)
 	{
-		newMatrix = (newMatrix * createRotationMatrixY(y));
-		newMatrix = (newMatrix * createRotationMatrixX(x));
-		newMatrix = (newMatrix * createRotationMatrixZ(z));
+		result = (result * createRotationMatrixY(y));
+		result = (result * createRotationMatrixX(x));
+		result = (result * createRotationMatrixZ(z));
 	}
 	else if(order == DirectionOrder::YZX)
 	{
-		newMatrix = (newMatrix * createRotationMatrixY(y));
-		newMatrix = (newMatrix * createRotationMatrixZ(z));
-		newMatrix = (newMatrix * createRotationMatrixX(x));
+		result = (result * createRotationMatrixY(y));
+		result = (result * createRotationMatrixZ(z));
+		result = (result * createRotationMatrixX(x));
 	}
 	else if(order == DirectionOrder::ZXY)
 	{
-		newMatrix = (newMatrix * createRotationMatrixZ(z));
-		newMatrix = (newMatrix * createRotationMatrixX(x));
-		newMatrix = (newMatrix * createRotationMatrixY(y));
+		result = (result * createRotationMatrixZ(z));
+		result = (result * createRotationMatrixX(x));
+		result = (result * createRotationMatrixY(y));
 	}
 	else if(order == DirectionOrder::ZYX)
 	{
-		newMatrix = (newMatrix * createRotationMatrixZ(z));
-		newMatrix = (newMatrix * createRotationMatrixY(y));
-		newMatrix = (newMatrix * createRotationMatrixX(x));
+		result = (result * createRotationMatrixZ(z));
+		result = (result * createRotationMatrixY(y));
+		result = (result * createRotationMatrixX(x));
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createRotationMatrixX(float angle)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[1][1] = cos(angle);
-	newMatrix.m[1][2] = sin(angle);
-	newMatrix.m[2][1] = -sin(angle);
-	newMatrix.m[2][2] = cos(angle);
+	result.m[1][1] = cos(angle);
+	result.m[1][2] = sin(angle);
+	result.m[2][1] = -sin(angle);
+	result.m[2][2] = cos(angle);
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createRotationMatrixY(float angle)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[0][0] = cos(angle);
-	newMatrix.m[0][2] = -sin(angle);
-	newMatrix.m[2][0] = sin(angle);
-	newMatrix.m[2][2] = cos(angle);
+	result.m[0][0] = cos(angle);
+	result.m[0][2] = -sin(angle);
+	result.m[2][0] = sin(angle);
+	result.m[2][2] = cos(angle);
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createRotationMatrixZ(float angle)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[0][0] = cos(angle);
-	newMatrix.m[1][0] = -sin(angle);
-	newMatrix.m[0][1] = sin(angle);
-	newMatrix.m[1][1] = cos(angle);
+	result.m[0][0] = cos(angle);
+	result.m[1][0] = -sin(angle);
+	result.m[0][1] = sin(angle);
+	result.m[1][1] = cos(angle);
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createOrthographicProjectionMatrix(float left, float right, float bottom, float top, float near, float far)
 {
-	mat44 newMatrix;
+	mat44 result;
 
-	newMatrix.m[0][0] = 2.0f / (right - left);
-	newMatrix.m[1][1] = 2.0f / (top - bottom);
-	newMatrix.m[2][2] = -2.0f / (far - near);
-	newMatrix.m[3][0] = -((right + left) / (right - left));
-	newMatrix.m[3][1] = -((top + bottom) / (top - bottom));
-	newMatrix.m[3][2] = -((far + near) / (far - near));
+	result.m[0][0] = 2.0f / (right - left);
+	result.m[1][1] = 2.0f / (top - bottom);
+	result.m[2][2] = -2.0f / (far - near);
+	result.m[3][0] = -((right + left) / (right - left));
+	result.m[3][1] = -((top + bottom) / (top - bottom));
+	result.m[3][2] = -((far + near) / (far - near));
 
-	return newMatrix;
+	return result;
 };
 
 const mat44 Math::createViewMatrix(const fvec3& eye, const fvec3& center, const fvec3& up)
@@ -176,33 +176,33 @@ const mat44 Math::createViewMatrix(const fvec3& eye, const fvec3& center, const 
 	fvec3 rightVector = normalize(calculateCrossProduct(frontVector, up));
 	fvec3 upVector = calculateCrossProduct(rightVector, frontVector);
 
-	mat44 newMatrix(1.0f);
-	newMatrix.m[0][0] = rightVector.x;
-	newMatrix.m[1][0] = rightVector.y;
-	newMatrix.m[2][0] = rightVector.z;
-	newMatrix.m[0][1] = upVector.x;
-	newMatrix.m[1][1] = upVector.y;
-	newMatrix.m[2][1] = upVector.z;
-	newMatrix.m[0][2] = -(frontVector.x);
-	newMatrix.m[1][2] = -(frontVector.y);
-	newMatrix.m[2][2] = -(frontVector.z);
-	newMatrix.m[3][0] = -(calculateDotProduct(rightVector, eye));
-	newMatrix.m[3][1] = -(calculateDotProduct(upVector, eye));
-	newMatrix.m[3][2] = calculateDotProduct(frontVector, eye);
+	mat44 result(1.0f);
+	result.m[0][0] = rightVector.x;
+	result.m[1][0] = rightVector.y;
+	result.m[2][0] = rightVector.z;
+	result.m[0][1] = upVector.x;
+	result.m[1][1] = upVector.y;
+	result.m[2][1] = upVector.z;
+	result.m[0][2] = -(frontVector.x);
+	result.m[1][2] = -(frontVector.y);
+	result.m[2][2] = -(frontVector.z);
+	result.m[3][0] = -(calculateDotProduct(rightVector, eye));
+	result.m[3][1] = -(calculateDotProduct(upVector, eye));
+	result.m[3][2] = calculateDotProduct(frontVector, eye);
 
-	return newMatrix;
+	return result;
 }
 
 const mat44 Math::createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far)
 {
 	const float tanHalfFovY = tan(fov / 2.0f);
 
-	mat44 newMatrix(0.0f);
-	newMatrix.m[0][0] = 1.0f / (aspect * tanHalfFovY);
-	newMatrix.m[1][1] = 1.0f / tanHalfFovY;
-	newMatrix.m[2][2] = -((far + near) / (far - near));
-	newMatrix.m[2][3] = -1.0f;
-	newMatrix.m[3][2] = -((2.0f * far * near) / (far - near));
+	mat44 result(0.0f);
+	result.m[0][0] = 1.0f / (aspect * tanHalfFovY);
+	result.m[1][1] = 1.0f / tanHalfFovY;
+	result.m[2][2] = -((far + near) / (far - near));
+	result.m[2][3] = -1.0f;
+	result.m[3][2] = -((2.0f * far * near) / (far - near));
 
-	return newMatrix;
+	return result;
 }

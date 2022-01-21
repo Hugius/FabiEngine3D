@@ -7,8 +7,8 @@
 class GuiScrollingList final : public GuiRectangle
 {
 public:
-	GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const fvec3& color,
-					 const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, fvec2 charSize, bool isCentered);
+	GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color,
+					 const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered);
 
 	void update(bool isHoverable);
 	void createButton(const string& ID, string textContent);
@@ -31,8 +31,8 @@ private:
 	const fvec3 _textColor;
 	const fvec3 _textHoverColor;
 
-	const fvec2 _convertPosition(fvec2 position) const;
-	const fvec2 _convertSize(fvec2 size) const;
+	const fvec2 _convertPosition(const fvec2& position) const;
+	const fvec2 _convertSize(const fvec2& size) const;
 
 	const fvec2 _charSize;
 

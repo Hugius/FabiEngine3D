@@ -167,7 +167,7 @@ void EngineInterface::water_setSpecularIntensity(const string& ID, float value)
 	_core->getWaterEntityManager()->getEntity(ID)->setSpecularIntensity(value);
 }
 
-void EngineInterface::water_setSpeed(const string& ID, fvec2 value)
+void EngineInterface::water_setSpeed(const string& ID, const fvec2& value)
 {
 	_core->getWaterEntityManager()->getEntity(ID)->setSpeed(value);
 }
@@ -264,7 +264,7 @@ const float EngineInterface::water_getTextureRepeat(const string& ID) const
 	return _core->getWaterEntityManager()->getEntity(ID)->getTextureRepeat();
 }
 
-const fvec2 EngineInterface::water_getSpeed(const string& ID) const
+const fvec2& EngineInterface::water_getSpeed(const string& ID) const
 {
 	return _core->getWaterEntityManager()->getEntity(ID)->getSpeed();
 }

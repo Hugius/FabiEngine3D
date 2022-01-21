@@ -81,31 +81,31 @@ mat33::mat33(const float value)
 
 const mat33 mat33::operator+(const mat33& other) const
 {
-	mat33 newMatrix;
+	mat33 result;
 
 	for(int i = 0; i < 9; i++)
 	{
-		newMatrix.f[i] = (this->f[i] + other.f[i]);
+		result.f[i] = (this->f[i] + other.f[i]);
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat33 mat33::operator-(const mat33& other) const
 {
-	mat33 newMatrix;
+	mat33 result;
 
 	for(int i = 0; i < 9; i++)
 	{
-		newMatrix.f[i] = (this->f[i] - other.f[i]);
+		result.f[i] = (this->f[i] - other.f[i]);
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const mat33 mat33::operator*(const mat33& other) const
 {
-	mat33 newMatrix(0.0f);
+	mat33 result(0.0f);
 
 	for(int column = 0; column < 3; column++)
 	{
@@ -113,21 +113,21 @@ const mat33 mat33::operator*(const mat33& other) const
 		{
 			for(int inner = 0; inner < 3; inner++)
 			{
-				newMatrix.m[row][column] += (this->m[inner][column] * other.m[row][inner]);
+				result.m[row][column] += (this->m[inner][column] * other.m[row][inner]);
 			}
 		}
 	}
 
-	return newMatrix;
+	return result;
 }
 
 const fvec3 mat33::operator*(const fvec3& other) const
 {
-	fvec3 newVector;
+	fvec3 result;
 
-	newVector.x = ((this->m[0][0] * other.x) + (this->m[1][0] * other.y) + (this->m[2][0] * other.z));
-	newVector.y = ((this->m[0][1] * other.x) + (this->m[1][1] * other.y) + (this->m[2][1] * other.z));
-	newVector.z = ((this->m[0][2] * other.x) + (this->m[1][2] * other.y) + (this->m[2][2] * other.z));
+	result.x = ((this->m[0][0] * other.x) + (this->m[1][0] * other.y) + (this->m[2][0] * other.z));
+	result.y = ((this->m[0][1] * other.x) + (this->m[1][1] * other.y) + (this->m[2][1] * other.z));
+	result.z = ((this->m[0][2] * other.x) + (this->m[1][2] * other.y) + (this->m[2][2] * other.z));
 
-	return newVector;
+	return result;
 }

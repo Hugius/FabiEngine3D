@@ -14,7 +14,7 @@ public:
 	MeshPart(const string& ID);
 
 	void addPosition(const fvec3& value);
-	void addUv(fvec2 value);
+	void addUv(const fvec2& value);
 	void addNormal(const fvec3& value);
 	void addTangent(const fvec3& value);
 

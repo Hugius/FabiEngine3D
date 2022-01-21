@@ -22,7 +22,7 @@ public:
 	static const vector<string> getFilesFromDirectory(const string& path);
 	static const vector<string> getDirectoriesFromDirectory(const string& path);
 	static const string vec2str(ivec2 vec);
-	static const string vec2str(fvec2 vec);
+	static const string vec2str(const fvec2& vec);
 	static const string vec2str(const fvec3& vec);
 	static const string vec2str(const fvec4& vec);
 	static const string getRootDirectoryPath();
@@ -30,13 +30,13 @@ public:
 	static const string chooseExplorerDirectory(const string& startingDirectory);
 
 	static const fvec2 convertFromScreenCoords(ivec2 position);
-	static const ivec2 convertToScreenCoords(fvec2 position);
+	static const ivec2 convertToScreenCoords(const fvec2& position);
 	static const fvec2 calculateMinViewportPosition();
 	static const fvec2 calculateMaxViewportPosition();
-	static const fvec2 convertPositionToViewport(fvec2 position);
-	static const fvec2 convertPositionFromViewport(fvec2 position);
-	static const fvec2 convertSizeToViewport(fvec2 size);
-	static const fvec2 convertSizeFromViewport(fvec2 size);
+	static const fvec2 convertPositionToViewport(const fvec2& position);
+	static const fvec2 convertPositionFromViewport(const fvec2& position);
+	static const fvec2 convertSizeToViewport(const fvec2& size);
+	static const fvec2 convertSizeFromViewport(const fvec2& size);
 
 	static const float getWindowAspectRatio();
 

@@ -3,7 +3,7 @@
 #include <map>
 #include <windows.h>
 
-GuiWriteField::GuiWriteField(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+GuiWriteField::GuiWriteField(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 	:
 	GuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "", textColor, textHoverColor, isCentered),
 	_noNumbers(noNumbers),

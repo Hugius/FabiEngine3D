@@ -1,7 +1,7 @@
 #include "gui_screen.hpp"
 #include "logger.hpp"
 
-GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size)
+GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -63,7 +63,7 @@ const string& GuiScreen::getParentID() const
 	return _parentID;
 }
 
-const fvec2 GuiScreen::convertPosition(fvec2 position) const
+const fvec2 GuiScreen::convertPosition(const fvec2& position) const
 {
 	fvec2 screenPosition = _parentPosition;
 	fvec2 screenSize = _parentSize;
@@ -72,7 +72,7 @@ const fvec2 GuiScreen::convertPosition(fvec2 position) const
 	return buttonPosition;
 }
 
-const fvec2 GuiScreen::convertSize(fvec2 size) const
+const fvec2 GuiScreen::convertSize(const fvec2& size) const
 {
 	fvec2 screenPosition = _parentPosition;
 	fvec2 screenSize = _parentSize;
@@ -81,7 +81,7 @@ const fvec2 GuiScreen::convertSize(fvec2 size) const
 	return buttonSize;
 }
 
-const fvec4 GuiScreen::_convertDimensions(fvec2 position, fvec2 size) const
+const fvec4 GuiScreen::_convertDimensions(const fvec2& position, const fvec2& size) const
 {
 	fvec2 screenPosition = _parentPosition;
 	fvec2 screenSize = _parentSize;

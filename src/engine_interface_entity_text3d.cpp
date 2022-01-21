@@ -59,7 +59,7 @@ void EngineInterface::text3d_rotate(const string& ID, const fvec3& change)
 	_core->getText3dEntityManager()->getEntity(ID)->rotate(change);
 }
 
-void EngineInterface::text3d_scale(const string& ID, fvec2 change)
+void EngineInterface::text3d_scale(const string& ID, const fvec2& change)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->scale(change);
 }
@@ -74,7 +74,7 @@ void EngineInterface::text3d_rotateTo(const string& ID, const fvec3& target, flo
 	_core->getText3dEntityManager()->getEntity(ID)->rotateTo(target, speed);
 }
 
-void EngineInterface::text3d_scaleTo(const string& ID, fvec2 target, float speed)
+void EngineInterface::text3d_scaleTo(const string& ID, const fvec2& target, float speed)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->scaleTo(target, speed);
 }
@@ -89,7 +89,7 @@ void EngineInterface::text3d_setRotation(const string& ID, const fvec3& value)
 	_core->getText3dEntityManager()->getEntity(ID)->setRotation(value);
 }
 
-void EngineInterface::text3d_setSize(const string& ID, fvec2 value)
+void EngineInterface::text3d_setSize(const string& ID, const fvec2& value)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->setSize(value);
 }
@@ -204,17 +204,17 @@ const fvec3& EngineInterface::text3d_getRotation(const string& ID) const
 	return _core->getText3dEntityManager()->getEntity(ID)->getRotation();
 }
 
-const fvec2 EngineInterface::text3d_getSize(const string& ID) const
+const fvec2& EngineInterface::text3d_getSize(const string& ID) const
 {
-	return _core->getText3dEntityManager()->getEntity(ID)->getSize().x;
+	return _core->getText3dEntityManager()->getEntity(ID)->getSize();
 }
 
-const fvec2 EngineInterface::text3d_getUvMultiplier(const string& ID) const
+const fvec2& EngineInterface::text3d_getUvMultiplier(const string& ID) const
 {
 	return _core->getText3dEntityManager()->getEntity(ID)->getUvMultiplier();
 }
 
-const fvec2 EngineInterface::text3d_getUvOffset(const string& ID) const
+const fvec2& EngineInterface::text3d_getUvOffset(const string& ID) const
 {
 	return _core->getText3dEntityManager()->getEntity(ID)->getUvOffset();
 }

@@ -11,7 +11,7 @@ const fvec3 Math::calculateCrossProduct(const fvec3& firstVector, const fvec3& s
 	return crossVector;
 }
 
-const fvec2 Math::calculateDifference(fvec2 firstPosition, fvec2 secondPosition)
+const fvec2 Math::calculateDifference(const fvec2& firstPosition, const fvec2& secondPosition)
 {
 	float xDistance = fabsf(firstPosition.x - secondPosition.x);
 	float yDistance = fabsf(firstPosition.y - secondPosition.y);
@@ -38,14 +38,16 @@ const fvec4 Math::calculateDifference(const fvec4& firstPosition, const fvec4& s
 	return fvec4(xDistance, yDistance, zDistance, wDistance);
 }
 
-const fvec2 Math::normalize(fvec2 vector)
+const fvec2 Math::normalize(const fvec2& vector)
 {
-	float inverseMagnitude = (1.0f / calculateMagnitude(vector));
+	const float inverseMagnitude = (1.0f / calculateMagnitude(vector));
 
-	vector.x *= inverseMagnitude;
-	vector.y *= inverseMagnitude;
+	fvec2 result = vector;
 
-	return vector;
+	result.x *= inverseMagnitude;
+	result.y *= inverseMagnitude;
+
+	return result;
 }
 
 const fvec3 Math::normalize(const fvec3& vector)
@@ -62,7 +64,7 @@ const fvec4 Math::normalize(const fvec4& vector)
 	return fvec4((vector.x * inverseMagnitude), (vector.y * inverseMagnitude), (vector.z * inverseMagnitude), (vector.w * inverseMagnitude));
 }
 
-const float Math::calculateDistance(fvec2 firstPosition, fvec2 secondPosition)
+const float Math::calculateDistance(const fvec2& firstPosition, const fvec2& secondPosition)
 {
 	if(firstPosition == secondPosition)
 	{
@@ -104,7 +106,7 @@ const float Math::calculateDistance(const fvec4& firstPosition, const fvec4& sec
 	return calculateMagnitude(fvec4(xDistance, yDistance, zDistance, wDistance));
 }
 
-const float Math::calculateDotProduct(fvec2 firstVector, fvec2 secondVector)
+const float Math::calculateDotProduct(const fvec2& firstVector, const fvec2& secondVector)
 {
 	return ((firstVector.x * secondVector.x) + (firstVector.y * secondVector.y));
 }
@@ -119,7 +121,7 @@ const float Math::calculateDotProduct(const fvec4& firstVector, const fvec4& sec
 	return ((firstVector.x * secondVector.x) + (firstVector.y * secondVector.y) + (firstVector.z * secondVector.z) + (firstVector.w * secondVector.w));
 }
 
-const float Math::calculateMagnitude(fvec2 vector)
+const float Math::calculateMagnitude(const fvec2& vector)
 {
 	return sqrtf((vector.x * vector.x) + (vector.y * vector.y));
 }

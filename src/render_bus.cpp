@@ -81,7 +81,7 @@ void RenderBus::setShadowMatrix(const mat44& value)
 	_shadowMatrix = value;
 }
 
-void RenderBus::setFlareSourceUv(fvec2 value)
+void RenderBus::setFlareSourceUv(const fvec2& value)
 {
 	_flareSourceUv = value;
 }
@@ -474,7 +474,7 @@ const mat44& RenderBus::getShadowMatrix() const
 	return _shadowMatrix;
 }
 
-const fvec2 RenderBus::getFlareSourceUv() const
+const fvec2& RenderBus::getFlareSourceUv() const
 {
 	return _flareSourceUv;
 }

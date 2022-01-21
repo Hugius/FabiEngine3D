@@ -54,21 +54,21 @@ public:
 	static const fvec3 normalize(const fvec3& vector);
 
 	static const fvec2 calculateAverage(const vector<fvec2>& values);
-	static const fvec2 calculateDifference(fvec2 firstPosition, fvec2 secondPosition);
-	static const fvec2 normalize(fvec2 vector);
-	static const fvec2 convertFromNdc(fvec2 position);
-	static const fvec2 convertToNdc(fvec2 position);
+	static const fvec2 calculateDifference(const fvec2& firstPosition, const fvec2& secondPosition);
+	static const fvec2 normalize(const fvec2& vector);
+	static const fvec2 convertFromNdc(const fvec2& position);
+	static const fvec2 convertToNdc(const fvec2& position);
 
 	static const float calculateDeterminant(const mat22& matrix);
 	static const float calculateDeterminant(const mat33& matrix);
 	static const float calculateDeterminant(const mat44& matrix);
-	static const float calculateDistance(fvec2 firstPosition, fvec2 secondPosition);
+	static const float calculateDistance(const fvec2& firstPosition, const fvec2& secondPosition);
 	static const float calculateDistance(const fvec3& firstPosition, const fvec3& secondPosition);
 	static const float calculateDistance(const fvec4& firstPosition, const fvec4& secondPosition);
-	static const float calculateDotProduct(fvec2 firstVector, fvec2 secondVector);
+	static const float calculateDotProduct(const fvec2& firstVector, const fvec2& secondVector);
 	static const float calculateDotProduct(const fvec3& firstVector, const fvec3& secondVector);
 	static const float calculateDotProduct(const fvec4& firstVector, const fvec4& secondVector);
-	static const float calculateMagnitude(fvec2 vector);
+	static const float calculateMagnitude(const fvec2& vector);
 	static const float calculateMagnitude(const fvec3& vector);
 	static const float calculateMagnitude(const fvec4& vector);
 	static const float calculateAngleDifference(float firstAngle, float secondAngle);
@@ -86,7 +86,7 @@ public:
 	static const int calculateAverage(const vector<int>& values);
 	static const int getRandomNumber(int min, int max);
 
-	static const bool isNormalized(fvec2 vector);
+	static const bool isNormalized(const fvec2& vector);
 	static const bool isNormalized(const fvec3& vector);
 	static const bool isNormalized(const fvec4& vector);
 

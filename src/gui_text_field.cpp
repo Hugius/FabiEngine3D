@@ -1,6 +1,6 @@
 #include "gui_text_field.hpp"
 
-GuiTextField::GuiTextField(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, string textContent, const fvec3& color, bool isCentered)
+GuiTextField::GuiTextField(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -53,12 +53,12 @@ void GuiTextField::updateInitialColor()
 	_initialColor = _fe3d->text2d_getColor(_entityID);
 }
 
-const fvec2 GuiTextField::getInitialPosition() const
+const fvec2& GuiTextField::getInitialPosition() const
 {
 	return _initialPosition;
 }
 
-const fvec2 GuiTextField::getInitialSize() const
+const fvec2& GuiTextField::getInitialSize() const
 {
 	return _initialSize;
 }

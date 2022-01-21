@@ -6,11 +6,11 @@
 class GuiViewport final
 {
 public:
-	GuiViewport(shared_ptr<EngineInterface> fe3d, const string& ID, fvec2 position, fvec2 size, const fvec3& color);
+	GuiViewport(shared_ptr<EngineInterface> fe3d, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color);
 	~GuiViewport();
 
 	void update(bool isHoverable);
-	void createWindow(const string& ID, fvec2 position, fvec2 size, const fvec3& color);
+	void createWindow(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color);
 	void deleteWindow(const string& ID);
 
 	const string& getID();
@@ -18,8 +18,8 @@ public:
 
 	const fvec3& getInitialColor() const;
 
-	const fvec2 getInitialPosition() const;
-	const fvec2 getInitialSize() const;
+	const fvec2& getInitialPosition() const;
+	const fvec2& getInitialSize() const;
 
 	const bool isHovered() const;
 

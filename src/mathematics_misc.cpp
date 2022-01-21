@@ -114,6 +114,7 @@ const unsigned int Math::calculateAverage(const vector<unsigned int>& values)
 const unsigned int Math::getRandomNumber(unsigned int min, unsigned int max)
 {
 	uniform_int_distribution<unsigned int> dist(min, max);
+
 	return dist(_generator);
 }
 
@@ -147,16 +148,18 @@ const float Math::getPI()
 const float Math::getRandomNumber(float min, float max)
 {
 	uniform_real_distribution<float> dist(min, max);
+
 	return dist(_generator);
 }
 
 const int Math::getRandomNumber(int min, int max)
 {
 	uniform_int_distribution<int> dist(min, max);
+
 	return dist(_generator);
 }
 
-const bool Math::isNormalized(fvec2 vector)
+const bool Math::isNormalized(const fvec2& vector)
 {
 	return (calculateMagnitude(vector) == 1.0f);
 }
@@ -171,20 +174,24 @@ const bool Math::isNormalized(const fvec4& vector)
 	return (calculateMagnitude(vector) == 1.0f);
 }
 
-const fvec2 Math::convertToNdc(fvec2 position)
+const fvec2 Math::convertToNdc(const fvec2& position)
 {
-	position.x = ((position.x * 2.0f) - 1.0f);
-	position.y = ((position.y * 2.0f) - 1.0f);
+	fvec2 result = position;
 
-	return fvec2(position.x, position.y);
+	result.x = ((position.x * 2.0f) - 1.0f);
+	result.y = ((position.y * 2.0f) - 1.0f);
+
+	return result;
 }
 
-const fvec2 Math::convertFromNdc(fvec2 position)
+const fvec2 Math::convertFromNdc(const fvec2& position)
 {
-	position.x += 1.0f;
-	position.y += 1.0f;
-	position.x /= 2.0f;
-	position.y /= 2.0f;
+	fvec2 result = position;
 
-	return fvec2(position.x, position.y);
+	result.x += 1.0f;
+	result.y += 1.0f;
+	result.x /= 2.0f;
+	result.y /= 2.0f;
+
+	return result;
 }

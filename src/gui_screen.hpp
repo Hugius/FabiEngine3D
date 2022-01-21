@@ -10,18 +10,18 @@
 class GuiScreen final
 {
 public:
-	GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
+	GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size);
 
 	void update(bool isHoverable);
 	void show();
 	void hide();
-	void createScrollingList(const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, fvec2 charSize, bool isCentered);
-	void createWriteField(const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
-	void createButton(const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& hoverColor, string textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered);
-	void createButton(const string& ID, fvec2 position, fvec2 size, const string& texturePath, const fvec3& hoverColor, bool isCentered);
-	void createRectangle(const string& ID, fvec2 position, fvec2 size, const fvec3& color, bool isCentered);
-	void createRectangle(const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered);
-	void createTextField(const string& ID, fvec2 position, fvec2 size, string textContent, const fvec3& textColor, bool isCentered);
+	void createScrollingList(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered);
+	void createWriteField(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
+	void createButton(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, string textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered);
+	void createButton(const string& ID, const fvec2& position, const fvec2& size, const string& texturePath, const fvec3& hoverColor, bool isCentered);
+	void createRectangle(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered);
+	void createRectangle(const string& ID, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered);
+	void createTextField(const string& ID, const fvec2& position, const fvec2& size, string textContent, const fvec3& textColor, bool isCentered);
 	void deleteScrollingList(const string& ID);
 	void deleteWriteField(const string& ID);
 	void deleteButton(const string& ID);
@@ -31,8 +31,8 @@ public:
 	const string& getID() const;
 	const string& getParentID() const;
 
-	const fvec2 convertPosition(fvec2 position) const;
-	const fvec2 convertSize(fvec2 size) const;
+	const fvec2 convertPosition(const fvec2& position) const;
+	const fvec2 convertSize(const fvec2& size) const;
 
 	const bool isScrollingListExisting(const string& ID) const;
 	const bool isWriteFieldExisting(const string& ID) const;
@@ -52,7 +52,7 @@ public:
 	const vector<shared_ptr<GuiTextField>>& getTextFields() const;
 
 private:
-	const fvec4 _convertDimensions(fvec2 position, fvec2 size) const;
+	const fvec4 _convertDimensions(const fvec2& position, const fvec2& size) const;
 
 	fvec2 _parentPosition;
 	fvec2 _parentSize;

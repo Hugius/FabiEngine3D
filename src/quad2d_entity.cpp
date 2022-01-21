@@ -103,7 +103,7 @@ void Quad2dEntity::setWireframeColor(const fvec3& value)
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void Quad2dEntity::setPosition(fvec2 value)
+void Quad2dEntity::setPosition(const fvec2& value)
 {
 	_position = value;
 	_positionTarget = value;
@@ -115,13 +115,13 @@ void Quad2dEntity::setRotation(float value)
 	_rotationTarget = Math::limitAngle(value);
 }
 
-void Quad2dEntity::setSize(fvec2 value)
+void Quad2dEntity::setSize(const fvec2& value)
 {
 	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Quad2dEntity::move(fvec2 value)
+void Quad2dEntity::move(const fvec2& value)
 {
 	_position += value;
 	_positionTarget += value;
@@ -135,7 +135,7 @@ void Quad2dEntity::rotate(float value)
 	_rotationTarget = Math::limitAngle(_rotationTarget);
 }
 
-void Quad2dEntity::scale(fvec2 value)
+void Quad2dEntity::scale(const fvec2& value)
 {
 	_size += value;
 	_sizeTarget += value;
@@ -143,7 +143,7 @@ void Quad2dEntity::scale(fvec2 value)
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void Quad2dEntity::moveTo(fvec2 target, float speed)
+void Quad2dEntity::moveTo(const fvec2& target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
@@ -155,18 +155,18 @@ void Quad2dEntity::rotateTo(float target, float speed)
 	_rotationTargetSpeed = speed;
 }
 
-void Quad2dEntity::scaleTo(fvec2 target, float speed)
+void Quad2dEntity::scaleTo(const fvec2& target, float speed)
 {
 	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
 }
 
-void Quad2dEntity::setMinPosition(fvec2 value)
+void Quad2dEntity::setMinPosition(const fvec2& value)
 {
 	_minPosition = value;
 }
 
-void Quad2dEntity::setMaxPosition(fvec2 value)
+void Quad2dEntity::setMaxPosition(const fvec2& value)
 {
 	_maxPosition = value;
 }
@@ -176,12 +176,12 @@ void Quad2dEntity::setDepth(unsigned int value)
 	_depth = value;
 }
 
-void Quad2dEntity::setUvMultiplier(fvec2 value)
+void Quad2dEntity::setUvMultiplier(const fvec2& value)
 {
 	_uvMultiplier = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Quad2dEntity::setUvOffset(fvec2 value)
+void Quad2dEntity::setUvOffset(const fvec2& value)
 {
 	_uvOffset = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
@@ -246,7 +246,7 @@ const mat44& Quad2dEntity::getTransformationMatrix() const
 	return _transformationMatrix;
 }
 
-const fvec2 Quad2dEntity::getPosition() const
+const fvec2& Quad2dEntity::getPosition() const
 {
 	return _position;
 }
@@ -256,27 +256,27 @@ const float Quad2dEntity::getRotation() const
 	return _rotation;
 }
 
-const fvec2 Quad2dEntity::getSize() const
+const fvec2& Quad2dEntity::getSize() const
 {
 	return _size;
 }
 
-const fvec2 Quad2dEntity::getMinPosition() const
+const fvec2& Quad2dEntity::getMinPosition() const
 {
 	return _minPosition;
 }
 
-const fvec2 Quad2dEntity::getMaxPosition() const
+const fvec2& Quad2dEntity::getMaxPosition() const
 {
 	return _maxPosition;
 }
 
-const fvec2 Quad2dEntity::getUvMultiplier() const
+const fvec2& Quad2dEntity::getUvMultiplier() const
 {
 	return _uvMultiplier;
 }
 
-const fvec2 Quad2dEntity::getUvOffset() const
+const fvec2& Quad2dEntity::getUvOffset() const
 {
 	return _uvOffset;
 }

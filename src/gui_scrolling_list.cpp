@@ -4,7 +4,7 @@
 
 #include <algorithm>
 
-GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, fvec2 charSize, bool isCentered)
+GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
 	:
 	GuiRectangle(fe3d, parentID + "_scrollingList", ID, position, size, color, isCentered),
 	_buttonColor(buttonColor),
@@ -181,7 +181,7 @@ void GuiScrollingList::_updateButtons(bool isHoverable)
 	}
 }
 
-const fvec2 GuiScrollingList::_convertPosition(fvec2 position) const
+const fvec2 GuiScrollingList::_convertPosition(const fvec2& position) const
 {
 	fvec2 listPosition = _fe3d->quad2d_getPosition(_entityID);
 	fvec2 listSize = _fe3d->quad2d_getSize(_entityID);
@@ -190,7 +190,7 @@ const fvec2 GuiScrollingList::_convertPosition(fvec2 position) const
 	return buttonPosition;
 }
 
-const fvec2 GuiScrollingList::_convertSize(fvec2 size) const
+const fvec2 GuiScrollingList::_convertSize(const fvec2& size) const
 {
 	fvec2 listPosition = _fe3d->quad2d_getPosition(_entityID);
 	fvec2 listSize = _fe3d->quad2d_getSize(_entityID);

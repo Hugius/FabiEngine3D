@@ -1,6 +1,6 @@
 #include "gui_rectangle.hpp"
 
-GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const fvec3& color, bool isCentered)
+GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -16,7 +16,7 @@ GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& paren
 	_fe3d->quad2d_setColor(_entityID, color);
 }
 
-GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered)
+GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -57,12 +57,12 @@ void GuiRectangle::updateInitialColor()
 	_initialColor = _fe3d->quad2d_getColor(_entityID);
 }
 
-const fvec2 GuiRectangle::getInitialPosition() const
+const fvec2& GuiRectangle::getInitialPosition() const
 {
 	return _initialPosition;
 }
 
-const fvec2 GuiRectangle::getInitialSize() const
+const fvec2& GuiRectangle::getInitialSize() const
 {
 	return _initialSize;
 }

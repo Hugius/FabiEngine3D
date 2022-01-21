@@ -347,7 +347,7 @@ void Text3dEntity::setRotation(const fvec3& value)
 	_rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
-void Text3dEntity::setSize(fvec2 value)
+void Text3dEntity::setSize(const fvec2& value)
 {
 	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
@@ -367,7 +367,7 @@ void Text3dEntity::rotate(const fvec3& value)
 	_rotationTarget = fvec3(Math::limitAngle(_rotationTarget.x), Math::limitAngle(_rotationTarget.y), Math::limitAngle(_rotationTarget.z));
 }
 
-void Text3dEntity::scale(fvec2 value)
+void Text3dEntity::scale(const fvec2& value)
 {
 	_size += value;
 	_sizeTarget += value;
@@ -387,7 +387,7 @@ void Text3dEntity::rotateTo(const fvec3& target, float speed)
 	_rotationTargetSpeed = speed;
 }
 
-void Text3dEntity::scaleTo(fvec2 target, float speed)
+void Text3dEntity::scaleTo(const fvec2& target, float speed)
 {
 	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
@@ -433,17 +433,17 @@ const fvec3& Text3dEntity::getRotation() const
 	return _rotation;
 }
 
-const fvec2 Text3dEntity::getSize() const
+const fvec2& Text3dEntity::getSize() const
 {
 	return _size;
 }
 
-const fvec2 Text3dEntity::getUvMultiplier() const
+const fvec2& Text3dEntity::getUvMultiplier() const
 {
 	return _uvMultiplier;
 }
 
-const fvec2 Text3dEntity::getUvOffset() const
+const fvec2& Text3dEntity::getUvOffset() const
 {
 	return _uvOffset;
 }

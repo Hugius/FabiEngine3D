@@ -21,9 +21,9 @@ public:
 private:
 	bool _mustPromptOnExit = false;
 
-	static inline constexpr fvec4 RENDER_COLOR = fvec4(0.0f, 0.0f, 0.0f, 1.0f);
+	static inline const fvec4 RENDER_COLOR = fvec4(0.0f, 0.0f, 0.0f, 1.0f);
 
-	static inline constexpr fvec2 CURSOR_SIZE = fvec2(0.075f);
+	static inline const fvec2 CURSOR_SIZE = fvec2(0.075f);
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 

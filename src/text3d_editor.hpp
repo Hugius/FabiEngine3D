@@ -32,7 +32,7 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	static inline constexpr string TEXT_CONTENT = "Text123";
+	static inline const string TEXT_CONTENT = "Text123";
 	vector<string> _loadedTextIDs;
 	string _hoveredTextID = "";
 	string _currentTextID = "";

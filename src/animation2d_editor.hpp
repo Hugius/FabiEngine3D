@@ -81,7 +81,7 @@ private:
 
 	shared_ptr<Animation2d> _getAnimation(const string& ID) const;
 
-	static inline constexpr string PREVIEW_QUAD_ID = "@@preview_quad3d";
+	static inline const string PREVIEW_QUAD_ID = "@@preview_quad3d";
 	set<pair<string, string>> _quad3dAnimationsToStop;
 	set<pair<string, string>> _quad3dAnimationsToStart;
 	set<pair<string, string>> _quad2dAnimationsToStop;
@@ -90,7 +90,7 @@ private:
 	string _currentAnimationID = "";
 	string _currentProjectID = "";
 
-	static inline constexpr fvec3 PREVIEW_QUAD_POSITION = fvec3(0.0f, 0.0f, -0.75f);
+	static inline const fvec3 PREVIEW_QUAD_POSITION = fvec3(0.0f, 0.0f, -0.75f);
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;

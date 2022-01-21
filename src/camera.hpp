@@ -71,7 +71,7 @@ private:
 	mat44 _viewMatrix = mat44(1.0f);
 	mat44 _projectionMatrix = mat44(1.0f);
 
-	static inline constexpr fvec3 DEFAULT_UP_VECTOR = fvec3(0.0f, 1.0f, 0.0f);
+	static inline const fvec3 DEFAULT_UP_VECTOR = fvec3(0.0f, 1.0f, 0.0f);
 	fvec3 _upVector = fvec3(0.0f);
 	fvec3 _frontVector = fvec3(0.0f);
 	fvec3 _rightVector = fvec3(0.0f);

@@ -26,7 +26,7 @@ public:
 
 	static const sockaddr_in composeSocketAddress(const string& IP, const string& port);
 
-	static inline constexpr string SERVER_PORT = "61295";
+	static inline const string SERVER_PORT = "61295";
 
 	static inline constexpr unsigned int PORT_DIGIT_COUNT = 5;
 	static inline constexpr unsigned int MAX_PING_COUNT = 10;

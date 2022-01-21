@@ -80,7 +80,7 @@ public:
 	const shared_ptr<TextureBuffer> getFontMap() const;
 
 private:
-	static inline constexpr map<char, ivec2> _fontMapIndices =
+	static inline const map<char, ivec2> _fontMapIndices =
 	{
 		{' ', ivec2(0, 5)},
 		{'!', ivec2(1, 5)},

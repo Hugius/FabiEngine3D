@@ -23,9 +23,9 @@ private:
 
 	vector<pair<string, string>> _consoleMessageQueue;
 
-	static inline constexpr fvec3 FRAME_COLOR = fvec3(0.0025f);
+	static inline const fvec3 FRAME_COLOR = fvec3(0.0025f);
 
-	static inline constexpr fvec2 CHAR_SIZE = fvec2(0.01f, 0.03f);
+	static inline const fvec2 CHAR_SIZE = fvec2(0.01f, 0.03f);
 
 	static inline constexpr float Y_OFFSET = 0.2f;
 	float _scrollingAcceleration = 0.0f;

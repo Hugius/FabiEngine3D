@@ -35,8 +35,8 @@ void Logger::_printPrefix(MessageType type)
 	delete[] rawTimestamp;
 
 	SetConsoleTextAttribute(console, 6);
-	cout << "[" + LEVEL_STRING[static_cast<unsigned int>(type)] + "]";
-	oss << "[" + LEVEL_STRING[static_cast<unsigned int>(type)] + "]";
+	cout << "[" + TYPE_STRING[static_cast<unsigned int>(type)] + "]";
+	oss << "[" + TYPE_STRING[static_cast<unsigned int>(type)] + "]";
 	SetConsoleTextAttribute(console, 12);
 	cout << "[" << timestamp << "]";
 	oss << "[" << timestamp << "]";

@@ -17,7 +17,7 @@ public:
 	const shared_ptr<GuiViewport> getTopViewport();
 	const shared_ptr<GuiOverlay> getOverlay();
 
-	static inline constexpr fvec3 FRAME_COLOR = fvec3(0.025f);
+	static inline const fvec3 FRAME_COLOR = fvec3(0.025f);
 
 private:
 	shared_ptr<EngineInterface> _fe3d = nullptr;

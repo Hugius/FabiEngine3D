@@ -34,7 +34,7 @@ private:
 	string _hoveredSoundID = "";
 	string _currentProjectID = "";
 
-	static inline constexpr fvec3 ICON_QUAD_POSITION = fvec3(0.0f, 0.0f, -1.5f);
+	static inline const fvec3 ICON_QUAD_POSITION = fvec3(0.0f, 0.0f, -1.5f);
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;

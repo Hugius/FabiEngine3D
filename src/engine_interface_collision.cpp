@@ -91,49 +91,46 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 
 	for(const auto& [key, other] : _core->getAabbEntityManager()->getEntities())
 	{
-		if(other->getID().size() >= otherID.size())
+		if(other->getID().substr(0, otherID.size()) != otherID)
 		{
-			if(other->getID().substr(0, otherID.size()) != otherID)
-			{
-				continue;
-			}
+			continue;
+		}
 
-			if(other->getParentEntityID() == self->getParentEntityID())
-			{
-				continue;
-			}
+		if(other->getParentEntityID() == self->getParentEntityID())
+		{
+			continue;
+		}
 
-			if(!other->isCollisionResponsive() || !other->isVisible())
-			{
-				continue;
-			}
+		if(!other->isCollisionResponsive() || !other->isVisible())
+		{
+			continue;
+		}
 
-			fvec3 otherPosition = other->getPosition();
-			fvec3 otherSize = other->getSize() / 2.0f;
-			if
-				(
-				((selfPosition.x > otherPosition.x - otherSize.x && selfPosition.x < otherPosition.x + otherSize.x) ||
-				(selfPosition.x - selfSize.x > otherPosition.x - otherSize.x && selfPosition.x - selfSize.x < otherPosition.x + otherSize.x) ||
-				(selfPosition.x + selfSize.x > otherPosition.x - otherSize.x && selfPosition.x + selfSize.x < otherPosition.x + otherSize.x) ||
-				(selfPosition.x - selfSize.x <= otherPosition.x - otherSize.x && selfPosition.x + selfSize.x >= otherPosition.x + otherSize.x))
+		fvec3 otherPosition = other->getPosition();
+		fvec3 otherSize = other->getSize() / 2.0f;
+		if
+			(
+			((selfPosition.x > otherPosition.x - otherSize.x && selfPosition.x < otherPosition.x + otherSize.x) ||
+			(selfPosition.x - selfSize.x > otherPosition.x - otherSize.x && selfPosition.x - selfSize.x < otherPosition.x + otherSize.x) ||
+			(selfPosition.x + selfSize.x > otherPosition.x - otherSize.x && selfPosition.x + selfSize.x < otherPosition.x + otherSize.x) ||
+			(selfPosition.x - selfSize.x <= otherPosition.x - otherSize.x && selfPosition.x + selfSize.x >= otherPosition.x + otherSize.x))
 
-				&&
+			&&
 
-				((selfPosition.y + selfSize.y > otherPosition.y && selfPosition.y + selfSize.y < otherPosition.y + (otherSize.y * 2.0f)) ||
-				(selfPosition.y > otherPosition.y && selfPosition.y < otherPosition.y + (otherSize.y * 2.0f)) ||
-				(selfPosition.y + (selfSize.y * 2.0f) > otherPosition.y && selfPosition.y + (selfSize.y * 2.0f) < otherPosition.y + (otherSize.y * 2.0f)) ||
-				(selfPosition.y <= otherPosition.y && selfPosition.y + (selfSize.y * 2.0f) >= otherPosition.y + (otherSize.y * 2.0f)))
+			((selfPosition.y + selfSize.y > otherPosition.y && selfPosition.y + selfSize.y < otherPosition.y + (otherSize.y * 2.0f)) ||
+			(selfPosition.y > otherPosition.y && selfPosition.y < otherPosition.y + (otherSize.y * 2.0f)) ||
+			(selfPosition.y + (selfSize.y * 2.0f) > otherPosition.y && selfPosition.y + (selfSize.y * 2.0f) < otherPosition.y + (otherSize.y * 2.0f)) ||
+			(selfPosition.y <= otherPosition.y && selfPosition.y + (selfSize.y * 2.0f) >= otherPosition.y + (otherSize.y * 2.0f)))
 
-				&&
+			&&
 
-				((selfPosition.z > otherPosition.z - otherSize.z && selfPosition.z < otherPosition.z + otherSize.z) ||
-				(selfPosition.z - selfSize.z > otherPosition.z - otherSize.z && selfPosition.z - selfSize.z < otherPosition.z + otherSize.z) ||
-				(selfPosition.z + selfSize.z > otherPosition.z - otherSize.z && selfPosition.z + selfSize.z < otherPosition.z + otherSize.z) ||
-				(selfPosition.z - selfSize.z <= otherPosition.z - otherSize.z && selfPosition.z + selfSize.z >= otherPosition.z + otherSize.z))
-				)
-			{
-				return other->getID();
-			}
+			((selfPosition.z > otherPosition.z - otherSize.z && selfPosition.z < otherPosition.z + otherSize.z) ||
+			(selfPosition.z - selfSize.z > otherPosition.z - otherSize.z && selfPosition.z - selfSize.z < otherPosition.z + otherSize.z) ||
+			(selfPosition.z + selfSize.z > otherPosition.z - otherSize.z && selfPosition.z + selfSize.z < otherPosition.z + otherSize.z) ||
+			(selfPosition.z - selfSize.z <= otherPosition.z - otherSize.z && selfPosition.z + selfSize.z >= otherPosition.z + otherSize.z))
+			)
+		{
+			return other->getID();
 		}
 	}
 
@@ -146,12 +143,9 @@ const string EngineInterface::collision_checkCameraWithEntities(const string& ID
 	{
 		if(entity->hasCollided())
 		{
-			if(entity->getID().size() >= ID.size())
+			if(entity->getID().substr(0, ID.size()) == ID)
 			{
-				if(entity->getID().substr(0, ID.size()) == ID)
-				{
-					return entity->getID();
-				}
+				return entity->getID();
 			}
 		}
 	}
@@ -196,12 +190,9 @@ const bool EngineInterface::collision_checkCameraWithEntitiesDirection(const str
 		{
 			if(direction == entity->getCollisionDirection())
 			{
-				if(entity->getID().size() >= ID.size())
+				if(entity->getID().substr(0, ID.size()) == ID)
 				{
-					if(entity->getID().substr(0, ID.size()) == ID)
-					{
-						return true;
-					}
+					return true;
 				}
 			}
 		}

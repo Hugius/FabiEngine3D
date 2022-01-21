@@ -34,9 +34,9 @@ private:
 	string _hoveredTextID = "";
 	string _currentProjectID = "";
 
-	static inline constexpr string TEXT_CONTENT = "Text123";
+	static inline const string TEXT_CONTENT = "Text123";
 
-	static inline constexpr fvec2 TEXT_SIZE = fvec2(1.0f, 0.2f);
+	static inline const fvec2 TEXT_SIZE = fvec2(1.0f, 0.2f);
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;

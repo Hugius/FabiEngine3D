@@ -5,7 +5,7 @@
 
 using std::string;
 
-class Sound2d final
+class Sound2d
 {
 public:
 	Sound2d(const string& ID, const string& audioPath, Mix_Chunk* dataPointer);

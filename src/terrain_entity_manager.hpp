@@ -34,7 +34,7 @@ private:
 
 	string _selectedID = "";
 
-	static inline const float MAX_SIZE = 1024.0f;
+	static inline constexpr float MAX_SIZE = 1024.0f;
 
 	unordered_map<string, shared_ptr<TerrainEntity>> _entities;
 

@@ -36,7 +36,7 @@ private:
 	fvec3 _frontVector = fvec3(0.0f);
 	fvec3 _color = fvec3(1.0f);
 
-	static inline const float MAX_ANGLE = 45.0f;
+	static inline constexpr float MAX_ANGLE = 45.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _yaw = 0.0f;
 	float _pitch = 0.0f;

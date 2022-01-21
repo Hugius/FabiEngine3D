@@ -37,7 +37,7 @@ private:
 	fvec3 _eyePosition = fvec3(0.0f);
 	fvec3 _centerPosition = fvec3(0.0f);
 
-	static inline const float NEAR_DISTANCE = 0.01f;
+	static inline constexpr float NEAR_DISTANCE = 0.01f;
 	float _size = 0.0f;
 	float _reach = 0.0f;
 	float _lightness = 0.0f;

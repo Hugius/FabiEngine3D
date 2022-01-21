@@ -31,7 +31,7 @@ public:
 	shared_ptr<ModelEntity> getEntity(const string& ID);
 
 private:
-	static inline const float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
+	static inline constexpr float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
 
 	unordered_map<string, shared_ptr<ModelEntity>> _entities;
 

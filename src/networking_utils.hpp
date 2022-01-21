@@ -26,13 +26,13 @@ public:
 
 	static const sockaddr_in composeSocketAddress(const string& IP, const string& port);
 
-	static inline const string SERVER_PORT = "61295";
+	static inline constexpr string SERVER_PORT = "61295";
 
-	static inline const unsigned int PORT_DIGIT_COUNT = 5;
-	static inline const unsigned int MAX_PING_COUNT = 10;
-	static inline const unsigned int MAX_MESSAGE_CHARACTERS = 128;
-	static inline const unsigned int MAX_USERNAME_CHARACTERS = 16;
-	static inline const unsigned int TCP_BUFFER_BYTES = 4096;
-	static inline const unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_CHARACTERS + 1 + MAX_MESSAGE_CHARACTERS);
-	static inline const unsigned int IPV4_ADDRESS_LENGTH = 16;
+	static inline constexpr unsigned int PORT_DIGIT_COUNT = 5;
+	static inline constexpr unsigned int MAX_PING_COUNT = 10;
+	static inline constexpr unsigned int MAX_MESSAGE_CHARACTERS = 128;
+	static inline constexpr unsigned int MAX_USERNAME_CHARACTERS = 16;
+	static inline constexpr unsigned int TCP_BUFFER_BYTES = 4096;
+	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_CHARACTERS + 1 + MAX_MESSAGE_CHARACTERS);
+	static inline constexpr unsigned int IPV4_ADDRESS_LENGTH = 16;
 };

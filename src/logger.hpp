@@ -91,7 +91,7 @@ private:
 
 	static inline vector<string> _messageQueue = {};
 
-	static inline const string LEVEL_STRING[4] = {"Info", "Error", "Debug", "Warn"};
+	static inline constexpr string LEVEL_STRING[4] = {"Info", "Error", "Debug", "Warn"};
 
 	static inline unsigned int _messageCount = 0;
 };

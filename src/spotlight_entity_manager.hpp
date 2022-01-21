@@ -23,7 +23,7 @@ public:
 
 	shared_ptr<SpotlightEntity> getEntity(const string& ID);
 
-	static inline const unsigned int MAX_LIGHT_COUNT = 64;
+	static inline constexpr unsigned int MAX_LIGHT_COUNT = 64;
 
 private:
 	unordered_map<string, shared_ptr<SpotlightEntity>> _entities;

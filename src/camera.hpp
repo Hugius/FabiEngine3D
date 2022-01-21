@@ -71,22 +71,22 @@ private:
 	mat44 _viewMatrix = mat44(1.0f);
 	mat44 _projectionMatrix = mat44(1.0f);
 
-	static inline const fvec3 DEFAULT_UP_VECTOR = fvec3(0.0f, 1.0f, 0.0f);
+	static inline constexpr fvec3 DEFAULT_UP_VECTOR = fvec3(0.0f, 1.0f, 0.0f);
 	fvec3 _upVector = fvec3(0.0f);
 	fvec3 _frontVector = fvec3(0.0f);
 	fvec3 _rightVector = fvec3(0.0f);
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _thirdPersonLookat = fvec3(0.0f);
 
-	static inline const float NEAR_DISTANCE = 0.01f;
-	static inline const float FAR_DISTANCE = 2500.0f;
-	static inline const float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
-	static inline const float DEFAULT_FOV_ANGLE = 90.0f;
-	static inline const float MAX_FOV_ANGLE = 150.0f;
-	static inline const float MIN_PITCH_ANGLE = -89.99f;
-	static inline const float MAX_PITCH_ANGLE = 89.99f;
-	static inline const float MIN_THIRD_PERSON_DISTANCE = 0.01f;
-	static inline const float MAX_ACCELERATION = 10.0f;
+	static inline constexpr float NEAR_DISTANCE = 0.01f;
+	static inline constexpr float FAR_DISTANCE = 2500.0f;
+	static inline constexpr float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
+	static inline constexpr float DEFAULT_FOV_ANGLE = 90.0f;
+	static inline constexpr float MAX_FOV_ANGLE = 150.0f;
+	static inline constexpr float MIN_PITCH_ANGLE = -89.99f;
+	static inline constexpr float MAX_PITCH_ANGLE = 89.99f;
+	static inline constexpr float MIN_THIRD_PERSON_DISTANCE = 0.01f;
+	static inline constexpr float MAX_ACCELERATION = 10.0f;
 	float _aspectRatio = 0.0f;
 	float _fov = 0.0f;
 	float _yaw = 0.0f;

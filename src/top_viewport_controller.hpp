@@ -43,10 +43,10 @@ public:
 	const bool isScriptRunning() const;
 	const bool isProjectCorrupted(const string& projectDirectoryPath) const;
 
-	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
-	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
-	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
-	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
+	static inline constexpr fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
+	static inline constexpr fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
+	static inline constexpr fvec3 TEXT_COLOR = fvec3(1.0f);
+	static inline constexpr fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 
 private:
 	void _updateProjectScreenManagement();
@@ -63,7 +63,7 @@ private:
 
 	string _currentProjectID = "";
 
-	static inline const fvec3 FRAME_COLOR = fvec3(0.075f);
+	static inline constexpr fvec3 FRAME_COLOR = fvec3(0.075f);
 
 	bool _isCreatingProject = false;
 	bool _isLoadingProject = false;

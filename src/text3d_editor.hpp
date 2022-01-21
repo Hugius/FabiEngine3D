@@ -32,25 +32,25 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	static inline const string TEXT_CONTENT = "Text123";
+	static inline constexpr string TEXT_CONTENT = "Text123";
 	vector<string> _loadedTextIDs;
 	string _hoveredTextID = "";
 	string _currentTextID = "";
 	string _currentProjectID = "";
 
-	static inline const float CW = 0.115f;
-	static inline const float CH = 0.0875f;
-	static inline const float CURSOR_SENSITIVITY = 0.025f;
-	static inline const float INITIAL_CAMERA_YAW = 45.0f;
-	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
-	static inline const float INITIAL_CAMERA_DISTANCE = 2.5f;
-	static inline const float MIN_CAMERA_PITCH = 1.0f;
-	static inline const float GRID_Y_OFFSET = 0.001f;
-	static inline const float GRID_SIZE = 30.0f;
-	static inline const float GRID_REPEAT = 3.0f;
-	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
-	static inline const float CAMERA_DISTANCE_SPEED = 0.125f;
-	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
+	static inline constexpr float CW = 0.115f;
+	static inline constexpr float CH = 0.0875f;
+	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
+	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
+	static inline constexpr float INITIAL_CAMERA_PITCH = 45.0f;
+	static inline constexpr float INITIAL_CAMERA_DISTANCE = 2.5f;
+	static inline constexpr float MIN_CAMERA_PITCH = 1.0f;
+	static inline constexpr float GRID_Y_OFFSET = 0.001f;
+	static inline constexpr float GRID_SIZE = 30.0f;
+	static inline constexpr float GRID_REPEAT = 3.0f;
+	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
+	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.125f;
+	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
 
 	bool _isCreatingText3d = false;
 	bool _isChoosingText3d = false;

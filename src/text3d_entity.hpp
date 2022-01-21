@@ -80,7 +80,7 @@ public:
 	const shared_ptr<TextureBuffer> getFontMap() const;
 
 private:
-	static inline const map<char, ivec2> _fontMapIndices =
+	static inline constexpr map<char, ivec2> _fontMapIndices =
 	{
 		{' ', ivec2(0, 5)},
 		{'!', ivec2(1, 5)},
@@ -203,8 +203,8 @@ private:
 	float _minHeight = numeric_limits<float>::lowest();
 	float _maxHeight = numeric_limits<float>::max();
 
-	static inline const unsigned int FONT_MAP_ROW_COUNT = 6;
-	static inline const unsigned int FONT_MAP_COLUMN_COUNT = 16;
+	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
+	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;
 
 	bool _isFacingCameraX = false;
 	bool _isFacingCameraY = false;

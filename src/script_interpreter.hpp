@@ -174,46 +174,46 @@ private:
 	vector<string> _terminateScriptIDs;
 	vector<unsigned int> _currentLineIndexStack;
 
-	static inline const string META_KEYWORD = "META";
-	static inline const string EXECUTE_KEYWORD = "EXECUTE";
-	static inline const string LOOP_KEYWORD = "LOOP";
-	static inline const string CONTINUE_KEYWORD = "CONTINUE";
-	static inline const string BREAK_KEYWORD = "BREAK";
-	static inline const string IF_KEYWORD = "IF";
-	static inline const string ELIF_KEYWORD = "ELIF";
-	static inline const string ELSE_KEYWORD = "ELSE";
-	static inline const string GLOBAL_KEYWORD = "GLOB";
-	static inline const string CONST_KEYWORD = "CONST";
-	static inline const string EDIT_KEYWORD = "EDIT";
-	static inline const string LIST_KEYWORD = "LST";
-	static inline const string STRING_KEYWORD = "STR";
-	static inline const string DECIMAL_KEYWORD = "DEC";
-	static inline const string INTEGER_KEYWORD = "INT";
-	static inline const string BOOLEAN_KEYWORD = "BOL";
-	static inline const string IS_KEYWORD = "IS";
-	static inline const string NOT_KEYWORD = "NOT";
-	static inline const string AND_KEYWORD = "AND";
-	static inline const string OR_KEYWORD = "OR";
-	static inline const string MORE_KEYWORD = "MORE";
-	static inline const string LESS_KEYWORD = "LESS";
-	static inline const string ADDITION_KEYWORD = "INCR";
-	static inline const string SUBTRACTION_KEYWORD = "DECR";
-	static inline const string MULTIPLICATION_KEYWORD = "MUL";
-	static inline const string DIVISION_KEYWORD = "DIV";
-	static inline const string MODULO_KEYWORD = "MOD";
-	static inline const string NEGATION_KEYWORD = "NEG";
-	static inline const string CASTING_KEYWORD = "CAST";
-	static inline const string PUSHING_KEYWORD = "PUSH";
-	static inline const string PULLING_KEYWORD = "PULL";
-	static inline const string PASS_KEYWORD = "PASS";
+	static inline constexpr string META_KEYWORD = "META";
+	static inline constexpr string EXECUTE_KEYWORD = "EXECUTE";
+	static inline constexpr string LOOP_KEYWORD = "LOOP";
+	static inline constexpr string CONTINUE_KEYWORD = "CONTINUE";
+	static inline constexpr string BREAK_KEYWORD = "BREAK";
+	static inline constexpr string IF_KEYWORD = "IF";
+	static inline constexpr string ELIF_KEYWORD = "ELIF";
+	static inline constexpr string ELSE_KEYWORD = "ELSE";
+	static inline constexpr string GLOBAL_KEYWORD = "GLOB";
+	static inline constexpr string CONST_KEYWORD = "CONST";
+	static inline constexpr string EDIT_KEYWORD = "EDIT";
+	static inline constexpr string LIST_KEYWORD = "LST";
+	static inline constexpr string STRING_KEYWORD = "STR";
+	static inline constexpr string DECIMAL_KEYWORD = "DEC";
+	static inline constexpr string INTEGER_KEYWORD = "INT";
+	static inline constexpr string BOOLEAN_KEYWORD = "BOL";
+	static inline constexpr string IS_KEYWORD = "IS";
+	static inline constexpr string NOT_KEYWORD = "NOT";
+	static inline constexpr string AND_KEYWORD = "AND";
+	static inline constexpr string OR_KEYWORD = "OR";
+	static inline constexpr string MORE_KEYWORD = "MORE";
+	static inline constexpr string LESS_KEYWORD = "LESS";
+	static inline constexpr string ADDITION_KEYWORD = "INCR";
+	static inline constexpr string SUBTRACTION_KEYWORD = "DECR";
+	static inline constexpr string MULTIPLICATION_KEYWORD = "MUL";
+	static inline constexpr string DIVISION_KEYWORD = "DIV";
+	static inline constexpr string MODULO_KEYWORD = "MOD";
+	static inline constexpr string NEGATION_KEYWORD = "NEG";
+	static inline constexpr string CASTING_KEYWORD = "CAST";
+	static inline constexpr string PUSHING_KEYWORD = "PUSH";
+	static inline constexpr string PULLING_KEYWORD = "PULL";
+	static inline constexpr string PASS_KEYWORD = "PASS";
 	string _currentProjectID = "";
 	string _initEntryID = "";
 	string _updateEntryID = "";
 	string _terminateEntryID = "";
 
-	static inline const unsigned int SPACES_PER_INDENT = 4;
-	static inline const unsigned int MAX_ITERATIONS_PER_LOOP = 1000;
-	static inline const unsigned int MAX_EXECUTION_DEPTH = 10;
+	static inline constexpr unsigned int SPACES_PER_INDENT = 4;
+	static inline constexpr unsigned int MAX_ITERATIONS_PER_LOOP = 1000;
+	static inline constexpr unsigned int MAX_EXECUTION_DEPTH = 10;
 	unsigned int _engineFunctionCallCount = 0;
 	unsigned int _executionDepth = 0;
 
@@ -244,7 +244,7 @@ private:
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
 
-	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =
+	static inline constexpr map<string, InputType> KEY_INPUT_STRING_MAP =
 	{
 		{"KEY_A", InputType::KEY_A},
 		{"KEY_B", InputType::KEY_B},
@@ -341,7 +341,7 @@ private:
 		{"KEY_SLASH", InputType::KEY_SLASH}
 	};
 
-	static inline const map<string, InputType> MOUSE_INPUT_STRING_MAP =
+	static inline constexpr map<string, InputType> MOUSE_INPUT_STRING_MAP =
 	{
 		{"BUTTON_LEFT", InputType::MOUSE_BUTTON_LEFT},
 		{"BUTTON_MIDDLE", InputType::MOUSE_BUTTON_MIDDLE},

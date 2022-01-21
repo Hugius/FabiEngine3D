@@ -74,24 +74,24 @@ private:
 
 	fvec3 _cameraLookatPosition = fvec3(0.0f);
 
-	static inline const float CW = 0.115f;
-	static inline const float CH = 0.0875f;
-	static inline const float CURSOR_SENSITIVITY = 0.025f;
-	static inline const float INITIAL_CAMERA_YAW = 45.0f;
-	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
-	static inline const float INITIAL_CAMERA_DISTANCE = 2.5f;
-	static inline const float MIN_CAMERA_PITCH = 1.0f;
-	static inline const float GRID_Y_OFFSET = 0.001f;
-	static inline const float GRID_SIZE = 60.0f;
-	static inline const float GRID_REPEAT = 6.0f;
-	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
-	static inline const float CAMERA_DISTANCE_SPEED = 0.25f;
-	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
-	static inline const float PART_HIGHLIGHT_SPEED = 0.025f;
+	static inline constexpr float CW = 0.115f;
+	static inline constexpr float CH = 0.0875f;
+	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
+	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
+	static inline constexpr float INITIAL_CAMERA_PITCH = 45.0f;
+	static inline constexpr float INITIAL_CAMERA_DISTANCE = 2.5f;
+	static inline constexpr float MIN_CAMERA_PITCH = 1.0f;
+	static inline constexpr float GRID_Y_OFFSET = 0.001f;
+	static inline constexpr float GRID_SIZE = 60.0f;
+	static inline constexpr float GRID_REPEAT = 6.0f;
+	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
+	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.25f;
+	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
+	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.025f;
 
 	int _selectedPartHighlightDirection = 1;
 
-	static inline const unsigned int MAX_FRAME_COUNT = 100;
+	static inline constexpr unsigned int MAX_FRAME_COUNT = 100;
 	unsigned int _currentFrameIndex = 0;
 
 	bool _mustUpdateCurrentFramePreview = true;

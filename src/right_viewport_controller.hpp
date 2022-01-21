@@ -11,10 +11,10 @@ public:
 	void update();
 
 private:
-	static inline const fvec3 FRAME_COLOR = fvec3(0.175f);
-	static inline const fvec3 BLACK = fvec3(0.0f);
-	static inline const fvec3 WHITE = fvec3(1.0f);
+	static inline constexpr fvec3 FRAME_COLOR = fvec3(0.175f);
+	static inline constexpr fvec3 BLACK = fvec3(0.0f);
+	static inline constexpr fvec3 WHITE = fvec3(1.0f);
 
-	static inline const float CW = 0.115f;
-	static inline const float CH = 0.0875f;
+	static inline constexpr float CW = 0.115f;
+	static inline constexpr float CH = 0.0875f;
 };

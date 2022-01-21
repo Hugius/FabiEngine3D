@@ -35,49 +35,49 @@ private:
 	void _reloadScriptTextDisplay(bool reloadAabbs);
 	void _copySelectedText();
 
-	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
-	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
+	static inline constexpr string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
+	static inline constexpr string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;
 	string _currentProjectID = "";
 	string _currentScriptFileID = "";
 
-	static inline const fvec3 CAMERA_POSITION = fvec3(0.0f, 0.0f, 10.0f);
-	static inline const fvec3 SCRIPT_TEXT_STARTING_POSITION = fvec3(-11.0f, 6.0f, 0.5f);
-	static inline const fvec3 SELECTION_COLOR = fvec3(0.075f);
-	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
-	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);
-	static inline const fvec3 DEFAULT_TEXT_COLOR = fvec3(1.0f);
-	static inline const fvec3 COMMENT_TEXT_COLOR = fvec3(0.0f, 0.75f, 0.0f);
+	static inline constexpr fvec3 CAMERA_POSITION = fvec3(0.0f, 0.0f, 10.0f);
+	static inline constexpr fvec3 SCRIPT_TEXT_STARTING_POSITION = fvec3(-11.0f, 6.0f, 0.5f);
+	static inline constexpr fvec3 SELECTION_COLOR = fvec3(0.075f);
+	static inline constexpr fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
+	static inline constexpr fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);
+	static inline constexpr fvec3 DEFAULT_TEXT_COLOR = fvec3(1.0f);
+	static inline constexpr fvec3 COMMENT_TEXT_COLOR = fvec3(0.0f, 0.75f, 0.0f);
 
-	static inline const fvec2 TEXT_CHARACTER_SIZE = fvec2(0.25f, 0.75f);
+	static inline constexpr fvec2 TEXT_CHARACTER_SIZE = fvec2(0.25f, 0.75f);
 
-	static inline const float CW = 0.115f;
-	static inline const float CH = 0.0875f;
-	static inline const float SCROLLING_SPEED = 0.1f;
-	static inline const float MAX_SCROLLING_ACCELERATION = 10.0f;
-	static inline const float HORIZONTAL_CHARACTER_OFFSET = 0.25f;
-	static inline const float HORIZONTAL_LINE_OFFSET = 1.0f;
-	static inline const float VERTICAL_LINE_OFFSET = 1.0f;
-	static inline const float CAMERA_OFFSET = (VERTICAL_LINE_OFFSET * (static_cast<float>(13) / 2.0f)) - (TEXT_CHARACTER_SIZE.y / 2.0f);
-	static inline const float CAMERA_FOV = 71.0f;
-	static inline const float SELECTION_DEPTH = 0.001f;
-	static inline const float AABB_DEPTH = 0.01f;
+	static inline constexpr float CW = 0.115f;
+	static inline constexpr float CH = 0.0875f;
+	static inline constexpr float SCROLLING_SPEED = 0.1f;
+	static inline constexpr float MAX_SCROLLING_ACCELERATION = 10.0f;
+	static inline constexpr float HORIZONTAL_CHARACTER_OFFSET = 0.25f;
+	static inline constexpr float HORIZONTAL_LINE_OFFSET = 1.0f;
+	static inline constexpr float VERTICAL_LINE_OFFSET = 1.0f;
+	static inline constexpr float CAMERA_OFFSET = (VERTICAL_LINE_OFFSET * (static_cast<float>(13) / 2.0f)) - (TEXT_CHARACTER_SIZE.y / 2.0f);
+	static inline constexpr float CAMERA_FOV = 71.0f;
+	static inline constexpr float SELECTION_DEPTH = 0.001f;
+	static inline constexpr float AABB_DEPTH = 0.01f;
 	float _scrollingAcceleration = 0.0f;
 
 	int _firstSelectedLineIndex = -1;
 	int _lastSelectedLineIndex = -1;
 
-	static inline const unsigned int CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM = 75;
-	static inline const unsigned int CONTINUOUS_TEXT_ACTION_INTERVAL = 5;
-	static inline const unsigned int MAX_PASSED_BAR_FRAMES = 50;
-	static inline const unsigned int MAX_CHARACTERS_PER_LINE = 88;
-	static inline const unsigned int MAX_LINE_COUNT = 100;
-	static inline const unsigned int MAX_VISIBLE_LINES = 13;
-	static inline const unsigned int BLOOM_QUALITY = 1;
+	static inline constexpr unsigned int CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM = 75;
+	static inline constexpr unsigned int CONTINUOUS_TEXT_ACTION_INTERVAL = 5;
+	static inline constexpr unsigned int MAX_PASSED_BAR_FRAMES = 50;
+	static inline constexpr unsigned int MAX_CHARACTERS_PER_LINE = 88;
+	static inline constexpr unsigned int MAX_LINE_COUNT = 100;
+	static inline constexpr unsigned int MAX_VISIBLE_LINES = 13;
+	static inline constexpr unsigned int BLOOM_QUALITY = 1;
 	unsigned int _passedFrames = 0;
 
-	static inline const vector<pair<char, char>> NUMBER_CHARACTERS =
+	static inline constexpr vector<pair<char, char>> NUMBER_CHARACTERS =
 	{
 		{'0', ')'},
 		{'1', '!'},
@@ -90,7 +90,7 @@ private:
 		{'8', '*'},
 		{'9', '('}
 	};
-	static inline const vector<pair<char, char>> SPECIAL_CHARACTERS =
+	static inline constexpr vector<pair<char, char>> SPECIAL_CHARACTERS =
 	{
 		{'.', '>'},
 		{',', '<'},
@@ -117,7 +117,7 @@ private:
 	bool _isSearchingScriptFile = false;
 
 	InputType _activeActionKey = InputType::NONE;
-	static inline const vector<InputType> ACTION_KEYS =
+	static inline constexpr vector<InputType> ACTION_KEYS =
 	{
 		InputType::KEY_ENTER,
 		InputType::KEY_BACKSPACE,

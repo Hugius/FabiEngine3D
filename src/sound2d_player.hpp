@@ -35,7 +35,7 @@ public:
 	const bool isSoundPlaying(Sound2d& sound) const;
 	const bool isSoundPaused(Sound2d& sound) const;
 
-	static inline const unsigned int MAX_CHANNEL_COUNT = 1024;
+	static inline constexpr unsigned int MAX_CHANNEL_COUNT = 1024;
 
 private:
 	void _updateSoundVolume(Sound2d& sound);

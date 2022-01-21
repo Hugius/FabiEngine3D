@@ -27,10 +27,10 @@ private:
 	string _lastTextContent = "";
 	string _currentTextContent = "";
 
-	static inline const float CHAR_WIDTH = 0.02f;
+	static inline constexpr float CHAR_WIDTH = 0.02f;
 
-	static inline const int MAX_PASSED_BAR_FRAMES = 50;
-	static inline const int MAX_PASSED_BACKSPACE_FRAMES = 20;
+	static inline constexpr int MAX_PASSED_BAR_FRAMES = 50;
+	static inline constexpr int MAX_PASSED_BACKSPACE_FRAMES = 20;
 
 	const bool _noNumbers;
 	const bool _noCaps;

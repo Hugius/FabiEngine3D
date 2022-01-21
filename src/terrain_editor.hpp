@@ -39,18 +39,18 @@ private:
 	string _currentProjectID = "";
 	string _currentTerrainID = "";
 
-	static inline const float CW = 0.115f;
-	static inline const float CH = 0.0875f;
-	static inline const float CURSOR_SENSITIVITY = 0.025f;
-	static inline const float INITIAL_CAMERA_YAW = 45.0f;
-	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
-	static inline const float INITIAL_CAMERA_DISTANCE = 2.5f;
-	static inline const float MIN_CAMERA_PITCH = 1.0f;
-	static inline const float GRID_Y_OFFSET = 1.5f;
-	static inline const float GRID_SIZE = 1024.0f;
-	static inline const float GRID_REPEAT = 10.0f;
-	static inline const float CAMERA_DISTANCE_SPEED = 5.0f;
-	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
+	static inline constexpr float CW = 0.115f;
+	static inline constexpr float CH = 0.0875f;
+	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
+	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
+	static inline constexpr float INITIAL_CAMERA_PITCH = 45.0f;
+	static inline constexpr float INITIAL_CAMERA_DISTANCE = 2.5f;
+	static inline constexpr float MIN_CAMERA_PITCH = 1.0f;
+	static inline constexpr float GRID_Y_OFFSET = 1.5f;
+	static inline constexpr float GRID_SIZE = 1024.0f;
+	static inline constexpr float GRID_REPEAT = 10.0f;
+	static inline constexpr float CAMERA_DISTANCE_SPEED = 5.0f;
+	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 
 	bool _isCreatingTerrain = false;
 	bool _isChoosingTerrain = false;

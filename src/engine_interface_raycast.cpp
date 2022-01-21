@@ -33,45 +33,41 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
 
 	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
-		if(!(entity->hasParent() && entity->getParentEntityType() == AabbParentEntityType::MODEL &&
-		   _core->getModelEntityManager()->getEntity(entity->getParentEntityID())->isLevelOfDetailed()))
+		if(entity->isRaycastResponsive() && entity->isVisible())
 		{
-			if(entity->isRaycastResponsive() && entity->isVisible())
+			float distance;
+			if(entity->isCentered())
 			{
-				float distance;
-				if(entity->isCentered())
-				{
-					const auto position = entity->getPosition();
-					const auto left = (entity->getSize().x / 2.0f);
-					const auto right = (entity->getSize().x / 2.0f);
-					const auto bottom = (entity->getSize().y / 2.0f);
-					const auto top = (entity->getSize().y / 2.0f);
-					const auto back = (entity->getSize().z / 2.0f);
-					const auto front = (entity->getSize().z / 2.0f);
-					const auto box = Box(position, left, right, bottom, top, back, front);
+				const auto position = entity->getPosition();
+				const auto left = (entity->getSize().x / 2.0f);
+				const auto right = (entity->getSize().x / 2.0f);
+				const auto bottom = (entity->getSize().y / 2.0f);
+				const auto top = (entity->getSize().y / 2.0f);
+				const auto back = (entity->getSize().z / 2.0f);
+				const auto front = (entity->getSize().z / 2.0f);
+				const auto box = Box(position, left, right, bottom, top, back, front);
 
-					distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
-				}
-				else
-				{
-					const auto position = entity->getPosition();
-					const auto left = (entity->getSize().x / 2.0f);
-					const auto right = (entity->getSize().x / 2.0f);
-					const auto bottom = 0.0f;
-					const auto top = entity->getSize().y;
-					const auto back = (entity->getSize().z / 2.0f);
-					const auto front = (entity->getSize().z / 2.0f);
-					const auto box = Box(position, left, right, bottom, top, back, front);
+				distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
+			}
+			else
+			{
+				const auto position = entity->getPosition();
+				const auto left = (entity->getSize().x / 2.0f);
+				const auto right = (entity->getSize().x / 2.0f);
+				const auto bottom = 0.0f;
+				const auto top = entity->getSize().y;
+				const auto back = (entity->getSize().z / 2.0f);
+				const auto front = (entity->getSize().z / 2.0f);
+				const auto box = Box(position, left, right, bottom, top, back, front);
 
-					distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
-				}
+				distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
+			}
 
-				if((distance != -1.0f) && (distance < closestDistance))
-				{
-					closestDistance = distance;
-					_hoveredAabbID = entity->getID();
-					_hoveredAabbDistance = closestDistance;
-				}
+			if((distance != -1.0f) && (distance < closestDistance))
+			{
+				closestDistance = distance;
+				_hoveredAabbID = entity->getID();
+				_hoveredAabbDistance = closestDistance;
 			}
 		}
 	}

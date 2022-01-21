@@ -66,7 +66,7 @@ public:
 	const shared_ptr<TextureBuffer> getFontMap() const;
 
 private:
-	static inline const map<char, ivec2> _fontMapIndices =
+	static inline constexpr map<char, ivec2> _fontMapIndices =
 	{
 		{' ', ivec2(0, 5)},
 		{'!', ivec2(1, 5)},
@@ -184,8 +184,8 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 	float _transparency = 1.0f;
 
-	static inline const unsigned int FONT_MAP_ROW_COUNT = 6;
-	static inline const unsigned int FONT_MAP_COLUMN_COUNT = 16;
+	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
+	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;
 	unsigned int _depth = 0;
 
 	bool _isCentered = false;

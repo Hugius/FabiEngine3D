@@ -36,7 +36,7 @@ private:
 
 	const fvec2 _charSize;
 
-	static inline const float SCROLL_WHEEL_DIVIDER = 100.0f;
+	static inline constexpr float SCROLL_WHEEL_DIVIDER = 100.0f;
 	float _scrollingOffset = 0.0f;
 	float _scrollingSpeed = 0.0f;
 

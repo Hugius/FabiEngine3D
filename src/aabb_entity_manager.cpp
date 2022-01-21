@@ -128,11 +128,6 @@ void AabbEntityManager::update()
 
 				auto parentEntity = foundPair->second;
 
-				if(parentEntity->isLevelOfDetailed())
-				{
-					goto SKIP;
-				}
-
 				if(entity->mustFollowParentEntityTransformation())
 				{
 					const auto newAabbSize = (entity->getLocalSize() * parentEntity->getBaseSize());

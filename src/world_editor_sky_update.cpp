@@ -42,6 +42,7 @@ void WorldEditor::_updateSkyMenu()
 
 				_currentSkyID = selectedButtonID;
 				_copyTemplateSky(_currentSkyID, ("@" + selectedButtonID));
+				_fe3d->sky_selectMainSky(_currentSkyID);
 				_gui->getOverlay()->deleteChoiceForm("skyList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("skyList"))
@@ -51,7 +52,5 @@ void WorldEditor::_updateSkyMenu()
 		}
 
 		screen->getButton("delete")->setHoverable(!_currentSkyID.empty());
-
-		_fe3d->sky_selectMainSky(_currentSkyID);
 	}
 }

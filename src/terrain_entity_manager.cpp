@@ -51,7 +51,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 		return;
 	}
 
-	auto size = static_cast<float>(image->getWidth());
+	const auto size = static_cast<float>(image->getWidth());
 
 	if(size > MAX_SIZE)
 	{
@@ -127,20 +127,19 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	vector<fvec3> tempPositions;
 	vector<fvec2> tempUvs;
 	vector<fvec3> tempNormals;
-	for(float z = 0.0f; z < size; z++)
+	for(float z = 0.0f; z < size; z += 1.0f)
 	{
-		for(float x = 0.0f; x < size; x++)
+		for(float x = 0.0f; x < size; x += 1.0f)
 		{
-			auto height = _getPixelHeight(x, z, size, maxHeight, pixels);
-			auto leftHeight = _getPixelHeight((x - 1), z, size, maxHeight, pixels);
-			auto rightHeight = _getPixelHeight((x + 1), z, size, maxHeight, pixels);
-			auto upHeight = _getPixelHeight(x, (z + 1), size, maxHeight, pixels);
-			auto downHeight = _getPixelHeight(x, (z - 1), size, maxHeight, pixels);
+			const auto height = _getPixelHeight(x, z, size, maxHeight, pixels);
+			const auto leftHeight = _getPixelHeight((x - 1), z, size, maxHeight, pixels);
+			const auto rightHeight = _getPixelHeight((x + 1), z, size, maxHeight, pixels);
+			const auto upHeight = _getPixelHeight(x, (z + 1), size, maxHeight, pixels);
+			const auto downHeight = _getPixelHeight(x, (z - 1), size, maxHeight, pixels);
 
-			auto position = fvec3((x - halfSize), height, (z - halfSize));
-
-			auto uv = fvec2(((x) / size), ((z) / size));
-			auto normal = Math::normalize(fvec3((leftHeight - rightHeight), 3.0f, (downHeight - upHeight)));
+			const auto position = fvec3((x - halfSize), height, (z - halfSize));
+			const auto uv = fvec2((x / size), (z / size));
+			const auto normal = Math::normalize(fvec3((leftHeight - rightHeight), 3.0f, (downHeight - upHeight)));
 
 			tempPositions.push_back(position);
 			tempUvs.push_back(uv);
@@ -151,14 +150,14 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	vector<fvec3> positions;
 	vector<fvec2> uvs;
 	vector<fvec3> normals;
-	for(unsigned int z = 0; z < uSize - 1; z++)
+	for(unsigned int z = 0; z < (uSize - 1); z++)
 	{
-		for(unsigned int x = 0; x < uSize - 1; x++)
+		for(unsigned int x = 0; x < (uSize - 1); x++)
 		{
 			auto topLeftIndex = ((z * uSize) + x);
-			auto topRightIndex = topLeftIndex + 1;
+			auto topRightIndex = (topLeftIndex + 1);
 			auto bottomLeftIndex = (((z + 1) * uSize) + x);
-			auto bottomRightIndex = bottomLeftIndex + 1;
+			auto bottomRightIndex = (bottomLeftIndex + 1);
 
 			positions.push_back(tempPositions[topLeftIndex]);
 			uvs.push_back(tempUvs[topLeftIndex]);
@@ -189,23 +188,23 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	vector<fvec3> tangents;
 	for(size_t i = 0; i < positions.size(); i += 3)
 	{
-		auto v0 = positions[i + 0];
-		auto v1 = positions[i + 1];
-		auto v2 = positions[i + 2];
+		const auto& pos1 = positions[i + 0];
+		const auto& pos2 = positions[i + 1];
+		const auto& pos3 = positions[i + 2];
 
-		auto uv0 = uvs[i + 0];
-		auto uv1 = uvs[i + 1];
-		auto uv2 = uvs[i + 2];
+		const auto& deltaPos1 = (pos2 - pos1);
+		const auto& deltaPos2 = (pos3 - pos1);
 
-		auto deltaPos1 = (v1 - v0);
-		auto deltaPos2 = (v2 - v0);
+		const auto& uv1 = uvs[i + 0];
+		const auto& uv2 = uvs[i + 1];
+		const auto& uv3 = uvs[i + 2];
 
-		auto deltaUv1 = (uv1 - uv0);
-		auto deltaUv2 = (uv2 - uv0);
+		const auto& deltaUv1 = (uv2 - uv1);
+		const auto& deltaUv2 = (uv3 - uv1);
 
-		auto r = (1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x));
+		const auto& r = (1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x));
 
-		auto tangent = ((deltaPos1 * deltaUv2.y - deltaPos2 * deltaUv1.y) * r);
+		const auto& tangent = ((deltaPos1 * deltaUv2.y - deltaPos2 * deltaUv1.y) * r);
 
 		tangents.push_back(tangent);
 		tangents.push_back(tangent);
@@ -243,26 +242,24 @@ const float TerrainEntityManager::getPixelHeight(const string& ID, float x, floa
 
 const bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 {
-	if(x > 0 && x < getEntity(ID)->getSize() && z > 0 && z < getEntity(ID)->getSize())
+	if((x > 0) && (z > 0) && (x < getEntity(ID)->getSize()) && (z < getEntity(ID)->getSize()))
 	{
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }
 
 float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixels)
 {
 	if(x == size)
 	{
-		x--;
+		x -= 1.0f;
 	}
 
 	if(z == size)
 	{
-		z--;
+		z -= 1.0f;
 	}
 
 	if((x < 0) || (x > size) || (z < 0) || (z > size))
@@ -270,7 +267,7 @@ float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float 
 		return 0.0f;
 	}
 
-	auto index = (static_cast<unsigned int>(z) * static_cast<unsigned int>(size)) + static_cast<unsigned int>(x);
+	const auto index = (static_cast<unsigned int>(z) * static_cast<unsigned int>(size)) + static_cast<unsigned int>(x);
 
 	return (pixels[index] * maxHeight);
 }

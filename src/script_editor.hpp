@@ -59,7 +59,7 @@ private:
 	static inline constexpr float HORIZONTAL_CHARACTER_OFFSET = 0.25f;
 	static inline constexpr float HORIZONTAL_LINE_OFFSET = 1.0f;
 	static inline constexpr float VERTICAL_LINE_OFFSET = 1.0f;
-	static inline constexpr float CAMERA_OFFSET = 1.0f;
+	static inline constexpr float CAMERA_OFFSET = 0.25f;
 	static inline constexpr float CAMERA_FOV = 71.0f;
 	static inline constexpr float SELECTION_DEPTH = 0.001f;
 	static inline constexpr float AABB_DEPTH = 0.01f;

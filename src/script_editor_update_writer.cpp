@@ -397,8 +397,8 @@ void ScriptEditor::_updateTextWriter()
 
 		if(!_fe3d->text3d_isExisting("cursor"))
 		{
-			_fe3d->quad3d_create("cursor", false);
-			_fe3d->quad3d_setSize("cursor", TEXT_CHARACTER_SIZE);
+			_fe3d->text3d_create("cursor", FONT_MAP_PATH, false);
+			_fe3d->text3d_setSize("cursor", TEXT_CHARACTER_SIZE);
 		}
 
 		fvec3 position;

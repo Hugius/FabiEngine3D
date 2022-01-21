@@ -11,7 +11,7 @@ CaptureBuffer::~CaptureBuffer()
 	glDeleteBuffers(1, &_rbo);
 }
 
-CaptureBuffer::CaptureBuffer(ivec2 position, ivec2 size, unsigned int count, bool isTextureClamped)
+CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned int count, bool isTextureClamped)
 {
 	_position = position;
 	_size = size;
@@ -58,7 +58,7 @@ CaptureBuffer::CaptureBuffer(ivec2 position, ivec2 size, unsigned int count, boo
 	}
 }
 
-CaptureBuffer::CaptureBuffer(ivec2 position, ivec2 size)
+CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size)
 {
 	_position = position;
 	_size = size;
@@ -107,12 +107,12 @@ void CaptureBuffer::unbind()
 	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 }
 
-const ivec2 CaptureBuffer::getPosition() const
+const ivec2& CaptureBuffer::getPosition() const
 {
 	return _position;
 }
 
-const ivec2 CaptureBuffer::getSize() const
+const ivec2& CaptureBuffer::getSize() const
 {
 	return _size;
 }

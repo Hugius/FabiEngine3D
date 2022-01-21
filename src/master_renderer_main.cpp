@@ -86,7 +86,7 @@ void MasterRenderer::update()
 	_updateLensFlare();
 }
 
-void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, ivec2 viewport)
+void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport)
 {
 	glViewport(0, 0, viewport.x, viewport.y);
 

@@ -3,18 +3,21 @@
 const mat22 Math::invertMatrix(const mat22& matrix)
 {
 	auto determinant = calculateDeterminant(matrix);
+
 	if(determinant == 0.0f)
 	{
 		return mat22(0.0f);
 	}
 
 	mat22 tempMatrix;
+
 	tempMatrix.f[0] = matrix.f[3];
 	tempMatrix.f[1] = -matrix.f[1];
 	tempMatrix.f[2] = -matrix.f[2];
 	tempMatrix.f[3] = matrix.f[0];
 
 	mat22 result;
+
 	for(unsigned int i = 0; i < 4; i++)
 	{
 		result.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
@@ -33,6 +36,7 @@ const mat33 Math::invertMatrix(const mat33& matrix)
 	}
 
 	mat33 tempMatrix;
+
 	tempMatrix.f[0] = ((matrix.m[1][1] * matrix.m[2][2]) - (matrix.m[2][1] * matrix.m[1][2]));
 	tempMatrix.f[1] = ((matrix.m[0][2] * matrix.m[2][1]) - (matrix.m[0][1] * matrix.m[2][2]));
 	tempMatrix.f[2] = ((matrix.m[0][1] * matrix.m[1][2]) - (matrix.m[0][2] * matrix.m[1][1]));
@@ -44,6 +48,7 @@ const mat33 Math::invertMatrix(const mat33& matrix)
 	tempMatrix.f[8] = ((matrix.m[0][0] * matrix.m[1][1]) - (matrix.m[1][0] * matrix.m[0][1]));
 
 	mat33 result;
+
 	for(unsigned int i = 0; i < 9; i++)
 	{
 		result.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
@@ -55,12 +60,14 @@ const mat33 Math::invertMatrix(const mat33& matrix)
 const mat44 Math::invertMatrix(const mat44& matrix)
 {
 	auto determinant = calculateDeterminant(matrix);
+
 	if(determinant == 0.0f)
 	{
 		return mat44(0.0f);
 	}
 
 	mat44 tempMatrix;
+
 	tempMatrix.f[0] =
 		matrix.f[5] * matrix.f[10] * matrix.f[15] -
 		matrix.f[5] * matrix.f[11] * matrix.f[14] -
@@ -175,6 +182,7 @@ const mat44 Math::invertMatrix(const mat44& matrix)
 		matrix.f[8] * matrix.f[2] * matrix.f[5];
 
 	mat44 result;
+
 	for(unsigned int i = 0; i < 16; i++)
 	{
 		result.f[i] = (tempMatrix.f[i] * (1.0f / determinant));

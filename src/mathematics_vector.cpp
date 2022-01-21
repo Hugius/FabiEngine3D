@@ -42,12 +42,7 @@ const fvec2 Math::normalize(const fvec2& vector)
 {
 	const float inverseMagnitude = (1.0f / calculateMagnitude(vector));
 
-	fvec2 result = vector;
-
-	result.x *= inverseMagnitude;
-	result.y *= inverseMagnitude;
-
-	return result;
+	return fvec2((vector.x * inverseMagnitude), (vector.y * inverseMagnitude));
 }
 
 const fvec3 Math::normalize(const fvec3& vector)

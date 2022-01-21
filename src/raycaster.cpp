@@ -10,7 +10,7 @@
 using std::min;
 using std::max;
 
-void Raycaster::update(ivec2 cursorPosition)
+void Raycaster::update(const ivec2& cursorPosition)
 {
 	_cursorRay = _calculateCursorRay(cursorPosition);
 
@@ -71,7 +71,7 @@ const float Raycaster::getTerrainPointingPrecision() const
 	return _terrainPointingPrecision;
 }
 
-const Ray Raycaster::getCursorRay() const
+const Ray& Raycaster::getCursorRay() const
 {
 	return _cursorRay;
 }
@@ -82,7 +82,7 @@ const fvec3& Raycaster::getTerrainPoint() const
 }
 
 /* https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms */
-const float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box) const
+const float Raycaster::calculateRayBoxIntersectionDistance(const Ray& ray, const Box& box) const
 {
 	/*
 		Initial formula: point = (origin + distance) * direction
@@ -127,7 +127,7 @@ const float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box) con
 	return minIntersectionDistance;
 }
 
-const Ray Raycaster::_calculateCursorRay(ivec2 cursorPosition) const
+const Ray Raycaster::_calculateCursorRay(const ivec2& cursorPosition) const
 {
 	fvec2 screenCoords = Tools::convertFromScreenCoords(cursorPosition);
 	fvec2 ndcCoords = Math::convertToNdc(screenCoords);
@@ -154,14 +154,14 @@ const fvec3 Raycaster::_convertToWorldSpace(const fvec4& viewCoords) const
 	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }
 
-const fvec3 Raycaster::findPointOnRay(Ray ray, float distance) const
+const fvec3 Raycaster::calculatePointOnRay(const Ray& ray, float distance) const
 {
 	return (ray.getPosition() + (ray.getDirection() * distance));
 }
 
 const bool Raycaster::_isUnderTerrain(float distance) const
 {
-	fvec3 scaledRay = findPointOnRay(_cursorRay, distance);
+	auto scaledRay = calculatePointOnRay(_cursorRay, distance);
 
 	auto selectedTerrain = _terrainManager->getSelectedTerrain();
 	float terrainHeight = _terrainManager->getPixelHeight(
@@ -181,13 +181,12 @@ const fvec3 Raycaster::_calculateTerrainPoint() const
 		if(_isUnderTerrain(distance))
 		{
 			distance -= (_terrainPointingPrecision / 2.0f);
-			fvec3 endPoint = findPointOnRay(_cursorRay, distance);
+
+			fvec3 endPoint = calculatePointOnRay(_cursorRay, distance);
 
 			auto selectedTerrain = _terrainManager->getSelectedTerrain();
-			if(_terrainManager->isInside(
-				selectedTerrain->getID(),
-				endPoint.x + (selectedTerrain->getSize() / 2.0f),
-				endPoint.z + (selectedTerrain->getSize() / 2.0f)))
+
+			if(_terrainManager->isInside(selectedTerrain->getID(), (endPoint.x + (selectedTerrain->getSize() / 2.0f)), (endPoint.z + (selectedTerrain->getSize() / 2.0f))))
 			{
 				return endPoint;
 			}

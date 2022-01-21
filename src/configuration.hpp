@@ -18,10 +18,10 @@ public:
 
 	const string& getWindowTitle() const;
 
-	const ivec2 getMonitorSize() const;
-	const ivec2 getWindowSize()	const;
-	const ivec2 getViewportSize() const;
-	const ivec2 getViewportPosition() const;
+	const ivec2& getMonitorSize() const;
+	const ivec2& getWindowSize()	const;
+	const ivec2& getViewportSize() const;
+	const ivec2& getViewportPosition() const;
 
 	static inline const float MS_PER_UPDATE = (1000.0f / 144.0f);
 

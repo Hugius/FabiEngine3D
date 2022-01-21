@@ -60,7 +60,7 @@ void Camera::reset()
 	_cursorIsBeingCentered = false;
 }
 
-void Camera::update(ivec2 lastCursorPosition)
+void Camera::update(const ivec2& lastCursorPosition)
 {
 	const auto currentCursorPosition = _renderWindow->getCursorPosition();
 	const auto left = Config::getInst().getViewportPosition().x;

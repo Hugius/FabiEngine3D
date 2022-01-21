@@ -744,7 +744,7 @@ public:
 	const fvec3& raycast_getPointOnTerrain() const;
 	const bool raycast_isPointOnTerrainValid() const;
 	const bool raycast_isTerrainPointingEnabled() const;
-	const Ray raycast_getCursorRay() const;
+	const Ray& raycast_getCursorRay() const;
 
 	void gfx_enableAmbientLighting();
 	void gfx_enableDirectionalLighting();
@@ -900,7 +900,7 @@ public:
 	void misc_setCursorVisible(bool value);
 	void misc_setCursorEntityID(const string& value);
 	void misc_centerCursor();
-	void misc_setCursorPosition(ivec2 value);
+	void misc_setCursorPosition(const ivec2& value);
 	void misc_setWindowTitle(const string& value);
 	void misc_cacheMesh(const string& filePath);
 	void misc_cacheImage(const string& filePath);

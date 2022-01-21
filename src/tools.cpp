@@ -61,7 +61,7 @@ const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
 	return directoryNames;
 }
 
-const string Tools::vec2str(ivec2 vec)
+const string Tools::vec2str(const ivec2& vec)
 {
 	return string(to_string(vec.x) + " " + to_string(vec.y));
 }
@@ -252,7 +252,7 @@ const ivec2 Tools::convertToScreenCoords(const fvec2& position)
 	return ivec2(static_cast<int>(x), static_cast<int>(y));
 }
 
-const fvec2 Tools::convertFromScreenCoords(ivec2 position)
+const fvec2 Tools::convertFromScreenCoords(const ivec2& position)
 {
 	const float x = (static_cast<float>(position.x) / static_cast<float>(Config::getInst().getWindowSize().x));
 	const float y = (static_cast<float>(position.y) / static_cast<float>(Config::getInst().getWindowSize().y));

@@ -21,7 +21,7 @@ public:
 
 	static const vector<string> getFilesFromDirectory(const string& path);
 	static const vector<string> getDirectoriesFromDirectory(const string& path);
-	static const string vec2str(ivec2 vec);
+	static const string vec2str(const ivec2& vec);
 	static const string vec2str(const fvec2& vec);
 	static const string vec2str(const fvec3& vec);
 	static const string vec2str(const fvec4& vec);
@@ -29,7 +29,7 @@ public:
 	static const string chooseExplorerFile(const string& startingDirectory, const string& fileType);
 	static const string chooseExplorerDirectory(const string& startingDirectory);
 
-	static const fvec2 convertFromScreenCoords(ivec2 position);
+	static const fvec2 convertFromScreenCoords(const ivec2& position);
 	static const ivec2 convertToScreenCoords(const fvec2& position);
 	static const fvec2 calculateMinViewportPosition();
 	static const fvec2 calculateMaxViewportPosition();

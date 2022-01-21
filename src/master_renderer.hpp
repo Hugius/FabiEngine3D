@@ -56,7 +56,7 @@ public:
 	void inject(shared_ptr<ShadowGenerator> shadowGenerator);
 	void inject(shared_ptr<Timer> timer);
 	void update();
-	void renderLogo(shared_ptr<Quad2dEntity> logo, ivec2 viewport);
+	void renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport);
 	void renderApplication();
 	void reloadBloomBlurCaptureBuffer();
 	void reloadDofBlurCaptureBuffer();

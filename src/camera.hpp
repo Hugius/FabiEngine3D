@@ -13,7 +13,7 @@ public:
 	void inject(shared_ptr<RenderBus> renderBus);
 	void inject(shared_ptr<RenderWindow> renderWindow);
 	void reset();
-	void update(ivec2 lastCursorPosition);
+	void update(const ivec2& lastCursorPosition);
 	void updateMatrices();
 	void move(const fvec3& value);
 	void setPosition(const fvec3& value);

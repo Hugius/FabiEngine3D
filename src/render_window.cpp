@@ -23,7 +23,7 @@ void RenderWindow::setTitle(const string& title)
 	SDL_SetWindowTitle(_windowPointer, title.c_str());
 }
 
-void RenderWindow::setSize(ivec2 size)
+void RenderWindow::setSize(const ivec2& size)
 {
 	SDL_SetWindowSize(_windowPointer, size.x, size.y);
 	center();
@@ -116,7 +116,7 @@ void RenderWindow::hideCursor()
 	SDL_ShowCursor(SDL_DISABLE);
 }
 
-void RenderWindow::setCursorPosition(ivec2 pos)
+void RenderWindow::setCursorPosition(const ivec2& pos)
 {
 	SDL_WarpMouseInWindow(_windowPointer, pos.x, pos.y);
 }

@@ -229,7 +229,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 	}
 }
 
-const Ray EngineInterface::raycast_getCursorRay() const
+const Ray& EngineInterface::raycast_getCursorRay() const
 {
 	return _core->getRaycaster()->getCursorRay();
 }

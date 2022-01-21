@@ -10,15 +10,15 @@ using std::vector;
 class CaptureBuffer final
 {
 public:
-	CaptureBuffer(ivec2 position, ivec2 size, unsigned int count, bool isTextureClamped);
-	CaptureBuffer(ivec2 position, ivec2 size);
+	CaptureBuffer(const ivec2& position, const ivec2& size, unsigned int count, bool isTextureClamped);
+	CaptureBuffer(const ivec2& position, const ivec2& size);
 	~CaptureBuffer();
 
 	void bind();
 	void unbind();
 
-	const ivec2 getPosition() const;
-	const ivec2 getSize() const;
+	const ivec2& getPosition() const;
+	const ivec2& getSize() const;
 
 	const BufferID getFbo() const;
 	const BufferID getRbo() const;

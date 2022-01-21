@@ -121,7 +121,7 @@ void EngineInterface::misc_centerCursor()
 	_core->getCamera()->notifyCursorCenter();
 }
 
-void EngineInterface::misc_setCursorPosition(ivec2 value)
+void EngineInterface::misc_setCursorPosition(const ivec2& value)
 {
 	_core->getRenderWindow()->setCursorPosition(value);
 }

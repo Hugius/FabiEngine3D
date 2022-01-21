@@ -15,7 +15,7 @@ public:
 	~RenderWindow();
 
 	void setTitle(const string& title);
-	void setSize(ivec2 size);
+	void setSize(const ivec2& size);
 	void center();
 	void setOpacity(float value);
 	void enableColorKeying(const fvec3& color);
@@ -31,7 +31,7 @@ public:
 	void hideWindow();
 	void showCursor();
 	void hideCursor();
-	void setCursorPosition(ivec2 pos);
+	void setCursorPosition(const ivec2& pos);
 
 	const ivec2 getCursorPosition() const;
 

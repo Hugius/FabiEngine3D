@@ -1,5 +1,4 @@
 #include "shadow_generator.hpp"
-#include "shadow_generator.hpp"
 #include "render_bus.hpp"
 #include "configuration.hpp"
 

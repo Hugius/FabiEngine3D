@@ -36,7 +36,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\engine_core.cpp">
+    <ClCompile Include="..\..\..\src\engine_core_lifecycle.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface.cpp">
@@ -107,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_entity_water.cpp">
       <Filter>Interface\Entity\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_core_misc.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

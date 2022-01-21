@@ -1,5 +1,4 @@
 #include "camera_collision_handler.hpp"
-#include "camera_collision_handler.hpp"
 #include "logger.hpp"
 
 void CameraCollisionHandler::inject(shared_ptr<TerrainEntityManager> terrainManager)

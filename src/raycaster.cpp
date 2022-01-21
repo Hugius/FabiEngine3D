@@ -1,5 +1,4 @@
 #include "raycaster.hpp"
-#include "raycaster.hpp"
 #include "render_bus.hpp"
 #include "configuration.hpp"
 #include "tools.hpp"

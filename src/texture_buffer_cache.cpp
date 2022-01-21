@@ -1,6 +1,4 @@
 #include "texture_buffer_cache.hpp"
-#include "texture_buffer_cache.hpp"
-#include "texture_buffer_cache.hpp"
 
 #include "logger.hpp"
 

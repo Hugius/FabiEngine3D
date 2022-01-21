@@ -1,5 +1,4 @@
 #include "render_window.hpp"
-#include "render_window.hpp"
 #include "logger.hpp"
 #include "configuration.hpp"
 

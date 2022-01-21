@@ -1,6 +1,4 @@
 #include "mesh_loader.hpp"
-#include "mesh_loader.hpp"
-#include "mesh_loader.hpp"
 #include "logger.hpp"
 
 #include <future>

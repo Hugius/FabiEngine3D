@@ -1,5 +1,4 @@
 #include "world_editor.hpp"
-#include "world_editor.hpp"
 #include "logger.hpp"
 
 void WorldEditor::copyTemplateModel(const string& newID, const string& templateID, const fvec3& position)

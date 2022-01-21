@@ -1,5 +1,4 @@
 #include "terrain_entity_manager.hpp"
-#include "terrain_entity_manager.hpp"
 #include "logger.hpp"
 
 using std::make_shared;

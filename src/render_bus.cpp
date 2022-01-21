@@ -1,5 +1,4 @@
 #include "render_bus.hpp"
-#include "render_bus.hpp"
 
 #include <algorithm>
 

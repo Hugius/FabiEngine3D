@@ -1,5 +1,4 @@
 #include "quad3d_entity_manager.hpp"
-#include "quad3d_entity_manager.hpp"
 #include "render_bus.hpp"
 #include "logger.hpp"
 

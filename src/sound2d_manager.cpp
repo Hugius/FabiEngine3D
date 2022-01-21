@@ -1,5 +1,4 @@
 #include "sound2d_manager.hpp"
-#include "sound2d_manager.hpp"
 #include "logger.hpp"
 
 #include <algorithm>

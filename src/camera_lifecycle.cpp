@@ -1,5 +1,4 @@
 #include "camera.hpp"
-#include "camera.hpp"
 #include "configuration.hpp"
 
 #include <algorithm>

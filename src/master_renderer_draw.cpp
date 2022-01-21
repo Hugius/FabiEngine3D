@@ -1,5 +1,4 @@
 #include "master_renderer.hpp"
-#include "master_renderer.hpp"
 #include "render_bus.hpp"
 
 #include <functional>

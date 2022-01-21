@@ -47,7 +47,6 @@ public:
 
 	void start();
 	void update();
-	void render();
 	void pause();
 	void resume();
 	void stop();

@@ -146,7 +146,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\engine_core.cpp" />
+    <ClCompile Include="..\..\..\src\engine_core_lifecycle.cpp" />
+    <ClCompile Include="..\..\..\src\engine_core_misc.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_text3d.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_sound3d.cpp" />

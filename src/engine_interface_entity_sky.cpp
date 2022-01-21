@@ -116,9 +116,13 @@ void EngineInterface::sky_setVisible(const string& ID, bool value)
 	_core->getSkyEntityManager()->getEntity(ID)->setVisible(value);
 }
 
-void EngineInterface::sky_selectMainSky(const string& ID)
+void EngineInterface::sky_select(const string& ID)
 {
 	_core->getSkyEntityManager()->selectMainSky(ID);
+}
+
+void EngineInterface::sky_mix(const string& mixID, float mixValue)
+{
 }
 
 void EngineInterface::sky_setLightness(const string& ID, float value)

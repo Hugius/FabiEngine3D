@@ -26,6 +26,7 @@ void WorldEditor::_updateSkyMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
+			_fe3d->sky_select("");
 			_fe3d->sky_delete(_currentSkyID);
 			_currentSkyID = "";
 		}
@@ -33,6 +34,7 @@ void WorldEditor::_updateSkyMenu()
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("skyList");
+
 			if(!selectedButtonID.empty())
 			{
 				if(_fe3d->sky_isExisting(selectedButtonID))
@@ -42,7 +44,7 @@ void WorldEditor::_updateSkyMenu()
 
 				_currentSkyID = selectedButtonID;
 				_copyTemplateSky(_currentSkyID, ("@" + selectedButtonID));
-				_fe3d->sky_selectMainSky(_currentSkyID);
+				_fe3d->sky_select(_currentSkyID);
 				_gui->getOverlay()->deleteChoiceForm("skyList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("skyList"))

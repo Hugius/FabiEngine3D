@@ -85,7 +85,7 @@ void SkyEditor::_updateSkyCreating()
 
 			if(_fe3d->sky_isExisting(newSkyID))
 			{
-				_fe3d->sky_selectMainSky(newSkyID);
+				_fe3d->sky_select(newSkyID);
 
 				_currentSkyID = newSkyID;
 				_loadedSkyIDs.push_back(newSkyID);
@@ -103,13 +103,13 @@ void SkyEditor::_updateSkyChoosing()
 {
 	if(_isChoosingSky)
 	{
-		_fe3d->sky_selectMainSky("");
+		_fe3d->sky_select("");
 
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("skyList");
 
 		if(!selectedButtonID.empty())
 		{
-			_fe3d->sky_selectMainSky("@" + selectedButtonID);
+			_fe3d->sky_select("@" + selectedButtonID);
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -147,7 +147,7 @@ void SkyEditor::_updateSkyDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->sky_selectMainSky("");
+			_fe3d->sky_select("");
 
 			_fe3d->sky_delete(_currentSkyID);
 
@@ -158,7 +158,7 @@ void SkyEditor::_updateSkyDeleting()
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_fe3d->sky_selectMainSky("");
+			_fe3d->sky_select("");
 
 			_currentSkyID = "";
 			_isDeletingSky = false;

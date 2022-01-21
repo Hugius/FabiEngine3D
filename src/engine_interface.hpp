@@ -55,7 +55,7 @@ public:
 	void sky_delete(const string& ID);
 	void sky_deleteAll();
 	void sky_setVisible(const string& ID, bool value);
-	void sky_selectMainSky(const string& ID);
+	void sky_select(const string& ID);
 	void sky_selectMixSky(const string& ID);
 	void sky_setMixValue(float mixValue);
 	void sky_setCubeMaps(const string& ID, const array<string, 6>& value);

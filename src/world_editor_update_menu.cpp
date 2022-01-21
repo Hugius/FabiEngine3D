@@ -108,8 +108,6 @@ void WorldEditor::_updateChoiceMenu()
 
 			unloadEditorWorld();
 
-			_fe3d->sky_selectMainSky("");
-
 			_currentWorldID = "";
 			_currentSkyID = "";
 			_currentTerrainID = "";
@@ -129,8 +127,6 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingReflection = false;
 
 			unloadEditorWorld();
-
-			_fe3d->sky_selectMainSky("");
 
 			_currentWorldID = "";
 			_currentSkyID = "";

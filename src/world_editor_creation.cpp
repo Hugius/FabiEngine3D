@@ -39,7 +39,7 @@ const bool WorldEditor::_copyTemplateSky(const string& newID, const string& temp
 	_fe3d->sky_setLightness(newID, _fe3d->sky_getLightness(templateID));
 	_fe3d->sky_setRotation(newID, _fe3d->sky_getRotation(templateID));
 	_fe3d->sky_setColor(newID, _fe3d->sky_getColor(templateID));
-	_fe3d->sky_selectMainSky(newID);
+	_fe3d->sky_select(newID);
 
 	_loadedSkyID = newID;
 

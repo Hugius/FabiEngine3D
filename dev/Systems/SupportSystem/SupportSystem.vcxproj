@@ -50,6 +50,7 @@
     <ClCompile Include="..\..\..\src\configuration.cpp" />
     <ClCompile Include="..\..\..\src\input_handler.cpp" />
     <ClCompile Include="..\..\..\src\library_loader.cpp" />
+    <ClCompile Include="..\..\..\src\logger.cpp" />
     <ClCompile Include="..\..\..\src\timer.cpp" />
     <ClCompile Include="..\..\..\src\tools.cpp" />
   </ItemGroup>

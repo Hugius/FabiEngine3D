@@ -24,22 +24,25 @@ class Logger final
 public:
 	Logger() = delete;
 
-	template<typename T, typename...Rest> inline static void throwInfo(T first, Rest...rest)
+	template<typename T, typename...Rest> static void throwInfo(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::INFO);
 		_printMessage(first, rest...);
 	}
-	template<typename T, typename...Rest> inline static void throwDebug(T first, Rest...rest)
+
+	template<typename T, typename...Rest> static void throwDebug(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::DEBUG);
 		_printMessage(first, rest...);
 	}
-	template<typename T, typename...Rest> inline static void throwWarning(T first, Rest...rest)
+
+	template<typename T, typename...Rest> static void throwWarning(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::WARNING);
 		_printMessage(first, rest...);
 	}
-	template<typename T, typename...Rest> inline static void throwFatalWarning(T first, Rest...rest)
+
+	template<typename T, typename...Rest> static void throwFatalWarning(T first, Rest...rest)
 	{
 		cout << endl;
 		_printPrefix(MessageType::WARNING);
@@ -49,7 +52,8 @@ public:
 		auto temp = _getch();
 		exit(420);
 	}
-	template<typename T, typename...Rest> inline static void throwError(T first, Rest...rest)
+
+	template<typename T, typename...Rest> static void throwError(T first, Rest...rest)
 	{
 		cout << endl;
 		_printPrefix(MessageType::ERR);
@@ -59,61 +63,18 @@ public:
 		auto temp = _getch();
 		exit(420);
 	}
-	inline static void setCustomMessageQueue(const vector<string>& customMessages)
-	{
-		_messageQueue = customMessages;
-	}
-	inline static void clearMessageQueue()
-	{
-		_messageCount = 0;
-		_messageQueue.clear();
-	}
 
-	inline static const vector<string>& getMessageQueue()
-	{
-		return _messageQueue;
-	}
+	static void setCustomMessageQueue(const vector<string>& customMessages);
+	static void clearMessageQueue();
 
-	inline static unsigned int getMessageCount()
-	{
-		return _messageCount;
-	}
+	static const vector<string>& getMessageQueue();
+
+	static unsigned int getMessageCount();
 
 private:
-	inline static void _printPrefix(MessageType type)
-	{
-		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
-		ostringstream oss;
+	static void _printPrefix(MessageType type);
 
-		auto rawTimestamp = new char[9];
-		auto current = time(nullptr);
-		auto format = tm();
-		localtime_s(&format, &current);
-		strftime(rawTimestamp, 9, "%H:%M:%S", &format);
-		auto timestamp = string(rawTimestamp);
-		delete[] rawTimestamp;
-
-		SetConsoleTextAttribute(console, 6);
-		cout << "[" + _level_string[static_cast<unsigned int>(type)] + "]";
-		oss << "[" + _level_string[static_cast<unsigned int>(type)] + "]";
-		SetConsoleTextAttribute(console, 12);
-		cout << "[" << timestamp << "]";
-		oss << "[" << timestamp << "]";
-		SetConsoleTextAttribute(console, 7);
-
-		if(type == MessageType::DEBUG || type == MessageType::ERR)
-		{
-			cout << "> ";
-		}
-		else
-		{
-			cout << " > ";
-		}
-
-		oss << " > ";
-		_messageQueue.push_back(oss.str());
-	}
-	template<typename T, typename...Rest> inline static void _printMessage(T first, Rest&&...rest)
+	template<typename T, typename...Rest> static void _printMessage(T first, Rest&&...rest)
 	{
 		ostringstream oss;
 
@@ -128,8 +89,9 @@ private:
 		_messageCount++;
 	}
 
-	inline static vector<string> _messageQueue;
-	inline static string _level_string[4] = {"Info", "Error", "Debug", "Warn"};
+	static inline vector<string> _messageQueue = {};
 
-	inline static unsigned int _messageCount = 0;
+	static inline const string LEVEL_STRING[4] = {"Info", "Error", "Debug", "Warn"};
+
+	static inline unsigned int _messageCount = 0;
 };

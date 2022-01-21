@@ -104,5 +104,8 @@
     <ClCompile Include="..\..\..\src\library_loader.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\logger.cpp">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

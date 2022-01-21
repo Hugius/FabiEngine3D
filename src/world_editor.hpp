@@ -50,10 +50,10 @@ public:
 	void addPointlightToCustomWorld(const string& ID);
 	void addSpotlightToCustomWorld(const string& ID);
 	void addReflectionToCustomWorld(const string& ID);
-	void copyTemplateModel(const string& newID, const string& templateID, fvec3 position);
-	void copyTemplateQuad3d(const string& newID, const string& templateID, fvec3 position);
-	void copyTemplateText3d(const string& newID, const string& templateID, fvec3 position);
-	void copyTemplateSound(const string& newID, const string& templateID, fvec3 position);
+	void copyTemplateModel(const string& newID, const string& templateID, const fvec3& position);
+	void copyTemplateQuad3d(const string& newID, const string& templateID, const fvec3& position);
+	void copyTemplateText3d(const string& newID, const string& templateID, const fvec3& position);
+	void copyTemplateSound(const string& newID, const string& templateID, const fvec3& position);
 	void unloadEditorWorld();
 	void unloadCustomWorld();
 
@@ -166,10 +166,10 @@ private:
 	const bool _copyTemplateSky(const string& newID, const string& templateID);
 	const bool _copyTemplateTerrain(const string& newID, const string& templateID);
 	const bool _copyTemplateWater(const string& newID, const string& templateID);
-	const bool _copyTemplateModel(const string& newID, const string& templateID, fvec3 position, bool isFromOutside);
-	const bool _copyTemplateQuad3d(const string& newID, const string& templateID, fvec3 position, bool isFromOutside);
-	const bool _copyTemplateText3d(const string& newID, const string& templateID, fvec3 position, bool isFromOutside);
-	const bool _copyTemplateSound(const string& newID, const string& templateID, fvec3 position, bool isFromOutside);
+	const bool _copyTemplateModel(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside);
+	const bool _copyTemplateQuad3d(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside);
+	const bool _copyTemplateText3d(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside);
+	const bool _copyTemplateSound(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside);
 
 	static inline const string TEMPLATE_LAMP_ID = "@@template_lamp";
 	static inline const string TEMPLATE_TORCH_ID = "@@template_torch";

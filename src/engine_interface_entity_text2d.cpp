@@ -41,7 +41,7 @@ void EngineInterface::text2d_setContent(const string& ID, const string& value, f
 	entity->setSize(newSize);
 }
 
-void EngineInterface::text2d_setColor(const string& ID, fvec3 value)
+void EngineInterface::text2d_setColor(const string& ID, const fvec3& value)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->setColor(value);
 }
@@ -111,7 +111,7 @@ void EngineInterface::text2d_setWireframed(const string& ID, bool value)
 	_core->getText2dEntityManager()->getEntity(ID)->setWireframed(value);
 }
 
-void EngineInterface::text2d_setWireframeColor(const string& ID, fvec3 value)
+void EngineInterface::text2d_setWireframeColor(const string& ID, const fvec3& value)
 {
 	_core->getText2dEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
@@ -191,12 +191,12 @@ const fvec2 EngineInterface::text2d_getMaxPosition(const string& ID) const
 	return  _core->getText2dEntityManager()->getEntity(ID)->getMaxPosition();
 }
 
-const fvec3 EngineInterface::text2d_getColor(const string& ID) const
+const fvec3& EngineInterface::text2d_getColor(const string& ID) const
 {
 	return _core->getText2dEntityManager()->getEntity(ID)->getColor();
 }
 
-const fvec3 EngineInterface::text2d_getWireframeColor(const string& ID) const
+const fvec3& EngineInterface::text2d_getWireframeColor(const string& ID) const
 {
 	return _core->getText2dEntityManager()->getEntity(ID)->getWireframeColor();
 }

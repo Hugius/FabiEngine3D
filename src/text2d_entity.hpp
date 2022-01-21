@@ -22,8 +22,8 @@ public:
 	void setHorizontallyMirrored(bool value);
 	void setVerticallyMirrored(bool value);
 	void setTransparency(float value);
-	void setWireframeColor(fvec3 value);
-	void setColor(fvec3 value);
+	void setWireframeColor(const fvec3& value);
+	void setColor(const fvec3& value);
 	void setMinPosition(fvec2 value);
 	void setMaxPosition(fvec2 value);
 	void setPosition(fvec2 value);
@@ -43,8 +43,8 @@ public:
 	const string& getContent() const;
 	const string& getFontMapPath() const;
 
-	const fvec3 getWireframeColor() const;
-	const fvec3 getColor() const;
+	const fvec3& getWireframeColor() const;
+	const fvec3& getColor() const;
 
 	const fvec2 getPosition() const;
 	const fvec2 getSize() const;

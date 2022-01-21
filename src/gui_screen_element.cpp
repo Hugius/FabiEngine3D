@@ -1,31 +1,31 @@
 #include "gui_screen.hpp"
 #include "logger.hpp"
 
-void GuiScreen::createScrollingList(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered)
+void GuiScreen::createScrollingList(const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, fvec2 charSize, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_scrollingLists.push_back(make_shared<GuiScrollingList>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize, isCentered));
 }
 
-void GuiScreen::createWriteField(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+void GuiScreen::createWriteField(const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_writeFields.push_back(make_shared<GuiWriteField>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered));
 }
 
-void GuiScreen::createButton(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isCentered)
+void GuiScreen::createButton(const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& hoverColor, string textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textContent, textColor, textHoverColor, isCentered));
 }
 
-void GuiScreen::createButton(const string& ID, fvec2 position, fvec2 size, const string& texturePath, fvec3 hoverColor, bool isCentered)
+void GuiScreen::createButton(const string& ID, fvec2 position, fvec2 size, const string& texturePath, const fvec3& hoverColor, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), texturePath, hoverColor, isCentered));
 }
 
-void GuiScreen::createRectangle(const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered)
+void GuiScreen::createRectangle(const string& ID, fvec2 position, fvec2 size, const fvec3& color, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, isCentered));
@@ -37,7 +37,7 @@ void GuiScreen::createRectangle(const string& ID, fvec2 position, fvec2 size, co
 	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), texturePath, isCentered));
 }
 
-void GuiScreen::createTextField(const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 textColor, bool isCentered)
+void GuiScreen::createTextField(const string& ID, fvec2 position, fvec2 size, string textContent, const fvec3& textColor, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_textFields.push_back(make_shared<GuiTextField>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), textContent, textColor, isCentered));

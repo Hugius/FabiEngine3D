@@ -10,7 +10,7 @@ void WaterEntity::setHeight(float value)
 	_height = value;
 }
 
-void WaterEntity::setColor(fvec3 value)
+void WaterEntity::setColor(const fvec3& value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -115,7 +115,7 @@ void WaterEntity::setWireframed(bool value)
 	_isWireframed = value;
 }
 
-void WaterEntity::setWireframeColor(fvec3 value)
+void WaterEntity::setWireframeColor(const fvec3& value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -135,7 +135,7 @@ const float WaterEntity::getHeight() const
 	return _height;
 }
 
-const fvec3 WaterEntity::getColor() const
+const fvec3& WaterEntity::getColor() const
 {
 	return _color;
 }
@@ -205,7 +205,7 @@ const fvec2 WaterEntity::getWaveOffset() const
 	return _waveOffset;
 }
 
-const fvec3 WaterEntity::getWireframeColor() const
+const fvec3& WaterEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }

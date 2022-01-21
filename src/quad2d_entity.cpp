@@ -78,7 +78,7 @@ void Quad2dEntity::setDiffuseMapPath(const string& value)
 	_diffuseMapPath = value;
 }
 
-void Quad2dEntity::setColor(fvec3 value)
+void Quad2dEntity::setColor(const fvec3& value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -98,7 +98,7 @@ void Quad2dEntity::setTransparency(float value)
 	_transparency = clamp(value, 0.0f, 1.0f);
 }
 
-void Quad2dEntity::setWireframeColor(fvec3 value)
+void Quad2dEntity::setWireframeColor(const fvec3& value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -201,12 +201,12 @@ const string& Quad2dEntity::getDiffuseMapPath() const
 	return _diffuseMapPath;
 }
 
-const fvec3 Quad2dEntity::getWireframeColor() const
+const fvec3& Quad2dEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const fvec3 Quad2dEntity::getColor() const
+const fvec3& Quad2dEntity::getColor() const
 {
 	return _color;
 }
@@ -241,7 +241,7 @@ const bool Quad2dEntity::hasDiffuseMap() const
 	return (_diffuseMap != nullptr);
 }
 
-const mat44 Quad2dEntity::getTransformationMatrix() const
+const mat44& Quad2dEntity::getTransformationMatrix() const
 {
 	return _transformationMatrix;
 }

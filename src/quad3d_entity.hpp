@@ -27,19 +27,19 @@ public:
 	void setWireframed(bool value);
 	void setDiffuseMap(shared_ptr<TextureBuffer> value);
 	void setEmissionMap(shared_ptr<TextureBuffer> value);
-	void setPosition(fvec3 value);
-	void setRotation(fvec3 value);
+	void setPosition(const fvec3& value);
+	void setRotation(const fvec3& value);
 	void setSize(fvec2 value);
-	void move(fvec3 value);
-	void rotate(fvec3 value);
+	void move(const fvec3& value);
+	void rotate(const fvec3& value);
 	void scale(fvec2 value);
-	void moveTo(fvec3 target, float speed);
-	void rotateTo(fvec3 target, float speed);
+	void moveTo(const fvec3& target, float speed);
+	void rotateTo(const fvec3& target, float speed);
 	void scaleTo(fvec2 target, float speed);
-	void setColor(fvec3 value);
+	void setColor(const fvec3& value);
 	void setUvMultiplier(fvec2 value);
 	void setUvOffset(fvec2 value);
-	void setWireframeColor(fvec3 value);
+	void setWireframeColor(const fvec3& value);
 	void setDiffuseMapPath(const string& value);
 	void setEmissionMapPath(const string& value);
 	void setLightness(float value);
@@ -55,10 +55,10 @@ public:
 
 	const mat44& getTransformationMatrix() const;
 
-	const fvec3 getPosition() const;
-	const fvec3 getRotation() const;
-	const fvec3 getColor() const;
-	const fvec3 getWireframeColor() const;
+	const fvec3& getPosition() const;
+	const fvec3& getRotation() const;
+	const fvec3& getColor() const;
+	const fvec3& getWireframeColor() const;
 
 	const fvec2 getSize() const;
 	const fvec2 getUvMultiplier() const;

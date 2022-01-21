@@ -16,12 +16,12 @@ public:
 	void updateTransformation();
 	void capture();
 	void setCaptured();
-	void setPosition(fvec3 value);
-	void move(fvec3 value);
-	void moveTo(fvec3 target, float speed);
+	void setPosition(const fvec3& value);
+	void move(const fvec3& value);
+	void moveTo(const fvec3& target, float speed);
 	void setCubeMap(shared_ptr<TextureBuffer> value);
 
-	const fvec3 getPosition() const;
+	const fvec3& getPosition() const;
 
 	const bool mustCapture() const;
 

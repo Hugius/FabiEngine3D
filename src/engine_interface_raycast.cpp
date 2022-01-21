@@ -234,7 +234,7 @@ const Ray EngineInterface::raycast_getCursorRay() const
 	return _core->getRaycaster()->getCursorRay();
 }
 
-const fvec3 EngineInterface::raycast_getPointOnTerrain() const
+const fvec3& EngineInterface::raycast_getPointOnTerrain() const
 {
 	return _core->getRaycaster()->getTerrainPoint();
 }

@@ -18,7 +18,7 @@ public:
 	void setFrozen(bool value);
 	void setDepthMapIncluded(bool value);
 	void setLevelOfDetailed(bool value);
-	void setLevelOfDetailSize(fvec3 value);
+	void setLevelOfDetailSize(const fvec3& value);
 	void setLevelOfDetailEntityID(const string& value);
 	void setPreviousReflectionEntityID(const string& value);
 	void setCurrentReflectionEntityID(const string& value);
@@ -33,28 +33,28 @@ public:
 	void setSpecularMap(const string& partID, shared_ptr<TextureBuffer> value);
 	void setReflectionMap(const string& partID, shared_ptr<TextureBuffer> value);
 	void setNormalMap(const string& partID, shared_ptr<TextureBuffer> value);
-	void setBasePosition(fvec3 value);
-	void setBaseRotation(fvec3 value);
-	void setBaseRotationOrigin(fvec3 value);
-	void setBaseSize(fvec3 value);
-	void setPartPosition(const string& partID, fvec3 value);
-	void setPartRotation(const string& partID, fvec3 value);
-	void setPartRotationOrigin(const string& partID, fvec3 value);
-	void setPartSize(const string& partID, fvec3 value);
-	void moveBase(fvec3 value);
-	void rotateBase(fvec3 value);
-	void scaleBase(fvec3 value);
-	void movePart(const string& partID, fvec3 value);
-	void rotatePart(const string& partID, fvec3 value);
-	void scalePart(const string& partID, fvec3 value);
-	void moveBaseTo(fvec3 target, float speed);
-	void rotateBaseTo(fvec3 target, float speed);
-	void scaleBaseTo(fvec3 target, float speed);
-	void movePartTo(const string& partID, fvec3 target, float speed);
-	void rotatePartTo(const string& partID, fvec3 target, float speed);
-	void scalePartTo(const string& partID, fvec3 target, float speed);
-	void setColor(const string& partID, fvec3 value);
-	void setWireframeColor(const string& partID, fvec3 value);
+	void setBasePosition(const fvec3& value);
+	void setBaseRotation(const fvec3& value);
+	void setBaseRotationOrigin(const fvec3& value);
+	void setBaseSize(const fvec3& value);
+	void setPartPosition(const string& partID, const fvec3& value);
+	void setPartRotation(const string& partID, const fvec3& value);
+	void setPartRotationOrigin(const string& partID, const fvec3& value);
+	void setPartSize(const string& partID, const fvec3& value);
+	void moveBase(const fvec3& value);
+	void rotateBase(const fvec3& value);
+	void scaleBase(const fvec3& value);
+	void movePart(const string& partID, const fvec3& value);
+	void rotatePart(const string& partID, const fvec3& value);
+	void scalePart(const string& partID, const fvec3& value);
+	void moveBaseTo(const fvec3& target, float speed);
+	void rotateBaseTo(const fvec3& target, float speed);
+	void scaleBaseTo(const fvec3& target, float speed);
+	void movePartTo(const string& partID, const fvec3& target, float speed);
+	void rotatePartTo(const string& partID, const fvec3& target, float speed);
+	void scalePartTo(const string& partID, const fvec3& target, float speed);
+	void setColor(const string& partID, const fvec3& value);
+	void setWireframeColor(const string& partID, const fvec3& value);
 	void setMeshPath(const string& value);
 	void setDiffuseMapPath(const string& partID, const string& value);
 	void setEmissionMapPath(const string& partID, const string& value);
@@ -88,17 +88,17 @@ public:
 
 	const mat44& getTransformationMatrix(const string& partID) const;
 
-	const fvec3 getColor(const string& partID) const;
-	const fvec3 getWireframeColor(const string& partID) const;
-	const fvec3 getLevelOfDetailSize() const;
-	const fvec3 getBasePosition() const;
-	const fvec3 getBaseRotation() const;
-	const fvec3 getBaseRotationOrigin() const;
-	const fvec3 getBaseSize() const;
-	const fvec3 getPartPosition(const string& partID) const;
-	const fvec3 getPartRotation(const string& partID) const;
-	const fvec3 getPartRotationOrigin(const string& partID) const;
-	const fvec3 getPartSize(const string& partID) const;
+	const fvec3& getColor(const string& partID) const;
+	const fvec3& getWireframeColor(const string& partID) const;
+	const fvec3& getLevelOfDetailSize() const;
+	const fvec3& getBasePosition() const;
+	const fvec3& getBaseRotation() const;
+	const fvec3& getBaseRotationOrigin() const;
+	const fvec3& getBaseSize() const;
+	const fvec3& getPartPosition(const string& partID) const;
+	const fvec3& getPartRotation(const string& partID) const;
+	const fvec3& getPartRotationOrigin(const string& partID) const;
+	const fvec3& getPartSize(const string& partID) const;
 
 	const float getCubeReflectionMixValue() const;
 	const float getMinHeight() const;
@@ -138,9 +138,9 @@ public:
 	const DirectionOrder getRotationOrder() const;
 
 private:
-	void _correctPositionTarget(fvec3& current, fvec3 target, float speed);
-	void _correctRotationTarget(fvec3& current, fvec3 target, float speed);
-	void _correctSizeTarget(fvec3& current, fvec3 target, float speed);
+	void _correctPositionTarget(fvec3& current, const fvec3& target, float speed);
+	void _correctRotationTarget(fvec3& current, const fvec3& target, float speed);
+	void _correctSizeTarget(fvec3& current, const fvec3& target, float speed);
 
 	const unsigned int _getPartIndex(const string& partID) const;
 

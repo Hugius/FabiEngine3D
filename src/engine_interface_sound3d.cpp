@@ -103,17 +103,17 @@ void EngineInterface::sound3d_stopAll()
 	_core->getSound3dPlayer()->stopSounds(_core->getSound3dManager()->getSounds());
 }
 
-void EngineInterface::sound3d_setPosition(const string& ID, fvec3 value)
+void EngineInterface::sound3d_setPosition(const string& ID, const fvec3& value)
 {
 	_core->getSound3dManager()->getSound(ID).setPosition(value);
 }
 
-void EngineInterface::sound3d_move(const string& ID, fvec3 change)
+void EngineInterface::sound3d_move(const string& ID, const fvec3& change)
 {
 	_core->getSound3dManager()->getSound(ID).move(change);
 }
 
-void EngineInterface::sound3d_moveTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::sound3d_moveTo(const string& ID, const fvec3& target, float speed)
 {
 	_core->getSound3dManager()->getSound(ID).moveTo(target, speed);
 }
@@ -175,7 +175,7 @@ const float EngineInterface::sound3d_getMaxVolume(const string& ID) const
 	return _core->getSound3dManager()->getSound(ID).getMaxVolume();
 }
 
-const fvec3 EngineInterface::sound3d_getPosition(const string& ID) const
+const fvec3& EngineInterface::sound3d_getPosition(const string& ID) const
 {
 	return _core->getSound3dManager()->getSound(ID).getPosition();
 }

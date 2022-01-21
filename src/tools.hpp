@@ -23,8 +23,8 @@ public:
 	static const vector<string> getDirectoriesFromDirectory(const string& path);
 	static const string vec2str(ivec2 vec);
 	static const string vec2str(fvec2 vec);
-	static const string vec2str(fvec3 vec);
-	static const string vec2str(fvec4 vec);
+	static const string vec2str(const fvec3& vec);
+	static const string vec2str(const fvec4& vec);
 	static const string getRootDirectoryPath();
 	static const string chooseExplorerFile(const string& startingDirectory, const string& fileType);
 	static const string chooseExplorerDirectory(const string& startingDirectory);

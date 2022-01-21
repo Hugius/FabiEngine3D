@@ -39,7 +39,7 @@ void RenderWindow::setOpacity(float value)
 	SDL_SetWindowOpacity(_windowPointer, value);
 }
 
-void RenderWindow::enableColorKeying(fvec3 color)
+void RenderWindow::enableColorKeying(const fvec3& color)
 {
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
@@ -50,7 +50,7 @@ void RenderWindow::enableColorKeying(fvec3 color)
 	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_COLORKEY);
 }
 
-void RenderWindow::disableColorKeying(fvec3 color)
+void RenderWindow::disableColorKeying(const fvec3& color)
 {
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);

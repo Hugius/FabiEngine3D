@@ -1,6 +1,6 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::setBackgroundColor(fvec3 color)
+void MasterRenderer::setBackgroundColor(const fvec3& color)
 {
 	glClearColor(color.r, color.g, color.b, 1.0f);
 }

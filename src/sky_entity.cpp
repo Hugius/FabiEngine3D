@@ -20,7 +20,7 @@ void SkyEntity::setCubeMapPaths(const array<string, 6>& value)
 	_cubeMapPaths = value;
 }
 
-void SkyEntity::setColor(fvec3 value)
+void SkyEntity::setColor(const fvec3& value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -50,7 +50,7 @@ void SkyEntity::setWireframed(bool value)
 	_isWireframed = value;
 }
 
-void SkyEntity::setWireframeColor(fvec3 value)
+void SkyEntity::setWireframeColor(const fvec3& value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -70,12 +70,12 @@ const mat44& SkyEntity::getRotationMatrix() const
 	return _rotationMatrix;
 }
 
-const fvec3 SkyEntity::getWireframeColor() const
+const fvec3& SkyEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const fvec3 SkyEntity::getColor() const
+const fvec3& SkyEntity::getColor() const
 {
 	return _color;
 }

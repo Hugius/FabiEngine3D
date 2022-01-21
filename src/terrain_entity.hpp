@@ -45,7 +45,7 @@ public:
 	void setSpecularIntensity(float value);
 	void setSpecular(bool value);
 	void setWireframed(bool value);
-	void setWireframeColor(fvec3 value);
+	void setWireframeColor(const fvec3& value);
 
 	const string& getHeightMapPath() const;
 	const string& getDiffuseMapPath() const;
@@ -58,7 +58,7 @@ public:
 	const string& getGreenNormalMapPath() const;
 	const string& getBlueNormalMapPath() const;
 
-	const fvec3 getWireframeColor() const;
+	const fvec3& getWireframeColor() const;
 
 	const vector<float>& getPixels() const;
 	const float getTextureRepeat() const;

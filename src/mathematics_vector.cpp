@@ -1,6 +1,6 @@
 #include "mathematics.hpp"
 
-const fvec3 Math::calculateCrossProduct(fvec3 firstVector, fvec3 secondVector)
+const fvec3 Math::calculateCrossProduct(const fvec3& firstVector, const fvec3& secondVector)
 {
 	fvec3 crossVector;
 
@@ -19,7 +19,7 @@ const fvec2 Math::calculateDifference(fvec2 firstPosition, fvec2 secondPosition)
 	return fvec2(xDistance, yDistance);
 }
 
-const fvec3 Math::calculateDifference(fvec3 firstPosition, fvec3 secondPosition)
+const fvec3 Math::calculateDifference(const fvec3& firstPosition, const fvec3& secondPosition)
 {
 	float xDistance = fabsf(firstPosition.x - secondPosition.x);
 	float yDistance = fabsf(firstPosition.y - secondPosition.y);
@@ -28,7 +28,7 @@ const fvec3 Math::calculateDifference(fvec3 firstPosition, fvec3 secondPosition)
 	return fvec3(xDistance, yDistance, zDistance);
 }
 
-const fvec4 Math::calculateDifference(fvec4 firstPosition, fvec4 secondPosition)
+const fvec4 Math::calculateDifference(const fvec4& firstPosition, const fvec4& secondPosition)
 {
 	float xDistance = fabsf(firstPosition.x - secondPosition.x);
 	float yDistance = fabsf(firstPosition.y - secondPosition.y);
@@ -48,27 +48,18 @@ const fvec2 Math::normalize(fvec2 vector)
 	return vector;
 }
 
-const fvec3 Math::normalize(fvec3 vector)
+const fvec3 Math::normalize(const fvec3& vector)
 {
-	float inverseMagnitude = (1.0f / calculateMagnitude(vector));
+	const float inverseMagnitude = (1.0f / calculateMagnitude(vector));
 
-	vector.x *= inverseMagnitude;
-	vector.y *= inverseMagnitude;
-	vector.z *= inverseMagnitude;
-
-	return vector;
+	return fvec3((vector.x * inverseMagnitude), (vector.y * inverseMagnitude), (vector.z * inverseMagnitude));
 }
 
-const fvec4 Math::normalize(fvec4 vector)
+const fvec4 Math::normalize(const fvec4& vector)
 {
-	float inverseMagnitude = (1.0f / calculateMagnitude(vector));
+	const float inverseMagnitude = (1.0f / calculateMagnitude(vector));
 
-	vector.x *= inverseMagnitude;
-	vector.y *= inverseMagnitude;
-	vector.z *= inverseMagnitude;
-	vector.w *= inverseMagnitude;
-
-	return vector;
+	return fvec4((vector.x * inverseMagnitude), (vector.y * inverseMagnitude), (vector.z * inverseMagnitude), (vector.w * inverseMagnitude));
 }
 
 const float Math::calculateDistance(fvec2 firstPosition, fvec2 secondPosition)
@@ -84,7 +75,7 @@ const float Math::calculateDistance(fvec2 firstPosition, fvec2 secondPosition)
 	return calculateMagnitude(fvec2(xDistance, yDistance));
 }
 
-const float Math::calculateDistance(fvec3 firstPosition, fvec3 secondPosition)
+const float Math::calculateDistance(const fvec3& firstPosition, const fvec3& secondPosition)
 {
 	if(firstPosition == secondPosition)
 	{
@@ -98,7 +89,7 @@ const float Math::calculateDistance(fvec3 firstPosition, fvec3 secondPosition)
 	return calculateMagnitude(fvec3(xDistance, yDistance, zDistance));
 }
 
-const float Math::calculateDistance(fvec4 firstPosition, fvec4 secondPosition)
+const float Math::calculateDistance(const fvec4& firstPosition, const fvec4& secondPosition)
 {
 	if(firstPosition == secondPosition)
 	{
@@ -118,12 +109,12 @@ const float Math::calculateDotProduct(fvec2 firstVector, fvec2 secondVector)
 	return ((firstVector.x * secondVector.x) + (firstVector.y * secondVector.y));
 }
 
-const float Math::calculateDotProduct(fvec3 firstVector, fvec3 secondVector)
+const float Math::calculateDotProduct(const fvec3& firstVector, const fvec3& secondVector)
 {
 	return ((firstVector.x * secondVector.x) + (firstVector.y * secondVector.y) + (firstVector.z * secondVector.z));
 }
 
-const float Math::calculateDotProduct(fvec4 firstVector, fvec4 secondVector)
+const float Math::calculateDotProduct(const fvec4& firstVector, const fvec4& secondVector)
 {
 	return ((firstVector.x * secondVector.x) + (firstVector.y * secondVector.y) + (firstVector.z * secondVector.z) + (firstVector.w * secondVector.w));
 }
@@ -133,12 +124,12 @@ const float Math::calculateMagnitude(fvec2 vector)
 	return sqrtf((vector.x * vector.x) + (vector.y * vector.y));
 }
 
-const float Math::calculateMagnitude(fvec3 vector)
+const float Math::calculateMagnitude(const fvec3& vector)
 {
 	return sqrtf((vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z));
 }
 
-const float Math::calculateMagnitude(fvec4 vector)
+const float Math::calculateMagnitude(const fvec4& vector)
 {
 	return sqrtf((vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z) + (vector.w * vector.w));
 }

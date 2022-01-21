@@ -14,12 +14,12 @@ public:
 	void addFrame(const Animation3dFrame& value);
 	void setFrame(unsigned int index, const Animation3dFrame& value);
 	void setFrames(const vector<Animation3dFrame>& value);
-	void addPart(const string& partID, fvec3 totalMovement, fvec3 totalRotation, fvec3 totalScaling);
+	void addPart(const string& partID, const fvec3& totalMovement, const fvec3& totalRotation, const fvec3& totalScaling);
 	void setPreviewModelID(const string& value);
-	void setTotalMovement(const string& partID, fvec3 value);
-	void setTotalRotation(const string& partID, fvec3 value);
-	void setTotalScaling(const string& partID, fvec3 value);
-	void setInitialSize(fvec3 value);
+	void setTotalMovement(const string& partID, const fvec3& value);
+	void setTotalRotation(const string& partID, const fvec3& value);
+	void setTotalScaling(const string& partID, const fvec3& value);
+	void setInitialSize(const fvec3& value);
 	void setSpeed(float value);
 	void setPlayCount(int value);
 	void setFrameIndex(unsigned int value);
@@ -33,7 +33,7 @@ public:
 	const map<string, fvec3>& getTotalMovements() const;
 	const map<string, fvec3>& getTotalRotations() const;
 	const map<string, fvec3>& getTotalScalings() const;
-	const fvec3 getInitialSize() const;
+	const fvec3& getInitialSize() const;
 
 	const float getSpeed() const;
 

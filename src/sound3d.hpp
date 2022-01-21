@@ -10,13 +10,13 @@ public:
 	using Sound2d::Sound2d;
 
 	void updateTransformation();
-	void setPosition(fvec3 value);
-	void move(fvec3 value);
-	void moveTo(fvec3 target, float speed);
+	void setPosition(const fvec3& value);
+	void move(const fvec3& value);
+	void moveTo(const fvec3& target, float speed);
 	void setMaxVolume(float value);
 	void setMaxDistance(float value);
 
-	const fvec3 getPosition() const;
+	const fvec3& getPosition() const;
 
 	const float getMaxVolume() const;
 	const float getMaxDistance() const;

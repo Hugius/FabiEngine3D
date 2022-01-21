@@ -7,10 +7,10 @@
 class GuiButton
 {
 public:
-	GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor,
-			  string textContent, fvec3 textColor, fvec3 textHoverColor, bool isCentered);
+	GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const fvec3& color, const fvec3& hoverColor,
+			  string textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered);
 	GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size,
-			  const string& texturePath, fvec3 hoverColor, bool isCentered);
+			  const string& texturePath, const fvec3& hoverColor, bool isCentered);
 
 	virtual void update(bool isHoverable);
 	virtual void changeTextContent(const string& content);

@@ -11,7 +11,7 @@ void Animation3dFrame::deleteParts()
 	_transformationTypes.clear();
 }
 
-void Animation3dFrame::addPart(const string& partID, fvec3 targetTransformation, fvec3 rotationOrigin, fvec3 speed, Animation3dSpeedType animationSpeedType, TransformationType transformationType)
+void Animation3dFrame::addPart(const string& partID, const fvec3& targetTransformation, const fvec3& rotationOrigin, const fvec3& speed, Animation3dSpeedType animationSpeedType, TransformationType transformationType)
 {
 	_targetTransformations.insert(make_pair(partID, targetTransformation));
 	_rotationOrigins.insert(make_pair(partID, rotationOrigin));
@@ -20,17 +20,17 @@ void Animation3dFrame::addPart(const string& partID, fvec3 targetTransformation,
 	_transformationTypes.insert(make_pair(partID, transformationType));
 }
 
-void Animation3dFrame::setTargetTransformation(const string& partID, fvec3 value)
+void Animation3dFrame::setTargetTransformation(const string& partID, const fvec3& value)
 {
 	_targetTransformations.at(partID) = value;
 }
 
-void Animation3dFrame::setRotationOrigin(const string& partID, fvec3 value)
+void Animation3dFrame::setRotationOrigin(const string& partID, const fvec3& value)
 {
 	_rotationOrigins.at(partID) = value;
 }
 
-void Animation3dFrame::setSpeed(const string& partID, fvec3 value)
+void Animation3dFrame::setSpeed(const string& partID, const fvec3& value)
 {
 	_speeds.at(partID) = value;
 }

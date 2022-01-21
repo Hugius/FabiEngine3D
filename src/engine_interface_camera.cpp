@@ -75,17 +75,17 @@ void EngineInterface::camera_moveFollowZ(float speed)
 	_core->getCamera()->moveFollowZ(speed);
 }
 
-void EngineInterface::camera_move(fvec3 speed)
+void EngineInterface::camera_move(const fvec3& speed)
 {
 	_core->getCamera()->move(speed);
 }
 
-void EngineInterface::camera_setPosition(fvec3 value)
+void EngineInterface::camera_setPosition(const fvec3& value)
 {
 	_core->getCamera()->setPosition(value);
 }
 
-void EngineInterface::camera_setThirdPersonLookat(fvec3 value)
+void EngineInterface::camera_setThirdPersonLookat(const fvec3& value)
 {
 	_core->getCamera()->setThirdPersonLookat(value);
 }
@@ -210,27 +210,27 @@ const float EngineInterface::camera_getCursorSensitivity() const
 	return _core->getCamera()->getCursorSensitivity();
 }
 
-const fvec3 EngineInterface::camera_getPosition() const
+const fvec3& EngineInterface::camera_getPosition() const
 {
 	return _core->getCamera()->getPosition();
 }
 
-const fvec3 EngineInterface::camera_getUpVector() const
+const fvec3& EngineInterface::camera_getUpVector() const
 {
 	return _core->getCamera()->getUpVector();
 }
 
-const fvec3 EngineInterface::camera_getFrontVector() const
+const fvec3& EngineInterface::camera_getFrontVector() const
 {
 	return _core->getCamera()->getFrontVector();
 }
 
-const fvec3 EngineInterface::camera_getRightVector() const
+const fvec3& EngineInterface::camera_getRightVector() const
 {
 	return _core->getCamera()->getRightVector();
 }
 
-const fvec3 EngineInterface::camera_getThirdPersonLookat() const
+const fvec3& EngineInterface::camera_getThirdPersonLookat() const
 {
 	return _core->getCamera()->getThirdPersonLookat();
 }

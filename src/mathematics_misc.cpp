@@ -161,12 +161,12 @@ const bool Math::isNormalized(fvec2 vector)
 	return (calculateMagnitude(vector) == 1.0f);
 }
 
-const bool Math::isNormalized(fvec3 vector)
+const bool Math::isNormalized(const fvec3& vector)
 {
 	return (calculateMagnitude(vector) == 1.0f);
 }
 
-const bool Math::isNormalized(fvec4 vector)
+const bool Math::isNormalized(const fvec4& vector)
 {
 	return (calculateMagnitude(vector) == 1.0f);
 }

@@ -71,12 +71,12 @@ const string Tools::vec2str(fvec2 vec)
 	return string(to_string(vec.x) + " " + to_string(vec.y));
 }
 
-const string Tools::vec2str(fvec3 vec)
+const string Tools::vec2str(const fvec3& vec)
 {
 	return string(to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z));
 }
 
-const string Tools::vec2str(fvec4 vec)
+const string Tools::vec2str(const fvec4& vec)
 {
 	return string(to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w));
 }

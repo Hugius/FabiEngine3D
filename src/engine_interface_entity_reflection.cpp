@@ -21,17 +21,17 @@ void EngineInterface::reflection_setVisible(const string& ID, bool value)
 	_core->getReflectionEntityManager()->getEntity(ID)->setVisible(value);
 }
 
-void EngineInterface::reflection_setPosition(const string& ID, fvec3 value)
+void EngineInterface::reflection_setPosition(const string& ID, const fvec3& value)
 {
 	_core->getReflectionEntityManager()->getEntity(ID)->setPosition(value);
 }
 
-void EngineInterface::reflection_move(const string& ID, fvec3 change)
+void EngineInterface::reflection_move(const string& ID, const fvec3& change)
 {
 	_core->getReflectionEntityManager()->getEntity(ID)->move(change);
 }
 
-void EngineInterface::reflection_moveTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::reflection_moveTo(const string& ID, const fvec3& target, float speed)
 {
 	_core->getReflectionEntityManager()->getEntity(ID)->moveTo(target, speed);
 }
@@ -53,7 +53,7 @@ const vector<string> EngineInterface::reflection_getIDs() const
 	return result;
 }
 
-const fvec3 EngineInterface::reflection_getPosition(const string& ID) const
+const fvec3& EngineInterface::reflection_getPosition(const string& ID) const
 {
 	return _core->getReflectionEntityManager()->getEntity(ID)->getPosition();
 }

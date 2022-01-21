@@ -149,59 +149,59 @@ void ModelEntity::setNormalMap(const string& partID, shared_ptr<TextureBuffer> v
 	_parts[_getPartIndex(partID)].normalMap = value;
 }
 
-void ModelEntity::setBasePosition(fvec3 value)
+void ModelEntity::setBasePosition(const fvec3& value)
 {
 	_basePosition = value;
 	_basePositionTarget = _basePosition;
 }
 
-void ModelEntity::setBaseRotation(fvec3 value)
+void ModelEntity::setBaseRotation(const fvec3& value)
 {
 	_baseRotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 	_baseRotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
-void ModelEntity::setBaseRotationOrigin(fvec3 value)
+void ModelEntity::setBaseRotationOrigin(const fvec3& value)
 {
 	_baseRotationOrigin = value;
 }
 
-void ModelEntity::setBaseSize(fvec3 value)
+void ModelEntity::setBaseSize(const fvec3& value)
 {
 	_baseSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 	_baseSizeTarget = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-void ModelEntity::setPartPosition(const string& partID, fvec3 value)
+void ModelEntity::setPartPosition(const string& partID, const fvec3& value)
 {
 	_parts[_getPartIndex(partID)].position = value;
 	_parts[_getPartIndex(partID)].positionTarget = value;
 }
 
-void ModelEntity::setPartRotation(const string& partID, fvec3 value)
+void ModelEntity::setPartRotation(const string& partID, const fvec3& value)
 {
 	_parts[_getPartIndex(partID)].rotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 	_parts[_getPartIndex(partID)].rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
-void ModelEntity::setPartRotationOrigin(const string& partID, fvec3 value)
+void ModelEntity::setPartRotationOrigin(const string& partID, const fvec3& value)
 {
 	_parts[_getPartIndex(partID)].rotationOrigin = value;
 }
 
-void ModelEntity::setPartSize(const string& partID, fvec3 value)
+void ModelEntity::setPartSize(const string& partID, const fvec3& value)
 {
 	_parts[_getPartIndex(partID)].size = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 	_parts[_getPartIndex(partID)].sizeTarget = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-void ModelEntity::moveBase(fvec3 value)
+void ModelEntity::moveBase(const fvec3& value)
 {
 	_basePosition += value;
 	_basePositionTarget += value;
 }
 
-void ModelEntity::rotateBase(fvec3 value)
+void ModelEntity::rotateBase(const fvec3& value)
 {
 	_baseRotation += value;
 	_baseRotationTarget += value;
@@ -209,7 +209,7 @@ void ModelEntity::rotateBase(fvec3 value)
 	_baseRotationTarget = fvec3(Math::limitAngle(_baseRotationTarget.x), Math::limitAngle(_baseRotationTarget.y), Math::limitAngle(_baseRotationTarget.z));
 }
 
-void ModelEntity::scaleBase(fvec3 value)
+void ModelEntity::scaleBase(const fvec3& value)
 {
 	_baseSize += value;
 	_baseSizeTarget += value;
@@ -217,13 +217,13 @@ void ModelEntity::scaleBase(fvec3 value)
 	_baseSizeTarget = fvec3(max(0.0f, _baseSizeTarget.x), max(0.0f, _baseSizeTarget.y), max(0.0f, _baseSizeTarget.z));
 }
 
-void ModelEntity::movePart(const string& partID, fvec3 value)
+void ModelEntity::movePart(const string& partID, const fvec3& value)
 {
 	_parts[_getPartIndex(partID)].position += value;
 	_parts[_getPartIndex(partID)].positionTarget += value;
 }
 
-void ModelEntity::rotatePart(const string& partID, fvec3 value)
+void ModelEntity::rotatePart(const string& partID, const fvec3& value)
 {
 	fvec3& rotation = _parts[_getPartIndex(partID)].rotation;
 	fvec3& rotationTarget = _parts[_getPartIndex(partID)].rotationTarget;
@@ -233,7 +233,7 @@ void ModelEntity::rotatePart(const string& partID, fvec3 value)
 	rotationTarget = fvec3(Math::limitAngle(rotationTarget.x), Math::limitAngle(rotationTarget.y), Math::limitAngle(rotationTarget.z));
 }
 
-void ModelEntity::scalePart(const string& partID, fvec3 value)
+void ModelEntity::scalePart(const string& partID, const fvec3& value)
 {
 	fvec3& size = _parts[_getPartIndex(partID)].size;
 	fvec3& sizeTarget = _parts[_getPartIndex(partID)].sizeTarget;
@@ -243,48 +243,48 @@ void ModelEntity::scalePart(const string& partID, fvec3 value)
 	sizeTarget = fvec3(max(0.0f, sizeTarget.x), max(0.0f, sizeTarget.y), max(0.0f, sizeTarget.z));
 }
 
-void ModelEntity::moveBaseTo(fvec3 target, float speed)
+void ModelEntity::moveBaseTo(const fvec3& target, float speed)
 {
 	_basePositionTarget = target;
 	_basePositionTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::rotateBaseTo(fvec3 target, float speed)
+void ModelEntity::rotateBaseTo(const fvec3& target, float speed)
 {
 	_baseRotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 	_baseRotationTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::scaleBaseTo(fvec3 target, float speed)
+void ModelEntity::scaleBaseTo(const fvec3& target, float speed)
 {
 	_baseSizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
 	_baseSizeTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::movePartTo(const string& partID, fvec3 target, float speed)
+void ModelEntity::movePartTo(const string& partID, const fvec3& target, float speed)
 {
 	_parts[_getPartIndex(partID)].positionTarget = target;
 	_parts[_getPartIndex(partID)].positionTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::rotatePartTo(const string& partID, fvec3 target, float speed)
+void ModelEntity::rotatePartTo(const string& partID, const fvec3& target, float speed)
 {
 	_parts[_getPartIndex(partID)].rotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 	_parts[_getPartIndex(partID)].rotationTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::scalePartTo(const string& partID, fvec3 target, float speed)
+void ModelEntity::scalePartTo(const string& partID, const fvec3& target, float speed)
 {
 	_parts[_getPartIndex(partID)].sizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
 	_parts[_getPartIndex(partID)].sizeTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::setColor(const string& partID, fvec3 value)
+void ModelEntity::setColor(const string& partID, const fvec3& value)
 {
 	_parts[_getPartIndex(partID)].color = fvec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 }
 
-void ModelEntity::setWireframeColor(const string& partID, fvec3 value)
+void ModelEntity::setWireframeColor(const string& partID, const fvec3& value)
 {
 	_parts[_getPartIndex(partID)].wireframeColor = fvec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 }
@@ -294,7 +294,7 @@ void ModelEntity::setMeshPath(const string& value)
 	_meshPath = value;
 }
 
-void ModelEntity::setLevelOfDetailSize(fvec3 value)
+void ModelEntity::setLevelOfDetailSize(const fvec3& value)
 {
 	_levelOfDetailSize = value;
 }
@@ -459,7 +459,7 @@ void ModelEntity::setEmissionIntensity(const string& partID, float value)
 	_parts[_getPartIndex(partID)].emissionIntensity = max(0.0f, value);
 }
 
-void ModelEntity::_correctPositionTarget(fvec3& current, fvec3 target, float speed)
+void ModelEntity::_correctPositionTarget(fvec3& current, const fvec3& target, float speed)
 {
 	if(fabsf(target.x - current.x) <= speed)
 	{
@@ -477,7 +477,7 @@ void ModelEntity::_correctPositionTarget(fvec3& current, fvec3 target, float spe
 	}
 }
 
-void ModelEntity::_correctRotationTarget(fvec3& current, fvec3 target, float speed)
+void ModelEntity::_correctRotationTarget(fvec3& current, const fvec3& target, float speed)
 {
 	current = fvec3(Math::limitAngle(current.x), Math::limitAngle(current.y), Math::limitAngle(current.z));
 
@@ -497,7 +497,7 @@ void ModelEntity::_correctRotationTarget(fvec3& current, fvec3 target, float spe
 	}
 }
 
-void ModelEntity::_correctSizeTarget(fvec3& current, fvec3 target, float speed)
+void ModelEntity::_correctSizeTarget(fvec3& current, const fvec3& target, float speed)
 {
 	current = fvec3(max(0.0f, current.x), max(0.0f, current.y), max(0.0f, current.z));
 
@@ -552,57 +552,57 @@ const shared_ptr<TextureBuffer> ModelEntity::getNormalMap(const string& partID) 
 	return _parts[_getPartIndex(partID)].normalMap;
 }
 
-const fvec3 ModelEntity::getColor(const string& partID) const
+const fvec3& ModelEntity::getColor(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].color;
 }
 
-const fvec3 ModelEntity::getWireframeColor(const string& partID) const
+const fvec3& ModelEntity::getWireframeColor(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].wireframeColor;
 }
 
-const fvec3 ModelEntity::getBasePosition() const
+const fvec3& ModelEntity::getBasePosition() const
 {
 	return _basePosition;
 }
 
-const fvec3 ModelEntity::getBaseRotation() const
+const fvec3& ModelEntity::getBaseRotation() const
 {
 	return _baseRotation;
 }
 
-const fvec3 ModelEntity::getBaseRotationOrigin() const
+const fvec3& ModelEntity::getBaseRotationOrigin() const
 {
 	return _baseRotationOrigin;
 }
 
-const fvec3 ModelEntity::getBaseSize() const
+const fvec3& ModelEntity::getBaseSize() const
 {
 	return _baseSize;
 }
 
-const fvec3 ModelEntity::getPartPosition(const string& partID) const
+const fvec3& ModelEntity::getPartPosition(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].position;
 }
 
-const fvec3 ModelEntity::getPartRotation(const string& partID) const
+const fvec3& ModelEntity::getPartRotation(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].rotation;
 }
 
-const fvec3 ModelEntity::getPartRotationOrigin(const string& partID) const
+const fvec3& ModelEntity::getPartRotationOrigin(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].rotationOrigin;
 }
 
-const fvec3 ModelEntity::getPartSize(const string& partID) const
+const fvec3& ModelEntity::getPartSize(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].size;
 }
 
-const fvec3 ModelEntity::getLevelOfDetailSize() const
+const fvec3& ModelEntity::getLevelOfDetailSize() const
 {
 	return _levelOfDetailSize;
 }

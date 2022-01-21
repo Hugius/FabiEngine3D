@@ -20,7 +20,7 @@ public:
 	void setSpeed(fvec2 value);
 	void setRippleOffset(fvec2 value);
 	void setWaveOffset(fvec2 value);
-	void setColor(fvec3 value);
+	void setColor(const fvec3& value);
 	void setDudvMap(shared_ptr<TextureBuffer> value);
 	void setNormalMap(shared_ptr<TextureBuffer> value);
 	void setDisplacementMap(shared_ptr<TextureBuffer> value);
@@ -38,14 +38,14 @@ public:
 	void setReflective(bool value);
 	void setRefractive(bool value);
 	void setWireframed(bool value);
-	void setWireframeColor(fvec3 value);
+	void setWireframeColor(const fvec3& value);
 
 	const string& getDudvMapPath() const;
 	const string& getNormalMapPath() const;
 	const string& getDisplacementMapPath() const;
 
-	const fvec3 getColor() const;
-	const fvec3 getWireframeColor() const;
+	const fvec3& getColor() const;
+	const fvec3& getWireframeColor() const;
 
 	const fvec2 getSpeed() const;
 	const fvec2 getRippleOffset() const;

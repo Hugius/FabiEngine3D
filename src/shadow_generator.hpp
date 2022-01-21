@@ -8,8 +8,8 @@ public:
 	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
 	void generate();
-	void setEyePosition(fvec3 value);
-	void setCenterPosition(fvec3 value);
+	void setEyePosition(const fvec3& value);
+	void setCenterPosition(const fvec3& value);
 	void setSize(float value);
 	void setReach(float value);
 	void setLightness(float value);
@@ -18,8 +18,8 @@ public:
 	void setEnabled(bool value);
 	void setFollowingCamera(bool value);
 
-	const fvec3 getEyePosition() const;
-	const fvec3 getCenterPosition() const;
+	const fvec3& getEyePosition() const;
+	const fvec3& getCenterPosition() const;
 
 	const float getSize() const;
 	const float getReach() const;
@@ -32,7 +32,7 @@ public:
 	const bool isFollowingCamera() const;
 
 private:
-	const mat44 _createShadowMatrix(fvec3 eyePosition, fvec3 centerPosition, float size, float reach) const;
+	const mat44 _createShadowMatrix(const fvec3& eyePosition, const fvec3& centerPosition, float size, float reach) const;
 
 	fvec3 _eyePosition = fvec3(0.0f);
 	fvec3 _centerPosition = fvec3(0.0f);

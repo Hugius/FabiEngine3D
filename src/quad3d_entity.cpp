@@ -127,13 +127,13 @@ void Quad3dEntity::setEmissionMap(shared_ptr<TextureBuffer> value)
 	_emissionMap = value;
 }
 
-void Quad3dEntity::setPosition(fvec3 value)
+void Quad3dEntity::setPosition(const fvec3& value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void Quad3dEntity::setRotation(fvec3 value)
+void Quad3dEntity::setRotation(const fvec3& value)
 {
 	_rotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 	_rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
@@ -145,13 +145,13 @@ void Quad3dEntity::setSize(fvec2 value)
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Quad3dEntity::move(fvec3 value)
+void Quad3dEntity::move(const fvec3& value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void Quad3dEntity::rotate(fvec3 value)
+void Quad3dEntity::rotate(const fvec3& value)
 {
 	_rotation += value;
 	_rotationTarget += value;
@@ -167,13 +167,13 @@ void Quad3dEntity::scale(fvec2 value)
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void Quad3dEntity::moveTo(fvec3 target, float speed)
+void Quad3dEntity::moveTo(const fvec3& target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void Quad3dEntity::rotateTo(fvec3 target, float speed)
+void Quad3dEntity::rotateTo(const fvec3& target, float speed)
 {
 	_rotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 	_rotationTargetSpeed = speed;
@@ -185,7 +185,7 @@ void Quad3dEntity::scaleTo(fvec2 target, float speed)
 	_sizeTargetSpeed = speed;
 }
 
-void Quad3dEntity::setColor(fvec3 value)
+void Quad3dEntity::setColor(const fvec3& value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -200,7 +200,7 @@ void Quad3dEntity::setUvOffset(fvec2 value)
 	_uvOffset = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Quad3dEntity::setWireframeColor(fvec3 value)
+void Quad3dEntity::setWireframeColor(const fvec3& value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -300,12 +300,12 @@ const shared_ptr<TextureBuffer> Quad3dEntity::getEmissionMap() const
 	return _emissionMap;
 }
 
-const fvec3 Quad3dEntity::getPosition() const
+const fvec3& Quad3dEntity::getPosition() const
 {
 	return _position;
 }
 
-const fvec3 Quad3dEntity::getRotation() const
+const fvec3& Quad3dEntity::getRotation() const
 {
 	return _rotation;
 }
@@ -325,12 +325,12 @@ const fvec2 Quad3dEntity::getUvOffset() const
 	return _uvOffset;
 }
 
-const fvec3 Quad3dEntity::getColor() const
+const fvec3& Quad3dEntity::getColor() const
 {
 	return _color;
 }
 
-const fvec3 Quad3dEntity::getWireframeColor() const
+const fvec3& Quad3dEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }

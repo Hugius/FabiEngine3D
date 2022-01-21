@@ -6,10 +6,10 @@
 class CameraCollisionDetector final
 {
 public:
-	const bool checkX(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const;
-	const bool checkY(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const;
-	const bool checkZ(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const;
+	const bool checkX(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, Box box) const;
+	const bool checkY(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, Box box) const;
+	const bool checkZ(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, Box box) const;
 
 private:
-	const bool _isInside(fvec3 aabbPosition, fvec3 aabbHalfSize, fvec3 boxMiddle, Box box) const;
+	const bool _isInside(const fvec3& aabbPosition, const fvec3& aabbHalfSize, const fvec3& boxMiddle, Box box) const;
 };

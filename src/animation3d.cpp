@@ -25,7 +25,7 @@ void Animation3d::addFrame(const Animation3dFrame& value)
 	_frames.push_back(value);
 }
 
-void Animation3d::addPart(const string& partID, fvec3 totalMovement, fvec3 totalRotation, fvec3 totalScaling)
+void Animation3d::addPart(const string& partID, const fvec3& totalMovement, const fvec3& totalRotation, const fvec3& totalScaling)
 {
 	_partIDs.push_back(partID);
 	_totalMovements.insert(make_pair(partID, totalMovement));
@@ -33,17 +33,17 @@ void Animation3d::addPart(const string& partID, fvec3 totalMovement, fvec3 total
 	_totalScalings.insert(make_pair(partID, totalScaling));
 }
 
-void Animation3d::setTotalMovement(const string& partID, fvec3 value)
+void Animation3d::setTotalMovement(const string& partID, const fvec3& value)
 {
 	_totalMovements.at(partID) = value;
 }
 
-void Animation3d::setTotalRotation(const string& partID, fvec3 value)
+void Animation3d::setTotalRotation(const string& partID, const fvec3& value)
 {
 	_totalRotations.at(partID) = value;
 }
 
-void Animation3d::setTotalScaling(const string& partID, fvec3 value)
+void Animation3d::setTotalScaling(const string& partID, const fvec3& value)
 {
 	_totalScalings.at(partID) = value;
 }
@@ -53,7 +53,7 @@ void Animation3d::setPreviewModelID(const string& value)
 	_previewModelID = value;
 }
 
-void Animation3d::setInitialSize(fvec3 value)
+void Animation3d::setInitialSize(const fvec3& value)
 {
 	_initialSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
@@ -118,7 +118,7 @@ const string& Animation3d::getPreviewModelID() const
 	return _previewModelID;
 }
 
-const fvec3 Animation3d::getInitialSize() const
+const fvec3& Animation3d::getInitialSize() const
 {
 	return _initialSize;
 }

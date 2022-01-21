@@ -27,27 +27,27 @@ void EngineInterface::pointlight_setVisible(const string& ID, bool value)
 	_core->getPointlightEntityManager()->getEntity(ID)->setVisible(value);
 }
 
-void EngineInterface::pointlight_setPosition(const string& ID, fvec3 value)
+void EngineInterface::pointlight_setPosition(const string& ID, const fvec3& value)
 {
 	_core->getPointlightEntityManager()->getEntity(ID)->setPosition(value);
 }
 
-void EngineInterface::pointlight_move(const string& ID, fvec3 change)
+void EngineInterface::pointlight_move(const string& ID, const fvec3& change)
 {
 	_core->getPointlightEntityManager()->getEntity(ID)->move(change);
 }
 
-void EngineInterface::pointlight_moveTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::pointlight_moveTo(const string& ID, const fvec3& target, float speed)
 {
 	_core->getPointlightEntityManager()->getEntity(ID)->moveTo(target, speed);
 }
 
-void EngineInterface::pointlight_setRadius(const string& ID, fvec3 value)
+void EngineInterface::pointlight_setRadius(const string& ID, const fvec3& value)
 {
 	_core->getPointlightEntityManager()->getEntity(ID)->setRadius(value);
 }
 
-void EngineInterface::pointlight_setColor(const string& ID, fvec3 value)
+void EngineInterface::pointlight_setColor(const string& ID, const fvec3& value)
 {
 	_core->getPointlightEntityManager()->getEntity(ID)->setColor(value);
 }
@@ -77,17 +77,17 @@ const PointlightShape EngineInterface::pointlight_getShape(const string& ID) con
 	return _core->getPointlightEntityManager()->getEntity(ID)->getShape();
 }
 
-const fvec3 EngineInterface::pointlight_getPosition(const string& ID) const
+const fvec3& EngineInterface::pointlight_getPosition(const string& ID) const
 {
 	return _core->getPointlightEntityManager()->getEntity(ID)->getPosition();
 }
 
-const fvec3 EngineInterface::pointlight_getRadius(const string& ID) const
+const fvec3& EngineInterface::pointlight_getRadius(const string& ID) const
 {
 	return _core->getPointlightEntityManager()->getEntity(ID)->getRadius();
 }
 
-const fvec3 EngineInterface::pointlight_getColor(const string& ID) const
+const fvec3& EngineInterface::pointlight_getColor(const string& ID) const
 {
 	return _core->getPointlightEntityManager()->getEntity(ID)->getColor();
 }

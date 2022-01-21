@@ -1,6 +1,6 @@
 #include "camera_collision_detector.hpp"
 
-const bool CameraCollisionDetector::checkX(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const
+const bool CameraCollisionDetector::checkX(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, Box box) const
 {
 	const auto left = box.getLeft();
 	const auto right = box.getRight();
@@ -29,7 +29,7 @@ const bool CameraCollisionDetector::checkX(fvec3 aabbPosition, fvec3 aabbSize, f
 	}
 }
 
-const bool CameraCollisionDetector::checkY(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const
+const bool CameraCollisionDetector::checkY(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, Box box) const
 {
 	const auto bottom = box.getBottom();
 	const auto top = box.getTop();
@@ -58,7 +58,7 @@ const bool CameraCollisionDetector::checkY(fvec3 aabbPosition, fvec3 aabbSize, f
 	}
 }
 
-const bool CameraCollisionDetector::checkZ(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const
+const bool CameraCollisionDetector::checkZ(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, Box box) const
 {
 	const auto back = box.getBack();
 	const auto front = box.getFront();
@@ -87,7 +87,7 @@ const bool CameraCollisionDetector::checkZ(fvec3 aabbPosition, fvec3 aabbSize, f
 	}
 }
 
-const bool CameraCollisionDetector::_isInside(fvec3 aabbPosition, fvec3 aabbHalfSize, fvec3 boxMiddle, Box box) const
+const bool CameraCollisionDetector::_isInside(const fvec3& aabbPosition, const fvec3& aabbHalfSize, const fvec3& boxMiddle, Box box) const
 {
 	const auto left = box.getLeft();
 	const auto right = box.getRight();

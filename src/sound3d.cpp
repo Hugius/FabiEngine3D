@@ -27,19 +27,19 @@ void Sound3d::updateTransformation()
 	}
 }
 
-void Sound3d::setPosition(fvec3 value)
+void Sound3d::setPosition(const fvec3& value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void Sound3d::move(fvec3 value)
+void Sound3d::move(const fvec3& value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void Sound3d::moveTo(fvec3 target, float speed)
+void Sound3d::moveTo(const fvec3& target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
@@ -55,7 +55,7 @@ void Sound3d::setMaxDistance(float value)
 	_maxDistance = max(0.0f, value);
 }
 
-const fvec3 Sound3d::getPosition() const
+const fvec3& Sound3d::getPosition() const
 {
 	return _position;
 }

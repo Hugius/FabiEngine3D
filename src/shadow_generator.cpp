@@ -53,7 +53,7 @@ void ShadowGenerator::generate()
 	_renderBus->setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newSize, newReach));
 }
 
-const mat44 ShadowGenerator::_createShadowMatrix(fvec3 eyePosition, fvec3 centerPosition, float size, float reach) const
+const mat44 ShadowGenerator::_createShadowMatrix(const fvec3& eyePosition, const fvec3& centerPosition, float size, float reach) const
 {
 	float left = -(size / 2.0f);
 	float right = (size / 2.0f);
@@ -89,12 +89,12 @@ void ShadowGenerator::inject(shared_ptr<RenderBus> renderBus)
 	_renderBus = renderBus;
 }
 
-void ShadowGenerator::setEyePosition(fvec3 value)
+void ShadowGenerator::setEyePosition(const fvec3& value)
 {
 	_eyePosition = value;
 }
 
-void ShadowGenerator::setCenterPosition(fvec3 value)
+void ShadowGenerator::setCenterPosition(const fvec3& value)
 {
 	_centerPosition = value;
 }
@@ -119,12 +119,12 @@ void ShadowGenerator::setQuality(unsigned int value)
 	_quality = value;
 }
 
-const fvec3 ShadowGenerator::getEyePosition() const
+const fvec3& ShadowGenerator::getEyePosition() const
 {
 	return _eyePosition;
 }
 
-const fvec3 ShadowGenerator::getCenterPosition() const
+const fvec3& ShadowGenerator::getCenterPosition() const
 {
 	return _centerPosition;
 }

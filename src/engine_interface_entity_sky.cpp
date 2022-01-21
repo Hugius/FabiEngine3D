@@ -137,7 +137,7 @@ void EngineInterface::sky_setRotation(const string& ID, float value)
 	_core->getSkyEntityManager()->getEntity(ID)->setRotation(value);
 }
 
-void EngineInterface::sky_setColor(const string& ID, fvec3 value)
+void EngineInterface::sky_setColor(const string& ID, const fvec3& value)
 {
 	_core->getSkyEntityManager()->getEntity(ID)->setColor(value);
 }
@@ -147,7 +147,7 @@ void EngineInterface::sky_setWireframed(const string& ID, bool value)
 	_core->getSkyEntityManager()->getEntity(ID)->setWireframed(value);
 }
 
-void EngineInterface::sky_setWireframeColor(const string& ID, fvec3 value)
+void EngineInterface::sky_setWireframeColor(const string& ID, const fvec3& value)
 {
 	_core->getSkyEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
@@ -179,7 +179,7 @@ const string EngineInterface::sky_getMixID() const
 	}
 }
 
-const fvec3 EngineInterface::sky_getWireframeColor(const string& ID) const
+const fvec3& EngineInterface::sky_getWireframeColor(const string& ID) const
 {
 	return _core->getSkyEntityManager()->getEntity(ID)->getWireframeColor();
 }
@@ -251,7 +251,7 @@ const float EngineInterface::sky_getMixValue() const
 	return _core->getRenderBus()->getSkyMixValue();
 }
 
-const fvec3 EngineInterface::sky_getColor(const string& ID) const
+const fvec3& EngineInterface::sky_getColor(const string& ID) const
 {
 	return _core->getSkyEntityManager()->getEntity(ID)->getColor();
 }

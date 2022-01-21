@@ -15,9 +15,9 @@ public:
 	void reset();
 	void update(ivec2 lastCursorPosition);
 	void updateMatrices();
-	void move(fvec3 value);
-	void setPosition(fvec3 value);
-	void setThirdPersonLookat(fvec3 value);
+	void move(const fvec3& value);
+	void setPosition(const fvec3& value);
+	void setThirdPersonLookat(const fvec3& value);
 	void setThirdPersonDistance(float value);
 	void setAspectRatio(float value);
 	void setFOV(float value);
@@ -41,11 +41,11 @@ public:
 	const mat44& getViewMatrix() const;
 	const mat44& getProjectionMatrix() const;
 
-	const fvec3 getUpVector() const;
-	const fvec3 getFrontVector() const;
-	const fvec3 getRightVector() const;
-	const fvec3 getPosition() const;
-	const fvec3 getThirdPersonLookat() const;
+	const fvec3& getUpVector() const;
+	const fvec3& getFrontVector() const;
+	const fvec3& getRightVector() const;
+	const fvec3& getPosition() const;
+	const fvec3& getThirdPersonLookat() const;
 
 	const float getFOV() const;
 	const float getAspectRatio() const;

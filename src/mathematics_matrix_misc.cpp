@@ -1,30 +1,29 @@
 #include "mathematics.hpp"
 
-const mat22 Math::invertMatrix(mat22 matrix)
+const mat22 Math::invertMatrix(const mat22& matrix)
 {
 	auto determinant = calculateDeterminant(matrix);
-
 	if(determinant == 0.0f)
 	{
 		return mat22(0.0f);
 	}
 
 	mat22 tempMatrix;
-
 	tempMatrix.f[0] = matrix.f[3];
 	tempMatrix.f[1] = -matrix.f[1];
 	tempMatrix.f[2] = -matrix.f[2];
 	tempMatrix.f[3] = matrix.f[0];
 
+	mat22 newMatrix;
 	for(unsigned int i = 0; i < 4; i++)
 	{
-		matrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
+		newMatrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
 	}
 
-	return matrix;
+	return newMatrix;
 }
 
-const mat33 Math::invertMatrix(mat33 matrix)
+const mat33 Math::invertMatrix(const mat33& matrix)
 {
 	auto determinant = calculateDeterminant(matrix);
 
@@ -34,7 +33,6 @@ const mat33 Math::invertMatrix(mat33 matrix)
 	}
 
 	mat33 tempMatrix;
-
 	tempMatrix.f[0] = ((matrix.m[1][1] * matrix.m[2][2]) - (matrix.m[2][1] * matrix.m[1][2]));
 	tempMatrix.f[1] = ((matrix.m[0][2] * matrix.m[2][1]) - (matrix.m[0][1] * matrix.m[2][2]));
 	tempMatrix.f[2] = ((matrix.m[0][1] * matrix.m[1][2]) - (matrix.m[0][2] * matrix.m[1][1]));
@@ -45,25 +43,24 @@ const mat33 Math::invertMatrix(mat33 matrix)
 	tempMatrix.f[7] = ((matrix.m[2][0] * matrix.m[0][1]) - (matrix.m[0][0] * matrix.m[2][1]));
 	tempMatrix.f[8] = ((matrix.m[0][0] * matrix.m[1][1]) - (matrix.m[1][0] * matrix.m[0][1]));
 
+	mat33 newMatrix;
 	for(unsigned int i = 0; i < 9; i++)
 	{
-		matrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
+		newMatrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
 	}
 
-	return matrix;
+	return newMatrix;
 }
 
-const mat44 Math::invertMatrix(mat44 matrix)
+const mat44 Math::invertMatrix(const mat44& matrix)
 {
 	auto determinant = calculateDeterminant(matrix);
-
 	if(determinant == 0.0f)
 	{
 		return mat44(0.0f);
 	}
 
 	mat44 tempMatrix;
-
 	tempMatrix.f[0] =
 		matrix.f[5] * matrix.f[10] * matrix.f[15] -
 		matrix.f[5] * matrix.f[11] * matrix.f[14] -
@@ -177,53 +174,46 @@ const mat44 Math::invertMatrix(mat44 matrix)
 		matrix.f[8] * matrix.f[1] * matrix.f[6] -
 		matrix.f[8] * matrix.f[2] * matrix.f[5];
 
+	mat44 newMatrix;
 	for(unsigned int i = 0; i < 16; i++)
 	{
-		matrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
+		newMatrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
 	}
 
-	return matrix;
+	return newMatrix;
 }
 
-const mat33 Math::transposeMatrix(mat33 matrix)
+const mat33 Math::transposeMatrix(const mat33& matrix)
 {
-	mat33 tempMatrix;
-	for(unsigned int i = 0; i < 9; i++)
-	{
-		tempMatrix.f[i] = matrix.f[i];
-	}
+	mat33 newMatrix;
 
 	for(unsigned int r = 0; r < 3; r++)
 	{
 		for(unsigned c = 0; c < 3; c++)
 		{
-			matrix.m[r][c] = tempMatrix.m[c][r];
+			newMatrix.m[r][c] = matrix.m[c][r];
 		}
 	}
 
-	return matrix;
+	return newMatrix;
 }
 
-const mat44 Math::transposeMatrix(mat44 matrix)
+const mat44 Math::transposeMatrix(const mat44& matrix)
 {
-	mat44 tempMatrix;
-	for(int i = 0; i < 16; i++)
-	{
-		tempMatrix.f[i] = matrix.f[i];
-	}
+	mat44 newMatrix;
 
 	for(unsigned int r = 0; r < 4; r++)
 	{
 		for(unsigned int c = 0; c < 4; c++)
 		{
-			matrix.m[r][c] = tempMatrix.m[c][r];
+			newMatrix.m[r][c] = matrix.m[c][r];
 		}
 	}
 
-	return matrix;
+	return newMatrix;
 }
 
-const float Math::calculateDeterminant(mat22 matrix)
+const float Math::calculateDeterminant(const mat22& matrix)
 {
 	float values[2] = {};
 
@@ -233,7 +223,7 @@ const float Math::calculateDeterminant(mat22 matrix)
 	return (values[0] - values[1]);
 }
 
-const float Math::calculateDeterminant(mat33 matrix)
+const float Math::calculateDeterminant(const mat33& matrix)
 {
 	float values[3] = {};
 
@@ -244,7 +234,7 @@ const float Math::calculateDeterminant(mat33 matrix)
 	return (values[0] - values[1] + values[2]);
 }
 
-const float Math::calculateDeterminant(mat44 matrix)
+const float Math::calculateDeterminant(const mat44& matrix)
 {
 	float values[4] = {};
 

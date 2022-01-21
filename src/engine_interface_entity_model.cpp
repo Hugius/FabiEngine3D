@@ -179,87 +179,87 @@ void EngineInterface::model_setReflective(const string& ID, const string& partID
 	_core->getModelEntityManager()->getEntity(ID)->setReflective(partID, value);
 }
 
-void EngineInterface::model_setBasePosition(const string& ID, fvec3 value)
+void EngineInterface::model_setBasePosition(const string& ID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setBasePosition(value);
 }
 
-void EngineInterface::model_setBaseRotation(const string& ID, fvec3 value)
+void EngineInterface::model_setBaseRotation(const string& ID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setBaseRotation(value);
 }
 
-void EngineInterface::model_setBaseRotationOrigin(const string& ID, fvec3 value)
+void EngineInterface::model_setBaseRotationOrigin(const string& ID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setBaseRotationOrigin(value);
 }
 
-void EngineInterface::model_setBaseSize(const string& ID, fvec3 value)
+void EngineInterface::model_setBaseSize(const string& ID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setBaseSize(value);
 }
 
-void EngineInterface::model_setPartPosition(const string& ID, const string& partID, fvec3 value)
+void EngineInterface::model_setPartPosition(const string& ID, const string& partID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setPartPosition(partID, value);
 }
 
-void EngineInterface::model_setPartRotation(const string& ID, const string& partID, fvec3 value)
+void EngineInterface::model_setPartRotation(const string& ID, const string& partID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setPartRotation(partID, value);
 }
 
-void EngineInterface::model_setPartRotationOrigin(const string& ID, const string& partID, fvec3 value)
+void EngineInterface::model_setPartRotationOrigin(const string& ID, const string& partID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setPartRotationOrigin(partID, value);
 }
 
-void EngineInterface::model_setPartSize(const string& ID, const string& partID, fvec3 value)
+void EngineInterface::model_setPartSize(const string& ID, const string& partID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setPartSize(partID, value);
 }
 
-void EngineInterface::model_moveBase(const string& ID, fvec3 change)
+void EngineInterface::model_moveBase(const string& ID, const fvec3& change)
 {
 	_core->getModelEntityManager()->getEntity(ID)->moveBase(change);
 }
 
-void EngineInterface::model_rotateBase(const string& ID, fvec3 change)
+void EngineInterface::model_rotateBase(const string& ID, const fvec3& change)
 {
 	_core->getModelEntityManager()->getEntity(ID)->rotateBase(change);
 }
 
-void EngineInterface::model_scaleBase(const string& ID, fvec3 change)
+void EngineInterface::model_scaleBase(const string& ID, const fvec3& change)
 {
 	_core->getModelEntityManager()->getEntity(ID)->scaleBase(change);
 }
 
-void EngineInterface::model_movePart(const string& ID, const string& partID, fvec3 change)
+void EngineInterface::model_movePart(const string& ID, const string& partID, const fvec3& change)
 {
 	_core->getModelEntityManager()->getEntity(ID)->movePart(partID, change);
 }
 
-void EngineInterface::model_rotatePart(const string& ID, const string& partID, fvec3 change)
+void EngineInterface::model_rotatePart(const string& ID, const string& partID, const fvec3& change)
 {
 	_core->getModelEntityManager()->getEntity(ID)->rotatePart(partID, change);
 }
 
-void EngineInterface::model_scalePart(const string& ID, const string& partID, fvec3 change)
+void EngineInterface::model_scalePart(const string& ID, const string& partID, const fvec3& change)
 {
 	_core->getModelEntityManager()->getEntity(ID)->scalePart(partID, change);
 }
 
-void EngineInterface::model_moveBaseTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::model_moveBaseTo(const string& ID, const fvec3& target, float speed)
 {
 	_core->getModelEntityManager()->getEntity(ID)->moveBaseTo(target, speed);
 }
 
-void EngineInterface::model_rotateBaseTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::model_rotateBaseTo(const string& ID, const fvec3& target, float speed)
 {
 	_core->getModelEntityManager()->getEntity(ID)->rotateBaseTo(target, speed);
 }
 
-void EngineInterface::model_scaleBaseTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::model_scaleBaseTo(const string& ID, const fvec3& target, float speed)
 {
 	_core->getModelEntityManager()->getEntity(ID)->scaleBaseTo(target, speed);
 }
@@ -304,22 +304,22 @@ void EngineInterface::model_setLevelOfDetailDistance(const string& ID, float val
 	_core->getModelEntityManager()->getEntity(ID)->setLevelOfDetailDistance(value);
 }
 
-void EngineInterface::model_movePartTo(const string& ID, const string& partID, fvec3 target, float speed)
+void EngineInterface::model_movePartTo(const string& ID, const string& partID, const fvec3& target, float speed)
 {
 	_core->getModelEntityManager()->getEntity(ID)->movePartTo(partID, target, speed);
 }
 
-void EngineInterface::model_rotatePartTo(const string& ID, const string& partID, fvec3 target, float speed)
+void EngineInterface::model_rotatePartTo(const string& ID, const string& partID, const fvec3& target, float speed)
 {
 	_core->getModelEntityManager()->getEntity(ID)->rotatePartTo(partID, target, speed);
 }
 
-void EngineInterface::model_scalePartTo(const string& ID, const string& partID, fvec3 target, float speed)
+void EngineInterface::model_scalePartTo(const string& ID, const string& partID, const fvec3& target, float speed)
 {
 	_core->getModelEntityManager()->getEntity(ID)->scalePartTo(partID, target, speed);
 }
 
-void EngineInterface::model_setLevelOfDetailSize(const string& ID, fvec3 value)
+void EngineInterface::model_setLevelOfDetailSize(const string& ID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setLevelOfDetailSize(value);
 }
@@ -364,12 +364,12 @@ void EngineInterface::model_setDepthMapIncluded(const string& ID, bool value)
 	_core->getModelEntityManager()->getEntity(ID)->setDepthMapIncluded(value);
 }
 
-void EngineInterface::model_setColor(const string& ID, const string& partID, fvec3 value)
+void EngineInterface::model_setColor(const string& ID, const string& partID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setColor(partID, value);
 }
 
-void EngineInterface::model_setWireframeColor(const string& ID, const string& partID, fvec3 value)
+void EngineInterface::model_setWireframeColor(const string& ID, const string& partID, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(ID)->setWireframeColor(partID, value);
 }
@@ -487,57 +487,57 @@ const DirectionOrder EngineInterface::model_getRotationOrder(const string& ID) c
 	return _core->getModelEntityManager()->getEntity(ID)->getRotationOrder();
 }
 
-const fvec3 EngineInterface::model_getBasePosition(const string& ID) const
+const fvec3& EngineInterface::model_getBasePosition(const string& ID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getBasePosition();
 }
 
-const fvec3 EngineInterface::model_getBaseRotation(const string& ID) const
+const fvec3& EngineInterface::model_getBaseRotation(const string& ID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getBaseRotation();
 }
 
-const fvec3 EngineInterface::model_getBaseRotationOrigin(const string& ID) const
+const fvec3& EngineInterface::model_getBaseRotationOrigin(const string& ID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getBaseRotationOrigin();
 }
 
-const fvec3 EngineInterface::model_getBaseSize(const string& ID) const
+const fvec3& EngineInterface::model_getBaseSize(const string& ID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getBaseSize();
 }
 
-const fvec3 EngineInterface::model_getPartPosition(const string& ID, const string& partID) const
+const fvec3& EngineInterface::model_getPartPosition(const string& ID, const string& partID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getPartPosition(partID);
 }
 
-const fvec3 EngineInterface::model_getPartRotation(const string& ID, const string& partID) const
+const fvec3& EngineInterface::model_getPartRotation(const string& ID, const string& partID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getPartRotation(partID);
 }
 
-const fvec3 EngineInterface::model_getPartRotationOrigin(const string& ID, const string& partID) const
+const fvec3& EngineInterface::model_getPartRotationOrigin(const string& ID, const string& partID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getPartRotationOrigin(partID);
 }
 
-const fvec3 EngineInterface::model_getPartSize(const string& ID, const string& partID) const
+const fvec3& EngineInterface::model_getPartSize(const string& ID, const string& partID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getPartSize(partID);
 }
 
-const fvec3 EngineInterface::model_getColor(const string& ID, const string& partID) const
+const fvec3& EngineInterface::model_getColor(const string& ID, const string& partID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getColor(partID);
 }
 
-const fvec3 EngineInterface::model_getWireframeColor(const string& ID, const string& partID) const
+const fvec3& EngineInterface::model_getWireframeColor(const string& ID, const string& partID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getWireframeColor(partID);
 }
 
-const fvec3 EngineInterface::model_getLevelOfDetailSize(const string& ID) const
+const fvec3& EngineInterface::model_getLevelOfDetailSize(const string& ID) const
 {
 	return _core->getModelEntityManager()->getEntity(ID)->getLevelOfDetailSize();
 }

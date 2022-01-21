@@ -11,8 +11,8 @@ struct mat22 final
 	mat22(const mat22& other);
 	mat22(const mat33& other);
 	mat22(const mat44& other);
-	mat22(const float& value);
-	mat22(const float& m00, const float& m01, const float& m10, const float& m11);
+	mat22(const float value);
+	mat22(const float m00, const float m01, const float m10, const float m11);
 
 	const mat22 operator+(const mat22& other) const;
 	const mat22 operator-(const mat22& other) const;

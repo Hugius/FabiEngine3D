@@ -195,7 +195,7 @@ void Text3dEntity::setFacingCameraY(bool value)
 	}
 }
 
-void Text3dEntity::setColor(fvec3 value)
+void Text3dEntity::setColor(const fvec3& value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
@@ -205,7 +205,7 @@ void Text3dEntity::setColor(fvec3 value)
 	}
 }
 
-void Text3dEntity::setWireframeColor(fvec3 value)
+void Text3dEntity::setWireframeColor(const fvec3& value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
@@ -335,13 +335,13 @@ void Text3dEntity::setVisible(bool value)
 	}
 }
 
-void Text3dEntity::setPosition(fvec3 value)
+void Text3dEntity::setPosition(const fvec3& value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void Text3dEntity::setRotation(fvec3 value)
+void Text3dEntity::setRotation(const fvec3& value)
 {
 	_rotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 	_rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
@@ -353,13 +353,13 @@ void Text3dEntity::setSize(fvec2 value)
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Text3dEntity::move(fvec3 value)
+void Text3dEntity::move(const fvec3& value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void Text3dEntity::rotate(fvec3 value)
+void Text3dEntity::rotate(const fvec3& value)
 {
 	_rotation += value;
 	_rotationTarget += value;
@@ -375,13 +375,13 @@ void Text3dEntity::scale(fvec2 value)
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void Text3dEntity::moveTo(fvec3 target, float speed)
+void Text3dEntity::moveTo(const fvec3& target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void Text3dEntity::rotateTo(fvec3 target, float speed)
+void Text3dEntity::rotateTo(const fvec3& target, float speed)
 {
 	_rotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 	_rotationTargetSpeed = speed;
@@ -423,12 +423,12 @@ const mat44& Text3dEntity::getTransformationMatrix() const
 	return _transformationMatrix;
 }
 
-const fvec3 Text3dEntity::getPosition() const
+const fvec3& Text3dEntity::getPosition() const
 {
 	return _position;
 }
 
-const fvec3 Text3dEntity::getRotation() const
+const fvec3& Text3dEntity::getRotation() const
 {
 	return _rotation;
 }
@@ -448,12 +448,12 @@ const fvec2 Text3dEntity::getUvOffset() const
 	return _uvOffset;
 }
 
-const fvec3 Text3dEntity::getColor() const
+const fvec3& Text3dEntity::getColor() const
 {
 	return _color;
 }
 
-const fvec3 Text3dEntity::getWireframeColor() const
+const fvec3& Text3dEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }

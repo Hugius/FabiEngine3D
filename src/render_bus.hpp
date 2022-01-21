@@ -26,19 +26,19 @@ public:
 	void setFinalSceneMap(shared_ptr<TextureBuffer> value);
 	void setCursorEntityID(const string& value);
 	void setLensFlareMapPath(const string& value);
-	void setViewMatrix(const mat44 value);
-	void setProjectionMatrix(const mat44 value);
-	void setShadowMatrix(const mat44 value);
-	void setClippingPlane(fvec4 value);
-	void setCameraPosition(fvec3 value);
-	void setCameraFront(fvec3 value);
-	void setAmbientLightingColor(fvec3 value);
-	void setDirectionalLightingPosition(fvec3 value);
-	void setDirectionalLightingColor(fvec3 value);
-	void setShadowEyePosition(fvec3 value);
-	void setShadowCenterPosition(fvec3 value);
-	void setFogColor(fvec3 value);
-	void setFlareSourcePosition(fvec3 value);
+	void setViewMatrix(const mat44& value);
+	void setProjectionMatrix(const mat44& value);
+	void setShadowMatrix(const mat44& value);
+	void setClippingPlane(const fvec4& value);
+	void setCameraPosition(const fvec3& value);
+	void setCameraFront(const fvec3& value);
+	void setAmbientLightingColor(const fvec3& value);
+	void setDirectionalLightingPosition(const fvec3& value);
+	void setDirectionalLightingColor(const fvec3& value);
+	void setShadowEyePosition(const fvec3& value);
+	void setShadowCenterPosition(const fvec3& value);
+	void setFogColor(const fvec3& value);
+	void setFlareSourcePosition(const fvec3& value);
 	void setFlareSourceUv(fvec2 value);
 	void setAmbientLightingIntensity(float value);
 	void setDirectionalLightingIntensity(float value);
@@ -94,21 +94,21 @@ public:
 	const string& getCursorEntityID() const;
 	const string& getLensFlareMapPath() const;
 
-	const mat44 getViewMatrix() const;
-	const mat44 getProjectionMatrix() const;
-	const mat44 getShadowMatrix() const;
+	const mat44& getViewMatrix() const;
+	const mat44& getProjectionMatrix() const;
+	const mat44& getShadowMatrix() const;
 
-	const fvec4 getClippingPlane() const;
+	const fvec4& getClippingPlane() const;
 
-	const fvec3 getCameraPosition() const;
-	const fvec3 getCameraFront() const;
-	const fvec3 getAmbientLightingColor() const;
-	const fvec3 getDirectionalLightingColor() const;
-	const fvec3 getDirectionalLightingPosition() const;
-	const fvec3 getShadowEyePosition() const;
-	const fvec3 getShadowCenterPosition() const;
-	const fvec3 getFogColor() const;
-	const fvec3 getFlareSourcePosition() const;
+	const fvec3& getCameraPosition() const;
+	const fvec3& getCameraFront() const;
+	const fvec3& getAmbientLightingColor() const;
+	const fvec3& getDirectionalLightingColor() const;
+	const fvec3& getDirectionalLightingPosition() const;
+	const fvec3& getShadowEyePosition() const;
+	const fvec3& getShadowCenterPosition() const;
+	const fvec3& getFogColor() const;
+	const fvec3& getFlareSourcePosition() const;
 
 	const fvec2 getFlareSourceUv() const;
 

@@ -66,17 +66,17 @@ void RenderBus::setFinalSceneMap(shared_ptr<TextureBuffer> value)
 	_finalSceneMap = value;
 }
 
-void RenderBus::setViewMatrix(const mat44 value)
+void RenderBus::setViewMatrix(const mat44& value)
 {
 	_viewMatrix = value;
 }
 
-void RenderBus::setProjectionMatrix(const mat44 value)
+void RenderBus::setProjectionMatrix(const mat44& value)
 {
 	_projectionMatrix = value;
 }
 
-void RenderBus::setShadowMatrix(const mat44 value)
+void RenderBus::setShadowMatrix(const mat44& value)
 {
 	_shadowMatrix = value;
 }
@@ -86,52 +86,52 @@ void RenderBus::setFlareSourceUv(fvec2 value)
 	_flareSourceUv = value;
 }
 
-void RenderBus::setClippingPlane(fvec4 value)
+void RenderBus::setClippingPlane(const fvec4& value)
 {
 	_clippingPlane = value;
 }
 
-void RenderBus::setCameraPosition(fvec3 value)
+void RenderBus::setCameraPosition(const fvec3& value)
 {
 	_cameraPosition = value;
 }
 
-void RenderBus::setCameraFront(fvec3 value)
+void RenderBus::setCameraFront(const fvec3& value)
 {
 	_cameraFront = value;
 }
 
-void RenderBus::setAmbientLightingColor(fvec3 value)
+void RenderBus::setAmbientLightingColor(const fvec3& value)
 {
 	_ambientLightColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderBus::setDirectionalLightingPosition(fvec3 value)
+void RenderBus::setDirectionalLightingPosition(const fvec3& value)
 {
 	_directionalLightPosition = value;
 }
 
-void RenderBus::setDirectionalLightingColor(fvec3 value)
+void RenderBus::setDirectionalLightingColor(const fvec3& value)
 {
 	_directionalLightColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderBus::setShadowEyePosition(fvec3 value)
+void RenderBus::setShadowEyePosition(const fvec3& value)
 {
 	_shadowEyePosition = value;
 }
 
-void RenderBus::setShadowCenterPosition(fvec3 value)
+void RenderBus::setShadowCenterPosition(const fvec3& value)
 {
 	_shadowCenterPosition = value;
 }
 
-void RenderBus::setFogColor(fvec3 value)
+void RenderBus::setFogColor(const fvec3& value)
 {
 	_fogColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderBus::setFlareSourcePosition(fvec3 value)
+void RenderBus::setFlareSourcePosition(const fvec3& value)
 {
 	_flareSourcePosition = value;
 }
@@ -459,17 +459,17 @@ const shared_ptr<TextureBuffer> RenderBus::getFinalSceneMap() const
 	return _finalSceneMap;
 }
 
-const mat44 RenderBus::getViewMatrix() const
+const mat44& RenderBus::getViewMatrix() const
 {
 	return _viewMatrix;
 }
 
-const mat44 RenderBus::getProjectionMatrix() const
+const mat44& RenderBus::getProjectionMatrix() const
 {
 	return _projectionMatrix;
 }
 
-const mat44 RenderBus::getShadowMatrix() const
+const mat44& RenderBus::getShadowMatrix() const
 {
 	return _shadowMatrix;
 }
@@ -479,52 +479,52 @@ const fvec2 RenderBus::getFlareSourceUv() const
 	return _flareSourceUv;
 }
 
-const fvec4 RenderBus::getClippingPlane() const
+const fvec4& RenderBus::getClippingPlane() const
 {
 	return _clippingPlane;
 }
 
-const fvec3 RenderBus::getCameraPosition() const
+const fvec3& RenderBus::getCameraPosition() const
 {
 	return _cameraPosition;
 }
 
-const fvec3 RenderBus::getCameraFront() const
+const fvec3& RenderBus::getCameraFront() const
 {
 	return _cameraFront;
 }
 
-const fvec3 RenderBus::getAmbientLightingColor() const
+const fvec3& RenderBus::getAmbientLightingColor() const
 {
 	return _ambientLightColor;
 }
 
-const fvec3 RenderBus::getDirectionalLightingPosition() const
+const fvec3& RenderBus::getDirectionalLightingPosition() const
 {
 	return _directionalLightPosition;
 }
 
-const fvec3 RenderBus::getShadowEyePosition() const
+const fvec3& RenderBus::getShadowEyePosition() const
 {
 	return _shadowEyePosition;
 }
 
-const fvec3 RenderBus::getShadowCenterPosition() const
+const fvec3& RenderBus::getShadowCenterPosition() const
 {
 	return _shadowCenterPosition;
 }
 
-const fvec3 RenderBus::getFogColor() const
+const fvec3& RenderBus::getFogColor() const
 {
 	return _fogColor;
 }
 
-const fvec3 RenderBus::getFlareSourcePosition() const
+const fvec3& RenderBus::getFlareSourcePosition() const
 {
 	return _flareSourcePosition;
 }
 
-const fvec3 RenderBus::getDirectionalLightingColor() const
+const fvec3& RenderBus::getDirectionalLightingColor() const
 {
 	return _directionalLightColor;
 }

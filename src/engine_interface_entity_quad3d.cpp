@@ -29,12 +29,12 @@ void EngineInterface::quad3d_setVisible(const string& ID, bool value)
 	_core->getQuad3dEntityManager()->getEntity(ID)->setVisible(value);
 }
 
-void EngineInterface::quad3d_move(const string& ID, fvec3 change)
+void EngineInterface::quad3d_move(const string& ID, const fvec3& change)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->move(change);
 }
 
-void EngineInterface::quad3d_rotate(const string& ID, fvec3 change)
+void EngineInterface::quad3d_rotate(const string& ID, const fvec3& change)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->rotate(change);
 }
@@ -44,12 +44,12 @@ void EngineInterface::quad3d_scale(const string& ID, fvec2 change)
 	_core->getQuad3dEntityManager()->getEntity(ID)->scale(change);
 }
 
-void EngineInterface::quad3d_moveTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::quad3d_moveTo(const string& ID, const fvec3& target, float speed)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->moveTo(target, speed);
 }
 
-void EngineInterface::quad3d_rotateTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::quad3d_rotateTo(const string& ID, const fvec3& target, float speed)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->rotateTo(target, speed);
 }
@@ -59,12 +59,12 @@ void EngineInterface::quad3d_scaleTo(const string& ID, fvec2 target, float speed
 	_core->getQuad3dEntityManager()->getEntity(ID)->scaleTo(target, speed);
 }
 
-void EngineInterface::quad3d_setPosition(const string& ID, fvec3 value)
+void EngineInterface::quad3d_setPosition(const string& ID, const fvec3& value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setPosition(value);
 }
 
-void EngineInterface::quad3d_setRotation(const string& ID, fvec3 value)
+void EngineInterface::quad3d_setRotation(const string& ID, const fvec3& value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setRotation(value);
 }
@@ -74,12 +74,12 @@ void EngineInterface::quad3d_setSize(const string& ID, fvec2 value)
 	_core->getQuad3dEntityManager()->getEntity(ID)->setSize(value);
 }
 
-void EngineInterface::quad3d_setColor(const string& ID, fvec3 value)
+void EngineInterface::quad3d_setColor(const string& ID, const fvec3& value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setColor(value);
 }
 
-void EngineInterface::quad3d_setWireframeColor(const string& ID, fvec3 value)
+void EngineInterface::quad3d_setWireframeColor(const string& ID, const fvec3& value)
 {
 	_core->getQuad3dEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
@@ -254,12 +254,12 @@ const bool EngineInterface::quad3d_isVisible(const string& ID) const
 	return _core->getQuad3dEntityManager()->getEntity(ID)->isVisible();
 }
 
-const fvec3 EngineInterface::quad3d_getPosition(const string& ID) const
+const fvec3& EngineInterface::quad3d_getPosition(const string& ID) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(ID)->getPosition();
 }
 
-const fvec3 EngineInterface::quad3d_getRotation(const string& ID) const
+const fvec3& EngineInterface::quad3d_getRotation(const string& ID) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(ID)->getRotation();
 }
@@ -279,12 +279,12 @@ const fvec2 EngineInterface::quad3d_getUvOffset(const string& ID) const
 	return _core->getQuad3dEntityManager()->getEntity(ID)->getUvOffset();
 }
 
-const fvec3 EngineInterface::quad3d_getColor(const string& ID) const
+const fvec3& EngineInterface::quad3d_getColor(const string& ID) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(ID)->getColor();
 }
 
-const fvec3 EngineInterface::quad3d_getWireframeColor(const string& ID) const
+const fvec3& EngineInterface::quad3d_getWireframeColor(const string& ID) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(ID)->getWireframeColor();
 }

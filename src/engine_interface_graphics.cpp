@@ -359,7 +359,7 @@ void EngineInterface::gfx_setShadowQuality(unsigned int value)
 	_core->getMasterRenderer()->reloadShadowCaptureBuffer();
 }
 
-void EngineInterface::gfx_setAmbientLightingColor(fvec3 value)
+void EngineInterface::gfx_setAmbientLightingColor(const fvec3& value)
 {
 	_core->getRenderBus()->setAmbientLightingColor(value);
 }
@@ -369,12 +369,12 @@ void EngineInterface::gfx_setAmbientLightingIntensity(float value)
 	_core->getRenderBus()->setAmbientLightingIntensity(value);
 }
 
-void EngineInterface::gfx_setDirectionalLightingPosition(fvec3 value)
+void EngineInterface::gfx_setDirectionalLightingPosition(const fvec3& value)
 {
 	_core->getRenderBus()->setDirectionalLightingPosition(value);
 }
 
-void EngineInterface::gfx_setDirectionalLightingColor(fvec3 value)
+void EngineInterface::gfx_setDirectionalLightingColor(const fvec3& value)
 {
 	_core->getRenderBus()->setDirectionalLightingColor(value);
 }
@@ -384,7 +384,7 @@ void EngineInterface::gfx_setDirectionalLightingIntensity(float value)
 	_core->getRenderBus()->setDirectionalLightingIntensity(value);
 }
 
-void EngineInterface::gfx_setFogColor(fvec3 value)
+void EngineInterface::gfx_setFogColor(const fvec3& value)
 {
 	_core->getRenderBus()->setFogColor(value);
 }
@@ -404,12 +404,12 @@ void EngineInterface::gfx_setFogMaxDistance(float value)
 	_core->getRenderBus()->setFogMaxDistance(value);
 }
 
-void EngineInterface::gfx_setShadowEyePosition(fvec3 value)
+void EngineInterface::gfx_setShadowEyePosition(const fvec3& value)
 {
 	_core->getShadowGenerator()->setEyePosition(value);
 }
 
-void EngineInterface::gfx_setShadowCenterPosition(fvec3 value)
+void EngineInterface::gfx_setShadowCenterPosition(const fvec3& value)
 {
 	_core->getShadowGenerator()->setCenterPosition(value);
 }
@@ -592,7 +592,7 @@ const unsigned int EngineInterface::gfx_getPlanarRefractionQuality() const
 	return _core->getRenderBus()->getPlanarRefractionQuality();
 }
 
-const fvec3 EngineInterface::gfx_getAmbientLightingColor() const
+const fvec3& EngineInterface::gfx_getAmbientLightingColor() const
 {
 	return _core->getRenderBus()->getAmbientLightingColor();
 }
@@ -607,12 +607,12 @@ const float EngineInterface::gfx_getDirectionalLightingIntensity() const
 	return _core->getRenderBus()->getDirectionalLightingIntensity();
 }
 
-const fvec3 EngineInterface::gfx_getDirectionalLightingPosition() const
+const fvec3& EngineInterface::gfx_getDirectionalLightingPosition() const
 {
 	return _core->getRenderBus()->getDirectionalLightingPosition();
 }
 
-const fvec3 EngineInterface::gfx_getDirectionalLightingColor() const
+const fvec3& EngineInterface::gfx_getDirectionalLightingColor() const
 {
 	return _core->getRenderBus()->getDirectionalLightingColor();
 }
@@ -632,7 +632,7 @@ const float EngineInterface::gfx_getFogThickness() const
 	return _core->getRenderBus()->getFogThickness();
 }
 
-const fvec3 EngineInterface::gfx_getFogColor() const
+const fvec3& EngineInterface::gfx_getFogColor() const
 {
 	return _core->getRenderBus()->getFogColor();
 }
@@ -642,12 +642,12 @@ const float EngineInterface::gfx_getPlanarReflectionHeight() const
 	return _core->getRenderBus()->getPlanarReflectionHeight();
 }
 
-const fvec3 EngineInterface::gfx_getShadowEyePosition() const
+const fvec3& EngineInterface::gfx_getShadowEyePosition() const
 {
 	return _core->getShadowGenerator()->getEyePosition();
 }
 
-const fvec3 EngineInterface::gfx_getShadowCenterPosition() const
+const fvec3& EngineInterface::gfx_getShadowCenterPosition() const
 {
 	return _core->getShadowGenerator()->getCenterPosition();
 }

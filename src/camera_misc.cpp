@@ -132,22 +132,22 @@ void Camera::setAspectRatio(float value)
 	_aspectRatio = max(0.0f, value);
 }
 
-const fvec3 Camera::getPosition() const
+const fvec3& Camera::getPosition() const
 {
 	return _position;
 }
 
-const fvec3 Camera::getFrontVector() const
+const fvec3& Camera::getFrontVector() const
 {
 	return _frontVector;
 }
 
-const fvec3 Camera::getRightVector() const
+const fvec3& Camera::getRightVector() const
 {
 	return _rightVector;
 }
 
-const fvec3 Camera::getThirdPersonLookat() const
+const fvec3& Camera::getThirdPersonLookat() const
 {
 	return _thirdPersonLookat;
 }
@@ -242,7 +242,7 @@ const bool Camera::isThirdPersonViewEnabled() const
 	return _isThirdPersonViewEnabled;
 }
 
-void Camera::move(fvec3 value)
+void Camera::move(const fvec3& value)
 {
 	_position += value;
 }
@@ -252,12 +252,12 @@ void Camera::invertUpVector()
 	_upVector *= -1.0f;
 }
 
-void Camera::setPosition(fvec3 value)
+void Camera::setPosition(const fvec3& value)
 {
 	_position = value;
 }
 
-void Camera::setThirdPersonLookat(fvec3 value)
+void Camera::setThirdPersonLookat(const fvec3& value)
 {
 	_thirdPersonLookat = value;
 }
@@ -277,7 +277,7 @@ const mat44& Camera::getProjectionMatrix() const
 	return _projectionMatrix;
 }
 
-const fvec3 Camera::getUpVector() const
+const fvec3& Camera::getUpVector() const
 {
 	return _upVector;
 }

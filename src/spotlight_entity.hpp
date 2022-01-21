@@ -10,19 +10,19 @@ public:
 
 	void updateTransformation();
 	void updateFrontVector();
-	void setPosition(fvec3 value);
-	void move(fvec3 value);
-	void moveTo(fvec3 target, float speed);
-	void setColor(fvec3 value);
+	void setPosition(const fvec3& value);
+	void move(const fvec3& value);
+	void moveTo(const fvec3& target, float speed);
+	void setColor(const fvec3& value);
 	void setYaw(float value);
 	void setPitch(float value);
 	void setIntensity(float value);
 	void setAngle(float value);
 	void setDistance(float value);
 
-	const fvec3 getPosition() const;
-	const fvec3 getFrontVector() const;
-	const fvec3 getColor() const;
+	const fvec3& getPosition() const;
+	const fvec3& getFrontVector() const;
+	const fvec3& getColor() const;
 
 	const float getYaw() const;
 	const float getPitch() const;

@@ -3,7 +3,7 @@
 #include "mat33.hpp"
 #include "mat44.hpp"
 
-mat22::mat22(const float& m00, const float& m01, const float& m10, const float& m11)
+mat22::mat22(const float m00, const float m01, const float m10, const float m11)
 {
 	this->m[0][0] = m00;
 	this->m[1][0] = m10;
@@ -46,7 +46,7 @@ mat22::mat22(const mat44& other)
 	this->m[1][1] = other.m[1][1];
 }
 
-mat22::mat22(const float& value)
+mat22::mat22(const float value)
 {
 	for(int i = 0; i < 4; i++)
 	{

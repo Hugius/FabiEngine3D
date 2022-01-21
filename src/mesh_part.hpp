@@ -13,10 +13,10 @@ class MeshPart final
 public:
 	MeshPart(const string& ID);
 
-	void addPosition(fvec3 value);
+	void addPosition(const fvec3& value);
 	void addUv(fvec2 value);
-	void addNormal(fvec3 value);
-	void addTangent(fvec3 value);
+	void addNormal(const fvec3& value);
+	void addTangent(const fvec3& value);
 
 	const string& getID() const;
 

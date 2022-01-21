@@ -18,8 +18,8 @@ public:
 	void setSize(ivec2 size);
 	void center();
 	void setOpacity(float value);
-	void enableColorKeying(fvec3 color);
-	void disableColorKeying(fvec3 color);
+	void enableColorKeying(const fvec3& color);
+	void disableColorKeying(const fvec3& color);
 	void showBorder();
 	void hideBorder();
 	void enableFullscreen();

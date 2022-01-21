@@ -307,7 +307,7 @@ void EngineInterface::terrain_setWireframed(const string& ID, bool value)
 	_core->getTerrainEntityManager()->getEntity(ID)->setWireframed(value);
 }
 
-void EngineInterface::terrain_setWireframeColor(const string& ID, fvec3 value)
+void EngineInterface::terrain_setWireframeColor(const string& ID, const fvec3& value)
 {
 	_core->getTerrainEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
@@ -479,7 +479,7 @@ const string& EngineInterface::terrain_getBlueNormalMapPath(const string& ID) co
 	return _core->getTerrainEntityManager()->getEntity(ID)->getBlueNormalMapPath();
 }
 
-const fvec3 EngineInterface::terrain_getWireframeColor(const string& ID) const
+const fvec3& EngineInterface::terrain_getWireframeColor(const string& ID) const
 {
 	return _core->getTerrainEntityManager()->getEntity(ID)->getWireframeColor();
 }

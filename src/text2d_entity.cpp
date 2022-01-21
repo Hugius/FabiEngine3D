@@ -221,7 +221,7 @@ void Text2dEntity::setFontMap(shared_ptr<TextureBuffer> value)
 	}
 }
 
-void Text2dEntity::setColor(fvec3 value)
+void Text2dEntity::setColor(const fvec3& value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
@@ -261,7 +261,7 @@ void Text2dEntity::setTransparency(float value)
 	}
 }
 
-void Text2dEntity::setWireframeColor(fvec3 value)
+void Text2dEntity::setWireframeColor(const fvec3& value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
@@ -354,12 +354,12 @@ const shared_ptr<TextureBuffer> Text2dEntity::getFontMap() const
 	return _fontMap;
 }
 
-const fvec3 Text2dEntity::getWireframeColor() const
+const fvec3& Text2dEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const fvec3 Text2dEntity::getColor() const
+const fvec3& Text2dEntity::getColor() const
 {
 	return _color;
 }

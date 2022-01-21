@@ -23,11 +23,11 @@ class Math final
 public:
 	Math() = delete;
 
-	static const mat22 invertMatrix(mat22 matrix);
-	static const mat33 invertMatrix(mat33 matrix);
-	static const mat44 invertMatrix(mat44 matrix);
-	static const mat33 transposeMatrix(mat33 matrix);
-	static const mat44 transposeMatrix(mat44 matrix);
+	static const mat22 invertMatrix(const mat22& matrix);
+	static const mat33 invertMatrix(const mat33& matrix);
+	static const mat44 invertMatrix(const mat44& matrix);
+	static const mat33 transposeMatrix(const mat33& matrix);
+	static const mat44 transposeMatrix(const mat44& matrix);
 	static const mat44 createTranslationMatrix(float x, float y, float z);
 	static const mat44 createTranslationMatrixX(float value);
 	static const mat44 createTranslationMatrixY(float value);
@@ -40,18 +40,18 @@ public:
 	static const mat44 createScalingMatrixX(float value);
 	static const mat44 createScalingMatrixY(float value);
 	static const mat44 createScalingMatrixZ(float value);
-	static const mat44 createViewMatrix(fvec3 eye, fvec3 center, fvec3 up);
+	static const mat44 createViewMatrix(const fvec3& eye, const fvec3& center, const fvec3& up);
 	static const mat44 createOrthographicProjectionMatrix(float left, float right, float bottom, float top, float near, float far);
 	static const mat44 createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far);
 
 	static const fvec4 calculateAverage(const vector<fvec4>& values);
-	static const fvec4 calculateDifference(fvec4 firstPosition, fvec4 secondPosition);
-	static const fvec4 normalize(fvec4 vector);
+	static const fvec4 calculateDifference(const fvec4& firstPosition, const fvec4& secondPosition);
+	static const fvec4 normalize(const fvec4& vector);
 
 	static const fvec3 calculateAverage(const vector<fvec3>& values);
-	static const fvec3 calculateCrossProduct(fvec3 firstVector, fvec3 secondVector);
-	static const fvec3 calculateDifference(fvec3 firstPosition, fvec3 secondPosition);
-	static const fvec3 normalize(fvec3 vector);
+	static const fvec3 calculateCrossProduct(const fvec3& firstVector, const fvec3& secondVector);
+	static const fvec3 calculateDifference(const fvec3& firstPosition, const fvec3& secondPosition);
+	static const fvec3 normalize(const fvec3& vector);
 
 	static const fvec2 calculateAverage(const vector<fvec2>& values);
 	static const fvec2 calculateDifference(fvec2 firstPosition, fvec2 secondPosition);
@@ -59,18 +59,18 @@ public:
 	static const fvec2 convertFromNdc(fvec2 position);
 	static const fvec2 convertToNdc(fvec2 position);
 
-	static const float calculateDeterminant(mat22 matrix);
-	static const float calculateDeterminant(mat33 matrix);
-	static const float calculateDeterminant(mat44 matrix);
+	static const float calculateDeterminant(const mat22& matrix);
+	static const float calculateDeterminant(const mat33& matrix);
+	static const float calculateDeterminant(const mat44& matrix);
 	static const float calculateDistance(fvec2 firstPosition, fvec2 secondPosition);
-	static const float calculateDistance(fvec3 firstPosition, fvec3 secondPosition);
-	static const float calculateDistance(fvec4 firstPosition, fvec4 secondPosition);
+	static const float calculateDistance(const fvec3& firstPosition, const fvec3& secondPosition);
+	static const float calculateDistance(const fvec4& firstPosition, const fvec4& secondPosition);
 	static const float calculateDotProduct(fvec2 firstVector, fvec2 secondVector);
-	static const float calculateDotProduct(fvec3 firstVector, fvec3 secondVector);
-	static const float calculateDotProduct(fvec4 firstVector, fvec4 secondVector);
+	static const float calculateDotProduct(const fvec3& firstVector, const fvec3& secondVector);
+	static const float calculateDotProduct(const fvec4& firstVector, const fvec4& secondVector);
 	static const float calculateMagnitude(fvec2 vector);
-	static const float calculateMagnitude(fvec3 vector);
-	static const float calculateMagnitude(fvec4 vector);
+	static const float calculateMagnitude(const fvec3& vector);
+	static const float calculateMagnitude(const fvec4& vector);
 	static const float calculateAngleDifference(float firstAngle, float secondAngle);
 	static const float calculateReferenceAngle(float angle);
 	static const float calculateAverage(const vector<float>& values);
@@ -87,8 +87,8 @@ public:
 	static const int getRandomNumber(int min, int max);
 
 	static const bool isNormalized(fvec2 vector);
-	static const bool isNormalized(fvec3 vector);
-	static const bool isNormalized(fvec4 vector);
+	static const bool isNormalized(const fvec3& vector);
+	static const bool isNormalized(const fvec4& vector);
 
 private:
 	static inline const float PI = 3.14159265358979323846264338327f;

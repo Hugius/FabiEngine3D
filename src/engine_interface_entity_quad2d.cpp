@@ -89,7 +89,7 @@ void EngineInterface::quad2d_scaleTo(const string& ID, fvec2 target, float speed
 	_core->getQuad2dEntityManager()->getEntity(ID)->scaleTo(target, speed);
 }
 
-void EngineInterface::quad2d_setColor(const string& ID, fvec3 value)
+void EngineInterface::quad2d_setColor(const string& ID, const fvec3& value)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->setColor(value);
 }
@@ -114,7 +114,7 @@ void EngineInterface::quad2d_setWireframed(const string& ID, bool value)
 	_core->getQuad2dEntityManager()->getEntity(ID)->setWireframed(value);
 }
 
-void EngineInterface::quad2d_setWireframeColor(const string& ID, fvec3 value)
+void EngineInterface::quad2d_setWireframeColor(const string& ID, const fvec3& value)
 {
 	_core->getQuad2dEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
@@ -176,7 +176,7 @@ const string& EngineInterface::quad2d_getDiffuseMapPath(const string& ID) const
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getDiffuseMapPath();
 }
 
-const fvec3 EngineInterface::quad2d_getWireframeColor(const string& ID) const
+const fvec3& EngineInterface::quad2d_getWireframeColor(const string& ID) const
 {
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getWireframeColor();
 }
@@ -206,7 +206,7 @@ const fvec2 EngineInterface::quad2d_getUvOffset(const string& ID) const
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getUvOffset();
 }
 
-const fvec3 EngineInterface::quad2d_getColor(const string& ID) const
+const fvec3& EngineInterface::quad2d_getColor(const string& ID) const
 {
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getColor();
 }

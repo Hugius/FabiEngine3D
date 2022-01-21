@@ -33,19 +33,19 @@ void ReflectionEntity::setCaptured()
 	_mustCapture = false;
 }
 
-void ReflectionEntity::setPosition(fvec3 value)
+void ReflectionEntity::setPosition(const fvec3& value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void ReflectionEntity::move(fvec3 value)
+void ReflectionEntity::move(const fvec3& value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void ReflectionEntity::moveTo(fvec3 target, float speed)
+void ReflectionEntity::moveTo(const fvec3& target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
@@ -56,7 +56,7 @@ void ReflectionEntity::setCubeMap(shared_ptr<TextureBuffer> value)
 	_cubeMap = value;
 }
 
-const fvec3 ReflectionEntity::getPosition() const
+const fvec3& ReflectionEntity::getPosition() const
 {
 	return _position;
 }

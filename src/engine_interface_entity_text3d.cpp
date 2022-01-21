@@ -49,12 +49,12 @@ void EngineInterface::text3d_setVisible(const string& ID, bool value)
 	_core->getText3dEntityManager()->getEntity(ID)->setVisible(value);
 }
 
-void EngineInterface::text3d_move(const string& ID, fvec3 change)
+void EngineInterface::text3d_move(const string& ID, const fvec3& change)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->move(change);
 }
 
-void EngineInterface::text3d_rotate(const string& ID, fvec3 change)
+void EngineInterface::text3d_rotate(const string& ID, const fvec3& change)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->rotate(change);
 }
@@ -64,12 +64,12 @@ void EngineInterface::text3d_scale(const string& ID, fvec2 change)
 	_core->getText3dEntityManager()->getEntity(ID)->scale(change);
 }
 
-void EngineInterface::text3d_moveTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::text3d_moveTo(const string& ID, const fvec3& target, float speed)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->moveTo(target, speed);
 }
 
-void EngineInterface::text3d_rotateTo(const string& ID, fvec3 target, float speed)
+void EngineInterface::text3d_rotateTo(const string& ID, const fvec3& target, float speed)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->rotateTo(target, speed);
 }
@@ -79,12 +79,12 @@ void EngineInterface::text3d_scaleTo(const string& ID, fvec2 target, float speed
 	_core->getText3dEntityManager()->getEntity(ID)->scaleTo(target, speed);
 }
 
-void EngineInterface::text3d_setPosition(const string& ID, fvec3 value)
+void EngineInterface::text3d_setPosition(const string& ID, const fvec3& value)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->setPosition(value);
 }
 
-void EngineInterface::text3d_setRotation(const string& ID, fvec3 value)
+void EngineInterface::text3d_setRotation(const string& ID, const fvec3& value)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->setRotation(value);
 }
@@ -94,12 +94,12 @@ void EngineInterface::text3d_setSize(const string& ID, fvec2 value)
 	_core->getText3dEntityManager()->getEntity(ID)->setSize(value);
 }
 
-void EngineInterface::text3d_setColor(const string& ID, fvec3 value)
+void EngineInterface::text3d_setColor(const string& ID, const fvec3& value)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->setColor(value);
 }
 
-void EngineInterface::text3d_setWireframeColor(const string& ID, fvec3 value)
+void EngineInterface::text3d_setWireframeColor(const string& ID, const fvec3& value)
 {
 	_core->getText3dEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
@@ -194,12 +194,12 @@ const bool EngineInterface::text3d_isVisible(const string& ID) const
 	return _core->getText3dEntityManager()->getEntity(ID)->isVisible();
 }
 
-const fvec3 EngineInterface::text3d_getPosition(const string& ID) const
+const fvec3& EngineInterface::text3d_getPosition(const string& ID) const
 {
 	return _core->getText3dEntityManager()->getEntity(ID)->getPosition();
 }
 
-const fvec3 EngineInterface::text3d_getRotation(const string& ID) const
+const fvec3& EngineInterface::text3d_getRotation(const string& ID) const
 {
 	return _core->getText3dEntityManager()->getEntity(ID)->getRotation();
 }
@@ -219,12 +219,12 @@ const fvec2 EngineInterface::text3d_getUvOffset(const string& ID) const
 	return _core->getText3dEntityManager()->getEntity(ID)->getUvOffset();
 }
 
-const fvec3 EngineInterface::text3d_getColor(const string& ID) const
+const fvec3& EngineInterface::text3d_getColor(const string& ID) const
 {
 	return _core->getText3dEntityManager()->getEntity(ID)->getColor();
 }
 
-const fvec3 EngineInterface::text3d_getWireframeColor(const string& ID) const
+const fvec3& EngineInterface::text3d_getWireframeColor(const string& ID) const
 {
 	return _core->getText3dEntityManager()->getEntity(ID)->getWireframeColor();
 }

@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color)
+GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string& ID, fvec2 position, fvec2 size, const fvec3& color)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -66,7 +66,7 @@ const string& GuiViewport::getEntityID()
 	return _entityID;
 }
 
-const fvec3 GuiViewport::getInitialColor() const
+const fvec3& GuiViewport::getInitialColor() const
 {
 	return _initialColor;
 }
@@ -81,7 +81,7 @@ const fvec2 GuiViewport::getInitialSize() const
 	return _initialSize;
 }
 
-void GuiViewport::createWindow(const string& ID, fvec2 position, fvec2 size, fvec3 color)
+void GuiViewport::createWindow(const string& ID, fvec2 position, fvec2 size, const fvec3& color)
 {
 	auto viewportPosition = _fe3d->quad2d_getPosition(_entityID);
 	auto viewportSize = _fe3d->quad2d_getSize(_entityID);

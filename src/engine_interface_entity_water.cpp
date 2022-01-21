@@ -72,7 +72,7 @@ void EngineInterface::water_setWireframed(const string& ID, bool value)
 	_core->getWaterEntityManager()->getEntity(ID)->setWireframed(value);
 }
 
-void EngineInterface::water_setWireframeColor(const string& ID, fvec3 value)
+void EngineInterface::water_setWireframeColor(const string& ID, const fvec3& value)
 {
 	_core->getWaterEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
@@ -172,7 +172,7 @@ void EngineInterface::water_setSpeed(const string& ID, fvec2 value)
 	_core->getWaterEntityManager()->getEntity(ID)->setSpeed(value);
 }
 
-void EngineInterface::water_setColor(const string& ID, fvec3 value)
+void EngineInterface::water_setColor(const string& ID, const fvec3& value)
 {
 	_core->getWaterEntityManager()->getEntity(ID)->setColor(value);
 }
@@ -237,7 +237,7 @@ const string EngineInterface::water_getSelectedID() const
 	return _core->getWaterEntityManager()->getSelectedWater()->getID();
 }
 
-const fvec3 EngineInterface::water_getWireframeColor(const string& ID) const
+const fvec3& EngineInterface::water_getWireframeColor(const string& ID) const
 {
 	return _core->getWaterEntityManager()->getEntity(ID)->getWireframeColor();
 }
@@ -314,7 +314,7 @@ const float EngineInterface::water_getHeight(const string& ID) const
 	return _core->getWaterEntityManager()->getEntity(ID)->getHeight();
 }
 
-const fvec3 EngineInterface::water_getColor(const string& ID) const
+const fvec3& EngineInterface::water_getColor(const string& ID) const
 {
 	return _core->getWaterEntityManager()->getEntity(ID)->getColor();
 }

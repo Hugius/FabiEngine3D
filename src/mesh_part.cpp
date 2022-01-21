@@ -7,17 +7,17 @@ MeshPart::MeshPart(const string& ID)
 
 }
 
-void MeshPart::addPosition(fvec3 value)
+void MeshPart::addPosition(const fvec3& value)
 {
 	_positions.push_back(value);
 }
 
-void MeshPart::addNormal(fvec3 value)
+void MeshPart::addNormal(const fvec3& value)
 {
 	_normals.push_back(value);
 }
 
-void MeshPart::addTangent(fvec3 value)
+void MeshPart::addTangent(const fvec3& value)
 {
 	_tangents.push_back(value);
 }

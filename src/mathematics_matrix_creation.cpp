@@ -170,14 +170,13 @@ const mat44 Math::createOrthographicProjectionMatrix(float left, float right, fl
 	return newMatrix;
 };
 
-const mat44 Math::createViewMatrix(fvec3 eye, fvec3 center, fvec3 up)
+const mat44 Math::createViewMatrix(const fvec3& eye, const fvec3& center, const fvec3& up)
 {
 	fvec3 frontVector = normalize(center - eye);
 	fvec3 rightVector = normalize(calculateCrossProduct(frontVector, up));
 	fvec3 upVector = calculateCrossProduct(rightVector, frontVector);
 
 	mat44 newMatrix(1.0f);
-
 	newMatrix.m[0][0] = rightVector.x;
 	newMatrix.m[1][0] = rightVector.y;
 	newMatrix.m[2][0] = rightVector.z;

@@ -76,7 +76,7 @@ const Ray Raycaster::getCursorRay() const
 	return _cursorRay;
 }
 
-const fvec3 Raycaster::getTerrainPoint() const
+const fvec3& Raycaster::getTerrainPoint() const
 {
 	return _terrainPoint;
 }
@@ -138,7 +138,7 @@ const Ray Raycaster::_calculateCursorRay(ivec2 cursorPosition) const
 	return Ray(_renderBus->getCameraPosition(), Math::normalize(worldCoords));
 }
 
-const fvec4 Raycaster::_convertToViewSpace(fvec4 clipCoords) const
+const fvec4 Raycaster::_convertToViewSpace(const fvec4& clipCoords) const
 {
 	auto invertedProjection = Math::invertMatrix(_renderBus->getProjectionMatrix());
 	auto viewCoords = (invertedProjection * clipCoords);
@@ -146,7 +146,7 @@ const fvec4 Raycaster::_convertToViewSpace(fvec4 clipCoords) const
 	return fvec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
-const fvec3 Raycaster::_convertToWorldSpace(fvec4 viewCoords) const
+const fvec3 Raycaster::_convertToWorldSpace(const fvec4& viewCoords) const
 {
 	auto invertedView = Math::invertMatrix(_renderBus->getViewMatrix());
 	auto worldCoords = (invertedView * viewCoords);
@@ -154,14 +154,14 @@ const fvec3 Raycaster::_convertToWorldSpace(fvec4 viewCoords) const
 	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }
 
-const fvec3 Raycaster::getPointOnRay(Ray ray, float distance) const
+const fvec3 Raycaster::findPointOnRay(Ray ray, float distance) const
 {
 	return (ray.getPosition() + (ray.getDirection() * distance));
 }
 
 const bool Raycaster::_isUnderTerrain(float distance) const
 {
-	fvec3 scaledRay = getPointOnRay(_cursorRay, distance);
+	fvec3 scaledRay = findPointOnRay(_cursorRay, distance);
 
 	auto selectedTerrain = _terrainManager->getSelectedTerrain();
 	float terrainHeight = _terrainManager->getPixelHeight(
@@ -181,7 +181,7 @@ const fvec3 Raycaster::_calculateTerrainPoint() const
 		if(_isUnderTerrain(distance))
 		{
 			distance -= (_terrainPointingPrecision / 2.0f);
-			fvec3 endPoint = getPointOnRay(_cursorRay, distance);
+			fvec3 endPoint = findPointOnRay(_cursorRay, distance);
 
 			auto selectedTerrain = _terrainManager->getSelectedTerrain();
 			if(_terrainManager->isInside(

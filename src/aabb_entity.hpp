@@ -17,14 +17,14 @@ public:
 	void setMesh(shared_ptr<VertexBuffer> value);
 	void updateTransformation();
 	void updateTransformationMatrix();
-	void setLocalPosition(fvec3 value);
-	void setLocalSize(fvec3 value);
-	void setPosition(fvec3 value);
-	void setSize(fvec3 value);
-	void move(fvec3 value);
-	void scale(fvec3 value);
-	void moveTo(fvec3 target, float speed);
-	void scaleTo(fvec3 target, float speed);
+	void setLocalPosition(const fvec3& value);
+	void setLocalSize(const fvec3& value);
+	void setPosition(const fvec3& value);
+	void setSize(const fvec3& value);
+	void move(const fvec3& value);
+	void scale(const fvec3& value);
+	void moveTo(const fvec3& target, float speed);
+	void scaleTo(const fvec3& target, float speed);
 	void setParentEntityID(const string& value);
 	void setParentEntityType(AabbParentEntityType value);
 	void setFollowParentEntityTransformation(bool value);
@@ -33,18 +33,18 @@ public:
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
 	void setCollided(bool value);
-	void setColor(fvec3 value);
+	void setColor(const fvec3& value);
 	void setCentered(bool value);
 
 	const string& getParentEntityID() const;
 
 	const mat44& getTransformationMatrix() const;
 
-	const fvec3 getLocalPosition() const;
-	const fvec3 getLocalSize() const;
-	const fvec3 getPosition() const;
-	const fvec3 getSize() const;
-	const fvec3 getColor() const;
+	const fvec3& getLocalPosition() const;
+	const fvec3& getLocalSize() const;
+	const fvec3& getPosition() const;
+	const fvec3& getSize() const;
+	const fvec3& getColor() const;
 
 	const bool isCentered() const;
 	const bool isRaycastResponsive() const;

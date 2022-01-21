@@ -18,17 +18,17 @@ public:
 	const float getTerrainPointingPrecision() const;
 	const float calculateRayBoxIntersectionDistance(Ray ray, Box box) const;
 
-	const fvec3 getTerrainPoint() const;
-	const fvec3 getPointOnRay(Ray ray, float distance) const;
+	const fvec3& getTerrainPoint() const;
+	const fvec3 findPointOnRay(Ray ray, float distance) const;
 
 	const bool isTerrainPointingEnabled() const;
 
 	const Ray getCursorRay() const;
 
 private:
-	const fvec4 _convertToViewSpace(fvec4 clipCoords) const;
+	const fvec4 _convertToViewSpace(const fvec4& clipCoords) const;
 
-	const fvec3 _convertToWorldSpace(fvec4 viewCoords) const;
+	const fvec3 _convertToWorldSpace(const fvec4& viewCoords) const;
 	const fvec3 _calculateTerrainPoint() const;
 
 	const bool _isUnderTerrain(float distance) const;

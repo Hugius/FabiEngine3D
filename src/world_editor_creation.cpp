@@ -2,22 +2,22 @@
 #include "world_editor.hpp"
 #include "logger.hpp"
 
-void WorldEditor::copyTemplateModel(const string& newID, const string& templateID, fvec3 position)
+void WorldEditor::copyTemplateModel(const string& newID, const string& templateID, const fvec3& position)
 {
 	_copyTemplateModel(newID, templateID, position, true);
 }
 
-void WorldEditor::copyTemplateQuad3d(const string& newID, const string& templateID, fvec3 position)
+void WorldEditor::copyTemplateQuad3d(const string& newID, const string& templateID, const fvec3& position)
 {
 	_copyTemplateQuad3d(newID, templateID, position, true);
 }
 
-void WorldEditor::copyTemplateText3d(const string& newID, const string& templateID, fvec3 position)
+void WorldEditor::copyTemplateText3d(const string& newID, const string& templateID, const fvec3& position)
 {
 	_copyTemplateText3d(newID, templateID, position, true);
 }
 
-void WorldEditor::copyTemplateSound(const string& newID, const string& templateID, fvec3 position)
+void WorldEditor::copyTemplateSound(const string& newID, const string& templateID, const fvec3& position)
 {
 	_copyTemplateSound(newID, templateID, position, true);
 }
@@ -183,7 +183,7 @@ const bool WorldEditor::_copyTemplateWater(const string& newID, const string& te
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateModel(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateModel(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside)
 {
 	if(_fe3d->model_isExisting(newID))
 	{
@@ -273,7 +273,7 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateQuad3d(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateQuad3d(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside)
 {
 	if(_fe3d->quad3d_isExisting(newID))
 	{
@@ -323,7 +323,7 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newID, const string& t
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateText3d(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateText3d(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside)
 {
 	if(_fe3d->text3d_isExisting(newID))
 	{
@@ -364,7 +364,7 @@ const bool WorldEditor::_copyTemplateText3d(const string& newID, const string& t
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateSound(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateSound(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside)
 {
 	if(_fe3d->sound3d_isExisting(newID))
 	{

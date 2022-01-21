@@ -340,7 +340,7 @@ const bool WorldEditor::_copyTemplateText3d(const string& newID, const string& t
 
 	_fe3d->aabb_create(newID, false);
 	_fe3d->aabb_setParentEntityID(newID, newID);
-	_fe3d->aabb_setParentEntityType(newID, AabbParentEntityType::QUAD3D);
+	_fe3d->aabb_setParentEntityType(newID, AabbParentEntityType::TEXT3D);
 
 	_fe3d->text3d_setPosition(newID, position);
 	_fe3d->text3d_setSize(newID, _fe3d->text3d_getSize(templateID));

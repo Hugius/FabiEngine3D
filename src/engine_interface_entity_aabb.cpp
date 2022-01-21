@@ -159,8 +159,9 @@ const vector<string> EngineInterface::aabb_getChildIDs(const string& parentID, A
 		if(entity->hasParent())
 		{
 			if(parentID == entity->getParentEntityID() && (
-				(entity->getParentEntityType() == AabbParentEntityType::MODEL && (parentEntityType == AabbParentEntityType::MODEL)) ||
-				(entity->getParentEntityType() == AabbParentEntityType::QUAD3D && (parentEntityType == AabbParentEntityType::QUAD3D))))
+				((entity->getParentEntityType() == AabbParentEntityType::MODEL) && (parentEntityType == AabbParentEntityType::MODEL)) ||
+				((entity->getParentEntityType() == AabbParentEntityType::QUAD3D) && (parentEntityType == AabbParentEntityType::QUAD3D)) ||
+				((entity->getParentEntityType() == AabbParentEntityType::TEXT3D) && (parentEntityType == AabbParentEntityType::TEXT3D))))
 			{
 				result.push_back(entity->getID());
 			}

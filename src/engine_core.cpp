@@ -63,6 +63,7 @@ EngineCore::EngineCore()
 	_text2dEntityManager->inject(_textureBufferCache);
 	_aabbEntityManager->inject(_modelEntityManager);
 	_aabbEntityManager->inject(_quad3dEntityManager);
+	_aabbEntityManager->inject(_text3dEntityManager);
 	_masterRenderer->inject(_renderBus);
 	_masterRenderer->inject(_camera);
 	_masterRenderer->inject(_shadowGenerator);

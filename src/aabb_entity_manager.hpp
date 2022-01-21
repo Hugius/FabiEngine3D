@@ -5,6 +5,7 @@
 #include "aabb_entity.hpp"
 #include "model_entity_manager.hpp"
 #include "quad3d_entity_manager.hpp"
+#include "text3d_entity_manager.hpp"
 
 #include <unordered_map>
 
@@ -17,6 +18,7 @@ public:
 
 	void inject(shared_ptr<ModelEntityManager> modelEntityManager);
 	void inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager);
+	void inject(shared_ptr<Text3dEntityManager> text3dEntityManager);
 	void createEntity(const string& ID, bool isCentered);
 	void update();
 	void deleteEntity(const string& ID);
@@ -38,4 +40,5 @@ private:
 
 	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
 	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;
+	shared_ptr<Text3dEntityManager> _text3dEntityManager = nullptr;
 };

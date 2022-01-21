@@ -69,6 +69,10 @@ void WorldEditor::_updateChoiceMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3d");
 		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("text3d")->isHovered())
+		{
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3d");
+		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sound")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound");
@@ -94,6 +98,7 @@ void WorldEditor::_updateChoiceMenu()
 		{
 			_currentTemplateModelID = "";
 			_currentTemplateQuadID = "";
+			_currentTemplateTextID = "";
 			_currentTemplateSoundID = "";
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;
@@ -117,6 +122,7 @@ void WorldEditor::_updateChoiceMenu()
 		{
 			_currentTemplateModelID = "";
 			_currentTemplateQuadID = "";
+			_currentTemplateTextID = "";
 			_currentTemplateSoundID = "";
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;

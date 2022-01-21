@@ -36,7 +36,7 @@ void EngineInterface::text3d_setContent(const string& ID, const string& value, f
 
 void EngineInterface::text3d_delete(const string& ID)
 {
-	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::QUAD3D))
+	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::TEXT3D))
 	{
 		_core->getAabbEntityManager()->deleteEntity(aabbID);
 	}

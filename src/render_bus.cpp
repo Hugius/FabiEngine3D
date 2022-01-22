@@ -393,6 +393,26 @@ void RenderBus::setLensFlareMapPath(const string& value)
 	_lensFlareMapPath = value;
 }
 
+void RenderBus::setSkyExposureIntensity(float value)
+{
+	_skyExposureIntensity = value;
+}
+
+void RenderBus::setSkyExposureSpeed(float value)
+{
+	_skyExposureSpeed = value;
+}
+
+void RenderBus::setSkyExposureLightness(float value)
+{
+	_skyExposureLightness = value;
+}
+
+void RenderBus::setSkyExposureEnabled(bool value)
+{
+	_isSkyExposureEnabled = value;
+}
+
 const shared_ptr<TextureBuffer> RenderBus::getPlanarReflectionMap() const
 {
 	return _planarReflectionMap;
@@ -771,4 +791,24 @@ const string& RenderBus::getCursorEntityID() const
 const string& RenderBus::getLensFlareMapPath() const
 {
 	return _lensFlareMapPath;
+}
+
+const float RenderBus::getSkyExposureIntensity() const
+{
+	return _skyExposureIntensity;
+}
+
+const float RenderBus::getSkyExposureSpeed() const
+{
+	return _skyExposureSpeed;
+}
+
+const float RenderBus::getSkyExposureLightness() const
+{
+	return _skyExposureLightness;
+}
+
+const bool RenderBus::isSkyExposureEnabled() const
+{
+	return _isSkyExposureEnabled;
 }

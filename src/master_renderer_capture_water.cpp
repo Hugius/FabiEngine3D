@@ -68,13 +68,8 @@ void MasterRenderer::_captureWaterReflections()
 		bool wasShadowsEnabled = _renderBus->isShadowsEnabled();
 		_renderBus->setShadowsEnabled(false);
 
-		float oldLightness = 0.0f;
-		auto skyEntity = _skyEntityManager->getSelectedEntity();
-		if(skyEntity != nullptr)
-		{
-			oldLightness = skyEntity->getLightness();
-			skyEntity->setLightness(skyEntity->getInitialLightness());
-		}
+		float skyExposureLightness = _renderBus->getSkyExposureLightness();
+		_renderBus->setSkyExposureLightness(0.0f);
 
 		const float clippingHeight = -(waterEntity->getHeight());
 		const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
@@ -140,10 +135,7 @@ void MasterRenderer::_captureWaterReflections()
 
 		_renderBus->setShadowsEnabled(wasShadowsEnabled);
 
-		if(skyEntity != nullptr)
-		{
-			skyEntity->setLightness(oldLightness);
-		}
+		_renderBus->setSkyExposureLightness(skyExposureLightness);
 	}
 	else
 	{
@@ -160,19 +152,14 @@ void MasterRenderer::_captureWaterRefractions()
 		_waterRefractionCaptor->bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		bool wasShadowsEnabled = _renderBus->isShadowsEnabled();
+		const auto isShadowsEnabled = _renderBus->isShadowsEnabled();
 		if((waterEntity->getQuality() == WaterQuality::SKY) || (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN))
 		{
 			_renderBus->setShadowsEnabled(false);
 		}
 
-		float oldSkyLightness = 0.0f;
-		auto skyEntity = _skyEntityManager->getSelectedEntity();
-		if(skyEntity != nullptr)
-		{
-			oldSkyLightness = skyEntity->getLightness();
-			skyEntity->setLightness(skyEntity->getInitialLightness());
-		}
+		const auto skyExposureLightness = _renderBus->getSkyExposureLightness();
+		_renderBus->setSkyExposureLightness(0.0f);
 
 		const float waveHeight = (waterEntity->hasDisplacementMap() ? waterEntity->getWaveHeight() : 0.0f);
 		bool isUnderWater = (_camera->getPosition().y < (waterEntity->getHeight() + waveHeight));
@@ -203,8 +190,7 @@ void MasterRenderer::_captureWaterRefractions()
 			glDisable(GL_CLIP_DISTANCE0);
 		}
 
-		if((waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL) ||
-		   (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D))
+		if((waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL) || (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D))
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities();
@@ -218,12 +204,9 @@ void MasterRenderer::_captureWaterRefractions()
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		_renderBus->setShadowsEnabled(wasShadowsEnabled);
+		_renderBus->setShadowsEnabled(isShadowsEnabled);
 
-		if(skyEntity != nullptr)
-		{
-			skyEntity->setLightness(oldSkyLightness);
-		}
+		_renderBus->setSkyExposureLightness(skyExposureLightness);
 
 		_waterRefractionCaptor->unbind();
 

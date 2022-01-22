@@ -34,7 +34,7 @@ void main()
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 
-	primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
+	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
 	o_primaryColor   = vec4(primaryColor, 1.0f);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
@@ -42,7 +42,7 @@ void main()
 
 vec3 calculateCubeMapping()
 {
-	if (u_hasCubeMap)
+	if(u_hasCubeMap)
 	{
 		vec4 cubeMapColor = texture(u_cubeMap, f_uv);
 		cubeMapColor.rgb = pow(cubeMapColor.rgb, vec3(2.2f));

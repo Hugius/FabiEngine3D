@@ -95,7 +95,7 @@ void SkyEntityManager::selectEntity(const string& ID)
 {
 	if(!isEntityExisting(ID) && !ID.empty())
 	{
-		Logger::throwError("SkyEntityManager::selectMainSky");
+		Logger::throwError("SkyEntityManager::selectEntity");
 	}
 
 	_selectedEntityID = ID;
@@ -117,65 +117,15 @@ void SkyEntityManager::createEntity(const string& ID)
 
 void SkyEntityManager::update()
 {
-	auto mainSky = getSelectedEntity();
+	auto entity = getSelectedEntity();
 
-	if(mainSky != nullptr)
+	if(entity != nullptr)
 	{
-		if(_isExposureEnabled)
+		if(entity->isVisible())
 		{
-			auto lightness = mainSky->getLightness();
-			auto pitch = min(_renderBus->getCameraPitch() + 30.0f, 90.0f);
-			auto targetLightness = mainSky->getInitialLightness() + (((90.0f - pitch) / 90.0f) * _exposureIntensity);
-
-			if(lightness > targetLightness)
-			{
-				mainSky->setLightness(lightness - (_exposureSpeed * 3.5f));
-			}
-			else if(mainSky->getLightness() < targetLightness)
-			{
-				mainSky->setLightness(lightness + _exposureSpeed);
-			}
-		}
-		else
-		{
-			mainSky->setLightness(mainSky->getInitialLightness());
-		}
-
-		if(mainSky->isVisible())
-		{
-			mainSky->updateRotationMatrix();
+			entity->updateRotationMatrix();
 		}
 	}
-}
-
-void SkyEntityManager::setExposureIntensity(float value)
-{
-	_exposureIntensity = value;
-}
-
-void SkyEntityManager::setExposureSpeed(float value)
-{
-	_exposureSpeed = value;
-}
-
-void SkyEntityManager::setExposureEnabled(bool value)
-{
-	_isExposureEnabled = value;
-}
-
-const float SkyEntityManager::getExposureIntensity() const
-{
-	return _exposureIntensity;
-}
-
-const float SkyEntityManager::getExposureSpeed() const
-{
-	return _exposureSpeed;
-}
-
-const bool SkyEntityManager::isExposureEnabled() const
-{
-	return _isExposureEnabled;
 }
 
 void SkyEntityManager::deleteEntity(const string& ID)

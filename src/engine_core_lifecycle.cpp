@@ -337,6 +337,8 @@ void EngineCore::update()
 
 	_timer->startDeltaPart("renderUpdate");
 	_masterRenderer->update();
+	_timer->stopDeltaPart();
+	_timer->startDeltaPart("miscUpdate");
 	if(!Config::getInst().isApplicationExported())
 	{
 		static float opacity = 0.0f;

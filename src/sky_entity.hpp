@@ -19,7 +19,6 @@ public:
 	void setCubeMapPaths(const array<string, 6>& value);
 	void setColor(const fvec3& value);
 	void setCubeMap(shared_ptr<TextureBuffer> value);
-	void setInitialLightness(float value);
 	void setLightness(float value);
 	void setRotation(float value);
 	void setWireframed(bool value);
@@ -32,7 +31,6 @@ public:
 	const fvec3& getWireframeColor() const;
 	const fvec3& getColor() const;
 
-	const float getInitialLightness() const;
 	const float getLightness() const;
 	const float getRotation() const;
 
@@ -50,7 +48,6 @@ private:
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
 
-	float _initialLightness = 1.0f;
 	float _lightness = 1.0f;
 	float _rotation = 0.0f;
 

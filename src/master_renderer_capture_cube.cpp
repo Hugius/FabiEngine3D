@@ -37,13 +37,8 @@ void MasterRenderer::_captureCubeReflections()
 
 	_renderBus->setReflectionsEnabled(false);
 
-	float oldLightness = 0.0f;
-	auto skyEntity = _skyEntityManager->getSelectedEntity();
-	if(skyEntity != nullptr)
-	{
-		oldLightness = skyEntity->getLightness();
-		skyEntity->setLightness(skyEntity->getInitialLightness());
-	}
+	float skyExposureLightness = _renderBus->getSkyExposureLightness();
+	_renderBus->setSkyExposureLightness(0.0f);
 
 	_camera->invertUpVector();
 	_camera->setAspectRatio(1.0f);
@@ -160,10 +155,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	_renderBus->setReflectionsEnabled(true);
 
-	if(skyEntity != nullptr)
-	{
-		skyEntity->setLightness(oldLightness);
-	}
+	_renderBus->setSkyExposureLightness(skyExposureLightness);
 
 	_camera->invertUpVector();
 	_camera->setAspectRatio(initialCameraAspectRatio);

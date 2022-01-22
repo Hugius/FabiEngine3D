@@ -89,6 +89,10 @@ public:
 	void setBloomType(BloomType value);
 	void setGuiDepth(unsigned int value);
 	void setAnisotropicFilteringQuality(unsigned int value);
+	void setSkyExposureIntensity(float value);
+	void setSkyExposureSpeed(float value);
+	void setSkyExposureLightness(float value);
+	void setSkyExposureEnabled(bool value);
 
 	const string& getCursorEntityID() const;
 	const string& getLensFlareMapPath() const;
@@ -132,6 +136,9 @@ public:
 	const float getLensFlareSensitivity() const;
 	const float getMotionBlurStrength() const;
 	const float getMotionBlurMixValue() const;
+	const float getSkyExposureIntensity() const;
+	const float getSkyExposureSpeed() const;
+	const float getSkyExposureLightness() const;
 
 	const unsigned int getBloomQuality() const;
 	const unsigned int getDofQuality() const;
@@ -160,6 +167,7 @@ public:
 	const bool isShadowFrameRenderingEnabled() const;
 	const bool isTriangleCountingEnabled() const;
 	const bool isDofDynamic() const;
+	const bool isSkyExposureEnabled() const;
 
 	const shared_ptr<TextureBuffer> getPrimarySceneMap() const;
 	const shared_ptr<TextureBuffer> getSecondarySceneMap() const;
@@ -231,6 +239,9 @@ private:
 	float _lensFlareIntensity = 1.0f;
 	float _motionBlurStrength = 0.0f;
 	float _motionBlurMixValue = 0.0f;
+	float _skyExposureIntensity = 0.0f;
+	float _skyExposureSpeed = 0.0f;
+	float _skyExposureLightness = 0.0f;
 
 	unsigned int _bloomQuality = Config::MIN_BLOOM_QUALITY;
 	unsigned int _dofQuality = Config::MIN_DOF_QUALITY;
@@ -259,6 +270,7 @@ private:
 	bool _isShadowFrameRenderingEnabled = false;
 	bool _isTriangleCountingEnabled = false;
 	bool _isDofDynamic = false;
+	bool _isSkyExposureEnabled = false;
 
 	BloomType _bloomType = BloomType::EVERYTHING;
 };

@@ -124,7 +124,6 @@ void EngineInterface::sky_select(const string& ID)
 void EngineInterface::sky_setLightness(const string& ID, float value)
 {
 	_core->getSkyEntityManager()->getEntity(ID)->setLightness(value);
-	_core->getSkyEntityManager()->getEntity(ID)->setInitialLightness(value);
 }
 
 void EngineInterface::sky_setRotation(const string& ID, float value)
@@ -212,11 +211,6 @@ const string& EngineInterface::sky_getFrontCubeMapPath(const string& ID) const
 const float EngineInterface::sky_getLightness(const string& ID) const
 {
 	return _core->getSkyEntityManager()->getEntity(ID)->getLightness();
-}
-
-const float EngineInterface::sky_getInitialLightness(const string& ID) const
-{
-	return _core->getSkyEntityManager()->getEntity(ID)->getInitialLightness();
 }
 
 const float EngineInterface::sky_getRotation(const string& ID) const

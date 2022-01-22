@@ -356,7 +356,8 @@ const vector<pair<string, int>> EngineInterface::misc_getUpdateProfilingStatisti
 		pair<string, int>("shadowUpdate", 0),
 		pair<string, int>("soundUpdate", 0),
 		pair<string, int>("networkUpdate", 0),
-		pair<string, int>("renderUpdate", 0)
+		pair<string, int>("renderUpdate", 0),
+		pair<string, int>("miscUpdate", 0)
 	};
 
 	for(auto& [key, percentage] : result)

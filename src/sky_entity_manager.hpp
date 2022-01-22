@@ -19,15 +19,8 @@ public:
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 	void selectEntity(const string& ID);
-	void setExposureIntensity(float value);
-	void setExposureSpeed(float value);
-	void setExposureEnabled(bool value);
-
-	const float getExposureIntensity() const;
-	const float getExposureSpeed() const;
 
 	const bool isEntityExisting(const string& ID) const;
-	const bool isExposureEnabled() const;
 
 	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();
 	shared_ptr<SkyEntity> getEntity(const string& ID);
@@ -35,11 +28,6 @@ public:
 
 private:
 	string _selectedEntityID = "";
-
-	float _exposureIntensity = 0.0f;
-	float _exposureSpeed = 0.0f;
-
-	bool _isExposureEnabled = false;
 
 	const shared_ptr<VertexBuffer> _mesh;
 

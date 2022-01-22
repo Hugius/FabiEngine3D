@@ -74,13 +74,8 @@ void MasterRenderer::_capturePlanarReflections()
 
 	_renderBus->setReflectionsEnabled(false);
 
-	float oldSkyLightness = 0.0f;
-	auto skyEntity = _skyEntityManager->getSelectedEntity();
-	if(skyEntity != nullptr)
-	{
-		oldSkyLightness = skyEntity->getLightness();
-		skyEntity->setLightness(skyEntity->getInitialLightness());
-	}
+	float skyExposureLightness = _renderBus->getSkyExposureLightness();
+	_renderBus->setSkyExposureLightness(0.0f);
 
 	const float clippingHeight = -(_renderBus->getPlanarReflectionHeight() + 0.0000001f);
 	const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
@@ -131,8 +126,5 @@ void MasterRenderer::_capturePlanarReflections()
 
 	_renderBus->setReflectionsEnabled(true);
 
-	if(skyEntity != nullptr)
-	{
-		skyEntity->setLightness(oldSkyLightness);
-	}
+	_renderBus->setSkyExposureLightness(skyExposureLightness);
 }

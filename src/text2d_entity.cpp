@@ -103,10 +103,10 @@ void Text2dEntity::setContent(const string& value)
 
 		for(const auto& character : _content)
 		{
-			auto xIndex = _fontMapIndices.at(character).x;
-			auto yIndex = _fontMapIndices.at(character).y;
-			auto uvMultiplier = fvec2((1.0f / static_cast<float>(FONT_MAP_COLUMN_COUNT)), (1.0f / static_cast<float>(FONT_MAP_ROW_COUNT)));
-			auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
+			const auto xIndex = _fontMapIndices.at(character).x;
+			const auto yIndex = _fontMapIndices.at(character).y;
+			const auto uvMultiplier = fvec2((1.0f / static_cast<float>(FONT_MAP_COLUMN_COUNT)), (1.0f / static_cast<float>(FONT_MAP_ROW_COUNT)));
+			const auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
 
 			auto characterEntity = make_shared<Quad2dEntity>("dummy");
 			characterEntity->setMesh(_mesh);

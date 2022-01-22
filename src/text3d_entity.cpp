@@ -80,7 +80,6 @@ void Text3dEntity::updateCharacterEntities()
 		Math::convertToRadians(_rotation.x),
 		Math::convertToRadians(_rotation.y),
 		Math::convertToRadians(_rotation.z), DirectionOrder::YXZ);
-
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
@@ -112,10 +111,10 @@ void Text3dEntity::setContent(const string& value)
 
 		for(const auto& character : _content)
 		{
-			auto xIndex = _fontMapIndices.at(character).x;
-			auto yIndex = _fontMapIndices.at(character).y;
-			auto uvMultiplier = fvec2((1.0f / static_cast<float>(FONT_MAP_COLUMN_COUNT)), (1.0f / static_cast<float>(FONT_MAP_ROW_COUNT)));
-			auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
+			const auto xIndex = _fontMapIndices.at(character).x;
+			const auto yIndex = _fontMapIndices.at(character).y;
+			const auto uvMultiplier = fvec2((1.0f / static_cast<float>(FONT_MAP_COLUMN_COUNT)), (1.0f / static_cast<float>(FONT_MAP_ROW_COUNT)));
+			const auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
 
 			auto characterEntity = make_shared<Quad3dEntity>("dummy");
 			characterEntity->setMesh(_mesh);

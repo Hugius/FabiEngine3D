@@ -25,9 +25,10 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 
 		_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
 		_shader->uploadUniform("u_rotationMatrix", entity->getRotationMatrix());
-		_shader->uploadUniform("u_mainLightness", entity->getLightness());
-		_shader->uploadUniform("u_mainColor", entity->getColor());
+		_shader->uploadUniform("u_lightness", (entity->getLightness() + _renderBus->getSkyExposureLightness()));
+		_shader->uploadUniform("u_color", entity->getColor());
 		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
+		_shader->uploadUniform("u_hasCubeMap", (entity->getCubeMap() != nullptr));
 
 		if(entity->hasCubeMap())
 		{

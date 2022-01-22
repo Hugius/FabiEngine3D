@@ -6,6 +6,7 @@
 #include <algorithm>
 
 using std::make_shared;
+using std::min;
 using std::max;
 using std::clamp;
 
@@ -82,6 +83,7 @@ MasterRenderer::MasterRenderer()
 
 void MasterRenderer::update()
 {
+	_updateSkyExposure();
 	_updateMotionBlur();
 	_updateLensFlare();
 }
@@ -230,6 +232,29 @@ void MasterRenderer::reloadWaterRefractionCaptureBuffer()
 void MasterRenderer::reloadShadowCaptureBuffer()
 {
 	_shadowCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getShadowQuality()));
+}
+
+void MasterRenderer::_updateSkyExposure()
+{
+	if(_renderBus->isSkyExposureEnabled())
+	{
+		auto lightness = _renderBus->getSkyExposureLightness();
+		auto pitch = min(_renderBus->getCameraPitch() + 30.0f, 90.0f);
+		auto targetLightness = (((90.0f - pitch) / 90.0f) * _renderBus->getSkyExposureIntensity());
+
+		if(lightness > targetLightness)
+		{
+			_renderBus->setSkyExposureLightness(lightness - (_renderBus->getSkyExposureSpeed() * 3.5f));
+		}
+		else
+		{
+			_renderBus->setSkyExposureLightness(lightness + _renderBus->getSkyExposureSpeed());
+		}
+	}
+	else
+	{
+		_renderBus->setSkyExposureLightness(0.0f);
+	}
 }
 
 void MasterRenderer::_updateMotionBlur()

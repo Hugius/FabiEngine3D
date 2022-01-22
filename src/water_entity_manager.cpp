@@ -177,7 +177,9 @@ void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 
 void WaterEntityManager::update()
 {
-	for(const auto& [key, entity] : _entities)
+	auto entity = getSelectedEntity();
+
+	if(entity != nullptr)
 	{
 		if(entity->isVisible())
 		{

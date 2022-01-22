@@ -73,6 +73,7 @@ public:
 	const string getOpenglVersion() const;
 
 private:
+	void _updateSkyExposure();
 	void _updateMotionBlur();
 	void _updateLensFlare();
 	void _captureCubeReflections();

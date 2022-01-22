@@ -69,13 +69,13 @@ void EngineInterface::gfx_enableBloom()
 
 void EngineInterface::gfx_enableSkyExposure()
 {
-	if(_core->getSkyEntityManager()->isExposureEnabled())
+	if(_core->getRenderBus()->isSkyExposureEnabled())
 	{
 		Logger::throwWarning("Tried to enable sky exposure: already enabled");
 		return;
 	}
 
-	_core->getSkyEntityManager()->setExposureEnabled(true);
+	_core->getRenderBus()->setSkyExposureEnabled(true);
 }
 
 void EngineInterface::gfx_enableDOF()
@@ -220,18 +220,18 @@ void EngineInterface::gfx_disableBloom(bool mustResetProperties)
 
 void EngineInterface::gfx_disableSkyExposure(bool mustResetProperties)
 {
-	if(!_core->getSkyEntityManager()->isExposureEnabled())
+	if(!_core->getRenderBus()->isSkyExposureEnabled())
 	{
 		Logger::throwWarning("Tried to disable sky exposure: not enabled");
 		return;
 	}
 
-	_core->getSkyEntityManager()->setExposureEnabled(false);
+	_core->getRenderBus()->setSkyExposureEnabled(false);
 
 	if(mustResetProperties)
 	{
-		_core->getSkyEntityManager()->setExposureIntensity(0.0f);
-		_core->getSkyEntityManager()->setExposureSpeed(0.0f);
+		_core->getRenderBus()->setSkyExposureIntensity(0.0f);
+		_core->getRenderBus()->setSkyExposureSpeed(0.0f);
 	}
 }
 
@@ -456,12 +456,12 @@ void EngineInterface::gfx_setBloomType(BloomType value)
 
 void EngineInterface::gfx_setSkyExposureIntensity(float value)
 {
-	_core->getSkyEntityManager()->setExposureIntensity(value);
+	_core->getRenderBus()->setSkyExposureIntensity(value);
 }
 
 void EngineInterface::gfx_setSkyExposureSpeed(float value)
 {
-	_core->getSkyEntityManager()->setExposureSpeed(value);
+	_core->getRenderBus()->setSkyExposureSpeed(value);
 }
 
 void EngineInterface::gfx_setDofDynamicDistance(float value)
@@ -544,7 +544,7 @@ const bool EngineInterface::gfx_isBloomEnabled() const
 
 const bool EngineInterface::gfx_isSkyExposureEnabled() const
 {
-	return _core->getSkyEntityManager()->isExposureEnabled();
+	return _core->getRenderBus()->isSkyExposureEnabled();
 }
 
 const bool EngineInterface::gfx_isShadowsEnabled() const
@@ -699,12 +699,12 @@ const unsigned int EngineInterface::gfx_getShadowInterval() const
 
 const float EngineInterface::gfx_getSkyExposureIntensity() const
 {
-	return _core->getSkyEntityManager()->getExposureIntensity();
+	return _core->getRenderBus()->getSkyExposureIntensity();
 }
 
 const float EngineInterface::gfx_getSkyExposureSpeed() const
 {
-	return _core->getSkyEntityManager()->getExposureSpeed();
+	return _core->getRenderBus()->getSkyExposureSpeed();
 }
 
 const float EngineInterface::gfx_getDofDynamicDistance() const

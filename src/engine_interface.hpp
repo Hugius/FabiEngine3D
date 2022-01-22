@@ -81,7 +81,6 @@ public:
 	const fvec3& sky_getWireframeColor(const string& ID) const;
 	const fvec3& sky_getColor(const string& ID) const;
 	const float sky_getLightness(const string& ID) const;
-	const float sky_getInitialLightness(const string& ID) const;
 	const float sky_getRotation(const string& ID) const;
 	const bool sky_isExisting(const string& ID) const;
 	const bool sky_isVisible(const string& ID) const;

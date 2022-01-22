@@ -30,7 +30,8 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string textID, fontMapPath;
+		string textID;
+		string fontMapPath;
 
 		istringstream iss(line);
 
@@ -79,7 +80,8 @@ const bool Text2dEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string textID, fontMapPath;
+		string textID;
+		string fontMapPath;
 		fvec3 color;
 		float transparency;
 

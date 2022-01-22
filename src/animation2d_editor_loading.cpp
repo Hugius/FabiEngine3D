@@ -30,8 +30,11 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 	string line;
 	while(getline(file, line))
 	{
-		string animationID, previewTexturePath;
-		unsigned int rowCount, columnCount, framestep;
+		string animationID;
+		string previewTexturePath;
+		unsigned int rowCount;
+		unsigned int columnCount;
+		unsigned int framestep;
 
 		istringstream iss(line);
 

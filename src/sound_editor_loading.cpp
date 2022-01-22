@@ -30,7 +30,8 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string soundID, audioPath;
+		string soundID;
+		string audioPath;
 
 		istringstream iss(line);
 

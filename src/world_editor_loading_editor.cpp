@@ -71,7 +71,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "SKY")
 		{
-			string skyID, templateID;
+			string skyID;
+			string templateID;
 
 			iss >> skyID >> templateID;
 
@@ -85,7 +86,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "TERRAIN")
 		{
-			string terrainID, templateID;
+			string terrainID;
+			string templateID;
 
 			iss >> terrainID >> templateID;
 
@@ -99,7 +101,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "WATER")
 		{
-			string waterID, templateID;
+			string waterID;
+			string templateID;
 			float height;
 
 			iss >> waterID >> templateID >> height;
@@ -116,8 +119,12 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "MODEL")
 		{
-			string modelID, templateID, animationID;
-			fvec3 position, rotation, size;
+			string modelID;
+			string templateID;
+			string animationID;
+			fvec3 position;
+			fvec3 rotation;
+			fvec3 size;
 			bool isFrozen;
 
 			iss >> modelID;
@@ -179,8 +186,11 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "QUAD3D")
 		{
-			string quadID, templateID, animationID;
-			fvec3 position, rotation;
+			string quadID;
+			string templateID;
+			string animationID;
+			fvec3 position;
+			fvec3 rotation;
 			fvec2 size;
 
 			iss >>
@@ -213,9 +223,11 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "SOUND")
 		{
-			string soundID, templateID;
+			string soundID;
+			string templateID;
 			fvec3 position;
-			float maxVolume, maxDistance;
+			float maxVolume;
+			float maxDistance;
 
 			iss >>
 				soundID >>
@@ -253,7 +265,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "POINTLIGHT")
 		{
 			string pointlightID;
-			fvec3 position, radius, color;
+			fvec3 position;
+			fvec3 radius;
+			fvec3 color;
 			float intensity;
 			unsigned int shape;
 
@@ -300,8 +314,13 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "SPOTLIGHT")
 		{
 			string spotlightID;
-			fvec3 position, color;
-			float yaw, pitch, intensity, angle, distance;
+			fvec3 position;
+			fvec3 color;
+			float yaw;
+			float pitch;
+			float intensity;
+			float angle;
+			float distance;
 
 			iss >>
 				spotlightID >>
@@ -403,8 +422,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "LIGHTING_DIRECTIONAL")
 		{
-			fvec3 position, color;
-			float intensity, quad3dSize;
+			fvec3 position;
+			fvec3 color;
+			float intensity;
+			float quad3dSize;
 
 			iss >>
 				position.x >>
@@ -423,10 +444,13 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "GRAPHICS_SHADOWS")
 		{
-			float size, lightness;
-			fvec3 position, center;
+			float size;
+			float lightness;
+			fvec3 position;
+			fvec3 center;
 			bool isFollowingCamera;
-			unsigned int interval, quality;
+			unsigned int interval;
+			unsigned int quality;
 
 			iss >>
 				size >>
@@ -454,7 +478,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "GRAPHICS_REFLECTIONS")
 		{
 			float planarHeight;
-			unsigned int cubeQuality, planarQuality;
+			unsigned int cubeQuality;
+			unsigned int planarQuality;
 
 			iss >>
 				planarHeight >>
@@ -477,7 +502,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "GRAPHICS_DOF")
 		{
 			bool isDynamic;
-			float blurDistance, maxDistance;
+			float blurDistance;
+			float maxDistance;
 			unsigned int quality;
 
 			iss >>
@@ -494,7 +520,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "GRAPHICS_FOG")
 		{
-			float minDistance, maxDistance, thickness;
+			float minDistance;
+			float maxDistance;
+			float thickness;
 			fvec3 color;
 
 			iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
@@ -508,7 +536,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "GRAPHICS_LENS_FLARE")
 		{
 			string flareMapPath;
-			float intensity, sensitivity;
+			float intensity;
+			float sensitivity;
 
 			iss >> flareMapPath >> intensity >> sensitivity;
 
@@ -528,7 +557,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "GRAPHICS_SKY_EXPOSURE")
 		{
-			float intensity, speed;
+			float intensity;
+			float speed;
 
 			iss >> intensity >> speed;
 
@@ -539,7 +569,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "GRAPHICS_BLOOM")
 		{
 			float intensity;
-			unsigned int type, blurCount, quality;
+			unsigned int type;
+			unsigned int blurCount;
+			unsigned int quality;
 
 			iss >>
 				type >>

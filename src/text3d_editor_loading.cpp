@@ -31,10 +31,12 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string textID, fontMapPath;
+		string textID;
+		string fontMapPath;
 		fvec2 size;
 		fvec3 color;
-		bool isFacingX, isFacingY;
+		bool isFacingX;
+		bool isFacingY;
 
 		istringstream iss(line);
 
@@ -92,11 +94,17 @@ const bool Text3dEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string textID, fontMapPath;
+		string textID;
+		string fontMapPath;
 		fvec2 size;
 		fvec3 color;
-		float lightness, transparency;
-		bool isFacingX, isFacingY, isReflected, isShadowed, isBright;
+		float lightness;
+		float transparency;
+		bool isFacingX;
+		bool isFacingY;
+		bool isReflected;
+		bool isShadowed;
+		bool isBright;
 
 		istringstream iss(line);
 

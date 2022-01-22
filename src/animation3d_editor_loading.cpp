@@ -31,7 +31,8 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 	string line;
 	while(getline(file, line))
 	{
-		string animationID, previewModelID;
+		string animationID;
+		string previewModelID;
 
 		istringstream iss(line);
 

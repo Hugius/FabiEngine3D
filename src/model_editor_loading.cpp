@@ -40,7 +40,8 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 
 		if(lineType == "MODEL")
 		{
-			string modelID, meshPath;
+			string modelID;
+			string meshPath;
 
 			iss >> modelID >> meshPath;
 
@@ -91,11 +92,14 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 		if(lineType == "MODEL")
 		{
-			string modelID, meshPath, levelOfDetailEntityID;
+			string modelID;
+			string meshPath;
+			string levelOfDetailEntityID;
 			fvec3 size;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
-			bool isShadowed, isReflected;
+			bool isShadowed;
+			bool isReflected;
 
 			iss >>
 				modelID >>
@@ -118,11 +122,23 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 					break;
 				}
 
-				string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
+				string diffuseMapPath;
+				string emissionMapPath;
+				string specularMapPath;
+				string reflectionMapPath;
+				string normalMapPath;
 				fvec3 color;
-				float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness, emissionIntensity;
+				float textureRepeat;
+				float specularShininess;
+				float specularIntensity;
+				float reflectivity;
+				float lightness;
+				float emissionIntensity;
 				unsigned int reflectionType;
-				bool isSpecular, isReflective, isFaceCulled, isBright;
+				bool isSpecular;
+				bool isReflective;
+				bool isFaceCulled;
+				bool isBright;
 
 				iss >>
 					diffuseMapPath >>
@@ -245,11 +261,14 @@ const bool ModelEditor::loadFromFile()
 
 		if(lineType == "MODEL")
 		{
-			string modelID, meshPath, levelOfDetailEntityID;
+			string modelID;
+			string meshPath;
+			string levelOfDetailEntityID;
 			fvec3 size;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
-			bool isShadowed, isReflected;
+			bool isShadowed;
+			bool isReflected;
 
 			iss >>
 				modelID >>
@@ -296,11 +315,23 @@ const bool ModelEditor::loadFromFile()
 						break;
 					}
 
-					string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
+					string diffuseMapPath;
+					string emissionMapPath;
+					string specularMapPath;
+					string reflectionMapPath;
+					string normalMapPath;
 					fvec3 color;
-					float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness, emissionIntensity;
+					float textureRepeat;
+					float specularShininess;
+					float specularIntensity;
+					float reflectivity;
+					float lightness;
+					float emissionIntensity;
 					unsigned int reflectionType;
-					bool isSpecular, isReflective, isFaceCulled, isBright;
+					bool isSpecular;
+					bool isReflective;
+					bool isFaceCulled;
+					bool isBright;
 
 					iss >>
 						diffuseMapPath >>
@@ -403,8 +434,10 @@ const bool ModelEditor::loadFromFile()
 		}
 		else if(lineType == "AABB")
 		{
-			string aabbID, modelID;
-			fvec3 position, size;
+			string aabbID;
+			string modelID;
+			fvec3 position;
+			fvec3 size;
 
 			iss >>
 				aabbID >>

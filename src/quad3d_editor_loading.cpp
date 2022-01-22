@@ -31,10 +31,13 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string quadID, diffuseMapPath, emissionMapPath;
+		string quadID;
+		string diffuseMapPath;
+		string emissionMapPath;
 		fvec2 size;
 		fvec3 color;
-		bool isFacingX, isFacingY;
+		bool isFacingX;
+		bool isFacingY;
 
 		istringstream iss(line);
 
@@ -105,11 +108,20 @@ const bool Quad3dEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string quadID, diffuseMapPath, emissionMapPath;
+		string quadID;
+		string diffuseMapPath;
+		string emissionMapPath;
 		fvec2 size;
 		fvec3 color;
-		float lightness, textureRepeat, transparency, emissionIntensity;
-		bool isFacingX, isFacingY, isReflected, isShadowed, isBright;
+		float lightness;
+		float textureRepeat;
+		float transparency;
+		float emissionIntensity;
+		bool isFacingX;
+		bool isFacingY;
+		bool isReflected;
+		bool isShadowed;
+		bool isBright;
 
 		istringstream iss(line);
 

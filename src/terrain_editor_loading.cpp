@@ -31,10 +31,23 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
-			redNormalMapPath, greenNormalMapPath, blueNormalMapPath,
-			blendMapPath, redDiffuseMapPath, greenDiffuseMapPath, blueDiffuseMapPath;
-		float maxHeight, textureRepeat, lightness, redTextureRepeat, greenTextureRepeat, blueTextureRepeat;
+		string terrainID;
+		string heightMapPath;
+		string diffuseMapPath;
+		string normalMapPath;
+		string redNormalMapPath;
+		string greenNormalMapPath;
+		string blueNormalMapPath;
+		string blendMapPath;
+		string redDiffuseMapPath;
+		string greenDiffuseMapPath;
+		string blueDiffuseMapPath;
+		float maxHeight;
+		float textureRepeat;
+		float lightness;
+		float redTextureRepeat;
+		float greenTextureRepeat;
+		float blueTextureRepeat;
 
 		istringstream iss(line);
 
@@ -208,10 +221,25 @@ const bool TerrainEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
-			redNormalMapPath, greenNormalMapPath, blueNormalMapPath,
-			blendMapPath, redDiffuseMapPath, greenDiffuseMapPath, blueDiffuseMapPath;
-		float maxHeight, textureRepeat, lightness, redTextureRepeat, greenTextureRepeat, blueTextureRepeat, specularShininess, specularIntensity;
+		string terrainID;
+		string heightMapPath;
+		string diffuseMapPath;
+		string normalMapPath;
+		string redNormalMapPath;
+		string greenNormalMapPath;
+		string blueNormalMapPath;
+		string blendMapPath;
+		string redDiffuseMapPath;
+		string greenDiffuseMapPath;
+		string blueDiffuseMapPath;
+		float maxHeight;
+		float textureRepeat;
+		float lightness;
+		float redTextureRepeat;
+		float greenTextureRepeat;
+		float blueTextureRepeat;
+		float specularShininess;
+		float specularIntensity;
 		bool isSpecular;
 
 		istringstream iss(line);

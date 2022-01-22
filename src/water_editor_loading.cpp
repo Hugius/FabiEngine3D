@@ -31,7 +31,10 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
+		string waterID;
+		string dudvMapPath;
+		string normalMapPath;
+		string displacementMapPath;
 
 		istringstream iss(line);
 
@@ -108,12 +111,23 @@ const bool WaterEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
+		string waterID;
+		string dudvMapPath;
+		string normalMapPath;
+		string displacementMapPath;
 		fvec3 color;
 		fvec2 speed;
-		float height, size, textureRepeat, waveHeight, transparency, specularShininess, specularIntensity;
+		float height;
+		float size;
+		float textureRepeat;
+		float waveHeight;
+		float transparency;
+		float specularShininess;
+		float specularIntensity;
 		unsigned int quality;
-		bool isSpecular, isReflective, isRefractive;
+		bool isSpecular;
+		bool isReflective;
+		bool isRefractive;
 
 		istringstream iss(line);
 

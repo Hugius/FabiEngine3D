@@ -30,7 +30,8 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string quadID, diffuseMapPath;
+		string quadID;
+		string diffuseMapPath;
 
 		istringstream iss(line);
 
@@ -79,7 +80,8 @@ const bool Quad2dEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string quadID, diffuseMapPath;
+		string quadID;
+		string diffuseMapPath;
 		fvec3 color;
 		float transparency;
 

@@ -61,7 +61,6 @@ public:
 	void setLensFlareSensitivity(float value);
 	void setMotionBlurStrength(float value);
 	void setMotionBlurMixValue(float value);
-	void setSkyMixValue(float value);
 	void setBloomQuality(unsigned int value);
 	void setDofQuality(unsigned int value);
 	void setMotionBlurQuality(unsigned int value);
@@ -133,7 +132,6 @@ public:
 	const float getLensFlareSensitivity() const;
 	const float getMotionBlurStrength() const;
 	const float getMotionBlurMixValue() const;
-	const float getSkyMixValue() const;
 
 	const unsigned int getBloomQuality() const;
 	const unsigned int getDofQuality() const;
@@ -233,7 +231,6 @@ private:
 	float _lensFlareIntensity = 1.0f;
 	float _motionBlurStrength = 0.0f;
 	float _motionBlurMixValue = 0.0f;
-	float _skyMixValue = 0.0f;
 
 	unsigned int _bloomQuality = Config::MIN_BLOOM_QUALITY;
 	unsigned int _dofQuality = Config::MIN_DOF_QUALITY;

@@ -76,24 +76,14 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 	return iterator->second;
 }
 
-shared_ptr<SkyEntity> SkyEntityManager::getSelectedMainSky()
+shared_ptr<SkyEntity> SkyEntityManager::getSelectedEntity()
 {
-	if(_entities.empty() || _selectedMainID.empty())
+	if(_entities.empty() || _selectedEntityID.empty())
 	{
 		return nullptr;
 	}
 
-	return getEntity(_selectedMainID);
-}
-
-shared_ptr<SkyEntity> SkyEntityManager::getSelectedMixSky()
-{
-	if(_entities.empty() || _selectedMixID.empty())
-	{
-		return nullptr;
-	}
-
-	return getEntity(_selectedMixID);
+	return getEntity(_selectedEntityID);
 }
 
 const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntities()
@@ -101,24 +91,19 @@ const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntitie
 	return _entities;
 }
 
-void SkyEntityManager::selectMainSky(const string& ID)
+void SkyEntityManager::selectEntity(const string& ID)
 {
 	if(!isEntityExisting(ID) && !ID.empty())
 	{
 		Logger::throwError("SkyEntityManager::selectMainSky");
 	}
 
-	_selectedMainID = ID;
-}
+	_selectedEntityID = ID;
 
-void SkyEntityManager::selectMixSky(const string& ID)
-{
-	if(!isEntityExisting(ID) && !ID.empty())
+	if(_selectedEntityID.empty())
 	{
-		Logger::throwError("SkyEntityManager::selectMixSky");
-	}
 
-	_selectedMixID = ID;
+	}
 }
 
 void SkyEntityManager::createEntity(const string& ID)
@@ -132,16 +117,15 @@ void SkyEntityManager::createEntity(const string& ID)
 
 void SkyEntityManager::update()
 {
-	auto mainSky = getSelectedMainSky();
-	auto mixSky = getSelectedMixSky();
+	auto mainSky = getSelectedEntity();
 
 	if(mainSky != nullptr)
 	{
 		if(_isExposureEnabled)
 		{
-			float lightness = mainSky->getLightness();
-			float pitch = min(_renderBus->getCameraPitch() + 30.0f, 90.0f);
-			float targetLightness = mainSky->getInitialLightness() + (((90.0f - pitch) / 90.0f) * _exposureIntensity);
+			auto lightness = mainSky->getLightness();
+			auto pitch = min(_renderBus->getCameraPitch() + 30.0f, 90.0f);
+			auto targetLightness = mainSky->getInitialLightness() + (((90.0f - pitch) / 90.0f) * _exposureIntensity);
 
 			if(lightness > targetLightness)
 			{
@@ -202,11 +186,18 @@ void SkyEntityManager::deleteEntity(const string& ID)
 	}
 
 	_entities.erase(ID);
+
+	if(ID == _selectedEntityID)
+	{
+		selectEntity("");
+	}
 }
 
 void SkyEntityManager::deleteEntities()
 {
 	_entities.clear();
+
+	selectEntity("");
 }
 
 const bool SkyEntityManager::isEntityExisting(const string& ID) const

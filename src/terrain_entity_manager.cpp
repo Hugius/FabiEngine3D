@@ -15,14 +15,14 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 	return iterator->second;
 }
 
-shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedTerrain()
+shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedEntity()
 {
-	if(_entities.empty() || _selectedID.empty())
+	if(_entities.empty() || _selectedEntityID.empty())
 	{
 		return nullptr;
 	}
 
-	return getEntity(_selectedID);
+	return getEntity(_selectedEntityID);
 }
 
 const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::getEntities()
@@ -79,14 +79,14 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 	entity->setSize(size);
 }
 
-void TerrainEntityManager::selectTerrain(const string& ID)
+void TerrainEntityManager::selectEntity(const string& ID)
 {
 	if(!isEntityExisting(ID) && !ID.empty())
 	{
 		Logger::throwError("TerrainEntityManager::selectTerrain");
 	}
 
-	_selectedID = ID;
+	_selectedEntityID = ID;
 }
 
 void TerrainEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
@@ -102,11 +102,18 @@ void TerrainEntityManager::deleteEntity(const string& ID)
 	}
 
 	_entities.erase(ID);
+
+	if(ID == _selectedEntityID)
+	{
+		selectEntity("");
+	}
 }
 
 void TerrainEntityManager::deleteEntities()
 {
 	_entities.clear();
+
+	selectEntity("");
 }
 
 const bool TerrainEntityManager::isEntityExisting(const string& ID) const

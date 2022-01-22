@@ -50,19 +50,16 @@ void WorldEditor::unloadEditorWorld()
 	if(!_loadedSkyID.empty())
 	{
 		_fe3d->sky_delete(_loadedSkyID);
-		_fe3d->sky_select("");
 	}
 
 	if(!_loadedTerrainID.empty())
 	{
 		_fe3d->terrain_delete(_loadedTerrainID);
-		_fe3d->terrain_select("");
 	}
 
 	if(!_loadedWaterID.empty())
 	{
 		_fe3d->water_delete(_loadedWaterID);
-		_fe3d->water_select("");
 	}
 
 	for(const auto& [key, templateID] : _loadedModelIDs)

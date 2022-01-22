@@ -105,13 +105,9 @@ void main()
 	}
 
 	vec3 diffuseMapping = calculateDiffuseMapping();
-
 	vec3 emissionMapping = calculateEmissionMapping();
-
     vec3 specularMapping = calculateSpecularMapping();
-
     vec3 reflectionMapping = calculateReflectionMapping();
-
     vec3 normalMapping = calculateNormalMapping();
 
 	float shadowLighting	 = calculateShadows();

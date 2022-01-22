@@ -207,8 +207,6 @@ void TerrainEditor::_updateTerrainDeleting()
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_fe3d->terrain_select("");
-
 			_currentTerrainID = "";
 			_isDeletingTerrain = false;
 		}

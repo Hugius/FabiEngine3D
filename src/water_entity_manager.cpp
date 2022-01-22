@@ -16,14 +16,14 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 	return iterator->second;
 }
 
-shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()
+shared_ptr<WaterEntity> WaterEntityManager::getSelectedEntity()
 {
-	if(_entities.empty() || _selectedID.empty())
+	if(_entities.empty() || _selectedEntityID.empty())
 	{
 		return nullptr;
 	}
 
-	return getEntity(_selectedID);
+	return getEntity(_selectedEntityID);
 }
 
 const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEntities()
@@ -31,14 +31,14 @@ const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEnt
 	return _entities;
 }
 
-void WaterEntityManager::selectWater(const string& ID)
+void WaterEntityManager::selectEntity(const string& ID)
 {
 	if(!isEntityExisting(ID) && !ID.empty())
 	{
 		Logger::throwError("WaterEntityManager::selectWater");
 	}
 
-	_selectedID = ID;
+	_selectedEntityID = ID;
 }
 
 void WaterEntityManager::createEntity(const string& ID)
@@ -58,11 +58,18 @@ void WaterEntityManager::deleteEntity(const string& ID)
 	}
 
 	_entities.erase(ID);
+
+	if(ID == _selectedEntityID)
+	{
+		selectEntity("");
+	}
 }
 
 void WaterEntityManager::deleteEntities()
 {
 	_entities.clear();
+
+	selectEntity("");
 }
 
 void WaterEntityManager::loadMesh(const string& ID)

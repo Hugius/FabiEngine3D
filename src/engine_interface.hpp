@@ -56,8 +56,6 @@ public:
 	void sky_deleteAll();
 	void sky_setVisible(const string& ID, bool value);
 	void sky_select(const string& ID);
-	void sky_selectMixSky(const string& ID);
-	void sky_setMixValue(float mixValue);
 	void sky_setCubeMaps(const string& ID, const array<string, 6>& value);
 	void sky_setRightCubeMap(const string& ID, const string& value);
 	void sky_setLeftCubeMap(const string& ID, const string& value);
@@ -80,13 +78,11 @@ public:
 	const string& sky_getBackCubeMapPath(const string& ID) const;
 	const string& sky_getFrontCubeMapPath(const string& ID) const;
 	const string sky_getSelectedID() const;
-	const string sky_getMixID() const;
 	const fvec3& sky_getWireframeColor(const string& ID) const;
 	const fvec3& sky_getColor(const string& ID) const;
 	const float sky_getLightness(const string& ID) const;
 	const float sky_getInitialLightness(const string& ID) const;
 	const float sky_getRotation(const string& ID) const;
-	const float sky_getMixValue() const;
 	const bool sky_isExisting(const string& ID) const;
 	const bool sky_isVisible(const string& ID) const;
 	const bool sky_isWireframed(const string& ID) const;

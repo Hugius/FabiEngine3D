@@ -171,14 +171,6 @@ void ScriptInterpreter::unload()
 	_animation2dEditor->stopQuad2dAnimations();
 	_animation3dEditor->stopModelAnimations();
 
-	_fe3d->sky_select("");
-	_fe3d->sky_selectMixSky("");
-	_fe3d->sky_setMixValue(0.0f);
-
-	_fe3d->terrain_select("");
-
-	_fe3d->water_select("");
-
 	_fe3d->sky_deleteAll();
 	_fe3d->terrain_deleteAll();
 	_fe3d->water_deleteAll();

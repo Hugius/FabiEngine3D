@@ -4,31 +4,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:sky_get_mix_id")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_validateFe3dSky())
-			{
-				const auto result = _fe3d->sky_getMixID();
-
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:sky_get_mix_value")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_validateFe3dSky())
-			{
-				const auto result = _fe3d->sky_getMixValue();
-
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:sky_get_lightness")
+	if(functionName == "fe3d:sky_get_lightness")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{

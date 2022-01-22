@@ -26,7 +26,6 @@ void WorldEditor::_updateSkyMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_fe3d->sky_select("");
 			_fe3d->sky_delete(_currentSkyID);
 			_currentSkyID = "";
 		}

@@ -13,7 +13,7 @@ void EngineInterface::terrain_deleteAll()
 		terrain_delete(entity->getID());
 	}
 
-	_core->getTerrainEntityManager()->selectTerrain("");
+	_core->getTerrainEntityManager()->selectEntity("");
 }
 
 void EngineInterface::terrain_delete(const string& ID)
@@ -28,7 +28,7 @@ void EngineInterface::terrain_setVisible(const string& ID, bool value)
 
 void EngineInterface::terrain_select(const string& ID)
 {
-	_core->getTerrainEntityManager()->selectTerrain(ID);
+	_core->getTerrainEntityManager()->selectEntity(ID);
 }
 
 void EngineInterface::terrain_setMaxHeight(const string& ID, float value)
@@ -414,12 +414,12 @@ const float EngineInterface::terrain_getSpecularIntensity(const string& ID) cons
 
 const string EngineInterface::terrain_getSelectedID() const
 {
-	if(_core->getTerrainEntityManager()->getSelectedTerrain() == nullptr)
+	if(_core->getTerrainEntityManager()->getSelectedEntity() == nullptr)
 	{
 		return "";
 	}
 
-	return _core->getTerrainEntityManager()->getSelectedTerrain()->getID();
+	return _core->getTerrainEntityManager()->getSelectedEntity()->getID();
 }
 
 const vector<string> EngineInterface::terrain_getIDs() const

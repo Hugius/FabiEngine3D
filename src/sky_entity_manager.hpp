@@ -18,8 +18,7 @@ public:
 	void createEntity(const string& ID);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
-	void selectMainSky(const string& ID);
-	void selectMixSky(const string& ID);
+	void selectEntity(const string& ID);
 	void setExposureIntensity(float value);
 	void setExposureSpeed(float value);
 	void setExposureEnabled(bool value);
@@ -32,12 +31,10 @@ public:
 
 	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();
 	shared_ptr<SkyEntity> getEntity(const string& ID);
-	shared_ptr<SkyEntity> getSelectedMainSky();
-	shared_ptr<SkyEntity> getSelectedMixSky();
+	shared_ptr<SkyEntity> getSelectedEntity();
 
 private:
-	string _selectedMainID = "";
-	string _selectedMixID = "";
+	string _selectedEntityID = "";
 
 	float _exposureIntensity = 0.0f;
 	float _exposureSpeed = 0.0f;

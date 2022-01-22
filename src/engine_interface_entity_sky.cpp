@@ -118,22 +118,13 @@ void EngineInterface::sky_setVisible(const string& ID, bool value)
 
 void EngineInterface::sky_select(const string& ID)
 {
-	_core->getSkyEntityManager()->selectMainSky(ID);
-}
-
-void EngineInterface::sky_mix(const string& mixID, float mixValue)
-{
+	_core->getSkyEntityManager()->selectEntity(ID);
 }
 
 void EngineInterface::sky_setLightness(const string& ID, float value)
 {
 	_core->getSkyEntityManager()->getEntity(ID)->setLightness(value);
 	_core->getSkyEntityManager()->getEntity(ID)->setInitialLightness(value);
-}
-
-void EngineInterface::sky_setMixValue(float value)
-{
-	_core->getRenderBus()->setSkyMixValue(value);
 }
 
 void EngineInterface::sky_setRotation(const string& ID, float value)
@@ -156,31 +147,14 @@ void EngineInterface::sky_setWireframeColor(const string& ID, const fvec3& value
 	_core->getSkyEntityManager()->getEntity(ID)->setWireframeColor(value);
 }
 
-void EngineInterface::sky_selectMixSky(const string& ID)
-{
-	_core->getSkyEntityManager()->selectMixSky(ID);
-}
-
 const string EngineInterface::sky_getSelectedID() const
 {
-	if(_core->getSkyEntityManager()->getSelectedMainSky() == nullptr)
+	if(_core->getSkyEntityManager()->getSelectedEntity() == nullptr)
 	{
 		return "";
 	}
 
-	return _core->getSkyEntityManager()->getSelectedMainSky()->getID();
-}
-
-const string EngineInterface::sky_getMixID() const
-{
-	if(_core->getSkyEntityManager()->getSelectedMixSky() != nullptr)
-	{
-		return _core->getSkyEntityManager()->getSelectedMixSky()->getID();
-	}
-	else
-	{
-		return "";
-	}
+	return _core->getSkyEntityManager()->getSelectedEntity()->getID();
 }
 
 const fvec3& EngineInterface::sky_getWireframeColor(const string& ID) const
@@ -248,11 +222,6 @@ const float EngineInterface::sky_getInitialLightness(const string& ID) const
 const float EngineInterface::sky_getRotation(const string& ID) const
 {
 	return _core->getSkyEntityManager()->getEntity(ID)->getRotation();
-}
-
-const float EngineInterface::sky_getMixValue() const
-{
-	return _core->getRenderBus()->getSkyMixValue();
 }
 
 const fvec3& EngineInterface::sky_getColor(const string& ID) const

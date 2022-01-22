@@ -172,8 +172,6 @@ void WaterEditor::_updateWaterDeleting()
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_fe3d->water_select("");
-
 			_currentWaterID = "";
 			_isDeletingWater = false;
 		}

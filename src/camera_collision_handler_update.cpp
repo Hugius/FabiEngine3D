@@ -5,12 +5,12 @@ void CameraCollisionHandler::update()
 	_isCameraUnderTerrain = false;
 	if(_isCameraTerrainResponseEnabled)
 	{
-		if(_terrainManager->getSelectedTerrain() != nullptr)
+		if(_terrainManager->getSelectedEntity() != nullptr)
 		{
 			fvec3 cameraPosition = _camera->getPosition();
-			const float terrainX = (cameraPosition.x + (_terrainManager->getSelectedTerrain()->getSize() / 2.0f));
-			const float terrainZ = (cameraPosition.z + (_terrainManager->getSelectedTerrain()->getSize() / 2.0f));
-			const float terrainY = (_terrainManager->getPixelHeight(_terrainManager->getSelectedTerrain()->getID(), terrainX, terrainZ) + _cameraTerrainHeight);
+			const float terrainX = (cameraPosition.x + (_terrainManager->getSelectedEntity()->getSize() / 2.0f));
+			const float terrainZ = (cameraPosition.z + (_terrainManager->getSelectedEntity()->getSize() / 2.0f));
+			const float terrainY = (_terrainManager->getPixelHeight(_terrainManager->getSelectedEntity()->getID(), terrainX, terrainZ) + _cameraTerrainHeight);
 
 			if(cameraPosition.y < terrainY)
 			{

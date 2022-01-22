@@ -20,6 +20,7 @@ uniform bool u_isWireframed;
 
 layout (location = 0) out vec4 o_finalColor;
 
+vec4 calculateDiffuseMapping();
 float convertDepthToPerspective(float depth);
 
 void main()
@@ -41,24 +42,27 @@ void main()
 	if (u_isPerspectiveDepthEntity)
 	{
 		float depth = texture(u_diffuseMap, f_uv).r;
-		o_finalColor = vec4(vec3((convertDepthToPerspective(depth) / u_farDistance)), 1.0f);
-		o_finalColor.rgb = pow(o_finalColor.rgb, vec3(1.0f / 2.2f));
+		vec3 depthColor = vec3((convertDepthToPerspective(depth) / u_farDistance));
+		depthColor = pow(depthColor, vec3(1.0f / 2.2f));
+
+		o_finalColor = vec4(depthColor, 1.0f);
 	}
 	else
 	{
 		if (u_hasDiffuseMap)
 		{
-			vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
-			diffuseMapColor.rgb  = pow(diffuseMapColor.rgb, vec3(2.2f));
-			diffuseMapColor.rgb *= u_color;
-			diffuseMapColor.rgb  = pow(diffuseMapColor.rgb, vec3(1.0f / 2.2f));
-			diffuseMapColor.a   *= u_transparency;
-			o_finalColor = diffuseMapColor;
+			vec4 diffuseMapping = calculateDiffuseMapping();
+			diffuseMapping.rgb *= u_color;
+			diffuseMapping.rgb  = pow(diffuseMapping.rgb, vec3(1.0f / 2.2f));
+			diffuseMapping.a   *= u_transparency;
+
+			o_finalColor = diffuseMapping;
 		}
 		else
 		{
-			o_finalColor = vec4(u_color, u_transparency);
-			o_finalColor.rgb = pow(o_finalColor.rgb, vec3(1.0f / 2.2f));
+			vec3 color = pow(u_color, vec3(1.0f / 2.2f));
+
+			o_finalColor = vec4(color, u_transparency);
 		}
 	}
 }
@@ -66,5 +70,21 @@ void main()
 float convertDepthToPerspective(float depth)
 {
     float z = ((depth * 2.0f) - 1.0f);
+
     return ((2.0f * u_nearDistance * u_farDistance) / (u_farDistance + u_nearDistance - z * (u_farDistance - u_nearDistance)));
+}
+
+vec4 calculateDiffuseMapping()
+{
+	if (u_hasDiffuseMap)
+	{
+		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
+		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
+
+		return diffuseMapColor;
+	}
+	else
+	{
+		return vec4(1.0f);
+	}
 }

@@ -180,11 +180,6 @@ void RenderBus::setMotionBlurMixValue(float value)
 	_motionBlurMixValue = clamp(value, 0.0f, 1.0f);
 }
 
-void RenderBus::setSkyMixValue(float value)
-{
-	_skyMixValue = value;
-}
-
 void RenderBus::setBloomQuality(unsigned int value)
 {
 	_bloomQuality = clamp(value, Config::MIN_BLOOM_QUALITY, Config::MAX_BLOOM_QUALITY);
@@ -571,11 +566,6 @@ const float RenderBus::getMotionBlurStrength() const
 const float RenderBus::getMotionBlurMixValue() const
 {
 	return _motionBlurMixValue;
-}
-
-const float RenderBus::getSkyMixValue() const
-{
-	return _skyMixValue;
 }
 
 const unsigned int RenderBus::getBloomQuality() const

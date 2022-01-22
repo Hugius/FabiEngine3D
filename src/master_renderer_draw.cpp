@@ -9,11 +9,11 @@ using std::function;
 
 void MasterRenderer::_renderSkyEntity()
 {
-	if(_skyEntityManager->getSelectedMainSky() != nullptr)
+	if(_skyEntityManager->getSelectedEntity() != nullptr)
 	{
 		_skyEntityColorRenderer.bind();
 
-		_skyEntityColorRenderer.render(_skyEntityManager->getSelectedMainSky(), _skyEntityManager->getSelectedMixSky());
+		_skyEntityColorRenderer.render(_skyEntityManager->getSelectedEntity());
 
 		_skyEntityColorRenderer.unbind();
 	}
@@ -21,7 +21,7 @@ void MasterRenderer::_renderSkyEntity()
 
 void MasterRenderer::_renderTerrainEntity()
 {
-	if(_terrainEntityManager->getSelectedTerrain() != nullptr)
+	if(_terrainEntityManager->getSelectedEntity() != nullptr)
 	{
 		_terrainEntityColorRenderer.bind();
 
@@ -29,7 +29,7 @@ void MasterRenderer::_renderTerrainEntity()
 
 		_terrainEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
 
-		_terrainEntityColorRenderer.render(_terrainEntityManager->getSelectedTerrain());
+		_terrainEntityColorRenderer.render(_terrainEntityManager->getSelectedEntity());
 
 		_terrainEntityColorRenderer.unbind();
 	}
@@ -37,7 +37,7 @@ void MasterRenderer::_renderTerrainEntity()
 
 void MasterRenderer::_renderWaterEntity()
 {
-	if(_waterEntityManager->getSelectedWater() != nullptr)
+	if(_waterEntityManager->getSelectedEntity() != nullptr)
 	{
 		_waterEntityColorRenderer.bind();
 
@@ -45,7 +45,7 @@ void MasterRenderer::_renderWaterEntity()
 
 		_waterEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
 
-		_waterEntityColorRenderer.render(_waterEntityManager->getSelectedWater());
+		_waterEntityColorRenderer.render(_waterEntityManager->getSelectedEntity());
 
 		_waterEntityColorRenderer.unbind();
 	}

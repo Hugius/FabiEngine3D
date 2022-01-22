@@ -15,19 +15,19 @@ public:
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 	void loadMesh(const string& ID);
-	void selectWater(const string& ID);
+	void selectEntity(const string& ID);
 
 	const bool isEntityExisting(const string& ID) const;
 
 	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities();
 
 	shared_ptr<WaterEntity> getEntity(const string& ID);
-	shared_ptr<WaterEntity> getSelectedWater();
+	shared_ptr<WaterEntity> getSelectedEntity();
 
 private:
 	void _loadMesh(shared_ptr<WaterEntity> entity, float size);
 
-	string _selectedID = "";
+	string _selectedEntityID = "";
 
 	static inline constexpr float MAX_SIZE = 1024.0f;
 

@@ -2,7 +2,7 @@
 
 void MasterRenderer::_captureWaterReflections()
 {
-	const auto waterEntity = _waterEntityManager->getSelectedWater();
+	const auto waterEntity = _waterEntityManager->getSelectedEntity();
 
 	if((waterEntity != nullptr) && waterEntity->isReflective())
 	{
@@ -69,7 +69,7 @@ void MasterRenderer::_captureWaterReflections()
 		_renderBus->setShadowsEnabled(false);
 
 		float oldLightness = 0.0f;
-		auto skyEntity = _skyEntityManager->getSelectedMainSky();
+		auto skyEntity = _skyEntityManager->getSelectedEntity();
 		if(skyEntity != nullptr)
 		{
 			oldLightness = skyEntity->getLightness();
@@ -153,7 +153,7 @@ void MasterRenderer::_captureWaterReflections()
 
 void MasterRenderer::_captureWaterRefractions()
 {
-	const auto waterEntity = _waterEntityManager->getSelectedWater();
+	const auto waterEntity = _waterEntityManager->getSelectedEntity();
 
 	if((waterEntity != nullptr) && waterEntity->isRefractive())
 	{
@@ -167,7 +167,7 @@ void MasterRenderer::_captureWaterRefractions()
 		}
 
 		float oldSkyLightness = 0.0f;
-		auto skyEntity = _skyEntityManager->getSelectedMainSky();
+		auto skyEntity = _skyEntityManager->getSelectedEntity();
 		if(skyEntity != nullptr)
 		{
 			oldSkyLightness = skyEntity->getLightness();

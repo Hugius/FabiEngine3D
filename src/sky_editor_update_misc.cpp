@@ -147,8 +147,6 @@ void SkyEditor::_updateSkyDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->sky_select("");
-
 			_fe3d->sky_delete(_currentSkyID);
 
 			_loadedSkyIDs.erase(remove(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), _currentSkyID), _loadedSkyIDs.end());

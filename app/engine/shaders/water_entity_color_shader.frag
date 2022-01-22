@@ -69,11 +69,11 @@ void main()
 
 	vec4 waterColor = calculateWaterColor();
 
-	vec3 primaryColor = waterColor.rgb;
-	primaryColor = calculateFog(primaryColor);
-	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-
-	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
+	vec3 primaryColor = vec3(0.0f);
+	primaryColor += waterColor.rgb;
+	primaryColor  = calculateFog(primaryColor);
+	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+	primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
 
 	o_primaryColor   = vec4(primaryColor, waterColor.a);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);

@@ -13,7 +13,7 @@ void EngineInterface::water_deleteAll()
 		water_delete(entity->getID());
 	}
 
-	_core->getWaterEntityManager()->selectWater("");
+	_core->getWaterEntityManager()->selectEntity("");
 }
 
 void EngineInterface::water_delete(const string& ID)
@@ -28,7 +28,7 @@ void EngineInterface::water_setVisible(const string& ID, bool value)
 
 void EngineInterface::water_select(const string& ID)
 {
-	_core->getWaterEntityManager()->selectWater(ID);
+	_core->getWaterEntityManager()->selectEntity(ID);
 }
 
 void EngineInterface::water_setHeight(const string& ID, float value)
@@ -229,12 +229,12 @@ const bool EngineInterface::water_hasDisplacementMap(const string& ID) const
 
 const string EngineInterface::water_getSelectedID() const
 {
-	if(_core->getWaterEntityManager()->getSelectedWater() == nullptr)
+	if(_core->getWaterEntityManager()->getSelectedEntity() == nullptr)
 	{
 		return "";
 	}
 
-	return _core->getWaterEntityManager()->getSelectedWater()->getID();
+	return _core->getWaterEntityManager()->getSelectedEntity()->getID();
 }
 
 const fvec3& EngineInterface::water_getWireframeColor(const string& ID) const

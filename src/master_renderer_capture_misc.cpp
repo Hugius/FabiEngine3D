@@ -6,12 +6,12 @@ void MasterRenderer::_captureWorldDepth()
 	auto modelEntities = _modelEntityManager->getEntities();
 	auto quad3dEntities = _quad3dEntityManager->getEntities();
 	float clippingY = numeric_limits<float>::lowest();
-	const bool waterDepthNeeded = (_waterEntityManager->getSelectedWater() != nullptr) && (_waterEntityManager->getSelectedWater()->getTransparency() > 0.0f);
+	const bool waterDepthNeeded = (_waterEntityManager->getSelectedEntity() != nullptr) && (_waterEntityManager->getSelectedEntity()->getTransparency() > 0.0f);
 	bool isUnderWater = false;
 
 	if(waterDepthNeeded)
 	{
-		auto waterEntity = _waterEntityManager->getSelectedWater();
+		auto waterEntity = _waterEntityManager->getSelectedEntity();
 		float waveHeight = (waterEntity->hasDisplacementMap() ? waterEntity->getWaveHeight() : 0.0f);
 		isUnderWater = (_renderBus->getCameraPosition().y < (waterEntity->getHeight() + waveHeight));
 		isUnderWater = (isUnderWater && (_renderBus->getCameraPosition().x > (waterEntity->getSize() / 2.0f)));
@@ -34,11 +34,11 @@ void MasterRenderer::_captureWorldDepth()
 		_worldDepthCaptor->bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		if(_terrainEntityManager->getSelectedTerrain() != nullptr)
+		if(_terrainEntityManager->getSelectedEntity() != nullptr)
 		{
 			_terrainEntityDepthRenderer.bind();
 
-			_terrainEntityDepthRenderer.render(_terrainEntityManager->getSelectedTerrain());
+			_terrainEntityDepthRenderer.render(_terrainEntityManager->getSelectedEntity());
 
 			_terrainEntityDepthRenderer.unbind();
 		}

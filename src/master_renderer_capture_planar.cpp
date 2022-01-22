@@ -75,7 +75,7 @@ void MasterRenderer::_capturePlanarReflections()
 	_renderBus->setReflectionsEnabled(false);
 
 	float oldSkyLightness = 0.0f;
-	auto skyEntity = _skyEntityManager->getSelectedMainSky();
+	auto skyEntity = _skyEntityManager->getSelectedEntity();
 	if(skyEntity != nullptr)
 	{
 		oldSkyLightness = skyEntity->getLightness();

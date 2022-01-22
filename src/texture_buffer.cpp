@@ -38,7 +38,7 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 
 	glBindTexture(GL_TEXTURE_CUBE_MAP, _ID);
 
-	unsigned int imageSize = 0;
+	unsigned int imageSize = 1;
 	for(const auto& image : images)
 	{
 		if(image != nullptr)
@@ -54,17 +54,20 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 
 		if(images[i] == nullptr)
 		{
-			glTexImage2D(cubeIndex, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-			continue;
-		}
+			unsigned char* pixels = new unsigned char[imageSize * imageSize * 3];
 
-		if(images[i]->getPixelFormat() == PixelFormat::RGB)
-		{
-			glTexImage2D(cubeIndex, 0, GL_RGB, images[i]->getWidth(), images[i]->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->getPixels());
+			for(unsigned int i = 0; i < (imageSize * imageSize * 3); i++)
+			{
+				pixels[i] = 255;
+			}
+
+			glTexImage2D(cubeIndex, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+			delete[] pixels;
 		}
-		if(images[i]->getPixelFormat() == PixelFormat::RGBA)
+		else
 		{
-			glTexImage2D(cubeIndex, 0, GL_RGBA, images[i]->getWidth(), images[i]->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, images[i]->getPixels());
+			glTexImage2D(cubeIndex, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->getPixels());
 		}
 	}
 

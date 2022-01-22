@@ -162,7 +162,7 @@ vec3 calculateDiffuseMapping()
 	}
 	else
 	{
-		return vec3(0.0f);
+		return vec3(1.0f);
 	}
 }
 

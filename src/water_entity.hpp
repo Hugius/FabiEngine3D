@@ -92,7 +92,7 @@ private:
 	float _waveHeight = 0.0f;
 	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;
-	float _transparency = 0.0f;
+	float _transparency = 1.0f;
 
 	bool _isSpecular = false;
 	bool _isReflective = false;

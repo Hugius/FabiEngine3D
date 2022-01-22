@@ -238,18 +238,30 @@ void MasterRenderer::_updateSkyExposure()
 {
 	if(_renderBus->isSkyExposureEnabled())
 	{
+		const auto pitch = max(0.0f, _renderBus->getCameraPitch());
+		const auto targetLightness = (((90.0f - pitch) / 90.0f) * _renderBus->getSkyExposureIntensity());
 		auto lightness = _renderBus->getSkyExposureLightness();
-		auto pitch = min(_renderBus->getCameraPitch() + 30.0f, 90.0f);
-		auto targetLightness = (((90.0f - pitch) / 90.0f) * _renderBus->getSkyExposureIntensity());
 
 		if(lightness > targetLightness)
 		{
-			_renderBus->setSkyExposureLightness(lightness - (_renderBus->getSkyExposureSpeed() * 3.5f));
+			lightness -= (_renderBus->getSkyExposureSpeed() * 2.0f);
+
+			if(lightness < targetLightness)
+			{
+				lightness = targetLightness;
+			}
 		}
-		else
+		if(lightness < targetLightness)
 		{
-			_renderBus->setSkyExposureLightness(lightness + _renderBus->getSkyExposureSpeed());
+			lightness += _renderBus->getSkyExposureSpeed();
+
+			if(lightness > targetLightness)
+			{
+				lightness = targetLightness;
+			}
 		}
+
+		_renderBus->setSkyExposureLightness(lightness);
 	}
 	else
 	{

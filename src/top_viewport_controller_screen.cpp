@@ -54,14 +54,6 @@ void TopViewportController::_updateProjectScreenManagement()
 	_updateProjectLoading();
 	_updateProjectDeleting();
 
-	if(_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && (leftScreen->getID() == "main") && !_gui->getOverlay()->isFocused())
-	{
-		if(!_scriptExecutor->isStarted())
-		{
-			_fe3d->application_stop();
-		}
-	}
-
 	if(_gui->getOverlay()->isAnswerFormConfirmed("quit"))
 	{
 		_saveCurrentProject();

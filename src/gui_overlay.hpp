@@ -85,6 +85,9 @@ private:
 	string _choiceFormID = "";
 	string _answerFormID = "";
 
+	static inline const fvec3 FORM_TITLE_RECT_COLOR = fvec3(0.05f);
+	static inline const fvec3 FORM_TITLE_TEXT_COLOR = fvec3(1.0f);
+
 	bool _isFocused = false;
 	bool _mustDeleteValueForms = false;
 

@@ -77,35 +77,49 @@ void MasterRenderer::_captureWaterReflections()
 
 		glEnable(GL_CLIP_DISTANCE0);
 
-		if(waterEntity->getQuality() == WaterQuality::SKY)
+		switch(waterEntity->getQuality())
 		{
-			_renderSkyEntity();
-		}
-
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN)
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-		}
-
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL)
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			_renderOpaqueModelEntities();
-			_renderTransparentModelEntities();
-		}
-
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			_renderOpaqueModelEntities();
-			_renderOpaqueQuad3dEntities();
-			_renderOpaqueText3dEntities();
-			_renderTransparentModelEntities();
-			_renderTransparentQuad3dEntities();
-			_renderTransparentText3dEntities();
+			case WaterQuality::SKY:
+			{
+				_renderSkyEntity();
+				break;
+			}
+			case WaterQuality::SKY_TERRAIN:
+			{
+				_renderSkyEntity();
+				_renderTerrainEntity();
+				break;
+			}
+			case WaterQuality::SKY_TERRAIN_MODEL:
+			{
+				_renderSkyEntity();
+				_renderTerrainEntity();
+				_renderOpaqueModelEntities();
+				_renderTransparentModelEntities();
+				break;
+			}
+			case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D:
+			{
+				_renderSkyEntity();
+				_renderTerrainEntity();
+				_renderOpaqueModelEntities();
+				_renderOpaqueQuad3dEntities();
+				_renderTransparentModelEntities();
+				_renderTransparentQuad3dEntities();
+				break;
+			}
+			case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D_TEXT3D:
+			{
+				_renderSkyEntity();
+				_renderTerrainEntity();
+				_renderOpaqueModelEntities();
+				_renderOpaqueQuad3dEntities();
+				_renderOpaqueText3dEntities();
+				_renderTransparentModelEntities();
+				_renderTransparentQuad3dEntities();
+				_renderTransparentText3dEntities();
+				break;
+			}
 		}
 
 		glDisable(GL_CLIP_DISTANCE0);
@@ -216,6 +230,16 @@ void MasterRenderer::_captureWaterRefractions()
 				break;
 			}
 			case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D:
+			{
+				_renderSkyEntity();
+				_renderTerrainEntity();
+				_renderOpaqueModelEntities();
+				_renderOpaqueQuad3dEntities();
+				_renderTransparentModelEntities();
+				_renderTransparentQuad3dEntities();
+				break;
+			}
+			case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D_TEXT3D:
 			{
 				_renderSkyEntity();
 				_renderTerrainEntity();

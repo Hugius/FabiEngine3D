@@ -36,21 +36,33 @@ void WaterEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
-			if(quality == WaterQuality::SKY)
+			switch(quality)
 			{
-				quality = WaterQuality::SKY_TERRAIN;
-			}
-			else if(quality == WaterQuality::SKY_TERRAIN)
-			{
-				quality = WaterQuality::SKY_TERRAIN_MODEL;
-			}
-			else if(quality == WaterQuality::SKY_TERRAIN_MODEL)
-			{
-				quality = WaterQuality::SKY_TERRAIN_MODEL_QUAD3D;
-			}
-			else
-			{
-				quality = WaterQuality::SKY;
+				case WaterQuality::SKY:
+				{
+					quality = WaterQuality::SKY_TERRAIN;
+					break;
+				}
+				case WaterQuality::SKY_TERRAIN:
+				{
+					quality = WaterQuality::SKY_TERRAIN_MODEL;
+					break;
+				}
+				case WaterQuality::SKY_TERRAIN_MODEL:
+				{
+					quality = WaterQuality::SKY_TERRAIN_MODEL_QUAD3D;
+					break;
+				}
+				case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D:
+				{
+					quality = WaterQuality::SKY_TERRAIN_MODEL_QUAD3D_TEXT3D;
+					break;
+				}
+				case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D_TEXT3D:
+				{
+					quality = WaterQuality::SKY;
+					break;
+				}
 			}
 
 			_fe3d->water_setQuality(_currentWaterID, quality);

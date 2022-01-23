@@ -103,9 +103,9 @@ void EngineCore::start()
 	_isRunning = true;
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string meshDirectoryPath = "engine\\assets\\mesh\\";
-	const string fontMapDirectoryPath = "engine\\assets\\image\\font_map\\";
-	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
+	const auto meshDirectoryPath = "engine\\assets\\mesh\\";
+	const auto fontMapDirectoryPath = "engine\\assets\\image\\font_map\\";
+	const auto diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
 
 	if
 		(
@@ -150,39 +150,30 @@ void EngineCore::start()
 
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);
-	float width = static_cast<float>(DM.w);
-	float height = static_cast<float>(DM.h);
-	ivec2 logoResolution = ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
+	const auto width = static_cast<float>(DM.w);
+	const auto height = static_cast<float>(DM.h);
+	const auto logoResolution = ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
 
-	fvec3 keyingColor = fvec3(0.2f);
-	if(Config::getInst().isApplicationExported())
-	{
-		_masterRenderer->setBackgroundColor(fvec4(0.0f));
-	}
-	else
-	{
-		_masterRenderer->setBackgroundColor(fvec4(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f));
-		_renderWindow->enableColorKeying(keyingColor);
-		_renderWindow->setSize(logoResolution);
-		_renderWindow->showWindow();
-		_masterRenderer->renderLogo(logo, logoResolution);
-		_renderWindow->swapBackBuffer();
-	}
+	const auto keyingColor = fvec3(0.2f);
+	_masterRenderer->setBackgroundColor(fvec4(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f));
+	_renderWindow->enableColorKeying(keyingColor);
+	_renderWindow->setSize(logoResolution);
+	_renderWindow->showWindow();
+	_masterRenderer->renderLogo(logo, logoResolution);
+	_renderWindow->swapBackBuffer();
 
 	_engineController->initialize();
 
 	if(_isRunning)
 	{
-		if(!Config::getInst().isApplicationExported())
-		{
-			_renderWindow->disableColorKeying(keyingColor);
-			_masterRenderer->setBackgroundColor(fvec4(0.0f, 0.0f, 0.0f, 1.0f));
-		}
+		_renderWindow->disableColorKeying(keyingColor);
+		_masterRenderer->setBackgroundColor(fvec4(0.0f, 0.0f, 0.0f, 1.0f));
 
-		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_networkingServer->isRunning()))
+		if(!_networkingServer->isRunning())
 		{
 			_renderWindow->showWindow();
 			_renderWindow->setSize(Config::getInst().getWindowSize());
+
 			if(Config::getInst().isWindowFullscreen())
 			{
 				_renderWindow->enableFullscreen();
@@ -211,7 +202,7 @@ void EngineCore::start()
 
 	while(_isRunning)
 	{
-		auto previousTime = high_resolution_clock::now();
+		const auto previousTime = high_resolution_clock::now();
 
 		if(_networkingServer->isRunning())
 		{
@@ -264,8 +255,8 @@ void EngineCore::start()
 			_timer->stopDeltaPart();
 		}
 
-		auto currentTime = high_resolution_clock::now();
-		auto timeDifference = duration_cast<nanoseconds>(currentTime - previousTime);
+		const auto currentTime = high_resolution_clock::now();
+		const auto timeDifference = duration_cast<nanoseconds>(currentTime - previousTime);
 		_deltaTime = static_cast<float>(timeDifference.count()) / 1000000.0f;
 	}
 

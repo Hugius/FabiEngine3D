@@ -196,21 +196,6 @@
     <Filter Include="Animation2d Editor\Base">
       <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quad3d Editor">
-      <UniqueIdentifier>{063d7b87-4367-42d9-9cd8-ec43b6c6859d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quad3d Editor\Miscellaneous">
-      <UniqueIdentifier>{98e7159a-73c1-46c3-b837-f2fd96b8cf0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quad3d Editor\Persistence">
-      <UniqueIdentifier>{56c13b35-dfec-489b-8bb5-898cc76156f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quad3d Editor\Update">
-      <UniqueIdentifier>{4ff3dc37-6430-4a6e-b964-a56600422763}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quad3d Editor\Base">
-      <UniqueIdentifier>{def1ca50-9deb-4baf-be73-c5b864aeb462}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quad2D Editor">
       <UniqueIdentifier>{cf5d8c21-2c15-4c9b-8562-61f1520e05ac}</UniqueIdentifier>
     </Filter>
@@ -247,6 +232,21 @@
     <Filter Include="World Editor\Update\Quad3D">
       <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quad3D Editor">
+      <UniqueIdentifier>{063d7b87-4367-42d9-9cd8-ec43b6c6859d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad3D Editor\Miscellaneous">
+      <UniqueIdentifier>{98e7159a-73c1-46c3-b837-f2fd96b8cf0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad3D Editor\Persistence">
+      <UniqueIdentifier>{56c13b35-dfec-489b-8bb5-898cc76156f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad3D Editor\Update">
+      <UniqueIdentifier>{4ff3dc37-6430-4a6e-b964-a56600422763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad3D Editor\Base">
+      <UniqueIdentifier>{def1ca50-9deb-4baf-be73-c5b864aeb462}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -274,16 +274,16 @@
       <Filter>Sound Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_lifecycle.cpp">
-      <Filter>Quad3d Editor\Base</Filter>
+      <Filter>Quad3D Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_misc.cpp">
-      <Filter>Quad3d Editor\Miscellaneous</Filter>
+      <Filter>Quad3D Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_update_menu.cpp">
-      <Filter>Quad3d Editor\Update</Filter>
+      <Filter>Quad3D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_update_texturing.cpp">
-      <Filter>Quad3d Editor\Update</Filter>
+      <Filter>Quad3D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_editor_misc.cpp">
       <Filter>Sky Editor\Miscellaneous</Filter>
@@ -394,7 +394,7 @@
       <Filter>Animation3d Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_update_misc.cpp">
-      <Filter>Quad3d Editor\Update</Filter>
+      <Filter>Quad3D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_editor_update_menu.cpp">
       <Filter>Terrain Editor\Update</Filter>
@@ -469,10 +469,10 @@
       <Filter>World Editor\Update\Terrain</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_update_lighting.cpp">
-      <Filter>Quad3d Editor\Update</Filter>
+      <Filter>Quad3D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_update_miscellaneous.cpp">
-      <Filter>Quad3d Editor\Update</Filter>
+      <Filter>Quad3D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_settings_update_lighting.cpp">
       <Filter>World Editor\Update\Settings</Filter>
@@ -517,7 +517,7 @@
       <Filter>Water Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_saving.cpp">
-      <Filter>Quad3d Editor\Persistence</Filter>
+      <Filter>Quad3D Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound_editor_saving.cpp">
       <Filter>Sound Editor\Persistence</Filter>
@@ -547,7 +547,7 @@
       <Filter>Water Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_loading.cpp">
-      <Filter>Quad3d Editor\Persistence</Filter>
+      <Filter>Quad3D Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_editor_loading.cpp">
       <Filter>Animation3d Editor\Persistence</Filter>
@@ -690,7 +690,7 @@
       <Filter>Sound Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad3d_editor.hpp">
-      <Filter>Quad3d Editor\Base</Filter>
+      <Filter>Quad3D Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sky_editor.hpp">
       <Filter>Sky Editor\Base</Filter>

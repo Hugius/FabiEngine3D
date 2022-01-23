@@ -12,22 +12,7 @@ void EngineInterface::application_start()
 	_core->start();
 }
 
-void EngineInterface::application_pause()
-{
-	_core->pause();
-}
-
-void EngineInterface::application_resume()
-{
-	_core->resume();
-}
-
 void EngineInterface::application_stop()
 {
 	_core->stop();
-}
-
-const bool EngineInterface::application_isPaused() const
-{
-	return _core->isPaused();
 }

@@ -5,11 +5,6 @@ const float EngineCore::getDeltaTimeMS() const
 	return _deltaTimeMS;
 }
 
-const bool EngineCore::isPaused() const
-{
-	return _isPaused;
-}
-
 const bool EngineCore::isRunning() const
 {
 	return _isRunning;

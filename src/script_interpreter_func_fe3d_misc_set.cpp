@@ -11,37 +11,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:application_pause")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_fe3d->server_isRunning())
-			{
-				_throwScriptError("cannot access `fe3d:application_pause` functionality as a networking server!");
-				return true;
-			}
-
-			_fe3d->application_pause();
-
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:application_resume")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_fe3d->server_isRunning())
-			{
-				_throwScriptError("cannot access `fe3d:application_resume` functionality as a networking server!");
-				return true;
-			}
-
-			_fe3d->application_resume();
-
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:application_stop")
+	if(functionName == "fe3d:application_stop")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{

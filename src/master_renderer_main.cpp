@@ -107,6 +107,7 @@ void MasterRenderer::renderApplication()
 
 	if(_renderBus->isWireframeRenderingEnabled())
 	{
+		_timer->startDeltaPart("3dEntityRender");
 		glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -121,10 +122,19 @@ void MasterRenderer::renderApplication()
 		_renderTransparentText3dEntities();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
+		_timer->stopDeltaPart();
+		_timer->startDeltaPart("2dEntityRender");
 		_renderGUI();
+		_timer->stopDeltaPart();
 		return;
 	}
 
+	_timer->startDeltaPart("depthPreRender");
+	_captureWorldDepth();
+	_timer->stopDeltaPart();
+	_timer->startDeltaPart("shadowPreRender");
+	_captureShadows();
+	_timer->stopDeltaPart();
 	_timer->startDeltaPart("reflectionPreRender");
 	_captureCubeReflections();
 	_capturePlanarReflections();
@@ -133,19 +143,11 @@ void MasterRenderer::renderApplication()
 	_timer->startDeltaPart("refractionPreRender");
 	_captureWaterRefractions();
 	_timer->stopDeltaPart();
-	_timer->startDeltaPart("depthPreRender");
-	_captureWorldDepth();
-	_timer->stopDeltaPart();
-	_timer->startDeltaPart("shadowPreRender");
-	_captureShadows();
-	_timer->stopDeltaPart();
 
+	_timer->startDeltaPart("3dEntityRender");
 	_worldColorCaptor->bind();
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	_renderBus->setTriangleCountingEnabled(true);
-	_timer->startDeltaPart("skyEntityRender");
 	_renderSkyEntity();
 	_renderTerrainEntity();
 	_renderWaterEntity();
@@ -156,13 +158,12 @@ void MasterRenderer::renderApplication()
 	_renderTransparentQuad3dEntities();
 	_renderTransparentText3dEntities();
 	_renderAabbEntities();
-	_timer->stopDeltaPart();
 	_renderBus->setTriangleCountingEnabled(false);
-
 	_worldColorCaptor->unbind();
 	_renderBus->setPrimarySceneMap(_worldColorCaptor->getTexture(0));
 	_renderBus->setSecondarySceneMap(_worldColorCaptor->getTexture(1));
 	_renderBus->setFinalSceneMap(_renderBus->getPrimarySceneMap());
+	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("postProcessing");
 	_captureAntiAliasing();
@@ -176,7 +177,7 @@ void MasterRenderer::renderApplication()
 	glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
 	_timer->stopDeltaPart();
 
-	_timer->startDeltaPart("guiEntityRender");
+	_timer->startDeltaPart("2dEntityRender");
 	_renderBus->setTriangleCountingEnabled(true);
 	_renderGUI();
 	_renderBus->setTriangleCountingEnabled(false);

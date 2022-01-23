@@ -45,11 +45,7 @@ public:
 	void inject(shared_ptr<EngineCore> core);
 
 	void application_start();
-	void application_pause();
-	void application_resume();
 	void application_stop();
-
-	const bool application_isPaused() const;
 
 	void sky_create(const string& ID);
 	void sky_delete(const string& ID);

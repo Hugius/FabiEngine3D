@@ -353,10 +353,9 @@ const vector<pair<string, int>> EngineInterface::misc_getUpdateProfilingStatisti
 		pair<string, int>("physicsUpdate", 0),
 		pair<string, int>("3dEntityUpdate", 0),
 		pair<string, int>("2dEntityUpdate", 0),
-		pair<string, int>("shadowUpdate", 0),
+		pair<string, int>("renderUpdate", 0),
 		pair<string, int>("soundUpdate", 0),
 		pair<string, int>("networkUpdate", 0),
-		pair<string, int>("renderUpdate", 0),
 		pair<string, int>("miscUpdate", 0)
 	};
 
@@ -372,18 +371,13 @@ const vector<pair<string, int>> EngineInterface::misc_getRenderProfilingStatisti
 {
 	vector<pair<string, int>> result =
 	{
+		pair<string, int>("depthPreRender", 0),
+		pair<string, int>("shadowPreRender", 0),
 		pair<string, int>("reflectionPreRender", 0),
 		pair<string, int>("refractionPreRender", 0),
-		pair<string, int>("shadowPreRender", 0),
-		pair<string, int>("depthPreRender", 0),
-		pair<string, int>("skyEntityRender", 0),
-		pair<string, int>("terrainEntityRender", 0),
-		pair<string, int>("waterEntityRender", 0),
-		pair<string, int>("modelEntityRender", 0),
-		pair<string, int>("quad3dEntityRender", 0),
-		pair<string, int>("aabbEntityRender", 0),
-		pair<string, int>("guiEntityRender", 0),
+		pair<string, int>("3dEntityRender", 0),
 		pair<string, int>("postProcessing", 0),
+		pair<string, int>("2dEntityRender", 0),
 		pair<string, int>("bufferSwap", 0)
 	};
 

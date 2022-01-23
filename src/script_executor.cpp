@@ -76,7 +76,6 @@ void ScriptExecutor::pause()
 
 		_fe3d->sound3d_pauseAll();
 
-		_fe3d->application_pause();
 		_isRunning = false;
 	}
 }
@@ -110,7 +109,6 @@ void ScriptExecutor::resume()
 			_fe3d->sound3d_pause(soundID);
 		}
 
-		_fe3d->application_resume();
 		_isRunning = true;
 		_mustSkipUpdate = true;
 	}
@@ -123,11 +121,6 @@ void ScriptExecutor::unload()
 		_scriptInterpreter->executeTerminateScripts();
 
 		_scriptInterpreter->unload();
-
-		if(_fe3d->application_isPaused())
-		{
-			_fe3d->application_resume();
-		}
 
 		_isStarted = false;
 		_isRunning = false;

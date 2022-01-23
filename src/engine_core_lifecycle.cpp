@@ -291,42 +291,43 @@ void EngineCore::update()
 
 	if(!(Config::getInst().isApplicationExported() && _networkingServer->isRunning()))
 	{
-		if(!_isPaused)
-		{
-			_timer->startDeltaPart("physicsUpdate");
-			_camera->update(lastCursorPosition);
-			_raycaster->update(_fe3d->misc_getCursorPositionRelativeToViewport());
-			_cameraCollisionHandler->update();
-			_camera->updateMatrices();
-			_timer->stopDeltaPart();
+		_timer->startDeltaPart("physicsUpdate");
+		_camera->update(lastCursorPosition);
+		_raycaster->update(_fe3d->misc_getCursorPositionRelativeToViewport());
+		_cameraCollisionHandler->update();
+		_camera->updateMatrices();
+		_timer->stopDeltaPart();
 
-			_timer->startDeltaPart("3dEntityUpdate");
-			_skyEntityManager->update();
-			_waterEntityManager->update();
-			_modelEntityManager->update();
-			_quad3dEntityManager->update();
-			_text3dEntityManager->update();
-			_aabbEntityManager->update();
-			_pointlightEntityManager->update();
-			_spotlightEntityManager->update();
-			_reflectionEntityManager->update();
-			_timer->stopDeltaPart();
-
-			_timer->startDeltaPart("shadowUpdate");
-			_shadowGenerator->update();
-			_timer->stopDeltaPart();
-
-			_timer->startDeltaPart("soundUpdate");
-			_sound2dManager->update();
-			_sound3dManager->update();
-			_sound2dPlayer->update();
-			_sound3dPlayer->update();
-			_timer->stopDeltaPart();
-		}
+		_timer->startDeltaPart("3dEntityUpdate");
+		_skyEntityManager->update();
+		_waterEntityManager->update();
+		_modelEntityManager->update();
+		_quad3dEntityManager->update();
+		_text3dEntityManager->update();
+		_aabbEntityManager->update();
+		_pointlightEntityManager->update();
+		_spotlightEntityManager->update();
+		_reflectionEntityManager->update();
+		_timer->stopDeltaPart();
 
 		_timer->startDeltaPart("2dEntityUpdate");
 		_quad2dEntityManager->update();
 		_text2dEntityManager->update();
+		_timer->stopDeltaPart();
+
+		_timer->startDeltaPart("renderUpdate");
+		_masterRenderer->update();
+		_timer->stopDeltaPart();
+
+		_timer->startDeltaPart("shadowUpdate");
+		_shadowGenerator->update();
+		_timer->stopDeltaPart();
+
+		_timer->startDeltaPart("soundUpdate");
+		_sound2dManager->update();
+		_sound3dManager->update();
+		_sound2dPlayer->update();
+		_sound3dPlayer->update();
 		_timer->stopDeltaPart();
 	}
 
@@ -335,9 +336,6 @@ void EngineCore::update()
 	_networkingClient->update();
 	_timer->stopDeltaPart();
 
-	_timer->startDeltaPart("renderUpdate");
-	_masterRenderer->update();
-	_timer->stopDeltaPart();
 	_timer->startDeltaPart("miscUpdate");
 	if(!Config::getInst().isApplicationExported())
 	{
@@ -356,26 +354,6 @@ void EngineCore::update()
 	}
 	lastCursorPosition = _renderWindow->getCursorPosition();
 	_timer->stopDeltaPart();
-}
-
-void EngineCore::pause()
-{
-	if(_isPaused)
-	{
-		Logger::throwError("Tried to resume engine: already paused!");
-	}
-
-	_isPaused = true;
-}
-
-void EngineCore::resume()
-{
-	if(!_isPaused)
-	{
-		Logger::throwError("Tried to resume engine: not paused!");
-	}
-
-	_isPaused = false;
 }
 
 void EngineCore::stop()

@@ -111,7 +111,13 @@ void MasterRenderer::_captureCubeReflections()
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				_renderSkyEntity();
 				_renderTerrainEntity();
-				_renderModelEntities();
+				_renderWaterEntity();
+				_renderOpaqueModelEntities();
+				_renderOpaqueQuad3dEntities();
+				_renderOpaqueText3dEntities();
+				_renderTransparentModelEntities();
+				_renderTransparentQuad3dEntities();
+				_renderTransparentText3dEntities();
 				_cubeReflectionCaptor->unbind();
 
 				const auto dataSize = (reflectionQuality * reflectionQuality * 3);

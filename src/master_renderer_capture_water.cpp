@@ -75,29 +75,40 @@ void MasterRenderer::_captureWaterReflections()
 		const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
 		_renderBus->setClippingPlane(clippingPlane);
 
-		_renderSkyEntity();
+		glEnable(GL_CLIP_DISTANCE0);
 
-		if(waterEntity->getQuality() != WaterQuality::SKY)
+		if(waterEntity->getQuality() == WaterQuality::SKY)
 		{
-			glEnable(GL_CLIP_DISTANCE0);
-			_renderTerrainEntity();
-			glDisable(GL_CLIP_DISTANCE0);
+			_renderSkyEntity();
 		}
 
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL ||
-		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN)
 		{
-			glEnable(GL_CLIP_DISTANCE2);
-			_renderModelEntities();
-			glDisable(GL_CLIP_DISTANCE2);
+			_renderSkyEntity();
+			_renderTerrainEntity();
+		}
+
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL)
+		{
+			_renderSkyEntity();
+			_renderTerrainEntity();
+			_renderOpaqueModelEntities();
+			_renderTransparentModelEntities();
 		}
 
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
 		{
-			glEnable(GL_CLIP_DISTANCE2);
-			_renderQuad3dEntities();
-			glDisable(GL_CLIP_DISTANCE2);
+			_renderSkyEntity();
+			_renderTerrainEntity();
+			_renderOpaqueModelEntities();
+			_renderOpaqueQuad3dEntities();
+			_renderOpaqueText3dEntities();
+			_renderTransparentModelEntities();
+			_renderTransparentQuad3dEntities();
+			_renderTransparentText3dEntities();
 		}
+
+		glDisable(GL_CLIP_DISTANCE0);
 
 		_waterReflectionCaptor->unbind();
 
@@ -181,28 +192,44 @@ void MasterRenderer::_captureWaterRefractions()
 			_renderBus->setClippingPlane(clippingPlane);
 		}
 
-		_renderSkyEntity();
+		glEnable(GL_CLIP_DISTANCE0);
 
-		if(waterEntity->getQuality() != WaterQuality::SKY)
+		switch(waterEntity->getQuality())
 		{
-			glEnable(GL_CLIP_DISTANCE0);
-			_renderTerrainEntity();
-			glDisable(GL_CLIP_DISTANCE0);
+			case WaterQuality::SKY:
+			{
+				_renderSkyEntity();
+				break;
+			}
+			case WaterQuality::SKY_TERRAIN:
+			{
+				_renderSkyEntity();
+				_renderTerrainEntity();
+				break;
+			}
+			case WaterQuality::SKY_TERRAIN_MODEL:
+			{
+				_renderSkyEntity();
+				_renderTerrainEntity();
+				_renderOpaqueModelEntities();
+				_renderTransparentModelEntities();
+				break;
+			}
+			case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D:
+			{
+				_renderSkyEntity();
+				_renderTerrainEntity();
+				_renderOpaqueModelEntities();
+				_renderOpaqueQuad3dEntities();
+				_renderOpaqueText3dEntities();
+				_renderTransparentModelEntities();
+				_renderTransparentQuad3dEntities();
+				_renderTransparentText3dEntities();
+				break;
+			}
 		}
 
-		if((waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL) || (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D))
-		{
-			glEnable(GL_CLIP_DISTANCE2);
-			_renderModelEntities();
-			glDisable(GL_CLIP_DISTANCE2);
-		}
-
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
-		{
-			glEnable(GL_CLIP_DISTANCE2);
-			_renderQuad3dEntities();
-			glDisable(GL_CLIP_DISTANCE2);
-		}
+		glDisable(GL_CLIP_DISTANCE0);
 
 		_renderBus->setShadowsEnabled(isShadowsEnabled);
 

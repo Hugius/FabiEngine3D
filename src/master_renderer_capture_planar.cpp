@@ -88,8 +88,12 @@ void MasterRenderer::_capturePlanarReflections()
 	glDisable(GL_CLIP_DISTANCE0);
 
 	glEnable(GL_CLIP_DISTANCE2);
-	_renderModelEntities();
-	_renderQuad3dEntities();
+	_renderOpaqueModelEntities();
+	_renderOpaqueQuad3dEntities();
+	_renderOpaqueText3dEntities();
+	_renderTransparentModelEntities();
+	_renderTransparentQuad3dEntities();
+	_renderTransparentText3dEntities();
 	glDisable(GL_CLIP_DISTANCE2);
 
 	_planarReflectionCaptor->unbind();

@@ -47,14 +47,9 @@ public:
 
 	void start();
 	void update();
-	void pause();
-	void resume();
 	void stop();
 
 	const float getDeltaTimeMS() const;
-
-	const bool isPaused() const;
-	const bool isRunning() const;
 
 	const shared_ptr<LibraryLoader> getLibraryLoader() const;
 	const shared_ptr<InputHandler> getInputHandler() const;

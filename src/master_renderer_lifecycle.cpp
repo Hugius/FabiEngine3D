@@ -84,151 +84,9 @@ MasterRenderer::MasterRenderer()
 void MasterRenderer::update()
 {
 	_updateSkyExposure();
+	_updateShadows();
 	_updateMotionBlur();
 	_updateLensFlare();
-}
-
-void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport)
-{
-	glViewport(0, 0, viewport.x, viewport.y);
-
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	_quad2dEntityColorRenderer.bind();
-
-	_quad2dEntityColorRenderer.render(logo);
-
-	_quad2dEntityColorRenderer.unbind();
-}
-
-void MasterRenderer::renderApplication()
-{
-	const auto& config = Config::getInst();
-
-	if(_renderBus->isWireframeRenderingEnabled())
-	{
-		_timer->startDeltaPart("3dEntityRender");
-		glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		_renderSkyEntity();
-		_renderTerrainEntity();
-		_renderWaterEntity();
-		_renderOpaqueModelEntities();
-		_renderOpaqueQuad3dEntities();
-		_renderOpaqueText3dEntities();
-		_renderTransparentModelEntities();
-		_renderTransparentQuad3dEntities();
-		_renderTransparentText3dEntities();
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
-		_timer->stopDeltaPart();
-		_timer->startDeltaPart("2dEntityRender");
-		_renderGUI();
-		_timer->stopDeltaPart();
-		return;
-	}
-
-	_timer->startDeltaPart("depthPreRender");
-	_captureWorldDepth();
-	_timer->stopDeltaPart();
-	_timer->startDeltaPart("shadowPreRender");
-	_captureShadows();
-	_timer->stopDeltaPart();
-	_timer->startDeltaPart("reflectionPreRender");
-	_captureCubeReflections();
-	_capturePlanarReflections();
-	_captureWaterReflections();
-	_timer->stopDeltaPart();
-	_timer->startDeltaPart("refractionPreRender");
-	_captureWaterRefractions();
-	_timer->stopDeltaPart();
-
-	_timer->startDeltaPart("3dEntityRender");
-	_worldColorCaptor->bind();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	_renderBus->setTriangleCountingEnabled(true);
-	_renderSkyEntity();
-	_renderTerrainEntity();
-	_renderWaterEntity();
-	_renderOpaqueModelEntities();
-	_renderOpaqueQuad3dEntities();
-	_renderOpaqueText3dEntities();
-	_renderTransparentModelEntities();
-	_renderTransparentQuad3dEntities();
-	_renderTransparentText3dEntities();
-	_renderAabbEntities();
-	_renderBus->setTriangleCountingEnabled(false);
-	_worldColorCaptor->unbind();
-	_renderBus->setPrimarySceneMap(_worldColorCaptor->getTexture(0));
-	_renderBus->setSecondarySceneMap(_worldColorCaptor->getTexture(1));
-	_renderBus->setFinalSceneMap(_renderBus->getPrimarySceneMap());
-	_timer->stopDeltaPart();
-
-	_timer->startDeltaPart("postProcessing");
-	_captureAntiAliasing();
-	_captureBloom();
-	_captureDOF();
-	_captureLensFlare();
-	_captureMotionBlur();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
-	_renderFinalSceneMap();
-	glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
-	_timer->stopDeltaPart();
-
-	_timer->startDeltaPart("2dEntityRender");
-	_renderBus->setTriangleCountingEnabled(true);
-	_renderGUI();
-	_renderBus->setTriangleCountingEnabled(false);
-	_timer->stopDeltaPart();
-}
-
-void MasterRenderer::reloadBloomBlurCaptureBuffer()
-{
-	const auto viewportSize = Config::getInst().getViewportSize();
-
-	_bloomBlurCaptorHighQuality = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderBus->getBloomQuality()), 1, true);
-	_bloomBlurCaptorLowQuality = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / (_renderBus->getBloomQuality() * 2)), 1, true);
-}
-
-void MasterRenderer::reloadDofBlurCaptureBuffer()
-{
-	const auto viewportSize = Config::getInst().getViewportSize();
-
-	_dofBlurCaptor = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderBus->getDofQuality()), 1, true);
-}
-
-void MasterRenderer::reloadMotionBlurBlurCaptureBuffer()
-{
-	const auto viewportSize = Config::getInst().getViewportSize();
-
-	_motionBlurBlurCaptor = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderBus->getMotionBlurQuality()), 1, true);
-}
-
-void MasterRenderer::reloadCubeReflectionCaptureBuffer()
-{
-	_cubeReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getCubeReflectionQuality()), 1, false);
-}
-
-void MasterRenderer::reloadPlanarReflectionCaptureBuffer()
-{
-	_planarReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getPlanarReflectionQuality()), 1, false);
-}
-
-void MasterRenderer::reloadWaterReflectionCaptureBuffer()
-{
-	_waterReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getPlanarReflectionQuality()), 1, false);
-}
-
-void MasterRenderer::reloadWaterRefractionCaptureBuffer()
-{
-	_waterRefractionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getPlanarRefractionQuality()), 1, false);
-}
-
-void MasterRenderer::reloadShadowCaptureBuffer()
-{
-	_shadowCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getShadowQuality()));
 }
 
 void MasterRenderer::_updateSkyExposure()
@@ -266,6 +124,11 @@ void MasterRenderer::_updateSkyExposure()
 	}
 }
 
+void MasterRenderer::_updateShadows()
+{
+
+}
+
 void MasterRenderer::_updateMotionBlur()
 {
 	if(_renderBus->isMotionBlurEnabled())
@@ -287,15 +150,14 @@ void MasterRenderer::_updateLensFlare()
 {
 	if(_renderBus->isLensFlareEnabled())
 	{
-		auto flareSourcePosition = _renderBus->getDirectionalLightingPosition();
-		auto viewMatrix = _renderBus->getViewMatrix();
-		auto projectionMatrix = _renderBus->getProjectionMatrix();
+		const auto& flareSourcePosition = _renderBus->getDirectionalLightingPosition();
+		const auto& viewMatrix = _renderBus->getViewMatrix();
+		const auto& projectionMatrix = _renderBus->getProjectionMatrix();
+		const auto flareSourceClip = (projectionMatrix * viewMatrix * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
+		const auto flareSourceNdc = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
+		const auto flareSourceUv = fvec2(((flareSourceNdc.x + 1.0f) / 2.0f), ((flareSourceNdc.y + 1.0f) / 2.0f));
+
 		float transparency = 0.0f;
-
-		fvec4 flareSourceClip = (projectionMatrix * viewMatrix * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
-		fvec2 flareSourceNdc = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
-		fvec2 flareSourceUv = fvec2(((flareSourceNdc.x + 1.0f) / 2.0f), ((flareSourceNdc.y + 1.0f) / 2.0f));
-
 		if((flareSourceNdc.x > -1.0f) && (flareSourceNdc.x < 1.0f) && (flareSourceNdc.y > -1.0f) && (flareSourceNdc.y < 1.0f))
 		{
 			transparency = (1.0f - (max(fabsf(flareSourceNdc.x), fabsf(flareSourceNdc.y)) / _renderBus->getLensFlareSensitivity()));

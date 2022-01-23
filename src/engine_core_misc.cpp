@@ -5,11 +5,6 @@ const float EngineCore::getDeltaTimeMS() const
 	return _deltaTimeMS;
 }
 
-const bool EngineCore::isRunning() const
-{
-	return _isRunning;
-}
-
 const shared_ptr<LibraryLoader> EngineCore::getLibraryLoader() const
 {
 	return _libraryLoader;

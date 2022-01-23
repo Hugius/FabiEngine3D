@@ -60,7 +60,7 @@
     <ClCompile Include="..\..\..\src\master_renderer_draw.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\master_renderer_main.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_lifecycle.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\render_bus.cpp">

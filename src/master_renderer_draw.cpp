@@ -7,6 +7,102 @@ using std::make_shared;
 using std::dynamic_pointer_cast;
 using std::function;
 
+void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport)
+{
+	glViewport(0, 0, viewport.x, viewport.y);
+
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	_quad2dEntityColorRenderer.bind();
+
+	_quad2dEntityColorRenderer.render(logo);
+
+	_quad2dEntityColorRenderer.unbind();
+}
+
+void MasterRenderer::renderApplication()
+{
+	const auto& config = Config::getInst();
+
+	if(_renderBus->isWireframeRenderingEnabled())
+	{
+		_timer->startDeltaPart("3dEntityRender");
+		glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		_renderSkyEntity();
+		_renderTerrainEntity();
+		_renderWaterEntity();
+		_renderOpaqueModelEntities();
+		_renderOpaqueQuad3dEntities();
+		_renderOpaqueText3dEntities();
+		_renderTransparentModelEntities();
+		_renderTransparentQuad3dEntities();
+		_renderTransparentText3dEntities();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
+		_timer->stopDeltaPart();
+		_timer->startDeltaPart("2dEntityRender");
+		_renderGUI();
+		_timer->stopDeltaPart();
+		return;
+	}
+
+	_timer->startDeltaPart("depthPreRender");
+	_captureWorldDepth();
+	_timer->stopDeltaPart();
+	_timer->startDeltaPart("shadowPreRender");
+	_captureShadows();
+	_timer->stopDeltaPart();
+	_timer->startDeltaPart("reflectionPreRender");
+	_captureCubeReflections();
+	_capturePlanarReflections();
+	_captureWaterReflections();
+	_timer->stopDeltaPart();
+	_timer->startDeltaPart("refractionPreRender");
+	_captureWaterRefractions();
+	_timer->stopDeltaPart();
+
+	_timer->startDeltaPart("3dEntityRender");
+	_worldColorCaptor->bind();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	_renderBus->setTriangleCountingEnabled(true);
+	_renderSkyEntity();
+	_renderTerrainEntity();
+	_renderWaterEntity();
+	_renderOpaqueModelEntities();
+	_renderOpaqueQuad3dEntities();
+	_renderOpaqueText3dEntities();
+	_renderTransparentModelEntities();
+	_renderTransparentQuad3dEntities();
+	_renderTransparentText3dEntities();
+	_renderAabbEntities();
+	_renderBus->setTriangleCountingEnabled(false);
+	_worldColorCaptor->unbind();
+	_renderBus->setPrimarySceneMap(_worldColorCaptor->getTexture(0));
+	_renderBus->setSecondarySceneMap(_worldColorCaptor->getTexture(1));
+	_renderBus->setFinalSceneMap(_renderBus->getPrimarySceneMap());
+	_timer->stopDeltaPart();
+
+	_timer->startDeltaPart("postProcessing");
+	_captureAntiAliasing();
+	_captureBloom();
+	_captureDOF();
+	_captureLensFlare();
+	_captureMotionBlur();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
+	_renderFinalSceneMap();
+	glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
+	_timer->stopDeltaPart();
+
+	_timer->startDeltaPart("2dEntityRender");
+	_renderBus->setTriangleCountingEnabled(true);
+	_renderGUI();
+	_renderBus->setTriangleCountingEnabled(false);
+	_timer->stopDeltaPart();
+}
+
 void MasterRenderer::_renderSkyEntity()
 {
 	if(_skyEntityManager->getSelectedEntity() != nullptr)

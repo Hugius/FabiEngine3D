@@ -74,6 +74,7 @@ public:
 
 private:
 	void _updateSkyExposure();
+	void _updateShadows();
 	void _updateMotionBlur();
 	void _updateLensFlare();
 	void _captureCubeReflections();

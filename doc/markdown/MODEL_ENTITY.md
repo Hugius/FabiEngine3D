@@ -111,7 +111,7 @@
 - **Reflectivity**: the percentage of how reflective the mesh is
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Transparency**: the transparency of the fragments
+- **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
 - **Emission Intensity**: the intensity of the emission map

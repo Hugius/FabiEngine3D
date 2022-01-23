@@ -50,7 +50,7 @@
 - **Lightness**: the lightness multiplier of the mesh
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Transparency**: the transparency of the fragments
+- **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
 - **Min Height**: the minimum Y position from which fragments are visible

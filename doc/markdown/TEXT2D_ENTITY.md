@@ -33,7 +33,7 @@
 - **Rotation**: the rotation of the mesh around the Z axis
   - Type: `decimal`
   - Constraints: between `0.0` and `360.0`
-- **Transparency**: the transparency of the fragments
+- **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
 - **Horizontally Mirrored**: the characters horizontally mirrored

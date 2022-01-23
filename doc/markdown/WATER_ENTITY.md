@@ -49,7 +49,7 @@
 - **Specular Intesity**: the intensity of the specular lighting
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Transparency**: the transparency of the fragments
+- **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
 - **Reflective**: planar reflections are rendered on the mesh

@@ -176,6 +176,78 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
+
+	else if(functionName == "fe3d:collision_check_camera_text3d")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(args[1].getString() != "X" && args[1].getString() != "Y" && args[1].getString() != "Z" && !args[1].getString().empty())
+			{
+				_throwScriptError("invalid direction argument!");
+				return true;
+			}
+
+			string result = "";
+			auto foundAabbID = _fe3d->collision_checkCameraWithEntities(args[0].getString());
+
+			if(!foundAabbID.empty())
+			{
+				if(_fe3d->aabb_hasParent(foundAabbID) && (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::TEXT3D))
+				{
+					auto directionX = _fe3d->collision_checkCameraWithEntityDirection(foundAabbID, Direction::X);
+					auto directionY = _fe3d->collision_checkCameraWithEntityDirection(foundAabbID, Direction::Y);
+					auto directionZ = _fe3d->collision_checkCameraWithEntityDirection(foundAabbID, Direction::Z);
+					if((directionX && args[1].getString() == "X") ||
+					   (directionY && args[1].getString() == "Y") ||
+					   (directionZ && args[1].getString() == "Z") ||
+					   ((directionX || directionY || directionZ) && args[1].getString().empty()))
+					{
+						result = _fe3d->aabb_getParentEntityID(foundAabbID);
+					}
+				}
+			}
+
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
+		}
+	}
+	else if(functionName == "fe3d:collision_check_camera_text3ds")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(args[0].getString() != "X" && args[0].getString() != "Y" && args[0].getString() != "Z" && !args[0].getString().empty())
+			{
+				_throwScriptError("invalid direction argument!");
+				return true;
+			}
+
+			string result = "";
+			auto foundAabbID = _fe3d->collision_checkCameraWithAny();
+
+			if(!foundAabbID.empty())
+			{
+				if(_fe3d->aabb_hasParent(foundAabbID) && (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::TEXT3D))
+				{
+					auto directionX = _fe3d->collision_checkCameraWithAnyDirection(Direction::X);
+					auto directionY = _fe3d->collision_checkCameraWithAnyDirection(Direction::Y);
+					auto directionZ = _fe3d->collision_checkCameraWithAnyDirection(Direction::Z);
+					if((directionX && args[0].getString() == "X") ||
+					   (directionY && args[0].getString() == "Y") ||
+					   (directionZ && args[0].getString() == "Z") ||
+					   ((directionX || directionY || directionZ) && args[0].getString().empty()))
+					{
+						result = _fe3d->aabb_getParentEntityID(foundAabbID);
+					}
+				}
+			}
+
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
+		}
+	}
+
 	else if(functionName == "fe3d:collision_check_camera_aabb")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -184,8 +256,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(args[1].getString() != "X" && args[1].getString() != "Y" &&
-				   args[1].getString() != "Z" && !args[1].getString().empty())
+				if(args[1].getString() != "X" && args[1].getString() != "Y" && args[1].getString() != "Z" && !args[1].getString().empty())
 				{
 					_throwScriptError("invalid direction argument!");
 					return true;
@@ -220,8 +291,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[0].getString() != "X" && args[0].getString() != "Y" &&
-			   args[0].getString() != "Z" && !args[0].getString().empty())
+			if(args[0].getString() != "X" && args[0].getString() != "Y" && args[0].getString() != "Z" && !args[0].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;
@@ -264,8 +334,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 					if(!foundAabbID.empty())
 					{
-						if(_fe3d->aabb_hasParent(foundAabbID) &&
-						   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
+						if(_fe3d->aabb_hasParent(foundAabbID) && (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 						{
 							if(args[1].getString().empty())
 							{
@@ -345,8 +414,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 					if(!foundAabbID.empty())
 					{
-						if(_fe3d->aabb_hasParent(foundAabbID) &&
-						   (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::QUAD3D))
+						if(_fe3d->aabb_hasParent(foundAabbID) && (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::QUAD3D))
 						{
 							result = foundAabbID;
 							break;

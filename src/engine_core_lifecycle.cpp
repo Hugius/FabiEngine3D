@@ -33,7 +33,6 @@ EngineCore::EngineCore()
 	_vertexBufferCache = make_shared<VertexBufferCache>();
 	_textureBufferCache = make_shared<TextureBufferCache>();
 	_renderBus = make_shared<RenderBus>();
-	_shadowGenerator = make_shared<ShadowGenerator>();
 	_camera = make_shared<Camera>();
 	_raycaster = make_shared<Raycaster>();
 	_cameraCollisionHandler = make_shared<CameraCollisionHandler>();
@@ -66,7 +65,6 @@ EngineCore::EngineCore()
 	_aabbEntityManager->inject(_text3dEntityManager);
 	_masterRenderer->inject(_renderBus);
 	_masterRenderer->inject(_camera);
-	_masterRenderer->inject(_shadowGenerator);
 	_masterRenderer->inject(_timer);
 	_masterRenderer->inject(_skyEntityManager);
 	_masterRenderer->inject(_terrainEntityManager);
@@ -80,7 +78,6 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_pointlightEntityManager);
 	_masterRenderer->inject(_spotlightEntityManager);
 	_masterRenderer->inject(_reflectionEntityManager);
-	_shadowGenerator->inject(_renderBus);
 	_camera->inject(_renderBus);
 	_camera->inject(_renderWindow);
 	_raycaster->inject(_terrainEntityManager);
@@ -317,10 +314,6 @@ void EngineCore::update()
 
 		_timer->startDeltaPart("renderUpdate");
 		_masterRenderer->update();
-		_timer->stopDeltaPart();
-
-		_timer->startDeltaPart("shadowUpdate");
-		_shadowGenerator->update();
 		_timer->stopDeltaPart();
 
 		_timer->startDeltaPart("soundUpdate");

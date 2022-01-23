@@ -9,11 +9,11 @@ void MasterRenderer::_captureCubeReflections()
 
 	const auto reflectionQuality = _renderBus->getCubeReflectionQuality();
 
-	const auto initialCameraAspectRatio = _camera->getAspectRatio();
-	const auto initialCameraFOV = _camera->getFOV();
-	const auto initialCameraYaw = _camera->getYaw();
-	const auto initialCameraPitch = _camera->getPitch();
-	const auto initialCameraPosition = _camera->getPosition();
+	const auto originalCameraAspectRatio = _camera->getAspectRatio();
+	const auto originalCameraFOV = _camera->getFOV();
+	const auto originalCameraYaw = _camera->getYaw();
+	const auto originalCameraPitch = _camera->getPitch();
+	const auto& originalCameraPosition = _camera->getPosition();
 
 	vector<string> savedModelEntityIDs;
 	for(const auto& [key, entity] : _modelEntityManager->getEntities())
@@ -37,8 +37,11 @@ void MasterRenderer::_captureCubeReflections()
 
 	_renderBus->setReflectionsEnabled(false);
 
-	float skyExposureLightness = _renderBus->getSkyExposureLightness();
+	float originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
 	_renderBus->setSkyExposureLightness(0.0f);
+
+	const auto originalShadowInterval = _renderBus->getShadowInterval();
+	_renderBus->setShadowInterval(0);
 
 	_camera->invertUpVector();
 	_camera->setAspectRatio(1.0f);
@@ -104,7 +107,7 @@ void MasterRenderer::_captureCubeReflections()
 
 				_camera->updateMatrices();
 
-				_shadowGenerator->generate();
+				_updateShadows();
 				_captureShadows();
 
 				_cubeReflectionCaptor->bind();
@@ -159,17 +162,18 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	_renderBus->setReflectionsEnabled(true);
-
-	_renderBus->setSkyExposureLightness(skyExposureLightness);
-
 	_camera->invertUpVector();
-	_camera->setAspectRatio(initialCameraAspectRatio);
-	_camera->setFOV(initialCameraFOV);
-	_camera->setYaw(initialCameraYaw);
-	_camera->setPitch(initialCameraPitch);
-	_camera->setPosition(initialCameraPosition);
+	_camera->setAspectRatio(originalCameraAspectRatio);
+	_camera->setFOV(originalCameraFOV);
+	_camera->setYaw(originalCameraYaw);
+	_camera->setPitch(originalCameraPitch);
+	_camera->setPosition(originalCameraPosition);
 	_camera->updateMatrices();
 
-	_shadowGenerator->generate();
+	_renderBus->setShadowInterval(originalShadowInterval);
+	_updateShadows();
+
+	_renderBus->setSkyExposureLightness(originalSkyExposureLightness);
+
+	_renderBus->setReflectionsEnabled(true);
 }

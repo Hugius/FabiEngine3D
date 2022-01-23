@@ -126,7 +126,38 @@ void MasterRenderer::_updateSkyExposure()
 
 void MasterRenderer::_updateShadows()
 {
+	if(_renderBus->isShadowsEnabled())
+	{
+		if((_renderBus->getShadowInterval() == 0) || (_timer->getPassedTickCount() % _renderBus->getShadowInterval()) == 0)
+		{
+			if(_renderBus->isShadowsFollowingCamera())
+			{
+				auto cameraPosition = _renderBus->getCameraPosition();
+				auto eyePosition = _renderBus->getShadowEyePosition();
+				auto centerPosition = _renderBus->getShadowCenterPosition();
 
+				eyePosition.x += cameraPosition.x;
+				eyePosition.z += cameraPosition.z;
+				centerPosition.x += cameraPosition.x;
+				centerPosition.z += cameraPosition.z;
+
+				_renderBus->setShadowEyePosition(eyePosition);
+				_renderBus->setShadowCenterPosition(centerPosition);
+			}
+
+			const auto leftX = -(_renderBus->getShadowSize() / 2.0f);
+			const auto rightX = (_renderBus->getShadowSize() / 2.0f);
+			const auto bottomY = -(_renderBus->getShadowSize() / 2.0f);
+			const auto topY = (_renderBus->getShadowSize() / 2.0f);
+			const auto nearZ = 0.01f;
+			const auto farZ = _renderBus->getShadowReach();
+
+			const auto viewMatrix = Math::createViewMatrix(_renderBus->getShadowEyePosition(), _renderBus->getShadowCenterPosition(), fvec3(0.0f, 1.0f, 0.0f));
+			const auto projectionMatrix = Math::createOrthographicProjectionMatrix(leftX, rightX, bottomY, topY, nearZ, farZ);
+
+			_renderBus->setShadowMatrix(projectionMatrix * viewMatrix);
+		}
+	}
 }
 
 void MasterRenderer::_updateMotionBlur()

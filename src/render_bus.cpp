@@ -413,6 +413,16 @@ void RenderBus::setSkyExposureEnabled(bool value)
 	_isSkyExposureEnabled = value;
 }
 
+void RenderBus::setShadowInterval(unsigned int value)
+{
+	_shadowInterval = value;
+}
+
+void RenderBus::setShadowsFollowingCamera(bool value)
+{
+	_isShadowsFollowingCamera = value;
+}
+
 const shared_ptr<TextureBuffer> RenderBus::getPlanarReflectionMap() const
 {
 	return _planarReflectionMap;
@@ -683,6 +693,11 @@ const unsigned int RenderBus::getAnisotropicFilteringQuality() const
 	return _anisotropicFilteringQuality;
 }
 
+const unsigned int RenderBus::getShadowInterval() const
+{
+	return _shadowInterval;
+}
+
 const unsigned int RenderBus::getShadowQuality() const
 {
 	return _shadowQuality;
@@ -811,4 +826,9 @@ const float RenderBus::getSkyExposureLightness() const
 const bool RenderBus::isSkyExposureEnabled() const
 {
 	return _isSkyExposureEnabled;
+}
+
+const bool RenderBus::isShadowsFollowingCamera() const
+{
+	return _isShadowsFollowingCamera;
 }

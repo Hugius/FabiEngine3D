@@ -41,7 +41,7 @@ public:
 	static const mat44 createScalingMatrixY(float value);
 	static const mat44 createScalingMatrixZ(float value);
 	static const mat44 createViewMatrix(const fvec3& eye, const fvec3& center, const fvec3& up);
-	static const mat44 createOrthographicProjectionMatrix(float left, float right, float bottom, float top, float near, float far);
+	static const mat44 createOrthographicProjectionMatrix(float leftZ, float rightZ, float bottomZ, float topZ, float nearZ, float farZ);
 	static const mat44 createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far);
 
 	static const fvec4 calculateAverage(const vector<fvec4>& values);

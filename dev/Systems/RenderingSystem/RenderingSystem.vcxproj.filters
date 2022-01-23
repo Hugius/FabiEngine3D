@@ -66,9 +66,6 @@
     <ClCompile Include="..\..\..\src\render_bus.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\shadow_generator.cpp">
-      <Filter>Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\render_window.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
@@ -162,9 +159,6 @@
       <Filter>Master Renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\render_bus.hpp">
-      <Filter>Miscellaneous</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\shadow_generator.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\render_window.hpp">

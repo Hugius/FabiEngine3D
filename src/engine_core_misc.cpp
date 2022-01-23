@@ -115,11 +115,6 @@ const shared_ptr<RenderBus> EngineCore::getRenderBus() const
 	return _renderBus;
 }
 
-const shared_ptr<ShadowGenerator> EngineCore::getShadowGenerator() const
-{
-	return _shadowGenerator;
-}
-
 const shared_ptr<Camera> EngineCore::getCamera() const
 {
 	return _camera;

@@ -74,7 +74,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	_renderBus->setReflectionsEnabled(false);
 
-	float skyExposureLightness = _renderBus->getSkyExposureLightness();
+	const auto originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
 	_renderBus->setSkyExposureLightness(0.0f);
 
 	const float clippingHeight = -(_renderBus->getPlanarReflectionHeight() + 0.0000001f);
@@ -130,5 +130,5 @@ void MasterRenderer::_capturePlanarReflections()
 
 	_renderBus->setReflectionsEnabled(true);
 
-	_renderBus->setSkyExposureLightness(skyExposureLightness);
+	_renderBus->setSkyExposureLightness(originalSkyExposureLightness);
 }

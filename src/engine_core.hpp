@@ -20,7 +20,6 @@
 #include "reflection_entity_manager.hpp"
 #include "quad2d_entity_manager.hpp"
 #include "text2d_entity_manager.hpp"
-#include "shadow_generator.hpp"
 #include "raycaster.hpp"
 #include "camera_collision_handler.hpp"
 #include "timer.hpp"
@@ -73,7 +72,6 @@ public:
 	const shared_ptr<VertexBufferCache> getVertexBufferCache() const;
 	const shared_ptr<TextureBufferCache> getTextureBufferCache() const;
 	const shared_ptr<RenderBus> getRenderBus() const;
-	const shared_ptr<ShadowGenerator> getShadowGenerator() const;
 	const shared_ptr<Camera> getCamera() const;
 	const shared_ptr<Raycaster> getRaycaster() const;
 	const shared_ptr<CameraCollisionDetector> getCameraCollisionDetector() const;
@@ -114,7 +112,6 @@ private:
 	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
 	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;
 	shared_ptr<RenderBus> _renderBus = nullptr;
-	shared_ptr<ShadowGenerator> _shadowGenerator = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<Raycaster> _raycaster = nullptr;
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;

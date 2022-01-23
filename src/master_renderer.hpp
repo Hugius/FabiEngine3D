@@ -20,7 +20,6 @@
 #include "blur_renderer.hpp"
 #include "timer.hpp"
 #include "camera.hpp"
-#include "shadow_generator.hpp"
 #include "sky_entity_manager.hpp"
 #include "terrain_entity_manager.hpp"
 #include "water_entity_manager.hpp"
@@ -53,7 +52,6 @@ public:
 	void inject(shared_ptr<ReflectionEntityManager> reflectionEntityManager);
 	void inject(shared_ptr<RenderBus> renderBus);
 	void inject(shared_ptr<Camera> camera);
-	void inject(shared_ptr<ShadowGenerator> shadowGenerator);
 	void inject(shared_ptr<Timer> timer);
 	void update();
 	void renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport);
@@ -178,6 +176,5 @@ private:
 	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
 	shared_ptr<RenderBus> _renderBus = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
-	shared_ptr<ShadowGenerator> _shadowGenerator = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
 };

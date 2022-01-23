@@ -93,6 +93,8 @@ public:
 	void setSkyExposureSpeed(float value);
 	void setSkyExposureLightness(float value);
 	void setSkyExposureEnabled(bool value);
+	void setShadowInterval(unsigned int value);
+	void setShadowsFollowingCamera(bool value);
 
 	const string& getCursorEntityID() const;
 	const string& getLensFlareMapPath() const;
@@ -151,6 +153,7 @@ public:
 	const unsigned int getTriangleCount() const;
 	const unsigned int getGuiDepth() const;
 	const unsigned int getAnisotropicFilteringQuality() const;
+	const unsigned int getShadowInterval() const;
 
 	const bool isReflectionsEnabled() const;
 	const bool isAntiAliasingEnabled() const;
@@ -168,6 +171,7 @@ public:
 	const bool isTriangleCountingEnabled() const;
 	const bool isDofDynamic() const;
 	const bool isSkyExposureEnabled() const;
+	const bool isShadowsFollowingCamera() const;
 
 	const shared_ptr<TextureBuffer> getPrimarySceneMap() const;
 	const shared_ptr<TextureBuffer> getSecondarySceneMap() const;
@@ -254,6 +258,7 @@ private:
 	unsigned int _bloomBlurCount = 0;
 	unsigned int _triangleCount = 0;
 	unsigned int _guiDepth = 0;
+	unsigned int _shadowInterval = 0;
 
 	bool _isReflectionsEnabled = true;
 	bool _isAntiAliasingEnabled = false;
@@ -271,6 +276,7 @@ private:
 	bool _isTriangleCountingEnabled = false;
 	bool _isDofDynamic = false;
 	bool _isSkyExposureEnabled = false;
+	bool _isShadowsFollowingCamera = false;
 
 	BloomType _bloomType = BloomType::EVERYTHING;
 };

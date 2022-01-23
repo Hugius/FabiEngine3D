@@ -54,11 +54,6 @@ void MasterRenderer::inject(shared_ptr<Camera> camera)
 	_camera = camera;
 }
 
-void MasterRenderer::inject(shared_ptr<ShadowGenerator> shadowGenerator)
-{
-	_shadowGenerator = shadowGenerator;
-}
-
 void MasterRenderer::inject(shared_ptr<Timer> timer)
 {
 	_timer = timer;

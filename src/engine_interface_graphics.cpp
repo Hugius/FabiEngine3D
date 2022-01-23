@@ -47,13 +47,13 @@ void EngineInterface::gfx_enableAntiAliasing()
 
 void EngineInterface::gfx_enableShadows()
 {
-	if(_core->getShadowGenerator()->isEnabled())
+	if(_core->getRenderBus()->isShadowsEnabled())
 	{
 		Logger::throwWarning("Tried to enable shadows: already enabled");
 		return;
 	}
 
-	_core->getShadowGenerator()->setEnabled(true);
+	_core->getRenderBus()->setShadowsEnabled(true);
 }
 
 void EngineInterface::gfx_enableBloom()
@@ -178,24 +178,24 @@ void EngineInterface::gfx_disableAntiAliasing(bool mustResetProperties)
 
 void EngineInterface::gfx_disableShadows(bool mustResetProperties)
 {
-	if(!_core->getShadowGenerator()->isEnabled())
+	if(!_core->getRenderBus()->isShadowsEnabled())
 	{
 		Logger::throwWarning("Tried to disable shadows: not enabled");
 		return;
 	}
 
-	_core->getShadowGenerator()->setEnabled(false);
+	_core->getRenderBus()->setShadowsEnabled(false);
 
 	if(mustResetProperties)
 	{
-		_core->getShadowGenerator()->setEyePosition(fvec3(0.0f));
-		_core->getShadowGenerator()->setCenterPosition(fvec3(0.0f));
-		_core->getShadowGenerator()->setSize(0.0f);
-		_core->getShadowGenerator()->setReach(0.0f);
-		_core->getShadowGenerator()->setLightness(0.0f);
-		_core->getShadowGenerator()->setQuality(Config::MIN_SHADOW_QUALITY);
-		_core->getShadowGenerator()->setInterval(0);
-		_core->getShadowGenerator()->setFollowingCamera(false);
+		_core->getRenderBus()->setShadowEyePosition(fvec3(0.0f));
+		_core->getRenderBus()->setShadowCenterPosition(fvec3(0.0f));
+		_core->getRenderBus()->setShadowSize(0.0f);
+		_core->getRenderBus()->setShadowReach(0.0f);
+		_core->getRenderBus()->setShadowLightness(0.0f);
+		_core->getRenderBus()->setShadowQuality(Config::MIN_SHADOW_QUALITY);
+		_core->getRenderBus()->setShadowInterval(0);
+		_core->getRenderBus()->setShadowsFollowingCamera(false);
 	}
 }
 
@@ -355,7 +355,7 @@ void EngineInterface::gfx_setPlanarRefractionQuality(unsigned int value)
 
 void EngineInterface::gfx_setShadowQuality(unsigned int value)
 {
-	_core->getShadowGenerator()->setQuality(value);
+	_core->getRenderBus()->setShadowQuality(value);
 	_core->getMasterRenderer()->reloadShadowCaptureBuffer();
 }
 
@@ -406,37 +406,37 @@ void EngineInterface::gfx_setFogMaxDistance(float value)
 
 void EngineInterface::gfx_setShadowEyePosition(const fvec3& value)
 {
-	_core->getShadowGenerator()->setEyePosition(value);
+	_core->getRenderBus()->setShadowEyePosition(value);
 }
 
 void EngineInterface::gfx_setShadowCenterPosition(const fvec3& value)
 {
-	_core->getShadowGenerator()->setCenterPosition(value);
+	_core->getRenderBus()->setShadowCenterPosition(value);
 }
 
 void EngineInterface::gfx_setShadowSize(float value)
 {
-	_core->getShadowGenerator()->setSize(value);
+	_core->getRenderBus()->setShadowSize(value);
 }
 
 void EngineInterface::gfx_setShadowReach(float value)
 {
-	_core->getShadowGenerator()->setReach(value);
+	_core->getRenderBus()->setShadowReach(value);
 }
 
 void EngineInterface::gfx_setShadowLightness(float value)
 {
-	_core->getShadowGenerator()->setLightness(value);
+	_core->getRenderBus()->setShadowLightness(value);
 }
 
 void EngineInterface::gfx_setShadowInterval(unsigned int value)
 {
-	_core->getShadowGenerator()->setInterval(value);
+	_core->getRenderBus()->setShadowInterval(value);
 }
 
 void EngineInterface::gfx_setShadowFollowingCamera(bool value)
 {
-	_core->getShadowGenerator()->setFollowingCamera(value);
+	_core->getRenderBus()->setShadowsFollowingCamera(value);
 }
 
 void EngineInterface::gfx_setBloomIntensity(float value)
@@ -549,7 +549,7 @@ const bool EngineInterface::gfx_isSkyExposureEnabled() const
 
 const bool EngineInterface::gfx_isShadowsEnabled() const
 {
-	return _core->getShadowGenerator()->isEnabled();
+	return _core->getRenderBus()->isShadowsEnabled();
 }
 
 const bool EngineInterface::gfx_isDofEnabled() const
@@ -574,7 +574,7 @@ const bool EngineInterface::gfx_isLensFlareEnabled() const
 
 const unsigned int EngineInterface::gfx_getShadowQuality() const
 {
-	return _core->getShadowGenerator()->getQuality();
+	return _core->getRenderBus()->getShadowQuality();
 }
 
 const unsigned int EngineInterface::gfx_getCubeReflectionQuality() const
@@ -644,12 +644,12 @@ const float EngineInterface::gfx_getPlanarReflectionHeight() const
 
 const fvec3& EngineInterface::gfx_getShadowEyePosition() const
 {
-	return _core->getShadowGenerator()->getEyePosition();
+	return _core->getRenderBus()->getShadowEyePosition();
 }
 
 const fvec3& EngineInterface::gfx_getShadowCenterPosition() const
 {
-	return _core->getShadowGenerator()->getCenterPosition();
+	return _core->getRenderBus()->getShadowCenterPosition();
 }
 
 const string& EngineInterface::gfx_getLensFlareMapPath() const
@@ -659,22 +659,22 @@ const string& EngineInterface::gfx_getLensFlareMapPath() const
 
 const float EngineInterface::gfx_getShadowSize() const
 {
-	return _core->getShadowGenerator()->getSize();
+	return _core->getRenderBus()->getShadowSize();
 }
 
 const float EngineInterface::gfx_getShadowReach() const
 {
-	return _core->getShadowGenerator()->getReach();
+	return _core->getRenderBus()->getShadowReach();
 }
 
 const float EngineInterface::gfx_getShadowLightness() const
 {
-	return _core->getShadowGenerator()->getLightness();
+	return _core->getRenderBus()->getShadowLightness();
 }
 
 const bool EngineInterface::gfx_isShadowFollowingCamera() const
 {
-	return _core->getShadowGenerator()->isFollowingCamera();
+	return _core->getRenderBus()->isShadowsFollowingCamera();
 }
 
 const bool EngineInterface::gfx_hasLensFlareMap() const
@@ -694,7 +694,7 @@ const unsigned int EngineInterface::gfx_getBloomBlurCount() const
 
 const unsigned int EngineInterface::gfx_getShadowInterval() const
 {
-	return _core->getShadowGenerator()->getInterval();
+	return _core->getRenderBus()->getShadowInterval();
 }
 
 const float EngineInterface::gfx_getSkyExposureIntensity() const

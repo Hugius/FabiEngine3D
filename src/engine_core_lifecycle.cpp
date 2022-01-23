@@ -221,6 +221,7 @@ void EngineCore::start()
 			}
 
 			update();
+
 			_timer->increasePassedFrameCount();
 
 			if(!Config::getInst().isApplicationExported())
@@ -236,7 +237,7 @@ void EngineCore::start()
 		}
 		else
 		{
-			renderLag += _deltaTimeMS;
+			renderLag += _deltaTime;
 
 			if(renderLag > (Config::MS_PER_UPDATE * 10.0f))
 			{
@@ -265,7 +266,7 @@ void EngineCore::start()
 
 		auto currentTime = high_resolution_clock::now();
 		auto timeDifference = duration_cast<nanoseconds>(currentTime - previousTime);
-		_deltaTimeMS = static_cast<float>(timeDifference.count()) / 1000000.0f;
+		_deltaTime = static_cast<float>(timeDifference.count()) / 1000000.0f;
 	}
 
 	_engineController->terminate();

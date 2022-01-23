@@ -161,7 +161,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowEyePosition().x;
+			const auto result = _fe3d->gfx_getShadowEyeOffset().x;
 
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowEyePosition().y;
+			const auto result = _fe3d->gfx_getShadowEyeOffset().y;
 
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
@@ -179,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowEyePosition().z;
+			const auto result = _fe3d->gfx_getShadowEyeOffset().z;
 
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
@@ -188,7 +188,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowCenterPosition().x;
+			const auto result = _fe3d->gfx_getShadowCenterOffset().x;
 
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
@@ -197,7 +197,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowCenterPosition().y;
+			const auto result = _fe3d->gfx_getShadowCenterOffset().y;
 
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
@@ -206,7 +206,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowCenterPosition().z;
+			const auto result = _fe3d->gfx_getShadowCenterOffset().z;
 
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}

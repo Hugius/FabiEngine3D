@@ -770,8 +770,8 @@ public:
 	void gfx_setFogThickness(float value);
 	void gfx_setFogMinDistance(float value);
 	void gfx_setFogMaxDistance(float value);
-	void gfx_setShadowEyePosition(const fvec3& value);
-	void gfx_setShadowCenterPosition(const fvec3& value);
+	void gfx_setShadowEyeOffset(const fvec3& value);
+	void gfx_setShadowCenterOffset(const fvec3& value);
 	void gfx_setShadowSize(float value);
 	void gfx_setShadowReach(float value);
 	void gfx_setShadowLightness(float value);
@@ -800,8 +800,8 @@ public:
 	const fvec3& gfx_getAmbientLightingColor() const;
 	const fvec3& gfx_getDirectionalLightingColor() const;
 	const fvec3& gfx_getFogColor() const;
-	const fvec3& gfx_getShadowEyePosition() const;
-	const fvec3& gfx_getShadowCenterPosition() const;
+	const fvec3& gfx_getShadowEyeOffset() const;
+	const fvec3& gfx_getShadowCenterOffset() const;
 	const float gfx_getAmbientLightingIntensity() const;
 	const float gfx_getDirectionalLightingIntensity() const;
 	const float gfx_getFogMinDistance() const;

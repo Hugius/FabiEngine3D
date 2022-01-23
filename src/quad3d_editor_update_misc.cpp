@@ -27,8 +27,8 @@ void Quad3dEditor::_updateCamera()
 		_fe3d->quad2d_setVisible("@@cursor", false);
 
 		const auto distance = _fe3d->camera_getThirdPersonDistance();
-		_fe3d->gfx_setShadowEyePosition(fvec3(cameraLookat + fvec3(distance * 2.0f)));
-		_fe3d->gfx_setShadowCenterPosition(cameraLookat);
+		_fe3d->gfx_setShadowEyeOffset(fvec3(cameraLookat + fvec3(distance * 2.0f)));
+		_fe3d->gfx_setShadowCenterOffset(cameraLookat);
 		_fe3d->gfx_setShadowSize(distance * 4.0f);
 		_fe3d->gfx_setShadowReach(distance * 8.0f);
 	}

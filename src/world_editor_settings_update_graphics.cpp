@@ -12,8 +12,8 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		auto isFollowingCamera = _fe3d->gfx_isShadowFollowingCamera();
 		auto size = _fe3d->gfx_getShadowSize();
 		auto lightness = _fe3d->gfx_getShadowLightness();
-		auto eye = _fe3d->gfx_getShadowEyePosition();
-		auto center = _fe3d->gfx_getShadowCenterPosition();
+		auto eye = _fe3d->gfx_getShadowEyeOffset();
+		auto center = _fe3d->gfx_getShadowCenterOffset();
 		auto interval = _fe3d->gfx_getShadowInterval();
 		auto quality = _fe3d->gfx_getShadowQuality();
 
@@ -76,27 +76,27 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 		if(_gui->getOverlay()->checkValueForm("eyeX", eye.x))
 		{
-			_fe3d->gfx_setShadowEyePosition(eye);
+			_fe3d->gfx_setShadowEyeOffset(eye);
 		}
 		if(_gui->getOverlay()->checkValueForm("eyeY", eye.y))
 		{
-			_fe3d->gfx_setShadowEyePosition(eye);
+			_fe3d->gfx_setShadowEyeOffset(eye);
 		}
 		if(_gui->getOverlay()->checkValueForm("eyeZ", eye.z))
 		{
-			_fe3d->gfx_setShadowEyePosition(eye);
+			_fe3d->gfx_setShadowEyeOffset(eye);
 		}
 		if(_gui->getOverlay()->checkValueForm("centerX", center.x))
 		{
-			_fe3d->gfx_setShadowCenterPosition(center);
+			_fe3d->gfx_setShadowCenterOffset(center);
 		}
 		if(_gui->getOverlay()->checkValueForm("centerY", center.y))
 		{
-			_fe3d->gfx_setShadowCenterPosition(center);
+			_fe3d->gfx_setShadowCenterOffset(center);
 		}
 		if(_gui->getOverlay()->checkValueForm("centerZ", center.z))
 		{
-			_fe3d->gfx_setShadowCenterPosition(center);
+			_fe3d->gfx_setShadowCenterOffset(center);
 		}
 		if(_gui->getOverlay()->checkValueForm("lightness", lightness))
 		{

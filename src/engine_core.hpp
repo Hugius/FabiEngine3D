@@ -48,7 +48,7 @@ public:
 	void update();
 	void stop();
 
-	const float getDeltaTimeMS() const;
+	const float getDeltaTime() const;
 
 	const shared_ptr<LibraryLoader> getLibraryLoader() const;
 	const shared_ptr<InputHandler> getInputHandler() const;
@@ -85,7 +85,7 @@ public:
 	const shared_ptr<Timer> getTimer() const;
 
 private:
-	float _deltaTimeMS = 0.0f;
+	float _deltaTime = 0.0f;
 
 	bool _isPaused = false;
 	bool _isRunning = false;

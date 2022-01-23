@@ -36,7 +36,9 @@ public:
 	void setDirectionalLightingPosition(const fvec3& value);
 	void setDirectionalLightingColor(const fvec3& value);
 	void setShadowEyePosition(const fvec3& value);
+	void setShadowEyeOffset(const fvec3& value);
 	void setShadowCenterPosition(const fvec3& value);
+	void setShadowCenterOffset(const fvec3& value);
 	void setFogColor(const fvec3& value);
 	void setFlareSourcePosition(const fvec3& value);
 	void setFlareSourceUv(const fvec2& value);
@@ -111,7 +113,9 @@ public:
 	const fvec3& getDirectionalLightingColor() const;
 	const fvec3& getDirectionalLightingPosition() const;
 	const fvec3& getShadowEyePosition() const;
+	const fvec3& getShadowEyeOffset() const;
 	const fvec3& getShadowCenterPosition() const;
+	const fvec3& getShadowCenterOffset() const;
 	const fvec3& getFogColor() const;
 	const fvec3& getFlareSourcePosition() const;
 
@@ -214,7 +218,9 @@ private:
 	fvec3 _cameraFront = fvec3(0.0f);
 	fvec3 _directionalLightPosition = fvec3(0.0f);
 	fvec3 _shadowEyePosition = fvec3(0.0f);
+	fvec3 _shadowEyeOffset = fvec3(0.0f);
 	fvec3 _shadowCenterPosition = fvec3(0.0f);
+	fvec3 _shadowCenterOffset = fvec3(0.0f);
 	fvec3 _flareSourcePosition = fvec3(0.0f);
 	fvec3 _ambientLightColor = fvec3(1.0f);
 	fvec3 _directionalLightColor = fvec3(1.0f);

@@ -153,7 +153,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_setShadowEyePosition(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+			_fe3d->gfx_setShadowEyeOffset(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
@@ -164,7 +164,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_setShadowCenterPosition(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+			_fe3d->gfx_setShadowCenterOffset(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}

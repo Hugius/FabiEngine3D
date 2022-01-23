@@ -188,12 +188,14 @@ void EngineInterface::gfx_disableShadows(bool mustResetProperties)
 
 	if(mustResetProperties)
 	{
+		_core->getRenderBus()->setShadowQuality(Config::MIN_SHADOW_QUALITY);
+		_core->getRenderBus()->setShadowEyeOffset(fvec3(0.0f));
+		_core->getRenderBus()->setShadowCenterOffset(fvec3(0.0f));
 		_core->getRenderBus()->setShadowEyePosition(fvec3(0.0f));
 		_core->getRenderBus()->setShadowCenterPosition(fvec3(0.0f));
 		_core->getRenderBus()->setShadowSize(0.0f);
 		_core->getRenderBus()->setShadowReach(0.0f);
 		_core->getRenderBus()->setShadowLightness(0.0f);
-		_core->getRenderBus()->setShadowQuality(Config::MIN_SHADOW_QUALITY);
 		_core->getRenderBus()->setShadowInterval(0);
 		_core->getRenderBus()->setShadowsFollowingCamera(false);
 	}
@@ -404,14 +406,14 @@ void EngineInterface::gfx_setFogMaxDistance(float value)
 	_core->getRenderBus()->setFogMaxDistance(value);
 }
 
-void EngineInterface::gfx_setShadowEyePosition(const fvec3& value)
+void EngineInterface::gfx_setShadowEyeOffset(const fvec3& value)
 {
-	_core->getRenderBus()->setShadowEyePosition(value);
+	_core->getRenderBus()->setShadowEyeOffset(value);
 }
 
-void EngineInterface::gfx_setShadowCenterPosition(const fvec3& value)
+void EngineInterface::gfx_setShadowCenterOffset(const fvec3& value)
 {
-	_core->getRenderBus()->setShadowCenterPosition(value);
+	_core->getRenderBus()->setShadowCenterOffset(value);
 }
 
 void EngineInterface::gfx_setShadowSize(float value)
@@ -642,14 +644,14 @@ const float EngineInterface::gfx_getPlanarReflectionHeight() const
 	return _core->getRenderBus()->getPlanarReflectionHeight();
 }
 
-const fvec3& EngineInterface::gfx_getShadowEyePosition() const
+const fvec3& EngineInterface::gfx_getShadowEyeOffset() const
 {
-	return _core->getRenderBus()->getShadowEyePosition();
+	return _core->getRenderBus()->getShadowEyeOffset();
 }
 
-const fvec3& EngineInterface::gfx_getShadowCenterPosition() const
+const fvec3& EngineInterface::gfx_getShadowCenterOffset() const
 {
-	return _core->getRenderBus()->getShadowCenterPosition();
+	return _core->getRenderBus()->getShadowCenterOffset();
 }
 
 const string& EngineInterface::gfx_getLensFlareMapPath() const

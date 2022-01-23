@@ -132,17 +132,17 @@ void MasterRenderer::_updateShadows()
 		{
 			if(_renderBus->isShadowsFollowingCamera())
 			{
-				auto cameraPosition = _renderBus->getCameraPosition();
-				auto eyePosition = _renderBus->getShadowEyePosition();
-				auto centerPosition = _renderBus->getShadowCenterPosition();
+				auto& cameraPosition = _renderBus->getCameraPosition();
+				auto& eyeOffset = _renderBus->getShadowEyeOffset();
+				auto& centerOffset = _renderBus->getShadowCenterOffset();
 
-				eyePosition.x += cameraPosition.x;
-				eyePosition.z += cameraPosition.z;
-				centerPosition.x += cameraPosition.x;
-				centerPosition.z += cameraPosition.z;
-
-				_renderBus->setShadowEyePosition(eyePosition);
-				_renderBus->setShadowCenterPosition(centerPosition);
+				_renderBus->setShadowEyePosition(fvec3((eyeOffset.x + cameraPosition.x), eyeOffset.y, (eyeOffset.z + cameraPosition.z)));
+				_renderBus->setShadowCenterPosition(fvec3((centerOffset.x + cameraPosition.x), centerOffset.y, (centerOffset.z + cameraPosition.z)));
+			}
+			else
+			{
+				_renderBus->setShadowEyePosition(_renderBus->getShadowEyeOffset());
+				_renderBus->setShadowCenterPosition(_renderBus->getShadowCenterOffset());
 			}
 
 			const auto leftX = -(_renderBus->getShadowSize() / 2.0f);

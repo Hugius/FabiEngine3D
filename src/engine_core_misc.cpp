@@ -1,8 +1,8 @@
 #include "engine_core.hpp"
 
-const float EngineCore::getDeltaTimeMS() const
+const float EngineCore::getDeltaTime() const
 {
-	return _deltaTimeMS;
+	return _deltaTime;
 }
 
 const shared_ptr<LibraryLoader> EngineCore::getLibraryLoader() const

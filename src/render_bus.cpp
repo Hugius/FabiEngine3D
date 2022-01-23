@@ -120,9 +120,19 @@ void RenderBus::setShadowEyePosition(const fvec3& value)
 	_shadowEyePosition = value;
 }
 
+void RenderBus::setShadowEyeOffset(const fvec3& value)
+{
+	_shadowEyeOffset = value;
+}
+
 void RenderBus::setShadowCenterPosition(const fvec3& value)
 {
 	_shadowCenterPosition = value;
+}
+
+void RenderBus::setShadowCenterOffset(const fvec3& value)
+{
+	_shadowCenterOffset = value;
 }
 
 void RenderBus::setFogColor(const fvec3& value)
@@ -533,9 +543,19 @@ const fvec3& RenderBus::getShadowEyePosition() const
 	return _shadowEyePosition;
 }
 
+const fvec3& RenderBus::getShadowEyeOffset() const
+{
+	return _shadowEyeOffset;
+}
+
 const fvec3& RenderBus::getShadowCenterPosition() const
 {
 	return _shadowCenterPosition;
+}
+
+const fvec3& RenderBus::getShadowCenterOffset() const
+{
+	return _shadowCenterOffset;
 }
 
 const fvec3& RenderBus::getFogColor() const

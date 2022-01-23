@@ -123,8 +123,9 @@ void ScriptInterpreter::load()
 		auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
 		auto modelImagePaths = _modelEditor->getImagePathsFromFile();
 		auto quad3dImagePaths = _quad3dEditor->getImagePathsFromFile();
+		auto text3dImagePaths = _text3dEditor->getImagePathsFromFile();
 		auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
-		auto textImagePaths = _text2dEditor->getImagePathsFromFile();
+		auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
 		auto audioPaths = _soundEditor->getAudioPathsFromFile();
 
 		_fe3d->misc_cacheMeshes(modelMeshPaths);
@@ -137,7 +138,9 @@ void ScriptInterpreter::load()
 		imagePaths.insert(imagePaths.end(), waterImagePaths.begin(), waterImagePaths.end());
 		imagePaths.insert(imagePaths.end(), modelImagePaths.begin(), modelImagePaths.end());
 		imagePaths.insert(imagePaths.end(), quad3dImagePaths.begin(), quad3dImagePaths.end());
+		imagePaths.insert(imagePaths.end(), text3dImagePaths.begin(), text3dImagePaths.end());
 		imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
+		imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
 		_fe3d->misc_cacheImages(imagePaths);
 
 		_fe3d->misc_cacheAudios(audioPaths);

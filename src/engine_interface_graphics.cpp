@@ -300,19 +300,22 @@ void EngineInterface::gfx_setPlanarReflectionHeight(float value)
 void EngineInterface::gfx_setBloomQuality(unsigned int value)
 {
 	_core->getRenderBus()->setBloomQuality(value);
-	_core->getMasterRenderer()->reloadBloomBlurCaptureBuffer();
+
+	_core->getMasterRenderer()->reloadBloomBlurQuality();
 }
 
 void EngineInterface::gfx_setDofQuality(unsigned int value)
 {
 	_core->getRenderBus()->setDofQuality(value);
-	_core->getMasterRenderer()->reloadDofBlurCaptureBuffer();
+
+	_core->getMasterRenderer()->reloadDofBlurQuality();
 }
 
 void EngineInterface::gfx_setMotionBlurQuality(unsigned int value)
 {
 	_core->getRenderBus()->setMotionBlurQuality(value);
-	_core->getMasterRenderer()->reloadMotionBlurBlurCaptureBuffer();
+
+	_core->getMasterRenderer()->reloadMotionBlurBlurQuality();
 }
 
 void EngineInterface::gfx_setAnisotropicFilteringQuality(unsigned int value)
@@ -339,26 +342,30 @@ void EngineInterface::gfx_setAnisotropicFilteringQuality(unsigned int value)
 void EngineInterface::gfx_setCubeReflectionQuality(unsigned int value)
 {
 	_core->getRenderBus()->setCubeReflectionQuality(value);
-	_core->getMasterRenderer()->reloadCubeReflectionCaptureBuffer();
+
+	_core->getMasterRenderer()->reloadCubeReflectionQuality();
 }
 
 void EngineInterface::gfx_setPlanarReflectionQuality(unsigned int value)
 {
 	_core->getRenderBus()->setPlanarReflectionQuality(value);
-	_core->getMasterRenderer()->reloadPlanarReflectionCaptureBuffer();
-	_core->getMasterRenderer()->reloadWaterReflectionCaptureBuffer();
+
+	_core->getMasterRenderer()->reloadPlanarReflectionQuality();
+	_core->getMasterRenderer()->reloadWaterReflectionQuality();
 }
 
 void EngineInterface::gfx_setPlanarRefractionQuality(unsigned int value)
 {
 	_core->getRenderBus()->setPlanarRefractionQuality(value);
-	_core->getMasterRenderer()->reloadWaterRefractionCaptureBuffer();
+
+	_core->getMasterRenderer()->reloadWaterRefractionQuality();
 }
 
 void EngineInterface::gfx_setShadowQuality(unsigned int value)
 {
 	_core->getRenderBus()->setShadowQuality(value);
-	_core->getMasterRenderer()->reloadShadowCaptureBuffer();
+
+	_core->getMasterRenderer()->reloadShadowQuality();
 }
 
 void EngineInterface::gfx_setAmbientLightingColor(const fvec3& value)

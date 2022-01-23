@@ -167,6 +167,7 @@ void EngineCore::start()
 	if(_isRunning)
 	{
 		_renderWindow->disableColorKeying(keyingColor);
+
 		_masterRenderer->setBackgroundColor(fvec4(0.0f, 0.0f, 0.0f, 1.0f));
 
 		if(!_networkingServer->isRunning())
@@ -211,7 +212,9 @@ void EngineCore::start()
 				_inputHandler->update();
 			}
 
-			update();
+			_engineController->update();
+			_networkingServer->update();
+			_networkingClient->update();
 
 			_timer->increasePassedFrameCount();
 
@@ -243,6 +246,7 @@ void EngineCore::start()
 
 				renderLag -= Config::MS_PER_UPDATE;
 				renderLag = max(renderLag, 0.0f);
+
 				_timer->increasePassedFrameCount();
 			}
 
@@ -278,43 +282,40 @@ void EngineCore::update()
 	_engineController->update();
 	_timer->stopDeltaPart();
 
-	if(!(Config::getInst().isApplicationExported() && _networkingServer->isRunning()))
-	{
-		_timer->startDeltaPart("physicsUpdate");
-		_camera->update(lastCursorPosition);
-		_raycaster->update(_fe3d->misc_getCursorPositionRelativeToViewport());
-		_cameraCollisionHandler->update();
-		_camera->updateMatrices();
-		_timer->stopDeltaPart();
+	_timer->startDeltaPart("physicsUpdate");
+	_camera->update(lastCursorPosition);
+	_raycaster->update(_fe3d->misc_getCursorPositionRelativeToViewport());
+	_cameraCollisionHandler->update();
+	_camera->updateMatrices();
+	_timer->stopDeltaPart();
 
-		_timer->startDeltaPart("3dEntityUpdate");
-		_skyEntityManager->update();
-		_waterEntityManager->update();
-		_modelEntityManager->update();
-		_quad3dEntityManager->update();
-		_text3dEntityManager->update();
-		_aabbEntityManager->update();
-		_pointlightEntityManager->update();
-		_spotlightEntityManager->update();
-		_reflectionEntityManager->update();
-		_timer->stopDeltaPart();
+	_timer->startDeltaPart("3dEntityUpdate");
+	_skyEntityManager->update();
+	_waterEntityManager->update();
+	_modelEntityManager->update();
+	_quad3dEntityManager->update();
+	_text3dEntityManager->update();
+	_aabbEntityManager->update();
+	_pointlightEntityManager->update();
+	_spotlightEntityManager->update();
+	_reflectionEntityManager->update();
+	_timer->stopDeltaPart();
 
-		_timer->startDeltaPart("2dEntityUpdate");
-		_quad2dEntityManager->update();
-		_text2dEntityManager->update();
-		_timer->stopDeltaPart();
+	_timer->startDeltaPart("2dEntityUpdate");
+	_quad2dEntityManager->update();
+	_text2dEntityManager->update();
+	_timer->stopDeltaPart();
 
-		_timer->startDeltaPart("renderUpdate");
-		_masterRenderer->update();
-		_timer->stopDeltaPart();
+	_timer->startDeltaPart("renderUpdate");
+	_masterRenderer->update();
+	_timer->stopDeltaPart();
 
-		_timer->startDeltaPart("soundUpdate");
-		_sound2dManager->update();
-		_sound3dManager->update();
-		_sound2dPlayer->update();
-		_sound3dPlayer->update();
-		_timer->stopDeltaPart();
-	}
+	_timer->startDeltaPart("soundUpdate");
+	_sound2dManager->update();
+	_sound3dManager->update();
+	_sound2dPlayer->update();
+	_sound3dPlayer->update();
+	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("networkUpdate");
 	_networkingServer->update();

@@ -56,14 +56,14 @@ public:
 	void update();
 	void renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport);
 	void renderApplication();
-	void reloadBloomBlurCaptureBuffer();
-	void reloadDofBlurCaptureBuffer();
-	void reloadMotionBlurBlurCaptureBuffer();
-	void reloadCubeReflectionCaptureBuffer();
-	void reloadPlanarReflectionCaptureBuffer();
-	void reloadWaterReflectionCaptureBuffer();
-	void reloadWaterRefractionCaptureBuffer();
-	void reloadShadowCaptureBuffer();
+	void reloadBloomBlurQuality();
+	void reloadDofBlurQuality();
+	void reloadMotionBlurBlurQuality();
+	void reloadCubeReflectionQuality();
+	void reloadPlanarReflectionQuality();
+	void reloadWaterReflectionQuality();
+	void reloadWaterRefractionQuality();
+	void reloadShadowQuality();
 	void setBackgroundColor(const fvec3& color);
 
 	const string getCpuName() const;

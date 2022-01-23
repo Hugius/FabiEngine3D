@@ -148,7 +148,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader->uploadUniform("u_specularShininess", entity->getSpecularShininess());
 		_shader->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
-		_shader->uploadUniform("u_transparency", entity->getTransparency());
+		_shader->uploadUniform("u_opacity", entity->getOpacity());
 		_shader->uploadUniform("u_isSpecular", entity->isSpecular());
 		_shader->uploadUniform("u_isReflective", entity->isReflective());
 		_shader->uploadUniform("u_isRefractive", entity->isRefractive());

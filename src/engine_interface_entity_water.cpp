@@ -177,9 +177,9 @@ void EngineInterface::water_setColor(const string& ID, const fvec3& value)
 	_core->getWaterEntityManager()->getEntity(ID)->setColor(value);
 }
 
-void EngineInterface::water_setTransparency(const string& ID, float value)
+void EngineInterface::water_setOpacity(const string& ID, float value)
 {
-	_core->getWaterEntityManager()->getEntity(ID)->setTransparency(value);
+	_core->getWaterEntityManager()->getEntity(ID)->setOpacity(value);
 }
 
 const bool EngineInterface::water_isExisting(const string& ID) const
@@ -284,9 +284,9 @@ const float EngineInterface::water_getSpecularIntensity(const string& ID) const
 	return _core->getWaterEntityManager()->getEntity(ID)->getSpecularIntensity();
 }
 
-const float EngineInterface::water_getTransparency(const string& ID) const
+const float EngineInterface::water_getOpacity(const string& ID) const
 {
-	return _core->getWaterEntityManager()->getEntity(ID)->getTransparency();
+	return _core->getWaterEntityManager()->getEntity(ID)->getOpacity();
 }
 
 const WaterQuality EngineInterface::water_getQuality(const string& ID) const

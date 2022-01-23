@@ -125,9 +125,9 @@ void WaterEntity::setSize(float value)
 	_size = max(0.0f, value);
 }
 
-void WaterEntity::setTransparency(float value)
+void WaterEntity::setOpacity(float value)
 {
-	_transparency = max(0.0f, value);
+	_opacity = max(0.0f, value);
 }
 
 const float WaterEntity::getHeight() const
@@ -230,9 +230,9 @@ const float WaterEntity::getSize() const
 	return _size;
 }
 
-const float WaterEntity::getTransparency() const
+const float WaterEntity::getOpacity() const
 {
-	return _transparency;
+	return _opacity;
 }
 
 const bool WaterEntity::isSpecular() const

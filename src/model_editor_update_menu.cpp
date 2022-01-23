@@ -68,7 +68,7 @@ void ModelEditor::_updateChoiceMenu()
 
 			for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
 			{
-				_fe3d->model_setTransparency(_currentModelID, partID, 1.0f);
+				_fe3d->model_setOpacity(_currentModelID, partID, 1.0f);
 			}
 
 			_fe3d->model_setVisible(_currentModelID, false);
@@ -90,7 +90,7 @@ void ModelEditor::_updateChoiceMenu()
 			}
 			else
 			{
-				_fe3d->model_setTransparency(_currentModelID, _currentPartID, 1.0f);
+				_fe3d->model_setOpacity(_currentModelID, _currentPartID, 1.0f);
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
 				_currentPartID = "";
 			}

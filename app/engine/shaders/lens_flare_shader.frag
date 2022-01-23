@@ -7,7 +7,7 @@ layout (location = 1) uniform sampler2D u_sceneMap;
 layout (location = 2) uniform sampler2D u_flareMap;
 
 uniform float u_lensFlareIntensity;
-uniform float u_lensFlareTransparency;
+uniform float u_lensFlareOpacity;
 
 uniform bool u_isLensFlareEnabled;
 
@@ -26,6 +26,6 @@ void main()
     vec3 flareColor = texture(u_flareMap, vec2(f_uv.x, -f_uv.y)).rgb;
 
     o_finalColor.rgb = worldColor;
-    o_finalColor.rgb += (flareColor * u_lensFlareTransparency * u_lensFlareIntensity * f_flareVisibility);
+    o_finalColor.rgb += (flareColor * u_lensFlareOpacity * u_lensFlareIntensity * f_flareVisibility);
 	o_finalColor.a = 1.0f;
 }

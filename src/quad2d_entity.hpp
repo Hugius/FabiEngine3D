@@ -20,7 +20,7 @@ public:
 	void setDiffuseMapPath(const string& value);
 	void setHorizontallyMirrored(bool value);
 	void setVerticallyMirrored(bool value);
-	void setTransparency(float value);
+	void setOpacity(float value);
 	void setWireframeColor(const fvec3& value);
 	void setColor(const fvec3& value);
 	void setMinPosition(const fvec2& value);
@@ -55,7 +55,7 @@ public:
 	const fvec2& getUvMultiplier() const;
 	const fvec2& getUvOffset() const;
 
-	const float getTransparency() const;
+	const float getOpacity() const;
 	const float getRotation() const;
 
 	const unsigned int getDepth() const;
@@ -92,7 +92,7 @@ private:
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
-	float _transparency = 1.0f;
+	float _opacity = 1.0f;
 
 	unsigned int _depth = 0;
 

@@ -84,7 +84,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	string templateID = ("@" + waterID);
 	//	auto color = _fe3d->water_getColor(waterID);
 	//	auto speed = _fe3d->water_getSpeed(waterID);
-	//	auto transparency = _fe3d->water_getTransparency(waterID);
+	//	auto opacity = _fe3d->water_getOpacity(waterID);
 
 	//	file <<
 	//		"WATER " <<
@@ -95,7 +95,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		color.b << " " <<
 	//		speed.x << " " <<
 	//		speed.y << " " <<
-	//		transparency << endl;
+	//		opacity << endl;
 	//}
 
 	//for(const auto& modelID : _fe3d->model_getIDs())
@@ -118,7 +118,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		auto color = _fe3d->model_getColor(modelID, "");
 	//		auto minHeight = _fe3d->model_getMinHeight(modelID);
 	//		auto maxHeight = _fe3d->model_getMaxHeight(modelID);
-	//		auto transparency = _fe3d->model_getTransparency(modelID, "");
+	//		auto opacity = _fe3d->model_getOpacity(modelID, "");
 	//		auto lightness = _fe3d->model_getLightness(modelID, "");
 
 	//		string templateID;
@@ -156,7 +156,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//			color.b << " " <<
 	//			minHeight << " " <<
 	//			maxHeight << " " <<
-	//			transparency << " " <<
+	//			opacity << " " <<
 	//			lightness << " " <<
 	//			_fe3d->model_getPartIDs(modelID).size();
 

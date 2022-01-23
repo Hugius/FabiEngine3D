@@ -40,7 +40,7 @@ public:
 	void setColor(const fvec3& value);
 	void setWireframeColor(const fvec3& value);
 	void setLightness(float value);
-	void setTransparency(float value);
+	void setOpacity(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
 	void setFrozen(bool value);
@@ -61,7 +61,7 @@ public:
 	const fvec2& getUvOffset() const;
 
 	const float getLightness() const;
-	const float getTransparency() const;
+	const float getOpacity() const;
 	const float getMinHeight() const;
 	const float getMaxHeight() const;
 
@@ -199,7 +199,7 @@ private:
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
 	float _lightness = 1.0f;
-	float _transparency = 1.0f;
+	float _opacity = 1.0f;
 	float _minHeight = numeric_limits<float>::lowest();
 	float _maxHeight = numeric_limits<float>::max();
 

@@ -31,7 +31,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 	{
 		_shader->uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader->uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
+		_shader->uploadUniform("u_minTextureOpacity", MIN_TEXTURE_OPACITY);
 
 		for(const auto& partID : entity->getPartIDs())
 		{

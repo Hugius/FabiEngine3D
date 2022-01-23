@@ -184,13 +184,13 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_get_transparency")
+	else if(functionName == "fe3d:water_get_opacity")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
-				const auto result = _fe3d->water_getTransparency(_fe3d->water_getSelectedID());
+				const auto result = _fe3d->water_getOpacity(_fe3d->water_getSelectedID());
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}

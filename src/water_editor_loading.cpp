@@ -121,7 +121,7 @@ const bool WaterEditor::loadFromFile()
 		float size;
 		float textureRepeat;
 		float waveHeight;
-		float transparency;
+		float opacity;
 		float specularShininess;
 		float specularIntensity;
 		unsigned int quality;
@@ -149,7 +149,7 @@ const bool WaterEditor::loadFromFile()
 			quality >>
 			speed.x >>
 			speed.y >>
-			transparency >>
+			opacity >>
 			specularShininess >>
 			specularIntensity;
 
@@ -176,7 +176,7 @@ const bool WaterEditor::loadFromFile()
 			_fe3d->water_setQuality(waterID, static_cast<WaterQuality>(quality));
 			_fe3d->water_setSpecularShininess(waterID, specularShininess);
 			_fe3d->water_setSpecularIntensity(waterID, specularIntensity);
-			_fe3d->water_setTransparency(waterID, transparency);
+			_fe3d->water_setOpacity(waterID, opacity);
 			_fe3d->water_setColor(waterID, color);
 			_fe3d->water_setTextureRepeat(waterID, textureRepeat);
 			_fe3d->water_setSpeed(waterID, speed);

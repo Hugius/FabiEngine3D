@@ -165,7 +165,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 			for(const auto& partID : modelEntity->getPartIDs())
 			{
-				if(modelEntity->getTransparency(partID) < 1.0f)
+				if(modelEntity->getOpacity(partID) < 1.0f)
 				{
 					isTransparent = true;
 				}
@@ -226,7 +226,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 			for(const auto& partID : modelEntity->getPartIDs())
 			{
-				if(modelEntity->getTransparency(partID) < 1.0f)
+				if(modelEntity->getOpacity(partID) < 1.0f)
 				{
 					isTransparent = true;
 					break;
@@ -280,7 +280,7 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 
 		for(const auto& [key, entity] : quad3dEntities)
 		{
-			if(entity->getTransparency() < 1.0f)
+			if(entity->getOpacity() < 1.0f)
 			{
 				continue;
 			}
@@ -302,7 +302,7 @@ void MasterRenderer::_renderTransparentQuad3dEntities()
 
 		for(const auto& [key, entity] : quad3dEntities)
 		{
-			if(entity->getTransparency() == 1.0f)
+			if(entity->getOpacity() == 1.0f)
 			{
 				continue;
 			}
@@ -324,7 +324,7 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 
 		for(const auto& [key, textEntity] : text3dEntities)
 		{
-			if(textEntity->getTransparency() < 1.0f)
+			if(textEntity->getOpacity() < 1.0f)
 			{
 				continue;
 			}
@@ -349,7 +349,7 @@ void MasterRenderer::_renderTransparentText3dEntities()
 
 		for(const auto& [key, textEntity] : text3dEntities)
 		{
-			if(textEntity->getTransparency() == 1.0f)
+			if(textEntity->getOpacity() == 1.0f)
 			{
 				continue;
 			}

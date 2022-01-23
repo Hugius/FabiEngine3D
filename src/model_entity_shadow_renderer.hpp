@@ -11,5 +11,5 @@ public:
 	void render(const shared_ptr<ModelEntity> entity);
 
 private:
-	static inline constexpr float MIN_TEXTURE_TRANSPARENCY = 0.25f;
+	static inline constexpr float MIN_TEXTURE_OPACITY = 0.25f;
 };

@@ -199,9 +199,9 @@ void EngineInterface::quad3d_setLightness(const string& ID, float value)
 	_core->getQuad3dEntityManager()->getEntity(ID)->setLightness(value);
 }
 
-void EngineInterface::quad3d_setTransparency(const string& ID, float value)
+void EngineInterface::quad3d_setOpacity(const string& ID, float value)
 {
-	_core->getQuad3dEntityManager()->getEntity(ID)->setTransparency(value);
+	_core->getQuad3dEntityManager()->getEntity(ID)->setOpacity(value);
 }
 
 void EngineInterface::quad3d_setTextureRepeat(const string& ID, float value)
@@ -229,9 +229,9 @@ const float EngineInterface::quad3d_getMaxHeight(const string& ID) const
 	return _core->getQuad3dEntityManager()->getEntity(ID)->getMaxHeight();
 }
 
-const float EngineInterface::quad3d_getTransparency(const string& ID) const
+const float EngineInterface::quad3d_getOpacity(const string& ID) const
 {
-	return _core->getQuad3dEntityManager()->getEntity(ID)->getTransparency();
+	return _core->getQuad3dEntityManager()->getEntity(ID)->getOpacity();
 }
 
 const float EngineInterface::quad3d_getTextureRepeat(const string& ID) const

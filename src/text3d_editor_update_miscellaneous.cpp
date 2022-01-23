@@ -10,7 +10,7 @@ void Text3dEditor::_updateMiscellaneousMenu()
 		auto size = _fe3d->text3d_getSize(_currentTextID);
 		auto isFacingX = _fe3d->text3d_isFacingCameraX(_currentTextID);
 		auto isFacingY = _fe3d->text3d_isFacingCameraY(_currentTextID);
-		auto transparency = _fe3d->text3d_getTransparency(_currentTextID);
+		auto opacity = _fe3d->text3d_getOpacity(_currentTextID);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -32,9 +32,9 @@ void Text3dEditor::_updateMiscellaneousMenu()
 			isFacingY = !isFacingY;
 			_fe3d->text3d_setFacingCameraY(_currentTextID, isFacingY);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transparency")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("transparency", "Transparency", (transparency * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		if(_gui->getOverlay()->checkValueForm("sizeX", size.x, {0.0f}))
@@ -47,10 +47,10 @@ void Text3dEditor::_updateMiscellaneousMenu()
 			size.y /= 100.0f;
 			_fe3d->text3d_setSize(_currentTextID, size);
 		}
-		if(_gui->getOverlay()->checkValueForm("transparency", transparency, {0.0f}))
+		if(_gui->getOverlay()->checkValueForm("opacity", opacity, {0.0f}))
 		{
-			transparency /= 100.0f;
-			_fe3d->text3d_setTransparency(_currentTextID, transparency);
+			opacity /= 100.0f;
+			_fe3d->text3d_setOpacity(_currentTextID, opacity);
 		}
 
 		screen->getButton("isFacingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");

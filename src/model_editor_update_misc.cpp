@@ -101,20 +101,20 @@ void ModelEditor::_updateMiscellaneous()
 		}
 		else
 		{
-			const auto transparency = _fe3d->model_getTransparency(_currentModelID, partID);
+			const auto opacity = _fe3d->model_getOpacity(_currentModelID, partID);
 
-			if(transparency == 0.0f)
+			if(opacity == 0.0f)
 			{
 				_selectedPartHighlightDirection *= -1;
 			}
 
-			if(transparency == 1.0f)
+			if(opacity == 1.0f)
 			{
 				_selectedPartHighlightDirection *= -1;
 			}
 
 			const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
-			_fe3d->model_setTransparency(_currentModelID, partID, (transparency + speed));
+			_fe3d->model_setOpacity(_currentModelID, partID, (opacity + speed));
 		}
 	}
 }
@@ -306,7 +306,7 @@ void ModelEditor::_updatePartChoosing()
 
 			for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
 			{
-				_fe3d->model_setTransparency(_currentModelID, partID, 1.0f);
+				_fe3d->model_setOpacity(_currentModelID, partID, 1.0f);
 			}
 		}
 	}

@@ -349,9 +349,9 @@ void EngineInterface::model_setWireframed(const string& ID, const string& partID
 	_core->getModelEntityManager()->getEntity(ID)->setWireframed(partID, value);
 }
 
-void EngineInterface::model_setTransparency(const string& ID, const string& partID, float value)
+void EngineInterface::model_setOpacity(const string& ID, const string& partID, float value)
 {
-	_core->getModelEntityManager()->getEntity(ID)->setTransparency(partID, value);
+	_core->getModelEntityManager()->getEntity(ID)->setOpacity(partID, value);
 }
 
 void EngineInterface::model_setShadowed(const string& ID, bool value)
@@ -562,9 +562,9 @@ const float EngineInterface::model_getSpecularIntensity(const string& ID, const 
 	return _core->getModelEntityManager()->getEntity(ID)->getSpecularIntensity(partID);
 }
 
-const float EngineInterface::model_getTransparency(const string& ID, const string& partID) const
+const float EngineInterface::model_getOpacity(const string& ID, const string& partID) const
 {
-	return _core->getModelEntityManager()->getEntity(ID)->getTransparency(partID);
+	return _core->getModelEntityManager()->getEntity(ID)->getOpacity(partID);
 }
 
 const float EngineInterface::model_getMinHeight(const string& ID) const

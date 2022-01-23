@@ -62,7 +62,7 @@ void Text2dEditor::_updateChoiceMenu()
 	if(screen->getID() == "text2dEditorMenuChoice")
 	{
 		auto color = _fe3d->text2d_getColor(_currentTextID);
-		auto transparency = _fe3d->text2d_getTransparency(_currentTextID);
+		auto opacity = _fe3d->text2d_getOpacity(_currentTextID);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -78,9 +78,9 @@ void Text2dEditor::_updateChoiceMenu()
 			_gui->getOverlay()->createValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui->getOverlay()->createValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transparency")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("transparency", "Transparency", (transparency * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
@@ -98,10 +98,10 @@ void Text2dEditor::_updateChoiceMenu()
 			color.b /= 255.0f;
 			_fe3d->text2d_setColor(_currentTextID, color);
 		}
-		if(_gui->getOverlay()->checkValueForm("transparency", transparency, {}))
+		if(_gui->getOverlay()->checkValueForm("opacity", opacity, {}))
 		{
-			transparency /= 100.0f;
-			_fe3d->text2d_setTransparency(_currentTextID, transparency);
+			opacity /= 100.0f;
+			_fe3d->text2d_setOpacity(_currentTextID, opacity);
 		}
 	}
 }

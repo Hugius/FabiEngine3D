@@ -91,20 +91,20 @@ void GuiButton::setHoverable(bool isHoverable)
 
 	if(isHoverable)
 	{
-		_fe3d->quad2d_setTransparency(_rectangle->getEntityID(), 1.0f);
+		_fe3d->quad2d_setOpacity(_rectangle->getEntityID(), 1.0f);
 
 		if(_textField != nullptr)
 		{
-			_fe3d->text2d_setTransparency(_textField->getEntityID(), 1.0f);
+			_fe3d->text2d_setOpacity(_textField->getEntityID(), 1.0f);
 		}
 	}
 	else
 	{
-		_fe3d->quad2d_setTransparency(_rectangle->getEntityID(), 0.25f);
+		_fe3d->quad2d_setOpacity(_rectangle->getEntityID(), 0.25f);
 
 		if(_textField != nullptr)
 		{
-			_fe3d->text2d_setTransparency(_textField->getEntityID(), 0.25f);
+			_fe3d->text2d_setOpacity(_textField->getEntityID(), 0.25f);
 		}
 	}
 }

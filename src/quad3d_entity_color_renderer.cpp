@@ -59,13 +59,13 @@ void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 		_shader->uploadUniform("u_lightness", entity->getLightness());
 		_shader->uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader->uploadUniform("u_transparency", entity->getTransparency());
+		_shader->uploadUniform("u_opacity", entity->getOpacity());
 		_shader->uploadUniform("u_isBright", entity->isBright());
 		_shader->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
 		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 		_shader->uploadUniform("u_uvOffset", entity->getUvOffset());
-		_shader->uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
+		_shader->uploadUniform("u_minTextureOpacity", MIN_TEXTURE_OPACITY);
 
 		if(entity->hasDiffuseMap())
 		{

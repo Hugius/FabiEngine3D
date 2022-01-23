@@ -23,7 +23,7 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			for(const auto& partID : _fe3d->model_getPartIDs(currentAnimation->getPreviewModelID()))
 			{
-				_fe3d->model_setTransparency(currentAnimation->getPreviewModelID(), partID, 1.0f);
+				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), partID, 1.0f);
 			}
 
 			_currentPartID = "";
@@ -200,7 +200,7 @@ void Animation3dEditor::_updateFrameMenu()
 			{
 				for(const auto& partID : _fe3d->model_getPartIDs(currentAnimation->getPreviewModelID()))
 				{
-					_fe3d->model_setTransparency(currentAnimation->getPreviewModelID(), partID, 1.0f);
+					_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), partID, 1.0f);
 				}
 			}
 

@@ -250,9 +250,9 @@ void Quad3dEntity::setLightness(float value)
 	_lightness = max(0.0f, value);
 }
 
-void Quad3dEntity::setTransparency(float value)
+void Quad3dEntity::setOpacity(float value)
 {
-	_transparency = clamp(value, 0.0f, 1.0f);
+	_opacity = clamp(value, 0.0f, 1.0f);
 }
 
 void Quad3dEntity::setMinHeight(float value)
@@ -350,9 +350,9 @@ const float Quad3dEntity::getLightness() const
 	return _lightness;
 }
 
-const float Quad3dEntity::getTransparency() const
+const float Quad3dEntity::getOpacity() const
 {
-	return _transparency;
+	return _opacity;
 }
 
 const float Quad3dEntity::getMinHeight() const

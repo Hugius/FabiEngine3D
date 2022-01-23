@@ -99,7 +99,7 @@ const bool Text3dEditor::loadFromFile()
 		fvec2 size;
 		fvec3 color;
 		float lightness;
-		float transparency;
+		float opacity;
 		bool isFacingX;
 		bool isFacingY;
 		bool isReflected;
@@ -122,7 +122,7 @@ const bool Text3dEditor::loadFromFile()
 			isShadowed >>
 			lightness >>
 			isBright >>
-			transparency;
+			opacity;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -148,7 +148,7 @@ const bool Text3dEditor::loadFromFile()
 			_fe3d->text3d_setShadowed(textID, isShadowed);
 			_fe3d->text3d_setReflected(textID, isReflected);
 			_fe3d->text3d_setBright(textID, isBright);
-			_fe3d->text3d_setTransparency(textID, transparency);
+			_fe3d->text3d_setOpacity(textID, opacity);
 		}
 	}
 

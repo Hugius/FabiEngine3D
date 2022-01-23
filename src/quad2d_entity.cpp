@@ -93,9 +93,9 @@ void Quad2dEntity::setVerticallyMirrored(bool value)
 	_isVerticallyMirrored = value;
 }
 
-void Quad2dEntity::setTransparency(float value)
+void Quad2dEntity::setOpacity(float value)
 {
-	_transparency = clamp(value, 0.0f, 1.0f);
+	_opacity = clamp(value, 0.0f, 1.0f);
 }
 
 void Quad2dEntity::setWireframeColor(const fvec3& value)
@@ -211,9 +211,9 @@ const fvec3& Quad2dEntity::getColor() const
 	return _color;
 }
 
-const float Quad2dEntity::getTransparency() const
+const float Quad2dEntity::getOpacity() const
 {
-	return _transparency;
+	return _opacity;
 }
 
 const bool Quad2dEntity::isWireframed() const

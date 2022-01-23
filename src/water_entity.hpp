@@ -33,7 +33,7 @@ public:
 	void setSpecularIntensity(float value);
 	void setHeight(float value);
 	void setSize(float value);
-	void setTransparency(float value);
+	void setOpacity(float value);
 	void setSpecular(bool value);
 	void setReflective(bool value);
 	void setRefractive(bool value);
@@ -57,7 +57,7 @@ public:
 	const float getSpecularShininess() const;
 	const float getSpecularIntensity() const;
 	const float getSize() const;
-	const float getTransparency() const;
+	const float getOpacity() const;
 
 	const bool isSpecular() const;
 	const bool isReflective() const;
@@ -92,7 +92,7 @@ private:
 	float _waveHeight = 0.0f;
 	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;
-	float _transparency = 1.0f;
+	float _opacity = 1.0f;
 
 	bool _isSpecular = false;
 	bool _isReflective = false;

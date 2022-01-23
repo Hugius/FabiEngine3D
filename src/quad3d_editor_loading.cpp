@@ -115,7 +115,7 @@ const bool Quad3dEditor::loadFromFile()
 		fvec3 color;
 		float lightness;
 		float textureRepeat;
-		float transparency;
+		float opacity;
 		float emissionIntensity;
 		bool isFacingX;
 		bool isFacingY;
@@ -142,7 +142,7 @@ const bool Quad3dEditor::loadFromFile()
 			textureRepeat >>
 			isBright >>
 			emissionIntensity >>
-			transparency;
+			opacity;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -166,7 +166,7 @@ const bool Quad3dEditor::loadFromFile()
 			_fe3d->quad3d_setReflected(quadID, isReflected);
 			_fe3d->quad3d_setTextureRepeat(quadID, textureRepeat);
 			_fe3d->quad3d_setBright(quadID, isBright);
-			_fe3d->quad3d_setTransparency(quadID, transparency);
+			_fe3d->quad3d_setOpacity(quadID, opacity);
 			_fe3d->quad3d_setEmissionIntensity(quadID, emissionIntensity);
 
 			if(!diffuseMapPath.empty())

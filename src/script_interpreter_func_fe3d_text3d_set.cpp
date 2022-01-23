@@ -268,7 +268,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text3d_set_transparency")
+	else if(functionName == "fe3d:text3d_set_opacity")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
@@ -276,7 +276,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 		{
 			if(_validateFe3dText3d(args[0].getString(), false))
 			{
-				_fe3d->text3d_setTransparency(args[0].getString(), args[1].getDecimal());
+				_fe3d->text3d_setOpacity(args[0].getString(), args[1].getDecimal());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

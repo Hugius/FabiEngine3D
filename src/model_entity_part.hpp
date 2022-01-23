@@ -38,7 +38,7 @@ struct ModelEntityPart final
 	float lightness = 1.0f;
 	float specularShininess = 1.0f;
 	float specularIntensity = 1.0f;
-	float transparency = 1.0f;
+	float opacity = 1.0f;
 	float emissionIntensity = 1.0f;
 	float textureRepeat = 1.0f;
 

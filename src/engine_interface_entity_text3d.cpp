@@ -159,9 +159,9 @@ void EngineInterface::text3d_setLightness(const string& ID, float value)
 	_core->getText3dEntityManager()->getEntity(ID)->setLightness(value);
 }
 
-void EngineInterface::text3d_setTransparency(const string& ID, float value)
+void EngineInterface::text3d_setOpacity(const string& ID, float value)
 {
-	_core->getText3dEntityManager()->getEntity(ID)->setTransparency(value);
+	_core->getText3dEntityManager()->getEntity(ID)->setOpacity(value);
 }
 
 const float EngineInterface::text3d_getLightness(const string& ID) const
@@ -179,9 +179,9 @@ const float EngineInterface::text3d_getMaxHeight(const string& ID) const
 	return _core->getText3dEntityManager()->getEntity(ID)->getMaxHeight();
 }
 
-const float EngineInterface::text3d_getTransparency(const string& ID) const
+const float EngineInterface::text3d_getOpacity(const string& ID) const
 {
-	return _core->getText3dEntityManager()->getEntity(ID)->getTransparency();
+	return _core->getText3dEntityManager()->getEntity(ID)->getOpacity();
 }
 
 const bool EngineInterface::text3d_isExisting(const string& ID) const

@@ -157,7 +157,7 @@ const bool WorldEditor::_copyTemplateWater(const string& newID, const string& te
 	_fe3d->water_setQuality(newID, _fe3d->water_getQuality(templateID));
 	_fe3d->water_setSpecularShininess(newID, _fe3d->water_getSpecularShininess(templateID));
 	_fe3d->water_setSpecularIntensity(newID, _fe3d->water_getSpecularIntensity(templateID));
-	_fe3d->water_setTransparency(newID, _fe3d->water_getTransparency(templateID));
+	_fe3d->water_setOpacity(newID, _fe3d->water_getOpacity(templateID));
 	_fe3d->water_setColor(newID, _fe3d->water_getColor(templateID));
 	_fe3d->water_setTextureRepeat(newID, _fe3d->water_getTextureRepeat(templateID));
 	_fe3d->water_setSpeed(newID, _fe3d->water_getSpeed(templateID));

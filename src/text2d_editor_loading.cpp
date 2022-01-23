@@ -83,11 +83,11 @@ const bool Text2dEditor::loadFromFile()
 		string textID;
 		string fontMapPath;
 		fvec3 color;
-		float transparency;
+		float opacity;
 
 		istringstream iss(line);
 
-		iss >> textID >> fontMapPath >> color.r >> color.g >> color.b >> transparency;
+		iss >> textID >> fontMapPath >> color.r >> color.g >> color.b >> opacity;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -108,7 +108,7 @@ const bool Text2dEditor::loadFromFile()
 			_fe3d->text2d_setPosition(textID, Tools::convertPositionToViewport(fvec2(0.0f)));
 			_fe3d->text2d_setSize(textID, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->text2d_setColor(textID, color);
-			_fe3d->text2d_setTransparency(textID, transparency);
+			_fe3d->text2d_setOpacity(textID, opacity);
 			_fe3d->text2d_setContent(textID, TEXT_CONTENT);
 		}
 	}

@@ -94,9 +94,9 @@ void EngineInterface::quad2d_setColor(const string& ID, const fvec3& value)
 	_core->getQuad2dEntityManager()->getEntity(ID)->setColor(value);
 }
 
-void EngineInterface::quad2d_setTransparency(const string& ID, float value)
+void EngineInterface::quad2d_setOpacity(const string& ID, float value)
 {
-	_core->getQuad2dEntityManager()->getEntity(ID)->setTransparency(value);
+	_core->getQuad2dEntityManager()->getEntity(ID)->setOpacity(value);
 }
 
 void EngineInterface::quad2d_setMinPosition(const string& ID, const fvec2& value)
@@ -154,9 +154,9 @@ const float EngineInterface::quad2d_getRotation(const string& ID) const
 	return _core->getQuad2dEntityManager()->getEntity(ID)->getRotation();
 }
 
-const float EngineInterface::quad2d_getTransparency(const string& ID) const
+const float EngineInterface::quad2d_getOpacity(const string& ID) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(ID)->getTransparency();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->getOpacity();
 }
 
 const vector<string> EngineInterface::quad2d_getIDs() const

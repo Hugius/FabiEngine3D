@@ -8,7 +8,7 @@ void WaterEditor::_updateMiscellaneousMenu()
 	{
 		auto size = _fe3d->water_getSize(_currentWaterID);
 		auto speed = _fe3d->water_getSpeed(_currentWaterID);
-		auto transparency = _fe3d->water_getTransparency(_currentWaterID);
+		auto opacity = _fe3d->water_getOpacity(_currentWaterID);
 		auto waveHeight = _fe3d->water_getWaveHeight(_currentWaterID);
 		auto quality = _fe3d->water_getQuality(_currentWaterID);
 
@@ -30,9 +30,9 @@ void WaterEditor::_updateMiscellaneousMenu()
 			_gui->getOverlay()->createValueForm("speedX", "X", speed.x * 100000.0f, fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui->getOverlay()->createValueForm("speedZ", "Z", speed.y * 100000.0f, fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transparency")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("transparency", "Transparency", (transparency * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
@@ -82,10 +82,10 @@ void WaterEditor::_updateMiscellaneousMenu()
 			speed.y /= 100000.0f;
 			_fe3d->water_setSpeed(_currentWaterID, speed);
 		}
-		if(_gui->getOverlay()->checkValueForm("transparency", transparency))
+		if(_gui->getOverlay()->checkValueForm("opacity", opacity))
 		{
-			transparency /= 100.0f;
-			_fe3d->water_setTransparency(_currentWaterID, transparency);
+			opacity /= 100.0f;
+			_fe3d->water_setOpacity(_currentWaterID, opacity);
 		}
 		if(_gui->getOverlay()->checkValueForm("waveHeight", waveHeight))
 		{

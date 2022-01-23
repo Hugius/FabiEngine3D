@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_set_transparency")
+	else if(functionName == "fe3d:water_set_opacity")
 	{
 		auto types = {SVT::DECIMAL};
 
@@ -111,7 +111,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setTransparency(_fe3d->water_getSelectedID(), args[0].getDecimal());
+				_fe3d->water_setOpacity(_fe3d->water_getSelectedID(), args[0].getDecimal());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

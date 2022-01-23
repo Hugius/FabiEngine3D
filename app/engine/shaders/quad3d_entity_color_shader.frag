@@ -15,8 +15,8 @@ uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
 uniform float u_lightness;
-uniform float u_minTextureTransparency;
-uniform float u_transparency;
+uniform float u_minTextureOpacity;
+uniform float u_opacity;
 uniform float u_emissionIntensity;
 
 uniform bool u_isWireframed;
@@ -55,7 +55,7 @@ void main()
 
 	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
-	o_primaryColor = vec4(primaryColor, u_transparency);
+	o_primaryColor = vec4(primaryColor, u_opacity);
 	o_secondaryColor = vec4((((emissionMapping != vec3(0.0f)) || u_isBright) ? primaryColor : vec3(0.0f)), 1.0f);
 }
 
@@ -66,7 +66,7 @@ vec3 calculateDiffuseMapping()
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
-		if (diffuseMapColor.a < u_minTextureTransparency)
+		if (diffuseMapColor.a < u_minTextureOpacity)
 		{
 			discard;
 		}
@@ -85,7 +85,7 @@ vec3 calculateEmissionMapping()
 	{
 		vec4 emissionMapColor = texture(u_emissionMap, f_uv);
 
-		if (emissionMapColor.a < u_minTextureTransparency)
+		if (emissionMapColor.a < u_minTextureOpacity)
 		{
 			return vec3(0.0f);
 		}

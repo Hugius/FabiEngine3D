@@ -120,7 +120,7 @@ void Text3dEntity::setContent(const string& value)
 			characterEntity->setMesh(_mesh);
 			characterEntity->setDiffuseMapPath(_fontMapPath);
 			characterEntity->setDiffuseMap(_fontMap);
-			characterEntity->setTransparency(_transparency);
+			characterEntity->setOpacity(_opacity);
 			characterEntity->setWireframeColor(_wireframeColor);
 			characterEntity->setColor(_color);
 			characterEntity->setWireframed(_isWireframed);
@@ -284,13 +284,13 @@ void Text3dEntity::setLightness(float value)
 	}
 }
 
-void Text3dEntity::setTransparency(float value)
+void Text3dEntity::setOpacity(float value)
 {
-	_transparency = clamp(value, 0.0f, 1.0f);
+	_opacity = clamp(value, 0.0f, 1.0f);
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setTransparency(_transparency);
+		character->setOpacity(_opacity);
 	}
 }
 
@@ -462,9 +462,9 @@ const float Text3dEntity::getLightness() const
 	return _lightness;
 }
 
-const float Text3dEntity::getTransparency() const
+const float Text3dEntity::getOpacity() const
 {
-	return _transparency;
+	return _opacity;
 }
 
 const float Text3dEntity::getMinHeight() const

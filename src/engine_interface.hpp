@@ -171,7 +171,7 @@ public:
 	void water_setWaveHeight(const string& ID, float value);
 	void water_setSpecularShininess(const string& ID, float value);
 	void water_setSpecularIntensity(const string& ID, float value);
-	void water_setTransparency(const string& ID, float value);
+	void water_setOpacity(const string& ID, float value);
 	void water_setColor(const string& ID, const fvec3& value);
 	void water_setTextureRepeat(const string& ID, float value);
 	void water_setQuality(const string& ID, WaterQuality value);
@@ -190,7 +190,7 @@ public:
 	const float water_getWaveHeight(const string& ID) const;
 	const float water_getSpecularShininess(const string& ID) const;
 	const float water_getSpecularIntensity(const string& ID) const;
-	const float water_getTransparency(const string& ID) const;
+	const float water_getOpacity(const string& ID) const;
 	const bool water_isExisting(const string& ID) const;
 	const bool water_isVisible(const string& ID) const;
 	const bool water_isSpecular(const string& ID) const;
@@ -247,7 +247,7 @@ public:
 	void model_setReflectivity(const string& ID, const string& partID, float value);
 	void model_setLightness(const string& ID, const string& partID, float value);
 	void model_setEmissionIntensity(const string& ID, const string& partID, float value);
-	void model_setTransparency(const string& ID, const string& partID, float value);
+	void model_setOpacity(const string& ID, const string& partID, float value);
 	void model_setColor(const string& ID, const string& partID, const fvec3& value);
 	void model_setWireframeColor(const string& ID, const string& partID, const fvec3& value);
 	void model_setMinHeight(const string& ID, float value);
@@ -282,7 +282,7 @@ public:
 	const float model_getLightness(const string& ID, const string& partID) const;
 	const float model_getSpecularShininess(const string& ID, const string& partID) const;
 	const float model_getSpecularIntensity(const string& ID, const string& partID) const;
-	const float model_getTransparency(const string& ID, const string& partID) const;
+	const float model_getOpacity(const string& ID, const string& partID) const;
 	const float model_getMinHeight(const string& ID) const;
 	const float model_getMaxHeight(const string& ID) const;
 	const float model_getLevelOfDetailDistance(const string& ID) const;
@@ -330,7 +330,7 @@ public:
 	void quad3d_setMinHeight(const string& ID, float value);
 	void quad3d_setMaxHeight(const string& ID, float value);
 	void quad3d_setLightness(const string& ID, float value);
-	void quad3d_setTransparency(const string& ID, float value);
+	void quad3d_setOpacity(const string& ID, float value);
 	void quad3d_setTextureRepeat(const string& ID, float value);
 	void quad3d_setEmissionIntensity(const string& ID, float value);
 	void quad3d_setVisible(const string& ID, bool value);
@@ -356,7 +356,7 @@ public:
 	const float quad3d_getLightness(const string& ID) const;
 	const float quad3d_getMinHeight(const string& ID) const;
 	const float quad3d_getMaxHeight(const string& ID) const;
-	const float quad3d_getTransparency(const string& ID) const;
+	const float quad3d_getOpacity(const string& ID) const;
 	const float quad3d_getTextureRepeat(const string& ID) const;
 	const float quad3d_getEmissionIntensity(const string& ID) const;
 	const bool quad3d_isExisting(const string& ID) const;
@@ -390,7 +390,7 @@ public:
 	void text3d_setMinHeight(const string& ID, float value);
 	void text3d_setMaxHeight(const string& ID, float value);
 	void text3d_setLightness(const string& ID, float value);
-	void text3d_setTransparency(const string& ID, float value);
+	void text3d_setOpacity(const string& ID, float value);
 	void text3d_setVisible(const string& ID, bool value);
 	void text3d_setFacingCameraX(const string& ID, bool value);
 	void text3d_setFacingCameraY(const string& ID, bool value);
@@ -414,7 +414,7 @@ public:
 	const float text3d_getLightness(const string& ID) const;
 	const float text3d_getMinHeight(const string& ID) const;
 	const float text3d_getMaxHeight(const string& ID) const;
-	const float text3d_getTransparency(const string& ID) const;
+	const float text3d_getOpacity(const string& ID) const;
 	const bool text3d_isExisting(const string& ID) const;
 	const bool text3d_isVisible(const string& ID) const;
 	const bool text3d_isFacingCameraX(const string& ID) const;
@@ -433,7 +433,7 @@ public:
 	void quad2d_setVisible(const string& ID, bool value);
 	void quad2d_setDiffuseMap(const string& ID, const string& value);
 	void quad2d_setColor(const string& ID, const fvec3& value);
-	void quad2d_setTransparency(const string& ID, float value);
+	void quad2d_setOpacity(const string& ID, float value);
 	void quad2d_setMinPosition(const string& ID, const fvec2& value);
 	void quad2d_setMaxPosition(const string& ID, const fvec2& value);
 	void quad2d_setPosition(const string& ID, const fvec2& value);
@@ -463,7 +463,7 @@ public:
 	const fvec2& quad2d_getUvMultiplier(const string& ID) const;
 	const fvec2& quad2d_getUvOffset(const string& ID) const;
 	const float quad2d_getRotation(const string& ID) const;
-	const float quad2d_getTransparency(const string& ID) const;
+	const float quad2d_getOpacity(const string& ID) const;
 	const bool quad2d_isExisting(const string& ID) const;
 	const bool quad2d_isVisible(const string& ID) const;
 	const bool quad2d_isCentered(const string& ID) const;
@@ -478,7 +478,7 @@ public:
 	void text2d_setVisible(const string& ID, bool value);
 	void text2d_setContent(const string& ID, const string& value, float charWidth = -1.0f, float charHeight = -1.0f);
 	void text2d_setColor(const string& ID, const fvec3& value);
-	void text2d_setTransparency(const string& ID, float value);
+	void text2d_setOpacity(const string& ID, float value);
 	void text2d_setMinPosition(const string& ID, const fvec2& value);
 	void text2d_setMaxPosition(const string& ID, const fvec2& value);
 	void text2d_setPosition(const string& ID, const fvec2& value);
@@ -505,7 +505,7 @@ public:
 	const fvec2& text2d_getMinPosition(const string& ID) const;
 	const fvec2& text2d_getMaxPosition(const string& ID) const;
 	const float text2d_getRotation(const string& ID) const;
-	const float text2d_getTransparency(const string& ID) const;
+	const float text2d_getOpacity(const string& ID) const;
 	const bool text2d_isExisting(const string& ID) const;
 	const bool text2d_isVisible(const string& ID) const;
 	const bool text2d_isCentered(const string& ID) const;

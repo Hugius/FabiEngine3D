@@ -33,7 +33,7 @@ const bool Text3dEditor::saveToFile() const
 		auto isShadowed = _fe3d->text3d_isShadowed(textID);
 		auto lightness = _fe3d->text3d_getLightness(textID);
 		auto isBright = _fe3d->text3d_isBright(textID);
-		auto transparency = _fe3d->text3d_getTransparency(textID);
+		auto opacity = _fe3d->text3d_getOpacity(textID);
 
 		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
@@ -55,7 +55,7 @@ const bool Text3dEditor::saveToFile() const
 			isShadowed << " " <<
 			lightness << " " <<
 			isBright << " " <<
-			transparency << endl;
+			opacity << endl;
 	}
 
 	file.close();

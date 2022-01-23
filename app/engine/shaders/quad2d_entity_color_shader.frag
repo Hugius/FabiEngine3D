@@ -10,7 +10,7 @@ uniform vec2 u_minPosition;
 uniform vec2 u_maxPosition;
 uniform vec3 u_wireframeColor;
 
-uniform float u_transparency;
+uniform float u_opacity;
 uniform float u_nearDistance;
 uniform float u_farDistance;
 
@@ -54,7 +54,7 @@ void main()
 			vec4 diffuseMapping = calculateDiffuseMapping();
 			diffuseMapping.rgb *= u_color;
 			diffuseMapping.rgb  = pow(diffuseMapping.rgb, vec3(1.0f / 2.2f));
-			diffuseMapping.a   *= u_transparency;
+			diffuseMapping.a   *= u_opacity;
 
 			o_finalColor = diffuseMapping;
 		}
@@ -62,7 +62,7 @@ void main()
 		{
 			vec3 color = pow(u_color, vec3(1.0f / 2.2f));
 
-			o_finalColor = vec4(color, u_transparency);
+			o_finalColor = vec4(color, u_opacity);
 		}
 	}
 }

@@ -21,7 +21,7 @@ public:
 	void setFontMap(shared_ptr<TextureBuffer> value);
 	void setHorizontallyMirrored(bool value);
 	void setVerticallyMirrored(bool value);
-	void setTransparency(float value);
+	void setOpacity(float value);
 	void setWireframeColor(const fvec3& value);
 	void setColor(const fvec3& value);
 	void setMinPosition(const fvec2& value);
@@ -51,7 +51,7 @@ public:
 	const fvec2& getMinPosition() const;
 	const fvec2& getMaxPosition() const;
 
-	const float getTransparency() const;
+	const float getOpacity() const;
 	const float getRotation() const;
 
 	const unsigned int getDepth() const;
@@ -182,7 +182,7 @@ private:
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
-	float _transparency = 1.0f;
+	float _opacity = 1.0f;
 
 	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
 	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;

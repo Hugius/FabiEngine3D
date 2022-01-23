@@ -241,7 +241,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2d_get_transparency")
+	else if(functionName == "fe3d:text2d_get_opacity")
 	{
 		auto types = {SVT::STRING};
 
@@ -249,7 +249,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText2d(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text2d_getTransparency(args[0].getString());
+				const auto result = _fe3d->text2d_getOpacity(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}

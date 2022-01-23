@@ -444,9 +444,9 @@ void ModelEntity::setLevelOfDetailDistance(float value)
 	_levelOfDetailDistance = value;
 }
 
-void ModelEntity::setTransparency(const string& partID, float value)
+void ModelEntity::setOpacity(const string& partID, float value)
 {
-	_parts[_getPartIndex(partID)].transparency = clamp(value, 0.0f, 1.0f);
+	_parts[_getPartIndex(partID)].opacity = clamp(value, 0.0f, 1.0f);
 }
 
 void ModelEntity::setTextureRepeat(const string& partID, float value)
@@ -794,9 +794,9 @@ const float ModelEntity::getEmissionIntensity(const string& partID) const
 	return _parts[_getPartIndex(partID)].emissionIntensity;
 }
 
-const float ModelEntity::getTransparency(const string& partID) const
+const float ModelEntity::getOpacity(const string& partID) const
 {
-	return _parts[_getPartIndex(partID)].transparency;
+	return _parts[_getPartIndex(partID)].opacity;
 }
 
 const float ModelEntity::getTextureRepeat(const string& partID) const

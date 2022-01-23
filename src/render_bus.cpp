@@ -165,9 +165,9 @@ void RenderBus::setShadowLightness(float value)
 	_shadowLightness = max(0.0f, value);
 }
 
-void RenderBus::setLensFlareTransparency(float value)
+void RenderBus::setLensFlareOpacity(float value)
 {
-	_lensFlareTransparency = max(0.0f, value);
+	_lensFlareOpacity = max(0.0f, value);
 }
 
 void RenderBus::setLensFlareIntensity(float value)
@@ -593,9 +593,9 @@ const float RenderBus::getShadowLightness() const
 	return _shadowLightness;
 }
 
-const float RenderBus::getLensFlareTransparency() const
+const float RenderBus::getLensFlareOpacity() const
 {
-	return _lensFlareTransparency;
+	return _lensFlareOpacity;
 }
 
 const float RenderBus::getLensFlareIntensity() const

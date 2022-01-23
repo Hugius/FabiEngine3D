@@ -10,7 +10,7 @@ void LensFlareRenderer::bind()
 	_shader->uploadUniform("u_flareMap", 2);
 	_shader->uploadUniform("u_nearDistance", _renderBus->getNearDistance());
 	_shader->uploadUniform("u_farDistance", _renderBus->getFarDistance());
-	_shader->uploadUniform("u_lensFlareTransparency", _renderBus->getLensFlareTransparency());
+	_shader->uploadUniform("u_lensFlareOpacity", _renderBus->getLensFlareOpacity());
 	_shader->uploadUniform("u_lensFlareIntensity", _renderBus->getLensFlareIntensity());
 	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
 	_shader->uploadUniform("u_flareSourcePosition", _renderBus->getFlareSourcePosition());

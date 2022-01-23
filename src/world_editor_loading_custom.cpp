@@ -75,7 +75,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		string waterID, templateID;
 	//		fvec3 color;
 	//		fvec2 speed;
-	//		float transparency;
+	//		float opacity;
 
 	//		iss >>
 	//			waterID >>
@@ -85,20 +85,20 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			color.b >>
 	//			speed.x >>
 	//			speed.y >>
-	//			transparency;
+	//			opacity;
 
 	//		if(_copyTemplateWater(waterID, templateID))
 	//		{
 	//			_fe3d->water_setColor(waterID, color);
 	//			_fe3d->water_setSpeed(waterID, speed);
-	//			_fe3d->water_setTransparency(waterID, transparency);
+	//			_fe3d->water_setOpacity(waterID, opacity);
 	//		}
 	//	}
 	//	else if(lineType == "MODEL")
 	//	{
 	//		string modelID, templateID;
 	//		fvec3 position, rotation, rotationOrigin, size, color;
-	//		float minHeight, maxHeight, transparency, lightness;
+	//		float minHeight, maxHeight, opacity, lightness;
 	//		unsigned partCount;
 	//		bool isVisible, isFrozen, isAabbRaycastResponsive, isAabbCollisionResponsive;
 
@@ -129,7 +129,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			color.b >>
 	//			minHeight >>
 	//			maxHeight >>
-	//			transparency >>
+	//			opacity >>
 	//			lightness >>
 	//			partCount;
 
@@ -168,7 +168,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			_fe3d->model_setColor(modelID, "", color);
 	//			_fe3d->model_setMinHeight(modelID, minHeight);
 	//			_fe3d->model_setMaxHeight(modelID, maxHeight);
-	//			//_fe3d->model_setTransparency(modelID, transparency);
+	//			//_fe3d->model_setOpacity(modelID, opacity);
 	//			//_fe3d->model_setLightness(modelID, lightness);
 	//			_fe3d->model_setVisible(modelID, isVisible);
 	//			for(const auto& ID : _fe3d->aabb_getChildIDs(modelID, AabbParentEntityType::MODEL))

@@ -13,18 +13,18 @@ void WorldEditor::_updateModelHighlighting(const string& ID, int& direction)
 
 		for(size_t i = 0; i < partIDs.size(); i++)
 		{
-			auto transparency = _fe3d->model_getTransparency(ID, partIDs[i]);
+			auto opacity = _fe3d->model_getOpacity(ID, partIDs[i]);
 
-			if((transparency == 0.0f) && (i == 0))
+			if((opacity == 0.0f) && (i == 0))
 			{
 				direction *= -1;
 			}
-			if((transparency == 1.0f) && (i == 0))
+			if((opacity == 1.0f) && (i == 0))
 			{
 				direction *= -1;
 			}
 			const float speed = (MODEL_HIGHLIGHT_SPEED * static_cast<float>(direction));
-			_fe3d->model_setTransparency(ID, partIDs[i], (transparency + speed));
+			_fe3d->model_setOpacity(ID, partIDs[i], (opacity + speed));
 		}
 	}
 }
@@ -38,19 +38,19 @@ void WorldEditor::_updateQuad3dHighlighting(const string& ID, int& direction)
 
 	if(!ID.empty())
 	{
-		auto transparency = _fe3d->quad3d_getTransparency(ID);
+		auto opacity = _fe3d->quad3d_getOpacity(ID);
 
-		if(transparency == 0.0f)
+		if(opacity == 0.0f)
 		{
 			direction *= -1;
 		}
-		if(transparency == 1.0f)
+		if(opacity == 1.0f)
 		{
 			direction *= -1;
 		}
 
 		const float speed = (QUAD3D_HIGHLIGHT_SPEED * static_cast<float>(direction));
-		_fe3d->quad3d_setTransparency(ID, (transparency + speed));
+		_fe3d->quad3d_setOpacity(ID, (opacity + speed));
 	}
 }
 
@@ -63,19 +63,19 @@ void WorldEditor::_updateText3dHighlighting(const string& ID, int& direction)
 
 	if(!ID.empty())
 	{
-		auto transparency = _fe3d->text3d_getTransparency(ID);
+		auto opacity = _fe3d->text3d_getOpacity(ID);
 
-		if(transparency == 0.0f)
+		if(opacity == 0.0f)
 		{
 			direction *= -1;
 		}
-		if(transparency == 1.0f)
+		if(opacity == 1.0f)
 		{
 			direction *= -1;
 		}
 
 		const float speed = (TEXT3D_HIGHLIGHT_SPEED * static_cast<float>(direction));
-		_fe3d->text3d_setTransparency(ID, (transparency + speed));
+		_fe3d->text3d_setOpacity(ID, (opacity + speed));
 	}
 }
 

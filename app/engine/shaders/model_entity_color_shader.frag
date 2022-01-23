@@ -44,8 +44,8 @@ uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
 uniform float u_specularShininess;
 uniform float u_specularIntensity;
-uniform float u_transparency;
-uniform float u_minTextureTransparency;
+uniform float u_opacity;
+uniform float u_minTextureOpacity;
 uniform float u_shadowSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
@@ -141,7 +141,7 @@ void main()
 
     primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
-	o_primaryColor = vec4(primaryColor, u_transparency);
+	o_primaryColor = vec4(primaryColor, u_opacity);
 	o_secondaryColor = vec4((isBright ? primaryColor : vec3(0.0f)), 1.0f);
 }
 
@@ -152,7 +152,7 @@ vec3 calculateDiffuseMapping()
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
-		if (diffuseMapColor.a < u_minTextureTransparency)
+		if (diffuseMapColor.a < u_minTextureOpacity)
 		{
 			discard;
 		}
@@ -171,7 +171,7 @@ vec3 calculateEmissionMapping()
 	{
 		vec4 emissionMapColor = texture(u_emissionMap, f_uv);
 
-		if (emissionMapColor.a < u_minTextureTransparency)
+		if (emissionMapColor.a < u_minTextureOpacity)
 		{
 			return vec3(0.0f);
 		}
@@ -190,7 +190,7 @@ vec3 calculateSpecularMapping()
     {
 		vec4 specularMapColor = texture(u_specularMap, f_uv);
 
-		if (specularMapColor.a < u_minTextureTransparency)
+		if (specularMapColor.a < u_minTextureOpacity)
 		{
 			return vec3(0.0f);
 		}
@@ -209,7 +209,7 @@ vec3 calculateReflectionMapping()
     {
 		vec4 reflectionMapColor = texture(u_reflectionMap, f_uv);
 
-		if (reflectionMapColor.a < u_minTextureTransparency)
+		if (reflectionMapColor.a < u_minTextureOpacity)
 		{
 			return vec3(0.0f);
 		}
@@ -442,10 +442,10 @@ float calculateShadows()
 				shadow = 1.0f;
 			}
 
-			float transparency = (fragmentDistance - (halfSize * 0.9f));
-			transparency = clamp(transparency, 0.0f, halfSize * 0.1f);
-			transparency = clamp(transparency, 0.0f, halfSize * 0.1f);
-			transparency /= (halfSize * 0.1f);
+			float opacity = (fragmentDistance - (halfSize * 0.9f));
+			opacity = clamp(opacity, 0.0f, (halfSize * 0.1f));
+			opacity /= (halfSize * 0.1f);
+			opacity = (1.0f - opacity);
 
 			if (u_isShadowFrameRenderEnabled)
 			{
@@ -455,7 +455,7 @@ float calculateShadows()
 				}
 			}
 
-			return mix(shadow, 1.0f, transparency);
+			return mix(1.0f, shadow, opacity);
 		}
 
 		return 1.0f;

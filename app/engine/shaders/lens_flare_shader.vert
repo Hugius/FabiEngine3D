@@ -12,7 +12,7 @@ uniform vec2 u_flareSourceUv;
 uniform float u_farDistance;
 uniform float u_nearDistance;
 uniform float u_lensFlareIntensity;
-uniform float u_lensFlareTransparency;
+uniform float u_lensFlareOpacity;
 
 uniform bool u_isLensFlareEnabled;
 
@@ -31,7 +31,7 @@ void main()
 
 float calculateFlareVisibility()
 {
-    if (u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareTransparency > 0.0f))
+    if (u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareOpacity > 0.0f))
     {
         float flareDepth = texture(u_depthMap, u_flareSourceUv).r;
         float flareFragmentDepth = (convertDepthToPerspective(flareDepth) / u_farDistance);

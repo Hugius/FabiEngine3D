@@ -93,18 +93,18 @@ void WorldEditor::_unselectModel(const string& ID)
 {
 	for(const auto& partID : _fe3d->model_getPartIDs(ID))
 	{
-		_fe3d->model_setTransparency(ID, partID, 1.0f);
+		_fe3d->model_setOpacity(ID, partID, 1.0f);
 	}
 }
 
 void WorldEditor::_unselectQuad3d(const string& ID)
 {
-	_fe3d->quad3d_setTransparency(ID, 1.0f);
+	_fe3d->quad3d_setOpacity(ID, 1.0f);
 }
 
 void WorldEditor::_unselectText3d(const string& ID)
 {
-	_fe3d->text3d_setTransparency(ID, 1.0f);
+	_fe3d->text3d_setOpacity(ID, 1.0f);
 }
 
 void WorldEditor::_unselectSound(const string& ID)

@@ -30,7 +30,7 @@ uniform float u_specularShininess;
 uniform float u_specularIntensity;
 uniform float u_nearDistance;
 uniform float u_farDistance;
-uniform float u_transparency;
+uniform float u_opacity;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
@@ -91,14 +91,14 @@ vec4 calculateWaterColor()
 	vec2 reflectionUv = vec2(ndc.x, -ndc.y);
 	vec2 refractionUv = vec2(ndc.x, ndc.y);
 
-	float transparency = 1.0f;
-	if (u_transparency < 1.0f)
+	float opacity = 1.0f;
+	if (u_opacity < 1.0f)
 	{
 		float depth = texture(u_depthMap, refractionUv).r;
 		float floorDistance = convertDepthToPerspective(depth);
 		float waterDistance = convertDepthToPerspective(gl_FragCoord.z);
 		float waterDepth = (floorDistance - waterDistance);
-		transparency = clamp(waterDepth / ((1.0f - u_transparency) * 10.0f), 0.0f, 1.0f);
+		opacity = clamp(waterDepth / ((1.0f - u_opacity) * 10.0f), 0.0f, 1.0f);
 	}
 
 	if (u_hasDudvMap)
@@ -163,7 +163,7 @@ vec4 calculateWaterColor()
 		finalColor += calculateLights(normal);
 	}
 
-	return vec4(finalColor, transparency);
+	return vec4(finalColor, opacity);
 }
 
 vec3 calculateLights(vec3 normal)

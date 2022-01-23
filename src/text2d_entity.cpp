@@ -114,7 +114,7 @@ void Text2dEntity::setContent(const string& value)
 			characterEntity->setDiffuseMap(_fontMap);
 			characterEntity->setHorizontallyMirrored(_isHorizontallyMirrored);
 			characterEntity->setVerticallyMirrored(_isVerticallyMirrored);
-			characterEntity->setTransparency(_transparency);
+			characterEntity->setOpacity(_opacity);
 			characterEntity->setWireframeColor(_wireframeColor);
 			characterEntity->setColor(_color);
 			characterEntity->setMinPosition(_minPosition);
@@ -251,13 +251,13 @@ void Text2dEntity::setVerticallyMirrored(bool value)
 	}
 }
 
-void Text2dEntity::setTransparency(float value)
+void Text2dEntity::setOpacity(float value)
 {
-	_transparency = clamp(value, 0.0f, 1.0f);
+	_opacity = clamp(value, 0.0f, 1.0f);
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setTransparency(_transparency);
+		character->setOpacity(_opacity);
 	}
 }
 
@@ -364,9 +364,9 @@ const fvec3& Text2dEntity::getColor() const
 	return _color;
 }
 
-const float Text2dEntity::getTransparency() const
+const float Text2dEntity::getOpacity() const
 {
-	return _transparency;
+	return _opacity;
 }
 
 const bool Text2dEntity::isWireframed() const

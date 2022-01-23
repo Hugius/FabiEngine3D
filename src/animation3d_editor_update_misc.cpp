@@ -172,20 +172,20 @@ void Animation3dEditor::_updateMiscellaneous()
 		}
 		else
 		{
-			const auto transparency = _fe3d->model_getTransparency(currentAnimation->getPreviewModelID(), partID);
+			const auto opacity = _fe3d->model_getOpacity(currentAnimation->getPreviewModelID(), partID);
 
-			if(transparency == 0.0f)
+			if(opacity == 0.0f)
 			{
 				_selectedPartHighlightDirection *= -1;
 			}
 
-			if(transparency == 1.0f)
+			if(opacity == 1.0f)
 			{
 				_selectedPartHighlightDirection *= -1;
 			}
 
 			const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
-			_fe3d->model_setTransparency(currentAnimation->getPreviewModelID(), partID, (transparency + speed));
+			_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), partID, (opacity + speed));
 		}
 	}
 }

@@ -139,7 +139,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader->uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
 		_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));
-		_shader->uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
+		_shader->uploadUniform("u_minTextureOpacity", MIN_TEXTURE_OPACITY);
 
 		if(!entity->getPreviousReflectionEntityID().empty())
 		{
@@ -170,7 +170,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader->uploadUniform("u_isReflective", entity->isReflective(partID));
 			_shader->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partID));
 			_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
-			_shader->uploadUniform("u_transparency", entity->getTransparency(partID));
+			_shader->uploadUniform("u_opacity", entity->getOpacity(partID));
 			_shader->uploadUniform("u_isSpecular", entity->isSpecular(partID));
 			_shader->uploadUniform("u_reflectivity", entity->getReflectivity(partID));
 			_shader->uploadUniform("u_lightness", entity->getLightness(partID));

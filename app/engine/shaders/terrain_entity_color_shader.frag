@@ -418,7 +418,7 @@ float calculateShadows()
 				for (int y = -1; y <= 1; y++)
 				{
 					float pcfDepth = texture(u_shadowMap, projCoords.xy + (vec2(x, y) * texelSize)).r; 
-					shadow += (currentDepth - texelSize.x > pcfDepth) ? u_shadowLightness : 1.0f;        
+					shadow += ((currentDepth - texelSize.x) > pcfDepth) ? u_shadowLightness : 1.0f;        
 				}    
 			}
             
@@ -429,9 +429,10 @@ float calculateShadows()
 				shadow = 1.0f;
 			}
 
-			float transparency = (fragmentDistance - (halfSize * 0.9f));
-			transparency = clamp(transparency, 0.0f, halfSize * 0.1f);
-			transparency /= (halfSize * 0.1f);
+			float opacity = (fragmentDistance - (halfSize * 0.9f));
+			opacity = clamp(opacity, 0.0f, (halfSize * 0.1f));
+			opacity /= (halfSize * 0.1f);
+			opacity = (1.0f - opacity);
 
 			if (u_isShadowFrameRenderEnabled)
 			{
@@ -441,7 +442,7 @@ float calculateShadows()
 				}
 			}
 
-			return mix(shadow, 1.0f, transparency);
+			return mix(1.0f, shadow, opacity);
 		}
 
 		return 1.0f;

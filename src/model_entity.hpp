@@ -65,7 +65,7 @@ public:
 	void setLightness(const string& partID, float value);
 	void setSpecularShininess(const string& partID, float value);
 	void setSpecularIntensity(const string& partID, float value);
-	void setTransparency(const string& partID, float value);
+	void setOpacity(const string& partID, float value);
 	void setTextureRepeat(const string& partID, float value);
 	void setEmissionIntensity(const string& partID, float value);
 	void setSpecular(const string& partID, bool value);
@@ -108,7 +108,7 @@ public:
 	const float getLightness(const string& partID) const;
 	const float getSpecularShininess(const string& partID) const;
 	const float getSpecularIntensity(const string& partID) const;
-	const float getTransparency(const string& partID) const;
+	const float getOpacity(const string& partID) const;
 	const float getTextureRepeat(const string& partID) const;
 	const float getEmissionIntensity(const string& partID) const;
 

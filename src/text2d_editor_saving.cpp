@@ -25,7 +25,7 @@ const bool Text2dEditor::saveToFile() const
 	{
 		auto fontMapPath = _fe3d->text2d_getFontMapPath(textID);
 		auto color = _fe3d->text2d_getColor(textID);
-		auto transparency = _fe3d->text2d_getTransparency(textID);
+		auto opacity = _fe3d->text2d_getOpacity(textID);
 
 		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
@@ -33,7 +33,7 @@ const bool Text2dEditor::saveToFile() const
 
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
-		file << textID << " " << fontMapPath << " " << color.r << " " << color.g << " " << color.b << " " << transparency << endl;
+		file << textID << " " << fontMapPath << " " << color.r << " " << color.g << " " << color.b << " " << opacity << endl;
 	}
 
 	file.close();

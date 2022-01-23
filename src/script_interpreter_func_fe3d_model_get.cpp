@@ -592,7 +592,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_transparency")
+	else if(functionName == "fe3d:model_get_opacity")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -602,7 +602,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			{
 				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					const auto result = _fe3d->model_getTransparency(args[0].getString(), args[1].getString());
+					const auto result = _fe3d->model_getOpacity(args[0].getString(), args[1].getString());
 
 					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 				}

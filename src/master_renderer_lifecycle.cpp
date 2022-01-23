@@ -188,14 +188,14 @@ void MasterRenderer::_updateLensFlare()
 		const auto flareSourceNdc = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
 		const auto flareSourceUv = fvec2(((flareSourceNdc.x + 1.0f) / 2.0f), ((flareSourceNdc.y + 1.0f) / 2.0f));
 
-		float transparency = 0.0f;
+		float opacity = 0.0f;
 		if((flareSourceNdc.x > -1.0f) && (flareSourceNdc.x < 1.0f) && (flareSourceNdc.y > -1.0f) && (flareSourceNdc.y < 1.0f))
 		{
-			transparency = (1.0f - (max(fabsf(flareSourceNdc.x), fabsf(flareSourceNdc.y)) / _renderBus->getLensFlareSensitivity()));
-			transparency = clamp(transparency, 0.0f, 1.0f);
+			opacity = (1.0f - (max(fabsf(flareSourceNdc.x), fabsf(flareSourceNdc.y)) / _renderBus->getLensFlareSensitivity()));
+			opacity = clamp(opacity, 0.0f, 1.0f);
 		}
 
-		_renderBus->setLensFlareTransparency(transparency);
+		_renderBus->setLensFlareOpacity(opacity);
 		_renderBus->setFlareSourcePosition(flareSourcePosition);
 		_renderBus->setFlareSourceUv(flareSourceUv);
 	}

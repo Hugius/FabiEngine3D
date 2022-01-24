@@ -16,12 +16,11 @@ void WorldEditor::_updateModelPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				BEGIN1:;
-				const auto newID = (_currentTemplateModelID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newID = (_currentTemplateModelID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-				if(_fe3d->model_isExisting(newID))
+				while(_fe3d->model_isExisting(newID))
 				{
-					goto BEGIN1;
+					newID = (_currentTemplateModelID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				}
 
 				_copyTemplateModel(newID, _currentTemplateModelID, newPosition, false);
@@ -68,12 +67,11 @@ void WorldEditor::_updateModelPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				BEGIN2:;
-				const auto newID = (_currentTemplateModelID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newID = (_currentTemplateModelID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-				if(_fe3d->model_isExisting(newID))
+				while(_fe3d->model_isExisting(newID))
 				{
-					goto BEGIN2;
+					newID = (_currentTemplateModelID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				}
 
 				_copyTemplateModel(newID, _currentTemplateModelID, newPosition, false);

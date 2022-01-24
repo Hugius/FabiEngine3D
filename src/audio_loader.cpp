@@ -76,8 +76,6 @@ void AudioLoader::cacheChunks(const vector<string>& filePaths)
 
 Mix_Chunk* AudioLoader::loadChunk(const string& filePath)
 {
-	BEGIN:;
-
 	auto cacheIterator = _cache.find(filePath);
 
 	if(cacheIterator != _cache.end())
@@ -104,7 +102,7 @@ Mix_Chunk* AudioLoader::loadChunk(const string& filePath)
 
 	_cache.insert(make_pair(filePath, chunk));
 
-	goto BEGIN;
+	return chunk;
 }
 
 void AudioLoader::clearChunkCache(const string& filePath)

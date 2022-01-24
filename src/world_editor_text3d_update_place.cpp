@@ -15,12 +15,11 @@ void WorldEditor::_updateText3dPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				BEGIN1:;
-				const auto newID = (_currentTemplateTextID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newID = (_currentTemplateTextID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-				if(_fe3d->text3d_isExisting(newID))
+				while(_fe3d->text3d_isExisting(newID))
 				{
-					goto BEGIN1;
+					newID = (_currentTemplateTextID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				}
 
 				_copyTemplateText3d(newID, _currentTemplateTextID, newPosition, false);
@@ -67,12 +66,11 @@ void WorldEditor::_updateText3dPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				BEGIN2:;
-				const auto newID = (_currentTemplateTextID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newID = (_currentTemplateTextID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-				if(_fe3d->text3d_isExisting(newID))
+				while(_fe3d->text3d_isExisting(newID))
 				{
-					goto BEGIN2;
+					newID = (_currentTemplateTextID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				}
 
 				_copyTemplateText3d(newID, _currentTemplateTextID, newPosition, false);

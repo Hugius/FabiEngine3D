@@ -142,11 +142,9 @@ void NetworkingServer::stop()
 
 	closesocket(_udpSocket);
 
-	BEGIN:;
-	for(const auto& socketID : _clientSockets)
+	while(!_clientSockets.empty())
 	{
-		_disconnectClient(socketID);
-		goto BEGIN;
+		_disconnectClient(_clientSockets.back());
 	}
 
 	_pendingMessages.clear();

@@ -57,7 +57,6 @@ void NetworkingServer::update()
 		_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
 	}
 
-	BEGIN:;
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
 		const auto clientSocketID = _clientSockets[i];
@@ -153,7 +152,7 @@ void NetworkingServer::update()
 			else if(messageStatusCode == 0)
 			{
 				_disconnectClient(clientSocketID);
-				goto BEGIN;
+				i--;
 			}
 			else
 			{
@@ -161,7 +160,7 @@ void NetworkingServer::update()
 				if((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT))
 				{
 					_disconnectClient(clientSocketID);
-					goto BEGIN;
+					i--;
 				}
 				else
 				{

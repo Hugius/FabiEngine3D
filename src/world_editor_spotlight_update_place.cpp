@@ -16,13 +16,13 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				BEGIN1:;
-				const auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				const string newModelID = ("@@torch_" + newID);
+				auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelID = ("@@torch_" + newID);
 
-				if(_fe3d->spotlight_isExisting(newID))
+				while(_fe3d->spotlight_isExisting(newID))
 				{
-					goto BEGIN1;
+					newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelID = ("@@torch_" + newID);
 				}
 
 				_fe3d->spotlight_create(newID);
@@ -99,12 +99,13 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				BEGIN2:;
-				const auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				const string newModelID = ("@@torch_" + newID);
-				if(_fe3d->spotlight_isExisting(newID))
+				auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelID = ("@@torch_" + newID);
+
+				while(_fe3d->spotlight_isExisting(newID))
 				{
-					goto BEGIN2;
+					newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelID = ("@@torch_" + newID);
 				}
 
 				_fe3d->spotlight_create(newID);

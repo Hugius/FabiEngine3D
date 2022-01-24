@@ -105,284 +105,283 @@ void AabbEntityManager::update()
 {
 	for(const auto& [key, entity] : _entities)
 	{
-		if(!entity->hasParent())
+		if(entity->hasParent())
 		{
-			entity->updateTransformation();
-			goto SKIP;
-		}
-
-		switch(entity->getParentEntityType())
-		{
-			case AabbParentEntityType::MODEL:
+			switch(entity->getParentEntityType())
 			{
-				auto foundPair = _modelEntityManager->getEntities().find(entity->getParentEntityID());
-
-				if(foundPair == _modelEntityManager->getEntities().end())
+				case AabbParentEntityType::MODEL:
 				{
-					Logger::throwError("AabbEntityManager::update::1");
-				}
+					auto foundPair = _modelEntityManager->getEntities().find(entity->getParentEntityID());
 
-				auto parentEntity = foundPair->second;
-
-				if(entity->mustFollowParentEntityTransformation())
-				{
-					const auto newAabbSize = (entity->getLocalSize() * parentEntity->getBaseSize());
-					const auto parentRotation = parentEntity->getBaseRotation();
-
-					Direction rotationDirection;
-					float rotation = 0.0f;
-					if((parentRotation.x > parentRotation.y) && (parentRotation.x > parentRotation.z))
+					if(foundPair == _modelEntityManager->getEntities().end())
 					{
-						rotationDirection = Direction::X;
-						rotation = parentRotation.x;
-					}
-					if((parentRotation.y > parentRotation.x) && (parentRotation.y > parentRotation.z))
-					{
-						rotationDirection = Direction::Y;
-						rotation = parentRotation.y;
-					}
-					if((parentRotation.z > parentRotation.x) && (parentRotation.z > parentRotation.y))
-					{
-						rotationDirection = Direction::Z;
-						rotation = parentRotation.z;
+						Logger::throwError("AabbEntityManager::update::1");
 					}
 
-					const bool is90Degrees = ((rotation > 45.0f) && (rotation < 135.0f));
-					const bool is180Degrees = ((rotation >= 135.0f) && (rotation <= 225.0f));
-					const bool is270Degrees = ((rotation > 225.0f) && (rotation < 315.0f));
-					const float roundedRotation = (is90Degrees ? 90.0f : is180Degrees ? 180.0f : is270Degrees ? 270.0f : 0.0f);
+					auto parentEntity = foundPair->second;
 
-					if(is90Degrees || is270Degrees)
+					if(entity->mustFollowParentEntityTransformation())
 					{
-						if(rotationDirection == Direction::X)
+						const auto newAabbSize = (entity->getLocalSize() * parentEntity->getBaseSize());
+						const auto parentRotation = parentEntity->getBaseRotation();
+
+						Direction rotationDirection;
+						float rotation = 0.0f;
+						if((parentRotation.x > parentRotation.y) && (parentRotation.x > parentRotation.z))
 						{
-							entity->setSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
+							rotationDirection = Direction::X;
+							rotation = parentRotation.x;
 						}
-						else if(rotationDirection == Direction::Y)
+						if((parentRotation.y > parentRotation.x) && (parentRotation.y > parentRotation.z))
 						{
-							entity->setSize(fvec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
+							rotationDirection = Direction::Y;
+							rotation = parentRotation.y;
 						}
-						else if(rotationDirection == Direction::Z)
+						if((parentRotation.z > parentRotation.x) && (parentRotation.z > parentRotation.y))
 						{
-							entity->setSize(fvec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
+							rotationDirection = Direction::Z;
+							rotation = parentRotation.z;
 						}
-					}
-					else
-					{
-						entity->setSize(newAabbSize);
-					}
 
-					if((roundedRotation == 0.0f) || entity->isCentered())
-					{
-						const fvec3 localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
-						entity->setPosition(parentEntity->getBasePosition() + localPosition);
-					}
-					else
-					{
-						fvec3 localPosition;
-						if(rotationDirection == Direction::Y)
+						const bool is90Degrees = ((rotation > 45.0f) && (rotation < 135.0f));
+						const bool is180Degrees = ((rotation >= 135.0f) && (rotation <= 225.0f));
+						const bool is270Degrees = ((rotation > 225.0f) && (rotation < 315.0f));
+						const float roundedRotation = (is90Degrees ? 90.0f : is180Degrees ? 180.0f : is270Degrees ? 270.0f : 0.0f);
+
+						if(is90Degrees || is270Degrees)
 						{
-							localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
+							if(rotationDirection == Direction::X)
+							{
+								entity->setSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
+							}
+							else if(rotationDirection == Direction::Y)
+							{
+								entity->setSize(fvec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
+							}
+							else if(rotationDirection == Direction::Z)
+							{
+								entity->setSize(fvec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
+							}
 						}
 						else
 						{
-							const fvec3 offset = fvec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
-							localPosition = (entity->getLocalPosition() + offset) * parentEntity->getBaseSize();
+							entity->setSize(newAabbSize);
 						}
 
-						mat44 rotationMatrix;
-						fvec3 rotationOffset;
-						if(rotationDirection == Direction::X)
+						if((roundedRotation == 0.0f) || entity->isCentered())
 						{
-							rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(roundedRotation));
-							rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.z) / 2.0f), 0.0f);
+							const fvec3 localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
+							entity->setPosition(parentEntity->getBasePosition() + localPosition);
 						}
-						else if(rotationDirection == Direction::Y)
+						else
 						{
-							rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(roundedRotation));
-							rotationOffset = fvec3(0.0f);
+							fvec3 localPosition;
+							if(rotationDirection == Direction::Y)
+							{
+								localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
+							}
+							else
+							{
+								const fvec3 offset = fvec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
+								localPosition = (entity->getLocalPosition() + offset) * parentEntity->getBaseSize();
+							}
+
+							mat44 rotationMatrix;
+							fvec3 rotationOffset;
+							if(rotationDirection == Direction::X)
+							{
+								rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(roundedRotation));
+								rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.z) / 2.0f), 0.0f);
+							}
+							else if(rotationDirection == Direction::Y)
+							{
+								rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(roundedRotation));
+								rotationOffset = fvec3(0.0f);
+							}
+							else if(rotationDirection == Direction::Z)
+							{
+								rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(roundedRotation));
+								rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.x) / 2.0f), 0.0f);
+							}
+
+							auto rotatedLocalPosition = (rotationMatrix * fvec4(localPosition.x, localPosition.y, localPosition.z, 1.0f));
+							rotatedLocalPosition += rotationOffset;
+							entity->setPosition(parentEntity->getBasePosition() + rotatedLocalPosition);
 						}
-						else if(rotationDirection == Direction::Z)
+					}
+
+					if(entity->mustFollowParentEntityVisibility())
+					{
+						entity->setVisible(parentEntity->isVisible());
+					}
+
+					if(parentEntity->isFrozen())
+					{
+						entity->setVisible(false);
+					}
+
+					break;
+				}
+				case AabbParentEntityType::QUAD3D:
+				{
+					auto foundPair = _quad3dEntityManager->getEntities().find(entity->getParentEntityID());
+					if(foundPair == _quad3dEntityManager->getEntities().end())
+					{
+						Logger::throwError("AabbEntityManager::update::2");
+					}
+
+					auto parentEntity = foundPair->second;
+
+					if(entity->mustFollowParentEntityTransformation())
+					{
+						const auto parentPosition = parentEntity->getPosition();
+						const auto parentRotation = parentEntity->getRotation();
+						const auto parentSize = parentEntity->getSize();
+
+						float refRotationX = Math::calculateReferenceAngle(parentRotation.x);
+						float refRotationY = Math::calculateReferenceAngle(parentRotation.y);
+						float refRotationZ = Math::calculateReferenceAngle(parentRotation.z);
+						refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
+						refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
+						refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
+
+						fvec3 newAabbSize;
+						if(refRotationX > refRotationY && refRotationX > refRotationZ)
 						{
-							rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(roundedRotation));
-							rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.x) / 2.0f), 0.0f);
+							const auto xSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.x)));
+							const auto xCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.x)));
+							newAabbSize.x = max(MIN_SIZE, parentSize.x);
+							newAabbSize.y = max(MIN_SIZE, (xCosRotation * parentSize.y));
+							newAabbSize.z = max(MIN_SIZE, (xSinRotation * parentSize.y));
+						}
+						else if(refRotationY > refRotationX && refRotationY > refRotationZ)
+						{
+							const auto ySinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.y)));
+							const auto yCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.y)));
+							newAabbSize.x = max(MIN_SIZE, (yCosRotation * parentSize.x));
+							newAabbSize.y = max(MIN_SIZE, parentSize.y);
+							newAabbSize.z = max(MIN_SIZE, (ySinRotation * parentSize.x));
+						}
+						else if(refRotationZ > refRotationX && refRotationZ > refRotationY)
+						{
+							const auto zSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.z)));
+							const auto zCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.z)));
+							newAabbSize.x = max(MIN_SIZE, ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y)));
+							newAabbSize.y = max(MIN_SIZE, ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y)));
+							newAabbSize.z = MIN_SIZE;
+						}
+						else
+						{
+							newAabbSize.x = max(MIN_SIZE, parentSize.x);
+							newAabbSize.y = max(MIN_SIZE, parentSize.y);
+							newAabbSize.z = MIN_SIZE;
 						}
 
-						auto rotatedLocalPosition = (rotationMatrix * fvec4(localPosition.x, localPosition.y, localPosition.z, 1.0f));
-						rotatedLocalPosition += rotationOffset;
-						entity->setPosition(parentEntity->getBasePosition() + rotatedLocalPosition);
+						auto newAabbPosition = (parentPosition + entity->getLocalPosition());
+						if(!entity->isCentered())
+						{
+							newAabbPosition.y -= ((newAabbSize.y - parentSize.y) / 2.0f);
+						}
+
+						entity->setPosition(newAabbPosition);
+						entity->setSize(newAabbSize);
 					}
-				}
 
-				if(entity->mustFollowParentEntityVisibility())
-				{
-					entity->setVisible(parentEntity->isVisible());
-				}
-
-				if(parentEntity->isFrozen())
-				{
-					entity->setVisible(false);
-				}
-
-				break;
-			}
-			case AabbParentEntityType::QUAD3D:
-			{
-				auto foundPair = _quad3dEntityManager->getEntities().find(entity->getParentEntityID());
-				if(foundPair == _quad3dEntityManager->getEntities().end())
-				{
-					Logger::throwError("AabbEntityManager::update::2");
-				}
-
-				auto parentEntity = foundPair->second;
-
-				if(entity->mustFollowParentEntityTransformation())
-				{
-					const auto parentPosition = parentEntity->getPosition();
-					const auto parentRotation = parentEntity->getRotation();
-					const auto parentSize = parentEntity->getSize();
-
-					float refRotationX = Math::calculateReferenceAngle(parentRotation.x);
-					float refRotationY = Math::calculateReferenceAngle(parentRotation.y);
-					float refRotationZ = Math::calculateReferenceAngle(parentRotation.z);
-					refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
-					refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
-					refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
-
-					fvec3 newAabbSize;
-					if(refRotationX > refRotationY && refRotationX > refRotationZ)
+					if(entity->mustFollowParentEntityVisibility())
 					{
-						const auto xSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.x)));
-						const auto xCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.x)));
-						newAabbSize.x = max(MIN_SIZE, parentSize.x);
-						newAabbSize.y = max(MIN_SIZE, (xCosRotation * parentSize.y));
-						newAabbSize.z = max(MIN_SIZE, (xSinRotation * parentSize.y));
-					}
-					else if(refRotationY > refRotationX && refRotationY > refRotationZ)
-					{
-						const auto ySinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.y)));
-						const auto yCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.y)));
-						newAabbSize.x = max(MIN_SIZE, (yCosRotation * parentSize.x));
-						newAabbSize.y = max(MIN_SIZE, parentSize.y);
-						newAabbSize.z = max(MIN_SIZE, (ySinRotation * parentSize.x));
-					}
-					else if(refRotationZ > refRotationX && refRotationZ > refRotationY)
-					{
-						const auto zSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.z)));
-						const auto zCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.z)));
-						newAabbSize.x = max(MIN_SIZE, ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y)));
-						newAabbSize.y = max(MIN_SIZE, ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y)));
-						newAabbSize.z = MIN_SIZE;
-					}
-					else
-					{
-						newAabbSize.x = max(MIN_SIZE, parentSize.x);
-						newAabbSize.y = max(MIN_SIZE, parentSize.y);
-						newAabbSize.z = MIN_SIZE;
+						entity->setVisible(parentEntity->isVisible());
 					}
 
-					auto newAabbPosition = (parentPosition + entity->getLocalPosition());
-					if(!entity->isCentered())
+					if(parentEntity->isFrozen())
 					{
-						newAabbPosition.y -= ((newAabbSize.y - parentSize.y) / 2.0f);
+						entity->setVisible(false);
 					}
 
-					entity->setPosition(newAabbPosition);
-					entity->setSize(newAabbSize);
+					break;
 				}
-
-				if(entity->mustFollowParentEntityVisibility())
+				case AabbParentEntityType::TEXT3D:
 				{
-					entity->setVisible(parentEntity->isVisible());
-				}
-
-				if(parentEntity->isFrozen())
-				{
-					entity->setVisible(false);
-				}
-
-				break;
-			}
-			case AabbParentEntityType::TEXT3D:
-			{
-				auto foundPair = _text3dEntityManager->getEntities().find(entity->getParentEntityID());
-				if(foundPair == _text3dEntityManager->getEntities().end())
-				{
-					Logger::throwError("AabbEntityManager::update::3");
-				}
-
-				auto parentEntity = foundPair->second;
-
-				if(entity->mustFollowParentEntityTransformation())
-				{
-					const auto parentPosition = parentEntity->getPosition();
-					const auto parentRotation = parentEntity->getRotation();
-					const auto parentSize = parentEntity->getSize();
-
-					float refRotationX = Math::calculateReferenceAngle(parentRotation.x);
-					float refRotationY = Math::calculateReferenceAngle(parentRotation.y);
-					float refRotationZ = Math::calculateReferenceAngle(parentRotation.z);
-					refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
-					refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
-					refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
-
-					fvec3 newAabbSize;
-					if(refRotationX > refRotationY && refRotationX > refRotationZ)
+					auto foundPair = _text3dEntityManager->getEntities().find(entity->getParentEntityID());
+					if(foundPair == _text3dEntityManager->getEntities().end())
 					{
-						const auto xSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.x)));
-						const auto xCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.x)));
-						newAabbSize.x = max(MIN_SIZE, parentSize.x);
-						newAabbSize.y = max(MIN_SIZE, (xCosRotation * parentSize.y));
-						newAabbSize.z = max(MIN_SIZE, (xSinRotation * parentSize.y));
-					}
-					else if(refRotationY > refRotationX && refRotationY > refRotationZ)
-					{
-						const auto ySinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.y)));
-						const auto yCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.y)));
-						newAabbSize.x = max(MIN_SIZE, (yCosRotation * parentSize.x));
-						newAabbSize.y = max(MIN_SIZE, parentSize.y);
-						newAabbSize.z = max(MIN_SIZE, (ySinRotation * parentSize.x));
-					}
-					else if(refRotationZ > refRotationX && refRotationZ > refRotationY)
-					{
-						const auto zSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.z)));
-						const auto zCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.z)));
-						newAabbSize.x = max(MIN_SIZE, ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y)));
-						newAabbSize.y = max(MIN_SIZE, ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y)));
-						newAabbSize.z = MIN_SIZE;
-					}
-					else
-					{
-						newAabbSize.x = max(MIN_SIZE, parentSize.x);
-						newAabbSize.y = max(MIN_SIZE, parentSize.y);
-						newAabbSize.z = MIN_SIZE;
+						Logger::throwError("AabbEntityManager::update::3");
 					}
 
-					auto newAabbPosition = (parentPosition + entity->getLocalPosition());
-					if(!entity->isCentered())
+					auto parentEntity = foundPair->second;
+
+					if(entity->mustFollowParentEntityTransformation())
 					{
-						newAabbPosition.y -= ((newAabbSize.y - parentSize.y) / 2.0f);
+						const auto parentPosition = parentEntity->getPosition();
+						const auto parentRotation = parentEntity->getRotation();
+						const auto parentSize = parentEntity->getSize();
+
+						float refRotationX = Math::calculateReferenceAngle(parentRotation.x);
+						float refRotationY = Math::calculateReferenceAngle(parentRotation.y);
+						float refRotationZ = Math::calculateReferenceAngle(parentRotation.z);
+						refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
+						refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
+						refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
+
+						fvec3 newAabbSize;
+						if(refRotationX > refRotationY && refRotationX > refRotationZ)
+						{
+							const auto xSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.x)));
+							const auto xCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.x)));
+							newAabbSize.x = max(MIN_SIZE, parentSize.x);
+							newAabbSize.y = max(MIN_SIZE, (xCosRotation * parentSize.y));
+							newAabbSize.z = max(MIN_SIZE, (xSinRotation * parentSize.y));
+						}
+						else if(refRotationY > refRotationX && refRotationY > refRotationZ)
+						{
+							const auto ySinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.y)));
+							const auto yCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.y)));
+							newAabbSize.x = max(MIN_SIZE, (yCosRotation * parentSize.x));
+							newAabbSize.y = max(MIN_SIZE, parentSize.y);
+							newAabbSize.z = max(MIN_SIZE, (ySinRotation * parentSize.x));
+						}
+						else if(refRotationZ > refRotationX && refRotationZ > refRotationY)
+						{
+							const auto zSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.z)));
+							const auto zCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.z)));
+							newAabbSize.x = max(MIN_SIZE, ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y)));
+							newAabbSize.y = max(MIN_SIZE, ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y)));
+							newAabbSize.z = MIN_SIZE;
+						}
+						else
+						{
+							newAabbSize.x = max(MIN_SIZE, parentSize.x);
+							newAabbSize.y = max(MIN_SIZE, parentSize.y);
+							newAabbSize.z = MIN_SIZE;
+						}
+
+						auto newAabbPosition = (parentPosition + entity->getLocalPosition());
+						if(!entity->isCentered())
+						{
+							newAabbPosition.y -= ((newAabbSize.y - parentSize.y) / 2.0f);
+						}
+
+						entity->setPosition(newAabbPosition);
+						entity->setSize(newAabbSize);
 					}
 
-					entity->setPosition(newAabbPosition);
-					entity->setSize(newAabbSize);
-				}
+					if(entity->mustFollowParentEntityVisibility())
+					{
+						entity->setVisible(parentEntity->isVisible());
+					}
 
-				if(entity->mustFollowParentEntityVisibility())
-				{
-					entity->setVisible(parentEntity->isVisible());
-				}
+					if(parentEntity->isFrozen())
+					{
+						entity->setVisible(false);
+					}
 
-				if(parentEntity->isFrozen())
-				{
-					entity->setVisible(false);
+					break;
 				}
-
-				break;
 			}
 		}
-
-		SKIP:;
+		else
+		{
+			entity->updateTransformation();
+		}
 
 		if(entity->isVisible())
 		{

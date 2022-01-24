@@ -16,13 +16,13 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				BEGIN1:;
-				const auto newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				const string newModelID = ("@@lamp_" + newID);
+				auto newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelID = ("@@lamp_" + newID);
 
-				if(_fe3d->pointlight_isExisting(newID))
+				while(_fe3d->pointlight_isExisting(newID))
 				{
-					goto BEGIN1;
+					newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelID = ("@@lamp_" + newID);
 				}
 
 				_fe3d->pointlight_create(newID);
@@ -96,12 +96,13 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				BEGIN2:;
-				const auto newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				const string newModelID = ("@@lamp_" + newID);
-				if(_fe3d->pointlight_isExisting(newID))
+				auto newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelID = ("@@lamp_" + newID);
+
+				while(_fe3d->pointlight_isExisting(newID))
 				{
-					goto BEGIN2;
+					newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelID = ("@@lamp_" + newID);
 				}
 
 				_fe3d->pointlight_create(newID);

@@ -16,13 +16,13 @@ void WorldEditor::_updateSoundPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				BEGIN1:;
-				const auto newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				const string newModelID = ("@@speaker_" + newID);
+				auto newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelID = ("@@speaker_" + newID);
 
-				if(_fe3d->sound3d_isExisting(newID))
+				while(_fe3d->sound3d_isExisting(newID))
 				{
-					goto BEGIN1;
+					newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelID = ("@@speaker_" + newID);
 				}
 
 				_fe3d->sound3d_create(newID, _fe3d->sound3d_getAudioPath(_currentTemplateSoundID));
@@ -111,12 +111,13 @@ void WorldEditor::_updateSoundPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				BEGIN2:;
-				const auto newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				const string newModelID = ("@@speaker_" + newID);
-				if(_fe3d->sound3d_isExisting(newID))
+				auto newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelID = ("@@speaker_" + newID);
+
+				while(_fe3d->sound3d_isExisting(newID))
 				{
-					goto BEGIN2;
+					newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelID = ("@@speaker_" + newID);
 				}
 
 				_fe3d->sound3d_create(newID, _fe3d->sound3d_getAudioPath(_currentTemplateSoundID));

@@ -16,13 +16,13 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				BEGIN1:;
-				const auto newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				const string newModelID = ("@@camera_" + newID);
+				auto newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelID = ("@@camera_" + newID);
 
-				if(_fe3d->reflection_isExisting(newID))
+				while(_fe3d->reflection_isExisting(newID))
 				{
-					goto BEGIN1;
+					newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelID = ("@@camera_" + newID);
 				}
 
 				_fe3d->reflection_create(newID);
@@ -94,12 +94,13 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				BEGIN2:;
-				const auto newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				const string newModelID = ("@@camera_" + newID);
-				if(_fe3d->reflection_isExisting(newID))
+				auto newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelID = ("@@camera_" + newID);
+
+				while(_fe3d->reflection_isExisting(newID))
 				{
-					goto BEGIN2;
+					newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelID = ("@@camera_" + newID);
 				}
 
 				_fe3d->reflection_create(newID);

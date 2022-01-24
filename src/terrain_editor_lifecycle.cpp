@@ -46,9 +46,9 @@ void TerrainEditor::load()
 
 void TerrainEditor::unload()
 {
-	for(const auto& ID : _loadedTerrainIDs)
+	for(const auto& id : _loadedTerrainIDs)
 	{
-		_fe3d->terrain_delete(ID);
+		_fe3d->terrain_delete(id);
 	}
 
 	_unloadGUI();

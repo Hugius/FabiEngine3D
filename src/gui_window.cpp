@@ -2,11 +2,11 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color)
+GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const fvec3& color)
 	:
 	_fe3d(fe3d),
-	_ID(ID),
-	_entityID("@" + parentID + "_" + ID),
+	_ID(id),
+	_entityID("@" + parentID + "_" + id),
 	_parentID(parentID),
 	_initialPosition(position),
 	_initialSize(size),
@@ -81,11 +81,11 @@ const fvec2& GuiWindow::getInitialSize() const
 	return _initialSize;
 }
 
-void GuiWindow::createScreen(const string& ID)
+void GuiWindow::createScreen(const string& id)
 {
 	for(const auto& screen : _screens)
 	{
-		if(screen->getID() == ID)
+		if(screen->getID() == id)
 		{
 			Logger::throwError("GuiWindow::createScreen");
 		}
@@ -94,22 +94,22 @@ void GuiWindow::createScreen(const string& ID)
 	auto windowPosition = _fe3d->quad2d_getPosition(_entityID);
 	auto windowSize = _fe3d->quad2d_getSize(_entityID);
 
-	_screens.push_back(make_shared<GuiScreen>(_fe3d, _parentID + "_" + _ID, ID, windowPosition, windowSize));
+	_screens.push_back(make_shared<GuiScreen>(_fe3d, _parentID + "_" + _ID, id, windowPosition, windowSize));
 }
 
-void GuiWindow::deleteScreen(const string& ID)
+void GuiWindow::deleteScreen(const string& id)
 {
 	bool isFound = false;
 	for(size_t i = 0; i < _screens.size(); i++)
 	{
-		if(_screens[i]->getID() == ID)
+		if(_screens[i]->getID() == id)
 		{
 			_screens.erase(_screens.begin() + i);
 			isFound = true;
 		}
 	}
 
-	if(ID == _activeScreenID)
+	if(id == _activeScreenID)
 	{
 		_activeScreenID = "";
 	}
@@ -120,14 +120,14 @@ void GuiWindow::deleteScreen(const string& ID)
 	}
 }
 
-void GuiWindow::setActiveScreen(const string& ID)
+void GuiWindow::setActiveScreen(const string& id)
 {
 	if(!_activeScreenID.empty())
 	{
 		getActiveScreen()->hide();
 	}
 
-	_activeScreenID = ID;
+	_activeScreenID = id;
 	getActiveScreen()->show();
 }
 
@@ -141,11 +141,11 @@ shared_ptr<GuiScreen> GuiWindow::getActiveScreen() const
 	return getScreen(_activeScreenID);
 }
 
-shared_ptr<GuiScreen> GuiWindow::getScreen(const string& ID) const
+shared_ptr<GuiScreen> GuiWindow::getScreen(const string& id) const
 {
 	for(const auto& screen : _screens)
 	{
-		if(ID == screen->getID())
+		if(id == screen->getID())
 		{
 			return screen;
 		}

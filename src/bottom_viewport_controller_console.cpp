@@ -201,19 +201,19 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end());
 }
 
-void BottomViewportController::_deleteConsoleMessage(const string& ID)
+void BottomViewportController::_deleteConsoleMessage(const string& id)
 {
 	auto window = _gui->getBottomViewport()->getWindow("console");
 	auto screen = window->getScreen("main");
 
-	screen->deleteTextField(ID + "_time");
+	screen->deleteTextField(id + "_time");
 
-	screen->deleteTextField(ID + "_separator");
+	screen->deleteTextField(id + "_separator");
 
 	unsigned int index = 0;
-	while(screen->isTextFieldExisting(ID + "_msg_" + to_string(index)))
+	while(screen->isTextFieldExisting(id + "_msg_" + to_string(index)))
 	{
-		screen->deleteTextField(ID + "_msg_" + to_string(index));
+		screen->deleteTextField(id + "_msg_" + to_string(index));
 		index++;
 	}
 }

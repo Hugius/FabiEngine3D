@@ -1,9 +1,9 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::terrain_create(const string& ID, const string& heightMapPath)
+void EngineInterface::terrain_create(const string& id, const string& heightMapPath)
 {
-	_core->getTerrainEntityManager()->createEntity(ID, heightMapPath);
+	_core->getTerrainEntityManager()->createEntity(id, heightMapPath);
 }
 
 void EngineInterface::terrain_deleteAll()
@@ -16,38 +16,38 @@ void EngineInterface::terrain_deleteAll()
 	_core->getTerrainEntityManager()->selectEntity("");
 }
 
-void EngineInterface::terrain_delete(const string& ID)
+void EngineInterface::terrain_delete(const string& id)
 {
-	_core->getTerrainEntityManager()->deleteEntity(ID);
+	_core->getTerrainEntityManager()->deleteEntity(id);
 }
 
-void EngineInterface::terrain_setVisible(const string& ID, bool value)
+void EngineInterface::terrain_setVisible(const string& id, bool value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setVisible(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setVisible(value);
 }
 
-void EngineInterface::terrain_select(const string& ID)
+void EngineInterface::terrain_select(const string& id)
 {
-	_core->getTerrainEntityManager()->selectEntity(ID);
+	_core->getTerrainEntityManager()->selectEntity(id);
 }
 
-void EngineInterface::terrain_setMaxHeight(const string& ID, float value)
+void EngineInterface::terrain_setMaxHeight(const string& id, float value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setMaxHeight(value);
-	_core->getTerrainEntityManager()->loadMesh(ID);
+	_core->getTerrainEntityManager()->getEntity(id)->setMaxHeight(value);
+	_core->getTerrainEntityManager()->loadMesh(id);
 }
 
-void EngineInterface::terrain_setTextureRepeat(const string& ID, float value)
+void EngineInterface::terrain_setTextureRepeat(const string& id, float value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setTextureRepeat(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setTextureRepeat(value);
 }
 
-void EngineInterface::terrain_setDiffuseMap(const string& ID, const string& value)
+void EngineInterface::terrain_setDiffuseMap(const string& id, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setDiffuseMap(nullptr);
-		_core->getTerrainEntityManager()->getEntity(ID)->setDiffuseMapPath("");
+		_core->getTerrainEntityManager()->getEntity(id)->setDiffuseMap(nullptr);
+		_core->getTerrainEntityManager()->getEntity(id)->setDiffuseMapPath("");
 	}
 	else
 	{
@@ -62,17 +62,17 @@ void EngineInterface::terrain_setDiffuseMap(const string& ID, const string& valu
 			_core->getTextureBufferCache()->store2dBuffer(value, texture);
 		}
 
-		_core->getTerrainEntityManager()->getEntity(ID)->setDiffuseMap(texture);
-		_core->getTerrainEntityManager()->getEntity(ID)->setDiffuseMapPath(value);
+		_core->getTerrainEntityManager()->getEntity(id)->setDiffuseMap(texture);
+		_core->getTerrainEntityManager()->getEntity(id)->setDiffuseMapPath(value);
 	}
 }
 
-void EngineInterface::terrain_setNormalMap(const string& ID, const string& value)
+void EngineInterface::terrain_setNormalMap(const string& id, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setNormalMap(nullptr);
-		_core->getTerrainEntityManager()->getEntity(ID)->setNormalMapPath("");
+		_core->getTerrainEntityManager()->getEntity(id)->setNormalMap(nullptr);
+		_core->getTerrainEntityManager()->getEntity(id)->setNormalMapPath("");
 	}
 	else
 	{
@@ -87,17 +87,17 @@ void EngineInterface::terrain_setNormalMap(const string& ID, const string& value
 			_core->getTextureBufferCache()->store2dBuffer(value, texture);
 		}
 
-		_core->getTerrainEntityManager()->getEntity(ID)->setNormalMap(texture);
-		_core->getTerrainEntityManager()->getEntity(ID)->setNormalMapPath(value);
+		_core->getTerrainEntityManager()->getEntity(id)->setNormalMap(texture);
+		_core->getTerrainEntityManager()->getEntity(id)->setNormalMapPath(value);
 	}
 }
 
-void EngineInterface::terrain_setBlendMap(const string& ID, const string& value)
+void EngineInterface::terrain_setBlendMap(const string& id, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlendMap(nullptr);
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlendMapPath("");
+		_core->getTerrainEntityManager()->getEntity(id)->setBlendMap(nullptr);
+		_core->getTerrainEntityManager()->getEntity(id)->setBlendMapPath("");
 	}
 	else
 	{
@@ -112,17 +112,17 @@ void EngineInterface::terrain_setBlendMap(const string& ID, const string& value)
 			_core->getTextureBufferCache()->store2dBuffer(value, texture);
 		}
 
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlendMap(texture);
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlendMapPath(value);
+		_core->getTerrainEntityManager()->getEntity(id)->setBlendMap(texture);
+		_core->getTerrainEntityManager()->getEntity(id)->setBlendMapPath(value);
 	}
 }
 
-void EngineInterface::terrain_setRedDiffuseMap(const string& ID, const string& value)
+void EngineInterface::terrain_setRedDiffuseMap(const string& id, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setRedDiffuseMap(nullptr);
-		_core->getTerrainEntityManager()->getEntity(ID)->setRedDiffuseMapPath("");
+		_core->getTerrainEntityManager()->getEntity(id)->setRedDiffuseMap(nullptr);
+		_core->getTerrainEntityManager()->getEntity(id)->setRedDiffuseMapPath("");
 	}
 	else
 	{
@@ -137,17 +137,17 @@ void EngineInterface::terrain_setRedDiffuseMap(const string& ID, const string& v
 			_core->getTextureBufferCache()->store2dBuffer(value, texture);
 		}
 
-		_core->getTerrainEntityManager()->getEntity(ID)->setRedDiffuseMap(texture);
-		_core->getTerrainEntityManager()->getEntity(ID)->setRedDiffuseMapPath(value);
+		_core->getTerrainEntityManager()->getEntity(id)->setRedDiffuseMap(texture);
+		_core->getTerrainEntityManager()->getEntity(id)->setRedDiffuseMapPath(value);
 	}
 }
 
-void EngineInterface::terrain_setGreenDiffuseMap(const string& ID, const string& value)
+void EngineInterface::terrain_setGreenDiffuseMap(const string& id, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setGreenDiffuseMap(nullptr);
-		_core->getTerrainEntityManager()->getEntity(ID)->setGreenDiffuseMapPath("");
+		_core->getTerrainEntityManager()->getEntity(id)->setGreenDiffuseMap(nullptr);
+		_core->getTerrainEntityManager()->getEntity(id)->setGreenDiffuseMapPath("");
 	}
 	else
 	{
@@ -162,17 +162,17 @@ void EngineInterface::terrain_setGreenDiffuseMap(const string& ID, const string&
 			_core->getTextureBufferCache()->store2dBuffer(value, texture);
 		}
 
-		_core->getTerrainEntityManager()->getEntity(ID)->setGreenDiffuseMap(texture);
-		_core->getTerrainEntityManager()->getEntity(ID)->setGreenDiffuseMapPath(value);
+		_core->getTerrainEntityManager()->getEntity(id)->setGreenDiffuseMap(texture);
+		_core->getTerrainEntityManager()->getEntity(id)->setGreenDiffuseMapPath(value);
 	}
 }
 
-void EngineInterface::terrain_setBlueDiffuseMap(const string& ID, const string& value)
+void EngineInterface::terrain_setBlueDiffuseMap(const string& id, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlueDiffuseMap(nullptr);
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlueDiffuseMapPath("");
+		_core->getTerrainEntityManager()->getEntity(id)->setBlueDiffuseMap(nullptr);
+		_core->getTerrainEntityManager()->getEntity(id)->setBlueDiffuseMapPath("");
 	}
 	else
 	{
@@ -187,17 +187,17 @@ void EngineInterface::terrain_setBlueDiffuseMap(const string& ID, const string& 
 			_core->getTextureBufferCache()->store2dBuffer(value, texture);
 		}
 
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlueDiffuseMap(texture);
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlueDiffuseMapPath(value);
+		_core->getTerrainEntityManager()->getEntity(id)->setBlueDiffuseMap(texture);
+		_core->getTerrainEntityManager()->getEntity(id)->setBlueDiffuseMapPath(value);
 	}
 }
 
-void EngineInterface::terrain_setRedNormalMap(const string& ID, const string& value)
+void EngineInterface::terrain_setRedNormalMap(const string& id, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setRedNormalMap(nullptr);
-		_core->getTerrainEntityManager()->getEntity(ID)->setRedNormalMapPath("");
+		_core->getTerrainEntityManager()->getEntity(id)->setRedNormalMap(nullptr);
+		_core->getTerrainEntityManager()->getEntity(id)->setRedNormalMapPath("");
 	}
 	else
 	{
@@ -212,17 +212,17 @@ void EngineInterface::terrain_setRedNormalMap(const string& ID, const string& va
 			_core->getTextureBufferCache()->store2dBuffer(value, texture);
 		}
 
-		_core->getTerrainEntityManager()->getEntity(ID)->setRedNormalMap(texture);
-		_core->getTerrainEntityManager()->getEntity(ID)->setRedNormalMapPath(value);
+		_core->getTerrainEntityManager()->getEntity(id)->setRedNormalMap(texture);
+		_core->getTerrainEntityManager()->getEntity(id)->setRedNormalMapPath(value);
 	}
 }
 
-void EngineInterface::terrain_setGreenNormalMap(const string& ID, const string& value)
+void EngineInterface::terrain_setGreenNormalMap(const string& id, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setGreenNormalMap(nullptr);
-		_core->getTerrainEntityManager()->getEntity(ID)->setGreenNormalMapPath("");
+		_core->getTerrainEntityManager()->getEntity(id)->setGreenNormalMap(nullptr);
+		_core->getTerrainEntityManager()->getEntity(id)->setGreenNormalMapPath("");
 	}
 	else
 	{
@@ -237,17 +237,17 @@ void EngineInterface::terrain_setGreenNormalMap(const string& ID, const string& 
 			_core->getTextureBufferCache()->store2dBuffer(value, texture);
 		}
 
-		_core->getTerrainEntityManager()->getEntity(ID)->setGreenNormalMap(texture);
-		_core->getTerrainEntityManager()->getEntity(ID)->setGreenNormalMapPath(value);
+		_core->getTerrainEntityManager()->getEntity(id)->setGreenNormalMap(texture);
+		_core->getTerrainEntityManager()->getEntity(id)->setGreenNormalMapPath(value);
 	}
 }
 
-void EngineInterface::terrain_setBlueNormalMap(const string& ID, const string& value)
+void EngineInterface::terrain_setBlueNormalMap(const string& id, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlueNormalMap(nullptr);
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlueNormalMapPath("");
+		_core->getTerrainEntityManager()->getEntity(id)->setBlueNormalMap(nullptr);
+		_core->getTerrainEntityManager()->getEntity(id)->setBlueNormalMapPath("");
 	}
 	else
 	{
@@ -262,154 +262,154 @@ void EngineInterface::terrain_setBlueNormalMap(const string& ID, const string& v
 			_core->getTextureBufferCache()->store2dBuffer(value, texture);
 		}
 
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlueNormalMap(texture);
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlueNormalMapPath(value);
+		_core->getTerrainEntityManager()->getEntity(id)->setBlueNormalMap(texture);
+		_core->getTerrainEntityManager()->getEntity(id)->setBlueNormalMapPath(value);
 	}
 }
 
-void EngineInterface::terrain_setRedTextureRepeat(const string& ID, float value)
+void EngineInterface::terrain_setRedTextureRepeat(const string& id, float value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setRedTextureRepeat(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setRedTextureRepeat(value);
 }
 
-void EngineInterface::terrain_setGreenTextureRepeat(const string& ID, float value)
+void EngineInterface::terrain_setGreenTextureRepeat(const string& id, float value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setGreenTextureRepeat(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setGreenTextureRepeat(value);
 }
 
-void EngineInterface::terrain_setBlueTextureRepeat(const string& ID, float value)
+void EngineInterface::terrain_setBlueTextureRepeat(const string& id, float value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setBlueTextureRepeat(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setBlueTextureRepeat(value);
 }
 
-void EngineInterface::terrain_setSpecularShininess(const string& ID, float value)
+void EngineInterface::terrain_setSpecularShininess(const string& id, float value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setSpecularShininess(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setSpecularShininess(value);
 }
 
-void EngineInterface::terrain_setSpecularIntensity(const string& ID, float value)
+void EngineInterface::terrain_setSpecularIntensity(const string& id, float value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setSpecularIntensity(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setSpecularIntensity(value);
 }
 
-void EngineInterface::terrain_setLightness(const string& ID, float value)
+void EngineInterface::terrain_setLightness(const string& id, float value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setLightness(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setLightness(value);
 }
 
-void EngineInterface::terrain_setSpecular(const string& ID, bool value)
+void EngineInterface::terrain_setSpecular(const string& id, bool value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setSpecular(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setSpecular(value);
 }
 
-void EngineInterface::terrain_setWireframed(const string& ID, bool value)
+void EngineInterface::terrain_setWireframed(const string& id, bool value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setWireframed(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setWireframed(value);
 }
 
-void EngineInterface::terrain_setWireframeColor(const string& ID, const fvec3& value)
+void EngineInterface::terrain_setWireframeColor(const string& id, const fvec3& value)
 {
-	_core->getTerrainEntityManager()->getEntity(ID)->setWireframeColor(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setWireframeColor(value);
 }
 
-const bool EngineInterface::terrain_isExisting(const string& ID) const
+const bool EngineInterface::terrain_isExisting(const string& id) const
 {
-	return _core->getTerrainEntityManager()->isEntityExisting(ID);
+	return _core->getTerrainEntityManager()->isEntityExisting(id);
 }
 
-const bool EngineInterface::terrain_isVisible(const string& ID) const
+const bool EngineInterface::terrain_isVisible(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->isVisible();
+	return _core->getTerrainEntityManager()->getEntity(id)->isVisible();
 }
 
-const bool EngineInterface::terrain_isSpecular(const string& ID) const
+const bool EngineInterface::terrain_isSpecular(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->isSpecular();
+	return _core->getTerrainEntityManager()->getEntity(id)->isSpecular();
 }
 
-const bool EngineInterface::terrain_isWireframed(const string& ID) const
+const bool EngineInterface::terrain_isWireframed(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->isWireframed();
+	return _core->getTerrainEntityManager()->getEntity(id)->isWireframed();
 }
 
-const float EngineInterface::terrain_getSize(const string& ID) const
+const float EngineInterface::terrain_getSize(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getSize();
+	return _core->getTerrainEntityManager()->getEntity(id)->getSize();
 }
 
-const float EngineInterface::terrain_getMaxHeight(const string& ID) const
+const float EngineInterface::terrain_getMaxHeight(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getMaxHeight();
+	return _core->getTerrainEntityManager()->getEntity(id)->getMaxHeight();
 }
 
-const float EngineInterface::terrain_getTextureRepeat(const string& ID) const
+const float EngineInterface::terrain_getTextureRepeat(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getTextureRepeat();
+	return _core->getTerrainEntityManager()->getEntity(id)->getTextureRepeat();
 }
 
-const bool EngineInterface::terrain_isInside(const string& ID, float x, float z) const
+const bool EngineInterface::terrain_isInside(const string& id, float x, float z) const
 {
-	return _core->getTerrainEntityManager()->isInside(ID, x, z);
+	return _core->getTerrainEntityManager()->isInside(id, x, z);
 }
 
-const bool EngineInterface::terrain_hasBlendMap(const string& ID) const
+const bool EngineInterface::terrain_hasBlendMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->hasBlendMap();
+	return _core->getTerrainEntityManager()->getEntity(id)->hasBlendMap();
 }
 
-const bool EngineInterface::terrain_hasDiffuseMap(const string& ID) const
+const bool EngineInterface::terrain_hasDiffuseMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->hasDiffuseMap();
+	return _core->getTerrainEntityManager()->getEntity(id)->hasDiffuseMap();
 }
 
-const bool EngineInterface::terrain_hasRedDiffuseMap(const string& ID) const
+const bool EngineInterface::terrain_hasRedDiffuseMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->hasRedDiffuseMap();
+	return _core->getTerrainEntityManager()->getEntity(id)->hasRedDiffuseMap();
 }
 
-const bool EngineInterface::terrain_hasGreenDiffuseMap(const string& ID) const
+const bool EngineInterface::terrain_hasGreenDiffuseMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->hasGreenDiffuseMap();
+	return _core->getTerrainEntityManager()->getEntity(id)->hasGreenDiffuseMap();
 }
 
-const bool EngineInterface::terrain_hasBlueDiffuseMap(const string& ID) const
+const bool EngineInterface::terrain_hasBlueDiffuseMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->hasBlueDiffuseMap();
+	return _core->getTerrainEntityManager()->getEntity(id)->hasBlueDiffuseMap();
 }
 
-const bool EngineInterface::terrain_hasNormalMap(const string& ID) const
+const bool EngineInterface::terrain_hasNormalMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->hasNormalMap();
+	return _core->getTerrainEntityManager()->getEntity(id)->hasNormalMap();
 }
 
-const bool EngineInterface::terrain_hasRedNormalMap(const string& ID) const
+const bool EngineInterface::terrain_hasRedNormalMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->hasRedNormalMap();
+	return _core->getTerrainEntityManager()->getEntity(id)->hasRedNormalMap();
 }
 
-const bool EngineInterface::terrain_hasGreenNormalMap(const string& ID) const
+const bool EngineInterface::terrain_hasGreenNormalMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->hasGreenNormalMap();
+	return _core->getTerrainEntityManager()->getEntity(id)->hasGreenNormalMap();
 }
 
-const bool EngineInterface::terrain_hasBlueNormalMap(const string& ID) const
+const bool EngineInterface::terrain_hasBlueNormalMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->hasBlueNormalMap();
+	return _core->getTerrainEntityManager()->getEntity(id)->hasBlueNormalMap();
 }
 
-const float EngineInterface::terrain_getPixelHeight(const string& ID, float x, float z) const
+const float EngineInterface::terrain_getPixelHeight(const string& id, float x, float z) const
 {
-	return _core->getTerrainEntityManager()->getPixelHeight(ID, x, z);
+	return _core->getTerrainEntityManager()->getPixelHeight(id, x, z);
 }
 
-const float EngineInterface::terrain_getSpecularShininess(const string& ID) const
+const float EngineInterface::terrain_getSpecularShininess(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getSpecularShininess();
+	return _core->getTerrainEntityManager()->getEntity(id)->getSpecularShininess();
 }
 
-const float EngineInterface::terrain_getSpecularIntensity(const string& ID) const
+const float EngineInterface::terrain_getSpecularIntensity(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getSpecularIntensity();
+	return _core->getTerrainEntityManager()->getEntity(id)->getSpecularIntensity();
 }
 
 const string EngineInterface::terrain_getSelectedID() const
@@ -434,77 +434,77 @@ const vector<string> EngineInterface::terrain_getIDs() const
 	return result;
 }
 
-const string& EngineInterface::terrain_getDiffuseMapPath(const string& ID) const
+const string& EngineInterface::terrain_getDiffuseMapPath(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getDiffuseMapPath();
+	return _core->getTerrainEntityManager()->getEntity(id)->getDiffuseMapPath();
 }
 
-const string& EngineInterface::terrain_getNormalMapPath(const string& ID) const
+const string& EngineInterface::terrain_getNormalMapPath(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getNormalMapPath();
+	return _core->getTerrainEntityManager()->getEntity(id)->getNormalMapPath();
 }
 
-const string& EngineInterface::terrain_getBlendMapPath(const string& ID) const
+const string& EngineInterface::terrain_getBlendMapPath(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getBlendMapPath();
+	return _core->getTerrainEntityManager()->getEntity(id)->getBlendMapPath();
 }
 
-const string& EngineInterface::terrain_getRedDiffuseMapPath(const string& ID) const
+const string& EngineInterface::terrain_getRedDiffuseMapPath(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getRedDiffuseMapPath();
+	return _core->getTerrainEntityManager()->getEntity(id)->getRedDiffuseMapPath();
 }
 
-const string& EngineInterface::terrain_getGreenDiffuseMapPath(const string& ID) const
+const string& EngineInterface::terrain_getGreenDiffuseMapPath(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getGreenDiffuseMapPath();
+	return _core->getTerrainEntityManager()->getEntity(id)->getGreenDiffuseMapPath();
 }
 
-const string& EngineInterface::terrain_getBlueDiffuseMapPath(const string& ID) const
+const string& EngineInterface::terrain_getBlueDiffuseMapPath(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getBlueDiffuseMapPath();
+	return _core->getTerrainEntityManager()->getEntity(id)->getBlueDiffuseMapPath();
 }
 
-const string& EngineInterface::terrain_getRedNormalMapPath(const string& ID) const
+const string& EngineInterface::terrain_getRedNormalMapPath(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getRedNormalMapPath();
+	return _core->getTerrainEntityManager()->getEntity(id)->getRedNormalMapPath();
 }
 
-const string& EngineInterface::terrain_getGreenNormalMapPath(const string& ID) const
+const string& EngineInterface::terrain_getGreenNormalMapPath(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getGreenNormalMapPath();
+	return _core->getTerrainEntityManager()->getEntity(id)->getGreenNormalMapPath();
 }
 
-const string& EngineInterface::terrain_getBlueNormalMapPath(const string& ID) const
+const string& EngineInterface::terrain_getBlueNormalMapPath(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getBlueNormalMapPath();
+	return _core->getTerrainEntityManager()->getEntity(id)->getBlueNormalMapPath();
 }
 
-const fvec3& EngineInterface::terrain_getWireframeColor(const string& ID) const
+const fvec3& EngineInterface::terrain_getWireframeColor(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getWireframeColor();
+	return _core->getTerrainEntityManager()->getEntity(id)->getWireframeColor();
 }
 
-const float EngineInterface::terrain_getRedTextureRepeat(const string& ID) const
+const float EngineInterface::terrain_getRedTextureRepeat(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getRedTextureRepeat();
+	return _core->getTerrainEntityManager()->getEntity(id)->getRedTextureRepeat();
 }
 
-const float EngineInterface::terrain_getGreenTextureRepeat(const string& ID) const
+const float EngineInterface::terrain_getGreenTextureRepeat(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getGreenTextureRepeat();
+	return _core->getTerrainEntityManager()->getEntity(id)->getGreenTextureRepeat();
 }
 
-const float EngineInterface::terrain_getBlueTextureRepeat(const string& ID) const
+const float EngineInterface::terrain_getBlueTextureRepeat(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getBlueTextureRepeat();
+	return _core->getTerrainEntityManager()->getEntity(id)->getBlueTextureRepeat();
 }
 
-const float EngineInterface::terrain_getLightness(const string& ID) const
+const float EngineInterface::terrain_getLightness(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getLightness();
+	return _core->getTerrainEntityManager()->getEntity(id)->getLightness();
 }
 
-const string& EngineInterface::terrain_getHeightMapPath(const string& ID) const
+const string& EngineInterface::terrain_getHeightMapPath(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(ID)->getHeightMapPath();
+	return _core->getTerrainEntityManager()->getEntity(id)->getHeightMapPath();
 }

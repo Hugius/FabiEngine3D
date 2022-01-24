@@ -5,9 +5,9 @@
 class Script final
 {
 public:
-	void createScriptFile(const string& ID);
-	void renameScriptFile(const string& ID, const string& newID);
-	void deleteScriptFile(const string& ID);
+	void createScriptFile(const string& id);
+	void renameScriptFile(const string& id, const string& newID);
+	void deleteScriptFile(const string& id);
 	void clear();
 
 	const vector<string> getScriptFileIDs() const;
@@ -17,10 +17,10 @@ public:
 	const unsigned int getScriptFileCount() const;
 	const unsigned int getTotalLineCount() const;
 
-	const bool isScriptFileExisting(const string& ID) const;
+	const bool isScriptFileExisting(const string& id) const;
 	const bool isEmpty();
 
-	shared_ptr<ScriptFile> getScriptFile(const string& ID) const;
+	shared_ptr<ScriptFile> getScriptFile(const string& id) const;
 
 private:
 	vector<shared_ptr<ScriptFile>> _scriptFiles;

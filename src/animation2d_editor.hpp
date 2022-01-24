@@ -54,7 +54,7 @@ public:
 	const unsigned int getQuad2dAnimationFramestep(const string& animationID, const string& quadID) const;
 
 	const bool isLoaded() const;
-	const bool isAnimationExisting(const string& ID) const;
+	const bool isAnimationExisting(const string& id) const;
 	const bool isQuad3dAnimationStarted(const string& animationID, const string& quadID) const;
 	const bool isQuad3dAnimationPlaying(const string& animationID, const string& quadID) const;
 	const bool isQuad3dAnimationPaused(const string& animationID, const string& quadID) const;
@@ -77,9 +77,9 @@ private:
 	void _updateQuad3dAnimationExecution();
 	void _updateQuad2dAnimationExecution();
 	void _updateMiscellaneous();
-	void _deleteAnimation(const string& ID);
+	void _deleteAnimation(const string& id);
 
-	shared_ptr<Animation2d> _getAnimation(const string& ID) const;
+	shared_ptr<Animation2d> _getAnimation(const string& id) const;
 
 	static inline const string PREVIEW_QUAD_ID = "@@preview_quad3d";
 	set<pair<string, string>> _quad3dAnimationsToStop;

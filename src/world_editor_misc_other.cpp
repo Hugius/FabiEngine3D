@@ -89,33 +89,33 @@ void WorldEditor::unloadEditorWorld()
 		_fe3d->text3d_delete(key);
 	}
 
-	for(const auto& ID : _loadedPointlightIDs)
+	for(const auto& id : _loadedPointlightIDs)
 	{
-		_fe3d->pointlight_delete(ID);
+		_fe3d->pointlight_delete(id);
 
 		if(!_currentWorldID.empty())
 		{
-			_fe3d->model_delete("@@lamp_" + ID);
+			_fe3d->model_delete("@@lamp_" + id);
 		}
 	}
 
-	for(const auto& ID : _loadedSpotlightIDs)
+	for(const auto& id : _loadedSpotlightIDs)
 	{
-		_fe3d->spotlight_delete(ID);
+		_fe3d->spotlight_delete(id);
 
 		if(!_currentWorldID.empty())
 		{
-			_fe3d->model_delete("@@torch_" + ID);
+			_fe3d->model_delete("@@torch_" + id);
 		}
 	}
 
-	for(const auto& ID : _loadedReflectionIDs)
+	for(const auto& id : _loadedReflectionIDs)
 	{
-		_fe3d->reflection_delete(ID);
+		_fe3d->reflection_delete(id);
 
 		if(!_currentWorldID.empty())
 		{
-			_fe3d->model_delete("@@camera_" + ID);
+			_fe3d->model_delete("@@camera_" + id);
 		}
 	}
 
@@ -156,9 +156,9 @@ const string& WorldEditor::getLoadedWorldID() const
 	return _loadedWorldID;
 }
 
-void WorldEditor::setCurrentProjectID(const string& ID)
+void WorldEditor::setCurrentProjectID(const string& id)
 {
-	_currentProjectID = ID;
+	_currentProjectID = id;
 }
 
 const vector<string> WorldEditor::_getWorldIDs() const
@@ -185,11 +185,11 @@ const vector<string> WorldEditor::_getWorldIDs() const
 	return worldIDs;
 }
 
-void WorldEditor::_deleteWorldFile(const string& ID)
+void WorldEditor::_deleteWorldFile(const string& id)
 {
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\" + ID + ".fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\" + id + ".fe3d");
 
 	if(Tools::isFileExisting(filePath))
 	{
@@ -197,7 +197,7 @@ void WorldEditor::_deleteWorldFile(const string& ID)
 	}
 	else
 	{
-		Logger::throwWarning("Cannot delete world with ID \"" + ID + "\"!");
+		Logger::throwWarning("Cannot delete world with id \"" + id + "\"!");
 	}
 }
 

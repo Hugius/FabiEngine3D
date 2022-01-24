@@ -33,13 +33,13 @@ void Text2dEditor::_updateTextCreating()
 		{
 			if(newTextID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Text ID cannot contain any spaces!");
+				Logger::throwWarning("Text id cannot contain any spaces!");
 				return;
 			}
 
 			if(newTextID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Text ID cannot contain '@'!");
+				Logger::throwWarning("Text id cannot contain '@'!");
 				return;
 			}
 
@@ -47,7 +47,7 @@ void Text2dEditor::_updateTextCreating()
 
 			if(find(_loadedTextIDs.begin(), _loadedTextIDs.end(), newTextID) != _loadedTextIDs.end())
 			{
-				Logger::throwWarning("Text with ID \"" + newTextID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Text with id \"" + newTextID.substr(1) + "\" already exists!");
 				return;
 			}
 

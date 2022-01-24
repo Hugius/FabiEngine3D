@@ -363,7 +363,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				string selfSearchID = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
 				if(!_fe3d->aabb_isExisting(selfSearchID))
 				{
-					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
+					_throwScriptError("requested model AABB with id \"" + selfSearchID + "\" does not exist!");
 					return true;
 				}
 
@@ -427,7 +427,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				string selfSearchID = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
 				if(!_fe3d->aabb_isExisting(selfSearchID))
 				{
-					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
+					_throwScriptError("requested model AABB with id \"" + selfSearchID + "\" does not exist!");
 					return true;
 				}
 
@@ -475,7 +475,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				string selfSearchID = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
 				if(!_fe3d->aabb_isExisting(selfSearchID))
 				{
-					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
+					_throwScriptError("requested model AABB with id \"" + selfSearchID + "\" does not exist!");
 					return true;
 				}
 

@@ -16,11 +16,11 @@ const bool Animation3dEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-void Animation3dEditor::_deleteAnimation(const string& ID)
+void Animation3dEditor::_deleteAnimation(const string& id)
 {
 	for(size_t i = 0; i < _animations.size(); i++)
 	{
-		if(_animations[i]->getID() == ID)
+		if(_animations[i]->getID() == id)
 		{
 			_animations.erase(_animations.begin() + i);
 			return;
@@ -53,11 +53,11 @@ const bool Animation3dEditor::_comparePartIDs(vector<string> first, vector<strin
 	return true;
 }
 
-shared_ptr<Animation3d> Animation3dEditor::_getAnimation(const string& ID) const
+shared_ptr<Animation3d> Animation3dEditor::_getAnimation(const string& id) const
 {
 	for(const auto& animation : _animations)
 	{
-		if(animation->getID() == ID)
+		if(animation->getID() == id)
 		{
 			return animation;
 		}
@@ -158,11 +158,11 @@ const unsigned int Animation3dEditor::getModelAnimationFrameIndex(const string& 
 	return _startedModelAnimations.at(make_pair(animationID, modelID)).getFrameIndex();
 }
 
-const bool Animation3dEditor::isAnimationExisting(const string& ID) const
+const bool Animation3dEditor::isAnimationExisting(const string& id) const
 {
 	for(const auto& animation : _animations)
 	{
-		if(animation->getID() == ID)
+		if(animation->getID() == id)
 		{
 			return true;
 		}

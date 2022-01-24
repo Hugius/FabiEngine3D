@@ -11,7 +11,7 @@ using std::string;
 class MeshPart final
 {
 public:
-	MeshPart(const string& ID);
+	MeshPart(const string& id);
 
 	void addPosition(const fvec3& value);
 	void addUv(const fvec2& value);

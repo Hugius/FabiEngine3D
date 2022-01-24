@@ -3,9 +3,9 @@
 using std::make_pair;
 using std::max;
 
-Animation3d::Animation3d(const string& ID)
+Animation3d::Animation3d(const string& id)
 	:
-	_ID(ID)
+	_ID(id)
 {
 
 }

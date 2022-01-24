@@ -1,24 +1,24 @@
 #include "script.hpp"
 #include "logger.hpp"
 
-void Script::createScriptFile(const string& ID)
+void Script::createScriptFile(const string& id)
 {
 	for(const auto& file : _scriptFiles)
 	{
-		if(file->getID() == ID)
+		if(file->getID() == id)
 		{
 			Logger::throwError("Script::createScriptFile");
 		}
 	}
 
-	_scriptFiles.push_back(make_shared<ScriptFile>(ID));
+	_scriptFiles.push_back(make_shared<ScriptFile>(id));
 }
 
-void Script::renameScriptFile(const string& ID, const string& newID)
+void Script::renameScriptFile(const string& id, const string& newID)
 {
 	for(const auto& file : _scriptFiles)
 	{
-		if(file->getID() == ID)
+		if(file->getID() == id)
 		{
 			file->changeID(newID);
 			return;
@@ -28,11 +28,11 @@ void Script::renameScriptFile(const string& ID, const string& newID)
 	Logger::throwError("Script::renameScriptFile");
 }
 
-void Script::deleteScriptFile(const string& ID)
+void Script::deleteScriptFile(const string& id)
 {
 	for(size_t i = 0; i < _scriptFiles.size(); i++)
 	{
-		if(_scriptFiles[i]->getID() == ID)
+		if(_scriptFiles[i]->getID() == id)
 		{
 			_scriptFiles.erase(_scriptFiles.begin() + i);
 			return;
@@ -64,11 +64,11 @@ const unsigned int Script::getTotalLineCount() const
 	return total;
 }
 
-const bool Script::isScriptFileExisting(const string& ID) const
+const bool Script::isScriptFileExisting(const string& id) const
 {
 	for(const auto& file : _scriptFiles)
 	{
-		if(file->getID() == ID)
+		if(file->getID() == id)
 		{
 			return true;
 		}
@@ -82,11 +82,11 @@ const bool Script::isEmpty()
 	return (getScriptFileCount() == 0);
 }
 
-shared_ptr<ScriptFile> Script::getScriptFile(const string& ID) const
+shared_ptr<ScriptFile> Script::getScriptFile(const string& id) const
 {
 	for(const auto& file : _scriptFiles)
 	{
-		if(file->getID() == ID)
+		if(file->getID() == id)
 		{
 			return file;
 		}

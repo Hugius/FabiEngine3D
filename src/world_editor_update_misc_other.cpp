@@ -118,13 +118,13 @@ void WorldEditor::_updateWorldCreating()
 		{
 			if(newWorldID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("World ID cannot contain any spaces!");
+				Logger::throwWarning("World id cannot contain any spaces!");
 				return;
 			}
 
 			if(newWorldID.find('@') != string::npos)
 			{
-				Logger::throwWarning("World ID cannot contain '@'!");
+				Logger::throwWarning("World id cannot contain '@'!");
 				return;
 			}
 
@@ -132,7 +132,7 @@ void WorldEditor::_updateWorldCreating()
 
 			if(find(worldNames.begin(), worldNames.end(), newWorldID) != worldNames.end())
 			{
-				Logger::throwWarning("World with ID \"" + newWorldID.substr(1) + "\" already exists!");
+				Logger::throwWarning("World with id \"" + newWorldID.substr(1) + "\" already exists!");
 				return;
 			}
 

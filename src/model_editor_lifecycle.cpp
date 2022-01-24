@@ -64,9 +64,9 @@ void ModelEditor::load()
 
 void ModelEditor::unload()
 {
-	for(const auto& ID : _loadedModelIDs)
+	for(const auto& id : _loadedModelIDs)
 	{
-		_fe3d->model_delete(ID);
+		_fe3d->model_delete(id);
 	}
 
 	_unloadGUI();

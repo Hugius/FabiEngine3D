@@ -5,7 +5,7 @@
 class GuiTextField final
 {
 public:
-	GuiTextField(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& color, bool isCentered);
+	GuiTextField(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& color, bool isCentered);
 	~GuiTextField();
 
 	void setVisible(bool isVisible);

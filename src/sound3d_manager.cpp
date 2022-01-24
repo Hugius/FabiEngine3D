@@ -8,9 +8,9 @@ void Sound3dManager::deleteSounds()
 	_sounds.clear();
 }
 
-void Sound3dManager::deleteSound(const string& ID)
+void Sound3dManager::deleteSound(const string& id)
 {
-	auto index = _findSoundIndex(ID);
+	auto index = _findSoundIndex(id);
 
 	if(index == -1)
 	{
@@ -35,13 +35,13 @@ void Sound3dManager::update()
 	}
 }
 
-void Sound3dManager::createSound(const string& ID, const string& audioPath)
+void Sound3dManager::createSound(const string& id, const string& audioPath)
 {
-	if(_findSoundIndex(ID) != -1)
+	if(_findSoundIndex(id) != -1)
 	{
 		Logger::throwError("Sound3dManager::createSound::1");
 	}
-	if(ID.empty())
+	if(id.empty())
 	{
 		Logger::throwError("Sound3dManager::createSound::2");
 	}
@@ -50,13 +50,13 @@ void Sound3dManager::createSound(const string& ID, const string& audioPath)
 
 	if(dataPointer != nullptr)
 	{
-		_sounds.push_back(Sound3d(ID, audioPath, dataPointer));
+		_sounds.push_back(Sound3d(id, audioPath, dataPointer));
 	}
 }
 
-const bool Sound3dManager::isSoundExisting(const string& ID) const
+const bool Sound3dManager::isSoundExisting(const string& id) const
 {
-	return (_findSoundIndex(ID) != -1);
+	return (_findSoundIndex(id) != -1);
 }
 
 vector<Sound3d>& Sound3dManager::getSounds()
@@ -64,9 +64,9 @@ vector<Sound3d>& Sound3dManager::getSounds()
 	return _sounds;
 }
 
-Sound3d& Sound3dManager::getSound(const string& ID)
+Sound3d& Sound3dManager::getSound(const string& id)
 {
-	auto index = _findSoundIndex(ID);
+	auto index = _findSoundIndex(id);
 
 	if(index == -1)
 	{
@@ -76,11 +76,11 @@ Sound3d& Sound3dManager::getSound(const string& ID)
 	return _sounds[index];
 }
 
-const int Sound3dManager::_findSoundIndex(const string& ID) const
+const int Sound3dManager::_findSoundIndex(const string& id) const
 {
 	for(size_t i = 0; i < _sounds.size(); i++)
 	{
-		if(_sounds[i].getID() == ID)
+		if(_sounds[i].getID() == id)
 		{
 			return static_cast<int>(i);
 		}

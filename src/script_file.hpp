@@ -5,7 +5,7 @@
 class ScriptFile final
 {
 public:
-	ScriptFile(const string& ID);
+	ScriptFile(const string& id);
 
 	void addNewLine(const string& textContent);
 	void insertNewLine(unsigned int index, const string& textContent);

@@ -83,20 +83,20 @@ void ScriptEditor::_updateScriptFileCreating()
 		{
 			if(newScriptFileID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Script ID cannot contain any spaces!");
+				Logger::throwWarning("Script id cannot contain any spaces!");
 				return;
 			}
 
 			if(newScriptFileID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Script ID cannot contain '@'!");
+				Logger::throwWarning("Script id cannot contain '@'!");
 				return;
 			}
 
 			auto existingScriptFileIDs = _script->getScriptFileIDs();
 			if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) != existingScriptFileIDs.end())
 			{
-				Logger::throwWarning("Script with ID \"" + newScriptFileID + "\" already exists!");
+				Logger::throwWarning("Script with id \"" + newScriptFileID + "\" already exists!");
 				return;
 			}
 
@@ -151,20 +151,20 @@ void ScriptEditor::_updateScriptFileRenaming()
 		{
 			if(newScriptFileID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Script ID cannot contain any spaces!");
+				Logger::throwWarning("Script id cannot contain any spaces!");
 				return;
 			}
 
 			if(newScriptFileID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Script ID cannot contain '@'!");
+				Logger::throwWarning("Script id cannot contain '@'!");
 				return;
 			}
 
 			auto existingScriptFileIDs = _script->getScriptFileIDs();
 			if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
 			{
-				Logger::throwWarning("Script with ID \"" + newScriptFileID + "\" already exists!");
+				Logger::throwWarning("Script with id \"" + newScriptFileID + "\" already exists!");
 			}
 
 			_scriptFileNamesToDelete.push_back(_currentScriptFileID);

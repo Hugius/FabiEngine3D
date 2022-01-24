@@ -23,9 +23,9 @@ void ModelEditor::_updateMainAabbMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto IDs = _fe3d->aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL);
-			for(auto& ID : IDs)
+			for(auto& id : IDs)
 			{
-				ID = ID.substr(string(_currentModelID + "@").size());
+				id = id.substr(string(_currentModelID + "@").size());
 			}
 			sort(IDs.begin(), IDs.end());
 			_gui->getOverlay()->createChoiceForm("aabbList", "Edit AABB", fvec2(-0.5f, 0.1f), IDs);
@@ -34,9 +34,9 @@ void ModelEditor::_updateMainAabbMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto IDs = _fe3d->aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL);
-			for(auto& ID : IDs)
+			for(auto& id : IDs)
 			{
-				ID = ID.substr(string(_currentModelID + "@").size());
+				id = id.substr(string(_currentModelID + "@").size());
 			}
 			sort(IDs.begin(), IDs.end());
 			_gui->getOverlay()->createChoiceForm("aabbList", "Delete AABB", fvec2(-0.5f, 0.1f), IDs);
@@ -119,19 +119,19 @@ void ModelEditor::_updateAabbCreating()
 		{
 			if(newAabbID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("AABB ID cannot contain any spaces!");
+				Logger::throwWarning("AABB id cannot contain any spaces!");
 				return;
 			}
 
 			if(newAabbID.find('@') != string::npos)
 			{
-				Logger::throwWarning("AABB ID cannot contain '@'!");
+				Logger::throwWarning("AABB id cannot contain '@'!");
 				return;
 			}
 
 			if(_fe3d->aabb_isExisting(_currentModelID + "@" + newAabbID))
 			{
-				Logger::throwWarning("AABB with ID \"" + newAabbID + "\" already exists!");
+				Logger::throwWarning("AABB with id \"" + newAabbID + "\" already exists!");
 				return;
 			}
 

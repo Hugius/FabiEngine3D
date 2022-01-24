@@ -17,16 +17,16 @@ void WorldEditor::_updateModelEditing()
 
 		auto hoveredID = _fe3d->raycast_checkCursorInAny().first;
 
-		for(const auto& ID : _fe3d->model_getIDs())
+		for(const auto& id : _fe3d->model_getIDs())
 		{
-			if(ID[0] != '@')
+			if(id[0] != '@')
 			{
-				bool hovered = (hoveredID.size() >= ID.size()) && (hoveredID.substr(0, ID.size()) == ID);
+				bool hovered = (hoveredID.size() >= id.size()) && (hoveredID.substr(0, id.size()) == id);
 
 				if(hovered && _fe3d->misc_isCursorInsideViewport() &&
 				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					_selectModel(ID);
+					_selectModel(id);
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
@@ -38,9 +38,9 @@ void WorldEditor::_updateModelEditing()
 				}
 				else
 				{
-					if((ID != _selectedModelID) && (ID != _activeModelID))
+					if((id != _selectedModelID) && (id != _activeModelID))
 					{
-						_unselectModel(ID);
+						_unselectModel(id);
 					}
 				}
 			}

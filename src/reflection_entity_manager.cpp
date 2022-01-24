@@ -3,9 +3,9 @@
 
 using std::make_shared;
 
-shared_ptr<ReflectionEntity> ReflectionEntityManager::getEntity(const string& ID)
+shared_ptr<ReflectionEntity> ReflectionEntityManager::getEntity(const string& id)
 {
-	auto iterator = _entities.find(ID);
+	auto iterator = _entities.find(id);
 
 	if(iterator == _entities.end())
 	{
@@ -22,11 +22,11 @@ const unordered_map<string, shared_ptr<ReflectionEntity>>& ReflectionEntityManag
 	return _entities;
 }
 
-void ReflectionEntityManager::createEntity(const string& ID)
+void ReflectionEntityManager::createEntity(const string& id)
 {
-	auto entity = make_shared<ReflectionEntity>(ID);
+	auto entity = make_shared<ReflectionEntity>(id);
 
-	_entities.insert(make_pair(ID, entity));
+	_entities.insert(make_pair(id, entity));
 }
 
 void ReflectionEntityManager::update()
@@ -37,14 +37,14 @@ void ReflectionEntityManager::update()
 	}
 }
 
-void ReflectionEntityManager::deleteEntity(const string& ID)
+void ReflectionEntityManager::deleteEntity(const string& id)
 {
-	if(!isEntityExisting(ID))
+	if(!isEntityExisting(id))
 	{
 		Logger::throwError("ReflectionEntityManager::deleteEntity");
 	}
 
-	_entities.erase(ID);
+	_entities.erase(id);
 }
 
 void ReflectionEntityManager::deleteEntities()
@@ -52,7 +52,7 @@ void ReflectionEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool ReflectionEntityManager::isEntityExisting(const string& ID) const
+const bool ReflectionEntityManager::isEntityExisting(const string& id) const
 {
-	return (_entities.find(ID) != _entities.end());
+	return (_entities.find(id) != _entities.end());
 }

@@ -40,9 +40,9 @@ void Quad3dEntityManager::inject(shared_ptr<RenderBus> renderBus)
 	_renderBus = renderBus;
 }
 
-shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& ID)
+shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& id)
 {
-	auto iterator = _entities.find(ID);
+	auto iterator = _entities.find(id);
 
 	if(iterator == _entities.end())
 	{
@@ -59,11 +59,11 @@ const unordered_map<string, shared_ptr<Quad3dEntity>>& Quad3dEntityManager::getE
 	return _entities;
 }
 
-void Quad3dEntityManager::createEntity(const string& ID, bool isCentered)
+void Quad3dEntityManager::createEntity(const string& id, bool isCentered)
 {
-	auto entity = make_shared<Quad3dEntity>(ID);
+	auto entity = make_shared<Quad3dEntity>(id);
 
-	_entities.insert(make_pair(ID, entity));
+	_entities.insert(make_pair(id, entity));
 
 	entity->setMesh(isCentered ? _centeredMesh : _standingMesh);
 	entity->setCentered(isCentered);
@@ -100,14 +100,14 @@ void Quad3dEntityManager::update()
 	}
 }
 
-void Quad3dEntityManager::deleteEntity(const string& ID)
+void Quad3dEntityManager::deleteEntity(const string& id)
 {
-	if(!isEntityExisting(ID))
+	if(!isEntityExisting(id))
 	{
 		Logger::throwError("Quad3dEntityManager::deleteEntity");
 	}
 
-	_entities.erase(ID);
+	_entities.erase(id);
 }
 
 void Quad3dEntityManager::deleteEntities()
@@ -115,7 +115,7 @@ void Quad3dEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool Quad3dEntityManager::isEntityExisting(const string& ID) const
+const bool Quad3dEntityManager::isEntityExisting(const string& id) const
 {
-	return (_entities.find(ID) != _entities.end());
+	return (_entities.find(id) != _entities.end());
 }

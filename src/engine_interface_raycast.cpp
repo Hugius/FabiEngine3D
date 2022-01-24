@@ -83,7 +83,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
 	return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 }
 
-const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const string& ID, bool canBeOccluded)
+const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const string& id, bool canBeOccluded)
 {
 	if(canBeOccluded)
 	{
@@ -94,7 +94,7 @@ const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const strin
 
 		if(_core->getAabbEntityManager()->isEntityExisting(_hoveredAabbID))
 		{
-			return make_pair((ID == _hoveredAabbID), _hoveredAabbDistance);
+			return make_pair((id == _hoveredAabbID), _hoveredAabbDistance);
 		}
 		else
 		{
@@ -103,7 +103,7 @@ const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const strin
 	}
 	else
 	{
-		auto entity = _core->getAabbEntityManager()->getEntity(ID);
+		auto entity = _core->getAabbEntityManager()->getEntity(id);
 
 		if(entity->isRaycastResponsive() && entity->isVisible())
 		{
@@ -140,7 +140,7 @@ const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const strin
 	}
 }
 
-const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(const string& ID, bool canBeOccluded)
+const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(const string& id, bool canBeOccluded)
 {
 	if(canBeOccluded)
 	{
@@ -154,7 +154,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 			return make_pair("", -1.0f);
 		}
 
-		if(_hoveredAabbID.substr(0, ID.size()) == ID)
+		if(_hoveredAabbID.substr(0, id.size()) == id)
 		{
 			return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 		}
@@ -170,7 +170,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 		{
 			if(entity->isRaycastResponsive() && entity->isVisible())
 			{
-				if(entity->getID().substr(0, ID.size()) == ID)
+				if(entity->getID().substr(0, id.size()) == id)
 				{
 					float distance;
 					if(entity->isCentered())

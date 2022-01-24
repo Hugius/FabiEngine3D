@@ -1,19 +1,19 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::aabb_create(const string& ID, bool isCentered)
+void EngineInterface::aabb_create(const string& id, bool isCentered)
 {
-	_core->getAabbEntityManager()->createEntity(ID, isCentered);
+	_core->getAabbEntityManager()->createEntity(id, isCentered);
 }
 
-void EngineInterface::aabb_setParentEntityID(const string& ID, const string& value)
+void EngineInterface::aabb_setParentEntityID(const string& id, const string& value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setParentEntityID(value);
+	_core->getAabbEntityManager()->getEntity(id)->setParentEntityID(value);
 }
 
-void EngineInterface::aabb_setParentEntityType(const string& ID, AabbParentEntityType value)
+void EngineInterface::aabb_setParentEntityType(const string& id, AabbParentEntityType value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setParentEntityType(value);
+	_core->getAabbEntityManager()->getEntity(id)->setParentEntityType(value);
 }
 
 void EngineInterface::aabb_deleteAll()
@@ -21,133 +21,133 @@ void EngineInterface::aabb_deleteAll()
 	_core->getAabbEntityManager()->deleteEntities();
 }
 
-void EngineInterface::aabb_delete(const string& ID)
+void EngineInterface::aabb_delete(const string& id)
 {
-	_core->getAabbEntityManager()->deleteEntity(ID);
+	_core->getAabbEntityManager()->deleteEntity(id);
 }
 
-void EngineInterface::aabb_setVisible(const string& ID, bool value)
+void EngineInterface::aabb_setVisible(const string& id, bool value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setVisible(value);
+	_core->getAabbEntityManager()->getEntity(id)->setVisible(value);
 }
 
-void EngineInterface::aabb_setColor(const string& ID, const fvec3& value)
+void EngineInterface::aabb_setColor(const string& id, const fvec3& value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setColor(value);
+	_core->getAabbEntityManager()->getEntity(id)->setColor(value);
 }
 
-void EngineInterface::aabb_setRaycastResponsive(const string& ID, bool value)
+void EngineInterface::aabb_setRaycastResponsive(const string& id, bool value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setRaycastResponsive(value);
+	_core->getAabbEntityManager()->getEntity(id)->setRaycastResponsive(value);
 }
 
-void EngineInterface::aabb_setCollisionResponsive(const string& ID, bool value)
+void EngineInterface::aabb_setCollisionResponsive(const string& id, bool value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setCollisionResponsive(value);
+	_core->getAabbEntityManager()->getEntity(id)->setCollisionResponsive(value);
 }
 
-void EngineInterface::aabb_setFollowParentTransformation(const string& ID, bool value)
+void EngineInterface::aabb_setFollowParentTransformation(const string& id, bool value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setFollowParentEntityTransformation(value);
+	_core->getAabbEntityManager()->getEntity(id)->setFollowParentEntityTransformation(value);
 }
 
-void EngineInterface::aabb_setFollowParentVisibility(const string& ID, bool value)
+void EngineInterface::aabb_setFollowParentVisibility(const string& id, bool value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setFollowParentEntityVisibility(value);
+	_core->getAabbEntityManager()->getEntity(id)->setFollowParentEntityVisibility(value);
 }
 
-void EngineInterface::aabb_setLocalPosition(const string& ID, const fvec3& value)
+void EngineInterface::aabb_setLocalPosition(const string& id, const fvec3& value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setLocalPosition(value);
+	_core->getAabbEntityManager()->getEntity(id)->setLocalPosition(value);
 }
 
-void EngineInterface::aabb_setLocalSize(const string& ID, const fvec3& value)
+void EngineInterface::aabb_setLocalSize(const string& id, const fvec3& value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setLocalSize(value);
+	_core->getAabbEntityManager()->getEntity(id)->setLocalSize(value);
 }
 
-void EngineInterface::aabb_setBasePosition(const string& ID, const fvec3& value)
+void EngineInterface::aabb_setBasePosition(const string& id, const fvec3& value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setPosition(value);
+	_core->getAabbEntityManager()->getEntity(id)->setPosition(value);
 }
 
-void EngineInterface::aabb_setBaseSize(const string& ID, const fvec3& value)
+void EngineInterface::aabb_setBaseSize(const string& id, const fvec3& value)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->setSize(value);
+	_core->getAabbEntityManager()->getEntity(id)->setSize(value);
 }
 
-void EngineInterface::aabb_move(const string& ID, const fvec3& change)
+void EngineInterface::aabb_move(const string& id, const fvec3& change)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->move(change);
+	_core->getAabbEntityManager()->getEntity(id)->move(change);
 }
 
-void EngineInterface::aabb_scale(const string& ID, const fvec3& change)
+void EngineInterface::aabb_scale(const string& id, const fvec3& change)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->scale(change);
+	_core->getAabbEntityManager()->getEntity(id)->scale(change);
 }
 
-void EngineInterface::aabb_moveTo(const string& ID, const fvec3& target, float speed)
+void EngineInterface::aabb_moveTo(const string& id, const fvec3& target, float speed)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->moveTo(target, speed);
+	_core->getAabbEntityManager()->getEntity(id)->moveTo(target, speed);
 }
 
-void EngineInterface::aabb_scaleTo(const string& ID, const fvec3& target, float speed)
+void EngineInterface::aabb_scaleTo(const string& id, const fvec3& target, float speed)
 {
-	_core->getAabbEntityManager()->getEntity(ID)->scaleTo(target, speed);
+	_core->getAabbEntityManager()->getEntity(id)->scaleTo(target, speed);
 }
 
-const fvec3& EngineInterface::aabb_getPosition(const string& ID) const
+const fvec3& EngineInterface::aabb_getPosition(const string& id) const
 {
-	if(_core->getAabbEntityManager()->getEntity(ID)->hasParent())
+	if(_core->getAabbEntityManager()->getEntity(id)->hasParent())
 	{
-		return _core->getAabbEntityManager()->getEntity(ID)->getLocalPosition();
+		return _core->getAabbEntityManager()->getEntity(id)->getLocalPosition();
 	}
 	else
 	{
-		return _core->getAabbEntityManager()->getEntity(ID)->getPosition();
+		return _core->getAabbEntityManager()->getEntity(id)->getPosition();
 	}
 }
 
-const fvec3& EngineInterface::aabb_getSize(const string& ID) const
+const fvec3& EngineInterface::aabb_getSize(const string& id) const
 {
-	if(_core->getAabbEntityManager()->getEntity(ID)->hasParent())
+	if(_core->getAabbEntityManager()->getEntity(id)->hasParent())
 	{
-		return _core->getAabbEntityManager()->getEntity(ID)->getLocalSize();
+		return _core->getAabbEntityManager()->getEntity(id)->getLocalSize();
 	}
 	else
 	{
-		return _core->getAabbEntityManager()->getEntity(ID)->getSize();
+		return _core->getAabbEntityManager()->getEntity(id)->getSize();
 	}
 }
 
-const fvec3& EngineInterface::aabb_getColor(const string& ID) const
+const fvec3& EngineInterface::aabb_getColor(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(ID)->getColor();
+	return _core->getAabbEntityManager()->getEntity(id)->getColor();
 }
 
-const bool EngineInterface::aabb_isRaycastResponsive(const string& ID) const
+const bool EngineInterface::aabb_isRaycastResponsive(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(ID)->isRaycastResponsive();
+	return _core->getAabbEntityManager()->getEntity(id)->isRaycastResponsive();
 }
 
-const bool EngineInterface::aabb_isCollisionResponsive(const string& ID) const
+const bool EngineInterface::aabb_isCollisionResponsive(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(ID)->isCollisionResponsive();
+	return _core->getAabbEntityManager()->getEntity(id)->isCollisionResponsive();
 }
 
-const bool EngineInterface::aabb_isExisting(const string& ID) const
+const bool EngineInterface::aabb_isExisting(const string& id) const
 {
-	return _core->getAabbEntityManager()->isEntityExisting(ID);
+	return _core->getAabbEntityManager()->isEntityExisting(id);
 }
 
-const bool EngineInterface::aabb_isVisible(const string& ID) const
+const bool EngineInterface::aabb_isVisible(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(ID)->isVisible();
+	return _core->getAabbEntityManager()->getEntity(id)->isVisible();
 }
 
-const bool EngineInterface::aabb_hasParent(const string& ID) const
+const bool EngineInterface::aabb_hasParent(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(ID)->hasParent();
+	return _core->getAabbEntityManager()->getEntity(id)->hasParent();
 }
 
 const vector<string> EngineInterface::aabb_getChildIDs(const string& parentID, AabbParentEntityType parentEntityType) const
@@ -183,12 +183,12 @@ const vector<string> EngineInterface::aabb_getIDs() const
 	return result;
 }
 
-const string& EngineInterface::aabb_getParentEntityID(const string& ID) const
+const string& EngineInterface::aabb_getParentEntityID(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(ID)->getParentEntityID();
+	return _core->getAabbEntityManager()->getEntity(id)->getParentEntityID();
 }
 
-const AabbParentEntityType EngineInterface::aabb_getParentEntityType(const string& ID) const
+const AabbParentEntityType EngineInterface::aabb_getParentEntityType(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(ID)->getParentEntityType();
+	return _core->getAabbEntityManager()->getEntity(id)->getParentEntityType();
 }

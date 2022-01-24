@@ -14,11 +14,11 @@ void WorldEditor::_updateTerrainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> terrainIDs;
-			for(const auto& ID : _terrainEditor->getLoadedIDs())
+			for(const auto& id : _terrainEditor->getLoadedIDs())
 			{
-				if(ID[0] == '@')
+				if(id[0] == '@')
 				{
-					terrainIDs.push_back(ID.substr(1));
+					terrainIDs.push_back(id.substr(1));
 				}
 			}
 

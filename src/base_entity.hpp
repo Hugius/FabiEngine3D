@@ -7,7 +7,7 @@ using std::string;
 class BaseEntity
 {
 public:
-	BaseEntity(const string& ID);
+	BaseEntity(const string& id);
 
 	virtual void setVisible(bool value);
 

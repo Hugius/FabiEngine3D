@@ -16,7 +16,7 @@ using BufferID = GLuint;
 class TextureBuffer final
 {
 public:
-	TextureBuffer(BufferID ID);
+	TextureBuffer(BufferID id);
 	TextureBuffer(shared_ptr<Image> image);
 	TextureBuffer(const array<shared_ptr<Image>, 6>& images);
 	~TextureBuffer();

@@ -64,9 +64,9 @@ void SkyEntityManager::inject(shared_ptr<RenderBus> renderBus)
 	_renderBus = renderBus;
 }
 
-shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
+shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& id)
 {
-	auto iterator = _entities.find(ID);
+	auto iterator = _entities.find(id);
 
 	if(iterator == _entities.end())
 	{
@@ -91,14 +91,14 @@ const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntitie
 	return _entities;
 }
 
-void SkyEntityManager::selectEntity(const string& ID)
+void SkyEntityManager::selectEntity(const string& id)
 {
-	if(!isEntityExisting(ID) && !ID.empty())
+	if(!isEntityExisting(id) && !id.empty())
 	{
 		Logger::throwError("SkyEntityManager::selectEntity");
 	}
 
-	_selectedEntityID = ID;
+	_selectedEntityID = id;
 
 	if(_selectedEntityID.empty())
 	{
@@ -106,11 +106,11 @@ void SkyEntityManager::selectEntity(const string& ID)
 	}
 }
 
-void SkyEntityManager::createEntity(const string& ID)
+void SkyEntityManager::createEntity(const string& id)
 {
-	auto entity = make_shared<SkyEntity>(ID);
+	auto entity = make_shared<SkyEntity>(id);
 
-	_entities.insert(make_pair(ID, entity));
+	_entities.insert(make_pair(id, entity));
 
 	entity->setMesh(_mesh);
 }
@@ -128,16 +128,16 @@ void SkyEntityManager::update()
 	}
 }
 
-void SkyEntityManager::deleteEntity(const string& ID)
+void SkyEntityManager::deleteEntity(const string& id)
 {
-	if(!isEntityExisting(ID))
+	if(!isEntityExisting(id))
 	{
 		Logger::throwError("SkyEntityManager::deleteEntity");
 	}
 
-	_entities.erase(ID);
+	_entities.erase(id);
 
-	if(ID == _selectedEntityID)
+	if(id == _selectedEntityID)
 	{
 		selectEntity("");
 	}
@@ -150,7 +150,7 @@ void SkyEntityManager::deleteEntities()
 	selectEntity("");
 }
 
-const bool SkyEntityManager::isEntityExisting(const string& ID) const
+const bool SkyEntityManager::isEntityExisting(const string& id) const
 {
-	return (_entities.find(ID) != _entities.end());
+	return (_entities.find(id) != _entities.end());
 }

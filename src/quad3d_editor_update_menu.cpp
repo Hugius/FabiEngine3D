@@ -18,9 +18,9 @@ void Quad3dEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto IDs = getLoadedIDs();
-			for(auto& ID : IDs)
+			for(auto& id : IDs)
 			{
-				ID = ID.substr(1);
+				id = id.substr(1);
 			}
 			_gui->getOverlay()->createChoiceForm("quad3dList", "Edit Quad3D", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingQuad3d = true;
@@ -28,9 +28,9 @@ void Quad3dEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto IDs = getLoadedIDs();
-			for(auto& ID : IDs)
+			for(auto& id : IDs)
 			{
-				ID = ID.substr(1);
+				id = id.substr(1);
 			}
 			_gui->getOverlay()->createChoiceForm("quad3dList", "Delete Quad3D", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingQuad3d = true;

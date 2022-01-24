@@ -1,11 +1,11 @@
 #include "script_variable.hpp"
 #include "logger.hpp"
 
-ScriptVariable::ScriptVariable(const string& ID, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, vector<ScriptValue> values)
+ScriptVariable::ScriptVariable(const string& id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, vector<ScriptValue> values)
 	:
 	_scope(scope),
 	_type(type),
-	_ID(ID),
+	_ID(id),
 	_isConstant(isConstant)
 {
 	for(const auto& value : values)

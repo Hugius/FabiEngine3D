@@ -5,14 +5,14 @@
 
 struct ModelEntityPart final
 {
-	ModelEntityPart(const string& ID)
+	ModelEntityPart(const string& id)
 		:
-		ID(ID)
+		id(id)
 	{
 
 	}
 
-	const string ID;
+	const string id;
 	string diffuseMapPath = "";
 	string emissionMapPath = "";
 	string specularMapPath = "";

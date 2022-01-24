@@ -6,9 +6,9 @@
 using std::max;
 using std::clamp;
 
-void ModelEntity::createPart(const string& ID)
+void ModelEntity::createPart(const string& id)
 {
-	_parts.push_back(ModelEntityPart(ID));
+	_parts.push_back(ModelEntityPart(id));
 }
 
 void ModelEntity::updateTransformation()
@@ -668,7 +668,7 @@ const vector<string> ModelEntity::getPartIDs() const
 
 	for(const auto& part : _parts)
 	{
-		result.push_back(part.ID);
+		result.push_back(part.id);
 	}
 
 	return result;
@@ -820,7 +820,7 @@ const unsigned int ModelEntity::_getPartIndex(const string& partID) const
 
 	for(size_t i = 0; i < _parts.size(); i++)
 	{
-		if(partID == _parts[i].ID)
+		if(partID == _parts[i].id)
 		{
 			return static_cast<unsigned int>(i);
 		}

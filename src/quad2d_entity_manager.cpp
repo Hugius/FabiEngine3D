@@ -11,9 +11,9 @@ Quad2dEntityManager::Quad2dEntityManager()
 
 }
 
-shared_ptr<Quad2dEntity> Quad2dEntityManager::getEntity(const string& ID)
+shared_ptr<Quad2dEntity> Quad2dEntityManager::getEntity(const string& id)
 {
-	auto iterator = _entities.find(ID);
+	auto iterator = _entities.find(id);
 
 	if(iterator == _entities.end())
 	{
@@ -30,11 +30,11 @@ const unordered_map<string, shared_ptr<Quad2dEntity>>& Quad2dEntityManager::getE
 	return _entities;
 }
 
-void Quad2dEntityManager::createEntity(const string& ID, bool isCentered)
+void Quad2dEntityManager::createEntity(const string& id, bool isCentered)
 {
-	auto entity = make_shared<Quad2dEntity>(ID);
+	auto entity = make_shared<Quad2dEntity>(id);
 
-	_entities.insert(make_pair(ID, entity));
+	_entities.insert(make_pair(id, entity));
 
 	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
 	entity->setCentered(isCentered);
@@ -43,14 +43,14 @@ void Quad2dEntityManager::createEntity(const string& ID, bool isCentered)
 	_renderBus->setGuiDepth(_renderBus->getGuiDepth() + 1);
 }
 
-void Quad2dEntityManager::deleteEntity(const string& ID)
+void Quad2dEntityManager::deleteEntity(const string& id)
 {
-	if(!isEntityExisting(ID))
+	if(!isEntityExisting(id))
 	{
 		Logger::throwError("Quad2dEntityManager::deleteEntity");
 	}
 
-	_entities.erase(ID);
+	_entities.erase(id);
 }
 
 void Quad2dEntityManager::deleteEntities()
@@ -58,9 +58,9 @@ void Quad2dEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool Quad2dEntityManager::isEntityExisting(const string& ID) const
+const bool Quad2dEntityManager::isEntityExisting(const string& id) const
 {
-	return (_entities.find(ID) != _entities.end());
+	return (_entities.find(id) != _entities.end());
 }
 
 void Quad2dEntityManager::inject(shared_ptr<RenderBus> renderBus)

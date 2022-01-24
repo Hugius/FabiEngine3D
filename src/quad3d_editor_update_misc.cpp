@@ -100,13 +100,13 @@ void Quad3dEditor::_updateQuad3dCreating()
 		{
 			if(newQuadID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Quad3d ID cannot contain any spaces!");
+				Logger::throwWarning("Quad3d id cannot contain any spaces!");
 				return;
 			}
 
 			if(newQuadID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Quad3d ID cannot contain '@'!");
+				Logger::throwWarning("Quad3d id cannot contain '@'!");
 				return;
 			}
 
@@ -114,7 +114,7 @@ void Quad3dEditor::_updateQuad3dCreating()
 
 			if(find(_loadedQuadIDs.begin(), _loadedQuadIDs.end(), newQuadID) != _loadedQuadIDs.end())
 			{
-				Logger::throwWarning("Quad3d with ID \"" + newQuadID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Quad3d with id \"" + newQuadID.substr(1) + "\" already exists!");
 				return;
 			}
 

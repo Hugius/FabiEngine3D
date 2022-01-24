@@ -4,9 +4,9 @@
 
 using std::make_shared;
 
-shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
+shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& id)
 {
-	auto iterator = _entities.find(ID);
+	auto iterator = _entities.find(id);
 
 	if(iterator == _entities.end())
 	{
@@ -31,35 +31,35 @@ const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEnt
 	return _entities;
 }
 
-void WaterEntityManager::selectEntity(const string& ID)
+void WaterEntityManager::selectEntity(const string& id)
 {
-	if(!isEntityExisting(ID) && !ID.empty())
+	if(!isEntityExisting(id) && !id.empty())
 	{
 		Logger::throwError("WaterEntityManager::selectWater");
 	}
 
-	_selectedEntityID = ID;
+	_selectedEntityID = id;
 }
 
-void WaterEntityManager::createEntity(const string& ID)
+void WaterEntityManager::createEntity(const string& id)
 {
-	auto entity = make_shared<WaterEntity>(ID);
+	auto entity = make_shared<WaterEntity>(id);
 
-	_entities.insert(make_pair(ID, entity));
+	_entities.insert(make_pair(id, entity));
 
 	_loadMesh(entity, 0.0f);
 }
 
-void WaterEntityManager::deleteEntity(const string& ID)
+void WaterEntityManager::deleteEntity(const string& id)
 {
-	if(!isEntityExisting(ID))
+	if(!isEntityExisting(id))
 	{
 		Logger::throwError("WaterEntityManager::deleteEntity");
 	}
 
-	_entities.erase(ID);
+	_entities.erase(id);
 
-	if(ID == _selectedEntityID)
+	if(id == _selectedEntityID)
 	{
 		selectEntity("");
 	}
@@ -72,14 +72,14 @@ void WaterEntityManager::deleteEntities()
 	selectEntity("");
 }
 
-void WaterEntityManager::loadMesh(const string& ID)
+void WaterEntityManager::loadMesh(const string& id)
 {
-	_loadMesh(getEntity(ID), getEntity(ID)->getSize());
+	_loadMesh(getEntity(id), getEntity(id)->getSize());
 }
 
-const bool WaterEntityManager::isEntityExisting(const string& ID) const
+const bool WaterEntityManager::isEntityExisting(const string& id) const
 {
-	return (_entities.find(ID) != _entities.end());
+	return (_entities.find(id) != _entities.end());
 }
 
 void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)

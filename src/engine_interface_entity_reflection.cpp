@@ -1,9 +1,9 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::reflection_create(const string& ID)
+void EngineInterface::reflection_create(const string& id)
 {
-	_core->getReflectionEntityManager()->createEntity(ID);
+	_core->getReflectionEntityManager()->createEntity(id);
 }
 
 void EngineInterface::reflection_deleteAll()
@@ -11,34 +11,34 @@ void EngineInterface::reflection_deleteAll()
 	_core->getReflectionEntityManager()->deleteEntities();
 }
 
-void EngineInterface::reflection_delete(const string& ID)
+void EngineInterface::reflection_delete(const string& id)
 {
-	_core->getReflectionEntityManager()->deleteEntity(ID);
+	_core->getReflectionEntityManager()->deleteEntity(id);
 }
 
-void EngineInterface::reflection_setVisible(const string& ID, bool value)
+void EngineInterface::reflection_setVisible(const string& id, bool value)
 {
-	_core->getReflectionEntityManager()->getEntity(ID)->setVisible(value);
+	_core->getReflectionEntityManager()->getEntity(id)->setVisible(value);
 }
 
-void EngineInterface::reflection_setPosition(const string& ID, const fvec3& value)
+void EngineInterface::reflection_setPosition(const string& id, const fvec3& value)
 {
-	_core->getReflectionEntityManager()->getEntity(ID)->setPosition(value);
+	_core->getReflectionEntityManager()->getEntity(id)->setPosition(value);
 }
 
-void EngineInterface::reflection_move(const string& ID, const fvec3& change)
+void EngineInterface::reflection_move(const string& id, const fvec3& change)
 {
-	_core->getReflectionEntityManager()->getEntity(ID)->move(change);
+	_core->getReflectionEntityManager()->getEntity(id)->move(change);
 }
 
-void EngineInterface::reflection_moveTo(const string& ID, const fvec3& target, float speed)
+void EngineInterface::reflection_moveTo(const string& id, const fvec3& target, float speed)
 {
-	_core->getReflectionEntityManager()->getEntity(ID)->moveTo(target, speed);
+	_core->getReflectionEntityManager()->getEntity(id)->moveTo(target, speed);
 }
 
-void EngineInterface::reflection_capture(const string& ID)
+void EngineInterface::reflection_capture(const string& id)
 {
-	_core->getReflectionEntityManager()->getEntity(ID)->capture();
+	_core->getReflectionEntityManager()->getEntity(id)->capture();
 }
 
 const vector<string> EngineInterface::reflection_getIDs() const
@@ -53,17 +53,17 @@ const vector<string> EngineInterface::reflection_getIDs() const
 	return result;
 }
 
-const fvec3& EngineInterface::reflection_getPosition(const string& ID) const
+const fvec3& EngineInterface::reflection_getPosition(const string& id) const
 {
-	return _core->getReflectionEntityManager()->getEntity(ID)->getPosition();
+	return _core->getReflectionEntityManager()->getEntity(id)->getPosition();
 }
 
-const bool EngineInterface::reflection_isExisting(const string& ID) const
+const bool EngineInterface::reflection_isExisting(const string& id) const
 {
-	return _core->getReflectionEntityManager()->isEntityExisting(ID);
+	return _core->getReflectionEntityManager()->isEntityExisting(id);
 }
 
-const bool EngineInterface::reflection_isVisible(const string& ID) const
+const bool EngineInterface::reflection_isVisible(const string& id) const
 {
-	return _core->getReflectionEntityManager()->getEntity(ID)->isVisible();
+	return _core->getReflectionEntityManager()->getEntity(id)->isVisible();
 }

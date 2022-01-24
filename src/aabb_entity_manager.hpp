@@ -19,16 +19,16 @@ public:
 	void inject(shared_ptr<ModelEntityManager> modelEntityManager);
 	void inject(shared_ptr<Quad3dEntityManager> quad3dEntityManager);
 	void inject(shared_ptr<Text3dEntityManager> text3dEntityManager);
-	void createEntity(const string& ID, bool isCentered);
+	void createEntity(const string& id, bool isCentered);
 	void update();
-	void deleteEntity(const string& ID);
+	void deleteEntity(const string& id);
 	void deleteEntities();
 
-	const bool isEntityExisting(const string& ID) const;
+	const bool isEntityExisting(const string& id) const;
 
 	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities();
 
-	shared_ptr<AabbEntity> getEntity(const string& ID);
+	shared_ptr<AabbEntity> getEntity(const string& id);
 
 private:
 	static inline constexpr float MIN_SIZE = 0.1f;

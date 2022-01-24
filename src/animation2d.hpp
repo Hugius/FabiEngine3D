@@ -7,7 +7,7 @@ using std::string;
 class Animation2d final
 {
 public:
-	Animation2d(const string& ID);
+	Animation2d(const string& id);
 
 	void setPlayCount(int value);
 	void setPaused(bool value);

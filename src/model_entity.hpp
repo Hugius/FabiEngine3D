@@ -9,7 +9,7 @@ class ModelEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void createPart(const string& ID);
+	void createPart(const string& id);
 	void deleteParts();
 	void updateTransformation();
 	void updateTransformationMatrix();

@@ -1,8 +1,8 @@
 #include "world_editor.hpp"
 
-void WorldEditor::_activateModel(const string& ID)
+void WorldEditor::_activateModel(const string& id)
 {
-	_activeModelID = ID;
+	_activeModelID = id;
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeModelID);
@@ -15,7 +15,7 @@ void WorldEditor::_activateModel(const string& ID)
 	rightWindow->getScreen("modelPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	rightWindow->getScreen("modelPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	string tempID = ID;
+	string tempID = id;
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
@@ -23,9 +23,9 @@ void WorldEditor::_activateModel(const string& ID)
 	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Active model: " + rawID, 0.025f);
 }
 
-void WorldEditor::_activateQuad3d(const string& ID)
+void WorldEditor::_activateQuad3d(const string& id)
 {
-	_activeQuadID = ID;
+	_activeQuadID = id;
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->quad3d_getPosition(_activeQuadID);
@@ -38,7 +38,7 @@ void WorldEditor::_activateQuad3d(const string& ID)
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	string tempID = ID;
+	string tempID = id;
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
@@ -46,9 +46,9 @@ void WorldEditor::_activateQuad3d(const string& ID)
 	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Active quad3d: " + rawID, 0.025f);
 }
 
-void WorldEditor::_activateText3d(const string& ID)
+void WorldEditor::_activateText3d(const string& id)
 {
-	_activeTextID = ID;
+	_activeTextID = id;
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->text3d_getPosition(_activeTextID);
@@ -61,7 +61,7 @@ void WorldEditor::_activateText3d(const string& ID)
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	string tempID = ID;
+	string tempID = id;
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
@@ -69,9 +69,9 @@ void WorldEditor::_activateText3d(const string& ID)
 	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Active text3d: " + rawID, 0.025f);
 }
 
-void WorldEditor::_activateSound(const string& ID)
+void WorldEditor::_activateSound(const string& id)
 {
-	_activeSpeakerID = ("@@speaker_" + ID);
+	_activeSpeakerID = ("@@speaker_" + id);
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->sound3d_getPosition(_activeSpeakerID.substr(string("@@speaker_").size()));
@@ -84,7 +84,7 @@ void WorldEditor::_activateSound(const string& ID)
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("volume")->changeTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
 
-	string tempID = ID;
+	string tempID = id;
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
@@ -92,9 +92,9 @@ void WorldEditor::_activateSound(const string& ID)
 	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityID(), "Active sound: " + rawID, 0.025f);
 }
 
-void WorldEditor::_activatePointlight(const string& ID)
+void WorldEditor::_activatePointlight(const string& id)
 {
-	_activeLampID = ("@@lamp_" + ID);
+	_activeLampID = ("@@lamp_" + id);
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeLampID);
@@ -108,9 +108,9 @@ void WorldEditor::_activatePointlight(const string& ID)
 	rightWindow->getScreen("pointlightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 }
 
-void WorldEditor::_activateSpotlight(const string& ID)
+void WorldEditor::_activateSpotlight(const string& id)
 {
-	_activeTorchID = ("@@torch_" + ID);
+	_activeTorchID = ("@@torch_" + id);
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeTorchID);
@@ -123,9 +123,9 @@ void WorldEditor::_activateSpotlight(const string& ID)
 	rightWindow->getScreen("spotlightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 }
 
-void WorldEditor::_activateReflection(const string& ID)
+void WorldEditor::_activateReflection(const string& id)
 {
-	_activeCameraID = ("@@camera_" + ID);
+	_activeCameraID = ("@@camera_" + id);
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeCameraID);

@@ -26,20 +26,20 @@ void Animation2dEditor::_updateAnimationCreating()
 		{
 			if(newAnimationID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Animation ID cannot contain any spaces!");
+				Logger::throwWarning("Animation id cannot contain any spaces!");
 				return;
 			}
 
 			if(newAnimationID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Animation ID cannot contain '@'!");
+				Logger::throwWarning("Animation id cannot contain '@'!");
 				return;
 			}
 
 			auto animationIDs = getAnimationIDs();
 			if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) != animationIDs.end())
 			{
-				Logger::throwWarning("Animation ID \"" + newAnimationID + "\" already exists!");
+				Logger::throwWarning("Animation id \"" + newAnimationID + "\" already exists!");
 				return;
 			}
 

@@ -1,9 +1,9 @@
 #include "script_file.hpp"
 #include "logger.hpp"
 
-ScriptFile::ScriptFile(const string& ID)
+ScriptFile::ScriptFile(const string& id)
 	:
-	_ID(ID)
+	_ID(id)
 {
 
 }

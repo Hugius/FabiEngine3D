@@ -213,7 +213,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		//for(const auto& animationID : _animation3dEditor->getStartedModelAnimationIDs(modelID))
 	//		//{
 	//		//	// Retrieve raw animation data for retrieving
-	//		//	string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	//		//	string errorMessage = "Tried to retrieve animation with id \"" + animationID + "\" on model with id \"" + modelID + "\": ";
 	//		//	auto animationData = _animation3dEditor->getAnimationData(animationID, modelID, errorMessage);
 
 	//		//	// Data to save
@@ -362,7 +362,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	////		auto maxVolume = _fe3d->sound_getMaxVolume(soundID);
 	////		auto maxDistance = _fe3d->sound_getMaxDistance(soundID);
 
-	////		// Extract template ID
+	////		// Extract template id
 	////		string templateID;
 	////		if(_loadedSoundIDs.find(soundID) == _loadedSoundIDs.end())
 	////		{

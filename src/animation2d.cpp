@@ -1,9 +1,9 @@
 #include "animation2d.hpp"
 #include "logger.hpp"
 
-Animation2d::Animation2d(const string& ID)
+Animation2d::Animation2d(const string& id)
 	:
-	_ID(ID)
+	_ID(id)
 {
 
 }

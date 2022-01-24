@@ -25,9 +25,9 @@ void SkyEditor::load()
 
 void SkyEditor::unload()
 {
-	for(const auto& ID : _loadedSkyIDs)
+	for(const auto& id : _loadedSkyIDs)
 	{
-		_fe3d->sky_delete(ID);
+		_fe3d->sky_delete(id);
 	}
 
 	_unloadGUI();

@@ -83,13 +83,13 @@ void TerrainEditor::_updateTerrainCreating()
 		{
 			if(newTerrainID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Terrain ID cannot contain any spaces!");
+				Logger::throwWarning("Terrain id cannot contain any spaces!");
 				return;
 			}
 
 			if(newTerrainID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Terrain ID cannot contain '@'!");
+				Logger::throwWarning("Terrain id cannot contain '@'!");
 				return;
 			}
 
@@ -97,7 +97,7 @@ void TerrainEditor::_updateTerrainCreating()
 
 			if(find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) != _loadedTerrainIDs.end())
 			{
-				Logger::throwWarning("Terrain with ID \"" + newTerrainID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Terrain with id \"" + newTerrainID.substr(1) + "\" already exists!");
 				return;
 			}
 

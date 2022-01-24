@@ -1,11 +1,11 @@
 #include "base_entity.hpp"
 #include "logger.hpp"
 
-BaseEntity::BaseEntity(const string& ID)
+BaseEntity::BaseEntity(const string& id)
 	:
-	_ID(ID)
+	_ID(id)
 {
-	if(ID.empty())
+	if(id.empty())
 	{
 		Logger::throwError("BaseEntity::BaseEntity");
 	}

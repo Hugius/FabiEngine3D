@@ -4,9 +4,9 @@
 
 #include <algorithm>
 
-GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
+GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
 	:
-	GuiRectangle(fe3d, parentID + "_scrollingList", ID, position, size, color, isCentered),
+	GuiRectangle(fe3d, parentID + "_scrollingList", id, position, size, color, isCentered),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),
 	_textColor(textColor),
@@ -23,7 +23,7 @@ void GuiScrollingList::update(bool isHoverable)
 	_updateButtons(isHoverable);
 }
 
-void GuiScrollingList::createButton(const string& ID, const string& textContent)
+void GuiScrollingList::createButton(const string& id, const string& textContent)
 {
 	float x = 0.0f;
 	float y = (1.0f - _charSize.y - (_buttons.size() * (_charSize.y * 1.5f)));
@@ -32,7 +32,7 @@ void GuiScrollingList::createButton(const string& ID, const string& textContent)
 
 	fvec2 position = _convertPosition(fvec2(x, y));
 	fvec2 size = _convertSize(fvec2(w, h));
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID, ID, fvec2(position.x, position.y), fvec2(size.x, size.y),
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID, id, fvec2(position.x, position.y), fvec2(size.x, size.y),
 					   _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, _fe3d->quad2d_isCentered(_entityID)));
 
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
@@ -43,11 +43,11 @@ void GuiScrollingList::createButton(const string& ID, const string& textContent)
 	_fe3d->text2d_setMaxPosition(textID, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
 }
 
-void GuiScrollingList::deleteButton(const string& ID)
+void GuiScrollingList::deleteButton(const string& id)
 {
 	for(size_t i = 0; i < _buttons.size(); i++)
 	{
-		if(ID == _buttons[i]->getID())
+		if(id == _buttons[i]->getID())
 		{
 			_buttons.erase(_buttons.begin() + i);
 
@@ -204,11 +204,11 @@ const bool GuiScrollingList::isHovered() const
 	return _isHovered;
 }
 
-shared_ptr<GuiButton> GuiScrollingList::getButton(const string& ID) const
+shared_ptr<GuiButton> GuiScrollingList::getButton(const string& id) const
 {
 	for(const auto& button : _buttons)
 	{
-		if(ID == button->getID())
+		if(id == button->getID())
 		{
 			return button;
 		}

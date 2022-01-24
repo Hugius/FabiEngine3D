@@ -50,9 +50,9 @@ void Text3dEntityManager::inject(shared_ptr<TextureBufferCache> textureBufferCac
 	_textureBufferCache = textureBufferCache;
 }
 
-shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string& ID)
+shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string& id)
 {
-	auto iterator = _entities.find(ID);
+	auto iterator = _entities.find(id);
 
 	if(iterator == _entities.end())
 	{
@@ -69,11 +69,11 @@ const unordered_map<string, shared_ptr<Text3dEntity>>& Text3dEntityManager::getE
 	return _entities;
 }
 
-void Text3dEntityManager::createEntity(const string& ID, const string& fontMapPath, bool isCentered)
+void Text3dEntityManager::createEntity(const string& id, const string& fontMapPath, bool isCentered)
 {
-	auto entity = make_shared<Text3dEntity>(ID);
+	auto entity = make_shared<Text3dEntity>(id);
 
-	_entities.insert(make_pair(ID, entity));
+	_entities.insert(make_pair(id, entity));
 
 	auto texture = _textureBufferCache->get2dBuffer(fontMapPath);
 
@@ -123,14 +123,14 @@ void Text3dEntityManager::update()
 	}
 }
 
-void Text3dEntityManager::deleteEntity(const string& ID)
+void Text3dEntityManager::deleteEntity(const string& id)
 {
-	if(!isEntityExisting(ID))
+	if(!isEntityExisting(id))
 	{
 		Logger::throwError("Text3dEntityManager::deleteEntity");
 	}
 
-	_entities.erase(ID);
+	_entities.erase(id);
 }
 
 void Text3dEntityManager::deleteEntities()
@@ -138,7 +138,7 @@ void Text3dEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool Text3dEntityManager::isEntityExisting(const string& ID) const
+const bool Text3dEntityManager::isEntityExisting(const string& id) const
 {
-	return (_entities.find(ID) != _entities.end());
+	return (_entities.find(id) != _entities.end());
 }

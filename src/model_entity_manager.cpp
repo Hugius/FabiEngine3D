@@ -4,9 +4,9 @@
 using std::make_shared;
 using std::max;
 
-shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& ID)
+shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& id)
 {
-	auto iterator = _entities.find(ID);
+	auto iterator = _entities.find(id);
 
 	if(iterator == _entities.end())
 	{
@@ -48,24 +48,24 @@ void ModelEntityManager::inject(shared_ptr<VertexBufferCache> vertexBufferCache)
 	_vertexBufferCache = vertexBufferCache;
 }
 
-void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
+void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 {
-	auto entity = make_shared<ModelEntity>(ID);
+	auto entity = make_shared<ModelEntity>(id);
 
-	_entities.insert(make_pair(ID, entity));
+	_entities.insert(make_pair(id, entity));
 
 	auto mesh = _meshLoader->loadMesh(meshPath);
 
 	if(mesh == nullptr)
 	{
-		deleteEntity(ID);
+		deleteEntity(id);
 		return;
 	}
 
 	if((mesh->getParts().size() == 1) && !mesh->getParts()[0]->getID().empty())
 	{
-		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");
-		deleteEntity(ID);
+		Logger::throwWarning("Multiparted model with id \"" + id + "\" only has 1 part!");
+		deleteEntity(id);
 		return;
 	}
 
@@ -108,14 +108,14 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 	entity->setMeshPath(meshPath);
 }
 
-void ModelEntityManager::deleteEntity(const string& ID)
+void ModelEntityManager::deleteEntity(const string& id)
 {
-	if(!isEntityExisting(ID))
+	if(!isEntityExisting(id))
 	{
 		Logger::throwError("ModelEntityManager::deleteEntity");
 	}
 
-	_entities.erase(ID);
+	_entities.erase(id);
 }
 
 void ModelEntityManager::deleteEntities()
@@ -123,9 +123,9 @@ void ModelEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool ModelEntityManager::isEntityExisting(const string& ID) const
+const bool ModelEntityManager::isEntityExisting(const string& id) const
 {
-	return (_entities.find(ID) != _entities.end());
+	return (_entities.find(id) != _entities.end());
 }
 
 void ModelEntityManager::update()

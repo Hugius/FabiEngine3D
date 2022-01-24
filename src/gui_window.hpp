@@ -6,12 +6,12 @@
 class GuiWindow final
 {
 public:
-	GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color);
+	GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const fvec3& color);
 	~GuiWindow();
 
-	void createScreen(const string& ID);
-	void deleteScreen(const string& ID);
-	void setActiveScreen(const string& ID);
+	void createScreen(const string& id);
+	void deleteScreen(const string& id);
+	void setActiveScreen(const string& id);
 	void update(bool isHoverable);
 
 	const string& getID() const;
@@ -26,7 +26,7 @@ public:
 	const bool isHovered() const;
 
 	const vector<shared_ptr<GuiScreen>>& getScreens() const;
-	shared_ptr<GuiScreen> getScreen(const string& ID) const;
+	shared_ptr<GuiScreen> getScreen(const string& id) const;
 	shared_ptr<GuiScreen> getActiveScreen() const;
 
 private:

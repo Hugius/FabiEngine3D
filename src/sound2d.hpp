@@ -8,7 +8,7 @@ using std::string;
 class Sound2d
 {
 public:
-	Sound2d(const string& ID, const string& audioPath, Mix_Chunk* dataPointer);
+	Sound2d(const string& id, const string& audioPath, Mix_Chunk* dataPointer);
 
 	void setVolume(float value);
 

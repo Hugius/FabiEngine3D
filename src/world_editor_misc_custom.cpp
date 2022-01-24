@@ -1,9 +1,9 @@
 #include "world_editor.hpp"
 #include "logger.hpp"
 
-void WorldEditor::createCustomWorld(const string& ID)
+void WorldEditor::createCustomWorld(const string& id)
 {
-	_customWorldID = ID;
+	_customWorldID = id;
 	_hasCustomWorldLighting = false;
 	_hasCustomWorldGraphics = false;
 	_hasCustomWorldSky = false;
@@ -78,11 +78,11 @@ void WorldEditor::addWaterToCustomWorld()
 	}
 }
 
-void WorldEditor::addModelToCustomWorld(const string& ID)
+void WorldEditor::addModelToCustomWorld(const string& id)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldModelIDs.push_back(ID);
+		_customWorldModelIDs.push_back(id);
 	}
 	else
 	{
@@ -90,11 +90,11 @@ void WorldEditor::addModelToCustomWorld(const string& ID)
 	}
 }
 
-void WorldEditor::addQuad3dToCustomWorld(const string& ID)
+void WorldEditor::addQuad3dToCustomWorld(const string& id)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldQuadIDs.push_back(ID);
+		_customWorldQuadIDs.push_back(id);
 	}
 	else
 	{
@@ -102,11 +102,11 @@ void WorldEditor::addQuad3dToCustomWorld(const string& ID)
 	}
 }
 
-void WorldEditor::addText3dToCustomWorld(const string& ID)
+void WorldEditor::addText3dToCustomWorld(const string& id)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldTextIDs.push_back(ID);
+		_customWorldTextIDs.push_back(id);
 	}
 	else
 	{
@@ -114,11 +114,11 @@ void WorldEditor::addText3dToCustomWorld(const string& ID)
 	}
 }
 
-void WorldEditor::addAabbToCustomWorld(const string& ID)
+void WorldEditor::addAabbToCustomWorld(const string& id)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldAabbIDs.push_back(ID);
+		_customWorldAabbIDs.push_back(id);
 	}
 	else
 	{
@@ -126,11 +126,11 @@ void WorldEditor::addAabbToCustomWorld(const string& ID)
 	}
 }
 
-void WorldEditor::addSoundToCustomWorld(const string& ID)
+void WorldEditor::addSoundToCustomWorld(const string& id)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldSoundIDs.push_back(ID);
+		_customWorldSoundIDs.push_back(id);
 	}
 	else
 	{
@@ -138,11 +138,11 @@ void WorldEditor::addSoundToCustomWorld(const string& ID)
 	}
 }
 
-void WorldEditor::addPointlightToCustomWorld(const string& ID)
+void WorldEditor::addPointlightToCustomWorld(const string& id)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldPointlightIDs.push_back(ID);
+		_customWorldPointlightIDs.push_back(id);
 	}
 	else
 	{
@@ -150,11 +150,11 @@ void WorldEditor::addPointlightToCustomWorld(const string& ID)
 	}
 }
 
-void WorldEditor::addSpotlightToCustomWorld(const string& ID)
+void WorldEditor::addSpotlightToCustomWorld(const string& id)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldSpotlightIDs.push_back(ID);
+		_customWorldSpotlightIDs.push_back(id);
 	}
 	else
 	{
@@ -162,11 +162,11 @@ void WorldEditor::addSpotlightToCustomWorld(const string& ID)
 	}
 }
 
-void WorldEditor::addReflectionToCustomWorld(const string& ID)
+void WorldEditor::addReflectionToCustomWorld(const string& id)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldReflectionIDs.push_back(ID);
+		_customWorldReflectionIDs.push_back(id);
 	}
 	else
 	{

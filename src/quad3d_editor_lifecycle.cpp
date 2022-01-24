@@ -54,9 +54,9 @@ void Quad3dEditor::load()
 
 void Quad3dEditor::unload()
 {
-	for(const auto& ID : _loadedQuadIDs)
+	for(const auto& id : _loadedQuadIDs)
 	{
-		_fe3d->quad3d_delete(ID);
+		_fe3d->quad3d_delete(id);
 	}
 
 	_unloadGUI();

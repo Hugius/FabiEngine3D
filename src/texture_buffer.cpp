@@ -3,9 +3,9 @@
 
 using std::clamp;
 
-TextureBuffer::TextureBuffer(BufferID ID)
+TextureBuffer::TextureBuffer(BufferID id)
 	:
-	_ID(ID)
+	_ID(id)
 {
 
 }

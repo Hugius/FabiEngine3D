@@ -99,9 +99,9 @@ void Animation3dEditor::_updateChoiceMenu()
 			}
 
 			auto modelIDs = _modelEditor->getLoadedIDs();
-			for(auto& ID : modelIDs)
+			for(auto& id : modelIDs)
 			{
-				ID = ID.substr(1);
+				id = id.substr(1);
 			}
 			_gui->getOverlay()->createChoiceForm("modelList", "Select Model", fvec2(-0.5f, 0.1f), modelIDs);
 		}

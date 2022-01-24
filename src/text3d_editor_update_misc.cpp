@@ -101,13 +101,13 @@ void Text3dEditor::_updateText3dCreating()
 		{
 			if(newTextID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Text3d ID cannot contain any spaces!");
+				Logger::throwWarning("Text3d id cannot contain any spaces!");
 				return;
 			}
 
 			if(newTextID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Text3d ID cannot contain '@'!");
+				Logger::throwWarning("Text3d id cannot contain '@'!");
 				return;
 			}
 
@@ -115,7 +115,7 @@ void Text3dEditor::_updateText3dCreating()
 
 			if(find(_loadedTextIDs.begin(), _loadedTextIDs.end(), newTextID) != _loadedTextIDs.end())
 			{
-				Logger::throwWarning("Text3d with ID \"" + newTextID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Text3d with id \"" + newTextID.substr(1) + "\" already exists!");
 				return;
 			}
 

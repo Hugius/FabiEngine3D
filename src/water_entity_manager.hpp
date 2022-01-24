@@ -11,17 +11,17 @@ class WaterEntityManager final : public BaseEntityManager
 {
 public:
 	void update();
-	void createEntity(const string& ID);
-	void deleteEntity(const string& ID);
+	void createEntity(const string& id);
+	void deleteEntity(const string& id);
 	void deleteEntities();
-	void loadMesh(const string& ID);
-	void selectEntity(const string& ID);
+	void loadMesh(const string& id);
+	void selectEntity(const string& id);
 
-	const bool isEntityExisting(const string& ID) const;
+	const bool isEntityExisting(const string& id) const;
 
 	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities();
 
-	shared_ptr<WaterEntity> getEntity(const string& ID);
+	shared_ptr<WaterEntity> getEntity(const string& id);
 	shared_ptr<WaterEntity> getSelectedEntity();
 
 private:

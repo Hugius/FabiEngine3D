@@ -69,7 +69,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 			}
 			else
 			{
-				Logger::throwWarning("Preview texture of animation with ID \"" + newAnimation->getID() + "\" not existing anymore!");
+				Logger::throwWarning("Preview texture of animation with id \"" + newAnimation->getID() + "\" not existing anymore!");
 				continue;
 			}
 		}

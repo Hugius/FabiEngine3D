@@ -18,13 +18,13 @@ void WorldEditor::_updateReflectionEditing()
 
 		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
 
-		for(const auto& ID : _fe3d->model_getIDs())
+		for(const auto& id : _fe3d->model_getIDs())
 		{
-			if(ID.substr(0, string("@@camera").size()) == "@@camera")
+			if(id.substr(0, string("@@camera").size()) == "@@camera")
 			{
-				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbID == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					_selectReflection(ID.substr(string("@@camera_").size()));
+					_selectReflection(id.substr(string("@@camera_").size()));
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
@@ -36,9 +36,9 @@ void WorldEditor::_updateReflectionEditing()
 				}
 				else
 				{
-					if((ID != _selectedCameraID) && (ID != _activeCameraID))
+					if((id != _selectedCameraID) && (id != _activeCameraID))
 					{
-						_unselectReflection(ID);
+						_unselectReflection(id);
 					}
 				}
 			}

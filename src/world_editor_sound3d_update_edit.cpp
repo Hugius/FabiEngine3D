@@ -17,14 +17,14 @@ void WorldEditor::_updateSoundEditing()
 
 		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
 
-		for(const auto& ID : _fe3d->model_getIDs())
+		for(const auto& id : _fe3d->model_getIDs())
 		{
-			if(ID.substr(0, string("@@speaker").size()) == "@@speaker")
+			if(id.substr(0, string("@@speaker").size()) == "@@speaker")
 			{
-				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() &&
+				if(hoveredAabbID == id && _fe3d->misc_isCursorInsideViewport() &&
 				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					_selectSound(ID.substr(string("@@speaker_").size()));
+					_selectSound(id.substr(string("@@speaker_").size()));
 
 					_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
@@ -38,9 +38,9 @@ void WorldEditor::_updateSoundEditing()
 				}
 				else
 				{
-					if((ID != _selectedSpeakerID) && (ID != _activeSpeakerID))
+					if((id != _selectedSpeakerID) && (id != _activeSpeakerID))
 					{
-						_unselectSound(ID);
+						_unselectSound(id);
 					}
 				}
 			}

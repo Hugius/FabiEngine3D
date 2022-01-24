@@ -186,19 +186,19 @@ void ScriptInterpreter::unload()
 	_fe3d->spotlight_deleteAll();
 	_fe3d->reflection_deleteAll();
 
-	for(const auto& ID : _fe3d->quad2d_getIDs())
+	for(const auto& id : _fe3d->quad2d_getIDs())
 	{
-		if(ID[0] != '@')
+		if(id[0] != '@')
 		{
-			_fe3d->quad2d_delete(ID);
+			_fe3d->quad2d_delete(id);
 		}
 	}
 
-	for(const auto& ID : _fe3d->text2d_getIDs())
+	for(const auto& id : _fe3d->text2d_getIDs())
 	{
-		if(ID[0] != '@')
+		if(id[0] != '@')
 		{
-			_fe3d->text2d_delete(ID);
+			_fe3d->text2d_delete(id);
 		}
 	}
 

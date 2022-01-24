@@ -13,20 +13,20 @@ class Timer final
 {
 public:
 	void start();
-	void startDeltaPart(const string& ID);
+	void startDeltaPart(const string& id);
 	void stopDeltaPart();
 	void sleep(int microseconds);
 	void increasePassedFrameCount();
 	void clearDeltaParts();
 
 	const float stop();
-	const float getDeltaPart(const string& ID);
+	const float getDeltaPart(const string& id);
 	const float getDeltaPartSum() const;
 
 	const unsigned int getPassedTickCount() const;
 
 	const bool isStarted() const;
-	const bool isDeltaPartStarted(const string& ID) const;
+	const bool isDeltaPartStarted(const string& id) const;
 
 private:
 	string _currentID = "";

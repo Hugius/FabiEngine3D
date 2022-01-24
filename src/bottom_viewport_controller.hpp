@@ -19,7 +19,7 @@ private:
 	void _updateStatistics();
 	void _updateConsole();
 	void _addConsoleMessage(const string& newMessage);
-	void _deleteConsoleMessage(const string& ID);
+	void _deleteConsoleMessage(const string& id);
 
 	vector<pair<string, string>> _consoleMessageQueue;
 

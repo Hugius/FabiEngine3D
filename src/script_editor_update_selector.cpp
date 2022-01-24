@@ -17,11 +17,11 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 		   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_V)) ||
 		   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_X)))
 		{
-			for(const auto& ID : _fe3d->text3d_getIDs())
+			for(const auto& id : _fe3d->text3d_getIDs())
 			{
-				if(ID.substr(0, string("selection_").size()) == "selection_")
+				if(id.substr(0, string("selection_").size()) == "selection_")
 				{
-					_fe3d->text3d_delete(ID);
+					_fe3d->text3d_delete(id);
 				}
 			}
 

@@ -21,14 +21,14 @@ public:
 	void inject(shared_ptr<MeshLoader> meshLoader);
 	void inject(shared_ptr<VertexBufferCache> vertexBufferCache);
 	void update();
-	void createEntity(const string& ID, const string& meshPath);
-	void deleteEntity(const string& ID);
+	void createEntity(const string& id, const string& meshPath);
+	void deleteEntity(const string& id);
 	void deleteEntities();
 
-	const bool isEntityExisting(const string& ID) const;
+	const bool isEntityExisting(const string& id) const;
 
 	const unordered_map<string, shared_ptr<ModelEntity>>& getEntities();
-	shared_ptr<ModelEntity> getEntity(const string& ID);
+	shared_ptr<ModelEntity> getEntity(const string& id);
 
 private:
 	static inline constexpr float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;

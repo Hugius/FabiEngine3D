@@ -34,9 +34,9 @@ void SoundEditor::load()
 
 void SoundEditor::unload()
 {
-	for(const auto& ID : _loadedSoundIDs)
+	for(const auto& id : _loadedSoundIDs)
 	{
-		_fe3d->sound2d_delete(ID);
+		_fe3d->sound2d_delete(id);
 	}
 
 	_unloadGUI();

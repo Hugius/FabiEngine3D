@@ -61,11 +61,11 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& ID : _fe3d->text3d_getIDs())
+			for(const auto& id : _fe3d->text3d_getIDs())
 			{
-				if(ID[0] != '@')
+				if(id[0] != '@')
 				{
-					_fe3d->text3d_delete(ID);
+					_fe3d->text3d_delete(id);
 				}
 			}
 
@@ -308,13 +308,13 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 
 				if(aabbIDs.empty())
 				{
-					_throwScriptError("text3d with ID \"" + args[0].getString() + "\" has no bound AABBs!");
+					_throwScriptError("text3d with id \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				for(const auto& ID : aabbIDs)
+				for(const auto& id : aabbIDs)
 				{
-					_fe3d->aabb_setRaycastResponsive(ID, args[1].getBoolean());
+					_fe3d->aabb_setRaycastResponsive(id, args[1].getBoolean());
 				}
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
@@ -333,13 +333,13 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 
 				if(aabbIDs.empty())
 				{
-					_throwScriptError("text3d with ID \"" + args[0].getString() + "\" has no bound AABBs!");
+					_throwScriptError("text3d with id \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				for(const auto& ID : aabbIDs)
+				for(const auto& id : aabbIDs)
 				{
-					_fe3d->aabb_setCollisionResponsive(ID, args[1].getBoolean());
+					_fe3d->aabb_setCollisionResponsive(id, args[1].getBoolean());
 				}
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));

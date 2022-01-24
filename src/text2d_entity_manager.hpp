@@ -19,14 +19,14 @@ public:
 	void inject(shared_ptr<ImageLoader> imageLoader);
 	void inject(shared_ptr<TextureBufferCache> textureBufferCache);
 	void update();
-	void createEntity(const string& ID, const string& fontMapPath, bool isCentered);
-	void deleteEntity(const string& ID);
+	void createEntity(const string& id, const string& fontMapPath, bool isCentered);
+	void deleteEntity(const string& id);
 	void deleteEntities();
 
-	const bool isEntityExisting(const string& ID) const;
+	const bool isEntityExisting(const string& id) const;
 
 	const unordered_map<string, shared_ptr<Text2dEntity>>& getEntities();
-	shared_ptr<Text2dEntity> getEntity(const string& ID);
+	shared_ptr<Text2dEntity> getEntity(const string& id);
 
 private:
 	const shared_ptr<VertexBuffer> _centeredMesh;

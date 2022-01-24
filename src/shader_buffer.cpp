@@ -100,16 +100,16 @@ const BufferID ShaderBuffer::getUniformID(const string& name)
 		return cacheIterator->second;
 	}
 
-	auto ID = glGetUniformLocation(_programID, name.c_str());
+	auto id = glGetUniformLocation(_programID, name.c_str());
 
-	if(ID == -1)
+	if(id == -1)
 	{
 		Logger::throwError("ShaderBuffer::_getUniformID ---> ", name);
 	}
 
-	_uniformCache.insert(make_pair(name, ID));
+	_uniformCache.insert(make_pair(name, id));
 
-	return ID;
+	return id;
 }
 
 void ShaderBuffer::bind()

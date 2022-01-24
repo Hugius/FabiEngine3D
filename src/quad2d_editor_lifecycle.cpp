@@ -21,9 +21,9 @@ void Quad2dEditor::load()
 
 void Quad2dEditor::unload()
 {
-	for(const auto& ID : _loadedQuadIDs)
+	for(const auto& id : _loadedQuadIDs)
 	{
-		_fe3d->quad2d_delete(ID);
+		_fe3d->quad2d_delete(id);
 	}
 
 	_unloadGUI();

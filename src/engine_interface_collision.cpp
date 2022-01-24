@@ -68,9 +68,9 @@ const bool EngineInterface::collision_checkCameraWithTerrain() const
 	return _core->getCameraCollisionHandler()->isCameraUnderTerrain();
 }
 
-const bool EngineInterface::collision_checkCameraWithEntity(const string& ID) const
+const bool EngineInterface::collision_checkCameraWithEntity(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(ID)->hasCollided();
+	return _core->getAabbEntityManager()->getEntity(id)->hasCollided();
 }
 
 const string EngineInterface::collision_checkEntityWithEntities(const string& selfID, const string& otherID) const
@@ -137,13 +137,13 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 	return "";
 }
 
-const string EngineInterface::collision_checkCameraWithEntities(const string& ID) const
+const string EngineInterface::collision_checkCameraWithEntities(const string& id) const
 {
 	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasCollided())
 		{
-			if(entity->getID().substr(0, ID.size()) == ID)
+			if(entity->getID().substr(0, id.size()) == id)
 			{
 				return entity->getID();
 			}
@@ -153,11 +153,11 @@ const string EngineInterface::collision_checkCameraWithEntities(const string& ID
 	return "";
 }
 
-const bool EngineInterface::collision_checkCameraWithEntityDirection(const string& ID, Direction direction) const
+const bool EngineInterface::collision_checkCameraWithEntityDirection(const string& id, Direction direction) const
 {
-	if(_core->getAabbEntityManager()->getEntity(ID)->hasCollided())
+	if(_core->getAabbEntityManager()->getEntity(id)->hasCollided())
 	{
-		if(direction == _core->getAabbEntityManager()->getEntity(ID)->getCollisionDirection())
+		if(direction == _core->getAabbEntityManager()->getEntity(id)->getCollisionDirection())
 		{
 			return true;
 		}
@@ -182,7 +182,7 @@ const bool EngineInterface::collision_checkCameraWithAnyDirection(Direction dire
 	return false;
 }
 
-const bool EngineInterface::collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction) const
+const bool EngineInterface::collision_checkCameraWithEntitiesDirection(const string& id, Direction direction) const
 {
 	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
@@ -190,7 +190,7 @@ const bool EngineInterface::collision_checkCameraWithEntitiesDirection(const str
 		{
 			if(direction == entity->getCollisionDirection())
 			{
-				if(entity->getID().substr(0, ID.size()) == ID)
+				if(entity->getID().substr(0, id.size()) == id)
 				{
 					return true;
 				}

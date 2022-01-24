@@ -13,15 +13,15 @@ class ReflectionEntityManager final : public BaseEntityManager
 {
 public:
 	void update();
-	void createEntity(const string& ID);
-	void deleteEntity(const string& ID);
+	void createEntity(const string& id);
+	void deleteEntity(const string& id);
 	void deleteEntities();
 
-	const bool isEntityExisting(const string& ID) const;
+	const bool isEntityExisting(const string& id) const;
 
 	const unordered_map<string, shared_ptr<ReflectionEntity>>& getEntities();
 
-	shared_ptr<ReflectionEntity> getEntity(const string& ID);
+	shared_ptr<ReflectionEntity> getEntity(const string& id);
 
 private:
 	unordered_map<string, shared_ptr<ReflectionEntity>> _entities;

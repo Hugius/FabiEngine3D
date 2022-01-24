@@ -9,7 +9,7 @@ using std::vector;
 class Animation3d final
 {
 public:
-	Animation3d(const string& ID);
+	Animation3d(const string& id);
 
 	void addFrame(const Animation3dFrame& value);
 	void setFrame(unsigned int index, const Animation3dFrame& value);

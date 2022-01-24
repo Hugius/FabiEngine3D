@@ -129,13 +129,13 @@ void ModelEditor::_updateModelCreating()
 		{
 			if(newModelID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Model ID cannot contain any spaces!");
+				Logger::throwWarning("Model id cannot contain any spaces!");
 				return;
 			}
 
 			if(newModelID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Model ID cannot contain '@'!");
+				Logger::throwWarning("Model id cannot contain '@'!");
 				return;
 			}
 
@@ -143,7 +143,7 @@ void ModelEditor::_updateModelCreating()
 
 			if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) != _loadedModelIDs.end())
 			{
-				Logger::throwWarning("Model with ID \"" + newModelID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Model with id \"" + newModelID.substr(1) + "\" already exists!");
 				return;
 			}
 

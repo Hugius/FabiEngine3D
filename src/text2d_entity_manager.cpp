@@ -11,9 +11,9 @@ Text2dEntityManager::Text2dEntityManager()
 
 }
 
-shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string& ID)
+shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string& id)
 {
-	auto iterator = _entities.find(ID);
+	auto iterator = _entities.find(id);
 
 	if(iterator == _entities.end())
 	{
@@ -30,11 +30,11 @@ const unordered_map<string, shared_ptr<Text2dEntity>>& Text2dEntityManager::getE
 	return _entities;
 }
 
-void Text2dEntityManager::createEntity(const string& ID, const string& fontMapPath, bool isCentered)
+void Text2dEntityManager::createEntity(const string& id, const string& fontMapPath, bool isCentered)
 {
-	auto entity = make_shared<Text2dEntity>(ID);
+	auto entity = make_shared<Text2dEntity>(id);
 
-	_entities.insert(make_pair(ID, entity));
+	_entities.insert(make_pair(id, entity));
 
 	auto texture = _textureBufferCache->get2dBuffer(fontMapPath);
 
@@ -55,14 +55,14 @@ void Text2dEntityManager::createEntity(const string& ID, const string& fontMapPa
 	_renderBus->setGuiDepth(_renderBus->getGuiDepth() + 1);
 }
 
-void Text2dEntityManager::deleteEntity(const string& ID)
+void Text2dEntityManager::deleteEntity(const string& id)
 {
-	if(!isEntityExisting(ID))
+	if(!isEntityExisting(id))
 	{
 		Logger::throwError("Text2dEntityManager::deleteEntity");
 	}
 
-	_entities.erase(ID);
+	_entities.erase(id);
 }
 
 void Text2dEntityManager::deleteEntities()
@@ -70,9 +70,9 @@ void Text2dEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool Text2dEntityManager::isEntityExisting(const string& ID) const
+const bool Text2dEntityManager::isEntityExisting(const string& id) const
 {
-	return (_entities.find(ID) != _entities.end());
+	return (_entities.find(id) != _entities.end());
 }
 
 void Text2dEntityManager::inject(shared_ptr<RenderBus> renderBus)

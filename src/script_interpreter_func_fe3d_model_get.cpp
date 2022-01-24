@@ -31,13 +31,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				return true;
 			}
 
-			for(const auto& ID : _fe3d->model_getIDs())
+			for(const auto& id : _fe3d->model_getIDs())
 			{
-				if(args[0].getString() == ID.substr(0, args[0].getString().size()))
+				if(args[0].getString() == id.substr(0, args[0].getString().size()))
 				{
-					if(ID[0] != '@')
+					if(id[0] != '@')
 					{
-						returnValues.push_back(ScriptValue(SVT::STRING, ID));
+						returnValues.push_back(ScriptValue(SVT::STRING, id));
 					}
 				}
 			}
@@ -49,11 +49,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 		{
 			const auto result = _fe3d->model_getIDs();
 
-			for(const auto& ID : result)
+			for(const auto& id : result)
 			{
-				if(ID[0] != '@')
+				if(id[0] != '@')
 				{
-					returnValues.push_back(ScriptValue(SVT::STRING, ID));
+					returnValues.push_back(ScriptValue(SVT::STRING, id));
 				}
 			}
 		}

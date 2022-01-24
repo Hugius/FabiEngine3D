@@ -14,11 +14,11 @@ void WorldEditor::_updateWaterMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> waterIDs;
-			for(const auto& ID : _waterEditor->getLoadedIDs())
+			for(const auto& id : _waterEditor->getLoadedIDs())
 			{
-				if(ID[0] == '@')
+				if(id[0] == '@')
 				{
-					waterIDs.push_back(ID.substr(1));
+					waterIDs.push_back(id.substr(1));
 				}
 			}
 

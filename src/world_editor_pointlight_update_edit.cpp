@@ -18,13 +18,13 @@ void WorldEditor::_updatePointlightEditing()
 
 		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
 
-		for(const auto& ID : _fe3d->model_getIDs())
+		for(const auto& id : _fe3d->model_getIDs())
 		{
-			if(ID.substr(0, string("@@lamp").size()) == "@@lamp")
+			if(id.substr(0, string("@@lamp").size()) == "@@lamp")
 			{
-				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbID == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					_selectPointlight(ID.substr(string("@@lamp_").size()));
+					_selectPointlight(id.substr(string("@@lamp_").size()));
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
@@ -36,9 +36,9 @@ void WorldEditor::_updatePointlightEditing()
 				}
 				else
 				{
-					if((ID != _selectedLampID) && (ID != _activeLampID))
+					if((id != _selectedLampID) && (id != _activeLampID))
 					{
-						_unselectPointlight(ID);
+						_unselectPointlight(id);
 					}
 				}
 			}

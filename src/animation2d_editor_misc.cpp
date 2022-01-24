@@ -259,11 +259,11 @@ const unsigned int Animation2dEditor::getQuad2dAnimationFramestep(const string& 
 	return _startedQuad2dAnimations.at(make_pair(animationID, quadID)).getFramestep();
 }
 
-void Animation2dEditor::_deleteAnimation(const string& ID)
+void Animation2dEditor::_deleteAnimation(const string& id)
 {
 	for(size_t i = 0; i < _animations.size(); i++)
 	{
-		if(_animations[i]->getID() == ID)
+		if(_animations[i]->getID() == id)
 		{
 			_animations.erase(_animations.begin() + i);
 			return;
@@ -273,11 +273,11 @@ void Animation2dEditor::_deleteAnimation(const string& ID)
 	Logger::throwError("Animation2dEditor::_deleteAnimation");
 }
 
-shared_ptr<Animation2d> Animation2dEditor::_getAnimation(const string& ID) const
+shared_ptr<Animation2d> Animation2dEditor::_getAnimation(const string& id) const
 {
 	for(const auto& animation : _animations)
 	{
-		if(animation->getID() == ID)
+		if(animation->getID() == id)
 		{
 			return animation;
 		}
@@ -286,11 +286,11 @@ shared_ptr<Animation2d> Animation2dEditor::_getAnimation(const string& ID) const
 	Logger::throwError("Animation2dEditor::_getAnimation");
 }
 
-const bool Animation2dEditor::isAnimationExisting(const string& ID) const
+const bool Animation2dEditor::isAnimationExisting(const string& id) const
 {
 	for(const auto& animation : _animations)
 	{
-		if(animation->getID() == ID)
+		if(animation->getID() == id)
 		{
 			return true;
 		}

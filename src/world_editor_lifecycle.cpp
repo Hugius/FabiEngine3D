@@ -18,24 +18,24 @@ void WorldEditor::load()
 	_waterEditor->loadFromFile();
 
 	_modelEditor->loadFromFile();
-	for(const auto& ID : _modelEditor->getLoadedIDs())
+	for(const auto& id : _modelEditor->getLoadedIDs())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace");
-		screen->getScrollingList("modelList")->createButton(ID, ID.substr(1));
+		screen->getScrollingList("modelList")->createButton(id, id.substr(1));
 	}
 
 	_quad3dEditor->loadFromFile();
-	for(const auto& ID : _quad3dEditor->getLoadedIDs())
+	for(const auto& id : _quad3dEditor->getLoadedIDs())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace");
-		screen->getScrollingList("quad3dList")->createButton(ID, ID.substr(1));
+		screen->getScrollingList("quad3dList")->createButton(id, id.substr(1));
 	}
 
 	_text3dEditor->loadFromFile();
-	for(const auto& ID : _text3dEditor->getLoadedIDs())
+	for(const auto& id : _text3dEditor->getLoadedIDs())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace");
-		screen->getScrollingList("text3dList")->createButton(ID, ID.substr(1));
+		screen->getScrollingList("text3dList")->createButton(id, id.substr(1));
 	}
 
 	_animation2dEditor->loadFromFile(false);
@@ -82,14 +82,14 @@ void WorldEditor::load()
 	_fe3d->model_setReflected(TEMPLATE_SPEAKER_ID, false);
 	_fe3d->model_setBright(TEMPLATE_SPEAKER_ID, "", true);
 	_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-	for(const auto& ID : _soundEditor->getLoadedIDs())
+	for(const auto& id : _soundEditor->getLoadedIDs())
 	{
-		_fe3d->sound3d_create(ID, _fe3d->sound2d_getAudioPath(ID));
-		_fe3d->sound3d_setMaxVolume(ID, DEFAULT_SOUND_MAX_VOLUME);
-		_fe3d->sound3d_setMaxDistance(ID, DEFAULT_SOUND_MAX_DISTANCE);
+		_fe3d->sound3d_create(id, _fe3d->sound2d_getAudioPath(id));
+		_fe3d->sound3d_setMaxVolume(id, DEFAULT_SOUND_MAX_VOLUME);
+		_fe3d->sound3d_setMaxDistance(id, DEFAULT_SOUND_MAX_DISTANCE);
 
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundPlace");
-		screen->getScrollingList("soundList")->createButton(ID, ID.substr(1));
+		screen->getScrollingList("soundList")->createButton(id, id.substr(1));
 	}
 
 	_gui->getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
@@ -112,34 +112,34 @@ void WorldEditor::unload()
 
 	unloadEditorWorld();
 
-	for(const auto& ID : _skyEditor->getLoadedIDs())
+	for(const auto& id : _skyEditor->getLoadedIDs())
 	{
-		_fe3d->sky_delete(ID);
+		_fe3d->sky_delete(id);
 	}
 
-	for(const auto& ID : _terrainEditor->getLoadedIDs())
+	for(const auto& id : _terrainEditor->getLoadedIDs())
 	{
-		_fe3d->terrain_delete(ID);
+		_fe3d->terrain_delete(id);
 	}
 
-	for(const auto& ID : _waterEditor->getLoadedIDs())
+	for(const auto& id : _waterEditor->getLoadedIDs())
 	{
-		_fe3d->water_delete(ID);
+		_fe3d->water_delete(id);
 	}
 
-	for(const auto& ID : _modelEditor->getLoadedIDs())
+	for(const auto& id : _modelEditor->getLoadedIDs())
 	{
-		_fe3d->model_delete(ID);
+		_fe3d->model_delete(id);
 	}
 
-	for(const auto& ID : _quad3dEditor->getLoadedIDs())
+	for(const auto& id : _quad3dEditor->getLoadedIDs())
 	{
-		_fe3d->quad3d_delete(ID);
+		_fe3d->quad3d_delete(id);
 	}
 
-	for(const auto& ID : _text3dEditor->getLoadedIDs())
+	for(const auto& id : _text3dEditor->getLoadedIDs())
 	{
-		_fe3d->text3d_delete(ID);
+		_fe3d->text3d_delete(id);
 	}
 
 	_fe3d->model_delete(TEMPLATE_LAMP_ID);
@@ -152,10 +152,10 @@ void WorldEditor::unload()
 	_fe3d->reflection_delete(TEMPLATE_CAMERA_ID);
 
 	_fe3d->model_delete(TEMPLATE_SPEAKER_ID);
-	for(const auto& ID : _soundEditor->getLoadedIDs())
+	for(const auto& id : _soundEditor->getLoadedIDs())
 	{
-		_fe3d->sound2d_delete(ID);
-		_fe3d->sound3d_delete(ID);
+		_fe3d->sound2d_delete(id);
+		_fe3d->sound3d_delete(id);
 	}
 
 	_loadedModelIDs.clear();

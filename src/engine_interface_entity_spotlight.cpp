@@ -1,7 +1,7 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::spotlight_create(const string& ID)
+void EngineInterface::spotlight_create(const string& id)
 {
 	if(_core->getSpotlightEntityManager()->getEntities().size() == SpotlightEntityManager::MAX_LIGHT_COUNT)
 	{
@@ -9,7 +9,7 @@ void EngineInterface::spotlight_create(const string& ID)
 		return;
 	}
 
-	_core->getSpotlightEntityManager()->createEntity(ID);
+	_core->getSpotlightEntityManager()->createEntity(id);
 }
 
 void EngineInterface::spotlight_deleteAll()
@@ -17,59 +17,59 @@ void EngineInterface::spotlight_deleteAll()
 	_core->getSpotlightEntityManager()->deleteEntities();
 }
 
-void EngineInterface::spotlight_delete(const string& ID)
+void EngineInterface::spotlight_delete(const string& id)
 {
-	_core->getSpotlightEntityManager()->deleteEntity(ID);
+	_core->getSpotlightEntityManager()->deleteEntity(id);
 }
 
-void EngineInterface::spotlight_setVisible(const string& ID, bool value)
+void EngineInterface::spotlight_setVisible(const string& id, bool value)
 {
-	_core->getSpotlightEntityManager()->getEntity(ID)->setVisible(value);
+	_core->getSpotlightEntityManager()->getEntity(id)->setVisible(value);
 }
 
-void EngineInterface::spotlight_setPosition(const string& ID, const fvec3& value)
+void EngineInterface::spotlight_setPosition(const string& id, const fvec3& value)
 {
-	_core->getSpotlightEntityManager()->getEntity(ID)->setPosition(value);
+	_core->getSpotlightEntityManager()->getEntity(id)->setPosition(value);
 }
 
-void EngineInterface::spotlight_move(const string& ID, const fvec3& change)
+void EngineInterface::spotlight_move(const string& id, const fvec3& change)
 {
-	_core->getSpotlightEntityManager()->getEntity(ID)->move(change);
+	_core->getSpotlightEntityManager()->getEntity(id)->move(change);
 }
 
-void EngineInterface::spotlight_moveTo(const string& ID, const fvec3& target, float speed)
+void EngineInterface::spotlight_moveTo(const string& id, const fvec3& target, float speed)
 {
-	_core->getSpotlightEntityManager()->getEntity(ID)->moveTo(target, speed);
+	_core->getSpotlightEntityManager()->getEntity(id)->moveTo(target, speed);
 }
 
-void EngineInterface::spotlight_setColor(const string& ID, const fvec3& value)
+void EngineInterface::spotlight_setColor(const string& id, const fvec3& value)
 {
-	_core->getSpotlightEntityManager()->getEntity(ID)->setColor(value);
+	_core->getSpotlightEntityManager()->getEntity(id)->setColor(value);
 }
 
-void EngineInterface::spotlight_setYaw(const string& ID, float value)
+void EngineInterface::spotlight_setYaw(const string& id, float value)
 {
-	_core->getSpotlightEntityManager()->getEntity(ID)->setYaw(value);
+	_core->getSpotlightEntityManager()->getEntity(id)->setYaw(value);
 }
 
-void EngineInterface::spotlight_setPitch(const string& ID, float value)
+void EngineInterface::spotlight_setPitch(const string& id, float value)
 {
-	_core->getSpotlightEntityManager()->getEntity(ID)->setPitch(value);
+	_core->getSpotlightEntityManager()->getEntity(id)->setPitch(value);
 }
 
-void EngineInterface::spotlight_setIntensity(const string& ID, float value)
+void EngineInterface::spotlight_setIntensity(const string& id, float value)
 {
-	_core->getSpotlightEntityManager()->getEntity(ID)->setIntensity(value);
+	_core->getSpotlightEntityManager()->getEntity(id)->setIntensity(value);
 }
 
-void EngineInterface::spotlight_setAngle(const string& ID, float value)
+void EngineInterface::spotlight_setAngle(const string& id, float value)
 {
-	_core->getSpotlightEntityManager()->getEntity(ID)->setAngle(value);
+	_core->getSpotlightEntityManager()->getEntity(id)->setAngle(value);
 }
 
-void EngineInterface::spotlight_setDistance(const string& ID, float value)
+void EngineInterface::spotlight_setDistance(const string& id, float value)
 {
-	_core->getSpotlightEntityManager()->getEntity(ID)->setDistance(value);
+	_core->getSpotlightEntityManager()->getEntity(id)->setDistance(value);
 }
 
 const vector<string> EngineInterface::spotlight_getIDs() const
@@ -84,52 +84,52 @@ const vector<string> EngineInterface::spotlight_getIDs() const
 	return result;
 }
 
-const fvec3& EngineInterface::spotlight_getPosition(const string& ID) const
+const fvec3& EngineInterface::spotlight_getPosition(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->getEntity(ID)->getPosition();
+	return _core->getSpotlightEntityManager()->getEntity(id)->getPosition();
 }
 
-const fvec3& EngineInterface::spotlight_getFrontVector(const string& ID) const
+const fvec3& EngineInterface::spotlight_getFrontVector(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->getEntity(ID)->getFrontVector();
+	return _core->getSpotlightEntityManager()->getEntity(id)->getFrontVector();
 }
 
-const fvec3& EngineInterface::spotlight_getColor(const string& ID) const
+const fvec3& EngineInterface::spotlight_getColor(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->getEntity(ID)->getColor();
+	return _core->getSpotlightEntityManager()->getEntity(id)->getColor();
 }
 
-const float EngineInterface::spotlight_getYaw(const string& ID) const
+const float EngineInterface::spotlight_getYaw(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->getEntity(ID)->getYaw();
+	return _core->getSpotlightEntityManager()->getEntity(id)->getYaw();
 }
 
-const float EngineInterface::spotlight_getPitch(const string& ID) const
+const float EngineInterface::spotlight_getPitch(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->getEntity(ID)->getPitch();
+	return _core->getSpotlightEntityManager()->getEntity(id)->getPitch();
 }
 
-const float EngineInterface::spotlight_getIntensity(const string& ID) const
+const float EngineInterface::spotlight_getIntensity(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->getEntity(ID)->getIntensity();
+	return _core->getSpotlightEntityManager()->getEntity(id)->getIntensity();
 }
 
-const float EngineInterface::spotlight_getAngle(const string& ID) const
+const float EngineInterface::spotlight_getAngle(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->getEntity(ID)->getAngle();
+	return _core->getSpotlightEntityManager()->getEntity(id)->getAngle();
 }
 
-const float EngineInterface::spotlight_getDistance(const string& ID) const
+const float EngineInterface::spotlight_getDistance(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->getEntity(ID)->getDistance();
+	return _core->getSpotlightEntityManager()->getEntity(id)->getDistance();
 }
 
-const bool EngineInterface::spotlight_isExisting(const string& ID) const
+const bool EngineInterface::spotlight_isExisting(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->isEntityExisting(ID);
+	return _core->getSpotlightEntityManager()->isEntityExisting(id);
 }
 
-const bool EngineInterface::spotlight_isVisible(const string& ID) const
+const bool EngineInterface::spotlight_isVisible(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->getEntity(ID)->isVisible();
+	return _core->getSpotlightEntityManager()->getEntity(id)->isVisible();
 }

@@ -33,13 +33,13 @@ void SoundEditor::_updateSoundCreating()
 		{
 			if(newSoundID.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Sound ID cannot contain any spaces!");
+				Logger::throwWarning("Sound id cannot contain any spaces!");
 				return;
 			}
 
 			if(newSoundID.find('@') != string::npos)
 			{
-				Logger::throwWarning("Sound ID cannot contain '@'!");
+				Logger::throwWarning("Sound id cannot contain '@'!");
 				return;
 			}
 
@@ -47,7 +47,7 @@ void SoundEditor::_updateSoundCreating()
 
 			if(find(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), newSoundID) != _loadedSoundIDs.end())
 			{
-				Logger::throwWarning("Sound with ID \"" + newSoundID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Sound with id \"" + newSoundID.substr(1) + "\" already exists!");
 				return;
 			}
 

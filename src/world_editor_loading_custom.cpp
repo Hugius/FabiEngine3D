@@ -28,7 +28,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//auto file = ifstream(filePath);
 	//if(!file)
 	//{
-	//	Logger::throwWarning("Cannot load world with ID \"" + fileName + "\"!");
+	//	Logger::throwWarning("Cannot load world with id \"" + fileName + "\"!");
 	//	return false;
 	//}
 
@@ -145,7 +145,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//			if(partIDs.size() != _fe3d->model_getPartIDs(templateID).size())
 	//			{
-	//				Logger::throwWarning("World model parts with ID \"" + modelID + "\" differ from base model!");
+	//				Logger::throwWarning("World model parts with id \"" + modelID + "\" differ from base model!");
 	//				continue;
 	//			}
 
@@ -153,7 +153,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			{
 	//				if(partIDs[i] != _fe3d->model_getPartIDs(templateID)[i])
 	//				{
-	//					Logger::throwWarning("World model parts with ID \"" + modelID + "\" differ from base model!");
+	//					Logger::throwWarning("World model parts with id \"" + modelID + "\" differ from base model!");
 	//					continue;
 	//				}
 	//			}
@@ -171,10 +171,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			//_fe3d->model_setOpacity(modelID, opacity);
 	//			//_fe3d->model_setLightness(modelID, lightness);
 	//			_fe3d->model_setVisible(modelID, isVisible);
-	//			for(const auto& ID : _fe3d->aabb_getChildIDs(modelID, AabbParentEntityType::MODEL))
+	//			for(const auto& id : _fe3d->aabb_getChildIDs(modelID, AabbParentEntityType::MODEL))
 	//			{
-	//				_fe3d->aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
-	//				_fe3d->aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
+	//				_fe3d->aabb_setRaycastResponsive(id, isAabbRaycastResponsive);
+	//				_fe3d->aabb_setCollisionResponsive(id, isAabbCollisionResponsive);
 	//			}
 
 	//			for(unsigned int i = 0; i < partCount; i++)
@@ -248,7 +248,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		//if(_animation3dEditor->isAnimationExisting(animationID))
 	//		//{
 	//		//	// Retrieve raw animation data for editing
-	//		//	string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	//		//	string errorMessage = "Tried to retrieve animation with id \"" + animationID + "\" on model with id \"" + modelID + "\": ";
 	//		//	auto animationData = _animation3dEditor->getAnimationData(animationID, modelID, errorMessage);
 	//		//	auto frameData = animationData->getFrames()[frameIndex];
 
@@ -333,10 +333,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			_fe3d->quad3d_setMinHeight(quadID, minHeight);
 	//			_fe3d->quad3d_setMaxHeight(quadID, maxHeight);
 	//			_fe3d->quad3d_setVisible(quadID, isVisible);
-	//			for(const auto& ID : _fe3d->aabb_getChildIDs(quadID, AabbParentEntityType::QUAD3D))
+	//			for(const auto& id : _fe3d->aabb_getChildIDs(quadID, AabbParentEntityType::QUAD3D))
 	//			{
-	//				_fe3d->aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
-	//				_fe3d->aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
+	//				_fe3d->aabb_setRaycastResponsive(id, isAabbRaycastResponsive);
+	//				_fe3d->aabb_setCollisionResponsive(id, isAabbCollisionResponsive);
 	//			}
 	//		}
 	//	}

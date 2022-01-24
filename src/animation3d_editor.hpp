@@ -37,7 +37,7 @@ public:
 	const unsigned int getModelAnimationFrameIndex(const string& animationID, const string& modelID) const;
 
 	const bool isLoaded() const;
-	const bool isAnimationExisting(const string& ID) const;
+	const bool isAnimationExisting(const string& id) const;
 	const bool isModelAnimationStarted(const string& animationID, const string& modelID) const;
 	const bool isModelAnimationPlaying(const string& animationID, const string& modelID) const;
 	const bool isModelAnimationPaused(const string& animationID, const string& modelID) const;
@@ -57,12 +57,12 @@ private:
 	void _updateModelAnimationExecution();
 	void _updateCamera();
 	void _updateMiscellaneous();
-	void _deleteAnimation(const string& ID);
+	void _deleteAnimation(const string& id);
 
 	const bool _hasReachedFloat(float first, float second, float speed) const;
 	const bool _comparePartIDs(vector<string> first, vector<string> second) const;
 
-	shared_ptr<Animation3d> _getAnimation(const string& ID) const;
+	shared_ptr<Animation3d> _getAnimation(const string& id) const;
 
 	set<pair<string, string>> _modelAnimationsToStop;
 	set<pair<string, string>> _modelAnimationsToStart;

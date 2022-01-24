@@ -25,7 +25,7 @@ const float Timer::stop()
 	return static_cast<float>((_time2.QuadPart - _time1.QuadPart) * 1000.0f / _frequency.QuadPart);
 }
 
-void Timer::startDeltaPart(const string& ID)
+void Timer::startDeltaPart(const string& id)
 {
 	if(!_currentID.empty())
 	{
@@ -34,7 +34,7 @@ void Timer::startDeltaPart(const string& ID)
 
 	QueryPerformanceFrequency(&_specificFrequency);
 	QueryPerformanceCounter(&_specificTime1);
-	_currentID = ID;
+	_currentID = id;
 }
 
 void Timer::stopDeltaPart()
@@ -49,9 +49,9 @@ void Timer::stopDeltaPart()
 	_currentID = "";
 }
 
-const float Timer::getDeltaPart(const string& ID)
+const float Timer::getDeltaPart(const string& id)
 {
-	return _deltaParts[ID];
+	return _deltaParts[id];
 }
 
 const float Timer::getDeltaPartSum() const
@@ -102,7 +102,7 @@ const bool Timer::isStarted() const
 	return _isStarted;
 }
 
-const bool Timer::isDeltaPartStarted(const string& ID) const
+const bool Timer::isDeltaPartStarted(const string& id) const
 {
-	return (!_currentID.empty()) && (ID == _currentID);
+	return (!_currentID.empty()) && (id == _currentID);
 }

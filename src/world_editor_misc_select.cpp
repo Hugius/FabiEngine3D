@@ -1,8 +1,8 @@
 #include "world_editor.hpp"
 
-void WorldEditor::_selectModel(const string& ID)
+void WorldEditor::_selectModel(const string& id)
 {
-	_selectedModelID = ID;
+	_selectedModelID = id;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
@@ -17,15 +17,15 @@ void WorldEditor::_selectModel(const string& ID)
 	}
 }
 
-void WorldEditor::_selectQuad3d(const string& ID)
+void WorldEditor::_selectQuad3d(const string& id)
 {
-	_selectedQuadID = ID;
+	_selectedQuadID = id;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 	if(_activeModelID.empty() && _activeQuadID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
-		string tempID = ID;
+		string tempID = id;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
@@ -34,15 +34,15 @@ void WorldEditor::_selectQuad3d(const string& ID)
 	}
 }
 
-void WorldEditor::_selectText3d(const string& ID)
+void WorldEditor::_selectText3d(const string& id)
 {
-	_selectedTextID = ID;
+	_selectedTextID = id;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 	if(_activeModelID.empty() && _activeTextID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
-		string tempID = ID;
+		string tempID = id;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
@@ -51,15 +51,15 @@ void WorldEditor::_selectText3d(const string& ID)
 	}
 }
 
-void WorldEditor::_selectSound(const string& ID)
+void WorldEditor::_selectSound(const string& id)
 {
-	_selectedSpeakerID = ("@@speaker_" + ID);
+	_selectedSpeakerID = ("@@speaker_" + id);
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 	if(_activeModelID.empty() && _activeQuadID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
-		string tempID = ID;
+		string tempID = id;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
@@ -68,65 +68,65 @@ void WorldEditor::_selectSound(const string& ID)
 	}
 }
 
-void WorldEditor::_selectPointlight(const string& ID)
+void WorldEditor::_selectPointlight(const string& id)
 {
-	_selectedLampID = ("@@lamp_" + ID);
+	_selectedLampID = ("@@lamp_" + id);
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 }
 
-void WorldEditor::_selectSpotlight(const string& ID)
+void WorldEditor::_selectSpotlight(const string& id)
 {
-	_selectedTorchID = ("@@torch_" + ID);
+	_selectedTorchID = ("@@torch_" + id);
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 }
 
-void WorldEditor::_selectReflection(const string& ID)
+void WorldEditor::_selectReflection(const string& id)
 {
-	_selectedCameraID = ("@@camera_" + ID);
+	_selectedCameraID = ("@@camera_" + id);
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 }
 
-void WorldEditor::_unselectModel(const string& ID)
+void WorldEditor::_unselectModel(const string& id)
 {
-	for(const auto& partID : _fe3d->model_getPartIDs(ID))
+	for(const auto& partID : _fe3d->model_getPartIDs(id))
 	{
-		_fe3d->model_setOpacity(ID, partID, 1.0f);
+		_fe3d->model_setOpacity(id, partID, 1.0f);
 	}
 }
 
-void WorldEditor::_unselectQuad3d(const string& ID)
+void WorldEditor::_unselectQuad3d(const string& id)
 {
-	_fe3d->quad3d_setOpacity(ID, 1.0f);
+	_fe3d->quad3d_setOpacity(id, 1.0f);
 }
 
-void WorldEditor::_unselectText3d(const string& ID)
+void WorldEditor::_unselectText3d(const string& id)
 {
-	_fe3d->text3d_setOpacity(ID, 1.0f);
+	_fe3d->text3d_setOpacity(id, 1.0f);
 }
 
-void WorldEditor::_unselectSound(const string& ID)
+void WorldEditor::_unselectSound(const string& id)
 {
-	_fe3d->model_setBaseSize(ID, DEFAULT_SPEAKER_SIZE);
-	_fe3d->aabb_setLocalSize(ID, DEFAULT_SPEAKER_AABB_SIZE);
+	_fe3d->model_setBaseSize(id, DEFAULT_SPEAKER_SIZE);
+	_fe3d->aabb_setLocalSize(id, DEFAULT_SPEAKER_AABB_SIZE);
 }
 
-void WorldEditor::_unselectPointlight(const string& ID)
+void WorldEditor::_unselectPointlight(const string& id)
 {
-	_fe3d->model_setBaseSize(ID, DEFAULT_LAMP_SIZE);
-	_fe3d->aabb_setLocalSize(ID, DEFAULT_LAMP_AABB_SIZE);
+	_fe3d->model_setBaseSize(id, DEFAULT_LAMP_SIZE);
+	_fe3d->aabb_setLocalSize(id, DEFAULT_LAMP_AABB_SIZE);
 }
 
-void WorldEditor::_unselectSpotlight(const string& ID)
+void WorldEditor::_unselectSpotlight(const string& id)
 {
-	_fe3d->model_setBaseSize(ID, DEFAULT_TORCH_SIZE);
-	_fe3d->aabb_setLocalSize(ID, DEFAULT_TORCH_AABB_SIZE);
+	_fe3d->model_setBaseSize(id, DEFAULT_TORCH_SIZE);
+	_fe3d->aabb_setLocalSize(id, DEFAULT_TORCH_AABB_SIZE);
 }
 
-void WorldEditor::_unselectReflection(const string& ID)
+void WorldEditor::_unselectReflection(const string& id)
 {
-	_fe3d->model_setBaseSize(ID, DEFAULT_CAMERA_SIZE);
-	_fe3d->aabb_setLocalSize(ID, DEFAULT_CAMERA_AABB_SIZE);
+	_fe3d->model_setBaseSize(id, DEFAULT_CAMERA_SIZE);
+	_fe3d->aabb_setLocalSize(id, DEFAULT_CAMERA_AABB_SIZE);
 }

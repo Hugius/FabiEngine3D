@@ -6,12 +6,12 @@
 class GuiViewport final
 {
 public:
-	GuiViewport(shared_ptr<EngineInterface> fe3d, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color);
+	GuiViewport(shared_ptr<EngineInterface> fe3d, const string& id, const fvec2& position, const fvec2& size, const fvec3& color);
 	~GuiViewport();
 
 	void update(bool isHoverable);
-	void createWindow(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color);
-	void deleteWindow(const string& ID);
+	void createWindow(const string& id, const fvec2& position, const fvec2& size, const fvec3& color);
+	void deleteWindow(const string& id);
 
 	const string& getID();
 	const string& getEntityID();
@@ -24,7 +24,7 @@ public:
 	const bool isHovered() const;
 
 	const vector<shared_ptr<GuiWindow>>& getWindows() const;
-	shared_ptr<GuiWindow> getWindow(const string& ID) const;
+	shared_ptr<GuiWindow> getWindow(const string& id) const;
 
 private:
 	const string _ID;

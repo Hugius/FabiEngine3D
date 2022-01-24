@@ -1,53 +1,53 @@
 #include "gui_screen.hpp"
 #include "logger.hpp"
 
-void GuiScreen::createScrollingList(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
+void GuiScreen::createScrollingList(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_scrollingLists.push_back(make_shared<GuiScrollingList>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize, isCentered));
+	_scrollingLists.push_back(make_shared<GuiScrollingList>(_fe3d, _parentID + "_" + _ID, id, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize, isCentered));
 }
 
-void GuiScreen::createWriteField(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+void GuiScreen::createWriteField(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_writeFields.push_back(make_shared<GuiWriteField>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered));
+	_writeFields.push_back(make_shared<GuiWriteField>(_fe3d, _parentID + "_" + _ID, id, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered));
 }
 
-void GuiScreen::createButton(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
+void GuiScreen::createButton(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textContent, textColor, textHoverColor, isCentered));
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID + "_" + _ID, id, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textContent, textColor, textHoverColor, isCentered));
 }
 
-void GuiScreen::createButton(const string& ID, const fvec2& position, const fvec2& size, const string& texturePath, const fvec3& hoverColor, bool isCentered)
+void GuiScreen::createButton(const string& id, const fvec2& position, const fvec2& size, const string& texturePath, const fvec3& hoverColor, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), texturePath, hoverColor, isCentered));
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID + "_" + _ID, id, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), texturePath, hoverColor, isCentered));
 }
 
-void GuiScreen::createRectangle(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
+void GuiScreen::createRectangle(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, isCentered));
+	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, _parentID + "_" + _ID, id, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, isCentered));
 }
 
-void GuiScreen::createRectangle(const string& ID, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
+void GuiScreen::createRectangle(const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), texturePath, isCentered));
+	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, _parentID + "_" + _ID, id, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), texturePath, isCentered));
 }
 
-void GuiScreen::createTextField(const string& ID, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& textColor, bool isCentered)
+void GuiScreen::createTextField(const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& textColor, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_textFields.push_back(make_shared<GuiTextField>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), textContent, textColor, isCentered));
+	_textFields.push_back(make_shared<GuiTextField>(_fe3d, _parentID + "_" + _ID, id, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), textContent, textColor, isCentered));
 }
 
-void GuiScreen::deleteScrollingList(const string& ID)
+void GuiScreen::deleteScrollingList(const string& id)
 {
 	for(size_t i = 0; i < _scrollingLists.size(); i++)
 	{
-		if(ID == _scrollingLists[i]->getID())
+		if(id == _scrollingLists[i]->getID())
 		{
 			_scrollingLists.erase(_scrollingLists.begin() + i);
 			return;
@@ -57,11 +57,11 @@ void GuiScreen::deleteScrollingList(const string& ID)
 	Logger::throwError("GuiScreen::deleteScrollingList");
 }
 
-void GuiScreen::deleteWriteField(const string& ID)
+void GuiScreen::deleteWriteField(const string& id)
 {
 	for(size_t i = 0; i < _writeFields.size(); i++)
 	{
-		if(ID == _writeFields[i]->getID())
+		if(id == _writeFields[i]->getID())
 		{
 			_writeFields.erase(_writeFields.begin() + i);
 			return;
@@ -71,11 +71,11 @@ void GuiScreen::deleteWriteField(const string& ID)
 	Logger::throwError("GuiScreen::deleteWriteField");
 }
 
-void GuiScreen::deleteButton(const string& ID)
+void GuiScreen::deleteButton(const string& id)
 {
 	for(size_t i = 0; i < _buttons.size(); i++)
 	{
-		if(ID == _buttons[i]->getID())
+		if(id == _buttons[i]->getID())
 		{
 			_buttons.erase(_buttons.begin() + i);
 			return;
@@ -85,11 +85,11 @@ void GuiScreen::deleteButton(const string& ID)
 	Logger::throwError("GuiScreen::deleteButton");
 }
 
-void GuiScreen::deleteRectangle(const string& ID)
+void GuiScreen::deleteRectangle(const string& id)
 {
 	for(size_t i = 0; i < _rectangles.size(); i++)
 	{
-		if(ID == _rectangles[i]->getID())
+		if(id == _rectangles[i]->getID())
 		{
 			_rectangles.erase(_rectangles.begin() + i);
 			return;
@@ -99,11 +99,11 @@ void GuiScreen::deleteRectangle(const string& ID)
 	Logger::throwError("GuiScreen::deleteRectangle");
 }
 
-void GuiScreen::deleteTextField(const string& ID)
+void GuiScreen::deleteTextField(const string& id)
 {
 	for(size_t i = 0; i < _textFields.size(); i++)
 	{
-		if(ID == _textFields[i]->getID())
+		if(id == _textFields[i]->getID())
 		{
 			_textFields.erase(_textFields.begin() + i);
 			return;
@@ -113,11 +113,11 @@ void GuiScreen::deleteTextField(const string& ID)
 	Logger::throwError("GuiScreen::deleteTextField");
 }
 
-const bool GuiScreen::isScrollingListExisting(const string& ID) const
+const bool GuiScreen::isScrollingListExisting(const string& id) const
 {
 	for(const auto& scrollingList : _scrollingLists)
 	{
-		if(ID == scrollingList->getID())
+		if(id == scrollingList->getID())
 		{
 			return true;
 		}
@@ -126,11 +126,11 @@ const bool GuiScreen::isScrollingListExisting(const string& ID) const
 	return false;
 }
 
-const bool GuiScreen::isWriteFieldExisting(const string& ID) const
+const bool GuiScreen::isWriteFieldExisting(const string& id) const
 {
 	for(const auto& writeField : _writeFields)
 	{
-		if(ID == writeField->getID())
+		if(id == writeField->getID())
 		{
 			return true;
 		}
@@ -139,11 +139,11 @@ const bool GuiScreen::isWriteFieldExisting(const string& ID) const
 	return false;
 }
 
-const bool GuiScreen::isButtonExisting(const string& ID) const
+const bool GuiScreen::isButtonExisting(const string& id) const
 {
 	for(const auto& button : _buttons)
 	{
-		if(ID == button->getID())
+		if(id == button->getID())
 		{
 			return true;
 		}
@@ -152,11 +152,11 @@ const bool GuiScreen::isButtonExisting(const string& ID) const
 	return false;
 }
 
-const bool GuiScreen::isRectangleExisting(const string& ID) const
+const bool GuiScreen::isRectangleExisting(const string& id) const
 {
 	for(const auto& rectangle : _rectangles)
 	{
-		if(ID == rectangle->getID())
+		if(id == rectangle->getID())
 		{
 			return true;
 		}
@@ -165,11 +165,11 @@ const bool GuiScreen::isRectangleExisting(const string& ID) const
 	return false;
 }
 
-const bool GuiScreen::isTextFieldExisting(const string& ID) const
+const bool GuiScreen::isTextFieldExisting(const string& id) const
 {
 	for(const auto& textField : _textFields)
 	{
-		if(ID == textField->getID())
+		if(id == textField->getID())
 		{
 			return true;
 		}
@@ -178,11 +178,11 @@ const bool GuiScreen::isTextFieldExisting(const string& ID) const
 	return false;
 }
 
-shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string& ID) const
+shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string& id) const
 {
 	for(const auto& scrollingList : _scrollingLists)
 	{
-		if(ID == scrollingList->getID())
+		if(id == scrollingList->getID())
 		{
 			return scrollingList;
 		}
@@ -191,11 +191,11 @@ shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string& ID) const
 	Logger::throwError("GuiScreen::getScrollingList");
 }
 
-shared_ptr<GuiWriteField> GuiScreen::getWriteField(const string& ID) const
+shared_ptr<GuiWriteField> GuiScreen::getWriteField(const string& id) const
 {
 	for(const auto& writeField : _writeFields)
 	{
-		if(ID == writeField->getID())
+		if(id == writeField->getID())
 		{
 			return writeField;
 		}
@@ -204,11 +204,11 @@ shared_ptr<GuiWriteField> GuiScreen::getWriteField(const string& ID) const
 	Logger::throwError("GuiScreen::getWriteField");
 }
 
-shared_ptr<GuiButton> GuiScreen::getButton(const string& ID) const
+shared_ptr<GuiButton> GuiScreen::getButton(const string& id) const
 {
 	for(const auto& button : _buttons)
 	{
-		if(ID == button->getID())
+		if(id == button->getID())
 		{
 			return button;
 		}
@@ -217,11 +217,11 @@ shared_ptr<GuiButton> GuiScreen::getButton(const string& ID) const
 	Logger::throwError("GuiScreen::getButton");
 }
 
-shared_ptr<GuiRectangle> GuiScreen::getRectangle(const string& ID) const
+shared_ptr<GuiRectangle> GuiScreen::getRectangle(const string& id) const
 {
 	for(const auto& rectangle : _rectangles)
 	{
-		if(ID == rectangle->getID())
+		if(id == rectangle->getID())
 		{
 			return rectangle;
 		}
@@ -230,11 +230,11 @@ shared_ptr<GuiRectangle> GuiScreen::getRectangle(const string& ID) const
 	Logger::throwError("GuiScreen::getRectangle");
 }
 
-shared_ptr<GuiTextField> GuiScreen::getTextField(const string& ID) const
+shared_ptr<GuiTextField> GuiScreen::getTextField(const string& id) const
 {
 	for(const auto& textField : _textFields)
 	{
-		if(ID == textField->getID())
+		if(id == textField->getID())
 		{
 			return textField;
 		}

@@ -18,13 +18,13 @@ void WorldEditor::_updateSpotlightEditing()
 
 		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
 
-		for(const auto& ID : _fe3d->model_getIDs())
+		for(const auto& id : _fe3d->model_getIDs())
 		{
-			if(ID.substr(0, string("@@torch").size()) == "@@torch")
+			if(id.substr(0, string("@@torch").size()) == "@@torch")
 			{
-				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbID == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					_selectSpotlight(ID.substr(string("@@torch_").size()));
+					_selectSpotlight(id.substr(string("@@torch_").size()));
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
@@ -36,9 +36,9 @@ void WorldEditor::_updateSpotlightEditing()
 				}
 				else
 				{
-					if((ID != _selectedTorchID) && (ID != _activeTorchID))
+					if((id != _selectedTorchID) && (id != _activeTorchID))
 					{
-						_unselectSpotlight(ID);
+						_unselectSpotlight(id);
 					}
 				}
 			}

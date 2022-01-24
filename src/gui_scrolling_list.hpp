@@ -11,7 +11,7 @@ public:
 					 const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered);
 
 	void update(bool isHoverable);
-	void createButton(const string& ID, string textContent);
+	void createButton(const string& ID, const string& textContent);
 	void deleteButton(const string& ID);
 	void deleteButtons();
 	void setVisible(bool isVisible);

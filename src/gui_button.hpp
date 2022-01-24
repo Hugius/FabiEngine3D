@@ -8,7 +8,7 @@ class GuiButton
 {
 public:
 	GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor,
-			  string textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered);
+			  const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered);
 	GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size,
 			  const string& texturePath, const fvec3& hoverColor, bool isCentered);
 

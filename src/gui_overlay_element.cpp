@@ -33,7 +33,7 @@ void GuiOverlay::createRectangle(const string& ID, const fvec2& position, const 
 	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, "overlay", ID, position, size, texturePath, isCentered));
 }
 
-void GuiOverlay::createTextField(const string& ID, const fvec2& position, const fvec2& size, string textContent, const fvec3& textColor, bool isCentered)
+void GuiOverlay::createTextField(const string& ID, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& textColor, bool isCentered)
 {
 	_textFields.push_back(make_shared<GuiTextField>(_fe3d, "overlay", ID, position, size, textContent, textColor, isCentered));
 }

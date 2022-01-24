@@ -23,7 +23,7 @@ void GuiScrollingList::update(bool isHoverable)
 	_updateButtons(isHoverable);
 }
 
-void GuiScrollingList::createButton(const string& ID, string textContent)
+void GuiScrollingList::createButton(const string& ID, const string& textContent)
 {
 	float x = 0.0f;
 	float y = (1.0f - _charSize.y - (_buttons.size() * (_charSize.y * 1.5f)));

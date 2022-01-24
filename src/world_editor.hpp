@@ -159,7 +159,7 @@ private:
 	void _deactivateSpotlight();
 	void _deactivateReflection();
 	void _deactivateSound();
-	void _handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder, float multiplier = 1.0f, float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
+	void _handleValueChanging(const string& screenID, const string& buttonID, const string& writeFieldID, float& value, float adder, float multiplier = 1.0f, float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
 
 	const vector<string> _getWorldIDs() const;
 

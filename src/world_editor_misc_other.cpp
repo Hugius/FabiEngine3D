@@ -201,8 +201,7 @@ void WorldEditor::_deleteWorldFile(const string& ID)
 	}
 }
 
-void WorldEditor::_handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder,
-									   float multiplier, float minimum, float maximum)
+void WorldEditor::_handleValueChanging(const string& screenID, const string& buttonID, const string& writeFieldID, float& value, float adder, float multiplier, float minimum, float maximum)
 {
 	auto writeField = _gui->getRightViewport()->getWindow("main")->getScreen(screenID)->getWriteField(writeFieldID);
 

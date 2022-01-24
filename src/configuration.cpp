@@ -64,7 +64,7 @@ Config::Config()
 	}
 }
 
-void Config::_processOption(ifstream& file, string& option, string name)
+void Config::_processOption(ifstream& file, string& option, const string& name)
 {
 	string line;
 	string field;
@@ -86,7 +86,7 @@ void Config::_processOption(ifstream& file, string& option, string name)
 	}
 }
 
-void Config::_processOption(ifstream& file, float& option, string name)
+void Config::_processOption(ifstream& file, float& option, const string& name)
 {
 	string line;
 	string field;
@@ -108,7 +108,7 @@ void Config::_processOption(ifstream& file, float& option, string name)
 	}
 }
 
-void Config::_processOption(ifstream& file, int& option, string name)
+void Config::_processOption(ifstream& file, int& option, const string& name)
 {
 	string line;
 	string field;
@@ -130,7 +130,7 @@ void Config::_processOption(ifstream& file, int& option, string name)
 	}
 }
 
-void Config::_processOption(ifstream& file, bool& option, string name)
+void Config::_processOption(ifstream& file, bool& option, const string& name)
 {
 	string line;
 	string field;

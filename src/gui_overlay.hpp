@@ -20,7 +20,7 @@ public:
 	void createButton(const string& ID, const fvec2& position, const fvec2& size, const string& texturePath, const fvec3& hoverColor, bool isCentered);
 	void createRectangle(const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered);
 	void createRectangle(const string& ID, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered);
-	void createTextField(const string& ID, const fvec2& position, const fvec2& size, string textContent, const fvec3& textColor, bool isCentered);
+	void createTextField(const string& ID, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& textColor, bool isCentered);
 	void deleteScrollingList(const string& ID);
 	void deleteWriteField(const string& ID);
 	void deleteButton(const string& ID);

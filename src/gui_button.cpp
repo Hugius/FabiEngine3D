@@ -1,7 +1,7 @@
 #include "gui_button.hpp"
 #include "tools.hpp"
 
-GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, string textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
+GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),

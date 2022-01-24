@@ -144,7 +144,7 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 			const auto upHeight = _getPixelHeight(x, (z + 1), size, maxHeight, pixels);
 			const auto downHeight = _getPixelHeight(x, (z - 1), size, maxHeight, pixels);
 
-			const auto position = fvec3((x - halfSize), height, (z - halfSize));
+			const auto position = fvec3((halfSize - x), height, (z - halfSize));
 			const auto uv = fvec2((x / size), (z / size));
 			const auto normal = Math::normalize(fvec3((leftHeight - rightHeight), 3.0f, (downHeight - upHeight)));
 
@@ -166,29 +166,29 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 			auto bottomLeftIndex = (((z + 1) * uSize) + x);
 			auto bottomRightIndex = (bottomLeftIndex + 1);
 
-			positions.push_back(tempPositions[topLeftIndex]);
-			uvs.push_back(tempUvs[topLeftIndex]);
-			normals.push_back(tempNormals[topLeftIndex]);
+			positions.push_back(tempPositions[bottomRightIndex]);
+			uvs.push_back(tempUvs[bottomRightIndex]);
+			normals.push_back(tempNormals[bottomRightIndex]);
 
 			positions.push_back(tempPositions[bottomLeftIndex]);
 			uvs.push_back(tempUvs[bottomLeftIndex]);
 			normals.push_back(tempNormals[bottomLeftIndex]);
 
-			positions.push_back(tempPositions[bottomRightIndex]);
-			uvs.push_back(tempUvs[bottomRightIndex]);
-			normals.push_back(tempNormals[bottomRightIndex]);
+			positions.push_back(tempPositions[topLeftIndex]);
+			uvs.push_back(tempUvs[topLeftIndex]);
+			normals.push_back(tempNormals[topLeftIndex]);
 
-			positions.push_back(tempPositions[bottomRightIndex]);
-			uvs.push_back(tempUvs[bottomRightIndex]);
-			normals.push_back(tempNormals[bottomRightIndex]);
+			positions.push_back(tempPositions[topLeftIndex]);
+			uvs.push_back(tempUvs[topLeftIndex]);
+			normals.push_back(tempNormals[topLeftIndex]);
 
 			positions.push_back(tempPositions[topRightIndex]);
 			uvs.push_back(tempUvs[topRightIndex]);
 			normals.push_back(tempNormals[topRightIndex]);
 
-			positions.push_back(tempPositions[topLeftIndex]);
-			uvs.push_back(tempUvs[topLeftIndex]);
-			normals.push_back(tempNormals[topLeftIndex]);
+			positions.push_back(tempPositions[bottomRightIndex]);
+			uvs.push_back(tempUvs[bottomRightIndex]);
+			normals.push_back(tempNormals[bottomRightIndex]);
 		}
 	}
 

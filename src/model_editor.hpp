@@ -8,7 +8,7 @@ class ModelEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void unload();
 	void update();
@@ -41,13 +41,13 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedModelIDs;
-	string _currentProjectID = "";
-	string _currentModelID = "";
-	string _currentPartID = "";
+	vector<string> _loadedModelIds;
+	string _currentProjectId = "";
+	string _currentModelId = "";
+	string _currentPartId = "";
 	string _currentAabbID = "";
-	string _hoveredModelID = "";
-	string _hoveredPartID = "";
+	string _hoveredModelId = "";
+	string _hoveredPartId = "";
 	string _hoveredAabbID = "";
 
 	static inline constexpr float CW = 0.115f;

@@ -6,7 +6,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
-		for(const auto& partId : entity->getPartIDs())
+		for(const auto& partId : entity->getPartIds())
 		{
 			if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR) && entity->isVisible())
 			{
@@ -39,7 +39,7 @@ void MasterRenderer::_capturePlanarReflections()
 				continue;
 			}
 
-			for(const auto& partId : entity->getPartIDs())
+			for(const auto& partId : entity->getPartIds())
 			{
 				if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR))
 				{

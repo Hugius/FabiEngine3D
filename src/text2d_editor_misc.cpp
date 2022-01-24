@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void Text2dEditor::setCurrentProjectID(const string& projectID)
+void Text2dEditor::setCurrentProjectId(const string& projectId)
 {
-	_currentProjectID = projectID;
+	_currentProjectId = projectId;
 }
 
 const bool Text2dEditor::isLoaded() const

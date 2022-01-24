@@ -5,9 +5,9 @@
 
 #include <sstream>
 
-void ScriptInterpreter::setCurrentProjectID(const string& projectID)
+void ScriptInterpreter::setCurrentProjectId(const string& projectId)
 {
-	_currentProjectID = projectID;
+	_currentProjectId = projectId;
 }
 
 const bool ScriptInterpreter::hasThrownError() const
@@ -98,14 +98,14 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 
 const bool ScriptInterpreter::_validateSavesDirectory() const
 {
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		Logger::throwError("ScriptInterpreter::_validateSavesDirectory");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+	const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{

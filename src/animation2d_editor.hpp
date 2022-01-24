@@ -8,61 +8,61 @@ class Animation2dEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void unload();
 	void update();
-	void startQuad3dAnimation(const string& animationID, const string& quadID, int playCount);
-	void pauseQuad3dAnimation(const string& animationID, const string& quadID);
-	void autopauseQuad3dAnimation(const string& animationID, const string& quadID);
-	void resumeQuad3dAnimation(const string& animationID, const string& quadID);
-	void stopQuad3dAnimation(const string& animationID, const string& quadID);
+	void startQuad3dAnimation(const string& animationId, const string& quadId, int playCount);
+	void pauseQuad3dAnimation(const string& animationId, const string& quadId);
+	void autopauseQuad3dAnimation(const string& animationId, const string& quadId);
+	void resumeQuad3dAnimation(const string& animationId, const string& quadId);
+	void stopQuad3dAnimation(const string& animationId, const string& quadId);
 	void pauseQuad3dAnimations();
 	void autopauseQuad3dAnimations();
 	void resumeQuad3dAnimations();
 	void stopQuad3dAnimations();
-	void setQuad3dAnimationFramestep(const string& animationID, const string& quadID, unsigned int value);
-	void startQuad2dAnimation(const string& animationID, const string& quadID, int playCount);
-	void pauseQuad2dAnimation(const string& animationID, const string& quadID);
-	void autopauseQuad2dAnimation(const string& animationID, const string& quadID);
-	void resumeQuad2dAnimation(const string& animationID, const string& quadID);
-	void stopQuad2dAnimation(const string& animationID, const string& quadID);
+	void setQuad3dAnimationFramestep(const string& animationId, const string& quadId, unsigned int value);
+	void startQuad2dAnimation(const string& animationId, const string& quadId, int playCount);
+	void pauseQuad2dAnimation(const string& animationId, const string& quadId);
+	void autopauseQuad2dAnimation(const string& animationId, const string& quadId);
+	void resumeQuad2dAnimation(const string& animationId, const string& quadId);
+	void stopQuad2dAnimation(const string& animationId, const string& quadId);
 	void pauseQuad2dAnimations();
 	void autopauseQuad2dAnimations();
 	void resumeQuad2dAnimations();
 	void stopQuad2dAnimations();
-	void setQuad2dAnimationFramestep(const string& animationID, const string& quadID, unsigned int value);
+	void setQuad2dAnimationFramestep(const string& animationId, const string& quadId, unsigned int value);
 
-	const vector<string> getAnimationIDs();
-	const vector<string> getStartedQuad3dAnimationIDs() const;
-	const vector<string> getStartedQuad2dAnimationIDs() const;
-	const vector<string> getStartedQuad3dAnimationIDs(const string& quadID) const;
-	const vector<string> getStartedQuad2dAnimationIDs(const string& quadID) const;
+	const vector<string> getAnimationIds();
+	const vector<string> getStartedQuad3dAnimationIds() const;
+	const vector<string> getStartedQuad2dAnimationIds() const;
+	const vector<string> getStartedQuad3dAnimationIds(const string& quadId) const;
+	const vector<string> getStartedQuad2dAnimationIds(const string& quadId) const;
 
-	const int getQuad3dAnimationPlayCount(const string& animationID, const string& quadID) const;
-	const int getQuad2dAnimationPlayCount(const string& animationID, const string& quadID) const;
+	const int getQuad3dAnimationPlayCount(const string& animationId, const string& quadId) const;
+	const int getQuad2dAnimationPlayCount(const string& animationId, const string& quadId) const;
 
-	const unsigned int getQuad3dAnimationRowCount(const string& animationID, const string& quadID) const;
-	const unsigned int getQuad3dAnimationColumnCount(const string& animationID, const string& quadID) const;
-	const unsigned int getQuad3dAnimationRowIndex(const string& animationID, const string& quadID) const;
-	const unsigned int getQuad3dAnimationColumnIndex(const string& animationID, const string& quadID) const;
-	const unsigned int getQuad3dAnimationFramestep(const string& animationID, const string& quadID) const;
-	const unsigned int getQuad2dAnimationRowCount(const string& animationID, const string& quadID) const;
-	const unsigned int getQuad2dAnimationColumnCount(const string& animationID, const string& quadID) const;
-	const unsigned int getQuad2dAnimationRowIndex(const string& animationID, const string& quadID) const;
-	const unsigned int getQuad2dAnimationColumnIndex(const string& animationID, const string& quadID) const;
-	const unsigned int getQuad2dAnimationFramestep(const string& animationID, const string& quadID) const;
+	const unsigned int getQuad3dAnimationRowCount(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad3dAnimationColumnCount(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad3dAnimationRowIndex(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad3dAnimationColumnIndex(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad3dAnimationFramestep(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad2dAnimationRowCount(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad2dAnimationColumnCount(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad2dAnimationRowIndex(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad2dAnimationColumnIndex(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad2dAnimationFramestep(const string& animationId, const string& quadId) const;
 
 	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& id) const;
-	const bool isQuad3dAnimationStarted(const string& animationID, const string& quadID) const;
-	const bool isQuad3dAnimationPlaying(const string& animationID, const string& quadID) const;
-	const bool isQuad3dAnimationPaused(const string& animationID, const string& quadID) const;
-	const bool isQuad3dAnimationAutopaused(const string& animationID, const string& quadID) const;
-	const bool isQuad2dAnimationStarted(const string& animationID, const string& quadID) const;
-	const bool isQuad2dAnimationPlaying(const string& animationID, const string& quadID) const;
-	const bool isQuad2dAnimationPaused(const string& animationID, const string& quadID) const;
-	const bool isQuad2dAnimationAutopaused(const string& animationID, const string& quadID) const;
+	const bool isQuad3dAnimationStarted(const string& animationId, const string& quadId) const;
+	const bool isQuad3dAnimationPlaying(const string& animationId, const string& quadId) const;
+	const bool isQuad3dAnimationPaused(const string& animationId, const string& quadId) const;
+	const bool isQuad3dAnimationAutopaused(const string& animationId, const string& quadId) const;
+	const bool isQuad2dAnimationStarted(const string& animationId, const string& quadId) const;
+	const bool isQuad2dAnimationPlaying(const string& animationId, const string& quadId) const;
+	const bool isQuad2dAnimationPaused(const string& animationId, const string& quadId) const;
+	const bool isQuad2dAnimationAutopaused(const string& animationId, const string& quadId) const;
 	const bool loadFromFile(bool mustCheckPreviewTexture);
 	const bool saveToFile() const;
 
@@ -86,9 +86,9 @@ private:
 	set<pair<string, string>> _quad3dAnimationsToStart;
 	set<pair<string, string>> _quad2dAnimationsToStop;
 	set<pair<string, string>> _quad2dAnimationsToStart;
-	string _hoveredAnimationID = "";
-	string _currentAnimationID = "";
-	string _currentProjectID = "";
+	string _hoveredAnimationId = "";
+	string _currentAnimationId = "";
+	string _currentProjectId = "";
 
 	static inline const fvec3 PREVIEW_QUAD_POSITION = fvec3(0.0f, 0.0f, -0.75f);
 

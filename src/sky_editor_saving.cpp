@@ -14,13 +14,13 @@ const bool SkyEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		Logger::throwError("SkyEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\sky.fe3d");
+	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\sky.fe3d");
 
 	for(const auto& skyID : _loadedSkyIDs)
 	{
@@ -31,7 +31,7 @@ const bool SkyEditor::saveToFile() const
 
 		for(auto& cubeMapPath : cubeMapPaths)
 		{
-			cubeMapPath = string(cubeMapPath.empty() ? "" : cubeMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+			cubeMapPath = string(cubeMapPath.empty() ? "" : cubeMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 
 			cubeMapPath = (cubeMapPath.empty()) ? "?" : cubeMapPath;
 

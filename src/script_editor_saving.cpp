@@ -14,7 +14,7 @@ const bool ScriptEditor::saveScriptFiles()
 		return false;
 	}
 
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		Logger::throwError("ScriptEditor::saveScriptsToFile");
 	}
@@ -22,7 +22,7 @@ const bool ScriptEditor::saveScriptFiles()
 	for(const auto& fileName : _scriptFileNamesToDelete)
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const auto filePath = string(rootPath + "projects\\" + _currentProjectID + "\\scripts\\" + fileName + ".fe3d");
+		const auto filePath = string(rootPath + "projects\\" + _currentProjectId + "\\scripts\\" + fileName + ".fe3d");
 
 		if(Tools::isFileExisting(filePath))
 		{
@@ -34,7 +34,7 @@ const bool ScriptEditor::saveScriptFiles()
 	for(const auto& scriptID : _script->getScriptFileIDs())
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
-		ofstream file(rootPath + "projects\\" + _currentProjectID + "\\scripts\\" + scriptID + ".fe3d");
+		ofstream file(rootPath + "projects\\" + _currentProjectId + "\\scripts\\" + scriptID + ".fe3d");
 
 		file << _script->getScriptFile(scriptID)->getCursorLineIndex() << " " << _script->getScriptFile(scriptID)->getCursorCharIndex() << endl;
 

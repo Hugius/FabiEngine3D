@@ -62,25 +62,25 @@ void WorldEditor::unloadEditorWorld()
 		_fe3d->water_delete(_loadedWaterID);
 	}
 
-	for(const auto& [key, templateID] : _loadedModelIDs)
+	for(const auto& [key, templateID] : _loadedModelIds)
 	{
 		_fe3d->model_delete(key);
 
-		auto animationID = _animation3dEditor->getStartedModelAnimationIDs(key);
-		if(!animationID.empty())
+		auto animationId = _animation3dEditor->getStartedModelAnimationIds(key);
+		if(!animationId.empty())
 		{
-			_animation3dEditor->stopModelAnimation(animationID.back(), key);
+			_animation3dEditor->stopModelAnimation(animationId.back(), key);
 		}
 	}
 
-	for(const auto& [key, templateID] : _loadedQuadIDs)
+	for(const auto& [key, templateID] : _loadedQuadIds)
 	{
 		_fe3d->quad3d_delete(key);
 
-		auto animationID = _animation2dEditor->getStartedQuad3dAnimationIDs(key);
-		if(!animationID.empty())
+		auto animationId = _animation2dEditor->getStartedQuad3dAnimationIds(key);
+		if(!animationId.empty())
 		{
-			_animation2dEditor->stopQuad3dAnimation(animationID.back(), key);
+			_animation2dEditor->stopQuad3dAnimation(animationId.back(), key);
 		}
 	}
 
@@ -133,8 +133,8 @@ void WorldEditor::unloadEditorWorld()
 	_loadedSkyID = "";
 	_loadedTerrainID = "";
 	_loadedWaterID = "";
-	_loadedModelIDs.clear();
-	_loadedQuadIDs.clear();
+	_loadedModelIds.clear();
+	_loadedQuadIds.clear();
 	_loadedSoundIDs.clear();
 	_loadedPointlightIDs.clear();
 	_loadedSpotlightIDs.clear();
@@ -156,9 +156,9 @@ const string& WorldEditor::getLoadedWorldID() const
 	return _loadedWorldID;
 }
 
-void WorldEditor::setCurrentProjectID(const string& id)
+void WorldEditor::setCurrentProjectId(const string& id)
 {
-	_currentProjectID = id;
+	_currentProjectId = id;
 }
 
 const vector<string> WorldEditor::_getWorldIDs() const
@@ -167,7 +167,7 @@ const vector<string> WorldEditor::_getWorldIDs() const
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\");
+	const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\editor\\");
 
 	if(Tools::isDirectoryExisting(directoryPath))
 	{
@@ -189,7 +189,7 @@ void WorldEditor::_deleteWorldFile(const string& id)
 {
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\" + id + ".fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\editor\\" + id + ".fe3d");
 
 	if(Tools::isFileExisting(filePath))
 	{

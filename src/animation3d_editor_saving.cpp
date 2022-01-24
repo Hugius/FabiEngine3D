@@ -14,22 +14,22 @@ const bool Animation3dEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		Logger::throwError("Animation3dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\animation3d.fe3d");
+	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\animation3d.fe3d");
 
 	for(const auto& animation : _animations)
 	{
-		auto animationID = animation->getId();
-		auto previewModelID = animation->getPreviewModelID();
+		auto animationId = animation->getId();
+		auto previewModelId = animation->getPreviewModelId();
 
-		if(!previewModelID.empty())
+		if(!previewModelId.empty())
 		{
-			file << animationID << " " << previewModelID;
+			file << animationId << " " << previewModelId;
 
 			if(animation->getFrames().size() > 1)
 			{
@@ -37,10 +37,10 @@ const bool Animation3dEditor::saveToFile() const
 
 				for(unsigned int frameIndex = 1; frameIndex < animation->getFrames().size(); frameIndex++)
 				{
-					file << animation->getPartIDs().size() << " ";
+					file << animation->getPartIds().size() << " ";
 
 					unsigned int partIndex = 0;
-					for(auto partId : animation->getPartIDs())
+					for(auto partId : animation->getPartIds())
 					{
 						auto frame = animation->getFrames()[frameIndex];
 						auto targetTransformation = frame.getTargetTransformations().at(partId);
@@ -68,7 +68,7 @@ const bool Animation3dEditor::saveToFile() const
 							speedType << " " <<
 							transformationType;
 
-						if(partIndex != (animation->getPartIDs().size() - 1))
+						if(partIndex != (animation->getPartIds().size() - 1))
 						{
 							file << " ";
 						}

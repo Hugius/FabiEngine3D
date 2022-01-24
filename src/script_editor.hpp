@@ -11,7 +11,7 @@ public:
 
 	void inject(shared_ptr<Script> script);
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void unload();
 	void update();
@@ -39,7 +39,7 @@ private:
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;
-	string _currentProjectID = "";
+	string _currentProjectId = "";
 	string _currentScriptFileID = "";
 
 	static inline const fvec3 CAMERA_POSITION = fvec3(0.0f, 0.0f, 10.0f);

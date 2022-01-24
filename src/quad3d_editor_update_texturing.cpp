@@ -8,9 +8,9 @@ void Quad3dEditor::_updateTexturingMenu()
 
 	if(screen->getId() == "quad3dEditorMenuTexturing")
 	{
-		auto hasDiffuseMap = _fe3d->quad3d_hasDiffuseMap(_currentQuadID);
-		auto hasEmissionMap = _fe3d->quad3d_hasEmissionMap(_currentQuadID);
-		auto textureRepeat = _fe3d->quad3d_getTextureRepeat(_currentQuadID);
+		auto hasDiffuseMap = _fe3d->quad3d_hasDiffuseMap(_currentQuadId);
+		auto hasEmissionMap = _fe3d->quad3d_hasEmissionMap(_currentQuadId);
+		auto textureRepeat = _fe3d->quad3d_getTextureRepeat(_currentQuadId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -19,13 +19,13 @@ void Quad3dEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("Quad3dEditor::_updateTexturingMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\quad3d\\diffuse_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\quad3d\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -48,17 +48,17 @@ void Quad3dEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->quad3d_setDiffuseMap(_currentQuadID, finalFilePath);
+			_fe3d->quad3d_setDiffuseMap(_currentQuadId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("Quad3dEditor::_updateTexturingMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\quad3d\\emission_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\quad3d\\emission_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -81,12 +81,12 @@ void Quad3dEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->quad3d_setEmissionMap(_currentQuadID, finalFilePath);
+			_fe3d->quad3d_setEmissionMap(_currentQuadId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d->quad3d_setDiffuseMap(_currentQuadID, "");
-			_fe3d->quad3d_setEmissionMap(_currentQuadID, "");
+			_fe3d->quad3d_setDiffuseMap(_currentQuadId, "");
+			_fe3d->quad3d_setEmissionMap(_currentQuadId, "");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
@@ -95,7 +95,7 @@ void Quad3dEditor::_updateTexturingMenu()
 
 		if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
-			_fe3d->quad3d_setTextureRepeat(_currentQuadID, textureRepeat);
+			_fe3d->quad3d_setTextureRepeat(_currentQuadId, textureRepeat);
 		}
 
 		screen->getButton("clearMaps")->setHoverable(hasDiffuseMap || hasEmissionMap);

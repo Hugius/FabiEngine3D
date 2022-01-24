@@ -14,13 +14,13 @@ const bool Text3dEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		Logger::throwError("Text3dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\text3d.fe3d");
+	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\text3d.fe3d");
 
 	for(const auto& textID : _loadedTextIDs)
 	{
@@ -35,7 +35,7 @@ const bool Text3dEditor::saveToFile() const
 		auto isBright = _fe3d->text3d_isBright(textID);
 		auto opacity = _fe3d->text3d_getOpacity(textID);
 
-		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 
 		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
 

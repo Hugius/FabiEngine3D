@@ -21,7 +21,7 @@ void Animation2dEditor::load()
 	_fe3d->quad3d_setPosition(PREVIEW_QUAD_ID, PREVIEW_QUAD_POSITION);
 	_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
 
-	_gui->getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("animationId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_isEditorLoaded = true;
 }
@@ -34,7 +34,7 @@ void Animation2dEditor::unload()
 
 	_fe3d->quad3d_delete(PREVIEW_QUAD_ID);
 
-	_gui->getOverlay()->deleteTextField("animationID");
+	_gui->getOverlay()->deleteTextField("animationId");
 
 	_animations.clear();
 	_startedQuad3dAnimations.clear();
@@ -43,8 +43,8 @@ void Animation2dEditor::unload()
 	_quad3dAnimationsToStart.clear();
 	_quad2dAnimationsToStop.clear();
 	_quad2dAnimationsToStart.clear();
-	_hoveredAnimationID = "";
-	_currentAnimationID = "";
+	_hoveredAnimationId = "";
+	_currentAnimationId = "";
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;
 	_isDeletingAnimation = false;

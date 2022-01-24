@@ -9,7 +9,7 @@ using std::istringstream;
 
 const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
 	{
 		Logger::throwError("Animation2dEditor::loadFromFile");
 	}
@@ -18,7 +18,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\animation2d.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\animation2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -30,7 +30,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 	string line;
 	while(getline(file, line))
 	{
-		string animationID;
+		string animationId;
 		string previewTexturePath;
 		unsigned int rowCount;
 		unsigned int columnCount;
@@ -39,7 +39,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 		istringstream iss(line);
 
 		iss >>
-			animationID >>
+			animationId >>
 			previewTexturePath >>
 			rowCount >>
 			columnCount >>
@@ -51,10 +51,10 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 
 		if(!Config::getInst().isApplicationExported())
 		{
-			previewTexturePath = string("projects\\" + _currentProjectID + "\\" + previewTexturePath);
+			previewTexturePath = string("projects\\" + _currentProjectId + "\\" + previewTexturePath);
 		}
 
-		auto newAnimation = make_shared<Animation2d>(animationID);
+		auto newAnimation = make_shared<Animation2d>(animationId);
 
 		newAnimation->setPreviewTexturePath(previewTexturePath);
 		newAnimation->setRowCount(rowCount);

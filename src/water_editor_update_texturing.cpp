@@ -20,13 +20,13 @@ void WaterEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dudvMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("WaterEditor::_updateTexturingMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\water\\dudv_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\water\\dudv_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -53,13 +53,13 @@ void WaterEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("WaterEditor::_updateTexturingMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\water\\normal_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\water\\normal_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -86,13 +86,13 @@ void WaterEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("displaceMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("WaterEditor::_updateTexturingMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\water\\displacement_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\water\\displacement_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

@@ -142,9 +142,9 @@ void ScriptExecutor::inject(shared_ptr<ScriptInterpreter> scriptInterpreter)
 	_scriptInterpreter = scriptInterpreter;
 }
 
-void ScriptExecutor::setCurrentProjectID(const string& projectID)
+void ScriptExecutor::setCurrentProjectId(const string& projectId)
 {
-	_scriptInterpreter->setCurrentProjectID(projectID);
+	_scriptInterpreter->setCurrentProjectId(projectId);
 }
 
 const bool ScriptExecutor::isStarted() const

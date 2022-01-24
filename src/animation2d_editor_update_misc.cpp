@@ -3,9 +3,9 @@
 
 void Animation2dEditor::_updateMiscellaneous()
 {
-	if(!_currentAnimationID.empty())
+	if(!_currentAnimationId.empty())
 	{
-		if(!isQuad3dAnimationStarted(_currentAnimationID, PREVIEW_QUAD_ID))
+		if(!isQuad3dAnimationStarted(_currentAnimationId, PREVIEW_QUAD_ID))
 		{
 			if(_isEditorLoaded)
 			{
@@ -20,38 +20,38 @@ void Animation2dEditor::_updateAnimationCreating()
 {
 	if(_isCreatingAnimation)
 	{
-		string newAnimationID = "";
+		string newAnimationId = "";
 
-		if(_gui->getOverlay()->checkValueForm("animationCreate", newAnimationID, {_currentAnimationID}))
+		if(_gui->getOverlay()->checkValueForm("animationCreate", newAnimationId, {_currentAnimationId}))
 		{
-			if(newAnimationID.find(' ') != string::npos)
+			if(newAnimationId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Animation id cannot contain any spaces!");
 				return;
 			}
 
-			if(newAnimationID.find('@') != string::npos)
+			if(newAnimationId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Animation id cannot contain '@'!");
 				return;
 			}
 
-			auto animationIDs = getAnimationIDs();
-			if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) != animationIDs.end())
+			auto animationIds = getAnimationIds();
+			if(find(animationIds.begin(), animationIds.end(), newAnimationId) != animationIds.end())
 			{
-				Logger::throwWarning("Animation id \"" + newAnimationID + "\" already exists!");
+				Logger::throwWarning("Animation id \"" + newAnimationId + "\" already exists!");
 				return;
 			}
 
-			_animations.push_back(make_shared<Animation2d>(newAnimationID));
+			_animations.push_back(make_shared<Animation2d>(newAnimationId));
 
-			_currentAnimationID = newAnimationID;
+			_currentAnimationId = newAnimationId;
 
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, true);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
-			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityId(), "Animation: " + newAnimationID, 0.025f);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityId(), true);
+			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationId")->getEntityId(), "Animation: " + newAnimationId, 0.025f);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
 			_isCreatingAnimation = false;
 		}
 	}
@@ -67,17 +67,17 @@ void Animation2dEditor::_updateAnimationChoosing()
 		{
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentAnimationID = selectedButtonID;
+				_currentAnimationId = selectedButtonID;
 
 				if(!_isDeletingAnimation)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 
-					_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, _getAnimation(_currentAnimationID)->getPreviewTexturePath());
+					_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, _getAnimation(_currentAnimationId)->getPreviewTexturePath());
 					_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, true);
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityId(), "Animation: " + selectedButtonID, 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityId(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationId")->getEntityId(), "Animation: " + selectedButtonID, 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("animationList");
@@ -95,7 +95,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 
 void Animation2dEditor::_updateAnimationDeleting()
 {
-	if(_isDeletingAnimation && !_currentAnimationID.empty())
+	if(_isDeletingAnimation && !_currentAnimationId.empty())
 	{
 		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
@@ -107,14 +107,14 @@ void Animation2dEditor::_updateAnimationDeleting()
 			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, "");
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
 
-			_deleteAnimation(_currentAnimationID);
+			_deleteAnimation(_currentAnimationId);
 
-			_currentAnimationID = "";
+			_currentAnimationId = "";
 			_isDeletingAnimation = false;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_currentAnimationID = "";
+			_currentAnimationId = "";
 			_isDeletingAnimation = false;
 		}
 	}

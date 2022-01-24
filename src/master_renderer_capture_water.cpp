@@ -26,7 +26,7 @@ void MasterRenderer::_captureWaterReflections()
 						continue;
 					}
 
-					for(const auto& partId : entity->getPartIDs())
+					for(const auto& partId : entity->getPartIds())
 					{
 						if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR))
 						{

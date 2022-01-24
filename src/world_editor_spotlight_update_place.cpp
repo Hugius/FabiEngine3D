@@ -17,12 +17,12 @@ void WorldEditor::_updateSpotlightPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelID = ("@@torch_" + newID);
+				auto newModelId = ("@@torch_" + newID);
 
 				while(_fe3d->spotlight_isExisting(newID))
 				{
 					newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelID = ("@@torch_" + newID);
+					newModelId = ("@@torch_" + newID);
 				}
 
 				_fe3d->spotlight_create(newID);
@@ -37,19 +37,19 @@ void WorldEditor::_updateSpotlightPlacing()
 					_fe3d->spotlight_setAngle(newID, DEFAULT_SPOTLIGHT_ANGLE);
 					_fe3d->spotlight_setDistance(newID, DEFAULT_SPOTLIGHT_DISTANCE);
 
-					_fe3d->model_create(newModelID, "engine\\assets\\mesh\\torch.obj");
-					_fe3d->model_setBasePosition(newModelID, newPosition);
-					_fe3d->model_setBaseRotation(newModelID, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
-					_fe3d->model_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
-					_fe3d->model_setShadowed(newModelID, false);
-					_fe3d->model_setReflected(newModelID, false);
-					_fe3d->model_setBright(newModelID, "", true);
+					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\torch.obj");
+					_fe3d->model_setBasePosition(newModelId, newPosition);
+					_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
+					_fe3d->model_setBaseSize(newModelId, DEFAULT_TORCH_SIZE);
+					_fe3d->model_setShadowed(newModelId, false);
+					_fe3d->model_setReflected(newModelId, false);
+					_fe3d->model_setBright(newModelId, "", true);
 
-					_fe3d->aabb_create(newModelID, true);
-					_fe3d->aabb_setParentEntityId(newModelID, newModelID);
-					_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
-					_fe3d->aabb_setLocalSize(newModelID, DEFAULT_TORCH_AABB_SIZE);
-					_fe3d->aabb_setCollisionResponsive(newModelID, false);
+					_fe3d->aabb_create(newModelId, true);
+					_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+					_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+					_fe3d->aabb_setLocalSize(newModelId, DEFAULT_TORCH_AABB_SIZE);
+					_fe3d->aabb_setCollisionResponsive(newModelId, false);
 				}
 			}
 
@@ -100,12 +100,12 @@ void WorldEditor::_updateSpotlightPlacing()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelID = ("@@torch_" + newID);
+				auto newModelId = ("@@torch_" + newID);
 
 				while(_fe3d->spotlight_isExisting(newID))
 				{
 					newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelID = ("@@torch_" + newID);
+					newModelId = ("@@torch_" + newID);
 				}
 
 				_fe3d->spotlight_create(newID);
@@ -120,19 +120,19 @@ void WorldEditor::_updateSpotlightPlacing()
 					_fe3d->spotlight_setAngle(newID, DEFAULT_SPOTLIGHT_ANGLE);
 					_fe3d->spotlight_setDistance(newID, DEFAULT_SPOTLIGHT_DISTANCE);
 
-					_fe3d->model_create(newModelID, "engine\\assets\\mesh\\torch.obj");
-					_fe3d->model_setBasePosition(newModelID, newPosition);
-					_fe3d->model_setBaseRotation(newModelID, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
-					_fe3d->model_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
-					_fe3d->model_setShadowed(newModelID, false);
-					_fe3d->model_setReflected(newModelID, false);
-					_fe3d->model_setBright(newModelID, "", true);
+					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\torch.obj");
+					_fe3d->model_setBasePosition(newModelId, newPosition);
+					_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, 0.0f, DEFAULT_SPOTLIGHT_PITCH));
+					_fe3d->model_setBaseSize(newModelId, DEFAULT_TORCH_SIZE);
+					_fe3d->model_setShadowed(newModelId, false);
+					_fe3d->model_setReflected(newModelId, false);
+					_fe3d->model_setBright(newModelId, "", true);
 
-					_fe3d->aabb_create(newModelID, true);
-					_fe3d->aabb_setParentEntityId(newModelID, newModelID);
-					_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
-					_fe3d->aabb_setLocalSize(newModelID, DEFAULT_TORCH_AABB_SIZE);
-					_fe3d->aabb_setCollisionResponsive(newModelID, false);
+					_fe3d->aabb_create(newModelId, true);
+					_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+					_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+					_fe3d->aabb_setLocalSize(newModelId, DEFAULT_TORCH_AABB_SIZE);
+					_fe3d->aabb_setCollisionResponsive(newModelId, false);
 				}
 			}
 		}

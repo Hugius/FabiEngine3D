@@ -13,17 +13,17 @@ const bool Animation2dEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		Logger::throwError("Animation2dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\animation2d.fe3d");
+	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\animation2d.fe3d");
 
 	for(const auto& animation : _animations)
 	{
-		auto animationID = animation->getId();
+		auto animationId = animation->getId();
 		auto previewTexturePath = animation->getPreviewTexturePath();
 		auto rowCount = animation->getRowCount();
 		auto columnCount = animation->getColumnCount();
@@ -31,14 +31,14 @@ const bool Animation2dEditor::saveToFile() const
 
 		if(!previewTexturePath.empty())
 		{
-			previewTexturePath = string(previewTexturePath.empty() ? "" : previewTexturePath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+			previewTexturePath = string(previewTexturePath.empty() ? "" : previewTexturePath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 
 			previewTexturePath = (previewTexturePath.empty()) ? "?" : previewTexturePath;
 
 			replace(previewTexturePath.begin(), previewTexturePath.end(), ' ', '?');
 
 			file <<
-				animationID << " " <<
+				animationId << " " <<
 				previewTexturePath << " " <<
 				rowCount << " " <<
 				columnCount << " " <<

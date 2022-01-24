@@ -48,9 +48,9 @@ void Animation3d::setTotalScaling(const string& partId, const fvec3& value)
 	_totalScalings.at(partId) = value;
 }
 
-void Animation3d::setPreviewModelID(const string& value)
+void Animation3d::setPreviewModelId(const string& value)
 {
-	_previewModelID = value;
+	_previewModelId = value;
 }
 
 void Animation3d::setInitialSize(const fvec3& value)
@@ -108,14 +108,14 @@ const map<string, fvec3>& Animation3d::getTotalScalings() const
 	return _totalScalings;
 }
 
-const vector<string>& Animation3d::getPartIDs() const
+const vector<string>& Animation3d::getPartIds() const
 {
 	return _partIds;
 }
 
-const string& Animation3d::getPreviewModelID() const
+const string& Animation3d::getPreviewModelId() const
 {
-	return _previewModelID;
+	return _previewModelId;
 }
 
 const fvec3& Animation3d::getInitialSize() const

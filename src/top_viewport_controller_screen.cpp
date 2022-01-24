@@ -16,7 +16,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	{
 		if(topScreen->getButton("newProject")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("newProjectID", "Create Project", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("newProjectId", "Create Project", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingProject = true;
 		}
 		else if(topScreen->getButton("loadProject")->isHovered())
@@ -39,7 +39,7 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 		else if(topScreen->getButton("quitEngine")->isHovered())
 		{
-			if((!_currentProjectID.empty()) && (leftScreen->getId() != "main") && (leftScreen->getId() != "worldEditorMenuMain"))
+			if((!_currentProjectId.empty()) && (leftScreen->getId() != "main") && (leftScreen->getId() != "worldEditorMenuMain"))
 			{
 				_gui->getOverlay()->createAnswerForm("quit", "Save Changes?", fvec2(0.0f, 0.25f));
 			}
@@ -66,7 +66,7 @@ void TopViewportController::_updateProjectScreenManagement()
 
 	topScreen->getButton("newProject")->setHoverable(!_scriptExecutor->isStarted());
 	topScreen->getButton("loadProject")->setHoverable(!_scriptExecutor->isStarted());
-	topScreen->getButton("saveProject")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted());
+	topScreen->getButton("saveProject")->setHoverable(!_currentProjectId.empty() && !_scriptExecutor->isStarted());
 	topScreen->getButton("deleteProject")->setHoverable(!_scriptExecutor->isStarted());
 }
 
@@ -74,7 +74,7 @@ void TopViewportController::_updateGameScreenManagement()
 {
 	auto screen = _gui->getTopViewport()->getWindow("executionWindow")->getActiveScreen();
 
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		screen->getButton("start")->setHoverable(false);
 		screen->getButton("pause")->setHoverable(false);
@@ -160,13 +160,13 @@ void TopViewportController::_updateMiscScreenManagement()
 
 	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{
-		if(_currentProjectID.empty())
+		if(_currentProjectId.empty())
 		{
 			Logger::throwError("TopViewportController::_updateMiscScreenManagement");
 		}
 
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\");
+		const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\");
 
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{
@@ -201,7 +201,7 @@ void TopViewportController::_updateMiscScreenManagement()
 		}
 
 		const string rootPath = Tools::getRootDirectoryPath();
-		const string exportDirectoryPath = string(chosenDirectoryPath + "\\" + _currentProjectID + "\\");
+		const string exportDirectoryPath = string(chosenDirectoryPath + "\\" + _currentProjectId + "\\");
 
 		if(Tools::isDirectoryExisting(exportDirectoryPath))
 		{
@@ -213,10 +213,10 @@ void TopViewportController::_updateMiscScreenManagement()
 
 			Tools::copyDirectory(string(rootPath + "binaries"), string(exportDirectoryPath + "binaries"));
 			Tools::copyDirectory(string(rootPath + "engine"), string(exportDirectoryPath + "engine"));
-			Tools::copyDirectory(string(rootPath + "projects\\" + _currentProjectID), exportDirectoryPath);
+			Tools::copyDirectory(string(rootPath + "projects\\" + _currentProjectId), exportDirectoryPath);
 
 			auto oldPath = string(exportDirectoryPath + "binaries\\fe3d.exe");
-			auto newPath = string(exportDirectoryPath + "binaries\\" + _currentProjectID + ".exe");
+			auto newPath = string(exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe");
 			Tools::renameFile(oldPath, newPath);
 
 			const auto filePath = string(exportDirectoryPath + "config.fe3d");
@@ -233,6 +233,6 @@ void TopViewportController::_updateMiscScreenManagement()
 		ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
 	}
 
-	screen->getButton("uncache")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main"));
-	screen->getButton("export")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main"));
+	screen->getButton("uncache")->setHoverable(!_currentProjectId.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main"));
+	screen->getButton("export")->setHoverable(!_currentProjectId.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main"));
 }

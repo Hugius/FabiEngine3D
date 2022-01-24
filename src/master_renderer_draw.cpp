@@ -161,7 +161,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 		{
 			bool isTransparent = false;
 
-			for(const auto& partId : modelEntity->getPartIDs())
+			for(const auto& partId : modelEntity->getPartIds())
 			{
 				if(modelEntity->getOpacity(partId) < 1.0f)
 				{
@@ -222,7 +222,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 		{
 			bool isTransparent = false;
 
-			for(const auto& partId : modelEntity->getPartIDs())
+			for(const auto& partId : modelEntity->getPartIds())
 			{
 				if(modelEntity->getOpacity(partId) < 1.0f)
 				{

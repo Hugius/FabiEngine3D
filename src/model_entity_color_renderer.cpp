@@ -162,7 +162,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			}
 		}
 
-		for(const auto& partId : entity->getPartIDs())
+		for(const auto& partId : entity->getPartIds())
 		{
 			_shader->uploadUniform("u_isReflective", entity->isReflective(partId));
 			_shader->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partId));

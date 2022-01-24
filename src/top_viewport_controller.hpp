@@ -61,7 +61,7 @@ private:
 
 	const bool _prepareProjectChoosing(const string& title) const;
 
-	string _currentProjectID = "";
+	string _currentProjectId = "";
 
 	static inline const fvec3 FRAME_COLOR = fvec3(0.075f);
 

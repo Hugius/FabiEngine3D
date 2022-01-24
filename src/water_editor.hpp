@@ -7,7 +7,7 @@ class WaterEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void update();
 	void unload();
@@ -34,7 +34,7 @@ private:
 	void _updateMiscellaneous();
 
 	vector <string> _loadedWaterIDs;
-	string _currentProjectID = "";
+	string _currentProjectId = "";
 	string _currentWaterID = "";
 
 	static inline constexpr float CW = 0.115f;

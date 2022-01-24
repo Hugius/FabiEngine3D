@@ -47,14 +47,14 @@ void Quad3dEditor::load()
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
 	_fe3d->model_setShadowed("@@grid", false);
 
-	_gui->getOverlay()->createTextField("quadID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("quadId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_isEditorLoaded = true;
 }
 
 void Quad3dEditor::unload()
 {
-	for(const auto& id : _loadedQuadIDs)
+	for(const auto& id : _loadedQuadIds)
 	{
 		_fe3d->quad3d_delete(id);
 	}
@@ -76,11 +76,11 @@ void Quad3dEditor::unload()
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
 
-	_gui->getOverlay()->deleteTextField("quadID");
+	_gui->getOverlay()->deleteTextField("quadId");
 
-	_loadedQuadIDs.clear();
-	_hoveredQuadID = "";
-	_currentQuadID = "";
+	_loadedQuadIds.clear();
+	_hoveredQuadId = "";
+	_currentQuadId = "";
 	_isCreatingQuad3d = false;
 	_isChoosingQuad3d = false;
 	_isDeletingQuad3d = false;

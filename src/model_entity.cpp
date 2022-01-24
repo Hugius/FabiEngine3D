@@ -662,7 +662,7 @@ const string& ModelEntity::getCurrentReflectionEntityId() const
 	return _currentReflectionEntityId;
 }
 
-const vector<string> ModelEntity::getPartIDs() const
+const vector<string> ModelEntity::getPartIds() const
 {
 	vector<string> result;
 

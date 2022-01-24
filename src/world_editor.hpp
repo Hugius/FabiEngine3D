@@ -32,7 +32,7 @@ public:
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<SoundEditor> soundEditor);
 
-	void setCurrentProjectID(const string& id);
+	void setCurrentProjectId(const string& id);
 	void load();
 	void unload();
 	void update();
@@ -179,10 +179,10 @@ private:
 	static inline const string TORCH_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
 	static inline const string CAMERA_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
 	static inline const string SPEAKER_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
-	map<string, string> _loadedModelIDs;
-	map<string, string> _outsideLoadedModelIDs;
-	map<string, string> _loadedQuadIDs;
-	map<string, string> _outsideLoadedQuadIDs;
+	map<string, string> _loadedModelIds;
+	map<string, string> _outsideLoadedModelIds;
+	map<string, string> _loadedQuadIds;
+	map<string, string> _outsideLoadedQuadIds;
 	map<string, string> _loadedTextIDs;
 	map<string, string> _outsideLoadedTextIDs;
 	map<string, string> _loadedSoundIDs;
@@ -190,8 +190,8 @@ private:
 	map<string, fvec3> _initialModelPosition;
 	map<string, fvec3> _initialModelRotation;
 	map<string, fvec3> _initialModelSize;
-	vector<string> _customWorldModelIDs;
-	vector<string> _customWorldQuadIDs;
+	vector<string> _customWorldModelIds;
+	vector<string> _customWorldQuadIds;
 	vector<string> _customWorldTextIDs;
 	vector<string> _customWorldAabbIDs;
 	vector<string> _customWorldPointlightIDs;
@@ -209,12 +209,12 @@ private:
 	string _currentSkyID = "";
 	string _currentTerrainID = "";
 	string _currentWaterID = "";
-	string _currentTemplateModelID = "";
-	string _selectedModelID = "";
-	string _activeModelID = "";
-	string _currentTemplateQuadID = "";
-	string _selectedQuadID = "";
-	string _activeQuadID = "";
+	string _currentTemplateModelId = "";
+	string _selectedModelId = "";
+	string _activeModelId = "";
+	string _currentTemplateQuadId = "";
+	string _selectedQuadId = "";
+	string _activeQuadId = "";
 	string _currentTemplateTextID = "";
 	string _selectedTextID = "";
 	string _activeTextID = "";
@@ -228,7 +228,7 @@ private:
 	string _selectedSpeakerID = "";
 	string _activeSpeakerID = "";
 	string _loadedWorldID = "";
-	string _currentProjectID = "";
+	string _currentProjectId = "";
 	string _currentWorldID = "";
 
 	static inline const fvec3 DEFAULT_LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);

@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void SkyEditor::setCurrentProjectID(const string& projectID)
+void SkyEditor::setCurrentProjectId(const string& projectId)
 {
-	_currentProjectID = projectID;
+	_currentProjectId = projectId;
 }
 
 const bool SkyEditor::isLoaded() const

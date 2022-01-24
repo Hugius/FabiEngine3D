@@ -17,12 +17,12 @@ void WorldEditor::_updateSoundPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				auto newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelID = ("@@speaker_" + newID);
+				auto newModelId = ("@@speaker_" + newID);
 
 				while(_fe3d->sound3d_isExisting(newID))
 				{
 					newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelID = ("@@speaker_" + newID);
+					newModelId = ("@@speaker_" + newID);
 				}
 
 				_fe3d->sound3d_create(newID, _fe3d->sound3d_getAudioPath(_currentTemplateSoundID));
@@ -36,18 +36,18 @@ void WorldEditor::_updateSoundPlacing()
 					_fe3d->sound3d_setMaxDistance(newID, DEFAULT_SOUND_MAX_DISTANCE);
 					_fe3d->sound3d_start(newID, -1, 0, false);
 
-					_fe3d->model_create(newModelID, _fe3d->model_getMeshPath(TEMPLATE_SPEAKER_ID));
-					_fe3d->model_setBasePosition(newModelID, newPosition);
-					_fe3d->model_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
-					_fe3d->model_setShadowed(newModelID, false);
-					_fe3d->model_setReflected(newModelID, false);
-					_fe3d->model_setBright(newModelID, "", true);
+					_fe3d->model_create(newModelId, _fe3d->model_getMeshPath(TEMPLATE_SPEAKER_ID));
+					_fe3d->model_setBasePosition(newModelId, newPosition);
+					_fe3d->model_setBaseSize(newModelId, DEFAULT_SPEAKER_SIZE);
+					_fe3d->model_setShadowed(newModelId, false);
+					_fe3d->model_setReflected(newModelId, false);
+					_fe3d->model_setBright(newModelId, "", true);
 
-					_fe3d->aabb_create(newModelID, true);
-					_fe3d->aabb_setParentEntityId(newModelID, newModelID);
-					_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
-					_fe3d->aabb_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
-					_fe3d->aabb_setCollisionResponsive(newModelID, false);
+					_fe3d->aabb_create(newModelId, true);
+					_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+					_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+					_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SPEAKER_AABB_SIZE);
+					_fe3d->aabb_setCollisionResponsive(newModelId, false);
 				}
 			}
 
@@ -112,12 +112,12 @@ void WorldEditor::_updateSoundPlacing()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				auto newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelID = ("@@speaker_" + newID);
+				auto newModelId = ("@@speaker_" + newID);
 
 				while(_fe3d->sound3d_isExisting(newID))
 				{
 					newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelID = ("@@speaker_" + newID);
+					newModelId = ("@@speaker_" + newID);
 				}
 
 				_fe3d->sound3d_create(newID, _fe3d->sound3d_getAudioPath(_currentTemplateSoundID));
@@ -131,18 +131,18 @@ void WorldEditor::_updateSoundPlacing()
 					_fe3d->sound3d_setMaxDistance(newID, DEFAULT_SOUND_MAX_DISTANCE);
 					_fe3d->sound3d_start(newID, -1, 0, false);
 
-					_fe3d->model_create(newModelID, _fe3d->model_getMeshPath(TEMPLATE_SPEAKER_ID));
-					_fe3d->model_setBasePosition(newModelID, newPosition);
-					_fe3d->model_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
-					_fe3d->model_setShadowed(newModelID, false);
-					_fe3d->model_setReflected(newModelID, false);
-					_fe3d->model_setBright(newModelID, "", true);
+					_fe3d->model_create(newModelId, _fe3d->model_getMeshPath(TEMPLATE_SPEAKER_ID));
+					_fe3d->model_setBasePosition(newModelId, newPosition);
+					_fe3d->model_setBaseSize(newModelId, DEFAULT_SPEAKER_SIZE);
+					_fe3d->model_setShadowed(newModelId, false);
+					_fe3d->model_setReflected(newModelId, false);
+					_fe3d->model_setBright(newModelId, "", true);
 
-					_fe3d->aabb_create(newModelID, true);
-					_fe3d->aabb_setParentEntityId(newModelID, newModelID);
-					_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
-					_fe3d->aabb_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
-					_fe3d->aabb_setCollisionResponsive(newModelID, false);
+					_fe3d->aabb_create(newModelId, true);
+					_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+					_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+					_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SPEAKER_AABB_SIZE);
+					_fe3d->aabb_setCollisionResponsive(newModelId, false);
 				}
 			}
 		}

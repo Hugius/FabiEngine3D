@@ -12,7 +12,7 @@ using std::istringstream;
 
 const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 {
-	//if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	//if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
 	//{
 	//	Logger::throwError("WorldEditor::loadCustomWorldFromFile::1");
 	//}
@@ -23,7 +23,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//const auto rootPath = Tools::getRootDirectoryPath();
 	//const auto filePath = (rootPath + (Config::getInst().isApplicationExported() ? "" :
-	//					   ("projects\\" + _currentProjectID + "\\")) + "worlds\\custom\\" + fileName + ".fe3d");
+	//					   ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\" + fileName + ".fe3d");
 
 	//auto file = ifstream(filePath);
 	//if(!file)
@@ -96,15 +96,15 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//	}
 	//	else if(lineType == "MODEL")
 	//	{
-	//		string modelID, templateID;
+	//		string modelId, templateID;
 	//		fvec3 position, rotation, rotationOrigin, size, color;
 	//		float minHeight, maxHeight, opacity, lightness;
 	//		unsigned partCount;
 	//		bool isVisible, isFrozen, isAabbRaycastResponsive, isAabbCollisionResponsive;
 
-	//		iss >> modelID;
+	//		iss >> modelId;
 
-	//		bool makeInvisible = (modelID[0] == '@');
+	//		bool makeInvisible = (modelId[0] == '@');
 
 	//		iss >>
 	//			templateID >>
@@ -143,35 +143,35 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//				partIds.push_back(partId);
 	//			}
 
-	//			if(partIds.size() != _fe3d->model_getPartIDs(templateID).size())
+	//			if(partIds.size() != _fe3d->model_getPartIds(templateID).size())
 	//			{
-	//				Logger::throwWarning("World model parts with id \"" + modelID + "\" differ from base model!");
+	//				Logger::throwWarning("World model parts with id \"" + modelId + "\" differ from base model!");
 	//				continue;
 	//			}
 
 	//			for(size_t i = 0; i < partIds.size(); i++)
 	//			{
-	//				if(partIds[i] != _fe3d->model_getPartIDs(templateID)[i])
+	//				if(partIds[i] != _fe3d->model_getPartIds(templateID)[i])
 	//				{
-	//					Logger::throwWarning("World model parts with id \"" + modelID + "\" differ from base model!");
+	//					Logger::throwWarning("World model parts with id \"" + modelId + "\" differ from base model!");
 	//					continue;
 	//				}
 	//			}
 	//		}
 
-	//		if(_copyTemplateModel(modelID, templateID, position, false))
+	//		if(_copyTemplateModel(modelId, templateID, position, false))
 	//		{
-	//			_fe3d->model_setBaseRotation(modelID, rotation);
-	//			_fe3d->model_setBaseRotationOrigin(modelID, rotationOrigin);
-	//			_fe3d->model_setBaseSize(modelID, size);
-	//			_fe3d->model_setFrozen(modelID, isFrozen);
-	//			_fe3d->model_setColor(modelID, "", color);
-	//			_fe3d->model_setMinHeight(modelID, minHeight);
-	//			_fe3d->model_setMaxHeight(modelID, maxHeight);
-	//			//_fe3d->model_setOpacity(modelID, opacity);
-	//			//_fe3d->model_setLightness(modelID, lightness);
-	//			_fe3d->model_setVisible(modelID, isVisible);
-	//			for(const auto& id : _fe3d->aabb_getChildIDs(modelID, AabbParentEntityType::MODEL))
+	//			_fe3d->model_setBaseRotation(modelId, rotation);
+	//			_fe3d->model_setBaseRotationOrigin(modelId, rotationOrigin);
+	//			_fe3d->model_setBaseSize(modelId, size);
+	//			_fe3d->model_setFrozen(modelId, isFrozen);
+	//			_fe3d->model_setColor(modelId, "", color);
+	//			_fe3d->model_setMinHeight(modelId, minHeight);
+	//			_fe3d->model_setMaxHeight(modelId, maxHeight);
+	//			//_fe3d->model_setOpacity(modelId, opacity);
+	//			//_fe3d->model_setLightness(modelId, lightness);
+	//			_fe3d->model_setVisible(modelId, isVisible);
+	//			for(const auto& id : _fe3d->aabb_getChildIDs(modelId, AabbParentEntityType::MODEL))
 	//			{
 	//				_fe3d->aabb_setRaycastResponsive(id, isAabbRaycastResponsive);
 	//				_fe3d->aabb_setCollisionResponsive(id, isAabbCollisionResponsive);
@@ -195,29 +195,29 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//					size.y >>
 	//					size.z;
 
-	//				_fe3d->model_setPartPosition(modelID, partId, position);
-	//				_fe3d->model_setPartRotation(modelID, partId, rotation);
-	//				_fe3d->model_setPartRotationOrigin(modelID, partId, rotationOrigin);
-	//				_fe3d->model_setPartSize(modelID, partId, size);
+	//				_fe3d->model_setPartPosition(modelId, partId, position);
+	//				_fe3d->model_setPartRotation(modelId, partId, rotation);
+	//				_fe3d->model_setPartRotationOrigin(modelId, partId, rotationOrigin);
+	//				_fe3d->model_setPartSize(modelId, partId, size);
 	//			}
 
 	//			if(makeInvisible)
 	//			{
-	//				_fe3d->model_setVisible(modelID, false);
+	//				_fe3d->model_setVisible(modelId, false);
 	//			}
 	//		}
 	//	}
 	//	else if(lineType == "ANIMATION3D")
 	//	{
-	//		string animationID, modelID;
+	//		string animationId, modelId;
 	//		float speed;
 	//		int remainingLoops;
 	//		unsigned int frameIndex, fadeFramestep;
 	//		bool isPaused;
 
 	//		iss >>
-	//			animationID >>
-	//			modelID >>
+	//			animationId >>
+	//			modelId >>
 	//			isPaused >>
 	//			frameIndex >>
 	//			speed >>
@@ -243,17 +243,17 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			}
 	//		}
 
-	//		_animation3dEditor->startModelAnimation(animationID, modelID, remainingLoops);
+	//		_animation3dEditor->startModelAnimation(animationId, modelId, remainingLoops);
 
-	//		//if(_animation3dEditor->isAnimationExisting(animationID))
+	//		//if(_animation3dEditor->isAnimationExisting(animationId))
 	//		//{
 	//		//	// Retrieve raw animation data for editing
-	//		//	string errorMessage = "Tried to retrieve animation with id \"" + animationID + "\" on model with id \"" + modelID + "\": ";
-	//		//	auto animationData = _animation3dEditor->getAnimationData(animationID, modelID, errorMessage);
+	//		//	string errorMessage = "Tried to retrieve animation with id \"" + animationId + "\" on model with id \"" + modelId + "\": ";
+	//		//	auto animationData = _animation3dEditor->getAnimationData(animationId, modelId, errorMessage);
 	//		//	auto frameData = animationData->getFrames()[frameIndex];
 
 	//		//	// Set properties
-	//		//	isPaused ? _animation3dEditor->pauseModelAnimation(animationID, modelID) : void();
+	//		//	isPaused ? _animation3dEditor->pauseModelAnimation(animationId, modelId) : void();
 	//		//	animationData->setSpeedMultiplier(speedMultiplier);
 	//		//	animationData->setFadeFramestep(fadeFramestep);
 	//		//	animationData->setFrameIndex(frameIndex);
@@ -263,13 +263,13 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		//	}
 
 	//		//	// Retrieve parts
-	//		//	auto partIds = _fe3d->model_getPartIDs(modelID);
+	//		//	auto partIds = _fe3d->model_getPartIds(modelId);
 	//		//	for(const auto& partId : partIds)
 	//		//	{
 	//		//		// Retrieve part transformation
-	//		//		auto position = _fe3d->model_getPartPosition(modelID, partId);
-	//		//		auto rotation = _fe3d->model_getPartRotation(modelID, partId);
-	//		//		auto size = _fe3d->model_getPartSize(modelID, partId);
+	//		//		auto position = _fe3d->model_getPartPosition(modelId, partId);
+	//		//		auto rotation = _fe3d->model_getPartRotation(modelId, partId);
+	//		//		auto size = _fe3d->model_getPartSize(modelId, partId);
 
 	//		//		// Set properties
 	//		//		animationData->setTotalMovement(partId, position);
@@ -280,7 +280,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//	}
 	//	else if(lineType == "QUAD3D")
 	//	{
-	//		string quadID, templateID, textContent;
+	//		string quadId, templateID, textContent;
 	//		fvec3 position, rotation, color;
 	//		fvec2 size;
 	//		float lightness, minHeight, maxHeight;
@@ -289,7 +289,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		bool isVisible, isAabbRaycastResponsive, isAabbCollisionResponsive, isFacingX, isFacingY, isAnimationPlaying, isAnimationPaused;
 
 	//		iss >>
-	//			quadID >>
+	//			quadId >>
 	//			templateID >>
 	//			isVisible >>
 	//			isAabbRaycastResponsive >>
@@ -321,19 +321,19 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		replace(textContent.begin(), textContent.end(), '?', ' ');
 
-	//		if(_copyTemplateQuad3d(quadID, templateID, position, false))
+	//		if(_copyTemplateQuad3d(quadId, templateID, position, false))
 	//		{
-	//			_fe3d->quad3d_setRotation(quadID, rotation);
-	//			_fe3d->quad3d_setSize(quadID, size);
-	//			_fe3d->quad3d_setFacingCameraX(quadID, isFacingX);
-	//			_fe3d->quad3d_setFacingCameraY(quadID, isFacingY);
-	//			_fe3d->quad3d_setColor(quadID, color);
-	//			//_fe3d->quad3d_setTextContent(quadID, textContent);
-	//			_fe3d->quad3d_setLightness(quadID, lightness);
-	//			_fe3d->quad3d_setMinHeight(quadID, minHeight);
-	//			_fe3d->quad3d_setMaxHeight(quadID, maxHeight);
-	//			_fe3d->quad3d_setVisible(quadID, isVisible);
-	//			for(const auto& id : _fe3d->aabb_getChildIDs(quadID, AabbParentEntityType::QUAD3D))
+	//			_fe3d->quad3d_setRotation(quadId, rotation);
+	//			_fe3d->quad3d_setSize(quadId, size);
+	//			_fe3d->quad3d_setFacingCameraX(quadId, isFacingX);
+	//			_fe3d->quad3d_setFacingCameraY(quadId, isFacingY);
+	//			_fe3d->quad3d_setColor(quadId, color);
+	//			//_fe3d->quad3d_setTextContent(quadId, textContent);
+	//			_fe3d->quad3d_setLightness(quadId, lightness);
+	//			_fe3d->quad3d_setMinHeight(quadId, minHeight);
+	//			_fe3d->quad3d_setMaxHeight(quadId, maxHeight);
+	//			_fe3d->quad3d_setVisible(quadId, isVisible);
+	//			for(const auto& id : _fe3d->aabb_getChildIDs(quadId, AabbParentEntityType::QUAD3D))
 	//			{
 	//				_fe3d->aabb_setRaycastResponsive(id, isAabbRaycastResponsive);
 	//				_fe3d->aabb_setCollisionResponsive(id, isAabbCollisionResponsive);

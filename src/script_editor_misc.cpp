@@ -104,9 +104,9 @@ void ScriptEditor::inject(shared_ptr<Script> script)
 	_script = script;
 }
 
-void ScriptEditor::setCurrentProjectID(const string& projectID)
+void ScriptEditor::setCurrentProjectId(const string& projectId)
 {
-	_currentProjectID = projectID;
+	_currentProjectId = projectId;
 }
 
 const bool ScriptEditor::isLoaded() const

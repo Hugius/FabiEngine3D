@@ -14,25 +14,25 @@ void Quad2dEditor::load()
 	_fe3d->camera_reset();
 	_fe3d->camera_setYaw(270.0f);
 
-	_gui->getOverlay()->createTextField("quadID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("quadId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_isEditorLoaded = true;
 }
 
 void Quad2dEditor::unload()
 {
-	for(const auto& id : _loadedQuadIDs)
+	for(const auto& id : _loadedQuadIds)
 	{
 		_fe3d->quad2d_delete(id);
 	}
 
 	_unloadGUI();
 
-	_gui->getOverlay()->deleteTextField("quadID");
+	_gui->getOverlay()->deleteTextField("quadId");
 
-	_loadedQuadIDs.clear();
-	_currentQuadID = "";
-	_hoveredQuadID = "";
+	_loadedQuadIds.clear();
+	_currentQuadId = "";
+	_hoveredQuadId = "";
 	_isEditorLoaded = false;
 	_isCreatingQuad = false;
 	_isChoosingQuad = false;

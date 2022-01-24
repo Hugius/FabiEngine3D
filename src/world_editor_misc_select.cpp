@@ -2,35 +2,35 @@
 
 void WorldEditor::_selectModel(const string& id)
 {
-	_selectedModelID = id;
+	_selectedModelId = id;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
-	if(_activeModelID.empty() && _activeQuadID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelId.empty() && _activeQuadId.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
-		string tempID = _selectedModelID;
+		string tempID = _selectedModelId;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
-		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), true);
-		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityId(), "Selected model: " + rawID, 0.025f);
+		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
+		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelId")->getEntityId(), "Selected model: " + rawID, 0.025f);
 	}
 }
 
 void WorldEditor::_selectQuad3d(const string& id)
 {
-	_selectedQuadID = id;
+	_selectedQuadId = id;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
-	if(_activeModelID.empty() && _activeQuadID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelId.empty() && _activeQuadId.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = id;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
-		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), true);
-		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityId(), "Selected quad3d: " + rawID, 0.025f);
+		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
+		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Selected quad3d: " + rawID, 0.025f);
 	}
 }
 
@@ -40,7 +40,7 @@ void WorldEditor::_selectText3d(const string& id)
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
-	if(_activeModelID.empty() && _activeTextID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelId.empty() && _activeTextID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = id;
 		reverse(tempID.begin(), tempID.end());
@@ -57,7 +57,7 @@ void WorldEditor::_selectSound(const string& id)
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
-	if(_activeModelID.empty() && _activeQuadID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelId.empty() && _activeQuadId.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = id;
 		reverse(tempID.begin(), tempID.end());
@@ -91,7 +91,7 @@ void WorldEditor::_selectReflection(const string& id)
 
 void WorldEditor::_unselectModel(const string& id)
 {
-	for(const auto& partId : _fe3d->model_getPartIDs(id))
+	for(const auto& partId : _fe3d->model_getPartIds(id))
 	{
 		_fe3d->model_setOpacity(id, partId, 1.0f);
 	}

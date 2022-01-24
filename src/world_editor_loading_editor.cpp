@@ -12,14 +12,14 @@ using std::istringstream;
 
 const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
 	{
 		Logger::throwError("WorldEditor::loadEditorWorldFromFile::1");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\" + fileName + ".fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\editor\\" + fileName + ".fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -120,18 +120,18 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "MODEL")
 		{
-			string modelID;
+			string modelId;
 			string templateID;
-			string animationID;
+			string animationId;
 			fvec3 position;
 			fvec3 rotation;
 			fvec3 size;
 			bool isFrozen;
 
-			iss >> modelID;
+			iss >> modelId;
 
 			bool makeInvisible = false;
-			if(modelID[0] == '@')
+			if(modelId[0] == '@')
 			{
 				if(_isEditorLoaded)
 				{
@@ -155,47 +155,47 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				size.y >>
 				size.z >>
 				isFrozen >>
-				animationID;
+				animationId;
 
-			animationID = (animationID == "?") ? "" : animationID;
+			animationId = (animationId == "?") ? "" : animationId;
 
-			replace(animationID.begin(), animationID.end(), '?', ' ');
+			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_copyTemplateModel(modelID, templateID, position, false))
+			if(_copyTemplateModel(modelId, templateID, position, false))
 			{
-				_fe3d->model_setBaseRotation(modelID, rotation);
-				_fe3d->model_setBaseSize(modelID, size);
-				_fe3d->model_setFrozen(modelID, isFrozen);
+				_fe3d->model_setBaseRotation(modelId, rotation);
+				_fe3d->model_setBaseSize(modelId, size);
+				_fe3d->model_setFrozen(modelId, isFrozen);
 
 				if(_isEditorLoaded)
 				{
-					_initialModelPosition.insert(make_pair(modelID, position));
-					_initialModelRotation.insert(make_pair(modelID, rotation));
-					_initialModelSize.insert(make_pair(modelID, size));
+					_initialModelPosition.insert(make_pair(modelId, position));
+					_initialModelRotation.insert(make_pair(modelId, rotation));
+					_initialModelSize.insert(make_pair(modelId, size));
 				}
 
-				if(!animationID.empty())
+				if(!animationId.empty())
 				{
-					_animation3dEditor->startModelAnimation(animationID, modelID, -1);
+					_animation3dEditor->startModelAnimation(animationId, modelId, -1);
 				}
 
 				if(makeInvisible)
 				{
-					_fe3d->model_setVisible(modelID, false);
+					_fe3d->model_setVisible(modelId, false);
 				}
 			}
 		}
 		else if(lineType == "QUAD3D")
 		{
-			string quadID;
+			string quadId;
 			string templateID;
-			string animationID;
+			string animationId;
 			fvec3 position;
 			fvec3 rotation;
 			fvec2 size;
 
 			iss >>
-				quadID >>
+				quadId >>
 				templateID >>
 				position.x >>
 				position.y >>
@@ -205,20 +205,20 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				rotation.z >>
 				size.x >>
 				size.y >>
-				animationID;
+				animationId;
 
-			animationID = (animationID == "?") ? "" : animationID;
+			animationId = (animationId == "?") ? "" : animationId;
 
-			replace(animationID.begin(), animationID.end(), '?', ' ');
+			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_copyTemplateQuad3d(quadID, templateID, position, false))
+			if(_copyTemplateQuad3d(quadId, templateID, position, false))
 			{
-				_fe3d->quad3d_setRotation(quadID, rotation);
-				_fe3d->quad3d_setSize(quadID, size);
+				_fe3d->quad3d_setRotation(quadId, rotation);
+				_fe3d->quad3d_setSize(quadId, size);
 
-				if(!animationID.empty())
+				if(!animationId.empty())
 				{
-					_animation2dEditor->startQuad3dAnimation(animationID, quadID, -1);
+					_animation2dEditor->startQuad3dAnimation(animationId, quadId, -1);
 				}
 			}
 		}
@@ -241,19 +241,19 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_isEditorLoaded)
 			{
-				const string newModelID = ("@@speaker_" + soundID);
-				_fe3d->model_create(newModelID, "engine\\assets\\mesh\\speaker.obj");
-				_fe3d->model_setBasePosition(newModelID, position);
-				_fe3d->model_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
-				_fe3d->model_setShadowed(newModelID, false);
-				_fe3d->model_setReflected(newModelID, false);
-				_fe3d->model_setBright(newModelID, "", true);
+				const string newModelId = ("@@speaker_" + soundID);
+				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\speaker.obj");
+				_fe3d->model_setBasePosition(newModelId, position);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPEAKER_SIZE);
+				_fe3d->model_setShadowed(newModelId, false);
+				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
 
-				_fe3d->aabb_create(newModelID, true);
-				_fe3d->aabb_setParentEntityId(newModelID, newModelID);
-				_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
-				_fe3d->aabb_setCollisionResponsive(newModelID, false);
+				_fe3d->aabb_create(newModelId, true);
+				_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+				_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_SPEAKER_AABB_SIZE);
+				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
 			if(_copyTemplateSound(soundID, templateID, position, false))
@@ -288,20 +288,20 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_isEditorLoaded)
 			{
-				const string newModelID = ("@@lamp_" + pointlightID);
-				_fe3d->model_create(newModelID, "engine\\assets\\mesh\\lamp.obj");
-				_fe3d->model_setBasePosition(newModelID, position);
-				_fe3d->model_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
-				_fe3d->model_setColor(newModelID, "", color);
-				_fe3d->model_setShadowed(newModelID, false);
-				_fe3d->model_setReflected(newModelID, false);
-				_fe3d->model_setBright(newModelID, "", true);
+				const string newModelId = ("@@lamp_" + pointlightID);
+				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
+				_fe3d->model_setBasePosition(newModelId, position);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_LAMP_SIZE);
+				_fe3d->model_setColor(newModelId, "", color);
+				_fe3d->model_setShadowed(newModelId, false);
+				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
 
-				_fe3d->aabb_create(newModelID, true);
-				_fe3d->aabb_setParentEntityId(newModelID, newModelID);
-				_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
-				_fe3d->aabb_setCollisionResponsive(newModelID, false);
+				_fe3d->aabb_create(newModelId, true);
+				_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+				_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_LAMP_AABB_SIZE);
+				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
 			_fe3d->pointlight_create(pointlightID);
@@ -339,21 +339,21 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_isEditorLoaded)
 			{
-				const string newModelID = ("@@torch_" + spotlightID);
-				_fe3d->model_create(newModelID, "engine\\assets\\mesh\\torch.obj");
-				_fe3d->model_setBasePosition(newModelID, position);
-				_fe3d->model_setBaseRotation(newModelID, fvec3(0.0f, -yaw, pitch));
-				_fe3d->model_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
-				_fe3d->model_setColor(newModelID, "", color);
-				_fe3d->model_setShadowed(newModelID, false);
-				_fe3d->model_setReflected(newModelID, false);
-				_fe3d->model_setBright(newModelID, "", true);
+				const string newModelId = ("@@torch_" + spotlightID);
+				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\torch.obj");
+				_fe3d->model_setBasePosition(newModelId, position);
+				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, -yaw, pitch));
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_TORCH_SIZE);
+				_fe3d->model_setColor(newModelId, "", color);
+				_fe3d->model_setShadowed(newModelId, false);
+				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
 
-				_fe3d->aabb_create(newModelID, true);
-				_fe3d->aabb_setParentEntityId(newModelID, newModelID);
-				_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelID, DEFAULT_TORCH_AABB_SIZE);
-				_fe3d->aabb_setCollisionResponsive(newModelID, false);
+				_fe3d->aabb_create(newModelId, true);
+				_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+				_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_TORCH_AABB_SIZE);
+				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
 			_fe3d->spotlight_create(spotlightID);
@@ -379,19 +379,19 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_isEditorLoaded)
 			{
-				const string newModelID = ("@@camera_" + reflectionID);
-				_fe3d->model_create(newModelID, "engine\\assets\\mesh\\camera.obj");
-				_fe3d->model_setBasePosition(newModelID, position);
-				_fe3d->model_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
-				_fe3d->model_setShadowed(newModelID, false);
-				_fe3d->model_setReflected(newModelID, false);
-				_fe3d->model_setBright(newModelID, "", true);
+				const string newModelId = ("@@camera_" + reflectionID);
+				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
+				_fe3d->model_setBasePosition(newModelId, position);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
+				_fe3d->model_setShadowed(newModelId, false);
+				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
 
-				_fe3d->aabb_create(newModelID, true);
-				_fe3d->aabb_setParentEntityId(newModelID, newModelID);
-				_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
-				_fe3d->aabb_setLocalSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
-				_fe3d->aabb_setCollisionResponsive(newModelID, false);
+				_fe3d->aabb_create(newModelId, true);
+				_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+				_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAMERA_AABB_SIZE);
+				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
 			_fe3d->reflection_create(reflectionID);
@@ -548,7 +548,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(!Config::getInst().isApplicationExported())
 			{
-				flareMapPath = string("projects\\" + _currentProjectID + "\\" + flareMapPath);
+				flareMapPath = string("projects\\" + _currentProjectId + "\\" + flareMapPath);
 			}
 
 			_fe3d->gfx_enableLensFlare();

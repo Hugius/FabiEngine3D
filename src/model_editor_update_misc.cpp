@@ -72,28 +72,28 @@ void ModelEditor::_updateMiscellaneous()
 			}
 		}
 
-		if(!_currentModelID.empty())
+		if(!_currentModelId.empty())
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				for(const auto& partId : _fe3d->model_getPartIDs(_currentModelID))
+				for(const auto& partId : _fe3d->model_getPartIds(_currentModelId))
 				{
-					if(_fe3d->model_isWireframed(_currentModelID, partId))
+					if(_fe3d->model_isWireframed(_currentModelId, partId))
 					{
-						_fe3d->model_setWireframed(_currentModelID, partId, false);
+						_fe3d->model_setWireframed(_currentModelId, partId, false);
 					}
 					else
 					{
-						_fe3d->model_setWireframed(_currentModelID, partId, true);
+						_fe3d->model_setWireframed(_currentModelId, partId, true);
 					}
 				}
 			}
 		}
 	}
 
-	if(!_currentModelID.empty())
+	if(!_currentModelId.empty())
 	{
-		auto& partId = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
+		auto& partId = (_hoveredPartId.empty() ? _currentPartId : _hoveredPartId);
 
 		if(partId.empty())
 		{
@@ -101,7 +101,7 @@ void ModelEditor::_updateMiscellaneous()
 		}
 		else
 		{
-			const auto opacity = _fe3d->model_getOpacity(_currentModelID, partId);
+			const auto opacity = _fe3d->model_getOpacity(_currentModelId, partId);
 
 			if(opacity == 0.0f)
 			{
@@ -114,7 +114,7 @@ void ModelEditor::_updateMiscellaneous()
 			}
 
 			const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
-			_fe3d->model_setOpacity(_currentModelID, partId, (opacity + speed));
+			_fe3d->model_setOpacity(_currentModelId, partId, (opacity + speed));
 		}
 	}
 }
@@ -123,37 +123,37 @@ void ModelEditor::_updateModelCreating()
 {
 	if(_isCreatingModel)
 	{
-		string newModelID;
+		string newModelId;
 
-		if(_gui->getOverlay()->checkValueForm("modelCreate", newModelID, {}))
+		if(_gui->getOverlay()->checkValueForm("modelCreate", newModelId, {}))
 		{
-			if(newModelID.find(' ') != string::npos)
+			if(newModelId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Model id cannot contain any spaces!");
 				return;
 			}
 
-			if(newModelID.find('@') != string::npos)
+			if(newModelId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Model id cannot contain '@'!");
 				return;
 			}
 
-			newModelID = ("@" + newModelID);
+			newModelId = ("@" + newModelId);
 
-			if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) != _loadedModelIDs.end())
+			if(find(_loadedModelIds.begin(), _loadedModelIds.end(), newModelId) != _loadedModelIds.end())
 			{
-				Logger::throwWarning("Model with id \"" + newModelID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Model with id \"" + newModelId.substr(1) + "\" already exists!");
 				return;
 			}
 
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("ModelEditor::_updateModelCreating");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\mesh\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\mesh\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -179,16 +179,16 @@ void ModelEditor::_updateModelCreating()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearMeshCache(finalFilePath);
-			_fe3d->model_create(newModelID, finalFilePath);
+			_fe3d->model_create(newModelId, finalFilePath);
 
-			if(_fe3d->model_isExisting(newModelID))
+			if(_fe3d->model_isExisting(newModelId))
 			{
-				_currentModelID = newModelID;
-				_loadedModelIDs.push_back(newModelID);
+				_currentModelId = newModelId;
+				_loadedModelIds.push_back(newModelId);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityId(), "Model: " + newModelID.substr(1), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelId")->getEntityId(), "Model: " + newModelId.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
 				_isCreatingModel = false;
 			}
 		}
@@ -203,26 +203,26 @@ void ModelEditor::_updateModelChoosing()
 
 		if(!selectedButtonID.empty())
 		{
-			if(_hoveredModelID.empty())
+			if(_hoveredModelId.empty())
 			{
-				_hoveredModelID = ("@" + selectedButtonID);
-				_fe3d->model_setVisible(_hoveredModelID, true);
+				_hoveredModelId = ("@" + selectedButtonID);
+				_fe3d->model_setVisible(_hoveredModelId, true);
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentModelID = ("@" + selectedButtonID);
-				_hoveredModelID = "";
+				_currentModelId = ("@" + selectedButtonID);
+				_hoveredModelId = "";
 
 				if(!_isDeletingModel)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityId(), "Model: " + _currentModelID.substr(1), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelId")->getEntityId(), "Model: " + _currentModelId.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
 				}
 
-				_fe3d->model_setVisible(_currentModelID, true);
+				_fe3d->model_setVisible(_currentModelId, true);
 				_gui->getOverlay()->deleteChoiceForm("modelList");
 				_isChoosingModel = false;
 			}
@@ -235,10 +235,10 @@ void ModelEditor::_updateModelChoosing()
 		}
 		else
 		{
-			if(!_hoveredModelID.empty())
+			if(!_hoveredModelId.empty())
 			{
-				_fe3d->model_setVisible(_hoveredModelID, false);
-				_hoveredModelID = "";
+				_fe3d->model_setVisible(_hoveredModelId, false);
+				_hoveredModelId = "";
 			}
 		}
 	}
@@ -246,7 +246,7 @@ void ModelEditor::_updateModelChoosing()
 
 void ModelEditor::_updateModelDeleting()
 {
-	if(_isDeletingModel && !_currentModelID.empty())
+	if(_isDeletingModel && !_currentModelId.empty())
 	{
 		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
@@ -255,17 +255,17 @@ void ModelEditor::_updateModelDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->model_delete(_currentModelID);
+			_fe3d->model_delete(_currentModelId);
 
-			_loadedModelIDs.erase(remove(_loadedModelIDs.begin(), _loadedModelIDs.end(), _currentModelID), _loadedModelIDs.end());
-			_currentModelID = "";
+			_loadedModelIds.erase(remove(_loadedModelIds.begin(), _loadedModelIds.end(), _currentModelId), _loadedModelIds.end());
+			_currentModelId = "";
 			_isDeletingModel = false;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_fe3d->model_setVisible(_currentModelID, false);
+			_fe3d->model_setVisible(_currentModelId, false);
 
-			_currentModelID = "";
+			_currentModelId = "";
 			_isDeletingModel = false;
 		}
 	}
@@ -279,16 +279,16 @@ void ModelEditor::_updatePartChoosing()
 
 		if(!selectedButtonID.empty())
 		{
-			if(_hoveredPartID.empty())
+			if(_hoveredPartId.empty())
 			{
-				_hoveredPartID = selectedButtonID;
-				_originalPartOpacity = _fe3d->model_getOpacity(_currentModelID, _hoveredPartID);
+				_hoveredPartId = selectedButtonID;
+				_originalPartOpacity = _fe3d->model_getOpacity(_currentModelId, _hoveredPartId);
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentPartID = selectedButtonID;
-				_hoveredPartID = "";
+				_currentPartId = selectedButtonID;
+				_hoveredPartId = "";
 				_gui->getOverlay()->deleteChoiceForm("partList");
 				_isChoosingPart = false;
 			}
@@ -300,10 +300,10 @@ void ModelEditor::_updatePartChoosing()
 		}
 		else
 		{
-			if(!_hoveredPartID.empty())
+			if(!_hoveredPartId.empty())
 			{
-				_fe3d->model_setOpacity(_currentModelID, _hoveredPartID, _originalPartOpacity);
-				_hoveredPartID = "";
+				_fe3d->model_setOpacity(_currentModelId, _hoveredPartId, _originalPartOpacity);
+				_hoveredPartId = "";
 			}
 		}
 	}

@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void ModelEditor::setCurrentProjectID(const string& projectID)
+void ModelEditor::setCurrentProjectId(const string& projectId)
 {
-	_currentProjectID = projectID;
+	_currentProjectId = projectId;
 }
 
 const bool ModelEditor::isLoaded() const
@@ -14,6 +14,6 @@ const bool ModelEditor::isLoaded() const
 
 const vector<string>& ModelEditor::getLoadedIDs()
 {
-	sort(_loadedModelIDs.begin(), _loadedModelIDs.end());
-	return _loadedModelIDs;
+	sort(_loadedModelIds.begin(), _loadedModelIds.end());
+	return _loadedModelIds;
 }

@@ -61,36 +61,36 @@ void ModelEditor::_updateChoiceMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			for(const auto& partId : _fe3d->model_getPartIDs(_currentModelID))
+			for(const auto& partId : _fe3d->model_getPartIds(_currentModelId))
 			{
-				_fe3d->model_setWireframed(_currentModelID, partId, false);
+				_fe3d->model_setWireframed(_currentModelId, partId, false);
 			}
 
-			if(!_currentPartID.empty())
+			if(!_currentPartId.empty())
 			{
-				_fe3d->model_setOpacity(_currentModelID, _currentPartID, _originalPartOpacity);
-				_currentPartID = "";
+				_fe3d->model_setOpacity(_currentModelId, _currentPartId, _originalPartOpacity);
+				_currentPartId = "";
 			}
 
-			_fe3d->model_setVisible(_currentModelID, false);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), false);
+			_fe3d->model_setVisible(_currentModelId, false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMain");
-			_currentModelID = "";
+			_currentModelId = "";
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())
 		{
-			if(_currentPartID.empty())
+			if(_currentPartId.empty())
 			{
-				auto IDs = _fe3d->model_getPartIDs(_currentModelID);
+				auto IDs = _fe3d->model_getPartIds(_currentModelId);
 				sort(IDs.begin(), IDs.end());
 				_gui->getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), IDs);
 				_isChoosingPart = true;
 			}
 			else
 			{
-				_fe3d->model_setOpacity(_currentModelID, _currentPartID, _originalPartOpacity);
-				_currentPartID = "";
+				_fe3d->model_setOpacity(_currentModelId, _currentPartId, _originalPartOpacity);
+				_currentPartId = "";
 			}
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
@@ -111,8 +111,8 @@ void ModelEditor::_updateChoiceMenu()
 			_fe3d->misc_enableAabbFrameRendering();
 		}
 
-		screen->getButton("part")->setHoverable(_fe3d->model_isMultiParted(_currentModelID));
+		screen->getButton("part")->setHoverable(_fe3d->model_isMultiParted(_currentModelId));
 
-		screen->getButton("part")->changeTextContent(_currentPartID.empty() ? "Select Part" : "Unselect Part");
+		screen->getButton("part")->changeTextContent(_currentPartId.empty() ? "Select Part" : "Unselect Part");
 	}
 }

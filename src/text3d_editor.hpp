@@ -7,7 +7,7 @@ class Text3dEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void unload();
 	void update();
@@ -36,7 +36,7 @@ private:
 	vector<string> _loadedTextIDs;
 	string _hoveredTextID = "";
 	string _currentTextID = "";
-	string _currentProjectID = "";
+	string _currentProjectId = "";
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;

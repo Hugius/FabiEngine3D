@@ -18,7 +18,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 		auto frame = animation.getFrames()[frameIndex];
 
 		unsigned int finishedPartCount = 0;
-		for(const auto& partId : animation.getPartIDs())
+		for(const auto& partId : animation.getPartIds())
 		{
 			if(!_fe3d->model_isExisting(key.second))
 			{
@@ -368,7 +368,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 		animation.setFrame(frameIndex, frame);
 
-		if(finishedPartCount == animation.getPartIDs().size())
+		if(finishedPartCount == animation.getPartIds().size())
 		{
 			if(animation.isAutopaused())
 			{

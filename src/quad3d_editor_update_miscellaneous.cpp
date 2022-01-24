@@ -7,10 +7,10 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 
 	if(screen->getId() == "quad3dEditorMenuMiscellaneous")
 	{
-		auto size = _fe3d->quad3d_getSize(_currentQuadID);
-		auto isFacingX = _fe3d->quad3d_isFacingCameraX(_currentQuadID);
-		auto isFacingY = _fe3d->quad3d_isFacingCameraY(_currentQuadID);
-		auto opacity = _fe3d->quad3d_getOpacity(_currentQuadID);
+		auto size = _fe3d->quad3d_getSize(_currentQuadId);
+		auto isFacingX = _fe3d->quad3d_isFacingCameraX(_currentQuadId);
+		auto isFacingY = _fe3d->quad3d_isFacingCameraY(_currentQuadId);
+		auto opacity = _fe3d->quad3d_getOpacity(_currentQuadId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -25,12 +25,12 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingX")->isHovered())
 		{
 			isFacingX = !isFacingX;
-			_fe3d->quad3d_setFacingCameraX(_currentQuadID, isFacingX);
+			_fe3d->quad3d_setFacingCameraX(_currentQuadId, isFacingX);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingY")->isHovered())
 		{
 			isFacingY = !isFacingY;
-			_fe3d->quad3d_setFacingCameraY(_currentQuadID, isFacingY);
+			_fe3d->quad3d_setFacingCameraY(_currentQuadId, isFacingY);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
@@ -40,23 +40,23 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		if(_gui->getOverlay()->checkValueForm("sizeX", size.x, {0.0f}))
 		{
 			size.x /= 100.0f;
-			_fe3d->quad3d_setSize(_currentQuadID, size);
+			_fe3d->quad3d_setSize(_currentQuadId, size);
 		}
 		if(_gui->getOverlay()->checkValueForm("sizeY", size.y, {0.0f}))
 		{
 			size.y /= 100.0f;
-			_fe3d->quad3d_setSize(_currentQuadID, size);
+			_fe3d->quad3d_setSize(_currentQuadId, size);
 		}
 		if(_gui->getOverlay()->checkValueForm("opacity", opacity, {0.0f}))
 		{
 			opacity /= 100.0f;
-			_fe3d->quad3d_setOpacity(_currentQuadID, opacity);
+			_fe3d->quad3d_setOpacity(_currentQuadId, opacity);
 		}
 
 		screen->getButton("isFacingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
 		screen->getButton("isFacingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
 
-		auto rotation = _fe3d->quad3d_getRotation(_currentQuadID);
+		auto rotation = _fe3d->quad3d_getRotation(_currentQuadId);
 		if(!isFacingX)
 		{
 			rotation.x = 0.0f;
@@ -66,6 +66,6 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		{
 			rotation.y = 0.0f;
 		}
-		_fe3d->quad3d_setRotation(_currentQuadID, rotation);
+		_fe3d->quad3d_setRotation(_currentQuadId, rotation);
 	}
 }

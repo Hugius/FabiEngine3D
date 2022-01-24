@@ -9,13 +9,13 @@ void TopViewportController::_updateProjectCreating()
 {
 	if(_isCreatingProject)
 	{
-		string newProjectID;
+		string newProjectId;
 
-		if(_gui->getOverlay()->checkValueForm("newProjectID", newProjectID))
+		if(_gui->getOverlay()->checkValueForm("newProjectId", newProjectId))
 		{
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string projectDirectoryPath = (rootPath + "projects\\");
-			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID + "\\");
+			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectId + "\\");
 
 			if(!Tools::isDirectoryExisting(projectDirectoryPath))
 			{
@@ -23,17 +23,17 @@ void TopViewportController::_updateProjectCreating()
 				return;
 			}
 
-			if(newProjectID.find(' ') != string::npos)
+			if(newProjectId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("New project name cannot contain any spaces!");
 				return;
 			}
 			else if(Tools::isDirectoryExisting(newProjectDirectoryPath))
 			{
-				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
+				Logger::throwWarning("Project \"" + newProjectId + "\"" + " already exists!");
 				return;
 			}
-			else if(any_of(newProjectID.begin(), newProjectID.end(), isupper))
+			else if(any_of(newProjectId.begin(), newProjectId.end(), isupper))
 			{
 				Logger::throwWarning("New project name cannot contain any capitals!");
 				return;
@@ -106,10 +106,10 @@ void TopViewportController::_updateProjectCreating()
 				text3dFile.close();
 				waterFile.close();
 
-				_currentProjectID = newProjectID;
+				_currentProjectId = newProjectId;
 				_applyProjectChange();
 
-				Logger::throwInfo("New project \"" + _currentProjectID + "\" created!");
+				Logger::throwInfo("New project \"" + _currentProjectId + "\" created!");
 
 				_isCreatingProject = false;
 			}
@@ -133,7 +133,7 @@ void TopViewportController::_updateProjectLoading()
 				return;
 			}
 
-			_currentProjectID = clickedButtonID;
+			_currentProjectId = clickedButtonID;
 			_applyProjectChange();
 
 			auto skyImagePaths = _skyEditor->getImagePathsFromFile();
@@ -162,7 +162,7 @@ void TopViewportController::_updateProjectLoading()
 
 			_fe3d->misc_cacheAudios(audioPaths);
 
-			Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
+			Logger::throwInfo("Existing project \"" + _currentProjectId + "\" loaded!");
 
 			_gui->getOverlay()->deleteChoiceForm("projectList");
 			_isLoadingProject = false;
@@ -196,9 +196,9 @@ void TopViewportController::_updateProjectDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			if(chosenButtonID == _currentProjectID)
+			if(chosenButtonID == _currentProjectId)
 			{
-				_currentProjectID = "";
+				_currentProjectId = "";
 				_applyProjectChange();
 			}
 

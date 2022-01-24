@@ -13,14 +13,14 @@ using std::istringstream;
 
 const vector<string> ModelEditor::getMeshPathsFromFile() const
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
 	{
 		Logger::throwError("ModelEditor::getMeshPathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\model.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -41,10 +41,10 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 
 		if(lineType == "MODEL")
 		{
-			string modelID;
+			string modelId;
 			string meshPath;
 
-			iss >> modelID >> meshPath;
+			iss >> modelId >> meshPath;
 
 			meshPath = (meshPath == "?") ? "" : meshPath;
 
@@ -52,7 +52,7 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 
 			if(!Config::getInst().isApplicationExported())
 			{
-				meshPath = string("projects\\" + _currentProjectID + "\\" + meshPath);
+				meshPath = string("projects\\" + _currentProjectId + "\\" + meshPath);
 			}
 
 			meshPaths.push_back(meshPath);
@@ -66,14 +66,14 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 
 const vector<string> ModelEditor::getImagePathsFromFile() const
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
 	{
 		Logger::throwError("ModelEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\model.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -94,7 +94,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 		if(lineType == "MODEL")
 		{
-			string modelID;
+			string modelId;
 			string meshPath;
 			string levelOfDetailEntityId;
 			fvec3 size;
@@ -104,7 +104,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 			bool isReflected;
 
 			iss >>
-				modelID >>
+				modelId >>
 				meshPath >>
 				size.x >>
 				size.y >>
@@ -181,7 +181,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				{
 					if(!Config::getInst().isApplicationExported())
 					{
-						diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
+						diffuseMapPath = string("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 					}
 
 					imagePaths.push_back(diffuseMapPath);
@@ -191,7 +191,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				{
 					if(!Config::getInst().isApplicationExported())
 					{
-						emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
+						emissionMapPath = string("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 					}
 
 					imagePaths.push_back(emissionMapPath);
@@ -201,7 +201,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				{
 					if(!Config::getInst().isApplicationExported())
 					{
-						specularMapPath = string("projects\\" + _currentProjectID + "\\" + specularMapPath);
+						specularMapPath = string("projects\\" + _currentProjectId + "\\" + specularMapPath);
 					}
 
 					imagePaths.push_back(specularMapPath);
@@ -211,7 +211,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				{
 					if(!Config::getInst().isApplicationExported())
 					{
-						reflectionMapPath = string("projects\\" + _currentProjectID + "\\" + reflectionMapPath);
+						reflectionMapPath = string("projects\\" + _currentProjectId + "\\" + reflectionMapPath);
 					}
 
 					imagePaths.push_back(reflectionMapPath);
@@ -221,7 +221,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				{
 					if(!Config::getInst().isApplicationExported())
 					{
-						normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
+						normalMapPath = string("projects\\" + _currentProjectId + "\\" + normalMapPath);
 					}
 
 					imagePaths.push_back(normalMapPath);
@@ -237,16 +237,16 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 const bool ModelEditor::loadFromFile()
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
 	{
 		Logger::throwError("ModelEditor::loadFromFile::1");
 	}
 
-	_loadedModelIDs.clear();
+	_loadedModelIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\model.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -266,7 +266,7 @@ const bool ModelEditor::loadFromFile()
 
 		if(lineType == "MODEL")
 		{
-			string modelID;
+			string modelId;
 			string meshPath;
 			string levelOfDetailEntityId;
 			fvec3 size;
@@ -276,7 +276,7 @@ const bool ModelEditor::loadFromFile()
 			bool isReflected;
 
 			iss >>
-				modelID >>
+				modelId >>
 				meshPath >>
 				size.x >>
 				size.y >>
@@ -295,20 +295,20 @@ const bool ModelEditor::loadFromFile()
 
 			if(!Config::getInst().isApplicationExported())
 			{
-				meshPath = string("projects\\" + _currentProjectID + "\\" + meshPath);
+				meshPath = string("projects\\" + _currentProjectId + "\\" + meshPath);
 			}
 
-			_fe3d->model_create(modelID, meshPath);
+			_fe3d->model_create(modelId, meshPath);
 
-			if(_fe3d->model_isExisting(modelID))
+			if(_fe3d->model_isExisting(modelId))
 			{
-				_loadedModelIDs.push_back(modelID);
+				_loadedModelIds.push_back(modelId);
 
-				_fe3d->model_setVisible(modelID, false);
-				_fe3d->model_setBaseSize(modelID, size);
-				_fe3d->model_setLevelOfDetailEntityId(modelID, levelOfDetailEntityId);
-				_fe3d->model_setLevelOfDetailDistance(modelID, levelOfDetailDistance);
-				_fe3d->model_setRotationOrder(modelID, DirectionOrder(rotationOrder));
+				_fe3d->model_setVisible(modelId, false);
+				_fe3d->model_setBaseSize(modelId, size);
+				_fe3d->model_setLevelOfDetailEntityId(modelId, levelOfDetailEntityId);
+				_fe3d->model_setLevelOfDetailDistance(modelId, levelOfDetailDistance);
+				_fe3d->model_setRotationOrder(modelId, DirectionOrder(rotationOrder));
 
 				while(true)
 				{
@@ -374,68 +374,68 @@ const bool ModelEditor::loadFromFile()
 					replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 					replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
-					_fe3d->model_setColor(modelID, partId, color);
-					_fe3d->model_setSpecular(modelID, partId, isSpecular);
-					_fe3d->model_setSpecularShininess(modelID, partId, specularShininess);
-					_fe3d->model_setSpecularIntensity(modelID, partId, specularIntensity);
-					_fe3d->model_setReflectivity(modelID, partId, reflectivity);
-					_fe3d->model_setLightness(modelID, partId, lightness);
-					_fe3d->model_setTextureRepeat(modelID, partId, textureRepeat);
-					_fe3d->model_setReflective(modelID, partId, isReflective);
-					_fe3d->model_setReflectionType(modelID, partId, ReflectionType(reflectionType));
-					_fe3d->model_setFaceCulled(modelID, partId, isFaceCulled);
-					_fe3d->model_setBright(modelID, partId, isBright);
-					_fe3d->model_setEmissionIntensity(modelID, partId, emissionIntensity);
-					_fe3d->model_setOpacity(modelID, partId, opacity);
+					_fe3d->model_setColor(modelId, partId, color);
+					_fe3d->model_setSpecular(modelId, partId, isSpecular);
+					_fe3d->model_setSpecularShininess(modelId, partId, specularShininess);
+					_fe3d->model_setSpecularIntensity(modelId, partId, specularIntensity);
+					_fe3d->model_setReflectivity(modelId, partId, reflectivity);
+					_fe3d->model_setLightness(modelId, partId, lightness);
+					_fe3d->model_setTextureRepeat(modelId, partId, textureRepeat);
+					_fe3d->model_setReflective(modelId, partId, isReflective);
+					_fe3d->model_setReflectionType(modelId, partId, ReflectionType(reflectionType));
+					_fe3d->model_setFaceCulled(modelId, partId, isFaceCulled);
+					_fe3d->model_setBright(modelId, partId, isBright);
+					_fe3d->model_setEmissionIntensity(modelId, partId, emissionIntensity);
+					_fe3d->model_setOpacity(modelId, partId, opacity);
 
 					if(!diffuseMapPath.empty())
 					{
 						if(!Config::getInst().isApplicationExported())
 						{
-							diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
+							diffuseMapPath = string("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 						}
 
-						_fe3d->model_setDiffuseMap(modelID, partId, diffuseMapPath);
+						_fe3d->model_setDiffuseMap(modelId, partId, diffuseMapPath);
 					}
 
 					if(!specularMapPath.empty())
 					{
 						if(!Config::getInst().isApplicationExported())
 						{
-							specularMapPath = string("projects\\" + _currentProjectID + "\\" + specularMapPath);
+							specularMapPath = string("projects\\" + _currentProjectId + "\\" + specularMapPath);
 						}
 
-						_fe3d->model_setSpecularMap(modelID, partId, specularMapPath);
+						_fe3d->model_setSpecularMap(modelId, partId, specularMapPath);
 					}
 
 					if(!emissionMapPath.empty())
 					{
 						if(!Config::getInst().isApplicationExported())
 						{
-							emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
+							emissionMapPath = string("projects\\" + _currentProjectId + "\\" + emissionMapPath);
 						}
 
-						_fe3d->model_setEmissionMap(modelID, partId, emissionMapPath);
+						_fe3d->model_setEmissionMap(modelId, partId, emissionMapPath);
 					}
 
 					if(!reflectionMapPath.empty())
 					{
 						if(!Config::getInst().isApplicationExported())
 						{
-							reflectionMapPath = string("projects\\" + _currentProjectID + "\\" + reflectionMapPath);
+							reflectionMapPath = string("projects\\" + _currentProjectId + "\\" + reflectionMapPath);
 						}
 
-						_fe3d->model_setReflectionMap(modelID, partId, reflectionMapPath);
+						_fe3d->model_setReflectionMap(modelId, partId, reflectionMapPath);
 					}
 
 					if(!normalMapPath.empty())
 					{
 						if(!Config::getInst().isApplicationExported())
 						{
-							normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
+							normalMapPath = string("projects\\" + _currentProjectId + "\\" + normalMapPath);
 						}
 
-						_fe3d->model_setNormalMap(modelID, partId, normalMapPath);
+						_fe3d->model_setNormalMap(modelId, partId, normalMapPath);
 					}
 				}
 			}
@@ -443,13 +443,13 @@ const bool ModelEditor::loadFromFile()
 		else if(lineType == "AABB")
 		{
 			string aabbID;
-			string modelID;
+			string modelId;
 			fvec3 position;
 			fvec3 size;
 
 			iss >>
 				aabbID >>
-				modelID >>
+				modelId >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -463,7 +463,7 @@ const bool ModelEditor::loadFromFile()
 			{
 				_fe3d->aabb_setVisible(aabbID, false);
 				_fe3d->aabb_setFollowParentVisibility(aabbID, false);
-				_fe3d->aabb_setParentEntityId(aabbID, modelID);
+				_fe3d->aabb_setParentEntityId(aabbID, modelId);
 				_fe3d->aabb_setParentEntityType(aabbID, AabbParentEntityType::MODEL);
 				_fe3d->aabb_setLocalPosition(aabbID, position);
 				_fe3d->aabb_setLocalSize(aabbID, size);

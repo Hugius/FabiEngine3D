@@ -36,7 +36,7 @@ public:
 	void inject(shared_ptr<SoundEditor> soundEditor);
 	void inject(shared_ptr<WorldEditor> worldEditor);
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void executeInitializeScripts();
 	void executeUpdateScripts(bool isDebugging);
@@ -135,7 +135,7 @@ private:
 	const bool _validateFe3dTerrain();
 	const bool _validateFe3dWater();
 	const bool _validateFe3dModel(const string& id, bool isTemplate);
-	const bool _validateFe3dModelPart(const string& modelID, const string& partId);
+	const bool _validateFe3dModelPart(const string& modelId, const string& partId);
 	const bool _validateFe3dQuad3d(const string& id, bool isTemplate);
 	const bool _validateFe3dText3d(const string& id, bool isTemplate);
 	const bool _validateFe3dQuad2d(const string& id, bool isTemplate);
@@ -206,7 +206,7 @@ private:
 	static inline const string PUSHING_KEYWORD = "PUSH";
 	static inline const string PULLING_KEYWORD = "PULL";
 	static inline const string PASS_KEYWORD = "PASS";
-	string _currentProjectID = "";
+	string _currentProjectId = "";
 	string _initEntryID = "";
 	string _updateEntryID = "";
 	string _terminateEntryID = "";

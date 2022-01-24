@@ -10,7 +10,7 @@ using std::istringstream;
 
 const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
 	{
 		Logger::throwError("Animation3dEditor::loadFromFile");
 	}
@@ -19,7 +19,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\animation3d.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\animation3d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -31,22 +31,22 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 	string line;
 	while(getline(file, line))
 	{
-		string animationID;
-		string previewModelID;
+		string animationId;
+		string previewModelId;
 
 		istringstream iss(line);
 
-		iss >> animationID >> previewModelID;
+		iss >> animationId >> previewModelId;
 
-		auto newAnimation = make_shared<Animation3d>(animationID);
-		newAnimation->setPreviewModelID(previewModelID);
+		auto newAnimation = make_shared<Animation3d>(animationId);
+		newAnimation->setPreviewModelId(previewModelId);
 
 		Animation3dFrame defaultFrame;
 
 		newAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 		defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 
-		auto partIds = _fe3d->model_getPartIDs(previewModelID);
+		auto partIds = _fe3d->model_getPartIds(previewModelId);
 		if(partIds.size() > 1)
 		{
 			for(const auto& partId : partIds)
@@ -64,7 +64,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 		{
 			iss = istringstream(line);
 
-			iss >> animationID >> previewModelID;
+			iss >> animationId >> previewModelId;
 
 			vector<Animation3dFrame> customFrames;
 			while(true)
@@ -119,20 +119,20 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 
 		if(mustCheckPreviewModel)
 		{
-			if(_fe3d->model_isExisting(newAnimation->getPreviewModelID()))
+			if(_fe3d->model_isExisting(newAnimation->getPreviewModelId()))
 			{
 				bool hasAllParts = true;
-				for(const auto& partId : newAnimation->getPartIDs())
+				for(const auto& partId : newAnimation->getPartIds())
 				{
 					if(!partId.empty())
 					{
-						hasAllParts = hasAllParts && _fe3d->model_hasPart(newAnimation->getPreviewModelID(), partId);
+						hasAllParts = hasAllParts && _fe3d->model_hasPart(newAnimation->getPreviewModelId(), partId);
 					}
 				}
 
 				if(hasAllParts)
 				{
-					newAnimation->setInitialSize(_fe3d->model_getBaseSize(newAnimation->getPreviewModelID()));
+					newAnimation->setInitialSize(_fe3d->model_getBaseSize(newAnimation->getPreviewModelId()));
 				}
 				else
 				{

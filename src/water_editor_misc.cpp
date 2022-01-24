@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void WaterEditor::setCurrentProjectID(const string& projectID)
+void WaterEditor::setCurrentProjectId(const string& projectId)
 {
-	_currentProjectID = projectID;
+	_currentProjectId = projectId;
 }
 
 const bool WaterEditor::isLoaded() const

@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void TerrainEditor::setCurrentProjectID(const string& projectID)
+void TerrainEditor::setCurrentProjectId(const string& projectId)
 {
-	_currentProjectID = projectID;
+	_currentProjectId = projectId;
 }
 
 const bool TerrainEditor::isLoaded() const

@@ -15,13 +15,13 @@ void TerrainEditor::_updateBlendMapMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("TerrainEditor::_updateBlendMapMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\terrain\\blend_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\terrain\\blend_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

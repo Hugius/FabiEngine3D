@@ -13,7 +13,7 @@ void WorldEditor::_updateText3dEditing()
 		_dontResetSelectedText3d = false;
 	}
 
-	if(_currentTemplateModelID.empty() && _currentTemplateTextID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
+	if(_currentTemplateModelId.empty() && _currentTemplateTextID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
 		for(const auto& id : _fe3d->text3d_getIds())
 		{

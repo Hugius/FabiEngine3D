@@ -17,12 +17,12 @@ void WorldEditor::_updateReflectionPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				auto newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelID = ("@@camera_" + newID);
+				auto newModelId = ("@@camera_" + newID);
 
 				while(_fe3d->reflection_isExisting(newID))
 				{
 					newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelID = ("@@camera_" + newID);
+					newModelId = ("@@camera_" + newID);
 				}
 
 				_fe3d->reflection_create(newID);
@@ -33,18 +33,18 @@ void WorldEditor::_updateReflectionPlacing()
 
 					_fe3d->reflection_setPosition(newID, newPosition);
 
-					_fe3d->model_create(newModelID, "engine\\assets\\mesh\\camera.obj");
-					_fe3d->model_setBasePosition(newModelID, newPosition);
-					_fe3d->model_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
-					_fe3d->model_setShadowed(newModelID, false);
-					_fe3d->model_setReflected(newModelID, false);
-					_fe3d->model_setBright(newModelID, "", true);
+					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
+					_fe3d->model_setBasePosition(newModelId, newPosition);
+					_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
+					_fe3d->model_setShadowed(newModelId, false);
+					_fe3d->model_setReflected(newModelId, false);
+					_fe3d->model_setBright(newModelId, "", true);
 
-					_fe3d->aabb_create(newModelID, true);
-					_fe3d->aabb_setParentEntityId(newModelID, newModelID);
-					_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
-					_fe3d->aabb_setLocalSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
-					_fe3d->aabb_setCollisionResponsive(newModelID, false);
+					_fe3d->aabb_create(newModelId, true);
+					_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+					_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+					_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAMERA_AABB_SIZE);
+					_fe3d->aabb_setCollisionResponsive(newModelId, false);
 				}
 			}
 
@@ -95,12 +95,12 @@ void WorldEditor::_updateReflectionPlacing()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				auto newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelID = ("@@camera_" + newID);
+				auto newModelId = ("@@camera_" + newID);
 
 				while(_fe3d->reflection_isExisting(newID))
 				{
 					newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelID = ("@@camera_" + newID);
+					newModelId = ("@@camera_" + newID);
 				}
 
 				_fe3d->reflection_create(newID);
@@ -111,18 +111,18 @@ void WorldEditor::_updateReflectionPlacing()
 
 					_fe3d->reflection_setPosition(newID, newPosition);
 
-					_fe3d->model_create(newModelID, "engine\\assets\\mesh\\camera.obj");
-					_fe3d->model_setBasePosition(newModelID, newPosition);
-					_fe3d->model_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
-					_fe3d->model_setShadowed(newModelID, false);
-					_fe3d->model_setReflected(newModelID, false);
-					_fe3d->model_setBright(newModelID, "", true);
+					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
+					_fe3d->model_setBasePosition(newModelId, newPosition);
+					_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
+					_fe3d->model_setShadowed(newModelId, false);
+					_fe3d->model_setReflected(newModelId, false);
+					_fe3d->model_setBright(newModelId, "", true);
 
-					_fe3d->aabb_create(newModelID, true);
-					_fe3d->aabb_setParentEntityId(newModelID, newModelID);
-					_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
-					_fe3d->aabb_setLocalSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
-					_fe3d->aabb_setCollisionResponsive(newModelID, false);
+					_fe3d->aabb_create(newModelId, true);
+					_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+					_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+					_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAMERA_AABB_SIZE);
+					_fe3d->aabb_setCollisionResponsive(newModelId, false);
 				}
 			}
 		}

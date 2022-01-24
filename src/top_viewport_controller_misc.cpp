@@ -52,7 +52,7 @@ void TopViewportController::update()
 
 const bool TopViewportController::isScriptStarted() const
 {
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		return false;
 	}
@@ -64,7 +64,7 @@ const bool TopViewportController::isScriptStarted() const
 
 const bool TopViewportController::isScriptRunning() const
 {
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		return false;
 	}
@@ -77,7 +77,7 @@ const bool TopViewportController::isScriptRunning() const
 void TopViewportController::_updateMiscellaneous()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("main");
-	bool isHoverable = (_currentProjectID.empty()) ? false : !_scriptExecutor->isStarted();
+	bool isHoverable = (_currentProjectId.empty()) ? false : !_scriptExecutor->isStarted();
 
 	screen->getButton("skyEditor")->setHoverable(isHoverable);
 	screen->getButton("terrainEditor")->setHoverable(isHoverable);
@@ -105,22 +105,22 @@ const bool TopViewportController::_prepareProjectChoosing(const string& title) c
 		return false;
 	}
 
-	auto projectIDs = Tools::getDirectoriesFromDirectory(projectDirectoryPath);
+	auto projectIds = Tools::getDirectoriesFromDirectory(projectDirectoryPath);
 
-	_gui->getOverlay()->createChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIDs);
+	_gui->getOverlay()->createChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIds);
 
 	return true;
 }
 
 void TopViewportController::_applyProjectChange()
 {
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		_fe3d->misc_setWindowTitle("FabiEngine3D");
 	}
 	else
 	{
-		_fe3d->misc_setWindowTitle("FabiEngine3D - " + _currentProjectID);
+		_fe3d->misc_setWindowTitle("FabiEngine3D - " + _currentProjectId);
 	}
 
 	_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
@@ -190,19 +190,19 @@ void TopViewportController::_applyProjectChange()
 		_scriptEditor->unload();
 	}
 
-	_skyEditor->setCurrentProjectID(_currentProjectID);
-	_terrainEditor->setCurrentProjectID(_currentProjectID);
-	_waterEditor->setCurrentProjectID(_currentProjectID);
-	_modelEditor->setCurrentProjectID(_currentProjectID);
-	_quad3dEditor->setCurrentProjectID(_currentProjectID);
-	_text3dEditor->setCurrentProjectID(_currentProjectID);
-	_quad2dEditor->setCurrentProjectID(_currentProjectID);
-	_text2dEditor->setCurrentProjectID(_currentProjectID);
-	_animation2dEditor->setCurrentProjectID(_currentProjectID);
-	_animation3dEditor->setCurrentProjectID(_currentProjectID);
-	_soundEditor->setCurrentProjectID(_currentProjectID);
-	_worldEditor->setCurrentProjectID(_currentProjectID);
-	_scriptEditor->setCurrentProjectID(_currentProjectID);
+	_skyEditor->setCurrentProjectId(_currentProjectId);
+	_terrainEditor->setCurrentProjectId(_currentProjectId);
+	_waterEditor->setCurrentProjectId(_currentProjectId);
+	_modelEditor->setCurrentProjectId(_currentProjectId);
+	_quad3dEditor->setCurrentProjectId(_currentProjectId);
+	_text3dEditor->setCurrentProjectId(_currentProjectId);
+	_quad2dEditor->setCurrentProjectId(_currentProjectId);
+	_text2dEditor->setCurrentProjectId(_currentProjectId);
+	_animation2dEditor->setCurrentProjectId(_currentProjectId);
+	_animation3dEditor->setCurrentProjectId(_currentProjectId);
+	_soundEditor->setCurrentProjectId(_currentProjectId);
+	_worldEditor->setCurrentProjectId(_currentProjectId);
+	_scriptEditor->setCurrentProjectId(_currentProjectId);
 }
 
 const bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath) const
@@ -239,7 +239,7 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 
 void TopViewportController::_saveCurrentProject()
 {
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		Logger::throwError("TopViewportController::_saveCurrentProject");
 	}
@@ -258,7 +258,7 @@ void TopViewportController::_saveCurrentProject()
 	_worldEditor->saveEditorWorldToFile();
 	_scriptEditor->saveScriptFiles();
 
-	Logger::throwInfo("Project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Project \"" + _currentProjectId + "\" saved!");
 }
 
 void TopViewportController::inject(shared_ptr<SkyEditor> skyEditor)

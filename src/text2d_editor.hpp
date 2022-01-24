@@ -7,7 +7,7 @@ class Text2dEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void update();
 	void unload();
@@ -32,7 +32,7 @@ private:
 	vector<string> _loadedTextIDs;
 	string _currentTextID = "";
 	string _hoveredTextID = "";
-	string _currentProjectID = "";
+	string _currentProjectId = "";
 
 	static inline const string TEXT_CONTENT = "Text123";
 

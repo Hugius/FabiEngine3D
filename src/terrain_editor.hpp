@@ -7,7 +7,7 @@ class TerrainEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void update();
 	void unload();
@@ -36,7 +36,7 @@ private:
 	void _updateMiscellaneous();
 
 	vector <string> _loadedTerrainIDs;
-	string _currentProjectID = "";
+	string _currentProjectId = "";
 	string _currentTerrainID = "";
 
 	static inline constexpr float CW = 0.115f;

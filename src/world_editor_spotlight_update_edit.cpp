@@ -5,7 +5,7 @@ void WorldEditor::_updateSpotlightEditing()
 {
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	if(_currentTemplateModelID.empty() && _currentTemplateQuadID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		if(!_dontResetSelectedTorch)
 		{

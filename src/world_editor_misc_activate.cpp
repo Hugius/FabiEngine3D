@@ -2,10 +2,10 @@
 
 void WorldEditor::_activateModel(const string& id)
 {
-	_activeModelID = id;
+	_activeModelId = id;
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activeModelID);
+	auto position = _fe3d->model_getBasePosition(_activeModelId);
 
 	rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
 	rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
@@ -19,16 +19,16 @@ void WorldEditor::_activateModel(const string& id)
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityId(), "Active model: " + rawID, 0.025f);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
+	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelId")->getEntityId(), "Active model: " + rawID, 0.025f);
 }
 
 void WorldEditor::_activateQuad3d(const string& id)
 {
-	_activeQuadID = id;
+	_activeQuadId = id;
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->quad3d_getPosition(_activeQuadID);
+	auto position = _fe3d->quad3d_getPosition(_activeQuadId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
@@ -42,8 +42,8 @@ void WorldEditor::_activateQuad3d(const string& id)
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityId(), "Active quad3d: " + rawID, 0.025f);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
+	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Active quad3d: " + rawID, 0.025f);
 }
 
 void WorldEditor::_activateText3d(const string& id)
@@ -137,24 +137,24 @@ void WorldEditor::_activateReflection(const string& id)
 
 void WorldEditor::_deactivateModel()
 {
-	if(!_activeModelID.empty())
+	if(!_activeModelId.empty())
 	{
-		_unselectModel(_activeModelID);
+		_unselectModel(_activeModelId);
 	}
 
-	_activeModelID = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), false);
+	_activeModelId = "";
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateQuad3d()
 {
-	if(!_activeQuadID.empty())
+	if(!_activeQuadId.empty())
 	{
-		_unselectQuad3d(_activeQuadID);
+		_unselectQuad3d(_activeQuadId);
 	}
 
-	_activeQuadID = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), false);
+	_activeQuadId = "";
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateText3d()

@@ -6,9 +6,9 @@ void Animation3dEditor::inject(shared_ptr<ModelEditor> modelEditor)
 	_modelEditor = modelEditor;
 }
 
-void Animation3dEditor::setCurrentProjectID(const string& projectID)
+void Animation3dEditor::setCurrentProjectId(const string& projectId)
 {
-	_currentProjectID = projectID;
+	_currentProjectId = projectId;
 }
 
 const bool Animation3dEditor::isLoaded() const
@@ -35,7 +35,7 @@ const bool Animation3dEditor::_hasReachedFloat(float first, float second, float 
 	return (first >= (second - fabsf(speed))) && (first <= (second + fabsf(speed)));
 }
 
-const bool Animation3dEditor::_comparePartIDs(vector<string> first, vector<string> second) const
+const bool Animation3dEditor::_comparePartIds(vector<string> first, vector<string> second) const
 {
 	if(first.size() != second.size())
 	{
@@ -66,7 +66,7 @@ shared_ptr<Animation3d> Animation3dEditor::_getAnimation(const string& id) const
 	Logger::throwError("Animation3dEditor::_getAnimation");
 }
 
-const vector<string> Animation3dEditor::getAnimationIDs() const
+const vector<string> Animation3dEditor::getAnimationIds() const
 {
 	vector<string> result;
 
@@ -80,7 +80,7 @@ const vector<string> Animation3dEditor::getAnimationIDs() const
 	return result;
 }
 
-const vector<string> Animation3dEditor::getStartedModelAnimationIDs() const
+const vector<string> Animation3dEditor::getStartedModelAnimationIds() const
 {
 	set<string> IDs;
 
@@ -92,13 +92,13 @@ const vector<string> Animation3dEditor::getStartedModelAnimationIDs() const
 	return vector<string>(IDs.begin(), IDs.end());
 }
 
-const vector<string> Animation3dEditor::getStartedModelAnimationIDs(const string& modelID) const
+const vector<string> Animation3dEditor::getStartedModelAnimationIds(const string& modelId) const
 {
 	set<string> IDs;
 
 	for(const auto& [key, animation] : _startedModelAnimations)
 	{
-		if(modelID == key.second)
+		if(modelId == key.second)
 		{
 			IDs.insert(key.first);
 		}
@@ -107,55 +107,55 @@ const vector<string> Animation3dEditor::getStartedModelAnimationIDs(const string
 	return vector<string>(IDs.begin(), IDs.end());
 }
 
-const float Animation3dEditor::getModelAnimationSpeed(const string& animationID, const string& modelID) const
+const float Animation3dEditor::getModelAnimationSpeed(const string& animationId, const string& modelId) const
 {
-	if(!isAnimationExisting(animationID))
+	if(!isAnimationExisting(animationId))
 	{
 		Logger::throwWarning("animation not existing!");
 		return false;
 	}
 
-	if(!isModelAnimationStarted(animationID, modelID))
+	if(!isModelAnimationStarted(animationId, modelId))
 	{
 		Logger::throwWarning("animation not started!");
 		return false;
 	}
 
-	return _startedModelAnimations.at(make_pair(animationID, modelID)).getSpeed();
+	return _startedModelAnimations.at(make_pair(animationId, modelId)).getSpeed();
 }
 
-const int Animation3dEditor::getModelAnimationPlayCount(const string& animationID, const string& modelID) const
+const int Animation3dEditor::getModelAnimationPlayCount(const string& animationId, const string& modelId) const
 {
-	if(!isAnimationExisting(animationID))
+	if(!isAnimationExisting(animationId))
 	{
 		Logger::throwWarning("animation not existing!");
 		return false;
 	}
 
-	if(!isModelAnimationStarted(animationID, modelID))
+	if(!isModelAnimationStarted(animationId, modelId))
 	{
 		Logger::throwWarning("animation not started!");
 		return false;
 	}
 
-	return _startedModelAnimations.at(make_pair(animationID, modelID)).getPlayCount();
+	return _startedModelAnimations.at(make_pair(animationId, modelId)).getPlayCount();
 }
 
-const unsigned int Animation3dEditor::getModelAnimationFrameIndex(const string& animationID, const string& modelID) const
+const unsigned int Animation3dEditor::getModelAnimationFrameIndex(const string& animationId, const string& modelId) const
 {
-	if(!isAnimationExisting(animationID))
+	if(!isAnimationExisting(animationId))
 	{
 		Logger::throwWarning("animation not existing!");
 		return false;
 	}
 
-	if(!isModelAnimationStarted(animationID, modelID))
+	if(!isModelAnimationStarted(animationId, modelId))
 	{
 		Logger::throwWarning("animation not started!");
 		return false;
 	}
 
-	return _startedModelAnimations.at(make_pair(animationID, modelID)).getFrameIndex();
+	return _startedModelAnimations.at(make_pair(animationId, modelId)).getFrameIndex();
 }
 
 const bool Animation3dEditor::isAnimationExisting(const string& id) const
@@ -171,63 +171,63 @@ const bool Animation3dEditor::isAnimationExisting(const string& id) const
 	return false;
 }
 
-const bool Animation3dEditor::isModelAnimationStarted(const string& animationID, const string& modelID) const
+const bool Animation3dEditor::isModelAnimationStarted(const string& animationId, const string& modelId) const
 {
-	if(!isAnimationExisting(animationID))
+	if(!isAnimationExisting(animationId))
 	{
 		Logger::throwWarning("animation not existing!");
 	}
 
-	return (_startedModelAnimations.find(make_pair(animationID, modelID)) != _startedModelAnimations.end());
+	return (_startedModelAnimations.find(make_pair(animationId, modelId)) != _startedModelAnimations.end());
 }
 
-const bool Animation3dEditor::isModelAnimationPlaying(const string& animationID, const string& modelID) const
+const bool Animation3dEditor::isModelAnimationPlaying(const string& animationId, const string& modelId) const
 {
-	if(!isAnimationExisting(animationID))
+	if(!isAnimationExisting(animationId))
 	{
 		Logger::throwWarning("animation not existing!");
 		return false;
 	}
 
-	if(!isModelAnimationStarted(animationID, modelID))
+	if(!isModelAnimationStarted(animationId, modelId))
 	{
 		Logger::throwWarning("animation not started!");
 		return false;
 	}
 
-	return !isModelAnimationPaused(animationID, modelID);
+	return !isModelAnimationPaused(animationId, modelId);
 }
 
-const bool Animation3dEditor::isModelAnimationAutopaused(const string& animationID, const string& modelID) const
+const bool Animation3dEditor::isModelAnimationAutopaused(const string& animationId, const string& modelId) const
 {
-	if(!isAnimationExisting(animationID))
+	if(!isAnimationExisting(animationId))
 	{
 		Logger::throwWarning("animation not existing!");
 		return false;
 	}
 
-	if(!isModelAnimationStarted(animationID, modelID))
+	if(!isModelAnimationStarted(animationId, modelId))
 	{
 		Logger::throwWarning("animation not started!");
 		return false;
 	}
 
-	return _startedModelAnimations.at(make_pair(animationID, modelID)).isAutopaused();
+	return _startedModelAnimations.at(make_pair(animationId, modelId)).isAutopaused();
 }
 
-const bool Animation3dEditor::isModelAnimationPaused(const string& animationID, const string& modelID) const
+const bool Animation3dEditor::isModelAnimationPaused(const string& animationId, const string& modelId) const
 {
-	if(!isAnimationExisting(animationID))
+	if(!isAnimationExisting(animationId))
 	{
 		Logger::throwWarning("animation not existing!");
 		return false;
 	}
 
-	if(!isModelAnimationStarted(animationID, modelID))
+	if(!isModelAnimationStarted(animationId, modelId))
 	{
 		Logger::throwWarning("animation not started!");
 		return false;
 	}
 
-	return _startedModelAnimations.at(make_pair(animationID, modelID)).isPaused();
+	return _startedModelAnimations.at(make_pair(animationId, modelId)).isPaused();
 }

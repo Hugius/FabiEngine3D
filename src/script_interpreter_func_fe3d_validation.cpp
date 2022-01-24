@@ -184,9 +184,9 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& id, bool isTempla
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dModelPart(const string& modelID, const string& partId)
+const bool ScriptInterpreter::_validateFe3dModelPart(const string& modelId, const string& partId)
 {
-	if(_fe3d->model_hasPart(modelID, partId))
+	if(_fe3d->model_hasPart(modelId, partId))
 	{
 		_throwScriptError("model entity part does not exist!");
 		return false;

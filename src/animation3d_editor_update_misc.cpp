@@ -71,31 +71,31 @@ void Animation3dEditor::_updateMiscellaneous()
 		}
 	}
 
-	if(!_currentAnimationID.empty())
+	if(!_currentAnimationId.empty())
 	{
-		auto currentAnimation = _getAnimation(_currentAnimationID);
+		auto currentAnimation = _getAnimation(_currentAnimationId);
 
 		if(_mustUpdateCurrentFramePreview)
 		{
-			if(!isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
+			if(!isModelAnimationStarted(_currentAnimationId, currentAnimation->getPreviewModelId()))
 			{
-				if(_fe3d->model_isExisting(currentAnimation->getPreviewModelID()))
+				if(_fe3d->model_isExisting(currentAnimation->getPreviewModelId()))
 				{
-					for(const auto& partId : currentAnimation->getPartIDs())
+					for(const auto& partId : currentAnimation->getPartIds())
 					{
 						if(partId.empty())
 						{
-							_fe3d->model_setBasePosition(currentAnimation->getPreviewModelID(), fvec3(0.0f));
-							_fe3d->model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), fvec3(0.0f));
-							_fe3d->model_setBaseRotation(currentAnimation->getPreviewModelID(), fvec3(0.0f));
-							_fe3d->model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
+							_fe3d->model_setBasePosition(currentAnimation->getPreviewModelId(), fvec3(0.0f));
+							_fe3d->model_setBaseRotationOrigin(currentAnimation->getPreviewModelId(), fvec3(0.0f));
+							_fe3d->model_setBaseRotation(currentAnimation->getPreviewModelId(), fvec3(0.0f));
+							_fe3d->model_setBaseSize(currentAnimation->getPreviewModelId(), currentAnimation->getInitialSize());
 						}
 						else
 						{
-							_fe3d->model_setPartPosition(currentAnimation->getPreviewModelID(), partId, fvec3(0.0f));
-							_fe3d->model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partId, fvec3(0.0f));
-							_fe3d->model_setPartRotation(currentAnimation->getPreviewModelID(), partId, fvec3(0.0f));
-							_fe3d->model_setPartSize(currentAnimation->getPreviewModelID(), partId, fvec3(1.0f));
+							_fe3d->model_setPartPosition(currentAnimation->getPreviewModelId(), partId, fvec3(0.0f));
+							_fe3d->model_setPartRotationOrigin(currentAnimation->getPreviewModelId(), partId, fvec3(0.0f));
+							_fe3d->model_setPartRotation(currentAnimation->getPreviewModelId(), partId, fvec3(0.0f));
+							_fe3d->model_setPartSize(currentAnimation->getPreviewModelId(), partId, fvec3(1.0f));
 						}
 					}
 
@@ -105,43 +105,43 @@ void Animation3dEditor::_updateMiscellaneous()
 						{
 							auto frame = currentAnimation->getFrames()[frameIndex];
 
-							for(const auto& partId : currentAnimation->getPartIDs())
+							for(const auto& partId : currentAnimation->getPartIds())
 							{
-								if(_fe3d->model_hasPart(currentAnimation->getPreviewModelID(), partId) || partId.empty())
+								if(_fe3d->model_hasPart(currentAnimation->getPreviewModelId(), partId) || partId.empty())
 								{
 									if(frame.getTransformationTypes().at(partId) == TransformationType::MOVEMENT)
 									{
 										auto newPosition = (currentAnimation->getInitialSize() * frame.getTargetTransformations().at(partId));
 										if(partId.empty())
 										{
-											_fe3d->model_setBasePosition(currentAnimation->getPreviewModelID(), newPosition);
+											_fe3d->model_setBasePosition(currentAnimation->getPreviewModelId(), newPosition);
 										}
 										else
 										{
-											_fe3d->model_setPartPosition(currentAnimation->getPreviewModelID(), partId, newPosition);
+											_fe3d->model_setPartPosition(currentAnimation->getPreviewModelId(), partId, newPosition);
 										}
 									}
 									else if(frame.getTransformationTypes().at(partId) == TransformationType::ROTATION)
 									{
-										auto currentModelSize = _fe3d->model_getBaseSize(currentAnimation->getPreviewModelID());
+										auto currentModelSize = _fe3d->model_getBaseSize(currentAnimation->getPreviewModelId());
 										auto newOrigin = (currentModelSize * frame.getRotationOrigins().at(partId));
 										if(partId.empty())
 										{
-											_fe3d->model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), newOrigin);
+											_fe3d->model_setBaseRotationOrigin(currentAnimation->getPreviewModelId(), newOrigin);
 										}
 										else
 										{
-											_fe3d->model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partId, newOrigin);
+											_fe3d->model_setPartRotationOrigin(currentAnimation->getPreviewModelId(), partId, newOrigin);
 										}
 
 										auto newRotation = frame.getTargetTransformations().at(partId);
 										if(partId.empty())
 										{
-											_fe3d->model_setBaseRotation(currentAnimation->getPreviewModelID(), newRotation);
+											_fe3d->model_setBaseRotation(currentAnimation->getPreviewModelId(), newRotation);
 										}
 										else
 										{
-											_fe3d->model_setPartRotation(currentAnimation->getPreviewModelID(), partId, newRotation);
+											_fe3d->model_setPartRotation(currentAnimation->getPreviewModelId(), partId, newRotation);
 										}
 									}
 									else if(frame.getTransformationTypes().at(partId) == TransformationType::SCALING)
@@ -150,11 +150,11 @@ void Animation3dEditor::_updateMiscellaneous()
 										auto newSize = (modelSize + (modelSize * frame.getTargetTransformations().at(partId)));
 										if(partId.empty())
 										{
-											_fe3d->model_setBaseSize(currentAnimation->getPreviewModelID(), newSize);
+											_fe3d->model_setBaseSize(currentAnimation->getPreviewModelId(), newSize);
 										}
 										else
 										{
-											_fe3d->model_setPartSize(currentAnimation->getPreviewModelID(), partId, newSize);
+											_fe3d->model_setPartSize(currentAnimation->getPreviewModelId(), partId, newSize);
 										}
 									}
 								}
@@ -165,14 +165,14 @@ void Animation3dEditor::_updateMiscellaneous()
 			}
 		}
 
-		auto partId = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
+		auto partId = (_hoveredPartId.empty() ? _currentPartId : _hoveredPartId);
 		if(partId.empty())
 		{
 			_selectedPartHighlightDirection = 1;
 		}
 		else
 		{
-			const auto opacity = _fe3d->model_getOpacity(currentAnimation->getPreviewModelID(), partId);
+			const auto opacity = _fe3d->model_getOpacity(currentAnimation->getPreviewModelId(), partId);
 
 			if(opacity == 0.0f)
 			{
@@ -185,7 +185,7 @@ void Animation3dEditor::_updateMiscellaneous()
 			}
 
 			const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
-			_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), partId, (opacity + speed));
+			_fe3d->model_setOpacity(currentAnimation->getPreviewModelId(), partId, (opacity + speed));
 		}
 	}
 }
@@ -194,36 +194,36 @@ void Animation3dEditor::_updateAnimationCreating()
 {
 	if(_isCreatingAnimation)
 	{
-		string newAnimationID;
+		string newAnimationId;
 
-		if(_gui->getOverlay()->checkValueForm("animationCreate", newAnimationID, {_currentAnimationID}))
+		if(_gui->getOverlay()->checkValueForm("animationCreate", newAnimationId, {_currentAnimationId}))
 		{
-			if(newAnimationID.find(' ') != string::npos)
+			if(newAnimationId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Animation id cannot contain any spaces!");
 				return;
 			}
 
-			if(newAnimationID.find('@') != string::npos)
+			if(newAnimationId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Animation id cannot contain '@'!");
 				return;
 			}
 
-			auto animationIDs = getAnimationIDs();
-			if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) != animationIDs.end())
+			auto animationIds = getAnimationIds();
+			if(find(animationIds.begin(), animationIds.end(), newAnimationId) != animationIds.end())
 			{
-				Logger::throwWarning("Animation id \"" + newAnimationID + "\" already exists!");
+				Logger::throwWarning("Animation id \"" + newAnimationId + "\" already exists!");
 				return;
 			}
 
-			_animations.push_back(make_shared<Animation3d>(newAnimationID));
+			_animations.push_back(make_shared<Animation3d>(newAnimationId));
 
-			_currentAnimationID = newAnimationID;
+			_currentAnimationId = newAnimationId;
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityId(), "Animation: " + newAnimationID, 0.025f);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityId(), true);
+			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationId")->getEntityId(), "Animation: " + newAnimationId, 0.025f);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), true);
 			_isCreatingAnimation = false;
 		}
@@ -240,19 +240,19 @@ void Animation3dEditor::_updateAnimationChoosing()
 		{
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentAnimationID = selectedButtonID;
+				_currentAnimationId = selectedButtonID;
 
 				if(!_isDeletingAnimation)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
-					if(_fe3d->model_isExisting(_getAnimation(selectedButtonID)->getPreviewModelID()))
+					if(_fe3d->model_isExisting(_getAnimation(selectedButtonID)->getPreviewModelId()))
 					{
-						_fe3d->model_setVisible(_getAnimation(selectedButtonID)->getPreviewModelID(), true);
+						_fe3d->model_setVisible(_getAnimation(selectedButtonID)->getPreviewModelId(), true);
 					}
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityId(), "Animation: " + selectedButtonID, 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityId(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationId")->getEntityId(), "Animation: " + selectedButtonID, 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), true);
 				}
 
@@ -271,7 +271,7 @@ void Animation3dEditor::_updateAnimationChoosing()
 
 void Animation3dEditor::_updateAnimationDeleting()
 {
-	if(_isDeletingAnimation && !_currentAnimationID.empty())
+	if(_isDeletingAnimation && !_currentAnimationId.empty())
 	{
 		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
@@ -280,19 +280,19 @@ void Animation3dEditor::_updateAnimationDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			if(!_getAnimation(_currentAnimationID)->getPreviewModelID().empty())
+			if(!_getAnimation(_currentAnimationId)->getPreviewModelId().empty())
 			{
-				_fe3d->model_setVisible(_getAnimation(_currentAnimationID)->getPreviewModelID(), false);
+				_fe3d->model_setVisible(_getAnimation(_currentAnimationId)->getPreviewModelId(), false);
 			}
 
-			_deleteAnimation(_currentAnimationID);
+			_deleteAnimation(_currentAnimationId);
 
-			_currentAnimationID = "";
+			_currentAnimationId = "";
 			_isDeletingAnimation = false;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_currentAnimationID = "";
+			_currentAnimationId = "";
 			_isDeletingAnimation = false;
 		}
 	}

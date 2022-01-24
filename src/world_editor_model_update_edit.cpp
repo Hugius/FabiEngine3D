@@ -4,11 +4,11 @@ void WorldEditor::_updateModelEditing()
 {
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	if(_currentTemplateModelID.empty() && _currentTemplateQuadID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		if(!_dontResetSelectedModel)
 		{
-			_selectedModelID = "";
+			_selectedModelId = "";
 		}
 		else
 		{
@@ -30,15 +30,15 @@ void WorldEditor::_updateModelEditing()
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						if(_selectedModelID != _activeModelID)
+						if(_selectedModelId != _activeModelId)
 						{
-							_activateModel(_selectedModelID);
+							_activateModel(_selectedModelId);
 						}
 					}
 				}
 				else
 				{
-					if((id != _selectedModelID) && (id != _activeModelID))
+					if((id != _selectedModelId) && (id != _activeModelId))
 					{
 						_unselectModel(id);
 					}
@@ -50,27 +50,27 @@ void WorldEditor::_updateModelEditing()
 		{
 			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
-				if(!_activeModelID.empty())
+				if(!_activeModelId.empty())
 				{
-					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedModelID.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedModelId.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
-						_activeModelID = "";
+						_activeModelId = "";
 						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
 		}
 
-		if(_selectedModelID.empty())
+		if(_selectedModelId.empty())
 		{
-			_updateModelHighlighting(_activeModelID, _activeModelHighlightDirection);
+			_updateModelHighlighting(_activeModelId, _activeModelHighlightDirection);
 		}
 		else
 		{
-			_updateModelHighlighting(_selectedModelID, _selectedModelHighlightDirection);
+			_updateModelHighlighting(_selectedModelId, _selectedModelHighlightDirection);
 		}
 
-		if(!_activeModelID.empty())
+		if(!_activeModelId.empty())
 		{
 			auto screen = rightWindow->getScreen("modelPropertiesMenu");
 
@@ -98,57 +98,57 @@ void WorldEditor::_updateModelEditing()
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
-					_fe3d->model_setFrozen(_activeModelID, !_fe3d->model_isFrozen(_activeModelID));
+					_fe3d->model_setFrozen(_activeModelId, !_fe3d->model_isFrozen(_activeModelId));
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
-					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor->getAnimationIDs());
+					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor->getAnimationIds());
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d->model_delete(_activeModelID);
-					_loadedModelIDs.erase(_activeModelID);
+					_fe3d->model_delete(_activeModelId);
+					_loadedModelIds.erase(_activeModelId);
 					rightWindow->setActiveScreen("main");
-					_activeModelID = "";
+					_activeModelId = "";
 					return;
 				}
 			}
 
 			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d->model_delete(_activeModelID);
-				_loadedModelIDs.erase(_activeModelID);
+				_fe3d->model_delete(_activeModelId);
+				_loadedModelIds.erase(_activeModelId);
 				rightWindow->setActiveScreen("main");
-				_activeModelID = "";
+				_activeModelId = "";
 				return;
 			}
 
-			auto lastAnimationID = _animation3dEditor->getStartedModelAnimationIDs(_activeModelID);
+			auto lastAnimationId = _animation3dEditor->getStartedModelAnimationIds(_activeModelId);
 			auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("animationList");
 			if(!selectedButtonID.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if(!lastAnimationID.empty())
+				if(!lastAnimationId.empty())
 				{
-					_animation3dEditor->stopModelAnimation(lastAnimationID.back(), _activeModelID);
+					_animation3dEditor->stopModelAnimation(lastAnimationId.back(), _activeModelId);
 
-					_fe3d->model_setBasePosition(_activeModelID, _initialModelPosition.at(_activeModelID));
-					_fe3d->model_setBaseRotationOrigin(_activeModelID, fvec3(0.0f));
-					_fe3d->model_setBaseRotation(_activeModelID, _initialModelRotation.at(_activeModelID));
-					_fe3d->model_setBaseSize(_activeModelID, _initialModelSize.at(_activeModelID));
+					_fe3d->model_setBasePosition(_activeModelId, _initialModelPosition.at(_activeModelId));
+					_fe3d->model_setBaseRotationOrigin(_activeModelId, fvec3(0.0f));
+					_fe3d->model_setBaseRotation(_activeModelId, _initialModelRotation.at(_activeModelId));
+					_fe3d->model_setBaseSize(_activeModelId, _initialModelSize.at(_activeModelId));
 
-					for(const auto& partId : _fe3d->model_getPartIDs(_activeModelID))
+					for(const auto& partId : _fe3d->model_getPartIds(_activeModelId))
 					{
 						if(!partId.empty())
 						{
-							_fe3d->model_setPartPosition(_activeModelID, partId, fvec3(0.0f));
-							_fe3d->model_setPartRotationOrigin(_activeModelID, partId, fvec3(0.0f));
-							_fe3d->model_setPartRotation(_activeModelID, partId, fvec3(0.0f));
-							_fe3d->model_setPartSize(_activeModelID, partId, fvec3(1.0f));
+							_fe3d->model_setPartPosition(_activeModelId, partId, fvec3(0.0f));
+							_fe3d->model_setPartRotationOrigin(_activeModelId, partId, fvec3(0.0f));
+							_fe3d->model_setPartRotation(_activeModelId, partId, fvec3(0.0f));
+							_fe3d->model_setPartSize(_activeModelId, partId, fvec3(1.0f));
 						}
 					}
 				}
 
-				_animation3dEditor->startModelAnimation(selectedButtonID, _activeModelID, -1);
+				_animation3dEditor->startModelAnimation(selectedButtonID, _activeModelId, -1);
 
 				_gui->getOverlay()->deleteChoiceForm("animationList");
 			}
@@ -157,9 +157,9 @@ void WorldEditor::_updateModelEditing()
 				_gui->getOverlay()->deleteChoiceForm("animationList");
 			}
 
-			auto position = _fe3d->model_getBasePosition(_activeModelID);
-			auto rotation = _fe3d->model_getBaseRotation(_activeModelID);
-			auto size = _fe3d->model_getBaseSize(_activeModelID);
+			auto position = _fe3d->model_getBasePosition(_activeModelId);
+			auto rotation = _fe3d->model_getBaseRotation(_activeModelId);
+			auto size = _fe3d->model_getBaseSize(_activeModelId);
 			auto oldPosition = position;
 			auto oldRotation = rotation;
 			auto oldSize = size;
@@ -194,63 +194,63 @@ void WorldEditor::_updateModelEditing()
 
 			if((position != oldPosition) || (rotation != oldRotation) || (size != oldSize))
 			{
-				auto animationIDs = _animation3dEditor->getStartedModelAnimationIDs(_activeModelID);
-				if(!animationIDs.empty())
+				auto animationIds = _animation3dEditor->getStartedModelAnimationIds(_activeModelId);
+				if(!animationIds.empty())
 				{
-					_animation3dEditor->stopModelAnimation(animationIDs[0], _activeModelID);
+					_animation3dEditor->stopModelAnimation(animationIds[0], _activeModelId);
 
 					if(position != oldPosition)
 					{
-						_initialModelPosition.at(_activeModelID) = position;
+						_initialModelPosition.at(_activeModelId) = position;
 					}
 
 					if(rotation != oldRotation)
 					{
-						_initialModelRotation.at(_activeModelID) = rotation;
+						_initialModelRotation.at(_activeModelId) = rotation;
 					}
 
 					if(size != oldSize)
 					{
-						_initialModelSize.at(_activeModelID) = size;
+						_initialModelSize.at(_activeModelId) = size;
 					}
 
-					_fe3d->model_setBasePosition(_activeModelID, _initialModelPosition.at(_activeModelID));
-					_fe3d->model_setBaseRotationOrigin(_activeModelID, fvec3(0.0f));
-					_fe3d->model_setBaseRotation(_activeModelID, _initialModelRotation.at(_activeModelID));
-					_fe3d->model_setBaseSize(_activeModelID, _initialModelSize.at(_activeModelID));
+					_fe3d->model_setBasePosition(_activeModelId, _initialModelPosition.at(_activeModelId));
+					_fe3d->model_setBaseRotationOrigin(_activeModelId, fvec3(0.0f));
+					_fe3d->model_setBaseRotation(_activeModelId, _initialModelRotation.at(_activeModelId));
+					_fe3d->model_setBaseSize(_activeModelId, _initialModelSize.at(_activeModelId));
 
-					for(const auto& partId : _fe3d->model_getPartIDs(_activeModelID))
+					for(const auto& partId : _fe3d->model_getPartIds(_activeModelId))
 					{
 						if(!partId.empty())
 						{
-							_fe3d->model_setPartPosition(_activeModelID, partId, fvec3(0.0f));
-							_fe3d->model_setPartRotationOrigin(_activeModelID, partId, fvec3(0.0f));
-							_fe3d->model_setPartRotation(_activeModelID, partId, fvec3(0.0f));
-							_fe3d->model_setPartSize(_activeModelID, partId, fvec3(1.0f));
+							_fe3d->model_setPartPosition(_activeModelId, partId, fvec3(0.0f));
+							_fe3d->model_setPartRotationOrigin(_activeModelId, partId, fvec3(0.0f));
+							_fe3d->model_setPartRotation(_activeModelId, partId, fvec3(0.0f));
+							_fe3d->model_setPartSize(_activeModelId, partId, fvec3(1.0f));
 						}
 					}
 
-					_animation3dEditor->startModelAnimation(animationIDs[0], _activeModelID, -1);
+					_animation3dEditor->startModelAnimation(animationIds[0], _activeModelId, -1);
 				}
 				else
 				{
-					_initialModelPosition.at(_activeModelID) = position;
-					_fe3d->model_setBasePosition(_activeModelID, position);
+					_initialModelPosition.at(_activeModelId) = position;
+					_fe3d->model_setBasePosition(_activeModelId, position);
 
-					_initialModelRotation.at(_activeModelID) = rotation;
-					_fe3d->model_setBaseRotation(_activeModelID, rotation);
+					_initialModelRotation.at(_activeModelId) = rotation;
+					_fe3d->model_setBaseRotation(_activeModelId, rotation);
 
-					_initialModelSize.at(_activeModelID) = size;
-					_fe3d->model_setBaseSize(_activeModelID, size);
+					_initialModelSize.at(_activeModelId) = size;
+					_fe3d->model_setBaseSize(_activeModelId, size);
 				}
 			}
 
-			screen->getButton("freeze")->changeTextContent(_fe3d->model_isFrozen(_activeModelID) ? "Unfreeze" : "Freeze");
+			screen->getButton("freeze")->changeTextContent(_fe3d->model_isFrozen(_activeModelId) ? "Unfreeze" : "Freeze");
 		}
 
-		if(_selectedModelID.empty() && _activeModelID.empty())
+		if(_selectedModelId.empty() && _activeModelId.empty())
 		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), false);
 		}
 	}
 }

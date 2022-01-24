@@ -19,12 +19,12 @@ void Animation2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_gui->getOverlay()->createChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), getAnimationIDs());
+			_gui->getOverlay()->createChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), getAnimationIds());
 			_isChoosingAnimation = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_gui->getOverlay()->createChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), getAnimationIDs());
+			_gui->getOverlay()->createChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), getAnimationIds());
 			_isChoosingAnimation = true;
 			_isDeletingAnimation = true;
 		}
@@ -51,23 +51,23 @@ void Animation2dEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "animation2dEditorMenuChoice")
 	{
-		auto currentAnimation = _getAnimation(_currentAnimationID);
+		auto currentAnimation = _getAnimation(_currentAnimationId);
 		auto rowCount = currentAnimation->getRowCount();
 		auto columnCount = currentAnimation->getColumnCount();
 		auto framestep = currentAnimation->getFramestep();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(isQuad3dAnimationStarted(_currentAnimationID, PREVIEW_QUAD_ID))
+			if(isQuad3dAnimationStarted(_currentAnimationId, PREVIEW_QUAD_ID))
 			{
-				stopQuad3dAnimation(_currentAnimationID, PREVIEW_QUAD_ID);
+				stopQuad3dAnimation(_currentAnimationId, PREVIEW_QUAD_ID);
 			}
 
 			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, "");
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
 
-			_currentAnimationID = "";
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityId(), false);
+			_currentAnimationId = "";
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 			return;
 		}
@@ -89,25 +89,25 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
-			startQuad3dAnimation(_currentAnimationID, PREVIEW_QUAD_ID, 1);
+			startQuad3dAnimation(_currentAnimationId, PREVIEW_QUAD_ID, 1);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
-			stopQuad3dAnimation(_currentAnimationID, PREVIEW_QUAD_ID);
+			stopQuad3dAnimation(_currentAnimationId, PREVIEW_QUAD_ID);
 		}
 
 		const auto isConfirmed = _gui->getOverlay()->isAnswerFormConfirmed("preview");
 		const auto isDenied = _gui->getOverlay()->isAnswerFormDenied("preview");
 		if(isConfirmed || isDenied)
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("Animation2dEditor::_updateChoiceMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto entityType = (isConfirmed ? "quad3d" : "quad2d");
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID +
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId +
 													"\\assets\\image\\entity\\" + entityType + "\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
@@ -149,7 +149,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 
 		auto hasPreviewTexture = !currentAnimation->getPreviewTexturePath().empty();
-		auto isStarted = isQuad3dAnimationStarted(_currentAnimationID, PREVIEW_QUAD_ID);
+		auto isStarted = isQuad3dAnimationStarted(_currentAnimationId, PREVIEW_QUAD_ID);
 		screen->getButton("preview")->setHoverable(!isStarted);
 		screen->getButton("rows")->setHoverable(hasPreviewTexture && !isStarted);
 		screen->getButton("columns")->setHoverable(hasPreviewTexture && !isStarted);

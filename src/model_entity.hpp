@@ -75,7 +75,7 @@ public:
 	void setFaceCulled(const string& partId, bool value);
 	void setRotationOrder(DirectionOrder value);
 
-	const vector<string> getPartIDs() const;
+	const vector<string> getPartIds() const;
 	const string& getMeshPath() const;
 	const string& getLevelOfDetailEntityId() const;
 	const string& getPreviousReflectionEntityId() const;

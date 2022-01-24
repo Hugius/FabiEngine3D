@@ -14,13 +14,13 @@ const bool WaterEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		Logger::throwError("WaterEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\water.fe3d");
+	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\water.fe3d");
 
 	for(const auto& waterID : _loadedWaterIDs)
 	{
@@ -41,9 +41,9 @@ const bool WaterEditor::saveToFile() const
 		auto isReflective = _fe3d->water_isReflective(waterID);
 		auto isRefractive = _fe3d->water_isRefractive(waterID);
 
-		dudvMapPath = string(dudvMapPath.empty() ? "" : dudvMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		displacementMapPath = string(displacementMapPath.empty() ? "" : displacementMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		dudvMapPath = string(dudvMapPath.empty() ? "" : dudvMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+		displacementMapPath = string(displacementMapPath.empty() ? "" : displacementMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 
 		dudvMapPath = (dudvMapPath.empty() ? "?" : dudvMapPath);
 		normalMapPath = (normalMapPath.empty() ? "?" : normalMapPath);

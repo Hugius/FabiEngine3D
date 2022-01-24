@@ -51,7 +51,7 @@ void Animation3dEditor::load()
 	_fe3d->reflection_create("@@reflection");
 	_fe3d->reflection_capture("@@reflection");
 
-	_gui->getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("animationId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("animationFrame", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_isEditorLoaded = true;
@@ -61,9 +61,9 @@ void Animation3dEditor::unload()
 {
 	for(const auto& animation : _animations)
 	{
-		if(_fe3d->model_isExisting(animation->getPreviewModelID()))
+		if(_fe3d->model_isExisting(animation->getPreviewModelId()))
 		{
-			_fe3d->model_delete(animation->getPreviewModelID());
+			_fe3d->model_delete(animation->getPreviewModelId());
 		}
 	}
 
@@ -86,17 +86,17 @@ void Animation3dEditor::unload()
 
 	_fe3d->reflection_delete("@@reflection");
 
-	_gui->getOverlay()->deleteTextField("animationID");
+	_gui->getOverlay()->deleteTextField("animationId");
 	_gui->getOverlay()->deleteTextField("animationFrame");
 
 	_animations.clear();
 	_modelAnimationsToStop.clear();
 	_modelAnimationsToStart.clear();
 	_startedModelAnimations.clear();
-	_currentAnimationID = "";
-	_currentPartID = "";
-	_hoveredModelID = "";
-	_hoveredPartID = "";
+	_currentAnimationId = "";
+	_currentPartId = "";
+	_hoveredModelId = "";
+	_hoveredPartId = "";
 	_cameraLookatPosition = fvec3(0.0f);
 	_currentFrameIndex = 0;
 	_selectedPartHighlightDirection = 1;

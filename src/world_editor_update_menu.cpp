@@ -96,8 +96,8 @@ void WorldEditor::_updateChoiceMenu()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			_currentTemplateModelID = "";
-			_currentTemplateQuadID = "";
+			_currentTemplateModelId = "";
+			_currentTemplateQuadId = "";
 			_currentTemplateTextID = "";
 			_currentTemplateSoundID = "";
 			_isPlacingPointlight = false;
@@ -118,8 +118,8 @@ void WorldEditor::_updateChoiceMenu()
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
-			_currentTemplateModelID = "";
-			_currentTemplateQuadID = "";
+			_currentTemplateModelId = "";
+			_currentTemplateQuadId = "";
 			_currentTemplateTextID = "";
 			_currentTemplateSoundID = "";
 			_isPlacingPointlight = false;

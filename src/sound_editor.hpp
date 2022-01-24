@@ -7,7 +7,7 @@ class SoundEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void update();
 	void unload();
@@ -32,7 +32,7 @@ private:
 	vector<string> _loadedSoundIDs;
 	string _currentSoundID = "";
 	string _hoveredSoundID = "";
-	string _currentProjectID = "";
+	string _currentProjectId = "";
 
 	static inline const fvec3 ICON_QUAD_POSITION = fvec3(0.0f, 0.0f, -1.5f);
 

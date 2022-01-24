@@ -92,8 +92,8 @@ void WorldEditor::load()
 		screen->getScrollingList("soundList")->createButton(id, id.substr(1));
 	}
 
-	_gui->getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("quadID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("quadId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("textID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
@@ -158,17 +158,17 @@ void WorldEditor::unload()
 		_fe3d->sound3d_delete(id);
 	}
 
-	_loadedModelIDs.clear();
-	_outsideLoadedModelIDs.clear();
-	_loadedQuadIDs.clear();
-	_outsideLoadedQuadIDs.clear();
+	_loadedModelIds.clear();
+	_outsideLoadedModelIds.clear();
+	_loadedQuadIds.clear();
+	_outsideLoadedQuadIds.clear();
 	_loadedSoundIDs.clear();
 	_outsideLoadedSoundIDs.clear();
 	_initialModelPosition.clear();
 	_initialModelRotation.clear();
 	_initialModelSize.clear();
-	_customWorldModelIDs.clear();
-	_customWorldQuadIDs.clear();
+	_customWorldModelIds.clear();
+	_customWorldQuadIds.clear();
 	_customWorldAabbIDs.clear();
 	_customWorldSoundIDs.clear();
 	_customWorldPointlightIDs.clear();
@@ -185,12 +185,12 @@ void WorldEditor::unload()
 	_currentSkyID = "";
 	_currentTerrainID = "";
 	_currentWaterID = "";
-	_currentTemplateModelID = "";
-	_selectedModelID = "";
-	_activeModelID = "";
-	_currentTemplateQuadID = "";
-	_selectedQuadID = "";
-	_activeQuadID = "";
+	_currentTemplateModelId = "";
+	_selectedModelId = "";
+	_activeModelId = "";
+	_currentTemplateQuadId = "";
+	_selectedQuadId = "";
+	_activeQuadId = "";
 	_currentTemplateSoundID = "";
 	_selectedSpeakerID = "";
 	_activeSpeakerID = "";
@@ -237,8 +237,8 @@ void WorldEditor::unload()
 	_isChoosingWorld = false;
 	_isDeletingWorld = false;
 
-	_gui->getOverlay()->deleteTextField("modelID");
-	_gui->getOverlay()->deleteTextField("quadID");
+	_gui->getOverlay()->deleteTextField("modelId");
+	_gui->getOverlay()->deleteTextField("quadId");
 	_gui->getOverlay()->deleteTextField("soundID");
 
 	_fe3d->collision_disableCameraResponse();

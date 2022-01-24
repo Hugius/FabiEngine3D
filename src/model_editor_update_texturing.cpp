@@ -10,14 +10,14 @@ void ModelEditor::_updateTexturingMenu()
 
 	if(screen->getId() == "modelEditorMenuTexturing")
 	{
-		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
+		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelId) || !_currentPartId.empty());
 
-		auto hasDiffuseMap = (isPartSelected ? _fe3d->model_hasDiffuseMap(_currentModelID, _currentPartID) : false);
-		auto hasEmissionMap = (isPartSelected ? _fe3d->model_hasEmissionMap(_currentModelID, _currentPartID) : false);
-		auto hasSpecularMap = (isPartSelected ? _fe3d->model_hasSpecularMap(_currentModelID, _currentPartID) : false);
-		auto hasReflectionMap = (isPartSelected ? _fe3d->model_hasReflectionMap(_currentModelID, _currentPartID) : false);
-		auto hasNormalMap = (isPartSelected ? _fe3d->model_hasNormalMap(_currentModelID, _currentPartID) : false);
-		auto textureRepeat = (isPartSelected ? _fe3d->model_getTextureRepeat(_currentModelID, _currentPartID) : 0.0f);
+		auto hasDiffuseMap = (isPartSelected ? _fe3d->model_hasDiffuseMap(_currentModelId, _currentPartId) : false);
+		auto hasEmissionMap = (isPartSelected ? _fe3d->model_hasEmissionMap(_currentModelId, _currentPartId) : false);
+		auto hasSpecularMap = (isPartSelected ? _fe3d->model_hasSpecularMap(_currentModelId, _currentPartId) : false);
+		auto hasReflectionMap = (isPartSelected ? _fe3d->model_hasReflectionMap(_currentModelId, _currentPartId) : false);
+		auto hasNormalMap = (isPartSelected ? _fe3d->model_hasNormalMap(_currentModelId, _currentPartId) : false);
+		auto textureRepeat = (isPartSelected ? _fe3d->model_getTextureRepeat(_currentModelId, _currentPartId) : 0.0f);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -26,13 +26,13 @@ void ModelEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\model\\diffuse_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\model\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -55,17 +55,17 @@ void ModelEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->model_setDiffuseMap(_currentModelID, _currentPartID, finalFilePath);
+			_fe3d->model_setDiffuseMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\model\\emission_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\model\\emission_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -88,17 +88,17 @@ void ModelEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->model_setEmissionMap(_currentModelID, _currentPartID, finalFilePath);
+			_fe3d->model_setEmissionMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\model\\specular_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\model\\specular_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -121,17 +121,17 @@ void ModelEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->model_setSpecularMap(_currentModelID, _currentPartID, finalFilePath);
+			_fe3d->model_setSpecularMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\model\\reflection_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\model\\reflection_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -154,17 +154,17 @@ void ModelEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->model_setReflectionMap(_currentModelID, _currentPartID, finalFilePath);
+			_fe3d->model_setReflectionMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\model\\normal_map\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\model\\normal_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -187,15 +187,15 @@ void ModelEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->model_setNormalMap(_currentModelID, _currentPartID, finalFilePath);
+			_fe3d->model_setNormalMap(_currentModelId, _currentPartId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d->model_setDiffuseMap(_currentModelID, _currentPartID, "");
-			_fe3d->model_setEmissionMap(_currentModelID, _currentPartID, "");
-			_fe3d->model_setSpecularMap(_currentModelID, _currentPartID, "");
-			_fe3d->model_setReflectionMap(_currentModelID, _currentPartID, "");
-			_fe3d->model_setNormalMap(_currentModelID, _currentPartID, "");
+			_fe3d->model_setDiffuseMap(_currentModelId, _currentPartId, "");
+			_fe3d->model_setEmissionMap(_currentModelId, _currentPartId, "");
+			_fe3d->model_setSpecularMap(_currentModelId, _currentPartId, "");
+			_fe3d->model_setReflectionMap(_currentModelId, _currentPartId, "");
+			_fe3d->model_setNormalMap(_currentModelId, _currentPartId, "");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
@@ -204,7 +204,7 @@ void ModelEditor::_updateTexturingMenu()
 
 		if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
-			_fe3d->model_setTextureRepeat(_currentModelID, _currentPartID, textureRepeat);
+			_fe3d->model_setTextureRepeat(_currentModelId, _currentPartId, textureRepeat);
 		}
 
 		screen->getButton("diffuseMap")->setHoverable(isPartSelected);

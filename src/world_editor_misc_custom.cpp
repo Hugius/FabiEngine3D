@@ -10,8 +10,8 @@ void WorldEditor::createCustomWorld(const string& id)
 	_hasCustomWorldTerrain = false;
 	_hasCustomWorldWater = false;
 	_hasCustomWorldGraphics = false;
-	_customWorldModelIDs.clear();
-	_customWorldQuadIDs.clear();
+	_customWorldModelIds.clear();
+	_customWorldQuadIds.clear();
 	_customWorldAabbIDs.clear();
 	_customWorldSoundIDs.clear();
 	_customWorldPointlightIDs.clear();
@@ -82,7 +82,7 @@ void WorldEditor::addModelToCustomWorld(const string& id)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldModelIDs.push_back(id);
+		_customWorldModelIds.push_back(id);
 	}
 	else
 	{
@@ -94,7 +94,7 @@ void WorldEditor::addQuad3dToCustomWorld(const string& id)
 {
 	if(!_customWorldID.empty())
 	{
-		_customWorldQuadIDs.push_back(id);
+		_customWorldQuadIds.push_back(id);
 	}
 	else
 	{

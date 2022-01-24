@@ -15,24 +15,24 @@ const bool WorldEditor::saveEditorWorldToFile()
 		return false;
 	}
 
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		Logger::throwError("WorldEditor::saveEditorWorldToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\worlds\\editor\\" + _currentWorldID + ".fe3d");
+	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\worlds\\editor\\" + _currentWorldID + ".fe3d");
 
 	vector<string> levelOfDetailEntityIds;
-	for(const auto& modelID : _fe3d->model_getIds())
+	for(const auto& modelId : _fe3d->model_getIds())
 	{
-		if(modelID[0] != '@')
+		if(modelId[0] != '@')
 		{
-			if(!_fe3d->model_getLevelOfDetailEntityId(modelID).empty())
+			if(!_fe3d->model_getLevelOfDetailEntityId(modelId).empty())
 			{
-				if(find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelID) == levelOfDetailEntityIds.end())
+				if(find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelId) == levelOfDetailEntityIds.end())
 				{
-					levelOfDetailEntityIds.push_back(_fe3d->model_getLevelOfDetailEntityId(modelID));
+					levelOfDetailEntityIds.push_back(_fe3d->model_getLevelOfDetailEntityId(modelId));
 				}
 			}
 		}
@@ -80,47 +80,47 @@ const bool WorldEditor::saveEditorWorldToFile()
 			height << endl;
 	}
 
-	for(const auto& modelID : _fe3d->model_getIds())
+	for(const auto& modelId : _fe3d->model_getIds())
 	{
-		bool isLevelOfDetailEntity = find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelID) != levelOfDetailEntityIds.end();
-		if((modelID[0] != '@') || isLevelOfDetailEntity)
+		bool isLevelOfDetailEntity = find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelId) != levelOfDetailEntityIds.end();
+		if((modelId[0] != '@') || isLevelOfDetailEntity)
 		{
-			auto startedAnimations = _animation3dEditor->getStartedModelAnimationIDs(modelID);
+			auto startedAnimations = _animation3dEditor->getStartedModelAnimationIds(modelId);
 
 			if(!startedAnimations.empty())
 			{
-				_fe3d->model_setBasePosition(modelID, _initialModelPosition[modelID]);
-				_fe3d->model_setBaseRotationOrigin(modelID, fvec3(0.0f));
-				_fe3d->model_setBaseRotation(modelID, _initialModelRotation[modelID]);
-				_fe3d->model_setBaseSize(modelID, _initialModelSize[modelID]);
+				_fe3d->model_setBasePosition(modelId, _initialModelPosition[modelId]);
+				_fe3d->model_setBaseRotationOrigin(modelId, fvec3(0.0f));
+				_fe3d->model_setBaseRotation(modelId, _initialModelRotation[modelId]);
+				_fe3d->model_setBaseSize(modelId, _initialModelSize[modelId]);
 
-				for(const auto& partId : _fe3d->model_getPartIDs(modelID))
+				for(const auto& partId : _fe3d->model_getPartIds(modelId))
 				{
 					if(!partId.empty())
 					{
-						_fe3d->model_setPartPosition(modelID, partId, fvec3(0.0f));
-						_fe3d->model_setPartRotationOrigin(modelID, partId, fvec3(0.0f));
-						_fe3d->model_setPartRotation(modelID, partId, fvec3(0.0f));
-						_fe3d->model_setPartSize(modelID, partId, fvec3(1.0f));
+						_fe3d->model_setPartPosition(modelId, partId, fvec3(0.0f));
+						_fe3d->model_setPartRotationOrigin(modelId, partId, fvec3(0.0f));
+						_fe3d->model_setPartRotation(modelId, partId, fvec3(0.0f));
+						_fe3d->model_setPartSize(modelId, partId, fvec3(1.0f));
 					}
 				}
 			}
 
-			auto position = _fe3d->model_getBasePosition(modelID);
-			auto rotation = _fe3d->model_getBaseRotation(modelID);
-			auto size = _fe3d->model_getBaseSize(modelID);
-			auto isFrozen = _fe3d->model_isFrozen(modelID);
-			auto animationID = (startedAnimations.empty()) ? "" : startedAnimations[0];
+			auto position = _fe3d->model_getBasePosition(modelId);
+			auto rotation = _fe3d->model_getBaseRotation(modelId);
+			auto size = _fe3d->model_getBaseSize(modelId);
+			auto isFrozen = _fe3d->model_isFrozen(modelId);
+			auto animationId = (startedAnimations.empty()) ? "" : startedAnimations[0];
 
-			animationID = (animationID.empty()) ? "?" : animationID;
+			animationId = (animationId.empty()) ? "?" : animationId;
 
-			replace(animationID.begin(), animationID.end(), ' ', '?');
+			replace(animationId.begin(), animationId.end(), ' ', '?');
 
-			string templateID = _loadedModelIDs.at(modelID);
+			string templateID = _loadedModelIds.at(modelId);
 
 			file <<
 				"MODEL " <<
-				modelID << " " <<
+				modelId << " " <<
 				templateID << " " <<
 				position.x << " " <<
 				position.y << " " <<
@@ -132,32 +132,32 @@ const bool WorldEditor::saveEditorWorldToFile()
 				size.y << " " <<
 				size.z << " " <<
 				isFrozen << " " <<
-				animationID;
+				animationId;
 
 			file << endl;
 		}
 	}
 
-	for(const auto& quadID : _fe3d->quad3d_getIds())
+	for(const auto& quadId : _fe3d->quad3d_getIds())
 	{
-		if(quadID[0] != '@')
+		if(quadId[0] != '@')
 		{
-			auto startedAnimations = _animation2dEditor->getStartedQuad3dAnimationIDs(quadID);
+			auto startedAnimations = _animation2dEditor->getStartedQuad3dAnimationIds(quadId);
 
-			auto position = _fe3d->quad3d_getPosition(quadID);
-			auto rotation = _fe3d->quad3d_getRotation(quadID);
-			auto size = _fe3d->quad3d_getSize(quadID);
-			auto animationID = (startedAnimations.empty() ? "" : startedAnimations[0]);
+			auto position = _fe3d->quad3d_getPosition(quadId);
+			auto rotation = _fe3d->quad3d_getRotation(quadId);
+			auto size = _fe3d->quad3d_getSize(quadId);
+			auto animationId = (startedAnimations.empty() ? "" : startedAnimations[0]);
 
-			animationID = (animationID.empty()) ? "?" : animationID;
+			animationId = (animationId.empty()) ? "?" : animationId;
 
-			replace(animationID.begin(), animationID.end(), ' ', '?');
+			replace(animationId.begin(), animationId.end(), ' ', '?');
 
-			string templateID = _loadedQuadIDs.at(quadID);
+			string templateID = _loadedQuadIds.at(quadId);
 
 			file <<
 				"QUAD3D " <<
-				quadID << " " <<
+				quadId << " " <<
 				templateID << " " <<
 				position.x << " " <<
 				position.y << " " <<
@@ -167,7 +167,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 				rotation.z << " " <<
 				size.x << " " <<
 				size.y << " " <<
-				animationID << endl;
+				animationId << endl;
 		}
 	}
 
@@ -375,7 +375,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto intensity = _fe3d->gfx_getLensFlareIntensity();
 		auto sensitivity = _fe3d->gfx_getLensFlareSensitivity();
 
-		flareMapPath = string(flareMapPath.empty() ? "" : flareMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		flareMapPath = string(flareMapPath.empty() ? "" : flareMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 
 		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
 

@@ -10,11 +10,11 @@ void WorldEditor::_updateQuad3dMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateQuadID.empty())
+			if(!_currentTemplateQuadId.empty())
 			{
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), false);
-				_fe3d->quad3d_setVisible(_currentTemplateQuadID, false);
-				_currentTemplateQuadID = "";
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), false);
+				_fe3d->quad3d_setVisible(_currentTemplateQuadId, false);
+				_currentTemplateQuadId = "";
 			}
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -32,21 +32,21 @@ void WorldEditor::_updateQuad3dMenu()
 
 			auto IDs = _fe3d->quad3d_getIds();
 			sort(IDs.begin(), IDs.end());
-			for(auto& quadID : IDs)
+			for(auto& quadId : IDs)
 			{
-				if(quadID[0] != '@')
+				if(quadId[0] != '@')
 				{
-					reverse(quadID.begin(), quadID.end());
-					string rawID = quadID.substr(quadID.find('_') + 1);
+					reverse(quadId.begin(), quadId.end());
+					string rawID = quadId.substr(quadId.find('_') + 1);
 					reverse(rawID.begin(), rawID.end());
-					reverse(quadID.begin(), quadID.end());
+					reverse(quadId.begin(), quadId.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createButton(quadID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createButton(quadId, rawID);
 				}
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateQuadID.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateQuadId.empty());
 	}
 }
 
@@ -63,11 +63,11 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& quadID : _quad3dEditor->getLoadedIDs())
+			for(const auto& quadId : _quad3dEditor->getLoadedIDs())
 			{
-				if(_fe3d->quad3d_isExisting(quadID))
+				if(_fe3d->quad3d_isExisting(quadId))
 				{
-					if(screen->getScrollingList("quad3dList")->getButton(quadID)->isHovered())
+					if(screen->getScrollingList("quad3dList")->getButton(quadId)->isHovered())
 					{
 						_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
@@ -77,15 +77,15 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 						_deactivatePointlight();
 						_deactivateReflection();
 
-						_currentTemplateQuadID = quadID;
-						_fe3d->quad3d_setVisible(_currentTemplateQuadID, true);
-						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), true);
-						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityId(), "Quad3d: " + _currentTemplateQuadID.substr(1), 0.025f);
+						_currentTemplateQuadId = quadId;
+						_fe3d->quad3d_setVisible(_currentTemplateQuadId, true);
+						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
+						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Quad3d: " + _currentTemplateQuadId.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedID().empty())
 						{
-							_fe3d->quad3d_setPosition(_currentTemplateQuadID, fvec3(0.0f));
+							_fe3d->quad3d_setPosition(_currentTemplateQuadId, fvec3(0.0f));
 							_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 							_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 							_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -114,20 +114,20 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 			}
 		}
 
-		for(const auto& quadID : _fe3d->quad3d_getIds())
+		for(const auto& quadId : _fe3d->quad3d_getIds())
 		{
-			if(quadID[0] != '@')
+			if(quadId[0] != '@')
 			{
-				if(screen->getScrollingList("quad3dList")->getButton(quadID)->isHovered())
+				if(screen->getScrollingList("quad3dList")->getButton(quadId)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activateQuad3d(quadID);
+						_activateQuad3d(quadId);
 					}
 					else
 					{
 						_dontResetSelectedQuad3d = true;
-						_selectQuad3d(quadID);
+						_selectQuad3d(quadId);
 					}
 
 					break;

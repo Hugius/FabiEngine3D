@@ -9,7 +9,7 @@ void WorldEditor::_updateModelHighlighting(const string& id, int& direction)
 
 	if(!id.empty())
 	{
-		auto partIds = _fe3d->model_getPartIDs(id);
+		auto partIds = _fe3d->model_getPartIds(id);
 
 		for(size_t i = 0; i < partIds.size(); i++)
 		{

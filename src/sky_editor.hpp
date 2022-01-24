@@ -7,7 +7,7 @@ class SkyEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void update();
 	void unload();
@@ -33,7 +33,7 @@ private:
 	void _updateMiscellaneous();
 
 	vector <string> _loadedSkyIDs;
-	string _currentProjectID = "";
+	string _currentProjectId = "";
 	string _currentSkyID = "";
 
 	static inline constexpr float CW = 0.115f;

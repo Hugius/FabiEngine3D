@@ -257,7 +257,7 @@ public:
 	void model_setBright(const string& id, const string& partId, bool value);
 	void model_setRotationOrder(const string& id, DirectionOrder value);
 
-	const vector<string> model_getPartIDs(const string& id) const;
+	const vector<string> model_getPartIds(const string& id) const;
 	const vector<string> model_getIds() const;
 	const vector<string> model_getGroupIDs(const string& id) const;
 	const string& model_getMeshPath(const string& id) const;

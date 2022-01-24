@@ -391,7 +391,7 @@ const bool EngineInterface::model_isVisible(const string& id) const
 
 const bool EngineInterface::model_isMultiParted(const string& id) const
 {
-	return (_core->getModelEntityManager()->getEntity(id)->getPartIDs().size() > 1);
+	return (_core->getModelEntityManager()->getEntity(id)->getPartIds().size() > 1);
 }
 
 const bool EngineInterface::model_isFaceCulled(const string& id, const string& partId) const
@@ -431,9 +431,9 @@ const bool EngineInterface::model_isDepthMapIncluded(const string& id) const
 
 const bool EngineInterface::model_hasPart(const string& id, const string& partId) const
 {
-	for(const auto& existingPartID : model_getPartIDs(id))
+	for(const auto& existingPartId : model_getPartIds(id))
 	{
-		if(partId == existingPartID)
+		if(partId == existingPartId)
 		{
 			return true;
 		}
@@ -627,9 +627,9 @@ const string& EngineInterface::model_getLevelOfDetailEntityId(const string& id) 
 	return _core->getModelEntityManager()->getEntity(id)->getLevelOfDetailEntityId();
 }
 
-const vector<string> EngineInterface::model_getPartIDs(const string& id) const
+const vector<string> EngineInterface::model_getPartIds(const string& id) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getPartIDs();
+	return _core->getModelEntityManager()->getEntity(id)->getPartIds();
 }
 
 const vector<string> EngineInterface::model_getIds() const

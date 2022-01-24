@@ -7,7 +7,7 @@ class Quad2dEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void update();
 	void unload();
@@ -29,10 +29,10 @@ private:
 	void _updateQuadDeleting();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedQuadIDs;
-	string _currentQuadID = "";
-	string _hoveredQuadID = "";
-	string _currentProjectID = "";
+	vector<string> _loadedQuadIds;
+	string _currentQuadId = "";
+	string _hoveredQuadId = "";
+	string _currentProjectId = "";
 
 	static inline const fvec2 QUAD_SIZE = fvec2(0.75f);
 

@@ -204,7 +204,7 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 	_fe3d->model_setLevelOfDetailEntityId(newID, _fe3d->model_getLevelOfDetailEntityId(templateID));
 	_fe3d->model_setRotationOrder(newID, _fe3d->model_getRotationOrder(templateID));
 
-	for(const auto& partId : _fe3d->model_getPartIDs(templateID))
+	for(const auto& partId : _fe3d->model_getPartIds(templateID))
 	{
 		if(_fe3d->model_hasDiffuseMap(templateID, partId))
 		{
@@ -262,11 +262,11 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 
 	if(isFromOutside)
 	{
-		_outsideLoadedModelIDs.insert(make_pair(newID, templateID));
+		_outsideLoadedModelIds.insert(make_pair(newID, templateID));
 	}
 	else
 	{
-		_loadedModelIDs.insert(make_pair(newID, templateID));
+		_loadedModelIds.insert(make_pair(newID, templateID));
 	}
 
 	return true;
@@ -312,11 +312,11 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newID, const string& t
 
 	if(isFromOutside)
 	{
-		_outsideLoadedQuadIDs.insert(make_pair(newID, templateID));
+		_outsideLoadedQuadIds.insert(make_pair(newID, templateID));
 	}
 	else
 	{
-		_loadedQuadIDs.insert(make_pair(newID, templateID));
+		_loadedQuadIds.insert(make_pair(newID, templateID));
 	}
 
 	return true;

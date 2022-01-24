@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void SoundEditor::setCurrentProjectID(const string& projectID)
+void SoundEditor::setCurrentProjectId(const string& projectId)
 {
-	_currentProjectID = projectID;
+	_currentProjectId = projectId;
 }
 
 const bool SoundEditor::isLoaded() const

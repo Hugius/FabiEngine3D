@@ -7,7 +7,7 @@ class Quad3dEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void unload();
 	void update();
@@ -33,10 +33,10 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedQuadIDs;
-	string _hoveredQuadID = "";
-	string _currentQuadID = "";
-	string _currentProjectID = "";
+	vector<string> _loadedQuadIds;
+	string _hoveredQuadId = "";
+	string _currentQuadId = "";
+	string _currentProjectId = "";
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;

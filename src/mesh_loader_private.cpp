@@ -18,7 +18,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 	vector<fvec3> temp_positions;
 	vector<fvec2> temp_uvs;
 	vector<fvec3> temp_normals;
-	string selectedPartID = "";
+	string selectedPartId = "";
 
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto fullFilePath = string(rootPath + filePath);
@@ -44,9 +44,9 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 			string id;
 			iss >> id;
 
-			selectedPartID = string(id);
+			selectedPartId = string(id);
 
-			if(selectedPartID == "?")
+			if(selectedPartId == "?")
 			{
 				return nullptr;
 			}
@@ -98,7 +98,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 			bool isAlreadyExisting = false;
 			for(const auto& meshPart : meshParts)
 			{
-				if(meshPart->getId() == selectedPartID)
+				if(meshPart->getId() == selectedPartId)
 				{
 					isAlreadyExisting = true;
 
@@ -118,7 +118,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 
 			if(!isAlreadyExisting)
 			{
-				auto newPart = make_shared<MeshPart>(selectedPartID);
+				auto newPart = make_shared<MeshPart>(selectedPartId);
 
 				newPart->addPosition(temp_positions[indices[0]]);
 				newPart->addPosition(temp_positions[indices[3]]);

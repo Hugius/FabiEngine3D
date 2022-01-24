@@ -7,13 +7,13 @@ void Animation3dEditor::_updateFrameMenu()
 
 	if(screen->getId() == "animation3dEditorMenuFrame")
 	{
-		auto currentAnimation = _getAnimation(_currentAnimationID);
+		auto currentAnimation = _getAnimation(_currentAnimationId);
 		auto frame = currentAnimation->getFrames()[_currentFrameIndex];
-		auto transformation = frame.getTargetTransformations().at(_currentPartID);
-		auto rotationOrigin = frame.getRotationOrigins().at(_currentPartID);
-		auto speed = frame.getSpeeds().at(_currentPartID);
-		auto speedType = frame.getSpeedTypes().at(_currentPartID);
-		auto transformationType = frame.getTransformationTypes().at(_currentPartID);
+		auto transformation = frame.getTargetTransformations().at(_currentPartId);
+		auto rotationOrigin = frame.getRotationOrigins().at(_currentPartId);
+		auto speed = frame.getSpeeds().at(_currentPartId);
+		auto speedType = frame.getSpeedTypes().at(_currentPartId);
+		auto transformationType = frame.getTransformationTypes().at(_currentPartId);
 		auto multiplier = (transformationType == TransformationType::MOVEMENT) ? 1000.0f : (transformationType == TransformationType::SCALING) ? 100.0f : 1.0f;
 
 		screen->getButton("rotationOrigin")->setHoverable(transformationType == TransformationType::ROTATION);
@@ -21,10 +21,10 @@ void Animation3dEditor::_updateFrameMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentPartID.empty())
+			if(!_currentPartId.empty())
 			{
-				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), _currentPartID, _originalPartOpacity);
-				_currentPartID = "";
+				_fe3d->model_setOpacity(currentAnimation->getPreviewModelId(), _currentPartId, _originalPartOpacity);
+				_currentPartId = "";
 			}
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
@@ -32,16 +32,16 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())
 		{
-			if(_currentPartID.empty())
+			if(_currentPartId.empty())
 			{
-				auto modelParts = currentAnimation->getPartIDs();
+				auto modelParts = currentAnimation->getPartIds();
 				modelParts.erase(modelParts.begin());
 				_gui->getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), modelParts);
 			}
 			else
 			{
-				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), _currentPartID, _originalPartOpacity);
-				_currentPartID = "";
+				_fe3d->model_setOpacity(currentAnimation->getPreviewModelId(), _currentPartId, _originalPartOpacity);
+				_currentPartId = "";
 			}
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformation")->isHovered())
@@ -97,13 +97,13 @@ void Animation3dEditor::_updateFrameMenu()
 		   _gui->getOverlay()->isValueFormExisting("rotationOriginY") &&
 		   _gui->getOverlay()->isValueFormExisting("rotationOriginZ"))
 		{
-			if(_currentPartID.empty())
+			if(_currentPartId.empty())
 			{
-				_fe3d->model_rotateBase(currentAnimation->getPreviewModelID(), frame.getSpeeds().at(_currentPartID));
+				_fe3d->model_rotateBase(currentAnimation->getPreviewModelId(), frame.getSpeeds().at(_currentPartId));
 			}
 			else
 			{
-				_fe3d->model_rotatePart(currentAnimation->getPreviewModelID(), _currentPartID, frame.getSpeeds().at(_currentPartID));
+				_fe3d->model_rotatePart(currentAnimation->getPreviewModelId(), _currentPartId, frame.getSpeeds().at(_currentPartId));
 			}
 			_mustUpdateCurrentFramePreview = false;
 		}
@@ -152,7 +152,7 @@ void Animation3dEditor::_updateFrameMenu()
 			_mustUpdateCurrentFramePreview = true;
 		}
 
-		screen->getButton("part")->changeTextContent(_currentPartID.empty() ? "Select Part" : "Unselect Part");
+		screen->getButton("part")->changeTextContent(_currentPartId.empty() ? "Select Part" : "Unselect Part");
 		switch(transformationType)
 		{
 			case TransformationType::MOVEMENT:
@@ -190,11 +190,11 @@ void Animation3dEditor::_updateFrameMenu()
 			}
 		}
 
-		frame.setTargetTransformation(_currentPartID, transformation);
-		frame.setTransformationType(_currentPartID, transformationType);
-		frame.setSpeed(_currentPartID, speed);
-		frame.setSpeedType(_currentPartID, speedType);
-		frame.setRotationOrigin(_currentPartID, rotationOrigin);
+		frame.setTargetTransformation(_currentPartId, transformation);
+		frame.setTransformationType(_currentPartId, transformationType);
+		frame.setSpeed(_currentPartId, speed);
+		frame.setSpeedType(_currentPartId, speedType);
+		frame.setRotationOrigin(_currentPartId, rotationOrigin);
 
 		currentAnimation->setFrame(_currentFrameIndex, frame);
 
@@ -202,16 +202,16 @@ void Animation3dEditor::_updateFrameMenu()
 
 		if(!selectedButtonID.empty())
 		{
-			if(_hoveredPartID.empty())
+			if(_hoveredPartId.empty())
 			{
-				_hoveredPartID = selectedButtonID;
-				_originalPartOpacity = _fe3d->model_getOpacity(currentAnimation->getPreviewModelID(), _hoveredPartID);
+				_hoveredPartId = selectedButtonID;
+				_originalPartOpacity = _fe3d->model_getOpacity(currentAnimation->getPreviewModelId(), _hoveredPartId);
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentPartID = selectedButtonID;
-				_hoveredPartID = "";
+				_currentPartId = selectedButtonID;
+				_hoveredPartId = "";
 				_gui->getOverlay()->deleteChoiceForm("partList");
 			}
 		}
@@ -221,10 +221,10 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else
 		{
-			if(!_hoveredPartID.empty())
+			if(!_hoveredPartId.empty())
 			{
-				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), _hoveredPartID, _originalPartOpacity);
-				_hoveredPartID = "";
+				_fe3d->model_setOpacity(currentAnimation->getPreviewModelId(), _hoveredPartId, _originalPartOpacity);
+				_hoveredPartId = "";
 			}
 		}
 	}

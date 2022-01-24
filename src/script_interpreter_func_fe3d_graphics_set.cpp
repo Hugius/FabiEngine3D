@@ -194,14 +194,14 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("ScriptInterpreter::_executeFe3dGraphicsSetter");
 			}
 
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\misc\\flare_map\\");
+			const auto targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "assets\\image\\misc\\flare_map\\");
 			const auto filePath = (targetDirectoryPath + args[0].getString());
 
 			_fe3d->gfx_setLensFlareMap(filePath);

@@ -14,32 +14,32 @@ const bool Quad3dEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectID.empty())
+	if(_currentProjectId.empty())
 	{
 		Logger::throwError("Quad3dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\quad3d.fe3d");
+	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\quad3d.fe3d");
 
-	for(const auto& quadID : _loadedQuadIDs)
+	for(const auto& quadId : _loadedQuadIds)
 	{
-		auto size = _fe3d->quad3d_getSize(quadID);
-		auto color = _fe3d->quad3d_getColor(quadID);
-		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quadID);
-		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quadID);
-		auto isFacingX = _fe3d->quad3d_isFacingCameraX(quadID);
-		auto isFacingY = _fe3d->quad3d_isFacingCameraY(quadID);
-		auto isReflected = _fe3d->quad3d_isReflected(quadID);
-		auto isShadowed = _fe3d->quad3d_isShadowed(quadID);
-		auto lightness = _fe3d->quad3d_getLightness(quadID);
-		auto textureRepeat = _fe3d->quad3d_getTextureRepeat(quadID);
-		auto isBright = _fe3d->quad3d_isBright(quadID);
-		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(quadID);
-		auto opacity = _fe3d->quad3d_getOpacity(quadID);
+		auto size = _fe3d->quad3d_getSize(quadId);
+		auto color = _fe3d->quad3d_getColor(quadId);
+		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quadId);
+		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quadId);
+		auto isFacingX = _fe3d->quad3d_isFacingCameraX(quadId);
+		auto isFacingY = _fe3d->quad3d_isFacingCameraY(quadId);
+		auto isReflected = _fe3d->quad3d_isReflected(quadId);
+		auto isShadowed = _fe3d->quad3d_isShadowed(quadId);
+		auto lightness = _fe3d->quad3d_getLightness(quadId);
+		auto textureRepeat = _fe3d->quad3d_getTextureRepeat(quadId);
+		auto isBright = _fe3d->quad3d_isBright(quadId);
+		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(quadId);
+		auto opacity = _fe3d->quad3d_getOpacity(quadId);
 
-		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
@@ -48,7 +48,7 @@ const bool Quad3dEditor::saveToFile() const
 		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 
 		file <<
-			quadID << " " <<
+			quadId << " " <<
 			size.x << " " <<
 			size.y << " " <<
 			color.r << " " <<

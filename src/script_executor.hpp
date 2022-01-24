@@ -8,7 +8,7 @@ public:
 	void inject(shared_ptr<EngineInterface> fe3d);
 	void inject(shared_ptr<ScriptInterpreter> scriptInterpreter);
 
-	void setCurrentProjectID(const string& projectID);
+	void setCurrentProjectId(const string& projectId);
 	void load();
 	void update(bool isDebugging);
 	void pause();

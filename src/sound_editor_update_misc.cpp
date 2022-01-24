@@ -51,13 +51,13 @@ void SoundEditor::_updateSoundCreating()
 				return;
 			}
 
-			if(_currentProjectID.empty())
+			if(_currentProjectId.empty())
 			{
 				Logger::throwError("SoundEditor::_updateSoundCreating");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\audio\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\audio\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

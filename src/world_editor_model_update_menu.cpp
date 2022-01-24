@@ -10,11 +10,11 @@ void WorldEditor::_updateModelMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateModelID.empty())
+			if(!_currentTemplateModelId.empty())
 			{
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), false);
-				_fe3d->model_setVisible(_currentTemplateModelID, false);
-				_currentTemplateModelID = "";
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), false);
+				_fe3d->model_setVisible(_currentTemplateModelId, false);
+				_currentTemplateModelId = "";
 			}
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -32,21 +32,21 @@ void WorldEditor::_updateModelMenu()
 
 			auto IDs = _fe3d->model_getIds();
 			sort(IDs.begin(), IDs.end());
-			for(auto& modelID : IDs)
+			for(auto& modelId : IDs)
 			{
-				if(modelID[0] != '@')
+				if(modelId[0] != '@')
 				{
-					reverse(modelID.begin(), modelID.end());
-					string rawID = modelID.substr(modelID.find('_') + 1);
+					reverse(modelId.begin(), modelId.end());
+					string rawID = modelId.substr(modelId.find('_') + 1);
 					reverse(rawID.begin(), rawID.end());
-					reverse(modelID.begin(), modelID.end());
+					reverse(modelId.begin(), modelId.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createButton(modelID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createButton(modelId, rawID);
 				}
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateModelID.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateModelId.empty());
 	}
 }
 
@@ -63,11 +63,11 @@ void WorldEditor::_updateModelPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& modelID : _modelEditor->getLoadedIDs())
+			for(const auto& modelId : _modelEditor->getLoadedIDs())
 			{
-				if(_fe3d->model_isExisting(modelID))
+				if(_fe3d->model_isExisting(modelId))
 				{
-					if(screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
+					if(screen->getScrollingList("modelList")->getButton(modelId)->isHovered())
 					{
 						_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
@@ -78,15 +78,15 @@ void WorldEditor::_updateModelPlacingMenu()
 						_deactivateSpotlight();
 						_deactivateReflection();
 
-						_currentTemplateModelID = modelID;
-						_fe3d->model_setVisible(_currentTemplateModelID, true);
-						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), true);
-						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityId(), "Model: " + _currentTemplateModelID.substr(1), 0.025f);
+						_currentTemplateModelId = modelId;
+						_fe3d->model_setVisible(_currentTemplateModelId, true);
+						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
+						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelId")->getEntityId(), "Model: " + _currentTemplateModelId.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedID().empty())
 						{
-							_fe3d->model_setBasePosition(_currentTemplateModelID, fvec3(0.0f));
+							_fe3d->model_setBasePosition(_currentTemplateModelId, fvec3(0.0f));
 							_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 							_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 							_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -115,20 +115,20 @@ void WorldEditor::_updateModelChoosingMenu()
 			}
 		}
 
-		for(const auto& modelID : _fe3d->model_getIds())
+		for(const auto& modelId : _fe3d->model_getIds())
 		{
-			if(modelID[0] != '@')
+			if(modelId[0] != '@')
 			{
-				if(screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
+				if(screen->getScrollingList("modelList")->getButton(modelId)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activateModel(modelID);
+						_activateModel(modelId);
 					}
 					else
 					{
 						_dontResetSelectedModel = true;
-						_selectModel(modelID);
+						_selectModel(modelId);
 					}
 
 					break;

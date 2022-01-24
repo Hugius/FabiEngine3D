@@ -7,15 +7,15 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 	if(screen->getId() == "modelEditorMenuMiscellaneous")
 	{
-		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
-		const auto isNoPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || _currentPartID.empty());
+		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelId) || !_currentPartId.empty());
+		const auto isNoPartSelected = (!_fe3d->model_isMultiParted(_currentModelId) || _currentPartId.empty());
 
-		auto size = (isNoPartSelected ? _fe3d->model_getBaseSize(_currentModelID) : fvec3(0.0f));
-		auto opacity = (isPartSelected ? _fe3d->model_getOpacity(_currentModelID, _currentPartID) : 0.0f);
-		auto isFaceCulled = (isPartSelected ? _fe3d->model_isFaceCulled(_currentModelID, _currentPartID) : false);
-		auto levelOfDetailEntityId = (isNoPartSelected ? _fe3d->model_getLevelOfDetailEntityId(_currentModelID) : "");
-		auto levelOfDetailDistance = (isNoPartSelected ? _fe3d->model_getLevelOfDetailDistance(_currentModelID) : 0.0f);
-		auto rotationOrder = (isNoPartSelected ? _fe3d->model_getRotationOrder(_currentModelID) : DirectionOrder::XYZ);
+		auto size = (isNoPartSelected ? _fe3d->model_getBaseSize(_currentModelId) : fvec3(0.0f));
+		auto opacity = (isPartSelected ? _fe3d->model_getOpacity(_currentModelId, _currentPartId) : 0.0f);
+		auto isFaceCulled = (isPartSelected ? _fe3d->model_isFaceCulled(_currentModelId, _currentPartId) : false);
+		auto levelOfDetailEntityId = (isNoPartSelected ? _fe3d->model_getLevelOfDetailEntityId(_currentModelId) : "");
+		auto levelOfDetailDistance = (isNoPartSelected ? _fe3d->model_getLevelOfDetailDistance(_currentModelId) : 0.0f);
+		auto rotationOrder = (isNoPartSelected ? _fe3d->model_getRotationOrder(_currentModelId) : DirectionOrder::XYZ);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -30,7 +30,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
-			if(_currentPartID.empty())
+			if(_currentPartId.empty())
 			{
 				_gui->getOverlay()->createValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			}
@@ -42,7 +42,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
 			isFaceCulled = !isFaceCulled;
-			_fe3d->model_setFaceCulled(_currentModelID, _currentPartID, isFaceCulled);
+			_fe3d->model_setFaceCulled(_currentModelId, _currentPartId, isFaceCulled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityId")->isHovered())
 		{
@@ -79,31 +79,31 @@ void ModelEditor::_updateMiscellaneousMenu()
 			{
 				rotationOrder = DirectionOrder::XYZ;
 			}
-			_fe3d->model_setRotationOrder(_currentModelID, rotationOrder);
+			_fe3d->model_setRotationOrder(_currentModelId, rotationOrder);
 		}
 
 		if(_gui->getOverlay()->checkValueForm("sizeX", size.x))
 		{
 			size.x /= 100.0f;
-			_fe3d->model_setBaseSize(_currentModelID, size);
+			_fe3d->model_setBaseSize(_currentModelId, size);
 		}
 		if(_gui->getOverlay()->checkValueForm("sizeY", size.y))
 		{
 			size.y /= 100.0f;
-			_fe3d->model_setBaseSize(_currentModelID, size);
+			_fe3d->model_setBaseSize(_currentModelId, size);
 		}
 		if(_gui->getOverlay()->checkValueForm("sizeZ", size.z))
 		{
 			size.z /= 100.0f;
-			_fe3d->model_setBaseSize(_currentModelID, size);
+			_fe3d->model_setBaseSize(_currentModelId, size);
 		}
 		if(_gui->getOverlay()->checkValueForm("opacity", opacity))
 		{
 			opacity /= 100.0f;
 
-			if(_currentPartID.empty())
+			if(_currentPartId.empty())
 			{
-				_fe3d->model_setOpacity(_currentModelID, _currentPartID, opacity);
+				_fe3d->model_setOpacity(_currentModelId, _currentPartId, opacity);
 			}
 			else
 			{
@@ -114,20 +114,20 @@ void ModelEditor::_updateMiscellaneousMenu()
 		{
 			if(levelOfDetailEntityId == "@")
 			{
-				_fe3d->model_setLevelOfDetailEntityId(_currentModelID, "");
+				_fe3d->model_setLevelOfDetailEntityId(_currentModelId, "");
 			}
-			else if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), ("@" + levelOfDetailEntityId)) == _loadedModelIDs.end())
+			else if(find(_loadedModelIds.begin(), _loadedModelIds.end(), ("@" + levelOfDetailEntityId)) == _loadedModelIds.end())
 			{
 				Logger::throwWarning("Cannot find LOD entity with id \"" + levelOfDetailEntityId + "\"");
 			}
 			else
 			{
-				_fe3d->model_setLevelOfDetailEntityId(_currentModelID, ("@" + levelOfDetailEntityId));
+				_fe3d->model_setLevelOfDetailEntityId(_currentModelId, ("@" + levelOfDetailEntityId));
 			}
 		}
 		if(_gui->getOverlay()->checkValueForm("levelOfDetailDistance", levelOfDetailDistance, {}))
 		{
-			_fe3d->model_setLevelOfDetailDistance(_currentModelID, levelOfDetailDistance);
+			_fe3d->model_setLevelOfDetailDistance(_currentModelId, levelOfDetailDistance);
 		}
 
 		screen->getButton("size")->setHoverable(isNoPartSelected);

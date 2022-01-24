@@ -11,14 +11,14 @@ using std::istringstream;
 
 const vector<string> WaterEditor::getImagePathsFromFile() const
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
 	{
 		Logger::throwError("WaterEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\water.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\water.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -56,7 +56,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				dudvMapPath = string("projects\\" + _currentProjectID + "\\" + dudvMapPath);
+				dudvMapPath = string("projects\\" + _currentProjectId + "\\" + dudvMapPath);
 			}
 
 			imagePaths.push_back(dudvMapPath);
@@ -66,7 +66,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
+				normalMapPath = string("projects\\" + _currentProjectId + "\\" + normalMapPath);
 			}
 
 			imagePaths.push_back(normalMapPath);
@@ -76,7 +76,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				displacementMapPath = string("projects\\" + _currentProjectID + "\\" + displacementMapPath);
+				displacementMapPath = string("projects\\" + _currentProjectId + "\\" + displacementMapPath);
 			}
 
 			imagePaths.push_back(displacementMapPath);
@@ -90,7 +90,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 
 const bool WaterEditor::loadFromFile()
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
 	{
 		Logger::throwError("WaterEditor::loadFromFile");
 	}
@@ -99,7 +99,7 @@ const bool WaterEditor::loadFromFile()
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\water.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\water.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -185,7 +185,7 @@ const bool WaterEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					dudvMapPath = string("projects\\" + _currentProjectID + "\\" + dudvMapPath);
+					dudvMapPath = string("projects\\" + _currentProjectId + "\\" + dudvMapPath);
 				}
 
 				_fe3d->water_setDudvMap(waterID, dudvMapPath);
@@ -195,7 +195,7 @@ const bool WaterEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
+					normalMapPath = string("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
 
 				_fe3d->water_setNormalMap(waterID, normalMapPath);
@@ -205,7 +205,7 @@ const bool WaterEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					displacementMapPath = string("projects\\" + _currentProjectID + "\\" + displacementMapPath);
+					displacementMapPath = string("projects\\" + _currentProjectId + "\\" + displacementMapPath);
 				}
 
 				_fe3d->water_setDisplacementMap(waterID, displacementMapPath);

@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void Quad3dEditor::setCurrentProjectID(const string& projectID)
+void Quad3dEditor::setCurrentProjectId(const string& projectId)
 {
-	_currentProjectID = projectID;
+	_currentProjectId = projectId;
 }
 
 const bool Quad3dEditor::isLoaded() const
@@ -14,6 +14,6 @@ const bool Quad3dEditor::isLoaded() const
 
 const vector<string>& Quad3dEditor::getLoadedIDs()
 {
-	sort(_loadedQuadIDs.begin(), _loadedQuadIDs.end());
-	return _loadedQuadIDs;
+	sort(_loadedQuadIds.begin(), _loadedQuadIds.end());
+	return _loadedQuadIds;
 }

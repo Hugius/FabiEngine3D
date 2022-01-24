@@ -80,8 +80,9 @@ void WorldEditor::_updateSoundEditing()
 				{
 					_fe3d->model_delete(_activeSpeakerID);
 					_fe3d->sound3d_delete(activeSoundID);
-					rightWindow->setActiveScreen("main");
+					_loadedSoundIDs.erase(activeSoundID);
 					_activeSpeakerID = "";
+					rightWindow->setActiveScreen("main");
 					return;
 				}
 			}
@@ -90,8 +91,9 @@ void WorldEditor::_updateSoundEditing()
 			{
 				_fe3d->model_delete(_activeSpeakerID);
 				_fe3d->sound3d_delete(activeSoundID);
-				rightWindow->setActiveScreen("main");
+				_loadedSoundIDs.erase(activeSoundID);
 				_activeSpeakerID = "";
+				rightWindow->setActiveScreen("main");
 				return;
 			}
 

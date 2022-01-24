@@ -83,8 +83,9 @@ void WorldEditor::_updateReflectionEditing()
 				{
 					_fe3d->model_delete(_activeCameraID);
 					_fe3d->reflection_delete(activeReflectionID);
-					rightWindow->setActiveScreen("main");
+					_loadedReflectionIDs.erase(remove(_loadedReflectionIDs.begin(), _loadedReflectionIDs.end(), activeReflectionID), _loadedReflectionIDs.end());
 					_activeCameraID = "";
+					rightWindow->setActiveScreen("main");
 					return;
 				}
 			}
@@ -93,8 +94,9 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				_fe3d->model_delete(_activeCameraID);
 				_fe3d->reflection_delete(activeReflectionID);
-				rightWindow->setActiveScreen("main");
+				_loadedReflectionIDs.erase(remove(_loadedReflectionIDs.begin(), _loadedReflectionIDs.end(), activeReflectionID), _loadedReflectionIDs.end());
 				_activeCameraID = "";
+				rightWindow->setActiveScreen("main");
 				return;
 			}
 

@@ -99,8 +99,9 @@ void WorldEditor::_updateText3dEditing()
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d->text3d_delete(_activeTextID);
-					rightWindow->setActiveScreen("main");
+					_loadedTextIDs.erase(_activeTextID);
 					_activeTextID = "";
+					rightWindow->setActiveScreen("main");
 					return;
 				}
 			}
@@ -108,8 +109,9 @@ void WorldEditor::_updateText3dEditing()
 			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d->text3d_delete(_activeTextID);
-				rightWindow->setActiveScreen("main");
+				_loadedTextIDs.erase(_activeTextID);
 				_activeTextID = "";
+				rightWindow->setActiveScreen("main");
 				return;
 			}
 

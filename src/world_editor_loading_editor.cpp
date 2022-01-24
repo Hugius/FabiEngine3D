@@ -169,9 +169,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 				if(_isEditorLoaded)
 				{
-					_initialModelPosition[modelID] = position;
-					_initialModelRotation[modelID] = rotation;
-					_initialModelSize[modelID] = size;
+					_initialModelPosition.insert(make_pair(modelID, position));
+					_initialModelRotation.insert(make_pair(modelID, rotation));
+					_initialModelSize.insert(make_pair(modelID, size));
 				}
 
 				if(!animationID.empty())

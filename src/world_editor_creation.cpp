@@ -255,18 +255,18 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 
 	if(_isEditorLoaded)
 	{
-		_initialModelPosition[newID] = _fe3d->model_getBasePosition(templateID);
-		_initialModelRotation[newID] = _fe3d->model_getBaseRotation(templateID);
-		_initialModelSize[newID] = _fe3d->model_getBaseSize(templateID);
+		_initialModelPosition.insert(make_pair(newID, _fe3d->model_getBasePosition(templateID)));
+		_initialModelRotation.insert(make_pair(newID, _fe3d->model_getBaseRotation(templateID)));
+		_initialModelSize.insert(make_pair(newID, _fe3d->model_getBaseSize(templateID)));
 	}
 
 	if(isFromOutside)
 	{
-		_outsideLoadedModelIDs[newID] = templateID;
+		_outsideLoadedModelIDs.insert(make_pair(newID, templateID));
 	}
 	else
 	{
-		_loadedModelIDs[newID] = templateID;
+		_loadedModelIDs.insert(make_pair(newID, templateID));
 	}
 
 	return true;
@@ -312,11 +312,11 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newID, const string& t
 
 	if(isFromOutside)
 	{
-		_outsideLoadedQuadIDs[newID] = templateID;
+		_outsideLoadedQuadIDs.insert(make_pair(newID, templateID));
 	}
 	else
 	{
-		_loadedQuadIDs[newID] = templateID;
+		_loadedQuadIDs.insert(make_pair(newID, templateID));
 	}
 
 	return true;
@@ -353,11 +353,11 @@ const bool WorldEditor::_copyTemplateText3d(const string& newID, const string& t
 
 	if(isFromOutside)
 	{
-		//_outsideLoadedTextIDs[newID] = templateID;
+		_outsideLoadedTextIDs.insert(make_pair(newID, templateID));
 	}
 	else
 	{
-		//_loadedTextIDs[newID] = templateID;
+		_loadedTextIDs.insert(make_pair(newID, templateID));
 	}
 
 	return true;
@@ -381,11 +381,11 @@ const bool WorldEditor::_copyTemplateSound(const string& newID, const string& te
 
 	if(isFromOutside)
 	{
-		_outsideLoadedSoundIDs[newID] = templateID;
+		_outsideLoadedSoundIDs.insert(make_pair(newID, templateID));
 	}
 	else
 	{
-		_loadedSoundIDs[newID] = templateID;
+		_loadedSoundIDs.insert(make_pair(newID, templateID));
 	}
 
 	return true;

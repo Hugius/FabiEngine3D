@@ -89,8 +89,9 @@ void WorldEditor::_updateSpotlightEditing()
 				{
 					_fe3d->model_delete(_activeTorchID);
 					_fe3d->spotlight_delete(activeSpotlightID);
-					rightWindow->setActiveScreen("main");
+					_loadedSpotlightIDs.erase(remove(_loadedSpotlightIDs.begin(), _loadedSpotlightIDs.end(), activeSpotlightID), _loadedSpotlightIDs.end());
 					_activeTorchID = "";
+					rightWindow->setActiveScreen("main");
 					return;
 				}
 			}
@@ -99,8 +100,9 @@ void WorldEditor::_updateSpotlightEditing()
 			{
 				_fe3d->model_delete(_activeTorchID);
 				_fe3d->spotlight_delete(activeSpotlightID);
-				rightWindow->setActiveScreen("main");
+				_loadedSpotlightIDs.erase(remove(_loadedSpotlightIDs.begin(), _loadedSpotlightIDs.end(), activeSpotlightID), _loadedSpotlightIDs.end());
 				_activeTorchID = "";
+				rightWindow->setActiveScreen("main");
 				return;
 			}
 

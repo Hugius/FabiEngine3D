@@ -61,11 +61,14 @@ void WorldEditor::_updateModelEditing()
 			}
 		}
 
-		if(_selectedModelID != _activeModelID)
+		if(_selectedModelID.empty())
+		{
+			_updateModelHighlighting(_activeModelID, _activeModelHighlightDirection);
+		}
+		else
 		{
 			_updateModelHighlighting(_selectedModelID, _selectedModelHighlightDirection);
 		}
-		_updateModelHighlighting(_activeModelID, _activeModelHighlightDirection);
 
 		if(!_activeModelID.empty())
 		{
@@ -104,10 +107,20 @@ void WorldEditor::_updateModelEditing()
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d->model_delete(_activeModelID);
+					_loadedModelIDs.erase(_activeModelID);
 					rightWindow->setActiveScreen("main");
 					_activeModelID = "";
 					return;
 				}
+			}
+
+			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
+			{
+				_fe3d->model_delete(_activeModelID);
+				_loadedModelIDs.erase(_activeModelID);
+				rightWindow->setActiveScreen("main");
+				_activeModelID = "";
+				return;
 			}
 
 			auto lastAnimationID = _animation3dEditor->getStartedModelAnimationIDs(_activeModelID);
@@ -118,10 +131,10 @@ void WorldEditor::_updateModelEditing()
 				{
 					_animation3dEditor->stopModelAnimation(lastAnimationID.back(), _activeModelID);
 
-					_fe3d->model_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
+					_fe3d->model_setBasePosition(_activeModelID, _initialModelPosition.at(_activeModelID));
 					_fe3d->model_setBaseRotationOrigin(_activeModelID, fvec3(0.0f));
-					_fe3d->model_setBaseRotation(_activeModelID, _initialModelRotation[_activeModelID]);
-					_fe3d->model_setBaseSize(_activeModelID, _initialModelSize[_activeModelID]);
+					_fe3d->model_setBaseRotation(_activeModelID, _initialModelRotation.at(_activeModelID));
+					_fe3d->model_setBaseSize(_activeModelID, _initialModelSize.at(_activeModelID));
 
 					for(const auto& partID : _fe3d->model_getPartIDs(_activeModelID))
 					{
@@ -142,14 +155,6 @@ void WorldEditor::_updateModelEditing()
 			else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 			{
 				_gui->getOverlay()->deleteChoiceForm("animationList");
-			}
-
-			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
-			{
-				_fe3d->model_delete(_activeModelID);
-				rightWindow->setActiveScreen("main");
-				_activeModelID = "";
-				return;
 			}
 
 			auto position = _fe3d->model_getBasePosition(_activeModelID);
@@ -196,23 +201,23 @@ void WorldEditor::_updateModelEditing()
 
 					if(position != oldPosition)
 					{
-						_initialModelPosition[_activeModelID] = position;
+						_initialModelPosition.at(_activeModelID) = position;
 					}
 
 					if(rotation != oldRotation)
 					{
-						_initialModelRotation[_activeModelID] = rotation;
+						_initialModelRotation.at(_activeModelID) = rotation;
 					}
 
 					if(size != oldSize)
 					{
-						_initialModelSize[_activeModelID] = size;
+						_initialModelSize.at(_activeModelID) = size;
 					}
 
-					_fe3d->model_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
+					_fe3d->model_setBasePosition(_activeModelID, _initialModelPosition.at(_activeModelID));
 					_fe3d->model_setBaseRotationOrigin(_activeModelID, fvec3(0.0f));
-					_fe3d->model_setBaseRotation(_activeModelID, _initialModelRotation[_activeModelID]);
-					_fe3d->model_setBaseSize(_activeModelID, _initialModelSize[_activeModelID]);
+					_fe3d->model_setBaseRotation(_activeModelID, _initialModelRotation.at(_activeModelID));
+					_fe3d->model_setBaseSize(_activeModelID, _initialModelSize.at(_activeModelID));
 
 					for(const auto& partID : _fe3d->model_getPartIDs(_activeModelID))
 					{
@@ -229,13 +234,13 @@ void WorldEditor::_updateModelEditing()
 				}
 				else
 				{
-					_initialModelPosition[_activeModelID] = position;
+					_initialModelPosition.at(_activeModelID) = position;
 					_fe3d->model_setBasePosition(_activeModelID, position);
 
-					_initialModelRotation[_activeModelID] = rotation;
+					_initialModelRotation.at(_activeModelID) = rotation;
 					_fe3d->model_setBaseRotation(_activeModelID, rotation);
 
-					_initialModelSize[_activeModelID] = size;
+					_initialModelSize.at(_activeModelID) = size;
 					_fe3d->model_setBaseSize(_activeModelID, size);
 				}
 			}

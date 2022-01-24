@@ -108,8 +108,9 @@ void WorldEditor::_updatePointlightEditing()
 				{
 					_fe3d->model_delete(_activeLampID);
 					_fe3d->pointlight_delete(activePointlightID);
-					rightWindow->setActiveScreen("main");
+					_loadedPointlightIDs.erase(remove(_loadedPointlightIDs.begin(), _loadedPointlightIDs.end(), activePointlightID), _loadedPointlightIDs.end());
 					_activeLampID = "";
+					rightWindow->setActiveScreen("main");
 					return;
 				}
 			}
@@ -118,8 +119,9 @@ void WorldEditor::_updatePointlightEditing()
 			{
 				_fe3d->model_delete(_activeLampID);
 				_fe3d->pointlight_delete(activePointlightID);
-				rightWindow->setActiveScreen("main");
+				_loadedPointlightIDs.erase(remove(_loadedPointlightIDs.begin(), _loadedPointlightIDs.end(), activePointlightID), _loadedPointlightIDs.end());
 				_activeLampID = "";
+				rightWindow->setActiveScreen("main");
 				return;
 			}
 

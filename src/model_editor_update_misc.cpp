@@ -293,9 +293,6 @@ void ModelEditor::_updatePartChoosing()
 				_currentPartID = selectedButtonID;
 				_hoveredPartID = "";
 
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), true);
-
 				_gui->getOverlay()->deleteChoiceForm("partList");
 				_isChoosingPart = false;
 			}

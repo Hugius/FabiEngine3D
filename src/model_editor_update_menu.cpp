@@ -66,12 +66,16 @@ void ModelEditor::_updateChoiceMenu()
 				_fe3d->model_setWireframed(_currentModelID, partID, false);
 			}
 
+			if(!_currentPartID.empty())
+			{
+				_fe3d->model_setOpacity(_currentModelID, _currentPartID, _originalPartOpacity);
+				_currentPartID = "";
+			}
+
 			_fe3d->model_setVisible(_currentModelID, false);
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			_currentModelID = "";
-			_currentPartID = "";
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())
@@ -86,7 +90,6 @@ void ModelEditor::_updateChoiceMenu()
 			else
 			{
 				_fe3d->model_setOpacity(_currentModelID, _currentPartID, _originalPartOpacity);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
 				_currentPartID = "";
 			}
 		}

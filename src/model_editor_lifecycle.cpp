@@ -57,7 +57,6 @@ void ModelEditor::load()
 	_fe3d->reflection_capture("@@reflection");
 
 	_gui->getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("partID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("aabbID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_isEditorLoaded = true;
@@ -90,7 +89,6 @@ void ModelEditor::unload()
 	_fe3d->reflection_delete("@@reflection");
 
 	_gui->getOverlay()->deleteTextField("modelID");
-	_gui->getOverlay()->deleteTextField("partID");
 	_gui->getOverlay()->deleteTextField("aabbID");
 
 	_loadedModelIDs.clear();

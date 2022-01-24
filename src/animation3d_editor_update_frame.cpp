@@ -24,7 +24,6 @@ void Animation3dEditor::_updateFrameMenu()
 			if(!_currentPartID.empty())
 			{
 				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), _currentPartID, _originalPartOpacity);
-
 				_currentPartID = "";
 			}
 
@@ -42,7 +41,6 @@ void Animation3dEditor::_updateFrameMenu()
 			else
 			{
 				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), _currentPartID, _originalPartOpacity);
-
 				_currentPartID = "";
 			}
 		}

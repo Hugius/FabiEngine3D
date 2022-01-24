@@ -78,7 +78,6 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 						_deactivateReflection();
 
 						_currentTemplateQuadID = quadID;
-						_fe3d->quad3d_setPosition(_currentTemplateQuadID, fvec3(0.0f));
 						_fe3d->quad3d_setVisible(_currentTemplateQuadID, true);
 						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
 						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad3d: " + _currentTemplateQuadID.substr(1), 0.025f);
@@ -86,6 +85,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 
 						if(_fe3d->terrain_getSelectedID().empty())
 						{
+							_fe3d->quad3d_setPosition(_currentTemplateQuadID, fvec3(0.0f));
 							_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 							_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 							_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));

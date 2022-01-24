@@ -88,6 +88,7 @@ private:
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.25f;
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.025f;
+	float _originalPartOpacity = 0.0f;
 
 	int _selectedPartHighlightDirection = 1;
 

@@ -309,7 +309,6 @@ void ModelEditor::_updatePartChoosing()
 		{
 			if(!_hoveredPartID.empty())
 			{
-				std::cout << _originalPartOpacity << std::endl;
 				_fe3d->model_setOpacity(_currentModelID, _hoveredPartID, _originalPartOpacity);
 
 				_hoveredPartID = "";

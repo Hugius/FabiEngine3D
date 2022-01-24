@@ -21,12 +21,13 @@ void Animation3dEditor::_updateFrameMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			for(const auto& partID : _fe3d->model_getPartIDs(currentAnimation->getPreviewModelID()))
+			if(!_currentPartID.empty())
 			{
-				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), partID, 1.0f);
+				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), _currentPartID, _originalPartOpacity);
+
+				_currentPartID = "";
 			}
 
-			_currentPartID = "";
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 			return;
 		}
@@ -181,7 +182,12 @@ void Animation3dEditor::_updateFrameMenu()
 
 		if(!selectedButtonID.empty())
 		{
-			_hoveredPartID = selectedButtonID;
+			if(_hoveredPartID.empty())
+			{
+				_hoveredPartID = selectedButtonID;
+
+				_originalPartOpacity = _fe3d->model_getOpacity(currentAnimation->getPreviewModelID(), _hoveredPartID);
+			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -198,13 +204,10 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			if(!_hoveredPartID.empty())
 			{
-				for(const auto& partID : _fe3d->model_getPartIDs(currentAnimation->getPreviewModelID()))
-				{
-					_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), partID, 1.0f);
-				}
-			}
+				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), _hoveredPartID, _originalPartOpacity);
 
-			_hoveredPartID = "";
+				_hoveredPartID = "";
+			}
 		}
 	}
 }

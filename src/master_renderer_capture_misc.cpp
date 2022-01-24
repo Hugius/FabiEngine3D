@@ -219,18 +219,17 @@ void MasterRenderer::_captureBloom()
 {
 	if(_renderBus->isBloomEnabled() && (_renderBus->getBloomBlurCount() > 0) && (_renderBus->getBloomIntensity() > 0.0f))
 	{
-		shared_ptr<TextureBuffer> textureToBlur = nullptr;
 		if(_renderBus->getBloomType() == BloomType::EVERYTHING)
 		{
-			textureToBlur = _renderBus->getPrimarySceneMap();
+			_renderBus->setBloomMap(_renderBus->getPrimarySceneMap());
 		}
 		else
 		{
-			textureToBlur = _renderBus->getSecondarySceneMap();
+			_renderBus->setBloomMap(_renderBus->getSecondarySceneMap());
 		}
 
 		_bloomBlurRendererHighQuality.bind();
-		_renderBus->setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_renderSurface, textureToBlur, _renderBus->getBloomBlurCount(), _renderBus->getBloomIntensity(), BlurDirection::BOTH));
+		_renderBus->setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_renderSurface, _renderBus->getBloomMap(), _renderBus->getBloomBlurCount(), _renderBus->getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererHighQuality.unbind();
 
 		_bloomBlurRendererLowQuality.bind();

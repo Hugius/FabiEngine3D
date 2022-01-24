@@ -48,6 +48,7 @@ private:
 	string _currentAabbID = "";
 	string _hoveredModelID = "";
 	string _hoveredPartID = "";
+	string _hoveredAabbID = "";
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;

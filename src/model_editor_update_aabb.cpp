@@ -57,15 +57,10 @@ void ModelEditor::_updateChoiceAabbMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			for(const auto& aabbID : _fe3d->aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))
-			{
-				_fe3d->aabb_setVisible(aabbID, true);
-				_fe3d->aabb_setFollowParentVisibility(aabbID, true);
-			}
-
-			_currentAabbID = "";
+			_fe3d->aabb_setVisible((_currentModelID + "@" + _currentAabbID), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), false);
+			_currentAabbID = "";
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
@@ -143,6 +138,7 @@ void ModelEditor::_updateAabbCreating()
 			_currentAabbID = newAabbID;
 
 			_fe3d->aabb_create(_currentModelID + "@" + _currentAabbID, false);
+			_fe3d->aabb_setFollowParentVisibility((_currentModelID + "@" + _currentAabbID), false);
 			_fe3d->aabb_setParentEntityID((_currentModelID + "@" + _currentAabbID), _currentModelID);
 			_fe3d->aabb_setParentEntityType((_currentModelID + "@" + _currentAabbID), AabbParentEntityType::MODEL);
 
@@ -161,20 +157,18 @@ void ModelEditor::_updateAabbChoosing()
 	{
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("aabbList");
 
-		for(const auto& aabbID : _fe3d->aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))
-		{
-			_fe3d->aabb_setVisible(aabbID, false);
-			_fe3d->aabb_setFollowParentVisibility(aabbID, false);
-		}
-
 		if(!selectedButtonID.empty())
 		{
-			_fe3d->aabb_setVisible((_currentModelID + "@" + selectedButtonID), true);
-			_fe3d->aabb_setFollowParentVisibility((_currentModelID + "@" + selectedButtonID), true);
+			if(_hoveredAabbID.empty())
+			{
+				_hoveredAabbID = selectedButtonID;
+				_fe3d->aabb_setVisible((_currentModelID + "@" + _hoveredAabbID), true);
+			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentAabbID = selectedButtonID;
+				_hoveredAabbID = "";
 
 				if(!_isDeletingAabb)
 				{
@@ -190,15 +184,17 @@ void ModelEditor::_updateAabbChoosing()
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("aabbList"))
 		{
-			for(const auto& aabbID : _fe3d->aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))
-			{
-				_fe3d->aabb_setVisible(aabbID, true);
-				_fe3d->aabb_setFollowParentVisibility(aabbID, true);
-			}
-
 			_gui->getOverlay()->deleteChoiceForm("aabbList");
 			_isChoosingAabb = false;
 			_isDeletingAabb = false;
+		}
+		else
+		{
+			if(!_hoveredAabbID.empty())
+			{
+				_fe3d->aabb_setVisible((_currentModelID + "@" + _hoveredAabbID), false);
+				_hoveredAabbID = "";
+			}
 		}
 	}
 }

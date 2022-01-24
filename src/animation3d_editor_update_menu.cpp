@@ -93,6 +93,11 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
 		{
+			if(_fe3d->model_isExisting(currentAnimation->getPreviewModelID()))
+			{
+				_fe3d->model_setVisible(currentAnimation->getPreviewModelID(), false);
+			}
+
 			auto modelIDs = _modelEditor->getLoadedIDs();
 			for(auto& ID : modelIDs)
 			{
@@ -213,21 +218,15 @@ void Animation3dEditor::_updateChoiceMenu()
 			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 		}
 
-		if(_fe3d->model_isExisting(currentAnimation->getPreviewModelID()))
-		{
-			_fe3d->model_setVisible(currentAnimation->getPreviewModelID(), !_gui->getOverlay()->isChoiceFormExisting("modelList"));
-		}
-
-		if(!_hoveredModelID.empty())
-		{
-			_fe3d->model_setVisible(_hoveredModelID, false);
-		}
-
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("modelList");
 
 		if(!selectedButtonID.empty())
 		{
-			_hoveredModelID = ("@" + selectedButtonID);
+			if(_hoveredModelID.empty())
+			{
+				_hoveredModelID = ("@" + selectedButtonID);
+				_fe3d->model_setVisible(_hoveredModelID, true);
+			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -276,16 +275,20 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("modelList"))
 		{
+			if(_fe3d->model_isExisting(currentAnimation->getPreviewModelID()))
+			{
+				_fe3d->model_setVisible(currentAnimation->getPreviewModelID(), true);
+			}
+
 			_gui->getOverlay()->deleteChoiceForm("modelList");
 		}
 		else
 		{
-			_hoveredModelID = "";
-		}
-
-		if(!_hoveredModelID.empty())
-		{
-			_fe3d->model_setVisible(_hoveredModelID, true);
+			if(!_hoveredModelID.empty())
+			{
+				_fe3d->model_setVisible(_hoveredModelID, false);
+				_hoveredModelID = "";
+			}
 		}
 	}
 }

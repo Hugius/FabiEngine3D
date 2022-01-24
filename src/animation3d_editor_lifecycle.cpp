@@ -61,7 +61,7 @@ void Animation3dEditor::unload()
 {
 	for(const auto& animation : _animations)
 	{
-		if(!animation->getPreviewModelID().empty())
+		if(_fe3d->model_isExisting(animation->getPreviewModelID()))
 		{
 			_fe3d->model_delete(animation->getPreviewModelID());
 		}

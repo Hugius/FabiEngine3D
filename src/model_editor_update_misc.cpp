@@ -199,16 +199,15 @@ void ModelEditor::_updateModelChoosing()
 {
 	if(_isChoosingModel)
 	{
-		if(!_hoveredModelID.empty())
-		{
-			_fe3d->model_setVisible(_hoveredModelID, false);
-		}
-
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("modelList");
 
 		if(!selectedButtonID.empty())
 		{
-			_hoveredModelID = ("@" + selectedButtonID);
+			if(_hoveredModelID.empty())
+			{
+				_hoveredModelID = ("@" + selectedButtonID);
+				_fe3d->model_setVisible(_hoveredModelID, true);
+			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -236,12 +235,11 @@ void ModelEditor::_updateModelChoosing()
 		}
 		else
 		{
-			_hoveredModelID = "";
-		}
-
-		if(!_hoveredModelID.empty())
-		{
-			_fe3d->model_setVisible(_hoveredModelID, true);
+			if(!_hoveredModelID.empty())
+			{
+				_fe3d->model_setVisible(_hoveredModelID, false);
+				_hoveredModelID = "";
+			}
 		}
 	}
 }
@@ -284,7 +282,6 @@ void ModelEditor::_updatePartChoosing()
 			if(_hoveredPartID.empty())
 			{
 				_hoveredPartID = selectedButtonID;
-
 				_originalPartOpacity = _fe3d->model_getOpacity(_currentModelID, _hoveredPartID);
 			}
 
@@ -292,7 +289,6 @@ void ModelEditor::_updatePartChoosing()
 			{
 				_currentPartID = selectedButtonID;
 				_hoveredPartID = "";
-
 				_gui->getOverlay()->deleteChoiceForm("partList");
 				_isChoosingPart = false;
 			}
@@ -307,7 +303,6 @@ void ModelEditor::_updatePartChoosing()
 			if(!_hoveredPartID.empty())
 			{
 				_fe3d->model_setOpacity(_currentModelID, _hoveredPartID, _originalPartOpacity);
-
 				_hoveredPartID = "";
 			}
 		}

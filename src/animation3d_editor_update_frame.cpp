@@ -205,7 +205,6 @@ void Animation3dEditor::_updateFrameMenu()
 			if(_hoveredPartID.empty())
 			{
 				_hoveredPartID = selectedButtonID;
-
 				_originalPartOpacity = _fe3d->model_getOpacity(currentAnimation->getPreviewModelID(), _hoveredPartID);
 			}
 
@@ -225,7 +224,6 @@ void Animation3dEditor::_updateFrameMenu()
 			if(!_hoveredPartID.empty())
 			{
 				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), _hoveredPartID, _originalPartOpacity);
-
 				_hoveredPartID = "";
 			}
 		}

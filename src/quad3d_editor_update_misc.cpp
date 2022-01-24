@@ -138,16 +138,15 @@ void Quad3dEditor::_updateQuad3dChoosing()
 {
 	if(_isChoosingQuad3d)
 	{
-		if(!_hoveredQuadID.empty())
-		{
-			_fe3d->quad3d_setVisible(_hoveredQuadID, false);
-		}
-
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("quad3dList");
 
 		if(!selectedButtonID.empty())
 		{
-			_hoveredQuadID = ("@" + selectedButtonID);
+			if(_hoveredQuadID.empty())
+			{
+				_hoveredQuadID = ("@" + selectedButtonID);
+				_fe3d->quad3d_setVisible(_hoveredQuadID, true);
+			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -175,12 +174,11 @@ void Quad3dEditor::_updateQuad3dChoosing()
 		}
 		else
 		{
-			_hoveredQuadID = "";
-		}
-
-		if(!_hoveredQuadID.empty())
-		{
-			_fe3d->quad3d_setVisible(_hoveredQuadID, true);
+			if(!_hoveredQuadID.empty())
+			{
+				_fe3d->quad3d_setVisible(_hoveredQuadID, false);
+				_hoveredQuadID = "";
+			}
 		}
 	}
 }

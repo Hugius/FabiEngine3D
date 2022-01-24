@@ -79,16 +79,15 @@ void Quad2dEditor::_updateQuadChoosing()
 {
 	if(_isChoosingQuad)
 	{
-		if(!_hoveredQuadID.empty())
-		{
-			_fe3d->quad2d_setVisible(_hoveredQuadID, false);
-		}
-
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("quadList");
 
 		if(!selectedButtonID.empty())
 		{
-			_hoveredQuadID = ("@" + selectedButtonID);
+			if(_hoveredQuadID.empty())
+			{
+				_hoveredQuadID = ("@" + selectedButtonID);
+				_fe3d->quad2d_setVisible(_hoveredQuadID, false);
+			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -116,12 +115,11 @@ void Quad2dEditor::_updateQuadChoosing()
 		}
 		else
 		{
-			_hoveredQuadID = "";
-		}
-
-		if(!_hoveredQuadID.empty())
-		{
-			_fe3d->quad2d_setVisible(_hoveredQuadID, true);
+			if(!_hoveredQuadID.empty())
+			{
+				_fe3d->quad2d_setVisible(_hoveredQuadID, true);
+				_hoveredQuadID = "";
+			}
 		}
 	}
 }

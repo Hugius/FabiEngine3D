@@ -172,16 +172,15 @@ void Text3dEditor::_updateText3dChoosing()
 {
 	if(_isChoosingText3d)
 	{
-		if(!_hoveredTextID.empty())
-		{
-			_fe3d->text3d_setVisible(_hoveredTextID, false);
-		}
-
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("text3dList");
 
 		if(!selectedButtonID.empty())
 		{
-			_hoveredTextID = ("@" + selectedButtonID);
+			if(_hoveredTextID.empty())
+			{
+				_hoveredTextID = ("@" + selectedButtonID);
+				_fe3d->text3d_setVisible(_hoveredTextID, true);
+			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -209,12 +208,11 @@ void Text3dEditor::_updateText3dChoosing()
 		}
 		else
 		{
-			_hoveredTextID = "";
-		}
-
-		if(!_hoveredTextID.empty())
-		{
-			_fe3d->text3d_setVisible(_hoveredTextID, true);
+			if(!_hoveredTextID.empty())
+			{
+				_fe3d->text3d_setVisible(_hoveredTextID, false);
+				_hoveredTextID = "";
+			}
 		}
 	}
 }

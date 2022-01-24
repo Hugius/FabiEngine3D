@@ -120,8 +120,6 @@ void WaterEditor::_updateWaterChoosing()
 {
 	if(_isChoosingWater)
 	{
-		_fe3d->water_select("");
-
 		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("waterList");
 
 		if(!selectedButtonID.empty())
@@ -149,6 +147,10 @@ void WaterEditor::_updateWaterChoosing()
 			_gui->getOverlay()->deleteChoiceForm("waterList");
 			_isChoosingWater = false;
 			_isDeletingWater = false;
+		}
+		else
+		{
+			_fe3d->water_select("");
 		}
 	}
 }

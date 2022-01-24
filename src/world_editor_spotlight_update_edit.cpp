@@ -22,8 +22,7 @@ void WorldEditor::_updateSpotlightEditing()
 		{
 			if(ID.substr(0, string("@@torch").size()) == "@@torch")
 			{
-				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() &&
-				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectSpotlight(ID.substr(string("@@torch_").size()));
 

@@ -22,8 +22,7 @@ void WorldEditor::_updatePointlightEditing()
 		{
 			if(ID.substr(0, string("@@lamp").size()) == "@@lamp")
 			{
-				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() &&
-				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectPointlight(ID.substr(string("@@lamp_").size()));
 
@@ -147,6 +146,7 @@ void WorldEditor::_updatePointlightEditing()
 				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 
 				_fe3d->pointlight_setPosition(activePointlightID, position);
+				_fe3d->model_setBasePosition(_activeLampID, position);
 			}
 			else if(!screen->getButton("radius")->isHoverable())
 			{
@@ -176,8 +176,8 @@ void WorldEditor::_updatePointlightEditing()
 				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", color.b, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", color.b, -POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 
-				_fe3d->model_setColor(_activeLampID, "", color);
 				_fe3d->pointlight_setColor(activePointlightID, color);
+				_fe3d->model_setColor(_activeLampID, "", color);
 			}
 
 			_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);

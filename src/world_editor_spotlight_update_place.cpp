@@ -19,12 +19,14 @@ void WorldEditor::_updateSpotlightPlacing()
 				BEGIN1:;
 				const auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				const string newModelID = ("@@torch_" + newID);
+
 				if(_fe3d->spotlight_isExisting(newID))
 				{
 					goto BEGIN1;
 				}
 
 				_fe3d->spotlight_create(newID);
+
 				if(_fe3d->spotlight_isExisting(newID))
 				{
 					_loadedSpotlightIDs.push_back(newID);

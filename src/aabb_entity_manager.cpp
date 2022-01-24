@@ -103,10 +103,6 @@ void AabbEntityManager::createEntity(const string& ID, bool isCentered)
 
 void AabbEntityManager::update()
 {
-	const auto& modelEntities = _modelEntityManager->getEntities();
-	const auto& quad3dEntities = _quad3dEntityManager->getEntities();
-	const auto& text3dEntities = _text3dEntityManager->getEntities();
-
 	for(const auto& [key, entity] : _entities)
 	{
 		if(!entity->hasParent())
@@ -119,9 +115,9 @@ void AabbEntityManager::update()
 		{
 			case AabbParentEntityType::MODEL:
 			{
-				auto foundPair = modelEntities.find(entity->getParentEntityID());
+				auto foundPair = _modelEntityManager->getEntities().find(entity->getParentEntityID());
 
-				if(foundPair == modelEntities.end())
+				if(foundPair == _modelEntityManager->getEntities().end())
 				{
 					Logger::throwError("AabbEntityManager::update::1");
 				}
@@ -232,8 +228,8 @@ void AabbEntityManager::update()
 			}
 			case AabbParentEntityType::QUAD3D:
 			{
-				auto foundPair = quad3dEntities.find(entity->getParentEntityID());
-				if(foundPair == quad3dEntities.end())
+				auto foundPair = _quad3dEntityManager->getEntities().find(entity->getParentEntityID());
+				if(foundPair == _quad3dEntityManager->getEntities().end())
 				{
 					Logger::throwError("AabbEntityManager::update::2");
 				}
@@ -309,8 +305,8 @@ void AabbEntityManager::update()
 			}
 			case AabbParentEntityType::TEXT3D:
 			{
-				auto foundPair = text3dEntities.find(entity->getParentEntityID());
-				if(foundPair == text3dEntities.end())
+				auto foundPair = _text3dEntityManager->getEntities().find(entity->getParentEntityID());
+				if(foundPair == _text3dEntityManager->getEntities().end())
 				{
 					Logger::throwError("AabbEntityManager::update::3");
 				}

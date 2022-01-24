@@ -143,7 +143,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 
 		if(!entity->getPreviousReflectionEntityID().empty())
 		{
-			const auto& reflectionEntity = reflectionEntities.at(entity->getPreviousReflectionEntityID());
+			const auto reflectionEntity = reflectionEntities.at(entity->getPreviousReflectionEntityID());
 
 			if(reflectionEntity->getCubeMap() != nullptr)
 			{
@@ -153,7 +153,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		}
 		if(!entity->getCurrentReflectionEntityID().empty())
 		{
-			const auto& reflectionEntity = reflectionEntities.at(entity->getCurrentReflectionEntityID());
+			const auto reflectionEntity = reflectionEntities.at(entity->getCurrentReflectionEntityID());
 
 			if(reflectionEntity->getCubeMap() != nullptr)
 			{
@@ -164,9 +164,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 
 		for(const auto& partID : entity->getPartIDs())
 		{
-			const auto& transformationMatrix = entity->getTransformationMatrix(partID);
-			const auto normalTransformationMatrix = Math::transposeMatrix(Math::invertMatrix(mat33(transformationMatrix)));
-
 			_shader->uploadUniform("u_isReflective", entity->isReflective(partID));
 			_shader->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partID));
 			_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
@@ -183,8 +180,8 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader->uploadUniform("u_hasSpecularMap", entity->hasSpecularMap(partID));
 			_shader->uploadUniform("u_hasReflectionMap", entity->hasReflectionMap(partID));
 			_shader->uploadUniform("u_hasNormalMap", entity->hasNormalMap(partID));
-			_shader->uploadUniform("u_transformationMatrix", transformationMatrix);
-			_shader->uploadUniform("u_normalTransformationMatrix", normalTransformationMatrix);
+			_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
+			_shader->uploadUniform("u_normalTransformationMatrix", Math::transposeMatrix(Math::invertMatrix(mat33(entity->getTransformationMatrix(partID)))));
 			_shader->uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
 			_shader->uploadUniform("u_isWireframed", (entity->isWireframed(partID) || _renderBus->isWireframeRenderingEnabled()));
 			_shader->uploadUniform("u_isBright", entity->isBright(partID));

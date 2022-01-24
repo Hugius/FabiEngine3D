@@ -181,10 +181,8 @@ void MasterRenderer::_updateLensFlare()
 {
 	if(_renderBus->isLensFlareEnabled())
 	{
-		const auto& flareSourcePosition = _renderBus->getDirectionalLightingPosition();
-		const auto& viewMatrix = _renderBus->getViewMatrix();
-		const auto& projectionMatrix = _renderBus->getProjectionMatrix();
-		const auto flareSourceClip = (projectionMatrix * viewMatrix * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
+		const auto flareSourcePosition = _renderBus->getDirectionalLightingPosition();
+		const auto flareSourceClip = (_renderBus->getProjectionMatrix() * _renderBus->getViewMatrix() * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
 		const auto flareSourceNdc = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
 		const auto flareSourceUv = fvec2(((flareSourceNdc.x + 1.0f) / 2.0f), ((flareSourceNdc.y + 1.0f) / 2.0f));
 

@@ -60,19 +60,19 @@ void NetworkingServer::update()
 	BEGIN:;
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
-		const auto& clientSocketID = _clientSockets[i];
-		const auto& clientUsername = _clientUsernames[i];
+		const auto clientSocketID = _clientSockets[i];
+		const auto clientUsername = _clientUsernames[i];
 
 		auto& clientMessageBuild = _tcpMessageBuilds[i];
 		auto& messageThread = _tcpMessageThreads[i];
 
 		if(messageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 		{
-			const auto& messageResult = messageThread.get();
-			const auto& messageStatusCode = get<0>(messageResult);
-			const auto& messageErrorCode = get<1>(messageResult);
-			const auto& messageTimestamp = get<2>(messageResult);
-			const auto& messageContent = get<3>(messageResult);
+			const auto messageResult = messageThread.get();
+			const auto messageStatusCode = get<0>(messageResult);
+			const auto messageErrorCode = get<1>(messageResult);
+			const auto messageTimestamp = get<2>(messageResult);
+			const auto messageContent = get<3>(messageResult);
 
 			if(messageStatusCode > 0)
 			{
@@ -175,12 +175,12 @@ void NetworkingServer::update()
 
 	while(NetworkingUtils::isMessageReadyUDP(_udpSocket))
 	{
-		const auto& messageResult = _receiveUdpMessage(_udpSocket);
-		const auto& messageStatusCode = get<0>(messageResult);
-		const auto& messageErrorCode = get<1>(messageResult);
-		const auto& messageContent = get<2>(messageResult);
-		const auto& messageIP = get<3>(messageResult);
-		const auto& messagePort = get<4>(messageResult);
+		const auto messageResult = _receiveUdpMessage(_udpSocket);
+		const auto messageStatusCode = get<0>(messageResult);
+		const auto messageErrorCode = get<1>(messageResult);
+		const auto messageContent = get<2>(messageResult);
+		const auto messageIP = get<3>(messageResult);
+		const auto messagePort = get<4>(messageResult);
 
 		if(messageStatusCode > 0)
 		{

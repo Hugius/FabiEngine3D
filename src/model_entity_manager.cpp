@@ -62,16 +62,14 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 		return;
 	}
 
-	const auto& parts = mesh->getParts();
-
-	if((parts.size() == 1) && !parts[0]->getID().empty())
+	if((mesh->getParts().size() == 1) && !mesh->getParts()[0]->getID().empty())
 	{
 		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");
 		deleteEntity(ID);
 		return;
 	}
 
-	for(const auto& part : parts)
+	for(const auto& part : mesh->getParts())
 	{
 		vector<float> bufferData;
 
@@ -132,8 +130,6 @@ const bool ModelEntityManager::isEntityExisting(const string& ID) const
 
 void ModelEntityManager::update()
 {
-	const auto& reflectionEntities = _reflectionManager->getEntities();
-
 	for(const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
@@ -159,7 +155,7 @@ void ModelEntityManager::update()
 			if((_timer->getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
 			{
 				map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
-				for(const auto& [key, reflectionEntity] : reflectionEntities)
+				for(const auto& [key, reflectionEntity] : _reflectionManager->getEntities())
 				{
 					if(reflectionEntity->isVisible())
 					{
@@ -168,12 +164,12 @@ void ModelEntityManager::update()
 					}
 				}
 
-				if(reflectionEntities.find(entity->getPreviousReflectionEntityID()) == reflectionEntities.end())
+				if(_reflectionManager->getEntities().find(entity->getPreviousReflectionEntityID()) == _reflectionManager->getEntities().end())
 				{
 					entity->setPreviousReflectionEntityID("");
 					entity->setCubeReflectionMixValue(1.0f);
 				}
-				if(reflectionEntities.find(entity->getCurrentReflectionEntityID()) == reflectionEntities.end())
+				if(_reflectionManager->getEntities().find(entity->getCurrentReflectionEntityID()) == _reflectionManager->getEntities().end())
 				{
 					entity->setCurrentReflectionEntityID("");
 					entity->setCubeReflectionMixValue(1.0f);

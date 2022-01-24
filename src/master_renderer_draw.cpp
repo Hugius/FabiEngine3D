@@ -22,12 +22,10 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& view
 
 void MasterRenderer::renderApplication()
 {
-	const auto& config = Config::getInst();
-
 	if(_renderBus->isWireframeRenderingEnabled())
 	{
 		_timer->startDeltaPart("3dEntityRender");
-		glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
+		glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_renderSkyEntity();
@@ -40,7 +38,7 @@ void MasterRenderer::renderApplication()
 		_renderTransparentQuad3dEntities();
 		_renderTransparentText3dEntities();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
+		glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 		_timer->stopDeltaPart();
 		_timer->startDeltaPart("2dEntityRender");
 		_renderGUI();
@@ -91,9 +89,9 @@ void MasterRenderer::renderApplication()
 	_captureLensFlare();
 	_captureMotionBlur();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
+	glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
 	_renderFinalSceneMap();
-	glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
+	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("2dEntityRender");
@@ -178,11 +176,11 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 			if(modelEntity->isLevelOfDetailed())
 			{
-				const auto& levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
-				const auto& originalPosition = levelOfDetailEntity->getBasePosition();
-				const auto& originalRotation = levelOfDetailEntity->getBaseRotation();
-				const auto& originalSize = levelOfDetailEntity->getBaseSize();
-				const auto& originalVisibility = levelOfDetailEntity->isVisible();
+				const auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
+				const auto originalPosition = levelOfDetailEntity->getBasePosition();
+				const auto originalRotation = levelOfDetailEntity->getBaseRotation();
+				const auto originalSize = levelOfDetailEntity->getBaseSize();
+				const auto originalVisibility = levelOfDetailEntity->isVisible();
 
 				levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
 				levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
@@ -240,11 +238,11 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 			if(modelEntity->isLevelOfDetailed())
 			{
-				const auto& levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
-				const auto& originalPosition = levelOfDetailEntity->getBasePosition();
-				const auto& originalRotation = levelOfDetailEntity->getBaseRotation();
-				const auto& originalSize = levelOfDetailEntity->getBaseSize();
-				const auto& originalVisibility = levelOfDetailEntity->isVisible();
+				const auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
+				const auto originalPosition = levelOfDetailEntity->getBasePosition();
+				const auto originalRotation = levelOfDetailEntity->getBaseRotation();
+				const auto originalSize = levelOfDetailEntity->getBaseSize();
+				const auto originalVisibility = levelOfDetailEntity->isVisible();
 
 				levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
 				levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());

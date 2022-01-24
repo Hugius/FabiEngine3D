@@ -197,23 +197,23 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	vector<fvec3> tangents;
 	for(size_t i = 0; i < positions.size(); i += 3)
 	{
-		const auto& pos1 = positions[i + 0];
-		const auto& pos2 = positions[i + 1];
-		const auto& pos3 = positions[i + 2];
+		const auto pos1 = positions[i + 0];
+		const auto pos2 = positions[i + 1];
+		const auto pos3 = positions[i + 2];
 
-		const auto& deltaPos1 = (pos2 - pos1);
-		const auto& deltaPos2 = (pos3 - pos1);
+		const auto deltaPos1 = (pos2 - pos1);
+		const auto deltaPos2 = (pos3 - pos1);
 
-		const auto& uv1 = uvs[i + 0];
-		const auto& uv2 = uvs[i + 1];
-		const auto& uv3 = uvs[i + 2];
+		const auto uv1 = uvs[i + 0];
+		const auto uv2 = uvs[i + 1];
+		const auto uv3 = uvs[i + 2];
 
-		const auto& deltaUv1 = (uv2 - uv1);
-		const auto& deltaUv2 = (uv3 - uv1);
+		const auto deltaUv1 = (uv2 - uv1);
+		const auto deltaUv2 = (uv3 - uv1);
 
-		const auto& r = (1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x));
+		const auto r = (1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x));
 
-		const auto& tangent = ((deltaPos1 * deltaUv2.y - deltaPos2 * deltaUv1.y) * r);
+		const auto tangent = ((deltaPos1 * deltaUv2.y - deltaPos2 * deltaUv1.y) * r);
 
 		tangents.push_back(tangent);
 		tangents.push_back(tangent);

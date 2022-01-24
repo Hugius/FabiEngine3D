@@ -10,6 +10,13 @@ void WorldEditor::_updateModelMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
+			if(!_currentTemplateModelID.empty())
+			{
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
+				_fe3d->model_setVisible(_currentTemplateModelID, false);
+				_currentTemplateModelID = "";
+			}
+
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
@@ -38,6 +45,8 @@ void WorldEditor::_updateModelMenu()
 				}
 			}
 		}
+
+		screen->getButton("choice")->setHoverable(_currentTemplateModelID.empty());
 	}
 }
 
@@ -49,13 +58,6 @@ void WorldEditor::_updateModelPlacingMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateModelID.empty())
-			{
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
-				_fe3d->model_setVisible(_currentTemplateModelID, false);
-				_currentTemplateModelID = "";
-			}
-
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuModel");
 			return;
 		}

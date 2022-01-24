@@ -13,7 +13,7 @@ void MasterRenderer::_captureCubeReflections()
 	const auto originalCameraFOV = _camera->getFOV();
 	const auto originalCameraYaw = _camera->getYaw();
 	const auto originalCameraPitch = _camera->getPitch();
-	const auto& originalCameraPosition = _camera->getPosition();
+	const auto originalCameraPosition = _camera->getPosition();
 
 	vector<string> savedModelEntityIDs;
 	for(const auto& [key, entity] : _modelEntityManager->getEntities())

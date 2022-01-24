@@ -64,6 +64,8 @@ void WorldEditor::_updatePointlightMenu()
 				}
 			}
 		}
+
+		screen->getButton("choice")->setHoverable(!_isPlacingPointlight);
 	}
 }
 

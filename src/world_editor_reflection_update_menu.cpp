@@ -64,6 +64,8 @@ void WorldEditor::_updateReflectionMenu()
 				}
 			}
 		}
+
+		screen->getButton("choice")->setHoverable(!_isPlacingReflection);
 	}
 }
 

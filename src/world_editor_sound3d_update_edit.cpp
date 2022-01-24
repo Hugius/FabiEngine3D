@@ -111,6 +111,7 @@ void WorldEditor::_updateSoundEditing()
 			_handleValueChanging("soundPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / SOUND_POSITION_DIVIDER));
 			_handleValueChanging("soundPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / SOUND_POSITION_DIVIDER));
 			_fe3d->sound3d_setPosition(activeSoundID, position);
+			_fe3d->model_setBasePosition(_activeSpeakerID, position);
 
 			_handleValueChanging("soundPropertiesMenu", "distancePlus", "distance", maxDistance, (_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);
 			_handleValueChanging("soundPropertiesMenu", "distanceMinus", "distance", maxDistance, -(_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);

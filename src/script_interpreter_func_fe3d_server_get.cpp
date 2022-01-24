@@ -86,8 +86,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto& messages = _fe3d->server_getPendingMessages();
-			for(const auto& message : messages)
+			for(const auto& message : _fe3d->server_getPendingMessages())
 			{
 				returnValues.push_back(ScriptValue(SVT::STRING, string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP")));
 			}
@@ -97,8 +96,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto& messages = _fe3d->server_getPendingMessages();
-			for(const auto& message : messages)
+			for(const auto& message : _fe3d->server_getPendingMessages())
 			{
 				returnValues.push_back(ScriptValue(SVT::STRING, message.getUsername()));
 			}
@@ -108,8 +106,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto& messages = _fe3d->server_getPendingMessages();
-			for(const auto& message : messages)
+			for(const auto& message : _fe3d->server_getPendingMessages())
 			{
 				returnValues.push_back(ScriptValue(SVT::STRING, message.getContent()));
 			}

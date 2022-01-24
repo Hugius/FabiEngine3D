@@ -10,6 +10,13 @@ void WorldEditor::_updateQuad3dMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
+			if(!_currentTemplateQuadID.empty())
+			{
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
+				_fe3d->quad3d_setVisible(_currentTemplateQuadID, false);
+				_currentTemplateQuadID = "";
+			}
+
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
@@ -38,6 +45,8 @@ void WorldEditor::_updateQuad3dMenu()
 				}
 			}
 		}
+
+		screen->getButton("choice")->setHoverable(_currentTemplateQuadID.empty());
 	}
 }
 
@@ -49,13 +58,6 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateQuadID.empty())
-			{
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
-				_fe3d->quad3d_setVisible(_currentTemplateQuadID, false);
-				_currentTemplateQuadID = "";
-			}
-
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3d");
 			return;
 		}

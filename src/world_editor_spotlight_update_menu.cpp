@@ -64,6 +64,8 @@ void WorldEditor::_updateSpotlightMenu()
 				}
 			}
 		}
+
+		screen->getButton("choice")->setHoverable(!_isPlacingSpotlight);
 	}
 }
 

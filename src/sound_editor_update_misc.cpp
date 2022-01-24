@@ -91,8 +91,8 @@ void SoundEditor::_updateSoundCreating()
 				_loadedSoundIDs.push_back(newSoundID);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + newSoundID.substr(1), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityId(), "Sound: " + newSoundID.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), true);
 				_isCreatingSound = false;
 			}
 		}
@@ -115,8 +115,8 @@ void SoundEditor::_updateSoundChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + selectedButtonID.substr(1), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityId(), "Sound: " + selectedButtonID.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("soundList");

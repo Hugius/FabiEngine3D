@@ -135,23 +135,23 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		if(partCount > 1)
 	//		{
-	//			vector<string> partIDs;
+	//			vector<string> partIds;
 	//			for(unsigned int i = 0; i < partCount; i++)
 	//			{
-	//				string partID;
-	//				iss >> partID;
-	//				partIDs.push_back(partID);
+	//				string partId;
+	//				iss >> partId;
+	//				partIds.push_back(partId);
 	//			}
 
-	//			if(partIDs.size() != _fe3d->model_getPartIDs(templateID).size())
+	//			if(partIds.size() != _fe3d->model_getPartIDs(templateID).size())
 	//			{
 	//				Logger::throwWarning("World model parts with id \"" + modelID + "\" differ from base model!");
 	//				continue;
 	//			}
 
-	//			for(size_t i = 0; i < partIDs.size(); i++)
+	//			for(size_t i = 0; i < partIds.size(); i++)
 	//			{
-	//				if(partIDs[i] != _fe3d->model_getPartIDs(templateID)[i])
+	//				if(partIds[i] != _fe3d->model_getPartIDs(templateID)[i])
 	//				{
 	//					Logger::throwWarning("World model parts with id \"" + modelID + "\" differ from base model!");
 	//					continue;
@@ -179,9 +179,9 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//			for(unsigned int i = 0; i < partCount; i++)
 	//			{
-	//				string partID;
+	//				string partId;
 	//				iss >>
-	//					partID >>
+	//					partId >>
 	//					position.x >>
 	//					position.y >>
 	//					position.z >>
@@ -195,10 +195,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//					size.y >>
 	//					size.z;
 
-	//				_fe3d->model_setPartPosition(modelID, partID, position);
-	//				_fe3d->model_setPartRotation(modelID, partID, rotation);
-	//				_fe3d->model_setPartRotationOrigin(modelID, partID, rotationOrigin);
-	//				_fe3d->model_setPartSize(modelID, partID, size);
+	//				_fe3d->model_setPartPosition(modelID, partId, position);
+	//				_fe3d->model_setPartRotation(modelID, partId, rotation);
+	//				_fe3d->model_setPartRotationOrigin(modelID, partId, rotationOrigin);
+	//				_fe3d->model_setPartSize(modelID, partId, size);
 	//			}
 
 	//			if(makeInvisible)
@@ -236,10 +236,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			}
 	//			else
 	//			{
-	//				string partID = (nextElement == "?") ? "" : nextElement;
+	//				string partId = (nextElement == "?") ? "" : nextElement;
 	//				fvec3 speed;
 	//				iss >> speed.x >> speed.y >> speed.z;
-	//				speeds[partID] = speed;
+	//				speeds[partId] = speed;
 	//			}
 	//		}
 
@@ -259,22 +259,22 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		//	animationData->setFrameIndex(frameIndex);
 	//		//	for(const auto& [key, speed] : speeds)
 	//		//	{
-	//		//		frameData.setSpeed(partID, speed);
+	//		//		frameData.setSpeed(partId, speed);
 	//		//	}
 
 	//		//	// Retrieve parts
-	//		//	auto partIDs = _fe3d->model_getPartIDs(modelID);
-	//		//	for(const auto& partID : partIDs)
+	//		//	auto partIds = _fe3d->model_getPartIDs(modelID);
+	//		//	for(const auto& partId : partIds)
 	//		//	{
 	//		//		// Retrieve part transformation
-	//		//		auto position = _fe3d->model_getPartPosition(modelID, partID);
-	//		//		auto rotation = _fe3d->model_getPartRotation(modelID, partID);
-	//		//		auto size = _fe3d->model_getPartSize(modelID, partID);
+	//		//		auto position = _fe3d->model_getPartPosition(modelID, partId);
+	//		//		auto rotation = _fe3d->model_getPartRotation(modelID, partId);
+	//		//		auto size = _fe3d->model_getPartSize(modelID, partId);
 
 	//		//		// Set properties
-	//		//		animationData->setTotalMovement(partID, position);
-	//		//		animationData->setTotalRotation(partID, rotation);
-	//		//		animationData->setTotalScaling(partID, size);
+	//		//		animationData->setTotalMovement(partId, position);
+	//		//		animationData->setTotalRotation(partId, rotation);
+	//		//		animationData->setTotalScaling(partId, size);
 	//		//	}
 	//		//}
 	//	}

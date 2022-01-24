@@ -33,35 +33,35 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader->uploadUniform("u_minTextureOpacity", MIN_TEXTURE_OPACITY);
 
-		for(const auto& partID : entity->getPartIDs())
+		for(const auto& partId : entity->getPartIDs())
 		{
-			_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
-			_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
+			_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partId));
+			_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
 
-			if(entity->isFaceCulled(partID))
+			if(entity->isFaceCulled(partId))
 			{
 				glEnable(GL_CULL_FACE);
 			}
 
-			if(entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID)->getId());
+				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partId)->getId());
 			}
 
-			glBindVertexArray(entity->getMesh(partID)->getVaoID());
+			glBindVertexArray(entity->getMesh(partId)->getVaoID());
 
-			glDrawArrays(GL_TRIANGLES, 0, entity->getMesh(partID)->getVertexCount());
+			glDrawArrays(GL_TRIANGLES, 0, entity->getMesh(partId)->getVertexCount());
 
 			glBindVertexArray(0);
 
-			if(entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
-			if(entity->isFaceCulled(partID))
+			if(entity->isFaceCulled(partId))
 			{
 				glDisable(GL_CULL_FACE);
 			}

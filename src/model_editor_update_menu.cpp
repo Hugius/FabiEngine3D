@@ -61,9 +61,9 @@ void ModelEditor::_updateChoiceMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
+			for(const auto& partId : _fe3d->model_getPartIDs(_currentModelID))
 			{
-				_fe3d->model_setWireframed(_currentModelID, partID, false);
+				_fe3d->model_setWireframed(_currentModelID, partId, false);
 			}
 
 			if(!_currentPartID.empty())
@@ -73,7 +73,7 @@ void ModelEditor::_updateChoiceMenu()
 			}
 
 			_fe3d->model_setVisible(_currentModelID, false);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			_currentModelID = "";
 			return;

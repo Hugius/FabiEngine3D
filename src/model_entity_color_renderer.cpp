@@ -141,9 +141,9 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));
 		_shader->uploadUniform("u_minTextureOpacity", MIN_TEXTURE_OPACITY);
 
-		if(!entity->getPreviousReflectionEntityID().empty())
+		if(!entity->getPreviousReflectionEntityId().empty())
 		{
-			const auto reflectionEntity = reflectionEntities.at(entity->getPreviousReflectionEntityID());
+			const auto reflectionEntity = reflectionEntities.at(entity->getPreviousReflectionEntityId());
 
 			if(reflectionEntity->getCubeMap() != nullptr)
 			{
@@ -151,9 +151,9 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 				glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntity->getCubeMap()->getId());
 			}
 		}
-		if(!entity->getCurrentReflectionEntityID().empty())
+		if(!entity->getCurrentReflectionEntityId().empty())
 		{
-			const auto reflectionEntity = reflectionEntities.at(entity->getCurrentReflectionEntityID());
+			const auto reflectionEntity = reflectionEntities.at(entity->getCurrentReflectionEntityId());
 
 			if(reflectionEntity->getCubeMap() != nullptr)
 			{
@@ -162,116 +162,116 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			}
 		}
 
-		for(const auto& partID : entity->getPartIDs())
+		for(const auto& partId : entity->getPartIDs())
 		{
-			_shader->uploadUniform("u_isReflective", entity->isReflective(partID));
-			_shader->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partID));
-			_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
-			_shader->uploadUniform("u_opacity", entity->getOpacity(partID));
-			_shader->uploadUniform("u_isSpecular", entity->isSpecular(partID));
-			_shader->uploadUniform("u_reflectivity", entity->getReflectivity(partID));
-			_shader->uploadUniform("u_lightness", entity->getLightness(partID));
-			_shader->uploadUniform("u_specularShininess", entity->getSpecularShininess(partID));
-			_shader->uploadUniform("u_specularIntensity", entity->getSpecularIntensity(partID));
-			_shader->uploadUniform("u_color", entity->getColor(partID));
-			_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor(partID));
-			_shader->uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap(partID));
-			_shader->uploadUniform("u_hasEmissionMap", entity->hasEmissionMap(partID));
-			_shader->uploadUniform("u_hasSpecularMap", entity->hasSpecularMap(partID));
-			_shader->uploadUniform("u_hasReflectionMap", entity->hasReflectionMap(partID));
-			_shader->uploadUniform("u_hasNormalMap", entity->hasNormalMap(partID));
-			_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
-			_shader->uploadUniform("u_normalTransformationMatrix", Math::transposeMatrix(Math::invertMatrix(mat33(entity->getTransformationMatrix(partID)))));
-			_shader->uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
-			_shader->uploadUniform("u_isWireframed", (entity->isWireframed(partID) || _renderBus->isWireframeRenderingEnabled()));
-			_shader->uploadUniform("u_isBright", entity->isBright(partID));
+			_shader->uploadUniform("u_isReflective", entity->isReflective(partId));
+			_shader->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partId));
+			_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
+			_shader->uploadUniform("u_opacity", entity->getOpacity(partId));
+			_shader->uploadUniform("u_isSpecular", entity->isSpecular(partId));
+			_shader->uploadUniform("u_reflectivity", entity->getReflectivity(partId));
+			_shader->uploadUniform("u_lightness", entity->getLightness(partId));
+			_shader->uploadUniform("u_specularShininess", entity->getSpecularShininess(partId));
+			_shader->uploadUniform("u_specularIntensity", entity->getSpecularIntensity(partId));
+			_shader->uploadUniform("u_color", entity->getColor(partId));
+			_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor(partId));
+			_shader->uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap(partId));
+			_shader->uploadUniform("u_hasEmissionMap", entity->hasEmissionMap(partId));
+			_shader->uploadUniform("u_hasSpecularMap", entity->hasSpecularMap(partId));
+			_shader->uploadUniform("u_hasReflectionMap", entity->hasReflectionMap(partId));
+			_shader->uploadUniform("u_hasNormalMap", entity->hasNormalMap(partId));
+			_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partId));
+			_shader->uploadUniform("u_normalTransformationMatrix", Math::transposeMatrix(Math::invertMatrix(mat33(entity->getTransformationMatrix(partId)))));
+			_shader->uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partId)));
+			_shader->uploadUniform("u_isWireframed", (entity->isWireframed(partId) || _renderBus->isWireframeRenderingEnabled()));
+			_shader->uploadUniform("u_isBright", entity->isBright(partId));
 
-			if(entity->isFaceCulled(partID))
+			if(entity->isFaceCulled(partId))
 			{
 				glEnable(GL_CULL_FACE);
 			}
 
-			if(entity->isWireframed(partID))
+			if(entity->isWireframed(partId))
 			{
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			}
 
-			if(entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE4);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID)->getId());
+				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partId)->getId());
 			}
-			if(entity->hasEmissionMap(partID))
+			if(entity->hasEmissionMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE5);
-				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partID)->getId());
+				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partId)->getId());
 			}
-			if(entity->hasSpecularMap(partID))
+			if(entity->hasSpecularMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE6);
-				glBindTexture(GL_TEXTURE_2D, entity->getSpecularMap(partID)->getId());
+				glBindTexture(GL_TEXTURE_2D, entity->getSpecularMap(partId)->getId());
 			}
-			if(entity->hasReflectionMap(partID))
+			if(entity->hasReflectionMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE7);
-				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partID)->getId());
+				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partId)->getId());
 			}
-			if(entity->hasNormalMap(partID))
+			if(entity->hasNormalMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE8);
-				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID)->getId());
+				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partId)->getId());
 			}
 
-			glBindVertexArray(entity->getMesh(partID)->getVaoID());
+			glBindVertexArray(entity->getMesh(partId)->getVaoID());
 
-			glDrawArrays(GL_TRIANGLES, 0, entity->getMesh(partID)->getVertexCount());
-			_renderBus->increaseTriangleCount(entity->getMesh(partID)->getVertexCount() / 3);
+			glDrawArrays(GL_TRIANGLES, 0, entity->getMesh(partId)->getVertexCount());
+			_renderBus->increaseTriangleCount(entity->getMesh(partId)->getVertexCount() / 3);
 
 			glBindVertexArray(0);
 
-			if(entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasEmissionMap(partID))
+			if(entity->hasEmissionMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasSpecularMap(partID))
+			if(entity->hasSpecularMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasReflectionMap(partID))
+			if(entity->hasReflectionMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasNormalMap(partID))
+			if(entity->hasNormalMap(partId))
 			{
 				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
-			if(entity->isWireframed(partID))
+			if(entity->isWireframed(partId))
 			{
 				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			}
 
-			if(entity->isFaceCulled(partID))
+			if(entity->isFaceCulled(partId))
 			{
 				glDisable(GL_CULL_FACE);
 			}
 		}
 
-		if(entity->getPreviousReflectionEntityID().empty())
+		if(entity->getPreviousReflectionEntityId().empty())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
-		if(entity->getCurrentReflectionEntityID().empty())
+		if(entity->getCurrentReflectionEntityId().empty())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);

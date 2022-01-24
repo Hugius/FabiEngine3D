@@ -24,7 +24,7 @@ public:
 	void setLensFlareMap(shared_ptr<TextureBuffer> value);
 	void setMotionBlurMap(shared_ptr<TextureBuffer> value);
 	void setFinalSceneMap(shared_ptr<TextureBuffer> value);
-	void setCursorEntityID(const string& value);
+	void setCursorEntityId(const string& value);
 	void setLensFlareMapPath(const string& value);
 	void setViewMatrix(const mat44& value);
 	void setProjectionMatrix(const mat44& value);
@@ -98,7 +98,7 @@ public:
 	void setShadowInterval(unsigned int value);
 	void setShadowsFollowingCamera(bool value);
 
-	const string& getCursorEntityID() const;
+	const string& getCursorEntityId() const;
 	const string& getLensFlareMapPath() const;
 
 	const mat44& getViewMatrix() const;
@@ -205,7 +205,7 @@ private:
 	shared_ptr<TextureBuffer> _finalSceneMap = nullptr;
 	shared_ptr<TextureBuffer> _motionBlurMap = nullptr;
 
-	string _cursorEntityID = "";
+	string _cursorEntityId = "";
 	string _lensFlareMapPath = "";
 
 	mat44 _viewMatrix = mat44(1.0f);

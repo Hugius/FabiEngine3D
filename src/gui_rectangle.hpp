@@ -15,7 +15,7 @@ public:
 	void updateInitialColor();
 
 	const string& getId() const;
-	const string& getEntityID() const;
+	const string& getEntityId() const;
 	const string& getParentID() const;
 
 	const fvec3& getInitialColor() const;
@@ -25,7 +25,7 @@ public:
 
 protected:
 	const string _ID;
-	const string _entityID;
+	const string _entityId;
 	const string _parentID;
 
 	fvec3 _initialColor;

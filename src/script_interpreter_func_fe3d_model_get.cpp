@@ -758,7 +758,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				const auto result = _fe3d->model_getLevelOfDetailEntityID(args[0].getString());
+				const auto result = _fe3d->model_getLevelOfDetailEntityId(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}

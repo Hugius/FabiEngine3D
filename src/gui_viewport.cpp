@@ -6,20 +6,20 @@ GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string& id, con
 	:
 	_fe3d(fe3d),
 	_ID(id),
-	_entityID("@" + id),
+	_entityId("@" + id),
 	_initialPosition(position),
 	_initialSize(size),
 	_initialColor(color)
 {
-	_fe3d->quad2d_create(_entityID, true);
-	_fe3d->quad2d_setPosition(_entityID, position);
-	_fe3d->quad2d_setSize(_entityID, size);
-	_fe3d->quad2d_setColor(_entityID, color);
+	_fe3d->quad2d_create(_entityId, true);
+	_fe3d->quad2d_setPosition(_entityId, position);
+	_fe3d->quad2d_setSize(_entityId, size);
+	_fe3d->quad2d_setColor(_entityId, color);
 }
 
 GuiViewport::~GuiViewport()
 {
-	_fe3d->quad2d_delete(_entityID);
+	_fe3d->quad2d_delete(_entityId);
 }
 
 void GuiViewport::update(bool isHoverable)
@@ -32,11 +32,11 @@ void GuiViewport::update(bool isHoverable)
 
 const bool GuiViewport::isHovered() const
 {
-	if(_fe3d->quad2d_isVisible(_entityID))
+	if(_fe3d->quad2d_isVisible(_entityId))
 	{
 		auto cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()));
-		auto buttonPosition = _fe3d->quad2d_getPosition(_entityID);
-		auto buttonSize = _fe3d->quad2d_getSize(_entityID);
+		auto buttonPosition = _fe3d->quad2d_getPosition(_entityId);
+		auto buttonSize = _fe3d->quad2d_getSize(_entityId);
 
 		if(cursorPosition.x > (buttonPosition.x - (buttonSize.x / 2.0f)))
 		{
@@ -61,9 +61,9 @@ const string& GuiViewport::getId()
 	return _ID;
 }
 
-const string& GuiViewport::getEntityID()
+const string& GuiViewport::getEntityId()
 {
-	return _entityID;
+	return _entityId;
 }
 
 const fvec3& GuiViewport::getInitialColor() const
@@ -83,8 +83,8 @@ const fvec2& GuiViewport::getInitialSize() const
 
 void GuiViewport::createWindow(const string& id, const fvec2& position, const fvec2& size, const fvec3& color)
 {
-	auto viewportPosition = _fe3d->quad2d_getPosition(_entityID);
-	auto viewportSize = _fe3d->quad2d_getSize(_entityID);
+	auto viewportPosition = _fe3d->quad2d_getPosition(_entityId);
+	auto viewportSize = _fe3d->quad2d_getSize(_entityId);
 	auto windowPosition = (viewportPosition + (position * viewportSize));
 	auto windowSize = ((size / 2.0f) * viewportSize);
 

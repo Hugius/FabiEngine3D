@@ -11,40 +11,40 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 		if(_isEditorLoaded)
 		{
-			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(animation.getFrameIndex() + 1), 0.025f);
+			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), "Frame: " + to_string(animation.getFrameIndex() + 1), 0.025f);
 		}
 
 		const auto frameIndex = animation.getFrameIndex();
 		auto frame = animation.getFrames()[frameIndex];
 
 		unsigned int finishedPartCount = 0;
-		for(const auto& partID : animation.getPartIDs())
+		for(const auto& partId : animation.getPartIDs())
 		{
 			if(!_fe3d->model_isExisting(key.second))
 			{
 				break;
 			}
 
-			auto totalMovement = animation.getTotalMovements().at(partID);
-			auto totalRotation = animation.getTotalRotations().at(partID);
-			auto totalScaling = animation.getTotalScalings().at(partID);
-			auto baseSpeed = frame.getSpeeds().at(partID);
+			auto totalMovement = animation.getTotalMovements().at(partId);
+			auto totalRotation = animation.getTotalRotations().at(partId);
+			auto totalScaling = animation.getTotalScalings().at(partId);
+			auto baseSpeed = frame.getSpeeds().at(partId);
 
 			const auto currentModelSize = _fe3d->model_getBaseSize(key.second);
-			const auto transformationType = frame.getTransformationTypes().at(partID);
+			const auto transformationType = frame.getTransformationTypes().at(partId);
 			const auto isMovement = (transformationType == TransformationType::MOVEMENT);
 			const auto isRotation = (transformationType == TransformationType::ROTATION);
 			const auto isScaling = (transformationType == TransformationType::SCALING);
-			const auto speedMultiplier = (partID.empty() || (isMovement || isScaling)) ? animation.getInitialSize() : fvec3(1.0f);
-			const auto speedType = frame.getSpeedTypes().at(partID);
-			const auto rotationOrigin = frame.getRotationOrigins().at(partID);
-			const auto currentSpeed = (frame.getSpeeds().at(partID) * animation.getSpeed());
+			const auto speedMultiplier = (partId.empty() || (isMovement || isScaling)) ? animation.getInitialSize() : fvec3(1.0f);
+			const auto speedType = frame.getSpeedTypes().at(partId);
+			const auto rotationOrigin = frame.getRotationOrigins().at(partId);
+			const auto currentSpeed = (frame.getSpeeds().at(partId) * animation.getSpeed());
 			const auto xSpeed = (!isRotation ? (speedMultiplier.x * currentSpeed.x) : currentSpeed.x);
 			const auto ySpeed = (!isRotation ? (speedMultiplier.y * currentSpeed.y) : currentSpeed.y);
 			const auto zSpeed = (!isRotation ? (speedMultiplier.z * currentSpeed.z) : currentSpeed.z);
-			const auto targetMovement = (animation.getInitialSize() * frame.getTargetTransformations().at(partID));
-			const auto targetRotation = frame.getTargetTransformations().at(partID);
-			const auto targetScaling = ((partID.empty() ? animation.getInitialSize() : fvec3(1.0f)) * frame.getTargetTransformations().at(partID));
+			const auto targetMovement = (animation.getInitialSize() * frame.getTargetTransformations().at(partId));
+			const auto targetRotation = frame.getTargetTransformations().at(partId);
+			const auto targetScaling = ((partId.empty() ? animation.getInitialSize() : fvec3(1.0f)) * frame.getTargetTransformations().at(partId));
 			const auto targetTransformation = (isMovement ? targetMovement : isRotation ? targetRotation : targetScaling);
 
 			if(((isMovement && _hasReachedFloat(totalMovement.x, targetTransformation.x, xSpeed)) &&
@@ -126,37 +126,37 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 					if(transformationType == TransformationType::MOVEMENT)
 					{
-						if(partID.empty())
+						if(partId.empty())
 						{
 							_fe3d->model_moveBase(key.second, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 						}
 						else
 						{
-							_fe3d->model_movePart(key.second, partID, fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							_fe3d->model_movePart(key.second, partId, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 						}
 					}
 					else if(transformationType == TransformationType::ROTATION)
 					{
-						if(partID.empty())
+						if(partId.empty())
 						{
 							_fe3d->model_setBaseRotationOrigin(key.second, (currentModelSize * rotationOrigin));
 							_fe3d->model_rotateBase(key.second, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 						}
 						else
 						{
-							_fe3d->model_setPartRotationOrigin(key.second, partID, (currentModelSize * rotationOrigin));
-							_fe3d->model_rotatePart(key.second, partID, fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							_fe3d->model_setPartRotationOrigin(key.second, partId, (currentModelSize * rotationOrigin));
+							_fe3d->model_rotatePart(key.second, partId, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 						}
 					}
 					else if(transformationType == TransformationType::SCALING)
 					{
-						if(partID.empty())
+						if(partId.empty())
 						{
 							_fe3d->model_scaleBase(key.second, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 						}
 						else
 						{
-							_fe3d->model_scalePart(key.second, partID, fvec3((finalSpeed - difference), 0.0f, 0.0f));
+							_fe3d->model_scalePart(key.second, partId, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 						}
 					}
 				}
@@ -224,37 +224,37 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 					if(transformationType == TransformationType::MOVEMENT)
 					{
-						if(partID.empty())
+						if(partId.empty())
 						{
 							_fe3d->model_moveBase(key.second, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 						}
 						else
 						{
-							_fe3d->model_movePart(key.second, partID, fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							_fe3d->model_movePart(key.second, partId, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 						}
 					}
 					else if(transformationType == TransformationType::ROTATION)
 					{
-						if(partID.empty())
+						if(partId.empty())
 						{
 							_fe3d->model_setBaseRotationOrigin(key.second, (currentModelSize * rotationOrigin));
 							_fe3d->model_rotateBase(key.second, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 						}
 						else
 						{
-							_fe3d->model_setPartRotationOrigin(key.second, partID, (currentModelSize * rotationOrigin));
-							_fe3d->model_rotatePart(key.second, partID, fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							_fe3d->model_setPartRotationOrigin(key.second, partId, (currentModelSize * rotationOrigin));
+							_fe3d->model_rotatePart(key.second, partId, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 						}
 					}
 					else if(transformationType == TransformationType::SCALING)
 					{
-						if(partID.empty())
+						if(partId.empty())
 						{
 							_fe3d->model_scaleBase(key.second, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 						}
 						else
 						{
-							_fe3d->model_scalePart(key.second, partID, fvec3(0.0f, (finalSpeed - difference), 0.0f));
+							_fe3d->model_scalePart(key.second, partId, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 						}
 					}
 				}
@@ -322,48 +322,48 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 					if(transformationType == TransformationType::MOVEMENT)
 					{
-						if(partID.empty())
+						if(partId.empty())
 						{
 							_fe3d->model_moveBase(key.second, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 						}
 						else
 						{
-							_fe3d->model_movePart(key.second, partID, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
+							_fe3d->model_movePart(key.second, partId, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 						}
 					}
 					else if(transformationType == TransformationType::ROTATION)
 					{
-						if(partID.empty())
+						if(partId.empty())
 						{
 							_fe3d->model_setBaseRotationOrigin(key.second, (currentModelSize * rotationOrigin));
 							_fe3d->model_rotateBase(key.second, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 						}
 						else
 						{
-							_fe3d->model_setPartRotationOrigin(key.second, partID, (currentModelSize * rotationOrigin));
-							_fe3d->model_rotatePart(key.second, partID, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
+							_fe3d->model_setPartRotationOrigin(key.second, partId, (currentModelSize * rotationOrigin));
+							_fe3d->model_rotatePart(key.second, partId, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 						}
 					}
 					else if(transformationType == TransformationType::SCALING)
 					{
-						if(partID.empty())
+						if(partId.empty())
 						{
 							_fe3d->model_scaleBase(key.second, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 						}
 						else
 						{
-							_fe3d->model_scalePart(key.second, partID, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
+							_fe3d->model_scalePart(key.second, partId, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 						}
 
 					}
 				}
 			}
 
-			animation.setTotalMovement(partID, totalMovement);
-			animation.setTotalRotation(partID, totalRotation);
-			animation.setTotalScaling(partID, totalScaling);
+			animation.setTotalMovement(partId, totalMovement);
+			animation.setTotalRotation(partId, totalRotation);
+			animation.setTotalScaling(partId, totalScaling);
 
-			frame.setSpeed(partID, baseSpeed);
+			frame.setSpeed(partId, baseSpeed);
 		}
 
 		animation.setFrame(frameIndex, frame);

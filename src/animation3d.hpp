@@ -14,11 +14,11 @@ public:
 	void addFrame(const Animation3dFrame& value);
 	void setFrame(unsigned int index, const Animation3dFrame& value);
 	void setFrames(const vector<Animation3dFrame>& value);
-	void addPart(const string& partID, const fvec3& totalMovement, const fvec3& totalRotation, const fvec3& totalScaling);
+	void addPart(const string& partId, const fvec3& totalMovement, const fvec3& totalRotation, const fvec3& totalScaling);
 	void setPreviewModelID(const string& value);
-	void setTotalMovement(const string& partID, const fvec3& value);
-	void setTotalRotation(const string& partID, const fvec3& value);
-	void setTotalScaling(const string& partID, const fvec3& value);
+	void setTotalMovement(const string& partId, const fvec3& value);
+	void setTotalRotation(const string& partId, const fvec3& value);
+	void setTotalScaling(const string& partId, const fvec3& value);
 	void setInitialSize(const fvec3& value);
 	void setSpeed(float value);
 	void setPlayCount(int value);
@@ -48,7 +48,7 @@ public:
 
 private:
 	const string _ID;
-	vector<string> _partIDs;
+	vector<string> _partIds;
 	string _previewModelID = "";
 
 	map<string, fvec3> _totalMovements;

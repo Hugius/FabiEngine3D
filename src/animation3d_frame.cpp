@@ -11,38 +11,38 @@ void Animation3dFrame::deleteParts()
 	_transformationTypes.clear();
 }
 
-void Animation3dFrame::addPart(const string& partID, const fvec3& targetTransformation, const fvec3& rotationOrigin, const fvec3& speed, Animation3dSpeedType animationSpeedType, TransformationType transformationType)
+void Animation3dFrame::addPart(const string& partId, const fvec3& targetTransformation, const fvec3& rotationOrigin, const fvec3& speed, Animation3dSpeedType animationSpeedType, TransformationType transformationType)
 {
-	_targetTransformations.insert(make_pair(partID, targetTransformation));
-	_rotationOrigins.insert(make_pair(partID, rotationOrigin));
-	_speeds.insert(make_pair(partID, speed));
-	_speedTypes.insert(make_pair(partID, animationSpeedType));
-	_transformationTypes.insert(make_pair(partID, transformationType));
+	_targetTransformations.insert(make_pair(partId, targetTransformation));
+	_rotationOrigins.insert(make_pair(partId, rotationOrigin));
+	_speeds.insert(make_pair(partId, speed));
+	_speedTypes.insert(make_pair(partId, animationSpeedType));
+	_transformationTypes.insert(make_pair(partId, transformationType));
 }
 
-void Animation3dFrame::setTargetTransformation(const string& partID, const fvec3& value)
+void Animation3dFrame::setTargetTransformation(const string& partId, const fvec3& value)
 {
-	_targetTransformations.at(partID) = value;
+	_targetTransformations.at(partId) = value;
 }
 
-void Animation3dFrame::setRotationOrigin(const string& partID, const fvec3& value)
+void Animation3dFrame::setRotationOrigin(const string& partId, const fvec3& value)
 {
-	_rotationOrigins.at(partID) = value;
+	_rotationOrigins.at(partId) = value;
 }
 
-void Animation3dFrame::setSpeed(const string& partID, const fvec3& value)
+void Animation3dFrame::setSpeed(const string& partId, const fvec3& value)
 {
-	_speeds.at(partID) = value;
+	_speeds.at(partId) = value;
 }
 
-void Animation3dFrame::setSpeedType(const string& partID, Animation3dSpeedType value)
+void Animation3dFrame::setSpeedType(const string& partId, Animation3dSpeedType value)
 {
-	_speedTypes.at(partID) = value;
+	_speedTypes.at(partId) = value;
 }
 
-void Animation3dFrame::setTransformationType(const string& partID, TransformationType value)
+void Animation3dFrame::setTransformationType(const string& partId, TransformationType value)
 {
-	_transformationTypes.at(partID) = value;
+	_transformationTypes.at(partId) = value;
 }
 
 const map<string, fvec3>& Animation3dFrame::getTargetTransformations() const

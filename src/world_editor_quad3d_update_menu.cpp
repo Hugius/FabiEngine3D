@@ -12,7 +12,7 @@ void WorldEditor::_updateQuad3dMenu()
 		{
 			if(!_currentTemplateQuadID.empty())
 			{
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), false);
 				_fe3d->quad3d_setVisible(_currentTemplateQuadID, false);
 				_currentTemplateQuadID = "";
 			}
@@ -79,8 +79,8 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 
 						_currentTemplateQuadID = quadID;
 						_fe3d->quad3d_setVisible(_currentTemplateQuadID, true);
-						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
-						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad3d: " + _currentTemplateQuadID.substr(1), 0.025f);
+						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), true);
+						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityId(), "Quad3d: " + _currentTemplateQuadID.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedID().empty())

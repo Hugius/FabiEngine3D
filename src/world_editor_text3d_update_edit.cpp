@@ -173,7 +173,7 @@ void WorldEditor::_updateText3dEditing()
 
 		if(_selectedTextID.empty() && _activeTextID.empty())
 		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), false);
 		}
 	}
 }

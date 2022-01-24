@@ -5,9 +5,9 @@
 #include <chrono>
 #include <filesystem>
 
-void EngineInterface::misc_setCursorEntityID(const string& value)
+void EngineInterface::misc_setCursorEntityId(const string& value)
 {
-	_core->getRenderBus()->setCursorEntityID(value);
+	_core->getRenderBus()->setCursorEntityId(value);
 }
 
 void EngineInterface::misc_enableWireframeRendering()
@@ -390,9 +390,9 @@ const vector<pair<string, int>> EngineInterface::misc_getRenderProfilingStatisti
 	return result;
 }
 
-const string EngineInterface::misc_getCursorEntityID() const
+const string EngineInterface::misc_getCursorEntityId() const
 {
-	return _core->getRenderBus()->getCursorEntityID();
+	return _core->getRenderBus()->getCursorEntityId();
 }
 
 const bool EngineInterface::misc_isVsyncEnabled() const

@@ -63,7 +63,7 @@ void Text3dEditor::_updateChoiceMenu()
 		{
 			_fe3d->text3d_setWireframed(_currentTextID, false);
 			_fe3d->text3d_setVisible(_currentTextID, false);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), false);
 			_currentTextID = "";
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuMain");
 			return;

@@ -161,9 +161,9 @@ void MasterRenderer::_renderOpaqueModelEntities()
 		{
 			bool isTransparent = false;
 
-			for(const auto& partID : modelEntity->getPartIDs())
+			for(const auto& partId : modelEntity->getPartIDs())
 			{
-				if(modelEntity->getOpacity(partID) < 1.0f)
+				if(modelEntity->getOpacity(partId) < 1.0f)
 				{
 					isTransparent = true;
 				}
@@ -176,7 +176,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 			if(modelEntity->isLevelOfDetailed())
 			{
-				const auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
+				const auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityId())->second;
 				const auto originalPosition = levelOfDetailEntity->getBasePosition();
 				const auto originalRotation = levelOfDetailEntity->getBaseRotation();
 				const auto originalSize = levelOfDetailEntity->getBaseSize();
@@ -222,9 +222,9 @@ void MasterRenderer::_renderTransparentModelEntities()
 		{
 			bool isTransparent = false;
 
-			for(const auto& partID : modelEntity->getPartIDs())
+			for(const auto& partId : modelEntity->getPartIDs())
 			{
-				if(modelEntity->getOpacity(partID) < 1.0f)
+				if(modelEntity->getOpacity(partId) < 1.0f)
 				{
 					isTransparent = true;
 					break;
@@ -238,7 +238,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 			if(modelEntity->isLevelOfDetailed())
 			{
-				const auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
+				const auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityId())->second;
 				const auto originalPosition = levelOfDetailEntity->getBasePosition();
 				const auto originalRotation = levelOfDetailEntity->getBaseRotation();
 				const auto originalSize = levelOfDetailEntity->getBaseSize();
@@ -400,7 +400,7 @@ void MasterRenderer::_renderGUI()
 		map<unsigned int, shared_ptr<BaseEntity>> orderedEntityMap;
 		for(const auto& [key, entity] : _quad2dEntityManager->getEntities())
 		{
-			if(entity->getId() != _renderBus->getCursorEntityID())
+			if(entity->getId() != _renderBus->getCursorEntityId())
 			{
 				orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
 			}
@@ -429,9 +429,9 @@ void MasterRenderer::_renderGUI()
 			}
 		}
 
-		if(!_renderBus->getCursorEntityID().empty())
+		if(!_renderBus->getCursorEntityId().empty())
 		{
-			_quad2dEntityColorRenderer.render(_quad2dEntityManager->getEntities().at(_renderBus->getCursorEntityID()));
+			_quad2dEntityColorRenderer.render(_quad2dEntityManager->getEntities().at(_renderBus->getCursorEntityId()));
 		}
 
 		_quad2dEntityColorRenderer.unbind();

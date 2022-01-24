@@ -9,11 +9,11 @@ void WorldEditor::_updateModelHighlighting(const string& id, int& direction)
 
 	if(!id.empty())
 	{
-		auto partIDs = _fe3d->model_getPartIDs(id);
+		auto partIds = _fe3d->model_getPartIDs(id);
 
-		for(size_t i = 0; i < partIDs.size(); i++)
+		for(size_t i = 0; i < partIds.size(); i++)
 		{
-			auto opacity = _fe3d->model_getOpacity(id, partIDs[i]);
+			auto opacity = _fe3d->model_getOpacity(id, partIds[i]);
 
 			if((opacity == 0.0f) && (i == 0))
 			{
@@ -24,7 +24,7 @@ void WorldEditor::_updateModelHighlighting(const string& id, int& direction)
 				direction *= -1;
 			}
 			const float speed = (MODEL_HIGHLIGHT_SPEED * static_cast<float>(direction));
-			_fe3d->model_setOpacity(id, partIDs[i], (opacity + speed));
+			_fe3d->model_setOpacity(id, partIds[i], (opacity + speed));
 		}
 	}
 }

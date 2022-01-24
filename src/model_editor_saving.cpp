@@ -29,7 +29,7 @@ const bool ModelEditor::saveToFile() const
 		auto isMultiParted = _fe3d->model_isMultiParted(modelID);
 		auto meshPath = _fe3d->model_getMeshPath(modelID);
 		auto modelSize = _fe3d->model_getBaseSize(modelID);
-		auto levelOfDetailEntityID = _fe3d->model_getLevelOfDetailEntityID(modelID);
+		auto levelOfDetailEntityId = _fe3d->model_getLevelOfDetailEntityId(modelID);
 		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(modelID);
 		auto rotationOrder = static_cast<unsigned int>(_fe3d->model_getRotationOrder(modelID));
 		auto isShadowed = _fe3d->model_isShadowed(modelID);
@@ -38,10 +38,10 @@ const bool ModelEditor::saveToFile() const
 		meshPath = string(meshPath.empty() ? "" : meshPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
-		levelOfDetailEntityID = (levelOfDetailEntityID.empty()) ? "?" : levelOfDetailEntityID;
+		levelOfDetailEntityId = (levelOfDetailEntityId.empty()) ? "?" : levelOfDetailEntityId;
 
 		replace(meshPath.begin(), meshPath.end(), ' ', '?');
-		replace(levelOfDetailEntityID.begin(), levelOfDetailEntityID.end(), ' ', '?');
+		replace(levelOfDetailEntityId.begin(), levelOfDetailEntityId.end(), ' ', '?');
 
 		file << "MODEL " <<
 			modelID << " " <<
@@ -49,7 +49,7 @@ const bool ModelEditor::saveToFile() const
 			modelSize.x << " " <<
 			modelSize.y << " " <<
 			modelSize.z << " " <<
-			levelOfDetailEntityID << " " <<
+			levelOfDetailEntityId << " " <<
 			levelOfDetailDistance << " " <<
 			rotationOrder << " " <<
 			isShadowed << " " <<
@@ -57,28 +57,28 @@ const bool ModelEditor::saveToFile() const
 
 		file << " ";
 
-		auto partIDs = _fe3d->model_getPartIDs(modelID);
-		for(size_t i = 0; i < partIDs.size(); i++)
+		auto partIds = _fe3d->model_getPartIDs(modelID);
+		for(size_t i = 0; i < partIds.size(); i++)
 		{
-			auto partID = partIDs[i];
-			auto diffuseMapPath = _fe3d->model_getDiffuseMapPath(modelID, partID);
-			auto emissionMapPath = _fe3d->model_getEmissionMapPath(modelID, partID);
-			auto specularMapPath = _fe3d->model_getSpecularMapPath(modelID, partID);
-			auto reflectionMapPath = _fe3d->model_getReflectionMapPath(modelID, partID);
-			auto normalMapPath = _fe3d->model_getNormalMapPath(modelID, partID);
-			auto isSpecular = _fe3d->model_isSpecular(modelID, partID);
-			auto specularShininess = _fe3d->model_getSpecularShininess(modelID, partID);
-			auto specularIntensity = _fe3d->model_getSpecularIntensity(modelID, partID);
-			auto reflectivity = _fe3d->model_getReflectivity(modelID, partID);
-			auto lightness = _fe3d->model_getLightness(modelID, partID);
-			auto color = _fe3d->model_getColor(modelID, partID);
-			auto textureRepeat = _fe3d->model_getTextureRepeat(modelID, partID);
-			auto isReflective = _fe3d->model_isReflective(modelID, partID);
-			auto reflectionType = static_cast<unsigned int>(_fe3d->model_getReflectionType(modelID, partID));
-			auto isFaceCulled = _fe3d->model_isFaceCulled(modelID, partID);
-			auto isBright = _fe3d->model_isBright(modelID, partID);
-			auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelID, partID);
-			auto opacity = _fe3d->model_getOpacity(modelID, partID);
+			auto partId = partIds[i];
+			auto diffuseMapPath = _fe3d->model_getDiffuseMapPath(modelID, partId);
+			auto emissionMapPath = _fe3d->model_getEmissionMapPath(modelID, partId);
+			auto specularMapPath = _fe3d->model_getSpecularMapPath(modelID, partId);
+			auto reflectionMapPath = _fe3d->model_getReflectionMapPath(modelID, partId);
+			auto normalMapPath = _fe3d->model_getNormalMapPath(modelID, partId);
+			auto isSpecular = _fe3d->model_isSpecular(modelID, partId);
+			auto specularShininess = _fe3d->model_getSpecularShininess(modelID, partId);
+			auto specularIntensity = _fe3d->model_getSpecularIntensity(modelID, partId);
+			auto reflectivity = _fe3d->model_getReflectivity(modelID, partId);
+			auto lightness = _fe3d->model_getLightness(modelID, partId);
+			auto color = _fe3d->model_getColor(modelID, partId);
+			auto textureRepeat = _fe3d->model_getTextureRepeat(modelID, partId);
+			auto isReflective = _fe3d->model_isReflective(modelID, partId);
+			auto reflectionType = static_cast<unsigned int>(_fe3d->model_getReflectionType(modelID, partId));
+			auto isFaceCulled = _fe3d->model_isFaceCulled(modelID, partId);
+			auto isBright = _fe3d->model_isBright(modelID, partId);
+			auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelID, partId);
+			auto opacity = _fe3d->model_getOpacity(modelID, partId);
 
 			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 			emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
@@ -86,7 +86,7 @@ const bool ModelEditor::saveToFile() const
 			reflectionMapPath = string(reflectionMapPath.empty() ? "" : reflectionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 			normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
-			partID = (partID.empty()) ? "?" : partID;
+			partId = (partId.empty()) ? "?" : partId;
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 			emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
 			specularMapPath = (specularMapPath.empty()) ? "?" : specularMapPath;
@@ -100,7 +100,7 @@ const bool ModelEditor::saveToFile() const
 			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 
 			file <<
-				partID << " " <<
+				partId << " " <<
 				diffuseMapPath << " " <<
 				emissionMapPath << " " <<
 				specularMapPath << " " <<
@@ -122,7 +122,7 @@ const bool ModelEditor::saveToFile() const
 				emissionIntensity << " " <<
 				opacity;
 
-			if(i < (partIDs.size() - 1))
+			if(i < (partIds.size() - 1))
 			{
 				file << " ";
 			}

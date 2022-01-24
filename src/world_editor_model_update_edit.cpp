@@ -136,14 +136,14 @@ void WorldEditor::_updateModelEditing()
 					_fe3d->model_setBaseRotation(_activeModelID, _initialModelRotation.at(_activeModelID));
 					_fe3d->model_setBaseSize(_activeModelID, _initialModelSize.at(_activeModelID));
 
-					for(const auto& partID : _fe3d->model_getPartIDs(_activeModelID))
+					for(const auto& partId : _fe3d->model_getPartIDs(_activeModelID))
 					{
-						if(!partID.empty())
+						if(!partId.empty())
 						{
-							_fe3d->model_setPartPosition(_activeModelID, partID, fvec3(0.0f));
-							_fe3d->model_setPartRotationOrigin(_activeModelID, partID, fvec3(0.0f));
-							_fe3d->model_setPartRotation(_activeModelID, partID, fvec3(0.0f));
-							_fe3d->model_setPartSize(_activeModelID, partID, fvec3(1.0f));
+							_fe3d->model_setPartPosition(_activeModelID, partId, fvec3(0.0f));
+							_fe3d->model_setPartRotationOrigin(_activeModelID, partId, fvec3(0.0f));
+							_fe3d->model_setPartRotation(_activeModelID, partId, fvec3(0.0f));
+							_fe3d->model_setPartSize(_activeModelID, partId, fvec3(1.0f));
 						}
 					}
 				}
@@ -219,14 +219,14 @@ void WorldEditor::_updateModelEditing()
 					_fe3d->model_setBaseRotation(_activeModelID, _initialModelRotation.at(_activeModelID));
 					_fe3d->model_setBaseSize(_activeModelID, _initialModelSize.at(_activeModelID));
 
-					for(const auto& partID : _fe3d->model_getPartIDs(_activeModelID))
+					for(const auto& partId : _fe3d->model_getPartIDs(_activeModelID))
 					{
-						if(!partID.empty())
+						if(!partId.empty())
 						{
-							_fe3d->model_setPartPosition(_activeModelID, partID, fvec3(0.0f));
-							_fe3d->model_setPartRotationOrigin(_activeModelID, partID, fvec3(0.0f));
-							_fe3d->model_setPartRotation(_activeModelID, partID, fvec3(0.0f));
-							_fe3d->model_setPartSize(_activeModelID, partID, fvec3(1.0f));
+							_fe3d->model_setPartPosition(_activeModelID, partId, fvec3(0.0f));
+							_fe3d->model_setPartRotationOrigin(_activeModelID, partId, fvec3(0.0f));
+							_fe3d->model_setPartRotation(_activeModelID, partId, fvec3(0.0f));
+							_fe3d->model_setPartSize(_activeModelID, partId, fvec3(1.0f));
 						}
 					}
 
@@ -250,7 +250,7 @@ void WorldEditor::_updateModelEditing()
 
 		if(_selectedModelID.empty() && _activeModelID.empty())
 		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), false);
 		}
 	}
 }

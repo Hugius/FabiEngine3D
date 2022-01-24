@@ -138,9 +138,9 @@ void AabbEntity::scaleTo(const fvec3& target, float speed)
 	_sizeTargetSpeed = speed;
 }
 
-void AabbEntity::setParentEntityID(const string& value)
+void AabbEntity::setParentEntityId(const string& value)
 {
-	_parentEntityID = value;
+	_parentEntityId = value;
 }
 
 void AabbEntity::setParentEntityType(AabbParentEntityType value)
@@ -193,9 +193,9 @@ const fvec3& AabbEntity::getColor() const
 	return _color;
 }
 
-const string& AabbEntity::getParentEntityID() const
+const string& AabbEntity::getParentEntityId() const
 {
-	return _parentEntityID;
+	return _parentEntityId;
 }
 
 const AabbParentEntityType AabbEntity::getParentEntityType() const
@@ -225,7 +225,7 @@ const bool AabbEntity::isCollisionResponsive() const
 
 const bool AabbEntity::hasParent() const
 {
-	return !_parentEntityID.empty();
+	return !_parentEntityId.empty();
 }
 
 const bool AabbEntity::hasCollided() const

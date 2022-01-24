@@ -28,7 +28,7 @@ void WorldEditor::_updateText3dPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextID, false);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), false);
 				_currentTemplateTextID = "";
 			}
 		}
@@ -49,7 +49,7 @@ void WorldEditor::_updateText3dPlacing()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextID, false);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), false);
 				_currentTemplateTextID = "";
 				return;
 			}

@@ -63,7 +63,7 @@ void Quad3dEditor::_updateChoiceMenu()
 		{
 			_fe3d->quad3d_setWireframed(_currentQuadID, false);
 			_fe3d->quad3d_setVisible(_currentQuadID, false);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), false);
 			_currentQuadID = "";
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuMain");
 			return;

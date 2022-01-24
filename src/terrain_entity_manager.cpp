@@ -17,12 +17,12 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& id)
 
 shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedEntity()
 {
-	if(_entities.empty() || _selectedEntityID.empty())
+	if(_entities.empty() || _selectedEntityId.empty())
 	{
 		return nullptr;
 	}
 
-	return getEntity(_selectedEntityID);
+	return getEntity(_selectedEntityId);
 }
 
 const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::getEntities()
@@ -86,7 +86,7 @@ void TerrainEntityManager::selectEntity(const string& id)
 		Logger::throwError("TerrainEntityManager::selectTerrain");
 	}
 
-	_selectedEntityID = id;
+	_selectedEntityId = id;
 }
 
 void TerrainEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
@@ -103,7 +103,7 @@ void TerrainEntityManager::deleteEntity(const string& id)
 
 	_entities.erase(id);
 
-	if(id == _selectedEntityID)
+	if(id == _selectedEntityId)
 	{
 		selectEntity("");
 	}

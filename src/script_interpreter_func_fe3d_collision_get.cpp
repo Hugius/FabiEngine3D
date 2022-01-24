@@ -44,18 +44,18 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					{
 						if(args[1].getString().empty())
 						{
-							result = _fe3d->aabb_getParentEntityID(foundAabbID);
+							result = _fe3d->aabb_getParentEntityId(foundAabbID);
 						}
 						else
 						{
-							string partID = foundAabbID;
-							reverse(partID.begin(), partID.end());
-							partID = partID.substr(0, partID.find('@'));
-							reverse(partID.begin(), partID.end());
+							string partId = foundAabbID;
+							reverse(partId.begin(), partId.end());
+							partId = partId.substr(0, partId.find('@'));
+							reverse(partId.begin(), partId.end());
 
-							if(partID == args[1].getString())
+							if(partId == args[1].getString())
 							{
-								result = _fe3d->aabb_getParentEntityID(foundAabbID);
+								result = _fe3d->aabb_getParentEntityId(foundAabbID);
 							}
 						}
 					}
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					   (directionZ && args[0].getString() == "Z") ||
 					   ((directionX || directionY || directionZ) && args[0].getString().empty()))
 					{
-						result = _fe3d->aabb_getParentEntityID(foundAabbID);
+						result = _fe3d->aabb_getParentEntityId(foundAabbID);
 					}
 				}
 			}
@@ -131,7 +131,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					   (directionZ && args[1].getString() == "Z") ||
 					   ((directionX || directionY || directionZ) && args[1].getString().empty()))
 					{
-						result = _fe3d->aabb_getParentEntityID(foundAabbID);
+						result = _fe3d->aabb_getParentEntityId(foundAabbID);
 					}
 				}
 			}
@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					   (directionZ && args[0].getString() == "Z") ||
 					   ((directionX || directionY || directionZ) && args[0].getString().empty()))
 					{
-						result = _fe3d->aabb_getParentEntityID(foundAabbID);
+						result = _fe3d->aabb_getParentEntityId(foundAabbID);
 					}
 				}
 			}
@@ -204,7 +204,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					   (directionZ && args[1].getString() == "Z") ||
 					   ((directionX || directionY || directionZ) && args[1].getString().empty()))
 					{
-						result = _fe3d->aabb_getParentEntityID(foundAabbID);
+						result = _fe3d->aabb_getParentEntityId(foundAabbID);
 					}
 				}
 			}
@@ -239,7 +239,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					   (directionZ && args[0].getString() == "Z") ||
 					   ((directionX || directionY || directionZ) && args[0].getString().empty()))
 					{
-						result = _fe3d->aabb_getParentEntityID(foundAabbID);
+						result = _fe3d->aabb_getParentEntityId(foundAabbID);
 					}
 				}
 			}
@@ -342,12 +342,12 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 							}
 							else
 							{
-								string partID = foundAabbID;
-								reverse(partID.begin(), partID.end());
-								partID = partID.substr(0, partID.find('@'));
-								reverse(partID.begin(), partID.end());
+								string partId = foundAabbID;
+								reverse(partId.begin(), partId.end());
+								partId = partId.substr(0, partId.find('@'));
+								reverse(partId.begin(), partId.end());
 
-								if(partID == args[1].getString())
+								if(partId == args[1].getString())
 								{
 									result = foundAabbID;
 								}
@@ -381,12 +381,12 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 						}
 						else
 						{
-							string partID = foundAabbID;
-							reverse(partID.begin(), partID.end());
-							partID = partID.substr(0, partID.find('@'));
-							reverse(partID.begin(), partID.end());
+							string partId = foundAabbID;
+							reverse(partId.begin(), partId.end());
+							partId = partId.substr(0, partId.find('@'));
+							reverse(partId.begin(), partId.end());
 
-							if(partID == args[1].getString())
+							if(partId == args[1].getString())
 							{
 								result = foundAabbID;
 							}

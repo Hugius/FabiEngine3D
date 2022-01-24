@@ -121,18 +121,18 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				{
 					if(args[1].getString().empty())
 					{
-						result = _fe3d->aabb_getParentEntityID(foundAabbID);
+						result = _fe3d->aabb_getParentEntityId(foundAabbID);
 					}
 					else
 					{
-						string partID = foundAabbID;
-						reverse(partID.begin(), partID.end());
-						partID = partID.substr(0, partID.find('@'));
-						reverse(partID.begin(), partID.end());
+						string partId = foundAabbID;
+						reverse(partId.begin(), partId.end());
+						partId = partId.substr(0, partId.find('@'));
+						reverse(partId.begin(), partId.end());
 
-						if(partID == args[1].getString())
+						if(partId == args[1].getString())
 						{
-							result = _fe3d->aabb_getParentEntityID(foundAabbID);
+							result = _fe3d->aabb_getParentEntityId(foundAabbID);
 						}
 					}
 				}
@@ -162,12 +162,12 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 					}
 					else
 					{
-						string partID = foundAabbID;
-						reverse(partID.begin(), partID.end());
-						partID = partID.substr(0, partID.find('@'));
-						reverse(partID.begin(), partID.end());
+						string partId = foundAabbID;
+						reverse(partId.begin(), partId.end());
+						partId = partId.substr(0, partId.find('@'));
+						reverse(partId.begin(), partId.end());
 
-						if(partID == args[1].getString())
+						if(partId == args[1].getString())
 						{
 							result = foundDistance;
 						}
@@ -189,7 +189,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			{
 				if(_fe3d->aabb_hasParent(foundAabbID) && (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 				{
-					result = _fe3d->aabb_getParentEntityID(foundAabbID);
+					result = _fe3d->aabb_getParentEntityId(foundAabbID);
 				}
 			}
 
@@ -227,7 +227,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			{
 				if(_fe3d->aabb_hasParent(foundAabbID) && (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::QUAD3D))
 				{
-					result = _fe3d->aabb_getParentEntityID(foundAabbID);
+					result = _fe3d->aabb_getParentEntityId(foundAabbID);
 				}
 			}
 
@@ -245,7 +245,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			{
 				if(_fe3d->aabb_hasParent(foundAabbID) && (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::QUAD3D))
 				{
-					result = _fe3d->aabb_getParentEntityID(foundAabbID);
+					result = _fe3d->aabb_getParentEntityId(foundAabbID);
 				}
 			}
 
@@ -303,7 +303,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			{
 				if(_fe3d->aabb_hasParent(foundAabbID) && (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::TEXT3D))
 				{
-					result = _fe3d->aabb_getParentEntityID(foundAabbID);
+					result = _fe3d->aabb_getParentEntityId(foundAabbID);
 				}
 			}
 
@@ -321,7 +321,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			{
 				if(_fe3d->aabb_hasParent(foundAabbID) && (_fe3d->aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::TEXT3D))
 				{
-					result = _fe3d->aabb_getParentEntityID(foundAabbID);
+					result = _fe3d->aabb_getParentEntityId(foundAabbID);
 				}
 			}
 

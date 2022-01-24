@@ -44,7 +44,7 @@ void WorldEditor::_updateSoundPlacing()
 					_fe3d->model_setBright(newModelID, "", true);
 
 					_fe3d->aabb_create(newModelID, true);
-					_fe3d->aabb_setParentEntityID(newModelID, newModelID);
+					_fe3d->aabb_setParentEntityId(newModelID, newModelID);
 					_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 					_fe3d->aabb_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
 					_fe3d->aabb_setCollisionResponsive(newModelID, false);
@@ -55,7 +55,7 @@ void WorldEditor::_updateSoundPlacing()
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 				_fe3d->sound3d_stop(_currentTemplateSoundID, 0);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), false);
 				_currentTemplateSoundID = "";
 			}
 		}
@@ -85,7 +85,7 @@ void WorldEditor::_updateSoundPlacing()
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 				_fe3d->sound3d_stop(_currentTemplateSoundID, 0);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), false);
 				_currentTemplateSoundID = "";
 				return;
 			}
@@ -139,7 +139,7 @@ void WorldEditor::_updateSoundPlacing()
 					_fe3d->model_setBright(newModelID, "", true);
 
 					_fe3d->aabb_create(newModelID, true);
-					_fe3d->aabb_setParentEntityID(newModelID, newModelID);
+					_fe3d->aabb_setParentEntityId(newModelID, newModelID);
 					_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 					_fe3d->aabb_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
 					_fe3d->aabb_setCollisionResponsive(newModelID, false);

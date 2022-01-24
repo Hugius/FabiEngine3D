@@ -67,7 +67,7 @@ void Animation2dEditor::_updateChoiceMenu()
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
 
 			_currentAnimationID = "";
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityId(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 			return;
 		}

@@ -32,7 +32,7 @@ private:
 
 	float _getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixels);
 
-	string _selectedEntityID = "";
+	string _selectedEntityId = "";
 
 	static inline constexpr float MAX_SIZE = 1024.0f;
 

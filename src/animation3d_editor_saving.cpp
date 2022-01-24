@@ -40,22 +40,22 @@ const bool Animation3dEditor::saveToFile() const
 					file << animation->getPartIDs().size() << " ";
 
 					unsigned int partIndex = 0;
-					for(auto partID : animation->getPartIDs())
+					for(auto partId : animation->getPartIDs())
 					{
 						auto frame = animation->getFrames()[frameIndex];
-						auto targetTransformation = frame.getTargetTransformations().at(partID);
-						auto rotationOrigin = frame.getRotationOrigins().at(partID);
-						auto speed = frame.getSpeeds().at(partID);
-						auto speedType = static_cast<int>(frame.getSpeedTypes().at(partID));
-						auto transformationType = static_cast<int>(frame.getTransformationTypes().at(partID));
+						auto targetTransformation = frame.getTargetTransformations().at(partId);
+						auto rotationOrigin = frame.getRotationOrigins().at(partId);
+						auto speed = frame.getSpeeds().at(partId);
+						auto speedType = static_cast<int>(frame.getSpeedTypes().at(partId));
+						auto transformationType = static_cast<int>(frame.getTransformationTypes().at(partId));
 
-						if(partID.empty())
+						if(partId.empty())
 						{
-							partID = "?";
+							partId = "?";
 						}
 
 						file <<
-							partID << " " <<
+							partId << " " <<
 							targetTransformation.x << " " <<
 							targetTransformation.y << " " <<
 							targetTransformation.z << " " <<

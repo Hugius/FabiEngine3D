@@ -19,8 +19,8 @@ void WorldEditor::_activateModel(const string& id)
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Active model: " + rawID, 0.025f);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), true);
+	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityId(), "Active model: " + rawID, 0.025f);
 }
 
 void WorldEditor::_activateQuad3d(const string& id)
@@ -42,8 +42,8 @@ void WorldEditor::_activateQuad3d(const string& id)
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Active quad3d: " + rawID, 0.025f);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), true);
+	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityId(), "Active quad3d: " + rawID, 0.025f);
 }
 
 void WorldEditor::_activateText3d(const string& id)
@@ -65,8 +65,8 @@ void WorldEditor::_activateText3d(const string& id)
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Active text3d: " + rawID, 0.025f);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), true);
+	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityId(), "Active text3d: " + rawID, 0.025f);
 }
 
 void WorldEditor::_activateSound(const string& id)
@@ -88,8 +88,8 @@ void WorldEditor::_activateSound(const string& id)
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityID(), "Active sound: " + rawID, 0.025f);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), true);
+	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityId(), "Active sound: " + rawID, 0.025f);
 }
 
 void WorldEditor::_activatePointlight(const string& id)
@@ -143,7 +143,7 @@ void WorldEditor::_deactivateModel()
 	}
 
 	_activeModelID = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateQuad3d()
@@ -154,7 +154,7 @@ void WorldEditor::_deactivateQuad3d()
 	}
 
 	_activeQuadID = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateText3d()
@@ -165,7 +165,7 @@ void WorldEditor::_deactivateText3d()
 	}
 
 	_activeTextID = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), false);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateSound()
@@ -176,7 +176,7 @@ void WorldEditor::_deactivateSound()
 	}
 
 	_activeSpeakerID = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), false);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivatePointlight()

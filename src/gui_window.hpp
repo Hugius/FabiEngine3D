@@ -15,7 +15,7 @@ public:
 	void update(bool isHoverable);
 
 	const string& getId() const;
-	const string& getEntityID() const;
+	const string& getEntityId() const;
 	const string& getParentID() const;
 
 	const fvec3& getInitialColor() const;
@@ -31,7 +31,7 @@ public:
 
 private:
 	const string _ID;
-	const string _entityID;
+	const string _entityId;
 	const string _parentID;
 	string _activeScreenID = "";
 

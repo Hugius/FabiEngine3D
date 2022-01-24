@@ -32,17 +32,17 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 	//ofstream file(filePath);
 
-	//vector<string> levelOfDetailEntityIDs;
+	//vector<string> levelOfDetailEntityIds;
 	//for(const auto& modelID : _fe3d->model_getIds())
 	//{
 	//	bool isCustomWorldModel = find(_customWorldModelIDs.begin(), _customWorldModelIDs.end(), modelID) != _customWorldModelIDs.end();
 	//	if((modelID[0] != '@') && isCustomWorldModel)
 	//	{
-	//		if(!_fe3d->model_getLevelOfDetailEntityID(modelID).empty())
+	//		if(!_fe3d->model_getLevelOfDetailEntityId(modelID).empty())
 	//		{
-	//			if(find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) == levelOfDetailEntityIDs.end())
+	//			if(find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelID) == levelOfDetailEntityIds.end())
 	//			{
-	//				levelOfDetailEntityIDs.push_back(_fe3d->model_getLevelOfDetailEntityID(modelID));
+	//				levelOfDetailEntityIds.push_back(_fe3d->model_getLevelOfDetailEntityId(modelID));
 	//			}
 	//		}
 	//	}
@@ -100,7 +100,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 	//for(const auto& modelID : _fe3d->model_getIds())
 	//{
-	//	bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
+	//	bool isLevelOfDetailEntity = find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelID) != levelOfDetailEntityIds.end();
 	//	bool isCustomWorldModel =
 	//		find(_customWorldModelIDs.begin(), _customWorldModelIDs.end(), modelID) != _customWorldModelIDs.end();
 	//	if(((modelID[0] != '@') || isLevelOfDetailEntity) && isCustomWorldModel)
@@ -160,29 +160,29 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//			lightness << " " <<
 	//			_fe3d->model_getPartIDs(modelID).size();
 
-	//		auto partIDs = _fe3d->model_getPartIDs(modelID);
-	//		if(partIDs.size() > 1)
+	//		auto partIds = _fe3d->model_getPartIDs(modelID);
+	//		if(partIds.size() > 1)
 	//		{
-	//			for(const auto& partID : partIDs)
+	//			for(const auto& partId : partIds)
 	//			{
 	//				file << " ";
 
-	//				file << partID;
+	//				file << partId;
 	//			}
 
-	//			for(size_t i = 0; i < partIDs.size(); i++)
+	//			for(size_t i = 0; i < partIds.size(); i++)
 	//			{
-	//				if(!partIDs[i].empty())
+	//				if(!partIds[i].empty())
 	//				{
 	//					file << " ";
 
-	//					position = _fe3d->model_getPartPosition(modelID, partIDs[i]);
-	//					rotation = _fe3d->model_getPartRotation(modelID, partIDs[i]);
-	//					rotationOrigin = _fe3d->model_getPartRotationOrigin(modelID, partIDs[i]);
-	//					size = _fe3d->model_getPartSize(modelID, partIDs[i]);
+	//					position = _fe3d->model_getPartPosition(modelID, partIds[i]);
+	//					rotation = _fe3d->model_getPartRotation(modelID, partIds[i]);
+	//					rotationOrigin = _fe3d->model_getPartRotationOrigin(modelID, partIds[i]);
+	//					size = _fe3d->model_getPartSize(modelID, partIds[i]);
 
 	//					file <<
-	//						partIDs[i] << " " <<
+	//						partIds[i] << " " <<
 	//						position.x << " " <<
 	//						position.y << " " <<
 	//						position.z << " " <<
@@ -205,7 +205,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 	//for(const auto& modelID : _fe3d->model_getIds())
 	//{
-	//	bool isLodModel = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
+	//	bool isLodModel = find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelID) != levelOfDetailEntityIds.end();
 	//	bool isCustomWorldModel =
 	//		find(_customWorldModelIDs.begin(), _customWorldModelIDs.end(), modelID) != _customWorldModelIDs.end();
 	//	if(((modelID[0] != '@') || isLodModel) && isCustomWorldModel)
@@ -240,7 +240,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		//	for(const auto& [key, speed] : frame.getSpeeds())
 	//		//	{
 	//		//		// Write speed
-	//		//		file << (partID.empty() ? "?" : partID) << " " << speed.x << " " << speed.y << " " << speed.z;
+	//		//		file << (partId.empty() ? "?" : partId) << " " << speed.x << " " << speed.y << " " << speed.z;
 
 	//		//		// Write space
 	//		//		if(index != (frame.getSpeeds().size() - 1))
@@ -327,7 +327,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//{
 	//	bool isCustomWorldAabb =
 	//		find(_customWorldAabbIDs.begin(), _customWorldAabbIDs.end(), aabbID) != _customWorldAabbIDs.end();
-	//	if((aabbID[0] != '@') && isCustomWorldAabb && _fe3d->aabb_getParentEntityID(aabbID).empty())
+	//	if((aabbID[0] != '@') && isCustomWorldAabb && _fe3d->aabb_getParentEntityId(aabbID).empty())
 	//	{
 	//		auto isVisible = _fe3d->aabb_isVisible(aabbID);
 	//		auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbID);

@@ -27,7 +27,7 @@ public:
 private:
 	void _loadMesh(shared_ptr<WaterEntity> entity, float size);
 
-	string _selectedEntityID = "";
+	string _selectedEntityId = "";
 
 	static inline constexpr float MAX_SIZE = 1024.0f;
 

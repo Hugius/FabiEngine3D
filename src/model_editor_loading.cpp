@@ -96,7 +96,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 		{
 			string modelID;
 			string meshPath;
-			string levelOfDetailEntityID;
+			string levelOfDetailEntityId;
 			fvec3 size;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
@@ -109,7 +109,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				size.x >>
 				size.y >>
 				size.z >>
-				levelOfDetailEntityID >>
+				levelOfDetailEntityId >>
 				levelOfDetailDistance >>
 				rotationOrder >>
 				isShadowed >>
@@ -117,9 +117,9 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 			while(true)
 			{
-				string partID;
-				iss >> partID;
-				if(partID.empty())
+				string partId;
+				iss >> partId;
+				if(partId.empty())
 				{
 					break;
 				}
@@ -268,7 +268,7 @@ const bool ModelEditor::loadFromFile()
 		{
 			string modelID;
 			string meshPath;
-			string levelOfDetailEntityID;
+			string levelOfDetailEntityId;
 			fvec3 size;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
@@ -281,17 +281,17 @@ const bool ModelEditor::loadFromFile()
 				size.x >>
 				size.y >>
 				size.z >>
-				levelOfDetailEntityID >>
+				levelOfDetailEntityId >>
 				levelOfDetailDistance >>
 				rotationOrder >>
 				isShadowed >>
 				isReflected;
 
 			meshPath = (meshPath == "?") ? "" : meshPath;
-			levelOfDetailEntityID = (levelOfDetailEntityID == "?") ? "" : levelOfDetailEntityID;
+			levelOfDetailEntityId = (levelOfDetailEntityId == "?") ? "" : levelOfDetailEntityId;
 
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
-			replace(levelOfDetailEntityID.begin(), levelOfDetailEntityID.end(), '?', ' ');
+			replace(levelOfDetailEntityId.begin(), levelOfDetailEntityId.end(), '?', ' ');
 
 			if(!Config::getInst().isApplicationExported())
 			{
@@ -306,16 +306,16 @@ const bool ModelEditor::loadFromFile()
 
 				_fe3d->model_setVisible(modelID, false);
 				_fe3d->model_setBaseSize(modelID, size);
-				_fe3d->model_setLevelOfDetailEntityID(modelID, levelOfDetailEntityID);
+				_fe3d->model_setLevelOfDetailEntityId(modelID, levelOfDetailEntityId);
 				_fe3d->model_setLevelOfDetailDistance(modelID, levelOfDetailDistance);
 				_fe3d->model_setRotationOrder(modelID, DirectionOrder(rotationOrder));
 
 				while(true)
 				{
-					string partID;
-					iss >> partID;
+					string partId;
+					iss >> partId;
 
-					if(partID.empty())
+					if(partId.empty())
 					{
 						break;
 					}
@@ -361,7 +361,7 @@ const bool ModelEditor::loadFromFile()
 						emissionIntensity >>
 						opacity;
 
-					partID = (partID == "?") ? "" : partID;
+					partId = (partId == "?") ? "" : partId;
 					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 					emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 					specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
@@ -374,19 +374,19 @@ const bool ModelEditor::loadFromFile()
 					replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 					replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
-					_fe3d->model_setColor(modelID, partID, color);
-					_fe3d->model_setSpecular(modelID, partID, isSpecular);
-					_fe3d->model_setSpecularShininess(modelID, partID, specularShininess);
-					_fe3d->model_setSpecularIntensity(modelID, partID, specularIntensity);
-					_fe3d->model_setReflectivity(modelID, partID, reflectivity);
-					_fe3d->model_setLightness(modelID, partID, lightness);
-					_fe3d->model_setTextureRepeat(modelID, partID, textureRepeat);
-					_fe3d->model_setReflective(modelID, partID, isReflective);
-					_fe3d->model_setReflectionType(modelID, partID, ReflectionType(reflectionType));
-					_fe3d->model_setFaceCulled(modelID, partID, isFaceCulled);
-					_fe3d->model_setBright(modelID, partID, isBright);
-					_fe3d->model_setEmissionIntensity(modelID, partID, emissionIntensity);
-					_fe3d->model_setOpacity(modelID, partID, opacity);
+					_fe3d->model_setColor(modelID, partId, color);
+					_fe3d->model_setSpecular(modelID, partId, isSpecular);
+					_fe3d->model_setSpecularShininess(modelID, partId, specularShininess);
+					_fe3d->model_setSpecularIntensity(modelID, partId, specularIntensity);
+					_fe3d->model_setReflectivity(modelID, partId, reflectivity);
+					_fe3d->model_setLightness(modelID, partId, lightness);
+					_fe3d->model_setTextureRepeat(modelID, partId, textureRepeat);
+					_fe3d->model_setReflective(modelID, partId, isReflective);
+					_fe3d->model_setReflectionType(modelID, partId, ReflectionType(reflectionType));
+					_fe3d->model_setFaceCulled(modelID, partId, isFaceCulled);
+					_fe3d->model_setBright(modelID, partId, isBright);
+					_fe3d->model_setEmissionIntensity(modelID, partId, emissionIntensity);
+					_fe3d->model_setOpacity(modelID, partId, opacity);
 
 					if(!diffuseMapPath.empty())
 					{
@@ -395,7 +395,7 @@ const bool ModelEditor::loadFromFile()
 							diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 						}
 
-						_fe3d->model_setDiffuseMap(modelID, partID, diffuseMapPath);
+						_fe3d->model_setDiffuseMap(modelID, partId, diffuseMapPath);
 					}
 
 					if(!specularMapPath.empty())
@@ -405,7 +405,7 @@ const bool ModelEditor::loadFromFile()
 							specularMapPath = string("projects\\" + _currentProjectID + "\\" + specularMapPath);
 						}
 
-						_fe3d->model_setSpecularMap(modelID, partID, specularMapPath);
+						_fe3d->model_setSpecularMap(modelID, partId, specularMapPath);
 					}
 
 					if(!emissionMapPath.empty())
@@ -415,7 +415,7 @@ const bool ModelEditor::loadFromFile()
 							emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 						}
 
-						_fe3d->model_setEmissionMap(modelID, partID, emissionMapPath);
+						_fe3d->model_setEmissionMap(modelID, partId, emissionMapPath);
 					}
 
 					if(!reflectionMapPath.empty())
@@ -425,7 +425,7 @@ const bool ModelEditor::loadFromFile()
 							reflectionMapPath = string("projects\\" + _currentProjectID + "\\" + reflectionMapPath);
 						}
 
-						_fe3d->model_setReflectionMap(modelID, partID, reflectionMapPath);
+						_fe3d->model_setReflectionMap(modelID, partId, reflectionMapPath);
 					}
 
 					if(!normalMapPath.empty())
@@ -435,7 +435,7 @@ const bool ModelEditor::loadFromFile()
 							normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 						}
 
-						_fe3d->model_setNormalMap(modelID, partID, normalMapPath);
+						_fe3d->model_setNormalMap(modelID, partId, normalMapPath);
 					}
 				}
 			}
@@ -463,7 +463,7 @@ const bool ModelEditor::loadFromFile()
 			{
 				_fe3d->aabb_setVisible(aabbID, false);
 				_fe3d->aabb_setFollowParentVisibility(aabbID, false);
-				_fe3d->aabb_setParentEntityID(aabbID, modelID);
+				_fe3d->aabb_setParentEntityId(aabbID, modelID);
 				_fe3d->aabb_setParentEntityType(aabbID, AabbParentEntityType::MODEL);
 				_fe3d->aabb_setLocalPosition(aabbID, position);
 				_fe3d->aabb_setLocalSize(aabbID, size);

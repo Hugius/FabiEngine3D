@@ -12,7 +12,7 @@ void WorldEditor::_updateText3dMenu()
 		{
 			if(!_currentTemplateTextID.empty())
 			{
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), false);
 				_fe3d->text3d_setVisible(_currentTemplateTextID, false);
 				_currentTemplateTextID = "";
 			}
@@ -79,8 +79,8 @@ void WorldEditor::_updateText3dPlacingMenu()
 
 						_currentTemplateTextID = textID;
 						_fe3d->text3d_setVisible(_currentTemplateTextID, true);
-						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
-						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text3d: " + _currentTemplateTextID.substr(1), 0.025f);
+						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), true);
+						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityId(), "Text3d: " + _currentTemplateTextID.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedID().empty())

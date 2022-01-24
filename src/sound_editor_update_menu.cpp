@@ -72,7 +72,7 @@ void SoundEditor::_updateChoiceMenu()
 			}
 
 			_currentSoundID = "";
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuMain");
 			return;
 		}

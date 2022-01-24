@@ -53,7 +53,7 @@ void MasterRenderer::_captureWorldDepth()
 				{
 					if(modelEntity->isLevelOfDetailed())
 					{
-						auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityID());
+						auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityId());
 						if(foundPair != modelEntities.end())
 						{
 							auto levelOfDetailEntity = foundPair->second;
@@ -267,7 +267,7 @@ void MasterRenderer::_captureShadows()
 			{
 				if(modelEntity->isLevelOfDetailed())
 				{
-					auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityID());
+					auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityId());
 					if(foundPair != modelEntities.end())
 					{
 						auto levelOfDetailEntity = foundPair->second;

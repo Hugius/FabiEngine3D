@@ -195,7 +195,7 @@ void WorldEditor::_updateQuad3dEditing()
 
 		if(_selectedQuadID.empty() && _activeQuadID.empty())
 		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), false);
 		}
 	}
 }

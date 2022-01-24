@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot delete AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 			{
 				if(id[0] != '@')
 				{
-					if(_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+					if(_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 					{
 						_fe3d->aabb_delete(id);
 					}
@@ -74,7 +74,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;
@@ -114,7 +114,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;
@@ -134,7 +134,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;
@@ -154,7 +154,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;
@@ -174,7 +174,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;
@@ -194,7 +194,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;
@@ -214,7 +214,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;
@@ -234,7 +234,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;
@@ -254,7 +254,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityID(args[0].getString()).empty())
+				if(!_fe3d->aabb_getParentEntityId(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with id \"" + args[0].getString() + "\": bound to model or quad3d!");
 					return true;

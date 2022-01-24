@@ -59,7 +59,7 @@ void ModelEditor::_updateChoiceAabbMenu()
 		{
 			_fe3d->aabb_setVisible((_currentModelID + "@" + _currentAabbID), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityId(), false);
 			_currentAabbID = "";
 			return;
 		}
@@ -139,12 +139,12 @@ void ModelEditor::_updateAabbCreating()
 
 			_fe3d->aabb_create(_currentModelID + "@" + _currentAabbID, false);
 			_fe3d->aabb_setFollowParentVisibility((_currentModelID + "@" + _currentAabbID), false);
-			_fe3d->aabb_setParentEntityID((_currentModelID + "@" + _currentAabbID), _currentModelID);
+			_fe3d->aabb_setParentEntityId((_currentModelID + "@" + _currentAabbID), _currentModelID);
 			_fe3d->aabb_setParentEntityType((_currentModelID + "@" + _currentAabbID), AabbParentEntityType::MODEL);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
-			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), true);
+			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("aabbID")->getEntityId(), ("AABB: " + _currentAabbID), 0.025f);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityId(), true);
 
 			_isCreatingAabb = false;
 		}
@@ -174,8 +174,8 @@ void ModelEditor::_updateAabbChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("aabbID")->getEntityId(), ("AABB: " + _currentAabbID), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityId(), true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("aabbList");

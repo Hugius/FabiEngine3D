@@ -15,23 +15,23 @@ void MasterRenderer::_captureCubeReflections()
 	const auto originalCameraPitch = _camera->getPitch();
 	const auto originalCameraPosition = _camera->getPosition();
 
-	vector<string> savedModelEntityIDs;
+	vector<string> savedModelEntityIds;
 	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
-			savedModelEntityIDs.push_back(entity->getId());
+			savedModelEntityIds.push_back(entity->getId());
 		}
 	}
 
-	vector<string> savedQuad3dEntityIDs;
+	vector<string> savedQuad3dEntityIds;
 	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
-			savedQuad3dEntityIDs.push_back(entity->getId());
+			savedQuad3dEntityIds.push_back(entity->getId());
 		}
 	}
 
@@ -142,7 +142,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
-		for(const auto& savedID : savedModelEntityIDs)
+		for(const auto& savedID : savedModelEntityIds)
 		{
 			if(entity->getId() == savedID)
 			{
@@ -151,7 +151,7 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	for(const auto& savedID : savedQuad3dEntityIDs)
+	for(const auto& savedID : savedQuad3dEntityIds)
 	{
 		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 		{

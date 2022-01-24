@@ -135,7 +135,7 @@ private:
 	const bool _validateFe3dTerrain();
 	const bool _validateFe3dWater();
 	const bool _validateFe3dModel(const string& id, bool isTemplate);
-	const bool _validateFe3dModelPart(const string& modelID, const string& partID);
+	const bool _validateFe3dModelPart(const string& modelID, const string& partId);
 	const bool _validateFe3dQuad3d(const string& id, bool isTemplate);
 	const bool _validateFe3dText3d(const string& id, bool isTemplate);
 	const bool _validateFe3dQuad2d(const string& id, bool isTemplate);

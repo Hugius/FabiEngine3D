@@ -43,7 +43,7 @@ void WorldEditor::_updatePointlightPlacing()
 					_fe3d->model_setBright(newModelID, "", true);
 
 					_fe3d->aabb_create(newModelID, true);
-					_fe3d->aabb_setParentEntityID(newModelID, newModelID);
+					_fe3d->aabb_setParentEntityId(newModelID, newModelID);
 					_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 					_fe3d->aabb_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 					_fe3d->aabb_setCollisionResponsive(newModelID, false);
@@ -123,7 +123,7 @@ void WorldEditor::_updatePointlightPlacing()
 					_fe3d->model_setBright(newModelID, "", true);
 
 					_fe3d->aabb_create(newModelID, true);
-					_fe3d->aabb_setParentEntityID(newModelID, newModelID);
+					_fe3d->aabb_setParentEntityId(newModelID, newModelID);
 					_fe3d->aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 					_fe3d->aabb_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 					_fe3d->aabb_setCollisionResponsive(newModelID, false);

@@ -124,7 +124,7 @@ void WorldEditor::_updateSoundEditing()
 
 		if(_selectedSpeakerID.empty() && _activeSpeakerID.empty())
 		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), false);
 		}
 	}
 }

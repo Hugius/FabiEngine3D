@@ -44,11 +44,11 @@ void GuiButton::_updateHovering(bool isHoverable)
 {
 	_isHovered = false;
 
-	if(_fe3d->quad2d_isVisible(_rectangle->getEntityID()))
+	if(_fe3d->quad2d_isVisible(_rectangle->getEntityId()))
 	{
 		fvec2 cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()));
-		fvec2 buttonPosition = _fe3d->quad2d_getPosition(_rectangle->getEntityID());
-		fvec2 buttonSize = _fe3d->quad2d_getSize(_rectangle->getEntityID());
+		fvec2 buttonPosition = _fe3d->quad2d_getPosition(_rectangle->getEntityId());
+		fvec2 buttonSize = _fe3d->quad2d_getSize(_rectangle->getEntityId());
 
 		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f))
 		{
@@ -58,11 +58,11 @@ void GuiButton::_updateHovering(bool isHoverable)
 				{
 					_isHovered = true;
 
-					_fe3d->quad2d_setColor(_rectangle->getEntityID(), _hoverColor);
+					_fe3d->quad2d_setColor(_rectangle->getEntityId(), _hoverColor);
 
 					if(_textField != nullptr)
 					{
-						_fe3d->text2d_setColor(_textField->getEntityID(), _textHoverColor);
+						_fe3d->text2d_setColor(_textField->getEntityId(), _textHoverColor);
 					}
 				}
 			}
@@ -70,11 +70,11 @@ void GuiButton::_updateHovering(bool isHoverable)
 
 		if(!_isHovered)
 		{
-			_fe3d->quad2d_setColor(_rectangle->getEntityID(), _rectangle->getInitialColor());
+			_fe3d->quad2d_setColor(_rectangle->getEntityId(), _rectangle->getInitialColor());
 
 			if(_textField != nullptr)
 			{
-				_fe3d->text2d_setColor(_textField->getEntityID(), _textField->getInitialColor());
+				_fe3d->text2d_setColor(_textField->getEntityId(), _textField->getInitialColor());
 			}
 		}
 	}
@@ -91,37 +91,37 @@ void GuiButton::setHoverable(bool isHoverable)
 
 	if(isHoverable)
 	{
-		_fe3d->quad2d_setOpacity(_rectangle->getEntityID(), 1.0f);
+		_fe3d->quad2d_setOpacity(_rectangle->getEntityId(), 1.0f);
 
 		if(_textField != nullptr)
 		{
-			_fe3d->text2d_setOpacity(_textField->getEntityID(), 1.0f);
+			_fe3d->text2d_setOpacity(_textField->getEntityId(), 1.0f);
 		}
 	}
 	else
 	{
-		_fe3d->quad2d_setOpacity(_rectangle->getEntityID(), 0.25f);
+		_fe3d->quad2d_setOpacity(_rectangle->getEntityId(), 0.25f);
 
 		if(_textField != nullptr)
 		{
-			_fe3d->text2d_setOpacity(_textField->getEntityID(), 0.25f);
+			_fe3d->text2d_setOpacity(_textField->getEntityId(), 0.25f);
 		}
 	}
 }
 
 void GuiButton::changeTextContent(const string& content)
 {
-	auto text2dEntityID = getTextField()->getEntityID();
+	auto text2dEntityId = getTextField()->getEntityId();
 
-	if(content != _fe3d->text2d_getContent(text2dEntityID))
+	if(content != _fe3d->text2d_getContent(text2dEntityId))
 	{
-		auto charWidth = (getTextField()->getInitialSize().x / static_cast<float>(_fe3d->text2d_getContent(text2dEntityID).size()));
+		auto charWidth = (getTextField()->getInitialSize().x / static_cast<float>(_fe3d->text2d_getContent(text2dEntityId).size()));
 		auto charHeight = getTextField()->getInitialSize().y;
-		_fe3d->text2d_setContent(text2dEntityID, content, charWidth, charHeight);
+		_fe3d->text2d_setContent(text2dEntityId, content, charWidth, charHeight);
 		getTextField()->updateInitialSize();
 
 		auto newRectangleSize = fvec2(getTextField()->getInitialSize() / fvec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));
-		_fe3d->quad2d_setSize(getRectangle()->getEntityID(), newRectangleSize);
+		_fe3d->quad2d_setSize(getRectangle()->getEntityId(), newRectangleSize);
 		getRectangle()->updateInitialSize();
 	}
 }

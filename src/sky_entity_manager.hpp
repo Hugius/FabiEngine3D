@@ -27,7 +27,7 @@ public:
 	shared_ptr<SkyEntity> getSelectedEntity();
 
 private:
-	string _selectedEntityID = "";
+	string _selectedEntityId = "";
 
 	const shared_ptr<VertexBuffer> _mesh;
 

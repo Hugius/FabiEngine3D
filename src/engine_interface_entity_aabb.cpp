@@ -6,9 +6,9 @@ void EngineInterface::aabb_create(const string& id, bool isCentered)
 	_core->getAabbEntityManager()->createEntity(id, isCentered);
 }
 
-void EngineInterface::aabb_setParentEntityID(const string& id, const string& value)
+void EngineInterface::aabb_setParentEntityId(const string& id, const string& value)
 {
-	_core->getAabbEntityManager()->getEntity(id)->setParentEntityID(value);
+	_core->getAabbEntityManager()->getEntity(id)->setParentEntityId(value);
 }
 
 void EngineInterface::aabb_setParentEntityType(const string& id, AabbParentEntityType value)
@@ -158,7 +158,7 @@ const vector<string> EngineInterface::aabb_getChildIDs(const string& parentID, A
 	{
 		if(entity->hasParent())
 		{
-			if(parentID == entity->getParentEntityID() && (
+			if(parentID == entity->getParentEntityId() && (
 				((entity->getParentEntityType() == AabbParentEntityType::MODEL) && (parentEntityType == AabbParentEntityType::MODEL)) ||
 				((entity->getParentEntityType() == AabbParentEntityType::QUAD3D) && (parentEntityType == AabbParentEntityType::QUAD3D)) ||
 				((entity->getParentEntityType() == AabbParentEntityType::TEXT3D) && (parentEntityType == AabbParentEntityType::TEXT3D))))
@@ -183,9 +183,9 @@ const vector<string> EngineInterface::aabb_getIds() const
 	return result;
 }
 
-const string& EngineInterface::aabb_getParentEntityID(const string& id) const
+const string& EngineInterface::aabb_getParentEntityId(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(id)->getParentEntityID();
+	return _core->getAabbEntityManager()->getEntity(id)->getParentEntityId();
 }
 
 const AabbParentEntityType EngineInterface::aabb_getParentEntityType(const string& id) const

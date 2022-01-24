@@ -201,53 +201,53 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 	_fe3d->model_setBaseSize(newID, _fe3d->model_getBaseSize(templateID));
 	_fe3d->model_setLevelOfDetailSize(newID, _fe3d->model_getBaseSize(templateID));
 	_fe3d->model_setFrozen(newID, _fe3d->model_isFrozen(templateID));
-	_fe3d->model_setLevelOfDetailEntityID(newID, _fe3d->model_getLevelOfDetailEntityID(templateID));
+	_fe3d->model_setLevelOfDetailEntityId(newID, _fe3d->model_getLevelOfDetailEntityId(templateID));
 	_fe3d->model_setRotationOrder(newID, _fe3d->model_getRotationOrder(templateID));
 
-	for(const auto& partID : _fe3d->model_getPartIDs(templateID))
+	for(const auto& partId : _fe3d->model_getPartIDs(templateID))
 	{
-		if(_fe3d->model_hasDiffuseMap(templateID, partID))
+		if(_fe3d->model_hasDiffuseMap(templateID, partId))
 		{
-			_fe3d->model_setDiffuseMap(newID, partID, _fe3d->model_getDiffuseMapPath(templateID, partID));
+			_fe3d->model_setDiffuseMap(newID, partId, _fe3d->model_getDiffuseMapPath(templateID, partId));
 		}
 
-		if(_fe3d->model_hasEmissionMap(templateID, partID))
+		if(_fe3d->model_hasEmissionMap(templateID, partId))
 		{
-			_fe3d->model_setEmissionMap(newID, partID, _fe3d->model_getEmissionMapPath(templateID, partID));
+			_fe3d->model_setEmissionMap(newID, partId, _fe3d->model_getEmissionMapPath(templateID, partId));
 		}
 
-		if(_fe3d->model_hasSpecularMap(templateID, partID))
+		if(_fe3d->model_hasSpecularMap(templateID, partId))
 		{
-			_fe3d->model_setSpecularMap(newID, partID, _fe3d->model_getSpecularMapPath(templateID, partID));
+			_fe3d->model_setSpecularMap(newID, partId, _fe3d->model_getSpecularMapPath(templateID, partId));
 		}
 
-		if(_fe3d->model_hasReflectionMap(templateID, partID))
+		if(_fe3d->model_hasReflectionMap(templateID, partId))
 		{
-			_fe3d->model_setReflectionMap(newID, partID, _fe3d->model_getReflectionMapPath(templateID, partID));
+			_fe3d->model_setReflectionMap(newID, partId, _fe3d->model_getReflectionMapPath(templateID, partId));
 		}
 
-		if(_fe3d->model_hasNormalMap(templateID, partID))
+		if(_fe3d->model_hasNormalMap(templateID, partId))
 		{
-			_fe3d->model_setNormalMap(newID, partID, _fe3d->model_getNormalMapPath(templateID, partID));
+			_fe3d->model_setNormalMap(newID, partId, _fe3d->model_getNormalMapPath(templateID, partId));
 		}
 
-		_fe3d->model_setLightness(newID, partID, _fe3d->model_getLightness(templateID, partID));
-		_fe3d->model_setSpecular(newID, partID, _fe3d->model_isSpecular(templateID, partID));
-		_fe3d->model_setSpecularShininess(newID, partID, _fe3d->model_getSpecularShininess(templateID, partID));
-		_fe3d->model_setSpecularIntensity(newID, partID, _fe3d->model_getSpecularIntensity(templateID, partID));
-		_fe3d->model_setReflective(newID, partID, _fe3d->model_isReflective(templateID, partID));
-		_fe3d->model_setReflectionType(newID, partID, _fe3d->model_getReflectionType(templateID, partID));
-		_fe3d->model_setReflectivity(newID, partID, _fe3d->model_getReflectivity(templateID, partID));
-		_fe3d->model_setColor(newID, partID, _fe3d->model_getColor(templateID, partID));
-		_fe3d->model_setTextureRepeat(newID, partID, _fe3d->model_getTextureRepeat(templateID, partID));
-		_fe3d->model_setFaceCulled(newID, partID, _fe3d->model_isFaceCulled(templateID, partID));
+		_fe3d->model_setLightness(newID, partId, _fe3d->model_getLightness(templateID, partId));
+		_fe3d->model_setSpecular(newID, partId, _fe3d->model_isSpecular(templateID, partId));
+		_fe3d->model_setSpecularShininess(newID, partId, _fe3d->model_getSpecularShininess(templateID, partId));
+		_fe3d->model_setSpecularIntensity(newID, partId, _fe3d->model_getSpecularIntensity(templateID, partId));
+		_fe3d->model_setReflective(newID, partId, _fe3d->model_isReflective(templateID, partId));
+		_fe3d->model_setReflectionType(newID, partId, _fe3d->model_getReflectionType(templateID, partId));
+		_fe3d->model_setReflectivity(newID, partId, _fe3d->model_getReflectivity(templateID, partId));
+		_fe3d->model_setColor(newID, partId, _fe3d->model_getColor(templateID, partId));
+		_fe3d->model_setTextureRepeat(newID, partId, _fe3d->model_getTextureRepeat(templateID, partId));
+		_fe3d->model_setFaceCulled(newID, partId, _fe3d->model_isFaceCulled(templateID, partId));
 	}
 
 	for(const auto& templateAabbID : _fe3d->aabb_getChildIDs(templateID, AabbParentEntityType::MODEL))
 	{
 		const string newAabbID = (newID + "@" + templateAabbID.substr(string(templateID + "_").size()));
 		_fe3d->aabb_create(newAabbID, false);
-		_fe3d->aabb_setParentEntityID(newAabbID, newID);
+		_fe3d->aabb_setParentEntityId(newAabbID, newID);
 		_fe3d->aabb_setParentEntityType(newAabbID, AabbParentEntityType::MODEL);
 		_fe3d->aabb_setLocalPosition(newAabbID, _fe3d->aabb_getPosition(templateAabbID));
 		_fe3d->aabb_setLocalSize(newAabbID, _fe3d->aabb_getSize(templateAabbID));
@@ -288,7 +288,7 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newID, const string& t
 	_fe3d->quad3d_create(newID, false);
 
 	_fe3d->aabb_create(newID, false);
-	_fe3d->aabb_setParentEntityID(newID, newID);
+	_fe3d->aabb_setParentEntityId(newID, newID);
 	_fe3d->aabb_setParentEntityType(newID, AabbParentEntityType::QUAD3D);
 
 	if(_fe3d->quad3d_hasDiffuseMap(templateID))
@@ -338,7 +338,7 @@ const bool WorldEditor::_copyTemplateText3d(const string& newID, const string& t
 	_fe3d->text3d_create(newID, _fe3d->text3d_getFontMapPath(templateID), false);
 
 	_fe3d->aabb_create(newID, false);
-	_fe3d->aabb_setParentEntityID(newID, newID);
+	_fe3d->aabb_setParentEntityId(newID, newID);
 	_fe3d->aabb_setParentEntityType(newID, AabbParentEntityType::TEXT3D);
 
 	_fe3d->text3d_setPosition(newID, position);

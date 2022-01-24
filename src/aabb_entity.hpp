@@ -25,7 +25,7 @@ public:
 	void scale(const fvec3& value);
 	void moveTo(const fvec3& target, float speed);
 	void scaleTo(const fvec3& target, float speed);
-	void setParentEntityID(const string& value);
+	void setParentEntityId(const string& value);
 	void setParentEntityType(AabbParentEntityType value);
 	void setFollowParentEntityTransformation(bool value);
 	void setFollowParentEntityVisibility(bool value);
@@ -36,7 +36,7 @@ public:
 	void setColor(const fvec3& value);
 	void setCentered(bool value);
 
-	const string& getParentEntityID() const;
+	const string& getParentEntityId() const;
 
 	const mat44& getTransformationMatrix() const;
 
@@ -59,7 +59,7 @@ public:
 	const Direction getCollisionDirection() const;
 
 private:
-	string _parentEntityID = "";
+	string _parentEntityId = "";
 
 	mat44 _transformationMatrix = mat44(1.0f);
 

@@ -78,12 +78,12 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& id)
 
 shared_ptr<SkyEntity> SkyEntityManager::getSelectedEntity()
 {
-	if(_entities.empty() || _selectedEntityID.empty())
+	if(_entities.empty() || _selectedEntityId.empty())
 	{
 		return nullptr;
 	}
 
-	return getEntity(_selectedEntityID);
+	return getEntity(_selectedEntityId);
 }
 
 const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntities()
@@ -98,9 +98,9 @@ void SkyEntityManager::selectEntity(const string& id)
 		Logger::throwError("SkyEntityManager::selectEntity");
 	}
 
-	_selectedEntityID = id;
+	_selectedEntityId = id;
 
-	if(_selectedEntityID.empty())
+	if(_selectedEntityId.empty())
 	{
 
 	}
@@ -137,7 +137,7 @@ void SkyEntityManager::deleteEntity(const string& id)
 
 	_entities.erase(id);
 
-	if(id == _selectedEntityID)
+	if(id == _selectedEntityId)
 	{
 		selectEntity("");
 	}

@@ -6,9 +6,9 @@ void MasterRenderer::_capturePlanarReflections()
 
 	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
-		for(const auto& partID : entity->getPartIDs())
+		for(const auto& partId : entity->getPartIDs())
 		{
-			if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+			if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR) && entity->isVisible())
 			{
 				anyReflectiveModelFound = true;
 				break;
@@ -27,7 +27,7 @@ void MasterRenderer::_capturePlanarReflections()
 	_planarReflectionCaptor->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	vector<string> savedModelEntityIDs;
+	vector<string> savedModelEntityIds;
 	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
 		if(entity->isVisible())
@@ -35,29 +35,29 @@ void MasterRenderer::_capturePlanarReflections()
 			if(!entity->isReflected())
 			{
 				entity->setVisible(false);
-				savedModelEntityIDs.push_back(entity->getId());
+				savedModelEntityIds.push_back(entity->getId());
 				continue;
 			}
 
-			for(const auto& partID : entity->getPartIDs())
+			for(const auto& partId : entity->getPartIDs())
 			{
-				if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR))
+				if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR))
 				{
 					entity->setVisible(false);
-					savedModelEntityIDs.push_back(entity->getId());
+					savedModelEntityIds.push_back(entity->getId());
 					break;
 				}
 			}
 		}
 	}
 
-	vector<string> savedQuad3dEntityIDs;
+	vector<string> savedQuad3dEntityIds;
 	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
-			savedQuad3dEntityIDs.push_back(entity->getId());
+			savedQuad3dEntityIds.push_back(entity->getId());
 		}
 	}
 
@@ -102,7 +102,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
-		for(const auto& savedID : savedModelEntityIDs)
+		for(const auto& savedID : savedModelEntityIds)
 		{
 			if(entity->getId() == savedID)
 			{
@@ -113,7 +113,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 	{
-		for(const auto& savedID : savedQuad3dEntityIDs)
+		for(const auto& savedID : savedQuad3dEntityIds)
 		{
 			if(entity->getId() == savedID)
 			{

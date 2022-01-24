@@ -14,7 +14,7 @@ public:
 	void deleteWindow(const string& id);
 
 	const string& getId();
-	const string& getEntityID();
+	const string& getEntityId();
 
 	const fvec3& getInitialColor() const;
 
@@ -28,7 +28,7 @@ public:
 
 private:
 	const string _ID;
-	const string _entityID;
+	const string _entityId;
 
 	const fvec3 _initialColor;
 

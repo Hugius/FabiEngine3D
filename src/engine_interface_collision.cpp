@@ -96,7 +96,7 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 			continue;
 		}
 
-		if(other->getParentEntityID() == self->getParentEntityID())
+		if(other->getParentEntityId() == self->getParentEntityId())
 		{
 			continue;
 		}

@@ -126,8 +126,8 @@ void Quad3dEditor::_updateQuad3dCreating()
 				_loadedQuadIDs.push_back(newQuadID);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad3d: " + newQuadID.substr(1), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityId(), "Quad3d: " + newQuadID.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), true);
 				_isCreatingQuad3d = false;
 			}
 		}
@@ -157,8 +157,8 @@ void Quad3dEditor::_updateQuad3dChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityID(), "Quad3d: " + _currentQuadID.substr(1), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadID")->getEntityId(), "Quad3d: " + _currentQuadID.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), true);
 				}
 
 				_fe3d->quad3d_setVisible(_currentQuadID, true);

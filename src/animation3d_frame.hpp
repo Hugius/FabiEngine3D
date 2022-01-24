@@ -13,13 +13,13 @@ using std::string;
 class Animation3dFrame final
 {
 public:
-	void addPart(const string& partID, const fvec3& targetTransformation, const fvec3& rotationOrigin, const fvec3& speed, Animation3dSpeedType animationSpeedType, TransformationType transformationType);
+	void addPart(const string& partId, const fvec3& targetTransformation, const fvec3& rotationOrigin, const fvec3& speed, Animation3dSpeedType animationSpeedType, TransformationType transformationType);
 	void deleteParts();
-	void setTargetTransformation(const string& partID, const fvec3& value);
-	void setRotationOrigin(const string& partID, const fvec3& value);
-	void setSpeed(const string& partID, const fvec3& value);
-	void setSpeedType(const string& partID, Animation3dSpeedType value);
-	void setTransformationType(const string& partID, TransformationType value);
+	void setTargetTransformation(const string& partId, const fvec3& value);
+	void setRotationOrigin(const string& partId, const fvec3& value);
+	void setSpeed(const string& partId, const fvec3& value);
+	void setSpeedType(const string& partId, Animation3dSpeedType value);
+	void setTransformationType(const string& partId, TransformationType value);
 
 	const map<string, fvec3>& getTargetTransformations() const;
 	const map<string, fvec3>& getRotationOrigins() const;

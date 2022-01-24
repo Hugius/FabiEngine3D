@@ -25,27 +25,27 @@ void Animation3d::addFrame(const Animation3dFrame& value)
 	_frames.push_back(value);
 }
 
-void Animation3d::addPart(const string& partID, const fvec3& totalMovement, const fvec3& totalRotation, const fvec3& totalScaling)
+void Animation3d::addPart(const string& partId, const fvec3& totalMovement, const fvec3& totalRotation, const fvec3& totalScaling)
 {
-	_partIDs.push_back(partID);
-	_totalMovements.insert(make_pair(partID, totalMovement));
-	_totalRotations.insert(make_pair(partID, totalRotation));
-	_totalScalings.insert(make_pair(partID, totalScaling));
+	_partIds.push_back(partId);
+	_totalMovements.insert(make_pair(partId, totalMovement));
+	_totalRotations.insert(make_pair(partId, totalRotation));
+	_totalScalings.insert(make_pair(partId, totalScaling));
 }
 
-void Animation3d::setTotalMovement(const string& partID, const fvec3& value)
+void Animation3d::setTotalMovement(const string& partId, const fvec3& value)
 {
-	_totalMovements.at(partID) = value;
+	_totalMovements.at(partId) = value;
 }
 
-void Animation3d::setTotalRotation(const string& partID, const fvec3& value)
+void Animation3d::setTotalRotation(const string& partId, const fvec3& value)
 {
-	_totalRotations.at(partID) = value;
+	_totalRotations.at(partId) = value;
 }
 
-void Animation3d::setTotalScaling(const string& partID, const fvec3& value)
+void Animation3d::setTotalScaling(const string& partId, const fvec3& value)
 {
-	_totalScalings.at(partID) = value;
+	_totalScalings.at(partId) = value;
 }
 
 void Animation3d::setPreviewModelID(const string& value)
@@ -110,7 +110,7 @@ const map<string, fvec3>& Animation3d::getTotalScalings() const
 
 const vector<string>& Animation3d::getPartIDs() const
 {
-	return _partIDs;
+	return _partIds;
 }
 
 const string& Animation3d::getPreviewModelID() const

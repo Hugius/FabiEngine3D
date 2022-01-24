@@ -28,7 +28,7 @@ void WorldEditor::_updateQuad3dPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
 				_fe3d->quad3d_setVisible(_currentTemplateQuadID, false);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), false);
 				_currentTemplateQuadID = "";
 			}
 		}
@@ -49,7 +49,7 @@ void WorldEditor::_updateQuad3dPlacing()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 			{
 				_fe3d->quad3d_setVisible(_currentTemplateQuadID, false);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityId(), false);
 				_currentTemplateQuadID = "";
 				return;
 			}

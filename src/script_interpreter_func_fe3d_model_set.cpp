@@ -635,7 +635,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_setLevelOfDetailEntityID(args[0].getString(), args[1].getString());
+				_fe3d->model_setLevelOfDetailEntityId(args[0].getString(), args[1].getString());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

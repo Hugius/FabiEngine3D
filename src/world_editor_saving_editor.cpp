@@ -23,16 +23,16 @@ const bool WorldEditor::saveEditorWorldToFile()
 	const auto rootPath = Tools::getRootDirectoryPath();
 	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\worlds\\editor\\" + _currentWorldID + ".fe3d");
 
-	vector<string> levelOfDetailEntityIDs;
+	vector<string> levelOfDetailEntityIds;
 	for(const auto& modelID : _fe3d->model_getIds())
 	{
 		if(modelID[0] != '@')
 		{
-			if(!_fe3d->model_getLevelOfDetailEntityID(modelID).empty())
+			if(!_fe3d->model_getLevelOfDetailEntityId(modelID).empty())
 			{
-				if(find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) == levelOfDetailEntityIDs.end())
+				if(find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelID) == levelOfDetailEntityIds.end())
 				{
-					levelOfDetailEntityIDs.push_back(_fe3d->model_getLevelOfDetailEntityID(modelID));
+					levelOfDetailEntityIds.push_back(_fe3d->model_getLevelOfDetailEntityId(modelID));
 				}
 			}
 		}
@@ -82,7 +82,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	for(const auto& modelID : _fe3d->model_getIds())
 	{
-		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
+		bool isLevelOfDetailEntity = find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelID) != levelOfDetailEntityIds.end();
 		if((modelID[0] != '@') || isLevelOfDetailEntity)
 		{
 			auto startedAnimations = _animation3dEditor->getStartedModelAnimationIDs(modelID);
@@ -94,14 +94,14 @@ const bool WorldEditor::saveEditorWorldToFile()
 				_fe3d->model_setBaseRotation(modelID, _initialModelRotation[modelID]);
 				_fe3d->model_setBaseSize(modelID, _initialModelSize[modelID]);
 
-				for(const auto& partID : _fe3d->model_getPartIDs(modelID))
+				for(const auto& partId : _fe3d->model_getPartIDs(modelID))
 				{
-					if(!partID.empty())
+					if(!partId.empty())
 					{
-						_fe3d->model_setPartPosition(modelID, partID, fvec3(0.0f));
-						_fe3d->model_setPartRotationOrigin(modelID, partID, fvec3(0.0f));
-						_fe3d->model_setPartRotation(modelID, partID, fvec3(0.0f));
-						_fe3d->model_setPartSize(modelID, partID, fvec3(1.0f));
+						_fe3d->model_setPartPosition(modelID, partId, fvec3(0.0f));
+						_fe3d->model_setPartRotationOrigin(modelID, partId, fvec3(0.0f));
+						_fe3d->model_setPartRotation(modelID, partId, fvec3(0.0f));
+						_fe3d->model_setPartSize(modelID, partId, fvec3(1.0f));
 					}
 				}
 			}

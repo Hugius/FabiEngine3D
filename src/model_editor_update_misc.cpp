@@ -76,15 +76,15 @@ void ModelEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
+				for(const auto& partId : _fe3d->model_getPartIDs(_currentModelID))
 				{
-					if(_fe3d->model_isWireframed(_currentModelID, partID))
+					if(_fe3d->model_isWireframed(_currentModelID, partId))
 					{
-						_fe3d->model_setWireframed(_currentModelID, partID, false);
+						_fe3d->model_setWireframed(_currentModelID, partId, false);
 					}
 					else
 					{
-						_fe3d->model_setWireframed(_currentModelID, partID, true);
+						_fe3d->model_setWireframed(_currentModelID, partId, true);
 					}
 				}
 			}
@@ -93,15 +93,15 @@ void ModelEditor::_updateMiscellaneous()
 
 	if(!_currentModelID.empty())
 	{
-		auto& partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
+		auto& partId = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
 
-		if(partID.empty())
+		if(partId.empty())
 		{
 			_selectedPartHighlightDirection = 1;
 		}
 		else
 		{
-			const auto opacity = _fe3d->model_getOpacity(_currentModelID, partID);
+			const auto opacity = _fe3d->model_getOpacity(_currentModelID, partId);
 
 			if(opacity == 0.0f)
 			{
@@ -114,7 +114,7 @@ void ModelEditor::_updateMiscellaneous()
 			}
 
 			const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
-			_fe3d->model_setOpacity(_currentModelID, partID, (opacity + speed));
+			_fe3d->model_setOpacity(_currentModelID, partId, (opacity + speed));
 		}
 	}
 }
@@ -187,8 +187,8 @@ void ModelEditor::_updateModelCreating()
 				_loadedModelIDs.push_back(newModelID);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityId(), "Model: " + newModelID.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), true);
 				_isCreatingModel = false;
 			}
 		}
@@ -218,8 +218,8 @@ void ModelEditor::_updateModelChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityId(), "Model: " + _currentModelID.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityId(), true);
 				}
 
 				_fe3d->model_setVisible(_currentModelID, true);

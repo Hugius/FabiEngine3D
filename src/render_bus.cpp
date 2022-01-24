@@ -393,9 +393,9 @@ void RenderBus::setAnisotropicFilteringQuality(unsigned int value)
 	_anisotropicFilteringQuality = clamp(value, Config::MIN_ANISOTROPIC_FILTERING_QUALITY, Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 }
 
-void RenderBus::setCursorEntityID(const string& value)
+void RenderBus::setCursorEntityId(const string& value)
 {
-	_cursorEntityID = value;
+	_cursorEntityId = value;
 }
 
 void RenderBus::setLensFlareMapPath(const string& value)
@@ -818,9 +818,9 @@ const BloomType RenderBus::getBloomType() const
 	return _bloomType;
 }
 
-const string& RenderBus::getCursorEntityID() const
+const string& RenderBus::getCursorEntityId() const
 {
-	return _cursorEntityID;
+	return _cursorEntityId;
 }
 
 const string& RenderBus::getLensFlareMapPath() const

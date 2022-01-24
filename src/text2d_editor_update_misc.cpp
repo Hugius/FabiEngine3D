@@ -95,8 +95,8 @@ void Text2dEditor::_updateTextCreating()
 				_loadedTextIDs.push_back(newTextID);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text: " + newTextID.substr(1), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityId(), "Text: " + newTextID.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), true);
 				_isCreatingText = false;
 			}
 		}
@@ -126,8 +126,8 @@ void Text2dEditor::_updateTextChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityID(), "Text: " + selectedButtonID.substr(1), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityId(), "Text: " + selectedButtonID.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), true);
 				}
 
 				_fe3d->text2d_setVisible(_currentTextID, true);

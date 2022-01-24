@@ -50,8 +50,8 @@ void Animation2dEditor::_updateAnimationCreating()
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, true);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
-			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), true);
+			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityId(), "Animation: " + newAnimationID, 0.025f);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityId(), true);
 			_isCreatingAnimation = false;
 		}
 	}
@@ -76,8 +76,8 @@ void Animation2dEditor::_updateAnimationChoosing()
 					_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, _getAnimation(_currentAnimationID)->getPreviewTexturePath());
 					_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, true);
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityId(), "Animation: " + selectedButtonID, 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityId(), true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("animationList");

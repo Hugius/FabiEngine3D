@@ -11,7 +11,7 @@ void MasterRenderer::_captureWaterReflections()
 		_waterReflectionCaptor->bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		vector<string> savedModelEntityIDs;
+		vector<string> savedModelEntityIds;
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL ||
 		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
 		{
@@ -22,16 +22,16 @@ void MasterRenderer::_captureWaterReflections()
 					if(!entity->isReflected())
 					{
 						entity->setVisible(false);
-						savedModelEntityIDs.push_back(entity->getId());
+						savedModelEntityIds.push_back(entity->getId());
 						continue;
 					}
 
-					for(const auto& partID : entity->getPartIDs())
+					for(const auto& partId : entity->getPartIDs())
 					{
-						if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR))
+						if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR))
 						{
 							entity->setVisible(false);
-							savedModelEntityIDs.push_back(entity->getId());
+							savedModelEntityIds.push_back(entity->getId());
 							break;
 						}
 					}
@@ -39,7 +39,7 @@ void MasterRenderer::_captureWaterReflections()
 			}
 		}
 
-		vector<string> savedQuad3dEntityIDs;
+		vector<string> savedQuad3dEntityIds;
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
 		{
 			for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
@@ -47,7 +47,7 @@ void MasterRenderer::_captureWaterReflections()
 				if(!entity->isReflected() && entity->isVisible())
 				{
 					entity->setVisible(false);
-					savedQuad3dEntityIDs.push_back(entity->getId());
+					savedQuad3dEntityIds.push_back(entity->getId());
 				}
 			}
 		}
@@ -128,7 +128,7 @@ void MasterRenderer::_captureWaterReflections()
 
 		_renderBus->setWaterReflectionMap(_waterReflectionCaptor->getTexture(0));
 
-		for(const auto& savedID : savedModelEntityIDs)
+		for(const auto& savedID : savedModelEntityIds)
 		{
 			for(const auto& [key, entity] : _modelEntityManager->getEntities())
 			{
@@ -139,7 +139,7 @@ void MasterRenderer::_captureWaterReflections()
 			}
 		}
 
-		for(const auto& savedID : savedQuad3dEntityIDs)
+		for(const auto& savedID : savedQuad3dEntityIds)
 		{
 			for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 			{

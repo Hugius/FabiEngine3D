@@ -136,7 +136,7 @@ void ModelEntityManager::update()
 
 		if(entity->isVisible())
 		{
-			if(!entity->getLevelOfDetailEntityID().empty())
+			if(!entity->getLevelOfDetailEntityId().empty())
 			{
 				auto levelOfDetailEntityPair = getEntities().find(entity->getId());
 				if(levelOfDetailEntityPair == getEntities().end())
@@ -148,7 +148,7 @@ void ModelEntityManager::update()
 				auto entityPosition = entity->getBasePosition();
 				auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
 
-				bool isFarEnough = (absolsuteDistance > entity->getLevelOfDetailDistance()) && (!entity->getLevelOfDetailEntityID().empty());
+				bool isFarEnough = (absolsuteDistance > entity->getLevelOfDetailDistance()) && (!entity->getLevelOfDetailEntityId().empty());
 				entity->setLevelOfDetailed(isFarEnough);
 			}
 
@@ -164,32 +164,32 @@ void ModelEntityManager::update()
 					}
 				}
 
-				if(_reflectionManager->getEntities().find(entity->getPreviousReflectionEntityID()) == _reflectionManager->getEntities().end())
+				if(_reflectionManager->getEntities().find(entity->getPreviousReflectionEntityId()) == _reflectionManager->getEntities().end())
 				{
-					entity->setPreviousReflectionEntityID("");
+					entity->setPreviousReflectionEntityId("");
 					entity->setCubeReflectionMixValue(1.0f);
 				}
-				if(_reflectionManager->getEntities().find(entity->getCurrentReflectionEntityID()) == _reflectionManager->getEntities().end())
+				if(_reflectionManager->getEntities().find(entity->getCurrentReflectionEntityId()) == _reflectionManager->getEntities().end())
 				{
-					entity->setCurrentReflectionEntityID("");
+					entity->setCurrentReflectionEntityId("");
 					entity->setCubeReflectionMixValue(1.0f);
 				}
-				if(entity->getPreviousReflectionEntityID() == entity->getCurrentReflectionEntityID())
+				if(entity->getPreviousReflectionEntityId() == entity->getCurrentReflectionEntityId())
 				{
-					entity->setPreviousReflectionEntityID("");
+					entity->setPreviousReflectionEntityId("");
 					entity->setCubeReflectionMixValue(1.0f);
 				}
 
 				if(!reflectionDistanceMap.empty())
 				{
-					auto& closestReflectionEntityID = reflectionDistanceMap.begin()->second->getId();
+					auto& closestReflectionEntityId = reflectionDistanceMap.begin()->second->getId();
 
-					if(entity->getCurrentReflectionEntityID() != closestReflectionEntityID)
+					if(entity->getCurrentReflectionEntityId() != closestReflectionEntityId)
 					{
-						entity->setPreviousReflectionEntityID(entity->getCurrentReflectionEntityID());
-						entity->setCurrentReflectionEntityID(closestReflectionEntityID);
+						entity->setPreviousReflectionEntityId(entity->getCurrentReflectionEntityId());
+						entity->setCurrentReflectionEntityId(closestReflectionEntityId);
 
-						if(!entity->getPreviousReflectionEntityID().empty())
+						if(!entity->getPreviousReflectionEntityId().empty())
 						{
 							entity->setCubeReflectionMixValue(0.0f);
 						}

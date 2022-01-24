@@ -6,21 +6,21 @@ GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, c
 	:
 	_fe3d(fe3d),
 	_ID(id),
-	_entityID("@" + parentID + "_" + id),
+	_entityId("@" + parentID + "_" + id),
 	_parentID(parentID),
 	_initialPosition(position),
 	_initialSize(size),
 	_initialColor(color)
 {
-	_fe3d->quad2d_create(_entityID, true);
-	_fe3d->quad2d_setPosition(_entityID, position);
-	_fe3d->quad2d_setSize(_entityID, size);
-	_fe3d->quad2d_setColor(_entityID, color);
+	_fe3d->quad2d_create(_entityId, true);
+	_fe3d->quad2d_setPosition(_entityId, position);
+	_fe3d->quad2d_setSize(_entityId, size);
+	_fe3d->quad2d_setColor(_entityId, color);
 }
 
 GuiWindow::~GuiWindow()
 {
-	_fe3d->quad2d_delete(_entityID);
+	_fe3d->quad2d_delete(_entityId);
 }
 
 void GuiWindow::update(bool isHoverable)
@@ -33,11 +33,11 @@ void GuiWindow::update(bool isHoverable)
 
 const bool GuiWindow::isHovered() const
 {
-	if(_fe3d->quad2d_isVisible(_entityID))
+	if(_fe3d->quad2d_isVisible(_entityId))
 	{
 		fvec2 cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()));
-		fvec2 buttonPosition = _fe3d->quad2d_getPosition(_entityID);
-		fvec2 buttonSize = _fe3d->quad2d_getSize(_entityID);
+		fvec2 buttonPosition = _fe3d->quad2d_getPosition(_entityId);
+		fvec2 buttonSize = _fe3d->quad2d_getSize(_entityId);
 
 		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f))
 		{
@@ -56,9 +56,9 @@ const string& GuiWindow::getId() const
 	return _ID;
 }
 
-const string& GuiWindow::getEntityID() const
+const string& GuiWindow::getEntityId() const
 {
-	return _entityID;
+	return _entityId;
 }
 
 const string& GuiWindow::getParentID() const
@@ -91,8 +91,8 @@ void GuiWindow::createScreen(const string& id)
 		}
 	}
 
-	auto windowPosition = _fe3d->quad2d_getPosition(_entityID);
-	auto windowSize = _fe3d->quad2d_getSize(_entityID);
+	auto windowPosition = _fe3d->quad2d_getPosition(_entityId);
+	auto windowSize = _fe3d->quad2d_getSize(_entityId);
 
 	_screens.push_back(make_shared<GuiScreen>(_fe3d, _parentID + "_" + _ID, id, windowPosition, windowSize));
 }

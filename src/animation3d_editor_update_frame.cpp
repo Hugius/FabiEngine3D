@@ -33,9 +33,18 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())
 		{
-			auto modelParts = currentAnimation->getPartIDs();
-			modelParts.erase(modelParts.begin());
-			_gui->getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), modelParts);
+			if(_currentPartID.empty())
+			{
+				auto modelParts = currentAnimation->getPartIDs();
+				modelParts.erase(modelParts.begin());
+				_gui->getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), modelParts);
+			}
+			else
+			{
+				_fe3d->model_setOpacity(currentAnimation->getPreviewModelID(), _currentPartID, _originalPartOpacity);
+
+				_currentPartID = "";
+			}
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformation")->isHovered())
 		{
@@ -145,29 +154,42 @@ void Animation3dEditor::_updateFrameMenu()
 			_mustUpdateCurrentFramePreview = true;
 		}
 
-		if(transformationType == TransformationType::MOVEMENT)
+		screen->getButton("part")->changeTextContent(_currentPartID.empty() ? "Select Part" : "Unselect Part");
+		switch(transformationType)
 		{
-			screen->getButton("transformationType")->changeTextContent("Type: MOVE");
+			case TransformationType::MOVEMENT:
+			{
+				screen->getButton("transformationType")->changeTextContent("Type: MOVE");
+				break;
+			}
+			case TransformationType::ROTATION:
+			{
+				screen->getButton("transformationType")->changeTextContent("Type: ROTATE");
+				break;
+			}
+			case TransformationType::SCALING:
+			{
+				screen->getButton("transformationType")->changeTextContent("Type: SCALE");
+				break;
+			}
 		}
-		else if(transformationType == TransformationType::ROTATION)
+		switch(speedType)
 		{
-			screen->getButton("transformationType")->changeTextContent("Type: ROTATE");
-		}
-		else
-		{
-			screen->getButton("transformationType")->changeTextContent("Type: SCALE");
-		}
-		if(speedType == Animation3dSpeedType::LINEAR)
-		{
-			screen->getButton("speedType")->changeTextContent("Type: LINEAR");
-		}
-		else if(speedType == Animation3dSpeedType::EXPONENTIAL)
-		{
-			screen->getButton("speedType")->changeTextContent("Type: EXPONENT");
-		}
-		else
-		{
-			screen->getButton("speedType")->changeTextContent("Type: INSTANT");
+			case Animation3dSpeedType::LINEAR:
+			{
+				screen->getButton("speedType")->changeTextContent("Type: LINEAR");
+				break;
+			}
+			case Animation3dSpeedType::EXPONENTIAL:
+			{
+				screen->getButton("speedType")->changeTextContent("Type: EXPONENT");
+				break;
+			}
+			case Animation3dSpeedType::INSTANTLY:
+			{
+				screen->getButton("speedType")->changeTextContent("Type: INSTANT");
+				break;
+			}
 		}
 
 		frame.setTargetTransformation(_currentPartID, transformation);

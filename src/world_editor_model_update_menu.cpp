@@ -79,7 +79,6 @@ void WorldEditor::_updateModelPlacingMenu()
 						_deactivateReflection();
 
 						_currentTemplateModelID = modelID;
-						_fe3d->model_setBasePosition(_currentTemplateModelID, fvec3(0.0f));
 						_fe3d->model_setVisible(_currentTemplateModelID, true);
 						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
 						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + _currentTemplateModelID.substr(1), 0.025f);
@@ -87,6 +86,7 @@ void WorldEditor::_updateModelPlacingMenu()
 
 						if(_fe3d->terrain_getSelectedID().empty())
 						{
+							_fe3d->model_setBasePosition(_currentTemplateModelID, fvec3(0.0f));
 							_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 							_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 							_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));

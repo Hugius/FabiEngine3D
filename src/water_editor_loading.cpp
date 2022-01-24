@@ -31,7 +31,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string waterID;
+		string waterId;
 		string dudvMapPath;
 		string normalMapPath;
 		string displacementMapPath;
@@ -39,7 +39,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 		istringstream iss(line);
 
 		iss >>
-			waterID >>
+			waterId >>
 			dudvMapPath >>
 			normalMapPath >>
 			displacementMapPath;
@@ -95,7 +95,7 @@ const bool WaterEditor::loadFromFile()
 		Logger::throwError("WaterEditor::loadFromFile");
 	}
 
-	_loadedWaterIDs.clear();
+	_loadedWaterIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -111,7 +111,7 @@ const bool WaterEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string waterID;
+		string waterId;
 		string dudvMapPath;
 		string normalMapPath;
 		string displacementMapPath;
@@ -132,7 +132,7 @@ const bool WaterEditor::loadFromFile()
 		istringstream iss(line);
 
 		iss >>
-			waterID >>
+			waterId >>
 			dudvMapPath >>
 			normalMapPath >>
 			displacementMapPath >>
@@ -161,25 +161,25 @@ const bool WaterEditor::loadFromFile()
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
-		_fe3d->water_create(waterID);
+		_fe3d->water_create(waterId);
 
-		if(_fe3d->water_isExisting(waterID))
+		if(_fe3d->water_isExisting(waterId))
 		{
-			_loadedWaterIDs.push_back(waterID);
+			_loadedWaterIds.push_back(waterId);
 
-			_fe3d->water_setHeight(waterID, height);
-			_fe3d->water_setSize(waterID, size);
-			_fe3d->water_setSpecular(waterID, isSpecular);
-			_fe3d->water_setReflective(waterID, isReflective);
-			_fe3d->water_setRefractive(waterID, isRefractive);
-			_fe3d->water_setWaveHeight(waterID, waveHeight);
-			_fe3d->water_setQuality(waterID, static_cast<WaterQuality>(quality));
-			_fe3d->water_setSpecularShininess(waterID, specularShininess);
-			_fe3d->water_setSpecularIntensity(waterID, specularIntensity);
-			_fe3d->water_setOpacity(waterID, opacity);
-			_fe3d->water_setColor(waterID, color);
-			_fe3d->water_setTextureRepeat(waterID, textureRepeat);
-			_fe3d->water_setSpeed(waterID, speed);
+			_fe3d->water_setHeight(waterId, height);
+			_fe3d->water_setSize(waterId, size);
+			_fe3d->water_setSpecular(waterId, isSpecular);
+			_fe3d->water_setReflective(waterId, isReflective);
+			_fe3d->water_setRefractive(waterId, isRefractive);
+			_fe3d->water_setWaveHeight(waterId, waveHeight);
+			_fe3d->water_setQuality(waterId, static_cast<WaterQuality>(quality));
+			_fe3d->water_setSpecularShininess(waterId, specularShininess);
+			_fe3d->water_setSpecularIntensity(waterId, specularIntensity);
+			_fe3d->water_setOpacity(waterId, opacity);
+			_fe3d->water_setColor(waterId, color);
+			_fe3d->water_setTextureRepeat(waterId, textureRepeat);
+			_fe3d->water_setSpeed(waterId, speed);
 
 			if(!dudvMapPath.empty())
 			{
@@ -188,7 +188,7 @@ const bool WaterEditor::loadFromFile()
 					dudvMapPath = string("projects\\" + _currentProjectId + "\\" + dudvMapPath);
 				}
 
-				_fe3d->water_setDudvMap(waterID, dudvMapPath);
+				_fe3d->water_setDudvMap(waterId, dudvMapPath);
 			}
 
 			if(!normalMapPath.empty())
@@ -198,7 +198,7 @@ const bool WaterEditor::loadFromFile()
 					normalMapPath = string("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
 
-				_fe3d->water_setNormalMap(waterID, normalMapPath);
+				_fe3d->water_setNormalMap(waterId, normalMapPath);
 			}
 
 			if(!displacementMapPath.empty())
@@ -208,7 +208,7 @@ const bool WaterEditor::loadFromFile()
 					displacementMapPath = string("projects\\" + _currentProjectId + "\\" + displacementMapPath);
 				}
 
-				_fe3d->water_setDisplacementMap(waterID, displacementMapPath);
+				_fe3d->water_setDisplacementMap(waterId, displacementMapPath);
 			}
 		}
 	}

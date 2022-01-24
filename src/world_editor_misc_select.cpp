@@ -36,18 +36,18 @@ void WorldEditor::_selectQuad3d(const string& id)
 
 void WorldEditor::_selectText3d(const string& id)
 {
-	_selectedTextID = id;
+	_selectedTextId = id;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
-	if(_activeModelId.empty() && _activeTextID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelId.empty() && _activeTextId.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = id;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
-		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), true);
-		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityId(), "Selected text3d: " + rawID, 0.025f);
+		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
+		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textId")->getEntityId(), "Selected text3d: " + rawID, 0.025f);
 	}
 }
 

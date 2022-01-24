@@ -22,18 +22,18 @@ const bool Text3dEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\text3d.fe3d");
 
-	for(const auto& textID : _loadedTextIDs)
+	for(const auto& textId : _loadedTextIds)
 	{
-		auto size = _fe3d->text3d_getSize(textID);
-		auto color = _fe3d->text3d_getColor(textID);
-		auto fontMapPath = _fe3d->text3d_getFontMapPath(textID);
-		auto isFacingX = _fe3d->text3d_isFacingCameraX(textID);
-		auto isFacingY = _fe3d->text3d_isFacingCameraY(textID);
-		auto isReflected = _fe3d->text3d_isReflected(textID);
-		auto isShadowed = _fe3d->text3d_isShadowed(textID);
-		auto lightness = _fe3d->text3d_getLightness(textID);
-		auto isBright = _fe3d->text3d_isBright(textID);
-		auto opacity = _fe3d->text3d_getOpacity(textID);
+		auto size = _fe3d->text3d_getSize(textId);
+		auto color = _fe3d->text3d_getColor(textId);
+		auto fontMapPath = _fe3d->text3d_getFontMapPath(textId);
+		auto isFacingX = _fe3d->text3d_isFacingCameraX(textId);
+		auto isFacingY = _fe3d->text3d_isFacingCameraY(textId);
+		auto isReflected = _fe3d->text3d_isReflected(textId);
+		auto isShadowed = _fe3d->text3d_isShadowed(textId);
+		auto lightness = _fe3d->text3d_getLightness(textId);
+		auto isBright = _fe3d->text3d_isBright(textId);
+		auto opacity = _fe3d->text3d_getOpacity(textId);
 
 		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 
@@ -42,7 +42,7 @@ const bool Text3dEditor::saveToFile() const
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
 		file <<
-			textID << " " <<
+			textId << " " <<
 			size.x << " " <<
 			size.y << " " <<
 			color.r << " " <<

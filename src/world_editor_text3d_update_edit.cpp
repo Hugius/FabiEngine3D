@@ -6,21 +6,21 @@ void WorldEditor::_updateText3dEditing()
 
 	if(!_dontResetSelectedText3d)
 	{
-		_selectedTextID = "";
+		_selectedTextId = "";
 	}
 	else
 	{
 		_dontResetSelectedText3d = false;
 	}
 
-	if(_currentTemplateModelId.empty() && _currentTemplateTextID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
+	if(_currentTemplateModelId.empty() && _currentTemplateTextId.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
 		for(const auto& id : _fe3d->text3d_getIds())
 		{
 			if(id[0] != '@')
 			{
-				auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
-				bool hovered = (hoveredAabbID.size() >= id.size()) && (hoveredAabbID.substr(0, id.size()) == id);
+				auto hoveredAabbId = _fe3d->raycast_checkCursorInAny().first;
+				bool hovered = (hoveredAabbId.size() >= id.size()) && (hoveredAabbId.substr(0, id.size()) == id);
 
 				if(hovered && _fe3d->misc_isCursorInsideViewport() &&
 				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
@@ -29,15 +29,15 @@ void WorldEditor::_updateText3dEditing()
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						if(_selectedTextID != _activeTextID)
+						if(_selectedTextId != _activeTextId)
 						{
-							_activateText3d(_selectedTextID);
+							_activateText3d(_selectedTextId);
 						}
 					}
 				}
 				else
 				{
-					if((id != _selectedTextID) && (id != _activeTextID))
+					if((id != _selectedTextId) && (id != _activeTextId))
 					{
 						_unselectText3d(id);
 					}
@@ -49,27 +49,27 @@ void WorldEditor::_updateText3dEditing()
 		{
 			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
-				if(!_activeTextID.empty())
+				if(!_activeTextId.empty())
 				{
-					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedTextID.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedTextId.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
-						_activeTextID = "";
+						_activeTextId = "";
 						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
 		}
 
-		if(_selectedTextID.empty())
+		if(_selectedTextId.empty())
 		{
-			_updateText3dHighlighting(_activeTextID, _activeText3dHighlightDirection);
+			_updateText3dHighlighting(_activeTextId, _activeText3dHighlightDirection);
 		}
 		else
 		{
-			_updateText3dHighlighting(_selectedTextID, _selectedText3dHighlightDirection);
+			_updateText3dHighlighting(_selectedTextId, _selectedText3dHighlightDirection);
 		}
 
-		if(!_activeTextID.empty())
+		if(!_activeTextId.empty())
 		{
 			auto screen = rightWindow->getScreen("text3dPropertiesMenu");
 
@@ -97,13 +97,13 @@ void WorldEditor::_updateText3dEditing()
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
-					_fe3d->text3d_setFrozen(_activeTextID, !_fe3d->text3d_isFrozen(_activeTextID));
+					_fe3d->text3d_setFrozen(_activeTextId, !_fe3d->text3d_isFrozen(_activeTextId));
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d->text3d_delete(_activeTextID);
-					_loadedTextIDs.erase(_activeTextID);
-					_activeTextID = "";
+					_fe3d->text3d_delete(_activeTextId);
+					_loadedTextIds.erase(_activeTextId);
+					_activeTextId = "";
 					rightWindow->setActiveScreen("main");
 					return;
 				}
@@ -111,16 +111,16 @@ void WorldEditor::_updateText3dEditing()
 
 			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d->text3d_delete(_activeTextID);
-				_loadedTextIDs.erase(_activeTextID);
-				_activeTextID = "";
+				_fe3d->text3d_delete(_activeTextId);
+				_loadedTextIds.erase(_activeTextId);
+				_activeTextId = "";
 				rightWindow->setActiveScreen("main");
 				return;
 			}
 
-			auto position = _fe3d->text3d_getPosition(_activeTextID);
-			auto rotation = _fe3d->text3d_getRotation(_activeTextID);
-			auto size = _fe3d->text3d_getSize(_activeTextID);
+			auto position = _fe3d->text3d_getPosition(_activeTextId);
+			auto rotation = _fe3d->text3d_getRotation(_activeTextId);
+			auto size = _fe3d->text3d_getSize(_activeTextId);
 
 			screen->getButton("xMinus")->setHoverable(true);
 			screen->getButton("xPlus")->setHoverable(true);
@@ -147,7 +147,7 @@ void WorldEditor::_updateText3dEditing()
 				_handleValueChanging("text3dPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / TEXT3D_POSITION_DIVIDER));
 				_handleValueChanging("text3dPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / TEXT3D_POSITION_DIVIDER));
 				_handleValueChanging("text3dPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / TEXT3D_POSITION_DIVIDER));
-				_fe3d->text3d_setPosition(_activeTextID, position);
+				_fe3d->text3d_setPosition(_activeTextId, position);
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
@@ -157,7 +157,7 @@ void WorldEditor::_updateText3dEditing()
 				_handleValueChanging("text3dPropertiesMenu", "yMinus", "y", rotation.y, -TEXT3D_ROTATION_SPEED);
 				_handleValueChanging("text3dPropertiesMenu", "zPlus", "z", rotation.z, TEXT3D_ROTATION_SPEED);
 				_handleValueChanging("text3dPropertiesMenu", "zMinus", "z", rotation.z, -TEXT3D_ROTATION_SPEED);
-				_fe3d->text3d_setRotation(_activeTextID, rotation);
+				_fe3d->text3d_setRotation(_activeTextId, rotation);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
@@ -165,15 +165,15 @@ void WorldEditor::_updateText3dEditing()
 				_handleValueChanging("text3dPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / TEXT3D_SIZE_DIVIDER), TEXT3D_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("text3dPropertiesMenu", "yPlus", "y", size.y, (_editorSpeed / TEXT3D_SIZE_DIVIDER), TEXT3D_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("text3dPropertiesMenu", "yMinus", "y", size.y, -(_editorSpeed / TEXT3D_SIZE_DIVIDER), TEXT3D_SIZE_MULTIPLIER, 0.0f);
-				_fe3d->text3d_setSize(_activeTextID, size);
+				_fe3d->text3d_setSize(_activeTextId, size);
 			}
 
-			screen->getButton("freeze")->changeTextContent(_fe3d->text3d_isFrozen(_activeTextID) ? "Unfreeze" : "Freeze");
+			screen->getButton("freeze")->changeTextContent(_fe3d->text3d_isFrozen(_activeTextId) ? "Unfreeze" : "Freeze");
 		}
 
-		if(_selectedTextID.empty() && _activeTextID.empty())
+		if(_selectedTextId.empty() && _activeTextId.empty())
 		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
 		}
 	}
 }

@@ -16,7 +16,7 @@ public:
 	const bool isVisible() const;
 
 protected:
-	const string _ID;
+	const string _id;
 
 	bool _isVisible = true;
 

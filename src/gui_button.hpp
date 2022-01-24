@@ -29,7 +29,7 @@ public:
 protected:
 	void _updateHovering(bool isHoverable);
 
-	const string _ID;
+	const string _id;
 	const string _parentID;
 
 	const fvec3 _hoverColor;

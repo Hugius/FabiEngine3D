@@ -346,15 +346,15 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 		{
 			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
-				auto aabbIDs = _fe3d->aabb_getChildIDs(args[0].getString(), AabbParentEntityType::QUAD3D);
+				auto aabbIds = _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::QUAD3D);
 
-				if(aabbIDs.empty())
+				if(aabbIds.empty())
 				{
 					_throwScriptError("quad3d with id \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				for(const auto& id : aabbIDs)
+				for(const auto& id : aabbIds)
 				{
 					_fe3d->aabb_setRaycastResponsive(id, args[1].getBoolean());
 				}
@@ -371,15 +371,15 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 		{
 			if(_validateFe3dQuad3d(args[0].getString(), false))
 			{
-				auto aabbIDs = _fe3d->aabb_getChildIDs(args[0].getString(), AabbParentEntityType::QUAD3D);
+				auto aabbIds = _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::QUAD3D);
 
-				if(aabbIDs.empty())
+				if(aabbIds.empty())
 				{
 					_throwScriptError("quad3d with id \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				for(const auto& id : aabbIDs)
+				for(const auto& id : aabbIds)
 				{
 					_fe3d->aabb_setCollisionResponsive(id, args[1].getBoolean());
 				}

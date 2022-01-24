@@ -31,7 +31,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string textID;
+		string textId;
 		string fontMapPath;
 		fvec2 size;
 		fvec3 color;
@@ -41,7 +41,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 		istringstream iss(line);
 
 		iss >>
-			textID >>
+			textId >>
 			size.x >>
 			size.y >>
 			color.r >>
@@ -78,7 +78,7 @@ const bool Text3dEditor::loadFromFile()
 		Logger::throwError("Text3dEditor::loadFromFile");
 	}
 
-	_loadedTextIDs.clear();
+	_loadedTextIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -94,7 +94,7 @@ const bool Text3dEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string textID;
+		string textId;
 		string fontMapPath;
 		fvec2 size;
 		fvec3 color;
@@ -109,7 +109,7 @@ const bool Text3dEditor::loadFromFile()
 		istringstream iss(line);
 
 		iss >>
-			textID >>
+			textId >>
 			size.x >>
 			size.y >>
 			color.r >>
@@ -133,22 +133,22 @@ const bool Text3dEditor::loadFromFile()
 			fontMapPath = string("projects\\" + _currentProjectId + "\\" + fontMapPath);
 		}
 
-		_fe3d->text3d_create(textID, fontMapPath, false);
+		_fe3d->text3d_create(textId, fontMapPath, false);
 
-		if(_fe3d->text3d_isExisting(textID))
+		if(_fe3d->text3d_isExisting(textId))
 		{
-			_loadedTextIDs.push_back(textID);
+			_loadedTextIds.push_back(textId);
 
-			_fe3d->text3d_setVisible(textID, false);
-			_fe3d->text3d_setSize(textID, size);
-			_fe3d->text3d_setColor(textID, color);
-			_fe3d->text3d_setLightness(textID, lightness);
-			_fe3d->text3d_setFacingCameraX(textID, isFacingX);
-			_fe3d->text3d_setFacingCameraY(textID, isFacingY);
-			_fe3d->text3d_setShadowed(textID, isShadowed);
-			_fe3d->text3d_setReflected(textID, isReflected);
-			_fe3d->text3d_setBright(textID, isBright);
-			_fe3d->text3d_setOpacity(textID, opacity);
+			_fe3d->text3d_setVisible(textId, false);
+			_fe3d->text3d_setSize(textId, size);
+			_fe3d->text3d_setColor(textId, color);
+			_fe3d->text3d_setLightness(textId, lightness);
+			_fe3d->text3d_setFacingCameraX(textId, isFacingX);
+			_fe3d->text3d_setFacingCameraY(textId, isFacingY);
+			_fe3d->text3d_setShadowed(textId, isShadowed);
+			_fe3d->text3d_setReflected(textId, isReflected);
+			_fe3d->text3d_setBright(textId, isBright);
+			_fe3d->text3d_setOpacity(textId, opacity);
 		}
 	}
 

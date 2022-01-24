@@ -17,22 +17,22 @@ void ModelEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto IDs = getLoadedIDs();
-			for(auto& id : IDs)
+			auto Ids = getLoadedIds();
+			for(auto& id : Ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("modelList", "Edit Model", fvec2(-0.5f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("modelList", "Edit Model", fvec2(-0.5f, 0.1f), Ids);
 			_isChoosingModel = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto IDs = getLoadedIDs();
-			for(auto& id : IDs)
+			auto Ids = getLoadedIds();
+			for(auto& id : Ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("modelList", "Delete Model", fvec2(-0.5f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("modelList", "Delete Model", fvec2(-0.5f, 0.1f), Ids);
 			_isChoosingModel = true;
 			_isDeletingModel = true;
 		}
@@ -82,9 +82,9 @@ void ModelEditor::_updateChoiceMenu()
 		{
 			if(_currentPartId.empty())
 			{
-				auto IDs = _fe3d->model_getPartIds(_currentModelId);
-				sort(IDs.begin(), IDs.end());
-				_gui->getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), IDs);
+				auto Ids = _fe3d->model_getPartIds(_currentModelId);
+				sort(Ids.begin(), Ids.end());
+				_gui->getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), Ids);
 				_isChoosingPart = true;
 			}
 			else

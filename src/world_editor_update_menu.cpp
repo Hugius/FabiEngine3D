@@ -22,16 +22,16 @@ void WorldEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto IDs = _getWorldIDs();
-			sort(IDs.begin(), IDs.end());
-			_gui->getOverlay()->createChoiceForm("worldList", "Edit World", fvec2(0.0f, 0.1f), IDs);
+			auto Ids = _getWorldIds();
+			sort(Ids.begin(), Ids.end());
+			_gui->getOverlay()->createChoiceForm("worldList", "Edit World", fvec2(0.0f, 0.1f), Ids);
 			_isChoosingWorld = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto IDs = _getWorldIDs();
-			sort(IDs.begin(), IDs.end());
-			_gui->getOverlay()->createChoiceForm("worldList", "Delete World", fvec2(0.0f, 0.1f), IDs);
+			auto Ids = _getWorldIds();
+			sort(Ids.begin(), Ids.end());
+			_gui->getOverlay()->createChoiceForm("worldList", "Delete World", fvec2(0.0f, 0.1f), Ids);
 			_isChoosingWorld = true;
 			_isDeletingWorld = true;
 		}
@@ -98,7 +98,7 @@ void WorldEditor::_updateChoiceMenu()
 		{
 			_currentTemplateModelId = "";
 			_currentTemplateQuadId = "";
-			_currentTemplateTextID = "";
+			_currentTemplateTextId = "";
 			_currentTemplateSoundID = "";
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;
@@ -109,9 +109,9 @@ void WorldEditor::_updateChoiceMenu()
 			unloadEditorWorld();
 
 			_currentWorldID = "";
-			_currentSkyID = "";
-			_currentTerrainID = "";
-			_currentWaterID = "";
+			_currentSkyId = "";
+			_currentTerrainId = "";
+			_currentWaterId = "";
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 			return;
@@ -120,7 +120,7 @@ void WorldEditor::_updateChoiceMenu()
 		{
 			_currentTemplateModelId = "";
 			_currentTemplateQuadId = "";
-			_currentTemplateTextID = "";
+			_currentTemplateTextId = "";
 			_currentTemplateSoundID = "";
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;
@@ -129,9 +129,9 @@ void WorldEditor::_updateChoiceMenu()
 			unloadEditorWorld();
 
 			_currentWorldID = "";
-			_currentSkyID = "";
-			_currentTerrainID = "";
-			_currentWaterID = "";
+			_currentSkyId = "";
+			_currentTerrainId = "";
+			_currentWaterId = "";
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 			return;

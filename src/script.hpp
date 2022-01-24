@@ -10,7 +10,7 @@ public:
 	void deleteScriptFile(const string& id);
 	void clear();
 
-	const vector<string> getScriptFileIDs() const;
+	const vector<string> getScriptFileIds() const;
 
 	const vector<pair<string, unsigned int>> findKeyword(const string& keyword) const;
 

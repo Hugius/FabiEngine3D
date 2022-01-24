@@ -35,9 +35,9 @@ void WorldEditor::_updateSoundMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSoundChoice");
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->deleteButtons();
 
-			auto IDs = _fe3d->sound3d_getIds();
-			sort(IDs.begin(), IDs.end());
-			for(auto& soundID : IDs)
+			auto Ids = _fe3d->sound3d_getIds();
+			sort(Ids.begin(), Ids.end());
+			for(auto& soundID : Ids)
 			{
 				if(soundID[0] != '@')
 				{
@@ -68,7 +68,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& soundID : _soundEditor->getLoadedIDs())
+			for(const auto& soundID : _soundEditor->getLoadedIds())
 			{
 				if(screen->getScrollingList("soundList")->getButton(soundID)->isHovered())
 				{
@@ -88,7 +88,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityId(), "Sound: " + _currentTemplateSoundID.substr(1), 0.025f);
 					_fe3d->misc_centerCursor();
 
-					if(_fe3d->terrain_getSelectedID().empty())
+					if(_fe3d->terrain_getSelectedId().empty())
 					{
 						_fe3d->sound3d_setPosition(_currentTemplateSoundID, fvec3(0.0f));
 						_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));

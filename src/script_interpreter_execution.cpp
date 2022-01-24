@@ -76,7 +76,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	unsigned int scopeDepth = 0;
 
 	_executionDepth++;
-	_currentScriptIDsStack.push_back(scriptID);
+	_currentScriptIdsStack.push_back(scriptID);
 	_currentLineIndexStack.push_back(0);
 	_localVariables[_executionDepth] = {};
 
@@ -218,16 +218,16 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			if
 				(
 				(scriptType == ScriptType::INITIALIZE &&
-				(find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end() ||
-				find(_terminateScriptIDs.begin(), _terminateScriptIDs.end(), scriptToExecute) != _terminateScriptIDs.end()))
+				(find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecute) != _updateScriptIds.end() ||
+				find(_terminateScriptIds.begin(), _terminateScriptIds.end(), scriptToExecute) != _terminateScriptIds.end()))
 				||
 				(scriptType == ScriptType::UPDATE &&
-				(find(_initializeScriptIDs.begin(), _initializeScriptIDs.end(), scriptToExecute) != _initializeScriptIDs.end() ||
-				find(_terminateScriptIDs.begin(), _terminateScriptIDs.end(), scriptToExecute) != _terminateScriptIDs.end()))
+				(find(_initializeScriptIds.begin(), _initializeScriptIds.end(), scriptToExecute) != _initializeScriptIds.end() ||
+				find(_terminateScriptIds.begin(), _terminateScriptIds.end(), scriptToExecute) != _terminateScriptIds.end()))
 				||
 				(scriptType == ScriptType::TERMINATE &&
-				(find(_initializeScriptIDs.begin(), _initializeScriptIDs.end(), scriptToExecute) != _initializeScriptIDs.end() ||
-				find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end()))
+				(find(_initializeScriptIds.begin(), _initializeScriptIds.end(), scriptToExecute) != _initializeScriptIds.end() ||
+				find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecute) != _updateScriptIds.end()))
 				)
 			{
 				_throwScriptError("script \"" + scriptToExecute + "\" is not of the same type!");
@@ -235,9 +235,9 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			}
 
 			auto& scriptList =
-				(scriptType == ScriptType::INITIALIZE) ? _initializeScriptIDs :
-				(scriptType == ScriptType::UPDATE) ? _updateScriptIDs :
-				_terminateScriptIDs;
+				(scriptType == ScriptType::INITIALIZE) ? _initializeScriptIds :
+				(scriptType == ScriptType::UPDATE) ? _updateScriptIds :
+				_terminateScriptIds;
 
 			if(find(scriptList.begin(), scriptList.end(), scriptToExecute) != scriptList.end())
 			{
@@ -470,7 +470,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 	}
 
-	_currentScriptIDsStack.pop_back();
+	_currentScriptIdsStack.pop_back();
 	_currentLineIndexStack.pop_back();
 	_localVariables.erase(_executionDepth);
 	_executionDepth--;

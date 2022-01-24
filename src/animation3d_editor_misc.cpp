@@ -82,29 +82,29 @@ const vector<string> Animation3dEditor::getAnimationIds() const
 
 const vector<string> Animation3dEditor::getStartedModelAnimationIds() const
 {
-	set<string> IDs;
+	set<string> Ids;
 
 	for(const auto& [key, animation] : _startedModelAnimations)
 	{
-		IDs.insert(key.first);
+		Ids.insert(key.first);
 	}
 
-	return vector<string>(IDs.begin(), IDs.end());
+	return vector<string>(Ids.begin(), Ids.end());
 }
 
 const vector<string> Animation3dEditor::getStartedModelAnimationIds(const string& modelId) const
 {
-	set<string> IDs;
+	set<string> Ids;
 
 	for(const auto& [key, animation] : _startedModelAnimations)
 	{
 		if(modelId == key.second)
 		{
-			IDs.insert(key.first);
+			Ids.insert(key.first);
 		}
 	}
 
-	return vector<string>(IDs.begin(), IDs.end());
+	return vector<string>(Ids.begin(), Ids.end());
 }
 
 const float Animation3dEditor::getModelAnimationSpeed(const string& animationId, const string& modelId) const

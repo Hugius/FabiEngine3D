@@ -130,13 +130,13 @@ const bool ModelEditor::saveToFile() const
 
 		file << endl;
 
-		for(const auto& aabbID : _fe3d->aabb_getChildIDs(modelId, AabbParentEntityType::MODEL))
+		for(const auto& aabbId : _fe3d->aabb_getChildIds(modelId, AabbParentEntityType::MODEL))
 		{
-			auto position = _fe3d->aabb_getPosition(aabbID);
-			auto size = _fe3d->aabb_getSize(aabbID);
+			auto position = _fe3d->aabb_getPosition(aabbId);
+			auto size = _fe3d->aabb_getSize(aabbId);
 
 			file << "AABB " <<
-				aabbID << " " <<
+				aabbId << " " <<
 				modelId << " " <<
 				position.x << " " <<
 				position.y << " " <<

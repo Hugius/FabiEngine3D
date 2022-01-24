@@ -13,7 +13,7 @@ public:
 	void update();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedIDs();
+	const vector<string>& getLoadedIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
@@ -33,9 +33,9 @@ private:
 	void _updateMiscellaneous();
 
 	static inline const string TEXT_CONTENT = "Text123";
-	vector<string> _loadedTextIDs;
-	string _hoveredTextID = "";
-	string _currentTextID = "";
+	vector<string> _loadedTextIds;
+	string _hoveredTextId = "";
+	string _currentTextId = "";
 	string _currentProjectId = "";
 
 	static inline constexpr float CW = 0.115f;

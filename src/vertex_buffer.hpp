@@ -8,7 +8,7 @@
 
 using std::vector;
 
-using BufferID = GLuint;
+using BufferId = GLuint;
 
 class VertexBuffer final
 {
@@ -19,8 +19,8 @@ public:
 
 	const unsigned int getVertexCount() const;
 
-	const BufferID getVaoID() const;
-	const BufferID getVboID() const;
+	const BufferId getVaoID() const;
+	const BufferId getVboID() const;
 
 	const VertexBufferType getBufferType() const;
 
@@ -29,6 +29,6 @@ private:
 
 	VertexBufferType _bufferType;
 
-	BufferID _vaoID = 0;
-	BufferID _vboID = 0;
+	BufferId _vaoID = 0;
+	BufferId _vboID = 0;
 };

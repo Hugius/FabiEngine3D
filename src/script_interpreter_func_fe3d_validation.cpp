@@ -213,7 +213,7 @@ const bool ScriptInterpreter::_validateFe3dReflection(const string& id)
 
 const bool ScriptInterpreter::_validateFe3dSky()
 {
-	if(_fe3d->sky_getSelectedID().empty())
+	if(_fe3d->sky_getSelectedId().empty())
 	{
 		_throwScriptError("sky entity not selected!");
 		return false;
@@ -224,7 +224,7 @@ const bool ScriptInterpreter::_validateFe3dSky()
 
 const bool ScriptInterpreter::_validateFe3dTerrain()
 {
-	if(_fe3d->terrain_getSelectedID().empty())
+	if(_fe3d->terrain_getSelectedId().empty())
 	{
 		_throwScriptError("terrain entity not selected!");
 		return false;
@@ -267,7 +267,7 @@ const bool ScriptInterpreter::_validateFe3dAnimation3d(const string& id)
 
 const bool ScriptInterpreter::_validateFe3dWater()
 {
-	if(_fe3d->water_getSelectedID().empty())
+	if(_fe3d->water_getSelectedId().empty())
 	{
 		_throwScriptError("water entity not selected!");
 		return false;

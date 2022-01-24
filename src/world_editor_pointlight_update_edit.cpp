@@ -16,13 +16,13 @@ void WorldEditor::_updatePointlightEditing()
 			_dontResetSelectedLamp = false;
 		}
 
-		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
+		auto hoveredAabbId = _fe3d->raycast_checkCursorInAny().first;
 
 		for(const auto& id : _fe3d->model_getIds())
 		{
 			if(id.substr(0, string("@@lamp").size()) == "@@lamp")
 			{
-				if(hoveredAabbID == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectPointlight(id.substr(string("@@lamp_").size()));
 
@@ -110,7 +110,7 @@ void WorldEditor::_updatePointlightEditing()
 				{
 					_fe3d->model_delete(_activeLampID);
 					_fe3d->pointlight_delete(activePointlightID);
-					_loadedPointlightIDs.erase(remove(_loadedPointlightIDs.begin(), _loadedPointlightIDs.end(), activePointlightID), _loadedPointlightIDs.end());
+					_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), activePointlightID), _loadedPointlightIds.end());
 					_activeLampID = "";
 					rightWindow->setActiveScreen("main");
 					return;
@@ -121,7 +121,7 @@ void WorldEditor::_updatePointlightEditing()
 			{
 				_fe3d->model_delete(_activeLampID);
 				_fe3d->pointlight_delete(activePointlightID);
-				_loadedPointlightIDs.erase(remove(_loadedPointlightIDs.begin(), _loadedPointlightIDs.end(), activePointlightID), _loadedPointlightIDs.end());
+				_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), activePointlightID), _loadedPointlightIds.end());
 				_activeLampID = "";
 				rightWindow->setActiveScreen("main");
 				return;

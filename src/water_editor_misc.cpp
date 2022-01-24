@@ -12,8 +12,8 @@ const bool WaterEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const vector<string>& WaterEditor::getLoadedIDs()
+const vector<string>& WaterEditor::getLoadedIds()
 {
-	sort(_loadedWaterIDs.begin(), _loadedWaterIDs.end());
-	return _loadedWaterIDs;
+	sort(_loadedWaterIds.begin(), _loadedWaterIds.end());
+	return _loadedWaterIds;
 }

@@ -12,8 +12,8 @@ const bool SoundEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const vector<string>& SoundEditor::getLoadedIDs()
+const vector<string>& SoundEditor::getLoadedIds()
 {
-	sort(_loadedSoundIDs.begin(), _loadedSoundIDs.end());
-	return _loadedSoundIDs;
+	sort(_loadedSoundIds.begin(), _loadedSoundIds.end());
+	return _loadedSoundIds;
 }

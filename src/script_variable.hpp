@@ -26,7 +26,7 @@ public:
 	const ScriptVariableType getType() const;
 
 private:
-	string _ID;
+	string _id;
 
 	bool _isConstant;
 

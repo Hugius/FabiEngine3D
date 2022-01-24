@@ -27,7 +27,7 @@ public:
 private:
 	vector<string> _lines;
 
-	string _ID;
+	string _id;
 
 	unsigned int _cursorLineIndex = 0;
 	unsigned int _cursorCharIndex = 0;

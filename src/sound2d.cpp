@@ -6,7 +6,7 @@ using std::clamp;
 
 Sound2d::Sound2d(const string& id, const string& audioPath, Mix_Chunk* dataPointer)
 	:
-	_ID(id),
+	_id(id),
 	_audioPath(audioPath),
 	_dataPointer(dataPointer)
 {
@@ -15,7 +15,7 @@ Sound2d::Sound2d(const string& id, const string& audioPath, Mix_Chunk* dataPoint
 
 const string& Sound2d::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const string& Sound2d::getAudioPath() const

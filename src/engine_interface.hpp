@@ -73,7 +73,7 @@ public:
 	const string& sky_getBottomCubeMapPath(const string& id) const;
 	const string& sky_getBackCubeMapPath(const string& id) const;
 	const string& sky_getFrontCubeMapPath(const string& id) const;
-	const string sky_getSelectedID() const;
+	const string sky_getSelectedId() const;
 	const fvec3& sky_getWireframeColor(const string& id) const;
 	const fvec3& sky_getColor(const string& id) const;
 	const float sky_getLightness(const string& id) const;
@@ -115,7 +115,7 @@ public:
 	void terrain_setWireframeColor(const string& id, const fvec3& value);
 
 	const vector<string> terrain_getIds() const;
-	const string terrain_getSelectedID() const;
+	const string terrain_getSelectedId() const;
 	const string& terrain_getHeightMapPath(const string& id) const;
 	const string& terrain_getBlendMapPath(const string& id) const;
 	const string& terrain_getDiffuseMapPath(const string& id) const;
@@ -180,7 +180,7 @@ public:
 	const string& water_getDudvMapPath(const string& id) const;
 	const string& water_getNormalMapPath(const string& id) const;
 	const string& water_getDisplacementMapPath(const string& id) const;
-	const string water_getSelectedID() const;
+	const string water_getSelectedId() const;
 	const fvec3& water_getWireframeColor(const string& id) const;
 	const fvec3& water_getColor(const string& id) const;
 	const fvec2& water_getSpeed(const string& id) const;
@@ -259,7 +259,7 @@ public:
 
 	const vector<string> model_getPartIds(const string& id) const;
 	const vector<string> model_getIds() const;
-	const vector<string> model_getGroupIDs(const string& id) const;
+	const vector<string> model_getGroupIds(const string& id) const;
 	const string& model_getMeshPath(const string& id) const;
 	const string& model_getDiffuseMapPath(const string& id, const string& partId) const;
 	const string& model_getEmissionMapPath(const string& id, const string& partId) const;
@@ -534,7 +534,7 @@ public:
 	void aabb_moveTo(const string& id, const fvec3& target, float speed);
 	void aabb_scaleTo(const string& id, const fvec3& target, float speed);
 
-	const vector<string> aabb_getChildIDs(const string& parentID, AabbParentEntityType parentEntityType) const;
+	const vector<string> aabb_getChildIds(const string& parentID, AabbParentEntityType parentEntityType) const;
 	const vector<string> aabb_getIds() const;
 	const string& aabb_getParentEntityId(const string& id) const;
 	const fvec3& aabb_getPosition(const string& id) const;
@@ -931,7 +931,7 @@ public:
 private:
 	shared_ptr<EngineCore> _core = nullptr;
 
-	string _hoveredAabbID = "";
+	string _hoveredAabbId = "";
 
 	float _hoveredAabbDistance = -1.0f;
 

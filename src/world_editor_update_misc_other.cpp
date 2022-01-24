@@ -102,9 +102,9 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->raycast_disableTerrainPointing();
 	}
 
-	if(!_fe3d->terrain_getSelectedID().empty())
+	if(!_fe3d->terrain_getSelectedId().empty())
 	{
-		_fe3d->raycast_enableTerrainPointing(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedID()), 0.1f);
+		_fe3d->raycast_enableTerrainPointing(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId()), 0.1f);
 	}
 }
 
@@ -128,7 +128,7 @@ void WorldEditor::_updateWorldCreating()
 				return;
 			}
 
-			const auto worldNames = _getWorldIDs();
+			const auto worldNames = _getWorldIds();
 
 			if(find(worldNames.begin(), worldNames.end(), newWorldID) != worldNames.end())
 			{

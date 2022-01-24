@@ -16,13 +16,13 @@ void WorldEditor::_updateReflectionEditing()
 			_dontResetSelectedCamera = false;
 		}
 
-		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
+		auto hoveredAabbId = _fe3d->raycast_checkCursorInAny().first;
 
 		for(const auto& id : _fe3d->model_getIds())
 		{
 			if(id.substr(0, string("@@camera").size()) == "@@camera")
 			{
-				if(hoveredAabbID == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectReflection(id.substr(string("@@camera_").size()));
 
@@ -82,7 +82,7 @@ void WorldEditor::_updateReflectionEditing()
 				{
 					_fe3d->model_delete(_activeCameraID);
 					_fe3d->reflection_delete(activeReflectionID);
-					_loadedReflectionIDs.erase(remove(_loadedReflectionIDs.begin(), _loadedReflectionIDs.end(), activeReflectionID), _loadedReflectionIDs.end());
+					_loadedReflectionIds.erase(remove(_loadedReflectionIds.begin(), _loadedReflectionIds.end(), activeReflectionID), _loadedReflectionIds.end());
 					_activeCameraID = "";
 					rightWindow->setActiveScreen("main");
 					return;
@@ -93,7 +93,7 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				_fe3d->model_delete(_activeCameraID);
 				_fe3d->reflection_delete(activeReflectionID);
-				_loadedReflectionIDs.erase(remove(_loadedReflectionIDs.begin(), _loadedReflectionIDs.end(), activeReflectionID), _loadedReflectionIDs.end());
+				_loadedReflectionIds.erase(remove(_loadedReflectionIds.begin(), _loadedReflectionIds.end(), activeReflectionID), _loadedReflectionIds.end());
 				_activeCameraID = "";
 				rightWindow->setActiveScreen("main");
 				return;

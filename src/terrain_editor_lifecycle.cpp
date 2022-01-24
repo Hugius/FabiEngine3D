@@ -39,14 +39,14 @@ void TerrainEditor::load()
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
 	_fe3d->model_setShadowed("@@grid", false);
 
-	_gui->getOverlay()->createTextField("terrainID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("terrainId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_isEditorLoaded = true;
 }
 
 void TerrainEditor::unload()
 {
-	for(const auto& id : _loadedTerrainIDs)
+	for(const auto& id : _loadedTerrainIds)
 	{
 		_fe3d->terrain_delete(id);
 	}
@@ -61,10 +61,10 @@ void TerrainEditor::unload()
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
 
-	_gui->getOverlay()->deleteTextField("terrainID");
+	_gui->getOverlay()->deleteTextField("terrainId");
 
-	_loadedTerrainIDs.clear();
-	_currentTerrainID = "";
+	_loadedTerrainIds.clear();
+	_currentTerrainId = "";
 	_isEditorLoaded = false;
 	_isCreatingTerrain = false;
 	_isChoosingTerrain = false;

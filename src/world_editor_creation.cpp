@@ -41,7 +41,7 @@ const bool WorldEditor::_copyTemplateSky(const string& newID, const string& temp
 	_fe3d->sky_setColor(newID, _fe3d->sky_getColor(templateID));
 	_fe3d->sky_select(newID);
 
-	_loadedSkyID = newID;
+	_loadedSkyId = newID;
 
 	return true;
 }
@@ -122,7 +122,7 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newID, const string& 
 		_fe3d->terrain_setBlueDiffuseMap(newID, _fe3d->terrain_getBlueDiffuseMapPath(templateID));
 	}
 
-	_loadedTerrainID = newID;
+	_loadedTerrainId = newID;
 
 	return true;
 }
@@ -177,7 +177,7 @@ const bool WorldEditor::_copyTemplateWater(const string& newID, const string& te
 		_fe3d->water_setDisplacementMap(newID, _fe3d->water_getDisplacementMapPath(templateID));
 	}
 
-	_loadedWaterID = newID;
+	_loadedWaterId = newID;
 
 	return true;
 }
@@ -243,14 +243,14 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 		_fe3d->model_setFaceCulled(newID, partId, _fe3d->model_isFaceCulled(templateID, partId));
 	}
 
-	for(const auto& templateAabbID : _fe3d->aabb_getChildIDs(templateID, AabbParentEntityType::MODEL))
+	for(const auto& templateAabbId : _fe3d->aabb_getChildIds(templateID, AabbParentEntityType::MODEL))
 	{
-		const string newAabbID = (newID + "@" + templateAabbID.substr(string(templateID + "_").size()));
-		_fe3d->aabb_create(newAabbID, false);
-		_fe3d->aabb_setParentEntityId(newAabbID, newID);
-		_fe3d->aabb_setParentEntityType(newAabbID, AabbParentEntityType::MODEL);
-		_fe3d->aabb_setLocalPosition(newAabbID, _fe3d->aabb_getPosition(templateAabbID));
-		_fe3d->aabb_setLocalSize(newAabbID, _fe3d->aabb_getSize(templateAabbID));
+		const string newAabbId = (newID + "@" + templateAabbId.substr(string(templateID + "_").size()));
+		_fe3d->aabb_create(newAabbId, false);
+		_fe3d->aabb_setParentEntityId(newAabbId, newID);
+		_fe3d->aabb_setParentEntityType(newAabbId, AabbParentEntityType::MODEL);
+		_fe3d->aabb_setLocalPosition(newAabbId, _fe3d->aabb_getPosition(templateAabbId));
+		_fe3d->aabb_setLocalSize(newAabbId, _fe3d->aabb_getSize(templateAabbId));
 	}
 
 	if(_isEditorLoaded)
@@ -353,11 +353,11 @@ const bool WorldEditor::_copyTemplateText3d(const string& newID, const string& t
 
 	if(isFromOutside)
 	{
-		_outsideLoadedTextIDs.insert(make_pair(newID, templateID));
+		_outsideLoadedTextIds.insert(make_pair(newID, templateID));
 	}
 	else
 	{
-		_loadedTextIDs.insert(make_pair(newID, templateID));
+		_loadedTextIds.insert(make_pair(newID, templateID));
 	}
 
 	return true;
@@ -381,11 +381,11 @@ const bool WorldEditor::_copyTemplateSound(const string& newID, const string& te
 
 	if(isFromOutside)
 	{
-		_outsideLoadedSoundIDs.insert(make_pair(newID, templateID));
+		_outsideLoadedSoundIds.insert(make_pair(newID, templateID));
 	}
 	else
 	{
-		_loadedSoundIDs.insert(make_pair(newID, templateID));
+		_loadedSoundIds.insert(make_pair(newID, templateID));
 	}
 
 	return true;

@@ -5,7 +5,7 @@ void WorldEditor::_updateSpotlightPlacing()
 {
 	if(_isPlacingSpotlight)
 	{
-		if(_fe3d->terrain_getSelectedID().empty())
+		if(_fe3d->terrain_getSelectedId().empty())
 		{
 			auto newPosition = _fe3d->spotlight_getPosition(TEMPLATE_TORCH_ID);
 			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
@@ -29,7 +29,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				if(_fe3d->spotlight_isExisting(newID))
 				{
-					_loadedSpotlightIDs.push_back(newID);
+					_loadedSpotlightIds.push_back(newID);
 
 					_fe3d->spotlight_setPosition(newID, newPosition);
 					_fe3d->spotlight_setPitch(newID, DEFAULT_SPOTLIGHT_PITCH);
@@ -112,7 +112,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 				if(_fe3d->spotlight_isExisting(newID))
 				{
-					_loadedSpotlightIDs.push_back(newID);
+					_loadedSpotlightIds.push_back(newID);
 
 					_fe3d->spotlight_setPosition(newID, newPosition);
 					_fe3d->spotlight_setPitch(newID, DEFAULT_SPOTLIGHT_PITCH);

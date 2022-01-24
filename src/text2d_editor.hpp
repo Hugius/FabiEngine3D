@@ -13,7 +13,7 @@ public:
 	void unload();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedIDs();
+	const vector<string>& getLoadedIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
@@ -29,9 +29,9 @@ private:
 	void _updateTextDeleting();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedTextIDs;
-	string _currentTextID = "";
-	string _hoveredTextID = "";
+	vector<string> _loadedTextIds;
+	string _currentTextId = "";
+	string _hoveredTextId = "";
 	string _currentProjectId = "";
 
 	static inline const string TEXT_CONTENT = "Text123";

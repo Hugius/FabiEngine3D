@@ -3,7 +3,7 @@
 GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
 	:
 	_fe3d(fe3d),
-	_ID(id),
+	_id(id),
 	_entityId("@" + parentID + "_" + id),
 	_parentID(parentID),
 	_initialPosition(position),
@@ -19,7 +19,7 @@ GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& paren
 GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
 	:
 	_fe3d(fe3d),
-	_ID(id),
+	_id(id),
 	_entityId("@" + parentID + "_" + id),
 	_parentID(parentID),
 	_initialPosition(position),
@@ -74,7 +74,7 @@ const fvec3& GuiRectangle::getInitialColor() const
 
 const string& GuiRectangle::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const string& GuiRectangle::getEntityId() const

@@ -18,22 +18,22 @@ void SkyEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto IDs = getLoadedIDs();
-			for(auto& id : IDs)
+			auto Ids = getLoadedIds();
+			for(auto& id : Ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("skyList", "Edit Sky", fvec2(-0.5f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("skyList", "Edit Sky", fvec2(-0.5f, 0.1f), Ids);
 			_isChoosingSky = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto IDs = getLoadedIDs();
-			for(auto& id : IDs)
+			auto Ids = getLoadedIds();
+			for(auto& id : Ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("skyList", "Delete Sky", fvec2(-0.5f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("skyList", "Delete Sky", fvec2(-0.5f, 0.1f), Ids);
 			_isChoosingSky = true;
 			_isDeletingSky = true;
 		}
@@ -63,10 +63,10 @@ void SkyEditor::_updateChoiceMenu()
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuMain");
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyID")->getEntityId(), false);
-			_fe3d->sky_setWireframed(_currentSkyID, false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyId")->getEntityId(), false);
+			_fe3d->sky_setWireframed(_currentSkyId, false);
 			_fe3d->sky_select("");
-			_currentSkyID = "";
+			_currentSkyId = "";
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())

@@ -103,7 +103,7 @@ const bool GuiOverlay::isValueFormCancelled() const
 
 const bool GuiOverlay::isValueFormExisting(const string& id) const
 {
-	return find(_valueFormIDs.begin(), _valueFormIDs.end(), id) != _valueFormIDs.end();
+	return find(_valueFormIds.begin(), _valueFormIds.end(), id) != _valueFormIds.end();
 }
 
 void GuiOverlay::_createValueForm(const string& id, const string& title, const string& valueString, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition, bool onlyNumbers, bool minusAllowed)
@@ -113,7 +113,7 @@ void GuiOverlay::_createValueForm(const string& id, const string& title, const s
 		Logger::throwError("GuiOverlay::_createValueForm");
 	}
 
-	_valueFormIDs.push_back(id);
+	_valueFormIds.push_back(id);
 	createRectangle(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.0275f, 0.125f), FORM_TITLE_RECT_COLOR, true);
 	createTextField(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.025f, 0.1f), title, FORM_TITLE_TEXT_COLOR, true);
 	createWriteField(id, position, size, fvec3(0.25f), fvec3(0.5f), fvec3(1.0f), fvec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, (onlyNumbers && minusAllowed), true);
@@ -136,7 +136,7 @@ const bool GuiOverlay::_checkValueForm(const string& id, string& valueString, co
 {
 	bool changed = false;
 
-	if(find(_valueFormIDs.begin(), _valueFormIDs.end(), id) != _valueFormIDs.end())
+	if(find(_valueFormIds.begin(), _valueFormIds.end(), id) != _valueFormIds.end())
 	{
 		bool done = _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
 		bool cancelled = _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
@@ -165,7 +165,7 @@ const bool GuiOverlay::_checkValueForm(const string& id, string& valueString, co
 				changed = getWriteField(id)->hasTextContentChanged();
 			}
 
-			if(_valueFormIDs.size() == 1)
+			if(_valueFormIds.size() == 1)
 			{
 				_mustDeleteValueForms = true;
 			}
@@ -330,13 +330,13 @@ void GuiOverlay::_updateValueFormDeleting()
 {
 	if(_mustDeleteValueForms)
 	{
-		for(const auto& tempID : _valueFormIDs)
+		for(const auto& tempID : _valueFormIds)
 		{
 			deleteRectangle(tempID);
 			deleteTextField(tempID);
 			deleteWriteField(tempID);
 		}
-		_valueFormIDs.clear();
+		_valueFormIds.clear();
 
 		deleteButton("value_form_done");
 		deleteButton("value_form_cancel");

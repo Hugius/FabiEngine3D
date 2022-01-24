@@ -13,7 +13,7 @@ public:
 	void unload();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedIDs();
+	const vector<string>& getLoadedIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
@@ -32,9 +32,9 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	vector <string> _loadedSkyIDs;
+	vector <string> _loadedSkyIds;
 	string _currentProjectId = "";
-	string _currentSkyID = "";
+	string _currentSkyId = "";
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;

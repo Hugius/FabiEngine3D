@@ -19,8 +19,8 @@ void WorldEditor::_updateQuad3dEditing()
 		{
 			if(id[0] != '@')
 			{
-				auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
-				bool hovered = (hoveredAabbID.size() >= id.size()) && (hoveredAabbID.substr(0, id.size()) == id);
+				auto hoveredAabbId = _fe3d->raycast_checkCursorInAny().first;
+				bool hovered = (hoveredAabbId.size() >= id.size()) && (hoveredAabbId.substr(0, id.size()) == id);
 
 				if(hovered && _fe3d->misc_isCursorInsideViewport() &&
 				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))

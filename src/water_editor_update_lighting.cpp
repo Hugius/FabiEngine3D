@@ -7,12 +7,12 @@ void WaterEditor::_updateLightingMenu()
 
 	if(screen->getId() == "waterEditorMenuLighting")
 	{
-		auto color = _fe3d->water_getColor(_currentWaterID);
-		bool isReflective = _fe3d->water_isReflective(_currentWaterID);
-		bool isRefractive = _fe3d->water_isRefractive(_currentWaterID);
-		bool isSpecular = _fe3d->water_isSpecular(_currentWaterID);
-		auto specularShininess = _fe3d->water_getSpecularShininess(_currentWaterID);
-		auto specularIntensity = _fe3d->water_getSpecularIntensity(_currentWaterID);
+		auto color = _fe3d->water_getColor(_currentWaterId);
+		bool isReflective = _fe3d->water_isReflective(_currentWaterId);
+		bool isRefractive = _fe3d->water_isRefractive(_currentWaterId);
+		bool isSpecular = _fe3d->water_isSpecular(_currentWaterId);
+		auto specularShininess = _fe3d->water_getSpecularShininess(_currentWaterId);
+		auto specularIntensity = _fe3d->water_getSpecularIntensity(_currentWaterId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -28,17 +28,17 @@ void WaterEditor::_updateLightingMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflective")->isHovered())
 		{
 			isReflective = !isReflective;
-			_fe3d->water_setReflective(_currentWaterID, isReflective);
+			_fe3d->water_setReflective(_currentWaterId, isReflective);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isRefractive")->isHovered())
 		{
 			isRefractive = !isRefractive;
-			_fe3d->water_setRefractive(_currentWaterID, isRefractive);
+			_fe3d->water_setRefractive(_currentWaterId, isRefractive);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isSpecular")->isHovered())
 		{
 			isSpecular = !isSpecular;
-			_fe3d->water_setSpecular(_currentWaterID, isSpecular);
+			_fe3d->water_setSpecular(_currentWaterId, isSpecular);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
@@ -52,26 +52,26 @@ void WaterEditor::_updateLightingMenu()
 		if(_gui->getOverlay()->checkValueForm("colorR", color.r))
 		{
 			color.r /= 255.0f;
-			_fe3d->water_setColor(_currentWaterID, color);
+			_fe3d->water_setColor(_currentWaterId, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("colorG", color.g))
 		{
 			color.g /= 255.0f;
-			_fe3d->water_setColor(_currentWaterID, color);
+			_fe3d->water_setColor(_currentWaterId, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("colorB", color.b))
 		{
 			color.b /= 255.0f;
-			_fe3d->water_setColor(_currentWaterID, color);
+			_fe3d->water_setColor(_currentWaterId, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("specularShininess", specularShininess))
 		{
-			_fe3d->water_setSpecularShininess(_currentWaterID, specularShininess);
+			_fe3d->water_setSpecularShininess(_currentWaterId, specularShininess);
 		}
 		if(_gui->getOverlay()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity /= 100.0f;
-			_fe3d->water_setSpecularIntensity(_currentWaterID, specularIntensity);
+			_fe3d->water_setSpecularIntensity(_currentWaterId, specularIntensity);
 		}
 
 		screen->getButton("specularShininess")->setHoverable(isSpecular);

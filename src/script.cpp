@@ -95,7 +95,7 @@ shared_ptr<ScriptFile> Script::getScriptFile(const string& id) const
 	Logger::throwError("Script::getScriptFile");
 }
 
-const vector<string> Script::getScriptFileIDs() const
+const vector<string> Script::getScriptFileIds() const
 {
 	vector<string> result;
 

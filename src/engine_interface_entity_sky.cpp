@@ -146,7 +146,7 @@ void EngineInterface::sky_setWireframeColor(const string& id, const fvec3& value
 	_core->getSkyEntityManager()->getEntity(id)->setWireframeColor(value);
 }
 
-const string EngineInterface::sky_getSelectedID() const
+const string EngineInterface::sky_getSelectedId() const
 {
 	if(_core->getSkyEntityManager()->getSelectedEntity() == nullptr)
 	{

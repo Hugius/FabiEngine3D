@@ -3,14 +3,14 @@
 
 Animation2d::Animation2d(const string& id)
 	:
-	_ID(id)
+	_id(id)
 {
 
 }
 
 const string& Animation2d::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const string& Animation2d::getPreviewTexturePath() const

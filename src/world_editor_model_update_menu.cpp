@@ -30,9 +30,9 @@ void WorldEditor::_updateModelMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
-			auto IDs = _fe3d->model_getIds();
-			sort(IDs.begin(), IDs.end());
-			for(auto& modelId : IDs)
+			auto Ids = _fe3d->model_getIds();
+			sort(Ids.begin(), Ids.end());
+			for(auto& modelId : Ids)
 			{
 				if(modelId[0] != '@')
 				{
@@ -63,7 +63,7 @@ void WorldEditor::_updateModelPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& modelId : _modelEditor->getLoadedIDs())
+			for(const auto& modelId : _modelEditor->getLoadedIds())
 			{
 				if(_fe3d->model_isExisting(modelId))
 				{
@@ -84,7 +84,7 @@ void WorldEditor::_updateModelPlacingMenu()
 						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelId")->getEntityId(), "Model: " + _currentTemplateModelId.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
 
-						if(_fe3d->terrain_getSelectedID().empty())
+						if(_fe3d->terrain_getSelectedId().empty())
 						{
 							_fe3d->model_setBasePosition(_currentTemplateModelId, fvec3(0.0f));
 							_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));

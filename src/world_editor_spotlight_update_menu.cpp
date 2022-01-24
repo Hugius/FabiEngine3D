@@ -36,7 +36,7 @@ void WorldEditor::_updateSpotlightMenu()
 			_fe3d->spotlight_setVisible(TEMPLATE_TORCH_ID, true);
 			_fe3d->misc_centerCursor();
 
-			if(_fe3d->terrain_getSelectedID().empty())
+			if(_fe3d->terrain_getSelectedId().empty())
 			{
 				_fe3d->spotlight_setPosition(TEMPLATE_TORCH_ID, fvec3(0.0f));
 				_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -49,9 +49,9 @@ void WorldEditor::_updateSpotlightMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightChoice");
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->deleteButtons();
 
-			auto IDs = _fe3d->spotlight_getIds();
-			sort(IDs.begin(), IDs.end());
-			for(auto& spotlightID : IDs)
+			auto Ids = _fe3d->spotlight_getIds();
+			sort(Ids.begin(), Ids.end());
+			for(auto& spotlightID : Ids)
 			{
 				if(spotlightID[0] != '@')
 				{

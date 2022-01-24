@@ -31,7 +31,7 @@ const bool ScriptEditor::saveScriptFiles()
 	}
 	_scriptFileNamesToDelete.clear();
 
-	for(const auto& scriptID : _script->getScriptFileIDs())
+	for(const auto& scriptID : _script->getScriptFileIds())
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
 		ofstream file(rootPath + "projects\\" + _currentProjectId + "\\scripts\\" + scriptID + ".fe3d");

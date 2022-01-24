@@ -4,7 +4,7 @@
 GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size)
 	:
 	_fe3d(fe3d),
-	_ID(id),
+	_id(id),
 	_parentID(parentID),
 	_parentPosition(position),
 	_parentSize(size)
@@ -55,7 +55,7 @@ void GuiScreen::hide()
 
 const string& GuiScreen::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const string& GuiScreen::getParentID() const

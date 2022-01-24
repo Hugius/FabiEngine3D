@@ -24,7 +24,7 @@ public:
 	const fvec2& getInitialSize() const;
 
 private:
-	const string _ID;
+	const string _id;
 	const string _entityId;
 	const string _parentID;
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";

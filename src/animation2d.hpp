@@ -36,7 +36,7 @@ public:
 	const bool isAutopaused() const;
 
 private:
-	const string _ID;
+	const string _id;
 	string _previewTexturePath = "";
 
 	int _playCount = 0;

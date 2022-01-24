@@ -3,17 +3,17 @@
 
 using std::clamp;
 
-TextureBuffer::TextureBuffer(BufferID id)
+TextureBuffer::TextureBuffer(BufferId id)
 	:
-	_ID(id)
+	_id(id)
 {
 
 }
 
 TextureBuffer::TextureBuffer(shared_ptr<Image> image)
 {
-	glGenTextures(1, &_ID);
-	glBindTexture(GL_TEXTURE_2D, _ID);
+	glGenTextures(1, &_id);
+	glBindTexture(GL_TEXTURE_2D, _id);
 
 	if(image->getPixelFormat() == PixelFormat::RGB)
 	{
@@ -34,9 +34,9 @@ TextureBuffer::TextureBuffer(shared_ptr<Image> image)
 
 TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 {
-	glGenTextures(1, &_ID);
+	glGenTextures(1, &_id);
 
-	glBindTexture(GL_TEXTURE_CUBE_MAP, _ID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, _id);
 
 	unsigned int imageSize = 1;
 	for(const auto& image : images)
@@ -82,17 +82,17 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 
 TextureBuffer::~TextureBuffer()
 {
-	glDeleteTextures(1, &_ID);
+	glDeleteTextures(1, &_id);
 }
 
-const BufferID TextureBuffer::getId() const
+const BufferId TextureBuffer::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 void TextureBuffer::loadMipMapping()
 {
-	glBindTexture(GL_TEXTURE_2D, _ID);
+	glBindTexture(GL_TEXTURE_2D, _id);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
@@ -103,7 +103,7 @@ void TextureBuffer::loadMipMapping()
 
 void TextureBuffer::loadAnisotropicFiltering(unsigned int quality)
 {
-	glBindTexture(GL_TEXTURE_2D, _ID);
+	glBindTexture(GL_TEXTURE_2D, _id);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, static_cast<int>(quality));
 

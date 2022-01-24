@@ -5,7 +5,7 @@
 GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const fvec3& color)
 	:
 	_fe3d(fe3d),
-	_ID(id),
+	_id(id),
 	_entityId("@" + parentID + "_" + id),
 	_parentID(parentID),
 	_initialPosition(position),
@@ -53,7 +53,7 @@ const bool GuiWindow::isHovered() const
 
 const string& GuiWindow::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const string& GuiWindow::getEntityId() const
@@ -94,7 +94,7 @@ void GuiWindow::createScreen(const string& id)
 	auto windowPosition = _fe3d->quad2d_getPosition(_entityId);
 	auto windowSize = _fe3d->quad2d_getSize(_entityId);
 
-	_screens.push_back(make_shared<GuiScreen>(_fe3d, _parentID + "_" + _ID, id, windowPosition, windowSize));
+	_screens.push_back(make_shared<GuiScreen>(_fe3d, _parentID + "_" + _id, id, windowPosition, windowSize));
 }
 
 void GuiWindow::deleteScreen(const string& id)

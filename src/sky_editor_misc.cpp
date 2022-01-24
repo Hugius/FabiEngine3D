@@ -12,8 +12,8 @@ const bool SkyEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const vector<string>& SkyEditor::getLoadedIDs()
+const vector<string>& SkyEditor::getLoadedIds()
 {
-	sort(_loadedSkyIDs.begin(), _loadedSkyIDs.end());
-	return _loadedSkyIDs;
+	sort(_loadedSkyIds.begin(), _loadedSkyIds.end());
+	return _loadedSkyIds;
 }

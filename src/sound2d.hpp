@@ -20,7 +20,7 @@ public:
 	Mix_Chunk* getDataPointer() const;
 
 private:
-	string _ID = "";
+	string _id = "";
 	string _audioPath = "";
 
 	float _volume = 1.0f;

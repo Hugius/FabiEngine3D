@@ -10,11 +10,11 @@ void WorldEditor::_updateText3dMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateTextID.empty())
+			if(!_currentTemplateTextId.empty())
 			{
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), false);
-				_fe3d->text3d_setVisible(_currentTemplateTextID, false);
-				_currentTemplateTextID = "";
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
+				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
+				_currentTemplateTextId = "";
 			}
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -30,23 +30,23 @@ void WorldEditor::_updateText3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteButtons();
 
-			auto IDs = _fe3d->text3d_getIds();
-			sort(IDs.begin(), IDs.end());
-			for(auto& textID : IDs)
+			auto Ids = _fe3d->text3d_getIds();
+			sort(Ids.begin(), Ids.end());
+			for(auto& textId : Ids)
 			{
-				if(textID[0] != '@')
+				if(textId[0] != '@')
 				{
-					reverse(textID.begin(), textID.end());
-					string rawID = textID.substr(textID.find('_') + 1);
+					reverse(textId.begin(), textId.end());
+					string rawID = textId.substr(textId.find('_') + 1);
 					reverse(rawID.begin(), rawID.end());
-					reverse(textID.begin(), textID.end());
+					reverse(textId.begin(), textId.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createButton(textID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createButton(textId, rawID);
 				}
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateTextID.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateTextId.empty());
 	}
 }
 
@@ -63,11 +63,11 @@ void WorldEditor::_updateText3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& textID : _text3dEditor->getLoadedIDs())
+			for(const auto& textId : _text3dEditor->getLoadedIds())
 			{
-				if(_fe3d->text3d_isExisting(textID))
+				if(_fe3d->text3d_isExisting(textId))
 				{
-					if(screen->getScrollingList("text3dList")->getButton(textID)->isHovered())
+					if(screen->getScrollingList("text3dList")->getButton(textId)->isHovered())
 					{
 						_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
@@ -77,15 +77,15 @@ void WorldEditor::_updateText3dPlacingMenu()
 						_deactivatePointlight();
 						_deactivateReflection();
 
-						_currentTemplateTextID = textID;
-						_fe3d->text3d_setVisible(_currentTemplateTextID, true);
-						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), true);
-						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityId(), "Text3d: " + _currentTemplateTextID.substr(1), 0.025f);
+						_currentTemplateTextId = textId;
+						_fe3d->text3d_setVisible(_currentTemplateTextId, true);
+						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
+						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textId")->getEntityId(), "Text3d: " + _currentTemplateTextId.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
 
-						if(_fe3d->terrain_getSelectedID().empty())
+						if(_fe3d->terrain_getSelectedId().empty())
 						{
-							_fe3d->text3d_setPosition(_currentTemplateTextID, fvec3(0.0f));
+							_fe3d->text3d_setPosition(_currentTemplateTextId, fvec3(0.0f));
 							_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 							_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 							_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -114,20 +114,20 @@ void WorldEditor::_updateText3dChoosingMenu()
 			}
 		}
 
-		for(const auto& textID : _fe3d->text3d_getIds())
+		for(const auto& textId : _fe3d->text3d_getIds())
 		{
-			if(textID[0] != '@')
+			if(textId[0] != '@')
 			{
-				if(screen->getScrollingList("text3dList")->getButton(textID)->isHovered())
+				if(screen->getScrollingList("text3dList")->getButton(textId)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activateText3d(textID);
+						_activateText3d(textId);
 					}
 					else
 					{
 						_dontResetSelectedText3d = true;
-						_selectText3d(textID);
+						_selectText3d(textId);
 					}
 
 					break;

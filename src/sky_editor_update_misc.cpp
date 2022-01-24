@@ -36,17 +36,17 @@ void SkyEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
-		if(!_currentSkyID.empty())
+		if(!_currentSkyId.empty())
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->sky_isWireframed(_currentSkyID))
+				if(_fe3d->sky_isWireframed(_currentSkyId))
 				{
-					_fe3d->sky_setWireframed(_currentSkyID, false);
+					_fe3d->sky_setWireframed(_currentSkyId, false);
 				}
 				else
 				{
-					_fe3d->sky_setWireframed(_currentSkyID, true);
+					_fe3d->sky_setWireframed(_currentSkyId, true);
 				}
 			}
 		}
@@ -57,42 +57,42 @@ void SkyEditor::_updateSkyCreating()
 {
 	if(_isCreatingSky)
 	{
-		string newSkyID;
+		string newSkyId;
 
-		if(_gui->getOverlay()->checkValueForm("skyCreate", newSkyID, {}))
+		if(_gui->getOverlay()->checkValueForm("skyCreate", newSkyId, {}))
 		{
-			if(newSkyID.find(' ') != string::npos)
+			if(newSkyId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Sky id cannot contain any spaces!");
 				return;
 			}
 
-			if(newSkyID.find('@') != string::npos)
+			if(newSkyId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Sky id cannot contain '@'!");
 				return;
 			}
 
-			newSkyID = ("@" + newSkyID);
+			newSkyId = ("@" + newSkyId);
 
-			if(find(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), newSkyID) != _loadedSkyIDs.end())
+			if(find(_loadedSkyIds.begin(), _loadedSkyIds.end(), newSkyId) != _loadedSkyIds.end())
 			{
-				Logger::throwWarning("Sky with id \"" + newSkyID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Sky with id \"" + newSkyId.substr(1) + "\" already exists!");
 				return;
 			}
 
-			_fe3d->sky_create(newSkyID);
+			_fe3d->sky_create(newSkyId);
 
-			if(_fe3d->sky_isExisting(newSkyID))
+			if(_fe3d->sky_isExisting(newSkyId))
 			{
-				_fe3d->sky_select(newSkyID);
+				_fe3d->sky_select(newSkyId);
 
-				_currentSkyID = newSkyID;
-				_loadedSkyIDs.push_back(newSkyID);
+				_currentSkyId = newSkyId;
+				_loadedSkyIds.push_back(newSkyId);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("skyID")->getEntityId(), "Sky: " + newSkyID.substr(1), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyID")->getEntityId(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("skyId")->getEntityId(), "Sky: " + newSkyId.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyId")->getEntityId(), true);
 				_isCreatingSky = false;
 			}
 		}
@@ -111,14 +111,14 @@ void SkyEditor::_updateSkyChoosing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentSkyID = ("@" + selectedButtonID);
+				_currentSkyId = ("@" + selectedButtonID);
 
 				if(!_isDeletingSky)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("skyID")->getEntityId(), "Sky: " + _currentSkyID.substr(1), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyID")->getEntityId(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("skyId")->getEntityId(), "Sky: " + _currentSkyId.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyId")->getEntityId(), true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("skyList");
@@ -140,7 +140,7 @@ void SkyEditor::_updateSkyChoosing()
 
 void SkyEditor::_updateSkyDeleting()
 {
-	if(_isDeletingSky && !_currentSkyID.empty())
+	if(_isDeletingSky && !_currentSkyId.empty())
 	{
 		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
@@ -149,10 +149,10 @@ void SkyEditor::_updateSkyDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->sky_delete(_currentSkyID);
+			_fe3d->sky_delete(_currentSkyId);
 
-			_loadedSkyIDs.erase(remove(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), _currentSkyID), _loadedSkyIDs.end());
-			_currentSkyID = "";
+			_loadedSkyIds.erase(remove(_loadedSkyIds.begin(), _loadedSkyIds.end(), _currentSkyId), _loadedSkyIds.end());
+			_currentSkyId = "";
 			_isDeletingSky = false;
 
 		}
@@ -160,7 +160,7 @@ void SkyEditor::_updateSkyDeleting()
 		{
 			_fe3d->sky_select("");
 
-			_currentSkyID = "";
+			_currentSkyId = "";
 			_isDeletingSky = false;
 		}
 	}

@@ -167,11 +167,11 @@ private:
 	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
 	unordered_map<string, ScriptVariable> _globalVariables;
 
-	vector<string> _currentScriptIDsStack;
+	vector<string> _currentScriptIdsStack;
 	vector<string> _lineStringStreams;
-	vector<string> _initializeScriptIDs;
-	vector<string> _updateScriptIDs;
-	vector<string> _terminateScriptIDs;
+	vector<string> _initializeScriptIds;
+	vector<string> _updateScriptIds;
+	vector<string> _terminateScriptIds;
 	vector<unsigned int> _currentLineIndexStack;
 
 	static inline const string META_KEYWORD = "META";

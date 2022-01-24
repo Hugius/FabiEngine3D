@@ -12,8 +12,8 @@ const bool Text3dEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const vector<string>& Text3dEditor::getLoadedIDs()
+const vector<string>& Text3dEditor::getLoadedIds()
 {
-	sort(_loadedTextIDs.begin(), _loadedTextIDs.end());
-	return _loadedTextIDs;
+	sort(_loadedTextIds.begin(), _loadedTextIds.end());
+	return _loadedTextIds;
 }

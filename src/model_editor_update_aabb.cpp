@@ -22,24 +22,24 @@ void ModelEditor::_updateMainAabbMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto IDs = _fe3d->aabb_getChildIDs(_currentModelId, AabbParentEntityType::MODEL);
-			for(auto& id : IDs)
+			auto Ids = _fe3d->aabb_getChildIds(_currentModelId, AabbParentEntityType::MODEL);
+			for(auto& id : Ids)
 			{
 				id = id.substr(string(_currentModelId + "@").size());
 			}
-			sort(IDs.begin(), IDs.end());
-			_gui->getOverlay()->createChoiceForm("aabbList", "Edit AABB", fvec2(-0.5f, 0.1f), IDs);
+			sort(Ids.begin(), Ids.end());
+			_gui->getOverlay()->createChoiceForm("aabbList", "Edit AABB", fvec2(-0.5f, 0.1f), Ids);
 			_isChoosingAabb = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto IDs = _fe3d->aabb_getChildIDs(_currentModelId, AabbParentEntityType::MODEL);
-			for(auto& id : IDs)
+			auto Ids = _fe3d->aabb_getChildIds(_currentModelId, AabbParentEntityType::MODEL);
+			for(auto& id : Ids)
 			{
 				id = id.substr(string(_currentModelId + "@").size());
 			}
-			sort(IDs.begin(), IDs.end());
-			_gui->getOverlay()->createChoiceForm("aabbList", "Delete AABB", fvec2(-0.5f, 0.1f), IDs);
+			sort(Ids.begin(), Ids.end());
+			_gui->getOverlay()->createChoiceForm("aabbList", "Delete AABB", fvec2(-0.5f, 0.1f), Ids);
 			_isChoosingAabb = true;
 			_isDeletingAabb = true;
 		}
@@ -52,15 +52,15 @@ void ModelEditor::_updateChoiceAabbMenu()
 
 	if(screen->getId() == "modelEditorMenuAabbChoice")
 	{
-		auto position = _fe3d->aabb_getPosition(_currentModelId + "@" + _currentAabbID);
-		auto size = _fe3d->aabb_getSize(_currentModelId + "@" + _currentAabbID);
+		auto position = _fe3d->aabb_getPosition(_currentModelId + "@" + _currentAabbId);
+		auto size = _fe3d->aabb_getSize(_currentModelId + "@" + _currentAabbId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->aabb_setVisible((_currentModelId + "@" + _currentAabbID), false);
+			_fe3d->aabb_setVisible((_currentModelId + "@" + _currentAabbId), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityId(), false);
-			_currentAabbID = "";
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), false);
+			_currentAabbId = "";
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
@@ -79,32 +79,32 @@ void ModelEditor::_updateChoiceAabbMenu()
 		if(_gui->getOverlay()->checkValueForm("positionX", position.x))
 		{
 			position.x /= 100.0f;
-			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbID), position);
+			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbId), position);
 		}
 		if(_gui->getOverlay()->checkValueForm("positionY", position.y))
 		{
 			position.y /= 100.0f;
-			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbID), position);
+			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbId), position);
 		}
 		if(_gui->getOverlay()->checkValueForm("positionZ", position.z))
 		{
 			position.z /= 100.0f;
-			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbID), position);
+			_fe3d->aabb_setLocalPosition((_currentModelId + "@" + _currentAabbId), position);
 		}
 		if(_gui->getOverlay()->checkValueForm("sizeX", size.x))
 		{
 			size.x /= 100.0f;
-			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbID), size);
+			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbId), size);
 		}
 		if(_gui->getOverlay()->checkValueForm("sizeY", size.y))
 		{
 			size.y /= 100.0f;
-			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbID), size);
+			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbId), size);
 		}
 		if(_gui->getOverlay()->checkValueForm("sizeZ", size.z))
 		{
 			size.z /= 100.0f;
-			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbID), size);
+			_fe3d->aabb_setLocalSize((_currentModelId + "@" + _currentAabbId), size);
 		}
 	}
 }
@@ -113,38 +113,38 @@ void ModelEditor::_updateAabbCreating()
 {
 	if(_isCreatingAabb)
 	{
-		string newAabbID;
+		string newAabbId;
 
-		if(_gui->getOverlay()->checkValueForm("aabbCreate", newAabbID, {}))
+		if(_gui->getOverlay()->checkValueForm("aabbCreate", newAabbId, {}))
 		{
-			if(newAabbID.find(' ') != string::npos)
+			if(newAabbId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("AABB id cannot contain any spaces!");
 				return;
 			}
 
-			if(newAabbID.find('@') != string::npos)
+			if(newAabbId.find('@') != string::npos)
 			{
 				Logger::throwWarning("AABB id cannot contain '@'!");
 				return;
 			}
 
-			if(_fe3d->aabb_isExisting(_currentModelId + "@" + newAabbID))
+			if(_fe3d->aabb_isExisting(_currentModelId + "@" + newAabbId))
 			{
-				Logger::throwWarning("AABB with id \"" + newAabbID + "\" already exists!");
+				Logger::throwWarning("AABB with id \"" + newAabbId + "\" already exists!");
 				return;
 			}
 
-			_currentAabbID = newAabbID;
+			_currentAabbId = newAabbId;
 
-			_fe3d->aabb_create(_currentModelId + "@" + _currentAabbID, false);
-			_fe3d->aabb_setFollowParentVisibility((_currentModelId + "@" + _currentAabbID), false);
-			_fe3d->aabb_setParentEntityId((_currentModelId + "@" + _currentAabbID), _currentModelId);
-			_fe3d->aabb_setParentEntityType((_currentModelId + "@" + _currentAabbID), AabbParentEntityType::MODEL);
+			_fe3d->aabb_create(_currentModelId + "@" + _currentAabbId, false);
+			_fe3d->aabb_setFollowParentVisibility((_currentModelId + "@" + _currentAabbId), false);
+			_fe3d->aabb_setParentEntityId((_currentModelId + "@" + _currentAabbId), _currentModelId);
+			_fe3d->aabb_setParentEntityType((_currentModelId + "@" + _currentAabbId), AabbParentEntityType::MODEL);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
-			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("aabbID")->getEntityId(), ("AABB: " + _currentAabbID), 0.025f);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityId(), true);
+			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), ("AABB: " + _currentAabbId), 0.025f);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), true);
 
 			_isCreatingAabb = false;
 		}
@@ -159,23 +159,23 @@ void ModelEditor::_updateAabbChoosing()
 
 		if(!selectedButtonID.empty())
 		{
-			if(_hoveredAabbID.empty())
+			if(_hoveredAabbId.empty())
 			{
-				_hoveredAabbID = selectedButtonID;
-				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbID), true);
+				_hoveredAabbId = selectedButtonID;
+				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), true);
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentAabbID = selectedButtonID;
-				_hoveredAabbID = "";
+				_currentAabbId = selectedButtonID;
+				_hoveredAabbId = "";
 
 				if(!_isDeletingAabb)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("aabbID")->getEntityId(), ("AABB: " + _currentAabbID), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityId(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), ("AABB: " + _currentAabbId), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("aabbList");
@@ -190,10 +190,10 @@ void ModelEditor::_updateAabbChoosing()
 		}
 		else
 		{
-			if(!_hoveredAabbID.empty())
+			if(!_hoveredAabbId.empty())
 			{
-				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbID), false);
-				_hoveredAabbID = "";
+				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
+				_hoveredAabbId = "";
 			}
 		}
 	}
@@ -201,7 +201,7 @@ void ModelEditor::_updateAabbChoosing()
 
 void ModelEditor::_updateAabbDeleting()
 {
-	if(_isDeletingAabb && !_currentAabbID.empty())
+	if(_isDeletingAabb && !_currentAabbId.empty())
 	{
 		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
@@ -210,14 +210,14 @@ void ModelEditor::_updateAabbDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->aabb_delete(_currentModelId + "@" + _currentAabbID);
+			_fe3d->aabb_delete(_currentModelId + "@" + _currentAabbId);
 			_isDeletingAabb = false;
-			_currentAabbID = "";
+			_currentAabbId = "";
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingAabb = false;
-			_currentAabbID = "";
+			_currentAabbId = "";
 		}
 	}
 }

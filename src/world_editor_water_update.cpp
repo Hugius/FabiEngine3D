@@ -13,29 +13,29 @@ void WorldEditor::_updateWaterMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
-			vector<string> waterIDs;
-			for(const auto& id : _waterEditor->getLoadedIDs())
+			vector<string> waterIds;
+			for(const auto& id : _waterEditor->getLoadedIds())
 			{
 				if(id[0] == '@')
 				{
-					waterIDs.push_back(id.substr(1));
+					waterIds.push_back(id.substr(1));
 				}
 			}
 
-			_gui->getOverlay()->createChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIDs);
+			_gui->getOverlay()->createChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIds);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_fe3d->water_delete(_currentWaterID);
-			_currentWaterID = "";
+			_fe3d->water_delete(_currentWaterId);
+			_currentWaterId = "";
 		}
 		else if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("up")->isHovered())
 		{
-			_fe3d->water_setHeight(_currentWaterID, (_fe3d->water_getHeight(_currentWaterID) + (_editorSpeed / 100.0f)));
+			_fe3d->water_setHeight(_currentWaterId, (_fe3d->water_getHeight(_currentWaterId) + (_editorSpeed / 100.0f)));
 		}
 		else if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("down")->isHovered())
 		{
-			_fe3d->water_setHeight(_currentWaterID, (_fe3d->water_getHeight(_currentWaterID) - (_editorSpeed / 100.0f)));
+			_fe3d->water_setHeight(_currentWaterId, (_fe3d->water_getHeight(_currentWaterId) - (_editorSpeed / 100.0f)));
 		}
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -48,8 +48,8 @@ void WorldEditor::_updateWaterMenu()
 					_fe3d->water_delete(selectedButtonID);
 				}
 
-				_currentWaterID = selectedButtonID;
-				_copyTemplateWater(_currentWaterID, ("@" + selectedButtonID));
+				_currentWaterId = selectedButtonID;
+				_copyTemplateWater(_currentWaterId, ("@" + selectedButtonID));
 				_gui->getOverlay()->deleteChoiceForm("waterList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("waterList"))
@@ -58,10 +58,10 @@ void WorldEditor::_updateWaterMenu()
 			}
 		}
 
-		screen->getButton("up")->setHoverable(!_currentWaterID.empty());
-		screen->getButton("down")->setHoverable(!_currentWaterID.empty());
-		screen->getButton("delete")->setHoverable(!_currentWaterID.empty());
+		screen->getButton("up")->setHoverable(!_currentWaterId.empty());
+		screen->getButton("down")->setHoverable(!_currentWaterId.empty());
+		screen->getButton("delete")->setHoverable(!_currentWaterId.empty());
 
-		_fe3d->water_select(_currentWaterID);
+		_fe3d->water_select(_currentWaterId);
 	}
 }

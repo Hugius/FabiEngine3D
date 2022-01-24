@@ -27,7 +27,7 @@ void ScriptEditor::_updateGUI()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_gui->getOverlay()->createChoiceForm("scriptFileList", "Edit Script", fvec2(0.0f, 0.1f), _script->getScriptFileIDs());
+			_gui->getOverlay()->createChoiceForm("scriptFileList", "Edit Script", fvec2(0.0f, 0.1f), _script->getScriptFileIds());
 			_isChoosingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rename")->isHovered())
@@ -93,8 +93,8 @@ void ScriptEditor::_updateScriptFileCreating()
 				return;
 			}
 
-			auto existingScriptFileIDs = _script->getScriptFileIDs();
-			if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) != existingScriptFileIDs.end())
+			auto existingScriptFileIds = _script->getScriptFileIds();
+			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileID) != existingScriptFileIds.end())
 			{
 				Logger::throwWarning("Script with id \"" + newScriptFileID + "\" already exists!");
 				return;
@@ -161,8 +161,8 @@ void ScriptEditor::_updateScriptFileRenaming()
 				return;
 			}
 
-			auto existingScriptFileIDs = _script->getScriptFileIDs();
-			if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
+			auto existingScriptFileIds = _script->getScriptFileIds();
+			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileID) == existingScriptFileIds.end())
 			{
 				Logger::throwWarning("Script with id \"" + newScriptFileID + "\" already exists!");
 			}

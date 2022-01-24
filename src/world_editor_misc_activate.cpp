@@ -48,10 +48,10 @@ void WorldEditor::_activateQuad3d(const string& id)
 
 void WorldEditor::_activateText3d(const string& id)
 {
-	_activeTextID = id;
+	_activeTextId = id;
 
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->text3d_getPosition(_activeTextID);
+	auto position = _fe3d->text3d_getPosition(_activeTextId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
@@ -65,8 +65,8 @@ void WorldEditor::_activateText3d(const string& id)
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textID")->getEntityId(), "Active text3d: " + rawID, 0.025f);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
+	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textId")->getEntityId(), "Active text3d: " + rawID, 0.025f);
 }
 
 void WorldEditor::_activateSound(const string& id)
@@ -159,13 +159,13 @@ void WorldEditor::_deactivateQuad3d()
 
 void WorldEditor::_deactivateText3d()
 {
-	if(!_activeTextID.empty())
+	if(!_activeTextId.empty())
 	{
-		_unselectText3d(_activeTextID);
+		_unselectText3d(_activeTextId);
 	}
 
-	_activeTextID = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), false);
+	_activeTextId = "";
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateSound()

@@ -21,7 +21,7 @@ public:
 private:
 	void _validateExecution();
 
-	vector<string> _pausedSoundIDs;
+	vector<string> _pausedSoundIds;
 
 	bool _isStarted = false;
 	bool _isRunning = false;

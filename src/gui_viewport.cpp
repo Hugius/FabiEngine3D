@@ -5,7 +5,7 @@
 GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string& id, const fvec2& position, const fvec2& size, const fvec3& color)
 	:
 	_fe3d(fe3d),
-	_ID(id),
+	_id(id),
 	_entityId("@" + id),
 	_initialPosition(position),
 	_initialSize(size),
@@ -58,7 +58,7 @@ const bool GuiViewport::isHovered() const
 
 const string& GuiViewport::getId()
 {
-	return _ID;
+	return _id;
 }
 
 const string& GuiViewport::getEntityId()
@@ -88,7 +88,7 @@ void GuiViewport::createWindow(const string& id, const fvec2& position, const fv
 	auto windowPosition = (viewportPosition + (position * viewportSize));
 	auto windowSize = ((size / 2.0f) * viewportSize);
 
-	_windows.push_back(make_shared<GuiWindow>(_fe3d, _ID, id, windowPosition, windowSize, color));
+	_windows.push_back(make_shared<GuiWindow>(_fe3d, _id, id, windowPosition, windowSize, color));
 }
 
 void GuiViewport::deleteWindow(const string& id)

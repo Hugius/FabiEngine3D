@@ -31,7 +31,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string terrainID;
+		string terrainId;
 		string heightMapPath;
 		string diffuseMapPath;
 		string normalMapPath;
@@ -52,7 +52,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		istringstream iss(line);
 
 		iss >>
-			terrainID >>
+			terrainId >>
 			heightMapPath >>
 			diffuseMapPath >>
 			maxHeight >>
@@ -205,7 +205,7 @@ const bool TerrainEditor::loadFromFile()
 		Logger::throwError("TerrainEditor::loadFromFile");
 	}
 
-	_loadedTerrainIDs.clear();
+	_loadedTerrainIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -221,7 +221,7 @@ const bool TerrainEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string terrainID;
+		string terrainId;
 		string heightMapPath;
 		string diffuseMapPath;
 		string normalMapPath;
@@ -245,7 +245,7 @@ const bool TerrainEditor::loadFromFile()
 		istringstream iss(line);
 
 		iss >>
-			terrainID >>
+			terrainId >>
 			heightMapPath >>
 			diffuseMapPath >>
 			maxHeight >>
@@ -293,21 +293,21 @@ const bool TerrainEditor::loadFromFile()
 			heightMapPath = string("projects\\" + _currentProjectId + "\\" + heightMapPath);
 		}
 
-		_fe3d->terrain_create(terrainID, heightMapPath);
+		_fe3d->terrain_create(terrainId, heightMapPath);
 
-		if(_fe3d->terrain_isExisting(terrainID))
+		if(_fe3d->terrain_isExisting(terrainId))
 		{
-			_loadedTerrainIDs.push_back(terrainID);
+			_loadedTerrainIds.push_back(terrainId);
 
-			_fe3d->terrain_setMaxHeight(terrainID, maxHeight);
-			_fe3d->terrain_setTextureRepeat(terrainID, textureRepeat);
-			_fe3d->terrain_setLightness(terrainID, lightness);
-			_fe3d->terrain_setRedTextureRepeat(terrainID, redTextureRepeat);
-			_fe3d->terrain_setGreenTextureRepeat(terrainID, greenTextureRepeat);
-			_fe3d->terrain_setBlueTextureRepeat(terrainID, blueTextureRepeat);
-			_fe3d->terrain_setSpecular(terrainID, isSpecular);
-			_fe3d->terrain_setSpecularShininess(terrainID, specularShininess);
-			_fe3d->terrain_setSpecularIntensity(terrainID, specularIntensity);
+			_fe3d->terrain_setMaxHeight(terrainId, maxHeight);
+			_fe3d->terrain_setTextureRepeat(terrainId, textureRepeat);
+			_fe3d->terrain_setLightness(terrainId, lightness);
+			_fe3d->terrain_setRedTextureRepeat(terrainId, redTextureRepeat);
+			_fe3d->terrain_setGreenTextureRepeat(terrainId, greenTextureRepeat);
+			_fe3d->terrain_setBlueTextureRepeat(terrainId, blueTextureRepeat);
+			_fe3d->terrain_setSpecular(terrainId, isSpecular);
+			_fe3d->terrain_setSpecularShininess(terrainId, specularShininess);
+			_fe3d->terrain_setSpecularIntensity(terrainId, specularIntensity);
 
 			if(!diffuseMapPath.empty())
 			{
@@ -316,7 +316,7 @@ const bool TerrainEditor::loadFromFile()
 					diffuseMapPath = string("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
 				}
 
-				_fe3d->terrain_setDiffuseMap(terrainID, diffuseMapPath);
+				_fe3d->terrain_setDiffuseMap(terrainId, diffuseMapPath);
 			}
 
 			if(!normalMapPath.empty())
@@ -326,7 +326,7 @@ const bool TerrainEditor::loadFromFile()
 					normalMapPath = string("projects\\" + _currentProjectId + "\\" + normalMapPath);
 				}
 
-				_fe3d->terrain_setNormalMap(terrainID, normalMapPath);
+				_fe3d->terrain_setNormalMap(terrainId, normalMapPath);
 			}
 
 			if(!redNormalMapPath.empty())
@@ -336,7 +336,7 @@ const bool TerrainEditor::loadFromFile()
 					redNormalMapPath = string("projects\\" + _currentProjectId + "\\" + redNormalMapPath);
 				}
 
-				_fe3d->terrain_setRedNormalMap(terrainID, redNormalMapPath);
+				_fe3d->terrain_setRedNormalMap(terrainId, redNormalMapPath);
 			}
 
 			if(!greenNormalMapPath.empty())
@@ -346,7 +346,7 @@ const bool TerrainEditor::loadFromFile()
 					greenNormalMapPath = string("projects\\" + _currentProjectId + "\\" + greenNormalMapPath);
 				}
 
-				_fe3d->terrain_setGreenNormalMap(terrainID, greenNormalMapPath);
+				_fe3d->terrain_setGreenNormalMap(terrainId, greenNormalMapPath);
 			}
 
 			if(!blueNormalMapPath.empty())
@@ -356,7 +356,7 @@ const bool TerrainEditor::loadFromFile()
 					blueNormalMapPath = string("projects\\" + _currentProjectId + "\\" + blueNormalMapPath);
 				}
 
-				_fe3d->terrain_setBlueNormalMap(terrainID, blueNormalMapPath);
+				_fe3d->terrain_setBlueNormalMap(terrainId, blueNormalMapPath);
 			}
 
 			if(!blendMapPath.empty())
@@ -366,7 +366,7 @@ const bool TerrainEditor::loadFromFile()
 					blendMapPath = string("projects\\" + _currentProjectId + "\\" + blendMapPath);
 				}
 
-				_fe3d->terrain_setBlendMap(terrainID, blendMapPath);
+				_fe3d->terrain_setBlendMap(terrainId, blendMapPath);
 			}
 
 			if(!redDiffuseMapPath.empty())
@@ -376,7 +376,7 @@ const bool TerrainEditor::loadFromFile()
 					redDiffuseMapPath = string("projects\\" + _currentProjectId + "\\" + redDiffuseMapPath);
 				}
 
-				_fe3d->terrain_setRedDiffuseMap(terrainID, redDiffuseMapPath);
+				_fe3d->terrain_setRedDiffuseMap(terrainId, redDiffuseMapPath);
 			}
 
 			if(!greenDiffuseMapPath.empty())
@@ -386,7 +386,7 @@ const bool TerrainEditor::loadFromFile()
 					greenDiffuseMapPath = string("projects\\" + _currentProjectId + "\\" + greenDiffuseMapPath);
 				}
 
-				_fe3d->terrain_setGreenDiffuseMap(terrainID, greenDiffuseMapPath);
+				_fe3d->terrain_setGreenDiffuseMap(terrainId, greenDiffuseMapPath);
 			}
 
 			if(!blueDiffuseMapPath.empty())
@@ -396,7 +396,7 @@ const bool TerrainEditor::loadFromFile()
 					blueDiffuseMapPath = string("projects\\" + _currentProjectId + "\\" + blueDiffuseMapPath);
 				}
 
-				_fe3d->terrain_setBlueDiffuseMap(terrainID, blueDiffuseMapPath);
+				_fe3d->terrain_setBlueDiffuseMap(terrainId, blueDiffuseMapPath);
 			}
 		}
 	}

@@ -22,9 +22,9 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 
 	for(unsigned int i = 0; i < count; i++)
 	{
-		BufferID textureID;
-		glGenTextures(1, &textureID);
-		glBindTexture(GL_TEXTURE_2D, textureID);
+		BufferId textureId;
+		glGenTextures(1, &textureId);
+		glBindTexture(GL_TEXTURE_2D, textureId);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _size.x, _size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -32,9 +32,9 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, (isTextureClamped ? GL_CLAMP_TO_EDGE : GL_REPEAT));
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, textureID, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, textureId, 0);
 
-		_textures.push_back(make_shared<TextureBuffer>(textureID));
+		_textures.push_back(make_shared<TextureBuffer>(textureId));
 	}
 
 	glGenRenderbuffers(1, &_rbo);
@@ -43,7 +43,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _rbo);
 
-	vector<BufferID> attachments;
+	vector<BufferId> attachments;
 	for(unsigned int i = 0; i < count; i++)
 	{
 		attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
@@ -67,9 +67,9 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size)
 
 	bind();
 
-	BufferID textureID;
-	glGenTextures(1, &textureID);
-	_textures.push_back(make_shared<TextureBuffer>(textureID));
+	BufferId textureId;
+	glGenTextures(1, &textureId);
+	_textures.push_back(make_shared<TextureBuffer>(textureId));
 
 	glBindTexture(GL_TEXTURE_2D, _textures[0]->getId());
 
@@ -117,12 +117,12 @@ const ivec2& CaptureBuffer::getSize() const
 	return _size;
 }
 
-const BufferID CaptureBuffer::getFbo() const
+const BufferId CaptureBuffer::getFbo() const
 {
 	return _fbo;
 }
 
-const BufferID CaptureBuffer::getRbo() const
+const BufferId CaptureBuffer::getRbo() const
 {
 	return _rbo;
 }

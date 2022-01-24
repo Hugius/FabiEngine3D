@@ -5,7 +5,7 @@ using std::max;
 
 Animation3d::Animation3d(const string& id)
 	:
-	_ID(id)
+	_id(id)
 {
 
 }
@@ -90,7 +90,7 @@ const vector<Animation3dFrame>& Animation3d::getFrames() const
 
 const string& Animation3d::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const map<string, fvec3>& Animation3d::getTotalMovements() const

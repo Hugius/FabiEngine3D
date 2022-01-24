@@ -19,22 +19,22 @@ void Text2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto IDs = getLoadedIDs();
-			for(auto& id : IDs)
+			auto Ids = getLoadedIds();
+			for(auto& id : Ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("textList", "Edit Text", fvec2(-0.5f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("textList", "Edit Text", fvec2(-0.5f, 0.1f), Ids);
 			_isChoosingText = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto IDs = getLoadedIDs();
-			for(auto& id : IDs)
+			auto Ids = getLoadedIds();
+			for(auto& id : Ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("textList", "Delete Text", fvec2(-0.5f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("textList", "Delete Text", fvec2(-0.5f, 0.1f), Ids);
 			_isChoosingText = true;
 			_isDeletingText = true;
 		}
@@ -61,15 +61,15 @@ void Text2dEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "text2dEditorMenuChoice")
 	{
-		auto color = _fe3d->text2d_getColor(_currentTextID);
-		auto opacity = _fe3d->text2d_getOpacity(_currentTextID);
+		auto color = _fe3d->text2d_getColor(_currentTextId);
+		auto opacity = _fe3d->text2d_getOpacity(_currentTextId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->text2d_setVisible(_currentTextID, false);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textID")->getEntityId(), false);
+			_fe3d->text2d_setVisible(_currentTextId, false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuMain");
-			_currentTextID = "";
+			_currentTextId = "";
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
@@ -86,22 +86,22 @@ void Text2dEditor::_updateChoiceMenu()
 		if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
-			_fe3d->text2d_setColor(_currentTextID, color);
+			_fe3d->text2d_setColor(_currentTextId, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("colorG", color.g, {}))
 		{
 			color.g /= 255.0f;
-			_fe3d->text2d_setColor(_currentTextID, color);
+			_fe3d->text2d_setColor(_currentTextId, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("colorB", color.b, {}))
 		{
 			color.b /= 255.0f;
-			_fe3d->text2d_setColor(_currentTextID, color);
+			_fe3d->text2d_setColor(_currentTextId, color);
 		}
 		if(_gui->getOverlay()->checkValueForm("opacity", opacity, {}))
 		{
 			opacity /= 100.0f;
-			_fe3d->text2d_setOpacity(_currentTextID, opacity);
+			_fe3d->text2d_setOpacity(_currentTextId, opacity);
 		}
 	}
 }

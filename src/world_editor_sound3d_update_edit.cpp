@@ -15,13 +15,13 @@ void WorldEditor::_updateSoundEditing()
 			_dontResetSelectedSpeaker = false;
 		}
 
-		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
+		auto hoveredAabbId = _fe3d->raycast_checkCursorInAny().first;
 
 		for(const auto& id : _fe3d->model_getIds())
 		{
 			if(id.substr(0, string("@@speaker").size()) == "@@speaker")
 			{
-				if(hoveredAabbID == id && _fe3d->misc_isCursorInsideViewport() &&
+				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideViewport() &&
 				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectSound(id.substr(string("@@speaker_").size()));
@@ -83,7 +83,7 @@ void WorldEditor::_updateSoundEditing()
 				{
 					_fe3d->model_delete(_activeSpeakerID);
 					_fe3d->sound3d_delete(activeSoundID);
-					_loadedSoundIDs.erase(activeSoundID);
+					_loadedSoundIds.erase(activeSoundID);
 					_activeSpeakerID = "";
 					rightWindow->setActiveScreen("main");
 					return;
@@ -94,7 +94,7 @@ void WorldEditor::_updateSoundEditing()
 			{
 				_fe3d->model_delete(_activeSpeakerID);
 				_fe3d->sound3d_delete(activeSoundID);
-				_loadedSoundIDs.erase(activeSoundID);
+				_loadedSoundIds.erase(activeSoundID);
 				_activeSpeakerID = "";
 				rightWindow->setActiveScreen("main");
 				return;

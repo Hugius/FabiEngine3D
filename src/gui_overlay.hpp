@@ -81,7 +81,7 @@ private:
 	vector<shared_ptr<GuiRectangle>> _rectangles;
 	vector<shared_ptr<GuiTextField>> _textFields;
 
-	vector<string> _valueFormIDs;
+	vector<string> _valueFormIds;
 	string _choiceFormID = "";
 	string _answerFormID = "";
 

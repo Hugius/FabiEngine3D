@@ -7,7 +7,7 @@
 #include <glew.h>
 
 using std::map;
-using BufferID = GLuint;
+using BufferId = GLuint;
 
 class ShaderBuffer final
 {
@@ -23,22 +23,22 @@ public:
 		_uploadUniform(uniformID, data);
 	}
 
-	const BufferID getProgramID() const;
-	const BufferID getUniformID(const string& name);
+	const BufferId getProgramID() const;
+	const BufferId getUniformID(const string& name);
 
 private:
-	void _uploadUniform(const BufferID& uniformID, const bool& data);
-	void _uploadUniform(const BufferID& uniformID, const int& data);
-	void _uploadUniform(const BufferID& uniformID, const float& data);
-	void _uploadUniform(const BufferID& uniformID, const double& data);
-	void _uploadUniform(const BufferID& uniformID, const fvec2& data);
-	void _uploadUniform(const BufferID& uniformID, const fvec3& data);
-	void _uploadUniform(const BufferID& uniformID, const fvec4& data);
-	void _uploadUniform(const BufferID& uniformID, const mat22& data);
-	void _uploadUniform(const BufferID& uniformID, const mat33& data);
-	void _uploadUniform(const BufferID& uniformID, const mat44& data);
+	void _uploadUniform(const BufferId& uniformID, const bool& data);
+	void _uploadUniform(const BufferId& uniformID, const int& data);
+	void _uploadUniform(const BufferId& uniformID, const float& data);
+	void _uploadUniform(const BufferId& uniformID, const double& data);
+	void _uploadUniform(const BufferId& uniformID, const fvec2& data);
+	void _uploadUniform(const BufferId& uniformID, const fvec3& data);
+	void _uploadUniform(const BufferId& uniformID, const fvec4& data);
+	void _uploadUniform(const BufferId& uniformID, const mat22& data);
+	void _uploadUniform(const BufferId& uniformID, const mat33& data);
+	void _uploadUniform(const BufferId& uniformID, const mat44& data);
 
-	map<string, BufferID> _uniformCache;
+	map<string, BufferId> _uniformCache;
 
-	BufferID _programID = 0;
+	BufferId _programID = 0;
 };

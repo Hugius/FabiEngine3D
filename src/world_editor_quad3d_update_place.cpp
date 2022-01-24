@@ -5,7 +5,7 @@ void WorldEditor::_updateQuad3dPlacing()
 {
 	if(!_currentTemplateQuadId.empty())
 	{
-		if(_fe3d->terrain_getSelectedID().empty())
+		if(_fe3d->terrain_getSelectedId().empty())
 		{
 			auto newPosition = _fe3d->quad3d_getPosition(_currentTemplateQuadId);
 			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});

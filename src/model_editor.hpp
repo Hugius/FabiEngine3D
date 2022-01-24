@@ -15,7 +15,7 @@ public:
 
 	const vector<string> getMeshPathsFromFile() const;
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedIDs();
+	const vector<string>& getLoadedIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
@@ -45,10 +45,10 @@ private:
 	string _currentProjectId = "";
 	string _currentModelId = "";
 	string _currentPartId = "";
-	string _currentAabbID = "";
+	string _currentAabbId = "";
 	string _hoveredModelId = "";
 	string _hoveredPartId = "";
-	string _hoveredAabbID = "";
+	string _hoveredAabbId = "";
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;

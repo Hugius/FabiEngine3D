@@ -31,13 +31,13 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string skyID;
+		string skyId;
 		array<string, 6> cubeMapPaths{};
 
 		istringstream iss(line);
 
 		iss >>
-			skyID >>
+			skyId >>
 			cubeMapPaths[0] >>
 			cubeMapPaths[1] >>
 			cubeMapPaths[2] >>
@@ -75,7 +75,7 @@ const bool SkyEditor::loadFromFile()
 		Logger::throwError("SkyEditor::loadFromFile");
 	}
 
-	_loadedSkyIDs.clear();
+	_loadedSkyIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -91,7 +91,7 @@ const bool SkyEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string skyID;
+		string skyId;
 		array<string, 6> cubeMapPaths{};
 		fvec3 color;
 		float rotation;
@@ -100,7 +100,7 @@ const bool SkyEditor::loadFromFile()
 		istringstream iss(line);
 
 		iss >>
-			skyID >>
+			skyId >>
 			cubeMapPaths[0] >>
 			cubeMapPaths[1] >>
 			cubeMapPaths[2] >>
@@ -128,16 +128,16 @@ const bool SkyEditor::loadFromFile()
 			}
 		}
 
-		_fe3d->sky_create(skyID);
+		_fe3d->sky_create(skyId);
 
-		if(_fe3d->sky_isExisting(skyID))
+		if(_fe3d->sky_isExisting(skyId))
 		{
-			_loadedSkyIDs.push_back(skyID);
+			_loadedSkyIds.push_back(skyId);
 
-			_fe3d->sky_setCubeMaps(skyID, cubeMapPaths);
-			_fe3d->sky_setLightness(skyID, lightness);
-			_fe3d->sky_setRotation(skyID, rotation);
-			_fe3d->sky_setColor(skyID, color);
+			_fe3d->sky_setCubeMaps(skyId, cubeMapPaths);
+			_fe3d->sky_setLightness(skyId, lightness);
+			_fe3d->sky_setRotation(skyId, rotation);
+			_fe3d->sky_setColor(skyId, color);
 		}
 	}
 

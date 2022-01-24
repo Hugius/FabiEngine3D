@@ -30,9 +30,9 @@ void WorldEditor::_updateQuad3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButtons();
 
-			auto IDs = _fe3d->quad3d_getIds();
-			sort(IDs.begin(), IDs.end());
-			for(auto& quadId : IDs)
+			auto Ids = _fe3d->quad3d_getIds();
+			sort(Ids.begin(), Ids.end());
+			for(auto& quadId : Ids)
 			{
 				if(quadId[0] != '@')
 				{
@@ -63,7 +63,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& quadId : _quad3dEditor->getLoadedIDs())
+			for(const auto& quadId : _quad3dEditor->getLoadedIds())
 			{
 				if(_fe3d->quad3d_isExisting(quadId))
 				{
@@ -83,7 +83,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Quad3d: " + _currentTemplateQuadId.substr(1), 0.025f);
 						_fe3d->misc_centerCursor();
 
-						if(_fe3d->terrain_getSelectedID().empty())
+						if(_fe3d->terrain_getSelectedId().empty())
 						{
 							_fe3d->quad3d_setPosition(_currentTemplateQuadId, fvec3(0.0f));
 							_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));

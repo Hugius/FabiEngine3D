@@ -39,14 +39,14 @@ void WaterEditor::load()
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
 	_fe3d->model_setShadowed("@@grid", false);
 
-	_gui->getOverlay()->createTextField("waterID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("waterId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_isEditorLoaded = true;
 }
 
 void WaterEditor::unload()
 {
-	for(const auto& id : _loadedWaterIDs)
+	for(const auto& id : _loadedWaterIds)
 	{
 		_fe3d->water_delete(id);
 	}
@@ -61,10 +61,10 @@ void WaterEditor::unload()
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
 
-	_gui->getOverlay()->deleteTextField("waterID");
+	_gui->getOverlay()->deleteTextField("waterId");
 
-	_loadedWaterIDs.clear();
-	_currentWaterID = "";
+	_loadedWaterIds.clear();
+	_currentWaterId = "";
 	_isEditorLoaded = false;
 	_isCreatingWater = false;
 	_isChoosingWater = false;

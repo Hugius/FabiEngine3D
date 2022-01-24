@@ -45,37 +45,37 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	file << "CAMERA_PITCH " << _fe3d->camera_getPitch() << endl;
 
-	string skyID = _fe3d->sky_getSelectedID();
-	if(!skyID.empty())
+	string skyId = _fe3d->sky_getSelectedId();
+	if(!skyId.empty())
 	{
-		string templateID = ("@" + skyID);
+		string templateID = ("@" + skyId);
 
 		file <<
 			"SKY " <<
-			skyID << " " <<
+			skyId << " " <<
 			templateID << endl;
 	}
 
-	string terrainID = _fe3d->terrain_getSelectedID();
-	if(!terrainID.empty())
+	string terrainId = _fe3d->terrain_getSelectedId();
+	if(!terrainId.empty())
 	{
-		string templateID = ("@" + terrainID);
+		string templateID = ("@" + terrainId);
 
 		file <<
 			"TERRAIN " <<
-			terrainID << " " <<
+			terrainId << " " <<
 			templateID << endl;
 	}
 
-	string waterID = _fe3d->water_getSelectedID();
-	if(!waterID.empty())
+	string waterId = _fe3d->water_getSelectedId();
+	if(!waterId.empty())
 	{
-		string templateID = ("@" + waterID);
-		auto height = _fe3d->water_getHeight(waterID);
+		string templateID = ("@" + waterId);
+		auto height = _fe3d->water_getHeight(waterId);
 
 		file <<
 			"WATER " <<
-			waterID << " " <<
+			waterId << " " <<
 			templateID << " " <<
 			height << endl;
 	}
@@ -179,7 +179,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto maxVolume = _fe3d->sound3d_getMaxVolume(soundID);
 			auto maxDistance = _fe3d->sound3d_getMaxDistance(soundID);
 
-			string templateID = _loadedSoundIDs.at(soundID);
+			string templateID = _loadedSoundIds.at(soundID);
 
 			file <<
 				"SOUND " <<

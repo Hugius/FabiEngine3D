@@ -22,12 +22,12 @@ const bool SkyEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\sky.fe3d");
 
-	for(const auto& skyID : _loadedSkyIDs)
+	for(const auto& skyId : _loadedSkyIds)
 	{
-		auto cubeMapPaths = _fe3d->sky_getCubeMapPaths(skyID);
-		auto rotation = _fe3d->sky_getRotation(skyID);
-		auto lightness = _fe3d->sky_getLightness(skyID);
-		auto color = _fe3d->sky_getColor(skyID);
+		auto cubeMapPaths = _fe3d->sky_getCubeMapPaths(skyId);
+		auto rotation = _fe3d->sky_getRotation(skyId);
+		auto lightness = _fe3d->sky_getLightness(skyId);
+		auto color = _fe3d->sky_getColor(skyId);
 
 		for(auto& cubeMapPath : cubeMapPaths)
 		{
@@ -38,7 +38,7 @@ const bool SkyEditor::saveToFile() const
 			replace(cubeMapPath.begin(), cubeMapPath.end(), ' ', '?');
 		}
 
-		file << skyID << " ";
+		file << skyId << " ";
 
 		for(const auto& cubeMapPath : cubeMapPaths)
 		{

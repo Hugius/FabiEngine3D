@@ -53,17 +53,17 @@ void WaterEditor::_updateMiscellaneous()
 			}
 		}
 
-		if(!_currentWaterID.empty())
+		if(!_currentWaterId.empty())
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->water_isWireframed(_currentWaterID))
+				if(_fe3d->water_isWireframed(_currentWaterId))
 				{
-					_fe3d->water_setWireframed(_currentWaterID, false);
+					_fe3d->water_setWireframed(_currentWaterId, false);
 				}
 				else
 				{
-					_fe3d->water_setWireframed(_currentWaterID, true);
+					_fe3d->water_setWireframed(_currentWaterId, true);
 				}
 			}
 		}
@@ -74,42 +74,42 @@ void WaterEditor::_updateWaterCreating()
 {
 	if(_isCreatingWater)
 	{
-		string newWaterID;
+		string newWaterId;
 
-		if(_gui->getOverlay()->checkValueForm("waterCreate", newWaterID, {}))
+		if(_gui->getOverlay()->checkValueForm("waterCreate", newWaterId, {}))
 		{
-			if(newWaterID.find(' ') != string::npos)
+			if(newWaterId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Water id cannot contain any spaces!");
 				return;
 			}
 
-			if(newWaterID.find('@') != string::npos)
+			if(newWaterId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Water id cannot contain '@'!");
 				return;
 			}
 
-			newWaterID = ("@" + newWaterID);
+			newWaterId = ("@" + newWaterId);
 
-			if(find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterID) != _loadedWaterIDs.end())
+			if(find(_loadedWaterIds.begin(), _loadedWaterIds.end(), newWaterId) != _loadedWaterIds.end())
 			{
-				Logger::throwWarning("Water with id \"" + newWaterID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Water with id \"" + newWaterId.substr(1) + "\" already exists!");
 				return;
 			}
 
-			_fe3d->water_create(newWaterID);
+			_fe3d->water_create(newWaterId);
 
-			if(_fe3d->water_isExisting(newWaterID))
+			if(_fe3d->water_isExisting(newWaterId))
 			{
-				_fe3d->water_select(newWaterID);
+				_fe3d->water_select(newWaterId);
 
-				_currentWaterID = newWaterID;
-				_loadedWaterIDs.push_back(newWaterID);
+				_currentWaterId = newWaterId;
+				_loadedWaterIds.push_back(newWaterId);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("waterID")->getEntityId(), "Water: " + newWaterID.substr(1), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("waterID")->getEntityId(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("waterId")->getEntityId(), "Water: " + newWaterId.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("waterId")->getEntityId(), true);
 				_isCreatingWater = false;
 			}
 		}
@@ -128,14 +128,14 @@ void WaterEditor::_updateWaterChoosing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentWaterID = ("@" + selectedButtonID);
+				_currentWaterId = ("@" + selectedButtonID);
 
 				if(!_isDeletingWater)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("waterID")->getEntityId(), "Water: " + _currentWaterID.substr(1), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("waterID")->getEntityId(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("waterId")->getEntityId(), "Water: " + _currentWaterId.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("waterId")->getEntityId(), true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("waterList");
@@ -157,7 +157,7 @@ void WaterEditor::_updateWaterChoosing()
 
 void WaterEditor::_updateWaterDeleting()
 {
-	if(_isDeletingWater && !_currentWaterID.empty())
+	if(_isDeletingWater && !_currentWaterId.empty())
 	{
 		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
@@ -166,15 +166,15 @@ void WaterEditor::_updateWaterDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->water_delete(_currentWaterID);
+			_fe3d->water_delete(_currentWaterId);
 
-			_loadedWaterIDs.erase(remove(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), _currentWaterID), _loadedWaterIDs.end());
-			_currentWaterID = "";
+			_loadedWaterIds.erase(remove(_loadedWaterIds.begin(), _loadedWaterIds.end(), _currentWaterId), _loadedWaterIds.end());
+			_currentWaterId = "";
 			_isDeletingWater = false;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_currentWaterID = "";
+			_currentWaterId = "";
 			_isDeletingWater = false;
 		}
 	}

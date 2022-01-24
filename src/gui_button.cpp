@@ -4,7 +4,7 @@
 GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
 	:
 	_fe3d(fe3d),
-	_ID(id),
+	_id(id),
 	_parentID(parentID),
 	_rectangle(make_shared<GuiRectangle>(fe3d, parentID + "_button", id, position, size, color, isCentered)),
 	_textField(make_shared<GuiTextField>(fe3d, parentID + "_button", id, position, fvec2(size.x* TEXT_WIDTH_MULTIPLIER, size.y* TEXT_HEIGHT_MULTIPLIER), textContent, textColor, isCentered)),
@@ -17,7 +17,7 @@ GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentID, c
 GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, const fvec3& hoverColor, bool isCentered)
 	:
 	_fe3d(fe3d),
-	_ID(id),
+	_id(id),
 	_parentID(parentID),
 	_rectangle(make_shared<GuiRectangle>(fe3d, parentID + "_button", id, position, size, texturePath, isCentered)),
 	_hoverColor(hoverColor)
@@ -138,7 +138,7 @@ const bool GuiButton::isHovered() const
 
 const string& GuiButton::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const string& GuiButton::getParentID() const

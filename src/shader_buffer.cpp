@@ -91,7 +91,7 @@ ShaderBuffer::~ShaderBuffer()
 	glDeleteProgram(_programID);
 }
 
-const BufferID ShaderBuffer::getUniformID(const string& name)
+const BufferId ShaderBuffer::getUniformID(const string& name)
 {
 	auto cacheIterator = _uniformCache.find(name);
 
@@ -122,57 +122,57 @@ void ShaderBuffer::unbind()
 	glUseProgram(0);
 }
 
-const BufferID ShaderBuffer::getProgramID() const
+const BufferId ShaderBuffer::getProgramID() const
 {
 	return _programID;
 }
 
-void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const bool& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const bool& data)
 {
 	glUniform1i(uniformID, data);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const int& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const int& data)
 {
 	glUniform1i(uniformID, data);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const float& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const float& data)
 {
 	glUniform1f(uniformID, data);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const double& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const double& data)
 {
 	glUniform1d(uniformID, data);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const fvec2& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const fvec2& data)
 {
 	glUniform2f(uniformID, data.x, data.y);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const fvec3& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const fvec3& data)
 {
 	glUniform3f(uniformID, data.x, data.y, data.z);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const fvec4& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const fvec4& data)
 {
 	glUniform4f(uniformID, data.x, data.y, data.z, data.w);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const mat22& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const mat22& data)
 {
 	glUniformMatrix2fv(uniformID, 1, GL_FALSE, data.f);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const mat33& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const mat33& data)
 {
 	glUniformMatrix3fv(uniformID, 1, GL_FALSE, data.f);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const mat44& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const mat44& data)
 {
 	glUniformMatrix4fv(uniformID, 1, GL_FALSE, data.f);
 }

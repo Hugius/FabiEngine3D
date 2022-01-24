@@ -27,7 +27,7 @@ public:
 	shared_ptr<GuiWindow> getWindow(const string& id) const;
 
 private:
-	const string _ID;
+	const string _id;
 	const string _entityId;
 
 	const fvec3 _initialColor;

@@ -278,7 +278,7 @@ void EngineCore::update()
 		return;
 	}
 	_fe3d->_isRaycastUpdated = false;
-	_fe3d->_hoveredAabbID = "";
+	_fe3d->_hoveredAabbId = "";
 	_engineController->update();
 	_timer->stopDeltaPart();
 

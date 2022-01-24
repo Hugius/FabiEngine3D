@@ -3,7 +3,7 @@
 
 BaseEntity::BaseEntity(const string& id)
 	:
-	_ID(id)
+	_id(id)
 {
 	if(id.empty())
 	{
@@ -18,7 +18,7 @@ void BaseEntity::setVisible(bool value)
 
 const string& BaseEntity::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const bool BaseEntity::isVisible() const

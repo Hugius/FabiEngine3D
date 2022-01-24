@@ -5,7 +5,7 @@ void WorldEditor::_updateReflectionPlacing()
 {
 	if(_isPlacingReflection)
 	{
-		if(_fe3d->terrain_getSelectedID().empty())
+		if(_fe3d->terrain_getSelectedId().empty())
 		{
 			auto newPosition = _fe3d->reflection_getPosition(TEMPLATE_CAMERA_ID);
 			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
@@ -29,7 +29,7 @@ void WorldEditor::_updateReflectionPlacing()
 
 				if(_fe3d->reflection_isExisting(newID))
 				{
-					_loadedReflectionIDs.push_back(newID);
+					_loadedReflectionIds.push_back(newID);
 
 					_fe3d->reflection_setPosition(newID, newPosition);
 
@@ -107,7 +107,7 @@ void WorldEditor::_updateReflectionPlacing()
 
 				if(_fe3d->reflection_isExisting(newID))
 				{
-					_loadedReflectionIDs.push_back(newID);
+					_loadedReflectionIds.push_back(newID);
 
 					_fe3d->reflection_setPosition(newID, newPosition);
 

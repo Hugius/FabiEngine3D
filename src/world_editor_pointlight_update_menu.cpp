@@ -36,7 +36,7 @@ void WorldEditor::_updatePointlightMenu()
 			_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, true);
 			_fe3d->misc_centerCursor();
 
-			if(_fe3d->terrain_getSelectedID().empty())
+			if(_fe3d->terrain_getSelectedId().empty())
 			{
 				_fe3d->pointlight_setPosition(TEMPLATE_LAMP_ID, fvec3(0.0f));
 				_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -49,9 +49,9 @@ void WorldEditor::_updatePointlightMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteButtons();
 
-			auto IDs = _fe3d->pointlight_getIds();
-			sort(IDs.begin(), IDs.end());
-			for(auto& pointlightID : IDs)
+			auto Ids = _fe3d->pointlight_getIds();
+			sort(Ids.begin(), Ids.end());
+			for(auto& pointlightID : Ids)
 			{
 				if(pointlightID[0] != '@')
 				{

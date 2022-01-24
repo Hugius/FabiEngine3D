@@ -34,7 +34,7 @@ void SoundEditor::load()
 
 void SoundEditor::unload()
 {
-	for(const auto& id : _loadedSoundIDs)
+	for(const auto& id : _loadedSoundIds)
 	{
 		_fe3d->sound2d_delete(id);
 	}
@@ -49,7 +49,7 @@ void SoundEditor::unload()
 
 	_gui->getOverlay()->deleteTextField("soundID");
 
-	_loadedSoundIDs.clear();
+	_loadedSoundIds.clear();
 	_currentSoundID = "";
 	_hoveredSoundID = "";
 	_isEditorLoaded = false;

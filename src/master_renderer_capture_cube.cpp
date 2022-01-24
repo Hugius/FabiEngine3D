@@ -51,9 +51,9 @@ void MasterRenderer::_captureCubeReflections()
 	{
 		if(entity->mustCapture())
 		{
-			BufferID textureID;
-			glGenTextures(1, &textureID);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+			BufferId textureId;
+			glGenTextures(1, &textureId);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -130,12 +130,12 @@ void MasterRenderer::_captureCubeReflections()
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
-				glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
 				glTexImage2D(cubeIndex, 0, GL_RGB, reflectionQuality, reflectionQuality, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 			}
 
-			entity->setCubeMap(make_shared<TextureBuffer>(textureID));
+			entity->setCubeMap(make_shared<TextureBuffer>(textureId));
 			entity->setCaptured();
 		}
 	}

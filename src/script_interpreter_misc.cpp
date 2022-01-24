@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_validateSavesDirectory() const
 
 void ScriptInterpreter::_throwScriptError(const string& message)
 {
-	Logger::throwWarning("ERROR @ script \"" + _currentScriptIDsStack.back() + "\" @ line " +
+	Logger::throwWarning("ERROR @ script \"" + _currentScriptIdsStack.back() + "\" @ line " +
 						 to_string(_currentLineIndexStack.back() + 1) + ": " + message);
 	_hasThrownError = true;
 }

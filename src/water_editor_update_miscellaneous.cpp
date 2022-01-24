@@ -6,11 +6,11 @@ void WaterEditor::_updateMiscellaneousMenu()
 
 	if(screen->getId() == "waterEditorMenuMiscellaneous")
 	{
-		auto size = _fe3d->water_getSize(_currentWaterID);
-		auto speed = _fe3d->water_getSpeed(_currentWaterID);
-		auto opacity = _fe3d->water_getOpacity(_currentWaterID);
-		auto waveHeight = _fe3d->water_getWaveHeight(_currentWaterID);
-		auto quality = _fe3d->water_getQuality(_currentWaterID);
+		auto size = _fe3d->water_getSize(_currentWaterId);
+		auto speed = _fe3d->water_getSpeed(_currentWaterId);
+		auto opacity = _fe3d->water_getOpacity(_currentWaterId);
+		auto waveHeight = _fe3d->water_getWaveHeight(_currentWaterId);
+		auto quality = _fe3d->water_getQuality(_currentWaterId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -65,36 +65,36 @@ void WaterEditor::_updateMiscellaneousMenu()
 				}
 			}
 
-			_fe3d->water_setQuality(_currentWaterID, quality);
+			_fe3d->water_setQuality(_currentWaterId, quality);
 		}
 
 		if(_gui->getOverlay()->checkValueForm("size", size, {0.0f}))
 		{
-			_fe3d->water_setSize(_currentWaterID, size);
+			_fe3d->water_setSize(_currentWaterId, size);
 		}
 		if(_gui->getOverlay()->checkValueForm("speedX", speed.x))
 		{
 			speed.x /= 100000.0f;
-			_fe3d->water_setSpeed(_currentWaterID, speed);
+			_fe3d->water_setSpeed(_currentWaterId, speed);
 		}
 		if(_gui->getOverlay()->checkValueForm("speedZ", speed.y))
 		{
 			speed.y /= 100000.0f;
-			_fe3d->water_setSpeed(_currentWaterID, speed);
+			_fe3d->water_setSpeed(_currentWaterId, speed);
 		}
 		if(_gui->getOverlay()->checkValueForm("opacity", opacity))
 		{
 			opacity /= 100.0f;
-			_fe3d->water_setOpacity(_currentWaterID, opacity);
+			_fe3d->water_setOpacity(_currentWaterId, opacity);
 		}
 		if(_gui->getOverlay()->checkValueForm("waveHeight", waveHeight))
 		{
 			waveHeight /= 100.0f;
-			_fe3d->water_setWaveHeight(_currentWaterID, waveHeight);
+			_fe3d->water_setWaveHeight(_currentWaterId, waveHeight);
 		}
 
-		screen->getButton("waveHeight")->setHoverable(_fe3d->water_hasDisplacementMap(_currentWaterID));
-		screen->getButton("speed")->setHoverable(_fe3d->water_hasDudvMap(_currentWaterID) || _fe3d->water_hasDisplacementMap(_currentWaterID));
+		screen->getButton("waveHeight")->setHoverable(_fe3d->water_hasDisplacementMap(_currentWaterId));
+		screen->getButton("speed")->setHoverable(_fe3d->water_hasDudvMap(_currentWaterId) || _fe3d->water_hasDisplacementMap(_currentWaterId));
 
 		screen->getButton("quality")->changeTextContent("Quality: " + to_string(static_cast<int>(quality) + 1));
 	}

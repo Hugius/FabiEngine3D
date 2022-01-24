@@ -16,9 +16,9 @@ void EngineInterface::quad3d_deleteAll()
 
 void EngineInterface::quad3d_delete(const string& id)
 {
-	for(const auto& aabbID : aabb_getChildIDs(id, AabbParentEntityType::QUAD3D))
+	for(const auto& aabbId : aabb_getChildIds(id, AabbParentEntityType::QUAD3D))
 	{
-		_core->getAabbEntityManager()->deleteEntity(aabbID);
+		_core->getAabbEntityManager()->deleteEntity(aabbId);
 	}
 
 	_core->getQuad3dEntityManager()->deleteEntity(id);

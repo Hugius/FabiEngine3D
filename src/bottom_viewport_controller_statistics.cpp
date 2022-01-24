@@ -14,9 +14,9 @@ void BottomViewportController::_updateStatistics()
 		sort(fpsList.begin(), fpsList.end());
 		float fps = fpsList.empty() ? -1.0f : fpsList[49];
 
-		string fpsTextID = statisticsScreen->getTextField("fps")->getEntityId();
+		string fpsTextId = statisticsScreen->getTextField("fps")->getEntityId();
 		string text = "FPS: " + to_string(static_cast<int>(fps));
-		_fe3d->text2d_setContent(fpsTextID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(fpsTextId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 		fpsList.clear();
 	}
 	else
@@ -26,52 +26,52 @@ void BottomViewportController::_updateStatistics()
 
 	if(_fe3d->misc_checkInterval(100))
 	{
-		string textID = statisticsScreen->getTextField("cpuModel")->getEntityId();
+		string textId = statisticsScreen->getTextField("cpuModel")->getEntityId();
 		string text = ("CPU: " + _fe3d->misc_getCpuName());
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(100))
 	{
-		string textID = statisticsScreen->getTextField("gpuModel")->getEntityId();
+		string textId = statisticsScreen->getTextField("gpuModel")->getEntityId();
 		string text = ("GPU: " + _fe3d->misc_getGpuName());
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(100))
 	{
-		string textID = statisticsScreen->getTextField("openglVersion")->getEntityId();
+		string textId = statisticsScreen->getTextField("openglVersion")->getEntityId();
 		string text = "OpenGL Version: " + _fe3d->misc_getOpenglVersion();
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(1))
 	{
-		string textID = statisticsScreen->getTextField("cameraPositionYawPitch")->getEntityId();
+		string textId = statisticsScreen->getTextField("cameraPositionYawPitch")->getEntityId();
 		string text = ("Camera Position/Yaw/Pitch: " +
 					   to_string(static_cast<int>(_fe3d->camera_getPosition().x)) + " " +
 					   to_string(static_cast<int>(_fe3d->camera_getPosition().y)) + " " +
 					   to_string(static_cast<int>(_fe3d->camera_getPosition().z)) + " " +
 					   to_string(static_cast<int>(_fe3d->camera_getYaw())) + " " +
 					   to_string(static_cast<int>(_fe3d->camera_getPitch())));
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(1))
 	{
-		string textID = statisticsScreen->getTextField("cursorPosition")->getEntityId();
+		string textId = statisticsScreen->getTextField("cursorPosition")->getEntityId();
 		string text = "Raycast Direction: " +
 			to_string(static_cast<int>(_fe3d->raycast_getCursorRay().getDirection().x * 100.0f)) + "% " +
 			to_string(static_cast<int>(_fe3d->raycast_getCursorRay().getDirection().y * 100.0f)) + "% " +
 			to_string(static_cast<int>(_fe3d->raycast_getCursorRay().getDirection().z * 100.0f)) + "%";
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(10))
 	{
-		string textID = statisticsScreen->getTextField("triangleCount")->getEntityId();
+		string textId = statisticsScreen->getTextField("triangleCount")->getEntityId();
 		string text = "Triangles: " + to_string(static_cast<int>(_fe3d->misc_getTriangleCount()));
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(10))
@@ -85,9 +85,9 @@ void BottomViewportController::_updateStatistics()
 			}
 		}
 
-		string textID = statisticsScreen->getTextField("modelEntityCount")->getEntityId();
+		string textId = statisticsScreen->getTextField("modelEntityCount")->getEntityId();
 		string text = "Model Entities: " + to_string(entityCount);
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(10))
@@ -101,9 +101,9 @@ void BottomViewportController::_updateStatistics()
 			}
 		}
 
-		string textID = statisticsScreen->getTextField("quad3dEntityCount")->getEntityId();
+		string textId = statisticsScreen->getTextField("quad3dEntityCount")->getEntityId();
 		string text = "Quad3d Entities: " + to_string(entityCount);
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(10))
@@ -117,9 +117,9 @@ void BottomViewportController::_updateStatistics()
 			}
 		}
 
-		string textID = statisticsScreen->getTextField("aabbEntityCount")->getEntityId();
+		string textId = statisticsScreen->getTextField("aabbEntityCount")->getEntityId();
 		string text = "AABB Entities: " + to_string(entityCount);
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(10))
@@ -140,9 +140,9 @@ void BottomViewportController::_updateStatistics()
 			}
 		}
 
-		string textID = statisticsScreen->getTextField("lightEntityCount")->getEntityId();
+		string textId = statisticsScreen->getTextField("lightEntityCount")->getEntityId();
 		string text = "Light Entities: " + to_string(entityCount);
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(10))
@@ -156,9 +156,9 @@ void BottomViewportController::_updateStatistics()
 			}
 		}
 
-		string textID = statisticsScreen->getTextField("reflectionEntityCount")->getEntityId();
+		string textId = statisticsScreen->getTextField("reflectionEntityCount")->getEntityId();
 		string text = "Reflection Entities: " + to_string(entityCount);
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(10))
@@ -179,9 +179,9 @@ void BottomViewportController::_updateStatistics()
 			}
 		}
 
-		string textID = statisticsScreen->getTextField("quad2dEntityCount")->getEntityId();
+		string textId = statisticsScreen->getTextField("quad2dEntityCount")->getEntityId();
 		string text = "GUI Entities: " + to_string(entityCount);
-		_fe3d->text2d_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d->misc_checkInterval(50))
@@ -189,8 +189,8 @@ void BottomViewportController::_updateStatistics()
 		auto updateStatistics = _fe3d->misc_getUpdateProfilingStatistics();
 		for(const auto& [key, value] : updateStatistics)
 		{
-			string textID = statisticsScreen->getTextField(key)->getEntityId();
-			_fe3d->text2d_setContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
+			string textId = statisticsScreen->getTextField(key)->getEntityId();
+			_fe3d->text2d_setContent(textId, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
 		}
 	}
 
@@ -199,8 +199,8 @@ void BottomViewportController::_updateStatistics()
 		auto renderStatistics = _fe3d->misc_getRenderProfilingStatistics();
 		for(const auto& [key, value] : renderStatistics)
 		{
-			string textID = statisticsScreen->getTextField(key)->getEntityId();
-			_fe3d->text2d_setContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
+			string textId = statisticsScreen->getTextField(key)->getEntityId();
+			_fe3d->text2d_setContent(textId, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
 		}
 	}
 

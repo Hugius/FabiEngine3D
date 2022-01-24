@@ -47,19 +47,19 @@ void WorldEditor::unloadEditorWorld()
 	_fe3d->gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
 	_fe3d->gfx_setPlanarReflectionHeight(0.0);
 
-	if(!_loadedSkyID.empty())
+	if(!_loadedSkyId.empty())
 	{
-		_fe3d->sky_delete(_loadedSkyID);
+		_fe3d->sky_delete(_loadedSkyId);
 	}
 
-	if(!_loadedTerrainID.empty())
+	if(!_loadedTerrainId.empty())
 	{
-		_fe3d->terrain_delete(_loadedTerrainID);
+		_fe3d->terrain_delete(_loadedTerrainId);
 	}
 
-	if(!_loadedWaterID.empty())
+	if(!_loadedWaterId.empty())
 	{
-		_fe3d->water_delete(_loadedWaterID);
+		_fe3d->water_delete(_loadedWaterId);
 	}
 
 	for(const auto& [key, templateID] : _loadedModelIds)
@@ -84,12 +84,12 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
-	for(const auto& [key, templateID] : _loadedTextIDs)
+	for(const auto& [key, templateID] : _loadedTextIds)
 	{
 		_fe3d->text3d_delete(key);
 	}
 
-	for(const auto& id : _loadedPointlightIDs)
+	for(const auto& id : _loadedPointlightIds)
 	{
 		_fe3d->pointlight_delete(id);
 
@@ -99,7 +99,7 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
-	for(const auto& id : _loadedSpotlightIDs)
+	for(const auto& id : _loadedSpotlightIds)
 	{
 		_fe3d->spotlight_delete(id);
 
@@ -109,7 +109,7 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
-	for(const auto& id : _loadedReflectionIDs)
+	for(const auto& id : _loadedReflectionIds)
 	{
 		_fe3d->reflection_delete(id);
 
@@ -119,7 +119,7 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
-	for(const auto& [key, templateID] : _loadedSoundIDs)
+	for(const auto& [key, templateID] : _loadedSoundIds)
 	{
 		_fe3d->sound3d_delete(key);
 
@@ -130,15 +130,15 @@ void WorldEditor::unloadEditorWorld()
 	}
 
 	_loadedWorldID = "";
-	_loadedSkyID = "";
-	_loadedTerrainID = "";
-	_loadedWaterID = "";
+	_loadedSkyId = "";
+	_loadedTerrainId = "";
+	_loadedWaterId = "";
 	_loadedModelIds.clear();
 	_loadedQuadIds.clear();
-	_loadedSoundIDs.clear();
-	_loadedPointlightIDs.clear();
-	_loadedSpotlightIDs.clear();
-	_loadedReflectionIDs.clear();
+	_loadedSoundIds.clear();
+	_loadedPointlightIds.clear();
+	_loadedSpotlightIds.clear();
+	_loadedReflectionIds.clear();
 }
 
 void WorldEditor::unloadCustomWorld()
@@ -161,9 +161,9 @@ void WorldEditor::setCurrentProjectId(const string& id)
 	_currentProjectId = id;
 }
 
-const vector<string> WorldEditor::_getWorldIDs() const
+const vector<string> WorldEditor::_getWorldIds() const
 {
-	vector<string> worldIDs;
+	vector<string> worldIds;
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -174,7 +174,7 @@ const vector<string> WorldEditor::_getWorldIDs() const
 		for(const auto& fileName : Tools::getFilesFromDirectory(directoryPath))
 		{
 			auto nameSize = (fileName.size() - string(".fe3d").size());
-			worldIDs.push_back(fileName.substr(0, nameSize));
+			worldIds.push_back(fileName.substr(0, nameSize));
 		}
 	}
 	else
@@ -182,7 +182,7 @@ const vector<string> WorldEditor::_getWorldIDs() const
 		Logger::throwWarning("Project corrupted: directory `worlds\\editor\\` missing!");
 	}
 
-	return worldIDs;
+	return worldIds;
 }
 
 void WorldEditor::_deleteWorldFile(const string& id)

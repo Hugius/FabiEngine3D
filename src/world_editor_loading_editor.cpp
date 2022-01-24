@@ -72,50 +72,50 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "SKY")
 		{
-			string skyID;
+			string skyId;
 			string templateID;
 
-			iss >> skyID >> templateID;
+			iss >> skyId >> templateID;
 
-			if(_copyTemplateSky(skyID, templateID))
+			if(_copyTemplateSky(skyId, templateID))
 			{
 				if(_isEditorLoaded)
 				{
-					_currentSkyID = skyID;
+					_currentSkyId = skyId;
 				}
 			}
 		}
 		else if(lineType == "TERRAIN")
 		{
-			string terrainID;
+			string terrainId;
 			string templateID;
 
-			iss >> terrainID >> templateID;
+			iss >> terrainId >> templateID;
 
-			if(_copyTemplateTerrain(terrainID, templateID))
+			if(_copyTemplateTerrain(terrainId, templateID))
 			{
 				if(_isEditorLoaded)
 				{
-					_currentTerrainID = terrainID;
+					_currentTerrainId = terrainId;
 				}
 			}
 		}
 		else if(lineType == "WATER")
 		{
-			string waterID;
+			string waterId;
 			string templateID;
 			float height;
 
-			iss >> waterID >> templateID >> height;
+			iss >> waterId >> templateID >> height;
 
-			if(_copyTemplateWater(waterID, templateID))
+			if(_copyTemplateWater(waterId, templateID))
 			{
 				if(_isEditorLoaded)
 				{
-					_currentWaterID = waterID;
+					_currentWaterId = waterId;
 				}
 
-				_fe3d->water_setHeight(waterID, height);
+				_fe3d->water_setHeight(waterId, height);
 			}
 		}
 		else if(lineType == "MODEL")
@@ -310,7 +310,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d->pointlight_setColor(pointlightID, color);
 			_fe3d->pointlight_setIntensity(pointlightID, intensity);
 			_fe3d->pointlight_setShape(pointlightID, PointlightShape(shape));
-			_loadedPointlightIDs.push_back(pointlightID);
+			_loadedPointlightIds.push_back(pointlightID);
 		}
 		else if(lineType == "SPOTLIGHT")
 		{
@@ -364,7 +364,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d->spotlight_setIntensity(spotlightID, intensity);
 			_fe3d->spotlight_setAngle(spotlightID, angle);
 			_fe3d->spotlight_setDistance(spotlightID, distance);
-			_loadedSpotlightIDs.push_back(spotlightID);
+			_loadedSpotlightIds.push_back(spotlightID);
 		}
 		else if(lineType == "REFLECTION")
 		{
@@ -397,7 +397,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d->reflection_create(reflectionID);
 			_fe3d->reflection_setPosition(reflectionID, position);
 			_fe3d->reflection_capture(reflectionID);
-			_loadedReflectionIDs.push_back(reflectionID);
+			_loadedReflectionIds.push_back(reflectionID);
 		}
 		else if(lineType == "EDITOR_SPEED")
 		{

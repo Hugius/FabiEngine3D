@@ -26,7 +26,7 @@ public:
 	const vector<fvec3>& getTangents() const;
 
 private:
-	const string _ID;
+	const string _id;
 
 	vector<fvec3> _positions;
 	vector<fvec2> _uvs;

@@ -5,7 +5,7 @@ void WorldEditor::_updatePointlightPlacing()
 {
 	if(_isPlacingPointlight)
 	{
-		if(_fe3d->terrain_getSelectedID().empty())
+		if(_fe3d->terrain_getSelectedId().empty())
 		{
 			auto newPosition = _fe3d->pointlight_getPosition(TEMPLATE_LAMP_ID);
 			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
@@ -29,7 +29,7 @@ void WorldEditor::_updatePointlightPlacing()
 
 				if(_fe3d->pointlight_isExisting(newID))
 				{
-					_loadedPointlightIDs.push_back(newID);
+					_loadedPointlightIds.push_back(newID);
 
 					_fe3d->pointlight_setPosition(newID, newPosition);
 					_fe3d->pointlight_setRadius(newID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
@@ -109,7 +109,7 @@ void WorldEditor::_updatePointlightPlacing()
 
 				if(_fe3d->pointlight_isExisting(newID))
 				{
-					_loadedPointlightIDs.push_back(newID);
+					_loadedPointlightIds.push_back(newID);
 
 					_fe3d->pointlight_setPosition(newID, newPosition);
 					_fe3d->pointlight_setRadius(newID, fvec3(DEFAULT_POINTLIGHT_RADIUS));

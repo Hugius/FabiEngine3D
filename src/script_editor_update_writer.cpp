@@ -23,16 +23,16 @@ void ScriptEditor::_updateTextWriter()
 		unsigned int cursorCharIndex = _script->getScriptFile(_currentScriptFileID)->getCursorCharIndex();
 		string newCharacters = "";
 
-		auto hoveredTextID = _fe3d->raycast_checkCursorInAny().first;
+		auto hoveredTextId = _fe3d->raycast_checkCursorInAny().first;
 		int hoveredLineIndex = -1;
 		int hoveredCharacterIndex = -1;
-		if(!hoveredTextID.empty())
+		if(!hoveredTextId.empty())
 		{
 			bool extractingLineNumber = true;
 			string lineIndexString = "";
 			string charIndexString = "";
 
-			for(const auto& c : hoveredTextID)
+			for(const auto& c : hoveredTextId)
 			{
 				if(extractingLineNumber)
 				{
@@ -90,7 +90,7 @@ void ScriptEditor::_updateTextWriter()
 
 		if(_hasClickedLMB)
 		{
-			if(!hoveredTextID.empty())
+			if(!hoveredTextId.empty())
 			{
 				cursorLineIndex = hoveredLineIndex;
 

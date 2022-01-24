@@ -27,56 +27,56 @@ const vector<string> Animation2dEditor::getAnimationIds()
 
 const vector<string> Animation2dEditor::getStartedQuad3dAnimationIds() const
 {
-	set<string> IDs;
+	set<string> Ids;
 
 	for(const auto& [key, animation] : _startedQuad3dAnimations)
 	{
-		IDs.insert(key.first);
+		Ids.insert(key.first);
 	}
 
-	return vector<string>(IDs.begin(), IDs.end());
+	return vector<string>(Ids.begin(), Ids.end());
 }
 
 const vector<string> Animation2dEditor::getStartedQuad2dAnimationIds() const
 {
-	set<string> IDs;
+	set<string> Ids;
 
 	for(const auto& [key, animation] : _startedQuad2dAnimations)
 	{
-		IDs.insert(key.first);
+		Ids.insert(key.first);
 	}
 
-	return vector<string>(IDs.begin(), IDs.end());
+	return vector<string>(Ids.begin(), Ids.end());
 }
 
 const vector<string> Animation2dEditor::getStartedQuad3dAnimationIds(const string& quadId) const
 {
-	set<string> IDs;
+	set<string> Ids;
 
 	for(const auto& [key, animation] : _startedQuad3dAnimations)
 	{
 		if(quadId == key.second)
 		{
-			IDs.insert(key.first);
+			Ids.insert(key.first);
 		}
 	}
 
-	return vector<string>(IDs.begin(), IDs.end());
+	return vector<string>(Ids.begin(), Ids.end());
 }
 
 const vector<string> Animation2dEditor::getStartedQuad2dAnimationIds(const string& quadId) const
 {
-	set<string> IDs;
+	set<string> Ids;
 
 	for(const auto& [key, animation] : _startedQuad2dAnimations)
 	{
 		if(quadId == key.second)
 		{
-			IDs.insert(key.first);
+			Ids.insert(key.first);
 		}
 	}
 
-	return vector<string>(IDs.begin(), IDs.end());
+	return vector<string>(Ids.begin(), Ids.end());
 }
 
 const unsigned int Animation2dEditor::getQuad3dAnimationRowCount(const string& animationId, const string& quadId) const

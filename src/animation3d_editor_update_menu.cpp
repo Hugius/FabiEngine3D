@@ -98,7 +98,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				_fe3d->model_setVisible(currentAnimation->getPreviewModelId(), false);
 			}
 
-			auto modelIds = _modelEditor->getLoadedIDs();
+			auto modelIds = _modelEditor->getLoadedIds();
 			for(auto& id : modelIds)
 			{
 				id = id.substr(1);

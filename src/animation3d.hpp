@@ -47,7 +47,7 @@ public:
 	const vector<Animation3dFrame>& getFrames() const;
 
 private:
-	const string _ID;
+	const string _id;
 	vector<string> _partIds;
 	string _previewModelId = "";
 

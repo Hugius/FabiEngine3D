@@ -3,7 +3,7 @@
 
 ScriptFile::ScriptFile(const string& id)
 	:
-	_ID(id)
+	_id(id)
 {
 
 }
@@ -54,12 +54,12 @@ void ScriptFile::setCursorCharIndex(unsigned int index)
 
 void ScriptFile::changeID(const string& newID)
 {
-	_ID = newID;
+	_id = newID;
 }
 
 const string& ScriptFile::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const string& ScriptFile::getLineText(unsigned int index) const

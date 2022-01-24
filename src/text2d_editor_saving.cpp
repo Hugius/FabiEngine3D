@@ -21,11 +21,11 @@ const bool Text2dEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\text2d.fe3d");
 
-	for(const auto& textID : _loadedTextIDs)
+	for(const auto& textId : _loadedTextIds)
 	{
-		auto fontMapPath = _fe3d->text2d_getFontMapPath(textID);
-		auto color = _fe3d->text2d_getColor(textID);
-		auto opacity = _fe3d->text2d_getOpacity(textID);
+		auto fontMapPath = _fe3d->text2d_getFontMapPath(textId);
+		auto color = _fe3d->text2d_getColor(textId);
+		auto opacity = _fe3d->text2d_getOpacity(textId);
 
 		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 
@@ -33,7 +33,7 @@ const bool Text2dEditor::saveToFile() const
 
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
-		file << textID << " " << fontMapPath << " " << color.r << " " << color.g << " " << color.b << " " << opacity << endl;
+		file << textId << " " << fontMapPath << " " << color.r << " " << color.g << " " << color.b << " " << opacity << endl;
 	}
 
 	file.close();

@@ -21,7 +21,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 	for(unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 	{
 		const string lineNumberID = to_string(lineIndex);
-		const string lineTextID = "text_" + lineNumberID;
+		const string lineTextId = "text_" + lineNumberID;
 		const string lineNumberString = to_string(lineIndex + 1);
 		const string lineTextString = _script->getScriptFile(_currentScriptFileID)->getLineText(lineIndex);
 		const fvec2 lineNumberSize = fvec2(lineNumberString.size() * TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y);
@@ -49,12 +49,12 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		string noWhiteSpace;
 		iss >> noWhiteSpace;
 		bool isComment = (noWhiteSpace.substr(0, 3) == "///");
-		_fe3d->text3d_create(lineTextID, FONT_MAP_PATH, false);
-		_fe3d->text3d_setContent(lineTextID, lineTextString);
-		_fe3d->text3d_setPosition(lineTextID, (lineTextPosition - fvec3(0.0f, lineTextSize.y / 2.0f, 0.0f)));
-		_fe3d->text3d_setSize(lineTextID, lineTextSize);
-		_fe3d->text3d_setColor(lineTextID, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
-		_fe3d->text3d_setBright(lineTextID, true);
+		_fe3d->text3d_create(lineTextId, FONT_MAP_PATH, false);
+		_fe3d->text3d_setContent(lineTextId, lineTextString);
+		_fe3d->text3d_setPosition(lineTextId, (lineTextPosition - fvec3(0.0f, lineTextSize.y / 2.0f, 0.0f)));
+		_fe3d->text3d_setSize(lineTextId, lineTextSize);
+		_fe3d->text3d_setColor(lineTextId, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
+		_fe3d->text3d_setBright(lineTextId, true);
 
 		for(unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
 		{

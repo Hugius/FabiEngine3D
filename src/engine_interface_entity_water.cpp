@@ -227,7 +227,7 @@ const bool EngineInterface::water_hasDisplacementMap(const string& id) const
 	return _core->getWaterEntityManager()->getEntity(id)->hasDisplacementMap();
 }
 
-const string EngineInterface::water_getSelectedID() const
+const string EngineInterface::water_getSelectedId() const
 {
 	if(_core->getWaterEntityManager()->getSelectedEntity() == nullptr)
 	{

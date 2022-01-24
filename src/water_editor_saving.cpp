@@ -22,24 +22,24 @@ const bool WaterEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\water.fe3d");
 
-	for(const auto& waterID : _loadedWaterIDs)
+	for(const auto& waterId : _loadedWaterIds)
 	{
-		auto dudvMapPath = _fe3d->water_getDudvMapPath(waterID);
-		auto normalMapPath = _fe3d->water_getNormalMapPath(waterID);
-		auto displacementMapPath = _fe3d->water_getDisplacementMapPath(waterID);
-		auto color = _fe3d->water_getColor(waterID);
-		auto height = _fe3d->water_getHeight(waterID);
-		auto speed = _fe3d->water_getSpeed(waterID);
-		auto size = _fe3d->water_getSize(waterID);
-		auto textureRepeat = _fe3d->water_getTextureRepeat(waterID);
-		auto waveHeight = _fe3d->water_getWaveHeight(waterID);
-		auto opacity = _fe3d->water_getOpacity(waterID);
-		auto specularShininess = _fe3d->water_getSpecularShininess(waterID);
-		auto specularIntensity = _fe3d->water_getSpecularIntensity(waterID);
-		auto quality = static_cast<unsigned int>(_fe3d->water_getQuality(waterID));
-		auto isSpecular = _fe3d->water_isSpecular(waterID);
-		auto isReflective = _fe3d->water_isReflective(waterID);
-		auto isRefractive = _fe3d->water_isRefractive(waterID);
+		auto dudvMapPath = _fe3d->water_getDudvMapPath(waterId);
+		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);
+		auto displacementMapPath = _fe3d->water_getDisplacementMapPath(waterId);
+		auto color = _fe3d->water_getColor(waterId);
+		auto height = _fe3d->water_getHeight(waterId);
+		auto speed = _fe3d->water_getSpeed(waterId);
+		auto size = _fe3d->water_getSize(waterId);
+		auto textureRepeat = _fe3d->water_getTextureRepeat(waterId);
+		auto waveHeight = _fe3d->water_getWaveHeight(waterId);
+		auto opacity = _fe3d->water_getOpacity(waterId);
+		auto specularShininess = _fe3d->water_getSpecularShininess(waterId);
+		auto specularIntensity = _fe3d->water_getSpecularIntensity(waterId);
+		auto quality = static_cast<unsigned int>(_fe3d->water_getQuality(waterId));
+		auto isSpecular = _fe3d->water_isSpecular(waterId);
+		auto isReflective = _fe3d->water_isReflective(waterId);
+		auto isRefractive = _fe3d->water_isRefractive(waterId);
 
 		dudvMapPath = string(dudvMapPath.empty() ? "" : dudvMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
@@ -54,7 +54,7 @@ const bool WaterEditor::saveToFile() const
 		replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
 
 		file <<
-			waterID << " " <<
+			waterId << " " <<
 			dudvMapPath << " " <<
 			normalMapPath << " " <<
 			displacementMapPath << " " <<

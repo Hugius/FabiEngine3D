@@ -48,17 +48,17 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	//string skyID = _fe3d->sky_getSelectedID();
-	//if(!skyID.empty() && _hasCustomWorldSky)
+	//string skyId = _fe3d->sky_getSelectedId();
+	//if(!skyId.empty() && _hasCustomWorldSky)
 	//{
-	//	auto templateID = ("@" + skyID);
-	//	auto color = _fe3d->sky_getColor(skyID);
-	//	auto rotation = _fe3d->sky_getRotation(skyID);
-	//	auto lightness = _fe3d->sky_getInitialLightness(skyID);
+	//	auto templateID = ("@" + skyId);
+	//	auto color = _fe3d->sky_getColor(skyId);
+	//	auto rotation = _fe3d->sky_getRotation(skyId);
+	//	auto lightness = _fe3d->sky_getInitialLightness(skyId);
 
 	//	file <<
 	//		"SKY " <<
-	//		skyID << " " <<
+	//		skyId << " " <<
 	//		templateID << " " <<
 	//		rotation << " " <<
 	//		lightness << " " <<
@@ -67,28 +67,28 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		color.b << endl;
 	//}
 
-	//string terrainID = _fe3d->terrain_getSelectedID();
-	//if(!terrainID.empty() && _hasCustomWorldTerrain)
+	//string terrainId = _fe3d->terrain_getSelectedId();
+	//if(!terrainId.empty() && _hasCustomWorldTerrain)
 	//{
-	//	string templateID = ("@" + terrainID);
+	//	string templateID = ("@" + terrainId);
 
 	//	file <<
 	//		"TERRAIN " <<
-	//		terrainID << " " <<
+	//		terrainId << " " <<
 	//		templateID << endl;
 	//}
 
-	//string waterID = _fe3d->water_getSelectedID();
-	//if(!waterID.empty() && _hasCustomWorldWater)
+	//string waterId = _fe3d->water_getSelectedId();
+	//if(!waterId.empty() && _hasCustomWorldWater)
 	//{
-	//	string templateID = ("@" + waterID);
-	//	auto color = _fe3d->water_getColor(waterID);
-	//	auto speed = _fe3d->water_getSpeed(waterID);
-	//	auto opacity = _fe3d->water_getOpacity(waterID);
+	//	string templateID = ("@" + waterId);
+	//	auto color = _fe3d->water_getColor(waterId);
+	//	auto speed = _fe3d->water_getSpeed(waterId);
+	//	auto opacity = _fe3d->water_getOpacity(waterId);
 
 	//	file <<
 	//		"WATER " <<
-	//		waterID << " " <<
+	//		waterId << " " <<
 	//		templateID << " " <<
 	//		color.r << " " <<
 	//		color.g << " " <<
@@ -105,12 +105,12 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		find(_customWorldModelIds.begin(), _customWorldModelIds.end(), modelId) != _customWorldModelIds.end();
 	//	if(((modelId[0] != '@') || isLevelOfDetailEntity) && isCustomWorldModel)
 	//	{
-	//		auto aabbIDs = _fe3d->aabb_getChildIDs(modelId, AabbParentEntityType::MODEL);
+	//		auto aabbIds = _fe3d->aabb_getChildIds(modelId, AabbParentEntityType::MODEL);
 
 	//		auto isVisible = _fe3d->model_isVisible(modelId);
 	//		auto isFrozen = _fe3d->model_isFrozen(modelId);
-	//		auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d->aabb_isRaycastResponsive(aabbIDs[0]);
-	//		auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d->aabb_isCollisionResponsive(aabbIDs[0]);
+	//		auto isAabbRaycastResponsive = aabbIds.empty() ? false : _fe3d->aabb_isRaycastResponsive(aabbIds[0]);
+	//		auto isAabbCollisionResponsive = aabbIds.empty() ? false : _fe3d->aabb_isCollisionResponsive(aabbIds[0]);
 	//		auto position = _fe3d->model_getBasePosition(modelId);
 	//		auto rotation = _fe3d->model_getBaseRotation(modelId);
 	//		auto rotationOrigin = _fe3d->model_getBaseRotationOrigin(modelId);
@@ -261,11 +261,11 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		find(_customWorldQuadIds.begin(), _customWorldQuadIds.end(), quadId) != _customWorldQuadIds.end();
 	//	if((quadId[0] != '@') && isCustomWorldQuad3d)
 	//	{
-	//		auto aabbIDs = _fe3d->aabb_getChildIDs(quadId, AabbParentEntityType::QUAD3D);
+	//		auto aabbIds = _fe3d->aabb_getChildIds(quadId, AabbParentEntityType::QUAD3D);
 
 	//		auto isVisible = _fe3d->quad3d_isVisible(quadId);
-	//		auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d->aabb_isRaycastResponsive(aabbIDs[0]);
-	//		auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d->aabb_isCollisionResponsive(aabbIDs[0]);
+	//		auto isAabbRaycastResponsive = aabbIds.empty() ? false : _fe3d->aabb_isRaycastResponsive(aabbIds[0]);
+	//		auto isAabbCollisionResponsive = aabbIds.empty() ? false : _fe3d->aabb_isCollisionResponsive(aabbIds[0]);
 	//		auto isFacingX = _fe3d->quad3d_isFacingCameraX(quadId);
 	//		auto isFacingY = _fe3d->quad3d_isFacingCameraY(quadId);
 	//		//auto isAnimationPlaying = _fe3d->quad3d_isSpriteAnimationStarted(quadId);
@@ -323,21 +323,21 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	//for(const auto& aabbID : _fe3d->aabb_getIds())
+	//for(const auto& aabbId : _fe3d->aabb_getIds())
 	//{
 	//	bool isCustomWorldAabb =
-	//		find(_customWorldAabbIDs.begin(), _customWorldAabbIDs.end(), aabbID) != _customWorldAabbIDs.end();
-	//	if((aabbID[0] != '@') && isCustomWorldAabb && _fe3d->aabb_getParentEntityId(aabbID).empty())
+	//		find(_customWorldAabbIds.begin(), _customWorldAabbIds.end(), aabbId) != _customWorldAabbIds.end();
+	//	if((aabbId[0] != '@') && isCustomWorldAabb && _fe3d->aabb_getParentEntityId(aabbId).empty())
 	//	{
-	//		auto isVisible = _fe3d->aabb_isVisible(aabbID);
-	//		auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbID);
-	//		auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbID);
-	//		auto position = _fe3d->aabb_getPosition(aabbID);
-	//		auto size = _fe3d->aabb_getSize(aabbID);
+	//		auto isVisible = _fe3d->aabb_isVisible(aabbId);
+	//		auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
+	//		auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
+	//		auto position = _fe3d->aabb_getPosition(aabbId);
+	//		auto size = _fe3d->aabb_getSize(aabbId);
 
 	//		file <<
 	//			"AABB " <<
-	//			aabbID << " " <<
+	//			aabbId << " " <<
 	//			isVisible << " " <<
 	//			isRaycastResponsive << " " <<
 	//			isCollisionResponsive << " " <<
@@ -354,7 +354,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	////{
 	////	// Check if allowed to save
 	////	bool isCustomWorldSound =
-	////		find(_customWorldSoundIDs.begin(), _customWorldSoundIDs.end(), soundID) != _customWorldSoundIDs.end();
+	////		find(_customWorldSoundIds.begin(), _customWorldSoundIds.end(), soundID) != _customWorldSoundIds.end();
 	////	if((soundID[0] != '@') && isCustomWorldSound && _fe3d->sound_is3D(soundID))
 	////	{
 	////		// Data to save
@@ -364,13 +364,13 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 	////		// Extract template id
 	////		string templateID;
-	////		if(_loadedSoundIDs.find(soundID) == _loadedSoundIDs.end())
+	////		if(_loadedSoundIds.find(soundID) == _loadedSoundIds.end())
 	////		{
-	////			templateID = _outsideLoadedSoundIDs.at(soundID);
+	////			templateID = _outsideLoadedSoundIds.at(soundID);
 	////		}
 	////		else
 	////		{
-	////			templateID = _loadedSoundIDs.at(soundID);
+	////			templateID = _loadedSoundIds.at(soundID);
 	////		}
 
 	////		// Write data
@@ -389,7 +389,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//for(const auto& pointlightID : _fe3d->pointlight_getIds())
 	//{
 	//	bool isCustomWorldPointlight =
-	//		find(_customWorldPointlightIDs.begin(), _customWorldPointlightIDs.end(), pointlightID) != _customWorldPointlightIDs.end();
+	//		find(_customWorldPointlightIds.begin(), _customWorldPointlightIds.end(), pointlightID) != _customWorldPointlightIds.end();
 	//	if((pointlightID[0] != '@') && isCustomWorldPointlight)
 	//	{
 	//		auto position = _fe3d->pointlight_getPosition(pointlightID);
@@ -416,7 +416,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//for(const auto& spotlightID : _fe3d->spotlight_getIds())
 	//{
 	//	bool isCustomWorldSpotlight =
-	//		find(_customWorldSpotlightIDs.begin(), _customWorldSpotlightIDs.end(), spotlightID) != _customWorldSpotlightIDs.end();
+	//		find(_customWorldSpotlightIds.begin(), _customWorldSpotlightIds.end(), spotlightID) != _customWorldSpotlightIds.end();
 	//	if((spotlightID[0] != '@') && isCustomWorldSpotlight)
 	//	{
 	//		auto position = _fe3d->spotlight_getPosition(spotlightID);
@@ -447,7 +447,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//for(const auto& reflectionID : _fe3d->reflection_getIds())
 	//{
 	//	bool isCustomWorldReflection =
-	//		find(_customWorldReflectionIDs.begin(), _customWorldReflectionIDs.end(), reflectionID) != _customWorldReflectionIDs.end();
+	//		find(_customWorldReflectionIds.begin(), _customWorldReflectionIds.end(), reflectionID) != _customWorldReflectionIds.end();
 	//	if((reflectionID[0] != '@') && isCustomWorldReflection)
 	//	{
 	//		auto position = _fe3d->reflection_getPosition(reflectionID);
@@ -594,10 +594,10 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//_hasCustomWorldWater = false;
 	//_customWorldModelIds.clear();
 	//_customWorldQuadIds.clear();
-	//_customWorldAabbIDs.clear();
-	//_customWorldSoundIDs.clear();
-	//_customWorldPointlightIDs.clear();
-	//_customWorldSpotlightIDs.clear();
+	//_customWorldAabbIds.clear();
+	//_customWorldSoundIds.clear();
+	//_customWorldPointlightIds.clear();
+	//_customWorldSpotlightIds.clear();
 
 	return true;
 }

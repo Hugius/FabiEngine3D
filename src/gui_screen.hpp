@@ -57,7 +57,7 @@ private:
 	fvec2 _parentPosition;
 	fvec2 _parentSize;
 
-	const string _ID;
+	const string _id;
 	const string _parentID;
 
 	bool _isActive = false;

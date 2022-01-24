@@ -13,7 +13,7 @@ public:
 	void unload();
 
 	const vector<string> getAudioPathsFromFile() const;
-	const vector<string>& getLoadedIDs();
+	const vector<string>& getLoadedIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
@@ -29,7 +29,7 @@ private:
 	void _updateSoundDeleting();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedSoundIDs;
+	vector<string> _loadedSoundIds;
 	string _currentSoundID = "";
 	string _hoveredSoundID = "";
 	string _currentProjectId = "";

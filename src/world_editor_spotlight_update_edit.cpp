@@ -16,13 +16,13 @@ void WorldEditor::_updateSpotlightEditing()
 			_dontResetSelectedTorch = false;
 		}
 
-		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
+		auto hoveredAabbId = _fe3d->raycast_checkCursorInAny().first;
 
 		for(const auto& id : _fe3d->model_getIds())
 		{
 			if(id.substr(0, string("@@torch").size()) == "@@torch")
 			{
-				if(hoveredAabbID == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectSpotlight(id.substr(string("@@torch_").size()));
 
@@ -91,7 +91,7 @@ void WorldEditor::_updateSpotlightEditing()
 				{
 					_fe3d->model_delete(_activeTorchID);
 					_fe3d->spotlight_delete(activeSpotlightID);
-					_loadedSpotlightIDs.erase(remove(_loadedSpotlightIDs.begin(), _loadedSpotlightIDs.end(), activeSpotlightID), _loadedSpotlightIDs.end());
+					_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), activeSpotlightID), _loadedSpotlightIds.end());
 					_activeTorchID = "";
 					rightWindow->setActiveScreen("main");
 					return;
@@ -102,7 +102,7 @@ void WorldEditor::_updateSpotlightEditing()
 			{
 				_fe3d->model_delete(_activeTorchID);
 				_fe3d->spotlight_delete(activeSpotlightID);
-				_loadedSpotlightIDs.erase(remove(_loadedSpotlightIDs.begin(), _loadedSpotlightIDs.end(), activeSpotlightID), _loadedSpotlightIDs.end());
+				_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), activeSpotlightID), _loadedSpotlightIds.end());
 				_activeTorchID = "";
 				rightWindow->setActiveScreen("main");
 				return;

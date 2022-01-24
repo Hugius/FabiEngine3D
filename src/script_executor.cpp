@@ -60,7 +60,7 @@ void ScriptExecutor::pause()
 		{
 			if(_fe3d->sound2d_isPaused(soundID))
 			{
-				_pausedSoundIDs.push_back(soundID);
+				_pausedSoundIds.push_back(soundID);
 			}
 		}
 
@@ -68,7 +68,7 @@ void ScriptExecutor::pause()
 		{
 			if(_fe3d->sound3d_isPaused(soundID))
 			{
-				_pausedSoundIDs.push_back(soundID);
+				_pausedSoundIds.push_back(soundID);
 			}
 		}
 
@@ -98,13 +98,13 @@ void ScriptExecutor::resume()
 		}
 
 		_fe3d->sound2d_resumeAll();
-		for(const auto& soundID : _pausedSoundIDs)
+		for(const auto& soundID : _pausedSoundIds)
 		{
 			_fe3d->sound2d_pause(soundID);
 		}
 
 		_fe3d->sound3d_resumeAll();
-		for(const auto& soundID : _pausedSoundIDs)
+		for(const auto& soundID : _pausedSoundIds)
 		{
 			_fe3d->sound3d_pause(soundID);
 		}
@@ -128,7 +128,7 @@ void ScriptExecutor::unload()
 		_wasVsyncEnabled = false;
 		_wasTimerStarted = false;
 		_mustSkipUpdate = false;
-		_pausedSoundIDs.clear();
+		_pausedSoundIds.clear();
 	}
 }
 
@@ -168,7 +168,7 @@ void ScriptExecutor::_validateExecution()
 		_wasVsyncEnabled = false;
 		_wasTimerStarted = false;
 		_mustSkipUpdate = false;
-		_pausedSoundIDs.clear();
+		_pausedSoundIds.clear();
 	}
 	else if(_scriptInterpreter->gameMustStop())
 	{

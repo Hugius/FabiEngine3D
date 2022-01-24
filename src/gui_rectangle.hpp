@@ -24,7 +24,7 @@ public:
 	const fvec2& getInitialSize() const;
 
 protected:
-	const string _ID;
+	const string _id;
 	const string _entityId;
 	const string _parentID;
 

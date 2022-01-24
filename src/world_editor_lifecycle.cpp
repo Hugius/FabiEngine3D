@@ -18,21 +18,21 @@ void WorldEditor::load()
 	_waterEditor->loadFromFile();
 
 	_modelEditor->loadFromFile();
-	for(const auto& id : _modelEditor->getLoadedIDs())
+	for(const auto& id : _modelEditor->getLoadedIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace");
 		screen->getScrollingList("modelList")->createButton(id, id.substr(1));
 	}
 
 	_quad3dEditor->loadFromFile();
-	for(const auto& id : _quad3dEditor->getLoadedIDs())
+	for(const auto& id : _quad3dEditor->getLoadedIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace");
 		screen->getScrollingList("quad3dList")->createButton(id, id.substr(1));
 	}
 
 	_text3dEditor->loadFromFile();
-	for(const auto& id : _text3dEditor->getLoadedIDs())
+	for(const auto& id : _text3dEditor->getLoadedIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace");
 		screen->getScrollingList("text3dList")->createButton(id, id.substr(1));
@@ -82,7 +82,7 @@ void WorldEditor::load()
 	_fe3d->model_setReflected(TEMPLATE_SPEAKER_ID, false);
 	_fe3d->model_setBright(TEMPLATE_SPEAKER_ID, "", true);
 	_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-	for(const auto& id : _soundEditor->getLoadedIDs())
+	for(const auto& id : _soundEditor->getLoadedIds())
 	{
 		_fe3d->sound3d_create(id, _fe3d->sound2d_getAudioPath(id));
 		_fe3d->sound3d_setMaxVolume(id, DEFAULT_SOUND_MAX_VOLUME);
@@ -94,7 +94,7 @@ void WorldEditor::load()
 
 	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("quadId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("textID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("textId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_fe3d->collision_enableCameraResponse(true, true, true);
@@ -112,32 +112,32 @@ void WorldEditor::unload()
 
 	unloadEditorWorld();
 
-	for(const auto& id : _skyEditor->getLoadedIDs())
+	for(const auto& id : _skyEditor->getLoadedIds())
 	{
 		_fe3d->sky_delete(id);
 	}
 
-	for(const auto& id : _terrainEditor->getLoadedIDs())
+	for(const auto& id : _terrainEditor->getLoadedIds())
 	{
 		_fe3d->terrain_delete(id);
 	}
 
-	for(const auto& id : _waterEditor->getLoadedIDs())
+	for(const auto& id : _waterEditor->getLoadedIds())
 	{
 		_fe3d->water_delete(id);
 	}
 
-	for(const auto& id : _modelEditor->getLoadedIDs())
+	for(const auto& id : _modelEditor->getLoadedIds())
 	{
 		_fe3d->model_delete(id);
 	}
 
-	for(const auto& id : _quad3dEditor->getLoadedIDs())
+	for(const auto& id : _quad3dEditor->getLoadedIds())
 	{
 		_fe3d->quad3d_delete(id);
 	}
 
-	for(const auto& id : _text3dEditor->getLoadedIDs())
+	for(const auto& id : _text3dEditor->getLoadedIds())
 	{
 		_fe3d->text3d_delete(id);
 	}
@@ -152,7 +152,7 @@ void WorldEditor::unload()
 	_fe3d->reflection_delete(TEMPLATE_CAMERA_ID);
 
 	_fe3d->model_delete(TEMPLATE_SPEAKER_ID);
-	for(const auto& id : _soundEditor->getLoadedIDs())
+	for(const auto& id : _soundEditor->getLoadedIds())
 	{
 		_fe3d->sound2d_delete(id);
 		_fe3d->sound3d_delete(id);
@@ -162,29 +162,29 @@ void WorldEditor::unload()
 	_outsideLoadedModelIds.clear();
 	_loadedQuadIds.clear();
 	_outsideLoadedQuadIds.clear();
-	_loadedSoundIDs.clear();
-	_outsideLoadedSoundIDs.clear();
+	_loadedSoundIds.clear();
+	_outsideLoadedSoundIds.clear();
 	_initialModelPosition.clear();
 	_initialModelRotation.clear();
 	_initialModelSize.clear();
 	_customWorldModelIds.clear();
 	_customWorldQuadIds.clear();
-	_customWorldAabbIDs.clear();
-	_customWorldSoundIDs.clear();
-	_customWorldPointlightIDs.clear();
-	_customWorldSpotlightIDs.clear();
-	_customWorldReflectionIDs.clear();
-	_loadedAabbIDs.clear();
-	_loadedPointlightIDs.clear();
-	_loadedSpotlightIDs.clear();
-	_loadedReflectionIDs.clear();
+	_customWorldAabbIds.clear();
+	_customWorldSoundIds.clear();
+	_customWorldPointlightIds.clear();
+	_customWorldSpotlightIds.clear();
+	_customWorldReflectionIds.clear();
+	_loadedAabbIds.clear();
+	_loadedPointlightIds.clear();
+	_loadedSpotlightIds.clear();
+	_loadedReflectionIds.clear();
 	_customWorldID = "";
-	_loadedSkyID = "";
-	_loadedTerrainID = "";
-	_loadedWaterID = "";
-	_currentSkyID = "";
-	_currentTerrainID = "";
-	_currentWaterID = "";
+	_loadedSkyId = "";
+	_loadedTerrainId = "";
+	_loadedWaterId = "";
+	_currentSkyId = "";
+	_currentTerrainId = "";
+	_currentWaterId = "";
 	_currentTemplateModelId = "";
 	_selectedModelId = "";
 	_activeModelId = "";

@@ -5,7 +5,7 @@ ScriptVariable::ScriptVariable(const string& id, ScriptVariableScope scope, Scri
 	:
 	_scope(scope),
 	_type(type),
-	_ID(id),
+	_id(id),
 	_isConstant(isConstant)
 {
 	for(const auto& value : values)
@@ -16,7 +16,7 @@ ScriptVariable::ScriptVariable(const string& id, ScriptVariableScope scope, Scri
 
 const string& ScriptVariable::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const ScriptVariableScope ScriptVariable::getScope() const

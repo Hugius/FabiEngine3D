@@ -304,15 +304,15 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 		{
 			if(_validateFe3dText3d(args[0].getString(), false))
 			{
-				auto aabbIDs = _fe3d->aabb_getChildIDs(args[0].getString(), AabbParentEntityType::TEXT3D);
+				auto aabbIds = _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::TEXT3D);
 
-				if(aabbIDs.empty())
+				if(aabbIds.empty())
 				{
 					_throwScriptError("text3d with id \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				for(const auto& id : aabbIDs)
+				for(const auto& id : aabbIds)
 				{
 					_fe3d->aabb_setRaycastResponsive(id, args[1].getBoolean());
 				}
@@ -329,15 +329,15 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 		{
 			if(_validateFe3dText3d(args[0].getString(), false))
 			{
-				auto aabbIDs = _fe3d->aabb_getChildIDs(args[0].getString(), AabbParentEntityType::TEXT3D);
+				auto aabbIds = _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::TEXT3D);
 
-				if(aabbIDs.empty())
+				if(aabbIds.empty())
 				{
 					_throwScriptError("text3d with id \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				for(const auto& id : aabbIDs)
+				for(const auto& id : aabbIds)
 				{
 					_fe3d->aabb_setCollisionResponsive(id, args[1].getBoolean());
 				}

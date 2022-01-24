@@ -30,7 +30,7 @@ public:
 	shared_ptr<GuiScreen> getActiveScreen() const;
 
 private:
-	const string _ID;
+	const string _id;
 	const string _entityId;
 	const string _parentID;
 	string _activeScreenID = "";

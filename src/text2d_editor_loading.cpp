@@ -30,12 +30,12 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string textID;
+		string textId;
 		string fontMapPath;
 
 		istringstream iss(line);
 
-		iss >> textID >> fontMapPath;
+		iss >> textId >> fontMapPath;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -64,7 +64,7 @@ const bool Text2dEditor::loadFromFile()
 		Logger::throwError("Text2dEditor::loadFromFile");
 	}
 
-	_loadedTextIDs.clear();
+	_loadedTextIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -80,14 +80,14 @@ const bool Text2dEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string textID;
+		string textId;
 		string fontMapPath;
 		fvec3 color;
 		float opacity;
 
 		istringstream iss(line);
 
-		iss >> textID >> fontMapPath >> color.r >> color.g >> color.b >> opacity;
+		iss >> textId >> fontMapPath >> color.r >> color.g >> color.b >> opacity;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -98,18 +98,18 @@ const bool Text2dEditor::loadFromFile()
 			fontMapPath = string("projects\\" + _currentProjectId + "\\" + fontMapPath);
 		}
 
-		_fe3d->text2d_create(textID, fontMapPath, true);
+		_fe3d->text2d_create(textId, fontMapPath, true);
 
-		if(_fe3d->text2d_isExisting(textID))
+		if(_fe3d->text2d_isExisting(textId))
 		{
-			_loadedTextIDs.push_back(textID);
+			_loadedTextIds.push_back(textId);
 
-			_fe3d->text2d_setVisible(textID, false);
-			_fe3d->text2d_setPosition(textID, Tools::convertPositionToViewport(fvec2(0.0f)));
-			_fe3d->text2d_setSize(textID, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
-			_fe3d->text2d_setColor(textID, color);
-			_fe3d->text2d_setOpacity(textID, opacity);
-			_fe3d->text2d_setContent(textID, TEXT_CONTENT);
+			_fe3d->text2d_setVisible(textId, false);
+			_fe3d->text2d_setPosition(textId, Tools::convertPositionToViewport(fvec2(0.0f)));
+			_fe3d->text2d_setSize(textId, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->text2d_setColor(textId, color);
+			_fe3d->text2d_setOpacity(textId, opacity);
+			_fe3d->text2d_setContent(textId, TEXT_CONTENT);
 		}
 	}
 

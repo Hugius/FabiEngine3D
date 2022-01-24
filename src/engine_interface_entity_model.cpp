@@ -16,9 +16,9 @@ void EngineInterface::model_deleteAll()
 
 void EngineInterface::model_delete(const string& id)
 {
-	for(const auto& aabbID : aabb_getChildIDs(id, AabbParentEntityType::MODEL))
+	for(const auto& aabbId : aabb_getChildIds(id, AabbParentEntityType::MODEL))
 	{
-		_core->getAabbEntityManager()->deleteEntity(aabbID);
+		_core->getAabbEntityManager()->deleteEntity(aabbId);
 	}
 
 	_core->getModelEntityManager()->deleteEntity(id);
@@ -644,7 +644,7 @@ const vector<string> EngineInterface::model_getIds() const
 	return result;
 }
 
-const vector<string> EngineInterface::model_getGroupIDs(const string& id) const
+const vector<string> EngineInterface::model_getGroupIds(const string& id) const
 {
 	vector<string> result;
 

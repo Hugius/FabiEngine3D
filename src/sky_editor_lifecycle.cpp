@@ -18,14 +18,14 @@ void SkyEditor::load()
 	_fe3d->gfx_setMotionBlurStrength(0.1f);
 	_fe3d->gfx_setMotionBlurQuality(Config::MAX_MOTION_BLUR_QUALITY);
 
-	_gui->getOverlay()->createTextField("skyID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("skyId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_isEditorLoaded = true;
 }
 
 void SkyEditor::unload()
 {
-	for(const auto& id : _loadedSkyIDs)
+	for(const auto& id : _loadedSkyIds)
 	{
 		_fe3d->sky_delete(id);
 	}
@@ -34,10 +34,10 @@ void SkyEditor::unload()
 
 	_fe3d->gfx_disableMotionBlur(true);
 
-	_gui->getOverlay()->deleteTextField("skyID");
+	_gui->getOverlay()->deleteTextField("skyId");
 
-	_loadedSkyIDs.clear();
-	_currentSkyID = "";
+	_loadedSkyIds.clear();
+	_currentSkyId = "";
 	_isEditorLoaded = false;
 	_isCreatingSky = false;
 	_isChoosingSky = false;

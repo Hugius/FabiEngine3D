@@ -2,7 +2,7 @@
 
 MeshPart::MeshPart(const string& id)
 	:
-	_ID(id)
+	_id(id)
 {
 
 }
@@ -29,7 +29,7 @@ void MeshPart::addUv(const fvec2& value)
 
 const string& MeshPart::getId() const
 {
-	return _ID;
+	return _id;
 }
 
 const vector<fvec3>& MeshPart::getPositions() const

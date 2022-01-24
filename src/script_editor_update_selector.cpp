@@ -88,13 +88,13 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 		if(hoveredLineIndex != -1)
 		{
 			string selectionID = ("selection_" + to_string(hoveredLineIndex));
-			string textID = ("text_" + to_string(hoveredLineIndex));
+			string textId = ("text_" + to_string(hoveredLineIndex));
 
-			if(!_fe3d->text3d_isExisting(selectionID) && _fe3d->text3d_isExisting(textID))
+			if(!_fe3d->text3d_isExisting(selectionID) && _fe3d->text3d_isExisting(textId))
 			{
-				if(_fe3d->text3d_getContent(textID).empty())
+				if(_fe3d->text3d_getContent(textId).empty())
 				{
-					fvec3 lineTextPosition = (_fe3d->text3d_getPosition(textID));
+					fvec3 lineTextPosition = (_fe3d->text3d_getPosition(textId));
 					lineTextPosition.x = (SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
 					lineTextPosition.z -= SELECTION_DEPTH;
 					_fe3d->quad3d_create(selectionID, false);
@@ -104,8 +104,8 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				}
 				else
 				{
-					const fvec3 lineTextPosition = (_fe3d->text3d_getPosition(textID) - fvec3(0.0f, 0.0f, SELECTION_DEPTH));
-					const auto lineTextSize = (_fe3d->text3d_getSize(textID));
+					const fvec3 lineTextPosition = (_fe3d->text3d_getPosition(textId) - fvec3(0.0f, 0.0f, SELECTION_DEPTH));
+					const auto lineTextSize = (_fe3d->text3d_getSize(textId));
 					_fe3d->quad3d_create(selectionID, false);
 					_fe3d->quad3d_setColor(selectionID, SELECTION_COLOR);
 					_fe3d->quad3d_setPosition(selectionID, lineTextPosition);

@@ -442,13 +442,13 @@ const bool ModelEditor::loadFromFile()
 		}
 		else if(lineType == "AABB")
 		{
-			string aabbID;
+			string aabbId;
 			string modelId;
 			fvec3 position;
 			fvec3 size;
 
 			iss >>
-				aabbID >>
+				aabbId >>
 				modelId >>
 				position.x >>
 				position.y >>
@@ -457,16 +457,16 @@ const bool ModelEditor::loadFromFile()
 				size.y >>
 				size.z;
 
-			_fe3d->aabb_create(aabbID, false);
+			_fe3d->aabb_create(aabbId, false);
 
-			if(_fe3d->aabb_isExisting(aabbID))
+			if(_fe3d->aabb_isExisting(aabbId))
 			{
-				_fe3d->aabb_setVisible(aabbID, false);
-				_fe3d->aabb_setFollowParentVisibility(aabbID, false);
-				_fe3d->aabb_setParentEntityId(aabbID, modelId);
-				_fe3d->aabb_setParentEntityType(aabbID, AabbParentEntityType::MODEL);
-				_fe3d->aabb_setLocalPosition(aabbID, position);
-				_fe3d->aabb_setLocalSize(aabbID, size);
+				_fe3d->aabb_setVisible(aabbId, false);
+				_fe3d->aabb_setFollowParentVisibility(aabbId, false);
+				_fe3d->aabb_setParentEntityId(aabbId, modelId);
+				_fe3d->aabb_setParentEntityType(aabbId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setLocalPosition(aabbId, position);
+				_fe3d->aabb_setLocalSize(aabbId, size);
 			}
 		}
 		else

@@ -5,7 +5,7 @@ void WorldEditor::_updateSoundPlacing()
 {
 	if(!_currentTemplateSoundID.empty())
 	{
-		if(_fe3d->terrain_getSelectedID().empty())
+		if(_fe3d->terrain_getSelectedId().empty())
 		{
 			auto newPosition = _fe3d->sound3d_getPosition(_currentTemplateSoundID);
 			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
@@ -29,7 +29,7 @@ void WorldEditor::_updateSoundPlacing()
 
 				if(_fe3d->sound3d_isExisting(newID))
 				{
-					_loadedSoundIDs.insert(make_pair(newID, _currentTemplateSoundID));
+					_loadedSoundIds.insert(make_pair(newID, _currentTemplateSoundID));
 
 					_fe3d->sound3d_setPosition(newID, newPosition);
 					_fe3d->sound3d_setMaxVolume(newID, DEFAULT_SOUND_MAX_VOLUME);
@@ -124,7 +124,7 @@ void WorldEditor::_updateSoundPlacing()
 
 				if(_fe3d->sound3d_isExisting(newID))
 				{
-					_loadedSoundIDs.insert(make_pair(newID, _currentTemplateSoundID));
+					_loadedSoundIds.insert(make_pair(newID, _currentTemplateSoundID));
 
 					_fe3d->sound3d_setPosition(newID, newPosition);
 					_fe3d->sound3d_setMaxVolume(newID, DEFAULT_SOUND_MAX_VOLUME);

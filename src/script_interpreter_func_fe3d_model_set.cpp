@@ -449,15 +449,15 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto aabbIDs = _fe3d->aabb_getChildIDs(args[0].getString(), AabbParentEntityType::MODEL);
+				auto aabbIds = _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::MODEL);
 
-				if(aabbIDs.empty())
+				if(aabbIds.empty())
 				{
 					_throwScriptError("model with id \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				for(const auto& id : aabbIDs)
+				for(const auto& id : aabbIds)
 				{
 					_fe3d->aabb_setRaycastResponsive(id, args[1].getBoolean());
 				}
@@ -474,15 +474,15 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto aabbIDs = _fe3d->aabb_getChildIDs(args[0].getString(), AabbParentEntityType::MODEL);
+				auto aabbIds = _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::MODEL);
 
-				if(aabbIDs.empty())
+				if(aabbIds.empty())
 				{
 					_throwScriptError("model with id \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				for(const auto& id : aabbIDs)
+				for(const auto& id : aabbIds)
 				{
 					_fe3d->aabb_setCollisionResponsive(id, args[1].getBoolean());
 				}

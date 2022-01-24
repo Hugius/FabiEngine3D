@@ -67,20 +67,20 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
 			if((distance != -1.0f) && (distance < closestDistance))
 			{
 				closestDistance = distance;
-				_hoveredAabbID = entity->getId();
+				_hoveredAabbId = entity->getId();
 				_hoveredAabbDistance = closestDistance;
 			}
 		}
 	}
 
-	if(!_core->getAabbEntityManager()->isEntityExisting(_hoveredAabbID) || _hoveredAabbID.empty())
+	if(!_core->getAabbEntityManager()->isEntityExisting(_hoveredAabbId) || _hoveredAabbId.empty())
 	{
-		_hoveredAabbID = "";
+		_hoveredAabbId = "";
 		_hoveredAabbDistance = -1.0f;
 	}
 
 	_isRaycastUpdated = true;
-	return make_pair(_hoveredAabbID, _hoveredAabbDistance);
+	return make_pair(_hoveredAabbId, _hoveredAabbDistance);
 }
 
 const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const string& id, bool canBeOccluded)
@@ -92,9 +92,9 @@ const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const strin
 			raycast_checkCursorInAny();
 		}
 
-		if(_core->getAabbEntityManager()->isEntityExisting(_hoveredAabbID))
+		if(_core->getAabbEntityManager()->isEntityExisting(_hoveredAabbId))
 		{
-			return make_pair((id == _hoveredAabbID), _hoveredAabbDistance);
+			return make_pair((id == _hoveredAabbId), _hoveredAabbDistance);
 		}
 		else
 		{
@@ -149,14 +149,14 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 			raycast_checkCursorInAny();
 		}
 
-		if(_hoveredAabbID.empty() || !_core->getAabbEntityManager()->isEntityExisting(_hoveredAabbID))
+		if(_hoveredAabbId.empty() || !_core->getAabbEntityManager()->isEntityExisting(_hoveredAabbId))
 		{
 			return make_pair("", -1.0f);
 		}
 
-		if(_hoveredAabbID.substr(0, id.size()) == id)
+		if(_hoveredAabbId.substr(0, id.size()) == id)
 		{
-			return make_pair(_hoveredAabbID, _hoveredAabbDistance);
+			return make_pair(_hoveredAabbId, _hoveredAabbDistance);
 		}
 
 		return make_pair("", -1.0f);

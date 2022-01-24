@@ -45,7 +45,7 @@ void SoundEditor::_updateSoundCreating()
 
 			newSoundID = ("@" + newSoundID);
 
-			if(find(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), newSoundID) != _loadedSoundIDs.end())
+			if(find(_loadedSoundIds.begin(), _loadedSoundIds.end(), newSoundID) != _loadedSoundIds.end())
 			{
 				Logger::throwWarning("Sound with id \"" + newSoundID.substr(1) + "\" already exists!");
 				return;
@@ -88,7 +88,7 @@ void SoundEditor::_updateSoundCreating()
 			if(_fe3d->sound2d_isExisting(newSoundID))
 			{
 				_currentSoundID = newSoundID;
-				_loadedSoundIDs.push_back(newSoundID);
+				_loadedSoundIds.push_back(newSoundID);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityId(), "Sound: " + newSoundID.substr(1), 0.025f);
@@ -145,7 +145,7 @@ void SoundEditor::_updateSoundDeleting()
 		{
 			_fe3d->sound2d_delete(_currentSoundID);
 
-			_loadedSoundIDs.erase(remove(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), _currentSoundID), _loadedSoundIDs.end());
+			_loadedSoundIds.erase(remove(_loadedSoundIds.begin(), _loadedSoundIds.end(), _currentSoundID), _loadedSoundIds.end());
 			_currentSoundID = "";
 			_isDeletingSound = false;
 		}

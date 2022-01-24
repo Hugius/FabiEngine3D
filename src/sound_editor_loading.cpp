@@ -61,7 +61,7 @@ const bool SoundEditor::loadFromFile()
 		Logger::throwError("SoundEditor::loadFromFile");
 	}
 
-	_loadedSoundIDs.clear();
+	_loadedSoundIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -96,7 +96,7 @@ const bool SoundEditor::loadFromFile()
 
 		if(_fe3d->sound2d_isExisting(soundID))
 		{
-			_loadedSoundIDs.push_back(soundID);
+			_loadedSoundIds.push_back(soundID);
 		}
 	}
 

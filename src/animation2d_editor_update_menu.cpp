@@ -6,7 +6,7 @@ void Animation2dEditor::_updateMainMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "animation2dEditorMenuMain")
+	if(screen->getId() == "animation2dEditorMenuMain")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -49,7 +49,7 @@ void Animation2dEditor::_updateChoiceMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "animation2dEditorMenuChoice")
+	if(screen->getId() == "animation2dEditorMenuChoice")
 	{
 		auto currentAnimation = _getAnimation(_currentAnimationID);
 		auto rowCount = currentAnimation->getRowCount();

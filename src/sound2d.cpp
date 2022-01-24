@@ -13,7 +13,7 @@ Sound2d::Sound2d(const string& id, const string& audioPath, Mix_Chunk* dataPoint
 
 }
 
-const string& Sound2d::getID() const
+const string& Sound2d::getId() const
 {
 	return _ID;
 }

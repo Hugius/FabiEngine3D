@@ -5,7 +5,7 @@ void Script::createScriptFile(const string& id)
 {
 	for(const auto& file : _scriptFiles)
 	{
-		if(file->getID() == id)
+		if(file->getId() == id)
 		{
 			Logger::throwError("Script::createScriptFile");
 		}
@@ -18,7 +18,7 @@ void Script::renameScriptFile(const string& id, const string& newID)
 {
 	for(const auto& file : _scriptFiles)
 	{
-		if(file->getID() == id)
+		if(file->getId() == id)
 		{
 			file->changeID(newID);
 			return;
@@ -32,7 +32,7 @@ void Script::deleteScriptFile(const string& id)
 {
 	for(size_t i = 0; i < _scriptFiles.size(); i++)
 	{
-		if(_scriptFiles[i]->getID() == id)
+		if(_scriptFiles[i]->getId() == id)
 		{
 			_scriptFiles.erase(_scriptFiles.begin() + i);
 			return;
@@ -68,7 +68,7 @@ const bool Script::isScriptFileExisting(const string& id) const
 {
 	for(const auto& file : _scriptFiles)
 	{
-		if(file->getID() == id)
+		if(file->getId() == id)
 		{
 			return true;
 		}
@@ -86,7 +86,7 @@ shared_ptr<ScriptFile> Script::getScriptFile(const string& id) const
 {
 	for(const auto& file : _scriptFiles)
 	{
-		if(file->getID() == id)
+		if(file->getId() == id)
 		{
 			return file;
 		}
@@ -101,7 +101,7 @@ const vector<string> Script::getScriptFileIDs() const
 
 	for(const auto& file : _scriptFiles)
 	{
-		result.push_back(file->getID());
+		result.push_back(file->getId());
 	}
 
 	sort(result.begin(), result.end());
@@ -123,7 +123,7 @@ const vector<pair<string, unsigned int>> Script::findKeyword(const string& keywo
 			{
 				if(line.substr(i, keyword.size()) == keyword)
 				{
-					result.push_back(make_pair(file->getID(), lineNumber + 1));
+					result.push_back(make_pair(file->getId(), lineNumber + 1));
 					break;
 				}
 			}

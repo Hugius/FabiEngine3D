@@ -41,13 +41,13 @@ void EngineInterface::reflection_capture(const string& id)
 	_core->getReflectionEntityManager()->getEntity(id)->capture();
 }
 
-const vector<string> EngineInterface::reflection_getIDs() const
+const vector<string> EngineInterface::reflection_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getReflectionEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

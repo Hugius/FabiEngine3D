@@ -5,7 +5,7 @@ void Text3dEditor::_updateMiscellaneousMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "text3dEditorMenuMiscellaneous")
+	if(screen->getId() == "text3dEditorMenuMiscellaneous")
 	{
 		auto size = _fe3d->text3d_getSize(_currentTextID);
 		auto isFacingX = _fe3d->text3d_isFacingCameraX(_currentTextID);

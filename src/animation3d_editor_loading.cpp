@@ -136,13 +136,13 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 				}
 				else
 				{
-					Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getID() + "\" does not have required animation parts anymore!");
+					Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getId() + "\" does not have required animation parts anymore!");
 					continue;
 				}
 			}
 			else
 			{
-				Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getID() + "\" not existing anymore!");
+				Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getId() + "\" not existing anymore!");
 				continue;
 			}
 		}

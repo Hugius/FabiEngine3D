@@ -4,7 +4,7 @@ void SkyEditor::_updateMiscellaneousMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "skyEditorMenuMiscellaneous")
+	if(screen->getId() == "skyEditorMenuMiscellaneous")
 	{
 		float rotation = _fe3d->sky_getRotation(_currentSkyID);
 		float lightness = _fe3d->sky_getLightness(_currentSkyID);

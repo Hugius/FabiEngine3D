@@ -6,7 +6,7 @@ void WaterEditor::_updateTexturingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "waterEditorMenuTexturing")
+	if(screen->getId() == "waterEditorMenuTexturing")
 	{
 		auto hasDudvMap = _fe3d->water_hasDudvMap(_currentWaterID);
 		auto hasNormalMap = _fe3d->water_hasNormalMap(_currentWaterID);

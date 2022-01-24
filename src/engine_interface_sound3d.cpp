@@ -73,7 +73,7 @@ void EngineInterface::sound3d_resume(const string& id)
 
 	if(!_core->getSound3dPlayer()->isSoundPaused(sound))
 	{
-		Logger::throwWarning("Tried to resume sound3D with id \"", sound.getID(), "\": sound is not paused!");
+		Logger::throwWarning("Tried to resume sound3D with id \"", sound.getId(), "\": sound is not paused!");
 		return;
 	}
 
@@ -128,13 +128,13 @@ void EngineInterface::sound3d_setMaxVolume(const string& id, float value)
 	_core->getSound3dManager()->getSound(id).setMaxVolume(value);
 }
 
-const vector<string> EngineInterface::sound3d_getIDs() const
+const vector<string> EngineInterface::sound3d_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& chunk : _core->getSound3dManager()->getSounds())
 	{
-		result.push_back(chunk.getID());
+		result.push_back(chunk.getId());
 	}
 
 	return result;

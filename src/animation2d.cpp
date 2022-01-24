@@ -8,7 +8,7 @@ Animation2d::Animation2d(const string& id)
 
 }
 
-const string& Animation2d::getID() const
+const string& Animation2d::getId() const
 {
 	return _ID;
 }

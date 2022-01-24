@@ -7,7 +7,7 @@ void ModelEditor::_updateMainAabbMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "modelEditorMenuAabbMain")
+	if(screen->getId() == "modelEditorMenuAabbMain")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -50,7 +50,7 @@ void ModelEditor::_updateChoiceAabbMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "modelEditorMenuAabbChoice")
+	if(screen->getId() == "modelEditorMenuAabbChoice")
 	{
 		auto position = _fe3d->aabb_getPosition(_currentModelID + "@" + _currentAabbID);
 		auto size = _fe3d->aabb_getSize(_currentModelID + "@" + _currentAabbID);

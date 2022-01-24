@@ -14,7 +14,7 @@ public:
 	void setActiveScreen(const string& id);
 	void update(bool isHoverable);
 
-	const string& getID() const;
+	const string& getId() const;
 	const string& getEntityID() const;
 	const string& getParentID() const;
 

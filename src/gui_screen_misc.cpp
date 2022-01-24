@@ -53,7 +53,7 @@ void GuiScreen::hide()
 	_isActive = false;
 }
 
-const string& GuiScreen::getID() const
+const string& GuiScreen::getId() const
 {
 	return _ID;
 }

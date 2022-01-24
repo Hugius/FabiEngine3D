@@ -35,7 +35,7 @@ void MasterRenderer::_capturePlanarReflections()
 			if(!entity->isReflected())
 			{
 				entity->setVisible(false);
-				savedModelEntityIDs.push_back(entity->getID());
+				savedModelEntityIDs.push_back(entity->getId());
 				continue;
 			}
 
@@ -44,7 +44,7 @@ void MasterRenderer::_capturePlanarReflections()
 				if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR))
 				{
 					entity->setVisible(false);
-					savedModelEntityIDs.push_back(entity->getID());
+					savedModelEntityIDs.push_back(entity->getId());
 					break;
 				}
 			}
@@ -57,7 +57,7 @@ void MasterRenderer::_capturePlanarReflections()
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
-			savedQuad3dEntityIDs.push_back(entity->getID());
+			savedQuad3dEntityIDs.push_back(entity->getId());
 		}
 	}
 
@@ -104,7 +104,7 @@ void MasterRenderer::_capturePlanarReflections()
 	{
 		for(const auto& savedID : savedModelEntityIDs)
 		{
-			if(entity->getID() == savedID)
+			if(entity->getId() == savedID)
 			{
 				entity->setVisible(true);
 			}
@@ -115,7 +115,7 @@ void MasterRenderer::_capturePlanarReflections()
 	{
 		for(const auto& savedID : savedQuad3dEntityIDs)
 		{
-			if(entity->getID() == savedID)
+			if(entity->getId() == savedID)
 			{
 				entity->setVisible(true);
 			}

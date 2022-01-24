@@ -163,7 +163,7 @@ const bool Raycaster::_isUnderTerrain(float distance) const
 	auto scaledRay = calculatePointOnRay(_cursorRay, distance);
 
 	auto selectedTerrain = _terrainManager->getSelectedEntity();
-	float terrainHeight = _terrainManager->getPixelHeight(selectedTerrain->getID(), scaledRay.x + (selectedTerrain->getSize() / 2.0f), scaledRay.z + (selectedTerrain->getSize() / 2.0f));
+	float terrainHeight = _terrainManager->getPixelHeight(selectedTerrain->getId(), scaledRay.x + (selectedTerrain->getSize() / 2.0f), scaledRay.z + (selectedTerrain->getSize() / 2.0f));
 
 	return (scaledRay.y < terrainHeight);
 }
@@ -182,7 +182,7 @@ const fvec3 Raycaster::_calculateTerrainPoint() const
 
 			auto selectedTerrain = _terrainManager->getSelectedEntity();
 
-			if(_terrainManager->isInside(selectedTerrain->getID(), (endPoint.x + (selectedTerrain->getSize() / 2.0f)), (endPoint.z + (selectedTerrain->getSize() / 2.0f))))
+			if(_terrainManager->isInside(selectedTerrain->getId(), (endPoint.x + (selectedTerrain->getSize() / 2.0f)), (endPoint.z + (selectedTerrain->getSize() / 2.0f))))
 			{
 				return endPoint;
 			}

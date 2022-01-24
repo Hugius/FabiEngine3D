@@ -15,7 +15,7 @@ public:
 	void deleteValue(unsigned int index);
 	void deleteValues();
 
-	const string& getID() const;
+	const string& getId() const;
 
 	const unsigned int getValueCount() const;
 

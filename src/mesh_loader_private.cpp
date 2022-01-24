@@ -98,7 +98,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 			bool isAlreadyExisting = false;
 			for(const auto& meshPart : meshParts)
 			{
-				if(meshPart->getID() == selectedPartID)
+				if(meshPart->getId() == selectedPartID)
 				{
 					isAlreadyExisting = true;
 

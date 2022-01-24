@@ -17,7 +17,7 @@ const vector<string> Animation2dEditor::getAnimationIDs()
 
 	for(const auto& animation : _animations)
 	{
-		result.push_back(animation->getID());
+		result.push_back(animation->getId());
 	}
 
 	sort(result.begin(), result.end());
@@ -263,7 +263,7 @@ void Animation2dEditor::_deleteAnimation(const string& id)
 {
 	for(size_t i = 0; i < _animations.size(); i++)
 	{
-		if(_animations[i]->getID() == id)
+		if(_animations[i]->getId() == id)
 		{
 			_animations.erase(_animations.begin() + i);
 			return;
@@ -277,7 +277,7 @@ shared_ptr<Animation2d> Animation2dEditor::_getAnimation(const string& id) const
 {
 	for(const auto& animation : _animations)
 	{
-		if(animation->getID() == id)
+		if(animation->getId() == id)
 		{
 			return animation;
 		}
@@ -290,7 +290,7 @@ const bool Animation2dEditor::isAnimationExisting(const string& id) const
 {
 	for(const auto& animation : _animations)
 	{
-		if(animation->getID() == id)
+		if(animation->getId() == id)
 		{
 			return true;
 		}

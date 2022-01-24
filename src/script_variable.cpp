@@ -14,7 +14,7 @@ ScriptVariable::ScriptVariable(const string& id, ScriptVariableScope scope, Scri
 	}
 }
 
-const string& ScriptVariable::getID() const
+const string& ScriptVariable::getId() const
 {
 	return _ID;
 }

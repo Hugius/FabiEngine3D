@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& id : _fe3d->aabb_getIDs())
+			for(const auto& id : _fe3d->aabb_getIds())
 			{
 				if(id[0] != '@')
 				{

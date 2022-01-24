@@ -47,7 +47,7 @@ void GuiScrollingList::deleteButton(const string& id)
 {
 	for(size_t i = 0; i < _buttons.size(); i++)
 	{
-		if(id == _buttons[i]->getID())
+		if(id == _buttons[i]->getId())
 		{
 			_buttons.erase(_buttons.begin() + i);
 
@@ -55,7 +55,7 @@ void GuiScrollingList::deleteButton(const string& id)
 			vector<string> textContents;
 			for(size_t j = 0; j < _buttons.size(); j++)
 			{
-				buttonIDs.push_back(_buttons[j]->getID());
+				buttonIDs.push_back(_buttons[j]->getId());
 				textContents.push_back(_fe3d->text2d_getContent(_buttons[j]->getTextField()->getEntityID()));
 			}
 
@@ -208,7 +208,7 @@ shared_ptr<GuiButton> GuiScrollingList::getButton(const string& id) const
 {
 	for(const auto& button : _buttons)
 	{
-		if(id == button->getID())
+		if(id == button->getId())
 		{
 			return button;
 		}

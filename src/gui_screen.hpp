@@ -28,7 +28,7 @@ public:
 	void deleteRectangle(const string& id);
 	void deleteTextField(const string& id);
 
-	const string& getID() const;
+	const string& getId() const;
 	const string& getParentID() const;
 
 	const fvec2 convertPosition(const fvec2& position) const;

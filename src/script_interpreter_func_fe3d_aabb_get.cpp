@@ -15,7 +15,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				return true;
 			}
 
-			for(const auto& id : _fe3d->aabb_getIDs())
+			for(const auto& id : _fe3d->aabb_getIds())
 			{
 				if(args[0].getString() == id.substr(0, args[0].getString().size()))
 				{
@@ -196,7 +196,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->aabb_getIDs();
+			const auto result = _fe3d->aabb_getIds();
 
 			for(const auto& id : result)
 			{

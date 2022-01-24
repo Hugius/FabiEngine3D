@@ -33,7 +33,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//ofstream file(filePath);
 
 	//vector<string> levelOfDetailEntityIDs;
-	//for(const auto& modelID : _fe3d->model_getIDs())
+	//for(const auto& modelID : _fe3d->model_getIds())
 	//{
 	//	bool isCustomWorldModel = find(_customWorldModelIDs.begin(), _customWorldModelIDs.end(), modelID) != _customWorldModelIDs.end();
 	//	if((modelID[0] != '@') && isCustomWorldModel)
@@ -98,7 +98,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		opacity << endl;
 	//}
 
-	//for(const auto& modelID : _fe3d->model_getIDs())
+	//for(const auto& modelID : _fe3d->model_getIds())
 	//{
 	//	bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
 	//	bool isCustomWorldModel =
@@ -203,7 +203,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	//for(const auto& modelID : _fe3d->model_getIDs())
+	//for(const auto& modelID : _fe3d->model_getIds())
 	//{
 	//	bool isLodModel = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
 	//	bool isCustomWorldModel =
@@ -255,7 +255,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	//for(const auto& quadID : _fe3d->quad3d_getIDs())
+	//for(const auto& quadID : _fe3d->quad3d_getIds())
 	//{
 	//	bool isCustomWorldQuad3d =
 	//		find(_customWorldQuadIDs.begin(), _customWorldQuadIDs.end(), quadID) != _customWorldQuadIDs.end();
@@ -323,7 +323,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	//for(const auto& aabbID : _fe3d->aabb_getIDs())
+	//for(const auto& aabbID : _fe3d->aabb_getIds())
 	//{
 	//	bool isCustomWorldAabb =
 	//		find(_customWorldAabbIDs.begin(), _customWorldAabbIDs.end(), aabbID) != _customWorldAabbIDs.end();
@@ -350,7 +350,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	////for(const auto& soundID : _fe3d->sound3d_getIDs())
+	////for(const auto& soundID : _fe3d->sound3d_getIds())
 	////{
 	////	// Check if allowed to save
 	////	bool isCustomWorldSound =
@@ -386,7 +386,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	////	}
 	////}
 
-	//for(const auto& pointlightID : _fe3d->pointlight_getIDs())
+	//for(const auto& pointlightID : _fe3d->pointlight_getIds())
 	//{
 	//	bool isCustomWorldPointlight =
 	//		find(_customWorldPointlightIDs.begin(), _customWorldPointlightIDs.end(), pointlightID) != _customWorldPointlightIDs.end();
@@ -413,7 +413,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	//for(const auto& spotlightID : _fe3d->spotlight_getIDs())
+	//for(const auto& spotlightID : _fe3d->spotlight_getIds())
 	//{
 	//	bool isCustomWorldSpotlight =
 	//		find(_customWorldSpotlightIDs.begin(), _customWorldSpotlightIDs.end(), spotlightID) != _customWorldSpotlightIDs.end();
@@ -444,7 +444,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	//for(const auto& reflectionID : _fe3d->reflection_getIDs())
+	//for(const auto& reflectionID : _fe3d->reflection_getIds())
 	//{
 	//	bool isCustomWorldReflection =
 	//		find(_customWorldReflectionIDs.begin(), _customWorldReflectionIDs.end(), reflectionID) != _customWorldReflectionIDs.end();

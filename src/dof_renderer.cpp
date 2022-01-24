@@ -18,17 +18,17 @@ void DofRenderer::bind()
 	if(_renderBus->getDepthMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getDepthMap()->getID());
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getDepthMap()->getId());
 	}
 	if(_renderBus->getFinalSceneMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getID());
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getId());
 	}
 	if(_renderBus->getDofMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getDofMap()->getID());
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getDofMap()->getId());
 	}
 }
 

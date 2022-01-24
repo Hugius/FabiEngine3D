@@ -7,7 +7,7 @@ void Animation3dEditor::_updateMainMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "animation3dEditorMenuMain")
+	if(screen->getId() == "animation3dEditorMenuMain")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -50,7 +50,7 @@ void Animation3dEditor::_updateChoiceMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "animation3dEditorMenuChoice")
+	if(screen->getId() == "animation3dEditorMenuChoice")
 	{
 		auto currentAnimation = _getAnimation(_currentAnimationID);
 

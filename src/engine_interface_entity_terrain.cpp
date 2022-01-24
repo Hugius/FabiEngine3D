@@ -10,7 +10,7 @@ void EngineInterface::terrain_deleteAll()
 {
 	for(const auto& [key, entity] : _core->getTerrainEntityManager()->getEntities())
 	{
-		terrain_delete(entity->getID());
+		terrain_delete(entity->getId());
 	}
 
 	_core->getTerrainEntityManager()->selectEntity("");
@@ -419,16 +419,16 @@ const string EngineInterface::terrain_getSelectedID() const
 		return "";
 	}
 
-	return _core->getTerrainEntityManager()->getSelectedEntity()->getID();
+	return _core->getTerrainEntityManager()->getSelectedEntity()->getId();
 }
 
-const vector<string> EngineInterface::terrain_getIDs() const
+const vector<string> EngineInterface::terrain_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getTerrainEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

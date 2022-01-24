@@ -121,7 +121,7 @@ const vector<unsigned int> Sound3dPlayer::_findChannels(Sound3d& sound) const
 
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
-		if(_channels[i] == sound.getID())
+		if(_channels[i] == sound.getId())
 		{
 			channels.push_back(static_cast<unsigned int>(i));
 		}

@@ -5,7 +5,7 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "quad3dEditorMenuMiscellaneous")
+	if(screen->getId() == "quad3dEditorMenuMiscellaneous")
 	{
 		auto size = _fe3d->quad3d_getSize(_currentQuadID);
 		auto isFacingX = _fe3d->quad3d_isFacingCameraX(_currentQuadID);

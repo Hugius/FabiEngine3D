@@ -72,13 +72,13 @@ void EngineInterface::spotlight_setDistance(const string& id, float value)
 	_core->getSpotlightEntityManager()->getEntity(id)->setDistance(value);
 }
 
-const vector<string> EngineInterface::spotlight_getIDs() const
+const vector<string> EngineInterface::spotlight_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getSpotlightEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

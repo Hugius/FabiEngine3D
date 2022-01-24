@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 				return true;
 			}
 
-			for(const auto& id : _fe3d->reflection_getIDs())
+			for(const auto& id : _fe3d->reflection_getIds())
 			{
 				if(args[0].getString() == id.substr(0, args[0].getString().size()))
 				{
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->reflection_getIDs();
+			const auto result = _fe3d->reflection_getIds();
 
 			for(const auto& id : result)
 			{

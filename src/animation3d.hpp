@@ -26,7 +26,7 @@ public:
 	void setPaused(bool value);
 	void setAutopaused(bool value);
 
-	const string& getID() const;
+	const string& getId() const;
 	const vector<string>& getPartIDs() const;
 	const string& getPreviewModelID() const;
 

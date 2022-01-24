@@ -11,7 +11,7 @@ public:
 
 	virtual void setVisible(bool value);
 
-	const string& getID() const;
+	const string& getId() const;
 
 	const bool isVisible() const;
 

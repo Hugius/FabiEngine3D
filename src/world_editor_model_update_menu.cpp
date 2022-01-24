@@ -6,7 +6,7 @@ void WorldEditor::_updateModelMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuModel")
+	if(screen->getId() == "worldEditorMenuModel")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -30,7 +30,7 @@ void WorldEditor::_updateModelMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
-			auto IDs = _fe3d->model_getIDs();
+			auto IDs = _fe3d->model_getIds();
 			sort(IDs.begin(), IDs.end());
 			for(auto& modelID : IDs)
 			{
@@ -54,7 +54,7 @@ void WorldEditor::_updateModelPlacingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuModelPlace")
+	if(screen->getId() == "worldEditorMenuModelPlace")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -104,18 +104,18 @@ void WorldEditor::_updateModelChoosingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuModelChoice")
+	if(screen->getId() == "worldEditorMenuModelChoice")
 	{
 		for(const auto& button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
 		{
-			if(!_fe3d->model_isExisting(button->getID()))
+			if(!_fe3d->model_isExisting(button->getId()))
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButton(button->getID());
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButton(button->getId());
 				break;
 			}
 		}
 
-		for(const auto& modelID : _fe3d->model_getIDs())
+		for(const auto& modelID : _fe3d->model_getIds())
 		{
 			if(modelID[0] != '@')
 			{

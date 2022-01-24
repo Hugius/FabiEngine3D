@@ -4,7 +4,7 @@ void TerrainEditor::_updateMiscellaneousMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "terrainEditorMenuMiscellaneous")
+	if(screen->getId() == "terrainEditorMenuMiscellaneous")
 	{
 		auto maxHeight = _fe3d->terrain_getMaxHeight(_currentTerrainID);
 		auto textureRepeat = _fe3d->terrain_getTextureRepeat(_currentTerrainID);

@@ -97,13 +97,13 @@ const float EngineInterface::pointlight_getIntensity(const string& id) const
 	return _core->getPointlightEntityManager()->getEntity(id)->getIntensity();
 }
 
-const vector<string> EngineInterface::pointlight_getIDs() const
+const vector<string> EngineInterface::pointlight_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getPointlightEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

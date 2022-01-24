@@ -10,7 +10,7 @@ void EngineInterface::text3d_deleteAll()
 {
 	for(const auto& [key, entity] : _core->getText3dEntityManager()->getEntities())
 	{
-		text3d_delete(entity->getID());
+		text3d_delete(entity->getId());
 	}
 }
 
@@ -229,13 +229,13 @@ const fvec3& EngineInterface::text3d_getWireframeColor(const string& id) const
 	return _core->getText3dEntityManager()->getEntity(id)->getWireframeColor();
 }
 
-const vector<string> EngineInterface::text3d_getIDs() const
+const vector<string> EngineInterface::text3d_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getText3dEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

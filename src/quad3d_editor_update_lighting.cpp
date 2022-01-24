@@ -5,7 +5,7 @@ void Quad3dEditor::_updateLightingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "quad3dEditorMenuLighting")
+	if(screen->getId() == "quad3dEditorMenuLighting")
 	{
 		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(_currentQuadID);
 		auto lightness = _fe3d->quad3d_getLightness(_currentQuadID);

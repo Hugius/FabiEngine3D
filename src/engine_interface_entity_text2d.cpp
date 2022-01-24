@@ -206,13 +206,13 @@ const string& EngineInterface::text2d_getContent(const string& id) const
 	return _core->getText2dEntityManager()->getEntity(id)->getContent();
 }
 
-const vector<string> EngineInterface::text2d_getIDs() const
+const vector<string> EngineInterface::text2d_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getText2dEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

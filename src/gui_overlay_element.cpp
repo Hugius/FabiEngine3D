@@ -42,7 +42,7 @@ const bool GuiOverlay::isScrollingListExisting(const string& id) const
 {
 	for(const auto& scrollingList : _scrollingLists)
 	{
-		if(id == scrollingList->getID())
+		if(id == scrollingList->getId())
 		{
 			return true;
 		}
@@ -55,7 +55,7 @@ const bool GuiOverlay::isWriteFieldExisting(const string& id) const
 {
 	for(const auto& writeField : _writeFields)
 	{
-		if(id == writeField->getID())
+		if(id == writeField->getId())
 		{
 			return true;
 		}
@@ -68,7 +68,7 @@ const bool GuiOverlay::isButtonExisting(const string& id) const
 {
 	for(const auto& button : _buttons)
 	{
-		if(id == button->getID())
+		if(id == button->getId())
 		{
 			return true;
 		}
@@ -81,7 +81,7 @@ const bool GuiOverlay::isRectangleExisting(const string& id) const
 {
 	for(const auto& rectangle : _rectangles)
 	{
-		if(id == rectangle->getID())
+		if(id == rectangle->getId())
 		{
 			return true;
 		}
@@ -94,7 +94,7 @@ const bool GuiOverlay::isTextFieldExisting(const string& id) const
 {
 	for(const auto& textField : _textFields)
 	{
-		if(id == textField->getID())
+		if(id == textField->getId())
 		{
 			return true;
 		}
@@ -107,7 +107,7 @@ shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string& id) cons
 {
 	for(const auto& scrollingList : _scrollingLists)
 	{
-		if(id == scrollingList->getID())
+		if(id == scrollingList->getId())
 		{
 			return scrollingList;
 		}
@@ -120,7 +120,7 @@ shared_ptr<GuiWriteField> GuiOverlay::getWriteField(const string& id) const
 {
 	for(const auto& writeField : _writeFields)
 	{
-		if(id == writeField->getID())
+		if(id == writeField->getId())
 		{
 			return writeField;
 		}
@@ -133,7 +133,7 @@ shared_ptr<GuiButton> GuiOverlay::getButton(const string& id) const
 {
 	for(const auto& button : _buttons)
 	{
-		if(id == button->getID())
+		if(id == button->getId())
 		{
 			return button;
 		}
@@ -146,7 +146,7 @@ shared_ptr<GuiRectangle> GuiOverlay::getRectangle(const string& id) const
 {
 	for(const auto& rectangle : _rectangles)
 	{
-		if(id == rectangle->getID())
+		if(id == rectangle->getId())
 		{
 			return rectangle;
 		}
@@ -159,7 +159,7 @@ shared_ptr<GuiTextField> GuiOverlay::getTextField(const string& id) const
 {
 	for(const auto& textField : _textFields)
 	{
-		if(id == textField->getID())
+		if(id == textField->getId())
 		{
 			return textField;
 		}
@@ -197,7 +197,7 @@ void GuiOverlay::deleteScrollingList(const string& id)
 {
 	for(size_t i = 0; i < _scrollingLists.size(); i++)
 	{
-		if(id == _scrollingLists[i]->getID())
+		if(id == _scrollingLists[i]->getId())
 		{
 			_scrollingLists.erase(_scrollingLists.begin() + i);
 			return;
@@ -211,7 +211,7 @@ void GuiOverlay::deleteWriteField(const string& id)
 {
 	for(size_t i = 0; i < _writeFields.size(); i++)
 	{
-		if(id == _writeFields[i]->getID())
+		if(id == _writeFields[i]->getId())
 		{
 			_writeFields.erase(_writeFields.begin() + i);
 			return;
@@ -225,7 +225,7 @@ void GuiOverlay::deleteButton(const string& id)
 {
 	for(size_t i = 0; i < _buttons.size(); i++)
 	{
-		if(id == _buttons[i]->getID())
+		if(id == _buttons[i]->getId())
 		{
 			_buttons.erase(_buttons.begin() + i);
 			return;
@@ -239,7 +239,7 @@ void GuiOverlay::deleteRectangle(const string& id)
 {
 	for(size_t i = 0; i < _rectangles.size(); i++)
 	{
-		if(id == _rectangles[i]->getID())
+		if(id == _rectangles[i]->getId())
 		{
 			_rectangles.erase(_rectangles.begin() + i);
 			return;
@@ -253,7 +253,7 @@ void GuiOverlay::deleteTextField(const string& id)
 {
 	for(size_t i = 0; i < _textFields.size(); i++)
 	{
-		if(id == _textFields[i]->getID())
+		if(id == _textFields[i]->getId())
 		{
 			_textFields.erase(_textFields.begin() + i);
 			return;

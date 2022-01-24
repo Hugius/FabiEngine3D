@@ -6,7 +6,7 @@ void WorldEditor::_updatePointlightMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuPointlight")
+	if(screen->getId() == "worldEditorMenuPointlight")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -49,7 +49,7 @@ void WorldEditor::_updatePointlightMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteButtons();
 
-			auto IDs = _fe3d->pointlight_getIDs();
+			auto IDs = _fe3d->pointlight_getIds();
 			sort(IDs.begin(), IDs.end());
 			for(auto& pointlightID : IDs)
 			{
@@ -73,18 +73,18 @@ void WorldEditor::_updatePointlightChoosingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuPointlightChoice")
+	if(screen->getId() == "worldEditorMenuPointlightChoice")
 	{
 		for(const auto& button : screen->getScrollingList("pointlightList")->getButtons())
 		{
-			if(!_fe3d->pointlight_isExisting(button->getID()))
+			if(!_fe3d->pointlight_isExisting(button->getId()))
 			{
-				screen->getScrollingList("pointlightList")->deleteButton(button->getID());
+				screen->getScrollingList("pointlightList")->deleteButton(button->getId());
 				break;
 			}
 		}
 
-		for(const auto& pointlightID : _fe3d->pointlight_getIDs())
+		for(const auto& pointlightID : _fe3d->pointlight_getIds())
 		{
 			if(pointlightID[0] != '@')
 			{

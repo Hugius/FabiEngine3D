@@ -18,7 +18,7 @@ public:
 	void addNormal(const fvec3& value);
 	void addTangent(const fvec3& value);
 
-	const string& getID() const;
+	const string& getId() const;
 
 	const vector<fvec3>& getPositions() const;
 	const vector<fvec2>& getUvs() const;

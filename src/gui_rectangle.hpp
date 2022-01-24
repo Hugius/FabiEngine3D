@@ -14,7 +14,7 @@ public:
 	void updateInitialSize();
 	void updateInitialColor();
 
-	const string& getID() const;
+	const string& getId() const;
 	const string& getEntityID() const;
 	const string& getParentID() const;
 

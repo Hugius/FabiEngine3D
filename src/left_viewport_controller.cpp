@@ -33,7 +33,7 @@ void LeftViewportController::update()
 	auto window = _gui->getLeftViewport()->getWindow("main");
 	auto screen = window->getActiveScreen();
 
-	if(screen->getID() == "main")
+	if(screen->getId() == "main")
 	{
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("skyEditor")->isHovered())
 		{

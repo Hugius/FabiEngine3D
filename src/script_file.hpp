@@ -17,7 +17,7 @@ public:
 
 	const vector<string>& getLines() const;
 
-	const string& getID() const;
+	const string& getId() const;
 	const string& getLineText(unsigned int index) const;
 
 	const unsigned int getLineCount() const;

@@ -5,7 +5,7 @@ void SoundEditor::_updateMainMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "soundEditorMenuMain")
+	if(screen->getId() == "soundEditorMenuMain")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -58,7 +58,7 @@ void SoundEditor::_updateChoiceMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "soundEditorMenuChoice")
+	if(screen->getId() == "soundEditorMenuChoice")
 	{
 		bool isExisting = _fe3d->sound2d_isExisting(_currentSoundID);
 		bool isPlaying = isExisting && _fe3d->sound2d_isPlaying(_currentSoundID);

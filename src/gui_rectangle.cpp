@@ -72,7 +72,7 @@ const fvec3& GuiRectangle::getInitialColor() const
 	return _initialColor;
 }
 
-const string& GuiRectangle::getID() const
+const string& GuiRectangle::getId() const
 {
 	return _ID;
 }

@@ -85,7 +85,7 @@ TextureBuffer::~TextureBuffer()
 	glDeleteTextures(1, &_ID);
 }
 
-const BufferID TextureBuffer::getID() const
+const BufferID TextureBuffer::getId() const
 {
 	return _ID;
 }

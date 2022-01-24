@@ -39,7 +39,7 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 		else if(topScreen->getButton("quitEngine")->isHovered())
 		{
-			if((!_currentProjectID.empty()) && (leftScreen->getID() != "main") && (leftScreen->getID() != "worldEditorMenuMain"))
+			if((!_currentProjectID.empty()) && (leftScreen->getId() != "main") && (leftScreen->getId() != "worldEditorMenuMain"))
 			{
 				_gui->getOverlay()->createAnswerForm("quit", "Save Changes?", fvec2(0.0f, 0.25f));
 			}
@@ -121,7 +121,7 @@ void TopViewportController::_updateGameScreenManagement()
 		}
 
 		static bool wasInMainMenu = false;
-		const bool isInMainMenu = (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getID() == "main");
+		const bool isInMainMenu = (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main");
 		screen->getButton("start")->setHoverable(isInMainMenu && !_script->isEmpty() && !isScriptRunning());
 		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d->server_isRunning());
 		screen->getButton("restart")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
@@ -233,6 +233,6 @@ void TopViewportController::_updateMiscScreenManagement()
 		ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
 	}
 
-	screen->getButton("uncache")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getID() == "main"));
-	screen->getButton("export")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getID() == "main"));
+	screen->getButton("uncache")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main"));
+	screen->getButton("export")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main"));
 }

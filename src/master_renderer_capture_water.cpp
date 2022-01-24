@@ -22,7 +22,7 @@ void MasterRenderer::_captureWaterReflections()
 					if(!entity->isReflected())
 					{
 						entity->setVisible(false);
-						savedModelEntityIDs.push_back(entity->getID());
+						savedModelEntityIDs.push_back(entity->getId());
 						continue;
 					}
 
@@ -31,7 +31,7 @@ void MasterRenderer::_captureWaterReflections()
 						if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR))
 						{
 							entity->setVisible(false);
-							savedModelEntityIDs.push_back(entity->getID());
+							savedModelEntityIDs.push_back(entity->getId());
 							break;
 						}
 					}
@@ -47,7 +47,7 @@ void MasterRenderer::_captureWaterReflections()
 				if(!entity->isReflected() && entity->isVisible())
 				{
 					entity->setVisible(false);
-					savedQuad3dEntityIDs.push_back(entity->getID());
+					savedQuad3dEntityIDs.push_back(entity->getId());
 				}
 			}
 		}
@@ -132,7 +132,7 @@ void MasterRenderer::_captureWaterReflections()
 		{
 			for(const auto& [key, entity] : _modelEntityManager->getEntities())
 			{
-				if(entity->getID() == savedID)
+				if(entity->getId() == savedID)
 				{
 					entity->setVisible(true);
 				}
@@ -143,7 +143,7 @@ void MasterRenderer::_captureWaterReflections()
 		{
 			for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 			{
-				if(entity->getID() == savedID)
+				if(entity->getId() == savedID)
 				{
 					entity->setVisible(true);
 				}

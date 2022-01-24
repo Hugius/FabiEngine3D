@@ -4,7 +4,7 @@ void ModelEditor::_updateLightingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "modelEditorMenuLighting")
+	if(screen->getId() == "modelEditorMenuLighting")
 	{
 		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
 		const auto isNoPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || _currentPartID.empty());

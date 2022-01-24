@@ -186,7 +186,7 @@ void ScriptInterpreter::unload()
 	_fe3d->spotlight_deleteAll();
 	_fe3d->reflection_deleteAll();
 
-	for(const auto& id : _fe3d->quad2d_getIDs())
+	for(const auto& id : _fe3d->quad2d_getIds())
 	{
 		if(id[0] != '@')
 		{
@@ -194,7 +194,7 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	for(const auto& id : _fe3d->text2d_getIDs())
+	for(const auto& id : _fe3d->text2d_getIds())
 	{
 		if(id[0] != '@')
 		{

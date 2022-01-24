@@ -56,7 +56,7 @@ const bool GuiViewport::isHovered() const
 	return false;
 }
 
-const string& GuiViewport::getID()
+const string& GuiViewport::getId()
 {
 	return _ID;
 }
@@ -95,7 +95,7 @@ void GuiViewport::deleteWindow(const string& id)
 {
 	for(size_t i = 0; i < _windows.size(); i++)
 	{
-		if(_windows[i]->getID() == id)
+		if(_windows[i]->getId() == id)
 		{
 			_windows.erase(_windows.begin() + i);
 			return;
@@ -114,7 +114,7 @@ shared_ptr<GuiWindow> GuiViewport::getWindow(const string& id) const
 {
 	for(const auto& window : _windows)
 	{
-		if(id == window->getID())
+		if(id == window->getId())
 		{
 			return window;
 		}

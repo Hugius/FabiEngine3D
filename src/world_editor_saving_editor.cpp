@@ -24,7 +24,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\worlds\\editor\\" + _currentWorldID + ".fe3d");
 
 	vector<string> levelOfDetailEntityIDs;
-	for(const auto& modelID : _fe3d->model_getIDs())
+	for(const auto& modelID : _fe3d->model_getIds())
 	{
 		if(modelID[0] != '@')
 		{
@@ -80,7 +80,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 			height << endl;
 	}
 
-	for(const auto& modelID : _fe3d->model_getIDs())
+	for(const auto& modelID : _fe3d->model_getIds())
 	{
 		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
 		if((modelID[0] != '@') || isLevelOfDetailEntity)
@@ -138,7 +138,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& quadID : _fe3d->quad3d_getIDs())
+	for(const auto& quadID : _fe3d->quad3d_getIds())
 	{
 		if(quadID[0] != '@')
 		{
@@ -171,7 +171,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& soundID : _fe3d->sound3d_getIDs())
+	for(const auto& soundID : _fe3d->sound3d_getIds())
 	{
 		if(soundID[0] != '@')
 		{
@@ -193,7 +193,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& pointlightID : _fe3d->pointlight_getIDs())
+	for(const auto& pointlightID : _fe3d->pointlight_getIds())
 	{
 		if(pointlightID[0] != '@')
 		{
@@ -220,7 +220,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& spotlightID : _fe3d->spotlight_getIDs())
+	for(const auto& spotlightID : _fe3d->spotlight_getIds())
 	{
 		if(spotlightID[0] != '@')
 		{
@@ -249,7 +249,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& reflectionID : _fe3d->reflection_getIDs())
+	for(const auto& reflectionID : _fe3d->reflection_getIds())
 	{
 		if(reflectionID[0] != '@')
 		{

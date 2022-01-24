@@ -6,7 +6,7 @@ void WorldEditor::_updateText3dMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuText3d")
+	if(screen->getId() == "worldEditorMenuText3d")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -30,7 +30,7 @@ void WorldEditor::_updateText3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteButtons();
 
-			auto IDs = _fe3d->text3d_getIDs();
+			auto IDs = _fe3d->text3d_getIds();
 			sort(IDs.begin(), IDs.end());
 			for(auto& textID : IDs)
 			{
@@ -54,7 +54,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuText3dPlace")
+	if(screen->getId() == "worldEditorMenuText3dPlace")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -103,18 +103,18 @@ void WorldEditor::_updateText3dChoosingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuText3dChoice")
+	if(screen->getId() == "worldEditorMenuText3dChoice")
 	{
 		for(const auto& button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->getButtons())
 		{
-			if(!_fe3d->text3d_isExisting(button->getID()))
+			if(!_fe3d->text3d_isExisting(button->getId()))
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteButton(button->getID());
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteButton(button->getId());
 				break;
 			}
 		}
 
-		for(const auto& textID : _fe3d->text3d_getIDs())
+		for(const auto& textID : _fe3d->text3d_getIds())
 		{
 			if(textID[0] != '@')
 			{

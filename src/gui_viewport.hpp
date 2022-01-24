@@ -13,7 +13,7 @@ public:
 	void createWindow(const string& id, const fvec2& position, const fvec2& size, const fvec3& color);
 	void deleteWindow(const string& id);
 
-	const string& getID();
+	const string& getId();
 	const string& getEntityID();
 
 	const fvec3& getInitialColor() const;

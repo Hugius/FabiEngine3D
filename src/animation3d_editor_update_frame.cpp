@@ -5,7 +5,7 @@ void Animation3dEditor::_updateFrameMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "animation3dEditorMenuFrame")
+	if(screen->getId() == "animation3dEditorMenuFrame")
 	{
 		auto currentAnimation = _getAnimation(_currentAnimationID);
 		auto frame = currentAnimation->getFrames()[_currentFrameIndex];

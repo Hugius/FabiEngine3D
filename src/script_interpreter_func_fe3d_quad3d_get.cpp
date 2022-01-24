@@ -423,7 +423,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string& functionNam
 				return true;
 			}
 
-			for(const auto& id : _fe3d->quad3d_getIDs())
+			for(const auto& id : _fe3d->quad3d_getIds())
 			{
 				if(args[0].getString() == id.substr(0, args[0].getString().size()))
 				{
@@ -439,7 +439,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->quad3d_getIDs();
+			const auto result = _fe3d->quad3d_getIds();
 
 			for(const auto& id : result)
 			{

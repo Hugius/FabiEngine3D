@@ -71,7 +71,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size)
 	glGenTextures(1, &textureID);
 	_textures.push_back(make_shared<TextureBuffer>(textureID));
 
-	glBindTexture(GL_TEXTURE_2D, _textures[0]->getID());
+	glBindTexture(GL_TEXTURE_2D, _textures[0]->getId());
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _size.x, _size.y, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 
@@ -85,7 +85,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size)
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _textures[0]->getID(), 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _textures[0]->getId(), 0);
 
 	unbind();
 

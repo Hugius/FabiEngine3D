@@ -6,7 +6,7 @@ void Quad3dEditor::_updateTexturingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "quad3dEditorMenuTexturing")
+	if(screen->getId() == "quad3dEditorMenuTexturing")
 	{
 		auto hasDiffuseMap = _fe3d->quad3d_hasDiffuseMap(_currentQuadID);
 		auto hasEmissionMap = _fe3d->quad3d_hasEmissionMap(_currentQuadID);

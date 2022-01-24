@@ -400,7 +400,7 @@ void MasterRenderer::_renderGUI()
 		map<unsigned int, shared_ptr<BaseEntity>> orderedEntityMap;
 		for(const auto& [key, entity] : _quad2dEntityManager->getEntities())
 		{
-			if(entity->getID() != _renderBus->getCursorEntityID())
+			if(entity->getId() != _renderBus->getCursorEntityID())
 			{
 				orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
 			}

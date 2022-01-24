@@ -12,12 +12,12 @@ void BloomRenderer::bind()
 	if(_renderBus->getFinalSceneMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getID());
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getId());
 	}
 	if(_renderBus->getBloomMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getBloomMap()->getID());
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getBloomMap()->getId());
 	}
 }
 

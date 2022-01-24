@@ -10,7 +10,7 @@ void CameraCollisionHandler::update()
 			fvec3 cameraPosition = _camera->getPosition();
 			const float terrainX = (cameraPosition.x + (_terrainManager->getSelectedEntity()->getSize() / 2.0f));
 			const float terrainZ = (cameraPosition.z + (_terrainManager->getSelectedEntity()->getSize() / 2.0f));
-			const float terrainY = (_terrainManager->getPixelHeight(_terrainManager->getSelectedEntity()->getID(), terrainX, terrainZ) + _cameraTerrainHeight);
+			const float terrainY = (_terrainManager->getPixelHeight(_terrainManager->getSelectedEntity()->getId(), terrainX, terrainZ) + _cameraTerrainHeight);
 
 			if(cameraPosition.y < terrainY)
 			{

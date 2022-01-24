@@ -70,12 +70,12 @@ void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getID());
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
 		}
 		if(entity->hasEmissionMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap()->getID());
+			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap()->getId());
 		}
 
 		glBindVertexArray(buffer->getVaoID());

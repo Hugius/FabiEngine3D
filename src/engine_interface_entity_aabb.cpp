@@ -163,7 +163,7 @@ const vector<string> EngineInterface::aabb_getChildIDs(const string& parentID, A
 				((entity->getParentEntityType() == AabbParentEntityType::QUAD3D) && (parentEntityType == AabbParentEntityType::QUAD3D)) ||
 				((entity->getParentEntityType() == AabbParentEntityType::TEXT3D) && (parentEntityType == AabbParentEntityType::TEXT3D))))
 			{
-				result.push_back(entity->getID());
+				result.push_back(entity->getId());
 			}
 		}
 	}
@@ -171,13 +171,13 @@ const vector<string> EngineInterface::aabb_getChildIDs(const string& parentID, A
 	return result;
 }
 
-const vector<string> EngineInterface::aabb_getIDs() const
+const vector<string> EngineInterface::aabb_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

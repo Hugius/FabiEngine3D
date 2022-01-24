@@ -4,7 +4,7 @@ void WaterEditor::_updateMiscellaneousMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "waterEditorMenuMiscellaneous")
+	if(screen->getId() == "waterEditorMenuMiscellaneous")
 	{
 		auto size = _fe3d->water_getSize(_currentWaterID);
 		auto speed = _fe3d->water_getSpeed(_currentWaterID);

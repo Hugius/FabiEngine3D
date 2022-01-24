@@ -67,7 +67,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
 			if((distance != -1.0f) && (distance < closestDistance))
 			{
 				closestDistance = distance;
-				_hoveredAabbID = entity->getID();
+				_hoveredAabbID = entity->getId();
 				_hoveredAabbDistance = closestDistance;
 			}
 		}
@@ -170,7 +170,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 		{
 			if(entity->isRaycastResponsive() && entity->isVisible())
 			{
-				if(entity->getID().substr(0, id.size()) == id)
+				if(entity->getId().substr(0, id.size()) == id)
 				{
 					float distance;
 					if(entity->isCentered())
@@ -203,7 +203,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 					if((distance != -1.0f) && (distance < closestDistance))
 					{
 						closestDistance = distance;
-						closestBoxID = entity->getID();
+						closestBoxID = entity->getId();
 					}
 				}
 			}

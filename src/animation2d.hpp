@@ -20,7 +20,7 @@ public:
 	void setPassedFrames(unsigned int value);
 	void setPreviewTexturePath(const string& value);
 
-	const string& getID() const;
+	const string& getId() const;
 	const string& getPreviewTexturePath() const;
 
 	const int getPlayCount() const;

@@ -6,7 +6,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSettingsGraphicsShadows")
+	if(screen->getId() == "worldEditorMenuSettingsGraphicsShadows")
 	{
 		auto isEnabled = _fe3d->gfx_isShadowsEnabled();
 		auto isFollowingCamera = _fe3d->gfx_isShadowFollowingCamera();
@@ -129,7 +129,7 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSettingsGraphicsReflections")
+	if(screen->getId() == "worldEditorMenuSettingsGraphicsReflections")
 	{
 		auto planarHeight = _fe3d->gfx_getPlanarReflectionHeight();
 		auto cubeQuality = _fe3d->gfx_getCubeReflectionQuality();
@@ -172,7 +172,7 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSettingsGraphicsRefractions")
+	if(screen->getId() == "worldEditorMenuSettingsGraphicsRefractions")
 	{
 		auto planarQuality = _fe3d->gfx_getPlanarRefractionQuality();
 
@@ -197,7 +197,7 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSettingsGraphicsDof")
+	if(screen->getId() == "worldEditorMenuSettingsGraphicsDof")
 	{
 		auto isEnabled = _fe3d->gfx_isDofEnabled();
 		auto isDynamic = _fe3d->gfx_isDofDynamic();
@@ -267,7 +267,7 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSettingsGraphicsFog")
+	if(screen->getId() == "worldEditorMenuSettingsGraphicsFog")
 	{
 		auto isEnabled = _fe3d->gfx_isFogEnabled();
 		auto minDistance = _fe3d->gfx_getFogMinDistance();
@@ -353,7 +353,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSettingsGraphicsLensFlare")
+	if(screen->getId() == "worldEditorMenuSettingsGraphicsLensFlare")
 	{
 		auto isEnabled = _fe3d->gfx_isLensFlareEnabled();
 		auto flareMapPath = _fe3d->gfx_getLensFlareMapPath();
@@ -441,7 +441,7 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSettingsGraphicsSkyExposure")
+	if(screen->getId() == "worldEditorMenuSettingsGraphicsSkyExposure")
 	{
 		auto isEnabled = _fe3d->gfx_isSkyExposureEnabled();
 		auto intensity = _fe3d->gfx_getSkyExposureIntensity();
@@ -495,7 +495,7 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSettingsGraphicsBloom")
+	if(screen->getId() == "worldEditorMenuSettingsGraphicsBloom")
 	{
 		auto isEnabled = _fe3d->gfx_isBloomEnabled();
 		auto type = _fe3d->gfx_getBloomType();

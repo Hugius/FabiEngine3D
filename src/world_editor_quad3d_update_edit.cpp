@@ -15,7 +15,7 @@ void WorldEditor::_updateQuad3dEditing()
 
 	if(_currentTemplateModelID.empty() && _currentTemplateQuadID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
-		for(const auto& id : _fe3d->quad3d_getIDs())
+		for(const auto& id : _fe3d->quad3d_getIds())
 		{
 			if(id[0] != '@')
 			{

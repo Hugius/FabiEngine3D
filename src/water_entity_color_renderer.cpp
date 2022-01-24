@@ -31,17 +31,17 @@ void WaterEntityColorRenderer::bind()
 	if(_renderBus->getWaterReflectionMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterReflectionMap()->getID());
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterReflectionMap()->getId());
 	}
 	if(_renderBus->getWaterRefractionMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterRefractionMap()->getID());
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterRefractionMap()->getId());
 	}
 	if(_renderBus->getDepthMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getDepthMap()->getID());
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getDepthMap()->getId());
 	}
 
 	glEnable(GL_DEPTH_TEST);
@@ -161,17 +161,17 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		if(entity->hasDudvMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
-			glBindTexture(GL_TEXTURE_2D, entity->getDudvMap()->getID());
+			glBindTexture(GL_TEXTURE_2D, entity->getDudvMap()->getId());
 		}
 		if(entity->hasNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE4);
-			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap()->getID());
+			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap()->getId());
 		}
 		if(entity->hasDisplacementMap())
 		{
 			glActiveTexture(GL_TEXTURE5);
-			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap()->getID());
+			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap()->getId());
 		}
 
 		if(entity->hasDisplacementMap())

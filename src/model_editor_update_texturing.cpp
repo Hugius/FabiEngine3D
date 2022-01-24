@@ -8,7 +8,7 @@ void ModelEditor::_updateTexturingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "modelEditorMenuTexturing")
+	if(screen->getId() == "modelEditorMenuTexturing")
 	{
 		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || !_currentPartID.empty());
 

@@ -23,7 +23,7 @@ const bool Animation2dEditor::saveToFile() const
 
 	for(const auto& animation : _animations)
 	{
-		auto animationID = animation->getID();
+		auto animationID = animation->getId();
 		auto previewTexturePath = animation->getPreviewTexturePath();
 		auto rowCount = animation->getRowCount();
 		auto columnCount = animation->getColumnCount();

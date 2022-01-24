@@ -12,7 +12,7 @@ public:
 
 	void setVolume(float value);
 
-	const string& getID() const;
+	const string& getId() const;
 	const string& getAudioPath() const;
 
 	const float getVolume() const;

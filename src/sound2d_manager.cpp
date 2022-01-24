@@ -79,7 +79,7 @@ const int Sound2dManager::_findSoundIndex(const string& id) const
 {
 	for(size_t i = 0; i < _sounds.size(); i++)
 	{
-		if(_sounds[i].getID() == id)
+		if(_sounds[i].getId() == id)
 		{
 			return static_cast<int>(i);
 		}

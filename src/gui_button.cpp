@@ -136,7 +136,7 @@ const bool GuiButton::isHovered() const
 	return _isHovered;
 }
 
-const string& GuiButton::getID() const
+const string& GuiButton::getId() const
 {
 	return _ID;
 }

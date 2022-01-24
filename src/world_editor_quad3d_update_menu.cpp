@@ -6,7 +6,7 @@ void WorldEditor::_updateQuad3dMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuQuad3d")
+	if(screen->getId() == "worldEditorMenuQuad3d")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -30,7 +30,7 @@ void WorldEditor::_updateQuad3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButtons();
 
-			auto IDs = _fe3d->quad3d_getIDs();
+			auto IDs = _fe3d->quad3d_getIds();
 			sort(IDs.begin(), IDs.end());
 			for(auto& quadID : IDs)
 			{
@@ -54,7 +54,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuQuad3dPlace")
+	if(screen->getId() == "worldEditorMenuQuad3dPlace")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -103,18 +103,18 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuQuad3dChoice")
+	if(screen->getId() == "worldEditorMenuQuad3dChoice")
 	{
 		for(const auto& button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->getButtons())
 		{
-			if(!_fe3d->quad3d_isExisting(button->getID()))
+			if(!_fe3d->quad3d_isExisting(button->getId()))
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButton(button->getID());
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButton(button->getId());
 				break;
 			}
 		}
 
-		for(const auto& quadID : _fe3d->quad3d_getIDs())
+		for(const auto& quadID : _fe3d->quad3d_getIds())
 		{
 			if(quadID[0] != '@')
 			{

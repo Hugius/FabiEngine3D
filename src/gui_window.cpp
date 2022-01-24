@@ -51,7 +51,7 @@ const bool GuiWindow::isHovered() const
 	return false;
 }
 
-const string& GuiWindow::getID() const
+const string& GuiWindow::getId() const
 {
 	return _ID;
 }
@@ -85,7 +85,7 @@ void GuiWindow::createScreen(const string& id)
 {
 	for(const auto& screen : _screens)
 	{
-		if(screen->getID() == id)
+		if(screen->getId() == id)
 		{
 			Logger::throwError("GuiWindow::createScreen");
 		}
@@ -102,7 +102,7 @@ void GuiWindow::deleteScreen(const string& id)
 	bool isFound = false;
 	for(size_t i = 0; i < _screens.size(); i++)
 	{
-		if(_screens[i]->getID() == id)
+		if(_screens[i]->getId() == id)
 		{
 			_screens.erase(_screens.begin() + i);
 			isFound = true;
@@ -145,7 +145,7 @@ shared_ptr<GuiScreen> GuiWindow::getScreen(const string& id) const
 {
 	for(const auto& screen : _screens)
 	{
-		if(id == screen->getID())
+		if(id == screen->getId())
 		{
 			return screen;
 		}

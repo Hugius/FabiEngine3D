@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 				return true;
 			}
 
-			for(const auto& id : _fe3d->pointlight_getIDs())
+			for(const auto& id : _fe3d->pointlight_getIds())
 			{
 				if(args[0].getString() == id.substr(0, args[0].getString().size()))
 				{
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->pointlight_getIDs();
+			const auto result = _fe3d->pointlight_getIds();
 
 			for(const auto& id : result)
 			{

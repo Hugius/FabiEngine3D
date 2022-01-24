@@ -4,7 +4,7 @@ const bool ScriptInterpreter::_validateListIndex(const ScriptVariable& list, uns
 {
 	if(list.getType() == ScriptVariableType::SINGLE)
 	{
-		_throwScriptError("variable \"" + list.getID() + "\" not of type LIST!");
+		_throwScriptError("variable \"" + list.getId() + "\" not of type LIST!");
 		return false;
 	}
 

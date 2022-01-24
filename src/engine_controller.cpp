@@ -223,7 +223,7 @@ void EngineController::update()
 	else
 	{
 		static string lastScreen = "";
-		string activeScreen = _guiManager->getLeftViewport()->getWindow("main")->getActiveScreen()->getID();
+		string activeScreen = _guiManager->getLeftViewport()->getWindow("main")->getActiveScreen()->getId();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
 			_fe3d->camera_reset();

@@ -10,7 +10,7 @@ void EngineInterface::sky_deleteAll()
 {
 	for(const auto& [key, entity] : _core->getSkyEntityManager()->getEntities())
 	{
-		sky_delete(entity->getID());
+		sky_delete(entity->getId());
 	}
 }
 
@@ -153,7 +153,7 @@ const string EngineInterface::sky_getSelectedID() const
 		return "";
 	}
 
-	return _core->getSkyEntityManager()->getSelectedEntity()->getID();
+	return _core->getSkyEntityManager()->getSelectedEntity()->getId();
 }
 
 const fvec3& EngineInterface::sky_getWireframeColor(const string& id) const
@@ -161,13 +161,13 @@ const fvec3& EngineInterface::sky_getWireframeColor(const string& id) const
 	return _core->getSkyEntityManager()->getEntity(id)->getWireframeColor();
 }
 
-const vector<string> EngineInterface::sky_getIDs() const
+const vector<string> EngineInterface::sky_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getSkyEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

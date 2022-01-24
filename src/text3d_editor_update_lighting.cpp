@@ -5,7 +5,7 @@ void Text3dEditor::_updateLightingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "text3dEditorMenuLighting")
+	if(screen->getId() == "text3dEditorMenuLighting")
 	{
 		auto lightness = _fe3d->text3d_getLightness(_currentTextID);
 		auto isBright = _fe3d->text3d_isBright(_currentTextID);

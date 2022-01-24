@@ -9,7 +9,7 @@ void TerrainEditor::_updateLightingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "terrainEditorMenuLighting")
+	if(screen->getId() == "terrainEditorMenuLighting")
 	{
 		bool isSpecular = _fe3d->terrain_isSpecular(_currentTerrainID);
 		float specularShininess = _fe3d->terrain_getSpecularShininess(_currentTerrainID);

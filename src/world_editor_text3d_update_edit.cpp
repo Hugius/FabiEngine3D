@@ -15,7 +15,7 @@ void WorldEditor::_updateText3dEditing()
 
 	if(_currentTemplateModelID.empty() && _currentTemplateTextID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
-		for(const auto& id : _fe3d->text3d_getIDs())
+		for(const auto& id : _fe3d->text3d_getIds())
 		{
 			if(id[0] != '@')
 			{

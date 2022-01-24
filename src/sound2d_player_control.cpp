@@ -19,7 +19,7 @@ void Sound2dPlayer::startSound(Sound2d& sound, int playCount, unsigned int fadeM
 		Logger::throwError("Sound2dPlayer::startSound::3");
 		return;
 	}
-	_channels[channel] = sound.getID();
+	_channels[channel] = sound.getId();
 
 	if(fadeMS == 0)
 	{
@@ -39,7 +39,7 @@ void Sound2dPlayer::pauseSounds(vector<Sound2d>& sounds)
 	{
 		for(size_t i = 0; i < _channels.size(); i++)
 		{
-			if(_channels[i] == sound.getID())
+			if(_channels[i] == sound.getId())
 			{
 				Mix_Pause(static_cast<int>(i));
 			}
@@ -71,7 +71,7 @@ void Sound2dPlayer::resumeSounds(vector<Sound2d>& sounds)
 	{
 		for(size_t i = 0; i < _channels.size(); i++)
 		{
-			if(_channels[i] == sound.getID())
+			if(_channels[i] == sound.getId())
 			{
 				Mix_Resume(static_cast<int>(i));
 			}
@@ -100,7 +100,7 @@ void Sound2dPlayer::stopSounds(vector<Sound2d>& sounds)
 	{
 		for(size_t i = 0; i < _channels.size(); i++)
 		{
-			if(_channels[i] == sound.getID())
+			if(_channels[i] == sound.getId())
 			{
 				Mix_HaltChannel(static_cast<int>(i));
 			}
@@ -145,7 +145,7 @@ const bool Sound2dPlayer::isSoundStarted(Sound2d& sound) const
 {
 	for(const auto& soundID : _channels)
 	{
-		if(soundID == sound.getID())
+		if(soundID == sound.getId())
 		{
 			return true;
 		}

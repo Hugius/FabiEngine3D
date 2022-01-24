@@ -62,7 +62,7 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 		return;
 	}
 
-	if((mesh->getParts().size() == 1) && !mesh->getParts()[0]->getID().empty())
+	if((mesh->getParts().size() == 1) && !mesh->getParts()[0]->getId().empty())
 	{
 		Logger::throwWarning("Multiparted model with id \"" + id + "\" only has 1 part!");
 		deleteEntity(id);
@@ -91,18 +91,18 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 			bufferData.push_back(part->getTangents()[i].z);
 		}
 
-		entity->createPart(part->getID());
+		entity->createPart(part->getId());
 
-		auto vertexBuffer = _vertexBufferCache->getBuffer(meshPath, part->getID());
+		auto vertexBuffer = _vertexBufferCache->getBuffer(meshPath, part->getId());
 
 		if(vertexBuffer == nullptr)
 		{
 			vertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<unsigned int>(bufferData.size()));
 
-			_vertexBufferCache->storeBuffer(meshPath, part->getID(), vertexBuffer);
+			_vertexBufferCache->storeBuffer(meshPath, part->getId(), vertexBuffer);
 		}
 
-		entity->setMesh(part->getID(), vertexBuffer);
+		entity->setMesh(part->getId(), vertexBuffer);
 	}
 
 	entity->setMeshPath(meshPath);
@@ -138,7 +138,7 @@ void ModelEntityManager::update()
 		{
 			if(!entity->getLevelOfDetailEntityID().empty())
 			{
-				auto levelOfDetailEntityPair = getEntities().find(entity->getID());
+				auto levelOfDetailEntityPair = getEntities().find(entity->getId());
 				if(levelOfDetailEntityPair == getEntities().end())
 				{
 					Logger::throwError("ModelEntityManager::update");
@@ -182,7 +182,7 @@ void ModelEntityManager::update()
 
 				if(!reflectionDistanceMap.empty())
 				{
-					auto& closestReflectionEntityID = reflectionDistanceMap.begin()->second->getID();
+					auto& closestReflectionEntityID = reflectionDistanceMap.begin()->second->getId();
 
 					if(entity->getCurrentReflectionEntityID() != closestReflectionEntityID)
 					{

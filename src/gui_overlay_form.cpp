@@ -216,7 +216,7 @@ const string GuiOverlay::checkChoiceForm(const string& id)
 		{
 			if(button->isHovered())
 			{
-				return button->getID();
+				return button->getId();
 			}
 		}
 	}

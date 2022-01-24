@@ -159,13 +159,13 @@ const float EngineInterface::quad2d_getOpacity(const string& id) const
 	return _core->getQuad2dEntityManager()->getEntity(id)->getOpacity();
 }
 
-const vector<string> EngineInterface::quad2d_getIDs() const
+const vector<string> EngineInterface::quad2d_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getQuad2dEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

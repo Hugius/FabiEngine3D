@@ -73,7 +73,7 @@ void EngineInterface::sound2d_resume(const string& id)
 
 	if(!_core->getSound2dPlayer()->isSoundPaused(sound))
 	{
-		Logger::throwWarning("Tried to resume sound2D with id \"", sound.getID(), "\": sound is not paused!");
+		Logger::throwWarning("Tried to resume sound2D with id \"", sound.getId(), "\": sound is not paused!");
 		return;
 	}
 
@@ -108,13 +108,13 @@ void EngineInterface::sound2d_setVolume(const string& id, float value)
 	_core->getSound2dManager()->getSound(id).setVolume(value);
 }
 
-const vector<string> EngineInterface::sound2d_getIDs() const
+const vector<string> EngineInterface::sound2d_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& chunk : _core->getSound2dManager()->getSounds())
 	{
-		result.push_back(chunk.getID());
+		result.push_back(chunk.getId());
 	}
 
 	return result;

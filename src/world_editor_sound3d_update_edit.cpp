@@ -17,7 +17,7 @@ void WorldEditor::_updateSoundEditing()
 
 		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
 
-		for(const auto& id : _fe3d->model_getIDs())
+		for(const auto& id : _fe3d->model_getIds())
 		{
 			if(id.substr(0, string("@@speaker").size()) == "@@speaker")
 			{

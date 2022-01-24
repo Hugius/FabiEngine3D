@@ -21,7 +21,7 @@ void MasterRenderer::_captureCubeReflections()
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
-			savedModelEntityIDs.push_back(entity->getID());
+			savedModelEntityIDs.push_back(entity->getId());
 		}
 	}
 
@@ -31,7 +31,7 @@ void MasterRenderer::_captureCubeReflections()
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
-			savedQuad3dEntityIDs.push_back(entity->getID());
+			savedQuad3dEntityIDs.push_back(entity->getId());
 		}
 	}
 
@@ -125,7 +125,7 @@ void MasterRenderer::_captureCubeReflections()
 
 				const auto dataSize = (reflectionQuality * reflectionQuality * 3);
 				auto data = new unsigned char[dataSize];
-				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptor->getTexture(0)->getID());
+				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptor->getTexture(0)->getId());
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
@@ -144,7 +144,7 @@ void MasterRenderer::_captureCubeReflections()
 	{
 		for(const auto& savedID : savedModelEntityIDs)
 		{
-			if(entity->getID() == savedID)
+			if(entity->getId() == savedID)
 			{
 				entity->setVisible(true);
 			}
@@ -155,7 +155,7 @@ void MasterRenderer::_captureCubeReflections()
 	{
 		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 		{
-			if(entity->getID() == savedID)
+			if(entity->getId() == savedID)
 			{
 				entity->setVisible(true);
 			}

@@ -56,7 +56,7 @@ const string EngineInterface::collision_checkCameraWithAny() const
 	{
 		if(entity->hasCollided())
 		{
-			return entity->getID();
+			return entity->getId();
 		}
 	}
 
@@ -91,7 +91,7 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 
 	for(const auto& [key, other] : _core->getAabbEntityManager()->getEntities())
 	{
-		if(other->getID().substr(0, otherID.size()) != otherID)
+		if(other->getId().substr(0, otherID.size()) != otherID)
 		{
 			continue;
 		}
@@ -130,7 +130,7 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 			(selfPosition.z - selfSize.z <= otherPosition.z - otherSize.z && selfPosition.z + selfSize.z >= otherPosition.z + otherSize.z))
 			)
 		{
-			return other->getID();
+			return other->getId();
 		}
 	}
 
@@ -143,9 +143,9 @@ const string EngineInterface::collision_checkCameraWithEntities(const string& id
 	{
 		if(entity->hasCollided())
 		{
-			if(entity->getID().substr(0, id.size()) == id)
+			if(entity->getId().substr(0, id.size()) == id)
 			{
-				return entity->getID();
+				return entity->getId();
 			}
 		}
 	}
@@ -190,7 +190,7 @@ const bool EngineInterface::collision_checkCameraWithEntitiesDirection(const str
 		{
 			if(direction == entity->getCollisionDirection())
 			{
-				if(entity->getID().substr(0, id.size()) == id)
+				if(entity->getId().substr(0, id.size()) == id)
 				{
 					return true;
 				}

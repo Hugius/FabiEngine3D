@@ -88,7 +88,7 @@ const vector<Animation3dFrame>& Animation3d::getFrames() const
 	return _frames;
 }
 
-const string& Animation3d::getID() const
+const string& Animation3d::getId() const
 {
 	return _ID;
 }

@@ -25,7 +25,7 @@ public:
 	void loadAnisotropicFiltering(unsigned int quality);
 
 	const bool hasAnisotropicFiltering() const;
-	const BufferID getID() const;
+	const BufferID getId() const;
 
 private:
 	BufferID _ID;

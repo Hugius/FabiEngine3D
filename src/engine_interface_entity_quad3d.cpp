@@ -10,7 +10,7 @@ void EngineInterface::quad3d_deleteAll()
 {
 	for(const auto& [key, entity] : _core->getQuad3dEntityManager()->getEntities())
 	{
-		quad3d_delete(entity->getID());
+		quad3d_delete(entity->getId());
 	}
 }
 
@@ -289,13 +289,13 @@ const fvec3& EngineInterface::quad3d_getWireframeColor(const string& id) const
 	return _core->getQuad3dEntityManager()->getEntity(id)->getWireframeColor();
 }
 
-const vector<string> EngineInterface::quad3d_getIDs() const
+const vector<string> EngineInterface::quad3d_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getQuad3dEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

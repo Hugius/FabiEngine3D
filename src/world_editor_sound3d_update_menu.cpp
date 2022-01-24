@@ -6,7 +6,7 @@ void WorldEditor::_updateSoundMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSound")
+	if(screen->getId() == "worldEditorMenuSound")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -35,7 +35,7 @@ void WorldEditor::_updateSoundMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSoundChoice");
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->deleteButtons();
 
-			auto IDs = _fe3d->sound3d_getIDs();
+			auto IDs = _fe3d->sound3d_getIds();
 			sort(IDs.begin(), IDs.end());
 			for(auto& soundID : IDs)
 			{
@@ -59,7 +59,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSoundPlace")
+	if(screen->getId() == "worldEditorMenuSoundPlace")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -107,18 +107,18 @@ void WorldEditor::_updateSoundChoosingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSoundChoice")
+	if(screen->getId() == "worldEditorMenuSoundChoice")
 	{
 		for(const auto& button : screen->getScrollingList("soundList")->getButtons())
 		{
-			if(!_fe3d->sound3d_isExisting(button->getID()))
+			if(!_fe3d->sound3d_isExisting(button->getId()))
 			{
-				screen->getScrollingList("soundList")->deleteButton(button->getID());
+				screen->getScrollingList("soundList")->deleteButton(button->getId());
 				break;
 			}
 		}
 
-		for(const auto& soundID : _fe3d->sound3d_getIDs())
+		for(const auto& soundID : _fe3d->sound3d_getIds())
 		{
 			if(soundID[0] != '@')
 			{

@@ -16,7 +16,7 @@ void BaseEntity::setVisible(bool value)
 	_isVisible = value;
 }
 
-const string& BaseEntity::getID() const
+const string& BaseEntity::getId() const
 {
 	return _ID;
 }

@@ -4,7 +4,7 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSettingsLightingAmbient")
+	if(screen->getId() == "worldEditorMenuSettingsLightingAmbient")
 	{
 		bool isEnabled = _fe3d->gfx_isAmbientLightingEnabled();
 		fvec3 color = _fe3d->gfx_getAmbientLightingColor();
@@ -70,7 +70,7 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "worldEditorMenuSettingsLightingDirectional")
+	if(screen->getId() == "worldEditorMenuSettingsLightingDirectional")
 	{
 		auto isEnabled = _fe3d->gfx_isDirectionalLightingEnabled();
 		auto color = _fe3d->gfx_getDirectionalLightingColor();

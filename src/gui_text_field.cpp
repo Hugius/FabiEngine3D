@@ -68,7 +68,7 @@ const fvec3& GuiTextField::getInitialColor() const
 	return _initialColor;
 }
 
-const string& GuiTextField::getID() const
+const string& GuiTextField::getId() const
 {
 	return _ID;
 }

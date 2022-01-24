@@ -57,7 +57,7 @@ void ScriptFile::changeID(const string& newID)
 	_ID = newID;
 }
 
-const string& ScriptFile::getID() const
+const string& ScriptFile::getId() const
 {
 	return _ID;
 }

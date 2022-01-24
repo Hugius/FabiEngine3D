@@ -17,7 +17,7 @@ public:
 	void setVisible(bool isVisible);
 	void setHoverable(bool isHoverable);
 
-	const string& getID() const;
+	const string& getId() const;
 	const string& getParentID() const;
 
 	const bool isHoverable() const;

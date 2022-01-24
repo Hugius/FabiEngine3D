@@ -24,7 +24,7 @@ const bool Animation3dEditor::saveToFile() const
 
 	for(const auto& animation : _animations)
 	{
-		auto animationID = animation->getID();
+		auto animationID = animation->getId();
 		auto previewModelID = animation->getPreviewModelID();
 
 		if(!previewModelID.empty())

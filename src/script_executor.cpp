@@ -56,7 +56,7 @@ void ScriptExecutor::pause()
 			_fe3d->misc_disableVsync();
 		}
 
-		for(const auto& soundID : _fe3d->sound2d_getIDs())
+		for(const auto& soundID : _fe3d->sound2d_getIds())
 		{
 			if(_fe3d->sound2d_isPaused(soundID))
 			{
@@ -64,7 +64,7 @@ void ScriptExecutor::pause()
 			}
 		}
 
-		for(const auto& soundID : _fe3d->sound3d_getIDs())
+		for(const auto& soundID : _fe3d->sound3d_getIds())
 		{
 			if(_fe3d->sound3d_isPaused(soundID))
 			{

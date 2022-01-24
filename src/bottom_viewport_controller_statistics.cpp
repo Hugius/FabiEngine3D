@@ -77,7 +77,7 @@ void BottomViewportController::_updateStatistics()
 	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d->model_getIDs())
+		for(const auto& entityID : _fe3d->model_getIds())
 		{
 			if(_fe3d->model_isVisible(entityID))
 			{
@@ -93,7 +93,7 @@ void BottomViewportController::_updateStatistics()
 	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d->quad3d_getIDs())
+		for(const auto& entityID : _fe3d->quad3d_getIds())
 		{
 			if(_fe3d->quad3d_isVisible(entityID))
 			{
@@ -109,7 +109,7 @@ void BottomViewportController::_updateStatistics()
 	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d->aabb_getIDs())
+		for(const auto& entityID : _fe3d->aabb_getIds())
 		{
 			if(_fe3d->aabb_isVisible(entityID))
 			{
@@ -125,14 +125,14 @@ void BottomViewportController::_updateStatistics()
 	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d->pointlight_getIDs())
+		for(const auto& entityID : _fe3d->pointlight_getIds())
 		{
 			if(_fe3d->pointlight_isVisible(entityID))
 			{
 				entityCount++;
 			}
 		}
-		for(const auto& entityID : _fe3d->spotlight_getIDs())
+		for(const auto& entityID : _fe3d->spotlight_getIds())
 		{
 			if(_fe3d->spotlight_isVisible(entityID))
 			{
@@ -148,7 +148,7 @@ void BottomViewportController::_updateStatistics()
 	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d->reflection_getIDs())
+		for(const auto& entityID : _fe3d->reflection_getIds())
 		{
 			if(_fe3d->reflection_isVisible(entityID))
 			{
@@ -164,14 +164,14 @@ void BottomViewportController::_updateStatistics()
 	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d->quad2d_getIDs())
+		for(const auto& entityID : _fe3d->quad2d_getIds())
 		{
 			if(_fe3d->quad2d_isVisible(entityID))
 			{
 				entityCount++;
 			}
 		}
-		for(const auto& entityID : _fe3d->text2d_getIDs())
+		for(const auto& entityID : _fe3d->text2d_getIds())
 		{
 			if(_fe3d->text2d_isVisible(entityID))
 			{

@@ -5,7 +5,7 @@ void WaterEditor::_updateLightingMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "waterEditorMenuLighting")
+	if(screen->getId() == "waterEditorMenuLighting")
 	{
 		auto color = _fe3d->water_getColor(_currentWaterID);
 		bool isReflective = _fe3d->water_isReflective(_currentWaterID);

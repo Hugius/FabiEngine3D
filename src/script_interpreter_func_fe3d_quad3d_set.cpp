@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& id : _fe3d->quad3d_getIDs())
+			for(const auto& id : _fe3d->quad3d_getIds())
 			{
 				if(id[0] != '@')
 				{

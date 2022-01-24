@@ -20,7 +20,7 @@ void Animation3dEditor::_deleteAnimation(const string& id)
 {
 	for(size_t i = 0; i < _animations.size(); i++)
 	{
-		if(_animations[i]->getID() == id)
+		if(_animations[i]->getId() == id)
 		{
 			_animations.erase(_animations.begin() + i);
 			return;
@@ -57,7 +57,7 @@ shared_ptr<Animation3d> Animation3dEditor::_getAnimation(const string& id) const
 {
 	for(const auto& animation : _animations)
 	{
-		if(animation->getID() == id)
+		if(animation->getId() == id)
 		{
 			return animation;
 		}
@@ -72,7 +72,7 @@ const vector<string> Animation3dEditor::getAnimationIDs() const
 
 	for(const auto& animation : _animations)
 	{
-		result.push_back(animation->getID());
+		result.push_back(animation->getId());
 	}
 
 	sort(result.begin(), result.end());
@@ -162,7 +162,7 @@ const bool Animation3dEditor::isAnimationExisting(const string& id) const
 {
 	for(const auto& animation : _animations)
 	{
-		if(animation->getID() == id)
+		if(animation->getId() == id)
 		{
 			return true;
 		}

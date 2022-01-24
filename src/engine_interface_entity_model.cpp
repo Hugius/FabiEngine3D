@@ -10,7 +10,7 @@ void EngineInterface::model_deleteAll()
 {
 	for(const auto& [key, entity] : _core->getModelEntityManager()->getEntities())
 	{
-		model_delete(entity->getID());
+		model_delete(entity->getId());
 	}
 }
 
@@ -632,13 +632,13 @@ const vector<string> EngineInterface::model_getPartIDs(const string& id) const
 	return _core->getModelEntityManager()->getEntity(id)->getPartIDs();
 }
 
-const vector<string> EngineInterface::model_getIDs() const
+const vector<string> EngineInterface::model_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getModelEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;
@@ -650,11 +650,11 @@ const vector<string> EngineInterface::model_getGroupIDs(const string& id) const
 
 	for(const auto& [key, entity] : _core->getModelEntityManager()->getEntities())
 	{
-		if(entity->getID().size() >= id.size())
+		if(entity->getId().size() >= id.size())
 		{
-			if(entity->getID().substr(0, id.size()) == id)
+			if(entity->getId().substr(0, id.size()) == id)
 			{
-				result.push_back(entity->getID());
+				result.push_back(entity->getId());
 			}
 		}
 	}

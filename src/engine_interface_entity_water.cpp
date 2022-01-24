@@ -10,7 +10,7 @@ void EngineInterface::water_deleteAll()
 {
 	for(const auto& [key, entity] : _core->getWaterEntityManager()->getEntities())
 	{
-		water_delete(entity->getID());
+		water_delete(entity->getId());
 	}
 
 	_core->getWaterEntityManager()->selectEntity("");
@@ -234,7 +234,7 @@ const string EngineInterface::water_getSelectedID() const
 		return "";
 	}
 
-	return _core->getWaterEntityManager()->getSelectedEntity()->getID();
+	return _core->getWaterEntityManager()->getSelectedEntity()->getId();
 }
 
 const fvec3& EngineInterface::water_getWireframeColor(const string& id) const
@@ -242,13 +242,13 @@ const fvec3& EngineInterface::water_getWireframeColor(const string& id) const
 	return _core->getWaterEntityManager()->getEntity(id)->getWireframeColor();
 }
 
-const vector<string> EngineInterface::water_getIDs() const
+const vector<string> EngineInterface::water_getIds() const
 {
 	vector<string> result;
 
 	for(const auto& [key, entity] : _core->getWaterEntityManager()->getEntities())
 	{
-		result.push_back(entity->getID());
+		result.push_back(entity->getId());
 	}
 
 	return result;

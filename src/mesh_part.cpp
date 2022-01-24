@@ -27,7 +27,7 @@ void MeshPart::addUv(const fvec2& value)
 	_uvs.push_back(value);
 }
 
-const string& MeshPart::getID() const
+const string& MeshPart::getId() const
 {
 	return _ID;
 }

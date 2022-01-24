@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& id : _fe3d->reflection_getIDs())
+			for(const auto& id : _fe3d->reflection_getIds())
 			{
 				if(id[0] != '@')
 				{

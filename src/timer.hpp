@@ -29,7 +29,7 @@ public:
 	const bool isDeltaPartStarted(const string& id) const;
 
 private:
-	string _currentID = "";
+	string _currentId = "";
 
 	map<string, float> _deltaParts;
 

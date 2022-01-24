@@ -37,11 +37,11 @@ void WorldEditor::_updateModelMenu()
 				if(modelId[0] != '@')
 				{
 					reverse(modelId.begin(), modelId.end());
-					string rawID = modelId.substr(modelId.find('_') + 1);
-					reverse(rawID.begin(), rawID.end());
+					string rawId = modelId.substr(modelId.find('_') + 1);
+					reverse(rawId.begin(), rawId.end());
 					reverse(modelId.begin(), modelId.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createButton(modelId, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createButton(modelId, rawId);
 				}
 			}
 		}

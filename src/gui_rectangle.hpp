@@ -5,8 +5,8 @@
 class GuiRectangle
 {
 public:
-	GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered);
-	GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered);
+	GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered);
+	GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered);
 	~GuiRectangle();
 
 	virtual void setVisible(bool isVisible);
@@ -16,7 +16,7 @@ public:
 
 	const string& getId() const;
 	const string& getEntityId() const;
-	const string& getParentID() const;
+	const string& getParentId() const;
 
 	const fvec3& getInitialColor() const;
 
@@ -26,7 +26,7 @@ public:
 protected:
 	const string _id;
 	const string _entityId;
-	const string _parentID;
+	const string _parentId;
 
 	fvec3 _initialColor;
 

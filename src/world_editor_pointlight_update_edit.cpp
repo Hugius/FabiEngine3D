@@ -5,11 +5,11 @@ void WorldEditor::_updatePointlightEditing()
 {
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		if(!_dontResetSelectedLamp)
 		{
-			_selectedLampID = "";
+			_selectedLampId = "";
 		}
 		else
 		{
@@ -28,15 +28,15 @@ void WorldEditor::_updatePointlightEditing()
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						if(_selectedLampID != _activeLampID)
+						if(_selectedLampId != _activeLampId)
 						{
-							_activatePointlight(_selectedLampID.substr(string("@@lamp_").size()));
+							_activatePointlight(_selectedLampId.substr(string("@@lamp_").size()));
 						}
 					}
 				}
 				else
 				{
-					if((id != _selectedLampID) && (id != _activeLampID))
+					if((id != _selectedLampId) && (id != _activeLampId))
 					{
 						_unselectPointlight(id);
 					}
@@ -48,29 +48,29 @@ void WorldEditor::_updatePointlightEditing()
 		{
 			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
-				if(!_activeLampID.empty())
+				if(!_activeLampId.empty())
 				{
-					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedLampID.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedLampId.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
-						_activeLampID = "";
+						_activeLampId = "";
 						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
 		}
 
-		if(_selectedLampID.empty())
+		if(_selectedLampId.empty())
 		{
-			_updateLampHighlighting(_activeLampID, _activeLampHighlightDirection);
+			_updateLampHighlighting(_activeLampId, _activeLampHighlightDirection);
 		}
 		else
 		{
-			_updateLampHighlighting(_selectedLampID, _selectedLampHighlightDirection);
+			_updateLampHighlighting(_selectedLampId, _selectedLampHighlightDirection);
 		}
 
-		if(!_activeLampID.empty())
+		if(!_activeLampId.empty())
 		{
-			const string activePointlightID = _activeLampID.substr(string("@@lamp_").size());
+			const string activePointlightId = _activeLampId.substr(string("@@lamp_").size());
 			auto screen = rightWindow->getScreen("pointlightPropertiesMenu");
 
 			rightWindow->setActiveScreen("pointlightPropertiesMenu");
@@ -97,21 +97,21 @@ void WorldEditor::_updatePointlightEditing()
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("shape")->isHovered())
 				{
-					if(_fe3d->pointlight_getShape(activePointlightID) == PointlightShape::CIRCLE)
+					if(_fe3d->pointlight_getShape(activePointlightId) == PointlightShape::CIRCLE)
 					{
-						_fe3d->pointlight_setShape(activePointlightID, PointlightShape::SQUARE);
+						_fe3d->pointlight_setShape(activePointlightId, PointlightShape::SQUARE);
 					}
 					else
 					{
-						_fe3d->pointlight_setShape(activePointlightID, PointlightShape::CIRCLE);
+						_fe3d->pointlight_setShape(activePointlightId, PointlightShape::CIRCLE);
 					}
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d->model_delete(_activeLampID);
-					_fe3d->pointlight_delete(activePointlightID);
-					_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), activePointlightID), _loadedPointlightIds.end());
-					_activeLampID = "";
+					_fe3d->model_delete(_activeLampId);
+					_fe3d->pointlight_delete(activePointlightId);
+					_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), activePointlightId), _loadedPointlightIds.end());
+					_activeLampId = "";
 					rightWindow->setActiveScreen("main");
 					return;
 				}
@@ -119,18 +119,18 @@ void WorldEditor::_updatePointlightEditing()
 
 			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d->model_delete(_activeLampID);
-				_fe3d->pointlight_delete(activePointlightID);
-				_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), activePointlightID), _loadedPointlightIds.end());
-				_activeLampID = "";
+				_fe3d->model_delete(_activeLampId);
+				_fe3d->pointlight_delete(activePointlightId);
+				_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), activePointlightId), _loadedPointlightIds.end());
+				_activeLampId = "";
 				rightWindow->setActiveScreen("main");
 				return;
 			}
 
-			auto position = _fe3d->pointlight_getPosition(activePointlightID);
-			auto radius = _fe3d->pointlight_getRadius(activePointlightID);
-			auto color = _fe3d->pointlight_getColor(activePointlightID);
-			auto intensity = _fe3d->pointlight_getIntensity(activePointlightID);
+			auto position = _fe3d->pointlight_getPosition(activePointlightId);
+			auto radius = _fe3d->pointlight_getRadius(activePointlightId);
+			auto color = _fe3d->pointlight_getColor(activePointlightId);
+			auto intensity = _fe3d->pointlight_getIntensity(activePointlightId);
 
 			if(!screen->getButton("position")->isHoverable())
 			{
@@ -145,8 +145,8 @@ void WorldEditor::_updatePointlightEditing()
 				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 
-				_fe3d->pointlight_setPosition(activePointlightID, position);
-				_fe3d->model_setBasePosition(_activeLampID, position);
+				_fe3d->pointlight_setPosition(activePointlightId, position);
+				_fe3d->model_setBasePosition(_activeLampId, position);
 			}
 			else if(!screen->getButton("radius")->isHoverable())
 			{
@@ -161,7 +161,7 @@ void WorldEditor::_updatePointlightEditing()
 				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", radius.z, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", radius.z, -(_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 
-				_fe3d->pointlight_setRadius(activePointlightID, radius);
+				_fe3d->pointlight_setRadius(activePointlightId, radius);
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
@@ -176,16 +176,16 @@ void WorldEditor::_updatePointlightEditing()
 				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", color.b, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", color.b, -POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 
-				_fe3d->pointlight_setColor(activePointlightID, color);
-				_fe3d->model_setColor(_activeLampID, "", color);
+				_fe3d->pointlight_setColor(activePointlightId, color);
+				_fe3d->model_setColor(_activeLampId, "", color);
 			}
 
 			_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
 			_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
-			_fe3d->pointlight_setIntensity(activePointlightID, intensity);
+			_fe3d->pointlight_setIntensity(activePointlightId, intensity);
 
 			const auto quad2dEntityId = screen->getButton("shape")->getRectangle()->getEntityId();
-			if(_fe3d->pointlight_getShape(activePointlightID) == PointlightShape::CIRCLE)
+			if(_fe3d->pointlight_getShape(activePointlightId) == PointlightShape::CIRCLE)
 			{
 				_fe3d->quad2d_setDiffuseMap(quad2dEntityId, "engine\\assets\\image\\diffuse_map\\shape_circle.tga");
 			}

@@ -10,46 +10,46 @@ void ScriptInterpreter::load()
 {
 	auto lastLoggerMessageCount = Logger::getMessageCount();
 
-	for(const auto& scriptID : _script->getScriptFileIds())
+	for(const auto& scriptId : _script->getScriptFileIds())
 	{
-		auto scriptFile = _script->getScriptFile(scriptID);
+		auto scriptFile = _script->getScriptFile(scriptId);
 
 		string scriptType = "";
 		if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_initialize"))
 		{
-			_initializeScriptIds.push_back(scriptID);
+			_initializeScriptIds.push_back(scriptId);
 			scriptType = "script_type_initialize";
 		}
 		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_update"))
 		{
-			_updateScriptIds.push_back(scriptID);
+			_updateScriptIds.push_back(scriptId);
 			scriptType = "script_type_update";
 		}
 		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_terminate"))
 		{
-			_terminateScriptIds.push_back(scriptID);
+			_terminateScriptIds.push_back(scriptId);
 			scriptType = "script_type_terminate";
 		}
 		else
 		{
-			Logger::throwWarning("No script_type META found on line 1 @ script \"" + scriptID + "\"");
+			Logger::throwWarning("No script_type META found on line 1 @ script \"" + scriptId + "\"");
 			_hasThrownError = true;
 			return;
 		}
 
 		if(scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_entry"))
 		{
-			if(scriptType == "script_type_initialize" && _initEntryID.empty())
+			if(scriptType == "script_type_initialize" && _initEntryId.empty())
 			{
-				_initEntryID = _initializeScriptIds.back();
+				_initEntryId = _initializeScriptIds.back();
 			}
-			else if(scriptType == "script_type_update" && _updateEntryID.empty())
+			else if(scriptType == "script_type_update" && _updateEntryId.empty())
 			{
-				_updateEntryID = _updateScriptIds.back();
+				_updateEntryId = _updateScriptIds.back();
 			}
-			else if(scriptType == "script_type_terminate" && _terminateEntryID.empty())
+			else if(scriptType == "script_type_terminate" && _terminateEntryId.empty())
 			{
-				_terminateEntryID = _terminateScriptIds.back();
+				_terminateEntryId = _terminateScriptIds.back();
 			}
 			else
 			{
@@ -63,34 +63,34 @@ void ScriptInterpreter::load()
 		}
 		else
 		{
-			Logger::throwWarning("No script_execution META found on line 2 @ script \"" + scriptID + "\"");
+			Logger::throwWarning("No script_execution META found on line 2 @ script \"" + scriptId + "\"");
 			_hasThrownError = true;
 			return;
 		}
 	}
 
-	if(_initEntryID.empty() && !_initializeScriptIds.empty())
+	if(_initEntryId.empty() && !_initializeScriptIds.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for INITIALIZE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
-	if(_updateEntryID.empty() && !_updateScriptIds.empty())
+	if(_updateEntryId.empty() && !_updateScriptIds.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for UPDATE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
-	if(_terminateEntryID.empty() && !_terminateScriptIds.empty())
+	if(_terminateEntryId.empty() && !_terminateScriptIds.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for TERMINATE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
 
-	for(const auto& scriptID : _script->getScriptFileIds())
+	for(const auto& scriptId : _script->getScriptFileIds())
 	{
-		auto scriptFile = _script->getScriptFile(scriptID);
+		auto scriptFile = _script->getScriptFile(scriptId);
 
 		for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 		{
@@ -301,9 +301,9 @@ void ScriptInterpreter::unload()
 	_updateScriptIds.clear();
 	_terminateScriptIds.clear();
 	_globalVariables.clear();
-	_initEntryID = "";
-	_updateEntryID = "";
-	_terminateEntryID = "";
+	_initEntryId = "";
+	_updateEntryId = "";
+	_terminateEntryId = "";
 	_engineFunctionCallCount = 0;
 	_executionDepth = 0;
 	_hasThrownError = false;

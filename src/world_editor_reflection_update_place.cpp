@@ -16,22 +16,22 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelId = ("@@camera_" + newID);
+				auto newId = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelId = ("@@camera_" + newId);
 
-				while(_fe3d->reflection_isExisting(newID))
+				while(_fe3d->reflection_isExisting(newId))
 				{
-					newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@camera_" + newID);
+					newId = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelId = ("@@camera_" + newId);
 				}
 
-				_fe3d->reflection_create(newID);
+				_fe3d->reflection_create(newId);
 
-				if(_fe3d->reflection_isExisting(newID))
+				if(_fe3d->reflection_isExisting(newId))
 				{
-					_loadedReflectionIds.push_back(newID);
+					_loadedReflectionIds.push_back(newId);
 
-					_fe3d->reflection_setPosition(newID, newPosition);
+					_fe3d->reflection_setPosition(newId, newPosition);
 
 					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
 					_fe3d->model_setBasePosition(newModelId, newPosition);
@@ -94,22 +94,22 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelId = ("@@camera_" + newID);
+				auto newId = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelId = ("@@camera_" + newId);
 
-				while(_fe3d->reflection_isExisting(newID))
+				while(_fe3d->reflection_isExisting(newId))
 				{
-					newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@camera_" + newID);
+					newId = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelId = ("@@camera_" + newId);
 				}
 
-				_fe3d->reflection_create(newID);
+				_fe3d->reflection_create(newId);
 
-				if(_fe3d->reflection_isExisting(newID))
+				if(_fe3d->reflection_isExisting(newId))
 				{
-					_loadedReflectionIds.push_back(newID);
+					_loadedReflectionIds.push_back(newId);
 
-					_fe3d->reflection_setPosition(newID, newPosition);
+					_fe3d->reflection_setPosition(newId, newPosition);
 
 					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
 					_fe3d->model_setBasePosition(newModelId, newPosition);

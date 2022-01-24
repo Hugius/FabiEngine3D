@@ -234,24 +234,24 @@ void Animation3dEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("animationList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentAnimationId = selectedButtonID;
+				_currentAnimationId = selectedButtonId;
 
 				if(!_isDeletingAnimation)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
-					if(_fe3d->model_isExisting(_getAnimation(selectedButtonID)->getPreviewModelId()))
+					if(_fe3d->model_isExisting(_getAnimation(selectedButtonId)->getPreviewModelId()))
 					{
-						_fe3d->model_setVisible(_getAnimation(selectedButtonID)->getPreviewModelId(), true);
+						_fe3d->model_setVisible(_getAnimation(selectedButtonId)->getPreviewModelId(), true);
 					}
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationId")->getEntityId(), "Animation: " + selectedButtonID, 0.025f);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationId")->getEntityId(), "Animation: " + selectedButtonId, 0.025f);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), true);
 				}

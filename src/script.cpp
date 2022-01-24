@@ -14,13 +14,13 @@ void Script::createScriptFile(const string& id)
 	_scriptFiles.push_back(make_shared<ScriptFile>(id));
 }
 
-void Script::renameScriptFile(const string& id, const string& newID)
+void Script::renameScriptFile(const string& id, const string& newId)
 {
 	for(const auto& file : _scriptFiles)
 	{
 		if(file->getId() == id)
 		{
-			file->changeID(newID);
+			file->changeId(newId);
 			return;
 		}
 	}

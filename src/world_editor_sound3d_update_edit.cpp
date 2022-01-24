@@ -4,11 +4,11 @@ void WorldEditor::_updateSoundEditing()
 {
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		if(!_dontResetSelectedSpeaker)
 		{
-			_selectedSpeakerID = "";
+			_selectedSpeakerId = "";
 		}
 		else
 		{
@@ -30,15 +30,15 @@ void WorldEditor::_updateSoundEditing()
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						if(_selectedSpeakerID != _activeSpeakerID)
+						if(_selectedSpeakerId != _activeSpeakerId)
 						{
-							_activateSound(_selectedSpeakerID.substr(string("@@speaker_").size()));
+							_activateSound(_selectedSpeakerId.substr(string("@@speaker_").size()));
 						}
 					}
 				}
 				else
 				{
-					if((id != _selectedSpeakerID) && (id != _activeSpeakerID))
+					if((id != _selectedSpeakerId) && (id != _activeSpeakerId))
 					{
 						_unselectSound(id);
 					}
@@ -50,29 +50,29 @@ void WorldEditor::_updateSoundEditing()
 		{
 			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
-				if(!_activeSpeakerID.empty())
+				if(!_activeSpeakerId.empty())
 				{
-					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedSpeakerID.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedSpeakerId.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
-						_activeSpeakerID = "";
+						_activeSpeakerId = "";
 						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
 		}
 
-		if(_selectedSpeakerID.empty())
+		if(_selectedSpeakerId.empty())
 		{
-			_updateSpeakerHighlighting(_activeSpeakerID, _activeSpeakerHighlightDirection);
+			_updateSpeakerHighlighting(_activeSpeakerId, _activeSpeakerHighlightDirection);
 		}
 		else
 		{
-			_updateSpeakerHighlighting(_selectedSpeakerID, _selectedSpeakerHighlightDirection);
+			_updateSpeakerHighlighting(_selectedSpeakerId, _selectedSpeakerHighlightDirection);
 		}
 
-		if(!_activeSpeakerID.empty())
+		if(!_activeSpeakerId.empty())
 		{
-			const string activeSoundID = _activeSpeakerID.substr(string("@@speaker_").size());
+			const string activeSoundId = _activeSpeakerId.substr(string("@@speaker_").size());
 			auto screen = rightWindow->getScreen("soundPropertiesMenu");
 
 			rightWindow->setActiveScreen("soundPropertiesMenu");
@@ -81,10 +81,10 @@ void WorldEditor::_updateSoundEditing()
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d->model_delete(_activeSpeakerID);
-					_fe3d->sound3d_delete(activeSoundID);
-					_loadedSoundIds.erase(activeSoundID);
-					_activeSpeakerID = "";
+					_fe3d->model_delete(_activeSpeakerId);
+					_fe3d->sound3d_delete(activeSoundId);
+					_loadedSoundIds.erase(activeSoundId);
+					_activeSpeakerId = "";
 					rightWindow->setActiveScreen("main");
 					return;
 				}
@@ -92,17 +92,17 @@ void WorldEditor::_updateSoundEditing()
 
 			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d->model_delete(_activeSpeakerID);
-				_fe3d->sound3d_delete(activeSoundID);
-				_loadedSoundIds.erase(activeSoundID);
-				_activeSpeakerID = "";
+				_fe3d->model_delete(_activeSpeakerId);
+				_fe3d->sound3d_delete(activeSoundId);
+				_loadedSoundIds.erase(activeSoundId);
+				_activeSpeakerId = "";
 				rightWindow->setActiveScreen("main");
 				return;
 			}
 
-			auto position = _fe3d->sound3d_getPosition(activeSoundID);
-			auto maxDistance = _fe3d->sound3d_getMaxDistance(activeSoundID);
-			auto maxVolume = _fe3d->sound3d_getMaxVolume(activeSoundID);
+			auto position = _fe3d->sound3d_getPosition(activeSoundId);
+			auto maxDistance = _fe3d->sound3d_getMaxDistance(activeSoundId);
+			auto maxVolume = _fe3d->sound3d_getMaxVolume(activeSoundId);
 
 			_handleValueChanging("soundPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / SOUND_POSITION_DIVIDER));
 			_handleValueChanging("soundPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / SOUND_POSITION_DIVIDER));
@@ -110,21 +110,21 @@ void WorldEditor::_updateSoundEditing()
 			_handleValueChanging("soundPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / SOUND_POSITION_DIVIDER));
 			_handleValueChanging("soundPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / SOUND_POSITION_DIVIDER));
 			_handleValueChanging("soundPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / SOUND_POSITION_DIVIDER));
-			_fe3d->sound3d_setPosition(activeSoundID, position);
-			_fe3d->model_setBasePosition(_activeSpeakerID, position);
+			_fe3d->sound3d_setPosition(activeSoundId, position);
+			_fe3d->model_setBasePosition(_activeSpeakerId, position);
 
 			_handleValueChanging("soundPropertiesMenu", "distancePlus", "distance", maxDistance, (_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);
 			_handleValueChanging("soundPropertiesMenu", "distanceMinus", "distance", maxDistance, -(_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);
-			_fe3d->sound3d_setMaxDistance(activeSoundID, maxDistance);
+			_fe3d->sound3d_setMaxDistance(activeSoundId, maxDistance);
 
 			_handleValueChanging("soundPropertiesMenu", "volumePlus", "volume", maxVolume, SOUND_VOLUME_SPEED, SOUND_VOLUME_MULTIPLIER, 0.0f, 1.0f);
 			_handleValueChanging("soundPropertiesMenu", "volumeMinus", "volume", maxVolume, -SOUND_VOLUME_SPEED, SOUND_VOLUME_MULTIPLIER, 0.0f, 1.0f);
-			_fe3d->sound3d_setMaxVolume(activeSoundID, maxVolume);
+			_fe3d->sound3d_setMaxVolume(activeSoundId, maxVolume);
 		}
 
-		if(_selectedSpeakerID.empty() && _activeSpeakerID.empty())
+		if(_selectedSpeakerId.empty() && _activeSpeakerId.empty())
 		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), false);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
 		}
 	}
 }

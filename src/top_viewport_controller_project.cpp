@@ -122,10 +122,10 @@ void TopViewportController::_updateProjectLoading()
 	if(_isLoadingProject)
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const string clickedButtonID = _gui->getOverlay()->checkChoiceForm("projectList");
-		const string projectDirectoryPath = string(rootPath + "projects\\" + clickedButtonID + "\\");
+		const string clickedButtonId = _gui->getOverlay()->checkChoiceForm("projectList");
+		const string projectDirectoryPath = string(rootPath + "projects\\" + clickedButtonId + "\\");
 
-		if(!clickedButtonID.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(!clickedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if(isProjectCorrupted(projectDirectoryPath))
 			{
@@ -133,7 +133,7 @@ void TopViewportController::_updateProjectLoading()
 				return;
 			}
 
-			_currentProjectId = clickedButtonID;
+			_currentProjectId = clickedButtonId;
 			_applyProjectChange();
 
 			auto skyImagePaths = _skyEditor->getImagePathsFromFile();
@@ -179,13 +179,13 @@ void TopViewportController::_updateProjectDeleting()
 {
 	if(_isDeletingProject)
 	{
-		static string chosenButtonID = "";
-		string clickedButtonID = _gui->getOverlay()->checkChoiceForm("projectList");
+		static string chosenButtonId = "";
+		string clickedButtonId = _gui->getOverlay()->checkChoiceForm("projectList");
 
-		if(!clickedButtonID.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(!clickedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
-			chosenButtonID = clickedButtonID;
+			chosenButtonId = clickedButtonId;
 			_gui->getOverlay()->deleteChoiceForm("projectList");
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("projectList"))
@@ -196,14 +196,14 @@ void TopViewportController::_updateProjectDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			if(chosenButtonID == _currentProjectId)
+			if(chosenButtonId == _currentProjectId)
 			{
 				_currentProjectId = "";
 				_applyProjectChange();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = (rootPath + "projects\\" + chosenButtonID);
+			const auto directoryPath = (rootPath + "projects\\" + chosenButtonId);
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
 				Logger::throwWarning("Cannot delete project: missing directory!");
@@ -212,15 +212,15 @@ void TopViewportController::_updateProjectDeleting()
 
 			Tools::deleteDirectory(directoryPath);
 
-			Logger::throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
+			Logger::throwInfo("Existing project \"" + chosenButtonId + "\" deleted!");
 
 			_isDeletingProject = false;
-			chosenButtonID = "";
+			chosenButtonId = "";
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingProject = false;
-			chosenButtonID = "";
+			chosenButtonId = "";
 		}
 	}
 }

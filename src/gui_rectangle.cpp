@@ -1,11 +1,11 @@
 #include "gui_rectangle.hpp"
 
-GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
+GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
-	_entityId("@" + parentID + "_" + id),
-	_parentID(parentID),
+	_entityId("@" + parentId + "_" + id),
+	_parentId(parentId),
 	_initialPosition(position),
 	_initialSize(size),
 	_initialColor(color)
@@ -16,12 +16,12 @@ GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& paren
 	_fe3d->quad2d_setColor(_entityId, color);
 }
 
-GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
+GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
-	_entityId("@" + parentID + "_" + id),
-	_parentID(parentID),
+	_entityId("@" + parentId + "_" + id),
+	_parentId(parentId),
 	_initialPosition(position),
 	_initialSize(size),
 	_initialColor(fvec3(1.0f))
@@ -82,7 +82,7 @@ const string& GuiRectangle::getEntityId() const
 	return _entityId;
 }
 
-const string& GuiRectangle::getParentID() const
+const string& GuiRectangle::getParentId() const
 {
-	return _parentID;
+	return _parentId;
 }

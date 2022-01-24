@@ -1,11 +1,11 @@
 #include "gui_screen.hpp"
 #include "logger.hpp"
 
-GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size)
+GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size)
 	:
 	_fe3d(fe3d),
 	_id(id),
-	_parentID(parentID),
+	_parentId(parentId),
 	_parentPosition(position),
 	_parentSize(size)
 {
@@ -58,9 +58,9 @@ const string& GuiScreen::getId() const
 	return _id;
 }
 
-const string& GuiScreen::getParentID() const
+const string& GuiScreen::getParentId() const
 {
-	return _parentID;
+	return _parentId;
 }
 
 const fvec2 GuiScreen::convertPosition(const fvec2& position) const

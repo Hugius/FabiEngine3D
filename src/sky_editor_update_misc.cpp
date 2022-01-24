@@ -103,15 +103,15 @@ void SkyEditor::_updateSkyChoosing()
 {
 	if(_isChoosingSky)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("skyList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("skyList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
-			_fe3d->sky_select("@" + selectedButtonID);
+			_fe3d->sky_select("@" + selectedButtonId);
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentSkyId = ("@" + selectedButtonID);
+				_currentSkyId = ("@" + selectedButtonId);
 
 				if(!_isDeletingSky)
 				{

@@ -16,14 +16,14 @@ void WorldEditor::_updateModelPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newID = (_currentTemplateModelId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-				while(_fe3d->model_isExisting(newID))
+				while(_fe3d->model_isExisting(newId))
 				{
-					newID = (_currentTemplateModelId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newId = (_currentTemplateModelId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				}
 
-				_copyTemplateModel(newID, _currentTemplateModelId, newPosition, false);
+				_copyTemplateModel(newId, _currentTemplateModelId, newPosition, false);
 			}
 
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
@@ -67,14 +67,14 @@ void WorldEditor::_updateModelPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newID = (_currentTemplateModelId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-				while(_fe3d->model_isExisting(newID))
+				while(_fe3d->model_isExisting(newId))
 				{
-					newID = (_currentTemplateModelId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newId = (_currentTemplateModelId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				}
 
-				_copyTemplateModel(newID, _currentTemplateModelId, newPosition, false);
+				_copyTemplateModel(newId, _currentTemplateModelId, newPosition, false);
 			}
 		}
 	}

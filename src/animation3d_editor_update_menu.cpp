@@ -218,13 +218,13 @@ void Animation3dEditor::_updateChoiceMenu()
 			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 		}
 
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("modelList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("modelList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_hoveredModelId.empty())
 			{
-				_hoveredModelId = ("@" + selectedButtonID);
+				_hoveredModelId = ("@" + selectedButtonId);
 				_fe3d->model_setVisible(_hoveredModelId, true);
 			}
 

@@ -172,19 +172,19 @@ void Text3dEditor::_updateText3dChoosing()
 {
 	if(_isChoosingText3d)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("text3dList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("text3dList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_hoveredTextId.empty())
 			{
-				_hoveredTextId = ("@" + selectedButtonID);
+				_hoveredTextId = ("@" + selectedButtonId);
 				_fe3d->text3d_setVisible(_hoveredTextId, true);
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentTextId = ("@" + selectedButtonID);
+				_currentTextId = ("@" + selectedButtonId);
 				_hoveredTextId = "";
 
 				if(!_isDeletingText3d)

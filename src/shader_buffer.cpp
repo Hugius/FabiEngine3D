@@ -39,48 +39,48 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	auto vertexCode = vertexCodeString.c_str();
 	auto fragmentCode = fragmentCodeString.c_str();
 
-	auto vertexID = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexID, 1, &vertexCode, nullptr);
-	glCompileShader(vertexID);
+	auto vertexId = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertexId, 1, &vertexCode, nullptr);
+	glCompileShader(vertexId);
 
 	int vertexStatus;
-	glGetShaderiv(vertexID, GL_COMPILE_STATUS, &vertexStatus);
+	glGetShaderiv(vertexId, GL_COMPILE_STATUS, &vertexStatus);
 	if(!vertexStatus)
 	{
 		char log[512];
-		glGetShaderInfoLog(vertexID, 512, nullptr, log);
+		glGetShaderInfoLog(vertexId, 512, nullptr, log);
 		Logger::throwError("ShaderBuffer::_createProgram::1 ---> ", shaderName, " ", log);
 	}
 
-	auto fragmentID = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentID, 1, &fragmentCode, nullptr);
-	glCompileShader(fragmentID);
+	auto fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragmentId, 1, &fragmentCode, nullptr);
+	glCompileShader(fragmentId);
 
 	int fragmentStatus;
-	glGetShaderiv(fragmentID, GL_COMPILE_STATUS, &fragmentStatus);
+	glGetShaderiv(fragmentId, GL_COMPILE_STATUS, &fragmentStatus);
 	if(!fragmentStatus)
 	{
 		char log[512];
-		glGetShaderInfoLog(fragmentID, 512, nullptr, log);
+		glGetShaderInfoLog(fragmentId, 512, nullptr, log);
 		Logger::throwError("ShaderBuffer::_createProgram::2 ---> ", shaderName, " ", log);
 	}
 
-	_programID = glCreateProgram();
-	glAttachShader(_programID, vertexID);
-	glAttachShader(_programID, fragmentID);
-	glLinkProgram(_programID);
+	_programId = glCreateProgram();
+	glAttachShader(_programId, vertexId);
+	glAttachShader(_programId, fragmentId);
+	glLinkProgram(_programId);
 
 	int programStatus;
-	glGetProgramiv(_programID, GL_LINK_STATUS, &programStatus);
+	glGetProgramiv(_programId, GL_LINK_STATUS, &programStatus);
 	if(!programStatus)
 	{
 		char log[512];
-		glGetProgramInfoLog(_programID, 512, nullptr, log);
+		glGetProgramInfoLog(_programId, 512, nullptr, log);
 		Logger::throwError("ShaderBuffer::_createProgram::3 ---> ", shaderName, " ", log);
 	}
 
-	glDeleteShader(vertexID);
-	glDeleteShader(fragmentID);
+	glDeleteShader(vertexId);
+	glDeleteShader(fragmentId);
 
 	Logger::throwInfo("Loaded shader: \"engine\\shaders\\" + vertexFileName + "\"");
 	Logger::throwInfo("Loaded shader: \"engine\\shaders\\" + fragmentFileName + "\"");
@@ -88,10 +88,10 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 
 ShaderBuffer::~ShaderBuffer()
 {
-	glDeleteProgram(_programID);
+	glDeleteProgram(_programId);
 }
 
-const BufferId ShaderBuffer::getUniformID(const string& name)
+const BufferId ShaderBuffer::getUniformId(const string& name)
 {
 	auto cacheIterator = _uniformCache.find(name);
 
@@ -100,11 +100,11 @@ const BufferId ShaderBuffer::getUniformID(const string& name)
 		return cacheIterator->second;
 	}
 
-	auto id = glGetUniformLocation(_programID, name.c_str());
+	auto id = glGetUniformLocation(_programId, name.c_str());
 
 	if(id == -1)
 	{
-		Logger::throwError("ShaderBuffer::_getUniformID ---> ", name);
+		Logger::throwError("ShaderBuffer::_getUniformId ---> ", name);
 	}
 
 	_uniformCache.insert(make_pair(name, id));
@@ -114,7 +114,7 @@ const BufferId ShaderBuffer::getUniformID(const string& name)
 
 void ShaderBuffer::bind()
 {
-	glUseProgram(_programID);
+	glUseProgram(_programId);
 }
 
 void ShaderBuffer::unbind()
@@ -122,57 +122,57 @@ void ShaderBuffer::unbind()
 	glUseProgram(0);
 }
 
-const BufferId ShaderBuffer::getProgramID() const
+const BufferId ShaderBuffer::getProgramId() const
 {
-	return _programID;
+	return _programId;
 }
 
-void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const bool& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformId, const bool& data)
 {
-	glUniform1i(uniformID, data);
+	glUniform1i(uniformId, data);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const int& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformId, const int& data)
 {
-	glUniform1i(uniformID, data);
+	glUniform1i(uniformId, data);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const float& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformId, const float& data)
 {
-	glUniform1f(uniformID, data);
+	glUniform1f(uniformId, data);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const double& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformId, const double& data)
 {
-	glUniform1d(uniformID, data);
+	glUniform1d(uniformId, data);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const fvec2& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformId, const fvec2& data)
 {
-	glUniform2f(uniformID, data.x, data.y);
+	glUniform2f(uniformId, data.x, data.y);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const fvec3& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformId, const fvec3& data)
 {
-	glUniform3f(uniformID, data.x, data.y, data.z);
+	glUniform3f(uniformId, data.x, data.y, data.z);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const fvec4& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformId, const fvec4& data)
 {
-	glUniform4f(uniformID, data.x, data.y, data.z, data.w);
+	glUniform4f(uniformId, data.x, data.y, data.z, data.w);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const mat22& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformId, const mat22& data)
 {
-	glUniformMatrix2fv(uniformID, 1, GL_FALSE, data.f);
+	glUniformMatrix2fv(uniformId, 1, GL_FALSE, data.f);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const mat33& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformId, const mat33& data)
 {
-	glUniformMatrix3fv(uniformID, 1, GL_FALSE, data.f);
+	glUniformMatrix3fv(uniformId, 1, GL_FALSE, data.f);
 }
 
-void ShaderBuffer::_uploadUniform(const BufferId& uniformID, const mat44& data)
+void ShaderBuffer::_uploadUniform(const BufferId& uniformId, const mat44& data)
 {
-	glUniformMatrix4fv(uniformID, 1, GL_FALSE, data.f);
+	glUniformMatrix4fv(uniformId, 1, GL_FALSE, data.f);
 }

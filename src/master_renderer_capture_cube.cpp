@@ -142,20 +142,20 @@ void MasterRenderer::_captureCubeReflections()
 
 	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
-		for(const auto& savedID : savedModelEntityIds)
+		for(const auto& savedId : savedModelEntityIds)
 		{
-			if(entity->getId() == savedID)
+			if(entity->getId() == savedId)
 			{
 				entity->setVisible(true);
 			}
 		}
 	}
 
-	for(const auto& savedID : savedQuad3dEntityIds)
+	for(const auto& savedId : savedQuad3dEntityIds)
 	{
 		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 		{
-			if(entity->getId() == savedID)
+			if(entity->getId() == savedId)
 			{
 				entity->setVisible(true);
 			}

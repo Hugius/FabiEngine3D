@@ -47,7 +47,7 @@ public:
 	const bool gameMustStop() const;
 
 private:
-	void _executeScript(const string& scriptID, ScriptType scriptType);
+	void _executeScript(const string& scriptId, ScriptType scriptType);
 	void _processVariableCreation(const string& scriptLine, ScriptVariableScope scope);
 	void _processVariableAlteration(const string& scriptLine);
 	void _processVariableArithmetic(const string& scriptLine);
@@ -70,8 +70,8 @@ private:
 	const bool _isDecimalValue(const string& valueString) const;
 	const bool _isIntegerValue(const string& valueString) const;
 	const bool _isBooleanValue(const string& valueString) const;
-	const bool _isLocalVariableExisting(const string& variableID);
-	const bool _isGlobalVariableExisting(const string& variableID) const;
+	const bool _isLocalVariableExisting(const string& variableId);
+	const bool _isGlobalVariableExisting(const string& variableId) const;
 	const bool _checkConditionString(const string& conditionString);
 	const bool _validateCondition(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue);
 	const bool _compareValues(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue) const;
@@ -148,7 +148,7 @@ private:
 	const bool _validateFe3dSound2d(const string& id, bool isTemplate);
 	const bool _validateFe3dAnimation2d(const string& id);
 	const bool _validateFe3dAnimation3d(const string& id);
-	const bool _validateFe3dID(const string& id);
+	const bool _validateFe3dId(const string& id);
 	const bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth);
 	const bool _validateKeyInputString(const string& inputString);
 	const bool _validateMouseInputString(const string& inputString);
@@ -158,8 +158,8 @@ private:
 	const vector<ScriptValue> _processFe3dFunctionCall(const string& scriptLine);
 	const vector<ScriptValue> _processMathFunctionCall(const string& scriptLine);
 	const vector<ScriptValue> _processMiscFunctionCall(const string& scriptLine);
-	ScriptVariable& _getLocalVariable(const string& variableID);
-	ScriptVariable& _getGlobalVariable(const string& variableID);
+	ScriptVariable& _getLocalVariable(const string& variableId);
+	ScriptVariable& _getGlobalVariable(const string& variableId);
 	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const;
 
 	map<string, float> _debuggingTimes;
@@ -207,9 +207,9 @@ private:
 	static inline const string PULLING_KEYWORD = "PULL";
 	static inline const string PASS_KEYWORD = "PASS";
 	string _currentProjectId = "";
-	string _initEntryID = "";
-	string _updateEntryID = "";
-	string _terminateEntryID = "";
+	string _initEntryId = "";
+	string _updateEntryId = "";
+	string _terminateEntryId = "";
 
 	static inline constexpr unsigned int SPACES_PER_INDENT = 4;
 	static inline constexpr unsigned int MAX_ITERATIONS_PER_LOOP = 1000;

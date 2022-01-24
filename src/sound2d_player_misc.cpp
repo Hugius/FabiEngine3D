@@ -34,9 +34,9 @@ const unsigned int Sound2dPlayer::getUsedChannelCount() const
 {
 	int count = 0;
 
-	for(const auto& soundID : _channels)
+	for(const auto& soundId : _channels)
 	{
-		if(soundID.empty())
+		if(soundId.empty())
 		{
 			count++;
 		}

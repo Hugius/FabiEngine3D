@@ -51,16 +51,16 @@ void WorldEditor::_updateReflectionMenu()
 
 			auto Ids = _fe3d->reflection_getIds();
 			sort(Ids.begin(), Ids.end());
-			for(auto& reflectionID : Ids)
+			for(auto& reflectionId : Ids)
 			{
-				if(reflectionID[0] != '@')
+				if(reflectionId[0] != '@')
 				{
-					reverse(reflectionID.begin(), reflectionID.end());
-					string rawID = reflectionID.substr(reflectionID.find('_') + 1);
-					reverse(rawID.begin(), rawID.end());
-					reverse(reflectionID.begin(), reflectionID.end());
+					reverse(reflectionId.begin(), reflectionId.end());
+					string rawId = reflectionId.substr(reflectionId.find('_') + 1);
+					reverse(rawId.begin(), rawId.end());
+					reverse(reflectionId.begin(), reflectionId.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->createButton(reflectionID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->createButton(reflectionId, rawId);
 				}
 			}
 		}
@@ -84,20 +84,20 @@ void WorldEditor::_updateReflectionChoosingMenu()
 			}
 		}
 
-		for(const auto& reflectionID : _fe3d->reflection_getIds())
+		for(const auto& reflectionId : _fe3d->reflection_getIds())
 		{
-			if(reflectionID[0] != '@')
+			if(reflectionId[0] != '@')
 			{
-				if(screen->getScrollingList("reflectionList")->getButton(reflectionID)->isHovered())
+				if(screen->getScrollingList("reflectionList")->getButton(reflectionId)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activateReflection(reflectionID);
+						_activateReflection(reflectionId);
 					}
 					else
 					{
 						_dontResetSelectedCamera = true;
-						_selectReflection(reflectionID);
+						_selectReflection(reflectionId);
 					}
 
 					break;

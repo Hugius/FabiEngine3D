@@ -37,11 +37,11 @@ void WorldEditor::_updateQuad3dMenu()
 				if(quadId[0] != '@')
 				{
 					reverse(quadId.begin(), quadId.end());
-					string rawID = quadId.substr(quadId.find('_') + 1);
-					reverse(rawID.begin(), rawID.end());
+					string rawId = quadId.substr(quadId.find('_') + 1);
+					reverse(rawId.begin(), rawId.end());
 					reverse(quadId.begin(), quadId.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createButton(quadId, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createButton(quadId, rawId);
 				}
 			}
 		}

@@ -39,36 +39,36 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			{
 				if(_lastSelectedLineIndex == -1)
 				{
-					_script->getScriptFile(_currentScriptFileID)->deleteLine(_firstSelectedLineIndex);
+					_script->getScriptFile(_currentScriptFileId)->deleteLine(_firstSelectedLineIndex);
 				}
 				else
 				{
 					int lineIndexToDelete = (_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex;
 					for(int i = 0; i <= abs(_firstSelectedLineIndex - _lastSelectedLineIndex); i++)
 					{
-						_script->getScriptFile(_currentScriptFileID)->deleteLine(static_cast<unsigned int>(lineIndexToDelete));
+						_script->getScriptFile(_currentScriptFileId)->deleteLine(static_cast<unsigned int>(lineIndexToDelete));
 					}
 				}
 
-				if(hoveredLineIndex > static_cast<int>(_script->getScriptFile(_currentScriptFileID)->getLineCount() - 1))
+				if(hoveredLineIndex > static_cast<int>(_script->getScriptFile(_currentScriptFileId)->getLineCount() - 1))
 				{
-					hoveredLineIndex = static_cast<int>(_script->getScriptFile(_currentScriptFileID)->getLineCount());
+					hoveredLineIndex = static_cast<int>(_script->getScriptFile(_currentScriptFileId)->getLineCount());
 				}
 
-				if(cursorLineIndex > _script->getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+				if(cursorLineIndex > _script->getScriptFile(_currentScriptFileId)->getLineCount() - 1)
 				{
-					cursorLineIndex = _script->getScriptFile(_currentScriptFileID)->getLineCount();
+					cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 				}
 
 				cursorCharIndex = newCharacters.empty() ? 0 : static_cast<unsigned int>(newCharacters.size());
 
-				_script->getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, newCharacters);
+				_script->getScriptFile(_currentScriptFileId)->insertNewLine(cursorLineIndex, newCharacters);
 
 				if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 				{
-					if(_script->getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
+					if(_script->getScriptFile(_currentScriptFileId)->getLineCount() < MAX_LINE_COUNT)
 					{
-						_script->getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, "");
+						_script->getScriptFile(_currentScriptFileId)->insertNewLine(cursorLineIndex, "");
 						cursorLineIndex++;
 					}
 				}
@@ -87,29 +87,29 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 	{
 		if(hoveredLineIndex != -1)
 		{
-			string selectionID = ("selection_" + to_string(hoveredLineIndex));
+			string selectionId = ("selection_" + to_string(hoveredLineIndex));
 			string textId = ("text_" + to_string(hoveredLineIndex));
 
-			if(!_fe3d->text3d_isExisting(selectionID) && _fe3d->text3d_isExisting(textId))
+			if(!_fe3d->text3d_isExisting(selectionId) && _fe3d->text3d_isExisting(textId))
 			{
 				if(_fe3d->text3d_getContent(textId).empty())
 				{
 					fvec3 lineTextPosition = (_fe3d->text3d_getPosition(textId));
 					lineTextPosition.x = (SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
 					lineTextPosition.z -= SELECTION_DEPTH;
-					_fe3d->quad3d_create(selectionID, false);
-					_fe3d->quad3d_setColor(selectionID, SELECTION_COLOR);
-					_fe3d->quad3d_setPosition(selectionID, lineTextPosition);
-					_fe3d->quad3d_setSize(selectionID, TEXT_CHARACTER_SIZE);
+					_fe3d->quad3d_create(selectionId, false);
+					_fe3d->quad3d_setColor(selectionId, SELECTION_COLOR);
+					_fe3d->quad3d_setPosition(selectionId, lineTextPosition);
+					_fe3d->quad3d_setSize(selectionId, TEXT_CHARACTER_SIZE);
 				}
 				else
 				{
 					const fvec3 lineTextPosition = (_fe3d->text3d_getPosition(textId) - fvec3(0.0f, 0.0f, SELECTION_DEPTH));
 					const auto lineTextSize = (_fe3d->text3d_getSize(textId));
-					_fe3d->quad3d_create(selectionID, false);
-					_fe3d->quad3d_setColor(selectionID, SELECTION_COLOR);
-					_fe3d->quad3d_setPosition(selectionID, lineTextPosition);
-					_fe3d->quad3d_setSize(selectionID, lineTextSize);
+					_fe3d->quad3d_create(selectionId, false);
+					_fe3d->quad3d_setColor(selectionId, SELECTION_COLOR);
+					_fe3d->quad3d_setPosition(selectionId, lineTextPosition);
+					_fe3d->quad3d_setSize(selectionId, lineTextSize);
 				}
 			}
 
@@ -148,7 +148,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				cursorLineIndex = min(_firstSelectedLineIndex, _lastSelectedLineIndex);
 			}
 
-			cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
+			cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
 		}
 
 		if(isControlKeyDown)
@@ -162,22 +162,22 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				if(!_copyClipboard.empty())
 				{
 					unsigned int pastedCount = 0;
-					bool firstLineEmpty = _script->getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).empty();
+					bool firstLineEmpty = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).empty();
 					for(size_t i = 0; i < _copyClipboard.size(); i++)
 					{
-						if((cursorLineIndex + i) < _script->getScriptFile(_currentScriptFileID)->getLineCount())
+						if((cursorLineIndex + i) < _script->getScriptFile(_currentScriptFileId)->getLineCount())
 						{
-							if(_script->getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + static_cast<unsigned int>(i)).empty())
+							if(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex + static_cast<unsigned int>(i)).empty())
 							{
-								_script->getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
+								_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
 								pastedCount++;
 								continue;
 							}
 						}
 
-						if(_script->getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
+						if(_script->getScriptFile(_currentScriptFileId)->getLineCount() < MAX_LINE_COUNT)
 						{
-							_script->getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
+							_script->getScriptFile(_currentScriptFileId)->insertNewLine(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
 							pastedCount++;
 						}
 						else
@@ -190,7 +190,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					{
 						cursorLineIndex += (pastedCount - static_cast<int>(firstLineEmpty));
 						cursorLineIndex = min(cursorLineIndex, (MAX_LINE_COUNT - 1));
-						cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
+						cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
 
 						textHasChanged = true;
 					}

@@ -62,7 +62,7 @@ void WorldEditor::unloadEditorWorld()
 		_fe3d->water_delete(_loadedWaterId);
 	}
 
-	for(const auto& [key, templateID] : _loadedModelIds)
+	for(const auto& [key, templateId] : _loadedModelIds)
 	{
 		_fe3d->model_delete(key);
 
@@ -73,7 +73,7 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
-	for(const auto& [key, templateID] : _loadedQuadIds)
+	for(const auto& [key, templateId] : _loadedQuadIds)
 	{
 		_fe3d->quad3d_delete(key);
 
@@ -84,7 +84,7 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
-	for(const auto& [key, templateID] : _loadedTextIds)
+	for(const auto& [key, templateId] : _loadedTextIds)
 	{
 		_fe3d->text3d_delete(key);
 	}
@@ -93,7 +93,7 @@ void WorldEditor::unloadEditorWorld()
 	{
 		_fe3d->pointlight_delete(id);
 
-		if(!_currentWorldID.empty())
+		if(!_currentWorldId.empty())
 		{
 			_fe3d->model_delete("@@lamp_" + id);
 		}
@@ -103,7 +103,7 @@ void WorldEditor::unloadEditorWorld()
 	{
 		_fe3d->spotlight_delete(id);
 
-		if(!_currentWorldID.empty())
+		if(!_currentWorldId.empty())
 		{
 			_fe3d->model_delete("@@torch_" + id);
 		}
@@ -113,23 +113,23 @@ void WorldEditor::unloadEditorWorld()
 	{
 		_fe3d->reflection_delete(id);
 
-		if(!_currentWorldID.empty())
+		if(!_currentWorldId.empty())
 		{
 			_fe3d->model_delete("@@camera_" + id);
 		}
 	}
 
-	for(const auto& [key, templateID] : _loadedSoundIds)
+	for(const auto& [key, templateId] : _loadedSoundIds)
 	{
 		_fe3d->sound3d_delete(key);
 
-		if(!_currentWorldID.empty())
+		if(!_currentWorldId.empty())
 		{
 			_fe3d->model_delete("@@speaker_" + key);
 		}
 	}
 
-	_loadedWorldID = "";
+	_loadedWorldId = "";
 	_loadedSkyId = "";
 	_loadedTerrainId = "";
 	_loadedWaterId = "";
@@ -151,9 +151,9 @@ const bool WorldEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const string& WorldEditor::getLoadedWorldID() const
+const string& WorldEditor::getLoadedWorldId() const
 {
-	return _loadedWorldID;
+	return _loadedWorldId;
 }
 
 void WorldEditor::setCurrentProjectId(const string& id)
@@ -201,13 +201,13 @@ void WorldEditor::_deleteWorldFile(const string& id)
 	}
 }
 
-void WorldEditor::_handleValueChanging(const string& screenID, const string& buttonID, const string& writeFieldID, float& value, float adder, float multiplier, float minimum, float maximum)
+void WorldEditor::_handleValueChanging(const string& screenId, const string& buttonId, const string& writeFieldId, float& value, float adder, float multiplier, float minimum, float maximum)
 {
-	auto writeField = _gui->getRightViewport()->getWindow("main")->getScreen(screenID)->getWriteField(writeFieldID);
+	auto writeField = _gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getWriteField(writeFieldId);
 
 	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
-		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenID)->getButton(buttonID)->isHovered())
+		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(buttonId)->isHovered())
 		{
 			value += adder;
 		}

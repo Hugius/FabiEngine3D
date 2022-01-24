@@ -30,12 +30,12 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string soundID;
+		string soundId;
 		string audioPath;
 
 		istringstream iss(line);
 
-		iss >> soundID >> audioPath;
+		iss >> soundId >> audioPath;
 
 		audioPath = (audioPath == "?") ? "" : audioPath;
 
@@ -77,11 +77,11 @@ const bool SoundEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string soundID, audioPath;
+		string soundId, audioPath;
 
 		istringstream iss(line);
 
-		iss >> soundID >> audioPath;
+		iss >> soundId >> audioPath;
 
 		audioPath = (audioPath == "?") ? "" : audioPath;
 
@@ -92,11 +92,11 @@ const bool SoundEditor::loadFromFile()
 			audioPath = string("projects\\" + _currentProjectId + "\\" + audioPath);
 		}
 
-		_fe3d->sound2d_create(soundID, audioPath);
+		_fe3d->sound2d_create(soundId, audioPath);
 
-		if(_fe3d->sound2d_isExisting(soundID))
+		if(_fe3d->sound2d_isExisting(soundId))
 		{
-			_loadedSoundIds.push_back(soundID);
+			_loadedSoundIds.push_back(soundId);
 		}
 	}
 

@@ -73,11 +73,11 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "SKY")
 		{
 			string skyId;
-			string templateID;
+			string templateId;
 
-			iss >> skyId >> templateID;
+			iss >> skyId >> templateId;
 
-			if(_copyTemplateSky(skyId, templateID))
+			if(_copyTemplateSky(skyId, templateId))
 			{
 				if(_isEditorLoaded)
 				{
@@ -88,11 +88,11 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "TERRAIN")
 		{
 			string terrainId;
-			string templateID;
+			string templateId;
 
-			iss >> terrainId >> templateID;
+			iss >> terrainId >> templateId;
 
-			if(_copyTemplateTerrain(terrainId, templateID))
+			if(_copyTemplateTerrain(terrainId, templateId))
 			{
 				if(_isEditorLoaded)
 				{
@@ -103,12 +103,12 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "WATER")
 		{
 			string waterId;
-			string templateID;
+			string templateId;
 			float height;
 
-			iss >> waterId >> templateID >> height;
+			iss >> waterId >> templateId >> height;
 
-			if(_copyTemplateWater(waterId, templateID))
+			if(_copyTemplateWater(waterId, templateId))
 			{
 				if(_isEditorLoaded)
 				{
@@ -121,7 +121,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "MODEL")
 		{
 			string modelId;
-			string templateID;
+			string templateId;
 			string animationId;
 			fvec3 position;
 			fvec3 rotation;
@@ -144,7 +144,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			}
 
 			iss >>
-				templateID >>
+				templateId >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -161,7 +161,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_copyTemplateModel(modelId, templateID, position, false))
+			if(_copyTemplateModel(modelId, templateId, position, false))
 			{
 				_fe3d->model_setBaseRotation(modelId, rotation);
 				_fe3d->model_setBaseSize(modelId, size);
@@ -188,7 +188,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "QUAD3D")
 		{
 			string quadId;
-			string templateID;
+			string templateId;
 			string animationId;
 			fvec3 position;
 			fvec3 rotation;
@@ -196,7 +196,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			iss >>
 				quadId >>
-				templateID >>
+				templateId >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -211,7 +211,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_copyTemplateQuad3d(quadId, templateID, position, false))
+			if(_copyTemplateQuad3d(quadId, templateId, position, false))
 			{
 				_fe3d->quad3d_setRotation(quadId, rotation);
 				_fe3d->quad3d_setSize(quadId, size);
@@ -224,15 +224,15 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "SOUND")
 		{
-			string soundID;
-			string templateID;
+			string soundId;
+			string templateId;
 			fvec3 position;
 			float maxVolume;
 			float maxDistance;
 
 			iss >>
-				soundID >>
-				templateID >>
+				soundId >>
+				templateId >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -241,7 +241,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_isEditorLoaded)
 			{
-				const string newModelId = ("@@speaker_" + soundID);
+				const string newModelId = ("@@speaker_" + soundId);
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\speaker.obj");
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_SPEAKER_SIZE);
@@ -256,16 +256,16 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			if(_copyTemplateSound(soundID, templateID, position, false))
+			if(_copyTemplateSound(soundId, templateId, position, false))
 			{
-				_fe3d->sound3d_setMaxVolume(soundID, maxVolume);
-				_fe3d->sound3d_setMaxDistance(soundID, maxDistance);
-				_fe3d->sound3d_start(soundID, -1, 0, false);
+				_fe3d->sound3d_setMaxVolume(soundId, maxVolume);
+				_fe3d->sound3d_setMaxDistance(soundId, maxDistance);
+				_fe3d->sound3d_start(soundId, -1, 0, false);
 			}
 		}
 		else if(lineType == "POINTLIGHT")
 		{
-			string pointlightID;
+			string pointlightId;
 			fvec3 position;
 			fvec3 radius;
 			fvec3 color;
@@ -273,7 +273,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			unsigned int shape;
 
 			iss >>
-				pointlightID >>
+				pointlightId >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -288,7 +288,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_isEditorLoaded)
 			{
-				const string newModelId = ("@@lamp_" + pointlightID);
+				const string newModelId = ("@@lamp_" + pointlightId);
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_LAMP_SIZE);
@@ -304,17 +304,17 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			_fe3d->pointlight_create(pointlightID);
-			_fe3d->pointlight_setPosition(pointlightID, position);
-			_fe3d->pointlight_setRadius(pointlightID, radius);
-			_fe3d->pointlight_setColor(pointlightID, color);
-			_fe3d->pointlight_setIntensity(pointlightID, intensity);
-			_fe3d->pointlight_setShape(pointlightID, PointlightShape(shape));
-			_loadedPointlightIds.push_back(pointlightID);
+			_fe3d->pointlight_create(pointlightId);
+			_fe3d->pointlight_setPosition(pointlightId, position);
+			_fe3d->pointlight_setRadius(pointlightId, radius);
+			_fe3d->pointlight_setColor(pointlightId, color);
+			_fe3d->pointlight_setIntensity(pointlightId, intensity);
+			_fe3d->pointlight_setShape(pointlightId, PointlightShape(shape));
+			_loadedPointlightIds.push_back(pointlightId);
 		}
 		else if(lineType == "SPOTLIGHT")
 		{
-			string spotlightID;
+			string spotlightId;
 			fvec3 position;
 			fvec3 color;
 			float yaw;
@@ -324,7 +324,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			float distance;
 
 			iss >>
-				spotlightID >>
+				spotlightId >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -339,7 +339,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_isEditorLoaded)
 			{
-				const string newModelId = ("@@torch_" + spotlightID);
+				const string newModelId = ("@@torch_" + spotlightId);
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\torch.obj");
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseRotation(newModelId, fvec3(0.0f, -yaw, pitch));
@@ -356,30 +356,30 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			_fe3d->spotlight_create(spotlightID);
-			_fe3d->spotlight_setPosition(spotlightID, position);
-			_fe3d->spotlight_setColor(spotlightID, color);
-			_fe3d->spotlight_setYaw(spotlightID, yaw);
-			_fe3d->spotlight_setPitch(spotlightID, pitch);
-			_fe3d->spotlight_setIntensity(spotlightID, intensity);
-			_fe3d->spotlight_setAngle(spotlightID, angle);
-			_fe3d->spotlight_setDistance(spotlightID, distance);
-			_loadedSpotlightIds.push_back(spotlightID);
+			_fe3d->spotlight_create(spotlightId);
+			_fe3d->spotlight_setPosition(spotlightId, position);
+			_fe3d->spotlight_setColor(spotlightId, color);
+			_fe3d->spotlight_setYaw(spotlightId, yaw);
+			_fe3d->spotlight_setPitch(spotlightId, pitch);
+			_fe3d->spotlight_setIntensity(spotlightId, intensity);
+			_fe3d->spotlight_setAngle(spotlightId, angle);
+			_fe3d->spotlight_setDistance(spotlightId, distance);
+			_loadedSpotlightIds.push_back(spotlightId);
 		}
 		else if(lineType == "REFLECTION")
 		{
-			string reflectionID;
+			string reflectionId;
 			fvec3 position;
 
 			iss >>
-				reflectionID >>
+				reflectionId >>
 				position.x >>
 				position.y >>
 				position.z;
 
 			if(_isEditorLoaded)
 			{
-				const string newModelId = ("@@camera_" + reflectionID);
+				const string newModelId = ("@@camera_" + reflectionId);
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
@@ -394,10 +394,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			_fe3d->reflection_create(reflectionID);
-			_fe3d->reflection_setPosition(reflectionID, position);
-			_fe3d->reflection_capture(reflectionID);
-			_loadedReflectionIds.push_back(reflectionID);
+			_fe3d->reflection_create(reflectionId);
+			_fe3d->reflection_setPosition(reflectionId, position);
+			_fe3d->reflection_capture(reflectionId);
+			_loadedReflectionIds.push_back(reflectionId);
 		}
 		else if(lineType == "EDITOR_SPEED")
 		{
@@ -594,7 +594,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 	file.close();
 
-	_loadedWorldID = fileName;
+	_loadedWorldId = fileName;
 
 	Logger::throwInfo("World editor data loaded!");
 

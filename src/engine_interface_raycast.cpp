@@ -164,7 +164,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 	else
 	{
 		float closestDistance = numeric_limits<float>::max();
-		string closestBoxID = "";
+		string closestBoxId = "";
 
 		for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 		{
@@ -203,19 +203,19 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 					if((distance != -1.0f) && (distance < closestDistance))
 					{
 						closestDistance = distance;
-						closestBoxID = entity->getId();
+						closestBoxId = entity->getId();
 					}
 				}
 			}
 		}
 
-		if(closestBoxID.empty())
+		if(closestBoxId.empty())
 		{
 			return make_pair("", -1.0f);
 		}
 		else
 		{
-			return make_pair(closestBoxID, closestDistance);
+			return make_pair(closestBoxId, closestDistance);
 		}
 	}
 }

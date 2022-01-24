@@ -30,8 +30,8 @@ private:
 	void _updateMiscellaneous();
 
 	vector<string> _loadedSoundIds;
-	string _currentSoundID = "";
-	string _hoveredSoundID = "";
+	string _currentSoundId = "";
+	string _hoveredSoundId = "";
 	string _currentProjectId = "";
 
 	static inline const fvec3 ICON_QUAD_POSITION = fvec3(0.0f, 0.0f, -1.5f);

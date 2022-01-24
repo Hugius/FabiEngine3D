@@ -1,11 +1,11 @@
 #include "gui_text_field.hpp"
 
-GuiTextField::GuiTextField(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& color, bool isCentered)
+GuiTextField::GuiTextField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
-	_entityId("@" + parentID + "_" + id),
-	_parentID(parentID),
+	_entityId("@" + parentId + "_" + id),
+	_parentId(parentId),
 	_initialPosition(position),
 	_initialSize(size),
 	_initialColor(color)
@@ -78,7 +78,7 @@ const string& GuiTextField::getEntityId() const
 	return _entityId;
 }
 
-const string& GuiTextField::getParentID() const
+const string& GuiTextField::getParentId() const
 {
-	return _parentID;
+	return _parentId;
 }

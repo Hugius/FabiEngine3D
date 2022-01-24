@@ -16,24 +16,24 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelId = ("@@lamp_" + newID);
+				auto newId = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelId = ("@@lamp_" + newId);
 
-				while(_fe3d->pointlight_isExisting(newID))
+				while(_fe3d->pointlight_isExisting(newId))
 				{
-					newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@lamp_" + newID);
+					newId = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelId = ("@@lamp_" + newId);
 				}
 
-				_fe3d->pointlight_create(newID);
+				_fe3d->pointlight_create(newId);
 
-				if(_fe3d->pointlight_isExisting(newID))
+				if(_fe3d->pointlight_isExisting(newId))
 				{
-					_loadedPointlightIds.push_back(newID);
+					_loadedPointlightIds.push_back(newId);
 
-					_fe3d->pointlight_setPosition(newID, newPosition);
-					_fe3d->pointlight_setRadius(newID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
-					_fe3d->pointlight_setIntensity(newID, DEFAULT_POINTLIGHT_INTENSITY);
+					_fe3d->pointlight_setPosition(newId, newPosition);
+					_fe3d->pointlight_setRadius(newId, fvec3(DEFAULT_POINTLIGHT_RADIUS));
+					_fe3d->pointlight_setIntensity(newId, DEFAULT_POINTLIGHT_INTENSITY);
 
 					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
 					_fe3d->model_setBasePosition(newModelId, newPosition);
@@ -96,24 +96,24 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelId = ("@@lamp_" + newID);
+				auto newId = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelId = ("@@lamp_" + newId);
 
-				while(_fe3d->pointlight_isExisting(newID))
+				while(_fe3d->pointlight_isExisting(newId))
 				{
-					newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@lamp_" + newID);
+					newId = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelId = ("@@lamp_" + newId);
 				}
 
-				_fe3d->pointlight_create(newID);
+				_fe3d->pointlight_create(newId);
 
-				if(_fe3d->pointlight_isExisting(newID))
+				if(_fe3d->pointlight_isExisting(newId))
 				{
-					_loadedPointlightIds.push_back(newID);
+					_loadedPointlightIds.push_back(newId);
 
-					_fe3d->pointlight_setPosition(newID, newPosition);
-					_fe3d->pointlight_setRadius(newID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
-					_fe3d->pointlight_setIntensity(newID, DEFAULT_POINTLIGHT_INTENSITY);
+					_fe3d->pointlight_setPosition(newId, newPosition);
+					_fe3d->pointlight_setRadius(newId, fvec3(DEFAULT_POINTLIGHT_RADIUS));
+					_fe3d->pointlight_setIntensity(newId, DEFAULT_POINTLIGHT_INTENSITY);
 
 					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
 					_fe3d->model_setBasePosition(newModelId, newPosition);

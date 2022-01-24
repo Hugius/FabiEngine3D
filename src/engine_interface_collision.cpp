@@ -73,14 +73,14 @@ const bool EngineInterface::collision_checkCameraWithEntity(const string& id) co
 	return _core->getAabbEntityManager()->getEntity(id)->hasCollided();
 }
 
-const string EngineInterface::collision_checkEntityWithEntities(const string& selfID, const string& otherID) const
+const string EngineInterface::collision_checkEntityWithEntities(const string& selfId, const string& otherId) const
 {
-	if(!_core->getAabbEntityManager()->isEntityExisting(selfID))
+	if(!_core->getAabbEntityManager()->isEntityExisting(selfId))
 	{
 		return "";
 	}
 
-	auto self = _core->getAabbEntityManager()->getEntity(selfID);
+	auto self = _core->getAabbEntityManager()->getEntity(selfId);
 	fvec3 selfPosition = self->getPosition();
 	fvec3 selfSize = self->getSize() / 2.0f;
 
@@ -91,7 +91,7 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 
 	for(const auto& [key, other] : _core->getAabbEntityManager()->getEntities())
 	{
-		if(other->getId().substr(0, otherID.size()) != otherID)
+		if(other->getId().substr(0, otherId.size()) != otherId)
 		{
 			continue;
 		}

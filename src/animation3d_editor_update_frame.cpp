@@ -198,19 +198,19 @@ void Animation3dEditor::_updateFrameMenu()
 
 		currentAnimation->setFrame(_currentFrameIndex, frame);
 
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("partList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("partList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_hoveredPartId.empty())
 			{
-				_hoveredPartId = selectedButtonID;
+				_hoveredPartId = selectedButtonId;
 				_originalPartOpacity = _fe3d->model_getOpacity(currentAnimation->getPreviewModelId(), _hoveredPartId);
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentPartId = selectedButtonID;
+				_currentPartId = selectedButtonId;
 				_hoveredPartId = "";
 				_gui->getOverlay()->deleteChoiceForm("partList");
 			}

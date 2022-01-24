@@ -3,7 +3,7 @@
 
 void WorldEditor::_updateCamera()
 {
-	if(!_currentWorldID.empty())
+	if(!_currentWorldId.empty())
 	{
 		if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getOverlay()->isFocused())
 		{
@@ -112,17 +112,17 @@ void WorldEditor::_updateWorldCreating()
 {
 	if(_isCreatingWorld)
 	{
-		string newWorldID;
+		string newWorldId;
 
-		if(_gui->getOverlay()->checkValueForm("worldCreate", newWorldID, {}))
+		if(_gui->getOverlay()->checkValueForm("worldCreate", newWorldId, {}))
 		{
-			if(newWorldID.find(' ') != string::npos)
+			if(newWorldId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("World id cannot contain any spaces!");
 				return;
 			}
 
-			if(newWorldID.find('@') != string::npos)
+			if(newWorldId.find('@') != string::npos)
 			{
 				Logger::throwWarning("World id cannot contain '@'!");
 				return;
@@ -130,13 +130,13 @@ void WorldEditor::_updateWorldCreating()
 
 			const auto worldNames = _getWorldIds();
 
-			if(find(worldNames.begin(), worldNames.end(), newWorldID) != worldNames.end())
+			if(find(worldNames.begin(), worldNames.end(), newWorldId) != worldNames.end())
 			{
-				Logger::throwWarning("World with id \"" + newWorldID.substr(1) + "\" already exists!");
+				Logger::throwWarning("World with id \"" + newWorldId.substr(1) + "\" already exists!");
 				return;
 			}
 
-			_currentWorldID = newWorldID;
+			_currentWorldId = newWorldId;
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 		}
 	}
@@ -146,17 +146,17 @@ void WorldEditor::_updateWorldChoosing()
 {
 	if(_isChoosingWorld)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("worldList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("worldList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentWorldID = selectedButtonID;
+				_currentWorldId = selectedButtonId;
 
 				if(!_isDeletingWorld)
 				{
-					if(loadEditorWorldFromFile(_currentWorldID))
+					if(loadEditorWorldFromFile(_currentWorldId))
 					{
 						_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 					}
@@ -177,7 +177,7 @@ void WorldEditor::_updateWorldChoosing()
 
 void WorldEditor::_updateWorldDeleting()
 {
-	if(_isDeletingWorld && !_currentWorldID.empty())
+	if(_isDeletingWorld && !_currentWorldId.empty())
 	{
 		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
@@ -186,13 +186,13 @@ void WorldEditor::_updateWorldDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_deleteWorldFile(_currentWorldID);
-			_currentWorldID = "";
+			_deleteWorldFile(_currentWorldId);
+			_currentWorldId = "";
 			_isDeletingWorld = false;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_currentWorldID = "";
+			_currentWorldId = "";
 			_isDeletingWorld = false;
 		}
 	}

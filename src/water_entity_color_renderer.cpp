@@ -176,11 +176,11 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 
 		if(entity->hasDisplacementMap())
 		{
-			glBindVertexArray(entity->getHighQualityMesh()->getVaoID());
+			glBindVertexArray(entity->getHighQualityMesh()->getVaoId());
 		}
 		else
 		{
-			glBindVertexArray(entity->getLowQualityMesh()->getVaoID());
+			glBindVertexArray(entity->getLowQualityMesh()->getVaoId());
 		}
 
 		if(entity->hasDisplacementMap())

@@ -3,11 +3,11 @@
 
 void ScriptInterpreter::executeInitializeScripts()
 {
-	if(!_initEntryID.empty())
+	if(!_initEntryId.empty())
 	{
 		_isExecutingInitialization = true;
 
-		_executeScript(_initEntryID, ScriptType::INITIALIZE);
+		_executeScript(_initEntryId, ScriptType::INITIALIZE);
 
 		_isExecutingInitialization = false;
 	}
@@ -15,14 +15,14 @@ void ScriptInterpreter::executeInitializeScripts()
 
 void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 {
-	if(!_updateEntryID.empty())
+	if(!_updateEntryId.empty())
 	{
 		_isExecutingUpdate = true;
 
 		_isDebugging = isDebugging;
 		_debuggingTimes.clear();
 
-		_executeScript(_updateEntryID, ScriptType::UPDATE);
+		_executeScript(_updateEntryId, ScriptType::UPDATE);
 
 		if(_isDebugging)
 		{
@@ -47,23 +47,23 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 
 void ScriptInterpreter::executeTerminateScripts()
 {
-	if(!_terminateEntryID.empty())
+	if(!_terminateEntryId.empty())
 	{
 		_isExecutingTerminate = true;
 
-		_executeScript(_terminateEntryID, ScriptType::TERMINATE);
+		_executeScript(_terminateEntryId, ScriptType::TERMINATE);
 
 		_isExecutingTerminate = false;
 	}
 }
 
-void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType scriptType)
+void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType scriptType)
 {
 	if(_isDebugging)
 	{
-		if(_debuggingTimes.find(scriptID) == _debuggingTimes.end())
+		if(_debuggingTimes.find(scriptId) == _debuggingTimes.end())
 		{
-			_debuggingTimes.insert(make_pair(scriptID, 0.0f));
+			_debuggingTimes.insert(make_pair(scriptId, 0.0f));
 		}
 
 		_fe3d->misc_startMillisecondTimer();
@@ -76,7 +76,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	unsigned int scopeDepth = 0;
 
 	_executionDepth++;
-	_currentScriptIdsStack.push_back(scriptID);
+	_currentScriptIdsStack.push_back(scriptId);
 	_currentLineIndexStack.push_back(0);
 	_localVariables[_executionDepth] = {};
 
@@ -91,7 +91,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		return;
 	}
 
-	auto scriptFile = _script->getScriptFile(scriptID);
+	auto scriptFile = _script->getScriptFile(scriptId);
 
 	for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
@@ -243,7 +243,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			{
 				if(_isDebugging)
 				{
-					_debuggingTimes[scriptID] += _fe3d->misc_stopMillisecondTimer();
+					_debuggingTimes[scriptId] += _fe3d->misc_stopMillisecondTimer();
 				}
 
 				_executeScript(scriptToExecute, scriptType);
@@ -477,6 +477,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 
 	if(_isDebugging)
 	{
-		_debuggingTimes[scriptID] += _fe3d->misc_stopMillisecondTimer();
+		_debuggingTimes[scriptId] += _fe3d->misc_stopMillisecondTimer();
 	}
 }

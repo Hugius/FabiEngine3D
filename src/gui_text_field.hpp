@@ -5,7 +5,7 @@
 class GuiTextField final
 {
 public:
-	GuiTextField(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& color, bool isCentered);
+	GuiTextField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& color, bool isCentered);
 	~GuiTextField();
 
 	void setVisible(bool isVisible);
@@ -16,7 +16,7 @@ public:
 
 	const string& getId() const;
 	const string& getEntityId() const;
-	const string& getParentID() const;
+	const string& getParentId() const;
 
 	const fvec3& getInitialColor() const;
 
@@ -26,7 +26,7 @@ public:
 private:
 	const string _id;
 	const string _entityId;
-	const string _parentID;
+	const string _parentId;
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 
 	fvec3 _initialColor;

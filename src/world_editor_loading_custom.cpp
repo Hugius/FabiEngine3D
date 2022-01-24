@@ -42,20 +42,20 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//	if(lineType == "SKY")
 	//	{
-	//		string skyId, templateID;
+	//		string skyId, templateId;
 	//		fvec3 color;
 	//		float rotation, lightness;
 
 	//		iss >>
 	//			skyId >>
-	//			templateID >>
+	//			templateId >>
 	//			rotation >>
 	//			lightness >>
 	//			color.r >>
 	//			color.g >>
 	//			color.b;
 
-	//		if(_copyTemplateSky(skyId, templateID))
+	//		if(_copyTemplateSky(skyId, templateId))
 	//		{
 	//			_fe3d->sky_setRotation(skyId, rotation);
 	//			_fe3d->sky_setLightness(skyId, lightness);
@@ -64,22 +64,22 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//	}
 	//	else if(lineType == "TERRAIN")
 	//	{
-	//		string terrainId, templateID;
+	//		string terrainId, templateId;
 
-	//		iss >> terrainId >> templateID;
+	//		iss >> terrainId >> templateId;
 
-	//		_copyTemplateTerrain(terrainId, templateID);
+	//		_copyTemplateTerrain(terrainId, templateId);
 	//	}
 	//	else if(lineType == "WATER")
 	//	{
-	//		string waterId, templateID;
+	//		string waterId, templateId;
 	//		fvec3 color;
 	//		fvec2 speed;
 	//		float opacity;
 
 	//		iss >>
 	//			waterId >>
-	//			templateID >>
+	//			templateId >>
 	//			color.r >>
 	//			color.g >>
 	//			color.b >>
@@ -87,7 +87,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			speed.y >>
 	//			opacity;
 
-	//		if(_copyTemplateWater(waterId, templateID))
+	//		if(_copyTemplateWater(waterId, templateId))
 	//		{
 	//			_fe3d->water_setColor(waterId, color);
 	//			_fe3d->water_setSpeed(waterId, speed);
@@ -96,7 +96,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//	}
 	//	else if(lineType == "MODEL")
 	//	{
-	//		string modelId, templateID;
+	//		string modelId, templateId;
 	//		fvec3 position, rotation, rotationOrigin, size, color;
 	//		float minHeight, maxHeight, opacity, lightness;
 	//		unsigned partCount;
@@ -107,7 +107,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		bool makeInvisible = (modelId[0] == '@');
 
 	//		iss >>
-	//			templateID >>
+	//			templateId >>
 	//			isVisible >>
 	//			isFrozen >>
 	//			isAabbRaycastResponsive >>
@@ -143,7 +143,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//				partIds.push_back(partId);
 	//			}
 
-	//			if(partIds.size() != _fe3d->model_getPartIds(templateID).size())
+	//			if(partIds.size() != _fe3d->model_getPartIds(templateId).size())
 	//			{
 	//				Logger::throwWarning("World model parts with id \"" + modelId + "\" differ from base model!");
 	//				continue;
@@ -151,7 +151,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//			for(size_t i = 0; i < partIds.size(); i++)
 	//			{
-	//				if(partIds[i] != _fe3d->model_getPartIds(templateID)[i])
+	//				if(partIds[i] != _fe3d->model_getPartIds(templateId)[i])
 	//				{
 	//					Logger::throwWarning("World model parts with id \"" + modelId + "\" differ from base model!");
 	//					continue;
@@ -159,7 +159,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			}
 	//		}
 
-	//		if(_copyTemplateModel(modelId, templateID, position, false))
+	//		if(_copyTemplateModel(modelId, templateId, position, false))
 	//		{
 	//			_fe3d->model_setBaseRotation(modelId, rotation);
 	//			_fe3d->model_setBaseRotationOrigin(modelId, rotationOrigin);
@@ -280,7 +280,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//	}
 	//	else if(lineType == "QUAD3D")
 	//	{
-	//		string quadId, templateID, textContent;
+	//		string quadId, templateId, textContent;
 	//		fvec3 position, rotation, color;
 	//		fvec2 size;
 	//		float lightness, minHeight, maxHeight;
@@ -290,7 +290,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		iss >>
 	//			quadId >>
-	//			templateID >>
+	//			templateId >>
 	//			isVisible >>
 	//			isAabbRaycastResponsive >>
 	//			isAabbCollisionResponsive >>
@@ -321,7 +321,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		replace(textContent.begin(), textContent.end(), '?', ' ');
 
-	//		if(_copyTemplateQuad3d(quadId, templateID, position, false))
+	//		if(_copyTemplateQuad3d(quadId, templateId, position, false))
 	//		{
 	//			_fe3d->quad3d_setRotation(quadId, rotation);
 	//			_fe3d->quad3d_setSize(quadId, size);
@@ -368,34 +368,34 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//	}
 	//	else if(lineType == "SOUND")
 	//	{
-	//		string soundID, templateID;
+	//		string soundId, templateId;
 	//		fvec3 position;
 	//		float maxVolume, maxDistance;
 
 	//		iss >>
-	//			soundID >>
-	//			templateID >>
+	//			soundId >>
+	//			templateId >>
 	//			position.x >>
 	//			position.y >>
 	//			position.z >>
 	//			maxVolume >>
 	//			maxDistance;
 
-	//		if(_copyTemplateSound(soundID, templateID, position, false))
+	//		if(_copyTemplateSound(soundId, templateId, position, false))
 	//		{
-	//			_fe3d->sound3d_setMaxVolume(soundID, maxVolume);
-	//			_fe3d->sound3d_setMaxDistance(soundID, maxDistance);
-	//			_fe3d->sound3d_start(soundID, -1, 0, false);
+	//			_fe3d->sound3d_setMaxVolume(soundId, maxVolume);
+	//			_fe3d->sound3d_setMaxDistance(soundId, maxDistance);
+	//			_fe3d->sound3d_start(soundId, -1, 0, false);
 	//		}
 	//	}
 	//	else if(lineType == "POINTLIGHT")
 	//	{
-	//		string pointlightID;
+	//		string pointlightId;
 	//		fvec3 position, radius, color;
 	//		float intensity;
 
 	//		iss >>
-	//			pointlightID >>
+	//			pointlightId >>
 	//			position.x >>
 	//			position.y >>
 	//			position.z >>
@@ -407,20 +407,20 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			color.b >>
 	//			intensity;
 
-	//		_fe3d->pointlight_setPosition(pointlightID, position);
-	//		_fe3d->pointlight_setRadius(pointlightID, radius);
-	//		_fe3d->pointlight_setColor(pointlightID, color);
-	//		_fe3d->pointlight_setIntensity(pointlightID, intensity);
-	//		_loadedPointlightIds.push_back(pointlightID);
+	//		_fe3d->pointlight_setPosition(pointlightId, position);
+	//		_fe3d->pointlight_setRadius(pointlightId, radius);
+	//		_fe3d->pointlight_setColor(pointlightId, color);
+	//		_fe3d->pointlight_setIntensity(pointlightId, intensity);
+	//		_loadedPointlightIds.push_back(pointlightId);
 	//	}
 	//	else if(lineType == "SPOTLIGHT")
 	//	{
-	//		string spotlightID;
+	//		string spotlightId;
 	//		fvec3 position, color;
 	//		float yaw, pitch, intensity, angle, distance;
 
 	//		iss >>
-	//			spotlightID >>
+	//			spotlightId >>
 	//			position.x >>
 	//			position.y >>
 	//			position.z >>
@@ -433,30 +433,30 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			angle >>
 	//			distance;
 
-	//		_fe3d->spotlight_setPosition(spotlightID, position);
-	//		_fe3d->spotlight_setColor(spotlightID, color);
-	//		_fe3d->spotlight_setYaw(spotlightID, yaw);
-	//		_fe3d->spotlight_setPitch(spotlightID, pitch);
-	//		_fe3d->spotlight_setIntensity(spotlightID, intensity);
-	//		_fe3d->spotlight_setAngle(spotlightID, angle);
-	//		_fe3d->spotlight_setDistance(spotlightID, distance);
-	//		_loadedSpotlightIds.push_back(spotlightID);
+	//		_fe3d->spotlight_setPosition(spotlightId, position);
+	//		_fe3d->spotlight_setColor(spotlightId, color);
+	//		_fe3d->spotlight_setYaw(spotlightId, yaw);
+	//		_fe3d->spotlight_setPitch(spotlightId, pitch);
+	//		_fe3d->spotlight_setIntensity(spotlightId, intensity);
+	//		_fe3d->spotlight_setAngle(spotlightId, angle);
+	//		_fe3d->spotlight_setDistance(spotlightId, distance);
+	//		_loadedSpotlightIds.push_back(spotlightId);
 	//	}
 	//	else if(lineType == "REFLECTION")
 	//	{
-	//		string reflectionID;
+	//		string reflectionId;
 	//		fvec3 position;
 
 	//		iss >>
-	//			reflectionID >>
+	//			reflectionId >>
 	//			position.x >>
 	//			position.y >>
 	//			position.z;
 
-	//		_fe3d->reflection_create(reflectionID);
-	//		_fe3d->reflection_setPosition(reflectionID, position);
-	//		_fe3d->reflection_capture(reflectionID);
-	//		_loadedReflectionIds.push_back(reflectionID);
+	//		_fe3d->reflection_create(reflectionId);
+	//		_fe3d->reflection_setPosition(reflectionId, position);
+	//		_fe3d->reflection_capture(reflectionId);
+	//		_loadedReflectionIds.push_back(reflectionId);
 	//	}
 	//	else if(lineType == "LIGHTING_AMBIENT")
 	//	{
@@ -601,7 +601,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//file.close();
 
-	//_loadedWorldID = fileName;
+	//_loadedWorldId = fileName;
 
 	return true;
 }

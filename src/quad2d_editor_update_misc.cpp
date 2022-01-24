@@ -79,26 +79,26 @@ void Quad2dEditor::_updateQuadChoosing()
 {
 	if(_isChoosingQuad)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("quadList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("quadList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_hoveredQuadId.empty())
 			{
-				_hoveredQuadId = ("@" + selectedButtonID);
+				_hoveredQuadId = ("@" + selectedButtonId);
 				_fe3d->quad2d_setVisible(_hoveredQuadId, false);
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentQuadId = ("@" + selectedButtonID);
+				_currentQuadId = ("@" + selectedButtonId);
 				_hoveredQuadId = "";
 
 				if(!_isDeletingQuad)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Quad2D: " + selectedButtonID.substr(1), 0.025f);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Quad2D: " + selectedButtonId.substr(1), 0.025f);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
 				}
 

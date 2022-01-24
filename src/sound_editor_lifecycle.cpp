@@ -27,7 +27,7 @@ void SoundEditor::load()
 	_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
 	_fe3d->quad3d_setBright("@@icon", true);
 
-	_gui->getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("soundId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_isEditorLoaded = true;
 }
@@ -47,11 +47,11 @@ void SoundEditor::unload()
 
 	_fe3d->quad3d_delete("@@icon");
 
-	_gui->getOverlay()->deleteTextField("soundID");
+	_gui->getOverlay()->deleteTextField("soundId");
 
 	_loadedSoundIds.clear();
-	_currentSoundID = "";
-	_hoveredSoundID = "";
+	_currentSoundId = "";
+	_hoveredSoundId = "";
 	_isEditorLoaded = false;
 	_isCreatingSound = false;
 	_isChoosingSound = false;

@@ -36,7 +36,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 			glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap()->getId());
 		}
 
-		glBindVertexArray(entity->getMesh()->getVaoID());
+		glBindVertexArray(entity->getMesh()->getVaoId());
 
 		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
 		_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);

@@ -40,16 +40,16 @@ void WorldEditor::_updateWaterMenu()
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("waterList");
-			if(!selectedButtonID.empty())
+			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("waterList");
+			if(!selectedButtonId.empty())
 			{
-				if(_fe3d->water_isExisting(selectedButtonID))
+				if(_fe3d->water_isExisting(selectedButtonId))
 				{
-					_fe3d->water_delete(selectedButtonID);
+					_fe3d->water_delete(selectedButtonId);
 				}
 
-				_currentWaterId = selectedButtonID;
-				_copyTemplateWater(_currentWaterId, ("@" + selectedButtonID));
+				_currentWaterId = selectedButtonId;
+				_copyTemplateWater(_currentWaterId, ("@" + selectedButtonId));
 				_gui->getOverlay()->deleteChoiceForm("waterList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("waterList"))

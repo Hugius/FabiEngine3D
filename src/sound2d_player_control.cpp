@@ -143,9 +143,9 @@ void Sound2dPlayer::stopSound(Sound2d& sound, unsigned int fadeMS)
 
 const bool Sound2dPlayer::isSoundStarted(Sound2d& sound) const
 {
-	for(const auto& soundID : _channels)
+	for(const auto& soundId : _channels)
 	{
-		if(soundID == sound.getId())
+		if(soundId == sound.getId())
 		{
 			return true;
 		}

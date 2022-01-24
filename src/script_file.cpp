@@ -52,9 +52,9 @@ void ScriptFile::setCursorCharIndex(unsigned int index)
 	_cursorCharIndex = index;
 }
 
-void ScriptFile::changeID(const string& newID)
+void ScriptFile::changeId(const string& newId)
 {
-	_id = newID;
+	_id = newId;
 }
 
 const string& ScriptFile::getId() const

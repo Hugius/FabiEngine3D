@@ -6,7 +6,7 @@
 class GuiWriteField final : public GuiButton
 {
 public:
-	GuiWriteField(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor,
+	GuiWriteField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor,
 				  const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
 
 	void update(bool isHoverable);

@@ -107,26 +107,26 @@ void Text2dEditor::_updateTextChoosing()
 {
 	if(_isChoosingText)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("textList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("textList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_hoveredTextId.empty())
 			{
-				_hoveredTextId = ("@" + selectedButtonID);
+				_hoveredTextId = ("@" + selectedButtonId);
 				_fe3d->text2d_setVisible(_hoveredTextId, true);
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentTextId = ("@" + selectedButtonID);
+				_currentTextId = ("@" + selectedButtonId);
 				_hoveredTextId = "";
 
 				if(!_isDeletingText)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textId")->getEntityId(), "Text: " + selectedButtonID.substr(1), 0.025f);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textId")->getEntityId(), "Text: " + selectedButtonId.substr(1), 0.025f);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
 				}
 

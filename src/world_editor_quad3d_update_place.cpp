@@ -15,14 +15,14 @@ void WorldEditor::_updateQuad3dPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newID = (_currentTemplateQuadId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = (_currentTemplateQuadId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-				while(_fe3d->quad3d_isExisting(newID))
+				while(_fe3d->quad3d_isExisting(newId))
 				{
-					newID = (_currentTemplateQuadId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newId = (_currentTemplateQuadId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				}
 
-				_copyTemplateQuad3d(newID, _currentTemplateQuadId, newPosition, false);
+				_copyTemplateQuad3d(newId, _currentTemplateQuadId, newPosition, false);
 			}
 
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
@@ -66,14 +66,14 @@ void WorldEditor::_updateQuad3dPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newID = (_currentTemplateQuadId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = (_currentTemplateQuadId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-				while(_fe3d->quad3d_isExisting(newID))
+				while(_fe3d->quad3d_isExisting(newId))
 				{
-					newID = (_currentTemplateQuadId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newId = (_currentTemplateQuadId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				}
 
-				_copyTemplateQuad3d(newID, _currentTemplateQuadId, newPosition, false);
+				_copyTemplateQuad3d(newId, _currentTemplateQuadId, newPosition, false);
 			}
 		}
 	}

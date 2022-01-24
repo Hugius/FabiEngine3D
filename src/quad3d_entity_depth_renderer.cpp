@@ -50,7 +50,7 @@ void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity, fl
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
 		}
 
-		glBindVertexArray(buffer->getVaoID());
+		glBindVertexArray(buffer->getVaoId());
 
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 

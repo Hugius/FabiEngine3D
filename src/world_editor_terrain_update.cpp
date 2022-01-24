@@ -32,16 +32,16 @@ void WorldEditor::_updateTerrainMenu()
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("terrainList");
-			if(!selectedButtonID.empty())
+			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("terrainList");
+			if(!selectedButtonId.empty())
 			{
-				if(_fe3d->terrain_isExisting(selectedButtonID))
+				if(_fe3d->terrain_isExisting(selectedButtonId))
 				{
-					_fe3d->terrain_delete(selectedButtonID);
+					_fe3d->terrain_delete(selectedButtonId);
 				}
 
-				_currentTerrainId = selectedButtonID;
-				_copyTemplateTerrain(_currentTerrainId, ("@" + selectedButtonID));
+				_currentTerrainId = selectedButtonId;
+				_copyTemplateTerrain(_currentTerrainId, ("@" + selectedButtonId));
 				_gui->getOverlay()->deleteChoiceForm("terrainList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("terrainList"))

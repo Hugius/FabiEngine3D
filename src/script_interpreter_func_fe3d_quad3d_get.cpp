@@ -402,7 +402,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_validateFe3dID(args[0].getString()))
+			if(!_validateFe3dId(args[0].getString()))
 			{
 				return true;
 			}
@@ -418,7 +418,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_validateFe3dID(args[0].getString()))
+			if(!_validateFe3dId(args[0].getString()))
 			{
 				return true;
 			}

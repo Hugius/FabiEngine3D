@@ -16,26 +16,26 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelId = ("@@torch_" + newID);
+				auto newId = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelId = ("@@torch_" + newId);
 
-				while(_fe3d->spotlight_isExisting(newID))
+				while(_fe3d->spotlight_isExisting(newId))
 				{
-					newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@torch_" + newID);
+					newId = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelId = ("@@torch_" + newId);
 				}
 
-				_fe3d->spotlight_create(newID);
+				_fe3d->spotlight_create(newId);
 
-				if(_fe3d->spotlight_isExisting(newID))
+				if(_fe3d->spotlight_isExisting(newId))
 				{
-					_loadedSpotlightIds.push_back(newID);
+					_loadedSpotlightIds.push_back(newId);
 
-					_fe3d->spotlight_setPosition(newID, newPosition);
-					_fe3d->spotlight_setPitch(newID, DEFAULT_SPOTLIGHT_PITCH);
-					_fe3d->spotlight_setIntensity(newID, DEFAULT_SPOTLIGHT_INTENSITY);
-					_fe3d->spotlight_setAngle(newID, DEFAULT_SPOTLIGHT_ANGLE);
-					_fe3d->spotlight_setDistance(newID, DEFAULT_SPOTLIGHT_DISTANCE);
+					_fe3d->spotlight_setPosition(newId, newPosition);
+					_fe3d->spotlight_setPitch(newId, DEFAULT_SPOTLIGHT_PITCH);
+					_fe3d->spotlight_setIntensity(newId, DEFAULT_SPOTLIGHT_INTENSITY);
+					_fe3d->spotlight_setAngle(newId, DEFAULT_SPOTLIGHT_ANGLE);
+					_fe3d->spotlight_setDistance(newId, DEFAULT_SPOTLIGHT_DISTANCE);
 
 					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\torch.obj");
 					_fe3d->model_setBasePosition(newModelId, newPosition);
@@ -99,26 +99,26 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-				auto newModelId = ("@@torch_" + newID);
+				auto newId = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newModelId = ("@@torch_" + newId);
 
-				while(_fe3d->spotlight_isExisting(newID))
+				while(_fe3d->spotlight_isExisting(newId))
 				{
-					newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@torch_" + newID);
+					newId = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+					newModelId = ("@@torch_" + newId);
 				}
 
-				_fe3d->spotlight_create(newID);
+				_fe3d->spotlight_create(newId);
 
-				if(_fe3d->spotlight_isExisting(newID))
+				if(_fe3d->spotlight_isExisting(newId))
 				{
-					_loadedSpotlightIds.push_back(newID);
+					_loadedSpotlightIds.push_back(newId);
 
-					_fe3d->spotlight_setPosition(newID, newPosition);
-					_fe3d->spotlight_setPitch(newID, DEFAULT_SPOTLIGHT_PITCH);
-					_fe3d->spotlight_setIntensity(newID, DEFAULT_SPOTLIGHT_INTENSITY);
-					_fe3d->spotlight_setAngle(newID, DEFAULT_SPOTLIGHT_ANGLE);
-					_fe3d->spotlight_setDistance(newID, DEFAULT_SPOTLIGHT_DISTANCE);
+					_fe3d->spotlight_setPosition(newId, newPosition);
+					_fe3d->spotlight_setPitch(newId, DEFAULT_SPOTLIGHT_PITCH);
+					_fe3d->spotlight_setIntensity(newId, DEFAULT_SPOTLIGHT_INTENSITY);
+					_fe3d->spotlight_setAngle(newId, DEFAULT_SPOTLIGHT_ANGLE);
+					_fe3d->spotlight_setDistance(newId, DEFAULT_SPOTLIGHT_DISTANCE);
 
 					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\torch.obj");
 					_fe3d->model_setBasePosition(newModelId, newPosition);

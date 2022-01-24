@@ -47,8 +47,8 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 			continue;
 		}
 
-		const auto scriptFileID = fileName.substr(0, fileName.size() - 5);
-		_script->createScriptFile(scriptFileID);
+		const auto scriptFileId = fileName.substr(0, fileName.size() - 5);
+		_script->createScriptFile(scriptFileId);
 
 		string line;
 		unsigned int cursorLineIndex, cursorCharIndex;
@@ -59,13 +59,13 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 
 		iss >> cursorLineIndex >> cursorCharIndex;
 
-		_script->getScriptFile(scriptFileID)->setCursorLineIndex(cursorLineIndex);
-		_script->getScriptFile(scriptFileID)->setCursorCharIndex(cursorCharIndex);
+		_script->getScriptFile(scriptFileId)->setCursorLineIndex(cursorLineIndex);
+		_script->getScriptFile(scriptFileId)->setCursorCharIndex(cursorCharIndex);
 
 		unsigned int lineIndex = 0;
 		while(getline(file, line))
 		{
-			_script->getScriptFile(scriptFileID)->insertNewLine(lineIndex, line);
+			_script->getScriptFile(scriptFileId)->insertNewLine(lineIndex, line);
 			lineIndex++;
 		}
 

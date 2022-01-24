@@ -534,7 +534,7 @@ public:
 	void aabb_moveTo(const string& id, const fvec3& target, float speed);
 	void aabb_scaleTo(const string& id, const fvec3& target, float speed);
 
-	const vector<string> aabb_getChildIds(const string& parentID, AabbParentEntityType parentEntityType) const;
+	const vector<string> aabb_getChildIds(const string& parentId, AabbParentEntityType parentEntityType) const;
 	const vector<string> aabb_getIds() const;
 	const string& aabb_getParentEntityId(const string& id) const;
 	const fvec3& aabb_getPosition(const string& id) const;
@@ -717,7 +717,7 @@ public:
 
 	const string collision_checkCameraWithAny() const;
 	const string collision_checkCameraWithEntities(const string& id) const;
-	const string collision_checkEntityWithEntities(const string& selfID, const string& otherID) const;
+	const string collision_checkEntityWithEntities(const string& selfId, const string& otherId) const;
 	const bool collision_checkCameraWithTerrain() const;
 	const bool collision_checkCameraWithEntity(const string& id) const;
 	const bool collision_checkCameraWithEntityDirection(const string& id, Direction direction) const;

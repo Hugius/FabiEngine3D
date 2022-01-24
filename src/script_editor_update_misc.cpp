@@ -37,11 +37,11 @@ void ScriptEditor::_updateGUI()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_scriptFileNamesToDelete.push_back(_currentScriptFileID);
+			_scriptFileNamesToDelete.push_back(_currentScriptFileId);
 			_fe3d->text3d_deleteAll();
-			_script->deleteScriptFile(_currentScriptFileID);
+			_script->deleteScriptFile(_currentScriptFileId);
 			_isWritingScript = false;
-			_currentScriptFileID = "";
+			_currentScriptFileId = "";
 		}
 
 		if(_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL))
@@ -66,8 +66,8 @@ void ScriptEditor::_updateGUI()
 			return;
 		}
 
-		screen->getButton("rename")->setHoverable(!_currentScriptFileID.empty());
-		screen->getButton("delete")->setHoverable(!_currentScriptFileID.empty());
+		screen->getButton("rename")->setHoverable(!_currentScriptFileId.empty());
+		screen->getButton("delete")->setHoverable(!_currentScriptFileId.empty());
 
 		screen->getTextField("lineCount")->changeTextContent("Lines: " + to_string(_script->getTotalLineCount()));
 	}
@@ -77,35 +77,35 @@ void ScriptEditor::_updateScriptFileCreating()
 {
 	if(_isCreatingScriptFile)
 	{
-		string newScriptFileID;
+		string newScriptFileId;
 
-		if(_gui->getOverlay()->checkValueForm("scriptCreate", newScriptFileID))
+		if(_gui->getOverlay()->checkValueForm("scriptCreate", newScriptFileId))
 		{
-			if(newScriptFileID.find(' ') != string::npos)
+			if(newScriptFileId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Script id cannot contain any spaces!");
 				return;
 			}
 
-			if(newScriptFileID.find('@') != string::npos)
+			if(newScriptFileId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Script id cannot contain '@'!");
 				return;
 			}
 
 			auto existingScriptFileIds = _script->getScriptFileIds();
-			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileID) != existingScriptFileIds.end())
+			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) != existingScriptFileIds.end())
 			{
-				Logger::throwWarning("Script with id \"" + newScriptFileID + "\" already exists!");
+				Logger::throwWarning("Script with id \"" + newScriptFileId + "\" already exists!");
 				return;
 			}
 
-			_currentScriptFileID = newScriptFileID;
+			_currentScriptFileId = newScriptFileId;
 			_isWritingScript = true;
 			_firstSelectedLineIndex = -1;
 			_lastSelectedLineIndex = -1;
-			_script->createScriptFile(_currentScriptFileID);
-			_script->getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
+			_script->createScriptFile(_currentScriptFileId);
+			_script->getScriptFile(_currentScriptFileId)->insertNewLine(0, "");
 			_reloadScriptTextDisplay(true);
 
 			_isCreatingScriptFile = false;
@@ -117,13 +117,13 @@ void ScriptEditor::_updateScriptFileChoosing()
 {
 	if(_isChoosingScriptFile)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("scriptFileList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("scriptFileList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentScriptFileID = selectedButtonID;
+				_currentScriptFileId = selectedButtonId;
 				_isWritingScript = true;
 				_firstSelectedLineIndex = -1;
 				_lastSelectedLineIndex = -1;
@@ -145,31 +145,31 @@ void ScriptEditor::_updateScriptFileRenaming()
 {
 	if(_isRenamingScriptFile)
 	{
-		string newScriptFileID;
+		string newScriptFileId;
 
-		if(_gui->getOverlay()->checkValueForm("scriptRename", newScriptFileID))
+		if(_gui->getOverlay()->checkValueForm("scriptRename", newScriptFileId))
 		{
-			if(newScriptFileID.find(' ') != string::npos)
+			if(newScriptFileId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Script id cannot contain any spaces!");
 				return;
 			}
 
-			if(newScriptFileID.find('@') != string::npos)
+			if(newScriptFileId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Script id cannot contain '@'!");
 				return;
 			}
 
 			auto existingScriptFileIds = _script->getScriptFileIds();
-			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileID) == existingScriptFileIds.end())
+			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) == existingScriptFileIds.end())
 			{
-				Logger::throwWarning("Script with id \"" + newScriptFileID + "\" already exists!");
+				Logger::throwWarning("Script with id \"" + newScriptFileId + "\" already exists!");
 			}
 
-			_scriptFileNamesToDelete.push_back(_currentScriptFileID);
-			_script->renameScriptFile(_currentScriptFileID, newScriptFileID);
-			_currentScriptFileID = newScriptFileID;
+			_scriptFileNamesToDelete.push_back(_currentScriptFileId);
+			_script->renameScriptFile(_currentScriptFileId, newScriptFileId);
+			_currentScriptFileId = newScriptFileId;
 
 			_isRenamingScriptFile = false;
 		}
@@ -208,8 +208,8 @@ void ScriptEditor::_updateMiscellaneous()
 {
 	if(_isWritingScript)
 	{
-		const unsigned int currentLineIndex = _script->getScriptFile(_currentScriptFileID)->getCursorLineIndex();
-		const unsigned int lineCount = _script->getScriptFile(_currentScriptFileID)->getLineCount();
+		const unsigned int currentLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
+		const unsigned int lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 		const float lastLineHeight = _fe3d->text3d_getPosition(to_string(lineCount - 1)).y;
 
 		if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())

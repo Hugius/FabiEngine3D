@@ -51,16 +51,16 @@ void WorldEditor::_updateSpotlightMenu()
 
 			auto Ids = _fe3d->spotlight_getIds();
 			sort(Ids.begin(), Ids.end());
-			for(auto& spotlightID : Ids)
+			for(auto& spotlightId : Ids)
 			{
-				if(spotlightID[0] != '@')
+				if(spotlightId[0] != '@')
 				{
-					reverse(spotlightID.begin(), spotlightID.end());
-					string rawID = spotlightID.substr(spotlightID.find('_') + 1);
-					reverse(rawID.begin(), rawID.end());
-					reverse(spotlightID.begin(), spotlightID.end());
+					reverse(spotlightId.begin(), spotlightId.end());
+					string rawId = spotlightId.substr(spotlightId.find('_') + 1);
+					reverse(rawId.begin(), rawId.end());
+					reverse(spotlightId.begin(), spotlightId.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createButton(spotlightID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createButton(spotlightId, rawId);
 				}
 			}
 		}
@@ -84,20 +84,20 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 			}
 		}
 
-		for(const auto& spotlightID : _fe3d->spotlight_getIds())
+		for(const auto& spotlightId : _fe3d->spotlight_getIds())
 		{
-			if(spotlightID[0] != '@')
+			if(spotlightId[0] != '@')
 			{
-				if(screen->getScrollingList("spotlightList")->getButton(spotlightID)->isHovered())
+				if(screen->getScrollingList("spotlightList")->getButton(spotlightId)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activateSpotlight(spotlightID);
+						_activateSpotlight(spotlightId);
 					}
 					else
 					{
 						_dontResetSelectedTorch = true;
-						_selectSpotlight(spotlightID);
+						_selectSpotlight(spotlightId);
 					}
 
 					break;

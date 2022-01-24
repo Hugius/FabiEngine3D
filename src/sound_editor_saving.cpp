@@ -21,9 +21,9 @@ const bool SoundEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\sound.fe3d");
 
-	for(const auto& soundID : _loadedSoundIds)
+	for(const auto& soundId : _loadedSoundIds)
 	{
-		auto audioPath = _fe3d->sound2d_getAudioPath(soundID);
+		auto audioPath = _fe3d->sound2d_getAudioPath(soundId);
 
 		audioPath = string(audioPath.empty() ? "" : audioPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 
@@ -31,7 +31,7 @@ const bool SoundEditor::saveToFile() const
 
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
-		file << soundID << " " << audioPath << endl;
+		file << soundId << " " << audioPath << endl;
 	}
 
 	file.close();

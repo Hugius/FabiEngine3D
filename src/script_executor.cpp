@@ -56,19 +56,19 @@ void ScriptExecutor::pause()
 			_fe3d->misc_disableVsync();
 		}
 
-		for(const auto& soundID : _fe3d->sound2d_getIds())
+		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
-			if(_fe3d->sound2d_isPaused(soundID))
+			if(_fe3d->sound2d_isPaused(soundId))
 			{
-				_pausedSoundIds.push_back(soundID);
+				_pausedSoundIds.push_back(soundId);
 			}
 		}
 
-		for(const auto& soundID : _fe3d->sound3d_getIds())
+		for(const auto& soundId : _fe3d->sound3d_getIds())
 		{
-			if(_fe3d->sound3d_isPaused(soundID))
+			if(_fe3d->sound3d_isPaused(soundId))
 			{
-				_pausedSoundIds.push_back(soundID);
+				_pausedSoundIds.push_back(soundId);
 			}
 		}
 
@@ -98,15 +98,15 @@ void ScriptExecutor::resume()
 		}
 
 		_fe3d->sound2d_resumeAll();
-		for(const auto& soundID : _pausedSoundIds)
+		for(const auto& soundId : _pausedSoundIds)
 		{
-			_fe3d->sound2d_pause(soundID);
+			_fe3d->sound2d_pause(soundId);
 		}
 
 		_fe3d->sound3d_resumeAll();
-		for(const auto& soundID : _pausedSoundIds)
+		for(const auto& soundId : _pausedSoundIds)
 		{
-			_fe3d->sound3d_pause(soundID);
+			_fe3d->sound3d_pause(soundId);
 		}
 
 		_isRunning = true;

@@ -142,9 +142,9 @@ void Sound3dPlayer::stopSound(Sound3d& sound, unsigned int fadeMS)
 
 const bool Sound3dPlayer::isSoundStarted(Sound3d& sound) const
 {
-	for(const auto& soundID : _channels)
+	for(const auto& soundId : _channels)
 	{
-		if(soundID == sound.getId())
+		if(soundId == sound.getId())
 		{
 			return true;
 		}

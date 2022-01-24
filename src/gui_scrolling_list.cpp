@@ -4,9 +4,9 @@
 
 #include <algorithm>
 
-GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
+GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
 	:
-	GuiRectangle(fe3d, parentID + "_scrollingList", id, position, size, color, isCentered),
+	GuiRectangle(fe3d, parentId + "_scrollingList", id, position, size, color, isCentered),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),
 	_textColor(textColor),
@@ -32,14 +32,14 @@ void GuiScrollingList::createButton(const string& id, const string& textContent)
 
 	fvec2 position = _convertPosition(fvec2(x, y));
 	fvec2 size = _convertSize(fvec2(w, h));
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID, id, fvec2(position.x, position.y), fvec2(size.x, size.y),
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentId, id, fvec2(position.x, position.y), fvec2(size.x, size.y),
 					   _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, _fe3d->quad2d_isCentered(_entityId)));
 
-	string rectangleID = _buttons.back()->getRectangle()->getEntityId();
+	string rectangleId = _buttons.back()->getRectangle()->getEntityId();
 	string textId = _buttons.back()->getTextField()->getEntityId();
-	_fe3d->quad2d_setMinPosition(rectangleID, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
+	_fe3d->quad2d_setMinPosition(rectangleId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
 	_fe3d->text2d_setMinPosition(textId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
-	_fe3d->quad2d_setMaxPosition(rectangleID, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
+	_fe3d->quad2d_setMaxPosition(rectangleId, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
 	_fe3d->text2d_setMaxPosition(textId, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
 }
 
@@ -156,17 +156,17 @@ void GuiScrollingList::_updateScrolling()
 
 		for(const auto& button : _buttons)
 		{
-			string rectangleID = button->getRectangle()->getEntityId();
+			string rectangleId = button->getRectangle()->getEntityId();
 			string textId = button->getTextField()->getEntityId();
 
 			if(mustReset)
 			{
-				_fe3d->quad2d_setPosition(rectangleID, button->getRectangle()->getInitialPosition());
+				_fe3d->quad2d_setPosition(rectangleId, button->getRectangle()->getInitialPosition());
 				_fe3d->text2d_setPosition(textId, button->getTextField()->getInitialPosition());
 			}
 			else
 			{
-				_fe3d->quad2d_move(rectangleID, fvec2(0.0f, _scrollingSpeed));
+				_fe3d->quad2d_move(rectangleId, fvec2(0.0f, _scrollingSpeed));
 				_fe3d->text2d_move(textId, fvec2(0.0f, _scrollingSpeed));
 			}
 		}

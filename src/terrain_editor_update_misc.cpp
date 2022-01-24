@@ -155,15 +155,15 @@ void TerrainEditor::_updateTerrainChoosing()
 {
 	if(_isChoosingTerrain)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("terrainList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("terrainList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
-			_fe3d->terrain_select("@" + selectedButtonID);
+			_fe3d->terrain_select("@" + selectedButtonId);
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentTerrainId = ("@" + selectedButtonID);
+				_currentTerrainId = ("@" + selectedButtonId);
 
 				if(!_isDeletingTerrain)
 				{

@@ -138,19 +138,19 @@ void Quad3dEditor::_updateQuad3dChoosing()
 {
 	if(_isChoosingQuad3d)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("quad3dList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("quad3dList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_hoveredQuadId.empty())
 			{
-				_hoveredQuadId = ("@" + selectedButtonID);
+				_hoveredQuadId = ("@" + selectedButtonId);
 				_fe3d->quad3d_setVisible(_hoveredQuadId, true);
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentQuadId = ("@" + selectedButtonID);
+				_currentQuadId = ("@" + selectedButtonId);
 				_hoveredQuadId = "";
 
 				if(!_isDeletingQuad3d)

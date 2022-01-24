@@ -155,19 +155,19 @@ void ModelEditor::_updateAabbChoosing()
 {
 	if(_isChoosingAabb)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("aabbList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("aabbList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_hoveredAabbId.empty())
 			{
-				_hoveredAabbId = selectedButtonID;
+				_hoveredAabbId = selectedButtonId;
 				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), true);
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentAabbId = selectedButtonID;
+				_currentAabbId = selectedButtonId;
 				_hoveredAabbId = "";
 
 				if(!_isDeletingAabb)

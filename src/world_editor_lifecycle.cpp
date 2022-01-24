@@ -95,7 +95,7 @@ void WorldEditor::load()
 	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("quadId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("textId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("soundId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_fe3d->collision_enableCameraResponse(true, true, true);
 	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
@@ -178,7 +178,7 @@ void WorldEditor::unload()
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
 	_loadedReflectionIds.clear();
-	_customWorldID = "";
+	_customWorldId = "";
 	_loadedSkyId = "";
 	_loadedTerrainId = "";
 	_loadedWaterId = "";
@@ -191,17 +191,17 @@ void WorldEditor::unload()
 	_currentTemplateQuadId = "";
 	_selectedQuadId = "";
 	_activeQuadId = "";
-	_currentTemplateSoundID = "";
-	_selectedSpeakerID = "";
-	_activeSpeakerID = "";
-	_selectedLampID = "";
-	_activeLampID = "";
-	_selectedTorchID = "";
-	_activeTorchID = "";
-	_selectedCameraID = "";
-	_activeCameraID = "";
-	_loadedWorldID = "";
-	_currentWorldID = "";
+	_currentTemplateSoundId = "";
+	_selectedSpeakerId = "";
+	_activeSpeakerId = "";
+	_selectedLampId = "";
+	_activeLampId = "";
+	_selectedTorchId = "";
+	_activeTorchId = "";
+	_selectedCameraId = "";
+	_activeCameraId = "";
+	_loadedWorldId = "";
+	_currentWorldId = "";
 	_editorSpeed = 1.0f;
 	_selectedModelHighlightDirection = 1;
 	_activeModelHighlightDirection = 1;
@@ -239,7 +239,7 @@ void WorldEditor::unload()
 
 	_gui->getOverlay()->deleteTextField("modelId");
 	_gui->getOverlay()->deleteTextField("quadId");
-	_gui->getOverlay()->deleteTextField("soundID");
+	_gui->getOverlay()->deleteTextField("soundId");
 
 	_fe3d->collision_disableCameraResponse();
 	if(_fe3d->misc_isAabbFrameRenderingEnabled())

@@ -27,26 +27,26 @@ const float Timer::stop()
 
 void Timer::startDeltaPart(const string& id)
 {
-	if(!_currentID.empty())
+	if(!_currentId.empty())
 	{
 		Logger::throwError("Timer::startDeltaPart");
 	}
 
 	QueryPerformanceFrequency(&_specificFrequency);
 	QueryPerformanceCounter(&_specificTime1);
-	_currentID = id;
+	_currentId = id;
 }
 
 void Timer::stopDeltaPart()
 {
-	if(_currentID.empty())
+	if(_currentId.empty())
 	{
 		Logger::throwError("Timer::stopDeltaPart");
 	}
 
 	QueryPerformanceCounter(&_specificTime2);
-	_deltaParts[_currentID] = static_cast<float>((_specificTime2.QuadPart - _specificTime1.QuadPart) * 1000.0f / _specificFrequency.QuadPart);
-	_currentID = "";
+	_deltaParts[_currentId] = static_cast<float>((_specificTime2.QuadPart - _specificTime1.QuadPart) * 1000.0f / _specificFrequency.QuadPart);
+	_currentId = "";
 }
 
 const float Timer::getDeltaPart(const string& id)
@@ -104,5 +104,5 @@ const bool Timer::isStarted() const
 
 const bool Timer::isDeltaPartStarted(const string& id) const
 {
-	return (!_currentID.empty()) && (id == _currentID);
+	return (!_currentId.empty()) && (id == _currentId);
 }

@@ -10,7 +10,7 @@
 class GuiScreen final
 {
 public:
-	GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& id, const fvec2& position, const fvec2& size);
+	GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size);
 
 	void update(bool isHoverable);
 	void show();
@@ -29,7 +29,7 @@ public:
 	void deleteTextField(const string& id);
 
 	const string& getId() const;
-	const string& getParentID() const;
+	const string& getParentId() const;
 
 	const fvec2 convertPosition(const fvec2& position) const;
 	const fvec2 convertSize(const fvec2& size) const;
@@ -58,7 +58,7 @@ private:
 	fvec2 _parentSize;
 
 	const string _id;
-	const string _parentID;
+	const string _parentId;
 
 	bool _isActive = false;
 

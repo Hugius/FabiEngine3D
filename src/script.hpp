@@ -6,7 +6,7 @@ class Script final
 {
 public:
 	void createScriptFile(const string& id);
-	void renameScriptFile(const string& id, const string& newID);
+	void renameScriptFile(const string& id, const string& newId);
 	void deleteScriptFile(const string& id);
 	void clear();
 

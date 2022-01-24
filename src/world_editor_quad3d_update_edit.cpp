@@ -13,7 +13,7 @@ void WorldEditor::_updateQuad3dEditing()
 		_dontResetSelectedQuad3d = false;
 	}
 
-	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
+	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
 		for(const auto& id : _fe3d->quad3d_getIds())
 		{
@@ -114,15 +114,15 @@ void WorldEditor::_updateQuad3dEditing()
 			}
 
 			auto lastAnimationId = _animation2dEditor->getStartedQuad3dAnimationIds(_activeQuadId);
-			auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("animationList");
-			if(!selectedButtonID.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
+			if(!selectedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if(!lastAnimationId.empty())
 				{
 					_animation2dEditor->stopQuad3dAnimation(lastAnimationId.back(), _activeQuadId);
 				}
 
-				_animation2dEditor->startQuad3dAnimation(selectedButtonID, _activeQuadId, -1);
+				_animation2dEditor->startQuad3dAnimation(selectedButtonId, _activeQuadId, -1);
 
 				_gui->getOverlay()->deleteChoiceForm("animationList");
 			}

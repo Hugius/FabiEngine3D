@@ -19,26 +19,26 @@ public:
 	void unbind();
 	template<typename T> void uploadUniform(const string& name, const T& data)
 	{
-		auto uniformID = getUniformID(name);
-		_uploadUniform(uniformID, data);
+		auto uniformId = getUniformId(name);
+		_uploadUniform(uniformId, data);
 	}
 
-	const BufferId getProgramID() const;
-	const BufferId getUniformID(const string& name);
+	const BufferId getProgramId() const;
+	const BufferId getUniformId(const string& name);
 
 private:
-	void _uploadUniform(const BufferId& uniformID, const bool& data);
-	void _uploadUniform(const BufferId& uniformID, const int& data);
-	void _uploadUniform(const BufferId& uniformID, const float& data);
-	void _uploadUniform(const BufferId& uniformID, const double& data);
-	void _uploadUniform(const BufferId& uniformID, const fvec2& data);
-	void _uploadUniform(const BufferId& uniformID, const fvec3& data);
-	void _uploadUniform(const BufferId& uniformID, const fvec4& data);
-	void _uploadUniform(const BufferId& uniformID, const mat22& data);
-	void _uploadUniform(const BufferId& uniformID, const mat33& data);
-	void _uploadUniform(const BufferId& uniformID, const mat44& data);
+	void _uploadUniform(const BufferId& uniformId, const bool& data);
+	void _uploadUniform(const BufferId& uniformId, const int& data);
+	void _uploadUniform(const BufferId& uniformId, const float& data);
+	void _uploadUniform(const BufferId& uniformId, const double& data);
+	void _uploadUniform(const BufferId& uniformId, const fvec2& data);
+	void _uploadUniform(const BufferId& uniformId, const fvec3& data);
+	void _uploadUniform(const BufferId& uniformId, const fvec4& data);
+	void _uploadUniform(const BufferId& uniformId, const mat22& data);
+	void _uploadUniform(const BufferId& uniformId, const mat33& data);
+	void _uploadUniform(const BufferId& uniformId, const mat44& data);
 
 	map<string, BufferId> _uniformCache;
 
-	BufferId _programID = 0;
+	BufferId _programId = 0;
 };

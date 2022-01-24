@@ -13,7 +13,7 @@ public:
 	void deleteLine(unsigned int index);
 	void setCursorLineIndex(unsigned int index);
 	void setCursorCharIndex(unsigned int index);
-	void changeID(const string& newID);
+	void changeId(const string& newId);
 
 	const vector<string>& getLines() const;
 

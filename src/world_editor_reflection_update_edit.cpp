@@ -5,11 +5,11 @@ void WorldEditor::_updateReflectionEditing()
 {
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		if(!_dontResetSelectedCamera)
 		{
-			_selectedCameraID = "";
+			_selectedCameraId = "";
 		}
 		else
 		{
@@ -28,15 +28,15 @@ void WorldEditor::_updateReflectionEditing()
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						if(_selectedCameraID != _activeCameraID)
+						if(_selectedCameraId != _activeCameraId)
 						{
-							_activateReflection(_selectedCameraID.substr(string("@@camera_").size()));
+							_activateReflection(_selectedCameraId.substr(string("@@camera_").size()));
 						}
 					}
 				}
 				else
 				{
-					if((id != _selectedCameraID) && (id != _activeCameraID))
+					if((id != _selectedCameraId) && (id != _activeCameraId))
 					{
 						_unselectReflection(id);
 					}
@@ -48,26 +48,26 @@ void WorldEditor::_updateReflectionEditing()
 		{
 			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
-				if(!_activeCameraID.empty())
+				if(!_activeCameraId.empty())
 				{
-					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedCameraID.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedCameraId.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
-						_activeCameraID = "";
+						_activeCameraId = "";
 						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
 		}
 
-		if(_selectedCameraID != _activeCameraID)
+		if(_selectedCameraId != _activeCameraId)
 		{
-			_updateCameraHighlighting(_selectedCameraID, _selectedCameraHighlightDirection);
+			_updateCameraHighlighting(_selectedCameraId, _selectedCameraHighlightDirection);
 		}
-		_updateCameraHighlighting(_activeCameraID, _activeCameraHighlightDirection);
+		_updateCameraHighlighting(_activeCameraId, _activeCameraHighlightDirection);
 
-		if(!_activeCameraID.empty())
+		if(!_activeCameraId.empty())
 		{
-			const string activeReflectionID = _activeCameraID.substr(string("@@camera_").size());
+			const string activeReflectionId = _activeCameraId.substr(string("@@camera_").size());
 			auto screen = rightWindow->getScreen("reflectionPropertiesMenu");
 
 			rightWindow->setActiveScreen("reflectionPropertiesMenu");
@@ -76,14 +76,14 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
 				{
-					_fe3d->reflection_capture(activeReflectionID);
+					_fe3d->reflection_capture(activeReflectionId);
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d->model_delete(_activeCameraID);
-					_fe3d->reflection_delete(activeReflectionID);
-					_loadedReflectionIds.erase(remove(_loadedReflectionIds.begin(), _loadedReflectionIds.end(), activeReflectionID), _loadedReflectionIds.end());
-					_activeCameraID = "";
+					_fe3d->model_delete(_activeCameraId);
+					_fe3d->reflection_delete(activeReflectionId);
+					_loadedReflectionIds.erase(remove(_loadedReflectionIds.begin(), _loadedReflectionIds.end(), activeReflectionId), _loadedReflectionIds.end());
+					_activeCameraId = "";
 					rightWindow->setActiveScreen("main");
 					return;
 				}
@@ -91,15 +91,15 @@ void WorldEditor::_updateReflectionEditing()
 
 			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d->model_delete(_activeCameraID);
-				_fe3d->reflection_delete(activeReflectionID);
-				_loadedReflectionIds.erase(remove(_loadedReflectionIds.begin(), _loadedReflectionIds.end(), activeReflectionID), _loadedReflectionIds.end());
-				_activeCameraID = "";
+				_fe3d->model_delete(_activeCameraId);
+				_fe3d->reflection_delete(activeReflectionId);
+				_loadedReflectionIds.erase(remove(_loadedReflectionIds.begin(), _loadedReflectionIds.end(), activeReflectionId), _loadedReflectionIds.end());
+				_activeCameraId = "";
 				rightWindow->setActiveScreen("main");
 				return;
 			}
 
-			auto position = _fe3d->reflection_getPosition(activeReflectionID);
+			auto position = _fe3d->reflection_getPosition(activeReflectionId);
 
 			_handleValueChanging("reflectionPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / REFLECTION_POSITION_DIVIDER));
 			_handleValueChanging("reflectionPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / REFLECTION_POSITION_DIVIDER));
@@ -108,8 +108,8 @@ void WorldEditor::_updateReflectionEditing()
 			_handleValueChanging("reflectionPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / REFLECTION_POSITION_DIVIDER));
 			_handleValueChanging("reflectionPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / REFLECTION_POSITION_DIVIDER));
 
-			_fe3d->reflection_setPosition(activeReflectionID, position);
-			_fe3d->model_setBasePosition(_activeCameraID, position);
+			_fe3d->reflection_setPosition(activeReflectionId, position);
+			_fe3d->model_setBasePosition(_activeCameraId, position);
 		}
 	}
 }

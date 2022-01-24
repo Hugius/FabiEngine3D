@@ -40,7 +40,7 @@ private:
 	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;
 	string _currentProjectId = "";
-	string _currentScriptFileID = "";
+	string _currentScriptFileId = "";
 
 	static inline const fvec3 CAMERA_POSITION = fvec3(0.0f, 0.0f, 10.0f);
 	static inline const fvec3 SCRIPT_TEXT_STARTING_POSITION = fvec3(-11.0f, 6.0f, 0.5f);

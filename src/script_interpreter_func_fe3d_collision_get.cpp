@@ -327,10 +327,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 			if(args[1].getString().empty())
 			{
-				for(const auto& selfSearchID : _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::MODEL))
+				for(const auto& selfSearchId : _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::MODEL))
 				{
-					string otherSearchID = args[2].getString();
-					auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchID, otherSearchID);
+					string otherSearchId = args[2].getString();
+					auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchId, otherSearchId);
 
 					if(!foundAabbId.empty())
 					{
@@ -360,15 +360,15 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			}
 			else
 			{
-				string selfSearchID = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
-				if(!_fe3d->aabb_isExisting(selfSearchID))
+				string selfSearchId = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
+				if(!_fe3d->aabb_isExisting(selfSearchId))
 				{
-					_throwScriptError("requested model AABB with id \"" + selfSearchID + "\" does not exist!");
+					_throwScriptError("requested model AABB with id \"" + selfSearchId + "\" does not exist!");
 					return true;
 				}
 
-				string otherSearchID = args[2].getString();
-				auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchID, otherSearchID);
+				string otherSearchId = args[2].getString();
+				auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchId, otherSearchId);
 
 				if(!foundAabbId.empty())
 				{
@@ -408,9 +408,9 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 			if(args[1].getString().empty())
 			{
-				for(const auto& selfSearchID : _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::QUAD3D))
+				for(const auto& selfSearchId : _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::QUAD3D))
 				{
-					auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchID, args[2].getString());
+					auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchId, args[2].getString());
 
 					if(!foundAabbId.empty())
 					{
@@ -424,14 +424,14 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			}
 			else
 			{
-				string selfSearchID = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
-				if(!_fe3d->aabb_isExisting(selfSearchID))
+				string selfSearchId = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
+				if(!_fe3d->aabb_isExisting(selfSearchId))
 				{
-					_throwScriptError("requested model AABB with id \"" + selfSearchID + "\" does not exist!");
+					_throwScriptError("requested model AABB with id \"" + selfSearchId + "\" does not exist!");
 					return true;
 				}
 
-				auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchID, args[2].getString());
+				auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchId, args[2].getString());
 
 				if(!foundAabbId.empty())
 				{
@@ -456,9 +456,9 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 			if(args[1].getString().empty())
 			{
-				for(const auto& selfSearchID : _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::MODEL))
+				for(const auto& selfSearchId : _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::MODEL))
 				{
-					auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchID, args[2].getString());
+					auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchId, args[2].getString());
 
 					if(!foundAabbId.empty())
 					{
@@ -472,14 +472,14 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			}
 			else
 			{
-				string selfSearchID = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
-				if(!_fe3d->aabb_isExisting(selfSearchID))
+				string selfSearchId = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
+				if(!_fe3d->aabb_isExisting(selfSearchId))
 				{
-					_throwScriptError("requested model AABB with id \"" + selfSearchID + "\" does not exist!");
+					_throwScriptError("requested model AABB with id \"" + selfSearchId + "\" does not exist!");
 					return true;
 				}
 
-				auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchID, args[2].getString());
+				auto foundAabbId = _fe3d->collision_checkEntityWithEntities(selfSearchId, args[2].getString());
 
 				if(!foundAabbId.empty())
 				{

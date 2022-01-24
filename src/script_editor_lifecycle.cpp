@@ -40,7 +40,7 @@ void ScriptEditor::unload()
 
 	_scriptFileNamesToDelete.clear();
 	_copyClipboard.clear();
-	_currentScriptFileID = "";
+	_currentScriptFileId = "";
 	_scrollingAcceleration = 0.0f;
 	_firstSelectedLineIndex = -1;
 	_lastSelectedLineIndex = -1;

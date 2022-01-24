@@ -10,17 +10,17 @@ void WorldEditor::_updateSoundMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateSoundID.empty())
+			if(!_currentTemplateSoundId.empty())
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundID))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId))
 				{
-					_fe3d->sound3d_stop(_currentTemplateSoundID, 0);
+					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
 
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), false);
-				_currentTemplateSoundID = "";
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
+				_currentTemplateSoundId = "";
 			}
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -37,21 +37,21 @@ void WorldEditor::_updateSoundMenu()
 
 			auto Ids = _fe3d->sound3d_getIds();
 			sort(Ids.begin(), Ids.end());
-			for(auto& soundID : Ids)
+			for(auto& soundId : Ids)
 			{
-				if(soundID[0] != '@')
+				if(soundId[0] != '@')
 				{
-					reverse(soundID.begin(), soundID.end());
-					string rawID = soundID.substr(soundID.find('_') + 1);
-					reverse(rawID.begin(), rawID.end());
-					reverse(soundID.begin(), soundID.end());
+					reverse(soundId.begin(), soundId.end());
+					string rawId = soundId.substr(soundId.find('_') + 1);
+					reverse(rawId.begin(), rawId.end());
+					reverse(soundId.begin(), soundId.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->createButton(soundID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->createButton(soundId, rawId);
 				}
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateSoundID.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateSoundId.empty());
 	}
 }
 
@@ -68,9 +68,9 @@ void WorldEditor::_updateSoundPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& soundID : _soundEditor->getLoadedIds())
+			for(const auto& soundId : _soundEditor->getLoadedIds())
 			{
-				if(screen->getScrollingList("soundList")->getButton(soundID)->isHovered())
+				if(screen->getScrollingList("soundList")->getButton(soundId)->isHovered())
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
@@ -81,16 +81,16 @@ void WorldEditor::_updateSoundPlacingMenu()
 					_deactivateSpotlight();
 					_deactivateReflection();
 
-					_currentTemplateSoundID = soundID;
+					_currentTemplateSoundId = soundId;
 					_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, true);
-					_fe3d->sound3d_start(_currentTemplateSoundID, -1, 0, false);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), true);
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityId(), "Sound: " + _currentTemplateSoundID.substr(1), 0.025f);
+					_fe3d->sound3d_start(_currentTemplateSoundId, -1, 0, false);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundId")->getEntityId(), "Sound: " + _currentTemplateSoundId.substr(1), 0.025f);
 					_fe3d->misc_centerCursor();
 
 					if(_fe3d->terrain_getSelectedId().empty())
 					{
-						_fe3d->sound3d_setPosition(_currentTemplateSoundID, fvec3(0.0f));
+						_fe3d->sound3d_setPosition(_currentTemplateSoundId, fvec3(0.0f));
 						_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 						_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 						_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -118,20 +118,20 @@ void WorldEditor::_updateSoundChoosingMenu()
 			}
 		}
 
-		for(const auto& soundID : _fe3d->sound3d_getIds())
+		for(const auto& soundId : _fe3d->sound3d_getIds())
 		{
-			if(soundID[0] != '@')
+			if(soundId[0] != '@')
 			{
-				if(screen->getScrollingList("soundList")->getButton(soundID)->isHovered())
+				if(screen->getScrollingList("soundList")->getButton(soundId)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activateSound(soundID);
+						_activateSound(soundId);
 					}
 					else
 					{
 						_dontResetSelectedSpeaker = true;
-						_selectSound(soundID);
+						_selectSound(soundId);
 					}
 
 					break;

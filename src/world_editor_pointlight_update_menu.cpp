@@ -51,16 +51,16 @@ void WorldEditor::_updatePointlightMenu()
 
 			auto Ids = _fe3d->pointlight_getIds();
 			sort(Ids.begin(), Ids.end());
-			for(auto& pointlightID : Ids)
+			for(auto& pointlightId : Ids)
 			{
-				if(pointlightID[0] != '@')
+				if(pointlightId[0] != '@')
 				{
-					reverse(pointlightID.begin(), pointlightID.end());
-					string rawID = pointlightID.substr(pointlightID.find('_') + 1);
-					reverse(rawID.begin(), rawID.end());
-					reverse(pointlightID.begin(), pointlightID.end());
+					reverse(pointlightId.begin(), pointlightId.end());
+					string rawId = pointlightId.substr(pointlightId.find('_') + 1);
+					reverse(rawId.begin(), rawId.end());
+					reverse(pointlightId.begin(), pointlightId.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createButton(pointlightID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createButton(pointlightId, rawId);
 				}
 			}
 		}
@@ -84,20 +84,20 @@ void WorldEditor::_updatePointlightChoosingMenu()
 			}
 		}
 
-		for(const auto& pointlightID : _fe3d->pointlight_getIds())
+		for(const auto& pointlightId : _fe3d->pointlight_getIds())
 		{
-			if(pointlightID[0] != '@')
+			if(pointlightId[0] != '@')
 			{
-				if(screen->getScrollingList("pointlightList")->getButton(pointlightID)->isHovered())
+				if(screen->getScrollingList("pointlightList")->getButton(pointlightId)->isHovered())
 				{
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activatePointlight(pointlightID);
+						_activatePointlight(pointlightId);
 					}
 					else
 					{
 						_dontResetSelectedLamp = true;
-						_selectPointlight(pointlightID);
+						_selectPointlight(pointlightId);
 					}
 
 					break;

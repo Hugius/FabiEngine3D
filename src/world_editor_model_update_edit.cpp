@@ -4,7 +4,7 @@ void WorldEditor::_updateModelEditing()
 {
 	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
-	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		if(!_dontResetSelectedModel)
 		{
@@ -15,13 +15,13 @@ void WorldEditor::_updateModelEditing()
 			_dontResetSelectedModel = false;
 		}
 
-		auto hoveredID = _fe3d->raycast_checkCursorInAny().first;
+		auto hoveredId = _fe3d->raycast_checkCursorInAny().first;
 
 		for(const auto& id : _fe3d->model_getIds())
 		{
 			if(id[0] != '@')
 			{
-				bool hovered = (hoveredID.size() >= id.size()) && (hoveredID.substr(0, id.size()) == id);
+				bool hovered = (hoveredId.size() >= id.size()) && (hoveredId.substr(0, id.size()) == id);
 
 				if(hovered && _fe3d->misc_isCursorInsideViewport() &&
 				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
@@ -124,8 +124,8 @@ void WorldEditor::_updateModelEditing()
 			}
 
 			auto lastAnimationId = _animation3dEditor->getStartedModelAnimationIds(_activeModelId);
-			auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("animationList");
-			if(!selectedButtonID.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
+			if(!selectedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if(!lastAnimationId.empty())
 				{
@@ -148,7 +148,7 @@ void WorldEditor::_updateModelEditing()
 					}
 				}
 
-				_animation3dEditor->startModelAnimation(selectedButtonID, _activeModelId, -1);
+				_animation3dEditor->startModelAnimation(selectedButtonId, _activeModelId, -1);
 
 				_gui->getOverlay()->deleteChoiceForm("animationList");
 			}

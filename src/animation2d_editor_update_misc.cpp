@@ -61,13 +61,13 @@ void Animation2dEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("animationList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentAnimationId = selectedButtonID;
+				_currentAnimationId = selectedButtonId;
 
 				if(!_isDeletingAnimation)
 				{
@@ -76,7 +76,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 					_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, _getAnimation(_currentAnimationId)->getPreviewTexturePath());
 					_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, true);
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationId")->getEntityId(), "Animation: " + selectedButtonID, 0.025f);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationId")->getEntityId(), "Animation: " + selectedButtonId, 0.025f);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
 				}
 

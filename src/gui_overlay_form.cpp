@@ -184,7 +184,7 @@ const bool GuiOverlay::_checkValueForm(const string& id, string& valueString, co
 
 void GuiOverlay::createChoiceForm(const string& id, const string& title, const fvec2& position, const vector<string>& buttonTitles)
 {
-	if(!_choiceFormID.empty())
+	if(!_choiceFormId.empty())
 	{
 		Logger::throwError("GuiOverlay::createChoiceForm::1");
 	}
@@ -205,12 +205,12 @@ void GuiOverlay::createChoiceForm(const string& id, const string& title, const f
 	}
 
 	_isFocused = true;
-	_choiceFormID = id;
+	_choiceFormId = id;
 }
 
 const string GuiOverlay::checkChoiceForm(const string& id)
 {
-	if(id == _choiceFormID)
+	if(id == _choiceFormId)
 	{
 		for(const auto& button : getScrollingList(id)->getButtons())
 		{
@@ -226,7 +226,7 @@ const string GuiOverlay::checkChoiceForm(const string& id)
 
 const bool GuiOverlay::isChoiceFormCancelled(const string& id) const
 {
-	if(id == _choiceFormID)
+	if(id == _choiceFormId)
 	{
 		return (getButton("choice_form_cancel")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT));
 	}
@@ -238,28 +238,28 @@ const bool GuiOverlay::isChoiceFormCancelled(const string& id) const
 
 void GuiOverlay::deleteChoiceForm(const string& id)
 {
-	if(id != _choiceFormID)
+	if(id != _choiceFormId)
 	{
 		Logger::throwError("GuiOverlay::deleteChoiceForm");
 	}
 
-	deleteRectangle(_choiceFormID);
-	deleteTextField(_choiceFormID);
-	deleteScrollingList(_choiceFormID);
+	deleteRectangle(_choiceFormId);
+	deleteTextField(_choiceFormId);
+	deleteScrollingList(_choiceFormId);
 	deleteButton("choice_form_cancel");
 
 	_isFocused = false;
-	_choiceFormID = "";
+	_choiceFormId = "";
 }
 
 const bool GuiOverlay::isChoiceFormExisting(const string& id) const
 {
-	return (id == _choiceFormID);
+	return (id == _choiceFormId);
 }
 
 void GuiOverlay::createAnswerForm(const string& id, const string& title, const fvec2& position)
 {
-	if(!_answerFormID.empty())
+	if(!_answerFormId.empty())
 	{
 		Logger::throwError("GuiOverlay::createAnswerForm");
 	}
@@ -270,12 +270,12 @@ void GuiOverlay::createAnswerForm(const string& id, const string& title, const f
 	createButton("answer_form_no", position + fvec2(0.1f, -0.2f), fvec2(0.075f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "No", fvec3(1.0f), fvec3(0.0f), true);
 
 	_isFocused = true;
-	_answerFormID = id;
+	_answerFormId = id;
 }
 
 const bool GuiOverlay::isAnswerFormConfirmed(const string& id)
 {
-	if(id == _answerFormID)
+	if(id == _answerFormId)
 	{
 		if(getButton("answer_form_yes")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
@@ -291,7 +291,7 @@ const bool GuiOverlay::isAnswerFormConfirmed(const string& id)
 
 const bool GuiOverlay::isAnswerFormDenied(const string& id)
 {
-	if(isButtonExisting("answer_form_no") && (id == _answerFormID))
+	if(isButtonExisting("answer_form_no") && (id == _answerFormId))
 	{
 		if(getButton("answer_form_no")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
@@ -307,7 +307,7 @@ const bool GuiOverlay::isAnswerFormDenied(const string& id)
 
 void GuiOverlay::_deleteAnswerForm(const string& id)
 {
-	if(id != _answerFormID)
+	if(id != _answerFormId)
 	{
 		Logger::throwError("GuiOverlay::_deleteAnswerForm");
 	}
@@ -318,23 +318,23 @@ void GuiOverlay::_deleteAnswerForm(const string& id)
 	deleteButton("answer_form_no");
 
 	_isFocused = false;
-	_answerFormID = "";
+	_answerFormId = "";
 }
 
 const bool GuiOverlay::isAnswerFormExisting(const string& id) const
 {
-	return (id == _answerFormID);
+	return (id == _answerFormId);
 }
 
 void GuiOverlay::_updateValueFormDeleting()
 {
 	if(_mustDeleteValueForms)
 	{
-		for(const auto& tempID : _valueFormIds)
+		for(const auto& tempId : _valueFormIds)
 		{
-			deleteRectangle(tempID);
-			deleteTextField(tempID);
-			deleteWriteField(tempID);
+			deleteRectangle(tempId);
+			deleteTextField(tempId);
+			deleteWriteField(tempId);
 		}
 		_valueFormIds.clear();
 

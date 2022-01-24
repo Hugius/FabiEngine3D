@@ -150,7 +150,7 @@ const bool EngineInterface::aabb_hasParent(const string& id) const
 	return _core->getAabbEntityManager()->getEntity(id)->hasParent();
 }
 
-const vector<string> EngineInterface::aabb_getChildIds(const string& parentID, AabbParentEntityType parentEntityType) const
+const vector<string> EngineInterface::aabb_getChildIds(const string& parentId, AabbParentEntityType parentEntityType) const
 {
 	vector<string> result;
 
@@ -158,7 +158,7 @@ const vector<string> EngineInterface::aabb_getChildIds(const string& parentID, A
 	{
 		if(entity->hasParent())
 		{
-			if(parentID == entity->getParentEntityId() && (
+			if(parentId == entity->getParentEntityId() && (
 				((entity->getParentEntityType() == AabbParentEntityType::MODEL) && (parentEntityType == AabbParentEntityType::MODEL)) ||
 				((entity->getParentEntityType() == AabbParentEntityType::QUAD3D) && (parentEntityType == AabbParentEntityType::QUAD3D)) ||
 				((entity->getParentEntityType() == AabbParentEntityType::TEXT3D) && (parentEntityType == AabbParentEntityType::TEXT3D))))

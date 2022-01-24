@@ -10,7 +10,7 @@ using std::ofstream;
 
 const bool WorldEditor::saveEditorWorldToFile()
 {
-	if(_currentWorldID.empty())
+	if(_currentWorldId.empty())
 	{
 		return false;
 	}
@@ -21,7 +21,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\worlds\\editor\\" + _currentWorldID + ".fe3d");
+	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\worlds\\editor\\" + _currentWorldId + ".fe3d");
 
 	vector<string> levelOfDetailEntityIds;
 	for(const auto& modelId : _fe3d->model_getIds())
@@ -48,35 +48,35 @@ const bool WorldEditor::saveEditorWorldToFile()
 	string skyId = _fe3d->sky_getSelectedId();
 	if(!skyId.empty())
 	{
-		string templateID = ("@" + skyId);
+		string templateId = ("@" + skyId);
 
 		file <<
 			"SKY " <<
 			skyId << " " <<
-			templateID << endl;
+			templateId << endl;
 	}
 
 	string terrainId = _fe3d->terrain_getSelectedId();
 	if(!terrainId.empty())
 	{
-		string templateID = ("@" + terrainId);
+		string templateId = ("@" + terrainId);
 
 		file <<
 			"TERRAIN " <<
 			terrainId << " " <<
-			templateID << endl;
+			templateId << endl;
 	}
 
 	string waterId = _fe3d->water_getSelectedId();
 	if(!waterId.empty())
 	{
-		string templateID = ("@" + waterId);
+		string templateId = ("@" + waterId);
 		auto height = _fe3d->water_getHeight(waterId);
 
 		file <<
 			"WATER " <<
 			waterId << " " <<
-			templateID << " " <<
+			templateId << " " <<
 			height << endl;
 	}
 
@@ -116,12 +116,12 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			replace(animationId.begin(), animationId.end(), ' ', '?');
 
-			string templateID = _loadedModelIds.at(modelId);
+			string templateId = _loadedModelIds.at(modelId);
 
 			file <<
 				"MODEL " <<
 				modelId << " " <<
-				templateID << " " <<
+				templateId << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
@@ -153,12 +153,12 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			replace(animationId.begin(), animationId.end(), ' ', '?');
 
-			string templateID = _loadedQuadIds.at(quadId);
+			string templateId = _loadedQuadIds.at(quadId);
 
 			file <<
 				"QUAD3D " <<
 				quadId << " " <<
-				templateID << " " <<
+				templateId << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
@@ -171,20 +171,20 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& soundID : _fe3d->sound3d_getIds())
+	for(const auto& soundId : _fe3d->sound3d_getIds())
 	{
-		if(soundID[0] != '@')
+		if(soundId[0] != '@')
 		{
-			auto position = _fe3d->sound3d_getPosition(soundID);
-			auto maxVolume = _fe3d->sound3d_getMaxVolume(soundID);
-			auto maxDistance = _fe3d->sound3d_getMaxDistance(soundID);
+			auto position = _fe3d->sound3d_getPosition(soundId);
+			auto maxVolume = _fe3d->sound3d_getMaxVolume(soundId);
+			auto maxDistance = _fe3d->sound3d_getMaxDistance(soundId);
 
-			string templateID = _loadedSoundIds.at(soundID);
+			string templateId = _loadedSoundIds.at(soundId);
 
 			file <<
 				"SOUND " <<
-				soundID << " " <<
-				templateID << " " <<
+				soundId << " " <<
+				templateId << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
@@ -193,19 +193,19 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& pointlightID : _fe3d->pointlight_getIds())
+	for(const auto& pointlightId : _fe3d->pointlight_getIds())
 	{
-		if(pointlightID[0] != '@')
+		if(pointlightId[0] != '@')
 		{
-			auto position = _fe3d->pointlight_getPosition(pointlightID);
-			auto radius = _fe3d->pointlight_getRadius(pointlightID);
-			auto color = _fe3d->pointlight_getColor(pointlightID);
-			auto intensity = _fe3d->pointlight_getIntensity(pointlightID);
-			auto shape = static_cast<unsigned int>(_fe3d->pointlight_getShape(pointlightID));
+			auto position = _fe3d->pointlight_getPosition(pointlightId);
+			auto radius = _fe3d->pointlight_getRadius(pointlightId);
+			auto color = _fe3d->pointlight_getColor(pointlightId);
+			auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
+			auto shape = static_cast<unsigned int>(_fe3d->pointlight_getShape(pointlightId));
 
 			file <<
 				"POINTLIGHT " <<
-				pointlightID << " " <<
+				pointlightId << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
@@ -220,21 +220,21 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& spotlightID : _fe3d->spotlight_getIds())
+	for(const auto& spotlightId : _fe3d->spotlight_getIds())
 	{
-		if(spotlightID[0] != '@')
+		if(spotlightId[0] != '@')
 		{
-			auto position = _fe3d->spotlight_getPosition(spotlightID);
-			auto color = _fe3d->spotlight_getColor(spotlightID);
-			auto yaw = _fe3d->spotlight_getYaw(spotlightID);
-			auto pitch = _fe3d->spotlight_getPitch(spotlightID);
-			auto intensity = _fe3d->spotlight_getIntensity(spotlightID);
-			auto angle = _fe3d->spotlight_getAngle(spotlightID);
-			auto distance = _fe3d->spotlight_getDistance(spotlightID);
+			auto position = _fe3d->spotlight_getPosition(spotlightId);
+			auto color = _fe3d->spotlight_getColor(spotlightId);
+			auto yaw = _fe3d->spotlight_getYaw(spotlightId);
+			auto pitch = _fe3d->spotlight_getPitch(spotlightId);
+			auto intensity = _fe3d->spotlight_getIntensity(spotlightId);
+			auto angle = _fe3d->spotlight_getAngle(spotlightId);
+			auto distance = _fe3d->spotlight_getDistance(spotlightId);
 
 			file <<
 				"SPOTLIGHT " <<
-				spotlightID << " " <<
+				spotlightId << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
@@ -249,15 +249,15 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	for(const auto& reflectionID : _fe3d->reflection_getIds())
+	for(const auto& reflectionId : _fe3d->reflection_getIds())
 	{
-		if(reflectionID[0] != '@')
+		if(reflectionId[0] != '@')
 		{
-			auto position = _fe3d->reflection_getPosition(reflectionID);
+			auto position = _fe3d->reflection_getPosition(reflectionId);
 
 			file <<
 				"REFLECTION " <<
-				reflectionID << " " <<
+				reflectionId << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << endl;

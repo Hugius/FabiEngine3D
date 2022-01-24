@@ -50,14 +50,14 @@ public:
 	void addPointlightToCustomWorld(const string& id);
 	void addSpotlightToCustomWorld(const string& id);
 	void addReflectionToCustomWorld(const string& id);
-	void copyTemplateModel(const string& newID, const string& templateID, const fvec3& position);
-	void copyTemplateQuad3d(const string& newID, const string& templateID, const fvec3& position);
-	void copyTemplateText3d(const string& newID, const string& templateID, const fvec3& position);
-	void copyTemplateSound(const string& newID, const string& templateID, const fvec3& position);
+	void copyTemplateModel(const string& newId, const string& templateId, const fvec3& position);
+	void copyTemplateQuad3d(const string& newId, const string& templateId, const fvec3& position);
+	void copyTemplateText3d(const string& newId, const string& templateId, const fvec3& position);
+	void copyTemplateSound(const string& newId, const string& templateId, const fvec3& position);
 	void unloadEditorWorld();
 	void unloadCustomWorld();
 
-	const string& getLoadedWorldID() const;
+	const string& getLoadedWorldId() const;
 
 	const bool isLoaded() const;
 	const bool loadEditorWorldFromFile(const string& fileName);
@@ -159,17 +159,17 @@ private:
 	void _deactivateSpotlight();
 	void _deactivateReflection();
 	void _deactivateSound();
-	void _handleValueChanging(const string& screenID, const string& buttonID, const string& writeFieldID, float& value, float adder, float multiplier = 1.0f, float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
+	void _handleValueChanging(const string& screenId, const string& buttonId, const string& writeFieldId, float& value, float adder, float multiplier = 1.0f, float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
 
 	const vector<string> _getWorldIds() const;
 
-	const bool _copyTemplateSky(const string& newID, const string& templateID);
-	const bool _copyTemplateTerrain(const string& newID, const string& templateID);
-	const bool _copyTemplateWater(const string& newID, const string& templateID);
-	const bool _copyTemplateModel(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside);
-	const bool _copyTemplateQuad3d(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside);
-	const bool _copyTemplateText3d(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside);
-	const bool _copyTemplateSound(const string& newID, const string& templateID, const fvec3& position, bool isFromOutside);
+	const bool _copyTemplateSky(const string& newId, const string& templateId);
+	const bool _copyTemplateTerrain(const string& newId, const string& templateId);
+	const bool _copyTemplateWater(const string& newId, const string& templateId);
+	const bool _copyTemplateModel(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside);
+	const bool _copyTemplateQuad3d(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside);
+	const bool _copyTemplateText3d(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside);
+	const bool _copyTemplateSound(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside);
 
 	static inline const string TEMPLATE_LAMP_ID = "@@template_lamp";
 	static inline const string TEMPLATE_TORCH_ID = "@@template_torch";
@@ -202,7 +202,7 @@ private:
 	vector<string> _loadedPointlightIds;
 	vector<string> _loadedSpotlightIds;
 	vector<string> _loadedReflectionIds;
-	string _customWorldID = "";
+	string _customWorldId = "";
 	string _loadedSkyId = "";
 	string _loadedTerrainId = "";
 	string _loadedWaterId = "";
@@ -218,18 +218,18 @@ private:
 	string _currentTemplateTextId = "";
 	string _selectedTextId = "";
 	string _activeTextId = "";
-	string _selectedLampID = "";
-	string _activeLampID = "";
-	string _selectedTorchID = "";
-	string _activeTorchID = "";
-	string _selectedCameraID = "";
-	string _activeCameraID = "";
-	string _currentTemplateSoundID = "";
-	string _selectedSpeakerID = "";
-	string _activeSpeakerID = "";
-	string _loadedWorldID = "";
+	string _selectedLampId = "";
+	string _activeLampId = "";
+	string _selectedTorchId = "";
+	string _activeTorchId = "";
+	string _selectedCameraId = "";
+	string _activeCameraId = "";
+	string _currentTemplateSoundId = "";
+	string _selectedSpeakerId = "";
+	string _activeSpeakerId = "";
+	string _loadedWorldId = "";
 	string _currentProjectId = "";
-	string _currentWorldID = "";
+	string _currentWorldId = "";
 
 	static inline const fvec3 DEFAULT_LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
 	static inline const fvec3 DEFAULT_LAMP_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);

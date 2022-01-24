@@ -99,7 +99,7 @@ void WorldEditor::_updateChoiceMenu()
 			_currentTemplateModelId = "";
 			_currentTemplateQuadId = "";
 			_currentTemplateTextId = "";
-			_currentTemplateSoundID = "";
+			_currentTemplateSoundId = "";
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
@@ -108,7 +108,7 @@ void WorldEditor::_updateChoiceMenu()
 
 			unloadEditorWorld();
 
-			_currentWorldID = "";
+			_currentWorldId = "";
 			_currentSkyId = "";
 			_currentTerrainId = "";
 			_currentWaterId = "";
@@ -121,14 +121,14 @@ void WorldEditor::_updateChoiceMenu()
 			_currentTemplateModelId = "";
 			_currentTemplateQuadId = "";
 			_currentTemplateTextId = "";
-			_currentTemplateSoundID = "";
+			_currentTemplateSoundId = "";
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
 
 			unloadEditorWorld();
 
-			_currentWorldID = "";
+			_currentWorldId = "";
 			_currentSkyId = "";
 			_currentTerrainId = "";
 			_currentWaterId = "";

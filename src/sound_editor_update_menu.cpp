@@ -60,37 +60,37 @@ void SoundEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "soundEditorMenuChoice")
 	{
-		bool isExisting = _fe3d->sound2d_isExisting(_currentSoundID);
-		bool isPlaying = isExisting && _fe3d->sound2d_isPlaying(_currentSoundID);
-		bool isPaused = isExisting && _fe3d->sound2d_isPaused(_currentSoundID);
+		bool isExisting = _fe3d->sound2d_isExisting(_currentSoundId);
+		bool isPlaying = isExisting && _fe3d->sound2d_isPlaying(_currentSoundId);
+		bool isPaused = isExisting && _fe3d->sound2d_isPaused(_currentSoundId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			if(isPlaying)
 			{
-				_fe3d->sound2d_stop(_currentSoundID, 0);
+				_fe3d->sound2d_stop(_currentSoundId, 0);
 			}
 
-			_currentSoundID = "";
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), false);
+			_currentSoundId = "";
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuMain");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())
 		{
-			_fe3d->sound2d_start(_currentSoundID, 1, 0, false);
+			_fe3d->sound2d_start(_currentSoundId, 1, 0, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("resume")->isHovered())
 		{
-			_fe3d->sound2d_resume(_currentSoundID);
+			_fe3d->sound2d_resume(_currentSoundId);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("pause")->isHovered())
 		{
-			_fe3d->sound2d_pause(_currentSoundID);
+			_fe3d->sound2d_pause(_currentSoundId);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
-			_fe3d->sound2d_stop(_currentSoundID, 0);
+			_fe3d->sound2d_stop(_currentSoundId, 0);
 		}
 
 		screen->getButton("play")->setHoverable(!isPlaying && !isPaused);

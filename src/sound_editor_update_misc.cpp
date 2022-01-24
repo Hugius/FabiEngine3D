@@ -4,9 +4,9 @@
 
 void SoundEditor::_updateMiscellaneous()
 {
-	bool isExisting = _fe3d->sound2d_isExisting(_currentSoundID);
-	bool isPlaying = isExisting && _fe3d->sound2d_isPlaying(_currentSoundID);
-	bool isPaused = isExisting && _fe3d->sound2d_isPaused(_currentSoundID);
+	bool isExisting = _fe3d->sound2d_isExisting(_currentSoundId);
+	bool isPlaying = isExisting && _fe3d->sound2d_isPlaying(_currentSoundId);
+	bool isPaused = isExisting && _fe3d->sound2d_isPaused(_currentSoundId);
 
 	if(isPlaying)
 	{
@@ -27,27 +27,27 @@ void SoundEditor::_updateSoundCreating()
 {
 	if(_isCreatingSound)
 	{
-		string newSoundID;
+		string newSoundId;
 
-		if(_gui->getOverlay()->checkValueForm("soundCreate", newSoundID, {_currentSoundID}))
+		if(_gui->getOverlay()->checkValueForm("soundCreate", newSoundId, {_currentSoundId}))
 		{
-			if(newSoundID.find(' ') != string::npos)
+			if(newSoundId.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Sound id cannot contain any spaces!");
 				return;
 			}
 
-			if(newSoundID.find('@') != string::npos)
+			if(newSoundId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Sound id cannot contain '@'!");
 				return;
 			}
 
-			newSoundID = ("@" + newSoundID);
+			newSoundId = ("@" + newSoundId);
 
-			if(find(_loadedSoundIds.begin(), _loadedSoundIds.end(), newSoundID) != _loadedSoundIds.end())
+			if(find(_loadedSoundIds.begin(), _loadedSoundIds.end(), newSoundId) != _loadedSoundIds.end())
 			{
-				Logger::throwWarning("Sound with id \"" + newSoundID.substr(1) + "\" already exists!");
+				Logger::throwWarning("Sound with id \"" + newSoundId.substr(1) + "\" already exists!");
 				return;
 			}
 
@@ -83,16 +83,16 @@ void SoundEditor::_updateSoundCreating()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearAudioCache(finalFilePath);
-			_fe3d->sound2d_create(newSoundID, finalFilePath);
+			_fe3d->sound2d_create(newSoundId, finalFilePath);
 
-			if(_fe3d->sound2d_isExisting(newSoundID))
+			if(_fe3d->sound2d_isExisting(newSoundId))
 			{
-				_currentSoundID = newSoundID;
-				_loadedSoundIds.push_back(newSoundID);
+				_currentSoundId = newSoundId;
+				_loadedSoundIds.push_back(newSoundId);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityId(), "Sound: " + newSoundID.substr(1), 0.025f);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), true);
+				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundId")->getEntityId(), "Sound: " + newSoundId.substr(1), 0.025f);
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
 				_isCreatingSound = false;
 			}
 		}
@@ -103,20 +103,20 @@ void SoundEditor::_updateSoundChoosing()
 {
 	if(_isChoosingSound)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("soundList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("soundList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentSoundID = ("@" + selectedButtonID);
+				_currentSoundId = ("@" + selectedButtonId);
 
 				if(!_isDeletingSound)
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityId(), "Sound: " + selectedButtonID.substr(1), 0.025f);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityId(), true);
+					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundId")->getEntityId(), "Sound: " + selectedButtonId.substr(1), 0.025f);
+					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("soundList");
@@ -134,7 +134,7 @@ void SoundEditor::_updateSoundChoosing()
 
 void SoundEditor::_updateSoundDeleting()
 {
-	if(_isDeletingSound && !_currentSoundID.empty())
+	if(_isDeletingSound && !_currentSoundId.empty())
 	{
 		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
@@ -143,15 +143,15 @@ void SoundEditor::_updateSoundDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->sound2d_delete(_currentSoundID);
+			_fe3d->sound2d_delete(_currentSoundId);
 
-			_loadedSoundIds.erase(remove(_loadedSoundIds.begin(), _loadedSoundIds.end(), _currentSoundID), _loadedSoundIds.end());
-			_currentSoundID = "";
+			_loadedSoundIds.erase(remove(_loadedSoundIds.begin(), _loadedSoundIds.end(), _currentSoundId), _loadedSoundIds.end());
+			_currentSoundId = "";
 			_isDeletingSound = false;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_currentSoundID = "";
+			_currentSoundId = "";
 			_isDeletingSound = false;
 		}
 	}

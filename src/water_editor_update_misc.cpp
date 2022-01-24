@@ -120,15 +120,15 @@ void WaterEditor::_updateWaterChoosing()
 {
 	if(_isChoosingWater)
 	{
-		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("waterList");
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("waterList");
 
-		if(!selectedButtonID.empty())
+		if(!selectedButtonId.empty())
 		{
-			_fe3d->water_select("@" + selectedButtonID);
+			_fe3d->water_select("@" + selectedButtonId);
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentWaterId = ("@" + selectedButtonID);
+				_currentWaterId = ("@" + selectedButtonId);
 
 				if(!_isDeletingWater)
 				{

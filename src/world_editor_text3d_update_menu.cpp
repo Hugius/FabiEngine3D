@@ -37,11 +37,11 @@ void WorldEditor::_updateText3dMenu()
 				if(textId[0] != '@')
 				{
 					reverse(textId.begin(), textId.end());
-					string rawID = textId.substr(textId.find('_') + 1);
-					reverse(rawID.begin(), rawID.end());
+					string rawId = textId.substr(textId.find('_') + 1);
+					reverse(rawId.begin(), rawId.end());
 					reverse(textId.begin(), textId.end());
 
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createButton(textId, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createButton(textId, rawId);
 				}
 			}
 		}

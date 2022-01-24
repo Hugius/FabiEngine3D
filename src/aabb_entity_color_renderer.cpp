@@ -25,7 +25,7 @@ void AabbEntityColorRenderer::render(const shared_ptr<AabbEntity> entity)
 		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader->uploadUniform("u_color", entity->getColor());
 
-		glBindVertexArray(entity->getMesh()->getVaoID());
+		glBindVertexArray(entity->getMesh()->getVaoId());
 
 		glDrawArrays(GL_LINE_STRIP, 0, entity->getMesh()->getVertexCount());
 		_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);

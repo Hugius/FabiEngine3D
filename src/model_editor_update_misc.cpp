@@ -281,7 +281,12 @@ void ModelEditor::_updatePartChoosing()
 
 		if(!selectedButtonID.empty())
 		{
-			_hoveredPartID = selectedButtonID;
+			if(_hoveredPartID.empty())
+			{
+				_hoveredPartID = selectedButtonID;
+
+				_originalPartOpacity = _fe3d->model_getOpacity(_currentModelID, _hoveredPartID);
+			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -302,11 +307,12 @@ void ModelEditor::_updatePartChoosing()
 		}
 		else
 		{
-			_hoveredPartID = "";
-
-			for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
+			if(!_hoveredPartID.empty())
 			{
-				_fe3d->model_setOpacity(_currentModelID, partID, 1.0f);
+				std::cout << _originalPartOpacity << std::endl;
+				_fe3d->model_setOpacity(_currentModelID, _hoveredPartID, _originalPartOpacity);
+
+				_hoveredPartID = "";
 			}
 		}
 	}

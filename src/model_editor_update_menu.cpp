@@ -66,11 +66,6 @@ void ModelEditor::_updateChoiceMenu()
 				_fe3d->model_setWireframed(_currentModelID, partID, false);
 			}
 
-			for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
-			{
-				_fe3d->model_setOpacity(_currentModelID, partID, 1.0f);
-			}
-
 			_fe3d->model_setVisible(_currentModelID, false);
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
@@ -90,7 +85,7 @@ void ModelEditor::_updateChoiceMenu()
 			}
 			else
 			{
-				_fe3d->model_setOpacity(_currentModelID, _currentPartID, 1.0f);
+				_fe3d->model_setOpacity(_currentModelID, _currentPartID, _originalPartOpacity);
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
 				_currentPartID = "";
 			}

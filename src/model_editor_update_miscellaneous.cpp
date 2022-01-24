@@ -11,6 +11,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		const auto isNoPartSelected = (!_fe3d->model_isMultiParted(_currentModelID) || _currentPartID.empty());
 
 		auto size = (isNoPartSelected ? _fe3d->model_getBaseSize(_currentModelID) : fvec3(0.0f));
+		auto opacity = (isPartSelected ? _fe3d->model_getOpacity(_currentModelID, _currentPartID) : 0.0f);
 		auto isFaceCulled = (isPartSelected ? _fe3d->model_isFaceCulled(_currentModelID, _currentPartID) : false);
 		auto levelOfDetailEntityID = (isNoPartSelected ? _fe3d->model_getLevelOfDetailEntityID(_currentModelID) : "");
 		auto levelOfDetailDistance = (isNoPartSelected ? _fe3d->model_getLevelOfDetailDistance(_currentModelID) : 0.0f);
@@ -26,6 +27,17 @@ void ModelEditor::_updateMiscellaneousMenu()
 			_gui->getOverlay()->createValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui->getOverlay()->createValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui->getOverlay()->createValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
+		{
+			if(_currentPartID.empty())
+			{
+				_gui->getOverlay()->createValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			}
+			else
+			{
+				_gui->getOverlay()->createValueForm("opacity", "Opacity", (_originalPartOpacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			}
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
@@ -85,6 +97,19 @@ void ModelEditor::_updateMiscellaneousMenu()
 			size.z /= 100.0f;
 			_fe3d->model_setBaseSize(_currentModelID, size);
 		}
+		if(_gui->getOverlay()->checkValueForm("opacity", opacity))
+		{
+			opacity /= 100.0f;
+
+			if(_currentPartID.empty())
+			{
+				_fe3d->model_setOpacity(_currentModelID, _currentPartID, opacity);
+			}
+			else
+			{
+				_originalPartOpacity = opacity;
+			}
+		}
 		if(_gui->getOverlay()->checkValueForm("levelOfDetailEntityID", levelOfDetailEntityID, {}))
 		{
 			if(levelOfDetailEntityID == "@")
@@ -106,6 +131,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		}
 
 		screen->getButton("size")->setHoverable(isNoPartSelected);
+		screen->getButton("opacity")->setHoverable(isPartSelected);
 		screen->getButton("isFaceCulled")->setHoverable(isPartSelected);
 		screen->getButton("levelOfDetailEntityID")->setHoverable(isNoPartSelected);
 		screen->getButton("levelOfDetailDistance")->setHoverable(isNoPartSelected);

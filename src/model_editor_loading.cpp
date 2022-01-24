@@ -127,39 +127,13 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				string specularMapPath;
 				string reflectionMapPath;
 				string normalMapPath;
-				fvec3 color;
-				float textureRepeat;
-				float specularShininess;
-				float specularIntensity;
-				float reflectivity;
-				float lightness;
-				float emissionIntensity;
-				unsigned int reflectionType;
-				bool isSpecular;
-				bool isReflective;
-				bool isFaceCulled;
-				bool isBright;
 
 				iss >>
 					diffuseMapPath >>
 					emissionMapPath >>
 					specularMapPath >>
 					reflectionMapPath >>
-					normalMapPath >>
-					reflectionType >>
-					isSpecular >>
-					isReflective >>
-					specularShininess >>
-					specularIntensity >>
-					reflectivity >>
-					lightness >>
-					color.r >>
-					color.g >>
-					color.b >>
-					textureRepeat >>
-					isFaceCulled >>
-					isBright >>
-					emissionIntensity;
+					normalMapPath;
 
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -327,6 +301,7 @@ const bool ModelEditor::loadFromFile()
 					float reflectivity;
 					float lightness;
 					float emissionIntensity;
+					float opacity;
 					unsigned int reflectionType;
 					bool isSpecular;
 					bool isReflective;
@@ -352,7 +327,8 @@ const bool ModelEditor::loadFromFile()
 						textureRepeat >>
 						isFaceCulled >>
 						isBright >>
-						emissionIntensity;
+						emissionIntensity >>
+						opacity;
 
 					partID = (partID == "?") ? "" : partID;
 					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -379,6 +355,7 @@ const bool ModelEditor::loadFromFile()
 					_fe3d->model_setFaceCulled(modelID, partID, isFaceCulled);
 					_fe3d->model_setBright(modelID, partID, isBright);
 					_fe3d->model_setEmissionIntensity(modelID, partID, emissionIntensity);
+					_fe3d->model_setOpacity(modelID, partID, opacity);
 
 					if(!diffuseMapPath.empty())
 					{

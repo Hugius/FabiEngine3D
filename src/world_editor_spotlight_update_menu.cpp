@@ -103,13 +103,10 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 			}
 		}
 
-		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d->input_isKeyPressed(InputType::KEY_ESCAPE))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
-			{
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlight");
-				return;
-			}
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlight");
+			return;
 		}
 	}
 }

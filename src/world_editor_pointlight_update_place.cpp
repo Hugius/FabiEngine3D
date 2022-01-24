@@ -31,8 +31,6 @@ void WorldEditor::_updatePointlightPlacing()
 				{
 					_loadedPointlightIDs.push_back(newID);
 
-					_fe3d->pointlight_delete(newID);
-					_fe3d->pointlight_create(newID);
 					_fe3d->pointlight_setPosition(newID, newPosition);
 					_fe3d->pointlight_setRadius(newID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
 					_fe3d->pointlight_setIntensity(newID, DEFAULT_POINTLIGHT_INTENSITY);
@@ -54,8 +52,8 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
-				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				_isPlacingPointlight = false;
 			}
 		}
@@ -90,7 +88,7 @@ void WorldEditor::_updatePointlightPlacing()
 				return;
 			}
 
-			auto newPosition = (_fe3d->raycast_getPointOnTerrain() + POINTLIGHT_TERRAIN_OFFSET);
+			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + POINTLIGHT_TERRAIN_OFFSET);
 			_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, true);
 			_fe3d->pointlight_setPosition(TEMPLATE_LAMP_ID, newPosition);
 			_fe3d->model_setVisible(TEMPLATE_LAMP_ID, true);
@@ -107,11 +105,11 @@ void WorldEditor::_updatePointlightPlacing()
 				}
 
 				_fe3d->pointlight_create(newID);
+
 				if(_fe3d->pointlight_isExisting(newID))
 				{
 					_loadedPointlightIDs.push_back(newID);
 
-					_fe3d->pointlight_setPosition(newID, newPosition);
 					_fe3d->pointlight_setPosition(newID, newPosition);
 					_fe3d->pointlight_setRadius(newID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
 					_fe3d->pointlight_setIntensity(newID, DEFAULT_POINTLIGHT_INTENSITY);

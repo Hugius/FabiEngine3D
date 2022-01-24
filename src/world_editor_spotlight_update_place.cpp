@@ -91,7 +91,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				return;
 			}
 
-			auto newPosition = (_fe3d->raycast_getPointOnTerrain() + SPOTLIGHT_TERRAIN_OFFSET);
+			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + SPOTLIGHT_TERRAIN_OFFSET);
 			_fe3d->spotlight_setVisible(TEMPLATE_TORCH_ID, true);
 			_fe3d->spotlight_setPosition(TEMPLATE_TORCH_ID, newPosition);
 			_fe3d->model_setVisible(TEMPLATE_TORCH_ID, true);
@@ -108,6 +108,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				}
 
 				_fe3d->spotlight_create(newID);
+
 				if(_fe3d->spotlight_isExisting(newID))
 				{
 					_loadedSpotlightIDs.push_back(newID);

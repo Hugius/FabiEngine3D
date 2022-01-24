@@ -34,6 +34,7 @@ void WorldEditor::_updateReflectionPlacing()
 					_fe3d->reflection_setPosition(newID, newPosition);
 
 					_fe3d->model_create(newModelID, "engine\\assets\\mesh\\camera.obj");
+					_fe3d->model_setBasePosition(newModelID, newPosition);
 					_fe3d->model_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
 					_fe3d->model_setShadowed(newModelID, false);
 					_fe3d->model_setReflected(newModelID, false);

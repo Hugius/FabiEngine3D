@@ -26,10 +26,9 @@ void Sound3dPlayer::update()
 		if(isSoundStarted(sound))
 		{
 			const auto cameraPosition = _camera->getPosition();
-			const auto difference = Math::calculateDifference(cameraPosition, sound.getPosition());
-			const auto maxDifference = max(cameraPosition.x, max(cameraPosition.y, cameraPosition.z));
-			const auto volume = sound.getMaxVolume() - ((maxDifference / sound.getMaxDistance()) * sound.getMaxVolume());
-			sound.setVolume(clamp(volume, 0.0f, sound.getMaxVolume()));
+			const auto distance = Math::calculateDistance(cameraPosition, sound.getPosition());
+			const auto volume = (1.0f - (distance / sound.getMaxDistance()));
+			sound.setVolume(clamp(volume, 0.0f, 1.0f) * sound.getMaxVolume());
 
 			const auto cameraDirection = _camera->getFrontVector();
 			const auto soundDirection = (cameraPosition - sound.getPosition());

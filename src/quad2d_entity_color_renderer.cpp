@@ -32,8 +32,8 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 		_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 		_shader->uploadUniform("u_uvOffset", entity->getUvOffset());
 		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
-		_shader->uploadUniform("u_isHorizontallyMirrored", entity->isMirroredHorizonally());
-		_shader->uploadUniform("u_isVerticallyMirrored", entity->isVerticallyMirrored());
+		_shader->uploadUniform("u_isHorizontallyFlipped", entity->isFlippedHorizonally());
+		_shader->uploadUniform("u_isVerticallyFlipped", entity->isVerticallyFlipped());
 		_shader->uploadUniform("u_color", entity->getColor());
 		_shader->uploadUniform("u_windowSize", fvec2(Config::getInst().getWindowSize()));
 		_shader->uploadUniform("u_minPosition", entity->getMinPosition());

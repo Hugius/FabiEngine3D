@@ -129,14 +129,14 @@ void EngineInterface::quad2d_setUvOffset(const string& ID, const fvec2& value)
 	_core->getQuad2dEntityManager()->getEntity(ID)->setUvOffset(value);
 }
 
-void EngineInterface::quad2d_setHorizontallyMirrored(const string& ID, bool value)
+void EngineInterface::quad2d_setHorizontallyFlipped(const string& ID, bool value)
 {
-	_core->getQuad2dEntityManager()->getEntity(ID)->setHorizontallyMirrored(value);
+	_core->getQuad2dEntityManager()->getEntity(ID)->setHorizontallyFlipped(value);
 }
 
-void EngineInterface::quad2d_setVerticallyMirrored(const string& ID, bool value)
+void EngineInterface::quad2d_setVerticallyFlipped(const string& ID, bool value)
 {
-	_core->getQuad2dEntityManager()->getEntity(ID)->setVerticallyMirrored(value);
+	_core->getQuad2dEntityManager()->getEntity(ID)->setVerticallyFlipped(value);
 }
 
 const bool EngineInterface::quad2d_isExisting(const string& ID) const
@@ -231,12 +231,12 @@ const bool EngineInterface::quad2d_isWireframed(const string& ID) const
 	return _core->getQuad2dEntityManager()->getEntity(ID)->isWireframed();
 }
 
-const bool EngineInterface::quad2d_isHorizontallyMirrored(const string& ID) const
+const bool EngineInterface::quad2d_isHorizontallyFlipped(const string& ID) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(ID)->isMirroredHorizonally();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->isFlippedHorizonally();
 }
 
-const bool EngineInterface::quad2d_isVerticallyMirrored(const string& ID) const
+const bool EngineInterface::quad2d_isVerticallyFlipped(const string& ID) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(ID)->isVerticallyMirrored();
+	return _core->getQuad2dEntityManager()->getEntity(ID)->isVerticallyFlipped();
 }

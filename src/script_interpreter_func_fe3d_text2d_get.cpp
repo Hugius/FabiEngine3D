@@ -269,7 +269,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2d_is_horizontally_mirrored")
+	else if(functionName == "fe3d:text2d_is_horizontally_flipped")
 	{
 		auto types = {SVT::STRING};
 
@@ -277,13 +277,13 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText2d(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text2d_isHorizontallyMirrored(args[0].getString());
+				const auto result = _fe3d->text2d_isHorizontallyFlipped(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2d_is_vertically_mirrored")
+	else if(functionName == "fe3d:text2d_is_vertically_flipped")
 	{
 		auto types = {SVT::STRING};
 
@@ -291,7 +291,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 		{
 			if(_validateFe3dText2d(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text2d_isVerticallyMirrored(args[0].getString());
+				const auto result = _fe3d->text2d_isVerticallyFlipped(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}

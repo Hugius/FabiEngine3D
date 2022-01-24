@@ -83,14 +83,14 @@ void Quad2dEntity::setColor(const fvec3& value)
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void Quad2dEntity::setHorizontallyMirrored(bool value)
+void Quad2dEntity::setHorizontallyFlipped(bool value)
 {
-	_isHorizontallyMirrored = value;
+	_isHorizontallyFlipped = value;
 }
 
-void Quad2dEntity::setVerticallyMirrored(bool value)
+void Quad2dEntity::setVerticallyFlipped(bool value)
 {
-	_isVerticallyMirrored = value;
+	_isVerticallyFlipped = value;
 }
 
 void Quad2dEntity::setOpacity(float value)
@@ -226,14 +226,14 @@ const bool Quad2dEntity::isCentered() const
 	return _isCentered;
 }
 
-const bool Quad2dEntity::isMirroredHorizonally() const
+const bool Quad2dEntity::isFlippedHorizonally() const
 {
-	return _isHorizontallyMirrored;
+	return _isHorizontallyFlipped;
 }
 
-const bool Quad2dEntity::isVerticallyMirrored() const
+const bool Quad2dEntity::isVerticallyFlipped() const
 {
-	return _isVerticallyMirrored;
+	return _isVerticallyFlipped;
 }
 
 const bool Quad2dEntity::hasDiffuseMap() const

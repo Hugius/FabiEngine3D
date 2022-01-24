@@ -96,14 +96,14 @@ void EngineInterface::text2d_scaleTo(const string& ID, const fvec2& target, floa
 	_core->getText2dEntityManager()->getEntity(ID)->scaleTo(target, speed);
 }
 
-void EngineInterface::text2d_setHorizontallyMirrored(const string& ID, bool value)
+void EngineInterface::text2d_setHorizontallyFlipped(const string& ID, bool value)
 {
-	_core->getText2dEntityManager()->getEntity(ID)->setHorizontallyMirrored(value);
+	_core->getText2dEntityManager()->getEntity(ID)->setHorizontallyFlipped(value);
 }
 
-void EngineInterface::text2d_setVerticallyMirrored(const string& ID, bool value)
+void EngineInterface::text2d_setVerticallyFlipped(const string& ID, bool value)
 {
-	_core->getText2dEntityManager()->getEntity(ID)->setVerticallyMirrored(value);
+	_core->getText2dEntityManager()->getEntity(ID)->setVerticallyFlipped(value);
 }
 
 void EngineInterface::text2d_setWireframed(const string& ID, bool value)
@@ -141,14 +141,14 @@ const bool EngineInterface::text2d_isCentered(const string& ID) const
 	return _core->getText2dEntityManager()->getEntity(ID)->isCentered();
 }
 
-const bool EngineInterface::text2d_isHorizontallyMirrored(const string& ID) const
+const bool EngineInterface::text2d_isHorizontallyFlipped(const string& ID) const
 {
-	return _core->getText2dEntityManager()->getEntity(ID)->isMirroredHorizonally();
+	return _core->getText2dEntityManager()->getEntity(ID)->isFlippedHorizonally();
 }
 
-const bool EngineInterface::text2d_isVerticallyMirrored(const string& ID) const
+const bool EngineInterface::text2d_isVerticallyFlipped(const string& ID) const
 {
-	return _core->getText2dEntityManager()->getEntity(ID)->isVerticallyMirrored();
+	return _core->getText2dEntityManager()->getEntity(ID)->isVerticallyFlipped();
 }
 
 const bool EngineInterface::text2d_isWireframed(const string& ID) const

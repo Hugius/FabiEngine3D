@@ -61,7 +61,7 @@ void Text2dEntity::updateCharacterEntities()
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
-	if(_isHorizontallyMirrored)
+	if(_isHorizontallyFlipped)
 	{
 		reverse(_characterEntities.begin(), _characterEntities.end());
 	}
@@ -88,7 +88,7 @@ void Text2dEntity::updateCharacterEntities()
 		index++;
 	}
 
-	if(_isHorizontallyMirrored)
+	if(_isHorizontallyFlipped)
 	{
 		reverse(_characterEntities.begin(), _characterEntities.end());
 	}
@@ -112,8 +112,8 @@ void Text2dEntity::setContent(const string& value)
 			characterEntity->setMesh(_mesh);
 			characterEntity->setDiffuseMapPath(_fontMapPath);
 			characterEntity->setDiffuseMap(_fontMap);
-			characterEntity->setHorizontallyMirrored(_isHorizontallyMirrored);
-			characterEntity->setVerticallyMirrored(_isVerticallyMirrored);
+			characterEntity->setHorizontallyFlipped(_isHorizontallyFlipped);
+			characterEntity->setVerticallyFlipped(_isVerticallyFlipped);
 			characterEntity->setOpacity(_opacity);
 			characterEntity->setWireframeColor(_wireframeColor);
 			characterEntity->setColor(_color);
@@ -231,23 +231,23 @@ void Text2dEntity::setColor(const fvec3& value)
 	}
 }
 
-void Text2dEntity::setHorizontallyMirrored(bool value)
+void Text2dEntity::setHorizontallyFlipped(bool value)
 {
-	_isHorizontallyMirrored = value;
+	_isHorizontallyFlipped = value;
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setHorizontallyMirrored(_isHorizontallyMirrored);
+		character->setHorizontallyFlipped(_isHorizontallyFlipped);
 	}
 }
 
-void Text2dEntity::setVerticallyMirrored(bool value)
+void Text2dEntity::setVerticallyFlipped(bool value)
 {
-	_isVerticallyMirrored = value;
+	_isVerticallyFlipped = value;
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setVerticallyMirrored(_isVerticallyMirrored);
+		character->setVerticallyFlipped(_isVerticallyFlipped);
 	}
 }
 
@@ -379,14 +379,14 @@ const bool Text2dEntity::isCentered() const
 	return _isCentered;
 }
 
-const bool Text2dEntity::isMirroredHorizonally() const
+const bool Text2dEntity::isFlippedHorizonally() const
 {
-	return _isHorizontallyMirrored;
+	return _isHorizontallyFlipped;
 }
 
-const bool Text2dEntity::isVerticallyMirrored() const
+const bool Text2dEntity::isVerticallyFlipped() const
 {
-	return _isVerticallyMirrored;
+	return _isVerticallyFlipped;
 }
 
 const fvec2& Text2dEntity::getPosition() const

@@ -18,8 +18,8 @@ public:
 	void updateTransformationMatrix();
 	void setDiffuseMap(shared_ptr<TextureBuffer> value);
 	void setDiffuseMapPath(const string& value);
-	void setHorizontallyMirrored(bool value);
-	void setVerticallyMirrored(bool value);
+	void setHorizontallyFlipped(bool value);
+	void setVerticallyFlipped(bool value);
 	void setOpacity(float value);
 	void setWireframeColor(const fvec3& value);
 	void setColor(const fvec3& value);
@@ -62,8 +62,8 @@ public:
 
 	const bool isWireframed() const;
 	const bool isCentered() const;
-	const bool isMirroredHorizonally() const;
-	const bool isVerticallyMirrored() const;
+	const bool isFlippedHorizonally() const;
+	const bool isVerticallyFlipped() const;
 	const bool isPerspectiveDepthEntity() const;
 	const bool hasDiffuseMap() const;
 
@@ -97,8 +97,8 @@ private:
 	unsigned int _depth = 0;
 
 	bool _isCentered = false;
-	bool _isHorizontallyMirrored = false;
-	bool _isVerticallyMirrored = false;
+	bool _isHorizontallyFlipped = false;
+	bool _isVerticallyFlipped = false;
 	bool _isPerspectiveDepthEntity = false;
 	bool _isWireframed = false;
 

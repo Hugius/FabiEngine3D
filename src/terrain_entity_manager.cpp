@@ -138,14 +138,16 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	{
 		for(float x = 0.0f; x < size; x += 1.0f)
 		{
-			const auto height = _getPixelHeight(x, z, size, maxHeight, pixels);
-			const auto leftHeight = _getPixelHeight((x - 1), z, size, maxHeight, pixels);
-			const auto rightHeight = _getPixelHeight((x + 1), z, size, maxHeight, pixels);
-			const auto upHeight = _getPixelHeight(x, (z + 1), size, maxHeight, pixels);
-			const auto downHeight = _getPixelHeight(x, (z - 1), size, maxHeight, pixels);
+			const auto flippedZ = (size - z);
 
-			const auto position = fvec3((halfSize - x), height, (z - halfSize));
-			const auto uv = fvec2((x / size), (z / size));
+			const auto height = _getPixelHeight(x, flippedZ, size, maxHeight, pixels);
+			const auto leftHeight = _getPixelHeight((x - 1), flippedZ, size, maxHeight, pixels);
+			const auto rightHeight = _getPixelHeight((x + 1), flippedZ, size, maxHeight, pixels);
+			const auto upHeight = _getPixelHeight(x, (flippedZ + 1), size, maxHeight, pixels);
+			const auto downHeight = _getPixelHeight(x, (flippedZ - 1), size, maxHeight, pixels);
+
+			const auto position = fvec3((x - halfSize), height, (z - halfSize));
+			const auto uv = fvec2((x / size), (flippedZ / size));
 			const auto normal = Math::normalize(fvec3((leftHeight - rightHeight), 3.0f, (downHeight - upHeight)));
 
 			tempPositions.push_back(position);
@@ -166,29 +168,29 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 			auto bottomLeftIndex = (((z + 1) * uSize) + x);
 			auto bottomRightIndex = (bottomLeftIndex + 1);
 
-			positions.push_back(tempPositions[bottomRightIndex]);
-			uvs.push_back(tempUvs[bottomRightIndex]);
-			normals.push_back(tempNormals[bottomRightIndex]);
+			positions.push_back(tempPositions[topLeftIndex]);
+			uvs.push_back(tempUvs[topLeftIndex]);
+			normals.push_back(tempNormals[topLeftIndex]);
 
 			positions.push_back(tempPositions[bottomLeftIndex]);
 			uvs.push_back(tempUvs[bottomLeftIndex]);
 			normals.push_back(tempNormals[bottomLeftIndex]);
 
-			positions.push_back(tempPositions[topLeftIndex]);
-			uvs.push_back(tempUvs[topLeftIndex]);
-			normals.push_back(tempNormals[topLeftIndex]);
+			positions.push_back(tempPositions[bottomRightIndex]);
+			uvs.push_back(tempUvs[bottomRightIndex]);
+			normals.push_back(tempNormals[bottomRightIndex]);
 
-			positions.push_back(tempPositions[topLeftIndex]);
-			uvs.push_back(tempUvs[topLeftIndex]);
-			normals.push_back(tempNormals[topLeftIndex]);
+			positions.push_back(tempPositions[bottomRightIndex]);
+			uvs.push_back(tempUvs[bottomRightIndex]);
+			normals.push_back(tempNormals[bottomRightIndex]);
 
 			positions.push_back(tempPositions[topRightIndex]);
 			uvs.push_back(tempUvs[topRightIndex]);
 			normals.push_back(tempNormals[topRightIndex]);
 
-			positions.push_back(tempPositions[bottomRightIndex]);
-			uvs.push_back(tempUvs[bottomRightIndex]);
-			normals.push_back(tempNormals[bottomRightIndex]);
+			positions.push_back(tempPositions[topLeftIndex]);
+			uvs.push_back(tempUvs[topLeftIndex]);
+			normals.push_back(tempNormals[topLeftIndex]);
 		}
 	}
 
@@ -244,7 +246,9 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 
 const float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
 {
-	return _getPixelHeight(x, z, getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixels());
+	const auto flippedZ = (getEntity(ID)->getSize() - z);
+
+	return _getPixelHeight(x, flippedZ, getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixels());
 }
 
 const bool TerrainEntityManager::isInside(const string& ID, float x, float z)

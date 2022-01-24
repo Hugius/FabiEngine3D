@@ -445,8 +445,8 @@ public:
 	void quad2d_moveTo(const string& ID, const fvec2& target, float speed);
 	void quad2d_rotateTo(const string& ID, float target, float speed);
 	void quad2d_scaleTo(const string& ID, const fvec2& target, float speed);
-	void quad2d_setHorizontallyMirrored(const string& ID, bool value);
-	void quad2d_setVerticallyMirrored(const string& ID, bool value);
+	void quad2d_setHorizontallyFlipped(const string& ID, bool value);
+	void quad2d_setVerticallyFlipped(const string& ID, bool value);
 	void quad2d_setWireframed(const string& ID, bool value);
 	void quad2d_setWireframeColor(const string& ID, const fvec3& value);
 	void quad2d_setUvMultiplier(const string& ID, const fvec2& value);
@@ -467,8 +467,8 @@ public:
 	const bool quad2d_isExisting(const string& ID) const;
 	const bool quad2d_isVisible(const string& ID) const;
 	const bool quad2d_isCentered(const string& ID) const;
-	const bool quad2d_isHorizontallyMirrored(const string& ID) const;
-	const bool quad2d_isVerticallyMirrored(const string& ID) const;
+	const bool quad2d_isHorizontallyFlipped(const string& ID) const;
+	const bool quad2d_isVerticallyFlipped(const string& ID) const;
 	const bool quad2d_hasDiffuseMap(const string& ID) const;
 	const bool quad2d_isWireframed(const string& ID) const;
 
@@ -490,8 +490,8 @@ public:
 	void text2d_moveTo(const string& ID, const fvec2& target, float speed);
 	void text2d_rotateTo(const string& ID, float target, float speed);
 	void text2d_scaleTo(const string& ID, const fvec2& target, float speed);
-	void text2d_setHorizontallyMirrored(const string& ID, bool value);
-	void text2d_setVerticallyMirrored(const string& ID, bool value);
+	void text2d_setHorizontallyFlipped(const string& ID, bool value);
+	void text2d_setVerticallyFlipped(const string& ID, bool value);
 	void text2d_setWireframed(const string& ID, bool value);
 	void text2d_setWireframeColor(const string& ID, const fvec3& value);
 
@@ -509,8 +509,8 @@ public:
 	const bool text2d_isExisting(const string& ID) const;
 	const bool text2d_isVisible(const string& ID) const;
 	const bool text2d_isCentered(const string& ID) const;
-	const bool text2d_isHorizontallyMirrored(const string& ID) const;
-	const bool text2d_isVerticallyMirrored(const string& ID) const;
+	const bool text2d_isHorizontallyFlipped(const string& ID) const;
+	const bool text2d_isVerticallyFlipped(const string& ID) const;
 	const bool text2d_isWireframed(const string& ID) const;
 	const bool text2d_hasFontMap(const string& ID) const;
 

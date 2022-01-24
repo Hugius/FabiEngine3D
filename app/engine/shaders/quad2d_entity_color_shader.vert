@@ -8,16 +8,16 @@ uniform mat4 u_transformationMatrix;
 uniform vec2 u_uvMultiplier;
 uniform vec2 u_uvOffset;
 
-uniform bool u_isHorizontallyMirrored;
-uniform bool u_isVerticallyMirrored;
+uniform bool u_isHorizontallyFlipped;
+uniform bool u_isVerticallyFlipped;
 
 out vec2 f_uv;
 
 void main()
 {
 	gl_Position = (u_transformationMatrix * vec4(v_position, 0.0f, 1.0f));
-	f_uv.x = (u_isHorizontallyMirrored ? (1.0f - v_uv.x) : v_uv.x);
-	f_uv.y = (u_isVerticallyMirrored ? (1.0f - v_uv.y) : v_uv.y);
+	f_uv.x = (u_isHorizontallyFlipped ? (1.0f - v_uv.x) : v_uv.x);
+	f_uv.y = (u_isVerticallyFlipped ? (1.0f - v_uv.y) : v_uv.y);
 	f_uv.x = (u_uvOffset.x + (f_uv.x * u_uvMultiplier.x));
 	f_uv.y = (u_uvOffset.y + (f_uv.y * u_uvMultiplier.y));
 }

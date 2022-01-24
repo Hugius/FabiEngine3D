@@ -61,11 +61,14 @@ void WorldEditor::_updateSoundEditing()
 			}
 		}
 
-		if(_selectedSpeakerID != _activeSpeakerID)
+		if(_selectedSpeakerID.empty())
+		{
+			_updateSpeakerHighlighting(_activeSpeakerID, _activeSpeakerHighlightDirection);
+		}
+		else
 		{
 			_updateSpeakerHighlighting(_selectedSpeakerID, _selectedSpeakerHighlightDirection);
 		}
-		_updateSpeakerHighlighting(_activeSpeakerID, _activeSpeakerHighlightDirection);
 
 		if(!_activeSpeakerID.empty())
 		{

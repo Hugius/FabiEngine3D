@@ -60,11 +60,14 @@ void WorldEditor::_updateSpotlightEditing()
 			}
 		}
 
-		if(_selectedTorchID != _activeTorchID)
+		if(_selectedTorchID.empty())
+		{
+			_updateTorchHighlighting(_activeTorchID, _activeTorchHighlightDirection);
+		}
+		else
 		{
 			_updateTorchHighlighting(_selectedTorchID, _selectedTorchHighlightDirection);
 		}
-		_updateTorchHighlighting(_activeTorchID, _activeTorchHighlightDirection);
 
 		if(!_activeTorchID.empty())
 		{

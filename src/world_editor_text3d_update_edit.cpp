@@ -60,11 +60,14 @@ void WorldEditor::_updateText3dEditing()
 			}
 		}
 
-		if(_selectedTextID != _activeTextID)
+		if(_selectedTextID.empty())
+		{
+			_updateText3dHighlighting(_activeTextID, _activeText3dHighlightDirection);
+		}
+		else
 		{
 			_updateText3dHighlighting(_selectedTextID, _selectedText3dHighlightDirection);
 		}
-		_updateText3dHighlighting(_activeTextID, _activeText3dHighlightDirection);
 
 		if(!_activeTextID.empty())
 		{

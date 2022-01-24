@@ -60,11 +60,14 @@ void WorldEditor::_updatePointlightEditing()
 			}
 		}
 
-		if(_selectedLampID != _activeLampID)
+		if(_selectedLampID.empty())
+		{
+			_updateLampHighlighting(_activeLampID, _activeLampHighlightDirection);
+		}
+		else
 		{
 			_updateLampHighlighting(_selectedLampID, _selectedLampHighlightDirection);
 		}
-		_updateLampHighlighting(_activeLampID, _activeLampHighlightDirection);
 
 		if(!_activeLampID.empty())
 		{

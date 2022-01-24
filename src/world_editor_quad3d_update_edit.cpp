@@ -60,11 +60,14 @@ void WorldEditor::_updateQuad3dEditing()
 			}
 		}
 
-		if(_selectedQuadID != _activeQuadID)
+		if(_selectedQuadID.empty())
+		{
+			_updateQuad3dHighlighting(_activeQuadID, _activeQuad3dHighlightDirection);
+		}
+		else
 		{
 			_updateQuad3dHighlighting(_selectedQuadID, _selectedQuad3dHighlightDirection);
 		}
-		_updateQuad3dHighlighting(_activeQuadID, _activeQuad3dHighlightDirection);
 
 		if(!_activeQuadID.empty())
 		{

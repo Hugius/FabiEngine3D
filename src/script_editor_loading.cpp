@@ -50,11 +50,15 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		const auto scriptFileID = fileName.substr(0, fileName.size() - 5);
 		_script->createScriptFile(scriptFileID);
 
-		unsigned int cursorLineIndex, cursorCharIndex;
 		string line;
+		unsigned int cursorLineIndex, cursorCharIndex;
+
 		getline(file, line);
+
 		istringstream iss(line);
+
 		iss >> cursorLineIndex >> cursorCharIndex;
+
 		_script->getScriptFile(scriptFileID)->setCursorLineIndex(cursorLineIndex);
 		_script->getScriptFile(scriptFileID)->setCursorCharIndex(cursorCharIndex);
 

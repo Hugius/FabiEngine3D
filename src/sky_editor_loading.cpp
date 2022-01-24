@@ -32,7 +32,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 	while(getline(file, line))
 	{
 		string skyID;
-		array<string, 6> cubeMapPaths = {};
+		array<string, 6> cubeMapPaths{};
 
 		istringstream iss(line);
 
@@ -91,13 +91,13 @@ const bool SkyEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		istringstream iss(line);
-
 		string skyID;
 		array<string, 6> cubeMapPaths{};
+		fvec3 color;
 		float rotation;
 		float lightness;
-		fvec3 color;
+
+		istringstream iss(line);
 
 		iss >>
 			skyID >>

@@ -69,8 +69,11 @@ void Config::_processOption(ifstream& file, string& option, string name)
 	string line;
 	string field;
 	string equals;
+
 	getline(file, line);
+
 	istringstream iss(line);
+
 	iss >> field >> equals;
 
 	if(field == name)
@@ -88,8 +91,11 @@ void Config::_processOption(ifstream& file, float& option, string name)
 	string line;
 	string field;
 	string equals;
+
 	getline(file, line);
+
 	istringstream iss(line);
+
 	iss >> field >> equals;
 
 	if(field == name)
@@ -107,8 +113,11 @@ void Config::_processOption(ifstream& file, int& option, string name)
 	string line;
 	string field;
 	string equals;
+
 	getline(file, line);
+
 	istringstream iss(line);
+
 	iss >> field >> equals;
 
 	if(field == name)
@@ -129,7 +138,9 @@ void Config::_processOption(ifstream& file, bool& option, string name)
 	string value;
 
 	getline(file, line);
+
 	istringstream iss(line);
+
 	iss >> field >> equals >> value;
 
 	if(field == name)

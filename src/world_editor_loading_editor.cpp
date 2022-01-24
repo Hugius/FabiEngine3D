@@ -31,9 +31,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 	string line;
 	while(getline(file, line))
 	{
+		string lineType;
+
 		istringstream iss(line);
 
-		string lineType;
 		iss >> lineType;
 
 		if(lineType == "CAMERA_POSITION")

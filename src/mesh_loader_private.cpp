@@ -31,10 +31,12 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 	string line;
 	while(getline(file, line))
 	{
+		string lineType;
+
 		replace(line.begin(), line.end(), '/', ' ');
+
 		istringstream iss(line);
 
-		string lineType;
 		iss >> lineType;
 
 		if(lineType == "FE3D_PART")

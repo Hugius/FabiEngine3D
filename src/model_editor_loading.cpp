@@ -33,9 +33,10 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
+		string lineType;
+
 		istringstream iss(line);
 
-		string lineType;
 		iss >> lineType;
 
 		if(lineType == "MODEL")
@@ -85,9 +86,10 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
+		string lineType;
+
 		istringstream iss(line);
 
-		string lineType;
 		iss >> lineType;
 
 		if(lineType == "MODEL")
@@ -127,13 +129,41 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				string specularMapPath;
 				string reflectionMapPath;
 				string normalMapPath;
+				fvec3 color;
+				float textureRepeat;
+				float specularShininess;
+				float specularIntensity;
+				float reflectivity;
+				float lightness;
+				float emissionIntensity;
+				float opacity;
+				unsigned int reflectionType;
+				bool isSpecular;
+				bool isReflective;
+				bool isFaceCulled;
+				bool isBright;
 
 				iss >>
 					diffuseMapPath >>
 					emissionMapPath >>
 					specularMapPath >>
 					reflectionMapPath >>
-					normalMapPath;
+					normalMapPath >>
+					reflectionType >>
+					isSpecular >>
+					isReflective >>
+					specularShininess >>
+					specularIntensity >>
+					reflectivity >>
+					lightness >>
+					color.r >>
+					color.g >>
+					color.b >>
+					textureRepeat >>
+					isFaceCulled >>
+					isBright >>
+					emissionIntensity >>
+					opacity;
 
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -228,9 +258,10 @@ const bool ModelEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
+		string lineType;
+
 		istringstream iss(line);
 
-		string lineType;
 		iss >> lineType;
 
 		if(lineType == "MODEL")

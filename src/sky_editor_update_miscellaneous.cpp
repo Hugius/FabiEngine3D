@@ -6,9 +6,9 @@ void SkyEditor::_updateMiscellaneousMenu()
 
 	if(screen->getId() == "skyEditorMenuMiscellaneous")
 	{
-		float rotation = _fe3d->sky_getRotation(_currentSkyId);
-		float lightness = _fe3d->sky_getLightness(_currentSkyId);
-		fvec3 color = _fe3d->sky_getColor(_currentSkyId);
+		auto rotation = _fe3d->sky_getRotation(_currentSkyId);
+		auto lightness = _fe3d->sky_getLightness(_currentSkyId);
+		auto color = _fe3d->sky_getColor(_currentSkyId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -17,7 +17,7 @@ void SkyEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("rotation", "Rotation", rotation * 1000.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("rotation", "Rotation", rotation, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{

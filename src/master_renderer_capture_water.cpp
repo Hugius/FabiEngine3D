@@ -6,6 +6,19 @@ void MasterRenderer::_captureWaterReflections()
 
 	if((waterEntity != nullptr) && waterEntity->isReflective())
 	{
+		const float waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
+		bool isUnderWater = (_camera->getPosition().y < (waterEntity->getHeight() + waveHeight));
+		isUnderWater = (isUnderWater && (_camera->getPosition().x > -(waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_camera->getPosition().x < (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_camera->getPosition().z > -(waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_camera->getPosition().z < (waterEntity->getSize() / 2.0f)));
+
+		if(isUnderWater)
+		{
+			_renderBus->setWaterReflectionMap(nullptr);
+			return;
+		}
+
 		float cameraDistance = (_camera->getPosition().y - waterEntity->getHeight());
 
 		_waterReflectionCaptor->bind();
@@ -169,6 +182,19 @@ void MasterRenderer::_captureWaterRefractions()
 
 	if((waterEntity != nullptr) && waterEntity->isRefractive())
 	{
+		const float waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
+		bool isUnderWater = (_camera->getPosition().y < (waterEntity->getHeight() + waveHeight));
+		isUnderWater = (isUnderWater && (_camera->getPosition().x > -(waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_camera->getPosition().x < (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_camera->getPosition().z > -(waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_camera->getPosition().z < (waterEntity->getSize() / 2.0f)));
+
+		if(!isUnderWater)
+		{
+			_renderBus->setWaterRefractionMap(nullptr);
+			return;
+		}
+
 		_waterRefractionCaptor->bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -181,23 +207,7 @@ void MasterRenderer::_captureWaterRefractions()
 		const auto skyExposureLightness = _renderBus->getSkyExposureLightness();
 		_renderBus->setSkyExposureLightness(0.0f);
 
-		const float waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
-		bool isUnderWater = (_camera->getPosition().y < (waterEntity->getHeight() + waveHeight));
-		isUnderWater = (isUnderWater && (_camera->getPosition().x > (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_camera->getPosition().x < (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_camera->getPosition().z > (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_camera->getPosition().z < (waterEntity->getSize() / 2.0f)));
-
-		if(isUnderWater)
-		{
-			const float clippingHeight = (waterEntity->getHeight());
-			_renderBus->setMinPosition(fvec3(-FLT_MAX, clippingHeight, -FLT_MAX));
-		}
-		else
-		{
-			const float clippingHeight = (waterEntity->getHeight() + waveHeight);
-			_renderBus->setMaxPosition(fvec3(FLT_MAX, clippingHeight, FLT_MAX));
-		}
+		_renderBus->setMinPosition(fvec3(-FLT_MAX, waterEntity->getHeight() - 1.0f, -FLT_MAX));
 
 		switch(waterEntity->getQuality())
 		{
@@ -251,6 +261,8 @@ void MasterRenderer::_captureWaterRefractions()
 		_waterRefractionCaptor->unbind();
 
 		_renderBus->setWaterRefractionMap(_waterRefractionCaptor->getTexture(0));
+
+		_renderBus->setMinPosition(fvec3(-FLT_MAX));
 	}
 	else
 	{

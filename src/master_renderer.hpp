@@ -53,6 +53,7 @@ public:
 	void inject(shared_ptr<RenderBus> renderBus);
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<Timer> timer);
+
 	void update();
 	void renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport);
 	void renderApplication();
@@ -75,6 +76,7 @@ private:
 	void _updateShadows();
 	void _updateMotionBlur();
 	void _updateLensFlare();
+
 	void _captureCubeReflections();
 	void _capturePlanarReflections();
 	void _captureWaterReflections();
@@ -86,6 +88,7 @@ private:
 	void _captureDOF();
 	void _captureLensFlare();
 	void _captureMotionBlur();
+
 	void _renderSkyEntity();
 	void _renderTerrainEntity();
 	void _renderWaterEntity();

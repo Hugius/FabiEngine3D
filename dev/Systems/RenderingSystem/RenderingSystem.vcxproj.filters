@@ -49,6 +49,9 @@
     <Filter Include="Renderer\Base">
       <UniqueIdentifier>{83813c54-94d4-4c5a-b4f7-1161832d4096}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\Entity\Shadow">
+      <UniqueIdentifier>{131983b2-d80c-4520-ae69-ad8cbec52739}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\master_renderer_capture_cube.cpp">
@@ -105,12 +108,6 @@
     <ClCompile Include="..\..\..\src\quad3d_entity_depth_renderer.cpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\model_entity_shadow_renderer.cpp">
-      <Filter>Renderer\Entity\Depth</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_entity_shadow_renderer.cpp">
-      <Filter>Renderer\Entity\Depth</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\bloom_renderer.cpp">
       <Filter>Renderer\Post</Filter>
     </ClCompile>
@@ -152,6 +149,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\vertex_buffer_cache.cpp">
       <Filter>Buffer\Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_entity_shadow_renderer.cpp">
+      <Filter>Renderer\Entity\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\model_entity_shadow_renderer.cpp">
+      <Filter>Renderer\Entity\Shadow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,12 +203,6 @@
     <ClInclude Include="..\..\..\src\quad3d_entity_depth_renderer.hpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\model_entity_shadow_renderer.hpp">
-      <Filter>Renderer\Entity\Depth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\quad3d_entity_shadow_renderer.hpp">
-      <Filter>Renderer\Entity\Depth</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\bloom_renderer.hpp">
       <Filter>Renderer\Post</Filter>
     </ClInclude>
@@ -238,6 +235,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\vertex_buffer_cache.hpp">
       <Filter>Buffer\Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\quad3d_entity_shadow_renderer.hpp">
+      <Filter>Renderer\Entity\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\model_entity_shadow_renderer.hpp">
+      <Filter>Renderer\Entity\Shadow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

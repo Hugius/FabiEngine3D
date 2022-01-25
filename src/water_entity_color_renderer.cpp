@@ -129,10 +129,11 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		bool isUnderWater = (_renderBus->getCameraPosition().y < (entity->getHeight() + entity->getWaveHeight()));
-		isUnderWater = isUnderWater && (_renderBus->getCameraPosition().x > (entity->getSize() / 2.0f));
+		const float waveHeight = ((entity->getDisplacementMap() != nullptr) ? entity->getWaveHeight() : 0.0f);
+		bool isUnderWater = (_renderBus->getCameraPosition().y < (entity->getHeight() + waveHeight));
+		isUnderWater = isUnderWater && (_renderBus->getCameraPosition().x > -(entity->getSize() / 2.0f));
 		isUnderWater = isUnderWater && (_renderBus->getCameraPosition().x < (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus->getCameraPosition().z > (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus->getCameraPosition().z > -(entity->getSize() / 2.0f));
 		isUnderWater = isUnderWater && (_renderBus->getCameraPosition().z < (entity->getSize() / 2.0f));
 
 		_shader->uploadUniform("u_isUnderWater", isUnderWater);

@@ -33,8 +33,6 @@ void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
 {
 	if(entity->isVisible() && entity->isShadowed())
 	{
-		const auto buffer = entity->getMesh();
-
 		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
 		_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
@@ -53,9 +51,9 @@ void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
 		}
 
-		glBindVertexArray(buffer->getVaoId());
+		glBindVertexArray(entity->getMesh()->getVaoId());
 
-		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
+		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
 
 		glBindVertexArray(0);
 

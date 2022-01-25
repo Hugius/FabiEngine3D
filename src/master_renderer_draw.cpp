@@ -147,9 +147,7 @@ void MasterRenderer::_renderWaterEntity()
 
 void MasterRenderer::_renderOpaqueModelEntities()
 {
-	auto modelEntities = _modelEntityManager->getEntities();
-
-	if(!modelEntities.empty())
+	if(!_modelEntityManager->getEntities().empty())
 	{
 		_modelEntityColorRenderer.bind();
 
@@ -157,7 +155,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 		_modelEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
 
-		for(const auto& [key, modelEntity] : modelEntities)
+		for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
 		{
 			bool isTransparent = false;
 
@@ -176,7 +174,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 			if(modelEntity->isLevelOfDetailed())
 			{
-				const auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityId())->second;
+				const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId())->second;
 				const auto originalPosition = levelOfDetailEntity->getBasePosition();
 				const auto originalRotation = levelOfDetailEntity->getBaseRotation();
 				const auto originalSize = levelOfDetailEntity->getBaseSize();
@@ -208,9 +206,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 void MasterRenderer::_renderTransparentModelEntities()
 {
-	auto modelEntities = _modelEntityManager->getEntities();
-
-	if(!modelEntities.empty())
+	if(!_modelEntityManager->getEntities().empty())
 	{
 		_modelEntityColorRenderer.bind();
 
@@ -218,7 +214,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 		_modelEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
 
-		for(const auto& [key, modelEntity] : modelEntities)
+		for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
 		{
 			bool isTransparent = false;
 
@@ -238,7 +234,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 			if(modelEntity->isLevelOfDetailed())
 			{
-				const auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityId())->second;
+				const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId())->second;
 				const auto originalPosition = levelOfDetailEntity->getBasePosition();
 				const auto originalRotation = levelOfDetailEntity->getBaseRotation();
 				const auto originalSize = levelOfDetailEntity->getBaseSize();
@@ -270,13 +266,11 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 void MasterRenderer::_renderOpaqueQuad3dEntities()
 {
-	auto quad3dEntities = _quad3dEntityManager->getEntities();
-
-	if(!quad3dEntities.empty())
+	if(!_quad3dEntityManager->getEntities().empty())
 	{
 		_quad3dEntityColorRenderer.bind();
 
-		for(const auto& [key, entity] : quad3dEntities)
+		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 		{
 			if(entity->getOpacity() < 1.0f)
 			{
@@ -292,13 +286,11 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 
 void MasterRenderer::_renderTransparentQuad3dEntities()
 {
-	auto quad3dEntities = _quad3dEntityManager->getEntities();
-
-	if(!quad3dEntities.empty())
+	if(!_quad3dEntityManager->getEntities().empty())
 	{
 		_quad3dEntityColorRenderer.bind();
 
-		for(const auto& [key, entity] : quad3dEntities)
+		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 		{
 			if(entity->getOpacity() == 1.0f)
 			{
@@ -314,13 +306,11 @@ void MasterRenderer::_renderTransparentQuad3dEntities()
 
 void MasterRenderer::_renderOpaqueText3dEntities()
 {
-	auto text3dEntities = _text3dEntityManager->getEntities();
-
-	if(!text3dEntities.empty())
+	if(!_text3dEntityManager->getEntities().empty())
 	{
 		_quad3dEntityColorRenderer.bind();
 
-		for(const auto& [key, textEntity] : text3dEntities)
+		for(const auto& [key, textEntity] : _text3dEntityManager->getEntities())
 		{
 			if(textEntity->getOpacity() < 1.0f)
 			{
@@ -339,13 +329,11 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 
 void MasterRenderer::_renderTransparentText3dEntities()
 {
-	auto text3dEntities = _text3dEntityManager->getEntities();
-
-	if(!text3dEntities.empty())
+	if(!_text3dEntityManager->getEntities().empty())
 	{
 		_quad3dEntityColorRenderer.bind();
 
-		for(const auto& [key, textEntity] : text3dEntities)
+		for(const auto& [key, textEntity] : _text3dEntityManager->getEntities())
 		{
 			if(textEntity->getOpacity() == 1.0f)
 			{
@@ -366,13 +354,11 @@ void MasterRenderer::_renderAabbEntities()
 {
 	if(_renderBus->isAabbFrameRenderingEnabled())
 	{
-		auto aabbEntities = _aabbEntityManager->getEntities();
-
-		if(!aabbEntities.empty())
+		if(!_aabbEntityManager->getEntities().empty())
 		{
 			_aabbEntityColorRenderer.bind();
 
-			for(const auto& [key, entity] : aabbEntities)
+			for(const auto& [key, entity] : _aabbEntityManager->getEntities())
 			{
 				_aabbEntityColorRenderer.render(entity);
 			}

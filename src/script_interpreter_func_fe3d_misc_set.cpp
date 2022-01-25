@@ -106,77 +106,6 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:wireframe_enable_rendering")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_fe3d->server_isRunning())
-			{
-				_throwScriptError("cannot access `fe3d:wireframe` functionality as networking server!");
-				return true;
-			}
-
-			_fe3d->misc_enableWireframeRendering();
-
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:wireframe_disable_rendering")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_fe3d->server_isRunning())
-			{
-				_throwScriptError("cannot access `fe3d:wireframe` functionality as networking server!");
-				return true;
-			}
-
-			_fe3d->misc_disableWireframeRendering();
-
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:aabbs_enable_rendering")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_fe3d->server_isRunning())
-			{
-				_throwScriptError("cannot access `fe3d:aabbs` functionality as networking server!");
-				return true;
-			}
-
-			_fe3d->misc_enableAabbFrameRendering();
-
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:aabbs_disable_rendering")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_fe3d->server_isRunning())
-			{
-				_throwScriptError("cannot access `fe3d:aabbs` functionality as networking server!");
-				return true;
-			}
-
-			_fe3d->misc_disableAabbFrameRendering();
-
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:time_interval")
-	{
-		auto types = {SVT::INTEGER};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			const auto result = _fe3d->misc_checkInterval(args[0].getInteger());
-
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
-		}
-	}
 	else if(functionName == "fe3d:vsync_enable")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
@@ -205,6 +134,17 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			_fe3d->misc_disableVsync();
 
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:time_interval")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = _fe3d->misc_checkInterval(args[0].getInteger());
+
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else

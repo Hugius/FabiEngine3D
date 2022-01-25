@@ -3,8 +3,6 @@
 
 void MasterRenderer::_captureWorldDepth()
 {
-	auto modelEntities = _modelEntityManager->getEntities();
-	auto quad3dEntities = _quad3dEntityManager->getEntities();
 	float clippingY = -FLT_MAX;
 	const bool waterDepthNeeded = (_waterEntityManager->getSelectedEntity() != nullptr) && (_waterEntityManager->getSelectedEntity()->getOpacity() > 0.0f);
 	bool isUnderWater = false;
@@ -43,18 +41,18 @@ void MasterRenderer::_captureWorldDepth()
 			_terrainEntityDepthRenderer.unbind();
 		}
 
-		if(!modelEntities.empty())
+		if(!_modelEntityManager->getEntities().empty())
 		{
 			_modelEntityDepthRenderer.bind();
 
-			for(const auto& [key, modelEntity] : modelEntities)
+			for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
 			{
 				if(modelEntity->isDepthMapIncluded())
 				{
 					if(modelEntity->isLevelOfDetailed())
 					{
-						auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityId());
-						if(foundPair != modelEntities.end())
+						auto foundPair = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId());
+						if(foundPair != _modelEntityManager->getEntities().end())
 						{
 							auto levelOfDetailEntity = foundPair->second;
 
@@ -92,15 +90,30 @@ void MasterRenderer::_captureWorldDepth()
 			_modelEntityDepthRenderer.unbind();
 		}
 
-		if(!quad3dEntities.empty())
+		if(!_quad3dEntityManager->getEntities().empty())
 		{
 			_quad3dEntityDepthRenderer.bind();
 
-			for(const auto& [key, entity] : quad3dEntities)
+			for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 			{
 				if(entity->isDepthMapIncluded())
 				{
 					_quad3dEntityDepthRenderer.render(entity, clippingY, isUnderWater);
+				}
+			}
+
+			_quad3dEntityDepthRenderer.unbind();
+		}
+
+		if(!_text3dEntityManager->getEntities().empty())
+		{
+			_quad3dEntityDepthRenderer.bind();
+
+			for(const auto& [key, textEntity] : _text3dEntityManager->getEntities())
+			{
+				for(const auto& characterEntity : textEntity->getCharacterEntities())
+				{
+					_quad3dEntityDepthRenderer.render(characterEntity, clippingY, isUnderWater);
 				}
 			}
 

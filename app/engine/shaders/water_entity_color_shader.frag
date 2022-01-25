@@ -130,26 +130,21 @@ vec4 calculateWaterColor()
 		normal = normalize(normal);
 	}
 
-	vec3 viewDirection = normalize(u_cameraPosition - f_position);
-	float fresnelMixValue = dot(viewDirection, normal);
-
 	vec3 finalColor;
-	vec3 reflectionColor = texture(u_reflectionMap, reflectionUv).rgb;
-	vec3 refractionColor = texture(u_refractionMap, refractionUv).rgb;
-
-	if (u_isReflective && u_isRefractive && !u_isUnderWater)
+	if (!u_isUnderWater && u_isReflective)
 	{
-		finalColor = mix(reflectionColor, refractionColor, fresnelMixValue);
-		finalColor *= u_color;
-	}
-	else if (u_isRefractive)
-	{
-		finalColor = refractionColor;
-		finalColor *= u_color;
-	}
-	else if (u_isReflective)
-	{
+		vec3 reflectionColor = texture(u_reflectionMap, reflectionUv).rgb;
+		vec3 viewDirection = normalize(u_cameraPosition - f_position);
+		float fresnelMixValue = dot(viewDirection, normal);
 		finalColor = mix(reflectionColor, (reflectionColor * 0.1f), fresnelMixValue);
+		finalColor *= u_color;
+	}
+	else if (u_isUnderWater && u_isRefractive)
+	{
+		vec3 refractionColor = texture(u_refractionMap, refractionUv).rgb;
+		vec3 viewDirection = normalize(u_cameraPosition - f_position);
+		float fresnelMixValue = dot(viewDirection, vec3(normal.x, -normal.y, normal.z));
+		finalColor = mix(refractionColor, (refractionColor * 0.1f), fresnelMixValue);
 		finalColor *= u_color;
 	}
 	else

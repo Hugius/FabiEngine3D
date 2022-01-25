@@ -34,8 +34,6 @@ void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity, fl
 {
 	if(entity->isVisible())
 	{
-		const auto buffer = entity->getMesh();
-
 		_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));
 		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
@@ -55,9 +53,9 @@ void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity, fl
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
 		}
 
-		glBindVertexArray(buffer->getVaoId());
+		glBindVertexArray(entity->getMesh()->getVaoId());
 
-		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
+		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
 
 		glBindVertexArray(0);
 

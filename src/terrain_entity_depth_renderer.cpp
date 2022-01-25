@@ -14,15 +14,12 @@ void TerrainEntityDepthRenderer::bind()
 	glEnable(GL_CLIP_DISTANCE3);
 	glEnable(GL_CLIP_DISTANCE4);
 	glEnable(GL_CLIP_DISTANCE5);
-
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
 }
 
 void TerrainEntityDepthRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
-
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_CLIP_DISTANCE2);
@@ -37,8 +34,6 @@ void TerrainEntityDepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if(entity->isVisible())
 	{
-		const auto buffer = entity->getMesh();
-
 		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
 		_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
 		_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
@@ -48,9 +43,9 @@ void TerrainEntityDepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 
 		glEnable(GL_CULL_FACE);
 
-		glBindVertexArray(buffer->getVaoId());
+		glBindVertexArray(entity->getMesh()->getVaoId());
 
-		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
+		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
 
 		glBindVertexArray(0);
 

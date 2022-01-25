@@ -39,19 +39,6 @@ void ModelEntityColorRenderer::bind()
 	_shader->uploadUniform("u_reflectionMap", 7);
 	_shader->uploadUniform("u_normalMap", 8);
 
-	glEnable(GL_CLIP_DISTANCE0);
-	glEnable(GL_CLIP_DISTANCE1);
-	glEnable(GL_CLIP_DISTANCE2);
-	glEnable(GL_CLIP_DISTANCE3);
-	glEnable(GL_CLIP_DISTANCE4);
-	glEnable(GL_CLIP_DISTANCE5);
-
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	if(_renderBus->getPlanarReflectionMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
@@ -62,10 +49,28 @@ void ModelEntityColorRenderer::bind()
 		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, _renderBus->getShadowMap()->getId());
 	}
+
+	glEnable(GL_CLIP_DISTANCE0);
+	glEnable(GL_CLIP_DISTANCE1);
+	glEnable(GL_CLIP_DISTANCE2);
+	glEnable(GL_CLIP_DISTANCE3);
+	glEnable(GL_CLIP_DISTANCE4);
+	glEnable(GL_CLIP_DISTANCE5);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
 }
 
 void ModelEntityColorRenderer::unbind()
 {
+	glDisable(GL_BLEND);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CLIP_DISTANCE0);
+	glDisable(GL_CLIP_DISTANCE1);
+	glDisable(GL_CLIP_DISTANCE2);
+	glDisable(GL_CLIP_DISTANCE3);
+	glDisable(GL_CLIP_DISTANCE4);
+	glDisable(GL_CLIP_DISTANCE5);
+
 	if(_renderBus->getPlanarReflectionMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
@@ -76,17 +81,6 @@ void ModelEntityColorRenderer::unbind()
 		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-
-	glDisable(GL_BLEND);
-
-	glDisable(GL_DEPTH_TEST);
-
-	glDisable(GL_CLIP_DISTANCE0);
-	glDisable(GL_CLIP_DISTANCE1);
-	glDisable(GL_CLIP_DISTANCE2);
-	glDisable(GL_CLIP_DISTANCE3);
-	glDisable(GL_CLIP_DISTANCE4);
-	glDisable(GL_CLIP_DISTANCE5);
 
 	_shader->unbind();
 }
@@ -154,22 +148,18 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 
 		if(!entity->getPreviousReflectionEntityId().empty())
 		{
-			const auto reflectionEntity = reflectionEntities.at(entity->getPreviousReflectionEntityId());
-
-			if(reflectionEntity->getCubeMap() != nullptr)
+			if(reflectionEntities.at(entity->getPreviousReflectionEntityId())->getCubeMap() != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntity->getCubeMap()->getId());
+				glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getPreviousReflectionEntityId())->getCubeMap()->getId());
 			}
 		}
 		if(!entity->getCurrentReflectionEntityId().empty())
 		{
-			const auto reflectionEntity = reflectionEntities.at(entity->getCurrentReflectionEntityId());
-
-			if(reflectionEntity->getCubeMap() != nullptr)
+			if(reflectionEntities.at(entity->getCurrentReflectionEntityId())->getCubeMap() != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE1);
-				glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntity->getCubeMap()->getId());
+				glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getCurrentReflectionEntityId())->getCubeMap()->getId());
 			}
 		}
 

@@ -15,9 +15,10 @@ out vec2 f_uv;
 
 void main()
 {
-	gl_Position = (u_transformationMatrix * vec4(v_position, 0.0f, 1.0f));
 	f_uv.x = (u_isHorizontallyFlipped ? (1.0f - v_uv.x) : v_uv.x);
 	f_uv.y = (u_isVerticallyFlipped ? (1.0f - v_uv.y) : v_uv.y);
 	f_uv.x = (u_uvOffset.x + (f_uv.x * u_uvMultiplier.x));
 	f_uv.y = (u_uvOffset.y + (f_uv.y * u_uvMultiplier.y));
+
+	gl_Position = (u_transformationMatrix * vec4(v_position, 0.0f, 1.0f));
 }

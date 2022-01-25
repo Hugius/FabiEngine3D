@@ -45,16 +45,12 @@ void WaterEntityColorRenderer::bind()
 	}
 
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
-
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void WaterEntityColorRenderer::unbind()
 {
 	glDisable(GL_BLEND);
-
 	glDisable(GL_DEPTH_TEST);
 
 	if(_renderBus->getWaterReflectionMap() != nullptr)

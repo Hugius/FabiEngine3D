@@ -10,6 +10,12 @@ uniform mat4 u_projectionMatrix;
 
 uniform vec2 u_waveOffset;
 
+uniform vec3 u_minX;
+uniform vec3 u_minY;
+uniform vec3 u_minZ;
+uniform vec3 u_maxX;
+uniform vec3 u_maxY;
+uniform vec3 u_maxZ;
 uniform float u_height;
 uniform float u_textureRepeat;
 uniform float u_waveHeight;
@@ -23,25 +29,27 @@ out vec3 f_position;
 void main()
 {
 	vec3 newPosition = v_position;
-
 	newPosition.y = u_height;
-
-	f_uv = (v_uv * u_textureRepeat);
 
 	if (u_hasDisplacementMap)
 	{
 		vec2 texelSize = (vec2(1.0f) / textureSize(u_displacementMap, 0));
-
-		float heightPercentage = texture(u_displacementMap, (f_uv + (u_waveOffset * texelSize))).r;
-
+		float heightPercentage = texture(u_displacementMap, ((v_uv * u_textureRepeat) + (u_waveOffset * texelSize))).r;
 		newPosition.y += (heightPercentage * u_waveHeight);
 	}
 
 	vec4 worldSpacePosition = vec4(newPosition, 1.0f);
-	vec4 clipSpacePosition  = u_projectionMatrix * u_viewMatrix * vec4(newPosition, 1.0f);
+	vec4 clipSpacePosition  = (u_projectionMatrix * u_viewMatrix * vec4(newPosition, 1.0f));
+
+	f_clip = clipSpacePosition;
+	f_position = worldSpacePosition.xyz;
+	f_uv = (v_uv * u_textureRepeat);
 
 	gl_Position = clipSpacePosition;
-
-	f_position  = worldSpacePosition.xyz;
-	f_clip = clipSpacePosition;
+	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));
+	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(-1.0f,  0.0f,  0.0f,  u_maxX));
+	gl_ClipDistance[2] = dot(worldSpacePosition, vec4( 0.0f,  1.0f,  0.0f, -u_minY));
+	gl_ClipDistance[3] = dot(worldSpacePosition, vec4( 0.0f, -1.0f,  0.0f,  u_maxY));
+	gl_ClipDistance[4] = dot(worldSpacePosition, vec4( 0.0f,  0.0f,  1.0f, -u_minZ));
+	gl_ClipDistance[5] = dot(worldSpacePosition, vec4( 0.0f,  0.0f, -1.0f,  u_maxZ));
 }

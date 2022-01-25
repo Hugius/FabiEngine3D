@@ -11,7 +11,6 @@ void Quad2dEntityColorRenderer::bind()
 	_shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Quad2dEntityColorRenderer::unbind()
@@ -27,8 +26,6 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 	   ((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
 	   ((entity->getPosition().y + entity->getSize().y) > entity->getMinPosition().y))
 	{
-		const auto buffer = entity->getMesh();
-
 		_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 		_shader->uploadUniform("u_uvOffset", entity->getUvOffset());
 		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
@@ -50,10 +47,10 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
 		}
 
-		glBindVertexArray(buffer->getVaoId());
+		glBindVertexArray(entity->getMesh()->getVaoId());
 
-		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-		_renderBus->increaseTriangleCount(buffer->getVertexCount() / 3);
+		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
+		_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 

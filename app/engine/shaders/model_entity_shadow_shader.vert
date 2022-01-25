@@ -21,6 +21,8 @@ void main()
 	vec4 worldSpacePosition = (u_transformationMatrix * vec4(v_position, 1.0f));
 	vec4 lightSpacePosition = (u_lightSpaceMatrix * worldSpacePosition);
 
+	f_uv = (v_uv * u_textureRepeat);
+
 	gl_Position = lightSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));
 	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(-1.0f,  0.0f,  0.0f,  u_maxX));
@@ -28,6 +30,4 @@ void main()
 	gl_ClipDistance[3] = dot(worldSpacePosition, vec4( 0.0f, -1.0f,  0.0f,  u_maxY));
 	gl_ClipDistance[4] = dot(worldSpacePosition, vec4( 0.0f,  0.0f,  1.0f, -u_minZ));
 	gl_ClipDistance[5] = dot(worldSpacePosition, vec4( 0.0f,  0.0f, -1.0f,  u_maxZ));
-	
-	f_uv = (v_uv * u_textureRepeat);
 }

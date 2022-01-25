@@ -21,20 +21,14 @@ void Quad3dEntityColorRenderer::bind()
 	glEnable(GL_CLIP_DISTANCE3);
 	glEnable(GL_CLIP_DISTANCE4);
 	glEnable(GL_CLIP_DISTANCE5);
-
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
-
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Quad3dEntityColorRenderer::unbind()
 {
 	glDisable(GL_BLEND);
-
 	glDisable(GL_DEPTH_TEST);
-
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_CLIP_DISTANCE2);
@@ -49,8 +43,6 @@ void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 {
 	if(entity->isVisible())
 	{
-		const auto buffer = entity->getMesh();
-
 		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -89,10 +81,10 @@ void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap()->getId());
 		}
 
-		glBindVertexArray(buffer->getVaoId());
+		glBindVertexArray(entity->getMesh()->getVaoId());
 
-		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-		_renderBus->increaseTriangleCount(buffer->getVertexCount() / 3);
+		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
+		_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 

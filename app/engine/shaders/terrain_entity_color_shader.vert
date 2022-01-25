@@ -33,6 +33,12 @@ void main()
 	vec4 viewSpacePosition = (u_viewMatrix * worldSpacePosition);
 	vec4 clipSpacePosition = (u_projectionMatrix * viewSpacePosition);
 
+	f_position = worldSpacePosition.xyz;
+	f_uv = (v_uv * u_textureRepeat);
+	f_normal = normalize(v_normal);
+	f_shadowPosition = u_shadowMatrix * worldSpacePosition;
+	f_tbnMatrix = calculateTbnMatrix();
+
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));
 	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(-1.0f,  0.0f,  0.0f,  u_maxX));
@@ -40,12 +46,6 @@ void main()
 	gl_ClipDistance[3] = dot(worldSpacePosition, vec4( 0.0f, -1.0f,  0.0f,  u_maxY));
 	gl_ClipDistance[4] = dot(worldSpacePosition, vec4( 0.0f,  0.0f,  1.0f, -u_minZ));
 	gl_ClipDistance[5] = dot(worldSpacePosition, vec4( 0.0f,  0.0f, -1.0f,  u_maxZ));
-	
-	f_position = worldSpacePosition.xyz;
-	f_uv = (v_uv * u_textureRepeat);
-	f_normal = normalize(v_normal);
-	f_shadowPosition = u_shadowMatrix * worldSpacePosition;
-	f_tbnMatrix = calculateTbnMatrix();
 }
 
 mat3 calculateTbnMatrix()

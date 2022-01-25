@@ -10,6 +10,7 @@ out vec3 f_uv;
 
 void main()
 {
-	gl_Position = (u_projectionMatrix * u_viewMatrix * u_rotationMatrix * vec4(v_position, 1.0f));
     f_uv = v_position;
+
+	gl_Position = (u_projectionMatrix * u_viewMatrix * u_rotationMatrix * vec4(v_position, 1.0f));
 }

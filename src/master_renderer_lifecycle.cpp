@@ -79,6 +79,9 @@ MasterRenderer::MasterRenderer()
 	_dofBlurRenderer.inject(_dofBlurCaptor);
 	_motionBlurBlurRenderer.inject(_blurShader);
 	_motionBlurBlurRenderer.inject(_motionBlurBlurCaptor);
+
+	glDepthFunc(GL_LEQUAL);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void MasterRenderer::update()

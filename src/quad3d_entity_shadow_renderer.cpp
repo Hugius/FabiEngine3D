@@ -13,15 +13,12 @@ void Quad3dEntityShadowRenderer::bind()
 	glEnable(GL_CLIP_DISTANCE3);
 	glEnable(GL_CLIP_DISTANCE4);
 	glEnable(GL_CLIP_DISTANCE5);
-
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
 }
 
 void Quad3dEntityShadowRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
-
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_CLIP_DISTANCE2);

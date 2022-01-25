@@ -52,24 +52,24 @@ void TerrainEntityColorRenderer::bind()
 	glEnable(GL_CLIP_DISTANCE3);
 	glEnable(GL_CLIP_DISTANCE4);
 	glEnable(GL_CLIP_DISTANCE5);
-
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
 }
 
 void TerrainEntityColorRenderer::unbind()
 {
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
 	glDisable(GL_DEPTH_TEST);
-
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_CLIP_DISTANCE2);
 	glDisable(GL_CLIP_DISTANCE3);
 	glDisable(GL_CLIP_DISTANCE4);
 	glDisable(GL_CLIP_DISTANCE5);
+
+	if(_renderBus->getShadowMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 
 	_shader->unbind();
 }
@@ -125,12 +125,12 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if(entity->isVisible())
 	{
+		glEnable(GL_CULL_FACE);
+
 		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
-
-		glEnable(GL_CULL_FACE);
 
 		_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
 		_shader->uploadUniform("u_isSpecular", entity->isSpecular());
@@ -257,11 +257,11 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		glDisable(GL_CULL_FACE);
-
 		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
+
+		glDisable(GL_CULL_FACE);
 	}
 }

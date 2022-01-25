@@ -33,7 +33,7 @@
     <ClInclude Include="..\..\..\src\library_loader.hpp" />
     <ClInclude Include="..\..\..\src\pointlight_shape.hpp" />
     <ClInclude Include="..\..\..\src\logger.hpp" />
-    <ClInclude Include="..\..\..\src\message_type.hpp" />
+    <ClInclude Include="..\..\..\src\log_message_type.hpp" />
     <ClInclude Include="..\..\..\src\network_protocol.hpp" />
     <ClInclude Include="..\..\..\src\reflection_type.hpp" />
     <ClInclude Include="..\..\..\src\script_condition_type.hpp" />

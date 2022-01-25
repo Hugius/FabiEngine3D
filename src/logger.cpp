@@ -21,7 +21,7 @@ unsigned int Logger::getMessageCount()
 	return _messageCount;
 }
 
-void Logger::_printPrefix(MessageType type)
+void Logger::_printPrefix(LogMessageType type)
 {
 	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 	ostringstream oss;
@@ -42,7 +42,7 @@ void Logger::_printPrefix(MessageType type)
 	oss << "[" << timestamp << "]";
 	SetConsoleTextAttribute(console, 7);
 
-	if(type == MessageType::DEBUG || type == MessageType::ERR)
+	if(type == LogMessageType::DEBUG || type == LogMessageType::ERR)
 	{
 		cout << "> ";
 	}

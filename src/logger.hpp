@@ -2,7 +2,7 @@
 
 #define NOMINMAX
 
-#include "message_type.hpp"
+#include "log_message_type.hpp"
 
 #include <conio.h>
 #include <windows.h>
@@ -26,26 +26,26 @@ public:
 
 	template<typename T, typename...Rest> static void throwInfo(T first, Rest...rest)
 	{
-		_printPrefix(MessageType::INFO);
+		_printPrefix(LogMessageType::INFO);
 		_printMessage(first, rest...);
 	}
 
 	template<typename T, typename...Rest> static void throwDebug(T first, Rest...rest)
 	{
-		_printPrefix(MessageType::DEBUG);
+		_printPrefix(LogMessageType::DEBUG);
 		_printMessage(first, rest...);
 	}
 
 	template<typename T, typename...Rest> static void throwWarning(T first, Rest...rest)
 	{
-		_printPrefix(MessageType::WARNING);
+		_printPrefix(LogMessageType::WARNING);
 		_printMessage(first, rest...);
 	}
 
 	template<typename T, typename...Rest> static void throwFatalWarning(T first, Rest...rest)
 	{
 		cout << endl;
-		_printPrefix(MessageType::WARNING);
+		_printPrefix(LogMessageType::WARNING);
 		_printMessage(first, rest...);
 		cout << endl;
 		throwInfo("Press a key to continue...");
@@ -56,7 +56,7 @@ public:
 	template<typename T, typename...Rest> static void throwError(T first, Rest...rest)
 	{
 		cout << endl;
-		_printPrefix(MessageType::ERR);
+		_printPrefix(LogMessageType::ERR);
 		_printMessage(first, rest...);
 		cout << endl;
 		throwInfo("Press a key to continue...");
@@ -72,7 +72,7 @@ public:
 	static unsigned int getMessageCount();
 
 private:
-	static void _printPrefix(MessageType type);
+	static void _printPrefix(LogMessageType type);
 
 	template<typename T, typename...Rest> static void _printMessage(T first, Rest&&...rest)
 	{

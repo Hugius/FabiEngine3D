@@ -24,7 +24,7 @@
     <ClInclude Include="..\..\..\src\direction.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\message_type.hpp">
+    <ClInclude Include="..\..\..\src\log_message_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_condition_type.hpp">

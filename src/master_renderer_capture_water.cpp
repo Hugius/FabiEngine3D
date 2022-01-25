@@ -12,8 +12,7 @@ void MasterRenderer::_captureWaterReflections()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		vector<string> savedModelEntityIds;
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL ||
-		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL || waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
 		{
 			for(const auto& [key, entity] : _modelEntityManager->getEntities())
 			{
@@ -71,11 +70,7 @@ void MasterRenderer::_captureWaterReflections()
 		float skyExposureLightness = _renderBus->getSkyExposureLightness();
 		_renderBus->setSkyExposureLightness(0.0f);
 
-		const float clippingHeight = -(waterEntity->getHeight());
-		const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
-		_renderBus->setClippingPlane(clippingPlane);
-
-		glEnable(GL_CLIP_DISTANCE0);
+		_renderBus->setMinPosition(fvec3(-FLT_MAX, waterEntity->getHeight() - 1.0f, -FLT_MAX));
 
 		switch(waterEntity->getQuality())
 		{
@@ -121,8 +116,6 @@ void MasterRenderer::_captureWaterReflections()
 				break;
 			}
 		}
-
-		glDisable(GL_CLIP_DISTANCE0);
 
 		_waterReflectionCaptor->unbind();
 
@@ -161,6 +154,8 @@ void MasterRenderer::_captureWaterReflections()
 		_renderBus->setShadowsEnabled(wasShadowsEnabled);
 
 		_renderBus->setSkyExposureLightness(skyExposureLightness);
+
+		_renderBus->setMinPosition(fvec3(-FLT_MAX));
 	}
 	else
 	{
@@ -195,18 +190,14 @@ void MasterRenderer::_captureWaterRefractions()
 
 		if(isUnderWater)
 		{
-			const float clippingHeight = -(waterEntity->getHeight());
-			const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
-			_renderBus->setClippingPlane(clippingPlane);
+			const float clippingHeight = (waterEntity->getHeight());
+			_renderBus->setMinPosition(fvec3(-FLT_MAX, clippingHeight, -FLT_MAX));
 		}
 		else
 		{
 			const float clippingHeight = (waterEntity->getHeight() + waveHeight);
-			const fvec4 clippingPlane = fvec4(0.0f, -1.0f, 0.0f, clippingHeight);
-			_renderBus->setClippingPlane(clippingPlane);
+			_renderBus->setMaxPosition(fvec3(FLT_MAX, clippingHeight, FLT_MAX));
 		}
-
-		glEnable(GL_CLIP_DISTANCE0);
 
 		switch(waterEntity->getQuality())
 		{
@@ -252,8 +243,6 @@ void MasterRenderer::_captureWaterRefractions()
 				break;
 			}
 		}
-
-		glDisable(GL_CLIP_DISTANCE0);
 
 		_renderBus->setShadowsEnabled(isShadowsEnabled);
 

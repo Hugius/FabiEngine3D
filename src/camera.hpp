@@ -3,8 +3,6 @@
 #include "render_bus.hpp"
 #include "render_window.hpp"
 
-using std::numeric_limits;
-
 class Camera final
 {
 public:

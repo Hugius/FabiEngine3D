@@ -1,8 +1,6 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-using std::numeric_limits;
-
 void EngineInterface::raycast_enableTerrainPointing(float distance, float precision)
 {
 	if(_core->getRaycaster()->isTerrainPointingEnabled())
@@ -29,7 +27,7 @@ void EngineInterface::raycast_disableTerrainPointing()
 
 const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
 {
-	float closestDistance = numeric_limits<float>::max();
+	float closestDistance = FLT_MAX;
 
 	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
@@ -163,7 +161,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 	}
 	else
 	{
-		float closestDistance = numeric_limits<float>::max();
+		float closestDistance = FLT_MAX;
 		string closestBoxId = "";
 
 		for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())

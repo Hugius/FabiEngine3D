@@ -11,7 +11,6 @@ void TerrainEntityColorRenderer::bind()
 	_shader->uploadUniform("u_viewMatrix", _renderBus->getViewMatrix());
 	_shader->uploadUniform("u_projectionMatrix", _renderBus->getProjectionMatrix());
 	_shader->uploadUniform("u_shadowMatrix", _renderBus->getShadowMatrix());
-	_shader->uploadUniform("u_clippingPlane", _renderBus->getClippingPlane());
 	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
 	_shader->uploadUniform("u_ambientLightingColor", _renderBus->getAmbientLightingColor());
 	_shader->uploadUniform("u_ambientLightingIntensity", _renderBus->getAmbientLightingIntensity());
@@ -47,6 +46,13 @@ void TerrainEntityColorRenderer::bind()
 		glBindTexture(GL_TEXTURE_2D, _renderBus->getShadowMap()->getId());
 	}
 
+	glEnable(GL_CLIP_DISTANCE0);
+	glEnable(GL_CLIP_DISTANCE1);
+	glEnable(GL_CLIP_DISTANCE2);
+	glEnable(GL_CLIP_DISTANCE3);
+	glEnable(GL_CLIP_DISTANCE4);
+	glEnable(GL_CLIP_DISTANCE5);
+
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
@@ -57,6 +63,13 @@ void TerrainEntityColorRenderer::unbind()
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDisable(GL_DEPTH_TEST);
+
+	glDisable(GL_CLIP_DISTANCE0);
+	glDisable(GL_CLIP_DISTANCE1);
+	glDisable(GL_CLIP_DISTANCE2);
+	glDisable(GL_CLIP_DISTANCE3);
+	glDisable(GL_CLIP_DISTANCE4);
+	glDisable(GL_CLIP_DISTANCE5);
 
 	_shader->unbind();
 }
@@ -138,6 +151,12 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader->uploadUniform("u_hasGreenNormalMap", (entity->getGreenNormalMap() != nullptr));
 		_shader->uploadUniform("u_hasBlueNormalMap", (entity->getBlueNormalMap() != nullptr));
 		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
+		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
+		_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
+		_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
+		_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
+		_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
+		_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
 
 		if(entity->getDiffuseMap() != nullptr)
 		{

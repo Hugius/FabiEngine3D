@@ -7,7 +7,6 @@
 
 using std::map;
 using std::shared_ptr;
-using std::numeric_limits;
 
 class Text3dEntity final : public BaseEntity
 {
@@ -200,8 +199,8 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 	float _lightness = 1.0f;
 	float _opacity = 1.0f;
-	float _minHeight = numeric_limits<float>::lowest();
-	float _maxHeight = numeric_limits<float>::max();
+	float _minHeight = -FLT_MAX;
+	float _maxHeight = FLT_MAX;
 
 	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
 	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;

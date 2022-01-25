@@ -9,12 +9,15 @@ uniform mat4 u_transformationMatrix;
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 uniform mat4 u_shadowMatrix;
+
 uniform mat3 u_normalTransformationMatrix;
 
-uniform vec4 u_clippingPlane;
-
-uniform float u_minHeight;
-uniform float u_maxHeight;
+uniform float u_minX;
+uniform float u_minY;
+uniform float u_minZ;
+uniform float u_maxX;
+uniform float u_maxY;
+uniform float u_maxZ;
 uniform float u_textureRepeat;
 
 uniform bool u_hasNormalMap;
@@ -35,9 +38,12 @@ void main()
 	vec4 clipSpacePosition = (u_projectionMatrix * viewSpacePosition);
 
 	gl_Position = clipSpacePosition;
-	gl_ClipDistance[0] = dot(worldSpacePosition, vec4(0.0f,  1.0f, 0.0f, -u_minHeight));
-	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  u_maxHeight));
-	gl_ClipDistance[2] = dot(worldSpacePosition, u_clippingPlane);
+	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));
+	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(-1.0f,  0.0f,  0.0f,  u_maxX));
+	gl_ClipDistance[2] = dot(worldSpacePosition, vec4( 0.0f,  1.0f,  0.0f, -u_minY));
+	gl_ClipDistance[3] = dot(worldSpacePosition, vec4( 0.0f, -1.0f,  0.0f,  u_maxY));
+	gl_ClipDistance[4] = dot(worldSpacePosition, vec4( 0.0f,  0.0f,  1.0f, -u_minZ));
+	gl_ClipDistance[5] = dot(worldSpacePosition, vec4( 0.0f,  0.0f, -1.0f,  u_maxZ));
 	
 	f_position = worldSpacePosition.xyz;
 	f_uv = (v_uv * u_textureRepeat);

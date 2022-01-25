@@ -5,7 +5,7 @@ void MasterRenderer::_captureWorldDepth()
 {
 	auto modelEntities = _modelEntityManager->getEntities();
 	auto quad3dEntities = _quad3dEntityManager->getEntities();
-	float clippingY = numeric_limits<float>::lowest();
+	float clippingY = -FLT_MAX;
 	const bool waterDepthNeeded = (_waterEntityManager->getSelectedEntity() != nullptr) && (_waterEntityManager->getSelectedEntity()->getOpacity() > 0.0f);
 	bool isUnderWater = false;
 

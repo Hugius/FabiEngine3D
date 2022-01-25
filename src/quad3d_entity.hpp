@@ -7,7 +7,6 @@
 #include <memory>
 
 using std::shared_ptr;
-using std::numeric_limits;
 
 class Quad3dEntity final : public BaseEntity
 {
@@ -110,8 +109,8 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 	float _lightness = 1.0f;
 	float _opacity = 1.0f;
-	float _minHeight = numeric_limits<float>::lowest();
-	float _maxHeight = numeric_limits<float>::max();
+	float _minHeight = -FLT_MAX;
+	float _maxHeight = FLT_MAX;
 
 	bool _isFacingCameraX = false;
 	bool _isFacingCameraY = false;

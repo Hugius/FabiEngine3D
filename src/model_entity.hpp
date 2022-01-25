@@ -2,8 +2,6 @@
 
 #include "model_entity_part.hpp"
 
-using std::numeric_limits;
-
 class ModelEntity final : public BaseEntity
 {
 public:
@@ -158,8 +156,8 @@ private:
 	float _baseSizeTargetSpeed = 0.0f;
 	float _cubeReflectionMixValue = 1.0f;
 	float _levelOfDetailDistance = 0.0f;
-	float _minHeight = numeric_limits<float>::lowest();
-	float _maxHeight = numeric_limits<float>::max();
+	float _minHeight = -FLT_MAX;
+	float _maxHeight = FLT_MAX;
 
 	bool _isFrozen = false;
 	bool _isShadowed = true;

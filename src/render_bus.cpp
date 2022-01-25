@@ -80,14 +80,19 @@ void RenderBus::setShadowMatrix(const mat44& value)
 	_shadowMatrix = value;
 }
 
+void RenderBus::setMinPosition(const fvec3& value)
+{
+	_minPosition = value;
+}
+
+void RenderBus::setMaxPosition(const fvec3& value)
+{
+	_maxPosition = value;
+}
+
 void RenderBus::setFlareSourceUv(const fvec2& value)
 {
 	_flareSourceUv = value;
-}
-
-void RenderBus::setClippingPlane(const fvec4& value)
-{
-	_clippingPlane = value;
 }
 
 void RenderBus::setCameraPosition(const fvec3& value)
@@ -508,14 +513,19 @@ const mat44& RenderBus::getShadowMatrix() const
 	return _shadowMatrix;
 }
 
+const fvec3& RenderBus::getMinPosition() const
+{
+	return _minPosition;
+}
+
+const fvec3& RenderBus::getMaxPosition() const
+{
+	return _maxPosition;
+}
+
 const fvec2& RenderBus::getFlareSourceUv() const
 {
 	return _flareSourceUv;
-}
-
-const fvec4& RenderBus::getClippingPlane() const
-{
-	return _clippingPlane;
 }
 
 const fvec3& RenderBus::getCameraPosition() const

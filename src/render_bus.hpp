@@ -29,7 +29,8 @@ public:
 	void setViewMatrix(const mat44& value);
 	void setProjectionMatrix(const mat44& value);
 	void setShadowMatrix(const mat44& value);
-	void setClippingPlane(const fvec4& value);
+	void setMinPosition(const fvec3& value);
+	void setMaxPosition(const fvec3& value);
 	void setCameraPosition(const fvec3& value);
 	void setCameraFront(const fvec3& value);
 	void setAmbientLightingColor(const fvec3& value);
@@ -105,8 +106,8 @@ public:
 	const mat44& getProjectionMatrix() const;
 	const mat44& getShadowMatrix() const;
 
-	const fvec4& getClippingPlane() const;
-
+	const fvec3& getMinPosition() const;
+	const fvec3& getMaxPosition() const;
 	const fvec3& getCameraPosition() const;
 	const fvec3& getCameraFront() const;
 	const fvec3& getAmbientLightingColor() const;
@@ -212,8 +213,8 @@ private:
 	mat44 _projectionMatrix = mat44(1.0f);
 	mat44 _shadowMatrix = mat44(1.0f);
 
-	fvec4 _clippingPlane = fvec4(0.0f);
-
+	fvec3 _minPosition = fvec3(-FLT_MAX);
+	fvec3 _maxPosition = fvec3(FLT_MAX);
 	fvec3 _cameraPosition = fvec3(0.0f);
 	fvec3 _cameraFront = fvec3(0.0f);
 	fvec3 _directionalLightPosition = fvec3(0.0f);

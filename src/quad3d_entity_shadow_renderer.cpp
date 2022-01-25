@@ -9,6 +9,10 @@ void Quad3dEntityShadowRenderer::bind()
 
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
+	glEnable(GL_CLIP_DISTANCE2);
+	glEnable(GL_CLIP_DISTANCE3);
+	glEnable(GL_CLIP_DISTANCE4);
+	glEnable(GL_CLIP_DISTANCE5);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -20,6 +24,10 @@ void Quad3dEntityShadowRenderer::unbind()
 
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
+	glDisable(GL_CLIP_DISTANCE2);
+	glDisable(GL_CLIP_DISTANCE3);
+	glDisable(GL_CLIP_DISTANCE4);
+	glDisable(GL_CLIP_DISTANCE5);
 
 	_shader->unbind();
 }
@@ -31,8 +39,12 @@ void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
 		const auto buffer = entity->getMesh();
 
 		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
-		_shader->uploadUniform("u_minHeight", entity->getMinHeight());
-		_shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
+		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
+		_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
+		_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
+		_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
+		_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
+		_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
 		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 		_shader->uploadUniform("u_uvOffset", entity->getUvOffset());

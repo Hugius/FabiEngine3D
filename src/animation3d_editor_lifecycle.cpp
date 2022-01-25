@@ -4,8 +4,6 @@
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
-using std::numeric_limits;
-
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 

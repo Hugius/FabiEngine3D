@@ -6,8 +6,12 @@ layout (location = 1) in vec2 v_uv;
 uniform mat4 u_transformationMatrix;
 uniform mat4 u_lightSpaceMatrix;
 
-uniform float u_minHeight;
-uniform float u_maxHeight;
+uniform float u_minX;
+uniform float u_minY;
+uniform float u_minZ;
+uniform float u_maxX;
+uniform float u_maxY;
+uniform float u_maxZ;
 uniform float u_textureRepeat;
 
 out vec2 f_uv;
@@ -18,8 +22,12 @@ void main()
 	vec4 lightSpacePosition = (u_lightSpaceMatrix * worldSpacePosition);
 
 	gl_Position = lightSpacePosition;
-	gl_ClipDistance[0] = dot(worldSpacePosition, vec4(0.0f,  1.0f, 0.0f, -u_minHeight));
-	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  u_maxHeight));
+	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));
+	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(-1.0f,  0.0f,  0.0f,  u_maxX));
+	gl_ClipDistance[2] = dot(worldSpacePosition, vec4( 0.0f,  1.0f,  0.0f, -u_minY));
+	gl_ClipDistance[3] = dot(worldSpacePosition, vec4( 0.0f, -1.0f,  0.0f,  u_maxY));
+	gl_ClipDistance[4] = dot(worldSpacePosition, vec4( 0.0f,  0.0f,  1.0f, -u_minZ));
+	gl_ClipDistance[5] = dot(worldSpacePosition, vec4( 0.0f,  0.0f, -1.0f,  u_maxZ));
 	
 	f_uv = (v_uv * u_textureRepeat);
 }

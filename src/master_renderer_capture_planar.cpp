@@ -77,24 +77,17 @@ void MasterRenderer::_capturePlanarReflections()
 	const auto originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
 	_renderBus->setSkyExposureLightness(0.0f);
 
-	const float clippingHeight = -(_renderBus->getPlanarReflectionHeight() + 0.0000001f);
-	const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
-	_renderBus->setClippingPlane(clippingPlane);
+	const float clippingHeight = -(_renderBus->getPlanarReflectionHeight() + 0.0001f);
+	_renderBus->setMinPosition(fvec3(-FLT_MAX, clippingHeight, -FLT_MAX));
 
 	_renderSkyEntity();
-
-	glEnable(GL_CLIP_DISTANCE0);
 	_renderTerrainEntity();
-	glDisable(GL_CLIP_DISTANCE0);
-
-	glEnable(GL_CLIP_DISTANCE2);
 	_renderOpaqueModelEntities();
 	_renderOpaqueQuad3dEntities();
 	_renderOpaqueText3dEntities();
 	_renderTransparentModelEntities();
 	_renderTransparentQuad3dEntities();
 	_renderTransparentText3dEntities();
-	glDisable(GL_CLIP_DISTANCE2);
 
 	_planarReflectionCaptor->unbind();
 

@@ -154,7 +154,7 @@ const int Animation2dEditor::getQuad3dAnimationPlayCount(const string& animation
 	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getPlayCount();
 }
 
-const unsigned int Animation2dEditor::getQuad3dAnimationFramestep(const string& animationId, const string& quadId) const
+const unsigned int Animation2dEditor::getQuad3dAnimationInterval(const string& animationId, const string& quadId) const
 {
 	if(!isAnimationExisting(animationId))
 	{
@@ -166,7 +166,7 @@ const unsigned int Animation2dEditor::getQuad3dAnimationFramestep(const string& 
 		Logger::throwWarning("animation not started!");
 	}
 
-	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getFramestep();
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getInterval();
 }
 
 const unsigned int Animation2dEditor::getQuad2dAnimationRowCount(const string& animationId, const string& quadId) const
@@ -244,7 +244,7 @@ const int Animation2dEditor::getQuad2dAnimationPlayCount(const string& animation
 	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getPlayCount();
 }
 
-const unsigned int Animation2dEditor::getQuad2dAnimationFramestep(const string& animationId, const string& quadId) const
+const unsigned int Animation2dEditor::getQuad2dAnimationInterval(const string& animationId, const string& quadId) const
 {
 	if(!isAnimationExisting(animationId))
 	{
@@ -256,7 +256,7 @@ const unsigned int Animation2dEditor::getQuad2dAnimationFramestep(const string& 
 		Logger::throwWarning("animation not started!");
 	}
 
-	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getFramestep();
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getInterval();
 }
 
 void Animation2dEditor::_deleteAnimation(const string& id)

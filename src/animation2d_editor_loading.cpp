@@ -34,7 +34,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 		string previewTexturePath;
 		unsigned int rowCount;
 		unsigned int columnCount;
-		unsigned int framestep;
+		unsigned int interval;
 
 		istringstream iss(line);
 
@@ -43,7 +43,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 			previewTexturePath >>
 			rowCount >>
 			columnCount >>
-			framestep;
+			interval;
 
 		previewTexturePath = (previewTexturePath == "?") ? "" : previewTexturePath;
 
@@ -59,7 +59,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 		newAnimation->setPreviewTexturePath(previewTexturePath);
 		newAnimation->setRowCount(rowCount);
 		newAnimation->setColumnCount(columnCount);
-		newAnimation->setFramestep(framestep);
+		newAnimation->setInterval(interval);
 
 		if(mustCheckPreviewTexture)
 		{

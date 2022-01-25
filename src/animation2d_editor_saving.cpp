@@ -27,7 +27,7 @@ const bool Animation2dEditor::saveToFile() const
 		auto previewTexturePath = animation->getPreviewTexturePath();
 		auto rowCount = animation->getRowCount();
 		auto columnCount = animation->getColumnCount();
-		auto framestep = animation->getFramestep();
+		auto interval = animation->getInterval();
 
 		if(!previewTexturePath.empty())
 		{
@@ -42,7 +42,7 @@ const bool Animation2dEditor::saveToFile() const
 				previewTexturePath << " " <<
 				rowCount << " " <<
 				columnCount << " " <<
-				framestep << endl;
+				interval << endl;
 		}
 	}
 

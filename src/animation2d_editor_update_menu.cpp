@@ -54,7 +54,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		auto currentAnimation = _getAnimation(_currentAnimationId);
 		auto rowCount = currentAnimation->getRowCount();
 		auto columnCount = currentAnimation->getColumnCount();
-		auto framestep = currentAnimation->getFramestep();
+		auto interval = currentAnimation->getInterval();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -83,9 +83,9 @@ void Animation2dEditor::_updateChoiceMenu()
 		{
 			_gui->getOverlay()->createValueForm("columns", "Columns", columnCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("framestep")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("interval")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("framestep", "Framestep", framestep, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("interval", "Interval", interval, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
@@ -143,9 +143,9 @@ void Animation2dEditor::_updateChoiceMenu()
 		{
 			currentAnimation->setColumnCount(columnCount);
 		}
-		if(_gui->getOverlay()->checkValueForm("framestep", framestep, {}))
+		if(_gui->getOverlay()->checkValueForm("interval", interval, {}))
 		{
-			currentAnimation->setFramestep(framestep);
+			currentAnimation->setInterval(interval);
 		}
 
 		auto hasPreviewTexture = !currentAnimation->getPreviewTexturePath().empty();
@@ -153,7 +153,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		screen->getButton("preview")->setHoverable(!isStarted);
 		screen->getButton("rows")->setHoverable(hasPreviewTexture && !isStarted);
 		screen->getButton("columns")->setHoverable(hasPreviewTexture && !isStarted);
-		screen->getButton("framestep")->setHoverable(hasPreviewTexture && !isStarted);
+		screen->getButton("interval")->setHoverable(hasPreviewTexture && !isStarted);
 		screen->getButton("start")->setHoverable(hasPreviewTexture && !isStarted && (rowCount != 0) && (columnCount != 0));
 		screen->getButton("stop")->setHoverable(hasPreviewTexture && isStarted);
 	}

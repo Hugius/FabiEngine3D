@@ -269,7 +269,7 @@ void Animation2dEditor::stopQuad2dAnimations()
 	_startedQuad2dAnimations.clear();
 }
 
-void Animation2dEditor::setQuad3dAnimationFramestep(const string& animationId, const string& quadId, unsigned int value)
+void Animation2dEditor::setQuad3dAnimationInterval(const string& animationId, const string& quadId, unsigned int value)
 {
 	if(!isAnimationExisting(animationId))
 	{
@@ -281,10 +281,10 @@ void Animation2dEditor::setQuad3dAnimationFramestep(const string& animationId, c
 		Logger::throwWarning("animation not started!");
 	}
 
-	_startedQuad3dAnimations.at(make_pair(animationId, quadId)).setFramestep(value);
+	_startedQuad3dAnimations.at(make_pair(animationId, quadId)).setInterval(value);
 }
 
-void Animation2dEditor::setQuad2dAnimationFramestep(const string& animationId, const string& quadId, unsigned int value)
+void Animation2dEditor::setQuad2dAnimationInterval(const string& animationId, const string& quadId, unsigned int value)
 {
 	if(!isAnimationExisting(animationId))
 	{
@@ -296,5 +296,5 @@ void Animation2dEditor::setQuad2dAnimationFramestep(const string& animationId, c
 		Logger::throwWarning("animation not started!");
 	}
 
-	_startedQuad2dAnimations.at(make_pair(animationId, quadId)).setFramestep(value);
+	_startedQuad2dAnimations.at(make_pair(animationId, quadId)).setInterval(value);
 }

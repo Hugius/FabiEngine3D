@@ -212,7 +212,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		string animationId, modelId;
 	//		float speed;
 	//		int remainingLoops;
-	//		unsigned int frameIndex, fadeFramestep;
+	//		unsigned int frameIndex, fadeInterval;
 	//		bool isPaused;
 
 	//		iss >>
@@ -222,7 +222,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			frameIndex >>
 	//			speed >>
 	//			remainingLoops >>
-	//			fadeFramestep;
+	//			fadeInterval;
 
 	//		map<string, fvec3> speeds;
 	//		while(true)
@@ -255,7 +255,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		//	// Set properties
 	//		//	isPaused ? _animation3dEditor->pauseModelAnimation(animationId, modelId) : void();
 	//		//	animationData->setSpeedMultiplier(speedMultiplier);
-	//		//	animationData->setFadeFramestep(fadeFramestep);
+	//		//	animationData->setFadeInterval(fadeInterval);
 	//		//	animationData->setFrameIndex(frameIndex);
 	//		//	for(const auto& [key, speed] : speeds)
 	//		//	{

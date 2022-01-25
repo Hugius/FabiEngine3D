@@ -28,9 +28,9 @@ const unsigned int Animation2d::getPassedFrames() const
 	return _passedFrames;
 }
 
-const unsigned int Animation2d::getFramestep() const
+const unsigned int Animation2d::getInterval() const
 {
-	return _framestep;
+	return _interval;
 }
 
 const unsigned int Animation2d::getRowCount() const
@@ -98,9 +98,9 @@ void Animation2d::setColumnCount(unsigned int value)
 	_columnCount = value;
 }
 
-void Animation2d::setFramestep(unsigned int value)
+void Animation2d::setInterval(unsigned int value)
 {
-	_framestep = value;
+	_interval = value;
 }
 
 void Animation2d::setPassedFrames(unsigned int value)

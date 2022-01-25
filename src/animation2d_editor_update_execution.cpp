@@ -6,7 +6,7 @@ void Animation2dEditor::_updateQuad3dAnimationExecution()
 	{
 		if(!animation.isPaused())
 		{
-			if(animation.getPassedFrames() == animation.getFramestep())
+			if(animation.getPassedFrames() == animation.getInterval())
 			{
 				animation.setPassedFrames(0);
 
@@ -88,7 +88,7 @@ void Animation2dEditor::_updateQuad2dAnimationExecution()
 	{
 		if(!animation.isPaused())
 		{
-			if(animation.getPassedFrames() == animation.getFramestep())
+			if(animation.getPassedFrames() == animation.getInterval())
 			{
 				animation.setPassedFrames(0);
 

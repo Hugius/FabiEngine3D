@@ -122,7 +122,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_set_quad3d_framestep")
+	else if(functionName == "fe3d:animation2d_set_quad3d_interval")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
@@ -130,7 +130,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
 			{
-				_animation2dEditor->setQuad3dAnimationFramestep(args[0].getString(), args[1].getString(), args[1].getInteger());
+				_animation2dEditor->setQuad3dAnimationInterval(args[0].getString(), args[1].getString(), args[1].getInteger());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -254,7 +254,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_set_quad2d_framestep")
+	else if(functionName == "fe3d:animation2d_set_quad2d_interval")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
@@ -262,7 +262,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
 			{
-				_animation2dEditor->setQuad2dAnimationFramestep(args[0].getString(), args[1].getString(), args[1].getInteger());
+				_animation2dEditor->setQuad2dAnimationInterval(args[0].getString(), args[1].getString(), args[1].getInteger());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

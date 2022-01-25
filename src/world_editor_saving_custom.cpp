@@ -221,7 +221,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		//	auto frameIndex = animationData->getFrameIndex();
 	//		//	auto speedMultiplier = animationData->getSpeedMultiplier();
 	//		//	auto remainingLoops = (animationData->getPlayCount() == -1) ? -1 : (animationData->getPlayCount() - 1);
-	//		//	auto fadeFramestep = animationData->getFadeFramestep();
+	//		//	auto fadeInterval = animationData->getFadeInterval();
 
 	//		//	// Write main data
 	//		//	file <<
@@ -232,7 +232,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		//		frameIndex << " " <<
 	//		//		speedMultiplier << " " <<
 	//		//		remainingLoops << " " <<
-	//		//		fadeFramestep << " ";
+	//		//		fadeInterval << " ";
 
 	//		//	// Write speeds
 	//		//	unsigned int index = 0;

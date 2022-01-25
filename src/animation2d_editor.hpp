@@ -21,7 +21,7 @@ public:
 	void autopauseQuad3dAnimations();
 	void resumeQuad3dAnimations();
 	void stopQuad3dAnimations();
-	void setQuad3dAnimationFramestep(const string& animationId, const string& quadId, unsigned int value);
+	void setQuad3dAnimationInterval(const string& animationId, const string& quadId, unsigned int value);
 	void startQuad2dAnimation(const string& animationId, const string& quadId, int playCount);
 	void pauseQuad2dAnimation(const string& animationId, const string& quadId);
 	void autopauseQuad2dAnimation(const string& animationId, const string& quadId);
@@ -31,7 +31,7 @@ public:
 	void autopauseQuad2dAnimations();
 	void resumeQuad2dAnimations();
 	void stopQuad2dAnimations();
-	void setQuad2dAnimationFramestep(const string& animationId, const string& quadId, unsigned int value);
+	void setQuad2dAnimationInterval(const string& animationId, const string& quadId, unsigned int value);
 
 	const vector<string> getAnimationIds();
 	const vector<string> getStartedQuad3dAnimationIds() const;
@@ -46,12 +46,12 @@ public:
 	const unsigned int getQuad3dAnimationColumnCount(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad3dAnimationRowIndex(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad3dAnimationColumnIndex(const string& animationId, const string& quadId) const;
-	const unsigned int getQuad3dAnimationFramestep(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad3dAnimationInterval(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad2dAnimationRowCount(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad2dAnimationColumnCount(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad2dAnimationRowIndex(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad2dAnimationColumnIndex(const string& animationId, const string& quadId) const;
-	const unsigned int getQuad2dAnimationFramestep(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad2dAnimationInterval(const string& animationId, const string& quadId) const;
 
 	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& id) const;

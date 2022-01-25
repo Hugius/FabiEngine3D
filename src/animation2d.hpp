@@ -16,7 +16,7 @@ public:
 	void setColumnIndex(unsigned int value);
 	void setRowCount(unsigned int value);
 	void setColumnCount(unsigned int value);
-	void setFramestep(unsigned int value);
+	void setInterval(unsigned int value);
 	void setPassedFrames(unsigned int value);
 	void setPreviewTexturePath(const string& value);
 
@@ -26,7 +26,7 @@ public:
 	const int getPlayCount() const;
 
 	const unsigned int getPassedFrames() const;
-	const unsigned int getFramestep() const;
+	const unsigned int getInterval() const;
 	const unsigned int getRowCount() const;
 	const unsigned int getColumnCount() const;
 	const unsigned int getRowIndex() const;
@@ -45,7 +45,7 @@ private:
 	unsigned int _rowIndex = 0;
 	unsigned int _columnCount = 0;
 	unsigned int _columnIndex = 0;
-	unsigned int _framestep = 0;
+	unsigned int _interval = 0;
 	unsigned int _passedFrames = 0;
 
 	bool _isPaused = false;

@@ -26,7 +26,7 @@
 - **Play Count**: the amount of (remaining) times the animation must play
   - Type: `integer`
   - Constraints: `-1` or at least `0`
-- **Framestep**: the amount of engine updates between frame cycles
+- **Interval**: the amount of engine updates between animation frame cycles
   - Type: `integer`
   - Constraints: at least `0`
 - **Paused**: the animation is paused

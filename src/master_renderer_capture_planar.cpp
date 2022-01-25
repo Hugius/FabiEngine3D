@@ -25,6 +25,7 @@ void MasterRenderer::_capturePlanarReflections()
 	float cameraDistance = (_camera->getPosition().y - _renderBus->getPlanarReflectionHeight());
 
 	_planarReflectionCaptor->bind();
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	vector<string> savedModelEntityIds;
@@ -61,16 +62,16 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	const fvec3 initialCameraPosition = _camera->getPosition();
-	_camera->setPosition(fvec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
+	const fvec3 originalCameraPosition = _camera->getPosition();
+	_camera->setPosition(fvec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
 
-	const float initialCameraPitch = _camera->getPitch();
-	_camera->setPitch(-initialCameraPitch);
+	const float originalCameraPitch = _camera->getPitch();
+	_camera->setPitch(-originalCameraPitch);
 
 	_camera->updateMatrices();
 
-	_renderBus->setCameraPosition(initialCameraPosition);
-	_renderBus->setCameraPitch(initialCameraPitch);
+	_renderBus->setCameraPosition(originalCameraPosition);
+	_renderBus->setCameraPitch(originalCameraPitch);
 
 	_renderBus->setReflectionsEnabled(false);
 
@@ -115,9 +116,9 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	_camera->setPitch(initialCameraPitch);
+	_camera->setPitch(originalCameraPitch);
 
-	_camera->setPosition(initialCameraPosition);
+	_camera->setPosition(originalCameraPosition);
 
 	_camera->updateMatrices();
 

@@ -30,7 +30,7 @@ void Quad3dEntityDepthRenderer::unbind()
 	_shader->unbind();
 }
 
-void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity, float clippingY, bool isUnderWater)
+void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity)
 {
 	if(entity->isVisible())
 	{

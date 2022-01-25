@@ -30,7 +30,7 @@ void ModelEntityDepthRenderer::unbind()
 	_shader->unbind();
 }
 
-void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater)
+void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity)
 {
 	if(entity->isVisible())
 	{

@@ -225,6 +225,7 @@ void AabbEntityManager::update()
 				case AabbParentEntityType::QUAD3D:
 				{
 					auto foundPair = _quad3dEntityManager->getEntities().find(entity->getParentEntityId());
+
 					if(foundPair == _quad3dEntityManager->getEntities().end())
 					{
 						Logger::throwError("AabbEntityManager::update::2");
@@ -302,6 +303,7 @@ void AabbEntityManager::update()
 				case AabbParentEntityType::TEXT3D:
 				{
 					auto foundPair = _text3dEntityManager->getEntities().find(entity->getParentEntityId());
+
 					if(foundPair == _text3dEntityManager->getEntities().end())
 					{
 						Logger::throwError("AabbEntityManager::update::3");

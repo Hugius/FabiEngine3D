@@ -3,33 +3,12 @@
 
 void MasterRenderer::_captureWorldDepth()
 {
-	float clippingY = -FLT_MAX;
 	const bool waterDepthNeeded = (_waterEntityManager->getSelectedEntity() != nullptr) && (_waterEntityManager->getSelectedEntity()->getOpacity() > 0.0f);
-	bool isUnderWater = false;
-
-	if(waterDepthNeeded)
-	{
-		auto waterEntity = _waterEntityManager->getSelectedEntity();
-		float waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
-		isUnderWater = (_renderBus->getCameraPosition().y < (waterEntity->getHeight() + waveHeight));
-		isUnderWater = (isUnderWater && (_renderBus->getCameraPosition().x > (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus->getCameraPosition().x < (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus->getCameraPosition().z > (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus->getCameraPosition().z < (waterEntity->getSize() / 2.0f)));
-
-		if(isUnderWater)
-		{
-			clippingY = waterEntity->getHeight();
-		}
-		else
-		{
-			clippingY = (waterEntity->getHeight() + waveHeight);
-		}
-	}
 
 	if(_renderBus->isDofEnabled() || _renderBus->isLensFlareEnabled() || waterDepthNeeded)
 	{
 		_worldDepthCaptor->bind();
+
 		glClear(GL_DEPTH_BUFFER_BIT);
 
 		if(_terrainEntityManager->getSelectedEntity() != nullptr)
@@ -52,27 +31,27 @@ void MasterRenderer::_captureWorldDepth()
 					if(modelEntity->isLevelOfDetailed())
 					{
 						auto foundPair = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId());
+
 						if(foundPair != _modelEntityManager->getEntities().end())
 						{
-							auto levelOfDetailEntity = foundPair->second;
-
-							fvec3 initialPosition = levelOfDetailEntity->getBasePosition();
-							fvec3 initialRotation = levelOfDetailEntity->getBaseRotation();
-							fvec3 initialSize = levelOfDetailEntity->getBaseSize();
-							bool initialVisibility = levelOfDetailEntity->isVisible();
+							const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId())->second;
+							const auto originalPosition = levelOfDetailEntity->getBasePosition();
+							const auto originalRotation = levelOfDetailEntity->getBaseRotation();
+							const auto originalSize = levelOfDetailEntity->getBaseSize();
+							const auto originalVisibility = levelOfDetailEntity->isVisible();
 
 							levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
 							levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
-							levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * initialSize);
+							levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 							levelOfDetailEntity->setVisible(modelEntity->isVisible());
 							levelOfDetailEntity->updateTransformationMatrix();
 
-							_modelEntityDepthRenderer.render(levelOfDetailEntity, clippingY, isUnderWater);
+							_modelEntityDepthRenderer.render(levelOfDetailEntity);
 
-							levelOfDetailEntity->setBasePosition(initialPosition);
-							levelOfDetailEntity->setBaseRotation(initialRotation);
-							levelOfDetailEntity->setBaseSize(initialSize);
-							levelOfDetailEntity->setVisible(initialVisibility);
+							levelOfDetailEntity->setBasePosition(originalPosition);
+							levelOfDetailEntity->setBaseRotation(originalRotation);
+							levelOfDetailEntity->setBaseSize(originalSize);
+							levelOfDetailEntity->setVisible(originalVisibility);
 							levelOfDetailEntity->updateTransformationMatrix();
 						}
 						else
@@ -82,7 +61,7 @@ void MasterRenderer::_captureWorldDepth()
 					}
 					else
 					{
-						_modelEntityDepthRenderer.render(modelEntity, clippingY, isUnderWater);
+						_modelEntityDepthRenderer.render(modelEntity);
 					}
 				}
 			}
@@ -98,7 +77,7 @@ void MasterRenderer::_captureWorldDepth()
 			{
 				if(entity->isDepthMapIncluded())
 				{
-					_quad3dEntityDepthRenderer.render(entity, clippingY, isUnderWater);
+					_quad3dEntityDepthRenderer.render(entity);
 				}
 			}
 
@@ -113,7 +92,7 @@ void MasterRenderer::_captureWorldDepth()
 			{
 				for(const auto& characterEntity : textEntity->getCharacterEntities())
 				{
-					_quad3dEntityDepthRenderer.render(characterEntity, clippingY, isUnderWater);
+					_quad3dEntityDepthRenderer.render(characterEntity);
 				}
 			}
 
@@ -270,6 +249,7 @@ void MasterRenderer::_captureShadows()
 		auto quad3dEntities = _quad3dEntityManager->getEntities();
 
 		_shadowCaptor->bind();
+
 		glClear(GL_DEPTH_BUFFER_BIT);
 
 		if(!modelEntities.empty())
@@ -281,27 +261,27 @@ void MasterRenderer::_captureShadows()
 				if(modelEntity->isLevelOfDetailed())
 				{
 					auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityId());
+
 					if(foundPair != modelEntities.end())
 					{
-						auto levelOfDetailEntity = foundPair->second;
-
-						fvec3 initialPosition = levelOfDetailEntity->getBasePosition();
-						fvec3 initialRotation = levelOfDetailEntity->getBaseRotation();
-						fvec3 initialSize = levelOfDetailEntity->getBaseSize();
-						bool initialVisibility = levelOfDetailEntity->isVisible();
+						const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId())->second;
+						const auto originalPosition = levelOfDetailEntity->getBasePosition();
+						const auto originalRotation = levelOfDetailEntity->getBaseRotation();
+						const auto originalSize = levelOfDetailEntity->getBaseSize();
+						const auto originalVisibility = levelOfDetailEntity->isVisible();
 
 						levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
 						levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
-						levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * initialSize);
+						levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 						levelOfDetailEntity->setVisible(modelEntity->isVisible());
 						levelOfDetailEntity->updateTransformationMatrix();
 
 						_modelEntityShadowRenderer.render(levelOfDetailEntity);
 
-						levelOfDetailEntity->setBasePosition(initialPosition);
-						levelOfDetailEntity->setBaseRotation(initialRotation);
-						levelOfDetailEntity->setBaseSize(initialSize);
-						levelOfDetailEntity->setVisible(initialVisibility);
+						levelOfDetailEntity->setBasePosition(originalPosition);
+						levelOfDetailEntity->setBaseRotation(originalRotation);
+						levelOfDetailEntity->setBaseSize(originalSize);
+						levelOfDetailEntity->setVisible(originalVisibility);
 						levelOfDetailEntity->updateTransformationMatrix();
 					}
 					else

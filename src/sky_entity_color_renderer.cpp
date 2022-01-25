@@ -30,7 +30,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
 		_shader->uploadUniform("u_hasCubeMap", (entity->getCubeMap() != nullptr));
 
-		if(entity->hasCubeMap())
+		if(entity->getCubeMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap()->getId());
@@ -43,7 +43,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 
 		glBindVertexArray(0);
 
-		if(entity->hasCubeMap())
+		if(entity->getCubeMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);

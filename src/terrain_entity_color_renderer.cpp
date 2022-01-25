@@ -128,58 +128,58 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader->uploadUniform("u_lightness", entity->getLightness());
 		_shader->uploadUniform("u_specularShininess", entity->getSpecularShininess());
 		_shader->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
-		_shader->uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
-		_shader->uploadUniform("u_hasNormalMap", entity->hasNormalMap());
-		_shader->uploadUniform("u_hasBlendMap", entity->hasBlendMap());
-		_shader->uploadUniform("u_hasRedDiffuseMap", entity->hasRedDiffuseMap());
-		_shader->uploadUniform("u_hasGreenDiffuseMap", entity->hasGreenDiffuseMap());
-		_shader->uploadUniform("u_hasBlueDiffuseMap", entity->hasBlueDiffuseMap());
-		_shader->uploadUniform("u_hasRedNormalMap", entity->hasRedNormalMap());
-		_shader->uploadUniform("u_hasGreenNormalMap", entity->hasGreenNormalMap());
-		_shader->uploadUniform("u_hasBlueNormalMap", entity->hasBlueNormalMap());
+		_shader->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseMap() != nullptr));
+		_shader->uploadUniform("u_hasNormalMap", (entity->getNormalMap() != nullptr));
+		_shader->uploadUniform("u_hasBlendMap", (entity->getBlendMap() != nullptr));
+		_shader->uploadUniform("u_hasRedDiffuseMap", (entity->getRedDiffuseMap() != nullptr));
+		_shader->uploadUniform("u_hasGreenDiffuseMap", (entity->getGreenDiffuseMap() != nullptr));
+		_shader->uploadUniform("u_hasBlueDiffuseMap", (entity->getBlueDiffuseMap() != nullptr));
+		_shader->uploadUniform("u_hasRedNormalMap", (entity->getRedNormalMap() != nullptr));
+		_shader->uploadUniform("u_hasGreenNormalMap", (entity->getGreenNormalMap() != nullptr));
+		_shader->uploadUniform("u_hasBlueNormalMap", (entity->getBlueNormalMap() != nullptr));
 		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
 
-		if(entity->hasDiffuseMap())
+		if(entity->getDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
 		}
-		if(entity->hasNormalMap())
+		if(entity->getNormalMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap()->getId());
 		}
-		if(entity->hasBlendMap())
+		if(entity->getBlendMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, entity->getBlendMap()->getId());
 		}
-		if(entity->hasRedDiffuseMap())
+		if(entity->getRedDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, entity->getRedDiffuseMap()->getId());
 		}
-		if(entity->hasGreenDiffuseMap())
+		if(entity->getGreenDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, entity->getGreenDiffuseMap()->getId());
 		}
-		if(entity->hasBlueDiffuseMap())
+		if(entity->getBlueDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE6);
 			glBindTexture(GL_TEXTURE_2D, entity->getBlueDiffuseMap()->getId());
 		}
-		if(entity->hasRedNormalMap())
+		if(entity->getRedNormalMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE7);
 			glBindTexture(GL_TEXTURE_2D, entity->getRedNormalMap()->getId());
 		}
-		if(entity->hasGreenNormalMap())
+		if(entity->getGreenNormalMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE8);
 			glBindTexture(GL_TEXTURE_2D, entity->getGreenNormalMap()->getId());
 		}
-		if(entity->hasBlueNormalMap())
+		if(entity->getBlueNormalMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE9);
 			glBindTexture(GL_TEXTURE_2D, entity->getBlueNormalMap()->getId());
@@ -192,47 +192,47 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 
 		glBindVertexArray(0);
 
-		if(entity->hasDiffuseMap())
+		if(entity->getDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasNormalMap())
+		if(entity->getNormalMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasBlendMap())
+		if(entity->getBlendMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasRedDiffuseMap())
+		if(entity->getRedDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasGreenDiffuseMap())
+		if(entity->getGreenDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasBlueDiffuseMap())
+		if(entity->getBlueDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE6);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasRedNormalMap())
+		if(entity->getRedNormalMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE7);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasGreenNormalMap())
+		if(entity->getGreenNormalMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE8);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasBlueNormalMap())
+		if(entity->getBlueNormalMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE9);
 			glBindTexture(GL_TEXTURE_2D, 0);

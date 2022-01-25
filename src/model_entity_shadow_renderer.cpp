@@ -43,7 +43,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 				glEnable(GL_CULL_FACE);
 			}
 
-			if(entity->hasDiffuseMap(partId))
+			if(entity->getDiffuseMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partId)->getId());
@@ -55,7 +55,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 
 			glBindVertexArray(0);
 
-			if(entity->hasDiffuseMap(partId))
+			if(entity->getDiffuseMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);

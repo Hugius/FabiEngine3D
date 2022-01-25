@@ -186,7 +186,7 @@ void MasterRenderer::_captureWaterRefractions()
 		const auto skyExposureLightness = _renderBus->getSkyExposureLightness();
 		_renderBus->setSkyExposureLightness(0.0f);
 
-		const float waveHeight = (waterEntity->hasDisplacementMap() ? waterEntity->getWaveHeight() : 0.0f);
+		const float waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
 		bool isUnderWater = (_camera->getPosition().y < (waterEntity->getHeight() + waveHeight));
 		isUnderWater = (isUnderWater && (_camera->getPosition().x > (waterEntity->getSize() / 2.0f)));
 		isUnderWater = (isUnderWater && (_camera->getPosition().x < (waterEntity->getSize() / 2.0f)));

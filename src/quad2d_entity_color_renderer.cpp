@@ -40,11 +40,11 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 		_shader->uploadUniform("u_maxPosition", entity->getMaxPosition());
 		_shader->uploadUniform("u_opacity", entity->getOpacity());
 		_shader->uploadUniform("u_isPerspectiveDepthEntity", entity->isPerspectiveDepthEntity());
-		_shader->uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
+		_shader->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseMap() != nullptr));
 		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
 		_shader->uploadUniform("u_isWireframed", entity->isWireframed());
 
-		if(entity->hasDiffuseMap())
+		if(entity->getDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
@@ -57,7 +57,7 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 
 		glBindVertexArray(0);
 
-		if(entity->hasDiffuseMap())
+		if(entity->getDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);

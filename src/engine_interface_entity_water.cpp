@@ -214,17 +214,17 @@ const bool EngineInterface::water_isWireframed(const string& id) const
 
 const bool EngineInterface::water_hasDudvMap(const string& id) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->hasDudvMap();
+	return (_core->getWaterEntityManager()->getEntity(id)->getDudvMap() != nullptr);
 }
 
 const bool EngineInterface::water_hasNormalMap(const string& id) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->hasNormalMap();
+	return (_core->getWaterEntityManager()->getEntity(id)->getNormalMap() != nullptr);
 }
 
 const bool EngineInterface::water_hasDisplacementMap(const string& id) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->hasDisplacementMap();
+	return (_core->getWaterEntityManager()->getEntity(id)->getDisplacementMap() != nullptr);
 }
 
 const string EngineInterface::water_getSelectedId() const

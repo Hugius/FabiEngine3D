@@ -410,16 +410,6 @@ const bool Quad3dEntity::isWireframed() const
 	return _isWireframed;
 }
 
-const bool Quad3dEntity::hasDiffuseMap() const
-{
-	return (_diffuseMap != nullptr);
-}
-
-const bool Quad3dEntity::hasEmissionMap() const
-{
-	return (_emissionMap != nullptr);
-}
-
 const bool Quad3dEntity::isCentered() const
 {
 	return _isCentered;

@@ -63,9 +63,6 @@ public:
 	const bool isReflective() const;
 	const bool isRefractive() const;
 	const bool isWireframed() const;
-	const bool hasDudvMap() const;
-	const bool hasNormalMap() const;
-	const bool hasDisplacementMap() const;
 
 	const shared_ptr<VertexBuffer> getLowQualityMesh() const;
 	const shared_ptr<VertexBuffer> getHighQualityMesh() const;

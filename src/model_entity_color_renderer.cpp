@@ -175,11 +175,11 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader->uploadUniform("u_specularIntensity", entity->getSpecularIntensity(partId));
 			_shader->uploadUniform("u_color", entity->getColor(partId));
 			_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor(partId));
-			_shader->uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap(partId));
-			_shader->uploadUniform("u_hasEmissionMap", entity->hasEmissionMap(partId));
-			_shader->uploadUniform("u_hasSpecularMap", entity->hasSpecularMap(partId));
-			_shader->uploadUniform("u_hasReflectionMap", entity->hasReflectionMap(partId));
-			_shader->uploadUniform("u_hasNormalMap", entity->hasNormalMap(partId));
+			_shader->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseMap(partId) != nullptr));
+			_shader->uploadUniform("u_hasEmissionMap", (entity->getEmissionMap(partId) != nullptr));
+			_shader->uploadUniform("u_hasSpecularMap", (entity->getSpecularMap(partId) != nullptr));
+			_shader->uploadUniform("u_hasReflectionMap", (entity->getReflectionMap(partId) != nullptr));
+			_shader->uploadUniform("u_hasNormalMap", (entity->getNormalMap(partId) != nullptr));
 			_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partId));
 			_shader->uploadUniform("u_normalTransformationMatrix", Math::transposeMatrix(Math::invertMatrix(mat33(entity->getTransformationMatrix(partId)))));
 			_shader->uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partId)));
@@ -196,27 +196,27 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			}
 
-			if(entity->hasDiffuseMap(partId))
+			if(entity->getDiffuseMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partId)->getId());
 			}
-			if(entity->hasEmissionMap(partId))
+			if(entity->getEmissionMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partId)->getId());
 			}
-			if(entity->hasSpecularMap(partId))
+			if(entity->getSpecularMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, entity->getSpecularMap(partId)->getId());
 			}
-			if(entity->hasReflectionMap(partId))
+			if(entity->getReflectionMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partId)->getId());
 			}
-			if(entity->hasNormalMap(partId))
+			if(entity->getNormalMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE8);
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partId)->getId());
@@ -229,27 +229,27 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 
 			glBindVertexArray(0);
 
-			if(entity->hasDiffuseMap(partId))
+			if(entity->getDiffuseMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasEmissionMap(partId))
+			if(entity->getEmissionMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasSpecularMap(partId))
+			if(entity->getSpecularMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasReflectionMap(partId))
+			if(entity->getReflectionMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasNormalMap(partId))
+			if(entity->getNormalMap(partId) != nullptr)
 			{
 				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, 0);

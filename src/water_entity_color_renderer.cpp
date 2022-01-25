@@ -153,28 +153,28 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader->uploadUniform("u_isReflective", entity->isReflective());
 		_shader->uploadUniform("u_isRefractive", entity->isRefractive());
 		_shader->uploadUniform("u_color", entity->getColor());
-		_shader->uploadUniform("u_hasDisplacementMap", entity->hasDisplacementMap());
-		_shader->uploadUniform("u_hasDudvMap", entity->hasDudvMap());
-		_shader->uploadUniform("u_hasNormalMap", entity->hasNormalMap());
+		_shader->uploadUniform("u_hasDisplacementMap", (entity->getDisplacementMap() != nullptr));
+		_shader->uploadUniform("u_hasDudvMap", (entity->getDudvMap() != nullptr));
+		_shader->uploadUniform("u_hasNormalMap", (entity->getNormalMap() != nullptr));
 		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
 
-		if(entity->hasDudvMap())
+		if(entity->getDudvMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, entity->getDudvMap()->getId());
 		}
-		if(entity->hasNormalMap())
+		if(entity->getNormalMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap()->getId());
 		}
-		if(entity->hasDisplacementMap())
+		if(entity->getDisplacementMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap()->getId());
 		}
 
-		if(entity->hasDisplacementMap())
+		if(entity->getDisplacementMap() != nullptr)
 		{
 			glBindVertexArray(entity->getHighQualityMesh()->getVaoId());
 		}
@@ -183,7 +183,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 			glBindVertexArray(entity->getLowQualityMesh()->getVaoId());
 		}
 
-		if(entity->hasDisplacementMap())
+		if(entity->getDisplacementMap() != nullptr)
 		{
 			glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityMesh()->getVertexCount());
 			_renderBus->increaseTriangleCount(entity->getHighQualityMesh()->getVertexCount() / 3);
@@ -196,17 +196,17 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 
 		glBindVertexArray(0);
 
-		if(entity->hasDudvMap())
+		if(entity->getDudvMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasNormalMap())
+		if(entity->getNormalMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasDisplacementMap())
+		if(entity->getDisplacementMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, 0);

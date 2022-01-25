@@ -343,12 +343,12 @@ const string& EngineInterface::quad3d_getEmissionMapPath(const string& id) const
 
 const bool EngineInterface::quad3d_hasDiffuseMap(const string& id) const
 {
-	return _core->getQuad3dEntityManager()->getEntity(id)->hasDiffuseMap();
+	return (_core->getQuad3dEntityManager()->getEntity(id)->getDiffuseMap() != nullptr);
 }
 
 const bool EngineInterface::quad3d_hasEmissionMap(const string& id) const
 {
-	return _core->getQuad3dEntityManager()->getEntity(id)->hasEmissionMap();
+	return (_core->getQuad3dEntityManager()->getEntity(id)->getEmissionMap() != nullptr);
 }
 
 const bool EngineInterface::quad3d_isFrozen(const string& id) const

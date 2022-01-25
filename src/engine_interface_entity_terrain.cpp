@@ -354,47 +354,47 @@ const bool EngineInterface::terrain_isInside(const string& id, float x, float z)
 
 const bool EngineInterface::terrain_hasBlendMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(id)->hasBlendMap();
+	return (_core->getTerrainEntityManager()->getEntity(id)->getBlendMap() != nullptr);
 }
 
 const bool EngineInterface::terrain_hasDiffuseMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(id)->hasDiffuseMap();
+	return (_core->getTerrainEntityManager()->getEntity(id)->getDiffuseMap() != nullptr);
 }
 
 const bool EngineInterface::terrain_hasRedDiffuseMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(id)->hasRedDiffuseMap();
+	return (_core->getTerrainEntityManager()->getEntity(id)->getRedDiffuseMap() != nullptr);
 }
 
 const bool EngineInterface::terrain_hasGreenDiffuseMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(id)->hasGreenDiffuseMap();
+	return (_core->getTerrainEntityManager()->getEntity(id)->getGreenDiffuseMap() != nullptr);
 }
 
 const bool EngineInterface::terrain_hasBlueDiffuseMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(id)->hasBlueDiffuseMap();
+	return (_core->getTerrainEntityManager()->getEntity(id)->getBlueDiffuseMap() != nullptr);
 }
 
 const bool EngineInterface::terrain_hasNormalMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(id)->hasNormalMap();
+	return (_core->getTerrainEntityManager()->getEntity(id)->getNormalMap() != nullptr);
 }
 
 const bool EngineInterface::terrain_hasRedNormalMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(id)->hasRedNormalMap();
+	return (_core->getTerrainEntityManager()->getEntity(id)->getRedNormalMap() != nullptr);
 }
 
 const bool EngineInterface::terrain_hasGreenNormalMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(id)->hasGreenNormalMap();
+	return (_core->getTerrainEntityManager()->getEntity(id)->getGreenNormalMap() != nullptr);
 }
 
 const bool EngineInterface::terrain_hasBlueNormalMap(const string& id) const
 {
-	return _core->getTerrainEntityManager()->getEntity(id)->hasBlueNormalMap();
+	return (_core->getTerrainEntityManager()->getEntity(id)->getBlueNormalMap() != nullptr);
 }
 
 const float EngineInterface::terrain_getPixelHeight(const string& id, float x, float z) const

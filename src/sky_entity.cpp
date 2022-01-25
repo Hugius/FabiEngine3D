@@ -90,11 +90,6 @@ const float SkyEntity::getRotation() const
 	return _rotation;
 }
 
-const bool SkyEntity::hasCubeMap() const
-{
-	return (_cubeMap != nullptr);
-}
-
 const bool SkyEntity::isWireframed() const
 {
 	return _isWireframed;

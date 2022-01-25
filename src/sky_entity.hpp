@@ -34,7 +34,6 @@ public:
 	const float getLightness() const;
 	const float getRotation() const;
 
-	const bool hasCubeMap() const;
 	const bool isWireframed() const;
 
 	const shared_ptr<VertexBuffer> getMesh() const;

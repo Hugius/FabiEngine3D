@@ -65,7 +65,6 @@ public:
 	const bool isFlippedHorizonally() const;
 	const bool isVerticallyFlipped() const;
 	const bool isPerspectiveDepthEntity() const;
-	const bool hasDiffuseMap() const;
 
 	const shared_ptr<VertexBuffer> getMesh() const;
 	const shared_ptr<TextureBuffer> getDiffuseMap() const;

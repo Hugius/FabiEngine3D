@@ -122,11 +122,6 @@ public:
 	const bool isWireframed(const string& partId) const;
 	const bool isSpecular(const string& partId) const;
 	const bool isReflective(const string& partId) const;
-	const bool hasDiffuseMap(const string& partId) const;
-	const bool hasEmissionMap(const string& partId) const;
-	const bool hasSpecularMap(const string& partId) const;
-	const bool hasReflectionMap(const string& partId) const;
-	const bool hasNormalMap(const string& partId) const;
 
 	const shared_ptr<VertexBuffer> getMesh(const string& partId) const;
 	const shared_ptr<TextureBuffer> getDiffuseMap(const string& partId) const;

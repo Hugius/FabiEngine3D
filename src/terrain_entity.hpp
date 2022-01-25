@@ -73,15 +73,6 @@ public:
 
 	const bool isSpecular() const;
 	const bool isWireframed() const;
-	const bool hasDiffuseMap() const;
-	const bool hasNormalMap() const;
-	const bool hasBlendMap() const;
-	const bool hasRedDiffuseMap() const;
-	const bool hasGreenDiffuseMap() const;
-	const bool hasBlueDiffuseMap() const;
-	const bool hasRedNormalMap() const;
-	const bool hasGreenNormalMap() const;
-	const bool hasBlueNormalMap() const;
 
 	const shared_ptr<VertexBuffer> getMesh() const;
 	const shared_ptr<TextureBuffer> getDiffuseMap() const;

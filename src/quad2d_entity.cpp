@@ -236,11 +236,6 @@ const bool Quad2dEntity::isVerticallyFlipped() const
 	return _isVerticallyFlipped;
 }
 
-const bool Quad2dEntity::hasDiffuseMap() const
-{
-	return (_diffuseMap != nullptr);
-}
-
 const mat44& Quad2dEntity::getTransformationMatrix() const
 {
 	return _transformationMatrix;

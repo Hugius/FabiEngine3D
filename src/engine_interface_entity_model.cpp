@@ -454,27 +454,27 @@ const bool EngineInterface::model_isReflective(const string& id, const string& p
 
 const bool EngineInterface::model_hasDiffuseMap(const string& id, const string& partId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->hasDiffuseMap(partId);
+	return (_core->getModelEntityManager()->getEntity(id)->getDiffuseMap(partId) != nullptr);
 }
 
 const bool EngineInterface::model_hasEmissionMap(const string& id, const string& partId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->hasEmissionMap(partId);
+	return (_core->getModelEntityManager()->getEntity(id)->getEmissionMap(partId) != nullptr);
 }
 
 const bool EngineInterface::model_hasSpecularMap(const string& id, const string& partId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->hasSpecularMap(partId);
+	return (_core->getModelEntityManager()->getEntity(id)->getSpecularMap(partId) != nullptr);
 }
 
 const bool EngineInterface::model_hasReflectionMap(const string& id, const string& partId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->hasReflectionMap(partId);
+	return (_core->getModelEntityManager()->getEntity(id)->getReflectionMap(partId) != nullptr);
 }
 
 const bool EngineInterface::model_hasNormalMap(const string& id, const string& partId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->hasNormalMap(partId);
+	return (_core->getModelEntityManager()->getEntity(id)->getNormalMap(partId) != nullptr);
 }
 
 const ReflectionType EngineInterface::model_getReflectionType(const string& id, const string& partId) const

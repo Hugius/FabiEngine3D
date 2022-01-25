@@ -254,18 +254,3 @@ const bool WaterEntity::isWireframed() const
 {
 	return _isWireframed;
 }
-
-const bool WaterEntity::hasDudvMap() const
-{
-	return (_dudvMap != nullptr);
-}
-
-const bool WaterEntity::hasNormalMap() const
-{
-	return (_normalMap != nullptr);
-}
-
-const bool WaterEntity::hasDisplacementMap() const
-{
-	return (_displacementMap != nullptr);
-}

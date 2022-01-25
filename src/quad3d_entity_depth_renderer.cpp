@@ -44,7 +44,7 @@ void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity, fl
 		_shader->uploadUniform("u_uvOffset", entity->getUvOffset());
 		_shader->uploadUniform("u_minTextureOpacity", MIN_TEXTURE_OPACITY);
 
-		if(entity->hasDiffuseMap())
+		if(entity->getDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
@@ -56,7 +56,7 @@ void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity, fl
 
 		glBindVertexArray(0);
 
-		if(entity->hasDiffuseMap())
+		if(entity->getDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);

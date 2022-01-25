@@ -38,7 +38,7 @@ void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
 		_shader->uploadUniform("u_uvOffset", entity->getUvOffset());
 		_shader->uploadUniform("u_minTextureOpacity", MIN_TEXTURE_OPACITY);
 
-		if(entity->hasDiffuseMap())
+		if(entity->getDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
@@ -50,7 +50,7 @@ void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
 
 		glBindVertexArray(0);
 
-		if(entity->hasDiffuseMap())
+		if(entity->getDiffuseMap() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);

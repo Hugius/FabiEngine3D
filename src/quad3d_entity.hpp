@@ -79,8 +79,6 @@ public:
 	const bool isBright() const;
 	const bool isFrozen() const;
 	const bool isWireframed() const;
-	const bool hasDiffuseMap() const;
-	const bool hasEmissionMap() const;
 	const bool isCentered() const;
 
 	const shared_ptr<VertexBuffer> getMesh() const;

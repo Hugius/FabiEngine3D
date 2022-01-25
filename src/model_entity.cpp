@@ -704,31 +704,6 @@ const bool ModelEntity::isReflected() const
 	return _isReflected;
 }
 
-const bool ModelEntity::hasDiffuseMap(const string& partId) const
-{
-	return (_parts[_getPartIndex(partId)].diffuseMap != nullptr);
-}
-
-const bool ModelEntity::hasEmissionMap(const string& partId) const
-{
-	return (_parts[_getPartIndex(partId)].emissionMap != nullptr);
-}
-
-const bool ModelEntity::hasSpecularMap(const string& partId) const
-{
-	return (_parts[_getPartIndex(partId)].specularMap != nullptr);
-}
-
-const bool ModelEntity::hasReflectionMap(const string& partId) const
-{
-	return (_parts[_getPartIndex(partId)].reflectionMap != nullptr);
-}
-
-const bool ModelEntity::hasNormalMap(const string& partId) const
-{
-	return (_parts[_getPartIndex(partId)].normalMap != nullptr);
-}
-
 const ReflectionType ModelEntity::getReflectionType(const string& partId) const
 {
 	return _parts[_getPartIndex(partId)].reflectionType;

@@ -4,7 +4,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:animation2d_start_quad3d")
+	if(functionName == "fe3d:animation2d_quad3d_start")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_pause_quad3d")
+	else if(functionName == "fe3d:animation2d_quad3d_pause")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_pause_all_quad3ds")
+	else if(functionName == "fe3d:animation2d_quad3d_pause_all")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_autopause_quad3d")
+	else if(functionName == "fe3d:animation2d_quad3d_autopause")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_autopause_all_quad3ds")
+	else if(functionName == "fe3d:animation2d_quad3d_autopause_all")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_resume_quad3d")
+	else if(functionName == "fe3d:animation2d_quad3d_resume")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_resume_all_quad3ds")
+	else if(functionName == "fe3d:animation2d_quad3d_resume_all")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -96,7 +96,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_stop_quad3d")
+	else if(functionName == "fe3d:animation2d_quad3d_stop")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -110,7 +110,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_stop_all_quad3ds")
+	else if(functionName == "fe3d:animation2d_quad3d_stop_all")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -122,7 +122,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_set_quad3d_interval")
+	else if(functionName == "fe3d:animation2d_quad3d_set_interval")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
@@ -136,7 +136,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_start_quad2d")
+	else if(functionName == "fe3d:animation2d_quad2d_start")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
@@ -150,7 +150,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_pause_quad2d")
+	else if(functionName == "fe3d:animation2d_quad2d_pause")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -164,7 +164,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_pause_all_quad2ds")
+	else if(functionName == "fe3d:animation2d_quad2d_pause_all")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -176,7 +176,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_autopause_quad2d")
+	else if(functionName == "fe3d:animation2d_quad2d_autopause")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -190,7 +190,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_autopause_all_quad2ds")
+	else if(functionName == "fe3d:animation2d_quad2d_autopause_all")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -202,7 +202,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_resume_quad2d")
+	else if(functionName == "fe3d:animation2d_quad2d_resume")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -216,7 +216,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_resume_all_quad2ds")
+	else if(functionName == "fe3d:animation2d_quad2d_resume_all")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -228,7 +228,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_stop_quad2d")
+	else if(functionName == "fe3d:animation2d_quad2d_stop")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -242,7 +242,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_stop_all_quad2ds")
+	else if(functionName == "fe3d:animation2d_quad2d_stop_all")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -254,7 +254,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_set_quad2d_interval")
+	else if(functionName == "fe3d:animation2d_quad2d_set_interval")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 

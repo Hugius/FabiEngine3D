@@ -259,7 +259,6 @@ public:
 
 	const vector<string> model_getPartIds(const string& id) const;
 	const vector<string> model_getIds() const;
-	const vector<string> model_getGroupIds(const string& id) const;
 	const string& model_getMeshPath(const string& id) const;
 	const string& model_getDiffuseMapPath(const string& id, const string& partId) const;
 	const string& model_getEmissionMapPath(const string& id, const string& partId) const;

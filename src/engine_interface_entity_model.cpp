@@ -643,21 +643,3 @@ const vector<string> EngineInterface::model_getIds() const
 
 	return result;
 }
-
-const vector<string> EngineInterface::model_getGroupIds(const string& id) const
-{
-	vector<string> result;
-
-	for(const auto& [key, entity] : _core->getModelEntityManager()->getEntities())
-	{
-		if(entity->getId().size() >= id.size())
-		{
-			if(entity->getId().substr(0, id.size()) == id)
-			{
-				result.push_back(entity->getId());
-			}
-		}
-	}
-
-	return result;
-}

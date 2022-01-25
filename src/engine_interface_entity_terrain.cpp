@@ -55,11 +55,16 @@ void EngineInterface::terrain_setDiffuseMap(const string& id, const string& valu
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getTerrainEntityManager()->getEntity(id)->setDiffuseMap(texture);
@@ -80,11 +85,16 @@ void EngineInterface::terrain_setNormalMap(const string& id, const string& value
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getTerrainEntityManager()->getEntity(id)->setNormalMap(texture);
@@ -105,11 +115,16 @@ void EngineInterface::terrain_setBlendMap(const string& id, const string& value)
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getTerrainEntityManager()->getEntity(id)->setBlendMap(texture);
@@ -130,11 +145,16 @@ void EngineInterface::terrain_setRedDiffuseMap(const string& id, const string& v
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getTerrainEntityManager()->getEntity(id)->setRedDiffuseMap(texture);
@@ -155,11 +175,16 @@ void EngineInterface::terrain_setGreenDiffuseMap(const string& id, const string&
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getTerrainEntityManager()->getEntity(id)->setGreenDiffuseMap(texture);
@@ -180,11 +205,16 @@ void EngineInterface::terrain_setBlueDiffuseMap(const string& id, const string& 
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getTerrainEntityManager()->getEntity(id)->setBlueDiffuseMap(texture);
@@ -205,11 +235,16 @@ void EngineInterface::terrain_setRedNormalMap(const string& id, const string& va
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getTerrainEntityManager()->getEntity(id)->setRedNormalMap(texture);
@@ -230,11 +265,16 @@ void EngineInterface::terrain_setGreenNormalMap(const string& id, const string& 
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getTerrainEntityManager()->getEntity(id)->setGreenNormalMap(texture);
@@ -255,11 +295,16 @@ void EngineInterface::terrain_setBlueNormalMap(const string& id, const string& v
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getTerrainEntityManager()->getEntity(id)->setBlueNormalMap(texture);

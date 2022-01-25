@@ -90,11 +90,16 @@ void EngineInterface::water_setDudvMap(const string& id, const string& value)
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getWaterEntityManager()->getEntity(id)->setDudvMap(texture);
@@ -115,11 +120,16 @@ void EngineInterface::water_setNormalMap(const string& id, const string& value)
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getWaterEntityManager()->getEntity(id)->setNormalMap(texture);
@@ -140,11 +150,16 @@ void EngineInterface::water_setDisplacementMap(const string& id, const string& v
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getWaterEntityManager()->getEntity(id)->setDisplacementMap(texture);

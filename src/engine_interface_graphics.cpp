@@ -506,9 +506,14 @@ void EngineInterface::gfx_setLensFlareMap(const string& value)
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getRenderBus()->setLensFlareMap(texture);

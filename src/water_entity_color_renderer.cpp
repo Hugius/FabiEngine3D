@@ -27,6 +27,8 @@ void WaterEntityColorRenderer::bind()
 	_shader->uploadUniform("u_dudvMap", 3);
 	_shader->uploadUniform("u_normalMap", 4);
 	_shader->uploadUniform("u_displacementMap", 5);
+	_shader->uploadUniform("u_hasReflectionMap", (_renderBus->getWaterReflectionMap() != nullptr));
+	_shader->uploadUniform("u_hasRefractionMap", (_renderBus->getWaterRefractionMap() != nullptr));
 
 	if(_renderBus->getWaterReflectionMap() != nullptr)
 	{
@@ -129,14 +131,6 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		const float waveHeight = ((entity->getDisplacementMap() != nullptr) ? entity->getWaveHeight() : 0.0f);
-		bool isUnderWater = (_renderBus->getCameraPosition().y < (entity->getHeight() + waveHeight));
-		isUnderWater = isUnderWater && (_renderBus->getCameraPosition().x > -(entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus->getCameraPosition().x < (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus->getCameraPosition().z > -(entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus->getCameraPosition().z < (entity->getSize() / 2.0f));
-
-		_shader->uploadUniform("u_isUnderWater", isUnderWater);
 		_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
 		_shader->uploadUniform("u_rippleOffset", entity->getRippleOffset());
 		_shader->uploadUniform("u_waveOffset", entity->getWaveOffset());

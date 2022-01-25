@@ -19,8 +19,6 @@ void MasterRenderer::_captureWaterReflections()
 			return;
 		}
 
-		float cameraDistance = (_camera->getPosition().y - waterEntity->getHeight());
-
 		_waterReflectionCaptor->bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -64,10 +62,11 @@ void MasterRenderer::_captureWaterReflections()
 			}
 		}
 
-		const fvec3 initialCameraPosition = _camera->getPosition();
+		const auto initialCameraPosition = _camera->getPosition();
+		const auto cameraDistance = fabsf(_camera->getPosition().y - waterEntity->getHeight());
 		_camera->setPosition(fvec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
 
-		const float initialCameraPitch = _camera->getPitch();
+		const auto initialCameraPitch = _camera->getPitch();
 		_camera->setPitch(-initialCameraPitch);
 
 		_camera->updateMatrices();
@@ -77,10 +76,10 @@ void MasterRenderer::_captureWaterReflections()
 
 		_renderBus->setReflectionsEnabled(false);
 
-		bool wasShadowsEnabled = _renderBus->isShadowsEnabled();
+		const auto wasShadowsEnabled = _renderBus->isShadowsEnabled();
 		_renderBus->setShadowsEnabled(false);
 
-		float skyExposureLightness = _renderBus->getSkyExposureLightness();
+		const auto skyExposureLightness = _renderBus->getSkyExposureLightness();
 		_renderBus->setSkyExposureLightness(0.0f);
 
 		_renderBus->setMinPosition(fvec3(-FLT_MAX, waterEntity->getHeight() - 1.0f, -FLT_MAX));

@@ -44,7 +44,8 @@ uniform bool u_isFogEnabled;
 uniform bool u_isSpecular;
 uniform bool u_isReflective;
 uniform bool u_isRefractive;
-uniform bool u_isUnderWater;
+uniform bool u_hasReflectionMap;
+uniform bool u_hasRefractionMap;
 uniform bool u_hasDudvMap;
 uniform bool u_hasNormalMap;
 
@@ -81,15 +82,14 @@ void main()
 
 vec4 calculateWaterColor()
 {
-	vec2 mapUv = f_uv;
-	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
-	vec3 directionalLighting = vec3(0.0f);
-
 	vec2 ndc = (f_clip.xy / f_clip.w);
 	ndc /= 2.0f;
 	ndc += 0.5f;
+
+	vec2 defaultUv = f_uv;
 	vec2 reflectionUv = vec2(ndc.x, -ndc.y);
 	vec2 refractionUv = vec2(ndc.x, ndc.y);
+	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
 
 	float opacity = 1.0f;
 	if (u_opacity < 1.0f)
@@ -98,53 +98,50 @@ vec4 calculateWaterColor()
 		float floorDistance = convertDepthToPerspective(depth);
 		float waterDistance = convertDepthToPerspective(gl_FragCoord.z);
 		float waterDepth = (floorDistance - waterDistance);
+
 		opacity = clamp(waterDepth / ((1.0f - u_opacity) * 10.0f), 0.0f, 1.0f);
 	}
 
 	if (u_hasDudvMap)
 	{
-		vec2 distortedMapUv = texture(u_dudvMap, (mapUv + u_rippleOffset)).rg;
+		vec2 distortedMapUv = texture(u_dudvMap, (defaultUv + u_rippleOffset)).rg;
 		distortedMapUv *= 0.1f;
-		mapUv += distortedMapUv;
+		defaultUv += distortedMapUv;
 
-		vec2 distortedNdcUv = texture(u_dudvMap, mapUv).rg;
+		vec2 distortedNdcUv = texture(u_dudvMap, defaultUv).rg;
 		distortedNdcUv *= 2.0f;
 		distortedNdcUv -= 1.0f;
 		distortedNdcUv *= 0.025f;
 
 		reflectionUv += distortedNdcUv;
-
 		refractionUv += distortedNdcUv;
 
 		reflectionUv.x = clamp(reflectionUv.x, 0.001f, 0.999f);
 		reflectionUv.y = clamp(reflectionUv.y, -0.999f, -0.001f);
-
 		refractionUv.x = clamp(refractionUv.x, 0.001f, 0.999f);
 		refractionUv.y = clamp(refractionUv.y, 0.001f, 0.999f);
 	}
 
 	if (u_hasNormalMap)
 	{
-		vec3 normalMapColor = texture(u_normalMap, mapUv).rgb;
+		vec3 normalMapColor = texture(u_normalMap, defaultUv).rgb;
 		normal = vec3(((normalMapColor.r * 2.0f) - 1.0f), normalMapColor.b, ((normalMapColor.g * 2.0f) - 1.0f));
 		normal = normalize(normal);
 	}
 
 	vec3 finalColor;
-	if (!u_isUnderWater && u_isReflective)
+	if (u_hasReflectionMap && u_isReflective)
 	{
 		vec3 reflectionColor = texture(u_reflectionMap, reflectionUv).rgb;
 		vec3 viewDirection = normalize(u_cameraPosition - f_position);
 		float fresnelMixValue = dot(viewDirection, normal);
-		finalColor = mix(reflectionColor, (reflectionColor * 0.1f), fresnelMixValue);
+
+		finalColor = mix(reflectionColor, (reflectionColor * 0.05f), fresnelMixValue);
 		finalColor *= u_color;
 	}
-	else if (u_isUnderWater && u_isRefractive)
+	else if (u_hasRefractionMap && u_isRefractive)
 	{
-		vec3 refractionColor = texture(u_refractionMap, refractionUv).rgb;
-		vec3 viewDirection = normalize(u_cameraPosition - f_position);
-		float fresnelMixValue = dot(viewDirection, vec3(normal.x, -normal.y, normal.z));
-		finalColor = mix(refractionColor, (refractionColor * 0.1f), fresnelMixValue);
+		finalColor = texture(u_refractionMap, refractionUv).rgb;
 		finalColor *= u_color;
 	}
 	else

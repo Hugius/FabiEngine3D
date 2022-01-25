@@ -107,11 +107,16 @@ void EngineInterface::quad3d_setDiffuseMap(const string& id, const string& value
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getQuad3dEntityManager()->getEntity(id)->setDiffuseMap(texture);
@@ -132,11 +137,16 @@ void EngineInterface::quad3d_setEmissionMap(const string& id, const string& valu
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getQuad3dEntityManager()->getEntity(id)->setEmissionMap(texture);

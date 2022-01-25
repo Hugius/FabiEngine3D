@@ -42,11 +42,16 @@ void EngineInterface::model_setDiffuseMap(const string& id, const string& partId
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getModelEntityManager()->getEntity(id)->setDiffuseMap(partId, texture);
@@ -67,11 +72,16 @@ void EngineInterface::model_setEmissionMap(const string& id, const string& partI
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getModelEntityManager()->getEntity(id)->setEmissionMap(partId, texture);
@@ -92,11 +102,16 @@ void EngineInterface::model_setSpecularMap(const string& id, const string& partI
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getModelEntityManager()->getEntity(id)->setSpecularMap(partId, texture);
@@ -117,11 +132,16 @@ void EngineInterface::model_setNormalMap(const string& id, const string& partId,
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getModelEntityManager()->getEntity(id)->setNormalMap(partId, texture);
@@ -142,11 +162,16 @@ void EngineInterface::model_setReflectionMap(const string& id, const string& par
 
 		if(texture == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-			texture->loadMipMapping();
-			texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+			auto image = _core->getImageLoader()->loadImage(value);
 
-			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			if(image != nullptr)
+			{
+				texture = make_shared<TextureBuffer>(image);
+				texture->loadMipMapping();
+				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+
+				_core->getTextureBufferCache()->store2dBuffer(value, texture);
+			}
 		}
 
 		_core->getModelEntityManager()->getEntity(id)->setReflectionMap(partId, texture);

@@ -71,10 +71,10 @@ void MasterRenderer::renderApplication()
 	_renderOpaqueModelEntities();
 	_renderOpaqueQuad3dEntities();
 	_renderOpaqueText3dEntities();
+	_renderAabbEntities();
 	_renderTransparentModelEntities();
 	_renderTransparentQuad3dEntities();
 	_renderTransparentText3dEntities();
-	_renderAabbEntities();
 	_renderBus->setTriangleCountingEnabled(false);
 	_worldColorCaptor->unbind();
 	_renderBus->setPrimarySceneMap(_worldColorCaptor->getTexture(0));

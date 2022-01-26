@@ -37,7 +37,6 @@ public:
 	void setDepth(unsigned int value);
 	void setUvMultiplier(const fvec2& value);
 	void setUvOffset(const fvec2& value);
-	void setPerspectiveDepthEntity(bool value);
 	void setWireframed(bool value);
 	void setCentered(bool value);
 
@@ -64,7 +63,6 @@ public:
 	const bool isCentered() const;
 	const bool isFlippedHorizonally() const;
 	const bool isVerticallyFlipped() const;
-	const bool isPerspectiveDepthEntity() const;
 
 	const shared_ptr<VertexBuffer> getMesh() const;
 	const shared_ptr<TextureBuffer> getDiffuseMap() const;
@@ -98,7 +96,6 @@ private:
 	bool _isCentered = false;
 	bool _isHorizontallyFlipped = false;
 	bool _isVerticallyFlipped = false;
-	bool _isPerspectiveDepthEntity = false;
 	bool _isWireframed = false;
 
 	shared_ptr<VertexBuffer> _mesh = nullptr;

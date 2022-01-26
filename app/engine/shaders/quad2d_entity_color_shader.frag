@@ -14,14 +14,12 @@ uniform float u_opacity;
 uniform float u_nearDistance;
 uniform float u_farDistance;
 
-uniform bool u_isPerspectiveDepthEntity;
 uniform bool u_hasDiffuseMap;
 uniform bool u_isWireframed;
 
 layout (location = 0) out vec4 o_finalColor;
 
 vec4 calculateDiffuseMapping();
-float convertDepthToPerspective(float depth);
 
 void main()
 {
@@ -39,39 +37,21 @@ void main()
 		discard;
 	}
 
-	if (u_isPerspectiveDepthEntity)
+	if (u_hasDiffuseMap)
 	{
-		float depth = texture(u_diffuseMap, f_uv).r;
-		vec3 depthColor = vec3((convertDepthToPerspective(depth) / u_farDistance));
-		depthColor = pow(depthColor, vec3(1.0f / 2.2f));
+		vec4 diffuseMapping = calculateDiffuseMapping();
+		diffuseMapping.rgb *= u_color;
+		diffuseMapping.rgb  = pow(diffuseMapping.rgb, vec3(1.0f / 2.2f));
+		diffuseMapping.a   *= u_opacity;
 
-		o_finalColor = vec4(depthColor, 1.0f);
+		o_finalColor = diffuseMapping;
 	}
 	else
 	{
-		if (u_hasDiffuseMap)
-		{
-			vec4 diffuseMapping = calculateDiffuseMapping();
-			diffuseMapping.rgb *= u_color;
-			diffuseMapping.rgb  = pow(diffuseMapping.rgb, vec3(1.0f / 2.2f));
-			diffuseMapping.a   *= u_opacity;
+		vec3 color = pow(u_color, vec3(1.0f / 2.2f));
 
-			o_finalColor = diffuseMapping;
-		}
-		else
-		{
-			vec3 color = pow(u_color, vec3(1.0f / 2.2f));
-
-			o_finalColor = vec4(color, u_opacity);
-		}
+		o_finalColor = vec4(color, u_opacity);
 	}
-}
-
-float convertDepthToPerspective(float depth)
-{
-    float z = ((depth * 2.0f) - 1.0f);
-
-    return ((2.0f * u_nearDistance * u_farDistance) / (u_farDistance + u_nearDistance - z * (u_farDistance - u_nearDistance)));
 }
 
 vec4 calculateDiffuseMapping()

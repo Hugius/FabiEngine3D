@@ -281,11 +281,6 @@ const unsigned int Quad2dEntity::getDepth() const
 	return _depth;
 }
 
-void Quad2dEntity::setPerspectiveDepthEntity(bool value)
-{
-	_isPerspectiveDepthEntity = value;
-}
-
 void Quad2dEntity::setWireframed(bool value)
 {
 	_isWireframed = value;
@@ -294,9 +289,4 @@ void Quad2dEntity::setWireframed(bool value)
 void Quad2dEntity::setCentered(bool value)
 {
 	_isCentered = value;
-}
-
-const bool Quad2dEntity::isPerspectiveDepthEntity() const
-{
-	return _isPerspectiveDepthEntity;
 }

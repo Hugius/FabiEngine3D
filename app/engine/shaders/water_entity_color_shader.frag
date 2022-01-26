@@ -96,12 +96,15 @@ vec4 calculateWaterColor()
 
 	if (u_isRefractionsEnabled && (u_opacity < 1.0f))
 	{
-		float depth = texture(u_depthMap, refractionUv).r;
-		float floorDistance = convertDepthToPerspective(depth);
+		float objectDistance = convertDepthToPerspective(texture(u_depthMap, refractionUv).r);
 		float waterDistance = convertDepthToPerspective(gl_FragCoord.z);
-		float waterDepth = (floorDistance - waterDistance);
 
-		opacity = clamp(waterDepth / ((1.0f - u_opacity) * 10.0f), 0.0f, 1.0f);
+		if(objectDistance > waterDistance)
+		{
+			float waterDepth = (objectDistance - waterDistance);
+			opacity = waterDepth / ((1.0f - u_opacity) * 10.0f);
+			opacity = clamp(opacity, 0.0f, 1.0f);
+		}
 	}
 
 	if (u_hasDudvMap)

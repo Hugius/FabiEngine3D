@@ -36,7 +36,6 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 		_shader->uploadUniform("u_minPosition", entity->getMinPosition());
 		_shader->uploadUniform("u_maxPosition", entity->getMaxPosition());
 		_shader->uploadUniform("u_opacity", entity->getOpacity());
-		_shader->uploadUniform("u_isPerspectiveDepthEntity", entity->isPerspectiveDepthEntity());
 		_shader->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseMap() != nullptr));
 		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
 		_shader->uploadUniform("u_isWireframed", entity->isWireframed());

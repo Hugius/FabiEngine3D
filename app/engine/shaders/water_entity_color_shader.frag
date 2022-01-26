@@ -58,7 +58,7 @@ vec4 calculateWaterColor();
 vec3 calculateDirectionalLighting(vec3 normal);
 vec3 calculateLights(vec3 normal);
 vec3 calculateFog(vec3 color);
-float calculateSpecularLighting(vec3 position, vec3 normal);
+float calculateSpecularLighting(vec3 lightPosition, vec3 normal);
 float convertDepthToPerspective(float depth);
 
 void main()
@@ -219,11 +219,11 @@ vec3 calculateDirectionalLighting(vec3 normal)
 	}
 }
 
-float calculateSpecularLighting(vec3 position, vec3 normal)
+float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
 {
     if (u_isSpecular)
     {
-        vec3 lightDirection   = normalize(position - f_position);
+        vec3 lightDirection   = normalize(lightPosition - f_position);
         vec3 viewDirection    = normalize(u_cameraPosition - f_position);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
         float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);

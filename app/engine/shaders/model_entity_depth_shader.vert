@@ -7,12 +7,12 @@ uniform mat4 u_transformationMatrix;
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 
-uniform vec3 u_minX;
-uniform vec3 u_minY;
-uniform vec3 u_minZ;
-uniform vec3 u_maxX;
-uniform vec3 u_maxY;
-uniform vec3 u_maxZ;
+uniform float u_minX;
+uniform float u_minY;
+uniform float u_minZ;
+uniform float u_maxX;
+uniform float u_maxY;
+uniform float u_maxZ;
 
 uniform float u_textureRepeat;
 

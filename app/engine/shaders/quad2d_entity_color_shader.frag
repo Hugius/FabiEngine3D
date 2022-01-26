@@ -11,8 +11,6 @@ uniform vec2 u_maxPosition;
 uniform vec3 u_wireframeColor;
 
 uniform float u_opacity;
-uniform float u_nearDistance;
-uniform float u_farDistance;
 
 uniform bool u_hasDiffuseMap;
 uniform bool u_isWireframed;

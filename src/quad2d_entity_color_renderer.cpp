@@ -6,8 +6,6 @@ void Quad2dEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_nearDistance", _renderBus->getNearDistance());
-	_shader->uploadUniform("u_farDistance", _renderBus->getFarDistance());
 	_shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_BLEND);

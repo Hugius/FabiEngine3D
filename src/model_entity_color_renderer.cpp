@@ -24,6 +24,7 @@ void ModelEntityColorRenderer::bind()
 	_shader->uploadUniform("u_isAmbientLightingEnabled", _renderBus->isAmbientLightingEnabled());
 	_shader->uploadUniform("u_isDirectionalLightingEnabled", _renderBus->isDirectionalLightingEnabled());
 	_shader->uploadUniform("u_isReflectionsEnabled", _renderBus->isReflectionsEnabled());
+	//_shader->uploadUniform("u_isRefractionsEnabled", _renderBus->isRefractionsEnabled());
 	_shader->uploadUniform("u_shadowSize", _renderBus->getShadowSize());
 	_shader->uploadUniform("u_shadowCenter", _renderBus->getShadowCenterPosition());
 	_shader->uploadUniform("u_shadowLightness", _renderBus->getShadowLightness());

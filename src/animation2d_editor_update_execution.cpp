@@ -16,6 +16,8 @@ void Animation2dEditor::_updateQuad3dAnimationExecution()
 
 					if(animation.getRowIndex() == (animation.getRowCount() - 1))
 					{
+						animation.setRowIndex(0);
+
 						if(animation.getPlayCount() == -1)
 						{
 							_quad3dAnimationsToStop.insert(key);
@@ -28,10 +30,6 @@ void Animation2dEditor::_updateQuad3dAnimationExecution()
 							if(animation.getPlayCount() == 0)
 							{
 								_quad3dAnimationsToStop.insert(key);
-							}
-							else
-							{
-								animation.setRowIndex(0);
 							}
 						}
 					}

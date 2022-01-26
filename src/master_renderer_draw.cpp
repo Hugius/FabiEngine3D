@@ -48,6 +48,7 @@ void MasterRenderer::renderApplication()
 
 	_timer->startDeltaPart("depthPreRender");
 	_captureWorldDepth();
+	_captureWaterOpacity();
 	_timer->stopDeltaPart();
 	_timer->startDeltaPart("shadowPreRender");
 	_captureShadows();

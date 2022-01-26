@@ -20,6 +20,11 @@ void RenderBus::setWaterRefractionMap(shared_ptr<TextureBuffer> value)
 	_waterRefractionMap = value;
 }
 
+void RenderBus::setWaterOpacityMap(shared_ptr<TextureBuffer> value)
+{
+	_waterOpacityMap = value;
+}
+
 void RenderBus::setBloomMap(shared_ptr<TextureBuffer> value)
 {
 	_bloomMap = value;
@@ -456,6 +461,11 @@ const shared_ptr<TextureBuffer> RenderBus::getWaterReflectionMap() const
 const shared_ptr<TextureBuffer> RenderBus::getWaterRefractionMap() const
 {
 	return _waterRefractionMap;
+}
+
+const shared_ptr<TextureBuffer> RenderBus::getWaterOpacityMap() const
+{
+	return _waterOpacityMap;
 }
 
 const shared_ptr<TextureBuffer> RenderBus::getBloomMap() const

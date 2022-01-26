@@ -8,7 +8,7 @@ in vec4 f_clip;
 
 layout (location = 0) uniform sampler2D u_reflectionMap;
 layout (location = 1) uniform sampler2D u_refractionMap;
-layout (location = 2) uniform sampler2D u_depthMap;
+layout (location = 2) uniform sampler2D u_opacityMap;
 layout (location = 3) uniform sampler2D u_dudvMap;
 layout (location = 4) uniform sampler2D u_normalMap;
 
@@ -96,7 +96,7 @@ vec4 calculateWaterColor()
 
 	if (u_isRefractionsEnabled && (u_opacity < 1.0f))
 	{
-		float objectDistance = convertDepthToPerspective(texture(u_depthMap, refractionUv).r);
+		float objectDistance = convertDepthToPerspective(texture(u_opacityMap, refractionUv).r);
 		float waterDistance = convertDepthToPerspective(gl_FragCoord.z);
 
 		if(objectDistance > waterDistance)

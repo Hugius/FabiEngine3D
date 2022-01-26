@@ -81,6 +81,7 @@ private:
 	void _capturePlanarReflections();
 	void _captureWaterReflections();
 	void _captureWaterRefractions();
+	void _captureWaterOpacity();
 	void _captureWorldDepth();
 	void _captureShadows();
 	void _captureAntiAliasing();
@@ -152,6 +153,7 @@ private:
 	shared_ptr<CaptureBuffer> _planarReflectionCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _waterReflectionCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _waterRefractionCaptor = nullptr;
+	shared_ptr<CaptureBuffer> _waterOpacityCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _shadowCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _worldDepthCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _worldColorCaptor = nullptr;

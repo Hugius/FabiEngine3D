@@ -17,6 +17,7 @@ public:
 	void setPlanarReflectionMap(shared_ptr<TextureBuffer> value);
 	void setWaterReflectionMap(shared_ptr<TextureBuffer> value);
 	void setWaterRefractionMap(shared_ptr<TextureBuffer> value);
+	void setWaterOpacityMap(shared_ptr<TextureBuffer> value);
 	void setShadowMap(shared_ptr<TextureBuffer> value);
 	void setBloomMap(shared_ptr<TextureBuffer> value);
 	void setDepthMap(shared_ptr<TextureBuffer> value);
@@ -185,6 +186,7 @@ public:
 	const shared_ptr<TextureBuffer> getPlanarReflectionMap() const;
 	const shared_ptr<TextureBuffer> getWaterReflectionMap() const;
 	const shared_ptr<TextureBuffer> getWaterRefractionMap() const;
+	const shared_ptr<TextureBuffer> getWaterOpacityMap() const;
 	const shared_ptr<TextureBuffer> getShadowMap() const;
 	const shared_ptr<TextureBuffer> getBloomMap() const;
 	const shared_ptr<TextureBuffer> getDepthMap() const;
@@ -200,6 +202,7 @@ private:
 	shared_ptr<TextureBuffer> _planarReflectionMap = nullptr;
 	shared_ptr<TextureBuffer> _waterReflectionMap = nullptr;
 	shared_ptr<TextureBuffer> _waterRefractionMap = nullptr;
+	shared_ptr<TextureBuffer> _waterOpacityMap = nullptr;
 	shared_ptr<TextureBuffer> _shadowMap = nullptr;
 	shared_ptr<TextureBuffer> _bloomMap = nullptr;
 	shared_ptr<TextureBuffer> _depthMap = nullptr;

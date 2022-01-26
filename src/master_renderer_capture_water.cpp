@@ -249,3 +249,32 @@ void MasterRenderer::_captureWaterRefractions()
 
 	_waterRefractionCaptor->unbind();
 }
+
+void MasterRenderer::_captureWaterOpacity()
+{
+	const auto waterEntity = _waterEntityManager->getSelectedEntity();
+
+	if((waterEntity != nullptr) && (waterEntity->getOpacity() < 1.0f))
+	{
+		_waterOpacityCaptor->bind();
+
+		glClear(GL_DEPTH_BUFFER_BIT);
+
+		if(_terrainEntityManager->getSelectedEntity() != nullptr)
+		{
+			_terrainEntityDepthRenderer.bind();
+
+			_terrainEntityDepthRenderer.render(_terrainEntityManager->getSelectedEntity());
+
+			_terrainEntityDepthRenderer.unbind();
+		}
+
+		_waterOpacityCaptor->unbind();
+
+		_renderBus->setWaterOpacityMap(_waterOpacityCaptor->getTexture(0));
+	}
+	else
+	{
+		_renderBus->setWaterOpacityMap(nullptr);
+	}
+}

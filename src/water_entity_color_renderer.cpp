@@ -25,7 +25,7 @@ void WaterEntityColorRenderer::bind()
 	_shader->uploadUniform("u_isRefractionsEnabled", _renderBus->isRefractionsEnabled());
 	_shader->uploadUniform("u_reflectionMap", 0);
 	_shader->uploadUniform("u_refractionMap", 1);
-	_shader->uploadUniform("u_depthMap", 2);
+	_shader->uploadUniform("u_opacityMap", 2);
 	_shader->uploadUniform("u_dudvMap", 3);
 	_shader->uploadUniform("u_normalMap", 4);
 	_shader->uploadUniform("u_displacementMap", 5);
@@ -42,10 +42,10 @@ void WaterEntityColorRenderer::bind()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterRefractionMap()->getId());
 	}
-	if(_renderBus->getDepthMap() != nullptr)
+	if(_renderBus->getWaterOpacityMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getDepthMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterOpacityMap()->getId());
 	}
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -79,7 +79,7 @@ void WaterEntityColorRenderer::unbind()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(_renderBus->getDepthMap() != nullptr)
+	if(_renderBus->getWaterOpacityMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, 0);

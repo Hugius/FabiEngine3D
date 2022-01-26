@@ -3,108 +3,107 @@
 
 void MasterRenderer::_captureWorldDepth()
 {
-	if(_renderBus->isDofEnabled() || _renderBus->isLensFlareEnabled() || (_waterEntityManager->getSelectedEntity() != nullptr))
+	if(!_renderBus->isDofEnabled() && !_renderBus->isLensFlareEnabled())
 	{
-		_worldDepthCaptor->bind();
+		_renderBus->setDepthMap(nullptr);
+		return;
+	}
 
-		glClear(GL_DEPTH_BUFFER_BIT);
+	_worldDepthCaptor->bind();
 
-		if(_terrainEntityManager->getSelectedEntity() != nullptr)
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	if(_terrainEntityManager->getSelectedEntity() != nullptr)
+	{
+		_terrainEntityDepthRenderer.bind();
+
+		_terrainEntityDepthRenderer.render(_terrainEntityManager->getSelectedEntity());
+
+		_terrainEntityDepthRenderer.unbind();
+	}
+
+	if(!_modelEntityManager->getEntities().empty())
+	{
+		_modelEntityDepthRenderer.bind();
+
+		for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
 		{
-			_terrainEntityDepthRenderer.bind();
-
-			_terrainEntityDepthRenderer.render(_terrainEntityManager->getSelectedEntity());
-
-			_terrainEntityDepthRenderer.unbind();
-		}
-
-		if(!_modelEntityManager->getEntities().empty())
-		{
-			_modelEntityDepthRenderer.bind();
-
-			for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
+			if(modelEntity->isDepthMapIncluded())
 			{
-				if(modelEntity->isDepthMapIncluded())
+				if(modelEntity->isLevelOfDetailed())
 				{
-					if(modelEntity->isLevelOfDetailed())
+					auto foundPair = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId());
+
+					if(foundPair != _modelEntityManager->getEntities().end())
 					{
-						auto foundPair = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId());
+						const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId())->second;
+						const auto originalPosition = levelOfDetailEntity->getBasePosition();
+						const auto originalRotation = levelOfDetailEntity->getBaseRotation();
+						const auto originalSize = levelOfDetailEntity->getBaseSize();
+						const auto originalVisibility = levelOfDetailEntity->isVisible();
 
-						if(foundPair != _modelEntityManager->getEntities().end())
-						{
-							const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId())->second;
-							const auto originalPosition = levelOfDetailEntity->getBasePosition();
-							const auto originalRotation = levelOfDetailEntity->getBaseRotation();
-							const auto originalSize = levelOfDetailEntity->getBaseSize();
-							const auto originalVisibility = levelOfDetailEntity->isVisible();
+						levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
+						levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
+						levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
+						levelOfDetailEntity->setVisible(modelEntity->isVisible());
+						levelOfDetailEntity->updateTransformationMatrix();
 
-							levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
-							levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
-							levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
-							levelOfDetailEntity->setVisible(modelEntity->isVisible());
-							levelOfDetailEntity->updateTransformationMatrix();
+						_modelEntityDepthRenderer.render(levelOfDetailEntity);
 
-							_modelEntityDepthRenderer.render(levelOfDetailEntity);
-
-							levelOfDetailEntity->setBasePosition(originalPosition);
-							levelOfDetailEntity->setBaseRotation(originalRotation);
-							levelOfDetailEntity->setBaseSize(originalSize);
-							levelOfDetailEntity->setVisible(originalVisibility);
-							levelOfDetailEntity->updateTransformationMatrix();
-						}
-						else
-						{
-							Logger::throwError("MasterRenderer::_captureWorldDepth");
-						}
+						levelOfDetailEntity->setBasePosition(originalPosition);
+						levelOfDetailEntity->setBaseRotation(originalRotation);
+						levelOfDetailEntity->setBaseSize(originalSize);
+						levelOfDetailEntity->setVisible(originalVisibility);
+						levelOfDetailEntity->updateTransformationMatrix();
 					}
 					else
 					{
-						_modelEntityDepthRenderer.render(modelEntity);
+						Logger::throwError("MasterRenderer::_captureWorldDepth");
 					}
 				}
-			}
-
-			_modelEntityDepthRenderer.unbind();
-		}
-
-		if(!_quad3dEntityManager->getEntities().empty())
-		{
-			_quad3dEntityDepthRenderer.bind();
-
-			for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
-			{
-				if(entity->isDepthMapIncluded())
+				else
 				{
-					_quad3dEntityDepthRenderer.render(entity);
+					_modelEntityDepthRenderer.render(modelEntity);
 				}
 			}
-
-			_quad3dEntityDepthRenderer.unbind();
 		}
 
-		if(!_text3dEntityManager->getEntities().empty())
-		{
-			_quad3dEntityDepthRenderer.bind();
-
-			for(const auto& [key, textEntity] : _text3dEntityManager->getEntities())
-			{
-				for(const auto& characterEntity : textEntity->getCharacterEntities())
-				{
-					_quad3dEntityDepthRenderer.render(characterEntity);
-				}
-			}
-
-			_quad3dEntityDepthRenderer.unbind();
-		}
-
-		_worldDepthCaptor->unbind();
-
-		_renderBus->setDepthMap(_worldDepthCaptor->getTexture(0));
+		_modelEntityDepthRenderer.unbind();
 	}
-	else
+
+	if(!_quad3dEntityManager->getEntities().empty())
 	{
-		_renderBus->setDepthMap(nullptr);
+		_quad3dEntityDepthRenderer.bind();
+
+		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
+		{
+			if(entity->isDepthMapIncluded())
+			{
+				_quad3dEntityDepthRenderer.render(entity);
+			}
+		}
+
+		_quad3dEntityDepthRenderer.unbind();
 	}
+
+	if(!_text3dEntityManager->getEntities().empty())
+	{
+		_quad3dEntityDepthRenderer.bind();
+
+		for(const auto& [key, textEntity] : _text3dEntityManager->getEntities())
+		{
+			for(const auto& characterEntity : textEntity->getCharacterEntities())
+			{
+				_quad3dEntityDepthRenderer.render(characterEntity);
+			}
+		}
+
+		_quad3dEntityDepthRenderer.unbind();
+	}
+
+	_worldDepthCaptor->unbind();
+
+	_renderBus->setDepthMap(_worldDepthCaptor->getTexture(0));
 }
 
 void MasterRenderer::_captureDOF()

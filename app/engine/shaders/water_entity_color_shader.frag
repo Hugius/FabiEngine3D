@@ -38,6 +38,8 @@ uniform float u_fogThickness;
 uniform int u_pointlightShapes[MAX_LIGHT_COUNT];
 uniform int u_lightCount;
 
+uniform bool u_isReflectionsEnabled;
+uniform bool u_isRefractionsEnabled;
 uniform bool u_isWireframed;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isFogEnabled;
@@ -92,7 +94,7 @@ vec4 calculateWaterColor()
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
 
 	float opacity = 1.0f;
-	if (u_opacity < 1.0f)
+	if (u_isRefractionsEnabled && (u_opacity < 1.0f))
 	{
 		float depth = texture(u_depthMap, refractionUv).r;
 		float floorDistance = convertDepthToPerspective(depth);
@@ -130,7 +132,7 @@ vec4 calculateWaterColor()
 	}
 
 	vec3 finalColor;
-	if (u_hasReflectionMap && u_isReflective)
+	if (u_isReflectionsEnabled && u_hasReflectionMap && u_isReflective)
 	{
 		vec3 reflectionColor = texture(u_reflectionMap, reflectionUv).rgb;
 		vec3 viewDirection = normalize(u_cameraPosition - f_position);
@@ -139,7 +141,7 @@ vec4 calculateWaterColor()
 		finalColor = mix(reflectionColor, (reflectionColor * 0.05f), fresnelMixValue);
 		finalColor *= u_color;
 	}
-	else if (u_hasRefractionMap && u_isRefractive)
+	else if (u_isRefractionsEnabled && u_hasRefractionMap && u_isRefractive)
 	{
 		finalColor = texture(u_refractionMap, refractionUv).rgb;
 		finalColor *= u_color;

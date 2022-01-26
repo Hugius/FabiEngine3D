@@ -39,6 +39,9 @@ void ModelEditor::load()
 	_fe3d->gfx_enableShadows();
 	_fe3d->gfx_setShadowLightness(0.25f);
 	_fe3d->gfx_setShadowQuality(Config::MAX_SHADOW_QUALITY);
+	_fe3d->gfx_setCubeReflectionQuality(Config::MAX_REFLECTION_QUALITY);
+	_fe3d->gfx_setPlanarReflectionQuality(Config::MAX_REFLECTION_QUALITY);
+	_fe3d->gfx_setPlanarRefractionQuality(Config::MAX_REFRACTION_QUALITY);
 
 	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d->model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
@@ -80,6 +83,9 @@ void ModelEditor::unload()
 	_fe3d->gfx_disableDirectionalLighting(true);
 	_fe3d->gfx_disableBloom(true);
 	_fe3d->gfx_disableShadows(true);
+	_fe3d->gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d->gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d->gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
 
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");

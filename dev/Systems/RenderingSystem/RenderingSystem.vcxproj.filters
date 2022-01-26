@@ -52,6 +52,9 @@
     <Filter Include="Renderer\Entity\Shadow">
       <UniqueIdentifier>{131983b2-d80c-4520-ae69-ad8cbec52739}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders\Entity\Shadow">
+      <UniqueIdentifier>{195c574a-95e2-4618-b945-1dd4fdc55d84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\master_renderer_capture_cube.cpp">
@@ -341,16 +344,16 @@
       <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\quad3d_entity_shadow_shader.vert">
-      <Filter>Shaders\Entity\Depth</Filter>
+      <Filter>Shaders\Entity\Shadow</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\quad3d_entity_shadow_shader.frag">
-      <Filter>Shaders\Entity\Depth</Filter>
+      <Filter>Shaders\Entity\Shadow</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\model_entity_shadow_shader.vert">
-      <Filter>Shaders\Entity\Depth</Filter>
+      <Filter>Shaders\Entity\Shadow</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\model_entity_shadow_shader.frag">
-      <Filter>Shaders\Entity\Depth</Filter>
+      <Filter>Shaders\Entity\Shadow</Filter>
     </None>
   </ItemGroup>
 </Project>

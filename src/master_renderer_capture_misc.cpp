@@ -3,9 +3,7 @@
 
 void MasterRenderer::_captureWorldDepth()
 {
-	const bool waterDepthNeeded = (_waterEntityManager->getSelectedEntity() != nullptr) && (_waterEntityManager->getSelectedEntity()->getOpacity() > 0.0f);
-
-	if(_renderBus->isDofEnabled() || _renderBus->isLensFlareEnabled() || waterDepthNeeded)
+	if(_renderBus->isDofEnabled() || _renderBus->isLensFlareEnabled() || (_waterEntityManager->getSelectedEntity() != nullptr))
 	{
 		_worldDepthCaptor->bind();
 
@@ -122,6 +120,7 @@ void MasterRenderer::_captureDOF()
 		_dofRenderer.render(_renderSurface);
 		_dofRenderer.unbind();
 		_dofCaptor->unbind();
+
 		_renderBus->setFinalSceneMap(_dofCaptor->getTexture(0));
 	}
 	else
@@ -139,6 +138,7 @@ void MasterRenderer::_captureLensFlare()
 		_lensFlareRenderer.render(_renderSurface);
 		_lensFlareRenderer.unbind();
 		_lensFlareCaptor->unbind();
+
 		_renderBus->setFinalSceneMap(_lensFlareCaptor->getTexture(0));
 	}
 }
@@ -147,8 +147,8 @@ void MasterRenderer::_captureMotionBlur()
 {
 	if(_renderBus->isMotionBlurEnabled())
 	{
-		float xDifference = (_cameraYawDifference * _renderBus->getMotionBlurStrength());
-		float yDifference = (_cameraPitchDifference * _renderBus->getMotionBlurStrength());
+		const auto xDifference = (_cameraYawDifference * _renderBus->getMotionBlurStrength());
+		const auto yDifference = (_cameraPitchDifference * _renderBus->getMotionBlurStrength());
 
 		bool hasMoved = false;
 		BlurDirection direction;
@@ -186,6 +186,7 @@ void MasterRenderer::_captureMotionBlur()
 		_motionBlurRenderer.render(_renderSurface);
 		_motionBlurRenderer.unbind();
 		_motionBlurCaptor->unbind();
+
 		_renderBus->setFinalSceneMap(_motionBlurCaptor->getTexture(0));
 	}
 	else
@@ -203,6 +204,7 @@ void MasterRenderer::_captureAntiAliasing()
 		_antiAliasingRenderer.render(_renderSurface);
 		_antiAliasingRenderer.unbind();
 		_antiAliasingCaptor->unbind();
+
 		_renderBus->setFinalSceneMap(_antiAliasingCaptor->getTexture(0));
 	}
 }
@@ -233,6 +235,7 @@ void MasterRenderer::_captureBloom()
 		_bloomRenderer.render(_renderSurface);
 		_bloomRenderer.unbind();
 		_bloomCaptor->unbind();
+
 		_renderBus->setFinalSceneMap(_bloomCaptor->getTexture(0));
 	}
 	else
@@ -245,24 +248,21 @@ void MasterRenderer::_captureShadows()
 {
 	if(_renderBus->isShadowsEnabled())
 	{
-		auto modelEntities = _modelEntityManager->getEntities();
-		auto quad3dEntities = _quad3dEntityManager->getEntities();
-
 		_shadowCaptor->bind();
 
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		if(!modelEntities.empty())
+		if(!_modelEntityManager->getEntities().empty())
 		{
 			_modelEntityShadowRenderer.bind();
 
-			for(const auto& [key, modelEntity] : modelEntities)
+			for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
 			{
 				if(modelEntity->isLevelOfDetailed())
 				{
-					auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityId());
+					auto foundPair = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId());
 
-					if(foundPair != modelEntities.end())
+					if(foundPair != _modelEntityManager->getEntities().end())
 					{
 						const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId())->second;
 						const auto originalPosition = levelOfDetailEntity->getBasePosition();
@@ -298,7 +298,7 @@ void MasterRenderer::_captureShadows()
 			_modelEntityShadowRenderer.unbind();
 		}
 
-		if(!quad3dEntities.empty())
+		if(!_quad3dEntityManager->getEntities().empty())
 		{
 			_quad3dEntityShadowRenderer.bind();
 
@@ -311,6 +311,7 @@ void MasterRenderer::_captureShadows()
 		}
 
 		_shadowCaptor->unbind();
+
 		_renderBus->setShadowMap(_shadowCaptor->getTexture(0));
 	}
 	else

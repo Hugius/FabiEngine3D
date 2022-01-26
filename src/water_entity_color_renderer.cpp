@@ -21,6 +21,8 @@ void WaterEntityColorRenderer::bind()
 	_shader->uploadUniform("u_farDistance", _renderBus->getFarDistance());
 	_shader->uploadUniform("u_isDirectionalLightingEnabled", _renderBus->isDirectionalLightingEnabled());
 	_shader->uploadUniform("u_directionalLightingIntensity", _renderBus->getDirectionalLightingIntensity());
+	_shader->uploadUniform("u_isReflectionsEnabled", _renderBus->isReflectionsEnabled());
+	_shader->uploadUniform("u_isRefractionsEnabled", _renderBus->isRefractionsEnabled());
 	_shader->uploadUniform("u_reflectionMap", 0);
 	_shader->uploadUniform("u_refractionMap", 1);
 	_shader->uploadUniform("u_depthMap", 2);

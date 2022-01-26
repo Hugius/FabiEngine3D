@@ -7,50 +7,59 @@ void MasterRenderer::_captureCubeReflections()
 		return;
 	}
 
-	const auto reflectionQuality = _renderBus->getCubeReflectionQuality();
+	vector<shared_ptr<ModelEntity>> savedModelEntities;
+	for(const auto& [key, entity] : _modelEntityManager->getEntities())
+	{
+		if(!entity->isReflected() && entity->isVisible())
+		{
+			entity->setVisible(false);
+			savedModelEntities.push_back(entity);
+		}
+	}
+
+	vector<shared_ptr<Quad3dEntity>> savedQuad3dEntities;
+	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
+	{
+		if(!entity->isReflected() && entity->isVisible())
+		{
+			entity->setVisible(false);
+			savedQuad3dEntities.push_back(entity);
+		}
+	}
+
+	vector<shared_ptr<Text3dEntity>> savedText3dEntities;
+	for(const auto& [key, entity] : _text3dEntityManager->getEntities())
+	{
+		if(!entity->isReflected() && entity->isVisible())
+		{
+			entity->setVisible(false);
+			savedText3dEntities.push_back(entity);
+		}
+	}
 
 	const auto originalCameraAspectRatio = _camera->getAspectRatio();
 	const auto originalCameraFOV = _camera->getFOV();
 	const auto originalCameraYaw = _camera->getYaw();
 	const auto originalCameraPitch = _camera->getPitch();
 	const auto originalCameraPosition = _camera->getPosition();
-
-	vector<string> savedModelEntityIds;
-	for(const auto& [key, entity] : _modelEntityManager->getEntities())
-	{
-		if(!entity->isReflected() && entity->isVisible())
-		{
-			entity->setVisible(false);
-			savedModelEntityIds.push_back(entity->getId());
-		}
-	}
-
-	vector<string> savedQuad3dEntityIds;
-	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
-	{
-		if(!entity->isReflected() && entity->isVisible())
-		{
-			entity->setVisible(false);
-			savedQuad3dEntityIds.push_back(entity->getId());
-		}
-	}
-
-	_renderBus->setReflectionsEnabled(false);
-
-	float originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
-	_renderBus->setSkyExposureLightness(0.0f);
-
 	const auto originalShadowInterval = _renderBus->getShadowInterval();
-	_renderBus->setShadowInterval(0);
+	const auto originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
 
 	_camera->invertUpVector();
 	_camera->setAspectRatio(1.0f);
 	_camera->setFOV(90.0f);
 
+	_renderBus->setReflectionsEnabled(false);
+	_renderBus->setRefractionsEnabled(false);
+	_renderBus->setSkyExposureLightness(0.0f);
+	_renderBus->setShadowInterval(0);
+
 	for(const auto& [key, entity] : _reflectionEntityManager->getEntities())
 	{
 		if(entity->mustCapture())
 		{
+			_camera->setPosition(entity->getPosition());
+
 			BufferId textureId;
 			glGenTextures(1, &textureId);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
@@ -63,8 +72,6 @@ void MasterRenderer::_captureCubeReflections()
 
 			for(unsigned int i = 0; i < 6; i++)
 			{
-				_camera->setPosition(entity->getPosition());
-
 				switch(i)
 				{
 					case 0:
@@ -123,7 +130,7 @@ void MasterRenderer::_captureCubeReflections()
 				_renderTransparentText3dEntities();
 				_cubeReflectionCaptor->unbind();
 
-				const auto dataSize = (reflectionQuality * reflectionQuality * 3);
+				const auto dataSize = (_renderBus->getCubeReflectionQuality() * _renderBus->getCubeReflectionQuality() * 3);
 				auto data = new unsigned char[dataSize];
 				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptor->getTexture(0)->getId());
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -131,7 +138,7 @@ void MasterRenderer::_captureCubeReflections()
 
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-				glTexImage2D(cubeIndex, 0, GL_RGB, reflectionQuality, reflectionQuality, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glTexImage2D(cubeIndex, 0, GL_RGB, _renderBus->getCubeReflectionQuality(), _renderBus->getCubeReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 			}
 
@@ -140,26 +147,19 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	for(const auto& [key, entity] : _modelEntityManager->getEntities())
+	for(const auto& entity : savedModelEntities)
 	{
-		for(const auto& savedId : savedModelEntityIds)
-		{
-			if(entity->getId() == savedId)
-			{
-				entity->setVisible(true);
-			}
-		}
+		entity->setVisible(true);
 	}
 
-	for(const auto& savedId : savedQuad3dEntityIds)
+	for(const auto& entity : savedQuad3dEntities)
 	{
-		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
-		{
-			if(entity->getId() == savedId)
-			{
-				entity->setVisible(true);
-			}
-		}
+		entity->setVisible(true);
+	}
+
+	for(const auto& entity : savedText3dEntities)
+	{
+		entity->setVisible(true);
 	}
 
 	_camera->invertUpVector();
@@ -170,10 +170,10 @@ void MasterRenderer::_captureCubeReflections()
 	_camera->setPosition(originalCameraPosition);
 	_camera->updateMatrices();
 
+	_renderBus->setReflectionsEnabled(true);
+	_renderBus->setRefractionsEnabled(true);
 	_renderBus->setShadowInterval(originalShadowInterval);
-	_updateShadows();
-
 	_renderBus->setSkyExposureLightness(originalSkyExposureLightness);
 
-	_renderBus->setReflectionsEnabled(true);
+	_updateShadows();
 }

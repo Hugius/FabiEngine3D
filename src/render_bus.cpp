@@ -328,6 +328,11 @@ void RenderBus::setReflectionsEnabled(bool value)
 	_isReflectionsEnabled = value;
 }
 
+void RenderBus::setRefractionsEnabled(bool value)
+{
+	_isRefractionsEnabled = value;
+}
+
 void RenderBus::setFogEnabled(bool value)
 {
 	_isFogEnabled = value;
@@ -766,6 +771,11 @@ const bool RenderBus::isDirectionalLightingEnabled() const
 const bool RenderBus::isReflectionsEnabled() const
 {
 	return _isReflectionsEnabled;
+}
+
+const bool RenderBus::isRefractionsEnabled() const
+{
+	return _isRefractionsEnabled;
 }
 
 const bool RenderBus::isFogEnabled() const

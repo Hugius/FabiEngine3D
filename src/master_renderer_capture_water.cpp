@@ -70,13 +70,13 @@ void MasterRenderer::_captureWaterReflections()
 		}
 	}
 
+	const auto cameraDistance = fabsf(_camera->getPosition().y - waterEntity->getHeight());
 	const auto originalCameraPosition = _camera->getPosition();
 	const auto originalCameraPitch = _camera->getPitch();
 	const auto originalShadowsEnabled = _renderBus->isShadowsEnabled();
 	const auto originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
-	const auto cameraDistance = fabsf(_camera->getPosition().y - waterEntity->getHeight());
 
-	_camera->setPosition(fvec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
+	_camera->setPosition(fvec3(originalCameraPosition.x, (originalCameraPosition.y - (cameraDistance * 2.0f)), originalCameraPosition.z));
 	_camera->setPitch(-originalCameraPitch);
 	_camera->updateMatrices();
 
@@ -84,6 +84,7 @@ void MasterRenderer::_captureWaterReflections()
 	_renderBus->setCameraPosition(originalCameraPosition);
 	_renderBus->setCameraPitch(originalCameraPitch);
 	_renderBus->setReflectionsEnabled(false);
+	_renderBus->setRefractionsEnabled(false);
 	_renderBus->setShadowsEnabled(false);
 	_renderBus->setSkyExposureLightness(0.0f);
 
@@ -161,6 +162,7 @@ void MasterRenderer::_captureWaterReflections()
 	_renderBus->setWaterReflectionMap(_waterReflectionCaptor->getTexture(0));
 	_renderBus->setMinPosition(fvec3(-FLT_MAX));
 	_renderBus->setReflectionsEnabled(true);
+	_renderBus->setRefractionsEnabled(true);
 	_renderBus->setShadowsEnabled(originalShadowsEnabled);
 	_renderBus->setSkyExposureLightness(originalSkyExposureLightness);
 
@@ -194,8 +196,8 @@ void MasterRenderer::_captureWaterRefractions()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	const auto isShadowsEnabled = _renderBus->isShadowsEnabled();
-	const auto skyExposureLightness = _renderBus->getSkyExposureLightness();
+	const auto originalShadowsEnabled = _renderBus->isShadowsEnabled();
+	const auto originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
 
 	_renderBus->setMinPosition(fvec3(-FLT_MAX, (waterEntity->getHeight() - 1.0f), -FLT_MAX));
 	_renderBus->setShadowsEnabled(false);
@@ -248,8 +250,8 @@ void MasterRenderer::_captureWaterRefractions()
 
 	_renderBus->setWaterRefractionMap(_waterRefractionCaptor->getTexture(0));
 	_renderBus->setMinPosition(fvec3(-FLT_MAX));
-	_renderBus->setShadowsEnabled(isShadowsEnabled);
-	_renderBus->setSkyExposureLightness(skyExposureLightness);
+	_renderBus->setShadowsEnabled(originalShadowsEnabled);
+	_renderBus->setSkyExposureLightness(originalSkyExposureLightness);
 
 	_waterRefractionCaptor->unbind();
 }

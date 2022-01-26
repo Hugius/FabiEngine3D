@@ -75,6 +75,7 @@ public:
 	void setBloomBlurCount(unsigned int value);
 	void resetTriangleCount();
 	void setReflectionsEnabled(bool value);
+	void setRefractionsEnabled(bool value);
 	void setAntiAliasingEnabled(bool value);
 	void setAmbientLightingEnabled(bool value);
 	void setDirectionalLightingEnabled(bool value);
@@ -161,6 +162,7 @@ public:
 	const unsigned int getShadowInterval() const;
 
 	const bool isReflectionsEnabled() const;
+	const bool isRefractionsEnabled() const;
 	const bool isAntiAliasingEnabled() const;
 	const bool isAmbientLightingEnabled() const;
 	const bool isDirectionalLightingEnabled() const;
@@ -268,6 +270,7 @@ private:
 	unsigned int _shadowInterval = 0;
 
 	bool _isReflectionsEnabled = true;
+	bool _isRefractionsEnabled = true;
 	bool _isAntiAliasingEnabled = false;
 	bool _isAmbientLightingEnabled = false;
 	bool _isDirectionalLightingEnabled = false;

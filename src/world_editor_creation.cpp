@@ -232,6 +232,7 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 		}
 
 		_fe3d->model_setLightness(newId, partId, _fe3d->model_getLightness(templateId, partId));
+		_fe3d->model_setBright(newId, partId, _fe3d->model_isBright(templateId, partId));
 		_fe3d->model_setSpecular(newId, partId, _fe3d->model_isSpecular(templateId, partId));
 		_fe3d->model_setSpecularShininess(newId, partId, _fe3d->model_getSpecularShininess(templateId, partId));
 		_fe3d->model_setSpecularIntensity(newId, partId, _fe3d->model_getSpecularIntensity(templateId, partId));

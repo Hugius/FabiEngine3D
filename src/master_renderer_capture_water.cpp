@@ -70,7 +70,6 @@ void MasterRenderer::_captureWaterReflections()
 	const auto cameraDistance = fabsf(_camera->getPosition().y - waterEntity->getHeight());
 	const auto originalCameraPosition = _camera->getPosition();
 	const auto originalCameraPitch = _camera->getPitch();
-	const auto originalShadowsEnabled = _renderBus->isShadowsEnabled();
 	const auto originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
 
 	_camera->setPosition(fvec3(originalCameraPosition.x, (originalCameraPosition.y - (cameraDistance * 2.0f)), originalCameraPosition.z));
@@ -82,7 +81,6 @@ void MasterRenderer::_captureWaterReflections()
 	_renderBus->setCameraPitch(originalCameraPitch);
 	_renderBus->setReflectionsEnabled(false);
 	_renderBus->setRefractionsEnabled(false);
-	_renderBus->setShadowsEnabled(false);
 	_renderBus->setSkyExposureLightness(0.0f);
 
 	switch(waterEntity->getQuality())
@@ -160,7 +158,6 @@ void MasterRenderer::_captureWaterReflections()
 	_renderBus->setMinPosition(fvec3(-FLT_MAX));
 	_renderBus->setReflectionsEnabled(true);
 	_renderBus->setRefractionsEnabled(true);
-	_renderBus->setShadowsEnabled(originalShadowsEnabled);
 	_renderBus->setSkyExposureLightness(originalSkyExposureLightness);
 
 	_waterReflectionCaptor->unbind();
@@ -190,11 +187,9 @@ void MasterRenderer::_captureWaterRefractions()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	const auto originalShadowsEnabled = _renderBus->isShadowsEnabled();
 	const auto originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
 
 	_renderBus->setMinPosition(fvec3(-FLT_MAX, (waterEntity->getHeight() - 1.0f), -FLT_MAX));
-	_renderBus->setShadowsEnabled(false);
 	_renderBus->setSkyExposureLightness(0.0f);
 
 	switch(waterEntity->getQuality())
@@ -244,7 +239,6 @@ void MasterRenderer::_captureWaterRefractions()
 
 	_renderBus->setWaterRefractionMap(_waterRefractionCaptor->getTexture(0));
 	_renderBus->setMinPosition(fvec3(-FLT_MAX));
-	_renderBus->setShadowsEnabled(originalShadowsEnabled);
 	_renderBus->setSkyExposureLightness(originalSkyExposureLightness);
 
 	_waterRefractionCaptor->unbind();

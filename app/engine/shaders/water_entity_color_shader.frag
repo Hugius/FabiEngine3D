@@ -92,8 +92,8 @@ vec4 calculateWaterColor()
 	vec2 reflectionUv = vec2(ndc.x, -ndc.y);
 	vec2 refractionUv = vec2(ndc.x, ndc.y);
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
-
 	float opacity = 1.0f;
+
 	if (u_isRefractionsEnabled && (u_opacity < 1.0f))
 	{
 		float depth = texture(u_depthMap, refractionUv).r;

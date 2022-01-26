@@ -77,20 +77,7 @@ void WorldEditor::_updateSoundEditing()
 
 			rightWindow->setActiveScreen("soundPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
-				{
-					_fe3d->model_delete(_activeSpeakerId);
-					_fe3d->sound3d_delete(activeSoundId);
-					_loadedSoundIds.erase(activeSoundId);
-					_activeSpeakerId = "";
-					rightWindow->setActiveScreen("main");
-					return;
-				}
-			}
-
-			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
+			if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d->model_delete(_activeSpeakerId);
 				_fe3d->sound3d_delete(activeSoundId);

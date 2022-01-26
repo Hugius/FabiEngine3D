@@ -10,7 +10,7 @@ void Animation2dEditor::startQuad3dAnimation(const string& animationId, const st
 
 	if(!_fe3d->quad3d_isExisting(quadId))
 	{
-		Logger::throwWarning("animation not existing!");
+		Logger::throwWarning("quad3d not existing!");
 	}
 
 	if(isQuad3dAnimationStarted(animationId, quadId))

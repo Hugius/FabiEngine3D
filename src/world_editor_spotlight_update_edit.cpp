@@ -75,30 +75,17 @@ void WorldEditor::_updateSpotlightEditing()
 
 			rightWindow->setActiveScreen("spotlightPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
-				{
-					screen->getButton("position")->setHoverable(false);
-					screen->getButton("color")->setHoverable(true);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
-				{
-					screen->getButton("position")->setHoverable(true);
-					screen->getButton("color")->setHoverable(false);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
-				{
-					_fe3d->model_delete(_activeTorchId);
-					_fe3d->spotlight_delete(activeSpotlightId);
-					_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), activeSpotlightId), _loadedSpotlightIds.end());
-					_activeTorchId = "";
-					rightWindow->setActiveScreen("main");
-					return;
-				}
+				screen->getButton("position")->setHoverable(false);
+				screen->getButton("color")->setHoverable(true);
 			}
-
-			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
+			{
+				screen->getButton("position")->setHoverable(true);
+				screen->getButton("color")->setHoverable(false);
+			}
+			else if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d->model_delete(_activeTorchId);
 				_fe3d->spotlight_delete(activeSpotlightId);

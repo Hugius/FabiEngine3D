@@ -75,42 +75,39 @@ void WorldEditor::_updateQuad3dEditing()
 
 			rightWindow->setActiveScreen("quad3dPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
-				{
-					screen->getButton("position")->setHoverable(false);
-					screen->getButton("rotation")->setHoverable(true);
-					screen->getButton("size")->setHoverable(true);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
-				{
-					screen->getButton("position")->setHoverable(true);
-					screen->getButton("rotation")->setHoverable(false);
-					screen->getButton("size")->setHoverable(true);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
-				{
-					screen->getButton("position")->setHoverable(true);
-					screen->getButton("rotation")->setHoverable(true);
-					screen->getButton("size")->setHoverable(false);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
-				{
-					_fe3d->quad3d_setFrozen(_activeQuadId, !_fe3d->quad3d_isFrozen(_activeQuadId));
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
-				{
-					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation2dEditor->getAnimationIds());
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
-				{
-					_fe3d->quad3d_delete(_activeQuadId);
-					_loadedQuadIds.erase(_activeQuadId);
-					_activeQuadId = "";
-					rightWindow->setActiveScreen("main");
-					return;
-				}
+				screen->getButton("position")->setHoverable(false);
+				screen->getButton("rotation")->setHoverable(true);
+				screen->getButton("size")->setHoverable(true);
+			}
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
+			{
+				screen->getButton("position")->setHoverable(true);
+				screen->getButton("rotation")->setHoverable(false);
+				screen->getButton("size")->setHoverable(true);
+			}
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+			{
+				screen->getButton("position")->setHoverable(true);
+				screen->getButton("rotation")->setHoverable(true);
+				screen->getButton("size")->setHoverable(false);
+			}
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
+			{
+				_fe3d->quad3d_setFrozen(_activeQuadId, !_fe3d->quad3d_isFrozen(_activeQuadId));
+			}
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
+			{
+				_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation2dEditor->getAnimationIds());
+			}
+			else if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
+			{
+				_fe3d->quad3d_delete(_activeQuadId);
+				_loadedQuadIds.erase(_activeQuadId);
+				_activeQuadId = "";
+				rightWindow->setActiveScreen("main");
+				return;
 			}
 
 			auto lastAnimationId = _animation2dEditor->getStartedQuad3dAnimationIds(_activeQuadId);
@@ -129,15 +126,6 @@ void WorldEditor::_updateQuad3dEditing()
 			else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 			{
 				_gui->getOverlay()->deleteChoiceForm("animationList");
-			}
-
-			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
-			{
-				_fe3d->quad3d_delete(_activeQuadId);
-				_loadedQuadIds.erase(_activeQuadId);
-				_activeQuadId = "";
-				rightWindow->setActiveScreen("main");
-				return;
 			}
 
 			auto position = _fe3d->quad3d_getPosition(_activeQuadId);

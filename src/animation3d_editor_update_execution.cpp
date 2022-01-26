@@ -1,9 +1,15 @@
 #include "animation3d_editor.hpp"
-
+#include <iostream>
 void Animation3dEditor::_updateModelAnimationExecution()
 {
 	for(auto& [key, animation] : _startedModelAnimations)
 	{
+		if(!_fe3d->model_isExisting(key.second))
+		{
+			_modelAnimationsToStop.insert(key);
+			continue;
+		}
+
 		if(animation.isPaused())
 		{
 			continue;
@@ -20,11 +26,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 		unsigned int finishedPartCount = 0;
 		for(const auto& partId : animation.getPartIds())
 		{
-			if(!_fe3d->model_isExisting(key.second))
-			{
-				break;
-			}
-
 			auto totalMovement = animation.getTotalMovements().at(partId);
 			auto totalRotation = animation.getTotalRotations().at(partId);
 			auto totalScaling = animation.getTotalScalings().at(partId);
@@ -410,7 +411,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 			stopModelAnimation(key.first, key.second);
 		}
 	}
-	_modelAnimationsToStop.clear();
 
 	for(const auto& key : _modelAnimationsToStart)
 	{
@@ -419,5 +419,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 			startModelAnimation(key.first, key.second, -1);
 		}
 	}
+
+	_modelAnimationsToStop.clear();
 	_modelAnimationsToStart.clear();
 }

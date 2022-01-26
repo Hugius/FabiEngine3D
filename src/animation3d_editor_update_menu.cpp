@@ -125,7 +125,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				}
 			}
 
-			startModelAnimation(_currentAnimationId, currentAnimation->getPreviewModelId(), 0);
+			startModelAnimation(_currentAnimationId, currentAnimation->getPreviewModelId(), 1);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{

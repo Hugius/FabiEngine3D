@@ -10,12 +10,9 @@ void MasterRenderer::_captureWaterReflections()
 		return;
 	}
 
-	const float waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
-	bool isUnderWater = (_camera->getPosition().y < (waterEntity->getHeight() + waveHeight));
-	isUnderWater = (isUnderWater && (_camera->getPosition().x > -(waterEntity->getSize() / 2.0f)));
-	isUnderWater = (isUnderWater && (_camera->getPosition().x < (waterEntity->getSize() / 2.0f)));
-	isUnderWater = (isUnderWater && (_camera->getPosition().z > -(waterEntity->getSize() / 2.0f)));
-	isUnderWater = (isUnderWater && (_camera->getPosition().z < (waterEntity->getSize() / 2.0f)));
+	const auto waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
+	const auto waterHeight = (waterEntity->getHeight() + waveHeight);
+	const auto isUnderWater = (_camera->getPosition().y < waterHeight);
 
 	if(isUnderWater)
 	{
@@ -179,12 +176,9 @@ void MasterRenderer::_captureWaterRefractions()
 		return;
 	}
 
-	const float waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
-	bool isUnderWater = (_camera->getPosition().y < (waterEntity->getHeight() + waveHeight));
-	isUnderWater = (isUnderWater && (_camera->getPosition().x > -(waterEntity->getSize() / 2.0f)));
-	isUnderWater = (isUnderWater && (_camera->getPosition().x < (waterEntity->getSize() / 2.0f)));
-	isUnderWater = (isUnderWater && (_camera->getPosition().z > -(waterEntity->getSize() / 2.0f)));
-	isUnderWater = (isUnderWater && (_camera->getPosition().z < (waterEntity->getSize() / 2.0f)));
+	const auto waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
+	const auto waterHeight = (waterEntity->getHeight() + waveHeight);
+	const auto isUnderWater = (_camera->getPosition().y < waterHeight);
 
 	if(!isUnderWater)
 	{

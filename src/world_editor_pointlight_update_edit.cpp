@@ -75,49 +75,36 @@ void WorldEditor::_updatePointlightEditing()
 
 			rightWindow->setActiveScreen("pointlightPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
+				screen->getButton("position")->setHoverable(false);
+				screen->getButton("radius")->setHoverable(true);
+				screen->getButton("color")->setHoverable(true);
+			}
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("radius")->isHovered())
+			{
+				screen->getButton("position")->setHoverable(true);
+				screen->getButton("radius")->setHoverable(false);
+				screen->getButton("color")->setHoverable(true);
+			}
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
+			{
+				screen->getButton("position")->setHoverable(true);
+				screen->getButton("radius")->setHoverable(true);
+				screen->getButton("color")->setHoverable(false);
+			}
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("shape")->isHovered())
+			{
+				if(_fe3d->pointlight_getShape(activePointlightId) == PointlightShape::CIRCLE)
 				{
-					screen->getButton("position")->setHoverable(false);
-					screen->getButton("radius")->setHoverable(true);
-					screen->getButton("color")->setHoverable(true);
+					_fe3d->pointlight_setShape(activePointlightId, PointlightShape::SQUARE);
 				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("radius")->isHovered())
+				else
 				{
-					screen->getButton("position")->setHoverable(true);
-					screen->getButton("radius")->setHoverable(false);
-					screen->getButton("color")->setHoverable(true);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
-				{
-					screen->getButton("position")->setHoverable(true);
-					screen->getButton("radius")->setHoverable(true);
-					screen->getButton("color")->setHoverable(false);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("shape")->isHovered())
-				{
-					if(_fe3d->pointlight_getShape(activePointlightId) == PointlightShape::CIRCLE)
-					{
-						_fe3d->pointlight_setShape(activePointlightId, PointlightShape::SQUARE);
-					}
-					else
-					{
-						_fe3d->pointlight_setShape(activePointlightId, PointlightShape::CIRCLE);
-					}
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
-				{
-					_fe3d->model_delete(_activeLampId);
-					_fe3d->pointlight_delete(activePointlightId);
-					_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), activePointlightId), _loadedPointlightIds.end());
-					_activeLampId = "";
-					rightWindow->setActiveScreen("main");
-					return;
+					_fe3d->pointlight_setShape(activePointlightId, PointlightShape::CIRCLE);
 				}
 			}
-
-			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
+			else if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d->model_delete(_activeLampId);
 				_fe3d->pointlight_delete(activePointlightId);

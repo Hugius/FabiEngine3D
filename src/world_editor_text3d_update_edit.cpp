@@ -75,41 +75,29 @@ void WorldEditor::_updateText3dEditing()
 
 			rightWindow->setActiveScreen("text3dPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
-				{
-					screen->getButton("position")->setHoverable(false);
-					screen->getButton("rotation")->setHoverable(true);
-					screen->getButton("size")->setHoverable(true);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
-				{
-					screen->getButton("position")->setHoverable(true);
-					screen->getButton("rotation")->setHoverable(false);
-					screen->getButton("size")->setHoverable(true);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
-				{
-					screen->getButton("position")->setHoverable(true);
-					screen->getButton("rotation")->setHoverable(true);
-					screen->getButton("size")->setHoverable(false);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
-				{
-					_fe3d->text3d_setFrozen(_activeTextId, !_fe3d->text3d_isFrozen(_activeTextId));
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
-				{
-					_fe3d->text3d_delete(_activeTextId);
-					_loadedTextIds.erase(_activeTextId);
-					_activeTextId = "";
-					rightWindow->setActiveScreen("main");
-					return;
-				}
+				screen->getButton("position")->setHoverable(false);
+				screen->getButton("rotation")->setHoverable(true);
+				screen->getButton("size")->setHoverable(true);
 			}
-
-			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
+			{
+				screen->getButton("position")->setHoverable(true);
+				screen->getButton("rotation")->setHoverable(false);
+				screen->getButton("size")->setHoverable(true);
+			}
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+			{
+				screen->getButton("position")->setHoverable(true);
+				screen->getButton("rotation")->setHoverable(true);
+				screen->getButton("size")->setHoverable(false);
+			}
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
+			{
+				_fe3d->text3d_setFrozen(_activeTextId, !_fe3d->text3d_isFrozen(_activeTextId));
+			}
+			else if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d->text3d_delete(_activeTextId);
 				_loadedTextIds.erase(_activeTextId);

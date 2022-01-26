@@ -72,24 +72,11 @@ void WorldEditor::_updateReflectionEditing()
 
 			rightWindow->setActiveScreen("reflectionPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
-				{
-					_fe3d->reflection_capture(activeReflectionId);
-				}
-				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
-				{
-					_fe3d->model_delete(_activeCameraId);
-					_fe3d->reflection_delete(activeReflectionId);
-					_loadedReflectionIds.erase(remove(_loadedReflectionIds.begin(), _loadedReflectionIds.end(), activeReflectionId), _loadedReflectionIds.end());
-					_activeCameraId = "";
-					rightWindow->setActiveScreen("main");
-					return;
-				}
+				_fe3d->reflection_capture(activeReflectionId);
 			}
-
-			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
+			else if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d->model_delete(_activeCameraId);
 				_fe3d->reflection_delete(activeReflectionId);

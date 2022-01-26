@@ -4,6 +4,12 @@ void Animation2dEditor::_updateQuad3dAnimationExecution()
 {
 	for(auto& [key, animation] : _startedQuad3dAnimations)
 	{
+		if(!_fe3d->quad3d_isExisting(key.second))
+		{
+			_quad3dAnimationsToStop.insert(key);
+			continue;
+		}
+
 		if(!animation.isPaused())
 		{
 			if(animation.getPassedFrames() == animation.getInterval())
@@ -54,8 +60,10 @@ void Animation2dEditor::_updateQuad3dAnimationExecution()
 			}
 		}
 
-		auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())), (1.0f / static_cast<float>(animation.getRowCount())));
-		auto uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x), (static_cast<float>(animation.getRowCount() - animation.getRowIndex() - 1) * uvMultiplier.y));
+		const auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
+										(1.0f / static_cast<float>(animation.getRowCount())));
+		const auto uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x),
+									(static_cast<float>(animation.getRowCount() - animation.getRowIndex() - 1) * uvMultiplier.y));
 
 		_fe3d->quad3d_setUvMultiplier(key.second, uvMultiplier);
 		_fe3d->quad3d_setUvOffset(key.second, uvOffset);
@@ -68,7 +76,6 @@ void Animation2dEditor::_updateQuad3dAnimationExecution()
 			stopQuad3dAnimation(key.first, key.second);
 		}
 	}
-	_quad3dAnimationsToStop.clear();
 
 	for(const auto& key : _quad3dAnimationsToStart)
 	{
@@ -77,6 +84,8 @@ void Animation2dEditor::_updateQuad3dAnimationExecution()
 			startQuad3dAnimation(key.first, key.second, -1);
 		}
 	}
+
+	_quad3dAnimationsToStop.clear();
 	_quad3dAnimationsToStart.clear();
 }
 
@@ -84,6 +93,12 @@ void Animation2dEditor::_updateQuad2dAnimationExecution()
 {
 	for(auto& [key, animation] : _startedQuad2dAnimations)
 	{
+		if(!_fe3d->quad2d_isExisting(key.second))
+		{
+			_quad2dAnimationsToStop.insert(key);
+			continue;
+		}
+
 		if(!animation.isPaused())
 		{
 			if(animation.getPassedFrames() == animation.getInterval())
@@ -96,6 +111,8 @@ void Animation2dEditor::_updateQuad2dAnimationExecution()
 
 					if(animation.getRowIndex() == (animation.getRowCount() - 1))
 					{
+						animation.setRowIndex(0);
+
 						if(animation.getPlayCount() == -1)
 						{
 							_quad2dAnimationsToStop.insert(key);
@@ -108,10 +125,6 @@ void Animation2dEditor::_updateQuad2dAnimationExecution()
 							if(animation.getPlayCount() == 0)
 							{
 								_quad2dAnimationsToStop.insert(key);
-							}
-							else
-							{
-								animation.setRowIndex(0);
 							}
 						}
 					}
@@ -131,8 +144,10 @@ void Animation2dEditor::_updateQuad2dAnimationExecution()
 			}
 		}
 
-		auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())), (1.0f / static_cast<float>(animation.getRowCount())));
-		auto uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x), (static_cast<float>(animation.getRowIndex()) * uvMultiplier.y));
+		const auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
+										(1.0f / static_cast<float>(animation.getRowCount())));
+		const auto uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x),
+									(static_cast<float>(animation.getRowIndex()) * uvMultiplier.y));
 
 		_fe3d->quad2d_setUvMultiplier(key.second, uvMultiplier);
 		_fe3d->quad2d_setUvOffset(key.second, uvOffset);
@@ -145,7 +160,6 @@ void Animation2dEditor::_updateQuad2dAnimationExecution()
 			stopQuad2dAnimation(key.first, key.second);
 		}
 	}
-	_quad2dAnimationsToStop.clear();
 
 	for(const auto& key : _quad2dAnimationsToStart)
 	{
@@ -154,5 +168,7 @@ void Animation2dEditor::_updateQuad2dAnimationExecution()
 			startQuad2dAnimation(key.first, key.second, -1);
 		}
 	}
+
+	_quad2dAnimationsToStop.clear();
 	_quad2dAnimationsToStart.clear();
 }

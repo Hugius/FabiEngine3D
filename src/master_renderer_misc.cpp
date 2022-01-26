@@ -125,6 +125,7 @@ void MasterRenderer::inject(shared_ptr<RenderBus> renderBus)
 	_terrainEntityColorRenderer.inject(renderBus);
 	_terrainEntityDepthRenderer.inject(renderBus);
 	_waterEntityColorRenderer.inject(renderBus);
+	_waterEntityDepthRenderer.inject(renderBus);
 	_modelEntityColorRenderer.inject(renderBus);
 	_modelEntityDepthRenderer.inject(renderBus);
 	_modelEntityShadowRenderer.inject(renderBus);

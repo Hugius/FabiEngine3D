@@ -22,6 +22,15 @@ void MasterRenderer::_captureWorldDepth()
 		_terrainEntityDepthRenderer.unbind();
 	}
 
+	if(_waterEntityManager->getSelectedEntity() != nullptr)
+	{
+		_waterEntityDepthRenderer.bind();
+
+		_waterEntityDepthRenderer.render(_waterEntityManager->getSelectedEntity());
+
+		_waterEntityDepthRenderer.unbind();
+	}
+
 	if(!_modelEntityManager->getEntities().empty())
 	{
 		_modelEntityDepthRenderer.bind();

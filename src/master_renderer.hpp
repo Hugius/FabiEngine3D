@@ -4,6 +4,7 @@
 #include "terrain_entity_color_renderer.hpp"
 #include "terrain_entity_depth_renderer.hpp"
 #include "water_entity_color_renderer.hpp"
+#include "water_entity_depth_renderer.hpp"
 #include "model_entity_color_renderer.hpp"
 #include "model_entity_depth_renderer.hpp"
 #include "model_entity_shadow_renderer.hpp"
@@ -110,6 +111,7 @@ private:
 	TerrainEntityColorRenderer _terrainEntityColorRenderer;
 	TerrainEntityDepthRenderer _terrainEntityDepthRenderer;
 	WaterEntityColorRenderer _waterEntityColorRenderer;
+	WaterEntityDepthRenderer _waterEntityDepthRenderer;
 	ModelEntityColorRenderer _modelEntityColorRenderer;
 	ModelEntityDepthRenderer _modelEntityDepthRenderer;
 	ModelEntityShadowRenderer _modelEntityShadowRenderer;
@@ -134,6 +136,7 @@ private:
 	shared_ptr<ShaderBuffer> _terrainEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _terrainEntityDepthShader = nullptr;
 	shared_ptr<ShaderBuffer> _waterEntityColorShader = nullptr;
+	shared_ptr<ShaderBuffer> _waterEntityDepthShader = nullptr;
 	shared_ptr<ShaderBuffer> _modelEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _modelEntityDepthShader = nullptr;
 	shared_ptr<ShaderBuffer> _modelEntityShadowShader = nullptr;

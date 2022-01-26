@@ -22,6 +22,7 @@ MasterRenderer::MasterRenderer()
 	_terrainEntityColorShader = make_shared<ShaderBuffer>("terrain_entity_color_shader.vert", "terrain_entity_color_shader.frag");
 	_terrainEntityDepthShader = make_shared<ShaderBuffer>("terrain_entity_depth_shader.vert", "terrain_entity_depth_shader.frag");
 	_waterEntityColorShader = make_shared<ShaderBuffer>("water_entity_color_shader.vert", "water_entity_color_shader.frag");
+	_waterEntityDepthShader = make_shared<ShaderBuffer>("water_entity_depth_shader.vert", "water_entity_depth_shader.frag");
 	_modelEntityColorShader = make_shared<ShaderBuffer>("model_entity_color_shader.vert", "model_entity_color_shader.frag");
 	_modelEntityDepthShader = make_shared<ShaderBuffer>("model_entity_depth_shader.vert", "model_entity_depth_shader.frag");
 	_modelEntityShadowShader = make_shared<ShaderBuffer>("model_entity_shadow_shader.vert", "model_entity_shadow_shader.frag");
@@ -59,6 +60,7 @@ MasterRenderer::MasterRenderer()
 	_terrainEntityColorRenderer.inject(_terrainEntityColorShader);
 	_terrainEntityDepthRenderer.inject(_terrainEntityDepthShader);
 	_waterEntityColorRenderer.inject(_waterEntityColorShader);
+	_waterEntityDepthRenderer.inject(_waterEntityDepthShader);
 	_modelEntityColorRenderer.inject(_modelEntityColorShader);
 	_modelEntityDepthRenderer.inject(_modelEntityDepthShader);
 	_modelEntityShadowRenderer.inject(_modelEntityShadowShader);

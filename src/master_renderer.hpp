@@ -82,7 +82,7 @@ private:
 	void _capturePlanarReflections();
 	void _captureWaterReflections();
 	void _captureWaterRefractions();
-	void _captureWaterOpacity();
+	void _captureWaterEdges();
 	void _captureWorldDepth();
 	void _captureShadows();
 	void _captureAntiAliasing();

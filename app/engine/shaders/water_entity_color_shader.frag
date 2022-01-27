@@ -8,7 +8,7 @@ in vec4 f_clip;
 
 layout (location = 0) uniform sampler2D u_reflectionMap;
 layout (location = 1) uniform sampler2D u_refractionMap;
-layout (location = 2) uniform sampler2D u_opacityMap;
+layout (location = 2) uniform sampler2D u_edgeMap;
 layout (location = 3) uniform sampler2D u_dudvMap;
 layout (location = 4) uniform sampler2D u_normalMap;
 
@@ -30,16 +30,17 @@ uniform float u_specularShininess;
 uniform float u_specularIntensity;
 uniform float u_nearDistance;
 uniform float u_farDistance;
-uniform float u_opacity;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
+uniform float u_maxDepth;
 
 uniform int u_pointlightShapes[MAX_LIGHT_COUNT];
 uniform int u_lightCount;
 
 uniform bool u_isReflectionsEnabled;
 uniform bool u_isRefractionsEnabled;
+uniform bool u_isEdged;
 uniform bool u_isWireframed;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isFogEnabled;
@@ -94,17 +95,14 @@ vec4 calculateWaterColor()
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
 	float opacity = 1.0f;
 
-	if (u_isRefractionsEnabled && (u_opacity < 1.0f))
+	if (u_isEdged)
 	{
-		float objectDistance = convertDepthToPerspective(texture(u_opacityMap, refractionUv).r);
+		float objectDistance = convertDepthToPerspective(texture(u_edgeMap, refractionUv).r);
 		float waterDistance = convertDepthToPerspective(gl_FragCoord.z);
+		float depth = (objectDistance - waterDistance);
 
-		if(objectDistance > waterDistance)
-		{
-			float waterDepth = (objectDistance - waterDistance);
-			opacity = waterDepth / ((1.0f - u_opacity) * 10.0f);
-			opacity = clamp(opacity, 0.0f, 1.0f);
-		}
+		opacity = (depth / u_maxDepth);
+		opacity = clamp(opacity, 0.0f, 1.0f);
 	}
 
 	if (u_hasDudvMap)

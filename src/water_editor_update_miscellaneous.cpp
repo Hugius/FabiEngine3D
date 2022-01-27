@@ -8,8 +8,8 @@ void WaterEditor::_updateMiscellaneousMenu()
 	{
 		auto size = _fe3d->water_getSize(_currentWaterId);
 		auto speed = _fe3d->water_getSpeed(_currentWaterId);
-		auto opacity = _fe3d->water_getOpacity(_currentWaterId);
 		auto waveHeight = _fe3d->water_getWaveHeight(_currentWaterId);
+		auto maxDepth = _fe3d->water_getMaxDepth(_currentWaterId);
 		auto quality = _fe3d->water_getQuality(_currentWaterId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
@@ -25,14 +25,14 @@ void WaterEditor::_updateMiscellaneousMenu()
 		{
 			_gui->getOverlay()->createValueForm("waveHeight", "Wave Height", (waveHeight * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxDepth")->isHovered())
+		{
+			_gui->getOverlay()->createValueForm("maxDepth", "Max Depth", maxDepth, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
 			_gui->getOverlay()->createValueForm("speedX", "X", speed.x * 100000.0f, fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui->getOverlay()->createValueForm("speedZ", "Z", speed.y * 100000.0f, fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
-		{
-			_gui->getOverlay()->createValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
@@ -82,15 +82,14 @@ void WaterEditor::_updateMiscellaneousMenu()
 			speed.y /= 100000.0f;
 			_fe3d->water_setSpeed(_currentWaterId, speed);
 		}
-		if(_gui->getOverlay()->checkValueForm("opacity", opacity))
-		{
-			opacity /= 100.0f;
-			_fe3d->water_setOpacity(_currentWaterId, opacity);
-		}
 		if(_gui->getOverlay()->checkValueForm("waveHeight", waveHeight))
 		{
 			waveHeight /= 100.0f;
 			_fe3d->water_setWaveHeight(_currentWaterId, waveHeight);
+		}
+		if(_gui->getOverlay()->checkValueForm("maxDepth", maxDepth))
+		{
+			_fe3d->water_setMaxDepth(_currentWaterId, maxDepth);
 		}
 
 		screen->getButton("waveHeight")->setHoverable(_fe3d->water_hasDisplacementMap(_currentWaterId));

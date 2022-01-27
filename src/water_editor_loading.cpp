@@ -121,13 +121,14 @@ const bool WaterEditor::loadFromFile()
 		float size;
 		float textureRepeat;
 		float waveHeight;
-		float opacity;
 		float specularShininess;
 		float specularIntensity;
+		float maxDepth;
 		unsigned int quality;
 		bool isSpecular;
 		bool isReflective;
 		bool isRefractive;
+		bool isEdged;
 
 		istringstream iss(line);
 
@@ -149,9 +150,10 @@ const bool WaterEditor::loadFromFile()
 			quality >>
 			speed.x >>
 			speed.y >>
-			opacity >>
+			isEdged >>
 			specularShininess >>
-			specularIntensity;
+			specularIntensity >>
+			maxDepth;
 
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
@@ -176,10 +178,11 @@ const bool WaterEditor::loadFromFile()
 			_fe3d->water_setQuality(waterId, static_cast<WaterQuality>(quality));
 			_fe3d->water_setSpecularShininess(waterId, specularShininess);
 			_fe3d->water_setSpecularIntensity(waterId, specularIntensity);
-			_fe3d->water_setOpacity(waterId, opacity);
+			_fe3d->water_setEdged(waterId, isEdged);
 			_fe3d->water_setColor(waterId, color);
 			_fe3d->water_setTextureRepeat(waterId, textureRepeat);
 			_fe3d->water_setSpeed(waterId, speed);
+			_fe3d->water_setMaxDepth(waterId, maxDepth);
 
 			if(!dudvMapPath.empty())
 			{

@@ -11,6 +11,7 @@ void WaterEditor::_updateLightingMenu()
 		bool isReflective = _fe3d->water_isReflective(_currentWaterId);
 		bool isRefractive = _fe3d->water_isRefractive(_currentWaterId);
 		bool isSpecular = _fe3d->water_isSpecular(_currentWaterId);
+		bool isEdged = _fe3d->water_isEdged(_currentWaterId);
 		auto specularShininess = _fe3d->water_getSpecularShininess(_currentWaterId);
 		auto specularIntensity = _fe3d->water_getSpecularIntensity(_currentWaterId);
 
@@ -39,6 +40,11 @@ void WaterEditor::_updateLightingMenu()
 		{
 			isSpecular = !isSpecular;
 			_fe3d->water_setSpecular(_currentWaterId, isSpecular);
+		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEdged")->isHovered())
+		{
+			isEdged = !isEdged;
+			_fe3d->water_setEdged(_currentWaterId, isEdged);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
@@ -80,5 +86,6 @@ void WaterEditor::_updateLightingMenu()
 		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
 		screen->getButton("isRefractive")->changeTextContent(isRefractive ? "Refractive: ON" : "Refractive: OFF");
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
+		screen->getButton("isEdged")->changeTextContent(isEdged ? "Edged: ON" : "Edged: OFF");
 	}
 }

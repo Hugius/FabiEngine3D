@@ -171,7 +171,8 @@ public:
 	void water_setWaveHeight(const string& id, float value);
 	void water_setSpecularShininess(const string& id, float value);
 	void water_setSpecularIntensity(const string& id, float value);
-	void water_setOpacity(const string& id, float value);
+	void water_setMaxDepth(const string& id, float value);
+	void water_setEdged(const string& id, bool value);
 	void water_setColor(const string& id, const fvec3& value);
 	void water_setTextureRepeat(const string& id, float value);
 	void water_setQuality(const string& id, WaterQuality value);
@@ -185,12 +186,13 @@ public:
 	const fvec3& water_getColor(const string& id) const;
 	const fvec2& water_getSpeed(const string& id) const;
 	const float water_getHeight(const string& id) const;
+	const float water_getMaxDepth(const string& id) const;
 	const float water_getSize(const string& id) const;
 	const float water_getTextureRepeat(const string& id) const;
 	const float water_getWaveHeight(const string& id) const;
 	const float water_getSpecularShininess(const string& id) const;
 	const float water_getSpecularIntensity(const string& id) const;
-	const float water_getOpacity(const string& id) const;
+	const bool water_isEdged(const string& id) const;
 	const bool water_isExisting(const string& id) const;
 	const bool water_isVisible(const string& id) const;
 	const bool water_isSpecular(const string& id) const;

@@ -33,7 +33,8 @@ const bool WaterEditor::saveToFile() const
 		auto size = _fe3d->water_getSize(waterId);
 		auto textureRepeat = _fe3d->water_getTextureRepeat(waterId);
 		auto waveHeight = _fe3d->water_getWaveHeight(waterId);
-		auto opacity = _fe3d->water_getOpacity(waterId);
+		auto maxDepth = _fe3d->water_getMaxDepth(waterId);
+		auto isEdged = _fe3d->water_isEdged(waterId);
 		auto specularShininess = _fe3d->water_getSpecularShininess(waterId);
 		auto specularIntensity = _fe3d->water_getSpecularIntensity(waterId);
 		auto quality = static_cast<unsigned int>(_fe3d->water_getQuality(waterId));
@@ -71,9 +72,10 @@ const bool WaterEditor::saveToFile() const
 			quality << " " <<
 			speed.x << " " <<
 			speed.y << " " <<
-			opacity << " " <<
+			isEdged << " " <<
 			specularShininess << " " <<
-			specularIntensity << endl;
+			specularIntensity << " " <<
+			maxDepth << endl;
 	}
 
 	file.close();

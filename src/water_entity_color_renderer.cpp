@@ -25,7 +25,7 @@ void WaterEntityColorRenderer::bind()
 	_shader->uploadUniform("u_isRefractionsEnabled", _renderBus->isRefractionsEnabled());
 	_shader->uploadUniform("u_reflectionMap", 0);
 	_shader->uploadUniform("u_refractionMap", 1);
-	_shader->uploadUniform("u_opacityMap", 2);
+	_shader->uploadUniform("u_edgeMap", 2);
 	_shader->uploadUniform("u_dudvMap", 3);
 	_shader->uploadUniform("u_normalMap", 4);
 	_shader->uploadUniform("u_displacementMap", 5);
@@ -42,10 +42,10 @@ void WaterEntityColorRenderer::bind()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterRefractionMap()->getId());
 	}
-	if(_renderBus->getWaterOpacityMap() != nullptr)
+	if(_renderBus->getWaterEdgeMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterOpacityMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterEdgeMap()->getId());
 	}
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -79,7 +79,7 @@ void WaterEntityColorRenderer::unbind()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(_renderBus->getWaterOpacityMap() != nullptr)
+	if(_renderBus->getWaterEdgeMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -149,11 +149,12 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader->uploadUniform("u_rippleOffset", entity->getRippleOffset());
 		_shader->uploadUniform("u_waveOffset", entity->getWaveOffset());
 		_shader->uploadUniform("u_waveHeight", entity->getWaveHeight());
+		_shader->uploadUniform("u_maxDepth", entity->getMaxDepth());
 		_shader->uploadUniform("u_height", entity->getHeight());
 		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader->uploadUniform("u_specularShininess", entity->getSpecularShininess());
 		_shader->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
-		_shader->uploadUniform("u_opacity", entity->getOpacity());
+		_shader->uploadUniform("u_isEdged", entity->isEdged());
 		_shader->uploadUniform("u_isSpecular", entity->isSpecular());
 		_shader->uploadUniform("u_isReflective", entity->isReflective());
 		_shader->uploadUniform("u_isRefractive", entity->isRefractive());

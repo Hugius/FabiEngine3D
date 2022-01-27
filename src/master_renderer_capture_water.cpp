@@ -244,11 +244,11 @@ void MasterRenderer::_captureWaterRefractions()
 	_waterRefractionCaptor->unbind();
 }
 
-void MasterRenderer::_captureWaterOpacity()
+void MasterRenderer::_captureWaterEdges()
 {
 	const auto waterEntity = _waterEntityManager->getSelectedEntity();
 
-	if((waterEntity != nullptr) && (waterEntity->getOpacity() < 1.0f))
+	if((waterEntity != nullptr) && waterEntity->isEdged())
 	{
 		_waterOpacityCaptor->bind();
 
@@ -265,10 +265,10 @@ void MasterRenderer::_captureWaterOpacity()
 
 		_waterOpacityCaptor->unbind();
 
-		_renderBus->setWaterOpacityMap(_waterOpacityCaptor->getTexture(0));
+		_renderBus->setWaterEdgeMap(_waterOpacityCaptor->getTexture(0));
 	}
 	else
 	{
-		_renderBus->setWaterOpacityMap(nullptr);
+		_renderBus->setWaterEdgeMap(nullptr);
 	}
 }

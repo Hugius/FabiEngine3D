@@ -125,9 +125,14 @@ void WaterEntity::setSize(float value)
 	_size = max(0.0f, value);
 }
 
-void WaterEntity::setOpacity(float value)
+void WaterEntity::setMaxDepth(float value)
 {
-	_opacity = max(0.0f, value);
+	_maxDepth = max(0.0f, value);
+}
+
+void WaterEntity::setEdged(bool value)
+{
+	_isEdged = value;
 }
 
 const float WaterEntity::getHeight() const
@@ -215,6 +220,11 @@ const float WaterEntity::getWaveHeight() const
 	return _waveHeight;
 }
 
+const float WaterEntity::getMaxDepth() const
+{
+	return _maxDepth;
+}
+
 const float WaterEntity::getSpecularShininess() const
 {
 	return _specularShininess;
@@ -230,9 +240,9 @@ const float WaterEntity::getSize() const
 	return _size;
 }
 
-const float WaterEntity::getOpacity() const
+const bool WaterEntity::isEdged() const
 {
-	return _opacity;
+	return _isEdged;
 }
 
 const bool WaterEntity::isSpecular() const

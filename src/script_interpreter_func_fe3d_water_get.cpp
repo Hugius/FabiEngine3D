@@ -76,6 +76,18 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:water_get_max_depth")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dWater())
+			{
+				const auto result = _fe3d->water_getMaxDepth(_fe3d->water_getSelectedId());
+
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:water_get_speed_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
@@ -184,18 +196,6 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_get_opacity")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_validateFe3dWater())
-			{
-				const auto result = _fe3d->water_getOpacity(_fe3d->water_getSelectedId());
-
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
-			}
-		}
-	}
 	else if(functionName == "fe3d:water_get_size")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
@@ -287,6 +287,18 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			if(_validateFe3dWater())
 			{
 				const auto result = _fe3d->water_isSpecular(_fe3d->water_getSelectedId());
+
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_is_edged")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dWater())
+			{
+				const auto result = _fe3d->water_isEdged(_fe3d->water_getSelectedId());
 
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}

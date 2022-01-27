@@ -19,6 +19,20 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:water_max_depth")
+	{
+		auto types = {SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater())
+			{
+				_fe3d->water_setMaxDepth(_fe3d->water_getSelectedId(), args[0].getDecimal());
+
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:water_set_size")
 	{
 		auto types = {SVT::DECIMAL};
@@ -103,15 +117,15 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_set_opacity")
+	else if(functionName == "fe3d:water_set_edged")
 	{
-		auto types = {SVT::DECIMAL};
+		auto types = {SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setOpacity(_fe3d->water_getSelectedId(), args[0].getDecimal());
+				_fe3d->water_setEdged(_fe3d->water_getSelectedId(), args[0].getBoolean());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

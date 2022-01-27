@@ -182,6 +182,11 @@ void EngineInterface::water_setSpecularIntensity(const string& id, float value)
 	_core->getWaterEntityManager()->getEntity(id)->setSpecularIntensity(value);
 }
 
+void EngineInterface::water_setMaxDepth(const string& id, float value)
+{
+	_core->getWaterEntityManager()->getEntity(id)->setMaxDepth(value);
+}
+
 void EngineInterface::water_setSpeed(const string& id, const fvec2& value)
 {
 	_core->getWaterEntityManager()->getEntity(id)->setSpeed(value);
@@ -192,9 +197,9 @@ void EngineInterface::water_setColor(const string& id, const fvec3& value)
 	_core->getWaterEntityManager()->getEntity(id)->setColor(value);
 }
 
-void EngineInterface::water_setOpacity(const string& id, float value)
+void EngineInterface::water_setEdged(const string& id, bool value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setOpacity(value);
+	_core->getWaterEntityManager()->getEntity(id)->setEdged(value);
 }
 
 const bool EngineInterface::water_isExisting(const string& id) const
@@ -299,9 +304,9 @@ const float EngineInterface::water_getSpecularIntensity(const string& id) const
 	return _core->getWaterEntityManager()->getEntity(id)->getSpecularIntensity();
 }
 
-const float EngineInterface::water_getOpacity(const string& id) const
+const bool EngineInterface::water_isEdged(const string& id) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getOpacity();
+	return _core->getWaterEntityManager()->getEntity(id)->isEdged();
 }
 
 const WaterQuality EngineInterface::water_getQuality(const string& id) const
@@ -327,6 +332,11 @@ const string& EngineInterface::water_getDisplacementMapPath(const string& id) co
 const float EngineInterface::water_getHeight(const string& id) const
 {
 	return _core->getWaterEntityManager()->getEntity(id)->getHeight();
+}
+
+const float EngineInterface::water_getMaxDepth(const string& id) const
+{
+	return _core->getWaterEntityManager()->getEntity(id)->getMaxDepth();
 }
 
 const fvec3& EngineInterface::water_getColor(const string& id) const

@@ -375,6 +375,7 @@ const vector<pair<string, int>> EngineInterface::misc_getRenderProfilingStatisti
 		pair<string, int>("shadowPreRender", 0),
 		pair<string, int>("reflectionPreRender", 0),
 		pair<string, int>("refractionPreRender", 0),
+		pair<string, int>("waterPreRender", 0),
 		pair<string, int>("3dEntityRender", 0),
 		pair<string, int>("postProcessing", 0),
 		pair<string, int>("2dEntityRender", 0),

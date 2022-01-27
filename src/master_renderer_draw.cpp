@@ -48,7 +48,6 @@ void MasterRenderer::renderApplication()
 
 	_timer->startDeltaPart("depthPreRender");
 	_captureWorldDepth();
-	_captureWaterOpacity();
 	_timer->stopDeltaPart();
 	_timer->startDeltaPart("shadowPreRender");
 	_captureShadows();
@@ -56,10 +55,14 @@ void MasterRenderer::renderApplication()
 	_timer->startDeltaPart("reflectionPreRender");
 	_captureCubeReflections();
 	_capturePlanarReflections();
-	_captureWaterReflections();
 	_timer->stopDeltaPart();
 	_timer->startDeltaPart("refractionPreRender");
+
+	_timer->stopDeltaPart();
+	_timer->startDeltaPart("waterPreRender");
+	_captureWaterReflections();
 	_captureWaterRefractions();
+	_captureWaterEdges();
 	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("3dEntityRender");

@@ -36,7 +36,7 @@ void main()
 	f_position = worldSpacePosition.xyz;
 	f_uv = (v_uv * u_textureRepeat);
 	f_normal = normalize(v_normal);
-	f_shadowPosition = u_shadowMatrix * worldSpacePosition;
+	f_shadowPosition = (u_shadowMatrix * worldSpacePosition);
 	f_tbnMatrix = calculateTbnMatrix();
 
 	gl_Position = clipSpacePosition;

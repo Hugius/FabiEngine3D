@@ -27,7 +27,6 @@ void Animation3dEditor::_updateCamera()
 		_fe3d->gfx_setShadowEyeOffset(fvec3(cameraLookat + fvec3(distance * 2.0f)));
 		_fe3d->gfx_setShadowCenterOffset(cameraLookat);
 		_fe3d->gfx_setShadowSize(distance * 4.0f);
-		_fe3d->gfx_setShadowReach(distance * 8.0f);
 	}
 
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())

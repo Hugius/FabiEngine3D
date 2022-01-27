@@ -194,7 +194,6 @@ void EngineInterface::gfx_disableShadows(bool mustResetProperties)
 		_core->getRenderBus()->setShadowEyePosition(fvec3(0.0f));
 		_core->getRenderBus()->setShadowCenterPosition(fvec3(0.0f));
 		_core->getRenderBus()->setShadowSize(0.0f);
-		_core->getRenderBus()->setShadowReach(0.0f);
 		_core->getRenderBus()->setShadowLightness(0.0f);
 		_core->getRenderBus()->setShadowInterval(0);
 		_core->getRenderBus()->setShadowsFollowingCamera(false);
@@ -426,11 +425,6 @@ void EngineInterface::gfx_setShadowCenterOffset(const fvec3& value)
 void EngineInterface::gfx_setShadowSize(float value)
 {
 	_core->getRenderBus()->setShadowSize(value);
-}
-
-void EngineInterface::gfx_setShadowReach(float value)
-{
-	_core->getRenderBus()->setShadowReach(value);
 }
 
 void EngineInterface::gfx_setShadowLightness(float value)
@@ -674,11 +668,6 @@ const string& EngineInterface::gfx_getLensFlareMapPath() const
 const float EngineInterface::gfx_getShadowSize() const
 {
 	return _core->getRenderBus()->getShadowSize();
-}
-
-const float EngineInterface::gfx_getShadowReach() const
-{
-	return _core->getRenderBus()->getShadowReach();
 }
 
 const float EngineInterface::gfx_getShadowLightness() const

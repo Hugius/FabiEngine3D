@@ -165,9 +165,9 @@ void MasterRenderer::_captureCubeReflections()
 	_camera->invertUpVector();
 	_camera->setAspectRatio(originalCameraAspectRatio);
 	_camera->setFOV(originalCameraFOV);
+	_camera->setPosition(originalCameraPosition);
 	_camera->setYaw(originalCameraYaw);
 	_camera->setPitch(originalCameraPitch);
-	_camera->setPosition(originalCameraPosition);
 	_camera->updateMatrices();
 
 	_renderBus->setReflectionsEnabled(true);

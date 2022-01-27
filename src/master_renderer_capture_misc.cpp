@@ -318,6 +318,21 @@ void MasterRenderer::_captureShadows()
 			_quad3dEntityShadowRenderer.unbind();
 		}
 
+		if(!_text3dEntityManager->getEntities().empty())
+		{
+			_quad3dEntityShadowRenderer.bind();
+
+			for(const auto& [key, textEntity] : _text3dEntityManager->getEntities())
+			{
+				for(const auto& characterEntity : textEntity->getCharacterEntities())
+				{
+					_quad3dEntityShadowRenderer.render(characterEntity);
+				}
+			}
+
+			_quad3dEntityShadowRenderer.unbind();
+		}
+
 		_shadowCaptor->unbind();
 
 		_renderBus->setShadowMap(_shadowCaptor->getTexture(0));

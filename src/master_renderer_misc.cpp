@@ -121,30 +121,30 @@ void MasterRenderer::inject(shared_ptr<ReflectionEntityManager> reflectionEntity
 
 void MasterRenderer::inject(shared_ptr<RenderBus> renderBus)
 {
-	_skyEntityColorRenderer.inject(renderBus);
-	_terrainEntityColorRenderer.inject(renderBus);
-	_terrainEntityDepthRenderer.inject(renderBus);
-	_waterEntityColorRenderer.inject(renderBus);
-	_waterEntityDepthRenderer.inject(renderBus);
-	_modelEntityColorRenderer.inject(renderBus);
-	_modelEntityDepthRenderer.inject(renderBus);
-	_modelEntityShadowRenderer.inject(renderBus);
-	_quad3dEntityColorRenderer.inject(renderBus);
-	_quad3dEntityDepthRenderer.inject(renderBus);
-	_quad3dEntityShadowRenderer.inject(renderBus);
-	_aabbEntityColorRenderer.inject(renderBus);
-	_quad2dEntityColorRenderer.inject(renderBus);
-	_antiAliasingRenderer.inject(renderBus);
-	_bloomRenderer.inject(renderBus);
-	_dofRenderer.inject(renderBus);
-	_lensFlareRenderer.inject(renderBus);
-	_motionBlurRenderer.inject(renderBus);
-	_bloomBlurRendererHighQuality.inject(renderBus);
-	_bloomBlurRendererLowQuality.inject(renderBus);
-	_dofBlurRenderer.inject(renderBus);
-	_motionBlurBlurRenderer.inject(renderBus);
-
 	_renderBus = renderBus;
+
+	_skyEntityColorRenderer.inject(_renderBus);
+	_terrainEntityColorRenderer.inject(_renderBus);
+	_terrainEntityDepthRenderer.inject(_renderBus);
+	_waterEntityColorRenderer.inject(_renderBus);
+	_waterEntityDepthRenderer.inject(_renderBus);
+	_modelEntityColorRenderer.inject(_renderBus);
+	_modelEntityDepthRenderer.inject(_renderBus);
+	_modelEntityShadowRenderer.inject(_renderBus);
+	_quad3dEntityColorRenderer.inject(_renderBus);
+	_quad3dEntityDepthRenderer.inject(_renderBus);
+	_quad3dEntityShadowRenderer.inject(_renderBus);
+	_aabbEntityColorRenderer.inject(_renderBus);
+	_quad2dEntityColorRenderer.inject(_renderBus);
+	_antiAliasingRenderer.inject(_renderBus);
+	_bloomRenderer.inject(_renderBus);
+	_dofRenderer.inject(_renderBus);
+	_lensFlareRenderer.inject(_renderBus);
+	_motionBlurRenderer.inject(_renderBus);
+	_bloomBlurRendererHighQuality.inject(_renderBus);
+	_bloomBlurRendererLowQuality.inject(_renderBus);
+	_dofBlurRenderer.inject(_renderBus);
+	_motionBlurBlurRenderer.inject(_renderBus);
 }
 
 void MasterRenderer::reloadBloomBlurQuality()

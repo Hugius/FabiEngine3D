@@ -240,14 +240,14 @@ void EngineCore::start()
 
 			while(renderLag >= Config::MS_PER_UPDATE)
 			{
+				_timer->increasePassedFrameCount();
+
 				_inputHandler->update();
 
 				update();
 
 				renderLag -= Config::MS_PER_UPDATE;
 				renderLag = max(renderLag, 0.0f);
-
-				_timer->increasePassedFrameCount();
 			}
 
 			_renderBus->resetTriangleCount();

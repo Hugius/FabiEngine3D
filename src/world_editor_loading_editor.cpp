@@ -470,7 +470,6 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d->gfx_setShadowEyeOffset(position);
 			_fe3d->gfx_setShadowCenterOffset(center);
 			_fe3d->gfx_setShadowSize(size);
-			_fe3d->gfx_setShadowReach(size * 2.0f);
 			_fe3d->gfx_setShadowLightness(lightness);
 			_fe3d->gfx_setShadowFollowingCamera(isFollowingCamera);
 			_fe3d->gfx_setShadowInterval(interval);

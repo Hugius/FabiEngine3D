@@ -165,11 +165,6 @@ void RenderBus::setShadowSize(float value)
 	_shadowSize = max(0.0f, value);
 }
 
-void RenderBus::setShadowReach(float value)
-{
-	_shadowReach = max(0.0f, value);
-}
-
 void RenderBus::setShadowLightness(float value)
 {
 	_shadowLightness = max(0.0f, value);
@@ -606,11 +601,6 @@ const float RenderBus::getPlanarReflectionHeight() const
 const float RenderBus::getShadowSize() const
 {
 	return _shadowSize;
-}
-
-const float RenderBus::getShadowReach() const
-{
-	return _shadowReach;
 }
 
 const float RenderBus::getShadowLightness() const

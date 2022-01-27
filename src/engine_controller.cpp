@@ -104,10 +104,7 @@ EngineController::EngineController()
 void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 {
 	_fe3d = fe3d;
-}
 
-void EngineController::initialize()
-{
 	_guiManager->inject(_fe3d);
 	_leftViewportController->inject(_fe3d);
 	_rightViewportController->inject(_fe3d);
@@ -128,7 +125,10 @@ void EngineController::initialize()
 	_scriptEditor->inject(_fe3d);
 	_scriptExecutor->inject(_fe3d);
 	_scriptInterpreter->inject(_fe3d);
+}
 
+void EngineController::initialize()
+{
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
 	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";

@@ -138,12 +138,12 @@ void MasterRenderer::_updateShadows()
 		{
 			if(_renderBus->isShadowsFollowingCamera())
 			{
-				auto& cameraPosition = _renderBus->getCameraPosition();
-				auto& eyeOffset = _renderBus->getShadowEyeOffset();
-				auto& centerOffset = _renderBus->getShadowCenterOffset();
+				const auto cameraPosition = _renderBus->getCameraPosition();
+				const auto eyeOffset = _renderBus->getShadowEyeOffset();
+				const auto centerOffset = _renderBus->getShadowCenterOffset();
 
-				_renderBus->setShadowEyePosition(fvec3((eyeOffset.x + cameraPosition.x), eyeOffset.y, (eyeOffset.z + cameraPosition.z)));
-				_renderBus->setShadowCenterPosition(fvec3((centerOffset.x + cameraPosition.x), centerOffset.y, (centerOffset.z + cameraPosition.z)));
+				_renderBus->setShadowEyePosition(fvec3((cameraPosition.x + eyeOffset.x), (cameraPosition.y + eyeOffset.y), (cameraPosition.z + eyeOffset.z)));
+				_renderBus->setShadowCenterPosition(fvec3((cameraPosition.x + centerOffset.x), (cameraPosition.y + centerOffset.y), (cameraPosition.z + centerOffset.z)));
 			}
 			else
 			{
@@ -156,12 +156,13 @@ void MasterRenderer::_updateShadows()
 			const auto bottomY = -(_renderBus->getShadowSize() / 2.0f);
 			const auto topY = (_renderBus->getShadowSize() / 2.0f);
 			const auto nearZ = 0.01f;
-			const auto farZ = _renderBus->getShadowReach();
+			const auto farZ = Math::calculateDistance(fvec3(_renderBus->getShadowSize()), fvec3(0.0f));
 
 			const auto viewMatrix = Math::createViewMatrix(_renderBus->getShadowEyePosition(), _renderBus->getShadowCenterPosition(), fvec3(0.0f, 1.0f, 0.0f));
 			const auto projectionMatrix = Math::createOrthographicProjectionMatrix(leftX, rightX, bottomY, topY, nearZ, farZ);
+			const auto shadowMatrix = (projectionMatrix * viewMatrix);
 
-			_renderBus->setShadowMatrix(projectionMatrix * viewMatrix);
+			_renderBus->setShadowMatrix(shadowMatrix);
 		}
 	}
 }

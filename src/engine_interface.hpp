@@ -772,7 +772,6 @@ public:
 	void gfx_setShadowEyeOffset(const fvec3& value);
 	void gfx_setShadowCenterOffset(const fvec3& value);
 	void gfx_setShadowSize(float value);
-	void gfx_setShadowReach(float value);
 	void gfx_setShadowLightness(float value);
 	void gfx_setShadowQuality(unsigned int value);
 	void gfx_setShadowInterval(unsigned int value);
@@ -808,7 +807,6 @@ public:
 	const float gfx_getFogThickness() const;
 	const float gfx_getPlanarReflectionHeight() const;
 	const float gfx_getShadowSize() const;
-	const float gfx_getShadowReach() const;
 	const float gfx_getShadowLightness() const;
 	const float gfx_getBloomIntensity() const;
 	const float gfx_getSkyExposureIntensity() const;

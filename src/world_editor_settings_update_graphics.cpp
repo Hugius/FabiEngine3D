@@ -72,7 +72,6 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		if(_gui->getOverlay()->checkValueForm("size", size))
 		{
 			_fe3d->gfx_setShadowSize(size);
-			_fe3d->gfx_setShadowReach(size * 2.0f);
 		}
 		if(_gui->getOverlay()->checkValueForm("eyeX", eye.x))
 		{

@@ -45,6 +45,7 @@ uniform float u_directionalLightingIntensity;
 uniform float u_specularShininess;
 uniform float u_specularIntensity;
 uniform float u_opacity;
+uniform float u_minTextureOpacity;
 uniform float u_shadowSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
@@ -151,7 +152,7 @@ vec3 calculateDiffuseMapping()
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
-		if (diffuseMapColor.a < 1.0f)
+		if (diffuseMapColor.a < u_minTextureOpacity)
 		{
 			discard;
 		}
@@ -170,7 +171,7 @@ vec3 calculateEmissionMapping()
 	{
 		vec4 emissionMapColor = texture(u_emissionMap, f_uv);
 
-		if (emissionMapColor.a < 1.0f)
+		if (emissionMapColor.a < u_minTextureOpacity)
 		{
 			return vec3(0.0f);
 		}
@@ -189,7 +190,7 @@ vec3 calculateSpecularMapping()
     {
 		vec4 specularMapColor = texture(u_specularMap, f_uv);
 
-		if (specularMapColor.a < 1.0f)
+		if (specularMapColor.a < u_minTextureOpacity)
 		{
 			return vec3(0.0f);
 		}
@@ -208,7 +209,7 @@ vec3 calculateReflectionMapping()
     {
 		vec4 reflectionMapColor = texture(u_reflectionMap, f_uv);
 
-		if (reflectionMapColor.a < 1.0f)
+		if (reflectionMapColor.a < u_minTextureOpacity)
 		{
 			return vec3(0.0f);
 		}

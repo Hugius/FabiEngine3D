@@ -157,7 +157,8 @@ public:
 	void water_deleteAll();
 	void water_setVisible(const string& id, bool value);
 	void water_select(const string& id);
-	void water_setSpeed(const string& id, const fvec2& value);
+	void water_setRippleSpeed(const string& id, const fvec2& value);
+	void water_setWaveSpeed(const string& id, const fvec2& value);
 	void water_setHeight(const string& id, float value);
 	void water_setSize(const string& id, float value);
 	void water_setSpecular(const string& id, bool value);
@@ -184,7 +185,8 @@ public:
 	const string water_getSelectedId() const;
 	const fvec3& water_getWireframeColor(const string& id) const;
 	const fvec3& water_getColor(const string& id) const;
-	const fvec2& water_getSpeed(const string& id) const;
+	const fvec2& water_getRippleSpeed(const string& id) const;
+	const fvec2& water_getWaveSpeed(const string& id) const;
 	const float water_getHeight(const string& id) const;
 	const float water_getMaxDepth(const string& id) const;
 	const float water_getSize(const string& id) const;

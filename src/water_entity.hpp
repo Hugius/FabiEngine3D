@@ -17,7 +17,8 @@ public:
 	void setLowQualityMesh(shared_ptr<VertexBuffer> value);
 	void setHighQualityMesh(shared_ptr<VertexBuffer> value);
 	void setQuality(WaterQuality value);
-	void setSpeed(const fvec2& value);
+	void setRippleSpeed(const fvec2& value);
+	void setWaveSpeed(const fvec2& value);
 	void setRippleOffset(const fvec2& value);
 	void setWaveOffset(const fvec2& value);
 	void setColor(const fvec3& value);
@@ -48,9 +49,10 @@ public:
 	const fvec3& getColor() const;
 	const fvec3& getWireframeColor() const;
 
-	const fvec2& getSpeed() const;
 	const fvec2& getRippleOffset() const;
+	const fvec2& getRippleSpeed() const;
 	const fvec2& getWaveOffset() const;
+	const fvec2& getWaveSpeed() const;
 
 	const float getHeight() const;
 	const float getTextureRepeat() const;
@@ -81,8 +83,9 @@ private:
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
 
-	fvec2 _speed = fvec2(0.0f);
 	fvec2 _rippleOffset = fvec2(0.0f);
+	fvec2 _rippleSpeed = fvec2(0.0f);
+	fvec2 _waveSpeed = fvec2(0.0f);
 	fvec2 _waveOffset = fvec2(0.0f);
 
 	float _height = 0.0f;

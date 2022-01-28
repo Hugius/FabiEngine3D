@@ -160,7 +160,8 @@ const bool WorldEditor::_copyTemplateWater(const string& newId, const string& te
 	_fe3d->water_setEdged(newId, _fe3d->water_isEdged(templateId));
 	_fe3d->water_setColor(newId, _fe3d->water_getColor(templateId));
 	_fe3d->water_setTextureRepeat(newId, _fe3d->water_getTextureRepeat(templateId));
-	_fe3d->water_setSpeed(newId, _fe3d->water_getSpeed(templateId));
+	_fe3d->water_setRippleSpeed(newId, _fe3d->water_getRippleSpeed(templateId));
+	_fe3d->water_setWaveSpeed(newId, _fe3d->water_getWaveSpeed(templateId));
 	_fe3d->water_setMaxDepth(newId, _fe3d->water_getMaxDepth(templateId));
 
 	if(_fe3d->water_hasDudvMap(templateId))

@@ -187,9 +187,14 @@ void EngineInterface::water_setMaxDepth(const string& id, float value)
 	_core->getWaterEntityManager()->getEntity(id)->setMaxDepth(value);
 }
 
-void EngineInterface::water_setSpeed(const string& id, const fvec2& value)
+void EngineInterface::water_setRippleSpeed(const string& id, const fvec2& value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setSpeed(value);
+	_core->getWaterEntityManager()->getEntity(id)->setRippleSpeed(value);
+}
+
+void EngineInterface::water_setWaveSpeed(const string& id, const fvec2& value)
+{
+	_core->getWaterEntityManager()->getEntity(id)->setWaveSpeed(value);
 }
 
 void EngineInterface::water_setColor(const string& id, const fvec3& value)
@@ -284,9 +289,14 @@ const float EngineInterface::water_getTextureRepeat(const string& id) const
 	return _core->getWaterEntityManager()->getEntity(id)->getTextureRepeat();
 }
 
-const fvec2& EngineInterface::water_getSpeed(const string& id) const
+const fvec2& EngineInterface::water_getRippleSpeed(const string& id) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getSpeed();
+	return _core->getWaterEntityManager()->getEntity(id)->getRippleSpeed();
+}
+
+const fvec2& EngineInterface::water_getWaveSpeed(const string& id) const
+{
+	return _core->getWaterEntityManager()->getEntity(id)->getWaveSpeed();
 }
 
 const float EngineInterface::water_getWaveHeight(const string& id) const

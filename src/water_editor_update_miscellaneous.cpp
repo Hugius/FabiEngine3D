@@ -7,7 +7,8 @@ void WaterEditor::_updateMiscellaneousMenu()
 	if(screen->getId() == "waterEditorMenuMiscellaneous")
 	{
 		auto size = _fe3d->water_getSize(_currentWaterId);
-		auto speed = _fe3d->water_getSpeed(_currentWaterId);
+		auto rippleSpeed = _fe3d->water_getRippleSpeed(_currentWaterId);
+		auto waveSpeed = _fe3d->water_getWaveSpeed(_currentWaterId);
 		auto waveHeight = _fe3d->water_getWaveHeight(_currentWaterId);
 		auto maxDepth = _fe3d->water_getMaxDepth(_currentWaterId);
 		auto quality = _fe3d->water_getQuality(_currentWaterId);
@@ -29,10 +30,15 @@ void WaterEditor::_updateMiscellaneousMenu()
 		{
 			_gui->getOverlay()->createValueForm("maxDepth", "Max Depth", maxDepth, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rippleSpeed")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("speedX", "X", speed.x * 100000.0f, fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("speedZ", "Z", speed.y * 100000.0f, fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("rippleSpeedX", "X", (rippleSpeed.x * 100000.0f), fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("rippleSpeedY", "Y", (rippleSpeed.y * 100000.0f), fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("waveSpeed")->isHovered())
+		{
+			_gui->getOverlay()->createValueForm("waveSpeedX", "X", (waveSpeed.x * 100000.0f), fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("waveSpeedY", "Y", (waveSpeed.y * 100000.0f), fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
@@ -72,15 +78,25 @@ void WaterEditor::_updateMiscellaneousMenu()
 		{
 			_fe3d->water_setSize(_currentWaterId, size);
 		}
-		if(_gui->getOverlay()->checkValueForm("speedX", speed.x))
+		if(_gui->getOverlay()->checkValueForm("rippleSpeedX", rippleSpeed.x))
 		{
-			speed.x /= 100000.0f;
-			_fe3d->water_setSpeed(_currentWaterId, speed);
+			rippleSpeed.x /= 100000.0f;
+			_fe3d->water_setRippleSpeed(_currentWaterId, rippleSpeed);
 		}
-		if(_gui->getOverlay()->checkValueForm("speedZ", speed.y))
+		if(_gui->getOverlay()->checkValueForm("rippleSpeedY", rippleSpeed.y))
 		{
-			speed.y /= 100000.0f;
-			_fe3d->water_setSpeed(_currentWaterId, speed);
+			rippleSpeed.y /= 100000.0f;
+			_fe3d->water_setRippleSpeed(_currentWaterId, rippleSpeed);
+		}
+		if(_gui->getOverlay()->checkValueForm("waveSpeedX", waveSpeed.x))
+		{
+			waveSpeed.x /= 100000.0f;
+			_fe3d->water_setWaveSpeed(_currentWaterId, waveSpeed);
+		}
+		if(_gui->getOverlay()->checkValueForm("waveSpeedY", waveSpeed.y))
+		{
+			waveSpeed.y /= 100000.0f;
+			_fe3d->water_setWaveSpeed(_currentWaterId, waveSpeed);
 		}
 		if(_gui->getOverlay()->checkValueForm("waveHeight", waveHeight))
 		{
@@ -93,7 +109,8 @@ void WaterEditor::_updateMiscellaneousMenu()
 		}
 
 		screen->getButton("waveHeight")->setHoverable(_fe3d->water_hasDisplacementMap(_currentWaterId));
-		screen->getButton("speed")->setHoverable(_fe3d->water_hasDudvMap(_currentWaterId) || _fe3d->water_hasDisplacementMap(_currentWaterId));
+		screen->getButton("rippleSpeed")->setHoverable(_fe3d->water_hasDudvMap(_currentWaterId));
+		screen->getButton("waveSpeed")->setHoverable(_fe3d->water_hasDisplacementMap(_currentWaterId));
 
 		screen->getButton("quality")->changeTextContent("Quality: " + to_string(static_cast<int>(quality) + 1));
 	}

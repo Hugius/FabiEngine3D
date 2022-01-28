@@ -5,7 +5,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:water_set_speed")
+	if(functionName == "fe3d:water_set_ripple_speed")
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
@@ -13,7 +13,21 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setSpeed(_fe3d->water_getSelectedId(), fvec2((args[0].getDecimal() / 100000.0f), (args[1].getDecimal() / 100000.0f)));
+				_fe3d->water_setRippleSpeed(_fe3d->water_getSelectedId(), fvec2((args[0].getDecimal() / 100000.0f), (args[1].getDecimal() / 100000.0f)));
+
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_wave_speed")
+	{
+		auto types = {SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater())
+			{
+				_fe3d->water_setWaveSpeed(_fe3d->water_getSelectedId(), fvec2((args[0].getDecimal() / 100000.0f), (args[1].getDecimal() / 100000.0f)));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

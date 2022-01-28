@@ -29,7 +29,8 @@ const bool WaterEditor::saveToFile() const
 		auto displacementMapPath = _fe3d->water_getDisplacementMapPath(waterId);
 		auto color = _fe3d->water_getColor(waterId);
 		auto height = _fe3d->water_getHeight(waterId);
-		auto speed = _fe3d->water_getSpeed(waterId);
+		auto rippleSpeed = _fe3d->water_getRippleSpeed(waterId);
+		auto waveSpeed = _fe3d->water_getWaveSpeed(waterId);
 		auto size = _fe3d->water_getSize(waterId);
 		auto textureRepeat = _fe3d->water_getTextureRepeat(waterId);
 		auto waveHeight = _fe3d->water_getWaveHeight(waterId);
@@ -70,8 +71,10 @@ const bool WaterEditor::saveToFile() const
 			textureRepeat << " " <<
 			waveHeight << " " <<
 			quality << " " <<
-			speed.x << " " <<
-			speed.y << " " <<
+			rippleSpeed.x << " " <<
+			rippleSpeed.y << " " <<
+			waveSpeed.x << " " <<
+			waveSpeed.y << " " <<
 			isEdged << " " <<
 			specularShininess << " " <<
 			specularIntensity << " " <<

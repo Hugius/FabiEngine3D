@@ -28,7 +28,10 @@
 - **Wireframe Color**: the RGB color multiplier of the wireframe
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
-- **Speed**: the speed of  the rippling/waving movement
+- **Ripple Speed**: the speed of the rippling movement
+  - Type: `decimal2`
+  - Constraints: none
+- **Wave Speed**: the speed of the waving movement
   - Type: `decimal2`
   - Constraints: none
 - **Height**: the Y position of the mesh

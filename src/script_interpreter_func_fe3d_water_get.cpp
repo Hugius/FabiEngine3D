@@ -88,25 +88,49 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_get_speed_x")
+	else if(functionName == "fe3d:water_get_ripple_speed_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
-				const auto result = _fe3d->water_getSpeed(_fe3d->water_getSelectedId()).x;
+				const auto result = _fe3d->water_getRippleSpeed(_fe3d->water_getSelectedId()).x;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_get_speed_z")
+	else if(functionName == "fe3d:water_get_ripple_speed_y")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
-				const auto result = _fe3d->water_getSpeed(_fe3d->water_getSelectedId()).y;
+				const auto result = _fe3d->water_getRippleSpeed(_fe3d->water_getSelectedId()).y;
+
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_get_wave_speed_x")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dWater())
+			{
+				const auto result = _fe3d->water_getWaveSpeed(_fe3d->water_getSelectedId()).x;
+
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_get_wave_speed_y")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dWater())
+			{
+				const auto result = _fe3d->water_getWaveSpeed(_fe3d->water_getSelectedId()).y;
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}

@@ -70,9 +70,14 @@ void WaterEntity::setQuality(WaterQuality quality)
 	_quality = quality;
 }
 
-void WaterEntity::setSpeed(const fvec2& value)
+void WaterEntity::setRippleSpeed(const fvec2& value)
 {
-	_speed = value;
+	_rippleSpeed = value;
+}
+
+void WaterEntity::setWaveSpeed(const fvec2& value)
+{
+	_waveSpeed = value;
 }
 
 void WaterEntity::setWaveOffset(const fvec2& value)
@@ -200,14 +205,19 @@ const WaterQuality WaterEntity::getQuality() const
 	return _quality;
 }
 
-const fvec2& WaterEntity::getSpeed() const
+const fvec2& WaterEntity::getRippleSpeed() const
 {
-	return _speed;
+	return _rippleSpeed;
 }
 
 const fvec2& WaterEntity::getWaveOffset() const
 {
 	return _waveOffset;
+}
+
+const fvec2& WaterEntity::getWaveSpeed() const
+{
+	return _waveSpeed;
 }
 
 const fvec3& WaterEntity::getWireframeColor() const

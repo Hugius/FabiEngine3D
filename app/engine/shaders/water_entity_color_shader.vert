@@ -33,8 +33,7 @@ void main()
 
 	if (u_hasDisplacementMap)
 	{
-		vec2 texelSize = (vec2(1.0f) / textureSize(u_displacementMap, 0));
-		float heightPercentage = texture(u_displacementMap, ((v_uv * u_textureRepeat) + (u_waveOffset * texelSize))).r;
+		float heightPercentage = texture(u_displacementMap, ((v_uv * u_textureRepeat) + (u_waveOffset))).r;
 		newPosition.y += (heightPercentage * u_waveHeight);
 	}
 

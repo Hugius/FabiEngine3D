@@ -116,7 +116,8 @@ const bool WaterEditor::loadFromFile()
 		string normalMapPath;
 		string displacementMapPath;
 		fvec3 color;
-		fvec2 speed;
+		fvec2 rippleSpeed;
+		fvec2 waveSpeed;
 		float height;
 		float size;
 		float textureRepeat;
@@ -148,8 +149,10 @@ const bool WaterEditor::loadFromFile()
 			>> textureRepeat
 			>> waveHeight
 			>> quality
-			>> speed.x
-			>> speed.y
+			>> rippleSpeed.x
+			>> rippleSpeed.y
+			>> waveSpeed.x
+			>> waveSpeed.y
 			>> isEdged
 			>> specularShininess
 			>> specularIntensity
@@ -181,7 +184,8 @@ const bool WaterEditor::loadFromFile()
 			_fe3d->water_setEdged(waterId, isEdged);
 			_fe3d->water_setColor(waterId, color);
 			_fe3d->water_setTextureRepeat(waterId, textureRepeat);
-			_fe3d->water_setSpeed(waterId, speed);
+			_fe3d->water_setRippleSpeed(waterId, rippleSpeed);
+			_fe3d->water_setWaveSpeed(waterId, waveSpeed);
 			_fe3d->water_setMaxDepth(waterId, maxDepth);
 
 			if(!dudvMapPath.empty())

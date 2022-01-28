@@ -919,6 +919,7 @@ public:
 	const float misc_getFPS() const;
 	const float misc_stopMillisecondTimer() const;
 	const unsigned int misc_getTriangleCount() const;
+	const unsigned int misc_getPassedTickCount() const;
 	const bool misc_isCursorVisible() const;
 	const bool misc_isCursorInsideViewport() const;
 	const bool misc_isCursorInsideWindow() const;

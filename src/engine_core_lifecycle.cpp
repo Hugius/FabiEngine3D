@@ -212,11 +212,11 @@ void EngineCore::start()
 				_inputHandler->update();
 			}
 
+			_timer->increasePassedFrameCount();
+
 			_engineController->update();
 			_networkingServer->update();
 			_networkingClient->update();
-
-			_timer->increasePassedFrameCount();
 
 			if(!Config::getInst().isApplicationExported())
 			{

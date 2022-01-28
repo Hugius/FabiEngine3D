@@ -33,7 +33,7 @@ private:
 
 	map<string, float> _deltaParts;
 
-	unsigned int _passedTickCount = 0;
+	unsigned int _passedTickCount = -1;
 
 	bool _isStarted = false;
 

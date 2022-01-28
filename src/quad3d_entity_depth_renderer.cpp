@@ -45,7 +45,6 @@ void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity)
 		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 		_shader->uploadUniform("u_uvOffset", entity->getUvOffset());
-		_shader->uploadUniform("u_minTextureOpacity", MIN_TEXTURE_OPACITY);
 
 		if(entity->getDiffuseMap() != nullptr)
 		{

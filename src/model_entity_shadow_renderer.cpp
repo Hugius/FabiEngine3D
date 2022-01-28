@@ -40,7 +40,6 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
 		_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
 		_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
-		_shader->uploadUniform("u_minTextureOpacity", MIN_TEXTURE_OPACITY);
 
 		for(const auto& partId : entity->getPartIds())
 		{

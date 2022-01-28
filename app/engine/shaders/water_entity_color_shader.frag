@@ -152,7 +152,7 @@ vec4 calculateWaterColor()
 		finalColor = u_color;
 	}
 
-	if (u_isSpecular)
+	if (u_isSpecular && (u_cameraPosition.y > f_position.y))
 	{
 		finalColor += calculateDirectionalLighting(normal);
 		finalColor += calculateLights(normal);

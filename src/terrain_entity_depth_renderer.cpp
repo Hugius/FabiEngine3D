@@ -1,6 +1,9 @@
 #include "terrain_entity_depth_renderer.hpp"
 #include "render_bus.hpp"
 
+using std::min;
+using std::max;
+
 void TerrainEntityDepthRenderer::bind()
 {
 	_shader->bind();

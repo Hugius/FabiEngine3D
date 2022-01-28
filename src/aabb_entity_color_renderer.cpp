@@ -1,5 +1,8 @@
 #include "aabb_entity_color_renderer.hpp"
 
+using std::min;
+using std::max;
+
 void AabbEntityColorRenderer::bind()
 {
 	_shader->bind();

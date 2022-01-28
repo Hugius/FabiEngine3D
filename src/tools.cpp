@@ -26,7 +26,6 @@ const vector<string> Tools::getFilesFromDirectory(const string& path)
 	if(!isDirectoryExisting(path))
 	{
 		Logger::throwError("Tools::getFilesFromDirectory");
-		return {};
 	}
 
 	vector<string> fileNames;
@@ -44,7 +43,6 @@ const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
 	if(!isDirectoryExisting(path))
 	{
 		Logger::throwError("Tools::getDirectoriesFromDirectory");
-		return {};
 	}
 
 	vector<string> directoryNames;
@@ -181,7 +179,6 @@ void Tools::copyDirectory(const string& fromPath, const string& toPath)
 	if(!isDirectoryExisting(fromPath))
 	{
 		Logger::throwError("Tools::copyDirectory");
-		return;
 	}
 
 	using namespace std;
@@ -193,7 +190,6 @@ void Tools::copyFile(const string& fromPath, const string& toPath)
 	if(!isFileExisting(fromPath))
 	{
 		Logger::throwError("Tools::copyFile");
-		return;
 	}
 
 	using namespace std;
@@ -205,7 +201,6 @@ void Tools::renameDirectory(const string& oldPath, const string& newPath)
 	if(!isDirectoryExisting(oldPath))
 	{
 		Logger::throwError("Tools::renameDirectory");
-		return;
 	}
 
 	rename(oldPath, newPath);
@@ -216,7 +211,6 @@ void Tools::renameFile(const string& oldPath, const string& newPath)
 	if(!isFileExisting(oldPath))
 	{
 		Logger::throwError("Tools::renameFile");
-		return;
 	}
 
 	rename(oldPath, newPath);
@@ -227,7 +221,6 @@ void Tools::deleteDirectory(const string& path)
 	if(!isDirectoryExisting(path))
 	{
 		Logger::throwError("Tools::deleteDirectory");
-		return;
 	}
 
 	remove_all(path);
@@ -238,7 +231,6 @@ void Tools::deleteFile(const string& path)
 	if(!isFileExisting(path))
 	{
 		Logger::throwError("Tools::deleteFile");
-		return;
 	}
 
 	remove(path);

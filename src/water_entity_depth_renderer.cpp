@@ -1,5 +1,8 @@
 #include "water_entity_depth_renderer.hpp"
 
+using std::min;
+using std::max;
+
 void WaterEntityDepthRenderer::bind()
 {
 	_shader->bind();

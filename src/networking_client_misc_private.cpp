@@ -142,7 +142,6 @@ void NetworkingClient::_setupTcp()
 	if(tcpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkingClient::_setupTCP::1 ---> ", tcpInfoStatusCode);
-		return;
 	}
 
 	_tcpSocket = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
@@ -173,7 +172,6 @@ void NetworkingClient::_setupUdp()
 	if(udpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkingClient::_setupUDP::1 ---> ", udpInfoStatusCode);
-		return;
 	}
 
 	_udpSocket = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);

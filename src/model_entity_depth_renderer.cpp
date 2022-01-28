@@ -1,5 +1,8 @@
 #include "model_entity_depth_renderer.hpp"
 
+using std::min;
+using std::max;
+
 void ModelEntityDepthRenderer::bind()
 {
 	_shader->bind();
@@ -39,8 +42,8 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity)
 
 	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
 	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-	_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
-	_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
+	_shader->uploadUniform("u_minY", max(_renderBus->getMinPosition().y, entity->getMinHeight()));
+	_shader->uploadUniform("u_maxY", min(_renderBus->getMaxPosition().y, entity->getMaxHeight()));
 	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
 	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
 	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));

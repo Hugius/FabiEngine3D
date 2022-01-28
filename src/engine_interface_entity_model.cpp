@@ -379,6 +379,11 @@ void EngineInterface::model_setOpacity(const string& id, const string& partId, f
 	_core->getModelEntityManager()->getEntity(id)->setOpacity(partId, value);
 }
 
+void EngineInterface::model_setMinTextureAlpha(const string& id, const string& partId, float value)
+{
+	_core->getModelEntityManager()->getEntity(id)->setMinTextureAlpha(partId, value);
+}
+
 void EngineInterface::model_setShadowed(const string& id, bool value)
 {
 	_core->getModelEntityManager()->getEntity(id)->setShadowed(value);
@@ -615,6 +620,11 @@ const float EngineInterface::model_getTextureRepeat(const string& id, const stri
 const float EngineInterface::model_getEmissionIntensity(const string& id, const string& partId) const
 {
 	return _core->getModelEntityManager()->getEntity(id)->getEmissionIntensity(partId);
+}
+
+const float EngineInterface::model_getMinTextureAlpha(const string& id, const string& partId) const
+{
+	return _core->getModelEntityManager()->getEntity(id)->getMinTextureAlpha(partId);
 }
 
 const string& EngineInterface::model_getMeshPath(const string& id) const

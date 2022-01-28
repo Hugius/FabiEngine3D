@@ -79,6 +79,7 @@ const bool ModelEditor::saveToFile() const
 			auto isBright = _fe3d->model_isBright(modelId, partId);
 			auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelId, partId);
 			auto opacity = _fe3d->model_getOpacity(modelId, partId);
+			auto minTextureAlpha = _fe3d->model_getMinTextureAlpha(modelId, partId);
 
 			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
 			emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
@@ -120,7 +121,8 @@ const bool ModelEditor::saveToFile() const
 				isFaceCulled << " " <<
 				isBright << " " <<
 				emissionIntensity << " " <<
-				opacity;
+				opacity << " " <<
+				minTextureAlpha;
 
 			if(i < (partIds.size() - 1))
 			{

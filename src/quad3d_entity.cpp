@@ -280,6 +280,11 @@ void Quad3dEntity::setFrozen(bool value)
 	_isFrozen = value;
 }
 
+void Quad3dEntity::setMinTextureAlpha(float value)
+{
+	_minTextureAlpha = value;
+}
+
 const shared_ptr<VertexBuffer> Quad3dEntity::getMesh() const
 {
 	return _mesh;
@@ -373,6 +378,11 @@ const float Quad3dEntity::getTextureRepeat() const
 const float Quad3dEntity::getEmissionIntensity() const
 {
 	return _emissionIntensity;
+}
+
+const float Quad3dEntity::getMinTextureAlpha() const
+{
+	return _minTextureAlpha;
 }
 
 const bool Quad3dEntity::isFacingCameraX() const

@@ -41,12 +41,12 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
 		_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
 		_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));
-		_shader->uploadUniform("u_minTextureOpacity", MIN_TEXTURE_OPACITY);
 
 		for(const auto& partId : entity->getPartIds())
 		{
 			_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partId));
 			_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
+			_shader->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha(partId));
 
 			if(entity->isFaceCulled(partId))
 			{

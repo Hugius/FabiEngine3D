@@ -114,6 +114,9 @@
 - **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
+- **Min Texture Alpha**: the minimum texture alpha channel intensity to be visible
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
 - **Emission Intensity**: the intensity of the emission map
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`

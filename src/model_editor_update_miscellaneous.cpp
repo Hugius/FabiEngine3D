@@ -12,6 +12,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 		auto size = (isNoPartSelected ? _fe3d->model_getBaseSize(_currentModelId) : fvec3(0.0f));
 		auto opacity = (isPartSelected ? _fe3d->model_getOpacity(_currentModelId, _currentPartId) : 0.0f);
+		auto minTextureAlpha = (isPartSelected ? _fe3d->model_getMinTextureAlpha(_currentModelId, _currentPartId) : 0.0f);
 		auto isFaceCulled = (isPartSelected ? _fe3d->model_isFaceCulled(_currentModelId, _currentPartId) : false);
 		auto levelOfDetailEntityId = (isNoPartSelected ? _fe3d->model_getLevelOfDetailEntityId(_currentModelId) : "");
 		auto levelOfDetailDistance = (isNoPartSelected ? _fe3d->model_getLevelOfDetailDistance(_currentModelId) : 0.0f);
@@ -38,6 +39,10 @@ void ModelEditor::_updateMiscellaneousMenu()
 			{
 				_gui->getOverlay()->createValueForm("opacity", "Opacity", (_originalPartOpacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			}
+		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
+		{
+			_gui->getOverlay()->createValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
@@ -110,6 +115,11 @@ void ModelEditor::_updateMiscellaneousMenu()
 				_originalPartOpacity = opacity;
 			}
 		}
+		if(_gui->getOverlay()->checkValueForm("minTextureAlpha", minTextureAlpha))
+		{
+			minTextureAlpha /= 100.0f;
+			_fe3d->model_setMinTextureAlpha(_currentModelId, _currentPartId, minTextureAlpha);
+		}
 		if(_gui->getOverlay()->checkValueForm("levelOfDetailEntityId", levelOfDetailEntityId, {}))
 		{
 			if(levelOfDetailEntityId == "@")
@@ -132,6 +142,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 		screen->getButton("size")->setHoverable(isNoPartSelected);
 		screen->getButton("opacity")->setHoverable(isPartSelected);
+		screen->getButton("minTextureAlpha")->setHoverable(isPartSelected);
 		screen->getButton("isFaceCulled")->setHoverable(isPartSelected);
 		screen->getButton("levelOfDetailEntityId")->setHoverable(isNoPartSelected);
 		screen->getButton("levelOfDetailDistance")->setHoverable(isNoPartSelected);

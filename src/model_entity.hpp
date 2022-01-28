@@ -72,6 +72,7 @@ public:
 	void setWireframed(const string& partId, bool value);
 	void setFaceCulled(const string& partId, bool value);
 	void setRotationOrder(DirectionOrder value);
+	void setMinTextureAlpha(const string& partId, float value);
 
 	const vector<string> getPartIds() const;
 	const string& getMeshPath() const;
@@ -109,6 +110,7 @@ public:
 	const float getOpacity(const string& partId) const;
 	const float getTextureRepeat(const string& partId) const;
 	const float getEmissionIntensity(const string& partId) const;
+	const float getMinTextureAlpha(const string& partId) const;
 
 	const bool isFrozen() const;
 	const bool isDepthMapIncluded() const;
@@ -151,6 +153,7 @@ private:
 	fvec3 _baseSizeTarget = fvec3(1.0f);
 	fvec3 _levelOfDetailSize = fvec3(1.0f);
 
+	float _minTextureAlpha = 0.0f;
 	float _basePositionTargetSpeed = 0.0f;
 	float _baseRotationTargetSpeed = 0.0f;
 	float _baseSizeTargetSpeed = 0.0f;

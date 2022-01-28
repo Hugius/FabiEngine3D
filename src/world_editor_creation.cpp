@@ -243,6 +243,8 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 		_fe3d->model_setColor(newId, partId, _fe3d->model_getColor(templateId, partId));
 		_fe3d->model_setTextureRepeat(newId, partId, _fe3d->model_getTextureRepeat(templateId, partId));
 		_fe3d->model_setFaceCulled(newId, partId, _fe3d->model_isFaceCulled(templateId, partId));
+		_fe3d->model_setMinTextureAlpha(newId, partId, _fe3d->model_getMinTextureAlpha(templateId, partId));
+		_fe3d->model_setOpacity(newId, partId, _fe3d->model_getOpacity(templateId, partId));
 	}
 
 	for(const auto& templateAabbId : _fe3d->aabb_getChildIds(templateId, AabbParentEntityType::MODEL))

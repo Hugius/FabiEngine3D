@@ -19,7 +19,7 @@
   - Constraints: at least `0`
 - **Play Count**: the amount of (remaining) times the animation must play
   - Type: `integer`
-  - Constraints: `-1` or at least `0`
+  - Constraints: at least `0` or `-1`
 - **Frame Index**: the index of the current animation frame
   - Type: `integer`
   - Constraints: at least `0`

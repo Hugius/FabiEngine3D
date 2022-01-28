@@ -137,6 +137,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				float lightness;
 				float emissionIntensity;
 				float opacity;
+				float minTextureAlpha;
 				unsigned int reflectionType;
 				bool isSpecular;
 				bool isReflective;
@@ -163,7 +164,8 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 					isFaceCulled >>
 					isBright >>
 					emissionIntensity >>
-					opacity;
+					opacity >>
+					minTextureAlpha;
 
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -333,6 +335,7 @@ const bool ModelEditor::loadFromFile()
 					float lightness;
 					float emissionIntensity;
 					float opacity;
+					float minTextureAlpha;
 					unsigned int reflectionType;
 					bool isSpecular;
 					bool isReflective;
@@ -359,7 +362,8 @@ const bool ModelEditor::loadFromFile()
 						isFaceCulled >>
 						isBright >>
 						emissionIntensity >>
-						opacity;
+						opacity >>
+						minTextureAlpha;
 
 					partId = (partId == "?") ? "" : partId;
 					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -387,6 +391,7 @@ const bool ModelEditor::loadFromFile()
 					_fe3d->model_setBright(modelId, partId, isBright);
 					_fe3d->model_setEmissionIntensity(modelId, partId, emissionIntensity);
 					_fe3d->model_setOpacity(modelId, partId, opacity);
+					_fe3d->model_setMinTextureAlpha(modelId, partId, minTextureAlpha);
 
 					if(!diffuseMapPath.empty())
 					{

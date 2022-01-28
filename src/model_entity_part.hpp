@@ -41,6 +41,7 @@ struct ModelEntityPart final
 	float opacity = 1.0f;
 	float emissionIntensity = 1.0f;
 	float textureRepeat = 1.0f;
+	float minTextureAlpha = 1.0f;
 
 	bool isSpecular = false;
 	bool isReflective = false;

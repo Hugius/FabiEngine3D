@@ -359,6 +359,11 @@ void ModelEntity::setRotationOrder(DirectionOrder value)
 	_rotationOrder = value;
 }
 
+void ModelEntity::setMinTextureAlpha(const string& partId, float value)
+{
+	_parts[_getPartIndex(partId)].minTextureAlpha = clamp(value, 0.0f, 1.0f);
+}
+
 void ModelEntity::setReflectionType(const string& partId, ReflectionType value)
 {
 	_parts[_getPartIndex(partId)].reflectionType = value;
@@ -767,6 +772,11 @@ const float ModelEntity::getLevelOfDetailDistance() const
 const float ModelEntity::getEmissionIntensity(const string& partId) const
 {
 	return _parts[_getPartIndex(partId)].emissionIntensity;
+}
+
+const float ModelEntity::getMinTextureAlpha(const string& partId) const
+{
+	return _parts[_getPartIndex(partId)].minTextureAlpha;
 }
 
 const float ModelEntity::getOpacity(const string& partId) const

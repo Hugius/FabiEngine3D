@@ -48,6 +48,7 @@ public:
 	void setTextureRepeat(float value);
 	void setEmissionIntensity(float value);
 	void setFrozen(bool value);
+	void setMinTextureAlpha(float value);
 
 	const string& getDiffuseMapPath() const;
 	const string& getEmissionMapPath() const;
@@ -69,6 +70,7 @@ public:
 	const float getMaxHeight() const;
 	const float getTextureRepeat() const;
 	const float getEmissionIntensity() const;
+	const float getMinTextureAlpha() const;
 
 	const bool isFacingCameraX() const;
 	const bool isFacingCameraY() const;
@@ -102,6 +104,7 @@ private:
 	fvec2 _uvMultiplier = fvec2(1.0f);
 	fvec2 _uvOffset = fvec2(0.0f);
 
+	float _minTextureAlpha = 1.0f;
 	float _emissionIntensity = 1.0f;
 	float _textureRepeat = 1.0f;
 	float _positionTargetSpeed = 0.0f;

@@ -250,6 +250,7 @@ public:
 	void model_setLightness(const string& id, const string& partId, float value);
 	void model_setEmissionIntensity(const string& id, const string& partId, float value);
 	void model_setOpacity(const string& id, const string& partId, float value);
+	void model_setMinTextureAlpha(const string& id, const string& partId, float value);
 	void model_setColor(const string& id, const string& partId, const fvec3& value);
 	void model_setWireframeColor(const string& id, const string& partId, const fvec3& value);
 	void model_setMinHeight(const string& id, float value);
@@ -289,6 +290,7 @@ public:
 	const float model_getLevelOfDetailDistance(const string& id) const;
 	const float model_getTextureRepeat(const string& id, const string& partId) const;
 	const float model_getEmissionIntensity(const string& id, const string& partId) const;
+	const float model_getMinTextureAlpha(const string& id, const string& partId) const;
 	const bool model_isExisting(const string& id) const;
 	const bool model_isVisible(const string& id) const;
 	const bool model_isMultiParted(const string& id) const;

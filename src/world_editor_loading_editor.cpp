@@ -41,7 +41,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		{
 			fvec3 position;
 
-			iss >> position.x >> position.y >> position.z;
+			iss
+				>> position.x
+				>> position.y
+				>> position.z;
 
 			if(_isEditorLoaded)
 			{
@@ -75,7 +78,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			string skyId;
 			string templateId;
 
-			iss >> skyId >> templateId;
+			iss
+				>> skyId
+				>> templateId;
 
 			if(_copyTemplateSky(skyId, templateId))
 			{
@@ -90,7 +95,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			string terrainId;
 			string templateId;
 
-			iss >> terrainId >> templateId;
+			iss
+				>> terrainId
+				>> templateId;
 
 			if(_copyTemplateTerrain(terrainId, templateId))
 			{
@@ -106,7 +113,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			string templateId;
 			float height;
 
-			iss >> waterId >> templateId >> height;
+			iss
+				>> waterId
+				>> templateId
+				>> height;
 
 			if(_copyTemplateWater(waterId, templateId))
 			{
@@ -143,19 +153,19 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				}
 			}
 
-			iss >>
-				templateId >>
-				position.x >>
-				position.y >>
-				position.z >>
-				rotation.x >>
-				rotation.y >>
-				rotation.z >>
-				size.x >>
-				size.y >>
-				size.z >>
-				isFrozen >>
-				animationId;
+			iss
+				>> templateId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> rotation.x
+				>> rotation.y
+				>> rotation.z
+				>> size.x
+				>> size.y
+				>> size.z
+				>> isFrozen
+				>> animationId;
 
 			animationId = (animationId == "?") ? "" : animationId;
 
@@ -194,18 +204,18 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			fvec3 rotation;
 			fvec2 size;
 
-			iss >>
-				quadId >>
-				templateId >>
-				position.x >>
-				position.y >>
-				position.z >>
-				rotation.x >>
-				rotation.y >>
-				rotation.z >>
-				size.x >>
-				size.y >>
-				animationId;
+			iss
+				>> quadId
+				>> templateId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> rotation.x
+				>> rotation.y
+				>> rotation.z
+				>> size.x
+				>> size.y
+				>> animationId;
 
 			animationId = (animationId == "?") ? "" : animationId;
 
@@ -230,14 +240,14 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			float maxVolume;
 			float maxDistance;
 
-			iss >>
-				soundId >>
-				templateId >>
-				position.x >>
-				position.y >>
-				position.z >>
-				maxVolume >>
-				maxDistance;
+			iss
+				>> soundId
+				>> templateId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> maxVolume
+				>> maxDistance;
 
 			if(_isEditorLoaded)
 			{
@@ -272,19 +282,19 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			float intensity;
 			unsigned int shape;
 
-			iss >>
-				pointlightId >>
-				position.x >>
-				position.y >>
-				position.z >>
-				radius.x >>
-				radius.y >>
-				radius.z >>
-				color.r >>
-				color.g >>
-				color.b >>
-				intensity >>
-				shape;
+			iss
+				>> pointlightId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> radius.x
+				>> radius.y
+				>> radius.z
+				>> color.r
+				>> color.g
+				>> color.b
+				>> intensity
+				>> shape;
 
 			if(_isEditorLoaded)
 			{
@@ -323,19 +333,19 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			float angle;
 			float distance;
 
-			iss >>
-				spotlightId >>
-				position.x >>
-				position.y >>
-				position.z >>
-				color.r >>
-				color.g >>
-				color.b >>
-				yaw >>
-				pitch >>
-				intensity >>
-				angle >>
-				distance;
+			iss
+				>> spotlightId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> color.r
+				>> color.g
+				>> color.b
+				>> yaw
+				>> pitch
+				>> intensity
+				>> angle
+				>> distance;
 
 			if(_isEditorLoaded)
 			{
@@ -371,11 +381,11 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			string reflectionId;
 			fvec3 position;
 
-			iss >>
-				reflectionId >>
-				position.x >>
-				position.y >>
-				position.z;
+			iss
+				>> reflectionId
+				>> position.x
+				>> position.y
+				>> position.z;
 
 			if(_isEditorLoaded)
 			{
@@ -411,11 +421,11 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			fvec3 color;
 			float intensity;
 
-			iss >>
-				color.r >>
-				color.g >>
-				color.b >>
-				intensity;
+			iss
+				>> color.r
+				>> color.g
+				>> color.b
+				>> intensity;
 
 			_fe3d->gfx_enableAmbientLighting();
 			_fe3d->gfx_setAmbientLightingColor(color);
@@ -428,15 +438,15 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			float intensity;
 			float quad3dSize;
 
-			iss >>
-				position.x >>
-				position.y >>
-				position.z >>
-				color.r >>
-				color.g >>
-				color.b >>
-				intensity >>
-				quad3dSize;
+			iss
+				>> position.x
+				>> position.y
+				>> position.z
+				>> color.r
+				>> color.g
+				>> color.b
+				>> intensity
+				>> quad3dSize;
 
 			_fe3d->gfx_enableDirectionalLighting();
 			_fe3d->gfx_setDirectionalLightingPosition(position);
@@ -453,18 +463,18 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			unsigned int interval;
 			unsigned int quality;
 
-			iss >>
-				size >>
-				lightness >>
-				position.x >>
-				position.y >>
-				position.z >>
-				center.x >>
-				center.y >>
-				center.z >>
-				isFollowingCamera >>
-				interval >>
-				quality;
+			iss
+				>> size
+				>> lightness
+				>> position.x
+				>> position.y
+				>> position.z
+				>> center.x
+				>> center.y
+				>> center.z
+				>> isFollowingCamera
+				>> interval
+				>> quality;
 
 			_fe3d->gfx_enableShadows();
 			_fe3d->gfx_setShadowEyeOffset(position);
@@ -481,10 +491,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			unsigned int cubeQuality;
 			unsigned int planarQuality;
 
-			iss >>
-				planarHeight >>
-				cubeQuality >>
-				planarQuality;
+			iss
+				>> planarHeight
+				>> cubeQuality
+				>> planarQuality;
 
 			_fe3d->gfx_setPlanarReflectionHeight(planarHeight);
 			_fe3d->gfx_setCubeReflectionQuality(cubeQuality);
@@ -494,8 +504,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		{
 			unsigned int planarQuality;
 
-			iss >>
-				planarQuality;
+			iss >> planarQuality;
 
 			_fe3d->gfx_setPlanarRefractionQuality(planarQuality);
 		}
@@ -506,11 +515,11 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			float maxDistance;
 			unsigned int quality;
 
-			iss >>
-				isDynamic >>
-				blurDistance >>
-				maxDistance >>
-				quality;
+			iss
+				>> isDynamic
+				>> blurDistance
+				>> maxDistance
+				>> quality;
 
 			_fe3d->gfx_enableDOF();
 			_fe3d->gfx_setDofDynamic(isDynamic);
@@ -525,7 +534,13 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			float thickness;
 			fvec3 color;
 
-			iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
+			iss
+				>> minDistance
+				>> maxDistance
+				>> thickness
+				>> color.r
+				>> color.g
+				>> color.b;
 
 			_fe3d->gfx_enableFog();
 			_fe3d->gfx_setFogMinDistance(minDistance);
@@ -539,7 +554,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			float intensity;
 			float sensitivity;
 
-			iss >> flareMapPath >> intensity >> sensitivity;
+			iss
+				>> flareMapPath
+				>> intensity
+				>> sensitivity;
 
 			flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
 
@@ -560,7 +578,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			float intensity;
 			float speed;
 
-			iss >> intensity >> speed;
+			iss
+				>> intensity
+				>> speed;
 
 			_fe3d->gfx_enableSkyExposure();
 			_fe3d->gfx_setSkyExposureIntensity(intensity);
@@ -573,11 +593,11 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			unsigned int blurCount;
 			unsigned int quality;
 
-			iss >>
-				type >>
-				intensity >>
-				blurCount >>
-				quality;
+			iss
+				>> type
+				>> intensity
+				>> blurCount
+				>> quality;
 
 			_fe3d->gfx_enableBloom();
 			_fe3d->gfx_setBloomType(BloomType(type));

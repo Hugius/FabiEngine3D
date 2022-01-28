@@ -56,7 +56,10 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 		else if(lineType == "v")
 		{
 			float x, y, z;
-			iss >> x >> y >> z;
+			iss
+				>> x
+				>> y
+				>> z;
 
 			temp_positions.push_back(fvec3(x, y, z));
 
@@ -65,7 +68,9 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 		else if(lineType == "vt")
 		{
 			float x, y;
-			iss >> x >> y;
+			iss
+				>> x
+				>> y;
 
 			temp_uvs.push_back(fvec2(x, y));
 
@@ -74,7 +79,10 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 		else if(lineType == "vn")
 		{
 			float x, y, z;
-			iss >> x >> y >> z;
+			iss
+				>> x
+				>> y
+				>> z;
 
 			temp_normals.push_back(fvec3(x, y, z));
 
@@ -83,7 +91,16 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 		else if(lineType == "f")
 		{
 			array<unsigned int, 9> indices = {};
-			iss >> indices[0] >> indices[1] >> indices[2] >> indices[3] >> indices[4] >> indices[5] >> indices[6] >> indices[7] >> indices[8];
+			iss
+				>> indices[0]
+				>> indices[1]
+				>> indices[2]
+				>> indices[3]
+				>> indices[4]
+				>> indices[5]
+				>> indices[6]
+				>> indices[7]
+				>> indices[8];
 
 			for(auto& index : indices)
 			{

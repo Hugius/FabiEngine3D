@@ -51,24 +51,24 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 
 		istringstream iss(line);
 
-		iss >>
-			terrainId >>
-			heightMapPath >>
-			diffuseMapPath >>
-			maxHeight >>
-			textureRepeat >>
-			lightness >>
-			blendMapPath >>
-			redDiffuseMapPath >>
-			greenDiffuseMapPath >>
-			blueDiffuseMapPath >>
-			redTextureRepeat >>
-			greenTextureRepeat >>
-			blueTextureRepeat >>
-			normalMapPath >>
-			redNormalMapPath >>
-			greenNormalMapPath >>
-			blueNormalMapPath;
+		iss
+			>> terrainId
+			>> heightMapPath
+			>> diffuseMapPath
+			>> maxHeight
+			>> textureRepeat
+			>> lightness
+			>> blendMapPath
+			>> redDiffuseMapPath
+			>> greenDiffuseMapPath
+			>> blueDiffuseMapPath
+			>> redTextureRepeat
+			>> greenTextureRepeat
+			>> blueTextureRepeat
+			>> normalMapPath
+			>> redNormalMapPath
+			>> greenNormalMapPath
+			>> blueNormalMapPath;
 
 		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -244,27 +244,27 @@ const bool TerrainEditor::loadFromFile()
 
 		istringstream iss(line);
 
-		iss >>
-			terrainId >>
-			heightMapPath >>
-			diffuseMapPath >>
-			maxHeight >>
-			textureRepeat >>
-			lightness >>
-			blendMapPath >>
-			redDiffuseMapPath >>
-			greenDiffuseMapPath >>
-			blueDiffuseMapPath >>
-			redTextureRepeat >>
-			greenTextureRepeat >>
-			blueTextureRepeat >>
-			normalMapPath >>
-			redNormalMapPath >>
-			greenNormalMapPath >>
-			blueNormalMapPath >>
-			isSpecular >>
-			specularShininess >>
-			specularIntensity;
+		iss
+			>> terrainId
+			>> heightMapPath
+			>> diffuseMapPath
+			>> maxHeight
+			>> textureRepeat
+			>> lightness
+			>> blendMapPath
+			>> redDiffuseMapPath
+			>> greenDiffuseMapPath
+			>> blueDiffuseMapPath
+			>> redTextureRepeat
+			>> greenTextureRepeat
+			>> blueTextureRepeat
+			>> normalMapPath
+			>> redNormalMapPath
+			>> greenNormalMapPath
+			>> blueNormalMapPath
+			>> isSpecular
+			>> specularShininess
+			>> specularIntensity;
 
 		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;

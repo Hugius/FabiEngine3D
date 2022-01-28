@@ -38,11 +38,11 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 
 		istringstream iss(line);
 
-		iss >>
-			waterId >>
-			dudvMapPath >>
-			normalMapPath >>
-			displacementMapPath;
+		iss
+			>> waterId
+			>> dudvMapPath
+			>> normalMapPath
+			>> displacementMapPath;
 
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
@@ -132,28 +132,28 @@ const bool WaterEditor::loadFromFile()
 
 		istringstream iss(line);
 
-		iss >>
-			waterId >>
-			dudvMapPath >>
-			normalMapPath >>
-			displacementMapPath >>
-			isSpecular >>
-			isReflective >>
-			isRefractive >>
-			color.r >>
-			color.g >>
-			color.b >>
-			size >>
-			height >>
-			textureRepeat >>
-			waveHeight >>
-			quality >>
-			speed.x >>
-			speed.y >>
-			isEdged >>
-			specularShininess >>
-			specularIntensity >>
-			maxDepth;
+		iss
+			>> waterId
+			>> dudvMapPath
+			>> normalMapPath
+			>> displacementMapPath
+			>> isSpecular
+			>> isReflective
+			>> isRefractive
+			>> color.r
+			>> color.g
+			>> color.b
+			>> size
+			>> height
+			>> textureRepeat
+			>> waveHeight
+			>> quality
+			>> speed.x
+			>> speed.y
+			>> isEdged
+			>> specularShininess
+			>> specularIntensity
+			>> maxDepth;
 
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);

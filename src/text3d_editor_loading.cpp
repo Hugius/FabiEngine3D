@@ -40,16 +40,16 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 
 		istringstream iss(line);
 
-		iss >>
-			textId >>
-			size.x >>
-			size.y >>
-			color.r >>
-			color.g >>
-			color.b >>
-			isFacingX >>
-			isFacingY >>
-			fontMapPath;
+		iss
+			>> textId
+			>> size.x
+			>> size.y
+			>> color.r
+			>> color.g
+			>> color.b
+			>> isFacingX
+			>> isFacingY
+			>> fontMapPath;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -108,21 +108,21 @@ const bool Text3dEditor::loadFromFile()
 
 		istringstream iss(line);
 
-		iss >>
-			textId >>
-			size.x >>
-			size.y >>
-			color.r >>
-			color.g >>
-			color.b >>
-			isFacingX >>
-			isFacingY >>
-			fontMapPath >>
-			isReflected >>
-			isShadowed >>
-			lightness >>
-			isBright >>
-			opacity;
+		iss
+			>> textId
+			>> size.x
+			>> size.y
+			>> color.r
+			>> color.g
+			>> color.b
+			>> isFacingX
+			>> isFacingY
+			>> fontMapPath
+			>> isReflected
+			>> isShadowed
+			>> lightness
+			>> isBright
+			>> opacity;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 

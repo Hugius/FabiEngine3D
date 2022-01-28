@@ -35,7 +35,9 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 
 		istringstream iss(line);
 
-		iss >> soundId >> audioPath;
+		iss
+			>> soundId
+			>> audioPath;
 
 		audioPath = (audioPath == "?") ? "" : audioPath;
 
@@ -81,7 +83,9 @@ const bool SoundEditor::loadFromFile()
 
 		istringstream iss(line);
 
-		iss >> soundId >> audioPath;
+		iss
+			>> soundId
+			>> audioPath;
 
 		audioPath = (audioPath == "?") ? "" : audioPath;
 

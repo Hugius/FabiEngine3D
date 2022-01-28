@@ -36,7 +36,9 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 
 		istringstream iss(line);
 
-		iss >> animationId >> previewModelId;
+		iss
+			>> animationId
+			>> previewModelId;
 
 		auto newAnimation = make_shared<Animation3d>(animationId);
 		newAnimation->setPreviewModelId(previewModelId);
@@ -64,12 +66,15 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 		{
 			iss = istringstream(line);
 
-			iss >> animationId >> previewModelId;
+			iss
+				>> animationId
+				>> previewModelId;
 
 			vector<Animation3dFrame> customFrames;
 			while(true)
 			{
 				unsigned int modelPartCount;
+
 				if(iss >> modelPartCount)
 				{
 					Animation3dFrame customFrame;
@@ -80,10 +85,19 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 						fvec3 targetTransformation, rotationOrigin, speed;
 						int speedType, transformationType;
 
-						iss >> partId >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >>
-							rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >>
-							speed.x >> speed.y >> speed.z >>
-							speedType >> transformationType;
+						iss
+							>> partId
+							>> targetTransformation.x
+							>> targetTransformation.y
+							>> targetTransformation.z
+							>> rotationOrigin.x
+							>> rotationOrigin.y
+							>> rotationOrigin.z
+							>> speed.x
+							>> speed.y
+							>> speed.z
+							>> speedType
+							>> transformationType;
 
 						if(partId == "?")
 						{

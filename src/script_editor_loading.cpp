@@ -57,7 +57,9 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 
 		istringstream iss(line);
 
-		iss >> cursorLineIndex >> cursorCharIndex;
+		iss
+			>> cursorLineIndex
+			>> cursorCharIndex;
 
 		_script->getScriptFile(scriptFileId)->setCursorLineIndex(cursorLineIndex);
 		_script->getScriptFile(scriptFileId)->setCursorCharIndex(cursorCharIndex);

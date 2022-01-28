@@ -41,17 +41,17 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 
 		istringstream iss(line);
 
-		iss >>
-			quadId >>
-			size.x >>
-			size.y >>
-			color.r >>
-			color.g >>
-			color.b >>
-			isFacingX >>
-			isFacingY >>
-			diffuseMapPath >>
-			emissionMapPath;
+		iss
+			>> quadId
+			>> size.x
+			>> size.y
+			>> color.r
+			>> color.g
+			>> color.b
+			>> isFacingX
+			>> isFacingY
+			>> diffuseMapPath
+			>> emissionMapPath;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -125,24 +125,24 @@ const bool Quad3dEditor::loadFromFile()
 
 		istringstream iss(line);
 
-		iss >>
-			quadId >>
-			size.x >>
-			size.y >>
-			color.r >>
-			color.g >>
-			color.b >>
-			isFacingX >>
-			isFacingY >>
-			diffuseMapPath >>
-			emissionMapPath >>
-			isReflected >>
-			isShadowed >>
-			lightness >>
-			textureRepeat >>
-			isBright >>
-			emissionIntensity >>
-			opacity;
+		iss
+			>> quadId
+			>> size.x
+			>> size.y
+			>> color.r
+			>> color.g
+			>> color.b
+			>> isFacingX
+			>> isFacingY
+			>> diffuseMapPath
+			>> emissionMapPath
+			>> isReflected
+			>> isShadowed
+			>> lightness
+			>> textureRepeat
+			>> isBright
+			>> emissionIntensity
+			>> opacity;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;

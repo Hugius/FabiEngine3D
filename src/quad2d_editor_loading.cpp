@@ -35,7 +35,9 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 
 		istringstream iss(line);
 
-		iss >> quadId >> diffuseMapPath;
+		iss
+			>> quadId
+			>> diffuseMapPath;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 
@@ -87,7 +89,13 @@ const bool Quad2dEditor::loadFromFile()
 
 		istringstream iss(line);
 
-		iss >> quadId >> diffuseMapPath >> color.r >> color.g >> color.b >> opacity;
+		iss
+			>> quadId
+			>> diffuseMapPath
+			>> color.r
+			>> color.g
+			>> color.b
+			>> opacity;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 

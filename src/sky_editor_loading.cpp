@@ -36,14 +36,14 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 
 		istringstream iss(line);
 
-		iss >>
-			skyId >>
-			cubeMapPaths[0] >>
-			cubeMapPaths[1] >>
-			cubeMapPaths[2] >>
-			cubeMapPaths[3] >>
-			cubeMapPaths[4] >>
-			cubeMapPaths[5];
+		iss
+			>> skyId
+			>> cubeMapPaths[0]
+			>> cubeMapPaths[1]
+			>> cubeMapPaths[2]
+			>> cubeMapPaths[3]
+			>> cubeMapPaths[4]
+			>> cubeMapPaths[5];
 
 		for(auto& cubeMapPath : cubeMapPaths)
 		{
@@ -99,19 +99,19 @@ const bool SkyEditor::loadFromFile()
 
 		istringstream iss(line);
 
-		iss >>
-			skyId >>
-			cubeMapPaths[0] >>
-			cubeMapPaths[1] >>
-			cubeMapPaths[2] >>
-			cubeMapPaths[3] >>
-			cubeMapPaths[4] >>
-			cubeMapPaths[5] >>
-			rotation >>
-			lightness >>
-			color.r >>
-			color.g >>
-			color.b;
+		iss
+			>> skyId
+			>> cubeMapPaths[0]
+			>> cubeMapPaths[1]
+			>> cubeMapPaths[2]
+			>> cubeMapPaths[3]
+			>> cubeMapPaths[4]
+			>> cubeMapPaths[5]
+			>> rotation
+			>> lightness
+			>> color.r
+			>> color.g
+			>> color.b;
 
 		for(auto& cubeMapPath : cubeMapPaths)
 		{

@@ -35,7 +35,9 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 
 		istringstream iss(line);
 
-		iss >> textId >> fontMapPath;
+		iss
+			>> textId
+			>> fontMapPath;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -87,7 +89,13 @@ const bool Text2dEditor::loadFromFile()
 
 		istringstream iss(line);
 
-		iss >> textId >> fontMapPath >> color.r >> color.g >> color.b >> opacity;
+		iss
+			>> textId
+			>> fontMapPath
+			>> color.r
+			>> color.g
+			>> color.b
+			>> opacity;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 

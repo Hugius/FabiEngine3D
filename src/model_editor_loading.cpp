@@ -44,7 +44,9 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 			string modelId;
 			string meshPath;
 
-			iss >> modelId >> meshPath;
+			iss
+				>> modelId
+				>> meshPath;
 
 			meshPath = (meshPath == "?") ? "" : meshPath;
 
@@ -103,22 +105,23 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 			bool isShadowed;
 			bool isReflected;
 
-			iss >>
-				modelId >>
-				meshPath >>
-				size.x >>
-				size.y >>
-				size.z >>
-				levelOfDetailEntityId >>
-				levelOfDetailDistance >>
-				rotationOrder >>
-				isShadowed >>
-				isReflected;
+			iss
+				>> modelId
+				>> meshPath
+				>> size.x
+				>> size.y
+				>> size.z
+				>> levelOfDetailEntityId
+				>> levelOfDetailDistance
+				>> rotationOrder
+				>> isShadowed
+				>> isReflected;
 
 			while(true)
 			{
 				string partId;
 				iss >> partId;
+
 				if(partId.empty())
 				{
 					break;
@@ -144,28 +147,28 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				bool isFaceCulled;
 				bool isBright;
 
-				iss >>
-					diffuseMapPath >>
-					emissionMapPath >>
-					specularMapPath >>
-					reflectionMapPath >>
-					normalMapPath >>
-					reflectionType >>
-					isSpecular >>
-					isReflective >>
-					specularShininess >>
-					specularIntensity >>
-					reflectivity >>
-					lightness >>
-					color.r >>
-					color.g >>
-					color.b >>
-					textureRepeat >>
-					isFaceCulled >>
-					isBright >>
-					emissionIntensity >>
-					opacity >>
-					minTextureAlpha;
+				iss
+					>> diffuseMapPath
+					>> emissionMapPath
+					>> specularMapPath
+					>> reflectionMapPath
+					>> normalMapPath
+					>> reflectionType
+					>> isSpecular
+					>> isReflective
+					>> specularShininess
+					>> specularIntensity
+					>> reflectivity
+					>> lightness
+					>> color.r
+					>> color.g
+					>> color.b
+					>> textureRepeat
+					>> isFaceCulled
+					>> isBright
+					>> emissionIntensity
+					>> opacity
+					>> minTextureAlpha;
 
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -277,17 +280,17 @@ const bool ModelEditor::loadFromFile()
 			bool isShadowed;
 			bool isReflected;
 
-			iss >>
-				modelId >>
-				meshPath >>
-				size.x >>
-				size.y >>
-				size.z >>
-				levelOfDetailEntityId >>
-				levelOfDetailDistance >>
-				rotationOrder >>
-				isShadowed >>
-				isReflected;
+			iss
+				>> modelId
+				>> meshPath
+				>> size.x
+				>> size.y
+				>> size.z
+				>> levelOfDetailEntityId
+				>> levelOfDetailDistance
+				>> rotationOrder
+				>> isShadowed
+				>> isReflected;
 
 			meshPath = (meshPath == "?") ? "" : meshPath;
 			levelOfDetailEntityId = (levelOfDetailEntityId == "?") ? "" : levelOfDetailEntityId;
@@ -342,28 +345,28 @@ const bool ModelEditor::loadFromFile()
 					bool isFaceCulled;
 					bool isBright;
 
-					iss >>
-						diffuseMapPath >>
-						emissionMapPath >>
-						specularMapPath >>
-						reflectionMapPath >>
-						normalMapPath >>
-						reflectionType >>
-						isSpecular >>
-						isReflective >>
-						specularShininess >>
-						specularIntensity >>
-						reflectivity >>
-						lightness >>
-						color.r >>
-						color.g >>
-						color.b >>
-						textureRepeat >>
-						isFaceCulled >>
-						isBright >>
-						emissionIntensity >>
-						opacity >>
-						minTextureAlpha;
+					iss
+						>> diffuseMapPath
+						>> emissionMapPath
+						>> specularMapPath
+						>> reflectionMapPath
+						>> normalMapPath
+						>> reflectionType
+						>> isSpecular
+						>> isReflective
+						>> specularShininess
+						>> specularIntensity
+						>> reflectivity
+						>> lightness
+						>> color.r
+						>> color.g
+						>> color.b
+						>> textureRepeat
+						>> isFaceCulled
+						>> isBright
+						>> emissionIntensity
+						>> opacity
+						>> minTextureAlpha;
 
 					partId = (partId == "?") ? "" : partId;
 					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -452,15 +455,15 @@ const bool ModelEditor::loadFromFile()
 			fvec3 position;
 			fvec3 size;
 
-			iss >>
-				aabbId >>
-				modelId >>
-				position.x >>
-				position.y >>
-				position.z >>
-				size.x >>
-				size.y >>
-				size.z;
+			iss
+				>> aabbId
+				>> modelId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> size.x
+				>> size.y
+				>> size.z;
 
 			_fe3d->aabb_create(aabbId, false);
 

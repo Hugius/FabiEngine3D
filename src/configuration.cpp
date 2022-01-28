@@ -74,7 +74,9 @@ void Config::_processOption(ifstream& file, string& option, const string& name)
 
 	istringstream iss(line);
 
-	iss >> field >> equals;
+	iss
+		>> field
+		>> equals;
 
 	if(field == name)
 	{
@@ -96,7 +98,9 @@ void Config::_processOption(ifstream& file, float& option, const string& name)
 
 	istringstream iss(line);
 
-	iss >> field >> equals;
+	iss
+		>> field
+		>> equals;
 
 	if(field == name)
 	{
@@ -118,7 +122,9 @@ void Config::_processOption(ifstream& file, int& option, const string& name)
 
 	istringstream iss(line);
 
-	iss >> field >> equals;
+	iss
+		>> field
+		>> equals;
 
 	if(field == name)
 	{
@@ -141,7 +147,10 @@ void Config::_processOption(ifstream& file, bool& option, const string& name)
 
 	istringstream iss(line);
 
-	iss >> field >> equals >> value;
+	iss
+		>> field
+		>> equals
+		>> value;
 
 	if(field == name)
 	{

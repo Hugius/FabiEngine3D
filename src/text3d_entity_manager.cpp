@@ -103,28 +103,30 @@ void Text3dEntityManager::update()
 	{
 		entity->updateTransformation();
 
-		if(entity->isVisible())
+		if(!entity->isVisible())
 		{
-			const auto facingX = entity->isFacingCameraX();
-			const auto facingY = entity->isFacingCameraY();
-
-			if(facingX || facingY)
-			{
-				auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
-				auto direction = (position - _renderBus->getCameraPosition());
-
-				auto degreesX = Math::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
-				auto degreesY = Math::convertToDegrees(atan2f(direction.z, direction.x));
-
-				auto rotation = entity->getRotation();
-				rotation.x = (degreesX * static_cast<float>(facingX));
-				rotation.y = ((-degreesY - 90.0f) * static_cast<float>(facingY));
-
-				entity->setRotation(rotation);
-			}
-
-			entity->updateCharacterEntities();
+			continue;
 		}
+
+		const auto facingX = entity->isFacingCameraX();
+		const auto facingY = entity->isFacingCameraY();
+
+		if(facingX || facingY)
+		{
+			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
+			auto direction = (position - _renderBus->getCameraPosition());
+
+			auto degreesX = Math::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
+			auto degreesY = Math::convertToDegrees(atan2f(direction.z, direction.x));
+
+			auto rotation = entity->getRotation();
+			rotation.x = (degreesX * static_cast<float>(facingX));
+			rotation.y = ((-degreesY - 90.0f) * static_cast<float>(facingY));
+
+			entity->setRotation(rotation);
+		}
+
+		entity->updateCharacterEntities();
 	}
 }
 

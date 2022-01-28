@@ -32,48 +32,50 @@ void ModelEntityShadowRenderer::unbind()
 
 void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 {
-	if(entity->isVisible() && entity->isShadowed())
+	if(!entity->isVisible() || !entity->isShadowed())
 	{
-		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
-		_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-		_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
-		_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
-		_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
-		_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+		return;
+	}
 
-		for(const auto& partId : entity->getPartIds())
+	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
+	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
+	_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
+	_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
+	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
+	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+
+	for(const auto& partId : entity->getPartIds())
+	{
+		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partId));
+		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
+		_shader->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha(partId));
+
+		if(entity->isFaceCulled(partId))
 		{
-			_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partId));
-			_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
-			_shader->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha(partId));
+			glEnable(GL_CULL_FACE);
+		}
 
-			if(entity->isFaceCulled(partId))
-			{
-				glEnable(GL_CULL_FACE);
-			}
+		if(entity->getDiffuseMap(partId) != nullptr)
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partId)->getId());
+		}
 
-			if(entity->getDiffuseMap(partId) != nullptr)
-			{
-				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partId)->getId());
-			}
+		glBindVertexArray(entity->getMesh(partId)->getVaoId());
 
-			glBindVertexArray(entity->getMesh(partId)->getVaoId());
+		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh(partId)->getVertexCount());
 
-			glDrawArrays(GL_TRIANGLES, 0, entity->getMesh(partId)->getVertexCount());
+		glBindVertexArray(0);
 
-			glBindVertexArray(0);
+		if(entity->getDiffuseMap(partId) != nullptr)
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
 
-			if(entity->getDiffuseMap(partId) != nullptr)
-			{
-				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, 0);
-			}
-
-			if(entity->isFaceCulled(partId))
-			{
-				glDisable(GL_CULL_FACE);
-			}
+		if(entity->isFaceCulled(partId))
+		{
+			glDisable(GL_CULL_FACE);
 		}
 	}
 }

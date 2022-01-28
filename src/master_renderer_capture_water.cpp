@@ -31,23 +31,25 @@ void MasterRenderer::_captureWaterReflections()
 	{
 		for(const auto& [key, entity] : _modelEntityManager->getEntities())
 		{
-			if(entity->isVisible())
+			if(!entity->isVisible())
 			{
-				if(!entity->isReflected())
+				continue;
+			}
+
+			if(!entity->isReflected())
+			{
+				entity->setVisible(false);
+				savedModelEntityIds.push_back(entity->getId());
+				continue;
+			}
+
+			for(const auto& partId : entity->getPartIds())
+			{
+				if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR))
 				{
 					entity->setVisible(false);
 					savedModelEntityIds.push_back(entity->getId());
-					continue;
-				}
-
-				for(const auto& partId : entity->getPartIds())
-				{
-					if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR))
-					{
-						entity->setVisible(false);
-						savedModelEntityIds.push_back(entity->getId());
-						break;
-					}
+					break;
 				}
 			}
 		}

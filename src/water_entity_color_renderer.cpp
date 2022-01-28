@@ -138,95 +138,97 @@ void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 
 void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 {
-	if(entity->isVisible())
+	if(!entity->isVisible())
 	{
-		if(entity->isWireframed())
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		}
+		return;
+	}
 
-		_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
-		_shader->uploadUniform("u_rippleOffset", entity->getRippleOffset());
-		_shader->uploadUniform("u_waveOffset", entity->getWaveOffset());
-		_shader->uploadUniform("u_waveHeight", entity->getWaveHeight());
-		_shader->uploadUniform("u_maxDepth", entity->getMaxDepth());
-		_shader->uploadUniform("u_height", entity->getHeight());
-		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-		_shader->uploadUniform("u_specularShininess", entity->getSpecularShininess());
-		_shader->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
-		_shader->uploadUniform("u_isEdged", entity->isEdged());
-		_shader->uploadUniform("u_isSpecular", entity->isSpecular());
-		_shader->uploadUniform("u_isReflective", entity->isReflective());
-		_shader->uploadUniform("u_isRefractive", entity->isRefractive());
-		_shader->uploadUniform("u_color", entity->getColor());
-		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
-		_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-		_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
-		_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
-		_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
-		_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
-		_shader->uploadUniform("u_hasDisplacementMap", (entity->getDisplacementMap() != nullptr));
-		_shader->uploadUniform("u_hasDudvMap", (entity->getDudvMap() != nullptr));
-		_shader->uploadUniform("u_hasNormalMap", (entity->getNormalMap() != nullptr));
-		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
+	if(entity->isWireframed())
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
 
-		if(entity->getDudvMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE3);
-			glBindTexture(GL_TEXTURE_2D, entity->getDudvMap()->getId());
-		}
-		if(entity->getNormalMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE4);
-			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap()->getId());
-		}
-		if(entity->getDisplacementMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE5);
-			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap()->getId());
-		}
+	_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
+	_shader->uploadUniform("u_rippleOffset", entity->getRippleOffset());
+	_shader->uploadUniform("u_waveOffset", entity->getWaveOffset());
+	_shader->uploadUniform("u_waveHeight", entity->getWaveHeight());
+	_shader->uploadUniform("u_maxDepth", entity->getMaxDepth());
+	_shader->uploadUniform("u_height", entity->getHeight());
+	_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
+	_shader->uploadUniform("u_specularShininess", entity->getSpecularShininess());
+	_shader->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
+	_shader->uploadUniform("u_isEdged", entity->isEdged());
+	_shader->uploadUniform("u_isSpecular", entity->isSpecular());
+	_shader->uploadUniform("u_isReflective", entity->isReflective());
+	_shader->uploadUniform("u_isRefractive", entity->isRefractive());
+	_shader->uploadUniform("u_color", entity->getColor());
+	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
+	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
+	_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
+	_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
+	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
+	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+	_shader->uploadUniform("u_hasDisplacementMap", (entity->getDisplacementMap() != nullptr));
+	_shader->uploadUniform("u_hasDudvMap", (entity->getDudvMap() != nullptr));
+	_shader->uploadUniform("u_hasNormalMap", (entity->getNormalMap() != nullptr));
+	_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
 
-		if(entity->getDisplacementMap() != nullptr)
-		{
-			glBindVertexArray(entity->getHighQualityMesh()->getVaoId());
-		}
-		else
-		{
-			glBindVertexArray(entity->getLowQualityMesh()->getVaoId());
-		}
+	if(entity->getDudvMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, entity->getDudvMap()->getId());
+	}
+	if(entity->getNormalMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE4);
+		glBindTexture(GL_TEXTURE_2D, entity->getNormalMap()->getId());
+	}
+	if(entity->getDisplacementMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE5);
+		glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap()->getId());
+	}
 
-		if(entity->getDisplacementMap() != nullptr)
-		{
-			glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityMesh()->getVertexCount());
-			_renderBus->increaseTriangleCount(entity->getHighQualityMesh()->getVertexCount() / 3);
-		}
-		else
-		{
-			glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityMesh()->getVertexCount());
-			_renderBus->increaseTriangleCount(entity->getLowQualityMesh()->getVertexCount() / 3);
-		}
+	if(entity->getDisplacementMap() != nullptr)
+	{
+		glBindVertexArray(entity->getHighQualityMesh()->getVaoId());
+	}
+	else
+	{
+		glBindVertexArray(entity->getLowQualityMesh()->getVaoId());
+	}
 
-		glBindVertexArray(0);
+	if(entity->getDisplacementMap() != nullptr)
+	{
+		glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityMesh()->getVertexCount());
+		_renderBus->increaseTriangleCount(entity->getHighQualityMesh()->getVertexCount() / 3);
+	}
+	else
+	{
+		glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityMesh()->getVertexCount());
+		_renderBus->increaseTriangleCount(entity->getLowQualityMesh()->getVertexCount() / 3);
+	}
 
-		if(entity->getDudvMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE3);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getNormalMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE4);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getDisplacementMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE5);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
+	glBindVertexArray(0);
 
-		if(entity->isWireframed())
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		}
+	if(entity->getDudvMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getNormalMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE4);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getDisplacementMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE5);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	if(entity->isWireframed())
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }

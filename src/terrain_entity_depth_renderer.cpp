@@ -32,23 +32,25 @@ void TerrainEntityDepthRenderer::unbind()
 
 void TerrainEntityDepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
-	if(entity->isVisible())
+	if(!entity->isVisible())
 	{
-		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
-		_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-		_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
-		_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
-		_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
-		_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
-
-		glEnable(GL_CULL_FACE);
-
-		glBindVertexArray(entity->getMesh()->getVaoId());
-
-		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
-
-		glBindVertexArray(0);
-
-		glDisable(GL_CULL_FACE);
+		return;
 	}
+
+	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
+	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
+	_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
+	_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
+	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
+	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+
+	glEnable(GL_CULL_FACE);
+
+	glBindVertexArray(entity->getMesh()->getVaoId());
+
+	glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
+
+	glBindVertexArray(0);
+
+	glDisable(GL_CULL_FACE);
 }

@@ -31,22 +31,24 @@ void AabbEntityColorRenderer::unbind()
 
 void AabbEntityColorRenderer::render(const shared_ptr<AabbEntity> entity)
 {
-	if(entity->isVisible())
+	if(!entity->isVisible())
 	{
-		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
-		_shader->uploadUniform("u_color", entity->getColor());
-		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
-		_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-		_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
-		_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
-		_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
-		_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
-
-		glBindVertexArray(entity->getMesh()->getVaoId());
-
-		glDrawArrays(GL_LINE_STRIP, 0, entity->getMesh()->getVertexCount());
-		_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
-
-		glBindVertexArray(0);
+		return;
 	}
+
+	_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
+	_shader->uploadUniform("u_color", entity->getColor());
+	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
+	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
+	_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
+	_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
+	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
+	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+
+	glBindVertexArray(entity->getMesh()->getVaoId());
+
+	glDrawArrays(GL_LINE_STRIP, 0, entity->getMesh()->getVertexCount());
+	_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
+
+	glBindVertexArray(0);
 }

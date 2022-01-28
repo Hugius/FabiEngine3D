@@ -123,145 +123,147 @@ void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<st
 
 void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
-	if(entity->isVisible())
+	if(!entity->isVisible())
 	{
-		glEnable(GL_CULL_FACE);
-
-		if(entity->isWireframed())
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		}
-
-		_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
-		_shader->uploadUniform("u_isSpecular", entity->isSpecular());
-		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-		_shader->uploadUniform("u_redTextureRepeat", entity->getRedTextureRepeat());
-		_shader->uploadUniform("u_greenTextureRepeat", entity->getGreenTextureRepeat());
-		_shader->uploadUniform("u_blueTextureRepeat", entity->getBlueTextureRepeat());
-		_shader->uploadUniform("u_lightness", entity->getLightness());
-		_shader->uploadUniform("u_specularShininess", entity->getSpecularShininess());
-		_shader->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
-		_shader->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseMap() != nullptr));
-		_shader->uploadUniform("u_hasNormalMap", (entity->getNormalMap() != nullptr));
-		_shader->uploadUniform("u_hasBlendMap", (entity->getBlendMap() != nullptr));
-		_shader->uploadUniform("u_hasRedDiffuseMap", (entity->getRedDiffuseMap() != nullptr));
-		_shader->uploadUniform("u_hasGreenDiffuseMap", (entity->getGreenDiffuseMap() != nullptr));
-		_shader->uploadUniform("u_hasBlueDiffuseMap", (entity->getBlueDiffuseMap() != nullptr));
-		_shader->uploadUniform("u_hasRedNormalMap", (entity->getRedNormalMap() != nullptr));
-		_shader->uploadUniform("u_hasGreenNormalMap", (entity->getGreenNormalMap() != nullptr));
-		_shader->uploadUniform("u_hasBlueNormalMap", (entity->getBlueNormalMap() != nullptr));
-		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
-		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
-		_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-		_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
-		_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
-		_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
-		_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
-
-		if(entity->getDiffuseMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
-		}
-		if(entity->getNormalMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE2);
-			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap()->getId());
-		}
-		if(entity->getBlendMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE3);
-			glBindTexture(GL_TEXTURE_2D, entity->getBlendMap()->getId());
-		}
-		if(entity->getRedDiffuseMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE4);
-			glBindTexture(GL_TEXTURE_2D, entity->getRedDiffuseMap()->getId());
-		}
-		if(entity->getGreenDiffuseMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE5);
-			glBindTexture(GL_TEXTURE_2D, entity->getGreenDiffuseMap()->getId());
-		}
-		if(entity->getBlueDiffuseMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE6);
-			glBindTexture(GL_TEXTURE_2D, entity->getBlueDiffuseMap()->getId());
-		}
-		if(entity->getRedNormalMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE7);
-			glBindTexture(GL_TEXTURE_2D, entity->getRedNormalMap()->getId());
-		}
-		if(entity->getGreenNormalMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE8);
-			glBindTexture(GL_TEXTURE_2D, entity->getGreenNormalMap()->getId());
-		}
-		if(entity->getBlueNormalMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE9);
-			glBindTexture(GL_TEXTURE_2D, entity->getBlueNormalMap()->getId());
-		}
-
-		glBindVertexArray(entity->getMesh()->getVaoId());
-
-		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
-		_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
-
-		glBindVertexArray(0);
-
-		if(entity->getDiffuseMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getNormalMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE2);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getBlendMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE3);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getRedDiffuseMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE4);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getGreenDiffuseMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE5);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getBlueDiffuseMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE6);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getRedNormalMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE7);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getGreenNormalMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE8);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getBlueNormalMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE9);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-
-		if(entity->isWireframed())
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		}
-
-		glDisable(GL_CULL_FACE);
+		return;
 	}
+
+	glEnable(GL_CULL_FACE);
+
+	if(entity->isWireframed())
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+
+	_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
+	_shader->uploadUniform("u_isSpecular", entity->isSpecular());
+	_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
+	_shader->uploadUniform("u_redTextureRepeat", entity->getRedTextureRepeat());
+	_shader->uploadUniform("u_greenTextureRepeat", entity->getGreenTextureRepeat());
+	_shader->uploadUniform("u_blueTextureRepeat", entity->getBlueTextureRepeat());
+	_shader->uploadUniform("u_lightness", entity->getLightness());
+	_shader->uploadUniform("u_specularShininess", entity->getSpecularShininess());
+	_shader->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
+	_shader->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseMap() != nullptr));
+	_shader->uploadUniform("u_hasNormalMap", (entity->getNormalMap() != nullptr));
+	_shader->uploadUniform("u_hasBlendMap", (entity->getBlendMap() != nullptr));
+	_shader->uploadUniform("u_hasRedDiffuseMap", (entity->getRedDiffuseMap() != nullptr));
+	_shader->uploadUniform("u_hasGreenDiffuseMap", (entity->getGreenDiffuseMap() != nullptr));
+	_shader->uploadUniform("u_hasBlueDiffuseMap", (entity->getBlueDiffuseMap() != nullptr));
+	_shader->uploadUniform("u_hasRedNormalMap", (entity->getRedNormalMap() != nullptr));
+	_shader->uploadUniform("u_hasGreenNormalMap", (entity->getGreenNormalMap() != nullptr));
+	_shader->uploadUniform("u_hasBlueNormalMap", (entity->getBlueNormalMap() != nullptr));
+	_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
+	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
+	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
+	_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
+	_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
+	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
+	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+
+	if(entity->getDiffuseMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
+	}
+	if(entity->getNormalMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, entity->getNormalMap()->getId());
+	}
+	if(entity->getBlendMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, entity->getBlendMap()->getId());
+	}
+	if(entity->getRedDiffuseMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE4);
+		glBindTexture(GL_TEXTURE_2D, entity->getRedDiffuseMap()->getId());
+	}
+	if(entity->getGreenDiffuseMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE5);
+		glBindTexture(GL_TEXTURE_2D, entity->getGreenDiffuseMap()->getId());
+	}
+	if(entity->getBlueDiffuseMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE6);
+		glBindTexture(GL_TEXTURE_2D, entity->getBlueDiffuseMap()->getId());
+	}
+	if(entity->getRedNormalMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE7);
+		glBindTexture(GL_TEXTURE_2D, entity->getRedNormalMap()->getId());
+	}
+	if(entity->getGreenNormalMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE8);
+		glBindTexture(GL_TEXTURE_2D, entity->getGreenNormalMap()->getId());
+	}
+	if(entity->getBlueNormalMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE9);
+		glBindTexture(GL_TEXTURE_2D, entity->getBlueNormalMap()->getId());
+	}
+
+	glBindVertexArray(entity->getMesh()->getVaoId());
+
+	glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
+	_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
+
+	glBindVertexArray(0);
+
+	if(entity->getDiffuseMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getNormalMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getBlendMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getRedDiffuseMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE4);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getGreenDiffuseMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE5);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getBlueDiffuseMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE6);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getRedNormalMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE7);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getGreenNormalMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE8);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getBlueNormalMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE9);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	if(entity->isWireframed())
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+
+	glDisable(GL_CULL_FACE);
 }

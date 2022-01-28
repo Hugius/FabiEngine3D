@@ -179,17 +179,21 @@ void WaterEntityManager::update()
 {
 	auto entity = getSelectedEntity();
 
-	if(entity != nullptr)
+	if(entity == nullptr)
 	{
-		if(entity->isVisible())
-		{
-			fvec2 newOffset = entity->getRippleOffset();
-			newOffset.x += entity->getSpeed().x;
-			newOffset.y -= entity->getSpeed().y;
-			newOffset = fvec2(fmodf(newOffset.x, 1.0f), fmodf(newOffset.y, 1.0f));
-			entity->setRippleOffset(newOffset);
-
-			entity->setWaveOffset(entity->getWaveOffset() + (entity->getSpeed() * 500.0f));
-		}
+		return;
 	}
+
+	if(!entity->isVisible())
+	{
+		return;
+	}
+
+	fvec2 newOffset = entity->getRippleOffset();
+	newOffset.x += entity->getSpeed().x;
+	newOffset.y -= entity->getSpeed().y;
+	newOffset = fvec2(fmodf(newOffset.x, 1.0f), fmodf(newOffset.y, 1.0f));
+	entity->setRippleOffset(newOffset);
+
+	entity->setWaveOffset(entity->getWaveOffset() + (entity->getSpeed() * 500.0f));
 }

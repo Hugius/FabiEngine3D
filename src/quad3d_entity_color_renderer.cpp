@@ -41,67 +41,69 @@ void Quad3dEntityColorRenderer::unbind()
 
 void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 {
-	if(entity->isVisible())
+	if(!entity->isVisible())
 	{
-		if(entity->isWireframed())
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		}
+		return;
+	}
 
-		_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));
-		_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
-		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
-		_shader->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseMap() != nullptr));
-		_shader->uploadUniform("u_hasEmissionMap", (entity->getEmissionMap() != nullptr));
-		_shader->uploadUniform("u_color", entity->getColor());
-		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
-		_shader->uploadUniform("u_lightness", entity->getLightness());
-		_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
-		_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-		_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
-		_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
-		_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
-		_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
-		_shader->uploadUniform("u_opacity", entity->getOpacity());
-		_shader->uploadUniform("u_isBright", entity->isBright());
-		_shader->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
-		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-		_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
-		_shader->uploadUniform("u_uvOffset", entity->getUvOffset());
-		_shader->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha());
+	if(entity->isWireframed())
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
 
-		if(entity->getDiffuseMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
-		}
-		if(entity->getEmissionMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap()->getId());
-		}
+	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));
+	_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
+	_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
+	_shader->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseMap() != nullptr));
+	_shader->uploadUniform("u_hasEmissionMap", (entity->getEmissionMap() != nullptr));
+	_shader->uploadUniform("u_color", entity->getColor());
+	_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
+	_shader->uploadUniform("u_lightness", entity->getLightness());
+	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
+	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
+	_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
+	_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
+	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
+	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+	_shader->uploadUniform("u_opacity", entity->getOpacity());
+	_shader->uploadUniform("u_isBright", entity->isBright());
+	_shader->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
+	_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
+	_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
+	_shader->uploadUniform("u_uvOffset", entity->getUvOffset());
+	_shader->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha());
 
-		glBindVertexArray(entity->getMesh()->getVaoId());
+	if(entity->getDiffuseMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
+	}
+	if(entity->getEmissionMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap()->getId());
+	}
 
-		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
-		_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
+	glBindVertexArray(entity->getMesh()->getVaoId());
 
-		glBindVertexArray(0);
+	glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
+	_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
 
-		if(entity->getDiffuseMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-		if(entity->getEmissionMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
+	glBindVertexArray(0);
 
-		if(entity->isWireframed())
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		}
+	if(entity->getDiffuseMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(entity->getEmissionMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	if(entity->isWireframed())
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }

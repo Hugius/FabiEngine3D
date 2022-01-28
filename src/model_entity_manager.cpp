@@ -134,76 +134,78 @@ void ModelEntityManager::update()
 	{
 		entity->updateTransformation();
 
-		if(entity->isVisible())
+		if(!entity->isVisible())
 		{
-			if(entity->getLevelOfDetailEntityId().empty())
-			{
-				entity->setLevelOfDetailed(false);
-			}
-			else
-			{
-				if(getEntities().find(entity->getId()) == getEntities().end())
-				{
-					Logger::throwError("ModelEntityManager::update");
-				}
-
-				const auto cameraPosition = _renderBus->getCameraPosition();
-				const auto entityPosition = entity->getBasePosition();
-				const auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
-
-				entity->setLevelOfDetailed((absolsuteDistance > entity->getLevelOfDetailDistance()));
-			}
-
-			if(_reflectionManager->getEntities().find(entity->getPreviousReflectionEntityId()) == _reflectionManager->getEntities().end())
-			{
-				entity->setPreviousReflectionEntityId("");
-				entity->setCubeReflectionMixValue(1.0f);
-			}
-			if(_reflectionManager->getEntities().find(entity->getCurrentReflectionEntityId()) == _reflectionManager->getEntities().end())
-			{
-				entity->setCurrentReflectionEntityId("");
-				entity->setCubeReflectionMixValue(1.0f);
-			}
-			if(entity->getPreviousReflectionEntityId() == entity->getCurrentReflectionEntityId())
-			{
-				entity->setPreviousReflectionEntityId("");
-				entity->setCubeReflectionMixValue(1.0f);
-			}
-
-			if((_timer->getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
-			{
-				map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
-
-				for(const auto& [key, reflectionEntity] : _reflectionManager->getEntities())
-				{
-					if(reflectionEntity->isVisible())
-					{
-						const auto absoluteDistance = Math::calculateDistance(entity->getBasePosition(), reflectionEntity->getPosition());
-
-						reflectionDistanceMap.insert(make_pair(absoluteDistance, reflectionEntity));
-					}
-				}
-
-				if(!reflectionDistanceMap.empty())
-				{
-					auto& closestReflectionEntityId = reflectionDistanceMap.begin()->second->getId();
-
-					if(entity->getCurrentReflectionEntityId() != closestReflectionEntityId)
-					{
-						entity->setPreviousReflectionEntityId(entity->getCurrentReflectionEntityId());
-						entity->setCurrentReflectionEntityId(closestReflectionEntityId);
-
-						if(!entity->getPreviousReflectionEntityId().empty())
-						{
-							entity->setCubeReflectionMixValue(0.0f);
-						}
-					}
-				}
-
-				entity->setCubeReflectionMixValue(entity->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
-			}
-
-			entity->updateTransformationMatrix();
+			continue;
 		}
+
+		if(entity->getLevelOfDetailEntityId().empty())
+		{
+			entity->setLevelOfDetailed(false);
+		}
+		else
+		{
+			if(getEntities().find(entity->getId()) == getEntities().end())
+			{
+				Logger::throwError("ModelEntityManager::update");
+			}
+
+			const auto cameraPosition = _renderBus->getCameraPosition();
+			const auto entityPosition = entity->getBasePosition();
+			const auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
+
+			entity->setLevelOfDetailed((absolsuteDistance > entity->getLevelOfDetailDistance()));
+		}
+
+		if(_reflectionManager->getEntities().find(entity->getPreviousReflectionEntityId()) == _reflectionManager->getEntities().end())
+		{
+			entity->setPreviousReflectionEntityId("");
+			entity->setCubeReflectionMixValue(1.0f);
+		}
+		if(_reflectionManager->getEntities().find(entity->getCurrentReflectionEntityId()) == _reflectionManager->getEntities().end())
+		{
+			entity->setCurrentReflectionEntityId("");
+			entity->setCubeReflectionMixValue(1.0f);
+		}
+		if(entity->getPreviousReflectionEntityId() == entity->getCurrentReflectionEntityId())
+		{
+			entity->setPreviousReflectionEntityId("");
+			entity->setCubeReflectionMixValue(1.0f);
+		}
+
+		if((_timer->getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
+		{
+			map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
+
+			for(const auto& [key, reflectionEntity] : _reflectionManager->getEntities())
+			{
+				if(reflectionEntity->isVisible())
+				{
+					const auto absoluteDistance = Math::calculateDistance(entity->getBasePosition(), reflectionEntity->getPosition());
+
+					reflectionDistanceMap.insert(make_pair(absoluteDistance, reflectionEntity));
+				}
+			}
+
+			if(!reflectionDistanceMap.empty())
+			{
+				auto& closestReflectionEntityId = reflectionDistanceMap.begin()->second->getId();
+
+				if(entity->getCurrentReflectionEntityId() != closestReflectionEntityId)
+				{
+					entity->setPreviousReflectionEntityId(entity->getCurrentReflectionEntityId());
+					entity->setCurrentReflectionEntityId(closestReflectionEntityId);
+
+					if(!entity->getPreviousReflectionEntityId().empty())
+					{
+						entity->setCubeReflectionMixValue(0.0f);
+					}
+				}
+			}
+
+			entity->setCubeReflectionMixValue(entity->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
+		}
+
+		entity->updateTransformationMatrix();
 	}
 }

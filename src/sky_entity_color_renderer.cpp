@@ -16,42 +16,44 @@ void SkyEntityColorRenderer::unbind()
 
 void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 {
-	if(entity->isVisible())
+	if(!entity->isVisible())
 	{
-		if(entity->isWireframed())
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		}
+		return;
+	}
 
-		_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
-		_shader->uploadUniform("u_rotationMatrix", entity->getRotationMatrix());
-		_shader->uploadUniform("u_lightness", (entity->getLightness() + _renderBus->getSkyExposureLightness()));
-		_shader->uploadUniform("u_color", entity->getColor());
-		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
-		_shader->uploadUniform("u_hasCubeMap", (entity->getCubeMap() != nullptr));
+	if(entity->isWireframed())
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
 
-		if(entity->getCubeMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap()->getId());
-		}
+	_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
+	_shader->uploadUniform("u_rotationMatrix", entity->getRotationMatrix());
+	_shader->uploadUniform("u_lightness", (entity->getLightness() + _renderBus->getSkyExposureLightness()));
+	_shader->uploadUniform("u_color", entity->getColor());
+	_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
+	_shader->uploadUniform("u_hasCubeMap", (entity->getCubeMap() != nullptr));
 
-		glBindVertexArray(entity->getMesh()->getVaoId());
+	if(entity->getCubeMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap()->getId());
+	}
 
-		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
-		_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
+	glBindVertexArray(entity->getMesh()->getVaoId());
 
-		glBindVertexArray(0);
+	glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
+	_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
 
-		if(entity->getCubeMap() != nullptr)
-		{
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-		}
+	glBindVertexArray(0);
 
-		if(entity->isWireframed())
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		}
+	if(entity->getCubeMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+	}
+
+	if(entity->isWireframed())
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }

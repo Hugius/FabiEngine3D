@@ -331,6 +331,8 @@ private:
 	bool _isChoosingWorld = false;
 	bool _isDeletingWorld = false;
 	bool _isEditorLoaded = false;
+	bool _isWireframeModeEnabled = false;
+	bool _isAabbModeEnabled = false;
 
 	shared_ptr<SkyEditor> _skyEditor = nullptr;
 	shared_ptr<TerrainEditor> _terrainEditor = nullptr;

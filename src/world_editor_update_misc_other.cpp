@@ -73,64 +73,59 @@ void WorldEditor::_updateMiscellaneous()
 	{
 		if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 		{
-			if(!_loadedSkyId.empty())
+			_isWireframeModeEnabled = !_isWireframeModeEnabled;
+		}
+
+		if(_fe3d->input_isKeyPressed(InputType::KEY_B))
+		{
+			_isAabbModeEnabled = !_isAabbModeEnabled;
+		}
+
+		if(!_loadedSkyId.empty())
+		{
+			_fe3d->sky_setWireframed(_loadedSkyId, _isWireframeModeEnabled);
+		}
+
+		if(!_loadedTerrainId.empty())
+		{
+			_fe3d->terrain_setWireframed(_loadedTerrainId, _isWireframeModeEnabled);
+		}
+
+		if(!_loadedWaterId.empty())
+		{
+			_fe3d->water_setWireframed(_loadedWaterId, _isWireframeModeEnabled);
+		}
+
+		for(const auto& modelId : _fe3d->model_getIds())
+		{
+			for(const auto& partId : _fe3d->model_getPartIds(modelId))
 			{
-				_fe3d->sky_setWireframed(_loadedSkyId, !_fe3d->sky_isWireframed(_loadedSkyId));
+				_fe3d->model_setWireframed(modelId, partId, _isWireframeModeEnabled);
 			}
 
-			if(!_loadedTerrainId.empty())
+			for(const auto& aabbId : _fe3d->aabb_getChildIds(modelId, AabbParentEntityType::MODEL))
 			{
-				_fe3d->terrain_setWireframed(_loadedTerrainId, !_fe3d->terrain_isWireframed(_loadedTerrainId));
-			}
-
-			if(!_loadedWaterId.empty())
-			{
-				_fe3d->water_setWireframed(_loadedWaterId, !_fe3d->water_isWireframed(_loadedWaterId));
-			}
-
-			for(const auto& [key, templateId] : _loadedModelIds)
-			{
-				for(const auto& partId : _fe3d->model_getPartIds(key))
-				{
-					_fe3d->model_setWireframed(key, partId, !_fe3d->model_isWireframed(key, partId));
-				}
-			}
-
-			for(const auto& [key, templateId] : _loadedQuadIds)
-			{
-				_fe3d->quad3d_setWireframed(key, !_fe3d->quad3d_isWireframed(key));
-			}
-
-			for(const auto& [key, templateId] : _loadedTextIds)
-			{
-				_fe3d->text3d_setWireframed(key, !_fe3d->text3d_isWireframed(key));
+				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 			}
 		}
 
-		if(_fe3d->input_isKeyDown(InputType::KEY_B))
+		for(const auto& quadId : _fe3d->quad3d_getIds())
 		{
-			for(const auto& [key, templateId] : _loadedModelIds)
-			{
-				for(const auto& aabbId : _fe3d->aabb_getChildIds(key, AabbParentEntityType::MODEL))
-				{
-					_fe3d->aabb_setVisible(aabbId, !_fe3d->aabb_isVisible(aabbId));
-				}
-			}
+			_fe3d->quad3d_setWireframed(quadId, _isWireframeModeEnabled);
 
-			for(const auto& [key, templateId] : _loadedQuadIds)
+			for(const auto& aabbId : _fe3d->aabb_getChildIds(quadId, AabbParentEntityType::QUAD3D))
 			{
-				for(const auto& aabbId : _fe3d->aabb_getChildIds(key, AabbParentEntityType::QUAD3D))
-				{
-					_fe3d->aabb_setVisible(aabbId, !_fe3d->aabb_isVisible(aabbId));
-				}
+				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 			}
+		}
 
-			for(const auto& [key, templateId] : _loadedTextIds)
+		for(const auto& textId : _fe3d->text3d_getIds())
+		{
+			_fe3d->text3d_setWireframed(textId, _isWireframeModeEnabled);
+
+			for(const auto& aabbId : _fe3d->aabb_getChildIds(textId, AabbParentEntityType::TEXT3D))
 			{
-				for(const auto& aabbId : _fe3d->aabb_getChildIds(key, AabbParentEntityType::TEXT3D))
-				{
-					_fe3d->aabb_setVisible(aabbId, !_fe3d->aabb_isVisible(aabbId));
-				}
+				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 			}
 		}
 	}

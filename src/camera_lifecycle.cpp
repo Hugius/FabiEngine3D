@@ -93,13 +93,13 @@ void Camera::update(const ivec2& lastCursorPosition)
 		_firstPersonYawAcceleration += xOffset;
 		_firstPersonYawAcceleration = clamp(_firstPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_firstPersonYaw += _firstPersonYawAcceleration;
-		_firstPersonYawAcceleration *= 0.75f;
+		_firstPersonYawAcceleration *= ACCELERATION_RESISTANCE;
 
 		_firstPersonPitchAcceleration += yOffset;
 		_firstPersonPitchAcceleration = clamp(_firstPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_firstPersonPitch += _firstPersonPitchAcceleration;
 		_firstPersonPitch = clamp(_firstPersonPitch, _minFirstPersonPitch, _maxFirstPersonPitch);
-		_firstPersonPitchAcceleration *= 0.75f;
+		_firstPersonPitchAcceleration *= ACCELERATION_RESISTANCE;
 
 		_firstPersonYaw = Math::limitAngle(_firstPersonYaw);
 		_firstPersonPitch = clamp(_firstPersonPitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
@@ -127,14 +127,14 @@ void Camera::update(const ivec2& lastCursorPosition)
 		_thirdPersonYawAcceleration = clamp(_thirdPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_thirdPersonYaw -= _thirdPersonYawAcceleration;
 		_thirdPersonYaw = Math::limitAngle(_thirdPersonYaw);
-		_thirdPersonYawAcceleration *= 0.75f;
+		_thirdPersonYawAcceleration *= ACCELERATION_RESISTANCE;
 
 		_thirdPersonPitchAcceleration += yOffset;
 		_thirdPersonPitchAcceleration = clamp(_thirdPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_thirdPersonPitch -= _thirdPersonPitchAcceleration;
 		_thirdPersonPitch = clamp(_thirdPersonPitch, _minThirdPersonPitch, _maxThirdPersonPitch);
 		_thirdPersonPitch = clamp(_thirdPersonPitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
-		_thirdPersonPitchAcceleration *= 0.75f;
+		_thirdPersonPitchAcceleration *= ACCELERATION_RESISTANCE;
 
 		_thirdPersonDistance = max(MIN_THIRD_PERSON_DISTANCE, _thirdPersonDistance);
 

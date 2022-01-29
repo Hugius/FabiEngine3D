@@ -81,10 +81,11 @@ private:
 	static inline constexpr float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
 	static inline constexpr float DEFAULT_FOV_ANGLE = 90.0f;
 	static inline constexpr float MAX_FOV_ANGLE = 150.0f;
-	static inline constexpr float MIN_PITCH_ANGLE = -89.99f;
-	static inline constexpr float MAX_PITCH_ANGLE = 89.99f;
+	static inline constexpr float MIN_PITCH_ANGLE = -89.0f;
+	static inline constexpr float MAX_PITCH_ANGLE = 89.0f;
 	static inline constexpr float MIN_THIRD_PERSON_DISTANCE = 0.01f;
 	static inline constexpr float MAX_ACCELERATION = 10.0f;
+	static inline constexpr float ACCELERATION_RESISTANCE = 0.75f;
 	float _aspectRatio = 0.0f;
 	float _fov = 0.0f;
 	float _yaw = 0.0f;

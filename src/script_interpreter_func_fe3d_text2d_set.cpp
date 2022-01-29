@@ -6,7 +6,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:text2dplace")
+	if(functionName == "fe3d:text2d_place")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2ddelete")
+	else if(functionName == "fe3d:text2d_delete")
 	{
 		auto types = {SVT::STRING};
 
@@ -49,7 +49,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2ddelete_all")
+	else if(functionName == "fe3d:text2d_delete_all")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:text2dset_visible")
+	else if(functionName == "fe3d:text2d_set_visible")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dset_horizontally_flipped")
+	else if(functionName == "fe3d:text2d_set_horizontally_flipped")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dset_vertically_flipped")
+	else if(functionName == "fe3d:text2d_set_vertically_flipped")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dset_wireframed")
+	else if(functionName == "fe3d:text2d_set_wireframed")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dset_position")
+	else if(functionName == "fe3d:text2d_set_position")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -134,7 +134,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dmove")
+	else if(functionName == "fe3d:text2d_move")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dmove_to")
+	else if(functionName == "fe3d:text2d_move_to")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -163,7 +163,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2drotate_to")
+	else if(functionName == "fe3d:text2d_rotate_to")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -177,7 +177,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dscale_to")
+	else if(functionName == "fe3d:text2d_scale_to")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dset_rotation")
+	else if(functionName == "fe3d:text2d_set_rotation")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
@@ -206,7 +206,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2drotate")
+	else if(functionName == "fe3d:text2d_rotate")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
@@ -220,7 +220,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dset_size")
+	else if(functionName == "fe3d:text2d_set_size")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -234,7 +234,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dscale")
+	else if(functionName == "fe3d:text2d_scale")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -248,7 +248,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dset_color")
+	else if(functionName == "fe3d:text2d_set_color")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -262,7 +262,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dset_wireframe_color")
+	else if(functionName == "fe3d:text2d_set_wireframe_color")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -276,7 +276,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dset_content")
+	else if(functionName == "fe3d:text2d_set_content")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -290,7 +290,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2dset_opacity")
+	else if(functionName == "fe3d:text2d_set_opacity")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
@@ -311,7 +311,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:text` functionality as networking server!");
+		_throwScriptError("cannot access `fe3d:text2d` functionality as networking server!");
 	}
 
 	return true;

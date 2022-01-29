@@ -2,7 +2,7 @@
 #include "master_renderer.hpp"
 #include "configuration.hpp"
 #include "render_bus.hpp"
-
+#include "tools.hpp"
 #include <algorithm>
 
 using std::make_shared;
@@ -193,10 +193,16 @@ void MasterRenderer::_updateLensFlare()
 		const auto flareSourceNdc = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
 		const auto flareSourceUv = fvec2(((flareSourceNdc.x + 1.0f) * 0.5f), ((flareSourceNdc.y + 1.0f) * 0.5f));
 
+		if(flareSourceClip.z < 1.0f)
+		{
+			return;
+		}
+
 		float opacity = 0.0f;
 		if((flareSourceNdc.x > -1.0f) && (flareSourceNdc.x < 1.0f) && (flareSourceNdc.y > -1.0f) && (flareSourceNdc.y < 1.0f))
 		{
-			opacity = (1.0f - (max(fabsf(flareSourceNdc.x), fabsf(flareSourceNdc.y)) / _renderBus->getLensFlareSensitivity()));
+			const auto distance = (Math::calculateDistance(flareSourceNdc, fvec2(0.0f)) / _renderBus->getLensFlareSensitivity());
+			opacity = (1.0f - distance);
 			opacity = clamp(opacity, 0.0f, 1.0f);
 		}
 

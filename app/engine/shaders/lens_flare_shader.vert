@@ -33,12 +33,10 @@ float calculateFlareVisibility()
 {
     if (u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareOpacity > 0.0f))
     {
-        float flareDepth = texture(u_depthMap, u_flareSourceUv).r;
-        float flareFragmentDepth = (convertDepthToPerspective(flareDepth) / u_farDistance);
-
-        float flareDistance = distance(u_cameraPosition, u_flareSourcePosition);
+        float fragmentDepth = convertDepthToPerspective(texture(u_depthMap, u_flareSourceUv).r);
+        float flareDepth = distance(u_cameraPosition, u_flareSourcePosition);
         
-        if ((flareFragmentDepth * u_farDistance) >= abs(flareDistance))
+        if (fragmentDepth > abs(flareDepth))
         {
             return 1.0f;
         }

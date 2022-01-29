@@ -34,9 +34,10 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			if(_currentPartId.empty())
 			{
-				auto modelParts = currentAnimation->getPartIds();
-				modelParts.erase(modelParts.begin());
-				_gui->getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), modelParts);
+				auto partIds = currentAnimation->getPartIds();
+				partIds.erase(partIds.begin());
+				_gui->getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), partIds);
+				_isChoosingPart = true;
 			}
 			else
 			{
@@ -197,35 +198,5 @@ void Animation3dEditor::_updateFrameMenu()
 		frame.setRotationOrigin(_currentPartId, rotationOrigin);
 
 		currentAnimation->setFrame(_currentFrameIndex, frame);
-
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("partList");
-
-		if(!selectedButtonId.empty())
-		{
-			if(_hoveredPartId.empty())
-			{
-				_hoveredPartId = selectedButtonId;
-				_originalPartOpacity = _fe3d->model_getOpacity(currentAnimation->getPreviewModelId(), _hoveredPartId);
-			}
-
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-			{
-				_currentPartId = selectedButtonId;
-				_hoveredPartId = "";
-				_gui->getOverlay()->deleteChoiceForm("partList");
-			}
-		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("partList"))
-		{
-			_gui->getOverlay()->deleteChoiceForm("partList");
-		}
-		else
-		{
-			if(!_hoveredPartId.empty())
-			{
-				_fe3d->model_setOpacity(currentAnimation->getPreviewModelId(), _hoveredPartId, _originalPartOpacity);
-				_hoveredPartId = "";
-			}
-		}
 	}
 }

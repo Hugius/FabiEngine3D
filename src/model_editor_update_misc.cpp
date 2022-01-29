@@ -210,7 +210,7 @@ void ModelEditor::_updateModelChoosing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentModelId = ("@" + selectedButtonId);
+				_currentModelId = _hoveredModelId;
 				_hoveredModelId = "";
 
 				if(!_isDeletingModel)
@@ -221,7 +221,6 @@ void ModelEditor::_updateModelChoosing()
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
 				}
 
-				_fe3d->model_setVisible(_currentModelId, true);
 				_gui->getOverlay()->deleteChoiceForm("modelList");
 				_isChoosingModel = false;
 			}
@@ -286,8 +285,9 @@ void ModelEditor::_updatePartChoosing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentPartId = selectedButtonId;
+				_currentPartId = _hoveredPartId;
 				_hoveredPartId = "";
+
 				_gui->getOverlay()->deleteChoiceForm("partList");
 				_isChoosingPart = false;
 			}

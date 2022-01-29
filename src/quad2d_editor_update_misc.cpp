@@ -91,7 +91,7 @@ void Quad2dEditor::_updateQuadChoosing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentQuadId = ("@" + selectedButtonId);
+				_currentQuadId = _hoveredQuadId;
 				_hoveredQuadId = "";
 
 				if(!_isDeletingQuad)

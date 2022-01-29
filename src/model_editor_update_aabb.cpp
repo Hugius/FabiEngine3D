@@ -167,7 +167,7 @@ void ModelEditor::_updateAabbChoosing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentAabbId = selectedButtonId;
+				_currentAabbId = _hoveredAabbId;
 				_hoveredAabbId = "";
 
 				if(!_isDeletingAabb)

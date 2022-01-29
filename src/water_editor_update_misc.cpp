@@ -128,7 +128,7 @@ void WaterEditor::_updateWaterChoosing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentWaterId = ("@" + selectedButtonId);
+				_currentWaterId = _fe3d->water_getSelectedId();
 
 				if(!_isDeletingWater)
 				{

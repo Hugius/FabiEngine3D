@@ -183,6 +183,14 @@ void Animation3dEditor::update()
 	}
 	if(_isEditorLoaded)
 	{
+		_updateModelChoosing();
+	}
+	if(_isEditorLoaded)
+	{
+		_updatePartChoosing();
+	}
+	if(_isEditorLoaded)
+	{
 		_updateCamera();
 	}
 	if(_isEditorLoaded)

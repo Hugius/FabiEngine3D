@@ -54,6 +54,8 @@ private:
 	void _updateAnimationCreating();
 	void _updateAnimationChoosing();
 	void _updateAnimationDeleting();
+	void _updateModelChoosing();
+	void _updatePartChoosing();
 	void _updateModelAnimationExecution();
 	void _updateCamera();
 	void _updateMiscellaneous();
@@ -99,6 +101,8 @@ private:
 	bool _isCreatingAnimation = false;
 	bool _isChoosingAnimation = false;
 	bool _isDeletingAnimation = false;
+	bool _isChoosingModel = false;
+	bool _isChoosingPart = false;
 	bool _isEditorLoaded = false;
 
 	map<pair<string, string>, Animation3d> _startedModelAnimations;

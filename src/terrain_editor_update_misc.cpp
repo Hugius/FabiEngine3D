@@ -163,7 +163,7 @@ void TerrainEditor::_updateTerrainChoosing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentTerrainId = ("@" + selectedButtonId);
+				_currentTerrainId = _fe3d->terrain_getSelectedId();
 
 				if(!_isDeletingTerrain)
 				{

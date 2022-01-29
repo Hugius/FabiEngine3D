@@ -296,3 +296,124 @@ void Animation3dEditor::_updateAnimationDeleting()
 		}
 	}
 }
+
+void Animation3dEditor::_updateModelChoosing()
+{
+	if(_isChoosingModel)
+	{
+		auto currentAnimation = _getAnimation(_currentAnimationId);
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("modelList");
+
+		if(!selectedButtonId.empty())
+		{
+			if(_hoveredModelId.empty())
+			{
+				_hoveredModelId = ("@" + selectedButtonId);
+				_fe3d->model_setVisible(_hoveredModelId, true);
+			}
+
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			{
+				bool hasAllParts = true;
+				for(const auto& partId : currentAnimation->getPartIds())
+				{
+					if(!partId.empty())
+					{
+						hasAllParts = hasAllParts && _fe3d->model_hasPart(_hoveredModelId, partId);
+					}
+				}
+
+				if(!hasAllParts)
+				{
+					Logger::throwWarning("Preview model does not have required animation parts!");
+					return;
+				}
+
+				currentAnimation->setPreviewModelId(_hoveredModelId);
+				currentAnimation->setInitialSize(_fe3d->model_getBaseSize(currentAnimation->getPreviewModelId()));
+
+				if(currentAnimation->getFrames().empty())
+				{
+					Animation3dFrame defaultFrame;
+
+					currentAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
+					defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
+
+					auto partIds = _fe3d->model_getPartIds(currentAnimation->getPreviewModelId());
+					if(partIds.size() > 1)
+					{
+						for(const auto& partId : partIds)
+						{
+							currentAnimation->addPart(partId, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
+
+							defaultFrame.addPart(partId, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
+						}
+					}
+
+					currentAnimation->addFrame(defaultFrame);
+				}
+
+				_gui->getOverlay()->deleteChoiceForm("modelList");
+				_hoveredModelId = "";
+				_isChoosingModel = false;
+			}
+		}
+		else if(_gui->getOverlay()->isChoiceFormCancelled("modelList"))
+		{
+			if(_fe3d->model_isExisting(currentAnimation->getPreviewModelId()))
+			{
+				_fe3d->model_setVisible(currentAnimation->getPreviewModelId(), true);
+			}
+
+			_gui->getOverlay()->deleteChoiceForm("modelList");
+			_isChoosingModel = false;
+		}
+		else
+		{
+			if(!_hoveredModelId.empty())
+			{
+				_fe3d->model_setVisible(_hoveredModelId, false);
+				_hoveredModelId = "";
+			}
+		}
+	}
+}
+
+void Animation3dEditor::_updatePartChoosing()
+{
+	if(_isChoosingPart)
+	{
+		auto currentAnimation = _getAnimation(_currentAnimationId);
+		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("partList");
+
+		if(!selectedButtonId.empty())
+		{
+			if(_hoveredPartId.empty())
+			{
+				_hoveredPartId = selectedButtonId;
+				_originalPartOpacity = _fe3d->model_getOpacity(currentAnimation->getPreviewModelId(), _hoveredPartId);
+			}
+
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			{
+				_currentPartId = _hoveredPartId;
+				_hoveredPartId = "";
+				_gui->getOverlay()->deleteChoiceForm("partList");
+				_isChoosingPart = false;
+			}
+		}
+		else if(_gui->getOverlay()->isChoiceFormCancelled("partList"))
+		{
+			_gui->getOverlay()->deleteChoiceForm("partList");
+			_isChoosingPart = false;
+		}
+		else
+		{
+			if(!_hoveredPartId.empty())
+			{
+				_fe3d->model_setOpacity(currentAnimation->getPreviewModelId(), _hoveredPartId, _originalPartOpacity);
+				_hoveredPartId = "";
+			}
+		}
+	}
+}

@@ -183,7 +183,7 @@ void Text3dEditor::_updateText3dChoosing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentTextId = ("@" + selectedButtonId);
+				_currentTextId = _hoveredTextId;
 				_hoveredTextId = "";
 
 				if(!_isDeletingText3d)

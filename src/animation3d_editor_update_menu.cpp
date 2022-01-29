@@ -104,6 +104,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				id = id.substr(1);
 			}
 			_gui->getOverlay()->createChoiceForm("modelList", "Select Model", fvec2(-0.5f, 0.1f), modelIds);
+			_isChoosingModel = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
@@ -216,79 +217,6 @@ void Animation3dEditor::_updateChoiceMenu()
 		if(!isStarted)
 		{
 			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
-		}
-
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("modelList");
-
-		if(!selectedButtonId.empty())
-		{
-			if(_hoveredModelId.empty())
-			{
-				_hoveredModelId = ("@" + selectedButtonId);
-				_fe3d->model_setVisible(_hoveredModelId, true);
-			}
-
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-			{
-				bool hasAllParts = true;
-				for(const auto& partId : currentAnimation->getPartIds())
-				{
-					if(!partId.empty())
-					{
-						hasAllParts = hasAllParts && _fe3d->model_hasPart(_hoveredModelId, partId);
-					}
-				}
-
-				if(!hasAllParts)
-				{
-					Logger::throwWarning("Preview model does not have required animation parts!");
-					return;
-				}
-
-				currentAnimation->setPreviewModelId(_hoveredModelId);
-				currentAnimation->setInitialSize(_fe3d->model_getBaseSize(_hoveredModelId));
-
-				if(currentAnimation->getFrames().empty())
-				{
-					Animation3dFrame defaultFrame;
-
-					currentAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
-					defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
-
-					auto partIds = _fe3d->model_getPartIds(_hoveredModelId);
-					if(partIds.size() > 1)
-					{
-						for(const auto& partId : partIds)
-						{
-							currentAnimation->addPart(partId, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
-
-							defaultFrame.addPart(partId, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
-						}
-					}
-
-					currentAnimation->addFrame(defaultFrame);
-				}
-
-				_gui->getOverlay()->deleteChoiceForm("modelList");
-				_hoveredModelId = "";
-			}
-		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("modelList"))
-		{
-			if(_fe3d->model_isExisting(currentAnimation->getPreviewModelId()))
-			{
-				_fe3d->model_setVisible(currentAnimation->getPreviewModelId(), true);
-			}
-
-			_gui->getOverlay()->deleteChoiceForm("modelList");
-		}
-		else
-		{
-			if(!_hoveredModelId.empty())
-			{
-				_fe3d->model_setVisible(_hoveredModelId, false);
-				_hoveredModelId = "";
-			}
 		}
 	}
 }

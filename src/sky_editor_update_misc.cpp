@@ -111,7 +111,7 @@ void SkyEditor::_updateSkyChoosing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentSkyId = ("@" + selectedButtonId);
+				_currentSkyId = _fe3d->sky_getSelectedId();
 
 				if(!_isDeletingSky)
 				{

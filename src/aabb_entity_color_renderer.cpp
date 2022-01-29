@@ -9,6 +9,12 @@ void AabbEntityColorRenderer::bind()
 
 	_shader->uploadUniform("u_viewMatrix", _renderBus->getViewMatrix());
 	_shader->uploadUniform("u_projectionMatrix", _renderBus->getProjectionMatrix());
+	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
+	_shader->uploadUniform("u_fogMinDistance", _renderBus->getFogMinDistance());
+	_shader->uploadUniform("u_fogMaxDistance", _renderBus->getFogMaxDistance());
+	_shader->uploadUniform("u_fogThickness", _renderBus->getFogThickness());
+	_shader->uploadUniform("u_fogColor", _renderBus->getFogColor());
+	_shader->uploadUniform("u_isFogEnabled", _renderBus->isFogEnabled());
 
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);

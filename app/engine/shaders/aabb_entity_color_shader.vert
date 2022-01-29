@@ -13,13 +13,15 @@ uniform float u_maxX;
 uniform float u_maxY;
 uniform float u_maxZ;
 
-out vec2 f_uv;
+out vec3 f_position;
 
 void main()
 {
 	vec4 worldSpacePosition = (u_transformationMatrix * vec4(v_position, 1.0f));
 	vec4 viewSpacePosition  = (u_viewMatrix * worldSpacePosition);
 	vec4 clipSpacePosition  = (u_projectionMatrix * viewSpacePosition);
+
+	f_position = worldSpacePosition.xyz;
 
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));

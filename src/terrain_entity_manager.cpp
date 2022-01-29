@@ -72,11 +72,11 @@ void TerrainEntityManager::createEntity(const string& id, const string& heightMa
 		pixels.push_back(intensity);
 	}
 
-	_loadMesh(entity, size, 0.0f, pixels);
-
 	entity->setHeightMapPath(heightMapPath);
 	entity->setPixels(pixels);
 	entity->setSize(size);
+
+	loadMesh(id);
 }
 
 void TerrainEntityManager::selectEntity(const string& id)

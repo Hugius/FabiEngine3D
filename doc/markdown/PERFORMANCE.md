@@ -15,6 +15,7 @@
 - Rendering water reflections
 - Rendering water refractions
 - Rendering water waves
+- Rendering water edges
 - Rendering pointlight entities
 - Rendering spotlight entities
 - Rendering complex meshes

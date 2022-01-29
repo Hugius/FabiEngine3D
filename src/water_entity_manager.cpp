@@ -47,7 +47,7 @@ void WaterEntityManager::createEntity(const string& id)
 
 	_entities.insert(make_pair(id, entity));
 
-	_loadMesh(entity, 0.0f);
+	loadMesh(id);
 }
 
 void WaterEntityManager::deleteEntity(const string& id)

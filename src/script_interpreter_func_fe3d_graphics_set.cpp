@@ -149,13 +149,13 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:graphics_set_motion_blur_strength")
+	else if(functionName == "fe3d:graphics_set_motion_blur_intensity")
 	{
 		auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_setMotionBlurStrength(args[0].getDecimal());
+			_fe3d->gfx_setMotionBlurIntensity(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}

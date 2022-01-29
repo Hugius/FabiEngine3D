@@ -267,7 +267,7 @@ void EngineInterface::gfx_disableMotionBlur(bool mustResetProperties)
 
 	if(mustResetProperties)
 	{
-		_core->getRenderBus()->setMotionBlurStrength(0.0f);
+		_core->getRenderBus()->setMotionBlurIntensity(0.0f);
 		_core->getRenderBus()->setMotionBlurQuality(Config::MIN_MOTION_BLUR_QUALITY);
 	}
 }
@@ -482,9 +482,9 @@ void EngineInterface::gfx_setDofDynamic(bool value)
 	_core->getRenderBus()->setDofDynamic(value);
 }
 
-void EngineInterface::gfx_setMotionBlurStrength(float value)
+void EngineInterface::gfx_setMotionBlurIntensity(float value)
 {
-	_core->getRenderBus()->setMotionBlurStrength(value);
+	_core->getRenderBus()->setMotionBlurIntensity(value);
 }
 
 void EngineInterface::gfx_setLensFlareMap(const string& value)
@@ -730,9 +730,9 @@ const float EngineInterface::gfx_getLensFlareSensitivity() const
 	return _core->getRenderBus()->getLensFlareSensitivity();
 }
 
-const float EngineInterface::gfx_getMotionBlurStrength() const
+const float EngineInterface::gfx_getMotionBlurIntensity() const
 {
-	return _core->getRenderBus()->getMotionBlurStrength();
+	return _core->getRenderBus()->getMotionBlurIntensity();
 }
 
 const unsigned int EngineInterface::gfx_getBloomQuality() const

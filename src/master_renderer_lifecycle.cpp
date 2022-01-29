@@ -173,11 +173,11 @@ void MasterRenderer::_updateMotionBlur()
 	{
 		static auto lastYaw = _camera->getYaw();
 		static auto lastPitch = _camera->getPitch();
-		const auto currentYaw = _camera->getYaw();
-		const auto currentPitch = _camera->getPitch();
 
-		_cameraYawDifference = fabsf(Math::calculateReferenceAngle(currentYaw) - Math::calculateReferenceAngle(lastYaw));
-		_cameraPitchDifference = fabsf(Math::calculateReferenceAngle(currentPitch) - Math::calculateReferenceAngle(lastPitch));
+		fvec2 difference;
+		difference.x = fabsf(Math::calculateReferenceAngle(_camera->getYaw()) - Math::calculateReferenceAngle(lastYaw));
+		difference.y = fabsf(Math::calculateReferenceAngle(_camera->getPitch()) - Math::calculateReferenceAngle(lastPitch));
+		_renderBus->setMotionBlurDifference(difference);
 
 		lastYaw = _camera->getYaw();
 		lastPitch = _camera->getPitch();

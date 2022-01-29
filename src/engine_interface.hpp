@@ -792,7 +792,7 @@ public:
 	void gfx_setDofBlurDistance(float value);
 	void gfx_setDofDynamic(bool value);
 	void gfx_setDofQuality(unsigned int value);
-	void gfx_setMotionBlurStrength(float value);
+	void gfx_setMotionBlurIntensity(float value);
 	void gfx_setMotionBlurQuality(unsigned int value);
 	void gfx_setLensFlareMap(const string& value);
 	void gfx_setLensFlareIntensity(float value);
@@ -821,7 +821,7 @@ public:
 	const float gfx_getDofBlurDistance() const;
 	const float gfx_getLensFlareIntensity() const;
 	const float gfx_getLensFlareSensitivity() const;
-	const float gfx_getMotionBlurStrength() const;
+	const float gfx_getMotionBlurIntensity() const;
 	const unsigned int gfx_getBloomQuality() const;
 	const unsigned int gfx_getDofQuality() const;
 	const unsigned int gfx_getMotionBlurQuality() const;

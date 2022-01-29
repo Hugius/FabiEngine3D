@@ -62,8 +62,9 @@ public:
 	void setLensFlareOpacity(float value);
 	void setLensFlareIntensity(float value);
 	void setLensFlareSensitivity(float value);
-	void setMotionBlurStrength(float value);
+	void setMotionBlurIntensity(float value);
 	void setMotionBlurMixValue(float value);
+	void setMotionBlurDifference(fvec2 value);
 	void setBloomQuality(unsigned int value);
 	void setDofQuality(unsigned int value);
 	void setMotionBlurQuality(unsigned int value);
@@ -122,6 +123,7 @@ public:
 	const fvec3& getFlareSourcePosition() const;
 
 	const fvec2& getFlareSourceUv() const;
+	const fvec2 getMotionBlurDifference() const;
 
 	const float getAmbientLightingIntensity() const;
 	const float getDirectionalLightingIntensity() const;
@@ -141,7 +143,7 @@ public:
 	const float getLensFlareOpacity() const;
 	const float getLensFlareIntensity() const;
 	const float getLensFlareSensitivity() const;
-	const float getMotionBlurStrength() const;
+	const float getMotionBlurIntensity() const;
 	const float getMotionBlurMixValue() const;
 	const float getSkyExposureIntensity() const;
 	const float getSkyExposureSpeed() const;
@@ -231,6 +233,7 @@ private:
 	fvec3 _fogColor = fvec3(1.0f);
 
 	fvec2 _flareSourceUv = fvec2(0.0f);
+	fvec2 _motionBlurDifference = fvec2(0.0f);
 
 	float _ambientLightIntensity = 1.0f;
 	float _directionalLightIntensity = 1.0f;
@@ -250,7 +253,7 @@ private:
 	float _lensFlareOpacity = 0.0f;
 	float _lensFlareSensitivity = 1.0f;
 	float _lensFlareIntensity = 1.0f;
-	float _motionBlurStrength = 0.0f;
+	float _motionBlurIntensity = 0.0f;
 	float _motionBlurMixValue = 0.0f;
 	float _skyExposureIntensity = 0.0f;
 	float _skyExposureSpeed = 0.0f;

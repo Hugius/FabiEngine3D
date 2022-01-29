@@ -185,14 +185,19 @@ void RenderBus::setLensFlareSensitivity(float value)
 	_lensFlareSensitivity = max(0.0f, value);
 }
 
-void RenderBus::setMotionBlurStrength(float value)
+void RenderBus::setMotionBlurIntensity(float value)
 {
-	_motionBlurStrength = max(0.0f, value);
+	_motionBlurIntensity = max(0.0f, value);
 }
 
 void RenderBus::setMotionBlurMixValue(float value)
 {
 	_motionBlurMixValue = clamp(value, 0.0f, 1.0f);
+}
+
+void RenderBus::setMotionBlurDifference(fvec2 value)
+{
+	_motionBlurDifference = value;
 }
 
 void RenderBus::setBloomQuality(unsigned int value)
@@ -623,9 +628,9 @@ const float RenderBus::getLensFlareSensitivity() const
 	return _lensFlareSensitivity;
 }
 
-const float RenderBus::getMotionBlurStrength() const
+const float RenderBus::getMotionBlurIntensity() const
 {
-	return _motionBlurStrength;
+	return _motionBlurIntensity;
 }
 
 const float RenderBus::getMotionBlurMixValue() const
@@ -861,6 +866,11 @@ const float RenderBus::getSkyExposureSpeed() const
 const float RenderBus::getSkyExposureLightness() const
 {
 	return _skyExposureLightness;
+}
+
+const fvec2 RenderBus::getMotionBlurDifference() const
+{
+	return _motionBlurDifference;
 }
 
 const bool RenderBus::isSkyExposureEnabled() const

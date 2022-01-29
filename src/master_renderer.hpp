@@ -104,9 +104,6 @@ private:
 	void _renderFinalSceneMap();
 	void _renderGUI();
 
-	float _cameraYawDifference = 0.0f;
-	float _cameraPitchDifference = 0.0f;
-
 	SkyEntityColorRenderer _skyEntityColorRenderer;
 	TerrainEntityColorRenderer _terrainEntityColorRenderer;
 	TerrainEntityDepthRenderer _terrainEntityDepthRenderer;

@@ -155,25 +155,24 @@ void MasterRenderer::_captureMotionBlur()
 {
 	if(_renderBus->isMotionBlurEnabled())
 	{
-		const auto xDifference = (_cameraYawDifference * _renderBus->getMotionBlurStrength());
-		const auto yDifference = (_cameraPitchDifference * _renderBus->getMotionBlurStrength());
+		const auto difference = (_renderBus->getMotionBlurDifference() * _renderBus->getMotionBlurIntensity());
 
 		bool hasMoved = false;
 		BlurDirection direction;
 
-		if(xDifference != 0.0f || yDifference != 0.0f)
+		if(difference.x != 0.0f || difference.y != 0.0f)
 		{
-			if(xDifference >= yDifference)
+			if(difference.x >= difference.y)
 			{
 				hasMoved = true;
 				direction = BlurDirection::HORIZONTAL;
-				_renderBus->setMotionBlurMixValue(xDifference);
+				_renderBus->setMotionBlurMixValue(difference.x);
 			}
 			else
 			{
 				hasMoved = true;
 				direction = BlurDirection::VERTICAL;
-				_renderBus->setMotionBlurMixValue(yDifference);
+				_renderBus->setMotionBlurMixValue(difference.y);
 			}
 		}
 

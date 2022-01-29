@@ -517,7 +517,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 	//	if(_fe3d->gfx_isMotionBlurEnabled())
 	//	{
-	//		file << "GRAPHICS_MOTION_BLUR " << _fe3d->gfx_getMotionBlurStrength() << endl;
+	//		file << "GRAPHICS_MOTION_BLUR " << _fe3d->gfx_getMotionBlurIntensity() << endl;
 	//	}
 
 	//	if(_fe3d->gfx_isDofEnabled())

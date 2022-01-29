@@ -174,10 +174,10 @@ vec3 calculateNormalMapping()
 		{
 			vec2 blendUv = (f_uv / u_textureRepeat);
 			vec4 blendMapColor = texture(u_blendMap, blendUv);
-			float diffuseStrength = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
-			float rStrength = blendMapColor.r;
-			float gStrength = blendMapColor.g;
-			float bStrength = blendMapColor.b;
+			float diffuseIntensity = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
+			float rIntensity = blendMapColor.r;
+			float gIntensity = blendMapColor.g;
+			float bIntensity = blendMapColor.b;
 
 			vec3 totalNormal;
 
@@ -186,11 +186,11 @@ vec3 calculateNormalMapping()
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
-				totalNormal += (normalize(f_tbnMatrix * normal) * diffuseStrength);
+				totalNormal += (normalize(f_tbnMatrix * normal) * diffuseIntensity);
 			}
 			else
 			{
-				totalNormal += f_normal * diffuseStrength;
+				totalNormal += f_normal * diffuseIntensity;
 			}
 			
 			if (u_hasRedNormalMap)
@@ -198,11 +198,11 @@ vec3 calculateNormalMapping()
 				vec3 normal = texture(u_redNormalMap, (blendUv * u_redTextureRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
-				totalNormal += (normalize(f_tbnMatrix * normal) * rStrength);
+				totalNormal += (normalize(f_tbnMatrix * normal) * rIntensity);
 			}
 			else
 			{
-				totalNormal += f_normal * rStrength;
+				totalNormal += f_normal * rIntensity;
 			}
 
 			if (u_hasGreenNormalMap)
@@ -210,11 +210,11 @@ vec3 calculateNormalMapping()
 				vec3 normal = texture(u_greenNormalMap, (blendUv * u_greenTextureRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
-				totalNormal += (normalize(f_tbnMatrix * normal) * gStrength);
+				totalNormal += (normalize(f_tbnMatrix * normal) * gIntensity);
 			}
 			else
 			{
-				totalNormal += f_normal * gStrength;
+				totalNormal += f_normal * gIntensity;
 			}
 
 			if (u_hasBlueNormalMap)
@@ -222,11 +222,11 @@ vec3 calculateNormalMapping()
 				vec3 normal = texture(u_blueNormalMap, (blendUv * u_blueTextureRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
-				totalNormal += (normalize(f_tbnMatrix * normal) * bStrength);
+				totalNormal += (normalize(f_tbnMatrix * normal) * bIntensity);
 			}
 			else
 			{
-				totalNormal += f_normal * bStrength;
+				totalNormal += f_normal * bIntensity;
 			}
 
 			return totalNormal;

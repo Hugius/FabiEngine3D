@@ -112,11 +112,11 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:graphics_get_motion_blur_strength")
+	else if(functionName == "fe3d:graphics_get_motion_blur_intensity")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getMotionBlurStrength();
+			const auto result = _fe3d->gfx_getMotionBlurIntensity();
 
 			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}

@@ -522,12 +522,12 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//	}
 	//	else if(lineType == "GRAPHICS_MOTION_BLUR")
 	//	{
-	//		float strength;
+	//		float intensity;
 
-	//		iss >> strength;
+	//		iss >> intensity;
 
 	//		_fe3d->gfx_enableMotionBlur();
-	//		_fe3d->gfx_setMotionBlurStrength(strength);
+	//		_fe3d->gfx_setMotionBlurIntensity(intensity);
 	//	}
 	//	else if(lineType == "GRAPHICS_DOF")
 	//	{

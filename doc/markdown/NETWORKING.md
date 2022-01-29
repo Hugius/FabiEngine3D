@@ -13,7 +13,7 @@
 - You can portforward the server in your router settings on port `61205` for both TCP & UDP protocols.
 - There can be only 1 server running on the same machine.
 - You can set a maximum amount of clients that can connect to the server.
-- A server runs at the maximum update speed possible (it overrides the 144 ticks/second engine default).
+- A server runs at the maximum update speed possible (it overrides the default 144 updates per second).
 
 ### 1.2 Scripting
 
@@ -67,5 +67,5 @@
 
 - A network message cannot be longer than 128 characters or contain any semicolons (`;`).
 - There is no guarantee that if you send multiple messages right after each other, they will arrive at the same time.
-- Every update/tick in either the server or the client, the pending messages will be cleared before receiving new messages.
+- Every update in either the server or the client, the pending messages will be cleared before receiving new messages.
 - Some messages are reserved for the engine: `REQUEST`, `ACCEPT`, `PING`, `SERVER_FULL`, `ALREADY_CONNECTED`, `DISCONNECTED`.

@@ -129,7 +129,7 @@ void TopViewportController::_updateGameScreenManagement()
 		screen->getButton("debug")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
 
 		const bool cameIntoMainMenu = (!wasInMainMenu && isInMainMenu);
-		if(cameIntoMainMenu || (isInMainMenu && !isScriptStarted() && _fe3d->misc_checkInterval(Config::UPDATES_PER_SECOND)))
+		if(cameIntoMainMenu || (isInMainMenu && !isScriptStarted() && ((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0)))
 		{
 			_scriptEditor->loadScriptFiles(false);
 		}

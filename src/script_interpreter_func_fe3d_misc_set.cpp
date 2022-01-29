@@ -142,7 +142,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = _fe3d->misc_checkInterval(args[0].getInteger());
+			const auto result = ((_fe3d->misc_getPassedUpdateCount() % args[0].getInteger()) == 0);
 
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}

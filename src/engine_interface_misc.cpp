@@ -170,9 +170,14 @@ const unsigned int EngineInterface::misc_getTriangleCount() const
 	return _core->getRenderBus()->getTriangleCount();
 }
 
-const unsigned int EngineInterface::misc_getPassedTickCount() const
+const unsigned int EngineInterface::misc_getUpdateCountPerSecond() const
 {
-	return _core->getTimer()->getPassedTickCount();
+	return _core->getTimer()->getUpdateCountPerSecond();
+}
+
+const unsigned int EngineInterface::misc_getPassedUpdateCount() const
+{
+	return _core->getTimer()->getPassedUpdateCount();
 }
 
 const float EngineInterface::misc_getFPS() const
@@ -277,11 +282,6 @@ const bool EngineInterface::misc_isCursorInsideWindow() const
 	}
 
 	return false;
-}
-
-const bool EngineInterface::misc_checkInterval(unsigned int ticks) const
-{
-	return ((_core->getTimer()->getPassedTickCount() % ticks) == 0);
 }
 
 const vector<pair<string, int>> EngineInterface::misc_getUpdateProfilingStatistics() const

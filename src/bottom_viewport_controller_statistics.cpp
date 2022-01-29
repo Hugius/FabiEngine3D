@@ -6,15 +6,15 @@ using BVPC = BottomViewportController;
 
 void BottomViewportController::_updateStatistics()
 {
-	auto statisticsScreen = _gui->getBottomViewport()->getWindow("statistics")->getScreen("main");
-	auto consoleScreen = _gui->getBottomViewport()->getWindow("statistics")->getScreen("main");
+	const auto statisticsScreen = _gui->getBottomViewport()->getWindow("statistics")->getScreen("main");
+	const auto consoleScreen = _gui->getBottomViewport()->getWindow("statistics")->getScreen("main");
 
 	static vector<float> fpsList;
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0))
 	{
 		sort(fpsList.begin(), fpsList.end());
 
-		const auto fps = (fpsList.empty() ? 0.0f : fpsList[Config::getInst().UPDATES_PER_SECOND / 2]);
+		const auto fps = (fpsList.empty() ? 0.0f : fpsList[_fe3d->misc_getUpdateCountPerSecond() / 2]);
 		const auto textId = statisticsScreen->getTextField("fps")->getEntityId();
 		const auto text = string("FPS: " + to_string(static_cast<unsigned int>(fps)));
 
@@ -27,7 +27,7 @@ void BottomViewportController::_updateStatistics()
 		fpsList.push_back(_fe3d->misc_getFPS());
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 100))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0))
 	{
 		const auto textId = statisticsScreen->getTextField("cpuModel")->getEntityId();
 		const auto text = ("CPU: " + _fe3d->misc_getCpuName());
@@ -35,7 +35,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 100))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0))
 	{
 		const auto textId = statisticsScreen->getTextField("gpuModel")->getEntityId();
 		const auto text = ("GPU: " + _fe3d->misc_getGpuName());
@@ -43,7 +43,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 100))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0))
 	{
 		const auto textId = statisticsScreen->getTextField("openglVersion")->getEntityId();
 		const auto text = "OpenGL Version: " + _fe3d->misc_getOpenglVersion();
@@ -51,7 +51,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 100))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0))
 	{
 		const auto textId = statisticsScreen->getTextField("cameraPositionYawPitch")->getEntityId();
 		const auto text = ("Camera Position/Yaw/Pitch: " +
@@ -64,7 +64,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 100))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0))
 	{
 		const auto textId = statisticsScreen->getTextField("cursorPosition")->getEntityId();
 		const auto text = "Raycast Direction: " +
@@ -75,7 +75,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 100))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0))
 	{
 		const auto textId = statisticsScreen->getTextField("triangleCount")->getEntityId();
 		const auto text = "Triangles: " + to_string(static_cast<int>(_fe3d->misc_getTriangleCount()));
@@ -83,7 +83,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 10))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0))
 	{
 		unsigned int entityCount = 0;
 		for(const auto& entityId : _fe3d->model_getIds())
@@ -99,7 +99,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 10))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0))
 	{
 		unsigned int entityCount = 0;
 		for(const auto& entityId : _fe3d->quad3d_getIds())
@@ -115,7 +115,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 10))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0))
 	{
 		unsigned int entityCount = 0;
 		for(const auto& entityId : _fe3d->aabb_getIds())
@@ -131,7 +131,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 10))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0))
 	{
 		unsigned int entityCount = 0;
 		for(const auto& entityId : _fe3d->pointlight_getIds())
@@ -154,7 +154,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 10))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0))
 	{
 		unsigned int entityCount = 0;
 		for(const auto& entityId : _fe3d->reflection_getIds())
@@ -170,7 +170,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND / 10))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0))
 	{
 		unsigned int entityCount = 0;
 		for(const auto& entityId : _fe3d->quad2d_getIds())
@@ -193,7 +193,7 @@ void BottomViewportController::_updateStatistics()
 		_fe3d->text2d_setContent(textId, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if((_fe3d->misc_getPassedTickCount() == 0) || _fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0))
 	{
 		auto updateStatistics = _fe3d->misc_getUpdateProfilingStatistics();
 
@@ -205,7 +205,7 @@ void BottomViewportController::_updateStatistics()
 		}
 	}
 
-	if(_fe3d->misc_checkInterval(Config::getInst().UPDATES_PER_SECOND))
+	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0))
 	{
 		auto renderStatistics = _fe3d->misc_getRenderProfilingStatistics();
 

@@ -82,9 +82,9 @@ void Timer::sleep(int microseconds)
 	while((time2 - time1) < microseconds);
 }
 
-void Timer::increasePassedFrameCount()
+void Timer::increasePassedUpdateCount()
 {
-	_passedTickCount++;
+	_passedUpdateCount++;
 }
 
 void Timer::clearDeltaParts()
@@ -92,9 +92,14 @@ void Timer::clearDeltaParts()
 	_deltaParts.clear();
 }
 
-const unsigned int Timer::getPassedTickCount() const
+const unsigned int Timer::getUpdateCountPerSecond() const
 {
-	return _passedTickCount;
+	return UPDATES_PER_SECOND;
+}
+
+const unsigned int Timer::getPassedUpdateCount() const
+{
+	return _passedUpdateCount;
 }
 
 const bool Timer::isStarted() const

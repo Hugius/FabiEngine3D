@@ -199,6 +199,7 @@ void EngineCore::start()
 		}
 	}
 
+	const auto millisecondsPerUpdate = (1000.0f / static_cast<float>(_timer->getUpdateCountPerSecond()));
 	float renderLag = 0.0f;
 
 	while(_isRunning)
@@ -212,7 +213,7 @@ void EngineCore::start()
 				_inputHandler->update();
 			}
 
-			_timer->increasePassedFrameCount();
+			_timer->increasePassedUpdateCount();
 
 			_engineController->update();
 			_networkingServer->update();
@@ -233,20 +234,20 @@ void EngineCore::start()
 		{
 			renderLag += _deltaTime;
 
-			if(renderLag > (Config::MS_PER_UPDATE * 10.0f))
+			if(renderLag > (millisecondsPerUpdate * 10.0f))
 			{
-				renderLag = Config::MS_PER_UPDATE;
+				renderLag = millisecondsPerUpdate;
 			}
 
-			while(renderLag >= Config::MS_PER_UPDATE)
+			while(renderLag >= millisecondsPerUpdate)
 			{
-				_timer->increasePassedFrameCount();
+				_timer->increasePassedUpdateCount();
 
 				_inputHandler->update();
 
 				update();
 
-				renderLag -= Config::MS_PER_UPDATE;
+				renderLag -= millisecondsPerUpdate;
 				renderLag = max(renderLag, 0.0f);
 			}
 

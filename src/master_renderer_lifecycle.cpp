@@ -136,7 +136,7 @@ void MasterRenderer::_updateShadows()
 {
 	if(_renderBus->isShadowsEnabled())
 	{
-		if((_renderBus->getShadowInterval() == 0) || (_timer->getPassedTickCount() % _renderBus->getShadowInterval()) == 0)
+		if((_renderBus->getShadowInterval() == 0) || (_timer->getPassedUpdateCount() % _renderBus->getShadowInterval()) == 0)
 		{
 			if(_renderBus->isShadowsFollowingCamera())
 			{

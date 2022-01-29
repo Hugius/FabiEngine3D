@@ -162,6 +162,9 @@
     <ClCompile Include="..\..\..\src\water_entity_depth_renderer.cpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb_entity_depth_renderer.cpp">
+      <Filter>Renderer\Entity\Depth</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\master_renderer.hpp">
@@ -249,6 +252,9 @@
       <Filter>Renderer\Entity\Shadow</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\water_entity_depth_renderer.hpp">
+      <Filter>Renderer\Entity\Depth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\aabb_entity_depth_renderer.hpp">
       <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
   </ItemGroup>
@@ -365,6 +371,12 @@
       <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\water_entity_depth_shader.frag">
+      <Filter>Shaders\Entity\Depth</Filter>
+    </None>
+    <None Include="..\..\..\app\engine\shaders\aabb_entity_depth_shader.vert">
+      <Filter>Shaders\Entity\Depth</Filter>
+    </None>
+    <None Include="..\..\..\app\engine\shaders\aabb_entity_depth_shader.frag">
       <Filter>Shaders\Entity\Depth</Filter>
     </None>
   </ItemGroup>

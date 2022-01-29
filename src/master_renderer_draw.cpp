@@ -33,7 +33,7 @@ void MasterRenderer::renderApplication()
 	_capturePlanarReflections();
 	_timer->stopDeltaPart();
 	_timer->startDeltaPart("refractionPreRender");
-
+	// insert capture cube/planar refractions here
 	_timer->stopDeltaPart();
 	_timer->startDeltaPart("waterPreRender");
 	_captureWaterReflections();

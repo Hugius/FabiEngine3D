@@ -30,6 +30,7 @@ MasterRenderer::MasterRenderer()
 	_quad3dEntityDepthShader = make_shared<ShaderBuffer>("quad3d_entity_depth_shader.vert", "quad3d_entity_depth_shader.frag");
 	_quad3dEntityShadowShader = make_shared<ShaderBuffer>("quad3d_entity_shadow_shader.vert", "quad3d_entity_shadow_shader.frag");
 	_aabbEntityColorShader = make_shared<ShaderBuffer>("aabb_entity_color_shader.vert", "aabb_entity_color_shader.frag");
+	_aabbEntityDepthShader = make_shared<ShaderBuffer>("aabb_entity_depth_shader.vert", "aabb_entity_depth_shader.frag");
 	_quad2dEntityColorShader = make_shared<ShaderBuffer>("quad2d_entity_color_shader.vert", "quad2d_entity_color_shader.frag");
 	_antiAliasingShader = make_shared<ShaderBuffer>("anti_aliasing_shader.vert", "anti_aliasing_shader.frag");
 	_bloomShader = make_shared<ShaderBuffer>("bloom_shader.vert", "bloom_shader.frag");
@@ -68,6 +69,7 @@ MasterRenderer::MasterRenderer()
 	_quad3dEntityDepthRenderer.inject(_quad3dEntityDepthShader);
 	_quad3dEntityShadowRenderer.inject(_quad3dEntityShadowShader);
 	_aabbEntityColorRenderer.inject(_aabbEntityColorShader);
+	_aabbEntityDepthRenderer.inject(_aabbEntityDepthShader);
 	_quad2dEntityColorRenderer.inject(_quad2dEntityColorShader);
 	_antiAliasingRenderer.inject(_antiAliasingShader);
 	_bloomRenderer.inject(_bloomShader);

@@ -135,6 +135,7 @@ void MasterRenderer::inject(shared_ptr<RenderBus> renderBus)
 	_quad3dEntityDepthRenderer.inject(_renderBus);
 	_quad3dEntityShadowRenderer.inject(_renderBus);
 	_aabbEntityColorRenderer.inject(_renderBus);
+	_aabbEntityDepthRenderer.inject(_renderBus);
 	_quad2dEntityColorRenderer.inject(_renderBus);
 	_antiAliasingRenderer.inject(_renderBus);
 	_bloomRenderer.inject(_renderBus);

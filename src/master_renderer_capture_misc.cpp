@@ -110,6 +110,18 @@ void MasterRenderer::_captureWorldDepth()
 		_quad3dEntityDepthRenderer.unbind();
 	}
 
+	if(!_aabbEntityManager->getEntities().empty())
+	{
+		_aabbEntityDepthRenderer.bind();
+
+		for(const auto& [key, entity] : _aabbEntityManager->getEntities())
+		{
+			_aabbEntityDepthRenderer.render(entity);
+		}
+
+		_aabbEntityDepthRenderer.unbind();
+	}
+
 	_worldDepthCaptor->unbind();
 
 	_renderBus->setDepthMap(_worldDepthCaptor->getTexture(0));

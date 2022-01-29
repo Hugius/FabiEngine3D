@@ -33,6 +33,7 @@
 #include "reflection_entity_manager.hpp"
 #include "quad2d_entity_manager.hpp"
 #include "text2d_entity_manager.hpp"
+#include "aabb_entity_depth_renderer.hpp"
 
 class MasterRenderer final
 {
@@ -118,6 +119,7 @@ private:
 	Quad2dEntityColorRenderer _quad2dEntityColorRenderer;
 	AntiAliasingRenderer _antiAliasingRenderer;
 	AabbEntityColorRenderer _aabbEntityColorRenderer;
+	AabbEntityDepthRenderer _aabbEntityDepthRenderer;
 	BloomRenderer _bloomRenderer;
 	DofRenderer _dofRenderer;
 	LensFlareRenderer _lensFlareRenderer;
@@ -142,6 +144,7 @@ private:
 	shared_ptr<ShaderBuffer> _quad3dEntityShadowShader = nullptr;
 	shared_ptr<ShaderBuffer> _quad2dEntityColorShader = nullptr;
 	shared_ptr<ShaderBuffer> _aabbEntityColorShader = nullptr;
+	shared_ptr<ShaderBuffer> _aabbEntityDepthShader = nullptr;
 	shared_ptr<ShaderBuffer> _antiAliasingShader = nullptr;
 	shared_ptr<ShaderBuffer> _bloomShader = nullptr;
 	shared_ptr<ShaderBuffer> _dofShader = nullptr;

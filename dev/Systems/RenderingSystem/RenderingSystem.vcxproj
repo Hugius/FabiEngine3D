@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\aabb_entity_depth_renderer.cpp" />
     <ClCompile Include="..\..\..\src\aabb_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\anti_aliasing_renderer.cpp" />
     <ClCompile Include="..\..\..\src\base_renderer.cpp" />
@@ -56,6 +57,7 @@
     <ClCompile Include="..\..\..\src\render_window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\aabb_entity_depth_renderer.hpp" />
     <ClInclude Include="..\..\..\src\aabb_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\anti_aliasing_renderer.hpp" />
     <ClInclude Include="..\..\..\src\base_renderer.hpp" />
@@ -87,6 +89,8 @@
     <ClInclude Include="..\..\..\src\render_window.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\app\engine\shaders\aabb_entity_depth_shader.frag" />
+    <None Include="..\..\..\app\engine\shaders\aabb_entity_depth_shader.vert" />
     <None Include="..\..\..\app\engine\shaders\aabb_entity_color_shader.frag" />
     <None Include="..\..\..\app\engine\shaders\aabb_entity_color_shader.vert" />
     <None Include="..\..\..\app\engine\shaders\anti_aliasing_shader.frag" />

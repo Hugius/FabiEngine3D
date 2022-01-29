@@ -10,11 +10,7 @@ void MasterRenderer::_captureWaterReflections()
 		return;
 	}
 
-	const auto waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
-	const auto waterHeight = (waterEntity->getHeight() + waveHeight);
-	const auto isUnderWater = (_camera->getPosition().y < waterHeight);
-
-	if(isUnderWater)
+	if(_camera->getPosition().y < waterEntity->getHeight())
 	{
 		_renderBus->setWaterReflectionMap(nullptr);
 		return;
@@ -131,11 +127,7 @@ void MasterRenderer::_captureWaterRefractions()
 		return;
 	}
 
-	const auto waveHeight = ((waterEntity->getDisplacementMap() != nullptr) ? waterEntity->getWaveHeight() : 0.0f);
-	const auto waterHeight = (waterEntity->getHeight() + waveHeight);
-	const auto isUnderWater = (_camera->getPosition().y < waterHeight);
-
-	if(!isUnderWater)
+	if(_camera->getPosition().y > waterEntity->getHeight())
 	{
 		_renderBus->setWaterRefractionMap(nullptr);
 		return;

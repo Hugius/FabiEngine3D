@@ -59,14 +59,7 @@ void Animation3dEditor::_updateMiscellaneous()
 	{
 		if(_fe3d->input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d->model_isVisible("@@box"))
-			{
-				_fe3d->model_setVisible("@@box", false);
-			}
-			else
-			{
-				_fe3d->model_setVisible("@@box", true);
-			}
+			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
 		}
 	}
 

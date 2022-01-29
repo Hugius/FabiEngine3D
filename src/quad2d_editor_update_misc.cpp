@@ -10,14 +10,7 @@ void Quad2dEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->quad2d_isWireframed(_currentQuadId))
-				{
-					_fe3d->quad2d_setWireframed(_currentQuadId, false);
-				}
-				else
-				{
-					_fe3d->quad2d_setWireframed(_currentQuadId, true);
-				}
+				_fe3d->quad2d_setWireframed(_currentQuadId, !_fe3d->quad2d_isWireframed(_currentQuadId));
 			}
 		}
 	}

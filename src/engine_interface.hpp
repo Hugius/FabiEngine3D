@@ -773,6 +773,7 @@ public:
 	void gfx_setFogThickness(float value);
 	void gfx_setFogMinDistance(float value);
 	void gfx_setFogMaxDistance(float value);
+	void gfx_setShadowCircleEnabled(bool value);
 	void gfx_setShadowEyeOffset(const fvec3& value);
 	void gfx_setShadowCenterOffset(const fvec3& value);
 	void gfx_setShadowSize(float value);
@@ -841,6 +842,7 @@ public:
 	const bool gfx_isDofDynamic() const;
 	const bool gfx_isMotionBlurEnabled() const;
 	const bool gfx_isLensFlareEnabled() const;
+	const bool gfx_isShadowCircleEnabled() const;
 	const bool gfx_isShadowFollowingCamera() const;
 	const bool gfx_hasLensFlareMap() const;
 	const BloomType gfx_getBloomType() const;
@@ -881,9 +883,7 @@ public:
 	const bool client_isConnected() const;
 	const bool client_isAccepted() const;
 
-	void misc_enableShadowFrameRendering();
 	void misc_enableVsync();
-	void misc_disableShadowFrameRendering();
 	void misc_disableVsync();
 	void misc_setCursorVisible(bool value);
 	void misc_setCursorEntityId(const string& value);
@@ -922,7 +922,6 @@ public:
 	const bool misc_checkInterval(unsigned int ticks) const;
 	const bool misc_isMillisecondTimerStarted() const;
 	const bool misc_isVsyncEnabled() const;
-	const bool misc_isShadowFrameRenderingEnabled() const;
 
 private:
 	shared_ptr<EngineCore> _core = nullptr;

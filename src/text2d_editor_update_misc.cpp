@@ -10,14 +10,7 @@ void Text2dEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->text2d_isWireframed(_currentTextId))
-				{
-					_fe3d->text2d_setWireframed(_currentTextId, false);
-				}
-				else
-				{
-					_fe3d->text2d_setWireframed(_currentTextId, true);
-				}
+				_fe3d->text2d_setWireframed(_currentTextId, !_fe3d->text2d_isWireframed(_currentTextId));
 			}
 		}
 	}

@@ -20,6 +20,7 @@ void SoundEditor::_updateMiscellaneous()
 	{
 		_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
 	}
+
 	_fe3d->quad3d_rotate("@@icon", fvec3(0.0f, 0.5f, 0.0f));
 }
 

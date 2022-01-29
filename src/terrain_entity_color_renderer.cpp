@@ -30,7 +30,7 @@ void TerrainEntityColorRenderer::bind()
 	_shader->uploadUniform("u_shadowCenter", _renderBus->getShadowCenterPosition());
 	_shader->uploadUniform("u_shadowLightness", _renderBus->getShadowLightness());
 	_shader->uploadUniform("u_isShadowsEnabled", _renderBus->isShadowsEnabled());
-	_shader->uploadUniform("u_isShadowFrameRenderEnabled", _renderBus->isShadowFrameRenderingEnabled());
+	_shader->uploadUniform("u_isShadowCircleEnabled", _renderBus->isShadowCircleEnabled());
 	_shader->uploadUniform("u_shadowMap", 0);
 	_shader->uploadUniform("u_diffuseMap", 1);
 	_shader->uploadUniform("u_normalMap", 2);

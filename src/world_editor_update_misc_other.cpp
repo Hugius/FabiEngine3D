@@ -106,6 +106,33 @@ void WorldEditor::_updateMiscellaneous()
 				_fe3d->text3d_setWireframed(key, !_fe3d->text3d_isWireframed(key));
 			}
 		}
+
+		if(_fe3d->input_isKeyDown(InputType::KEY_B))
+		{
+			for(const auto& [key, templateId] : _loadedModelIds)
+			{
+				for(const auto& aabbId : _fe3d->aabb_getChildIds(key, AabbParentEntityType::MODEL))
+				{
+					_fe3d->aabb_setVisible(aabbId, !_fe3d->aabb_isVisible(aabbId));
+				}
+			}
+
+			for(const auto& [key, templateId] : _loadedQuadIds)
+			{
+				for(const auto& aabbId : _fe3d->aabb_getChildIds(key, AabbParentEntityType::QUAD3D))
+				{
+					_fe3d->aabb_setVisible(aabbId, !_fe3d->aabb_isVisible(aabbId));
+				}
+			}
+
+			for(const auto& [key, templateId] : _loadedTextIds)
+			{
+				for(const auto& aabbId : _fe3d->aabb_getChildIds(key, AabbParentEntityType::TEXT3D))
+				{
+					_fe3d->aabb_setVisible(aabbId, !_fe3d->aabb_isVisible(aabbId));
+				}
+			}
+		}
 	}
 
 	if(_fe3d->raycast_isTerrainPointingEnabled())

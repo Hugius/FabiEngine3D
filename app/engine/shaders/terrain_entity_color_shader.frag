@@ -64,7 +64,7 @@ uniform bool u_isAmbientLightingEnabled;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
-uniform bool u_isShadowFrameRenderEnabled;
+uniform bool u_isShadowCircleEnabled;
 uniform bool u_hasDiffuseMap;
 uniform bool u_hasNormalMap;
 uniform bool u_hasBlendMap;
@@ -434,7 +434,7 @@ float calculateShadows()
 			opacity /= (halfSize * 0.1f);
 			opacity = (1.0f - opacity);
 
-			if (u_isShadowFrameRenderEnabled)
+			if (u_isShadowCircleEnabled)
 			{
 				if ((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
 				{

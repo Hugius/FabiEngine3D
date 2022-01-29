@@ -412,6 +412,11 @@ void EngineInterface::gfx_setFogMaxDistance(float value)
 	_core->getRenderBus()->setFogMaxDistance(value);
 }
 
+void EngineInterface::gfx_setShadowCircleEnabled(bool value)
+{
+	_core->getRenderBus()->setShadowCircleEnabled(value);
+}
+
 void EngineInterface::gfx_setShadowEyeOffset(const fvec3& value)
 {
 	_core->getRenderBus()->setShadowEyeOffset(value);
@@ -578,6 +583,11 @@ const bool EngineInterface::gfx_isMotionBlurEnabled() const
 const bool EngineInterface::gfx_isLensFlareEnabled() const
 {
 	return _core->getRenderBus()->isLensFlareEnabled();
+}
+
+const bool EngineInterface::gfx_isShadowCircleEnabled() const
+{
+	return _core->getRenderBus()->isShadowCircleEnabled();
 }
 
 const unsigned int EngineInterface::gfx_getShadowQuality() const

@@ -10,17 +10,6 @@ void EngineInterface::misc_setCursorEntityId(const string& value)
 	_core->getRenderBus()->setCursorEntityId(value);
 }
 
-void EngineInterface::misc_enableShadowFrameRendering()
-{
-	if(_core->getRenderBus()->isShadowFrameRenderingEnabled())
-	{
-		Logger::throwWarning("Tried to enable shadow frame rendering: already enabled!");
-		return;
-	}
-
-	_core->getRenderBus()->setShadowFrameRenderingEnabled(true);
-}
-
 void EngineInterface::misc_enableVsync()
 {
 	if(_core->getRenderWindow()->isVsyncEnabled())
@@ -30,17 +19,6 @@ void EngineInterface::misc_enableVsync()
 	}
 
 	_core->getRenderWindow()->enableVsync();
-}
-
-void EngineInterface::misc_disableShadowFrameRendering()
-{
-	if(!_core->getRenderBus()->isShadowFrameRenderingEnabled())
-	{
-		Logger::throwWarning("Tried to disable shadow frame rendering: not enabled!");
-		return;
-	}
-
-	_core->getRenderBus()->setShadowFrameRenderingEnabled(false);
 }
 
 void EngineInterface::misc_disableVsync()
@@ -360,9 +338,4 @@ const string EngineInterface::misc_getCursorEntityId() const
 const bool EngineInterface::misc_isVsyncEnabled() const
 {
 	return _core->getRenderWindow()->isVsyncEnabled();
-}
-
-const bool EngineInterface::misc_isShadowFrameRenderingEnabled() const
-{
-	return _core->getRenderBus()->isShadowFrameRenderingEnabled();
 }

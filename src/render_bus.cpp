@@ -368,9 +368,9 @@ void RenderBus::setLensFlareEnabled(bool value)
 	_isLensFlareEnabled = value;
 }
 
-void RenderBus::setShadowFrameRenderingEnabled(bool value)
+void RenderBus::setShadowCircleEnabled(bool value)
 {
-	_isShadowFrameRenderingEnabled = value;
+	_isShadowCircleEnabled = value;
 }
 
 void RenderBus::setTriangleCountingEnabled(bool value)
@@ -803,9 +803,9 @@ const bool RenderBus::isLensFlareEnabled() const
 	return _isLensFlareEnabled;
 }
 
-const bool RenderBus::isShadowFrameRenderingEnabled() const
+const bool RenderBus::isShadowCircleEnabled() const
 {
-	return _isShadowFrameRenderingEnabled;
+	return _isShadowCircleEnabled;
 }
 
 const bool RenderBus::isTriangleCountingEnabled() const

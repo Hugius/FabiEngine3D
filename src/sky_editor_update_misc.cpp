@@ -40,14 +40,7 @@ void SkyEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->sky_isWireframed(_currentSkyId))
-				{
-					_fe3d->sky_setWireframed(_currentSkyId, false);
-				}
-				else
-				{
-					_fe3d->sky_setWireframed(_currentSkyId, true);
-				}
+				_fe3d->sky_setWireframed(_currentSkyId, !_fe3d->sky_isWireframed(_currentSkyId));
 			}
 		}
 	}

@@ -64,7 +64,7 @@ uniform int u_reflectionType;
 uniform bool u_isWireframed;
 uniform bool u_isReflective;
 uniform bool u_isSpecular;
-uniform bool u_isShadowFrameRenderEnabled;
+uniform bool u_isShadowCircleEnabled;
 uniform bool u_isAmbientLightingEnabled;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isReflectionsEnabled;
@@ -447,7 +447,7 @@ float calculateShadows()
 			opacity /= (halfSize * 0.1f);
 			opacity = (1.0f - opacity);
 
-			if (u_isShadowFrameRenderEnabled)
+			if (u_isShadowCircleEnabled)
 			{
 				if ((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
 				{

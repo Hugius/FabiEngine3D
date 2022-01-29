@@ -46,28 +46,14 @@ void TerrainEditor::_updateMiscellaneous()
 	{
 		if(_fe3d->input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d->model_isVisible("@@box"))
-			{
-				_fe3d->model_setVisible("@@box", false);
-			}
-			else
-			{
-				_fe3d->model_setVisible("@@box", true);
-			}
+			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
 		}
 
 		if(!_currentTerrainId.empty())
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->terrain_isWireframed(_currentTerrainId))
-				{
-					_fe3d->terrain_setWireframed(_currentTerrainId, false);
-				}
-				else
-				{
-					_fe3d->terrain_setWireframed(_currentTerrainId, true);
-				}
+				_fe3d->terrain_setWireframed(_currentTerrainId, !_fe3d->terrain_isWireframed(_currentTerrainId));
 			}
 		}
 	}

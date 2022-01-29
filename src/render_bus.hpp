@@ -86,7 +86,7 @@ public:
 	void setDofEnabled(bool value);
 	void setMotionBlurEnabled(bool value);
 	void setLensFlareEnabled(bool value);
-	void setShadowFrameRenderingEnabled(bool value);
+	void setShadowCircleEnabled(bool value);
 	void setTriangleCountingEnabled(bool value);
 	void setDofDynamic(bool value);
 	void setBloomType(BloomType value);
@@ -171,7 +171,7 @@ public:
 	const bool isDofEnabled() const;
 	const bool isMotionBlurEnabled() const;
 	const bool isLensFlareEnabled() const;
-	const bool isShadowFrameRenderingEnabled() const;
+	const bool isShadowCircleEnabled() const;
 	const bool isTriangleCountingEnabled() const;
 	const bool isDofDynamic() const;
 	const bool isSkyExposureEnabled() const;
@@ -279,7 +279,7 @@ private:
 	bool _isDofEnabled = false;
 	bool _isMotionBlurEnabled = false;
 	bool _isLensFlareEnabled = false;
-	bool _isShadowFrameRenderingEnabled = false;
+	bool _isShadowCircleEnabled = false;
 	bool _isTriangleCountingEnabled = false;
 	bool _isDofDynamic = false;
 	bool _isSkyExposureEnabled = false;

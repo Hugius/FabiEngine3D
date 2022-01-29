@@ -43,28 +43,14 @@ void WaterEditor::_updateMiscellaneous()
 	{
 		if(_fe3d->input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d->model_isVisible("@@box"))
-			{
-				_fe3d->model_setVisible("@@box", false);
-			}
-			else
-			{
-				_fe3d->model_setVisible("@@box", true);
-			}
+			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
 		}
 
 		if(!_currentWaterId.empty())
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d->water_isWireframed(_currentWaterId))
-				{
-					_fe3d->water_setWireframed(_currentWaterId, false);
-				}
-				else
-				{
-					_fe3d->water_setWireframed(_currentWaterId, true);
-				}
+				_fe3d->water_setWireframed(_currentWaterId, !_fe3d->water_isWireframed(_currentWaterId));
 			}
 		}
 	}

@@ -114,14 +114,14 @@ void EngineInterface::text3d_setFrozen(const string& id, bool value)
 	_core->getText3dEntityManager()->getEntity(id)->setFrozen(value);
 }
 
-void EngineInterface::text3d_setFacingCameraX(const string& id, bool value)
+void EngineInterface::text3d_setFacingCameraHorizontally(const string& id, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setFacingCameraX(value);
+	_core->getText3dEntityManager()->getEntity(id)->setFacingCameraHorizontally(value);
 }
 
-void EngineInterface::text3d_setFacingCameraY(const string& id, bool value)
+void EngineInterface::text3d_setFacingCameraVertically(const string& id, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setFacingCameraY(value);
+	_core->getText3dEntityManager()->getEntity(id)->setFacingCameraVertically(value);
 }
 
 void EngineInterface::text3d_setDepthMapIncluded(const string& id, bool value)
@@ -251,14 +251,14 @@ const string& EngineInterface::text3d_getContent(const string& id) const
 	return _core->getText3dEntityManager()->getEntity(id)->getContent();
 }
 
-const bool EngineInterface::text3d_isFacingCameraX(const string& id) const
+const bool EngineInterface::text3d_isFacingCameraHorizontally(const string& id) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isFacingCameraX();
+	return _core->getText3dEntityManager()->getEntity(id)->isFacingCameraHorizontally();
 }
 
-const bool EngineInterface::text3d_isFacingCameraY(const string& id) const
+const bool EngineInterface::text3d_isFacingCameraVertically(const string& id) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isFacingCameraY();
+	return _core->getText3dEntityManager()->getEntity(id)->isFacingCameraVertically();
 }
 
 const bool EngineInterface::text3d_isDepthMapIncluded(const string& id) const

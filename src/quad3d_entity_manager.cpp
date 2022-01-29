@@ -80,10 +80,10 @@ void Quad3dEntityManager::update()
 			continue;
 		}
 
-		const auto facingX = entity->isFacingCameraX();
-		const auto facingY = entity->isFacingCameraY();
+		const auto isFacingCameraHorizontally = entity->isFacingCameraHorizontally();
+		const auto isFacingCameraVertically = entity->isFacingCameraVertically();
 
-		if(facingX || facingY)
+		if(isFacingCameraHorizontally || isFacingCameraVertically)
 		{
 			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y * 0.5f), 0.0f));
 			auto direction = (position - _renderBus->getCameraPosition());
@@ -92,8 +92,8 @@ void Quad3dEntityManager::update()
 			auto degreesY = Math::convertToDegrees(atan2f(direction.z, direction.x));
 
 			auto rotation = entity->getRotation();
-			rotation.x = (degreesX) * static_cast<float>(facingX);
-			rotation.y = (-degreesY - 90.0f) * static_cast<float>(facingY);
+			rotation.x = (degreesX) * static_cast<float>(isFacingCameraHorizontally);
+			rotation.y = (-degreesY - 90.0f) * static_cast<float>(isFacingCameraVertically);
 
 			entity->setRotation(rotation);
 		}

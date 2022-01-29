@@ -8,8 +8,8 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 	if(screen->getId() == "quad3dEditorMenuMiscellaneous")
 	{
 		auto size = _fe3d->quad3d_getSize(_currentQuadId);
-		auto isFacingX = _fe3d->quad3d_isFacingCameraX(_currentQuadId);
-		auto isFacingY = _fe3d->quad3d_isFacingCameraY(_currentQuadId);
+		auto isFacingCameraHorizontally = _fe3d->quad3d_isFacingCameraHorizontally(_currentQuadId);
+		auto isFacingCameraVertically = _fe3d->quad3d_isFacingCameraVertically(_currentQuadId);
 		auto opacity = _fe3d->quad3d_getOpacity(_currentQuadId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
@@ -22,15 +22,15 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 			_gui->getOverlay()->createValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui->getOverlay()->createValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingX")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingCameraHorizontally")->isHovered())
 		{
-			isFacingX = !isFacingX;
-			_fe3d->quad3d_setFacingCameraX(_currentQuadId, isFacingX);
+			isFacingCameraHorizontally = !isFacingCameraHorizontally;
+			_fe3d->quad3d_setFacingCameraHorizontally(_currentQuadId, isFacingCameraHorizontally);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingY")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingCameraVertically")->isHovered())
 		{
-			isFacingY = !isFacingY;
-			_fe3d->quad3d_setFacingCameraY(_currentQuadId, isFacingY);
+			isFacingCameraVertically = !isFacingCameraVertically;
+			_fe3d->quad3d_setFacingCameraVertically(_currentQuadId, isFacingCameraVertically);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
@@ -53,16 +53,16 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 			_fe3d->quad3d_setOpacity(_currentQuadId, opacity);
 		}
 
-		screen->getButton("isFacingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
-		screen->getButton("isFacingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
+		screen->getButton("isFacingCameraHorizontally")->changeTextContent(isFacingCameraHorizontally ? "Facing X: ON" : "Facing X: OFF");
+		screen->getButton("isFacingCameraVertically")->changeTextContent(isFacingCameraVertically ? "Facing Y: ON" : "Facing Y: OFF");
 
 		auto rotation = _fe3d->quad3d_getRotation(_currentQuadId);
-		if(!isFacingX)
+		if(!isFacingCameraHorizontally)
 		{
 			rotation.x = 0.0f;
 			rotation.z = 0.0f;
 		}
-		if(!isFacingY)
+		if(!isFacingCameraVertically)
 		{
 			rotation.y = 0.0f;
 		}

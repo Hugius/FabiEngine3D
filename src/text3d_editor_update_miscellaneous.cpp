@@ -8,8 +8,8 @@ void Text3dEditor::_updateMiscellaneousMenu()
 	if(screen->getId() == "text3dEditorMenuMiscellaneous")
 	{
 		auto size = _fe3d->text3d_getSize(_currentTextId);
-		auto isFacingX = _fe3d->text3d_isFacingCameraX(_currentTextId);
-		auto isFacingY = _fe3d->text3d_isFacingCameraY(_currentTextId);
+		auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(_currentTextId);
+		auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(_currentTextId);
 		auto opacity = _fe3d->text3d_getOpacity(_currentTextId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
@@ -22,15 +22,15 @@ void Text3dEditor::_updateMiscellaneousMenu()
 			_gui->getOverlay()->createValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui->getOverlay()->createValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingX")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingCameraHorizontally")->isHovered())
 		{
-			isFacingX = !isFacingX;
-			_fe3d->text3d_setFacingCameraX(_currentTextId, isFacingX);
+			isFacingCameraHorizontally = !isFacingCameraHorizontally;
+			_fe3d->text3d_setFacingCameraHorizontally(_currentTextId, isFacingCameraHorizontally);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingY")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingCameraVertically")->isHovered())
 		{
-			isFacingY = !isFacingY;
-			_fe3d->text3d_setFacingCameraY(_currentTextId, isFacingY);
+			isFacingCameraVertically = !isFacingCameraVertically;
+			_fe3d->text3d_setFacingCameraVertically(_currentTextId, isFacingCameraVertically);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
@@ -53,16 +53,16 @@ void Text3dEditor::_updateMiscellaneousMenu()
 			_fe3d->text3d_setOpacity(_currentTextId, opacity);
 		}
 
-		screen->getButton("isFacingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
-		screen->getButton("isFacingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
+		screen->getButton("isFacingCameraHorizontally")->changeTextContent(isFacingCameraHorizontally ? "Facing X: ON" : "Facing X: OFF");
+		screen->getButton("isFacingCameraVertically")->changeTextContent(isFacingCameraVertically ? "Facing Y: ON" : "Facing Y: OFF");
 
 		auto rotation = _fe3d->text3d_getRotation(_currentTextId);
-		if(!isFacingX)
+		if(!isFacingCameraHorizontally)
 		{
 			rotation.x = 0.0f;
 			rotation.z = 0.0f;
 		}
-		if(!isFacingY)
+		if(!isFacingCameraVertically)
 		{
 			rotation.y = 0.0f;
 		}

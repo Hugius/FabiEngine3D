@@ -416,7 +416,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text3d_set_facing_camera_x")
+	else if(functionName == "fe3d:text3d_set_facing_camera_horizontally")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -424,13 +424,13 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 		{
 			if(_validateFe3dText3d(args[0].getString(), false))
 			{
-				_fe3d->text3d_setFacingCameraX(args[0].getString(), args[1].getBoolean());
+				_fe3d->text3d_setFacingCameraHorizontally(args[0].getString(), args[1].getBoolean());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:text3d_set_facing_camera_y")
+	else if(functionName == "fe3d:text3d_set_facing_camera_vertically")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -438,7 +438,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 		{
 			if(_validateFe3dText3d(args[0].getString(), false))
 			{
-				_fe3d->text3d_setFacingCameraY(args[0].getString(), args[1].getBoolean());
+				_fe3d->text3d_setFacingCameraVertically(args[0].getString(), args[1].getBoolean());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

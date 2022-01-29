@@ -44,9 +44,9 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformation")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("transformationX", "X", transformation.x * multiplier, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("transformationY", "Y", transformation.y * multiplier, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("transformationZ", "Z", transformation.z * multiplier, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("transformationX", "X", (transformation.x * multiplier), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("transformationY", "Y", (transformation.y * multiplier), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("transformationZ", "Z", (transformation.z * multiplier), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformationType")->isHovered())
 		{
@@ -65,9 +65,9 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("transformationSpeedX", "X", speed.x * 1000.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("transformationSpeedY", "Y", speed.y * 1000.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("transformationSpeedZ", "Z", speed.z * 1000.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("transformationSpeedX", "X", (speed.x * 1000.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("transformationSpeedY", "Y", (speed.y * 1000.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("transformationSpeedZ", "Z", (speed.z * 1000.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speedType")->isHovered())
 		{

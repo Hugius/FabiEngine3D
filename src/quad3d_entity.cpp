@@ -107,14 +107,14 @@ void Quad3dEntity::updateTransformationMatrix()
 	_transformationMatrix = (_transformationMatrix * scalingMatrix);
 }
 
-void Quad3dEntity::setFacingCameraX(bool value)
+void Quad3dEntity::setFacingCameraHorizontally(bool value)
 {
-	_isFacingCameraX = value;
+	_isFacingCameraHorizontally = value;
 }
 
-void Quad3dEntity::setFacingCameraY(bool value)
+void Quad3dEntity::setFacingCameraVertically(bool value)
 {
-	_isFacingCameraY = value;
+	_isFacingCameraVertically = value;
 }
 
 void Quad3dEntity::setDiffuseMap(shared_ptr<TextureBuffer> value)
@@ -385,14 +385,14 @@ const float Quad3dEntity::getMinTextureAlpha() const
 	return _minTextureAlpha;
 }
 
-const bool Quad3dEntity::isFacingCameraX() const
+const bool Quad3dEntity::isFacingCameraHorizontally() const
 {
-	return _isFacingCameraX;
+	return _isFacingCameraHorizontally;
 }
 
-const bool Quad3dEntity::isFacingCameraY() const
+const bool Quad3dEntity::isFacingCameraVertically() const
 {
-	return _isFacingCameraY;
+	return _isFacingCameraVertically;
 }
 
 const bool Quad3dEntity::isDepthMapIncluded() const

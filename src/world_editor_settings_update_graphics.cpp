@@ -51,7 +51,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 			_gui->getOverlay()->createValueForm("centerY", "Y", center.y, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui->getOverlay()->createValueForm("centerZ", "Z", center.z, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("follow")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFollowingCamera")->isHovered())
 		{
 			isFollowingCamera = !isFollowingCamera;
 			_fe3d->gfx_setShadowFollowingCamera(isFollowingCamera);
@@ -62,7 +62,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("interval")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("interval", "Frame Interval", interval, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("interval", "Interval", interval, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
@@ -112,7 +112,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
-		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
+		screen->getButton("isFollowingCamera")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
 	}
 }
 
@@ -193,7 +193,7 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		auto isEnabled = _fe3d->gfx_isDofEnabled();
 		auto isDynamic = _fe3d->gfx_isDofDynamic();
 		auto blurDistance = _fe3d->gfx_getDofBlurDistance();
-		auto maxDistance = _fe3d->gfx_getDofDynamicDistance();
+		auto dynamicDistance = _fe3d->gfx_getDofDynamicDistance();
 		auto quality = _fe3d->gfx_getDofQuality();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
@@ -220,7 +220,7 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dynamicDistance")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("dynamicDistance", "Dynamic Distance", maxDistance, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("dynamicDistance", "Dynamic Distance", dynamicDistance, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blurDistance")->isHovered())
 		{
@@ -231,9 +231,9 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 			_gui->getOverlay()->createValueForm("quality", "Quality", quality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		if(_gui->getOverlay()->checkValueForm("dynamicDistance", maxDistance))
+		if(_gui->getOverlay()->checkValueForm("dynamicDistance", dynamicDistance))
 		{
-			_fe3d->gfx_setDofDynamicDistance(maxDistance);
+			_fe3d->gfx_setDofDynamicDistance(dynamicDistance);
 		}
 		if(_gui->getOverlay()->checkValueForm("blurDistance", blurDistance))
 		{
@@ -393,11 +393,11 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("intensity", "Flare Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("intensity", "Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sensitivity")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("sensitivity", "Flare Sensitivity", (sensitivity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("sensitivity", "Sensitivity", (sensitivity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		if(_gui->getOverlay()->checkValueForm("intensity", intensity))
@@ -444,11 +444,11 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("intensity", "Exposure Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("intensity", "Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("speed", "Exposure Speed", (speed * 10000.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("speed", "Speed", (speed * 10000.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		if(_gui->getOverlay()->checkValueForm("intensity", intensity))
@@ -509,11 +509,11 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("intensity", "Bloom Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("intensity", "Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blurCount")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("blurCount", "Amount Of Blurs", blurCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("blurCount", "Blur Count", blurCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{

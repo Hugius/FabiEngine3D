@@ -16,8 +16,8 @@ public:
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setMesh(shared_ptr<VertexBuffer> value);
-	void setFacingCameraX(bool value);
-	void setFacingCameraY(bool value);
+	void setFacingCameraHorizontally(bool value);
+	void setFacingCameraVertically(bool value);
 	void setDepthMapIncluded(bool value);
 	void setShadowed(bool value);
 	void setCentered(bool value);
@@ -72,8 +72,8 @@ public:
 	const float getEmissionIntensity() const;
 	const float getMinTextureAlpha() const;
 
-	const bool isFacingCameraX() const;
-	const bool isFacingCameraY() const;
+	const bool isFacingCameraHorizontally() const;
+	const bool isFacingCameraVertically() const;
 	const bool isDepthMapIncluded() const;
 	const bool isShadowed() const;
 	const bool isReflected() const;
@@ -115,8 +115,8 @@ private:
 	float _minHeight = -FLT_MAX;
 	float _maxHeight = FLT_MAX;
 
-	bool _isFacingCameraX = false;
-	bool _isFacingCameraY = false;
+	bool _isFacingCameraHorizontally = false;
+	bool _isFacingCameraVertically = false;
 	bool _isDepthMapIncluded = true;
 	bool _isShadowed = true;
 	bool _isReflected = true;

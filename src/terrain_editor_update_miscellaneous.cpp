@@ -36,15 +36,15 @@ void TerrainEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redTextureRepeat")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("redTextureRepeat", "Red Repeat", redTextureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("redTextureRepeat", "Red Texture Repeat", redTextureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenTextureRepeat")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("greenTextureRepeat", "Green Repeat", greenTextureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("greenTextureRepeat", "Green Texture Repeat", greenTextureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueTextureRepeat")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("blueTextureRepeat", "Blue Repeat", blueTextureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("blueTextureRepeat", "Blue Texture Repeat", blueTextureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		if(_gui->getOverlay()->checkValueForm("maxHeight", maxHeight))

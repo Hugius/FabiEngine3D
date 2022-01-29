@@ -52,11 +52,11 @@ void ModelEditor::_updateMiscellaneousMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityId")->isHovered())
 		{
 			levelOfDetailEntityId = (levelOfDetailEntityId.empty()) ? levelOfDetailEntityId : levelOfDetailEntityId.substr(1, levelOfDetailEntityId.size() - 1);
-			_gui->getOverlay()->createValueForm("levelOfDetailEntityId", "LOD Entity id", levelOfDetailEntityId, fvec2(0.0f, 0.1f), fvec2(0.4f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("levelOfDetailEntityId", "LOD Entity ID", levelOfDetailEntityId, fvec2(0.0f, 0.1f), fvec2(0.4f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("levelOfDetailDistance", "Specular LOD Distance", levelOfDetailDistance, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("levelOfDetailDistance", "LOD Distance", levelOfDetailDistance, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{

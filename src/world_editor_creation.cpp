@@ -308,8 +308,8 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& t
 
 	_fe3d->quad3d_setPosition(newId, position);
 	_fe3d->quad3d_setSize(newId, _fe3d->quad3d_getSize(templateId));
-	_fe3d->quad3d_setFacingCameraX(newId, _fe3d->quad3d_isFacingCameraX(templateId));
-	_fe3d->quad3d_setFacingCameraY(newId, _fe3d->quad3d_isFacingCameraY(templateId));
+	_fe3d->quad3d_setFacingCameraHorizontally(newId, _fe3d->quad3d_isFacingCameraHorizontally(templateId));
+	_fe3d->quad3d_setFacingCameraVertically(newId, _fe3d->quad3d_isFacingCameraVertically(templateId));
 	_fe3d->quad3d_setColor(newId, _fe3d->quad3d_getColor(templateId));
 	_fe3d->quad3d_setShadowed(newId, _fe3d->quad3d_isShadowed(templateId));
 	_fe3d->quad3d_setReflected(newId, _fe3d->quad3d_isReflected(templateId));
@@ -348,8 +348,8 @@ const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& t
 
 	_fe3d->text3d_setPosition(newId, position);
 	_fe3d->text3d_setSize(newId, _fe3d->text3d_getSize(templateId));
-	_fe3d->text3d_setFacingCameraX(newId, _fe3d->text3d_isFacingCameraX(templateId));
-	_fe3d->text3d_setFacingCameraY(newId, _fe3d->text3d_isFacingCameraY(templateId));
+	_fe3d->text3d_setFacingCameraHorizontally(newId, _fe3d->text3d_isFacingCameraHorizontally(templateId));
+	_fe3d->text3d_setFacingCameraVertically(newId, _fe3d->text3d_isFacingCameraVertically(templateId));
 	_fe3d->text3d_setColor(newId, _fe3d->text3d_getColor(templateId));
 	_fe3d->text3d_setShadowed(newId, _fe3d->text3d_isShadowed(templateId));
 	_fe3d->text3d_setReflected(newId, _fe3d->text3d_isReflected(templateId));

@@ -75,13 +75,13 @@ void Animation2dEditor::_updateChoiceMenu()
 		{
 			_gui->getOverlay()->createAnswerForm("preview", "Quad3d Entity?", fvec2(0.0f, 0.25f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rows")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rowCount")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("rows", "Rows", rowCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("rowCount", "Row Count", rowCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("columns")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("columnCount")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("columns", "Columns", columnCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("columnCount", "Column Count", columnCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("interval")->isHovered())
 		{
@@ -134,11 +134,11 @@ void Animation2dEditor::_updateChoiceMenu()
 			currentAnimation->setPreviewTexturePath(finalFilePath);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("rows", rowCount, {0}))
+		if(_gui->getOverlay()->checkValueForm("rowCount", rowCount, {0}))
 		{
 			currentAnimation->setRowCount(rowCount);
 		}
-		if(_gui->getOverlay()->checkValueForm("columns", columnCount, {0}))
+		if(_gui->getOverlay()->checkValueForm("columnCount", columnCount, {0}))
 		{
 			currentAnimation->setColumnCount(columnCount);
 		}
@@ -150,8 +150,8 @@ void Animation2dEditor::_updateChoiceMenu()
 		auto hasPreviewTexture = !currentAnimation->getPreviewTexturePath().empty();
 		auto isStarted = isQuad3dAnimationStarted(_currentAnimationId, PREVIEW_QUAD_ID);
 		screen->getButton("preview")->setHoverable(!isStarted);
-		screen->getButton("rows")->setHoverable(hasPreviewTexture && !isStarted);
-		screen->getButton("columns")->setHoverable(hasPreviewTexture && !isStarted);
+		screen->getButton("rowCount")->setHoverable(hasPreviewTexture && !isStarted);
+		screen->getButton("columnCount")->setHoverable(hasPreviewTexture && !isStarted);
 		screen->getButton("interval")->setHoverable(hasPreviewTexture && !isStarted);
 		screen->getButton("start")->setHoverable(hasPreviewTexture && !isStarted && (rowCount != 0) && (columnCount != 0));
 		screen->getButton("stop")->setHoverable(hasPreviewTexture && isStarted);

@@ -266,8 +266,8 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		auto isVisible = _fe3d->quad3d_isVisible(quadId);
 	//		auto isAabbRaycastResponsive = aabbIds.empty() ? false : _fe3d->aabb_isRaycastResponsive(aabbIds[0]);
 	//		auto isAabbCollisionResponsive = aabbIds.empty() ? false : _fe3d->aabb_isCollisionResponsive(aabbIds[0]);
-	//		auto isFacingX = _fe3d->quad3d_isFacingCameraX(quadId);
-	//		auto isFacingY = _fe3d->quad3d_isFacingCameraY(quadId);
+	//		auto isFacingCameraHorizontally = _fe3d->quad3d_isFacingCameraHorizontally(quadId);
+	//		auto isFacingCameraVertically = _fe3d->quad3d_isFacingCameraVertically(quadId);
 	//		//auto isAnimationPlaying = _fe3d->quad3d_isSpriteAnimationStarted(quadId);
 	//		//auto isAnimationPaused = _fe3d->quad3d_isSpriteAnimationPaused(quadId);
 	//		auto position = _fe3d->quad3d_getPosition(quadId);
@@ -303,8 +303,8 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//			isVisible << " " <<
 	//			isAabbRaycastResponsive << " " <<
 	//			isAabbCollisionResponsive << " " <<
-	//			isFacingX << " " <<
-	//			isFacingY << " " <<
+	//			isFacingCameraHorizontally << " " <<
+	//			isFacingCameraVertically << " " <<
 	//			position.x << " " <<
 	//			position.y << " " <<
 	//			position.z << " " <<

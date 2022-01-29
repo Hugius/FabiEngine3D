@@ -126,8 +126,8 @@ void Text3dEntity::setContent(const string& value)
 			characterEntity->setWireframed(_isWireframed);
 			characterEntity->setCentered(_isCentered);
 			characterEntity->setVisible(_isVisible);
-			characterEntity->setFacingCameraX(_isFacingCameraX);
-			characterEntity->setFacingCameraY(_isFacingCameraY);
+			characterEntity->setFacingCameraHorizontally(_isFacingCameraHorizontally);
+			characterEntity->setFacingCameraVertically(_isFacingCameraVertically);
 			characterEntity->setDepthMapIncluded(_isDepthMapIncluded);
 			characterEntity->setShadowed(_isShadowed);
 			characterEntity->setReflected(_isReflected);
@@ -174,23 +174,23 @@ void Text3dEntity::setFontMap(shared_ptr<TextureBuffer> value)
 	}
 }
 
-void Text3dEntity::setFacingCameraX(bool value)
+void Text3dEntity::setFacingCameraHorizontally(bool value)
 {
-	_isFacingCameraX = value;
+	_isFacingCameraHorizontally = value;
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setFacingCameraX(_isFacingCameraX);
+		character->setFacingCameraHorizontally(_isFacingCameraHorizontally);
 	}
 }
 
-void Text3dEntity::setFacingCameraY(bool value)
+void Text3dEntity::setFacingCameraVertically(bool value)
 {
-	_isFacingCameraY = value;
+	_isFacingCameraVertically = value;
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setFacingCameraY(_isFacingCameraY);
+		character->setFacingCameraVertically(_isFacingCameraVertically);
 	}
 }
 
@@ -477,14 +477,14 @@ const float Text3dEntity::getMaxHeight() const
 	return _maxHeight;
 }
 
-const bool Text3dEntity::isFacingCameraX() const
+const bool Text3dEntity::isFacingCameraHorizontally() const
 {
-	return _isFacingCameraX;
+	return _isFacingCameraHorizontally;
 }
 
-const bool Text3dEntity::isFacingCameraY() const
+const bool Text3dEntity::isFacingCameraVertically() const
 {
-	return _isFacingCameraY;
+	return _isFacingCameraVertically;
 }
 
 const bool Text3dEntity::isDepthMapIncluded() const

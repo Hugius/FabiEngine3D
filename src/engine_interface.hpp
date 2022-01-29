@@ -339,8 +339,8 @@ public:
 	void quad3d_setTextureRepeat(const string& id, float value);
 	void quad3d_setEmissionIntensity(const string& id, float value);
 	void quad3d_setVisible(const string& id, bool value);
-	void quad3d_setFacingCameraX(const string& id, bool value);
-	void quad3d_setFacingCameraY(const string& id, bool value);
+	void quad3d_setFacingCameraHorizontally(const string& id, bool value);
+	void quad3d_setFacingCameraVertically(const string& id, bool value);
 	void quad3d_setDepthMapIncluded(const string& id, bool value);
 	void quad3d_setShadowed(const string& id, bool value);
 	void quad3d_setReflected(const string& id, bool value);
@@ -366,8 +366,8 @@ public:
 	const float quad3d_getEmissionIntensity(const string& id) const;
 	const bool quad3d_isExisting(const string& id) const;
 	const bool quad3d_isVisible(const string& id) const;
-	const bool quad3d_isFacingCameraX(const string& id) const;
-	const bool quad3d_isFacingCameraY(const string& id) const;
+	const bool quad3d_isFacingCameraHorizontally(const string& id) const;
+	const bool quad3d_isFacingCameraVertically(const string& id) const;
 	const bool quad3d_isDepthMapIncluded(const string& id) const;
 	const bool quad3d_isShadowed(const string& id) const;
 	const bool quad3d_isReflected(const string& id) const;
@@ -397,8 +397,8 @@ public:
 	void text3d_setLightness(const string& id, float value);
 	void text3d_setOpacity(const string& id, float value);
 	void text3d_setVisible(const string& id, bool value);
-	void text3d_setFacingCameraX(const string& id, bool value);
-	void text3d_setFacingCameraY(const string& id, bool value);
+	void text3d_setFacingCameraHorizontally(const string& id, bool value);
+	void text3d_setFacingCameraVertically(const string& id, bool value);
 	void text3d_setDepthMapIncluded(const string& id, bool value);
 	void text3d_setShadowed(const string& id, bool value);
 	void text3d_setReflected(const string& id, bool value);
@@ -422,8 +422,8 @@ public:
 	const float text3d_getOpacity(const string& id) const;
 	const bool text3d_isExisting(const string& id) const;
 	const bool text3d_isVisible(const string& id) const;
-	const bool text3d_isFacingCameraX(const string& id) const;
-	const bool text3d_isFacingCameraY(const string& id) const;
+	const bool text3d_isFacingCameraHorizontally(const string& id) const;
+	const bool text3d_isFacingCameraVertically(const string& id) const;
 	const bool text3d_isDepthMapIncluded(const string& id) const;
 	const bool text3d_isShadowed(const string& id) const;
 	const bool text3d_isReflected(const string& id) const;

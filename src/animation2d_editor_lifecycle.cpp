@@ -65,8 +65,8 @@ void Animation2dEditor::_loadGUI()
 	positions = VPC::calculateButtonPositions(6, CH);
 	leftWindow->createScreen("animation2dEditorMenuChoice");
 	leftWindow->getScreen("animation2dEditorMenuChoice")->createButton("preview", fvec2(0.0f, positions[0]), fvec2(TW("Preview Texture"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Preview Texture", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation2dEditorMenuChoice")->createButton("rows", fvec2(0.0f, positions[1]), fvec2(TW("Rows"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rows", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation2dEditorMenuChoice")->createButton("columns", fvec2(0.0f, positions[2]), fvec2(TW("Columns"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Columns", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("animation2dEditorMenuChoice")->createButton("rowCount", fvec2(0.0f, positions[1]), fvec2(TW("Rows"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rows", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("animation2dEditorMenuChoice")->createButton("columnCount", fvec2(0.0f, positions[2]), fvec2(TW("Columns"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Columns", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("animation2dEditorMenuChoice")->createButton("interval", fvec2(0.0f, positions[3]), fvec2(TW("Interval"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Interval", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("animation2dEditorMenuChoice")->createButton("start", fvec2(-0.5f, positions[4]), fvec2(TW("Start"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Start", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("animation2dEditorMenuChoice")->createButton("stop", fvec2(0.5f, positions[4]), fvec2(TW("Stop"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Stop", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);

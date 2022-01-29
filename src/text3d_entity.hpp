@@ -19,8 +19,8 @@ public:
 	void setContent(const string& value);
 	void setFontMapPath(const string& value);
 	void setFontMap(shared_ptr<TextureBuffer> value);
-	void setFacingCameraX(bool value);
-	void setFacingCameraY(bool value);
+	void setFacingCameraHorizontally(bool value);
+	void setFacingCameraVertically(bool value);
 	void setDepthMapIncluded(bool value);
 	void setShadowed(bool value);
 	void setCentered(bool value);
@@ -64,8 +64,8 @@ public:
 	const float getMinHeight() const;
 	const float getMaxHeight() const;
 
-	const bool isFacingCameraX() const;
-	const bool isFacingCameraY() const;
+	const bool isFacingCameraHorizontally() const;
+	const bool isFacingCameraVertically() const;
 	const bool isDepthMapIncluded() const;
 	const bool isShadowed() const;
 	const bool isReflected() const;
@@ -205,8 +205,8 @@ private:
 	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
 	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;
 
-	bool _isFacingCameraX = false;
-	bool _isFacingCameraY = false;
+	bool _isFacingCameraHorizontally = false;
+	bool _isFacingCameraVertically = false;
 	bool _isDepthMapIncluded = true;
 	bool _isShadowed = true;
 	bool _isReflected = true;

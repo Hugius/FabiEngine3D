@@ -35,8 +35,8 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 		string fontMapPath;
 		fvec2 size;
 		fvec3 color;
-		bool isFacingX;
-		bool isFacingY;
+		bool isFacingCameraHorizontally;
+		bool isFacingCameraVertically;
 
 		istringstream iss(line);
 
@@ -47,8 +47,8 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 			>> color.r
 			>> color.g
 			>> color.b
-			>> isFacingX
-			>> isFacingY
+			>> isFacingCameraHorizontally
+			>> isFacingCameraVertically
 			>> fontMapPath;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
@@ -100,8 +100,8 @@ const bool Text3dEditor::loadFromFile()
 		fvec3 color;
 		float lightness;
 		float opacity;
-		bool isFacingX;
-		bool isFacingY;
+		bool isFacingCameraHorizontally;
+		bool isFacingCameraVertically;
 		bool isReflected;
 		bool isShadowed;
 		bool isBright;
@@ -115,8 +115,8 @@ const bool Text3dEditor::loadFromFile()
 			>> color.r
 			>> color.g
 			>> color.b
-			>> isFacingX
-			>> isFacingY
+			>> isFacingCameraHorizontally
+			>> isFacingCameraVertically
 			>> fontMapPath
 			>> isReflected
 			>> isShadowed
@@ -143,8 +143,8 @@ const bool Text3dEditor::loadFromFile()
 			_fe3d->text3d_setSize(textId, size);
 			_fe3d->text3d_setColor(textId, color);
 			_fe3d->text3d_setLightness(textId, lightness);
-			_fe3d->text3d_setFacingCameraX(textId, isFacingX);
-			_fe3d->text3d_setFacingCameraY(textId, isFacingY);
+			_fe3d->text3d_setFacingCameraHorizontally(textId, isFacingCameraHorizontally);
+			_fe3d->text3d_setFacingCameraVertically(textId, isFacingCameraVertically);
 			_fe3d->text3d_setShadowed(textId, isShadowed);
 			_fe3d->text3d_setReflected(textId, isReflected);
 			_fe3d->text3d_setBright(textId, isBright);

@@ -286,7 +286,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		float lightness, minHeight, maxHeight;
 	//		int remainingAnimationLoops;
 	//		unsigned int animationRowIndex, animationColumnIndex;
-	//		bool isVisible, isAabbRaycastResponsive, isAabbCollisionResponsive, isFacingX, isFacingY, isAnimationPlaying, isAnimationPaused;
+	//		bool isVisible, isAabbRaycastResponsive, isAabbCollisionResponsive, isFacingCameraHorizontally, isFacingCameraVertically, isAnimationPlaying, isAnimationPaused;
 
 	//		iss >>
 	//			quadId >>
@@ -294,8 +294,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			isVisible >>
 	//			isAabbRaycastResponsive >>
 	//			isAabbCollisionResponsive >>
-	//			isFacingX >>
-	//			isFacingY >>
+	//			isFacingCameraHorizontally >>
+	//			isFacingCameraVertically >>
 	//			isAnimationPlaying >>
 	//			isAnimationPaused >>
 	//			position.x >>
@@ -325,8 +325,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//		{
 	//			_fe3d->quad3d_setRotation(quadId, rotation);
 	//			_fe3d->quad3d_setSize(quadId, size);
-	//			_fe3d->quad3d_setFacingCameraX(quadId, isFacingX);
-	//			_fe3d->quad3d_setFacingCameraY(quadId, isFacingY);
+	//			_fe3d->quad3d_setFacingCameraHorizontally(quadId, isFacingCameraHorizontally);
+	//			_fe3d->quad3d_setFacingCameraVertically(quadId, isFacingCameraVertically);
 	//			_fe3d->quad3d_setColor(quadId, color);
 	//			//_fe3d->quad3d_setTextContent(quadId, textContent);
 	//			_fe3d->quad3d_setLightness(quadId, lightness);

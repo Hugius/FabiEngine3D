@@ -270,7 +270,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text3d_is_facing_camera_x")
+	else if(functionName == "fe3d:text3d_is_facing_camera_horizontally")
 	{
 		auto types = {SVT::STRING};
 
@@ -278,13 +278,13 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string& functionNam
 		{
 			if(_validateFe3dText3d(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text3d_isFacingCameraX(args[0].getString());
+				const auto result = _fe3d->text3d_isFacingCameraHorizontally(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:text3d_is_facing_camera_y")
+	else if(functionName == "fe3d:text3d_is_facing_camera_vertically")
 	{
 		auto types = {SVT::STRING};
 
@@ -292,7 +292,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string& functionNam
 		{
 			if(_validateFe3dText3d(args[0].getString(), false))
 			{
-				const auto result = _fe3d->text3d_isFacingCameraY(args[0].getString());
+				const auto result = _fe3d->text3d_isFacingCameraVertically(args[0].getString());
 
 				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}

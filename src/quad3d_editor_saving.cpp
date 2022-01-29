@@ -28,8 +28,8 @@ const bool Quad3dEditor::saveToFile() const
 		auto color = _fe3d->quad3d_getColor(quadId);
 		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quadId);
 		auto emissionMapPath = _fe3d->quad3d_getEmissionMapPath(quadId);
-		auto isFacingX = _fe3d->quad3d_isFacingCameraX(quadId);
-		auto isFacingY = _fe3d->quad3d_isFacingCameraY(quadId);
+		auto isFacingCameraHorizontally = _fe3d->quad3d_isFacingCameraHorizontally(quadId);
+		auto isFacingCameraVertically = _fe3d->quad3d_isFacingCameraVertically(quadId);
 		auto isReflected = _fe3d->quad3d_isReflected(quadId);
 		auto isShadowed = _fe3d->quad3d_isShadowed(quadId);
 		auto lightness = _fe3d->quad3d_getLightness(quadId);
@@ -54,8 +54,8 @@ const bool Quad3dEditor::saveToFile() const
 			color.r << " " <<
 			color.g << " " <<
 			color.b << " " <<
-			isFacingX << " " <<
-			isFacingY << " " <<
+			isFacingCameraHorizontally << " " <<
+			isFacingCameraVertically << " " <<
 			diffuseMapPath << " " <<
 			emissionMapPath << " " <<
 			isReflected << " " <<

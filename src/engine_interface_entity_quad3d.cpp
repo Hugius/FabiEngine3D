@@ -164,14 +164,14 @@ void EngineInterface::quad3d_setFrozen(const string& id, bool value)
 	_core->getQuad3dEntityManager()->getEntity(id)->setFrozen(value);
 }
 
-void EngineInterface::quad3d_setFacingCameraX(const string& id, bool value)
+void EngineInterface::quad3d_setFacingCameraHorizontally(const string& id, bool value)
 {
-	_core->getQuad3dEntityManager()->getEntity(id)->setFacingCameraX(value);
+	_core->getQuad3dEntityManager()->getEntity(id)->setFacingCameraHorizontally(value);
 }
 
-void EngineInterface::quad3d_setFacingCameraY(const string& id, bool value)
+void EngineInterface::quad3d_setFacingCameraVertically(const string& id, bool value)
 {
-	_core->getQuad3dEntityManager()->getEntity(id)->setFacingCameraY(value);
+	_core->getQuad3dEntityManager()->getEntity(id)->setFacingCameraVertically(value);
 }
 
 void EngineInterface::quad3d_setDepthMapIncluded(const string& id, bool value)
@@ -311,14 +311,14 @@ const vector<string> EngineInterface::quad3d_getIds() const
 	return result;
 }
 
-const bool EngineInterface::quad3d_isFacingCameraX(const string& id) const
+const bool EngineInterface::quad3d_isFacingCameraHorizontally(const string& id) const
 {
-	return _core->getQuad3dEntityManager()->getEntity(id)->isFacingCameraX();
+	return _core->getQuad3dEntityManager()->getEntity(id)->isFacingCameraHorizontally();
 }
 
-const bool EngineInterface::quad3d_isFacingCameraY(const string& id) const
+const bool EngineInterface::quad3d_isFacingCameraVertically(const string& id) const
 {
-	return _core->getQuad3dEntityManager()->getEntity(id)->isFacingCameraY();
+	return _core->getQuad3dEntityManager()->getEntity(id)->isFacingCameraVertically();
 }
 
 const bool EngineInterface::quad3d_isDepthMapIncluded(const string& id) const

@@ -154,8 +154,7 @@ void ModelEditor::_updateModelCreating()
 				return;
 			}
 
-			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) && filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				_isCreatingModel = false;

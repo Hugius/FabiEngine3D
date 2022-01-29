@@ -11,6 +11,11 @@ Config::Config()
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = string(rootPath + "config.fe3d");
 
+	SDL_DisplayMode DM;
+	SDL_GetDesktopDisplayMode(0, &DM);
+	_monitorSize.x = DM.w;
+	_monitorSize.y = DM.h;
+
 	if(Tools::isFileExisting(filePath))
 	{
 		auto file = ifstream(filePath);
@@ -19,24 +24,18 @@ Config::Config()
 			Logger::throwFatalWarning("Cannot load `config.fe3d`!");
 		}
 
-		float windowSizeMultiplier = 0.0f;
-		_processOption(file, windowSizeMultiplier, "window_size");
+		_processOption(file, _windowSizeMultiplier, "window_size");
 		_processOption(file, _isWindowFullscreen, "window_fullscreen");
 		_processOption(file, _isWindowBorderless, "window_borderless");
 		_processOption(file, _windowTitle, "window_title");
 
-		if((windowSizeMultiplier < 0.0f) || (windowSizeMultiplier > 1.0f))
+		if((_windowSizeMultiplier < 0.0f) || (_windowSizeMultiplier > 1.0f))
 		{
 			Logger::throwFatalWarning("Configuration file @ option `window_size`: must be between 0.0 and 1.0!");
 		}
 
-		SDL_DisplayMode DM;
-		SDL_GetDesktopDisplayMode(0, &DM);
-		_monitorSize.x = DM.w;
-		_monitorSize.y = DM.h;
-
-		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * windowSizeMultiplier);
-		_windowSize.y = static_cast<int>(static_cast<float>(DM.h) * windowSizeMultiplier);
+		_windowSize.x = static_cast<int>(static_cast<float>(_monitorSize.x) * _windowSizeMultiplier);
+		_windowSize.y = static_cast<int>(static_cast<float>(_monitorSize.y) * _windowSizeMultiplier);
 		_viewportSize.x = static_cast<int>(static_cast<float>(_windowSize.x));
 		_viewportSize.y = static_cast<int>(static_cast<float>(_windowSize.y));
 		_viewportPosition.x = 0;
@@ -46,19 +45,15 @@ Config::Config()
 	}
 	else
 	{
-		SDL_DisplayMode DM;
-		SDL_GetDesktopDisplayMode(0, &DM);
-		_monitorSize.x = DM.w;
-		_monitorSize.y = DM.h;
-
+		_windowSizeMultiplier = DEFAULT_WINDOW_SIZE_MULTIPLIER;
 		_isWindowFullscreen = false;
 		_isWindowBorderless = false;
-		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * 0.9f);
-		_windowSize.y = static_cast<int>(static_cast<float>(DM.h) * 0.9f);
-		_viewportSize.x = static_cast<int>(0.75f * static_cast<float>(_windowSize.x));
-		_viewportSize.y = static_cast<int>(0.75f * static_cast<float>(_windowSize.y));
-		_viewportPosition.x = static_cast<int>(0.125f * static_cast<float>(_windowSize.x));
-		_viewportPosition.y = static_cast<int>(0.2f * static_cast<float>(_windowSize.y));
+		_windowSize.x = static_cast<int>(static_cast<float>(_monitorSize.x) * _windowSizeMultiplier);
+		_windowSize.y = static_cast<int>(static_cast<float>(_monitorSize.y) * _windowSizeMultiplier);
+		_viewportSize.x = static_cast<int>(static_cast<float>(_windowSize.x) * VIEWPORT_SIZE_MULTIPLIER.x);
+		_viewportSize.y = static_cast<int>(static_cast<float>(_windowSize.y) * VIEWPORT_SIZE_MULTIPLIER.y);
+		_viewportPosition.x = static_cast<int>(static_cast<float>(_windowSize.x) * VIEWPORT_POSITION_MULTIPLIER.x);
+		_viewportPosition.y = static_cast<int>(static_cast<float>(_windowSize.y) * VIEWPORT_POSITION_MULTIPLIER.y);
 
 		_isApplicationExported = false;
 	}
@@ -191,6 +186,11 @@ const ivec2& Config::getWindowSize() const
 const ivec2& Config::getViewportPosition() const
 {
 	return _viewportPosition;
+}
+
+const float Config::getWindowSizeMultiplier() const
+{
+	return _windowSizeMultiplier;
 }
 
 const ivec2& Config::getViewportSize() const

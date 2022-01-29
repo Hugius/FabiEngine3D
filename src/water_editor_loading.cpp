@@ -125,7 +125,6 @@ const bool WaterEditor::loadFromFile()
 		float specularShininess;
 		float specularIntensity;
 		float maxDepth;
-		unsigned int quality;
 		bool isSpecular;
 		bool isReflective;
 		bool isRefractive;
@@ -148,7 +147,6 @@ const bool WaterEditor::loadFromFile()
 			>> height
 			>> textureRepeat
 			>> waveHeight
-			>> quality
 			>> rippleSpeed.x
 			>> rippleSpeed.y
 			>> waveSpeed.x
@@ -178,7 +176,6 @@ const bool WaterEditor::loadFromFile()
 			_fe3d->water_setReflective(waterId, isReflective);
 			_fe3d->water_setRefractive(waterId, isRefractive);
 			_fe3d->water_setWaveHeight(waterId, waveHeight);
-			_fe3d->water_setQuality(waterId, static_cast<WaterQuality>(quality));
 			_fe3d->water_setSpecularShininess(waterId, specularShininess);
 			_fe3d->water_setSpecularIntensity(waterId, specularIntensity);
 			_fe3d->water_setEdged(waterId, isEdged);

@@ -69,9 +69,6 @@
     <ClInclude Include="..\..\..\src\network_protocol.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\water_quality.hpp">
-      <Filter>Enumeration</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\bloom_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>

@@ -7,7 +7,6 @@
 #include "networking_client_message.hpp"
 #include "networking_server_message.hpp"
 #include "mathematics.hpp"
-#include "water_quality.hpp"
 #include "bloom_type.hpp"
 #include "reflection_type.hpp"
 #include "pointlight_shape.hpp"
@@ -176,7 +175,6 @@ public:
 	void water_setEdged(const string& id, bool value);
 	void water_setColor(const string& id, const fvec3& value);
 	void water_setTextureRepeat(const string& id, float value);
-	void water_setQuality(const string& id, WaterQuality value);
 
 	const vector<string> water_getIds() const;
 	const string& water_getDudvMapPath(const string& id) const;
@@ -204,7 +202,6 @@ public:
 	const bool water_hasDudvMap(const string& id) const;
 	const bool water_hasNormalMap(const string& id) const;
 	const bool water_hasDisplacementMap(const string& id) const;
-	const WaterQuality water_getQuality(const string& id) const;
 
 	void model_create(const string& id, const string& meshPath);
 	void model_delete(const string& id);

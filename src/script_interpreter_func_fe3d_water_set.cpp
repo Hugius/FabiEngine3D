@@ -271,47 +271,6 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_set_quality")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dWater())
-			{
-				if(args[0].getString() == "SKY")
-				{
-					_fe3d->water_setQuality(_fe3d->water_getSelectedId(), WaterQuality::SKY);
-
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
-				}
-				else if(args[0].getString() == "SKY_TERRAIN")
-				{
-					_fe3d->water_setQuality(_fe3d->water_getSelectedId(), WaterQuality::SKY_TERRAIN);
-
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
-				}
-				else if(args[0].getString() == "SKY_TERRAIN_MODELS")
-				{
-					_fe3d->water_setQuality(_fe3d->water_getSelectedId(), WaterQuality::SKY_TERRAIN_MODEL);
-
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
-				}
-				else if(args[0].getString() == "SKY_TERRAIN_MODELS_QUAD3DS")
-				{
-					_fe3d->water_setQuality(_fe3d->water_getSelectedId(), WaterQuality::SKY_TERRAIN_MODEL_QUAD3D);
-
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
-				}
-				else
-				{
-					Logger::throwWarning("invalid quality!");
-
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
-				}
-			}
-		}
-	}
 	else
 	{
 		return false;

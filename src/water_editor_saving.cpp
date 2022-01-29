@@ -38,7 +38,6 @@ const bool WaterEditor::saveToFile() const
 		auto isEdged = _fe3d->water_isEdged(waterId);
 		auto specularShininess = _fe3d->water_getSpecularShininess(waterId);
 		auto specularIntensity = _fe3d->water_getSpecularIntensity(waterId);
-		auto quality = static_cast<unsigned int>(_fe3d->water_getQuality(waterId));
 		auto isSpecular = _fe3d->water_isSpecular(waterId);
 		auto isReflective = _fe3d->water_isReflective(waterId);
 		auto isRefractive = _fe3d->water_isRefractive(waterId);
@@ -70,7 +69,6 @@ const bool WaterEditor::saveToFile() const
 			height << " " <<
 			textureRepeat << " " <<
 			waveHeight << " " <<
-			quality << " " <<
 			rippleSpeed.x << " " <<
 			rippleSpeed.y << " " <<
 			waveSpeed.x << " " <<

@@ -65,11 +65,6 @@ void WaterEntity::setHighQualityMesh(shared_ptr<VertexBuffer> value)
 	_highQualityMesh = value;
 }
 
-void WaterEntity::setQuality(WaterQuality quality)
-{
-	_quality = quality;
-}
-
 void WaterEntity::setRippleSpeed(const fvec2& value)
 {
 	_rippleSpeed = value;
@@ -198,11 +193,6 @@ const shared_ptr<VertexBuffer> WaterEntity::getLowQualityMesh() const
 const shared_ptr<VertexBuffer> WaterEntity::getHighQualityMesh() const
 {
 	return _highQualityMesh;
-}
-
-const WaterQuality WaterEntity::getQuality() const
-{
-	return _quality;
 }
 
 const fvec2& WaterEntity::getRippleSpeed() const

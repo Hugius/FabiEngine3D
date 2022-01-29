@@ -25,47 +25,38 @@ void MasterRenderer::_captureWaterReflections()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	vector<string> savedModelEntityIds;
-	if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL ||
-	   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D ||
-	   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D_TEXT3D)
+	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
-		for(const auto& [key, entity] : _modelEntityManager->getEntities())
+		if(!entity->isVisible())
 		{
-			if(!entity->isVisible())
-			{
-				continue;
-			}
+			continue;
+		}
 
-			if(!entity->isReflected())
+		if(!entity->isReflected())
+		{
+			entity->setVisible(false);
+			savedModelEntityIds.push_back(entity->getId());
+			continue;
+		}
+
+		for(const auto& partId : entity->getPartIds())
+		{
+			if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR))
 			{
 				entity->setVisible(false);
 				savedModelEntityIds.push_back(entity->getId());
-				continue;
-			}
-
-			for(const auto& partId : entity->getPartIds())
-			{
-				if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR))
-				{
-					entity->setVisible(false);
-					savedModelEntityIds.push_back(entity->getId());
-					break;
-				}
+				break;
 			}
 		}
 	}
 
 	vector<string> savedQuad3dEntityIds;
-	if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D ||
-	   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D_TEXT3D)
+	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 	{
-		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
+		if(!entity->isReflected() && entity->isVisible())
 		{
-			if(!entity->isReflected() && entity->isVisible())
-			{
-				entity->setVisible(false);
-				savedQuad3dEntityIds.push_back(entity->getId());
-			}
+			entity->setVisible(false);
+			savedQuad3dEntityIds.push_back(entity->getId());
 		}
 	}
 
@@ -85,50 +76,15 @@ void MasterRenderer::_captureWaterReflections()
 	_renderBus->setRefractionsEnabled(false);
 	_renderBus->setSkyExposureLightness(0.0f);
 
-	switch(waterEntity->getQuality())
-	{
-		case WaterQuality::SKY:
-		{
-			_renderSkyEntity();
-			break;
-		}
-		case WaterQuality::SKY_TERRAIN:
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			break;
-		}
-		case WaterQuality::SKY_TERRAIN_MODEL:
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			_renderOpaqueModelEntities();
-			_renderTransparentModelEntities();
-			break;
-		}
-		case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D:
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			_renderOpaqueModelEntities();
-			_renderOpaqueQuad3dEntities();
-			_renderTransparentModelEntities();
-			_renderTransparentQuad3dEntities();
-			break;
-		}
-		case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D_TEXT3D:
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			_renderOpaqueModelEntities();
-			_renderOpaqueQuad3dEntities();
-			_renderOpaqueText3dEntities();
-			_renderTransparentModelEntities();
-			_renderTransparentQuad3dEntities();
-			_renderTransparentText3dEntities();
-			break;
-		}
-	}
+	_renderSkyEntity();
+	_renderTerrainEntity();
+	_renderOpaqueModelEntities();
+	_renderOpaqueQuad3dEntities();
+	_renderOpaqueText3dEntities();
+	_renderAabbEntities();
+	_renderTransparentModelEntities();
+	_renderTransparentQuad3dEntities();
+	_renderTransparentText3dEntities();
 
 	for(const auto& savedId : savedModelEntityIds)
 	{
@@ -194,50 +150,15 @@ void MasterRenderer::_captureWaterRefractions()
 	_renderBus->setMinPosition(fvec3(-FLT_MAX, (waterEntity->getHeight() - 1.0f), -FLT_MAX));
 	_renderBus->setSkyExposureLightness(0.0f);
 
-	switch(waterEntity->getQuality())
-	{
-		case WaterQuality::SKY:
-		{
-			_renderSkyEntity();
-			break;
-		}
-		case WaterQuality::SKY_TERRAIN:
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			break;
-		}
-		case WaterQuality::SKY_TERRAIN_MODEL:
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			_renderOpaqueModelEntities();
-			_renderTransparentModelEntities();
-			break;
-		}
-		case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D:
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			_renderOpaqueModelEntities();
-			_renderOpaqueQuad3dEntities();
-			_renderTransparentModelEntities();
-			_renderTransparentQuad3dEntities();
-			break;
-		}
-		case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D_TEXT3D:
-		{
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			_renderOpaqueModelEntities();
-			_renderOpaqueQuad3dEntities();
-			_renderOpaqueText3dEntities();
-			_renderTransparentModelEntities();
-			_renderTransparentQuad3dEntities();
-			_renderTransparentText3dEntities();
-			break;
-		}
-	}
+	_renderSkyEntity();
+	_renderTerrainEntity();
+	_renderOpaqueModelEntities();
+	_renderOpaqueQuad3dEntities();
+	_renderOpaqueText3dEntities();
+	_renderAabbEntities();
+	_renderTransparentModelEntities();
+	_renderTransparentQuad3dEntities();
+	_renderTransparentText3dEntities();
 
 	_renderBus->setWaterRefractionMap(_waterRefractionCaptor->getTexture(0));
 	_renderBus->setMinPosition(fvec3(-FLT_MAX));

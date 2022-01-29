@@ -52,11 +52,6 @@ void EngineInterface::water_setTextureRepeat(const string& id, float value)
 	_core->getWaterEntityManager()->getEntity(id)->setTextureRepeat(value);
 }
 
-void EngineInterface::water_setQuality(const string& id, WaterQuality value)
-{
-	_core->getWaterEntityManager()->getEntity(id)->setQuality(value);
-}
-
 void EngineInterface::water_setReflective(const string& id, bool value)
 {
 	_core->getWaterEntityManager()->getEntity(id)->setReflective(value);
@@ -317,11 +312,6 @@ const float EngineInterface::water_getSpecularIntensity(const string& id) const
 const bool EngineInterface::water_isEdged(const string& id) const
 {
 	return _core->getWaterEntityManager()->getEntity(id)->isEdged();
-}
-
-const WaterQuality EngineInterface::water_getQuality(const string& id) const
-{
-	return _core->getWaterEntityManager()->getEntity(id)->getQuality();
 }
 
 const string& EngineInterface::water_getDudvMapPath(const string& id) const

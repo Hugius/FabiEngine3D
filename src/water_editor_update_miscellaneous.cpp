@@ -11,7 +11,6 @@ void WaterEditor::_updateMiscellaneousMenu()
 		auto waveSpeed = _fe3d->water_getWaveSpeed(_currentWaterId);
 		auto waveHeight = _fe3d->water_getWaveHeight(_currentWaterId);
 		auto maxDepth = _fe3d->water_getMaxDepth(_currentWaterId);
-		auto quality = _fe3d->water_getQuality(_currentWaterId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -39,39 +38,6 @@ void WaterEditor::_updateMiscellaneousMenu()
 		{
 			_gui->getOverlay()->createValueForm("waveSpeedX", "X", (waveSpeed.x * 100000.0f), fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui->getOverlay()->createValueForm("waveSpeedY", "Y", (waveSpeed.y * 100000.0f), fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
-		{
-			switch(quality)
-			{
-				case WaterQuality::SKY:
-				{
-					quality = WaterQuality::SKY_TERRAIN;
-					break;
-				}
-				case WaterQuality::SKY_TERRAIN:
-				{
-					quality = WaterQuality::SKY_TERRAIN_MODEL;
-					break;
-				}
-				case WaterQuality::SKY_TERRAIN_MODEL:
-				{
-					quality = WaterQuality::SKY_TERRAIN_MODEL_QUAD3D;
-					break;
-				}
-				case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D:
-				{
-					quality = WaterQuality::SKY_TERRAIN_MODEL_QUAD3D_TEXT3D;
-					break;
-				}
-				case WaterQuality::SKY_TERRAIN_MODEL_QUAD3D_TEXT3D:
-				{
-					quality = WaterQuality::SKY;
-					break;
-				}
-			}
-
-			_fe3d->water_setQuality(_currentWaterId, quality);
 		}
 
 		if(_gui->getOverlay()->checkValueForm("size", size, {0.0f}))
@@ -107,7 +73,5 @@ void WaterEditor::_updateMiscellaneousMenu()
 		{
 			_fe3d->water_setMaxDepth(_currentWaterId, maxDepth);
 		}
-
-		screen->getButton("quality")->changeTextContent("Quality: " + to_string(static_cast<int>(quality) + 1));
 	}
 }

@@ -340,41 +340,6 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_get_quality")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_validateFe3dWater())
-			{
-				const auto quality = _fe3d->water_getQuality(_fe3d->water_getSelectedId());
-
-				if(quality == WaterQuality::SKY)
-				{
-					const auto result = "SKY";
-
-					returnValues.push_back(ScriptValue(SVT::STRING, result));
-				}
-				if(quality == WaterQuality::SKY_TERRAIN)
-				{
-					const auto result = "SKY_TERRAIN";
-
-					returnValues.push_back(ScriptValue(SVT::STRING, result));
-				}
-				if(quality == WaterQuality::SKY_TERRAIN_MODEL)
-				{
-					const auto result = "SKY_TERRAIN_MODEL";
-
-					returnValues.push_back(ScriptValue(SVT::STRING, result));
-				}
-				if(quality == WaterQuality::SKY_TERRAIN_MODEL_QUAD3D)
-				{
-					const auto result = "SKY_TERRAIN_MODEL_QUAD3D";
-
-					returnValues.push_back(ScriptValue(SVT::STRING, result));
-				}
-			}
-		}
-	}
 	else
 	{
 		return false;

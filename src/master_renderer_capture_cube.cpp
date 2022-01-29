@@ -125,6 +125,7 @@ void MasterRenderer::_captureCubeReflections()
 				_renderOpaqueModelEntities();
 				_renderOpaqueQuad3dEntities();
 				_renderOpaqueText3dEntities();
+				_renderAabbEntities();
 				_renderTransparentModelEntities();
 				_renderTransparentQuad3dEntities();
 				_renderTransparentText3dEntities();

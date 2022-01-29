@@ -398,7 +398,7 @@ float calculateShadows()
 {
 	if (u_isShadowsEnabled)
 	{
-		float halfSize = (u_shadowSize / 2.0f);
+		float halfSize = (u_shadowSize * 0.5f);
 		float fragmentDistance = distance(f_position.xz, u_shadowCenter.xz);
 
 		if (fragmentDistance <= halfSize)

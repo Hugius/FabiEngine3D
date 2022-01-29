@@ -151,10 +151,10 @@ void MasterRenderer::_updateShadows()
 				_renderBus->setShadowCenterPosition(_renderBus->getShadowCenterOffset());
 			}
 
-			const auto leftX = -(_renderBus->getShadowSize() / 2.0f);
-			const auto rightX = (_renderBus->getShadowSize() / 2.0f);
-			const auto bottomY = -(_renderBus->getShadowSize() / 2.0f);
-			const auto topY = (_renderBus->getShadowSize() / 2.0f);
+			const auto leftX = -(_renderBus->getShadowSize() * 0.5f);
+			const auto rightX = (_renderBus->getShadowSize() * 0.5f);
+			const auto bottomY = -(_renderBus->getShadowSize() * 0.5f);
+			const auto topY = (_renderBus->getShadowSize() * 0.5f);
 			const auto nearZ = 0.01f;
 			const auto farZ = Math::calculateDistance(fvec3(_renderBus->getShadowSize()), fvec3(0.0f));
 
@@ -191,7 +191,7 @@ void MasterRenderer::_updateLensFlare()
 		const auto flareSourcePosition = _renderBus->getDirectionalLightingPosition();
 		const auto flareSourceClip = (_renderBus->getProjectionMatrix() * _renderBus->getViewMatrix() * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
 		const auto flareSourceNdc = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
-		const auto flareSourceUv = fvec2(((flareSourceNdc.x + 1.0f) / 2.0f), ((flareSourceNdc.y + 1.0f) / 2.0f));
+		const auto flareSourceUv = fvec2(((flareSourceNdc.x + 1.0f) * 0.5f), ((flareSourceNdc.y + 1.0f) * 0.5f));
 
 		float opacity = 0.0f;
 		if((flareSourceNdc.x > -1.0f) && (flareSourceNdc.x < 1.0f) && (flareSourceNdc.y > -1.0f) && (flareSourceNdc.y < 1.0f))

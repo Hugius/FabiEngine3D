@@ -37,10 +37,10 @@ void GuiScrollingList::createButton(const string& id, const string& textContent)
 
 	string rectangleId = _buttons.back()->getRectangle()->getEntityId();
 	string textId = _buttons.back()->getTextField()->getEntityId();
-	_fe3d->quad2d_setMinPosition(rectangleId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
-	_fe3d->text2d_setMinPosition(textId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
-	_fe3d->quad2d_setMaxPosition(rectangleId, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
-	_fe3d->text2d_setMaxPosition(textId, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
+	_fe3d->quad2d_setMinPosition(rectangleId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y * 0.5f)));
+	_fe3d->text2d_setMinPosition(textId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y * 0.5f)));
+	_fe3d->quad2d_setMaxPosition(rectangleId, fvec2(1.0f, _initialPosition.y + (_initialSize.y * 0.5f)));
+	_fe3d->text2d_setMaxPosition(textId, fvec2(1.0f, _initialPosition.y + (_initialSize.y * 0.5f)));
 }
 
 void GuiScrollingList::deleteButton(const string& id)
@@ -98,9 +98,9 @@ void GuiScrollingList::_updateHovering()
 	fvec2 listPosition = _fe3d->quad2d_getPosition(_entityId);
 	fvec2 listSize = _fe3d->quad2d_getSize(_entityId);
 
-	if(cursorPosition.x > listPosition.x - (listSize.x / 2.0f) && cursorPosition.x < listPosition.x + (listSize.x / 2.0f))
+	if(cursorPosition.x > listPosition.x - (listSize.x * 0.5f) && cursorPosition.x < listPosition.x + (listSize.x * 0.5f))
 	{
-		if(cursorPosition.y > listPosition.y - (listSize.y / 2.0f) && cursorPosition.y < listPosition.y + (listSize.y / 2.0f))
+		if(cursorPosition.y > listPosition.y - (listSize.y * 0.5f) && cursorPosition.y < listPosition.y + (listSize.y * 0.5f))
 		{
 			_isHovered = true;
 		}
@@ -114,9 +114,9 @@ void GuiScrollingList::_updateScrolling()
 		bool mustReset = false;
 
 		fvec2 cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()));
-		if(cursorPosition.x > _initialPosition.x - (_initialSize.x / 2.0f) && cursorPosition.x < _initialPosition.x + (_initialSize.x / 2.0f))
+		if(cursorPosition.x > _initialPosition.x - (_initialSize.x * 0.5f) && cursorPosition.x < _initialPosition.x + (_initialSize.x * 0.5f))
 		{
-			if(cursorPosition.y > _initialPosition.y - (_initialSize.y / 2.0f) && cursorPosition.y < _initialPosition.y + (_initialSize.y / 2.0f))
+			if(cursorPosition.y > _initialPosition.y - (_initialSize.y * 0.5f) && cursorPosition.y < _initialPosition.y + (_initialSize.y * 0.5f))
 			{
 				float scrollingAcceleration = (static_cast<float>(-_fe3d->input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER);
 				_scrollingSpeed += scrollingAcceleration;
@@ -137,7 +137,7 @@ void GuiScrollingList::_updateScrolling()
 		float firstButtonHeight = _fe3d->quad2d_getPosition(_buttons[0]->getRectangle()->getEntityId()).y;
 		float lastButtonHeight = _fe3d->quad2d_getPosition(_buttons[_buttons.size() - 1]->getRectangle()->getEntityId()).y;
 		float listHeight = _fe3d->quad2d_getPosition(_entityId).y;
-		float edgeOffset = (_fe3d->quad2d_getSize(_entityId).y / 2.0f);
+		float edgeOffset = (_fe3d->quad2d_getSize(_entityId).y * 0.5f);
 		if(lastButtonHeight >= listHeight - edgeOffset + (_charSize.y / 3.0f))
 		{
 			if(_scrollingSpeed > 0.0f)
@@ -185,7 +185,7 @@ const fvec2 GuiScrollingList::_convertPosition(const fvec2& position) const
 {
 	fvec2 listPosition = _fe3d->quad2d_getPosition(_entityId);
 	fvec2 listSize = _fe3d->quad2d_getSize(_entityId);
-	fvec2 buttonPosition = (listPosition + (position * (listSize / 2.0f)));
+	fvec2 buttonPosition = (listPosition + (position * (listSize * 0.5f)));
 
 	return buttonPosition;
 }
@@ -194,7 +194,7 @@ const fvec2 GuiScrollingList::_convertSize(const fvec2& size) const
 {
 	fvec2 listPosition = _fe3d->quad2d_getPosition(_entityId);
 	fvec2 listSize = _fe3d->quad2d_getSize(_entityId);
-	fvec2 buttonSize = (size / 2.0f) * listSize;
+	fvec2 buttonSize = (size * 0.5f) * listSize;
 
 	return buttonSize;
 }

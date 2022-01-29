@@ -84,7 +84,7 @@ const bool WaterEntityManager::isEntityExisting(const string& id) const
 
 void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 {
-	const float halfSize = (size / 2.0f);
+	const float halfSize = (size * 0.5f);
 
 	if(size > MAX_SIZE)
 	{

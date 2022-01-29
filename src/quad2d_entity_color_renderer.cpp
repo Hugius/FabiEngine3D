@@ -20,13 +20,30 @@ void Quad2dEntityColorRenderer::unbind()
 
 void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 {
-	if(!entity->isVisible() ||
-	   ((entity->getPosition().x - entity->getSize().x) > entity->getMaxPosition().x) ||
-	   ((entity->getPosition().x + entity->getSize().x) < entity->getMinPosition().x) ||
-	   ((entity->getPosition().y - entity->getSize().y) > entity->getMaxPosition().y) ||
-	   ((entity->getPosition().y + entity->getSize().y) < entity->getMinPosition().y))
+	if(!entity->isVisible())
 	{
 		return;
+	}
+
+	if(entity->isCentered())
+	{
+		if(((entity->getPosition().x - (entity->getSize().x * 0.5f)) > entity->getMaxPosition().x) ||
+		   ((entity->getPosition().x + (entity->getSize().x * 0.5f)) < entity->getMinPosition().x) ||
+		   ((entity->getPosition().y - (entity->getSize().y * 0.5f)) > entity->getMaxPosition().y) ||
+		   ((entity->getPosition().y + (entity->getSize().y * 0.5f)) < entity->getMinPosition().y))
+		{
+			return;
+		}
+	}
+	else
+	{
+		if((entity->getPosition().x > entity->getMaxPosition().x) ||
+		   ((entity->getPosition().x + entity->getSize().x) < entity->getMinPosition().x) ||
+		   (entity->getPosition().y > entity->getMaxPosition().y) ||
+		   ((entity->getPosition().y + entity->getSize().y) < entity->getMinPosition().y))
+		{
+			return;
+		}
 	}
 
 	_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());

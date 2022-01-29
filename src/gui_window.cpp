@@ -39,9 +39,9 @@ const bool GuiWindow::isHovered() const
 		fvec2 buttonPosition = _fe3d->quad2d_getPosition(_entityId);
 		fvec2 buttonSize = _fe3d->quad2d_getSize(_entityId);
 
-		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f))
+		if(cursorPosition.x > buttonPosition.x - (buttonSize.x * 0.5f) && cursorPosition.x < buttonPosition.x + (buttonSize.x * 0.5f))
 		{
-			if(cursorPosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && cursorPosition.y < buttonPosition.y + (buttonSize.y / 2.0f))
+			if(cursorPosition.y > buttonPosition.y - (buttonSize.y * 0.5f) && cursorPosition.y < buttonPosition.y + (buttonSize.y * 0.5f))
 			{
 				return true;
 			}

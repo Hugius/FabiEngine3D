@@ -128,7 +128,7 @@ void TerrainEntityManager::loadMesh(const string& id)
 
 void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float>& pixels)
 {
-	const auto halfSize = (size / 2.0f);
+	const auto halfSize = (size * 0.5f);
 	const auto uSize = static_cast<unsigned int>(size);
 
 	vector<fvec3> tempPositions;

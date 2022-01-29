@@ -411,7 +411,7 @@ void ScriptEditor::_updateTextWriter()
 		{
 			position = _fe3d->text3d_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
 		}
-		position += fvec3(TEXT_CHARACTER_SIZE.x / 2.0f, 0.0f, 0.0f);
+		position += fvec3(TEXT_CHARACTER_SIZE.x * 0.5f, 0.0f, 0.0f);
 		_fe3d->text3d_setPosition("cursor", position);
 		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
 		_fe3d->text3d_setContent("cursor", (showBar ? "|" : " "));

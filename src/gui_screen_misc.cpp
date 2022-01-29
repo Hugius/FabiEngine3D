@@ -67,7 +67,7 @@ const fvec2 GuiScreen::convertPosition(const fvec2& position) const
 {
 	fvec2 screenPosition = _parentPosition;
 	fvec2 screenSize = _parentSize;
-	fvec2 buttonPosition = (screenPosition + (position * (screenSize / 2.0f)));
+	fvec2 buttonPosition = (screenPosition + (position * (screenSize * 0.5f)));
 
 	return buttonPosition;
 }
@@ -76,7 +76,7 @@ const fvec2 GuiScreen::convertSize(const fvec2& size) const
 {
 	fvec2 screenPosition = _parentPosition;
 	fvec2 screenSize = _parentSize;
-	fvec2 buttonSize = (size / 2.0f) * screenSize;
+	fvec2 buttonSize = (size * 0.5f) * screenSize;
 
 	return buttonSize;
 }
@@ -85,8 +85,8 @@ const fvec4 GuiScreen::_convertDimensions(const fvec2& position, const fvec2& si
 {
 	fvec2 screenPosition = _parentPosition;
 	fvec2 screenSize = _parentSize;
-	fvec2 buttonPosition = (screenPosition + (position * (screenSize / 2.0f)));
-	fvec2 buttonSize = (size / 2.0f) * screenSize;
+	fvec2 buttonPosition = (screenPosition + (position * (screenSize * 0.5f)));
+	fvec2 buttonSize = (size * 0.5f) * screenSize;
 
 	return fvec4(buttonPosition.x, buttonPosition.y, buttonSize.x, buttonSize.y);
 }

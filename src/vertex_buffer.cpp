@@ -71,13 +71,13 @@ VertexBuffer::VertexBuffer(float x, float y, float w, float h, bool isCentered)
 	{
 		data = new float[24]
 		{
-			x - (w / 2.0f), y - (h / 2.0f), 0.0f, 0.0f,
-			x + (w / 2.0f), y - (h / 2.0f), 1.0f, 0.0f,
-			x + (w / 2.0f), y + (h / 2.0f), 1.0f, 1.0f,
+			x - (w * 0.5f), y - (h * 0.5f), 0.0f, 0.0f,
+			x + (w * 0.5f), y - (h * 0.5f), 1.0f, 0.0f,
+			x + (w * 0.5f), y + (h * 0.5f), 1.0f, 1.0f,
 
-			x + (w / 2.0f), y + (h / 2.0f), 1.0f, 1.0f,
-			x - (w / 2.0f), y + (h / 2.0f), 0.0f, 1.0f,
-			x - (w / 2.0f), y - (h / 2.0f), 0.0f, 0.0f
+			x + (w * 0.5f), y + (h * 0.5f), 1.0f, 1.0f,
+			x - (w * 0.5f), y + (h * 0.5f), 0.0f, 1.0f,
+			x - (w * 0.5f), y - (h * 0.5f), 0.0f, 0.0f
 		};
 	}
 	else

@@ -82,7 +82,7 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 
 	auto self = _core->getAabbEntityManager()->getEntity(selfId);
 	fvec3 selfPosition = self->getPosition();
-	fvec3 selfSize = self->getSize() / 2.0f;
+	fvec3 selfSize = self->getSize() * 0.5f;
 
 	if(!self->isCollisionResponsive() || !self->isVisible())
 	{
@@ -107,7 +107,7 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 		}
 
 		fvec3 otherPosition = other->getPosition();
-		fvec3 otherSize = other->getSize() / 2.0f;
+		fvec3 otherSize = other->getSize() * 0.5f;
 		if
 			(
 			((selfPosition.x > otherPosition.x - otherSize.x && selfPosition.x < otherPosition.x + otherSize.x) ||

@@ -36,7 +36,7 @@ void Sound3dPlayer::update()
 			const auto rotatedSoundDirection = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
 			const auto normalizedSoundDirection = Math::normalize(fvec3(rotatedSoundDirection.x, rotatedSoundDirection.y, rotatedSoundDirection.z));
 			const auto dotProduct = Math::calculateDotProduct(normalizedSoundDirection, cameraDirection);
-			const auto panningRange = ((dotProduct / 2.0f) + 0.5f);
+			const auto panningRange = ((dotProduct * 0.5f) + 0.5f);
 			const auto leftIntensity = Uint8(255.0f * panningRange);
 			const auto rightIntensity = Uint8(255 - leftIntensity);
 

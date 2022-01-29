@@ -390,7 +390,7 @@ vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color)
 	{
 		if (reflectionMapColor != vec3(0.0f))
 		{
-			vec2 ndc = (((f_clip.xy / f_clip.w) / 2.0f) + 0.5f);
+			vec2 ndc = (((f_clip.xy / f_clip.w) * 0.5f) + 0.5f);
 			vec2 texCoords = vec2(ndc.x, -ndc.y);
 			vec3 reflectionColor = texture(u_planarReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
 			vec3 mixedColor = mix(color, reflectionColor, u_reflectivity);
@@ -410,7 +410,7 @@ float calculateShadows()
 {
 	if (u_isShadowsEnabled)
 	{
-		float halfSize = (u_shadowSize / 2.0f);
+		float halfSize = (u_shadowSize * 0.5f);
 		float fragmentDistance = distance(f_position.xz, u_shadowCenter.xz);
 
 		if (fragmentDistance <= halfSize)

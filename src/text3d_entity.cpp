@@ -86,8 +86,8 @@ void Text3dEntity::updateCharacterEntities()
 	for(const auto& character : _characterEntities)
 	{
 		auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
-		offset.x -= (this->getSize().x / 2.0f);
-		offset.x += (characterSize.x / 2.0f);
+		offset.x -= (this->getSize().x * 0.5f);
+		offset.x += (characterSize.x * 0.5f);
 
 		character->setPosition(_position + (rotationMatrix * offset));
 		character->setRotation(_rotation);

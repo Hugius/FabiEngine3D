@@ -182,7 +182,7 @@ void AabbEntityManager::update()
 							}
 							else
 							{
-								const fvec3 offset = fvec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
+								const fvec3 offset = fvec3(0.0f, (entity->getLocalSize().y * 0.5f), 0.0f);
 								localPosition = (entity->getLocalPosition() + offset) * parentEntity->getBaseSize();
 							}
 
@@ -191,7 +191,7 @@ void AabbEntityManager::update()
 							if(rotationDirection == Direction::X)
 							{
 								rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(roundedRotation));
-								rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.z) / 2.0f), 0.0f);
+								rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.z) * 0.5f), 0.0f);
 							}
 							else if(rotationDirection == Direction::Y)
 							{
@@ -201,7 +201,7 @@ void AabbEntityManager::update()
 							else if(rotationDirection == Direction::Z)
 							{
 								rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(roundedRotation));
-								rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.x) / 2.0f), 0.0f);
+								rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.x) * 0.5f), 0.0f);
 							}
 
 							auto rotatedLocalPosition = (rotationMatrix * fvec4(localPosition.x, localPosition.y, localPosition.z, 1.0f));
@@ -281,7 +281,7 @@ void AabbEntityManager::update()
 						auto newAabbPosition = (parentPosition + entity->getLocalPosition());
 						if(!entity->isCentered())
 						{
-							newAabbPosition.y -= ((newAabbSize.y - parentSize.y) / 2.0f);
+							newAabbPosition.y -= ((newAabbSize.y - parentSize.y) * 0.5f);
 						}
 
 						entity->setPosition(newAabbPosition);
@@ -359,7 +359,7 @@ void AabbEntityManager::update()
 						auto newAabbPosition = (parentPosition + entity->getLocalPosition());
 						if(!entity->isCentered())
 						{
-							newAabbPosition.y -= ((newAabbSize.y - parentSize.y) / 2.0f);
+							newAabbPosition.y -= ((newAabbSize.y - parentSize.y) * 0.5f);
 						}
 
 						entity->setPosition(newAabbPosition);

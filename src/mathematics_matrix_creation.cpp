@@ -195,7 +195,7 @@ const mat44 Math::createViewMatrix(const fvec3& eye, const fvec3& center, const 
 
 const mat44 Math::createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far)
 {
-	const float tanHalfFovY = tan(fov / 2.0f);
+	const float tanHalfFovY = tan(fov * 0.5f);
 
 	mat44 result(0.0f);
 	result.m[0][0] = 1.0f / (aspect * tanHalfFovY);

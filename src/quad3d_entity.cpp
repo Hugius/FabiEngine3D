@@ -87,7 +87,7 @@ void Quad3dEntity::updateTransformationMatrix()
 
 	if(!_isCentered)
 	{
-		auto rotationOriginMatrix = Math::createTranslationMatrix(0.0f, (_size.y / 2.0f), 0.0f);
+		auto rotationOriginMatrix = Math::createTranslationMatrix(0.0f, (_size.y * 0.5f), 0.0f);
 		_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
 	}
 
@@ -99,7 +99,7 @@ void Quad3dEntity::updateTransformationMatrix()
 
 	if(!_isCentered)
 	{
-		auto rotationOriginMatrix = Math::createTranslationMatrix(0.0f, -(_size.y / 2.0f), 0.0f);
+		auto rotationOriginMatrix = Math::createTranslationMatrix(0.0f, -(_size.y * 0.5f), 0.0f);
 		_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
 	}
 

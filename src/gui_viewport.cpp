@@ -38,13 +38,13 @@ const bool GuiViewport::isHovered() const
 		auto buttonPosition = _fe3d->quad2d_getPosition(_entityId);
 		auto buttonSize = _fe3d->quad2d_getSize(_entityId);
 
-		if(cursorPosition.x > (buttonPosition.x - (buttonSize.x / 2.0f)))
+		if(cursorPosition.x > (buttonPosition.x - (buttonSize.x * 0.5f)))
 		{
-			if(cursorPosition.x < (buttonPosition.x + (buttonSize.x / 2.0f)))
+			if(cursorPosition.x < (buttonPosition.x + (buttonSize.x * 0.5f)))
 			{
-				if(cursorPosition.y > (buttonPosition.y - (buttonSize.y / 2.0f)))
+				if(cursorPosition.y > (buttonPosition.y - (buttonSize.y * 0.5f)))
 				{
-					if(cursorPosition.y < (buttonPosition.y + (buttonSize.y / 2.0f)))
+					if(cursorPosition.y < (buttonPosition.y + (buttonSize.y * 0.5f)))
 					{
 						return true;
 					}
@@ -86,7 +86,7 @@ void GuiViewport::createWindow(const string& id, const fvec2& position, const fv
 	auto viewportPosition = _fe3d->quad2d_getPosition(_entityId);
 	auto viewportSize = _fe3d->quad2d_getSize(_entityId);
 	auto windowPosition = (viewportPosition + (position * viewportSize));
-	auto windowSize = ((size / 2.0f) * viewportSize);
+	auto windowSize = ((size * 0.5f) * viewportSize);
 
 	_windows.push_back(make_shared<GuiWindow>(_fe3d, _id, id, windowPosition, windowSize, color));
 }

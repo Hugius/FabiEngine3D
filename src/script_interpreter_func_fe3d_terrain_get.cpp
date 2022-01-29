@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 		{
 			if(_validateFe3dTerrain())
 			{
-				const auto halfTerrainSize = (_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId()) / 2.0f);
+				const auto halfTerrainSize = (_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId()) * 0.5f);
 				const auto result = _fe3d->terrain_getPixelHeight(_fe3d->terrain_getSelectedId(), (args[0].getDecimal() + halfTerrainSize), (args[1].getDecimal() + halfTerrainSize));
 
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));

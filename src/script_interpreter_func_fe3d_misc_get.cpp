@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
-	else if(functionName == "fe3d:vynsc_is_enabled")
+	else if(functionName == "fe3d:vsync_is_enabled")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{

@@ -18,7 +18,7 @@ const vector<float> BaseViewportController::calculateButtonPositions(unsigned in
 	float gapSpace = (freeSpace / static_cast<float>(buttonCount + 1));
 	float height = 1.0f;
 
-	height -= (gapSpace + (buttonHeight / 2.0f));
+	height -= (gapSpace + (buttonHeight * 0.5f));
 
 	for(unsigned int i = 0; i < buttonCount; i++)
 	{

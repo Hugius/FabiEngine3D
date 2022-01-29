@@ -157,7 +157,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				auto speed = Tools::convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
-				_fe3d->text2d_moveTo(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
+				_fe3d->text2d_moveTo(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) * 0.5f));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 			if(_validateFe3dText2d(args[0].getString(), false))
 			{
 				auto speed = Tools::convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
-				_fe3d->text2d_scaleTo(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) / 2.0f));
+				_fe3d->text2d_scaleTo(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal())), ((speed.x + speed.y) * 0.5f));
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

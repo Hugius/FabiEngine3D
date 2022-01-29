@@ -72,18 +72,15 @@ void Text2dEntity::updateCharacterEntities()
 
 		if(_isCentered)
 		{
-			offset.x -= (this->getSize().x / 2.0f);
-			offset.x += (characterSize.x / 2.0f);
+			offset.x -= (this->getSize().x * 0.5f);
+			offset.x += (characterSize.x * 0.5f);
 		}
 
 		character->setPosition(_position + (rotationMatrix * offset));
 		character->setRotation(_rotation);
 		character->setSize(characterSize);
 
-		if(_isVisible)
-		{
-			character->updateTransformationMatrix();
-		}
+		character->updateTransformationMatrix();
 
 		index++;
 	}

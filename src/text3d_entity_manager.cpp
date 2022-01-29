@@ -113,7 +113,7 @@ void Text3dEntityManager::update()
 
 		if(facingX || facingY)
 		{
-			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
+			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y * 0.5f), 0.0f));
 			auto direction = (position - _renderBus->getCameraPosition());
 
 			auto degreesX = Math::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));

@@ -150,7 +150,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
+	_shader->uploadUniform("u_isWireframed", entity->isWireframed());
 	_shader->uploadUniform("u_rippleOffset", entity->getRippleOffset());
 	_shader->uploadUniform("u_waveOffset", entity->getWaveOffset());
 	_shader->uploadUniform("u_waveHeight", entity->getWaveHeight());

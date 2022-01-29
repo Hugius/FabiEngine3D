@@ -10,17 +10,6 @@ void EngineInterface::misc_setCursorEntityId(const string& value)
 	_core->getRenderBus()->setCursorEntityId(value);
 }
 
-void EngineInterface::misc_enableWireframeRendering()
-{
-	if(_core->getRenderBus()->isWireframeRenderingEnabled())
-	{
-		Logger::throwWarning("Tried to enable wireframe rendering: already enabled!");
-		return;
-	}
-
-	_core->getRenderBus()->setWireframeRenderingEnabled(true);
-}
-
 void EngineInterface::misc_enableShadowFrameRendering()
 {
 	if(_core->getRenderBus()->isShadowFrameRenderingEnabled())
@@ -30,17 +19,6 @@ void EngineInterface::misc_enableShadowFrameRendering()
 	}
 
 	_core->getRenderBus()->setShadowFrameRenderingEnabled(true);
-}
-
-void EngineInterface::misc_enableAabbFrameRendering()
-{
-	if(_core->getRenderBus()->isAabbFrameRenderingEnabled())
-	{
-		Logger::throwWarning("Tried to enable AABB frame rendering: already enabled!");
-		return;
-	}
-
-	_core->getRenderBus()->setAabbFrameRenderingEnabled(true);
 }
 
 void EngineInterface::misc_enableVsync()
@@ -54,17 +32,6 @@ void EngineInterface::misc_enableVsync()
 	_core->getRenderWindow()->enableVsync();
 }
 
-void EngineInterface::misc_disableWireframeRendering()
-{
-	if(!_core->getRenderBus()->isWireframeRenderingEnabled())
-	{
-		Logger::throwWarning("Tried to disable wireframe rendering: not enabled!");
-		return;
-	}
-
-	_core->getRenderBus()->setWireframeRenderingEnabled(false);
-}
-
 void EngineInterface::misc_disableShadowFrameRendering()
 {
 	if(!_core->getRenderBus()->isShadowFrameRenderingEnabled())
@@ -74,17 +41,6 @@ void EngineInterface::misc_disableShadowFrameRendering()
 	}
 
 	_core->getRenderBus()->setShadowFrameRenderingEnabled(false);
-}
-
-void EngineInterface::misc_disableAabbFrameRendering()
-{
-	if(!_core->getRenderBus()->isAabbFrameRenderingEnabled())
-	{
-		Logger::throwWarning("Tried to disable AABB frame rendering: not enabled!");
-		return;
-	}
-
-	_core->getRenderBus()->setAabbFrameRenderingEnabled(false);
 }
 
 void EngineInterface::misc_disableVsync()
@@ -406,17 +362,7 @@ const bool EngineInterface::misc_isVsyncEnabled() const
 	return _core->getRenderWindow()->isVsyncEnabled();
 }
 
-const bool EngineInterface::misc_isWireframeRenderingEnabled() const
-{
-	return _core->getRenderBus()->isWireframeRenderingEnabled();
-}
-
 const bool EngineInterface::misc_isShadowFrameRenderingEnabled() const
 {
 	return _core->getRenderBus()->isShadowFrameRenderingEnabled();
-}
-
-const bool EngineInterface::misc_isAabbFrameRenderingEnabled() const
-{
-	return _core->getRenderBus()->isAabbFrameRenderingEnabled();
 }

@@ -71,28 +71,39 @@ void WorldEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
-		if(_fe3d->input_isKeyPressed(InputType::KEY_B))
-		{
-			if(_fe3d->misc_isAabbFrameRenderingEnabled())
-			{
-				_fe3d->misc_disableAabbFrameRendering();
-			}
-			else
-			{
-				_fe3d->misc_enableAabbFrameRendering();
-			}
-
-		}
-
 		if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 		{
-			if(_fe3d->misc_isWireframeRenderingEnabled())
+			if(!_loadedSkyId.empty())
 			{
-				_fe3d->misc_disableWireframeRendering();
+				_fe3d->sky_setWireframed(_loadedSkyId, !_fe3d->sky_isWireframed(_loadedSkyId));
 			}
-			else
+
+			if(!_loadedTerrainId.empty())
 			{
-				_fe3d->misc_enableWireframeRendering();
+				_fe3d->terrain_setWireframed(_loadedTerrainId, !_fe3d->terrain_isWireframed(_loadedTerrainId));
+			}
+
+			if(!_loadedWaterId.empty())
+			{
+				_fe3d->water_setWireframed(_loadedWaterId, !_fe3d->water_isWireframed(_loadedWaterId));
+			}
+
+			for(const auto& [key, templateId] : _loadedModelIds)
+			{
+				for(const auto& partId : _fe3d->model_getPartIds(key))
+				{
+					_fe3d->model_setWireframed(key, partId, !_fe3d->model_isWireframed(key, partId));
+				}
+			}
+
+			for(const auto& [key, templateId] : _loadedQuadIds)
+			{
+				_fe3d->quad3d_setWireframed(key, !_fe3d->quad3d_isWireframed(key));
+			}
+
+			for(const auto& [key, templateId] : _loadedTextIds)
+			{
+				_fe3d->text3d_setWireframed(key, !_fe3d->text3d_isWireframed(key));
 			}
 		}
 	}

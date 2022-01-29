@@ -84,7 +84,7 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 	fvec3 selfPosition = self->getPosition();
 	fvec3 selfSize = self->getSize() * 0.5f;
 
-	if(!self->isCollisionResponsive() || !self->isVisible())
+	if(!self->isCollisionResponsive())
 	{
 		return "";
 	}
@@ -101,7 +101,7 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 			continue;
 		}
 
-		if(!other->isCollisionResponsive() || !other->isVisible())
+		if(!other->isCollisionResponsive())
 		{
 			continue;
 		}

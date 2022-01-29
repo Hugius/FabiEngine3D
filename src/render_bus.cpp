@@ -368,16 +368,6 @@ void RenderBus::setLensFlareEnabled(bool value)
 	_isLensFlareEnabled = value;
 }
 
-void RenderBus::setWireframeRenderingEnabled(bool value)
-{
-	_isWireframeRenderingEnabled = value;
-}
-
-void RenderBus::setAabbFrameRenderingEnabled(bool value)
-{
-	_isAabbFrameRenderingEnabled = value;
-}
-
 void RenderBus::setShadowFrameRenderingEnabled(bool value)
 {
 	_isShadowFrameRenderingEnabled = value;
@@ -811,16 +801,6 @@ const bool RenderBus::isMotionBlurEnabled() const
 const bool RenderBus::isLensFlareEnabled() const
 {
 	return _isLensFlareEnabled;
-}
-
-const bool RenderBus::isWireframeRenderingEnabled() const
-{
-	return _isWireframeRenderingEnabled;
-}
-
-const bool RenderBus::isAabbFrameRenderingEnabled() const
-{
-	return _isAabbFrameRenderingEnabled;
 }
 
 const bool RenderBus::isShadowFrameRenderingEnabled() const

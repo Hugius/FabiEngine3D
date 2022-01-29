@@ -469,8 +469,6 @@ const bool ModelEditor::loadFromFile()
 
 			if(_fe3d->aabb_isExisting(aabbId))
 			{
-				_fe3d->aabb_setVisible(aabbId, false);
-				_fe3d->aabb_setFollowParentVisibility(aabbId, false);
 				_fe3d->aabb_setParentEntityId(aabbId, modelId);
 				_fe3d->aabb_setParentEntityType(aabbId, AabbParentEntityType::MODEL);
 				_fe3d->aabb_setLocalPosition(aabbId, position);

@@ -26,7 +26,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
+	_shader->uploadUniform("u_isWireframed", entity->isWireframed());
 	_shader->uploadUniform("u_rotationMatrix", entity->getRotationMatrix());
 	_shader->uploadUniform("u_lightness", (entity->getLightness() + _renderBus->getSkyExposureLightness()));
 	_shader->uploadUniform("u_color", entity->getColor());

@@ -137,7 +137,7 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
+	_shader->uploadUniform("u_isWireframed", entity->isWireframed());
 	_shader->uploadUniform("u_isSpecular", entity->isSpecular());
 	_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 	_shader->uploadUniform("u_redTextureRepeat", entity->getRedTextureRepeat());

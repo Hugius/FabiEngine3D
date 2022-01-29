@@ -27,8 +27,6 @@ public:
 	void scaleTo(const fvec3& target, float speed);
 	void setParentEntityId(const string& value);
 	void setParentEntityType(AabbParentEntityType value);
-	void setFollowParentEntityTransformation(bool value);
-	void setFollowParentEntityVisibility(bool value);
 	void setCollisionDirection(Direction value);
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
@@ -51,8 +49,6 @@ public:
 	const bool isCollisionResponsive() const;
 	const bool hasParent() const;
 	const bool hasCollided() const;
-	const bool mustFollowParentEntityTransformation() const;
-	const bool mustFollowParentEntityVisibility() const;
 
 	const shared_ptr<VertexBuffer> getMesh() const;
 	const AabbParentEntityType getParentEntityType() const;
@@ -75,8 +71,6 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 
 	bool _isCentered = false;
-	bool _mustFollowParentEntityTransformation = true;
-	bool _mustFollowParentEntityVisibility = true;
 	bool _isRaycastResponsive = true;
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;

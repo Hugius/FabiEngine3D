@@ -528,8 +528,6 @@ public:
 	void aabb_setColor(const string& id, const fvec3& value);
 	void aabb_setRaycastResponsive(const string& id, bool value);
 	void aabb_setCollisionResponsive(const string& id, bool value);
-	void aabb_setFollowParentTransformation(const string& id, bool value);
-	void aabb_setFollowParentVisibility(const string& id, bool value);
 	void aabb_setLocalPosition(const string& id, const fvec3& value);
 	void aabb_setLocalSize(const string& id, const fvec3& value);
 	void aabb_setBasePosition(const string& id, const fvec3& value);
@@ -883,13 +881,9 @@ public:
 	const bool client_isConnected() const;
 	const bool client_isAccepted() const;
 
-	void misc_enableWireframeRendering();
 	void misc_enableShadowFrameRendering();
-	void misc_enableAabbFrameRendering();
 	void misc_enableVsync();
-	void misc_disableWireframeRendering();
 	void misc_disableShadowFrameRendering();
-	void misc_disableAabbFrameRendering();
 	void misc_disableVsync();
 	void misc_setCursorVisible(bool value);
 	void misc_setCursorEntityId(const string& value);
@@ -928,9 +922,7 @@ public:
 	const bool misc_checkInterval(unsigned int ticks) const;
 	const bool misc_isMillisecondTimerStarted() const;
 	const bool misc_isVsyncEnabled() const;
-	const bool misc_isWireframeRenderingEnabled() const;
 	const bool misc_isShadowFrameRenderingEnabled() const;
-	const bool misc_isAabbFrameRenderingEnabled() const;
 
 private:
 	shared_ptr<EngineCore> _core = nullptr;

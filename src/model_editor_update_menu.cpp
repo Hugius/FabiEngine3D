@@ -108,7 +108,6 @@ void ModelEditor::_updateChoiceMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("aabb")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
-			_fe3d->misc_enableAabbFrameRendering();
 		}
 
 		screen->getButton("part")->setHoverable(_fe3d->model_isMultiParted(_currentModelId));

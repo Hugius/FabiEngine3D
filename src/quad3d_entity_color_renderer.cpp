@@ -55,7 +55,7 @@ void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 	}
 
 	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));
-	_shader->uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus->isWireframeRenderingEnabled()));
+	_shader->uploadUniform("u_isWireframed", entity->isWireframed());
 	_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 	_shader->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseMap() != nullptr));
 	_shader->uploadUniform("u_hasEmissionMap", (entity->getEmissionMap() != nullptr));

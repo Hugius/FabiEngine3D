@@ -12,7 +12,6 @@ void ModelEditor::_updateMainAabbMenu()
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-			_fe3d->misc_disableAabbFrameRendering();
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
@@ -138,7 +137,6 @@ void ModelEditor::_updateAabbCreating()
 			_currentAabbId = newAabbId;
 
 			_fe3d->aabb_create(_currentModelId + "@" + _currentAabbId, false);
-			_fe3d->aabb_setFollowParentVisibility((_currentModelId + "@" + _currentAabbId), false);
 			_fe3d->aabb_setParentEntityId((_currentModelId + "@" + _currentAabbId), _currentModelId);
 			_fe3d->aabb_setParentEntityType((_currentModelId + "@" + _currentAabbId), AabbParentEntityType::MODEL);
 

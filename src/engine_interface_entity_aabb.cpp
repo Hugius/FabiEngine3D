@@ -46,16 +46,6 @@ void EngineInterface::aabb_setCollisionResponsive(const string& id, bool value)
 	_core->getAabbEntityManager()->getEntity(id)->setCollisionResponsive(value);
 }
 
-void EngineInterface::aabb_setFollowParentTransformation(const string& id, bool value)
-{
-	_core->getAabbEntityManager()->getEntity(id)->setFollowParentEntityTransformation(value);
-}
-
-void EngineInterface::aabb_setFollowParentVisibility(const string& id, bool value)
-{
-	_core->getAabbEntityManager()->getEntity(id)->setFollowParentEntityVisibility(value);
-}
-
 void EngineInterface::aabb_setLocalPosition(const string& id, const fvec3& value)
 {
 	_core->getAabbEntityManager()->getEntity(id)->setLocalPosition(value);

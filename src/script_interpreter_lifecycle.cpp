@@ -275,14 +275,6 @@ void ScriptInterpreter::unload()
 		_fe3d->client_stop();
 	}
 
-	if(_fe3d->misc_isAabbFrameRenderingEnabled())
-	{
-		_fe3d->misc_disableAabbFrameRendering();
-	}
-	if(_fe3d->misc_isWireframeRenderingEnabled())
-	{
-		_fe3d->misc_disableWireframeRendering();
-	}
 	if(!_fe3d->misc_isVsyncEnabled())
 	{
 		_fe3d->misc_enableVsync();

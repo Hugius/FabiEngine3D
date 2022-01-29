@@ -31,7 +31,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
 
 	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
-		if(entity->isRaycastResponsive() && entity->isVisible())
+		if(entity->isRaycastResponsive())
 		{
 			float distance;
 
@@ -103,7 +103,7 @@ const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const strin
 	{
 		auto entity = _core->getAabbEntityManager()->getEntity(id);
 
-		if(entity->isRaycastResponsive() && entity->isVisible())
+		if(entity->isRaycastResponsive())
 		{
 			float distance;
 			if(entity->isCentered())
@@ -166,7 +166,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 
 		for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 		{
-			if(entity->isRaycastResponsive() && entity->isVisible())
+			if(entity->isRaycastResponsive())
 			{
 				if(entity->getId().substr(0, id.size()) == id)
 				{

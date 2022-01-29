@@ -110,11 +110,6 @@ void ModelEditor::unload()
 	_isChoosingAabb = false;
 	_isDeletingAabb = false;
 	_isEditorLoaded = false;
-
-	if(_fe3d->misc_isAabbFrameRenderingEnabled())
-	{
-		_fe3d->misc_disableAabbFrameRendering();
-	}
 }
 
 void ModelEditor::_loadGUI()

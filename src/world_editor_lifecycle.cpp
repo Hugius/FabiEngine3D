@@ -242,14 +242,7 @@ void WorldEditor::unload()
 	_gui->getOverlay()->deleteTextField("soundId");
 
 	_fe3d->collision_disableCameraResponse();
-	if(_fe3d->misc_isAabbFrameRenderingEnabled())
-	{
-		_fe3d->misc_disableAabbFrameRendering();
-	}
-	if(_fe3d->misc_isWireframeRenderingEnabled())
-	{
-		_fe3d->misc_disableWireframeRendering();
-	}
+
 	if(_fe3d->raycast_isTerrainPointingEnabled())
 	{
 		_fe3d->raycast_disableTerrainPointing();

@@ -97,7 +97,7 @@ const bool CameraCollisionHandler::_handleCollision(Direction direction) const
 		{
 			case Direction::X:
 			{
-				if(aabb->isCollisionResponsive() && aabb->isVisible())
+				if(aabb->isCollisionResponsive())
 				{
 					const fvec3 middle = _camera->getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
@@ -120,7 +120,7 @@ const bool CameraCollisionHandler::_handleCollision(Direction direction) const
 			}
 			case Direction::Y:
 			{
-				if(aabb->isCollisionResponsive() && aabb->isVisible())
+				if(aabb->isCollisionResponsive())
 				{
 					const fvec3 middle = _camera->getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
@@ -146,7 +146,7 @@ const bool CameraCollisionHandler::_handleCollision(Direction direction) const
 			}
 			case Direction::Z:
 			{
-				if(aabb->isCollisionResponsive() && aabb->isVisible())
+				if(aabb->isCollisionResponsive())
 				{
 					const fvec3 middle = _camera->getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);

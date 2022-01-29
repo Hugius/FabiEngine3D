@@ -86,8 +86,6 @@ public:
 	void setDofEnabled(bool value);
 	void setMotionBlurEnabled(bool value);
 	void setLensFlareEnabled(bool value);
-	void setWireframeRenderingEnabled(bool value);
-	void setAabbFrameRenderingEnabled(bool value);
 	void setShadowFrameRenderingEnabled(bool value);
 	void setTriangleCountingEnabled(bool value);
 	void setDofDynamic(bool value);
@@ -173,8 +171,6 @@ public:
 	const bool isDofEnabled() const;
 	const bool isMotionBlurEnabled() const;
 	const bool isLensFlareEnabled() const;
-	const bool isWireframeRenderingEnabled() const;
-	const bool isAabbFrameRenderingEnabled() const;
 	const bool isShadowFrameRenderingEnabled() const;
 	const bool isTriangleCountingEnabled() const;
 	const bool isDofDynamic() const;
@@ -283,8 +279,6 @@ private:
 	bool _isDofEnabled = false;
 	bool _isMotionBlurEnabled = false;
 	bool _isLensFlareEnabled = false;
-	bool _isWireframeRenderingEnabled = false;
-	bool _isAabbFrameRenderingEnabled = false;
 	bool _isShadowFrameRenderingEnabled = false;
 	bool _isTriangleCountingEnabled = false;
 	bool _isDofDynamic = false;

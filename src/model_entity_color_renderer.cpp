@@ -190,7 +190,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partId));
 		_shader->uploadUniform("u_normalTransformationMatrix", Math::transposeMatrix(Math::invertMatrix(mat33(entity->getTransformationMatrix(partId)))));
 		_shader->uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partId)));
-		_shader->uploadUniform("u_isWireframed", (entity->isWireframed(partId) || _renderBus->isWireframeRenderingEnabled()));
+		_shader->uploadUniform("u_isWireframed", entity->isWireframed(partId));
 		_shader->uploadUniform("u_isBright", entity->isBright(partId));
 
 		if(entity->isFaceCulled(partId))

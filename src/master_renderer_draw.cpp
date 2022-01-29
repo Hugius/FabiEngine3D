@@ -22,30 +22,6 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& view
 
 void MasterRenderer::renderApplication()
 {
-	if(_renderBus->isWireframeRenderingEnabled())
-	{
-		_timer->startDeltaPart("3dEntityRender");
-		glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		_renderSkyEntity();
-		_renderTerrainEntity();
-		_renderWaterEntity();
-		_renderOpaqueModelEntities();
-		_renderOpaqueQuad3dEntities();
-		_renderOpaqueText3dEntities();
-		_renderTransparentModelEntities();
-		_renderTransparentQuad3dEntities();
-		_renderTransparentText3dEntities();
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
-		_timer->stopDeltaPart();
-		_timer->startDeltaPart("2dEntityRender");
-		_renderGUI();
-		_timer->stopDeltaPart();
-		return;
-	}
-
 	_timer->startDeltaPart("depthPreRender");
 	_captureWorldDepth();
 	_timer->stopDeltaPart();
@@ -356,19 +332,16 @@ void MasterRenderer::_renderTransparentText3dEntities()
 
 void MasterRenderer::_renderAabbEntities()
 {
-	if(_renderBus->isAabbFrameRenderingEnabled())
+	if(!_aabbEntityManager->getEntities().empty())
 	{
-		if(!_aabbEntityManager->getEntities().empty())
+		_aabbEntityColorRenderer.bind();
+
+		for(const auto& [key, entity] : _aabbEntityManager->getEntities())
 		{
-			_aabbEntityColorRenderer.bind();
-
-			for(const auto& [key, entity] : _aabbEntityManager->getEntities())
-			{
-				_aabbEntityColorRenderer.render(entity);
-			}
-
-			_aabbEntityColorRenderer.unbind();
+			_aabbEntityColorRenderer.render(entity);
 		}
+
+		_aabbEntityColorRenderer.unbind();
 	}
 }
 

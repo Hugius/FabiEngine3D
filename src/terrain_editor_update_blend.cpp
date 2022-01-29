@@ -50,7 +50,5 @@ void TerrainEditor::_updateBlendMapMenu()
 		{
 			_fe3d->terrain_setBlendMap(_currentTerrainId, "");
 		}
-
-		screen->getButton("clearMaps")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainId));
 	}
 }

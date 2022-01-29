@@ -152,14 +152,5 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			_fe3d->terrain_setGreenDiffuseMap(_currentTerrainId, "");
 			_fe3d->terrain_setBlueDiffuseMap(_currentTerrainId, "");
 		}
-
-		screen->getButton("redDiffuseMap")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainId));
-		screen->getButton("greenDiffuseMap")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainId));
-		screen->getButton("blueDiffuseMap")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainId));
-		screen->getButton("clearMaps")->setHoverable(
-			_fe3d->terrain_hasDiffuseMap(_currentTerrainId) ||
-			_fe3d->terrain_hasRedDiffuseMap(_currentTerrainId) ||
-			_fe3d->terrain_hasGreenDiffuseMap(_currentTerrainId) ||
-			_fe3d->terrain_hasBlueDiffuseMap(_currentTerrainId));
 	}
 }

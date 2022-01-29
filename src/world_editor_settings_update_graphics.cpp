@@ -111,14 +111,6 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 			_fe3d->gfx_setShadowQuality(quality);
 		}
 
-		screen->getButton("size")->setHoverable(isEnabled);
-		screen->getButton("eye")->setHoverable(isEnabled);
-		screen->getButton("center")->setHoverable(isEnabled);
-		screen->getButton("follow")->setHoverable(isEnabled);
-		screen->getButton("lightness")->setHoverable(isEnabled);
-		screen->getButton("interval")->setHoverable(isEnabled);
-		screen->getButton("quality")->setHoverable(isEnabled);
-
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
 	}
@@ -252,11 +244,6 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 			_fe3d->gfx_setDofQuality(quality);
 		}
 
-		screen->getButton("isDynamic")->setHoverable(isEnabled);
-		screen->getButton("dynamicDistance")->setHoverable(isEnabled && isDynamic);
-		screen->getButton("blurDistance")->setHoverable(isEnabled);
-		screen->getButton("quality")->setHoverable(isEnabled);
-
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 		screen->getButton("isDynamic")->changeTextContent(isDynamic ? "Dynamic: ON" : "Dynamic: OFF");
 	}
@@ -338,11 +325,6 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 			color.b /= 255.0f;
 			_fe3d->gfx_setFogColor(color);
 		}
-
-		screen->getButton("minDistance")->setHoverable(isEnabled);
-		screen->getButton("maxDistance")->setHoverable(isEnabled);
-		screen->getButton("thickness")->setHoverable(isEnabled);
-		screen->getButton("color")->setHoverable(isEnabled);
 
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
@@ -429,9 +411,6 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 			_fe3d->gfx_setLensFlareSensitivity(sensitivity);
 		}
 
-		screen->getButton("intensity")->setHoverable(isEnabled);
-		screen->getButton("sensitivity")->setHoverable(isEnabled);
-
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
@@ -482,9 +461,6 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 			speed /= 10000.0f;
 			_fe3d->gfx_setSkyExposureSpeed(speed);
 		}
-
-		screen->getButton("intensity")->setHoverable(isEnabled);
-		screen->getButton("speed")->setHoverable(isEnabled);
 
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
@@ -557,11 +533,6 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		{
 			_fe3d->gfx_setBloomQuality(quality);
 		}
-
-		screen->getButton("type")->setHoverable(isEnabled);
-		screen->getButton("intensity")->setHoverable(isEnabled);
-		screen->getButton("blurCount")->setHoverable(isEnabled);
-		screen->getButton("quality")->setHoverable(isEnabled);
 
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 		screen->getButton("type")->changeTextContent((type == BloomType::EVERYTHING) ? "Type: EVERYTHING" : "Type: PARTS");

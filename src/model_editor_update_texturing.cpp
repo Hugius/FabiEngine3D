@@ -212,7 +212,7 @@ void ModelEditor::_updateTexturingMenu()
 		screen->getButton("specularMap")->setHoverable(isPartSelected);
 		screen->getButton("reflectionMap")->setHoverable(isPartSelected);
 		screen->getButton("normalMap")->setHoverable(isPartSelected);
-		screen->getButton("clearMaps")->setHoverable(isPartSelected && (hasDiffuseMap || hasEmissionMap || hasSpecularMap || hasReflectionMap || hasNormalMap));
-		screen->getButton("textureRepeat")->setHoverable(isPartSelected && (hasDiffuseMap || hasEmissionMap || hasSpecularMap || hasReflectionMap || hasNormalMap));
+		screen->getButton("clearMaps")->setHoverable(isPartSelected);
+		screen->getButton("textureRepeat")->setHoverable(isPartSelected);
 	}
 }

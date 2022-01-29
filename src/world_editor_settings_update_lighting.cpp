@@ -59,9 +59,6 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 			_fe3d->gfx_setAmbientLightingIntensity(intensity);
 		}
 
-		screen->getButton("color")->setHoverable(isEnabled);
-		screen->getButton("intensity")->setHoverable(isEnabled);
-
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
@@ -143,10 +140,6 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 			intensity /= 100.0f;
 			_fe3d->gfx_setDirectionalLightingIntensity(intensity);
 		}
-
-		screen->getButton("color")->setHoverable(isEnabled);
-		screen->getButton("position")->setHoverable(isEnabled);
-		screen->getButton("intensity")->setHoverable(isEnabled);
 
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}

@@ -200,7 +200,7 @@ void WorldEditor::_loadGUI()
 
 	positions = VPC::calculateButtonPositions(2, CH);
 	leftWindow->createScreen("worldEditorMenuSettingsGraphicsRefractions");
-	leftWindow->getScreen("worldEditorMenuSettingsGraphicsRefractions")->createButton("quality", fvec2(0.0f, positions[0]), fvec2(TW("Quality"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Quality", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuSettingsGraphicsRefractions")->createButton("planarQuality", fvec2(0.0f, positions[0]), fvec2(TW("Planar Quality"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Planar Quality", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsRefractions")->createButton("back", fvec2(0.0f, positions[1]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true);
 
 	positions = VPC::calculateButtonPositions(6, CH);

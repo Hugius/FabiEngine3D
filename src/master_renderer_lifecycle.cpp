@@ -202,6 +202,7 @@ void MasterRenderer::_updateLensFlare()
 		if((flareSourceNdc.x > -1.0f) && (flareSourceNdc.x < 1.0f) && (flareSourceNdc.y > -1.0f) && (flareSourceNdc.y < 1.0f))
 		{
 			const auto distance = (Math::calculateDistance(flareSourceNdc, fvec2(0.0f)) / _renderBus->getLensFlareSensitivity());
+
 			opacity = (1.0f - distance);
 			opacity = clamp(opacity, 0.0f, 1.0f);
 		}

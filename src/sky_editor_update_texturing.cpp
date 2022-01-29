@@ -215,13 +215,5 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			_fe3d->sky_setCubeMaps(_currentSkyId, {"", "", "", "", "", ""});
 		}
-
-		screen->getButton("clearMaps")->setHoverable(
-			_fe3d->sky_hasRightCubeMap(_currentSkyId) ||
-			_fe3d->sky_hasLeftCubeMap(_currentSkyId) ||
-			_fe3d->sky_hasTopCubeMap(_currentSkyId) ||
-			_fe3d->sky_hasBottomCubeMap(_currentSkyId) ||
-			_fe3d->sky_hasFrontCubeMap(_currentSkyId) ||
-			_fe3d->sky_hasBackCubeMap(_currentSkyId));
 	}
 }

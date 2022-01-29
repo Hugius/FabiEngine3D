@@ -132,8 +132,5 @@ void WaterEditor::_updateTexturingMenu()
 		{
 			_fe3d->water_setTextureRepeat(_currentWaterId, textureRepeat);
 		}
-
-		screen->getButton("clearMaps")->setHoverable(hasDudvMap || hasNormalMap || hasDisplacementMap);
-		screen->getButton("textureRepeat")->setHoverable(hasDudvMap || hasNormalMap || hasDisplacementMap);
 	}
 }

@@ -67,10 +67,5 @@ void TerrainEditor::_updateMiscellaneousMenu()
 		{
 			_fe3d->terrain_setBlueTextureRepeat(_currentTerrainId, blueTextureRepeat);
 		}
-
-		screen->getButton("textureRepeat")->setHoverable(hasDiffuseMap || hasNormalMap);
-		screen->getButton("redTextureRepeat")->setHoverable(hasRedDiffuseMap || hasRedNormalMap);
-		screen->getButton("greenTextureRepeat")->setHoverable(hasGreenDiffuseMap || hasGreenNormalMap);
-		screen->getButton("blueTextureRepeat")->setHoverable(hasBlueDiffuseMap || hasBlueNormalMap);
 	}
 }

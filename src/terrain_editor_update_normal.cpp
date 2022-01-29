@@ -152,14 +152,5 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d->terrain_setGreenNormalMap(_currentTerrainId, "");
 			_fe3d->terrain_setBlueNormalMap(_currentTerrainId, "");
 		}
-
-		screen->getButton("redNormalMap")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainId));
-		screen->getButton("greenNormalMap")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainId));
-		screen->getButton("blueNormalMap")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainId));
-		screen->getButton("clearMaps")->setHoverable(
-			_fe3d->terrain_hasNormalMap(_currentTerrainId) ||
-			_fe3d->terrain_hasRedNormalMap(_currentTerrainId) ||
-			_fe3d->terrain_hasGreenNormalMap(_currentTerrainId) ||
-			_fe3d->terrain_hasBlueNormalMap(_currentTerrainId));
 	}
 }

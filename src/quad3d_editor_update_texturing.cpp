@@ -97,8 +97,5 @@ void Quad3dEditor::_updateTexturingMenu()
 		{
 			_fe3d->quad3d_setTextureRepeat(_currentQuadId, textureRepeat);
 		}
-
-		screen->getButton("clearMaps")->setHoverable(hasDiffuseMap || hasEmissionMap);
-		screen->getButton("textureRepeat")->setHoverable(hasDiffuseMap || hasEmissionMap);
 	}
 }

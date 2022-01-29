@@ -134,11 +134,11 @@ void ModelEditor::_updateLightingMenu()
 		screen->getButton("color")->setHoverable(isPartSelected);
 		screen->getButton("lightness")->setHoverable(isPartSelected);
 		screen->getButton("isSpecular")->setHoverable(isPartSelected);
-		screen->getButton("specularShininess")->setHoverable(isPartSelected && isSpecular);
-		screen->getButton("specularIntensity")->setHoverable(isPartSelected && isSpecular);
+		screen->getButton("specularShininess")->setHoverable(isPartSelected);
+		screen->getButton("specularIntensity")->setHoverable(isPartSelected);
 		screen->getButton("isReflective")->setHoverable(isPartSelected);
-		screen->getButton("reflectionType")->setHoverable(isPartSelected && isReflective);
-		screen->getButton("reflectivity")->setHoverable(isPartSelected && isReflective);
+		screen->getButton("reflectionType")->setHoverable(isPartSelected);
+		screen->getButton("reflectivity")->setHoverable(isPartSelected);
 		screen->getButton("isBright")->setHoverable(isPartSelected);
 		screen->getButton("isShadowed")->setHoverable(isNoPartSelected);
 		screen->getButton("isReflected")->setHoverable(isNoPartSelected);
@@ -149,20 +149,18 @@ void ModelEditor::_updateLightingMenu()
 		screen->getButton("isReflected")->changeTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
-		if(isReflective)
+		switch(reflectionType)
 		{
-			if(reflectionType == ReflectionType::CUBE)
+			case ReflectionType::CUBE:
 			{
 				screen->getButton("reflectionType")->changeTextContent("Type: CUBE");
+				break;
 			}
-			else
+			case ReflectionType::PLANAR:
 			{
 				screen->getButton("reflectionType")->changeTextContent("Type: PLANAR");
+				break;
 			}
-		}
-		else
-		{
-			screen->getButton("reflectionType")->changeTextContent("Type: NONE");
 		}
 	}
 }

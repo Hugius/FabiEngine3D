@@ -108,10 +108,6 @@ void WaterEditor::_updateMiscellaneousMenu()
 			_fe3d->water_setMaxDepth(_currentWaterId, maxDepth);
 		}
 
-		screen->getButton("waveHeight")->setHoverable(_fe3d->water_hasDisplacementMap(_currentWaterId));
-		screen->getButton("rippleSpeed")->setHoverable(_fe3d->water_hasDudvMap(_currentWaterId));
-		screen->getButton("waveSpeed")->setHoverable(_fe3d->water_hasDisplacementMap(_currentWaterId));
-
 		screen->getButton("quality")->changeTextContent("Quality: " + to_string(static_cast<int>(quality) + 1));
 	}
 }

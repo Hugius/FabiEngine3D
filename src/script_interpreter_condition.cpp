@@ -314,7 +314,7 @@ const bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, const stri
 	return false;
 }
 
-ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const
+const int ScriptInterpreter::_getLastConditionStatementIndex(const vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const
 {
 	unsigned int index = static_cast<unsigned int>(statements.size());
 
@@ -322,9 +322,9 @@ ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<S
 	{
 		if(statements[index].getScopeDepth() == scopeDepth)
 		{
-			return &statements[index];
+			return index;
 		}
 	}
 
-	return nullptr;
+	return -1;
 }

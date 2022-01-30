@@ -62,6 +62,7 @@ private:
 	const string _limitDecimalString(const string& valueString) const;
 
 	const int _extractListIndexFromString(const string& valueString, bool& isAccessingList);
+	const int _getLastConditionStatementIndex(const vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const;
 
 	const unsigned int _countLeadingSpaces(const string& scriptLineText);
 
@@ -160,7 +161,6 @@ private:
 	const vector<ScriptValue> _processMiscFunctionCall(const string& scriptLine);
 	ScriptVariable& _getLocalVariable(const string& variableId);
 	ScriptVariable& _getGlobalVariable(const string& variableId);
-	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const;
 
 	map<string, float> _debuggingTimes;
 

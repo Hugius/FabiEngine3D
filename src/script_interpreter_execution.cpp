@@ -304,18 +304,18 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 		{
 			if(scriptLineText.back() == ':')
 			{
-				if(_getLastConditionStatement(conditionStatements, scopeDepth) != nullptr &&
-				   (_getLastConditionStatement(conditionStatements, scopeDepth)->getType() == ScriptConditionType::IF ||
-				   _getLastConditionStatement(conditionStatements, scopeDepth)->getType() == ScriptConditionType::ELIF))
+				auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
+
+				if(lastIndex != -1 && (conditionStatements[lastIndex].getType() == ScriptConditionType::IF || conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF))
 				{
-					string conditionString = scriptLineText.substr((ELIF_KEYWORD.size() + 1), scriptLineText.size() - (ELIF_KEYWORD.size() + 2));
+					const auto conditionString = scriptLineText.substr((ELIF_KEYWORD.size() + 1), scriptLineText.size() - (ELIF_KEYWORD.size() + 2));
 
-					_getLastConditionStatement(conditionStatements, scopeDepth)->setType(ScriptConditionType::ELIF);
+					conditionStatements[lastIndex].setType(ScriptConditionType::ELIF);
 
-					if(_getLastConditionStatement(conditionStatements, scopeDepth)->isFalse() && _checkConditionString(conditionString))
+					if(conditionStatements[lastIndex].isFalse() && _checkConditionString(conditionString))
 					{
 						_hasPassedElifStatement = true;
-						_getLastConditionStatement(conditionStatements, scopeDepth)->setTrue();
+						conditionStatements[lastIndex].setTrue();
 						scopeDepth++;
 					}
 					else
@@ -341,16 +341,15 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 		{
 			if(scriptLineText.back() == ':')
 			{
-				if(_getLastConditionStatement(conditionStatements, scopeDepth) != nullptr &&
-				   (_getLastConditionStatement(conditionStatements, scopeDepth)->getType() == ScriptConditionType::IF ||
-				   _getLastConditionStatement(conditionStatements, scopeDepth)->getType() == ScriptConditionType::ELIF))
-				{
+				auto lastIndex = _getLastConditionStatementIndex(conditionStatements, scopeDepth);
 
+				if(lastIndex != -1 && (conditionStatements[lastIndex].getType() == ScriptConditionType::IF || conditionStatements[lastIndex].getType() == ScriptConditionType::ELIF))
+				{
 					if(scriptLineText.size() == (ELSE_KEYWORD.size() + 1))
 					{
-						_getLastConditionStatement(conditionStatements, scopeDepth)->setType(ScriptConditionType::ELSE);
+						conditionStatements[lastIndex].setType(ScriptConditionType::ELSE);
 
-						if(_getLastConditionStatement(conditionStatements, scopeDepth)->isFalse())
+						if(conditionStatements[lastIndex].isFalse())
 						{
 							scopeDepth++;
 							_hasPassedElseStatement = true;

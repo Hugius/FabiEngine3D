@@ -66,7 +66,7 @@ const float Timer::getDeltaPartSum() const
 	return sum;
 }
 
-void Timer::sleep(int microseconds)
+void Timer::sleep(unsigned int milliseconds)
 {
 	__int64 time1 = 0;
 	__int64 time2 = 0;
@@ -79,7 +79,7 @@ void Timer::sleep(int microseconds)
 	{
 		QueryPerformanceCounter((LARGE_INTEGER*)&time2);
 	}
-	while((time2 - time1) < microseconds);
+	while((time2 - time1) < (milliseconds * 1000));
 }
 
 void Timer::increasePassedUpdateCount()

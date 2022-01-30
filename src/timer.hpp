@@ -15,7 +15,7 @@ public:
 	void start();
 	void startDeltaPart(const string& id);
 	void stopDeltaPart();
-	void sleep(int microseconds);
+	void sleep(unsigned int milliseconds);
 	void increasePassedUpdateCount();
 	void clearDeltaParts();
 

@@ -37,12 +37,6 @@ public:
 	void initialize();
 	void update();
 
-	static inline const fvec3 SCROLLING_LIST_COLOR = fvec3(0.25f);
-	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);
-	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.5f, 0.5f, 1.0f);
-	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
-	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
-
 private:
 	string _lastActiveEditorScreen = "";
 
@@ -64,4 +58,9 @@ private:
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
+
+	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);
+	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.5f, 0.5f, 1.0f);
+	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
+	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 };

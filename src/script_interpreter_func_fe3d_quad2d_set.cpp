@@ -30,8 +30,8 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 				_fe3d->quad2d_setDiffuseMap(args[0].getString(), _fe3d->quad2d_getDiffuseMapPath("@" + args[1].getString()));
 				_fe3d->quad2d_setPosition(args[0].getString(), Tools::convertPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
 				_fe3d->quad2d_setSize(args[0].getString(), Tools::convertSizeToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
-				_fe3d->quad2d_setMinPosition(args[0].getString(), Tools::calculateMinViewportPosition());
-				_fe3d->quad2d_setMaxPosition(args[0].getString(), Tools::calculateMaxViewportPosition());
+				_fe3d->quad2d_setMinPosition(args[0].getString(), Tools::getMinViewportPosition());
+				_fe3d->quad2d_setMaxPosition(args[0].getString(), Tools::getMaxViewportPosition());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

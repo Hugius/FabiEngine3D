@@ -252,7 +252,7 @@ const fvec2 Tools::convertFromScreenCoords(const ivec2& position)
 	return fvec2(x, y);
 }
 
-const fvec2 Tools::calculateMinViewportPosition()
+const fvec2 Tools::getMinViewportPosition()
 {
 	if(Config::getInst().isApplicationExported())
 	{
@@ -265,7 +265,7 @@ const fvec2 Tools::calculateMinViewportPosition()
 	return result;
 }
 
-const fvec2 Tools::calculateMaxViewportPosition()
+const fvec2 Tools::getMaxViewportPosition()
 {
 	if(Config::getInst().isApplicationExported())
 	{

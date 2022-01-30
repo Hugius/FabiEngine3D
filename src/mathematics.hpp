@@ -59,6 +59,7 @@ public:
 	static const fvec2 convertFromNdc(const fvec2& position);
 	static const fvec2 convertToNdc(const fvec2& position);
 
+	static const vector<float> calculateDistributedPositions(unsigned int buttonCount, float buttonHeight);
 	static const float calculateDeterminant(const mat22& matrix);
 	static const float calculateDeterminant(const mat33& matrix);
 	static const float calculateDeterminant(const mat44& matrix);

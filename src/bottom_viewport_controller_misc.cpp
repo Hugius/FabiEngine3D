@@ -1,7 +1,5 @@
 #include "bottom_viewport_controller.hpp"
 
-using BVPC = BottomViewportController;
-
 void BottomViewportController::inject(shared_ptr<ScriptExecutor> scriptExecutor)
 {
 	_scriptExecutor = scriptExecutor;
@@ -14,14 +12,14 @@ void BottomViewportController::inject(shared_ptr<ScriptEditor> scriptEditor)
 
 void BottomViewportController::initialize()
 {
-	_gui->getBottomViewport()->createWindow("statistics", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
+	_gui->getBottomViewport()->createWindow("statistics", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.875f), FRAME_COLOR);
 	auto statisticsWindow = _gui->getBottomViewport()->getWindow("statistics");
 
 	statisticsWindow->createScreen("main");
 	statisticsWindow->setActiveScreen("main");
 	auto statisticsScreen = statisticsWindow->getScreen("main");
 
-	_gui->getBottomViewport()->createWindow("console", fvec2(0.25f, 0.0f), fvec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
+	_gui->getBottomViewport()->createWindow("console", fvec2(0.25f, 0.0f), fvec2(0.9875f, 1.875f), FRAME_COLOR);
 	auto consoleWindow = _gui->getBottomViewport()->getWindow("console");
 
 	consoleWindow->createScreen("main");

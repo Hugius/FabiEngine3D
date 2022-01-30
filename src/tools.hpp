@@ -31,8 +31,8 @@ public:
 
 	static const fvec2 convertFromScreenCoords(const ivec2& position);
 	static const ivec2 convertToScreenCoords(const fvec2& position);
-	static const fvec2 calculateMinViewportPosition();
-	static const fvec2 calculateMaxViewportPosition();
+	static const fvec2 getMinViewportPosition();
+	static const fvec2 getMaxViewportPosition();
 	static const fvec2 convertPositionToViewport(const fvec2& position);
 	static const fvec2 convertPositionFromViewport(const fvec2& position);
 	static const fvec2 convertSizeToViewport(const fvec2& size);

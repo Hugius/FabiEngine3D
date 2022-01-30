@@ -195,3 +195,22 @@ const fvec2 Math::convertFromNdc(const fvec2& position)
 
 	return result;
 }
+
+const vector<float> Math::calculateDistributedPositions(unsigned int count, float size)
+{
+	vector<float> result;
+
+	float freeSpace = (2.0f - (static_cast<float>(count) * size));
+	float gapSpace = (freeSpace / static_cast<float>(count + 1));
+	float position = 1.0f;
+
+	position -= (gapSpace + (size * 0.5f));
+
+	for(unsigned int i = 0; i < count; i++)
+	{
+		result.push_back(position);
+		position -= (gapSpace + size);
+	}
+
+	return result;
+}

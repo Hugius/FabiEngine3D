@@ -43,11 +43,6 @@ public:
 	const bool isScriptRunning() const;
 	const bool isProjectCorrupted(const string& projectDirectoryPath) const;
 
-	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
-	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
-	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
-	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
-
 private:
 	void _updateProjectScreenManagement();
 	void _updateGameScreenManagement();
@@ -84,4 +79,9 @@ private:
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
 	shared_ptr<Script> _script = nullptr;
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
+
+	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
+	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
+	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
+	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 };

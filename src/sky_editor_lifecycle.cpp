@@ -1,4 +1,4 @@
-#define TW(text) (static_cast<float>(string(text).size()) * CW)
+#define TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * CW), CH)
 
 #include "sky_editor.hpp"
 #include "left_viewport_controller.hpp"
@@ -49,38 +49,38 @@ void SkyEditor::unload()
 
 void SkyEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
+	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = Math::calculateDistributedPositions(4, CH);
 	leftWindow->createScreen("skyEditorMenuMain");
-	leftWindow->getScreen("skyEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), fvec2(TW("Create Sky"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), fvec2(TW("Edit Sky"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), fvec2(TW("Delete Sky"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Sky"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Sky"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Sky"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Math::calculateDistributedPositions(3, CH);
 	leftWindow->createScreen("skyEditorMenuChoice");
-	leftWindow->getScreen("skyEditorMenuChoice")->createButton("texturing", fvec2(0.0f, positions[0]), fvec2(TW("Texturing"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texturing", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuChoice")->createButton("miscellaneous", fvec2(0.0f, positions[1]), fvec2(TW("Miscellaneous"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Miscellaneous", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[2]), fvec2(TW("Go Back"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuChoice")->createButton("texturing", fvec2(0.0f, positions[0]), TEXT_SIZE("Texturing"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texturing", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuChoice")->createButton("miscellaneous", fvec2(0.0f, positions[1]), TEXT_SIZE("Miscellaneous"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Miscellaneous", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Math::calculateDistributedPositions(8, CH);
 	leftWindow->createScreen("skyEditorMenuTexturing");
-	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("leftMap", fvec2(0.0f, positions[0]), fvec2(TW("Left Map"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Left Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("rightMap", fvec2(0.0f, positions[1]), fvec2(TW("Right Map"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Right Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("bottomMap", fvec2(0.0f, positions[2]), fvec2(TW("Bottom Map"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Bottom Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("topMap", fvec2(0.0f, positions[3]), fvec2(TW("Top Map"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Top Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("backMap", fvec2(0.0f, positions[4]), fvec2(TW("Back Map"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Back Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("frontMap", fvec2(0.0f, positions[5]), fvec2(TW("Front Map"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Front Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("clearMaps", fvec2(0.0f, positions[6]), fvec2(TW("Clear Maps"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("back", fvec2(0.0f, positions[7]), fvec2(TW("Go Back"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("leftMap", fvec2(0.0f, positions[0]), TEXT_SIZE("Left Map"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Left Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("rightMap", fvec2(0.0f, positions[1]), TEXT_SIZE("Right Map"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Right Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("bottomMap", fvec2(0.0f, positions[2]), TEXT_SIZE("Bottom Map"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Bottom Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("topMap", fvec2(0.0f, positions[3]), TEXT_SIZE("Top Map"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Top Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("backMap", fvec2(0.0f, positions[4]), TEXT_SIZE("Back Map"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Back Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("frontMap", fvec2(0.0f, positions[5]), TEXT_SIZE("Front Map"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Front Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("clearMaps", fvec2(0.0f, positions[6]), TEXT_SIZE("Clear Maps"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Maps", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuTexturing")->createButton("back", fvec2(0.0f, positions[7]), TEXT_SIZE("Go Back"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Math::calculateDistributedPositions(4, CH);
 	leftWindow->createScreen("skyEditorMenuMiscellaneous");
-	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("rotation", fvec2(0.0f, positions[0]), fvec2(TW("Rotation"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rotation", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("lightness", fvec2(0.0f, positions[1]), fvec2(TW("Lightness"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("color", fvec2(0.0f, positions[2]), fvec2(TW("Color"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("rotation", fvec2(0.0f, positions[0]), TEXT_SIZE("Rotation"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rotation", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("lightness", fvec2(0.0f, positions[1]), TEXT_SIZE("Lightness"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("color", fvec2(0.0f, positions[2]), TEXT_SIZE("Color"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 }
 
 void SkyEditor::_unloadGUI()

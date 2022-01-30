@@ -1,4 +1,4 @@
-#define TW(text) (static_cast<float>(string(text).size()) * CW)
+#define TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * CW), CH)
 
 #include "quad2d_editor.hpp"
 #include "left_viewport_controller.hpp"
@@ -39,21 +39,21 @@ void Quad2dEditor::unload()
 
 void Quad2dEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
+	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = Math::calculateDistributedPositions(4, CH);
 	leftWindow->createScreen("quad2dEditorMenuMain");
-	leftWindow->getScreen("quad2dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), fvec2(TW("Create Quad2D"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad2dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), fvec2(TW("Edit Quad2D"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad2dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), fvec2(TW("Delete Quad2D"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad2dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Quad2D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Quad2D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Quad2D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Math::calculateDistributedPositions(4, CH);
 	leftWindow->createScreen("quad2dEditorMenuChoice");
-	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("diffuseMap", fvec2(0.0f, positions[0]), fvec2(TW("Diffuse Map"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Diffuse Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[1]), fvec2(TW("Color"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("opacity", fvec2(0.0f, positions[2]), fvec2(TW("Opacity"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("diffuseMap", fvec2(0.0f, positions[0]), TEXT_SIZE("Diffuse Map"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Diffuse Map", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[1]), TEXT_SIZE("Color"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("opacity", fvec2(0.0f, positions[2]), TEXT_SIZE("Opacity"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad2dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 }
 
 void Quad2dEditor::_unloadGUI()

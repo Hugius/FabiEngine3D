@@ -35,14 +35,13 @@ public:
 	const bool isSoundPlaying(Sound2d& sound) const;
 	const bool isSoundPaused(Sound2d& sound) const;
 
-	static inline constexpr unsigned int MAX_CHANNEL_COUNT = 1024;
-
 private:
 	void _updateSoundVolume(Sound2d& sound);
 
 	const vector<unsigned int> _findChannels(Sound2d& sound) const;
 	const int _getFreeChannel() const;
 
+	static inline constexpr unsigned int MAX_CHANNEL_COUNT = 1024;
 	array<string, MAX_CHANNEL_COUNT> _channels;
 
 	shared_ptr<Sound2dManager> _sound2dManager = nullptr;

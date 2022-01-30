@@ -2,7 +2,7 @@
 
 void WorldEditor::_updateText3dEditing()
 {
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
 	if(!_dontResetSelectedText3d)
 	{

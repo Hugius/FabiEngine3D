@@ -2,7 +2,7 @@
 
 void WorldEditor::_updateQuad3dEditing()
 {
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
 	if(!_dontResetSelectedQuad3d)
 	{

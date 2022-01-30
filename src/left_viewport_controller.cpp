@@ -1,4 +1,4 @@
-#define TW(text) (static_cast<float>(string(text).size()) * CW)
+#define TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * CW), CH)
 
 #include "left_viewport_controller.hpp"
 #include "tools.hpp"
@@ -10,19 +10,19 @@ void LeftViewportController::initialize()
 
 	auto positions = Math::calculateDistributedPositions(13, CH);
 	window->createScreen("main");
-	window->getScreen("main")->createButton("skyEditor", fvec2(0.0f, positions[0]), fvec2(TW("Sky"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("terrainEditor", fvec2(0.0f, positions[1]), fvec2(TW("Terrain"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Terrain", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("waterEditor", fvec2(0.0f, positions[2]), fvec2(TW("Water"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("modelEditor", fvec2(0.0f, positions[3]), fvec2(TW("Model"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("quad3dEditor", fvec2(0.0f, positions[4]), fvec2(TW("Quad3D"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("text3dEditor", fvec2(0.0f, positions[5]), fvec2(TW("Text3D"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("quad2dEditor", fvec2(0.0f, positions[6]), fvec2(TW("Quad2D"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("text2dEditor", fvec2(0.0f, positions[7]), fvec2(TW("Text2D"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[8]), fvec2(TW("Animation2D"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, positions[9]), fvec2(TW("Animation3D"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("soundEditor", fvec2(0.0f, positions[10]), fvec2(TW("Sound"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[11]), fvec2(TW("World"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "World", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[12]), fvec2(TW("Script"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("skyEditor", fvec2(0.0f, positions[0]), TEXT_SIZE("Sky"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sky", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("terrainEditor", fvec2(0.0f, positions[1]), TEXT_SIZE("Terrain"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Terrain", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("waterEditor", fvec2(0.0f, positions[2]), TEXT_SIZE("Water"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("modelEditor", fvec2(0.0f, positions[3]), TEXT_SIZE("Model"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("quad3dEditor", fvec2(0.0f, positions[4]), TEXT_SIZE("Quad3D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("text3dEditor", fvec2(0.0f, positions[5]), TEXT_SIZE("Text3D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("quad2dEditor", fvec2(0.0f, positions[6]), TEXT_SIZE("Quad2D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("text2dEditor", fvec2(0.0f, positions[7]), TEXT_SIZE("Text2D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[8]), TEXT_SIZE("Animation2D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation2D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, positions[9]), TEXT_SIZE("Animation3D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("soundEditor", fvec2(0.0f, positions[10]), TEXT_SIZE("Sound"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Sound", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[11]), TEXT_SIZE("World"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "World", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[12]), TEXT_SIZE("Script"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	window->setActiveScreen("main");
 }

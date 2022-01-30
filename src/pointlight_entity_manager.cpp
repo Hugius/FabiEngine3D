@@ -24,7 +24,7 @@ const unordered_map<string, shared_ptr<PointlightEntity>>& PointlightEntityManag
 
 void PointlightEntityManager::createEntity(const string& id)
 {
-	if(getEntities().size() == MAX_LIGHT_COUNT)
+	if(getEntities().size() == MAX_ENTITY_COUNT)
 	{
 		Logger::throwError("PointlightEntityManager::createEntity");
 	}
@@ -47,6 +47,11 @@ void PointlightEntityManager::deleteEntity(const string& id)
 void PointlightEntityManager::deleteEntities()
 {
 	_entities.clear();
+}
+
+const unsigned int PointlightEntityManager::getMaxEntityCount() const
+{
+	return MAX_ENTITY_COUNT;
 }
 
 const bool PointlightEntityManager::isEntityExisting(const string& id) const

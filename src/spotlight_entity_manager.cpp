@@ -24,7 +24,7 @@ const unordered_map<string, shared_ptr<SpotlightEntity>>& SpotlightEntityManager
 
 void SpotlightEntityManager::createEntity(const string& id)
 {
-	if(getEntities().size() == MAX_LIGHT_COUNT)
+	if(getEntities().size() == MAX_ENTITY_COUNT)
 	{
 		Logger::throwError("SpotlightEntityManager::createEntity");
 	}
@@ -60,6 +60,11 @@ void SpotlightEntityManager::deleteEntity(const string& id)
 void SpotlightEntityManager::deleteEntities()
 {
 	_entities.clear();
+}
+
+const unsigned int SpotlightEntityManager::getMaxEntityCount() const
+{
+	return MAX_ENTITY_COUNT;
 }
 
 const bool SpotlightEntityManager::isEntityExisting(const string& id) const

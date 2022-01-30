@@ -4,7 +4,7 @@ void WorldEditor::_activateModel(const string& id)
 {
 	_activeModelId = id;
 
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeModelId);
 
 	rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -27,7 +27,7 @@ void WorldEditor::_activateQuad3d(const string& id)
 {
 	_activeQuadId = id;
 
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->quad3d_getPosition(_activeQuadId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -50,7 +50,7 @@ void WorldEditor::_activateText3d(const string& id)
 {
 	_activeTextId = id;
 
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->text3d_getPosition(_activeTextId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -73,7 +73,7 @@ void WorldEditor::_activateSound(const string& id)
 {
 	_activeSpeakerId = ("@@speaker_" + id);
 
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->sound3d_getPosition(_activeSpeakerId.substr(string("@@speaker_").size()));
 	auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSpeakerId.substr(string("@@speaker_").size()));
 	auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSpeakerId.substr(string("@@speaker_").size()));
@@ -96,7 +96,7 @@ void WorldEditor::_activatePointlight(const string& id)
 {
 	_activeLampId = ("@@lamp_" + id);
 
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeLampId);
 
 	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -112,7 +112,7 @@ void WorldEditor::_activateSpotlight(const string& id)
 {
 	_activeTorchId = ("@@torch_" + id);
 
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeTorchId);
 
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -127,7 +127,7 @@ void WorldEditor::_activateReflection(const string& id)
 {
 	_activeCameraId = ("@@camera_" + id);
 
-	auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeCameraId);
 
 	rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));

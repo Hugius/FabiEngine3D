@@ -3,7 +3,7 @@
 
 void EngineInterface::spotlight_create(const string& id)
 {
-	if(_core->getSpotlightEntityManager()->getEntities().size() == SpotlightEntityManager::MAX_LIGHT_COUNT)
+	if(_core->getSpotlightEntityManager()->getEntities().size() == _core->getPointlightEntityManager()->getMaxEntityCount())
 	{
 		Logger::throwWarning("Tried to create spotlight entity: maximum reached!");
 		return;

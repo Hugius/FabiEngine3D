@@ -1,4 +1,4 @@
-#define TW(text) (static_cast<float>(string(text).size()) * CW)
+#define TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * CW), CH)
 
 #include "text2d_editor.hpp"
 #include "left_viewport_controller.hpp"
@@ -39,20 +39,20 @@ void Text2dEditor::unload()
 
 void Text2dEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
+	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = Math::calculateDistributedPositions(4, CH);
 	leftWindow->createScreen("text2dEditorMenuMain");
-	leftWindow->getScreen("text2dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), fvec2(TW("Create Text"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Text", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text2dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), fvec2(TW("Edit Text"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Text", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text2dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), fvec2(TW("Delete Text"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Text", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text2dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Text"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Text", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Text"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Text", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Text"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Text", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Math::calculateDistributedPositions(3, CH);
 	leftWindow->createScreen("text2dEditorMenuChoice");
-	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[0]), fvec2(TW("Color"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("opacity", fvec2(0.0f, positions[1]), fvec2(TW("Opacity"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[2]), fvec2(TW("Go Back"), CH), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[0]), TEXT_SIZE("Color"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("opacity", fvec2(0.0f, positions[1]), TEXT_SIZE("Opacity"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 }
 
 void Text2dEditor::_unloadGUI()

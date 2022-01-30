@@ -18,7 +18,7 @@ LibraryLoader::LibraryLoader()
 	Logger::throwInfo("Initializing SDL...");
 	if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
-		Logger::throwFatalWarning("SDL could not be initialized: ", SDL_GetError());
+		Logger::throwError("SDL could not be initialized: ", SDL_GetError());
 	}
 
 	Logger::throwInfo("Initializing window...");
@@ -30,13 +30,13 @@ LibraryLoader::LibraryLoader()
 	auto initGlew = glewInit();
 	if(initGlew != GLEW_OK)
 	{
-		Logger::throwFatalWarning("GLEW could not be initialized: ", reinterpret_cast<char const*>(glewGetErrorString(initGlew)));
+		Logger::throwError("GLEW could not be initialized: ", reinterpret_cast<char const*>(glewGetErrorString(initGlew)));
 	}
 
 	Logger::throwInfo("Initializing SDL_Mixer...");
 	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 	{
-		Logger::throwFatalWarning("SDL_MIX could not be initialized: ", Mix_GetError());
+		Logger::throwError("SDL_MIX could not be initialized: ", Mix_GetError());
 	}
 
 	Logger::throwInfo("Initializing Sockets API...");
@@ -44,7 +44,7 @@ LibraryLoader::LibraryLoader()
 	auto winsockResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if(winsockResult != 0)
 	{
-		Logger::throwFatalWarning("Windows Sockets API could not be initialized: ", winsockResult);
+		Logger::throwError("Windows Sockets API could not be initialized: ", winsockResult);
 	}
 }
 

@@ -17,12 +17,12 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 
 	if(!Tools::isFileExisting(rootPath + vertexPath))
 	{
-		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
+		Logger::throwError("Directory `engine\\` is missing or corrupted!");
 	}
 
 	if(!Tools::isFileExisting(rootPath + fragmentPath))
 	{
-		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
+		Logger::throwError("Directory `engine\\` is missing or corrupted!");
 	}
 
 	auto vertexFile = ifstream(rootPath + vertexPath);

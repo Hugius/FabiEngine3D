@@ -42,17 +42,6 @@ public:
 		_printMessage(first, rest...);
 	}
 
-	template<typename T, typename...Rest> static void throwFatalWarning(T first, Rest...rest)
-	{
-		cout << endl;
-		_printPrefix(LogMessageType::WARNING);
-		_printMessage(first, rest...);
-		cout << endl;
-		throwInfo("Press a key to continue...");
-		auto temp = _getch();
-		exit(420);
-	}
-
 	template<typename T, typename...Rest> static void throwError(T first, Rest...rest)
 	{
 		cout << endl;

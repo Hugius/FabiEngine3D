@@ -140,7 +140,7 @@ void EngineCore::start()
 		!Tools::isFileExisting(rootPath + fontMapDirectoryPath + "font.tga")
 		)
 	{
-		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
+		Logger::throwError("Directory `engine\\` is missing or corrupted!");
 	}
 
 	shared_ptr<Quad2dEntity> logo = make_shared<Quad2dEntity>("logo");

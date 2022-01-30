@@ -14,7 +14,7 @@ void Sound2dManager::deleteSound(const string& id)
 
 	if(index == -1)
 	{
-		Logger::throwError("Sound2dManager::deleteSound");
+		abort();
 	}
 	else
 	{
@@ -36,11 +36,11 @@ void Sound2dManager::createSound(const string& id, const string& audioPath)
 {
 	if(_findSoundIndex(id) != -1)
 	{
-		Logger::throwError("Sound2dManager::createSound::1");
+		abort();
 	}
 	if(id.empty())
 	{
-		Logger::throwError("Sound2dManager::createSound::2");
+		abort();
 	}
 
 	auto dataPointer = _audioLoader->loadChunk(audioPath);
@@ -67,7 +67,7 @@ Sound2d& Sound2dManager::getSound(const string& id)
 
 	if(index == -1)
 	{
-		Logger::throwError("Sound2dManager::getSound");
+		abort();
 	}
 	else
 	{

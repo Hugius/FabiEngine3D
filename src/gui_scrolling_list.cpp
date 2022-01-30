@@ -70,7 +70,7 @@ void GuiScrollingList::deleteButton(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiScrollingList::deleteButton");
+	abort();
 }
 
 void GuiScrollingList::deleteButtons()

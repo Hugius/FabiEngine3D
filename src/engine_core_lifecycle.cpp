@@ -97,7 +97,7 @@ void EngineCore::start()
 {
 	if(_isRunning)
 	{
-		Logger::throwError("Tried to start engine: already running!");
+		abort();
 	}
 
 	_isRunning = true;
@@ -347,7 +347,7 @@ void EngineCore::stop()
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("Tried to stop engine: not running!");
+		abort();
 	}
 
 	_isRunning = false;

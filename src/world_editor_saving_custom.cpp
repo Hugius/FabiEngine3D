@@ -13,11 +13,11 @@ const bool WorldEditor::saveCustomWorldToFile()
 {
 	//if(getCurrentProjectId().empty())
 	//{
-	//	Logger::throwError("WorldEditor::saveCustomWorldToFile::1");
+	//	abort();
 	//}
 	//if(isLoaded())
 	//{
-	//	Logger::throwError("WorldEditor::saveCustomWorldToFile::2");
+	//	abort();
 	//}
 
 	//if(_customWorldId.empty())

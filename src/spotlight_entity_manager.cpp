@@ -9,7 +9,7 @@ shared_ptr<SpotlightEntity> SpotlightEntityManager::getEntity(const string& id)
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("SpotlightEntityManager::getEntity");
+		abort();
 	}
 	else
 	{
@@ -26,7 +26,7 @@ void SpotlightEntityManager::createEntity(const string& id)
 {
 	if(getEntities().size() == MAX_ENTITY_COUNT)
 	{
-		Logger::throwError("SpotlightEntityManager::createEntity");
+		abort();
 	}
 
 	auto entity = make_shared<SpotlightEntity>(id);
@@ -51,7 +51,7 @@ void SpotlightEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("SpotlightEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);

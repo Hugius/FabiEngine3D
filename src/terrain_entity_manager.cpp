@@ -9,7 +9,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& id)
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("TerrainEntityManager::getEntity");
+		abort();
 	}
 
 	return iterator->second;
@@ -83,7 +83,7 @@ void TerrainEntityManager::selectEntity(const string& id)
 {
 	if(!isEntityExisting(id) && !id.empty())
 	{
-		Logger::throwError("TerrainEntityManager::selectTerrain");
+		abort();
 	}
 
 	_selectedEntityId = id;
@@ -98,7 +98,7 @@ void TerrainEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("TerrainEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);

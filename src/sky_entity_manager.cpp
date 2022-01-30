@@ -70,7 +70,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& id)
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("SkyEntityManager::getEntity");
+		abort();
 	}
 
 	return iterator->second;
@@ -95,7 +95,7 @@ void SkyEntityManager::selectEntity(const string& id)
 {
 	if(!isEntityExisting(id) && !id.empty())
 	{
-		Logger::throwError("SkyEntityManager::selectEntity");
+		abort();
 	}
 
 	_selectedEntityId = id;
@@ -132,7 +132,7 @@ void SkyEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("SkyEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);

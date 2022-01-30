@@ -110,7 +110,7 @@ void GuiOverlay::_createValueForm(const string& id, const string& title, const s
 {
 	if(isValueFormExisting(id))
 	{
-		Logger::throwError("GuiOverlay::_createValueForm");
+		abort();
 	}
 
 	_valueFormIds.push_back(id);
@@ -186,7 +186,7 @@ void GuiOverlay::createChoiceForm(const string& id, const string& title, const f
 {
 	if(!_choiceFormId.empty())
 	{
-		Logger::throwError("GuiOverlay::createChoiceForm::1");
+		abort();
 	}
 
 	createRectangle(id, position + fvec2(0.0f, 0.475f), fvec2(title.size() * 0.0275f, 0.125f), FORM_TITLE_RECT_COLOR, true);
@@ -198,7 +198,7 @@ void GuiOverlay::createChoiceForm(const string& id, const string& title, const f
 	{
 		if(buttonTitle.empty())
 		{
-			Logger::throwError("GuiOverlay::createChoiceForm::2");
+			abort();
 		}
 
 		getScrollingList(id)->createButton(buttonTitle, buttonTitle);
@@ -240,7 +240,7 @@ void GuiOverlay::deleteChoiceForm(const string& id)
 {
 	if(id != _choiceFormId)
 	{
-		Logger::throwError("GuiOverlay::deleteChoiceForm");
+		abort();
 	}
 
 	deleteRectangle(_choiceFormId);
@@ -261,7 +261,7 @@ void GuiOverlay::createAnswerForm(const string& id, const string& title, const f
 {
 	if(!_answerFormId.empty())
 	{
-		Logger::throwError("GuiOverlay::createAnswerForm");
+		abort();
 	}
 
 	createRectangle("question", position, fvec2(title.size() * 0.0275f, 0.125f), FORM_TITLE_RECT_COLOR, true);
@@ -309,7 +309,7 @@ void GuiOverlay::_deleteAnswerForm(const string& id)
 {
 	if(id != _answerFormId)
 	{
-		Logger::throwError("GuiOverlay::_deleteAnswerForm");
+		abort();
 	}
 
 	deleteRectangle("question");

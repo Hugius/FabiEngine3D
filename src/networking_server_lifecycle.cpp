@@ -28,12 +28,12 @@ void NetworkingServer::start(unsigned int maxClientCount)
 {
 	if(_isRunning)
 	{
-		Logger::throwError("NetworkingServer::start::1");
+		abort();
 	}
 
 	if(maxClientCount <= 0)
 	{
-		Logger::throwError("NetworkingServer::start::2");
+		abort();
 	}
 
 	addrinfo tcpHints = addrinfo();
@@ -52,26 +52,30 @@ void NetworkingServer::start(unsigned int maxClientCount)
 	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
 	if(tcpInfoStatusCode != 0)
 	{
-		Logger::throwError("NetworkingServer::start::3 ---> ", tcpInfoStatusCode);
+		Logger::throwDebug(tcpInfoStatusCode);
+		abort();
 	}
 
 	addrinfo* udpAddressInfo = nullptr;
 	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
 	if(udpInfoStatusCode != 0)
 	{
-		Logger::throwError("NetworkingServer::start::4 ---> ", udpInfoStatusCode);
+		Logger::throwDebug(udpInfoStatusCode);
+		abort();
 	}
 
 	_tcpSocket = socket(tcpAddressInfo->ai_family, tcpAddressInfo->ai_socktype, tcpAddressInfo->ai_protocol);
 	if(_tcpSocket == INVALID_SOCKET)
 	{
-		Logger::throwError("NetworkingServer::start::5 ---> ", WSAGetLastError());
+		Logger::throwDebug(WSAGetLastError());
+		abort();
 	}
 
 	_udpSocket = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
 	if(_udpSocket == INVALID_SOCKET)
 	{
-		Logger::throwError("NetworkingServer::start::6 ---> ", WSAGetLastError());
+		Logger::throwDebug(WSAGetLastError());
+		abort();
 	}
 
 	DWORD trueValue = 1;
@@ -94,7 +98,8 @@ void NetworkingServer::start(unsigned int maxClientCount)
 		}
 		else
 		{
-			Logger::throwError("NetworkingServer::start::7 ---> ", WSAGetLastError());
+			Logger::throwDebug(WSAGetLastError());
+			abort();
 		}
 	}
 
@@ -110,14 +115,16 @@ void NetworkingServer::start(unsigned int maxClientCount)
 		}
 		else
 		{
-			Logger::throwError("NetworkingServer::start::8 ---> ", WSAGetLastError());
+			Logger::throwDebug(WSAGetLastError());
+			abort();
 		}
 	}
 
 	auto listenStatusCode = listen(_tcpSocket, SOMAXCONN);
 	if(listenStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("NetworkingServer::start::9 ---> ", WSAGetLastError());
+		Logger::throwDebug(WSAGetLastError());
+		abort();
 	}
 
 	_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
@@ -135,7 +142,7 @@ void NetworkingServer::stop()
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::stop");
+		abort();
 	}
 
 	closesocket(_tcpSocket);

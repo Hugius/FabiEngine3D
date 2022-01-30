@@ -28,7 +28,7 @@ void ModelEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("ModelEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -60,7 +60,7 @@ void ModelEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("ModelEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -92,7 +92,7 @@ void ModelEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("ModelEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -124,7 +124,7 @@ void ModelEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("ModelEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -156,7 +156,7 @@ void ModelEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("ModelEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

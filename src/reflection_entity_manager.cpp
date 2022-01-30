@@ -9,7 +9,7 @@ shared_ptr<ReflectionEntity> ReflectionEntityManager::getEntity(const string& id
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("ReflectionEntityManager::getEntity");
+		abort();
 	}
 	else
 	{
@@ -41,7 +41,7 @@ void ReflectionEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("ReflectionEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);

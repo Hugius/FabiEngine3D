@@ -16,7 +16,7 @@ const bool Text3dEditor::saveToFile() const
 
 	if(getCurrentProjectId().empty())
 	{
-		Logger::throwError("Text3dEditor::saveToFile");
+		abort();
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();

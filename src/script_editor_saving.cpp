@@ -16,7 +16,7 @@ const bool ScriptEditor::saveScriptFiles()
 
 	if(getCurrentProjectId().empty())
 	{
-		Logger::throwError("ScriptEditor::saveScriptsToFile");
+		abort();
 	}
 
 	for(const auto& fileName : _scriptFileNamesToDelete)

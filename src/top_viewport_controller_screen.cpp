@@ -162,7 +162,7 @@ void TopViewportController::_updateMiscScreenManagement()
 	{
 		if(_currentProjectId.empty())
 		{
-			Logger::throwError("TopViewportController::_updateMiscScreenManagement");
+			abort();
 		}
 
 		const auto rootPath = Tools::getRootDirectoryPath();

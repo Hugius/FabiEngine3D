@@ -13,7 +13,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("SkyEditor::getImagePathsFromFile");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -72,7 +72,7 @@ const bool SkyEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("SkyEditor::loadFromFile");
+		abort();
 	}
 
 	_loadedSkyIds.clear();

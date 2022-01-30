@@ -89,7 +89,7 @@ void TerrainEditor::_updateTerrainCreating()
 
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("TerrainEditor::_updateTerrainCreating");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

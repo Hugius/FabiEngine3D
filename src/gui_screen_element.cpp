@@ -54,7 +54,7 @@ void GuiScreen::deleteScrollingList(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiScreen::deleteScrollingList");
+	abort();
 }
 
 void GuiScreen::deleteWriteField(const string& id)
@@ -68,7 +68,7 @@ void GuiScreen::deleteWriteField(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiScreen::deleteWriteField");
+	abort();
 }
 
 void GuiScreen::deleteButton(const string& id)
@@ -82,7 +82,7 @@ void GuiScreen::deleteButton(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiScreen::deleteButton");
+	abort();
 }
 
 void GuiScreen::deleteRectangle(const string& id)
@@ -96,7 +96,7 @@ void GuiScreen::deleteRectangle(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiScreen::deleteRectangle");
+	abort();
 }
 
 void GuiScreen::deleteTextField(const string& id)
@@ -110,7 +110,7 @@ void GuiScreen::deleteTextField(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiScreen::deleteTextField");
+	abort();
 }
 
 const bool GuiScreen::isScrollingListExisting(const string& id) const
@@ -188,7 +188,7 @@ shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiScreen::getScrollingList");
+	abort();
 }
 
 shared_ptr<GuiWriteField> GuiScreen::getWriteField(const string& id) const
@@ -201,7 +201,7 @@ shared_ptr<GuiWriteField> GuiScreen::getWriteField(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiScreen::getWriteField");
+	abort();
 }
 
 shared_ptr<GuiButton> GuiScreen::getButton(const string& id) const
@@ -214,7 +214,7 @@ shared_ptr<GuiButton> GuiScreen::getButton(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiScreen::getButton");
+	abort();
 }
 
 shared_ptr<GuiRectangle> GuiScreen::getRectangle(const string& id) const
@@ -227,7 +227,7 @@ shared_ptr<GuiRectangle> GuiScreen::getRectangle(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiScreen::getRectangle");
+	abort();
 }
 
 shared_ptr<GuiTextField> GuiScreen::getTextField(const string& id) const
@@ -240,7 +240,7 @@ shared_ptr<GuiTextField> GuiScreen::getTextField(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiScreen::getTextField");
+	abort();
 }
 
 const vector<shared_ptr<GuiScrollingList>>& GuiScreen::getScrollingLists() const

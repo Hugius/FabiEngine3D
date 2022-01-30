@@ -46,7 +46,7 @@ void Text2dEditor::_updateTextCreating()
 
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("Text2dEditor::_updateTextCreating");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

@@ -40,7 +40,8 @@ void NetworkingServer::update()
 
 		if(clientSocket == INVALID_SOCKET)
 		{
-			Logger::throwError("NetworkingServer::update::1 ---> ", WSAGetLastError());
+			Logger::throwDebug(WSAGetLastError());
+			abort();
 		}
 
 		const auto clientIP = extractPeerIP(clientSocket);
@@ -159,7 +160,8 @@ void NetworkingServer::update()
 				}
 				else
 				{
-					Logger::throwError("NetworkingServer::update::2 ---> ", messageErrorCode);
+					Logger::throwDebug(messageErrorCode);
+					abort();
 				}
 			}
 
@@ -196,18 +198,14 @@ void NetworkingServer::update()
 				}
 			}
 		}
-		else if
-			(
-			(messageStatusCode == 0) ||
-			(messageErrorCode == WSAECONNRESET) ||
-			(messageErrorCode == WSAECONNABORTED) ||
-			(messageErrorCode == WSAEMSGSIZE)
-			)
+		else if((messageStatusCode == 0) || (messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED) || (messageErrorCode == WSAEMSGSIZE))
 		{
+			// Purposely left blank
 		}
 		else
 		{
-			Logger::throwError("NetworkingServer::update::3 ---> ", messageErrorCode);
+			Logger::throwDebug(messageErrorCode);
+			abort();
 		}
 	}
 }

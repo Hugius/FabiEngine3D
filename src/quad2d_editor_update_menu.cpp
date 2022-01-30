@@ -76,7 +76,7 @@ void Quad2dEditor::_updateChoiceMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("Quad2dEditor::_updateChoiceMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

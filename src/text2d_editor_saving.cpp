@@ -15,7 +15,7 @@ const bool Text2dEditor::saveToFile() const
 
 	if(getCurrentProjectId().empty())
 	{
-		Logger::throwError("Text2dEditor::saveToFile");
+		abort();
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();

@@ -12,12 +12,12 @@ Image::Image(unsigned char* pixels, unsigned int width, unsigned int height, Pix
 {
 	if(pixels == nullptr)
 	{
-		Logger::throwError("");
+		abort();
 	}
 
 	if((width == 0) || (height == 0))
 	{
-		Logger::throwError("");
+		abort();
 	}
 }
 

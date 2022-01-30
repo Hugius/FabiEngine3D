@@ -17,7 +17,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	if(getCurrentProjectId().empty())
 	{
-		Logger::throwError("WorldEditor::saveEditorWorldToFile");
+		abort();
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();

@@ -67,7 +67,7 @@ void MasterRenderer::_captureWorldDepth()
 					}
 					else
 					{
-						Logger::throwError("MasterRenderer::_captureWorldDepth");
+						abort();
 					}
 				}
 				else
@@ -305,7 +305,7 @@ void MasterRenderer::_captureShadows()
 					}
 					else
 					{
-						Logger::throwError("MasterRenderer::_captureShadows");
+						abort();
 					}
 				}
 				else

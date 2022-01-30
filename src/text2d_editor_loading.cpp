@@ -12,7 +12,7 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("Text2dEditor::getImagePathsFromFile");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -63,7 +63,7 @@ const bool Text2dEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("Text2dEditor::loadFromFile");
+		abort();
 	}
 
 	_loadedTextIds.clear();

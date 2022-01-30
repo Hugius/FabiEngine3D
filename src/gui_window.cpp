@@ -87,7 +87,7 @@ void GuiWindow::createScreen(const string& id)
 	{
 		if(screen->getId() == id)
 		{
-			Logger::throwError("GuiWindow::createScreen");
+			abort();
 		}
 	}
 
@@ -116,7 +116,7 @@ void GuiWindow::deleteScreen(const string& id)
 
 	if(!isFound)
 	{
-		Logger::throwError("GuiWindow::deleteScreen");
+		abort();
 	}
 }
 
@@ -151,5 +151,5 @@ shared_ptr<GuiScreen> GuiWindow::getScreen(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiWindow::getScreen");
+	abort();
 }

@@ -30,7 +30,7 @@ private:
 
 		if(iterator == list.end())
 		{
-			Logger::throwError("InputHandler::_getVectorIndex");
+			abort();
 		}
 		else
 		{

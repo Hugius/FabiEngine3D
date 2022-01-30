@@ -30,7 +30,7 @@ void CameraCollisionHandler::enableCameraAabbResponse(bool x, bool y, bool z)
 {
 	if(_isCameraAabbResponseEnabled)
 	{
-		Logger::throwError("CollisionResolver::enableCameraAabbResponse");
+		abort();
 	}
 
 	_isCameraAabbResponseEnabled = true;
@@ -43,7 +43,7 @@ void CameraCollisionHandler::disableCameraAabbResponse()
 {
 	if(!_isCameraAabbResponseEnabled)
 	{
-		Logger::throwError("CollisionResolver::disableCameraAabbResponse");
+		abort();
 	}
 
 	_isCameraAabbResponseEnabled = false;
@@ -56,7 +56,7 @@ void CameraCollisionHandler::enableCameraTerrainResponse(float cameraHeight, flo
 {
 	if(_isCameraTerrainResponseEnabled)
 	{
-		Logger::throwError("CollisionResolver::enableCameraTerrainResponse");
+		abort();
 	}
 
 	_isCameraTerrainResponseEnabled = true;
@@ -68,7 +68,7 @@ void CameraCollisionHandler::disableCameraTerrainResponse()
 {
 	if(!_isCameraTerrainResponseEnabled)
 	{
-		Logger::throwError("CollisionResolver::disableCameraTerrainResponse");
+		abort();
 	}
 
 	_isCameraTerrainResponseEnabled = false;

@@ -10,7 +10,7 @@ const bool NetworkingServer::isClientConnected(const string& username) const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::isClientConnected");
+		abort();
 	}
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
@@ -31,7 +31,7 @@ const string NetworkingServer::getNewClientIP() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::getNewClientIP");
+		abort();
 	}
 
 	return _newClientIP;
@@ -41,7 +41,7 @@ const string NetworkingServer::getNewClientUsername() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::getNewClientUsername");
+		abort();
 	}
 
 	return _newClientUsername;
@@ -51,7 +51,7 @@ const string NetworkingServer::getOldClientIP() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::getOldClientIP");
+		abort();
 	}
 
 	if(_oldClientIPs.empty())
@@ -68,7 +68,7 @@ const string NetworkingServer::getOldClientUsername() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::getOldClientUsername");
+		abort();
 	}
 
 	if(_oldClientUsernames.empty())
@@ -85,7 +85,7 @@ const vector<NetworkingClientMessage>& NetworkingServer::getPendingMessages() co
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::getPendingMessages");
+		abort();
 	}
 
 	return _pendingMessages;
@@ -95,7 +95,7 @@ const vector<string> NetworkingServer::getClientIPs() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::getClientIPs");
+		abort();
 	}
 
 	vector<string> clientIPs;
@@ -116,7 +116,7 @@ const vector<string> NetworkingServer::getClientUsernames() const
 
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::getClientUsernames");
+		abort();
 	}
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
@@ -134,7 +134,7 @@ void NetworkingServer::sendTcpMessage(const string& username, const string& cont
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::sendTcpMessage::1");
+		abort();
 	}
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
@@ -149,14 +149,14 @@ void NetworkingServer::sendTcpMessage(const string& username, const string& cont
 		}
 	}
 
-	Logger::throwError("NetworkingServer::sendTcpMessage::2");
+	abort();
 }
 
 void NetworkingServer::sendUdpMessage(const string& username, const string& content)
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::sendUdpMessage::1");
+		abort();
 	}
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
@@ -171,14 +171,14 @@ void NetworkingServer::sendUdpMessage(const string& username, const string& cont
 		}
 	}
 
-	Logger::throwError("NetworkingServer::sendUdpMessage::2");
+	abort();
 }
 
 void NetworkingServer::broadcastTcpMessage(const string& content, const string& exceptionUsername)
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::broadcastTcpMessage");
+		abort();
 	}
 
 	for(size_t i = 0; i < _clientSockets.size(); i++)
@@ -197,7 +197,7 @@ void NetworkingServer::broadcastUdpMessage(const string& content, const string& 
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::broadcastUdpMessage");
+		abort();
 	}
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
@@ -216,7 +216,7 @@ void NetworkingServer::disconnectClient(const string& username)
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::disconnectClient::1");
+		abort();
 	}
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
@@ -231,14 +231,14 @@ void NetworkingServer::disconnectClient(const string& username)
 		}
 	}
 
-	Logger::throwError("NetworkingServer::disconnectClient::2");
+	abort();
 }
 
 void NetworkingServer::disconnectClients()
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::disconnectClients::1");
+		abort();
 	}
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)

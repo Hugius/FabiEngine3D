@@ -17,7 +17,7 @@ shared_ptr<Quad2dEntity> Quad2dEntityManager::getEntity(const string& id)
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("Quad2dEntityManager::getEntity");
+		abort();
 	}
 	else
 	{
@@ -47,7 +47,7 @@ void Quad2dEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("Quad2dEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);

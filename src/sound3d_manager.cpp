@@ -14,7 +14,7 @@ void Sound3dManager::deleteSound(const string& id)
 
 	if(index == -1)
 	{
-		Logger::throwError("Sound3dManager::deleteSound");
+		abort();
 	}
 	else
 	{
@@ -39,11 +39,11 @@ void Sound3dManager::createSound(const string& id, const string& audioPath)
 {
 	if(_findSoundIndex(id) != -1)
 	{
-		Logger::throwError("Sound3dManager::createSound::1");
+		abort();
 	}
 	if(id.empty())
 	{
-		Logger::throwError("Sound3dManager::createSound::2");
+		abort();
 	}
 
 	auto dataPointer = _audioLoader->loadChunk(audioPath);
@@ -70,7 +70,7 @@ Sound3d& Sound3dManager::getSound(const string& id)
 
 	if(index == -1)
 	{
-		Logger::throwError("Sound3dManager::getSound");
+		abort();
 	}
 
 	return _sounds[index];

@@ -17,7 +17,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("SkyEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -49,7 +49,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("SkyEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -81,7 +81,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("SkyEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -113,7 +113,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("SkyEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -146,7 +146,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("SkyEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -178,7 +178,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("SkyEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

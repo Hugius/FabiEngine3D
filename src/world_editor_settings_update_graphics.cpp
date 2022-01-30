@@ -362,7 +362,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("WorldEditor::_updateLensFlareGraphicsSettingsMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

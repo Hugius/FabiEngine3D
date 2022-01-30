@@ -41,12 +41,12 @@ void ScriptVariable::setValue(shared_ptr<ScriptValue> value, unsigned int index)
 {
 	if(index >= _values.size())
 	{
-		Logger::throwError("");
+		abort();
 	}
 
 	if(_isConstant)
 	{
-		Logger::throwError("ScriptVariable::changeValue");
+		abort();
 	}
 
 	_values[index] = value;
@@ -61,7 +61,7 @@ void ScriptVariable::deleteValue(unsigned int index)
 {
 	if(index >= _values.size())
 	{
-		Logger::throwError("");
+		abort();
 	}
 
 	_values.erase(_values.begin() + index);
@@ -76,7 +76,7 @@ shared_ptr<ScriptValue> ScriptVariable::getValue(unsigned int index) const
 {
 	if(index >= _values.size())
 	{
-		Logger::throwError("");
+		abort();
 	}
 
 	return _values[index];

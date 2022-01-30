@@ -8,7 +8,7 @@ void VertexBufferCache::storeBuffer(const string& filePath, const string& partId
 
 	if(cacheIterator != _buffers.end())
 	{
-		Logger::throwError("");
+		abort();
 	}
 
 	_buffers.insert(make_pair(make_pair(filePath, partId), buffer));

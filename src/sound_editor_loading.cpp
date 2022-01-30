@@ -12,7 +12,7 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("SoundEditor::getAudioPathsFromFile");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -60,7 +60,7 @@ const bool SoundEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("SoundEditor::loadFromFile");
+		abort();
 	}
 
 	_loadedSoundIds.clear();

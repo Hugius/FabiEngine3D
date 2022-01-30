@@ -102,7 +102,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("Animation2dEditor::_updateChoiceMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

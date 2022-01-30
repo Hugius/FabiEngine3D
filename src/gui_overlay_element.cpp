@@ -113,7 +113,7 @@ shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string& id) cons
 		}
 	}
 
-	Logger::throwError("GuiOverlay::getScrollingList");
+	abort();
 }
 
 shared_ptr<GuiWriteField> GuiOverlay::getWriteField(const string& id) const
@@ -126,7 +126,7 @@ shared_ptr<GuiWriteField> GuiOverlay::getWriteField(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiOverlay::getWriteField");
+	abort();
 }
 
 shared_ptr<GuiButton> GuiOverlay::getButton(const string& id) const
@@ -139,7 +139,7 @@ shared_ptr<GuiButton> GuiOverlay::getButton(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiOverlay::getButton");
+	abort();
 }
 
 shared_ptr<GuiRectangle> GuiOverlay::getRectangle(const string& id) const
@@ -152,7 +152,7 @@ shared_ptr<GuiRectangle> GuiOverlay::getRectangle(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiOverlay::getRectangle");
+	abort();
 }
 
 shared_ptr<GuiTextField> GuiOverlay::getTextField(const string& id) const
@@ -165,7 +165,7 @@ shared_ptr<GuiTextField> GuiOverlay::getTextField(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiOverlay::getTextField");
+	abort();
 }
 
 const vector<shared_ptr<GuiScrollingList>>& GuiOverlay::getScrollingLists() const
@@ -204,7 +204,7 @@ void GuiOverlay::deleteScrollingList(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiOverlay::deleteScrollingList");
+	abort();
 }
 
 void GuiOverlay::deleteWriteField(const string& id)
@@ -218,7 +218,7 @@ void GuiOverlay::deleteWriteField(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiOverlay::deleteWriteField");
+	abort();
 }
 
 void GuiOverlay::deleteButton(const string& id)
@@ -232,7 +232,7 @@ void GuiOverlay::deleteButton(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiOverlay::deleteButton");
+	abort();
 }
 
 void GuiOverlay::deleteRectangle(const string& id)
@@ -246,7 +246,7 @@ void GuiOverlay::deleteRectangle(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiOverlay::deleteRectangle");
+	abort();
 }
 
 void GuiOverlay::deleteTextField(const string& id)
@@ -260,5 +260,5 @@ void GuiOverlay::deleteTextField(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiOverlay::deleteTextField");
+	abort();
 }

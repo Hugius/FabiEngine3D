@@ -8,7 +8,7 @@ void TextureBufferCache::store2dBuffer(const string& filePath, shared_ptr<Textur
 
 	if(cacheIterator != _2dBuffers.end())
 	{
-		Logger::throwError("");
+		abort();
 	}
 
 	_2dBuffers.insert(make_pair(filePath, buffer));
@@ -20,7 +20,7 @@ void TextureBufferCache::store3dBuffer(const array<string, 6>& filePaths, shared
 
 	if(cacheIterator != _3dBuffers.end())
 	{
-		Logger::throwError("");
+		abort();
 	}
 
 	_3dBuffers.insert(make_pair(filePaths, buffer));

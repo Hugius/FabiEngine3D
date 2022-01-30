@@ -13,7 +13,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("TerrainEditor::getImagePathsFromFile");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -202,7 +202,7 @@ const bool TerrainEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("TerrainEditor::loadFromFile");
+		abort();
 	}
 
 	_loadedTerrainIds.clear();

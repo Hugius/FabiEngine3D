@@ -49,7 +49,10 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	{
 		char log[512];
 		glGetShaderInfoLog(vertexId, 512, nullptr, log);
-		Logger::throwError("ShaderBuffer::_createProgram::1 ---> ", shaderName, " ", log);
+
+		Logger::throwDebug(shaderName);
+		Logger::throwDebug(log);
+		abort();
 	}
 
 	auto fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
@@ -62,7 +65,10 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	{
 		char log[512];
 		glGetShaderInfoLog(fragmentId, 512, nullptr, log);
-		Logger::throwError("ShaderBuffer::_createProgram::2 ---> ", shaderName, " ", log);
+
+		Logger::throwDebug(shaderName);
+		Logger::throwDebug(log);
+		abort();
 	}
 
 	_programId = glCreateProgram();
@@ -76,7 +82,10 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	{
 		char log[512];
 		glGetProgramInfoLog(_programId, 512, nullptr, log);
-		Logger::throwError("ShaderBuffer::_createProgram::3 ---> ", shaderName, " ", log);
+
+		Logger::throwDebug(shaderName);
+		Logger::throwDebug(log);
+		abort();
 	}
 
 	glDeleteShader(vertexId);
@@ -104,7 +113,8 @@ const BufferId ShaderBuffer::getUniformId(const string& name)
 
 	if(id == -1)
 	{
-		Logger::throwError("ShaderBuffer::_getUniformId ---> ", name);
+		Logger::throwDebug(name);
+		abort();
 	}
 
 	_uniformCache.insert(make_pair(name, id));

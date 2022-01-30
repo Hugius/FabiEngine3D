@@ -54,7 +54,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 
 	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{
-		Logger::throwError("CaptureBuffer::createColorTexture::1");
+		abort();
 	}
 }
 
@@ -91,7 +91,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size)
 
 	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{
-		Logger::throwError("CaptureBuffer::createDepthTexture::1");
+		abort();
 	}
 }
 

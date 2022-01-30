@@ -78,7 +78,7 @@ shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& id)
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("AabbEntityManager::getEntity");
+		abort();
 	}
 	else
 	{
@@ -116,7 +116,7 @@ void AabbEntityManager::update()
 
 					if(foundPair == _modelEntityManager->getEntities().end())
 					{
-						Logger::throwError("AabbEntityManager::update::1");
+						abort();
 					}
 
 					auto parentEntity = foundPair->second;
@@ -226,7 +226,7 @@ void AabbEntityManager::update()
 
 					if(foundPair == _quad3dEntityManager->getEntities().end())
 					{
-						Logger::throwError("AabbEntityManager::update::2");
+						abort();
 					}
 
 					auto parentEntity = foundPair->second;
@@ -301,7 +301,7 @@ void AabbEntityManager::update()
 
 					if(foundPair == _text3dEntityManager->getEntities().end())
 					{
-						Logger::throwError("AabbEntityManager::update::3");
+						abort();
 					}
 
 					auto parentEntity = foundPair->second;
@@ -388,7 +388,7 @@ void AabbEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("AabbEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);

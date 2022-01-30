@@ -17,7 +17,7 @@ shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string& id)
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("Text2dEntityManager::getEntity");
+		abort();
 	}
 	else
 	{
@@ -64,7 +64,7 @@ void Text2dEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("Text2dEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);

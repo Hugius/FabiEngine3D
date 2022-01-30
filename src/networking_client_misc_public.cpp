@@ -16,7 +16,7 @@ const bool NetworkingClient::isConnectingToServer() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::isConnectingToServer");
+		abort();
 	}
 
 	return _isConnectingToServer;
@@ -26,7 +26,7 @@ const bool NetworkingClient::isConnectedToServer() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::isConnectedToServer");
+		abort();
 	}
 
 	return _isConnectedToServer;
@@ -36,7 +36,7 @@ const bool NetworkingClient::isAcceptedByServer() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::isAcceptedByServer");
+		abort();
 	}
 
 	return _isAcceptedByServer;
@@ -46,12 +46,12 @@ const unsigned int NetworkingClient::getPingLatency() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::getPingLatency::1");
+		abort();
 	}
 
 	if(!_isConnectedToServer || !_isAcceptedByServer)
 	{
-		Logger::throwError("NetworkingClient::getPingLatency::2");
+		abort();
 	}
 
 	if(_pingLatencies.empty())
@@ -66,7 +66,7 @@ const string& NetworkingClient::getUsername() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::getUsername::1");
+		abort();
 	}
 
 	return _username;
@@ -76,12 +76,12 @@ const string& NetworkingClient::getServerIP() const
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::getServerIP::1");
+		abort();
 	}
 
 	if(!_isConnectedToServer || !_isAcceptedByServer)
 	{
-		Logger::throwError("NetworkingClient::getServerIP::2");
+		abort();
 	}
 
 	return _serverIP;
@@ -91,7 +91,7 @@ const vector<NetworkingServerMessage>& NetworkingClient::getPendingMessages() co
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::getPendingMessages");
+		abort();
 	}
 
 	return _pendingMessages;

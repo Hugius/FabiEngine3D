@@ -50,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 			else
 			{
-				Logger::throwError("ScriptInterpreter::_executeFe3dMiscFunction");
+				abort();
 			}
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));

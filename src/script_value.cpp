@@ -14,7 +14,7 @@ ScriptValue::ScriptValue(ScriptValueType type, const string& value)
 {
 	if(type != ScriptValueType::STRING)
 	{
-		Logger::throwError("ScriptValue::ScriptValue");
+		abort();
 	}
 
 	setString(value);
@@ -26,7 +26,7 @@ ScriptValue::ScriptValue(ScriptValueType type, float value)
 {
 	if(type != ScriptValueType::DECIMAL)
 	{
-		Logger::throwError("ScriptValue::ScriptValue");
+		abort();
 	}
 
 	setDecimal(value);
@@ -38,7 +38,7 @@ ScriptValue::ScriptValue(ScriptValueType type, int value)
 {
 	if(type != ScriptValueType::INTEGER)
 	{
-		Logger::throwError("ScriptValue::ScriptValue");
+		abort();
 	}
 
 	setInteger(value);
@@ -50,7 +50,7 @@ ScriptValue::ScriptValue(ScriptValueType type, bool value)
 {
 	if(type != ScriptValueType::BOOLEAN)
 	{
-		Logger::throwError("ScriptValue::ScriptValue");
+		abort();
 	}
 
 	setBoolean(value);
@@ -60,7 +60,7 @@ void ScriptValue::setString(const string& value)
 {
 	if(_type != ScriptValueType::STRING)
 	{
-		Logger::throwError("ScriptValue::setString");
+		abort();
 	}
 
 	_string = value;
@@ -70,7 +70,7 @@ void ScriptValue::setDecimal(float value)
 {
 	if(_type != ScriptValueType::DECIMAL)
 	{
-		Logger::throwError("ScriptValue::setDecimal");
+		abort();
 	}
 
 	_decimal = value;
@@ -80,7 +80,7 @@ void ScriptValue::setInteger(int value)
 {
 	if(_type != ScriptValueType::INTEGER)
 	{
-		Logger::throwError("ScriptValue::setInteger");
+		abort();
 	}
 
 	_integer = value;
@@ -90,7 +90,7 @@ void ScriptValue::setBoolean(bool value)
 {
 	if(_type != ScriptValueType::BOOLEAN)
 	{
-		Logger::throwError("ScriptValue::setBoolean");
+		abort();
 	}
 
 	_boolean = value;
@@ -100,7 +100,7 @@ const string& ScriptValue::getString() const
 {
 	if(_type != ScriptValueType::STRING)
 	{
-		Logger::throwError("ScriptValue::getString");
+		abort();
 	}
 
 	return _string;
@@ -110,7 +110,7 @@ const float ScriptValue::getDecimal() const
 {
 	if(_type != ScriptValueType::DECIMAL)
 	{
-		Logger::throwError("ScriptValue::getDecimal");
+		abort();
 	}
 
 	return _decimal;
@@ -120,7 +120,7 @@ const int ScriptValue::getInteger() const
 {
 	if(_type != ScriptValueType::INTEGER)
 	{
-		Logger::throwError("ScriptValue::getInteger");
+		abort();
 	}
 
 	return _integer;
@@ -130,7 +130,7 @@ const bool ScriptValue::getBoolean() const
 {
 	if(_type != ScriptValueType::BOOLEAN)
 	{
-		Logger::throwError("ScriptValue::getBoolean");
+		abort();
 	}
 
 	return _boolean;

@@ -15,7 +15,7 @@ const bool Quad2dEditor::saveToFile() const
 
 	if(getCurrentProjectId().empty())
 	{
-		Logger::throwError("Quad2dEditor::saveToFile");
+		abort();
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();

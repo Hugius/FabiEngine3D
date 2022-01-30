@@ -32,11 +32,11 @@ void Camera::enableFirstPersonView(float initialYaw, float initialPitch)
 {
 	if(_isThirdPersonViewEnabled)
 	{
-		Logger::throwError("Camera::enableFirstPersonView::1");
+		abort();
 	}
 	if(_isFirstPersonViewEnabled)
 	{
-		Logger::throwError("Camera::enableFirstPersonView::2");
+		abort();
 	}
 
 	_firstPersonYaw = Math::limitAngle(initialYaw);
@@ -49,7 +49,7 @@ void Camera::disableFirstPersonView()
 {
 	if(!_isFirstPersonViewEnabled)
 	{
-		Logger::throwError("Camera::disableFirstPersonView");
+		abort();
 	}
 
 	_isFirstPersonViewEnabled = false;
@@ -59,11 +59,11 @@ void Camera::enableThirdPersonView(float initialYaw, float initialPitch)
 {
 	if(_isFirstPersonViewEnabled)
 	{
-		Logger::throwError("Camera::enableThirdPersonView::1");
+		abort();
 	}
 	if(_isThirdPersonViewEnabled)
 	{
-		Logger::throwError("Camera::enableThirdPersonView::2");
+		abort();
 	}
 
 	_thirdPersonYaw = Math::limitAngle(initialYaw);
@@ -76,7 +76,7 @@ void Camera::disableThirdPersonView()
 {
 	if(!_isThirdPersonViewEnabled)
 	{
-		Logger::throwError("Camera::disableThirdPersonView");
+		abort();
 	}
 
 	_isThirdPersonViewEnabled = false;

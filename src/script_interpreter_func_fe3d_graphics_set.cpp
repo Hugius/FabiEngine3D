@@ -196,7 +196,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 		{
 			if(_currentProjectId.empty())
 			{
-				Logger::throwError("ScriptInterpreter::_executeFe3dGraphicsSetter");
+				abort();
 			}
 
 			const auto isExported = Config::getInst().isApplicationExported();

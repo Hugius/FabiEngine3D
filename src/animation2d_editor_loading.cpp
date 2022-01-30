@@ -11,7 +11,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("Animation2dEditor::loadFromFile");
+		abort();
 	}
 
 	_animations.clear();

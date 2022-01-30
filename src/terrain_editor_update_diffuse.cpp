@@ -17,7 +17,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("TerrainEditor::_updateDiffuseMapMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -49,7 +49,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("TerrainEditor::_updateDiffuseMapMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -81,7 +81,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("TerrainEditor::_updateDiffuseMapMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -113,7 +113,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("TerrainEditor::_updateDiffuseMapMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

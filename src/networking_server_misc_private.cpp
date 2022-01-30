@@ -14,20 +14,20 @@ const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& conten
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::_sendTcpMessage::1");
+		abort();
 	}
 
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwError("NetworkingServer::_sendTcpMessage::2");
+		abort();
 	}
 	else if(isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwError("NetworkingServer::_sendTcpMessage::3");
+		abort();
 	}
 	else if(content.size() > MAX_MESSAGE_CHARACTERS)
 	{
-		Logger::throwError("NetworkingServer::_sendTcpMessage::4");
+		abort();
 	}
 
 	string message = (content + ';');
@@ -47,7 +47,8 @@ const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& conten
 		}
 		else
 		{
-			Logger::throwError("NetworkingServer::_sendTcpMessage::5 ---> ", WSAGetLastError());
+			Logger::throwDebug(WSAGetLastError());
+			abort();
 		}
 	}
 
@@ -58,20 +59,20 @@ const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const strin
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingServer::_sendUdpMessage::1");
+		abort();
 	}
 
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwError("NetworkingServer::_sendUdpMessage::2");
+		abort();
 	}
 	else if(isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwError("NetworkingServer::_sendUdpMessage::3");
+		abort();
 	}
 	else if(content.size() > MAX_MESSAGE_CHARACTERS)
 	{
-		Logger::throwError("NetworkingServer::_sendUdpMessage::4");
+		abort();
 	}
 
 	auto socketAddress = composeSocketAddress(clientIP, clientPort);
@@ -92,7 +93,8 @@ const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const strin
 		}
 		else
 		{
-			Logger::throwError("NetworkingServer::_sendUdpMessage::5 ---> ", WSAGetLastError());
+			Logger::throwDebug(WSAGetLastError());
+			abort();
 		}
 	}
 

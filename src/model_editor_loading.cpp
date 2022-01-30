@@ -15,7 +15,7 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("ModelEditor::getMeshPathsFromFile");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -70,7 +70,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("ModelEditor::getImagePathsFromFile");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -244,7 +244,7 @@ const bool ModelEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("ModelEditor::loadFromFile::1");
+		abort();
 	}
 
 	_loadedModelIds.clear();
@@ -477,7 +477,7 @@ const bool ModelEditor::loadFromFile()
 		}
 		else
 		{
-			Logger::throwError("ModelEditor::loadFromFile::2");
+			abort();
 		}
 	}
 

@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_validateSavesDirectory() const
 {
 	if(_currentProjectId.empty())
 	{
-		Logger::throwError("ScriptInterpreter::_validateSavesDirectory");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();

@@ -14,7 +14,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("WorldEditor::loadEditorWorldFromFile::1");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -607,7 +607,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else
 		{
-			Logger::throwError("WorldEditor::loadEditorWorldFromFile::2");
+			abort();
 		}
 	}
 

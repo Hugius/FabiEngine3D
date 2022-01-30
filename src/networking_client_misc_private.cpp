@@ -14,25 +14,25 @@ bool NetworkingClient::_sendTcpMessage(const string& content, bool isReserved, b
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::_sendTcpMessage::1");
+		abort();
 	}
 
 	if(!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
-		Logger::throwError("NetworkingClient::_sendTcpMessage::2");
+		abort();
 	}
 
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwError("NetworkingClient::_sendTcpMessage::3");
+		abort();
 	}
 	if(isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwError("NetworkingClient::_sendTcpMessage::4");
+		abort();
 	}
 	if(content.size() > MAX_MESSAGE_CHARACTERS)
 	{
-		Logger::throwError("NetworkingClient::_sendTcpMessage::5");
+		abort();
 	}
 
 	string message = (content + ';');
@@ -52,7 +52,8 @@ bool NetworkingClient::_sendTcpMessage(const string& content, bool isReserved, b
 		}
 		else
 		{
-			Logger::throwError("NetworkingClient::_sendTcpMessage::6 ---> ", WSAGetLastError());
+			Logger::throwDebug(WSAGetLastError());
+			abort();
 		}
 	}
 
@@ -63,25 +64,25 @@ bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, b
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::_sendUdpMessage::1");
+		abort();
 	}
 
 	if(!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
-		Logger::throwError("NetworkingClient::_sendUdpMessage::2");
+		abort();
 	}
 
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwError("NetworkingClient::_sendUdpMessage::3");
+		abort();
 	}
 	else if(isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwError("NetworkingClient::_sendUdpMessage::4");
+		abort();
 	}
 	else if(content.size() > MAX_MESSAGE_CHARACTERS)
 	{
-		Logger::throwError("NetworkingClient::_sendUdpMessage::5");
+		abort();
 	}
 
 	auto socketAddress = composeSocketAddress(_serverIP, SERVER_PORT);
@@ -104,7 +105,8 @@ bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, b
 		}
 		else
 		{
-			Logger::throwError("NetworkingClient::_sendUdpMessage::6 ---> ", WSAGetLastError());
+			Logger::throwDebug(WSAGetLastError());
+			abort();
 		}
 	}
 
@@ -151,19 +153,22 @@ void NetworkingClient::_setupTcp()
 	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", "0", &hints, &addressInfo);
 	if(tcpInfoStatusCode != 0)
 	{
-		Logger::throwError("NetworkingClient::_setupTCP::1 ---> ", tcpInfoStatusCode);
+		Logger::throwDebug(tcpInfoStatusCode);
+		abort();
 	}
 
 	_tcpSocket = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
 	if(_tcpSocket == INVALID_SOCKET)
 	{
-		Logger::throwError("NetworkingClient::_setupTCP::2 ---> ", WSAGetLastError());
+		Logger::throwDebug(WSAGetLastError());
+		abort();
 	}
 
 	auto tcpBindStatusCode = bind(_tcpSocket, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if(tcpBindStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("NetworkingClient::_setupTCP::3 ---> ", WSAGetLastError());
+		Logger::throwDebug(WSAGetLastError());
+		abort();
 	}
 
 	freeaddrinfo(addressInfo);
@@ -183,19 +188,22 @@ void NetworkingClient::_setupUdp()
 	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", "0", &hints, &addressInfo);
 	if(udpInfoStatusCode != 0)
 	{
-		Logger::throwError("NetworkingClient::_setupUDP::1 ---> ", udpInfoStatusCode);
+		Logger::throwDebug(udpInfoStatusCode);
+		abort();
 	}
 
 	_udpSocket = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
 	if(_udpSocket == INVALID_SOCKET)
 	{
-		Logger::throwError("NetworkingClient::_setupUDP::2 ----> ", WSAGetLastError());
+		Logger::throwDebug(WSAGetLastError());
+		abort();
 	}
 
 	auto udpBindStatusCode = bind(_udpSocket, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if(udpBindStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("NetworkingClient::_setupUDP::3 ---> ", WSAGetLastError());
+		Logger::throwDebug(WSAGetLastError());
+		abort();
 	}
 
 	freeaddrinfo(addressInfo);

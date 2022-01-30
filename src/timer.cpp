@@ -5,7 +5,7 @@ void Timer::start()
 {
 	if(_isStarted)
 	{
-		Logger::throwError("Timer::start");
+		abort();
 	}
 
 	QueryPerformanceFrequency(&_frequency);
@@ -17,7 +17,7 @@ const float Timer::stop()
 {
 	if(!_isStarted)
 	{
-		Logger::throwError("Timer::stop");
+		abort();
 	}
 
 	QueryPerformanceCounter(&_time2);
@@ -29,7 +29,7 @@ void Timer::startDeltaPart(const string& id)
 {
 	if(!_currentId.empty())
 	{
-		Logger::throwError("Timer::startDeltaPart");
+		abort();
 	}
 
 	QueryPerformanceFrequency(&_specificFrequency);
@@ -41,7 +41,7 @@ void Timer::stopDeltaPart()
 {
 	if(_currentId.empty())
 	{
-		Logger::throwError("Timer::stopDeltaPart");
+		abort();
 	}
 
 	QueryPerformanceCounter(&_specificTime2);

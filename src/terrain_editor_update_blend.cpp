@@ -17,7 +17,7 @@ void TerrainEditor::_updateBlendMapMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("TerrainEditor::_updateBlendMapMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

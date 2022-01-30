@@ -10,7 +10,7 @@ shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& id)
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("ModelEntityManager::getEntity");
+		abort();
 	}
 	else
 	{
@@ -112,7 +112,7 @@ void ModelEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("ModelEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);
@@ -147,7 +147,7 @@ void ModelEntityManager::update()
 		{
 			if(getEntities().find(entity->getId()) == getEntities().end())
 			{
-				Logger::throwError("ModelEntityManager::update");
+				abort();
 			}
 
 			const auto cameraPosition = _renderBus->getCameraPosition();

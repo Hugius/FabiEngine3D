@@ -101,7 +101,7 @@ const vector<unsigned int> Sound2dPlayer::_findChannels(Sound2d& sound) const
 
 	if(channels.empty())
 	{
-		Logger::throwError("Sound2dPlayer::_findChannels");
+		abort();
 	}
 
 	return channels;

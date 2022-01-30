@@ -21,7 +21,7 @@ void Quad3dEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("Quad3dEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -53,7 +53,7 @@ void Quad3dEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("Quad3dEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

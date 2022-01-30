@@ -16,7 +16,7 @@ const bool SkyEditor::saveToFile() const
 
 	if(getCurrentProjectId().empty())
 	{
-		Logger::throwError("SkyEditor::saveToFile");
+		abort();
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();

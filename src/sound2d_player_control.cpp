@@ -5,18 +5,18 @@ void Sound2dPlayer::startSound(Sound2d& sound, int playCount, unsigned int fadeM
 {
 	if((playCount < -1) || (playCount == 0))
 	{
-		Logger::throwError("Sound2dPlayer::startSound::1");
+		abort();
 	}
 
 	if(isSoundStarted(sound) && !mustForce)
 	{
-		Logger::throwError("Sound2dPlayer::startSound::2");
+		abort();
 	}
 
 	auto channel = _getFreeChannel();
 	if(channel == -1)
 	{
-		Logger::throwError("Sound2dPlayer::startSound::3");
+		abort();
 	}
 	_channels[channel] = sound.getId();
 
@@ -50,12 +50,12 @@ void Sound2dPlayer::pauseSound(Sound2d& sound)
 {
 	if(!isSoundPlaying(sound))
 	{
-		Logger::throwError("Sound2dPlayer::pauseSound::1");
+		abort();
 	}
 
 	if(isSoundPaused(sound))
 	{
-		Logger::throwError("Sound2dPlayer::pauseSound::2");
+		abort();
 	}
 
 	for(const auto& channel : _findChannels(sound))
@@ -82,7 +82,7 @@ void Sound2dPlayer::resumeSound(Sound2d& sound)
 {
 	if(!isSoundPaused(sound))
 	{
-		Logger::throwError("Sound2dPlayer::resumeSound");
+		abort();
 	}
 
 	for(const auto& channel : _findChannels(sound))
@@ -111,7 +111,7 @@ void Sound2dPlayer::stopSound(Sound2d& sound, unsigned int fadeMS)
 {
 	if(!isSoundStarted(sound))
 	{
-		Logger::throwError("Sound2dPlayer::stopSound");
+		abort();
 	}
 
 	if(isSoundPaused(sound))

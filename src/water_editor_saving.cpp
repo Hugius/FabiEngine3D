@@ -16,7 +16,7 @@ const bool WaterEditor::saveToFile() const
 
 	if(getCurrentProjectId().empty())
 	{
-		Logger::throwError("WaterEditor::saveToFile");
+		abort();
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();

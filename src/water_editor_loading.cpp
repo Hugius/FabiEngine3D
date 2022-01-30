@@ -13,7 +13,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("WaterEditor::getImagePathsFromFile");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -92,7 +92,7 @@ const bool WaterEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("WaterEditor::loadFromFile");
+		abort();
 	}
 
 	_loadedWaterIds.clear();

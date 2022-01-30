@@ -12,7 +12,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("Animation3dEditor::loadFromFile");
+		abort();
 	}
 
 	_animations.clear();

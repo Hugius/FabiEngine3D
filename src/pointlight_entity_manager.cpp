@@ -9,7 +9,7 @@ shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const string& id
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("PointlightEntityManager::getEntity");
+		abort();
 	}
 	else
 	{
@@ -26,7 +26,7 @@ void PointlightEntityManager::createEntity(const string& id)
 {
 	if(getEntities().size() == MAX_ENTITY_COUNT)
 	{
-		Logger::throwError("PointlightEntityManager::createEntity");
+		abort();
 	}
 
 	auto entity = make_shared<PointlightEntity>(id);
@@ -38,7 +38,7 @@ void PointlightEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("PointlightEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);

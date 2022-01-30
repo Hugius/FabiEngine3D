@@ -129,7 +129,7 @@ const vector<unsigned int> Sound3dPlayer::_findChannels(Sound3d& sound) const
 
 	if(channels.empty())
 	{
-		Logger::throwError("SoundPlayer::_findChannels");
+		abort();
 	}
 
 	return channels;

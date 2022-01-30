@@ -106,7 +106,7 @@ void Text3dEditor::_updateText3dCreating()
 
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("Text3dEditor::_updateText3dCreating");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

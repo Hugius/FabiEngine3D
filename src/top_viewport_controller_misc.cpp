@@ -239,7 +239,7 @@ void TopViewportController::_saveCurrentProject()
 {
 	if(_currentProjectId.empty())
 	{
-		Logger::throwError("TopViewportController::_saveCurrentProject");
+		abort();
 	}
 
 	_skyEditor->saveToFile();

@@ -134,7 +134,7 @@ void ModelEditor::_updateModelCreating()
 
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("ModelEditor::_updateModelCreating");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

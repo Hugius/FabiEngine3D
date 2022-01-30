@@ -102,7 +102,7 @@ void GuiViewport::deleteWindow(const string& id)
 		}
 	}
 
-	Logger::throwError("GuiViewport::deleteWindow");
+	abort();
 }
 
 const vector<shared_ptr<GuiWindow>>& GuiViewport::getWindows() const
@@ -120,5 +120,5 @@ shared_ptr<GuiWindow> GuiViewport::getWindow(const string& id) const
 		}
 	}
 
-	Logger::throwError("GuiViewport::getWindow");
+	abort();
 }

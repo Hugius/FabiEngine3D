@@ -54,7 +54,7 @@ void SoundEditor::_updateSoundCreating()
 
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("SoundEditor::_updateSoundCreating");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

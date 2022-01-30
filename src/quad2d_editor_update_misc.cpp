@@ -46,7 +46,7 @@ void Quad2dEditor::_updateQuadCreating()
 
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("Quad2dEditor::_updateQuadCreating");
+				abort();
 			}
 
 			_fe3d->quad2d_create(newQuadId, true);

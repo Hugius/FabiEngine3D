@@ -56,7 +56,7 @@ shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string& id)
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("Text3dEntityManager::getEntity");
+		abort();
 	}
 	else
 	{
@@ -134,7 +134,7 @@ void Text3dEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("Text3dEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);

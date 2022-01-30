@@ -14,7 +14,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("ScriptEditor::loadScriptsFromFile");
+		abort();
 	}
 
 	_script->clear();

@@ -10,7 +10,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& id)
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("WaterEntityManager::getEntity");
+		abort();
 	}
 
 	return iterator->second;
@@ -35,7 +35,7 @@ void WaterEntityManager::selectEntity(const string& id)
 {
 	if(!isEntityExisting(id) && !id.empty())
 	{
-		Logger::throwError("WaterEntityManager::selectWater");
+		abort();
 	}
 
 	_selectedEntityId = id;
@@ -54,7 +54,7 @@ void WaterEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("WaterEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);
@@ -88,7 +88,7 @@ void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 
 	if(size > MAX_SIZE)
 	{
-		Logger::throwError("WaterEntityManager::loadMesh");
+		abort();
 	}
 
 	const float lowQualityBufferData[] =

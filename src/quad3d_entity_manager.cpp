@@ -46,7 +46,7 @@ shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& id)
 
 	if(iterator == _entities.end())
 	{
-		Logger::throwError("Quad3dEntityManager::getEntity");
+		abort();
 	}
 	else
 	{
@@ -106,7 +106,7 @@ void Quad3dEntityManager::deleteEntity(const string& id)
 {
 	if(!isEntityExisting(id))
 	{
-		Logger::throwError("Quad3dEntityManager::deleteEntity");
+		abort();
 	}
 
 	_entities.erase(id);

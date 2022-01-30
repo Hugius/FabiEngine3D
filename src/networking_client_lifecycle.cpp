@@ -26,24 +26,24 @@ void NetworkingClient::start(const string& username)
 {
 	if(_isRunning)
 	{
-		Logger::throwError("NetworkingClient::start::1");
+		abort();
 	}
 
 	if(username.empty())
 	{
-		Logger::throwError("NetworkingClient::start::2");
+		abort();
 	}
 	if(username.size() > MAX_USERNAME_CHARACTERS)
 	{
-		Logger::throwError("NetworkingClient::start::3");
+		abort();
 	}
 	if(isMessageReserved(username))
 	{
-		Logger::throwError("NetworkingClient::start::4");
+		abort();
 	}
 	if(find(username.begin(), username.end(), ';') != username.end())
 	{
-		Logger::throwError("NetworkingClient::start::5");
+		abort();
 	}
 
 	_username = username;
@@ -54,22 +54,22 @@ void NetworkingClient::connectToServer(const string& serverIP)
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::connectToServer::1");
+		abort();
 	}
 
 	if(_isConnectedToServer)
 	{
-		Logger::throwError("NetworkingClient::connectToServer::2");
+		abort();
 	}
 
 	if(_isConnectingToServer)
 	{
-		Logger::throwError("NetworkingClient::connectToServer::3");
+		abort();
 	}
 
 	if(!isValidServerIP(serverIP))
 	{
-		Logger::throwError("NetworkingClient::connectToServer::4");
+		abort();
 	}
 
 	_serverIP = serverIP;
@@ -85,12 +85,12 @@ void NetworkingClient::disconnectFromServer(bool mustBeAccepted)
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::disconnectFromServer");
+		abort();
 	}
 
 	if(!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
-		Logger::throwError("NetworkingClient::disconnectFromServer");
+		abort();
 	}
 
 	if(_tcpSocket != INVALID_SOCKET)
@@ -120,7 +120,7 @@ void NetworkingClient::stop()
 {
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkingClient::stop");
+		abort();
 	}
 
 	if(_tcpSocket != INVALID_SOCKET)

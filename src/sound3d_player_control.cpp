@@ -5,18 +5,18 @@ void Sound3dPlayer::startSound(Sound3d& sound, int playCount, unsigned int fadeM
 {
 	if((playCount < -1) || (playCount == 0))
 	{
-		Logger::throwError("Sound3dPlayer::startSound::1");
+		abort();
 	}
 
 	if(isSoundStarted(sound) && !mustForce)
 	{
-		Logger::throwError("Sound3dPlayer::startSound::2");
+		abort();
 	}
 
 	auto channel = _getFreeChannel();
 	if(channel == -1)
 	{
-		Logger::throwError("Sound3dPlayer::startSound::3");
+		abort();
 	}
 	_channels[channel] = sound.getId();
 
@@ -50,12 +50,12 @@ void Sound3dPlayer::pauseSound(Sound3d& sound)
 {
 	if(!isSoundPlaying(sound))
 	{
-		Logger::throwError("Sound3dPlayer::pauseSound3d::1");
+		abort();
 	}
 
 	if(isSoundPaused(sound))
 	{
-		Logger::throwError("Sound3dPlayer::pauseSound3d::2");
+		abort();
 	}
 
 	for(const auto& channel : _findChannels(sound))
@@ -82,7 +82,7 @@ void Sound3dPlayer::resumeSound(Sound3d& sound)
 {
 	if(!isSoundPaused(sound))
 	{
-		Logger::throwError("Sound3dPlayer::resumeSound3d");
+		abort();
 	}
 
 	for(const auto& channel : _findChannels(sound))
@@ -111,7 +111,7 @@ void Sound3dPlayer::stopSound(Sound3d& sound, unsigned int fadeMS)
 {
 	if(!isSoundStarted(sound))
 	{
-		Logger::throwError("Sound3dPlayer::stopSound3d");
+		abort();
 	}
 
 	if(isSoundPaused(sound))

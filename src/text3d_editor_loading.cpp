@@ -13,7 +13,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("Text3dEditor::getImagePathsFromFile");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -75,7 +75,7 @@ const bool Text3dEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("Text3dEditor::loadFromFile");
+		abort();
 	}
 
 	_loadedTextIds.clear();

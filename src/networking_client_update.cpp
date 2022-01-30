@@ -51,7 +51,8 @@ void NetworkingClient::update()
 			}
 			else
 			{
-				Logger::throwError("NetworkingClient::update::1 ---> ", connectionErrorCode);
+				Logger::throwDebug(connectionErrorCode);
+				abort();
 			}
 		}
 		else
@@ -155,15 +156,15 @@ void NetworkingClient::update()
 		}
 		else
 		{
-			auto code = messageErrorCode;
-			if((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT))
+			if((messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED) || (messageErrorCode == WSAETIMEDOUT))
 			{
 				disconnectFromServer(false);
 				return;
 			}
 			else
 			{
-				Logger::throwError("NetworkingClient::update::2 ---> ", code);
+				Logger::throwDebug(messageErrorCode);
+				abort();
 			}
 		}
 
@@ -186,18 +187,14 @@ void NetworkingClient::update()
 				_pendingMessages.push_back(NetworkingServerMessage(messageContent, NetworkProtocol::UDP));
 			}
 		}
-		else if
-			(
-			(messageStatusCode == 0) ||
-			(messageErrorCode == WSAECONNRESET) ||
-			(messageErrorCode == WSAECONNABORTED) ||
-			(messageErrorCode == WSAEMSGSIZE)
-			)
+		else if((messageStatusCode == 0) || (messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED) || (messageErrorCode == WSAEMSGSIZE))
 		{
+			// Purposely left blank
 		}
 		else
 		{
-			Logger::throwError("NetworkingClient::update::3 ---> ", messageErrorCode);
+			Logger::throwDebug(messageErrorCode);
+			abort();
 		}
 	}
 }

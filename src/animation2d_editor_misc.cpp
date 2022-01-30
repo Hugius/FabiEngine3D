@@ -260,7 +260,7 @@ void Animation2dEditor::_deleteAnimation(const string& id)
 		}
 	}
 
-	Logger::throwError("Animation2dEditor::_deleteAnimation");
+	abort();
 }
 
 shared_ptr<Animation2d> Animation2dEditor::_getAnimation(const string& id) const
@@ -273,7 +273,7 @@ shared_ptr<Animation2d> Animation2dEditor::_getAnimation(const string& id) const
 		}
 	}
 
-	Logger::throwError("Animation2dEditor::_getAnimation");
+	abort();
 }
 
 const bool Animation2dEditor::isAnimationExisting(const string& id) const

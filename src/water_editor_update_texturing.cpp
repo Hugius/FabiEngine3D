@@ -22,7 +22,7 @@ void WaterEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("WaterEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -54,7 +54,7 @@ void WaterEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("WaterEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
@@ -86,7 +86,7 @@ void WaterEditor::_updateTexturingMenu()
 		{
 			if(getCurrentProjectId().empty())
 			{
-				Logger::throwError("WaterEditor::_updateTexturingMenu");
+				abort();
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();

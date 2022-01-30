@@ -135,7 +135,7 @@ shared_ptr<ScriptVariable> ScriptInterpreter::_getLocalVariable(const string& va
 		return iterator->second;
 	}
 
-	Logger::throwError("ScriptInterpreter::_getLocalVariable");
+	abort();
 }
 
 shared_ptr<ScriptVariable> ScriptInterpreter::_getGlobalVariable(const string& variableId)
@@ -147,5 +147,5 @@ shared_ptr<ScriptVariable> ScriptInterpreter::_getGlobalVariable(const string& v
 		return iterator->second;
 	}
 
-	Logger::throwError("ScriptInterpreter::_getGlobalVariable");
+	abort();
 }

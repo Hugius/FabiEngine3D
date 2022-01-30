@@ -12,7 +12,7 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("Quad2dEditor::getImagePathsFromFile");
+		abort();
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -63,7 +63,7 @@ const bool Quad2dEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
-		Logger::throwError("Quad2dEditor::loadFromFile");
+		abort();
 	}
 
 	_loadedQuadIds.clear();

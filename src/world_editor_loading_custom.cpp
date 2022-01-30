@@ -14,11 +14,11 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 {
 	//if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	//{
-	//	Logger::throwError("WorldEditor::loadCustomWorldFromFile::1");
+	//	abort();
 	//}
 	//if(isLoaded())
 	//{
-	//	Logger::throwError("WorldEditor::loadCustomWorldFromFile::2");
+	//	abort();
 	//}
 
 	//const auto rootPath = Tools::getRootDirectoryPath();
@@ -594,7 +594,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//	}
 	//	else
 	//	{
-	//		Logger::throwError("WorldEditor::loadCustomWorldFromFile::3");
+	//		abort();
 	//	}
 	//}
 

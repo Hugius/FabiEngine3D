@@ -308,7 +308,7 @@ const bool ScriptInterpreter::_compareValues(shared_ptr<ScriptValue> firstValue,
 	}
 	else
 	{
-		Logger::throwError("ScriptInterpreter::_compareValues");
+		abort();
 	}
 
 	return false;

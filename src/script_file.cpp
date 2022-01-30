@@ -22,7 +22,7 @@ void ScriptFile::setLineText(unsigned int index, const string& textContent)
 {
 	if(index >= _lines.size())
 	{
-		Logger::throwError("ScriptFile::setLineText");
+		abort();
 	}
 	else
 	{
@@ -34,7 +34,7 @@ void ScriptFile::deleteLine(unsigned int index)
 {
 	if(index >= _lines.size())
 	{
-		Logger::throwError("ScriptFile::removeLine");
+		abort();
 	}
 	else
 	{
@@ -66,7 +66,7 @@ const string& ScriptFile::getLineText(unsigned int index) const
 {
 	if(index >= _lines.size())
 	{
-		Logger::throwError("ScriptFile::getLineText");
+		abort();
 	}
 	else
 	{

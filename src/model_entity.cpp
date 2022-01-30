@@ -795,7 +795,7 @@ const unsigned int ModelEntity::_getPartIndex(const string& partId) const
 	{
 		if(_parts.size() > 1)
 		{
-			Logger::throwError("ModelEntity::_getPartIndex::1");
+			abort();
 		}
 		else
 		{
@@ -811,5 +811,5 @@ const unsigned int ModelEntity::_getPartIndex(const string& partId) const
 		}
 	}
 
-	Logger::throwError("ModelEntity::_getPartIndex::2");
+	abort();
 }

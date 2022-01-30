@@ -10,7 +10,7 @@ using std::istringstream;
 
 const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
+	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		Logger::throwError("Animation3dEditor::loadFromFile");
 	}
@@ -19,7 +19,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\animation3d.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\animation3d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)

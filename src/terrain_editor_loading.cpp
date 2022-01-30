@@ -11,14 +11,14 @@ using std::istringstream;
 
 const vector<string> TerrainEditor::getImagePathsFromFile() const
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
+	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		Logger::throwError("TerrainEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\terrain.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\terrain.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -96,7 +96,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				heightMapPath = string("projects\\" + _currentProjectId + "\\" + heightMapPath);
+				heightMapPath = string("projects\\" + getCurrentProjectId() + "\\" + heightMapPath);
 			}
 
 			imagePaths.push_back(heightMapPath);
@@ -106,7 +106,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				diffuseMapPath = string("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
+				diffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 			}
 
 			imagePaths.push_back(diffuseMapPath);
@@ -116,7 +116,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				normalMapPath = string("projects\\" + _currentProjectId + "\\" + normalMapPath);
+				normalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
 			}
 
 			imagePaths.push_back(normalMapPath);
@@ -126,7 +126,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				redNormalMapPath = string("projects\\" + _currentProjectId + "\\" + redNormalMapPath);
+				redNormalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + redNormalMapPath);
 			}
 
 			imagePaths.push_back(redNormalMapPath);
@@ -136,7 +136,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				greenNormalMapPath = string("projects\\" + _currentProjectId + "\\" + greenNormalMapPath);
+				greenNormalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + greenNormalMapPath);
 			}
 
 			imagePaths.push_back(greenNormalMapPath);
@@ -146,7 +146,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				blueNormalMapPath = string("projects\\" + _currentProjectId + "\\" + blueNormalMapPath);
+				blueNormalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + blueNormalMapPath);
 			}
 
 			imagePaths.push_back(blueNormalMapPath);
@@ -156,7 +156,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				blendMapPath = string("projects\\" + _currentProjectId + "\\" + blendMapPath);
+				blendMapPath = string("projects\\" + getCurrentProjectId() + "\\" + blendMapPath);
 			}
 
 			imagePaths.push_back(blendMapPath);
@@ -166,7 +166,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				redDiffuseMapPath = string("projects\\" + _currentProjectId + "\\" + redDiffuseMapPath);
+				redDiffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + redDiffuseMapPath);
 			}
 
 			imagePaths.push_back(redDiffuseMapPath);
@@ -176,7 +176,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				greenDiffuseMapPath = string("projects\\" + _currentProjectId + "\\" + greenDiffuseMapPath);
+				greenDiffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + greenDiffuseMapPath);
 			}
 
 			imagePaths.push_back(greenDiffuseMapPath);
@@ -186,7 +186,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				blueDiffuseMapPath = string("projects\\" + _currentProjectId + "\\" + blueDiffuseMapPath);
+				blueDiffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + blueDiffuseMapPath);
 			}
 
 			imagePaths.push_back(blueDiffuseMapPath);
@@ -200,7 +200,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 
 const bool TerrainEditor::loadFromFile()
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
+	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		Logger::throwError("TerrainEditor::loadFromFile");
 	}
@@ -209,7 +209,7 @@ const bool TerrainEditor::loadFromFile()
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\terrain.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\terrain.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -290,7 +290,7 @@ const bool TerrainEditor::loadFromFile()
 
 		if(!Config::getInst().isApplicationExported())
 		{
-			heightMapPath = string("projects\\" + _currentProjectId + "\\" + heightMapPath);
+			heightMapPath = string("projects\\" + getCurrentProjectId() + "\\" + heightMapPath);
 		}
 
 		_fe3d->terrain_create(terrainId, heightMapPath);
@@ -313,7 +313,7 @@ const bool TerrainEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					diffuseMapPath = string("projects\\" + _currentProjectId + "\\" + diffuseMapPath);
+					diffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 				}
 
 				_fe3d->terrain_setDiffuseMap(terrainId, diffuseMapPath);
@@ -323,7 +323,7 @@ const bool TerrainEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					normalMapPath = string("projects\\" + _currentProjectId + "\\" + normalMapPath);
+					normalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
 				}
 
 				_fe3d->terrain_setNormalMap(terrainId, normalMapPath);
@@ -333,7 +333,7 @@ const bool TerrainEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					redNormalMapPath = string("projects\\" + _currentProjectId + "\\" + redNormalMapPath);
+					redNormalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + redNormalMapPath);
 				}
 
 				_fe3d->terrain_setRedNormalMap(terrainId, redNormalMapPath);
@@ -343,7 +343,7 @@ const bool TerrainEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					greenNormalMapPath = string("projects\\" + _currentProjectId + "\\" + greenNormalMapPath);
+					greenNormalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + greenNormalMapPath);
 				}
 
 				_fe3d->terrain_setGreenNormalMap(terrainId, greenNormalMapPath);
@@ -353,7 +353,7 @@ const bool TerrainEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					blueNormalMapPath = string("projects\\" + _currentProjectId + "\\" + blueNormalMapPath);
+					blueNormalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + blueNormalMapPath);
 				}
 
 				_fe3d->terrain_setBlueNormalMap(terrainId, blueNormalMapPath);
@@ -363,7 +363,7 @@ const bool TerrainEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					blendMapPath = string("projects\\" + _currentProjectId + "\\" + blendMapPath);
+					blendMapPath = string("projects\\" + getCurrentProjectId() + "\\" + blendMapPath);
 				}
 
 				_fe3d->terrain_setBlendMap(terrainId, blendMapPath);
@@ -373,7 +373,7 @@ const bool TerrainEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					redDiffuseMapPath = string("projects\\" + _currentProjectId + "\\" + redDiffuseMapPath);
+					redDiffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + redDiffuseMapPath);
 				}
 
 				_fe3d->terrain_setRedDiffuseMap(terrainId, redDiffuseMapPath);
@@ -383,7 +383,7 @@ const bool TerrainEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					greenDiffuseMapPath = string("projects\\" + _currentProjectId + "\\" + greenDiffuseMapPath);
+					greenDiffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + greenDiffuseMapPath);
 				}
 
 				_fe3d->terrain_setGreenDiffuseMap(terrainId, greenDiffuseMapPath);
@@ -393,7 +393,7 @@ const bool TerrainEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					blueDiffuseMapPath = string("projects\\" + _currentProjectId + "\\" + blueDiffuseMapPath);
+					blueDiffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + blueDiffuseMapPath);
 				}
 
 				_fe3d->terrain_setBlueDiffuseMap(terrainId, blueDiffuseMapPath);

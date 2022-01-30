@@ -11,7 +11,7 @@ using std::ofstream;
 
 const bool WorldEditor::saveCustomWorldToFile()
 {
-	//if(_currentProjectId.empty())
+	//if(getCurrentProjectId().empty())
 	//{
 	//	Logger::throwError("WorldEditor::saveCustomWorldToFile::1");
 	//}
@@ -28,7 +28,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 	//const auto rootPath = Tools::getRootDirectoryPath();
 	//const auto filePath = (rootPath + (Config::getInst().isApplicationExported() ? "" :
-	//					   ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\" + _customWorldId + ".fe3d");
+	//					   ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\custom\\" + _customWorldId + ".fe3d");
 
 	//ofstream file(filePath);
 

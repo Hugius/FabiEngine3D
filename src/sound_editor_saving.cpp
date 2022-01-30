@@ -13,19 +13,19 @@ const bool SoundEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectId.empty())
+	if(getCurrentProjectId().empty())
 	{
 		Logger::throwError("SoundEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\sound.fe3d");
+	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\sound.fe3d");
 
 	for(const auto& soundId : _loadedSoundIds)
 	{
 		auto audioPath = _fe3d->sound2d_getAudioPath(soundId);
 
-		audioPath = string(audioPath.empty() ? "" : audioPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+		audioPath = string(audioPath.empty() ? "" : audioPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		audioPath = (audioPath.empty()) ? "?" : audioPath;
 

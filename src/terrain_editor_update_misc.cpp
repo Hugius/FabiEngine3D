@@ -87,13 +87,13 @@ void TerrainEditor::_updateTerrainCreating()
 				return;
 			}
 
-			if(_currentProjectId.empty())
+			if(getCurrentProjectId().empty())
 			{
 				Logger::throwError("TerrainEditor::_updateTerrainCreating");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\image\\entity\\terrain\\height_map\\");
+			const auto targetDirectoryPath = string("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\terrain\\height_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

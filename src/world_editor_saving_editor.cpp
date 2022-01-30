@@ -15,13 +15,13 @@ const bool WorldEditor::saveEditorWorldToFile()
 		return false;
 	}
 
-	if(_currentProjectId.empty())
+	if(getCurrentProjectId().empty())
 	{
 		Logger::throwError("WorldEditor::saveEditorWorldToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\worlds\\editor\\" + _currentWorldId + ".fe3d");
+	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\worlds\\editor\\" + _currentWorldId + ".fe3d");
 
 	vector<string> levelOfDetailEntityIds;
 	for(const auto& modelId : _fe3d->model_getIds())
@@ -375,7 +375,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto intensity = _fe3d->gfx_getLensFlareIntensity();
 		auto sensitivity = _fe3d->gfx_getLensFlareSensitivity();
 
-		flareMapPath = string(flareMapPath.empty() ? "" : flareMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+		flareMapPath = string(flareMapPath.empty() ? "" : flareMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
 

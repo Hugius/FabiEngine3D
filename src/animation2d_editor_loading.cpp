@@ -9,7 +9,7 @@ using std::istringstream;
 
 const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
+	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		Logger::throwError("Animation2dEditor::loadFromFile");
 	}
@@ -18,7 +18,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\animation2d.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\animation2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -51,7 +51,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 
 		if(!Config::getInst().isApplicationExported())
 		{
-			previewTexturePath = string("projects\\" + _currentProjectId + "\\" + previewTexturePath);
+			previewTexturePath = string("projects\\" + getCurrentProjectId() + "\\" + previewTexturePath);
 		}
 
 		auto newAnimation = make_shared<Animation2d>(animationId);

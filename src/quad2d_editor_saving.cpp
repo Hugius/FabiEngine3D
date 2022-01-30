@@ -13,13 +13,13 @@ const bool Quad2dEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectId.empty())
+	if(getCurrentProjectId().empty())
 	{
 		Logger::throwError("Quad2dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\quad2d.fe3d");
+	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\quad2d.fe3d");
 
 	for(const auto& quadId : _loadedQuadIds)
 	{
@@ -27,7 +27,7 @@ const bool Quad2dEditor::saveToFile() const
 		auto color = _fe3d->quad2d_getColor(quadId);
 		auto opacity = _fe3d->quad2d_getOpacity(quadId);
 
-		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 

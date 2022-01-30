@@ -14,13 +14,13 @@ const bool Quad3dEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectId.empty())
+	if(getCurrentProjectId().empty())
 	{
 		Logger::throwError("Quad3dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\quad3d.fe3d");
+	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\quad3d.fe3d");
 
 	for(const auto& quadId : _loadedQuadIds)
 	{
@@ -38,8 +38,8 @@ const bool Quad3dEditor::saveToFile() const
 		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(quadId);
 		auto opacity = _fe3d->quad3d_getOpacity(quadId);
 
-		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;

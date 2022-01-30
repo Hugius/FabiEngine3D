@@ -13,13 +13,13 @@ const bool Text2dEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectId.empty())
+	if(getCurrentProjectId().empty())
 	{
 		Logger::throwError("Text2dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\text2d.fe3d");
+	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\text2d.fe3d");
 
 	for(const auto& textId : _loadedTextIds)
 	{
@@ -27,7 +27,7 @@ const bool Text2dEditor::saveToFile() const
 		auto color = _fe3d->text2d_getColor(textId);
 		auto opacity = _fe3d->text2d_getOpacity(textId);
 
-		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
 

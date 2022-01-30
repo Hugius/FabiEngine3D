@@ -16,13 +16,13 @@ const bool ModelEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectId.empty())
+	if(getCurrentProjectId().empty())
 	{
 		Logger::throwError("ModelEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\model.fe3d");
+	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\model.fe3d");
 
 	for(const auto& modelId : _loadedModelIds)
 	{
@@ -35,7 +35,7 @@ const bool ModelEditor::saveToFile() const
 		auto isShadowed = _fe3d->model_isShadowed(modelId);
 		auto isReflected = _fe3d->model_isReflected(modelId);
 
-		meshPath = string(meshPath.empty() ? "" : meshPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+		meshPath = string(meshPath.empty() ? "" : meshPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
 		levelOfDetailEntityId = (levelOfDetailEntityId.empty()) ? "?" : levelOfDetailEntityId;
@@ -81,11 +81,11 @@ const bool ModelEditor::saveToFile() const
 			auto opacity = _fe3d->model_getOpacity(modelId, partId);
 			auto minTextureAlpha = _fe3d->model_getMinTextureAlpha(modelId, partId);
 
-			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-			emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-			specularMapPath = string(specularMapPath.empty() ? "" : specularMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-			reflectionMapPath = string(reflectionMapPath.empty() ? "" : reflectionMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-			normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+			emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+			specularMapPath = string(specularMapPath.empty() ? "" : specularMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+			reflectionMapPath = string(reflectionMapPath.empty() ? "" : reflectionMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+			normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
 
 			partId = (partId.empty()) ? "?" : partId;
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;

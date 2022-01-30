@@ -14,13 +14,13 @@ const bool Animation3dEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectId.empty())
+	if(getCurrentProjectId().empty())
 	{
 		Logger::throwError("Animation3dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\animation3d.fe3d");
+	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation3d.fe3d");
 
 	for(const auto& animation : _animations)
 	{

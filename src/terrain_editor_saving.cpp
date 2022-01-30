@@ -15,7 +15,7 @@ const bool TerrainEditor::saveToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\terrain.fe3d");
+	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\terrain.fe3d");
 
 	for(const auto& terrainId : _loadedTerrainIds)
 	{
@@ -39,16 +39,16 @@ const bool TerrainEditor::saveToFile() const
 		auto blueTextureRepeat = _fe3d->terrain_getBlueTextureRepeat(terrainId);
 		auto isSpecular = _fe3d->terrain_isSpecular(terrainId);
 
-		heightMapPath = string(heightMapPath.empty() ? "" : heightMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-		blendMapPath = string(blendMapPath.empty() ? "" : blendMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-		redDiffuseMapPath = string(redDiffuseMapPath.empty() ? "" : redDiffuseMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-		greenDiffuseMapPath = string(greenDiffuseMapPath.empty() ? "" : greenDiffuseMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-		blueDiffuseMapPath = string(blueDiffuseMapPath.empty() ? "" : blueDiffuseMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-		redNormalMapPath = string(redNormalMapPath.empty() ? "" : redNormalMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-		greenNormalMapPath = string(greenNormalMapPath.empty() ? "" : greenNormalMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
-		blueNormalMapPath = string(blueNormalMapPath.empty() ? "" : blueNormalMapPath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+		heightMapPath = string(heightMapPath.empty() ? "" : heightMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		blendMapPath = string(blendMapPath.empty() ? "" : blendMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		redDiffuseMapPath = string(redDiffuseMapPath.empty() ? "" : redDiffuseMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		greenDiffuseMapPath = string(greenDiffuseMapPath.empty() ? "" : greenDiffuseMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		blueDiffuseMapPath = string(blueDiffuseMapPath.empty() ? "" : blueDiffuseMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		redNormalMapPath = string(redNormalMapPath.empty() ? "" : redNormalMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		greenNormalMapPath = string(greenNormalMapPath.empty() ? "" : greenNormalMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		blueNormalMapPath = string(blueNormalMapPath.empty() ? "" : blueNormalMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		heightMapPath = (heightMapPath.empty()) ? "?" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;

@@ -13,13 +13,13 @@ const bool Animation2dEditor::saveToFile() const
 		return false;
 	}
 
-	if(_currentProjectId.empty())
+	if(getCurrentProjectId().empty())
 	{
 		Logger::throwError("Animation2dEditor::saveToFile");
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + _currentProjectId + "\\data\\animation2d.fe3d");
+	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation2d.fe3d");
 
 	for(const auto& animation : _animations)
 	{
@@ -31,7 +31,7 @@ const bool Animation2dEditor::saveToFile() const
 
 		if(!previewTexturePath.empty())
 		{
-			previewTexturePath = string(previewTexturePath.empty() ? "" : previewTexturePath.substr(string("projects\\" + _currentProjectId + "\\").size()));
+			previewTexturePath = string(previewTexturePath.empty() ? "" : previewTexturePath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
 
 			previewTexturePath = (previewTexturePath.empty()) ? "?" : previewTexturePath;
 

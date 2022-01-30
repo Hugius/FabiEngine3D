@@ -12,14 +12,14 @@ using std::istringstream;
 
 const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
+	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		Logger::throwError("WorldEditor::loadEditorWorldFromFile::1");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\editor\\" + fileName + ".fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\" + fileName + ".fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -565,7 +565,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(!Config::getInst().isApplicationExported())
 			{
-				flareMapPath = string("projects\\" + _currentProjectId + "\\" + flareMapPath);
+				flareMapPath = string("projects\\" + getCurrentProjectId() + "\\" + flareMapPath);
 			}
 
 			_fe3d->gfx_enableLensFlare();

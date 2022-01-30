@@ -12,7 +12,7 @@ using std::istringstream;
 
 const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 {
-	//if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
+	//if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	//{
 	//	Logger::throwError("WorldEditor::loadCustomWorldFromFile::1");
 	//}
@@ -23,7 +23,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//const auto rootPath = Tools::getRootDirectoryPath();
 	//const auto filePath = (rootPath + (Config::getInst().isApplicationExported() ? "" :
-	//					   ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\" + fileName + ".fe3d");
+	//					   ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\custom\\" + fileName + ".fe3d");
 
 	//auto file = ifstream(filePath);
 	//if(!file)

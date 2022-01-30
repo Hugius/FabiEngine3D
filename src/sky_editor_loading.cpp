@@ -11,14 +11,14 @@ using std::istringstream;
 
 const vector<string> SkyEditor::getImagePathsFromFile() const
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
+	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		Logger::throwError("SkyEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\sky.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sky.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -55,7 +55,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					cubeMapPath = string("projects\\" + _currentProjectId + "\\" + cubeMapPath);
+					cubeMapPath = string("projects\\" + getCurrentProjectId() + "\\" + cubeMapPath);
 				}
 
 				imagePaths.push_back(cubeMapPath);
@@ -70,7 +70,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 
 const bool SkyEditor::loadFromFile()
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectId.empty())
+	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		Logger::throwError("SkyEditor::loadFromFile");
 	}
@@ -79,7 +79,7 @@ const bool SkyEditor::loadFromFile()
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "data\\sky.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sky.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -123,7 +123,7 @@ const bool SkyEditor::loadFromFile()
 			{
 				if(!Config::getInst().isApplicationExported())
 				{
-					cubeMapPath = string("projects\\" + _currentProjectId + "\\" + cubeMapPath);
+					cubeMapPath = string("projects\\" + getCurrentProjectId() + "\\" + cubeMapPath);
 				}
 			}
 		}

@@ -44,7 +44,7 @@ void Quad2dEditor::_updateQuadCreating()
 				return;
 			}
 
-			if(_currentProjectId.empty())
+			if(getCurrentProjectId().empty())
 			{
 				Logger::throwError("Quad2dEditor::_updateQuadCreating");
 			}

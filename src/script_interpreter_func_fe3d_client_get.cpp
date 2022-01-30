@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:client_is_valid_server_ip")
 	{
@@ -10,9 +10,9 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = _fe3d->client_isValidServerIP(args[0].getString());
+			const auto result = _fe3d->client_isValidServerIP(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:client_is_running")
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 		{
 			const auto result = _fe3d->client_isRunning();
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:client_is_connecting")
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 		{
 			const auto result = _fe3d->client_isConnecting();
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:client_is_connected")
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 		{
 			const auto result = _fe3d->client_isConnected();
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:client_is_accepted")
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 		{
 			const auto result = _fe3d->client_isAccepted();
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:client_get_pending_protocols")
@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 			{
 				const auto result = string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP");
 
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 			{
 				const auto result = message.getContent();
 
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 		{
 			const auto result = _fe3d->client_getPingLatency();
 
-			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
 	else if(functionName == "fe3d:client_get_server_ip")
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 		{
 			const auto result = _fe3d->client_getServerIP();
 
-			returnValues.push_back(ScriptValue(SVT::STRING, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:client_get_username")
@@ -99,7 +99,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 		{
 			const auto result = _fe3d->client_getUsername();
 
-			returnValues.push_back(ScriptValue(SVT::STRING, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
 	else

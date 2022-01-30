@@ -3,7 +3,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:pointlight_place")
 	{
@@ -11,24 +11,24 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_validateFe3dId(args[0].getString()))
+			if(!_validateFe3dId(args[0]->getString()))
 			{
 				return true;
 			}
 
-			if(_fe3d->pointlight_isExisting(args[0].getString()))
+			if(_fe3d->pointlight_isExisting(args[0]->getString()))
 			{
 				_throwScriptError("pointlight already exists!");
 				return true;
 			}
 
-			_fe3d->pointlight_create(args[0].getString());
-			_fe3d->pointlight_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
-			_fe3d->pointlight_setRadius(args[0].getString(), fvec3(args[4].getDecimal(), args[5].getDecimal(), args[6].getDecimal()));
-			_fe3d->pointlight_setColor(args[0].getString(), fvec3(args[7].getDecimal(), args[8].getDecimal(), args[9].getDecimal()));
-			_fe3d->pointlight_setIntensity(args[0].getString(), args[10].getDecimal());
+			_fe3d->pointlight_create(args[0]->getString());
+			_fe3d->pointlight_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
+			_fe3d->pointlight_setRadius(args[0]->getString(), fvec3(args[4]->getDecimal(), args[5]->getDecimal(), args[6]->getDecimal()));
+			_fe3d->pointlight_setColor(args[0]->getString(), fvec3(args[7]->getDecimal(), args[8]->getDecimal(), args[9]->getDecimal()));
+			_fe3d->pointlight_setIntensity(args[0]->getString(), args[10]->getDecimal());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:pointlight_delete")
@@ -37,11 +37,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0].getString()))
+			if(_validateFe3dPointlight(args[0]->getString()))
 			{
-				_fe3d->pointlight_delete(args[0].getString());
+				_fe3d->pointlight_delete(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -57,7 +57,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 				}
 			}
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:pointlight_set_visible")
@@ -66,11 +66,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0].getString()))
+			if(_validateFe3dPointlight(args[0]->getString()))
 			{
-				_fe3d->pointlight_setVisible(args[0].getString(), args[1].getBoolean());
+				_fe3d->pointlight_setVisible(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -80,11 +80,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0].getString()))
+			if(_validateFe3dPointlight(args[0]->getString()))
 			{
-				_fe3d->pointlight_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->pointlight_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -94,11 +94,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0].getString()))
+			if(_validateFe3dPointlight(args[0]->getString()))
 			{
-				_fe3d->pointlight_move(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->pointlight_move(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -108,11 +108,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0].getString()))
+			if(_validateFe3dPointlight(args[0]->getString()))
 			{
-				_fe3d->pointlight_moveTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+				_fe3d->pointlight_moveTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -122,11 +122,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0].getString()))
+			if(_validateFe3dPointlight(args[0]->getString()))
 			{
-				_fe3d->pointlight_setRadius(args[0].getString(), args[1].getDecimal());
+				_fe3d->pointlight_setRadius(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -136,11 +136,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0].getString()))
+			if(_validateFe3dPointlight(args[0]->getString()))
 			{
-				_fe3d->pointlight_setColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->pointlight_setColor(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -150,11 +150,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0].getString()))
+			if(_validateFe3dPointlight(args[0]->getString()))
 			{
-				_fe3d->pointlight_setIntensity(args[0].getString(), args[1].getDecimal());
+				_fe3d->pointlight_setIntensity(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -164,25 +164,25 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(args[0].getString()))
+			if(_validateFe3dPointlight(args[0]->getString()))
 			{
-				if(args[1].getString() == "CIRCLE")
+				if(args[1]->getString() == "CIRCLE")
 				{
-					_fe3d->pointlight_setShape(args[0].getString(), PointlightShape::CIRCLE);
+					_fe3d->pointlight_setShape(args[0]->getString(), PointlightShape::CIRCLE);
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
-				else if(args[1].getString() == "SQUARE")
+				else if(args[1]->getString() == "SQUARE")
 				{
-					_fe3d->pointlight_setShape(args[0].getString(), PointlightShape::SQUARE);
+					_fe3d->pointlight_setShape(args[0]->getString(), PointlightShape::SQUARE);
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 				else
 				{
 					Logger::throwWarning("invalid shape!");
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}

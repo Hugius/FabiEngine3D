@@ -1,17 +1,15 @@
 #include "script_variable.hpp"
 #include "logger.hpp"
 
-ScriptVariable::ScriptVariable(const string& id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, const vector<ScriptValue>& values)
+ScriptVariable::ScriptVariable(const string& id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>>& values)
 	:
 	_scope(scope),
 	_type(type),
 	_id(id),
-	_isConstant(isConstant)
+	_isConstant(isConstant),
+	_values(values)
 {
-	for(const auto& value : values)
-	{
-		_values.push_back(make_shared<ScriptValue>(value));
-	}
+
 }
 
 const string& ScriptVariable::getId() const
@@ -34,35 +32,38 @@ const bool ScriptVariable::isConstant() const
 	return _isConstant;
 }
 
-void ScriptVariable::setValues(vector<ScriptValue> values)
+void ScriptVariable::setValues(const vector<shared_ptr<ScriptValue>>& values)
 {
-	_values.clear();
-
-	for(const auto& value : values)
-	{
-		_values.push_back(make_shared<ScriptValue>(value));
-	}
+	_values = values;
 }
 
-void ScriptVariable::setValue(ScriptValue value, unsigned int index)
+void ScriptVariable::setValue(shared_ptr<ScriptValue> value, unsigned int index)
 {
+	if(index >= _values.size())
+	{
+		Logger::throwError("");
+	}
+
 	if(_isConstant)
 	{
 		Logger::throwError("ScriptVariable::changeValue");
 	}
 
-	_values.erase(_values.begin() + index);
-
-	_values.insert(_values.begin() + index, make_shared<ScriptValue>(value));
+	_values[index] = value;
 }
 
-void ScriptVariable::addValue(ScriptValue value)
+void ScriptVariable::addValue(shared_ptr<ScriptValue> value)
 {
-	_values.push_back(make_shared<ScriptValue>(value));
+	_values.push_back(value);
 }
 
 void ScriptVariable::deleteValue(unsigned int index)
 {
+	if(index >= _values.size())
+	{
+		Logger::throwError("");
+	}
+
 	_values.erase(_values.begin() + index);
 }
 
@@ -71,14 +72,14 @@ void ScriptVariable::deleteValues()
 	_values.clear();
 }
 
-ScriptValue& ScriptVariable::getValue(unsigned int index) const
+shared_ptr<ScriptValue> ScriptVariable::getValue(unsigned int index) const
 {
 	if(index >= _values.size())
 	{
-		Logger::throwError("ScriptVariable::getValue");
+		Logger::throwError("");
 	}
 
-	return *_values[index];
+	return _values[index];
 }
 
 const unsigned int ScriptVariable::getValueCount() const

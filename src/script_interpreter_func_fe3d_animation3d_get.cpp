@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:animation3d_is_model_started")
 	{
@@ -10,11 +10,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				const auto result = _animation3dEditor->isModelAnimationStarted(args[0].getString(), args[1].getString());
+				const auto result = _animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -24,11 +24,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				const auto result = _animation3dEditor->isModelAnimationPlaying(args[0].getString(), args[1].getString());
+				const auto result = _animation3dEditor->isModelAnimationPlaying(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -38,11 +38,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				const auto result = _animation3dEditor->isModelAnimationAutopaused(args[0].getString(), args[1].getString());
+				const auto result = _animation3dEditor->isModelAnimationAutopaused(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -52,11 +52,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				const auto result = _animation3dEditor->isModelAnimationPaused(args[0].getString(), args[1].getString());
+				const auto result = _animation3dEditor->isModelAnimationPaused(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -66,11 +66,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				const auto result = _animation3dEditor->getModelAnimationSpeed(args[0].getString(), args[1].getString());
+				const auto result = _animation3dEditor->getModelAnimationSpeed(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -80,11 +80,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				const auto result = _animation3dEditor->getModelAnimationPlayCount(args[0].getString(), args[1].getString());
+				const auto result = _animation3dEditor->getModelAnimationPlayCount(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
@@ -94,11 +94,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
-				const auto result = _animation3dEditor->getModelAnimationFrameIndex(args[0].getString(), args[1].getString());
+				const auto result = _animation3dEditor->getModelAnimationFrameIndex(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
 	}

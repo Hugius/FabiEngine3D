@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:client_start")
 	{
@@ -10,9 +10,9 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->client_start(args[0].getString());
+			_fe3d->client_start(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:client_connect")
@@ -21,9 +21,9 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->client_connect(args[0].getString());
+			_fe3d->client_connect(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:client_disconnect")
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 		{
 			_fe3d->client_disconnect();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:client_stop")
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 		{
 			_fe3d->client_stop();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:client_send_tcp_message")
@@ -50,9 +50,9 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->client_sendTcpMessage(args[0].getString());
+			_fe3d->client_sendTcpMessage(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:client_send_udp_message")
@@ -61,9 +61,9 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->client_sendUdpMessage(args[0].getString());
+			_fe3d->client_sendUdpMessage(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else

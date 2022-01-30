@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:server_start")
 	{
@@ -22,9 +22,9 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 				return true;
 			}
 
-			_fe3d->server_start(args[0].getInteger());
+			_fe3d->server_start(args[0]->getInteger());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:server_send_tcp_message")
@@ -33,9 +33,9 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->server_sendTcpMessage(args[0].getString(), args[1].getString());
+			_fe3d->server_sendTcpMessage(args[0]->getString(), args[1]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:server_send_udp_message")
@@ -44,9 +44,9 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->server_sendUdpMessage(args[0].getString(), args[1].getString());
+			_fe3d->server_sendUdpMessage(args[0]->getString(), args[1]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:server_broadcast_tcp_message")
@@ -55,9 +55,9 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->server_broadcastTcpMessage(args[0].getString(), args[1].getString());
+			_fe3d->server_broadcastTcpMessage(args[0]->getString(), args[1]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:server_broadcast_udp_message")
@@ -66,9 +66,9 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->server_broadcastUdpMessage(args[0].getString(), args[1].getString());
+			_fe3d->server_broadcastUdpMessage(args[0]->getString(), args[1]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:server_disconnect_client")
@@ -77,9 +77,9 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->server_disconnectClient(args[0].getString());
+			_fe3d->server_disconnectClient(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:server_disconnect_clients")
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 		{
 			_fe3d->server_disconnectClients();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else

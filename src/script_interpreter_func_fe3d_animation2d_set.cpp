@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:animation2d_quad3d_start")
 	{
@@ -10,11 +10,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
-				_animation2dEditor->startQuad3dAnimation(args[0].getString(), args[1].getString(), args[2].getInteger());
+				_animation2dEditor->startQuad3dAnimation(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -24,11 +24,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
-				_animation2dEditor->pauseQuad3dAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->pauseQuad3dAnimation(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -36,11 +36,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
 				_animation2dEditor->pauseQuad3dAnimations();
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -50,11 +50,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
-				_animation2dEditor->autopauseQuad3dAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->autopauseQuad3dAnimation(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -62,11 +62,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
 				_animation2dEditor->autopauseQuad3dAnimations();
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -76,11 +76,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
-				_animation2dEditor->resumeQuad3dAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->resumeQuad3dAnimation(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -88,11 +88,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
 				_animation2dEditor->resumeQuad3dAnimations();
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -102,11 +102,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
-				_animation2dEditor->stopQuad3dAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->stopQuad3dAnimation(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -114,11 +114,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
 				_animation2dEditor->stopQuad3dAnimations();
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -128,11 +128,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad3d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
-				_animation2dEditor->setQuad3dAnimationInterval(args[0].getString(), args[1].getString(), args[1].getInteger());
+				_animation2dEditor->setQuad3dAnimationInterval(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -142,11 +142,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				_animation2dEditor->startQuad2dAnimation(args[0].getString(), args[1].getString(), args[2].getInteger());
+				_animation2dEditor->startQuad2dAnimation(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -156,11 +156,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				_animation2dEditor->pauseQuad2dAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->pauseQuad2dAnimation(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -168,11 +168,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
 				_animation2dEditor->pauseQuad2dAnimations();
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -182,11 +182,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				_animation2dEditor->autopauseQuad2dAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->autopauseQuad2dAnimation(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -194,11 +194,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
 				_animation2dEditor->autopauseQuad2dAnimations();
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -208,11 +208,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				_animation2dEditor->resumeQuad2dAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->resumeQuad2dAnimation(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -220,11 +220,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
 				_animation2dEditor->resumeQuad2dAnimations();
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -234,11 +234,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				_animation2dEditor->stopQuad2dAnimation(args[0].getString(), args[1].getString());
+				_animation2dEditor->stopQuad2dAnimation(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -246,11 +246,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
 				_animation2dEditor->stopQuad2dAnimations();
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -260,11 +260,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad2d(args[1].getString(), false))
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
-				_animation2dEditor->setQuad2dAnimationInterval(args[0].getString(), args[1].getString(), args[1].getInteger());
+				_animation2dEditor->setQuad2dAnimationInterval(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}

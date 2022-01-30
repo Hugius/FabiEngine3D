@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:quad3d_place")
 	{
@@ -10,22 +10,22 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_validateFe3dId(args[0].getString()))
+			if(!_validateFe3dId(args[0]->getString()))
 			{
 				return true;
 			}
 
-			if(_fe3d->quad3d_isExisting(args[0].getString()))
+			if(_fe3d->quad3d_isExisting(args[0]->getString()))
 			{
 				_throwScriptError("quad3d already exists!");
 				return true;
 			}
 
-			if(_validateFe3dQuad3d(args[1].getString(), true))
+			if(_validateFe3dQuad3d(args[1]->getString(), true))
 			{
-				_worldEditor->copyTemplateQuad3d(args[0].getString(), ("@" + args[1].getString()), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+				_worldEditor->copyTemplateQuad3d(args[0]->getString(), ("@" + args[1]->getString()), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -35,11 +35,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_delete(args[0].getString());
+				_fe3d->quad3d_delete(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 				}
 			}
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:quad3d_set_visible")
@@ -64,11 +64,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setVisible(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad3d_setVisible(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -78,11 +78,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setDiffuseMap(args[0].getString(), args[1].getString());
+				_fe3d->quad3d_setDiffuseMap(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -92,11 +92,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setEmissionMap(args[0].getString(), args[1].getString());
+				_fe3d->quad3d_setEmissionMap(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -106,11 +106,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad3d_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -120,11 +120,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setRotation(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad3d_setRotation(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -134,11 +134,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setSize(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->quad3d_setSize(args[0]->getString(), fvec2(args[1]->getDecimal(), args[2]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -148,11 +148,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_move(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad3d_move(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -162,11 +162,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_rotate(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad3d_rotate(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -176,11 +176,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_scale(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->quad3d_scale(args[0]->getString(), fvec2(args[1]->getDecimal(), args[2]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -190,11 +190,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_moveTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+				_fe3d->quad3d_moveTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -204,11 +204,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_rotateTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+				_fe3d->quad3d_rotateTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -218,11 +218,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_scaleTo(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()), args[3].getDecimal());
+				_fe3d->quad3d_scaleTo(args[0]->getString(), fvec2(args[1]->getDecimal(), args[2]->getDecimal()), args[3]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -232,11 +232,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad3d_setColor(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -246,11 +246,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setWireframeColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->quad3d_setWireframeColor(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -260,11 +260,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setMinHeight(args[0].getString(), args[1].getDecimal());
+				_fe3d->quad3d_setMinHeight(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -274,11 +274,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setMaxHeight(args[0].getString(), args[1].getDecimal());
+				_fe3d->quad3d_setMaxHeight(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -288,11 +288,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setOpacity(args[0].getString(), args[1].getDecimal());
+				_fe3d->quad3d_setOpacity(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -302,11 +302,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setEmissionIntensity(args[0].getString(), args[1].getDecimal());
+				_fe3d->quad3d_setEmissionIntensity(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -316,11 +316,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setTextureRepeat(args[0].getString(), args[1].getDecimal());
+				_fe3d->quad3d_setTextureRepeat(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -330,11 +330,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setLightness(args[0].getString(), args[1].getDecimal());
+				_fe3d->quad3d_setLightness(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -344,22 +344,22 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::QUAD3D);
+				auto aabbIds = _fe3d->aabb_getChildIds(args[0]->getString(), AabbParentEntityType::QUAD3D);
 
 				if(aabbIds.empty())
 				{
-					_throwScriptError("quad3d with id \"" + args[0].getString() + "\" has no bound AABBs!");
+					_throwScriptError("quad3d with id \"" + args[0]->getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
 				for(const auto& id : aabbIds)
 				{
-					_fe3d->aabb_setRaycastResponsive(id, args[1].getBoolean());
+					_fe3d->aabb_setRaycastResponsive(id, args[1]->getBoolean());
 				}
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -369,22 +369,22 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::QUAD3D);
+				auto aabbIds = _fe3d->aabb_getChildIds(args[0]->getString(), AabbParentEntityType::QUAD3D);
 
 				if(aabbIds.empty())
 				{
-					_throwScriptError("quad3d with id \"" + args[0].getString() + "\" has no bound AABBs!");
+					_throwScriptError("quad3d with id \"" + args[0]->getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
 				for(const auto& id : aabbIds)
 				{
-					_fe3d->aabb_setCollisionResponsive(id, args[1].getBoolean());
+					_fe3d->aabb_setCollisionResponsive(id, args[1]->getBoolean());
 				}
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -394,11 +394,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setShadowed(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad3d_setShadowed(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -408,11 +408,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setReflected(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad3d_setReflected(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -422,11 +422,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setBright(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad3d_setBright(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -436,11 +436,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setWireframed(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad3d_setWireframed(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -450,11 +450,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setFrozen(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad3d_setFrozen(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -464,11 +464,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setFacingCameraHorizontally(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad3d_setFacingCameraHorizontally(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -478,11 +478,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setFacingCameraVertically(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad3d_setFacingCameraVertically(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -492,11 +492,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setUvMultiplier(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->quad3d_setUvMultiplier(args[0]->getString(), fvec2(args[1]->getDecimal(), args[2]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -506,11 +506,11 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad3d(args[0].getString(), false))
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setUvOffset(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->quad3d_setUvOffset(args[0]->getString(), fvec2(args[1]->getDecimal(), args[2]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}

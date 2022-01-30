@@ -4,7 +4,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:world_load")
 	{
@@ -13,9 +13,9 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_worldEditor->unloadEditorWorld();
-			_worldEditor->loadEditorWorldFromFile(args[0].getString());
+			_worldEditor->loadEditorWorldFromFile(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_clear")
@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		{
 			_worldEditor->unloadEditorWorld();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom")
@@ -33,9 +33,9 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor->createCustomWorld(args[0].getString());
+			_worldEditor->createCustomWorld(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_sky")
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		{
 			_worldEditor->addSkyToCustomWorld();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_terrain")
@@ -53,7 +53,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		{
 			_worldEditor->addTerrainToCustomWorld();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_water")
@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		{
 			_worldEditor->addWaterToCustomWorld();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_model")
@@ -71,9 +71,9 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor->addModelToCustomWorld(args[0].getString());
+			_worldEditor->addModelToCustomWorld(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_quad3d")
@@ -82,9 +82,9 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor->addQuad3dToCustomWorld(args[0].getString());
+			_worldEditor->addQuad3dToCustomWorld(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_aabb")
@@ -93,9 +93,9 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor->addAabbToCustomWorld(args[0].getString());
+			_worldEditor->addAabbToCustomWorld(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_sound")
@@ -104,9 +104,9 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor->addSoundToCustomWorld(args[0].getString());
+			_worldEditor->addSoundToCustomWorld(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_light")
@@ -115,9 +115,9 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor->addPointlightToCustomWorld(args[0].getString());
+			_worldEditor->addPointlightToCustomWorld(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_reflection")
@@ -126,9 +126,9 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor->addReflectionToCustomWorld(args[0].getString());
+			_worldEditor->addReflectionToCustomWorld(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_lighting")
@@ -137,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		{
 			_worldEditor->addLightingToCustomWorld();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_add_custom_graphics")
@@ -146,7 +146,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		{
 			_worldEditor->addGraphicsToCustomWorld();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_save_custom")
@@ -155,7 +155,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		{
 			_worldEditor->saveCustomWorldToFile();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_load_custom")
@@ -165,9 +165,9 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_worldEditor->unloadEditorWorld();
-			_worldEditor->loadCustomWorldFromFile(args[0].getString());
+			_worldEditor->loadCustomWorldFromFile(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:world_delete_custom")
@@ -179,17 +179,17 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\");
-			const auto filePath = string(directoryPath + args[0].getString() + ".fe3d");
+			const auto filePath = string(directoryPath + args[0]->getString() + ".fe3d");
 
 			if(Tools::isFileExisting(filePath))
 			{
 				const auto temp = remove(filePath.c_str());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 			else
 			{
-				_throwScriptError("cannot delete custom world \"" + args[0].getString() + "\"!");
+				_throwScriptError("cannot delete custom world \"" + args[0]->getString() + "\"!");
 			}
 		}
 	}

@@ -4,7 +4,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:world_get_current_id")
 	{
@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName
 		{
 			const auto result = _worldEditor->getLoadedWorldId();
 
-			returnValues.push_back(ScriptValue(SVT::STRING, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:world_is_custom_existing")
@@ -24,11 +24,11 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\");
-			const auto filePath = string(directoryPath + args[0].getString() + ".fe3d");
+			const auto filePath = string(directoryPath + args[0]->getString() + ".fe3d");
 
 			const auto result = Tools::isFileExisting(filePath);
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else

@@ -3,7 +3,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:model_place")
 	{
@@ -11,22 +11,22 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_validateFe3dId(args[0].getString()))
+			if(!_validateFe3dId(args[0]->getString()))
 			{
 				return true;
 			}
 
-			if(_fe3d->model_isExisting(args[0].getString()))
+			if(_fe3d->model_isExisting(args[0]->getString()))
 			{
 				_throwScriptError("model already exists!");
 				return true;
 			}
 
-			if(_validateFe3dModel(args[1].getString(), true))
+			if(_validateFe3dModel(args[1]->getString(), true))
 			{
-				_worldEditor->copyTemplateModel(args[0].getString(), ("@" + args[1].getString()), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+				_worldEditor->copyTemplateModel(args[0]->getString(), ("@" + args[1]->getString()), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -36,11 +36,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_delete(args[0].getString());
+				_fe3d->model_delete(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 				}
 			}
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:model_set_visible")
@@ -65,11 +65,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setVisible(args[0].getString(), args[1].getBoolean());
+				_fe3d->model_setVisible(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -79,13 +79,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setFaceCulled(args[0].getString(), args[1].getString(), args[2].getBoolean());
+					_fe3d->model_setFaceCulled(args[0]->getString(), args[1]->getString(), args[2]->getBoolean());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -96,11 +96,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setLevelOfDetailSize(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->model_setLevelOfDetailSize(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -110,11 +110,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setBasePosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->model_setBasePosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -124,11 +124,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setBaseRotation(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->model_setBaseRotation(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -138,11 +138,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setBaseRotationOrigin(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->model_setBaseRotationOrigin(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -152,11 +152,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setBaseSize(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->model_setBaseSize(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -166,13 +166,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setPartPosition(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					_fe3d->model_setPartPosition(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -183,13 +183,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setPartRotation(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					_fe3d->model_setPartRotation(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -200,13 +200,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setPartRotationOrigin(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					_fe3d->model_setPartRotationOrigin(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -217,13 +217,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setPartSize(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					_fe3d->model_setPartSize(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -234,11 +234,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_moveBase(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->model_moveBase(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -248,10 +248,10 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_rotateBase(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				_fe3d->model_rotateBase(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -261,11 +261,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_scaleBase(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->model_scaleBase(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -275,13 +275,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_movePart(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					_fe3d->model_movePart(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -292,13 +292,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_rotatePart(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					_fe3d->model_rotatePart(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -309,13 +309,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_scalePart(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					_fe3d->model_scalePart(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -326,11 +326,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_moveBaseTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+				_fe3d->model_moveBaseTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -340,11 +340,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_rotateBaseTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+				_fe3d->model_rotateBaseTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -354,11 +354,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_scaleBaseTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+				_fe3d->model_scaleBaseTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -368,13 +368,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_movePartTo(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()), args[5].getDecimal());
+					_fe3d->model_movePartTo(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()), args[5]->getDecimal());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -385,13 +385,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_rotatePartTo(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()), args[5].getDecimal());
+					_fe3d->model_rotatePartTo(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()), args[5]->getDecimal());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -402,13 +402,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_scalePartTo(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()), args[5].getDecimal());
+					_fe3d->model_scalePartTo(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()), args[5]->getDecimal());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -419,11 +419,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setMinHeight(args[0].getString(), args[1].getDecimal());
+				_fe3d->model_setMinHeight(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -433,11 +433,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setMaxHeight(args[0].getString(), args[1].getDecimal());
+				_fe3d->model_setMaxHeight(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -447,22 +447,22 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::MODEL);
+				auto aabbIds = _fe3d->aabb_getChildIds(args[0]->getString(), AabbParentEntityType::MODEL);
 
 				if(aabbIds.empty())
 				{
-					_throwScriptError("model with id \"" + args[0].getString() + "\" has no bound AABBs!");
+					_throwScriptError("model with id \"" + args[0]->getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
 				for(const auto& id : aabbIds)
 				{
-					_fe3d->aabb_setRaycastResponsive(id, args[1].getBoolean());
+					_fe3d->aabb_setRaycastResponsive(id, args[1]->getBoolean());
 				}
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -472,22 +472,22 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->aabb_getChildIds(args[0].getString(), AabbParentEntityType::MODEL);
+				auto aabbIds = _fe3d->aabb_getChildIds(args[0]->getString(), AabbParentEntityType::MODEL);
 
 				if(aabbIds.empty())
 				{
-					_throwScriptError("model with id \"" + args[0].getString() + "\" has no bound AABBs!");
+					_throwScriptError("model with id \"" + args[0]->getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
 				for(const auto& id : aabbIds)
 				{
-					_fe3d->aabb_setCollisionResponsive(id, args[1].getBoolean());
+					_fe3d->aabb_setCollisionResponsive(id, args[1]->getBoolean());
 				}
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -497,13 +497,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setTextureRepeat(args[0].getString(), args[1].getString(), args[2].getDecimal());
+					_fe3d->model_setTextureRepeat(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -514,13 +514,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setDiffuseMap(args[0].getString(), args[1].getString(), args[2].getString());
+					_fe3d->model_setDiffuseMap(args[0]->getString(), args[1]->getString(), args[2]->getString());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -531,13 +531,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setEmissionMap(args[0].getString(), args[1].getString(), args[2].getString());
+					_fe3d->model_setEmissionMap(args[0]->getString(), args[1]->getString(), args[2]->getString());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -548,13 +548,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setSpecularMap(args[0].getString(), args[1].getString(), args[2].getString());
+					_fe3d->model_setSpecularMap(args[0]->getString(), args[1]->getString(), args[2]->getString());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -565,13 +565,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setReflectionMap(args[0].getString(), args[1].getString(), args[2].getString());
+					_fe3d->model_setReflectionMap(args[0]->getString(), args[1]->getString(), args[2]->getString());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -582,13 +582,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setNormalMap(args[0].getString(), args[1].getString(), args[2].getString());
+					_fe3d->model_setNormalMap(args[0]->getString(), args[1]->getString(), args[2]->getString());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -599,13 +599,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setColor(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					_fe3d->model_setColor(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -616,13 +616,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setWireframeColor(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					_fe3d->model_setWireframeColor(args[0]->getString(), args[1]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -633,11 +633,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setLevelOfDetailEntityId(args[0].getString(), args[1].getString());
+				_fe3d->model_setLevelOfDetailEntityId(args[0]->getString(), args[1]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -647,13 +647,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setLightness(args[0].getString(), args[1].getString(), args[2].getDecimal());
+					_fe3d->model_setLightness(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -664,13 +664,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setSpecularShininess(args[0].getString(), args[1].getString(), args[2].getDecimal());
+					_fe3d->model_setSpecularShininess(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -681,13 +681,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setSpecularIntensity(args[0].getString(), args[1].getString(), args[2].getDecimal());
+					_fe3d->model_setSpecularIntensity(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -698,13 +698,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setReflectivity(args[0].getString(), args[1].getString(), args[2].getDecimal());
+					_fe3d->model_setReflectivity(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -715,11 +715,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setLevelOfDetailDistance(args[0].getString(), args[1].getDecimal());
+				_fe3d->model_setLevelOfDetailDistance(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -729,13 +729,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setOpacity(args[0].getString(), args[1].getString(), args[2].getDecimal());
+					_fe3d->model_setOpacity(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -746,13 +746,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setSpecular(args[0].getString(), args[1].getString(), args[2].getBoolean());
+					_fe3d->model_setSpecular(args[0]->getString(), args[1]->getString(), args[2]->getBoolean());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -763,11 +763,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setReflected(args[0].getString(), args[1].getBoolean());
+				_fe3d->model_setReflected(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -777,13 +777,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setReflective(args[0].getString(), args[1].getString(), args[2].getBoolean());
+					_fe3d->model_setReflective(args[0]->getString(), args[1]->getString(), args[2]->getBoolean());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -794,11 +794,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setShadowed(args[0].getString(), args[1].getBoolean());
+				_fe3d->model_setShadowed(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -808,11 +808,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setFrozen(args[0].getString(), args[1].getBoolean());
+				_fe3d->model_setFrozen(args[0]->getString(), args[1]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -822,13 +822,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setWireframed(args[0].getString(), args[1].getString(), args[2].getBoolean());
+					_fe3d->model_setWireframed(args[0]->getString(), args[1]->getString(), args[2]->getBoolean());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -839,13 +839,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setBright(args[0].getString(), args[1].getString(), args[2].getBoolean());
+					_fe3d->model_setBright(args[0]->getString(), args[1]->getString(), args[2]->getBoolean());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -856,13 +856,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setEmissionIntensity(args[0].getString(), args[1].getString(), args[2].getDecimal());
+					_fe3d->model_setEmissionIntensity(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}
@@ -873,27 +873,27 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					if(args[2].getString() == "CUBE")
+					if(args[2]->getString() == "CUBE")
 					{
-						_fe3d->model_setReflectionType(args[0].getString(), args[1].getString(), ReflectionType::CUBE);
+						_fe3d->model_setReflectionType(args[0]->getString(), args[1]->getString(), ReflectionType::CUBE);
 
-						returnValues.push_back(ScriptValue(SVT::EMPTY));
+						returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 					}
-					else if(args[2].getString() == "PLANAR")
+					else if(args[2]->getString() == "PLANAR")
 					{
-						_fe3d->model_setReflectionType(args[0].getString(), args[1].getString(), ReflectionType::PLANAR);
+						_fe3d->model_setReflectionType(args[0]->getString(), args[1]->getString(), ReflectionType::PLANAR);
 
-						returnValues.push_back(ScriptValue(SVT::EMPTY));
+						returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 					}
 					else
 					{
 						Logger::throwWarning("invalid reflection type!");
 
-						returnValues.push_back(ScriptValue(SVT::EMPTY));
+						returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 					}
 				}
 			}
@@ -905,49 +905,49 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(args[0].getString(), false))
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(args[1].getString() == "XYZ")
+				if(args[1]->getString() == "XYZ")
 				{
-					_fe3d->model_setRotationOrder(args[0].getString(), DirectionOrder::XYZ);
+					_fe3d->model_setRotationOrder(args[0]->getString(), DirectionOrder::XYZ);
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
-				else if(args[1].getString() == "XZY")
+				else if(args[1]->getString() == "XZY")
 				{
-					_fe3d->model_setRotationOrder(args[0].getString(), DirectionOrder::XZY);
+					_fe3d->model_setRotationOrder(args[0]->getString(), DirectionOrder::XZY);
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
-				else if(args[1].getString() == "YXZ")
+				else if(args[1]->getString() == "YXZ")
 				{
-					_fe3d->model_setRotationOrder(args[0].getString(), DirectionOrder::YXZ);
+					_fe3d->model_setRotationOrder(args[0]->getString(), DirectionOrder::YXZ);
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
-				else if(args[1].getString() == "YZX")
+				else if(args[1]->getString() == "YZX")
 				{
-					_fe3d->model_setRotationOrder(args[0].getString(), DirectionOrder::YZX);
+					_fe3d->model_setRotationOrder(args[0]->getString(), DirectionOrder::YZX);
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
-				else if(args[1].getString() == "ZXY")
+				else if(args[1]->getString() == "ZXY")
 				{
-					_fe3d->model_setRotationOrder(args[0].getString(), DirectionOrder::ZXY);
+					_fe3d->model_setRotationOrder(args[0]->getString(), DirectionOrder::ZXY);
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
-				else if(args[1].getString() == "ZYX")
+				else if(args[1]->getString() == "ZYX")
 				{
-					_fe3d->model_setRotationOrder(args[0].getString(), DirectionOrder::ZYX);
+					_fe3d->model_setRotationOrder(args[0]->getString(), DirectionOrder::ZYX);
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 				else
 				{
 					Logger::throwWarning("invalid rotation order!");
 
-					returnValues.push_back(ScriptValue(SVT::EMPTY));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}
 			}
 		}

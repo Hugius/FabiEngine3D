@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:sound3d_place")
 	{
@@ -10,24 +10,24 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_validateFe3dId(args[0].getString()))
+			if(!_validateFe3dId(args[0]->getString()))
 			{
 				return true;
 			}
 
-			if(_fe3d->sound3d_isExisting(args[0].getString()))
+			if(_fe3d->sound3d_isExisting(args[0]->getString()))
 			{
 				_throwScriptError("sound already exists!");
 				return true;
 			}
 
-			if(_validateFe3dSound3d(args[1].getString(), true))
+			if(_validateFe3dSound3d(args[1]->getString(), true))
 			{
-				_worldEditor->copyTemplateSound(args[0].getString(), ("@" + args[1].getString()), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
-				_fe3d->sound3d_setMaxVolume(args[0].getString(), args[5].getDecimal());
-				_fe3d->sound3d_setMaxDistance(args[0].getString(), args[6].getDecimal());
+				_worldEditor->copyTemplateSound(args[0]->getString(), ("@" + args[1]->getString()), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
+				_fe3d->sound3d_setMaxVolume(args[0]->getString(), args[5]->getDecimal());
+				_fe3d->sound3d_setMaxDistance(args[0]->getString(), args[6]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -37,11 +37,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_delete(args[0].getString());
+				_fe3d->sound3d_delete(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -57,7 +57,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 				}
 			}
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:sound3d_start")
@@ -66,11 +66,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_start(args[0].getString(), args[1].getInteger(), args[2].getInteger(), false);
+				_fe3d->sound3d_start(args[0]->getString(), args[1]->getInteger(), args[2]->getInteger(), false);
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -80,11 +80,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_start(args[0].getString(), args[1].getInteger(), args[2].getInteger(), true);
+				_fe3d->sound3d_start(args[0]->getString(), args[1]->getInteger(), args[2]->getInteger(), true);
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -94,11 +94,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_pause(args[0].getString());
+				_fe3d->sound3d_pause(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -108,7 +108,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 		{
 			_fe3d->sound3d_pauseAll();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:sound3d_resume")
@@ -117,11 +117,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_resume(args[0].getString());
+				_fe3d->sound3d_resume(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -131,7 +131,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 		{
 			_fe3d->sound3d_resumeAll();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:sound3d_stop")
@@ -140,11 +140,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_stop(args[0].getString(), args[1].getInteger());
+				_fe3d->sound3d_stop(args[0]->getString(), args[1]->getInteger());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -154,7 +154,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 		{
 			_fe3d->sound3d_stopAll();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:sound3d_set_position")
@@ -163,11 +163,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->sound3d_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -177,11 +177,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_move(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->sound3d_move(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -191,11 +191,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_moveTo(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+				_fe3d->sound3d_moveTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -205,11 +205,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_setMaxVolume(args[0].getString(), args[1].getDecimal());
+				_fe3d->sound3d_setMaxVolume(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -219,11 +219,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0].getString(), false))
+			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_setMaxDistance(args[0].getString(), args[1].getDecimal());
+				_fe3d->sound3d_setMaxDistance(args[0]->getString(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}

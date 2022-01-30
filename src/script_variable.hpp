@@ -7,11 +7,11 @@
 class ScriptVariable final
 {
 public:
-	ScriptVariable(const string& id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, const vector<ScriptValue>& values);
+	ScriptVariable(const string& id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>>& values);
 
-	void addValue(ScriptValue value);
-	void setValues(vector<ScriptValue> values);
-	void setValue(ScriptValue value, unsigned int index = 0);
+	void addValue(shared_ptr<ScriptValue> value);
+	void setValues(const vector<shared_ptr<ScriptValue>>& values);
+	void setValue(shared_ptr<ScriptValue> value, unsigned int index = 0);
 	void deleteValue(unsigned int index);
 	void deleteValues();
 
@@ -21,7 +21,7 @@ public:
 
 	const bool isConstant() const;
 
-	ScriptValue& getValue(unsigned int index = 0) const;
+	shared_ptr<ScriptValue> getValue(unsigned int index = 0) const;
 	const ScriptVariableScope getScope() const;
 	const ScriptVariableType getType() const;
 

@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:lighting_is_ambient_enabled")
 	{
@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_isAmbientLightingEnabled();
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_ambient_color_r")
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getAmbientLightingColor().r;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_ambient_color_g")
@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getAmbientLightingColor().g;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_ambient_color_b")
@@ -37,7 +37,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getAmbientLightingColor().b;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_ambient_intensity")
@@ -46,7 +46,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getAmbientLightingIntensity();
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_is_directional_enabled")
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_isDirectionalLightingEnabled();
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_directional_position_x")
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingPosition().x;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_directional_position_y")
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingPosition().y;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_directional_position_z")
@@ -82,7 +82,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingPosition().z;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_directional_color_r")
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingColor().r;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_directional_color_g")
@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingColor().g;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_directional_color_b")
@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingColor().b;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_directional_intensity")
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getDirectionalLightingIntensity();
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_cube_reflection_quality")
@@ -127,7 +127,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getCubeReflectionQuality();
 
-			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_planar_reflection_quality")
@@ -136,7 +136,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getPlanarReflectionQuality();
 
-			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_planar_refraction_quality")
@@ -145,7 +145,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getPlanarRefractionQuality();
 
-			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_planar_reflection_height")
@@ -154,7 +154,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getPlanarReflectionHeight();
 
-			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_eye_x")
@@ -163,7 +163,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getShadowEyeOffset().x;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_eye_y")
@@ -172,7 +172,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getShadowEyeOffset().y;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_eye_z")
@@ -181,7 +181,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getShadowEyeOffset().z;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_center_x")
@@ -190,7 +190,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getShadowCenterOffset().x;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_center_y")
@@ -199,7 +199,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getShadowCenterOffset().y;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_center_z")
@@ -208,7 +208,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getShadowCenterOffset().z;
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_size")
@@ -217,7 +217,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getShadowSize();
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_lightness")
@@ -226,7 +226,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getShadowLightness();
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_quality")
@@ -235,7 +235,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getShadowQuality();
 
-			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_interval")
@@ -244,7 +244,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_getShadowInterval();
 
-			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
 	else if(functionName == "fe3d:lighting_is_shadow_following_camera")
@@ -253,7 +253,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		{
 			const auto result = _fe3d->gfx_isShadowFollowingCamera();
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else

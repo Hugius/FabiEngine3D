@@ -3,7 +3,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:text2d_is_existing")
 	{
@@ -11,14 +11,14 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_validateFe3dId(args[0].getString()))
+			if(!_validateFe3dId(args[0]->getString()))
 			{
 				return true;
 			}
 
-			const auto result = _fe3d->text2d_isExisting(args[0].getString());
+			const auto result = _fe3d->text2d_isExisting(args[0]->getString());
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:text2d_find_ids")
@@ -27,18 +27,18 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_validateFe3dId(args[0].getString()))
+			if(!_validateFe3dId(args[0]->getString()))
 			{
 				return true;
 			}
 
 			for(const auto& id : _fe3d->text2d_getIds())
 			{
-				if(args[0].getString() == id.substr(0, args[0].getString().size()))
+				if(args[0]->getString() == id.substr(0, args[0]->getString().size()))
 				{
 					if(id[0] != '@')
 					{
-						returnValues.push_back(ScriptValue(SVT::STRING, id));
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, id));
 					}
 				}
 			}
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			{
 				if(id[0] != '@')
 				{
-					returnValues.push_back(ScriptValue(SVT::STRING, id));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, id));
 				}
 			}
 		}
@@ -65,11 +65,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_isVisible(args[0].getString());
+				const auto result = _fe3d->text2d_isVisible(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -79,11 +79,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertPositionFromViewport(_fe3d->text2d_getPosition(args[0].getString())).x;
+				const auto result = Tools::convertPositionFromViewport(_fe3d->text2d_getPosition(args[0]->getString())).x;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -93,11 +93,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertPositionFromViewport(_fe3d->text2d_getPosition(args[0].getString())).y;
+				const auto result = Tools::convertPositionFromViewport(_fe3d->text2d_getPosition(args[0]->getString())).y;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -107,11 +107,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_getRotation(args[0].getString());
+				const auto result = _fe3d->text2d_getRotation(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -121,11 +121,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertSizeFromViewport(_fe3d->text2d_getSize(args[0].getString())).x;
+				const auto result = Tools::convertSizeFromViewport(_fe3d->text2d_getSize(args[0]->getString())).x;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -135,11 +135,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertSizeFromViewport(_fe3d->text2d_getSize(args[0].getString())).y;
+				const auto result = Tools::convertSizeFromViewport(_fe3d->text2d_getSize(args[0]->getString())).y;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -149,11 +149,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_getColor(args[0].getString()).r;
+				const auto result = _fe3d->text2d_getColor(args[0]->getString()).r;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -163,11 +163,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_getColor(args[0].getString()).g;
+				const auto result = _fe3d->text2d_getColor(args[0]->getString()).g;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -177,11 +177,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_getColor(args[0].getString()).b;
+				const auto result = _fe3d->text2d_getColor(args[0]->getString()).b;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -191,11 +191,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_getWireframeColor(args[0].getString()).r;
+				const auto result = _fe3d->text2d_getWireframeColor(args[0]->getString()).r;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -205,11 +205,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_getColor(args[0].getString()).g;
+				const auto result = _fe3d->text2d_getColor(args[0]->getString()).g;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -219,11 +219,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_getColor(args[0].getString()).b;
+				const auto result = _fe3d->text2d_getColor(args[0]->getString()).b;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -233,11 +233,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_getContent(args[0].getString());
+				const auto result = _fe3d->text2d_getContent(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -247,11 +247,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_getOpacity(args[0].getString());
+				const auto result = _fe3d->text2d_getOpacity(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -261,11 +261,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_isWireframed(args[0].getString());
+				const auto result = _fe3d->text2d_isWireframed(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -275,11 +275,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_isHorizontallyFlipped(args[0].getString());
+				const auto result = _fe3d->text2d_isHorizontallyFlipped(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -289,11 +289,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_isVerticallyFlipped(args[0].getString());
+				const auto result = _fe3d->text2d_isVerticallyFlipped(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -303,11 +303,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_isWireframed(args[0].getString());
+				const auto result = _fe3d->text2d_isWireframed(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -317,11 +317,11 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText2d(args[0].getString(), false))
+			if(_validateFe3dText2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->text2d_getFontMapPath(args[0].getString());
+				const auto result = _fe3d->text2d_getFontMapPath(args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}

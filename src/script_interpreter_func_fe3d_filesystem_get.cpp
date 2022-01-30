@@ -8,7 +8,7 @@ using std::ifstream;
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:directory_is_existing")
 	{
@@ -19,11 +19,11 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto newDirectoryPath = string(directoryPath + args[0].getString());
+			const auto newDirectoryPath = string(directoryPath + args[0]->getString());
 
 			const auto result = Tools::isDirectoryExisting(newDirectoryPath);
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:file_is_existing")
@@ -35,11 +35,11 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto filePath = (directoryPath + args[0].getString());
+			const auto filePath = (directoryPath + args[0]->getString());
 
 			const auto result = Tools::isFileExisting(filePath);
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:file_read")
@@ -51,12 +51,12 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto filePath = (directoryPath + args[0].getString());
+			const auto filePath = (directoryPath + args[0]->getString());
 
 			auto file = ifstream(filePath);
 			if(!file)
 			{
-				_throwScriptError("cannot read from file \"" + args[0].getString() + "\"!");
+				_throwScriptError("cannot read from file \"" + args[0]->getString() + "\"!");
 				return true;
 			}
 
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			{
 				getline(file, line);
 
-				returnValues.push_back(ScriptValue(SVT::STRING, line));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, line));
 			}
 
 			file.close();

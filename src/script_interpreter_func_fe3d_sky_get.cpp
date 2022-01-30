@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:sky_get_lightness")
 	{
@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getLightness(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getColor(_fe3d->sky_getSelectedId()).r;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getColor(_fe3d->sky_getSelectedId()).g;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getColor(_fe3d->sky_getSelectedId()).b;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				const auto result = _fe3d->sky_getWireframeColor(_fe3d->sky_getSelectedId()).r;
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getWireframeColor(_fe3d->sky_getSelectedId()).g;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -83,7 +83,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getWireframeColor(_fe3d->sky_getSelectedId()).b;
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getRotation(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_isWireframed(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -119,7 +119,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getLeftCubeMapPath(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -131,7 +131,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getRightCubeMapPath(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -143,7 +143,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getBottomCubeMapPath(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -155,7 +155,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getTopCubeMapPath(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -167,7 +167,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getBackCubeMapPath(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -179,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_getFrontCubeMapPath(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_hasLeftCubeMap(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -203,7 +203,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_hasRightCubeMap(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -215,7 +215,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_hasBottomCubeMap(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -227,7 +227,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_hasTopCubeMap(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -239,7 +239,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_hasBackCubeMap(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -251,7 +251,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			{
 				const auto result = _fe3d->sky_hasFrontCubeMap(_fe3d->sky_getSelectedId());
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}

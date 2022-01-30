@@ -23,7 +23,7 @@ const bool ScriptInterpreter::_validateListIndex(const shared_ptr<ScriptVariable
 	return true;
 }
 
-const bool ScriptInterpreter::_validateArgumentCount(const vector<ScriptValue>& values, unsigned int count)
+const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<ScriptValue>>& values, unsigned int count)
 {
 	if(values.size() == count)
 	{
@@ -41,11 +41,11 @@ const bool ScriptInterpreter::_validateArgumentCount(const vector<ScriptValue>& 
 	}
 }
 
-const bool ScriptInterpreter::_validateArgumentTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types)
+const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<ScriptValue>>& values, const vector<ScriptValueType>& types)
 {
 	for(size_t i = 0; i < values.size(); i++)
 	{
-		if(values[i].getType() != types[i])
+		if(values[i]->getType() != types[i])
 		{
 			_throwScriptError("incorrect argument type!");
 			return false;
@@ -109,19 +109,19 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		listVariable->addValue(ScriptValue(ScriptValueType::STRING, valueString));
+		listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::STRING, valueString));
 	}
 	else if(_isDecimalValue(valueString))
 	{
-		listVariable->addValue(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))));
+		listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))));
 	}
 	else if(_isIntegerValue(valueString))
 	{
-		listVariable->addValue(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))));
+		listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))));
 	}
 	else if(_isBooleanValue(valueString))
 	{
-		listVariable->addValue(ScriptValue(ScriptValueType::BOOLEAN, (valueString == "<true>")));
+		listVariable->addValue(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, (valueString == "<true>")));
 	}
 	else
 	{
@@ -201,13 +201,13 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	{
 		auto indexVariable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
-		if(indexVariable->getValue().getType() != ScriptValueType::INTEGER)
+		if(indexVariable->getValue()->getType() != ScriptValueType::INTEGER)
 		{
 			_throwScriptError("LIST index not of type INT!");
 			return;
 		}
 
-		index = indexVariable->getValue().getInteger();
+		index = indexVariable->getValue()->getInteger();
 	}
 
 	if(!_validateListIndex(listVariable, index))

@@ -1,8 +1,8 @@
 #include "script_interpreter.hpp"
 
-const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string& listString)
+const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListString(const string& listString)
 {
-	vector<ScriptValue> valueList;
+	vector<shared_ptr<ScriptValue>> valueList;
 	bool isBuildingString = false;
 	bool isBuildingNumber = false;
 	bool isBuildingDecimal = false;
@@ -84,7 +84,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 			{
 				if(c == '"')
 				{
-					valueList.push_back(ScriptValue(ScriptValueType::STRING, currentValueString));
+					valueList.push_back(make_shared<ScriptValue>(ScriptValueType::STRING, currentValueString));
 					isBuildingString = false;
 					hasFinishedValue = true;
 				}
@@ -130,7 +130,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 							return {};
 						}
 
-						valueList.push_back(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
+						valueList.push_back(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
 						isBuildingNumber = false;
 						isBuildingDecimal = false;
 
@@ -141,7 +141,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					}
 					else
 					{
-						valueList.push_back(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
+						valueList.push_back(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
 						isBuildingNumber = false;
 
 						if(c != ',')
@@ -157,13 +157,13 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 
 				if(currentValueString == "<true>")
 				{
-					valueList.push_back(ScriptValue(ScriptValueType::BOOLEAN, true));
+					valueList.push_back(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, true));
 					isBuildingBoolean = false;
 					hasFinishedValue = true;
 				}
 				else if(currentValueString == "<false>")
 				{
-					valueList.push_back(ScriptValue(ScriptValueType::BOOLEAN, false));
+					valueList.push_back(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, false));
 					isBuildingBoolean = false;
 					hasFinishedValue = true;
 				}

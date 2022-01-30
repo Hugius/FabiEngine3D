@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:collision_enable_camera_terrain_response")
 	{
@@ -10,9 +10,9 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->collision_enableTerrainResponse(args[0].getDecimal(), args[1].getDecimal());
+			_fe3d->collision_enableTerrainResponse(args[0]->getDecimal(), args[1]->getDecimal());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:collision_disable_camera_terrain_response")
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 		{
 			_fe3d->collision_disableTerrainResponse();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:collision_enable_camera_response")
@@ -30,9 +30,9 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->collision_enableCameraResponse(args[0].getBoolean(), args[1].getBoolean(), args[2].getBoolean());
+			_fe3d->collision_enableCameraResponse(args[0]->getBoolean(), args[1]->getBoolean(), args[2]->getBoolean());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:collision_disable_camera_response")
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 		{
 			_fe3d->collision_disableCameraResponse();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:collision_set_camera_box")
@@ -50,9 +50,9 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->collision_setCameraBox(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal(), args[5].getDecimal());
+			_fe3d->collision_setCameraBox(args[0]->getDecimal(), args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal(), args[5]->getDecimal());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else

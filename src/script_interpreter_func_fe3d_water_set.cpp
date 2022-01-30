@@ -3,7 +3,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:water_set_ripple_speed")
 	{
@@ -13,9 +13,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setRippleSpeed(_fe3d->water_getSelectedId(), fvec2((args[0].getDecimal() / 100000.0f), (args[1].getDecimal() / 100000.0f)));
+				_fe3d->water_setRippleSpeed(_fe3d->water_getSelectedId(), fvec2((args[0]->getDecimal() / 100000.0f), (args[1]->getDecimal() / 100000.0f)));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -27,9 +27,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setWaveSpeed(_fe3d->water_getSelectedId(), fvec2((args[0].getDecimal() / 100000.0f), (args[1].getDecimal() / 100000.0f)));
+				_fe3d->water_setWaveSpeed(_fe3d->water_getSelectedId(), fvec2((args[0]->getDecimal() / 100000.0f), (args[1]->getDecimal() / 100000.0f)));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -41,9 +41,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setMaxDepth(_fe3d->water_getSelectedId(), args[0].getDecimal());
+				_fe3d->water_setMaxDepth(_fe3d->water_getSelectedId(), args[0]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -55,9 +55,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setSize(_fe3d->water_getSelectedId(), args[0].getDecimal());
+				_fe3d->water_setSize(_fe3d->water_getSelectedId(), args[0]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -69,9 +69,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setDudvMap(_fe3d->water_getSelectedId(), args[0].getString());
+				_fe3d->water_setDudvMap(_fe3d->water_getSelectedId(), args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -83,9 +83,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setNormalMap(_fe3d->water_getSelectedId(), args[0].getString());
+				_fe3d->water_setNormalMap(_fe3d->water_getSelectedId(), args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -97,9 +97,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setDisplacementMap(_fe3d->water_getSelectedId(), args[0].getString());
+				_fe3d->water_setDisplacementMap(_fe3d->water_getSelectedId(), args[0]->getString());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -111,9 +111,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setColor(_fe3d->water_getSelectedId(), fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->water_setColor(_fe3d->water_getSelectedId(), fvec3(args[0]->getDecimal(), args[1]->getDecimal(), args[2]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -125,9 +125,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setWireframeColor(_fe3d->water_getSelectedId(), fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->water_setWireframeColor(_fe3d->water_getSelectedId(), fvec3(args[0]->getDecimal(), args[1]->getDecimal(), args[2]->getDecimal()));
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -139,9 +139,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setEdged(_fe3d->water_getSelectedId(), args[0].getBoolean());
+				_fe3d->water_setEdged(_fe3d->water_getSelectedId(), args[0]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -153,9 +153,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setHeight(_fe3d->water_getSelectedId(), args[0].getDecimal());
+				_fe3d->water_setHeight(_fe3d->water_getSelectedId(), args[0]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -167,9 +167,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setWaveHeight(_fe3d->water_getSelectedId(), args[0].getDecimal());
+				_fe3d->water_setWaveHeight(_fe3d->water_getSelectedId(), args[0]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -181,9 +181,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setTextureRepeat(_fe3d->water_getSelectedId(), args[0].getDecimal());
+				_fe3d->water_setTextureRepeat(_fe3d->water_getSelectedId(), args[0]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -195,9 +195,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setSpecularShininess(_fe3d->water_getSelectedId(), args[0].getDecimal());
+				_fe3d->water_setSpecularShininess(_fe3d->water_getSelectedId(), args[0]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -209,9 +209,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setSpecularIntensity(_fe3d->water_getSelectedId(), args[0].getDecimal());
+				_fe3d->water_setSpecularIntensity(_fe3d->water_getSelectedId(), args[0]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -223,9 +223,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setReflective(_fe3d->water_getSelectedId(), args[0].getBoolean());
+				_fe3d->water_setReflective(_fe3d->water_getSelectedId(), args[0]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -237,9 +237,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setRefractive(_fe3d->water_getSelectedId(), args[0].getBoolean());
+				_fe3d->water_setRefractive(_fe3d->water_getSelectedId(), args[0]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -251,9 +251,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setSpecular(_fe3d->water_getSelectedId(), args[0].getBoolean());
+				_fe3d->water_setSpecular(_fe3d->water_getSelectedId(), args[0]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
@@ -265,9 +265,9 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), args[0].getBoolean());
+				_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), args[0]->getBoolean());
 
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}

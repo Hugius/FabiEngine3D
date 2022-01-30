@@ -9,7 +9,7 @@ using std::clamp;
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:application_stop")
 	{
@@ -24,36 +24,36 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 				_mustStopApplication = true;
 			}
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:print")
 	{
 		if(_validateArgumentCount(args, 1))
 		{
-			if(args[0].getType() == SVT::STRING)
+			if(args[0]->getType() == SVT::STRING)
 			{
-				Logger::throwInfo(args[0].getString());
+				Logger::throwInfo(args[0]->getString());
 			}
-			else if(args[0].getType() == SVT::DECIMAL)
+			else if(args[0]->getType() == SVT::DECIMAL)
 			{
-				string decimalString = to_string(args[0].getDecimal());
+				string decimalString = to_string(args[0]->getDecimal());
 				Logger::throwInfo(decimalString.substr(0, decimalString.size() - 1));
 			}
-			else if(args[0].getType() == SVT::INTEGER)
+			else if(args[0]->getType() == SVT::INTEGER)
 			{
-				Logger::throwInfo(to_string(args[0].getInteger()));
+				Logger::throwInfo(to_string(args[0]->getInteger()));
 			}
-			else if(args[0].getType() == SVT::BOOLEAN)
+			else if(args[0]->getType() == SVT::BOOLEAN)
 			{
-				Logger::throwInfo(args[0].getBoolean() ? "true" : "false");
+				Logger::throwInfo(args[0]->getBoolean() ? "true" : "false");
 			}
 			else
 			{
 				Logger::throwError("ScriptInterpreter::_executeFe3dMiscFunction");
 			}
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:cursor_set_visible")
@@ -68,9 +68,9 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 				return true;
 			}
 
-			_fe3d->misc_setCursorVisible(args[0].getBoolean());
+			_fe3d->misc_setCursorVisible(args[0]->getBoolean());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:cursor_center")
@@ -85,7 +85,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 
 			_fe3d->misc_centerCursor();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:timer_start")
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		{
 			_fe3d->misc_startMillisecondTimer();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:timer_stop")
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		{
 			const auto result = _fe3d->misc_stopMillisecondTimer();
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:vsync_enable")
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 
 			_fe3d->misc_enableVsync();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:vsync_disable")
@@ -133,7 +133,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 
 			_fe3d->misc_disableVsync();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:time_interval")
@@ -142,9 +142,9 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = ((_fe3d->misc_getPassedUpdateCount() % args[0].getInteger()) == 0);
+			const auto result = ((_fe3d->misc_getPassedUpdateCount() % args[0]->getInteger()) == 0);
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else

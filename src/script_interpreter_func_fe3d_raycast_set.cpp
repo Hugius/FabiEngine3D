@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:raycast_enable_terrain_pointing")
 	{
@@ -10,9 +10,9 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->raycast_enableTerrainPointing(args[0].getDecimal(), args[1].getDecimal());
+			_fe3d->raycast_enableTerrainPointing(args[0]->getDecimal(), args[1]->getDecimal());
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:raycast_disable_terrain_pointing")
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string& functionNa
 		{
 			_fe3d->raycast_disableTerrainPointing();
 
-			returnValues.push_back(ScriptValue(SVT::EMPTY));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else

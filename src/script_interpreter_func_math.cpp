@@ -6,9 +6,9 @@ using std::clamp;
 
 using SVT = ScriptValueType;
 
-const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const string& scriptLine)
+const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCall(const string& scriptLine)
 {
-	vector<ScriptValue> returnValues;
+	vector<shared_ptr<ScriptValue>> returnValues;
 	auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
 	auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');
 
@@ -40,9 +40,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = tan(Math::convertToRadians(args[0].getDecimal()));
+			const auto result = tan(Math::convertToRadians(args[0]->getDecimal()));
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:sin")
@@ -51,9 +51,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = sin(Math::convertToRadians(args[0].getDecimal()));
+			const auto result = sin(Math::convertToRadians(args[0]->getDecimal()));
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:cos")
@@ -62,9 +62,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = cos(Math::convertToRadians(args[0].getDecimal()));
+			const auto result = cos(Math::convertToRadians(args[0]->getDecimal()));
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:atan")
@@ -73,9 +73,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = Math::convertToDegrees(atan(args[0].getDecimal()));
+			const auto result = Math::convertToDegrees(atan(args[0]->getDecimal()));
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:asin")
@@ -84,9 +84,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = Math::convertToDegrees(asin(args[0].getDecimal()));
+			const auto result = Math::convertToDegrees(asin(args[0]->getDecimal()));
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:acos")
@@ -95,9 +95,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = Math::convertToDegrees(acos(args[0].getDecimal()));
+			const auto result = Math::convertToDegrees(acos(args[0]->getDecimal()));
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:atan2")
@@ -106,26 +106,26 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = Math::convertToDegrees(atan2(args[0].getDecimal(), args[1].getDecimal()));
+			const auto result = Math::convertToDegrees(atan2(args[0]->getDecimal(), args[1]->getDecimal()));
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:pow")
 	{
 		if(_validateArgumentCount(args, 2))
 		{
-			if(args[0].getType() == SVT::INTEGER && args[1].getType() == SVT::INTEGER)
+			if(args[0]->getType() == SVT::INTEGER && args[1]->getType() == SVT::INTEGER)
 			{
-				const auto result = static_cast<int>(pow(args[0].getInteger(), args[1].getInteger()));
+				const auto result = static_cast<int>(pow(args[0]->getInteger(), args[1]->getInteger()));
 
-				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
-			else if(args[0].getType() == SVT::DECIMAL && args[1].getType() == SVT::INTEGER)
+			else if(args[0]->getType() == SVT::DECIMAL && args[1]->getType() == SVT::INTEGER)
 			{
-				const auto result = static_cast<float>(pow(args[0].getDecimal(), args[1].getInteger()));
+				const auto result = static_cast<float>(pow(args[0]->getDecimal(), args[1]->getInteger()));
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 			else
 			{
@@ -137,17 +137,17 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 	{
 		if(_validateArgumentCount(args, 2))
 		{
-			if(args[0].getType() == SVT::INTEGER && args[1].getType() == SVT::INTEGER)
+			if(args[0]->getType() == SVT::INTEGER && args[1]->getType() == SVT::INTEGER)
 			{
-				const auto result = min(args[0].getInteger(), args[1].getInteger());
+				const auto result = min(args[0]->getInteger(), args[1]->getInteger());
 
-				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
-			else if(args[0].getType() == SVT::DECIMAL && args[1].getType() == SVT::DECIMAL)
+			else if(args[0]->getType() == SVT::DECIMAL && args[1]->getType() == SVT::DECIMAL)
 			{
-				const auto result = min(args[0].getDecimal(), args[1].getDecimal());
+				const auto result = min(args[0]->getDecimal(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 			else
 			{
@@ -159,17 +159,17 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 	{
 		if(_validateArgumentCount(args, 2))
 		{
-			if(args[0].getType() == SVT::INTEGER && args[1].getType() == SVT::INTEGER)
+			if(args[0]->getType() == SVT::INTEGER && args[1]->getType() == SVT::INTEGER)
 			{
-				const auto result = max(args[0].getInteger(), args[1].getInteger());
+				const auto result = max(args[0]->getInteger(), args[1]->getInteger());
 
-				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
-			else if(args[0].getType() == SVT::DECIMAL && args[1].getType() == SVT::DECIMAL)
+			else if(args[0]->getType() == SVT::DECIMAL && args[1]->getType() == SVT::DECIMAL)
 			{
-				const auto result = max(args[0].getDecimal(), args[1].getDecimal());
+				const auto result = max(args[0]->getDecimal(), args[1]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 			else
 			{
@@ -183,7 +183,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, round(args[0].getDecimal())));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, round(args[0]->getDecimal())));
 		}
 	}
 	else if(functionName == "math:floor")
@@ -192,7 +192,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, floor(args[0].getDecimal())));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, floor(args[0]->getDecimal())));
 		}
 	}
 	else if(functionName == "math:ceil")
@@ -201,24 +201,24 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, ceil(args[0].getDecimal())));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, ceil(args[0]->getDecimal())));
 		}
 	}
 	else if(functionName == "math:clamp")
 	{
 		if(_validateArgumentCount(args, 3))
 		{
-			if(args[0].getType() == SVT::INTEGER && args[2].getType() == SVT::INTEGER && args[3].getType() == SVT::INTEGER)
+			if(args[0]->getType() == SVT::INTEGER && args[2]->getType() == SVT::INTEGER && args[3]->getType() == SVT::INTEGER)
 			{
-				const auto result = clamp(args[0].getInteger(), args[1].getInteger(), args[2].getInteger());
+				const auto result = clamp(args[0]->getInteger(), args[1]->getInteger(), args[2]->getInteger());
 
-				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
-			else if(args[0].getType() == SVT::DECIMAL && args[1].getType() == SVT::DECIMAL && args[2].getType() == SVT::DECIMAL)
+			else if(args[0]->getType() == SVT::DECIMAL && args[1]->getType() == SVT::DECIMAL && args[2]->getType() == SVT::DECIMAL)
 			{
-				const auto result = clamp(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal());
+				const auto result = clamp(args[0]->getDecimal(), args[1]->getDecimal(), args[2]->getDecimal());
 
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 			else
 			{
@@ -232,20 +232,20 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, sqrtf(args[0].getDecimal())));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, sqrtf(args[0]->getDecimal())));
 		}
 	}
 	else if(functionName == "math:abs")
 	{
 		if(_validateArgumentCount(args, 1))
 		{
-			if(args[0].getType() == SVT::INTEGER)
+			if(args[0]->getType() == SVT::INTEGER)
 			{
-				returnValues.push_back(ScriptValue(SVT::INTEGER, abs(args[0].getInteger())));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, abs(args[0]->getInteger())));
 			}
-			else if(args[0].getType() == SVT::DECIMAL)
+			else if(args[0]->getType() == SVT::DECIMAL)
 			{
-				returnValues.push_back(ScriptValue(SVT::DECIMAL, fabsf(args[0].getDecimal())));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, fabsf(args[0]->getDecimal())));
 			}
 			else
 			{
@@ -259,7 +259,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		{
 			const auto result = Math::getPI();
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:is_even")
@@ -268,9 +268,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = ((args[0].getInteger() % 2) == 0);
+			const auto result = ((args[0]->getInteger() % 2) == 0);
 
-			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "math:angle_difference")
@@ -279,9 +279,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = Math::calculateAngleDifference(args[0].getDecimal(), args[1].getDecimal());
+			const auto result = Math::calculateAngleDifference(args[0]->getDecimal(), args[1]->getDecimal());
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:reference_angle")
@@ -290,9 +290,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = Math::calculateReferenceAngle(args[0].getDecimal());
+			const auto result = Math::calculateReferenceAngle(args[0]->getDecimal());
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:vector_distance")
@@ -301,11 +301,11 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto first = fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal());
-			const auto second = fvec3(args[3].getDecimal(), args[4].getDecimal(), args[5].getDecimal());
+			const auto first = fvec3(args[0]->getDecimal(), args[1]->getDecimal(), args[2]->getDecimal());
+			const auto second = fvec3(args[3]->getDecimal(), args[4]->getDecimal(), args[5]->getDecimal());
 			const auto result = Math::calculateDistance(first, second);
 
-			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else

@@ -3,7 +3,7 @@
 
 const bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 {
-	vector<ScriptValue> comparisonValues;
+	vector<shared_ptr<ScriptValue>> comparisonValues;
 	vector<string> elements;
 	vector<string> logicOperators;
 	vector<bool> conditions;
@@ -74,19 +74,19 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 			{
 				elementString.erase(elementString.begin());
 				elementString.pop_back();
-				comparisonValues.push_back(ScriptValue(ScriptValueType::STRING, elementString));
+				comparisonValues.push_back(make_shared<ScriptValue>(ScriptValueType::STRING, elementString));
 			}
 			else if(_isDecimalValue(elementString))
 			{
-				comparisonValues.push_back(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(elementString))));
+				comparisonValues.push_back(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(elementString))));
 			}
 			else if(_isIntegerValue(elementString))
 			{
-				comparisonValues.push_back(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(elementString))));
+				comparisonValues.push_back(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(elementString))));
 			}
 			else if(_isBooleanValue(elementString))
 			{
-				comparisonValues.push_back(ScriptValue(ScriptValueType::BOOLEAN, (elementString == "<true>")));
+				comparisonValues.push_back(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, (elementString == "<true>")));
 			}
 			else
 			{
@@ -221,21 +221,21 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 	return finalCondition;
 }
 
-const bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue)
+const bool ScriptInterpreter::_validateCondition(shared_ptr<ScriptValue> firstValue, const string& comparisonOperator, shared_ptr<ScriptValue> secondValue)
 {
-	if(firstValue.getType() != secondValue.getType())
+	if(firstValue->getType() != secondValue->getType())
 	{
 		_throwScriptError("compared values not of the same type!");
 		return false;
 	}
 
-	if((comparisonOperator == MORE_KEYWORD || comparisonOperator == LESS_KEYWORD) && firstValue.getType() == ScriptValueType::STRING)
+	if(((comparisonOperator == MORE_KEYWORD) || (comparisonOperator == LESS_KEYWORD)) && (firstValue->getType() == ScriptValueType::STRING))
 	{
 		_throwScriptError("invalid comparison operator for STR values!");
 		return false;
 	}
 
-	if((comparisonOperator == MORE_KEYWORD || comparisonOperator == LESS_KEYWORD) && firstValue.getType() == ScriptValueType::BOOLEAN)
+	if(((comparisonOperator == MORE_KEYWORD) || (comparisonOperator == LESS_KEYWORD)) && (firstValue->getType() == ScriptValueType::BOOLEAN))
 	{
 		_throwScriptError("invalid comparison operator for BOOL values!");
 		return false;
@@ -244,66 +244,66 @@ const bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, const 
 	return true;
 }
 
-const bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue) const
+const bool ScriptInterpreter::_compareValues(shared_ptr<ScriptValue> firstValue, const string& comparisonOperator, shared_ptr<ScriptValue> secondValue) const
 {
 	if(comparisonOperator == IS_KEYWORD)
 	{
-		if(firstValue.getType() == ScriptValueType::STRING)
+		if(firstValue->getType() == ScriptValueType::STRING)
 		{
-			return (firstValue.getString() == secondValue.getString());
+			return (firstValue->getString() == secondValue->getString());
 		}
-		else if(firstValue.getType() == ScriptValueType::DECIMAL)
+		else if(firstValue->getType() == ScriptValueType::DECIMAL)
 		{
-			return (firstValue.getDecimal() == secondValue.getDecimal());
+			return (firstValue->getDecimal() == secondValue->getDecimal());
 		}
-		else if(firstValue.getType() == ScriptValueType::INTEGER)
+		else if(firstValue->getType() == ScriptValueType::INTEGER)
 		{
-			return (firstValue.getInteger() == secondValue.getInteger());
+			return (firstValue->getInteger() == secondValue->getInteger());
 		}
-		else if(firstValue.getType() == ScriptValueType::BOOLEAN)
+		else if(firstValue->getType() == ScriptValueType::BOOLEAN)
 		{
-			return (firstValue.getBoolean() == secondValue.getBoolean());
+			return (firstValue->getBoolean() == secondValue->getBoolean());
 		}
 	}
 	else if(comparisonOperator == NOT_KEYWORD)
 	{
-		if(firstValue.getType() == ScriptValueType::STRING)
+		if(firstValue->getType() == ScriptValueType::STRING)
 		{
-			return (firstValue.getString() != secondValue.getString());
+			return (firstValue->getString() != secondValue->getString());
 		}
-		else if(firstValue.getType() == ScriptValueType::DECIMAL)
+		else if(firstValue->getType() == ScriptValueType::DECIMAL)
 		{
-			return (firstValue.getDecimal() != secondValue.getDecimal());
+			return (firstValue->getDecimal() != secondValue->getDecimal());
 		}
-		else if(firstValue.getType() == ScriptValueType::INTEGER)
+		else if(firstValue->getType() == ScriptValueType::INTEGER)
 		{
-			return (firstValue.getInteger() != secondValue.getInteger());
+			return (firstValue->getInteger() != secondValue->getInteger());
 		}
-		else if(firstValue.getType() == ScriptValueType::BOOLEAN)
+		else if(firstValue->getType() == ScriptValueType::BOOLEAN)
 		{
-			return (firstValue.getBoolean() != secondValue.getBoolean());
+			return (firstValue->getBoolean() != secondValue->getBoolean());
 		}
 	}
 	else if(comparisonOperator == MORE_KEYWORD)
 	{
-		if(firstValue.getType() == ScriptValueType::DECIMAL)
+		if(firstValue->getType() == ScriptValueType::DECIMAL)
 		{
-			return (firstValue.getDecimal() > secondValue.getDecimal());
+			return (firstValue->getDecimal() > secondValue->getDecimal());
 		}
-		else if(firstValue.getType() == ScriptValueType::INTEGER)
+		else if(firstValue->getType() == ScriptValueType::INTEGER)
 		{
-			return (firstValue.getInteger() > secondValue.getInteger());
+			return (firstValue->getInteger() > secondValue->getInteger());
 		}
 	}
 	else if(comparisonOperator == LESS_KEYWORD)
 	{
-		if(firstValue.getType() == ScriptValueType::DECIMAL)
+		if(firstValue->getType() == ScriptValueType::DECIMAL)
 		{
-			return (firstValue.getDecimal() < secondValue.getDecimal());
+			return (firstValue->getDecimal() < secondValue->getDecimal());
 		}
-		else if(firstValue.getType() == ScriptValueType::INTEGER)
+		else if(firstValue->getType() == ScriptValueType::INTEGER)
 		{
-			return (firstValue.getInteger() < secondValue.getInteger());
+			return (firstValue->getInteger() < secondValue->getInteger());
 		}
 	}
 	else

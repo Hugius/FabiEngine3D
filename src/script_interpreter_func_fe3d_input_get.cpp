@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
 	if(functionName == "fe3d:input_is_key_down")
 	{
@@ -10,11 +10,11 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateKeyInputString(args[0].getString()))
+			if(_validateKeyInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isKeyDown(KEY_INPUT_STRING_MAP.at(args[0].getString()));
+				const auto result = _fe3d->input_isKeyDown(KEY_INPUT_STRING_MAP.at(args[0]->getString()));
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -24,11 +24,11 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateKeyInputString(args[0].getString()))
+			if(_validateKeyInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isKeyPressed(KEY_INPUT_STRING_MAP.at(args[0].getString()));
+				const auto result = _fe3d->input_isKeyPressed(KEY_INPUT_STRING_MAP.at(args[0]->getString()));
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -38,11 +38,11 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateMouseInputString(args[0].getString()))
+			if(_validateMouseInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isMouseDown(MOUSE_INPUT_STRING_MAP.at(args[0].getString()));
+				const auto result = _fe3d->input_isMouseDown(MOUSE_INPUT_STRING_MAP.at(args[0]->getString()));
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -52,11 +52,11 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateMouseInputString(args[0].getString()))
+			if(_validateMouseInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isMousePressed(MOUSE_INPUT_STRING_MAP.at(args[0].getString()));
+				const auto result = _fe3d->input_isMousePressed(MOUSE_INPUT_STRING_MAP.at(args[0]->getString()));
 
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 		{
 			const auto result = _fe3d->input_getMouseWheelY();
 
-			returnValues.push_back(ScriptValue(SVT::INTEGER, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else

@@ -46,65 +46,65 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		return;
 	}
 
-	if((variable->getValue().getType() == ScriptValueType::INTEGER) && (typeString == BOOLEAN_KEYWORD))
+	if((variable->getValue()->getType() == ScriptValueType::INTEGER) && (typeString == BOOLEAN_KEYWORD))
 	{
-		variable->setValue(ScriptValue(ScriptValueType::BOOLEAN, static_cast<bool>(variable->getValue().getInteger())));
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, static_cast<bool>(variable->getValue()->getInteger())));
 	}
-	else if((variable->getValue().getType() == ScriptValueType::INTEGER) && (typeString == DECIMAL_KEYWORD))
+	else if((variable->getValue()->getType() == ScriptValueType::INTEGER) && (typeString == DECIMAL_KEYWORD))
 	{
-		variable->setValue(ScriptValue(ScriptValueType::DECIMAL, static_cast<float>(variable->getValue().getInteger())));
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::DECIMAL, static_cast<float>(variable->getValue()->getInteger())));
 	}
-	else if((variable->getValue().getType() == ScriptValueType::INTEGER) && (typeString == STRING_KEYWORD))
+	else if((variable->getValue()->getType() == ScriptValueType::INTEGER) && (typeString == STRING_KEYWORD))
 	{
-		variable->setValue(ScriptValue(ScriptValueType::STRING, to_string(variable->getValue().getInteger())));
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::STRING, to_string(variable->getValue()->getInteger())));
 	}
-	else if((variable->getValue().getType() == ScriptValueType::DECIMAL) && (typeString == INTEGER_KEYWORD))
+	else if((variable->getValue()->getType() == ScriptValueType::DECIMAL) && (typeString == INTEGER_KEYWORD))
 	{
-		variable->setValue(ScriptValue(ScriptValueType::INTEGER, static_cast<int>(variable->getValue().getDecimal())));
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::INTEGER, static_cast<int>(variable->getValue()->getDecimal())));
 	}
-	else if((variable->getValue().getType() == ScriptValueType::DECIMAL) && (typeString == STRING_KEYWORD))
+	else if((variable->getValue()->getType() == ScriptValueType::DECIMAL) && (typeString == STRING_KEYWORD))
 	{
-		variable->setValue(ScriptValue(ScriptValueType::STRING, to_string(variable->getValue().getDecimal())));
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::STRING, to_string(variable->getValue()->getDecimal())));
 	}
-	else if((variable->getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == INTEGER_KEYWORD))
+	else if((variable->getValue()->getType() == ScriptValueType::BOOLEAN) && (typeString == INTEGER_KEYWORD))
 	{
-		variable->setValue(ScriptValue(ScriptValueType::INTEGER, static_cast<int>(variable->getValue().getBoolean())));
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::INTEGER, static_cast<int>(variable->getValue()->getBoolean())));
 	}
-	else if((variable->getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == STRING_KEYWORD))
+	else if((variable->getValue()->getType() == ScriptValueType::BOOLEAN) && (typeString == STRING_KEYWORD))
 	{
-		string newValue = variable->getValue().getBoolean() ? "<true>" : "<false>";
-		variable->setValue(ScriptValue(ScriptValueType::STRING, newValue));
+		string newValue = variable->getValue()->getBoolean() ? "<true>" : "<false>";
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::STRING, newValue));
 	}
-	else if((variable->getValue().getType() == ScriptValueType::STRING) && (typeString == BOOLEAN_KEYWORD))
+	else if((variable->getValue()->getType() == ScriptValueType::STRING) && (typeString == BOOLEAN_KEYWORD))
 	{
-		if(!_isBooleanValue(variable->getValue().getString()))
+		if(!_isBooleanValue(variable->getValue()->getString()))
 		{
 			_throwScriptError("invalid boolean string!");
 			return;
 		}
 
-		bool newValue = (variable->getValue().getString() == "<true>") ? true : false;
-		variable->setValue(ScriptValue(ScriptValueType::BOOLEAN, newValue));
+		bool newValue = (variable->getValue()->getString() == "<true>") ? true : false;
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::BOOLEAN, newValue));
 	}
-	else if((variable->getValue().getType() == ScriptValueType::STRING) && (typeString == INTEGER_KEYWORD))
+	else if((variable->getValue()->getType() == ScriptValueType::STRING) && (typeString == INTEGER_KEYWORD))
 	{
-		if(!_isIntegerValue(variable->getValue().getString()))
+		if(!_isIntegerValue(variable->getValue()->getString()))
 		{
 			_throwScriptError("invalid integer string!");
 			return;
 		}
 
-		variable->setValue(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(variable->getValue().getString()))));
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(variable->getValue()->getString()))));
 	}
-	else if((variable->getValue().getType() == ScriptValueType::STRING) && (typeString == DECIMAL_KEYWORD))
+	else if((variable->getValue()->getType() == ScriptValueType::STRING) && (typeString == DECIMAL_KEYWORD))
 	{
-		if(!_isDecimalValue(variable->getValue().getString()))
+		if(!_isDecimalValue(variable->getValue()->getString()))
 		{
 			_throwScriptError("invalid decimal string!");
 			return;
 		}
 
-		variable->setValue(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(variable->getValue().getString()))));
+		variable->setValue(make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitDecimalString(variable->getValue()->getString()))));
 	}
 	else
 	{

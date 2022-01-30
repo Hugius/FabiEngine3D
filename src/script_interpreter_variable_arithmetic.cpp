@@ -85,12 +85,12 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		_throwScriptError("arithmetic not allowed on LIST values!");
 		return;
 	}
-	else if(leftVariable->getValue(leftValueIndex).getType() == ScriptValueType::STRING)
+	else if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::STRING)
 	{
 		_throwScriptError("arithmetic not allowed on STR values!");
 		return;
 	}
-	else if(leftVariable->getValue(leftValueIndex).getType() == ScriptValueType::BOOLEAN)
+	else if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::BOOLEAN)
 	{
 		_throwScriptError("arithmetic not allowed on BOOL values!");
 		return;
@@ -98,18 +98,18 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 
 	if(operatorString == NEGATION_KEYWORD)
 	{
-		if(leftVariable->getValue(leftValueIndex).getType() == ScriptValueType::INTEGER)
+		if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::INTEGER)
 		{
-			auto integer = leftVariable->getValue(leftValueIndex).getInteger();
+			auto integer = leftVariable->getValue(leftValueIndex)->getInteger();
 			integer *= -1;
-			leftVariable->getValue(leftValueIndex).setInteger(integer);
+			leftVariable->getValue(leftValueIndex)->setInteger(integer);
 			return;
 		}
 		else
 		{
-			auto decimal = leftVariable->getValue(leftValueIndex).getDecimal();
+			auto decimal = leftVariable->getValue(leftValueIndex)->getDecimal();
 			decimal *= -1.0f;
-			leftVariable->getValue(leftValueIndex).setDecimal(decimal);
+			leftVariable->getValue(leftValueIndex)->setDecimal(decimal);
 			return;
 		}
 	}
@@ -134,12 +134,12 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 	else if(_isDecimalValue(valueString))
 	{
-		auto value = ScriptValue(ScriptValueType::DECIMAL, stof(_limitIntegerString(valueString)));
+		auto value = make_shared<ScriptValue>(ScriptValueType::DECIMAL, stof(_limitIntegerString(valueString)));
 		_performArithmeticOperation(leftVariable->getValue(leftValueIndex), operatorString, value);
 	}
 	else if(_isIntegerValue(valueString))
 	{
-		auto value = ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
+		auto value = make_shared<ScriptValue>(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
 		_performArithmeticOperation(leftVariable->getValue(leftValueIndex), operatorString, value);
 	}
 	else if(_isBooleanValue(valueString))
@@ -188,12 +188,12 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			_throwScriptError("arithmetic not allowed on LIST values!");
 			return;
 		}
-		else if(rightVariable->getValue(rightValueIndex).getType() == ScriptValueType::STRING)
+		else if(rightVariable->getValue(rightValueIndex)->getType() == ScriptValueType::STRING)
 		{
 			_throwScriptError("arithmetic not allowed on STR values!");
 			return;
 		}
-		else if(rightVariable->getValue(rightValueIndex).getType() == ScriptValueType::BOOLEAN)
+		else if(rightVariable->getValue(rightValueIndex)->getType() == ScriptValueType::BOOLEAN)
 		{
 			_throwScriptError("arithmetic not allowed on BOOL values!");
 			return;
@@ -203,65 +203,65 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 }
 
-void ScriptInterpreter::_performArithmeticOperation(ScriptValue& leftValue, const string& operatorString, ScriptValue& rightValue)
+void ScriptInterpreter::_performArithmeticOperation(shared_ptr<ScriptValue> leftValue, const string& operatorString, shared_ptr<ScriptValue> rightValue)
 {
-	if((leftValue.getType() == ScriptValueType::INTEGER) && rightValue.getType() == ScriptValueType::INTEGER)
+	if(((leftValue->getType() == ScriptValueType::INTEGER)) && (rightValue->getType() == ScriptValueType::INTEGER))
 	{
-		int result = leftValue.getInteger();
+		int result = leftValue->getInteger();
 
 		if(operatorString == ADDITION_KEYWORD)
 		{
-			result += rightValue.getInteger();
+			result += rightValue->getInteger();
 		}
 		else if(operatorString == SUBTRACTION_KEYWORD)
 		{
-			result -= rightValue.getInteger();
+			result -= rightValue->getInteger();
 		}
 		else if(operatorString == MULTIPLICATION_KEYWORD)
 		{
-			result *= rightValue.getInteger();
+			result *= rightValue->getInteger();
 		}
 		else if(operatorString == DIVISION_KEYWORD)
 		{
-			result /= rightValue.getInteger();
+			result /= rightValue->getInteger();
 		}
 		else if(operatorString == MODULO_KEYWORD)
 		{
-			result %= rightValue.getInteger();
+			result %= rightValue->getInteger();
 		}
 
 		result = ((result < 0) ? max(result, -1000000000) : min(result, 1000000000));
 
-		leftValue.setInteger(result);
+		leftValue->setInteger(result);
 	}
-	else if((leftValue.getType() == ScriptValueType::DECIMAL) && (rightValue.getType() == ScriptValueType::DECIMAL))
+	else if((leftValue->getType() == ScriptValueType::DECIMAL) && (rightValue->getType() == ScriptValueType::DECIMAL))
 	{
-		float result = leftValue.getDecimal();
+		float result = leftValue->getDecimal();
 
 		if(operatorString == ADDITION_KEYWORD)
 		{
-			result += rightValue.getDecimal();
+			result += rightValue->getDecimal();
 		}
 		else if(operatorString == SUBTRACTION_KEYWORD)
 		{
-			result -= rightValue.getDecimal();
+			result -= rightValue->getDecimal();
 		}
 		else if(operatorString == MULTIPLICATION_KEYWORD)
 		{
-			result *= rightValue.getDecimal();
+			result *= rightValue->getDecimal();
 		}
 		else if(operatorString == DIVISION_KEYWORD)
 		{
-			result /= rightValue.getDecimal();
+			result /= rightValue->getDecimal();
 		}
 		else if(operatorString == MODULO_KEYWORD)
 		{
-			result = fmodf(result, rightValue.getDecimal());
+			result = fmodf(result, rightValue->getDecimal());
 		}
 
 		result = ((result < 0) ? max(result, -1000000000.0f) : min(result, 1000000000.0f));
 
-		leftValue.setDecimal(result);
+		leftValue->setDecimal(result);
 	}
 	else
 	{

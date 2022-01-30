@@ -28,7 +28,13 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->client_isConnecting();
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to get connecting status: not running!");
+				return false;
+			}
+
+			const auto result = _fe3d->client_isConnectingToServer();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -37,7 +43,13 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->client_isConnected();
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to get connection status: not running!");
+				return false;
+			}
+
+			const auto result = _fe3d->client_isConnectedToServer();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -46,7 +58,13 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->client_isAccepted();
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to get pending messages: not running!");
+				return {};
+			}
+
+			const auto result = _fe3d->client_isAcceptedByServer();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -55,6 +73,12 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to get pending messages: not running!");
+				return {};
+			}
+
 			for(const auto& message : _fe3d->client_getPendingMessages())
 			{
 				const auto result = string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP");
@@ -67,6 +91,12 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to get pending messages: not running!");
+				return {};
+			}
+
 			for(const auto& message : _fe3d->client_getPendingMessages())
 			{
 				const auto result = message.getContent();
@@ -79,6 +109,22 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to get ping latency: not running!");
+				return 0;
+			}
+			if(!_core->getNetworkingClient()->isConnectedToServer())
+			{
+				Logger::throwWarning("Networking client tried to get ping latency: not connected!");
+				return 0;
+			}
+			if(!_core->getNetworkingClient()->isAcceptedByServer())
+			{
+				Logger::throwWarning("Networking client tried to get ping latency: not accepted!");
+				return 0;
+			}
+
 			const auto result = _fe3d->client_getPingLatency();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
@@ -88,6 +134,22 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to get server IP: not running!");
+				return "";
+			}
+			if(!_core->getNetworkingClient()->isConnectedToServer())
+			{
+				Logger::throwWarning("Networking client tried to get server IP: not connected!");
+				return "";
+			}
+			if(!_core->getNetworkingClient()->isAcceptedByServer())
+			{
+				Logger::throwWarning("Networking client tried to get server IP: not accepted!");
+				return "";
+			}
+
 			const auto result = _fe3d->client_getServerIP();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
@@ -97,6 +159,12 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to get username: not running!");
+				return "";
+			}
+
 			const auto result = _fe3d->client_getUsername();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));

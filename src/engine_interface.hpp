@@ -874,11 +874,13 @@ public:
 	const string client_getUsername() const;
 	const string client_getServerIP() const;
 	const unsigned int client_getPingLatency() const;
+	const unsigned int client_getMaxUsernameSize() const;
 	const bool client_isValidServerIP(const string& serverIP) const;
 	const bool client_isRunning() const;
-	const bool client_isConnecting() const;
-	const bool client_isConnected() const;
-	const bool client_isAccepted() const;
+	const bool client_isConnectingToServer() const;
+	const bool client_isConnectedToServer() const;
+	const bool client_isAcceptedByServer() const;
+	const bool client_isMessageReserved(const string& message);
 
 	void misc_enableVsync();
 	void misc_disableVsync();

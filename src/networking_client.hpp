@@ -38,12 +38,14 @@ public:
 	const string& getServerIP() const;
 
 	const unsigned int getPingLatency() const;
+	const unsigned int getMaxUsernameSize() const;
 
 	const bool isValidServerIP(const string& serverIP) const;
 	const bool isRunning() const;
 	const bool isConnectingToServer() const;
 	const bool isConnectedToServer() const;
 	const bool isAcceptedByServer() const;
+	const bool isMessageReserved(const string& message) const;
 
 	const vector<NetworkingServerMessage>& getPendingMessages() const;
 
@@ -55,25 +57,24 @@ private:
 	static inline constexpr unsigned int MAX_PING_COUNT = 10;
 	static inline constexpr unsigned int IPV4_ADDRESS_LENGTH = 16;
 	static inline constexpr unsigned int MAX_MESSAGE_CHARACTERS = 128;
-	static inline constexpr unsigned int MAX_USERNAME_CHARACTERS = 16;
+	static inline constexpr unsigned int MAX_USERNAME_SIZE = 16;
 	static inline constexpr unsigned int TCP_BUFFER_BYTES = 4096;
-	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_CHARACTERS + 1 + MAX_MESSAGE_CHARACTERS);
+	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_CHARACTERS);
 
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
 
-	const string extractSocketIP(SOCKET socket) const;
-	const string extractSocketPort(SOCKET socket) const;
+	const string _extractSocketIP(SOCKET socket) const;
+	const string _extractSocketPort(SOCKET socket) const;
 
 	int _waitForServerConnection(SOCKET socket, const string& serverIP) const;
-	const string extractAddressIP(sockaddr_in* address) const;
-	const string extractAddressPort(sockaddr_in* address) const;
-	const bool isMessageReadyUDP(SOCKET socket) const;
-	const bool isMessageReserved(const string& message) const;
-	const sockaddr_in composeSocketAddress(const string& IP, const string& port) const;
+	const string _extractAddressIP(sockaddr_in* address) const;
+	const string _extractAddressPort(sockaddr_in* address) const;
+	const bool _isMessageReadyUDP(SOCKET socket) const;
+	const sockaddr_in _composeSocketAddress(const string& IP, const string& port) const;
 	bool _sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted);
 	bool _sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted) const;
-	const bool isValidIP(const string& IP) const;
+	const bool _isValidIP(const string& IP) const;
 
 	future<tuple<int, int, long long, string>> _tcpMessageThread;
 	string _username = "";

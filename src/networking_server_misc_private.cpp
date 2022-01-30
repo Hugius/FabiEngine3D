@@ -21,7 +21,7 @@ const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& conten
 	{
 		abort();
 	}
-	else if(isMessageReserved(content) && !isReserved)
+	else if(_isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
@@ -66,7 +66,7 @@ const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const strin
 	{
 		abort();
 	}
-	else if(isMessageReserved(content) && !isReserved)
+	else if(_isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
@@ -75,7 +75,7 @@ const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const strin
 		abort();
 	}
 
-	auto socketAddress = composeSocketAddress(clientIP, clientPort);
+	auto socketAddress = _composeSocketAddress(clientIP, clientPort);
 
 	auto sendStatusCode = sendto(
 		_udpSocket,
@@ -166,8 +166,8 @@ tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOC
 
 	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 
-	auto IP = extractAddressIP(&sourceAddress);
-	auto port = extractAddressPort(&sourceAddress);
+	auto IP = _extractAddressIP(&sourceAddress);
+	auto port = _extractAddressPort(&sourceAddress);
 
 	if(receiveResult > 0)
 	{
@@ -179,25 +179,25 @@ tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOC
 	}
 }
 
-const string NetworkingServer::extractPeerIP(SOCKET socket)
+const string NetworkingServer::_extractPeerIP(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
 
-	return extractAddressIP(&socketAddress);
+	return _extractAddressIP(&socketAddress);
 }
 
-const string NetworkingServer::extractPeerPort(SOCKET socket)
+const string NetworkingServer::_extractPeerPort(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
 
-	return extractAddressPort(&socketAddress);
+	return _extractAddressPort(&socketAddress);
 }
 
-const sockaddr_in NetworkingServer::composeSocketAddress(const string& IP, const string& port) const
+const sockaddr_in NetworkingServer::_composeSocketAddress(const string& IP, const string& port) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	socketAddress.sin_family = AF_INET;
@@ -207,7 +207,7 @@ const sockaddr_in NetworkingServer::composeSocketAddress(const string& IP, const
 	return socketAddress;
 }
 
-const string NetworkingServer::extractAddressIP(sockaddr_in* address) const
+const string NetworkingServer::_extractAddressIP(sockaddr_in* address) const
 {
 	char IP[IPV4_ADDRESS_LENGTH];
 	inet_ntop(AF_INET, &(address->sin_addr), IP, sizeof(IP));
@@ -215,12 +215,12 @@ const string NetworkingServer::extractAddressIP(sockaddr_in* address) const
 	return string(IP);
 }
 
-const string NetworkingServer::extractAddressPort(sockaddr_in* address) const
+const string NetworkingServer::_extractAddressPort(sockaddr_in* address) const
 {
 	return to_string(ntohs(address->sin_port));
 }
 
-const bool NetworkingServer::isMessageReadyUDP(SOCKET socket) const
+const bool NetworkingServer::_isMessageReadyUDP(SOCKET socket) const
 {
 	fd_set socketSet = fd_set();
 	timeval timeInterval = {0, 1};
@@ -230,7 +230,7 @@ const bool NetworkingServer::isMessageReadyUDP(SOCKET socket) const
 	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
 }
 
-const bool NetworkingServer::isMessageReserved(const string& message) const
+const bool NetworkingServer::_isMessageReserved(const string& message) const
 {
 	return
 		(

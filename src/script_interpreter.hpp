@@ -153,7 +153,7 @@ private:
 	const bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth);
 	const bool _validateKeyInputString(const string& inputString);
 	const bool _validateMouseInputString(const string& inputString);
-	const bool _validateSavesDirectory() const;
+	const bool _validateSavesDirectory();
 
 	const vector<shared_ptr<ScriptValue>> _extractValuesFromListString(const string& listString);
 	const vector<shared_ptr<ScriptValue>> _processFe3dFunctionCall(const string& scriptLine);

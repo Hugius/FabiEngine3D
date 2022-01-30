@@ -96,7 +96,7 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 	return true;
 }
 
-const bool ScriptInterpreter::_validateSavesDirectory() const
+const bool ScriptInterpreter::_validateSavesDirectory()
 {
 	if(_currentProjectId.empty())
 	{
@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_validateSavesDirectory() const
 
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
-		Logger::throwWarning("Project corrupted: directory `saves\\` missing!");
+		_throwScriptError("Project corrupted: directory `saves\\` missing!");
 		return false;
 	}
 
@@ -118,8 +118,7 @@ const bool ScriptInterpreter::_validateSavesDirectory() const
 
 void ScriptInterpreter::_throwScriptError(const string& message)
 {
-	Logger::throwWarning("ERROR @ script \"" + _currentScriptIdsStack.back() + "\" @ line " +
-						 to_string(_currentLineIndexStack.back() + 1) + ": " + message);
+	Logger::throwWarning("ERROR @ script \"" + _currentScriptIdsStack.back() + "\" @ line " + to_string(_currentLineIndexStack.back() + 1) + ": " + message);
 	_hasThrownError = true;
 }
 

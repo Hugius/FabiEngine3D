@@ -8,23 +8,25 @@ using SVT = ScriptValueType;
 
 const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCall(const string& scriptLine)
 {
-	vector<shared_ptr<ScriptValue>> returnValues;
 	auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
 	auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');
 
 	if((openingParanthesisFound == scriptLine.end()) && (closingParanthesisFound == scriptLine.end()))
 	{
 		_throwScriptError("invalid '()' syntax!");
+		return {};
 	}
 
 	if(scriptLine.back() != ')')
 	{
 		_throwScriptError("function call must end with ')'!");
+		return {};
 	}
 
 	auto parenthesisIndex = static_cast<unsigned int>(distance(scriptLine.begin(), openingParanthesisFound));
 	string argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1));
 	argumentString.pop_back();
+	vector<shared_ptr<ScriptValue>> returnValues;
 	auto args = _extractValuesFromListString(argumentString);
 
 	if(_hasThrownError)
@@ -130,6 +132,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			else
 			{
 				_throwScriptError("wrong argument type(s)!");
+				return {};
 			}
 		}
 	}
@@ -152,6 +155,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			else
 			{
 				_throwScriptError("wrong argument type(s)!");
+				return {};
 			}
 		}
 	}
@@ -174,6 +178,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			else
 			{
 				_throwScriptError("wrong argument type(s)!");
+				return {};
 			}
 		}
 	}
@@ -223,6 +228,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			else
 			{
 				_throwScriptError("wrong argument type(s)!");
+				return {};
 			}
 		}
 	}
@@ -250,6 +256,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			else
 			{
 				_throwScriptError("wrong argument type(s)!");
+				return {};
 			}
 		}
 	}
@@ -311,6 +318,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	else
 	{
 		_throwScriptError("math function not existing!");
+		return {};
 	}
 
 	return returnValues;

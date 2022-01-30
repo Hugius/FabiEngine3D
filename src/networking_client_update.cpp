@@ -38,7 +38,7 @@ void NetworkingClient::update()
 				_isConnectingToServer = false;
 				_isConnectedToServer = true;
 
-				if(!_sendTcpMessage(("REQUEST" + extractSocketPort(_udpSocket) + _username), true, false))
+				if(!_sendTcpMessage(("REQUEST" + _extractSocketPort(_udpSocket) + _username), true, false))
 				{
 					return;
 				}
@@ -171,7 +171,7 @@ void NetworkingClient::update()
 		_tcpMessageThread = async(launch::async, &NetworkingClient::_waitForTcpMessage, this, _tcpSocket);
 	}
 
-	while(isMessageReadyUDP(_udpSocket))
+	while(_isMessageReadyUDP(_udpSocket))
 	{
 		const auto messageResult = _receiveUdpMessage(_udpSocket);
 		const auto messageStatusCode = get<0>(messageResult);

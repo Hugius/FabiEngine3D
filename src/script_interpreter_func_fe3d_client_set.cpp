@@ -10,6 +10,32 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_fe3d->client_isRunning())
+			{
+				_throwScriptError("Networking client tried to start: already running!");
+				return true;
+			}
+			if(args[0]->getString().empty())
+			{
+				_throwScriptError("Networking client tried to start: username is empty!");
+				return true;
+			}
+			if(args[0]->getString().size() > _fe3d->client_getMaxUsernameSize())
+			{
+				_throwScriptError("Networking client tried to start: username is too long!");
+				return true;
+			}
+			if(_fe3d->client_isMessageReserved(args[0]->getString()))
+			{
+				_throwScriptError("Networking client tried to start: username is reserved!");
+				return true;
+			}
+			if(find(args[0]->getString().begin(), args[0]->getString().end(), ';') != args[0]->getString().end())
+			{
+				_throwScriptError("Networking client tried to start: username cannot contain ':'!");
+				return true;
+			}
+
 			_fe3d->client_start(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -21,6 +47,27 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(!_fe3d->client_isRunning())
+			{
+				_throwScriptError("Networking client tried to connect: not running!");
+				return true;
+			}
+			if(_fe3d->client_isConnectedToServer())
+			{
+				_throwScriptError("Networking client tried to connect: already connected!");
+				return true;
+			}
+			if(_fe3d->client_isConnectingToServer())
+			{
+				_throwScriptError("Networking client tried to connect: already connecting!");
+				return true;
+			}
+			if(!_fe3d->client_isValidServerIP(args[0]->getString()))
+			{
+				_throwScriptError("Networking client tried to connect: invalid server IP!");
+				return true;
+			}
+
 			_fe3d->client_connect(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -30,6 +77,22 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to disconnect: not running!");
+				return;
+			}
+			if(!_core->getNetworkingClient()->isConnectedToServer())
+			{
+				Logger::throwWarning("Networking client tried to disconnect: not connected!");
+				return;
+			}
+			if(!_core->getNetworkingClient()->isAcceptedByServer())
+			{
+				Logger::throwWarning("Networking client tried to disconnect: not accepted!");
+				return;
+			}
+
 			_fe3d->client_disconnect();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -39,6 +102,12 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to stop: not running!");
+				return;
+			}
+
 			_fe3d->client_stop();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -50,6 +119,37 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to send TCP message: not running!");
+				return;
+			}
+			if(!_core->getNetworkingClient()->isConnectedToServer())
+			{
+				Logger::throwWarning("Networking client tried to send TCP message: not connected!");
+				return;
+			}
+			if(!_core->getNetworkingClient()->isAcceptedByServer())
+			{
+				Logger::throwWarning("Networking client tried to send TCP message: not accepted!");
+				return;
+			}
+			if(find(content.begin(), content.end(), ';') != content.end())
+			{
+				Logger::throwWarning("Networking client tried to send TCP message: cannot contain ':'!");
+				return;
+			}
+			if(isMessageReserved(content))
+			{
+				Logger::throwWarning("Networking client tried to send TCP message: \"" + content + "\" is reserved!");
+				return;
+			}
+			if(content.size() > MAX_MESSAGE_CHARACTERS)
+			{
+				Logger::throwWarning("Networking client tried to send TCP message: maximum character amount exceeded!");
+				return;
+			}
+
 			_fe3d->client_sendTcpMessage(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -61,6 +161,37 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(!_core->getNetworkingClient()->isRunning())
+			{
+				Logger::throwWarning("Networking client tried to send UDP message: not running!");
+				return;
+			}
+			if(!_core->getNetworkingClient()->isConnectedToServer())
+			{
+				Logger::throwWarning("Networking client tried to send UDP message: not connected!");
+				return;
+			}
+			if(!_core->getNetworkingClient()->isAcceptedByServer())
+			{
+				Logger::throwWarning("Networking client tried to send UDP message: not accepted!");
+				return;
+			}
+			if(find(content.begin(), content.end(), ';') != content.end())
+			{
+				Logger::throwWarning("Networking client tried to send UDP message: cannot contain ':'!");
+				return;
+			}
+			if(isMessageReserved(content))
+			{
+				Logger::throwWarning("Networking client tried to send UDP message: \"" + content + "\" is reserved!");
+				return;
+			}
+			if(content.size() > MAX_MESSAGE_CHARACTERS)
+			{
+				Logger::throwWarning("Networking client tried to send UDP message: maximum character amount exceeded!");
+				return;
+			}
+
 			_fe3d->client_sendUdpMessage(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));

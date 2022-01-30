@@ -891,9 +891,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 					}
 					else
 					{
-						Logger::throwWarning("invalid reflection type!");
-
-						returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+						_throwScriptError("invalid reflection type!");
+						return true;
 					}
 				}
 			}
@@ -945,9 +944,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 				}
 				else
 				{
-					Logger::throwWarning("invalid rotation order!");
-
-					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+					_throwScriptError("invalid rotation order!");
+					return true;
 				}
 			}
 		}

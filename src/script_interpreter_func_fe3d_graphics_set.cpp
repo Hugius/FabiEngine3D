@@ -284,9 +284,8 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			}
 			else
 			{
-				Logger::throwWarning("invalid bloom type!");
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				_throwScriptError("invalid bloom type!");
+				return true;
 			}
 		}
 	}

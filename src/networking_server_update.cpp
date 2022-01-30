@@ -44,8 +44,8 @@ void NetworkingServer::update()
 			abort();
 		}
 
-		const auto clientIP = extractPeerIP(clientSocket);
-		const auto clientPort = extractPeerPort(clientSocket);
+		const auto clientIP = _extractPeerIP(clientSocket);
+		const auto clientPort = _extractPeerPort(clientSocket);
 
 		_clientSockets.push_back(clientSocket);
 		_clientIPs.push_back(clientIP);
@@ -169,7 +169,7 @@ void NetworkingServer::update()
 		}
 	}
 
-	while(isMessageReadyUDP(_udpSocket))
+	while(_isMessageReadyUDP(_udpSocket))
 	{
 		const auto messageResult = _receiveUdpMessage(_udpSocket);
 		const auto messageStatusCode = get<0>(messageResult);

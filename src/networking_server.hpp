@@ -60,19 +60,19 @@ private:
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
 
-	const string extractPeerIP(SOCKET socket);
-	const string extractPeerPort(SOCKET socket);
+	const string _extractPeerIP(SOCKET socket);
+	const string _extractPeerPort(SOCKET socket);
 
 	const bool _sendTcpMessage(SOCKET socket, const string& content, bool isReserved);
 	const bool _sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const;
 
 	const SOCKET _waitForClientConnection(SOCKET socket) const;
 
-	const string extractAddressIP(sockaddr_in* address) const;
-	const string extractAddressPort(sockaddr_in* address) const;
-	const bool isMessageReadyUDP(SOCKET socket) const;
-	const bool isMessageReserved(const string& message) const;
-	const sockaddr_in composeSocketAddress(const string& IP, const string& port) const;
+	const string _extractAddressIP(sockaddr_in* address) const;
+	const string _extractAddressPort(sockaddr_in* address) const;
+	const bool _isMessageReadyUDP(SOCKET socket) const;
+	const bool _isMessageReserved(const string& message) const;
+	const sockaddr_in _composeSocketAddress(const string& IP, const string& port) const;
 
 	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads;
 	vector<string> _tcpMessageBuilds;

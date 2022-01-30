@@ -4,7 +4,7 @@
 
 const bool NetworkingClient::isValidServerIP(const string& serverIP) const
 {
-	return (isValidIP(serverIP) && (serverIP != "0.0.0.0"));
+	return (_isValidIP(serverIP) && (serverIP != "0.0.0.0"));
 }
 
 const bool NetworkingClient::isRunning() const
@@ -60,6 +60,11 @@ const unsigned int NetworkingClient::getPingLatency() const
 	}
 
 	return Math::calculateAverage(_pingLatencies);
+}
+
+const unsigned int NetworkingClient::getMaxUsernameSize() const
+{
+	return MAX_USERNAME_SIZE;
 }
 
 const string& NetworkingClient::getUsername() const

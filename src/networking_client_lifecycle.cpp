@@ -33,7 +33,7 @@ void NetworkingClient::start(const string& username)
 	{
 		abort();
 	}
-	if(username.size() > MAX_USERNAME_CHARACTERS)
+	if(username.size() > MAX_USERNAME_SIZE)
 	{
 		abort();
 	}

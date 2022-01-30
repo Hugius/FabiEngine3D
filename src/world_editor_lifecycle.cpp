@@ -158,10 +158,23 @@ void WorldEditor::unload()
 		_fe3d->sound3d_delete(id);
 	}
 
+	_gui->getOverlay()->deleteTextField("modelId");
+	_gui->getOverlay()->deleteTextField("quadId");
+	_gui->getOverlay()->deleteTextField("soundId");
+
+	_fe3d->collision_disableCameraResponse();
+
+	if(_fe3d->raycast_isTerrainPointingEnabled())
+	{
+		_fe3d->raycast_disableTerrainPointing();
+	}
+
 	_loadedModelIds.clear();
 	_outsideLoadedModelIds.clear();
 	_loadedQuadIds.clear();
 	_outsideLoadedQuadIds.clear();
+	_loadedTextIds.clear();
+	_outsideLoadedTextIds.clear();
 	_loadedSoundIds.clear();
 	_outsideLoadedSoundIds.clear();
 	_initialModelPosition.clear();
@@ -169,11 +182,12 @@ void WorldEditor::unload()
 	_initialModelSize.clear();
 	_customWorldModelIds.clear();
 	_customWorldQuadIds.clear();
+	_customWorldTextIds.clear();
 	_customWorldAabbIds.clear();
-	_customWorldSoundIds.clear();
 	_customWorldPointlightIds.clear();
 	_customWorldSpotlightIds.clear();
 	_customWorldReflectionIds.clear();
+	_customWorldSoundIds.clear();
 	_loadedAabbIds.clear();
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
@@ -191,16 +205,20 @@ void WorldEditor::unload()
 	_currentTemplateQuadId = "";
 	_selectedQuadId = "";
 	_activeQuadId = "";
-	_currentTemplateSoundId = "";
-	_selectedSpeakerId = "";
-	_activeSpeakerId = "";
+	_currentTemplateTextId = "";
+	_selectedTextId = "";
+	_activeTextId = "";
 	_selectedLampId = "";
 	_activeLampId = "";
 	_selectedTorchId = "";
 	_activeTorchId = "";
 	_selectedCameraId = "";
 	_activeCameraId = "";
+	_currentTemplateSoundId = "";
+	_selectedSpeakerId = "";
+	_activeSpeakerId = "";
 	_loadedWorldId = "";
+	_currentProjectId = "";
 	_currentWorldId = "";
 	_editorSpeed = 1.0f;
 	_selectedModelHighlightDirection = 1;
@@ -209,14 +227,14 @@ void WorldEditor::unload()
 	_activeQuad3dHighlightDirection = 1;
 	_selectedText3dHighlightDirection = 1;
 	_activeText3dHighlightDirection = 1;
-	_selectedSpeakerHighlightDirection = 1;
-	_activeSpeakerHighlightDirection = 1;
 	_selectedLampHighlightDirection = 1;
 	_activeLampHighlightDirection = 1;
 	_selectedTorchHighlightDirection = 1;
 	_activeTorchHighlightDirection = 1;
 	_selectedCameraHighlightDirection = 1;
 	_activeCameraHighlightDirection = 1;
+	_selectedSpeakerHighlightDirection = 1;
+	_activeSpeakerHighlightDirection = 1;
 	_hasCustomWorldLighting = false;
 	_hasCustomWorldGraphics = false;
 	_hasCustomWorldSky = false;
@@ -225,28 +243,19 @@ void WorldEditor::unload()
 	_dontResetSelectedModel = false;
 	_dontResetSelectedQuad3d = false;
 	_dontResetSelectedText3d = false;
-	_dontResetSelectedSpeaker = false;
 	_dontResetSelectedLamp = false;
 	_dontResetSelectedTorch = false;
 	_dontResetSelectedCamera = false;
+	_dontResetSelectedSpeaker = false;
 	_isPlacingPointlight = false;
 	_isPlacingSpotlight = false;
 	_isPlacingReflection = false;
-	_isEditorLoaded = false;
 	_isCreatingWorld = false;
 	_isChoosingWorld = false;
 	_isDeletingWorld = false;
-
-	_gui->getOverlay()->deleteTextField("modelId");
-	_gui->getOverlay()->deleteTextField("quadId");
-	_gui->getOverlay()->deleteTextField("soundId");
-
-	_fe3d->collision_disableCameraResponse();
-
-	if(_fe3d->raycast_isTerrainPointingEnabled())
-	{
-		_fe3d->raycast_disableTerrainPointing();
-	}
+	_isEditorLoaded = false;
+	_isWireframeModeEnabled = false;
+	_isAabbModeEnabled = false;
 }
 
 void WorldEditor::update()

@@ -36,7 +36,6 @@ private:
 	vector<string> _loadedTextIds;
 	string _hoveredTextId = "";
 	string _currentTextId = "";
-	string _currentProjectId = "";
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
@@ -55,5 +54,4 @@ private:
 	bool _isCreatingText3d = false;
 	bool _isChoosingText3d = false;
 	bool _isDeletingText3d = false;
-	bool _isEditorLoaded = false;
 };

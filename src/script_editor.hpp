@@ -39,7 +39,6 @@ private:
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;
-	string _currentProjectId = "";
 	string _currentScriptFileId = "";
 
 	static inline const fvec3 CAMERA_POSITION = fvec3(0.0f, 0.0f, 10.0f);
@@ -110,7 +109,6 @@ private:
 	bool _isContinuousActionAllowed = false;
 	bool _wasGuiFocused = false;
 	bool _hasClickedLMB = false;
-	bool _isEditorLoaded = false;
 	bool _isCreatingScriptFile = false;
 	bool _isChoosingScriptFile = false;
 	bool _isRenamingScriptFile = false;

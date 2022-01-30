@@ -34,17 +34,18 @@ void SkyEditor::unload()
 
 	_gui->getOverlay()->deleteTextField("skyId");
 
+	if(_fe3d->camera_isThirdPersonViewEnabled())
+	{
+		_fe3d->camera_disableThirdPersonView();
+	}
+
 	_loadedSkyIds.clear();
+	_currentProjectId = "";
 	_currentSkyId = "";
 	_isEditorLoaded = false;
 	_isCreatingSky = false;
 	_isChoosingSky = false;
 	_isDeletingSky = false;
-
-	if(_fe3d->camera_isThirdPersonViewEnabled())
-	{
-		_fe3d->camera_disableThirdPersonView();
-	}
 }
 
 void SkyEditor::_loadGUI()

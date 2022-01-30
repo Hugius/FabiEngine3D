@@ -68,7 +68,6 @@ private:
 
 	set<pair<string, string>> _modelAnimationsToStop;
 	set<pair<string, string>> _modelAnimationsToStart;
-	string _currentProjectId = "";
 	string _currentAnimationId = "";
 	string _currentPartId = "";
 	string _hoveredModelId = "";
@@ -103,7 +102,6 @@ private:
 	bool _isDeletingAnimation = false;
 	bool _isChoosingModel = false;
 	bool _isChoosingPart = false;
-	bool _isEditorLoaded = false;
 
 	map<pair<string, string>, Animation3d> _startedModelAnimations;
 	vector<shared_ptr<Animation3d>> _animations;

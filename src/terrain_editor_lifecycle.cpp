@@ -62,17 +62,18 @@ void TerrainEditor::unload()
 
 	_gui->getOverlay()->deleteTextField("terrainId");
 
+	if(_fe3d->camera_isThirdPersonViewEnabled())
+	{
+		_fe3d->camera_disableThirdPersonView();
+	}
+
 	_loadedTerrainIds.clear();
+	_currentProjectId = "";
 	_currentTerrainId = "";
 	_isEditorLoaded = false;
 	_isCreatingTerrain = false;
 	_isChoosingTerrain = false;
 	_isDeletingTerrain = false;
-
-	if(_fe3d->camera_isThirdPersonViewEnabled())
-	{
-		_fe3d->camera_disableThirdPersonView();
-	}
 }
 
 void TerrainEditor::_loadGUI()

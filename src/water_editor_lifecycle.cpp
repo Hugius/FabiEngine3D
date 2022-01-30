@@ -62,17 +62,18 @@ void WaterEditor::unload()
 
 	_gui->getOverlay()->deleteTextField("waterId");
 
+	if(_fe3d->camera_isThirdPersonViewEnabled())
+	{
+		_fe3d->camera_disableThirdPersonView();
+	}
+
 	_loadedWaterIds.clear();
+	_currentProjectId = "";
 	_currentWaterId = "";
 	_isEditorLoaded = false;
 	_isCreatingWater = false;
 	_isChoosingWater = false;
 	_isDeletingWater = false;
-
-	if(_fe3d->camera_isThirdPersonViewEnabled())
-	{
-		_fe3d->camera_disableThirdPersonView();
-	}
 }
 
 void WaterEditor::_loadGUI()

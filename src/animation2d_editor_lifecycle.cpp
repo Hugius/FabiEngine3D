@@ -33,15 +33,16 @@ void Animation2dEditor::unload()
 
 	_gui->getOverlay()->deleteTextField("animationId");
 
-	_animations.clear();
 	_startedQuad3dAnimations.clear();
 	_startedQuad2dAnimations.clear();
+	_animations.clear();
 	_quad3dAnimationsToStop.clear();
 	_quad3dAnimationsToStart.clear();
 	_quad2dAnimationsToStop.clear();
 	_quad2dAnimationsToStart.clear();
 	_hoveredAnimationId = "";
 	_currentAnimationId = "";
+	_currentProjectId = "";
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;
 	_isDeletingAnimation = false;

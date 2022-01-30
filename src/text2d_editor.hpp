@@ -32,7 +32,6 @@ private:
 	vector<string> _loadedTextIds;
 	string _currentTextId = "";
 	string _hoveredTextId = "";
-	string _currentProjectId = "";
 
 	static inline const string TEXT_CONTENT = "Text123";
 

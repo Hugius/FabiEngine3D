@@ -42,7 +42,6 @@ private:
 	void _updateMiscellaneous();
 
 	vector<string> _loadedModelIds;
-	string _currentProjectId = "";
 	string _currentModelId = "";
 	string _currentPartId = "";
 	string _currentAabbId = "";
@@ -75,5 +74,4 @@ private:
 	bool _isCreatingAabb = false;
 	bool _isChoosingAabb = false;
 	bool _isDeletingAabb = false;
-	bool _isEditorLoaded = false;
 };

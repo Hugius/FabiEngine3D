@@ -34,7 +34,6 @@ private:
 	void _updateMiscellaneous();
 
 	vector <string> _loadedWaterIds;
-	string _currentProjectId = "";
 	string _currentWaterId = "";
 
 	static inline constexpr float CW = 0.115f;
@@ -53,5 +52,4 @@ private:
 	bool _isCreatingWater = false;
 	bool _isChoosingWater = false;
 	bool _isDeletingWater = false;
-	bool _isEditorLoaded = false;
 };

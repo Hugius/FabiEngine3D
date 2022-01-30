@@ -36,7 +36,6 @@ private:
 	void _updateMiscellaneous();
 
 	vector <string> _loadedTerrainIds;
-	string _currentProjectId = "";
 	string _currentTerrainId = "";
 
 	static inline constexpr float CW = 0.115f;
@@ -55,5 +54,4 @@ private:
 	bool _isCreatingTerrain = false;
 	bool _isChoosingTerrain = false;
 	bool _isDeletingTerrain = false;
-	bool _isEditorLoaded = false;
 };

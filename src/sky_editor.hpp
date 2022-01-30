@@ -33,7 +33,6 @@ private:
 	void _updateMiscellaneous();
 
 	vector <string> _loadedSkyIds;
-	string _currentProjectId = "";
 	string _currentSkyId = "";
 
 	static inline constexpr float CW = 0.115f;
@@ -43,5 +42,4 @@ private:
 	bool _isCreatingSky = false;
 	bool _isChoosingSky = false;
 	bool _isDeletingSky = false;
-	bool _isEditorLoaded = false;
 };

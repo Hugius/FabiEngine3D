@@ -88,7 +88,6 @@ private:
 	set<pair<string, string>> _quad2dAnimationsToStart;
 	string _hoveredAnimationId = "";
 	string _currentAnimationId = "";
-	string _currentProjectId = "";
 
 	static inline const fvec3 PREVIEW_QUAD_POSITION = fvec3(0.0f, 0.0f, -0.75f);
 
@@ -98,7 +97,6 @@ private:
 	bool _isCreatingAnimation = false;
 	bool _isChoosingAnimation = false;
 	bool _isDeletingAnimation = false;
-	bool _isEditorLoaded = false;
 
 	map<pair<string, string>, Animation2d> _startedQuad3dAnimations;
 	map<pair<string, string>, Animation2d> _startedQuad2dAnimations;

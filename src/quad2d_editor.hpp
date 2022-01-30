@@ -32,7 +32,6 @@ private:
 	vector<string> _loadedQuadIds;
 	string _currentQuadId = "";
 	string _hoveredQuadId = "";
-	string _currentProjectId = "";
 
 	static inline const fvec2 QUAD_SIZE = fvec2(0.75f);
 

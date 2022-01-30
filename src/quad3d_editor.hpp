@@ -36,7 +36,6 @@ private:
 	vector<string> _loadedQuadIds;
 	string _hoveredQuadId = "";
 	string _currentQuadId = "";
-	string _currentProjectId = "";
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
@@ -55,5 +54,4 @@ private:
 	bool _isCreatingQuad3d = false;
 	bool _isChoosingQuad3d = false;
 	bool _isDeletingQuad3d = false;
-	bool _isEditorLoaded = false;
 };

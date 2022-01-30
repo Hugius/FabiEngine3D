@@ -223,7 +223,6 @@ private:
 	string _selectedSpeakerId = "";
 	string _activeSpeakerId = "";
 	string _loadedWorldId = "";
-	string _currentProjectId = "";
 	string _currentWorldId = "";
 
 	static inline const fvec3 DEFAULT_LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
@@ -330,7 +329,6 @@ private:
 	bool _isCreatingWorld = false;
 	bool _isChoosingWorld = false;
 	bool _isDeletingWorld = false;
-	bool _isEditorLoaded = false;
 	bool _isWireframeModeEnabled = false;
 	bool _isAabbModeEnabled = false;
 

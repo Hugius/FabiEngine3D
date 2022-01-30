@@ -29,6 +29,7 @@ void Quad2dEditor::unload()
 	_gui->getOverlay()->deleteTextField("quadId");
 
 	_loadedQuadIds.clear();
+	_currentProjectId = "";
 	_currentQuadId = "";
 	_hoveredQuadId = "";
 	_isEditorLoaded = false;

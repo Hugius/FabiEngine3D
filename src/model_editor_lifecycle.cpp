@@ -95,15 +95,19 @@ void ModelEditor::unload()
 	_gui->getOverlay()->deleteTextField("aabbId");
 
 	_loadedModelIds.clear();
+	_currentProjectId = "";
 	_currentModelId = "";
 	_currentPartId = "";
 	_currentAabbId = "";
 	_hoveredModelId = "";
 	_hoveredPartId = "";
+	_hoveredAabbId = "";
+	_originalPartOpacity = 0.0f;
 	_selectedPartHighlightDirection = 1;
 	_isCreatingModel = false;
 	_isChoosingModel = false;
 	_isDeletingModel = false;
+	_isChoosingPart = false;
 	_isCreatingAabb = false;
 	_isChoosingAabb = false;
 	_isDeletingAabb = false;

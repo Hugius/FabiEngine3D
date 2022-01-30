@@ -80,6 +80,7 @@ void Text3dEditor::unload()
 	_loadedTextIds.clear();
 	_hoveredTextId = "";
 	_currentTextId = "";
+	_currentProjectId = "";
 	_isCreatingText3d = false;
 	_isChoosingText3d = false;
 	_isDeletingText3d = false;

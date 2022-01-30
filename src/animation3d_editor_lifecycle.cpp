@@ -92,22 +92,26 @@ void Animation3dEditor::unload()
 	_gui->getOverlay()->deleteTextField("animationId");
 	_gui->getOverlay()->deleteTextField("animationFrame");
 
-	_animations.clear();
 	_modelAnimationsToStop.clear();
 	_modelAnimationsToStart.clear();
-	_startedModelAnimations.clear();
+	_currentProjectId = "";
 	_currentAnimationId = "";
 	_currentPartId = "";
 	_hoveredModelId = "";
 	_hoveredPartId = "";
 	_cameraLookatPosition = fvec3(0.0f);
-	_currentFrameIndex = 0;
+	_originalPartOpacity = 0.0f;
 	_selectedPartHighlightDirection = 1;
+	_currentFrameIndex = 0;
 	_mustUpdateCurrentFramePreview = true;
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;
 	_isDeletingAnimation = false;
+	_isChoosingModel = false;
+	_isChoosingPart = false;
 	_isEditorLoaded = false;
+	_startedModelAnimations.clear();
+	_animations.clear();
 }
 
 void Animation3dEditor::_loadGUI()

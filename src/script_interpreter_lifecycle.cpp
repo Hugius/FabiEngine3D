@@ -287,12 +287,14 @@ void ScriptInterpreter::unload()
 
 	_debuggingTimes.clear();
 	_localVariables.clear();
+	_globalVariables.clear();
 	_currentScriptIdsStack.clear();
-	_currentLineIndexStack.clear();
+	_lineStringStreams.clear();
 	_initializeScriptIds.clear();
 	_updateScriptIds.clear();
 	_terminateScriptIds.clear();
-	_globalVariables.clear();
+	_currentLineIndexStack.clear();
+	_currentProjectId = "";
 	_initEntryId = "";
 	_updateEntryId = "";
 	_terminateEntryId = "";
@@ -306,4 +308,7 @@ void ScriptInterpreter::unload()
 	_hasPassedElseStatement = false;
 	_mustIgnoreDeeperScope = false;
 	_isDebugging = false;
+	_isExecutingInitialization = false;
+	_isExecutingUpdate = false;
+	_isExecutingTerminate = false;
 }

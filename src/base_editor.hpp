@@ -18,10 +18,12 @@ protected:
 	virtual void _loadGUI() = 0;
 	virtual void _unloadGUI() = 0;
 
-	shared_ptr<EngineInterface> _fe3d = nullptr;
-	shared_ptr<GuiManager> _gui = nullptr;
+	string _currentProjectId = "";
 
 	bool _isEditorLoaded = false;
+
+	shared_ptr<EngineInterface> _fe3d = nullptr;
+	shared_ptr<GuiManager> _gui = nullptr;
 
 	static inline const fvec3 SCROLLING_LIST_COLOR = fvec3(0.25f);
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);

@@ -32,7 +32,6 @@ private:
 	vector<string> _loadedSoundIds;
 	string _currentSoundId = "";
 	string _hoveredSoundId = "";
-	string _currentProjectId = "";
 
 	static inline const fvec3 ICON_QUAD_POSITION = fvec3(0.0f, 0.0f, -1.5f);
 
@@ -42,5 +41,4 @@ private:
 	bool _isCreatingSound = false;
 	bool _isChoosingSound = false;
 	bool _isDeletingSound = false;
-	bool _isEditorLoaded = false;
 };

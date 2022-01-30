@@ -31,6 +31,7 @@ void Text2dEditor::unload()
 	_loadedTextIds.clear();
 	_currentTextId = "";
 	_hoveredTextId = "";
+	_currentProjectId = "";
 	_isEditorLoaded = false;
 	_isCreatingText = false;
 	_isChoosingText = false;

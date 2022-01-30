@@ -78,6 +78,7 @@ void Quad3dEditor::unload()
 	_gui->getOverlay()->deleteTextField("quadId");
 
 	_loadedQuadIds.clear();
+	_currentProjectId = "";
 	_hoveredQuadId = "";
 	_currentQuadId = "";
 	_isCreatingQuad3d = false;

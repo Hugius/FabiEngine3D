@@ -166,6 +166,8 @@ void NetworkingClient::_setupTcp()
 		Logger::throwError("NetworkingClient::_setupTCP::3 ---> ", WSAGetLastError());
 	}
 
+	freeaddrinfo(addressInfo);
+
 	_connectionThread = async(launch::async, &NetworkingClient::_waitForServerConnection, this, _tcpSocket, _serverIP);
 }
 

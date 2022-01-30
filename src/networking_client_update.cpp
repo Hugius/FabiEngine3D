@@ -38,7 +38,7 @@ void NetworkingClient::update()
 				_isConnectingToServer = false;
 				_isConnectedToServer = true;
 
-				if(!_sendTcpMessage(("REQUEST" + NetworkingUtils::extractSocketPort(_udpSocket) + _username), true, false))
+				if(!_sendTcpMessage(("REQUEST" + extractSocketPort(_udpSocket) + _username), true, false))
 				{
 					return;
 				}
@@ -104,7 +104,7 @@ void NetworkingClient::update()
 						latency -= serverReceiveDelay;
 						latency -= clientReceiveDelay;
 
-						if(_pingLatencies.size() == NetworkingUtils::MAX_PING_COUNT)
+						if(_pingLatencies.size() == MAX_PING_COUNT)
 						{
 							_pingLatencies.erase(_pingLatencies.begin());
 						}
@@ -170,7 +170,7 @@ void NetworkingClient::update()
 		_tcpMessageThread = async(launch::async, &NetworkingClient::_waitForTcpMessage, this, _tcpSocket);
 	}
 
-	while(NetworkingUtils::isMessageReadyUDP(_udpSocket))
+	while(isMessageReadyUDP(_udpSocket))
 	{
 		const auto messageResult = _receiveUdpMessage(_udpSocket);
 		const auto messageStatusCode = get<0>(messageResult);
@@ -181,7 +181,7 @@ void NetworkingClient::update()
 
 		if(messageStatusCode > 0)
 		{
-			if((messageIP == _serverIP) && (messagePort == _serverPort))
+			if((messageIP == _serverIP) && (messagePort == SERVER_PORT))
 			{
 				_pendingMessages.push_back(NetworkingServerMessage(messageContent, NetworkProtocol::UDP));
 			}

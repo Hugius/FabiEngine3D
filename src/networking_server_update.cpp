@@ -42,8 +42,8 @@ void NetworkingServer::update()
 			Logger::throwError("NetworkingServer::update::1 ---> ", WSAGetLastError());
 		}
 
-		auto clientIP = NetworkingUtils::extractPeerIP(clientSocketId);
-		auto clientPort = NetworkingUtils::extractPeerPort(clientSocketId);
+		auto clientIP = extractPeerIP(clientSocketId);
+		auto clientPort = extractPeerPort(clientSocketId);
 
 		_clientSockets.push_back(clientSocketId);
 		_clientIPs.push_back(clientIP);
@@ -81,8 +81,8 @@ void NetworkingServer::update()
 					{
 						if(clientMessageBuild.substr(0, string("REQUEST").size()) == "REQUEST")
 						{
-							const auto newPortUDP = clientMessageBuild.substr(string("REQUEST").size(), NetworkingUtils::PORT_DIGIT_COUNT);
-							const auto newUsername = clientMessageBuild.substr(string("REQUEST").size() + NetworkingUtils::PORT_DIGIT_COUNT);
+							const auto newPortUDP = clientMessageBuild.substr(string("REQUEST").size(), PORT_DIGIT_COUNT);
+							const auto newUsername = clientMessageBuild.substr(string("REQUEST").size() + PORT_DIGIT_COUNT);
 
 							if(_clientIPs.size() > _maxClientCount)
 							{
@@ -172,7 +172,7 @@ void NetworkingServer::update()
 		}
 	}
 
-	while(NetworkingUtils::isMessageReadyUDP(_udpSocket))
+	while(isMessageReadyUDP(_udpSocket))
 	{
 		const auto messageResult = _receiveUdpMessage(_udpSocket);
 		const auto messageStatusCode = get<0>(messageResult);

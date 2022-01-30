@@ -15,9 +15,6 @@
     <ClInclude Include="..\..\..\src\networking_client_message.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\networking_utils.hpp">
-      <Filter>Miscellaneous</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\networking_server_message.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
@@ -29,9 +26,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\networking_utils.cpp">
-      <Filter>Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\networking_server_lifecycle.cpp">
       <Filter>Server</Filter>
     </ClCompile>

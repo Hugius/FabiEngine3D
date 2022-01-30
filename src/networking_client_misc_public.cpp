@@ -4,7 +4,7 @@
 
 const bool NetworkingClient::isValidServerIP(const string& serverIP) const
 {
-	return (NetworkingUtils::isValidIP(serverIP) && (serverIP != "0.0.0.0"));
+	return (isValidIP(serverIP) && (serverIP != "0.0.0.0"));
 }
 
 const bool NetworkingClient::isRunning() const

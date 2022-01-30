@@ -33,11 +33,11 @@ void NetworkingClient::start(const string& username)
 	{
 		Logger::throwError("NetworkingClient::start::2");
 	}
-	if(username.size() > NetworkingUtils::MAX_USERNAME_CHARACTERS)
+	if(username.size() > MAX_USERNAME_CHARACTERS)
 	{
 		Logger::throwError("NetworkingClient::start::3");
 	}
-	if(NetworkingUtils::isMessageReserved(username))
+	if(isMessageReserved(username))
 	{
 		Logger::throwError("NetworkingClient::start::4");
 	}
@@ -50,7 +50,7 @@ void NetworkingClient::start(const string& username)
 	_isRunning = true;
 }
 
-void NetworkingClient::connectToServer(const string& serverIP, const string& serverPort)
+void NetworkingClient::connectToServer(const string& serverIP)
 {
 	if(!_isRunning)
 	{
@@ -73,7 +73,6 @@ void NetworkingClient::connectToServer(const string& serverIP, const string& ser
 	}
 
 	_serverIP = serverIP;
-	_serverPort = serverPort;
 
 	_setupTcp();
 
@@ -111,7 +110,6 @@ void NetworkingClient::disconnectFromServer(bool mustBeAccepted)
 	_lastMilliseconds = 0;
 	_tcpMessageBuild = "";
 	_serverIP = "";
-	_serverPort = "";
 	_isConnectedToServer = false;
 	_isAcceptedByServer = false;
 	_isWaitingForPing = false;
@@ -143,7 +141,6 @@ void NetworkingClient::stop()
 	_username = "";
 	_tcpMessageBuild = "";
 	_serverIP = "";
-	_serverPort = "";
 	_isConnectedToServer = false;
 	_isConnectingToServer = false;
 	_isAcceptedByServer = false;

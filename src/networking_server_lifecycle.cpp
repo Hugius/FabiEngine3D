@@ -49,14 +49,14 @@ void NetworkingServer::start(unsigned int maxClientCount)
 	udpHints.ai_protocol = IPPROTO_UDP;
 
 	addrinfo* tcpAddressInfo = nullptr;
-	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkingUtils::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
+	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
 	if(tcpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkingServer::start::3 ---> ", tcpInfoStatusCode);
 	}
 
 	addrinfo* udpAddressInfo = nullptr;
-	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkingUtils::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
+	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
 	if(udpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkingServer::start::4 ---> ", udpInfoStatusCode);

@@ -8,6 +8,7 @@
 #include <ws2tcpip.h>
 
 using std::launch;
+using std::to_string;
 
 bool NetworkingClient::_sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted)
 {
@@ -25,11 +26,11 @@ bool NetworkingClient::_sendTcpMessage(const string& content, bool isReserved, b
 	{
 		Logger::throwError("NetworkingClient::_sendTcpMessage::3");
 	}
-	if(NetworkingUtils::isMessageReserved(content) && !isReserved)
+	if(isMessageReserved(content) && !isReserved)
 	{
 		Logger::throwError("NetworkingClient::_sendTcpMessage::4");
 	}
-	if(content.size() > NetworkingUtils::MAX_MESSAGE_CHARACTERS)
+	if(content.size() > MAX_MESSAGE_CHARACTERS)
 	{
 		Logger::throwError("NetworkingClient::_sendTcpMessage::5");
 	}
@@ -74,16 +75,16 @@ bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, b
 	{
 		Logger::throwError("NetworkingClient::_sendUdpMessage::3");
 	}
-	else if(NetworkingUtils::isMessageReserved(content) && !isReserved)
+	else if(isMessageReserved(content) && !isReserved)
 	{
 		Logger::throwError("NetworkingClient::_sendUdpMessage::4");
 	}
-	else if(content.size() > NetworkingUtils::MAX_MESSAGE_CHARACTERS)
+	else if(content.size() > MAX_MESSAGE_CHARACTERS)
 	{
 		Logger::throwError("NetworkingClient::_sendUdpMessage::5");
 	}
 
-	auto socketAddress = NetworkingUtils::composeSocketAddress(_serverIP, _serverPort);
+	auto socketAddress = composeSocketAddress(_serverIP, SERVER_PORT);
 
 	string message = (_username + ';' + content);
 
@@ -110,9 +111,18 @@ bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, b
 	return true;
 }
 
-int NetworkingClient::_waitForServerConnection(SOCKET socket, const string& serverIP, const string& serverPort) const
+const bool NetworkingClient::isValidIP(const string& IP) const
 {
-	auto socketAddress = NetworkingUtils::composeSocketAddress(serverIP, serverPort);
+	sockaddr_in socketAddress = sockaddr_in();
+	socketAddress.sin_family = AF_INET;
+	const auto result = InetPton(AF_INET, IP.c_str(), &socketAddress.sin_addr.s_addr);
+
+	return (result > 0);
+}
+
+int NetworkingClient::_waitForServerConnection(SOCKET socket, const string& serverIP) const
+{
+	auto socketAddress = composeSocketAddress(serverIP, SERVER_PORT);
 
 	auto connectStatusCode = connect(
 		socket,
@@ -156,7 +166,7 @@ void NetworkingClient::_setupTcp()
 		Logger::throwError("NetworkingClient::_setupTCP::3 ---> ", WSAGetLastError());
 	}
 
-	_connectionThread = async(launch::async, &NetworkingClient::_waitForServerConnection, this, _tcpSocket, _serverIP, _serverPort);
+	_connectionThread = async(launch::async, &NetworkingClient::_waitForServerConnection, this, _tcpSocket, _serverIP);
 }
 
 void NetworkingClient::_setupUdp()
@@ -191,8 +201,8 @@ void NetworkingClient::_setupUdp()
 
 tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET socket) const
 {
-	char buffer[NetworkingUtils::TCP_BUFFER_BYTES];
-	int bufferLength = static_cast<int>(NetworkingUtils::TCP_BUFFER_BYTES);
+	char buffer[TCP_BUFFER_BYTES];
+	int bufferLength = static_cast<int>(TCP_BUFFER_BYTES);
 	auto receiveResult = recv(socket, buffer, bufferLength, 0);
 
 	if(receiveResult > 0)
@@ -207,15 +217,15 @@ tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET s
 
 tuple<int, int, string, string, string> NetworkingClient::_receiveUdpMessage(SOCKET socket) const
 {
-	char buffer[NetworkingUtils::UDP_BUFFER_BYTES];
-	int bufferLength = static_cast<int>(NetworkingUtils::UDP_BUFFER_BYTES);
+	char buffer[UDP_BUFFER_BYTES];
+	int bufferLength = static_cast<int>(UDP_BUFFER_BYTES);
 	sockaddr_in sourceAddress = sockaddr_in();
 	int sourceAddressLength = sizeof(sourceAddress);
 
 	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 
-	auto IP = NetworkingUtils::extractAddressIP(&sourceAddress);
-	auto port = NetworkingUtils::extractAddressPort(&sourceAddress);
+	auto IP = extractAddressIP(&sourceAddress);
+	auto port = extractAddressPort(&sourceAddress);
 
 	if(receiveResult > 0)
 	{
@@ -225,4 +235,68 @@ tuple<int, int, string, string, string> NetworkingClient::_receiveUdpMessage(SOC
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), "", IP, port);
 	}
+}
+
+const string NetworkingClient::extractSocketIP(SOCKET socket) const
+{
+	sockaddr_in socketAddress = sockaddr_in();
+	int socketAddressLength = sizeof(socketAddress);
+	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+
+	return extractAddressIP(&socketAddress);
+}
+
+const string NetworkingClient::extractSocketPort(SOCKET socket) const
+{
+	sockaddr_in socketAddress = sockaddr_in();
+	int socketAddressLength = sizeof(socketAddress);
+	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+
+	return extractAddressPort(&socketAddress);
+}
+
+const sockaddr_in NetworkingClient::composeSocketAddress(const string& IP, const string& port) const
+{
+	sockaddr_in socketAddress = sockaddr_in();
+	socketAddress.sin_family = AF_INET;
+	InetPton(AF_INET, IP.c_str(), &socketAddress.sin_addr.s_addr);
+	socketAddress.sin_port = htons(static_cast<u_short>(stoi(port)));
+
+	return socketAddress;
+}
+
+const string NetworkingClient::extractAddressIP(sockaddr_in* address) const
+{
+	char IP[IPV4_ADDRESS_LENGTH];
+	inet_ntop(AF_INET, &(address->sin_addr), IP, sizeof(IP));
+
+	return string(IP);
+}
+
+const string NetworkingClient::extractAddressPort(sockaddr_in* address) const
+{
+	return to_string(ntohs(address->sin_port));
+}
+
+const bool NetworkingClient::isMessageReadyUDP(SOCKET socket) const
+{
+	fd_set socketSet = fd_set();
+	timeval timeInterval = {0, 1};
+	FD_ZERO(&socketSet);
+	FD_SET(socket, &socketSet);
+
+	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
+}
+
+const bool NetworkingClient::isMessageReserved(const string& message) const
+{
+	return
+		(
+		(message.substr(0, string("REQUEST").size()) == "REQUEST") ||
+		(message.substr(0, string("ACCEPT").size()) == "ACCEPT") ||
+		(message.substr(0, string("PING").size()) == "PING") ||
+		(message.substr(0, string("SERVER_FULL").size()) == "SERVER_FULL") ||
+		(message.substr(0, string("ALREADY_CONNECTED").size()) == "ALREADY_CONNECTED") ||
+		(message.substr(0, string("DISCONNECTED").size()) == "DISCONNECTED")
+		);
 }

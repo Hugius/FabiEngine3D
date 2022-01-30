@@ -1,7 +1,6 @@
 #pragma once
 
 #include "networking_client_message.hpp"
-#include "networking_utils.hpp"
 
 #include <future>
 #include <vector>
@@ -14,6 +13,10 @@ using std::vector;
 using std::future;
 using std::shared_ptr;
 using std::tuple;
+
+typedef unsigned __int64 SOCKET;
+
+struct sockaddr_in;
 
 class NetworkingServer final
 {
@@ -46,13 +49,30 @@ public:
 private:
 	void _disconnectClient(SOCKET socket);
 
+	static inline const string SERVER_PORT = "61295";
+	static inline constexpr unsigned int PORT_DIGIT_COUNT = 5;
+	static inline constexpr unsigned int IPV4_ADDRESS_LENGTH = 16;
+	static inline constexpr unsigned int MAX_MESSAGE_CHARACTERS = 128;
+	static inline constexpr unsigned int MAX_USERNAME_CHARACTERS = 16;
+	static inline constexpr unsigned int TCP_BUFFER_BYTES = 4096;
+	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_CHARACTERS + 1 + MAX_MESSAGE_CHARACTERS);
+
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
+
+	const string extractPeerIP(SOCKET socket);
+	const string extractPeerPort(SOCKET socket);
 
 	const bool _sendTcpMessage(SOCKET socket, const string& content, bool isReserved);
 	const bool _sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const;
 
 	const SOCKET _waitForClientConnection(SOCKET socket) const;
+
+	const string extractAddressIP(sockaddr_in* address) const;
+	const string extractAddressPort(sockaddr_in* address) const;
+	const bool isMessageReadyUDP(SOCKET socket) const;
+	const bool isMessageReserved(const string& message) const;
+	const sockaddr_in composeSocketAddress(const string& IP, const string& port) const;
 
 	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads;
 	vector<string> _tcpMessageBuilds;

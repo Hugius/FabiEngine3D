@@ -45,16 +45,16 @@ void EngineInterface::server_sendTcpMessage(const string& username, const string
 		Logger::throwWarning("Networking message tried to send TCP message: cannot contain ':'!");
 		return;
 	}
-	else if(NetworkingUtils::isMessageReserved(content))
-	{
-		Logger::throwWarning("Networking server tried to send TCP message: \"" + content + "\" is reserved!");
-		return;
-	}
-	else if(content.size() > NetworkingUtils::MAX_MESSAGE_CHARACTERS)
-	{
-		Logger::throwWarning("Networking server tried to send TCP message: maximum character amount exceeded!");
-		return;
-	}
+	//else if(isMessageReserved(content))
+	//{
+	//	Logger::throwWarning("Networking server tried to send TCP message: \"" + content + "\" is reserved!");
+	//	return;
+	//}
+	//else if(content.size() > MAX_MESSAGE_CHARACTERS)
+	//{
+	//	Logger::throwWarning("Networking server tried to send TCP message: maximum character amount exceeded!");
+	//	return;
+	//}
 
 	_core->getNetworkingServer()->sendTcpMessage(username, content);
 }
@@ -76,16 +76,16 @@ void EngineInterface::server_sendUdpMessage(const string& username, const string
 		Logger::throwWarning("Networking message tried to send UDP message: cannot contain ':'!");
 		return;
 	}
-	else if(NetworkingUtils::isMessageReserved(content))
-	{
-		Logger::throwWarning("Networking server tried to send UDP message: \"" + content + "\" is reserved!");
-		return;
-	}
-	else if(content.size() > NetworkingUtils::MAX_MESSAGE_CHARACTERS)
-	{
-		Logger::throwWarning("Networking server tried to send UDP message: maximum character amount exceeded!");
-		return;
-	}
+	//else if(isMessageReserved(content))
+	//{
+	//	Logger::throwWarning("Networking server tried to send UDP message: \"" + content + "\" is reserved!");
+	//	return;
+	//}
+	//else if(content.size() > MAX_MESSAGE_CHARACTERS)
+	//{
+	//	Logger::throwWarning("Networking server tried to send UDP message: maximum character amount exceeded!");
+	//	return;
+	//}
 
 	_core->getNetworkingServer()->sendUdpMessage(username, content);
 }

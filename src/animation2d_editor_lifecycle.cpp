@@ -42,7 +42,6 @@ void Animation2dEditor::unload()
 	_quad2dAnimationsToStart.clear();
 	_hoveredAnimationId = "";
 	_currentAnimationId = "";
-	_currentProjectId = "";
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;
 	_isDeletingAnimation = false;

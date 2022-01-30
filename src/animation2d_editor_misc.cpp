@@ -1,11 +1,6 @@
 #include "animation2d_editor.hpp"
 #include "logger.hpp"
 
-void Animation2dEditor::setCurrentProjectId(const string& projectId)
-{
-	_currentProjectId = projectId;
-}
-
 const bool Animation2dEditor::isLoaded() const
 {
 	return _isEditorLoaded;

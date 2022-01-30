@@ -94,7 +94,6 @@ void Animation3dEditor::unload()
 
 	_modelAnimationsToStop.clear();
 	_modelAnimationsToStart.clear();
-	_currentProjectId = "";
 	_currentAnimationId = "";
 	_currentPartId = "";
 	_hoveredModelId = "";

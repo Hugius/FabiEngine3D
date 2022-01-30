@@ -11,7 +11,6 @@ public:
 
 	void inject(shared_ptr<Script> script);
 
-	void setCurrentProjectId(const string& projectId);
 	void load();
 	void unload();
 	void update();

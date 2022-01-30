@@ -95,7 +95,6 @@ void ModelEditor::unload()
 	_gui->getOverlay()->deleteTextField("aabbId");
 
 	_loadedModelIds.clear();
-	_currentProjectId = "";
 	_currentModelId = "";
 	_currentPartId = "";
 	_currentAabbId = "";

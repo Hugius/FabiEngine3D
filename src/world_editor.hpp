@@ -27,7 +27,6 @@ public:
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<SoundEditor> soundEditor);
 
-	void setCurrentProjectId(const string& id);
 	void load();
 	void unload();
 	void update();

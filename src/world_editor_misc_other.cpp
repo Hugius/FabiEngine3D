@@ -156,11 +156,6 @@ const string& WorldEditor::getLoadedWorldId() const
 	return _loadedWorldId;
 }
 
-void WorldEditor::setCurrentProjectId(const string& id)
-{
-	_currentProjectId = id;
-}
-
 const vector<string> WorldEditor::_getWorldIds() const
 {
 	vector<string> worldIds;

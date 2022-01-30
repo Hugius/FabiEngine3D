@@ -218,7 +218,6 @@ void WorldEditor::unload()
 	_selectedSpeakerId = "";
 	_activeSpeakerId = "";
 	_loadedWorldId = "";
-	_currentProjectId = "";
 	_currentWorldId = "";
 	_editorSpeed = 1.0f;
 	_selectedModelHighlightDirection = 1;

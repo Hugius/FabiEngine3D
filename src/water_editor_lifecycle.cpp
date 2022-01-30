@@ -68,7 +68,6 @@ void WaterEditor::unload()
 	}
 
 	_loadedWaterIds.clear();
-	_currentProjectId = "";
 	_currentWaterId = "";
 	_isEditorLoaded = false;
 	_isCreatingWater = false;

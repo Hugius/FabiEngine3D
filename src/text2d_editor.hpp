@@ -7,7 +7,6 @@ class Text2dEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectId(const string& projectId);
 	void load();
 	void update();
 	void unload();

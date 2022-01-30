@@ -68,7 +68,6 @@ void TerrainEditor::unload()
 	}
 
 	_loadedTerrainIds.clear();
-	_currentProjectId = "";
 	_currentTerrainId = "";
 	_isEditorLoaded = false;
 	_isCreatingTerrain = false;

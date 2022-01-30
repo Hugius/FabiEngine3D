@@ -6,11 +6,6 @@ void Animation3dEditor::inject(shared_ptr<ModelEditor> modelEditor)
 	_modelEditor = modelEditor;
 }
 
-void Animation3dEditor::setCurrentProjectId(const string& projectId)
-{
-	_currentProjectId = projectId;
-}
-
 const bool Animation3dEditor::isLoaded() const
 {
 	return _isEditorLoaded;

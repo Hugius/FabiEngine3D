@@ -2,11 +2,6 @@
 
 #include <algorithm>
 
-void WaterEditor::setCurrentProjectId(const string& projectId)
-{
-	_currentProjectId = projectId;
-}
-
 const bool WaterEditor::isLoaded() const
 {
 	return _isEditorLoaded;

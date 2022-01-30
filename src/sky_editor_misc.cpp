@@ -2,11 +2,6 @@
 
 #include <algorithm>
 
-void SkyEditor::setCurrentProjectId(const string& projectId)
-{
-	_currentProjectId = projectId;
-}
-
 const bool SkyEditor::isLoaded() const
 {
 	return _isEditorLoaded;

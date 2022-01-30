@@ -2,11 +2,6 @@
 
 #include <algorithm>
 
-void ModelEditor::setCurrentProjectId(const string& projectId)
-{
-	_currentProjectId = projectId;
-}
-
 const bool ModelEditor::isLoaded() const
 {
 	return _isEditorLoaded;

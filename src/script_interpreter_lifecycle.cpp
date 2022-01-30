@@ -294,7 +294,6 @@ void ScriptInterpreter::unload()
 	_updateScriptIds.clear();
 	_terminateScriptIds.clear();
 	_currentLineIndexStack.clear();
-	_currentProjectId = "";
 	_initEntryId = "";
 	_updateEntryId = "";
 	_terminateEntryId = "";

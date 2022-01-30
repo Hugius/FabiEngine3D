@@ -40,7 +40,6 @@ void SkyEditor::unload()
 	}
 
 	_loadedSkyIds.clear();
-	_currentProjectId = "";
 	_currentSkyId = "";
 	_isEditorLoaded = false;
 	_isCreatingSky = false;

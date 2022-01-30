@@ -9,7 +9,8 @@ public:
 	void inject(shared_ptr<EngineInterface> fe3d);
 	void inject(shared_ptr<GuiManager> gui);
 
-	virtual void setCurrentProjectId(const string& projectId) = 0;
+	void setCurrentProjectId(const string& currentProjectId);
+
 	virtual void load() = 0;
 	virtual void update() = 0;
 	virtual void unload() = 0;

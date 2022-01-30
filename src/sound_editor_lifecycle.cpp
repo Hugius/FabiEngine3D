@@ -48,7 +48,6 @@ void SoundEditor::unload()
 	_gui->getOverlay()->deleteTextField("soundId");
 
 	_loadedSoundIds.clear();
-	_currentProjectId = "";
 	_currentSoundId = "";
 	_hoveredSoundId = "";
 	_isEditorLoaded = false;

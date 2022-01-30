@@ -9,3 +9,8 @@ void BaseEditor::inject(shared_ptr<GuiManager> gui)
 {
 	_gui = gui;
 }
+
+void BaseEditor::setCurrentProjectId(const string& currentProjectId)
+{
+	_currentProjectId = currentProjectId;
+}

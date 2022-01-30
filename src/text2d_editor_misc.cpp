@@ -2,11 +2,6 @@
 
 #include <algorithm>
 
-void Text2dEditor::setCurrentProjectId(const string& projectId)
-{
-	_currentProjectId = projectId;
-}
-
 const bool Text2dEditor::isLoaded() const
 {
 	return _isEditorLoaded;

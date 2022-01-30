@@ -2,11 +2,6 @@
 
 #include <algorithm>
 
-void Quad2dEditor::setCurrentProjectId(const string& projectId)
-{
-	_currentProjectId = projectId;
-}
-
 const bool Quad2dEditor::isLoaded() const
 {
 	return _isEditorLoaded;

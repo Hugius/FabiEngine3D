@@ -53,26 +53,26 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			auto firstListVariable = (_isLocalVariableExisting(firstName) ? _getLocalVariable(firstName) : _getGlobalVariable(firstName));
-			if(firstListVariable.getType() == ScriptVariableType::SINGLE)
+			if(firstListVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwScriptError("variable \"" + firstName + "\" is not of type LIST!");
 				return returnValues;
 			}
 
 			auto secondListVariable = (_isLocalVariableExisting(secondName) ? _getLocalVariable(secondName) : _getGlobalVariable(secondName));
-			if(secondListVariable.getType() == ScriptVariableType::SINGLE)
+			if(secondListVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwScriptError("variable \"" + secondName + "\" is not of type LIST!");
 				return returnValues;
 			}
 
-			for(unsigned int i = 0; i < firstListVariable.getValueCount(); i++)
+			for(unsigned int i = 0; i < firstListVariable->getValueCount(); i++)
 			{
-				returnValues.push_back(firstListVariable.getValue(i));
+				returnValues.push_back(firstListVariable->getValue(i));
 			}
-			for(unsigned int i = 0; i < secondListVariable.getValueCount(); i++)
+			for(unsigned int i = 0; i < secondListVariable->getValueCount(); i++)
 			{
-				returnValues.push_back(secondListVariable.getValue(i));
+				returnValues.push_back(secondListVariable->getValue(i));
 			}
 		}
 	}
@@ -91,13 +91,13 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
-			if(listVariable.getType() == ScriptVariableType::SINGLE)
+			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwScriptError("variable \"" + listName + "\" is not of type LIST!");
 				return returnValues;
 			}
 
-			const auto result = listVariable.getValueCount();
+			const auto result = listVariable->getValueCount();
 
 			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
@@ -122,42 +122,42 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
-			if(listVariable.getType() == ScriptVariableType::SINGLE)
+			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwScriptError("variable \"" + listName + "\" is not of type LIST!");
 				return returnValues;
 			}
 
 			bool hasFoundValue = false;
-			for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
+			for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
 			{
-				if((listVariable.getValue(i).getType() == SVT::STRING) &&
+				if((listVariable->getValue(i).getType() == SVT::STRING) &&
 				   (args[1].getType() == SVT::STRING) &&
-				   (listVariable.getValue(i).getString() == args[1].getString()))
+				   (listVariable->getValue(i).getString() == args[1].getString()))
 				{
 					hasFoundValue = true;
 					break;
 				}
 
-				if((listVariable.getValue(i).getType() == SVT::DECIMAL) &&
+				if((listVariable->getValue(i).getType() == SVT::DECIMAL) &&
 				   (args[1].getType() == SVT::DECIMAL) &&
-				   (listVariable.getValue(i).getDecimal() == args[1].getDecimal()))
+				   (listVariable->getValue(i).getDecimal() == args[1].getDecimal()))
 				{
 					hasFoundValue = true;
 					break;
 				}
 
-				if((listVariable.getValue(i).getType() == SVT::INTEGER) &&
+				if((listVariable->getValue(i).getType() == SVT::INTEGER) &&
 				   (args[1].getType() == SVT::INTEGER) &&
-				   (listVariable.getValue(i).getInteger() == args[1].getInteger()))
+				   (listVariable->getValue(i).getInteger() == args[1].getInteger()))
 				{
 					hasFoundValue = true;
 					break;
 				}
 
-				if((listVariable.getValue(i).getType() == SVT::BOOLEAN) &&
+				if((listVariable->getValue(i).getType() == SVT::BOOLEAN) &&
 				   (args[1].getType() == SVT::BOOLEAN) &&
-				   (listVariable.getValue(i).getBoolean() == args[1].getBoolean()))
+				   (listVariable->getValue(i).getBoolean() == args[1].getBoolean()))
 				{
 					hasFoundValue = true;
 					break;
@@ -187,42 +187,42 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
-			if(listVariable.getType() == ScriptVariableType::SINGLE)
+			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwScriptError("variable \"" + listName + "\" is not of type LIST!");
 				return returnValues;
 			}
 
 			int foundIndex = -1;
-			for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
+			for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
 			{
-				if((listVariable.getValue(i).getType() == SVT::STRING) &&
+				if((listVariable->getValue(i).getType() == SVT::STRING) &&
 				   (args[1].getType() == SVT::STRING) &&
-				   (listVariable.getValue(i).getString() == args[1].getString()))
+				   (listVariable->getValue(i).getString() == args[1].getString()))
 				{
 					foundIndex = i;
 					break;
 				}
 
-				if((listVariable.getValue(i).getType() == SVT::DECIMAL) &&
+				if((listVariable->getValue(i).getType() == SVT::DECIMAL) &&
 				   (args[1].getType() == SVT::DECIMAL) &&
-				   (listVariable.getValue(i).getDecimal() == args[1].getDecimal()))
+				   (listVariable->getValue(i).getDecimal() == args[1].getDecimal()))
 				{
 					foundIndex = i;
 					break;
 				}
 
-				if((listVariable.getValue(i).getType() == SVT::INTEGER) &&
+				if((listVariable->getValue(i).getType() == SVT::INTEGER) &&
 				   (args[1].getType() == SVT::INTEGER) &&
-				   (listVariable.getValue(i).getInteger() == args[1].getInteger()))
+				   (listVariable->getValue(i).getInteger() == args[1].getInteger()))
 				{
 					foundIndex = i;
 					break;
 				}
 
-				if((listVariable.getValue(i).getType() == SVT::BOOLEAN) &&
+				if((listVariable->getValue(i).getType() == SVT::BOOLEAN) &&
 				   (args[1].getType() == SVT::BOOLEAN) &&
-				   (listVariable.getValue(i).getBoolean() == args[1].getBoolean()))
+				   (listVariable->getValue(i).getBoolean() == args[1].getBoolean()))
 				{
 					foundIndex = i;
 					break;
@@ -247,22 +247,22 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
-			if(listVariable.getType() == ScriptVariableType::SINGLE)
+			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwScriptError("variable \"" + listName + "\" is not of type LIST!");
 				return returnValues;
 			}
 
-			if(listVariable.getValueCount() == 0)
+			if(listVariable->getValueCount() == 0)
 			{
 				_throwScriptError("LIST \"" + listName + "\" is empty!");
 				return returnValues;
 			}
 
-			auto type = listVariable.getValue(0).getType();
-			for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
+			auto type = listVariable->getValue(0).getType();
+			for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
 			{
-				if(listVariable.getValue(i).getType() != type)
+				if(listVariable->getValue(i).getType() != type)
 				{
 					_throwScriptError("values inside LIST \"" + listName + "\" not of same type!");
 					return returnValues;
@@ -272,9 +272,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			if(type == ScriptValueType::INTEGER)
 			{
 				vector<int> rawValues;
-				for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
+				for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
 				{
-					rawValues.push_back(listVariable.getValue(i).getInteger());
+					rawValues.push_back(listVariable->getValue(i).getInteger());
 				}
 
 				const auto result = *min_element(begin(rawValues), end(rawValues));
@@ -284,9 +284,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			else if(type == ScriptValueType::DECIMAL)
 			{
 				vector<float> rawValues;
-				for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
+				for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
 				{
-					rawValues.push_back(listVariable.getValue(i).getDecimal());
+					rawValues.push_back(listVariable->getValue(i).getDecimal());
 				}
 
 				const auto result = *min_element(begin(rawValues), end(rawValues));
@@ -315,22 +315,22 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
-			if(listVariable.getType() == ScriptVariableType::SINGLE)
+			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwScriptError("variable \"" + listName + "\" is not of type LIST!");
 				return returnValues;
 			}
 
-			if(listVariable.getValueCount() == 0)
+			if(listVariable->getValueCount() == 0)
 			{
 				_throwScriptError("LIST \"" + listName + "\" is empty!");
 				return returnValues;
 			}
 
-			auto type = listVariable.getValue(0).getType();
-			for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
+			auto type = listVariable->getValue(0).getType();
+			for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
 			{
-				if(listVariable.getValue(i).getType() != type)
+				if(listVariable->getValue(i).getType() != type)
 				{
 					_throwScriptError("values inside LIST \"" + listName + "\" not of same type!");
 					return returnValues;
@@ -340,9 +340,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			if(type == ScriptValueType::INTEGER)
 			{
 				vector<int> rawValues;
-				for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
+				for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
 				{
-					rawValues.push_back(listVariable.getValue(i).getInteger());
+					rawValues.push_back(listVariable->getValue(i).getInteger());
 				}
 
 				const auto result = *max_element(begin(rawValues), end(rawValues));
@@ -352,9 +352,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			else if(type == ScriptValueType::DECIMAL)
 			{
 				vector<float> rawValues;
-				for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
+				for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
 				{
-					rawValues.push_back(listVariable.getValue(i).getDecimal());
+					rawValues.push_back(listVariable->getValue(i).getDecimal());
 				}
 
 				const auto result = *max_element(begin(rawValues), end(rawValues));
@@ -383,16 +383,16 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
-			if(listVariable.getType() == ScriptVariableType::SINGLE)
+			if(listVariable->getType() == ScriptVariableType::SINGLE)
 			{
 				_throwScriptError("variable \"" + listName + "\" is not of type LIST!");
 				return returnValues;
 			}
 
 			vector<ScriptValue> values = {};
-			for(int i = (static_cast<int>(listVariable.getValueCount()) - 1); i > -1; i--)
+			for(int i = (static_cast<int>(listVariable->getValueCount()) - 1); i > -1; i--)
 			{
-				returnValues.push_back(listVariable.getValue(i));
+				returnValues.push_back(listVariable->getValue(i));
 			}
 		}
 	}

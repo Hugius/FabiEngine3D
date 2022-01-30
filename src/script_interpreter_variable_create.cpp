@@ -1,6 +1,8 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
 
+using std::initializer_list;
+
 void ScriptInterpreter::_processVariableCreation(const string& scriptLine, ScriptVariableScope scope)
 {
 	auto forbiddenVariableNames = {
@@ -166,34 +168,34 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 
 		auto values = _extractValuesFromListString(listString);
 
-		variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::MULTIPLE, isConstant, values)));
+		variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isConstant, values)));
 	}
 	else if((typeString == STRING_KEYWORD) && _isStringValue(valueString))
 	{
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		auto values = {ScriptValue(ScriptValueType::STRING, valueString)};
+		auto value = ScriptValue(ScriptValueType::STRING, valueString);
 
-		variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, values)));
+		variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})));
 	}
 	else if((typeString == DECIMAL_KEYWORD) && _isDecimalValue(valueString))
 	{
-		auto values = {ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString)))};
+		auto value = ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString)));
 
-		variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, values)));
+		variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})));
 	}
 	else if((typeString == INTEGER_KEYWORD) && _isIntegerValue(valueString))
 	{
-		auto values = {ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)))};
+		auto value = ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
 
-		variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, values)));
+		variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})));
 	}
 	else if((typeString == BOOLEAN_KEYWORD) && _isBooleanValue(valueString))
 	{
-		auto values = {ScriptValue(ScriptValueType::BOOLEAN, (valueString == "<true>"))};
+		auto value = ScriptValue(ScriptValueType::BOOLEAN, (valueString == "<true>"));
 
-		variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, values)));
+		variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})));
 	}
 	else if((typeString == BOOLEAN_KEYWORD) && (valueString[0] == '(' && valueString.back() == ')'))
 	{
@@ -202,13 +204,13 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 
 		auto value = ScriptValue(ScriptValueType::BOOLEAN, _checkConditionString(valueString));
 
-		variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, {value})));
+		variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})));
 	}
 	else if((valueString.substr(0, 5) == "fe3d:") || (valueString.substr(0, 5) == "math:") || (valueString.substr(0, 5) == "misc:"))
 	{
-		auto loggerMessageCount = Logger::getMessageCount();
+		const auto loggerMessageCount = Logger::getMessageCount();
 
-		auto returnValues =
+		const auto returnValues =
 			(valueString.substr(0, 5) == "fe3d:") ? _processFe3dFunctionCall(valueString) :
 			(valueString.substr(0, 5) == "math:") ? _processMathFunctionCall(valueString) :
 			_processMiscFunctionCall(valueString);
@@ -230,7 +232,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 
 		if(typeString == LIST_KEYWORD)
 		{
-			variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::MULTIPLE, isConstant, returnValues)));
+			variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isConstant, returnValues)));
 		}
 		else if(returnValues.empty())
 		{
@@ -249,19 +251,19 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		}
 		else if((typeString == STRING_KEYWORD) && (returnValues[0].getType() == ScriptValueType::STRING))
 		{
-			variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, returnValues)));
+			variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, returnValues)));
 		}
 		else if((typeString == DECIMAL_KEYWORD) && (returnValues[0].getType() == ScriptValueType::DECIMAL))
 		{
-			variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, returnValues)));
+			variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, returnValues)));
 		}
 		else if((typeString == INTEGER_KEYWORD) && (returnValues[0].getType() == ScriptValueType::INTEGER))
 		{
-			variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, returnValues)));
+			variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, returnValues)));
 		}
 		else if((typeString == BOOLEAN_KEYWORD) && (returnValues[0].getType() == ScriptValueType::BOOLEAN))
 		{
-			variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, returnValues)));
+			variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, returnValues)));
 		}
 		else
 		{
@@ -292,7 +294,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			return;
 		}
 
-		const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
+		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 		unsigned int valueIndex = 0;
 		if(isAccessingList)
@@ -305,39 +307,39 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			valueIndex = listIndex;
 		}
 
-		if((typeString == LIST_KEYWORD) && (rightVariable.getType() == ScriptVariableType::MULTIPLE))
+		if((typeString == LIST_KEYWORD) && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
 			vector<ScriptValue> values = {};
-			for(unsigned int i = 0; i < rightVariable.getValueCount(); i++)
+			for(unsigned int i = 0; i < rightVariable->getValueCount(); i++)
 			{
-				values.push_back(rightVariable.getValue(i));
+				values.push_back(rightVariable->getValue(i));
 			}
 
-			variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::MULTIPLE, isConstant, values)));
+			variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isConstant, values)));
 		}
-		else if((typeString == STRING_KEYWORD) && (rightVariable.getValue(valueIndex).getType() == ScriptValueType::STRING))
+		else if((typeString == STRING_KEYWORD) && (rightVariable->getValue(valueIndex).getType() == ScriptValueType::STRING))
 		{
-			auto values = {rightVariable.getValue(valueIndex)};
+			auto value = rightVariable->getValue(valueIndex);
 
-			variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, values)));
+			variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})));
 		}
-		else if((typeString == DECIMAL_KEYWORD) && (rightVariable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL))
+		else if((typeString == DECIMAL_KEYWORD) && (rightVariable->getValue(valueIndex).getType() == ScriptValueType::DECIMAL))
 		{
-			auto values = {rightVariable.getValue(valueIndex)};
+			auto value = rightVariable->getValue(valueIndex);
 
-			variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, values)));
+			variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})));
 		}
-		else if((typeString == INTEGER_KEYWORD) && (rightVariable.getValue(valueIndex).getType() == ScriptValueType::INTEGER))
+		else if((typeString == INTEGER_KEYWORD) && (rightVariable->getValue(valueIndex).getType() == ScriptValueType::INTEGER))
 		{
-			auto values = {rightVariable.getValue(valueIndex)};
+			auto value = rightVariable->getValue(valueIndex);
 
-			variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, values)));
+			variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})));
 		}
-		else if((typeString == BOOLEAN_KEYWORD) && (rightVariable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN))
+		else if((typeString == BOOLEAN_KEYWORD) && (rightVariable->getValue(valueIndex).getType() == ScriptValueType::BOOLEAN))
 		{
-			auto values = {rightVariable.getValue(valueIndex)};
+			auto value = rightVariable->getValue(valueIndex);
 
-			variableList.insert(make_pair(nameString, ScriptVariable(nameString, scope, ScriptVariableType::SINGLE, isConstant, values)));
+			variableList.insert(make_pair(nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::SINGLE, isConstant, initializer_list{value})));
 		}
 		else
 		{

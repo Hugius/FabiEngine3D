@@ -76,7 +76,7 @@ private:
 	const bool _checkConditionString(const string& conditionString);
 	const bool _validateCondition(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue);
 	const bool _compareValues(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue) const;
-	const bool _validateListIndex(const ScriptVariable& list, unsigned int index);
+	const bool _validateListIndex(const shared_ptr<ScriptVariable> list, unsigned int index);
 	const bool _validateArgumentCount(const vector<ScriptValue>& values, unsigned int count);
 	const bool _validateArgumentTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types);
 	const bool _executeFe3dSkySetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
@@ -159,13 +159,13 @@ private:
 	const vector<ScriptValue> _processFe3dFunctionCall(const string& scriptLine);
 	const vector<ScriptValue> _processMathFunctionCall(const string& scriptLine);
 	const vector<ScriptValue> _processMiscFunctionCall(const string& scriptLine);
-	ScriptVariable& _getLocalVariable(const string& variableId);
-	ScriptVariable& _getGlobalVariable(const string& variableId);
+	shared_ptr<ScriptVariable> _getLocalVariable(const string& variableId);
+	shared_ptr<ScriptVariable> _getGlobalVariable(const string& variableId);
 
 	map<string, float> _debuggingTimes;
 
-	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
-	unordered_map<string, ScriptVariable> _globalVariables;
+	unordered_map<unsigned int, unordered_map<string, shared_ptr<ScriptVariable>>> _localVariables;
+	unordered_map<string, shared_ptr<ScriptVariable>> _globalVariables;
 
 	vector<string> _currentScriptIdsStack;
 	vector<string> _lineStringStreams;

@@ -189,7 +189,7 @@ void ModelEntityManager::update()
 
 			if(!reflectionDistanceMap.empty())
 			{
-				auto& closestReflectionEntityId = reflectionDistanceMap.begin()->second->getId();
+				const auto closestReflectionEntityId = reflectionDistanceMap.begin()->second->getId();
 
 				if(entity->getCurrentReflectionEntityId() != closestReflectionEntityId)
 				{

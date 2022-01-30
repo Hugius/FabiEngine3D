@@ -61,7 +61,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		return;
 	}
 
-	auto& leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
+	const auto leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	unsigned int leftValueIndex = 0;
 	if(isAccessingLeftList)
@@ -74,23 +74,23 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		leftValueIndex = leftListIndex;
 	}
 
-	if(leftVariable.isConstant())
+	if(leftVariable->isConstant())
 	{
 		_throwScriptError("CONST variables cannot be changed!");
 		return;
 	}
 
-	if(!isAccessingLeftList && (leftVariable.getType() == ScriptVariableType::MULTIPLE))
+	if(!isAccessingLeftList && (leftVariable->getType() == ScriptVariableType::MULTIPLE))
 	{
 		_throwScriptError("arithmetic not allowed on LIST values!");
 		return;
 	}
-	else if(leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::STRING)
+	else if(leftVariable->getValue(leftValueIndex).getType() == ScriptValueType::STRING)
 	{
 		_throwScriptError("arithmetic not allowed on STR values!");
 		return;
 	}
-	else if(leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::BOOLEAN)
+	else if(leftVariable->getValue(leftValueIndex).getType() == ScriptValueType::BOOLEAN)
 	{
 		_throwScriptError("arithmetic not allowed on BOOL values!");
 		return;
@@ -98,18 +98,18 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 
 	if(operatorString == NEGATION_KEYWORD)
 	{
-		if(leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::INTEGER)
+		if(leftVariable->getValue(leftValueIndex).getType() == ScriptValueType::INTEGER)
 		{
-			auto integer = leftVariable.getValue(leftValueIndex).getInteger();
+			auto integer = leftVariable->getValue(leftValueIndex).getInteger();
 			integer *= -1;
-			leftVariable.getValue(leftValueIndex).setInteger(integer);
+			leftVariable->getValue(leftValueIndex).setInteger(integer);
 			return;
 		}
 		else
 		{
-			auto decimal = leftVariable.getValue(leftValueIndex).getDecimal();
+			auto decimal = leftVariable->getValue(leftValueIndex).getDecimal();
 			decimal *= -1.0f;
-			leftVariable.getValue(leftValueIndex).setDecimal(decimal);
+			leftVariable->getValue(leftValueIndex).setDecimal(decimal);
 			return;
 		}
 	}
@@ -135,12 +135,12 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	else if(_isDecimalValue(valueString))
 	{
 		auto value = ScriptValue(ScriptValueType::DECIMAL, stof(_limitIntegerString(valueString)));
-		_performArithmeticOperation(leftVariable.getValue(leftValueIndex), operatorString, value);
+		_performArithmeticOperation(leftVariable->getValue(leftValueIndex), operatorString, value);
 	}
 	else if(_isIntegerValue(valueString))
 	{
 		auto value = ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
-		_performArithmeticOperation(leftVariable.getValue(leftValueIndex), operatorString, value);
+		_performArithmeticOperation(leftVariable->getValue(leftValueIndex), operatorString, value);
 	}
 	else if(_isBooleanValue(valueString))
 	{
@@ -170,7 +170,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			return;
 		}
 
-		const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
+		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 		unsigned int rightValueIndex = 0;
 		if(isAccessingRightList)
@@ -183,23 +183,23 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			rightValueIndex = rightListIndex;
 		}
 
-		if(!isAccessingRightList && (rightVariable.getType() == ScriptVariableType::MULTIPLE))
+		if(!isAccessingRightList && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
 			_throwScriptError("arithmetic not allowed on LIST values!");
 			return;
 		}
-		else if(rightVariable.getValue(rightValueIndex).getType() == ScriptValueType::STRING)
+		else if(rightVariable->getValue(rightValueIndex).getType() == ScriptValueType::STRING)
 		{
 			_throwScriptError("arithmetic not allowed on STR values!");
 			return;
 		}
-		else if(rightVariable.getValue(rightValueIndex).getType() == ScriptValueType::BOOLEAN)
+		else if(rightVariable->getValue(rightValueIndex).getType() == ScriptValueType::BOOLEAN)
 		{
 			_throwScriptError("arithmetic not allowed on BOOL values!");
 			return;
 		}
 
-		_performArithmeticOperation(leftVariable.getValue(leftValueIndex), operatorString, rightVariable.getValue(rightValueIndex));
+		_performArithmeticOperation(leftVariable->getValue(leftValueIndex), operatorString, rightVariable->getValue(rightValueIndex));
 	}
 }
 

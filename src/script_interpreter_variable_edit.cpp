@@ -66,9 +66,9 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		return;
 	}
 
-	auto& leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
+	const auto leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	if(leftVariable.isConstant())
+	if(leftVariable->isConstant())
 	{
 		_throwScriptError("CONST variables cannot be changed!");
 		return;
@@ -87,45 +87,45 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		}
 	}
 
-	bool isSingleVariable = (leftVariable.getType() == ScriptVariableType::SINGLE || isAccessingLeftList);
-	bool isStringVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::STRING);
-	bool isDecimalVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::DECIMAL);
-	bool isIntegerVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::INTEGER);
-	bool isBooleanVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::BOOLEAN);
+	bool isSingleVariable = (leftVariable->getType() == ScriptVariableType::SINGLE || isAccessingLeftList);
+	bool isStringVariable = (leftVariable->getValue(leftValueIndex).getType() == ScriptValueType::STRING);
+	bool isDecimalVariable = (leftVariable->getValue(leftValueIndex).getType() == ScriptValueType::DECIMAL);
+	bool isIntegerVariable = (leftVariable->getValue(leftValueIndex).getType() == ScriptValueType::INTEGER);
+	bool isBooleanVariable = (leftVariable->getValue(leftValueIndex).getType() == ScriptValueType::BOOLEAN);
 
-	if(leftVariable.getType() == ScriptVariableType::MULTIPLE && _isListValue(valueString))
+	if(leftVariable->getType() == ScriptVariableType::MULTIPLE && _isListValue(valueString))
 	{
 		string listString = valueString.substr(1);
 		listString.pop_back();
 
 		auto values = _extractValuesFromListString(listString);
-		leftVariable.setValues(values);
+		leftVariable->setValues(values);
 	}
 	else if(isSingleVariable && isStringVariable && _isStringValue(valueString))
 	{
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		leftVariable.getValue(leftValueIndex).setString(valueString);
+		leftVariable->getValue(leftValueIndex).setString(valueString);
 	}
 	else if(isSingleVariable && isDecimalVariable && _isDecimalValue(valueString))
 	{
-		leftVariable.getValue(leftValueIndex).setDecimal(stof(_limitDecimalString(valueString)));
+		leftVariable->getValue(leftValueIndex).setDecimal(stof(_limitDecimalString(valueString)));
 	}
 	else if(isSingleVariable && isIntegerVariable && _isIntegerValue(valueString))
 	{
-		leftVariable.getValue(leftValueIndex).setInteger(stoi(_limitIntegerString(valueString)));
+		leftVariable->getValue(leftValueIndex).setInteger(stoi(_limitIntegerString(valueString)));
 	}
 	else if(isSingleVariable && isBooleanVariable && _isBooleanValue(valueString))
 	{
-		leftVariable.getValue(leftValueIndex).setBoolean(valueString == "<true>");
+		leftVariable->getValue(leftValueIndex).setBoolean(valueString == "<true>");
 	}
 	else if(isSingleVariable && isBooleanVariable && ((valueString[0] == '(') && (valueString.back() == ')')))
 	{
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		leftVariable.getValue(leftValueIndex).setBoolean(_checkConditionString(valueString));
+		leftVariable->getValue(leftValueIndex).setBoolean(_checkConditionString(valueString));
 	}
 	else if(valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:")
 	{
@@ -151,9 +151,9 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			}
 		}
 
-		if(leftVariable.getType() == ScriptVariableType::MULTIPLE)
+		if(leftVariable->getType() == ScriptVariableType::MULTIPLE)
 		{
-			leftVariable.setValues(returnValues);
+			leftVariable->setValues(returnValues);
 		}
 		else if(returnValues.empty())
 		{
@@ -172,19 +172,19 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		}
 		else if(isSingleVariable && isStringVariable && (returnValues[0].getType() == ScriptValueType::STRING))
 		{
-			leftVariable.getValue(leftValueIndex).setString(returnValues[0].getString());
+			leftVariable->getValue(leftValueIndex).setString(returnValues[0].getString());
 		}
 		else if(isSingleVariable && isDecimalVariable && (returnValues[0].getType() == ScriptValueType::DECIMAL))
 		{
-			leftVariable.getValue(leftValueIndex).setDecimal(returnValues[0].getDecimal());
+			leftVariable->getValue(leftValueIndex).setDecimal(returnValues[0].getDecimal());
 		}
 		else if(isSingleVariable && isIntegerVariable && (returnValues[0].getType() == ScriptValueType::INTEGER))
 		{
-			leftVariable.getValue(leftValueIndex).setInteger(returnValues[0].getInteger());
+			leftVariable->getValue(leftValueIndex).setInteger(returnValues[0].getInteger());
 		}
 		else if(isSingleVariable && isBooleanVariable && (returnValues[0].getType() == ScriptValueType::BOOLEAN))
 		{
-			leftVariable.getValue(leftValueIndex).setBoolean(returnValues[0].getBoolean());
+			leftVariable->getValue(leftValueIndex).setBoolean(returnValues[0].getBoolean());
 		}
 		else
 		{
@@ -215,7 +215,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			return;
 		}
 
-		const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
+		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 		unsigned int rightValueIndex = 0;
 		if(isAccessingRightList)
@@ -228,19 +228,19 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			rightValueIndex = rightListIndex;
 		}
 
-		if((leftVariable.getType() == ScriptVariableType::MULTIPLE) && (rightVariable.getType() == ScriptVariableType::MULTIPLE))
+		if((leftVariable->getType() == ScriptVariableType::MULTIPLE) && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
 			vector<ScriptValue> values = {};
-			for(unsigned int i = 0; i < rightVariable.getValueCount(); i++)
+			for(unsigned int i = 0; i < rightVariable->getValueCount(); i++)
 			{
-				values.push_back(rightVariable.getValue(i));
+				values.push_back(rightVariable->getValue(i));
 			}
 
-			leftVariable.setValues(values);
+			leftVariable->setValues(values);
 		}
-		else if(leftVariable.getValue(leftValueIndex).getType() == rightVariable.getValue(rightValueIndex).getType())
+		else if(leftVariable->getValue(leftValueIndex).getType() == rightVariable->getValue(rightValueIndex).getType())
 		{
-			leftVariable.setValue(rightVariable.getValue(rightValueIndex), leftValueIndex);
+			leftVariable->setValue(rightVariable->getValue(rightValueIndex), leftValueIndex);
 		}
 		else
 		{

@@ -1,10 +1,10 @@
 #include "script_interpreter.hpp"
 
-const bool ScriptInterpreter::_validateListIndex(const ScriptVariable& list, unsigned int index)
+const bool ScriptInterpreter::_validateListIndex(const shared_ptr<ScriptVariable> list, unsigned int index)
 {
-	if(list.getType() == ScriptVariableType::SINGLE)
+	if(list->getType() == ScriptVariableType::SINGLE)
 	{
-		_throwScriptError("variable \"" + list.getId() + "\" not of type LIST!");
+		_throwScriptError("variable \"" + list->getId() + "\" not of type LIST!");
 		return false;
 	}
 
@@ -14,7 +14,7 @@ const bool ScriptInterpreter::_validateListIndex(const ScriptVariable& list, uns
 		return false;
 	}
 
-	if(index >= list.getValueCount())
+	if(index >= list->getValueCount())
 	{
 		_throwScriptError("LIST index out of range!");
 		return false;
@@ -91,9 +91,9 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		return;
 	}
 
-	auto& listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
+	auto listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	if(listVariable.isConstant())
+	if(listVariable->isConstant())
 	{
 		_throwScriptError("cannot push to constant LIST!");
 		return;
@@ -109,19 +109,19 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		listVariable.addValue(ScriptValue(ScriptValueType::STRING, valueString));
+		listVariable->addValue(ScriptValue(ScriptValueType::STRING, valueString));
 	}
 	else if(_isDecimalValue(valueString))
 	{
-		listVariable.addValue(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))));
+		listVariable->addValue(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))));
 	}
 	else if(_isIntegerValue(valueString))
 	{
-		listVariable.addValue(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))));
+		listVariable->addValue(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))));
 	}
 	else if(_isBooleanValue(valueString))
 	{
-		listVariable.addValue(ScriptValue(ScriptValueType::BOOLEAN, (valueString == "<true>")));
+		listVariable->addValue(ScriptValue(ScriptValueType::BOOLEAN, (valueString == "<true>")));
 	}
 	else
 	{
@@ -131,15 +131,15 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 			return;
 		}
 
-		const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
+		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
-		if(rightVariable.getType() == ScriptVariableType::MULTIPLE)
+		if(rightVariable->getType() == ScriptVariableType::MULTIPLE)
 		{
 			_throwScriptError("cannot push LIST to LIST!");
 			return;
 		}
 
-		listVariable.addValue(rightVariable.getValue());
+		listVariable->addValue(rightVariable->getValue());
 	}
 }
 
@@ -184,9 +184,9 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		return;
 	}
 
-	auto& listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
+	auto listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	if(listVariable.isConstant())
+	if(listVariable->isConstant())
 	{
 		_throwScriptError("cannot push to constant LIST!");
 		return;
@@ -201,13 +201,13 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	{
 		auto indexVariable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
-		if(indexVariable.getValue().getType() != ScriptValueType::INTEGER)
+		if(indexVariable->getValue().getType() != ScriptValueType::INTEGER)
 		{
 			_throwScriptError("LIST index not of type INT!");
 			return;
 		}
 
-		index = indexVariable.getValue().getInteger();
+		index = indexVariable->getValue().getInteger();
 	}
 
 	if(!_validateListIndex(listVariable, index))
@@ -215,5 +215,5 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		return;
 	}
 
-	listVariable.deleteValue(index);
+	listVariable->deleteValue(index);
 }

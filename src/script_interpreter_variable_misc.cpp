@@ -32,79 +32,79 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 
 	typeString = scriptLine.substr(CASTING_KEYWORD.size() + nameString.size() + 2);
 
-	auto& variable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
+	const auto variable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	if(variable.getType() == ScriptVariableType::MULTIPLE)
+	if(variable->getType() == ScriptVariableType::MULTIPLE)
 	{
 		_throwScriptError("LIST variables cannot be typecasted!");
 		return;
 	}
 
-	if(variable.isConstant())
+	if(variable->isConstant())
 	{
 		_throwScriptError("CONST variables cannot be typecasted!");
 		return;
 	}
 
-	if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == BOOLEAN_KEYWORD))
+	if((variable->getValue().getType() == ScriptValueType::INTEGER) && (typeString == BOOLEAN_KEYWORD))
 	{
-		variable.setValue(ScriptValue(ScriptValueType::BOOLEAN, static_cast<bool>(variable.getValue().getInteger())));
+		variable->setValue(ScriptValue(ScriptValueType::BOOLEAN, static_cast<bool>(variable->getValue().getInteger())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == DECIMAL_KEYWORD))
+	else if((variable->getValue().getType() == ScriptValueType::INTEGER) && (typeString == DECIMAL_KEYWORD))
 	{
-		variable.setValue(ScriptValue(ScriptValueType::DECIMAL, static_cast<float>(variable.getValue().getInteger())));
+		variable->setValue(ScriptValue(ScriptValueType::DECIMAL, static_cast<float>(variable->getValue().getInteger())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == STRING_KEYWORD))
+	else if((variable->getValue().getType() == ScriptValueType::INTEGER) && (typeString == STRING_KEYWORD))
 	{
-		variable.setValue(ScriptValue(ScriptValueType::STRING, to_string(variable.getValue().getInteger())));
+		variable->setValue(ScriptValue(ScriptValueType::STRING, to_string(variable->getValue().getInteger())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == INTEGER_KEYWORD))
+	else if((variable->getValue().getType() == ScriptValueType::DECIMAL) && (typeString == INTEGER_KEYWORD))
 	{
-		variable.setValue(ScriptValue(ScriptValueType::INTEGER, static_cast<int>(variable.getValue().getDecimal())));
+		variable->setValue(ScriptValue(ScriptValueType::INTEGER, static_cast<int>(variable->getValue().getDecimal())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == STRING_KEYWORD))
+	else if((variable->getValue().getType() == ScriptValueType::DECIMAL) && (typeString == STRING_KEYWORD))
 	{
-		variable.setValue(ScriptValue(ScriptValueType::STRING, to_string(variable.getValue().getDecimal())));
+		variable->setValue(ScriptValue(ScriptValueType::STRING, to_string(variable->getValue().getDecimal())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == INTEGER_KEYWORD))
+	else if((variable->getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == INTEGER_KEYWORD))
 	{
-		variable.setValue(ScriptValue(ScriptValueType::INTEGER, static_cast<int>(variable.getValue().getBoolean())));
+		variable->setValue(ScriptValue(ScriptValueType::INTEGER, static_cast<int>(variable->getValue().getBoolean())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == STRING_KEYWORD))
+	else if((variable->getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == STRING_KEYWORD))
 	{
-		string newValue = variable.getValue().getBoolean() ? "<true>" : "<false>";
-		variable.setValue(ScriptValue(ScriptValueType::STRING, newValue));
+		string newValue = variable->getValue().getBoolean() ? "<true>" : "<false>";
+		variable->setValue(ScriptValue(ScriptValueType::STRING, newValue));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == BOOLEAN_KEYWORD))
+	else if((variable->getValue().getType() == ScriptValueType::STRING) && (typeString == BOOLEAN_KEYWORD))
 	{
-		if(!_isBooleanValue(variable.getValue().getString()))
+		if(!_isBooleanValue(variable->getValue().getString()))
 		{
 			_throwScriptError("invalid boolean string!");
 			return;
 		}
 
-		bool newValue = (variable.getValue().getString() == "<true>") ? true : false;
-		variable.setValue(ScriptValue(ScriptValueType::BOOLEAN, newValue));
+		bool newValue = (variable->getValue().getString() == "<true>") ? true : false;
+		variable->setValue(ScriptValue(ScriptValueType::BOOLEAN, newValue));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == INTEGER_KEYWORD))
+	else if((variable->getValue().getType() == ScriptValueType::STRING) && (typeString == INTEGER_KEYWORD))
 	{
-		if(!_isIntegerValue(variable.getValue().getString()))
+		if(!_isIntegerValue(variable->getValue().getString()))
 		{
 			_throwScriptError("invalid integer string!");
 			return;
 		}
 
-		variable.setValue(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(variable.getValue().getString()))));
+		variable->setValue(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(variable->getValue().getString()))));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == DECIMAL_KEYWORD))
+	else if((variable->getValue().getType() == ScriptValueType::STRING) && (typeString == DECIMAL_KEYWORD))
 	{
-		if(!_isDecimalValue(variable.getValue().getString()))
+		if(!_isDecimalValue(variable->getValue().getString()))
 		{
 			_throwScriptError("invalid decimal string!");
 			return;
 		}
 
-		variable.setValue(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(variable.getValue().getString()))));
+		variable->setValue(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(variable->getValue().getString()))));
 	}
 	else
 	{
@@ -115,7 +115,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 
 const bool ScriptInterpreter::_isLocalVariableExisting(const string& variableId)
 {
-	auto& variables = _localVariables[_executionDepth];
+	const auto variables = _localVariables[_executionDepth];
 
 	return (variables.find(variableId) != variables.end());
 }
@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_isGlobalVariableExisting(const string& variableId
 	return (_globalVariables.find(variableId) != _globalVariables.end());
 }
 
-ScriptVariable& ScriptInterpreter::_getLocalVariable(const string& variableId)
+shared_ptr<ScriptVariable> ScriptInterpreter::_getLocalVariable(const string& variableId)
 {
 	auto& variables = _localVariables[_executionDepth];
 	auto iterator = variables.find(variableId);
@@ -138,7 +138,7 @@ ScriptVariable& ScriptInterpreter::_getLocalVariable(const string& variableId)
 	Logger::throwError("ScriptInterpreter::_getLocalVariable");
 }
 
-ScriptVariable& ScriptInterpreter::_getGlobalVariable(const string& variableId)
+shared_ptr<ScriptVariable> ScriptInterpreter::_getGlobalVariable(const string& variableId)
 {
 	auto iterator = _globalVariables.find(variableId);
 

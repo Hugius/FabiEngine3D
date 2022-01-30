@@ -78,7 +78,7 @@ void ModelEditor::_updateMiscellaneous()
 
 	if(!_currentModelId.empty())
 	{
-		auto& partId = (_hoveredPartId.empty() ? _currentPartId : _hoveredPartId);
+		const auto partId = (_hoveredPartId.empty() ? _currentPartId : _hoveredPartId);
 
 		if(partId.empty())
 		{

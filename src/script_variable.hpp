@@ -7,7 +7,7 @@
 class ScriptVariable final
 {
 public:
-	ScriptVariable(const string& id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, vector<ScriptValue> values);
+	ScriptVariable(const string& id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, const vector<ScriptValue>& values);
 
 	void addValue(ScriptValue value);
 	void setValues(vector<ScriptValue> values);

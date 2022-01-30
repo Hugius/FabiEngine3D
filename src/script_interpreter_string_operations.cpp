@@ -118,16 +118,16 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 			return -1;
 		}
 
-		auto& variable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
+		const auto variable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
-		if((variable.getType() == ScriptVariableType::MULTIPLE) || variable.getValue().getType() != ScriptValueType::INTEGER)
+		if((variable->getType() == ScriptVariableType::MULTIPLE) || variable->getValue().getType() != ScriptValueType::INTEGER)
 		{
 			_throwScriptError("LIST index must be of type INT!");
 			return -1;
 		}
 
 		isAccessingList = true;
-		return variable.getValue().getInteger();
+		return variable->getValue().getInteger();
 	}
 }
 

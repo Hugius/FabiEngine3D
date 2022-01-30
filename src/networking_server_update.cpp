@@ -36,38 +36,33 @@ void NetworkingServer::update()
 
 	if(_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 	{
-		auto clientSocketId = _connectionThread.get();
-		if(clientSocketId == INVALID_SOCKET)
+		const auto clientSocket = _connectionThread.get();
+
+		if(clientSocket == INVALID_SOCKET)
 		{
 			Logger::throwError("NetworkingServer::update::1 ---> ", WSAGetLastError());
 		}
 
-		auto clientIP = extractPeerIP(clientSocketId);
-		auto clientPort = extractPeerPort(clientSocketId);
+		const auto clientIP = extractPeerIP(clientSocket);
+		const auto clientPort = extractPeerPort(clientSocket);
 
-		_clientSockets.push_back(clientSocketId);
+		_clientSockets.push_back(clientSocket);
 		_clientIPs.push_back(clientIP);
 		_tcpClientPorts.push_back(clientPort);
 		_udpClientPorts.push_back("");
 		_clientUsernames.push_back("");
 		_tcpMessageBuilds.push_back("");
 
-		_tcpMessageThreads.push_back(async(launch::async, &NetworkingServer::_waitForTcpMessage, this, clientSocketId));
+		_tcpMessageThreads.push_back(async(launch::async, &NetworkingServer::_waitForTcpMessage, this, clientSocket));
 
 		_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
 	}
 
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
-		const auto clientSocketId = _clientSockets[i];
-		const auto clientUsername = _clientUsernames[i];
-
-		auto& clientMessageBuild = _tcpMessageBuilds[i];
-		auto& messageThread = _tcpMessageThreads[i];
-
-		if(messageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
+		if(_tcpMessageThreads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 		{
-			const auto messageResult = messageThread.get();
+			const auto messageResult = _tcpMessageThreads[i].get();
 			const auto messageStatusCode = get<0>(messageResult);
 			const auto messageErrorCode = get<1>(messageResult);
 			const auto messageTimestamp = get<2>(messageResult);
@@ -79,36 +74,36 @@ void NetworkingServer::update()
 				{
 					if(character == ';')
 					{
-						if(clientMessageBuild.substr(0, string("REQUEST").size()) == "REQUEST")
+						if(_tcpMessageBuilds[i].substr(0, string("REQUEST").size()) == "REQUEST")
 						{
-							const auto newPortUDP = clientMessageBuild.substr(string("REQUEST").size(), PORT_DIGIT_COUNT);
-							const auto newUsername = clientMessageBuild.substr(string("REQUEST").size() + PORT_DIGIT_COUNT);
+							const auto newPortUDP = _tcpMessageBuilds[i].substr(string("REQUEST").size(), PORT_DIGIT_COUNT);
+							const auto newUsername = _tcpMessageBuilds[i].substr(string("REQUEST").size() + PORT_DIGIT_COUNT);
 
 							if(_clientIPs.size() > _maxClientCount)
 							{
-								if(!_sendTcpMessage(clientSocketId, "SERVER_FULL", true))
+								if(!_sendTcpMessage(_clientSockets[i], "SERVER_FULL", true))
 								{
 									return;
 								}
 
-								clientMessageBuild = "";
+								_tcpMessageBuilds[i] = "";
 
 								break;
 							}
 							else if(find(_clientUsernames.begin(), _clientUsernames.end(), newUsername) != _clientUsernames.end())
 							{
-								if(!_sendTcpMessage(clientSocketId, "ALREADY_CONNECTED", true))
+								if(!_sendTcpMessage(_clientSockets[i], "ALREADY_CONNECTED", true))
 								{
 									return;
 								}
 
-								clientMessageBuild = "";
+								_tcpMessageBuilds[i] = "";
 
 								break;
 							}
 							else
 							{
-								if(!_sendTcpMessage(clientSocketId, "ACCEPT", true))
+								if(!_sendTcpMessage(_clientSockets[i], "ACCEPT", true))
 								{
 									return;
 								}
@@ -119,39 +114,39 @@ void NetworkingServer::update()
 
 								_newClientIP = _clientIPs[i];
 								_newClientUsername = _clientUsernames[i];
-								clientMessageBuild = "";
+								_tcpMessageBuilds[i] = "";
 
 								Logger::throwInfo("Networking client \"" + newUsername + "\" connected to the server!");
 							}
 						}
-						else if(clientMessageBuild == "PING")
+						else if(_tcpMessageBuilds[i] == "PING")
 						{
 							auto receiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
 
 							auto pingMessage = ("PING" + to_string(receiveDelay));
 
-							if(!_sendTcpMessage(clientSocketId, pingMessage, true))
+							if(!_sendTcpMessage(_clientSockets[i], pingMessage, true))
 							{
 								return;
 							}
 
-							clientMessageBuild = "";
+							_tcpMessageBuilds[i] = "";
 						}
 						else
 						{
-							_pendingMessages.push_back(NetworkingClientMessage(clientUsername, clientMessageBuild, NetworkProtocol::TCP));
-							clientMessageBuild = "";
+							_pendingMessages.push_back(NetworkingClientMessage(_clientUsernames[i], _tcpMessageBuilds[i], NetworkProtocol::TCP));
+							_tcpMessageBuilds[i] = "";
 						}
 					}
 					else
 					{
-						clientMessageBuild += character;
+						_tcpMessageBuilds[i] += character;
 					}
 				}
 			}
 			else if(messageStatusCode == 0)
 			{
-				_disconnectClient(clientSocketId);
+				_disconnectClient(_clientSockets[i]);
 				i--;
 			}
 			else
@@ -159,7 +154,7 @@ void NetworkingServer::update()
 				auto code = messageErrorCode;
 				if((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT))
 				{
-					_disconnectClient(clientSocketId);
+					_disconnectClient(_clientSockets[i]);
 					i--;
 				}
 				else
@@ -168,7 +163,7 @@ void NetworkingServer::update()
 				}
 			}
 
-			messageThread = async(launch::async, &NetworkingServer::_waitForTcpMessage, this, clientSocketId);
+			_tcpMessageThreads[i] = async(launch::async, &NetworkingServer::_waitForTcpMessage, this, _clientSockets[i]);
 		}
 	}
 

@@ -111,7 +111,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 					return false;
 				}
 
-				const auto& variable = (_isLocalVariableExisting(elementString) ? _getLocalVariable(elementString) : _getGlobalVariable(elementString));
+				const auto variable = (_isLocalVariableExisting(elementString) ? _getLocalVariable(elementString) : _getGlobalVariable(elementString));
 
 				unsigned int valueIndex = 0;
 				if(isAccessingList)
@@ -124,13 +124,13 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 					valueIndex = listIndex;
 				}
 
-				if(!isAccessingList && variable.getType() == ScriptVariableType::MULTIPLE)
+				if(!isAccessingList && variable->getType() == ScriptVariableType::MULTIPLE)
 				{
 					_throwScriptError("LIST variable cannot be used in condition!");
 					return false;
 				}
 
-				comparisonValues.push_back(variable.getValue(valueIndex));
+				comparisonValues.push_back(variable->getValue(valueIndex));
 			}
 
 			if(comparisonValues.size() == 2)

@@ -128,11 +128,9 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 	auto messageCount = Logger::getMessageCount();
 	if(messageCount > lastLoggerMessageCount)
 	{
-		const auto& messageQueue = Logger::getMessageQueue();
-
 		for(unsigned int i = lastLoggerMessageCount - 1; i < messageCount; i++)
 		{
-			if(messageQueue[i].substr(0, string("[Warn]").size()) == "[Warn]")
+			if(Logger::getMessageQueue()[i].substr(0, string("[Warn]").size()) == "[Warn]")
 			{
 				_hasThrownError = true;
 			}

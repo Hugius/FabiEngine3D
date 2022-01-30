@@ -203,7 +203,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 						return {};
 					}
 
-					const auto& variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
+					const auto variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
 
 					unsigned int valueIndex = 0;
 					if(isAccessingList)
@@ -216,13 +216,13 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 						valueIndex = listIndex;
 					}
 
-					if(!isAccessingList && variable.getType() == ScriptVariableType::MULTIPLE)
+					if(!isAccessingList && variable->getType() == ScriptVariableType::MULTIPLE)
 					{
 						_throwScriptError("LIST cannot be used inside LIST!");
 						return {};
 					}
 
-					valueList.push_back(variable.getValue(valueIndex));
+					valueList.push_back(variable->getValue(valueIndex));
 					isBuildingVariable = false;
 
 					if(c != ',')

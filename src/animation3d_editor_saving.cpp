@@ -9,7 +9,7 @@ using std::ofstream;
 
 const bool Animation3dEditor::saveToFile() const
 {
-	if(!_isEditorLoaded)
+	if(!isLoaded())
 	{
 		return false;
 	}

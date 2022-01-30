@@ -5,10 +5,8 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
-void SkyEditor::load()
+void SkyEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 
@@ -17,18 +15,14 @@ void SkyEditor::load()
 	_fe3d->gfx_setMotionBlurQuality(Config::MAX_MOTION_BLUR_QUALITY);
 
 	_gui->getOverlay()->createTextField("skyId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void SkyEditor::unload()
+void SkyEditor::_unload()
 {
 	for(const auto& id : _loadedSkyIds)
 	{
 		_fe3d->sky_delete(id);
 	}
-
-	_unloadGUI();
 
 	_fe3d->gfx_disableMotionBlur(true);
 
@@ -41,7 +35,6 @@ void SkyEditor::unload()
 
 	_loadedSkyIds.clear();
 	_currentSkyId = "";
-	_isEditorLoaded = false;
 	_isCreatingSky = false;
 	_isChoosingSky = false;
 	_isDeletingSky = false;
@@ -93,39 +86,39 @@ void SkyEditor::_unloadGUI()
 
 void SkyEditor::update()
 {
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTexturingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneousMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSkyCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSkyChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSkyDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

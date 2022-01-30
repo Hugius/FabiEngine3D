@@ -8,7 +8,7 @@ using std::ofstream;
 
 const bool Text2dEditor::saveToFile() const
 {
-	if(!_isEditorLoaded)
+	if(!isLoaded())
 	{
 		return false;
 	}

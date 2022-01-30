@@ -5,33 +5,26 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
-void Quad2dEditor::load()
+void Quad2dEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setYaw(270.0f);
 
 	_gui->getOverlay()->createTextField("quadId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void Quad2dEditor::unload()
+void Quad2dEditor::_unload()
 {
 	for(const auto& id : _loadedQuadIds)
 	{
 		_fe3d->quad2d_delete(id);
 	}
 
-	_unloadGUI();
-
 	_gui->getOverlay()->deleteTextField("quadId");
 
 	_loadedQuadIds.clear();
 	_currentQuadId = "";
 	_hoveredQuadId = "";
-	_isEditorLoaded = false;
 	_isCreatingQuad = false;
 	_isChoosingQuad = false;
 	_isDeletingQuad = false;
@@ -64,23 +57,23 @@ void Quad2dEditor::_unloadGUI()
 
 void Quad2dEditor::update()
 {
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuadCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuadChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuadDeleting();
 	}

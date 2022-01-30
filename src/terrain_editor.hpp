@@ -7,18 +7,17 @@ class TerrainEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void load();
 	void update();
-	void unload();
 
 	const vector<string> getImagePathsFromFile() const;
 	const vector<string>& getLoadedIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
-	const bool isLoaded() const;
 
 private:
+	void _load();
+	void _unload();
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();

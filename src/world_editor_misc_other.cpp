@@ -146,11 +146,6 @@ void WorldEditor::unloadCustomWorld()
 
 }
 
-const bool WorldEditor::isLoaded() const
-{
-	return _isEditorLoaded;
-}
-
 const string& WorldEditor::getLoadedWorldId() const
 {
 	return _loadedWorldId;

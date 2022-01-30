@@ -9,7 +9,7 @@ using std::ofstream;
 
 const bool ScriptEditor::saveScriptFiles()
 {
-	if(!_isEditorLoaded)
+	if(!isLoaded())
 	{
 		return false;
 	}

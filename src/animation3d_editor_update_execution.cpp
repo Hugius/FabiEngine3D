@@ -15,7 +15,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 			continue;
 		}
 
-		if(_isEditorLoaded)
+		if(isLoaded())
 		{
 			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), "Frame: " + to_string(animation.getFrameIndex() + 1), 0.025f);
 		}

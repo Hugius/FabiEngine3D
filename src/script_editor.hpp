@@ -11,16 +11,15 @@ public:
 
 	void inject(shared_ptr<Script> script);
 
-	void load();
-	void unload();
 	void update();
 
 	const bool loadScriptFiles(bool isLoggingEnabled);
 	const bool saveScriptFiles();
-	const bool isLoaded() const;
 	const bool isWritingScript() const;
 
 private:
+	void _load();
+	void _unload();
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateGUI();

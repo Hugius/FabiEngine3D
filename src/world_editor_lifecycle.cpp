@@ -2,10 +2,8 @@
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
-void WorldEditor::load()
+void WorldEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 
 	_fe3d->gfx_enableAntiAliasing();
@@ -100,13 +98,10 @@ void WorldEditor::load()
 	_fe3d->collision_enableCameraResponse(true, true, true);
 	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
-	_isEditorLoaded = true;
 }
 
-void WorldEditor::unload()
+void WorldEditor::_unload()
 {
-	_unloadGUI();
-
 	_fe3d->gfx_disableAntiAliasing(true);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 
@@ -252,230 +247,229 @@ void WorldEditor::unload()
 	_isCreatingWorld = false;
 	_isChoosingWorld = false;
 	_isDeletingWorld = false;
-	_isEditorLoaded = false;
 	_isWireframeModeEnabled = false;
 	_isAabbModeEnabled = false;
 }
 
 void WorldEditor::update()
 {
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSkyMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTerrainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateWaterMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateModelMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateModelPlacingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateModelChoosingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateModelPlacing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateModelEditing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuad3dMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuad3dPlacingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuad3dChoosingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuad3dPlacing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuad3dEditing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateText3dMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateText3dPlacingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateText3dChoosingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateText3dPlacing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateText3dEditing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updatePointlightMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updatePointlightChoosingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updatePointlightPlacing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updatePointlightEditing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSpotlightMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSpotlightChoosingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSpotlightPlacing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSpotlightEditing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateReflectionMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateReflectionChoosingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateReflectionPlacing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateReflectionEditing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSoundMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSoundPlacingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSoundChoosingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSoundPlacing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSoundEditing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateLightingSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateAmbientLightingSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateDirectionalLightingSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateGraphicsSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateShadowsGraphicsSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateReflectionsGraphicsSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateRefractionsGraphicsSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateDofGraphicsSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateFogGraphicsSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateLensFlareGraphicsSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSkyExposureGraphicsSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateBloomGraphicsSettingsMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateWorldCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateWorldChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateWorldDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

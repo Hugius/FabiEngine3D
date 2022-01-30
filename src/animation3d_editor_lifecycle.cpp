@@ -5,10 +5,8 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
-void Animation3dEditor::load()
+void Animation3dEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH);
@@ -53,11 +51,9 @@ void Animation3dEditor::load()
 
 	_gui->getOverlay()->createTextField("animationId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("animationFrame", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void Animation3dEditor::unload()
+void Animation3dEditor::_unload()
 {
 	for(const auto& animation : _animations)
 	{
@@ -66,8 +62,6 @@ void Animation3dEditor::unload()
 			_fe3d->model_delete(animation->getPreviewModelId());
 		}
 	}
-
-	_unloadGUI();
 
 	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
@@ -108,7 +102,6 @@ void Animation3dEditor::unload()
 	_isDeletingAnimation = false;
 	_isChoosingModel = false;
 	_isChoosingPart = false;
-	_isEditorLoaded = false;
 	_startedModelAnimations.clear();
 	_animations.clear();
 }
@@ -158,43 +151,43 @@ void Animation3dEditor::update()
 {
 	_updateModelAnimationExecution();
 
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateFrameMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateAnimationCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateAnimationChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateAnimationDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateModelChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updatePartChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

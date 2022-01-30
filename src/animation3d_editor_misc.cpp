@@ -6,11 +6,6 @@ void Animation3dEditor::inject(shared_ptr<ModelEditor> modelEditor)
 	_modelEditor = modelEditor;
 }
 
-const bool Animation3dEditor::isLoaded() const
-{
-	return _isEditorLoaded;
-}
-
 void Animation3dEditor::_deleteAnimation(const string& id)
 {
 	for(size_t i = 0; i < _animations.size(); i++)

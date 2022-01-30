@@ -46,7 +46,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> position.y
 				>> position.z;
 
-			if(_isEditorLoaded)
+			if(isLoaded())
 			{
 				_fe3d->camera_setPosition(position);
 			}
@@ -57,7 +57,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			iss >> yaw;
 
-			if(_isEditorLoaded)
+			if(isLoaded())
 			{
 				_fe3d->camera_setYaw(yaw);
 			}
@@ -68,7 +68,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			iss >> pitch;
 
-			if(_isEditorLoaded)
+			if(isLoaded())
 			{
 				_fe3d->camera_setPitch(pitch);
 			}
@@ -84,7 +84,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_copyTemplateSky(skyId, templateId))
 			{
-				if(_isEditorLoaded)
+				if(isLoaded())
 				{
 					_currentSkyId = skyId;
 				}
@@ -101,7 +101,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_copyTemplateTerrain(terrainId, templateId))
 			{
-				if(_isEditorLoaded)
+				if(isLoaded())
 				{
 					_currentTerrainId = terrainId;
 				}
@@ -120,7 +120,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(_copyTemplateWater(waterId, templateId))
 			{
-				if(_isEditorLoaded)
+				if(isLoaded())
 				{
 					_currentWaterId = waterId;
 				}
@@ -143,7 +143,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			bool makeInvisible = false;
 			if(modelId[0] == '@')
 			{
-				if(_isEditorLoaded)
+				if(isLoaded())
 				{
 					continue;
 				}
@@ -177,7 +177,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->model_setBaseSize(modelId, size);
 				_fe3d->model_setFrozen(modelId, isFrozen);
 
-				if(_isEditorLoaded)
+				if(isLoaded())
 				{
 					_initialModelPosition.insert(make_pair(modelId, position));
 					_initialModelRotation.insert(make_pair(modelId, rotation));
@@ -249,7 +249,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> maxVolume
 				>> maxDistance;
 
-			if(_isEditorLoaded)
+			if(isLoaded())
 			{
 				const string newModelId = ("@@speaker_" + soundId);
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\speaker.obj");
@@ -296,7 +296,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> intensity
 				>> shape;
 
-			if(_isEditorLoaded)
+			if(isLoaded())
 			{
 				const string newModelId = ("@@lamp_" + pointlightId);
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
@@ -347,7 +347,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> angle
 				>> distance;
 
-			if(_isEditorLoaded)
+			if(isLoaded())
 			{
 				const string newModelId = ("@@torch_" + spotlightId);
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\torch.obj");
@@ -387,7 +387,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> position.y
 				>> position.z;
 
-			if(_isEditorLoaded)
+			if(isLoaded())
 			{
 				const string newModelId = ("@@camera_" + reflectionId);
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
@@ -411,7 +411,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "EDITOR_SPEED")
 		{
-			if(_isEditorLoaded)
+			if(isLoaded())
 			{
 				iss >> _editorSpeed;
 			}

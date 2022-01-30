@@ -5,10 +5,8 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
-void Text3dEditor::load()
+void Text3dEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
@@ -47,18 +45,14 @@ void Text3dEditor::load()
 	_fe3d->model_setShadowed("@@grid", false);
 
 	_gui->getOverlay()->createTextField("textId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void Text3dEditor::unload()
+void Text3dEditor::_unload()
 {
 	for(const auto& id : _loadedTextIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
-
-	_unloadGUI();
 
 	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
@@ -83,7 +77,6 @@ void Text3dEditor::unload()
 	_isCreatingText3d = false;
 	_isChoosingText3d = false;
 	_isDeletingText3d = false;
-	_isEditorLoaded = false;
 }
 
 void Text3dEditor::_loadGUI()
@@ -131,39 +124,39 @@ void Text3dEditor::_unloadGUI()
 
 void Text3dEditor::update()
 {
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateLightingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneousMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateText3dCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateText3dChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateText3dDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

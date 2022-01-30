@@ -8,7 +8,7 @@ using std::ofstream;
 
 const bool SoundEditor::saveToFile() const
 {
-	if(!_isEditorLoaded)
+	if(!isLoaded())
 	{
 		return false;
 	}

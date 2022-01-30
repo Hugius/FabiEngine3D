@@ -10,18 +10,20 @@ public:
 	void inject(shared_ptr<GuiManager> gui);
 
 	void setCurrentProjectId(const string& currentProjectId);
+	void load();
+	void unload();
 
-	virtual void load() = 0;
 	virtual void update() = 0;
-	virtual void unload() = 0;
+
+	const bool isLoaded() const;
 
 protected:
+	virtual void _load() = 0;
+	virtual void _unload() = 0;
 	virtual void _loadGUI() = 0;
 	virtual void _unloadGUI() = 0;
 
-	string _currentProjectId = "";
-
-	bool _isEditorLoaded = false;
+	const string& getCurrentProjectId() const;
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 	shared_ptr<GuiManager> _gui = nullptr;
@@ -31,4 +33,9 @@ protected:
 	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.5f, 0.5f, 1.0f);
 	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
+
+private:
+	string _currentProjectId = "";
+
+	bool _isEditorLoaded = false;
 };

@@ -15,7 +15,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//{
 	//	Logger::throwError("WorldEditor::saveCustomWorldToFile::1");
 	//}
-	//if(_isEditorLoaded)
+	//if(isLoaded())
 	//{
 	//	Logger::throwError("WorldEditor::saveCustomWorldToFile::2");
 	//}

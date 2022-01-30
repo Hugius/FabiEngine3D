@@ -5,10 +5,8 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
-void Quad3dEditor::load()
+void Quad3dEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
@@ -47,18 +45,14 @@ void Quad3dEditor::load()
 	_fe3d->model_setShadowed("@@grid", false);
 
 	_gui->getOverlay()->createTextField("quadId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void Quad3dEditor::unload()
+void Quad3dEditor::_unload()
 {
 	for(const auto& id : _loadedQuadIds)
 	{
 		_fe3d->quad3d_delete(id);
 	}
-
-	_unloadGUI();
 
 	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
@@ -83,7 +77,6 @@ void Quad3dEditor::unload()
 	_isCreatingQuad3d = false;
 	_isChoosingQuad3d = false;
 	_isDeletingQuad3d = false;
-	_isEditorLoaded = false;
 }
 
 void Quad3dEditor::_loadGUI()
@@ -142,43 +135,43 @@ void Quad3dEditor::_unloadGUI()
 
 void Quad3dEditor::update()
 {
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTexturingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateLightingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneousMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuad3dCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuad3dChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateQuad3dDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

@@ -104,11 +104,6 @@ void ScriptEditor::inject(shared_ptr<Script> script)
 	_script = script;
 }
 
-const bool ScriptEditor::isLoaded() const
-{
-	return _isEditorLoaded;
-}
-
 const bool ScriptEditor::isWritingScript() const
 {
 	return !_currentScriptFileId.empty();

@@ -5,10 +5,8 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
-void SoundEditor::load()
+void SoundEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->gfx_enableAntiAliasing();
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d->gfx_enableBloom();
@@ -26,18 +24,14 @@ void SoundEditor::load()
 	_fe3d->quad3d_setBright("@@icon", true);
 
 	_gui->getOverlay()->createTextField("soundId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void SoundEditor::unload()
+void SoundEditor::_unload()
 {
 	for(const auto& id : _loadedSoundIds)
 	{
 		_fe3d->sound2d_delete(id);
 	}
-
-	_unloadGUI();
 
 	_fe3d->gfx_disableAntiAliasing(true);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
@@ -50,7 +44,6 @@ void SoundEditor::unload()
 	_loadedSoundIds.clear();
 	_currentSoundId = "";
 	_hoveredSoundId = "";
-	_isEditorLoaded = false;
 	_isCreatingSound = false;
 	_isChoosingSound = false;
 	_isDeletingSound = false;
@@ -84,27 +77,27 @@ void SoundEditor::_unloadGUI()
 
 void SoundEditor::update()
 {
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSoundCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSoundChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateSoundDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

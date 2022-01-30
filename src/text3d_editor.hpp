@@ -7,8 +7,6 @@ class Text3dEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void load();
-	void unload();
 	void update();
 
 	const vector<string> getImagePathsFromFile() const;
@@ -16,9 +14,10 @@ public:
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
-	const bool isLoaded() const;
 
 private:
+	void _load();
+	void _unload();
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();

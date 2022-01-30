@@ -8,7 +8,7 @@ using std::ofstream;
 
 const bool Animation2dEditor::saveToFile() const
 {
-	if(!_isEditorLoaded)
+	if(!isLoaded())
 	{
 		return false;
 	}

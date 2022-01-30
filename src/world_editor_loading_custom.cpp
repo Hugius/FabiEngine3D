@@ -16,7 +16,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//{
 	//	Logger::throwError("WorldEditor::loadCustomWorldFromFile::1");
 	//}
-	//if(_isEditorLoaded)
+	//if(isLoaded())
 	//{
 	//	Logger::throwError("WorldEditor::loadCustomWorldFromFile::2");
 	//}

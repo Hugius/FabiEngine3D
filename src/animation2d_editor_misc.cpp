@@ -1,11 +1,6 @@
 #include "animation2d_editor.hpp"
 #include "logger.hpp"
 
-const bool Animation2dEditor::isLoaded() const
-{
-	return _isEditorLoaded;
-}
-
 const vector<string> Animation2dEditor::getAnimationIds()
 {
 	vector<string> result;

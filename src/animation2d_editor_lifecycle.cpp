@@ -5,10 +5,8 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
-void Animation2dEditor::load()
+void Animation2dEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setYaw(270.0f);
 
@@ -19,14 +17,10 @@ void Animation2dEditor::load()
 	_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
 
 	_gui->getOverlay()->createTextField("animationId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void Animation2dEditor::unload()
+void Animation2dEditor::_unload()
 {
-	_unloadGUI();
-
 	_fe3d->gfx_disableAntiAliasing(true);
 
 	_fe3d->quad3d_delete(PREVIEW_QUAD_ID);
@@ -45,7 +39,6 @@ void Animation2dEditor::unload()
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;
 	_isDeletingAnimation = false;
-	_isEditorLoaded = false;
 }
 
 void Animation2dEditor::_loadGUI()
@@ -81,27 +74,27 @@ void Animation2dEditor::update()
 	_updateQuad3dAnimationExecution();
 	_updateQuad2dAnimationExecution();
 
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateAnimationCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateAnimationChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateAnimationDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

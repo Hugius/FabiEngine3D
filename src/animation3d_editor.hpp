@@ -11,8 +11,6 @@ public:
 
 	void inject(shared_ptr<ModelEditor> modelEditor);
 
-	void load();
-	void unload();
 	void update();
 	void startModelAnimation(const string& animationId, const string& modelId, int playCount);
 	void pauseModelAnimation(const string& animationId, const string& modelId);
@@ -35,7 +33,6 @@ public:
 
 	const unsigned int getModelAnimationFrameIndex(const string& animationId, const string& modelId) const;
 
-	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& id) const;
 	const bool isModelAnimationStarted(const string& animationId, const string& modelId) const;
 	const bool isModelAnimationPlaying(const string& animationId, const string& modelId) const;
@@ -45,6 +42,8 @@ public:
 	const bool saveToFile() const;
 
 private:
+	void _load();
+	void _unload();
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();

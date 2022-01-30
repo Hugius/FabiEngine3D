@@ -8,8 +8,6 @@ class Animation2dEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void load();
-	void unload();
 	void update();
 	void startQuad3dAnimation(const string& animationId, const string& quadId, int playCount);
 	void pauseQuad3dAnimation(const string& animationId, const string& quadId);
@@ -52,7 +50,6 @@ public:
 	const unsigned int getQuad2dAnimationColumnIndex(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad2dAnimationInterval(const string& animationId, const string& quadId) const;
 
-	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& id) const;
 	const bool isQuad3dAnimationStarted(const string& animationId, const string& quadId) const;
 	const bool isQuad3dAnimationPlaying(const string& animationId, const string& quadId) const;
@@ -66,6 +63,8 @@ public:
 	const bool saveToFile() const;
 
 private:
+	void _load();
+	void _unload();
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();

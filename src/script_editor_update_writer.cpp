@@ -4,7 +4,7 @@
 
 void ScriptEditor::_updateTextWriter()
 {
-	if(_isEditorLoaded && _isWritingScript && !_gui->getOverlay()->isFocused() && !_wasGuiFocused)
+	if(isLoaded() && _isWritingScript && !_gui->getOverlay()->isFocused() && !_wasGuiFocused)
 	{
 		if(_fe3d->misc_isCursorInsideViewport())
 		{

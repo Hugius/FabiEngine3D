@@ -11,7 +11,7 @@ using std::ofstream;
 
 const bool ModelEditor::saveToFile() const
 {
-	if(!_isEditorLoaded)
+	if(!isLoaded())
 	{
 		return false;
 	}

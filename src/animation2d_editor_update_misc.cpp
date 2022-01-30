@@ -7,7 +7,7 @@ void Animation2dEditor::_updateMiscellaneous()
 	{
 		if(!isQuad3dAnimationStarted(_currentAnimationId, PREVIEW_QUAD_ID))
 		{
-			if(_isEditorLoaded)
+			if(isLoaded())
 			{
 				_fe3d->quad3d_setUvMultiplier(PREVIEW_QUAD_ID, fvec2(1.0f));
 				_fe3d->quad3d_setUvOffset(PREVIEW_QUAD_ID, fvec2(0.0f));

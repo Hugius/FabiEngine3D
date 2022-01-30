@@ -5,10 +5,8 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
-void WaterEditor::load()
+void WaterEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
@@ -39,18 +37,14 @@ void WaterEditor::load()
 	_fe3d->model_setShadowed("@@grid", false);
 
 	_gui->getOverlay()->createTextField("waterId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void WaterEditor::unload()
+void WaterEditor::_unload()
 {
 	for(const auto& id : _loadedWaterIds)
 	{
 		_fe3d->water_delete(id);
 	}
-
-	_unloadGUI();
 
 	_fe3d->gfx_disableAntiAliasing(true);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
@@ -69,7 +63,6 @@ void WaterEditor::unload()
 
 	_loadedWaterIds.clear();
 	_currentWaterId = "";
-	_isEditorLoaded = false;
 	_isCreatingWater = false;
 	_isChoosingWater = false;
 	_isDeletingWater = false;
@@ -134,43 +127,43 @@ void WaterEditor::_unloadGUI()
 
 void WaterEditor::update()
 {
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTexturingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateLightingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneousMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateWaterCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateWaterChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateWaterDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

@@ -14,3 +14,29 @@ void BaseEditor::setCurrentProjectId(const string& currentProjectId)
 {
 	_currentProjectId = currentProjectId;
 }
+
+void BaseEditor::load()
+{
+	_loadGUI();
+	_load();
+
+	_isEditorLoaded = true;
+}
+
+void BaseEditor::unload()
+{
+	_unload();
+	_unloadGUI();
+
+	_isEditorLoaded = false;
+}
+
+const bool BaseEditor::isLoaded() const
+{
+	return _isEditorLoaded;
+}
+
+const string& BaseEditor::getCurrentProjectId() const
+{
+	return _currentProjectId;
+}

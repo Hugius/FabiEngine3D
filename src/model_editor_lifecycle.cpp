@@ -9,10 +9,8 @@
 #include <sstream>
 #include <algorithm>
 
-void ModelEditor::load()
+void ModelEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
@@ -58,18 +56,14 @@ void ModelEditor::load()
 
 	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("aabbId", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void ModelEditor::unload()
+void ModelEditor::_unload()
 {
 	for(const auto& id : _loadedModelIds)
 	{
 		_fe3d->model_delete(id);
 	}
-
-	_unloadGUI();
 
 	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
@@ -110,7 +104,6 @@ void ModelEditor::unload()
 	_isCreatingAabb = false;
 	_isChoosingAabb = false;
 	_isDeletingAabb = false;
-	_isEditorLoaded = false;
 }
 
 void ModelEditor::_loadGUI()
@@ -198,67 +191,67 @@ void ModelEditor::_unloadGUI()
 
 void ModelEditor::update()
 {
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTexturingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateLightingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneousMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainAabbMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceAabbMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateModelCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateModelChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateModelDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updatePartChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateAabbCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateAabbChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateAabbDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

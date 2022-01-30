@@ -5,33 +5,26 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
-void Text2dEditor::load()
+void Text2dEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setYaw(270.0f);
 
 	_gui->getOverlay()->createTextField("textId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void Text2dEditor::unload()
+void Text2dEditor::_unload()
 {
 	for(const auto& id : _loadedTextIds)
 	{
 		_fe3d->text2d_delete(id);
 	}
 
-	_unloadGUI();
-
 	_gui->getOverlay()->deleteTextField("textId");
 
 	_loadedTextIds.clear();
 	_currentTextId = "";
 	_hoveredTextId = "";
-	_isEditorLoaded = false;
 	_isCreatingText = false;
 	_isChoosingText = false;
 	_isDeletingText = false;
@@ -63,23 +56,23 @@ void Text2dEditor::_unloadGUI()
 
 void Text2dEditor::update()
 {
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTextCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTextChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTextDeleting();
 	}

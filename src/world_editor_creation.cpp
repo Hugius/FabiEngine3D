@@ -257,7 +257,7 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 		_fe3d->aabb_setLocalSize(newAabbId, _fe3d->aabb_getSize(templateAabbId));
 	}
 
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_initialModelPosition.insert(make_pair(newId, _fe3d->model_getBasePosition(templateId)));
 		_initialModelRotation.insert(make_pair(newId, _fe3d->model_getBaseRotation(templateId)));

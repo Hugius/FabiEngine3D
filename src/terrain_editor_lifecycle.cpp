@@ -5,10 +5,8 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
-void TerrainEditor::load()
+void TerrainEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
@@ -39,18 +37,14 @@ void TerrainEditor::load()
 	_fe3d->model_setShadowed("@@grid", false);
 
 	_gui->getOverlay()->createTextField("terrainId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-
-	_isEditorLoaded = true;
 }
 
-void TerrainEditor::unload()
+void TerrainEditor::_unload()
 {
 	for(const auto& id : _loadedTerrainIds)
 	{
 		_fe3d->terrain_delete(id);
 	}
-
-	_unloadGUI();
 
 	_fe3d->gfx_disableAntiAliasing(true);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
@@ -69,7 +63,6 @@ void TerrainEditor::unload()
 
 	_loadedTerrainIds.clear();
 	_currentTerrainId = "";
-	_isEditorLoaded = false;
 	_isCreatingTerrain = false;
 	_isChoosingTerrain = false;
 	_isDeletingTerrain = false;
@@ -150,51 +143,51 @@ void TerrainEditor::_unloadGUI()
 
 void TerrainEditor::update()
 {
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateDiffuseMapMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateNormalMapMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateBlendMapMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateLightingMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneousMenu();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTerrainCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTerrainChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTerrainDeleting();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

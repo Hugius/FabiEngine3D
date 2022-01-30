@@ -4,10 +4,8 @@
 #include "left_viewport_controller.hpp"
 #include "tools.hpp"
 
-void ScriptEditor::load()
+void ScriptEditor::_load()
 {
-	_loadGUI();
-
 	_fe3d->camera_reset();
 	_fe3d->camera_setPosition(CAMERA_POSITION);
 	_fe3d->camera_setFOV(CAMERA_FOV);
@@ -19,14 +17,10 @@ void ScriptEditor::load()
 	_fe3d->gfx_setBloomIntensity(0.95f);
 	_fe3d->gfx_setBloomBlurCount(2);
 	_fe3d->gfx_setBloomQuality(BLOOM_QUALITY);
-
-	_isEditorLoaded = true;
 }
 
-void ScriptEditor::unload()
+void ScriptEditor::_unload()
 {
-	_unloadGUI();
-
 	_fe3d->gfx_disableBloom(true);
 
 	_fe3d->text3d_deleteAll();
@@ -42,7 +36,6 @@ void ScriptEditor::unload()
 	_firstSelectedLineIndex = -1;
 	_lastSelectedLineIndex = -1;
 	_passedFrames = 0;
-	_isEditorLoaded = false;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_isSingleActionAllowed = true;
@@ -79,31 +72,31 @@ void ScriptEditor::_unloadGUI()
 void ScriptEditor::update()
 {
 
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateGUI();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateScriptFileCreating();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateScriptFileChoosing();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateScriptFileRenaming();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateScriptSearching();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateTextWriter();
 	}
-	if(_isEditorLoaded)
+	if(isLoaded())
 	{
 		_updateMiscellaneous();
 	}

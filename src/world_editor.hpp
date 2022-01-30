@@ -27,8 +27,6 @@ public:
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<SoundEditor> soundEditor);
 
-	void load();
-	void unload();
 	void update();
 	void createCustomWorld(const string& id);
 	void addLightingToCustomWorld();
@@ -53,13 +51,14 @@ public:
 
 	const string& getLoadedWorldId() const;
 
-	const bool isLoaded() const;
 	const bool loadEditorWorldFromFile(const string& fileName);
 	const bool saveEditorWorldToFile();
 	const bool loadCustomWorldFromFile(const string& fileName);
 	const bool saveCustomWorldToFile();
 
 private:
+	void _load();
+	void _unload();
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();

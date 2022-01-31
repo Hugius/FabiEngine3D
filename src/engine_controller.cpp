@@ -199,7 +199,7 @@ void EngineController::initialize()
 		_bottomViewportController->initialize();
 		_topViewportController->initialize();
 
-		_fe3d->misc_enableVsync();
+		_fe3d->misc_setVsyncEnabled(true);
 	}
 }
 

@@ -61,7 +61,7 @@ const bool EngineInterface::pointlight_isExisting(const string& id) const
 	return _core->getPointlightEntityManager()->isEntityExisting(id);
 }
 
-const  bool EngineInterface::pointlight_isVisible(const string& id) const
+const bool EngineInterface::pointlight_isVisible(const string& id) const
 {
 	return _core->getPointlightEntityManager()->getEntity(id)->isVisible();
 }

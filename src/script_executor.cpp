@@ -51,10 +51,7 @@ void ScriptExecutor::pause()
 		}
 
 		_wasVsyncEnabled = _fe3d->misc_isVsyncEnabled();
-		if(_wasVsyncEnabled)
-		{
-			_fe3d->misc_disableVsync();
-		}
+		_fe3d->misc_setVsyncEnabled(!_wasVsyncEnabled);
 
 		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
@@ -86,11 +83,7 @@ void ScriptExecutor::resume()
 	{
 		_fe3d->misc_centerCursor();
 		_fe3d->misc_setCursorVisible(_wasCursorVisible);
-
-		if(_wasVsyncEnabled)
-		{
-			_fe3d->misc_enableVsync();
-		}
+		_fe3d->misc_setVsyncEnabled(_wasVsyncEnabled);
 
 		if(_wasTimerStarted)
 		{

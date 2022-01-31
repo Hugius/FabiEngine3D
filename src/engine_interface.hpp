@@ -885,8 +885,7 @@ public:
 	const bool client_isAcceptedByServer() const;
 	const bool client_isMessageReserved(const string& message);
 
-	void misc_enableVsync();
-	void misc_disableVsync();
+	void misc_setVsyncEnabled(bool value);
 	void misc_setCursorVisible(bool value);
 	void misc_setCursorEntityId(const string& value);
 	void misc_centerCursor();

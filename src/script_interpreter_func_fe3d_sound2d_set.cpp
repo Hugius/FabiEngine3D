@@ -65,6 +65,12 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_fe3d->sound2d_isStarted(args[0]->getString()))
+			{
+				_throwScriptError("Tried to play sound2D with id \"" + args[0]->getString() + "\": sound is already started!");
+				return true;
+			}
+
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
 				_fe3d->sound2d_start(args[0]->getString(), args[1]->getInteger(), args[2]->getInteger(), args[3]->getBoolean());
@@ -81,6 +87,17 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
+				if(!_fe3d->sound2d_isPlaying(args[0]->getString()))
+				{
+					_throwScriptError("Tried to pause sound2D with id \"" + args[0]->getString() + "\": sound is not playing!");
+					return true;
+				}
+				if(_fe3d->sound2d_isPaused(args[0]->getString()))
+				{
+					_throwScriptError("Tried to pause sound2D with id \"" + args[0]->getString() + "\": sound is already paused!");
+					return true;
+				}
+
 				_fe3d->sound2d_pause(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -104,6 +121,12 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
+				if(!_fe3d->sound2d_isPaused(args[0]->getString()))
+				{
+					_throwScriptError("Tried to resume sound2D with id \"" + args[0]->getString() + "\": sound is not paused!");
+					return true;
+				}
+
 				_fe3d->sound2d_resume(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -127,6 +150,12 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
+				if(!_fe3d->sound2d_isStarted(args[0]->getString()))
+				{
+					_throwScriptError("Tried to stop sound2D with id \"" + args[0]->getString() + "\": sound is not started!");
+					return true;
+				}
+
 				_fe3d->sound2d_stop(args[0]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -164,6 +193,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:sound2d` functionality as networking server!");
+		return true;
 	}
 
 	return true;

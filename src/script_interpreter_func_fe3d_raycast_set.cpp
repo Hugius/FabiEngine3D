@@ -10,6 +10,12 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_fe3d->raycast_isTerrainPointingEnabled())
+			{
+				_throwScriptError("Tried to enable terrain raycast pointing: already enabled!");
+				return true;
+			}
+
 			_fe3d->raycast_enableTerrainPointing(args[0]->getDecimal(), args[1]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -19,6 +25,12 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_fe3d->raycast_isTerrainPointingEnabled())
+			{
+				_throwScriptError("Tried to disable terrain raycast pointing: not enabled!");
+				return true;
+			}
+
 			_fe3d->raycast_disableTerrainPointing();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));

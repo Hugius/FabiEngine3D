@@ -10,26 +10,9 @@ void EngineInterface::misc_setCursorEntityId(const string& value)
 	_core->getRenderBus()->setCursorEntityId(value);
 }
 
-void EngineInterface::misc_enableVsync()
+void EngineInterface::misc_setVsyncEnabled(bool value)
 {
-	if(_core->getRenderWindow()->isVsyncEnabled())
-	{
-		Logger::throwWarning("Tried to enable Vsync: already enabled!");
-		return;
-	}
-
-	_core->getRenderWindow()->enableVsync();
-}
-
-void EngineInterface::misc_disableVsync()
-{
-	if(!_core->getRenderWindow()->isVsyncEnabled())
-	{
-		Logger::throwWarning("Tried to disable Vsync: not enabled!");
-		return;
-	}
-
-	_core->getRenderWindow()->disableVsync();
+	_core->getRenderWindow()->setVsyncEnabled(value);
 }
 
 void EngineInterface::misc_setCursorVisible(bool value)
@@ -156,12 +139,6 @@ void EngineInterface::misc_cacheAudios(const vector<string>& filePaths)
 
 void EngineInterface::misc_startMillisecondTimer()
 {
-	if(_core->getTimer()->isStarted())
-	{
-		Logger::throwWarning("Tried to start milliseconds timer: already started!");
-		return;
-	}
-
 	_core->getTimer()->start();
 }
 
@@ -187,12 +164,6 @@ const float EngineInterface::misc_getFPS() const
 
 const float EngineInterface::misc_stopMillisecondTimer() const
 {
-	if(!_core->getTimer()->isStarted())
-	{
-		Logger::throwWarning("Tried to stop milliseconds timer: not started!");
-		return 0.0f;
-	}
-
 	return _core->getTimer()->stop();
 }
 

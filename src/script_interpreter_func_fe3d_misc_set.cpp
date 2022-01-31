@@ -92,6 +92,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(_fe3d->misc_isMillisecondTimerStarted())
+			{
+				_throwScriptError("Tried to start milliseconds timer: already started!");
+				return true;
+			}
+
 			_fe3d->misc_startMillisecondTimer();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -101,6 +107,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_fe3d->misc_isMillisecondTimerStarted())
+			{
+				_throwScriptError("Tried to stop milliseconds timer: not started!");
+				return true;
+			}
+
 			const auto result = _fe3d->misc_stopMillisecondTimer();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
@@ -116,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 				return true;
 			}
 
-			_fe3d->misc_enableVsync();
+			_fe3d->misc_setVsyncEnabled(true);
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -131,7 +143,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 				return true;
 			}
 
-			_fe3d->misc_disableVsync();
+			_fe3d->misc_setVsyncEnabled(false);
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

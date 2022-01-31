@@ -28,38 +28,12 @@ void EngineInterface::sound2d_deleteAll()
 
 void EngineInterface::sound2d_start(const string& id, int playCount, unsigned int fadeMS, bool mustForce)
 {
-	auto sound = _core->getSound2dManager()->getSound(id);
-
-	if(!_core->getSound2dPlayer()->isChannelAvailable())
-	{
-		Logger::throwWarning("Tried to play sound2D with id \"", id, "\": no audio channels available!");
-		return;
-	}
-	if(_core->getSound2dPlayer()->isSoundStarted(sound) && !mustForce)
-	{
-		Logger::throwWarning("Tried to play sound2D with id \"", id, "\": sound is already started!");
-		return;
-	}
-
-	_core->getSound2dPlayer()->startSound(sound, playCount, fadeMS, mustForce);
+	_core->getSound2dPlayer()->startSound(_core->getSound2dManager()->getSound(id), playCount, fadeMS, mustForce);
 }
 
 void EngineInterface::sound2d_pause(const string& id)
 {
-	auto sound = _core->getSound2dManager()->getSound(id);
-
-	if(!_core->getSound2dPlayer()->isSoundPlaying(sound))
-	{
-		Logger::throwWarning("Tried to pause sound2D with id \"", id, "\": sound is not playing!");
-		return;
-	}
-	if(_core->getSound2dPlayer()->isSoundPaused(sound))
-	{
-		Logger::throwWarning("Tried to pause sound2D with id \"", id, "\": sound is already paused!");
-		return;
-	}
-
-	_core->getSound2dPlayer()->pauseSound(sound);
+	_core->getSound2dPlayer()->pauseSound(_core->getSound2dManager()->getSound(id));
 }
 
 void EngineInterface::sound2d_pauseAll()
@@ -69,15 +43,7 @@ void EngineInterface::sound2d_pauseAll()
 
 void EngineInterface::sound2d_resume(const string& id)
 {
-	auto sound = _core->getSound2dManager()->getSound(id);
-
-	if(!_core->getSound2dPlayer()->isSoundPaused(sound))
-	{
-		Logger::throwWarning("Tried to resume sound2D with id \"", sound.getId(), "\": sound is not paused!");
-		return;
-	}
-
-	_core->getSound2dPlayer()->resumeSound(sound);
+	_core->getSound2dPlayer()->resumeSound(_core->getSound2dManager()->getSound(id));
 }
 
 void EngineInterface::sound2d_resumeAll()
@@ -87,15 +53,7 @@ void EngineInterface::sound2d_resumeAll()
 
 void EngineInterface::sound2d_stop(const string& id, unsigned int fadeMS)
 {
-	auto sound = _core->getSound2dManager()->getSound(id);
-
-	if(!_core->getSound2dPlayer()->isSoundStarted(sound))
-	{
-		Logger::throwWarning("Tried to stop sound2D with id \"", id, "\": sound is not started!");
-		return;
-	}
-
-	_core->getSound2dPlayer()->stopSound(sound, fadeMS);
+	_core->getSound2dPlayer()->stopSound(_core->getSound2dManager()->getSound(id), fadeMS);
 }
 
 void EngineInterface::sound2d_stopAll()

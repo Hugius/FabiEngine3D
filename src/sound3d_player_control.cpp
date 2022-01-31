@@ -14,10 +14,7 @@ void Sound3dPlayer::startSound(Sound3d& sound, int playCount, unsigned int fadeM
 	}
 
 	auto channel = _getFreeChannel();
-	if(channel == -1)
-	{
-		abort();
-	}
+
 	_channels[channel] = sound.getId();
 
 	if(fadeMS == 0)

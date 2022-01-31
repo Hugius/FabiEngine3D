@@ -161,7 +161,7 @@ void ScriptInterpreter::load()
 
 	if(_fe3d->misc_isVsyncEnabled())
 	{
-		_fe3d->misc_disableVsync();
+		_fe3d->misc_setVsyncEnabled(false);
 	}
 	_fe3d->misc_setCursorVisible(true);
 
@@ -277,7 +277,7 @@ void ScriptInterpreter::unload()
 
 	if(!_fe3d->misc_isVsyncEnabled())
 	{
-		_fe3d->misc_enableVsync();
+		_fe3d->misc_setVsyncEnabled(true);
 	}
 	if(_fe3d->misc_isMillisecondTimerStarted())
 	{

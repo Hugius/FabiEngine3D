@@ -60,7 +60,7 @@ const int Sound2dPlayer::_getFreeChannel() const
 		}
 	}
 
-	return -1;
+	abort();
 }
 
 const bool Sound2dPlayer::isChannelAvailable() const

@@ -78,7 +78,7 @@ const unsigned int Sound3dPlayer::getAllocatedChannelCount() const
 	return static_cast<unsigned int>(_channels.size());
 }
 
-const  int Sound3dPlayer::_getFreeChannel() const
+const int Sound3dPlayer::_getFreeChannel() const
 {
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
@@ -88,7 +88,7 @@ const  int Sound3dPlayer::_getFreeChannel() const
 		}
 	}
 
-	return -1;
+	abort();
 }
 
 const bool Sound3dPlayer::isChannelAvailable() const

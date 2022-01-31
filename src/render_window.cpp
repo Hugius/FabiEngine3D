@@ -9,7 +9,7 @@ RenderWindow::RenderWindow(SDL_Window* windowPointer)
 	_windowPointer(windowPointer)
 {
 	hideBorder();
-	disableVsync();
+	setVsyncEnabled(false);
 }
 
 RenderWindow::~RenderWindow()
@@ -80,14 +80,9 @@ void RenderWindow::disableFullscreen()
 	SDL_SetWindowFullscreen(_windowPointer, SDL_FALSE);
 }
 
-void RenderWindow::enableVsync()
+void RenderWindow::setVsyncEnabled(bool value)
 {
-	SDL_GL_SetSwapInterval(1);
-}
-
-void RenderWindow::disableVsync()
-{
-	SDL_GL_SetSwapInterval(0);
+	SDL_GL_SetSwapInterval(static_cast<int>(value));
 }
 
 void RenderWindow::swapBackBuffer()

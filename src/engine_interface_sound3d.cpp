@@ -28,38 +28,12 @@ void EngineInterface::sound3d_deleteAll()
 
 void EngineInterface::sound3d_start(const string& id, int playCount, unsigned int fadeMS, bool mustForce)
 {
-	auto sound = _core->getSound3dManager()->getSound(id);
-
-	if(!_core->getSound3dPlayer()->isChannelAvailable())
-	{
-		Logger::throwWarning("Tried to play sound3D with id \"", id, "\": no sound channels available!");
-		return;
-	}
-	if(_core->getSound3dPlayer()->isSoundStarted(sound) && !mustForce)
-	{
-		Logger::throwWarning("Tried to play sound3D with id \"", id, "\": sound is already started!");
-		return;
-	}
-
-	_core->getSound3dPlayer()->startSound(sound, playCount, fadeMS, mustForce);
+	_core->getSound3dPlayer()->startSound(_core->getSound3dManager()->getSound(id), playCount, fadeMS, mustForce);
 }
 
 void EngineInterface::sound3d_pause(const string& id)
 {
-	auto sound = _core->getSound3dManager()->getSound(id);
-
-	if(!_core->getSound3dPlayer()->isSoundPlaying(sound))
-	{
-		Logger::throwWarning("Tried to pause sound3D with id \"", id, "\": sound is not playing!");
-		return;
-	}
-	if(_core->getSound3dPlayer()->isSoundPaused(sound))
-	{
-		Logger::throwWarning("Tried to pause sound3D with id \"", id, "\": sound is already paused!");
-		return;
-	}
-
-	_core->getSound3dPlayer()->pauseSound(sound);
+	_core->getSound3dPlayer()->pauseSound(_core->getSound3dManager()->getSound(id));
 }
 
 void EngineInterface::sound3d_pauseAll()
@@ -69,15 +43,7 @@ void EngineInterface::sound3d_pauseAll()
 
 void EngineInterface::sound3d_resume(const string& id)
 {
-	auto sound = _core->getSound3dManager()->getSound(id);
-
-	if(!_core->getSound3dPlayer()->isSoundPaused(sound))
-	{
-		Logger::throwWarning("Tried to resume sound3D with id \"", sound.getId(), "\": sound is not paused!");
-		return;
-	}
-
-	_core->getSound3dPlayer()->resumeSound(sound);
+	_core->getSound3dPlayer()->resumeSound(_core->getSound3dManager()->getSound(id));
 }
 
 void EngineInterface::sound3d_resumeAll()
@@ -87,15 +53,7 @@ void EngineInterface::sound3d_resumeAll()
 
 void EngineInterface::sound3d_stop(const string& id, unsigned int fadeMS)
 {
-	auto sound = _core->getSound3dManager()->getSound(id);
-
-	if(!_core->getSound3dPlayer()->isSoundStarted(sound))
-	{
-		Logger::throwWarning("Tried to stop sound3D with id \"", id, "\": sound is not started!");
-		return;
-	}
-
-	_core->getSound3dPlayer()->stopSound(sound, fadeMS);
+	_core->getSound3dPlayer()->stopSound(_core->getSound3dManager()->getSound(id), fadeMS);
 }
 
 void EngineInterface::sound3d_stopAll()

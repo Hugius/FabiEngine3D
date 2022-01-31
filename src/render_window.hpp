@@ -24,8 +24,7 @@ public:
 	void hideBorder();
 	void enableFullscreen();
 	void disableFullscreen();
-	void enableVsync();
-	void disableVsync();
+	void setVsyncEnabled(bool value);
 	void swapBackBuffer();
 	void showWindow();
 	void hideWindow();

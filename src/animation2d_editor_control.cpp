@@ -20,10 +20,12 @@ void Animation2dEditor::startQuad3dAnimation(const string& animationId, const st
 		abort();
 	}
 
-	auto animation = *_getAnimation(animationId);
-	animation.setPlayCount(playCount);
+	auto newAnimation = make_shared<Animation2d>(*_getAnimation(animationId));
 
-	_startedQuad3dAnimations.insert(make_pair(make_pair(animationId, quadId), animation));
+	newAnimation->setPlayCount(playCount);
+
+
+	_startedQuad3dAnimations.insert(make_pair(make_pair(animationId, quadId), newAnimation));
 }
 
 void Animation2dEditor::pauseQuad3dAnimation(const string& animationId, const string& quadId)
@@ -42,7 +44,7 @@ void Animation2dEditor::pauseQuad3dAnimation(const string& animationId, const st
 		abort();
 	}
 
-	_startedQuad3dAnimations.at(make_pair(animationId, quadId)).setPaused(true);
+	_startedQuad3dAnimations.at(make_pair(animationId, quadId))->setPaused(true);
 }
 
 void Animation2dEditor::autopauseQuad3dAnimation(const string& animationId, const string& quadId)
@@ -61,7 +63,7 @@ void Animation2dEditor::autopauseQuad3dAnimation(const string& animationId, cons
 		abort();
 	}
 
-	_startedQuad3dAnimations.at(make_pair(animationId, quadId)).setAutopaused(true);
+	_startedQuad3dAnimations.at(make_pair(animationId, quadId))->setAutopaused(true);
 }
 
 void Animation2dEditor::resumeQuad3dAnimation(const string& animationId, const string& quadId)
@@ -79,7 +81,7 @@ void Animation2dEditor::resumeQuad3dAnimation(const string& animationId, const s
 		abort();
 	}
 
-	_startedQuad3dAnimations.at(make_pair(animationId, quadId)).setPaused(false);
+	_startedQuad3dAnimations.at(make_pair(animationId, quadId))->setPaused(false);
 }
 
 void Animation2dEditor::stopQuad3dAnimation(const string& animationId, const string& quadId)
@@ -100,7 +102,7 @@ void Animation2dEditor::pauseQuad3dAnimations()
 {
 	for(auto& [key, animation] : _startedQuad3dAnimations)
 	{
-		animation.setPaused(true);
+		animation->setPaused(true);
 	}
 }
 
@@ -108,7 +110,7 @@ void Animation2dEditor::autopauseQuad3dAnimations()
 {
 	for(auto& [key, animation] : _startedQuad3dAnimations)
 	{
-		animation.setAutopaused(true);
+		animation->setAutopaused(true);
 	}
 }
 
@@ -116,7 +118,7 @@ void Animation2dEditor::resumeQuad3dAnimations()
 {
 	for(auto& [key, animation] : _startedQuad3dAnimations)
 	{
-		animation.setPaused(false);
+		animation->setPaused(false);
 	}
 }
 
@@ -136,7 +138,7 @@ void Animation2dEditor::setQuad3dAnimationInterval(const string& animationId, co
 		abort();
 	}
 
-	_startedQuad3dAnimations.at(make_pair(animationId, quadId)).setInterval(value);
+	_startedQuad3dAnimations.at(make_pair(animationId, quadId))->setInterval(value);
 }
 
 void Animation2dEditor::startQuad2dAnimation(const string& animationId, const string& quadId, int playCount)
@@ -158,10 +160,11 @@ void Animation2dEditor::startQuad2dAnimation(const string& animationId, const st
 		abort();
 	}
 
-	auto animation = *_getAnimation(animationId);
-	animation.setPlayCount(playCount);
+	auto newAnimation = make_shared<Animation2d>(*_getAnimation(animationId));
 
-	_startedQuad2dAnimations.insert(make_pair(make_pair(animationId, quadId), animation));
+	newAnimation->setPlayCount(playCount);
+
+	_startedQuad2dAnimations.insert(make_pair(make_pair(animationId, quadId), newAnimation));
 }
 
 void Animation2dEditor::pauseQuad2dAnimation(const string& animationId, const string& quadId)
@@ -180,7 +183,7 @@ void Animation2dEditor::pauseQuad2dAnimation(const string& animationId, const st
 		abort();
 	}
 
-	_startedQuad2dAnimations.at(make_pair(animationId, quadId)).setPaused(true);
+	_startedQuad2dAnimations.at(make_pair(animationId, quadId))->setPaused(true);
 }
 
 void Animation2dEditor::autopauseQuad2dAnimation(const string& animationId, const string& quadId)
@@ -199,7 +202,7 @@ void Animation2dEditor::autopauseQuad2dAnimation(const string& animationId, cons
 		abort();
 	}
 
-	_startedQuad2dAnimations.at(make_pair(animationId, quadId)).setAutopaused(true);
+	_startedQuad2dAnimations.at(make_pair(animationId, quadId))->setAutopaused(true);
 }
 
 void Animation2dEditor::resumeQuad2dAnimation(const string& animationId, const string& quadId)
@@ -217,7 +220,7 @@ void Animation2dEditor::resumeQuad2dAnimation(const string& animationId, const s
 		abort();
 	}
 
-	_startedQuad2dAnimations.at(make_pair(animationId, quadId)).setPaused(false);
+	_startedQuad2dAnimations.at(make_pair(animationId, quadId))->setPaused(false);
 }
 
 void Animation2dEditor::stopQuad2dAnimation(const string& animationId, const string& quadId)
@@ -238,7 +241,7 @@ void Animation2dEditor::pauseQuad2dAnimations()
 {
 	for(auto& [key, animation] : _startedQuad2dAnimations)
 	{
-		animation.setPaused(true);
+		animation->setPaused(true);
 	}
 }
 
@@ -246,7 +249,7 @@ void Animation2dEditor::autopauseQuad2dAnimations()
 {
 	for(auto& [key, animation] : _startedQuad2dAnimations)
 	{
-		animation.setAutopaused(true);
+		animation->setAutopaused(true);
 	}
 }
 
@@ -254,7 +257,7 @@ void Animation2dEditor::resumeQuad2dAnimations()
 {
 	for(auto& [key, animation] : _startedQuad2dAnimations)
 	{
-		animation.setPaused(false);
+		animation->setPaused(false);
 	}
 }
 
@@ -274,5 +277,5 @@ void Animation2dEditor::setQuad2dAnimationInterval(const string& animationId, co
 		abort();
 	}
 
-	_startedQuad2dAnimations.at(make_pair(animationId, quadId)).setInterval(value);
+	_startedQuad2dAnimations.at(make_pair(animationId, quadId))->setInterval(value);
 }

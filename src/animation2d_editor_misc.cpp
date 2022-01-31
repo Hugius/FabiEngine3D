@@ -84,7 +84,7 @@ const unsigned int Animation2dEditor::getQuad3dAnimationRowCount(const string& a
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getRowCount();
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->getRowCount();
 }
 
 const unsigned int Animation2dEditor::getQuad3dAnimationColumnCount(const string& animationId, const string& quadId) const
@@ -102,7 +102,7 @@ const unsigned int Animation2dEditor::getQuad3dAnimationColumnCount(const string
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getColumnCount();
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->getColumnCount();
 }
 
 const unsigned int Animation2dEditor::getQuad3dAnimationRowIndex(const string& animationId, const string& quadId) const
@@ -120,7 +120,7 @@ const unsigned int Animation2dEditor::getQuad3dAnimationRowIndex(const string& a
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getRowIndex();
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->getRowIndex();
 }
 
 const unsigned int Animation2dEditor::getQuad3dAnimationColumnIndex(const string& animationId, const string& quadId) const
@@ -138,7 +138,7 @@ const unsigned int Animation2dEditor::getQuad3dAnimationColumnIndex(const string
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getColumnIndex();
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->getColumnIndex();
 }
 
 const int Animation2dEditor::getQuad3dAnimationPlayCount(const string& animationId, const string& quadId) const
@@ -156,7 +156,7 @@ const int Animation2dEditor::getQuad3dAnimationPlayCount(const string& animation
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getPlayCount();
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->getPlayCount();
 }
 
 const unsigned int Animation2dEditor::getQuad3dAnimationInterval(const string& animationId, const string& quadId) const
@@ -174,7 +174,7 @@ const unsigned int Animation2dEditor::getQuad3dAnimationInterval(const string& a
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getInterval();
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->getInterval();
 }
 
 const unsigned int Animation2dEditor::getQuad2dAnimationRowCount(const string& animationId, const string& quadId) const
@@ -192,7 +192,7 @@ const unsigned int Animation2dEditor::getQuad2dAnimationRowCount(const string& a
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getRowCount();
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getRowCount();
 }
 
 const unsigned int Animation2dEditor::getQuad2dAnimationColumnCount(const string& animationId, const string& quadId) const
@@ -210,7 +210,7 @@ const unsigned int Animation2dEditor::getQuad2dAnimationColumnCount(const string
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getColumnCount();
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getColumnCount();
 }
 
 const unsigned int Animation2dEditor::getQuad2dAnimationRowIndex(const string& animationId, const string& quadId) const
@@ -228,7 +228,7 @@ const unsigned int Animation2dEditor::getQuad2dAnimationRowIndex(const string& a
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getRowIndex();
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getRowIndex();
 }
 
 const unsigned int Animation2dEditor::getQuad2dAnimationColumnIndex(const string& animationId, const string& quadId) const
@@ -246,7 +246,7 @@ const unsigned int Animation2dEditor::getQuad2dAnimationColumnIndex(const string
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getColumnIndex();
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getColumnIndex();
 }
 
 const int Animation2dEditor::getQuad2dAnimationPlayCount(const string& animationId, const string& quadId) const
@@ -264,7 +264,7 @@ const int Animation2dEditor::getQuad2dAnimationPlayCount(const string& animation
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getPlayCount();
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getPlayCount();
 }
 
 const unsigned int Animation2dEditor::getQuad2dAnimationInterval(const string& animationId, const string& quadId) const
@@ -282,7 +282,7 @@ const unsigned int Animation2dEditor::getQuad2dAnimationInterval(const string& a
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getInterval();
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getInterval();
 }
 
 void Animation2dEditor::_deleteAnimation(const string& id)
@@ -372,7 +372,7 @@ const bool Animation2dEditor::isQuad3dAnimationPaused(const string& animationId,
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).isPaused();
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->isPaused();
 }
 
 const bool Animation2dEditor::isQuad3dAnimationAutopaused(const string& animationId, const string& quadId) const
@@ -390,7 +390,7 @@ const bool Animation2dEditor::isQuad3dAnimationAutopaused(const string& animatio
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).isAutopaused();
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->isAutopaused();
 }
 
 const bool Animation2dEditor::isQuad2dAnimationStarted(const string& animationId, const string& quadId) const
@@ -440,7 +440,7 @@ const bool Animation2dEditor::isQuad2dAnimationPaused(const string& animationId,
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).isPaused();
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->isPaused();
 }
 
 const bool Animation2dEditor::isQuad2dAnimationAutopaused(const string& animationId, const string& quadId) const
@@ -458,5 +458,5 @@ const bool Animation2dEditor::isQuad2dAnimationAutopaused(const string& animatio
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).isAutopaused();
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->isAutopaused();
 }

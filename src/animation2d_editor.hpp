@@ -96,7 +96,7 @@ private:
 	bool _isChoosingAnimation = false;
 	bool _isDeletingAnimation = false;
 
-	map<pair<string, string>, Animation2d> _startedQuad3dAnimations;
-	map<pair<string, string>, Animation2d> _startedQuad2dAnimations;
+	map<pair<string, string>, shared_ptr<Animation2d>> _startedQuad3dAnimations;
+	map<pair<string, string>, shared_ptr<Animation2d>> _startedQuad2dAnimations;
 	vector<shared_ptr<Animation2d>> _animations;
 };

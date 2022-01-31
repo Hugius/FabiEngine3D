@@ -73,12 +73,15 @@ const unsigned int Animation2dEditor::getQuad3dAnimationRowCount(const string& a
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getRowCount();
@@ -88,12 +91,15 @@ const unsigned int Animation2dEditor::getQuad3dAnimationColumnCount(const string
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getColumnCount();
@@ -103,12 +109,15 @@ const unsigned int Animation2dEditor::getQuad3dAnimationRowIndex(const string& a
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getRowIndex();
@@ -118,12 +127,15 @@ const unsigned int Animation2dEditor::getQuad3dAnimationColumnIndex(const string
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getColumnIndex();
@@ -133,12 +145,15 @@ const int Animation2dEditor::getQuad3dAnimationPlayCount(const string& animation
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getPlayCount();
@@ -148,12 +163,15 @@ const unsigned int Animation2dEditor::getQuad3dAnimationInterval(const string& a
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).getInterval();
@@ -163,12 +181,15 @@ const unsigned int Animation2dEditor::getQuad2dAnimationRowCount(const string& a
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getRowCount();
@@ -178,12 +199,15 @@ const unsigned int Animation2dEditor::getQuad2dAnimationColumnCount(const string
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getColumnCount();
@@ -193,12 +217,15 @@ const unsigned int Animation2dEditor::getQuad2dAnimationRowIndex(const string& a
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getRowIndex();
@@ -208,12 +235,15 @@ const unsigned int Animation2dEditor::getQuad2dAnimationColumnIndex(const string
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getColumnIndex();
@@ -223,12 +253,15 @@ const int Animation2dEditor::getQuad2dAnimationPlayCount(const string& animation
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getPlayCount();
@@ -238,12 +271,15 @@ const unsigned int Animation2dEditor::getQuad2dAnimationInterval(const string& a
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
-		Logger::throwWarning("animation not started!");
+		abort();
 	}
 
 	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).getInterval();
@@ -293,7 +329,11 @@ const bool Animation2dEditor::isQuad3dAnimationStarted(const string& animationId
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
+	}
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
 	}
 
 	return (_startedQuad3dAnimations.find(make_pair(animationId, quadId)) != _startedQuad3dAnimations.end());
@@ -303,12 +343,15 @@ const bool Animation2dEditor::isQuad3dAnimationPlaying(const string& animationId
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
-		return false;
+		abort();
 	}
 
 	return !isQuad3dAnimationPaused(animationId, quadId);
@@ -318,13 +361,15 @@ const bool Animation2dEditor::isQuad3dAnimationPaused(const string& animationId,
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
-		return false;
+		abort();
 	}
-
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
-		return false;
+		abort();
 	}
 
 	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).isPaused();
@@ -334,13 +379,15 @@ const bool Animation2dEditor::isQuad3dAnimationAutopaused(const string& animatio
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
-		return false;
+		abort();
 	}
-
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
-		return false;
+		abort();
 	}
 
 	return _startedQuad3dAnimations.at(make_pair(animationId, quadId)).isAutopaused();
@@ -350,7 +397,11 @@ const bool Animation2dEditor::isQuad2dAnimationStarted(const string& animationId
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
+	}
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
 	}
 
 	return (_startedQuad2dAnimations.find(make_pair(animationId, quadId)) != _startedQuad2dAnimations.end());
@@ -360,12 +411,15 @@ const bool Animation2dEditor::isQuad2dAnimationPlaying(const string& animationId
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
 	}
-
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
-		return false;
+		abort();
 	}
 
 	return !isQuad2dAnimationPaused(animationId, quadId);
@@ -375,13 +429,15 @@ const bool Animation2dEditor::isQuad2dAnimationPaused(const string& animationId,
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
-		return false;
+		abort();
 	}
-
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
-		return false;
+		abort();
 	}
 
 	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).isPaused();
@@ -391,13 +447,15 @@ const bool Animation2dEditor::isQuad2dAnimationAutopaused(const string& animatio
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
-		return false;
+		abort();
 	}
-
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
-		return false;
+		abort();
 	}
 
 	return _startedQuad2dAnimations.at(make_pair(animationId, quadId)).isAutopaused();

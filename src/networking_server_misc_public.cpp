@@ -8,11 +8,6 @@ const bool NetworkingServer::isRunning() const
 
 const bool NetworkingServer::isClientConnected(const string& username) const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
@@ -29,31 +24,16 @@ const bool NetworkingServer::isClientConnected(const string& username) const
 
 const string NetworkingServer::getNewClientIP() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	return _newClientIP;
 }
 
 const string NetworkingServer::getNewClientUsername() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	return _newClientUsername;
 }
 
 const string NetworkingServer::getOldClientIP() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	if(_oldClientIPs.empty())
 	{
 		return "";
@@ -66,11 +46,6 @@ const string NetworkingServer::getOldClientIP() const
 
 const string NetworkingServer::getOldClientUsername() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	if(_oldClientUsernames.empty())
 	{
 		return "";
@@ -88,41 +63,27 @@ const unsigned int NetworkingServer::getMaxMessageSize() const
 
 const vector<NetworkingClientMessage>& NetworkingServer::getPendingMessages() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	return _pendingMessages;
 }
 
 const vector<string> NetworkingServer::getClientIPs() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
+	vector<string> result;
 
-	vector<string> clientIPs;
 	for(size_t i = 0; i < _clientIPs.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{
-			clientIPs.push_back(_clientIPs[i]);
+			result.push_back(_clientIPs[i]);
 		}
 	}
 
-	return clientIPs;
+	return result;
 }
 
 const vector<string> NetworkingServer::getClientUsernames() const
 {
 	vector<string> clientUsernames;
-
-	if(!_isRunning)
-	{
-		abort();
-	}
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
@@ -138,6 +99,18 @@ const vector<string> NetworkingServer::getClientUsernames() const
 void NetworkingServer::sendTcpMessage(const string& username, const string& content)
 {
 	if(!_isRunning)
+	{
+		abort();
+	}
+	if(find(content.begin(), content.end(), ';') != content.end())
+	{
+		abort();
+	}
+	if(isMessageReserved(content))
+	{
+		abort();
+	}
+	if(content.size() > MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
@@ -163,6 +136,18 @@ void NetworkingServer::sendUdpMessage(const string& username, const string& cont
 	{
 		abort();
 	}
+	if(find(content.begin(), content.end(), ';') != content.end())
+	{
+		abort();
+	}
+	if(isMessageReserved(content))
+	{
+		abort();
+	}
+	if(content.size() > MAX_MESSAGE_SIZE)
+	{
+		abort();
+	}
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
@@ -185,6 +170,18 @@ void NetworkingServer::broadcastTcpMessage(const string& content)
 	{
 		abort();
 	}
+	if(find(content.begin(), content.end(), ';') != content.end())
+	{
+		abort();
+	}
+	if(isMessageReserved(content))
+	{
+		abort();
+	}
+	if(content.size() > MAX_MESSAGE_SIZE)
+	{
+		abort();
+	}
 
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
@@ -198,6 +195,18 @@ void NetworkingServer::broadcastTcpMessage(const string& content)
 void NetworkingServer::broadcastUdpMessage(const string& content)
 {
 	if(!_isRunning)
+	{
+		abort();
+	}
+	if(find(content.begin(), content.end(), ';') != content.end())
+	{
+		abort();
+	}
+	if(isMessageReserved(content))
+	{
+		abort();
+	}
+	if(content.size() > MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}

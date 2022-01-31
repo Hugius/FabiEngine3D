@@ -72,11 +72,11 @@ bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, b
 	{
 		abort();
 	}
-	else if(isMessageReserved(content) && !isReserved)
+	if(isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
-	else if(content.size() > MAX_MESSAGE_SIZE)
+	if(content.size() > MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
@@ -122,10 +122,7 @@ int NetworkingClient::_waitForServerConnection(SOCKET socket, const string& serv
 {
 	auto socketAddress = _composeSocketAddress(serverIP, SERVER_PORT);
 
-	auto connectStatusCode = connect(
-		socket,
-		reinterpret_cast<sockaddr*>(&socketAddress),
-		sizeof(socketAddress));
+	auto connectStatusCode = connect(socket, reinterpret_cast<sockaddr*>(&socketAddress), sizeof(socketAddress));
 
 	if(connectStatusCode == SOCKET_ERROR)
 	{

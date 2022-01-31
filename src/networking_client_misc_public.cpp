@@ -54,11 +54,53 @@ const vector<NetworkingServerMessage>& NetworkingClient::getPendingMessages() co
 
 void NetworkingClient::sendTcpMessage(const string& content)
 {
+	if(!_isRunning)
+	{
+		abort();
+	}
+	if(!_isConnectedToServer || !_isAcceptedByServer)
+	{
+		abort();
+	}
+	if(find(content.begin(), content.end(), ';') != content.end())
+	{
+		abort();
+	}
+	if(isMessageReserved(content))
+	{
+		abort();
+	}
+	if(content.size() > MAX_MESSAGE_SIZE)
+	{
+		abort();
+	}
+
 	_sendTcpMessage(content, false, true);
 }
 
 void NetworkingClient::sendUdpMessage(const string& content)
 {
+	if(!_isRunning)
+	{
+		abort();
+	}
+	if(!_isConnectedToServer || !_isAcceptedByServer)
+	{
+		abort();
+	}
+	if(find(content.begin(), content.end(), ';') != content.end())
+	{
+		abort();
+	}
+	if(isMessageReserved(content))
+	{
+		abort();
+	}
+	if(content.size() > MAX_MESSAGE_SIZE)
+	{
+		abort();
+	}
+
 	_sendUdpMessage(content, false, true);
 }
 

@@ -70,11 +70,6 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 				_throwScriptError("Networking server tried to send TCP message to client \"" + args[0]->getString() + "\": not running!");
 				return true;
 			}
-			if(!_fe3d->server_isClientConnected(args[0]->getString()))
-			{
-				_throwScriptError("Networking server tried to send TCP message to client \"" + args[0]->getString() + "\": not connected!");
-				return true;
-			}
 			if(find(args[1]->getString().begin(), args[1]->getString().end(), ';') != args[1]->getString().end())
 			{
 				_throwScriptError("Networking message tried to send TCP message: cannot contain ':'!");
@@ -88,6 +83,11 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 			if(args[1]->getString().size() > _fe3d->server_getMaxMessageSize())
 			{
 				_throwScriptError("Networking server tried to send TCP message: maximum character amount exceeded!");
+				return true;
+			}
+			if(!_fe3d->server_isClientConnected(args[0]->getString()))
+			{
+				_throwScriptError("Networking server tried to send TCP message to client \"" + args[0]->getString() + "\": not connected!");
 				return true;
 			}
 
@@ -125,6 +125,11 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 			else if(args[1]->getString().size() > _fe3d->server_getMaxMessageSize())
 			{
 				_throwScriptError("Networking server tried to send UDP message: maximum character amount exceeded!");
+				return true;
+			}
+			if(!_fe3d->server_isClientConnected(args[0]->getString()))
+			{
+				_throwScriptError("Networking server tried to send UDP message to client \"" + args[0]->getString() + "\": not connected!");
 				return true;
 			}
 

@@ -12,6 +12,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
+				if(_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation already started!");
+					return true;
+				}
+				if((args[2]->getInteger() < -1) || (args[2]->getInteger() == 0))
+				{
+					_throwScriptError("invalid play count!");
+					return true;
+				}
+
 				_animation2dEditor->startQuad3dAnimation(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -26,6 +37,18 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
+				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+
+				}
+				if(_animation2dEditor->isQuad3dAnimationPaused(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not playing!");
+					return true;
+				}
+
 				_animation2dEditor->pauseQuad3dAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -52,6 +75,18 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
+				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+
+				}
+				if(_animation2dEditor->isQuad3dAnimationPaused(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not playing!");
+					return true;
+				}
+
 				_animation2dEditor->autopauseQuad3dAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -78,6 +113,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
+				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+				if(!_animation2dEditor->isQuad3dAnimationPaused(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not paused!");
+					return true;
+				}
+
 				_animation2dEditor->resumeQuad3dAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -104,6 +150,12 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
+				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+
 				_animation2dEditor->stopQuad3dAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -130,6 +182,12 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad3d(args[1]->getString(), false))
 			{
+				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+
 				_animation2dEditor->setQuad3dAnimationInterval(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -144,6 +202,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
+				if(_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation already started!");
+					return true;
+				}
+				if((args[2]->getInteger() < -1) || (args[2]->getInteger() == 0))
+				{
+					_throwScriptError("play count is invalid!");
+					return true;
+				}
+
 				_animation2dEditor->startQuad2dAnimation(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -158,6 +227,18 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
+				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+
+				}
+				if(_animation2dEditor->isQuad2dAnimationPaused(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not playing!");
+					return true;
+				}
+
 				_animation2dEditor->pauseQuad2dAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -184,6 +265,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
+				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+				if(_animation2dEditor->isQuad2dAnimationPaused(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not playing!");
+					return true;
+				}
+
 				_animation2dEditor->autopauseQuad2dAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -210,6 +302,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
+				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+				if(!_animation2dEditor->isQuad2dAnimationPaused(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not paused!");
+					return true;
+				}
+
 				_animation2dEditor->resumeQuad2dAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -236,6 +339,12 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
+				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+
 				_animation2dEditor->stopQuad2dAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -262,6 +371,12 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
+				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+
 				_animation2dEditor->setQuad2dAnimationInterval(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -276,6 +391,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:animation3d` functionality as networking server!");
+		return true;
 	}
 
 	return true;

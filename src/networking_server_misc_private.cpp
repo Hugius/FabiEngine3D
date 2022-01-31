@@ -16,16 +16,15 @@ const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& conten
 	{
 		abort();
 	}
-
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
 	}
-	else if(isMessageReserved(content) && !isReserved)
+	if(isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
-	else if(content.size() > MAX_MESSAGE_SIZE)
+	if(content.size() > MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
@@ -61,16 +60,15 @@ const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const strin
 	{
 		abort();
 	}
-
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
 	}
-	else if(isMessageReserved(content) && !isReserved)
+	if(isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
-	else if(content.size() > MAX_MESSAGE_SIZE)
+	if(content.size() > MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}

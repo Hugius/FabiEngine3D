@@ -28,8 +28,8 @@ public:
 	void update();
 	void sendTcpMessage(const string& username, const string& content);
 	void sendUdpMessage(const string& username, const string& content);
-	void broadcastTcpMessage(const string& content, const string& exceptionUsername);
-	void broadcastUdpMessage(const string& content, const string& exceptionUsername);
+	void broadcastTcpMessage(const string& content);
+	void broadcastUdpMessage(const string& content);
 	void disconnectClient(const string& username);
 	void disconnectClients();
 	void stop();
@@ -41,8 +41,11 @@ public:
 	const string getOldClientIP() const;
 	const string getOldClientUsername() const;
 
+	const unsigned int getMaxMessageSize() const;
+
 	const bool isRunning() const;
 	const bool isClientConnected(const string& username) const;
+	const bool isMessageReserved(const string& message) const;
 
 	const vector<NetworkingClientMessage>& getPendingMessages() const;
 
@@ -52,10 +55,10 @@ private:
 	static inline const string SERVER_PORT = "61295";
 	static inline constexpr unsigned int PORT_DIGIT_COUNT = 5;
 	static inline constexpr unsigned int IPV4_ADDRESS_LENGTH = 16;
-	static inline constexpr unsigned int MAX_MESSAGE_CHARACTERS = 128;
-	static inline constexpr unsigned int MAX_USERNAME_CHARACTERS = 16;
+	static inline constexpr unsigned int MAX_MESSAGE_SIZE = 128;
+	static inline constexpr unsigned int MAX_USERNAME_SIZE = 16;
 	static inline constexpr unsigned int TCP_BUFFER_BYTES = 4096;
-	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_CHARACTERS + 1 + MAX_MESSAGE_CHARACTERS);
+	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_SIZE);
 
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
@@ -71,7 +74,6 @@ private:
 	const string _extractAddressIP(sockaddr_in* address) const;
 	const string _extractAddressPort(sockaddr_in* address) const;
 	const bool _isMessageReadyUDP(SOCKET socket) const;
-	const bool _isMessageReserved(const string& message) const;
 	const sockaddr_in _composeSocketAddress(const string& IP, const string& port) const;
 
 	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads;

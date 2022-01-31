@@ -14,46 +14,21 @@ const bool NetworkingClient::isRunning() const
 
 const bool NetworkingClient::isConnectingToServer() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	return _isConnectingToServer;
 }
 
 const bool NetworkingClient::isConnectedToServer() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	return _isConnectedToServer;
 }
 
 const bool NetworkingClient::isAcceptedByServer() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	return _isAcceptedByServer;
 }
 
 const unsigned int NetworkingClient::getPingLatency() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
-	if(!_isConnectedToServer || !_isAcceptedByServer)
-	{
-		abort();
-	}
-
 	if(_pingLatencies.empty())
 	{
 		return 0;
@@ -62,43 +37,18 @@ const unsigned int NetworkingClient::getPingLatency() const
 	return Math::calculateAverage(_pingLatencies);
 }
 
-const unsigned int NetworkingClient::getMaxUsernameSize() const
-{
-	return MAX_USERNAME_SIZE;
-}
-
 const string& NetworkingClient::getUsername() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	return _username;
 }
 
 const string& NetworkingClient::getServerIP() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
-	if(!_isConnectedToServer || !_isAcceptedByServer)
-	{
-		abort();
-	}
-
 	return _serverIP;
 }
 
 const vector<NetworkingServerMessage>& NetworkingClient::getPendingMessages() const
 {
-	if(!_isRunning)
-	{
-		abort();
-	}
-
 	return _pendingMessages;
 }
 
@@ -110,4 +60,14 @@ void NetworkingClient::sendTcpMessage(const string& content)
 void NetworkingClient::sendUdpMessage(const string& content)
 {
 	_sendUdpMessage(content, false, true);
+}
+
+const unsigned int NetworkingClient::getMaxUsernameSize() const
+{
+	return MAX_USERNAME_SIZE;
+}
+
+const unsigned int NetworkingClient::getMaxMessageSize()
+{
+	return MAX_MESSAGE_SIZE;
 }

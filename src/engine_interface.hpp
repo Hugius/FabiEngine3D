@@ -847,8 +847,8 @@ public:
 	void server_start(unsigned int maxClientCount);
 	void server_sendTcpMessage(const string& username, const string& content);
 	void server_sendUdpMessage(const string& username, const string& content);
-	void server_broadcastTcpMessage(const string& content, const string& exceptionUsername);
-	void server_broadcastUdpMessage(const string& content, const string& exceptionUsername);
+	void server_broadcastTcpMessage(const string& content);
+	void server_broadcastUdpMessage(const string& content);
 	void server_disconnectClient(const string& username);
 	void server_disconnectClients();
 	void server_stop();
@@ -860,8 +860,10 @@ public:
 	const string server_getNewClientUsername() const;
 	const string server_getOldClientIP() const;
 	const string server_getOldClientUsername() const;
+	const unsigned int server_getMaxMessageSize() const;
 	const bool server_isRunning() const;
 	const bool server_isClientConnected(const string& username) const;
+	const bool server_isMessageReserved(const string& message);
 
 	void client_start(const string& username);
 	void client_connect(const string& serverIP);
@@ -875,6 +877,7 @@ public:
 	const string client_getServerIP() const;
 	const unsigned int client_getPingLatency() const;
 	const unsigned int client_getMaxUsernameSize() const;
+	const unsigned int client_getMaxMessageSize() const;
 	const bool client_isValidServerIP(const string& serverIP) const;
 	const bool client_isRunning() const;
 	const bool client_isConnectingToServer() const;

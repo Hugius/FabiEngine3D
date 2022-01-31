@@ -21,11 +21,11 @@ const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& conten
 	{
 		abort();
 	}
-	else if(_isMessageReserved(content) && !isReserved)
+	else if(isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
-	else if(content.size() > MAX_MESSAGE_CHARACTERS)
+	else if(content.size() > MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
@@ -66,11 +66,11 @@ const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const strin
 	{
 		abort();
 	}
-	else if(_isMessageReserved(content) && !isReserved)
+	else if(isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
-	else if(content.size() > MAX_MESSAGE_CHARACTERS)
+	else if(content.size() > MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
@@ -230,7 +230,7 @@ const bool NetworkingServer::_isMessageReadyUDP(SOCKET socket) const
 	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
 }
 
-const bool NetworkingServer::_isMessageReserved(const string& message) const
+const bool NetworkingServer::isMessageReserved(const string& message) const
 {
 	return
 		(

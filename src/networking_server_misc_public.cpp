@@ -81,6 +81,11 @@ const string NetworkingServer::getOldClientUsername() const
 	}
 }
 
+const unsigned int NetworkingServer::getMaxMessageSize() const
+{
+	return MAX_MESSAGE_SIZE;
+}
+
 const vector<NetworkingClientMessage>& NetworkingServer::getPendingMessages() const
 {
 	if(!_isRunning)
@@ -174,7 +179,7 @@ void NetworkingServer::sendUdpMessage(const string& username, const string& cont
 	abort();
 }
 
-void NetworkingServer::broadcastTcpMessage(const string& content, const string& exceptionUsername)
+void NetworkingServer::broadcastTcpMessage(const string& content)
 {
 	if(!_isRunning)
 	{
@@ -183,17 +188,14 @@ void NetworkingServer::broadcastTcpMessage(const string& content, const string& 
 
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
-		if(_clientUsernames[i] != exceptionUsername)
+		if(!_clientUsernames[i].empty())
 		{
-			if(!_clientUsernames[i].empty())
-			{
-				_sendTcpMessage(_clientSockets[i], content, false);
-			}
+			_sendTcpMessage(_clientSockets[i], content, false);
 		}
 	}
 }
 
-void NetworkingServer::broadcastUdpMessage(const string& content, const string& exceptionUsername)
+void NetworkingServer::broadcastUdpMessage(const string& content)
 {
 	if(!_isRunning)
 	{
@@ -202,12 +204,9 @@ void NetworkingServer::broadcastUdpMessage(const string& content, const string& 
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
-		if(_clientUsernames[i] != exceptionUsername)
+		if(!_clientUsernames[i].empty())
 		{
-			if(!_clientUsernames[i].empty())
-			{
-				_sendUdpMessage(_clientIPs[i], _udpClientPorts[i], content, false);
-			}
+			_sendUdpMessage(_clientIPs[i], _udpClientPorts[i], content, false);
 		}
 	}
 }

@@ -77,20 +77,20 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(!_core->getNetworkingClient()->isRunning())
+			if(!_fe3d->client_isRunning())
 			{
-				Logger::throwWarning("Networking client tried to disconnect: not running!");
-				return;
+				_throwScriptError("Networking client tried to disconnect: not running!");
+				return true;
 			}
-			if(!_core->getNetworkingClient()->isConnectedToServer())
+			if(!_fe3d->client_isConnectedToServer())
 			{
-				Logger::throwWarning("Networking client tried to disconnect: not connected!");
-				return;
+				_throwScriptError("Networking client tried to disconnect: not connected!");
+				return true;
 			}
-			if(!_core->getNetworkingClient()->isAcceptedByServer())
+			if(!_fe3d->client_isAcceptedByServer())
 			{
-				Logger::throwWarning("Networking client tried to disconnect: not accepted!");
-				return;
+				_throwScriptError("Networking client tried to disconnect: not accepted!");
+				return true;
 			}
 
 			_fe3d->client_disconnect();
@@ -102,10 +102,10 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(!_core->getNetworkingClient()->isRunning())
+			if(!_fe3d->client_isRunning())
 			{
-				Logger::throwWarning("Networking client tried to stop: not running!");
-				return;
+				_throwScriptError("Networking client tried to stop: not running!");
+				return true;
 			}
 
 			_fe3d->client_stop();
@@ -119,35 +119,35 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_core->getNetworkingClient()->isRunning())
+			if(!_fe3d->client_isRunning())
 			{
-				Logger::throwWarning("Networking client tried to send TCP message: not running!");
-				return;
+				_throwScriptError("Networking client tried to send TCP message: not running!");
+				return true;
 			}
-			if(!_core->getNetworkingClient()->isConnectedToServer())
+			if(!_fe3d->client_isConnectedToServer())
 			{
-				Logger::throwWarning("Networking client tried to send TCP message: not connected!");
-				return;
+				_throwScriptError("Networking client tried to send TCP message: not connected!");
+				return true;
 			}
-			if(!_core->getNetworkingClient()->isAcceptedByServer())
+			if(!_fe3d->client_isAcceptedByServer())
 			{
-				Logger::throwWarning("Networking client tried to send TCP message: not accepted!");
-				return;
+				_throwScriptError("Networking client tried to send TCP message: not accepted!");
+				return true;
 			}
-			if(find(content.begin(), content.end(), ';') != content.end())
+			if(find(args[0]->getString().begin(), args[0]->getString().end(), ';') != args[0]->getString().end())
 			{
-				Logger::throwWarning("Networking client tried to send TCP message: cannot contain ':'!");
-				return;
+				_throwScriptError("Networking client tried to send TCP message: cannot contain ':'!");
+				return true;
 			}
-			if(isMessageReserved(content))
+			if(_fe3d->client_isMessageReserved(args[0]->getString()))
 			{
-				Logger::throwWarning("Networking client tried to send TCP message: \"" + content + "\" is reserved!");
-				return;
+				_throwScriptError("Networking client tried to send TCP message: \"" + args[0]->getString() + "\" is reserved!");
+				return true;
 			}
-			if(content.size() > MAX_MESSAGE_CHARACTERS)
+			if(args[0]->getString().size() > _fe3d->client_getMaxMessageSize())
 			{
-				Logger::throwWarning("Networking client tried to send TCP message: maximum character amount exceeded!");
-				return;
+				_throwScriptError("Networking client tried to send TCP message: maximum character amount exceeded!");
+				return true;
 			}
 
 			_fe3d->client_sendTcpMessage(args[0]->getString());
@@ -161,35 +161,35 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_core->getNetworkingClient()->isRunning())
+			if(!_fe3d->client_isRunning())
 			{
-				Logger::throwWarning("Networking client tried to send UDP message: not running!");
-				return;
+				_throwScriptError("Networking client tried to send UDP message: not running!");
+				return true;
 			}
-			if(!_core->getNetworkingClient()->isConnectedToServer())
+			if(!_fe3d->client_isConnectedToServer())
 			{
-				Logger::throwWarning("Networking client tried to send UDP message: not connected!");
-				return;
+				_throwScriptError("Networking client tried to send UDP message: not connected!");
+				return true;
 			}
-			if(!_core->getNetworkingClient()->isAcceptedByServer())
+			if(!_fe3d->client_isAcceptedByServer())
 			{
-				Logger::throwWarning("Networking client tried to send UDP message: not accepted!");
-				return;
+				_throwScriptError("Networking client tried to send UDP message: not accepted!");
+				return true;
 			}
-			if(find(content.begin(), content.end(), ';') != content.end())
+			if(find(args[0]->getString().begin(), args[0]->getString().end(), ';') != args[0]->getString().end())
 			{
-				Logger::throwWarning("Networking client tried to send UDP message: cannot contain ':'!");
-				return;
+				_throwScriptError("Networking client tried to send UDP message: cannot contain ':'!");
+				return true;
 			}
-			if(isMessageReserved(content))
+			if(_fe3d->client_isMessageReserved(args[0]->getString()))
 			{
-				Logger::throwWarning("Networking client tried to send UDP message: \"" + content + "\" is reserved!");
-				return;
+				_throwScriptError("Networking client tried to send UDP message: \"" + args[0]->getString() + "\" is reserved!");
+				return true;
 			}
-			if(content.size() > MAX_MESSAGE_CHARACTERS)
+			if(args[0]->getString().size() > _fe3d->client_getMaxMessageSize())
 			{
-				Logger::throwWarning("Networking client tried to send UDP message: maximum character amount exceeded!");
-				return;
+				_throwScriptError("Networking client tried to send UDP message: maximum character amount exceeded!");
+				return true;
 			}
 
 			_fe3d->client_sendUdpMessage(args[0]->getString());

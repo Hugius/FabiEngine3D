@@ -16,12 +16,10 @@ bool NetworkingClient::_sendTcpMessage(const string& content, bool isReserved, b
 	{
 		abort();
 	}
-
 	if(!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
 		abort();
 	}
-
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
@@ -30,7 +28,7 @@ bool NetworkingClient::_sendTcpMessage(const string& content, bool isReserved, b
 	{
 		abort();
 	}
-	if(content.size() > MAX_MESSAGE_CHARACTERS)
+	if(content.size() > MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
@@ -66,12 +64,10 @@ bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, b
 	{
 		abort();
 	}
-
 	if(!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
 		abort();
 	}
-
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		abort();
@@ -80,7 +76,7 @@ bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, b
 	{
 		abort();
 	}
-	else if(content.size() > MAX_MESSAGE_CHARACTERS)
+	else if(content.size() > MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}

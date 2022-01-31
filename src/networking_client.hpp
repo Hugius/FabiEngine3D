@@ -39,6 +39,7 @@ public:
 
 	const unsigned int getPingLatency() const;
 	const unsigned int getMaxUsernameSize() const;
+	const unsigned int getMaxMessageSize();
 
 	const bool isValidServerIP(const string& serverIP) const;
 	const bool isRunning() const;
@@ -56,10 +57,10 @@ private:
 	static inline const string SERVER_PORT = "61295";
 	static inline constexpr unsigned int MAX_PING_COUNT = 10;
 	static inline constexpr unsigned int IPV4_ADDRESS_LENGTH = 16;
-	static inline constexpr unsigned int MAX_MESSAGE_CHARACTERS = 128;
+	static inline constexpr unsigned int MAX_MESSAGE_SIZE = 128;
 	static inline constexpr unsigned int MAX_USERNAME_SIZE = 16;
 	static inline constexpr unsigned int TCP_BUFFER_BYTES = 4096;
-	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_CHARACTERS);
+	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_SIZE);
 
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;

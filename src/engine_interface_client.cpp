@@ -66,6 +66,11 @@ const unsigned int EngineInterface::client_getMaxUsernameSize() const
 	return _core->getNetworkingClient()->getMaxUsernameSize();
 }
 
+const unsigned int EngineInterface::client_getMaxMessageSize() const
+{
+	return _core->getNetworkingClient()->getMaxMessageSize();
+}
+
 const bool EngineInterface::client_isValidServerIP(const string& serverIP) const
 {
 	return _core->getNetworkingClient()->isValidServerIP(serverIP);

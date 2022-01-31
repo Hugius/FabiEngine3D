@@ -26,6 +26,7 @@ public:
 	const vector<string> getAnimationIds() const;
 	const vector<string> getStartedModelAnimationIds() const;
 	const vector<string> getStartedModelAnimationIds(const string& modelId) const;
+	const vector<string> getAnimationPartIds(const string& id) const;
 
 	const float getModelAnimationSpeed(const string& animationId, const string& modelId) const;
 
@@ -101,7 +102,7 @@ private:
 	bool _isChoosingModel = false;
 	bool _isChoosingPart = false;
 
-	map<pair<string, string>, Animation3d> _startedModelAnimations;
+	map<pair<string, string>, shared_ptr<Animation3d>> _startedModelAnimations;
 	vector<shared_ptr<Animation3d>> _animations;
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 };

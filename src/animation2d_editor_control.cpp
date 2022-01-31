@@ -34,6 +34,10 @@ void Animation2dEditor::pauseQuad3dAnimation(const string& animationId, const st
 	{
 		abort();
 	}
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
 		abort();
@@ -50,6 +54,10 @@ void Animation2dEditor::pauseQuad3dAnimation(const string& animationId, const st
 void Animation2dEditor::autopauseQuad3dAnimation(const string& animationId, const string& quadId)
 {
 	if(!isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_fe3d->quad3d_isExisting(quadId))
 	{
 		abort();
 	}
@@ -72,6 +80,10 @@ void Animation2dEditor::resumeQuad3dAnimation(const string& animationId, const s
 	{
 		abort();
 	}
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
 		abort();
@@ -87,6 +99,10 @@ void Animation2dEditor::resumeQuad3dAnimation(const string& animationId, const s
 void Animation2dEditor::stopQuad3dAnimation(const string& animationId, const string& quadId)
 {
 	if(!isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_fe3d->quad3d_isExisting(quadId))
 	{
 		abort();
 	}
@@ -133,6 +149,10 @@ void Animation2dEditor::setQuad3dAnimationInterval(const string& animationId, co
 	{
 		abort();
 	}
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad3dAnimationStarted(animationId, quadId))
 	{
 		abort();
@@ -173,6 +193,10 @@ void Animation2dEditor::pauseQuad2dAnimation(const string& animationId, const st
 	{
 		abort();
 	}
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
 		abort();
@@ -189,6 +213,10 @@ void Animation2dEditor::pauseQuad2dAnimation(const string& animationId, const st
 void Animation2dEditor::autopauseQuad2dAnimation(const string& animationId, const string& quadId)
 {
 	if(!isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_fe3d->quad2d_isExisting(quadId))
 	{
 		abort();
 	}
@@ -211,6 +239,10 @@ void Animation2dEditor::resumeQuad2dAnimation(const string& animationId, const s
 	{
 		abort();
 	}
+	if(!_fe3d->quad2d_isExisting(quadId))
+	{
+		abort();
+	}
 	if(!isQuad2dAnimationStarted(animationId, quadId))
 	{
 		abort();
@@ -226,6 +258,10 @@ void Animation2dEditor::resumeQuad2dAnimation(const string& animationId, const s
 void Animation2dEditor::stopQuad2dAnimation(const string& animationId, const string& quadId)
 {
 	if(!isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_fe3d->quad2d_isExisting(quadId))
 	{
 		abort();
 	}
@@ -269,6 +305,10 @@ void Animation2dEditor::stopQuad2dAnimations()
 void Animation2dEditor::setQuad2dAnimationInterval(const string& animationId, const string& quadId, unsigned int value)
 {
 	if(!isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_fe3d->quad2d_isExisting(quadId))
 	{
 		abort();
 	}

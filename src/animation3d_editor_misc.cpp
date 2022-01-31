@@ -97,55 +97,68 @@ const vector<string> Animation3dEditor::getStartedModelAnimationIds(const string
 	return vector<string>(Ids.begin(), Ids.end());
 }
 
+const vector<string> Animation3dEditor::getAnimationPartIds(const string& id) const
+{
+	if(!isAnimationExisting(id))
+	{
+		abort();
+	}
+
+	return _getAnimation(id)->getPartIds();
+}
+
 const float Animation3dEditor::getModelAnimationSpeed(const string& animationId, const string& modelId) const
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
-		return false;
+		abort();
 	}
-
+	if(!_fe3d->model_isExisting(modelId))
+	{
+		abort();
+	}
 	if(!isModelAnimationStarted(animationId, modelId))
 	{
-		Logger::throwWarning("animation not started!");
-		return false;
+		abort();
 	}
 
-	return _startedModelAnimations.at(make_pair(animationId, modelId)).getSpeed();
+	return _startedModelAnimations.at(make_pair(animationId, modelId))->getSpeed();
 }
 
 const int Animation3dEditor::getModelAnimationPlayCount(const string& animationId, const string& modelId) const
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
-		return false;
+		abort();
 	}
-
+	if(!_fe3d->model_isExisting(modelId))
+	{
+		abort();
+	}
 	if(!isModelAnimationStarted(animationId, modelId))
 	{
-		Logger::throwWarning("animation not started!");
-		return false;
+		abort();
 	}
 
-	return _startedModelAnimations.at(make_pair(animationId, modelId)).getPlayCount();
+	return _startedModelAnimations.at(make_pair(animationId, modelId))->getPlayCount();
 }
 
 const unsigned int Animation3dEditor::getModelAnimationFrameIndex(const string& animationId, const string& modelId) const
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
-		return false;
+		abort();
 	}
-
+	if(!_fe3d->model_isExisting(modelId))
+	{
+		abort();
+	}
 	if(!isModelAnimationStarted(animationId, modelId))
 	{
-		Logger::throwWarning("animation not started!");
-		return false;
+		abort();
 	}
 
-	return _startedModelAnimations.at(make_pair(animationId, modelId)).getFrameIndex();
+	return _startedModelAnimations.at(make_pair(animationId, modelId))->getFrameIndex();
 }
 
 const bool Animation3dEditor::isAnimationExisting(const string& id) const
@@ -165,7 +178,11 @@ const bool Animation3dEditor::isModelAnimationStarted(const string& animationId,
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
+		abort();
+	}
+	if(!_fe3d->model_isExisting(modelId))
+	{
+		abort();
 	}
 
 	return (_startedModelAnimations.find(make_pair(animationId, modelId)) != _startedModelAnimations.end());
@@ -175,14 +192,15 @@ const bool Animation3dEditor::isModelAnimationPlaying(const string& animationId,
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
-		return false;
+		abort();
 	}
-
+	if(!_fe3d->model_isExisting(modelId))
+	{
+		abort();
+	}
 	if(!isModelAnimationStarted(animationId, modelId))
 	{
-		Logger::throwWarning("animation not started!");
-		return false;
+		abort();
 	}
 
 	return !isModelAnimationPaused(animationId, modelId);
@@ -192,32 +210,34 @@ const bool Animation3dEditor::isModelAnimationAutopaused(const string& animation
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
-		return false;
+		abort();
 	}
-
+	if(!_fe3d->model_isExisting(modelId))
+	{
+		abort();
+	}
 	if(!isModelAnimationStarted(animationId, modelId))
 	{
-		Logger::throwWarning("animation not started!");
-		return false;
+		abort();
 	}
 
-	return _startedModelAnimations.at(make_pair(animationId, modelId)).isAutopaused();
+	return _startedModelAnimations.at(make_pair(animationId, modelId))->isAutopaused();
 }
 
 const bool Animation3dEditor::isModelAnimationPaused(const string& animationId, const string& modelId) const
 {
 	if(!isAnimationExisting(animationId))
 	{
-		Logger::throwWarning("animation not existing!");
-		return false;
+		abort();
 	}
-
+	if(!_fe3d->model_isExisting(modelId))
+	{
+		abort();
+	}
 	if(!isModelAnimationStarted(animationId, modelId))
 	{
-		Logger::throwWarning("animation not started!");
-		return false;
+		abort();
 	}
 
-	return _startedModelAnimations.at(make_pair(animationId, modelId)).isPaused();
+	return _startedModelAnimations.at(make_pair(animationId, modelId))->isPaused();
 }

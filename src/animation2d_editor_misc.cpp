@@ -335,6 +335,10 @@ const bool Animation2dEditor::isQuad3dAnimationStarted(const string& animationId
 	{
 		abort();
 	}
+	if(!_fe3d->quad3d_isExisting(quadId))
+	{
+		abort();
+	}
 
 	return (_startedQuad3dAnimations.find(make_pair(animationId, quadId)) != _startedQuad3dAnimations.end());
 }
@@ -396,6 +400,10 @@ const bool Animation2dEditor::isQuad3dAnimationAutopaused(const string& animatio
 const bool Animation2dEditor::isQuad2dAnimationStarted(const string& animationId, const string& quadId) const
 {
 	if(!isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_fe3d->quad2d_isExisting(quadId))
 	{
 		abort();
 	}

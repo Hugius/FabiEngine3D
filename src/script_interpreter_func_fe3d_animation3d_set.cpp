@@ -12,6 +12,29 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
+				if(_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation already started!");
+					return true;
+				}
+				if((args[2]->getInteger() < -1) || (args[2]->getInteger() == 0))
+				{
+					_throwScriptError("play count is invalid!");
+					return true;
+				}
+
+				for(const auto& partId : _animation3dEditor->getAnimationPartIds(args[0]->getString()))
+				{
+					if(!partId.empty())
+					{
+						if(!_fe3d->model_hasPart(args[1]->getString(), partId))
+						{
+							_throwScriptError("model does not have required animation parts!");
+							return true;
+						}
+					}
+				}
+
 				_animation3dEditor->startModelAnimation(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -26,6 +49,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
+				if(!_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+				if(_animation3dEditor->isModelAnimationPaused(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not playing!");
+					return true;
+				}
+
 				_animation3dEditor->pauseModelAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -52,6 +86,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
+				if(!_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+				if(_animation3dEditor->isModelAnimationPaused(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not playing!");
+					return true;
+				}
+
 				_animation3dEditor->autopauseModelAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -78,6 +123,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
+				if(!_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+				if(!_animation3dEditor->isModelAnimationPaused(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not paused!");
+					return true;
+				}
+
 				_animation3dEditor->resumeModelAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -104,6 +160,12 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
+				if(!_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+
 				_animation3dEditor->stopModelAnimation(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -130,6 +192,12 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
 			{
+				if(!_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwScriptError("animation not started!");
+					return true;
+				}
+
 				_animation3dEditor->setModelAnimationSpeed(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -144,6 +212,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:animation3d` functionality as networking server!");
+		return true;
 	}
 
 	return true;

@@ -35,9 +35,9 @@ void WorldEditor::_updateSoundMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSoundChoice");
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->deleteButtons();
 
-			auto Ids = _fe3d->sound3d_getIds();
-			sort(Ids.begin(), Ids.end());
-			for(auto& soundId : Ids)
+			auto ids = _fe3d->sound3d_getIds();
+			sort(ids.begin(), ids.end());
+			for(auto& soundId : ids)
 			{
 				if(soundId[0] != '@')
 				{

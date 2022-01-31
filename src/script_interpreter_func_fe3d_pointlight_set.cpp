@@ -23,6 +23,13 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			}
 
 			_fe3d->pointlight_create(args[0]->getString());
+
+			if(!_fe3d->pointlight_isExisting(args[0]->getString()))
+			{
+				_throwScriptError("Tried to create pointlight entity: maximum reached!");
+				return true;
+			}
+
 			_fe3d->pointlight_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 			_fe3d->pointlight_setRadius(args[0]->getString(), fvec3(args[4]->getDecimal(), args[5]->getDecimal(), args[6]->getDecimal()));
 			_fe3d->pointlight_setColor(args[0]->getString(), fvec3(args[7]->getDecimal(), args[8]->getDecimal(), args[9]->getDecimal()));

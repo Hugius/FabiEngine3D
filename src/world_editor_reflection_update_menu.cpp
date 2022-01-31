@@ -49,9 +49,9 @@ void WorldEditor::_updateReflectionMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuReflectionChoice");
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->deleteButtons();
 
-			auto Ids = _fe3d->reflection_getIds();
-			sort(Ids.begin(), Ids.end());
-			for(auto& reflectionId : Ids)
+			auto ids = _fe3d->reflection_getIds();
+			sort(ids.begin(), ids.end());
+			for(auto& reflectionId : ids)
 			{
 				if(reflectionId[0] != '@')
 				{

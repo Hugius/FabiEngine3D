@@ -30,9 +30,9 @@ void WorldEditor::_updateQuad3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButtons();
 
-			auto Ids = _fe3d->quad3d_getIds();
-			sort(Ids.begin(), Ids.end());
-			for(auto& quadId : Ids)
+			auto ids = _fe3d->quad3d_getIds();
+			sort(ids.begin(), ids.end());
+			for(auto& quadId : ids)
 			{
 				if(quadId[0] != '@')
 				{

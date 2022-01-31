@@ -30,9 +30,9 @@ void WorldEditor::_updateModelMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
-			auto Ids = _fe3d->model_getIds();
-			sort(Ids.begin(), Ids.end());
-			for(auto& modelId : Ids)
+			auto ids = _fe3d->model_getIds();
+			sort(ids.begin(), ids.end());
+			for(auto& modelId : ids)
 			{
 				if(modelId[0] != '@')
 				{

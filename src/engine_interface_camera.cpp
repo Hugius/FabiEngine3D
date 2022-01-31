@@ -8,55 +8,21 @@ void EngineInterface::camera_reset()
 
 void EngineInterface::camera_enableFirstPersonView(float initialYaw, float initialPitch)
 {
-	if(_core->getCamera()->isThirdPersonViewEnabled())
-	{
-		Logger::throwWarning("Tried to enable first person view: third person view currently enabled!");
-		return;
-	}
-	if(_core->getCamera()->isFirstPersonViewEnabled())
-	{
-		Logger::throwWarning("Tried to enable first person view: already enabled!");
-		return;
-	}
-
 	_core->getCamera()->enableFirstPersonView(initialYaw, initialPitch);
 }
 
 void EngineInterface::camera_disableFirstPersonView()
 {
-	if(!_core->getCamera()->isFirstPersonViewEnabled())
-	{
-		Logger::throwWarning("Tried to disable first person view: not enabled!");
-		return;
-	}
-
 	_core->getCamera()->disableFirstPersonView();
 }
 
 void EngineInterface::camera_enableThirdPersonView(float initialYaw, float initialPitch)
 {
-	if(_core->getCamera()->isFirstPersonViewEnabled())
-	{
-		Logger::throwWarning("Tried to enable third person view: first person view currently enabled!");
-		return;
-	}
-	if(_core->getCamera()->isThirdPersonViewEnabled())
-	{
-		Logger::throwWarning("Tried to enable third person view: already enabled!");
-		return;
-	}
-
 	_core->getCamera()->enableThirdPersonView(initialYaw, initialPitch);
 }
 
 void EngineInterface::camera_disableThirdPersonView()
 {
-	if(!_core->getCamera()->isThirdPersonViewEnabled())
-	{
-		Logger::throwWarning("Tried to disable third person view: not enabled!");
-		return;
-	}
-
 	_core->getCamera()->disableThirdPersonView();
 }
 

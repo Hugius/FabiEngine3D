@@ -24,7 +24,6 @@ public:
 	void setModelAnimationSpeed(const string& animationId, const string& modelId, float value);
 
 	const vector<string> getAnimationIds() const;
-	const vector<string> getStartedModelAnimationIds() const;
 	const vector<string> getStartedModelAnimationIds(const string& modelId) const;
 	const vector<string> getAnimationPartIds(const string& id) const;
 

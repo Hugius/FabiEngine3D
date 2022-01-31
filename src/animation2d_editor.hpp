@@ -31,8 +31,6 @@ public:
 	void setQuad2dAnimationInterval(const string& animationId, const string& quadId, unsigned int value);
 
 	const vector<string> getAnimationIds();
-	const vector<string> getStartedQuad3dAnimationIds() const;
-	const vector<string> getStartedQuad2dAnimationIds() const;
 	const vector<string> getStartedQuad3dAnimationIds(const string& quadId) const;
 	const vector<string> getStartedQuad2dAnimationIds(const string& quadId) const;
 

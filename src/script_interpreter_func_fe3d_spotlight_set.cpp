@@ -22,6 +22,13 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 			}
 
 			_fe3d->spotlight_create(args[0]->getString());
+
+			if(!_fe3d->pointlight_isExisting(args[0]->getString()))
+			{
+				_throwScriptError("Tried to create spotlight entity: maximum reached!");
+				return true;
+			}
+
 			_fe3d->spotlight_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 			_fe3d->spotlight_setColor(args[0]->getString(), fvec3(args[4]->getDecimal(), args[5]->getDecimal(), args[6]->getDecimal()));
 			_fe3d->spotlight_setYaw(args[0]->getString(), args[7]->getDecimal());

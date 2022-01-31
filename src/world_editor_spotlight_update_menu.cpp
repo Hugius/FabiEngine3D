@@ -49,9 +49,9 @@ void WorldEditor::_updateSpotlightMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightChoice");
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->deleteButtons();
 
-			auto Ids = _fe3d->spotlight_getIds();
-			sort(Ids.begin(), Ids.end());
-			for(auto& spotlightId : Ids)
+			auto ids = _fe3d->spotlight_getIds();
+			sort(ids.begin(), ids.end());
+			for(auto& spotlightId : ids)
 			{
 				if(spotlightId[0] != '@')
 				{

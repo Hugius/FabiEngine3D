@@ -19,22 +19,22 @@ void Quad2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto Ids = getLoadedIds();
-			for(auto& id : Ids)
+			auto ids = getLoadedIds();
+			for(auto& id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("quadList", "Edit Quad2D", fvec2(-0.5f, 0.1f), Ids);
+			_gui->getOverlay()->createChoiceForm("quadList", "Edit Quad2D", fvec2(-0.5f, 0.1f), ids);
 			_isChoosingQuad = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto Ids = getLoadedIds();
-			for(auto& id : Ids)
+			auto ids = getLoadedIds();
+			for(auto& id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("quadList", "Delete Quad2D", fvec2(-0.5f, 0.1f), Ids);
+			_gui->getOverlay()->createChoiceForm("quadList", "Delete Quad2D", fvec2(-0.5f, 0.1f), ids);
 			_isChoosingQuad = true;
 			_isDeletingQuad = true;
 		}

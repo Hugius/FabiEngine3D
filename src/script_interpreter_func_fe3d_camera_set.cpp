@@ -120,6 +120,17 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_fe3d->camera_isThirdPersonViewEnabled())
+			{
+				_throwScriptError("Tried to enable first person view: third person view currently enabled!");
+				return true;
+			}
+			if(_fe3d->camera_isFirstPersonViewEnabled())
+			{
+				_throwScriptError("Tried to enable first person view: already enabled!");
+				return true;
+			}
+
 			_fe3d->camera_enableFirstPersonView(args[0]->getDecimal(), args[1]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -129,6 +140,12 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_fe3d->camera_isFirstPersonViewEnabled())
+			{
+				_throwScriptError("Tried to disable first person view: not enabled!");
+				return true;
+			}
+
 			_fe3d->camera_disableFirstPersonView();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -162,6 +179,17 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_fe3d->camera_isFirstPersonViewEnabled())
+			{
+				_throwScriptError("Tried to enable third person view: first person view currently enabled!");
+				return true;
+			}
+			if(_fe3d->camera_isThirdPersonViewEnabled())
+			{
+				_throwScriptError("Tried to enable third person view: already enabled!");
+				return true;
+			}
+
 			_fe3d->camera_enableThirdPersonView(args[0]->getDecimal(), args[1]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -171,6 +199,12 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(!_fe3d->camera_isThirdPersonViewEnabled())
+			{
+				_throwScriptError("Tried to disable third person view: not enabled!");
+				return true;
+			}
+
 			_fe3d->camera_disableThirdPersonView();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));

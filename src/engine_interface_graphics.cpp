@@ -3,122 +3,56 @@
 
 void EngineInterface::gfx_enableAmbientLighting()
 {
-	if(_core->getRenderBus()->isAmbientLightingEnabled())
-	{
-		Logger::throwWarning("Tried to enable ambient lighting: already enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setAmbientLightingEnabled(true);
 }
 
 void EngineInterface::gfx_enableDirectionalLighting()
 {
-	if(_core->getRenderBus()->isDirectionalLightingEnabled())
-	{
-		Logger::throwWarning("Tried to enable directional lighting: already enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setDirectionalLightingEnabled(true);
 }
 
 void EngineInterface::gfx_enableFog()
 {
-	if(_core->getRenderBus()->isFogEnabled())
-	{
-		Logger::throwWarning("Tried to enable fog: already enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setFogEnabled(true);
 }
 
 void EngineInterface::gfx_enableAntiAliasing()
 {
-	if(_core->getRenderBus()->isAntiAliasingEnabled())
-	{
-		Logger::throwWarning("Tried to enable anti aliasing: already enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setAntiAliasingEnabled(true);
 }
 
 void EngineInterface::gfx_enableShadows()
 {
-	if(_core->getRenderBus()->isShadowsEnabled())
-	{
-		Logger::throwWarning("Tried to enable shadows: already enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setShadowsEnabled(true);
 }
 
 void EngineInterface::gfx_enableBloom()
 {
-	if(_core->getRenderBus()->isBloomEnabled())
-	{
-		Logger::throwWarning("Tried to enable bloom: already enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setBloomEnabled(true);
 }
 
 void EngineInterface::gfx_enableSkyExposure()
 {
-	if(_core->getRenderBus()->isSkyExposureEnabled())
-	{
-		Logger::throwWarning("Tried to enable sky exposure: already enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setSkyExposureEnabled(true);
 }
 
 void EngineInterface::gfx_enableDOF()
 {
-	if(_core->getRenderBus()->isDofEnabled())
-	{
-		Logger::throwWarning("Tried to enable DOF: already enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setDofEnabled(true);
 }
 
 void EngineInterface::gfx_enableMotionBlur()
 {
-	if(_core->getRenderBus()->isMotionBlurEnabled())
-	{
-		Logger::throwWarning("Tried to enable motion blur: already enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setMotionBlurEnabled(true);
 }
 
 void EngineInterface::gfx_enableLensFlare()
 {
-	if(_core->getRenderBus()->isLensFlareEnabled())
-	{
-		Logger::throwWarning("Tried to enable lens flare: already enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setLensFlareEnabled(true);
 }
 
 void EngineInterface::gfx_disableAmbientLighting(bool mustResetProperties)
 {
-	if(!_core->getRenderBus()->isAmbientLightingEnabled())
-	{
-		Logger::throwWarning("Tried to disable ambient lighting: not enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setAmbientLightingEnabled(false);
 
 	if(mustResetProperties)
@@ -130,12 +64,6 @@ void EngineInterface::gfx_disableAmbientLighting(bool mustResetProperties)
 
 void EngineInterface::gfx_disableDirectionalLighting(bool mustResetProperties)
 {
-	if(!_core->getRenderBus()->isDirectionalLightingEnabled())
-	{
-		Logger::throwWarning("Tried to disable directional lighting: not enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setDirectionalLightingEnabled(false);
 
 	if(mustResetProperties)
@@ -148,12 +76,6 @@ void EngineInterface::gfx_disableDirectionalLighting(bool mustResetProperties)
 
 void EngineInterface::gfx_disableFog(bool mustResetProperties)
 {
-	if(!_core->getRenderBus()->isFogEnabled())
-	{
-		Logger::throwWarning("Tried to disable fog: not enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setFogEnabled(false);
 
 	if(mustResetProperties)
@@ -167,23 +89,11 @@ void EngineInterface::gfx_disableFog(bool mustResetProperties)
 
 void EngineInterface::gfx_disableAntiAliasing(bool mustResetProperties)
 {
-	if(!_core->getRenderBus()->isAntiAliasingEnabled())
-	{
-		Logger::throwWarning("Tried to disable anti aliasing: not enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setAntiAliasingEnabled(false);
 }
 
 void EngineInterface::gfx_disableShadows(bool mustResetProperties)
 {
-	if(!_core->getRenderBus()->isShadowsEnabled())
-	{
-		Logger::throwWarning("Tried to disable shadows: not enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setShadowsEnabled(false);
 
 	if(mustResetProperties)
@@ -202,12 +112,6 @@ void EngineInterface::gfx_disableShadows(bool mustResetProperties)
 
 void EngineInterface::gfx_disableBloom(bool mustResetProperties)
 {
-	if(!_core->getRenderBus()->isBloomEnabled())
-	{
-		Logger::throwWarning("Tried to disable bloom: not enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setBloomEnabled(false);
 
 	if(mustResetProperties)
@@ -221,12 +125,6 @@ void EngineInterface::gfx_disableBloom(bool mustResetProperties)
 
 void EngineInterface::gfx_disableSkyExposure(bool mustResetProperties)
 {
-	if(!_core->getRenderBus()->isSkyExposureEnabled())
-	{
-		Logger::throwWarning("Tried to disable sky exposure: not enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setSkyExposureEnabled(false);
 
 	if(mustResetProperties)
@@ -238,12 +136,6 @@ void EngineInterface::gfx_disableSkyExposure(bool mustResetProperties)
 
 void EngineInterface::gfx_disableDOF(bool mustResetProperties)
 {
-	if(!_core->getRenderBus()->isDofEnabled())
-	{
-		Logger::throwWarning("Tried to disable DOF: not enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setDofEnabled(false);
 
 	if(mustResetProperties)
@@ -257,12 +149,6 @@ void EngineInterface::gfx_disableDOF(bool mustResetProperties)
 
 void EngineInterface::gfx_disableMotionBlur(bool mustResetProperties)
 {
-	if(!_core->getRenderBus()->isMotionBlurEnabled())
-	{
-		Logger::throwWarning("Tried to disable motion blur: not enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setMotionBlurEnabled(false);
 
 	if(mustResetProperties)
@@ -274,12 +160,6 @@ void EngineInterface::gfx_disableMotionBlur(bool mustResetProperties)
 
 void EngineInterface::gfx_disableLensFlare(bool mustResetProperties)
 {
-	if(!_core->getRenderBus()->isLensFlareEnabled())
-	{
-		Logger::throwWarning("Tried to disable lens flare: not enabled");
-		return;
-	}
-
 	_core->getRenderBus()->setLensFlareEnabled(false);
 
 	if(mustResetProperties)

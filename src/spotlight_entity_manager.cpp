@@ -26,7 +26,7 @@ void SpotlightEntityManager::createEntity(const string& id)
 {
 	if(getEntities().size() == MAX_ENTITY_COUNT)
 	{
-		abort();
+		return;
 	}
 
 	auto entity = make_shared<SpotlightEntity>(id);

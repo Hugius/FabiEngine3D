@@ -70,31 +70,19 @@ const vector<string> Animation3dEditor::getAnimationIds() const
 	return result;
 }
 
-const vector<string> Animation3dEditor::getStartedModelAnimationIds() const
-{
-	set<string> Ids;
-
-	for(const auto& [key, animation] : _startedModelAnimations)
-	{
-		Ids.insert(key.first);
-	}
-
-	return vector<string>(Ids.begin(), Ids.end());
-}
-
 const vector<string> Animation3dEditor::getStartedModelAnimationIds(const string& modelId) const
 {
-	set<string> Ids;
+	set<string> ids;
 
 	for(const auto& [key, animation] : _startedModelAnimations)
 	{
-		if(modelId == key.second)
+		if(modelId.empty() || (modelId == key.second))
 		{
-			Ids.insert(key.first);
+			ids.insert(key.first);
 		}
 	}
 
-	return vector<string>(Ids.begin(), Ids.end());
+	return vector<string>(ids.begin(), ids.end());
 }
 
 const vector<string> Animation3dEditor::getAnimationPartIds(const string& id) const

@@ -95,7 +95,7 @@ void WorldEditor::_load()
 	_gui->getOverlay()->createTextField("textId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("soundId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
-	_fe3d->collision_enableCameraResponse(true, true, true);
+	_fe3d->collision_enableCameraAabbResponse(true, true, true);
 	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 }
@@ -157,7 +157,7 @@ void WorldEditor::_unload()
 	_gui->getOverlay()->deleteTextField("quadId");
 	_gui->getOverlay()->deleteTextField("soundId");
 
-	_fe3d->collision_disableCameraResponse();
+	_fe3d->collision_disableCameraAabbResponse();
 
 	if(_fe3d->raycast_isTerrainPointingEnabled())
 	{

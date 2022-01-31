@@ -3,12 +3,6 @@
 
 void EngineInterface::pointlight_create(const string& id)
 {
-	if(_core->getPointlightEntityManager()->getEntities().size() == _core->getPointlightEntityManager()->getMaxEntityCount())
-	{
-		Logger::throwWarning("Tried to create pointlight entity: maximum reached!");
-		return;
-	}
-
 	_core->getPointlightEntityManager()->createEntity(id);
 }
 

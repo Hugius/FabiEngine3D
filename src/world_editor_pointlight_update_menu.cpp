@@ -49,9 +49,9 @@ void WorldEditor::_updatePointlightMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteButtons();
 
-			auto Ids = _fe3d->pointlight_getIds();
-			sort(Ids.begin(), Ids.end());
-			for(auto& pointlightId : Ids)
+			auto ids = _fe3d->pointlight_getIds();
+			sort(ids.begin(), ids.end());
+			for(auto& pointlightId : ids)
 			{
 				if(pointlightId[0] != '@')
 				{

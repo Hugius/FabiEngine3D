@@ -710,10 +710,10 @@ public:
 	const bool camera_isFirstPersonViewEnabled() const;
 
 	void collision_setCameraBox(float left, float right, float bottom, float top, float back, float front);
-	void collision_enableCameraResponse(bool x, bool y, bool z);
-	void collision_enableTerrainResponse(float cameraHeight, float cameraSpeed);
-	void collision_disableCameraResponse();
-	void collision_disableTerrainResponse();
+	void collision_enableCameraAabbResponse(bool x, bool y, bool z);
+	void collision_enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
+	void collision_disableCameraAabbResponse();
+	void collision_disableCameraTerrainResponse();
 
 	const string collision_checkCameraWithAny() const;
 	const string collision_checkCameraWithEntities(const string& id) const;

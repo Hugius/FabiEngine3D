@@ -30,9 +30,9 @@ void WorldEditor::_updateText3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteButtons();
 
-			auto Ids = _fe3d->text3d_getIds();
-			sort(Ids.begin(), Ids.end());
-			for(auto& textId : Ids)
+			auto ids = _fe3d->text3d_getIds();
+			sort(ids.begin(), ids.end());
+			for(auto& textId : ids)
 			{
 				if(textId[0] != '@')
 				{

@@ -18,22 +18,22 @@ void SoundEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto Ids = getLoadedIds();
-			for(auto& id : Ids)
+			auto ids = getLoadedIds();
+			for(auto& id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("soundList", "Edit Sound", fvec2(0.0f, 0.1f), Ids);
+			_gui->getOverlay()->createChoiceForm("soundList", "Edit Sound", fvec2(0.0f, 0.1f), ids);
 			_isChoosingSound = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto Ids = getLoadedIds();
-			for(auto& id : Ids)
+			auto ids = getLoadedIds();
+			for(auto& id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->createChoiceForm("soundList", "Delete Sound", fvec2(0.0f, 0.1f), Ids);
+			_gui->getOverlay()->createChoiceForm("soundList", "Delete Sound", fvec2(0.0f, 0.1f), ids);
 			_isChoosingSound = true;
 			_isDeletingSound = true;
 		}

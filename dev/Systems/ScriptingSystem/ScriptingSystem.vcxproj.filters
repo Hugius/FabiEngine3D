@@ -75,9 +75,6 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_graphics_set.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_set.cpp">
-      <Filter>Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_input_get.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
@@ -177,9 +174,6 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_get.cpp">
       <Filter>Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_get.cpp">
-      <Filter>Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_filesystem_get.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
@@ -266,6 +260,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text3d_get.cpp">
       <Filter>Interpreter\Function\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_get.cpp">
+      <Filter>Interpreter\Function\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_set.cpp">
+      <Filter>Interpreter\Function\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

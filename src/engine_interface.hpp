@@ -710,21 +710,25 @@ public:
 	const bool camera_isFirstPersonViewEnabled() const;
 
 	void collision_setCameraBox(float left, float right, float bottom, float top, float back, float front);
-	void collision_enableCameraAabbResponse(bool x, bool y, bool z);
-	void collision_enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
-	void collision_disableCameraAabbResponse();
-	void collision_disableCameraTerrainResponse();
+	void collision_setCameraAabbResponseEnabled(bool x, bool y, bool z);
+	void collision_setCameraTerrainResponseEnabled(bool value);
+	void collision_setCameraTerrainResponseHeight(float value);
+	void collision_setCameraTerrainResponseSpeed(float value);
 
 	const string collision_checkCameraWithAny() const;
 	const string collision_checkCameraWithEntities(const string& id) const;
 	const string collision_checkEntityWithEntities(const string& selfId, const string& otherId) const;
+	const float collision_getCameraTerrainResponseHeight() const;
+	const float collision_getCameraTerrainResponseSpeed() const;
+	const bool collision_isCameraAabbResponseEnabledX() const;
+	const bool collision_isCameraAabbResponseEnabledY() const;
+	const bool collision_isCameraAabbResponseEnabledZ() const;
+	const bool collision_isCameraTerrainResponseEnabled() const;
 	const bool collision_checkCameraWithTerrain() const;
 	const bool collision_checkCameraWithEntity(const string& id) const;
 	const bool collision_checkCameraWithEntityDirection(const string& id, Direction direction) const;
 	const bool collision_checkCameraWithAnyDirection(Direction direction) const;
 	const bool collision_checkCameraWithEntitiesDirection(const string& id, Direction direction) const;
-	const bool collision_isCameraResponseEnabled() const;
-	const bool collision_isTerrainResponseEnabled() const;
 
 	void raycast_setTerrainPointingEnabled(bool value);
 	void raycast_setTerrainPointingDistance(float value);

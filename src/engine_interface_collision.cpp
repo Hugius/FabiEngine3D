@@ -6,24 +6,24 @@ void EngineInterface::collision_setCameraBox(float left, float right, float bott
 	_core->getCameraCollisionHandler()->setCameraBox(Box(left, right, bottom, top, back, front));
 }
 
-void EngineInterface::collision_enableCameraAabbResponse(bool x, bool y, bool z)
+void EngineInterface::collision_setCameraAabbResponseEnabled(bool x, bool y, bool z)
 {
-	_core->getCameraCollisionHandler()->enableCameraAabbResponse(x, y, z);
+	_core->getCameraCollisionHandler()->setCameraAabbResponseEnabled(x, y, z);
 }
 
-void EngineInterface::collision_disableCameraAabbResponse()
+void EngineInterface::collision_setCameraTerrainResponseEnabled(bool value)
 {
-	_core->getCameraCollisionHandler()->disableCameraAabbResponse();
+	_core->getCameraCollisionHandler()->setCameraTerrainResponseEnabled(value);
 }
 
-void EngineInterface::collision_enableCameraTerrainResponse(float cameraHeight, float cameraSpeed)
+void EngineInterface::collision_setCameraTerrainResponseHeight(float value)
 {
-	_core->getCameraCollisionHandler()->enableCameraTerrainResponse(cameraHeight, cameraSpeed);
+	_core->getCameraCollisionHandler()->setCameraTerrainResponseHeight(value);
 }
 
-void EngineInterface::collision_disableCameraTerrainResponse()
+void EngineInterface::collision_setCameraTerrainResponseSpeed(float value)
 {
-	_core->getCameraCollisionHandler()->disableCameraTerrainResponse();
+	_core->getCameraCollisionHandler()->setCameraTerrainResponseSpeed(value);
 }
 
 const string EngineInterface::collision_checkCameraWithAny() const
@@ -113,6 +113,31 @@ const string EngineInterface::collision_checkEntityWithEntities(const string& se
 	return "";
 }
 
+const float EngineInterface::collision_getCameraTerrainResponseHeight() const
+{
+	return _core->getCameraCollisionHandler()->getCameraTerrainResponseHeight();
+}
+
+const float EngineInterface::collision_getCameraTerrainResponseSpeed() const
+{
+	return _core->getCameraCollisionHandler()->getCameraTerrainResponseSpeed();
+}
+
+const bool EngineInterface::collision_isCameraAabbResponseEnabledX() const
+{
+	return _core->getCameraCollisionHandler()->isCameraAabbResponseEnabledX();
+}
+
+const bool EngineInterface::collision_isCameraAabbResponseEnabledY() const
+{
+	return _core->getCameraCollisionHandler()->isCameraAabbResponseEnabledY();
+}
+
+const bool EngineInterface::collision_isCameraAabbResponseEnabledZ() const
+{
+	return _core->getCameraCollisionHandler()->isCameraAabbResponseEnabledZ();
+}
+
 const string EngineInterface::collision_checkCameraWithEntities(const string& id) const
 {
 	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
@@ -177,12 +202,7 @@ const bool EngineInterface::collision_checkCameraWithEntitiesDirection(const str
 	return false;
 }
 
-const bool EngineInterface::collision_isCameraResponseEnabled() const
-{
-	return _core->getCameraCollisionHandler()->isCameraAabbResponseEnabled();
-}
-
-const bool EngineInterface::collision_isTerrainResponseEnabled() const
+const bool EngineInterface::collision_isCameraTerrainResponseEnabled() const
 {
 	return _core->getCameraCollisionHandler()->isCameraTerrainResponseEnabled();
 }

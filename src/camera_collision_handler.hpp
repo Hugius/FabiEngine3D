@@ -16,14 +16,19 @@ public:
 	void inject(shared_ptr<AabbEntityManager> aabbManager);
 	void inject(shared_ptr<Camera> camera);
 	void update();
-	void setCameraBox(const Box& box);
-	void enableCameraAabbResponse(bool x, bool y, bool z);
-	void disableCameraAabbResponse();
-	void enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
-	void disableCameraTerrainResponse();
+	void setCameraBox(const Box& value);
+	void setCameraAabbResponseEnabled(bool x, bool y, bool z);
+	void setCameraTerrainResponseEnabled(bool value);
+	void setCameraTerrainResponseHeight(float value);
+	void setCameraTerrainResponseSpeed(float value);
+
+	const float getCameraTerrainResponseHeight() const;
+	const float getCameraTerrainResponseSpeed() const;
 
 	const bool isCameraUnderTerrain() const;
-	const bool isCameraAabbResponseEnabled() const;
+	const bool isCameraAabbResponseEnabledX() const;
+	const bool isCameraAabbResponseEnabledY() const;
+	const bool isCameraAabbResponseEnabledZ() const;
 	const bool isCameraTerrainResponseEnabled() const;
 
 private:
@@ -31,10 +36,9 @@ private:
 
 	fvec3 _lastCameraPosition = fvec3(0.0f);
 
-	float _cameraTerrainHeight = 0.0f;
-	float _cameraTerrainSpeed = 0.0f;
+	float _cameraTerrainResponseHeight = 0.0f;
+	float _cameraTerrainResponseSpeed = 0.0f;
 
-	bool _isCameraAabbResponseEnabled = false;
 	bool _isCameraAabbResponseEnabledX = false;
 	bool _isCameraAabbResponseEnabledY = false;
 	bool _isCameraAabbResponseEnabledZ = false;

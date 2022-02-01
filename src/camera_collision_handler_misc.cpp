@@ -21,57 +21,41 @@ void CameraCollisionHandler::inject(shared_ptr<CameraCollisionDetector> cameraCo
 	_cameraCollisionDetector = cameraCollisionDetector;
 }
 
-void CameraCollisionHandler::setCameraBox(const Box& box)
+void CameraCollisionHandler::setCameraBox(const Box& value)
 {
-	_cameraBox = box;
+	_cameraBox = value;
 }
 
-void CameraCollisionHandler::enableCameraAabbResponse(bool x, bool y, bool z)
+void CameraCollisionHandler::setCameraAabbResponseEnabled(bool x, bool y, bool z)
 {
-	if(_isCameraAabbResponseEnabled)
-	{
-		abort();
-	}
-
-	_isCameraAabbResponseEnabled = true;
 	_isCameraAabbResponseEnabledX = x;
 	_isCameraAabbResponseEnabledY = y;
 	_isCameraAabbResponseEnabledZ = z;
 }
 
-void CameraCollisionHandler::disableCameraAabbResponse()
+void CameraCollisionHandler::setCameraTerrainResponseEnabled(bool value)
 {
-	if(!_isCameraAabbResponseEnabled)
-	{
-		abort();
-	}
-
-	_isCameraAabbResponseEnabled = false;
-	_isCameraAabbResponseEnabledX = false;
-	_isCameraAabbResponseEnabledY = false;
-	_isCameraAabbResponseEnabledZ = false;
+	_isCameraTerrainResponseEnabled = value;
 }
 
-void CameraCollisionHandler::enableCameraTerrainResponse(float cameraHeight, float cameraSpeed)
+void CameraCollisionHandler::setCameraTerrainResponseHeight(float value)
 {
-	if(_isCameraTerrainResponseEnabled)
-	{
-		abort();
-	}
-
-	_isCameraTerrainResponseEnabled = true;
-	_cameraTerrainHeight = cameraHeight;
-	_cameraTerrainSpeed = cameraSpeed;
+	_cameraTerrainResponseHeight = value;
 }
 
-void CameraCollisionHandler::disableCameraTerrainResponse()
+void CameraCollisionHandler::setCameraTerrainResponseSpeed(float value)
 {
-	if(!_isCameraTerrainResponseEnabled)
-	{
-		abort();
-	}
+	_cameraTerrainResponseSpeed = value;
+}
 
-	_isCameraTerrainResponseEnabled = false;
+const float CameraCollisionHandler::getCameraTerrainResponseHeight() const
+{
+	return _cameraTerrainResponseHeight;
+}
+
+const float CameraCollisionHandler::getCameraTerrainResponseSpeed() const
+{
+	return _cameraTerrainResponseSpeed;
 }
 
 const bool CameraCollisionHandler::isCameraUnderTerrain() const
@@ -79,9 +63,19 @@ const bool CameraCollisionHandler::isCameraUnderTerrain() const
 	return _isCameraUnderTerrain;
 }
 
-const bool CameraCollisionHandler::isCameraAabbResponseEnabled() const
+const bool CameraCollisionHandler::isCameraAabbResponseEnabledX() const
 {
-	return _isCameraAabbResponseEnabled;
+	return _isCameraAabbResponseEnabledX;
+}
+
+const bool CameraCollisionHandler::isCameraAabbResponseEnabledY() const
+{
+	return _isCameraAabbResponseEnabledY;
+}
+
+const bool CameraCollisionHandler::isCameraAabbResponseEnabledZ() const
+{
+	return _isCameraAabbResponseEnabledZ;
 }
 
 const bool CameraCollisionHandler::isCameraTerrainResponseEnabled() const

@@ -10,13 +10,13 @@ void CameraCollisionHandler::update()
 			fvec3 cameraPosition = _camera->getPosition();
 			const float terrainX = (cameraPosition.x + (_terrainManager->getSelectedEntity()->getSize() * 0.5f));
 			const float terrainZ = (cameraPosition.z + (_terrainManager->getSelectedEntity()->getSize() * 0.5f));
-			const float terrainY = (_terrainManager->getPixelHeight(_terrainManager->getSelectedEntity()->getId(), terrainX, terrainZ) + _cameraTerrainHeight);
+			const float terrainY = (_terrainManager->getPixelHeight(_terrainManager->getSelectedEntity()->getId(), terrainX, terrainZ) + _cameraTerrainResponseHeight);
 
 			if(cameraPosition.y < terrainY)
 			{
 				_isCameraUnderTerrain = true;
 
-				_camera->move(fvec3(0.0f, fabsf(cameraPosition.y - terrainY) * _cameraTerrainSpeed, 0.0f));
+				_camera->move(fvec3(0.0f, fabsf(cameraPosition.y - terrainY) * _cameraTerrainResponseSpeed, 0.0f));
 				cameraPosition.y = _camera->getPosition().y;
 
 				if(cameraPosition.y > terrainY)
@@ -27,7 +27,7 @@ void CameraCollisionHandler::update()
 		}
 	}
 
-	if(_isCameraAabbResponseEnabled)
+	if(_isCameraAabbResponseEnabledX || _isCameraAabbResponseEnabledY || _isCameraAabbResponseEnabledZ)
 	{
 		unsigned int xPriority = 0;
 		unsigned int yPriority = 0;

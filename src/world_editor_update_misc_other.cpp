@@ -130,10 +130,16 @@ void WorldEditor::_updateMiscellaneous()
 		}
 	}
 
-	_fe3d->raycast_setTerrainPointingEnabled(!_fe3d->terrain_getSelectedId().empty());
-	if(_fe3d->raycast_isTerrainPointingEnabled())
+	if(_fe3d->terrain_getSelectedId().empty())
 	{
-		_fe3d->raycast_setTerrainPointingDistance(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId()));
+		_fe3d->raycast_setTerrainPointingEnabled(false);
+		_fe3d->raycast_setTerrainPointingDistance(0.0f);
+		_fe3d->raycast_setTerrainPointingPrecision(0.0f);
+	}
+	else
+	{
+		_fe3d->raycast_setTerrainPointingEnabled(true);
+		_fe3d->raycast_setTerrainPointingDistance(Math::calculateDistance(fvec3(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId())), fvec3(0.0f)));
 		_fe3d->raycast_setTerrainPointingPrecision(0.1f);
 	}
 }

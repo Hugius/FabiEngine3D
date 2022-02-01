@@ -205,14 +205,8 @@ void ScriptInterpreter::unload()
 	_fe3d->camera_reset();
 
 	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	if(_fe3d->collision_isCameraResponseEnabled())
-	{
-		_fe3d->collision_disableCameraAabbResponse();
-	}
-	if(_fe3d->collision_isTerrainResponseEnabled())
-	{
-		_fe3d->collision_disableCameraTerrainResponse();
-	}
+	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);
+	_fe3d->collision_setCameraTerrainResponseEnabled(false);
 
 	_fe3d->raycast_setTerrainPointingEnabled(false);
 

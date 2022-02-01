@@ -11,7 +11,7 @@ void ModelEntity::createPart(const string& id)
 	_parts.push_back(ModelEntityPart(id));
 }
 
-void ModelEntity::updateTransformation()
+void ModelEntity::updateTarget()
 {
 	if(_basePosition != _basePositionTarget)
 	{
@@ -75,47 +75,47 @@ void ModelEntity::updateTransformation()
 	}
 }
 
-void ModelEntity::updateTransformationMatrix()
+void ModelEntity::updateTransformation()
 {
 	for(size_t i = 0; i < _parts.size(); i++)
 	{
-		_parts[i].transformationMatrix = mat44(1.0f);
+		_parts[i].transformation = mat44(1.0f);
 
 		auto baseTranslationMatrix = Math::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
-		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseTranslationMatrix);
+		_parts[i].transformation = (_parts[i].transformation * baseTranslationMatrix);
 
 		auto translationMatrix = Math::createTranslationMatrix(_parts[i].position.x, _parts[i].position.y, _parts[i].position.z);
-		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * translationMatrix);
+		_parts[i].transformation = (_parts[i].transformation * translationMatrix);
 
 		auto baseRotationOriginMatrix = Math::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
-		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationOriginMatrix);
+		_parts[i].transformation = (_parts[i].transformation * baseRotationOriginMatrix);
 
 		auto baseRotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_baseRotation.x),
 			Math::convertToRadians(_baseRotation.y),
 			Math::convertToRadians(_baseRotation.z), _rotationOrder);
-		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationMatrix);
+		_parts[i].transformation = (_parts[i].transformation * baseRotationMatrix);
 
 		baseRotationOriginMatrix = Math::createTranslationMatrix(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
-		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationOriginMatrix);
+		_parts[i].transformation = (_parts[i].transformation * baseRotationOriginMatrix);
 
 		auto rotationOriginMatrix = Math::createTranslationMatrix(_parts[i].rotationOrigin.x, _parts[i].rotationOrigin.y, _parts[i].rotationOrigin.z);
-		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationOriginMatrix);
+		_parts[i].transformation = (_parts[i].transformation * rotationOriginMatrix);
 
 		auto rotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_parts[i].rotation.x),
 			Math::convertToRadians(_parts[i].rotation.y),
 			Math::convertToRadians(_parts[i].rotation.z), _rotationOrder);
-		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationMatrix);
+		_parts[i].transformation = (_parts[i].transformation * rotationMatrix);
 
 		rotationOriginMatrix = Math::createTranslationMatrix(-_parts[i].rotationOrigin.x, -_parts[i].rotationOrigin.y, -_parts[i].rotationOrigin.z);
-		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationOriginMatrix);
+		_parts[i].transformation = (_parts[i].transformation * rotationOriginMatrix);
 
 		auto baseScalingMatrix = Math::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
-		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseScalingMatrix);
+		_parts[i].transformation = (_parts[i].transformation * baseScalingMatrix);
 
 		auto scalingMatrix = Math::createScalingMatrix(_parts[i].size.x, _parts[i].size.y, _parts[i].size.z);
-		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * scalingMatrix);
+		_parts[i].transformation = (_parts[i].transformation * scalingMatrix);
 	}
 }
 
@@ -527,9 +527,9 @@ const shared_ptr<VertexBuffer> ModelEntity::getMesh(const string& partId) const
 	return _parts[_getPartIndex(partId)].vertexBuffer;
 }
 
-const mat44& ModelEntity::getTransformationMatrix(const string& partId) const
+const mat44& ModelEntity::getTransformation(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].transformationMatrix;
+	return _parts[_getPartIndex(partId)].transformation;
 }
 
 const shared_ptr<TextureBuffer> ModelEntity::getDiffuseMap(const string& partId) const

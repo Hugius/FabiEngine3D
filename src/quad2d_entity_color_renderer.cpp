@@ -48,7 +48,7 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 
 	_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 	_shader->uploadUniform("u_uvOffset", entity->getUvOffset());
-	_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
+	_shader->uploadUniform("u_transformation", entity->getTransformation());
 	_shader->uploadUniform("u_isHorizontallyFlipped", entity->isFlippedHorizonally());
 	_shader->uploadUniform("u_isVerticallyFlipped", entity->isVerticallyFlipped());
 	_shader->uploadUniform("u_color", entity->getColor());

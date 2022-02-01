@@ -9,7 +9,7 @@ class Sound3d final : public Sound2d
 public:
 	using Sound2d::Sound2d;
 
-	void updateTransformation();
+	void updateTarget();
 	void setPosition(const fvec3& value);
 	void move(const fvec3& value);
 	void moveTo(const fvec3& target, float speed);

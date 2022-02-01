@@ -15,8 +15,8 @@ public:
 	using BaseEntity::BaseEntity;
 
 	void setMesh(shared_ptr<VertexBuffer> value);
+	void updateTarget();
 	void updateTransformation();
-	void updateTransformationMatrix();
 	void setLocalPosition(const fvec3& value);
 	void setLocalSize(const fvec3& value);
 	void setPosition(const fvec3& value);
@@ -36,7 +36,7 @@ public:
 
 	const string& getParentEntityId() const;
 
-	const mat44& getTransformationMatrix() const;
+	const mat44& getTransformation() const;
 
 	const fvec3& getLocalPosition() const;
 	const fvec3& getLocalSize() const;
@@ -57,7 +57,7 @@ public:
 private:
 	string _parentEntityId = "";
 
-	mat44 _transformationMatrix = mat44(1.0f);
+	mat44 _transformation = mat44(1.0f);
 
 	fvec3 _localPosition = fvec3(0.0f);
 	fvec3 _localSize = fvec3(1.0f);

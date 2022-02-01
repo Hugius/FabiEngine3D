@@ -5,7 +5,7 @@
 using std::max;
 using std::clamp;
 
-void SpotlightEntity::updateTransformation()
+void SpotlightEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{

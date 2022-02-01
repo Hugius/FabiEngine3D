@@ -31,7 +31,7 @@ void Sound3dManager::update()
 {
 	for(auto& sound : _sounds)
 	{
-		sound.updateTransformation();
+		sound.updateTarget();
 	}
 }
 

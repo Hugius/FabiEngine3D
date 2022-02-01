@@ -7,7 +7,7 @@ using std::max;
 using std::clamp;
 using std::make_shared;
 
-void Text3dEntity::updateTransformation()
+void Text3dEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
@@ -95,7 +95,7 @@ void Text3dEntity::updateCharacterEntities()
 
 		if(_isVisible)
 		{
-			character->updateTransformationMatrix();
+			character->updateTransformation();
 		}
 
 		index++;
@@ -417,9 +417,9 @@ const shared_ptr<TextureBuffer> Text3dEntity::getFontMap() const
 	return _fontMap;
 }
 
-const mat44& Text3dEntity::getTransformationMatrix() const
+const mat44& Text3dEntity::getTransformation() const
 {
-	return _transformationMatrix;
+	return _transformation;
 }
 
 const fvec3& Text3dEntity::getPosition() const

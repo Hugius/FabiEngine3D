@@ -9,7 +9,7 @@ class PointlightEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void updateTransformation();
+	void updateTarget();
 	void setPosition(const fvec3& value);
 	void move(const fvec3& value);
 	void moveTo(const fvec3& target, float speed);

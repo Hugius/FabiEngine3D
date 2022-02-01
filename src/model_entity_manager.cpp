@@ -132,7 +132,7 @@ void ModelEntityManager::update()
 {
 	for(const auto& [key, entity] : _entities)
 	{
-		entity->updateTransformation();
+		entity->updateTarget();
 
 		if(!entity->isVisible())
 		{
@@ -206,6 +206,6 @@ void ModelEntityManager::update()
 			entity->setCubeReflectionMixValue(entity->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
 		}
 
-		entity->updateTransformationMatrix();
+		entity->updateTransformation();
 	}
 }

@@ -8,7 +8,7 @@ class SpotlightEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void updateTransformation();
+	void updateTarget();
 	void updateFront();
 	void setPosition(const fvec3& value);
 	void move(const fvec3& value);

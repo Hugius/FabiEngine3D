@@ -5,7 +5,7 @@
 using std::clamp;
 using std::max;
 
-void Sound3d::updateTransformation()
+void Sound3d::updateTarget()
 {
 	if(_position != _positionTarget)
 	{

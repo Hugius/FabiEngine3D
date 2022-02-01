@@ -9,7 +9,7 @@ in vec2 f_uv;
 in vec3 f_normal;
 in vec4 f_shadowPosition;
 in vec4 f_clip;
-in mat3 f_tbnMatrix;
+in mat3 f_tbn;
 
 layout (location = 0) uniform samplerCube u_previousCubeReflectionMap;
 layout (location = 1) uniform samplerCube u_currentCubeReflectionMap;
@@ -228,7 +228,7 @@ vec3 calculateNormalMapping()
     {
         vec3 normal = texture(u_normalMap, f_uv).rgb;
         normal = ((normal * 2.0f) - 1.0f);
-        normal = normalize(f_tbnMatrix * normal);
+        normal = normalize(f_tbn * normal);
 
         return normal;
     }

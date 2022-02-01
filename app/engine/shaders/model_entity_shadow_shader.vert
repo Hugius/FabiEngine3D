@@ -3,8 +3,9 @@
 layout (location = 0) in vec3 v_position;
 layout (location = 1) in vec2 v_uv;
 
-uniform mat4 u_transformationMatrix;
-uniform mat4 u_shadowMatrix;
+uniform mat4 u_transformation;
+uniform mat4 u_shadowView;
+uniform mat4 u_shadowProjection;
 
 uniform float u_minX;
 uniform float u_minY;
@@ -18,8 +19,8 @@ out vec2 f_uv;
 
 void main()
 {
-	vec4 worldSpacePosition = (u_transformationMatrix * vec4(v_position, 1.0f));
-	vec4 shadowSpacePosition = (u_shadowMatrix * worldSpacePosition);
+	vec4 worldSpacePosition = (u_transformation * vec4(v_position, 1.0f));
+	vec4 shadowSpacePosition = (u_shadowProjection * u_shadowView * worldSpacePosition);
 
 	f_uv = (v_uv * u_textureRepeat);
 

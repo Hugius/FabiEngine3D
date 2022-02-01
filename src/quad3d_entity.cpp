@@ -11,7 +11,7 @@ void Quad3dEntity::setMesh(shared_ptr<VertexBuffer> value)
 	_mesh = value;
 }
 
-void Quad3dEntity::updateTransformation()
+void Quad3dEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
@@ -78,33 +78,33 @@ void Quad3dEntity::updateTransformation()
 	}
 }
 
-void Quad3dEntity::updateTransformationMatrix()
+void Quad3dEntity::updateTransformation()
 {
-	_transformationMatrix = mat44(1.0f);
+	_transformation = mat44(1.0f);
 
 	auto translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
-	_transformationMatrix = (_transformationMatrix * translationMatrix);
+	_transformation = (_transformation * translationMatrix);
 
 	if(!_isCentered)
 	{
 		auto rotationOriginMatrix = Math::createTranslationMatrix(0.0f, (_size.y * 0.5f), 0.0f);
-		_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
+		_transformation = (_transformation * rotationOriginMatrix);
 	}
 
 	auto rotationMatrix = Math::createRotationMatrix(
 		Math::convertToRadians(_rotation.x),
 		Math::convertToRadians(_rotation.y),
 		Math::convertToRadians(_rotation.z), DirectionOrder::YXZ);
-	_transformationMatrix = (_transformationMatrix * rotationMatrix);
+	_transformation = (_transformation * rotationMatrix);
 
 	if(!_isCentered)
 	{
 		auto rotationOriginMatrix = Math::createTranslationMatrix(0.0f, -(_size.y * 0.5f), 0.0f);
-		_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
+		_transformation = (_transformation * rotationOriginMatrix);
 	}
 
 	auto scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
-	_transformationMatrix = (_transformationMatrix * scalingMatrix);
+	_transformation = (_transformation * scalingMatrix);
 }
 
 void Quad3dEntity::setFacingCameraHorizontally(bool value)
@@ -290,9 +290,9 @@ const shared_ptr<VertexBuffer> Quad3dEntity::getMesh() const
 	return _mesh;
 }
 
-const mat44& Quad3dEntity::getTransformationMatrix() const
+const mat44& Quad3dEntity::getTransformation() const
 {
-	return _transformationMatrix;
+	return _transformation;
 }
 
 const shared_ptr<TextureBuffer> Quad3dEntity::getDiffuseMap() const

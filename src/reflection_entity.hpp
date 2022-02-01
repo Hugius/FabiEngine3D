@@ -13,7 +13,7 @@ class ReflectionEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void updateTransformation();
+	void updateTarget();
 	void capture();
 	void setCaptured();
 	void setPosition(const fvec3& value);

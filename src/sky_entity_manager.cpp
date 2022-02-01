@@ -123,7 +123,7 @@ void SkyEntityManager::update()
 	{
 		if(entity->isVisible())
 		{
-			entity->updateRotationMatrix();
+			entity->updateTransformation();
 		}
 	}
 }

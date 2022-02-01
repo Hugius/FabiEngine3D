@@ -13,7 +13,7 @@ class Text2dEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void updateTransformation();
+	void updateTarget();
 	void updateCharacterEntities();
 	void setMesh(shared_ptr<VertexBuffer> value);
 	void setContent(const string& value);

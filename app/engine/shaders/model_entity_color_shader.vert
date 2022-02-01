@@ -5,12 +5,13 @@ layout (location = 1) in vec2 v_uv;
 layout (location = 2) in vec3 v_normal;
 layout (location = 3) in vec3 v_tangent;
 
-uniform mat4 u_transformationMatrix;
-uniform mat4 u_viewMatrix;
-uniform mat4 u_projectionMatrix;
-uniform mat4 u_shadowMatrix;
+uniform mat4 u_transformation;
+uniform mat4 u_cameraView;
+uniform mat4 u_cameraProjection;
+uniform mat4 u_shadowView;
+uniform mat4 u_shadowProjection;
 
-uniform mat3 u_normalTransformationMatrix;
+uniform mat3 u_normalTransformation;
 
 uniform float u_minX;
 uniform float u_minY;
@@ -27,22 +28,22 @@ out vec2 f_uv;
 out vec3 f_normal;
 out vec4 f_shadowPosition;
 out vec4 f_clip;
-out mat3 f_tbnMatrix;
+out mat3 f_tbn;
 
-mat3 calculateTbnMatrix();
+mat3 calculateTBN();
 
 void main()
 {
-	vec4 worldSpacePosition = (u_transformationMatrix * vec4(v_position, 1.0f));
-	vec4 viewSpacePosition = (u_viewMatrix * worldSpacePosition);
-	vec4 clipSpacePosition = (u_projectionMatrix * viewSpacePosition);
+	vec4 worldSpacePosition = (u_transformation * vec4(v_position, 1.0f));
+	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
+	vec4 clipSpacePosition = (u_cameraProjection * viewSpacePosition);
 
 	f_position = worldSpacePosition.xyz;
 	f_uv = (v_uv * u_textureRepeat);
-	f_normal = normalize(u_normalTransformationMatrix * v_normal);
-	f_shadowPosition = (u_shadowMatrix * worldSpacePosition);
+	f_normal = normalize(u_normalTransformation * v_normal);
+	f_shadowPosition = (u_shadowProjection * u_shadowView * worldSpacePosition);
 	f_clip = clipSpacePosition;
-    f_tbnMatrix = calculateTbnMatrix();
+    f_tbn = calculateTBN();
 
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));
@@ -53,13 +54,14 @@ void main()
 	gl_ClipDistance[5] = dot(worldSpacePosition, vec4( 0.0f,  0.0f, -1.0f,  u_maxZ));
 }
 
-mat3 calculateTbnMatrix()
+mat3 calculateTBN()
 {
     if (u_hasNormalMap)
     {
-        vec3 tangent = normalize(mat3(u_normalTransformationMatrix) * v_tangent);
-			 tangent = normalize(tangent - dot(tangent, f_normal) * f_normal);
+        vec3 tangent = normalize(mat3(u_normalTransformation) * v_tangent);
+		tangent = normalize(tangent - dot(tangent, f_normal) * f_normal);
         vec3 bitangent = cross(f_normal, tangent);
+
         return mat3(tangent, bitangent, f_normal);
     }
     else

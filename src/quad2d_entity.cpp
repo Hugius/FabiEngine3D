@@ -11,7 +11,7 @@ void Quad2dEntity::setMesh(shared_ptr<VertexBuffer> value)
 	_mesh = value;
 }
 
-void Quad2dEntity::updateTransformation()
+void Quad2dEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
@@ -59,13 +59,13 @@ void Quad2dEntity::updateTransformation()
 	}
 }
 
-void Quad2dEntity::updateTransformationMatrix()
+void Quad2dEntity::updateTransformation()
 {
 	auto translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, 0.0f);
 	auto rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(_rotation));
 	auto scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 
-	_transformationMatrix = (translationMatrix * rotationMatrix * scalingMatrix);
+	_transformation = (translationMatrix * rotationMatrix * scalingMatrix);
 }
 
 void Quad2dEntity::setDiffuseMap(shared_ptr<TextureBuffer> value)
@@ -236,9 +236,9 @@ const bool Quad2dEntity::isVerticallyFlipped() const
 	return _isVerticallyFlipped;
 }
 
-const mat44& Quad2dEntity::getTransformationMatrix() const
+const mat44& Quad2dEntity::getTransformation() const
 {
-	return _transformationMatrix;
+	return _transformation;
 }
 
 const fvec2& Quad2dEntity::getPosition() const

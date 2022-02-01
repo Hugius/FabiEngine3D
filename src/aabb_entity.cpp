@@ -9,7 +9,7 @@ void AabbEntity::setMesh(shared_ptr<VertexBuffer> value)
 	_mesh = value;
 }
 
-void AabbEntity::updateTransformation()
+void AabbEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
@@ -51,13 +51,13 @@ void AabbEntity::updateTransformation()
 	}
 }
 
-void AabbEntity::updateTransformationMatrix()
+void AabbEntity::updateTransformation()
 {
 	auto translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
 
 	auto scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, _size.z);
 
-	_transformationMatrix = (translationMatrix * scalingMatrix);
+	_transformation = (translationMatrix * scalingMatrix);
 }
 
 void AabbEntity::setCollisionDirection(Direction value)
@@ -153,9 +153,9 @@ const shared_ptr<VertexBuffer> AabbEntity::getMesh()const
 	return _mesh;
 }
 
-const mat44& AabbEntity::getTransformationMatrix() const
+const mat44& AabbEntity::getTransformation() const
 {
-	return _transformationMatrix;
+	return _transformation;
 }
 
 const fvec3& AabbEntity::getLocalPosition() const

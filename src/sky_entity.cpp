@@ -10,9 +10,9 @@ void SkyEntity::setMesh(shared_ptr<VertexBuffer> value)
 	_mesh = value;
 }
 
-void SkyEntity::updateRotationMatrix()
+void SkyEntity::updateTransformation()
 {
-	_rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(_rotation));
+	_transformation = Math::createRotationMatrixY(Math::convertToRadians(_rotation));
 }
 
 void SkyEntity::setCubeMapPaths(const array<string, 6>& value)
@@ -60,9 +60,9 @@ const array<string, 6>& SkyEntity::getCubeMapPaths() const
 	return _cubeMapPaths;
 }
 
-const mat44& SkyEntity::getRotationMatrix() const
+const mat44& SkyEntity::getTransformation() const
 {
-	return _rotationMatrix;
+	return _transformation;
 }
 
 const fvec3& SkyEntity::getWireframeColor() const

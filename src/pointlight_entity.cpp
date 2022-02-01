@@ -5,7 +5,7 @@
 using std::max;
 using std::clamp;
 
-void PointlightEntity::updateTransformation()
+void PointlightEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{

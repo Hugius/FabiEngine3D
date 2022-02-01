@@ -374,12 +374,12 @@ void AabbEntityManager::update()
 		}
 		else
 		{
-			entity->updateTransformation();
+			entity->updateTarget();
 		}
 
 		if(entity->isVisible())
 		{
-			entity->updateTransformationMatrix();
+			entity->updateTransformation();
 		}
 	}
 }

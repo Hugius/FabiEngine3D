@@ -13,8 +13,8 @@ class Quad3dEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
+	void updateTarget();
 	void updateTransformation();
-	void updateTransformationMatrix();
 	void setMesh(shared_ptr<VertexBuffer> value);
 	void setFacingCameraHorizontally(bool value);
 	void setFacingCameraVertically(bool value);
@@ -53,7 +53,7 @@ public:
 	const string& getDiffuseMapPath() const;
 	const string& getEmissionMapPath() const;
 
-	const mat44& getTransformationMatrix() const;
+	const mat44& getTransformation() const;
 
 	const fvec3& getPosition() const;
 	const fvec3& getRotation() const;
@@ -90,7 +90,7 @@ private:
 	string _diffuseMapPath = "";
 	string _emissionMapPath = "";
 
-	mat44 _transformationMatrix = mat44(1.0f);
+	mat44 _transformation = mat44(1.0f);
 
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _rotation = fvec3(0.0f);

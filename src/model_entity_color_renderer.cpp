@@ -10,8 +10,9 @@ void ModelEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjection());
-	_shader->uploadUniform("u_shadowMatrix", (_renderBus->getShadowProjection() * _renderBus->getShadowView()));
+	_shader->uploadUniform("u_cameraProjection", _renderBus->getCameraProjection());
+	_shader->uploadUniform("u_shadowView", _renderBus->getShadowView());
+	_shader->uploadUniform("u_shadowProjection", _renderBus->getShadowProjection());
 	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
 	_shader->uploadUniform("u_ambientLightingColor", _renderBus->getAmbientLightingColor());
 	_shader->uploadUniform("u_ambientLightingIntensity", _renderBus->getAmbientLightingIntensity());
@@ -149,7 +150,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
 	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
 	_shader->uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
-	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getCameraView())) : _renderBus->getCameraView()));
+	_shader->uploadUniform("u_cameraView", (entity->isFrozen() ? mat44(mat33(_renderBus->getCameraView())) : _renderBus->getCameraView()));
 
 	if(!entity->getPreviousReflectionEntityId().empty())
 	{
@@ -187,8 +188,8 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader->uploadUniform("u_hasSpecularMap", (entity->getSpecularMap(partId) != nullptr));
 		_shader->uploadUniform("u_hasReflectionMap", (entity->getReflectionMap(partId) != nullptr));
 		_shader->uploadUniform("u_hasNormalMap", (entity->getNormalMap(partId) != nullptr));
-		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partId));
-		_shader->uploadUniform("u_normalTransformationMatrix", Math::transposeMatrix(Math::invertMatrix(mat33(entity->getTransformationMatrix(partId)))));
+		_shader->uploadUniform("u_transformation", entity->getTransformation(partId));
+		_shader->uploadUniform("u_normalTransformation", Math::transposeMatrix(Math::invertMatrix(mat33(entity->getTransformation(partId)))));
 		_shader->uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partId)));
 		_shader->uploadUniform("u_isWireframed", entity->isWireframed(partId));
 		_shader->uploadUniform("u_isBright", entity->isBright(partId));

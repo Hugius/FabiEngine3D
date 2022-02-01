@@ -164,7 +164,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 				levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
 				levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
-				levelOfDetailEntity->updateTransformationMatrix();
+				levelOfDetailEntity->updateTransformation();
 
 				_modelEntityColorRenderer.render(levelOfDetailEntity, _reflectionEntityManager->getEntities());
 
@@ -172,7 +172,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 				levelOfDetailEntity->setBaseRotation(originalRotation);
 				levelOfDetailEntity->setBaseSize(originalSize);
 				levelOfDetailEntity->setVisible(originalVisibility);
-				levelOfDetailEntity->updateTransformationMatrix();
+				levelOfDetailEntity->updateTransformation();
 			}
 			else
 			{
@@ -224,7 +224,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 				levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
 				levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
-				levelOfDetailEntity->updateTransformationMatrix();
+				levelOfDetailEntity->updateTransformation();
 
 				_modelEntityColorRenderer.render(levelOfDetailEntity, _reflectionEntityManager->getEntities());
 
@@ -232,7 +232,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 				levelOfDetailEntity->setBaseRotation(originalRotation);
 				levelOfDetailEntity->setBaseSize(originalSize);
 				levelOfDetailEntity->setVisible(originalVisibility);
-				levelOfDetailEntity->updateTransformationMatrix();
+				levelOfDetailEntity->updateTransformation();
 			}
 			else
 			{

@@ -60,10 +60,10 @@
 - **FOV**: the visible field of view angle
   - Type: `decimal`
   - Constraints: between `0.0` and `150.0`
-- **Near Distance**: the minimum visible distance
+- **Near**: the minimum visible distance
   - Type: `decimal`
   - Constraints: fixed at `0.01`
-- **Far Distance**: the maximum visible distance
+- **Far**: the maximum visible distance
   - Type: `decimal`
   - Constraints: fixed at `2500.0`
 - **Yaw**: the horizontal rotation of the camera direction

@@ -4,8 +4,8 @@ void SkyEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_viewMatrix", mat44(mat33(_renderBus->getCameraView())));
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjection());
+	_shader->uploadUniform("u_cameraView", mat44(mat33(_renderBus->getCameraView())));
+	_shader->uploadUniform("u_cameraProjection", _renderBus->getCameraProjection());
 	_shader->uploadUniform("u_cubeMap", 0);
 }
 
@@ -27,7 +27,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 	}
 
 	_shader->uploadUniform("u_isWireframed", entity->isWireframed());
-	_shader->uploadUniform("u_rotationMatrix", entity->getRotationMatrix());
+	_shader->uploadUniform("u_transformation", entity->getTransformation());
 	_shader->uploadUniform("u_lightness", (entity->getLightness() + _renderBus->getSkyExposureLightness()));
 	_shader->uploadUniform("u_color", entity->getColor());
 	_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());

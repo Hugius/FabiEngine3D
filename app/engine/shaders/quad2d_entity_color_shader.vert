@@ -3,7 +3,7 @@
 layout (location = 0) in vec2 v_position;
 layout (location = 1) in vec2 v_uv;
 
-uniform mat4 u_transformationMatrix;
+uniform mat4 u_transformation;
 
 uniform vec2 u_uvMultiplier;
 uniform vec2 u_uvOffset;
@@ -20,5 +20,5 @@ void main()
 	f_uv.x = (u_uvOffset.x + (f_uv.x * u_uvMultiplier.x));
 	f_uv.y = (u_uvOffset.y + (f_uv.y * u_uvMultiplier.y));
 
-	gl_Position = (u_transformationMatrix * vec4(v_position, 0.0f, 1.0f));
+	gl_Position = (u_transformation * vec4(v_position, 0.0f, 1.0f));
 }

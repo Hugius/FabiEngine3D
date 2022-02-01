@@ -9,8 +9,8 @@ void WaterEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_viewMatrix", _renderBus->getCameraView());
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjection());
+	_shader->uploadUniform("u_cameraView", _renderBus->getCameraView());
+	_shader->uploadUniform("u_cameraProjection", _renderBus->getCameraProjection());
 	_shader->uploadUniform("u_directionalLightingColor", _renderBus->getDirectionalLightingColor());
 	_shader->uploadUniform("u_directionalLightPosition", _renderBus->getDirectionalLightingPosition());
 	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());

@@ -3,9 +3,9 @@
 layout (location = 0) in vec3 v_position;
 layout (location = 1) in vec2 v_uv;
 
-uniform mat4 u_transformationMatrix;
-uniform mat4 u_viewMatrix;
-uniform mat4 u_projectionMatrix;
+uniform mat4 u_transformation;
+uniform mat4 u_cameraView;
+uniform mat4 u_cameraProjection;
 
 uniform vec2 u_uvMultiplier;
 uniform vec2 u_uvOffset;
@@ -23,9 +23,9 @@ out vec2 f_uv;
 
 void main()
 {
-    vec4 worldSpacePosition = (u_transformationMatrix * vec4(v_position, 1.0f));
-	vec4 viewSpacePosition  = (u_viewMatrix * worldSpacePosition);
-	vec4 clipSpacePosition  = (u_projectionMatrix * viewSpacePosition);
+    vec4 worldSpacePosition = (u_transformation * vec4(v_position, 1.0f));
+	vec4 viewSpacePosition  = (u_cameraView * worldSpacePosition);
+	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
 
     f_position = worldSpacePosition.xyz;
 	f_uv.x = ((u_uvOffset.x + (v_uv.x * u_uvMultiplier.x)) * u_textureRepeat);

@@ -7,8 +7,8 @@ void AabbEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_viewMatrix", _renderBus->getCameraView());
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjection());
+	_shader->uploadUniform("u_cameraView", _renderBus->getCameraView());
+	_shader->uploadUniform("u_cameraProjection", _renderBus->getCameraProjection());
 	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
 	_shader->uploadUniform("u_fogMinDistance", _renderBus->getFogMinDistance());
 	_shader->uploadUniform("u_fogMaxDistance", _renderBus->getFogMaxDistance());
@@ -45,7 +45,7 @@ void AabbEntityColorRenderer::render(const shared_ptr<AabbEntity> entity)
 		return;
 	}
 
-	_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
+	_shader->uploadUniform("u_transformation", entity->getTransformation());
 	_shader->uploadUniform("u_color", entity->getColor());
 	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
 	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);

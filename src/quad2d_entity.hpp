@@ -14,8 +14,8 @@ public:
 	using BaseEntity::BaseEntity;
 
 	void setMesh(shared_ptr<VertexBuffer> value);
+	void updateTarget();
 	void updateTransformation();
-	void updateTransformationMatrix();
 	void setDiffuseMap(shared_ptr<TextureBuffer> value);
 	void setDiffuseMapPath(const string& value);
 	void setHorizontallyFlipped(bool value);
@@ -42,7 +42,7 @@ public:
 
 	const string& getDiffuseMapPath() const;
 
-	const mat44& getTransformationMatrix() const;
+	const mat44& getTransformation() const;
 
 	const fvec3& getWireframeColor() const;
 	const fvec3& getColor() const;
@@ -68,7 +68,7 @@ public:
 	const shared_ptr<TextureBuffer> getDiffuseMap() const;
 
 private:
-	mat44 _transformationMatrix = mat44(1.0f);
+	mat44 _transformation = mat44(1.0f);
 
 	string _diffuseMapPath = "";
 

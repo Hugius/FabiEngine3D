@@ -7,7 +7,8 @@ void Quad3dEntityShadowRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_shadowMatrix", (_renderBus->getShadowProjection() * _renderBus->getShadowView()));
+	_shader->uploadUniform("u_shadowView", _renderBus->getShadowView());
+	_shader->uploadUniform("u_shadowProjection", _renderBus->getShadowProjection());
 	_shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -39,7 +40,7 @@ void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
 		return;
 	}
 
-	_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
+	_shader->uploadUniform("u_transformation", entity->getTransformation());
 	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
 	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
 	_shader->uploadUniform("u_minY", max(_renderBus->getMinPosition().y, entity->getMinHeight()));

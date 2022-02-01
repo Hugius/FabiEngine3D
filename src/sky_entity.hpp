@@ -14,8 +14,8 @@ class SkyEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
+	void updateTransformation();
 	void setMesh(shared_ptr<VertexBuffer> value);
-	void updateRotationMatrix();
 	void setCubeMapPaths(const array<string, 6>& value);
 	void setColor(const fvec3& value);
 	void setCubeMap(shared_ptr<TextureBuffer> value);
@@ -26,7 +26,7 @@ public:
 
 	const array<string, 6>& getCubeMapPaths() const;
 
-	const mat44& getRotationMatrix() const;
+	const mat44& getTransformation() const;
 
 	const fvec3& getWireframeColor() const;
 	const fvec3& getColor() const;
@@ -42,7 +42,7 @@ public:
 private:
 	array<string, 6> _cubeMapPaths = {"", "", "", "", "", ""};
 
-	mat44 _rotationMatrix = mat44(1.0f);
+	mat44 _transformation = mat44(1.0f);
 
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);

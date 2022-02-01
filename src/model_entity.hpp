@@ -9,8 +9,8 @@ public:
 
 	void createPart(const string& id);
 	void deleteParts();
+	void updateTarget();
 	void updateTransformation();
-	void updateTransformationMatrix();
 	void setShadowed(bool value);
 	void setReflected(bool value);
 	void setFrozen(bool value);
@@ -85,7 +85,7 @@ public:
 	const string& getReflectionMapPath(const string& partId) const;
 	const string& getNormalMapPath(const string& partId) const;
 
-	const mat44& getTransformationMatrix(const string& partId) const;
+	const mat44& getTransformation(const string& partId) const;
 
 	const fvec3& getColor(const string& partId) const;
 	const fvec3& getWireframeColor(const string& partId) const;

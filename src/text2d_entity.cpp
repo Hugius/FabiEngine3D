@@ -7,7 +7,7 @@ using std::max;
 using std::clamp;
 using std::make_shared;
 
-void Text2dEntity::updateTransformation()
+void Text2dEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
@@ -80,7 +80,7 @@ void Text2dEntity::updateCharacterEntities()
 		character->setRotation(_rotation);
 		character->setSize(characterSize);
 
-		character->updateTransformationMatrix();
+		character->updateTransformation();
 
 		index++;
 	}

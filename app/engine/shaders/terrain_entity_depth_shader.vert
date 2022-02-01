@@ -2,8 +2,8 @@
 
 layout (location = 0) in vec3 v_position;
 
-uniform mat4 u_viewMatrix;
-uniform mat4 u_projectionMatrix;
+uniform mat4 u_cameraView;
+uniform mat4 u_cameraProjection;
 
 uniform float u_minX;
 uniform float u_minY;
@@ -15,8 +15,8 @@ uniform float u_maxZ;
 void main()
 {
 	vec4 worldSpacePosition = vec4(v_position, 1.0f);
-	vec4 viewSpacePosition  = (u_viewMatrix * worldSpacePosition);
-	vec4 clipSpacePosition  = (u_projectionMatrix * viewSpacePosition);
+	vec4 viewSpacePosition  = (u_cameraView * worldSpacePosition);
+	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
 
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));

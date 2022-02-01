@@ -33,7 +33,7 @@ void ReflectionEntityManager::update()
 {
 	for(const auto& [key, entity] : _entities)
 	{
-		entity->updateTransformation();
+		entity->updateTarget();
 	}
 }
 

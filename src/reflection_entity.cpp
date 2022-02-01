@@ -1,7 +1,7 @@
 #include "reflection_entity.hpp"
 #include "logger.hpp"
 
-void ReflectionEntity::updateTransformation()
+void ReflectionEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{

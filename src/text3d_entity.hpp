@@ -13,7 +13,7 @@ class Text3dEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void updateTransformation();
+	void updateTarget();
 	void updateCharacterEntities();
 	void setMesh(shared_ptr<VertexBuffer> value);
 	void setContent(const string& value);
@@ -48,7 +48,7 @@ public:
 	const string& getContent() const;
 	const string& getFontMapPath() const;
 
-	const mat44& getTransformationMatrix() const;
+	const mat44& getTransformation() const;
 
 	const fvec3& getPosition() const;
 	const fvec3& getRotation() const;
@@ -180,7 +180,7 @@ private:
 	string _content = "";
 	string _fontMapPath = "";
 
-	mat44 _transformationMatrix = mat44(1.0f);
+	mat44 _transformation = mat44(1.0f);
 
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _rotation = fvec3(0.0f);

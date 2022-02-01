@@ -72,11 +72,11 @@ void Quad2dEntityManager::update()
 {
 	for(const auto& [key, entity] : _entities)
 	{
-		entity->updateTransformation();
+		entity->updateTarget();
 
 		if(entity->isVisible())
 		{
-			entity->updateTransformationMatrix();
+			entity->updateTransformation();
 		}
 	}
 }

@@ -160,8 +160,11 @@ void MasterRenderer::_updateShadows()
 			const auto nearZ = 0.01f;
 			const auto farZ = Math::calculateDistance(fvec3(_renderBus->getShadowSize()), fvec3(0.0f));
 
-			_renderBus->setShadowView(Math::createViewMatrix(_renderBus->getShadowEyePosition(), _renderBus->getShadowCenterPosition(), fvec3(0.0f, 1.0f, 0.0f)));
-			_renderBus->setShadowProjection(Math::createOrthographicProjectionMatrix(leftX, rightX, bottomY, topY, nearZ, farZ));
+			const auto viewMatrix = Math::createViewMatrix(_renderBus->getShadowEyePosition(), _renderBus->getShadowCenterPosition(), fvec3(0.0f, 1.0f, 0.0f));
+			const auto projectionMatrix = Math::createOrthographicProjectionMatrix(leftX, rightX, bottomY, topY, nearZ, farZ);
+
+			_renderBus->setShadowView(viewMatrix);
+			_renderBus->setShadowProjection(projectionMatrix);
 		}
 	}
 }

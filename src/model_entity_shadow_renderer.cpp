@@ -8,7 +8,8 @@ void ModelEntityShadowRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_shadowMatrix", (_renderBus->getShadowProjection() * _renderBus->getShadowView()));
+	_shader->uploadUniform("u_shadowView", _renderBus->getShadowView());
+	_shader->uploadUniform("u_shadowProjection", _renderBus->getShadowProjection());
 	_shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -49,7 +50,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 
 	for(const auto& partId : entity->getPartIds())
 	{
-		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partId));
+		_shader->uploadUniform("u_transformation", entity->getTransformation(partId));
 		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
 		_shader->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha(partId));
 

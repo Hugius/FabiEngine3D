@@ -8,7 +8,7 @@ in vec3 f_position;
 in vec2 f_uv;
 in vec3 f_normal;
 in vec4 f_shadowPosition;
-in mat3 f_tbnMatrix;
+in mat3 f_tbn;
 
 layout (location = 0) uniform sampler2D u_shadowMap;
 layout (location = 1) uniform sampler2D u_diffuseMap;
@@ -186,7 +186,7 @@ vec3 calculateNormalMapping()
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
-				totalNormal += (normalize(f_tbnMatrix * normal) * diffuseIntensity);
+				totalNormal += (normalize(f_tbn * normal) * diffuseIntensity);
 			}
 			else
 			{
@@ -198,7 +198,7 @@ vec3 calculateNormalMapping()
 				vec3 normal = texture(u_redNormalMap, (blendUv * u_redTextureRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
-				totalNormal += (normalize(f_tbnMatrix * normal) * rIntensity);
+				totalNormal += (normalize(f_tbn * normal) * rIntensity);
 			}
 			else
 			{
@@ -210,7 +210,7 @@ vec3 calculateNormalMapping()
 				vec3 normal = texture(u_greenNormalMap, (blendUv * u_greenTextureRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
-				totalNormal += (normalize(f_tbnMatrix * normal) * gIntensity);
+				totalNormal += (normalize(f_tbn * normal) * gIntensity);
 			}
 			else
 			{
@@ -222,7 +222,7 @@ vec3 calculateNormalMapping()
 				vec3 normal = texture(u_blueNormalMap, (blendUv * u_blueTextureRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
-				totalNormal += (normalize(f_tbnMatrix * normal) * bIntensity);
+				totalNormal += (normalize(f_tbn * normal) * bIntensity);
 			}
 			else
 			{
@@ -238,7 +238,7 @@ vec3 calculateNormalMapping()
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
-				normal = normalize(f_tbnMatrix * normal);
+				normal = normalize(f_tbn * normal);
 
 				return normal;
 			}

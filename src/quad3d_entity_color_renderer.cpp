@@ -8,7 +8,7 @@ void Quad3dEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjection());
+	_shader->uploadUniform("u_cameraProjection", _renderBus->getCameraProjection());
 	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
 	_shader->uploadUniform("u_fogMinDistance", _renderBus->getFogMinDistance());
 	_shader->uploadUniform("u_fogMaxDistance", _renderBus->getFogMaxDistance());
@@ -54,9 +54,9 @@ void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getCameraView())) : _renderBus->getCameraView()));
+	_shader->uploadUniform("u_cameraView", (entity->isFrozen() ? mat44(mat33(_renderBus->getCameraView())) : _renderBus->getCameraView()));
 	_shader->uploadUniform("u_isWireframed", entity->isWireframed());
-	_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
+	_shader->uploadUniform("u_transformation", entity->getTransformation());
 	_shader->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseMap() != nullptr));
 	_shader->uploadUniform("u_hasEmissionMap", (entity->getEmissionMap() != nullptr));
 	_shader->uploadUniform("u_color", entity->getColor());

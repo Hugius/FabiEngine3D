@@ -7,8 +7,8 @@ void ModelEntityDepthRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_viewMatrix", _renderBus->getCameraView());
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjection());
+	_shader->uploadUniform("u_cameraView", _renderBus->getCameraView());
+	_shader->uploadUniform("u_cameraProjection", _renderBus->getCameraProjection());
 	_shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -46,11 +46,11 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity)
 	_shader->uploadUniform("u_maxY", min(_renderBus->getMaxPosition().y, entity->getMaxHeight()));
 	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
 	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
-	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getCameraView())) : _renderBus->getCameraView()));
+	_shader->uploadUniform("u_cameraView", (entity->isFrozen() ? mat44(mat33(_renderBus->getCameraView())) : _renderBus->getCameraView()));
 
 	for(const auto& partId : entity->getPartIds())
 	{
-		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partId));
+		_shader->uploadUniform("u_transformation", entity->getTransformation(partId));
 		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
 		_shader->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha(partId));
 

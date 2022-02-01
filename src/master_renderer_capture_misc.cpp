@@ -55,7 +55,7 @@ void MasterRenderer::_captureWorldDepth()
 						levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
 						levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 						levelOfDetailEntity->setVisible(modelEntity->isVisible());
-						levelOfDetailEntity->updateTransformationMatrix();
+						levelOfDetailEntity->updateTransformation();
 
 						_modelEntityDepthRenderer.render(levelOfDetailEntity);
 
@@ -63,7 +63,7 @@ void MasterRenderer::_captureWorldDepth()
 						levelOfDetailEntity->setBaseRotation(originalRotation);
 						levelOfDetailEntity->setBaseSize(originalSize);
 						levelOfDetailEntity->setVisible(originalVisibility);
-						levelOfDetailEntity->updateTransformationMatrix();
+						levelOfDetailEntity->updateTransformation();
 					}
 					else
 					{
@@ -293,7 +293,7 @@ void MasterRenderer::_captureShadows()
 						levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
 						levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 						levelOfDetailEntity->setVisible(modelEntity->isVisible());
-						levelOfDetailEntity->updateTransformationMatrix();
+						levelOfDetailEntity->updateTransformation();
 
 						_modelEntityShadowRenderer.render(levelOfDetailEntity);
 
@@ -301,7 +301,7 @@ void MasterRenderer::_captureShadows()
 						levelOfDetailEntity->setBaseRotation(originalRotation);
 						levelOfDetailEntity->setBaseSize(originalSize);
 						levelOfDetailEntity->setVisible(originalVisibility);
-						levelOfDetailEntity->updateTransformationMatrix();
+						levelOfDetailEntity->updateTransformation();
 					}
 					else
 					{

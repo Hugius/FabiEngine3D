@@ -11,7 +11,7 @@
 - **Position**: the XYZ position of the light
   - Type: `decimal3`
   - Constraints: none
-- **Front Vector**: the normalized vector of the light direction
+- **Front**: the normalized vector of the light direction
   - Type: `decimal3`
   - Constraints: at least `0.0`
 - **Color**: the RGB color multiplier of the fragments

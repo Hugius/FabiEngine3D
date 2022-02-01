@@ -584,7 +584,7 @@ public:
 
 	const vector<string> spotlight_getIds() const;
 	const fvec3& spotlight_getPosition(const string& id) const;
-	const fvec3& spotlight_getFrontVector(const string& id) const;
+	const fvec3& spotlight_getFront(const string& id) const;
 	const fvec3& spotlight_getColor(const string& id) const;
 	const float spotlight_getYaw(const string& id) const;
 	const float spotlight_getPitch(const string& id) const;
@@ -689,9 +689,9 @@ public:
 	void camera_setCursorSensitivity(float value);
 
 	const fvec3& camera_getPosition() const;
-	const fvec3& camera_getUpVector() const;
-	const fvec3& camera_getFrontVector() const;
-	const fvec3& camera_getRightVector() const;
+	const fvec3& camera_getRight() const;
+	const fvec3& camera_getUp() const;
+	const fvec3& camera_getFront() const;
 	const fvec3& camera_getThirdPersonLookat() const;
 	const float camera_getFOV() const;
 	const float camera_getCursorSensitivity() const;

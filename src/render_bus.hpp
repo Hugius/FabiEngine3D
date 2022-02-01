@@ -27,15 +27,16 @@ public:
 	void setFinalSceneMap(shared_ptr<TextureBuffer> value);
 	void setCursorEntityId(const string& value);
 	void setLensFlareMapPath(const string& value);
-	void setCameraViewMatrix(const mat44& value);
-	void setCameraProjectionMatrix(const mat44& value);
-	void setCameraShadowMatrix(const mat44& value);
+	void setCameraView(const mat44& value);
+	void setCameraProjection(const mat44& value);
+	void setShadowView(const mat44& value);
+	void setShadowProjection(const mat44& value);
 	void setMinPosition(const fvec3& value);
 	void setMaxPosition(const fvec3& value);
 	void setCameraPosition(const fvec3& value);
-	void setCameraUpVector(const fvec3& value);
-	void setCameraFrontVector(const fvec3& value);
-	void setCameraRightVector(const fvec3& value);
+	void setCameraUp(const fvec3& value);
+	void setCameraFront(const fvec3& value);
+	void setCameraRight(const fvec3& value);
 	void setAmbientLightingColor(const fvec3& value);
 	void setDirectionalLightingPosition(const fvec3& value);
 	void setDirectionalLightingColor(const fvec3& value);
@@ -104,16 +105,17 @@ public:
 	const string& getCursorEntityId() const;
 	const string& getLensFlareMapPath() const;
 
-	const mat44& getCameraViewMatrix() const;
-	const mat44& getCameraProjectionMatrix() const;
-	const mat44& getCameraShadowMatrix() const;
+	const mat44& getCameraView() const;
+	const mat44& getCameraProjection() const;
+	const mat44& getShadowView() const;
+	const mat44& getShadowProjection() const;
 
 	const fvec3& getMinPosition() const;
 	const fvec3& getMaxPosition() const;
 	const fvec3& getCameraPosition() const;
-	const fvec3& getCameraUpVector() const;
-	const fvec3& getCameraFrontVector() const;
-	const fvec3& getCameraRightVector() const;
+	const fvec3& getCameraUp() const;
+	const fvec3& getCameraFront() const;
+	const fvec3& getCameraRight() const;
 	const fvec3& getAmbientLightingColor() const;
 	const fvec3& getDirectionalLightingColor() const;
 	const fvec3& getDirectionalLightingPosition() const;
@@ -214,16 +216,17 @@ private:
 	string _cursorEntityId = "";
 	string _lensFlareMapPath = "";
 
-	mat44 _cameraViewMatrix = mat44(1.0f);
-	mat44 _cameraProjectionMatrix = mat44(1.0f);
-	mat44 _cameraShadowMatrix = mat44(1.0f);
+	mat44 _cameraView = mat44(1.0f);
+	mat44 _cameraProjection = mat44(1.0f);
+	mat44 _shadowView = mat44(1.0f);
+	mat44 _shadowProjection = mat44(1.0f);
 
 	fvec3 _minPosition = fvec3(-FLT_MAX);
 	fvec3 _maxPosition = fvec3(FLT_MAX);
 	fvec3 _cameraPosition = fvec3(0.0f);
-	fvec3 _cameraUpVector = fvec3(0.0f);
-	fvec3 _cameraFrontVector = fvec3(0.0f);
-	fvec3 _cameraRightVector = fvec3(0.0f);
+	fvec3 _cameraUp = fvec3(0.0f);
+	fvec3 _cameraFront = fvec3(0.0f);
+	fvec3 _cameraRight = fvec3(0.0f);
 	fvec3 _directionalLightPosition = fvec3(0.0f);
 	fvec3 _shadowEyePosition = fvec3(0.0f);
 	fvec3 _shadowEyeOffset = fvec3(0.0f);

@@ -48,13 +48,13 @@
 - **Position**: the 3D position of the camera in the world
   - Type: `decimal3`
   - Constraints: none
-- **Right Vector**: the normalized vector of the X camera direction
+- **Right**: the normalized vector of the X camera direction
   - Type: `decimal3`
   - Constraints: between `-1.0` and `1.0`
-- **Up Vector**: the normalized vector of the Y camera direction
+- **Up**: the normalized vector of the Y camera direction
   - Type: `decimal3`
   - Constraints: between `-1.0` and `1.0`
-- **Front Vector**: the normalized vector of the Z camera direction
+- **Front**: the normalized vector of the Z camera direction
   - Type: `decimal3`
   - Constraints: between `-1.0` and `1.0`
 - **FOV**: the visible field of view angle

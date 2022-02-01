@@ -25,7 +25,7 @@ uniform vec3 u_pointlightPositions[MAX_POINTLIGHT_COUNT];
 uniform vec3 u_pointlightRadiuses[MAX_POINTLIGHT_COUNT];
 uniform vec3 u_pointlightColors[MAX_POINTLIGHT_COUNT];
 uniform vec3 u_spotlightPositions[MAX_SPOTLIGHT_COUNT];
-uniform vec3 u_spotlightFrontVectors[MAX_SPOTLIGHT_COUNT];
+uniform vec3 u_spotlightFronts[MAX_SPOTLIGHT_COUNT];
 uniform vec3 u_spotlightColors[MAX_SPOTLIGHT_COUNT];
 uniform vec3 u_cameraPosition;
 uniform vec3 u_ambientLightingColor;
@@ -334,7 +334,7 @@ vec3 calculateSpotlights(vec3 normal)
 	for (int i = 0; i < u_spotlightCount; i++)
 	{
 		vec3 direction = normalize(u_spotlightPositions[i] - f_position);
-		float spot = dot(direction, normalize(-u_spotlightFrontVectors[i]));
+		float spot = dot(direction, normalize(-u_spotlightFronts[i]));
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_spotlightPositions[i], normal);
 		float smoothingAngle = (u_spotlightAngles[i] * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));

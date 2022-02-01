@@ -10,8 +10,8 @@ void ModelEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjectionMatrix());
-	_shader->uploadUniform("u_shadowMatrix", _renderBus->getCameraShadowMatrix());
+	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjection());
+	_shader->uploadUniform("u_shadowMatrix", (_renderBus->getShadowProjection() * _renderBus->getShadowView()));
 	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
 	_shader->uploadUniform("u_ambientLightingColor", _renderBus->getAmbientLightingColor());
 	_shader->uploadUniform("u_ambientLightingIntensity", _renderBus->getAmbientLightingIntensity());
@@ -125,7 +125,7 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 	for(size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader->uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
-		_shader->uploadUniform("u_spotlightFrontVectors[" + to_string(i) + "]", visibleEntities[i]->getFrontVector());
+		_shader->uploadUniform("u_spotlightFronts[" + to_string(i) + "]", visibleEntities[i]->getFront());
 		_shader->uploadUniform("u_spotlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
 		_shader->uploadUniform("u_spotlightIntensities[" + to_string(i) + "]", visibleEntities[i]->getIntensity());
 		_shader->uploadUniform("u_spotlightAngles[" + to_string(i) + "]", cosf(Math::convertToRadians(visibleEntities[i]->getAngle())));
@@ -149,7 +149,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
 	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
 	_shader->uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
-	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getCameraViewMatrix())) : _renderBus->getCameraViewMatrix()));
+	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getCameraView())) : _renderBus->getCameraView()));
 
 	if(!entity->getPreviousReflectionEntityId().empty())
 	{

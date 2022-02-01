@@ -45,7 +45,7 @@ void MasterRenderer::_captureCubeReflections()
 	const auto originalShadowInterval = _renderBus->getShadowInterval();
 	const auto originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
 
-	//_camera->invertUpVector();
+	//_camera->invertUpDirection();
 	_camera->setAspectRatio(1.0f);
 	_camera->setFOV(90.0f);
 
@@ -163,7 +163,7 @@ void MasterRenderer::_captureCubeReflections()
 		entity->setVisible(true);
 	}
 
-	//_camera->invertUpVector();
+	//_camera->invertUpDirection();
 	_camera->setAspectRatio(originalCameraAspectRatio);
 	_camera->setFOV(originalCameraFOV);
 	_camera->setPosition(originalCameraPosition);

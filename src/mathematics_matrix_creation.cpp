@@ -172,23 +172,23 @@ const mat44 Math::createOrthographicProjectionMatrix(float leftX, float rightX, 
 
 const mat44 Math::createViewMatrix(const fvec3& eye, const fvec3& center, const fvec3& up)
 {
-	fvec3 frontVector = normalize(center - eye);
-	fvec3 rightVector = normalize(calculateCrossProduct(frontVector, up));
-	fvec3 upVector = calculateCrossProduct(rightVector, frontVector);
+	fvec3 finalFront = normalize(center - eye);
+	fvec3 finalRight = normalize(calculateCrossProduct(finalFront, up));
+	fvec3 finalUp = calculateCrossProduct(finalRight, finalFront);
 
 	mat44 result(1.0f);
-	result.m[0][0] = rightVector.x;
-	result.m[1][0] = rightVector.y;
-	result.m[2][0] = rightVector.z;
-	result.m[0][1] = upVector.x;
-	result.m[1][1] = upVector.y;
-	result.m[2][1] = upVector.z;
-	result.m[0][2] = -(frontVector.x);
-	result.m[1][2] = -(frontVector.y);
-	result.m[2][2] = -(frontVector.z);
-	result.m[3][0] = -(calculateDotProduct(rightVector, eye));
-	result.m[3][1] = -(calculateDotProduct(upVector, eye));
-	result.m[3][2] = calculateDotProduct(frontVector, eye);
+	result.m[0][0] = finalRight.x;
+	result.m[1][0] = finalRight.y;
+	result.m[2][0] = finalRight.z;
+	result.m[0][1] = finalUp.x;
+	result.m[1][1] = finalUp.y;
+	result.m[2][1] = finalUp.z;
+	result.m[0][2] = -(finalFront.x);
+	result.m[1][2] = -(finalFront.y);
+	result.m[2][2] = -(finalFront.z);
+	result.m[3][0] = -(calculateDotProduct(finalRight, eye));
+	result.m[3][1] = -(calculateDotProduct(finalUp, eye));
+	result.m[3][2] = calculateDotProduct(finalFront, eye);
 
 	return result;
 }

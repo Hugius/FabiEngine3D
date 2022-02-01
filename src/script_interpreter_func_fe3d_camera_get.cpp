@@ -31,83 +31,83 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_up_vector_x")
+	else if(functionName == "fe3d:camera_get_right_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_getUpVector().x;
+			const auto result = _fe3d->camera_getRight().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_up_vector_y")
+	else if(functionName == "fe3d:camera_get_right_y")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_getUpVector().y;
+			const auto result = _fe3d->camera_getRight().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_up_vector_z")
+	else if(functionName == "fe3d:camera_get_right_z")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_getUpVector().z;
+			const auto result = _fe3d->camera_getRight().z;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_front_vector_x")
+	else if(functionName == "fe3d:camera_get_up_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_getFrontVector().x;
+			const auto result = _fe3d->camera_getUp().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_front_vector_y")
+	else if(functionName == "fe3d:camera_get_up_y")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_getFrontVector().y;
+			const auto result = _fe3d->camera_getUp().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_front_vector_z")
+	else if(functionName == "fe3d:camera_get_up_z")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_getFrontVector().z;
+			const auto result = _fe3d->camera_getUp().z;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_right_vector_x")
+	else if(functionName == "fe3d:camera_get_front_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_getRightVector().x;
+			const auto result = _fe3d->camera_getFront().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_right_vector_y")
+	else if(functionName == "fe3d:camera_get_front_y")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_getRightVector().y;
+			const auto result = _fe3d->camera_getFront().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_right_vector_z")
+	else if(functionName == "fe3d:camera_get_front_z")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_getRightVector().z;
+			const auto result = _fe3d->camera_getFront().z;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}

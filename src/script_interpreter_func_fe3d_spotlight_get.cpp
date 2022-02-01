@@ -114,7 +114,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:spotlight_get_front_vector_x")
+	else if(functionName == "fe3d:spotlight_get_front_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -122,13 +122,13 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 		{
 			if(_validateFe3dSpotlight(args[0]->getString()))
 			{
-				const auto result = _fe3d->spotlight_getFrontVector(args[0]->getString()).x;
+				const auto result = _fe3d->spotlight_getFront(args[0]->getString()).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:spotlight_get_front_vector_y")
+	else if(functionName == "fe3d:spotlight_get_front_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -136,13 +136,13 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 		{
 			if(_validateFe3dSpotlight(args[0]->getString()))
 			{
-				const auto result = _fe3d->spotlight_getFrontVector(args[0]->getString()).y;
+				const auto result = _fe3d->spotlight_getFront(args[0]->getString()).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:spotlight_get_front_vector_z")
+	else if(functionName == "fe3d:spotlight_get_front_z")
 	{
 		auto types = {SVT::STRING};
 
@@ -150,7 +150,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 		{
 			if(_validateFe3dSpotlight(args[0]->getString()))
 			{
-				const auto result = _fe3d->spotlight_getFrontVector(args[0]->getString()).z;
+				const auto result = _fe3d->spotlight_getFront(args[0]->getString()).z;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}

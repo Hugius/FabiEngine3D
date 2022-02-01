@@ -83,9 +83,9 @@ const fvec3& EngineInterface::spotlight_getPosition(const string& id) const
 	return _core->getSpotlightEntityManager()->getEntity(id)->getPosition();
 }
 
-const fvec3& EngineInterface::spotlight_getFrontVector(const string& id) const
+const fvec3& EngineInterface::spotlight_getFront(const string& id) const
 {
-	return _core->getSpotlightEntityManager()->getEntity(id)->getFrontVector();
+	return _core->getSpotlightEntityManager()->getEntity(id)->getFront();
 }
 
 const fvec3& EngineInterface::spotlight_getColor(const string& id) const

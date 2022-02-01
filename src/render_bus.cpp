@@ -74,19 +74,24 @@ void RenderBus::setFinalSceneMap(shared_ptr<TextureBuffer> value)
 	_finalSceneMap = value;
 }
 
-void RenderBus::setCameraViewMatrix(const mat44& value)
+void RenderBus::setCameraView(const mat44& value)
 {
-	_cameraViewMatrix = value;
+	_cameraView = value;
 }
 
-void RenderBus::setCameraProjectionMatrix(const mat44& value)
+void RenderBus::setCameraProjection(const mat44& value)
 {
-	_cameraProjectionMatrix = value;
+	_cameraProjection = value;
 }
 
-void RenderBus::setCameraShadowMatrix(const mat44& value)
+void RenderBus::setShadowView(const mat44& value)
 {
-	_cameraShadowMatrix = value;
+	_shadowView = value;
+}
+
+void RenderBus::setShadowProjection(const mat44& value)
+{
+	_shadowProjection = value;
 }
 
 void RenderBus::setMinPosition(const fvec3& value)
@@ -109,19 +114,19 @@ void RenderBus::setCameraPosition(const fvec3& value)
 	_cameraPosition = value;
 }
 
-void RenderBus::setCameraUpVector(const fvec3& value)
+void RenderBus::setCameraUp(const fvec3& value)
 {
-	_cameraUpVector = value;
+	_cameraUp = value;
 }
 
-void RenderBus::setCameraFrontVector(const fvec3& value)
+void RenderBus::setCameraFront(const fvec3& value)
 {
-	_cameraFrontVector = value;
+	_cameraFront = value;
 }
 
-void RenderBus::setCameraRightVector(const fvec3& value)
+void RenderBus::setCameraRight(const fvec3& value)
 {
-	_cameraRightVector = value;
+	_cameraRight = value;
 }
 
 void RenderBus::setAmbientLightingColor(const fvec3& value)
@@ -517,19 +522,24 @@ const shared_ptr<TextureBuffer> RenderBus::getFinalSceneMap() const
 	return _finalSceneMap;
 }
 
-const mat44& RenderBus::getCameraViewMatrix() const
+const mat44& RenderBus::getCameraView() const
 {
-	return _cameraViewMatrix;
+	return _cameraView;
 }
 
-const mat44& RenderBus::getCameraProjectionMatrix() const
+const mat44& RenderBus::getCameraProjection() const
 {
-	return _cameraProjectionMatrix;
+	return _cameraProjection;
 }
 
-const mat44& RenderBus::getCameraShadowMatrix() const
+const mat44& RenderBus::getShadowView() const
 {
-	return _cameraShadowMatrix;
+	return _shadowView;
+}
+
+const mat44& RenderBus::getShadowProjection() const
+{
+	return _shadowProjection;
 }
 
 const fvec3& RenderBus::getMinPosition() const
@@ -552,19 +562,19 @@ const fvec3& RenderBus::getCameraPosition() const
 	return _cameraPosition;
 }
 
-const fvec3& RenderBus::getCameraUpVector() const
+const fvec3& RenderBus::getCameraUp() const
 {
-	return _cameraUpVector;
+	return _cameraUp;
 }
 
-const fvec3& RenderBus::getCameraFrontVector() const
+const fvec3& RenderBus::getCameraFront() const
 {
-	return _cameraFrontVector;
+	return _cameraFront;
 }
 
-const fvec3& RenderBus::getCameraRightVector() const
+const fvec3& RenderBus::getCameraRight() const
 {
-	return _cameraRightVector;
+	return _cameraRight;
 }
 
 const fvec3& RenderBus::getAmbientLightingColor() const

@@ -23,12 +23,12 @@ void Camera::inject(shared_ptr<RenderWindow> renderWindow)
 
 void Camera::reset()
 {
-	_viewMatrix = mat44(1.0f);
-	_projectionMatrix = mat44(1.0f);
+	_view = mat44(1.0f);
+	_projection = mat44(1.0f);
 
-	_upVector = fvec3(0.0f);
-	_frontVector = fvec3(0.0f);
-	_rightVector = fvec3(0.0f);
+	_up = fvec3(0.0f);
+	_front = fvec3(0.0f);
+	_right = fvec3(0.0f);
 	_position = fvec3(0.0f);
 	_thirdPersonLookat = fvec3(0.0f);
 
@@ -39,6 +39,8 @@ void Camera::reset()
 	_maxFirstPersonPitch = MAX_PITCH_ANGLE;
 	_minThirdPersonPitch = MIN_PITCH_ANGLE;
 	_maxThirdPersonPitch = MAX_PITCH_ANGLE;
+	_near = DEFAULT_NEAR_DISTANCE;
+	_far = DEFAULT_FAR_DISTANCE;
 	_yaw = 0.0f;
 	_pitch = 0.0f;
 	_firstPersonYaw = 0.0f;
@@ -158,6 +160,6 @@ void Camera::update(const ivec2& lastCursorPosition)
 	_renderBus->setCameraYaw(_yaw);
 	_renderBus->setCameraPitch(_pitch);
 	_renderBus->setCameraPosition(_position);
-	_renderBus->setCameraNearDistance(NEAR_DISTANCE);
-	_renderBus->setCameraFarDistance(FAR_DISTANCE);
+	_renderBus->setCameraNearDistance(_near);
+	_renderBus->setCameraFarDistance(_far);
 }

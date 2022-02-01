@@ -30,7 +30,7 @@ void Sound3dPlayer::update()
 			const auto volume = (1.0f - (distance / sound.getMaxDistance()));
 			sound.setVolume(clamp(volume, 0.0f, 1.0f) * sound.getMaxVolume());
 
-			const auto cameraDirection = _camera->getFrontVector();
+			const auto cameraDirection = _camera->getFront();
 			const auto soundDirection = (cameraPosition - sound.getPosition());
 			const auto rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
 			const auto rotatedSoundDirection = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));

@@ -191,19 +191,19 @@ const fvec3& EngineInterface::camera_getPosition() const
 	return _core->getCamera()->getPosition();
 }
 
-const fvec3& EngineInterface::camera_getUpVector() const
+const fvec3& EngineInterface::camera_getUp() const
 {
-	return _core->getCamera()->getUpVector();
+	return _core->getCamera()->getUp();
 }
 
-const fvec3& EngineInterface::camera_getFrontVector() const
+const fvec3& EngineInterface::camera_getFront() const
 {
-	return _core->getCamera()->getFrontVector();
+	return _core->getCamera()->getFront();
 }
 
-const fvec3& EngineInterface::camera_getRightVector() const
+const fvec3& EngineInterface::camera_getRight() const
 {
-	return _core->getCamera()->getRightVector();
+	return _core->getCamera()->getRight();
 }
 
 const fvec3& EngineInterface::camera_getThirdPersonLookat() const

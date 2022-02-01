@@ -7,8 +7,8 @@ void WaterEntityDepthRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_viewMatrix", _renderBus->getCameraViewMatrix());
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjectionMatrix());
+	_shader->uploadUniform("u_viewMatrix", _renderBus->getCameraView());
+	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjection());
 
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);

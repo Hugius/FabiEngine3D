@@ -37,12 +37,12 @@ public:
 	void setThirdPersonViewEnabled(bool value);
 	void notifyCursorCenter();
 
-	const mat44& getViewMatrix() const;
-	const mat44& getProjectionMatrix() const;
+	const mat44& getView() const;
+	const mat44& getProjection() const;
 
-	const fvec3& getUpVector() const;
-	const fvec3& getFrontVector() const;
-	const fvec3& getRightVector() const;
+	const fvec3& getRight() const;
+	const fvec3& getUp() const;
+	const fvec3& getFront() const;
 	const fvec3& getPosition() const;
 	const fvec3& getThirdPersonLookat() const;
 
@@ -67,18 +67,9 @@ public:
 	const bool isFirstPersonViewEnabled() const;
 
 private:
-	mat44 _viewMatrix = mat44(1.0f);
-	mat44 _projectionMatrix = mat44(1.0f);
-
-	static inline const fvec3 DEFAULT_UP_VECTOR = fvec3(0.0f, 1.0f, 0.0f);
-	fvec3 _upVector = fvec3(0.0f);
-	fvec3 _frontVector = fvec3(0.0f);
-	fvec3 _rightVector = fvec3(0.0f);
-	fvec3 _position = fvec3(0.0f);
-	fvec3 _thirdPersonLookat = fvec3(0.0f);
-
-	static inline constexpr float NEAR_DISTANCE = 0.01f;
-	static inline constexpr float FAR_DISTANCE = 2500.0f;
+	static inline const fvec3 DEFAULT_UP = fvec3(0.0f, 1.0f, 0.0f);
+	static inline constexpr float DEFAULT_NEAR_DISTANCE = 0.01f;
+	static inline constexpr float DEFAULT_FAR_DISTANCE = 2500.0f;
 	static inline constexpr float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
 	static inline constexpr float DEFAULT_FOV_ANGLE = 90.0f;
 	static inline constexpr float MAX_FOV_ANGLE = 150.0f;
@@ -87,6 +78,18 @@ private:
 	static inline constexpr float MIN_THIRD_PERSON_DISTANCE = 0.01f;
 	static inline constexpr float MAX_ACCELERATION = 10.0f;
 	static inline constexpr float ACCELERATION_RESISTANCE = 0.75f;
+
+	mat44 _view = mat44(1.0f);
+	mat44 _projection = mat44(1.0f);
+
+	fvec3 _right = fvec3(0.0f);
+	fvec3 _up = fvec3(0.0f);
+	fvec3 _front = fvec3(0.0f);
+	fvec3 _position = fvec3(0.0f);
+	fvec3 _thirdPersonLookat = fvec3(0.0f);
+
+	float _near = 0.0f;
+	float _far = 0.0f;
 	float _aspectRatio = 0.0f;
 	float _fov = 0.0f;
 	float _yaw = 0.0f;

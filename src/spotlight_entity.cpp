@@ -27,12 +27,12 @@ void SpotlightEntity::updateTransformation()
 	}
 }
 
-void SpotlightEntity::updateFrontVector()
+void SpotlightEntity::updateFront()
 {
-	_frontVector.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
-	_frontVector.y = sin(Math::convertToRadians(_pitch));
-	_frontVector.z = (sin(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
-	_frontVector = Math::normalize(_frontVector);
+	_front.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
+	_front.y = sin(Math::convertToRadians(_pitch));
+	_front.z = (sin(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
+	_front = Math::normalize(_front);
 }
 
 void SpotlightEntity::setPosition(const fvec3& value)
@@ -88,9 +88,9 @@ const fvec3& SpotlightEntity::getPosition() const
 	return _position;
 }
 
-const fvec3& SpotlightEntity::getFrontVector() const
+const fvec3& SpotlightEntity::getFront() const
 {
-	return _frontVector;
+	return _front;
 }
 
 const fvec3& SpotlightEntity::getColor() const

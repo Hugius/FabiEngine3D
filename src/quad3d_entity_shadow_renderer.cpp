@@ -7,7 +7,7 @@ void Quad3dEntityShadowRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_shadowMatrix", _renderBus->getCameraShadowMatrix());
+	_shader->uploadUniform("u_shadowMatrix", (_renderBus->getShadowProjection() * _renderBus->getShadowView()));
 	_shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);

@@ -23,11 +23,11 @@ uniform float u_textureRepeat;
 
 uniform bool u_hasNormalMap;
 
-out vec3 f_position;
+out vec4 f_clipSpacePos;
+out vec4 f_shadowSpacePos;
+out vec3 f_worldSpacePos;
 out vec2 f_uv;
 out vec3 f_normal;
-out vec4 f_shadowPosition;
-out vec4 f_clip;
 out mat3 f_tbn;
 
 mat3 calculateTBN();
@@ -38,11 +38,11 @@ void main()
 	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
 	vec4 clipSpacePosition = (u_cameraProjection * viewSpacePosition);
 
-	f_position = worldSpacePosition.xyz;
+	f_clipSpacePos = clipSpacePosition;
+	f_shadowSpacePos = (u_shadowProjection * u_shadowView * worldSpacePosition);
+	f_worldSpacePos = worldSpacePosition.xyz;
 	f_uv = (v_uv * u_textureRepeat);
 	f_normal = normalize(u_normalTransformation * v_normal);
-	f_shadowPosition = (u_shadowProjection * u_shadowView * worldSpacePosition);
-	f_clip = clipSpacePosition;
     f_tbn = calculateTBN();
 
 	gl_Position = clipSpacePosition;
@@ -56,11 +56,13 @@ void main()
 
 mat3 calculateTBN()
 {
-    if (u_hasNormalMap)
+    if(u_hasNormalMap)
     {
-        vec3 tangent = normalize(mat3(u_normalTransformation) * v_tangent);
-		tangent = normalize(tangent - dot(tangent, f_normal) * f_normal);
-        vec3 bitangent = cross(f_normal, tangent);
+        vec3 tangent = normalize(u_normalTransformation * v_tangent);
+
+		tangent = normalize(tangent - (dot(tangent, f_normal) * f_normal));
+
+        vec3 bitangent = cross(tangent, f_normal);
 
         return mat3(tangent, bitangent, f_normal);
     }

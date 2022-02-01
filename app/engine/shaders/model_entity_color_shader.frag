@@ -4,11 +4,11 @@
 #define MAX_SPOTLIGHT_COUNT 64
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 
-in vec3 f_position;
+in vec4 f_clipSpacePos;
+in vec4 f_shadowSpacePos;
+in vec3 f_worldSpacePos;
 in vec2 f_uv;
 in vec3 f_normal;
-in vec4 f_shadowPosition;
-in vec4 f_clip;
 in mat3 f_tbn;
 
 layout (location = 0) uniform samplerCube u_previousCubeReflectionMap;
@@ -127,7 +127,7 @@ void main()
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	
 	bool isBright = ((emissionMapping != vec3(0.0f)) || u_isBright);
-	if (!isBright)
+	if(!isBright)
 	{
 		vec3 lighting = vec3(0.0f);
 		lighting += ambientLighting;
@@ -147,12 +147,12 @@ void main()
 
 vec3 calculateDiffuseMapping()
 {
-	if (u_hasDiffuseMap)
+	if(u_hasDiffuseMap)
 	{
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
-		if (diffuseMapColor.a < u_minTextureAlpha)
+		if(diffuseMapColor.a < u_minTextureAlpha)
 		{
 			discard;
 		}
@@ -167,11 +167,11 @@ vec3 calculateDiffuseMapping()
 
 vec3 calculateEmissionMapping()
 {
-	if (u_hasEmissionMap)
+	if(u_hasEmissionMap)
 	{
 		vec4 emissionMapColor = texture(u_emissionMap, f_uv);
 
-		if (emissionMapColor.a < u_minTextureAlpha)
+		if(emissionMapColor.a < u_minTextureAlpha)
 		{
 			return vec3(0.0f);
 		}
@@ -186,11 +186,11 @@ vec3 calculateEmissionMapping()
 
 vec3 calculateSpecularMapping()
 {
-    if (u_hasSpecularMap)
+    if(u_hasSpecularMap)
     {
 		vec4 specularMapColor = texture(u_specularMap, f_uv);
 
-		if (specularMapColor.a < u_minTextureAlpha)
+		if(specularMapColor.a < u_minTextureAlpha)
 		{
 			return vec3(0.0f);
 		}
@@ -205,11 +205,11 @@ vec3 calculateSpecularMapping()
 
 vec3 calculateReflectionMapping()
 {
-    if (u_hasReflectionMap)
+    if(u_hasReflectionMap)
     {
 		vec4 reflectionMapColor = texture(u_reflectionMap, f_uv);
 
-		if (reflectionMapColor.a < u_minTextureAlpha)
+		if(reflectionMapColor.a < u_minTextureAlpha)
 		{
 			return vec3(0.0f);
 		}
@@ -224,7 +224,7 @@ vec3 calculateReflectionMapping()
 
 vec3 calculateNormalMapping()
 {
-    if (u_hasNormalMap)
+    if(u_hasNormalMap)
     {
         vec3 normal = texture(u_normalMap, f_uv).rgb;
         normal = ((normal * 2.0f) - 1.0f);
@@ -240,7 +240,7 @@ vec3 calculateNormalMapping()
 
 vec3 calculateAmbientLighting()
 {
-	if (u_isAmbientLightingEnabled)
+	if(u_isAmbientLightingEnabled)
 	{
 		return (u_ambientLightingColor * u_ambientLightingIntensity);
 	}
@@ -252,10 +252,10 @@ vec3 calculateAmbientLighting()
 
 vec3 calculateDirectionalLighting(vec3 specularMapColor, vec3 normal)
 {
-	if (u_isDirectionalLightingEnabled)
+	if(u_isDirectionalLightingEnabled)
 	{
         vec3 result = vec3(0.0f);
-		vec3 direction = normalize(u_directionalLightingPosition - f_position);
+		vec3 direction = normalize(u_directionalLightingPosition - f_worldSpacePos);
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(specularMapColor, u_directionalLightingPosition, normal);
 
@@ -278,20 +278,20 @@ vec3 calculatePointlights(vec3 specularMapColor, vec3 normal)
 
 	for (int i = 0; i < u_pointlightCount; i++)
 	{
-		vec3 direction = normalize(u_pointlightPositions[i] - f_position);
+		vec3 direction = normalize(u_pointlightPositions[i] - f_worldSpacePos);
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(specularMapColor, u_pointlightPositions[i], normal);
 
 		float attenuation;
-		if (u_pointlightShapes[i] == 0)
+		if(u_pointlightShapes[i] == 0)
 		{
-			float fragmentDistance = distance(u_pointlightPositions[i], f_position);
+			float fragmentDistance = distance(u_pointlightPositions[i], f_worldSpacePos);
 			float averageRadius = ((u_pointlightRadiuses[i].x + u_pointlightRadiuses[i].y + u_pointlightRadiuses[i].z) / 3.0f);
 			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
 		}
 		else
 		{
-			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_position);
+			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_worldSpacePos);
 			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_pointlightRadiuses[i].x)));
 			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_pointlightRadiuses[i].y)));
 			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_pointlightRadiuses[i].z)));
@@ -317,14 +317,14 @@ vec3 calculateSpotlights(vec3 specularMapColor, vec3 normal)
 
 	for (int i = 0; i < u_spotlightCount; i++)
 	{
-		vec3 direction = normalize(u_spotlightPositions[i] - f_position);
+		vec3 direction = normalize(u_spotlightPositions[i] - f_worldSpacePos);
 		float spot = dot(direction, normalize(-u_spotlightFronts[i]));
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(specularMapColor, u_spotlightPositions[i], normal);
 		float smoothingAngle = (u_spotlightAngles[i] * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
 		float intensity = clamp(((spot - (u_spotlightAngles[i] * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
 
-		float fragmentDistance = distance(u_spotlightPositions[i], f_position);
+		float fragmentDistance = distance(u_spotlightPositions[i], f_worldSpacePos);
 		float distanceMultiplier = (fragmentDistance / u_spotlightDistances[i]);
 		distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
 		distanceMultiplier = (1.0f - distanceMultiplier);
@@ -344,9 +344,9 @@ vec3 calculateSpotlights(vec3 specularMapColor, vec3 normal)
 
 vec3 calculateFog(vec3 color)
 {
-	if (u_isFogEnabled)
+	if(u_isFogEnabled)
 	{
-        float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
+        float fragmentDistance = distance(f_worldSpacePos.xyz, u_cameraPosition);
 		float distanceDifference = (u_maxFogDistance - u_minFogDistance);
 		float distancePart = clamp(((fragmentDistance - u_minFogDistance) / distanceDifference), 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
@@ -362,11 +362,11 @@ vec3 calculateFog(vec3 color)
 
 vec3 calculateCubeReflection(vec3 reflectionMapColor, vec3 color, vec3 normal)
 {
-	if (u_isReflectionsEnabled && u_isReflective && (u_reflectionType == 0))
+	if(u_isReflectionsEnabled && u_isReflective && (u_reflectionType == 0))
 	{		
-		if (reflectionMapColor != vec3(0.0f))
+		if(reflectionMapColor != vec3(0.0f))
 		{
-			vec3 viewDirection = normalize(f_position - u_cameraPosition);
+			vec3 viewDirection = normalize(f_worldSpacePos - u_cameraPosition);
 			vec3 reflectionDirection = reflect(viewDirection, normal);
 			vec3 previousCubeReflectionMapColor = texture(u_previousCubeReflectionMap, reflectionDirection).rgb;
 			vec3 currentCubeReflectionMapColor = texture(u_currentCubeReflectionMap, reflectionDirection).rgb;
@@ -386,11 +386,11 @@ vec3 calculateCubeReflection(vec3 reflectionMapColor, vec3 color, vec3 normal)
 
 vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color)
 {
-	if (u_isReflectionsEnabled && u_isReflective && (u_reflectionType == 1))
+	if(u_isReflectionsEnabled && u_isReflective && (u_reflectionType == 1))
 	{
-		if (reflectionMapColor != vec3(0.0f))
+		if(reflectionMapColor != vec3(0.0f))
 		{
-			vec2 ndc = (((f_clip.xy / f_clip.w) * 0.5f) + 0.5f);
+			vec2 ndc = (((f_clipSpacePos.xy / f_clipSpacePos.w) * 0.5f) + 0.5f);
 			vec2 texCoords = vec2(ndc.x, -ndc.y);
 			vec3 reflectionColor = texture(u_planarReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
 			vec3 mixedColor = mix(color, reflectionColor, u_reflectivity);
@@ -408,20 +408,20 @@ vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color)
 
 float calculateShadows()
 {
-	if (u_isShadowsEnabled)
+	if(u_isShadowsEnabled)
 	{
 		float halfSize = (u_shadowSize * 0.5f);
-		float fragmentDistance = distance(f_position.xz, u_shadowLookat.xz);
+		float fragmentDistance = distance(f_worldSpacePos.xz, u_shadowLookat.xz);
 
-		if (fragmentDistance <= halfSize)
+		if(fragmentDistance <= halfSize)
 		{
 			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
 			float shadow = 0.0f;
-			vec3 projCoords = (((f_shadowPosition.xyz / f_shadowPosition.w) * 0.5f) + 0.5f);
+			vec3 projCoords = (((f_shadowSpacePos.xyz / f_shadowSpacePos.w) * 0.5f) + 0.5f);
 			float currentDepth = projCoords.z;
 			float bias = 0.00075f;
 
-			if (projCoords.z > 1.0f)
+			if(projCoords.z > 1.0f)
 			{
 				return 1.0f;
 			}
@@ -437,7 +437,7 @@ float calculateShadows()
             
 			shadow /= 9.0f;
 			
-			if (shadow > 1.0f)
+			if(shadow > 1.0f)
 			{
 				shadow = 1.0f;
 			}
@@ -447,9 +447,9 @@ float calculateShadows()
 			opacity /= (halfSize * 0.1f);
 			opacity = (1.0f - opacity);
 
-			if (u_isShadowCircleEnabled)
+			if(u_isShadowCircleEnabled)
 			{
-				if ((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
+				if((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
 				{
 					return 0.0f;
 				}
@@ -468,10 +468,10 @@ float calculateShadows()
 
 float calculateSpecularLighting(vec3 specularMapColor, vec3 lightPosition, vec3 normal)
 {
-    if (u_isSpecular)
+    if(u_isSpecular)
     {
-        vec3 lightDirection = normalize(lightPosition - f_position);
-        vec3 viewDirection = normalize(u_cameraPosition - f_position);
+        vec3 lightDirection = normalize(lightPosition - f_worldSpacePos);
+        vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
 		float specularMapIntensity = ((specularMapColor.r + specularMapColor.g + specularMapColor.b) / 3.0f);
         float result = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), (u_specularShininess * specularMapIntensity));

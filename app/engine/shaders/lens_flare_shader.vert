@@ -17,26 +17,27 @@ uniform float u_lensFlareOpacity;
 uniform bool u_isLensFlareEnabled;
 
 out vec2 f_uv;
-out float f_flareVisibility;
+out float f_visibility;
 
-float convertDepthToPerspective(float depth);
 float calculateFlareVisibility();
+float convertDepthToPerspective(float depth);
 
 void main()
 {
-	gl_Position = vec4(v_position, 0.0f, 1.0f);
 	f_uv = v_uv; 
-    f_flareVisibility = calculateFlareVisibility();
+    f_visibility = calculateFlareVisibility();
+
+	gl_Position = vec4(v_position, 0.0f, 1.0f);
 }
 
 float calculateFlareVisibility()
 {
-    if (u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareOpacity > 0.0f))
+    if(u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareOpacity > 0.0f))
     {
         float fragmentDepth = convertDepthToPerspective(texture(u_depthMap, u_flareSourceUv).r);
         float flareDepth = distance(u_cameraPosition, u_flareSourcePosition);
         
-        if (fragmentDepth > abs(flareDepth))
+        if(fragmentDepth > abs(flareDepth))
         {
             return 1.0f;
         }
@@ -54,5 +55,6 @@ float calculateFlareVisibility()
 float convertDepthToPerspective(float depth)
 {
     float z = ((depth * 2.0f) - 1.0f);
+
     return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
 }

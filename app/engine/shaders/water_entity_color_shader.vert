@@ -22,26 +22,27 @@ uniform float u_waveHeight;
 
 uniform bool u_hasDisplacementMap;
 
-out vec4 f_clip;
+out vec4 f_clipSpacePos;
+out vec3 f_worldSpacePos;
 out vec2 f_uv;
-out vec3 f_position;
 
 void main()
 {
 	vec3 newPosition = v_position;
 	newPosition.y = u_height;
 
-	if (u_hasDisplacementMap)
+	if(u_hasDisplacementMap)
 	{
 		float heightPercentage = texture(u_displacementMap, ((v_uv * u_textureRepeat) + (u_waveOffset))).r;
 		newPosition.y += (heightPercentage * u_waveHeight);
 	}
 
 	vec4 worldSpacePosition = vec4(newPosition, 1.0f);
-	vec4 clipSpacePosition  = (u_cameraProjection * u_cameraView * vec4(newPosition, 1.0f));
+	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
+	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
 
-	f_clip = clipSpacePosition;
-	f_position = worldSpacePosition.xyz;
+	f_clipSpacePos = clipSpacePosition;
+	f_worldSpacePos = worldSpacePosition.xyz;
 	f_uv = (v_uv * u_textureRepeat);
 
 	gl_Position = clipSpacePosition;

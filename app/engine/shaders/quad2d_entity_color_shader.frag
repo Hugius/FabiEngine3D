@@ -30,12 +30,12 @@ void main()
 	vec2 normalizedPosition = (gl_FragCoord.xy / u_windowSize);
 	vec2 ndcPosition = ((normalizedPosition * 2.0f) - vec2(1.0f));
 
-	if ((ndcPosition.x > u_maxPosition.x) || (ndcPosition.y > u_maxPosition.y) || (ndcPosition.x < u_minPosition.x) || (ndcPosition.y < u_minPosition.y))
+	if((ndcPosition.x > u_maxPosition.x) || (ndcPosition.y > u_maxPosition.y) || (ndcPosition.x < u_minPosition.x) || (ndcPosition.y < u_minPosition.y))
 	{
 		discard;
 	}
 
-	if (u_hasDiffuseMap)
+	if(u_hasDiffuseMap)
 	{
 		vec4 diffuseMapping = calculateDiffuseMapping();
 		diffuseMapping.rgb *= u_color;
@@ -54,7 +54,7 @@ void main()
 
 vec4 calculateDiffuseMapping()
 {
-	if (u_hasDiffuseMap)
+	if(u_hasDiffuseMap)
 	{
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));

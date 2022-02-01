@@ -1,7 +1,7 @@
 #version 460 core
 
 in vec2 f_uv;
-in vec3 f_position;
+in vec3 f_worldSpacePos;
 
 layout (location = 0) uniform sampler2D u_diffuseMap;
 layout (location = 1) uniform sampler2D u_emissionMap;
@@ -61,12 +61,12 @@ void main()
 
 vec3 calculateDiffuseMapping()
 {
-	if (u_hasDiffuseMap)
+	if(u_hasDiffuseMap)
 	{
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
-		if (diffuseMapColor.a < u_minTextureAlpha)
+		if(diffuseMapColor.a < u_minTextureAlpha)
 		{
 			discard;
 		}
@@ -81,11 +81,11 @@ vec3 calculateDiffuseMapping()
 
 vec3 calculateEmissionMapping()
 {
-	if (u_hasEmissionMap)
+	if(u_hasEmissionMap)
 	{
 		vec4 emissionMapColor = texture(u_emissionMap, f_uv);
 
-		if (emissionMapColor.a < u_minTextureAlpha)
+		if(emissionMapColor.a < u_minTextureAlpha)
 		{
 			return vec3(0.0f);
 		}
@@ -100,9 +100,9 @@ vec3 calculateEmissionMapping()
 
 vec3 calculateFog(vec3 color)
 {
-	if (u_isFogEnabled)
+	if(u_isFogEnabled)
 	{
-        float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
+        float fragmentDistance = distance(f_worldSpacePos.xyz, u_cameraPosition);
 
 		float distanceDifference = (u_maxFogDistance - u_minFogDistance);
 		float distancePart = clamp(((fragmentDistance - u_minFogDistance) / distanceDifference), 0.0f, 1.0f);

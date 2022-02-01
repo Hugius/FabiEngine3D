@@ -20,7 +20,8 @@ void main()
 	newPosition.y = u_height;
 
 	vec4 worldSpacePosition = vec4(newPosition, 1.0f);
-	vec4 clipSpacePosition  = (u_cameraProjection * u_cameraView * vec4(newPosition, 1.0f));
+	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
+	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
 
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));

@@ -2,7 +2,7 @@
 
 #define KERNEL_SIZE 5
 
-in vec2 f_position;
+in vec2 f_worldSpacePos;
 in vec2 f_uv;
 
 layout (location = 0) uniform sampler2D u_diffuseMap;
@@ -26,12 +26,12 @@ void main()
 
     vec3 result = (texture(u_diffuseMap, f_uv).rgb * kernel[0] * u_intensity);
 
-    if (u_isHorizontal)
+    if(u_isHorizontal)
     {
         for (int i = 1; i < KERNEL_SIZE; i++)
         {
             vec2 leftUv = f_uv - vec2(uvOffset.x * i, 0.0f);
-            if (leftUv.x >= 0.0f && leftUv.x <= 1.0f)
+            if(leftUv.x >= 0.0f && leftUv.x <= 1.0f)
             {
                 result += (texture(u_diffuseMap, leftUv).rgb * kernel[i] * u_intensity);
             }
@@ -41,7 +41,7 @@ void main()
             }
 
             vec2 rightUv = f_uv + vec2(uvOffset.x * i, 0.0f);
-            if (rightUv.x >= 0.0f && rightUv.x <= 1.0f)
+            if(rightUv.x >= 0.0f && rightUv.x <= 1.0f)
             {
                 result += (texture(u_diffuseMap, rightUv).rgb * kernel[i] * u_intensity);
             }
@@ -57,7 +57,7 @@ void main()
         for (int i = 1; i < KERNEL_SIZE; i++)
         {
             vec2 bottomUv = f_uv - vec2(0.0f, uvOffset.y * i);
-            if (bottomUv.y >= 0.0f && bottomUv.y <= 1.0f)
+            if(bottomUv.y >= 0.0f && bottomUv.y <= 1.0f)
             {
                 result += texture(u_diffuseMap, bottomUv).rgb * kernel[i] * u_intensity;
             }
@@ -67,11 +67,11 @@ void main()
             }
 
             vec2 topUv = f_uv + vec2(0.0f, uvOffset.y * i);
-            if (topUv.y >= 0.0f && topUv.y <= 1.0f)
+            if(topUv.y >= 0.0f && topUv.y <= 1.0f)
             {
            	    result += texture(u_diffuseMap, topUv).rgb * kernel[i] * u_intensity;
             }
-             else
+            else
             {
                 result += (texture(u_diffuseMap, f_uv).rgb * kernel[i] * u_intensity);
             }

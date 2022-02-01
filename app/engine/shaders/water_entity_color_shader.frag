@@ -1,10 +1,8 @@
 #version 460 core
 
-#define MAX_LIGHT_COUNT 128
-
-in vec3 f_position;
+in vec4 f_clipSpacePos;
+in vec3 f_worldSpacePos;
 in vec2 f_uv;
-in vec4 f_clip;
 
 layout (location = 0) uniform sampler2D u_reflectionMap;
 layout (location = 1) uniform sampler2D u_refractionMap;
@@ -12,9 +10,6 @@ layout (location = 2) uniform sampler2D u_edgeMap;
 layout (location = 3) uniform sampler2D u_dudvMap;
 layout (location = 4) uniform sampler2D u_normalMap;
 
-uniform vec3 u_pointlightPositions[MAX_LIGHT_COUNT];
-uniform vec3 u_pointlightRadiuses[MAX_LIGHT_COUNT];
-uniform vec3 u_pointlightColors[MAX_LIGHT_COUNT];
 uniform vec3 u_directionalLightingColor;
 uniform vec3 u_directionalLightingPosition;
 uniform vec3 u_cameraPosition;
@@ -24,7 +19,6 @@ uniform vec3 u_wireframeColor;
 
 uniform vec2 u_rippleOffset;
 
-uniform float u_pointlightIntensities[MAX_LIGHT_COUNT];
 uniform float u_directionalLightingIntensity;
 uniform float u_specularShininess;
 uniform float u_specularIntensity;
@@ -34,9 +28,6 @@ uniform float u_minFogDistance;
 uniform float u_maxFogDistance;
 uniform float u_fogThickness;
 uniform float u_maxDepth;
-
-uniform int u_pointlightShapes[MAX_LIGHT_COUNT];
-uniform int u_lightCount;
 
 uniform bool u_isReflectionsEnabled;
 uniform bool u_isRefractionsEnabled;
@@ -57,7 +48,6 @@ layout (location = 1) out vec4 o_secondaryColor;
 
 vec4 calculateWaterColor();
 vec3 calculateDirectionalLighting(vec3 normal);
-vec3 calculateLights(vec3 normal);
 vec3 calculateFog(vec3 color);
 float calculateSpecularLighting(vec3 lightPosition, vec3 normal);
 float convertDepthToPerspective(float depth);
@@ -75,17 +65,17 @@ void main()
 
 	vec3 primaryColor = vec3(0.0f);
 	primaryColor += waterColor.rgb;
-	primaryColor  = calculateFog(primaryColor);
-	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-	primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
+	primaryColor = calculateFog(primaryColor);
+	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
-	o_primaryColor   = vec4(primaryColor, waterColor.a);
+	o_primaryColor = vec4(primaryColor, waterColor.a);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 vec4 calculateWaterColor()
 {
-	vec2 ndc = (f_clip.xy / f_clip.w);
+	vec2 ndc = (f_clipSpacePos.xy / f_clipSpacePos.w);
 	ndc /= 2.0f;
 	ndc += 0.5f;
 
@@ -95,7 +85,7 @@ vec4 calculateWaterColor()
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
 	float opacity = 1.0f;
 
-	if (u_isEdged)
+	if(u_isEdged)
 	{
 		float objectDistance = convertDepthToPerspective(texture(u_edgeMap, refractionUv).r);
 		float waterDistance = convertDepthToPerspective(gl_FragCoord.z);
@@ -105,7 +95,7 @@ vec4 calculateWaterColor()
 		opacity = clamp(opacity, 0.0f, 1.0f);
 	}
 
-	if (u_hasDudvMap)
+	if(u_hasDudvMap)
 	{
 		vec2 distortedMapUv = texture(u_dudvMap, (defaultUv + u_rippleOffset)).rg;
 		distortedMapUv *= 0.1f;
@@ -125,7 +115,7 @@ vec4 calculateWaterColor()
 		refractionUv.y = clamp(refractionUv.y, 0.001f, 0.999f);
 	}
 
-	if (u_hasNormalMap)
+	if(u_hasNormalMap)
 	{
 		vec3 normalMapColor = texture(u_normalMap, defaultUv).rgb;
 		normal = vec3(((normalMapColor.r * 2.0f) - 1.0f), normalMapColor.b, ((normalMapColor.g * 2.0f) - 1.0f));
@@ -133,16 +123,16 @@ vec4 calculateWaterColor()
 	}
 
 	vec3 finalColor;
-	if (u_isReflectionsEnabled && u_hasReflectionMap && u_isReflective)
+	if(u_isReflectionsEnabled && u_hasReflectionMap && u_isReflective)
 	{
 		vec3 reflectionColor = texture(u_reflectionMap, reflectionUv).rgb;
-		vec3 viewDirection = normalize(u_cameraPosition - f_position);
+		vec3 viewDirection = normalize(u_cameraPosition - f_worldSpacePos);
 		float fresnelMixValue = dot(viewDirection, normal);
 
 		finalColor = mix(reflectionColor, (reflectionColor * 0.05f), fresnelMixValue);
 		finalColor *= u_color;
 	}
-	else if (u_isRefractionsEnabled && u_hasRefractionMap && u_isRefractive)
+	else if(u_isRefractionsEnabled && u_hasRefractionMap && u_isRefractive)
 	{
 		finalColor = texture(u_refractionMap, refractionUv).rgb;
 		finalColor *= u_color;
@@ -152,60 +142,20 @@ vec4 calculateWaterColor()
 		finalColor = u_color;
 	}
 
-	if (u_isSpecular && (u_cameraPosition.y > f_position.y))
+	if(u_isSpecular && (u_cameraPosition.y > f_worldSpacePos.y))
 	{
 		finalColor += calculateDirectionalLighting(normal);
-		finalColor += calculateLights(normal);
 	}
 
 	return vec4(finalColor, opacity);
 }
 
-vec3 calculateLights(vec3 normal)
-{
-	vec3 result = vec3(0.0f);
-		
-	for (int i = 0; i < u_lightCount; i++)
-	{
-		vec3 lightDirection = normalize(u_pointlightPositions[i] - f_position);
-		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
-		float specular = calculateSpecularLighting(u_pointlightPositions[i], normal);
-
-		float attenuation;
-		if (u_pointlightShapes[i] == 0)
-		{
-			float fragmentDistance = distance(u_pointlightPositions[i], f_position);
-			float averageRadius = ((u_pointlightRadiuses[i].x + u_pointlightRadiuses[i].y + u_pointlightRadiuses[i].z) / 3.0f);
-			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
-		}
-		else
-		{
-			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_position);
-			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_pointlightRadiuses[i].x)));
-			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_pointlightRadiuses[i].y)));
-			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_pointlightRadiuses[i].z)));
-			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
-		}
-
-        vec3 current = vec3(0.0f);
-		current += vec3(diffuse);
-        current += vec3(specular);
-        current *= u_pointlightColors[i];
-        current *= (attenuation * attenuation);
-        current *= u_pointlightIntensities[i];
-
-        result += current;
-	}
-
-	return result;
-}
-
 vec3 calculateDirectionalLighting(vec3 normal)
 {
-	if (u_isDirectionalLightingEnabled)
+	if(u_isDirectionalLightingEnabled)
 	{
-		vec3 lightDirection = normalize(u_directionalLightingPosition - f_position);
-		vec3 viewDirection = normalize(f_position - u_cameraPosition);
+		vec3 lightDirection = normalize(u_directionalLightingPosition - f_worldSpacePos);
+		vec3 viewDirection = normalize(f_worldSpacePos - u_cameraPosition);
 		vec3 reflectDirection = reflect(normalize(lightDirection), normal);
 		float specular = pow(clamp(dot(reflectDirection, viewDirection), 0.0f, 1.0f), u_specularShininess);
 		specular *= u_directionalLightingIntensity;
@@ -222,10 +172,10 @@ vec3 calculateDirectionalLighting(vec3 normal)
 
 float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
 {
-    if (u_isSpecular)
+    if(u_isSpecular)
     {
-        vec3 lightDirection   = normalize(lightPosition - f_position);
-        vec3 viewDirection    = normalize(u_cameraPosition - f_position);
+        vec3 lightDirection   = normalize(lightPosition - f_worldSpacePos);
+        vec3 viewDirection    = normalize(u_cameraPosition - f_worldSpacePos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
         float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
@@ -239,9 +189,9 @@ float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
 
 vec3 calculateFog(vec3 color)
 {
-	if (u_isFogEnabled)
+	if(u_isFogEnabled)
 	{
-		float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
+		float fragmentDistance = distance(f_worldSpacePos.xyz, u_cameraPosition);
 
 		float distanceDifference = (u_maxFogDistance - u_minFogDistance);
 		float distancePart = clamp(((fragmentDistance - u_minFogDistance) / distanceDifference), 0.0f, 1.0f);

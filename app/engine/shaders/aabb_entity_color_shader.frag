@@ -1,6 +1,6 @@
 #version 460 core
 
-in vec3 f_position;
+in vec3 f_worldSpacePos;
 
 uniform vec3 u_cameraPosition;
 uniform vec3 u_color;
@@ -31,9 +31,9 @@ void main()
 
 vec3 calculateFog(vec3 color)
 {
-	if (u_isFogEnabled)
+	if(u_isFogEnabled)
 	{
-        float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
+        float fragmentDistance = distance(f_worldSpacePos.xyz, u_cameraPosition);
 		float distanceDifference = (u_maxFogDistance - u_minFogDistance);
 		float distancePart = clamp(((fragmentDistance - u_minFogDistance) / distanceDifference), 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);

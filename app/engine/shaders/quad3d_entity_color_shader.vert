@@ -18,7 +18,7 @@ uniform float u_maxY;
 uniform float u_maxZ;
 uniform float u_textureRepeat;
 
-out vec3 f_position;
+out vec3 f_worldSpacePos;
 out vec2 f_uv;
 
 void main()
@@ -27,7 +27,7 @@ void main()
 	vec4 viewSpacePosition  = (u_cameraView * worldSpacePosition);
 	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
 
-    f_position = worldSpacePosition.xyz;
+    f_worldSpacePos = worldSpacePosition.xyz;
 	f_uv.x = ((u_uvOffset.x + (v_uv.x * u_uvMultiplier.x)) * u_textureRepeat);
 	f_uv.y = ((u_uvOffset.y + (v_uv.y * u_uvMultiplier.y)) * u_textureRepeat);
 

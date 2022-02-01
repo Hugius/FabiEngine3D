@@ -23,7 +23,7 @@ float convertDepthToPerspective(float depth);
 
 void main()
 {
-	if (!u_isDofEnabled)
+	if(!u_isDofEnabled)
 	{
         o_finalColor.rgb = texture(u_sceneMap, f_uv).rgb;
 		o_finalColor.a = 1.0f;
@@ -32,7 +32,6 @@ void main()
 
 	float currentDepth = texture(u_depthMap, f_uv).r;
     float middleDepth = texture(u_depthMap, vec2(0.5f)).r;
-    vec3 blurColor = texture(u_dofMap, f_uv).rgb;
 
     float currentFragmentDistance = convertDepthToPerspective(currentDepth);
     float middleFragmentDistance = convertDepthToPerspective(middleDepth);
@@ -42,7 +41,7 @@ void main()
 
     bool isCloseToFragment = (middleFragmentDistance < (u_dofDynamicDistance + middleSmoothingDistance));
 
-    if (isCloseToFragment || !u_isDofDynamic)
+    if(isCloseToFragment || !u_isDofDynamic)
     {
         float blurMixValue = (currentFragmentDistance - (u_dofBlurDistance - fragmentSmoothingDistance)) / fragmentSmoothingDistance;
 
@@ -54,6 +53,8 @@ void main()
         float finalMixValue = mix(0.0f, blurMixValue, (u_isDofDynamic ? distanceMixValue : 1.0f));
 
         vec3 worldColor = texture(u_sceneMap, f_uv).rgb;
+        vec3 blurColor = texture(u_dofMap, f_uv).rgb;
+
         o_finalColor.rgb = mix(worldColor, blurColor, finalMixValue);
         o_finalColor.a = 1.0f;
     }

@@ -10,7 +10,7 @@ void main()
 {
 	vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 
-	if (diffuseMapColor.a < u_minTextureAlpha)
+	if(diffuseMapColor.a < u_minTextureAlpha)
 	{
 		discard;
 	}

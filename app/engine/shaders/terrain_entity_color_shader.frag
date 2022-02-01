@@ -4,10 +4,10 @@
 #define MAX_SPOTLIGHT_COUNT 64
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 
-in vec3 f_position;
+in vec4 f_shadowSpacePos;
+in vec3 f_worldSpacePos;
 in vec2 f_uv;
 in vec3 f_normal;
-in vec4 f_shadowPosition;
 in mat3 f_tbn;
 
 layout (location = 0) uniform sampler2D u_shadowMap;
@@ -128,14 +128,14 @@ void main()
 
 vec3 calculateDiffuseMapping()
 {
-	if (u_hasBlendMap)
+	if(u_hasBlendMap)
 	{
 		vec2 blendUv = (f_uv / u_textureRepeat);
 
 		vec4 blendMapColor = texture(u_blendMap, blendUv);
 
 		vec3 diffuseMapColor = vec3(0.0f);
-		if (u_hasDiffuseMap)
+		if(u_hasDiffuseMap)
 		{
 			float blendMultiplier = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
 			diffuseMapColor = (texture(u_diffuseMap, f_uv).rgb * blendMultiplier);
@@ -153,7 +153,7 @@ vec3 calculateDiffuseMapping()
         
 		return newColor;
 	}
-	else if (u_hasDiffuseMap)
+	else if(u_hasDiffuseMap)
 	{
 		vec3 newColor = texture(u_diffuseMap, vec2(-f_uv.x, f_uv.y)).rgb;
 		newColor = pow(newColor, vec3(2.2f));
@@ -168,9 +168,9 @@ vec3 calculateDiffuseMapping()
 
 vec3 calculateNormalMapping()
 {
-    if (u_hasNormalMap || u_hasRedNormalMap || u_hasGreenNormalMap || u_hasBlueNormalMap)
+    if(u_hasNormalMap || u_hasRedNormalMap || u_hasGreenNormalMap || u_hasBlueNormalMap)
     {
-		if (u_hasBlendMap)
+		if(u_hasBlendMap)
 		{
 			vec2 blendUv = (f_uv / u_textureRepeat);
 			vec4 blendMapColor = texture(u_blendMap, blendUv);
@@ -181,7 +181,7 @@ vec3 calculateNormalMapping()
 
 			vec3 totalNormal;
 
-			if (u_hasNormalMap)
+			if(u_hasNormalMap)
 			{
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
 				normal *= 2.0f;
@@ -193,7 +193,7 @@ vec3 calculateNormalMapping()
 				totalNormal += f_normal * diffuseIntensity;
 			}
 			
-			if (u_hasRedNormalMap)
+			if(u_hasRedNormalMap)
 			{
 				vec3 normal = texture(u_redNormalMap, (blendUv * u_redTextureRepeat)).rgb;
 				normal *= 2.0f;
@@ -205,7 +205,7 @@ vec3 calculateNormalMapping()
 				totalNormal += f_normal * rIntensity;
 			}
 
-			if (u_hasGreenNormalMap)
+			if(u_hasGreenNormalMap)
 			{
 				vec3 normal = texture(u_greenNormalMap, (blendUv * u_greenTextureRepeat)).rgb;
 				normal *= 2.0f;
@@ -217,7 +217,7 @@ vec3 calculateNormalMapping()
 				totalNormal += f_normal * gIntensity;
 			}
 
-			if (u_hasBlueNormalMap)
+			if(u_hasBlueNormalMap)
 			{
 				vec3 normal = texture(u_blueNormalMap, (blendUv * u_blueTextureRepeat)).rgb;
 				normal *= 2.0f;
@@ -233,7 +233,7 @@ vec3 calculateNormalMapping()
 		}
 		else
 		{
-			if (u_hasNormalMap)
+			if(u_hasNormalMap)
 			{
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
 				normal *= 2.0f;
@@ -256,7 +256,7 @@ vec3 calculateNormalMapping()
 
 vec3 calculateAmbientLighting()
 {
-	if (u_isAmbientLightingEnabled)
+	if(u_isAmbientLightingEnabled)
 	{
 		return (u_ambientLightingColor * u_ambientLightingIntensity);
 	}
@@ -268,10 +268,10 @@ vec3 calculateAmbientLighting()
 
 vec3 calculateDirectionalLighting(vec3 normal)
 {
-	if (u_isDirectionalLightingEnabled)
+	if(u_isDirectionalLightingEnabled)
 	{
         vec3 result = vec3(0.0f);
-        vec3 direction = normalize(u_directionalLightingPosition - f_position);
+        vec3 direction = normalize(u_directionalLightingPosition - f_worldSpacePos);
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_directionalLightingPosition, normal);
 
@@ -294,20 +294,20 @@ vec3 calculatePointlights(vec3 normal)
 		
 	for (int i = 0; i < u_pointlightCount; i++)
 	{
-		vec3 direction = normalize(u_pointlightPositions[i] - f_position);
+		vec3 direction = normalize(u_pointlightPositions[i] - f_worldSpacePos);
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_pointlightPositions[i], normal);
 
 		float attenuation;
-		if (u_pointlightShapes[i] == 0)
+		if(u_pointlightShapes[i] == 0)
 		{
-			float fragmentDistance = distance(u_pointlightPositions[i], f_position);
+			float fragmentDistance = distance(u_pointlightPositions[i], f_worldSpacePos);
 			float averageRadius = ((u_pointlightRadiuses[i].x + u_pointlightRadiuses[i].y + u_pointlightRadiuses[i].z) / 3.0f);
 			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
 		}
 		else
 		{
-			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_position);
+			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_worldSpacePos);
 			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_pointlightRadiuses[i].x)));
 			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_pointlightRadiuses[i].y)));
 			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_pointlightRadiuses[i].z)));
@@ -333,14 +333,14 @@ vec3 calculateSpotlights(vec3 normal)
 
 	for (int i = 0; i < u_spotlightCount; i++)
 	{
-		vec3 direction = normalize(u_spotlightPositions[i] - f_position);
+		vec3 direction = normalize(u_spotlightPositions[i] - f_worldSpacePos);
 		float spot = dot(direction, normalize(-u_spotlightFronts[i]));
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_spotlightPositions[i], normal);
 		float smoothingAngle = (u_spotlightAngles[i] * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
 		float intensity = clamp(((spot - (u_spotlightAngles[i] * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
 
-		float fragmentDistance = distance(u_spotlightPositions[i], f_position);
+		float fragmentDistance = distance(u_spotlightPositions[i], f_worldSpacePos);
 		float distanceMultiplier = (fragmentDistance / u_spotlightDistances[i]);
 		distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
 		distanceMultiplier = (1.0f - distanceMultiplier);
@@ -360,9 +360,9 @@ vec3 calculateSpotlights(vec3 normal)
 
 vec3 calculateFog(vec3 color)
 {
-	if (u_isFogEnabled)
+	if(u_isFogEnabled)
 	{
-		float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
+		float fragmentDistance = distance(f_worldSpacePos.xyz, u_cameraPosition);
 
 		float distanceDifference = (u_maxFogDistance - u_minFogDistance);
 		float fragmentPart = clamp(((fragmentDistance - u_minFogDistance) / distanceDifference), 0.0f, 1.0f);
@@ -379,10 +379,10 @@ vec3 calculateFog(vec3 color)
 
 float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
 {
-    if (u_isSpecular)
+    if(u_isSpecular)
     {
-        vec3 lightDirection   = normalize(lightPosition - f_position);
-        vec3 viewDirection    = normalize(u_cameraPosition - f_position);
+        vec3 lightDirection   = normalize(lightPosition - f_worldSpacePos);
+        vec3 viewDirection    = normalize(u_cameraPosition - f_worldSpacePos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
         float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
@@ -396,19 +396,19 @@ float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
 
 float calculateShadows()
 {
-	if (u_isShadowsEnabled)
+	if(u_isShadowsEnabled)
 	{
 		float halfSize = (u_shadowSize * 0.5f);
-		float fragmentDistance = distance(f_position.xz, u_shadowLookat.xz);
+		float fragmentDistance = distance(f_worldSpacePos.xz, u_shadowLookat.xz);
 
-		if (fragmentDistance <= halfSize)
+		if(fragmentDistance <= halfSize)
 		{
 			float shadow = 0.0f;
-			vec3 projCoords = (((f_shadowPosition.xyz / f_shadowPosition.w) * 0.5f) + 0.5f);
+			vec3 projCoords = (((f_shadowSpacePos.xyz / f_shadowSpacePos.w) * 0.5f) + 0.5f);
 			float currentDepth = projCoords.z;
 			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
 
-			if (projCoords.z > 1.0f)
+			if(projCoords.z > 1.0f)
 			{	
 				return 1.0f;
 			}
@@ -424,7 +424,7 @@ float calculateShadows()
             
 			shadow /= 9.0f;
 
-			if (shadow > 1.0f)
+			if(shadow > 1.0f)
 			{
 				shadow = 1.0f;
 			}
@@ -434,9 +434,9 @@ float calculateShadows()
 			opacity /= (halfSize * 0.1f);
 			opacity = (1.0f - opacity);
 
-			if (u_isShadowCircleEnabled)
+			if(u_isShadowCircleEnabled)
 			{
-				if ((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
+				if((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
 				{
 					return 0.0f;
 				}

@@ -10,7 +10,11 @@ out vec3 f_uv;
 
 void main()
 {
+	vec4 worldSpacePosition = (u_transformation * vec4(v_position, 1.0f));
+	vec4 viewSpacePosition = (u_cameraView * worldSpacePosition);
+	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
+
     f_uv = v_position;
 
-	gl_Position = (u_cameraProjection * u_cameraView * u_transformation * vec4(v_position, 1.0f));
+	gl_Position = clipSpacePosition;
 }

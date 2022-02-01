@@ -314,8 +314,12 @@ const bool WorldEditor::saveEditorWorldToFile()
 			"GRAPHICS_SHADOWS " <<
 			size << " " <<
 			lightness << " " <<
-			Tools::vec2str(position) << " " <<
-			Tools::vec2str(lookat) << " " <<
+			position.x << " " <<
+			position.y << " " <<
+			position.z << " " <<
+			lookat.x << " " <<
+			lookat.y << " " <<
+			lookat.z << " " <<
 			isFollowingCamera << " " <<
 			interval << " " <<
 			quality << endl;
@@ -325,6 +329,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto planarHeight = _fe3d->gfx_getPlanarReflectionHeight();
 		auto cubeQuality = _fe3d->gfx_getCubeReflectionQuality();
 		auto planarQuality = _fe3d->gfx_getPlanarReflectionQuality();
+
 		file <<
 			"GRAPHICS_REFLECTIONS " <<
 			planarHeight << " " <<
@@ -334,6 +339,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	{
 		auto planarQuality = _fe3d->gfx_getPlanarReflectionQuality();
+
 		file <<
 			"GRAPHICS_REFRACTIONS " <<
 			planarQuality << endl;
@@ -366,7 +372,9 @@ const bool WorldEditor::saveEditorWorldToFile()
 			minDistance << " " <<
 			maxDistance << " " <<
 			thickness << " " <<
-			Tools::vec2str(color) << endl;
+			color.r << " " <<
+			color.g << " " <<
+			color.b << endl;
 	}
 
 	if(_fe3d->gfx_isLensFlareEnabled())

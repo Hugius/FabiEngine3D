@@ -160,6 +160,6 @@ void Camera::update(const ivec2& lastCursorPosition)
 	_renderBus->setCameraYaw(_yaw);
 	_renderBus->setCameraPitch(_pitch);
 	_renderBus->setCameraPosition(_position);
-	_renderBus->setCameraNearDistance(_near);
-	_renderBus->setCameraFarDistance(_far);
+	_renderBus->setCameraNear(_near);
+	_renderBus->setCameraFar(_far);
 }

@@ -166,14 +166,14 @@ const float EngineInterface::camera_getThirdPersonDistance() const
 	return _core->getCamera()->getThirdPersonDistance();
 }
 
-const float EngineInterface::camera_getNearDistance() const
+const float EngineInterface::camera_getNear() const
 {
-	return _core->getCamera()->getNearDistance();
+	return _core->getCamera()->getNear();
 }
 
-const float EngineInterface::camera_getFarDistance() const
+const float EngineInterface::camera_getFar() const
 {
-	return _core->getCamera()->getFarDistance();
+	return _core->getCamera()->getFar();
 }
 
 const float EngineInterface::camera_getFOV() const

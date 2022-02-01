@@ -59,8 +59,8 @@ public:
 	const float getMinThirdPersonPitch() const;
 	const float getMaxThirdPersonPitch() const;
 	const float getThirdPersonDistance() const;
-	const float getNearDistance() const;
-	const float getFarDistance() const;
+	const float getNear() const;
+	const float getFar() const;
 	const float getCursorSensitivity() const;
 
 	const bool isThirdPersonViewEnabled() const;

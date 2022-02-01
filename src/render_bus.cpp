@@ -274,14 +274,14 @@ void RenderBus::setCameraPitch(float value)
 	_cameraPitch = value;
 }
 
-void RenderBus::setCameraNearDistance(float value)
+void RenderBus::setCameraNear(float value)
 {
-	_cameraNearDistance = max(0.0f, value);
+	_cameraNear = max(0.0f, value);
 }
 
-void RenderBus::setCameraFarDistance(float value)
+void RenderBus::setCameraFar(float value)
 {
-	_farDistance = value;
+	_cameraFar = value;
 }
 
 void RenderBus::setDofDynamicDistance(float value)
@@ -717,14 +717,14 @@ const float RenderBus::getCameraPitch() const
 	return _cameraPitch;
 }
 
-const float RenderBus::getCameraNearDistance() const
+const float RenderBus::getCameraNear() const
 {
-	return _cameraNearDistance;
+	return _cameraNear;
 }
 
-const float RenderBus::getFarDistance() const
+const float RenderBus::getCameraFar() const
 {
-	return _farDistance;
+	return _cameraFar;
 }
 
 const float RenderBus::getDofDynamicDistance() const

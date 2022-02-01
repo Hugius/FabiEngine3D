@@ -19,8 +19,8 @@ void WaterEntityColorRenderer::bind()
 	_shader->uploadUniform("u_fogThickness", _renderBus->getFogThickness());
 	_shader->uploadUniform("u_fogColor", _renderBus->getFogColor());
 	_shader->uploadUniform("u_isFogEnabled", _renderBus->isFogEnabled());
-	_shader->uploadUniform("u_nearDistance", _renderBus->getCameraNearDistance());
-	_shader->uploadUniform("u_farDistance", _renderBus->getFarDistance());
+	_shader->uploadUniform("u_cameraNear", _renderBus->getCameraNear());
+	_shader->uploadUniform("u_cameraFar", _renderBus->getCameraFar());
 	_shader->uploadUniform("u_isDirectionalLightingEnabled", _renderBus->isDirectionalLightingEnabled());
 	_shader->uploadUniform("u_directionalLightingIntensity", _renderBus->getDirectionalLightingIntensity());
 	_shader->uploadUniform("u_isReflectionsEnabled", _renderBus->isReflectionsEnabled());

@@ -150,12 +150,12 @@ const float Camera::getMaxFirstPersonPitch() const
 	return _maxFirstPersonPitch;
 }
 
-const float Camera::getNearDistance() const
+const float Camera::getNear() const
 {
 	return DEFAULT_NEAR_DISTANCE;
 }
 
-const float Camera::getFarDistance() const
+const float Camera::getFar() const
 {
 	return DEFAULT_FAR_DISTANCE;
 }

@@ -706,8 +706,8 @@ public:
 	const float camera_getMinThirdPersonPitch() const;
 	const float camera_getMaxThirdPersonPitch() const;
 	const float camera_getThirdPersonDistance() const;
-	const float camera_getNearDistance() const;
-	const float camera_getFarDistance() const;
+	const float camera_getNear() const;
+	const float camera_getFar() const;
 	const bool camera_isThirdPersonViewEnabled() const;
 	const bool camera_isFirstPersonViewEnabled() const;
 

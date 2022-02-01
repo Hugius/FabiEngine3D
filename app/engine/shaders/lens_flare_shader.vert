@@ -9,8 +9,8 @@ uniform vec3 u_cameraPosition;
 uniform vec3 u_flareSourcePosition;
 uniform vec2 u_flareSourceUv;
 
-uniform float u_farDistance;
-uniform float u_nearDistance;
+uniform float u_cameraFar;
+uniform float u_cameraNear;
 uniform float u_lensFlareIntensity;
 uniform float u_lensFlareOpacity;
 
@@ -54,5 +54,5 @@ float calculateFlareVisibility()
 float convertDepthToPerspective(float depth)
 {
     float z = ((depth * 2.0f) - 1.0f);
-    return ((2.0f * u_nearDistance * u_farDistance) / (u_farDistance + u_nearDistance - z * (u_farDistance - u_nearDistance)));
+    return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
 }

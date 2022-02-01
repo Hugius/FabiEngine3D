@@ -9,8 +9,8 @@ layout (location = 0) uniform sampler2D u_depthMap;
 layout (location = 1) uniform sampler2D u_sceneMap;
 layout (location = 2) uniform sampler2D u_dofMap;
 
-uniform float u_nearDistance;
-uniform float u_farDistance;
+uniform float u_cameraNear;
+uniform float u_cameraFar;
 uniform float u_dofDynamicDistance;
 uniform float u_dofBlurDistance;
 
@@ -67,5 +67,5 @@ void main()
 float convertDepthToPerspective(float depth)
 {
     float z = ((depth * 2.0f) - 1.0f);
-    return ((2.0f * u_nearDistance * u_farDistance) / (u_farDistance + u_nearDistance - z * (u_farDistance - u_nearDistance)));
+    return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
 }

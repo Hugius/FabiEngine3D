@@ -28,8 +28,8 @@ uniform float u_pointlightIntensities[MAX_LIGHT_COUNT];
 uniform float u_directionalLightingIntensity;
 uniform float u_specularShininess;
 uniform float u_specularIntensity;
-uniform float u_nearDistance;
-uniform float u_farDistance;
+uniform float u_cameraNear;
+uniform float u_cameraFar;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
@@ -259,5 +259,5 @@ vec3 calculateFog(vec3 color)
 float convertDepthToPerspective(float depth)
 {
     float z = ((depth * 2.0f) - 1.0f);
-    return ((2.0f * u_nearDistance * u_farDistance) / (u_farDistance + u_nearDistance - z * (u_farDistance - u_nearDistance)));
+    return ((2.0f * u_cameraNear * u_cameraFar) / (u_cameraFar + u_cameraNear - z * (u_cameraFar - u_cameraNear)));
 }

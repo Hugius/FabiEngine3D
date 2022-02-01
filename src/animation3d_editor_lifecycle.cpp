@@ -9,7 +9,7 @@ void Animation3dEditor::_load()
 {
 	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
-	_fe3d->camera_setThirdPersonViewEnabled(true);
+	_fe3d->camera_setThirdPersonEnabled(true);
 	_fe3d->camera_setThirdPersonYaw(INITIAL_CAMERA_YAW);
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
@@ -65,7 +65,7 @@ void Animation3dEditor::_unload()
 		}
 	}
 
-	_fe3d->camera_setThirdPersonViewEnabled(false);
+	_fe3d->camera_setThirdPersonEnabled(false);
 
 	_fe3d->gfx_disableAntiAliasing(true);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);

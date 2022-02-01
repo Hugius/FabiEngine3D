@@ -139,11 +139,11 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_is_first_person_view_enabled")
+	else if(functionName == "fe3d:camera_is_first_person_enabled")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_isFirstPersonViewEnabled();
+			const auto result = _fe3d->camera_isFirstPersonEnabled();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -184,11 +184,11 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_is_third_person_view_enabled")
+	else if(functionName == "fe3d:camera_is_third_person_enabled")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_isThirdPersonViewEnabled();
+			const auto result = _fe3d->camera_isThirdPersonEnabled();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -274,7 +274,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_near_distance")
+	else if(functionName == "fe3d:camera_get_near")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -283,7 +283,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_far_distance")
+	else if(functionName == "fe3d:camera_get_far")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{

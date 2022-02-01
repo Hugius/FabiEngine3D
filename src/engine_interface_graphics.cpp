@@ -80,8 +80,8 @@ void EngineInterface::gfx_disableFog(bool mustResetProperties)
 
 	if(mustResetProperties)
 	{
-		_core->getRenderBus()->setFogMinDistance(0.0f);
-		_core->getRenderBus()->setFogMaxDistance(0.0f);
+		_core->getRenderBus()->setMinFogDistance(0.0f);
+		_core->getRenderBus()->setMaxFogDistance(0.0f);
 		_core->getRenderBus()->setFogThickness(0.0f);
 		_core->getRenderBus()->setFogColor(fvec3(0.0f));
 	}
@@ -99,10 +99,10 @@ void EngineInterface::gfx_disableShadows(bool mustResetProperties)
 	if(mustResetProperties)
 	{
 		_core->getRenderBus()->setShadowQuality(Config::MIN_SHADOW_QUALITY);
-		_core->getRenderBus()->setShadowEyeOffset(fvec3(0.0f));
-		_core->getRenderBus()->setShadowCenterOffset(fvec3(0.0f));
-		_core->getRenderBus()->setShadowEyePosition(fvec3(0.0f));
-		_core->getRenderBus()->setShadowCenterPosition(fvec3(0.0f));
+		_core->getRenderBus()->setShadowPositionOffset(fvec3(0.0f));
+		_core->getRenderBus()->setShadowLookatOffset(fvec3(0.0f));
+		_core->getRenderBus()->setShadowPosition(fvec3(0.0f));
+		_core->getRenderBus()->setShadowLookat(fvec3(0.0f));
 		_core->getRenderBus()->setShadowSize(0.0f);
 		_core->getRenderBus()->setShadowLightness(0.0f);
 		_core->getRenderBus()->setShadowInterval(0);
@@ -284,12 +284,12 @@ void EngineInterface::gfx_setFogThickness(float value)
 
 void EngineInterface::gfx_setFogMinDistance(float value)
 {
-	_core->getRenderBus()->setFogMinDistance(value);
+	_core->getRenderBus()->setMinFogDistance(value);
 }
 
 void EngineInterface::gfx_setFogMaxDistance(float value)
 {
-	_core->getRenderBus()->setFogMaxDistance(value);
+	_core->getRenderBus()->setMaxFogDistance(value);
 }
 
 void EngineInterface::gfx_setShadowCircleEnabled(bool value)
@@ -297,14 +297,14 @@ void EngineInterface::gfx_setShadowCircleEnabled(bool value)
 	_core->getRenderBus()->setShadowCircleEnabled(value);
 }
 
-void EngineInterface::gfx_setShadowEyeOffset(const fvec3& value)
+void EngineInterface::gfx_setShadowPositionOffset(const fvec3& value)
 {
-	_core->getRenderBus()->setShadowEyeOffset(value);
+	_core->getRenderBus()->setShadowPositionOffset(value);
 }
 
-void EngineInterface::gfx_setShadowCenterOffset(const fvec3& value)
+void EngineInterface::gfx_setShadowLookatOffset(const fvec3& value)
 {
-	_core->getRenderBus()->setShadowCenterOffset(value);
+	_core->getRenderBus()->setShadowLookatOffset(value);
 }
 
 void EngineInterface::gfx_setShadowSize(float value)
@@ -517,12 +517,12 @@ const fvec3& EngineInterface::gfx_getDirectionalLightingColor() const
 
 const float EngineInterface::gfx_getFogMinDistance() const
 {
-	return _core->getRenderBus()->getFogMinDistance();
+	return _core->getRenderBus()->getMinFogDistance();
 }
 
 const float EngineInterface::gfx_getFogMaxDistance() const
 {
-	return _core->getRenderBus()->getFogMaxDistance();
+	return _core->getRenderBus()->getMaxFogDistance();
 }
 
 const float EngineInterface::gfx_getFogThickness() const
@@ -540,14 +540,14 @@ const float EngineInterface::gfx_getPlanarReflectionHeight() const
 	return _core->getRenderBus()->getPlanarReflectionHeight();
 }
 
-const fvec3& EngineInterface::gfx_getShadowEyeOffset() const
+const fvec3& EngineInterface::gfx_getShadowPositionOffset() const
 {
-	return _core->getRenderBus()->getShadowEyeOffset();
+	return _core->getRenderBus()->getShadowPositionOffset();
 }
 
-const fvec3& EngineInterface::gfx_getShadowCenterOffset() const
+const fvec3& EngineInterface::gfx_getShadowLookatOffset() const
 {
-	return _core->getRenderBus()->getShadowCenterOffset();
+	return _core->getRenderBus()->getShadowLookatOffset();
 }
 
 const string& EngineInterface::gfx_getLensFlareMapPath() const

@@ -3,7 +3,7 @@
 
 void SkyEditor::_updateCamera()
 {
-	if(_fe3d->camera_isFirstPersonViewEnabled())
+	if(_fe3d->camera_isFirstPersonEnabled())
 	{
 		_fe3d->quad2d_setVisible("@@cursor", false);
 	}
@@ -12,15 +12,15 @@ void SkyEditor::_updateCamera()
 	{
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			_fe3d->camera_setFirstPersonViewEnabled(!_fe3d->camera_isFirstPersonViewEnabled());
+			_fe3d->camera_setFirstPersonEnabled(!_fe3d->camera_isFirstPersonEnabled());
 		}
 	}
 
-	if(_fe3d->camera_isFirstPersonViewEnabled())
+	if(_fe3d->camera_isFirstPersonEnabled())
 	{
 		if(_gui->getOverlay()->isFocused())
 		{
-			_fe3d->camera_setFirstPersonViewEnabled(false);
+			_fe3d->camera_setFirstPersonEnabled(false);
 		}
 	}
 }

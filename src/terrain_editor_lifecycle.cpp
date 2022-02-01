@@ -10,7 +10,7 @@ void TerrainEditor::_load()
 	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
-	_fe3d->camera_setThirdPersonViewEnabled(true);
+	_fe3d->camera_setThirdPersonEnabled(true);
 	_fe3d->camera_setThirdPersonYaw(INITIAL_CAMERA_YAW);
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
@@ -58,7 +58,7 @@ void TerrainEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("terrainId");
 
-	_fe3d->camera_setThirdPersonViewEnabled(false);
+	_fe3d->camera_setThirdPersonEnabled(false);
 
 	_loadedTerrainIds.clear();
 	_currentTerrainId = "";

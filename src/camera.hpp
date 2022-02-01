@@ -33,8 +33,8 @@ public:
 	void followRightXZ(float speed);
 	void followFrontXYZ(float speed);
 	void followFrontXZ(float speed);
-	void setFirstPersonViewEnabled(bool value);
-	void setThirdPersonViewEnabled(bool value);
+	void setFirstPersonEnabled(bool value);
+	void setThirdPersonEnabled(bool value);
 	void notifyCursorCenter();
 
 	const mat44& getView() const;
@@ -63,8 +63,8 @@ public:
 	const float getFar() const;
 	const float getCursorSensitivity() const;
 
-	const bool isThirdPersonViewEnabled() const;
-	const bool isFirstPersonViewEnabled() const;
+	const bool isThirdPersonEnabled() const;
+	const bool isFirstPersonEnabled() const;
 
 private:
 	static inline const fvec3 DEFAULT_UP = fvec3(0.0f, 1.0f, 0.0f);
@@ -109,8 +109,8 @@ private:
 	float _maxThirdPersonPitch = 0.0f;
 	float _cursorSensitivity = 0.0f;
 
-	bool _isThirdPersonViewEnabled = false;
-	bool _isFirstPersonViewEnabled = false;
+	bool _isThirdPersonEnabled = false;
+	bool _isFirstPersonEnabled = false;
 	bool _mustCenterCursor = false;
 	bool _isCursorBeingCentered = false;
 

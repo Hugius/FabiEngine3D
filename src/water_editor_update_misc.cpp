@@ -3,7 +3,7 @@
 
 void WaterEditor::_updateCamera()
 {
-	if(_fe3d->camera_isThirdPersonViewEnabled())
+	if(_fe3d->camera_isThirdPersonEnabled())
 	{
 		auto scrollOffset = _fe3d->input_getMouseWheelY();
 		auto cameraDistance = _fe3d->camera_getThirdPersonDistance();
@@ -17,13 +17,13 @@ void WaterEditor::_updateCamera()
 	{
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			_fe3d->camera_setThirdPersonViewEnabled(!_fe3d->camera_isThirdPersonViewEnabled());
+			_fe3d->camera_setThirdPersonEnabled(!_fe3d->camera_isThirdPersonEnabled());
 		}
 	}
 
 	if(_gui->getOverlay()->isFocused())
 	{
-		_fe3d->camera_setThirdPersonViewEnabled(false);
+		_fe3d->camera_setThirdPersonEnabled(false);
 	}
 }
 

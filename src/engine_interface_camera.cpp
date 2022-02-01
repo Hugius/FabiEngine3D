@@ -6,14 +6,14 @@ void EngineInterface::camera_reset()
 	_core->getCamera()->reset();
 }
 
-void EngineInterface::camera_setFirstPersonViewEnabled(bool value)
+void EngineInterface::camera_setFirstPersonEnabled(bool value)
 {
-	_core->getCamera()->setFirstPersonViewEnabled(value);
+	_core->getCamera()->setFirstPersonEnabled(value);
 }
 
-void EngineInterface::camera_setThirdPersonViewEnabled(bool value)
+void EngineInterface::camera_setThirdPersonEnabled(bool value)
 {
-	_core->getCamera()->setThirdPersonViewEnabled(value);
+	_core->getCamera()->setThirdPersonEnabled(value);
 }
 
 void EngineInterface::camera_followRightXZ(float speed)
@@ -211,12 +211,12 @@ const fvec3& EngineInterface::camera_getThirdPersonLookat() const
 	return _core->getCamera()->getThirdPersonLookat();
 }
 
-const bool EngineInterface::camera_isThirdPersonViewEnabled() const
+const bool EngineInterface::camera_isThirdPersonEnabled() const
 {
-	return _core->getCamera()->isThirdPersonViewEnabled();
+	return _core->getCamera()->isThirdPersonEnabled();
 }
 
-const bool EngineInterface::camera_isFirstPersonViewEnabled() const
+const bool EngineInterface::camera_isFirstPersonEnabled() const
 {
-	return _core->getCamera()->isFirstPersonViewEnabled();
+	return _core->getCamera()->isFirstPersonEnabled();
 }

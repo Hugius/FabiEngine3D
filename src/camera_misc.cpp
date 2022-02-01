@@ -30,16 +30,16 @@ void Camera::followFrontXYZ(float speed)
 	_position.z += (_front.z * speed);
 }
 
-void Camera::setFirstPersonViewEnabled(bool value)
+void Camera::setFirstPersonEnabled(bool value)
 {
 	_mustCenterCursor = value;
-	_isFirstPersonViewEnabled = value;
+	_isFirstPersonEnabled = value;
 }
 
-void Camera::setThirdPersonViewEnabled(bool value)
+void Camera::setThirdPersonEnabled(bool value)
 {
 	_mustCenterCursor = value;
-	_isThirdPersonViewEnabled = value;
+	_isThirdPersonEnabled = value;
 }
 
 void Camera::setFov(float value)
@@ -212,14 +212,14 @@ const float Camera::getPitch() const
 	return _pitch;
 }
 
-const bool Camera::isFirstPersonViewEnabled() const
+const bool Camera::isFirstPersonEnabled() const
 {
-	return _isFirstPersonViewEnabled;
+	return _isFirstPersonEnabled;
 }
 
-const bool Camera::isThirdPersonViewEnabled() const
+const bool Camera::isThirdPersonEnabled() const
 {
-	return _isThirdPersonViewEnabled;
+	return _isThirdPersonEnabled;
 }
 
 void Camera::move(const fvec3& speed)

@@ -141,16 +141,16 @@ void MasterRenderer::_updateShadows()
 			if(_renderBus->isShadowsFollowingCamera())
 			{
 				const auto cameraPosition = _renderBus->getCameraPosition();
-				const auto eyeOffset = _renderBus->getShadowEyeOffset();
-				const auto centerOffset = _renderBus->getShadowCenterOffset();
+				const auto positionOffset = _renderBus->getShadowPositionOffset();
+				const auto lookatOffset = _renderBus->getShadowLookatOffset();
 
-				_renderBus->setShadowEyePosition(fvec3((cameraPosition.x + eyeOffset.x), (cameraPosition.y + eyeOffset.y), (cameraPosition.z + eyeOffset.z)));
-				_renderBus->setShadowCenterPosition(fvec3((cameraPosition.x + centerOffset.x), (cameraPosition.y + centerOffset.y), (cameraPosition.z + centerOffset.z)));
+				_renderBus->setShadowPosition(fvec3((cameraPosition.x + positionOffset.x), (cameraPosition.y + positionOffset.y), (cameraPosition.z + positionOffset.z)));
+				_renderBus->setShadowLookat(fvec3((cameraPosition.x + lookatOffset.x), (cameraPosition.y + lookatOffset.y), (cameraPosition.z + lookatOffset.z)));
 			}
 			else
 			{
-				_renderBus->setShadowEyePosition(_renderBus->getShadowEyeOffset());
-				_renderBus->setShadowCenterPosition(_renderBus->getShadowCenterOffset());
+				_renderBus->setShadowPosition(_renderBus->getShadowPositionOffset());
+				_renderBus->setShadowLookat(_renderBus->getShadowLookatOffset());
 			}
 
 			const auto leftX = -(_renderBus->getShadowSize() * 0.5f);
@@ -160,7 +160,7 @@ void MasterRenderer::_updateShadows()
 			const auto nearZ = 0.01f;
 			const auto farZ = Math::calculateDistance(fvec3(_renderBus->getShadowSize()), fvec3(0.0f));
 
-			const auto viewMatrix = Math::createViewMatrix(_renderBus->getShadowEyePosition(), _renderBus->getShadowCenterPosition(), fvec3(0.0f, 1.0f, 0.0f));
+			const auto viewMatrix = Math::createViewMatrix(_renderBus->getShadowPosition(), _renderBus->getShadowLookat(), fvec3(0.0f, 1.0f, 0.0f));
 			const auto projectionMatrix = Math::createOrthographicProjectionMatrix(leftX, rightX, bottomY, topY, nearZ, farZ);
 
 			_renderBus->setShadowView(viewMatrix);

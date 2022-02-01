@@ -16,7 +16,7 @@ uniform vec3 u_pointlightPositions[MAX_LIGHT_COUNT];
 uniform vec3 u_pointlightRadiuses[MAX_LIGHT_COUNT];
 uniform vec3 u_pointlightColors[MAX_LIGHT_COUNT];
 uniform vec3 u_directionalLightingColor;
-uniform vec3 u_directionalLightPosition;
+uniform vec3 u_directionalLightingPosition;
 uniform vec3 u_cameraPosition;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
@@ -30,8 +30,8 @@ uniform float u_specularShininess;
 uniform float u_specularIntensity;
 uniform float u_cameraNear;
 uniform float u_cameraFar;
-uniform float u_fogMinDistance;
-uniform float u_fogMaxDistance;
+uniform float u_minFogDistance;
+uniform float u_maxFogDistance;
 uniform float u_fogThickness;
 uniform float u_maxDepth;
 
@@ -204,7 +204,7 @@ vec3 calculateDirectionalLighting(vec3 normal)
 {
 	if (u_isDirectionalLightingEnabled)
 	{
-		vec3 lightDirection = normalize(u_directionalLightPosition - f_position);
+		vec3 lightDirection = normalize(u_directionalLightingPosition - f_position);
 		vec3 viewDirection = normalize(f_position - u_cameraPosition);
 		vec3 reflectDirection = reflect(normalize(lightDirection), normal);
 		float specular = pow(clamp(dot(reflectDirection, viewDirection), 0.0f, 1.0f), u_specularShininess);
@@ -243,8 +243,8 @@ vec3 calculateFog(vec3 color)
 	{
 		float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
 
-		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
-		float distancePart = clamp(((fragmentDistance - u_fogMinDistance) / distanceDifference), 0.0f, 1.0f);
+		float distanceDifference = (u_maxFogDistance - u_minFogDistance);
+		float distancePart = clamp(((fragmentDistance - u_minFogDistance) / distanceDifference), 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
 		float mixValue = (distancePart * thickness);
 

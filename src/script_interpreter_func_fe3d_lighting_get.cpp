@@ -157,56 +157,56 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
-	else if(functionName == "fe3d:lighting_get_shadow_eye_x")
+	else if(functionName == "fe3d:lighting_get_shadow_position_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowEyeOffset().x;
+			const auto result = _fe3d->gfx_getShadowPositionOffset().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:lighting_get_shadow_eye_y")
+	else if(functionName == "fe3d:lighting_get_shadow_position_y")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowEyeOffset().y;
+			const auto result = _fe3d->gfx_getShadowPositionOffset().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:lighting_get_shadow_eye_z")
+	else if(functionName == "fe3d:lighting_get_shadow_position_z")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowEyeOffset().z;
+			const auto result = _fe3d->gfx_getShadowPositionOffset().z;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:lighting_get_shadow_center_x")
+	else if(functionName == "fe3d:lighting_get_shadow_lookat_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowCenterOffset().x;
+			const auto result = _fe3d->gfx_getShadowLookatOffset().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:lighting_get_shadow_center_y")
+	else if(functionName == "fe3d:lighting_get_shadow_lookat_y")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowCenterOffset().y;
+			const auto result = _fe3d->gfx_getShadowLookatOffset().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:lighting_get_shadow_center_z")
+	else if(functionName == "fe3d:lighting_get_shadow_lookat_z")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowCenterOffset().z;
+			const auto result = _fe3d->gfx_getShadowLookatOffset().z;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}

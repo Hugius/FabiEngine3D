@@ -7,19 +7,19 @@ void WorldEditor::_updateCamera()
 	{
 		if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getOverlay()->isFocused())
 		{
-			if(_fe3d->misc_isCursorInsideViewport() && !_fe3d->camera_isFirstPersonViewEnabled())
+			if(_fe3d->misc_isCursorInsideViewport() && !_fe3d->camera_isFirstPersonEnabled())
 			{
-				_fe3d->camera_setFirstPersonViewEnabled(true);
+				_fe3d->camera_setFirstPersonEnabled(true);
 			}
 
-			if(_fe3d->camera_isFirstPersonViewEnabled())
+			if(_fe3d->camera_isFirstPersonEnabled())
 			{
 				_fe3d->quad2d_setVisible("@@cursor", false);
 			}
 		}
 		else
 		{
-			_fe3d->camera_setFirstPersonViewEnabled(false);
+			_fe3d->camera_setFirstPersonEnabled(false);
 
 			if(_fe3d->misc_isCursorInsideWindow())
 			{

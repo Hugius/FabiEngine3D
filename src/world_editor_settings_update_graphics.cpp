@@ -12,8 +12,8 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		auto isFollowingCamera = _fe3d->gfx_isShadowFollowingCamera();
 		auto size = _fe3d->gfx_getShadowSize();
 		auto lightness = _fe3d->gfx_getShadowLightness();
-		auto eye = _fe3d->gfx_getShadowEyeOffset();
-		auto center = _fe3d->gfx_getShadowCenterOffset();
+		auto position = _fe3d->gfx_getShadowPositionOffset();
+		auto lookat = _fe3d->gfx_getShadowLookatOffset();
 		auto interval = _fe3d->gfx_getShadowInterval();
 		auto quality = _fe3d->gfx_getShadowQuality();
 
@@ -39,17 +39,17 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		{
 			_gui->getOverlay()->createValueForm("size", "Size", size, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("eye")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("eyeX", "X", eye.x, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("eyeY", "Y", eye.y, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("eyeZ", "Z", eye.z, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("positionX", "X", position.x, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("positionY", "Y", position.y, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("positionZ", "Z", position.z, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("center")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lookat")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("centerX", "X", center.x, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("centerY", "Y", center.y, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("centerZ", "Z", center.z, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("lookatX", "X", lookat.x, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("lookatY", "Y", lookat.y, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("lookatZ", "Z", lookat.z, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFollowingCamera")->isHovered())
 		{
@@ -73,29 +73,29 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		{
 			_fe3d->gfx_setShadowSize(size);
 		}
-		if(_gui->getOverlay()->checkValueForm("eyeX", eye.x))
+		if(_gui->getOverlay()->checkValueForm("positionX", position.x))
 		{
-			_fe3d->gfx_setShadowEyeOffset(eye);
+			_fe3d->gfx_setShadowPositionOffset(position);
 		}
-		if(_gui->getOverlay()->checkValueForm("eyeY", eye.y))
+		if(_gui->getOverlay()->checkValueForm("positionY", position.y))
 		{
-			_fe3d->gfx_setShadowEyeOffset(eye);
+			_fe3d->gfx_setShadowPositionOffset(position);
 		}
-		if(_gui->getOverlay()->checkValueForm("eyeZ", eye.z))
+		if(_gui->getOverlay()->checkValueForm("positionZ", position.z))
 		{
-			_fe3d->gfx_setShadowEyeOffset(eye);
+			_fe3d->gfx_setShadowPositionOffset(position);
 		}
-		if(_gui->getOverlay()->checkValueForm("centerX", center.x))
+		if(_gui->getOverlay()->checkValueForm("lookatX", lookat.x))
 		{
-			_fe3d->gfx_setShadowCenterOffset(center);
+			_fe3d->gfx_setShadowLookatOffset(lookat);
 		}
-		if(_gui->getOverlay()->checkValueForm("centerY", center.y))
+		if(_gui->getOverlay()->checkValueForm("lookatY", lookat.y))
 		{
-			_fe3d->gfx_setShadowCenterOffset(center);
+			_fe3d->gfx_setShadowLookatOffset(lookat);
 		}
-		if(_gui->getOverlay()->checkValueForm("centerZ", center.z))
+		if(_gui->getOverlay()->checkValueForm("lookatZ", lookat.z))
 		{
-			_fe3d->gfx_setShadowCenterOffset(center);
+			_fe3d->gfx_setShadowLookatOffset(lookat);
 		}
 		if(_gui->getOverlay()->checkValueForm("lightness", lightness))
 		{

@@ -666,8 +666,8 @@ public:
 	const bool input_isMousePressed(InputType button) const;
 
 	void camera_reset();
-	void camera_setFirstPersonViewEnabled(bool value);
-	void camera_setThirdPersonViewEnabled(bool value);
+	void camera_setFirstPersonEnabled(bool value);
+	void camera_setThirdPersonEnabled(bool value);
 	void camera_followRightXZ(float speed);
 	void camera_followFrontXZ(float speed);
 	void camera_followFrontXYZ(float speed);
@@ -708,8 +708,8 @@ public:
 	const float camera_getMinThirdPersonPitch() const;
 	const float camera_getMaxThirdPersonPitch() const;
 	const float camera_getThirdPersonDistance() const;
-	const bool camera_isThirdPersonViewEnabled() const;
-	const bool camera_isFirstPersonViewEnabled() const;
+	const bool camera_isThirdPersonEnabled() const;
+	const bool camera_isFirstPersonEnabled() const;
 
 	void collision_setCameraBox(float left, float right, float bottom, float top, float back, float front);
 	void collision_setCameraAabbResponseEnabled(bool x, bool y, bool z);
@@ -780,8 +780,8 @@ public:
 	void gfx_setFogMinDistance(float value);
 	void gfx_setFogMaxDistance(float value);
 	void gfx_setShadowCircleEnabled(bool value);
-	void gfx_setShadowEyeOffset(const fvec3& value);
-	void gfx_setShadowCenterOffset(const fvec3& value);
+	void gfx_setShadowPositionOffset(const fvec3& value);
+	void gfx_setShadowLookatOffset(const fvec3& value);
 	void gfx_setShadowSize(float value);
 	void gfx_setShadowLightness(float value);
 	void gfx_setShadowQuality(unsigned int value);
@@ -809,8 +809,8 @@ public:
 	const fvec3& gfx_getAmbientLightingColor() const;
 	const fvec3& gfx_getDirectionalLightingColor() const;
 	const fvec3& gfx_getFogColor() const;
-	const fvec3& gfx_getShadowEyeOffset() const;
-	const fvec3& gfx_getShadowCenterOffset() const;
+	const fvec3& gfx_getShadowPositionOffset() const;
+	const fvec3& gfx_getShadowLookatOffset() const;
 	const float gfx_getAmbientLightingIntensity() const;
 	const float gfx_getDirectionalLightingIntensity() const;
 	const float gfx_getFogMinDistance() const;

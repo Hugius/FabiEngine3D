@@ -116,10 +116,10 @@
 
 #### 1.9.2 Properties
 
-- **Eye**: the position of the shadow source
+- **Position**: the position of the shadow source
   - Type: `decimal3`
   - Constraints: none
-- **Center**: the position to where the shadow source is looking at
+- **Lookat**: the position to where the shadow source is looking at
   - Type: `decimal3`
   - Constraints: none
 - **Size**: the size of the shadowed area

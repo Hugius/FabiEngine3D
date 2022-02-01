@@ -12,6 +12,7 @@ using std::string;
 class RenderBus final
 {
 public:
+
 	void setPrimarySceneMap(shared_ptr<TextureBuffer> value);
 	void setSecondarySceneMap(shared_ptr<TextureBuffer> value);
 	void setPlanarReflectionMap(shared_ptr<TextureBuffer> value);
@@ -29,28 +30,29 @@ public:
 	void setLensFlareMapPath(const string& value);
 	void setCameraView(const mat44& value);
 	void setCameraProjection(const mat44& value);
-	void setShadowView(const mat44& value);
-	void setShadowProjection(const mat44& value);
-	void setMinPosition(const fvec3& value);
-	void setMaxPosition(const fvec3& value);
 	void setCameraPosition(const fvec3& value);
 	void setCameraUp(const fvec3& value);
 	void setCameraFront(const fvec3& value);
 	void setCameraRight(const fvec3& value);
+	void setShadowView(const mat44& value);
+	void setShadowProjection(const mat44& value);
+	void setMinPosition(const fvec3& value);
+	void setMaxPosition(const fvec3& value);
+	void setAmbientLightingEnabled(bool value);
 	void setAmbientLightingColor(const fvec3& value);
+	void setAmbientLightingIntensity(float value);
+	void setDirectionalLightingIntensity(float value);
 	void setDirectionalLightingPosition(const fvec3& value);
 	void setDirectionalLightingColor(const fvec3& value);
-	void setShadowEyePosition(const fvec3& value);
-	void setShadowEyeOffset(const fvec3& value);
-	void setShadowCenterPosition(const fvec3& value);
-	void setShadowCenterOffset(const fvec3& value);
+	void setShadowPosition(const fvec3& value);
+	void setShadowPositionOffset(const fvec3& value);
+	void setShadowLookat(const fvec3& value);
+	void setShadowLookatOffset(const fvec3& value);
 	void setFogColor(const fvec3& value);
 	void setFlareSourcePosition(const fvec3& value);
 	void setFlareSourceUv(const fvec2& value);
-	void setAmbientLightingIntensity(float value);
-	void setDirectionalLightingIntensity(float value);
-	void setFogMinDistance(float value);
-	void setFogMaxDistance(float value);
+	void setMinFogDistance(float value);
+	void setMaxFogDistance(float value);
 	void setFogThickness(float value);
 	void setBloomIntensity(float value);
 	void setCameraYaw(float value);
@@ -81,7 +83,6 @@ public:
 	void setReflectionsEnabled(bool value);
 	void setRefractionsEnabled(bool value);
 	void setAntiAliasingEnabled(bool value);
-	void setAmbientLightingEnabled(bool value);
 	void setDirectionalLightingEnabled(bool value);
 	void setFogEnabled(bool value);
 	void setBloomEnabled(bool value);
@@ -119,10 +120,10 @@ public:
 	const fvec3& getAmbientLightingColor() const;
 	const fvec3& getDirectionalLightingColor() const;
 	const fvec3& getDirectionalLightingPosition() const;
-	const fvec3& getShadowEyePosition() const;
-	const fvec3& getShadowEyeOffset() const;
-	const fvec3& getShadowCenterPosition() const;
-	const fvec3& getShadowCenterOffset() const;
+	const fvec3& getShadowPosition() const;
+	const fvec3& getShadowPositionOffset() const;
+	const fvec3& getShadowLookat() const;
+	const fvec3& getShadowLookatOffset() const;
 	const fvec3& getFogColor() const;
 	const fvec3& getFlareSourcePosition() const;
 
@@ -131,8 +132,8 @@ public:
 
 	const float getAmbientLightingIntensity() const;
 	const float getDirectionalLightingIntensity() const;
-	const float getFogMinDistance() const;
-	const float getFogMaxDistance() const;
+	const float getMinFogDistance() const;
+	const float getMaxFogDistance() const;
 	const float getFogThickness() const;
 	const float getBloomIntensity() const;
 	const float getCameraYaw() const;
@@ -199,6 +200,7 @@ public:
 	const BloomType getBloomType() const;
 
 private:
+
 	shared_ptr<TextureBuffer> _primarySceneMap = nullptr;
 	shared_ptr<TextureBuffer> _secondarySceneMap = nullptr;
 	shared_ptr<TextureBuffer> _planarReflectionMap = nullptr;
@@ -227,24 +229,24 @@ private:
 	fvec3 _cameraUp = fvec3(0.0f);
 	fvec3 _cameraFront = fvec3(0.0f);
 	fvec3 _cameraRight = fvec3(0.0f);
-	fvec3 _directionalLightPosition = fvec3(0.0f);
-	fvec3 _shadowEyePosition = fvec3(0.0f);
-	fvec3 _shadowEyeOffset = fvec3(0.0f);
-	fvec3 _shadowCenterPosition = fvec3(0.0f);
-	fvec3 _shadowCenterOffset = fvec3(0.0f);
+	fvec3 _directionalLightingPosition = fvec3(0.0f);
+	fvec3 _shadowPosition = fvec3(0.0f);
+	fvec3 _shadowPositionOffset = fvec3(0.0f);
+	fvec3 _shadowLookat = fvec3(0.0f);
+	fvec3 _shadowLookatOffset = fvec3(0.0f);
 	fvec3 _flareSourcePosition = fvec3(0.0f);
-	fvec3 _ambientLightColor = fvec3(1.0f);
-	fvec3 _directionalLightColor = fvec3(1.0f);
+	fvec3 _ambientLightingColor = fvec3(1.0f);
+	fvec3 _directionalLightingColor = fvec3(1.0f);
 	fvec3 _fogColor = fvec3(1.0f);
 
 	fvec2 _flareSourceUv = fvec2(0.0f);
 	fvec2 _motionBlurDifference = fvec2(0.0f);
 
-	float _ambientLightIntensity = 1.0f;
-	float _directionalLightIntensity = 1.0f;
+	float _ambientLightingIntensity = 1.0f;
+	float _directionalLightingIntensity = 1.0f;
 	float _bloomIntensity = 1.0f;
-	float _fogMinDistance = 0.0f;
-	float _fogMaxDistance = 0.0f;
+	float _minFogDistance = 0.0f;
+	float _maxFogDistance = 0.0f;
 	float _fogThickness = 1.0f;
 	float _cameraYaw = 0.0f;
 	float _cameraPitch = 0.0f;

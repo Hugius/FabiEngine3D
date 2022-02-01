@@ -31,10 +31,10 @@ uniform vec3 u_spotlightColors[MAX_SPOTLIGHT_COUNT];
 uniform vec3 u_cameraPosition;
 uniform vec3 u_ambientLightingColor;
 uniform vec3 u_directionalLightingColor;
-uniform vec3 u_directionalLightPosition;
+uniform vec3 u_directionalLightingPosition;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
-uniform vec3 u_shadowCenter;
+uniform vec3 u_shadowLookat;
 
 uniform float u_pointlightIntensities[MAX_POINTLIGHT_COUNT];
 uniform float u_spotlightIntensities[MAX_SPOTLIGHT_COUNT];
@@ -47,8 +47,8 @@ uniform float u_specularIntensity;
 uniform float u_opacity;
 uniform float u_minTextureAlpha;
 uniform float u_shadowSize;
-uniform float u_fogMinDistance;
-uniform float u_fogMaxDistance;
+uniform float u_minFogDistance;
+uniform float u_maxFogDistance;
 uniform float u_fogThickness;
 uniform float u_reflectivity;
 uniform float u_lightness;
@@ -255,9 +255,9 @@ vec3 calculateDirectionalLighting(vec3 specularMapColor, vec3 normal)
 	if (u_isDirectionalLightingEnabled)
 	{
         vec3 result = vec3(0.0f);
-		vec3 direction = normalize(u_directionalLightPosition - f_position);
+		vec3 direction = normalize(u_directionalLightingPosition - f_position);
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
-		float specular = calculateSpecularLighting(specularMapColor, u_directionalLightPosition, normal);
+		float specular = calculateSpecularLighting(specularMapColor, u_directionalLightingPosition, normal);
 
         result += vec3(diffuse);
         result += vec3(specular);
@@ -347,8 +347,8 @@ vec3 calculateFog(vec3 color)
 	if (u_isFogEnabled)
 	{
         float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
-		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
-		float distancePart = clamp(((fragmentDistance - u_fogMinDistance) / distanceDifference), 0.0f, 1.0f);
+		float distanceDifference = (u_maxFogDistance - u_minFogDistance);
+		float distancePart = clamp(((fragmentDistance - u_minFogDistance) / distanceDifference), 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
 		float mixValue = (distancePart * thickness);
 
@@ -411,7 +411,7 @@ float calculateShadows()
 	if (u_isShadowsEnabled)
 	{
 		float halfSize = (u_shadowSize * 0.5f);
-		float fragmentDistance = distance(f_position.xz, u_shadowCenter.xz);
+		float fragmentDistance = distance(f_position.xz, u_shadowLookat.xz);
 
 		if (fragmentDistance <= halfSize)
 		{

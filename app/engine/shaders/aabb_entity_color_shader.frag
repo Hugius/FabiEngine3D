@@ -6,8 +6,8 @@ uniform vec3 u_cameraPosition;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
 
-uniform float u_fogMinDistance;
-uniform float u_fogMaxDistance;
+uniform float u_minFogDistance;
+uniform float u_maxFogDistance;
 uniform float u_fogThickness;
 
 uniform bool u_isFogEnabled;
@@ -34,8 +34,8 @@ vec3 calculateFog(vec3 color)
 	if (u_isFogEnabled)
 	{
         float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
-		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
-		float distancePart = clamp(((fragmentDistance - u_fogMinDistance) / distanceDifference), 0.0f, 1.0f);
+		float distanceDifference = (u_maxFogDistance - u_minFogDistance);
+		float distancePart = clamp(((fragmentDistance - u_minFogDistance) / distanceDifference), 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
 		float mixValue = (distancePart * thickness);
 

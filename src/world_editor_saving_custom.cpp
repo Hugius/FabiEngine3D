@@ -500,8 +500,8 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	{
 	//		auto size = _fe3d->gfx_getShadowSize();
 	//		auto lightness = _fe3d->gfx_getShadowLightness();
-	//		auto eye = _fe3d->gfx_getShadowEyePosition();
-	//		auto center = _fe3d->gfx_getShadowCenterPosition();
+	//		auto eye = _fe3d->gfx_getShadowPosition();
+	//		auto center = _fe3d->gfx_getShadowLookat();
 	//		auto isFollowingCamera = _fe3d->gfx_isShadowFollowingCamera();
 	//		auto interval = _fe3d->gfx_getShadowInterval();
 

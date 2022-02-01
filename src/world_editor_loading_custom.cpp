@@ -513,8 +513,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			interval;
 
 	//		_fe3d->gfx_enableShadows();
-	//		_fe3d->gfx_setShadowEyePosition(position);
-	//		_fe3d->gfx_setShadowCenterPosition(center);
+	//		_fe3d->gfx_setShadowPosition(position);
+	//		_fe3d->gfx_setShadowLookat(center);
 	//		_fe3d->gfx_setShadowSize(size);
 	//		_fe3d->gfx_setShadowLightness(lightness);
 	//		_fe3d->gfx_setShadowFollowingCamera(isFollowingCamera);

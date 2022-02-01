@@ -6,7 +6,7 @@ using std::max;
 
 void Text3dEditor::_updateCamera()
 {
-	if(_fe3d->camera_isThirdPersonViewEnabled())
+	if(_fe3d->camera_isThirdPersonEnabled())
 	{
 		auto scrollOffset = _fe3d->input_getMouseWheelY();
 		auto cameraDistance = _fe3d->camera_getThirdPersonDistance();
@@ -28,8 +28,8 @@ void Text3dEditor::_updateCamera()
 		_fe3d->quad2d_setVisible("@@cursor", false);
 
 		const auto distance = _fe3d->camera_getThirdPersonDistance();
-		_fe3d->gfx_setShadowEyeOffset(fvec3(cameraLookat + fvec3(distance * 2.0f)));
-		_fe3d->gfx_setShadowCenterOffset(cameraLookat);
+		_fe3d->gfx_setShadowPositionOffset(fvec3(cameraLookat + fvec3(distance * 2.0f)));
+		_fe3d->gfx_setShadowLookatOffset(cameraLookat);
 		_fe3d->gfx_setShadowSize(distance * 4.0f);
 	}
 
@@ -37,13 +37,13 @@ void Text3dEditor::_updateCamera()
 	{
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			_fe3d->camera_setThirdPersonViewEnabled(!_fe3d->camera_isThirdPersonViewEnabled());
+			_fe3d->camera_setThirdPersonEnabled(!_fe3d->camera_isThirdPersonEnabled());
 		}
 	}
 
 	if(_gui->getOverlay()->isFocused())
 	{
-		_fe3d->camera_setThirdPersonViewEnabled(false);
+		_fe3d->camera_setThirdPersonEnabled(false);
 	}
 }
 

@@ -180,8 +180,8 @@ void WorldEditor::_loadGUI()
 	positions = Math::calculateDistributedPositions(9, CH);
 	leftWindow->createScreen("worldEditorMenuSettingsGraphicsShadows");
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("isEnabled", fvec2(0.0f, positions[0]), TEXT_SIZE("Enabled: OFF"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Enabled: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("eye", fvec2(0.0f, positions[1]), TEXT_SIZE("Eye"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Eye", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("center", fvec2(0.0f, positions[2]), TEXT_SIZE("Center"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Center", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("position", fvec2(0.0f, positions[1]), TEXT_SIZE("Position"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Position", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("lookat", fvec2(0.0f, positions[2]), TEXT_SIZE("Lookat"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lookat", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("size", fvec2(0.0f, positions[3]), TEXT_SIZE("Size"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Size", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("lightness", fvec2(0.0f, positions[4]), TEXT_SIZE("Lightness"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lightness", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("isFollowingCamera", fvec2(0.0f, positions[5]), TEXT_SIZE("Follow Cam: OFF"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Follow Cam: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);

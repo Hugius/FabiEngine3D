@@ -53,8 +53,8 @@ void Camera::reset()
 	_thirdPersonPitchAcceleration = 0.0f;
 	_thirdPersonDistance = 0.0f;
 
-	_isFirstPersonViewEnabled = false;
-	_isThirdPersonViewEnabled = false;
+	_isFirstPersonEnabled = false;
+	_isThirdPersonEnabled = false;
 	_mustCenterCursor = false;
 	_isCursorBeingCentered = false;
 }
@@ -82,7 +82,7 @@ void Camera::update(const ivec2& lastCursorPosition)
 		}
 	}
 
-	if(_isFirstPersonViewEnabled && !_isCursorBeingCentered)
+	if(_isFirstPersonEnabled && !_isCursorBeingCentered)
 	{
 		auto xOffset = static_cast<float>(currentCursorPosition.x - xMiddle);
 		auto yOffset = static_cast<float>(yMiddle - currentCursorPosition.y);
@@ -114,7 +114,7 @@ void Camera::update(const ivec2& lastCursorPosition)
 		_firstPersonPitchAcceleration = 0.0f;
 	}
 
-	if(_isThirdPersonViewEnabled && !_isCursorBeingCentered)
+	if(_isThirdPersonEnabled && !_isCursorBeingCentered)
 	{
 		auto xOffset = static_cast<float>(currentCursorPosition.x - xMiddle);
 		auto yOffset = static_cast<float>(yMiddle - currentCursorPosition.y);

@@ -131,37 +131,37 @@ void RenderBus::setCameraRight(const fvec3& value)
 
 void RenderBus::setAmbientLightingColor(const fvec3& value)
 {
-	_ambientLightColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_ambientLightingColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setDirectionalLightingPosition(const fvec3& value)
 {
-	_directionalLightPosition = value;
+	_directionalLightingPosition = value;
 }
 
 void RenderBus::setDirectionalLightingColor(const fvec3& value)
 {
-	_directionalLightColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_directionalLightingColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderBus::setShadowEyePosition(const fvec3& value)
+void RenderBus::setShadowPosition(const fvec3& value)
 {
-	_shadowEyePosition = value;
+	_shadowPosition = value;
 }
 
-void RenderBus::setShadowEyeOffset(const fvec3& value)
+void RenderBus::setShadowPositionOffset(const fvec3& value)
 {
-	_shadowEyeOffset = value;
+	_shadowPositionOffset = value;
 }
 
-void RenderBus::setShadowCenterPosition(const fvec3& value)
+void RenderBus::setShadowLookat(const fvec3& value)
 {
-	_shadowCenterPosition = value;
+	_shadowLookat = value;
 }
 
-void RenderBus::setShadowCenterOffset(const fvec3& value)
+void RenderBus::setShadowLookatOffset(const fvec3& value)
 {
-	_shadowCenterOffset = value;
+	_shadowLookatOffset = value;
 }
 
 void RenderBus::setFogColor(const fvec3& value)
@@ -236,22 +236,22 @@ void RenderBus::setMotionBlurQuality(unsigned int value)
 
 void RenderBus::setAmbientLightingIntensity(float value)
 {
-	_ambientLightIntensity = max(0.0f, value);
+	_ambientLightingIntensity = max(0.0f, value);
 }
 
 void RenderBus::setDirectionalLightingIntensity(float value)
 {
-	_directionalLightIntensity = max(0.0f, value);
+	_directionalLightingIntensity = max(0.0f, value);
 }
 
-void RenderBus::setFogMinDistance(float value)
+void RenderBus::setMinFogDistance(float value)
 {
-	_fogMinDistance = max(0.0f, value);
+	_minFogDistance = max(0.0f, value);
 }
 
-void RenderBus::setFogMaxDistance(float value)
+void RenderBus::setMaxFogDistance(float value)
 {
-	_fogMaxDistance = max(0.0f, value);
+	_maxFogDistance = max(0.0f, value);
 }
 
 void RenderBus::setFogThickness(float value)
@@ -579,32 +579,32 @@ const fvec3& RenderBus::getCameraRight() const
 
 const fvec3& RenderBus::getAmbientLightingColor() const
 {
-	return _ambientLightColor;
+	return _ambientLightingColor;
 }
 
 const fvec3& RenderBus::getDirectionalLightingPosition() const
 {
-	return _directionalLightPosition;
+	return _directionalLightingPosition;
 }
 
-const fvec3& RenderBus::getShadowEyePosition() const
+const fvec3& RenderBus::getShadowPosition() const
 {
-	return _shadowEyePosition;
+	return _shadowPosition;
 }
 
-const fvec3& RenderBus::getShadowEyeOffset() const
+const fvec3& RenderBus::getShadowPositionOffset() const
 {
-	return _shadowEyeOffset;
+	return _shadowPositionOffset;
 }
 
-const fvec3& RenderBus::getShadowCenterPosition() const
+const fvec3& RenderBus::getShadowLookat() const
 {
-	return _shadowCenterPosition;
+	return _shadowLookat;
 }
 
-const fvec3& RenderBus::getShadowCenterOffset() const
+const fvec3& RenderBus::getShadowLookatOffset() const
 {
-	return _shadowCenterOffset;
+	return _shadowLookatOffset;
 }
 
 const fvec3& RenderBus::getFogColor() const
@@ -619,7 +619,7 @@ const fvec3& RenderBus::getFlareSourcePosition() const
 
 const fvec3& RenderBus::getDirectionalLightingColor() const
 {
-	return _directionalLightColor;
+	return _directionalLightingColor;
 }
 
 const float RenderBus::getPlanarReflectionHeight() const
@@ -679,22 +679,22 @@ const unsigned int RenderBus::getMotionBlurQuality() const
 
 const float RenderBus::getAmbientLightingIntensity() const
 {
-	return _ambientLightIntensity;
+	return _ambientLightingIntensity;
 }
 
 const float RenderBus::getDirectionalLightingIntensity() const
 {
-	return _directionalLightIntensity;
+	return _directionalLightingIntensity;
 }
 
-const float RenderBus::getFogMinDistance() const
+const float RenderBus::getMinFogDistance() const
 {
-	return _fogMinDistance;
+	return _minFogDistance;
 }
 
-const float RenderBus::getFogMaxDistance() const
+const float RenderBus::getMaxFogDistance() const
 {
-	return _fogMaxDistance;
+	return _maxFogDistance;
 }
 
 const float RenderBus::getFogThickness() const

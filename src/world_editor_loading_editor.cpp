@@ -479,8 +479,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> quality;
 
 			_fe3d->gfx_enableShadows();
-			_fe3d->gfx_setShadowEyeOffset(position);
-			_fe3d->gfx_setShadowCenterOffset(center);
+			_fe3d->gfx_setShadowPositionOffset(position);
+			_fe3d->gfx_setShadowLookatOffset(center);
 			_fe3d->gfx_setShadowSize(size);
 			_fe3d->gfx_setShadowLightness(lightness);
 			_fe3d->gfx_setShadowFollowingCamera(isFollowingCamera);

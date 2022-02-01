@@ -134,7 +134,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->camera_getFOV();
+			const auto result = _fe3d->camera_getFov();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}

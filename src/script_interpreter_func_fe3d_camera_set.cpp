@@ -43,7 +43,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->camera_moveFollowX(args[0]->getDecimal());
+			_fe3d->camera_followRightXZ(args[0]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->camera_moveFollowZ(args[0]->getDecimal());
+			_fe3d->camera_followFrontXZ(args[0]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->camera_moveFollowZY(args[0]->getDecimal());
+			_fe3d->camera_followFrontXYZ(args[0]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->camera_setFOV(args[0]->getDecimal());
+			_fe3d->camera_setFov(args[0]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

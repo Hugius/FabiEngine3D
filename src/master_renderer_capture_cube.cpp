@@ -38,7 +38,7 @@ void MasterRenderer::_captureCubeReflections()
 	}
 
 	const auto originalCameraAspectRatio = _camera->getAspectRatio();
-	const auto originalCameraFOV = _camera->getFOV();
+	const auto originalCameraFOV = _camera->getFov();
 	const auto originalCameraYaw = _camera->getYaw();
 	const auto originalCameraPitch = _camera->getPitch();
 	const auto originalCameraPosition = _camera->getPosition();
@@ -47,7 +47,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	//_camera->invertUpDirection();
 	_camera->setAspectRatio(1.0f);
-	_camera->setFOV(90.0f);
+	_camera->setFov(90.0f);
 
 	_renderBus->setReflectionsEnabled(false);
 	_renderBus->setRefractionsEnabled(false);
@@ -165,7 +165,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	//_camera->invertUpDirection();
 	_camera->setAspectRatio(originalCameraAspectRatio);
-	_camera->setFOV(originalCameraFOV);
+	_camera->setFov(originalCameraFOV);
 	_camera->setPosition(originalCameraPosition);
 	_camera->setYaw(originalCameraYaw);
 	_camera->setPitch(originalCameraPitch);

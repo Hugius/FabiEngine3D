@@ -31,11 +31,11 @@ void WorldEditor::_updateCamera()
 		{
 			if(_fe3d->input_isKeyDown(InputType::KEY_A))
 			{
-				_fe3d->camera_moveFollowX(-_editorSpeed / 100.0f);
+				_fe3d->camera_followRightXZ(-_editorSpeed / 100.0f);
 			}
 			if(_fe3d->input_isKeyDown(InputType::KEY_D))
 			{
-				_fe3d->camera_moveFollowX(_editorSpeed / 100.0f);
+				_fe3d->camera_followRightXZ(_editorSpeed / 100.0f);
 			}
 
 			if(_fe3d->input_isKeyDown(InputType::KEY_SPACE))
@@ -49,11 +49,11 @@ void WorldEditor::_updateCamera()
 
 			if(_fe3d->input_isKeyDown(InputType::KEY_W))
 			{
-				_fe3d->camera_moveFollowZ(_editorSpeed / 100.0f);
+				_fe3d->camera_followFrontXZ(_editorSpeed / 100.0f);
 			}
 			if(_fe3d->input_isKeyDown(InputType::KEY_S))
 			{
-				_fe3d->camera_moveFollowZ(-_editorSpeed / 100.0f);
+				_fe3d->camera_followFrontXZ(-_editorSpeed / 100.0f);
 			}
 		}
 	}

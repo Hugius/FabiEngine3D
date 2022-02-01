@@ -16,19 +16,19 @@ void EngineInterface::camera_setThirdPersonViewEnabled(bool value)
 	_core->getCamera()->setThirdPersonViewEnabled(value);
 }
 
-void EngineInterface::camera_moveFollowX(float speed)
+void EngineInterface::camera_followRightXZ(float speed)
 {
-	_core->getCamera()->moveFollowX(speed);
+	_core->getCamera()->followRightXZ(speed);
 }
 
-void EngineInterface::camera_moveFollowZY(float speed)
+void EngineInterface::camera_followFrontXZ(float speed)
 {
-	_core->getCamera()->moveFollowZY(speed);
+	_core->getCamera()->followFrontXZ(speed);
 }
 
-void EngineInterface::camera_moveFollowZ(float speed)
+void EngineInterface::camera_followFrontXYZ(float speed)
 {
-	_core->getCamera()->moveFollowZ(speed);
+	_core->getCamera()->followFrontXYZ(speed);
 }
 
 void EngineInterface::camera_move(const fvec3& speed)
@@ -46,9 +46,9 @@ void EngineInterface::camera_setThirdPersonLookat(const fvec3& value)
 	_core->getCamera()->setThirdPersonLookat(value);
 }
 
-void EngineInterface::camera_setFOV(float value)
+void EngineInterface::camera_setFov(float value)
 {
-	_core->getCamera()->setFOV(value);
+	_core->getCamera()->setFov(value);
 }
 
 void EngineInterface::camera_setCursorSensitivity(float value)
@@ -176,9 +176,9 @@ const float EngineInterface::camera_getFar() const
 	return _core->getCamera()->getFar();
 }
 
-const float EngineInterface::camera_getFOV() const
+const float EngineInterface::camera_getFov() const
 {
-	return _core->getCamera()->getFOV();
+	return _core->getCamera()->getFov();
 }
 
 const float EngineInterface::camera_getCursorSensitivity() const

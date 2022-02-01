@@ -13,12 +13,12 @@ public:
 	void reset();
 	void update(const ivec2& lastCursorPosition);
 	void updateMatrices();
-	void move(const fvec3& value);
+	void move(const fvec3& speed);
 	void setPosition(const fvec3& value);
 	void setThirdPersonLookat(const fvec3& value);
 	void setThirdPersonDistance(float value);
 	void setAspectRatio(float value);
-	void setFOV(float value);
+	void setFov(float value);
 	void setCursorSensitivity(float value);
 	void setYaw(float value);
 	void setPitch(float value);
@@ -30,9 +30,9 @@ public:
 	void setMaxFirstPersonPitch(float value);
 	void setMinThirdPersonPitch(float value);
 	void setMaxThirdPersonPitch(float value);
-	void moveFollowX(float value);
-	void moveFollowZY(float value);
-	void moveFollowZ(float value);
+	void followRightXZ(float speed);
+	void followFrontXYZ(float speed);
+	void followFrontXZ(float speed);
 	void setFirstPersonViewEnabled(bool value);
 	void setThirdPersonViewEnabled(bool value);
 	void notifyCursorCenter();
@@ -46,7 +46,7 @@ public:
 	const fvec3& getPosition() const;
 	const fvec3& getThirdPersonLookat() const;
 
-	const float getFOV() const;
+	const float getFov() const;
 	const float getAspectRatio() const;
 	const float getYaw() const;
 	const float getPitch() const;
@@ -68,13 +68,13 @@ public:
 
 private:
 	static inline const fvec3 DEFAULT_UP = fvec3(0.0f, 1.0f, 0.0f);
-	static inline constexpr float DEFAULT_NEAR_DISTANCE = 0.01f;
-	static inline constexpr float DEFAULT_FAR_DISTANCE = 2500.0f;
+	static inline constexpr float DEFAULT_NEAR = 0.01f;
+	static inline constexpr float DEFAULT_FAR = 2500.0f;
 	static inline constexpr float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
-	static inline constexpr float DEFAULT_FOV_ANGLE = 90.0f;
-	static inline constexpr float MAX_FOV_ANGLE = 150.0f;
-	static inline constexpr float MIN_PITCH_ANGLE = -89.0f;
-	static inline constexpr float MAX_PITCH_ANGLE = 89.0f;
+	static inline constexpr float DEFAULT_FOV = 90.0f;
+	static inline constexpr float MAX_FOV = 150.0f;
+	static inline constexpr float MIN_PITCH = -89.0f;
+	static inline constexpr float MAX_PITCH = 89.0f;
 	static inline constexpr float MIN_THIRD_PERSON_DISTANCE = 0.01f;
 	static inline constexpr float MAX_ACCELERATION = 10.0f;
 	static inline constexpr float ACCELERATION_RESISTANCE = 0.75f;
@@ -112,7 +112,7 @@ private:
 	bool _isThirdPersonViewEnabled = false;
 	bool _isFirstPersonViewEnabled = false;
 	bool _mustCenterCursor = false;
-	bool _cursorIsBeingCentered = false;
+	bool _isCursorBeingCentered = false;
 
 	shared_ptr<RenderBus> _renderBus = nullptr;
 	shared_ptr<RenderWindow> _renderWindow = nullptr;

@@ -7,25 +7,27 @@
 using std::clamp;
 using std::max;
 
-void Camera::moveFollowX(float value)
+void Camera::followRightXZ(float speed)
 {
-	_position += (_right * value);
+	_position.x += (_right.x * speed);
+	_position.z += (_right.z * speed);
 }
 
-void Camera::moveFollowZ(float value)
+void Camera::followFrontXZ(float speed)
 {
 	fvec3 tempFront = _front;
 	tempFront.x = cos(Math::convertToRadians(_yaw));
 	tempFront.z = sin(Math::convertToRadians(_yaw));
-	_position.x += (tempFront.x * value);
-	_position.z += (tempFront.z * value);
+
+	_position.x += (tempFront.x * speed);
+	_position.z += (tempFront.z * speed);
 }
 
-void Camera::moveFollowZY(float value)
+void Camera::followFrontXYZ(float speed)
 {
-	_position.x += (_front.x * value);
-	_position.y += (_front.y * value);
-	_position.z += (_front.z * value);
+	_position.x += (_front.x * speed);
+	_position.y += (_front.y * speed);
+	_position.z += (_front.z * speed);
 }
 
 void Camera::setFirstPersonViewEnabled(bool value)
@@ -40,9 +42,9 @@ void Camera::setThirdPersonViewEnabled(bool value)
 	_isThirdPersonViewEnabled = value;
 }
 
-void Camera::setFOV(float value)
+void Camera::setFov(float value)
 {
-	_fov = clamp(value, 0.0f, MAX_FOV_ANGLE);
+	_fov = clamp(value, 0.0f, MAX_FOV);
 }
 
 void Camera::setCursorSensitivity(float value)
@@ -57,7 +59,7 @@ void Camera::setYaw(float value)
 
 void Camera::setPitch(float value)
 {
-	_pitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+	_pitch = clamp(value, MIN_PITCH, MAX_PITCH);
 }
 
 void Camera::setFirstPersonYaw(float value)
@@ -67,7 +69,7 @@ void Camera::setFirstPersonYaw(float value)
 
 void Camera::setFirstPersonPitch(float value)
 {
-	_firstPersonPitch = clamp(clamp(value, _minFirstPersonPitch, _maxFirstPersonPitch), MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+	_firstPersonPitch = clamp(clamp(value, _minFirstPersonPitch, _maxFirstPersonPitch), MIN_PITCH, MAX_PITCH);
 }
 
 void Camera::setThirdPersonYaw(float value)
@@ -77,32 +79,32 @@ void Camera::setThirdPersonYaw(float value)
 
 void Camera::setThirdPersonPitch(float value)
 {
-	_thirdPersonPitch = clamp(clamp(value, _minThirdPersonPitch, _maxThirdPersonPitch), MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+	_thirdPersonPitch = clamp(clamp(value, _minThirdPersonPitch, _maxThirdPersonPitch), MIN_PITCH, MAX_PITCH);
 }
 
 void Camera::setMinFirstPersonPitch(float value)
 {
-	_minFirstPersonPitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+	_minFirstPersonPitch = clamp(value, MIN_PITCH, MAX_PITCH);
 }
 
 void Camera::setMaxFirstPersonPitch(float value)
 {
-	_maxFirstPersonPitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+	_maxFirstPersonPitch = clamp(value, MIN_PITCH, MAX_PITCH);
 }
 
 void Camera::setMinThirdPersonPitch(float value)
 {
-	_minThirdPersonPitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+	_minThirdPersonPitch = clamp(value, MIN_PITCH, MAX_PITCH);
 }
 
 void Camera::setMaxThirdPersonPitch(float value)
 {
-	_maxThirdPersonPitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+	_maxThirdPersonPitch = clamp(value, MIN_PITCH, MAX_PITCH);
 }
 
 void Camera::setThirdPersonDistance(float value)
 {
-	_thirdPersonDistance = max(value, MIN_THIRD_PERSON_DISTANCE);
+	_thirdPersonDistance = max(MIN_THIRD_PERSON_DISTANCE, value);
 }
 
 void Camera::setAspectRatio(float value)
@@ -152,12 +154,12 @@ const float Camera::getMaxFirstPersonPitch() const
 
 const float Camera::getNear() const
 {
-	return DEFAULT_NEAR_DISTANCE;
+	return DEFAULT_NEAR;
 }
 
 const float Camera::getFar() const
 {
-	return DEFAULT_FAR_DISTANCE;
+	return DEFAULT_FAR;
 }
 
 const float Camera::getCursorSensitivity() const
@@ -190,7 +192,7 @@ const float Camera::getThirdPersonDistance() const
 	return _thirdPersonDistance;
 }
 
-const float Camera::getFOV() const
+const float Camera::getFov() const
 {
 	return _fov;
 }
@@ -220,9 +222,9 @@ const bool Camera::isThirdPersonViewEnabled() const
 	return _isThirdPersonViewEnabled;
 }
 
-void Camera::move(const fvec3& value)
+void Camera::move(const fvec3& speed)
 {
-	_position += value;
+	_position += speed;
 }
 
 void Camera::setPosition(const fvec3& value)
@@ -237,7 +239,7 @@ void Camera::setThirdPersonLookat(const fvec3& value)
 
 void Camera::notifyCursorCenter()
 {
-	_cursorIsBeingCentered = true;
+	_isCursorBeingCentered = true;
 }
 
 const mat44& Camera::getView() const

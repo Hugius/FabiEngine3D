@@ -248,7 +248,7 @@ void EngineCore::start()
 				update();
 
 				renderLag -= millisecondsPerUpdate;
-				renderLag = max(renderLag, 0.0f);
+				renderLag = max(0.0f, renderLag);
 			}
 
 			_renderBus->resetTriangleCount();

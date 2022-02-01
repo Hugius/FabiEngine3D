@@ -22,6 +22,10 @@ public:
 	void setCursorSensitivity(float value);
 	void setYaw(float value);
 	void setPitch(float value);
+	void setFirstPersonYaw(float value);
+	void setFirstPersonPitch(float value);
+	void setThirdPersonYaw(float value);
+	void setThirdPersonPitch(float value);
 	void setMinFirstPersonPitch(float value);
 	void setMaxFirstPersonPitch(float value);
 	void setMinThirdPersonPitch(float value);
@@ -29,12 +33,9 @@ public:
 	void moveFollowX(float value);
 	void moveFollowZY(float value);
 	void moveFollowZ(float value);
-	void enableFirstPersonView(float initialYaw, float initialPitch);
-	void disableFirstPersonView();
-	void enableThirdPersonView(float initialYaw, float initialPitch);
-	void disableThirdPersonView();
+	void setFirstPersonViewEnabled(bool value);
+	void setThirdPersonViewEnabled(bool value);
 	void notifyCursorCenter();
-	void invertUpVector();
 
 	const mat44& getViewMatrix() const;
 	const mat44& getProjectionMatrix() const;
@@ -103,8 +104,6 @@ private:
 	float _thirdPersonPitchAcceleration = 0.0f;
 	float _minThirdPersonPitch = 0.0f;
 	float _maxThirdPersonPitch = 0.0f;
-	float _nearDistance = 0.0f;
-	float _farDistance = 0.0f;
 	float _cursorSensitivity = 0.0f;
 
 	bool _isThirdPersonViewEnabled = false;

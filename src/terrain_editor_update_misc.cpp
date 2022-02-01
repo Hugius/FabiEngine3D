@@ -20,23 +20,13 @@ void TerrainEditor::_updateCamera()
 	{
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d->camera_isThirdPersonViewEnabled())
-			{
-				_fe3d->camera_disableThirdPersonView();
-			}
-			else
-			{
-				_fe3d->camera_enableThirdPersonView(_fe3d->camera_getThirdPersonYaw(), _fe3d->camera_getThirdPersonPitch());
-			}
+			_fe3d->camera_setThirdPersonViewEnabled(!_fe3d->camera_isThirdPersonViewEnabled());
 		}
 	}
 
-	if(_fe3d->camera_isThirdPersonViewEnabled())
+	if(_gui->getOverlay()->isFocused())
 	{
-		if(_gui->getOverlay()->isFocused())
-		{
-			_fe3d->camera_disableThirdPersonView();
-		}
+		_fe3d->camera_setThirdPersonViewEnabled(false);
 	}
 }
 

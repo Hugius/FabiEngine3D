@@ -9,7 +9,7 @@ void WorldEditor::_updateCamera()
 		{
 			if(_fe3d->misc_isCursorInsideViewport() && !_fe3d->camera_isFirstPersonViewEnabled())
 			{
-				_fe3d->camera_enableFirstPersonView(_fe3d->camera_getFirstPersonYaw(), _fe3d->camera_getFirstPersonPitch());
+				_fe3d->camera_setFirstPersonViewEnabled(true);
 			}
 
 			if(_fe3d->camera_isFirstPersonViewEnabled())
@@ -19,10 +19,7 @@ void WorldEditor::_updateCamera()
 		}
 		else
 		{
-			if(_fe3d->camera_isFirstPersonViewEnabled())
-			{
-				_fe3d->camera_disableFirstPersonView();
-			}
+			_fe3d->camera_setFirstPersonViewEnabled(false);
 
 			if(_fe3d->misc_isCursorInsideWindow())
 			{
@@ -132,12 +129,18 @@ void WorldEditor::_updateMiscellaneous()
 
 	if(_fe3d->terrain_getSelectedId().empty())
 	{
+		_fe3d->collision_setCameraTerrainResponseEnabled(false);
+		_fe3d->collision_setCameraTerrainResponseHeight(0.0f);
+		_fe3d->collision_setCameraTerrainResponseSpeed(0.0f);
 		_fe3d->raycast_setTerrainPointingEnabled(false);
 		_fe3d->raycast_setTerrainPointingDistance(0.0f);
 		_fe3d->raycast_setTerrainPointingPrecision(0.0f);
 	}
 	else
 	{
+		_fe3d->collision_setCameraTerrainResponseEnabled(true);
+		_fe3d->collision_setCameraTerrainResponseHeight(1.0f);
+		_fe3d->collision_setCameraTerrainResponseSpeed(_editorSpeed);
 		_fe3d->raycast_setTerrainPointingEnabled(true);
 		_fe3d->raycast_setTerrainPointingDistance(Math::calculateDistance(fvec3(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId())), fvec3(0.0f)));
 		_fe3d->raycast_setTerrainPointingPrecision(0.1f);

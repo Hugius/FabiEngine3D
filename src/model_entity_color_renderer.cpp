@@ -10,8 +10,8 @@ void ModelEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getProjectionMatrix());
-	_shader->uploadUniform("u_shadowMatrix", _renderBus->getShadowMatrix());
+	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjectionMatrix());
+	_shader->uploadUniform("u_shadowMatrix", _renderBus->getCameraShadowMatrix());
 	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
 	_shader->uploadUniform("u_ambientLightingColor", _renderBus->getAmbientLightingColor());
 	_shader->uploadUniform("u_ambientLightingIntensity", _renderBus->getAmbientLightingIntensity());
@@ -149,7 +149,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
 	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
 	_shader->uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
-	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));
+	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getCameraViewMatrix())) : _renderBus->getCameraViewMatrix()));
 
 	if(!entity->getPreviousReflectionEntityId().empty())
 	{

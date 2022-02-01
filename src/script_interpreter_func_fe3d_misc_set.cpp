@@ -118,9 +118,11 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:vsync_enable")
+	else if(functionName == "fe3d:vsync_set_enabled")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		auto types = {SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_fe3d->server_isRunning())
 			{
@@ -128,22 +130,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 				return true;
 			}
 
-			_fe3d->misc_setVsyncEnabled(true);
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:vsync_disable")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_fe3d->server_isRunning())
-			{
-				_throwScriptError("cannot access `fe3d:vsync` functionality as networking server!");
-				return true;
-			}
-
-			_fe3d->misc_setVsyncEnabled(false);
+			_fe3d->misc_setVsyncEnabled(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

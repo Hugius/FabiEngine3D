@@ -60,6 +60,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			if(isLoaded())
 			{
 				_fe3d->camera_setYaw(yaw);
+				_fe3d->camera_setFirstPersonYaw(yaw);
 			}
 		}
 		else if(lineType == "CAMERA_PITCH")
@@ -71,6 +72,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			if(isLoaded())
 			{
 				_fe3d->camera_setPitch(pitch);
+				_fe3d->camera_setFirstPersonPitch(pitch);
 			}
 		}
 		else if(lineType == "SKY")

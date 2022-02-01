@@ -6,24 +6,14 @@ void EngineInterface::camera_reset()
 	_core->getCamera()->reset();
 }
 
-void EngineInterface::camera_enableFirstPersonView(float initialYaw, float initialPitch)
+void EngineInterface::camera_setFirstPersonViewEnabled(bool value)
 {
-	_core->getCamera()->enableFirstPersonView(initialYaw, initialPitch);
+	_core->getCamera()->setFirstPersonViewEnabled(value);
 }
 
-void EngineInterface::camera_disableFirstPersonView()
+void EngineInterface::camera_setThirdPersonViewEnabled(bool value)
 {
-	_core->getCamera()->disableFirstPersonView();
-}
-
-void EngineInterface::camera_enableThirdPersonView(float initialYaw, float initialPitch)
-{
-	_core->getCamera()->enableThirdPersonView(initialYaw, initialPitch);
-}
-
-void EngineInterface::camera_disableThirdPersonView()
-{
-	_core->getCamera()->disableThirdPersonView();
+	_core->getCamera()->setThirdPersonViewEnabled(value);
 }
 
 void EngineInterface::camera_moveFollowX(float speed)
@@ -74,6 +64,26 @@ void EngineInterface::camera_setYaw(float value)
 void EngineInterface::camera_setPitch(float value)
 {
 	_core->getCamera()->setPitch(value);
+}
+
+void EngineInterface::camera_setFirstPersonYaw(float value)
+{
+	_core->getCamera()->setFirstPersonYaw(value);
+}
+
+void EngineInterface::camera_setFirstPersonPitch(float value)
+{
+	_core->getCamera()->setFirstPersonPitch(value);
+}
+
+void EngineInterface::camera_setThirdPersonYaw(float value)
+{
+	_core->getCamera()->setThirdPersonYaw(value);
+}
+
+void EngineInterface::camera_setThirdPersonPitch(float value)
+{
+	_core->getCamera()->setThirdPersonPitch(value);
 }
 
 void EngineInterface::camera_setMinFirstPersonPitch(float value)

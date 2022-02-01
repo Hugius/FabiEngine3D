@@ -666,10 +666,8 @@ public:
 	const bool input_isMousePressed(InputType button) const;
 
 	void camera_reset();
-	void camera_enableFirstPersonView(float initialYaw, float initialPitch);
-	void camera_enableThirdPersonView(float initialYaw, float initialPitch);
-	void camera_disableFirstPersonView();
-	void camera_disableThirdPersonView();
+	void camera_setFirstPersonViewEnabled(bool value);
+	void camera_setThirdPersonViewEnabled(bool value);
 	void camera_moveFollowX(float speed);
 	void camera_moveFollowZY(float speed);
 	void camera_moveFollowZ(float speed);
@@ -680,6 +678,10 @@ public:
 	void camera_setFOV(float value);
 	void camera_setYaw(float value);
 	void camera_setPitch(float value);
+	void camera_setFirstPersonYaw(float value);
+	void camera_setFirstPersonPitch(float value);
+	void camera_setThirdPersonYaw(float value);
+	void camera_setThirdPersonPitch(float value);
 	void camera_setMinFirstPersonPitch(float value);
 	void camera_setMaxFirstPersonPitch(float value);
 	void camera_setMinThirdPersonPitch(float value);

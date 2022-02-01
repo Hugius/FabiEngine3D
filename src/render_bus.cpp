@@ -1,4 +1,8 @@
 #include "render_bus.hpp"
+#include "render_bus.hpp"
+#include "render_bus.hpp"
+#include "render_bus.hpp"
+#include "render_bus.hpp"
 
 #include <algorithm>
 
@@ -70,19 +74,19 @@ void RenderBus::setFinalSceneMap(shared_ptr<TextureBuffer> value)
 	_finalSceneMap = value;
 }
 
-void RenderBus::setViewMatrix(const mat44& value)
+void RenderBus::setCameraViewMatrix(const mat44& value)
 {
-	_viewMatrix = value;
+	_cameraViewMatrix = value;
 }
 
-void RenderBus::setProjectionMatrix(const mat44& value)
+void RenderBus::setCameraProjectionMatrix(const mat44& value)
 {
-	_projectionMatrix = value;
+	_cameraProjectionMatrix = value;
 }
 
-void RenderBus::setShadowMatrix(const mat44& value)
+void RenderBus::setCameraShadowMatrix(const mat44& value)
 {
-	_shadowMatrix = value;
+	_cameraShadowMatrix = value;
 }
 
 void RenderBus::setMinPosition(const fvec3& value)
@@ -105,9 +109,19 @@ void RenderBus::setCameraPosition(const fvec3& value)
 	_cameraPosition = value;
 }
 
-void RenderBus::setCameraFront(const fvec3& value)
+void RenderBus::setCameraUpVector(const fvec3& value)
 {
-	_cameraFront = value;
+	_cameraUpVector = value;
+}
+
+void RenderBus::setCameraFrontVector(const fvec3& value)
+{
+	_cameraFrontVector = value;
+}
+
+void RenderBus::setCameraRightVector(const fvec3& value)
+{
+	_cameraRightVector = value;
 }
 
 void RenderBus::setAmbientLightingColor(const fvec3& value)
@@ -255,12 +269,12 @@ void RenderBus::setCameraPitch(float value)
 	_cameraPitch = value;
 }
 
-void RenderBus::setNearDistance(float value)
+void RenderBus::setCameraNearDistance(float value)
 {
-	_nearDistance = max(0.0f, value);
+	_cameraNearDistance = max(0.0f, value);
 }
 
-void RenderBus::setFarDistance(float value)
+void RenderBus::setCameraFarDistance(float value)
 {
 	_farDistance = value;
 }
@@ -503,19 +517,19 @@ const shared_ptr<TextureBuffer> RenderBus::getFinalSceneMap() const
 	return _finalSceneMap;
 }
 
-const mat44& RenderBus::getViewMatrix() const
+const mat44& RenderBus::getCameraViewMatrix() const
 {
-	return _viewMatrix;
+	return _cameraViewMatrix;
 }
 
-const mat44& RenderBus::getProjectionMatrix() const
+const mat44& RenderBus::getCameraProjectionMatrix() const
 {
-	return _projectionMatrix;
+	return _cameraProjectionMatrix;
 }
 
-const mat44& RenderBus::getShadowMatrix() const
+const mat44& RenderBus::getCameraShadowMatrix() const
 {
-	return _shadowMatrix;
+	return _cameraShadowMatrix;
 }
 
 const fvec3& RenderBus::getMinPosition() const
@@ -538,9 +552,19 @@ const fvec3& RenderBus::getCameraPosition() const
 	return _cameraPosition;
 }
 
-const fvec3& RenderBus::getCameraFront() const
+const fvec3& RenderBus::getCameraUpVector() const
 {
-	return _cameraFront;
+	return _cameraUpVector;
+}
+
+const fvec3& RenderBus::getCameraFrontVector() const
+{
+	return _cameraFrontVector;
+}
+
+const fvec3& RenderBus::getCameraRightVector() const
+{
+	return _cameraRightVector;
 }
 
 const fvec3& RenderBus::getAmbientLightingColor() const
@@ -683,9 +707,9 @@ const float RenderBus::getCameraPitch() const
 	return _cameraPitch;
 }
 
-const float RenderBus::getNearDistance() const
+const float RenderBus::getCameraNearDistance() const
 {
-	return _nearDistance;
+	return _cameraNearDistance;
 }
 
 const float RenderBus::getFarDistance() const

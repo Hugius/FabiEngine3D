@@ -8,8 +8,8 @@ void TerrainEntityDepthRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_viewMatrix", _renderBus->getViewMatrix());
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getProjectionMatrix());
+	_shader->uploadUniform("u_viewMatrix", _renderBus->getCameraViewMatrix());
+	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjectionMatrix());
 
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);

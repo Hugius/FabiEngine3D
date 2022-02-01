@@ -28,58 +28,16 @@ void Camera::moveFollowZY(float value)
 	_position.z += (_frontVector.z * value);
 }
 
-void Camera::enableFirstPersonView(float initialYaw, float initialPitch)
+void Camera::setFirstPersonViewEnabled(bool value)
 {
-	if(_isThirdPersonViewEnabled)
-	{
-		abort();
-	}
-	if(_isFirstPersonViewEnabled)
-	{
-		abort();
-	}
-
-	_firstPersonYaw = Math::limitAngle(initialYaw);
-	_firstPersonPitch = clamp(clamp(initialPitch, _minFirstPersonPitch, _maxFirstPersonPitch), MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
-	_mustCenterCursor = true;
-	_isFirstPersonViewEnabled = true;
+	_mustCenterCursor = value;
+	_isFirstPersonViewEnabled = value;
 }
 
-void Camera::disableFirstPersonView()
+void Camera::setThirdPersonViewEnabled(bool value)
 {
-	if(!_isFirstPersonViewEnabled)
-	{
-		abort();
-	}
-
-	_isFirstPersonViewEnabled = false;
-}
-
-void Camera::enableThirdPersonView(float initialYaw, float initialPitch)
-{
-	if(_isFirstPersonViewEnabled)
-	{
-		abort();
-	}
-	if(_isThirdPersonViewEnabled)
-	{
-		abort();
-	}
-
-	_thirdPersonYaw = Math::limitAngle(initialYaw);
-	_thirdPersonPitch = clamp(clamp(initialPitch, _minThirdPersonPitch, _maxThirdPersonPitch), MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
-	_mustCenterCursor = true;
-	_isThirdPersonViewEnabled = true;
-}
-
-void Camera::disableThirdPersonView()
-{
-	if(!_isThirdPersonViewEnabled)
-	{
-		abort();
-	}
-
-	_isThirdPersonViewEnabled = false;
+	_mustCenterCursor = value;
+	_isThirdPersonViewEnabled = value;
 }
 
 void Camera::setFOV(float value)
@@ -100,6 +58,26 @@ void Camera::setYaw(float value)
 void Camera::setPitch(float value)
 {
 	_pitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+}
+
+void Camera::setFirstPersonYaw(float value)
+{
+	_firstPersonYaw = Math::limitAngle(value);
+}
+
+void Camera::setFirstPersonPitch(float value)
+{
+	_firstPersonPitch = clamp(clamp(value, _minFirstPersonPitch, _maxFirstPersonPitch), MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+}
+
+void Camera::setThirdPersonYaw(float value)
+{
+	_thirdPersonYaw = Math::limitAngle(value);
+}
+
+void Camera::setThirdPersonPitch(float value)
+{
+	_thirdPersonPitch = clamp(clamp(value, _minThirdPersonPitch, _maxThirdPersonPitch), MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 }
 
 void Camera::setMinFirstPersonPitch(float value)
@@ -124,7 +102,7 @@ void Camera::setMaxThirdPersonPitch(float value)
 
 void Camera::setThirdPersonDistance(float value)
 {
-	_thirdPersonDistance = max(0.0f, value);
+	_thirdPersonDistance = max(value, MIN_THIRD_PERSON_DISTANCE);
 }
 
 void Camera::setAspectRatio(float value)
@@ -174,12 +152,12 @@ const float Camera::getMaxFirstPersonPitch() const
 
 const float Camera::getNearDistance() const
 {
-	return _nearDistance;
+	return NEAR_DISTANCE;
 }
 
 const float Camera::getFarDistance() const
 {
-	return _farDistance;
+	return FAR_DISTANCE;
 }
 
 const float Camera::getCursorSensitivity() const
@@ -247,11 +225,6 @@ void Camera::move(const fvec3& value)
 	_position += value;
 }
 
-void Camera::invertUpVector()
-{
-	_upVector *= -1.0f;
-}
-
 void Camera::setPosition(const fvec3& value)
 {
 	_position = value;
@@ -284,6 +257,8 @@ const fvec3& Camera::getUpVector() const
 
 void Camera::updateMatrices()
 {
+	_upVector = DEFAULT_UP_VECTOR;
+
 	_frontVector.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
 	_frontVector.y = sin(Math::convertToRadians(_pitch));
 	_frontVector.z = (sin(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
@@ -294,14 +269,11 @@ void Camera::updateMatrices()
 
 	_viewMatrix = Math::createViewMatrix(_position, (_position + _frontVector), _upVector);
 
-	_projectionMatrix = Math::createPerspectiveProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _nearDistance, _farDistance);
+	_projectionMatrix = Math::createPerspectiveProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, NEAR_DISTANCE, FAR_DISTANCE);
 
-	_renderBus->setCameraYaw(_yaw);
-	_renderBus->setCameraPitch(_pitch);
-	_renderBus->setCameraFront(_frontVector);
-	_renderBus->setCameraPosition(_position);
-	_renderBus->setViewMatrix(_viewMatrix);
-	_renderBus->setProjectionMatrix(_projectionMatrix);
-	_renderBus->setNearDistance(_nearDistance);
-	_renderBus->setFarDistance(_farDistance);
+	_renderBus->setCameraUpVector(_upVector);
+	_renderBus->setCameraFrontVector(_frontVector);
+	_renderBus->setCameraRightVector(_rightVector);
+	_renderBus->setCameraViewMatrix(_viewMatrix);
+	_renderBus->setCameraProjectionMatrix(_projectionMatrix);
 }

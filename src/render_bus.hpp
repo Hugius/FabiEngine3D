@@ -27,13 +27,15 @@ public:
 	void setFinalSceneMap(shared_ptr<TextureBuffer> value);
 	void setCursorEntityId(const string& value);
 	void setLensFlareMapPath(const string& value);
-	void setViewMatrix(const mat44& value);
-	void setProjectionMatrix(const mat44& value);
-	void setShadowMatrix(const mat44& value);
+	void setCameraViewMatrix(const mat44& value);
+	void setCameraProjectionMatrix(const mat44& value);
+	void setCameraShadowMatrix(const mat44& value);
 	void setMinPosition(const fvec3& value);
 	void setMaxPosition(const fvec3& value);
 	void setCameraPosition(const fvec3& value);
-	void setCameraFront(const fvec3& value);
+	void setCameraUpVector(const fvec3& value);
+	void setCameraFrontVector(const fvec3& value);
+	void setCameraRightVector(const fvec3& value);
 	void setAmbientLightingColor(const fvec3& value);
 	void setDirectionalLightingPosition(const fvec3& value);
 	void setDirectionalLightingColor(const fvec3& value);
@@ -52,8 +54,8 @@ public:
 	void setBloomIntensity(float value);
 	void setCameraYaw(float value);
 	void setCameraPitch(float value);
-	void setNearDistance(float value);
-	void setFarDistance(float value);
+	void setCameraNearDistance(float value);
+	void setCameraFarDistance(float value);
 	void setDofDynamicDistance(float value);
 	void setDofBlurDistance(float value);
 	void setPlanarReflectionHeight(float value);
@@ -102,14 +104,16 @@ public:
 	const string& getCursorEntityId() const;
 	const string& getLensFlareMapPath() const;
 
-	const mat44& getViewMatrix() const;
-	const mat44& getProjectionMatrix() const;
-	const mat44& getShadowMatrix() const;
+	const mat44& getCameraViewMatrix() const;
+	const mat44& getCameraProjectionMatrix() const;
+	const mat44& getCameraShadowMatrix() const;
 
 	const fvec3& getMinPosition() const;
 	const fvec3& getMaxPosition() const;
 	const fvec3& getCameraPosition() const;
-	const fvec3& getCameraFront() const;
+	const fvec3& getCameraUpVector() const;
+	const fvec3& getCameraFrontVector() const;
+	const fvec3& getCameraRightVector() const;
 	const fvec3& getAmbientLightingColor() const;
 	const fvec3& getDirectionalLightingColor() const;
 	const fvec3& getDirectionalLightingPosition() const;
@@ -131,7 +135,7 @@ public:
 	const float getBloomIntensity() const;
 	const float getCameraYaw() const;
 	const float getCameraPitch() const;
-	const float getNearDistance() const;
+	const float getCameraNearDistance() const;
 	const float getFarDistance() const;
 	const float getDofDynamicDistance() const;
 	const float getDofBlurDistance() const;
@@ -210,14 +214,16 @@ private:
 	string _cursorEntityId = "";
 	string _lensFlareMapPath = "";
 
-	mat44 _viewMatrix = mat44(1.0f);
-	mat44 _projectionMatrix = mat44(1.0f);
-	mat44 _shadowMatrix = mat44(1.0f);
+	mat44 _cameraViewMatrix = mat44(1.0f);
+	mat44 _cameraProjectionMatrix = mat44(1.0f);
+	mat44 _cameraShadowMatrix = mat44(1.0f);
 
 	fvec3 _minPosition = fvec3(-FLT_MAX);
 	fvec3 _maxPosition = fvec3(FLT_MAX);
 	fvec3 _cameraPosition = fvec3(0.0f);
-	fvec3 _cameraFront = fvec3(0.0f);
+	fvec3 _cameraUpVector = fvec3(0.0f);
+	fvec3 _cameraFrontVector = fvec3(0.0f);
+	fvec3 _cameraRightVector = fvec3(0.0f);
 	fvec3 _directionalLightPosition = fvec3(0.0f);
 	fvec3 _shadowEyePosition = fvec3(0.0f);
 	fvec3 _shadowEyeOffset = fvec3(0.0f);
@@ -239,7 +245,7 @@ private:
 	float _fogThickness = 1.0f;
 	float _cameraYaw = 0.0f;
 	float _cameraPitch = 0.0f;
-	float _nearDistance = 0.0f;
+	float _cameraNearDistance = 0.0f;
 	float _farDistance = 0.0f;
 	float _dofDynamicDistance = 0.0f;
 	float _dofBlurDistance = 0.0f;

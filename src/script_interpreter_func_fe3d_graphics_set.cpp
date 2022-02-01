@@ -289,7 +289,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			}
 		}
 	}
-	else if(functionName == "fe3d:graphics_set_enable_bloom")
+	else if(functionName == "fe3d:graphics_enable_bloom")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -298,7 +298,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:graphics_set_disable_bloom")
+	else if(functionName == "fe3d:graphics_disable_bloom")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{

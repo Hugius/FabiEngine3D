@@ -9,8 +9,8 @@ void WaterEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_viewMatrix", _renderBus->getViewMatrix());
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getProjectionMatrix());
+	_shader->uploadUniform("u_viewMatrix", _renderBus->getCameraViewMatrix());
+	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjectionMatrix());
 	_shader->uploadUniform("u_directionalLightingColor", _renderBus->getDirectionalLightingColor());
 	_shader->uploadUniform("u_directionalLightPosition", _renderBus->getDirectionalLightingPosition());
 	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
@@ -19,7 +19,7 @@ void WaterEntityColorRenderer::bind()
 	_shader->uploadUniform("u_fogThickness", _renderBus->getFogThickness());
 	_shader->uploadUniform("u_fogColor", _renderBus->getFogColor());
 	_shader->uploadUniform("u_isFogEnabled", _renderBus->isFogEnabled());
-	_shader->uploadUniform("u_nearDistance", _renderBus->getNearDistance());
+	_shader->uploadUniform("u_nearDistance", _renderBus->getCameraNearDistance());
 	_shader->uploadUniform("u_farDistance", _renderBus->getFarDistance());
 	_shader->uploadUniform("u_isDirectionalLightingEnabled", _renderBus->isDirectionalLightingEnabled());
 	_shader->uploadUniform("u_directionalLightingIntensity", _renderBus->getDirectionalLightingIntensity());

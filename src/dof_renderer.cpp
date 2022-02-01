@@ -8,7 +8,7 @@ void DofRenderer::bind()
 	_shader->uploadUniform("u_depthMap", 0);
 	_shader->uploadUniform("u_sceneMap", 1);
 	_shader->uploadUniform("u_dofMap", 2);
-	_shader->uploadUniform("u_nearDistance", _renderBus->getNearDistance());
+	_shader->uploadUniform("u_nearDistance", _renderBus->getCameraNearDistance());
 	_shader->uploadUniform("u_farDistance", _renderBus->getFarDistance());
 	_shader->uploadUniform("u_dofDynamicDistance", _renderBus->getDofDynamicDistance());
 	_shader->uploadUniform("u_dofBlurDistance", _renderBus->getDofBlurDistance());

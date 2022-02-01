@@ -7,8 +7,8 @@ void Quad3dEntityDepthRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_viewMatrix", _renderBus->getViewMatrix());
-	_shader->uploadUniform("u_projectionMatrix", _renderBus->getProjectionMatrix());
+	_shader->uploadUniform("u_viewMatrix", _renderBus->getCameraViewMatrix());
+	_shader->uploadUniform("u_projectionMatrix", _renderBus->getCameraProjectionMatrix());
 	_shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -40,7 +40,7 @@ void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity)
 		return;
 	}
 
-	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));
+	_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getCameraViewMatrix())) : _renderBus->getCameraViewMatrix()));
 	_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
 	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);

@@ -164,7 +164,7 @@ void MasterRenderer::_updateShadows()
 			const auto projectionMatrix = Math::createOrthographicProjectionMatrix(leftX, rightX, bottomY, topY, nearZ, farZ);
 			const auto shadowMatrix = (projectionMatrix * viewMatrix);
 
-			_renderBus->setShadowMatrix(shadowMatrix);
+			_renderBus->setCameraShadowMatrix(shadowMatrix);
 		}
 	}
 }
@@ -191,7 +191,7 @@ void MasterRenderer::_updateLensFlare()
 	if(_renderBus->isLensFlareEnabled())
 	{
 		const auto flareSourcePosition = _renderBus->getDirectionalLightingPosition();
-		const auto flareSourceClip = (_renderBus->getProjectionMatrix() * _renderBus->getViewMatrix() * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
+		const auto flareSourceClip = (_renderBus->getCameraProjectionMatrix() * _renderBus->getCameraViewMatrix() * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
 		const auto flareSourceNdc = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
 		const auto flareSourceUv = fvec2(((flareSourceNdc.x + 1.0f) * 0.5f), ((flareSourceNdc.y + 1.0f) * 0.5f));
 

@@ -726,13 +726,16 @@ public:
 	const bool collision_isCameraResponseEnabled() const;
 	const bool collision_isTerrainResponseEnabled() const;
 
-	void raycast_enableTerrainPointing(float distance, float precision);
-	void raycast_disableTerrainPointing();
+	void raycast_setTerrainPointingEnabled(bool value);
+	void raycast_setTerrainPointingDistance(float value);
+	void raycast_setTerrainPointingPrecision(float value);
 
 	const pair<const string, float> raycast_checkCursorInAny();
 	const pair<const string, float> raycast_checkCursorInEntities(const string& id, bool canBeOccluded);
 	const pair<bool, float> raycast_checkCursorInEntity(const string& id, bool canBeOccluded);
 	const fvec3& raycast_getPointOnTerrain() const;
+	const float raycast_getTerrainPointingDistance() const;
+	const float raycast_getTerrainPointingPrecision() const;
 	const bool raycast_isPointOnTerrainValid() const;
 	const bool raycast_isTerrainPointingEnabled() const;
 	const Ray& raycast_getCursorRay() const;

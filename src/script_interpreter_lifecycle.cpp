@@ -214,10 +214,7 @@ void ScriptInterpreter::unload()
 		_fe3d->collision_disableCameraTerrainResponse();
 	}
 
-	if(_fe3d->raycast_isTerrainPointingEnabled())
-	{
-		_fe3d->raycast_disableTerrainPointing();
-	}
+	_fe3d->raycast_setTerrainPointingEnabled(false);
 
 	if(_fe3d->gfx_isAntiAliasingEnabled())
 	{

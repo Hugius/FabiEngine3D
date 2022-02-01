@@ -58,6 +58,42 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
+	else if(functionName == "fe3d:raycast_is_terrain_pointing_enabled")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				const auto result = _fe3d->raycast_isTerrainPointingEnabled();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_get_terrain_pointing_distance")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				const auto result = _fe3d->raycast_getTerrainPointingDistance();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_get_terrain_pointing_precision")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				const auto result = _fe3d->raycast_getTerrainPointingPrecision();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

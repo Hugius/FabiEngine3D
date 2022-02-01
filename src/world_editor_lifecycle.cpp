@@ -158,11 +158,7 @@ void WorldEditor::_unload()
 	_gui->getOverlay()->deleteTextField("soundId");
 
 	_fe3d->collision_disableCameraAabbResponse();
-
-	if(_fe3d->raycast_isTerrainPointingEnabled())
-	{
-		_fe3d->raycast_disableTerrainPointing();
-	}
+	_fe3d->raycast_setTerrainPointingEnabled(false);
 
 	_loadedModelIds.clear();
 	_outsideLoadedModelIds.clear();

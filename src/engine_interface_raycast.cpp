@@ -1,16 +1,19 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::raycast_enableTerrainPointing(float distance, float precision)
+void EngineInterface::raycast_setTerrainPointingEnabled(bool value)
 {
-	_core->getRaycaster()->setTerrainPointingEnabled(true);
-	_core->getRaycaster()->setTerrainPointingDistance(distance);
-	_core->getRaycaster()->setTerrainPointingPrecision(precision);
+	_core->getRaycaster()->setTerrainPointingEnabled(value);
 }
 
-void EngineInterface::raycast_disableTerrainPointing()
+void EngineInterface::raycast_setTerrainPointingDistance(float value)
 {
-	_core->getRaycaster()->setTerrainPointingEnabled(false);
+	_core->getRaycaster()->setTerrainPointingDistance(value);
+}
+
+void EngineInterface::raycast_setTerrainPointingPrecision(float value)
+{
+	_core->getRaycaster()->setTerrainPointingPrecision(value);
 }
 
 const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
@@ -214,6 +217,16 @@ const Ray& EngineInterface::raycast_getCursorRay() const
 const fvec3& EngineInterface::raycast_getPointOnTerrain() const
 {
 	return _core->getRaycaster()->getTerrainPoint();
+}
+
+const float EngineInterface::raycast_getTerrainPointingDistance() const
+{
+	return _core->getRaycaster()->getTerrainPointingDistance();
+}
+
+const float EngineInterface::raycast_getTerrainPointingPrecision() const
+{
+	return _core->getRaycaster()->getTerrainPointingPrecision();
 }
 
 const bool EngineInterface::raycast_isPointOnTerrainValid() const

@@ -7,8 +7,8 @@ void Quad3dEntityShadowRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_shadowView", _renderBus->getShadowView());
-	_shader->uploadUniform("u_shadowProjection", _renderBus->getShadowProjection());
+	_shader->uploadUniform("u_shadowView", _renderStorage->getShadowView());
+	_shader->uploadUniform("u_shadowProjection", _renderStorage->getShadowProjection());
 	_shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -41,12 +41,12 @@ void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
 	}
 
 	_shader->uploadUniform("u_transformation", entity->getTransformation());
-	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
-	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-	_shader->uploadUniform("u_minY", max(_renderBus->getMinPosition().y, entity->getMinHeight()));
-	_shader->uploadUniform("u_maxY", min(_renderBus->getMaxPosition().y, entity->getMaxHeight()));
-	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
-	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+	_shader->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
+	_shader->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
+	_shader->uploadUniform("u_minY", max(_renderStorage->getMinPosition().y, entity->getMinHeight()));
+	_shader->uploadUniform("u_maxY", min(_renderStorage->getMaxPosition().y, entity->getMaxHeight()));
+	_shader->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
+	_shader->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
 	_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 	_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 	_shader->uploadUniform("u_uvOffset", entity->getUvOffset());

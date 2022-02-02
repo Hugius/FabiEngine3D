@@ -1,6 +1,6 @@
 #pragma once
 
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 #include "image.hpp"
 
 #include <array>

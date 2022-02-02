@@ -42,17 +42,17 @@ void MasterRenderer::_captureCubeReflections()
 	const auto originalCameraYaw = _camera->getYaw();
 	const auto originalCameraPitch = _camera->getPitch();
 	const auto originalCameraPosition = _camera->getPosition();
-	const auto originalShadowInterval = _renderBus->getShadowInterval();
-	const auto wasSkyExposureEnabled = _renderBus->isSkyExposureEnabled();
+	const auto originalShadowInterval = _renderStorage->getShadowInterval();
+	const auto wasSkyExposureEnabled = _renderStorage->isSkyExposureEnabled();
 
 	//_camera->invertUpDirection();
 	_camera->setAspectRatio(1.0f);
 	_camera->setFov(90.0f);
 
-	_renderBus->setReflectionsEnabled(false);
-	_renderBus->setRefractionsEnabled(false);
-	_renderBus->setSkyExposureEnabled(false);
-	_renderBus->setShadowInterval(0);
+	_renderStorage->setReflectionsEnabled(false);
+	_renderStorage->setRefractionsEnabled(false);
+	_renderStorage->setSkyExposureEnabled(false);
+	_renderStorage->setShadowInterval(0);
 
 	for(const auto& [key, entity] : _reflectionEntityManager->getEntities())
 	{
@@ -131,7 +131,7 @@ void MasterRenderer::_captureCubeReflections()
 				_renderTransparentText3dEntities();
 				_cubeReflectionCaptor->unbind();
 
-				const auto dataSize = (_renderBus->getCubeReflectionQuality() * _renderBus->getCubeReflectionQuality() * 3);
+				const auto dataSize = (_renderStorage->getCubeReflectionQuality() * _renderStorage->getCubeReflectionQuality() * 3);
 				auto data = new unsigned char[dataSize];
 				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptor->getTexture(0)->getId());
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -139,7 +139,7 @@ void MasterRenderer::_captureCubeReflections()
 
 				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-				glTexImage2D(cubeIndex, 0, GL_RGB, _renderBus->getCubeReflectionQuality(), _renderBus->getCubeReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glTexImage2D(cubeIndex, 0, GL_RGB, _renderStorage->getCubeReflectionQuality(), _renderStorage->getCubeReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 			}
 
@@ -171,10 +171,10 @@ void MasterRenderer::_captureCubeReflections()
 	_camera->setPitch(originalCameraPitch);
 	_camera->updateMatrices();
 
-	_renderBus->setReflectionsEnabled(true);
-	_renderBus->setRefractionsEnabled(true);
-	_renderBus->setSkyExposureEnabled(wasSkyExposureEnabled);
-	_renderBus->setShadowInterval(originalShadowInterval);
+	_renderStorage->setReflectionsEnabled(true);
+	_renderStorage->setRefractionsEnabled(true);
+	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);
+	_renderStorage->setShadowInterval(originalShadowInterval);
 
 	_updateShadows();
 }

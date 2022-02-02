@@ -9,45 +9,45 @@ void WaterEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_cameraView", _renderBus->getCameraView());
-	_shader->uploadUniform("u_cameraProjection", _renderBus->getCameraProjection());
-	_shader->uploadUniform("u_directionalLightingColor", _renderBus->getDirectionalLightingColor());
-	_shader->uploadUniform("u_directionalLightingPosition", _renderBus->getDirectionalLightingPosition());
-	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
-	_shader->uploadUniform("u_minFogDistance", _renderBus->getMinFogDistance());
-	_shader->uploadUniform("u_maxFogDistance", _renderBus->getMaxFogDistance());
-	_shader->uploadUniform("u_fogThickness", _renderBus->getFogThickness());
-	_shader->uploadUniform("u_fogColor", _renderBus->getFogColor());
-	_shader->uploadUniform("u_isFogEnabled", _renderBus->isFogEnabled());
-	_shader->uploadUniform("u_cameraNear", _renderBus->getCameraNear());
-	_shader->uploadUniform("u_cameraFar", _renderBus->getCameraFar());
-	_shader->uploadUniform("u_isDirectionalLightingEnabled", _renderBus->isDirectionalLightingEnabled());
-	_shader->uploadUniform("u_directionalLightingIntensity", _renderBus->getDirectionalLightingIntensity());
-	_shader->uploadUniform("u_isReflectionsEnabled", _renderBus->isReflectionsEnabled());
-	_shader->uploadUniform("u_isRefractionsEnabled", _renderBus->isRefractionsEnabled());
+	_shader->uploadUniform("u_cameraView", _renderStorage->getCameraView());
+	_shader->uploadUniform("u_cameraProjection", _renderStorage->getCameraProjection());
+	_shader->uploadUniform("u_directionalLightingColor", _renderStorage->getDirectionalLightingColor());
+	_shader->uploadUniform("u_directionalLightingPosition", _renderStorage->getDirectionalLightingPosition());
+	_shader->uploadUniform("u_cameraPosition", _renderStorage->getCameraPosition());
+	_shader->uploadUniform("u_minFogDistance", _renderStorage->getMinFogDistance());
+	_shader->uploadUniform("u_maxFogDistance", _renderStorage->getMaxFogDistance());
+	_shader->uploadUniform("u_fogThickness", _renderStorage->getFogThickness());
+	_shader->uploadUniform("u_fogColor", _renderStorage->getFogColor());
+	_shader->uploadUniform("u_isFogEnabled", _renderStorage->isFogEnabled());
+	_shader->uploadUniform("u_cameraNear", _renderStorage->getCameraNear());
+	_shader->uploadUniform("u_cameraFar", _renderStorage->getCameraFar());
+	_shader->uploadUniform("u_isDirectionalLightingEnabled", _renderStorage->isDirectionalLightingEnabled());
+	_shader->uploadUniform("u_directionalLightingIntensity", _renderStorage->getDirectionalLightingIntensity());
+	_shader->uploadUniform("u_isReflectionsEnabled", _renderStorage->isReflectionsEnabled());
+	_shader->uploadUniform("u_isRefractionsEnabled", _renderStorage->isRefractionsEnabled());
 	_shader->uploadUniform("u_reflectionMap", 0);
 	_shader->uploadUniform("u_refractionMap", 1);
 	_shader->uploadUniform("u_edgeMap", 2);
 	_shader->uploadUniform("u_dudvMap", 3);
 	_shader->uploadUniform("u_normalMap", 4);
 	_shader->uploadUniform("u_displacementMap", 5);
-	_shader->uploadUniform("u_hasReflectionMap", (_renderBus->getWaterReflectionMap() != nullptr));
-	_shader->uploadUniform("u_hasRefractionMap", (_renderBus->getWaterRefractionMap() != nullptr));
+	_shader->uploadUniform("u_hasReflectionMap", (_renderStorage->getWaterReflectionMap() != nullptr));
+	_shader->uploadUniform("u_hasRefractionMap", (_renderStorage->getWaterRefractionMap() != nullptr));
 
-	if(_renderBus->getWaterReflectionMap() != nullptr)
+	if(_renderStorage->getWaterReflectionMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterReflectionMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterReflectionMap()->getId());
 	}
-	if(_renderBus->getWaterRefractionMap() != nullptr)
+	if(_renderStorage->getWaterRefractionMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterRefractionMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterRefractionMap()->getId());
 	}
-	if(_renderBus->getWaterEdgeMap() != nullptr)
+	if(_renderStorage->getWaterEdgeMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getWaterEdgeMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterEdgeMap()->getId());
 	}
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -71,17 +71,17 @@ void WaterEntityColorRenderer::unbind()
 	glDisable(GL_CLIP_DISTANCE4);
 	glDisable(GL_CLIP_DISTANCE5);
 
-	if(_renderBus->getWaterReflectionMap() != nullptr)
+	if(_renderStorage->getWaterReflectionMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(_renderBus->getWaterRefractionMap() != nullptr)
+	if(_renderStorage->getWaterRefractionMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(_renderBus->getWaterEdgeMap() != nullptr)
+	if(_renderStorage->getWaterEdgeMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -164,12 +164,12 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 	_shader->uploadUniform("u_isReflective", entity->isReflective());
 	_shader->uploadUniform("u_isRefractive", entity->isRefractive());
 	_shader->uploadUniform("u_color", entity->getColor());
-	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
-	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-	_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
-	_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
-	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
-	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+	_shader->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
+	_shader->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
+	_shader->uploadUniform("u_minY", _renderStorage->getMinPosition().y);
+	_shader->uploadUniform("u_maxY", _renderStorage->getMaxPosition().y);
+	_shader->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
+	_shader->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
 	_shader->uploadUniform("u_hasDisplacementMap", (entity->getDisplacementMap() != nullptr));
 	_shader->uploadUniform("u_hasDudvMap", (entity->getDudvMap() != nullptr));
 	_shader->uploadUniform("u_hasNormalMap", (entity->getNormalMap() != nullptr));
@@ -203,12 +203,12 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 	if(entity->getDisplacementMap() != nullptr)
 	{
 		glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityMesh()->getVertexCount());
-		_renderBus->increaseTriangleCount(entity->getHighQualityMesh()->getVertexCount() / 3);
+		_renderStorage->increaseTriangleCount(entity->getHighQualityMesh()->getVertexCount() / 3);
 	}
 	else
 	{
 		glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityMesh()->getVertexCount());
-		_renderBus->increaseTriangleCount(entity->getLowQualityMesh()->getVertexCount() / 3);
+		_renderStorage->increaseTriangleCount(entity->getLowQualityMesh()->getVertexCount() / 3);
 	}
 
 	glBindVertexArray(0);

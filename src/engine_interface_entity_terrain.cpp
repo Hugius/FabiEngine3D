@@ -61,7 +61,7 @@ void EngineInterface::terrain_setDiffuseMap(const string& id, const string& valu
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -91,7 +91,7 @@ void EngineInterface::terrain_setNormalMap(const string& id, const string& value
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -121,7 +121,7 @@ void EngineInterface::terrain_setBlendMap(const string& id, const string& value)
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -151,7 +151,7 @@ void EngineInterface::terrain_setRedDiffuseMap(const string& id, const string& v
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -181,7 +181,7 @@ void EngineInterface::terrain_setGreenDiffuseMap(const string& id, const string&
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -211,7 +211,7 @@ void EngineInterface::terrain_setBlueDiffuseMap(const string& id, const string& 
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -241,7 +241,7 @@ void EngineInterface::terrain_setRedNormalMap(const string& id, const string& va
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -271,7 +271,7 @@ void EngineInterface::terrain_setGreenNormalMap(const string& id, const string& 
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -301,7 +301,7 @@ void EngineInterface::terrain_setBlueNormalMap(const string& id, const string& v
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}

@@ -9,7 +9,7 @@
 
 using std::string;
 
-class RenderBus final
+class RenderStorage final
 {
 public:
 

@@ -52,7 +52,7 @@ public:
 	void inject(shared_ptr<PointlightEntityManager> pointlightEntityManager);
 	void inject(shared_ptr<SpotlightEntityManager> spotlightEntityManager);
 	void inject(shared_ptr<ReflectionEntityManager> reflectionEntityManager);
-	void inject(shared_ptr<RenderBus> renderBus);
+	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<Timer> timer);
 
@@ -182,7 +182,7 @@ private:
 	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
 	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
 	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
-	shared_ptr<RenderBus> _renderBus = nullptr;
+	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
 };

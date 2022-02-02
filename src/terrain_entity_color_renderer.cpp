@@ -10,28 +10,28 @@ void TerrainEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_cameraView", _renderBus->getCameraView());
-	_shader->uploadUniform("u_cameraProjection", _renderBus->getCameraProjection());
-	_shader->uploadUniform("u_shadowView", _renderBus->getShadowView());
-	_shader->uploadUniform("u_shadowProjection", _renderBus->getShadowProjection());
-	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
-	_shader->uploadUniform("u_ambientLightingColor", _renderBus->getAmbientLightingColor());
-	_shader->uploadUniform("u_ambientLightingIntensity", _renderBus->getAmbientLightingIntensity());
-	_shader->uploadUniform("u_directionalLightingColor", _renderBus->getDirectionalLightingColor());
-	_shader->uploadUniform("u_directionalLightingPosition", _renderBus->getDirectionalLightingPosition());
-	_shader->uploadUniform("u_directionalLightingIntensity", _renderBus->getDirectionalLightingIntensity());
-	_shader->uploadUniform("u_minFogDistance", _renderBus->getMinFogDistance());
-	_shader->uploadUniform("u_maxFogDistance", _renderBus->getMaxFogDistance());
-	_shader->uploadUniform("u_fogThickness", _renderBus->getFogThickness());
-	_shader->uploadUniform("u_fogColor", _renderBus->getFogColor());
-	_shader->uploadUniform("u_isFogEnabled", _renderBus->isFogEnabled());
-	_shader->uploadUniform("u_isAmbientLightingEnabled", _renderBus->isAmbientLightingEnabled());
-	_shader->uploadUniform("u_isDirectionalLightingEnabled", _renderBus->isDirectionalLightingEnabled());
-	_shader->uploadUniform("u_shadowSize", _renderBus->getShadowSize());
-	_shader->uploadUniform("u_shadowLookat", _renderBus->getShadowLookat());
-	_shader->uploadUniform("u_shadowLightness", _renderBus->getShadowLightness());
-	_shader->uploadUniform("u_isShadowsEnabled", _renderBus->isShadowsEnabled());
-	_shader->uploadUniform("u_isShadowCircleEnabled", _renderBus->isShadowCircleEnabled());
+	_shader->uploadUniform("u_cameraView", _renderStorage->getCameraView());
+	_shader->uploadUniform("u_cameraProjection", _renderStorage->getCameraProjection());
+	_shader->uploadUniform("u_shadowView", _renderStorage->getShadowView());
+	_shader->uploadUniform("u_shadowProjection", _renderStorage->getShadowProjection());
+	_shader->uploadUniform("u_cameraPosition", _renderStorage->getCameraPosition());
+	_shader->uploadUniform("u_ambientLightingColor", _renderStorage->getAmbientLightingColor());
+	_shader->uploadUniform("u_ambientLightingIntensity", _renderStorage->getAmbientLightingIntensity());
+	_shader->uploadUniform("u_directionalLightingColor", _renderStorage->getDirectionalLightingColor());
+	_shader->uploadUniform("u_directionalLightingPosition", _renderStorage->getDirectionalLightingPosition());
+	_shader->uploadUniform("u_directionalLightingIntensity", _renderStorage->getDirectionalLightingIntensity());
+	_shader->uploadUniform("u_minFogDistance", _renderStorage->getMinFogDistance());
+	_shader->uploadUniform("u_maxFogDistance", _renderStorage->getMaxFogDistance());
+	_shader->uploadUniform("u_fogThickness", _renderStorage->getFogThickness());
+	_shader->uploadUniform("u_fogColor", _renderStorage->getFogColor());
+	_shader->uploadUniform("u_isFogEnabled", _renderStorage->isFogEnabled());
+	_shader->uploadUniform("u_isAmbientLightingEnabled", _renderStorage->isAmbientLightingEnabled());
+	_shader->uploadUniform("u_isDirectionalLightingEnabled", _renderStorage->isDirectionalLightingEnabled());
+	_shader->uploadUniform("u_shadowSize", _renderStorage->getShadowSize());
+	_shader->uploadUniform("u_shadowLookat", _renderStorage->getShadowLookat());
+	_shader->uploadUniform("u_shadowLightness", _renderStorage->getShadowLightness());
+	_shader->uploadUniform("u_isShadowsEnabled", _renderStorage->isShadowsEnabled());
+	_shader->uploadUniform("u_isShadowCircleEnabled", _renderStorage->isShadowCircleEnabled());
 	_shader->uploadUniform("u_shadowMap", 0);
 	_shader->uploadUniform("u_diffuseMap", 1);
 	_shader->uploadUniform("u_normalMap", 2);
@@ -43,10 +43,10 @@ void TerrainEntityColorRenderer::bind()
 	_shader->uploadUniform("u_greenNormalMap", 8);
 	_shader->uploadUniform("u_blueNormalMap", 9);
 
-	if(_renderBus->getShadowMap() != nullptr)
+	if(_renderStorage->getShadowMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getShadowMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getShadowMap()->getId());
 	}
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -68,7 +68,7 @@ void TerrainEntityColorRenderer::unbind()
 	glDisable(GL_CLIP_DISTANCE4);
 	glDisable(GL_CLIP_DISTANCE5);
 
-	if(_renderBus->getShadowMap() != nullptr)
+	if(_renderStorage->getShadowMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -157,12 +157,12 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 	_shader->uploadUniform("u_hasGreenNormalMap", (entity->getGreenNormalMap() != nullptr));
 	_shader->uploadUniform("u_hasBlueNormalMap", (entity->getBlueNormalMap() != nullptr));
 	_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
-	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
-	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-	_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
-	_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
-	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
-	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+	_shader->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
+	_shader->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
+	_shader->uploadUniform("u_minY", _renderStorage->getMinPosition().y);
+	_shader->uploadUniform("u_maxY", _renderStorage->getMaxPosition().y);
+	_shader->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
+	_shader->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
 
 	if(entity->getDiffuseMap() != nullptr)
 	{
@@ -213,7 +213,7 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 	glBindVertexArray(entity->getMesh()->getVaoId());
 
 	glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
-	_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
+	_renderStorage->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 

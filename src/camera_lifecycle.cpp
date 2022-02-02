@@ -11,9 +11,9 @@ Camera::Camera()
 	reset();
 }
 
-void Camera::inject(shared_ptr<RenderBus> renderBus)
+void Camera::inject(shared_ptr<RenderStorage> renderStorage)
 {
-	_renderBus = renderBus;
+	_renderStorage = renderStorage;
 }
 
 void Camera::inject(shared_ptr<RenderWindow> renderWindow)
@@ -157,9 +157,9 @@ void Camera::update(const ivec2& lastCursorPosition)
 	_yaw = Math::limitAngle(_yaw);
 	_pitch = clamp(_pitch, MIN_PITCH, MAX_PITCH);
 
-	_renderBus->setCameraYaw(_yaw);
-	_renderBus->setCameraPitch(_pitch);
-	_renderBus->setCameraPosition(_position);
-	_renderBus->setCameraNear(_near);
-	_renderBus->setCameraFar(_far);
+	_renderStorage->setCameraYaw(_yaw);
+	_renderStorage->setCameraPitch(_pitch);
+	_renderStorage->setCameraPosition(_position);
+	_renderStorage->setCameraNear(_near);
+	_renderStorage->setCameraFar(_far);
 }

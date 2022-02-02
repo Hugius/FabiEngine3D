@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity_manager.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 #include "mesh_loader.hpp"
 #include "timer.hpp"
 #include "model_entity.hpp"
@@ -15,7 +15,7 @@ using std::unordered_map;
 class ModelEntityManager final : public BaseEntityManager
 {
 public:
-	void inject(shared_ptr<RenderBus> renderBus);
+	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Timer> timer);
 	void inject(shared_ptr<ReflectionEntityManager> reflectionManager);
 	void inject(shared_ptr<MeshLoader> meshLoader);
@@ -35,7 +35,7 @@ private:
 
 	unordered_map<string, shared_ptr<ModelEntity>> _entities;
 
-	shared_ptr<RenderBus> _renderBus = nullptr;
+	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
 	shared_ptr<ReflectionEntityManager> _reflectionManager = nullptr;
 	shared_ptr<MeshLoader> _meshLoader = nullptr;

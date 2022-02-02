@@ -1,7 +1,7 @@
 #include "master_renderer.hpp"
 #include "master_renderer.hpp"
 #include "configuration.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 #include "tools.hpp"
 #include <algorithm>
 
@@ -99,15 +99,15 @@ void MasterRenderer::update()
 
 void MasterRenderer::_updateSkyExposure()
 {
-	if(_renderBus->isSkyExposureEnabled())
+	if(_renderStorage->isSkyExposureEnabled())
 	{
-		const auto pitch = max(0.0f, _renderBus->getCameraPitch());
-		const auto targetLightness = (((90.0f - pitch) / 90.0f) * _renderBus->getSkyExposureIntensity());
-		auto lightness = _renderBus->getSkyExposureLightness();
+		const auto pitch = max(0.0f, _renderStorage->getCameraPitch());
+		const auto targetLightness = (((90.0f - pitch) / 90.0f) * _renderStorage->getSkyExposureIntensity());
+		auto lightness = _renderStorage->getSkyExposureLightness();
 
 		if(lightness > targetLightness)
 		{
-			lightness -= (_renderBus->getSkyExposureSpeed() * 3.0f);
+			lightness -= (_renderStorage->getSkyExposureSpeed() * 3.0f);
 
 			if(lightness < targetLightness)
 			{
@@ -116,7 +116,7 @@ void MasterRenderer::_updateSkyExposure()
 		}
 		if(lightness < targetLightness)
 		{
-			lightness += _renderBus->getSkyExposureSpeed();
+			lightness += _renderStorage->getSkyExposureSpeed();
 
 			if(lightness > targetLightness)
 			{
@@ -124,50 +124,50 @@ void MasterRenderer::_updateSkyExposure()
 			}
 		}
 
-		_renderBus->setSkyExposureLightness(lightness);
+		_renderStorage->setSkyExposureLightness(lightness);
 	}
 }
 
 void MasterRenderer::_updateShadows()
 {
-	if(_renderBus->isShadowsEnabled())
+	if(_renderStorage->isShadowsEnabled())
 	{
-		if((_renderBus->getShadowInterval() == 0) || (_timer->getPassedUpdateCount() % _renderBus->getShadowInterval()) == 0)
+		if((_renderStorage->getShadowInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getShadowInterval()) == 0)
 		{
-			if(_renderBus->isShadowsFollowingCamera())
+			if(_renderStorage->isShadowsFollowingCamera())
 			{
-				const auto cameraPosition = _renderBus->getCameraPosition();
-				const auto positionOffset = _renderBus->getShadowPositionOffset();
-				const auto lookatOffset = _renderBus->getShadowLookatOffset();
+				const auto cameraPosition = _renderStorage->getCameraPosition();
+				const auto positionOffset = _renderStorage->getShadowPositionOffset();
+				const auto lookatOffset = _renderStorage->getShadowLookatOffset();
 
-				_renderBus->setShadowPosition(fvec3((cameraPosition.x + positionOffset.x), (cameraPosition.y + positionOffset.y), (cameraPosition.z + positionOffset.z)));
-				_renderBus->setShadowLookat(fvec3((cameraPosition.x + lookatOffset.x), (cameraPosition.y + lookatOffset.y), (cameraPosition.z + lookatOffset.z)));
+				_renderStorage->setShadowPosition(fvec3((cameraPosition.x + positionOffset.x), (cameraPosition.y + positionOffset.y), (cameraPosition.z + positionOffset.z)));
+				_renderStorage->setShadowLookat(fvec3((cameraPosition.x + lookatOffset.x), (cameraPosition.y + lookatOffset.y), (cameraPosition.z + lookatOffset.z)));
 			}
 			else
 			{
-				_renderBus->setShadowPosition(_renderBus->getShadowPositionOffset());
-				_renderBus->setShadowLookat(_renderBus->getShadowLookatOffset());
+				_renderStorage->setShadowPosition(_renderStorage->getShadowPositionOffset());
+				_renderStorage->setShadowLookat(_renderStorage->getShadowLookatOffset());
 			}
 
-			const auto leftX = -(_renderBus->getShadowSize() * 0.5f);
-			const auto rightX = (_renderBus->getShadowSize() * 0.5f);
-			const auto bottomY = -(_renderBus->getShadowSize() * 0.5f);
-			const auto topY = (_renderBus->getShadowSize() * 0.5f);
+			const auto leftX = -(_renderStorage->getShadowSize() * 0.5f);
+			const auto rightX = (_renderStorage->getShadowSize() * 0.5f);
+			const auto bottomY = -(_renderStorage->getShadowSize() * 0.5f);
+			const auto topY = (_renderStorage->getShadowSize() * 0.5f);
 			const auto nearZ = 0.01f;
-			const auto farZ = Math::calculateDistance(fvec3(_renderBus->getShadowSize()), fvec3(0.0f));
+			const auto farZ = Math::calculateDistance(fvec3(_renderStorage->getShadowSize()), fvec3(0.0f));
 
-			const auto viewMatrix = Math::createViewMatrix(_renderBus->getShadowPosition(), _renderBus->getShadowLookat(), fvec3(0.0f, 1.0f, 0.0f));
+			const auto viewMatrix = Math::createViewMatrix(_renderStorage->getShadowPosition(), _renderStorage->getShadowLookat(), fvec3(0.0f, 1.0f, 0.0f));
 			const auto projectionMatrix = Math::createOrthographicProjectionMatrix(leftX, rightX, bottomY, topY, nearZ, farZ);
 
-			_renderBus->setShadowView(viewMatrix);
-			_renderBus->setShadowProjection(projectionMatrix);
+			_renderStorage->setShadowView(viewMatrix);
+			_renderStorage->setShadowProjection(projectionMatrix);
 		}
 	}
 }
 
 void MasterRenderer::_updateMotionBlur()
 {
-	if(_renderBus->isMotionBlurEnabled())
+	if(_renderStorage->isMotionBlurEnabled())
 	{
 		static auto lastYaw = _camera->getYaw();
 		static auto lastPitch = _camera->getPitch();
@@ -175,7 +175,7 @@ void MasterRenderer::_updateMotionBlur()
 		fvec2 difference;
 		difference.x = fabsf(Math::calculateReferenceAngle(_camera->getYaw()) - Math::calculateReferenceAngle(lastYaw));
 		difference.y = fabsf(Math::calculateReferenceAngle(_camera->getPitch()) - Math::calculateReferenceAngle(lastPitch));
-		_renderBus->setMotionBlurDifference(difference);
+		_renderStorage->setMotionBlurDifference(difference);
 
 		lastYaw = _camera->getYaw();
 		lastPitch = _camera->getPitch();
@@ -184,10 +184,10 @@ void MasterRenderer::_updateMotionBlur()
 
 void MasterRenderer::_updateLensFlare()
 {
-	if(_renderBus->isLensFlareEnabled())
+	if(_renderStorage->isLensFlareEnabled())
 	{
-		const auto flareSourcePosition = _renderBus->getDirectionalLightingPosition();
-		const auto flareSourceClip = (_renderBus->getCameraProjection() * _renderBus->getCameraView() * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
+		const auto flareSourcePosition = _renderStorage->getDirectionalLightingPosition();
+		const auto flareSourceClip = (_renderStorage->getCameraProjection() * _renderStorage->getCameraView() * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
 		const auto flareSourceNdc = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
 		const auto flareSourceUv = fvec2(((flareSourceNdc.x + 1.0f) * 0.5f), ((flareSourceNdc.y + 1.0f) * 0.5f));
 
@@ -199,14 +199,14 @@ void MasterRenderer::_updateLensFlare()
 		float opacity = 0.0f;
 		if((flareSourceNdc.x > -1.0f) && (flareSourceNdc.x < 1.0f) && (flareSourceNdc.y > -1.0f) && (flareSourceNdc.y < 1.0f))
 		{
-			const auto distance = (Math::calculateDistance(flareSourceNdc, fvec2(0.0f)) / _renderBus->getLensFlareSensitivity());
+			const auto distance = (Math::calculateDistance(flareSourceNdc, fvec2(0.0f)) / _renderStorage->getLensFlareSensitivity());
 
 			opacity = (1.0f - distance);
 			opacity = clamp(opacity, 0.0f, 1.0f);
 		}
 
-		_renderBus->setLensFlareOpacity(opacity);
-		_renderBus->setFlareSourcePosition(flareSourcePosition);
-		_renderBus->setFlareSourceUv(flareSourceUv);
+		_renderStorage->setLensFlareOpacity(opacity);
+		_renderStorage->setFlareSourcePosition(flareSourcePosition);
+		_renderStorage->setFlareSourceUv(flareSourceUv);
 	}
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity_manager.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 #include "sky_entity.hpp"
 
 #include <unordered_map>
@@ -13,7 +13,7 @@ class SkyEntityManager final : public BaseEntityManager
 public:
 	SkyEntityManager();
 
-	void inject(shared_ptr<RenderBus> renderBus);
+	void inject(shared_ptr<RenderStorage> renderStorage);
 	void update();
 	void createEntity(const string& id);
 	void deleteEntity(const string& id);
@@ -33,5 +33,5 @@ private:
 
 	unordered_map<string, shared_ptr<SkyEntity>> _entities;
 
-	shared_ptr<RenderBus> _renderBus = nullptr;
+	shared_ptr<RenderStorage> _renderStorage = nullptr;
 };

@@ -38,9 +38,9 @@ void Quad2dEntityManager::createEntity(const string& id, bool isCentered)
 
 	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
 	entity->setCentered(isCentered);
-	entity->setDepth(_renderBus->getGuiDepth());
+	entity->setDepth(_renderStorage->getGuiDepth());
 
-	_renderBus->setGuiDepth(_renderBus->getGuiDepth() + 1);
+	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }
 
 void Quad2dEntityManager::deleteEntity(const string& id)
@@ -63,9 +63,9 @@ const bool Quad2dEntityManager::isEntityExisting(const string& id) const
 	return (_entities.find(id) != _entities.end());
 }
 
-void Quad2dEntityManager::inject(shared_ptr<RenderBus> renderBus)
+void Quad2dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
-	_renderBus = renderBus;
+	_renderStorage = renderStorage;
 }
 
 void Quad2dEntityManager::update()

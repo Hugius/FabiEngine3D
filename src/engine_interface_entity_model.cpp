@@ -48,7 +48,7 @@ void EngineInterface::model_setDiffuseMap(const string& id, const string& partId
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -78,7 +78,7 @@ void EngineInterface::model_setEmissionMap(const string& id, const string& partI
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -108,7 +108,7 @@ void EngineInterface::model_setSpecularMap(const string& id, const string& partI
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -138,7 +138,7 @@ void EngineInterface::model_setNormalMap(const string& id, const string& partId,
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -168,7 +168,7 @@ void EngineInterface::model_setReflectionMap(const string& id, const string& par
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}

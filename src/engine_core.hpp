@@ -4,7 +4,7 @@
 #include "image_loader.hpp"
 #include "audio_loader.hpp"
 #include "input_handler.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 #include "render_window.hpp"
 #include "camera.hpp"
 #include "master_renderer.hpp"
@@ -71,7 +71,7 @@ public:
 	const shared_ptr<MasterRenderer> getMasterRenderer() const;
 	const shared_ptr<VertexBufferCache> getVertexBufferCache() const;
 	const shared_ptr<TextureBufferCache> getTextureBufferCache() const;
-	const shared_ptr<RenderBus> getRenderBus() const;
+	const shared_ptr<RenderStorage> getRenderStorage() const;
 	const shared_ptr<Camera> getCamera() const;
 	const shared_ptr<Raycaster> getRaycaster() const;
 	const shared_ptr<CameraCollisionDetector> getCameraCollisionDetector() const;
@@ -111,7 +111,7 @@ private:
 	shared_ptr<MasterRenderer> _masterRenderer = nullptr;
 	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
 	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;
-	shared_ptr<RenderBus> _renderBus = nullptr;
+	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<Raycaster> _raycaster = nullptr;
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;

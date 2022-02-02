@@ -8,7 +8,7 @@ class Raycaster final
 {
 public:
 	void inject(shared_ptr<TerrainEntityManager> terrainManager);
-	void inject(shared_ptr<RenderBus> renderBus);
+	void inject(shared_ptr<RenderStorage> renderStorage);
 	void update(const ivec2& cursorPosition);
 	void setTerrainPointingEnabled(bool value);
 	void setTerrainPointingDistance(float distance);
@@ -44,6 +44,6 @@ private:
 
 	Ray _cursorRay = Ray(fvec3(0.0f), fvec3(0.0f));
 
-	shared_ptr<RenderBus> _renderBus = nullptr;
+	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
 };

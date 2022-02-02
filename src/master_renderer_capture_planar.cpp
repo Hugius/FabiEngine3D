@@ -22,7 +22,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	if(reflectiveModelEntities.empty())
 	{
-		_renderBus->setPlanarReflectionMap(nullptr);
+		_renderStorage->setPlanarReflectionMap(nullptr);
 		return;
 	}
 
@@ -61,21 +61,21 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	const auto cameraDistance = fabsf(_camera->getPosition().y - _renderBus->getPlanarReflectionHeight());
+	const auto cameraDistance = fabsf(_camera->getPosition().y - _renderStorage->getPlanarReflectionHeight());
 	const auto originalCameraPosition = _camera->getPosition();
 	const auto originalCameraPitch = _camera->getPitch();
-	const auto wasSkyExposureEnabled = _renderBus->isSkyExposureEnabled();
+	const auto wasSkyExposureEnabled = _renderStorage->isSkyExposureEnabled();
 
 	_camera->setPosition(fvec3(originalCameraPosition.x, (originalCameraPosition.y - (cameraDistance * 2.0f)), originalCameraPosition.z));
 	_camera->setPitch(-originalCameraPitch);
 	_camera->updateMatrices();
 
-	_renderBus->setMinPosition(fvec3(-FLT_MAX, _renderBus->getPlanarReflectionHeight(), -FLT_MAX));
-	_renderBus->setCameraPosition(originalCameraPosition);
-	_renderBus->setCameraPitch(originalCameraPitch);
-	_renderBus->setReflectionsEnabled(false);
-	_renderBus->setRefractionsEnabled(false);
-	_renderBus->setSkyExposureEnabled(false);
+	_renderStorage->setMinPosition(fvec3(-FLT_MAX, _renderStorage->getPlanarReflectionHeight(), -FLT_MAX));
+	_renderStorage->setCameraPosition(originalCameraPosition);
+	_renderStorage->setCameraPitch(originalCameraPitch);
+	_renderStorage->setReflectionsEnabled(false);
+	_renderStorage->setRefractionsEnabled(false);
+	_renderStorage->setSkyExposureEnabled(false);
 
 	_renderSkyEntity();
 	_renderTerrainEntity();
@@ -107,11 +107,11 @@ void MasterRenderer::_capturePlanarReflections()
 	_camera->setPosition(originalCameraPosition);
 	_camera->updateMatrices();
 
-	_renderBus->setPlanarReflectionMap(_planarReflectionCaptor->getTexture(0));
-	_renderBus->setMinPosition(fvec3(-FLT_MAX));
-	_renderBus->setReflectionsEnabled(true);
-	_renderBus->setRefractionsEnabled(true);
-	_renderBus->setSkyExposureEnabled(wasSkyExposureEnabled);
+	_renderStorage->setPlanarReflectionMap(_planarReflectionCaptor->getTexture(0));
+	_renderStorage->setMinPosition(fvec3(-FLT_MAX));
+	_renderStorage->setReflectionsEnabled(true);
+	_renderStorage->setRefractionsEnabled(true);
+	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);
 
 	_planarReflectionCaptor->unbind();
 }

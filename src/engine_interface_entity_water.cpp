@@ -91,7 +91,7 @@ void EngineInterface::water_setDudvMap(const string& id, const string& value)
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -121,7 +121,7 @@ void EngineInterface::water_setNormalMap(const string& id, const string& value)
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -151,7 +151,7 @@ void EngineInterface::water_setDisplacementMap(const string& id, const string& v
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}

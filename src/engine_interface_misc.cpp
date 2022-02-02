@@ -7,7 +7,7 @@
 
 void EngineInterface::misc_setCursorEntityId(const string& value)
 {
-	_core->getRenderBus()->setCursorEntityId(value);
+	_core->getRenderStorage()->setCursorEntityId(value);
 }
 
 void EngineInterface::misc_setVsyncEnabled(bool value)
@@ -144,7 +144,7 @@ void EngineInterface::misc_startMillisecondTimer()
 
 const unsigned int EngineInterface::misc_getTriangleCount() const
 {
-	return _core->getRenderBus()->getTriangleCount();
+	return _core->getRenderStorage()->getTriangleCount();
 }
 
 const unsigned int EngineInterface::misc_getUpdateCountPerSecond() const
@@ -303,7 +303,7 @@ const vector<pair<string, int>> EngineInterface::misc_getRenderProfilingStatisti
 
 const string EngineInterface::misc_getCursorEntityId() const
 {
-	return _core->getRenderBus()->getCursorEntityId();
+	return _core->getRenderStorage()->getCursorEntityId();
 }
 
 const bool EngineInterface::misc_isVsyncEnabled() const

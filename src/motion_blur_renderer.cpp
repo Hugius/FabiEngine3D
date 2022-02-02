@@ -1,5 +1,5 @@
 #include "motion_blur_renderer.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 
 void MotionBlurRenderer::bind()
 {
@@ -7,29 +7,29 @@ void MotionBlurRenderer::bind()
 
 	_shader->uploadUniform("u_sceneMap", 0);
 	_shader->uploadUniform("u_motionBlurMap", 1);
-	_shader->uploadUniform("u_mixValue", _renderBus->getMotionBlurMixValue());
-	_shader->uploadUniform("u_isMotionBlurEnabled", _renderBus->isMotionBlurEnabled());
+	_shader->uploadUniform("u_mixValue", _renderStorage->getMotionBlurMixValue());
+	_shader->uploadUniform("u_isMotionBlurEnabled", _renderStorage->isMotionBlurEnabled());
 
-	if(_renderBus->getFinalSceneMap() != nullptr)
+	if(_renderStorage->getFinalSceneMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneMap()->getId());
 	}
-	if(_renderBus->getMotionBlurMap() != nullptr)
+	if(_renderStorage->getMotionBlurMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getMotionBlurMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getMotionBlurMap()->getId());
 	}
 }
 
 void MotionBlurRenderer::unbind()
 {
-	if(_renderBus->getFinalSceneMap() != nullptr)
+	if(_renderStorage->getFinalSceneMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(_renderBus->getMotionBlurMap() != nullptr)
+	if(_renderStorage->getMotionBlurMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);

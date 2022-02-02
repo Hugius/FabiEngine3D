@@ -69,7 +69,7 @@
     <ClCompile Include="..\..\..\src\master_renderer_lifecycle.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\render_bus.cpp">
+    <ClCompile Include="..\..\..\src\render_storage.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\render_window.cpp">
@@ -170,7 +170,7 @@
     <ClInclude Include="..\..\..\src\master_renderer.hpp">
       <Filter>Master Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\render_bus.hpp">
+    <ClInclude Include="..\..\..\src\render_storage.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\render_window.hpp">

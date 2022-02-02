@@ -1,5 +1,5 @@
 #include "terrain_entity_depth_renderer.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 
 using std::min;
 using std::max;
@@ -8,8 +8,8 @@ void TerrainEntityDepthRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_cameraView", _renderBus->getCameraView());
-	_shader->uploadUniform("u_cameraProjection", _renderBus->getCameraProjection());
+	_shader->uploadUniform("u_cameraView", _renderStorage->getCameraView());
+	_shader->uploadUniform("u_cameraProjection", _renderStorage->getCameraProjection());
 
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
@@ -40,12 +40,12 @@ void TerrainEntityDepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 		return;
 	}
 
-	_shader->uploadUniform("u_minX", _renderBus->getMinPosition().x);
-	_shader->uploadUniform("u_maxX", _renderBus->getMaxPosition().x);
-	_shader->uploadUniform("u_minY", _renderBus->getMinPosition().y);
-	_shader->uploadUniform("u_maxY", _renderBus->getMaxPosition().y);
-	_shader->uploadUniform("u_minZ", _renderBus->getMinPosition().z);
-	_shader->uploadUniform("u_maxZ", _renderBus->getMaxPosition().z);
+	_shader->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
+	_shader->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
+	_shader->uploadUniform("u_minY", _renderStorage->getMinPosition().y);
+	_shader->uploadUniform("u_maxY", _renderStorage->getMaxPosition().y);
+	_shader->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
+	_shader->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
 
 	glEnable(GL_CULL_FACE);
 

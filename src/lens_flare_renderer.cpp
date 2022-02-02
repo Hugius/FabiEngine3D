@@ -1,5 +1,5 @@
 #include "lens_flare_renderer.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 
 void LensFlareRenderer::bind()
 {
@@ -8,45 +8,45 @@ void LensFlareRenderer::bind()
 	_shader->uploadUniform("u_depthMap", 0);
 	_shader->uploadUniform("u_sceneMap", 1);
 	_shader->uploadUniform("u_flareMap", 2);
-	_shader->uploadUniform("u_cameraNear", _renderBus->getCameraNear());
-	_shader->uploadUniform("u_cameraFar", _renderBus->getCameraFar());
-	_shader->uploadUniform("u_lensFlareOpacity", _renderBus->getLensFlareOpacity());
-	_shader->uploadUniform("u_lensFlareIntensity", _renderBus->getLensFlareIntensity());
-	_shader->uploadUniform("u_cameraPosition", _renderBus->getCameraPosition());
-	_shader->uploadUniform("u_flareSourcePosition", _renderBus->getFlareSourcePosition());
-	_shader->uploadUniform("u_flareSourceUv", _renderBus->getFlareSourceUv());
-	_shader->uploadUniform("u_isLensFlareEnabled", _renderBus->isLensFlareEnabled());
+	_shader->uploadUniform("u_cameraNear", _renderStorage->getCameraNear());
+	_shader->uploadUniform("u_cameraFar", _renderStorage->getCameraFar());
+	_shader->uploadUniform("u_lensFlareOpacity", _renderStorage->getLensFlareOpacity());
+	_shader->uploadUniform("u_lensFlareIntensity", _renderStorage->getLensFlareIntensity());
+	_shader->uploadUniform("u_cameraPosition", _renderStorage->getCameraPosition());
+	_shader->uploadUniform("u_flareSourcePosition", _renderStorage->getFlareSourcePosition());
+	_shader->uploadUniform("u_flareSourceUv", _renderStorage->getFlareSourceUv());
+	_shader->uploadUniform("u_isLensFlareEnabled", _renderStorage->isLensFlareEnabled());
 
-	if(_renderBus->getDepthMap() != nullptr)
+	if(_renderStorage->getDepthMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getDepthMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getDepthMap()->getId());
 	}
-	if(_renderBus->getFinalSceneMap() != nullptr)
+	if(_renderStorage->getFinalSceneMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneMap()->getId());
 	}
-	if(_renderBus->getLensFlareMap() != nullptr)
+	if(_renderStorage->getLensFlareMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getLensFlareMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getLensFlareMap()->getId());
 	}
 }
 
 void LensFlareRenderer::unbind()
 {
-	if(_renderBus->getDepthMap() != nullptr)
+	if(_renderStorage->getDepthMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(_renderBus->getFinalSceneMap() != nullptr)
+	if(_renderStorage->getFinalSceneMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(_renderBus->getLensFlareMap() != nullptr)
+	if(_renderStorage->getLensFlareMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, 0);

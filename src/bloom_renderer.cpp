@@ -1,5 +1,5 @@
 #include "bloom_renderer.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 
 void BloomRenderer::bind()
 {
@@ -7,28 +7,28 @@ void BloomRenderer::bind()
 
 	_shader->uploadUniform("u_sceneMap", 0);
 	_shader->uploadUniform("u_bloomMap", 1);
-	_shader->uploadUniform("u_isBloomEnabled", _renderBus->isBloomEnabled());
+	_shader->uploadUniform("u_isBloomEnabled", _renderStorage->isBloomEnabled());
 
-	if(_renderBus->getFinalSceneMap() != nullptr)
+	if(_renderStorage->getFinalSceneMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneMap()->getId());
 	}
-	if(_renderBus->getBloomMap() != nullptr)
+	if(_renderStorage->getBloomMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderBus->getBloomMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getBloomMap()->getId());
 	}
 }
 
 void BloomRenderer::unbind()
 {
-	if(_renderBus->getFinalSceneMap() != nullptr)
+	if(_renderStorage->getFinalSceneMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(_renderBus->getBloomMap() != nullptr)
+	if(_renderStorage->getBloomMap() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);

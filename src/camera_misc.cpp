@@ -273,9 +273,9 @@ void Camera::updateMatrices()
 
 	_projection = Math::createPerspectiveProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _near, _far);
 
-	_renderBus->setCameraUp(_up);
-	_renderBus->setCameraFront(_front);
-	_renderBus->setCameraRight(_right);
-	_renderBus->setCameraView(_view);
-	_renderBus->setCameraProjection(_projection);
+	_renderStorage->setCameraUp(_up);
+	_renderStorage->setCameraFront(_front);
+	_renderStorage->setCameraRight(_right);
+	_renderStorage->setCameraView(_view);
+	_renderStorage->setCameraProjection(_projection);
 }

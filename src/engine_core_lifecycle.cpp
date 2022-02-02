@@ -32,7 +32,7 @@ EngineCore::EngineCore()
 	_masterRenderer = make_shared<MasterRenderer>();
 	_vertexBufferCache = make_shared<VertexBufferCache>();
 	_textureBufferCache = make_shared<TextureBufferCache>();
-	_renderBus = make_shared<RenderBus>();
+	_renderStorage = make_shared<RenderStorage>();
 	_camera = make_shared<Camera>();
 	_raycaster = make_shared<Raycaster>();
 	_cameraCollisionHandler = make_shared<CameraCollisionHandler>();
@@ -45,25 +45,25 @@ EngineCore::EngineCore()
 	_sound3dPlayer = make_shared<Sound3dPlayer>();
 	_timer = make_shared<Timer>();
 
-	_skyEntityManager->inject(_renderBus);
+	_skyEntityManager->inject(_renderStorage);
 	_terrainEntityManager->inject(_imageLoader);
-	_modelEntityManager->inject(_renderBus);
+	_modelEntityManager->inject(_renderStorage);
 	_modelEntityManager->inject(_timer);
 	_modelEntityManager->inject(_reflectionEntityManager);
 	_modelEntityManager->inject(_meshLoader);
 	_modelEntityManager->inject(_vertexBufferCache);
-	_quad3dEntityManager->inject(_renderBus);
-	_text3dEntityManager->inject(_renderBus);
+	_quad3dEntityManager->inject(_renderStorage);
+	_text3dEntityManager->inject(_renderStorage);
 	_text3dEntityManager->inject(_imageLoader);
 	_text3dEntityManager->inject(_textureBufferCache);
-	_quad2dEntityManager->inject(_renderBus);
-	_text2dEntityManager->inject(_renderBus);
+	_quad2dEntityManager->inject(_renderStorage);
+	_text2dEntityManager->inject(_renderStorage);
 	_text2dEntityManager->inject(_imageLoader);
 	_text2dEntityManager->inject(_textureBufferCache);
 	_aabbEntityManager->inject(_modelEntityManager);
 	_aabbEntityManager->inject(_quad3dEntityManager);
 	_aabbEntityManager->inject(_text3dEntityManager);
-	_masterRenderer->inject(_renderBus);
+	_masterRenderer->inject(_renderStorage);
 	_masterRenderer->inject(_camera);
 	_masterRenderer->inject(_timer);
 	_masterRenderer->inject(_skyEntityManager);
@@ -78,10 +78,10 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_pointlightEntityManager);
 	_masterRenderer->inject(_spotlightEntityManager);
 	_masterRenderer->inject(_reflectionEntityManager);
-	_camera->inject(_renderBus);
+	_camera->inject(_renderStorage);
 	_camera->inject(_renderWindow);
 	_raycaster->inject(_terrainEntityManager);
-	_raycaster->inject(_renderBus);
+	_raycaster->inject(_renderStorage);
 	_cameraCollisionHandler->inject(_terrainEntityManager);
 	_cameraCollisionHandler->inject(_aabbEntityManager);
 	_cameraCollisionHandler->inject(_camera);
@@ -221,7 +221,7 @@ void EngineCore::start()
 
 			if(!Config::getInst().isApplicationExported())
 			{
-				_renderBus->resetTriangleCount();
+				_renderStorage->resetTriangleCount();
 
 				_masterRenderer->renderApplication();
 
@@ -251,7 +251,7 @@ void EngineCore::start()
 				renderLag = max(0.0f, renderLag);
 			}
 
-			_renderBus->resetTriangleCount();
+			_renderStorage->resetTriangleCount();
 
 			_masterRenderer->renderApplication();
 

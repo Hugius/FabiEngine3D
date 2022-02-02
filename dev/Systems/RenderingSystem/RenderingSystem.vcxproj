@@ -41,7 +41,7 @@
     <ClCompile Include="..\..\..\src\quad2d_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\model_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\vertex_buffer.cpp" />
-    <ClCompile Include="..\..\..\src\render_bus.cpp" />
+    <ClCompile Include="..\..\..\src\render_storage.cpp" />
     <ClCompile Include="..\..\..\src\capture_buffer.cpp" />
     <ClCompile Include="..\..\..\src\master_renderer_capture_cube.cpp" />
     <ClCompile Include="..\..\..\src\master_renderer_capture_misc.cpp" />
@@ -76,7 +76,7 @@
     <ClInclude Include="..\..\..\src\quad2d_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\model_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\vertex_buffer.hpp" />
-    <ClInclude Include="..\..\..\src\render_bus.hpp" />
+    <ClInclude Include="..\..\..\src\render_storage.hpp" />
     <ClInclude Include="..\..\..\src\capture_buffer.hpp" />
     <ClInclude Include="..\..\..\src\master_renderer.hpp" />
     <ClInclude Include="..\..\..\src\shader_buffer.hpp" />

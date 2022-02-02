@@ -23,9 +23,9 @@ const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEnt
 	return _entities;
 }
 
-void ModelEntityManager::inject(shared_ptr<RenderBus> renderBus)
+void ModelEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
-	_renderBus = renderBus;
+	_renderStorage = renderStorage;
 }
 
 void ModelEntityManager::inject(shared_ptr<Timer> timer)
@@ -150,7 +150,7 @@ void ModelEntityManager::update()
 				abort();
 			}
 
-			const auto cameraPosition = _renderBus->getCameraPosition();
+			const auto cameraPosition = _renderStorage->getCameraPosition();
 			const auto entityPosition = entity->getBasePosition();
 			const auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
 

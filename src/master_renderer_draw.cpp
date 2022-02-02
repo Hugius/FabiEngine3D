@@ -1,5 +1,5 @@
 #include "master_renderer.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 
 #include <functional>
 
@@ -44,7 +44,7 @@ void MasterRenderer::renderApplication()
 	_timer->startDeltaPart("3dEntityRender");
 	_worldColorCaptor->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	_renderBus->setTriangleCountingEnabled(true);
+	_renderStorage->setTriangleCountingEnabled(true);
 	_renderSkyEntity();
 	_renderTerrainEntity();
 	_renderWaterEntity();
@@ -55,11 +55,11 @@ void MasterRenderer::renderApplication()
 	_renderTransparentModelEntities();
 	_renderTransparentQuad3dEntities();
 	_renderTransparentText3dEntities();
-	_renderBus->setTriangleCountingEnabled(false);
+	_renderStorage->setTriangleCountingEnabled(false);
 	_worldColorCaptor->unbind();
-	_renderBus->setPrimarySceneMap(_worldColorCaptor->getTexture(0));
-	_renderBus->setSecondarySceneMap(_worldColorCaptor->getTexture(1));
-	_renderBus->setFinalSceneMap(_renderBus->getPrimarySceneMap());
+	_renderStorage->setPrimarySceneMap(_worldColorCaptor->getTexture(0));
+	_renderStorage->setSecondarySceneMap(_worldColorCaptor->getTexture(1));
+	_renderStorage->setFinalSceneMap(_renderStorage->getPrimarySceneMap());
 	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("postProcessing");
@@ -75,9 +75,9 @@ void MasterRenderer::renderApplication()
 	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("2dEntityRender");
-	_renderBus->setTriangleCountingEnabled(true);
+	_renderStorage->setTriangleCountingEnabled(true);
 	_renderGUI();
-	_renderBus->setTriangleCountingEnabled(false);
+	_renderStorage->setTriangleCountingEnabled(false);
 	_timer->stopDeltaPart();
 }
 
@@ -347,7 +347,7 @@ void MasterRenderer::_renderAabbEntities()
 
 void MasterRenderer::_renderFinalSceneMap()
 {
-	_renderSurface->setDiffuseMap(_renderBus->getFinalSceneMap());
+	_renderSurface->setDiffuseMap(_renderStorage->getFinalSceneMap());
 
 	_quad2dEntityColorRenderer.bind();
 	_quad2dEntityColorRenderer.render(_renderSurface);
@@ -363,7 +363,7 @@ void MasterRenderer::_renderGUI()
 		map<unsigned int, shared_ptr<BaseEntity>> orderedEntityMap;
 		for(const auto& [key, entity] : _quad2dEntityManager->getEntities())
 		{
-			if(entity->getId() != _renderBus->getCursorEntityId())
+			if(entity->getId() != _renderStorage->getCursorEntityId())
 			{
 				orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
 			}
@@ -392,9 +392,9 @@ void MasterRenderer::_renderGUI()
 			}
 		}
 
-		if(!_renderBus->getCursorEntityId().empty())
+		if(!_renderStorage->getCursorEntityId().empty())
 		{
-			_quad2dEntityColorRenderer.render(_quad2dEntityManager->getEntities().at(_renderBus->getCursorEntityId()));
+			_quad2dEntityColorRenderer.render(_quad2dEntityManager->getEntities().at(_renderStorage->getCursorEntityId()));
 		}
 
 		_quad2dEntityColorRenderer.unbind();

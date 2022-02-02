@@ -1,5 +1,5 @@
 #include "text3d_entity_manager.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 #include "logger.hpp"
 
 using std::make_shared;
@@ -35,9 +35,9 @@ Text3dEntityManager::Text3dEntityManager()
 
 }
 
-void Text3dEntityManager::inject(shared_ptr<RenderBus> renderBus)
+void Text3dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
-	_renderBus = renderBus;
+	_renderStorage = renderStorage;
 }
 
 void Text3dEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
@@ -84,7 +84,7 @@ void Text3dEntityManager::createEntity(const string& id, const string& fontMapPa
 		if(image != nullptr)
 		{
 			texture = make_shared<TextureBuffer>(image);
-			texture->loadAnisotropicFiltering(_renderBus->getAnisotropicFilteringQuality());
+			texture->loadAnisotropicFiltering(_renderStorage->getAnisotropicFilteringQuality());
 
 			_textureBufferCache->store2dBuffer(fontMapPath, texture);
 		}
@@ -114,7 +114,7 @@ void Text3dEntityManager::update()
 		if(isFacingCameraHorizontally || isFacingCameraVertically)
 		{
 			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y * 0.5f), 0.0f));
-			auto direction = (position - _renderBus->getCameraPosition());
+			auto direction = (position - _renderStorage->getCameraPosition());
 
 			auto degreesX = Math::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
 			auto degreesY = Math::convertToDegrees(atan2f(direction.z, direction.x));

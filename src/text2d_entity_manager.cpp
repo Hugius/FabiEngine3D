@@ -55,9 +55,9 @@ void Text2dEntityManager::createEntity(const string& id, const string& fontMapPa
 	entity->setFontMapPath(fontMapPath);
 	entity->setCentered(isCentered);
 	entity->setContent("text");
-	entity->setDepth(_renderBus->getGuiDepth());
+	entity->setDepth(_renderStorage->getGuiDepth());
 
-	_renderBus->setGuiDepth(_renderBus->getGuiDepth() + 1);
+	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }
 
 void Text2dEntityManager::deleteEntity(const string& id)
@@ -80,9 +80,9 @@ const bool Text2dEntityManager::isEntityExisting(const string& id) const
 	return (_entities.find(id) != _entities.end());
 }
 
-void Text2dEntityManager::inject(shared_ptr<RenderBus> renderBus)
+void Text2dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
-	_renderBus = renderBus;
+	_renderStorage = renderStorage;
 }
 
 void Text2dEntityManager::update()

@@ -69,7 +69,7 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 	glBindVertexArray(entity->getMesh()->getVaoId());
 
 	glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
-	_renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
+	_renderStorage->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 

@@ -1,7 +1,7 @@
 #include "capture_buffer.hpp"
 #include "logger.hpp"
 #include "configuration.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 
 using std::make_shared;
 

@@ -1,5 +1,5 @@
 #include "sky_entity_manager.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 #include "logger.hpp"
 
 using std::make_shared;
@@ -59,9 +59,9 @@ SkyEntityManager::SkyEntityManager()
 
 }
 
-void SkyEntityManager::inject(shared_ptr<RenderBus> renderBus)
+void SkyEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
-	_renderBus = renderBus;
+	_renderStorage = renderStorage;
 }
 
 shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& id)

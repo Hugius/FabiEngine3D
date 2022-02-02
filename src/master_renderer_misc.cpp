@@ -119,41 +119,41 @@ void MasterRenderer::inject(shared_ptr<ReflectionEntityManager> reflectionEntity
 	_reflectionEntityManager = reflectionEntityManager;
 }
 
-void MasterRenderer::inject(shared_ptr<RenderBus> renderBus)
+void MasterRenderer::inject(shared_ptr<RenderStorage> renderStorage)
 {
-	_renderBus = renderBus;
+	_renderStorage = renderStorage;
 
-	_skyEntityColorRenderer.inject(_renderBus);
-	_terrainEntityColorRenderer.inject(_renderBus);
-	_terrainEntityDepthRenderer.inject(_renderBus);
-	_waterEntityColorRenderer.inject(_renderBus);
-	_waterEntityDepthRenderer.inject(_renderBus);
-	_modelEntityColorRenderer.inject(_renderBus);
-	_modelEntityDepthRenderer.inject(_renderBus);
-	_modelEntityShadowRenderer.inject(_renderBus);
-	_quad3dEntityColorRenderer.inject(_renderBus);
-	_quad3dEntityDepthRenderer.inject(_renderBus);
-	_quad3dEntityShadowRenderer.inject(_renderBus);
-	_aabbEntityColorRenderer.inject(_renderBus);
-	_aabbEntityDepthRenderer.inject(_renderBus);
-	_quad2dEntityColorRenderer.inject(_renderBus);
-	_antiAliasingRenderer.inject(_renderBus);
-	_bloomRenderer.inject(_renderBus);
-	_dofRenderer.inject(_renderBus);
-	_lensFlareRenderer.inject(_renderBus);
-	_motionBlurRenderer.inject(_renderBus);
-	_bloomBlurRendererHighQuality.inject(_renderBus);
-	_bloomBlurRendererLowQuality.inject(_renderBus);
-	_dofBlurRenderer.inject(_renderBus);
-	_motionBlurBlurRenderer.inject(_renderBus);
+	_skyEntityColorRenderer.inject(_renderStorage);
+	_terrainEntityColorRenderer.inject(_renderStorage);
+	_terrainEntityDepthRenderer.inject(_renderStorage);
+	_waterEntityColorRenderer.inject(_renderStorage);
+	_waterEntityDepthRenderer.inject(_renderStorage);
+	_modelEntityColorRenderer.inject(_renderStorage);
+	_modelEntityDepthRenderer.inject(_renderStorage);
+	_modelEntityShadowRenderer.inject(_renderStorage);
+	_quad3dEntityColorRenderer.inject(_renderStorage);
+	_quad3dEntityDepthRenderer.inject(_renderStorage);
+	_quad3dEntityShadowRenderer.inject(_renderStorage);
+	_aabbEntityColorRenderer.inject(_renderStorage);
+	_aabbEntityDepthRenderer.inject(_renderStorage);
+	_quad2dEntityColorRenderer.inject(_renderStorage);
+	_antiAliasingRenderer.inject(_renderStorage);
+	_bloomRenderer.inject(_renderStorage);
+	_dofRenderer.inject(_renderStorage);
+	_lensFlareRenderer.inject(_renderStorage);
+	_motionBlurRenderer.inject(_renderStorage);
+	_bloomBlurRendererHighQuality.inject(_renderStorage);
+	_bloomBlurRendererLowQuality.inject(_renderStorage);
+	_dofBlurRenderer.inject(_renderStorage);
+	_motionBlurBlurRenderer.inject(_renderStorage);
 }
 
 void MasterRenderer::reloadBloomBlurQuality()
 {
 	const auto viewportSize = Config::getInst().getViewportSize();
 
-	_bloomBlurCaptorHighQuality = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderBus->getBloomQuality()), 1, true);
-	_bloomBlurCaptorLowQuality = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / (_renderBus->getBloomQuality() * 2)), 1, true);
+	_bloomBlurCaptorHighQuality = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderStorage->getBloomQuality()), 1, true);
+	_bloomBlurCaptorLowQuality = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / (_renderStorage->getBloomQuality() * 2)), 1, true);
 
 	_bloomBlurRendererHighQuality.inject(_bloomBlurCaptorHighQuality);
 	_bloomBlurRendererLowQuality.inject(_bloomBlurCaptorLowQuality);
@@ -163,7 +163,7 @@ void MasterRenderer::reloadDofBlurQuality()
 {
 	const auto viewportSize = Config::getInst().getViewportSize();
 
-	_dofBlurCaptor = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderBus->getDofQuality()), 1, true);
+	_dofBlurCaptor = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderStorage->getDofQuality()), 1, true);
 
 	_dofBlurRenderer.inject(_dofBlurCaptor);
 }
@@ -172,32 +172,32 @@ void MasterRenderer::reloadMotionBlurBlurQuality()
 {
 	const auto viewportSize = Config::getInst().getViewportSize();
 
-	_motionBlurBlurCaptor = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderBus->getMotionBlurQuality()), 1, true);
+	_motionBlurBlurCaptor = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderStorage->getMotionBlurQuality()), 1, true);
 
 	_motionBlurBlurRenderer.inject(_motionBlurBlurCaptor);
 }
 
 void MasterRenderer::reloadCubeReflectionQuality()
 {
-	_cubeReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getCubeReflectionQuality()), 1, false);
+	_cubeReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getCubeReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadPlanarReflectionQuality()
 {
-	_planarReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getPlanarReflectionQuality()), 1, false);
+	_planarReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getPlanarReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadWaterReflectionQuality()
 {
-	_waterReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getPlanarReflectionQuality()), 1, false);
+	_waterReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getPlanarReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadWaterRefractionQuality()
 {
-	_waterRefractionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getPlanarRefractionQuality()), 1, false);
+	_waterRefractionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getPlanarRefractionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadShadowQuality()
 {
-	_shadowCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getShadowQuality()));
+	_shadowCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderStorage->getShadowQuality()));
 }

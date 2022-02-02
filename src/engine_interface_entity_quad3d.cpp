@@ -113,7 +113,7 @@ void EngineInterface::quad3d_setDiffuseMap(const string& id, const string& value
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}
@@ -143,7 +143,7 @@ void EngineInterface::quad3d_setEmissionMap(const string& id, const string& valu
 			{
 				texture = make_shared<TextureBuffer>(image);
 				texture->loadMipMapping();
-				texture->loadAnisotropicFiltering(_core->getRenderBus()->getAnisotropicFilteringQuality());
+				texture->loadAnisotropicFiltering(_core->getRenderStorage()->getAnisotropicFilteringQuality());
 
 				_core->getTextureBufferCache()->store2dBuffer(value, texture);
 			}

@@ -110,9 +110,9 @@ const shared_ptr<TextureBufferCache> EngineCore::getTextureBufferCache() const
 	return _textureBufferCache;
 }
 
-const shared_ptr<RenderBus> EngineCore::getRenderBus() const
+const shared_ptr<RenderStorage> EngineCore::getRenderStorage() const
 {
-	return _renderBus;
+	return _renderStorage;
 }
 
 const shared_ptr<Camera> EngineCore::getCamera() const

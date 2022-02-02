@@ -1,5 +1,5 @@
 #include "raycaster.hpp"
-#include "render_bus.hpp"
+#include "render_storage.hpp"
 #include "configuration.hpp"
 #include "tools.hpp"
 #include "mathematics.hpp"
@@ -30,9 +30,9 @@ void Raycaster::update(const ivec2& cursorPosition)
 	}
 }
 
-void Raycaster::inject(shared_ptr<RenderBus> renderBus)
+void Raycaster::inject(shared_ptr<RenderStorage> renderStorage)
 {
-	_renderBus = renderBus;
+	_renderStorage = renderStorage;
 }
 
 void Raycaster::inject(shared_ptr<TerrainEntityManager> terrainManager)
@@ -134,12 +134,12 @@ const Ray Raycaster::_calculateCursorRay(const ivec2& cursorPosition) const
 	fvec4 viewCoords = _convertToViewSpace(clipCoords);
 	fvec3 worldCoords = _convertToWorldSpace(viewCoords);
 
-	return Ray(_renderBus->getCameraPosition(), Math::normalize(worldCoords));
+	return Ray(_renderStorage->getCameraPosition(), Math::normalize(worldCoords));
 }
 
 const fvec4 Raycaster::_convertToViewSpace(const fvec4& clipCoords) const
 {
-	auto invertedProjection = Math::invertMatrix(_renderBus->getCameraProjection());
+	auto invertedProjection = Math::invertMatrix(_renderStorage->getCameraProjection());
 	auto viewCoords = (invertedProjection * clipCoords);
 
 	return fvec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
@@ -147,7 +147,7 @@ const fvec4 Raycaster::_convertToViewSpace(const fvec4& clipCoords) const
 
 const fvec3 Raycaster::_convertToWorldSpace(const fvec4& viewCoords) const
 {
-	auto invertedView = Math::invertMatrix(_renderBus->getCameraView());
+	auto invertedView = Math::invertMatrix(_renderStorage->getCameraView());
 	auto worldCoords = (invertedView * viewCoords);
 
 	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);

@@ -16,21 +16,21 @@ void Quad3dEditor::_load()
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
-	_fe3d->gfx_enableAntiAliasing();
+	_fe3d->gfx_setAntiAliasingEnabled(true);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
-	_fe3d->gfx_enableAmbientLighting();
+	_fe3d->gfx_setAmbientLightingEnabled(true);
 	_fe3d->gfx_setAmbientLightingColor(fvec3(1.0f));
 	_fe3d->gfx_setAmbientLightingIntensity(1.0f);
-	_fe3d->gfx_enableDirectionalLighting();
+	_fe3d->gfx_setDirectionalLightingEnabled(true);
 	_fe3d->gfx_setDirectionalLightingColor(fvec3(1.0f));
 	_fe3d->gfx_setDirectionalLightingPosition(fvec3(10000.0f));
 	_fe3d->gfx_setDirectionalLightingIntensity(3.0f);
-	_fe3d->gfx_enableBloom();
+	_fe3d->gfx_setBloomEnabled(true);
 	_fe3d->gfx_setBloomType(BloomType::PARTS);
 	_fe3d->gfx_setBloomIntensity(1.0f);
 	_fe3d->gfx_setBloomBlurCount(5);
 	_fe3d->gfx_setBloomQuality(Config::MAX_BLOOM_QUALITY);
-	_fe3d->gfx_enableShadows();
+	_fe3d->gfx_setShadowsEnabled(true);
 	_fe3d->gfx_setShadowLightness(0.25f);
 	_fe3d->gfx_setShadowQuality(Config::MAX_SHADOW_QUALITY);
 
@@ -58,12 +58,23 @@ void Quad3dEditor::_unload()
 
 	_fe3d->camera_setThirdPersonEnabled(false);
 
-	_fe3d->gfx_disableAntiAliasing(true);
+	_fe3d->gfx_setAntiAliasingEnabled(false);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
-	_fe3d->gfx_disableAmbientLighting(true);
-	_fe3d->gfx_disableDirectionalLighting(true);
-	_fe3d->gfx_disableBloom(true);
-	_fe3d->gfx_disableShadows(true);
+	_fe3d->gfx_setAmbientLightingEnabled(false);
+	_fe3d->gfx_setAmbientLightingColor(fvec3(0.0f));
+	_fe3d->gfx_setAmbientLightingIntensity(0.0f);
+	_fe3d->gfx_setDirectionalLightingEnabled(false);
+	_fe3d->gfx_setDirectionalLightingColor(fvec3(0.0f));
+	_fe3d->gfx_setDirectionalLightingPosition(fvec3(0.0f));
+	_fe3d->gfx_setDirectionalLightingIntensity(0.0f);
+	_fe3d->gfx_setBloomEnabled(false);
+	_fe3d->gfx_setBloomType(BloomType::EVERYTHING);
+	_fe3d->gfx_setBloomIntensity(0.0f);
+	_fe3d->gfx_setBloomBlurCount(0);
+	_fe3d->gfx_setBloomQuality(Config::MIN_BLOOM_QUALITY);
+	_fe3d->gfx_setShadowsEnabled(false);
+	_fe3d->gfx_setShadowLightness(0.0f);
+	_fe3d->gfx_setShadowQuality(Config::MIN_SHADOW_QUALITY);
 
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");

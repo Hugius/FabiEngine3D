@@ -469,7 +469,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			color.b >>
 	//			intensity;
 
-	//		_fe3d->gfx_enableAmbientLighting();
+	//		_fe3d->gfx_setAmbientLightingEnabled(true);
 	//		_fe3d->gfx_setAmbientLightingColor(color);
 	//		_fe3d->gfx_setAmbientLightingIntensity(intensity);
 	//	}
@@ -488,7 +488,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			intensity >>
 	//			quad3dSize;
 
-	//		_fe3d->gfx_enableDirectionalLighting();
+	//		_fe3d->gfx_setDirectionalLightingEnabled(true);
 	//		_fe3d->gfx_setDirectionalLightingPosition(position);
 	//		_fe3d->gfx_setDirectionalLightingIntensity(intensity);
 	//		_fe3d->gfx_setDirectionalLightingColor(color);
@@ -512,7 +512,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			isFollowingCamera >>
 	//			interval;
 
-	//		_fe3d->gfx_enableShadows();
+	//		_fe3d->gfx_setShadowsEnabled(true);
 	//		_fe3d->gfx_setShadowPosition(position);
 	//		_fe3d->gfx_setShadowLookat(center);
 	//		_fe3d->gfx_setShadowSize(size);
@@ -526,7 +526,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		iss >> intensity;
 
-	//		_fe3d->gfx_enableMotionBlur();
+	//		_fe3d->gfx_setMotionBlurEnabled(true);
 	//		_fe3d->gfx_setMotionBlurIntensity(intensity);
 	//	}
 	//	else if(lineType == "GRAPHICS_DOF")
@@ -536,7 +536,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		iss >> isDynamic >> blurDistance >> maxDistance;
 
-	//		_fe3d->gfx_enableDOF();
+	//		_fe3d->gfx_setDOF();
 	//		_fe3d->gfx_setDofDynamic(isDynamic);
 	//		_fe3d->gfx_setDofDynamicDistance(maxDistance);
 	//		_fe3d->gfx_setDofBlurDistance(blurDistance);
@@ -548,7 +548,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
 
-	//		_fe3d->gfx_enableFog();
+	//		_fe3d->gfx_setFog();
 	//		_fe3d->gfx_setFogMinDistance(minDistance);
 	//		_fe3d->gfx_setFogMaxDistance(maxDistance);
 	//		_fe3d->gfx_setFogThickness(thickness);
@@ -565,7 +565,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
-	//		_fe3d->gfx_enableLensFlare();
+	//		_fe3d->gfx_setLensFlare();
 	//		_fe3d->gfx_setLensFlareMap(flareMapPath);
 	//		_fe3d->gfx_setLensFlareIntensity(intensity);
 	//		_fe3d->gfx_setLensFlareSensitivity(sensitivity);
@@ -576,7 +576,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		iss >> intensity >> speed;
 
-	//		_fe3d->gfx_enableSkyExposure();
+	//		_fe3d->gfx_setSkyExposure();
 	//		_fe3d->gfx_setSkyExposureIntensity(intensity);
 	//		_fe3d->gfx_setSkyExposureSpeed(speed);
 	//	}
@@ -587,7 +587,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//		iss >> type >> intensity >> blurCount;
 
-	//		_fe3d->gfx_enableBloom();
+	//		_fe3d->gfx_setBloomEnabled(true);
 	//		_fe3d->gfx_setBloomType(BloomType(type));
 	//		_fe3d->gfx_setBloomIntensity(intensity);
 	//		_fe3d->gfx_setBloomBlurCount(blurCount);

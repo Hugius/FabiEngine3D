@@ -1,174 +1,54 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::gfx_enableAmbientLighting()
+void EngineInterface::gfx_setAmbientLightingEnabled(bool value)
 {
-	_core->getRenderBus()->setAmbientLightingEnabled(true);
+	_core->getRenderBus()->setAmbientLightingEnabled(value);
 }
 
-void EngineInterface::gfx_enableDirectionalLighting()
+void EngineInterface::gfx_setDirectionalLightingEnabled(bool value)
 {
-	_core->getRenderBus()->setDirectionalLightingEnabled(true);
+	_core->getRenderBus()->setDirectionalLightingEnabled(value);
 }
 
-void EngineInterface::gfx_enableFog()
+void EngineInterface::gfx_setFogEnabled(bool value)
 {
-	_core->getRenderBus()->setFogEnabled(true);
+	_core->getRenderBus()->setFogEnabled(value);
 }
 
-void EngineInterface::gfx_enableAntiAliasing()
+void EngineInterface::gfx_setAntiAliasingEnabled(bool value)
 {
-	_core->getRenderBus()->setAntiAliasingEnabled(true);
+	_core->getRenderBus()->setAntiAliasingEnabled(value);
 }
 
-void EngineInterface::gfx_enableShadows()
+void EngineInterface::gfx_setShadowsEnabled(bool value)
 {
-	_core->getRenderBus()->setShadowsEnabled(true);
+	_core->getRenderBus()->setShadowsEnabled(value);
 }
 
-void EngineInterface::gfx_enableBloom()
+void EngineInterface::gfx_setBloomEnabled(bool value)
 {
-	_core->getRenderBus()->setBloomEnabled(true);
+	_core->getRenderBus()->setBloomEnabled(value);
 }
 
-void EngineInterface::gfx_enableSkyExposure()
+void EngineInterface::gfx_setSkyExposureEnabled(bool value)
 {
-	_core->getRenderBus()->setSkyExposureEnabled(true);
+	_core->getRenderBus()->setSkyExposureEnabled(value);
 }
 
-void EngineInterface::gfx_enableDOF()
+void EngineInterface::gfx_setDofEnabled(bool value)
 {
-	_core->getRenderBus()->setDofEnabled(true);
+	_core->getRenderBus()->setDofEnabled(value);
 }
 
-void EngineInterface::gfx_enableMotionBlur()
+void EngineInterface::gfx_setMotionBlurEnabled(bool value)
 {
-	_core->getRenderBus()->setMotionBlurEnabled(true);
+	_core->getRenderBus()->setMotionBlurEnabled(value);
 }
 
-void EngineInterface::gfx_enableLensFlare()
+void EngineInterface::gfx_setLensFlareEnabled(bool value)
 {
-	_core->getRenderBus()->setLensFlareEnabled(true);
-}
-
-void EngineInterface::gfx_disableAmbientLighting(bool mustResetProperties)
-{
-	_core->getRenderBus()->setAmbientLightingEnabled(false);
-
-	if(mustResetProperties)
-	{
-		_core->getRenderBus()->setAmbientLightingColor(1.0f);
-		_core->getRenderBus()->setAmbientLightingIntensity(1.0f);
-	}
-}
-
-void EngineInterface::gfx_disableDirectionalLighting(bool mustResetProperties)
-{
-	_core->getRenderBus()->setDirectionalLightingEnabled(false);
-
-	if(mustResetProperties)
-	{
-		_core->getRenderBus()->setDirectionalLightingPosition(fvec3(0.0f));
-		_core->getRenderBus()->setDirectionalLightingColor(1.0f);
-		_core->getRenderBus()->setDirectionalLightingIntensity(1.0f);
-	}
-}
-
-void EngineInterface::gfx_disableFog(bool mustResetProperties)
-{
-	_core->getRenderBus()->setFogEnabled(false);
-
-	if(mustResetProperties)
-	{
-		_core->getRenderBus()->setMinFogDistance(0.0f);
-		_core->getRenderBus()->setMaxFogDistance(0.0f);
-		_core->getRenderBus()->setFogThickness(0.0f);
-		_core->getRenderBus()->setFogColor(fvec3(0.0f));
-	}
-}
-
-void EngineInterface::gfx_disableAntiAliasing(bool mustResetProperties)
-{
-	_core->getRenderBus()->setAntiAliasingEnabled(false);
-}
-
-void EngineInterface::gfx_disableShadows(bool mustResetProperties)
-{
-	_core->getRenderBus()->setShadowsEnabled(false);
-
-	if(mustResetProperties)
-	{
-		_core->getRenderBus()->setShadowQuality(Config::MIN_SHADOW_QUALITY);
-		_core->getRenderBus()->setShadowPositionOffset(fvec3(0.0f));
-		_core->getRenderBus()->setShadowLookatOffset(fvec3(0.0f));
-		_core->getRenderBus()->setShadowPosition(fvec3(0.0f));
-		_core->getRenderBus()->setShadowLookat(fvec3(0.0f));
-		_core->getRenderBus()->setShadowSize(0.0f);
-		_core->getRenderBus()->setShadowLightness(0.0f);
-		_core->getRenderBus()->setShadowInterval(0);
-		_core->getRenderBus()->setShadowsFollowingCamera(false);
-	}
-}
-
-void EngineInterface::gfx_disableBloom(bool mustResetProperties)
-{
-	_core->getRenderBus()->setBloomEnabled(false);
-
-	if(mustResetProperties)
-	{
-		_core->getRenderBus()->setBloomType(BloomType());
-		_core->getRenderBus()->setBloomIntensity(0.0f);
-		_core->getRenderBus()->setBloomBlurCount(0);
-		_core->getRenderBus()->setBloomQuality(Config::MIN_BLOOM_QUALITY);
-	}
-}
-
-void EngineInterface::gfx_disableSkyExposure(bool mustResetProperties)
-{
-	_core->getRenderBus()->setSkyExposureEnabled(false);
-
-	if(mustResetProperties)
-	{
-		_core->getRenderBus()->setSkyExposureIntensity(0.0f);
-		_core->getRenderBus()->setSkyExposureSpeed(0.0f);
-	}
-}
-
-void EngineInterface::gfx_disableDOF(bool mustResetProperties)
-{
-	_core->getRenderBus()->setDofEnabled(false);
-
-	if(mustResetProperties)
-	{
-		_core->getRenderBus()->setDofDynamic(false);
-		_core->getRenderBus()->setDofDynamicDistance(0.0f);
-		_core->getRenderBus()->setDofBlurDistance(0.0f);
-		_core->getRenderBus()->setDofQuality(Config::MIN_DOF_QUALITY);
-	}
-}
-
-void EngineInterface::gfx_disableMotionBlur(bool mustResetProperties)
-{
-	_core->getRenderBus()->setMotionBlurEnabled(false);
-
-	if(mustResetProperties)
-	{
-		_core->getRenderBus()->setMotionBlurIntensity(0.0f);
-		_core->getRenderBus()->setMotionBlurQuality(Config::MIN_MOTION_BLUR_QUALITY);
-	}
-}
-
-void EngineInterface::gfx_disableLensFlare(bool mustResetProperties)
-{
-	_core->getRenderBus()->setLensFlareEnabled(false);
-
-	if(mustResetProperties)
-	{
-		_core->getRenderBus()->setLensFlareMap(nullptr);
-		_core->getRenderBus()->setLensFlareMapPath("");
-		_core->getRenderBus()->setLensFlareIntensity(0.0f);
-		_core->getRenderBus()->setLensFlareSensitivity(0.0f);
-	}
+	_core->getRenderBus()->setLensFlareEnabled(value);
 }
 
 void EngineInterface::gfx_setPlanarReflectionHeight(float value)

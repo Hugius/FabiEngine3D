@@ -127,7 +127,7 @@ void MasterRenderer::_captureWorldDepth()
 	_renderBus->setDepthMap(_worldDepthCaptor->getTexture(0));
 }
 
-void MasterRenderer::_captureDOF()
+void MasterRenderer::_captureDof()
 {
 	if(_renderBus->isDofEnabled())
 	{

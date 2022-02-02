@@ -4,20 +4,13 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
-	if(functionName == "fe3d:lighting_enable_ambient")
+	if(functionName == "fe3d:lighting_set_ambient_enabled")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->gfx_enableAmbientLighting();
+		auto types = {SVT::BOOLEAN};
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:lighting_disable_ambient")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_disableAmbientLighting(false);
+			_fe3d->gfx_setAmbientLightingEnabled(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -44,20 +37,13 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:lighting_enable_directional")
+	else if(functionName == "fe3d:lighting_set_directional_enabled")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->gfx_enableDirectionalLighting();
+		auto types = {SVT::BOOLEAN};
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:lighting_disable_directional")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_disableDirectionalLighting(false);
+			_fe3d->gfx_setDirectionalLightingEnabled(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -128,23 +114,16 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:lighting_enable_shadows")
+	else if(functionName == "fe3d:lighting_set_shadows_enabled")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		auto types = {SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_enableShadows();
+			_fe3d->gfx_setShadowsEnabled(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 
-		}
-	}
-	else if(functionName == "fe3d:lighting_disable_shadows")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->gfx_disableShadows(false);
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:lighting_set_shadow_position")

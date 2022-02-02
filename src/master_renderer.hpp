@@ -88,7 +88,7 @@ private:
 	void _captureShadows();
 	void _captureAntiAliasing();
 	void _captureBloom();
-	void _captureDOF();
+	void _captureDof();
 	void _captureLensFlare();
 	void _captureMotionBlur();
 

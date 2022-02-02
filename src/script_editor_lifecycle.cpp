@@ -3,6 +3,7 @@
 #include "script_editor.hpp"
 #include "left_viewport_controller.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 void ScriptEditor::_load()
 {
@@ -12,7 +13,7 @@ void ScriptEditor::_load()
 	_fe3d->camera_setYaw(270.0f);
 	_fe3d->camera_setPitch(0.0f);
 
-	_fe3d->gfx_enableBloom();
+	_fe3d->gfx_setBloomEnabled(true);
 	_fe3d->gfx_setBloomType(BloomType::PARTS);
 	_fe3d->gfx_setBloomIntensity(0.95f);
 	_fe3d->gfx_setBloomBlurCount(2);
@@ -21,7 +22,11 @@ void ScriptEditor::_load()
 
 void ScriptEditor::_unload()
 {
-	_fe3d->gfx_disableBloom(true);
+	_fe3d->gfx_setBloomEnabled(false);
+	_fe3d->gfx_setBloomType(BloomType::EVERYTHING);
+	_fe3d->gfx_setBloomIntensity(0.0f);
+	_fe3d->gfx_setBloomBlurCount(0);
+	_fe3d->gfx_setBloomQuality(Config::MIN_BLOOM_QUALITY);
 
 	_fe3d->text3d_deleteAll();
 

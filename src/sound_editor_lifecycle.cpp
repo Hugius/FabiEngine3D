@@ -7,9 +7,9 @@
 
 void SoundEditor::_load()
 {
-	_fe3d->gfx_enableAntiAliasing();
+	_fe3d->gfx_setAntiAliasingEnabled(true);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
-	_fe3d->gfx_enableBloom();
+	_fe3d->gfx_setBloomEnabled(true);
 	_fe3d->gfx_setBloomType(BloomType::PARTS);
 	_fe3d->gfx_setBloomIntensity(1.0f);
 	_fe3d->gfx_setBloomBlurCount(5);
@@ -33,9 +33,13 @@ void SoundEditor::_unload()
 		_fe3d->sound2d_delete(id);
 	}
 
-	_fe3d->gfx_disableAntiAliasing(true);
+	_fe3d->gfx_setAntiAliasingEnabled(false);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
-	_fe3d->gfx_disableBloom(true);
+	_fe3d->gfx_setBloomEnabled(false);
+	_fe3d->gfx_setBloomType(BloomType::EVERYTHING);
+	_fe3d->gfx_setBloomIntensity(0.0f);
+	_fe3d->gfx_setBloomBlurCount(0);
+	_fe3d->gfx_setBloomQuality(Config::MIN_BLOOM_QUALITY);
 
 	_fe3d->quad3d_delete("@@icon");
 

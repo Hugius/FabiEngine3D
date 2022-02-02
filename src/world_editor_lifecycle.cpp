@@ -6,7 +6,7 @@ void WorldEditor::_load()
 {
 	_fe3d->camera_reset();
 
-	_fe3d->gfx_enableAntiAliasing();
+	_fe3d->gfx_setAntiAliasingEnabled(true);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 
 	_skyEditor->loadFromFile();
@@ -101,7 +101,7 @@ void WorldEditor::_load()
 
 void WorldEditor::_unload()
 {
-	_fe3d->gfx_disableAntiAliasing(true);
+	_fe3d->gfx_setAntiAliasingEnabled(false);
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 
 	unloadEditorWorld();

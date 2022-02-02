@@ -429,7 +429,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> color.b
 				>> intensity;
 
-			_fe3d->gfx_enableAmbientLighting();
+			_fe3d->gfx_setAmbientLightingEnabled(true);
 			_fe3d->gfx_setAmbientLightingColor(color);
 			_fe3d->gfx_setAmbientLightingIntensity(intensity);
 		}
@@ -450,7 +450,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> intensity
 				>> quad3dSize;
 
-			_fe3d->gfx_enableDirectionalLighting();
+			_fe3d->gfx_setDirectionalLightingEnabled(true);
 			_fe3d->gfx_setDirectionalLightingPosition(position);
 			_fe3d->gfx_setDirectionalLightingIntensity(intensity);
 			_fe3d->gfx_setDirectionalLightingColor(color);
@@ -478,7 +478,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> interval
 				>> quality;
 
-			_fe3d->gfx_enableShadows();
+			_fe3d->gfx_setShadowsEnabled(true);
 			_fe3d->gfx_setShadowPositionOffset(position);
 			_fe3d->gfx_setShadowLookatOffset(center);
 			_fe3d->gfx_setShadowSize(size);
@@ -523,7 +523,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> maxDistance
 				>> quality;
 
-			_fe3d->gfx_enableDOF();
+			_fe3d->gfx_setDofEnabled(true);
 			_fe3d->gfx_setDofDynamic(isDynamic);
 			_fe3d->gfx_setDofDynamicDistance(maxDistance);
 			_fe3d->gfx_setDofBlurDistance(blurDistance);
@@ -544,7 +544,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> color.g
 				>> color.b;
 
-			_fe3d->gfx_enableFog();
+			_fe3d->gfx_setFogEnabled(true);
 			_fe3d->gfx_setFogMinDistance(minDistance);
 			_fe3d->gfx_setFogMaxDistance(maxDistance);
 			_fe3d->gfx_setFogThickness(thickness);
@@ -570,7 +570,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				flareMapPath = string("projects\\" + getCurrentProjectId() + "\\" + flareMapPath);
 			}
 
-			_fe3d->gfx_enableLensFlare();
+			_fe3d->gfx_setLensFlareEnabled(true);
 			_fe3d->gfx_setLensFlareMap(flareMapPath);
 			_fe3d->gfx_setLensFlareIntensity(intensity);
 			_fe3d->gfx_setLensFlareSensitivity(sensitivity);
@@ -584,7 +584,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> intensity
 				>> speed;
 
-			_fe3d->gfx_enableSkyExposure();
+			_fe3d->gfx_setSkyExposureEnabled(true);
 			_fe3d->gfx_setSkyExposureIntensity(intensity);
 			_fe3d->gfx_setSkyExposureSpeed(speed);
 		}
@@ -601,7 +601,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> blurCount
 				>> quality;
 
-			_fe3d->gfx_enableBloom();
+			_fe3d->gfx_setBloomEnabled(true);
 			_fe3d->gfx_setBloomType(BloomType(type));
 			_fe3d->gfx_setBloomIntensity(intensity);
 			_fe3d->gfx_setBloomBlurCount(blurCount);

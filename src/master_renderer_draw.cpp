@@ -65,7 +65,7 @@ void MasterRenderer::renderApplication()
 	_timer->startDeltaPart("postProcessing");
 	_captureAntiAliasing();
 	_captureBloom();
-	_captureDOF();
+	_captureDof();
 	_captureLensFlare();
 	_captureMotionBlur();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

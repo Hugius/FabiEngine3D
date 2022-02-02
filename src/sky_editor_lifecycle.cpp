@@ -10,7 +10,7 @@ void SkyEditor::_load()
 	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 
-	_fe3d->gfx_enableMotionBlur();
+	_fe3d->gfx_setMotionBlurEnabled(true);
 	_fe3d->gfx_setMotionBlurIntensity(0.1f);
 	_fe3d->gfx_setMotionBlurQuality(Config::MAX_MOTION_BLUR_QUALITY);
 
@@ -24,7 +24,9 @@ void SkyEditor::_unload()
 		_fe3d->sky_delete(id);
 	}
 
-	_fe3d->gfx_disableMotionBlur(true);
+	_fe3d->gfx_setMotionBlurEnabled(false);
+	_fe3d->gfx_setMotionBlurIntensity(0.0f);
+	_fe3d->gfx_setMotionBlurQuality(Config::MIN_MOTION_BLUR_QUALITY);
 
 	_gui->getOverlay()->deleteTextField("skyId");
 

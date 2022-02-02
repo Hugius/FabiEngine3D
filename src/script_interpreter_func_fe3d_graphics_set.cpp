@@ -7,20 +7,13 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
-	if(functionName == "fe3d:graphics_enable_fog")
+	if(functionName == "fe3d:graphics_set_fog_enabled")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->gfx_enableFog();
+		auto types = {SVT::BOOLEAN};
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:graphics_disable_fog")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_disableFog(false);
+			_fe3d->gfx_setFogEnabled(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -69,20 +62,13 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:graphics_enable_dof")
+	else if(functionName == "fe3d:graphics_set_dof_enabled")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->gfx_enableDOF();
+		auto types = {SVT::BOOLEAN};
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:graphics_disable_dof")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_disableDOF(false);
+			_fe3d->gfx_setDofEnabled(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -131,20 +117,13 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:graphics_enable_motion_blur")
+	else if(functionName == "fe3d:graphics_set_motion_blur_enabled")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->gfx_enableMotionBlur();
+		auto types = {SVT::BOOLEAN};
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:graphics_disable_motion_blur")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_disableMotionBlur(false);
+			_fe3d->gfx_setMotionBlurEnabled(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -170,20 +149,13 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:graphics_enable_lens_flare")
+	else if(functionName == "fe3d:graphics_set_lens_flare_enabled")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->gfx_enableLensFlare();
+		auto types = {SVT::BOOLEAN};
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:graphics_disable_lens_flare")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_disableLensFlare(false);
+			_fe3d->gfx_setLensFlareEnabled(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -289,20 +261,13 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			}
 		}
 	}
-	else if(functionName == "fe3d:graphics_enable_bloom")
+	else if(functionName == "fe3d:graphics_set_bloom_enabled")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->gfx_enableBloom();
+		auto types = {SVT::BOOLEAN};
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:graphics_disable_bloom")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_disableBloom(false);
+			_fe3d->gfx_setBloomEnabled(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -329,20 +294,13 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:graphics_enable_sky_exposure")
+	else if(functionName == "fe3d:graphics_set_sky_exposure_enabled")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			_fe3d->gfx_enableSkyExposure();
+		auto types = {SVT::BOOLEAN};
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:graphics_disable_sky_exposure")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d->gfx_disableSkyExposure(false);
+			_fe3d->gfx_setSkyExposureEnabled(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

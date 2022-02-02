@@ -26,14 +26,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if(isEnabled)
-			{
-				_fe3d->gfx_enableShadows();
-			}
-			else
-			{
-				_fe3d->gfx_disableShadows(false);
-			}
+			_fe3d->gfx_setShadowsEnabled(isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
@@ -204,14 +197,7 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if(isEnabled)
-			{
-				_fe3d->gfx_enableDOF();
-			}
-			else
-			{
-				_fe3d->gfx_disableDOF(false);
-			}
+			_fe3d->gfx_setDofEnabled(isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isDynamic")->isHovered())
 		{
@@ -269,14 +255,7 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if(isEnabled)
-			{
-				_fe3d->gfx_enableFog();
-			}
-			else
-			{
-				_fe3d->gfx_disableFog(false);
-			}
+			_fe3d->gfx_setFogEnabled(isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minDistance")->isHovered())
 		{
@@ -349,14 +328,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if(isEnabled)
-			{
-				_fe3d->gfx_enableLensFlare();
-			}
-			else
-			{
-				_fe3d->gfx_disableLensFlare(false);
-			}
+			_fe3d->gfx_setLensFlareEnabled(isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("flareMap")->isHovered())
 		{
@@ -432,14 +404,7 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if(isEnabled)
-			{
-				_fe3d->gfx_enableSkyExposure();
-			}
-			else
-			{
-				_fe3d->gfx_disableSkyExposure(false);
-			}
+			_fe3d->gfx_setSkyExposureEnabled(isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
@@ -485,14 +450,7 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if(isEnabled)
-			{
-				_fe3d->gfx_enableBloom();
-			}
-			else
-			{
-				_fe3d->gfx_disableBloom(false);
-			}
+			_fe3d->gfx_setBloomEnabled(isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("type")->isHovered())
 		{

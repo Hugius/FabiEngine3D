@@ -18,14 +18,7 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if(isEnabled)
-			{
-				_fe3d->gfx_enableAmbientLighting();
-			}
-			else
-			{
-				_fe3d->gfx_disableAmbientLighting(false);
-			}
+			_fe3d->gfx_setAmbientLightingEnabled(isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
@@ -82,14 +75,7 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if(isEnabled)
-			{
-				_fe3d->gfx_enableDirectionalLighting();
-			}
-			else
-			{
-				_fe3d->gfx_disableDirectionalLighting(false);
-			}
+			_fe3d->gfx_setDirectionalLightingEnabled(isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{

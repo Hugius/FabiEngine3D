@@ -201,6 +201,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:pointlight` functionality as networking server!");
+		return true;
 	}
 
 	return true;

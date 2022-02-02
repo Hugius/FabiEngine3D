@@ -274,6 +274,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:aabb` functionality as networking server!");
+		return true;
 	}
 
 	return true;

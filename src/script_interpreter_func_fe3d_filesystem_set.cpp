@@ -28,6 +28,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			if(Tools::isDirectoryExisting(newDirectoryPath))
 			{
 				_throwRuntimeError("cannot create directory \"" + args[0]->getString() + "\"!");
+				return true;
 			}
 			else
 			{
@@ -57,6 +58,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			else
 			{
 				_throwRuntimeError("cannot delete directory \"" + args[0]->getString() + "\"!");
+				return true;
 			}
 		}
 	}
@@ -74,6 +76,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			if(Tools::isFileExisting(filePath))
 			{
 				_throwRuntimeError("cannot create file \"" + args[0]->getString() + "\"!");
+				return true;
 			}
 			else
 			{
@@ -104,6 +107,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			else
 			{
 				_throwRuntimeError("cannot delete file \"" + args[0]->getString() + "\"!");
+				return true;
 			}
 		}
 	}
@@ -144,6 +148,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			else
 			{
 				_throwRuntimeError("cannot write to file \"" + args[0]->getString() + "\"!");
+				return true;
 			}
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -171,6 +176,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			else
 			{
 				_throwRuntimeError("cannot add new line to file \"" + args[0]->getString() + "\"!");
+				return true;
 			}
 		}
 	}
@@ -195,6 +201,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			else
 			{
 				_throwRuntimeError("cannot clear file \"" + args[0]->getString() + "\"!");
+				return true;
 			}
 		}
 	}

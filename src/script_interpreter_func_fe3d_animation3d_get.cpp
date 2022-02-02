@@ -146,6 +146,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:animation3d` functionality as networking server!");
+		return true;
 	}
 
 	return true;

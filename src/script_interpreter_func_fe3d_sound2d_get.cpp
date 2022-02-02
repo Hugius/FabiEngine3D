@@ -124,6 +124,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:sound2d` functionality as networking server!");
+		return true;
 	}
 
 	return true;

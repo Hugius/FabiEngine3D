@@ -126,6 +126,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	if(_isListValue(valueString))
 	{
 		_throwRuntimeError("arithmetic not allowed on LIST values!");
+		return;
 	}
 	else if(_isStringValue(valueString))
 	{

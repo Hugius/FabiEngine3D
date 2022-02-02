@@ -190,6 +190,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 			else
 			{
 				_throwRuntimeError("cannot delete custom world \"" + args[0]->getString() + "\"!");
+				return true;
 			}
 		}
 	}
@@ -201,6 +202,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:world` functionality as networking server!");
+		return true;
 	}
 
 	return true;

@@ -205,6 +205,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:client` functionality as networking server!");
+		return true;
 	}
 
 	return true;

@@ -263,6 +263,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:sky` functionality as networking server!");
+		return true;
 	}
 
 	return true;

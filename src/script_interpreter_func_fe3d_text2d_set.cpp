@@ -312,6 +312,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:text2d` functionality as networking server!");
+		return true;
 	}
 
 	return true;

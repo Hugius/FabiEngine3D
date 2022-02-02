@@ -3,7 +3,6 @@
 #include "networking_server.hpp"
 #include "logger.hpp"
 
-#include <winsock2.h>
 #include <ws2tcpip.h>
 
 using std::launch;
@@ -158,7 +157,7 @@ void NetworkingServer::stop()
 	_tcpSocket = INVALID_SOCKET;
 	_udpSocket = INVALID_SOCKET;
 	_maxClientCount = 0;
-	_newClientIP = "";
+	_newClientIp = "";
 	_newClientUsername = "";
 	_isRunning = false;
 

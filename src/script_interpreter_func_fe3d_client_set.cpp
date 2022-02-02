@@ -62,13 +62,13 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 				_throwScriptError("Networking client tried to connect: already connecting!");
 				return true;
 			}
-			if(!_fe3d->client_isValidServerIP(args[0]->getString()))
+			if(!_fe3d->client_isValidIp(args[0]->getString()))
 			{
-				_throwScriptError("Networking client tried to connect: invalid server IP!");
+				_throwScriptError("Networking client tried to connect: invalid server ip!");
 				return true;
 			}
 
-			_fe3d->client_connect(args[0]->getString());
+			_fe3d->client_connectToServer(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 				return true;
 			}
 
-			_fe3d->client_disconnect();
+			_fe3d->client_disconnectFromServer();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -150,7 +150,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 				return true;
 			}
 
-			_fe3d->client_sendTcpMessage(args[0]->getString());
+			_fe3d->client_sendTcpMessageToServer(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 				return true;
 			}
 
-			_fe3d->client_sendUdpMessage(args[0]->getString());
+			_fe3d->client_sendUdpMessageToServer(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

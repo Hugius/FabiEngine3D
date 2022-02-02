@@ -28,20 +28,20 @@ public:
 
 	void start(const string& username);
 	void update();
-	void connectToServer(const string& serverIP);
+	void connectToServer(const string& ip);
 	void disconnectFromServer(bool mustBeAccepted);
-	void sendTcpMessage(const string& content);
-	void sendUdpMessage(const string& content);
+	void sendTcpMessageToServer(const string& content);
+	void sendUdpMessageToServer(const string& content);
 	void stop();
 
 	const string& getUsername() const;
-	const string& getServerIP() const;
+	const string& getServerIp() const;
 
 	const unsigned int getPingLatency() const;
 	const unsigned int getMaxUsernameSize() const;
 	const unsigned int getMaxMessageSize();
 
-	const bool isValidServerIP(const string& serverIP) const;
+	const bool isValidIp(const string& ip) const;
 	const bool isRunning() const;
 	const bool isConnectingToServer() const;
 	const bool isConnectedToServer() const;
@@ -65,21 +65,20 @@ private:
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
 
-	const string _extractSocketIP(SOCKET socket) const;
+	const string _extractSocketIp(SOCKET socket) const;
 	const string _extractSocketPort(SOCKET socket) const;
 
-	int _waitForServerConnection(SOCKET socket, const string& serverIP) const;
-	const string _extractAddressIP(sockaddr_in* address) const;
+	int _waitForServerConnection(SOCKET socket, const string& ip) const;
+	const string _extractAddressIp(sockaddr_in* address) const;
 	const string _extractAddressPort(sockaddr_in* address) const;
 	const bool _isMessageReadyUDP(SOCKET socket) const;
-	const sockaddr_in _composeSocketAddress(const string& IP, const string& port) const;
-	bool _sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted);
-	bool _sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted) const;
-	const bool _isValidIP(const string& IP) const;
+	const sockaddr_in _composeSocketAddress(const string& ip, const string& port) const;
+	bool _sendTcpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted);
+	bool _sendUdpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted) const;
 
 	future<tuple<int, int, long long, string>> _tcpMessageThread;
 	string _username = "";
-	string _serverIP = "";
+	string _serverIp = "";
 	string _tcpMessageBuild = "";
 
 	long long _lastMilliseconds = 0;

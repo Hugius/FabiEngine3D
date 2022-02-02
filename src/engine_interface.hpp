@@ -844,20 +844,20 @@ public:
 	const BloomType gfx_getBloomType() const;
 
 	void server_start(unsigned int maxClientCount);
-	void server_sendTcpMessage(const string& username, const string& content);
-	void server_sendUdpMessage(const string& username, const string& content);
-	void server_broadcastTcpMessage(const string& content);
-	void server_broadcastUdpMessage(const string& content);
+	void server_sendTcpMessageToClient(const string& username, const string& content);
+	void server_sendUdpMessageToClient(const string& username, const string& content);
+	void server_broadcastTcpMessageToClients(const string& content);
+	void server_broadcastUdpMessageToClients(const string& content);
 	void server_disconnectClient(const string& username);
 	void server_disconnectClients();
 	void server_stop();
 
 	const vector<NetworkingClientMessage> server_getPendingMessages() const;
-	const vector<string> server_getClientIPs() const;
+	const vector<string> server_getClientIps() const;
 	const vector<string> server_getClientUsernames() const;
-	const string server_getNewClientIP() const;
+	const string server_getNewClientIp() const;
 	const string server_getNewClientUsername() const;
-	const string server_getOldClientIP() const;
+	const string server_getOldClientIp() const;
 	const string server_getOldClientUsername() const;
 	const unsigned int server_getMaxMessageSize() const;
 	const bool server_isRunning() const;
@@ -865,19 +865,19 @@ public:
 	const bool server_isMessageReserved(const string& message);
 
 	void client_start(const string& username);
-	void client_connect(const string& serverIP);
-	void client_sendTcpMessage(const string& content);
-	void client_sendUdpMessage(const string& content);
-	void client_disconnect();
+	void client_connectToServer(const string& ip);
+	void client_sendTcpMessageToServer(const string& content);
+	void client_sendUdpMessageToServer(const string& content);
+	void client_disconnectFromServer();
 	void client_stop();
 
 	const vector<NetworkingServerMessage> client_getPendingMessages() const;
 	const string client_getUsername() const;
-	const string client_getServerIP() const;
+	const string client_getServerIp() const;
 	const unsigned int client_getPingLatency() const;
 	const unsigned int client_getMaxUsernameSize() const;
 	const unsigned int client_getMaxMessageSize() const;
-	const bool client_isValidServerIP(const string& serverIP) const;
+	const bool client_isValidIp(const string& ip) const;
 	const bool client_isRunning() const;
 	const bool client_isConnectingToServer() const;
 	const bool client_isConnectedToServer() const;

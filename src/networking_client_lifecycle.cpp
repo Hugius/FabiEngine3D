@@ -3,7 +3,6 @@
 #include "networking_client.hpp"
 #include "logger.hpp"
 
-#include <winsock2.h>
 #include <ws2tcpip.h>
 
 NetworkingClient::NetworkingClient()
@@ -50,7 +49,7 @@ void NetworkingClient::start(const string& username)
 	_isRunning = true;
 }
 
-void NetworkingClient::connectToServer(const string& serverIP)
+void NetworkingClient::connectToServer(const string& ip)
 {
 	if(!_isRunning)
 	{
@@ -67,12 +66,12 @@ void NetworkingClient::connectToServer(const string& serverIP)
 		abort();
 	}
 
-	if(!isValidServerIP(serverIP))
+	if(!isValidIp(ip))
 	{
 		abort();
 	}
 
-	_serverIP = serverIP;
+	_serverIp = ip;
 
 	_setupTcp();
 
@@ -109,7 +108,7 @@ void NetworkingClient::disconnectFromServer(bool mustBeAccepted)
 	_pingLatencies.clear();
 	_lastMilliseconds = 0;
 	_tcpMessageBuild = "";
-	_serverIP = "";
+	_serverIp = "";
 	_isConnectedToServer = false;
 	_isAcceptedByServer = false;
 	_isWaitingForPing = false;
@@ -140,7 +139,7 @@ void NetworkingClient::stop()
 	_lastMilliseconds = 0;
 	_username = "";
 	_tcpMessageBuild = "";
-	_serverIP = "";
+	_serverIp = "";
 	_isConnectedToServer = false;
 	_isConnectingToServer = false;
 	_isAcceptedByServer = false;

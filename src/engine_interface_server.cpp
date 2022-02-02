@@ -11,24 +11,24 @@ void EngineInterface::server_stop()
 	_core->getNetworkingServer()->stop();
 }
 
-void EngineInterface::server_sendTcpMessage(const string& username, const string& content)
+void EngineInterface::server_sendTcpMessageToClient(const string& username, const string& content)
 {
-	_core->getNetworkingServer()->sendTcpMessage(username, content);
+	_core->getNetworkingServer()->sendTcpMessageToClient(username, content);
 }
 
-void EngineInterface::server_sendUdpMessage(const string& username, const string& content)
+void EngineInterface::server_sendUdpMessageToClient(const string& username, const string& content)
 {
-	_core->getNetworkingServer()->sendUdpMessage(username, content);
+	_core->getNetworkingServer()->sendUdpMessageToClient(username, content);
 }
 
-void EngineInterface::server_broadcastTcpMessage(const string& content)
+void EngineInterface::server_broadcastTcpMessageToClients(const string& content)
 {
-	_core->getNetworkingServer()->broadcastTcpMessage(content);
+	_core->getNetworkingServer()->broadcastTcpMessageToClients(content);
 }
 
-void EngineInterface::server_broadcastUdpMessage(const string& content)
+void EngineInterface::server_broadcastUdpMessageToClients(const string& content)
 {
-	_core->getNetworkingServer()->broadcastUdpMessage(content);
+	_core->getNetworkingServer()->broadcastUdpMessageToClients(content);
 }
 
 void EngineInterface::server_disconnectClient(const string& username)
@@ -56,9 +56,9 @@ const bool EngineInterface::server_isMessageReserved(const string& message)
 	return _core->getNetworkingServer()->isMessageReserved(message);
 }
 
-const string EngineInterface::server_getNewClientIP() const
+const string EngineInterface::server_getNewClientIp() const
 {
-	return _core->getNetworkingServer()->getNewClientIP();
+	return _core->getNetworkingServer()->getNewClientIp();
 }
 
 const string EngineInterface::server_getNewClientUsername() const
@@ -66,9 +66,9 @@ const string EngineInterface::server_getNewClientUsername() const
 	return _core->getNetworkingServer()->getNewClientUsername();
 }
 
-const string EngineInterface::server_getOldClientIP() const
+const string EngineInterface::server_getOldClientIp() const
 {
-	return _core->getNetworkingServer()->getOldClientIP();
+	return _core->getNetworkingServer()->getOldClientIp();
 }
 
 const string EngineInterface::server_getOldClientUsername() const
@@ -86,9 +86,9 @@ const vector<NetworkingClientMessage> EngineInterface::server_getPendingMessages
 	return _core->getNetworkingServer()->getPendingMessages();
 }
 
-const vector<string> EngineInterface::server_getClientIPs() const
+const vector<string> EngineInterface::server_getClientIps() const
 {
-	return _core->getNetworkingServer()->getClientIPs();
+	return _core->getNetworkingServer()->getClientIps();
 }
 
 const vector<string> EngineInterface::server_getClientUsernames() const

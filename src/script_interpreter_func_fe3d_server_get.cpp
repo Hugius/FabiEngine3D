@@ -28,9 +28,9 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto IP = _fe3d->server_getNewClientIP();
+			auto ip = _fe3d->server_getNewClientIp();
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, IP));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, ip));
 		}
 	}
 	else if(functionName == "fe3d:server_get_new_username")
@@ -46,9 +46,9 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto IP = _fe3d->server_getOldClientIP();
+			auto ip = _fe3d->server_getOldClientIp();
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, IP));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, ip));
 		}
 	}
 	else if(functionName == "fe3d:server_get_old_username")
@@ -64,10 +64,10 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto IPs = _fe3d->server_getClientIPs();
-			for(const auto& IP : IPs)
+			auto IPs = _fe3d->server_getClientIps();
+			for(const auto& ip : IPs)
 			{
-				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, IP));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, ip));
 			}
 		}
 	}

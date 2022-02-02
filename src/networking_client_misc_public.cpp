@@ -1,10 +1,23 @@
+#define WIN32_LEAN_AND_MEAN
+
 #include "networking_client.hpp"
 #include "logger.hpp"
 #include "mathematics.hpp"
 
-const bool NetworkingClient::isValidServerIP(const string& serverIP) const
+#include <ws2tcpip.h>
+
+const bool NetworkingClient::isValidIp(const string& ip) const
 {
-	return (_isValidIP(serverIP) && (serverIP != "0.0.0.0"));
+	if(ip == "0.0.0.0")
+	{
+		return false;
+	}
+
+	sockaddr_in socketAddress = sockaddr_in();
+	socketAddress.sin_family = AF_INET;
+	const auto result = InetPton(AF_INET, ip.c_str(), &socketAddress.sin_addr.s_addr);
+
+	return (result > 0);
 }
 
 const bool NetworkingClient::isRunning() const
@@ -42,9 +55,9 @@ const string& NetworkingClient::getUsername() const
 	return _username;
 }
 
-const string& NetworkingClient::getServerIP() const
+const string& NetworkingClient::getServerIp() const
 {
-	return _serverIP;
+	return _serverIp;
 }
 
 const vector<NetworkingServerMessage>& NetworkingClient::getPendingMessages() const
@@ -52,7 +65,7 @@ const vector<NetworkingServerMessage>& NetworkingClient::getPendingMessages() co
 	return _pendingMessages;
 }
 
-void NetworkingClient::sendTcpMessage(const string& content)
+void NetworkingClient::sendTcpMessageToServer(const string& content)
 {
 	if(!_isRunning)
 	{
@@ -75,10 +88,10 @@ void NetworkingClient::sendTcpMessage(const string& content)
 		abort();
 	}
 
-	_sendTcpMessage(content, false, true);
+	_sendTcpMessageToServer(content, false, true);
 }
 
-void NetworkingClient::sendUdpMessage(const string& content)
+void NetworkingClient::sendUdpMessageToServer(const string& content)
 {
 	if(!_isRunning)
 	{
@@ -101,7 +114,7 @@ void NetworkingClient::sendUdpMessage(const string& content)
 		abort();
 	}
 
-	_sendUdpMessage(content, false, true);
+	_sendUdpMessageToServer(content, false, true);
 }
 
 const unsigned int NetworkingClient::getMaxUsernameSize() const

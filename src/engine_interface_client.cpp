@@ -6,22 +6,22 @@ void EngineInterface::client_start(const string& username)
 	_core->getNetworkingClient()->start(username);
 }
 
-void EngineInterface::client_connect(const string& serverIP)
+void EngineInterface::client_connectToServer(const string& ip)
 {
-	_core->getNetworkingClient()->connectToServer(serverIP);
+	_core->getNetworkingClient()->connectToServer(ip);
 }
 
-void EngineInterface::client_sendTcpMessage(const string& content)
+void EngineInterface::client_sendTcpMessageToServer(const string& content)
 {
-	_core->getNetworkingClient()->sendTcpMessage(content);
+	_core->getNetworkingClient()->sendTcpMessageToServer(content);
 }
 
-void EngineInterface::client_sendUdpMessage(const string& content)
+void EngineInterface::client_sendUdpMessageToServer(const string& content)
 {
-	_core->getNetworkingClient()->sendUdpMessage(content);
+	_core->getNetworkingClient()->sendUdpMessageToServer(content);
 }
 
-void EngineInterface::client_disconnect()
+void EngineInterface::client_disconnectFromServer()
 {
 	_core->getNetworkingClient()->disconnectFromServer(true);
 }
@@ -71,9 +71,9 @@ const unsigned int EngineInterface::client_getMaxMessageSize() const
 	return _core->getNetworkingClient()->getMaxMessageSize();
 }
 
-const bool EngineInterface::client_isValidServerIP(const string& serverIP) const
+const bool EngineInterface::client_isValidIp(const string& ip) const
 {
-	return _core->getNetworkingClient()->isValidServerIP(serverIP);
+	return _core->getNetworkingClient()->isValidIp(ip);
 }
 
 const string EngineInterface::client_getUsername() const
@@ -81,9 +81,9 @@ const string EngineInterface::client_getUsername() const
 	return _core->getNetworkingClient()->getUsername();
 }
 
-const string EngineInterface::client_getServerIP() const
+const string EngineInterface::client_getServerIp() const
 {
-	return _core->getNetworkingClient()->getServerIP();
+	return _core->getNetworkingClient()->getServerIp();
 }
 
 const vector<NetworkingServerMessage> EngineInterface::client_getPendingMessages() const

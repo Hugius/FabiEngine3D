@@ -4,7 +4,6 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#include <winsock2.h>
 #include <ws2tcpip.h>
 
 using std::future_status;
@@ -38,7 +37,7 @@ void NetworkingClient::update()
 				_isConnectingToServer = false;
 				_isConnectedToServer = true;
 
-				if(!_sendTcpMessage(("REQUEST" + _extractSocketPort(_udpSocket) + _username), true, false))
+				if(!_sendTcpMessageToServer(("REQUEST" + _extractSocketPort(_udpSocket) + _username), true, false))
 				{
 					return;
 				}
@@ -68,7 +67,7 @@ void NetworkingClient::update()
 
 	if(_isAcceptedByServer && !_isWaitingForPing)
 	{
-		if(!_sendTcpMessage("PING", true, true))
+		if(!_sendTcpMessageToServer("PING", true, true))
 		{
 			return;
 		}
@@ -177,12 +176,12 @@ void NetworkingClient::update()
 		const auto messageStatusCode = get<0>(messageResult);
 		const auto messageErrorCode = get<1>(messageResult);
 		const auto messageContent = get<2>(messageResult);
-		const auto messageIP = get<3>(messageResult);
+		const auto messageIp = get<3>(messageResult);
 		const auto messagePort = get<4>(messageResult);
 
 		if(messageStatusCode > 0)
 		{
-			if((messageIP == _serverIP) && (messagePort == SERVER_PORT))
+			if((messageIp == _serverIp) && (messagePort == SERVER_PORT))
 			{
 				_pendingMessages.push_back(NetworkingServerMessage(messageContent, NetworkProtocol::UDP));
 			}

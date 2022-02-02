@@ -4,13 +4,12 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#include <winsock2.h>
 #include <ws2tcpip.h>
 
 using std::launch;
 using std::to_string;
 
-const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& content, bool isReserved)
+const bool NetworkingServer::_sendTcpMessageToClient(SOCKET socket, const string& content, bool isReserved)
 {
 	if(!_isRunning)
 	{
@@ -54,7 +53,7 @@ const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& conten
 	return true;
 }
 
-const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const
+const bool NetworkingServer::_sendUdpMessageToClient(const string& clientIp, const string& clientPort, const string& content, bool isReserved) const
 {
 	if(!_isRunning)
 	{
@@ -73,7 +72,7 @@ const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const strin
 		abort();
 	}
 
-	auto socketAddress = _composeSocketAddress(clientIP, clientPort);
+	auto socketAddress = _composeSocketAddress(clientIp, clientPort);
 
 	auto sendStatusCode = sendto(
 		_udpSocket,
@@ -109,11 +108,11 @@ void NetworkingServer::_disconnectClient(SOCKET socket)
 
 			closesocket(socket);
 
-			_oldClientIPs.push_back(_clientIPs[i]);
+			_oldClientIps.push_back(_clientIps[i]);
 			_oldClientUsernames.push_back(_clientUsernames[i]);
 
 			_clientSockets.erase(_clientSockets.begin() + i);
-			_clientIPs.erase(_clientIPs.begin() + i);
+			_clientIps.erase(_clientIps.begin() + i);
 			_tcpClientPorts.erase(_tcpClientPorts.begin() + i);
 			_udpClientPorts.erase(_udpClientPorts.begin() + i);
 			_clientUsernames.erase(_clientUsernames.begin() + i);
@@ -164,26 +163,26 @@ tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOC
 
 	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 
-	auto IP = _extractAddressIP(&sourceAddress);
+	auto ip = _extractAddressIp(&sourceAddress);
 	auto port = _extractAddressPort(&sourceAddress);
 
 	if(receiveResult > 0)
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), string(buffer, receiveResult), IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), string(buffer, receiveResult), ip, port);
 	}
 	else
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), "", IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), "", ip, port);
 	}
 }
 
-const string NetworkingServer::_extractPeerIP(SOCKET socket)
+const string NetworkingServer::_extractPeerIp(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
 
-	return _extractAddressIP(&socketAddress);
+	return _extractAddressIp(&socketAddress);
 }
 
 const string NetworkingServer::_extractPeerPort(SOCKET socket)
@@ -195,22 +194,22 @@ const string NetworkingServer::_extractPeerPort(SOCKET socket)
 	return _extractAddressPort(&socketAddress);
 }
 
-const sockaddr_in NetworkingServer::_composeSocketAddress(const string& IP, const string& port) const
+const sockaddr_in NetworkingServer::_composeSocketAddress(const string& ip, const string& port) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	socketAddress.sin_family = AF_INET;
-	InetPton(AF_INET, IP.c_str(), &socketAddress.sin_addr.s_addr);
+	InetPton(AF_INET, ip.c_str(), &socketAddress.sin_addr.s_addr);
 	socketAddress.sin_port = htons(static_cast<u_short>(stoi(port)));
 
 	return socketAddress;
 }
 
-const string NetworkingServer::_extractAddressIP(sockaddr_in* address) const
+const string NetworkingServer::_extractAddressIp(sockaddr_in* address) const
 {
-	char IP[IPV4_ADDRESS_LENGTH];
-	inet_ntop(AF_INET, &(address->sin_addr), IP, sizeof(IP));
+	char ip[IPV4_ADDRESS_LENGTH];
+	inet_ntop(AF_INET, &(address->sin_addr), ip, sizeof(ip));
 
-	return string(IP);
+	return string(ip);
 }
 
 const string NetworkingServer::_extractAddressPort(sockaddr_in* address) const

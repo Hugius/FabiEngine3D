@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 				return true;
 			}
 
-			_fe3d->server_sendTcpMessage(args[0]->getString(), args[1]->getString());
+			_fe3d->server_sendTcpMessageToClient(args[0]->getString(), args[1]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -133,7 +133,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 				return true;
 			}
 
-			_fe3d->server_sendUdpMessage(args[0]->getString(), args[1]->getString());
+			_fe3d->server_sendUdpMessageToClient(args[0]->getString(), args[1]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -165,7 +165,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 				return true;
 			}
 
-			_fe3d->server_broadcastTcpMessage(args[0]->getString());
+			_fe3d->server_broadcastTcpMessageToClients(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -197,7 +197,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 				return true;
 			}
 
-			_fe3d->server_broadcastUdpMessage(args[0]->getString());
+			_fe3d->server_broadcastUdpMessageToClients(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

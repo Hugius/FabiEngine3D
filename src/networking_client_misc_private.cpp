@@ -4,13 +4,12 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#include <winsock2.h>
 #include <ws2tcpip.h>
 
 using std::launch;
 using std::to_string;
 
-bool NetworkingClient::_sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted)
+bool NetworkingClient::_sendTcpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted)
 {
 	if(!_isRunning)
 	{
@@ -58,7 +57,7 @@ bool NetworkingClient::_sendTcpMessage(const string& content, bool isReserved, b
 	return true;
 }
 
-bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted) const
+bool NetworkingClient::_sendUdpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted) const
 {
 	if(!_isRunning)
 	{
@@ -81,7 +80,7 @@ bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, b
 		abort();
 	}
 
-	auto socketAddress = _composeSocketAddress(_serverIP, SERVER_PORT);
+	auto socketAddress = _composeSocketAddress(_serverIp, SERVER_PORT);
 
 	string message = (_username + ';' + content);
 
@@ -109,18 +108,9 @@ bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, b
 	return true;
 }
 
-const bool NetworkingClient::_isValidIP(const string& IP) const
+int NetworkingClient::_waitForServerConnection(SOCKET socket, const string& ip) const
 {
-	sockaddr_in socketAddress = sockaddr_in();
-	socketAddress.sin_family = AF_INET;
-	const auto result = InetPton(AF_INET, IP.c_str(), &socketAddress.sin_addr.s_addr);
-
-	return (result > 0);
-}
-
-int NetworkingClient::_waitForServerConnection(SOCKET socket, const string& serverIP) const
-{
-	auto socketAddress = _composeSocketAddress(serverIP, SERVER_PORT);
+	auto socketAddress = _composeSocketAddress(ip, SERVER_PORT);
 
 	auto connectStatusCode = connect(socket, reinterpret_cast<sockaddr*>(&socketAddress), sizeof(socketAddress));
 
@@ -166,7 +156,7 @@ void NetworkingClient::_setupTcp()
 
 	freeaddrinfo(addressInfo);
 
-	_connectionThread = async(launch::async, &NetworkingClient::_waitForServerConnection, this, _tcpSocket, _serverIP);
+	_connectionThread = async(launch::async, &NetworkingClient::_waitForServerConnection, this, _tcpSocket, _serverIp);
 }
 
 void NetworkingClient::_setupUdp()
@@ -227,26 +217,26 @@ tuple<int, int, string, string, string> NetworkingClient::_receiveUdpMessage(SOC
 
 	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 
-	auto IP = _extractAddressIP(&sourceAddress);
+	auto ip = _extractAddressIp(&sourceAddress);
 	auto port = _extractAddressPort(&sourceAddress);
 
 	if(receiveResult > 0)
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), string(buffer, receiveResult), IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), string(buffer, receiveResult), ip, port);
 	}
 	else
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), "", IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), "", ip, port);
 	}
 }
 
-const string NetworkingClient::_extractSocketIP(SOCKET socket) const
+const string NetworkingClient::_extractSocketIp(SOCKET socket) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
 
-	return _extractAddressIP(&socketAddress);
+	return _extractAddressIp(&socketAddress);
 }
 
 const string NetworkingClient::_extractSocketPort(SOCKET socket) const
@@ -258,22 +248,23 @@ const string NetworkingClient::_extractSocketPort(SOCKET socket) const
 	return _extractAddressPort(&socketAddress);
 }
 
-const sockaddr_in NetworkingClient::_composeSocketAddress(const string& IP, const string& port) const
+const sockaddr_in NetworkingClient::_composeSocketAddress(const string& ip, const string& port) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	socketAddress.sin_family = AF_INET;
-	InetPton(AF_INET, IP.c_str(), &socketAddress.sin_addr.s_addr);
+	InetPton(AF_INET, ip.c_str(), &socketAddress.sin_addr.s_addr);
 	socketAddress.sin_port = htons(static_cast<u_short>(stoi(port)));
 
 	return socketAddress;
 }
 
-const string NetworkingClient::_extractAddressIP(sockaddr_in* address) const
+const string NetworkingClient::_extractAddressIp(sockaddr_in* address) const
 {
-	char IP[IPV4_ADDRESS_LENGTH];
-	inet_ntop(AF_INET, &(address->sin_addr), IP, sizeof(IP));
+	char ip[IPV4_ADDRESS_LENGTH];
 
-	return string(IP);
+	inet_ntop(AF_INET, &(address->sin_addr), ip, sizeof(ip));
+
+	return string(ip);
 }
 
 const string NetworkingClient::_extractAddressPort(sockaddr_in* address) const

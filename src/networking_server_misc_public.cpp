@@ -22,9 +22,9 @@ const bool NetworkingServer::isClientConnected(const string& username) const
 	return false;
 }
 
-const string NetworkingServer::getNewClientIP() const
+const string NetworkingServer::getNewClientIp() const
 {
-	return _newClientIP;
+	return _newClientIp;
 }
 
 const string NetworkingServer::getNewClientUsername() const
@@ -32,15 +32,15 @@ const string NetworkingServer::getNewClientUsername() const
 	return _newClientUsername;
 }
 
-const string NetworkingServer::getOldClientIP() const
+const string NetworkingServer::getOldClientIp() const
 {
-	if(_oldClientIPs.empty())
+	if(_oldClientIps.empty())
 	{
 		return "";
 	}
 	else
 	{
-		return _oldClientIPs[0];
+		return _oldClientIps[0];
 	}
 }
 
@@ -66,15 +66,15 @@ const vector<NetworkingClientMessage>& NetworkingServer::getPendingMessages() co
 	return _pendingMessages;
 }
 
-const vector<string> NetworkingServer::getClientIPs() const
+const vector<string> NetworkingServer::getClientIps() const
 {
 	vector<string> result;
 
-	for(size_t i = 0; i < _clientIPs.size(); i++)
+	for(size_t i = 0; i < _clientIps.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{
-			result.push_back(_clientIPs[i]);
+			result.push_back(_clientIps[i]);
 		}
 	}
 
@@ -96,7 +96,7 @@ const vector<string> NetworkingServer::getClientUsernames() const
 	return clientUsernames;
 }
 
-void NetworkingServer::sendTcpMessage(const string& username, const string& content)
+void NetworkingServer::sendTcpMessageToClient(const string& username, const string& content)
 {
 	if(!_isRunning)
 	{
@@ -121,7 +121,7 @@ void NetworkingServer::sendTcpMessage(const string& username, const string& cont
 		{
 			if(username == _clientUsernames[i])
 			{
-				_sendTcpMessage(_clientSockets[i], content, false);
+				_sendTcpMessageToClient(_clientSockets[i], content, false);
 				return;
 			}
 		}
@@ -130,7 +130,7 @@ void NetworkingServer::sendTcpMessage(const string& username, const string& cont
 	abort();
 }
 
-void NetworkingServer::sendUdpMessage(const string& username, const string& content)
+void NetworkingServer::sendUdpMessageToClient(const string& username, const string& content)
 {
 	if(!_isRunning)
 	{
@@ -155,7 +155,7 @@ void NetworkingServer::sendUdpMessage(const string& username, const string& cont
 		{
 			if(username == _clientUsernames[i])
 			{
-				_sendUdpMessage(_clientIPs[i], _udpClientPorts[i], content, false);
+				_sendUdpMessageToClient(_clientIps[i], _udpClientPorts[i], content, false);
 				return;
 			}
 		}
@@ -164,7 +164,7 @@ void NetworkingServer::sendUdpMessage(const string& username, const string& cont
 	abort();
 }
 
-void NetworkingServer::broadcastTcpMessage(const string& content)
+void NetworkingServer::broadcastTcpMessageToClients(const string& content)
 {
 	if(!_isRunning)
 	{
@@ -187,12 +187,12 @@ void NetworkingServer::broadcastTcpMessage(const string& content)
 	{
 		if(!_clientUsernames[i].empty())
 		{
-			_sendTcpMessage(_clientSockets[i], content, false);
+			_sendTcpMessageToClient(_clientSockets[i], content, false);
 		}
 	}
 }
 
-void NetworkingServer::broadcastUdpMessage(const string& content)
+void NetworkingServer::broadcastUdpMessageToClients(const string& content)
 {
 	if(!_isRunning)
 	{
@@ -215,7 +215,7 @@ void NetworkingServer::broadcastUdpMessage(const string& content)
 	{
 		if(!_clientUsernames[i].empty())
 		{
-			_sendUdpMessage(_clientIPs[i], _udpClientPorts[i], content, false);
+			_sendUdpMessageToClient(_clientIps[i], _udpClientPorts[i], content, false);
 		}
 	}
 }
@@ -233,7 +233,7 @@ void NetworkingServer::disconnectClient(const string& username)
 		{
 			if(username == _clientUsernames[i])
 			{
-				_sendTcpMessage(_clientSockets[i], "DISCONNECTED", true);
+				_sendTcpMessageToClient(_clientSockets[i], "DISCONNECTED", true);
 				return;
 			}
 		}
@@ -253,7 +253,7 @@ void NetworkingServer::disconnectClients()
 	{
 		if(!_clientUsernames[i].empty())
 		{
-			_sendTcpMessage(_clientSockets[i], "DISCONNECTED", true);
+			_sendTcpMessageToClient(_clientSockets[i], "DISCONNECTED", true);
 			return;
 		}
 	}

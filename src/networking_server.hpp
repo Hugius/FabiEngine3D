@@ -26,19 +26,19 @@ public:
 
 	void start(unsigned int maxClientCount);
 	void update();
-	void sendTcpMessage(const string& username, const string& content);
-	void sendUdpMessage(const string& username, const string& content);
-	void broadcastTcpMessage(const string& content);
-	void broadcastUdpMessage(const string& content);
+	void sendTcpMessageToClient(const string& username, const string& content);
+	void sendUdpMessageToClient(const string& username, const string& content);
+	void broadcastTcpMessageToClients(const string& content);
+	void broadcastUdpMessageToClients(const string& content);
 	void disconnectClient(const string& username);
 	void disconnectClients();
 	void stop();
 
-	const vector<string> getClientIPs() const;
+	const vector<string> getClientIps() const;
 	const vector<string> getClientUsernames() const;
-	const string getNewClientIP() const;
+	const string getNewClientIp() const;
 	const string getNewClientUsername() const;
-	const string getOldClientIP() const;
+	const string getOldClientIp() const;
 	const string getOldClientUsername() const;
 
 	const unsigned int getMaxMessageSize() const;
@@ -63,28 +63,28 @@ private:
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
 
-	const string _extractPeerIP(SOCKET socket);
+	const string _extractPeerIp(SOCKET socket);
 	const string _extractPeerPort(SOCKET socket);
 
-	const bool _sendTcpMessage(SOCKET socket, const string& content, bool isReserved);
-	const bool _sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const;
+	const bool _sendTcpMessageToClient(SOCKET socket, const string& content, bool isReserved);
+	const bool _sendUdpMessageToClient(const string& clientIp, const string& clientPort, const string& content, bool isReserved) const;
 
 	const SOCKET _waitForClientConnection(SOCKET socket) const;
 
-	const string _extractAddressIP(sockaddr_in* address) const;
+	const string _extractAddressIp(sockaddr_in* address) const;
 	const string _extractAddressPort(sockaddr_in* address) const;
 	const bool _isMessageReadyUDP(SOCKET socket) const;
-	const sockaddr_in _composeSocketAddress(const string& IP, const string& port) const;
+	const sockaddr_in _composeSocketAddress(const string& ip, const string& port) const;
 
 	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads;
 	vector<string> _tcpMessageBuilds;
-	vector<string> _clientIPs;
+	vector<string> _clientIps;
 	vector<string> _tcpClientPorts;
 	vector<string> _udpClientPorts;
 	vector<string> _clientUsernames;
-	vector<string> _oldClientIPs;
+	vector<string> _oldClientIps;
 	vector<string> _oldClientUsernames;
-	string _newClientIP = "";
+	string _newClientIp = "";
 	string _newClientUsername = "";
 
 	unsigned int _maxClientCount = 0;

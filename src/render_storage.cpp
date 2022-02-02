@@ -70,16 +70,6 @@ void RenderStorage::setFinalSceneMap(shared_ptr<TextureBuffer> value)
 	_finalSceneMap = value;
 }
 
-void RenderStorage::setCameraView(const mat44& value)
-{
-	_cameraView = value;
-}
-
-void RenderStorage::setCameraProjection(const mat44& value)
-{
-	_cameraProjection = value;
-}
-
 void RenderStorage::setShadowView(const mat44& value)
 {
 	_shadowView = value;
@@ -103,26 +93,6 @@ void RenderStorage::setMaxPosition(const fvec3& value)
 void RenderStorage::setFlareSourceUv(const fvec2& value)
 {
 	_flareSourceUv = fvec2(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f));
-}
-
-void RenderStorage::setCameraPosition(const fvec3& value)
-{
-	_cameraPosition = value;
-}
-
-void RenderStorage::setCameraUp(const fvec3& value)
-{
-	_cameraUp = value;
-}
-
-void RenderStorage::setCameraFront(const fvec3& value)
-{
-	_cameraFront = value;
-}
-
-void RenderStorage::setCameraRight(const fvec3& value)
-{
-	_cameraRight = value;
 }
 
 void RenderStorage::setAmbientLightingColor(const fvec3& value)
@@ -258,26 +228,6 @@ void RenderStorage::setFogThickness(float value)
 void RenderStorage::setBloomIntensity(float value)
 {
 	_bloomIntensity = max(0.0f, value);
-}
-
-void RenderStorage::setCameraYaw(float value)
-{
-	_cameraYaw = value;
-}
-
-void RenderStorage::setCameraPitch(float value)
-{
-	_cameraPitch = value;
-}
-
-void RenderStorage::setCameraNear(float value)
-{
-	_cameraNear = max(0.0f, value);
-}
-
-void RenderStorage::setCameraFar(float value)
-{
-	_cameraFar = value;
 }
 
 void RenderStorage::setDofDynamicDistance(float value)
@@ -518,16 +468,6 @@ const shared_ptr<TextureBuffer> RenderStorage::getFinalSceneMap() const
 	return _finalSceneMap;
 }
 
-const mat44& RenderStorage::getCameraView() const
-{
-	return _cameraView;
-}
-
-const mat44& RenderStorage::getCameraProjection() const
-{
-	return _cameraProjection;
-}
-
 const mat44& RenderStorage::getShadowView() const
 {
 	return _shadowView;
@@ -551,26 +491,6 @@ const fvec3& RenderStorage::getMaxPosition() const
 const fvec2& RenderStorage::getFlareSourceUv() const
 {
 	return _flareSourceUv;
-}
-
-const fvec3& RenderStorage::getCameraPosition() const
-{
-	return _cameraPosition;
-}
-
-const fvec3& RenderStorage::getCameraUp() const
-{
-	return _cameraUp;
-}
-
-const fvec3& RenderStorage::getCameraFront() const
-{
-	return _cameraFront;
-}
-
-const fvec3& RenderStorage::getCameraRight() const
-{
-	return _cameraRight;
 }
 
 const fvec3& RenderStorage::getAmbientLightingColor() const
@@ -701,26 +621,6 @@ const float RenderStorage::getFogThickness() const
 const float RenderStorage::getBloomIntensity() const
 {
 	return _bloomIntensity;
-}
-
-const float RenderStorage::getCameraYaw() const
-{
-	return _cameraYaw;
-}
-
-const float RenderStorage::getCameraPitch() const
-{
-	return _cameraPitch;
-}
-
-const float RenderStorage::getCameraNear() const
-{
-	return _cameraNear;
-}
-
-const float RenderStorage::getCameraFar() const
-{
-	return _cameraFar;
 }
 
 const float RenderStorage::getDofDynamicDistance() const

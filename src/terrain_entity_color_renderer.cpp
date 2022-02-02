@@ -10,11 +10,11 @@ void TerrainEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_cameraView", _renderStorage->getCameraView());
-	_shader->uploadUniform("u_cameraProjection", _renderStorage->getCameraProjection());
+	_shader->uploadUniform("u_cameraView", _camera->getView());
+	_shader->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shader->uploadUniform("u_shadowView", _renderStorage->getShadowView());
 	_shader->uploadUniform("u_shadowProjection", _renderStorage->getShadowProjection());
-	_shader->uploadUniform("u_cameraPosition", _renderStorage->getCameraPosition());
+	_shader->uploadUniform("u_cameraPosition", _camera->getPosition());
 	_shader->uploadUniform("u_ambientLightingColor", _renderStorage->getAmbientLightingColor());
 	_shader->uploadUniform("u_ambientLightingIntensity", _renderStorage->getAmbientLightingIntensity());
 	_shader->uploadUniform("u_directionalLightingColor", _renderStorage->getDirectionalLightingColor());

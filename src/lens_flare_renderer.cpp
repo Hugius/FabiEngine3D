@@ -8,11 +8,11 @@ void LensFlareRenderer::bind()
 	_shader->uploadUniform("u_depthMap", 0);
 	_shader->uploadUniform("u_sceneMap", 1);
 	_shader->uploadUniform("u_flareMap", 2);
-	_shader->uploadUniform("u_cameraNear", _renderStorage->getCameraNear());
-	_shader->uploadUniform("u_cameraFar", _renderStorage->getCameraFar());
+	_shader->uploadUniform("u_cameraNear", _camera->getNear());
+	_shader->uploadUniform("u_cameraFar", _camera->getFar());
 	_shader->uploadUniform("u_lensFlareOpacity", _renderStorage->getLensFlareOpacity());
 	_shader->uploadUniform("u_lensFlareIntensity", _renderStorage->getLensFlareIntensity());
-	_shader->uploadUniform("u_cameraPosition", _renderStorage->getCameraPosition());
+	_shader->uploadUniform("u_cameraPosition", _camera->getPosition());
 	_shader->uploadUniform("u_flareSourcePosition", _renderStorage->getFlareSourcePosition());
 	_shader->uploadUniform("u_flareSourceUv", _renderStorage->getFlareSourceUv());
 	_shader->uploadUniform("u_isLensFlareEnabled", _renderStorage->isLensFlareEnabled());

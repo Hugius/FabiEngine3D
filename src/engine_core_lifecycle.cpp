@@ -48,14 +48,17 @@ EngineCore::EngineCore()
 	_skyEntityManager->inject(_renderStorage);
 	_terrainEntityManager->inject(_imageLoader);
 	_modelEntityManager->inject(_renderStorage);
+	_modelEntityManager->inject(_camera);
 	_modelEntityManager->inject(_timer);
 	_modelEntityManager->inject(_reflectionEntityManager);
 	_modelEntityManager->inject(_meshLoader);
 	_modelEntityManager->inject(_vertexBufferCache);
 	_quad3dEntityManager->inject(_renderStorage);
+	_quad3dEntityManager->inject(_camera);
 	_text3dEntityManager->inject(_renderStorage);
 	_text3dEntityManager->inject(_imageLoader);
 	_text3dEntityManager->inject(_textureBufferCache);
+	_text3dEntityManager->inject(_camera);
 	_quad2dEntityManager->inject(_renderStorage);
 	_text2dEntityManager->inject(_renderStorage);
 	_text2dEntityManager->inject(_imageLoader);
@@ -82,6 +85,7 @@ EngineCore::EngineCore()
 	_camera->inject(_renderWindow);
 	_raycaster->inject(_terrainEntityManager);
 	_raycaster->inject(_renderStorage);
+	_raycaster->inject(_camera);
 	_cameraCollisionHandler->inject(_terrainEntityManager);
 	_cameraCollisionHandler->inject(_aabbEntityManager);
 	_cameraCollisionHandler->inject(_camera);

@@ -7,8 +7,8 @@ void AabbEntityDepthRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_cameraView", _renderStorage->getCameraView());
-	_shader->uploadUniform("u_cameraProjection", _renderStorage->getCameraProjection());
+	_shader->uploadUniform("u_cameraView", _camera->getView());
+	_shader->uploadUniform("u_cameraProjection", _camera->getProjection());
 
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);

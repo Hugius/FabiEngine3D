@@ -8,8 +8,8 @@ void DofRenderer::bind()
 	_shader->uploadUniform("u_depthMap", 0);
 	_shader->uploadUniform("u_sceneMap", 1);
 	_shader->uploadUniform("u_dofMap", 2);
-	_shader->uploadUniform("u_cameraNear", _renderStorage->getCameraNear());
-	_shader->uploadUniform("u_cameraFar", _renderStorage->getCameraFar());
+	_shader->uploadUniform("u_cameraNear", _camera->getNear());
+	_shader->uploadUniform("u_cameraFar", _camera->getFar());
 	_shader->uploadUniform("u_dofDynamicDistance", _renderStorage->getDofDynamicDistance());
 	_shader->uploadUniform("u_dofBlurDistance", _renderStorage->getDofBlurDistance());
 	_shader->uploadUniform("u_isDofEnabled", _renderStorage->isDofEnabled());

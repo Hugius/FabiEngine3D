@@ -101,7 +101,7 @@ void MasterRenderer::_updateSkyExposure()
 {
 	if(_renderStorage->isSkyExposureEnabled())
 	{
-		const auto pitch = max(0.0f, _renderStorage->getCameraPitch());
+		const auto pitch = max(0.0f, _camera->getPitch());
 		const auto targetLightness = (((90.0f - pitch) / 90.0f) * _renderStorage->getSkyExposureIntensity());
 		auto lightness = _renderStorage->getSkyExposureLightness();
 
@@ -136,7 +136,7 @@ void MasterRenderer::_updateShadows()
 		{
 			if(_renderStorage->isShadowsFollowingCamera())
 			{
-				const auto cameraPosition = _renderStorage->getCameraPosition();
+				const auto cameraPosition = _camera->getPosition();
 				const auto positionOffset = _renderStorage->getShadowPositionOffset();
 				const auto lookatOffset = _renderStorage->getShadowLookatOffset();
 
@@ -187,7 +187,7 @@ void MasterRenderer::_updateLensFlare()
 	if(_renderStorage->isLensFlareEnabled())
 	{
 		const auto flareSourcePosition = _renderStorage->getDirectionalLightingPosition();
-		const auto flareSourceClip = (_renderStorage->getCameraProjection() * _renderStorage->getCameraView() * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
+		const auto flareSourceClip = (_camera->getProjection() * _camera->getView() * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
 		const auto flareSourceNdc = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
 		const auto flareSourceUv = fvec2(((flareSourceNdc.x + 1.0f) * 0.5f), ((flareSourceNdc.y + 1.0f) * 0.5f));
 

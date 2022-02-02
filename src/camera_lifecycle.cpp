@@ -156,10 +156,4 @@ void Camera::update(const ivec2& lastCursorPosition)
 
 	_yaw = Math::limitAngle(_yaw);
 	_pitch = clamp(_pitch, MIN_PITCH, MAX_PITCH);
-
-	_renderStorage->setCameraYaw(_yaw);
-	_renderStorage->setCameraPitch(_pitch);
-	_renderStorage->setCameraPosition(_position);
-	_renderStorage->setCameraNear(_near);
-	_renderStorage->setCameraFar(_far);
 }

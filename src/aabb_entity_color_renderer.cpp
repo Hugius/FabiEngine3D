@@ -7,9 +7,9 @@ void AabbEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_cameraView", _renderStorage->getCameraView());
-	_shader->uploadUniform("u_cameraProjection", _renderStorage->getCameraProjection());
-	_shader->uploadUniform("u_cameraPosition", _renderStorage->getCameraPosition());
+	_shader->uploadUniform("u_cameraView", _camera->getView());
+	_shader->uploadUniform("u_cameraProjection", _camera->getProjection());
+	_shader->uploadUniform("u_cameraPosition", _camera->getPosition());
 	_shader->uploadUniform("u_minFogDistance", _renderStorage->getMinFogDistance());
 	_shader->uploadUniform("u_maxFogDistance", _renderStorage->getMaxFogDistance());
 	_shader->uploadUniform("u_fogThickness", _renderStorage->getFogThickness());

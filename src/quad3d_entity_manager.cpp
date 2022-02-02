@@ -40,6 +40,11 @@ void Quad3dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 	_renderStorage = renderStorage;
 }
 
+void Quad3dEntityManager::inject(shared_ptr<Camera> camera)
+{
+	camera = camera;
+}
+
 shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& id)
 {
 	auto iterator = _entities.find(id);
@@ -86,7 +91,7 @@ void Quad3dEntityManager::update()
 		if(isFacingCameraHorizontally || isFacingCameraVertically)
 		{
 			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y * 0.5f), 0.0f));
-			auto direction = (position - _renderStorage->getCameraPosition());
+			auto direction = (position - _camera->getPosition());
 
 			auto degreesX = Math::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
 			auto degreesY = Math::convertToDegrees(atan2f(direction.z, direction.x));

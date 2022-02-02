@@ -7,6 +7,7 @@
 #include "model_entity.hpp"
 #include "reflection_entity_manager.hpp"
 #include "vertex_buffer_cache.hpp"
+#include "camera.hpp"
 
 #include <unordered_map>
 
@@ -16,6 +17,7 @@ class ModelEntityManager final : public BaseEntityManager
 {
 public:
 	void inject(shared_ptr<RenderStorage> renderStorage);
+	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<Timer> timer);
 	void inject(shared_ptr<ReflectionEntityManager> reflectionManager);
 	void inject(shared_ptr<MeshLoader> meshLoader);
@@ -36,6 +38,7 @@ private:
 	unordered_map<string, shared_ptr<ModelEntity>> _entities;
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
+	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
 	shared_ptr<ReflectionEntityManager> _reflectionManager = nullptr;
 	shared_ptr<MeshLoader> _meshLoader = nullptr;

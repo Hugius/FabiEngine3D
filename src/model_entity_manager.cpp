@@ -28,6 +28,11 @@ void ModelEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 	_renderStorage = renderStorage;
 }
 
+void ModelEntityManager::inject(shared_ptr<Camera> camera)
+{
+	_camera = camera;
+}
+
 void ModelEntityManager::inject(shared_ptr<Timer> timer)
 {
 	_timer = timer;
@@ -150,7 +155,7 @@ void ModelEntityManager::update()
 				abort();
 			}
 
-			const auto cameraPosition = _renderStorage->getCameraPosition();
+			const auto cameraPosition = _camera->getPosition();
 			const auto entityPosition = entity->getBasePosition();
 			const auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
 

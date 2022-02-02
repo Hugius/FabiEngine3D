@@ -64,10 +64,10 @@ void MasterRenderer::_captureWaterReflections()
 	_camera->setPosition(fvec3(originalCameraPosition.x, (originalCameraPosition.y - (cameraDistance * 2.0f)), originalCameraPosition.z));
 	_camera->setPitch(-originalCameraPitch);
 	_camera->updateMatrices();
+	_camera->setPosition(originalCameraPosition);
+	_camera->setPitch(originalCameraPitch);
 
 	_renderStorage->setMinPosition(fvec3(-FLT_MAX, (waterEntity->getHeight() - 1.0f), -FLT_MAX));
-	_renderStorage->setCameraPosition(originalCameraPosition);
-	_renderStorage->setCameraPitch(originalCameraPitch);
 	_renderStorage->setReflectionsEnabled(false);
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
@@ -104,8 +104,6 @@ void MasterRenderer::_captureWaterReflections()
 		}
 	}
 
-	_camera->setPosition(originalCameraPosition);
-	_camera->setPitch(originalCameraPitch);
 	_camera->updateMatrices();
 
 	_renderStorage->setWaterReflectionMap(_waterReflectionCaptor->getTexture(0));

@@ -16,6 +16,7 @@ public:
 	Text3dEntityManager();
 
 	void inject(shared_ptr<RenderStorage> renderStorage);
+	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<ImageLoader> imageLoader);
 	void inject(shared_ptr<TextureBufferCache> textureBufferCache);
 	void update();
@@ -35,6 +36,7 @@ private:
 	unordered_map<string, shared_ptr<Text3dEntity>> _entities;
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
+	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<ImageLoader> _imageLoader = nullptr;
 	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;
 };

@@ -52,6 +52,30 @@ const string MasterRenderer::getOpenglVersion() const
 void MasterRenderer::inject(shared_ptr<Camera> camera)
 {
 	_camera = camera;
+
+	_skyEntityColorRenderer.inject(_camera);
+	_terrainEntityColorRenderer.inject(_camera);
+	_terrainEntityDepthRenderer.inject(_camera);
+	_waterEntityColorRenderer.inject(_camera);
+	_waterEntityDepthRenderer.inject(_camera);
+	_modelEntityColorRenderer.inject(_camera);
+	_modelEntityDepthRenderer.inject(_camera);
+	_modelEntityShadowRenderer.inject(_camera);
+	_quad3dEntityColorRenderer.inject(_camera);
+	_quad3dEntityDepthRenderer.inject(_camera);
+	_quad3dEntityShadowRenderer.inject(_camera);
+	_aabbEntityColorRenderer.inject(_camera);
+	_aabbEntityDepthRenderer.inject(_camera);
+	_quad2dEntityColorRenderer.inject(_camera);
+	_antiAliasingRenderer.inject(_camera);
+	_bloomRenderer.inject(_camera);
+	_dofRenderer.inject(_camera);
+	_lensFlareRenderer.inject(_camera);
+	_motionBlurRenderer.inject(_camera);
+	_bloomBlurRendererHighQuality.inject(_camera);
+	_bloomBlurRendererLowQuality.inject(_camera);
+	_dofBlurRenderer.inject(_camera);
+	_motionBlurBlurRenderer.inject(_camera);
 }
 
 void MasterRenderer::inject(shared_ptr<Timer> timer)

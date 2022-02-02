@@ -35,6 +35,11 @@ void Raycaster::inject(shared_ptr<RenderStorage> renderStorage)
 	_renderStorage = renderStorage;
 }
 
+void Raycaster::inject(shared_ptr<Camera> camera)
+{
+	_camera = camera;
+}
+
 void Raycaster::inject(shared_ptr<TerrainEntityManager> terrainManager)
 {
 	_terrainManager = terrainManager;
@@ -134,12 +139,12 @@ const Ray Raycaster::_calculateCursorRay(const ivec2& cursorPosition) const
 	fvec4 viewCoords = _convertToViewSpace(clipCoords);
 	fvec3 worldCoords = _convertToWorldSpace(viewCoords);
 
-	return Ray(_renderStorage->getCameraPosition(), Math::normalize(worldCoords));
+	return Ray(_camera->getPosition(), Math::normalize(worldCoords));
 }
 
 const fvec4 Raycaster::_convertToViewSpace(const fvec4& clipCoords) const
 {
-	auto invertedProjection = Math::invertMatrix(_renderStorage->getCameraProjection());
+	auto invertedProjection = Math::invertMatrix(_camera->getProjection());
 	auto viewCoords = (invertedProjection * clipCoords);
 
 	return fvec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
@@ -147,7 +152,7 @@ const fvec4 Raycaster::_convertToViewSpace(const fvec4& clipCoords) const
 
 const fvec3 Raycaster::_convertToWorldSpace(const fvec4& viewCoords) const
 {
-	auto invertedView = Math::invertMatrix(_renderStorage->getCameraView());
+	auto invertedView = Math::invertMatrix(_camera->getView());
 	auto worldCoords = (invertedView * viewCoords);
 
 	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);

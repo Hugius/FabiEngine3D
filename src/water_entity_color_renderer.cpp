@@ -9,18 +9,18 @@ void WaterEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_cameraView", _renderStorage->getCameraView());
-	_shader->uploadUniform("u_cameraProjection", _renderStorage->getCameraProjection());
+	_shader->uploadUniform("u_cameraView", _camera->getView());
+	_shader->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shader->uploadUniform("u_directionalLightingColor", _renderStorage->getDirectionalLightingColor());
 	_shader->uploadUniform("u_directionalLightingPosition", _renderStorage->getDirectionalLightingPosition());
-	_shader->uploadUniform("u_cameraPosition", _renderStorage->getCameraPosition());
+	_shader->uploadUniform("u_cameraPosition", _camera->getPosition());
 	_shader->uploadUniform("u_minFogDistance", _renderStorage->getMinFogDistance());
 	_shader->uploadUniform("u_maxFogDistance", _renderStorage->getMaxFogDistance());
 	_shader->uploadUniform("u_fogThickness", _renderStorage->getFogThickness());
 	_shader->uploadUniform("u_fogColor", _renderStorage->getFogColor());
 	_shader->uploadUniform("u_isFogEnabled", _renderStorage->isFogEnabled());
-	_shader->uploadUniform("u_cameraNear", _renderStorage->getCameraNear());
-	_shader->uploadUniform("u_cameraFar", _renderStorage->getCameraFar());
+	_shader->uploadUniform("u_cameraNear", _camera->getNear());
+	_shader->uploadUniform("u_cameraFar", _camera->getFar());
 	_shader->uploadUniform("u_isDirectionalLightingEnabled", _renderStorage->isDirectionalLightingEnabled());
 	_shader->uploadUniform("u_directionalLightingIntensity", _renderStorage->getDirectionalLightingIntensity());
 	_shader->uploadUniform("u_isReflectionsEnabled", _renderStorage->isReflectionsEnabled());

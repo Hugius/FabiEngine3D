@@ -40,6 +40,11 @@ void Text3dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 	_renderStorage = renderStorage;
 }
 
+void Text3dEntityManager::inject(shared_ptr<Camera> camera)
+{
+	_camera = camera;
+}
+
 void Text3dEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
 {
 	_imageLoader = imageLoader;
@@ -114,7 +119,7 @@ void Text3dEntityManager::update()
 		if(isFacingCameraHorizontally || isFacingCameraVertically)
 		{
 			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y * 0.5f), 0.0f));
-			auto direction = (position - _renderStorage->getCameraPosition());
+			auto direction = (position - _camera->getPosition());
 
 			auto degreesX = Math::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
 			auto degreesY = Math::convertToDegrees(atan2f(direction.z, direction.x));

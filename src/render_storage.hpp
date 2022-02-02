@@ -28,12 +28,6 @@ public:
 	void setFinalSceneMap(shared_ptr<TextureBuffer> value);
 	void setCursorEntityId(const string& value);
 	void setLensFlareMapPath(const string& value);
-	void setCameraView(const mat44& value);
-	void setCameraProjection(const mat44& value);
-	void setCameraPosition(const fvec3& value);
-	void setCameraUp(const fvec3& value);
-	void setCameraFront(const fvec3& value);
-	void setCameraRight(const fvec3& value);
 	void setShadowView(const mat44& value);
 	void setShadowProjection(const mat44& value);
 	void setMinPosition(const fvec3& value);
@@ -55,10 +49,6 @@ public:
 	void setMaxFogDistance(float value);
 	void setFogThickness(float value);
 	void setBloomIntensity(float value);
-	void setCameraYaw(float value);
-	void setCameraPitch(float value);
-	void setCameraNear(float value);
-	void setCameraFar(float value);
 	void setDofDynamicDistance(float value);
 	void setDofBlurDistance(float value);
 	void setPlanarReflectionHeight(float value);
@@ -106,17 +96,11 @@ public:
 	const string& getCursorEntityId() const;
 	const string& getLensFlareMapPath() const;
 
-	const mat44& getCameraView() const;
-	const mat44& getCameraProjection() const;
 	const mat44& getShadowView() const;
 	const mat44& getShadowProjection() const;
 
 	const fvec3& getMinPosition() const;
 	const fvec3& getMaxPosition() const;
-	const fvec3& getCameraPosition() const;
-	const fvec3& getCameraUp() const;
-	const fvec3& getCameraFront() const;
-	const fvec3& getCameraRight() const;
 	const fvec3& getAmbientLightingColor() const;
 	const fvec3& getDirectionalLightingColor() const;
 	const fvec3& getDirectionalLightingPosition() const;
@@ -136,10 +120,6 @@ public:
 	const float getMaxFogDistance() const;
 	const float getFogThickness() const;
 	const float getBloomIntensity() const;
-	const float getCameraYaw() const;
-	const float getCameraPitch() const;
-	const float getCameraNear() const;
-	const float getCameraFar() const;
 	const float getDofDynamicDistance() const;
 	const float getDofBlurDistance() const;
 	const float getPlanarReflectionHeight() const;
@@ -218,17 +198,11 @@ private:
 	string _cursorEntityId = "";
 	string _lensFlareMapPath = "";
 
-	mat44 _cameraView = mat44(1.0f);
-	mat44 _cameraProjection = mat44(1.0f);
 	mat44 _shadowView = mat44(1.0f);
 	mat44 _shadowProjection = mat44(1.0f);
 
 	fvec3 _minPosition = fvec3(-FLT_MAX);
 	fvec3 _maxPosition = fvec3(FLT_MAX);
-	fvec3 _cameraPosition = fvec3(0.0f);
-	fvec3 _cameraUp = fvec3(0.0f);
-	fvec3 _cameraFront = fvec3(0.0f);
-	fvec3 _cameraRight = fvec3(0.0f);
 	fvec3 _directionalLightingPosition = fvec3(0.0f);
 	fvec3 _shadowPosition = fvec3(0.0f);
 	fvec3 _shadowPositionOffset = fvec3(0.0f);
@@ -248,10 +222,6 @@ private:
 	float _minFogDistance = 0.0f;
 	float _maxFogDistance = 0.0f;
 	float _fogThickness = 1.0f;
-	float _cameraYaw = 0.0f;
-	float _cameraPitch = 0.0f;
-	float _cameraNear = 0.0f;
-	float _cameraFar = 0.0f;
 	float _dofDynamicDistance = 0.0f;
 	float _dofBlurDistance = 0.0f;
 	float _planarReflectionHeight = 0.0f;

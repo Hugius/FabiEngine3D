@@ -4,8 +4,8 @@ void SkyEntityColorRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_cameraView", mat44(mat33(_renderStorage->getCameraView())));
-	_shader->uploadUniform("u_cameraProjection", _renderStorage->getCameraProjection());
+	_shader->uploadUniform("u_cameraView", mat44(mat33(_camera->getView())));
+	_shader->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shader->uploadUniform("u_cubeMap", 0);
 }
 

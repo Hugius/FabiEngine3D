@@ -3,12 +3,14 @@
 #include "terrain_entity_manager.hpp"
 #include "ray.hpp"
 #include "box.hpp"
+#include "camera.hpp"
 
 class Raycaster final
 {
 public:
 	void inject(shared_ptr<TerrainEntityManager> terrainManager);
 	void inject(shared_ptr<RenderStorage> renderStorage);
+	void inject(shared_ptr<Camera> camera);
 	void update(const ivec2& cursorPosition);
 	void setTerrainPointingEnabled(bool value);
 	void setTerrainPointingDistance(float distance);
@@ -46,4 +48,5 @@ private:
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
+	shared_ptr<Camera> _camera = nullptr;
 };

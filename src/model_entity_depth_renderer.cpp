@@ -7,8 +7,8 @@ void ModelEntityDepthRenderer::bind()
 {
 	_shader->bind();
 
-	_shader->uploadUniform("u_cameraView", _renderStorage->getCameraView());
-	_shader->uploadUniform("u_cameraProjection", _renderStorage->getCameraProjection());
+	_shader->uploadUniform("u_cameraView", _camera->getView());
+	_shader->uploadUniform("u_cameraProjection", _camera->getProjection());
 	_shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -46,7 +46,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity)
 	_shader->uploadUniform("u_maxY", min(_renderStorage->getMaxPosition().y, entity->getMaxHeight()));
 	_shader->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
 	_shader->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
-	_shader->uploadUniform("u_cameraView", (entity->isFrozen() ? mat44(mat33(_renderStorage->getCameraView())) : _renderStorage->getCameraView()));
+	_shader->uploadUniform("u_cameraView", (entity->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
 
 	for(const auto& partId : entity->getPartIds())
 	{

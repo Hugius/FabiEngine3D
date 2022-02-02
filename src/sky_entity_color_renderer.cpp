@@ -28,7 +28,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 
 	_shader->uploadUniform("u_isWireframed", entity->isWireframed());
 	_shader->uploadUniform("u_transformation", entity->getTransformation());
-	_shader->uploadUniform("u_lightness", (entity->getLightness() + _renderBus->getSkyExposureLightness()));
+	_shader->uploadUniform("u_lightness", (entity->getLightness() + (_renderBus->isSkyExposureEnabled() ? _renderBus->getSkyExposureLightness() : 0.0f)));
 	_shader->uploadUniform("u_color", entity->getColor());
 	_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
 	_shader->uploadUniform("u_hasCubeMap", (entity->getCubeMap() != nullptr));

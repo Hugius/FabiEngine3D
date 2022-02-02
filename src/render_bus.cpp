@@ -106,7 +106,7 @@ void RenderBus::setMaxPosition(const fvec3& value)
 
 void RenderBus::setFlareSourceUv(const fvec2& value)
 {
-	_flareSourceUv = value;
+	_flareSourceUv = fvec2(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f));
 }
 
 void RenderBus::setCameraPosition(const fvec3& value)
@@ -429,7 +429,7 @@ void RenderBus::setLensFlareMapPath(const string& value)
 
 void RenderBus::setSkyExposureIntensity(float value)
 {
-	_skyExposureIntensity = value;
+	_skyExposureIntensity = max(0.0f, value);
 }
 
 void RenderBus::setSkyExposureSpeed(float value)
@@ -439,7 +439,7 @@ void RenderBus::setSkyExposureSpeed(float value)
 
 void RenderBus::setSkyExposureLightness(float value)
 {
-	_skyExposureLightness = value;
+	_skyExposureLightness = max(0.0f, value);
 }
 
 void RenderBus::setSkyExposureEnabled(bool value)

@@ -3,6 +3,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 void AabbEntity::setMesh(shared_ptr<VertexBuffer> value)
 {
@@ -82,7 +83,7 @@ void AabbEntity::setCollided(bool value)
 
 void AabbEntity::setColor(const fvec3& value)
 {
-	_color = value;
+	_color = fvec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 }
 
 void AabbEntity::setCentered(bool value)

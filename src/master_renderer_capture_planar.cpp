@@ -64,7 +64,7 @@ void MasterRenderer::_capturePlanarReflections()
 	const auto cameraDistance = fabsf(_camera->getPosition().y - _renderBus->getPlanarReflectionHeight());
 	const auto originalCameraPosition = _camera->getPosition();
 	const auto originalCameraPitch = _camera->getPitch();
-	const auto originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
+	const auto wasSkyExposureEnabled = _renderBus->isSkyExposureEnabled();
 
 	_camera->setPosition(fvec3(originalCameraPosition.x, (originalCameraPosition.y - (cameraDistance * 2.0f)), originalCameraPosition.z));
 	_camera->setPitch(-originalCameraPitch);
@@ -75,7 +75,7 @@ void MasterRenderer::_capturePlanarReflections()
 	_renderBus->setCameraPitch(originalCameraPitch);
 	_renderBus->setReflectionsEnabled(false);
 	_renderBus->setRefractionsEnabled(false);
-	_renderBus->setSkyExposureLightness(0.0f);
+	_renderBus->setSkyExposureEnabled(false);
 
 	_renderSkyEntity();
 	_renderTerrainEntity();
@@ -111,7 +111,7 @@ void MasterRenderer::_capturePlanarReflections()
 	_renderBus->setMinPosition(fvec3(-FLT_MAX));
 	_renderBus->setReflectionsEnabled(true);
 	_renderBus->setRefractionsEnabled(true);
-	_renderBus->setSkyExposureLightness(originalSkyExposureLightness);
+	_renderBus->setSkyExposureEnabled(wasSkyExposureEnabled);
 
 	_planarReflectionCaptor->unbind();
 }

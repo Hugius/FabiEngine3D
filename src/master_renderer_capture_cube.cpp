@@ -43,7 +43,7 @@ void MasterRenderer::_captureCubeReflections()
 	const auto originalCameraPitch = _camera->getPitch();
 	const auto originalCameraPosition = _camera->getPosition();
 	const auto originalShadowInterval = _renderBus->getShadowInterval();
-	const auto originalSkyExposureLightness = _renderBus->getSkyExposureLightness();
+	const auto wasSkyExposureEnabled = _renderBus->isSkyExposureEnabled();
 
 	//_camera->invertUpDirection();
 	_camera->setAspectRatio(1.0f);
@@ -51,7 +51,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	_renderBus->setReflectionsEnabled(false);
 	_renderBus->setRefractionsEnabled(false);
-	_renderBus->setSkyExposureLightness(0.0f);
+	_renderBus->setSkyExposureEnabled(false);
 	_renderBus->setShadowInterval(0);
 
 	for(const auto& [key, entity] : _reflectionEntityManager->getEntities())
@@ -173,8 +173,8 @@ void MasterRenderer::_captureCubeReflections()
 
 	_renderBus->setReflectionsEnabled(true);
 	_renderBus->setRefractionsEnabled(true);
+	_renderBus->setSkyExposureEnabled(wasSkyExposureEnabled);
 	_renderBus->setShadowInterval(originalShadowInterval);
-	_renderBus->setSkyExposureLightness(originalSkyExposureLightness);
 
 	_updateShadows();
 }

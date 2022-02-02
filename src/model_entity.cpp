@@ -296,7 +296,7 @@ void ModelEntity::setMeshPath(const string& value)
 
 void ModelEntity::setLevelOfDetailSize(const fvec3& value)
 {
-	_levelOfDetailSize = value;
+	_levelOfDetailSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
 void ModelEntity::setDiffuseMapPath(const string& partId, const string& value)
@@ -446,7 +446,7 @@ void ModelEntity::setMaxHeight(float value)
 
 void ModelEntity::setLevelOfDetailDistance(float value)
 {
-	_levelOfDetailDistance = value;
+	_levelOfDetailDistance = max(0.0f, value);
 }
 
 void ModelEntity::setOpacity(const string& partId, float value)

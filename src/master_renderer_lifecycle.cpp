@@ -107,7 +107,7 @@ void MasterRenderer::_updateSkyExposure()
 
 		if(lightness > targetLightness)
 		{
-			lightness -= (_renderBus->getSkyExposureSpeed() * 2.0f);
+			lightness -= (_renderBus->getSkyExposureSpeed() * 3.0f);
 
 			if(lightness < targetLightness)
 			{
@@ -125,10 +125,6 @@ void MasterRenderer::_updateSkyExposure()
 		}
 
 		_renderBus->setSkyExposureLightness(lightness);
-	}
-	else
-	{
-		_renderBus->setSkyExposureLightness(0.0f);
 	}
 }
 

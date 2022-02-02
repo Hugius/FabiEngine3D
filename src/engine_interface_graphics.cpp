@@ -79,11 +79,14 @@ void EngineInterface::gfx_setMotionBlurQuality(unsigned int value)
 
 void EngineInterface::gfx_setAnisotropicFilteringQuality(unsigned int value)
 {
+	const auto minQuality = _core->getRenderStorage()->getMinAnisotropicFilteringQuality();
+	const auto maxQuality = _core->getRenderStorage()->getMaxAnisotropicFilteringQuality();
+
 	_core->getRenderStorage()->setAnisotropicFilteringQuality(value);
 
 	for(const auto& [key, texture] : _core->getTextureBufferCache()->get2dBuffers())
 	{
-		if(texture->hasAnisotropicFiltering())
+		if((texture->getAnisotropicFilteringQuality() >= minQuality) && (texture->getAnisotropicFilteringQuality() <= maxQuality))
 		{
 			texture->loadAnisotropicFiltering(value);
 		}
@@ -91,7 +94,7 @@ void EngineInterface::gfx_setAnisotropicFilteringQuality(unsigned int value)
 
 	for(const auto& [key, texture] : _core->getTextureBufferCache()->get3dBuffers())
 	{
-		if(texture->hasAnisotropicFiltering())
+		if((texture->getAnisotropicFilteringQuality() >= minQuality) && (texture->getAnisotropicFilteringQuality() <= maxQuality))
 		{
 			texture->loadAnisotropicFiltering(value);
 		}

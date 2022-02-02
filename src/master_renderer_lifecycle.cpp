@@ -39,6 +39,7 @@ MasterRenderer::MasterRenderer()
 	_motionBlurShader = make_shared<ShaderBuffer>("motion_blur_shader.vert", "motion_blur_shader.frag");
 	_blurShader = make_shared<ShaderBuffer>("blur_shader.vert", "blur_shader.frag");
 
+	_waterOpacityCaptor = make_shared<CaptureBuffer>(ivec2(0), viewportSize);
 	_worldDepthCaptor = make_shared<CaptureBuffer>(ivec2(0), viewportSize);
 	_worldColorCaptor = make_shared<CaptureBuffer>(ivec2(0), viewportSize, 2, false);
 	_antiAliasingCaptor = make_shared<CaptureBuffer>(ivec2(0), viewportSize, 1, false);
@@ -46,16 +47,6 @@ MasterRenderer::MasterRenderer()
 	_dofCaptor = make_shared<CaptureBuffer>(ivec2(0), viewportSize, 1, false);
 	_lensFlareCaptor = make_shared<CaptureBuffer>(ivec2(0), viewportSize, 1, false);
 	_motionBlurCaptor = make_shared<CaptureBuffer>(ivec2(0), viewportSize, 1, false);
-	_cubeReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
-	_planarReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
-	_waterReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
-	_waterRefractionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
-	_waterOpacityCaptor = make_shared<CaptureBuffer>(ivec2(0), viewportSize);
-	_shadowCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_SHADOW_QUALITY));
-	_bloomBlurCaptorHighQuality = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / Config::MIN_BLOOM_QUALITY), 1, true);
-	_bloomBlurCaptorLowQuality = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / (Config::MIN_BLOOM_QUALITY * 2)), 1, true);
-	_dofBlurCaptor = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / Config::MIN_DOF_QUALITY), 1, true);
-	_motionBlurBlurCaptor = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / Config::MIN_MOTION_BLUR_QUALITY), 1, true);
 
 	_skyEntityColorRenderer.inject(_skyEntityColorShader);
 	_terrainEntityColorRenderer.inject(_terrainEntityColorShader);

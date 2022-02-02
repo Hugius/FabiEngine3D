@@ -47,9 +47,9 @@ void WorldEditor::unloadEditorWorld()
 	_fe3d->gfx_setLensFlareMap("");
 	_fe3d->gfx_setLensFlareIntensity(0.0f);
 	_fe3d->gfx_setLensFlareSensitivity(0.0f);
-	_fe3d->gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
-	_fe3d->gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
-	_fe3d->gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
+	_fe3d->gfx_setCubeReflectionQuality(0);
+	_fe3d->gfx_setPlanarReflectionQuality(0);
+	_fe3d->gfx_setPlanarRefractionQuality(0);
 	_fe3d->gfx_setPlanarReflectionHeight(0.0f);
 
 	if(!_loadedSkyId.empty())

@@ -26,7 +26,7 @@ void ScriptEditor::_unload()
 	_fe3d->gfx_setBloomType(BloomType::EVERYTHING);
 	_fe3d->gfx_setBloomIntensity(0.0f);
 	_fe3d->gfx_setBloomBlurCount(0);
-	_fe3d->gfx_setBloomQuality(Config::MIN_BLOOM_QUALITY);
+	_fe3d->gfx_setBloomQuality(0);
 
 	_fe3d->text3d_deleteAll();
 

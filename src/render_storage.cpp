@@ -187,17 +187,17 @@ void RenderStorage::setMotionBlurDifference(fvec2 value)
 
 void RenderStorage::setBloomQuality(unsigned int value)
 {
-	_bloomQuality = clamp(value, Config::MIN_BLOOM_QUALITY, Config::MAX_BLOOM_QUALITY);
+	_bloomQuality = clamp(value, MIN_BLOOM_QUALITY, MAX_BLOOM_QUALITY);
 }
 
 void RenderStorage::setDofQuality(unsigned int value)
 {
-	_dofQuality = clamp(value, Config::MIN_DOF_QUALITY, Config::MAX_DOF_QUALITY);
+	_dofQuality = clamp(value, MIN_DOF_QUALITY, MAX_DOF_QUALITY);
 }
 
 void RenderStorage::setMotionBlurQuality(unsigned int value)
 {
-	_motionBlurQuality = clamp(value, Config::MIN_MOTION_BLUR_QUALITY, Config::MAX_MOTION_BLUR_QUALITY);
+	_motionBlurQuality = clamp(value, MIN_MOTION_BLUR_QUALITY, MAX_MOTION_BLUR_QUALITY);
 }
 
 void RenderStorage::setAmbientLightingIntensity(float value)
@@ -255,22 +255,22 @@ void RenderStorage::increaseTriangleCount(unsigned int value)
 
 void RenderStorage::setShadowQuality(unsigned int value)
 {
-	_shadowQuality = clamp(value, Config::MIN_SHADOW_QUALITY, Config::MAX_SHADOW_QUALITY);
+	_shadowQuality = clamp(value, MIN_SHADOW_QUALITY, MAX_SHADOW_QUALITY);
 }
 
 void RenderStorage::setCubeReflectionQuality(unsigned int value)
 {
-	_cubeReflectionQuality = clamp(value, Config::MIN_REFLECTION_QUALITY, Config::MAX_REFLECTION_QUALITY);
+	_cubeReflectionQuality = clamp(value, MIN_REFLECTION_QUALITY, MAX_REFLECTION_QUALITY);
 }
 
 void RenderStorage::setPlanarReflectionQuality(unsigned int value)
 {
-	_planarReflectionQuality = clamp(value, Config::MIN_REFLECTION_QUALITY, Config::MAX_REFLECTION_QUALITY);
+	_planarReflectionQuality = clamp(value, MIN_REFLECTION_QUALITY, MAX_REFLECTION_QUALITY);
 }
 
 void RenderStorage::setPlanarRefractionQuality(unsigned int value)
 {
-	_planarRefractionQuality = clamp(value, Config::MIN_REFRACTION_QUALITY, Config::MAX_REFRACTION_QUALITY);
+	_planarRefractionQuality = clamp(value, MIN_REFRACTION_QUALITY, MAX_REFRACTION_QUALITY);
 }
 
 void RenderStorage::resetTriangleCount()
@@ -360,7 +360,7 @@ void RenderStorage::setGuiDepth(unsigned int value)
 
 void RenderStorage::setAnisotropicFilteringQuality(unsigned int value)
 {
-	_anisotropicFilteringQuality = clamp(value, Config::MIN_ANISOTROPIC_FILTERING_QUALITY, Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
+	_anisotropicFilteringQuality = clamp(value, MIN_ANISOTROPIC_FILTERING_QUALITY, MAX_ANISOTROPIC_FILTERING_QUALITY);
 }
 
 void RenderStorage::setCursorEntityId(const string& value)
@@ -676,6 +676,76 @@ const unsigned int RenderStorage::getPlanarReflectionQuality() const
 const unsigned int RenderStorage::getPlanarRefractionQuality() const
 {
 	return _planarRefractionQuality;
+}
+
+const unsigned int RenderStorage::getMinBloomQuality() const
+{
+	return MIN_BLOOM_QUALITY;
+}
+
+const unsigned int RenderStorage::getMinDofQuality() const
+{
+	return MIN_DOF_QUALITY;
+}
+
+const unsigned int RenderStorage::getMinMotionBlurQuality() const
+{
+	return MIN_MOTION_BLUR_QUALITY;
+}
+
+const unsigned int RenderStorage::getMinShadowQuality() const
+{
+	return MIN_SHADOW_QUALITY;
+}
+
+const unsigned int RenderStorage::getMinReflectionQuality() const
+{
+	return MIN_REFLECTION_QUALITY;
+}
+
+const unsigned int RenderStorage::getMinRefractionQuality() const
+{
+	return MIN_REFRACTION_QUALITY;
+}
+
+const unsigned int RenderStorage::getMinAnisotropicFilteringQuality() const
+{
+	return MIN_ANISOTROPIC_FILTERING_QUALITY;
+}
+
+const unsigned int RenderStorage::getMaxBloomQuality() const
+{
+	return MAX_BLOOM_QUALITY;
+}
+
+const unsigned int RenderStorage::getMaxDofQuality() const
+{
+	return MAX_DOF_QUALITY;
+}
+
+const unsigned int RenderStorage::getMaxMotionBlurQuality() const
+{
+	return MAX_MOTION_BLUR_QUALITY;
+}
+
+const unsigned int RenderStorage::getMaxShadowQuality() const
+{
+	return MAX_SHADOW_QUALITY;
+}
+
+const unsigned int RenderStorage::getMaxReflectionQuality() const
+{
+	return MAX_REFLECTION_QUALITY;
+}
+
+const unsigned int RenderStorage::getMaxRefractionQuality() const
+{
+	return MAX_REFRACTION_QUALITY;
+}
+
+const unsigned int RenderStorage::getMaxAnisotropicFilteringQuality() const
+{
+	return MAX_ANISOTROPIC_FILTERING_QUALITY;
 }
 
 const bool RenderStorage::isAntiAliasingEnabled() const

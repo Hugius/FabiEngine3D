@@ -67,6 +67,7 @@ public:
 	void setCubeReflectionQuality(unsigned int value);
 	void setPlanarReflectionQuality(unsigned int value);
 	void setPlanarRefractionQuality(unsigned int value);
+	void setAnisotropicFilteringQuality(unsigned int value);
 	void increaseTriangleCount(unsigned int value);
 	void setBloomBlurCount(unsigned int value);
 	void resetTriangleCount();
@@ -85,7 +86,6 @@ public:
 	void setDofDynamic(bool value);
 	void setBloomType(BloomType value);
 	void setGuiDepth(unsigned int value);
-	void setAnisotropicFilteringQuality(unsigned int value);
 	void setSkyExposureIntensity(float value);
 	void setSkyExposureSpeed(float value);
 	void setSkyExposureLightness(float value);
@@ -141,10 +141,24 @@ public:
 	const unsigned int getCubeReflectionQuality() const;
 	const unsigned int getPlanarReflectionQuality() const;
 	const unsigned int getPlanarRefractionQuality() const;
+	const unsigned int getAnisotropicFilteringQuality() const;
+	const unsigned int getMinBloomQuality() const;
+	const unsigned int getMinDofQuality() const;
+	const unsigned int getMinMotionBlurQuality() const;
+	const unsigned int getMinShadowQuality() const;
+	const unsigned int getMinReflectionQuality() const;
+	const unsigned int getMinRefractionQuality() const;
+	const unsigned int getMinAnisotropicFilteringQuality() const;
+	const unsigned int getMaxBloomQuality() const;
+	const unsigned int getMaxDofQuality() const;
+	const unsigned int getMaxMotionBlurQuality() const;
+	const unsigned int getMaxShadowQuality() const;
+	const unsigned int getMaxReflectionQuality() const;
+	const unsigned int getMaxRefractionQuality() const;
+	const unsigned int getMaxAnisotropicFilteringQuality() const;
 	const unsigned int getBloomBlurCount() const;
 	const unsigned int getTriangleCount() const;
 	const unsigned int getGuiDepth() const;
-	const unsigned int getAnisotropicFilteringQuality() const;
 	const unsigned int getShadowInterval() const;
 
 	const bool isReflectionsEnabled() const;
@@ -180,6 +194,21 @@ public:
 	const BloomType getBloomType() const;
 
 private:
+
+	static inline constexpr unsigned int MIN_BLOOM_QUALITY = 1;
+	static inline constexpr unsigned int MAX_BLOOM_QUALITY = 5;
+	static inline constexpr unsigned int MIN_DOF_QUALITY = 1;
+	static inline constexpr unsigned int MAX_DOF_QUALITY = 5;
+	static inline constexpr unsigned int MIN_MOTION_BLUR_QUALITY = 1;
+	static inline constexpr unsigned int MAX_MOTION_BLUR_QUALITY = 5;
+	static inline constexpr unsigned int MIN_ANISOTROPIC_FILTERING_QUALITY = 1;
+	static inline constexpr unsigned int MAX_ANISOTROPIC_FILTERING_QUALITY = 16;
+	static inline constexpr unsigned int MIN_SHADOW_QUALITY = 2048;
+	static inline constexpr unsigned int MAX_SHADOW_QUALITY = 16384;
+	static inline constexpr unsigned int MIN_REFLECTION_QUALITY = 128;
+	static inline constexpr unsigned int MAX_REFLECTION_QUALITY = 1024;
+	static inline constexpr unsigned int MIN_REFRACTION_QUALITY = 128;
+	static inline constexpr unsigned int MAX_REFRACTION_QUALITY = 1024;
 
 	shared_ptr<TextureBuffer> _primarySceneMap = nullptr;
 	shared_ptr<TextureBuffer> _secondarySceneMap = nullptr;
@@ -236,14 +265,14 @@ private:
 	float _skyExposureSpeed = 0.0f;
 	float _skyExposureLightness = 0.0f;
 
-	unsigned int _bloomQuality = Config::MIN_BLOOM_QUALITY;
-	unsigned int _dofQuality = Config::MIN_DOF_QUALITY;
-	unsigned int _motionBlurQuality = Config::MIN_MOTION_BLUR_QUALITY;
-	unsigned int _shadowQuality = Config::MIN_SHADOW_QUALITY;
-	unsigned int _cubeReflectionQuality = Config::MIN_REFLECTION_QUALITY;
-	unsigned int _planarReflectionQuality = Config::MIN_REFLECTION_QUALITY;
-	unsigned int _planarRefractionQuality = Config::MIN_REFRACTION_QUALITY;
-	unsigned int _anisotropicFilteringQuality = Config::MIN_ANISOTROPIC_FILTERING_QUALITY;
+	unsigned int _bloomQuality = MIN_BLOOM_QUALITY;
+	unsigned int _dofQuality = MIN_DOF_QUALITY;
+	unsigned int _motionBlurQuality = MIN_MOTION_BLUR_QUALITY;
+	unsigned int _shadowQuality = MIN_SHADOW_QUALITY;
+	unsigned int _cubeReflectionQuality = MIN_REFLECTION_QUALITY;
+	unsigned int _planarReflectionQuality = MIN_REFLECTION_QUALITY;
+	unsigned int _planarRefractionQuality = MIN_REFRACTION_QUALITY;
+	unsigned int _anisotropicFilteringQuality = MIN_ANISOTROPIC_FILTERING_QUALITY;
 	unsigned int _bloomBlurCount = 0;
 	unsigned int _triangleCount = 0;
 	unsigned int _guiDepth = 0;

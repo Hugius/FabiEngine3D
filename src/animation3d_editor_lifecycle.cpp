@@ -16,7 +16,7 @@ void Animation3dEditor::_load()
 	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
 	_fe3d->gfx_setAntiAliasingEnabled(true);
-	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
+	_fe3d->gfx_setAnisotropicFilteringQuality(16);
 	_fe3d->gfx_setAmbientLightingEnabled(true);
 	_fe3d->gfx_setAmbientLightingColor(fvec3(1.0f));
 	_fe3d->gfx_setAmbientLightingIntensity(1.0f);
@@ -28,13 +28,13 @@ void Animation3dEditor::_load()
 	_fe3d->gfx_setBloomType(BloomType::PARTS);
 	_fe3d->gfx_setBloomIntensity(1.0f);
 	_fe3d->gfx_setBloomBlurCount(5);
-	_fe3d->gfx_setBloomQuality(Config::MAX_BLOOM_QUALITY);
+	_fe3d->gfx_setBloomQuality(5);
 	_fe3d->gfx_setShadowsEnabled(true);
 	_fe3d->gfx_setShadowLightness(0.25f);
-	_fe3d->gfx_setShadowQuality(Config::MAX_SHADOW_QUALITY);
-	_fe3d->gfx_setCubeReflectionQuality(Config::MAX_REFLECTION_QUALITY);
-	_fe3d->gfx_setPlanarReflectionQuality(Config::MAX_REFLECTION_QUALITY);
-	_fe3d->gfx_setPlanarRefractionQuality(Config::MAX_REFRACTION_QUALITY);
+	_fe3d->gfx_setShadowQuality(16384);
+	_fe3d->gfx_setCubeReflectionQuality(1024);
+	_fe3d->gfx_setPlanarReflectionQuality(1024);
+	_fe3d->gfx_setPlanarRefractionQuality(1024);
 
 	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d->model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
@@ -68,7 +68,7 @@ void Animation3dEditor::_unload()
 	_fe3d->camera_setThirdPersonEnabled(false);
 
 	_fe3d->gfx_setAntiAliasingEnabled(false);
-	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
+	_fe3d->gfx_setAnisotropicFilteringQuality(16);
 	_fe3d->gfx_setAmbientLightingEnabled(false);
 	_fe3d->gfx_setAmbientLightingColor(fvec3(0.0f));
 	_fe3d->gfx_setAmbientLightingIntensity(0.0f);
@@ -80,13 +80,13 @@ void Animation3dEditor::_unload()
 	_fe3d->gfx_setBloomType(BloomType::EVERYTHING);
 	_fe3d->gfx_setBloomIntensity(0.0f);
 	_fe3d->gfx_setBloomBlurCount(0);
-	_fe3d->gfx_setBloomQuality(Config::MIN_BLOOM_QUALITY);
+	_fe3d->gfx_setBloomQuality(0);
 	_fe3d->gfx_setShadowsEnabled(false);
 	_fe3d->gfx_setShadowLightness(0.0f);
-	_fe3d->gfx_setShadowQuality(Config::MIN_SHADOW_QUALITY);
-	_fe3d->gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
-	_fe3d->gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
-	_fe3d->gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
+	_fe3d->gfx_setShadowQuality(0);
+	_fe3d->gfx_setCubeReflectionQuality(0);
+	_fe3d->gfx_setPlanarReflectionQuality(0);
+	_fe3d->gfx_setPlanarRefractionQuality(0);
 
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");

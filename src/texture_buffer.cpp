@@ -110,11 +110,11 @@ void TextureBuffer::loadAnisotropicFiltering(unsigned int quality)
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-const bool TextureBuffer::hasAnisotropicFiltering() const
+const unsigned int TextureBuffer::getAnisotropicFilteringQuality() const
 {
-	int currentQuality;
+	int quality;
 
-	glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY, &currentQuality);
+	glGetIntegerv(GL_TEXTURE_MAX_ANISOTROPY, &quality);
 
-	return ((currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY) && (currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
+	return quality;
 }

@@ -24,7 +24,8 @@ public:
 	void loadMipMapping();
 	void loadAnisotropicFiltering(unsigned int quality);
 
-	const bool hasAnisotropicFiltering() const;
+	const unsigned int getAnisotropicFilteringQuality() const;
+
 	const BufferId getId() const;
 
 private:

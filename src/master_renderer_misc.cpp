@@ -170,6 +170,15 @@ void MasterRenderer::inject(shared_ptr<RenderStorage> renderStorage)
 	_bloomBlurRendererLowQuality.inject(_renderStorage);
 	_dofBlurRenderer.inject(_renderStorage);
 	_motionBlurBlurRenderer.inject(_renderStorage);
+
+	reloadBloomBlurQuality();
+	reloadDofBlurQuality();
+	reloadMotionBlurBlurQuality();
+	reloadCubeReflectionQuality();
+	reloadPlanarReflectionQuality();
+	reloadWaterReflectionQuality();
+	reloadWaterRefractionQuality();
+	reloadShadowQuality();
 }
 
 void MasterRenderer::reloadBloomBlurQuality()

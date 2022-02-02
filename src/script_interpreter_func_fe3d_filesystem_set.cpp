@@ -27,7 +27,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 			if(Tools::isDirectoryExisting(newDirectoryPath))
 			{
-				_throwScriptError("cannot create directory \"" + args[0]->getString() + "\"!");
+				_throwRuntimeError("cannot create directory \"" + args[0]->getString() + "\"!");
 			}
 			else
 			{
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot delete directory \"" + args[0]->getString() + "\"!");
+				_throwRuntimeError("cannot delete directory \"" + args[0]->getString() + "\"!");
 			}
 		}
 	}
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 			if(Tools::isFileExisting(filePath))
 			{
-				_throwScriptError("cannot create file \"" + args[0]->getString() + "\"!");
+				_throwRuntimeError("cannot create file \"" + args[0]->getString() + "\"!");
 			}
 			else
 			{
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot delete file \"" + args[0]->getString() + "\"!");
+				_throwRuntimeError("cannot delete file \"" + args[0]->getString() + "\"!");
 			}
 		}
 	}
@@ -143,7 +143,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot write to file \"" + args[0]->getString() + "\"!");
+				_throwRuntimeError("cannot write to file \"" + args[0]->getString() + "\"!");
 			}
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot add new line to file \"" + args[0]->getString() + "\"!");
+				_throwRuntimeError("cannot add new line to file \"" + args[0]->getString() + "\"!");
 			}
 		}
 	}
@@ -194,7 +194,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot clear file \"" + args[0]->getString() + "\"!");
+				_throwRuntimeError("cannot clear file \"" + args[0]->getString() + "\"!");
 			}
 		}
 	}

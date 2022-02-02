@@ -32,8 +32,7 @@ void ScriptInterpreter::load()
 		}
 		else
 		{
-			Logger::throwWarning("No script_type META found on line 1 @ script \"" + scriptId + "\"");
-			_hasThrownError = true;
+			_throwStartupError("No script_type META found on line 1 @ script \"" + scriptId + "\"");
 			return;
 		}
 
@@ -53,8 +52,7 @@ void ScriptInterpreter::load()
 			}
 			else
 			{
-				Logger::throwWarning("Entry point for " + scriptType + " defined multiple times!");
-				_hasThrownError = true;
+				_throwStartupError("Entry point for " + scriptType + " defined multiple times!");
 				return;
 			}
 		}
@@ -63,28 +61,24 @@ void ScriptInterpreter::load()
 		}
 		else
 		{
-			Logger::throwWarning("No script_execution META found on line 2 @ script \"" + scriptId + "\"");
-			_hasThrownError = true;
+			_throwStartupError("No script_execution META found on line 2 @ script \"" + scriptId + "\"");
 			return;
 		}
 	}
 
 	if(_initEntryId.empty() && !_initializeScriptIds.empty())
 	{
-		Logger::throwWarning("No script_execution_entry META defined for INITIALIZE script(s)!");
-		_hasThrownError = true;
+		_throwStartupError("No script_execution_entry META defined for INITIALIZE script(s)!");
 		return;
 	}
 	if(_updateEntryId.empty() && !_updateScriptIds.empty())
 	{
-		Logger::throwWarning("No script_execution_entry META defined for UPDATE script(s)!");
-		_hasThrownError = true;
+		_throwStartupError("No script_execution_entry META defined for UPDATE script(s)!");
 		return;
 	}
 	if(_terminateEntryId.empty() && !_terminateScriptIds.empty())
 	{
-		Logger::throwWarning("No script_execution_entry META defined for TERMINATE script(s)!");
-		_hasThrownError = true;
+		_throwStartupError("No script_execution_entry META defined for TERMINATE script(s)!");
 		return;
 	}
 

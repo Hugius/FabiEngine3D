@@ -54,7 +54,8 @@ private:
 	void _processVariableTypecast(const string& scriptLine);
 	void _processListPush(const string& scriptLine);
 	void _processListPull(const string& scriptLine);
-	void _throwScriptError(const string& message);
+	void _throwStartupError(const string& message);
+	void _throwRuntimeError(const string& message);
 	void _checkEngineWarnings(unsigned int lastLoggerMessageCount);
 	void _performArithmeticOperation(shared_ptr<ScriptValue> leftValue, const string& operatorString, shared_ptr<ScriptValue> rightValue);
 

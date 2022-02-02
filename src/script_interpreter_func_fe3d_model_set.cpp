@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 			if(_fe3d->model_isExisting(args[0]->getString()))
 			{
-				_throwScriptError("model already exists!");
+				_throwRuntimeError("model already exists!");
 				return true;
 			}
 
@@ -453,7 +453,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 				if(aabbIds.empty())
 				{
-					_throwScriptError("model with id \"" + args[0]->getString() + "\" has no bound AABBs!");
+					_throwRuntimeError("model with id \"" + args[0]->getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
@@ -478,7 +478,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 				if(aabbIds.empty())
 				{
-					_throwScriptError("model with id \"" + args[0]->getString() + "\" has no bound AABBs!");
+					_throwRuntimeError("model with id \"" + args[0]->getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
@@ -891,7 +891,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 					}
 					else
 					{
-						_throwScriptError("invalid reflection type!");
+						_throwRuntimeError("invalid reflection type!");
 						return true;
 					}
 				}
@@ -944,7 +944,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 				}
 				else
 				{
-					_throwScriptError("invalid rotation order!");
+					_throwRuntimeError("invalid rotation order!");
 					return true;
 				}
 			}
@@ -957,7 +957,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:model` functionality as networking server!");
+		_throwRuntimeError("cannot access `fe3d:model` functionality as networking server!");
 	}
 
 	return true;

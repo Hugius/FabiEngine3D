@@ -7,13 +7,13 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processFe3dFunctionCal
 
 	if((openingParanthesisFound == scriptLine.end()) && (closingParanthesisFound == scriptLine.end()))
 	{
-		_throwScriptError("invalid '()' syntax!");
+		_throwRuntimeError("invalid '()' syntax!");
 		return {};
 	}
 
 	if(scriptLine.back() != ')')
 	{
-		_throwScriptError("function call must end with ')'!");
+		_throwRuntimeError("function call must end with ')'!");
 		return {};
 	}
 
@@ -85,7 +85,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processFe3dFunctionCal
 
 	if(!isExecuted)
 	{
-		_throwScriptError("fe3d function not existing!");
+		_throwRuntimeError("fe3d function not existing!");
 		return {};
 	}
 

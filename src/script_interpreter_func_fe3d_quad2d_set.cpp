@@ -20,7 +20,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 
 			if(_fe3d->quad2d_isExisting(args[0]->getString()))
 			{
-				_throwScriptError("Quad2D entity already exists!");
+				_throwRuntimeError("Quad2D entity already exists!");
 				return true;
 			}
 
@@ -339,7 +339,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:quad2d` functionality as networking server!");
+		_throwRuntimeError("cannot access `fe3d:quad2d` functionality as networking server!");
 	}
 
 	return true;

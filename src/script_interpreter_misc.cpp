@@ -30,7 +30,7 @@ const unsigned int ScriptInterpreter::_countLeadingSpaces(const string& scriptLi
 		{
 			if(i == (scriptLineText.size() - 1))
 			{
-				_throwScriptError("unnecessary indentation!");
+				_throwRuntimeError("unnecessary indentation!");
 				return 0;
 			}
 			else
@@ -54,22 +54,22 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 
 	if(_hasPassedLoopStatement && isScopeDepthInvalid)
 	{
-		_throwScriptError("incorrect indentation after LOOP statement!");
+		_throwRuntimeError("incorrect indentation after LOOP statement!");
 		return false;
 	}
 	else if(_hasPassedIfStatement && isScopeDepthInvalid)
 	{
-		_throwScriptError("incorrect indentation after IF statement!");
+		_throwRuntimeError("incorrect indentation after IF statement!");
 		return false;
 	}
 	else if(_hasPassedElifStatement && isScopeDepthInvalid)
 	{
-		_throwScriptError("incorrect indentation after ELIF statement!");
+		_throwRuntimeError("incorrect indentation after ELIF statement!");
 		return false;
 	}
 	else if(_hasPassedElseStatement && isScopeDepthInvalid)
 	{
-		_throwScriptError("incorrect indentation after ELSE statement!");
+		_throwRuntimeError("incorrect indentation after ELSE statement!");
 		return false;
 	}
 	else if(currentLineScopeDepth < scopeDepth)
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 		}
 		else
 		{
-			_throwScriptError("unnecessary indentation before statement!");
+			_throwRuntimeError("unnecessary indentation before statement!");
 			return false;
 		}
 	}
@@ -109,14 +109,20 @@ const bool ScriptInterpreter::_validateSavesDirectory()
 
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
-		_throwScriptError("Project corrupted: directory `saves\\` missing!");
+		_throwRuntimeError("Project corrupted: directory `saves\\` missing!");
 		return false;
 	}
 
 	return true;
 }
 
-void ScriptInterpreter::_throwScriptError(const string& message)
+void ScriptInterpreter::_throwStartupError(const string& message)
+{
+	Logger::throwWarning("ERROR @ script: " + message);
+	_hasThrownError = true;
+}
+
+void ScriptInterpreter::_throwRuntimeError(const string& message)
 {
 	Logger::throwWarning("ERROR @ script \"" + _currentScriptIdsStack.back() + "\" @ line " + to_string(_currentLineIndexStack.back() + 1) + ": " + message);
 	_hasThrownError = true;

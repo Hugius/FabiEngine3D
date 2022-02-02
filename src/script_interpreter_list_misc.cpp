@@ -4,19 +4,19 @@ const bool ScriptInterpreter::_validateListIndex(const shared_ptr<ScriptVariable
 {
 	if(list->getType() == ScriptVariableType::SINGLE)
 	{
-		_throwScriptError("variable \"" + list->getId() + "\" not of type LIST!");
+		_throwRuntimeError("variable \"" + list->getId() + "\" not of type LIST!");
 		return false;
 	}
 
 	if(index < 0)
 	{
-		_throwScriptError("LIST index negative!");
+		_throwRuntimeError("LIST index negative!");
 		return false;
 	}
 
 	if(index >= list->getValueCount())
 	{
-		_throwScriptError("LIST index out of range!");
+		_throwRuntimeError("LIST index out of range!");
 		return false;
 	}
 
@@ -31,12 +31,12 @@ const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<Scr
 	}
 	else if(values.size() < count)
 	{
-		_throwScriptError("not enough arguments!");
+		_throwRuntimeError("not enough arguments!");
 		return false;
 	}
 	else
 	{
-		_throwScriptError("too many arguments!");
+		_throwRuntimeError("too many arguments!");
 		return false;
 	}
 }
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<Scr
 	{
 		if(values[i]->getType() != types[i])
 		{
-			_throwScriptError("incorrect argument type!");
+			_throwRuntimeError("incorrect argument type!");
 			return false;
 		}
 	}
@@ -72,14 +72,14 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 
 	if(nameString.empty())
 	{
-		_throwScriptError("LIST name missing!");
+		_throwRuntimeError("LIST name missing!");
 		return;
 	}
 
 	auto minLineSize = (PUSHING_KEYWORD.size() + nameString.size() + 3);
 	if(scriptLine.size() < minLineSize)
 	{
-		_throwScriptError("value missing!");
+		_throwRuntimeError("value missing!");
 		return;
 	}
 
@@ -87,7 +87,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwScriptError("LIST not existing!");
+		_throwRuntimeError("LIST not existing!");
 		return;
 	}
 
@@ -95,13 +95,13 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 
 	if(listVariable->isConstant())
 	{
-		_throwScriptError("cannot push to constant LIST!");
+		_throwRuntimeError("cannot push to constant LIST!");
 		return;
 	}
 
 	if(_isListValue(valueString))
 	{
-		_throwScriptError("cannot push LIST to LIST!");
+		_throwRuntimeError("cannot push LIST to LIST!");
 		return;
 	}
 	else if(_isStringValue(valueString))
@@ -127,7 +127,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	{
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
-			_throwScriptError("invalid value!");
+			_throwRuntimeError("invalid value!");
 			return;
 		}
 
@@ -135,7 +135,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 
 		if(rightVariable->getType() == ScriptVariableType::MULTIPLE)
 		{
-			_throwScriptError("cannot push LIST to LIST!");
+			_throwRuntimeError("cannot push LIST to LIST!");
 			return;
 		}
 
@@ -160,13 +160,13 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 
 	if(nameString.empty())
 	{
-		_throwScriptError("LIST name missing!");
+		_throwRuntimeError("LIST name missing!");
 		return;
 	}
 
 	if(scriptLine.size() < (PULLING_KEYWORD.size() + nameString.size() + 3))
 	{
-		_throwScriptError("LIST index missing!");
+		_throwRuntimeError("LIST index missing!");
 		return;
 	}
 
@@ -174,13 +174,13 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 
 	if(!_isIntegerValue(indexString) && !_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 	{
-		_throwScriptError("invalid LIST index!");
+		_throwRuntimeError("invalid LIST index!");
 		return;
 	}
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwScriptError("LIST not existing!");
+		_throwRuntimeError("LIST not existing!");
 		return;
 	}
 
@@ -188,7 +188,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 
 	if(listVariable->isConstant())
 	{
-		_throwScriptError("cannot push to constant LIST!");
+		_throwRuntimeError("cannot push to constant LIST!");
 		return;
 	}
 
@@ -203,7 +203,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 
 		if(indexVariable->getValue()->getType() != ScriptValueType::INTEGER)
 		{
-			_throwScriptError("LIST index not of type INT!");
+			_throwRuntimeError("LIST index not of type INT!");
 			return;
 		}
 

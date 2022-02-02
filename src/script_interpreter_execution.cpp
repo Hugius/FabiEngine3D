@@ -82,7 +82,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 
 	if(_executionDepth >= MAX_EXECUTION_DEPTH)
 	{
-		_throwScriptError("maximum amount of execution layers reached, perhaps infinite recursion?");
+		_throwRuntimeError("maximum amount of execution layers reached, perhaps infinite recursion?");
 		return;
 	}
 
@@ -123,7 +123,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 		}
 		else
 		{
-			_throwScriptError("invalid indentation!");
+			_throwRuntimeError("invalid indentation!");
 			return;
 		}
 
@@ -136,7 +136,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			{
 				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 				{
-					_throwScriptError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
+					_throwRuntimeError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
 					return;
 				}
 				else
@@ -151,7 +151,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			{
 				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 				{
-					_throwScriptError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
+					_throwRuntimeError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
 					return;
 				}
 				else
@@ -189,14 +189,14 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			   scriptLineText.substr(0, ELIF_KEYWORD.size()) == ELIF_KEYWORD ||
 			   scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD)
 			{
-				_throwScriptError("no LOOP/IF/ELIF/ELSE statement allowed as last line!");
+				_throwRuntimeError("no LOOP/IF/ELIF/ELSE statement allowed as last line!");
 				return;
 			}
 		}
 
 		if(scriptLineText.substr(0, META_KEYWORD.size()) == META_KEYWORD)
 		{
-			_throwScriptError("META keyword is only allowed on line 1 and 2!");
+			_throwRuntimeError("META keyword is only allowed on line 1 and 2!");
 			return;
 		}
 		else if(scriptLineText.substr(0, 5) == "fe3d:")
@@ -230,7 +230,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 				find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecute) != _updateScriptIds.end()))
 				)
 			{
-				_throwScriptError("script \"" + scriptToExecute + "\" is not of the same type!");
+				_throwRuntimeError("script \"" + scriptToExecute + "\" is not of the same type!");
 				return;
 			}
 
@@ -255,7 +255,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			}
 			else
 			{
-				_throwScriptError("script \"" + scriptToExecute + "\" not existing!");
+				_throwRuntimeError("script \"" + scriptToExecute + "\" not existing!");
 				return;
 			}
 		}
@@ -271,7 +271,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			}
 			else
 			{
-				_throwScriptError("LOOP statement must end with ':'!");
+				_throwRuntimeError("LOOP statement must end with ':'!");
 				return;
 			}
 		}
@@ -296,7 +296,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			}
 			else
 			{
-				_throwScriptError("IF statement must end with ':'!");
+				_throwRuntimeError("IF statement must end with ':'!");
 				return;
 			}
 		}
@@ -327,13 +327,13 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 				}
 				else
 				{
-					_throwScriptError("ELIF statement can only come after IF or ELIF statement!");
+					_throwRuntimeError("ELIF statement can only come after IF or ELIF statement!");
 					return;
 				}
 			}
 			else
 			{
-				_throwScriptError("ELIF statement must end with ':'!");
+				_throwRuntimeError("ELIF statement must end with ':'!");
 				return;
 			}
 		}
@@ -362,19 +362,19 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 					}
 					else
 					{
-						_throwScriptError("ELSE statement cannot have condition!");
+						_throwRuntimeError("ELSE statement cannot have condition!");
 						return;
 					}
 				}
 				else
 				{
-					_throwScriptError("ELSE statement can only come after IF or ELIF statement!");
+					_throwRuntimeError("ELSE statement can only come after IF or ELIF statement!");
 					return;
 				}
 			}
 			else
 			{
-				_throwScriptError("ELSE statement must end with ':'!");
+				_throwRuntimeError("ELSE statement must end with ':'!");
 				return;
 			}
 		}
@@ -426,7 +426,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 		{
 			if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 			{
-				_throwScriptError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
+				_throwRuntimeError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
 				return;
 			}
 			else
@@ -450,7 +450,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 		}
 		else
 		{
-			_throwScriptError("invalid statement!");
+			_throwRuntimeError("invalid statement!");
 			return;
 		}
 

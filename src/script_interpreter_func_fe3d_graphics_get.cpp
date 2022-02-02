@@ -274,7 +274,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:graphics` functionality as networking server!");
+		_throwRuntimeError("cannot access `fe3d:graphics` functionality as networking server!");
 	}
 
 	return true;

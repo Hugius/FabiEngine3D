@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(args[0]->getString().find('@') != string::npos)
 			{
-				_throwScriptError("id of requested sound with id \"" + args[0]->getString() + "\" cannot contain '@'");
+				_throwRuntimeError("id of requested sound with id \"" + args[0]->getString() + "\" cannot contain '@'");
 				return true;
 			}
 
@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(args[0]->getString().find('@') != string::npos)
 			{
-				_throwScriptError("id of requested sound with id \"" + args[0]->getString() + "\" cannot contain '@'");
+				_throwRuntimeError("id of requested sound with id \"" + args[0]->getString() + "\" cannot contain '@'");
 				return true;
 			}
 
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:sound3d` functionality as networking server!");
+		_throwRuntimeError("cannot access `fe3d:sound3d` functionality as networking server!");
 	}
 
 	return true;

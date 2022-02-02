@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 
 			if(_fe3d->spotlight_isExisting(args[0]->getString()))
 			{
-				_throwScriptError("spotlight already exists!");
+				_throwRuntimeError("spotlight already exists!");
 				return true;
 			}
 
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 
 			if(!_fe3d->pointlight_isExisting(args[0]->getString()))
 			{
-				_throwScriptError("Tried to create spotlight entity: maximum reached!");
+				_throwRuntimeError("Tried to create spotlight entity: maximum reached!");
 				return true;
 			}
 
@@ -216,7 +216,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:spotlight` functionality as networking server!");
+		_throwRuntimeError("cannot access `fe3d:spotlight` functionality as networking server!");
 	}
 
 	return true;

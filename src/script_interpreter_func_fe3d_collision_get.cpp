@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			if(args[2]->getString() != "X" && args[2]->getString() != "Y" &&
 			   args[2]->getString() != "Z" && !args[2]->getString().empty())
 			{
-				_throwScriptError("invalid direction argument!");
+				_throwRuntimeError("invalid direction argument!");
 				return true;
 			}
 
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			if(args[0]->getString() != "X" && args[0]->getString() != "Y" &&
 			   args[0]->getString() != "Z" && !args[0]->getString().empty())
 			{
-				_throwScriptError("invalid direction argument!");
+				_throwRuntimeError("invalid direction argument!");
 				return true;
 			}
 
@@ -165,7 +165,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			if(args[1]->getString() != "X" && args[1]->getString() != "Y" &&
 			   args[1]->getString() != "Z" && !args[1]->getString().empty())
 			{
-				_throwScriptError("invalid direction argument!");
+				_throwRuntimeError("invalid direction argument!");
 				return true;
 			}
 
@@ -202,7 +202,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			if(args[0]->getString() != "X" && args[0]->getString() != "Y" &&
 			   args[0]->getString() != "Z" && !args[0]->getString().empty())
 			{
-				_throwScriptError("invalid direction argument!");
+				_throwRuntimeError("invalid direction argument!");
 				return true;
 			}
 
@@ -239,7 +239,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			if(args[1]->getString() != "X" && args[1]->getString() != "Y" && args[1]->getString() != "Z" && !args[1]->getString().empty())
 			{
-				_throwScriptError("invalid direction argument!");
+				_throwRuntimeError("invalid direction argument!");
 				return true;
 			}
 
@@ -274,7 +274,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			if(args[0]->getString() != "X" && args[0]->getString() != "Y" && args[0]->getString() != "Z" && !args[0]->getString().empty())
 			{
-				_throwScriptError("invalid direction argument!");
+				_throwRuntimeError("invalid direction argument!");
 				return true;
 			}
 
@@ -312,7 +312,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			{
 				if(args[1]->getString() != "X" && args[1]->getString() != "Y" && args[1]->getString() != "Z" && !args[1]->getString().empty())
 				{
-					_throwScriptError("invalid direction argument!");
+					_throwRuntimeError("invalid direction argument!");
 					return true;
 				}
 
@@ -347,7 +347,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			if(args[0]->getString() != "X" && args[0]->getString() != "Y" && args[0]->getString() != "Z" && !args[0]->getString().empty())
 			{
-				_throwScriptError("invalid direction argument!");
+				_throwRuntimeError("invalid direction argument!");
 				return true;
 			}
 
@@ -417,7 +417,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				string selfSearchId = args[0]->getString() + (!args[1]->getString().empty() ? ("_" + args[1]->getString()) : "");
 				if(!_fe3d->aabb_isExisting(selfSearchId))
 				{
-					_throwScriptError("requested model AABB with id \"" + selfSearchId + "\" does not exist!");
+					_throwRuntimeError("requested model AABB with id \"" + selfSearchId + "\" does not exist!");
 					return true;
 				}
 
@@ -481,7 +481,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				string selfSearchId = args[0]->getString() + (!args[1]->getString().empty() ? ("_" + args[1]->getString()) : "");
 				if(!_fe3d->aabb_isExisting(selfSearchId))
 				{
-					_throwScriptError("requested model AABB with id \"" + selfSearchId + "\" does not exist!");
+					_throwRuntimeError("requested model AABB with id \"" + selfSearchId + "\" does not exist!");
 					return true;
 				}
 
@@ -529,7 +529,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				string selfSearchId = args[0]->getString() + (!args[1]->getString().empty() ? ("_" + args[1]->getString()) : "");
 				if(!_fe3d->aabb_isExisting(selfSearchId))
 				{
-					_throwScriptError("requested model AABB with id \"" + selfSearchId + "\" does not exist!");
+					_throwRuntimeError("requested model AABB with id \"" + selfSearchId + "\" does not exist!");
 					return true;
 				}
 
@@ -554,7 +554,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:collision` functionality as networking server!");
+		_throwRuntimeError("cannot access `fe3d:collision` functionality as networking server!");
 	}
 
 	return true;

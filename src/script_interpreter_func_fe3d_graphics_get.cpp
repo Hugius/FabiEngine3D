@@ -71,9 +71,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getDofQuality();
+			const auto result = static_cast<int>(_fe3d->gfx_getDofQuality());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "fe3d:graphics_is_dof_enabled")
@@ -125,9 +125,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getMotionBlurQuality();
+			const auto result = static_cast<int>(_fe3d->gfx_getMotionBlurQuality());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "fe3d:graphics_is_motion_blur_enabled")
@@ -197,18 +197,18 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getBloomQuality();
+			const auto result = static_cast<int>(_fe3d->gfx_getBloomQuality());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "fe3d:graphics_get_bloom_blur_count")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getBloomBlurCount();
+			const auto result = static_cast<int>(_fe3d->gfx_getBloomBlurCount());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "fe3d:graphics_is_bloom_enabled")

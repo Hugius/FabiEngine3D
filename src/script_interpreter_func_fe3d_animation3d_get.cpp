@@ -132,9 +132,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation3dEditor->getModelAnimationFrameIndex(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation3dEditor->getModelAnimationFrameIndex(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}

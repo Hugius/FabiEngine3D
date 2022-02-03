@@ -28,46 +28,45 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto ip = _fe3d->server_getNewClientIp();
+			auto result = _fe3d->server_getNewClientIp();
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, ip));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:server_get_new_username")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto username = _fe3d->server_getNewClientUsername();
+			auto result = _fe3d->server_getNewClientUsername();
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, username));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:server_get_old_ip")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto ip = _fe3d->server_getOldClientIp();
+			auto result = _fe3d->server_getOldClientIp();
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, ip));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:server_get_old_username")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto username = _fe3d->server_getOldClientUsername();
+			auto result = _fe3d->server_getOldClientUsername();
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, username));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:server_get_connected_ips")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto IPs = _fe3d->server_getClientIps();
-			for(const auto& ip : IPs)
+			for(const auto& result : _fe3d->server_getClientIps())
 			{
-				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, ip));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -75,10 +74,9 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto usernames = _fe3d->server_getClientUsernames();
-			for(const auto& username : usernames)
+			for(const auto& result : _fe3d->server_getClientUsernames())
 			{
-				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, username));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -88,7 +86,9 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		{
 			for(const auto& message : _fe3d->server_getPendingMessages())
 			{
-				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP")));
+				const auto result = string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP");
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -98,7 +98,9 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		{
 			for(const auto& message : _fe3d->server_getPendingMessages())
 			{
-				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, message.getUsername()));
+				const auto result = message.getUsername();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}
@@ -108,7 +110,9 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		{
 			for(const auto& message : _fe3d->server_getPendingMessages())
 			{
-				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, message.getContent()));
+				const auto result = message.getContent();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 		}
 	}

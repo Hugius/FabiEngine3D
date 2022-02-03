@@ -15,15 +15,15 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				return true;
 			}
 
-			for(const auto& id : _fe3d->aabb_getIds())
+			for(const auto& result : _fe3d->aabb_getIds())
 			{
-				if(args[0]->getString() == id.substr(0, args[0]->getString().size()))
+				if(args[0]->getString() == result.substr(0, args[0]->getString().size()))
 				{
-					if(id[0] != '@')
+					if(result[0] != '@')
 					{
-						if(!_fe3d->aabb_hasParent(id))
+						if(!_fe3d->aabb_hasParent(result))
 						{
-							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, id));
+							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 						}
 					}
 				}
@@ -196,15 +196,13 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->aabb_getIds();
-
-			for(const auto& id : result)
+			for(const auto& result : _fe3d->aabb_getIds())
 			{
-				if(id[0] != '@')
+				if(result[0] != '@')
 				{
-					if(!_fe3d->aabb_hasParent(id))
+					if(!_fe3d->aabb_hasParent(result))
 					{
-						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, id));
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 					}
 				}
 			}

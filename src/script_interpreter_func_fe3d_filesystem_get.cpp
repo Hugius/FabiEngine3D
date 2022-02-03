@@ -61,12 +61,12 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 				return true;
 			}
 
-			string line;
+			string result;
 			while(!file.eof())
 			{
-				getline(file, line);
+				getline(file, result);
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, line));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
 
 			file.close();

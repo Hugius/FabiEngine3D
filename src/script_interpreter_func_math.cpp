@@ -188,7 +188,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, round(args[0]->getDecimal())));
+			const auto result = round(args[0]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:floor")
@@ -197,7 +199,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, floor(args[0]->getDecimal())));
+			const auto result = floor(args[0]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:ceil")
@@ -206,7 +210,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, ceil(args[0]->getDecimal())));
+			const auto result = ceil(args[0]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:clamp")
@@ -238,7 +244,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, sqrtf(args[0]->getDecimal())));
+			const auto result = sqrtf(args[0]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:abs")
@@ -247,11 +255,15 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 		{
 			if(args[0]->getType() == SVT::INTEGER)
 			{
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, abs(args[0]->getInteger())));
+				const auto result = abs(args[0]->getInteger());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 			else if(args[0]->getType() == SVT::DECIMAL)
 			{
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, fabsf(args[0]->getDecimal())));
+				const auto result = fabsf(args[0]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 			else
 			{

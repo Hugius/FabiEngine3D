@@ -36,9 +36,9 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 				return true;
 			}
 
-			const auto result = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPositionRelativeToViewport())).x;
+			const auto result = clamp(Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPositionRelativeToViewport())).x, -1.0f, 1.0f);
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, clamp(result, -1.0f, 1.0f)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:cursor_get_position_y")
@@ -51,9 +51,9 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 				return true;
 			}
 
-			const auto result = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPositionRelativeToViewport())).y;
+			const auto result = clamp(Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPositionRelativeToViewport())).y, -1.0f, 1.0f);
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, clamp(result, -1.0f, 1.0f)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:window_get_width")

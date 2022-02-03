@@ -99,9 +99,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			const auto result = listVariable->getValueCount();
+			const auto result = static_cast<int>(listVariable->getValueCount());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "misc:list_contains")
@@ -130,43 +130,43 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			bool hasFoundValue = false;
+			bool result = false;
 			for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
 			{
-				if((listVariable->getValue(i)->getType() == SVT::STRING) &&
-				   (args[1]->getType() == SVT::STRING) &&
+				if((args[1]->getType() == SVT::STRING) &&
+				   (listVariable->getValue(i)->getType() == SVT::STRING) &&
 				   (listVariable->getValue(i)->getString() == args[1]->getString()))
 				{
-					hasFoundValue = true;
+					result = true;
 					break;
 				}
 
-				if((listVariable->getValue(i)->getType() == SVT::DECIMAL) &&
-				   (args[1]->getType() == SVT::DECIMAL) &&
+				if((args[1]->getType() == SVT::DECIMAL) &&
+				   (listVariable->getValue(i)->getType() == SVT::DECIMAL) &&
 				   (listVariable->getValue(i)->getDecimal() == args[1]->getDecimal()))
 				{
-					hasFoundValue = true;
+					result = true;
 					break;
 				}
 
-				if((listVariable->getValue(i)->getType() == SVT::INTEGER) &&
-				   (args[1]->getType() == SVT::INTEGER) &&
+				if((args[1]->getType() == SVT::INTEGER) &&
+				   (listVariable->getValue(i)->getType() == SVT::INTEGER) &&
 				   (listVariable->getValue(i)->getInteger() == args[1]->getInteger()))
 				{
-					hasFoundValue = true;
+					result = true;
 					break;
 				}
 
-				if((listVariable->getValue(i)->getType() == SVT::BOOLEAN) &&
-				   (args[1]->getType() == SVT::BOOLEAN) &&
+				if((args[1]->getType() == SVT::BOOLEAN) &&
+				   (listVariable->getValue(i)->getType() == SVT::BOOLEAN) &&
 				   (listVariable->getValue(i)->getBoolean() == args[1]->getBoolean()))
 				{
-					hasFoundValue = true;
+					result = true;
 					break;
 				}
 			}
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, hasFoundValue));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "misc:list_index")
@@ -195,43 +195,43 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			int foundIndex = -1;
+			int result = -1;
 			for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
 			{
-				if((listVariable->getValue(i)->getType() == SVT::STRING) &&
-				   (args[1]->getType() == SVT::STRING) &&
+				if((args[1]->getType() == SVT::STRING) &&
+				   (listVariable->getValue(i)->getType() == SVT::STRING) &&
 				   (listVariable->getValue(i)->getString() == args[1]->getString()))
 				{
-					foundIndex = i;
+					result = i;
 					break;
 				}
 
-				if((listVariable->getValue(i)->getType() == SVT::DECIMAL) &&
-				   (args[1]->getType() == SVT::DECIMAL) &&
+				if((args[1]->getType() == SVT::DECIMAL) &&
+				   (listVariable->getValue(i)->getType() == SVT::DECIMAL) &&
 				   (listVariable->getValue(i)->getDecimal() == args[1]->getDecimal()))
 				{
-					foundIndex = i;
+					result = i;
 					break;
 				}
 
-				if((listVariable->getValue(i)->getType() == SVT::INTEGER) &&
-				   (args[1]->getType() == SVT::INTEGER) &&
+				if((args[1]->getType() == SVT::INTEGER) &&
+				   (listVariable->getValue(i)->getType() == SVT::INTEGER) &&
 				   (listVariable->getValue(i)->getInteger() == args[1]->getInteger()))
 				{
-					foundIndex = i;
+					result = i;
 					break;
 				}
 
-				if((listVariable->getValue(i)->getType() == SVT::BOOLEAN) &&
-				   (args[1]->getType() == SVT::BOOLEAN) &&
+				if((args[1]->getType() == SVT::BOOLEAN) &&
+				   (listVariable->getValue(i)->getType() == SVT::BOOLEAN) &&
 				   (listVariable->getValue(i)->getBoolean() == args[1]->getBoolean()))
 				{
-					foundIndex = i;
+					result = i;
 					break;
 				}
 			}
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, foundIndex));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "misc:list_min")
@@ -403,7 +403,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, args[0]->getString() + args[1]->getString()));
+			const auto result = (args[0]->getString() + args[1]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "misc:string_get_size")
@@ -412,9 +414,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = args[0]->getString().size();
+			const auto result = static_cast<int>(args[0]->getString().size());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "misc:string_contains")
@@ -462,22 +464,22 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			const auto fullString = args[0]->getString();
 			const auto splitter = args[1]->getString();
 
-			string stringPart = "";
+			string result = "";
 			for(size_t i = 0; i < fullString.size(); i++)
 			{
 				if(fullString[i] == splitter.back())
 				{
-					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, stringPart));
-					stringPart = "";
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+					result = "";
 				}
 				else if(i == (fullString.size() - 1))
 				{
-					stringPart += fullString[i];
-					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, stringPart));
+					result += fullString[i];
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 				}
 				else
 				{
-					stringPart += fullString[i];
+					result += fullString[i];
 				}
 			}
 		}

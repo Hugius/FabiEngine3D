@@ -125,36 +125,36 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getCubeReflectionQuality();
+			const auto result = static_cast<int>(_fe3d->gfx_getCubeReflectionQuality());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_planar_reflection_quality")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getPlanarReflectionQuality();
+			const auto result = static_cast<int>(_fe3d->gfx_getPlanarReflectionQuality());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_planar_refraction_quality")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getPlanarRefractionQuality();
+			const auto result = static_cast<int>(_fe3d->gfx_getPlanarRefractionQuality());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_planar_reflection_height")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getPlanarReflectionHeight();
+			const auto result = static_cast<int>(_fe3d->gfx_getPlanarReflectionHeight());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_position_x")
@@ -233,18 +233,18 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowQuality();
+			const auto result = static_cast<int>(_fe3d->gfx_getShadowQuality());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_get_shadow_interval")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowInterval();
+			const auto result = static_cast<int>(_fe3d->gfx_getShadowInterval());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "fe3d:lighting_is_shadow_following_camera")

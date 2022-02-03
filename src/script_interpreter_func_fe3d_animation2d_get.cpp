@@ -92,9 +92,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation2dEditor->getQuad3dAnimationRowCount(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation2dEditor->getQuad3dAnimationRowCount(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
@@ -112,9 +112,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation2dEditor->getQuad3dAnimationColumnCount(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation2dEditor->getQuad3dAnimationColumnCount(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
@@ -132,9 +132,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation2dEditor->getQuad3dAnimationRowIndex(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation2dEditor->getQuad3dAnimationRowIndex(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
@@ -152,9 +152,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation2dEditor->getQuad3dAnimationColumnIndex(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation2dEditor->getQuad3dAnimationColumnIndex(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
@@ -192,9 +192,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation2dEditor->getQuad3dAnimationInterval(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation2dEditor->getQuad3dAnimationInterval(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
@@ -292,9 +292,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation2dEditor->getQuad2dAnimationRowCount(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation2dEditor->getQuad2dAnimationRowCount(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
@@ -312,9 +312,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation2dEditor->getQuad2dAnimationColumnCount(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation2dEditor->getQuad2dAnimationColumnCount(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
@@ -332,9 +332,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation2dEditor->getQuad2dAnimationRowIndex(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation2dEditor->getQuad2dAnimationRowIndex(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
@@ -352,9 +352,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation2dEditor->getQuad2dAnimationColumnIndex(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation2dEditor->getQuad2dAnimationColumnIndex(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}
@@ -392,9 +392,9 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 					return true;
 				}
 
-				const auto result = _animation2dEditor->getQuad2dAnimationInterval(args[0]->getString(), args[1]->getString());
+				const auto result = static_cast<int>(_animation2dEditor->getQuad2dAnimationInterval(args[0]->getString(), args[1]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}

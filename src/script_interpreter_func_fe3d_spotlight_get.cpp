@@ -31,13 +31,13 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 				return true;
 			}
 
-			for(const auto& id : _fe3d->spotlight_getIds())
+			for(const auto& result : _fe3d->spotlight_getIds())
 			{
-				if(args[0]->getString() == id.substr(0, args[0]->getString().size()))
+				if(args[0]->getString() == result.substr(0, args[0]->getString().size()))
 				{
-					if(id[0] != '@')
+					if(result[0] != '@')
 					{
-						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, id));
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 					}
 				}
 			}
@@ -47,13 +47,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->spotlight_getIds();
-
-			for(const auto& id : result)
+			for(const auto& result : _fe3d->spotlight_getIds())
 			{
-				if(id[0] != '@')
+				if(result[0] != '@')
 				{
-					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, id));
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 				}
 			}
 		}

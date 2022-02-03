@@ -10,9 +10,19 @@ using std::ofstream;
 
 ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentFileName)
 {
+	string shaderDirectoryPath;
+	if(Config::getInst().isApplicationExported())
+	{
+		shaderDirectoryPath = "shaders\\";
+	}
+	else
+	{
+		shaderDirectoryPath = "engine\\shaders\\";
+	}
+
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto vertexPath = string("engine\\shaders\\" + vertexFileName);
-	const auto fragmentPath = string("engine\\shaders\\" + fragmentFileName);
+	const auto vertexPath = string(shaderDirectoryPath + vertexFileName);
+	const auto fragmentPath = string(shaderDirectoryPath + fragmentFileName);
 	const auto shaderName = vertexFileName.substr(0, vertexFileName.size() - 5);
 
 	auto vertexFile = ifstream(rootPath + vertexPath);

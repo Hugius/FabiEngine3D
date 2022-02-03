@@ -106,11 +106,22 @@ void EngineCore::start()
 
 	_isRunning = true;
 
-	_imageLoader->cacheImage("engine\\assets\\image\\diffuse_map\\logo.tga", true);
+
+	string logoDirectoryPath;
+	if(Config::getInst().isApplicationExported())
+	{
+		logoDirectoryPath = "logo\\";
+	}
+	else
+	{
+		logoDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
+	}
+
+	_imageLoader->cacheImage(logoDirectoryPath + "logo.tga", true);
 
 	shared_ptr<Quad2dEntity> logo = make_shared<Quad2dEntity>("logo");
 	logo->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader->loadImage("engine\\assets\\image\\diffuse_map\\logo.tga")));
+	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader->loadImage(logoDirectoryPath + "logo.tga")));
 	logo->setCentered(true);
 
 	SDL_DisplayMode DM;

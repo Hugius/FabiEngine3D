@@ -127,7 +127,7 @@ void TopViewportController::_updateProjectLoading()
 
 		if(!clickedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if(!validateProject(projectDirectoryPath))
+			if(isProjectCorrupted(projectDirectoryPath))
 			{
 				return;
 			}

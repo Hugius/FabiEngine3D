@@ -209,10 +209,14 @@ void TopViewportController::_updateMiscScreenManagement()
 		else
 		{
 			Tools::createDirectory(exportDirectoryPath);
+			Tools::createDirectory(exportDirectoryPath + "logo\\");
+			Tools::createDirectory(exportDirectoryPath + "shaders\\");
 
-			Tools::copyDirectory(string(rootPath + "binaries"), string(exportDirectoryPath + "binaries"));
-			Tools::copyDirectory(string(rootPath + "engine"), string(exportDirectoryPath + "engine"));
+			Tools::copyDirectory(string(rootPath + "binaries\\"), string(exportDirectoryPath + "binaries\\"));
+			Tools::copyDirectory(string(rootPath + "engine\\shaders\\"), string(exportDirectoryPath + "shaders\\"));
 			Tools::copyDirectory(string(rootPath + "projects\\" + _currentProjectId), exportDirectoryPath);
+
+			Tools::copyFile(string(rootPath + "engine\\assets\\image\\diffuse_map\\logo.tga"), string(exportDirectoryPath + "logo\\logo.tga"));
 
 			auto oldPath = string(exportDirectoryPath + "binaries\\fe3d.exe");
 			auto newPath = string(exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe");

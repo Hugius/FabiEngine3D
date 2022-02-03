@@ -203,65 +203,82 @@ void TopViewportController::_applyProjectChange()
 	_scriptEditor->setCurrentProjectId(_currentProjectId);
 }
 
-const bool TopViewportController::validateProject(const string& projectDirectoryPath) const
+const bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath) const
 {
-	if(!Tools::isDirectoryExisting(projectDirectoryPath) ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\audio\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\model\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\model\\diffuse_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\model\\emission_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\model\\normal_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\model\\reflection_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\model\\specular_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\quad2d\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\quad2d\\diffuse_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\quad3d\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\quad3d\\diffuse_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\quad3d\\emission_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\sky\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\sky\\cube_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\terrain\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\terrain\\blend_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\terrain\\diffuse_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\terrain\\height_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\text2d\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\text2d\\font_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\text3d\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\text3d\\font_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\water\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\water\\displacement_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\water\\dudv_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\entity\\water\\normal_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\misc\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\image\\misc\\flare_map\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "assets\\mesh\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "data\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "saves\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "scripts\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "worlds\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "worlds\\custom\\") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "worlds\\editor\\"))
+	vector<string> directoryPaths;
+	vector<string> filePaths;
+
+	directoryPaths.push_back(projectDirectoryPath);
+	directoryPaths.push_back(projectDirectoryPath + "assets\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\audio\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\model\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\model\\diffuse_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\model\\emission_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\model\\normal_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\model\\reflection_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\model\\specular_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\quad2d\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\quad2d\\diffuse_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\quad3d\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\quad3d\\diffuse_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\quad3d\\emission_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\sky\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\sky\\cube_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\terrain\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\terrain\\blend_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\terrain\\diffuse_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\terrain\\height_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\text2d\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\text2d\\font_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\text3d\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\text3d\\font_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\water\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\water\\displacement_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\water\\dudv_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\water\\normal_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\misc\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\misc\\flare_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\mesh\\");
+	directoryPaths.push_back(projectDirectoryPath + "data\\");
+	directoryPaths.push_back(projectDirectoryPath + "saves\\");
+	directoryPaths.push_back(projectDirectoryPath + "scripts\\");
+	directoryPaths.push_back(projectDirectoryPath + "worlds\\");
+	directoryPaths.push_back(projectDirectoryPath + "worlds\\custom\\");
+	directoryPaths.push_back(projectDirectoryPath + "worlds\\editor\\");
+
+	filePaths.push_back(projectDirectoryPath + "data\\animation2d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\animation3d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\model.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\quad2d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\quad3d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\settings.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\sky.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\sound.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\terrain.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\text2d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\text3d.fe3d");
+	filePaths.push_back(projectDirectoryPath + "data\\water.fe3d");
+
+	for(const auto& path : directoryPaths)
 	{
-		return true;
+		if(!Tools::isDirectoryExisting(path))
+		{
+			Logger::throwWarning("Project corrupted: directory `" + path + "` not existing");
+
+			return true;
+		}
 	}
 
-	if(!Tools::isFileExisting(projectDirectoryPath + "data\\animation2d.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\animation3d.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\model.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\quad2d.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\quad3d.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\settings.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\sky.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\sound.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\terrain.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\text2d.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\text3d.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\water.fe3d"))
+	for(const auto& path : filePaths)
 	{
-		return true;
+		if(!Tools::isFileExisting(path))
+		{
+			Logger::throwWarning("Project corrupted: file `" + path + "` not existing");
+
+			return true;
+		}
 	}
 
 	return false;

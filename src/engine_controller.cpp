@@ -136,15 +136,17 @@ void EngineController::initialize()
 
 	if(Config::getInst().isApplicationExported())
 	{
-		_topViewportController->validateProject(rootPath);
-
-		_scriptEditor->loadScriptFiles(true);
-		_scriptExecutor->load();
-
-		if(!_scriptExecutor->isRunning())
+		if(!_topViewportController->isProjectCorrupted(rootPath))
 		{
-			_fe3d->application_stop();
-			_mustPromptOnExit = true;
+			_scriptEditor->loadScriptFiles(true);
+
+			_scriptExecutor->load();
+
+			if(!_scriptExecutor->isRunning())
+			{
+				_fe3d->application_stop();
+				_mustPromptOnExit = true;
+			}
 		}
 	}
 	else
@@ -167,7 +169,6 @@ void EngineController::initialize()
 		imagePaths.push_back(diffuseMapDirectoryPath + "debug.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "grid.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "light_source.tga");
-		imagePaths.push_back(diffuseMapDirectoryPath + "logo.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "minus.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "pause.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "plus.tga");

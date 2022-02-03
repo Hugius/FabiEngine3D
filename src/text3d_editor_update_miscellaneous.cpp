@@ -11,6 +11,7 @@ void Text3dEditor::_updateMiscellaneousMenu()
 		auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(_currentTextId);
 		auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(_currentTextId);
 		auto opacity = _fe3d->text3d_getOpacity(_currentTextId);
+		auto minTextureAlpha = _fe3d->text3d_getMinTextureAlpha(_currentTextId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -36,21 +37,30 @@ void Text3dEditor::_updateMiscellaneousMenu()
 		{
 			_gui->getOverlay()->createValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
+		{
+			_gui->getOverlay()->createValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
 
-		if(_gui->getOverlay()->checkValueForm("sizeX", size.x, {0.0f}))
+		if(_gui->getOverlay()->checkValueForm("sizeX", size.x))
 		{
 			size.x /= 100.0f;
 			_fe3d->text3d_setSize(_currentTextId, size);
 		}
-		if(_gui->getOverlay()->checkValueForm("sizeY", size.y, {0.0f}))
+		if(_gui->getOverlay()->checkValueForm("sizeY", size.y))
 		{
 			size.y /= 100.0f;
 			_fe3d->text3d_setSize(_currentTextId, size);
 		}
-		if(_gui->getOverlay()->checkValueForm("opacity", opacity, {0.0f}))
+		if(_gui->getOverlay()->checkValueForm("opacity", opacity))
 		{
 			opacity /= 100.0f;
 			_fe3d->text3d_setOpacity(_currentTextId, opacity);
+		}
+		if(_gui->getOverlay()->checkValueForm("minTextureAlpha", minTextureAlpha))
+		{
+			minTextureAlpha /= 100.0f;
+			_fe3d->text3d_setMinTextureAlpha(_currentTextId, minTextureAlpha);
 		}
 
 		screen->getButton("isFacingCameraHorizontally")->changeTextContent(isFacingCameraHorizontally ? "Facing X: ON" : "Facing X: OFF");

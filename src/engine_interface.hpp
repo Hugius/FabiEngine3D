@@ -335,6 +335,7 @@ public:
 	void quad3d_setOpacity(const string& id, float value);
 	void quad3d_setTextureRepeat(const string& id, float value);
 	void quad3d_setEmissionIntensity(const string& id, float value);
+	void quad3d_setMinTextureAlpha(const string& id, float value);
 	void quad3d_setVisible(const string& id, bool value);
 	void quad3d_setFacingCameraHorizontally(const string& id, bool value);
 	void quad3d_setFacingCameraVertically(const string& id, bool value);
@@ -361,6 +362,7 @@ public:
 	const float quad3d_getOpacity(const string& id) const;
 	const float quad3d_getTextureRepeat(const string& id) const;
 	const float quad3d_getEmissionIntensity(const string& id) const;
+	const float quad3d_getMinTextureAlpha(const string& id) const;
 	const bool quad3d_isExisting(const string& id) const;
 	const bool quad3d_isVisible(const string& id) const;
 	const bool quad3d_isFacingCameraHorizontally(const string& id) const;
@@ -393,6 +395,7 @@ public:
 	void text3d_setMaxHeight(const string& id, float value);
 	void text3d_setLightness(const string& id, float value);
 	void text3d_setOpacity(const string& id, float value);
+	void text3d_setMinTextureAlpha(const string& id, float value);
 	void text3d_setVisible(const string& id, bool value);
 	void text3d_setFacingCameraHorizontally(const string& id, bool value);
 	void text3d_setFacingCameraVertically(const string& id, bool value);
@@ -417,6 +420,7 @@ public:
 	const float text3d_getMinHeight(const string& id) const;
 	const float text3d_getMaxHeight(const string& id) const;
 	const float text3d_getOpacity(const string& id) const;
+	const float text3d_getMinTextureAlpha(const string& id) const;
 	const bool text3d_isExisting(const string& id) const;
 	const bool text3d_isVisible(const string& id) const;
 	const bool text3d_isFacingCameraHorizontally(const string& id) const;

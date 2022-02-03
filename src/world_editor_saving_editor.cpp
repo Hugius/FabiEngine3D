@@ -171,6 +171,31 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
+	for(const auto& textID : _fe3d->text3d_getIds())
+	{
+		if(textID[0] != '@')
+		{
+			auto position = _fe3d->text3d_getPosition(textID);
+			auto rotation = _fe3d->text3d_getRotation(textID);
+			auto size = _fe3d->text3d_getSize(textID);
+
+			string templateId = _loadedTextIds.at(textID);
+
+			file <<
+				"TEXT3D " <<
+				textID << " " <<
+				templateId << " " <<
+				position.x << " " <<
+				position.y << " " <<
+				position.z << " " <<
+				rotation.x << " " <<
+				rotation.y << " " <<
+				rotation.z << " " <<
+				size.x << " " <<
+				size.y << endl;
+		}
+	}
+
 	for(const auto& soundId : _fe3d->sound3d_getIds())
 	{
 		if(soundId[0] != '@')

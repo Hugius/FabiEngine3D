@@ -250,7 +250,7 @@ void Text3dEntity::setWireframed(bool value)
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setWireframeColor(_isWireframed);
+		character->setWireframed(_isWireframed);
 	}
 }
 
@@ -311,6 +311,16 @@ void Text3dEntity::setMaxHeight(float value)
 	for(const auto& character : _characterEntities)
 	{
 		character->setMaxHeight(_maxHeight);
+	}
+}
+
+void Text3dEntity::setMinTextureAlpha(float value)
+{
+	_minTextureAlpha = value;
+
+	for(const auto& character : _characterEntities)
+	{
+		character->setMinTextureAlpha(_minTextureAlpha);
 	}
 }
 
@@ -455,6 +465,11 @@ const fvec3& Text3dEntity::getColor() const
 const fvec3& Text3dEntity::getWireframeColor() const
 {
 	return _wireframeColor;
+}
+
+const float Text3dEntity::getMinTextureAlpha() const
+{
+	return _minTextureAlpha;
 }
 
 const float Text3dEntity::getLightness() const

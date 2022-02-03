@@ -116,6 +116,7 @@ const bool Quad3dEditor::loadFromFile()
 		float lightness;
 		float textureRepeat;
 		float opacity;
+		float minTextureAlpha;
 		float emissionIntensity;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
@@ -142,7 +143,8 @@ const bool Quad3dEditor::loadFromFile()
 			>> textureRepeat
 			>> isBright
 			>> emissionIntensity
-			>> opacity;
+			>> opacity
+			>> minTextureAlpha;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -168,6 +170,7 @@ const bool Quad3dEditor::loadFromFile()
 			_fe3d->quad3d_setBright(quadId, isBright);
 			_fe3d->quad3d_setOpacity(quadId, opacity);
 			_fe3d->quad3d_setEmissionIntensity(quadId, emissionIntensity);
+			_fe3d->quad3d_setMinTextureAlpha(quadId, minTextureAlpha);
 
 			if(!diffuseMapPath.empty())
 			{

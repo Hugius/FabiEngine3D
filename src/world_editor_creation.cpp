@@ -248,6 +248,7 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& t
 	_fe3d->quad3d_setShadowed(newId, _fe3d->quad3d_isShadowed(templateId));
 	_fe3d->quad3d_setReflected(newId, _fe3d->quad3d_isReflected(templateId));
 	_fe3d->quad3d_setLightness(newId, _fe3d->quad3d_getLightness(templateId));
+	_fe3d->quad3d_setMinTextureAlpha(newId, _fe3d->quad3d_getMinTextureAlpha(templateId));
 
 	if(isFromOutside)
 	{
@@ -278,6 +279,7 @@ const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& t
 	_fe3d->text3d_setReflected(newId, _fe3d->text3d_isReflected(templateId));
 	_fe3d->text3d_setLightness(newId, _fe3d->text3d_getLightness(templateId));
 	_fe3d->text3d_setContent(newId, _fe3d->text3d_getContent(templateId));
+	_fe3d->text3d_setMinTextureAlpha(newId, _fe3d->text3d_getMinTextureAlpha(templateId));
 
 	if(isFromOutside)
 	{

@@ -42,6 +42,7 @@ public:
 	void setOpacity(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
+	void setMinTextureAlpha(float value);
 	void setFrozen(bool value);
 	void setVisible(bool value);
 
@@ -59,6 +60,7 @@ public:
 	const fvec2& getUvMultiplier() const;
 	const fvec2& getUvOffset() const;
 
+	const float getMinTextureAlpha() const;
 	const float getLightness() const;
 	const float getOpacity() const;
 	const float getMinHeight() const;
@@ -194,6 +196,7 @@ private:
 	fvec2 _uvMultiplier = fvec2(1.0f);
 	fvec2 _uvOffset = fvec2(0.0f);
 
+	float _minTextureAlpha = 1.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;

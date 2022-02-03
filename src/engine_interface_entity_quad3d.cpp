@@ -224,6 +224,11 @@ void EngineInterface::quad3d_setEmissionIntensity(const string& id, float value)
 	_core->getQuad3dEntityManager()->getEntity(id)->setEmissionIntensity(value);
 }
 
+void EngineInterface::quad3d_setMinTextureAlpha(const string& id, float value)
+{
+	_core->getQuad3dEntityManager()->getEntity(id)->setMinTextureAlpha(value);
+}
+
 const float EngineInterface::quad3d_getLightness(const string& id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getLightness();
@@ -252,6 +257,11 @@ const float EngineInterface::quad3d_getTextureRepeat(const string& id) const
 const float EngineInterface::quad3d_getEmissionIntensity(const string& id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getEmissionIntensity();
+}
+
+const float EngineInterface::quad3d_getMinTextureAlpha(const string& id) const
+{
+	return _core->getQuad3dEntityManager()->getEntity(id)->getMinTextureAlpha();
 }
 
 const bool EngineInterface::quad3d_isExisting(const string& id) const

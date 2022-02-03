@@ -153,7 +153,6 @@ private:
 	fvec3 _baseSizeTarget = fvec3(1.0f);
 	fvec3 _levelOfDetailSize = fvec3(1.0f);
 
-	float _minTextureAlpha = 0.0f;
 	float _basePositionTargetSpeed = 0.0f;
 	float _baseRotationTargetSpeed = 0.0f;
 	float _baseSizeTargetSpeed = 0.0f;

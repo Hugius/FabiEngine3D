@@ -233,6 +233,32 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				}
 			}
 		}
+		else if(lineType == "TEXT3D")
+		{
+			string textId;
+			string templateId;
+			fvec3 position;
+			fvec3 rotation;
+			fvec2 size;
+
+			iss
+				>> textId
+				>> templateId
+				>> position.x
+				>> position.y
+				>> position.z
+				>> rotation.x
+				>> rotation.y
+				>> rotation.z
+				>> size.x
+				>> size.y;
+
+			if(_copyTemplateText3d(textId, templateId, position, false))
+			{
+				_fe3d->text3d_setRotation(textId, rotation);
+				_fe3d->text3d_setSize(textId, size);
+			}
+		}
 		else if(lineType == "SOUND")
 		{
 			string soundId;

@@ -164,6 +164,11 @@ void EngineInterface::text3d_setOpacity(const string& id, float value)
 	_core->getText3dEntityManager()->getEntity(id)->setOpacity(value);
 }
 
+void EngineInterface::text3d_setMinTextureAlpha(const string& id, float value)
+{
+	_core->getText3dEntityManager()->getEntity(id)->setMinTextureAlpha(value);
+}
+
 const float EngineInterface::text3d_getLightness(const string& id) const
 {
 	return _core->getText3dEntityManager()->getEntity(id)->getLightness();
@@ -182,6 +187,11 @@ const float EngineInterface::text3d_getMaxHeight(const string& id) const
 const float EngineInterface::text3d_getOpacity(const string& id) const
 {
 	return _core->getText3dEntityManager()->getEntity(id)->getOpacity();
+}
+
+const float EngineInterface::text3d_getMinTextureAlpha(const string& id) const
+{
+	return _core->getText3dEntityManager()->getEntity(id)->getMinTextureAlpha();
 }
 
 const bool EngineInterface::text3d_isExisting(const string& id) const

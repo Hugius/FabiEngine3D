@@ -152,6 +152,7 @@ void WorldEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("modelId");
 	_gui->getOverlay()->deleteTextField("quadId");
+	_gui->getOverlay()->deleteTextField("textId");
 	_gui->getOverlay()->deleteTextField("soundId");
 
 	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);

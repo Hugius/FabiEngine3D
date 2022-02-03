@@ -51,6 +51,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		iss >> noWhiteSpace;
 		const auto isComment = (noWhiteSpace.substr(0, 3) == "///");
 		_fe3d->text3d_create(lineTextId, FONT_MAP_PATH, false);
+		_fe3d->text3d_setMinTextureAlpha(lineTextId, 0.0f);
 		_fe3d->text3d_setContent(lineTextId, lineTextString);
 		_fe3d->text3d_setPosition(lineTextId, (lineTextPosition - fvec3(0.0f, (lineTextSize.y * 0.5f), 0.0f)));
 		_fe3d->text3d_setSize(lineTextId, lineTextSize);

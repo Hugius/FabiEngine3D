@@ -31,7 +31,9 @@ const bool SoundEditor::saveToFile() const
 
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
-		file << soundId << " " << audioPath << endl;
+		file <<
+			soundId << " " <<
+			audioPath << endl;
 	}
 
 	file.close();

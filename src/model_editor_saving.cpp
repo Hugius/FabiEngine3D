@@ -43,7 +43,8 @@ const bool ModelEditor::saveToFile() const
 		replace(meshPath.begin(), meshPath.end(), ' ', '?');
 		replace(levelOfDetailEntityId.begin(), levelOfDetailEntityId.end(), ' ', '?');
 
-		file << "MODEL " <<
+		file <<
+			"MODEL " <<
 			modelId << " " <<
 			meshPath << " " <<
 			modelSize.x << " " <<
@@ -137,7 +138,8 @@ const bool ModelEditor::saveToFile() const
 			auto position = _fe3d->aabb_getPosition(aabbId);
 			auto size = _fe3d->aabb_getSize(aabbId);
 
-			file << "AABB " <<
+			file <<
+				"AABB " <<
 				aabbId << " " <<
 				modelId << " " <<
 				position.x << " " <<

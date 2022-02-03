@@ -37,12 +37,12 @@ const bool Animation2dEditor::saveToFile() const
 
 			replace(previewTexturePath.begin(), previewTexturePath.end(), ' ', '?');
 
-			file <<
-				animationId << " " <<
-				previewTexturePath << " " <<
-				rowCount << " " <<
-				columnCount << " " <<
-				interval << endl;
+			file
+				<< animationId << " "
+				<< previewTexturePath << " "
+				<< rowCount << " "
+				<< columnCount << " "
+				<< interval << endl;
 		}
 	}
 

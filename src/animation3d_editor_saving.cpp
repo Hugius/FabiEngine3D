@@ -29,7 +29,9 @@ const bool Animation3dEditor::saveToFile() const
 
 		if(!previewModelId.empty())
 		{
-			file << animationId << " " << previewModelId;
+			file <<
+				animationId << " " <<
+				previewModelId;
 
 			if(animation->getFrames().size() > 1)
 			{
@@ -72,6 +74,7 @@ const bool Animation3dEditor::saveToFile() const
 						{
 							file << " ";
 						}
+
 						partIndex++;
 					}
 

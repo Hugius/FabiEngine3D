@@ -29,7 +29,7 @@ void Quad3dEditor::_updateTexturingMenu()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
 				return;
 			}
 
@@ -61,7 +61,7 @@ void Quad3dEditor::_updateTexturingMenu()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
 				return;
 			}
 

@@ -99,7 +99,7 @@ const bool TopViewportController::_prepareProjectChoosing(const string& title) c
 
 	if(!Tools::isDirectoryExisting(projectDirectoryPath))
 	{
-		Logger::throwWarning("Directory `projects\\` not existing");
+		Logger::throwWarning("Directory `projects\\` does not exist");
 		return false;
 	}
 
@@ -265,7 +265,7 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	{
 		if(!Tools::isDirectoryExisting(path))
 		{
-			Logger::throwWarning("Project corrupted: directory `" + path + "` not existing");
+			Logger::throwWarning("Project corrupted: directory `" + path + "` does not exist");
 
 			return true;
 		}
@@ -275,7 +275,7 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	{
 		if(!Tools::isFileExisting(path))
 		{
-			Logger::throwWarning("Project corrupted: file `" + path + "` not existing");
+			Logger::throwWarning("Project corrupted: file `" + path + "` does not exist");
 
 			return true;
 		}

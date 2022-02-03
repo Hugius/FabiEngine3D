@@ -290,7 +290,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
-			_throwRuntimeError("variable \"" + valueString + "\" not existing");
+			_throwRuntimeError("variable \"" + valueString + "\" does not exist");
 			return;
 		}
 

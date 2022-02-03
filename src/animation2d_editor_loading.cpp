@@ -23,7 +23,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `animation2d.fe3d` not existing");
+		Logger::throwWarning("Project corrupted: file `animation2d.fe3d` does not exist");
 		return false;
 	}
 
@@ -69,7 +69,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 			}
 			else
 			{
-				Logger::throwWarning("Preview texture of animation with id \"" + newAnimation->getId() + "\" not existing anymore");
+				Logger::throwWarning("Preview texture of animation with ID \"" + newAnimation->getId() + "\" does not exist");
 				continue;
 			}
 		}

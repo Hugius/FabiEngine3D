@@ -44,13 +44,13 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(!_isLocalVariableExisting(firstName) && !_isGlobalVariableExisting(firstName))
 			{
-				_throwRuntimeError("variable \"" + firstName + "\" not existing");
+				_throwRuntimeError("variable \"" + firstName + "\" does not exist");
 				return {};
 			}
 
 			if(!_isLocalVariableExisting(secondName) && !_isGlobalVariableExisting(secondName))
 			{
-				_throwRuntimeError("variable \"" + secondName + "\" not existing");
+				_throwRuntimeError("variable \"" + secondName + "\" does not exist");
 				return {};
 			}
 
@@ -88,7 +88,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
-				_throwRuntimeError("variable \"" + listName + "\" not existing");
+				_throwRuntimeError("variable \"" + listName + "\" does not exist");
 				return {};
 			}
 
@@ -119,7 +119,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			auto listName = args[0]->getString();
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
-				_throwRuntimeError("variable \"" + listName + "\" not existing");
+				_throwRuntimeError("variable \"" + listName + "\" does not exist");
 				return {};
 			}
 
@@ -184,7 +184,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			auto listName = args[0]->getString();
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
-				_throwRuntimeError("variable \"" + listName + "\" not existing");
+				_throwRuntimeError("variable \"" + listName + "\" does not exist");
 				return {};
 			}
 
@@ -244,7 +244,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
-				_throwRuntimeError("variable \"" + listName + "\" not existing");
+				_throwRuntimeError("variable \"" + listName + "\" does not exist");
 				return {};
 			}
 
@@ -312,7 +312,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
-				_throwRuntimeError("variable \"" + listName + "\" not existing");
+				_throwRuntimeError("variable \"" + listName + "\" does not exist");
 				return {};
 			}
 
@@ -380,7 +380,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
-				_throwRuntimeError("variable \"" + listName + "\" not existing");
+				_throwRuntimeError("variable \"" + listName + "\" does not exist");
 				return {};
 			}
 
@@ -523,7 +523,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 	}
 	else
 	{
-		_throwRuntimeError("misc function not existing");
+		_throwRuntimeError("misc function does not exist");
 		return {};
 	}
 

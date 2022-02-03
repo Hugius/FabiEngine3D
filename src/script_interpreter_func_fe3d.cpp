@@ -85,7 +85,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processFe3dFunctionCal
 
 	if(!isExecuted)
 	{
-		_throwRuntimeError("fe3d function not existing");
+		_throwRuntimeError("fe3d function does not exist");
 		return {};
 	}
 

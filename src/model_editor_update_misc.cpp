@@ -104,13 +104,13 @@ void ModelEditor::_updateModelCreating()
 		{
 			if(newModelId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Model id cannot contain any spaces");
+				Logger::throwWarning("Model ID cannot contain any spaces");
 				return;
 			}
 
 			if(newModelId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Model id cannot contain '@'");
+				Logger::throwWarning("Model ID cannot contain '@'");
 				return;
 			}
 
@@ -118,7 +118,7 @@ void ModelEditor::_updateModelCreating()
 
 			if(find(_loadedModelIds.begin(), _loadedModelIds.end(), newModelId) != _loadedModelIds.end())
 			{
-				Logger::throwWarning("Model with id \"" + newModelId.substr(1) + "\" already exists");
+				Logger::throwWarning("Model already exists");
 				return;
 			}
 
@@ -132,7 +132,7 @@ void ModelEditor::_updateModelCreating()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
 				_isCreatingModel = false;
 				return;
 			}

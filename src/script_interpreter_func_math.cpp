@@ -317,7 +317,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else
 	{
-		_throwRuntimeError("math function not existing");
+		_throwRuntimeError("math function does not exist");
 		return {};
 	}
 

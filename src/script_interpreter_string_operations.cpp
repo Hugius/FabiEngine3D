@@ -114,7 +114,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 	{
 		if(!_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 		{
-			_throwRuntimeError("variable \"" + indexString + "\" not existing");
+			_throwRuntimeError("variable \"" + indexString + "\" does not exist");
 			return -1;
 		}
 

@@ -59,13 +59,13 @@ void TerrainEditor::_updateTerrainCreating()
 		{
 			if(newTerrainId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Terrain id cannot contain any spaces");
+				Logger::throwWarning("Terrain ID cannot contain any spaces");
 				return;
 			}
 
 			if(newTerrainId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Terrain id cannot contain '@'");
+				Logger::throwWarning("Terrain ID cannot contain '@'");
 				return;
 			}
 
@@ -73,7 +73,7 @@ void TerrainEditor::_updateTerrainCreating()
 
 			if(find(_loadedTerrainIds.begin(), _loadedTerrainIds.end(), newTerrainId) != _loadedTerrainIds.end())
 			{
-				Logger::throwWarning("Terrain with id \"" + newTerrainId.substr(1) + "\" already exists");
+				Logger::throwWarning("Terrain already exists");
 				return;
 			}
 
@@ -87,7 +87,7 @@ void TerrainEditor::_updateTerrainCreating()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
 				_isCreatingTerrain = false;
 				return;
 			}

@@ -20,7 +20,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError("variable \"" + nameString + "\" not existing");
+		_throwRuntimeError("variable \"" + nameString + "\" does not exist");
 		return;
 	}
 

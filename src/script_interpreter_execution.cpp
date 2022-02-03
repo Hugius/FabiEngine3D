@@ -255,7 +255,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			}
 			else
 			{
-				_throwRuntimeError("script \"" + scriptToExecute + "\" not existing");
+				_throwRuntimeError("script \"" + scriptToExecute + "\" does not exist");
 				return;
 			}
 		}

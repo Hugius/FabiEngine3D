@@ -26,13 +26,13 @@ void Text2dEditor::_updateTextCreating()
 		{
 			if(newTextId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Text id cannot contain any spaces");
+				Logger::throwWarning("Text ID cannot contain any spaces");
 				return;
 			}
 
 			if(newTextId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Text id cannot contain '@'");
+				Logger::throwWarning("Text ID cannot contain '@'");
 				return;
 			}
 
@@ -40,7 +40,7 @@ void Text2dEditor::_updateTextCreating()
 
 			if(find(_loadedTextIds.begin(), _loadedTextIds.end(), newTextId) != _loadedTextIds.end())
 			{
-				Logger::throwWarning("Text with id \"" + newTextId.substr(1) + "\" already exists");
+				Logger::throwWarning("Text already exists");
 				return;
 			}
 
@@ -54,7 +54,7 @@ void Text2dEditor::_updateTextCreating()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
 				_isCreatingText = false;
 				return;
 			}

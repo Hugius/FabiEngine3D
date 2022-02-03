@@ -27,7 +27,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	{
 		if(isLoggingEnabled)
 		{
-			Logger::throwWarning("Project corrupted: directory `scripts\\` not existing");
+			Logger::throwWarning("Project corrupted: directory `scripts\\` does not exist");
 		}
 		return false;
 	}

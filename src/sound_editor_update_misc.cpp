@@ -34,13 +34,13 @@ void SoundEditor::_updateSoundCreating()
 		{
 			if(newSoundId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Sound id cannot contain any spaces");
+				Logger::throwWarning("Sound ID cannot contain any spaces");
 				return;
 			}
 
 			if(newSoundId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Sound id cannot contain '@'");
+				Logger::throwWarning("Sound ID cannot contain '@'");
 				return;
 			}
 
@@ -48,7 +48,7 @@ void SoundEditor::_updateSoundCreating()
 
 			if(find(_loadedSoundIds.begin(), _loadedSoundIds.end(), newSoundId) != _loadedSoundIds.end())
 			{
-				Logger::throwWarning("Sound with id \"" + newSoundId.substr(1) + "\" already exists");
+				Logger::throwWarning("Sound already exists");
 				return;
 			}
 
@@ -62,7 +62,7 @@ void SoundEditor::_updateSoundCreating()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
 				_isCreatingSound = false;
 				return;
 			}

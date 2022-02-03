@@ -199,7 +199,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 					if(!_isLocalVariableExisting(currentValueString) && !_isGlobalVariableExisting(currentValueString))
 					{
-						_throwRuntimeError("variable \"" + currentValueString + "\" not existing");
+						_throwRuntimeError("variable \"" + currentValueString + "\" does not exist");
 						return {};
 					}
 

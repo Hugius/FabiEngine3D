@@ -182,20 +182,20 @@ void Animation3dEditor::_updateAnimationCreating()
 		{
 			if(newAnimationId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Animation id cannot contain any spaces");
+				Logger::throwWarning("Animation ID cannot contain any spaces");
 				return;
 			}
 
 			if(newAnimationId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Animation id cannot contain '@'");
+				Logger::throwWarning("Animation ID cannot contain '@'");
 				return;
 			}
 
 			auto animationIds = getAnimationIds();
 			if(find(animationIds.begin(), animationIds.end(), newAnimationId) != animationIds.end())
 			{
-				Logger::throwWarning("Animation id \"" + newAnimationId + "\" already exists");
+				Logger::throwWarning("Animation already exists");
 				return;
 			}
 
@@ -308,7 +308,7 @@ void Animation3dEditor::_updateModelChoosing()
 
 				if(!hasAllParts)
 				{
-					Logger::throwWarning("Preview model does not have required animation parts");
+					Logger::throwWarning("Preview model does not have the required animation parts");
 					return;
 				}
 

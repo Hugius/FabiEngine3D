@@ -342,7 +342,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
 				return;
 			}
 

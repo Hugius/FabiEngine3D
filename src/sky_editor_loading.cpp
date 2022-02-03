@@ -23,7 +23,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `sky.fe3d` not existing");
+		Logger::throwWarning("Project corrupted: file `sky.fe3d` does not exist");
 		return {};
 	}
 
@@ -84,7 +84,7 @@ const bool SkyEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `sky.fe3d` not existing");
+		Logger::throwWarning("Project corrupted: file `sky.fe3d` does not exist");
 		return false;
 	}
 

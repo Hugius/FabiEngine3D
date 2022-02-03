@@ -87,7 +87,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError("LIST not existing");
+		_throwRuntimeError("LIST does not exist");
 		return;
 	}
 
@@ -180,7 +180,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError("LIST not existing");
+		_throwRuntimeError("LIST does not exist");
 		return;
 	}
 

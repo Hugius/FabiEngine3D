@@ -19,18 +19,18 @@ void TopViewportController::_updateProjectCreating()
 
 			if(!Tools::isDirectoryExisting(projectDirectoryPath))
 			{
-				Logger::throwWarning("Directory `projects\\` not existing");
+				Logger::throwWarning("Directory `projects\\` does not exist");
 				return;
 			}
 
 			if(newProjectId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("New project name cannot contain any spaces");
+				Logger::throwWarning("Project name cannot contain any spaces");
 				return;
 			}
 			else if(Tools::isDirectoryExisting(newProjectDirectoryPath))
 			{
-				Logger::throwWarning("Project \"" + newProjectId + "\"" + " already exists");
+				Logger::throwWarning("Project already exists");
 				return;
 			}
 			else if(any_of(newProjectId.begin(), newProjectId.end(), isupper))

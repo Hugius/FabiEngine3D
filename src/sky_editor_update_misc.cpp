@@ -49,13 +49,13 @@ void SkyEditor::_updateSkyCreating()
 		{
 			if(newSkyId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Sky id cannot contain any spaces");
+				Logger::throwWarning("Sky ID cannot contain any spaces");
 				return;
 			}
 
 			if(newSkyId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Sky id cannot contain '@'");
+				Logger::throwWarning("Sky ID cannot contain '@'");
 				return;
 			}
 
@@ -63,7 +63,7 @@ void SkyEditor::_updateSkyCreating()
 
 			if(find(_loadedSkyIds.begin(), _loadedSkyIds.end(), newSkyId) != _loadedSkyIds.end())
 			{
-				Logger::throwWarning("Sky with id \"" + newSkyId.substr(1) + "\" already exists");
+				Logger::throwWarning("Sky already exists");
 				return;
 			}
 

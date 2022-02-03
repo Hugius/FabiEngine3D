@@ -25,7 +25,7 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `model.fe3d` not existing");
+		Logger::throwWarning("Project corrupted: file `model.fe3d` does not exist");
 		return {};
 	}
 
@@ -80,7 +80,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `model.fe3d` not existing");
+		Logger::throwWarning("Project corrupted: file `model.fe3d` does not exist");
 		return {};
 	}
 
@@ -256,7 +256,7 @@ const bool ModelEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `model.fe3d` not existing");
+		Logger::throwWarning("Project corrupted: file `model.fe3d` does not exist");
 		return false;
 	}
 

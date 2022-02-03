@@ -128,7 +128,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 			}
 			else if(find(_loadedModelIds.begin(), _loadedModelIds.end(), ("@" + levelOfDetailEntityId)) == _loadedModelIds.end())
 			{
-				Logger::throwWarning("Cannot find LOD entity with id \"" + levelOfDetailEntityId + "\"");
+				Logger::throwWarning("LOD entity does not exist");
 			}
 			else
 			{

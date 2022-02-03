@@ -23,7 +23,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `water.fe3d` not existing");
+		Logger::throwWarning("Project corrupted: file `water.fe3d` does not exist");
 		return {};
 	}
 
@@ -104,7 +104,7 @@ const bool WaterEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `water.fe3d` not existing");
+		Logger::throwWarning("Project corrupted: file `water.fe3d` does not exist");
 		return false;
 	}
 

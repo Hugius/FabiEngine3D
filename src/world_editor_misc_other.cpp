@@ -174,7 +174,7 @@ const vector<string> WorldEditor::_getWorldIds() const
 	}
 	else
 	{
-		Logger::throwWarning("Project corrupted: directory `worlds\\editor\\` not existing");
+		Logger::throwWarning("Project corrupted: directory `worlds\\editor\\` does not exist");
 	}
 
 	return worldIds;

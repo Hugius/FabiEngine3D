@@ -57,7 +57,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError("variable \"" + nameString + "\" not existing");
+		_throwRuntimeError("variable \"" + nameString + "\" does not exist");
 		return;
 	}
 
@@ -167,7 +167,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
-			_throwRuntimeError("variable \"" + valueString + "\" not existing");
+			_throwRuntimeError("variable \"" + valueString + "\" does not exist");
 			return;
 		}
 

@@ -28,8 +28,8 @@ void ScriptEditor::_unload()
 	_fe3d->gfx_setBloomBlurCount(0);
 	_fe3d->gfx_setBloomQuality(0);
 
+	_fe3d->quad3d_deleteAll();
 	_fe3d->text3d_deleteAll();
-
 	_fe3d->aabb_deleteAll();
 
 	_script->clear();

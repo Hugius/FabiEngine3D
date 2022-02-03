@@ -104,8 +104,6 @@ void WorldEditor::_unload()
 	_fe3d->gfx_setAntiAliasingEnabled(false);
 	_fe3d->gfx_setAnisotropicFilteringQuality(0);
 
-	unloadEditorWorld();
-
 	for(const auto& id : _skyEditor->getLoadedIds())
 	{
 		_fe3d->sky_delete(id);

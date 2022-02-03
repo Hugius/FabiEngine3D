@@ -69,24 +69,26 @@ void WorldEditor::unloadEditorWorld()
 
 	for(const auto& [key, templateId] : _loadedModelIds)
 	{
-		_fe3d->model_delete(key);
+		auto animationIds = _animation3dEditor->getStartedModelAnimationIds(key);
 
-		auto animationId = _animation3dEditor->getStartedModelAnimationIds(key);
-		if(!animationId.empty())
+		if(!animationIds.empty())
 		{
-			_animation3dEditor->stopModelAnimation(animationId.back(), key);
+			_animation3dEditor->stopModelAnimation(animationIds.back(), key);
 		}
+
+		_fe3d->model_delete(key);
 	}
 
 	for(const auto& [key, templateId] : _loadedQuadIds)
 	{
-		_fe3d->quad3d_delete(key);
+		auto animationIds = _animation2dEditor->getStartedQuad3dAnimationIds(key);
 
-		auto animationId = _animation2dEditor->getStartedQuad3dAnimationIds(key);
-		if(!animationId.empty())
+		if(!animationIds.empty())
 		{
-			_animation2dEditor->stopQuad3dAnimation(animationId.back(), key);
+			_animation2dEditor->stopQuad3dAnimation(animationIds.back(), key);
 		}
+
+		_fe3d->quad3d_delete(key);
 	}
 
 	for(const auto& [key, templateId] : _loadedTextIds)
@@ -140,10 +142,11 @@ void WorldEditor::unloadEditorWorld()
 	_loadedWaterId = "";
 	_loadedModelIds.clear();
 	_loadedQuadIds.clear();
-	_loadedSoundIds.clear();
+	_loadedTextIds.clear();
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
 	_loadedReflectionIds.clear();
+	_loadedSoundIds.clear();
 }
 
 void WorldEditor::unloadCustomWorld()

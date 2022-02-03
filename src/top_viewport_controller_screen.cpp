@@ -170,7 +170,7 @@ void TopViewportController::_updateMiscScreenManagement()
 
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{
-			Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+			Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
 			return;
 		}
 
@@ -182,7 +182,7 @@ void TopViewportController::_updateMiscScreenManagement()
 
 		if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) && filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 		{
-			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
 			return;
 		}
 
@@ -204,7 +204,7 @@ void TopViewportController::_updateMiscScreenManagement()
 
 		if(Tools::isDirectoryExisting(exportDirectoryPath))
 		{
-			Logger::throwWarning("Project already exported to that location!");
+			Logger::throwWarning("Project already exported to that location");
 		}
 		else
 		{

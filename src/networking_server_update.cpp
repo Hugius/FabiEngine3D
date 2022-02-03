@@ -116,7 +116,7 @@ void NetworkingServer::update()
 								_newClientUsername = _clientUsernames[i];
 								_tcpMessageBuilds[i] = "";
 
-								Logger::throwInfo("Networking client \"" + newUsername + "\" connected to the server!");
+								Logger::throwInfo("Networking client \"" + newUsername + "\" connected to the server");
 							}
 						}
 						else if(_tcpMessageBuilds[i] == "PING")

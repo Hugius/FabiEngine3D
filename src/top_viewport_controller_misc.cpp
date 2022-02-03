@@ -99,7 +99,7 @@ const bool TopViewportController::_prepareProjectChoosing(const string& title) c
 
 	if(!Tools::isDirectoryExisting(projectDirectoryPath))
 	{
-		Logger::throwWarning("Directory `projects\\` is missing!");
+		Logger::throwWarning("Directory `projects\\` not existing");
 		return false;
 	}
 
@@ -256,7 +256,7 @@ void TopViewportController::_saveCurrentProject()
 	_worldEditor->saveEditorWorldToFile();
 	_scriptEditor->saveScriptFiles();
 
-	Logger::throwInfo("Project \"" + _currentProjectId + "\" saved!");
+	Logger::throwInfo("Project \"" + _currentProjectId + "\" saved");
 }
 
 void TopViewportController::inject(shared_ptr<SkyEditor> skyEditor)

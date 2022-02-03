@@ -36,7 +36,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
 				return;
 			}
 
@@ -48,7 +48,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) && filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
 				return;
 			}
 
@@ -68,7 +68,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
 				return;
 			}
 
@@ -80,7 +80,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) && filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
 				return;
 			}
 
@@ -100,7 +100,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
 				return;
 			}
 
@@ -112,7 +112,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) && filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
 				return;
 			}
 
@@ -132,7 +132,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
 				return;
 			}
 
@@ -144,7 +144,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) && filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
 				return;
 			}
 
@@ -164,7 +164,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
 				return;
 			}
 
@@ -176,7 +176,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) && filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
 				return;
 			}
 

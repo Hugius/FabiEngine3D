@@ -13,13 +13,13 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 
 	if((openingParanthesisFound == scriptLine.end()) && (closingParanthesisFound == scriptLine.end()))
 	{
-		_throwRuntimeError("invalid '()' syntax!");
+		_throwRuntimeError("invalid '()' syntax");
 		return {};
 	}
 
 	if(scriptLine.back() != ')')
 	{
-		_throwRuntimeError("function call must end with ')'!");
+		_throwRuntimeError("function call must end with ')'");
 		return {};
 	}
 
@@ -131,7 +131,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			}
 			else
 			{
-				_throwRuntimeError("wrong argument type(s)!");
+				_throwRuntimeError("wrong argument type(s)");
 				return {};
 			}
 		}
@@ -154,7 +154,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			}
 			else
 			{
-				_throwRuntimeError("wrong argument type(s)!");
+				_throwRuntimeError("wrong argument type(s)");
 				return {};
 			}
 		}
@@ -177,7 +177,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			}
 			else
 			{
-				_throwRuntimeError("wrong argument type(s)!");
+				_throwRuntimeError("wrong argument type(s)");
 				return {};
 			}
 		}
@@ -227,7 +227,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			}
 			else
 			{
-				_throwRuntimeError("wrong argument type(s)!");
+				_throwRuntimeError("wrong argument type(s)");
 				return {};
 			}
 		}
@@ -255,7 +255,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			}
 			else
 			{
-				_throwRuntimeError("wrong argument type(s)!");
+				_throwRuntimeError("wrong argument type(s)");
 				return {};
 			}
 		}
@@ -317,7 +317,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	}
 	else
 	{
-		_throwRuntimeError("math function not existing!");
+		_throwRuntimeError("math function not existing");
 		return {};
 	}
 

@@ -69,7 +69,7 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 
 	if((mesh->getParts().size() == 1) && !mesh->getParts()[0]->getId().empty())
 	{
-		Logger::throwWarning("Multiparted model with id \"" + id + "\" only has 1 part!");
+		Logger::throwWarning("Multiparted model with id \"" + id + "\" only has 1 part");
 		deleteEntity(id);
 		return;
 	}

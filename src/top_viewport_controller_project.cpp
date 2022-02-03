@@ -19,23 +19,23 @@ void TopViewportController::_updateProjectCreating()
 
 			if(!Tools::isDirectoryExisting(projectDirectoryPath))
 			{
-				Logger::throwWarning("Directory `projects\\` is missing!");
+				Logger::throwWarning("Directory `projects\\` not existing");
 				return;
 			}
 
 			if(newProjectId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("New project name cannot contain any spaces!");
+				Logger::throwWarning("New project name cannot contain any spaces");
 				return;
 			}
 			else if(Tools::isDirectoryExisting(newProjectDirectoryPath))
 			{
-				Logger::throwWarning("Project \"" + newProjectId + "\"" + " already exists!");
+				Logger::throwWarning("Project \"" + newProjectId + "\"" + " already exists");
 				return;
 			}
 			else if(any_of(newProjectId.begin(), newProjectId.end(), isupper))
 			{
-				Logger::throwWarning("New project name cannot contain any capitals!");
+				Logger::throwWarning("New project name cannot contain any capitals");
 				return;
 			}
 			else
@@ -109,7 +109,7 @@ void TopViewportController::_updateProjectCreating()
 				_currentProjectId = newProjectId;
 				_applyProjectChange();
 
-				Logger::throwInfo("New project \"" + _currentProjectId + "\" created!");
+				Logger::throwInfo("Project \"" + _currentProjectId + "\" created");
 
 				_isCreatingProject = false;
 			}
@@ -129,7 +129,7 @@ void TopViewportController::_updateProjectLoading()
 		{
 			if(isProjectCorrupted(projectDirectoryPath))
 			{
-				Logger::throwWarning("Cannot load project: missing files/directories!");
+				Logger::throwWarning("Cannot load project: missing files/directories");
 				return;
 			}
 
@@ -162,7 +162,7 @@ void TopViewportController::_updateProjectLoading()
 
 			_fe3d->misc_cacheAudios(audioPaths);
 
-			Logger::throwInfo("Existing project \"" + _currentProjectId + "\" loaded!");
+			Logger::throwInfo("Project \"" + _currentProjectId + "\" loaded");
 
 			_gui->getOverlay()->deleteChoiceForm("projectList");
 			_isLoadingProject = false;
@@ -206,13 +206,13 @@ void TopViewportController::_updateProjectDeleting()
 			const auto directoryPath = (rootPath + "projects\\" + chosenButtonId);
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
-				Logger::throwWarning("Cannot delete project: missing directory!");
+				Logger::throwWarning("Cannot delete project: missing directory");
 				return;
 			}
 
 			Tools::deleteDirectory(directoryPath);
 
-			Logger::throwInfo("Existing project \"" + chosenButtonId + "\" deleted!");
+			Logger::throwInfo("Project \"" + chosenButtonId + "\" deleted");
 
 			_isDeletingProject = false;
 			chosenButtonId = "";

@@ -23,7 +23,7 @@ const shared_ptr<Image> ImageLoader::loadImage(const string& filePath)
 
 	if(loadedImage == nullptr)
 	{
-		Logger::throwWarning("Cannot load image: \"" + filePath + "\"!");
+		Logger::throwWarning("Cannot load image: \"" + filePath + "\"");
 		return nullptr;
 	}
 
@@ -74,7 +74,7 @@ void ImageLoader::cacheImages(const vector<string>& filePaths)
 
 					if(loadedImage == nullptr)
 					{
-						Logger::throwWarning("Cannot load image: \"" + threadFilePaths[i] + "\"!");
+						Logger::throwWarning("Cannot load image: \"" + threadFilePaths[i] + "\"");
 						continue;
 					}
 

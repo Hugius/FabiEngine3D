@@ -76,13 +76,13 @@ void Text3dEditor::_updateText3dCreating()
 		{
 			if(newTextId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Text3d id cannot contain any spaces!");
+				Logger::throwWarning("Text3d id cannot contain any spaces");
 				return;
 			}
 
 			if(newTextId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Text3d id cannot contain '@'!");
+				Logger::throwWarning("Text3d id cannot contain '@'");
 				return;
 			}
 
@@ -90,7 +90,7 @@ void Text3dEditor::_updateText3dCreating()
 
 			if(find(_loadedTextIds.begin(), _loadedTextIds.end(), newTextId) != _loadedTextIds.end())
 			{
-				Logger::throwWarning("Text3d with id \"" + newTextId.substr(1) + "\" already exists!");
+				Logger::throwWarning("Text3d with id \"" + newTextId.substr(1) + "\" already exists");
 				return;
 			}
 
@@ -104,7 +104,7 @@ void Text3dEditor::_updateText3dCreating()
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` not existing");
 				_isCreatingText3d = false;
 				return;
 			}
@@ -118,7 +118,7 @@ void Text3dEditor::_updateText3dCreating()
 
 			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) && filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
 				_isCreatingText3d = false;
 				return;
 			}

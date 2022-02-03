@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			auto file = ifstream(filePath);
 			if(!file)
 			{
-				_throwRuntimeError("cannot read from file \"" + args[0]->getString() + "\"!");
+				_throwRuntimeError("cannot read from file \"" + args[0]->getString() + "\"");
 				return true;
 			}
 

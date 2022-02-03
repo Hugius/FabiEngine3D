@@ -22,7 +22,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 	//if(_customWorldId.empty())
 	//{
-	//	Logger::throwWarning("Cannot save custom world!");
+	//	Logger::throwWarning("Cannot save custom world");
 	//	return false;
 	//}
 

@@ -23,7 +23,7 @@ const shared_ptr<Mesh> MeshLoader::loadMesh(const string& filePath)
 
 	if(loadedMesh == nullptr)
 	{
-		Logger::throwWarning("Cannot load mesh: \"" + filePath + "\"!");
+		Logger::throwWarning("Cannot load mesh: \"" + filePath + "\"");
 		return nullptr;
 	}
 
@@ -74,7 +74,7 @@ void MeshLoader::cacheMeshes(const vector<string>& meshPaths)
 
 					if(loadedMesh == nullptr)
 					{
-						Logger::throwWarning("Cannot load mesh: \"" + threadFilePaths[i] + "\"!");
+						Logger::throwWarning("Cannot load mesh: \"" + threadFilePaths[i] + "\"");
 						continue;
 					}
 

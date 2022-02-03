@@ -27,7 +27,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	{
 		if(isLoggingEnabled)
 		{
-			Logger::throwWarning("Project corrupted: directory `scripts\\` missing!");
+			Logger::throwWarning("Project corrupted: directory `scripts\\` missing");
 		}
 		return false;
 	}
@@ -76,7 +76,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 
 	if(isLoggingEnabled)
 	{
-		Logger::throwInfo("Script editor data loaded!");
+		Logger::throwInfo("Script editor data loaded");
 	}
 
 	_isScriptLoadedFromFile = true;

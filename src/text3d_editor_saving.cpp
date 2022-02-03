@@ -60,7 +60,7 @@ const bool Text3dEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Text3d editor data saved!");
+	Logger::throwInfo("Text3D editor data saved");
 
 	return true;
 }

@@ -38,7 +38,7 @@ const bool Text2dEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Text2D editor data saved!");
+	Logger::throwInfo("Text2D editor data saved");
 
 	return true;
 }

@@ -56,13 +56,13 @@ void WaterEditor::_updateWaterCreating()
 		{
 			if(newWaterId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Water id cannot contain any spaces!");
+				Logger::throwWarning("Water id cannot contain any spaces");
 				return;
 			}
 
 			if(newWaterId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Water id cannot contain '@'!");
+				Logger::throwWarning("Water id cannot contain '@'");
 				return;
 			}
 
@@ -70,7 +70,7 @@ void WaterEditor::_updateWaterCreating()
 
 			if(find(_loadedWaterIds.begin(), _loadedWaterIds.end(), newWaterId) != _loadedWaterIds.end())
 			{
-				Logger::throwWarning("Water with id \"" + newWaterId.substr(1) + "\" already exists!");
+				Logger::throwWarning("Water with id \"" + newWaterId.substr(1) + "\" already exists");
 				return;
 			}
 

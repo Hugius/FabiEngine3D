@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 
 			if(_fe3d->text3d_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("text3d already exists!");
+				_throwRuntimeError("text3d already exists");
 				return true;
 			}
 
@@ -308,7 +308,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 
 				if(aabbIds.empty())
 				{
-					_throwRuntimeError("text3d with id \"" + args[0]->getString() + "\" has no bound AABBs!");
+					_throwRuntimeError("text3d with id \"" + args[0]->getString() + "\" has no bound AABBs");
 					return true;
 				}
 
@@ -333,7 +333,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 
 				if(aabbIds.empty())
 				{
-					_throwRuntimeError("text3d with id \"" + args[0]->getString() + "\" has no bound AABBs!");
+					_throwRuntimeError("text3d with id \"" + args[0]->getString() + "\" has no bound AABBs");
 					return true;
 				}
 
@@ -451,7 +451,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:text3d` functionality as networking server!");
+		_throwRuntimeError("cannot access `fe3d:text3d` functionality as networking server");
 		return true;
 	}
 

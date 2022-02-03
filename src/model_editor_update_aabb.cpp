@@ -118,19 +118,19 @@ void ModelEditor::_updateAabbCreating()
 		{
 			if(newAabbId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("AABB id cannot contain any spaces!");
+				Logger::throwWarning("AABB id cannot contain any spaces");
 				return;
 			}
 
 			if(newAabbId.find('@') != string::npos)
 			{
-				Logger::throwWarning("AABB id cannot contain '@'!");
+				Logger::throwWarning("AABB id cannot contain '@'");
 				return;
 			}
 
 			if(_fe3d->aabb_isExisting(_currentModelId + "@" + newAabbId))
 			{
-				Logger::throwWarning("AABB with id \"" + newAabbId + "\" already exists!");
+				Logger::throwWarning("AABB with id \"" + newAabbId + "\" already exists");
 				return;
 			}
 

@@ -26,20 +26,20 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 
 	if(nameString.empty())
 	{
-		_throwRuntimeError("variable name missing!");
+		_throwRuntimeError("variable name missing");
 		return;
 	}
 
 	if(equalSignString != "=")
 	{
-		_throwRuntimeError("equal sign missing!");
+		_throwRuntimeError("equal sign missing");
 		return;
 	}
 
 	auto minLineSize = (scriptLine.find('=') + 3);
 	if(scriptLine.size() < minLineSize)
 	{
-		_throwRuntimeError("value missing!");
+		_throwRuntimeError("value missing");
 		return;
 	}
 
@@ -62,7 +62,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwRuntimeError("variable \"" + nameString + "\" not existing!");
+		_throwRuntimeError("variable \"" + nameString + "\" not existing");
 		return;
 	}
 
@@ -70,7 +70,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 
 	if(leftVariable->isConstant())
 	{
-		_throwRuntimeError("CONST variables cannot be changed!");
+		_throwRuntimeError("CONST variables cannot be changed");
 		return;
 	}
 
@@ -146,7 +146,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		{
 			if(value->getType() == ScriptValueType::EMPTY)
 			{
-				_throwRuntimeError("function returned empty value!");
+				_throwRuntimeError("function returned empty value");
 				return;
 			}
 		}
@@ -157,17 +157,17 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		}
 		else if(returnValues.empty())
 		{
-			_throwRuntimeError("function returned no values!");
+			_throwRuntimeError("function returned no values");
 			return;
 		}
 		else if(returnValues.size() > 1)
 		{
-			_throwRuntimeError("function returned too many values!");
+			_throwRuntimeError("function returned too many values");
 			return;
 		}
 		else if(returnValues[0]->getType() == ScriptValueType::EMPTY)
 		{
-			_throwRuntimeError("function must return value!");
+			_throwRuntimeError("function must return value");
 			return;
 		}
 		else if(isSingleVariable && isStringVariable && (returnValues[0]->getType() == ScriptValueType::STRING))
@@ -188,7 +188,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		}
 		else
 		{
-			_throwRuntimeError("function returned incorrect value type!");
+			_throwRuntimeError("function returned incorrect value type");
 			return;
 		}
 	}
@@ -211,7 +211,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
-			_throwRuntimeError("variable \"" + valueString + "\" not existing!");
+			_throwRuntimeError("variable \"" + valueString + "\" not existing");
 			return;
 		}
 
@@ -244,7 +244,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		}
 		else
 		{
-			_throwRuntimeError("value types not matching!");
+			_throwRuntimeError("value types not matching");
 			return;
 		}
 	}

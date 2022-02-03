@@ -10,42 +10,42 @@
 
 LibraryLoader::LibraryLoader()
 {
+	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
+
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
-	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
-
-	Logger::throwInfo("Initializing SDL...");
 	if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		Logger::throwError("SDL could not be initialized: ", SDL_GetError());
 	}
+	Logger::throwInfo("Initialized SDL");
 
-	Logger::throwInfo("Initializing window...");
 	_windowPointer = SDL_CreateWindow("FabiEngine3D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0,
 									  SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL);
 	SDL_GL_CreateContext(_windowPointer);
+	Logger::throwInfo("Initialized window");
 
-	Logger::throwInfo("Initializing OpenGL...");
 	auto initGlew = glewInit();
 	if(initGlew != GLEW_OK)
 	{
 		Logger::throwError("GLEW could not be initialized: ", reinterpret_cast<char const*>(glewGetErrorString(initGlew)));
 	}
+	Logger::throwInfo("Initialized OpenGL");
 
-	Logger::throwInfo("Initializing SDL_Mixer...");
 	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 	{
-		Logger::throwError("SDL_MIX could not be initialized: ", Mix_GetError());
+		Logger::throwError("SDL_Mixer could not be initialized: ", Mix_GetError());
 	}
+	Logger::throwInfo("Initialized SDL_Mixer");
 
-	Logger::throwInfo("Initializing Sockets API...");
 	WSADATA wsaData;
 	auto winsockResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if(winsockResult != 0)
 	{
-		Logger::throwError("Windows Sockets API could not be initialized: ", winsockResult);
+		Logger::throwError("WinSock could not be initialized: ", winsockResult);
 	}
+	Logger::throwInfo("Initialized WinSock");
 }
 
 LibraryLoader::~LibraryLoader()

@@ -114,7 +114,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 	{
 		if(!_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 		{
-			_throwRuntimeError("variable \"" + indexString + "\" not existing!");
+			_throwRuntimeError("variable \"" + indexString + "\" not existing");
 			return -1;
 		}
 
@@ -122,7 +122,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 
 		if((variable->getType() == ScriptVariableType::MULTIPLE) || variable->getValue()->getType() != ScriptValueType::INTEGER)
 		{
-			_throwRuntimeError("LIST index must be of type INT!");
+			_throwRuntimeError("LIST index must be of type INT");
 			return -1;
 		}
 
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_validateKeyInputString(const string& inputString)
 {
 	if(KEY_INPUT_STRING_MAP.find(inputString) == KEY_INPUT_STRING_MAP.end())
 	{
-		_throwRuntimeError("invalid keyboard key!");
+		_throwRuntimeError("invalid keyboard key");
 		return false;
 	}
 
@@ -146,7 +146,7 @@ const bool ScriptInterpreter::_validateMouseInputString(const string& inputStrin
 {
 	if(MOUSE_INPUT_STRING_MAP.find(inputString) == MOUSE_INPUT_STRING_MAP.end())
 	{
-		_throwRuntimeError("invalid mouse button!");
+		_throwRuntimeError("invalid mouse button");
 		return false;
 	}
 

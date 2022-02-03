@@ -23,7 +23,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `sky.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `sky.fe3d` missing");
 		return {};
 	}
 
@@ -84,7 +84,7 @@ const bool SkyEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `sky.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `sky.fe3d` missing");
 		return false;
 	}
 
@@ -143,7 +143,7 @@ const bool SkyEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Sky editor data loaded!");
+	Logger::throwInfo("Sky editor data loaded");
 
 	return true;
 }

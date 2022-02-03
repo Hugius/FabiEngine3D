@@ -55,7 +55,7 @@ const bool SkyEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Sky editor data saved!");
+	Logger::throwInfo("Sky editor data saved");
 
 	return true;
 }

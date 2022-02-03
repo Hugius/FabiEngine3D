@@ -32,13 +32,13 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 				totalTime += time;
 			}
 
-			Logger::throwDebug("Debugging results:");
+			Logger::throwInfo("Debugging results:");
 			for(const auto& [key, time] : _debuggingTimes)
 			{
 				float percentage = (time / totalTime) * 100.0f;
-				Logger::throwDebug("Script \"" + key + "\" ---> " + to_string(percentage) + "%");
+				Logger::throwInfo("Script \"" + key + "\" ---> " + to_string(percentage) + "%");
 			}
-			Logger::throwDebug("");
+			Logger::throwInfo("");
 		}
 
 		_isExecutingUpdate = false;
@@ -123,7 +123,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 		}
 		else
 		{
-			_throwRuntimeError("invalid indentation!");
+			_throwRuntimeError("invalid indentation");
 			return;
 		}
 
@@ -189,14 +189,14 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			   scriptLineText.substr(0, ELIF_KEYWORD.size()) == ELIF_KEYWORD ||
 			   scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD)
 			{
-				_throwRuntimeError("no LOOP/IF/ELIF/ELSE statement allowed as last line!");
+				_throwRuntimeError("no LOOP/IF/ELIF/ELSE statement allowed as last line");
 				return;
 			}
 		}
 
 		if(scriptLineText.substr(0, META_KEYWORD.size()) == META_KEYWORD)
 		{
-			_throwRuntimeError("META keyword is only allowed on line 1 and 2!");
+			_throwRuntimeError("META keyword is only allowed on line 1 and 2");
 			return;
 		}
 		else if(scriptLineText.substr(0, 5) == "fe3d:")
@@ -230,7 +230,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 				find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecute) != _updateScriptIds.end()))
 				)
 			{
-				_throwRuntimeError("script \"" + scriptToExecute + "\" is not of the same type!");
+				_throwRuntimeError("script \"" + scriptToExecute + "\" is not of the same type");
 				return;
 			}
 
@@ -255,7 +255,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			}
 			else
 			{
-				_throwRuntimeError("script \"" + scriptToExecute + "\" not existing!");
+				_throwRuntimeError("script \"" + scriptToExecute + "\" not existing");
 				return;
 			}
 		}
@@ -271,7 +271,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			}
 			else
 			{
-				_throwRuntimeError("LOOP statement must end with ':'!");
+				_throwRuntimeError("LOOP statement must end with ':'");
 				return;
 			}
 		}
@@ -296,7 +296,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			}
 			else
 			{
-				_throwRuntimeError("IF statement must end with ':'!");
+				_throwRuntimeError("IF statement must end with ':'");
 				return;
 			}
 		}
@@ -327,13 +327,13 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 				}
 				else
 				{
-					_throwRuntimeError("ELIF statement can only come after IF or ELIF statement!");
+					_throwRuntimeError("ELIF statement can only come after IF or ELIF statement");
 					return;
 				}
 			}
 			else
 			{
-				_throwRuntimeError("ELIF statement must end with ':'!");
+				_throwRuntimeError("ELIF statement must end with ':'");
 				return;
 			}
 		}
@@ -362,19 +362,19 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 					}
 					else
 					{
-						_throwRuntimeError("ELSE statement cannot have condition!");
+						_throwRuntimeError("ELSE statement cannot have condition");
 						return;
 					}
 				}
 				else
 				{
-					_throwRuntimeError("ELSE statement can only come after IF or ELIF statement!");
+					_throwRuntimeError("ELSE statement can only come after IF or ELIF statement");
 					return;
 				}
 			}
 			else
 			{
-				_throwRuntimeError("ELSE statement must end with ':'!");
+				_throwRuntimeError("ELSE statement must end with ':'");
 				return;
 			}
 		}
@@ -450,7 +450,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 		}
 		else
 		{
-			_throwRuntimeError("invalid statement!");
+			_throwRuntimeError("invalid statement");
 			return;
 		}
 

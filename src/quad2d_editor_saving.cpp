@@ -38,7 +38,7 @@ const bool Quad2dEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Quad2D editor data saved!");
+	Logger::throwInfo("Quad2D editor data saved");
 
 	return true;
 }

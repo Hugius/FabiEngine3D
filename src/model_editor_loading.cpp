@@ -25,7 +25,7 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `model.fe3d` missing");
 		return {};
 	}
 
@@ -80,7 +80,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `model.fe3d` missing");
 		return {};
 	}
 
@@ -256,7 +256,7 @@ const bool ModelEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `model.fe3d` missing");
 		return false;
 	}
 
@@ -483,7 +483,7 @@ const bool ModelEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Model editor data loaded!");
+	Logger::throwInfo("Model editor data loaded");
 
 	return true;
 }

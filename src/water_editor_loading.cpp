@@ -23,7 +23,7 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `water.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `water.fe3d` missing");
 		return {};
 	}
 
@@ -104,7 +104,7 @@ const bool WaterEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `water.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `water.fe3d` missing");
 		return false;
 	}
 
@@ -219,7 +219,7 @@ const bool WaterEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Water editor data loaded!");
+	Logger::throwInfo("Water editor data loaded");
 
 	return true;
 }

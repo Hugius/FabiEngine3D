@@ -23,7 +23,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `terrain.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `terrain.fe3d` missing");
 		return {};
 	}
 
@@ -214,7 +214,7 @@ const bool TerrainEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `terrain.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `terrain.fe3d` missing");
 		return false;
 	}
 
@@ -403,7 +403,7 @@ const bool TerrainEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Terrain editor data loaded!");
+	Logger::throwInfo("Terrain editor data loaded");
 
 	return true;
 }

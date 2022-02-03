@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		{
 			if(_fe3d->server_isRunning())
 			{
-				_throwRuntimeError("cannot access `fe3d:cursor` functionality as networking server!");
+				_throwRuntimeError("cannot access `fe3d:cursor` functionality as networking server");
 				return true;
 			}
 
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		{
 			if(_fe3d->server_isRunning())
 			{
-				_throwRuntimeError("cannot access `fe3d:cursor` functionality as networking server!");
+				_throwRuntimeError("cannot access `fe3d:cursor` functionality as networking server");
 				return true;
 			}
 
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		{
 			if(_fe3d->misc_isMillisecondTimerStarted())
 			{
-				_throwRuntimeError("Tried to start milliseconds timer: already started!");
+				_throwRuntimeError("Tried to start milliseconds timer: already started");
 				return true;
 			}
 
@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		{
 			if(!_fe3d->misc_isMillisecondTimerStarted())
 			{
-				_throwRuntimeError("Tried to stop milliseconds timer: not started!");
+				_throwRuntimeError("Tried to stop milliseconds timer: not started");
 				return true;
 			}
 
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		{
 			if(_fe3d->server_isRunning())
 			{
-				_throwRuntimeError("cannot access `fe3d:vsync` functionality as networking server!");
+				_throwRuntimeError("cannot access `fe3d:vsync` functionality as networking server");
 				return true;
 			}
 

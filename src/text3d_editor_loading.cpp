@@ -23,7 +23,7 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `text3d.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `text3d.fe3d` missing");
 		return {};
 	}
 
@@ -87,7 +87,7 @@ const bool Text3dEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `text3d.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `text3d.fe3d` missing");
 		return false;
 	}
 
@@ -154,7 +154,7 @@ const bool Text3dEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Text3d editor data loaded!");
+	Logger::throwInfo("Text3D editor data loaded");
 
 	return true;
 }

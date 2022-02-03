@@ -568,7 +568,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string& functionNam
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:quad3d` functionality as networking server!");
+		_throwRuntimeError("cannot access `fe3d:quad3d` functionality as networking server");
 		return true;
 	}
 

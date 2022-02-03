@@ -69,7 +69,7 @@ const bool Quad3dEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Quad3d editor data saved!");
+	Logger::throwInfo("Quad3D editor data saved");
 
 	return true;
 }

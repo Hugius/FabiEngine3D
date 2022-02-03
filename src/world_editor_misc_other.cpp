@@ -174,7 +174,7 @@ const vector<string> WorldEditor::_getWorldIds() const
 	}
 	else
 	{
-		Logger::throwWarning("Project corrupted: directory `worlds\\editor\\` missing!");
+		Logger::throwWarning("Project corrupted: directory `worlds\\editor\\` missing");
 	}
 
 	return worldIds;
@@ -192,7 +192,7 @@ void WorldEditor::_deleteWorldFile(const string& id)
 	}
 	else
 	{
-		Logger::throwWarning("Cannot delete world with id \"" + id + "\"!");
+		Logger::throwWarning("Cannot delete world with id \"" + id + "\"");
 	}
 }
 

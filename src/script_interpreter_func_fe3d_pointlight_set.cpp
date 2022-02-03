@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 			if(_fe3d->pointlight_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("pointlight already exists!");
+				_throwRuntimeError("pointlight already exists");
 				return true;
 			}
 
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 			if(!_fe3d->pointlight_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("Tried to create pointlight entity: maximum reached!");
+				_throwRuntimeError("Tried to create pointlight entity: maximum reached");
 				return true;
 			}
 
@@ -187,7 +187,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 				}
 				else
 				{
-					_throwRuntimeError("invalid shape!");
+					_throwRuntimeError("invalid shape");
 					return true;
 				}
 			}
@@ -200,7 +200,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:pointlight` functionality as networking server!");
+		_throwRuntimeError("cannot access `fe3d:pointlight` functionality as networking server");
 		return true;
 	}
 

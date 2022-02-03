@@ -138,7 +138,7 @@ void EngineController::initialize()
 	{
 		if(_topViewportController->isProjectCorrupted(rootPath))
 		{
-			Logger::throwError("Cannot load application: missing files/directories!");
+			Logger::throwError("Cannot load application: missing files/directories");
 		}
 
 		_scriptEditor->loadScriptFiles(true);

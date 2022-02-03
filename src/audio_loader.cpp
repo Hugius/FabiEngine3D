@@ -58,7 +58,7 @@ void AudioLoader::cacheChunks(const vector<string>& filePaths)
 
 			if(loadedData == nullptr)
 			{
-				Logger::throwWarning("Cannot load audio: \"", uniqueFilePaths[i], "\"!");
+				Logger::throwWarning("Cannot load audio: \"", uniqueFilePaths[i], "\"");
 				continue;
 			}
 
@@ -87,7 +87,7 @@ Mix_Chunk* AudioLoader::loadChunk(const string& filePath)
 
 	if(data == nullptr)
 	{
-		Logger::throwWarning("Cannot load audio: \"", filePath, "\"!");
+		Logger::throwWarning("Cannot load audio: \"", filePath, "\"");
 		return nullptr;
 	}
 
@@ -124,7 +124,7 @@ Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data) 
 
 	if(chunk == nullptr)
 	{
-		Logger::throwWarning("Cannot load audio: \"", filePath, "\"!");
+		Logger::throwWarning("Cannot load audio: \"", filePath, "\"");
 	}
 
 	return chunk;

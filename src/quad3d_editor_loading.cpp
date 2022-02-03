@@ -23,7 +23,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` missing");
 		return {};
 	}
 
@@ -101,7 +101,7 @@ const bool Quad3dEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` missing");
 		return false;
 	}
 
@@ -193,7 +193,7 @@ const bool Quad3dEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Quad3d editor data loaded!");
+	Logger::throwInfo("Quad3D editor data loaded");
 
 	return true;
 }

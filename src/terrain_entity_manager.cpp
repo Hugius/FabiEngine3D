@@ -46,7 +46,7 @@ void TerrainEntityManager::createEntity(const string& id, const string& heightMa
 
 	if(image->getWidth() != image->getHeight())
 	{
-		Logger::throwWarning("Tried to create terrain with id \"" + id + "\": height map resolution not the same!");
+		Logger::throwWarning("Tried to create terrain with id \"" + id + "\": height map resolution not the same");
 		deleteEntity(id);
 		return;
 	}
@@ -55,7 +55,7 @@ void TerrainEntityManager::createEntity(const string& id, const string& heightMa
 
 	if(size > MAX_SIZE)
 	{
-		Logger::throwWarning("Tried to create terrain with id \"" + id + "\": height map resolution too high!");
+		Logger::throwWarning("Tried to create terrain with id \"" + id + "\": height map resolution too high");
 		deleteEntity(id);
 		return;
 	}

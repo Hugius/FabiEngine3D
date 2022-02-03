@@ -18,7 +18,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 	if(listString[0] == ',')
 	{
-		_throwRuntimeError("cannot start value with ','!");
+		_throwRuntimeError("cannot start value with ','");
 		return {};
 	}
 
@@ -33,7 +33,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 			}
 			else if(c != ' ')
 			{
-				_throwRuntimeError("values must be separated by ','!");
+				_throwRuntimeError("values must be separated by ','");
 				return {};
 			}
 		}
@@ -99,7 +99,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				{
 					if(!currentValueString.empty())
 					{
-						_throwRuntimeError("invalid INT or DEC syntax!");
+						_throwRuntimeError("invalid INT or DEC syntax");
 						return {};
 					}
 
@@ -116,7 +116,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				}
 				else if(c != ',' && c != ' ')
 				{
-					_throwRuntimeError("invalid INT or DEC syntax!");
+					_throwRuntimeError("invalid INT or DEC syntax");
 					return {};
 				}
 
@@ -126,7 +126,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 					{
 						if(currentValueString.back() == '.')
 						{
-							_throwRuntimeError("invalid DEC syntax!");
+							_throwRuntimeError("invalid DEC syntax");
 							return {};
 						}
 
@@ -169,7 +169,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				}
 				else if(currentValueString.size() > string("<false>").size())
 				{
-					_throwRuntimeError("invalid BOOL syntax!");
+					_throwRuntimeError("invalid BOOL syntax");
 					return {};
 				}
 			}
@@ -199,7 +199,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 					if(!_isLocalVariableExisting(currentValueString) && !_isGlobalVariableExisting(currentValueString))
 					{
-						_throwRuntimeError("variable \"" + currentValueString + "\" not existing!");
+						_throwRuntimeError("variable \"" + currentValueString + "\" not existing");
 						return {};
 					}
 
@@ -218,7 +218,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 					if(!isAccessingList && variable->getType() == ScriptVariableType::MULTIPLE)
 					{
-						_throwRuntimeError("LIST cannot be used inside LIST!");
+						_throwRuntimeError("LIST cannot be used inside LIST");
 						return {};
 					}
 
@@ -238,7 +238,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 	if(isBuildingString || isBuildingNumber || isBuildingBoolean || isBuildingVariable)
 	{
-		_throwRuntimeError("invalid syntax!");
+		_throwRuntimeError("invalid syntax");
 		return {};
 	}
 

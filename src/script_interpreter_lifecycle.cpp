@@ -52,7 +52,7 @@ void ScriptInterpreter::load()
 			}
 			else
 			{
-				_throwStartupError("Entry point for " + scriptType + " defined multiple times!");
+				_throwStartupError("Entry point for " + scriptType + " defined multiple times");
 				return;
 			}
 		}
@@ -68,17 +68,17 @@ void ScriptInterpreter::load()
 
 	if(_initEntryId.empty() && !_initializeScriptIds.empty())
 	{
-		_throwStartupError("No script_execution_entry META defined for INITIALIZE script(s)!");
+		_throwStartupError("No script_execution_entry META defined for INITIALIZE script(s)");
 		return;
 	}
 	if(_updateEntryId.empty() && !_updateScriptIds.empty())
 	{
-		_throwStartupError("No script_execution_entry META defined for UPDATE script(s)!");
+		_throwStartupError("No script_execution_entry META defined for UPDATE script(s)");
 		return;
 	}
 	if(_terminateEntryId.empty() && !_terminateScriptIds.empty())
 	{
-		_throwStartupError("No script_execution_entry META defined for TERMINATE script(s)!");
+		_throwStartupError("No script_execution_entry META defined for TERMINATE script(s)");
 		return;
 	}
 

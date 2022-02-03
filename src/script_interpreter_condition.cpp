@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 	if(conditionString.empty())
 	{
-		_throwRuntimeError("no condition found!");
+		_throwRuntimeError("no condition found");
 		return false;
 	}
 
@@ -57,7 +57,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 	if(elements.size() < 3)
 	{
-		_throwRuntimeError("not enough elements in condition!");
+		_throwRuntimeError("not enough elements in condition");
 		return false;
 	}
 
@@ -67,7 +67,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 		{
 			if(_isListValue(elementString))
 			{
-				_throwRuntimeError("LIST value cannot be used in condition!");
+				_throwRuntimeError("LIST value cannot be used in condition");
 				return false;
 			}
 			else if(_isStringValue(elementString))
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 				if(!_isLocalVariableExisting(elementString) && !_isGlobalVariableExisting(elementString))
 				{
-					_throwRuntimeError("invalid comparison value!");
+					_throwRuntimeError("invalid comparison value");
 					return false;
 				}
 
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 				if(!isAccessingList && variable->getType() == ScriptVariableType::MULTIPLE)
 				{
-					_throwRuntimeError("LIST variable cannot be used in condition!");
+					_throwRuntimeError("LIST variable cannot be used in condition");
 					return false;
 				}
 
@@ -163,7 +163,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 			}
 			else
 			{
-				_throwRuntimeError("invalid comparison operator!");
+				_throwRuntimeError("invalid comparison operator");
 				return false;
 			}
 		}
@@ -177,7 +177,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 			}
 			else
 			{
-				_throwRuntimeError("invalid logic operator!");
+				_throwRuntimeError("invalid logic operator");
 				return false;
 			}
 		}
@@ -185,7 +185,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 	if(mustBeValue || mustBeComparisonOperator)
 	{
-		_throwRuntimeError("condition incomplete!");
+		_throwRuntimeError("condition incomplete");
 		return false;
 	}
 
@@ -204,7 +204,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 		}
 		else if(currentLogicOperator != logicOperators[i - 1])
 		{
-			_throwRuntimeError("cannot use different logic operators!");
+			_throwRuntimeError("cannot use different logic operators");
 			return false;
 		}
 
@@ -225,19 +225,19 @@ const bool ScriptInterpreter::_validateCondition(shared_ptr<ScriptValue> firstVa
 {
 	if(firstValue->getType() != secondValue->getType())
 	{
-		_throwRuntimeError("compared values not of the same type!");
+		_throwRuntimeError("compared values not of the same type");
 		return false;
 	}
 
 	if(((comparisonOperator == MORE_KEYWORD) || (comparisonOperator == LESS_KEYWORD)) && (firstValue->getType() == ScriptValueType::STRING))
 	{
-		_throwRuntimeError("invalid comparison operator for STR values!");
+		_throwRuntimeError("invalid comparison operator for STR values");
 		return false;
 	}
 
 	if(((comparisonOperator == MORE_KEYWORD) || (comparisonOperator == LESS_KEYWORD)) && (firstValue->getType() == ScriptValueType::BOOLEAN))
 	{
-		_throwRuntimeError("invalid comparison operator for BOOL values!");
+		_throwRuntimeError("invalid comparison operator for BOOL values");
 		return false;
 	}
 

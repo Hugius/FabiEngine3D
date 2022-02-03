@@ -28,7 +28,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//auto file = ifstream(filePath);
 	//if(!file)
 	//{
-	//	Logger::throwWarning("Cannot load world with id \"" + fileName + "\"!");
+	//	Logger::throwWarning("Cannot load world with id \"" + fileName + "\"");
 	//	return false;
 	//}
 
@@ -145,7 +145,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 	//			if(partIds.size() != _fe3d->model_getPartIds(templateId).size())
 	//			{
-	//				Logger::throwWarning("World model parts with id \"" + modelId + "\" differ from base model!");
+	//				Logger::throwWarning("World model parts with id \"" + modelId + "\" differ from base model");
 	//				continue;
 	//			}
 
@@ -153,7 +153,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	//			{
 	//				if(partIds[i] != _fe3d->model_getPartIds(templateId)[i])
 	//				{
-	//					Logger::throwWarning("World model parts with id \"" + modelId + "\" differ from base model!");
+	//					Logger::throwWarning("World model parts with id \"" + modelId + "\" differ from base model");
 	//					continue;
 	//				}
 	//			}

@@ -41,7 +41,7 @@ const bool NetworkingServer::_sendTcpMessageToClient(SOCKET socket, const string
 		}
 		else if(WSAGetLastError() == WSAENOBUFS)
 		{
-			Logger::throwWarning("Networking server is sending too many TCP messages!");
+			Logger::throwWarning("Networking server is sending too many TCP messages");
 		}
 		else
 		{
@@ -86,7 +86,7 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string& clientIp, con
 	{
 		if(WSAGetLastError() == WSAENOBUFS)
 		{
-			Logger::throwWarning("Networking server is sending too many UDP messages!");
+			Logger::throwWarning("Networking server is sending too many UDP messages");
 		}
 		else
 		{
@@ -121,7 +121,7 @@ void NetworkingServer::_disconnectClient(SOCKET socket)
 
 			if(!clientUsername.empty())
 			{
-				Logger::throwInfo("Networking client \"" + clientUsername + "\" lost connection with the server!");
+				Logger::throwInfo("Networking client \"" + clientUsername + "\" disconnected from the server");
 			}
 
 			return;

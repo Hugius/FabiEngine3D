@@ -25,12 +25,12 @@ const bool WorldEditor::_copyTemplateSky(const string& newId, const string& temp
 {
 	if(_fe3d->sky_isExisting(newId))
 	{
-		Logger::throwWarning("World sky with id \"" + newId + "\" already exists!");
+		Logger::throwWarning("World sky with id \"" + newId + "\" already exists");
 		return false;
 	}
 	if(!_fe3d->sky_isExisting(templateId))
 	{
-		Logger::throwWarning("Editor sky of world sky with id \"" + newId + "\" not existing anymore!");
+		Logger::throwWarning("Editor sky of world sky with id \"" + newId + "\" not existing anymore");
 		return false;
 	}
 
@@ -50,12 +50,12 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newId, const string& 
 {
 	if(_fe3d->terrain_isExisting(newId))
 	{
-		Logger::throwWarning("World terrain with id \"" + newId + "\" already exists!");
+		Logger::throwWarning("World terrain with id \"" + newId + "\" already exists");
 		return false;
 	}
 	if(!_fe3d->terrain_isExisting(templateId))
 	{
-		Logger::throwWarning("Editor terrain of world terrain with id \"" + newId + "\" not existing anymore!");
+		Logger::throwWarning("Editor terrain of world terrain with id \"" + newId + "\" not existing anymore");
 		return false;
 	}
 
@@ -131,12 +131,12 @@ const bool WorldEditor::_copyTemplateWater(const string& newId, const string& te
 {
 	if(_fe3d->water_isExisting(newId))
 	{
-		Logger::throwWarning("World water with id \"" + newId + "\" already exists!");
+		Logger::throwWarning("World water with id \"" + newId + "\" already exists");
 		return false;
 	}
 	if(!_fe3d->water_isExisting(templateId))
 	{
-		Logger::throwWarning("Editor water of world water with id \"" + newId + "\" not existing anymore!");
+		Logger::throwWarning("Editor water of world water with id \"" + newId + "\" not existing anymore");
 		return false;
 	}
 
@@ -187,12 +187,12 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 {
 	if(_fe3d->model_isExisting(newId))
 	{
-		Logger::throwWarning("Model with id \"" + newId + "\" already exists!");
+		Logger::throwWarning("Model with id \"" + newId + "\" already exists");
 		return false;
 	}
 	if(!_fe3d->model_isExisting(templateId))
 	{
-		Logger::throwWarning("Editor model of model with id \"" + newId + "\" not existing anymore!");
+		Logger::throwWarning("Editor model of model with id \"" + newId + "\" not existing anymore");
 		return false;
 	}
 
@@ -280,12 +280,12 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& t
 {
 	if(_fe3d->quad3d_isExisting(newId))
 	{
-		Logger::throwWarning("Quad3d with id \"" + newId + "\" already exists!");
+		Logger::throwWarning("Quad3d with id \"" + newId + "\" already exists");
 		return false;
 	}
 	if(!_fe3d->quad3d_isExisting(templateId))
 	{
-		Logger::throwWarning("Editor quad3d of quad3d with id \"" + newId + "\" not existing anymore!");
+		Logger::throwWarning("Editor quad3d of quad3d with id \"" + newId + "\" not existing anymore");
 		return false;
 	}
 
@@ -330,12 +330,12 @@ const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& t
 {
 	if(_fe3d->text3d_isExisting(newId))
 	{
-		Logger::throwWarning("Text3d with id \"" + newId + "\" already exists!");
+		Logger::throwWarning("Text3d with id \"" + newId + "\" already exists");
 		return false;
 	}
 	if(!_fe3d->text3d_isExisting(templateId))
 	{
-		Logger::throwWarning("Editor text3d of text3d with id \"" + newId + "\" not existing anymore!");
+		Logger::throwWarning("Editor text3d of text3d with id \"" + newId + "\" not existing anymore");
 		return false;
 	}
 
@@ -371,12 +371,12 @@ const bool WorldEditor::_copyTemplateSound(const string& newId, const string& te
 {
 	if(_fe3d->sound3d_isExisting(newId))
 	{
-		Logger::throwWarning("sound3D with id \"" + newId + "\" already exists!");
+		Logger::throwWarning("sound3D with id \"" + newId + "\" already exists");
 		return false;
 	}
 	if(!_fe3d->sound2d_isExisting(templateId))
 	{
-		Logger::throwWarning("sound2D with id \"" + newId + "\" not existing anymore!");
+		Logger::throwWarning("sound2D with id \"" + newId + "\" not existing anymore");
 		return false;
 	}
 

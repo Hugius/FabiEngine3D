@@ -24,7 +24,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `animation3d.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `animation3d.fe3d` missing");
 		return false;
 	}
 
@@ -150,13 +150,13 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 				}
 				else
 				{
-					Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getId() + "\" does not have required animation parts anymore!");
+					Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getId() + "\" does not have required animation parts anymore");
 					continue;
 				}
 			}
 			else
 			{
-				Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getId() + "\" not existing anymore!");
+				Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getId() + "\" not existing anymore");
 				continue;
 			}
 		}
@@ -166,7 +166,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 
 	file.close();
 
-	Logger::throwInfo("Animation3D editor data loaded!");
+	Logger::throwInfo("Animation3D editor data loaded");
 
 	return true;
 }

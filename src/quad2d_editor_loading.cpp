@@ -22,7 +22,7 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `quad2d.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `quad2d.fe3d` missing");
 		return {};
 	}
 
@@ -75,7 +75,7 @@ const bool Quad2dEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `quad2d.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `quad2d.fe3d` missing");
 		return false;
 	}
 
@@ -127,7 +127,7 @@ const bool Quad2dEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Quad2D editor data loaded!");
+	Logger::throwInfo("Quad2D editor data loaded");
 
 	return true;
 }

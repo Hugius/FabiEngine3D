@@ -83,20 +83,20 @@ void ScriptEditor::_updateScriptFileCreating()
 		{
 			if(newScriptFileId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Script id cannot contain any spaces!");
+				Logger::throwWarning("Script id cannot contain any spaces");
 				return;
 			}
 
 			if(newScriptFileId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Script id cannot contain '@'!");
+				Logger::throwWarning("Script id cannot contain '@'");
 				return;
 			}
 
 			auto existingScriptFileIds = _script->getScriptFileIds();
 			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) != existingScriptFileIds.end())
 			{
-				Logger::throwWarning("Script with id \"" + newScriptFileId + "\" already exists!");
+				Logger::throwWarning("Script with id \"" + newScriptFileId + "\" already exists");
 				return;
 			}
 
@@ -151,20 +151,20 @@ void ScriptEditor::_updateScriptFileRenaming()
 		{
 			if(newScriptFileId.find(' ') != string::npos)
 			{
-				Logger::throwWarning("Script id cannot contain any spaces!");
+				Logger::throwWarning("Script id cannot contain any spaces");
 				return;
 			}
 
 			if(newScriptFileId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Script id cannot contain '@'!");
+				Logger::throwWarning("Script id cannot contain '@'");
 				return;
 			}
 
 			auto existingScriptFileIds = _script->getScriptFileIds();
 			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) == existingScriptFileIds.end())
 			{
-				Logger::throwWarning("Script with id \"" + newScriptFileId + "\" already exists!");
+				Logger::throwWarning("Script with id \"" + newScriptFileId + "\" already exists");
 			}
 
 			_scriptFileNamesToDelete.push_back(_currentScriptFileId);
@@ -188,8 +188,7 @@ void ScriptEditor::_updateScriptSearching()
 
 			if(result.empty())
 			{
-				Logger::throwInfo("Keyword \"" + keyword + "\" not found in scripts!");
-				Logger::throwInfo("");
+				Logger::throwWarning("Keyword \"" + keyword + "\" not found in scripts");
 				return;
 			}
 
@@ -197,7 +196,6 @@ void ScriptEditor::_updateScriptSearching()
 			{
 				Logger::throwInfo("Keyword \"" + keyword + "\" found in script \"" + key + "\" @ line " + to_string(lineNumber));
 			}
-			Logger::throwInfo("");
 
 			_isSearchingScriptFile = false;
 		}

@@ -48,7 +48,7 @@ const bool Animation2dEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Animation2D editor data saved!");
+	Logger::throwInfo("Animation2D editor data saved");
 
 	return true;
 }

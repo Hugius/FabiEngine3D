@@ -97,7 +97,7 @@ const bool TerrainEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Terrain editor data saved!");
+	Logger::throwInfo("Terrain editor data saved");
 
 	return true;
 }

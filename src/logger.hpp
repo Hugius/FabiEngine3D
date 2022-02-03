@@ -48,7 +48,7 @@ public:
 		_printPrefix(LogMessageType::ERR);
 		_printMessage(first, rest...);
 		cout << endl;
-		throwInfo("Press a key to continue...");
+		throwInfo("Press a key to continue");
 		auto temp = _getch();
 		exit(420);
 	}

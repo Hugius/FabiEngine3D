@@ -45,7 +45,7 @@ bool NetworkingClient::_sendTcpMessageToServer(const string& content, bool isRes
 		}
 		else if(WSAGetLastError() == WSAENOBUFS)
 		{
-			Logger::throwWarning("Networking client is sending too many TCP messages!");
+			Logger::throwWarning("Networking client is sending too many TCP messages");
 		}
 		else
 		{
@@ -96,7 +96,7 @@ bool NetworkingClient::_sendUdpMessageToServer(const string& content, bool isRes
 	{
 		if(WSAGetLastError() == WSAENOBUFS)
 		{
-			Logger::throwWarning("Networking client is sending too many UDP messages!");
+			Logger::throwWarning("Networking client is sending too many UDP messages");
 		}
 		else
 		{

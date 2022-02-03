@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:sound2d` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:sound2d` functionality as a networking server");
 		return true;
 	}
 

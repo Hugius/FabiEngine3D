@@ -20,7 +20,7 @@ const bool Quad3dEditor::saveToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\quad3d.fe3d");
+	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\quad3d.fe3d");
 
 	for(const auto& quadId : _loadedQuadIds)
 	{

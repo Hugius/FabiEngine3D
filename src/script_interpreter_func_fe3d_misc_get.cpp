@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 		{
 			if(_fe3d->server_isRunning())
 			{
-				_throwRuntimeError("cannot access `fe3d:cursor` functionality as networking server");
+				_throwRuntimeError("cannot access `fe3d:cursor` functionality as a networking server");
 				return true;
 			}
 
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 		{
 			if(_fe3d->server_isRunning())
 			{
-				_throwRuntimeError("cannot access `fe3d:cursor` functionality as networking server");
+				_throwRuntimeError("cannot access `fe3d:cursor` functionality as a networking server");
 				return true;
 			}
 
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 		{
 			if(_fe3d->server_isRunning())
 			{
-				_throwRuntimeError("cannot access `fe3d:cursor` functionality as networking server");
+				_throwRuntimeError("cannot access `fe3d:cursor` functionality as a networking server");
 				return true;
 			}
 
@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 		{
 			if(_fe3d->server_isRunning())
 			{
-				_throwRuntimeError("cannot access `fe3d:window` functionality as networking server");
+				_throwRuntimeError("cannot access `fe3d:window` functionality as a networking server");
 				return true;
 			}
 
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 		{
 			if(_fe3d->server_isRunning())
 			{
-				_throwRuntimeError("cannot access `fe3d:window` functionality as networking server");
+				_throwRuntimeError("cannot access `fe3d:window` functionality as a networking server");
 				return true;
 			}
 
@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 		{
 			if(_fe3d->server_isRunning())
 			{
-				_throwRuntimeError("cannot access `fe3d:vsync` functionality as networking server");
+				_throwRuntimeError("cannot access `fe3d:vsync` functionality as a networking server");
 				return true;
 			}
 

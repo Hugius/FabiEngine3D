@@ -41,7 +41,7 @@ const bool NetworkingServer::_sendTcpMessageToClient(SOCKET socket, const string
 		}
 		else if(WSAGetLastError() == WSAENOBUFS)
 		{
-			Logger::throwWarning("Networking server is sending too many TCP messages");
+			Logger::throwInfo("Networking server is sending too many TCP messages");
 		}
 		else
 		{
@@ -74,19 +74,13 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string& clientIp, con
 
 	auto socketAddress = _composeSocketAddress(clientIp, clientPort);
 
-	auto sendStatusCode = sendto(
-		_udpSocket,
-		content.c_str(),
-		static_cast<int>(content.size()),
-		0,
-		reinterpret_cast<sockaddr*>(&socketAddress),
-		sizeof(socketAddress));
+	auto sendStatusCode = sendto(_udpSocket, content.c_str(), static_cast<int>(content.size()), 0, reinterpret_cast<sockaddr*>(&socketAddress), sizeof(socketAddress));
 
 	if(sendStatusCode == SOCKET_ERROR)
 	{
 		if(WSAGetLastError() == WSAENOBUFS)
 		{
-			Logger::throwWarning("Networking server is sending too many UDP messages");
+			Logger::throwInfo("Networking server is sending too many UDP messages");
 		}
 		else
 		{

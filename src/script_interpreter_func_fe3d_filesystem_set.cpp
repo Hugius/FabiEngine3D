@@ -23,17 +23,15 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const string newDirectoryPath = string(directoryPath + args[0]->getString());
+			const auto newDirectoryPath = string(directoryPath + args[0]->getString());
 
 			if(Tools::isDirectoryExisting(newDirectoryPath))
 			{
-				_throwRuntimeError("cannot create directory \"" + args[0]->getString() + "\"");
+				_throwRuntimeError("cannot create directory");
 				return true;
 			}
-			else
-			{
-				Tools::createDirectory(newDirectoryPath);
-			}
+
+			Tools::createDirectory(newDirectoryPath);
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -49,17 +47,15 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const string newDirectoryPath = string(directoryPath + args[0]->getString());
 
-			if(Tools::isDirectoryExisting(newDirectoryPath))
+			if(!Tools::isDirectoryExisting(newDirectoryPath))
 			{
-				Tools::deleteDirectory(newDirectoryPath);
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-			else
-			{
-				_throwRuntimeError("cannot delete directory \"" + args[0]->getString() + "\"");
+				_throwRuntimeError("cannot delete directory");
 				return true;
 			}
+
+			Tools::deleteDirectory(newDirectoryPath);
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:file_create")
@@ -75,14 +71,13 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 			if(Tools::isFileExisting(filePath))
 			{
-				_throwRuntimeError("cannot create file \"" + args[0]->getString() + "\"");
+				_throwRuntimeError("cannot create file");
 				return true;
 			}
-			else
-			{
-				ofstream file(filePath);
-				file.close();
-			}
+
+			auto file = ofstream(filePath);
+
+			file.close();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -98,17 +93,15 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = string(directoryPath + args[0]->getString());
 
-			if(Tools::isFileExisting(filePath))
+			if(!Tools::isFileExisting(filePath))
 			{
-				const auto temp = remove(filePath.c_str());
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-			else
-			{
-				_throwRuntimeError("cannot delete file \"" + args[0]->getString() + "\"");
+				_throwRuntimeError("cannot delete file");
 				return true;
 			}
+
+			Tools::deleteFile(filePath);
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:file_write")
@@ -122,34 +115,32 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = string(directoryPath + args[0]->getString());
 
-			if(Tools::isFileExisting(filePath))
-			{
-				ofstream file(filePath, ios::app);
+			auto file = ofstream(filePath, ios::app);
 
-				if(args[1]->getType() == SVT::STRING)
-				{
-					file << args[1]->getString();
-				}
-				else if(args[1]->getType() == SVT::DECIMAL)
-				{
-					file << to_string(args[1]->getDecimal());
-				}
-				else if(args[1]->getType() == SVT::INTEGER)
-				{
-					file << to_string(args[1]->getInteger());
-				}
-				else if(args[1]->getType() == SVT::BOOLEAN)
-				{
-					file << (args[1]->getBoolean() ? "<true>" : "<false>");
-				}
-
-				file.close();
-			}
-			else
+			if(!file)
 			{
-				_throwRuntimeError("cannot write to file \"" + args[0]->getString() + "\"");
+				_throwRuntimeError("cannot open file");
 				return true;
 			}
+
+			if(args[1]->getType() == SVT::STRING)
+			{
+				file << args[1]->getString();
+			}
+			else if(args[1]->getType() == SVT::DECIMAL)
+			{
+				file << to_string(args[1]->getDecimal());
+			}
+			else if(args[1]->getType() == SVT::INTEGER)
+			{
+				file << to_string(args[1]->getInteger());
+			}
+			else if(args[1]->getType() == SVT::BOOLEAN)
+			{
+				file << (args[1]->getBoolean() ? "<true>" : "<false>");
+			}
+
+			file.close();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -165,19 +156,19 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = string(directoryPath + args[0]->getString());
 
-			if(Tools::isFileExisting(filePath))
-			{
-				ofstream file(filePath, ios::app);
-				file << endl;
-				file.close();
+			auto file = ofstream(filePath, ios::app);
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-			else
+			if(!file)
 			{
-				_throwRuntimeError("cannot add new line to file \"" + args[0]->getString() + "\"");
+				_throwRuntimeError("cannot open file");
 				return true;
 			}
+
+			file << endl;
+
+			file.close();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:file_clear")
@@ -191,18 +182,17 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = string(directoryPath + args[0]->getString());
 
-			if(Tools::isFileExisting(filePath))
-			{
-				ofstream file(filePath, ios::trunc);
-				file.close();
+			auto file = ofstream(filePath, ios::trunc);
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-			else
+			if(!file)
 			{
-				_throwRuntimeError("cannot clear file \"" + args[0]->getString() + "\"");
+				_throwRuntimeError("cannot open file");
 				return true;
 			}
+
+			file.close();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else

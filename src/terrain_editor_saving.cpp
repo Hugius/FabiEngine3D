@@ -15,7 +15,7 @@ const bool TerrainEditor::saveToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\terrain.fe3d");
+	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\terrain.fe3d");
 
 	for(const auto& terrainId : _loadedTerrainIds)
 	{

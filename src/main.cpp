@@ -4,6 +4,9 @@
 
 int main(int argc, char* argv[])
 {
+	AllocConsole();
+	freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);
+
 	auto engineCore = make_shared<EngineCore>();
 	auto engineInterface = make_shared<EngineInterface>();
 	auto engineController = make_shared<EngineController>();

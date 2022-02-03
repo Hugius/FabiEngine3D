@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 			if(_fe3d->quad3d_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("quad3d already exists");
+				_throwRuntimeError("quad3D already exists");
 				return true;
 			}
 
@@ -350,7 +350,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 				if(aabbIds.empty())
 				{
-					_throwRuntimeError("quad3d with id \"" + args[0]->getString() + "\" has no bound AABBs");
+					_throwRuntimeError("quad3D has no bound AABBs");
 					return true;
 				}
 
@@ -375,7 +375,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 				if(aabbIds.empty())
 				{
-					_throwRuntimeError("quad3d with id \"" + args[0]->getString() + "\" has no bound AABBs");
+					_throwRuntimeError("quad3D has no bound AABBs");
 					return true;
 				}
 
@@ -521,7 +521,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:quad3d` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:quad3d` functionality as a networking server");
 		return true;
 	}
 

@@ -213,40 +213,37 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 		}
 		else if(scriptLineText.substr(0, EXECUTE_KEYWORD.size() + 1) == EXECUTE_KEYWORD + " ")
 		{
-			string scriptToExecute = scriptLineText.substr(EXECUTE_KEYWORD.size() + 1);
+			string scriptToExecuteId = scriptLineText.substr(EXECUTE_KEYWORD.size() + 1);
 
 			if
 				(
 				(scriptType == ScriptType::INITIALIZE &&
-				(find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecute) != _updateScriptIds.end() ||
-				find(_terminateScriptIds.begin(), _terminateScriptIds.end(), scriptToExecute) != _terminateScriptIds.end()))
+				(find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecuteId) != _updateScriptIds.end() ||
+				find(_terminateScriptIds.begin(), _terminateScriptIds.end(), scriptToExecuteId) != _terminateScriptIds.end()))
 				||
 				(scriptType == ScriptType::UPDATE &&
-				(find(_initializeScriptIds.begin(), _initializeScriptIds.end(), scriptToExecute) != _initializeScriptIds.end() ||
-				find(_terminateScriptIds.begin(), _terminateScriptIds.end(), scriptToExecute) != _terminateScriptIds.end()))
+				(find(_initializeScriptIds.begin(), _initializeScriptIds.end(), scriptToExecuteId) != _initializeScriptIds.end() ||
+				find(_terminateScriptIds.begin(), _terminateScriptIds.end(), scriptToExecuteId) != _terminateScriptIds.end()))
 				||
 				(scriptType == ScriptType::TERMINATE &&
-				(find(_initializeScriptIds.begin(), _initializeScriptIds.end(), scriptToExecute) != _initializeScriptIds.end() ||
-				find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecute) != _updateScriptIds.end()))
+				(find(_initializeScriptIds.begin(), _initializeScriptIds.end(), scriptToExecuteId) != _initializeScriptIds.end() ||
+				find(_updateScriptIds.begin(), _updateScriptIds.end(), scriptToExecuteId) != _updateScriptIds.end()))
 				)
 			{
-				_throwRuntimeError("script \"" + scriptToExecute + "\" is not of the same type");
+				_throwRuntimeError("script is not of the same type");
 				return;
 			}
 
-			auto& scriptList =
-				(scriptType == ScriptType::INITIALIZE) ? _initializeScriptIds :
-				(scriptType == ScriptType::UPDATE) ? _updateScriptIds :
-				_terminateScriptIds;
+			auto& scriptList = ((scriptType == ScriptType::INITIALIZE) ? _initializeScriptIds : (scriptType == ScriptType::UPDATE) ? _updateScriptIds : _terminateScriptIds);
 
-			if(find(scriptList.begin(), scriptList.end(), scriptToExecute) != scriptList.end())
+			if(find(scriptList.begin(), scriptList.end(), scriptToExecuteId) != scriptList.end())
 			{
 				if(_isDebugging)
 				{
 					_debuggingTimes[scriptId] += _fe3d->misc_stopMillisecondTimer();
 				}
 
-				_executeScript(scriptToExecute, scriptType);
+				_executeScript(scriptToExecuteId, scriptType);
 
 				if(_isDebugging)
 				{
@@ -255,7 +252,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 			}
 			else
 			{
-				_throwRuntimeError("script \"" + scriptToExecute + "\" does not exist");
+				_throwRuntimeError("script does not exist");
 				return;
 			}
 		}

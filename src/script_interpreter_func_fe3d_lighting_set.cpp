@@ -210,7 +210,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:lighting` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:lighting` functionality as a networking server");
 		return true;
 	}
 

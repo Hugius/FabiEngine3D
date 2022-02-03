@@ -347,7 +347,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:water` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:water` functionality as a networking server");
 		return true;
 	}
 

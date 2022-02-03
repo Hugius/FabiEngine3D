@@ -106,7 +106,6 @@ void EngineCore::start()
 
 	_isRunning = true;
 
-
 	string logoDirectoryPath;
 	if(Config::getInst().isApplicationExported())
 	{

@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			if(args[2]->getString() != "X" && args[2]->getString() != "Y" &&
 			   args[2]->getString() != "Z" && !args[2]->getString().empty())
 			{
-				_throwRuntimeError("invalid direction argument");
+				_throwRuntimeError("direction is invalid");
 				return true;
 			}
 
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			if(args[0]->getString() != "X" && args[0]->getString() != "Y" &&
 			   args[0]->getString() != "Z" && !args[0]->getString().empty())
 			{
-				_throwRuntimeError("invalid direction argument");
+				_throwRuntimeError("direction is invalid");
 				return true;
 			}
 
@@ -165,7 +165,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			if(args[1]->getString() != "X" && args[1]->getString() != "Y" &&
 			   args[1]->getString() != "Z" && !args[1]->getString().empty())
 			{
-				_throwRuntimeError("invalid direction argument");
+				_throwRuntimeError("direction is invalid");
 				return true;
 			}
 
@@ -202,7 +202,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			if(args[0]->getString() != "X" && args[0]->getString() != "Y" &&
 			   args[0]->getString() != "Z" && !args[0]->getString().empty())
 			{
-				_throwRuntimeError("invalid direction argument");
+				_throwRuntimeError("direction is invalid");
 				return true;
 			}
 
@@ -239,7 +239,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			if(args[1]->getString() != "X" && args[1]->getString() != "Y" && args[1]->getString() != "Z" && !args[1]->getString().empty())
 			{
-				_throwRuntimeError("invalid direction argument");
+				_throwRuntimeError("direction is invalid");
 				return true;
 			}
 
@@ -274,7 +274,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			if(args[0]->getString() != "X" && args[0]->getString() != "Y" && args[0]->getString() != "Z" && !args[0]->getString().empty())
 			{
-				_throwRuntimeError("invalid direction argument");
+				_throwRuntimeError("direction is invalid");
 				return true;
 			}
 
@@ -312,7 +312,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			{
 				if(args[1]->getString() != "X" && args[1]->getString() != "Y" && args[1]->getString() != "Z" && !args[1]->getString().empty())
 				{
-					_throwRuntimeError("invalid direction argument");
+					_throwRuntimeError("direction is invalid");
 					return true;
 				}
 
@@ -347,7 +347,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			if(args[0]->getString() != "X" && args[0]->getString() != "Y" && args[0]->getString() != "Z" && !args[0]->getString().empty())
 			{
-				_throwRuntimeError("invalid direction argument");
+				_throwRuntimeError("direction is invalid");
 				return true;
 			}
 
@@ -554,7 +554,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:collision` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:collision` functionality as a networking server");
 		return true;
 	}
 

@@ -121,7 +121,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:reflection` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:reflection` functionality as a networking server");
 		return true;
 	}
 

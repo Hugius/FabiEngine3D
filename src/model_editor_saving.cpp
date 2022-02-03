@@ -22,7 +22,7 @@ const bool ModelEditor::saveToFile() const
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\model.fe3d");
+	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\model.fe3d");
 
 	for(const auto& modelId : _loadedModelIds)
 	{

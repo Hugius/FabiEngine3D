@@ -14,7 +14,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			{
 				if(_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation already started");
+					_throwRuntimeError("animation is already started");
 					return true;
 				}
 				if((args[2]->getInteger() < -1) || (args[2]->getInteger() == 0))
@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 					{
 						if(!_fe3d->model_hasPart(args[1]->getString(), partId))
 						{
-							_throwRuntimeError("model does not have required animation parts");
+							_throwRuntimeError("model does not have the required animation parts");
 							return true;
 						}
 					}
@@ -51,12 +51,12 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			{
 				if(!_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 				if(_animation3dEditor->isModelAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not playing");
+					_throwRuntimeError("animation is not playing");
 					return true;
 				}
 
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			{
 				if(!_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 				if(_animation3dEditor->isModelAnimationPaused(args[0]->getString(), args[1]->getString()))
@@ -125,12 +125,12 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			{
 				if(!_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 				if(!_animation3dEditor->isModelAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not paused");
+					_throwRuntimeError("animation is not paused");
 					return true;
 				}
 
@@ -162,7 +162,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			{
 				if(!_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -194,7 +194,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			{
 				if(!_animation3dEditor->isModelAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -211,7 +211,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:animation3d` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:animation3d` functionality as a networking server");
 		return true;
 	}
 

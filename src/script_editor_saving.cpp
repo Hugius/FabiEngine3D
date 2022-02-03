@@ -34,7 +34,7 @@ const bool ScriptEditor::saveScriptFiles()
 	for(const auto& scriptId : _script->getScriptFileIds())
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
-		ofstream file(rootPath + "projects\\" + getCurrentProjectId() + "\\scripts\\" + scriptId + ".fe3d");
+		auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\scripts\\" + scriptId + ".fe3d");
 
 		file << _script->getScriptFile(scriptId)->getCursorLineIndex() << " " << _script->getScriptFile(scriptId)->getCursorCharIndex() << endl;
 

@@ -185,17 +185,15 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\");
 			const auto filePath = string(directoryPath + args[0]->getString() + ".fe3d");
 
-			if(Tools::isFileExisting(filePath))
+			if(!Tools::isFileExisting(filePath))
 			{
-				Tools::deleteFile(filePath);
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-			else
-			{
-				_throwRuntimeError("cannot delete custom world \"" + args[0]->getString() + "\"");
+				_throwRuntimeError("cannot delete custom world");
 				return true;
 			}
+
+			Tools::deleteFile(filePath);
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else
@@ -205,7 +203,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:world` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:world` functionality as a networking server");
 		return true;
 	}
 

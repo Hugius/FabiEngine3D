@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:world` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:world` functionality as a networking server");
 		return true;
 	}
 

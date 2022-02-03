@@ -99,7 +99,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				{
 					if(!currentValueString.empty())
 					{
-						_throwRuntimeError("invalid INT or DEC syntax");
+						_throwRuntimeError("invalid syntax");
 						return {};
 					}
 
@@ -116,7 +116,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 				}
 				else if(c != ',' && c != ' ')
 				{
-					_throwRuntimeError("invalid INT or DEC syntax");
+					_throwRuntimeError("invalid syntax");
 					return {};
 				}
 
@@ -126,7 +126,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 					{
 						if(currentValueString.back() == '.')
 						{
-							_throwRuntimeError("invalid DEC syntax");
+							_throwRuntimeError("invalid syntax");
 							return {};
 						}
 
@@ -167,9 +167,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 					isBuildingBoolean = false;
 					hasFinishedValue = true;
 				}
-				else if(currentValueString.size() > string("<false>").size())
+				else if(currentValueString.size() >= string("<false>").size())
 				{
-					_throwRuntimeError("invalid BOOL syntax");
+					_throwRuntimeError("invalid syntax");
 					return {};
 				}
 			}

@@ -299,7 +299,7 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:camera` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:camera` functionality as a networking server");
 		return true;
 	}
 

@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -68,7 +68,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -108,7 +108,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -188,7 +188,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad3dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -208,7 +208,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -228,7 +228,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -248,7 +248,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -268,7 +268,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -288,7 +288,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -308,7 +308,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -328,7 +328,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -348,7 +348,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -368,7 +368,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -388,7 +388,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			{
 				if(!_animation2dEditor->isQuad2dAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not started");
+					_throwRuntimeError("animation is not started");
 					return true;
 				}
 
@@ -405,7 +405,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 
 	if(_fe3d->server_isRunning())
 	{
-		_throwRuntimeError("cannot access `fe3d:animation2d` functionality as networking server");
+		_throwRuntimeError("cannot access `fe3d:animation2d` functionality as a networking server");
 		return true;
 	}
 

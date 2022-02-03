@@ -54,9 +54,10 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			const auto filePath = (directoryPath + args[0]->getString());
 
 			auto file = ifstream(filePath);
+
 			if(!file)
 			{
-				_throwRuntimeError("cannot read from file \"" + args[0]->getString() + "\"");
+				_throwRuntimeError("cannot open file");
 				return true;
 			}
 

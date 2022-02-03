@@ -90,7 +90,7 @@ void NetworkingServer::start(unsigned int maxClientCount)
 	{
 		if(WSAGetLastError() == WSAEADDRINUSE)
 		{
-			Logger::throwWarning("Current machine is already hosting a networking server");
+			Logger::throwInfo("Current machine is already hosting a networking server");
 			freeaddrinfo(tcpAddressInfo);
 			freeaddrinfo(udpAddressInfo);
 			return;
@@ -107,7 +107,7 @@ void NetworkingServer::start(unsigned int maxClientCount)
 	{
 		if(WSAGetLastError() == WSAEADDRINUSE)
 		{
-			Logger::throwWarning("Current machine is already hosting a networking server");
+			Logger::throwInfo("Current machine is already hosting a networking server");
 			freeaddrinfo(tcpAddressInfo);
 			freeaddrinfo(udpAddressInfo);
 			return;

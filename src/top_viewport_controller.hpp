@@ -41,7 +41,7 @@ public:
 
 	const bool isScriptStarted() const;
 	const bool isScriptRunning() const;
-	const bool isProjectCorrupted(const string& projectDirectoryPath) const;
+	const bool validateProject(const string& projectDirectoryPath) const;
 
 private:
 	void _updateProjectScreenManagement();

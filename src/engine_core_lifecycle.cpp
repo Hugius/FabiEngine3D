@@ -106,46 +106,7 @@ void EngineCore::start()
 
 	_isRunning = true;
 
-	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto meshDirectoryPath = "engine\\assets\\mesh\\";
-	const auto fontMapDirectoryPath = "engine\\assets\\image\\font_map\\";
-	const auto diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
-
-	if
-		(
-		!Tools::isFileExisting(rootPath + meshDirectoryPath + "camera.obj") ||
-		!Tools::isFileExisting(rootPath + meshDirectoryPath + "box.obj") ||
-		!Tools::isFileExisting(rootPath + meshDirectoryPath + "lamp.obj") ||
-		!Tools::isFileExisting(rootPath + meshDirectoryPath + "plane.obj") ||
-		!Tools::isFileExisting(rootPath + meshDirectoryPath + "speaker.obj") ||
-		!Tools::isFileExisting(rootPath + meshDirectoryPath + "torch.obj") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "box.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "color.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_default.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_pointing.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_text.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "debug.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "grid.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "light_source.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "logo.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "minus.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "pause.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "plus.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "position.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "radius.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "restart.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "rotation.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "settings.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "shape_circle.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "shape_square.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "size.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "start.tga") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "stop.tga") ||
-		!Tools::isFileExisting(rootPath + fontMapDirectoryPath + "font.tga")
-		)
-	{
-		Logger::throwError("Directory `engine\\` is not existing or corrupted");
-	}
+	_imageLoader->cacheImage("engine\\assets\\image\\diffuse_map\\logo.tga", true);
 
 	shared_ptr<Quad2dEntity> logo = make_shared<Quad2dEntity>("logo");
 	logo->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));

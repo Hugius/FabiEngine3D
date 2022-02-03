@@ -24,6 +24,7 @@ const shared_ptr<Image> ImageLoader::loadImage(const string& filePath)
 	if(loadedImage == nullptr)
 	{
 		Logger::throwWarning("Cannot load image: \"" + filePath + "\"");
+
 		return nullptr;
 	}
 
@@ -34,12 +35,37 @@ const shared_ptr<Image> ImageLoader::loadImage(const string& filePath)
 	return loadedImage;
 }
 
-void ImageLoader::cacheImage(const string& filePath)
+void ImageLoader::cacheImage(const string& filePath, bool isCrucial)
 {
-	loadImage(filePath);
+	auto cacheIterator = _cache.find(filePath);
+
+	if(cacheIterator != _cache.end())
+	{
+		return;
+	}
+
+	auto loadedImage = _loadImage(filePath);
+
+	if(loadedImage == nullptr)
+	{
+		if(isCrucial)
+		{
+			Logger::throwError("Cannot load image: \"" + filePath + "\"");
+		}
+		else
+		{
+			Logger::throwWarning("Cannot load image: \"" + filePath + "\"");
+		}
+
+		return;
+	}
+
+	_cache.insert(make_pair(filePath, loadedImage));
+
+	Logger::throwInfo("Loaded image: \"" + filePath + "\"");
 }
 
-void ImageLoader::cacheImages(const vector<string>& filePaths)
+void ImageLoader::cacheImages(const vector<string>& filePaths, bool isCrucial)
 {
 	vector<future<shared_ptr<Image>>> threads;
 	vector<string> threadFilePaths;
@@ -74,7 +100,15 @@ void ImageLoader::cacheImages(const vector<string>& filePaths)
 
 					if(loadedImage == nullptr)
 					{
-						Logger::throwWarning("Cannot load image: \"" + threadFilePaths[i] + "\"");
+						if(isCrucial)
+						{
+							Logger::throwError("Cannot load image: \"" + threadFilePaths[i] + "\"");
+						}
+						else
+						{
+							Logger::throwWarning("Cannot load image: \"" + threadFilePaths[i] + "\"");
+						}
+
 						continue;
 					}
 

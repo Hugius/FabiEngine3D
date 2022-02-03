@@ -10,8 +10,8 @@ using std::pair;
 class MeshLoader final
 {
 public:
-	void cacheMesh(const string& filePath);
-	void cacheMeshes(const vector<string>& meshPaths);
+	void cacheMesh(const string& filePath, bool isCrucial);
+	void cacheMeshes(const vector<string>& filePaths, bool isCrucial);
 	void clearMeshCache(const string& filePath);
 	void clearMeshesCache();
 

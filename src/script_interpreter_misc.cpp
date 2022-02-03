@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_validateSavesDirectory()
 
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
-		_throwRuntimeError("Project corrupted: directory `saves\\` missing");
+		_throwRuntimeError("Project corrupted: directory `saves\\` not existing");
 		return false;
 	}
 

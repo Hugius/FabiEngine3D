@@ -24,7 +24,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `animation3d.fe3d` missing");
+		Logger::throwWarning("Project corrupted: file `animation3d.fe3d` not existing");
 		return false;
 	}
 

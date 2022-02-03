@@ -22,7 +22,7 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `text2d.fe3d` missing");
+		Logger::throwWarning("Project corrupted: file `text2d.fe3d` not existing");
 		return {};
 	}
 
@@ -75,7 +75,7 @@ const bool Text2dEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `text2d.fe3d` missing");
+		Logger::throwWarning("Project corrupted: file `text2d.fe3d` not existing");
 		return false;
 	}
 

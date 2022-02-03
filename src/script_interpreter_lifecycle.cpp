@@ -122,9 +122,9 @@ void ScriptInterpreter::load()
 		auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
 		auto audioPaths = _soundEditor->getAudioPathsFromFile();
 
-		_fe3d->misc_cacheMeshes(modelMeshPaths);
+		_fe3d->misc_cacheMeshes(modelMeshPaths, false);
 
-		_fe3d->misc_cacheImages(terrainImagePaths);
+		_fe3d->misc_cacheImages(terrainImagePaths, false);
 
 		vector<string> imagePaths;
 		imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
@@ -135,9 +135,9 @@ void ScriptInterpreter::load()
 		imagePaths.insert(imagePaths.end(), text3dImagePaths.begin(), text3dImagePaths.end());
 		imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
 		imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
-		_fe3d->misc_cacheImages(imagePaths);
+		_fe3d->misc_cacheImages(imagePaths, false);
 
-		_fe3d->misc_cacheAudios(audioPaths);
+		_fe3d->misc_cacheAudios(audioPaths, false);
 	}
 
 	_skyEditor->loadFromFile();

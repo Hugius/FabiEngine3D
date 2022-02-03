@@ -183,7 +183,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 			if(Tools::isFileExisting(filePath))
 			{
-				const auto temp = remove(filePath.c_str());
+				Tools::deleteFile(filePath);
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

@@ -890,12 +890,12 @@ public:
 	void misc_centerCursor();
 	void misc_setCursorPosition(const ivec2& value);
 	void misc_setWindowTitle(const string& value);
-	void misc_cacheMesh(const string& filePath);
-	void misc_cacheImage(const string& filePath);
-	void misc_cacheAudio(const string& filePath);
-	void misc_cacheMeshes(const vector<string>& filePaths);
-	void misc_cacheImages(const vector<string>& filePaths);
-	void misc_cacheAudios(const vector<string>& filePaths);
+	void misc_cacheMesh(const string& filePath, bool isCrucial);
+	void misc_cacheImage(const string& filePath, bool isCrucial);
+	void misc_cacheAudio(const string& filePath, bool isCrucial);
+	void misc_cacheMeshes(const vector<string>& filePaths, bool isCrucial);
+	void misc_cacheImages(const vector<string>& filePaths, bool isCrucial);
+	void misc_cacheAudios(const vector<string>& filePaths, bool isCrucial);
 	void misc_clearMeshCache(const string& filePath);
 	void misc_clearImageCache(const string& filePath);
 	void misc_clearAudioCache(const string& filePath);

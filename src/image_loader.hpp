@@ -19,8 +19,8 @@ using std::make_shared;
 class ImageLoader final
 {
 public:
-	void cacheImage(const string& filePath);
-	void cacheImages(const vector<string>& filePaths);
+	void cacheImage(const string& filePath, bool isCrucial);
+	void cacheImages(const vector<string>& filePaths, bool isCrucial);
 	void clearImageCache(const string& filePath);
 	void clearImagesCache();
 

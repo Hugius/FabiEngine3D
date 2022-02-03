@@ -7,7 +7,7 @@
 - You can pause the runtime with `ESC`.
 - If the application is paused you can start a debugging frame which logs a performance report about your script execution.
 
-## 2. Application Exporting
+## 2. Application Export
 
 ### 2.1 General
 

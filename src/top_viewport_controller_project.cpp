@@ -127,9 +127,8 @@ void TopViewportController::_updateProjectLoading()
 
 		if(!clickedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if(isProjectCorrupted(projectDirectoryPath))
+			if(!validateProject(projectDirectoryPath))
 			{
-				Logger::throwWarning("Cannot load project: missing files/directories");
 				return;
 			}
 
@@ -147,7 +146,7 @@ void TopViewportController::_updateProjectLoading()
 			auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
 			auto audioPaths = _soundEditor->getAudioPathsFromFile();
 
-			_fe3d->misc_cacheMeshes(modelMeshPaths);
+			_fe3d->misc_cacheMeshes(modelMeshPaths, false);
 
 			vector<string> imagePaths;
 			imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
@@ -158,9 +157,9 @@ void TopViewportController::_updateProjectLoading()
 			imagePaths.insert(imagePaths.end(), text3dImagePaths.begin(), text3dImagePaths.end());
 			imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
 			imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
-			_fe3d->misc_cacheImages(imagePaths);
+			_fe3d->misc_cacheImages(imagePaths, false);
 
-			_fe3d->misc_cacheAudios(audioPaths);
+			_fe3d->misc_cacheAudios(audioPaths, false);
 
 			Logger::throwInfo("Project \"" + _currentProjectId + "\" loaded");
 
@@ -206,7 +205,7 @@ void TopViewportController::_updateProjectDeleting()
 			const auto directoryPath = (rootPath + "projects\\" + chosenButtonId);
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
-				Logger::throwWarning("Cannot delete project: missing directory");
+				Logger::throwWarning("Cannot delete corrupted project");
 				return;
 			}
 

@@ -130,16 +130,13 @@ void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 void EngineController::initialize()
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string meshDirectoryPath = "engine\\assets\\mesh\\";
-	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
-	const string fontMapDirectoryPath = "engine\\assets\\image\\font_map\\";
+	const auto meshDirectoryPath = string("engine\\assets\\mesh\\");
+	const auto diffuseMapDirectoryPath = string("engine\\assets\\image\\diffuse_map\\");
+	const auto fontMapDirectoryPath = string("engine\\assets\\image\\font_map\\");
 
 	if(Config::getInst().isApplicationExported())
 	{
-		if(_topViewportController->isProjectCorrupted(rootPath))
-		{
-			Logger::throwError("Cannot load application: missing files/directories");
-		}
+		_topViewportController->validateProject(rootPath);
 
 		_scriptEditor->loadScriptFiles(true);
 		_scriptExecutor->load();
@@ -153,13 +150,13 @@ void EngineController::initialize()
 	else
 	{
 		vector<string> meshPaths;
-		meshPaths.push_back(meshDirectoryPath + "camera.obj");
 		meshPaths.push_back(meshDirectoryPath + "box.obj");
+		meshPaths.push_back(meshDirectoryPath + "camera.obj");
 		meshPaths.push_back(meshDirectoryPath + "lamp.obj");
 		meshPaths.push_back(meshDirectoryPath + "plane.obj");
 		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
 		meshPaths.push_back(meshDirectoryPath + "torch.obj");
-		_fe3d->misc_cacheMeshes(meshPaths);
+		_fe3d->misc_cacheMeshes(meshPaths, true);
 
 		vector<string> imagePaths;
 		imagePaths.push_back(diffuseMapDirectoryPath + "box.tga");
@@ -185,7 +182,7 @@ void EngineController::initialize()
 		imagePaths.push_back(diffuseMapDirectoryPath + "start.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "stop.tga");
 		imagePaths.push_back(fontMapDirectoryPath + "font.tga");
-		_fe3d->misc_cacheImages(imagePaths);
+		_fe3d->misc_cacheImages(imagePaths, true);
 
 		_fe3d->quad2d_create("@@cursor", true);
 		_fe3d->quad2d_setSize("@@cursor", fvec2(CURSOR_SIZE.x, (CURSOR_SIZE.y * Tools::getWindowAspectRatio())));

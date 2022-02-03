@@ -24,6 +24,7 @@ const shared_ptr<Mesh> MeshLoader::loadMesh(const string& filePath)
 	if(loadedMesh == nullptr)
 	{
 		Logger::throwWarning("Cannot load mesh: \"" + filePath + "\"");
+
 		return nullptr;
 	}
 
@@ -34,19 +35,44 @@ const shared_ptr<Mesh> MeshLoader::loadMesh(const string& filePath)
 	return loadedMesh;
 }
 
-void MeshLoader::cacheMesh(const string& filePath)
+void MeshLoader::cacheMesh(const string& filePath, bool isCrucial)
 {
-	loadMesh(filePath);
+	auto cacheIterator = _cache.find(filePath);
+
+	if(cacheIterator != _cache.end())
+	{
+		return;
+	}
+
+	auto loadedMesh = _loadMesh(filePath);
+
+	if(loadedMesh == nullptr)
+	{
+		if(isCrucial)
+		{
+			Logger::throwError("Cannot load mesh: \"" + filePath + "\"");
+		}
+		else
+		{
+			Logger::throwWarning("Cannot load mesh: \"" + filePath + "\"");
+		}
+
+		return;
+	}
+
+	_cache.insert(make_pair(filePath, loadedMesh));
+
+	Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
 }
 
-void MeshLoader::cacheMeshes(const vector<string>& meshPaths)
+void MeshLoader::cacheMeshes(const vector<string>& filePaths, bool isCrucial)
 {
 	vector<future<shared_ptr<Mesh>>> threads;
 	vector<string> threadFilePaths;
 	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
-	auto tempFilePaths = set<string>(meshPaths.begin(), meshPaths.end());
+	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	for(const auto& filePath : uniqueFilePaths)
@@ -74,7 +100,15 @@ void MeshLoader::cacheMeshes(const vector<string>& meshPaths)
 
 					if(loadedMesh == nullptr)
 					{
-						Logger::throwWarning("Cannot load mesh: \"" + threadFilePaths[i] + "\"");
+						if(isCrucial)
+						{
+							Logger::throwError("Cannot load mesh: \"" + threadFilePaths[i] + "\"");
+						}
+						else
+						{
+							Logger::throwWarning("Cannot load mesh: \"" + threadFilePaths[i] + "\"");
+						}
+
 						continue;
 					}
 

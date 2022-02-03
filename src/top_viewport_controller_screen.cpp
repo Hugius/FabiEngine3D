@@ -220,10 +220,10 @@ void TopViewportController::_updateMiscScreenManagement()
 
 			const auto filePath = string(exportDirectoryPath + "config.fe3d");
 			auto file = ofstream(filePath);
-			file << "window_size			= 0.75" << endl;
-			file << "window_fullscreen      = false" << endl;
-			file << "window_borderless      = false" << endl;
-			file << "window_title           = MyGame";
+			file << "window_size	   = 0.75" << endl;
+			file << "window_fullscreen = false" << endl;
+			file << "window_borderless = false" << endl;
+			file << "window_title      = MyGame";
 			file.close();
 		}
 	}

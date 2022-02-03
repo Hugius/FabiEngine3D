@@ -48,17 +48,17 @@ void EngineInterface::misc_setWindowTitle(const string& value)
 	_core->getRenderWindow()->setTitle(value);
 }
 
-void EngineInterface::misc_cacheMesh(const string& filePath)
+void EngineInterface::misc_cacheMesh(const string& filePath, bool isCrucial)
 {
-	_core->getMeshLoader()->cacheMesh(filePath);
+	_core->getMeshLoader()->cacheMesh(filePath, isCrucial);
 }
 
-void EngineInterface::misc_cacheImage(const string& filePath)
+void EngineInterface::misc_cacheImage(const string& filePath, bool isCrucial)
 {
-	_core->getImageLoader()->cacheImage(filePath);
+	_core->getImageLoader()->cacheImage(filePath, isCrucial);
 }
 
-void EngineInterface::misc_cacheAudio(const string& filePath)
+void EngineInterface::misc_cacheAudio(const string& filePath, bool isCrucial)
 {
 	_core->getAudioLoader()->cacheChunk(filePath);
 }
@@ -122,17 +122,17 @@ void EngineInterface::misc_clearAudiosCache()
 	_core->getAudioLoader()->clearChunksCache();
 }
 
-void EngineInterface::misc_cacheMeshes(const vector<string>& filePaths)
+void EngineInterface::misc_cacheMeshes(const vector<string>& filePaths, bool isCrucial)
 {
-	_core->getMeshLoader()->cacheMeshes(filePaths);
+	_core->getMeshLoader()->cacheMeshes(filePaths, isCrucial);
 }
 
-void EngineInterface::misc_cacheImages(const vector<string>& filePaths)
+void EngineInterface::misc_cacheImages(const vector<string>& filePaths, bool isCrucial)
 {
-	_core->getImageLoader()->cacheImages(filePaths);
+	_core->getImageLoader()->cacheImages(filePaths, isCrucial);
 }
 
-void EngineInterface::misc_cacheAudios(const vector<string>& filePaths)
+void EngineInterface::misc_cacheAudios(const vector<string>& filePaths, bool isCrucial)
 {
 	_core->getAudioLoader()->cacheChunks(filePaths);
 }

@@ -16,14 +16,10 @@ Config::Config()
 	_monitorSize.x = DM.w;
 	_monitorSize.y = DM.h;
 
-	if(Tools::isFileExisting(filePath))
-	{
-		auto file = ifstream(filePath);
-		if(!file)
-		{
-			Logger::throwError("Cannot load `config.fe3d`");
-		}
+	auto file = ifstream(filePath);
 
+	if(file)
+	{
 		_processOption(file, _windowSizeMultiplier, "window_size");
 		_processOption(file, _isWindowFullscreen, "window_fullscreen");
 		_processOption(file, _isWindowBorderless, "window_borderless");

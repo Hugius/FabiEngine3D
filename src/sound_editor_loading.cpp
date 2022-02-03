@@ -22,7 +22,7 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `sound.fe3d` missing");
+		Logger::throwWarning("Project corrupted: file `sound.fe3d` not existing");
 		return {};
 	}
 
@@ -72,7 +72,7 @@ const bool SoundEditor::loadFromFile()
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Project corrupted: file `sound.fe3d` missing");
+		Logger::throwWarning("Project corrupted: file `sound.fe3d` not existing");
 		return false;
 	}
 

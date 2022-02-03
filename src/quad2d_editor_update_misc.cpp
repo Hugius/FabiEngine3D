@@ -24,15 +24,15 @@ void Quad2dEditor::_updateQuadCreating()
 
 		if(_gui->getOverlay()->checkValueForm("quadCreate", newQuadId, {_currentQuadId}))
 		{
-			if(newQuadId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Quad ID cannot contain any spaces");
-				return;
-			}
-
 			if(newQuadId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Quad ID cannot contain '@'");
+				return;
+			}
+
+			if(newQuadId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Quad ID cannot contain any spaces");
 				return;
 			}
 

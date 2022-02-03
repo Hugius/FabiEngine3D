@@ -24,6 +24,11 @@ const unordered_map<string, shared_ptr<SpotlightEntity>>& SpotlightEntityManager
 
 void SpotlightEntityManager::createEntity(const string& id)
 {
+	if(isEntityExisting(id))
+	{
+		abort();
+	}
+
 	if(getEntities().size() == MAX_ENTITY_COUNT)
 	{
 		return;

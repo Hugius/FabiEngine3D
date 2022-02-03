@@ -54,15 +54,15 @@ void WaterEditor::_updateWaterCreating()
 
 		if(_gui->getOverlay()->checkValueForm("waterCreate", newWaterId, {}))
 		{
-			if(newWaterId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Water ID cannot contain any spaces");
-				return;
-			}
-
 			if(newWaterId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Water ID cannot contain '@'");
+				return;
+			}
+
+			if(newWaterId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Water ID cannot contain any spaces");
 				return;
 			}
 

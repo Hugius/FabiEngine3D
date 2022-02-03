@@ -43,6 +43,11 @@ void WaterEntityManager::selectEntity(const string& id)
 
 void WaterEntityManager::createEntity(const string& id)
 {
+	if(isEntityExisting(id))
+	{
+		abort();
+	}
+
 	auto entity = make_shared<WaterEntity>(id);
 
 	_entities.insert(make_pair(id, entity));
@@ -85,11 +90,6 @@ const bool WaterEntityManager::isEntityExisting(const string& id) const
 void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 {
 	const float halfSize = (size * 0.5f);
-
-	if(size > MAX_SIZE)
-	{
-		abort();
-	}
 
 	const float lowQualityBufferData[] =
 	{

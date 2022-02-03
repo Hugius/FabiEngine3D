@@ -24,15 +24,15 @@ void Animation2dEditor::_updateAnimationCreating()
 
 		if(_gui->getOverlay()->checkValueForm("animationCreate", newAnimationId, {_currentAnimationId}))
 		{
-			if(newAnimationId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Animation ID cannot contain any spaces");
-				return;
-			}
-
 			if(newAnimationId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Animation ID cannot contain '@'");
+				return;
+			}
+
+			if(newAnimationId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Animation ID cannot contain any spaces");
 				return;
 			}
 

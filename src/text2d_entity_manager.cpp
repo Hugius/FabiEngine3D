@@ -32,6 +32,11 @@ const unordered_map<string, shared_ptr<Text2dEntity>>& Text2dEntityManager::getE
 
 void Text2dEntityManager::createEntity(const string& id, const string& fontMapPath, bool isCentered)
 {
+	if(isEntityExisting(id))
+	{
+		abort();
+	}
+
 	auto entity = make_shared<Text2dEntity>(id);
 
 	_entities.insert(make_pair(id, entity));

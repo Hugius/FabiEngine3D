@@ -24,6 +24,11 @@ const unordered_map<string, shared_ptr<ReflectionEntity>>& ReflectionEntityManag
 
 void ReflectionEntityManager::createEntity(const string& id)
 {
+	if(isEntityExisting(id))
+	{
+		abort();
+	}
+
 	auto entity = make_shared<ReflectionEntity>(id);
 
 	_entities.insert(make_pair(id, entity));

@@ -102,15 +102,15 @@ void ModelEditor::_updateModelCreating()
 
 		if(_gui->getOverlay()->checkValueForm("modelCreate", newModelId, {}))
 		{
-			if(newModelId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Model ID cannot contain any spaces");
-				return;
-			}
-
 			if(newModelId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Model ID cannot contain '@'");
+				return;
+			}
+
+			if(newModelId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Model ID cannot contain any spaces");
 				return;
 			}
 

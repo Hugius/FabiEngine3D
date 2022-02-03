@@ -32,6 +32,11 @@ const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::ge
 
 void TerrainEntityManager::createEntity(const string& id, const string& heightMapPath)
 {
+	if(isEntityExisting(id))
+	{
+		abort();
+	}
+
 	auto entity = make_shared<TerrainEntity>(id);
 
 	_entities.insert(make_pair(id, entity));
@@ -46,18 +51,14 @@ void TerrainEntityManager::createEntity(const string& id, const string& heightMa
 
 	if(image->getWidth() != image->getHeight())
 	{
-		Logger::throwWarning("Tried to create terrain with id \"" + id + "\": height map resolution not the same");
-		deleteEntity(id);
-		return;
+		abort();
 	}
 
 	const auto size = static_cast<float>(image->getWidth());
 
 	if(size > MAX_SIZE)
 	{
-		Logger::throwWarning("Tried to create terrain with id \"" + id + "\": height map resolution too high");
-		deleteEntity(id);
-		return;
+		abort();
 	}
 
 	vector<float> pixels;

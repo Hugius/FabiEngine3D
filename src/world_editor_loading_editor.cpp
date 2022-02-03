@@ -24,7 +24,6 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 	auto file = ifstream(filePath);
 	if(!file)
 	{
-		Logger::throwWarning("Cannot load world with id \"" + fileName + "\"");
 		return false;
 	}
 

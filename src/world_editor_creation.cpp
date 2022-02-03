@@ -23,17 +23,6 @@ void WorldEditor::copyTemplateSound(const string& newId, const string& templateI
 
 const bool WorldEditor::_copyTemplateSky(const string& newId, const string& templateId)
 {
-	if(_fe3d->sky_isExisting(newId))
-	{
-		Logger::throwWarning("World sky with id \"" + newId + "\" already exists");
-		return false;
-	}
-	if(!_fe3d->sky_isExisting(templateId))
-	{
-		Logger::throwWarning("Editor sky of world sky with id \"" + newId + "\" does not exist anymore");
-		return false;
-	}
-
 	_fe3d->sky_create(newId);
 	_fe3d->sky_setCubeMaps(newId, _fe3d->sky_getCubeMapPaths(templateId));
 	_fe3d->sky_setLightness(newId, _fe3d->sky_getLightness(templateId));
@@ -48,22 +37,6 @@ const bool WorldEditor::_copyTemplateSky(const string& newId, const string& temp
 
 const bool WorldEditor::_copyTemplateTerrain(const string& newId, const string& templateId)
 {
-	if(_fe3d->terrain_isExisting(newId))
-	{
-		Logger::throwWarning("World terrain with id \"" + newId + "\" already exists");
-		return false;
-	}
-	if(!_fe3d->terrain_isExisting(templateId))
-	{
-		Logger::throwWarning("Editor terrain of world terrain with id \"" + newId + "\" does not exist anymore");
-		return false;
-	}
-
-	if(_fe3d->terrain_isExisting(newId))
-	{
-		_fe3d->terrain_delete(newId);
-	}
-
 	_fe3d->terrain_create(newId, _fe3d->terrain_getHeightMapPath(templateId));
 	_fe3d->terrain_select(newId);
 
@@ -129,22 +102,6 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newId, const string& 
 
 const bool WorldEditor::_copyTemplateWater(const string& newId, const string& templateId)
 {
-	if(_fe3d->water_isExisting(newId))
-	{
-		Logger::throwWarning("World water with ID \"" + newId + "\" already exists");
-		return false;
-	}
-	if(!_fe3d->water_isExisting(templateId))
-	{
-		Logger::throwWarning("Editor water of world water with id \"" + newId + "\" does not exist anymore");
-		return false;
-	}
-
-	if(_fe3d->water_isExisting(newId))
-	{
-		_fe3d->water_delete(newId);
-	}
-
 	_fe3d->water_create(newId);
 	_fe3d->water_select(newId);
 
@@ -185,17 +142,6 @@ const bool WorldEditor::_copyTemplateWater(const string& newId, const string& te
 
 const bool WorldEditor::_copyTemplateModel(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
 {
-	if(_fe3d->model_isExisting(newId))
-	{
-		Logger::throwWarning("Model with id \"" + newId + "\" already exists");
-		return false;
-	}
-	if(!_fe3d->model_isExisting(templateId))
-	{
-		Logger::throwWarning("Editor model of model with id \"" + newId + "\" does not exist anymore");
-		return false;
-	}
-
 	_fe3d->model_create(newId, _fe3d->model_getMeshPath(templateId));
 
 	_fe3d->model_setBasePosition(newId, position);
@@ -278,17 +224,6 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 
 const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
 {
-	if(_fe3d->quad3d_isExisting(newId))
-	{
-		Logger::throwWarning("Quad3d with id \"" + newId + "\" already exists");
-		return false;
-	}
-	if(!_fe3d->quad3d_isExisting(templateId))
-	{
-		Logger::throwWarning("Editor quad3d of quad3d with id \"" + newId + "\" does not exist anymore");
-		return false;
-	}
-
 	_fe3d->quad3d_create(newId, false);
 
 	_fe3d->aabb_create(newId, false);
@@ -328,17 +263,6 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& t
 
 const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
 {
-	if(_fe3d->text3d_isExisting(newId))
-	{
-		Logger::throwWarning("Text3d with id \"" + newId + "\" already exists");
-		return false;
-	}
-	if(!_fe3d->text3d_isExisting(templateId))
-	{
-		Logger::throwWarning("Editor text3d of text3d with id \"" + newId + "\" does not exist anymore");
-		return false;
-	}
-
 	_fe3d->text3d_create(newId, _fe3d->text3d_getFontMapPath(templateId), false);
 
 	_fe3d->aabb_create(newId, false);
@@ -369,17 +293,6 @@ const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& t
 
 const bool WorldEditor::_copyTemplateSound(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
 {
-	if(_fe3d->sound3d_isExisting(newId))
-	{
-		Logger::throwWarning("sound3D with id \"" + newId + "\" already exists");
-		return false;
-	}
-	if(!_fe3d->sound2d_isExisting(templateId))
-	{
-		Logger::throwWarning("sound2D with id \"" + newId + "\" does not exist anymore");
-		return false;
-	}
-
 	_fe3d->sound3d_create(newId, _fe3d->sound2d_getAudioPath(templateId));
 	_fe3d->sound3d_setPosition(newId, position);
 

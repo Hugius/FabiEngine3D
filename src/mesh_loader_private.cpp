@@ -184,6 +184,11 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 		return nullptr;
 	}
 
+	if((meshParts.size() == 1) && !meshParts[0]->getId().empty())
+	{
+		return nullptr;
+	}
+
 	auto mesh = make_shared<Mesh>();
 
 	for(const auto& meshPart : meshParts)

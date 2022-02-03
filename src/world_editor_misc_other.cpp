@@ -190,10 +190,6 @@ void WorldEditor::_deleteWorldFile(const string& id)
 	{
 		Tools::deleteFile(filePath);
 	}
-	else
-	{
-		Logger::throwWarning("Cannot delete world with id \"" + id + "\"");
-	}
 }
 
 void WorldEditor::_handleValueChanging(const string& screenId, const string& buttonId, const string& writeFieldId, float& value, float adder, float multiplier, float minimum, float maximum)

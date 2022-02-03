@@ -23,96 +23,101 @@ void TopViewportController::_updateProjectCreating()
 				return;
 			}
 
-			if(newProjectId.find(' ') != string::npos)
+			if(newProjectId.find('@') != string::npos)
 			{
-				Logger::throwWarning("Project name cannot contain any spaces");
+				Logger::throwWarning("Project ID cannot contain any '@'");
 				return;
 			}
-			else if(Tools::isDirectoryExisting(newProjectDirectoryPath))
+
+			if(newProjectId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Project ID cannot contain any spaces");
+				return;
+			}
+
+			if(any_of(newProjectId.begin(), newProjectId.end(), isupper))
+			{
+				Logger::throwWarning("Project ID cannot contain any capitals");
+				return;
+			}
+
+			if(Tools::isDirectoryExisting(newProjectDirectoryPath))
 			{
 				Logger::throwWarning("Project already exists");
 				return;
 			}
-			else if(any_of(newProjectId.begin(), newProjectId.end(), isupper))
-			{
-				Logger::throwWarning("New project name cannot contain any capitals");
-				return;
-			}
-			else
-			{
-				Tools::createDirectory(newProjectDirectoryPath);
 
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\audio\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\diffuse_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\emission_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\normal_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\reflection_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\specular_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad2d\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad2d\\diffuse_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\diffuse_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\emission_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\sky\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\sky\\cube_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\blend_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\diffuse_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\height_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text2d\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text2d\\font_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text3d\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text3d\\font_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\displacement_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\dudv_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\normal_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\misc\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\misc\\flare_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\mesh\\");
-				Tools::createDirectory(newProjectDirectoryPath + "data\\");
-				Tools::createDirectory(newProjectDirectoryPath + "saves\\");
-				Tools::createDirectory(newProjectDirectoryPath + "worlds\\");
-				Tools::createDirectory(newProjectDirectoryPath + "worlds\\custom\\");
-				Tools::createDirectory(newProjectDirectoryPath + "worlds\\editor\\");
-				Tools::createDirectory(newProjectDirectoryPath + "scripts\\");
+			Tools::createDirectory(newProjectDirectoryPath);
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\audio\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\diffuse_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\emission_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\normal_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\reflection_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\model\\specular_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad2d\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad2d\\diffuse_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\diffuse_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\quad3d\\emission_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\sky\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\sky\\cube_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\blend_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\diffuse_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\terrain\\height_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text2d\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text2d\\font_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text3d\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\text3d\\font_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\displacement_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\dudv_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\entity\\water\\normal_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\misc\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\image\\misc\\flare_map\\");
+			Tools::createDirectory(newProjectDirectoryPath + "assets\\mesh\\");
+			Tools::createDirectory(newProjectDirectoryPath + "data\\");
+			Tools::createDirectory(newProjectDirectoryPath + "saves\\");
+			Tools::createDirectory(newProjectDirectoryPath + "worlds\\");
+			Tools::createDirectory(newProjectDirectoryPath + "worlds\\custom\\");
+			Tools::createDirectory(newProjectDirectoryPath + "worlds\\editor\\");
+			Tools::createDirectory(newProjectDirectoryPath + "scripts\\");
 
-				auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
-				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
-				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
-				auto quad2dFile = ofstream(newProjectDirectoryPath + "data\\quad2d.fe3d");
-				auto quad3dFile = ofstream(newProjectDirectoryPath + "data\\quad3d.fe3d");
-				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
-				auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
-				auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound.fe3d");
-				auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
-				auto text2dFile = ofstream(newProjectDirectoryPath + "data\\text2d.fe3d");
-				auto text3dFile = ofstream(newProjectDirectoryPath + "data\\text3d.fe3d");
-				auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
-				animation2dFile.close();
-				animation3dFile.close();
-				modelFile.close();
-				quad2dFile.close();
-				quad3dFile.close();
-				settingsFile.close();
-				skyFile.close();
-				soundFile.close();
-				terrainFile.close();
-				text2dFile.close();
-				text3dFile.close();
-				waterFile.close();
+			auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
+			auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
+			auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
+			auto quad2dFile = ofstream(newProjectDirectoryPath + "data\\quad2d.fe3d");
+			auto quad3dFile = ofstream(newProjectDirectoryPath + "data\\quad3d.fe3d");
+			auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
+			auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
+			auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound.fe3d");
+			auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
+			auto text2dFile = ofstream(newProjectDirectoryPath + "data\\text2d.fe3d");
+			auto text3dFile = ofstream(newProjectDirectoryPath + "data\\text3d.fe3d");
+			auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
+			animation2dFile.close();
+			animation3dFile.close();
+			modelFile.close();
+			quad2dFile.close();
+			quad3dFile.close();
+			settingsFile.close();
+			skyFile.close();
+			soundFile.close();
+			terrainFile.close();
+			text2dFile.close();
+			text3dFile.close();
+			waterFile.close();
 
-				_currentProjectId = newProjectId;
-				_applyProjectChange();
+			_currentProjectId = newProjectId;
+			_applyProjectChange();
 
-				Logger::throwInfo("Project \"" + _currentProjectId + "\" created");
+			Logger::throwInfo("Project \"" + _currentProjectId + "\" created");
 
-				_isCreatingProject = false;
-			}
+			_isCreatingProject = false;
 		}
 	}
 }
@@ -205,7 +210,7 @@ void TopViewportController::_updateProjectDeleting()
 			const auto directoryPath = (rootPath + "projects\\" + chosenButtonId);
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
-				Logger::throwWarning("Cannot delete corrupted project");
+				Logger::throwWarning("Directory `projects\\" + chosenButtonId + "\\` does not exist");
 				return;
 			}
 

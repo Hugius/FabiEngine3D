@@ -81,15 +81,15 @@ void ScriptEditor::_updateScriptFileCreating()
 
 		if(_gui->getOverlay()->checkValueForm("scriptCreate", newScriptFileId))
 		{
-			if(newScriptFileId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Script ID cannot contain any spaces");
-				return;
-			}
-
 			if(newScriptFileId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Script ID cannot contain '@'");
+				return;
+			}
+
+			if(newScriptFileId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Script ID cannot contain any spaces");
 				return;
 			}
 
@@ -149,15 +149,15 @@ void ScriptEditor::_updateScriptFileRenaming()
 
 		if(_gui->getOverlay()->checkValueForm("scriptRename", newScriptFileId))
 		{
-			if(newScriptFileId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Script ID cannot contain any spaces");
-				return;
-			}
-
 			if(newScriptFileId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Script ID cannot contain '@'");
+				return;
+			}
+
+			if(newScriptFileId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Script ID cannot contain any spaces");
 				return;
 			}
 

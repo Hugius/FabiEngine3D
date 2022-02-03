@@ -73,6 +73,8 @@ public:
 	const shared_ptr<TextureBuffer> getDisplacementMap() const;
 
 private:
+	static inline constexpr float MAX_SIZE = 1024.0f;
+
 	string _dudvMapPath = "";
 	string _normalMapPath = "";
 	string _displacementMapPath = "";

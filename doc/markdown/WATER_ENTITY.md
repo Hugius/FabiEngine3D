@@ -39,7 +39,7 @@
   - Constraints: at least `0.0`
 - **Size**: the XZ size of the mesh
   - Type: `decimal`
-  - Constraints: at least `0.0`
+  - Constraints: between `0.0` and `1024.0`
 - **Wave Height**: the height of the waves
   - Type: `decimal`
   - Constraints: at least `0.0`

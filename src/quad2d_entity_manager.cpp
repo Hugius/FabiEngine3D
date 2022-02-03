@@ -32,6 +32,11 @@ const unordered_map<string, shared_ptr<Quad2dEntity>>& Quad2dEntityManager::getE
 
 void Quad2dEntityManager::createEntity(const string& id, bool isCentered)
 {
+	if(isEntityExisting(id))
+	{
+		abort();
+	}
+
 	auto entity = make_shared<Quad2dEntity>(id);
 
 	_entities.insert(make_pair(id, entity));

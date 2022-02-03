@@ -93,6 +93,11 @@ const unordered_map<string, shared_ptr<AabbEntity>>& AabbEntityManager::getEntit
 
 void AabbEntityManager::createEntity(const string& id, bool isCentered)
 {
+	if(isEntityExisting(id))
+	{
+		abort();
+	}
+
 	auto entity = make_shared<AabbEntity>(id);
 
 	_entities.insert(make_pair(id, entity));

@@ -32,15 +32,15 @@ void SoundEditor::_updateSoundCreating()
 
 		if(_gui->getOverlay()->checkValueForm("soundCreate", newSoundId, {_currentSoundId}))
 		{
-			if(newSoundId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Sound ID cannot contain any spaces");
-				return;
-			}
-
 			if(newSoundId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Sound ID cannot contain '@'");
+				return;
+			}
+
+			if(newSoundId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Sound ID cannot contain any spaces");
 				return;
 			}
 

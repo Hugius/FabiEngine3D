@@ -57,15 +57,15 @@ void TerrainEditor::_updateTerrainCreating()
 
 		if(_gui->getOverlay()->checkValueForm("terrainCreate", newTerrainId, {}))
 		{
-			if(newTerrainId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Terrain ID cannot contain any spaces");
-				return;
-			}
-
 			if(newTerrainId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Terrain ID cannot contain '@'");
+				return;
+			}
+
+			if(newTerrainId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Terrain ID cannot contain any spaces");
 				return;
 			}
 

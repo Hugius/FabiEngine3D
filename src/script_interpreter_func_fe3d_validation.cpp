@@ -332,15 +332,15 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string& id, bool isTemp
 
 const bool ScriptInterpreter::_validateFe3dId(const string& id)
 {
-	if(id.find(' ') != string::npos)
-	{
-		_throwRuntimeError("id cannot contain spaces");
-		return false;
-	}
-
 	if(id.find('@') != string::npos)
 	{
 		_throwRuntimeError("id cannot contain '@'");
+		return false;
+	}
+
+	if(id.find(' ') != string::npos)
+	{
+		_throwRuntimeError("id cannot contain spaces");
 		return false;
 	}
 

@@ -122,7 +122,7 @@ void WaterEntity::setWireframeColor(const fvec3& value)
 
 void WaterEntity::setSize(float value)
 {
-	_size = max(0.0f, value);
+	_size = clamp(value, 0.0f, MAX_SIZE);
 }
 
 void WaterEntity::setMaxDepth(float value)

@@ -13,7 +13,11 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_worldEditor->unloadEditorWorld();
-			_worldEditor->loadEditorWorldFromFile(args[0]->getString());
+
+			if(!_worldEditor->loadEditorWorldFromFile(args[0]->getString()))
+			{
+				_throwStartupError("Cannot load world");
+			}
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

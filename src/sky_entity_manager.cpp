@@ -99,15 +99,15 @@ void SkyEntityManager::selectEntity(const string& id)
 	}
 
 	_selectedEntityId = id;
-
-	if(_selectedEntityId.empty())
-	{
-
-	}
 }
 
 void SkyEntityManager::createEntity(const string& id)
 {
+	if(isEntityExisting(id))
+	{
+		abort();
+	}
+
 	auto entity = make_shared<SkyEntity>(id);
 
 	_entities.insert(make_pair(id, entity));

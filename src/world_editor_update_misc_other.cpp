@@ -155,15 +155,15 @@ void WorldEditor::_updateWorldCreating()
 
 		if(_gui->getOverlay()->checkValueForm("worldCreate", newWorldId, {}))
 		{
-			if(newWorldId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("World ID cannot contain any spaces");
-				return;
-			}
-
 			if(newWorldId.find('@') != string::npos)
 			{
 				Logger::throwWarning("World ID cannot contain '@'");
+				return;
+			}
+
+			if(newWorldId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("World ID cannot contain any spaces");
 				return;
 			}
 

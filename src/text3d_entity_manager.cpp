@@ -76,6 +76,11 @@ const unordered_map<string, shared_ptr<Text3dEntity>>& Text3dEntityManager::getE
 
 void Text3dEntityManager::createEntity(const string& id, const string& fontMapPath, bool isCentered)
 {
+	if(isEntityExisting(id))
+	{
+		abort();
+	}
+
 	auto entity = make_shared<Text3dEntity>(id);
 
 	_entities.insert(make_pair(id, entity));

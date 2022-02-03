@@ -24,15 +24,15 @@ void Text2dEditor::_updateTextCreating()
 
 		if(_gui->getOverlay()->checkValueForm("textCreate", newTextId, {_currentTextId}))
 		{
-			if(newTextId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Text ID cannot contain any spaces");
-				return;
-			}
-
 			if(newTextId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Text ID cannot contain '@'");
+				return;
+			}
+
+			if(newTextId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Text ID cannot contain any spaces");
 				return;
 			}
 

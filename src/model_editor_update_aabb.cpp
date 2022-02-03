@@ -116,15 +116,15 @@ void ModelEditor::_updateAabbCreating()
 
 		if(_gui->getOverlay()->checkValueForm("aabbCreate", newAabbId, {}))
 		{
-			if(newAabbId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("AABB ID cannot contain any spaces");
-				return;
-			}
-
 			if(newAabbId.find('@') != string::npos)
 			{
 				Logger::throwWarning("AABB ID cannot contain '@'");
+				return;
+			}
+
+			if(newAabbId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("AABB ID cannot contain any spaces");
 				return;
 			}
 

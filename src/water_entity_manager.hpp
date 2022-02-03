@@ -29,7 +29,5 @@ private:
 
 	string _selectedEntityId = "";
 
-	static inline constexpr float MAX_SIZE = 1024.0f;
-
 	unordered_map<string, shared_ptr<WaterEntity>> _entities;
 };

@@ -26,7 +26,7 @@ void WorldEditor::addLightingToCustomWorld()
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add lighting to custom world");
+		//Logger::throwWarning("Cannot add lighting to custom world");
 	}
 }
 
@@ -38,7 +38,7 @@ void WorldEditor::addGraphicsToCustomWorld()
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add graphics to custom world");
+		//Logger::throwWarning("Cannot add graphics to custom world");
 	}
 }
 
@@ -50,7 +50,7 @@ void WorldEditor::addSkyToCustomWorld()
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add sky to custom world");
+		//Logger::throwWarning("Cannot add sky to custom world");
 	}
 }
 
@@ -62,7 +62,7 @@ void WorldEditor::addTerrainToCustomWorld()
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add terrain to custom world");
+		//Logger::throwWarning("Cannot add terrain to custom world");
 	}
 }
 
@@ -74,7 +74,7 @@ void WorldEditor::addWaterToCustomWorld()
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add water to custom world");
+		//Logger::throwWarning("Cannot add water to custom world");
 	}
 }
 
@@ -86,7 +86,7 @@ void WorldEditor::addModelToCustomWorld(const string& id)
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add model to custom world");
+		//Logger::throwWarning("Cannot add model to custom world");
 	}
 }
 
@@ -98,7 +98,7 @@ void WorldEditor::addQuad3dToCustomWorld(const string& id)
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add quad3d to custom world");
+		//Logger::throwWarning("Cannot add quad3d to custom world");
 	}
 }
 
@@ -110,7 +110,7 @@ void WorldEditor::addText3dToCustomWorld(const string& id)
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add text3d to custom world");
+		//Logger::throwWarning("Cannot add text3d to custom world");
 	}
 }
 
@@ -122,7 +122,7 @@ void WorldEditor::addAabbToCustomWorld(const string& id)
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add AABB to custom world");
+		//Logger::throwWarning("Cannot add AABB to custom world");
 	}
 }
 
@@ -134,7 +134,7 @@ void WorldEditor::addSoundToCustomWorld(const string& id)
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add sound to custom world");
+		//Logger::throwWarning("Cannot add sound to custom world");
 	}
 }
 
@@ -146,7 +146,7 @@ void WorldEditor::addPointlightToCustomWorld(const string& id)
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add pointlight to custom world");
+		//Logger::throwWarning("Cannot add pointlight to custom world");
 	}
 }
 
@@ -158,7 +158,7 @@ void WorldEditor::addSpotlightToCustomWorld(const string& id)
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add spotlight to custom world");
+		//Logger::throwWarning("Cannot add spotlight to custom world");
 	}
 }
 
@@ -170,6 +170,6 @@ void WorldEditor::addReflectionToCustomWorld(const string& id)
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add reflection to custom world");
+		//Logger::throwWarning("Cannot add reflection to custom world");
 	}
 }

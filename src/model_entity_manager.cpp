@@ -55,6 +55,11 @@ void ModelEntityManager::inject(shared_ptr<VertexBufferCache> vertexBufferCache)
 
 void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 {
+	if(isEntityExisting(id))
+	{
+		abort();
+	}
+
 	auto entity = make_shared<ModelEntity>(id);
 
 	_entities.insert(make_pair(id, entity));
@@ -63,13 +68,6 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 
 	if(mesh == nullptr)
 	{
-		deleteEntity(id);
-		return;
-	}
-
-	if((mesh->getParts().size() == 1) && !mesh->getParts()[0]->getId().empty())
-	{
-		Logger::throwWarning("Multiparted model with id \"" + id + "\" only has 1 part");
 		deleteEntity(id);
 		return;
 	}

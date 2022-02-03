@@ -47,15 +47,15 @@ void SkyEditor::_updateSkyCreating()
 
 		if(_gui->getOverlay()->checkValueForm("skyCreate", newSkyId, {}))
 		{
-			if(newSkyId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Sky ID cannot contain any spaces");
-				return;
-			}
-
 			if(newSkyId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Sky ID cannot contain '@'");
+				return;
+			}
+
+			if(newSkyId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Sky ID cannot contain any spaces");
 				return;
 			}
 

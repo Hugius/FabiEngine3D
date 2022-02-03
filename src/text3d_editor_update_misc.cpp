@@ -74,15 +74,15 @@ void Text3dEditor::_updateText3dCreating()
 
 		if(_gui->getOverlay()->checkValueForm("text3dCreate", newTextId, {_currentTextId}))
 		{
-			if(newTextId.find(' ') != string::npos)
-			{
-				Logger::throwWarning("Text ID cannot contain any spaces");
-				return;
-			}
-
 			if(newTextId.find('@') != string::npos)
 			{
 				Logger::throwWarning("Text ID cannot contain '@'");
+				return;
+			}
+
+			if(newTextId.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Text ID cannot contain any spaces");
 				return;
 			}
 

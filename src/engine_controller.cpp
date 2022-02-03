@@ -136,17 +136,20 @@ void EngineController::initialize()
 
 	if(Config::getInst().isApplicationExported())
 	{
-		if(!_topViewportController->isProjectCorrupted(rootPath))
+		if(_topViewportController->isProjectCorrupted(rootPath))
 		{
-			_scriptEditor->loadScriptFiles(true);
+			_fe3d->application_stop();
+			return;
+		}
 
-			_scriptExecutor->load();
+		_scriptEditor->loadScriptFiles(true);
 
-			if(!_scriptExecutor->isRunning())
-			{
-				_fe3d->application_stop();
-				_mustPromptOnExit = true;
-			}
+		_scriptExecutor->load();
+
+		if(!_scriptExecutor->isRunning())
+		{
+			_fe3d->application_stop();
+			_mustPromptOnExit = true;
 		}
 	}
 	else

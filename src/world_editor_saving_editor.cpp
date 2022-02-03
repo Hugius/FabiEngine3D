@@ -23,17 +23,14 @@ const bool WorldEditor::saveEditorWorldToFile()
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\worlds\\editor\\" + _currentWorldId + ".fe3d");
 
-	vector<string> levelOfDetailEntityIds;
+	set<string> levelOfDetailEntityIds;
 	for(const auto& modelId : _fe3d->model_getIds())
 	{
 		if(modelId[0] != '@')
 		{
 			if(!_fe3d->model_getLevelOfDetailEntityId(modelId).empty())
 			{
-				if(find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelId) == levelOfDetailEntityIds.end())
-				{
-					levelOfDetailEntityIds.push_back(_fe3d->model_getLevelOfDetailEntityId(modelId));
-				}
+				levelOfDetailEntityIds.insert(_fe3d->model_getLevelOfDetailEntityId(modelId));
 			}
 		}
 	}

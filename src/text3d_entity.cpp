@@ -121,6 +121,7 @@ void Text3dEntity::setContent(const string& value)
 			characterEntity->setDiffuseMapPath(_fontMapPath);
 			characterEntity->setDiffuseMap(_fontMap);
 			characterEntity->setOpacity(_opacity);
+			characterEntity->setMinTextureAlpha(_minTextureAlpha);
 			characterEntity->setWireframeColor(_wireframeColor);
 			characterEntity->setColor(_color);
 			characterEntity->setWireframed(_isWireframed);

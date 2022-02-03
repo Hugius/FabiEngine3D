@@ -34,8 +34,9 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			fvec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
 		_fe3d->text3d_create(lineNumberId, FONT_MAP_PATH, false);
+		_fe3d->text3d_setMinTextureAlpha(lineNumberId, 0.0f);
 		_fe3d->text3d_setContent(lineNumberId, lineNumberString);
-		_fe3d->text3d_setPosition(lineNumberId, (lineNumberPosition - fvec3(0.0f, lineNumberSize.y * 0.5f, 0.0f)));
+		_fe3d->text3d_setPosition(lineNumberId, (lineNumberPosition - fvec3(0.0f, (lineNumberSize.y * 0.5f), 0.0f)));
 		_fe3d->text3d_setSize(lineNumberId, lineNumberSize);
 		_fe3d->text3d_setColor(lineNumberId, LINE_NUMBER_COLOR);
 		_fe3d->text3d_setBright(lineNumberId, true);

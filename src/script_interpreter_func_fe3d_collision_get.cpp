@@ -73,8 +73,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[2]->getString() != "X" && args[2]->getString() != "Y" &&
-			   args[2]->getString() != "Z" && !args[2]->getString().empty())
+			if(!args[2]->getString().empty() &&
+			   (args[2]->getString() != "X") &&
+			   (args[2]->getString() != "Y") &&
+			   (args[2]->getString() != "Z"))
 			{
 				_throwRuntimeError("direction is invalid");
 				return true;
@@ -125,8 +127,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[0]->getString() != "X" && args[0]->getString() != "Y" &&
-			   args[0]->getString() != "Z" && !args[0]->getString().empty())
+			if(!args[0]->getString().empty() &&
+			   (args[0]->getString() != "X") &&
+			   (args[0]->getString() != "Y") &&
+			   (args[0]->getString() != "Z"))
 			{
 				_throwRuntimeError("direction is invalid");
 				return true;
@@ -162,8 +166,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[1]->getString() != "X" && args[1]->getString() != "Y" &&
-			   args[1]->getString() != "Z" && !args[1]->getString().empty())
+			if(!args[1]->getString().empty() &&
+			   (args[1]->getString() != "X") &&
+			   (args[1]->getString() != "Y") &&
+			   (args[1]->getString() != "Z"))
 			{
 				_throwRuntimeError("direction is invalid");
 				return true;
@@ -199,8 +205,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[0]->getString() != "X" && args[0]->getString() != "Y" &&
-			   args[0]->getString() != "Z" && !args[0]->getString().empty())
+			if(!args[0]->getString().empty() &&
+			   (args[0]->getString() != "X") &&
+			   (args[0]->getString() != "Y") &&
+			   (args[0]->getString() != "Z"))
 			{
 				_throwRuntimeError("direction is invalid");
 				return true;
@@ -237,7 +245,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[1]->getString() != "X" && args[1]->getString() != "Y" && args[1]->getString() != "Z" && !args[1]->getString().empty())
+			if(!args[1]->getString().empty() &&
+			   (args[1]->getString() != "X") &&
+			   (args[1]->getString() != "Y") &&
+			   (args[1]->getString() != "Z"))
 			{
 				_throwRuntimeError("direction is invalid");
 				return true;
@@ -272,7 +283,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[0]->getString() != "X" && args[0]->getString() != "Y" && args[0]->getString() != "Z" && !args[0]->getString().empty())
+			if(!args[0]->getString().empty() &&
+			   (args[0]->getString() != "X") &&
+			   (args[0]->getString() != "Y") &&
+			   (args[0]->getString() != "Z"))
 			{
 				_throwRuntimeError("direction is invalid");
 				return true;
@@ -310,7 +324,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(args[1]->getString() != "X" && args[1]->getString() != "Y" && args[1]->getString() != "Z" && !args[1]->getString().empty())
+				if(!args[1]->getString().empty() &&
+				   (args[1]->getString() != "X") &&
+				   (args[1]->getString() != "Y") &&
+				   (args[1]->getString() != "Z"))
 				{
 					_throwRuntimeError("direction is invalid");
 					return true;
@@ -345,7 +362,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[0]->getString() != "X" && args[0]->getString() != "Y" && args[0]->getString() != "Z" && !args[0]->getString().empty())
+			if(!args[0]->getString().empty() &&
+			   (args[0]->getString() != "X") &&
+			   (args[0]->getString() != "Y") &&
+			   (args[0]->getString() != "Z"))
 			{
 				_throwRuntimeError("direction is invalid");
 				return true;
@@ -414,10 +434,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			}
 			else
 			{
-				string selfSearchId = args[0]->getString() + (!args[1]->getString().empty() ? ("_" + args[1]->getString()) : "");
+				string selfSearchId = (args[0]->getString() + (!args[1]->getString().empty() ? ("_" + args[1]->getString()) : ""));
 				if(!_fe3d->aabb_isExisting(selfSearchId))
 				{
-					_throwRuntimeError("requested model AABB with id \"" + selfSearchId + "\" does not exist");
+					//_throwRuntimeError("requested model AABB does not exist");
 					return true;
 				}
 
@@ -481,7 +501,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				string selfSearchId = args[0]->getString() + (!args[1]->getString().empty() ? ("_" + args[1]->getString()) : "");
 				if(!_fe3d->aabb_isExisting(selfSearchId))
 				{
-					_throwRuntimeError("requested model AABB with id \"" + selfSearchId + "\" does not exist");
+					//_throwRuntimeError("requested model AABB does not exist");
 					return true;
 				}
 
@@ -529,7 +549,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				string selfSearchId = args[0]->getString() + (!args[1]->getString().empty() ? ("_" + args[1]->getString()) : "");
 				if(!_fe3d->aabb_isExisting(selfSearchId))
 				{
-					_throwRuntimeError("requested model AABB with id \"" + selfSearchId + "\" does not exist");
+					//_throwRuntimeError("requested model AABB does not exist");
 					return true;
 				}
 

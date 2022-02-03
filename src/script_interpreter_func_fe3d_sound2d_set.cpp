@@ -89,12 +89,12 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			{
 				if(!_fe3d->sound2d_isPlaying(args[0]->getString()))
 				{
-					_throwRuntimeError("Tried to pause sound2D with id \"" + args[0]->getString() + "\": sound is not playing");
+					_throwRuntimeError("sound2D is not playing");
 					return true;
 				}
 				if(_fe3d->sound2d_isPaused(args[0]->getString()))
 				{
-					_throwRuntimeError("Tried to pause sound2D with id \"" + args[0]->getString() + "\": sound is already paused");
+					_throwRuntimeError("sound2D is already paused");
 					return true;
 				}
 
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			{
 				if(!_fe3d->sound2d_isPaused(args[0]->getString()))
 				{
-					_throwRuntimeError("Tried to resume sound2D with id \"" + args[0]->getString() + "\": sound is not paused");
+					_throwRuntimeError("sound2D is not paused");
 					return true;
 				}
 
@@ -152,7 +152,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			{
 				if(!_fe3d->sound2d_isStarted(args[0]->getString()))
 				{
-					_throwRuntimeError("Tried to stop sound2D with id \"" + args[0]->getString() + "\": sound is not started");
+					_throwRuntimeError("sound2D is not started");
 					return true;
 				}
 

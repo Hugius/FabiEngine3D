@@ -10,9 +10,8 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[0]->getString().find('@') != string::npos)
+			if(!_validateFe3dId(args[0]->getString()))
 			{
-				_throwRuntimeError("id of requested sound with id \"" + args[0]->getString() + "\" cannot contain '@'");
 				return true;
 			}
 
@@ -27,9 +26,8 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(args[0]->getString().find('@') != string::npos)
+			if(!_validateFe3dId(args[0]->getString()))
 			{
-				_throwRuntimeError("id of requested sound with id \"" + args[0]->getString() + "\" cannot contain '@'");
 				return true;
 			}
 

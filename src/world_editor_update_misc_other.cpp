@@ -155,15 +155,21 @@ void WorldEditor::_updateWorldCreating()
 
 		if(_gui->getOverlay()->checkValueForm("worldCreate", newWorldId, {}))
 		{
-			if(newWorldId.find('@') != string::npos)
+			if(any_of(newWorldId.begin(), newWorldId.end(), isspace))
 			{
-				Logger::throwWarning("World ID cannot contain '@'");
+				Logger::throwWarning("World ID cannot contain any spaces");
 				return;
 			}
 
-			if(newWorldId.find(' ') != string::npos)
+			if(!all_of(newWorldId.begin(), newWorldId.end(), isalnum))
 			{
-				Logger::throwWarning("World ID cannot contain any spaces");
+				Logger::throwWarning("World ID cannot contain any specials");
+				return;
+			}
+
+			if(any_of(newWorldId.begin(), newWorldId.end(), isupper))
+			{
+				Logger::throwWarning("World ID cannot contain any capitals");
 				return;
 			}
 

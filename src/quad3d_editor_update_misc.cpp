@@ -73,15 +73,21 @@ void Quad3dEditor::_updateQuad3dCreating()
 
 		if(_gui->getOverlay()->checkValueForm("quad3dCreate", newQuadId, {_currentQuadId}))
 		{
-			if(newQuadId.find('@') != string::npos)
+			if(any_of(newQuadId.begin(), newQuadId.end(), isspace))
 			{
-				Logger::throwWarning("Quad ID cannot contain '@'");
+				Logger::throwWarning("Quad ID cannot contain any spaces");
 				return;
 			}
 
-			if(newQuadId.find(' ') != string::npos)
+			if(!all_of(newQuadId.begin(), newQuadId.end(), isalnum))
 			{
-				Logger::throwWarning("Quad ID cannot contain any spaces");
+				Logger::throwWarning("Quad ID cannot contain any specials");
+				return;
+			}
+
+			if(any_of(newQuadId.begin(), newQuadId.end(), isupper))
+			{
+				Logger::throwWarning("Quad ID cannot contain any capitals");
 				return;
 			}
 

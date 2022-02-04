@@ -81,15 +81,21 @@ void ScriptEditor::_updateScriptFileCreating()
 
 		if(_gui->getOverlay()->checkValueForm("scriptCreate", newScriptFileId))
 		{
-			if(newScriptFileId.find('@') != string::npos)
+			if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
 			{
-				Logger::throwWarning("Script ID cannot contain '@'");
+				Logger::throwWarning("Script file ID cannot contain any spaces");
 				return;
 			}
 
-			if(newScriptFileId.find(' ') != string::npos)
+			if(!all_of(newScriptFileId.begin(), newScriptFileId.end(), isalnum))
 			{
-				Logger::throwWarning("Script ID cannot contain any spaces");
+				Logger::throwWarning("Script file ID cannot contain any specials");
+				return;
+			}
+
+			if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isupper))
+			{
+				Logger::throwWarning("Script file ID cannot contain any capitals");
 				return;
 			}
 
@@ -149,15 +155,21 @@ void ScriptEditor::_updateScriptFileRenaming()
 
 		if(_gui->getOverlay()->checkValueForm("scriptRename", newScriptFileId))
 		{
-			if(newScriptFileId.find('@') != string::npos)
+			if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
 			{
-				Logger::throwWarning("Script ID cannot contain '@'");
+				Logger::throwWarning("Script file ID cannot contain any spaces");
 				return;
 			}
 
-			if(newScriptFileId.find(' ') != string::npos)
+			if(!all_of(newScriptFileId.begin(), newScriptFileId.end(), isalnum))
 			{
-				Logger::throwWarning("Script ID cannot contain any spaces");
+				Logger::throwWarning("Script file ID cannot contain any specials");
+				return;
+			}
+
+			if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isupper))
+			{
+				Logger::throwWarning("Script file ID cannot contain any capitals");
 				return;
 			}
 

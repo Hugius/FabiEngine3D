@@ -23,15 +23,15 @@ void TopViewportController::_updateProjectCreating()
 				return;
 			}
 
-			if(newProjectId.find('@') != string::npos)
+			if(any_of(newProjectId.begin(), newProjectId.end(), isspace))
 			{
-				Logger::throwWarning("Project ID cannot contain any '@'");
+				Logger::throwWarning("Project ID cannot contain any spaces");
 				return;
 			}
 
-			if(newProjectId.find(' ') != string::npos)
+			if(!all_of(newProjectId.begin(), newProjectId.end(), isalnum))
 			{
-				Logger::throwWarning("Project ID cannot contain any spaces");
+				Logger::throwWarning("Project ID cannot contain any specials");
 				return;
 			}
 

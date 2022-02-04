@@ -116,15 +116,21 @@ void ModelEditor::_updateAabbCreating()
 
 		if(_gui->getOverlay()->checkValueForm("aabbCreate", newAabbId, {}))
 		{
-			if(newAabbId.find('@') != string::npos)
+			if(any_of(newAabbId.begin(), newAabbId.end(), isspace))
 			{
-				Logger::throwWarning("AABB ID cannot contain '@'");
+				Logger::throwWarning("AABB ID cannot contain any spaces");
 				return;
 			}
 
-			if(newAabbId.find(' ') != string::npos)
+			if(!all_of(newAabbId.begin(), newAabbId.end(), isalnum))
 			{
-				Logger::throwWarning("AABB ID cannot contain any spaces");
+				Logger::throwWarning("AABB ID cannot contain any specials");
+				return;
+			}
+
+			if(any_of(newAabbId.begin(), newAabbId.end(), isupper))
+			{
+				Logger::throwWarning("AABB ID cannot contain any capitals");
 				return;
 			}
 

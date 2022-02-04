@@ -332,15 +332,21 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string& id, bool isTemp
 
 const bool ScriptInterpreter::_validateFe3dId(const string& id)
 {
-	if(id.find('@') != string::npos)
+	if(any_of(id.begin(), id.end(), isspace))
 	{
-		_throwRuntimeError("ID cannot contain '@'");
+		_throwRuntimeError("ID cannot contain any spaces");
 		return false;
 	}
 
-	if(id.find(' ') != string::npos)
+	if(!all_of(id.begin(), id.end(), isalnum))
 	{
-		_throwRuntimeError("ID cannot contain spaces");
+		_throwRuntimeError("ID cannot contain any specials");
+		return false;
+	}
+
+	if(any_of(id.begin(), id.end(), isupper))
+	{
+		_throwRuntimeError("ID cannot contain any capitals");
 		return false;
 	}
 

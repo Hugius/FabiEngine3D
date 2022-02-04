@@ -102,15 +102,21 @@ void ModelEditor::_updateModelCreating()
 
 		if(_gui->getOverlay()->checkValueForm("modelCreate", newModelId, {}))
 		{
-			if(newModelId.find('@') != string::npos)
+			if(any_of(newModelId.begin(), newModelId.end(), isspace))
 			{
-				Logger::throwWarning("Model ID cannot contain '@'");
+				Logger::throwWarning("Model ID cannot contain any spaces");
 				return;
 			}
 
-			if(newModelId.find(' ') != string::npos)
+			if(!all_of(newModelId.begin(), newModelId.end(), isalnum))
 			{
-				Logger::throwWarning("Model ID cannot contain any spaces");
+				Logger::throwWarning("Model ID cannot contain any specials");
+				return;
+			}
+
+			if(any_of(newModelId.begin(), newModelId.end(), isupper))
+			{
+				Logger::throwWarning("Model ID cannot contain any capitals");
 				return;
 			}
 

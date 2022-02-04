@@ -74,15 +74,21 @@ void Text3dEditor::_updateText3dCreating()
 
 		if(_gui->getOverlay()->checkValueForm("text3dCreate", newTextId, {_currentTextId}))
 		{
-			if(newTextId.find('@') != string::npos)
+			if(any_of(newTextId.begin(), newTextId.end(), isspace))
 			{
-				Logger::throwWarning("Text ID cannot contain '@'");
+				Logger::throwWarning("Text ID cannot contain any spaces");
 				return;
 			}
 
-			if(newTextId.find(' ') != string::npos)
+			if(!all_of(newTextId.begin(), newTextId.end(), isalnum))
 			{
-				Logger::throwWarning("Text ID cannot contain any spaces");
+				Logger::throwWarning("Text ID cannot contain any specials");
+				return;
+			}
+
+			if(any_of(newTextId.begin(), newTextId.end(), isupper))
+			{
+				Logger::throwWarning("Text ID cannot contain any capitals");
 				return;
 			}
 

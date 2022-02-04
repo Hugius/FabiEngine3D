@@ -47,15 +47,21 @@ void SkyEditor::_updateSkyCreating()
 
 		if(_gui->getOverlay()->checkValueForm("skyCreate", newSkyId, {}))
 		{
-			if(newSkyId.find('@') != string::npos)
+			if(any_of(newSkyId.begin(), newSkyId.end(), isspace))
 			{
-				Logger::throwWarning("Sky ID cannot contain '@'");
+				Logger::throwWarning("Sky ID cannot contain any spaces");
 				return;
 			}
 
-			if(newSkyId.find(' ') != string::npos)
+			if(!all_of(newSkyId.begin(), newSkyId.end(), isalnum))
 			{
-				Logger::throwWarning("Sky ID cannot contain any spaces");
+				Logger::throwWarning("Sky ID cannot contain any specials");
+				return;
+			}
+
+			if(any_of(newSkyId.begin(), newSkyId.end(), isupper))
+			{
+				Logger::throwWarning("Sky ID cannot contain any capitals");
 				return;
 			}
 

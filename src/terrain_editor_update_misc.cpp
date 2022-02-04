@@ -57,15 +57,21 @@ void TerrainEditor::_updateTerrainCreating()
 
 		if(_gui->getOverlay()->checkValueForm("terrainCreate", newTerrainId, {}))
 		{
-			if(newTerrainId.find('@') != string::npos)
+			if(any_of(newTerrainId.begin(), newTerrainId.end(), isspace))
 			{
-				Logger::throwWarning("Terrain ID cannot contain '@'");
+				Logger::throwWarning("Terrain ID cannot contain any spaces");
 				return;
 			}
 
-			if(newTerrainId.find(' ') != string::npos)
+			if(!all_of(newTerrainId.begin(), newTerrainId.end(), isalnum))
 			{
-				Logger::throwWarning("Terrain ID cannot contain any spaces");
+				Logger::throwWarning("Terrain ID cannot contain any specials");
+				return;
+			}
+
+			if(any_of(newTerrainId.begin(), newTerrainId.end(), isupper))
+			{
+				Logger::throwWarning("Terrain ID cannot contain any capitals");
 				return;
 			}
 

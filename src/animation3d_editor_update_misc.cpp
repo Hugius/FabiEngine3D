@@ -180,15 +180,21 @@ void Animation3dEditor::_updateAnimationCreating()
 
 		if(_gui->getOverlay()->checkValueForm("animationCreate", newAnimationId, {_currentAnimationId}))
 		{
-			if(newAnimationId.find('@') != string::npos)
+			if(any_of(newAnimationId.begin(), newAnimationId.end(), isspace))
 			{
-				Logger::throwWarning("Animation ID cannot contain '@'");
+				Logger::throwWarning("Animation ID cannot contain any spaces");
 				return;
 			}
 
-			if(newAnimationId.find(' ') != string::npos)
+			if(!all_of(newAnimationId.begin(), newAnimationId.end(), isalnum))
 			{
-				Logger::throwWarning("Animation ID cannot contain any spaces");
+				Logger::throwWarning("Animation ID cannot contain any specials");
+				return;
+			}
+
+			if(any_of(newAnimationId.begin(), newAnimationId.end(), isupper))
+			{
+				Logger::throwWarning("Animation ID cannot contain any capitals");
 				return;
 			}
 

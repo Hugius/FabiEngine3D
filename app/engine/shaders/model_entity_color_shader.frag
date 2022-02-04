@@ -390,9 +390,8 @@ vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color)
 	{
 		if(reflectionMapColor != vec3(0.0f))
 		{
-			vec2 ndc = (((f_clipSpacePos.xy / f_clipSpacePos.w) * 0.5f) + 0.5f);
-			vec2 texCoords = vec2(ndc.x, -ndc.y);
-			vec3 reflectionColor = texture(u_planarReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
+			vec2 uvCoords = (((f_clipSpacePos.xy / f_clipSpacePos.w) * 0.5f) + 0.5f);
+			vec3 reflectionColor = texture(u_planarReflectionMap, vec2(uvCoords.x, -uvCoords.y)).rgb;
 			vec3 mixedColor = mix(color, reflectionColor, u_reflectivity);
         
 			return mixedColor;
@@ -415,13 +414,11 @@ float calculateShadows()
 
 		if(fragmentDistance <= halfSize)
 		{
+			vec3 uvCoords = (((f_shadowSpacePos.xyz / f_shadowSpacePos.w) * 0.5f) + 0.5f);
 			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
 			float shadow = 0.0f;
-			vec3 projCoords = (((f_shadowSpacePos.xyz / f_shadowSpacePos.w) * 0.5f) + 0.5f);
-			float currentDepth = projCoords.z;
-			float bias = 0.00075f;
 
-			if(projCoords.z > 1.0f)
+			if(uvCoords.z > 1.0f)
 			{
 				return 1.0f;
 			}
@@ -430,8 +427,13 @@ float calculateShadows()
 			{
 				for (int y = -1; y <= 1; y++)
 				{
-					float pcfDepth = texture(u_shadowMap, projCoords.xy + (vec2(x, y) * texelSize)).r; 
-					shadow += ((currentDepth - texelSize.x) > pcfDepth) ? u_shadowLightness : 1.0f;        
+					vec2 uvOffset = (vec2(x, y) * texelSize);
+
+					float depth = texture(u_shadowMap, (uvCoords.xy + uvOffset)).r;
+
+					float lightness = ((uvCoords.z > depth) ? u_shadowLightness : 1.0f);
+
+					shadow += lightness;         
 				}    
 			}
             

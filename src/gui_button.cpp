@@ -111,19 +111,11 @@ void GuiButton::setHoverable(bool isHoverable)
 
 void GuiButton::changeTextContent(const string& content)
 {
-	auto text2dEntityId = getTextField()->getEntityId();
+	_textField->changeTextContent(content);
 
-	if(content != _fe3d->text2d_getContent(text2dEntityId))
-	{
-		auto charWidth = (getTextField()->getInitialSize().x / static_cast<float>(_fe3d->text2d_getContent(text2dEntityId).size()));
-		auto charHeight = getTextField()->getInitialSize().y;
-		_fe3d->text2d_setContent(text2dEntityId, content, charWidth, charHeight);
-		getTextField()->updateInitialSize();
-
-		auto newRectangleSize = fvec2(getTextField()->getInitialSize() / fvec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));
-		_fe3d->quad2d_setSize(getRectangle()->getEntityId(), newRectangleSize);
-		getRectangle()->updateInitialSize();
-	}
+	auto newRectangleSize = fvec2(_textField->getInitialSize() / fvec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));
+	_fe3d->quad2d_setSize(_rectangle->getEntityId(), newRectangleSize);
+	_rectangle->updateInitialSize();
 }
 
 const bool GuiButton::isHoverable() const

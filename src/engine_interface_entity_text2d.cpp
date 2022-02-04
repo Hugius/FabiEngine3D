@@ -21,24 +21,9 @@ void EngineInterface::text2d_setVisible(const string& id, bool value)
 	_core->getText2dEntityManager()->getEntity(id)->setVisible(value);
 }
 
-void EngineInterface::text2d_setContent(const string& id, const string& value, float charWidth, float charHeight)
+void EngineInterface::text2d_setContent(const string& id, const string& value)
 {
-	auto entity = _core->getText2dEntityManager()->getEntity(id);
-
-	entity->setContent(value);
-
-	fvec2 newSize = entity->getSize();
-
-	if(charWidth >= 0.0f)
-	{
-		newSize.x = (charWidth * static_cast<float>(value.size()));
-	}
-	if(charHeight >= 0.0f)
-	{
-		newSize.y = charHeight;
-	}
-
-	entity->setSize(newSize);
+	_core->getText2dEntityManager()->getEntity(id)->setContent(value);
 }
 
 void EngineInterface::text2d_setColor(const string& id, const fvec3& value)

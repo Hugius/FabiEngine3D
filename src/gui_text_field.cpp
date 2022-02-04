@@ -29,11 +29,15 @@ void GuiTextField::setVisible(bool isVisible)
 
 void GuiTextField::changeTextContent(const string& content)
 {
-	if(content != _fe3d->text2d_getContent(_entityId))
+	const auto currentContent = _fe3d->text2d_getContent(_entityId);
+
+	if(content != currentContent)
 	{
-		auto charWidth = (_initialSize.x / static_cast<float>(_fe3d->text2d_getContent(_entityId).size()));
-		auto charHeight = _initialSize.y;
-		_fe3d->text2d_setContent(_entityId, content, charWidth, charHeight);
+		const auto characterWidth = (_initialSize.x / static_cast<float>(currentContent.size()));
+		const auto characterHeight = _initialSize.y;
+
+		_fe3d->text2d_setContent(_entityId, content);
+		_fe3d->text2d_setSize(_entityId, fvec2((characterWidth * static_cast<float>(content.size())), characterHeight));
 		updateInitialSize();
 	}
 }

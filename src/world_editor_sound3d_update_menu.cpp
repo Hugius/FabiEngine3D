@@ -85,7 +85,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 					_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, true);
 					_fe3d->sound3d_start(_currentTemplateSoundId, -1, 0, false);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundId")->getEntityId(), "Sound: " + _currentTemplateSoundId.substr(1), 0.025f);
+					_gui->getOverlay()->getTextField("soundId")->changeTextContent("Sound: " + _currentTemplateSoundId.substr(1));
 					_fe3d->misc_centerCursor();
 
 					if(_fe3d->terrain_getSelectedId().empty())

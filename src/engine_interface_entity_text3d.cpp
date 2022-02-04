@@ -14,24 +14,9 @@ void EngineInterface::text3d_deleteAll()
 	}
 }
 
-void EngineInterface::text3d_setContent(const string& id, const string& value, float charWidth, float charHeight)
+void EngineInterface::text3d_setContent(const string& id, const string& value)
 {
-	auto entity = _core->getText3dEntityManager()->getEntity(id);
-
-	entity->setContent(value);
-
-	fvec2 newSize = entity->getSize();
-
-	if(charWidth >= 0.0f)
-	{
-		newSize.x = (charWidth * static_cast<float>(value.size()));
-	}
-	if(charHeight >= 0.0f)
-	{
-		newSize.y = charHeight;
-	}
-
-	entity->setSize(newSize);
+	_core->getText3dEntityManager()->getEntity(id)->setContent(value);
 }
 
 void EngineInterface::text3d_delete(const string& id)

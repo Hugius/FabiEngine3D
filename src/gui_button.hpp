@@ -43,9 +43,6 @@ protected:
 	shared_ptr<GuiTextField> _textField = nullptr;
 
 private:
-	static inline constexpr float TOTAL_SIZE_INCREASE = 1.15f;
-	static inline constexpr float INCREASE_MULTIPLIER = 1.005f;
-	static inline constexpr float DECREASE_MULTIPLIER = 0.995f;
 	static inline constexpr float TEXT_WIDTH_MULTIPLIER = 0.9f;
 	static inline constexpr float TEXT_HEIGHT_MULTIPLIER = 0.75f;
 };

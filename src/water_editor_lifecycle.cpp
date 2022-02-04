@@ -38,7 +38,7 @@ void WaterEditor::_load()
 	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
 	_fe3d->model_setShadowed("@@grid", false);
 
-	_gui->getOverlay()->createTextField("waterId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("waterId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void WaterEditor::_unload()

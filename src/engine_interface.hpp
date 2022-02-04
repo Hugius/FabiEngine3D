@@ -379,7 +379,7 @@ public:
 	void text3d_create(const string& id, const string& fontMapPath, bool isCentered);
 	void text3d_delete(const string& id);
 	void text3d_deleteAll();
-	void text3d_setContent(const string& id, const string& value, float charWidth = -1.0f, float charHeight = -1.0f);
+	void text3d_setContent(const string& id, const string& value);
 	void text3d_setPosition(const string& id, const fvec3& value);
 	void text3d_setRotation(const string& id, const fvec3& value);
 	void text3d_setSize(const string& id, const fvec2& size);
@@ -482,7 +482,7 @@ public:
 	void text2d_delete(const string& id);
 	void text2d_deleteAll();
 	void text2d_setVisible(const string& id, bool value);
-	void text2d_setContent(const string& id, const string& value, float charWidth = -1.0f, float charHeight = -1.0f);
+	void text2d_setContent(const string& id, const string& value);
 	void text2d_setColor(const string& id, const fvec3& value);
 	void text2d_setOpacity(const string& id, float value);
 	void text2d_setMinPosition(const string& id, const fvec2& value);

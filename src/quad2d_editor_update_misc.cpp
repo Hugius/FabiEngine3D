@@ -66,7 +66,7 @@ void Quad2dEditor::_updateQuadCreating()
 				_loadedQuadIds.push_back(newQuadId);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Quad2D: " + newQuadId.substr(1), 0.025f);
+				_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad2D: " + newQuadId.substr(1));
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
 				_isCreatingQuad = false;
 			}
@@ -97,7 +97,7 @@ void Quad2dEditor::_updateQuadChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Quad2D: " + selectedButtonId.substr(1), 0.025f);
+					_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad2D: " + selectedButtonId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
 				}
 

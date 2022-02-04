@@ -216,7 +216,7 @@ void Animation3dEditor::_updateChoiceMenu()
 
 		if(!isStarted)
 		{
-			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
+			_gui->getOverlay()->getTextField("animationFrame")->changeTextContent("Frame: " + to_string(_currentFrameIndex + 1));
 		}
 	}
 }

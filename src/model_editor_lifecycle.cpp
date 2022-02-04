@@ -56,8 +56,8 @@ void ModelEditor::_load()
 	_fe3d->reflection_create("@@reflection");
 	_fe3d->reflection_capture("@@reflection");
 
-	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("aabbId", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("aabbId", fvec2(0.0f, 0.75f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void ModelEditor::_unload()

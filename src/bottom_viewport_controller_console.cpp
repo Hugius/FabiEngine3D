@@ -133,13 +133,15 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			{
 				screen->createTextField(key + "_time", fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", timePartColor, false);
 				string timeId = screen->getTextField(key + "_time")->getEntityId();
-				_fe3d->text2d_setContent(timeId, timePartText, CHAR_SIZE.x, CHAR_SIZE.y);
+				_fe3d->text2d_setContent(timeId, timePartText);
+				_fe3d->text2d_setSize(timeId, fvec2(CHAR_SIZE.x * static_cast<float>(timePartText.size()), CHAR_SIZE.y));
 				_fe3d->text2d_setMinPosition(timeId, minPosition);
 				_fe3d->text2d_setMaxPosition(timeId, maxPosition);
 
 				screen->createTextField(key + "_separator", fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", separatorPartColor, false);
 				string separatorId = screen->getTextField(key + "_separator")->getEntityId();
-				_fe3d->text2d_setContent(separatorId, separatorPartText, CHAR_SIZE.x, CHAR_SIZE.y);
+				_fe3d->text2d_setContent(separatorId, separatorPartText);
+				_fe3d->text2d_setSize(separatorId, fvec2(CHAR_SIZE.x * static_cast<float>(separatorPartText.size()), CHAR_SIZE.y));
 				_fe3d->text2d_setMinPosition(separatorId, minPosition);
 				_fe3d->text2d_setMaxPosition(separatorId, maxPosition);
 			}
@@ -164,7 +166,9 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			{
 				screen->createTextField(textFieldId, fvec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)),
 										fvec2(0.0f), "", messagePartColor, false);
-				_fe3d->text2d_setContent(screen->getTextField(textFieldId)->getEntityId(), messageParts[i], CHAR_SIZE.x, CHAR_SIZE.y);
+
+				_fe3d->text2d_setContent(screen->getTextField(textFieldId)->getEntityId(), messageParts[i]);
+				_fe3d->text2d_setSize(screen->getTextField(textFieldId)->getEntityId(), fvec2(CHAR_SIZE.x * static_cast<float>(messageParts[i].size()), CHAR_SIZE.y));
 
 				_fe3d->text2d_setMinPosition(screen->getTextField(textFieldId)->getEntityId(), minPosition);
 				_fe3d->text2d_setMaxPosition(screen->getTextField(textFieldId)->getEntityId(), maxPosition);
@@ -183,13 +187,15 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 				{
 					screen->createTextField(key + "_time", fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", timePartColor, false);
 					string timeId = screen->getTextField(key + "_time")->getEntityId();
-					_fe3d->text2d_setContent(timeId, timePartText, CHAR_SIZE.x, CHAR_SIZE.y);
+					_fe3d->text2d_setContent(timeId, timePartText);
+					_fe3d->text2d_setSize(timeId, fvec2(CHAR_SIZE.x * static_cast<float>(timePartText.size()), CHAR_SIZE.y));
 					_fe3d->text2d_setMinPosition(timeId, minPosition);
 					_fe3d->text2d_setMaxPosition(timeId, maxPosition);
 
 					screen->createTextField(key + "_separator", fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", separatorPartColor, false);
 					string separatorId = screen->getTextField(key + "_separator")->getEntityId();
-					_fe3d->text2d_setContent(separatorId, separatorPartText, CHAR_SIZE.x, CHAR_SIZE.y);
+					_fe3d->text2d_setContent(separatorId, separatorPartText);
+					_fe3d->text2d_setSize(separatorId, fvec2(CHAR_SIZE.x * static_cast<float>(separatorPartText.size()), CHAR_SIZE.y));
 					_fe3d->text2d_setMinPosition(separatorId, minPosition);
 					_fe3d->text2d_setMaxPosition(separatorId, maxPosition);
 				}

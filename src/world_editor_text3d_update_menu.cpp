@@ -80,7 +80,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 						_currentTemplateTextId = textId;
 						_fe3d->text3d_setVisible(_currentTemplateTextId, true);
 						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
-						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textId")->getEntityId(), "Text3d: " + _currentTemplateTextId.substr(1), 0.025f);
+						_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3d: " + _currentTemplateTextId.substr(1));
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedId().empty())

@@ -13,7 +13,7 @@ void WorldEditor::_selectModel(const string& id)
 		string rawId = tempId.substr(tempId.find('_') + 1);
 		reverse(rawId.begin(), rawId.end());
 		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
-		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelId")->getEntityId(), "Selected model: " + rawId, 0.025f);
+		_gui->getOverlay()->getTextField("modelId")->changeTextContent("Selected model: " + rawId);
 	}
 }
 
@@ -30,7 +30,7 @@ void WorldEditor::_selectQuad3d(const string& id)
 		string rawId = tempId.substr(tempId.find('_') + 1);
 		reverse(rawId.begin(), rawId.end());
 		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
-		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Selected quad3d: " + rawId, 0.025f);
+		_gui->getOverlay()->getTextField("quadId")->changeTextContent("Selected quad3d: " + rawId);
 	}
 }
 
@@ -47,7 +47,7 @@ void WorldEditor::_selectText3d(const string& id)
 		string rawId = tempId.substr(tempId.find('_') + 1);
 		reverse(rawId.begin(), rawId.end());
 		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
-		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textId")->getEntityId(), "Selected text3d: " + rawId, 0.025f);
+		_gui->getOverlay()->getTextField("textId")->changeTextContent("Selected text3d: " + rawId);
 	}
 }
 
@@ -64,7 +64,7 @@ void WorldEditor::_selectSound(const string& id)
 		string rawId = tempId.substr(tempId.find('_') + 1);
 		reverse(rawId.begin(), rawId.end());
 		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
-		_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundId")->getEntityId(), "Selected sound: " + rawId, 0.025f);
+		_gui->getOverlay()->getTextField("soundId")->changeTextContent("Selected sound: " + rawId);
 	}
 }
 

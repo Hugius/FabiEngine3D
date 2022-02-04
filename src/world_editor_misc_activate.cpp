@@ -20,7 +20,7 @@ void WorldEditor::_activateModel(const string& id)
 	string rawId = tempId.substr(tempId.find('_') + 1);
 	reverse(rawId.begin(), rawId.end());
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelId")->getEntityId(), "Active model: " + rawId, 0.025f);
+	_gui->getOverlay()->getTextField("modelId")->changeTextContent("Active model: " + rawId);
 }
 
 void WorldEditor::_activateQuad3d(const string& id)
@@ -43,7 +43,7 @@ void WorldEditor::_activateQuad3d(const string& id)
 	string rawId = tempId.substr(tempId.find('_') + 1);
 	reverse(rawId.begin(), rawId.end());
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Active quad3d: " + rawId, 0.025f);
+	_gui->getOverlay()->getTextField("quadId")->changeTextContent("Active quad3d: " + rawId);
 }
 
 void WorldEditor::_activateText3d(const string& id)
@@ -66,7 +66,7 @@ void WorldEditor::_activateText3d(const string& id)
 	string rawId = tempId.substr(tempId.find('_') + 1);
 	reverse(rawId.begin(), rawId.end());
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("textId")->getEntityId(), "Active text3d: " + rawId, 0.025f);
+	_gui->getOverlay()->getTextField("textId")->changeTextContent("Active text3d: " + rawId);
 }
 
 void WorldEditor::_activateSound(const string& id)
@@ -89,7 +89,7 @@ void WorldEditor::_activateSound(const string& id)
 	string rawId = tempId.substr(tempId.find('_') + 1);
 	reverse(rawId.begin(), rawId.end());
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
-	_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("soundId")->getEntityId(), "Active sound: " + rawId, 0.025f);
+	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Active sound: " + rawId);
 }
 
 void WorldEditor::_activatePointlight(const string& id)

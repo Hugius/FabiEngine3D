@@ -147,7 +147,7 @@ void ModelEditor::_updateAabbCreating()
 			_fe3d->aabb_setParentEntityType((_currentModelId + "@" + _currentAabbId), AabbParentEntityType::MODEL);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
-			_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), ("AABB: " + _currentAabbId), 0.025f);
+			_gui->getOverlay()->getTextField("aabbId")->changeTextContent("AABB: " + _currentAabbId);
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), true);
 
 			_isCreatingAabb = false;
@@ -178,7 +178,7 @@ void ModelEditor::_updateAabbChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), ("AABB: " + _currentAabbId), 0.025f);
+					_gui->getOverlay()->getTextField("aabbId")->changeTextContent("AABB: " + _currentAabbId);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), true);
 				}
 

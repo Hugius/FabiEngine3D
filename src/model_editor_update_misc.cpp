@@ -167,7 +167,7 @@ void ModelEditor::_updateModelCreating()
 				_loadedModelIds.push_back(newModelId);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-				_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelId")->getEntityId(), "Model: " + newModelId.substr(1), 0.025f);
+				_gui->getOverlay()->getTextField("modelId")->changeTextContent("Model: " + newModelId.substr(1));
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
 				_isCreatingModel = false;
 			}
@@ -198,7 +198,7 @@ void ModelEditor::_updateModelChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
-					_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("modelId")->getEntityId(), "Model: " + _currentModelId.substr(1), 0.025f);
+					_gui->getOverlay()->getTextField("modelId")->changeTextContent("Model: " + _currentModelId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
 				}
 

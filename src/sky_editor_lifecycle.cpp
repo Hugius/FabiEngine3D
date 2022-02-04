@@ -14,7 +14,7 @@ void SkyEditor::_load()
 	_fe3d->gfx_setMotionBlurIntensity(0.1f);
 	_fe3d->gfx_setMotionBlurQuality(5);
 
-	_gui->getOverlay()->createTextField("skyId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("skyId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void SkyEditor::_unload()

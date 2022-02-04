@@ -16,7 +16,7 @@ void Animation2dEditor::_load()
 	_fe3d->quad3d_setPosition(PREVIEW_QUAD_ID, PREVIEW_QUAD_POSITION);
 	_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
 
-	_gui->getOverlay()->createTextField("animationId", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("animationId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void Animation2dEditor::_unload()

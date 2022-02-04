@@ -80,7 +80,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 						_currentTemplateQuadId = quadId;
 						_fe3d->quad3d_setVisible(_currentTemplateQuadId, true);
 						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
-						_fe3d->text2d_setContent(_gui->getOverlay()->getTextField("quadId")->getEntityId(), "Quad3d: " + _currentTemplateQuadId.substr(1), 0.025f);
+						_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad3d: " + _currentTemplateQuadId.substr(1));
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedId().empty())

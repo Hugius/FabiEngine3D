@@ -13,11 +13,11 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& view
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	_quad2dEntityColorRenderer.bind();
+	_quad2dEntityColorRenderer->bind();
 
-	_quad2dEntityColorRenderer.render(logo);
+	_quad2dEntityColorRenderer->render(logo);
 
-	_quad2dEntityColorRenderer.unbind();
+	_quad2dEntityColorRenderer->unbind();
 }
 
 void MasterRenderer::renderApplication()
@@ -85,11 +85,11 @@ void MasterRenderer::_renderSkyEntity()
 {
 	if(_skyEntityManager->getSelectedEntity() != nullptr)
 	{
-		_skyEntityColorRenderer.bind();
+		_skyEntityColorRenderer->bind();
 
-		_skyEntityColorRenderer.render(_skyEntityManager->getSelectedEntity());
+		_skyEntityColorRenderer->render(_skyEntityManager->getSelectedEntity());
 
-		_skyEntityColorRenderer.unbind();
+		_skyEntityColorRenderer->unbind();
 	}
 }
 
@@ -97,15 +97,15 @@ void MasterRenderer::_renderTerrainEntity()
 {
 	if(_terrainEntityManager->getSelectedEntity() != nullptr)
 	{
-		_terrainEntityColorRenderer.bind();
+		_terrainEntityColorRenderer->bind();
 
-		_terrainEntityColorRenderer.processPointlightEntities(_pointlightEntityManager->getEntities());
+		_terrainEntityColorRenderer->processPointlightEntities(_pointlightEntityManager->getEntities());
 
-		_terrainEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
+		_terrainEntityColorRenderer->processSpotlightEntities(_spotlightEntityManager->getEntities());
 
-		_terrainEntityColorRenderer.render(_terrainEntityManager->getSelectedEntity());
+		_terrainEntityColorRenderer->render(_terrainEntityManager->getSelectedEntity());
 
-		_terrainEntityColorRenderer.unbind();
+		_terrainEntityColorRenderer->unbind();
 	}
 }
 
@@ -113,15 +113,15 @@ void MasterRenderer::_renderWaterEntity()
 {
 	if(_waterEntityManager->getSelectedEntity() != nullptr)
 	{
-		_waterEntityColorRenderer.bind();
+		_waterEntityColorRenderer->bind();
 
-		_waterEntityColorRenderer.processPointlightEntities(_pointlightEntityManager->getEntities());
+		_waterEntityColorRenderer->processPointlightEntities(_pointlightEntityManager->getEntities());
 
-		_waterEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
+		_waterEntityColorRenderer->processSpotlightEntities(_spotlightEntityManager->getEntities());
 
-		_waterEntityColorRenderer.render(_waterEntityManager->getSelectedEntity());
+		_waterEntityColorRenderer->render(_waterEntityManager->getSelectedEntity());
 
-		_waterEntityColorRenderer.unbind();
+		_waterEntityColorRenderer->unbind();
 	}
 }
 
@@ -129,11 +129,11 @@ void MasterRenderer::_renderOpaqueModelEntities()
 {
 	if(!_modelEntityManager->getEntities().empty())
 	{
-		_modelEntityColorRenderer.bind();
+		_modelEntityColorRenderer->bind();
 
-		_modelEntityColorRenderer.processPointlightEntities(_pointlightEntityManager->getEntities());
+		_modelEntityColorRenderer->processPointlightEntities(_pointlightEntityManager->getEntities());
 
-		_modelEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
+		_modelEntityColorRenderer->processSpotlightEntities(_spotlightEntityManager->getEntities());
 
 		for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
 		{
@@ -166,7 +166,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
 				levelOfDetailEntity->updateTransformation();
 
-				_modelEntityColorRenderer.render(levelOfDetailEntity, _reflectionEntityManager->getEntities());
+				_modelEntityColorRenderer->render(levelOfDetailEntity, _reflectionEntityManager->getEntities());
 
 				levelOfDetailEntity->setBasePosition(originalPosition);
 				levelOfDetailEntity->setBaseRotation(originalRotation);
@@ -176,11 +176,11 @@ void MasterRenderer::_renderOpaqueModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer.render(modelEntity, _reflectionEntityManager->getEntities());
+				_modelEntityColorRenderer->render(modelEntity, _reflectionEntityManager->getEntities());
 			}
 		}
 
-		_modelEntityColorRenderer.unbind();
+		_modelEntityColorRenderer->unbind();
 	}
 }
 
@@ -188,11 +188,11 @@ void MasterRenderer::_renderTransparentModelEntities()
 {
 	if(!_modelEntityManager->getEntities().empty())
 	{
-		_modelEntityColorRenderer.bind();
+		_modelEntityColorRenderer->bind();
 
-		_modelEntityColorRenderer.processPointlightEntities(_pointlightEntityManager->getEntities());
+		_modelEntityColorRenderer->processPointlightEntities(_pointlightEntityManager->getEntities());
 
-		_modelEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
+		_modelEntityColorRenderer->processSpotlightEntities(_spotlightEntityManager->getEntities());
 
 		for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
 		{
@@ -226,7 +226,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
 				levelOfDetailEntity->updateTransformation();
 
-				_modelEntityColorRenderer.render(levelOfDetailEntity, _reflectionEntityManager->getEntities());
+				_modelEntityColorRenderer->render(levelOfDetailEntity, _reflectionEntityManager->getEntities());
 
 				levelOfDetailEntity->setBasePosition(originalPosition);
 				levelOfDetailEntity->setBaseRotation(originalRotation);
@@ -236,11 +236,11 @@ void MasterRenderer::_renderTransparentModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer.render(modelEntity, _reflectionEntityManager->getEntities());
+				_modelEntityColorRenderer->render(modelEntity, _reflectionEntityManager->getEntities());
 			}
 		}
 
-		_modelEntityColorRenderer.unbind();
+		_modelEntityColorRenderer->unbind();
 	}
 }
 
@@ -248,7 +248,7 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 {
 	if(!_quad3dEntityManager->getEntities().empty())
 	{
-		_quad3dEntityColorRenderer.bind();
+		_quad3dEntityColorRenderer->bind();
 
 		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 		{
@@ -257,10 +257,10 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 				continue;
 			}
 
-			_quad3dEntityColorRenderer.render(entity);
+			_quad3dEntityColorRenderer->render(entity);
 		}
 
-		_quad3dEntityColorRenderer.unbind();
+		_quad3dEntityColorRenderer->unbind();
 	}
 }
 
@@ -268,7 +268,7 @@ void MasterRenderer::_renderTransparentQuad3dEntities()
 {
 	if(!_quad3dEntityManager->getEntities().empty())
 	{
-		_quad3dEntityColorRenderer.bind();
+		_quad3dEntityColorRenderer->bind();
 
 		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 		{
@@ -277,10 +277,10 @@ void MasterRenderer::_renderTransparentQuad3dEntities()
 				continue;
 			}
 
-			_quad3dEntityColorRenderer.render(entity);
+			_quad3dEntityColorRenderer->render(entity);
 		}
 
-		_quad3dEntityColorRenderer.unbind();
+		_quad3dEntityColorRenderer->unbind();
 	}
 }
 
@@ -288,7 +288,7 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 {
 	if(!_text3dEntityManager->getEntities().empty())
 	{
-		_quad3dEntityColorRenderer.bind();
+		_quad3dEntityColorRenderer->bind();
 
 		for(const auto& [key, textEntity] : _text3dEntityManager->getEntities())
 		{
@@ -299,11 +299,11 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 
 			for(const auto& characterEntity : textEntity->getCharacterEntities())
 			{
-				_quad3dEntityColorRenderer.render(characterEntity);
+				_quad3dEntityColorRenderer->render(characterEntity);
 			}
 		}
 
-		_quad3dEntityColorRenderer.unbind();
+		_quad3dEntityColorRenderer->unbind();
 	}
 }
 
@@ -311,7 +311,7 @@ void MasterRenderer::_renderTransparentText3dEntities()
 {
 	if(!_text3dEntityManager->getEntities().empty())
 	{
-		_quad3dEntityColorRenderer.bind();
+		_quad3dEntityColorRenderer->bind();
 
 		for(const auto& [key, textEntity] : _text3dEntityManager->getEntities())
 		{
@@ -322,11 +322,11 @@ void MasterRenderer::_renderTransparentText3dEntities()
 
 			for(const auto& characterEntity : textEntity->getCharacterEntities())
 			{
-				_quad3dEntityColorRenderer.render(characterEntity);
+				_quad3dEntityColorRenderer->render(characterEntity);
 			}
 		}
 
-		_quad3dEntityColorRenderer.unbind();
+		_quad3dEntityColorRenderer->unbind();
 	}
 }
 
@@ -334,14 +334,14 @@ void MasterRenderer::_renderAabbEntities()
 {
 	if(!_aabbEntityManager->getEntities().empty())
 	{
-		_aabbEntityColorRenderer.bind();
+		_aabbEntityColorRenderer->bind();
 
 		for(const auto& [key, entity] : _aabbEntityManager->getEntities())
 		{
-			_aabbEntityColorRenderer.render(entity);
+			_aabbEntityColorRenderer->render(entity);
 		}
 
-		_aabbEntityColorRenderer.unbind();
+		_aabbEntityColorRenderer->unbind();
 	}
 }
 
@@ -349,16 +349,16 @@ void MasterRenderer::_renderFinalSceneMap()
 {
 	_renderSurface->setDiffuseMap(_renderStorage->getFinalSceneMap());
 
-	_quad2dEntityColorRenderer.bind();
-	_quad2dEntityColorRenderer.render(_renderSurface);
-	_quad2dEntityColorRenderer.unbind();
+	_quad2dEntityColorRenderer->bind();
+	_quad2dEntityColorRenderer->render(_renderSurface);
+	_quad2dEntityColorRenderer->unbind();
 }
 
 void MasterRenderer::_renderGUI()
 {
 	if(!_quad2dEntityManager->getEntities().empty() || !_text2dEntityManager->getEntities().empty())
 	{
-		_quad2dEntityColorRenderer.bind();
+		_quad2dEntityColorRenderer->bind();
 
 		map<unsigned int, shared_ptr<BaseEntity>> orderedEntityMap;
 		for(const auto& [key, entity] : _quad2dEntityManager->getEntities())
@@ -380,23 +380,23 @@ void MasterRenderer::_renderGUI()
 
 			if(castedQuad2dEntity != nullptr)
 			{
-				_quad2dEntityColorRenderer.render(castedQuad2dEntity);
+				_quad2dEntityColorRenderer->render(castedQuad2dEntity);
 			}
 
 			if(castedText2dEntity != nullptr)
 			{
 				for(const auto& characterEntity : castedText2dEntity->getCharacterEntities())
 				{
-					_quad2dEntityColorRenderer.render(characterEntity);
+					_quad2dEntityColorRenderer->render(characterEntity);
 				}
 			}
 		}
 
 		if(!_renderStorage->getCursorEntityId().empty())
 		{
-			_quad2dEntityColorRenderer.render(_quad2dEntityManager->getEntities().at(_renderStorage->getCursorEntityId()));
+			_quad2dEntityColorRenderer->render(_quad2dEntityManager->getEntities().at(_renderStorage->getCursorEntityId()));
 		}
 
-		_quad2dEntityColorRenderer.unbind();
+		_quad2dEntityColorRenderer->unbind();
 	}
 }

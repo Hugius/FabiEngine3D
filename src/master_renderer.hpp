@@ -35,6 +35,8 @@
 #include "text2d_entity_manager.hpp"
 #include "aabb_entity_depth_renderer.hpp"
 
+using std::unique_ptr;
+
 class MasterRenderer final
 {
 public:
@@ -105,29 +107,29 @@ private:
 	void _renderFinalSceneMap();
 	void _renderGUI();
 
-	SkyEntityColorRenderer _skyEntityColorRenderer;
-	TerrainEntityColorRenderer _terrainEntityColorRenderer;
-	TerrainEntityDepthRenderer _terrainEntityDepthRenderer;
-	WaterEntityColorRenderer _waterEntityColorRenderer;
-	WaterEntityDepthRenderer _waterEntityDepthRenderer;
-	ModelEntityColorRenderer _modelEntityColorRenderer;
-	ModelEntityDepthRenderer _modelEntityDepthRenderer;
-	ModelEntityShadowRenderer _modelEntityShadowRenderer;
-	Quad3dEntityColorRenderer _quad3dEntityColorRenderer;
-	Quad3dEntityDepthRenderer _quad3dEntityDepthRenderer;
-	Quad3dEntityShadowRenderer _quad3dEntityShadowRenderer;
-	Quad2dEntityColorRenderer _quad2dEntityColorRenderer;
-	AntiAliasingRenderer _antiAliasingRenderer;
-	AabbEntityColorRenderer _aabbEntityColorRenderer;
-	AabbEntityDepthRenderer _aabbEntityDepthRenderer;
-	BloomRenderer _bloomRenderer;
-	DofRenderer _dofRenderer;
-	LensFlareRenderer _lensFlareRenderer;
-	MotionBlurRenderer _motionBlurRenderer;
-	BlurRenderer _bloomBlurRendererHighQuality;
-	BlurRenderer _bloomBlurRendererLowQuality;
-	BlurRenderer _dofBlurRenderer;
-	BlurRenderer _motionBlurBlurRenderer;
+	unique_ptr<SkyEntityColorRenderer> _skyEntityColorRenderer = nullptr;
+	unique_ptr<TerrainEntityColorRenderer> _terrainEntityColorRenderer = nullptr;
+	unique_ptr<TerrainEntityDepthRenderer> _terrainEntityDepthRenderer = nullptr;
+	unique_ptr<WaterEntityColorRenderer> _waterEntityColorRenderer = nullptr;
+	unique_ptr<WaterEntityDepthRenderer> _waterEntityDepthRenderer = nullptr;
+	unique_ptr<ModelEntityColorRenderer> _modelEntityColorRenderer = nullptr;
+	unique_ptr<ModelEntityDepthRenderer> _modelEntityDepthRenderer = nullptr;
+	unique_ptr<ModelEntityShadowRenderer> _modelEntityShadowRenderer = nullptr;
+	unique_ptr<Quad3dEntityColorRenderer> _quad3dEntityColorRenderer = nullptr;
+	unique_ptr<Quad3dEntityDepthRenderer> _quad3dEntityDepthRenderer = nullptr;
+	unique_ptr<Quad3dEntityShadowRenderer> _quad3dEntityShadowRenderer = nullptr;
+	unique_ptr<Quad2dEntityColorRenderer> _quad2dEntityColorRenderer = nullptr;
+	unique_ptr<AntiAliasingRenderer> _antiAliasingRenderer = nullptr;
+	unique_ptr<AabbEntityColorRenderer> _aabbEntityColorRenderer = nullptr;
+	unique_ptr<AabbEntityDepthRenderer> _aabbEntityDepthRenderer = nullptr;
+	unique_ptr<BloomRenderer> _bloomRenderer = nullptr;
+	unique_ptr<DofRenderer> _dofRenderer = nullptr;
+	unique_ptr<LensFlareRenderer> _lensFlareRenderer = nullptr;
+	unique_ptr<MotionBlurRenderer> _motionBlurRenderer = nullptr;
+	unique_ptr<BlurRenderer> _bloomBlurRendererHighQuality = nullptr;
+	unique_ptr<BlurRenderer> _bloomBlurRendererLowQuality = nullptr;
+	unique_ptr<BlurRenderer> _dofBlurRenderer = nullptr;
+	unique_ptr<BlurRenderer> _motionBlurBlurRenderer = nullptr;
 
 	shared_ptr<Quad2dEntity> _renderSurface = nullptr;
 

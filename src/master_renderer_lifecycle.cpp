@@ -5,6 +5,7 @@
 #include "tools.hpp"
 #include <algorithm>
 
+using std::make_unique;
 using std::make_shared;
 using std::min;
 using std::max;
@@ -13,6 +14,30 @@ using std::clamp;
 MasterRenderer::MasterRenderer()
 {
 	const auto viewportSize = Config::getInst().getViewportSize();
+
+	_skyEntityColorRenderer = make_unique<SkyEntityColorRenderer>();
+	_terrainEntityColorRenderer = make_unique<TerrainEntityColorRenderer>();
+	_terrainEntityDepthRenderer = make_unique<TerrainEntityDepthRenderer>();
+	_waterEntityColorRenderer = make_unique<WaterEntityColorRenderer>();
+	_waterEntityDepthRenderer = make_unique<WaterEntityDepthRenderer>();
+	_modelEntityColorRenderer = make_unique<ModelEntityColorRenderer>();
+	_modelEntityDepthRenderer = make_unique<ModelEntityDepthRenderer>();
+	_modelEntityShadowRenderer = make_unique<ModelEntityShadowRenderer>();
+	_quad3dEntityColorRenderer = make_unique<Quad3dEntityColorRenderer>();
+	_quad3dEntityDepthRenderer = make_unique<Quad3dEntityDepthRenderer>();
+	_quad3dEntityShadowRenderer = make_unique<Quad3dEntityShadowRenderer>();
+	_quad2dEntityColorRenderer = make_unique<Quad2dEntityColorRenderer>();
+	_antiAliasingRenderer = make_unique<AntiAliasingRenderer>();
+	_aabbEntityColorRenderer = make_unique<AabbEntityColorRenderer>();
+	_aabbEntityDepthRenderer = make_unique<AabbEntityDepthRenderer>();
+	_bloomRenderer = make_unique<BloomRenderer>();
+	_dofRenderer = make_unique<DofRenderer>();
+	_lensFlareRenderer = make_unique<LensFlareRenderer>();
+	_motionBlurRenderer = make_unique<MotionBlurRenderer>();
+	_bloomBlurRendererHighQuality = make_unique<BlurRenderer>();
+	_bloomBlurRendererLowQuality = make_unique<BlurRenderer>();
+	_dofBlurRenderer = make_unique<BlurRenderer>();
+	_motionBlurBlurRenderer = make_unique<BlurRenderer>();
 
 	_renderSurface = make_shared<Quad2dEntity>("renderQuad");
 	_renderSurface->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
@@ -48,33 +73,33 @@ MasterRenderer::MasterRenderer()
 	_lensFlareCaptor = make_shared<CaptureBuffer>(ivec2(0), viewportSize, 1, false);
 	_motionBlurCaptor = make_shared<CaptureBuffer>(ivec2(0), viewportSize, 1, false);
 
-	_skyEntityColorRenderer.inject(_skyEntityColorShader);
-	_terrainEntityColorRenderer.inject(_terrainEntityColorShader);
-	_terrainEntityDepthRenderer.inject(_terrainEntityDepthShader);
-	_waterEntityColorRenderer.inject(_waterEntityColorShader);
-	_waterEntityDepthRenderer.inject(_waterEntityDepthShader);
-	_modelEntityColorRenderer.inject(_modelEntityColorShader);
-	_modelEntityDepthRenderer.inject(_modelEntityDepthShader);
-	_modelEntityShadowRenderer.inject(_modelEntityShadowShader);
-	_quad3dEntityColorRenderer.inject(_quad3dEntityColorShader);
-	_quad3dEntityDepthRenderer.inject(_quad3dEntityDepthShader);
-	_quad3dEntityShadowRenderer.inject(_quad3dEntityShadowShader);
-	_aabbEntityColorRenderer.inject(_aabbEntityColorShader);
-	_aabbEntityDepthRenderer.inject(_aabbEntityDepthShader);
-	_quad2dEntityColorRenderer.inject(_quad2dEntityColorShader);
-	_antiAliasingRenderer.inject(_antiAliasingShader);
-	_bloomRenderer.inject(_bloomShader);
-	_dofRenderer.inject(_dofShader);
-	_lensFlareRenderer.inject(_lensFlareShader);
-	_motionBlurRenderer.inject(_motionBlurShader);
-	_bloomBlurRendererHighQuality.inject(_blurShader);
-	_bloomBlurRendererHighQuality.inject(_bloomBlurCaptorHighQuality);
-	_bloomBlurRendererLowQuality.inject(_blurShader);
-	_bloomBlurRendererLowQuality.inject(_bloomBlurCaptorLowQuality);
-	_dofBlurRenderer.inject(_blurShader);
-	_dofBlurRenderer.inject(_dofBlurCaptor);
-	_motionBlurBlurRenderer.inject(_blurShader);
-	_motionBlurBlurRenderer.inject(_motionBlurBlurCaptor);
+	_skyEntityColorRenderer->inject(_skyEntityColorShader);
+	_terrainEntityColorRenderer->inject(_terrainEntityColorShader);
+	_terrainEntityDepthRenderer->inject(_terrainEntityDepthShader);
+	_waterEntityColorRenderer->inject(_waterEntityColorShader);
+	_waterEntityDepthRenderer->inject(_waterEntityDepthShader);
+	_modelEntityColorRenderer->inject(_modelEntityColorShader);
+	_modelEntityDepthRenderer->inject(_modelEntityDepthShader);
+	_modelEntityShadowRenderer->inject(_modelEntityShadowShader);
+	_quad3dEntityColorRenderer->inject(_quad3dEntityColorShader);
+	_quad3dEntityDepthRenderer->inject(_quad3dEntityDepthShader);
+	_quad3dEntityShadowRenderer->inject(_quad3dEntityShadowShader);
+	_aabbEntityColorRenderer->inject(_aabbEntityColorShader);
+	_aabbEntityDepthRenderer->inject(_aabbEntityDepthShader);
+	_quad2dEntityColorRenderer->inject(_quad2dEntityColorShader);
+	_antiAliasingRenderer->inject(_antiAliasingShader);
+	_bloomRenderer->inject(_bloomShader);
+	_dofRenderer->inject(_dofShader);
+	_lensFlareRenderer->inject(_lensFlareShader);
+	_motionBlurRenderer->inject(_motionBlurShader);
+	_bloomBlurRendererHighQuality->inject(_blurShader);
+	_bloomBlurRendererHighQuality->inject(_bloomBlurCaptorHighQuality);
+	_bloomBlurRendererLowQuality->inject(_blurShader);
+	_bloomBlurRendererLowQuality->inject(_bloomBlurCaptorLowQuality);
+	_dofBlurRenderer->inject(_blurShader);
+	_dofBlurRenderer->inject(_dofBlurCaptor);
+	_motionBlurBlurRenderer->inject(_blurShader);
+	_motionBlurBlurRenderer->inject(_motionBlurBlurCaptor);
 
 	glDepthFunc(GL_LEQUAL);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

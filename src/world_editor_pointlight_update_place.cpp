@@ -1,5 +1,6 @@
 #include "world_editor.hpp"
 #include "tools.hpp"
+#include "logger.hpp"
 
 void WorldEditor::_updatePointlightPlacing()
 {
@@ -25,32 +26,38 @@ void WorldEditor::_updatePointlightPlacing()
 					newModelId = ("@@lamp_" + newId);
 				}
 
-				_fe3d->pointlight_create(newId);
-
-				if(_fe3d->pointlight_isExisting(newId))
+				if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxEntityCount())
 				{
-					_loadedPointlightIds.push_back(newId);
-
-					_fe3d->pointlight_setPosition(newId, newPosition);
-					_fe3d->pointlight_setRadius(newId, fvec3(DEFAULT_POINTLIGHT_RADIUS));
-					_fe3d->pointlight_setIntensity(newId, DEFAULT_POINTLIGHT_INTENSITY);
-
-					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
-					_fe3d->model_setBasePosition(newModelId, newPosition);
-					_fe3d->model_setBaseSize(newModelId, DEFAULT_LAMP_SIZE);
-					_fe3d->model_setShadowed(newModelId, false);
-					_fe3d->model_setReflected(newModelId, false);
-					_fe3d->model_setBright(newModelId, "", true);
-
-					_fe3d->aabb_create(newModelId, true);
-					_fe3d->aabb_setParentEntityId(newModelId, newModelId);
-					_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
-					_fe3d->aabb_setLocalSize(newModelId, DEFAULT_LAMP_AABB_SIZE);
-					_fe3d->aabb_setCollisionResponsive(newModelId, false);
+					Logger::throwWarning("pointlight maximum is reached");
+					return;
 				}
+
+				_loadedPointlightIds.push_back(newId);
+
+				_fe3d->pointlight_create(newId);
+				_fe3d->pointlight_setPosition(newId, newPosition);
+				_fe3d->pointlight_setRadius(newId, fvec3(DEFAULT_POINTLIGHT_RADIUS));
+				_fe3d->pointlight_setIntensity(newId, DEFAULT_POINTLIGHT_INTENSITY);
+
+				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
+				_fe3d->model_setBasePosition(newModelId, newPosition);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_LAMP_SIZE);
+				_fe3d->model_setShadowed(newModelId, false);
+				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
+
+				_fe3d->aabb_create(newModelId, true);
+				_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+				_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_LAMP_AABB_SIZE);
+				_fe3d->aabb_setCollisionResponsive(newModelId, false);
+
+				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+				_isPlacingPointlight = false;
 			}
 
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			if(_gui->getOverlay()->isValueFormCancelled())
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
@@ -105,29 +112,31 @@ void WorldEditor::_updatePointlightPlacing()
 					newModelId = ("@@lamp_" + newId);
 				}
 
-				_fe3d->pointlight_create(newId);
-
-				if(_fe3d->pointlight_isExisting(newId))
+				if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxEntityCount())
 				{
-					_loadedPointlightIds.push_back(newId);
-
-					_fe3d->pointlight_setPosition(newId, newPosition);
-					_fe3d->pointlight_setRadius(newId, fvec3(DEFAULT_POINTLIGHT_RADIUS));
-					_fe3d->pointlight_setIntensity(newId, DEFAULT_POINTLIGHT_INTENSITY);
-
-					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
-					_fe3d->model_setBasePosition(newModelId, newPosition);
-					_fe3d->model_setBaseSize(newModelId, DEFAULT_LAMP_SIZE);
-					_fe3d->model_setShadowed(newModelId, false);
-					_fe3d->model_setReflected(newModelId, false);
-					_fe3d->model_setBright(newModelId, "", true);
-
-					_fe3d->aabb_create(newModelId, true);
-					_fe3d->aabb_setParentEntityId(newModelId, newModelId);
-					_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
-					_fe3d->aabb_setLocalSize(newModelId, DEFAULT_LAMP_AABB_SIZE);
-					_fe3d->aabb_setCollisionResponsive(newModelId, false);
+					Logger::throwWarning("pointlight maximum is reached");
+					return;
 				}
+
+				_loadedPointlightIds.push_back(newId);
+
+				_fe3d->pointlight_create(newId);
+				_fe3d->pointlight_setPosition(newId, newPosition);
+				_fe3d->pointlight_setRadius(newId, fvec3(DEFAULT_POINTLIGHT_RADIUS));
+				_fe3d->pointlight_setIntensity(newId, DEFAULT_POINTLIGHT_INTENSITY);
+
+				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
+				_fe3d->model_setBasePosition(newModelId, newPosition);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_LAMP_SIZE);
+				_fe3d->model_setShadowed(newModelId, false);
+				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
+
+				_fe3d->aabb_create(newModelId, true);
+				_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+				_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_LAMP_AABB_SIZE);
+				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}
 	}

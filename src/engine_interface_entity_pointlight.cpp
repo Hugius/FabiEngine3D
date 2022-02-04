@@ -91,6 +91,11 @@ const float EngineInterface::pointlight_getIntensity(const string& id) const
 	return _core->getPointlightEntityManager()->getEntity(id)->getIntensity();
 }
 
+const unsigned int EngineInterface::pointlight_getMaxEntityCount() const
+{
+	return _core->getPointlightEntityManager()->getMaxEntityCount();
+}
+
 const vector<string> EngineInterface::pointlight_getIds() const
 {
 	vector<string> result;

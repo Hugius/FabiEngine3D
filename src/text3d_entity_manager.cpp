@@ -81,24 +81,26 @@ void Text3dEntityManager::createEntity(const string& id, const string& fontMapPa
 		abort();
 	}
 
-	auto entity = make_shared<Text3dEntity>(id);
-
-	_entities.insert(make_pair(id, entity));
-
 	auto texture = _textureBufferCache->get2dBuffer(fontMapPath);
 
 	if(texture == nullptr)
 	{
 		auto image = _imageLoader->loadImage(fontMapPath);
 
-		if(image != nullptr)
+		if(image == nullptr)
 		{
-			texture = make_shared<TextureBuffer>(image);
-			texture->loadAnisotropicFiltering(_renderStorage->getAnisotropicFilteringQuality());
-
-			_textureBufferCache->store2dBuffer(fontMapPath, texture);
+			return;
 		}
+
+		texture = make_shared<TextureBuffer>(image);
+		texture->loadAnisotropicFiltering(_renderStorage->getAnisotropicFilteringQuality());
+
+		_textureBufferCache->store2dBuffer(fontMapPath, texture);
 	}
+
+	auto entity = make_shared<Text3dEntity>(id);
+
+	_entities.insert(make_pair(id, entity));
 
 	entity->setMesh(isCentered ? _centeredMesh : _standingMesh);
 	entity->setCentered(isCentered);

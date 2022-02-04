@@ -21,14 +21,13 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 				return true;
 			}
 
-			_fe3d->spotlight_create(args[0]->getString());
-
-			if(!_fe3d->pointlight_isExisting(args[0]->getString()))
+			if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxEntityCount())
 			{
 				_throwRuntimeError("spotlight maximum is reached");
 				return true;
 			}
 
+			_fe3d->spotlight_create(args[0]->getString());
 			_fe3d->spotlight_setPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 			_fe3d->spotlight_setColor(args[0]->getString(), fvec3(args[4]->getDecimal(), args[5]->getDecimal(), args[6]->getDecimal()));
 			_fe3d->spotlight_setYaw(args[0]->getString(), args[7]->getDecimal());

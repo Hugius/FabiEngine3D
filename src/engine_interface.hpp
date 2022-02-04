@@ -568,6 +568,7 @@ public:
 	const fvec3& pointlight_getRadius(const string& id) const;
 	const fvec3& pointlight_getColor(const string& id) const;
 	const float pointlight_getIntensity(const string& id) const;
+	const unsigned int pointlight_getMaxEntityCount() const;
 	const bool pointlight_isExisting(const string& id) const;
 	const bool pointlight_isVisible(const string& id) const;
 	const PointlightShape pointlight_getShape(const string& id) const;
@@ -595,6 +596,7 @@ public:
 	const float spotlight_getIntensity(const string& id) const;
 	const float spotlight_getAngle(const string& id) const;
 	const float spotlight_getDistance(const string& id) const;
+	const unsigned int spotlight_getMaxEntityCount() const;
 	const bool spotlight_isExisting(const string& id) const;
 	const bool spotlight_isVisible(const string& id) const;
 

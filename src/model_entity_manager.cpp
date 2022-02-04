@@ -60,17 +60,16 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 		abort();
 	}
 
-	auto entity = make_shared<ModelEntity>(id);
-
-	_entities.insert(make_pair(id, entity));
-
 	auto mesh = _meshLoader->loadMesh(meshPath);
 
 	if(mesh == nullptr)
 	{
-		deleteEntity(id);
 		return;
 	}
+
+	auto entity = make_shared<ModelEntity>(id);
+
+	_entities.insert(make_pair(id, entity));
 
 	for(const auto& part : mesh->getParts())
 	{

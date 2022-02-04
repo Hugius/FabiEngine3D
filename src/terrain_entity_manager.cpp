@@ -2,6 +2,7 @@
 #include "logger.hpp"
 
 using std::make_shared;
+using std::min;
 
 shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& id)
 {
@@ -37,45 +38,35 @@ void TerrainEntityManager::createEntity(const string& id, const string& heightMa
 		abort();
 	}
 
-	auto entity = make_shared<TerrainEntity>(id);
-
-	_entities.insert(make_pair(id, entity));
-
 	auto image = _imageLoader->loadImage(heightMapPath);
 
 	if(image == nullptr)
 	{
-		deleteEntity(id);
 		return;
 	}
 
-	if(image->getWidth() != image->getHeight())
-	{
-		abort();
-	}
+	auto entity = make_shared<TerrainEntity>(id);
 
-	const auto size = static_cast<float>(image->getWidth());
+	_entities.insert(make_pair(id, entity));
 
-	if(size > MAX_SIZE)
-	{
-		abort();
-	}
+	const auto size = min(min(image->getWidth(), image->getHeight()), static_cast<unsigned int>(MAX_SIZE));
+	const auto bitsPerPixel = ((image->getPixelFormat() == PixelFormat::RGB) ? 3 : 4);
 
 	vector<float> pixels;
-	for(unsigned int i = 0; i < (image->getWidth() * image->getHeight() * 3); i += 3)
+	for(unsigned int i = 0; i < (size * size * bitsPerPixel); i += bitsPerPixel)
 	{
-		auto r = (static_cast<float>(image->getPixels()[i + 0]) / 255.0f);
-		auto g = (static_cast<float>(image->getPixels()[i + 1]) / 255.0f);
-		auto b = (static_cast<float>(image->getPixels()[i + 2]) / 255.0f);
+		const auto r = (static_cast<float>(image->getPixels()[i + 0]) / 255.0f);
+		const auto g = (static_cast<float>(image->getPixels()[i + 1]) / 255.0f);
+		const auto b = (static_cast<float>(image->getPixels()[i + 2]) / 255.0f);
 
-		auto intensity = ((r + g + b) / 3.0f);
+		const auto intensity = ((r + g + b) / 3.0f);
 
 		pixels.push_back(intensity);
 	}
 
 	entity->setHeightMapPath(heightMapPath);
 	entity->setPixels(pixels);
-	entity->setSize(size);
+	entity->setSize(static_cast<float>(size));
 
 	loadMesh(id);
 }

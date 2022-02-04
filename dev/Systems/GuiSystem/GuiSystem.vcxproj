@@ -31,7 +31,7 @@
     <ClCompile Include="..\..\..\src\gui_text_field.cpp" />
     <ClCompile Include="..\..\..\src\gui_viewport.cpp" />
     <ClCompile Include="..\..\..\src\gui_window.cpp" />
-    <ClCompile Include="..\..\..\src\gui_write_field.cpp" />
+    <ClCompile Include="..\..\..\src\gui_input_field.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\gui_button.hpp" />
@@ -43,7 +43,7 @@
     <ClInclude Include="..\..\..\src\gui_text_field.hpp" />
     <ClInclude Include="..\..\..\src\gui_viewport.hpp" />
     <ClInclude Include="..\..\..\src\gui_window.hpp" />
-    <ClInclude Include="..\..\..\src\gui_write_field.hpp" />
+    <ClInclude Include="..\..\..\src\gui_input_field.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

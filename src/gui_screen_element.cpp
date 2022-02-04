@@ -7,10 +7,10 @@ void GuiScreen::createScrollingList(const string& id, const fvec2& position, con
 	_scrollingLists.push_back(make_shared<GuiScrollingList>(_fe3d, _parentId + "_" + _id, id, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize, isCentered));
 }
 
-void GuiScreen::createWriteField(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+void GuiScreen::createInputField(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_writeFields.push_back(make_shared<GuiWriteField>(_fe3d, _parentId + "_" + _id, id, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered));
+	_inputFields.push_back(make_shared<GuiInputField>(_fe3d, _parentId + "_" + _id, id, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered));
 }
 
 void GuiScreen::createButton(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
@@ -57,13 +57,13 @@ void GuiScreen::deleteScrollingList(const string& id)
 	abort();
 }
 
-void GuiScreen::deleteWriteField(const string& id)
+void GuiScreen::deleteInputField(const string& id)
 {
-	for(size_t i = 0; i < _writeFields.size(); i++)
+	for(size_t i = 0; i < _inputFields.size(); i++)
 	{
-		if(id == _writeFields[i]->getId())
+		if(id == _inputFields[i]->getId())
 		{
-			_writeFields.erase(_writeFields.begin() + i);
+			_inputFields.erase(_inputFields.begin() + i);
 			return;
 		}
 	}
@@ -126,11 +126,11 @@ const bool GuiScreen::isScrollingListExisting(const string& id) const
 	return false;
 }
 
-const bool GuiScreen::isWriteFieldExisting(const string& id) const
+const bool GuiScreen::isInputFieldExisting(const string& id) const
 {
-	for(const auto& writeField : _writeFields)
+	for(const auto& inputField : _inputFields)
 	{
-		if(id == writeField->getId())
+		if(id == inputField->getId())
 		{
 			return true;
 		}
@@ -191,13 +191,13 @@ shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string& id) const
 	abort();
 }
 
-shared_ptr<GuiWriteField> GuiScreen::getWriteField(const string& id) const
+shared_ptr<GuiInputField> GuiScreen::getInputField(const string& id) const
 {
-	for(const auto& writeField : _writeFields)
+	for(const auto& inputField : _inputFields)
 	{
-		if(id == writeField->getId())
+		if(id == inputField->getId())
 		{
-			return writeField;
+			return inputField;
 		}
 	}
 
@@ -248,9 +248,9 @@ const vector<shared_ptr<GuiScrollingList>>& GuiScreen::getScrollingLists() const
 	return _scrollingLists;
 }
 
-const vector<shared_ptr<GuiWriteField>>& GuiScreen::getWriteFields() const
+const vector<shared_ptr<GuiInputField>>& GuiScreen::getInputFields() const
 {
-	return _writeFields;
+	return _inputFields;
 }
 
 const vector<shared_ptr<GuiButton>>& GuiScreen::getButtons() const

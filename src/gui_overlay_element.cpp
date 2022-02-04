@@ -7,10 +7,10 @@ void GuiOverlay::createScrollingList(const string& id, const fvec2& position, co
 	_scrollingLists.push_back(make_shared<GuiScrollingList>(_fe3d, "overlay", id, position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize, isCentered));
 }
 
-void GuiOverlay::createWriteField(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor,
+void GuiOverlay::createInputField(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor,
 								  bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 {
-	_writeFields.push_back(make_shared<GuiWriteField>(_fe3d, "overlay", id, position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered));
+	_inputFields.push_back(make_shared<GuiInputField>(_fe3d, "overlay", id, position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered));
 }
 
 void GuiOverlay::createButton(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
@@ -51,11 +51,11 @@ const bool GuiOverlay::isScrollingListExisting(const string& id) const
 	return false;
 }
 
-const bool GuiOverlay::isWriteFieldExisting(const string& id) const
+const bool GuiOverlay::isInputFieldExisting(const string& id) const
 {
-	for(const auto& writeField : _writeFields)
+	for(const auto& inputField : _inputFields)
 	{
-		if(id == writeField->getId())
+		if(id == inputField->getId())
 		{
 			return true;
 		}
@@ -116,13 +116,13 @@ shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string& id) cons
 	abort();
 }
 
-shared_ptr<GuiWriteField> GuiOverlay::getWriteField(const string& id) const
+shared_ptr<GuiInputField> GuiOverlay::getInputField(const string& id) const
 {
-	for(const auto& writeField : _writeFields)
+	for(const auto& inputField : _inputFields)
 	{
-		if(id == writeField->getId())
+		if(id == inputField->getId())
 		{
-			return writeField;
+			return inputField;
 		}
 	}
 
@@ -173,9 +173,9 @@ const vector<shared_ptr<GuiScrollingList>>& GuiOverlay::getScrollingLists() cons
 	return _scrollingLists;
 }
 
-const vector<shared_ptr<GuiWriteField>>& GuiOverlay::getWriteFields() const
+const vector<shared_ptr<GuiInputField>>& GuiOverlay::getInputFields() const
 {
-	return _writeFields;
+	return _inputFields;
 }
 
 const vector<shared_ptr<GuiButton>>& GuiOverlay::getButtons() const
@@ -207,13 +207,13 @@ void GuiOverlay::deleteScrollingList(const string& id)
 	abort();
 }
 
-void GuiOverlay::deleteWriteField(const string& id)
+void GuiOverlay::deleteInputField(const string& id)
 {
-	for(size_t i = 0; i < _writeFields.size(); i++)
+	for(size_t i = 0; i < _inputFields.size(); i++)
 	{
-		if(id == _writeFields[i]->getId())
+		if(id == _inputFields[i]->getId())
 		{
-			_writeFields.erase(_writeFields.begin() + i);
+			_inputFields.erase(_inputFields.begin() + i);
 			return;
 		}
 	}

@@ -3,15 +3,14 @@
 #include "engine_interface.hpp"
 #include "gui_button.hpp"
 
-class GuiWriteField final : public GuiButton
+class GuiInputField final : public GuiButton
 {
 public:
-	GuiWriteField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor,
+	GuiInputField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor,
 				  const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
 
 	void update(bool isHoverable);
 	void setActive(bool active);
-	void setPermActive(bool active);
 	void changeTextContent(const string& content);
 
 	const string getTextContent() const;
@@ -37,7 +36,6 @@ private:
 	const bool _noSpecials;
 	const bool _noLetters;
 	const bool _minusAllowed;
-	bool _mustBeActive = false;
 	bool _isActive = false;
 	bool _confirmedInput = false;
 };

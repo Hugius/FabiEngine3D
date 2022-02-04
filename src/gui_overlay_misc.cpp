@@ -14,9 +14,9 @@ void GuiOverlay::update()
 		scrollingList->update(true);
 	}
 
-	for(const auto& writeField : _writeFields)
+	for(const auto& inputField : _inputFields)
 	{
-		writeField->update(true);
+		inputField->update(true);
 	}
 
 	for(const auto& button : _buttons)

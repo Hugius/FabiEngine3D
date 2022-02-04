@@ -1,9 +1,9 @@
-#include "gui_write_field.hpp"
+#include "gui_input_field.hpp"
 
 #include <map>
 #include <windows.h>
 
-GuiWriteField::GuiWriteField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+GuiInputField::GuiInputField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 	:
 	GuiButton(fe3d, parentId, id, position, size, color, hoverColor, "", textColor, textHoverColor, isCentered),
 	_noNumbers(noNumbers),
@@ -16,32 +16,22 @@ GuiWriteField::GuiWriteField(shared_ptr<EngineInterface> fe3d, const string& par
 	_fe3d->text2d_setSize(_textField->getEntityId(), fvec2(CHAR_WIDTH, _fe3d->text2d_getSize(_textField->getEntityId()).y));
 }
 
-void GuiWriteField::update(bool isHoverable)
+void GuiInputField::update(bool isHoverable)
 {
 	_updateHovering(isHoverable && !_isActive);
 	_updateActivation();
 	_updateTyping();
 }
 
-void GuiWriteField::_updateActivation()
+void GuiInputField::_updateActivation()
 {
 	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
-		if(_isHovered)
-		{
-			_isActive = true;
-		}
-		else
-		{
-			if(!_mustBeActive)
-			{
-				_isActive = false;
-			}
-		}
+		_isActive = _isHovered;
 	}
 }
 
-void GuiWriteField::_updateTyping()
+void GuiInputField::_updateTyping()
 {
 	if(_isActive)
 	{
@@ -198,7 +188,7 @@ void GuiWriteField::_updateTyping()
 		}
 
 		_fe3d->text2d_setContent(_textField->getEntityId(), _currentTextContent + (barEnabled ? "|" : " "));
-		_fe3d->text2d_setSize(_textField->getEntityId(), fvec2(CHAR_WIDTH * _currentTextContent.size(), _fe3d->text2d_getSize(_textField->getEntityId()).y));
+		_fe3d->text2d_setSize(_textField->getEntityId(), fvec2(CHAR_WIDTH * static_cast<float>(_currentTextContent.size()), _fe3d->text2d_getSize(_textField->getEntityId()).y));
 
 		if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 		{
@@ -212,40 +202,34 @@ void GuiWriteField::_updateTyping()
 	else
 	{
 		_fe3d->text2d_setContent(_textField->getEntityId(), _currentTextContent);
-		_fe3d->text2d_setSize(_textField->getEntityId(), fvec2(CHAR_WIDTH * _currentTextContent.size(), _fe3d->text2d_getSize(_textField->getEntityId()).y));
+		_fe3d->text2d_setSize(_textField->getEntityId(), fvec2(CHAR_WIDTH * static_cast<float>(_currentTextContent.size()), _fe3d->text2d_getSize(_textField->getEntityId()).y));
 		_confirmedInput = false;
 	}
 }
 
-void GuiWriteField::setActive(bool active)
+void GuiInputField::setActive(bool active)
 {
 	_isActive = active;
 }
 
-void GuiWriteField::setPermActive(bool active)
-{
-	_isActive = active;
-	_mustBeActive = active;
-}
-
-const bool GuiWriteField::confirmedInput() const
+const bool GuiInputField::confirmedInput() const
 {
 	return _confirmedInput;
 }
 
-const bool GuiWriteField::isActive() const
+const bool GuiInputField::isActive() const
 {
 	return _isActive;
 }
 
-const bool GuiWriteField::hasTextContentChanged()
+const bool GuiInputField::hasTextContentChanged()
 {
 	bool result = (_lastTextContent != _currentTextContent);
 	_lastTextContent = _currentTextContent;
 	return result;
 }
 
-const string GuiWriteField::getTextContent() const
+const string GuiInputField::getTextContent() const
 {
 	if(_currentTextContent == "-" && _noSpecials && _minusAllowed)
 	{
@@ -257,7 +241,7 @@ const string GuiWriteField::getTextContent() const
 	}
 }
 
-void GuiWriteField::changeTextContent(const string& content)
+void GuiInputField::changeTextContent(const string& content)
 {
 	_currentTextContent = content;
 }

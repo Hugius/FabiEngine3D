@@ -20,10 +20,10 @@ void GuiScreen::update(bool isHoverable)
 		scrollingList->setVisible(_isActive);
 	}
 
-	for(const auto& writeField : _writeFields)
+	for(const auto& inputField : _inputFields)
 	{
-		writeField->update(isHoverable);
-		writeField->setVisible(_isActive);
+		inputField->update(isHoverable);
+		inputField->setVisible(_isActive);
 	}
 
 	for(const auto& button : _buttons)

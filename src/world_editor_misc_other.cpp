@@ -195,9 +195,9 @@ void WorldEditor::_deleteWorldFile(const string& id)
 	}
 }
 
-void WorldEditor::_handleValueChanging(const string& screenId, const string& buttonId, const string& writeFieldId, float& value, float adder, float multiplier, float minimum, float maximum)
+void WorldEditor::_handleValueChanging(const string& screenId, const string& buttonId, const string& inputFieldId, float& value, float adder, float multiplier, float minimum, float maximum)
 {
-	auto writeField = _gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getWriteField(writeFieldId);
+	auto inputField = _gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getInputField(inputFieldId);
 
 	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
@@ -207,28 +207,28 @@ void WorldEditor::_handleValueChanging(const string& screenId, const string& but
 		}
 	}
 
-	if(!writeField->isActive())
+	if(!inputField->isActive())
 	{
-		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
+		inputField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 
-	if(writeField->getTextContent().empty())
+	if(inputField->getTextContent().empty())
 	{
 		value = 0.0f;
 	}
 	else
 	{
-		if(writeField->isActive())
+		if(inputField->isActive())
 		{
-			value = (static_cast<float>(stoi(writeField->getTextContent())) / multiplier);
+			value = (static_cast<float>(stoi(inputField->getTextContent())) / multiplier);
 		}
 	}
 
 	value = clamp(value, minimum, maximum);
 
-	if(!writeField->isActive())
+	if(!inputField->isActive())
 	{
-		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
+		inputField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 }
 

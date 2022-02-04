@@ -7,9 +7,6 @@
     <Filter Include="Element">
       <UniqueIdentifier>{88bbef55-fccf-476a-ae9c-e0178d570227}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Element\Write Field">
-      <UniqueIdentifier>{e8139af9-336f-41bb-98fb-ee253efd10f5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Element\Rectangle">
       <UniqueIdentifier>{f25dce86-74f9-4824-a64a-076658e03b1e}</UniqueIdentifier>
     </Filter>
@@ -34,6 +31,9 @@
     <Filter Include="Element\Overlay">
       <UniqueIdentifier>{87f416a3-7e26-4614-a512-db5ffb377f30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Element\Input Field">
+      <UniqueIdentifier>{e8139af9-336f-41bb-98fb-ee253efd10f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\gui_manager.cpp">
@@ -57,8 +57,8 @@
     <ClCompile Include="..\..\..\src\gui_window.cpp">
       <Filter>Element\Window</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\gui_write_field.cpp">
-      <Filter>Element\Write Field</Filter>
+    <ClCompile Include="..\..\..\src\gui_input_field.cpp">
+      <Filter>Element\Input Field</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\gui_overlay_element.cpp">
       <Filter>Element\Overlay</Filter>
@@ -98,8 +98,8 @@
     <ClInclude Include="..\..\..\src\gui_window.hpp">
       <Filter>Element\Window</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\gui_write_field.hpp">
-      <Filter>Element\Write Field</Filter>
+    <ClInclude Include="..\..\..\src\gui_input_field.hpp">
+      <Filter>Element\Input Field</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\gui_overlay.hpp">
       <Filter>Element\Overlay</Filter>

@@ -152,7 +152,7 @@ private:
 	void _deactivateSpotlight();
 	void _deactivateReflection();
 	void _deactivateSound();
-	void _handleValueChanging(const string& screenId, const string& buttonId, const string& writeFieldId, float& value, float adder, float multiplier = 1.0f, float minimum = -FLT_MAX, float maximum = FLT_MAX);
+	void _handleValueChanging(const string& screenId, const string& buttonId, const string& inputFieldId, float& value, float adder, float multiplier = 1.0f, float minimum = -FLT_MAX, float maximum = FLT_MAX);
 
 	const vector<string> _getWorldIds() const;
 

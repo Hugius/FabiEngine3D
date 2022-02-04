@@ -94,143 +94,86 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 		iss >> lineType;
 
-		if(lineType == "MODEL")
+		if(lineType == "PART")
 		{
 			string modelId;
-			string meshPath;
-			string levelOfDetailEntityId;
-			fvec3 size;
-			float levelOfDetailDistance;
-			unsigned int rotationOrder;
-			bool isShadowed;
-			bool isReflected;
+			string partId;
+			string diffuseMapPath;
+			string emissionMapPath;
+			string specularMapPath;
+			string reflectionMapPath;
+			string normalMapPath;
 
 			iss
 				>> modelId
-				>> meshPath
-				>> size.x
-				>> size.y
-				>> size.z
-				>> levelOfDetailEntityId
-				>> levelOfDetailDistance
-				>> rotationOrder
-				>> isShadowed
-				>> isReflected;
+				>> partId
+				>> diffuseMapPath
+				>> emissionMapPath
+				>> specularMapPath
+				>> reflectionMapPath
+				>> normalMapPath;
 
-			while(true)
+			partId = (partId == "?") ? "" : partId;
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
+			specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
+			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+
+			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
+			replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
+			replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+
+			if(!diffuseMapPath.empty())
 			{
-				string partId;
-				iss >> partId;
-
-				if(partId.empty())
+				if(!Config::getInst().isApplicationExported())
 				{
-					break;
+					diffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 				}
 
-				string diffuseMapPath;
-				string emissionMapPath;
-				string specularMapPath;
-				string reflectionMapPath;
-				string normalMapPath;
-				fvec3 color;
-				float textureRepeat;
-				float specularShininess;
-				float specularIntensity;
-				float reflectivity;
-				float lightness;
-				float emissionIntensity;
-				float opacity;
-				float minTextureAlpha;
-				unsigned int reflectionType;
-				bool isSpecular;
-				bool isReflective;
-				bool isFaceCulled;
-				bool isBright;
+				imagePaths.push_back(diffuseMapPath);
+			}
 
-				iss
-					>> diffuseMapPath
-					>> emissionMapPath
-					>> specularMapPath
-					>> reflectionMapPath
-					>> normalMapPath
-					>> reflectionType
-					>> isSpecular
-					>> isReflective
-					>> specularShininess
-					>> specularIntensity
-					>> reflectivity
-					>> lightness
-					>> color.r
-					>> color.g
-					>> color.b
-					>> textureRepeat
-					>> isFaceCulled
-					>> isBright
-					>> emissionIntensity
-					>> opacity
-					>> minTextureAlpha;
-
-				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
-				specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
-				reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
-				normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-
-				replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-				replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
-				replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
-				replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
-				replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-
-				if(!diffuseMapPath.empty())
+			if(!emissionMapPath.empty())
+			{
+				if(!Config::getInst().isApplicationExported())
 				{
-					if(!Config::getInst().isApplicationExported())
-					{
-						diffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
-					}
-
-					imagePaths.push_back(diffuseMapPath);
+					emissionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
 				}
 
-				if(!emissionMapPath.empty())
-				{
-					if(!Config::getInst().isApplicationExported())
-					{
-						emissionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
-					}
+				imagePaths.push_back(emissionMapPath);
+			}
 
-					imagePaths.push_back(emissionMapPath);
+			if(!specularMapPath.empty())
+			{
+				if(!Config::getInst().isApplicationExported())
+				{
+					specularMapPath = string("projects\\" + getCurrentProjectId() + "\\" + specularMapPath);
 				}
 
-				if(!specularMapPath.empty())
-				{
-					if(!Config::getInst().isApplicationExported())
-					{
-						specularMapPath = string("projects\\" + getCurrentProjectId() + "\\" + specularMapPath);
-					}
+				imagePaths.push_back(specularMapPath);
+			}
 
-					imagePaths.push_back(specularMapPath);
+			if(!reflectionMapPath.empty())
+			{
+				if(!Config::getInst().isApplicationExported())
+				{
+					reflectionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + reflectionMapPath);
 				}
 
-				if(!reflectionMapPath.empty())
-				{
-					if(!Config::getInst().isApplicationExported())
-					{
-						reflectionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + reflectionMapPath);
-					}
+				imagePaths.push_back(reflectionMapPath);
+			}
 
-					imagePaths.push_back(reflectionMapPath);
+			if(!normalMapPath.empty())
+			{
+				if(!Config::getInst().isApplicationExported())
+				{
+					normalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
 				}
 
-				if(!normalMapPath.empty())
-				{
-					if(!Config::getInst().isApplicationExported())
-					{
-						normalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
-					}
-
-					imagePaths.push_back(normalMapPath);
-				}
+				imagePaths.push_back(normalMapPath);
 			}
 		}
 	}
@@ -314,150 +257,150 @@ const bool ModelEditor::loadFromFile()
 				_fe3d->model_setLevelOfDetailEntityId(modelId, levelOfDetailEntityId);
 				_fe3d->model_setLevelOfDetailDistance(modelId, levelOfDetailDistance);
 				_fe3d->model_setRotationOrder(modelId, DirectionOrder(rotationOrder));
+			}
+		}
+		else if(lineType == "PART")
+		{
+			string modelId;
+			string partId;
+			string diffuseMapPath;
+			string emissionMapPath;
+			string specularMapPath;
+			string reflectionMapPath;
+			string normalMapPath;
+			fvec3 color;
+			float textureRepeat;
+			float specularShininess;
+			float specularIntensity;
+			float reflectivity;
+			float lightness;
+			float emissionIntensity;
+			float opacity;
+			float minTextureAlpha;
+			unsigned int reflectionType;
+			bool isSpecular;
+			bool isReflective;
+			bool isFaceCulled;
+			bool isBright;
 
-				while(true)
+			iss
+				>> modelId
+				>> partId
+				>> diffuseMapPath
+				>> emissionMapPath
+				>> specularMapPath
+				>> reflectionMapPath
+				>> normalMapPath
+				>> reflectionType
+				>> isSpecular
+				>> isReflective
+				>> specularShininess
+				>> specularIntensity
+				>> reflectivity
+				>> lightness
+				>> color.r
+				>> color.g
+				>> color.b
+				>> textureRepeat
+				>> isFaceCulled
+				>> isBright
+				>> emissionIntensity
+				>> opacity
+				>> minTextureAlpha;
+
+			partId = (partId == "?") ? "" : partId;
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
+			specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
+			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+
+			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
+			replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
+			replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+
+			if(!_fe3d->model_hasPart(modelId, partId))
+			{
+				continue;
+			}
+
+			_fe3d->model_setColor(modelId, partId, color);
+			_fe3d->model_setSpecular(modelId, partId, isSpecular);
+			_fe3d->model_setSpecularShininess(modelId, partId, specularShininess);
+			_fe3d->model_setSpecularIntensity(modelId, partId, specularIntensity);
+			_fe3d->model_setReflectivity(modelId, partId, reflectivity);
+			_fe3d->model_setLightness(modelId, partId, lightness);
+			_fe3d->model_setTextureRepeat(modelId, partId, textureRepeat);
+			_fe3d->model_setReflective(modelId, partId, isReflective);
+			_fe3d->model_setReflectionType(modelId, partId, ReflectionType(reflectionType));
+			_fe3d->model_setFaceCulled(modelId, partId, isFaceCulled);
+			_fe3d->model_setBright(modelId, partId, isBright);
+			_fe3d->model_setEmissionIntensity(modelId, partId, emissionIntensity);
+			_fe3d->model_setOpacity(modelId, partId, opacity);
+			_fe3d->model_setMinTextureAlpha(modelId, partId, minTextureAlpha);
+
+			if(!diffuseMapPath.empty())
+			{
+				if(!Config::getInst().isApplicationExported())
 				{
-					string partId;
-					iss >> partId;
-
-					if(partId.empty())
-					{
-						break;
-					}
-
-					string diffuseMapPath;
-					string emissionMapPath;
-					string specularMapPath;
-					string reflectionMapPath;
-					string normalMapPath;
-					fvec3 color;
-					float textureRepeat;
-					float specularShininess;
-					float specularIntensity;
-					float reflectivity;
-					float lightness;
-					float emissionIntensity;
-					float opacity;
-					float minTextureAlpha;
-					unsigned int reflectionType;
-					bool isSpecular;
-					bool isReflective;
-					bool isFaceCulled;
-					bool isBright;
-
-					iss
-						>> diffuseMapPath
-						>> emissionMapPath
-						>> specularMapPath
-						>> reflectionMapPath
-						>> normalMapPath
-						>> reflectionType
-						>> isSpecular
-						>> isReflective
-						>> specularShininess
-						>> specularIntensity
-						>> reflectivity
-						>> lightness
-						>> color.r
-						>> color.g
-						>> color.b
-						>> textureRepeat
-						>> isFaceCulled
-						>> isBright
-						>> emissionIntensity
-						>> opacity
-						>> minTextureAlpha;
-
-					partId = (partId == "?") ? "" : partId;
-					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-					emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
-					specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
-					reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
-					normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-
-					replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-					replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
-					replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
-					replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
-					replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-
-					_fe3d->model_setColor(modelId, partId, color);
-					_fe3d->model_setSpecular(modelId, partId, isSpecular);
-					_fe3d->model_setSpecularShininess(modelId, partId, specularShininess);
-					_fe3d->model_setSpecularIntensity(modelId, partId, specularIntensity);
-					_fe3d->model_setReflectivity(modelId, partId, reflectivity);
-					_fe3d->model_setLightness(modelId, partId, lightness);
-					_fe3d->model_setTextureRepeat(modelId, partId, textureRepeat);
-					_fe3d->model_setReflective(modelId, partId, isReflective);
-					_fe3d->model_setReflectionType(modelId, partId, ReflectionType(reflectionType));
-					_fe3d->model_setFaceCulled(modelId, partId, isFaceCulled);
-					_fe3d->model_setBright(modelId, partId, isBright);
-					_fe3d->model_setEmissionIntensity(modelId, partId, emissionIntensity);
-					_fe3d->model_setOpacity(modelId, partId, opacity);
-					_fe3d->model_setMinTextureAlpha(modelId, partId, minTextureAlpha);
-
-					if(!diffuseMapPath.empty())
-					{
-						if(!Config::getInst().isApplicationExported())
-						{
-							diffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
-						}
-
-						_fe3d->model_setDiffuseMap(modelId, partId, diffuseMapPath);
-					}
-
-					if(!specularMapPath.empty())
-					{
-						if(!Config::getInst().isApplicationExported())
-						{
-							specularMapPath = string("projects\\" + getCurrentProjectId() + "\\" + specularMapPath);
-						}
-
-						_fe3d->model_setSpecularMap(modelId, partId, specularMapPath);
-					}
-
-					if(!emissionMapPath.empty())
-					{
-						if(!Config::getInst().isApplicationExported())
-						{
-							emissionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
-						}
-
-						_fe3d->model_setEmissionMap(modelId, partId, emissionMapPath);
-					}
-
-					if(!reflectionMapPath.empty())
-					{
-						if(!Config::getInst().isApplicationExported())
-						{
-							reflectionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + reflectionMapPath);
-						}
-
-						_fe3d->model_setReflectionMap(modelId, partId, reflectionMapPath);
-					}
-
-					if(!normalMapPath.empty())
-					{
-						if(!Config::getInst().isApplicationExported())
-						{
-							normalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
-						}
-
-						_fe3d->model_setNormalMap(modelId, partId, normalMapPath);
-					}
+					diffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 				}
+
+				_fe3d->model_setDiffuseMap(modelId, partId, diffuseMapPath);
+			}
+
+			if(!specularMapPath.empty())
+			{
+				if(!Config::getInst().isApplicationExported())
+				{
+					specularMapPath = string("projects\\" + getCurrentProjectId() + "\\" + specularMapPath);
+				}
+
+				_fe3d->model_setSpecularMap(modelId, partId, specularMapPath);
+			}
+
+			if(!emissionMapPath.empty())
+			{
+				if(!Config::getInst().isApplicationExported())
+				{
+					emissionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
+				}
+
+				_fe3d->model_setEmissionMap(modelId, partId, emissionMapPath);
+			}
+
+			if(!reflectionMapPath.empty())
+			{
+				if(!Config::getInst().isApplicationExported())
+				{
+					reflectionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + reflectionMapPath);
+				}
+
+				_fe3d->model_setReflectionMap(modelId, partId, reflectionMapPath);
+			}
+
+			if(!normalMapPath.empty())
+			{
+				if(!Config::getInst().isApplicationExported())
+				{
+					normalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
+				}
+
+				_fe3d->model_setNormalMap(modelId, partId, normalMapPath);
 			}
 		}
 		else if(lineType == "AABB")
 		{
-			string aabbId;
 			string modelId;
+			string aabbId;
 			fvec3 position;
 			fvec3 size;
 
 			iss
-				>> aabbId
 				>> modelId
+				>> aabbId
 				>> position.x
 				>> position.y
 				>> position.z

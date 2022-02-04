@@ -26,6 +26,8 @@ const bool ModelEditor::saveToFile() const
 
 	for(const auto& modelId : _loadedModelIds)
 	{
+		auto partIds = _fe3d->model_getPartIds(modelId);
+		auto aabbIds = _fe3d->aabb_getChildIds(modelId, AabbParentEntityType::MODEL);
 		auto isMultiParted = _fe3d->model_isMultiParted(modelId);
 		auto meshPath = _fe3d->model_getMeshPath(modelId);
 		auto modelSize = _fe3d->model_getBaseSize(modelId);
@@ -54,11 +56,8 @@ const bool ModelEditor::saveToFile() const
 			levelOfDetailDistance << " " <<
 			rotationOrder << " " <<
 			isShadowed << " " <<
-			isReflected;
+			isReflected << endl;
 
-		file << " ";
-
-		auto partIds = _fe3d->model_getPartIds(modelId);
 		for(size_t i = 0; i < partIds.size(); i++)
 		{
 			auto partId = partIds[i];
@@ -102,6 +101,8 @@ const bool ModelEditor::saveToFile() const
 			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 
 			file <<
+				"PART " <<
+				modelId << " " <<
 				partId << " " <<
 				diffuseMapPath << " " <<
 				emissionMapPath << " " <<
@@ -123,25 +124,19 @@ const bool ModelEditor::saveToFile() const
 				isBright << " " <<
 				emissionIntensity << " " <<
 				opacity << " " <<
-				minTextureAlpha;
-
-			if(i < (partIds.size() - 1))
-			{
-				file << " ";
-			}
+				minTextureAlpha << endl;
 		}
 
-		file << endl;
-
-		for(const auto& aabbId : _fe3d->aabb_getChildIds(modelId, AabbParentEntityType::MODEL))
+		for(size_t i = 0; i < aabbIds.size(); i++)
 		{
+			auto aabbId = aabbIds[i];
 			auto position = _fe3d->aabb_getPosition(aabbId);
 			auto size = _fe3d->aabb_getSize(aabbId);
 
 			file <<
 				"AABB " <<
-				aabbId << " " <<
 				modelId << " " <<
+				aabbId << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<

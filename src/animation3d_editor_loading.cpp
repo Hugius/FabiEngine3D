@@ -40,6 +40,15 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 			>> animationId
 			>> previewModelId;
 
+		if(mustCheckPreviewModel)
+		{
+			if(!_fe3d->model_isExisting(previewModelId))
+			{
+				Logger::throwWarning("Preview model of animation with id \"" + animationId + "\" does not exist");
+				continue;
+			}
+		}
+
 		auto newAnimation = make_shared<Animation3d>(animationId);
 		newAnimation->setPreviewModelId(previewModelId);
 
@@ -133,30 +142,22 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 
 		if(mustCheckPreviewModel)
 		{
-			if(_fe3d->model_isExisting(newAnimation->getPreviewModelId()))
+			bool hasAllParts = true;
+			for(const auto& partId : newAnimation->getPartIds())
 			{
-				bool hasAllParts = true;
-				for(const auto& partId : newAnimation->getPartIds())
+				if(!partId.empty())
 				{
-					if(!partId.empty())
-					{
-						hasAllParts = hasAllParts && _fe3d->model_hasPart(newAnimation->getPreviewModelId(), partId);
-					}
+					hasAllParts = hasAllParts && _fe3d->model_hasPart(newAnimation->getPreviewModelId(), partId);
 				}
+			}
 
-				if(hasAllParts)
-				{
-					newAnimation->setInitialSize(_fe3d->model_getBaseSize(newAnimation->getPreviewModelId()));
-				}
-				else
-				{
-					Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getId() + "\" does not have the required animation parts");
-					continue;
-				}
+			if(hasAllParts)
+			{
+				newAnimation->setInitialSize(_fe3d->model_getBaseSize(newAnimation->getPreviewModelId()));
 			}
 			else
 			{
-				Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getId() + "\" does not exist");
+				Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getId() + "\" does not have the required animation parts");
 				continue;
 			}
 		}

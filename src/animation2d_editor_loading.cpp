@@ -54,13 +54,6 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 			previewTexturePath = string("projects\\" + getCurrentProjectId() + "\\" + previewTexturePath);
 		}
 
-		auto newAnimation = make_shared<Animation2d>(animationId);
-
-		newAnimation->setPreviewTexturePath(previewTexturePath);
-		newAnimation->setRowCount(rowCount);
-		newAnimation->setColumnCount(columnCount);
-		newAnimation->setInterval(interval);
-
 		if(mustCheckPreviewTexture)
 		{
 			if(Tools::isFileExisting(rootPath + previewTexturePath))
@@ -69,10 +62,17 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 			}
 			else
 			{
-				Logger::throwWarning("Preview texture of animation with ID \"" + newAnimation->getId() + "\" does not exist");
+				Logger::throwWarning("Preview texture of animation with ID \"" + animationId + "\" does not exist");
 				continue;
 			}
 		}
+
+		auto newAnimation = make_shared<Animation2d>(animationId);
+
+		newAnimation->setPreviewTexturePath(previewTexturePath);
+		newAnimation->setRowCount(rowCount);
+		newAnimation->setColumnCount(columnCount);
+		newAnimation->setInterval(interval);
 
 		_animations.push_back(newAnimation);
 	}

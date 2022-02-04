@@ -321,6 +321,11 @@ const bool ModelEditor::loadFromFile()
 			replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
+			if(!_fe3d->model_isExisting(modelId))
+			{
+				continue;
+			}
+
 			if(!_fe3d->model_hasPart(modelId, partId))
 			{
 				continue;
@@ -407,6 +412,11 @@ const bool ModelEditor::loadFromFile()
 				>> size.x
 				>> size.y
 				>> size.z;
+
+			if(!_fe3d->model_isExisting(modelId))
+			{
+				continue;
+			}
 
 			_fe3d->aabb_create(aabbId, false);
 

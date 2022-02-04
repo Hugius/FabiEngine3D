@@ -156,22 +156,22 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 	{
 		for(size_t i = 0; i < meshPart->getPositions().size(); i += 3)
 		{
-			fvec3 v0 = meshPart->getPositions()[i + 0];
-			fvec3 v1 = meshPart->getPositions()[i + 1];
-			fvec3 v2 = meshPart->getPositions()[i + 2];
+			const auto v0 = meshPart->getPositions()[i + 0];
+			const auto v1 = meshPart->getPositions()[i + 1];
+			const auto v2 = meshPart->getPositions()[i + 2];
 
-			fvec2 uv0 = meshPart->getUvs()[i + 0];
-			fvec2 uv1 = meshPart->getUvs()[i + 1];
-			fvec2 uv2 = meshPart->getUvs()[i + 2];
+			const auto uv0 = meshPart->getUvs()[i + 0];
+			const auto uv1 = meshPart->getUvs()[i + 1];
+			const auto uv2 = meshPart->getUvs()[i + 2];
 
-			fvec3 deltaPosition1 = (v1 - v0);
-			fvec3 deltaPosition2 = (v2 - v0);
+			const auto deltaPosition1 = (v1 - v0);
+			const auto deltaPosition2 = (v2 - v0);
 
-			fvec2 deltaUv1 = (uv1 - uv0);
-			fvec2 deltaUv2 = (uv2 - uv0);
+			const auto deltaUv1 = (uv1 - uv0);
+			const auto deltaUv2 = (uv2 - uv0);
 
-			float r = (1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x));
-			fvec3 tangent = ((deltaPosition1 * deltaUv2.y - deltaPosition2 * deltaUv1.y) * r);
+			const auto r = (1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x));
+			const auto tangent = ((deltaPosition1 * deltaUv2.y - deltaPosition2 * deltaUv1.y) * r);
 
 			meshPart->addTangent(tangent);
 			meshPart->addTangent(tangent);
@@ -184,9 +184,15 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 		return nullptr;
 	}
 
-	if((meshParts.size() == 1) && !meshParts[0]->getId().empty())
+	if(meshParts.size() > 1)
 	{
-		return nullptr;
+		for(const auto& meshPart : meshParts)
+		{
+			if(meshPart->getId().empty())
+			{
+				return nullptr;
+			}
+		}
 	}
 
 	auto mesh = make_shared<Mesh>();

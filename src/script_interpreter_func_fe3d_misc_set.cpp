@@ -37,8 +37,9 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 			else if(args[0]->getType() == SVT::DECIMAL)
 			{
-				string decimalString = to_string(args[0]->getDecimal());
-				Logger::throwInfo(decimalString.substr(0, decimalString.size() - 1));
+				const auto decimalString = to_string(args[0]->getDecimal());
+
+				Logger::throwInfo(decimalString.substr(0, (decimalString.size() - 1)));
 			}
 			else if(args[0]->getType() == SVT::INTEGER)
 			{

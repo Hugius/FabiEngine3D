@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->raycast_getCursorRay().getPosition().x;
+			const auto result = _fe3d->raycast_getCursorRayPosition().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->raycast_getCursorRay().getPosition().y;
+			const auto result = _fe3d->raycast_getCursorRayPosition().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->raycast_getCursorRay().getPosition().z;
+			const auto result = _fe3d->raycast_getCursorRayPosition().z;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->raycast_getCursorRay().getDirection().x;
+			const auto result = _fe3d->raycast_getCursorRayDirection().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->raycast_getCursorRay().getDirection().y;
+			const auto result = _fe3d->raycast_getCursorRayDirection().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -53,7 +53,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->raycast_getCursorRay().getDirection().z;
+			const auto result = _fe3d->raycast_getCursorRayDirection().z;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}

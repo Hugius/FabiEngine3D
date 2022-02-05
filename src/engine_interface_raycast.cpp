@@ -18,13 +18,17 @@ void EngineInterface::raycast_setTerrainPointingPrecision(float value)
 
 const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
 {
-	float closestDistance = FLT_MAX;
+	const auto cursorRay = _core->getRaycaster()->getCursorRay();
+	const auto isTerrainPointEnabled = _core->getRaycaster()->isTerrainPointingEnabled();
+	const auto terrainPoint = _core->getRaycaster()->getTerrainPoint();
+	const auto distanceToTerrain = Math::calculateDistance(cursorRay->getPosition(), terrainPoint);
+	float closestDistanceToAabb = FLT_MAX;
 
 	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->isRaycastResponsive())
 		{
-			float distance;
+			float distanceToAabb;
 
 			if(entity->isCentered())
 			{
@@ -35,9 +39,9 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
 				const auto top = (entity->getSize().y * 0.5f);
 				const auto back = (entity->getSize().z * 0.5f);
 				const auto front = (entity->getSize().z * 0.5f);
-				const auto box = Box(position, left, right, bottom, top, back, front);
+				const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
-				distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
+				distanceToAabb = _core->getRaycaster()->calculateRayBoxIntersectionDistance(cursorRay, box);
 			}
 			else
 			{
@@ -48,16 +52,22 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
 				const auto top = entity->getSize().y;
 				const auto back = (entity->getSize().z * 0.5f);
 				const auto front = (entity->getSize().z * 0.5f);
-				const auto box = Box(position, left, right, bottom, top, back, front);
+				const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
-				distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
+				distanceToAabb = _core->getRaycaster()->calculateRayBoxIntersectionDistance(cursorRay, box);
 			}
 
-			if((distance != -1.0f) && (distance < closestDistance))
+			if(distanceToAabb != -1.0f)
 			{
-				closestDistance = distance;
-				_hoveredAabbId = entity->getId();
-				_hoveredAabbDistance = closestDistance;
+				if(distanceToAabb < closestDistanceToAabb)
+				{
+					if(!isTerrainPointEnabled || (terrainPoint == fvec3(-1.0f)) || (distanceToAabb < distanceToTerrain))
+					{
+						closestDistanceToAabb = distanceToAabb;
+						_hoveredAabbId = entity->getId();
+						_hoveredAabbDistance = closestDistanceToAabb;
+					}
+				}
 			}
 		}
 	}
@@ -106,7 +116,7 @@ const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const strin
 				const auto top = (entity->getSize().y * 0.5f);
 				const auto back = (entity->getSize().z * 0.5f);
 				const auto front = (entity->getSize().z * 0.5f);
-				const auto box = Box(position, left, right, bottom, top, back, front);
+				const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
 				distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
 			}
@@ -119,7 +129,7 @@ const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const strin
 				const auto top = entity->getSize().y;
 				const auto back = (entity->getSize().z * 0.5f);
 				const auto front = (entity->getSize().z * 0.5f);
-				const auto box = Box(position, left, right, bottom, top, back, front);
+				const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
 				distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
 			}
@@ -171,7 +181,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 						const auto top = (entity->getSize().y * 0.5f);
 						const auto back = (entity->getSize().z * 0.5f);
 						const auto front = (entity->getSize().z * 0.5f);
-						const auto box = Box(position, left, right, bottom, top, back, front);
+						const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
 						distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
 					}
@@ -184,7 +194,7 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 						const auto top = entity->getSize().y;
 						const auto back = (entity->getSize().z * 0.5f);
 						const auto front = (entity->getSize().z * 0.5f);
-						const auto box = Box(position, left, right, bottom, top, back, front);
+						const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
 						distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
 					}
@@ -209,14 +219,19 @@ const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(c
 	}
 }
 
-const Ray& EngineInterface::raycast_getCursorRay() const
+const fvec3& EngineInterface::raycast_getCursorRayPosition() const
 {
-	return _core->getRaycaster()->getCursorRay();
+	return _core->getRaycaster()->getCursorRay()->getPosition();
 }
 
 const fvec3& EngineInterface::raycast_getPointOnTerrain() const
 {
 	return _core->getRaycaster()->getTerrainPoint();
+}
+
+const fvec3& EngineInterface::raycast_getCursorRayDirection() const
+{
+	return _core->getRaycaster()->getCursorRay()->getDirection();
 }
 
 const float EngineInterface::raycast_getTerrainPointingDistance() const

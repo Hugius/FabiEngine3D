@@ -59,11 +59,11 @@ void BottomViewportController::_updateStatistics()
 	{
 		const auto textId = statisticsScreen->getTextField("cameraPositionYawPitch")->getEntityId();
 		const auto text = string("Camera Position/Yaw/Pitch: " +
-						   to_string(static_cast<int>(_fe3d->camera_getPosition().x)) + " " +
-						   to_string(static_cast<int>(_fe3d->camera_getPosition().y)) + " " +
-						   to_string(static_cast<int>(_fe3d->camera_getPosition().z)) + " " +
-						   to_string(static_cast<int>(_fe3d->camera_getYaw())) + " " +
-						   to_string(static_cast<int>(_fe3d->camera_getPitch())));
+								 to_string(static_cast<int>(_fe3d->camera_getPosition().x)) + " " +
+								 to_string(static_cast<int>(_fe3d->camera_getPosition().y)) + " " +
+								 to_string(static_cast<int>(_fe3d->camera_getPosition().z)) + " " +
+								 to_string(static_cast<int>(_fe3d->camera_getYaw())) + " " +
+								 to_string(static_cast<int>(_fe3d->camera_getPitch())));
 
 		_fe3d->text2d_setContent(textId, text);
 		_fe3d->text2d_setSize(textId, fvec2(CHAR_SIZE.x * static_cast<float>(text.size()), CHAR_SIZE.y));
@@ -73,9 +73,9 @@ void BottomViewportController::_updateStatistics()
 	{
 		const auto textId = statisticsScreen->getTextField("cursorPosition")->getEntityId();
 		const auto text = string("Raycast Direction: " +
-			to_string(static_cast<int>(_fe3d->raycast_getCursorRay().getDirection().x * 100.0f)) + "% " +
-			to_string(static_cast<int>(_fe3d->raycast_getCursorRay().getDirection().y * 100.0f)) + "% " +
-			to_string(static_cast<int>(_fe3d->raycast_getCursorRay().getDirection().z * 100.0f)) + "%");
+								 to_string(static_cast<int>(_fe3d->raycast_getCursorRayDirection().x * 100.0f)) + "% " +
+								 to_string(static_cast<int>(_fe3d->raycast_getCursorRayDirection().y * 100.0f)) + "% " +
+								 to_string(static_cast<int>(_fe3d->raycast_getCursorRayDirection().z * 100.0f)) + "%");
 
 		_fe3d->text2d_setContent(textId, text);
 		_fe3d->text2d_setSize(textId, fvec2(CHAR_SIZE.x * static_cast<float>(text.size()), CHAR_SIZE.y));

@@ -8,6 +8,8 @@
 class Raycaster final
 {
 public:
+	Raycaster();
+
 	void inject(shared_ptr<TerrainEntityManager> terrainManager);
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
@@ -18,14 +20,14 @@ public:
 
 	const float getTerrainPointingDistance() const;
 	const float getTerrainPointingPrecision() const;
-	const float calculateRayBoxIntersectionDistance(const Ray& ray, const Box& box) const;
+	const float calculateRayBoxIntersectionDistance(const shared_ptr<Ray> ray, const shared_ptr<Box> box) const;
 
 	const fvec3& getTerrainPoint() const;
-	const fvec3 calculatePointOnRay(const Ray& ray, float distance) const;
+	const fvec3 calculatePointOnRay(const shared_ptr<Ray> ray, float distance) const;
 
 	const bool isTerrainPointingEnabled() const;
 
-	const Ray& getCursorRay() const;
+	const shared_ptr<Ray> getCursorRay() const;
 
 private:
 	const fvec4 _convertToViewSpace(const fvec4& clipCoords) const;
@@ -35,7 +37,7 @@ private:
 
 	const bool _isUnderTerrain(float distance) const;
 
-	const Ray _calculateCursorRay(const ivec2& cursorPosition) const;
+	const shared_ptr<Ray> _calculateCursorRay(const ivec2& cursorPosition) const;
 
 	fvec3 _terrainPoint = fvec3(0.0f);
 
@@ -44,7 +46,7 @@ private:
 
 	bool _isTerrainPointingEnabled = false;
 
-	Ray _cursorRay = Ray(fvec3(0.0f), fvec3(0.0f));
+	shared_ptr<Ray> _cursorRay = nullptr;
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;

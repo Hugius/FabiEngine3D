@@ -9,6 +9,11 @@
 using std::min;
 using std::max;
 
+Raycaster::Raycaster()
+{
+	_cursorRay = make_shared<Ray>(fvec3(0.0f), fvec3(0.0f));
+}
+
 void Raycaster::update(const ivec2& cursorPosition)
 {
 	_cursorRay = _calculateCursorRay(cursorPosition);
@@ -75,7 +80,7 @@ const float Raycaster::getTerrainPointingPrecision() const
 	return _terrainPointingPrecision;
 }
 
-const Ray& Raycaster::getCursorRay() const
+const shared_ptr<Ray> Raycaster::getCursorRay() const
 {
 	return _cursorRay;
 }
@@ -86,7 +91,7 @@ const fvec3& Raycaster::getTerrainPoint() const
 }
 
 /* https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms */
-const float Raycaster::calculateRayBoxIntersectionDistance(const Ray& ray, const Box& box) const
+const float Raycaster::calculateRayBoxIntersectionDistance(const shared_ptr<Ray> ray, const shared_ptr<Box> box) const
 {
 	/*
 		Initial formula: point = (origin + distance) * direction
@@ -94,26 +99,26 @@ const float Raycaster::calculateRayBoxIntersectionDistance(const Ray& ray, const
 		Final formula: distance = (point - origin) * (1 / direction)
 	*/
 
-	if(ray.getDirection() == fvec3(0.0f))
+	if(ray->getDirection() == fvec3(0.0f))
 	{
 		return -1.0f;
 	}
 
-	const fvec3 inverseRayDirection = (fvec3(1.0f) / ray.getDirection());
+	const fvec3 inverseRayDirection = (fvec3(1.0f) / ray->getDirection());
 
-	float minX = (box.getPosition().x - box.getLeft());
-	float maxX = (box.getPosition().x + box.getRight());
-	float minY = (box.getPosition().y - box.getBottom());
-	float maxY = (box.getPosition().y + box.getTop());
-	float minZ = (box.getPosition().z - box.getBack());
-	float maxZ = (box.getPosition().z + box.getFront());
+	float minX = (box->getPosition().x - box->getLeft());
+	float maxX = (box->getPosition().x + box->getRight());
+	float minY = (box->getPosition().y - box->getBottom());
+	float maxY = (box->getPosition().y + box->getTop());
+	float minZ = (box->getPosition().z - box->getBack());
+	float maxZ = (box->getPosition().z + box->getFront());
 
-	float minDistanceX = ((minX - ray.getPosition().x) * inverseRayDirection.x);
-	float maxDistanceX = ((maxX - ray.getPosition().x) * inverseRayDirection.x);
-	float minDistanceY = ((minY - ray.getPosition().y) * inverseRayDirection.y);
-	float maxDistanceY = ((maxY - ray.getPosition().y) * inverseRayDirection.y);
-	float minDistanceZ = ((minZ - ray.getPosition().z) * inverseRayDirection.z);
-	float maxDistanceZ = ((maxZ - ray.getPosition().z) * inverseRayDirection.z);
+	float minDistanceX = ((minX - ray->getPosition().x) * inverseRayDirection.x);
+	float maxDistanceX = ((maxX - ray->getPosition().x) * inverseRayDirection.x);
+	float minDistanceY = ((minY - ray->getPosition().y) * inverseRayDirection.y);
+	float maxDistanceY = ((maxY - ray->getPosition().y) * inverseRayDirection.y);
+	float minDistanceZ = ((minZ - ray->getPosition().z) * inverseRayDirection.z);
+	float maxDistanceZ = ((maxZ - ray->getPosition().z) * inverseRayDirection.z);
 
 	float minIntersectionDistance = max(max(min(minDistanceX, maxDistanceX), min(minDistanceY, maxDistanceY)), min(minDistanceZ, maxDistanceZ));
 	float maxIntersectionDistance = min(min(max(minDistanceX, maxDistanceX), max(minDistanceY, maxDistanceY)), max(minDistanceZ, maxDistanceZ));
@@ -131,7 +136,7 @@ const float Raycaster::calculateRayBoxIntersectionDistance(const Ray& ray, const
 	return minIntersectionDistance;
 }
 
-const Ray Raycaster::_calculateCursorRay(const ivec2& cursorPosition) const
+const shared_ptr<Ray> Raycaster::_calculateCursorRay(const ivec2& cursorPosition) const
 {
 	fvec2 screenCoords = Tools::convertFromScreenCoords(cursorPosition);
 	fvec2 ndcCoords = Math::convertToNdc(screenCoords);
@@ -139,7 +144,7 @@ const Ray Raycaster::_calculateCursorRay(const ivec2& cursorPosition) const
 	fvec4 viewCoords = _convertToViewSpace(clipCoords);
 	fvec3 worldCoords = _convertToWorldSpace(viewCoords);
 
-	return Ray(_camera->getPosition(), Math::normalize(worldCoords));
+	return make_shared<Ray>(_camera->getPosition(), Math::normalize(worldCoords));
 }
 
 const fvec4 Raycaster::_convertToViewSpace(const fvec4& clipCoords) const
@@ -158,19 +163,18 @@ const fvec3 Raycaster::_convertToWorldSpace(const fvec4& viewCoords) const
 	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }
 
-const fvec3 Raycaster::calculatePointOnRay(const Ray& ray, float distance) const
+const fvec3 Raycaster::calculatePointOnRay(const shared_ptr<Ray> ray, float distance) const
 {
-	return (ray.getPosition() + (ray.getDirection() * distance));
+	return (ray->getPosition() + (ray->getDirection() * distance));
 }
 
 const bool Raycaster::_isUnderTerrain(float distance) const
 {
-	auto scaledRay = calculatePointOnRay(_cursorRay, distance);
+	const auto pointOnRay = calculatePointOnRay(_cursorRay, distance);
+	const auto selectedTerrain = _terrainManager->getSelectedEntity();
+	const auto terrainHeight = _terrainManager->getPixelHeight(selectedTerrain->getId(), pointOnRay.x + (selectedTerrain->getSize() * 0.5f), pointOnRay.z + (selectedTerrain->getSize() * 0.5f));
 
-	auto selectedTerrain = _terrainManager->getSelectedEntity();
-	float terrainHeight = _terrainManager->getPixelHeight(selectedTerrain->getId(), scaledRay.x + (selectedTerrain->getSize() * 0.5f), scaledRay.z + (selectedTerrain->getSize() * 0.5f));
-
-	return (scaledRay.y < terrainHeight);
+	return (pointOnRay.y < terrainHeight);
 }
 
 const fvec3 Raycaster::_calculateTerrainPoint() const

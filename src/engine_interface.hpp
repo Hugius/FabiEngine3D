@@ -738,20 +738,22 @@ public:
 	const bool collision_checkCameraWithAnyDirection(Direction direction) const;
 	const bool collision_checkCameraWithEntitiesDirection(const string& id, Direction direction) const;
 
-	void raycast_setTerrainPointingEnabled(bool value);
-	void raycast_setTerrainPointingDistance(float value);
-	void raycast_setTerrainPointingPrecision(float value);
+	void raycast_setTerrainIntersectionEnabled(bool value);
+	void raycast_setTerrainIntersectionDistance(float value);
+	void raycast_setTerrainIntersectionPrecision(float value);
+	void raycast_setAabbIntersectionEnabled(bool value);
 
 	const string& raycast_getClosestAabbId() const;
 	const fvec3& raycast_getCursorRayPosition() const;
 	const fvec3& raycast_getCursorRayDirection() const;
 	const fvec3& raycast_getPointOnTerrain() const;
-	const float raycast_getTerrainPointingDistance() const;
-	const float raycast_getTerrainPointingPrecision() const;
+	const float raycast_getTerrainIntersectionDistance() const;
+	const float raycast_getTerrainIntersectionPrecision() const;
 	const float raycast_getDistanceToTerrain();
 	const float raycast_getDistanceToAabb(const string& id);
 	const bool raycast_isPointOnTerrainValid() const;
-	const bool raycast_isTerrainPointingEnabled() const;
+	const bool raycast_isTerrainIntersectionEnabled() const;
+	const bool raycast_isAabbIntersectionEnabled() const;
 
 	void gfx_setAmbientLightingEnabled(bool value);
 	void gfx_setDirectionalLightingEnabled(bool value);

@@ -8,7 +8,6 @@ class RaycastCalculator final
 public:
 	RaycastCalculator();
 
-	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 	void update(const ivec2& cursorPosition);
 
@@ -25,6 +24,5 @@ private:
 
 	shared_ptr<Ray> _cursorRay = nullptr;
 
-	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 };

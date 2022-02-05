@@ -11,11 +11,6 @@ Camera::Camera()
 	reset();
 }
 
-void Camera::inject(shared_ptr<RenderStorage> renderStorage)
-{
-	_renderStorage = renderStorage;
-}
-
 void Camera::inject(shared_ptr<RenderWindow> renderWindow)
 {
 	_renderWindow = renderWindow;

@@ -1,6 +1,4 @@
 #include "raycast_calculator.hpp"
-#include "render_storage.hpp"
-#include "configuration.hpp"
 #include "tools.hpp"
 #include "mathematics.hpp"
 
@@ -16,11 +14,6 @@ void RaycastCalculator::update(const ivec2& cursorPosition)
 	_cursorRay = _calculateCursorRay(cursorPosition);
 }
 
-void RaycastCalculator::inject(shared_ptr<RenderStorage> renderStorage)
-{
-	_renderStorage = renderStorage;
-}
-
 void RaycastCalculator::inject(shared_ptr<Camera> camera)
 {
 	_camera = camera;
@@ -33,27 +26,29 @@ const shared_ptr<Ray> RaycastCalculator::getCursorRay() const
 
 const shared_ptr<Ray> RaycastCalculator::_calculateCursorRay(const ivec2& cursorPosition) const
 {
-	fvec2 screenCoords = Tools::convertFromScreenCoords(cursorPosition);
-	fvec2 ndcCoords = Math::convertToNdc(screenCoords);
-	fvec4 clipCoords = fvec4(ndcCoords.x, ndcCoords.y, -1.0f, 1.0f);
-	fvec4 viewCoords = _convertToViewSpace(clipCoords);
-	fvec3 worldCoords = _convertToWorldSpace(viewCoords);
+	const auto screenCoords = Tools::convertFromScreenCoords(cursorPosition);
+	const auto ndcCoords = Math::convertToNdc(screenCoords);
+	const auto clipCoords = fvec4(ndcCoords.x, ndcCoords.y, -1.0f, 1.0f);
+	const auto viewCoords = _convertToViewSpace(clipCoords);
+	const auto worldCoords = _convertToWorldSpace(viewCoords);
 
 	return make_shared<Ray>(_camera->getPosition(), Math::normalize(worldCoords));
 }
 
 const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4& clipCoords) const
 {
-	auto invertedProjection = Math::invertMatrix(_camera->getProjection());
-	auto viewCoords = (invertedProjection * clipCoords);
+	const auto invertedProjection = Math::invertMatrix(_camera->getProjection());
+
+	const auto viewCoords = (invertedProjection * clipCoords);
 
 	return fvec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
 const fvec3 RaycastCalculator::_convertToWorldSpace(const fvec4& viewCoords) const
 {
-	auto invertedView = Math::invertMatrix(_camera->getView());
-	auto worldCoords = (invertedView * viewCoords);
+	const auto invertedView = Math::invertMatrix(_camera->getView());
+
+	const auto worldCoords = (invertedView * viewCoords);
 
 	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }

@@ -202,7 +202,7 @@ void ScriptInterpreter::unload()
 	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);
 	_fe3d->collision_setCameraTerrainResponseEnabled(false);
 
-	_fe3d->raycast_setTerrainPointingEnabled(false);
+	_fe3d->raycast_setTerrainIntersectionEnabled(false);
 
 	_fe3d->gfx_setAntiAliasingEnabled(false);
 	_fe3d->gfx_setAmbientLightingEnabled(false);

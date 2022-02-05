@@ -12,23 +12,25 @@ public:
 	void inject(shared_ptr<RaycastCalculator> raycastCalculator);
 	void inject(shared_ptr<TerrainEntityManager> terrainManager);
 	void inject(shared_ptr<AabbEntityManager> aabbManager);
-	void setTerrainPointingEnabled(bool value);
-	void setTerrainPointingDistance(float distance);
-	void setTerrainPointingPrecision(float precision);
+	void setTerrainIntersectionEnabled(bool value);
+	void setTerrainIntersectionDistance(float distance);
+	void setTerrainIntersectionPrecision(float precision);
+	void setAabbIntersectionEnabled(bool value);
 
 	const string& getClosestAabbId() const;
 
-	const fvec3& getTerrainPoint() const;
+	const fvec3& getPointOnTerrain() const;
 
-	const float getTerrainPointingDistance() const;
-	const float getTerrainPointingPrecision() const;
+	const float getTerrainIntersectionDistance() const;
+	const float getTerrainIntersectionPrecision() const;
 	const float getDistanceToTerrain() const;
 	const float getDistanceToAabb(const string& id) const;
 
-	const bool isTerrainPointingEnabled() const;
+	const bool isTerrainIntersectionEnabled() const;
+	const bool isAabbIntersectionEnabled() const;
 
 private:
-	const fvec3 _calculateTerrainPoint() const;
+	const fvec3 _calculatePointOnTerrain() const;
 
 	const float _calculateDistanceToTerrain() const;
 	const float _calculateDistanceToAabb(shared_ptr<AabbEntity> entity) const;
@@ -38,13 +40,14 @@ private:
 
 	string _closestAabbId = "";
 
-	fvec3 _terrainPoint = fvec3(0.0f);
+	fvec3 _pointOnTerrain = fvec3(0.0f);
 
-	float _terrainPointingDistance = 0.0f;
-	float _terrainPointingPrecision = 0.0f;
+	float _terrainIntersectionDistance = 0.0f;
+	float _terrainIntersectionPrecision = 0.0f;
 	float _distanceToTerrain = 0.0f;
 
-	bool _isTerrainPointingEnabled = false;
+	bool _isTerrainIntersectionEnabled = false;
+	bool _isAabbIntersectionEnabled = false;
 
 	unordered_map<string, float> _aabbIntersections;
 

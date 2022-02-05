@@ -58,39 +58,51 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_is_terrain_pointing_enabled")
+	else if(functionName == "fe3d:raycast_is_terrain_intersection_enabled")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dTerrain())
 			{
-				const auto result = _fe3d->raycast_isTerrainPointingEnabled();
+				const auto result = _fe3d->raycast_isTerrainIntersectionEnabled();
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:raycast_get_terrain_pointing_distance")
+	else if(functionName == "fe3d:raycast_get_terrain_intersection_distance")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dTerrain())
 			{
-				const auto result = _fe3d->raycast_getTerrainPointingDistance();
+				const auto result = _fe3d->raycast_getTerrainIntersectionDistance();
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:raycast_get_terrain_pointing_precision")
+	else if(functionName == "fe3d:raycast_get_terrain_intersection_precision")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dTerrain())
 			{
-				const auto result = _fe3d->raycast_getTerrainPointingPrecision();
+				const auto result = _fe3d->raycast_getTerrainIntersectionPrecision();
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_is_aabb_intersection_enabled")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				const auto result = _fe3d->raycast_isAabbIntersectionEnabled();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}

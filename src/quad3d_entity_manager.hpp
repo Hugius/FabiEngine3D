@@ -3,6 +3,7 @@
 #include "base_entity_manager.hpp"
 #include "camera.hpp"
 #include "quad3d_entity.hpp"
+#include "render_storage.hpp"
 
 #include <unordered_map>
 

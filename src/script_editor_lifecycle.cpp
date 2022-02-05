@@ -13,6 +13,8 @@ void ScriptEditor::_load()
 	_fe3d->camera_setYaw(270.0f);
 	_fe3d->camera_setPitch(0.0f);
 
+	_fe3d->raycast_setAabbIntersectionEnabled(true);
+
 	_fe3d->gfx_setBloomEnabled(true);
 	_fe3d->gfx_setBloomType(BloomType::PARTS);
 	_fe3d->gfx_setBloomIntensity(0.95f);
@@ -22,6 +24,10 @@ void ScriptEditor::_load()
 
 void ScriptEditor::_unload()
 {
+	_fe3d->camera_reset();
+
+	_fe3d->raycast_setAabbIntersectionEnabled(false);
+
 	_fe3d->gfx_setBloomEnabled(false);
 	_fe3d->gfx_setBloomType(BloomType::EVERYTHING);
 	_fe3d->gfx_setBloomIntensity(0.0f);

@@ -6,14 +6,14 @@ using std::make_pair;
 
 void RaycastIntersector::update()
 {
-	if(_isTerrainPointingEnabled && (_terrainManager->getSelectedEntity() != nullptr))
+	if(_isTerrainIntersectionEnabled && (_terrainManager->getSelectedEntity() != nullptr))
 	{
-		_terrainPoint = _calculateTerrainPoint();
+		_pointOnTerrain = _calculatePointOnTerrain();
 		_distanceToTerrain = _calculateDistanceToTerrain();
 	}
 	else
 	{
-		_terrainPoint = fvec3(0.0f);
+		_pointOnTerrain = fvec3(0.0f);
 		_distanceToTerrain = -1.0f;
 	}
 
@@ -22,15 +22,15 @@ void RaycastIntersector::update()
 
 	for(const auto& [key, entity] : _aabbManager->getEntities())
 	{
-		if(!entity->isRaycastResponsive())
+		if(!_isAabbIntersectionEnabled || !entity->isRaycastResponsive())
 		{
 			_aabbIntersections.insert(make_pair(entity->getId(), -1.0f));
 			continue;
 		}
 
-		float distanceToAabb = _calculateDistanceToAabb(entity);
+		auto distanceToAabb = _calculateDistanceToAabb(entity);
 
-		if(_isTerrainPointingEnabled)
+		if(_isTerrainIntersectionEnabled)
 		{
 			if(_distanceToTerrain != -1.0f)
 			{
@@ -71,19 +71,24 @@ void RaycastIntersector::inject(shared_ptr<AabbEntityManager> aabbManager)
 	_aabbManager = aabbManager;
 }
 
-void RaycastIntersector::setTerrainPointingEnabled(bool value)
+void RaycastIntersector::setTerrainIntersectionEnabled(bool value)
 {
-	_isTerrainPointingEnabled = value;
+	_isTerrainIntersectionEnabled = value;
 }
 
-void RaycastIntersector::setTerrainPointingDistance(float distance)
+void RaycastIntersector::setTerrainIntersectionDistance(float distance)
 {
-	_terrainPointingDistance = distance;
+	_terrainIntersectionDistance = distance;
 }
 
-void RaycastIntersector::setTerrainPointingPrecision(float precision)
+void RaycastIntersector::setTerrainIntersectionPrecision(float precision)
 {
-	_terrainPointingPrecision = precision;
+	_terrainIntersectionPrecision = precision;
+}
+
+void RaycastIntersector::setAabbIntersectionEnabled(bool value)
+{
+	_isAabbIntersectionEnabled = value;
 }
 
 const string& RaycastIntersector::getClosestAabbId() const
@@ -91,19 +96,24 @@ const string& RaycastIntersector::getClosestAabbId() const
 	return _closestAabbId;
 }
 
-const bool RaycastIntersector::isTerrainPointingEnabled() const
+const bool RaycastIntersector::isTerrainIntersectionEnabled() const
 {
-	return _isTerrainPointingEnabled;
+	return _isTerrainIntersectionEnabled;
 }
 
-const float RaycastIntersector::getTerrainPointingDistance() const
+const bool RaycastIntersector::isAabbIntersectionEnabled() const
 {
-	return _terrainPointingDistance;
+	return _isAabbIntersectionEnabled;
 }
 
-const float RaycastIntersector::getTerrainPointingPrecision() const
+const float RaycastIntersector::getTerrainIntersectionDistance() const
 {
-	return _terrainPointingPrecision;
+	return _terrainIntersectionDistance;
+}
+
+const float RaycastIntersector::getTerrainIntersectionPrecision() const
+{
+	return _terrainIntersectionPrecision;
 }
 
 const float RaycastIntersector::getDistanceToTerrain() const
@@ -116,9 +126,9 @@ const float RaycastIntersector::getDistanceToAabb(const string& id) const
 	return _aabbIntersections.at(id);
 }
 
-const fvec3& RaycastIntersector::getTerrainPoint() const
+const fvec3& RaycastIntersector::getPointOnTerrain() const
 {
-	return _terrainPoint;
+	return _pointOnTerrain;
 }
 
 /* https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms */
@@ -176,15 +186,15 @@ const bool RaycastIntersector::_isUnderTerrain(float distance) const
 	return (pointOnRay.y < terrainHeight);
 }
 
-const fvec3 RaycastIntersector::_calculateTerrainPoint() const
+const fvec3 RaycastIntersector::_calculatePointOnTerrain() const
 {
 	float distance = 0.0f;
 
-	while(distance < _terrainPointingDistance)
+	while(distance < _terrainIntersectionDistance)
 	{
 		if(_isUnderTerrain(distance))
 		{
-			distance -= (_terrainPointingPrecision * 0.5f);
+			distance -= (_terrainIntersectionPrecision * 0.5f);
 
 			fvec3 endPoint = _raycastCalculator->calculatePointOnRay(_raycastCalculator->getCursorRay(), distance);
 
@@ -201,7 +211,7 @@ const fvec3 RaycastIntersector::_calculateTerrainPoint() const
 		}
 		else
 		{
-			distance += _terrainPointingPrecision;
+			distance += _terrainIntersectionPrecision;
 		}
 	}
 
@@ -210,7 +220,7 @@ const fvec3 RaycastIntersector::_calculateTerrainPoint() const
 
 const float RaycastIntersector::_calculateDistanceToTerrain() const
 {
-	return Math::calculateDistance(_raycastCalculator->getCursorRay()->getPosition(), _terrainPoint);
+	return Math::calculateDistance(_raycastCalculator->getCursorRay()->getPosition(), _pointOnTerrain);
 }
 
 const float RaycastIntersector::_calculateDistanceToAabb(shared_ptr<AabbEntity> entity) const

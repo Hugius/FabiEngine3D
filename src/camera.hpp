@@ -1,14 +1,16 @@
 #pragma once
 
-#include "render_storage.hpp"
 #include "render_window.hpp"
+
+#include <memory>
+
+using std::shared_ptr;
 
 class Camera final
 {
 public:
 	Camera();
 
-	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<RenderWindow> renderWindow);
 	void reset();
 	void update(const ivec2& lastCursorPosition);
@@ -114,6 +116,5 @@ private:
 	bool _mustCenterCursor = false;
 	bool _isCursorBeingCentered = false;
 
-	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<RenderWindow> _renderWindow = nullptr;
 };

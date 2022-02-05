@@ -132,18 +132,18 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->collision_setCameraTerrainResponseEnabled(false);
 		_fe3d->collision_setCameraTerrainResponseHeight(0.0f);
 		_fe3d->collision_setCameraTerrainResponseSpeed(0.0f);
-		_fe3d->raycast_setTerrainPointingEnabled(false);
-		_fe3d->raycast_setTerrainPointingDistance(0.0f);
-		_fe3d->raycast_setTerrainPointingPrecision(0.0f);
+		_fe3d->raycast_setTerrainIntersectionEnabled(false);
+		_fe3d->raycast_setTerrainIntersectionDistance(0.0f);
+		_fe3d->raycast_setTerrainIntersectionPrecision(0.0f);
 	}
 	else
 	{
 		_fe3d->collision_setCameraTerrainResponseEnabled(true);
 		_fe3d->collision_setCameraTerrainResponseHeight(1.0f);
 		_fe3d->collision_setCameraTerrainResponseSpeed(_editorSpeed);
-		_fe3d->raycast_setTerrainPointingEnabled(true);
-		_fe3d->raycast_setTerrainPointingDistance(Math::calculateDistance(fvec3(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId())), fvec3(0.0f)));
-		_fe3d->raycast_setTerrainPointingPrecision(0.1f);
+		_fe3d->raycast_setTerrainIntersectionEnabled(true);
+		_fe3d->raycast_setTerrainIntersectionDistance(Math::calculateDistance(fvec3(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId())), fvec3(0.0f)));
+		_fe3d->raycast_setTerrainIntersectionPrecision(0.1f);
 	}
 }
 

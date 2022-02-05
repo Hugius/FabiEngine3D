@@ -82,9 +82,7 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_pointlightEntityManager);
 	_masterRenderer->inject(_spotlightEntityManager);
 	_masterRenderer->inject(_reflectionEntityManager);
-	_camera->inject(_renderStorage);
 	_camera->inject(_renderWindow);
-	_raycastCalculator->inject(_renderStorage);
 	_raycastCalculator->inject(_camera);
 	_raycastIntersector->inject(_raycastCalculator);
 	_raycastIntersector->inject(_terrainEntityManager);

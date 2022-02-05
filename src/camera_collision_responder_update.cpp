@@ -1,6 +1,6 @@
-#include "camera_collision_handler.hpp"
+#include "camera_collision_responder.hpp"
 
-void CameraCollisionHandler::update()
+void CameraCollisionResponder::update()
 {
 	_isCameraUnderTerrain = false;
 	if(_isCameraTerrainResponseEnabled)

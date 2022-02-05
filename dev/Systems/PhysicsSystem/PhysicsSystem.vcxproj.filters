@@ -4,12 +4,6 @@
     <Filter Include="Collision">
       <UniqueIdentifier>{ca41db49-1882-4403-97a1-1182e8d0d208}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Collision\Detection">
-      <UniqueIdentifier>{e5a99923-9813-4e5a-a818-3f58048fdabb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Collision\Response">
-      <UniqueIdentifier>{08df31da-49f1-4652-a099-82c7bef88d22}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{e615d742-8e80-49bf-9a91-1f6319243cc6}</UniqueIdentifier>
     </Filter>
@@ -19,11 +13,17 @@
     <Filter Include="Raycast">
       <UniqueIdentifier>{38c4b353-998f-4065-9e6b-e3620964be85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Raycast\Intersection">
-      <UniqueIdentifier>{03241045-adc3-428d-be86-ce814b4ecabf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Raycast\Calculator">
       <UniqueIdentifier>{55b1e258-932e-4d0b-99bc-4ecb1d4fc312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Raycast\Intersector">
+      <UniqueIdentifier>{03241045-adc3-428d-be86-ce814b4ecabf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision\Responder">
+      <UniqueIdentifier>{08df31da-49f1-4652-a099-82c7bef88d22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision\Detector">
+      <UniqueIdentifier>{e5a99923-9813-4e5a-a818-3f58048fdabb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -31,13 +31,13 @@
       <Filter>Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\camera_collision_detector.cpp">
-      <Filter>Collision\Detection</Filter>
+      <Filter>Collision\Detector</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\camera_collision_handler_update.cpp">
-      <Filter>Collision\Response</Filter>
+    <ClCompile Include="..\..\..\src\camera_collision_responder_update.cpp">
+      <Filter>Collision\Responder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\camera_collision_handler_misc.cpp">
-      <Filter>Collision\Response</Filter>
+    <ClCompile Include="..\..\..\src\camera_collision_responder_misc.cpp">
+      <Filter>Collision\Responder</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\camera_lifecycle.cpp">
       <Filter>Camera</Filter>
@@ -46,7 +46,7 @@
       <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\raycast_intersector.cpp">
-      <Filter>Raycast\Intersection</Filter>
+      <Filter>Raycast\Intersector</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\raycast_calculator.cpp">
       <Filter>Raycast\Calculator</Filter>
@@ -60,16 +60,16 @@
       <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\camera_collision_detector.hpp">
-      <Filter>Collision\Detection</Filter>
+      <Filter>Collision\Detector</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\camera_collision_handler.hpp">
-      <Filter>Collision\Response</Filter>
+    <ClInclude Include="..\..\..\src\camera_collision_responder.hpp">
+      <Filter>Collision\Responder</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\camera.hpp">
       <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\raycast_intersector.hpp">
-      <Filter>Raycast\Intersection</Filter>
+      <Filter>Raycast\Intersector</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\raycast_calculator.hpp">
       <Filter>Raycast\Calculator</Filter>

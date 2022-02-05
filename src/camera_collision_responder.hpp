@@ -7,10 +7,10 @@
 #include "box.hpp"
 #include "direction_order.hpp"
 
-class CameraCollisionHandler final
+class CameraCollisionResponder final
 {
 public:
-	CameraCollisionHandler();
+	CameraCollisionResponder();
 
 	void inject(shared_ptr<CameraCollisionDetector> cameraCollisionDetector);
 	void inject(shared_ptr<TerrainEntityManager> terrainManager);

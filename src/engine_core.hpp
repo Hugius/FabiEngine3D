@@ -22,7 +22,7 @@
 #include "text2d_entity_manager.hpp"
 #include "raycast_calculator.hpp"
 #include "raycast_intersector.hpp"
-#include "camera_collision_handler.hpp"
+#include "camera_collision_responder.hpp"
 #include "timer.hpp"
 #include "sound2d_manager.hpp"
 #include "sound3d_manager.hpp"
@@ -77,7 +77,7 @@ public:
 	const shared_ptr<RaycastCalculator> getRaycastCalculator() const;
 	const shared_ptr<RaycastIntersector> getRaycastIntersector() const;
 	const shared_ptr<CameraCollisionDetector> getCameraCollisionDetector() const;
-	const shared_ptr<CameraCollisionHandler> getCameraCollisionHandler() const;
+	const shared_ptr<CameraCollisionResponder> getCameraCollisionResponder() const;
 	const shared_ptr<Sound2dManager> getSound2dManager() const;
 	const shared_ptr<Sound3dManager> getSound3dManager() const;
 	const shared_ptr<Sound2dPlayer> getSound2dPlayer() const;
@@ -118,7 +118,7 @@ private:
 	shared_ptr<RaycastCalculator> _raycastCalculator = nullptr;
 	shared_ptr<RaycastIntersector> _raycastIntersector = nullptr;
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
-	shared_ptr<CameraCollisionHandler> _cameraCollisionHandler = nullptr;
+	shared_ptr<CameraCollisionResponder> _cameraCollisionResponder = nullptr;
 	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
 	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
 	shared_ptr<Sound2dPlayer> _sound2dPlayer = nullptr;

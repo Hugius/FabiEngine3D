@@ -1,94 +1,94 @@
-#include "camera_collision_handler.hpp"
+#include "camera_collision_responder.hpp"
 #include "logger.hpp"
 
-CameraCollisionHandler::CameraCollisionHandler()
+CameraCollisionResponder::CameraCollisionResponder()
 {
 	_cameraBox = make_shared<Box>(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 }
 
-void CameraCollisionHandler::inject(shared_ptr<TerrainEntityManager> terrainManager)
+void CameraCollisionResponder::inject(shared_ptr<TerrainEntityManager> terrainManager)
 {
 	_terrainManager = terrainManager;
 }
 
-void CameraCollisionHandler::inject(shared_ptr<AabbEntityManager> aabbManager)
+void CameraCollisionResponder::inject(shared_ptr<AabbEntityManager> aabbManager)
 {
 	_aabbManager = aabbManager;
 }
 
-void CameraCollisionHandler::inject(shared_ptr<Camera> camera)
+void CameraCollisionResponder::inject(shared_ptr<Camera> camera)
 {
 	_camera = camera;
 }
 
-void CameraCollisionHandler::inject(shared_ptr<CameraCollisionDetector> cameraCollisionDetector)
+void CameraCollisionResponder::inject(shared_ptr<CameraCollisionDetector> cameraCollisionDetector)
 {
 	_cameraCollisionDetector = cameraCollisionDetector;
 }
 
-void CameraCollisionHandler::setCameraBox(const shared_ptr<Box> value)
+void CameraCollisionResponder::setCameraBox(const shared_ptr<Box> value)
 {
 	_cameraBox = value;
 }
 
-void CameraCollisionHandler::setCameraAabbResponseEnabled(bool x, bool y, bool z)
+void CameraCollisionResponder::setCameraAabbResponseEnabled(bool x, bool y, bool z)
 {
 	_isCameraAabbResponseEnabledX = x;
 	_isCameraAabbResponseEnabledY = y;
 	_isCameraAabbResponseEnabledZ = z;
 }
 
-void CameraCollisionHandler::setCameraTerrainResponseEnabled(bool value)
+void CameraCollisionResponder::setCameraTerrainResponseEnabled(bool value)
 {
 	_isCameraTerrainResponseEnabled = value;
 }
 
-void CameraCollisionHandler::setCameraTerrainResponseHeight(float value)
+void CameraCollisionResponder::setCameraTerrainResponseHeight(float value)
 {
 	_cameraTerrainResponseHeight = value;
 }
 
-void CameraCollisionHandler::setCameraTerrainResponseSpeed(float value)
+void CameraCollisionResponder::setCameraTerrainResponseSpeed(float value)
 {
 	_cameraTerrainResponseSpeed = value;
 }
 
-const float CameraCollisionHandler::getCameraTerrainResponseHeight() const
+const float CameraCollisionResponder::getCameraTerrainResponseHeight() const
 {
 	return _cameraTerrainResponseHeight;
 }
 
-const float CameraCollisionHandler::getCameraTerrainResponseSpeed() const
+const float CameraCollisionResponder::getCameraTerrainResponseSpeed() const
 {
 	return _cameraTerrainResponseSpeed;
 }
 
-const bool CameraCollisionHandler::isCameraUnderTerrain() const
+const bool CameraCollisionResponder::isCameraUnderTerrain() const
 {
 	return _isCameraUnderTerrain;
 }
 
-const bool CameraCollisionHandler::isCameraAabbResponseEnabledX() const
+const bool CameraCollisionResponder::isCameraAabbResponseEnabledX() const
 {
 	return _isCameraAabbResponseEnabledX;
 }
 
-const bool CameraCollisionHandler::isCameraAabbResponseEnabledY() const
+const bool CameraCollisionResponder::isCameraAabbResponseEnabledY() const
 {
 	return _isCameraAabbResponseEnabledY;
 }
 
-const bool CameraCollisionHandler::isCameraAabbResponseEnabledZ() const
+const bool CameraCollisionResponder::isCameraAabbResponseEnabledZ() const
 {
 	return _isCameraAabbResponseEnabledZ;
 }
 
-const bool CameraCollisionHandler::isCameraTerrainResponseEnabled() const
+const bool CameraCollisionResponder::isCameraTerrainResponseEnabled() const
 {
 	return _isCameraTerrainResponseEnabled;
 }
 
-const bool CameraCollisionHandler::_handleCollision(Direction direction) const
+const bool CameraCollisionResponder::_handleCollision(Direction direction) const
 {
 	for(const auto& [key, aabb] : _aabbManager->getEntities())
 	{

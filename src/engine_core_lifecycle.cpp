@@ -36,7 +36,7 @@ EngineCore::EngineCore()
 	_camera = make_shared<Camera>();
 	_raycastCalculator = make_shared<RaycastCalculator>();
 	_raycastIntersector = make_shared<RaycastIntersector>();
-	_cameraCollisionHandler = make_shared<CameraCollisionHandler>();
+	_cameraCollisionResponder = make_shared<CameraCollisionResponder>();
 	_cameraCollisionDetector = make_shared<CameraCollisionDetector>();
 	_networkingServer = make_shared<NetworkingServer>();
 	_networkingClient = make_shared<NetworkingClient>();
@@ -87,10 +87,10 @@ EngineCore::EngineCore()
 	_raycastIntersector->inject(_raycastCalculator);
 	_raycastIntersector->inject(_terrainEntityManager);
 	_raycastIntersector->inject(_aabbEntityManager);
-	_cameraCollisionHandler->inject(_terrainEntityManager);
-	_cameraCollisionHandler->inject(_aabbEntityManager);
-	_cameraCollisionHandler->inject(_camera);
-	_cameraCollisionHandler->inject(_cameraCollisionDetector);
+	_cameraCollisionResponder->inject(_terrainEntityManager);
+	_cameraCollisionResponder->inject(_aabbEntityManager);
+	_cameraCollisionResponder->inject(_camera);
+	_cameraCollisionResponder->inject(_cameraCollisionDetector);
 	_sound2dManager->inject(_audioLoader);
 	_sound3dManager->inject(_audioLoader);
 	_sound2dPlayer->inject(_sound2dManager);
@@ -261,7 +261,7 @@ void EngineCore::update()
 	_camera->update(lastCursorPosition);
 	_raycastCalculator->update(_fe3d->misc_getCursorPositionRelativeToViewport());
 	_raycastIntersector->update();
-	_cameraCollisionHandler->update();
+	_cameraCollisionResponder->update();
 	_camera->updateMatrices();
 	_timer->stopDeltaPart();
 

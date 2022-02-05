@@ -135,9 +135,9 @@ const shared_ptr<CameraCollisionDetector> EngineCore::getCameraCollisionDetector
 	return _cameraCollisionDetector;
 }
 
-const shared_ptr<CameraCollisionHandler> EngineCore::getCameraCollisionHandler() const
+const shared_ptr<CameraCollisionResponder> EngineCore::getCameraCollisionResponder() const
 {
-	return _cameraCollisionHandler;
+	return _cameraCollisionResponder;
 }
 
 const shared_ptr<Sound2dManager> EngineCore::getSound2dManager() const

@@ -154,33 +154,36 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			}
 		}
 	}
-	/*else if(functionName == "fe3d:raycast_into_model")
+	else if(functionName == "fe3d:raycast_get_closest_model")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
+		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			const auto aabbId = _fe3d->raycast_getClosestAabbId();
 			string result = "";
-			auto foundAabbId = _fe3d->raycast_checkCursorInEntities(args[0]->getString(), args[2]->getBoolean()).first;
 
-			if(!foundAabbId.empty())
+			if(!aabbId.empty())
 			{
-				if(_fe3d->aabb_hasParent(foundAabbId) && (_fe3d->aabb_getParentEntityType(foundAabbId) == AabbParentEntityType::MODEL))
+				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					if(args[1]->getString().empty())
+					if(_fe3d->aabb_getParentEntityType(aabbId) == AabbParentEntityType::MODEL)
 					{
-						result = _fe3d->aabb_getParentEntityId(foundAabbId);
-					}
-					else
-					{
-						string partId = foundAabbId;
-						reverse(partId.begin(), partId.end());
-						partId = partId.substr(0, partId.find('@'));
-						reverse(partId.begin(), partId.end());
-
-						if(partId == args[1]->getString())
+						if(args[0]->getString().empty())
 						{
-							result = _fe3d->aabb_getParentEntityId(foundAabbId);
+							result = _fe3d->aabb_getParentEntityId(aabbId);
+						}
+						else
+						{
+							auto partId = aabbId;
+							reverse(partId.begin(), partId.end());
+							partId = partId.substr(0, partId.find('@'));
+							reverse(partId.begin(), partId.end());
+
+							if(partId == args[1]->getString())
+							{
+								result = _fe3d->aabb_getParentEntityId(aabbId);
+							}
 						}
 					}
 				}
@@ -189,232 +192,93 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_model_distance")
+	else if(functionName == "fe3d:raycast_get_closest_quad3d")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			float result = -1.0f;
-			auto intersection = _fe3d->raycast_checkCursorInEntities(args[0]->getString(), args[2]->getBoolean());
-			string foundAabbId = intersection.first;
-			float foundDistance = intersection.second;
+			const auto aabbId = _fe3d->raycast_getClosestAabbId();
+			string result = "";
 
-			if(!foundAabbId.empty())
+			if(!aabbId.empty())
 			{
-				if(_fe3d->aabb_hasParent(foundAabbId) && (_fe3d->aabb_getParentEntityType(foundAabbId) == AabbParentEntityType::MODEL))
+				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					if(args[1]->getString().empty())
+					if(_fe3d->aabb_getParentEntityType(aabbId) == AabbParentEntityType::QUAD3D)
 					{
-						result = foundDistance;
-					}
-					else
-					{
-						string partId = foundAabbId;
-						reverse(partId.begin(), partId.end());
-						partId = partId.substr(0, partId.find('@'));
-						reverse(partId.begin(), partId.end());
-
-						if(partId == args[1]->getString())
-						{
-							result = foundDistance;
-						}
+						result = _fe3d->aabb_getParentEntityId(aabbId);
 					}
 				}
 			}
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_models")
+	else if(functionName == "fe3d:raycast_get_closest_text3d")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			const auto aabbId = _fe3d->raycast_getClosestAabbId();
 			string result = "";
-			auto foundAabbId = _fe3d->raycast_checkCursorInAny().first;
 
-			if(!foundAabbId.empty())
+			if(!aabbId.empty())
 			{
-				if(_fe3d->aabb_hasParent(foundAabbId) && (_fe3d->aabb_getParentEntityType(foundAabbId) == AabbParentEntityType::MODEL))
+				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					result = _fe3d->aabb_getParentEntityId(foundAabbId);
+					if(_fe3d->aabb_getParentEntityType(aabbId) == AabbParentEntityType::TEXT3D)
+					{
+						result = _fe3d->aabb_getParentEntityId(aabbId);
+					}
 				}
 			}
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_models_distance")
+	else if(functionName == "fe3d:raycast_get_distance_to_model")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			float result = -1.0f;
-			auto intersection = _fe3d->raycast_checkCursorInAny();
-
-			if(!intersection.first.empty())
-			{
-				if(_fe3d->aabb_hasParent(intersection.first) && (_fe3d->aabb_getParentEntityType(intersection.first) == AabbParentEntityType::MODEL))
-				{
-					result = intersection.second;
-				}
-			}
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}
-	else if(functionName == "fe3d:raycast_into_quad3d")
-	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			string result = "";
-			auto foundAabbId = _fe3d->raycast_checkCursorInEntities(args[0]->getString(), args[1]->getBoolean()).first;
-
-			if(!foundAabbId.empty())
+			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_fe3d->aabb_hasParent(foundAabbId) && (_fe3d->aabb_getParentEntityType(foundAabbId) == AabbParentEntityType::QUAD3D))
+				if(_validateFe3dAabb(args[0]->getString() + "@" + args[1]->getString()))
 				{
-					result = _fe3d->aabb_getParentEntityId(foundAabbId);
+					const auto result = _fe3d->raycast_getDistanceToAabb(args[0]->getString() + "@" + args[1]->getString());
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 				}
 			}
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_quad3ds")
+	else if(functionName == "fe3d:raycast_get_distance_to_quad3d")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			string result = "";
-			auto foundAabbId = _fe3d->raycast_checkCursorInAny().first;
-
-			if(!foundAabbId.empty())
-			{
-				if(_fe3d->aabb_hasParent(foundAabbId) && (_fe3d->aabb_getParentEntityType(foundAabbId) == AabbParentEntityType::QUAD3D))
-				{
-					result = _fe3d->aabb_getParentEntityId(foundAabbId);
-				}
-			}
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
-		}
-	}
-	else if(functionName == "fe3d:raycast_into_quad3d_distance")
-	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			float result = -1.0f;
-			auto intersection = _fe3d->raycast_checkCursorInEntities(args[0]->getString(), args[1]->getBoolean());
-
-			if(!intersection.first.empty())
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				if(_fe3d->aabb_hasParent(intersection.first) && (_fe3d->aabb_getParentEntityType(intersection.first) == AabbParentEntityType::QUAD3D))
-				{
-					result = intersection.second;
-				}
-			}
+				const auto result = _fe3d->raycast_getDistanceToAabb(args[0]->getString());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_quad3ds_distance")
+	else if(functionName == "fe3d:raycast_get_distance_to_text3d")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			float result = -1.0f;
-			auto intersection = _fe3d->raycast_checkCursorInAny();
-
-			if(!intersection.first.empty())
-			{
-				if(_fe3d->aabb_hasParent(intersection.first) && (_fe3d->aabb_getParentEntityType(intersection.first) == AabbParentEntityType::QUAD3D))
-				{
-					result = intersection.second;
-				}
-			}
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}
-	else if(functionName == "fe3d:raycast_into_text3d")
-	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			string result = "";
-			auto foundAabbId = _fe3d->raycast_checkCursorInEntities(args[0]->getString(), args[1]->getBoolean()).first;
-
-			if(!foundAabbId.empty())
+			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
-				if(_fe3d->aabb_hasParent(foundAabbId) && (_fe3d->aabb_getParentEntityType(foundAabbId) == AabbParentEntityType::TEXT3D))
-				{
-					result = _fe3d->aabb_getParentEntityId(foundAabbId);
-				}
-			}
+				const auto result = _fe3d->raycast_getDistanceToAabb(args[0]->getString());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_text3ds")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			string result = "";
-			auto foundAabbId = _fe3d->raycast_checkCursorInAny().first;
-
-			if(!foundAabbId.empty())
-			{
-				if(_fe3d->aabb_hasParent(foundAabbId) && (_fe3d->aabb_getParentEntityType(foundAabbId) == AabbParentEntityType::TEXT3D))
-				{
-					result = _fe3d->aabb_getParentEntityId(foundAabbId);
-				}
-			}
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
-		}
-	}
-	else if(functionName == "fe3d:raycast_into_text3d_distance")
-	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			float result = -1.0f;
-			auto intersection = _fe3d->raycast_checkCursorInEntities(args[0]->getString(), args[1]->getBoolean());
-
-			if(!intersection.first.empty())
-			{
-				if(_fe3d->aabb_hasParent(intersection.first) && (_fe3d->aabb_getParentEntityType(intersection.first) == AabbParentEntityType::TEXT3D))
-				{
-					result = intersection.second;
-				}
-			}
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}
-	else if(functionName == "fe3d:raycast_into_text3ds_distance")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			float result = -1.0f;
-			auto intersection = _fe3d->raycast_checkCursorInAny();
-
-			if(!intersection.first.empty())
-			{
-				if(_fe3d->aabb_hasParent(intersection.first) && (_fe3d->aabb_getParentEntityType(intersection.first) == AabbParentEntityType::TEXT3D))
-				{
-					result = intersection.second;
-				}
-			}
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-		}
-	}*/
-
 	else
 	{
 		return false;

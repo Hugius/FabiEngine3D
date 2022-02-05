@@ -1,9 +1,9 @@
 #include "camera_collision_detector.hpp"
 
-const bool CameraCollisionDetector::checkX(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, const Box& box) const
+const bool CameraCollisionDetector::checkX(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, const shared_ptr<Box> box) const
 {
-	const auto left = box.getLeft();
-	const auto right = box.getRight();
+	const auto left = box->getLeft();
+	const auto right = box->getRight();
 	const fvec3 halfAabbSize = (aabbSize * 0.5f);
 
 	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
@@ -29,10 +29,10 @@ const bool CameraCollisionDetector::checkX(const fvec3& aabbPosition, const fvec
 	}
 }
 
-const bool CameraCollisionDetector::checkY(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, const Box& box) const
+const bool CameraCollisionDetector::checkY(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, const shared_ptr<Box> box) const
 {
-	const auto bottom = box.getBottom();
-	const auto top = box.getTop();
+	const auto bottom = box->getBottom();
+	const auto top = box->getTop();
 	const fvec3 halfAabbSize = (aabbSize * 0.5f);
 
 	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
@@ -58,10 +58,10 @@ const bool CameraCollisionDetector::checkY(const fvec3& aabbPosition, const fvec
 	}
 }
 
-const bool CameraCollisionDetector::checkZ(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, const Box& box) const
+const bool CameraCollisionDetector::checkZ(const fvec3& aabbPosition, const fvec3& aabbSize, const fvec3& boxMiddle, const fvec3& boxMiddleChange, const shared_ptr<Box> box) const
 {
-	const auto back = box.getBack();
-	const auto front = box.getFront();
+	const auto back = box->getBack();
+	const auto front = box->getFront();
 	const fvec3 halfAabbSize = (aabbSize * 0.5f);
 
 	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
@@ -87,14 +87,14 @@ const bool CameraCollisionDetector::checkZ(const fvec3& aabbPosition, const fvec
 	}
 }
 
-const bool CameraCollisionDetector::_isInside(const fvec3& aabbPosition, const fvec3& aabbHalfSize, const fvec3& boxMiddle, const Box& box) const
+const bool CameraCollisionDetector::_isInside(const fvec3& aabbPosition, const fvec3& aabbHalfSize, const fvec3& boxMiddle, const shared_ptr<Box> box) const
 {
-	const auto left = box.getLeft();
-	const auto right = box.getRight();
-	const auto bottom = box.getBottom();
-	const auto top = box.getTop();
-	const auto back = box.getBack();
-	const auto front = box.getFront();
+	const auto left = box->getLeft();
+	const auto right = box->getRight();
+	const auto bottom = box->getBottom();
+	const auto top = box->getTop();
+	const auto back = box->getBack();
+	const auto front = box->getFront();
 	bool xInsideBox = false;
 	bool yInsideBox = false;
 	bool zInsideBox = false;

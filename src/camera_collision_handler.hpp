@@ -11,12 +11,14 @@
 class CameraCollisionHandler final
 {
 public:
+	CameraCollisionHandler();
+
 	void inject(shared_ptr<CameraCollisionDetector> cameraCollisionDetector);
 	void inject(shared_ptr<TerrainEntityManager> terrainManager);
 	void inject(shared_ptr<AabbEntityManager> aabbManager);
 	void inject(shared_ptr<Camera> camera);
 	void update();
-	void setCameraBox(const Box& value);
+	void setCameraBox(const shared_ptr<Box> value);
 	void setCameraAabbResponseEnabled(bool x, bool y, bool z);
 	void setCameraTerrainResponseEnabled(bool value);
 	void setCameraTerrainResponseHeight(float value);
@@ -46,7 +48,7 @@ private:
 	bool _isCameraUnderTerrain = false;
 
 	DirectionOrder _responseDirectionOrder = DirectionOrder::XYZ;
-	Box _cameraBox = Box(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	shared_ptr<Box> _cameraBox = nullptr;
 
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
 	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;

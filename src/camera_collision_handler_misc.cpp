@@ -1,6 +1,11 @@
 #include "camera_collision_handler.hpp"
 #include "logger.hpp"
 
+CameraCollisionHandler::CameraCollisionHandler()
+{
+	_cameraBox = make_shared<Box>(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+}
+
 void CameraCollisionHandler::inject(shared_ptr<TerrainEntityManager> terrainManager)
 {
 	_terrainManager = terrainManager;
@@ -21,7 +26,7 @@ void CameraCollisionHandler::inject(shared_ptr<CameraCollisionDetector> cameraCo
 	_cameraCollisionDetector = cameraCollisionDetector;
 }
 
-void CameraCollisionHandler::setCameraBox(const Box& value)
+void CameraCollisionHandler::setCameraBox(const shared_ptr<Box> value)
 {
 	_cameraBox = value;
 }

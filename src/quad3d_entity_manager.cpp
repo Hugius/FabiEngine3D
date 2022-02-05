@@ -53,10 +53,8 @@ shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& id)
 	{
 		abort();
 	}
-	else
-	{
-		return iterator->second;
-	}
+
+	return iterator->second;
 }
 
 const unordered_map<string, shared_ptr<Quad3dEntity>>& Quad3dEntityManager::getEntities()

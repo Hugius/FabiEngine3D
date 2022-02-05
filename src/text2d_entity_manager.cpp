@@ -19,10 +19,8 @@ shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string& id)
 	{
 		abort();
 	}
-	else
-	{
-		return iterator->second;
-	}
+
+	return iterator->second;
 }
 
 const unordered_map<string, shared_ptr<Text2dEntity>>& Text2dEntityManager::getEntities()

@@ -3,7 +3,7 @@
 
 void EngineInterface::collision_setCameraBox(float left, float right, float bottom, float top, float back, float front)
 {
-	_core->getCameraCollisionHandler()->setCameraBox(Box(left, right, bottom, top, back, front));
+	_core->getCameraCollisionHandler()->setCameraBox(make_shared<Box>(left, right, bottom, top, back, front));
 }
 
 void EngineInterface::collision_setCameraAabbResponseEnabled(bool x, bool y, bool z)

@@ -184,32 +184,7 @@ const string EngineInterface::misc_getOpenglVersion() const
 
 const ivec2 EngineInterface::misc_getCursorPosition() const
 {
-	ivec2 cursorPosition = _core->getRenderWindow()->getCursorPosition();
-
-	return ivec2(cursorPosition.x, (Config::getInst().getWindowSize().y - cursorPosition.y));
-}
-
-const ivec2 EngineInterface::misc_getCursorPositionRelativeToViewport() const
-{
-	if(Config::getInst().isApplicationExported())
-	{
-		return misc_getCursorPosition();
-	}
-	else
-	{
-		auto windowSize = Config::getInst().getWindowSize();
-		auto viewportPosition = Config::getInst().getViewportPosition();
-		auto viewportSize = Config::getInst().getViewportSize();
-
-		ivec2 offset = ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
-
-		fvec2 relativeCursorPosition = fvec2(_core->getRenderWindow()->getCursorPosition()) - fvec2(offset);
-
-		relativeCursorPosition = (relativeCursorPosition / fvec2(viewportSize)) * fvec2(windowSize);
-
-		ivec2 result = ivec2(relativeCursorPosition);
-		return ivec2(result.x, (Config::getInst().getWindowSize().y - result.y));
-	}
+	return _core->getRenderWindow()->getCursorPosition();
 }
 
 const bool EngineInterface::misc_isMillisecondTimerStarted() const

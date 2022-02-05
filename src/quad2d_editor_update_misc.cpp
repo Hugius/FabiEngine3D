@@ -59,8 +59,8 @@ void Quad2dEditor::_updateQuadCreating()
 
 			if(_fe3d->quad2d_isExisting(newQuadId))
 			{
-				_fe3d->quad2d_setPosition(newQuadId, Tools::convertPositionToViewport(fvec2(0.0f)));
-				_fe3d->quad2d_setSize(newQuadId, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
+				_fe3d->quad2d_setPosition(newQuadId, Tools::convertPositionRelativeToViewport(fvec2(0.0f)));
+				_fe3d->quad2d_setSize(newQuadId, Tools::convertSizeRelativeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
 
 				_currentQuadId = newQuadId;
 				_loadedQuadIds.push_back(newQuadId);

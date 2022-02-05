@@ -33,10 +33,10 @@ public:
 	static const ivec2 convertToScreenCoords(const fvec2& position);
 	static const fvec2 getMinViewportPosition();
 	static const fvec2 getMaxViewportPosition();
-	static const fvec2 convertPositionToViewport(const fvec2& position);
-	static const fvec2 convertPositionFromViewport(const fvec2& position);
-	static const fvec2 convertSizeToViewport(const fvec2& size);
-	static const fvec2 convertSizeFromViewport(const fvec2& size);
+	static const fvec2 convertPositionRelativeToViewport(const fvec2& position);
+	static const fvec2 convertPositionRelativeFromViewport(const fvec2& position);
+	static const fvec2 convertSizeRelativeToViewport(const fvec2& size);
+	static const fvec2 convertSizeRelativeFromViewport(const fvec2& size);
 
 	static const float getWindowAspectRatio();
 

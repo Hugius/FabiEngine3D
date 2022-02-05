@@ -175,11 +175,6 @@ const shared_ptr<Timer> EngineCore::getTimer() const
 	return _timer;
 }
 
-void EngineCore::inject(shared_ptr<EngineInterface> fe3d)
-{
-	_fe3d = fe3d;
-}
-
 void EngineCore::inject(shared_ptr<EngineController> engineController)
 {
 	_engineController = engineController;

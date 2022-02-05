@@ -118,8 +118,10 @@ void RenderWindow::setCursorPosition(const ivec2& pos)
 const ivec2 RenderWindow::getCursorPosition() const
 {
 	int x, y;
+
 	SDL_GetMouseState(&x, &y);
-	return ivec2(x, y);
+
+	return ivec2(x, (Config::getInst().getWindowSize().y - y));
 }
 
 const bool RenderWindow::isCursorVisible() const

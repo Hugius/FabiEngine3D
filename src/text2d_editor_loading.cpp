@@ -113,8 +113,8 @@ const bool Text2dEditor::loadFromFile()
 			_loadedTextIds.push_back(textId);
 
 			_fe3d->text2d_setVisible(textId, false);
-			_fe3d->text2d_setPosition(textId, Tools::convertPositionToViewport(fvec2(0.0f)));
-			_fe3d->text2d_setSize(textId, Tools::convertSizeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->text2d_setPosition(textId, Tools::convertPositionRelativeToViewport(fvec2(0.0f)));
+			_fe3d->text2d_setSize(textId, Tools::convertSizeRelativeToViewport(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->text2d_setColor(textId, color);
 			_fe3d->text2d_setOpacity(textId, opacity);
 			_fe3d->text2d_setContent(textId, TEXT_CONTENT);

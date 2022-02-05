@@ -39,7 +39,6 @@ class EngineCore;
 
 class EngineInterface final
 {
-	friend EngineCore;
 public:
 	void inject(shared_ptr<EngineCore> core);
 
@@ -920,7 +919,6 @@ public:
 	const string misc_getGpuName() const;
 	const string misc_getOpenglVersion() const;
 	const ivec2 misc_getCursorPosition() const;
-	const ivec2 misc_getCursorPositionRelativeToViewport() const;
 	const float misc_getFPS() const;
 	const float misc_stopMillisecondTimer() const;
 	const unsigned int misc_getTriangleCount() const;

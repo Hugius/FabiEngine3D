@@ -108,8 +108,8 @@ const bool Quad2dEditor::loadFromFile()
 			_loadedQuadIds.push_back(quadId);
 
 			_fe3d->quad2d_setVisible(quadId, false);
-			_fe3d->quad2d_setPosition(quadId, Tools::convertPositionToViewport(fvec2(0.0f)));
-			_fe3d->quad2d_setSize(quadId, Tools::convertSizeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->quad2d_setPosition(quadId, Tools::convertPositionRelativeToViewport(fvec2(0.0f)));
+			_fe3d->quad2d_setSize(quadId, Tools::convertSizeRelativeToViewport(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->quad2d_setColor(quadId, color);
 			_fe3d->quad2d_setOpacity(quadId, opacity);
 

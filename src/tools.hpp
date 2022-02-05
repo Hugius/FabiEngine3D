@@ -29,14 +29,15 @@ public:
 	static const string chooseExplorerFile(const string& startingDirectory, const string& fileType);
 	static const string chooseExplorerDirectory(const string& startingDirectory);
 
-	static const fvec2 convertFromScreenCoords(const ivec2& position);
-	static const ivec2 convertToScreenCoords(const fvec2& position);
+	static const fvec2 convertToNdc(const ivec2& position);
+	static const fvec2 convertPositionRelativeToDisplay(const fvec2& position);
+	static const fvec2 convertPositionRelativeFromDisplay(const fvec2& position);
+	static const fvec2 convertSizeRelativeToDisplay(const fvec2& size);
+	static const fvec2 convertSizeRelativeFromDisplay(const fvec2& size);
 	static const fvec2 getMinViewportPosition();
 	static const fvec2 getMaxViewportPosition();
-	static const fvec2 convertPositionRelativeToViewport(const fvec2& position);
-	static const fvec2 convertPositionRelativeFromViewport(const fvec2& position);
-	static const fvec2 convertSizeRelativeToViewport(const fvec2& size);
-	static const fvec2 convertSizeRelativeFromViewport(const fvec2& size);
+
+	static const ivec2 convertFromNdc(const fvec2& position);
 
 	static const float getWindowAspectRatio();
 

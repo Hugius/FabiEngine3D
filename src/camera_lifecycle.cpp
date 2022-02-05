@@ -1,5 +1,6 @@
 #include "camera.hpp"
 #include "configuration.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -57,21 +58,18 @@ void Camera::reset()
 void Camera::update(const ivec2& lastCursorPosition)
 {
 	const auto currentCursorPosition = _renderWindow->getCursorPosition();
-	const auto left = Config::getInst().getViewportPosition().x;
-	const auto bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
-	const auto xMiddle = left + (Config::getInst().getViewportSize().x / 2);
-	const auto yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
+	const auto middle = Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
 
 	if(_mustCenterCursor)
 	{
-		_renderWindow->setCursorPosition({xMiddle, yMiddle});
+		_renderWindow->setCursorPosition(middle);
 		_mustCenterCursor = false;
 		_isCursorBeingCentered = true;
 	}
 
 	if(_isCursorBeingCentered)
 	{
-		if((currentCursorPosition == ivec2(xMiddle, yMiddle)) || (currentCursorPosition != lastCursorPosition))
+		if((currentCursorPosition == middle) || (currentCursorPosition != lastCursorPosition))
 		{
 			_isCursorBeingCentered = false;
 		}
@@ -79,8 +77,8 @@ void Camera::update(const ivec2& lastCursorPosition)
 
 	if(_isFirstPersonEnabled && !_isCursorBeingCentered)
 	{
-		auto xOffset = static_cast<float>(currentCursorPosition.x - xMiddle);
-		auto yOffset = static_cast<float>(yMiddle - currentCursorPosition.y);
+		auto xOffset = static_cast<float>(currentCursorPosition.x - middle.x);
+		auto yOffset = static_cast<float>(currentCursorPosition.y - middle.y);
 
 		xOffset *= _cursorSensitivity;
 		yOffset *= _cursorSensitivity;
@@ -101,7 +99,7 @@ void Camera::update(const ivec2& lastCursorPosition)
 		_yaw = _firstPersonYaw;
 		_pitch = _firstPersonPitch;
 
-		_renderWindow->setCursorPosition({xMiddle, yMiddle});
+		_renderWindow->setCursorPosition(middle);
 	}
 	else
 	{
@@ -111,8 +109,8 @@ void Camera::update(const ivec2& lastCursorPosition)
 
 	if(_isThirdPersonEnabled && !_isCursorBeingCentered)
 	{
-		auto xOffset = static_cast<float>(currentCursorPosition.x - xMiddle);
-		auto yOffset = static_cast<float>(yMiddle - currentCursorPosition.y);
+		auto xOffset = static_cast<float>(currentCursorPosition.x - middle.x);
+		auto yOffset = static_cast<float>(currentCursorPosition.y - middle.y);
 
 		xOffset *= _cursorSensitivity;
 		yOffset *= _cursorSensitivity;
@@ -141,7 +139,7 @@ void Camera::update(const ivec2& lastCursorPosition)
 		_yaw = (Math::convertToDegrees(atan2f((_position.z - _thirdPersonLookat.z), (_position.x - _thirdPersonLookat.x))) + 180.0f);
 		_pitch = -_thirdPersonPitch;
 
-		_renderWindow->setCursorPosition({xMiddle, yMiddle});
+		_renderWindow->setCursorPosition(middle);
 	}
 	else
 	{

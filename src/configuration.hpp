@@ -20,8 +20,8 @@ public:
 
 	const ivec2& getMonitorSize() const;
 	const ivec2& getWindowSize()	const;
-	const ivec2& getViewportSize() const;
-	const ivec2& getViewportPosition() const;
+	const ivec2& getDisplaySize() const;
+	const ivec2& getDisplayPosition() const;
 
 	const float getWindowSizeMultiplier() const;
 
@@ -47,8 +47,8 @@ private:
 
 	ivec2 _monitorSize = ivec2(0);
 	ivec2 _windowSize = ivec2(0);
-	ivec2 _viewportSize = ivec2(0);
-	ivec2 _viewportPosition = ivec2(0);
+	ivec2 _displaySize = ivec2(0);
+	ivec2 _displayPosition = ivec2(0);
 
 	float _windowSizeMultiplier = 0.0f;
 
@@ -56,8 +56,8 @@ private:
 	bool _isWindowBorderless = false;
 	bool _isApplicationExported = false;
 
-	static inline const fvec2 VIEWPORT_POSITION_MULTIPLIER = fvec2(0.125f, 0.2f);
-	static inline const fvec2 VIEWPORT_SIZE_MULTIPLIER = fvec2(0.75f, 0.75f);
+	static inline const fvec2 DISPLAY_POSITION_MULTIPLIER = fvec2(0.125f, 0.2f);
+	static inline const fvec2 DISPLAY_SIZE_MULTIPLIER = fvec2(0.75f, 0.75f);
 
 	static inline constexpr float DEFAULT_WINDOW_SIZE_MULTIPLIER = 0.9f;
 };

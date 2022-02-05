@@ -29,10 +29,10 @@ void EngineInterface::misc_setCursorVisible(bool value)
 
 void EngineInterface::misc_centerCursor()
 {
-	const int left = Config::getInst().getViewportPosition().x;
-	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
-	const int xMiddle = left + (Config::getInst().getViewportSize().x / 2);
-	const int yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
+	const int left = Config::getInst().getDisplayPosition().x;
+	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getDisplayPosition().y + Config::getInst().getDisplaySize().y);
+	const int xMiddle = left + (Config::getInst().getDisplaySize().x / 2);
+	const int yMiddle = bottom + (Config::getInst().getDisplaySize().y / 2);
 	_core->getRenderWindow()->setCursorPosition({xMiddle, yMiddle});
 
 	_core->getCamera()->notifyCursorCenter();
@@ -200,8 +200,8 @@ const bool EngineInterface::misc_isCursorVisible() const
 const bool EngineInterface::misc_isCursorInsideViewport() const
 {
 	auto cursorPosition = misc_getCursorPosition();
-	auto viewportPosition = Config::getInst().getViewportPosition();
-	auto viewportSize = Config::getInst().getViewportSize();
+	auto viewportPosition = Config::getInst().getDisplayPosition();
+	auto viewportSize = Config::getInst().getDisplaySize();
 
 	if((cursorPosition.x > viewportPosition.x) && (cursorPosition.x < (viewportPosition.x + viewportSize.x)))
 	{

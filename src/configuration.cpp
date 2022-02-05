@@ -32,10 +32,10 @@ Config::Config()
 
 		_windowSize.x = static_cast<int>(static_cast<float>(_monitorSize.x) * _windowSizeMultiplier);
 		_windowSize.y = static_cast<int>(static_cast<float>(_monitorSize.y) * _windowSizeMultiplier);
-		_viewportSize.x = static_cast<int>(static_cast<float>(_windowSize.x));
-		_viewportSize.y = static_cast<int>(static_cast<float>(_windowSize.y));
-		_viewportPosition.x = 0;
-		_viewportPosition.y = 0;
+		_displaySize.x = static_cast<int>(static_cast<float>(_windowSize.x));
+		_displaySize.y = static_cast<int>(static_cast<float>(_windowSize.y));
+		_displayPosition.x = 0;
+		_displayPosition.y = 0;
 
 		_isApplicationExported = true;
 	}
@@ -46,10 +46,10 @@ Config::Config()
 		_isWindowBorderless = false;
 		_windowSize.x = static_cast<int>(static_cast<float>(_monitorSize.x) * _windowSizeMultiplier);
 		_windowSize.y = static_cast<int>(static_cast<float>(_monitorSize.y) * _windowSizeMultiplier);
-		_viewportSize.x = static_cast<int>(static_cast<float>(_windowSize.x) * VIEWPORT_SIZE_MULTIPLIER.x);
-		_viewportSize.y = static_cast<int>(static_cast<float>(_windowSize.y) * VIEWPORT_SIZE_MULTIPLIER.y);
-		_viewportPosition.x = static_cast<int>(static_cast<float>(_windowSize.x) * VIEWPORT_POSITION_MULTIPLIER.x);
-		_viewportPosition.y = static_cast<int>(static_cast<float>(_windowSize.y) * VIEWPORT_POSITION_MULTIPLIER.y);
+		_displaySize.x = static_cast<int>(static_cast<float>(_windowSize.x) * DISPLAY_SIZE_MULTIPLIER.x);
+		_displaySize.y = static_cast<int>(static_cast<float>(_windowSize.y) * DISPLAY_SIZE_MULTIPLIER.y);
+		_displayPosition.x = static_cast<int>(static_cast<float>(_windowSize.x) * DISPLAY_POSITION_MULTIPLIER.x);
+		_displayPosition.y = static_cast<int>(static_cast<float>(_windowSize.y) * DISPLAY_POSITION_MULTIPLIER.y);
 
 		_isApplicationExported = false;
 	}
@@ -179,9 +179,9 @@ const ivec2& Config::getWindowSize() const
 	return _windowSize;
 }
 
-const ivec2& Config::getViewportPosition() const
+const ivec2& Config::getDisplayPosition() const
 {
-	return _viewportPosition;
+	return _displayPosition;
 }
 
 const float Config::getWindowSizeMultiplier() const
@@ -189,9 +189,9 @@ const float Config::getWindowSizeMultiplier() const
 	return _windowSizeMultiplier;
 }
 
-const ivec2& Config::getViewportSize() const
+const ivec2& Config::getDisplaySize() const
 {
-	return _viewportSize;
+	return _displaySize;
 }
 
 const bool Config::isWindowFullscreen() const

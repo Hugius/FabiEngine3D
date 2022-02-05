@@ -26,13 +26,12 @@ const shared_ptr<Ray> RaycastCalculator::getCursorRay() const
 
 const shared_ptr<Ray> RaycastCalculator::_calculateCursorRay(const ivec2& cursorPosition) const
 {
-	const auto screenCoords = Tools::convertFromScreenCoords(cursorPosition);
-	const auto ndcCoords = Math::convertToNdc(screenCoords);
-	const auto clipCoords = fvec4(ndcCoords.x, ndcCoords.y, -1.0f, 1.0f);
-	const auto viewCoords = _convertToViewSpace(clipCoords);
-	const auto worldCoords = _convertToWorldSpace(viewCoords);
+	const auto ndcCoords = Tools::convertPositionRelativeFromDisplay(Tools::convertToNdc(cursorPosition));
+	const auto clipSpaceCoords = fvec4(ndcCoords.x, ndcCoords.y, -1.0f, 1.0f);
+	const auto viewSpaceCoords = _convertToViewSpace(clipSpaceCoords);
+	const auto worldSpaceCoords = _convertToWorldSpace(viewSpaceCoords);
 
-	return make_shared<Ray>(_camera->getPosition(), Math::normalize(worldCoords));
+	return make_shared<Ray>(_camera->getPosition(), Math::normalize(worldSpaceCoords));
 }
 
 const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4& clipCoords) const

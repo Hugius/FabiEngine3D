@@ -69,7 +69,7 @@ void MasterRenderer::renderApplication()
 	_captureLensFlare();
 	_captureMotionBlur();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
+	glViewport(Config::getInst().getDisplayPosition().x, Config::getInst().getDisplayPosition().y, Config::getInst().getDisplaySize().x, Config::getInst().getDisplaySize().y);
 	_renderFinalSceneMap();
 	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 	_timer->stopDeltaPart();

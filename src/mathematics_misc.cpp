@@ -174,28 +174,6 @@ const bool Math::isNormalized(const fvec4& vector)
 	return (calculateMagnitude(vector) == 1.0f);
 }
 
-const fvec2 Math::convertToNdc(const fvec2& position)
-{
-	fvec2 result = position;
-
-	result.x = ((position.x * 2.0f) - 1.0f);
-	result.y = ((position.y * 2.0f) - 1.0f);
-
-	return result;
-}
-
-const fvec2 Math::convertFromNdc(const fvec2& position)
-{
-	fvec2 result = position;
-
-	result.x += 1.0f;
-	result.y += 1.0f;
-	result.x /= 2.0f;
-	result.y /= 2.0f;
-
-	return result;
-}
-
 const vector<float> Math::calculateDistributedPositions(unsigned int count, float size)
 {
 	vector<float> result;

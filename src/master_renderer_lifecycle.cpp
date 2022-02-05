@@ -13,7 +13,7 @@ using std::clamp;
 
 MasterRenderer::MasterRenderer()
 {
-	const auto viewportSize = Config::getInst().getViewportSize();
+	const auto viewportSize = Config::getInst().getDisplaySize();
 
 	_skyEntityColorRenderer = make_unique<SkyEntityColorRenderer>();
 	_terrainEntityColorRenderer = make_unique<TerrainEntityColorRenderer>();

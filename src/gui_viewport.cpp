@@ -34,7 +34,7 @@ const bool GuiViewport::isHovered() const
 {
 	if(_fe3d->quad2d_isVisible(_entityId))
 	{
-		auto cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()));
+		auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
 		auto buttonPosition = _fe3d->quad2d_getPosition(_entityId);
 		auto buttonSize = _fe3d->quad2d_getSize(_entityId);
 

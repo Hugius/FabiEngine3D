@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string& functionNam
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertPositionRelativeFromViewport(_fe3d->quad2d_getPosition(args[0]->getString())).x;
+				const auto result = Tools::convertPositionRelativeFromDisplay(_fe3d->quad2d_getPosition(args[0]->getString())).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string& functionNam
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertPositionRelativeFromViewport(_fe3d->quad2d_getPosition(args[0]->getString())).y;
+				const auto result = Tools::convertPositionRelativeFromDisplay(_fe3d->quad2d_getPosition(args[0]->getString())).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -121,7 +121,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string& functionNam
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertSizeRelativeFromViewport(_fe3d->quad2d_getSize(args[0]->getString())).x;
+				const auto result = Tools::convertSizeRelativeFromDisplay(_fe3d->quad2d_getSize(args[0]->getString())).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dGetter(const string& functionNam
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
-				const auto result = Tools::convertSizeRelativeFromViewport(_fe3d->quad2d_getSize(args[0]->getString())).y;
+				const auto result = Tools::convertSizeRelativeFromDisplay(_fe3d->quad2d_getSize(args[0]->getString())).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}

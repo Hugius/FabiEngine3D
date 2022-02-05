@@ -28,8 +28,8 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 			{
 				_fe3d->quad2d_create(args[0]->getString(), true);
 				_fe3d->quad2d_setDiffuseMap(args[0]->getString(), _fe3d->quad2d_getDiffuseMapPath("@" + args[1]->getString()));
-				_fe3d->quad2d_setPosition(args[0]->getString(), Tools::convertPositionRelativeToViewport(fvec2(args[2]->getDecimal(), args[3]->getDecimal())));
-				_fe3d->quad2d_setSize(args[0]->getString(), Tools::convertSizeRelativeToViewport(fvec2(args[4]->getDecimal(), args[5]->getDecimal())));
+				_fe3d->quad2d_setPosition(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(args[2]->getDecimal(), args[3]->getDecimal())));
+				_fe3d->quad2d_setSize(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[4]->getDecimal(), args[5]->getDecimal())));
 				_fe3d->quad2d_setMinPosition(args[0]->getString(), Tools::getMinViewportPosition());
 				_fe3d->quad2d_setMaxPosition(args[0]->getString(), Tools::getMaxViewportPosition());
 
@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
-				_fe3d->quad2d_setPosition(args[0]->getString(), Tools::convertPositionRelativeToViewport(fvec2(args[1]->getDecimal(), args[2]->getDecimal())));
+				_fe3d->quad2d_setPosition(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(args[1]->getDecimal(), args[2]->getDecimal())));
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
@@ -114,7 +114,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
-				_fe3d->quad2d_move(args[0]->getString(), Tools::convertSizeRelativeToViewport(fvec2(args[1]->getDecimal(), args[2]->getDecimal())));
+				_fe3d->quad2d_move(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[1]->getDecimal(), args[2]->getDecimal())));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -128,8 +128,8 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
-				auto speed = Tools::convertSizeRelativeToViewport(fvec2(args[3]->getDecimal(), args[3]->getDecimal()));
-				_fe3d->quad2d_moveTo(args[0]->getString(), Tools::convertSizeRelativeToViewport(fvec2(args[1]->getDecimal(), args[2]->getDecimal())), ((speed.x + speed.y) * 0.5f));
+				auto speed = Tools::convertSizeRelativeToDisplay(fvec2(args[3]->getDecimal(), args[3]->getDecimal()));
+				_fe3d->quad2d_moveTo(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[1]->getDecimal(), args[2]->getDecimal())), ((speed.x + speed.y) * 0.5f));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -185,7 +185,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
-				_fe3d->quad2d_setSize(args[0]->getString(), Tools::convertSizeRelativeToViewport(fvec2(args[1]->getDecimal(), args[2]->getDecimal())));
+				_fe3d->quad2d_setSize(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[1]->getDecimal(), args[2]->getDecimal())));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -199,7 +199,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
-				_fe3d->quad2d_scale(args[0]->getString(), Tools::convertSizeRelativeToViewport(fvec2(args[1]->getDecimal(), args[2]->getDecimal())));
+				_fe3d->quad2d_scale(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[1]->getDecimal(), args[2]->getDecimal())));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -213,8 +213,8 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
-				auto speed = Tools::convertSizeRelativeToViewport(fvec2(args[3]->getDecimal(), args[3]->getDecimal()));
-				_fe3d->quad2d_scaleTo(args[0]->getString(), Tools::convertSizeRelativeToViewport(fvec2(args[1]->getDecimal(), args[2]->getDecimal())), ((speed.x + speed.y) * 0.5f));
+				auto speed = Tools::convertSizeRelativeToDisplay(fvec2(args[3]->getDecimal(), args[3]->getDecimal()));
+				_fe3d->quad2d_scaleTo(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[1]->getDecimal(), args[2]->getDecimal())), ((speed.x + speed.y) * 0.5f));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

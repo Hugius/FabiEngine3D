@@ -56,8 +56,6 @@ public:
 	static const fvec2 calculateAverage(const vector<fvec2>& values);
 	static const fvec2 calculateDifference(const fvec2& firstPosition, const fvec2& secondPosition);
 	static const fvec2 normalize(const fvec2& vector);
-	static const fvec2 convertFromNdc(const fvec2& position);
-	static const fvec2 convertToNdc(const fvec2& position);
 
 	static const vector<float> calculateDistributedPositions(unsigned int buttonCount, float buttonHeight);
 	static const float calculateDeterminant(const mat22& matrix);

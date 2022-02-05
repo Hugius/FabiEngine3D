@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 				return true;
 			}
 
-			const auto result = clamp(Tools::convertPositionRelativeToViewport(Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()))).x, -1.0f, 1.0f);
+			const auto result = clamp(Tools::convertPositionRelativeToDisplay(Tools::convertToNdc(_fe3d->misc_getCursorPosition())).x, -1.0f, 1.0f);
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 				return true;
 			}
 
-			const auto result = clamp(Tools::convertPositionRelativeToViewport(Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()))).y, -1.0f, 1.0f);
+			const auto result = clamp(Tools::convertPositionRelativeToDisplay(Tools::convertToNdc(_fe3d->misc_getCursorPosition())).y, -1.0f, 1.0f);
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}

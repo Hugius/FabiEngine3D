@@ -259,7 +259,7 @@ void EngineCore::update()
 
 	_timer->startDeltaPart("physicsUpdate");
 	_camera->update(lastCursorPosition);
-	_raycastCalculator->update(Tools::convertToScreenCoords(Math::convertFromNdc(Tools::convertPositionRelativeFromViewport(Math::convertToNdc(Tools::convertFromScreenCoords(_renderWindow->getCursorPosition()))))));
+	_raycastCalculator->update(_renderWindow->getCursorPosition());
 	_raycastIntersector->update();
 	_cameraCollisionResponder->update();
 	_camera->updateMatrices();

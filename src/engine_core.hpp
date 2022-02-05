@@ -20,7 +20,8 @@
 #include "reflection_entity_manager.hpp"
 #include "quad2d_entity_manager.hpp"
 #include "text2d_entity_manager.hpp"
-#include "raycaster.hpp"
+#include "raycast_calculator.hpp"
+#include "raycast_intersector.hpp"
 #include "camera_collision_handler.hpp"
 #include "timer.hpp"
 #include "sound2d_manager.hpp"
@@ -73,7 +74,8 @@ public:
 	const shared_ptr<TextureBufferCache> getTextureBufferCache() const;
 	const shared_ptr<RenderStorage> getRenderStorage() const;
 	const shared_ptr<Camera> getCamera() const;
-	const shared_ptr<Raycaster> getRaycaster() const;
+	const shared_ptr<RaycastCalculator> getRaycastCalculator() const;
+	const shared_ptr<RaycastIntersector> getRaycastIntersector() const;
 	const shared_ptr<CameraCollisionDetector> getCameraCollisionDetector() const;
 	const shared_ptr<CameraCollisionHandler> getCameraCollisionHandler() const;
 	const shared_ptr<Sound2dManager> getSound2dManager() const;
@@ -113,7 +115,8 @@ private:
 	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
-	shared_ptr<Raycaster> _raycaster = nullptr;
+	shared_ptr<RaycastCalculator> _raycastCalculator = nullptr;
+	shared_ptr<RaycastIntersector> _raycastIntersector = nullptr;
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
 	shared_ptr<CameraCollisionHandler> _cameraCollisionHandler = nullptr;
 	shared_ptr<Sound2dManager> _sound2dManager = nullptr;

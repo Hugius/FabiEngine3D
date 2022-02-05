@@ -10,23 +10,23 @@
     <Filter Include="Collision\Response">
       <UniqueIdentifier>{08df31da-49f1-4652-a099-82c7bef88d22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Raycasting">
-      <UniqueIdentifier>{38c4b353-998f-4065-9e6b-e3620964be85}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{e615d742-8e80-49bf-9a91-1f6319243cc6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Data">
       <UniqueIdentifier>{9dd572bc-a971-4c4d-bdc5-bafbeb583d68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Raycast">
+      <UniqueIdentifier>{38c4b353-998f-4065-9e6b-e3620964be85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Raycast\Intersection">
+      <UniqueIdentifier>{03241045-adc3-428d-be86-ce814b4ecabf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Raycast\Calculator">
+      <UniqueIdentifier>{55b1e258-932e-4d0b-99bc-4ecb1d4fc312}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\box.cpp">
-      <Filter>Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\raycaster.cpp">
-      <Filter>Raycasting</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\ray.cpp">
       <Filter>Data</Filter>
     </ClCompile>
@@ -45,14 +45,17 @@
     <ClCompile Include="..\..\..\src\camera_misc.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\raycast_intersector.cpp">
+      <Filter>Raycast\Intersection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\raycast_calculator.cpp">
+      <Filter>Raycast\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\box.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\box.hpp">
-      <Filter>Data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\raycaster.hpp">
-      <Filter>Raycasting</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\ray.hpp">
       <Filter>Data</Filter>
     </ClInclude>
@@ -64,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\camera.hpp">
       <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\raycast_intersector.hpp">
+      <Filter>Raycast\Intersection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\raycast_calculator.hpp">
+      <Filter>Raycast\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\box.hpp">
+      <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

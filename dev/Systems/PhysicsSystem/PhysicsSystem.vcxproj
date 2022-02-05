@@ -26,7 +26,8 @@
     <ClCompile Include="..\..\..\src\camera_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\camera_misc.cpp" />
     <ClCompile Include="..\..\..\src\ray.cpp" />
-    <ClCompile Include="..\..\..\src\raycaster.cpp" />
+    <ClCompile Include="..\..\..\src\raycast_calculator.cpp" />
+    <ClCompile Include="..\..\..\src\raycast_intersector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\box.hpp" />
@@ -34,7 +35,8 @@
     <ClInclude Include="..\..\..\src\camera_collision_detector.hpp" />
     <ClInclude Include="..\..\..\src\camera_collision_handler.hpp" />
     <ClInclude Include="..\..\..\src\ray.hpp" />
-    <ClInclude Include="..\..\..\src\raycaster.hpp" />
+    <ClInclude Include="..\..\..\src\raycast_calculator.hpp" />
+    <ClInclude Include="..\..\..\src\raycast_intersector.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

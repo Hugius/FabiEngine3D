@@ -16,7 +16,7 @@ void WorldEditor::_updateReflectionEditing()
 			_dontResetSelectedCamera = false;
 		}
 
-		auto hoveredAabbId = _fe3d->raycast_checkCursorInAny().first;
+		auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
 		for(const auto& id : _fe3d->model_getIds())
 		{

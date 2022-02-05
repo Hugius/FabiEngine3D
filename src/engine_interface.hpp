@@ -742,14 +742,14 @@ public:
 	void raycast_setTerrainPointingDistance(float value);
 	void raycast_setTerrainPointingPrecision(float value);
 
-	const pair<const string, float> raycast_checkCursorInAny();
-	const pair<const string, float> raycast_checkCursorInEntities(const string& id, bool canBeOccluded);
-	const pair<bool, float> raycast_checkCursorInEntity(const string& id, bool canBeOccluded);
-	const fvec3& raycast_getPointOnTerrain() const;
+	const string& raycast_getClosestAabbId() const;
 	const fvec3& raycast_getCursorRayPosition() const;
 	const fvec3& raycast_getCursorRayDirection() const;
+	const fvec3& raycast_getPointOnTerrain() const;
 	const float raycast_getTerrainPointingDistance() const;
 	const float raycast_getTerrainPointingPrecision() const;
+	const float raycast_getDistanceToTerrain();
+	const float raycast_getDistanceToAabb(const string& id);
 	const bool raycast_isPointOnTerrainValid() const;
 	const bool raycast_isTerrainPointingEnabled() const;
 
@@ -932,10 +932,4 @@ public:
 
 private:
 	shared_ptr<EngineCore> _core = nullptr;
-
-	string _hoveredAabbId = "";
-
-	float _hoveredAabbDistance = -1.0f;
-
-	bool _isRaycastUpdated = false;
 };

@@ -120,9 +120,14 @@ const shared_ptr<Camera> EngineCore::getCamera() const
 	return _camera;
 }
 
-const shared_ptr<Raycaster> EngineCore::getRaycaster() const
+const shared_ptr<RaycastCalculator> EngineCore::getRaycastCalculator() const
 {
-	return _raycaster;
+	return _raycastCalculator;
+}
+
+const shared_ptr<RaycastIntersector> EngineCore::getRaycastIntersector() const
+{
+	return _raycastIntersector;
 }
 
 const shared_ptr<CameraCollisionDetector> EngineCore::getCameraCollisionDetector() const

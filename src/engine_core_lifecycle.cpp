@@ -34,7 +34,8 @@ EngineCore::EngineCore()
 	_textureBufferCache = make_shared<TextureBufferCache>();
 	_renderStorage = make_shared<RenderStorage>();
 	_camera = make_shared<Camera>();
-	_raycaster = make_shared<Raycaster>();
+	_raycastCalculator = make_shared<RaycastCalculator>();
+	_raycastIntersector = make_shared<RaycastIntersector>();
 	_cameraCollisionHandler = make_shared<CameraCollisionHandler>();
 	_cameraCollisionDetector = make_shared<CameraCollisionDetector>();
 	_networkingServer = make_shared<NetworkingServer>();
@@ -83,9 +84,11 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_reflectionEntityManager);
 	_camera->inject(_renderStorage);
 	_camera->inject(_renderWindow);
-	_raycaster->inject(_terrainEntityManager);
-	_raycaster->inject(_renderStorage);
-	_raycaster->inject(_camera);
+	_raycastCalculator->inject(_renderStorage);
+	_raycastCalculator->inject(_camera);
+	_raycastIntersector->inject(_raycastCalculator);
+	_raycastIntersector->inject(_terrainEntityManager);
+	_raycastIntersector->inject(_aabbEntityManager);
 	_cameraCollisionHandler->inject(_terrainEntityManager);
 	_cameraCollisionHandler->inject(_aabbEntityManager);
 	_cameraCollisionHandler->inject(_camera);
@@ -253,14 +256,13 @@ void EngineCore::update()
 		stop();
 		return;
 	}
-	_fe3d->_isRaycastUpdated = false;
-	_fe3d->_hoveredAabbId = "";
 	_engineController->update();
 	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("physicsUpdate");
 	_camera->update(lastCursorPosition);
-	_raycaster->update(_fe3d->misc_getCursorPositionRelativeToViewport());
+	_raycastCalculator->update(_fe3d->misc_getCursorPositionRelativeToViewport());
+	_raycastIntersector->update();
 	_cameraCollisionHandler->update();
 	_camera->updateMatrices();
 	_timer->stopDeltaPart();

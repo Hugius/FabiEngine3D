@@ -1,7 +1,6 @@
 #pragma once
 
 #include "camera.hpp"
-#include "raycaster.hpp"
 #include "camera_collision_detector.hpp"
 #include "terrain_entity_manager.hpp"
 #include "aabb_entity_manager.hpp"

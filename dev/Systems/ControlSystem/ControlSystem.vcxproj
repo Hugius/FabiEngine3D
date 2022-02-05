@@ -177,7 +177,7 @@
     <ClCompile Include="..\..\..\src\engine_controller.cpp" />
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_misc.cpp" />
     <ClCompile Include="..\..\..\src\left_viewport_controller.cpp" />
-    <ClCompile Include="..\..\..\src\main.cpp" />
+    <ClCompile Include="..\..\..\src\entry.cpp" />
     <ClCompile Include="..\..\..\src\right_viewport_controller.cpp" />
     <ClCompile Include="..\..\..\src\top_viewport_controller_project.cpp" />
     <ClCompile Include="..\..\..\src\top_viewport_controller_misc.cpp" />

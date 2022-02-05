@@ -23,7 +23,7 @@ void ScriptEditor::_updateTextWriter()
 		unsigned int cursorCharIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharIndex();
 		string newCharacters = "";
 
-		auto hoveredTextId = _fe3d->raycast_checkCursorInAny().first;
+		auto hoveredTextId = _fe3d->raycast_getClosestAabbId();
 		int hoveredLineIndex = -1;
 		int hoveredCharacterIndex = -1;
 		if(!hoveredTextId.empty())

@@ -22,9 +22,6 @@
     <Filter Include="Interface\Entity">
       <UniqueIdentifier>{58eff109-7a52-4f2b-b047-1ed6d6a63f68}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface\Base">
-      <UniqueIdentifier>{ec2d2619-8458-42b3-b623-d20f669e26ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interface\Sound">
       <UniqueIdentifier>{8b0105af-f909-4f68-8fdf-d7050a705c32}</UniqueIdentifier>
     </Filter>
@@ -34,13 +31,16 @@
     <Filter Include="Interface\Entity\3D">
       <UniqueIdentifier>{7594d856-af56-4891-b34d-f2a6936a2a9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface\Main">
+      <UniqueIdentifier>{ec2d2619-8458-42b3-b623-d20f669e26ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\engine_core_lifecycle.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface.cpp">
-      <Filter>Interface\Base</Filter>
+      <Filter>Interface\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_graphics.cpp">
       <Filter>Interface\Graphics</Filter>
@@ -117,7 +117,7 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\engine_interface.hpp">
-      <Filter>Interface\Base</Filter>
+      <Filter>Interface\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

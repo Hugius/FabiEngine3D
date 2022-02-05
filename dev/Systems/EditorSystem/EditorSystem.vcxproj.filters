@@ -118,35 +118,11 @@
     <Filter Include="Sound Editor\Update">
       <UniqueIdentifier>{e2ab1721-0c9c-494a-9bf7-5e9c85a34bef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Model Editor\Base">
-      <UniqueIdentifier>{c81a28c3-8641-4386-a44f-2e55a8e40ff8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sky Editor\Base">
-      <UniqueIdentifier>{5700e399-7ef0-4d3f-825d-dac2901b30ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script Editor\Base">
-      <UniqueIdentifier>{aa76db5a-a605-480a-9ed6-d9ccb2be4d41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sound Editor\Base">
-      <UniqueIdentifier>{752ab018-d668-4268-a4d1-ffa2772f05b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Terrain Editor\Base">
-      <UniqueIdentifier>{62fb57fb-a4c7-4cef-8f1d-e57904b9070d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Water Editor\Base">
-      <UniqueIdentifier>{f926a8c2-362b-4a43-adc8-b51275acb1ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World Editor\Base">
-      <UniqueIdentifier>{d3d88ca1-85ef-42ec-895f-8e025772dd50}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Base">
       <UniqueIdentifier>{b047c6b1-8ea5-4051-aec8-8206cf6e491b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Text2D Editor">
       <UniqueIdentifier>{6e6d9451-17f4-4711-9e99-c72041411867}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Text2D Editor\Base">
-      <UniqueIdentifier>{4de6ae59-0dde-4b45-8b36-76909ae57f86}</UniqueIdentifier>
     </Filter>
     <Filter Include="Text2D Editor\Miscellaneous">
       <UniqueIdentifier>{96cd2441-9cb1-4132-9674-a95c6674ff85}</UniqueIdentifier>
@@ -160,9 +136,6 @@
     <Filter Include="Quad2D Editor">
       <UniqueIdentifier>{cf5d8c21-2c15-4c9b-8562-61f1520e05ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quad2D Editor\Base">
-      <UniqueIdentifier>{b4a13230-0910-4df3-bf23-455149a99feb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quad2D Editor\Miscellaneous">
       <UniqueIdentifier>{7866e10d-8438-4b1b-a551-903bad71e8e7}</UniqueIdentifier>
     </Filter>
@@ -174,9 +147,6 @@
     </Filter>
     <Filter Include="Text3D Editor">
       <UniqueIdentifier>{d607ada6-d098-4b33-aa83-eddaa3ea3abf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Text3D Editor\Base">
-      <UniqueIdentifier>{1a1a0ac7-7349-4515-8ece-a2916d32b804}</UniqueIdentifier>
     </Filter>
     <Filter Include="Text3D Editor\Miscellaneous">
       <UniqueIdentifier>{7c054309-e85e-4b15-be7a-e3e745b07af6}</UniqueIdentifier>
@@ -205,9 +175,6 @@
     <Filter Include="Quad3D Editor\Update">
       <UniqueIdentifier>{4ff3dc37-6430-4a6e-b964-a56600422763}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quad3D Editor\Base">
-      <UniqueIdentifier>{def1ca50-9deb-4baf-be73-c5b864aeb462}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World Editor\Update\Sound3D">
       <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
     </Filter>
@@ -226,9 +193,6 @@
     <Filter Include="Animation2D Editor\Data">
       <UniqueIdentifier>{7c7b847e-e36f-4402-8ae6-8ed4a01b7ad9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Animation2D Editor\Base">
-      <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Animation3D Editor">
       <UniqueIdentifier>{ce127aed-4053-4bb3-af19-624153f70c1b}</UniqueIdentifier>
     </Filter>
@@ -244,13 +208,49 @@
     <Filter Include="Animation3D Editor\Data">
       <UniqueIdentifier>{baad863b-7fa3-4249-9d05-0954879e29ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Animation3D Editor\Base">
+    <Filter Include="Animation2D Editor\Main">
+      <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation3D Editor\Main">
       <UniqueIdentifier>{e2011b46-5f88-42c0-9a59-40db66d04e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model Editor\Main">
+      <UniqueIdentifier>{c81a28c3-8641-4386-a44f-2e55a8e40ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad2D Editor\Main">
+      <UniqueIdentifier>{b4a13230-0910-4df3-bf23-455149a99feb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quad3D Editor\Main">
+      <UniqueIdentifier>{def1ca50-9deb-4baf-be73-c5b864aeb462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script Editor\Main">
+      <UniqueIdentifier>{aa76db5a-a605-480a-9ed6-d9ccb2be4d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sky Editor\Main">
+      <UniqueIdentifier>{5700e399-7ef0-4d3f-825d-dac2901b30ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound Editor\Main">
+      <UniqueIdentifier>{752ab018-d668-4268-a4d1-ffa2772f05b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain Editor\Main">
+      <UniqueIdentifier>{62fb57fb-a4c7-4cef-8f1d-e57904b9070d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text2D Editor\Main">
+      <UniqueIdentifier>{4de6ae59-0dde-4b45-8b36-76909ae57f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text3D Editor\Main">
+      <UniqueIdentifier>{1a1a0ac7-7349-4515-8ece-a2916d32b804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Water Editor\Main">
+      <UniqueIdentifier>{f926a8c2-362b-4a43-adc8-b51275acb1ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Main">
+      <UniqueIdentifier>{d3d88ca1-85ef-42ec-895f-8e025772dd50}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
-      <Filter>Animation3D Editor\Base</Filter>
+      <Filter>Animation3D Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_editor_misc.cpp">
       <Filter>Animation3D Editor\Miscellaneous</Filter>
@@ -262,7 +262,7 @@
       <Filter>Animation3D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound_editor_lifecycle.cpp">
-      <Filter>Sound Editor\Base</Filter>
+      <Filter>Sound Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound_editor_misc.cpp">
       <Filter>Sound Editor\Miscellaneous</Filter>
@@ -274,7 +274,7 @@
       <Filter>Sound Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_lifecycle.cpp">
-      <Filter>Quad3D Editor\Base</Filter>
+      <Filter>Quad3D Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad3d_editor_misc.cpp">
       <Filter>Quad3D Editor\Miscellaneous</Filter>
@@ -289,10 +289,10 @@
       <Filter>Sky Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_editor_lifecycle.cpp">
-      <Filter>Sky Editor\Base</Filter>
+      <Filter>Sky Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_editor_lifecycle.cpp">
-      <Filter>Model Editor\Base</Filter>
+      <Filter>Model Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_editor_misc.cpp">
       <Filter>Model Editor\Miscellaneous</Filter>
@@ -322,7 +322,7 @@
       <Filter>Model Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_lifecycle.cpp">
-      <Filter>World Editor\Base</Filter>
+      <Filter>World Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_pointlight_update_edit.cpp">
       <Filter>World Editor\Update\Pointlight</Filter>
@@ -376,7 +376,7 @@
       <Filter>World Editor\Update\Sound3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_lifecycle.cpp">
-      <Filter>Script Editor\Base</Filter>
+      <Filter>Script Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_update_writer.cpp">
       <Filter>Script Editor\Update</Filter>
@@ -436,10 +436,10 @@
       <Filter>Water Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_editor_lifecycle.cpp">
-      <Filter>Terrain Editor\Base</Filter>
+      <Filter>Terrain Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\water_editor_lifecycle.cpp">
-      <Filter>Water Editor\Base</Filter>
+      <Filter>Water Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\water_editor_update_texturing.cpp">
       <Filter>Water Editor\Update</Filter>
@@ -562,7 +562,7 @@
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation2d_editor_lifecycle.cpp">
-      <Filter>Animation2D Editor\Base</Filter>
+      <Filter>Animation2D Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation2d.cpp">
       <Filter>Animation2D Editor\Data</Filter>
@@ -601,7 +601,7 @@
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_editor_lifecycle.cpp">
-      <Filter>Quad2D Editor\Base</Filter>
+      <Filter>Quad2D Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\quad2d_editor_loading.cpp">
       <Filter>Quad2D Editor\Persistence</Filter>
@@ -625,7 +625,7 @@
       <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\text2d_editor_lifecycle.cpp">
-      <Filter>Text2D Editor\Base</Filter>
+      <Filter>Text2D Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\text2d_editor_loading.cpp">
       <Filter>Text2D Editor\Persistence</Filter>
@@ -643,7 +643,7 @@
       <Filter>Text2D Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\text3d_editor_lifecycle.cpp">
-      <Filter>Text3D Editor\Base</Filter>
+      <Filter>Text3D Editor\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\text3d_editor_loading.cpp">
       <Filter>Text3D Editor\Persistence</Filter>
@@ -678,7 +678,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
-      <Filter>Animation3D Editor\Base</Filter>
+      <Filter>Animation3D Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation3d.hpp">
       <Filter>Animation3D Editor\Data</Filter>
@@ -687,46 +687,46 @@
       <Filter>Animation3D Editor\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound_editor.hpp">
-      <Filter>Sound Editor\Base</Filter>
+      <Filter>Sound Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad3d_editor.hpp">
-      <Filter>Quad3D Editor\Base</Filter>
+      <Filter>Quad3D Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sky_editor.hpp">
-      <Filter>Sky Editor\Base</Filter>
+      <Filter>Sky Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\model_editor.hpp">
-      <Filter>Model Editor\Base</Filter>
+      <Filter>Model Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\world_editor.hpp">
-      <Filter>World Editor\Base</Filter>
+      <Filter>World Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_editor.hpp">
-      <Filter>Script Editor\Base</Filter>
+      <Filter>Script Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\water_editor.hpp">
-      <Filter>Water Editor\Base</Filter>
+      <Filter>Water Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\terrain_editor.hpp">
-      <Filter>Terrain Editor\Base</Filter>
+      <Filter>Terrain Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation2d_editor.hpp">
-      <Filter>Animation2D Editor\Base</Filter>
+      <Filter>Animation2D Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation2d.hpp">
       <Filter>Animation2D Editor\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad2d_editor.hpp">
-      <Filter>Quad2D Editor\Base</Filter>
+      <Filter>Quad2D Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\base_editor.hpp">
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\text2d_editor.hpp">
-      <Filter>Text2D Editor\Base</Filter>
+      <Filter>Text2D Editor\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\text3d_editor.hpp">
-      <Filter>Text3D Editor\Base</Filter>
+      <Filter>Text3D Editor\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

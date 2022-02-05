@@ -142,7 +142,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:raycast_into_model")
+	/*else if(functionName == "fe3d:raycast_into_model")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
@@ -401,7 +401,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
-	}
+	}*/
 
 	else
 	{

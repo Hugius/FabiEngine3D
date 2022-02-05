@@ -34,14 +34,14 @@
     <Filter Include="Interpreter\Function\Sound">
       <UniqueIdentifier>{f0265524-b264-47ea-9dfc-72cb593e78c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interpreter\Function\Base">
-      <UniqueIdentifier>{d76c7765-65c5-436a-a627-fdd98d31e78f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interpreter\Variable">
       <UniqueIdentifier>{ec855f5f-cba3-46b4-aac3-ae2109f5bbc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interpreter\Base">
+    <Filter Include="Interpreter\Main">
       <UniqueIdentifier>{541da134-77a6-4ba7-a9ea-e1c174278bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interpreter\Function\Main">
+      <UniqueIdentifier>{d76c7765-65c5-436a-a627-fdd98d31e78f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +55,7 @@
       <Filter>Executor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_lifecycle.cpp">
-      <Filter>Interpreter\Base</Filter>
+      <Filter>Interpreter\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_misc.cpp">
       <Filter>Interpreter\Miscellaneous</Filter>
@@ -82,13 +82,13 @@
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_math.cpp">
-      <Filter>Interpreter\Function\Base</Filter>
+      <Filter>Interpreter\Function\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_misc.cpp">
-      <Filter>Interpreter\Function\Base</Filter>
+      <Filter>Interpreter\Function\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d.cpp">
-      <Filter>Interpreter\Function\Base</Filter>
+      <Filter>Interpreter\Function\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_variable_arithmetic.cpp">
       <Filter>Interpreter\Variable</Filter>
@@ -279,7 +279,7 @@
       <Filter>Executor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_interpreter.hpp">
-      <Filter>Interpreter\Base</Filter>
+      <Filter>Interpreter\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_condition_statement.hpp">
       <Filter>Data</Filter>

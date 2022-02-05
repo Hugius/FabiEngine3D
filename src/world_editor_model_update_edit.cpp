@@ -15,7 +15,7 @@ void WorldEditor::_updateModelEditing()
 			_dontResetSelectedModel = false;
 		}
 
-		auto hoveredId = _fe3d->raycast_checkCursorInAny().first;
+		auto hoveredId = _fe3d->raycast_getClosestAabbId();
 
 		for(const auto& id : _fe3d->model_getIds())
 		{

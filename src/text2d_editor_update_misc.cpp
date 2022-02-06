@@ -86,11 +86,11 @@ void Text2dEditor::_updateTextCreating()
 
 			if(_fe3d->text2d_isExisting(newTextId))
 			{
-				_fe3d->text2d_setPosition(newTextId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-				_fe3d->text2d_setSize(newTextId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
-
 				_currentTextId = newTextId;
 				_loadedTextIds.push_back(newTextId);
+
+				_fe3d->text2d_setPosition(newTextId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
+				_fe3d->text2d_setSize(newTextId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 				_gui->getOverlay()->getTextField("textId")->changeTextContent("Text: " + newTextId.substr(1));

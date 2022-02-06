@@ -159,6 +159,7 @@ void ModelEditor::_updateModelCreating()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearMeshCache(finalFilePath);
+
 			_fe3d->model_create(newModelId, finalFilePath);
 
 			if(_fe3d->model_isExisting(newModelId))

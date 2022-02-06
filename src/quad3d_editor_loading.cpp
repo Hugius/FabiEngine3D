@@ -152,45 +152,41 @@ const bool Quad3dEditor::loadFromFile()
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
+		_loadedQuadIds.push_back(quadId);
+
 		_fe3d->quad3d_create(quadId, false);
+		_fe3d->quad3d_setVisible(quadId, false);
+		_fe3d->quad3d_setSize(quadId, size);
+		_fe3d->quad3d_setColor(quadId, color);
+		_fe3d->quad3d_setLightness(quadId, lightness);
+		_fe3d->quad3d_setFacingCameraHorizontally(quadId, isFacingCameraHorizontally);
+		_fe3d->quad3d_setFacingCameraVertically(quadId, isFacingCameraVertically);
+		_fe3d->quad3d_setShadowed(quadId, isShadowed);
+		_fe3d->quad3d_setReflected(quadId, isReflected);
+		_fe3d->quad3d_setTextureRepeat(quadId, textureRepeat);
+		_fe3d->quad3d_setBright(quadId, isBright);
+		_fe3d->quad3d_setOpacity(quadId, opacity);
+		_fe3d->quad3d_setEmissionIntensity(quadId, emissionIntensity);
+		_fe3d->quad3d_setMinTextureAlpha(quadId, minTextureAlpha);
 
-		if(_fe3d->quad3d_isExisting(quadId))
+		if(!diffuseMapPath.empty())
 		{
-			_loadedQuadIds.push_back(quadId);
-
-			_fe3d->quad3d_setVisible(quadId, false);
-			_fe3d->quad3d_setSize(quadId, size);
-			_fe3d->quad3d_setColor(quadId, color);
-			_fe3d->quad3d_setLightness(quadId, lightness);
-			_fe3d->quad3d_setFacingCameraHorizontally(quadId, isFacingCameraHorizontally);
-			_fe3d->quad3d_setFacingCameraVertically(quadId, isFacingCameraVertically);
-			_fe3d->quad3d_setShadowed(quadId, isShadowed);
-			_fe3d->quad3d_setReflected(quadId, isReflected);
-			_fe3d->quad3d_setTextureRepeat(quadId, textureRepeat);
-			_fe3d->quad3d_setBright(quadId, isBright);
-			_fe3d->quad3d_setOpacity(quadId, opacity);
-			_fe3d->quad3d_setEmissionIntensity(quadId, emissionIntensity);
-			_fe3d->quad3d_setMinTextureAlpha(quadId, minTextureAlpha);
-
-			if(!diffuseMapPath.empty())
+			if(!Config::getInst().isApplicationExported())
 			{
-				if(!Config::getInst().isApplicationExported())
-				{
-					diffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
-				}
-
-				_fe3d->quad3d_setDiffuseMap(quadId, diffuseMapPath);
+				diffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 			}
 
-			if(!emissionMapPath.empty())
-			{
-				if(!Config::getInst().isApplicationExported())
-				{
-					emissionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
-				}
+			_fe3d->quad3d_setDiffuseMap(quadId, diffuseMapPath);
+		}
 
-				_fe3d->quad3d_setEmissionMap(quadId, emissionMapPath);
+		if(!emissionMapPath.empty())
+		{
+			if(!Config::getInst().isApplicationExported())
+			{
+				emissionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
 			}
+
+			_fe3d->quad3d_setEmissionMap(quadId, emissionMapPath);
 		}
 	}
 

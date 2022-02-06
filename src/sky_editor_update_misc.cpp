@@ -73,20 +73,16 @@ void SkyEditor::_updateSkyCreating()
 				return;
 			}
 
+			_currentSkyId = newSkyId;
+			_loadedSkyIds.push_back(newSkyId);
+
 			_fe3d->sky_create(newSkyId);
+			_fe3d->sky_select(newSkyId);
 
-			if(_fe3d->sky_isExisting(newSkyId))
-			{
-				_fe3d->sky_select(newSkyId);
-
-				_currentSkyId = newSkyId;
-				_loadedSkyIds.push_back(newSkyId);
-
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-				_gui->getOverlay()->getTextField("skyId")->changeTextContent("Sky: " + newSkyId.substr(1));
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyId")->getEntityId(), true);
-				_isCreatingSky = false;
-			}
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+			_gui->getOverlay()->getTextField("skyId")->changeTextContent("Sky: " + newSkyId.substr(1));
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyId")->getEntityId(), true);
+			_isCreatingSky = false;
 		}
 	}
 }

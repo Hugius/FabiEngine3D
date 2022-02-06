@@ -89,6 +89,7 @@ void SoundEditor::_updateSoundCreating()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearAudioCache(finalFilePath);
+
 			_fe3d->sound2d_create(newSoundId, finalFilePath);
 
 			if(_fe3d->sound2d_isExisting(newSoundId))

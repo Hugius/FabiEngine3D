@@ -25,27 +25,23 @@ void WorldEditor::_updateReflectionPlacing()
 					newModelId = ("@@camera_" + newId);
 				}
 
+				_loadedReflectionIds.push_back(newId);
+
 				_fe3d->reflection_create(newId);
+				_fe3d->reflection_setPosition(newId, newPosition);
 
-				if(_fe3d->reflection_isExisting(newId))
-				{
-					_loadedReflectionIds.push_back(newId);
+				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
+				_fe3d->model_setBasePosition(newModelId, newPosition);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
+				_fe3d->model_setShadowed(newModelId, false);
+				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
 
-					_fe3d->reflection_setPosition(newId, newPosition);
-
-					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
-					_fe3d->model_setBasePosition(newModelId, newPosition);
-					_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
-					_fe3d->model_setShadowed(newModelId, false);
-					_fe3d->model_setReflected(newModelId, false);
-					_fe3d->model_setBright(newModelId, "", true);
-
-					_fe3d->aabb_create(newModelId, true);
-					_fe3d->aabb_setParentEntityId(newModelId, newModelId);
-					_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
-					_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAMERA_AABB_SIZE);
-					_fe3d->aabb_setCollisionResponsive(newModelId, false);
-				}
+				_fe3d->aabb_create(newModelId, true);
+				_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+				_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAMERA_AABB_SIZE);
+				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
@@ -103,27 +99,23 @@ void WorldEditor::_updateReflectionPlacing()
 					newModelId = ("@@camera_" + newId);
 				}
 
+				_loadedReflectionIds.push_back(newId);
+
 				_fe3d->reflection_create(newId);
+				_fe3d->reflection_setPosition(newId, newPosition);
 
-				if(_fe3d->reflection_isExisting(newId))
-				{
-					_loadedReflectionIds.push_back(newId);
+				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
+				_fe3d->model_setBasePosition(newModelId, newPosition);
+				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
+				_fe3d->model_setShadowed(newModelId, false);
+				_fe3d->model_setReflected(newModelId, false);
+				_fe3d->model_setBright(newModelId, "", true);
 
-					_fe3d->reflection_setPosition(newId, newPosition);
-
-					_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
-					_fe3d->model_setBasePosition(newModelId, newPosition);
-					_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
-					_fe3d->model_setShadowed(newModelId, false);
-					_fe3d->model_setReflected(newModelId, false);
-					_fe3d->model_setBright(newModelId, "", true);
-
-					_fe3d->aabb_create(newModelId, true);
-					_fe3d->aabb_setParentEntityId(newModelId, newModelId);
-					_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
-					_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAMERA_AABB_SIZE);
-					_fe3d->aabb_setCollisionResponsive(newModelId, false);
-				}
+				_fe3d->aabb_create(newModelId, true);
+				_fe3d->aabb_setParentEntityId(newModelId, newModelId);
+				_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAMERA_AABB_SIZE);
+				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 		}
 	}

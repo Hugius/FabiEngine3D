@@ -164,56 +164,52 @@ const bool WaterEditor::loadFromFile()
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
+		_loadedWaterIds.push_back(waterId);
+
 		_fe3d->water_create(waterId);
+		_fe3d->water_setHeight(waterId, height);
+		_fe3d->water_setSize(waterId, size);
+		_fe3d->water_setSpecular(waterId, isSpecular);
+		_fe3d->water_setReflective(waterId, isReflective);
+		_fe3d->water_setRefractive(waterId, isRefractive);
+		_fe3d->water_setWaveHeight(waterId, waveHeight);
+		_fe3d->water_setSpecularShininess(waterId, specularShininess);
+		_fe3d->water_setSpecularIntensity(waterId, specularIntensity);
+		_fe3d->water_setEdged(waterId, isEdged);
+		_fe3d->water_setColor(waterId, color);
+		_fe3d->water_setTextureRepeat(waterId, textureRepeat);
+		_fe3d->water_setRippleSpeed(waterId, rippleSpeed);
+		_fe3d->water_setWaveSpeed(waterId, waveSpeed);
+		_fe3d->water_setMaxDepth(waterId, maxDepth);
 
-		if(_fe3d->water_isExisting(waterId))
+		if(!dudvMapPath.empty())
 		{
-			_loadedWaterIds.push_back(waterId);
-
-			_fe3d->water_setHeight(waterId, height);
-			_fe3d->water_setSize(waterId, size);
-			_fe3d->water_setSpecular(waterId, isSpecular);
-			_fe3d->water_setReflective(waterId, isReflective);
-			_fe3d->water_setRefractive(waterId, isRefractive);
-			_fe3d->water_setWaveHeight(waterId, waveHeight);
-			_fe3d->water_setSpecularShininess(waterId, specularShininess);
-			_fe3d->water_setSpecularIntensity(waterId, specularIntensity);
-			_fe3d->water_setEdged(waterId, isEdged);
-			_fe3d->water_setColor(waterId, color);
-			_fe3d->water_setTextureRepeat(waterId, textureRepeat);
-			_fe3d->water_setRippleSpeed(waterId, rippleSpeed);
-			_fe3d->water_setWaveSpeed(waterId, waveSpeed);
-			_fe3d->water_setMaxDepth(waterId, maxDepth);
-
-			if(!dudvMapPath.empty())
+			if(!Config::getInst().isApplicationExported())
 			{
-				if(!Config::getInst().isApplicationExported())
-				{
-					dudvMapPath = string("projects\\" + getCurrentProjectId() + "\\" + dudvMapPath);
-				}
-
-				_fe3d->water_setDudvMap(waterId, dudvMapPath);
+				dudvMapPath = string("projects\\" + getCurrentProjectId() + "\\" + dudvMapPath);
 			}
 
-			if(!normalMapPath.empty())
-			{
-				if(!Config::getInst().isApplicationExported())
-				{
-					normalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
-				}
+			_fe3d->water_setDudvMap(waterId, dudvMapPath);
+		}
 
-				_fe3d->water_setNormalMap(waterId, normalMapPath);
+		if(!normalMapPath.empty())
+		{
+			if(!Config::getInst().isApplicationExported())
+			{
+				normalMapPath = string("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
 			}
 
-			if(!displacementMapPath.empty())
-			{
-				if(!Config::getInst().isApplicationExported())
-				{
-					displacementMapPath = string("projects\\" + getCurrentProjectId() + "\\" + displacementMapPath);
-				}
+			_fe3d->water_setNormalMap(waterId, normalMapPath);
+		}
 
-				_fe3d->water_setDisplacementMap(waterId, displacementMapPath);
+		if(!displacementMapPath.empty())
+		{
+			if(!Config::getInst().isApplicationExported())
+			{
+				displacementMapPath = string("projects\\" + getCurrentProjectId() + "\\" + displacementMapPath);
 			}
+
+			_fe3d->water_setDisplacementMap(waterId, displacementMapPath);
 		}
 	}
 

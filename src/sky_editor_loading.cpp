@@ -128,17 +128,13 @@ const bool SkyEditor::loadFromFile()
 			}
 		}
 
+		_loadedSkyIds.push_back(skyId);
+
 		_fe3d->sky_create(skyId);
-
-		if(_fe3d->sky_isExisting(skyId))
-		{
-			_loadedSkyIds.push_back(skyId);
-
-			_fe3d->sky_setCubeMaps(skyId, cubeMapPaths);
-			_fe3d->sky_setLightness(skyId, lightness);
-			_fe3d->sky_setRotation(skyId, rotation);
-			_fe3d->sky_setColor(skyId, color);
-		}
+		_fe3d->sky_setCubeMaps(skyId, cubeMapPaths);
+		_fe3d->sky_setLightness(skyId, lightness);
+		_fe3d->sky_setRotation(skyId, rotation);
+		_fe3d->sky_setColor(skyId, color);
 	}
 
 	file.close();

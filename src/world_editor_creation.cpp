@@ -24,11 +24,11 @@ void WorldEditor::copyTemplateSound(const string& newId, const string& templateI
 const bool WorldEditor::_copyTemplateSky(const string& newId, const string& templateId)
 {
 	_fe3d->sky_create(newId);
+	_fe3d->sky_select(newId);
 	_fe3d->sky_setCubeMaps(newId, _fe3d->sky_getCubeMapPaths(templateId));
 	_fe3d->sky_setLightness(newId, _fe3d->sky_getLightness(templateId));
 	_fe3d->sky_setRotation(newId, _fe3d->sky_getRotation(templateId));
 	_fe3d->sky_setColor(newId, _fe3d->sky_getColor(templateId));
-	_fe3d->sky_select(newId);
 
 	_loadedSkyId = newId;
 
@@ -39,7 +39,6 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newId, const string& 
 {
 	_fe3d->terrain_create(newId, _fe3d->terrain_getHeightMapPath(templateId));
 	_fe3d->terrain_select(newId);
-
 	_fe3d->terrain_setMaxHeight(newId, _fe3d->terrain_getMaxHeight(templateId));
 	_fe3d->terrain_setTextureRepeat(newId, _fe3d->terrain_getTextureRepeat(templateId));
 	_fe3d->terrain_setLightness(newId, _fe3d->terrain_getLightness(templateId));
@@ -104,7 +103,6 @@ const bool WorldEditor::_copyTemplateWater(const string& newId, const string& te
 {
 	_fe3d->water_create(newId);
 	_fe3d->water_select(newId);
-
 	_fe3d->water_setHeight(newId, _fe3d->water_getHeight(templateId));
 	_fe3d->water_setSize(newId, _fe3d->water_getSize(templateId));
 	_fe3d->water_setSpecular(newId, _fe3d->water_isSpecular(templateId));
@@ -143,7 +141,6 @@ const bool WorldEditor::_copyTemplateWater(const string& newId, const string& te
 const bool WorldEditor::_copyTemplateModel(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
 {
 	_fe3d->model_create(newId, _fe3d->model_getMeshPath(templateId));
-
 	_fe3d->model_setBasePosition(newId, position);
 	_fe3d->model_setBaseSize(newId, _fe3d->model_getBaseSize(templateId));
 	_fe3d->model_setLevelOfDetailSize(newId, _fe3d->model_getBaseSize(templateId));
@@ -153,6 +150,20 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 
 	for(const auto& partId : _fe3d->model_getPartIds(templateId))
 	{
+		_fe3d->model_setLightness(newId, partId, _fe3d->model_getLightness(templateId, partId));
+		_fe3d->model_setBright(newId, partId, _fe3d->model_isBright(templateId, partId));
+		_fe3d->model_setSpecular(newId, partId, _fe3d->model_isSpecular(templateId, partId));
+		_fe3d->model_setSpecularShininess(newId, partId, _fe3d->model_getSpecularShininess(templateId, partId));
+		_fe3d->model_setSpecularIntensity(newId, partId, _fe3d->model_getSpecularIntensity(templateId, partId));
+		_fe3d->model_setReflective(newId, partId, _fe3d->model_isReflective(templateId, partId));
+		_fe3d->model_setReflectionType(newId, partId, _fe3d->model_getReflectionType(templateId, partId));
+		_fe3d->model_setReflectivity(newId, partId, _fe3d->model_getReflectivity(templateId, partId));
+		_fe3d->model_setColor(newId, partId, _fe3d->model_getColor(templateId, partId));
+		_fe3d->model_setTextureRepeat(newId, partId, _fe3d->model_getTextureRepeat(templateId, partId));
+		_fe3d->model_setFaceCulled(newId, partId, _fe3d->model_isFaceCulled(templateId, partId));
+		_fe3d->model_setMinTextureAlpha(newId, partId, _fe3d->model_getMinTextureAlpha(templateId, partId));
+		_fe3d->model_setOpacity(newId, partId, _fe3d->model_getOpacity(templateId, partId));
+
 		if(_fe3d->model_hasDiffuseMap(templateId, partId))
 		{
 			_fe3d->model_setDiffuseMap(newId, partId, _fe3d->model_getDiffuseMapPath(templateId, partId));
@@ -177,20 +188,6 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 		{
 			_fe3d->model_setNormalMap(newId, partId, _fe3d->model_getNormalMapPath(templateId, partId));
 		}
-
-		_fe3d->model_setLightness(newId, partId, _fe3d->model_getLightness(templateId, partId));
-		_fe3d->model_setBright(newId, partId, _fe3d->model_isBright(templateId, partId));
-		_fe3d->model_setSpecular(newId, partId, _fe3d->model_isSpecular(templateId, partId));
-		_fe3d->model_setSpecularShininess(newId, partId, _fe3d->model_getSpecularShininess(templateId, partId));
-		_fe3d->model_setSpecularIntensity(newId, partId, _fe3d->model_getSpecularIntensity(templateId, partId));
-		_fe3d->model_setReflective(newId, partId, _fe3d->model_isReflective(templateId, partId));
-		_fe3d->model_setReflectionType(newId, partId, _fe3d->model_getReflectionType(templateId, partId));
-		_fe3d->model_setReflectivity(newId, partId, _fe3d->model_getReflectivity(templateId, partId));
-		_fe3d->model_setColor(newId, partId, _fe3d->model_getColor(templateId, partId));
-		_fe3d->model_setTextureRepeat(newId, partId, _fe3d->model_getTextureRepeat(templateId, partId));
-		_fe3d->model_setFaceCulled(newId, partId, _fe3d->model_isFaceCulled(templateId, partId));
-		_fe3d->model_setMinTextureAlpha(newId, partId, _fe3d->model_getMinTextureAlpha(templateId, partId));
-		_fe3d->model_setOpacity(newId, partId, _fe3d->model_getOpacity(templateId, partId));
 	}
 
 	for(const auto& templateAabbId : _fe3d->aabb_getChildIds(templateId, AabbParentEntityType::MODEL))
@@ -225,10 +222,15 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
 {
 	_fe3d->quad3d_create(newId, false);
-
-	_fe3d->aabb_create(newId, false);
-	_fe3d->aabb_setParentEntityId(newId, newId);
-	_fe3d->aabb_setParentEntityType(newId, AabbParentEntityType::QUAD3D);
+	_fe3d->quad3d_setPosition(newId, position);
+	_fe3d->quad3d_setSize(newId, _fe3d->quad3d_getSize(templateId));
+	_fe3d->quad3d_setFacingCameraHorizontally(newId, _fe3d->quad3d_isFacingCameraHorizontally(templateId));
+	_fe3d->quad3d_setFacingCameraVertically(newId, _fe3d->quad3d_isFacingCameraVertically(templateId));
+	_fe3d->quad3d_setColor(newId, _fe3d->quad3d_getColor(templateId));
+	_fe3d->quad3d_setShadowed(newId, _fe3d->quad3d_isShadowed(templateId));
+	_fe3d->quad3d_setReflected(newId, _fe3d->quad3d_isReflected(templateId));
+	_fe3d->quad3d_setLightness(newId, _fe3d->quad3d_getLightness(templateId));
+	_fe3d->quad3d_setMinTextureAlpha(newId, _fe3d->quad3d_getMinTextureAlpha(templateId));
 
 	if(_fe3d->quad3d_hasDiffuseMap(templateId))
 	{
@@ -240,15 +242,9 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& t
 		_fe3d->quad3d_setEmissionMap(newId, _fe3d->quad3d_getEmissionMapPath(templateId));
 	}
 
-	_fe3d->quad3d_setPosition(newId, position);
-	_fe3d->quad3d_setSize(newId, _fe3d->quad3d_getSize(templateId));
-	_fe3d->quad3d_setFacingCameraHorizontally(newId, _fe3d->quad3d_isFacingCameraHorizontally(templateId));
-	_fe3d->quad3d_setFacingCameraVertically(newId, _fe3d->quad3d_isFacingCameraVertically(templateId));
-	_fe3d->quad3d_setColor(newId, _fe3d->quad3d_getColor(templateId));
-	_fe3d->quad3d_setShadowed(newId, _fe3d->quad3d_isShadowed(templateId));
-	_fe3d->quad3d_setReflected(newId, _fe3d->quad3d_isReflected(templateId));
-	_fe3d->quad3d_setLightness(newId, _fe3d->quad3d_getLightness(templateId));
-	_fe3d->quad3d_setMinTextureAlpha(newId, _fe3d->quad3d_getMinTextureAlpha(templateId));
+	_fe3d->aabb_create(newId, false);
+	_fe3d->aabb_setParentEntityId(newId, newId);
+	_fe3d->aabb_setParentEntityType(newId, AabbParentEntityType::QUAD3D);
 
 	if(isFromOutside)
 	{
@@ -265,11 +261,6 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& t
 const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
 {
 	_fe3d->text3d_create(newId, _fe3d->text3d_getFontMapPath(templateId), false);
-
-	_fe3d->aabb_create(newId, false);
-	_fe3d->aabb_setParentEntityId(newId, newId);
-	_fe3d->aabb_setParentEntityType(newId, AabbParentEntityType::TEXT3D);
-
 	_fe3d->text3d_setPosition(newId, position);
 	_fe3d->text3d_setSize(newId, _fe3d->text3d_getSize(templateId));
 	_fe3d->text3d_setFacingCameraHorizontally(newId, _fe3d->text3d_isFacingCameraHorizontally(templateId));
@@ -280,6 +271,10 @@ const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& t
 	_fe3d->text3d_setLightness(newId, _fe3d->text3d_getLightness(templateId));
 	_fe3d->text3d_setContent(newId, _fe3d->text3d_getContent(templateId));
 	_fe3d->text3d_setMinTextureAlpha(newId, _fe3d->text3d_getMinTextureAlpha(templateId));
+
+	_fe3d->aabb_create(newId, false);
+	_fe3d->aabb_setParentEntityId(newId, newId);
+	_fe3d->aabb_setParentEntityType(newId, AabbParentEntityType::TEXT3D);
 
 	if(isFromOutside)
 	{

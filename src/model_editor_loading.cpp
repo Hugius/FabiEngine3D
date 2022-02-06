@@ -419,14 +419,10 @@ const bool ModelEditor::loadFromFile()
 			}
 
 			_fe3d->aabb_create(aabbId, false);
-
-			if(_fe3d->aabb_isExisting(aabbId))
-			{
-				_fe3d->aabb_setParentEntityId(aabbId, modelId);
-				_fe3d->aabb_setParentEntityType(aabbId, AabbParentEntityType::MODEL);
-				_fe3d->aabb_setLocalPosition(aabbId, position);
-				_fe3d->aabb_setLocalSize(aabbId, size);
-			}
+			_fe3d->aabb_setParentEntityId(aabbId, modelId);
+			_fe3d->aabb_setParentEntityType(aabbId, AabbParentEntityType::MODEL);
+			_fe3d->aabb_setLocalPosition(aabbId, position);
+			_fe3d->aabb_setLocalSize(aabbId, size);
 		}
 		else
 		{

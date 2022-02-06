@@ -405,14 +405,15 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "REFLECTION")
 		{
-			string reflectionId;
+			string reflectionId, exceptionModelId;
 			fvec3 position;
 
 			iss
 				>> reflectionId
 				>> position.x
 				>> position.y
-				>> position.z;
+				>> position.z
+				>> exceptionModelId;
 
 			if(isLoaded())
 			{
@@ -433,6 +434,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			_fe3d->reflection_create(reflectionId);
 			_fe3d->reflection_setPosition(reflectionId, position);
+			_fe3d->reflection_setExceptionModelId(reflectionId, exceptionModelId);
 			_fe3d->reflection_capture(reflectionId);
 			_loadedReflectionIds.push_back(reflectionId);
 		}

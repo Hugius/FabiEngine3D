@@ -610,7 +610,7 @@ public:
 	void reflection_setExceptionModelId(const string& reflectionId, const string& modelId);
 
 	const vector<string> reflection_getIds() const;
-	const string& getExceptionModelId(const string& id) const;
+	const string& reflection_getExceptionModelId(const string& id) const;
 	const fvec3& reflection_getPosition(const string& id) const;
 	const bool reflection_isExisting(const string& id) const;
 	const bool reflection_isVisible(const string& id) const;

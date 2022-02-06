@@ -58,7 +58,7 @@ const vector<string> EngineInterface::reflection_getIds() const
 	return result;
 }
 
-const string& EngineInterface::getExceptionModelId(const string& id) const
+const string& EngineInterface::reflection_getExceptionModelId(const string& id) const
 {
 	return _core->getReflectionEntityManager()->getEntity(id)->getExceptionModelId();
 }

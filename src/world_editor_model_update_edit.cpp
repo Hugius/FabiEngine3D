@@ -113,32 +113,35 @@ void WorldEditor::_updateModelEditing()
 
 			auto lastAnimationId = _animation3dEditor->getStartedModelAnimationIds(_activeModelId);
 			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
-			if(!selectedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(!selectedButtonId.empty())
 			{
-				if(!lastAnimationId.empty())
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_animation3dEditor->stopModelAnimation(lastAnimationId.back(), _activeModelId);
-
-					_fe3d->model_setBasePosition(_activeModelId, _initialModelPosition.at(_activeModelId));
-					_fe3d->model_setBaseRotationOrigin(_activeModelId, fvec3(0.0f));
-					_fe3d->model_setBaseRotation(_activeModelId, _initialModelRotation.at(_activeModelId));
-					_fe3d->model_setBaseSize(_activeModelId, _initialModelSize.at(_activeModelId));
-
-					for(const auto& partId : _fe3d->model_getPartIds(_activeModelId))
+					if(!lastAnimationId.empty())
 					{
-						if(!partId.empty())
+						_animation3dEditor->stopModelAnimation(lastAnimationId.back(), _activeModelId);
+
+						_fe3d->model_setBasePosition(_activeModelId, _initialModelPosition.at(_activeModelId));
+						_fe3d->model_setBaseRotationOrigin(_activeModelId, fvec3(0.0f));
+						_fe3d->model_setBaseRotation(_activeModelId, _initialModelRotation.at(_activeModelId));
+						_fe3d->model_setBaseSize(_activeModelId, _initialModelSize.at(_activeModelId));
+
+						for(const auto& partId : _fe3d->model_getPartIds(_activeModelId))
 						{
-							_fe3d->model_setPartPosition(_activeModelId, partId, fvec3(0.0f));
-							_fe3d->model_setPartRotationOrigin(_activeModelId, partId, fvec3(0.0f));
-							_fe3d->model_setPartRotation(_activeModelId, partId, fvec3(0.0f));
-							_fe3d->model_setPartSize(_activeModelId, partId, fvec3(1.0f));
+							if(!partId.empty())
+							{
+								_fe3d->model_setPartPosition(_activeModelId, partId, fvec3(0.0f));
+								_fe3d->model_setPartRotationOrigin(_activeModelId, partId, fvec3(0.0f));
+								_fe3d->model_setPartRotation(_activeModelId, partId, fvec3(0.0f));
+								_fe3d->model_setPartSize(_activeModelId, partId, fvec3(1.0f));
+							}
 						}
 					}
+
+					_animation3dEditor->startModelAnimation(selectedButtonId, _activeModelId, -1);
+
+					_gui->getOverlay()->deleteChoiceForm("animationList");
 				}
-
-				_animation3dEditor->startModelAnimation(selectedButtonId, _activeModelId, -1);
-
-				_gui->getOverlay()->deleteChoiceForm("animationList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 			{

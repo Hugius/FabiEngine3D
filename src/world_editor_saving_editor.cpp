@@ -284,13 +284,15 @@ const bool WorldEditor::saveEditorWorldToFile()
 		if(reflectionId[0] != '@')
 		{
 			auto position = _fe3d->reflection_getPosition(reflectionId);
+			auto exceptionModelId = _fe3d->reflection_getExceptionModelId(reflectionId);
 
 			file <<
 				"REFLECTION " <<
 				reflectionId << " " <<
 				position.x << " " <<
 				position.y << " " <<
-				position.z << endl;
+				position.z << " " <<
+				exceptionModelId << endl;
 		}
 	}
 

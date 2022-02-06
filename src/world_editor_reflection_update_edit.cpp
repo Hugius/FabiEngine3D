@@ -72,7 +72,23 @@ void WorldEditor::_updateReflectionEditing()
 
 			rightWindow->setActiveScreen("reflectionPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("exception")->isHovered())
+			{
+				vector<string> modelIds;
+
+				auto ids = _fe3d->model_getIds();
+				sort(ids.begin(), ids.end());
+				for(auto& modelId : ids)
+				{
+					if(modelId[0] != '@')
+					{
+						modelIds.push_back(modelId);
+					}
+				}
+
+				_gui->getOverlay()->createChoiceForm("exceptionList", "Select Exception", fvec2(0.0f, 0.1f), modelIds);
+			}
+			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
 			{
 				_fe3d->reflection_capture(activeReflectionId);
 			}
@@ -84,6 +100,20 @@ void WorldEditor::_updateReflectionEditing()
 				_activeCameraId = "";
 				rightWindow->setActiveScreen("main");
 				return;
+			}
+
+			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("exceptionList");
+			if(!selectedButtonId.empty())
+			{
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				{
+					_fe3d->reflection_setExceptionModelId(activeReflectionId, selectedButtonId);
+					_gui->getOverlay()->deleteChoiceForm("exceptionList");
+				}
+			}
+			else if(_gui->getOverlay()->isChoiceFormCancelled("exceptionList"))
+			{
+				_gui->getOverlay()->deleteChoiceForm("exceptionList");
 			}
 
 			auto position = _fe3d->reflection_getPosition(activeReflectionId);

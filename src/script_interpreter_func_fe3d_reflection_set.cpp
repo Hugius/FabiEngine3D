@@ -125,6 +125,20 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			}
 		}
 	}
+	else if(functionName == "fe3d:reflection_capture")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dReflection(args[0]->getString()))
+			{
+				_fe3d->reflection_setExceptionModelId(args[0]->getString(), args[1]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else
 	{
 		return false;

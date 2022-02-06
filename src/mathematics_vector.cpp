@@ -40,23 +40,23 @@ const fvec4 Math::calculateDifference(const fvec4& firstPosition, const fvec4& s
 
 const fvec2 Math::normalize(const fvec2& vector)
 {
-	const float inverseMagnitude = (1.0f / calculateMagnitude(vector));
+	const float invertedMagnitude = (1.0f / calculateMagnitude(vector));
 
-	return fvec2((vector.x * inverseMagnitude), (vector.y * inverseMagnitude));
+	return fvec2((vector.x * invertedMagnitude), (vector.y * invertedMagnitude));
 }
 
 const fvec3 Math::normalize(const fvec3& vector)
 {
-	const float inverseMagnitude = (1.0f / calculateMagnitude(vector));
+	const float invertedMagnitude = (1.0f / calculateMagnitude(vector));
 
-	return fvec3((vector.x * inverseMagnitude), (vector.y * inverseMagnitude), (vector.z * inverseMagnitude));
+	return fvec3((vector.x * invertedMagnitude), (vector.y * invertedMagnitude), (vector.z * invertedMagnitude));
 }
 
 const fvec4 Math::normalize(const fvec4& vector)
 {
-	const float inverseMagnitude = (1.0f / calculateMagnitude(vector));
+	const float invertedMagnitude = (1.0f / calculateMagnitude(vector));
 
-	return fvec4((vector.x * inverseMagnitude), (vector.y * inverseMagnitude), (vector.z * inverseMagnitude), (vector.w * inverseMagnitude));
+	return fvec4((vector.x * invertedMagnitude), (vector.y * invertedMagnitude), (vector.z * invertedMagnitude), (vector.w * invertedMagnitude));
 }
 
 const float Math::calculateDistance(const fvec2& firstPosition, const fvec2& secondPosition)

@@ -38,6 +38,7 @@ public:
 	void setFirstPersonEnabled(bool value);
 	void setThirdPersonEnabled(bool value);
 	void notifyCursorCenter();
+	void invertUp();
 
 	const mat44& getView() const;
 	const mat44& getProjection() const;
@@ -70,6 +71,7 @@ public:
 
 private:
 	static inline const fvec3 DEFAULT_UP = fvec3(0.0f, 1.0f, 0.0f);
+	static inline const fvec3 INVERTED_UP = fvec3(0.0f, -1.0f, 0.0f);
 	static inline constexpr float DEFAULT_NEAR = 0.01f;
 	static inline constexpr float DEFAULT_FAR = 2500.0f;
 	static inline constexpr float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
@@ -115,6 +117,7 @@ private:
 	bool _isFirstPersonEnabled = false;
 	bool _mustCenterCursor = false;
 	bool _isCursorBeingCentered = false;
+	bool _isUpInverted = false;
 
 	shared_ptr<RenderWindow> _renderWindow = nullptr;
 };

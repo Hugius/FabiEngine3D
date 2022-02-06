@@ -45,7 +45,7 @@ void MasterRenderer::_captureCubeReflections()
 	const auto originalShadowInterval = _renderStorage->getShadowInterval();
 	const auto wasSkyExposureEnabled = _renderStorage->isSkyExposureEnabled();
 
-	//_camera->invertUpDirection();
+	_camera->invertUp();
 	_camera->setAspectRatio(1.0f);
 	_camera->setFov(90.0f);
 
@@ -95,7 +95,7 @@ void MasterRenderer::_captureCubeReflections()
 					case 3:
 					{
 						_camera->setYaw(90.0f);
-						_camera->setPitch(270.0f);
+						_camera->setPitch(-90.0f);
 						break;
 					}
 					case 4:
@@ -144,6 +144,7 @@ void MasterRenderer::_captureCubeReflections()
 			}
 
 			entity->setCubeMap(make_shared<TextureBuffer>(textureId));
+			_skyEntityManager->getSelectedEntity()->setCubeMap(make_shared<TextureBuffer>(textureId));
 			entity->setCaptured();
 		}
 	}
@@ -163,7 +164,7 @@ void MasterRenderer::_captureCubeReflections()
 		entity->setVisible(true);
 	}
 
-	//_camera->invertUpDirection();
+	_camera->invertUp();
 	_camera->setAspectRatio(originalCameraAspectRatio);
 	_camera->setFov(originalCameraFOV);
 	_camera->setPosition(originalCameraPosition);

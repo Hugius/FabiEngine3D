@@ -242,6 +242,11 @@ void Camera::notifyCursorCenter()
 	_isCursorBeingCentered = true;
 }
 
+void Camera::invertUp()
+{
+	_isUpInverted = !_isUpInverted;
+}
+
 const mat44& Camera::getView() const
 {
 	return _view;
@@ -259,7 +264,14 @@ const fvec3& Camera::getUp() const
 
 void Camera::updateMatrices()
 {
-	_up = DEFAULT_UP;
+	if(_isUpInverted)
+	{
+		_up = INVERTED_UP;
+	}
+	else
+	{
+		_up = DEFAULT_UP;
+	}
 
 	_front.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
 	_front.y = sin(Math::convertToRadians(_pitch));

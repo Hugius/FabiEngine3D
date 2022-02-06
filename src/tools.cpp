@@ -289,13 +289,13 @@ const fvec2 Tools::convertPositionRelativeFromDisplay(const fvec2& position)
 
 	const auto sizeMultiplier = (fvec2(Config::getInst().getDisplaySize()) / fvec2(Config::getInst().getWindowSize()));
 	const auto positionMultiplier = (fvec2(Config::getInst().getDisplayPosition()) / fvec2(Config::getInst().getWindowSize()));
-	const auto inverseSizeMultiplier = fvec2(Config::getInst().getWindowSize()) / fvec2(Config::getInst().getDisplaySize());
-	const auto inversePositionMultiplier = (fvec2(Config::getInst().getWindowSize()) / fvec2(Config::getInst().getDisplayPosition()));
+	const auto invertedSizeMultiplier = fvec2(Config::getInst().getWindowSize()) / fvec2(Config::getInst().getDisplaySize());
+	const auto invertedPositionMultiplier = (fvec2(Config::getInst().getWindowSize()) / fvec2(Config::getInst().getDisplayPosition()));
 	const auto offset = (fvec2(1.0f) - fvec2(((positionMultiplier.x * 2.0f) + sizeMultiplier.x), ((positionMultiplier.y * 2.0f) + sizeMultiplier.y)));
 
 	fvec2 result = position;
 	result -= fvec2(fabsf(offset.x), fabsf(offset.y));
-	result *= inverseSizeMultiplier;
+	result *= invertedSizeMultiplier;
 
 	return result;
 }

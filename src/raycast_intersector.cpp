@@ -145,7 +145,7 @@ const float RaycastIntersector::_calculateRayBoxIntersectionDistance(const share
 		return -1.0f;
 	}
 
-	const auto inverseRayDirection = (fvec3(1.0f) / ray->getDirection());
+	const auto invertedRayDirection = (fvec3(1.0f) / ray->getDirection());
 
 	const auto minX = (box->getPosition().x - box->getLeft());
 	const auto maxX = (box->getPosition().x + box->getRight());
@@ -154,12 +154,12 @@ const float RaycastIntersector::_calculateRayBoxIntersectionDistance(const share
 	const auto minZ = (box->getPosition().z - box->getBack());
 	const auto maxZ = (box->getPosition().z + box->getFront());
 
-	const auto minDistanceX = ((minX - ray->getPosition().x) * inverseRayDirection.x);
-	const auto maxDistanceX = ((maxX - ray->getPosition().x) * inverseRayDirection.x);
-	const auto minDistanceY = ((minY - ray->getPosition().y) * inverseRayDirection.y);
-	const auto maxDistanceY = ((maxY - ray->getPosition().y) * inverseRayDirection.y);
-	const auto minDistanceZ = ((minZ - ray->getPosition().z) * inverseRayDirection.z);
-	const auto maxDistanceZ = ((maxZ - ray->getPosition().z) * inverseRayDirection.z);
+	const auto minDistanceX = ((minX - ray->getPosition().x) * invertedRayDirection.x);
+	const auto maxDistanceX = ((maxX - ray->getPosition().x) * invertedRayDirection.x);
+	const auto minDistanceY = ((minY - ray->getPosition().y) * invertedRayDirection.y);
+	const auto maxDistanceY = ((maxY - ray->getPosition().y) * invertedRayDirection.y);
+	const auto minDistanceZ = ((minZ - ray->getPosition().z) * invertedRayDirection.z);
+	const auto maxDistanceZ = ((maxZ - ray->getPosition().z) * invertedRayDirection.z);
 
 	const auto minIntersectionDistance = max(max(min(minDistanceX, maxDistanceX), min(minDistanceY, maxDistanceY)), min(minDistanceZ, maxDistanceZ));
 	const auto maxIntersectionDistance = min(min(max(minDistanceX, maxDistanceX), max(minDistanceY, maxDistanceY)), max(minDistanceZ, maxDistanceZ));

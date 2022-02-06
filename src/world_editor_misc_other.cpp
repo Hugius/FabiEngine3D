@@ -136,6 +136,7 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
+	_idCounter = 0;
 	_loadedWorldId = "";
 	_loadedSkyId = "";
 	_loadedTerrainId = "";

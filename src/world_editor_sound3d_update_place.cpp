@@ -16,14 +16,10 @@ void WorldEditor::_updateSoundPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = (_currentTemplateSoundId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = string(_currentTemplateSoundId.substr(1) + "_" + to_string(_idCounter));
 				auto newModelId = ("@@speaker_" + newId);
 
-				while(_fe3d->sound3d_isExisting(newId))
-				{
-					newId = (_currentTemplateSoundId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@speaker_" + newId);
-				}
+				_idCounter++;
 
 				_loadedSoundIds.insert(make_pair(newId, _currentTemplateSoundId));
 
@@ -107,14 +103,10 @@ void WorldEditor::_updateSoundPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newId = (_currentTemplateSoundId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = string(_currentTemplateSoundId.substr(1) + "_" + to_string(_idCounter));
 				auto newModelId = ("@@speaker_" + newId);
 
-				while(_fe3d->sound3d_isExisting(newId))
-				{
-					newId = (_currentTemplateSoundId.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@speaker_" + newId);
-				}
+				_idCounter++;
 
 				_loadedSoundIds.insert(make_pair(newId, _currentTemplateSoundId));
 

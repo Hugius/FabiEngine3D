@@ -15,12 +15,8 @@ void WorldEditor::_activateModel(const string& id)
 	rightWindow->getScreen("modelPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	rightWindow->getScreen("modelPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	string tempId = id;
-	reverse(tempId.begin(), tempId.end());
-	string rawId = tempId.substr(tempId.find('_') + 1);
-	reverse(rawId.begin(), rawId.end());
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("modelId")->changeTextContent("Active model: " + rawId);
+	_gui->getOverlay()->getTextField("modelId")->changeTextContent("Active model: " + _activeModelId);
 }
 
 void WorldEditor::_activateQuad3d(const string& id)
@@ -38,12 +34,8 @@ void WorldEditor::_activateQuad3d(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	string tempId = id;
-	reverse(tempId.begin(), tempId.end());
-	string rawId = tempId.substr(tempId.find('_') + 1);
-	reverse(rawId.begin(), rawId.end());
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("quadId")->changeTextContent("Active quad3d: " + rawId);
+	_gui->getOverlay()->getTextField("quadId")->changeTextContent("Active quad3d: " + _activeQuadId);
 }
 
 void WorldEditor::_activateText3d(const string& id)
@@ -61,12 +53,8 @@ void WorldEditor::_activateText3d(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	string tempId = id;
-	reverse(tempId.begin(), tempId.end());
-	string rawId = tempId.substr(tempId.find('_') + 1);
-	reverse(rawId.begin(), rawId.end());
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("textId")->changeTextContent("Active text3d: " + rawId);
+	_gui->getOverlay()->getTextField("textId")->changeTextContent("Active text3d: " + _activeTextId);
 }
 
 void WorldEditor::_activateSound(const string& id)
@@ -84,12 +72,8 @@ void WorldEditor::_activateSound(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("volume")->changeTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
 
-	string tempId = id;
-	reverse(tempId.begin(), tempId.end());
-	string rawId = tempId.substr(tempId.find('_') + 1);
-	reverse(rawId.begin(), rawId.end());
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Active sound: " + rawId);
+	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Active sound: " + _activeSpeakerId);
 }
 
 void WorldEditor::_activatePointlight(const string& id)

@@ -16,14 +16,10 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = string("reflection_" + to_string(_idCounter));
 				auto newModelId = ("@@camera_" + newId);
 
-				while(_fe3d->reflection_isExisting(newId))
-				{
-					newId = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@camera_" + newId);
-				}
+				_idCounter++;
 
 				_loadedReflectionIds.push_back(newId);
 
@@ -90,14 +86,10 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newId = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = string("reflection_" + to_string(_idCounter));
 				auto newModelId = ("@@camera_" + newId);
 
-				while(_fe3d->reflection_isExisting(newId))
-				{
-					newId = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@camera_" + newId);
-				}
+				_idCounter++;
 
 				_loadedReflectionIds.push_back(newId);
 

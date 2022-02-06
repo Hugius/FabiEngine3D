@@ -17,14 +17,10 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = string("spotlight_" + to_string(_idCounter));
 				auto newModelId = ("@@torch_" + newId);
 
-				while(_fe3d->spotlight_isExisting(newId))
-				{
-					newId = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@torch_" + newId);
-				}
+				_idCounter++;
 
 				if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxEntityCount())
 				{
@@ -106,14 +102,10 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newId = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = string("spotlight_" + to_string(_idCounter));
 				auto newModelId = ("@@torch_" + newId);
 
-				while(_fe3d->spotlight_isExisting(newId))
-				{
-					newId = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@torch_" + newId);
-				}
+				_idCounter++;
 
 				if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxEntityCount())
 				{

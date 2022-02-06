@@ -36,40 +36,46 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 		iss >> lineType;
 
-		if(lineType == "CAMERA_POSITION")
+		if(lineType == "ID_COUNTER")
 		{
-			fvec3 position;
-
-			iss
-				>> position.x
-				>> position.y
-				>> position.z;
-
 			if(isLoaded())
 			{
+				iss >> _idCounter;
+			}
+		}
+		else if(lineType == "CAMERA_POSITION")
+		{
+			if(isLoaded())
+			{
+				fvec3 position;
+
+				iss
+					>> position.x
+					>> position.y
+					>> position.z;
 				_fe3d->camera_setPosition(position);
 			}
 		}
 		else if(lineType == "CAMERA_YAW")
 		{
-			float yaw;
-
-			iss >> yaw;
-
 			if(isLoaded())
 			{
+				float yaw;
+
+				iss >> yaw;
+
 				_fe3d->camera_setYaw(yaw);
 				_fe3d->camera_setFirstPersonYaw(yaw);
 			}
 		}
 		else if(lineType == "CAMERA_PITCH")
 		{
-			float pitch;
-
-			iss >> pitch;
-
 			if(isLoaded())
 			{
+				float pitch;
+
+				iss >> pitch;
+
 				_fe3d->camera_setPitch(pitch);
 				_fe3d->camera_setFirstPersonPitch(pitch);
 			}
@@ -347,6 +353,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d->pointlight_setColor(pointlightId, color);
 			_fe3d->pointlight_setIntensity(pointlightId, intensity);
 			_fe3d->pointlight_setShape(pointlightId, PointlightShape(shape));
+
 			_loadedPointlightIds.push_back(pointlightId);
 		}
 		else if(lineType == "SPOTLIGHT")
@@ -401,6 +408,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d->spotlight_setIntensity(spotlightId, intensity);
 			_fe3d->spotlight_setAngle(spotlightId, angle);
 			_fe3d->spotlight_setDistance(spotlightId, distance);
+
 			_loadedSpotlightIds.push_back(spotlightId);
 		}
 		else if(lineType == "REFLECTION")
@@ -434,8 +442,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			_fe3d->reflection_create(reflectionId);
 			_fe3d->reflection_setPosition(reflectionId, position);
-			_fe3d->reflection_setExceptionModelId(reflectionId, exceptionModelId);
+			_fe3d->reflection_setExceptionModelId(reflectionId, (_fe3d->model_isExisting(exceptionModelId) ? exceptionModelId : ""));
 			_fe3d->reflection_capture(reflectionId);
+
 			_loadedReflectionIds.push_back(reflectionId);
 		}
 		else if(lineType == "EDITOR_SPEED")

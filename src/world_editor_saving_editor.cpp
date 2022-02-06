@@ -35,20 +35,32 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	const auto cameraPosition = _fe3d->camera_getPosition();
-	file <<
-		"CAMERA_POSITION " <<
-		cameraPosition.x << " " <<
-		cameraPosition.y << " " <<
-		cameraPosition.z << endl;
+	{
+		file <<
+			"ID_COUNTER " <<
+			_idCounter << endl;
+	}
 
-	file <<
-		"CAMERA_YAW " <<
-		_fe3d->camera_getYaw() << endl;
+	{
+		const auto cameraPosition = _fe3d->camera_getPosition();
+		file <<
+			"CAMERA_POSITION " <<
+			cameraPosition.x << " " <<
+			cameraPosition.y << " " <<
+			cameraPosition.z << endl;
+	}
 
-	file <<
-		"CAMERA_PITCH " <<
-		_fe3d->camera_getPitch() << endl;
+	{
+		file <<
+			"CAMERA_YAW " <<
+			_fe3d->camera_getYaw() << endl;
+	}
+
+	{
+		file <<
+			"CAMERA_PITCH " <<
+			_fe3d->camera_getPitch() << endl;
+	}
 
 	string skyId = _fe3d->sky_getSelectedId();
 	if(!skyId.empty())

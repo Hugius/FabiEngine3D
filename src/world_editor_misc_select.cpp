@@ -8,12 +8,8 @@ void WorldEditor::_selectModel(const string& id)
 
 	if(_activeModelId.empty() && _activeQuadId.empty() && _activeSpeakerId.empty() && _activeLampId.empty() && _activeCameraId.empty())
 	{
-		string tempId = _selectedModelId;
-		reverse(tempId.begin(), tempId.end());
-		string rawId = tempId.substr(tempId.find('_') + 1);
-		reverse(rawId.begin(), rawId.end());
 		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
-		_gui->getOverlay()->getTextField("modelId")->changeTextContent("Selected model: " + rawId);
+		_gui->getOverlay()->getTextField("modelId")->changeTextContent("Selected Model: " + _selectedModelId);
 	}
 }
 
@@ -25,12 +21,8 @@ void WorldEditor::_selectQuad3d(const string& id)
 
 	if(_activeModelId.empty() && _activeQuadId.empty() && _activeSpeakerId.empty() && _activeLampId.empty() && _activeCameraId.empty())
 	{
-		string tempId = id;
-		reverse(tempId.begin(), tempId.end());
-		string rawId = tempId.substr(tempId.find('_') + 1);
-		reverse(rawId.begin(), rawId.end());
 		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
-		_gui->getOverlay()->getTextField("quadId")->changeTextContent("Selected quad3d: " + rawId);
+		_gui->getOverlay()->getTextField("quadId")->changeTextContent("Selected Quad3d: " + _selectedQuadId);
 	}
 }
 
@@ -42,12 +34,8 @@ void WorldEditor::_selectText3d(const string& id)
 
 	if(_activeModelId.empty() && _activeTextId.empty() && _activeSpeakerId.empty() && _activeLampId.empty() && _activeCameraId.empty())
 	{
-		string tempId = id;
-		reverse(tempId.begin(), tempId.end());
-		string rawId = tempId.substr(tempId.find('_') + 1);
-		reverse(rawId.begin(), rawId.end());
 		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
-		_gui->getOverlay()->getTextField("textId")->changeTextContent("Selected text3d: " + rawId);
+		_gui->getOverlay()->getTextField("textId")->changeTextContent("Selected Text3d: " + _selectedTextId);
 	}
 }
 
@@ -59,12 +47,8 @@ void WorldEditor::_selectSound(const string& id)
 
 	if(_activeModelId.empty() && _activeQuadId.empty() && _activeSpeakerId.empty() && _activeLampId.empty() && _activeCameraId.empty())
 	{
-		string tempId = id;
-		reverse(tempId.begin(), tempId.end());
-		string rawId = tempId.substr(tempId.find('_') + 1);
-		reverse(rawId.begin(), rawId.end());
 		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
-		_gui->getOverlay()->getTextField("soundId")->changeTextContent("Selected sound: " + rawId);
+		_gui->getOverlay()->getTextField("soundId")->changeTextContent("Selected Sound: " + _selectedSpeakerId);
 	}
 }
 

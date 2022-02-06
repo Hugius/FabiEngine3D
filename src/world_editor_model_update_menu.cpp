@@ -30,19 +30,9 @@ void WorldEditor::_updateModelMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
-			auto ids = _fe3d->model_getIds();
-			sort(ids.begin(), ids.end());
-			for(auto& modelId : ids)
+			for(auto& [key, templateId] : _loadedModelIds)
 			{
-				if(modelId[0] != '@')
-				{
-					reverse(modelId.begin(), modelId.end());
-					string rawId = modelId.substr(modelId.find('_') + 1);
-					reverse(rawId.begin(), rawId.end());
-					reverse(modelId.begin(), modelId.end());
-
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createButton(modelId, rawId);
-				}
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createButton(key, key);
 			}
 		}
 
@@ -115,24 +105,21 @@ void WorldEditor::_updateModelChoosingMenu()
 			}
 		}
 
-		for(const auto& modelId : _fe3d->model_getIds())
+		for(auto& [key, templateId] : _loadedModelIds)
 		{
-			if(modelId[0] != '@')
+			if(screen->getScrollingList("modelList")->getButton(key)->isHovered())
 			{
-				if(screen->getScrollingList("modelList")->getButton(modelId)->isHovered())
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-					{
-						_activateModel(modelId);
-					}
-					else
-					{
-						_dontResetSelectedModel = true;
-						_selectModel(modelId);
-					}
-
-					break;
+					_activateModel(key);
 				}
+				else
+				{
+					_dontResetSelectedModel = true;
+					_selectModel(key);
+				}
+
+				break;
 			}
 		}
 

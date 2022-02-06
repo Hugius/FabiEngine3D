@@ -17,14 +17,10 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = string("pointlight_" + to_string(_idCounter));
 				auto newModelId = ("@@lamp_" + newId);
 
-				while(_fe3d->pointlight_isExisting(newId))
-				{
-					newId = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@lamp_" + newId);
-				}
+				_idCounter++;
 
 				if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxEntityCount())
 				{
@@ -103,14 +99,10 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newId = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				auto newId = string("pointlight_" + to_string(_idCounter));
 				auto newModelId = ("@@lamp_" + newId);
 
-				while(_fe3d->pointlight_isExisting(newId))
-				{
-					newId = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
-					newModelId = ("@@lamp_" + newId);
-				}
+				_idCounter++;
 
 				if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxEntityCount())
 				{

@@ -76,14 +76,9 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				vector<string> modelIds;
 
-				auto ids = _fe3d->model_getIds();
-				sort(ids.begin(), ids.end());
-				for(auto& modelId : ids)
+				for(auto& [key, templateId]: _loadedModelIds)
 				{
-					if(modelId[0] != '@')
-					{
-						modelIds.push_back(modelId);
-					}
+					modelIds.push_back(key);
 				}
 
 				_gui->getOverlay()->createChoiceForm("exceptionList", "Select Exception", fvec2(0.0f, 0.1f), modelIds);

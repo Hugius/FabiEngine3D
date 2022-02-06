@@ -722,9 +722,8 @@ public:
 	void collision_setCameraTerrainResponseHeight(float value);
 	void collision_setCameraTerrainResponseSpeed(float value);
 
-	const string collision_checkCameraWithAny() const;
-	const string collision_checkCameraWithEntities(const string& id) const;
-	const string collision_checkEntityWithEntities(const string& selfId, const string& otherId) const;
+	const vector<string> collision_checkCameraWithAabbs() const;
+	const vector<string> collision_checkCameraWithAabbs(Direction direction) const;
 	const float collision_getCameraTerrainResponseHeight() const;
 	const float collision_getCameraTerrainResponseSpeed() const;
 	const bool collision_isCameraAabbResponseEnabledX() const;
@@ -732,10 +731,8 @@ public:
 	const bool collision_isCameraAabbResponseEnabledZ() const;
 	const bool collision_isCameraTerrainResponseEnabled() const;
 	const bool collision_checkCameraWithTerrain() const;
-	const bool collision_checkCameraWithEntity(const string& id) const;
-	const bool collision_checkCameraWithEntityDirection(const string& id, Direction direction) const;
-	const bool collision_checkCameraWithAnyDirection(Direction direction) const;
-	const bool collision_checkCameraWithEntitiesDirection(const string& id, Direction direction) const;
+	const bool collision_checkCameraWithAabb(const string& id) const;
+	const bool collision_checkCameraWithAabb(const string& id, Direction direction) const;
 
 	void raycast_setTerrainIntersectionEnabled(bool value);
 	void raycast_setTerrainIntersectionDistance(float value);

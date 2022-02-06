@@ -259,9 +259,9 @@ void EngineCore::update()
 
 	_timer->startDeltaPart("physicsUpdate");
 	_camera->update(lastCursorPosition);
+	_cameraCollisionResponder->update();
 	_raycastCalculator->update(_renderWindow->getCursorPosition());
 	_raycastIntersector->update();
-	_cameraCollisionResponder->update();
 	_camera->updateMatrices();
 	_timer->stopDeltaPart();
 

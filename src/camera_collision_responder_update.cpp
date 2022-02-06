@@ -3,6 +3,7 @@
 void CameraCollisionResponder::update()
 {
 	_isCameraUnderTerrain = false;
+
 	if(_isCameraTerrainResponseEnabled)
 	{
 		if(_terrainManager->getSelectedEntity() != nullptr)
@@ -17,6 +18,7 @@ void CameraCollisionResponder::update()
 				_isCameraUnderTerrain = true;
 
 				_camera->move(fvec3(0.0f, fabsf(cameraPosition.y - terrainY) * _cameraTerrainResponseSpeed, 0.0f));
+
 				cameraPosition.y = _camera->getPosition().y;
 
 				if(cameraPosition.y > terrainY)

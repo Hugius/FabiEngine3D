@@ -26,17 +26,37 @@ void EngineInterface::collision_setCameraTerrainResponseSpeed(float value)
 	_core->getCameraCollisionResponder()->setCameraTerrainResponseSpeed(value);
 }
 
-const string EngineInterface::collision_checkCameraWithAny() const
+const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
 {
+	vector<string> result;
+
 	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasCollided())
 		{
-			return entity->getId();
+			result.push_back(entity->getId());
 		}
 	}
 
-	return "";
+	return result;
+}
+
+const vector<string> EngineInterface::collision_checkCameraWithAabbs(Direction direction) const
+{
+	vector<string> result;
+
+	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
+	{
+		if(entity->hasCollided())
+		{
+			if(direction == entity->getCollisionDirection())
+			{
+				result.push_back(entity->getId());
+			}
+		}
+	}
+
+	return result;
 }
 
 const bool EngineInterface::collision_checkCameraWithTerrain() const
@@ -44,73 +64,9 @@ const bool EngineInterface::collision_checkCameraWithTerrain() const
 	return _core->getCameraCollisionResponder()->isCameraUnderTerrain();
 }
 
-const bool EngineInterface::collision_checkCameraWithEntity(const string& id) const
+const bool EngineInterface::collision_checkCameraWithAabb(const string& id) const
 {
 	return _core->getAabbEntityManager()->getEntity(id)->hasCollided();
-}
-
-const string EngineInterface::collision_checkEntityWithEntities(const string& selfId, const string& otherId) const
-{
-	if(!_core->getAabbEntityManager()->isEntityExisting(selfId))
-	{
-		return "";
-	}
-
-	auto self = _core->getAabbEntityManager()->getEntity(selfId);
-	fvec3 selfPosition = self->getPosition();
-	fvec3 selfSize = self->getSize() * 0.5f;
-
-	if(!self->isCollisionResponsive())
-	{
-		return "";
-	}
-
-	for(const auto& [key, other] : _core->getAabbEntityManager()->getEntities())
-	{
-		if(other->getId().substr(0, otherId.size()) != otherId)
-		{
-			continue;
-		}
-
-		if(other->getParentEntityId() == self->getParentEntityId())
-		{
-			continue;
-		}
-
-		if(!other->isCollisionResponsive())
-		{
-			continue;
-		}
-
-		fvec3 otherPosition = other->getPosition();
-		fvec3 otherSize = other->getSize() * 0.5f;
-		if
-			(
-			((selfPosition.x > otherPosition.x - otherSize.x && selfPosition.x < otherPosition.x + otherSize.x) ||
-			(selfPosition.x - selfSize.x > otherPosition.x - otherSize.x && selfPosition.x - selfSize.x < otherPosition.x + otherSize.x) ||
-			(selfPosition.x + selfSize.x > otherPosition.x - otherSize.x && selfPosition.x + selfSize.x < otherPosition.x + otherSize.x) ||
-			(selfPosition.x - selfSize.x <= otherPosition.x - otherSize.x && selfPosition.x + selfSize.x >= otherPosition.x + otherSize.x))
-
-			&&
-
-			((selfPosition.y + selfSize.y > otherPosition.y && selfPosition.y + selfSize.y < otherPosition.y + (otherSize.y * 2.0f)) ||
-			(selfPosition.y > otherPosition.y && selfPosition.y < otherPosition.y + (otherSize.y * 2.0f)) ||
-			(selfPosition.y + (selfSize.y * 2.0f) > otherPosition.y && selfPosition.y + (selfSize.y * 2.0f) < otherPosition.y + (otherSize.y * 2.0f)) ||
-			(selfPosition.y <= otherPosition.y && selfPosition.y + (selfSize.y * 2.0f) >= otherPosition.y + (otherSize.y * 2.0f)))
-
-			&&
-
-			((selfPosition.z > otherPosition.z - otherSize.z && selfPosition.z < otherPosition.z + otherSize.z) ||
-			(selfPosition.z - selfSize.z > otherPosition.z - otherSize.z && selfPosition.z - selfSize.z < otherPosition.z + otherSize.z) ||
-			(selfPosition.z + selfSize.z > otherPosition.z - otherSize.z && selfPosition.z + selfSize.z < otherPosition.z + otherSize.z) ||
-			(selfPosition.z - selfSize.z <= otherPosition.z - otherSize.z && selfPosition.z + selfSize.z >= otherPosition.z + otherSize.z))
-			)
-		{
-			return other->getId();
-		}
-	}
-
-	return "";
 }
 
 const float EngineInterface::collision_getCameraTerrainResponseHeight() const
@@ -138,64 +94,13 @@ const bool EngineInterface::collision_isCameraAabbResponseEnabledZ() const
 	return _core->getCameraCollisionResponder()->isCameraAabbResponseEnabledZ();
 }
 
-const string EngineInterface::collision_checkCameraWithEntities(const string& id) const
-{
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
-	{
-		if(entity->hasCollided())
-		{
-			if(entity->getId().substr(0, id.size()) == id)
-			{
-				return entity->getId();
-			}
-		}
-	}
-
-	return "";
-}
-
-const bool EngineInterface::collision_checkCameraWithEntityDirection(const string& id, Direction direction) const
+const bool EngineInterface::collision_checkCameraWithAabb(const string& id, Direction direction) const
 {
 	if(_core->getAabbEntityManager()->getEntity(id)->hasCollided())
 	{
 		if(direction == _core->getAabbEntityManager()->getEntity(id)->getCollisionDirection())
 		{
 			return true;
-		}
-	}
-
-	return false;
-}
-
-const bool EngineInterface::collision_checkCameraWithAnyDirection(Direction direction) const
-{
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
-	{
-		if(entity->hasCollided())
-		{
-			if(direction == entity->getCollisionDirection())
-			{
-				return true;
-			}
-		}
-	}
-
-	return false;
-}
-
-const bool EngineInterface::collision_checkCameraWithEntitiesDirection(const string& id, Direction direction) const
-{
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
-	{
-		if(entity->hasCollided())
-		{
-			if(direction == entity->getCollisionDirection())
-			{
-				if(entity->getId().substr(0, id.size()) == id)
-				{
-					return true;
-				}
-			}
 		}
 	}
 

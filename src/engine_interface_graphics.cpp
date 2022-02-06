@@ -51,6 +51,11 @@ void EngineInterface::gfx_setLensFlareEnabled(bool value)
 	_core->getRenderStorage()->setLensFlareEnabled(value);
 }
 
+void EngineInterface::gfx_setCubeReflectionInterval(unsigned int value)
+{
+	_core->getRenderStorage()->setCubeReflectionInterval(value);
+}
+
 void EngineInterface::gfx_setPlanarReflectionHeight(float value)
 {
 	_core->getRenderStorage()->setPlanarReflectionHeight(value);

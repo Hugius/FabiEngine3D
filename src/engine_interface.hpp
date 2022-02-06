@@ -607,8 +607,10 @@ public:
 	void reflection_move(const string& id, const fvec3& change);
 	void reflection_moveTo(const string& id, const fvec3& target, float speed);
 	void reflection_capture(const string& id);
+	void reflection_setExceptionModelId(const string& reflectionId, const string& modelId);
 
 	const vector<string> reflection_getIds() const;
+	const string& getExceptionModelId(const string& id) const;
 	const fvec3& reflection_getPosition(const string& id) const;
 	const bool reflection_isExisting(const string& id) const;
 	const bool reflection_isVisible(const string& id) const;
@@ -761,6 +763,7 @@ public:
 	void gfx_setDofEnabled(bool value);
 	void gfx_setMotionBlurEnabled(bool value);
 	void gfx_setLensFlareEnabled(bool value);
+	void gfx_setCubeReflectionInterval(unsigned int value);
 	void gfx_setCubeReflectionQuality(unsigned int value);
 	void gfx_setPlanarReflectionQuality(unsigned int value);
 	void gfx_setPlanarRefractionQuality(unsigned int value);

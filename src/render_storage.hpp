@@ -92,6 +92,7 @@ public:
 	void setSkyExposureEnabled(bool value);
 	void setShadowInterval(unsigned int value);
 	void setShadowsFollowingCamera(bool value);
+	void setCubeReflectionInterval(unsigned int value);
 
 	const string& getCursorEntityId() const;
 	const string& getLensFlareMapPath() const;
@@ -160,6 +161,7 @@ public:
 	const unsigned int getTriangleCount() const;
 	const unsigned int getGuiDepth() const;
 	const unsigned int getShadowInterval() const;
+	const unsigned int getCubeReflectionInterval() const;
 
 	const bool isReflectionsEnabled() const;
 	const bool isRefractionsEnabled() const;
@@ -277,6 +279,7 @@ private:
 	unsigned int _triangleCount = 0;
 	unsigned int _guiDepth = 0;
 	unsigned int _shadowInterval = 0;
+	unsigned int _cubeReflectionInterval = 0;
 
 	bool _isReflectionsEnabled = true;
 	bool _isRefractionsEnabled = true;

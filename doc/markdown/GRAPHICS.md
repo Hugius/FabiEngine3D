@@ -75,6 +75,9 @@
 - **Quality**: the quality of cube reflections
   - Type: `integer`
   - Constraints: between `128` and `1024`
+- **Interval**: the amount of engine updates between entity adaptions
+  - Type: `integer`
+  - Constraints: at least `0`
 
 ### 1.7 Planar Reflections
 

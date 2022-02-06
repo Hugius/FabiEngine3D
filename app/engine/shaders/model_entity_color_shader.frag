@@ -110,12 +110,12 @@ void main()
     vec3 reflectionMapping = calculateReflectionMapping();
     vec3 normalMapping = calculateNormalMapping();
 
-	float shadowLighting	 = calculateShadows();
-	float shadowOcclusion	 = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
-	vec3 ambientLighting	 = (calculateAmbientLighting() * shadowLighting);
+	float shadowLighting = calculateShadows();
+	float shadowOcclusion = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
+	vec3 ambientLighting = (calculateAmbientLighting() * shadowLighting);
 	vec3 directionalLighting = (calculateDirectionalLighting(specularMapping, normalMapping) * shadowOcclusion);
-	vec3 pointlights		 = calculatePointlights(specularMapping, normalMapping);
-	vec3 spotlights		     = calculateSpotlights(specularMapping, normalMapping);
+	vec3 pointlights = calculatePointlights(specularMapping, normalMapping);
+	vec3 spotlights	= calculateSpotlights(specularMapping, normalMapping);
 
 	vec3 primaryColor = vec3(0.0f);
 	primaryColor += diffuseMapping;

@@ -20,6 +20,9 @@ public:
 	void move(const fvec3& value);
 	void moveTo(const fvec3& target, float speed);
 	void setCubeMap(shared_ptr<TextureBuffer> value);
+	void setExceptionModelId(const string& id);
+
+	const string& getExceptionModelId() const;
 
 	const fvec3& getPosition() const;
 
@@ -28,6 +31,8 @@ public:
 	const shared_ptr<TextureBuffer> getCubeMap() const;
 
 private:
+	string _exceptionModelId = "";
+
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _positionTarget = fvec3(0.0f);
 

@@ -58,6 +58,12 @@ void MasterRenderer::_captureCubeReflections()
 	{
 		if(entity->mustCapture())
 		{
+			const auto wasExceptionModelVisible = (entity->getExceptionModelId().empty() ? false : _modelEntityManager->getEntity(entity->getExceptionModelId())->isVisible());
+			if(!entity->getExceptionModelId().empty())
+			{
+				_modelEntityManager->getEntity(entity->getExceptionModelId())->setVisible(false);
+			}
+
 			_camera->setPosition(entity->getPosition());
 
 			BufferId textureId;
@@ -144,8 +150,12 @@ void MasterRenderer::_captureCubeReflections()
 			}
 
 			entity->setCubeMap(make_shared<TextureBuffer>(textureId));
-			_skyEntityManager->getSelectedEntity()->setCubeMap(make_shared<TextureBuffer>(textureId));
 			entity->setCaptured();
+
+			if(!entity->getExceptionModelId().empty())
+			{
+				_modelEntityManager->getEntity(entity->getExceptionModelId())->setVisible(wasExceptionModelVisible);
+			}
 		}
 	}
 

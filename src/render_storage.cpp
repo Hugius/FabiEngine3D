@@ -403,6 +403,11 @@ void RenderStorage::setShadowsFollowingCamera(bool value)
 	_isShadowsFollowingCamera = value;
 }
 
+void RenderStorage::setCubeReflectionInterval(unsigned int value)
+{
+	_cubeReflectionInterval = value;
+}
+
 const shared_ptr<TextureBuffer> RenderStorage::getPlanarReflectionMap() const
 {
 	return _planarReflectionMap;
@@ -656,6 +661,11 @@ const unsigned int RenderStorage::getAnisotropicFilteringQuality() const
 const unsigned int RenderStorage::getShadowInterval() const
 {
 	return _shadowInterval;
+}
+
+const unsigned int RenderStorage::getCubeReflectionInterval() const
+{
+	return _cubeReflectionInterval;
 }
 
 const unsigned int RenderStorage::getShadowQuality() const

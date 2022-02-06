@@ -21,6 +21,14 @@ void EngineInterface::model_delete(const string& id)
 		_core->getAabbEntityManager()->deleteEntity(aabbId);
 	}
 
+	for(const auto& reflectionId : reflection_getIds())
+	{
+		if(id == _core->getReflectionEntityManager()->getEntity(reflectionId)->getExceptionModelId())
+		{
+			_core->getReflectionEntityManager()->getEntity(reflectionId)->setExceptionModelId("");
+		}
+	}
+
 	_core->getModelEntityManager()->deleteEntity(id);
 }
 

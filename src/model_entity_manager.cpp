@@ -173,7 +173,7 @@ void ModelEntityManager::update()
 			entity->setCubeReflectionMixValue(1.0f);
 		}
 
-		if((_timer->getPassedUpdateCount() % _timer->getUpdateCountPerSecond()) == 0)
+		if((_renderStorage->getCubeReflectionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeReflectionInterval()) == 0)
 		{
 			map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
 

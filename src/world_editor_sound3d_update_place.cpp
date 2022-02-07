@@ -53,6 +53,17 @@ void WorldEditor::_updateSoundPlacing()
 		}
 		else
 		{
+			if(!_fe3d->raycast_isPointOnTerrainValid())
+			{
+				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
+				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId))
+				{
+					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
+				}
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
+				return;
+			}
+
 			if(!_fe3d->misc_isCursorInsideViewport() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
@@ -60,6 +71,7 @@ void WorldEditor::_updateSoundPlacing()
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
 				return;
 			}
 
@@ -70,25 +82,19 @@ void WorldEditor::_updateSoundPlacing()
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
 				return;
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-				_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
-				_currentTemplateSoundId = "";
-				return;
-			}
-
-			if(!_fe3d->raycast_isPointOnTerrainValid())
-			{
-				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
+				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
+				_currentTemplateSoundId = "";
 				return;
 			}
 
@@ -100,6 +106,7 @@ void WorldEditor::_updateSoundPlacing()
 			_fe3d->sound3d_setPosition(_currentTemplateSoundId, newPosition);
 			_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, true);
 			_fe3d->model_setBasePosition(TEMPLATE_SPEAKER_ID, newPosition);
+			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{

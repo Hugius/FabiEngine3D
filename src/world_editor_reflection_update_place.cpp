@@ -49,7 +49,7 @@ void WorldEditor::_updateReflectionPlacing()
 		}
 		else
 		{
-			if(!_fe3d->misc_isCursorInsideViewport() || _gui->getOverlay()->isFocused())
+			if(!_fe3d->misc_isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->reflection_setVisible(TEMPLATE_CAMERA_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);

@@ -216,6 +216,8 @@ void ScriptInterpreter::unload()
 	_animation2dEditor->stopQuad2dAnimations();
 	_animation3dEditor->stopModelAnimations();
 
+	_worldEditor->unloadEditorWorld();
+
 	_fe3d->sky_deleteAll();
 	_fe3d->terrain_deleteAll();
 	_fe3d->water_deleteAll();
@@ -227,16 +229,6 @@ void ScriptInterpreter::unload()
 	_fe3d->pointlight_deleteAll();
 	_fe3d->spotlight_deleteAll();
 	_fe3d->reflection_deleteAll();
-
-	for(const auto& id : _quad2dEditor->getLoadedIds())
-	{
-		_fe3d->quad2d_delete(id);
-	}
-
-	for(const auto& id : _text2dEditor->getLoadedIds())
-	{
-		_fe3d->text2d_delete(id);
-	}
 
 	for(const auto& id : _fe3d->quad2d_getIds())
 	{
@@ -252,6 +244,16 @@ void ScriptInterpreter::unload()
 		{
 			_fe3d->text2d_delete(id);
 		}
+	}
+
+	for(const auto& id : _quad2dEditor->getLoadedIds())
+	{
+		_fe3d->quad2d_delete(id);
+	}
+
+	for(const auto& id : _text2dEditor->getLoadedIds())
+	{
+		_fe3d->text2d_delete(id);
 	}
 
 	_fe3d->camera_reset();

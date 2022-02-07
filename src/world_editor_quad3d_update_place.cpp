@@ -38,7 +38,7 @@ void WorldEditor::_updateQuad3dPlacing()
 				return;
 			}
 
-			if(!_fe3d->misc_isCursorInsideViewport() || _gui->getOverlay()->isFocused())
+			if(!_fe3d->misc_isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->quad3d_setVisible(_currentTemplateQuadId, false);
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), false);

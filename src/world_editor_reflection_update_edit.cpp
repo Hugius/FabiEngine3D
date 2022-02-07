@@ -22,7 +22,7 @@ void WorldEditor::_updateReflectionEditing()
 		{
 			if(id.substr(0, string("@@camera").size()) == "@@camera")
 			{
-				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectReflection(id.substr(string("@@camera_").size()));
 
@@ -46,7 +46,7 @@ void WorldEditor::_updateReflectionEditing()
 
 		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeCameraId.empty())
 				{
@@ -76,7 +76,7 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				vector<string> modelIds;
 
-				for(auto& [key, templateId]: _loadedModelIds)
+				for(auto& [key, templateId] : _loadedModelIds)
 				{
 					modelIds.push_back(key);
 				}

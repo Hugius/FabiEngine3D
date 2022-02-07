@@ -925,7 +925,7 @@ public:
 	const unsigned int misc_getUpdateCountPerSecond() const;
 	const unsigned int misc_getPassedUpdateCount() const;
 	const bool misc_isCursorVisible() const;
-	const bool misc_isCursorInsideViewport() const;
+	const bool misc_isCursorInsideDisplay() const;
 	const bool misc_isCursorInsideWindow() const;
 	const bool misc_isMillisecondTimerStarted() const;
 	const bool misc_isVsyncEnabled() const;

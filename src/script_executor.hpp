@@ -9,11 +9,11 @@ public:
 	void inject(shared_ptr<ScriptInterpreter> scriptInterpreter);
 
 	void setCurrentProjectId(const string& projectId);
-	void load();
+	void start();
 	void update(bool isDebugging);
 	void pause();
 	void resume();
-	void unload();
+	void stop();
 
 	const bool isStarted() const;
 	const bool isRunning() const;
@@ -25,8 +25,10 @@ private:
 
 	bool _isStarted = false;
 	bool _isRunning = false;
-	bool _wasCursorVisible = false;
 	bool _wasVsyncEnabled = false;
+	bool _wasCursorVisible = false;
+	bool _wasFirstPersonEnabled = false;
+	bool _wasThirdPersonEnabled = false;
 	bool _wasTimerStarted = false;
 	bool _mustSkipUpdate = false;
 

@@ -6,12 +6,12 @@ void ScriptEditor::_updateTextWriter()
 {
 	if(isLoaded() && _isWritingScript && !_gui->getOverlay()->isFocused() && !_wasGuiFocused)
 	{
-		if(_fe3d->misc_isCursorInsideViewport())
+		if(_fe3d->misc_isCursorInsideDisplay())
 		{
 			_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
 		}
 
-		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d->misc_isCursorInsideViewport())
+		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d->misc_isCursorInsideDisplay())
 		{
 			_reloadScriptTextDisplay(true);
 			_hasClickedLMB = true;

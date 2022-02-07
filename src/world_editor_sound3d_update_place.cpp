@@ -64,7 +64,7 @@ void WorldEditor::_updateSoundPlacing()
 				return;
 			}
 
-			if(!_fe3d->misc_isCursorInsideViewport() || _gui->getOverlay()->isFocused())
+			if(!_fe3d->misc_isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId))

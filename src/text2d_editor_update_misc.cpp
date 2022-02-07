@@ -4,7 +4,7 @@
 
 void Text2dEditor::_updateMiscellaneous()
 {
-	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
+	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 	{
 		if(!_currentTextId.empty())
 		{

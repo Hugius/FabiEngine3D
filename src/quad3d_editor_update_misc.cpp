@@ -32,7 +32,7 @@ void Quad3dEditor::_updateCamera()
 		_fe3d->gfx_setShadowSize(distance * 2.0f);
 	}
 
-	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
+	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 	{
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
@@ -48,7 +48,7 @@ void Quad3dEditor::_updateCamera()
 
 void Quad3dEditor::_updateMiscellaneous()
 {
-	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
+	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 	{
 		if(_fe3d->input_isKeyPressed(InputType::KEY_R))
 		{

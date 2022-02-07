@@ -83,7 +83,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 		}
 	}
 
-	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && _fe3d->misc_isCursorInsideViewport())
+	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && _fe3d->misc_isCursorInsideDisplay())
 	{
 		if(hoveredLineIndex != -1)
 		{

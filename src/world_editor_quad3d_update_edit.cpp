@@ -22,7 +22,7 @@ void WorldEditor::_updateQuad3dEditing()
 				auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 				bool hovered = (hoveredAabbId.size() >= id.size()) && (hoveredAabbId.substr(0, id.size()) == id);
 
-				if(hovered && _fe3d->misc_isCursorInsideViewport() &&
+				if(hovered && _fe3d->misc_isCursorInsideDisplay() &&
 				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectQuad3d(id);
@@ -47,7 +47,7 @@ void WorldEditor::_updateQuad3dEditing()
 
 		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeQuadId.empty())
 				{

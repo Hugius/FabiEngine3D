@@ -1,6 +1,7 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 #include "configuration.hpp"
+#include "tools.hpp"
 
 #include <chrono>
 #include <filesystem>
@@ -29,11 +30,7 @@ void EngineInterface::misc_setCursorVisible(bool value)
 
 void EngineInterface::misc_centerCursor()
 {
-	const int left = Config::getInst().getDisplayPosition().x;
-	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getDisplayPosition().y + Config::getInst().getDisplaySize().y);
-	const int xMiddle = left + (Config::getInst().getDisplaySize().x / 2);
-	const int yMiddle = bottom + (Config::getInst().getDisplaySize().y / 2);
-	_core->getRenderWindow()->setCursorPosition({xMiddle, yMiddle});
+	_core->getRenderWindow()->setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 	_core->getCamera()->notifyCursorCenter();
 }
@@ -197,7 +194,7 @@ const bool EngineInterface::misc_isCursorVisible() const
 	return _core->getRenderWindow()->isCursorVisible();
 }
 
-const bool EngineInterface::misc_isCursorInsideViewport() const
+const bool EngineInterface::misc_isCursorInsideDisplay() const
 {
 	auto cursorPosition = misc_getCursorPosition();
 	auto viewportPosition = Config::getInst().getDisplayPosition();

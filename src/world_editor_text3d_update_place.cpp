@@ -38,7 +38,7 @@ void WorldEditor::_updateText3dPlacing()
 				return;
 			}
 
-			if(!_fe3d->misc_isCursorInsideViewport() || _gui->getOverlay()->isFocused())
+			if(!_fe3d->misc_isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);

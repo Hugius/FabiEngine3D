@@ -22,7 +22,7 @@ void WorldEditor::_updatePointlightEditing()
 		{
 			if(id.substr(0, string("@@lamp").size()) == "@@lamp")
 			{
-				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectPointlight(id.substr(string("@@lamp_").size()));
 
@@ -46,7 +46,7 @@ void WorldEditor::_updatePointlightEditing()
 
 		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeLampId.empty())
 				{

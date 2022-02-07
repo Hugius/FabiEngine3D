@@ -1,8 +1,10 @@
 #include "script_executor.hpp"
 #include "configuration.hpp"
 
-void ScriptExecutor::load()
+void ScriptExecutor::start()
 {
+	_fe3d->misc_centerCursor();
+
 	_scriptInterpreter->load();
 	_scriptInterpreter->executeInitializeScripts();
 	_isStarted = true;
@@ -27,10 +29,8 @@ void ScriptExecutor::update(bool isDebugging)
 
 		if(!Config::getInst().isApplicationExported())
 		{
-			if(_fe3d->misc_isCursorInsideViewport() || _fe3d->misc_isCursorVisible())
-			{
-				_fe3d->quad2d_setVisible("@@cursor", false);
-			}
+			_fe3d->quad2d_setVisible("@@cursor", !_fe3d->misc_isCursorInsideDisplay());
+			_fe3d->misc_setCursorVisible(_fe3d->misc_isCursorInsideDisplay());
 		}
 
 		_validateExecution();
@@ -41,17 +41,23 @@ void ScriptExecutor::pause()
 {
 	if(_isStarted && _isRunning)
 	{
+		_wasVsyncEnabled = _fe3d->misc_isVsyncEnabled();
+		_fe3d->misc_setVsyncEnabled(true);
+
 		_wasCursorVisible = _fe3d->misc_isCursorVisible();
 		_fe3d->misc_setCursorVisible(false);
+
+		_wasFirstPersonEnabled = _fe3d->camera_isFirstPersonEnabled();
+		_fe3d->camera_setFirstPersonEnabled(false);
+
+		_wasThirdPersonEnabled = _fe3d->camera_isThirdPersonEnabled();
+		_fe3d->camera_setThirdPersonEnabled(false);
 
 		_wasTimerStarted = _fe3d->misc_isMillisecondTimerStarted();
 		if(_wasTimerStarted)
 		{
 			_fe3d->misc_stopMillisecondTimer();
 		}
-
-		_wasVsyncEnabled = _fe3d->misc_isVsyncEnabled();
-		_fe3d->misc_setVsyncEnabled(!_wasVsyncEnabled);
 
 		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
@@ -82,8 +88,10 @@ void ScriptExecutor::resume()
 	if(_isStarted && !_isRunning)
 	{
 		_fe3d->misc_centerCursor();
-		_fe3d->misc_setCursorVisible(_wasCursorVisible);
 		_fe3d->misc_setVsyncEnabled(_wasVsyncEnabled);
+		_fe3d->misc_setCursorVisible(_wasCursorVisible);
+		_fe3d->camera_setFirstPersonEnabled(_wasFirstPersonEnabled);
+		_fe3d->camera_setThirdPersonEnabled(_wasThirdPersonEnabled);
 
 		if(_wasTimerStarted)
 		{
@@ -107,7 +115,7 @@ void ScriptExecutor::resume()
 	}
 }
 
-void ScriptExecutor::unload()
+void ScriptExecutor::stop()
 {
 	if(_isStarted)
 	{
@@ -117,8 +125,10 @@ void ScriptExecutor::unload()
 
 		_isStarted = false;
 		_isRunning = false;
-		_wasCursorVisible = false;
 		_wasVsyncEnabled = false;
+		_wasCursorVisible = false;
+		_wasFirstPersonEnabled = false;
+		_wasThirdPersonEnabled = false;
 		_wasTimerStarted = false;
 		_mustSkipUpdate = false;
 		_pausedSoundIds.clear();
@@ -157,14 +167,16 @@ void ScriptExecutor::_validateExecution()
 		_scriptInterpreter->unload();
 		_isStarted = false;
 		_isRunning = false;
-		_wasCursorVisible = false;
 		_wasVsyncEnabled = false;
+		_wasCursorVisible = false;
+		_wasFirstPersonEnabled = false;
+		_wasThirdPersonEnabled = false;
 		_wasTimerStarted = false;
 		_mustSkipUpdate = false;
 		_pausedSoundIds.clear();
 	}
 	else if(_scriptInterpreter->gameMustStop())
 	{
-		this->unload();
+		this->stop();
 	}
 }

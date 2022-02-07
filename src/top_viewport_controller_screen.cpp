@@ -95,7 +95,7 @@ void TopViewportController::_updateGameScreenManagement()
 				else
 				{
 					_scriptEditor->loadScriptFiles(true);
-					_scriptExecutor->load();
+					_scriptExecutor->start();
 				}
 			}
 			else if(screen->getButton("pause")->isHovered())
@@ -104,13 +104,13 @@ void TopViewportController::_updateGameScreenManagement()
 			}
 			else if(screen->getButton("restart")->isHovered())
 			{
-				_scriptExecutor->unload();
+				_scriptExecutor->stop();
 				_scriptEditor->loadScriptFiles(true);
-				_scriptExecutor->load();
+				_scriptExecutor->start();
 			}
 			else if(screen->getButton("stop")->isHovered())
 			{
-				_scriptExecutor->unload();
+				_scriptExecutor->stop();
 			}
 			else if(screen->getButton("debug")->isHovered())
 			{
@@ -141,7 +141,7 @@ void TopViewportController::_updateGameScreenManagement()
 			{
 				if(_fe3d->server_isRunning())
 				{
-					_scriptExecutor->unload();
+					_scriptExecutor->stop();
 				}
 				else
 				{

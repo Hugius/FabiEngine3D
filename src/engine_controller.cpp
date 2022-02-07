@@ -144,7 +144,7 @@ void EngineController::initialize()
 
 		_scriptEditor->loadScriptFiles(true);
 
-		_scriptExecutor->load();
+		_scriptExecutor->start();
 
 		if(!_scriptExecutor->isRunning())
 		{
@@ -250,7 +250,7 @@ void EngineController::terminate()
 	{
 		if(_scriptExecutor->isRunning())
 		{
-			_scriptExecutor->unload();
+			_scriptExecutor->stop();
 		}
 	}
 	else

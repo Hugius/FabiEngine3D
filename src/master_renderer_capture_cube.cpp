@@ -121,7 +121,9 @@ void MasterRenderer::_captureCubeReflections()
 				_camera->updateMatrices();
 
 				_updateShadows();
+
 				_captureShadows();
+				_captureWaterEdges();
 
 				_cubeReflectionCaptor->bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

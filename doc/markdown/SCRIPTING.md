@@ -24,10 +24,10 @@ Line 1 of every script file must specify its type: initialization, update, destr
 - Update script: `META script_type_update`.
 - Terminate script: `META script_type_terminate`.
 
-Line 2 of every script file must specify its execution state: entry or waiting.
+Line 2 of every script file must specify its state: entry or wait.
 
-- Entry script: `META script_execution_entry`.
-- Waiting script: `META script_execution_waiting`.
+- Entry script: `META script_state_entry`.
+- Wait script: `META script_state_wait`.
 
 ### 3.2 Example Code
 

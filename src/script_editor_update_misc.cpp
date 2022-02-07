@@ -174,7 +174,7 @@ void ScriptEditor::_updateScriptFileRenaming()
 			}
 
 			auto existingScriptFileIds = _script->getScriptFileIds();
-			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) == existingScriptFileIds.end())
+			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) != existingScriptFileIds.end())
 			{
 				Logger::throwWarning("Script already exists");
 			}

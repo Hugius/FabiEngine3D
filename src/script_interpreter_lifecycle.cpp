@@ -14,6 +14,18 @@ void ScriptInterpreter::load()
 	{
 		auto scriptFile = _script->getScriptFile(scriptId);
 
+		if(scriptFile->getLineCount() == 0)
+		{
+			_throwStartupError("No `script_type` found in script \"" + scriptId + "\"");
+			return;
+		}
+
+		if(scriptFile->getLineCount() < 2)
+		{
+			_throwStartupError("No `script_state` found in script \"" + scriptId + "\"");
+			return;
+		}
+
 		string scriptType = "";
 		if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_initialize"))
 		{
@@ -32,53 +44,89 @@ void ScriptInterpreter::load()
 		}
 		else
 		{
-			_throwStartupError("No script_type META found on line 1 @ script \"" + scriptId + "\"");
+			_throwStartupError("Incorrect `script_type` in script \"" + scriptId + "\"");
 			return;
 		}
 
-		if(scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_entry"))
+		if(scriptFile->getLineText(1) == (META_KEYWORD + " script_state_entry"))
 		{
-			if(scriptType == "script_type_initialize" && _initEntryId.empty())
+			if(scriptType == "script_type_initialize")
 			{
-				_initEntryId = _initializeScriptIds.back();
+				if(_initEntryId.empty())
+				{
+					_initEntryId = _initializeScriptIds.back();
+				}
+				else
+				{
+					_throwStartupError("Too many `script_state_entry` found for `script_type_initialize` scripts");
+					return;
+				}
 			}
-			else if(scriptType == "script_type_update" && _updateEntryId.empty())
+			if(scriptType == "script_type_update")
 			{
-				_updateEntryId = _updateScriptIds.back();
+				if(_updateEntryId.empty())
+				{
+					_updateEntryId = _updateScriptIds.back();
+				}
+				else
+				{
+					_throwStartupError("Too many `script_state_entry` found for `script_type_update` scripts");
+					return;
+				}
 			}
-			else if(scriptType == "script_type_terminate" && _terminateEntryId.empty())
+			if(scriptType == "script_type_terminate")
 			{
-				_terminateEntryId = _terminateScriptIds.back();
-			}
-			else
-			{
-				_throwStartupError("Entry point for " + scriptType + " defined multiple times");
-				return;
+				if(_terminateEntryId.empty())
+				{
+					_terminateEntryId = _terminateScriptIds.back();
+				}
+				else
+				{
+					_throwStartupError("Too many `script_state_entry` found for `script_type_terminate` scripts");
+					return;
+				}
 			}
 		}
-		else if(scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_waiting"))
+		else if(scriptFile->getLineText(1) == (META_KEYWORD + " script_state_wait"))
 		{
+			// Purposely left blank
 		}
 		else
 		{
-			_throwStartupError("No script_execution META found on line 2 @ script \"" + scriptId + "\"");
+			_throwStartupError("Incorrect `script_state` in script \"" + scriptId + "\"");
 			return;
 		}
 	}
 
-	if(_initEntryId.empty() && !_initializeScriptIds.empty())
+	if(_initializeScriptIds.empty())
 	{
-		_throwStartupError("No script_execution_entry META defined for INITIALIZE script(s)");
+		_throwStartupError("No `script_type_initialize` scripts found");
 		return;
 	}
-	if(_updateEntryId.empty() && !_updateScriptIds.empty())
+	if(_updateScriptIds.empty())
 	{
-		_throwStartupError("No script_execution_entry META defined for UPDATE script(s)");
+		_throwStartupError("No `script_type_update` scripts found");
 		return;
 	}
-	if(_terminateEntryId.empty() && !_terminateScriptIds.empty())
+	if(_terminateScriptIds.empty())
 	{
-		_throwStartupError("No script_execution_entry META defined for TERMINATE script(s)");
+		_throwStartupError("No `script_type_terminate` scripts found");
+		return;
+	}
+
+	if(_initEntryId.empty())
+	{
+		_throwStartupError("No `script_state_entry` found for `script_type_initialize` scripts");
+		return;
+	}
+	if(_updateEntryId.empty())
+	{
+		_throwStartupError("No `script_state_entry` found for `script_type_update` scripts");
+		return;
+	}
+	if(_terminateEntryId.empty())
+	{
+		_throwStartupError("No `script_state_entry` found for `script_type_terminate` scripts");
 		return;
 	}
 
@@ -179,6 +227,16 @@ void ScriptInterpreter::unload()
 	_fe3d->pointlight_deleteAll();
 	_fe3d->spotlight_deleteAll();
 	_fe3d->reflection_deleteAll();
+
+	for(const auto& id : _quad2dEditor->getLoadedIds())
+	{
+		_fe3d->quad2d_delete(id);
+	}
+
+	for(const auto& id : _text2dEditor->getLoadedIds())
+	{
+		_fe3d->text2d_delete(id);
+	}
 
 	for(const auto& id : _fe3d->quad2d_getIds())
 	{

@@ -22,8 +22,8 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("terrain", fvec2(0.0f, positions[1]), TEXT_SIZE("Terrain"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Terrain", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("water", fvec2(0.0f, positions[2]), TEXT_SIZE("Water"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("model", fvec2(0.0f, positions[3]), TEXT_SIZE("Model"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuChoice")->createButton("quad3d", fvec2(0.0f, positions[4]), TEXT_SIZE("Quad3d"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad3d", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuChoice")->createButton("text3d", fvec2(0.0f, positions[5]), TEXT_SIZE("Text3d"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text3d", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuChoice")->createButton("quad3d", fvec2(0.0f, positions[4]), TEXT_SIZE("Quad3D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Quad3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuChoice")->createButton("text3d", fvec2(0.0f, positions[5]), TEXT_SIZE("Text3D"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Text3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("pointlight", fvec2(0.0f, positions[6]), TEXT_SIZE("Pointlight"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Pointlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("spotlight", fvec2(0.0f, positions[7]), TEXT_SIZE("Spotlight"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Spotlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuChoice")->createButton("reflection", fvec2(0.0f, positions[8]), TEXT_SIZE("Reflection"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Reflection", TEXT_COLOR, TEXT_HOVER_COLOR, true);
@@ -265,7 +265,7 @@ void WorldEditor::_loadGUI()
 	rightWindow->getScreen("modelPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(1.0f, 0.1f), fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	rightWindow->createScreen("quad3dPropertiesMenu");
-	rightWindow->getScreen("quad3dPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.75f, 0.1f), "Quad3d Menu", fvec3(0.0f, 1.0f, 0.0f), true);
+	rightWindow->getScreen("quad3dPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.75f, 0.1f), "Quad3D Menu", fvec3(0.0f, 1.0f, 0.0f), true);
 	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("position", fvec2(0.0f, 0.8f), fvec2(0.75f, 0.2f), "position.tga", fvec3(1.0f), true);
 	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("rotation", fvec2(0.0f, 0.55f), fvec2(0.75f, 0.2f), "rotation.tga", fvec3(1.0f), true);
 	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("size", fvec2(0.0f, 0.3f), fvec2(0.75f, 0.2f), "size.tga", fvec3(1.0f), true);
@@ -286,7 +286,7 @@ void WorldEditor::_loadGUI()
 	rightWindow->getScreen("quad3dPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(1.0f, 0.1f), fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	rightWindow->createScreen("text3dPropertiesMenu");
-	rightWindow->getScreen("text3dPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.75f, 0.1f), "Text3d Menu", fvec3(0.0f, 1.0f, 0.0f), true);
+	rightWindow->getScreen("text3dPropertiesMenu")->createTextField("title", fvec2(0.0f, 0.95f), fvec2(1.75f, 0.1f), "Text3D Menu", fvec3(0.0f, 1.0f, 0.0f), true);
 	rightWindow->getScreen("text3dPropertiesMenu")->createButton("position", fvec2(0.0f, 0.8f), fvec2(0.75f, 0.2f), "position.tga", fvec3(1.0f), true);
 	rightWindow->getScreen("text3dPropertiesMenu")->createButton("rotation", fvec2(0.0f, 0.55f), fvec2(0.75f, 0.2f), "rotation.tga", fvec3(1.0f), true);
 	rightWindow->getScreen("text3dPropertiesMenu")->createButton("size", fvec2(0.0f, 0.3f), fvec2(0.75f, 0.2f), "size.tga", fvec3(1.0f), true);

@@ -140,7 +140,7 @@ void Text3dEditor::_updateText3dCreating()
 				_loadedTextIds.push_back(newTextId);
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
-				_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3d: " + newTextId.substr(1));
+				_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3D: " + newTextId.substr(1));
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
 				_isCreatingText3d = false;
 			}
@@ -171,7 +171,7 @@ void Text3dEditor::_updateText3dChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3d: " + _currentTextId.substr(1));
+					_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3D: " + _currentTextId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
 				}
 

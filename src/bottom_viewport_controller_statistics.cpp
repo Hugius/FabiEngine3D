@@ -119,7 +119,7 @@ void BottomViewportController::_updateStatistics()
 		}
 
 		const auto textId = statisticsScreen->getTextField("quad3dEntityCount")->getEntityId();
-		const auto text = string("Quad3d Entities: " + to_string(entityCount));
+		const auto text = string("Quad3D Entities: " + to_string(entityCount));
 		_fe3d->text2d_setContent(textId, text);
 		_fe3d->text2d_setSize(textId, fvec2(CHAR_SIZE.x * static_cast<float>(text.size()), CHAR_SIZE.y));
 	}

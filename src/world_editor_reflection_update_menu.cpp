@@ -47,21 +47,12 @@ void WorldEditor::_updateReflectionMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuReflectionChoice");
+
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->deleteButtons();
 
-			auto ids = _fe3d->reflection_getIds();
-			sort(ids.begin(), ids.end());
-			for(auto& reflectionId : ids)
+			for(auto& id : _loadedReflectionIds)
 			{
-				if(reflectionId[0] != '@')
-				{
-					reverse(reflectionId.begin(), reflectionId.end());
-					string rawId = reflectionId.substr(reflectionId.find('_') + 1);
-					reverse(rawId.begin(), rawId.end());
-					reverse(reflectionId.begin(), reflectionId.end());
-
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->createButton(reflectionId, rawId);
-				}
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->createButton(id, id);
 			}
 		}
 
@@ -84,24 +75,21 @@ void WorldEditor::_updateReflectionChoosingMenu()
 			}
 		}
 
-		for(const auto& reflectionId : _fe3d->reflection_getIds())
+		for(auto& id : _loadedReflectionIds)
 		{
-			if(reflectionId[0] != '@')
+			if(screen->getScrollingList("reflectionList")->getButton(id)->isHovered())
 			{
-				if(screen->getScrollingList("reflectionList")->getButton(reflectionId)->isHovered())
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-					{
-						_activateReflection(reflectionId);
-					}
-					else
-					{
-						_dontResetSelectedCamera = true;
-						_selectReflection(reflectionId);
-					}
-
-					break;
+					_activateReflection(id);
 				}
+				else
+				{
+					_dontResetSelectedCamera = true;
+					_selectReflection(id);
+				}
+
+				break;
 			}
 		}
 

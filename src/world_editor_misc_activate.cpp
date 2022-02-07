@@ -16,7 +16,7 @@ void WorldEditor::_activateModel(const string& id)
 	rightWindow->getScreen("modelPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("modelId")->changeTextContent("Active model: " + _activeModelId);
+	_gui->getOverlay()->getTextField("modelId")->changeTextContent("Active Model: " + _activeModelId);
 }
 
 void WorldEditor::_activateQuad3d(const string& id)
@@ -35,7 +35,7 @@ void WorldEditor::_activateQuad3d(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("quadId")->changeTextContent("Active quad3d: " + _activeQuadId);
+	_gui->getOverlay()->getTextField("quadId")->changeTextContent("Active Quad3D: " + _activeQuadId);
 }
 
 void WorldEditor::_activateText3d(const string& id)
@@ -54,7 +54,7 @@ void WorldEditor::_activateText3d(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("textId")->changeTextContent("Active text3d: " + _activeTextId);
+	_gui->getOverlay()->getTextField("textId")->changeTextContent("Active Text3D: " + _activeTextId);
 }
 
 void WorldEditor::_activateSound(const string& id)
@@ -73,7 +73,7 @@ void WorldEditor::_activateSound(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Active sound: " + _activeSpeakerId);
+	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Active Sound: " + _activeSpeakerId);
 }
 
 void WorldEditor::_activatePointlight(const string& id)

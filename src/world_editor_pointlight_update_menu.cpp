@@ -47,21 +47,12 @@ void WorldEditor::_updatePointlightMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
+
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteButtons();
 
-			auto ids = _fe3d->pointlight_getIds();
-			sort(ids.begin(), ids.end());
-			for(auto& pointlightId : ids)
+			for(auto& id : _loadedPointlightIds)
 			{
-				if(pointlightId[0] != '@')
-				{
-					reverse(pointlightId.begin(), pointlightId.end());
-					string rawId = pointlightId.substr(pointlightId.find('_') + 1);
-					reverse(rawId.begin(), rawId.end());
-					reverse(pointlightId.begin(), pointlightId.end());
-
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createButton(pointlightId, rawId);
-				}
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createButton(id, id);
 			}
 		}
 
@@ -84,24 +75,21 @@ void WorldEditor::_updatePointlightChoosingMenu()
 			}
 		}
 
-		for(const auto& pointlightId : _fe3d->pointlight_getIds())
+		for(auto& id : _loadedPointlightIds)
 		{
-			if(pointlightId[0] != '@')
+			if(screen->getScrollingList("pointlightList")->getButton(id)->isHovered())
 			{
-				if(screen->getScrollingList("pointlightList")->getButton(pointlightId)->isHovered())
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-					{
-						_activatePointlight(pointlightId);
-					}
-					else
-					{
-						_dontResetSelectedLamp = true;
-						_selectPointlight(pointlightId);
-					}
-
-					break;
+					_activatePointlight(id);
 				}
+				else
+				{
+					_dontResetSelectedLamp = true;
+					_selectPointlight(id);
+				}
+
+				break;
 			}
 		}
 

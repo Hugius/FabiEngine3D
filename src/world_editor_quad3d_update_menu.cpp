@@ -30,19 +30,9 @@ void WorldEditor::_updateQuad3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButtons();
 
-			auto ids = _fe3d->quad3d_getIds();
-			sort(ids.begin(), ids.end());
-			for(auto& quadId : ids)
+			for(auto& [key, templateId] : _loadedQuadIds)
 			{
-				if(quadId[0] != '@')
-				{
-					reverse(quadId.begin(), quadId.end());
-					string rawId = quadId.substr(quadId.find('_') + 1);
-					reverse(rawId.begin(), rawId.end());
-					reverse(quadId.begin(), quadId.end());
-
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createButton(quadId, rawId);
-				}
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createButton(key, key);
 			}
 		}
 
@@ -80,7 +70,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 						_currentTemplateQuadId = quadId;
 						_fe3d->quad3d_setVisible(_currentTemplateQuadId, true);
 						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
-						_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad3d: " + _currentTemplateQuadId.substr(1));
+						_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad3D: " + _currentTemplateQuadId.substr(1));
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedId().empty())
@@ -114,24 +104,21 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 			}
 		}
 
-		for(const auto& quadId : _fe3d->quad3d_getIds())
+		for(auto& [key, templateId] : _loadedQuadIds)
 		{
-			if(quadId[0] != '@')
+			if(screen->getScrollingList("quad3dList")->getButton(key)->isHovered())
 			{
-				if(screen->getScrollingList("quad3dList")->getButton(quadId)->isHovered())
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-					{
-						_activateQuad3d(quadId);
-					}
-					else
-					{
-						_dontResetSelectedQuad3d = true;
-						_selectQuad3d(quadId);
-					}
-
-					break;
+					_activateQuad3d(key);
 				}
+				else
+				{
+					_dontResetSelectedQuad3d = true;
+					_selectQuad3d(key);
+				}
+
+				break;
 			}
 		}
 

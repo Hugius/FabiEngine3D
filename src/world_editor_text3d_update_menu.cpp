@@ -30,19 +30,9 @@ void WorldEditor::_updateText3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteButtons();
 
-			auto ids = _fe3d->text3d_getIds();
-			sort(ids.begin(), ids.end());
-			for(auto& textId : ids)
+			for(auto& [key, templateId] : _loadedTextIds)
 			{
-				if(textId[0] != '@')
-				{
-					reverse(textId.begin(), textId.end());
-					string rawId = textId.substr(textId.find('_') + 1);
-					reverse(rawId.begin(), rawId.end());
-					reverse(textId.begin(), textId.end());
-
-					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createButton(textId, rawId);
-				}
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createButton(key, key);
 			}
 		}
 
@@ -80,7 +70,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 						_currentTemplateTextId = textId;
 						_fe3d->text3d_setVisible(_currentTemplateTextId, true);
 						_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
-						_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3d: " + _currentTemplateTextId.substr(1));
+						_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3D: " + _currentTemplateTextId.substr(1));
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedId().empty())
@@ -114,24 +104,21 @@ void WorldEditor::_updateText3dChoosingMenu()
 			}
 		}
 
-		for(const auto& textId : _fe3d->text3d_getIds())
+		for(auto& [key, templateId] : _loadedTextIds)
 		{
-			if(textId[0] != '@')
+			if(screen->getScrollingList("text3dList")->getButton(key)->isHovered())
 			{
-				if(screen->getScrollingList("text3dList")->getButton(textId)->isHovered())
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-					{
-						_activateText3d(textId);
-					}
-					else
-					{
-						_dontResetSelectedText3d = true;
-						_selectText3d(textId);
-					}
-
-					break;
+					_activateText3d(key);
 				}
+				else
+				{
+					_dontResetSelectedText3d = true;
+					_selectText3d(key);
+				}
+
+				break;
 			}
 		}
 

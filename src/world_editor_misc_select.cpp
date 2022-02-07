@@ -22,7 +22,7 @@ void WorldEditor::_selectQuad3d(const string& id)
 	if(_activeModelId.empty() && _activeQuadId.empty() && _activeSpeakerId.empty() && _activeLampId.empty() && _activeCameraId.empty())
 	{
 		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
-		_gui->getOverlay()->getTextField("quadId")->changeTextContent("Selected Quad3d: " + _selectedQuadId);
+		_gui->getOverlay()->getTextField("quadId")->changeTextContent("Selected Quad3D: " + _selectedQuadId);
 	}
 }
 
@@ -35,7 +35,7 @@ void WorldEditor::_selectText3d(const string& id)
 	if(_activeModelId.empty() && _activeTextId.empty() && _activeSpeakerId.empty() && _activeLampId.empty() && _activeCameraId.empty())
 	{
 		_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
-		_gui->getOverlay()->getTextField("textId")->changeTextContent("Selected Text3d: " + _selectedTextId);
+		_gui->getOverlay()->getTextField("textId")->changeTextContent("Selected Text3D: " + _selectedTextId);
 	}
 }
 

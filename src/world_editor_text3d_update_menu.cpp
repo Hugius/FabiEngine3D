@@ -109,12 +109,20 @@ void WorldEditor::_updateText3dChoosingMenu()
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
+					_deactivateModel();
+					_deactivateQuad3d();
+					_deactivateSound();
+					_deactivatePointlight();
+					_deactivateSpotlight();
+					_deactivateReflection();
+
 					_activateText3d(key);
 				}
 				else
 				{
-					_dontResetSelectedText3d = true;
 					_selectText3d(key);
+
+					_dontResetSelectedText3d = true;
 				}
 
 				break;

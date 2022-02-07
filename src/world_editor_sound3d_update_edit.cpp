@@ -21,8 +21,7 @@ void WorldEditor::_updateSoundEditing()
 		{
 			if(id.substr(0, string("@@speaker").size()) == "@@speaker")
 			{
-				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideDisplay() &&
-				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectSound(id.substr(string("@@speaker_").size()));
 

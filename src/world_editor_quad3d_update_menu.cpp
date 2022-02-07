@@ -109,12 +109,20 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
+					_deactivateModel();
+					_deactivateQuad3d();
+					_deactivateSound();
+					_deactivatePointlight();
+					_deactivateSpotlight();
+					_deactivateReflection();
+
 					_activateQuad3d(key);
 				}
 				else
 				{
-					_dontResetSelectedQuad3d = true;
 					_selectQuad3d(key);
+
+					_dontResetSelectedQuad3d = true;
 				}
 
 				break;

@@ -21,10 +21,9 @@ void WorldEditor::_updateModelEditing()
 		{
 			if(id[0] != '@')
 			{
-				bool hovered = (hoveredId.size() >= id.size()) && (hoveredId.substr(0, id.size()) == id);
+				bool isHovered = (hoveredId.size() >= id.size()) && (hoveredId.substr(0, id.size()) == id);
 
-				if(hovered && _fe3d->misc_isCursorInsideDisplay() &&
-				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectModel(id);
 

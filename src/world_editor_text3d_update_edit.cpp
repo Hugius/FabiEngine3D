@@ -20,10 +20,9 @@ void WorldEditor::_updateText3dEditing()
 			if(id[0] != '@')
 			{
 				auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
-				bool hovered = (hoveredAabbId.size() >= id.size()) && (hoveredAabbId.substr(0, id.size()) == id);
+				bool isHovered = (hoveredAabbId.size() >= id.size()) && (hoveredAabbId.substr(0, id.size()) == id);
 
-				if(hovered && _fe3d->misc_isCursorInsideDisplay() &&
-				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectText3d(id);
 

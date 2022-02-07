@@ -211,14 +211,11 @@ void AabbEntityManager::update()
 						entity->setPosition(parentEntity->getBasePosition() + rotatedLocalPosition);
 					}
 
-					if(!parentEntity->isVisible())
+					if(!parentEntity->isVisible() || parentEntity->isFrozen())
 					{
 						entity->setVisible(false);
-					}
-
-					if(parentEntity->isFrozen())
-					{
-						entity->setVisible(false);
+						entity->setCollisionResponsive(false);
+						entity->setRaycastResponsive(false);
 					}
 
 					break;
@@ -286,14 +283,11 @@ void AabbEntityManager::update()
 					entity->setPosition(newAabbPosition);
 					entity->setSize(newAabbSize);
 
-					if(!parentEntity->isVisible())
+					if(!parentEntity->isVisible() || parentEntity->isFrozen())
 					{
 						entity->setVisible(false);
-					}
-
-					if(parentEntity->isFrozen())
-					{
-						entity->setVisible(false);
+						entity->setCollisionResponsive(false);
+						entity->setRaycastResponsive(false);
 					}
 
 					break;
@@ -361,14 +355,11 @@ void AabbEntityManager::update()
 					entity->setPosition(newAabbPosition);
 					entity->setSize(newAabbSize);
 
-					if(!parentEntity->isVisible())
+					if(!parentEntity->isVisible() || parentEntity->isFrozen())
 					{
 						entity->setVisible(false);
-					}
-
-					if(parentEntity->isFrozen())
-					{
-						entity->setVisible(false);
+						entity->setCollisionResponsive(false);
+						entity->setRaycastResponsive(false);
 					}
 
 					break;

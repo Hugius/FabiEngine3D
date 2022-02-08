@@ -57,12 +57,9 @@ void Animation3dEditor::_load()
 
 void Animation3dEditor::_unload()
 {
-	for(const auto& animation : _animations)
+	for(const auto& id : _modelEditor->getLoadedIds())
 	{
-		if(_fe3d->model_isExisting(animation->getPreviewModelId()))
-		{
-			_fe3d->model_delete(animation->getPreviewModelId());
-		}
+		_fe3d->model_delete(id);
 	}
 
 	_fe3d->camera_setThirdPersonEnabled(false);

@@ -71,6 +71,7 @@ void WorldEditor::_updateQuad3dEditing()
 		if(!_activeQuadId.empty())
 		{
 			auto screen = rightWindow->getScreen("quad3dPropertiesMenu");
+			auto currentAnimationIds = _animation2dEditor->getStartedQuad3dAnimationIds(_activeQuadId);
 
 			rightWindow->setActiveScreen("quad3dPropertiesMenu");
 
@@ -102,6 +103,11 @@ void WorldEditor::_updateQuad3dEditing()
 			}
 			else if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
+				if(!currentAnimationIds.empty())
+				{
+					_animation2dEditor->stopQuad3dAnimation(currentAnimationIds[0], _activeQuadId);
+				}
+
 				_fe3d->quad3d_delete(_activeQuadId);
 				_loadedQuadIds.erase(_activeQuadId);
 				_activeQuadId = "";
@@ -109,15 +115,14 @@ void WorldEditor::_updateQuad3dEditing()
 				return;
 			}
 
-			auto lastAnimationId = _animation2dEditor->getStartedQuad3dAnimationIds(_activeQuadId);
 			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
 			if(!selectedButtonId.empty())
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if(!lastAnimationId.empty())
+					if(!currentAnimationIds.empty())
 					{
-						_animation2dEditor->stopQuad3dAnimation(lastAnimationId.back(), _activeQuadId);
+						_animation2dEditor->stopQuad3dAnimation(currentAnimationIds[0], _activeQuadId);
 					}
 
 					_animation2dEditor->startQuad3dAnimation(selectedButtonId, _activeQuadId, -1);

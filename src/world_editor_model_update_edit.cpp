@@ -72,6 +72,7 @@ void WorldEditor::_updateModelEditing()
 		if(!_activeModelId.empty())
 		{
 			auto screen = rightWindow->getScreen("modelPropertiesMenu");
+			auto currentAnimationIds = _animation3dEditor->getStartedModelAnimationIds(_activeModelId);
 
 			rightWindow->setActiveScreen("modelPropertiesMenu");
 
@@ -103,6 +104,11 @@ void WorldEditor::_updateModelEditing()
 			}
 			else if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
+				if(!currentAnimationIds.empty())
+				{
+					_animation3dEditor->stopModelAnimation(currentAnimationIds[0], _activeModelId);
+				}
+
 				_fe3d->model_delete(_activeModelId);
 				_loadedModelIds.erase(_activeModelId);
 				rightWindow->setActiveScreen("main");
@@ -110,15 +116,14 @@ void WorldEditor::_updateModelEditing()
 				return;
 			}
 
-			auto lastAnimationId = _animation3dEditor->getStartedModelAnimationIds(_activeModelId);
 			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
 			if(!selectedButtonId.empty())
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if(!lastAnimationId.empty())
+					if(!currentAnimationIds.empty())
 					{
-						_animation3dEditor->stopModelAnimation(lastAnimationId.back(), _activeModelId);
+						_animation3dEditor->stopModelAnimation(currentAnimationIds[0], _activeModelId);
 
 						_fe3d->model_setBasePosition(_activeModelId, _initialModelPosition.at(_activeModelId));
 						_fe3d->model_setBaseRotationOrigin(_activeModelId, fvec3(0.0f));

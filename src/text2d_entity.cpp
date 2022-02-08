@@ -100,6 +100,11 @@ void Text2dEntity::setContent(const string& value)
 
 		for(const auto& character : _content)
 		{
+			if(_fontMapIndices.find(character) == _fontMapIndices.end())
+			{
+				abort();
+			}
+
 			const auto xIndex = _fontMapIndices.at(character).x;
 			const auto yIndex = _fontMapIndices.at(character).y;
 			const auto uvMultiplier = fvec2((1.0f / static_cast<float>(FONT_MAP_COLUMN_COUNT)), (1.0f / static_cast<float>(FONT_MAP_ROW_COUNT)));

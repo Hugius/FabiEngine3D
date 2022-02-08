@@ -204,7 +204,7 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 
 		auto hasPreviewModel = _fe3d->model_isExisting(currentAnimation->getPreviewModelId());
-		auto isStarted = isModelAnimationStarted(_currentAnimationId, currentAnimation->getPreviewModelId());
+		auto isStarted = (hasPreviewModel && isModelAnimationStarted(_currentAnimationId, currentAnimation->getPreviewModelId()));
 		screen->getButton("preview")->setHoverable(!isStarted);
 		screen->getButton("start")->setHoverable(!isStarted && hasPreviewModel && (currentAnimation->getFrames().size() > 1));
 		screen->getButton("stop")->setHoverable(isStarted && hasPreviewModel);

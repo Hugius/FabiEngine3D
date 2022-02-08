@@ -23,7 +23,9 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 			if(_validateFe3dSound3d(args[1]->getString(), true))
 			{
-				_worldEditor->copyTemplateSound(args[0]->getString(), ("@" + args[1]->getString()), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
+				_worldEditor->copyTemplateSound(args[0]->getString(), ("@" + args[1]->getString()));
+
+				_fe3d->sound3d_setPosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 				_fe3d->sound3d_setMaxVolume(args[0]->getString(), args[5]->getDecimal());
 				_fe3d->sound3d_setMaxDistance(args[0]->getString(), args[6]->getDecimal());
 

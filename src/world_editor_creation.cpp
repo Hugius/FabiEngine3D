@@ -1,24 +1,24 @@
 #include "world_editor.hpp"
 #include "logger.hpp"
 
-void WorldEditor::copyTemplateModel(const string& newId, const string& templateId, const fvec3& position)
+void WorldEditor::copyTemplateModel(const string& newId, const string& templateId)
 {
-	_copyTemplateModel(newId, templateId, position, true);
+	_copyTemplateModel(newId, templateId, true);
 }
 
-void WorldEditor::copyTemplateQuad3d(const string& newId, const string& templateId, const fvec3& position)
+void WorldEditor::copyTemplateQuad3d(const string& newId, const string& templateId)
 {
-	_copyTemplateQuad3d(newId, templateId, position, true);
+	_copyTemplateQuad3d(newId, templateId, true);
 }
 
-void WorldEditor::copyTemplateText3d(const string& newId, const string& templateId, const fvec3& position)
+void WorldEditor::copyTemplateText3d(const string& newId, const string& templateId)
 {
-	_copyTemplateText3d(newId, templateId, position, true);
+	_copyTemplateText3d(newId, templateId, true);
 }
 
-void WorldEditor::copyTemplateSound(const string& newId, const string& templateId, const fvec3& position)
+void WorldEditor::copyTemplateSound(const string& newId, const string& templateId)
 {
-	_copyTemplateSound(newId, templateId, position, true);
+	_copyTemplateSound(newId, templateId, true);
 }
 
 const bool WorldEditor::_copyTemplateSky(const string& newId, const string& templateId)
@@ -138,13 +138,13 @@ const bool WorldEditor::_copyTemplateWater(const string& newId, const string& te
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateModel(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateModel(const string& newId, const string& templateId, bool isFromOutside)
 {
 	_fe3d->model_create(newId, _fe3d->model_getMeshPath(templateId));
-	_fe3d->model_setBasePosition(newId, position);
 	_fe3d->model_setBaseSize(newId, _fe3d->model_getBaseSize(templateId));
 	_fe3d->model_setLevelOfDetailSize(newId, _fe3d->model_getBaseSize(templateId));
-	_fe3d->model_setFrozen(newId, _fe3d->model_isFrozen(templateId));
+	_fe3d->model_setShadowed(newId, _fe3d->model_isShadowed(templateId));
+	_fe3d->model_setReflected(newId, _fe3d->model_isReflected(templateId));
 	_fe3d->model_setLevelOfDetailEntityId(newId, _fe3d->model_getLevelOfDetailEntityId(templateId));
 	_fe3d->model_setRotationOrder(newId, _fe3d->model_getRotationOrder(templateId));
 
@@ -152,6 +152,7 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 	{
 		_fe3d->model_setLightness(newId, partId, _fe3d->model_getLightness(templateId, partId));
 		_fe3d->model_setBright(newId, partId, _fe3d->model_isBright(templateId, partId));
+		_fe3d->model_setEmissionIntensity(newId, partId, _fe3d->model_getEmissionIntensity(templateId, partId));
 		_fe3d->model_setSpecular(newId, partId, _fe3d->model_isSpecular(templateId, partId));
 		_fe3d->model_setSpecularShininess(newId, partId, _fe3d->model_getSpecularShininess(templateId, partId));
 		_fe3d->model_setSpecularIntensity(newId, partId, _fe3d->model_getSpecularIntensity(templateId, partId));
@@ -219,17 +220,20 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& templateId, bool isFromOutside)
 {
 	_fe3d->quad3d_create(newId, false);
-	_fe3d->quad3d_setPosition(newId, position);
 	_fe3d->quad3d_setSize(newId, _fe3d->quad3d_getSize(templateId));
 	_fe3d->quad3d_setFacingCameraHorizontally(newId, _fe3d->quad3d_isFacingCameraHorizontally(templateId));
 	_fe3d->quad3d_setFacingCameraVertically(newId, _fe3d->quad3d_isFacingCameraVertically(templateId));
 	_fe3d->quad3d_setColor(newId, _fe3d->quad3d_getColor(templateId));
+	_fe3d->quad3d_setBright(newId, _fe3d->quad3d_isBright(templateId));
+	_fe3d->quad3d_setTextureRepeat(newId, _fe3d->quad3d_getTextureRepeat(templateId));
 	_fe3d->quad3d_setShadowed(newId, _fe3d->quad3d_isShadowed(templateId));
 	_fe3d->quad3d_setReflected(newId, _fe3d->quad3d_isReflected(templateId));
+	_fe3d->quad3d_setEmissionIntensity(newId, _fe3d->quad3d_getEmissionIntensity(templateId));
 	_fe3d->quad3d_setLightness(newId, _fe3d->quad3d_getLightness(templateId));
+	_fe3d->quad3d_setOpacity(newId, _fe3d->quad3d_getOpacity(templateId));
 	_fe3d->quad3d_setMinTextureAlpha(newId, _fe3d->quad3d_getMinTextureAlpha(templateId));
 
 	if(_fe3d->quad3d_hasDiffuseMap(templateId))
@@ -258,10 +262,9 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& t
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& templateId, bool isFromOutside)
 {
 	_fe3d->text3d_create(newId, _fe3d->text3d_getFontMapPath(templateId), false);
-	_fe3d->text3d_setPosition(newId, position);
 	_fe3d->text3d_setSize(newId, _fe3d->text3d_getSize(templateId));
 	_fe3d->text3d_setFacingCameraHorizontally(newId, _fe3d->text3d_isFacingCameraHorizontally(templateId));
 	_fe3d->text3d_setFacingCameraVertically(newId, _fe3d->text3d_isFacingCameraVertically(templateId));
@@ -269,6 +272,8 @@ const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& t
 	_fe3d->text3d_setShadowed(newId, _fe3d->text3d_isShadowed(templateId));
 	_fe3d->text3d_setReflected(newId, _fe3d->text3d_isReflected(templateId));
 	_fe3d->text3d_setLightness(newId, _fe3d->text3d_getLightness(templateId));
+	_fe3d->text3d_setBright(newId, _fe3d->text3d_isBright(templateId));
+	_fe3d->text3d_setOpacity(newId, _fe3d->text3d_getOpacity(templateId));
 	_fe3d->text3d_setContent(newId, _fe3d->text3d_getContent(templateId));
 	_fe3d->text3d_setMinTextureAlpha(newId, _fe3d->text3d_getMinTextureAlpha(templateId));
 
@@ -288,10 +293,9 @@ const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& t
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateSound(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateSound(const string& newId, const string& templateId, bool isFromOutside)
 {
 	_fe3d->sound3d_create(newId, _fe3d->sound2d_getAudioPath(templateId));
-	_fe3d->sound3d_setPosition(newId, position);
 
 	if(isFromOutside)
 	{

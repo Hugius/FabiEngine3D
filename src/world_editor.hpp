@@ -42,10 +42,10 @@ public:
 	void addPointlightToCustomWorld(const string& id);
 	void addSpotlightToCustomWorld(const string& id);
 	void addReflectionToCustomWorld(const string& id);
-	void copyTemplateModel(const string& newId, const string& templateId, const fvec3& position);
-	void copyTemplateQuad3d(const string& newId, const string& templateId, const fvec3& position);
-	void copyTemplateText3d(const string& newId, const string& templateId, const fvec3& position);
-	void copyTemplateSound(const string& newId, const string& templateId, const fvec3& position);
+	void copyTemplateModel(const string& newId, const string& templateId);
+	void copyTemplateQuad3d(const string& newId, const string& templateId);
+	void copyTemplateText3d(const string& newId, const string& templateId);
+	void copyTemplateSound(const string& newId, const string& templateId);
 	void unloadEditorWorld();
 	void unloadCustomWorld();
 
@@ -159,10 +159,10 @@ private:
 	const bool _copyTemplateSky(const string& newId, const string& templateId);
 	const bool _copyTemplateTerrain(const string& newId, const string& templateId);
 	const bool _copyTemplateWater(const string& newId, const string& templateId);
-	const bool _copyTemplateModel(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside);
-	const bool _copyTemplateQuad3d(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside);
-	const bool _copyTemplateText3d(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside);
-	const bool _copyTemplateSound(const string& newId, const string& templateId, const fvec3& position, bool isFromOutside);
+	const bool _copyTemplateModel(const string& newId, const string& templateId, bool isFromOutside);
+	const bool _copyTemplateQuad3d(const string& newId, const string& templateId, bool isFromOutside);
+	const bool _copyTemplateText3d(const string& newId, const string& templateId, bool isFromOutside);
+	const bool _copyTemplateSound(const string& newId, const string& templateId, bool isFromOutside);
 
 	static inline const string TEMPLATE_POINTLIGHT_ID = "@@template_pointlight";
 	static inline const string TEMPLATE_SPOTLIGHT_ID = "@@template_spotlight";

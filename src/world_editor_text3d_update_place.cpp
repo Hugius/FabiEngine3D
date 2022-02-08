@@ -19,7 +19,9 @@ void WorldEditor::_updateText3dPlacing()
 
 				_idCounter++;
 
-				_copyTemplateText3d(newId, _currentTemplateTextId, newPosition, false);
+				_copyTemplateText3d(newId, _currentTemplateTextId, false);
+
+				_fe3d->text3d_setPosition(newId, newPosition);
 			}
 
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
@@ -71,7 +73,9 @@ void WorldEditor::_updateText3dPlacing()
 
 				_idCounter++;
 
-				_copyTemplateText3d(newId, _currentTemplateTextId, newPosition, false);
+				_copyTemplateText3d(newId, _currentTemplateTextId, false);
+
+				_fe3d->text3d_setPosition(newId, newPosition);
 			}
 		}
 	}

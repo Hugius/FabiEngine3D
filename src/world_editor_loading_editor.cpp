@@ -178,8 +178,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_copyTemplateModel(modelId, templateId, position, false))
+			if(_copyTemplateModel(modelId, templateId, false))
 			{
+				_fe3d->model_setBasePosition(modelId, position);
 				_fe3d->model_setBaseRotation(modelId, rotation);
 				_fe3d->model_setBaseSize(modelId, size);
 				_fe3d->model_setFrozen(modelId, isFrozen);
@@ -228,8 +229,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_copyTemplateQuad3d(quadId, templateId, position, false))
+			if(_copyTemplateQuad3d(quadId, templateId, false))
 			{
+				_fe3d->quad3d_setPosition(quadId, position);
 				_fe3d->quad3d_setRotation(quadId, rotation);
 				_fe3d->quad3d_setSize(quadId, size);
 
@@ -259,8 +261,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> size.x
 				>> size.y;
 
-			if(_copyTemplateText3d(textId, templateId, position, false))
+			if(_copyTemplateText3d(textId, templateId, false))
 			{
+				_fe3d->text3d_setPosition(textId, position);
 				_fe3d->text3d_setRotation(textId, rotation);
 				_fe3d->text3d_setSize(textId, size);
 			}
@@ -299,8 +302,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			if(_copyTemplateSound(soundId, templateId, position, false))
+			if(_copyTemplateSound(soundId, templateId, false))
 			{
+				_fe3d->sound3d_setPosition(soundId, position);
 				_fe3d->sound3d_setMaxVolume(soundId, maxVolume);
 				_fe3d->sound3d_setMaxDistance(soundId, maxDistance);
 				_fe3d->sound3d_start(soundId, -1, 0, false);

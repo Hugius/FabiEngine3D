@@ -20,7 +20,9 @@ void WorldEditor::_updateModelPlacing()
 
 				_idCounter++;
 
-				_copyTemplateModel(newId, _currentTemplateModelId, newPosition, false);
+				_copyTemplateModel(newId, _currentTemplateModelId, false);
+
+				_fe3d->model_setBasePosition(newId, newPosition);
 			}
 
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
@@ -72,7 +74,9 @@ void WorldEditor::_updateModelPlacing()
 
 				_idCounter++;
 
-				_copyTemplateModel(newId, _currentTemplateModelId, newPosition, false);
+				_copyTemplateModel(newId, _currentTemplateModelId, false);
+
+				_fe3d->model_setBasePosition(newId, newPosition);
 			}
 		}
 	}

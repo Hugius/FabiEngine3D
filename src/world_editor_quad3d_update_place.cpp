@@ -19,7 +19,9 @@ void WorldEditor::_updateQuad3dPlacing()
 
 				_idCounter++;
 
-				_copyTemplateQuad3d(newId, _currentTemplateQuadId, newPosition, false);
+				_copyTemplateQuad3d(newId, _currentTemplateQuadId, false);
+
+				_fe3d->quad3d_setPosition(newId, newPosition);
 			}
 
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
@@ -71,7 +73,9 @@ void WorldEditor::_updateQuad3dPlacing()
 
 				_idCounter++;
 
-				_copyTemplateQuad3d(newId, _currentTemplateQuadId, newPosition, false);
+				_copyTemplateQuad3d(newId, _currentTemplateQuadId, false);
+
+				_fe3d->quad3d_setPosition(newId, newPosition);
 			}
 		}
 	}

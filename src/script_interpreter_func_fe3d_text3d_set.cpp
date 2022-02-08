@@ -23,7 +23,9 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 
 			if(_validateFe3dText3d(args[1]->getString(), true))
 			{
-				_worldEditor->copyTemplateText3d(args[0]->getString(), ("@" + args[1]->getString()), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
+				_worldEditor->copyTemplateText3d(args[0]->getString(), ("@" + args[1]->getString()));
+
+				_fe3d->text3d_setPosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

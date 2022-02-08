@@ -127,7 +127,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 				{
 					_selectSound(key);
 
-					_dontResetSelectedSpeaker = true;
+					_dontResetSelectedSound = true;
 				}
 
 				break;

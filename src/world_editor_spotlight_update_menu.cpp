@@ -13,7 +13,7 @@ void WorldEditor::_updateSpotlightMenu()
 			if(_isPlacingSpotlight)
 			{
 				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
-				_fe3d->spotlight_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 				_isPlacingSpotlight = false;
 			}
 
@@ -33,12 +33,12 @@ void WorldEditor::_updateSpotlightMenu()
 
 			_isPlacingSpotlight = true;
 			_fe3d->model_setVisible(TEMPLATE_TORCH_ID, true);
-			_fe3d->spotlight_setVisible(TEMPLATE_TORCH_ID, true);
+			_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, true);
 			_fe3d->misc_centerCursor();
 
 			if(_fe3d->terrain_getSelectedId().empty())
 			{
-				_fe3d->spotlight_setPosition(TEMPLATE_TORCH_ID, fvec3(0.0f));
+				_fe3d->spotlight_setPosition(TEMPLATE_SPOTLIGHT_ID, fvec3(0.0f));
 				_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 				_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 				_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -94,7 +94,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 				{
 					_selectSpotlight(id);
 
-					_dontResetSelectedTorch = true;
+					_dontResetSelectedSpotlight = true;
 				}
 
 				break;

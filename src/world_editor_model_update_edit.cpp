@@ -39,7 +39,7 @@ void WorldEditor::_updateModelEditing()
 				{
 					if((id != _selectedModelId) && (id != _activeModelId))
 					{
-						_unselectModel(id);
+						_deselectModel(id);
 					}
 				}
 			}

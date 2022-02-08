@@ -13,7 +13,7 @@ void WorldEditor::_updatePointlightMenu()
 			if(_isPlacingPointlight)
 			{
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
-				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_isPlacingPointlight = false;
 			}
 
@@ -33,12 +33,12 @@ void WorldEditor::_updatePointlightMenu()
 
 			_isPlacingPointlight = true;
 			_fe3d->model_setVisible(TEMPLATE_LAMP_ID, true);
-			_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, true);
+			_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, true);
 			_fe3d->misc_centerCursor();
 
 			if(_fe3d->terrain_getSelectedId().empty())
 			{
-				_fe3d->pointlight_setPosition(TEMPLATE_LAMP_ID, fvec3(0.0f));
+				_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, fvec3(0.0f));
 				_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 				_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 				_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -94,7 +94,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 				{
 					_selectPointlight(id);
 
-					_dontResetSelectedLamp = true;
+					_dontResetSelectedPointlight = true;
 				}
 
 				break;

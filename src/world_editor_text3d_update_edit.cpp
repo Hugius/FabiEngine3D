@@ -38,7 +38,7 @@ void WorldEditor::_updateText3dEditing()
 				{
 					if((id != _selectedTextId) && (id != _activeTextId))
 					{
-						_unselectText3d(id);
+						_deselectText3d(id);
 					}
 				}
 			}

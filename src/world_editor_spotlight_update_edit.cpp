@@ -7,13 +7,13 @@ void WorldEditor::_updateSpotlightEditing()
 
 	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
-		if(!_dontResetSelectedTorch)
+		if(!_dontResetSelectedSpotlight)
 		{
-			_selectedTorchId = "";
+			_selectedSpotlightId = "";
 		}
 		else
 		{
-			_dontResetSelectedTorch = false;
+			_dontResetSelectedSpotlight = false;
 		}
 
 		auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
@@ -28,17 +28,17 @@ void WorldEditor::_updateSpotlightEditing()
 
 					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						if(_selectedTorchId != _activeTorchId)
+						if(_selectedSpotlightId != _activeSpotlightId)
 						{
-							_activateSpotlight(_selectedTorchId.substr(string("@@torch_").size()));
+							_activateSpotlight(_selectedSpotlightId.substr(string("@@torch_").size()));
 						}
 					}
 				}
 				else
 				{
-					if((id != _selectedTorchId) && (id != _activeTorchId))
+					if((id != _selectedSpotlightId) && (id != _activeSpotlightId))
 					{
-						_unselectSpotlight(id);
+						_deselectSpotlight(id);
 					}
 				}
 			}
@@ -48,29 +48,29 @@ void WorldEditor::_updateSpotlightEditing()
 		{
 			if(_fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
-				if(!_activeTorchId.empty())
+				if(!_activeSpotlightId.empty())
 				{
-					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedTorchId.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedSpotlightId.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
-						_activeTorchId = "";
+						_activeSpotlightId = "";
 						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
 		}
 
-		if(_selectedTorchId.empty())
+		if(_selectedSpotlightId.empty())
 		{
-			_updateTorchHighlighting(_activeTorchId, _activeTorchHighlightDirection);
+			_updateSpotlightHighlighting(_activeSpotlightId, _activeSpotlightHighlightDirection);
 		}
 		else
 		{
-			_updateTorchHighlighting(_selectedTorchId, _selectedTorchHighlightDirection);
+			_updateSpotlightHighlighting(_selectedSpotlightId, _selectedSpotlightHighlightDirection);
 		}
 
-		if(!_activeTorchId.empty())
+		if(!_activeSpotlightId.empty())
 		{
-			const string activeSpotlightId = _activeTorchId.substr(string("@@torch_").size());
+			const string activeSpotlightId = _activeSpotlightId.substr(string("@@torch_").size());
 			auto screen = rightWindow->getScreen("spotlightPropertiesMenu");
 
 			rightWindow->setActiveScreen("spotlightPropertiesMenu");
@@ -87,10 +87,10 @@ void WorldEditor::_updateSpotlightEditing()
 			}
 			else if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d->model_delete(_activeTorchId);
+				_fe3d->model_delete(_activeSpotlightId);
 				_fe3d->spotlight_delete(activeSpotlightId);
 				_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), activeSpotlightId), _loadedSpotlightIds.end());
-				_activeTorchId = "";
+				_activeSpotlightId = "";
 				rightWindow->setActiveScreen("main");
 				return;
 			}
@@ -117,7 +117,7 @@ void WorldEditor::_updateSpotlightEditing()
 				_handleValueChanging("spotlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
 
 				_fe3d->spotlight_setPosition(activeSpotlightId, position);
-				_fe3d->model_setBasePosition(_activeTorchId, position);
+				_fe3d->model_setBasePosition(_activeSpotlightId, position);
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
@@ -133,18 +133,18 @@ void WorldEditor::_updateSpotlightEditing()
 				_handleValueChanging("spotlightPropertiesMenu", "zMinus", "z", color.b, -SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 
 				_fe3d->spotlight_setColor(activeSpotlightId, color);
-				_fe3d->model_setColor(_activeTorchId, "", color);
+				_fe3d->model_setColor(_activeSpotlightId, "", color);
 			}
 
 			_handleValueChanging("spotlightPropertiesMenu", "yawPlus", "yaw", yaw, SPOTLIGHT_YAW_SPEED);
 			_handleValueChanging("spotlightPropertiesMenu", "yawMinus", "yaw", yaw, -SPOTLIGHT_YAW_SPEED);
 			_fe3d->spotlight_setYaw(activeSpotlightId, yaw);
-			_fe3d->model_setBaseRotation(_activeTorchId, fvec3(0.0f, -yaw, _fe3d->model_getBaseRotation(_activeTorchId).z));
+			_fe3d->model_setBaseRotation(_activeSpotlightId, fvec3(0.0f, -yaw, _fe3d->model_getBaseRotation(_activeSpotlightId).z));
 
 			_handleValueChanging("spotlightPropertiesMenu", "pitchPlus", "pitch", pitch, SPOTLIGHT_PITCH_SPEED);
 			_handleValueChanging("spotlightPropertiesMenu", "pitchMinus", "pitch", pitch, -SPOTLIGHT_PITCH_SPEED);
 			_fe3d->spotlight_setPitch(activeSpotlightId, pitch);
-			_fe3d->model_setBaseRotation(_activeTorchId, fvec3(0.0f, _fe3d->model_getBaseRotation(_activeTorchId).y, pitch));
+			_fe3d->model_setBaseRotation(_activeSpotlightId, fvec3(0.0f, _fe3d->model_getBaseRotation(_activeSpotlightId).y, pitch));
 
 			_handleValueChanging("spotlightPropertiesMenu", "intensityPlus", "intensity", intensity, SPOTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
 			_handleValueChanging("spotlightPropertiesMenu", "intensityMinus", "intensity", intensity, -SPOTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);

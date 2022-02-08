@@ -59,12 +59,12 @@ void WorldEditor::_activateText3d(const string& id)
 
 void WorldEditor::_activateSound(const string& id)
 {
-	_activeSpeakerId = ("@@speaker_" + id);
+	_activeSoundId = ("@@speaker_" + id);
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->sound3d_getPosition(_activeSpeakerId.substr(string("@@speaker_").size()));
-	auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSpeakerId.substr(string("@@speaker_").size()));
-	auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSpeakerId.substr(string("@@speaker_").size()));
+	auto position = _fe3d->sound3d_getPosition(_activeSoundId.substr(string("@@speaker_").size()));
+	auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSoundId.substr(string("@@speaker_").size()));
+	auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSoundId.substr(string("@@speaker_").size()));
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
@@ -73,15 +73,15 @@ void WorldEditor::_activateSound(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Active Sound: " + _activeSpeakerId);
+	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Active Sound: " + _activeSoundId);
 }
 
 void WorldEditor::_activatePointlight(const string& id)
 {
-	_activeLampId = ("@@lamp_" + id);
+	_activePointlightId = ("@@lamp_" + id);
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activeLampId);
+	auto position = _fe3d->model_getBasePosition(_activePointlightId);
 
 	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
 	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("radius")->setHoverable(true);
@@ -94,10 +94,10 @@ void WorldEditor::_activatePointlight(const string& id)
 
 void WorldEditor::_activateSpotlight(const string& id)
 {
-	_activeTorchId = ("@@torch_" + id);
+	_activeSpotlightId = ("@@torch_" + id);
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activeTorchId);
+	auto position = _fe3d->model_getBasePosition(_activeSpotlightId);
 
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("color")->setHoverable(true);
@@ -109,10 +109,10 @@ void WorldEditor::_activateSpotlight(const string& id)
 
 void WorldEditor::_activateReflection(const string& id)
 {
-	_activeCameraId = ("@@camera_" + id);
+	_activeReflectionId = ("@@camera_" + id);
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activeCameraId);
+	auto position = _fe3d->model_getBasePosition(_activeReflectionId);
 
 	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
 	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
@@ -123,7 +123,7 @@ void WorldEditor::_deactivateModel()
 {
 	if(!_activeModelId.empty())
 	{
-		_unselectModel(_activeModelId);
+		_deselectModel(_activeModelId);
 	}
 
 	_activeModelId = "";
@@ -134,7 +134,7 @@ void WorldEditor::_deactivateQuad3d()
 {
 	if(!_activeQuadId.empty())
 	{
-		_unselectQuad3d(_activeQuadId);
+		_deselectQuad3d(_activeQuadId);
 	}
 
 	_activeQuadId = "";
@@ -145,7 +145,7 @@ void WorldEditor::_deactivateText3d()
 {
 	if(!_activeTextId.empty())
 	{
-		_unselectText3d(_activeTextId);
+		_deselectText3d(_activeTextId);
 	}
 
 	_activeTextId = "";
@@ -154,41 +154,41 @@ void WorldEditor::_deactivateText3d()
 
 void WorldEditor::_deactivateSound()
 {
-	if(!_activeSpeakerId.empty())
+	if(!_activeSoundId.empty())
 	{
-		_unselectSound(_activeSpeakerId);
+		_deselectSound(_activeSoundId);
 	}
 
-	_activeSpeakerId = "";
+	_activeSoundId = "";
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivatePointlight()
 {
-	if(!_activeLampId.empty())
+	if(!_activePointlightId.empty())
 	{
-		_unselectPointlight(_activeLampId);
+		_deselectPointlight(_activePointlightId);
 	}
 
-	_activeLampId = "";
+	_activePointlightId = "";
 }
 
 void WorldEditor::_deactivateSpotlight()
 {
-	if(!_activeTorchId.empty())
+	if(!_activeSpotlightId.empty())
 	{
-		_unselectSpotlight(_activeTorchId);
+		_deselectSpotlight(_activeSpotlightId);
 	}
 
-	_activeTorchId = "";
+	_activeSpotlightId = "";
 }
 
 void WorldEditor::_deactivateReflection()
 {
-	if(!_activeCameraId.empty())
+	if(!_activeReflectionId.empty())
 	{
-		_unselectReflection(_activeCameraId);
+		_deselectReflection(_activeReflectionId);
 	}
 
-	_activeCameraId = "";
+	_activeReflectionId = "";
 }

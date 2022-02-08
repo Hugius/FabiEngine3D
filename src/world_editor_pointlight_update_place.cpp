@@ -8,11 +8,11 @@ void WorldEditor::_updatePointlightPlacing()
 	{
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
-			auto newPosition = _fe3d->pointlight_getPosition(TEMPLATE_LAMP_ID);
+			auto newPosition = _fe3d->pointlight_getPosition(TEMPLATE_POINTLIGHT_ID);
 			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
 			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
 			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
-			_fe3d->pointlight_setPosition(TEMPLATE_LAMP_ID, newPosition);
+			_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, newPosition);
 			_fe3d->model_setBasePosition(TEMPLATE_LAMP_ID, newPosition);
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
@@ -48,14 +48,14 @@ void WorldEditor::_updatePointlightPlacing()
 				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_LAMP_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
-				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				_isPlacingPointlight = false;
 			}
 
 			if(_gui->getOverlay()->isValueFormCancelled())
 			{
-				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				_isPlacingPointlight = false;
 			}
@@ -64,21 +64,21 @@ void WorldEditor::_updatePointlightPlacing()
 		{
 			if(!_fe3d->misc_isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
-				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				return;
 			}
 
 			if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				return;
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 			{
-				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				_isPlacingPointlight = false;
 				return;
@@ -86,14 +86,14 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
-				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				return;
 			}
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + POINTLIGHT_TERRAIN_OFFSET);
-			_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, true);
-			_fe3d->pointlight_setPosition(TEMPLATE_LAMP_ID, newPosition);
+			_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, true);
+			_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, newPosition);
 			_fe3d->model_setVisible(TEMPLATE_LAMP_ID, true);
 			_fe3d->model_setBasePosition(TEMPLATE_LAMP_ID, newPosition);
 

@@ -11,7 +11,7 @@ void WorldEditor::_updateReflectionPlacing()
 			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
 			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
 			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
-			_fe3d->reflection_setPosition(TEMPLATE_CAMERA_ID, newPosition);
+			_fe3d->reflection_setPosition(TEMPLATE_REFLECTION_ID, newPosition);
 			_fe3d->model_setBasePosition(TEMPLATE_CAMERA_ID, newPosition);
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
@@ -42,7 +42,7 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
-				_fe3d->reflection_setVisible(TEMPLATE_CAMERA_ID, false);
+				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 				_isPlacingReflection = false;
 			}
@@ -51,21 +51,21 @@ void WorldEditor::_updateReflectionPlacing()
 		{
 			if(!_fe3d->misc_isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
-				_fe3d->reflection_setVisible(TEMPLATE_CAMERA_ID, false);
+				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 				return;
 			}
 
 			if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				_fe3d->reflection_setVisible(TEMPLATE_CAMERA_ID, false);
+				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 				return;
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 			{
-				_fe3d->reflection_setVisible(TEMPLATE_CAMERA_ID, false);
+				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 				_isPlacingReflection = false;
 				return;
@@ -73,14 +73,14 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
-				_fe3d->reflection_setVisible(TEMPLATE_CAMERA_ID, false);
+				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 				return;
 			}
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + REFLECTION_TERRAIN_OFFSET);
-			_fe3d->reflection_setVisible(TEMPLATE_CAMERA_ID, true);
-			_fe3d->reflection_setPosition(TEMPLATE_CAMERA_ID, newPosition);
+			_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, true);
+			_fe3d->reflection_setPosition(TEMPLATE_REFLECTION_ID, newPosition);
 			_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, true);
 			_fe3d->model_setBasePosition(TEMPLATE_CAMERA_ID, newPosition);
 

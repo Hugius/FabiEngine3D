@@ -38,7 +38,7 @@ void WorldEditor::_updateQuad3dEditing()
 				{
 					if((id != _selectedQuadId) && (id != _activeQuadId))
 					{
-						_unselectQuad3d(id);
+						_deselectQuad3d(id);
 					}
 				}
 			}

@@ -45,10 +45,10 @@ void WorldEditor::_load()
 	_fe3d->model_setReflected(TEMPLATE_LAMP_ID, false);
 	_fe3d->model_setBright(TEMPLATE_LAMP_ID, "", true);
 	_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
-	_fe3d->pointlight_create(TEMPLATE_LAMP_ID);
-	_fe3d->pointlight_setRadius(TEMPLATE_LAMP_ID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
-	_fe3d->pointlight_setIntensity(TEMPLATE_LAMP_ID, DEFAULT_POINTLIGHT_INTENSITY);
-	_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
+	_fe3d->pointlight_create(TEMPLATE_POINTLIGHT_ID);
+	_fe3d->pointlight_setRadius(TEMPLATE_POINTLIGHT_ID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
+	_fe3d->pointlight_setIntensity(TEMPLATE_POINTLIGHT_ID, DEFAULT_POINTLIGHT_INTENSITY);
+	_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 
 	_fe3d->model_create(TEMPLATE_TORCH_ID, TORCH_MODEL_PATH);
 	_fe3d->model_setBaseRotation(TEMPLATE_TORCH_ID, DEFAULT_TORCH_ROTATION);
@@ -57,12 +57,12 @@ void WorldEditor::_load()
 	_fe3d->model_setReflected(TEMPLATE_TORCH_ID, false);
 	_fe3d->model_setBright(TEMPLATE_TORCH_ID, "", true);
 	_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
-	_fe3d->spotlight_create(TEMPLATE_TORCH_ID);
-	_fe3d->spotlight_setPitch(TEMPLATE_TORCH_ID, DEFAULT_SPOTLIGHT_PITCH);
-	_fe3d->spotlight_setIntensity(TEMPLATE_TORCH_ID, DEFAULT_SPOTLIGHT_INTENSITY);
-	_fe3d->spotlight_setAngle(TEMPLATE_TORCH_ID, DEFAULT_SPOTLIGHT_ANGLE);
-	_fe3d->spotlight_setDistance(TEMPLATE_TORCH_ID, DEFAULT_SPOTLIGHT_DISTANCE);
-	_fe3d->spotlight_setVisible(TEMPLATE_TORCH_ID, false);
+	_fe3d->spotlight_create(TEMPLATE_SPOTLIGHT_ID);
+	_fe3d->spotlight_setPitch(TEMPLATE_SPOTLIGHT_ID, DEFAULT_SPOTLIGHT_PITCH);
+	_fe3d->spotlight_setIntensity(TEMPLATE_SPOTLIGHT_ID, DEFAULT_SPOTLIGHT_INTENSITY);
+	_fe3d->spotlight_setAngle(TEMPLATE_SPOTLIGHT_ID, DEFAULT_SPOTLIGHT_ANGLE);
+	_fe3d->spotlight_setDistance(TEMPLATE_SPOTLIGHT_ID, DEFAULT_SPOTLIGHT_DISTANCE);
+	_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 
 	_fe3d->model_create(TEMPLATE_CAMERA_ID, CAMERA_MODEL_PATH);
 	_fe3d->model_setBaseSize(TEMPLATE_CAMERA_ID, DEFAULT_CAMERA_SIZE);
@@ -70,8 +70,8 @@ void WorldEditor::_load()
 	_fe3d->model_setReflected(TEMPLATE_CAMERA_ID, false);
 	_fe3d->model_setBright(TEMPLATE_CAMERA_ID, "", true);
 	_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
-	_fe3d->reflection_create(TEMPLATE_CAMERA_ID);
-	_fe3d->reflection_setVisible(TEMPLATE_CAMERA_ID, false);
+	_fe3d->reflection_create(TEMPLATE_REFLECTION_ID);
+	_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
 
 	_soundEditor->loadFromFile();
 	_fe3d->model_create(TEMPLATE_SPEAKER_ID, SPEAKER_MODEL_PATH);
@@ -138,13 +138,13 @@ void WorldEditor::_unload()
 	}
 
 	_fe3d->model_delete(TEMPLATE_LAMP_ID);
-	_fe3d->pointlight_delete(TEMPLATE_LAMP_ID);
+	_fe3d->pointlight_delete(TEMPLATE_POINTLIGHT_ID);
 
 	_fe3d->model_delete(TEMPLATE_TORCH_ID);
-	_fe3d->spotlight_delete(TEMPLATE_TORCH_ID);
+	_fe3d->spotlight_delete(TEMPLATE_SPOTLIGHT_ID);
 
 	_fe3d->model_delete(TEMPLATE_CAMERA_ID);
-	_fe3d->reflection_delete(TEMPLATE_CAMERA_ID);
+	_fe3d->reflection_delete(TEMPLATE_REFLECTION_ID);
 
 	_fe3d->model_delete(TEMPLATE_SPEAKER_ID);
 	for(const auto& id : _soundEditor->getLoadedIds())
@@ -201,15 +201,15 @@ void WorldEditor::_unload()
 	_currentTemplateTextId = "";
 	_selectedTextId = "";
 	_activeTextId = "";
-	_selectedLampId = "";
-	_activeLampId = "";
-	_selectedTorchId = "";
-	_activeTorchId = "";
-	_selectedCameraId = "";
-	_activeCameraId = "";
+	_selectedPointlightId = "";
+	_activePointlightId = "";
+	_selectedSpotlightId = "";
+	_activeSpotlightId = "";
+	_selectedReflectionId = "";
+	_activeReflectionId = "";
 	_currentTemplateSoundId = "";
-	_selectedSpeakerId = "";
-	_activeSpeakerId = "";
+	_selectedSoundId = "";
+	_activeSoundId = "";
 	_loadedWorldId = "";
 	_currentWorldId = "";
 	_editorSpeed = 1.0f;
@@ -219,14 +219,14 @@ void WorldEditor::_unload()
 	_activeQuad3dHighlightDirection = 1;
 	_selectedText3dHighlightDirection = 1;
 	_activeText3dHighlightDirection = 1;
-	_selectedLampHighlightDirection = 1;
-	_activeLampHighlightDirection = 1;
-	_selectedTorchHighlightDirection = 1;
-	_activeTorchHighlightDirection = 1;
-	_selectedCameraHighlightDirection = 1;
-	_activeCameraHighlightDirection = 1;
-	_selectedSpeakerHighlightDirection = 1;
-	_activeSpeakerHighlightDirection = 1;
+	_selectedPointlightHighlightDirection = 1;
+	_activePointlightHighlightDirection = 1;
+	_selectedSpotlightHighlightDirection = 1;
+	_activeSpotlightHighlightDirection = 1;
+	_selectedReflectionHighlightDirection = 1;
+	_activeReflectionHighlightDirection = 1;
+	_selectedSoundHighlightDirection = 1;
+	_activeSoundHighlightDirection = 1;
 	_hasCustomWorldLighting = false;
 	_hasCustomWorldGraphics = false;
 	_hasCustomWorldSky = false;
@@ -235,10 +235,10 @@ void WorldEditor::_unload()
 	_dontResetSelectedModel = false;
 	_dontResetSelectedQuad3d = false;
 	_dontResetSelectedText3d = false;
-	_dontResetSelectedLamp = false;
-	_dontResetSelectedTorch = false;
-	_dontResetSelectedCamera = false;
-	_dontResetSelectedSpeaker = false;
+	_dontResetSelectedPointlight = false;
+	_dontResetSelectedSpotlight = false;
+	_dontResetSelectedReflection = false;
+	_dontResetSelectedSound = false;
 	_isPlacingPointlight = false;
 	_isPlacingSpotlight = false;
 	_isPlacingReflection = false;

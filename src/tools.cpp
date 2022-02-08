@@ -61,22 +61,22 @@ const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
 
 const string Tools::vec2str(const ivec2& vec)
 {
-	return string(to_string(vec.x) + " " + to_string(vec.y));
+	return (to_string(vec.x) + " " + to_string(vec.y));
 }
 
 const string Tools::vec2str(const fvec2& vec)
 {
-	return string(to_string(vec.x) + " " + to_string(vec.y));
+	return (to_string(vec.x) + " " + to_string(vec.y));
 }
 
 const string Tools::vec2str(const fvec3& vec)
 {
-	return string(to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z));
+	return (to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z));
 }
 
 const string Tools::vec2str(const fvec4& vec)
 {
-	return string(to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w));
+	return (to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w));
 }
 
 const string Tools::getRootDirectoryPath()

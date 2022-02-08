@@ -138,7 +138,7 @@ void AudioLoader::_throwLoadedMessage(const string& filePath)
 const char* AudioLoader::_loadWaveFile(const string& filePath) const
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto fullFilePath = string(rootPath + filePath);
+	const auto fullFilePath = (rootPath + filePath);
 
 	auto file = ifstream(fullFilePath, ios::binary);
 	if(!file)

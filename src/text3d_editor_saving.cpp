@@ -36,7 +36,7 @@ const bool Text3dEditor::saveToFile() const
 		auto opacity = _fe3d->text3d_getOpacity(textId);
 		auto minTextureAlpha = _fe3d->text3d_getMinTextureAlpha(textId);
 
-		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
 

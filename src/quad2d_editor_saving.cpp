@@ -27,7 +27,7 @@ const bool Quad2dEditor::saveToFile() const
 		auto color = _fe3d->quad2d_getColor(quadId);
 		auto opacity = _fe3d->quad2d_getOpacity(quadId);
 
-		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 

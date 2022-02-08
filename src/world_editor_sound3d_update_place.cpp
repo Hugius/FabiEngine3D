@@ -16,7 +16,7 @@ void WorldEditor::_updateSoundPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = string(_currentTemplateSoundId.substr(1) + "_" + to_string(_idCounter));
+				auto newId = (_currentTemplateSoundId.substr(1) + "_" + to_string(_idCounter));
 				auto newModelId = ("@@speaker_" + newId);
 
 				_idCounter++;
@@ -110,7 +110,7 @@ void WorldEditor::_updateSoundPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newId = string(_currentTemplateSoundId.substr(1) + "_" + to_string(_idCounter));
+				auto newId = (_currentTemplateSoundId.substr(1) + "_" + to_string(_idCounter));
 				auto newModelId = ("@@speaker_" + newId);
 
 				_idCounter++;

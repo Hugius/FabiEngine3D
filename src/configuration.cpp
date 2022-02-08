@@ -9,7 +9,7 @@ using std::istringstream;
 Config::Config()
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + "config.fe3d");
+	const auto filePath = (rootPath + "config.fe3d");
 
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);

@@ -338,7 +338,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + getCurrentProjectId() + "\\assets\\image\\misc\\flare_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\misc\\flare_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -346,7 +346,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
+			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				return;

@@ -258,7 +258,7 @@ const string NetworkingClient::_extractAddressIp(sockaddr_in* address) const
 
 	inet_ntop(AF_INET, &(address->sin_addr), ip, sizeof(ip));
 
-	return string(ip);
+	return (ip);
 }
 
 const string NetworkingClient::_extractAddressPort(sockaddr_in* address) const

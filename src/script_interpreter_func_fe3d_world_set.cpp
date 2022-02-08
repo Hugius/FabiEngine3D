@@ -182,8 +182,8 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\");
-			const auto filePath = string(directoryPath + args[0]->getString() + ".fe3d");
+			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\");
+			const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");
 
 			if(!Tools::isFileExisting(filePath))
 			{

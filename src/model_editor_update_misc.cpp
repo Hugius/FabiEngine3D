@@ -134,7 +134,7 @@ void ModelEditor::_updateModelCreating()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + getCurrentProjectId() + "\\assets\\mesh\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\mesh\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -143,7 +143,7 @@ void ModelEditor::_updateModelCreating()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "OBJ");
+			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "OBJ");
 			if(filePath.empty())
 			{
 				_isCreatingModel = false;

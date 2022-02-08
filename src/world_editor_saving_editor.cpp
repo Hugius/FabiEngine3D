@@ -427,7 +427,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto intensity = _fe3d->gfx_getLensFlareIntensity();
 		auto sensitivity = _fe3d->gfx_getLensFlareSensitivity();
 
-		flareMapPath = string(flareMapPath.empty() ? "" : flareMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		flareMapPath = (flareMapPath.empty() ? "" : flareMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
 

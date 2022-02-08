@@ -41,7 +41,7 @@ const string MasterRenderer::getCpuName() const
 
 const string MasterRenderer::getGpuName() const
 {
-	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_RENDERER))));
+	return (reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_RENDERER))));
 }
 
 const string MasterRenderer::getOpenglVersion() const

@@ -16,7 +16,7 @@ void WorldEditor::_updateModelPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = string(_currentTemplateModelId.substr(1) + "_" + to_string(_idCounter));
+				auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
 
@@ -68,7 +68,7 @@ void WorldEditor::_updateModelPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newId = string(_currentTemplateModelId.substr(1) + "_" + to_string(_idCounter));
+				auto newId = (_currentTemplateModelId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
 

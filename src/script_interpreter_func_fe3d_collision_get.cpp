@@ -75,29 +75,29 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dAabb(string(args[0]->getString() + "@" + args[1]->getString())))
+				if(_validateFe3dAabb((args[0]->getString() + "@" + args[1]->getString())))
 				{
 					if(args[2]->getString().empty())
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb(string(args[0]->getString() + "@" + args[1]->getString()));
+						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()));
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}
 					else if(args[2]->getString() == "X")
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb(string(args[0]->getString() + "@" + args[1]->getString()), Direction::X);
+						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), Direction::X);
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}
 					else if(args[2]->getString() == "Y")
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb(string(args[0]->getString() + "@" + args[1]->getString()), Direction::Y);
+						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), Direction::Y);
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}
 					else if(args[2]->getString() == "Z")
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb(string(args[0]->getString() + "@" + args[1]->getString()), Direction::Z);
+						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), Direction::Z);
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}

@@ -42,9 +42,9 @@ const bool WaterEditor::saveToFile() const
 		auto isReflective = _fe3d->water_isReflective(waterId);
 		auto isRefractive = _fe3d->water_isRefractive(waterId);
 
-		dudvMapPath = string(dudvMapPath.empty() ? "" : dudvMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
-		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
-		displacementMapPath = string(displacementMapPath.empty() ? "" : displacementMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		dudvMapPath = (dudvMapPath.empty() ? "" : dudvMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+		normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+		displacementMapPath = (displacementMapPath.empty() ? "" : displacementMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		dudvMapPath = (dudvMapPath.empty() ? "?" : dudvMapPath);
 		normalMapPath = (normalMapPath.empty() ? "?" : normalMapPath);

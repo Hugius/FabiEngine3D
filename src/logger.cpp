@@ -31,7 +31,7 @@ void Logger::_printPrefix(LogMessageType type)
 	auto format = tm();
 	localtime_s(&format, &current);
 	strftime(rawTimestamp, 9, "%H:%M:%S", &format);
-	auto timestamp = string(rawTimestamp);
+	auto timestamp = rawTimestamp;
 	delete[] rawTimestamp;
 
 	SetConsoleTextAttribute(console, 6);

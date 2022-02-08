@@ -22,7 +22,7 @@ const bool ScriptEditor::saveScriptFiles()
 	for(const auto& fileName : _scriptFileNamesToDelete)
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const auto filePath = string(rootPath + "projects\\" + getCurrentProjectId() + "\\scripts\\" + fileName + ".fe3d");
+		const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\scripts\\" + fileName + ".fe3d");
 
 		if(Tools::isFileExisting(filePath))
 		{

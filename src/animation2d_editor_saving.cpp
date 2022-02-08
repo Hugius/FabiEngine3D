@@ -31,7 +31,7 @@ const bool Animation2dEditor::saveToFile() const
 
 		if(!previewTexturePath.empty())
 		{
-			previewTexturePath = string(previewTexturePath.empty() ? "" : previewTexturePath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+			previewTexturePath = (previewTexturePath.empty() ? "" : previewTexturePath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 			previewTexturePath = (previewTexturePath.empty()) ? "?" : previewTexturePath;
 

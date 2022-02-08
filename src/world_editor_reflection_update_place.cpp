@@ -16,7 +16,7 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = string("reflection_" + to_string(_idCounter));
+				auto newId = ("reflection_" + to_string(_idCounter));
 				auto newModelId = ("@@camera_" + newId);
 
 				_idCounter++;
@@ -86,7 +86,7 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newId = string("reflection_" + to_string(_idCounter));
+				auto newId = ("reflection_" + to_string(_idCounter));
 				auto newModelId = ("@@camera_" + newId);
 
 				_idCounter++;

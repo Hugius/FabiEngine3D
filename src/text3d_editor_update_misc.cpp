@@ -106,7 +106,7 @@ void Text3dEditor::_updateText3dCreating()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\text3d\\font_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\text3d\\font_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -115,7 +115,7 @@ void Text3dEditor::_updateText3dCreating()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
+			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				_isCreatingText3d = false;

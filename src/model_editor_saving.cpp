@@ -37,7 +37,7 @@ const bool ModelEditor::saveToFile() const
 		auto isShadowed = _fe3d->model_isShadowed(modelId);
 		auto isReflected = _fe3d->model_isReflected(modelId);
 
-		meshPath = string(meshPath.empty() ? "" : meshPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		meshPath = (meshPath.empty() ? "" : meshPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
 		levelOfDetailEntityId = (levelOfDetailEntityId.empty()) ? "?" : levelOfDetailEntityId;
@@ -81,11 +81,11 @@ const bool ModelEditor::saveToFile() const
 			auto opacity = _fe3d->model_getOpacity(modelId, partId);
 			auto minTextureAlpha = _fe3d->model_getMinTextureAlpha(modelId, partId);
 
-			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
-			emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
-			specularMapPath = string(specularMapPath.empty() ? "" : specularMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
-			reflectionMapPath = string(reflectionMapPath.empty() ? "" : reflectionMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
-			normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+			diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+			emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+			specularMapPath = (specularMapPath.empty() ? "" : specularMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+			reflectionMapPath = (reflectionMapPath.empty() ? "" : reflectionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+			normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 			partId = (partId.empty()) ? "?" : partId;
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;

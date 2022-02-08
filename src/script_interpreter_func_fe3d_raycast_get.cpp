@@ -242,9 +242,9 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				if(_validateFe3dAabb(string(args[0]->getString() + "@" + args[1]->getString())))
+				if(_validateFe3dAabb((args[0]->getString() + "@" + args[1]->getString())))
 				{
-					const auto result = _fe3d->raycast_getDistanceToAabb(string(args[0]->getString() + "@" + args[1]->getString()));
+					const auto result = _fe3d->raycast_getDistanceToAabb((args[0]->getString() + "@" + args[1]->getString()));
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 				}

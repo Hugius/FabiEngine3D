@@ -17,7 +17,7 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = string("pointlight_" + to_string(_idCounter));
+				auto newId = ("pointlight_" + to_string(_idCounter));
 				auto newModelId = ("@@lamp_" + newId);
 
 				_idCounter++;
@@ -99,7 +99,7 @@ void WorldEditor::_updatePointlightPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newId = string("pointlight_" + to_string(_idCounter));
+				auto newId = ("pointlight_" + to_string(_idCounter));
 				auto newModelId = ("@@lamp_" + newId);
 
 				_idCounter++;

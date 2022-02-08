@@ -89,7 +89,7 @@ void TerrainEditor::_updateTerrainCreating()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\terrain\\height_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\terrain\\height_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -98,7 +98,7 @@ void TerrainEditor::_updateTerrainCreating()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
+			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				_isCreatingTerrain = false;

@@ -17,7 +17,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = string("spotlight_" + to_string(_idCounter));
+				auto newId = ("spotlight_" + to_string(_idCounter));
 				auto newModelId = ("@@torch_" + newId);
 
 				_idCounter++;
@@ -102,7 +102,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newId = string("spotlight_" + to_string(_idCounter));
+				auto newId = ("spotlight_" + to_string(_idCounter));
 				auto newModelId = ("@@torch_" + newId);
 
 				_idCounter++;

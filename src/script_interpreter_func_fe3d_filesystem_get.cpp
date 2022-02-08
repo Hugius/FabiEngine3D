@@ -18,8 +18,8 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto newDirectoryPath = string(directoryPath + args[0]->getString());
+			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+			const auto newDirectoryPath = (directoryPath + args[0]->getString());
 
 			const auto result = Tools::isDirectoryExisting(newDirectoryPath);
 
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = (directoryPath + args[0]->getString());
 
 			const auto result = Tools::isFileExisting(filePath);
@@ -50,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = (directoryPath + args[0]->getString());
 
 			auto file = ifstream(filePath);

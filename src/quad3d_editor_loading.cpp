@@ -18,7 +18,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\quad3d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\quad3d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -63,7 +63,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				diffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
+				diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 			}
 
 			imagePaths.push_back(diffuseMapPath);
@@ -73,7 +73,7 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				emissionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
+				emissionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
 			}
 
 			imagePaths.push_back(emissionMapPath);
@@ -96,7 +96,7 @@ const bool Quad3dEditor::loadFromFile()
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\quad3d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\quad3d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -173,7 +173,7 @@ const bool Quad3dEditor::loadFromFile()
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				diffuseMapPath = string("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
+				diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 			}
 
 			_fe3d->quad3d_setDiffuseMap(quadId, diffuseMapPath);
@@ -183,7 +183,7 @@ const bool Quad3dEditor::loadFromFile()
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				emissionMapPath = string("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
+				emissionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
 			}
 
 			_fe3d->quad3d_setEmissionMap(quadId, emissionMapPath);

@@ -56,7 +56,7 @@ void Text2dEditor::_updateTextCreating()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\text2d\\font_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\text2d\\font_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -65,7 +65,7 @@ void Text2dEditor::_updateTextCreating()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
+			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				_isCreatingText = false;

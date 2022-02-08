@@ -128,7 +128,7 @@ void TopViewportController::_updateProjectLoading()
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
 		const string clickedButtonId = _gui->getOverlay()->checkChoiceForm("projectList");
-		const string projectDirectoryPath = string(rootPath + "projects\\" + clickedButtonId + "\\");
+		const string projectDirectoryPath = (rootPath + "projects\\" + clickedButtonId + "\\");
 
 		if(!clickedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{

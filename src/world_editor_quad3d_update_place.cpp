@@ -15,7 +15,7 @@ void WorldEditor::_updateQuad3dPlacing()
 
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = string(_currentTemplateQuadId.substr(1) + "_" + to_string(_idCounter));
+				auto newId = (_currentTemplateQuadId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
 
@@ -67,7 +67,7 @@ void WorldEditor::_updateQuad3dPlacing()
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				auto newId = string(_currentTemplateQuadId.substr(1) + "_" + to_string(_idCounter));
+				auto newId = (_currentTemplateQuadId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
 

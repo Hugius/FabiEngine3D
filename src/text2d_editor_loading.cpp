@@ -17,7 +17,7 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\text2d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\text2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -47,7 +47,7 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
-				fontMapPath = string("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
+				fontMapPath = ("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
 			}
 
 			imagePaths.push_back(fontMapPath);
@@ -70,7 +70,7 @@ const bool Text2dEditor::loadFromFile()
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\text2d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\text2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -103,7 +103,7 @@ const bool Text2dEditor::loadFromFile()
 
 		if(!Config::getInst().isApplicationExported())
 		{
-			fontMapPath = string("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
+			fontMapPath = ("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
 		}
 
 		_fe3d->text2d_create(textId, fontMapPath, true);

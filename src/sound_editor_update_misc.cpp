@@ -64,7 +64,7 @@ void SoundEditor::_updateSoundCreating()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + getCurrentProjectId() + "\\assets\\audio\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\audio\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -73,7 +73,7 @@ void SoundEditor::_updateSoundCreating()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "WAV");
+			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "WAV");
 			if(filePath.empty())
 			{
 				_isCreatingSound = false;

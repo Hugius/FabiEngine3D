@@ -27,7 +27,7 @@ const bool Text2dEditor::saveToFile() const
 		auto color = _fe3d->text2d_getColor(textId);
 		auto opacity = _fe3d->text2d_getOpacity(textId);
 
-		fontMapPath = string(fontMapPath.empty() ? "" : fontMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		fontMapPath = (fontMapPath.empty()) ? "?" : fontMapPath;
 

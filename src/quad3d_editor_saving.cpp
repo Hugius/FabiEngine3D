@@ -39,8 +39,8 @@ const bool Quad3dEditor::saveToFile() const
 		auto opacity = _fe3d->quad3d_getOpacity(quadId);
 		auto minTextureAlpha = _fe3d->quad3d_getMinTextureAlpha(quadId);
 
-		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
-		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + getCurrentProjectId() + "\\").size()));
+		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
+		emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;

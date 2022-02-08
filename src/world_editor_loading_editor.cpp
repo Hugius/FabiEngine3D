@@ -19,7 +19,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\" + fileName + ".fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\" + fileName + ".fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -603,7 +603,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			if(!Config::getInst().isApplicationExported())
 			{
-				flareMapPath = string("projects\\" + getCurrentProjectId() + "\\" + flareMapPath);
+				flareMapPath = ("projects\\" + getCurrentProjectId() + "\\" + flareMapPath);
 			}
 
 			_fe3d->gfx_setLensFlareEnabled(true);

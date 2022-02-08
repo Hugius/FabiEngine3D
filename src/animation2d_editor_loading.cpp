@@ -18,7 +18,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\animation2d.fe3d");
+	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\animation2d.fe3d");
 
 	auto file = ifstream(filePath);
 	if(!file)
@@ -51,7 +51,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 
 		if(!Config::getInst().isApplicationExported())
 		{
-			previewTexturePath = string("projects\\" + getCurrentProjectId() + "\\" + previewTexturePath);
+			previewTexturePath = ("projects\\" + getCurrentProjectId() + "\\" + previewTexturePath);
 		}
 
 		if(mustCheckPreviewTexture)

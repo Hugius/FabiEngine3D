@@ -11,7 +11,7 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 {
 	FILE* file = nullptr;
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto fullFilePath = string(rootPath + filePath);
+	const auto fullFilePath = (rootPath + filePath);
 	if(fopen_s(&file, fullFilePath.c_str(), "rb") != 0)
 	{
 		return nullptr;

@@ -166,7 +166,7 @@ void TopViewportController::_updateMiscScreenManagement()
 		}
 
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const auto targetDirectoryPath = string("projects\\" + _currentProjectId + "\\assets\\");
+		const auto targetDirectoryPath = ("projects\\" + _currentProjectId + "\\assets\\");
 
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{
@@ -174,7 +174,7 @@ void TopViewportController::_updateMiscScreenManagement()
 			return;
 		}
 
-		const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "");
+		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "");
 		if(filePath.empty())
 		{
 			return;
@@ -200,7 +200,7 @@ void TopViewportController::_updateMiscScreenManagement()
 		}
 
 		const string rootPath = Tools::getRootDirectoryPath();
-		const string exportDirectoryPath = string(chosenDirectoryPath + "\\" + _currentProjectId + "\\");
+		const string exportDirectoryPath = (chosenDirectoryPath + "\\" + _currentProjectId + "\\");
 
 		if(Tools::isDirectoryExisting(exportDirectoryPath))
 		{
@@ -212,17 +212,17 @@ void TopViewportController::_updateMiscScreenManagement()
 			Tools::createDirectory(exportDirectoryPath + "logo\\");
 			Tools::createDirectory(exportDirectoryPath + "shaders\\");
 
-			Tools::copyDirectory(string(rootPath + "binaries\\"), string(exportDirectoryPath + "binaries\\"));
-			Tools::copyDirectory(string(rootPath + "engine\\shaders\\"), string(exportDirectoryPath + "shaders\\"));
-			Tools::copyDirectory(string(rootPath + "projects\\" + _currentProjectId), exportDirectoryPath);
+			Tools::copyDirectory((rootPath + "binaries\\"), (exportDirectoryPath + "binaries\\"));
+			Tools::copyDirectory((rootPath + "engine\\shaders\\"), (exportDirectoryPath + "shaders\\"));
+			Tools::copyDirectory((rootPath + "projects\\" + _currentProjectId), exportDirectoryPath);
 
-			Tools::copyFile(string(rootPath + "engine\\assets\\image\\diffuse_map\\logo.tga"), string(exportDirectoryPath + "logo\\logo.tga"));
+			Tools::copyFile((rootPath + "engine\\assets\\image\\diffuse_map\\logo.tga"), (exportDirectoryPath + "logo\\logo.tga"));
 
-			auto oldPath = string(exportDirectoryPath + "binaries\\fe3d.exe");
-			auto newPath = string(exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe");
+			auto oldPath = (exportDirectoryPath + "binaries\\fe3d.exe");
+			auto newPath = (exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe");
 			Tools::renameFile(oldPath, newPath);
 
-			const auto filePath = string(exportDirectoryPath + "config.fe3d");
+			const auto filePath = (exportDirectoryPath + "config.fe3d");
 			auto file = ofstream(filePath);
 			file << "window_size	   = 0.75" << endl;
 			file << "window_fullscreen = false" << endl;

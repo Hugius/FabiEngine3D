@@ -203,7 +203,7 @@ const string NetworkingServer::_extractAddressIp(sockaddr_in* address) const
 	char ip[IPV4_ADDRESS_LENGTH];
 	inet_ntop(AF_INET, &(address->sin_addr), ip, sizeof(ip));
 
-	return string(ip);
+	return (ip);
 }
 
 const string NetworkingServer::_extractAddressPort(sockaddr_in* address) const

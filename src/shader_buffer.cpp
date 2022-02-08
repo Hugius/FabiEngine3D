@@ -21,8 +21,8 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto vertexPath = string(shaderDirectoryPath + vertexFileName);
-	const auto fragmentPath = string(shaderDirectoryPath + fragmentFileName);
+	const auto vertexPath = (shaderDirectoryPath + vertexFileName);
+	const auto fragmentPath = (shaderDirectoryPath + fragmentFileName);
 	const auto shaderName = vertexFileName.substr(0, vertexFileName.size() - 5);
 
 	auto vertexFile = ifstream(rootPath + vertexPath);

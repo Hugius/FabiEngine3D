@@ -21,7 +21,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 	string selectedPartId = "";
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto fullFilePath = string(rootPath + filePath);
+	const auto fullFilePath = (rootPath + filePath);
 	auto file = ifstream(fullFilePath);
 	if(!file)
 	{
@@ -44,7 +44,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 			string id;
 			iss >> id;
 
-			selectedPartId = string(id);
+			selectedPartId = (id);
 
 			if(selectedPartId == "?")
 			{

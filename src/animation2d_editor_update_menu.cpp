@@ -107,7 +107,7 @@ void Animation2dEditor::_updateChoiceMenu()
 
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto entityType = (isConfirmed ? "quad3d" : "quad2d");
-			const auto targetDirectoryPath = string("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\" + entityType + "\\diffuse_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\" + entityType + "\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -115,7 +115,7 @@ void Animation2dEditor::_updateChoiceMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
+			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				return;

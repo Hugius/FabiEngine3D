@@ -7,7 +7,7 @@ void WorldEditor::_selectModel(const string& id)
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("modelId")->changeTextContent("Selected Model: " + _selectedModelId);
+	_gui->getOverlay()->getTextField("modelId")->changeTextContent("Model: " + _selectedModelId);
 }
 
 void WorldEditor::_selectQuad3d(const string& id)
@@ -17,7 +17,7 @@ void WorldEditor::_selectQuad3d(const string& id)
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("quadId")->changeTextContent("Selected Quad3D: " + _selectedQuadId);
+	_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad3D: " + _selectedQuadId);
 }
 
 void WorldEditor::_selectText3d(const string& id)
@@ -27,7 +27,7 @@ void WorldEditor::_selectText3d(const string& id)
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("textId")->changeTextContent("Selected Text3D: " + _selectedTextId);
+	_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3D: " + _selectedTextId);
 }
 
 void WorldEditor::_selectSound(const string& id)
@@ -37,7 +37,7 @@ void WorldEditor::_selectSound(const string& id)
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Selected Sound: " + _selectedSoundId);
+	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Sound: " + _selectedSoundId);
 }
 
 void WorldEditor::_selectPointlight(const string& id)

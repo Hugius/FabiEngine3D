@@ -73,7 +73,7 @@ void WorldEditor::unloadEditorWorld()
 
 		if(!animationIds.empty())
 		{
-			_animation3dEditor->stopModelAnimation(animationIds.back(), key);
+			_animation3dEditor->stopModelAnimation(animationIds[0], key);
 		}
 
 		_fe3d->model_delete(key);
@@ -85,7 +85,7 @@ void WorldEditor::unloadEditorWorld()
 
 		if(!animationIds.empty())
 		{
-			_animation2dEditor->stopQuad3dAnimation(animationIds.back(), key);
+			_animation2dEditor->stopQuad3dAnimation(animationIds[0], key);
 		}
 
 		_fe3d->quad3d_delete(key);

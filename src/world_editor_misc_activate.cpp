@@ -57,6 +57,58 @@ void WorldEditor::_activateText3d(const string& id)
 	_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3D: " + _activeTextId);
 }
 
+void WorldEditor::_activatePointlight(const string& id)
+{
+	_activePointlightId = ("@@lamp_" + id);
+
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	auto position = _fe3d->model_getBasePosition(_activePointlightId);
+
+	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
+	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("radius")->setHoverable(true);
+	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("color")->setHoverable(true);
+
+	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("pointlightId")->getEntityId(), true);
+	_gui->getOverlay()->getTextField("pointlightId")->changeTextContent("Pointlight: " + _activePointlightId);
+}
+
+void WorldEditor::_activateSpotlight(const string& id)
+{
+	_activeSpotlightId = ("@@torch_" + id);
+
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	auto position = _fe3d->model_getBasePosition(_activeSpotlightId);
+
+	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
+	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("color")->setHoverable(true);
+
+	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("spotlightId")->getEntityId(), true);
+	_gui->getOverlay()->getTextField("spotlightId")->changeTextContent("Spotlight: " + _activeSpotlightId);
+}
+
+void WorldEditor::_activateReflection(const string& id)
+{
+	_activeReflectionId = ("@@camera_" + id);
+
+	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+	auto position = _fe3d->model_getBasePosition(_activeReflectionId);
+
+	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("reflectionId")->getEntityId(), true);
+	_gui->getOverlay()->getTextField("reflectionId")->changeTextContent("Reflection: " + _activeReflectionId);
+}
+
 void WorldEditor::_activateSound(const string& id)
 {
 	_activeSoundId = ("@@speaker_" + id);
@@ -74,49 +126,6 @@ void WorldEditor::_activateSound(const string& id)
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
 	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Sound: " + _activeSoundId);
-}
-
-void WorldEditor::_activatePointlight(const string& id)
-{
-	_activePointlightId = ("@@lamp_" + id);
-
-	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activePointlightId);
-
-	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
-	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("radius")->setHoverable(true);
-	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("color")->setHoverable(true);
-
-	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
-}
-
-void WorldEditor::_activateSpotlight(const string& id)
-{
-	_activeSpotlightId = ("@@torch_" + id);
-
-	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activeSpotlightId);
-
-	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
-	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("color")->setHoverable(true);
-
-	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
-}
-
-void WorldEditor::_activateReflection(const string& id)
-{
-	_activeReflectionId = ("@@camera_" + id);
-
-	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activeReflectionId);
-
-	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 }
 
 void WorldEditor::_deactivateModel()
@@ -152,17 +161,6 @@ void WorldEditor::_deactivateText3d()
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
 }
 
-void WorldEditor::_deactivateSound()
-{
-	if(!_activeSoundId.empty())
-	{
-		_deselectSound(_activeSoundId);
-	}
-
-	_activeSoundId = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
-}
-
 void WorldEditor::_deactivatePointlight()
 {
 	if(!_activePointlightId.empty())
@@ -171,6 +169,7 @@ void WorldEditor::_deactivatePointlight()
 	}
 
 	_activePointlightId = "";
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("pointlightId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateSpotlight()
@@ -181,6 +180,7 @@ void WorldEditor::_deactivateSpotlight()
 	}
 
 	_activeSpotlightId = "";
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("spotlightId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateReflection()
@@ -191,4 +191,16 @@ void WorldEditor::_deactivateReflection()
 	}
 
 	_activeReflectionId = "";
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("reflectionId")->getEntityId(), false);
+}
+
+void WorldEditor::_deactivateSound()
+{
+	if(!_activeSoundId.empty())
+	{
+		_deselectSound(_activeSoundId);
+	}
+
+	_activeSoundId = "";
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
 }

@@ -30,6 +30,36 @@ void WorldEditor::_selectText3d(const string& id)
 	_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3D: " + _selectedTextId);
 }
 
+void WorldEditor::_selectPointlight(const string& id)
+{
+	_selectedPointlightId = ("@@lamp_" + id);
+
+	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("pointlightId")->getEntityId(), true);
+	_gui->getOverlay()->getTextField("pointlightId")->changeTextContent("Pointlight: " + _selectedPointlightId);
+}
+
+void WorldEditor::_selectSpotlight(const string& id)
+{
+	_selectedSpotlightId = ("@@torch_" + id);
+
+	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("spotlightId")->getEntityId(), true);
+	_gui->getOverlay()->getTextField("spotlightId")->changeTextContent("Spotlight: " + _selectedSpotlightId);
+}
+
+void WorldEditor::_selectReflection(const string& id)
+{
+	_selectedReflectionId = ("@@camera_" + id);
+
+	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("reflectionId")->getEntityId(), true);
+	_gui->getOverlay()->getTextField("reflectionId")->changeTextContent("Reflection: " + _selectedReflectionId);
+}
+
 void WorldEditor::_selectSound(const string& id)
 {
 	_selectedSoundId = ("@@speaker_" + id);
@@ -38,27 +68,6 @@ void WorldEditor::_selectSound(const string& id)
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
 	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Sound: " + _selectedSoundId);
-}
-
-void WorldEditor::_selectPointlight(const string& id)
-{
-	_selectedPointlightId = ("@@lamp_" + id);
-
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
-}
-
-void WorldEditor::_selectSpotlight(const string& id)
-{
-	_selectedSpotlightId = ("@@torch_" + id);
-
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
-}
-
-void WorldEditor::_selectReflection(const string& id)
-{
-	_selectedReflectionId = ("@@camera_" + id);
-
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 }
 
 void WorldEditor::_deselectModel(const string& id)
@@ -79,12 +88,6 @@ void WorldEditor::_deselectText3d(const string& id)
 	_fe3d->text3d_setOpacity(id, 1.0f);
 }
 
-void WorldEditor::_deselectSound(const string& id)
-{
-	_fe3d->model_setBaseSize(id, DEFAULT_SPEAKER_SIZE);
-	_fe3d->aabb_setLocalSize(id, DEFAULT_SPEAKER_AABB_SIZE);
-}
-
 void WorldEditor::_deselectPointlight(const string& id)
 {
 	_fe3d->model_setBaseSize(id, DEFAULT_LAMP_SIZE);
@@ -101,4 +104,10 @@ void WorldEditor::_deselectReflection(const string& id)
 {
 	_fe3d->model_setBaseSize(id, DEFAULT_CAMERA_SIZE);
 	_fe3d->aabb_setLocalSize(id, DEFAULT_CAMERA_AABB_SIZE);
+}
+
+void WorldEditor::_deselectSound(const string& id)
+{
+	_fe3d->model_setBaseSize(id, DEFAULT_SPEAKER_SIZE);
+	_fe3d->aabb_setLocalSize(id, DEFAULT_SPEAKER_AABB_SIZE);
 }

@@ -120,7 +120,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	{
 		leftVariable->getValue(leftValueIndex)->setBoolean(valueString == "<true>");
 	}
-	else if(isSingleVariable && isBooleanVariable && ((valueString[0] == '(') && (valueString.back() == ')')))
+	else if(isSingleVariable && isBooleanVariable && ((valueString.front() == '(') && (valueString.back() == ')')))
 	{
 		valueString.erase(valueString.begin());
 		valueString.pop_back();

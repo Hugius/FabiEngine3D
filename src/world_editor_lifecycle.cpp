@@ -43,7 +43,6 @@ void WorldEditor::_load()
 	_fe3d->model_setBaseSize(TEMPLATE_LAMP_ID, DEFAULT_LAMP_SIZE);
 	_fe3d->model_setShadowed(TEMPLATE_LAMP_ID, false);
 	_fe3d->model_setReflected(TEMPLATE_LAMP_ID, false);
-	_fe3d->model_setBright(TEMPLATE_LAMP_ID, "", true);
 	_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 	_fe3d->pointlight_create(TEMPLATE_POINTLIGHT_ID);
 	_fe3d->pointlight_setRadius(TEMPLATE_POINTLIGHT_ID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
@@ -55,7 +54,6 @@ void WorldEditor::_load()
 	_fe3d->model_setBaseSize(TEMPLATE_TORCH_ID, DEFAULT_TORCH_SIZE);
 	_fe3d->model_setShadowed(TEMPLATE_TORCH_ID, false);
 	_fe3d->model_setReflected(TEMPLATE_TORCH_ID, false);
-	_fe3d->model_setBright(TEMPLATE_TORCH_ID, "", true);
 	_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
 	_fe3d->spotlight_create(TEMPLATE_SPOTLIGHT_ID);
 	_fe3d->spotlight_setPitch(TEMPLATE_SPOTLIGHT_ID, DEFAULT_SPOTLIGHT_PITCH);
@@ -68,7 +66,6 @@ void WorldEditor::_load()
 	_fe3d->model_setBaseSize(TEMPLATE_CAMERA_ID, DEFAULT_CAMERA_SIZE);
 	_fe3d->model_setShadowed(TEMPLATE_CAMERA_ID, false);
 	_fe3d->model_setReflected(TEMPLATE_CAMERA_ID, false);
-	_fe3d->model_setBright(TEMPLATE_CAMERA_ID, "", true);
 	_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 	_fe3d->reflection_create(TEMPLATE_REFLECTION_ID);
 	_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
@@ -78,7 +75,6 @@ void WorldEditor::_load()
 	_fe3d->model_setBaseSize(TEMPLATE_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
 	_fe3d->model_setShadowed(TEMPLATE_SPEAKER_ID, false);
 	_fe3d->model_setReflected(TEMPLATE_SPEAKER_ID, false);
-	_fe3d->model_setBright(TEMPLATE_SPEAKER_ID, "", true);
 	_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 	for(const auto& id : _soundEditor->getLoadedIds())
 	{
@@ -93,6 +89,9 @@ void WorldEditor::_load()
 	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("quadId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("textId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("pointlightId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("spotlightId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("reflectionId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("soundId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 
 	_fe3d->collision_setCameraAabbResponseEnabled(true, true, true);
@@ -156,6 +155,9 @@ void WorldEditor::_unload()
 	_gui->getOverlay()->deleteTextField("modelId");
 	_gui->getOverlay()->deleteTextField("quadId");
 	_gui->getOverlay()->deleteTextField("textId");
+	_gui->getOverlay()->deleteTextField("pointlightId");
+	_gui->getOverlay()->deleteTextField("spotlightId");
+	_gui->getOverlay()->deleteTextField("reflectionId");
 	_gui->getOverlay()->deleteTextField("soundId");
 
 	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);

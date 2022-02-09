@@ -33,6 +33,10 @@
 #include "networking_client.hpp"
 #include "vertex_buffer_cache.hpp"
 #include "texture_buffer_cache.hpp"
+#include "animation3d_manager.hpp"
+#include "animation2d_manager.hpp"
+#include "animation3d_player.hpp"
+#include "animation2d_player.hpp"
 
 class EngineController;
 
@@ -107,6 +111,10 @@ private:
 	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
 	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
 	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
+	shared_ptr<Animation3dManager> _animation3dManager = nullptr;
+	shared_ptr<Animation2dManager> _animation2dManager = nullptr;
+	shared_ptr<Animation3dPlayer> _animation3dPlayer = nullptr;
+	shared_ptr<Animation2dPlayer> _animation2dPlayer = nullptr;
 	shared_ptr<RenderWindow> _renderWindow = nullptr;
 	shared_ptr<MasterRenderer> _masterRenderer = nullptr;
 	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
@@ -117,10 +125,10 @@ private:
 	shared_ptr<RaycastIntersector> _raycastIntersector = nullptr;
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
 	shared_ptr<CameraCollisionResponder> _cameraCollisionResponder = nullptr;
-	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
 	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
-	shared_ptr<Sound2dPlayer> _sound2dPlayer = nullptr;
+	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
 	shared_ptr<Sound3dPlayer> _sound3dPlayer = nullptr;
+	shared_ptr<Sound2dPlayer> _sound2dPlayer = nullptr;
 	shared_ptr<NetworkingServer> _networkingServer = nullptr;
 	shared_ptr<NetworkingClient> _networkingClient = nullptr;
 	shared_ptr<Timer> _timer = nullptr;

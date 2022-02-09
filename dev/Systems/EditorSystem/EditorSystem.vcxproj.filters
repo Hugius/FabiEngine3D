@@ -190,9 +190,6 @@
     <Filter Include="Animation2D Editor\Update">
       <UniqueIdentifier>{48974e80-2b9e-4c00-902e-59ad675354a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Animation2D Editor\Data">
-      <UniqueIdentifier>{7c7b847e-e36f-4402-8ae6-8ed4a01b7ad9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Animation3D Editor">
       <UniqueIdentifier>{ce127aed-4053-4bb3-af19-624153f70c1b}</UniqueIdentifier>
     </Filter>
@@ -204,9 +201,6 @@
     </Filter>
     <Filter Include="Animation3D Editor\Update">
       <UniqueIdentifier>{0b819a6c-bc62-490d-adc2-556478737fbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Animation3D Editor\Data">
-      <UniqueIdentifier>{baad863b-7fa3-4249-9d05-0954879e29ae}</UniqueIdentifier>
     </Filter>
     <Filter Include="Animation2D Editor\Main">
       <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
@@ -486,12 +480,6 @@
     <ClCompile Include="..\..\..\src\world_editor_reflection_update_edit.cpp">
       <Filter>World Editor\Update\Reflection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation3d.cpp">
-      <Filter>Animation3D Editor\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\animation3d_frame.cpp">
-      <Filter>Animation3D Editor\Data</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_editor_update_normal.cpp">
       <Filter>Terrain Editor\Update</Filter>
     </ClCompile>
@@ -563,9 +551,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation2d_editor_lifecycle.cpp">
       <Filter>Animation2D Editor\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\animation2d.cpp">
-      <Filter>Animation2D Editor\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation2d_editor_misc.cpp">
       <Filter>Animation2D Editor\Miscellaneous</Filter>
@@ -680,12 +665,6 @@
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
       <Filter>Animation3D Editor\Main</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\animation3d.hpp">
-      <Filter>Animation3D Editor\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\animation3d_frame.hpp">
-      <Filter>Animation3D Editor\Data</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\sound_editor.hpp">
       <Filter>Sound Editor\Main</Filter>
     </ClInclude>
@@ -712,9 +691,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation2d_editor.hpp">
       <Filter>Animation2D Editor\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\animation2d.hpp">
-      <Filter>Animation2D Editor\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad2d_editor.hpp">
       <Filter>Quad2D Editor\Main</Filter>

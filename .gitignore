@@ -1,6 +1,7 @@
 app/binaries/fe3d.pdb
 app/projects/*/
 
+dev/Systems/AnimationSystem/Temp/
 dev/Systems/AssetSystem/Temp/
 dev/Systems/ControlSystem/Temp/
 dev/Systems/CoreSystem/Temp/
@@ -15,6 +16,7 @@ dev/Systems/ScriptingSystem/Temp/
 dev/Systems/SoundSystem/Temp/
 dev/Systems/SupportSystem/Temp/
 
+dev/Systems/AnimationSystem.lib
 dev/Systems/AssetSystem.lib
 dev/Systems/ControlSystem.lib
 dev/Systems/CoreSystem.lib
@@ -28,6 +30,7 @@ dev/Systems/RenderingSystem.lib
 dev/Systems/ScriptingSystem.lib
 dev/Systems/SoundSystem.lib
 dev/Systems/SupportSystem.lib
+dev/Systems/AnimationSystem.pdb
 dev/Systems/AssetSystem.pdb
 dev/Systems/ControlSystem.pdb
 dev/Systems/CoreSystem.pdb

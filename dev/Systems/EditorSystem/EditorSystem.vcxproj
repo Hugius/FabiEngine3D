@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\animation3d.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_update_execution.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_control.cpp" />
@@ -29,7 +28,6 @@
     <ClCompile Include="..\..\..\src\animation3d_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_update_frame.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_update_misc.cpp" />
-    <ClCompile Include="..\..\..\src\animation3d_frame.cpp" />
     <ClCompile Include="..\..\..\src\base_editor.cpp" />
     <ClCompile Include="..\..\..\src\quad2d_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\quad2d_editor_loading.cpp" />
@@ -60,7 +58,6 @@
     <ClCompile Include="..\..\..\src\quad3d_editor_update_texturing.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\quad3d_editor_update_miscellaneous.cpp" />
-    <ClCompile Include="..\..\..\src\animation2d.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_control.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_lifecycle.cpp" />
@@ -163,9 +160,7 @@
     <ClCompile Include="..\..\..\src\water_editor_update_miscellaneous.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\animation3d.hpp" />
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp" />
-    <ClInclude Include="..\..\..\src\animation3d_frame.hpp" />
     <ClInclude Include="..\..\..\src\base_editor.hpp" />
     <ClInclude Include="..\..\..\src\quad2d_editor.hpp" />
     <ClInclude Include="..\..\..\src\text3d_editor.hpp" />
@@ -173,7 +168,6 @@
     <ClInclude Include="..\..\..\src\quad3d_editor.hpp" />
     <ClInclude Include="..\..\..\src\sky_editor.hpp" />
     <ClInclude Include="..\..\..\src\model_editor.hpp" />
-    <ClInclude Include="..\..\..\src\animation2d.hpp" />
     <ClInclude Include="..\..\..\src\animation2d_editor.hpp" />
     <ClInclude Include="..\..\..\src\text2d_editor.hpp" />
     <ClInclude Include="..\..\..\src\world_editor.hpp" />

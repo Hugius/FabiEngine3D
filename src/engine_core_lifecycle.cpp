@@ -28,6 +28,10 @@ EngineCore::EngineCore()
 	_pointlightEntityManager = make_shared<PointlightEntityManager>();
 	_spotlightEntityManager = make_shared<SpotlightEntityManager>();
 	_reflectionEntityManager = make_shared<ReflectionEntityManager>();
+	_animation3dManager = make_shared<Animation3dManager>();
+	_animation2dManager = make_shared<Animation2dManager>();
+	_animation3dPlayer = make_shared<Animation3dPlayer>();
+	_animation2dPlayer = make_shared<Animation2dPlayer>();
 	_renderWindow = make_shared<RenderWindow>(_libraryLoader->getWindowPointer());
 	_masterRenderer = make_shared<MasterRenderer>();
 	_vertexBufferCache = make_shared<VertexBufferCache>();
@@ -40,10 +44,10 @@ EngineCore::EngineCore()
 	_cameraCollisionDetector = make_shared<CameraCollisionDetector>();
 	_networkingServer = make_shared<NetworkingServer>();
 	_networkingClient = make_shared<NetworkingClient>();
-	_sound2dManager = make_shared<Sound2dManager>();
 	_sound3dManager = make_shared<Sound3dManager>();
-	_sound2dPlayer = make_shared<Sound2dPlayer>();
+	_sound2dManager = make_shared<Sound2dManager>();
 	_sound3dPlayer = make_shared<Sound3dPlayer>();
+	_sound2dPlayer = make_shared<Sound2dPlayer>();
 	_timer = make_shared<Timer>();
 
 	_skyEntityManager->inject(_renderStorage);
@@ -91,11 +95,11 @@ EngineCore::EngineCore()
 	_cameraCollisionResponder->inject(_aabbEntityManager);
 	_cameraCollisionResponder->inject(_camera);
 	_cameraCollisionResponder->inject(_cameraCollisionDetector);
-	_sound2dManager->inject(_audioLoader);
 	_sound3dManager->inject(_audioLoader);
-	_sound2dPlayer->inject(_sound2dManager);
+	_sound2dManager->inject(_audioLoader);
 	_sound3dPlayer->inject(_sound3dManager);
 	_sound3dPlayer->inject(_camera);
+	_sound2dPlayer->inject(_sound2dManager);
 }
 
 void EngineCore::start()
@@ -287,10 +291,10 @@ void EngineCore::update()
 	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("soundUpdate");
-	_sound2dManager->update();
 	_sound3dManager->update();
-	_sound2dPlayer->update();
+	_sound2dManager->update();
 	_sound3dPlayer->update();
+	_sound2dPlayer->update();
 	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("networkUpdate");

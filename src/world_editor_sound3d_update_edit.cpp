@@ -17,13 +17,15 @@ void WorldEditor::_updateSoundEditing()
 
 		auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
-		for(const auto& id : _fe3d->model_getIds())
+		for(const auto& modelId : _fe3d->model_getIds())
 		{
-			if(id.substr(0, string("@@speaker").size()) == "@@speaker")
+			if(modelId.substr(0, string("@@speaker").size()) == "@@speaker")
 			{
-				if(hoveredAabbId == id && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				const auto soundId = modelId.substr(string("@@speaker_").size());
+
+				if(hoveredAabbId == modelId && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					_selectSound(id.substr(string("@@speaker_").size()));
+					_selectSound(soundId);
 
 					_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
@@ -31,15 +33,15 @@ void WorldEditor::_updateSoundEditing()
 					{
 						if(_selectedSoundId != _activeSoundId)
 						{
-							_activateSound(_selectedSoundId.substr(string("@@speaker_").size()));
+							_activateSound(_selectedSoundId);
 						}
 					}
 				}
 				else
 				{
-					if((id != _selectedSoundId) && (id != _activeSoundId))
+					if((soundId != _selectedSoundId) && (soundId != _activeSoundId))
 					{
-						_deselectSound(id);
+						_deselectSound(soundId);
 					}
 				}
 			}
@@ -71,24 +73,23 @@ void WorldEditor::_updateSoundEditing()
 
 		if(!_activeSoundId.empty())
 		{
-			const string activeSoundId = _activeSoundId.substr(string("@@speaker_").size());
 			auto screen = rightWindow->getScreen("soundPropertiesMenu");
 
 			rightWindow->setActiveScreen("soundPropertiesMenu");
 
 			if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d->model_delete(_activeSoundId);
-				_fe3d->sound3d_delete(activeSoundId);
-				_loadedSoundIds.erase(activeSoundId);
+				_fe3d->model_delete("speaker_" + _activeSoundId);
+				_fe3d->sound3d_delete(_activeSoundId);
+				_loadedSoundIds.erase(_activeSoundId);
 				_activeSoundId = "";
 				rightWindow->setActiveScreen("main");
 				return;
 			}
 
-			auto position = _fe3d->sound3d_getPosition(activeSoundId);
-			auto maxDistance = _fe3d->sound3d_getMaxDistance(activeSoundId);
-			auto maxVolume = _fe3d->sound3d_getMaxVolume(activeSoundId);
+			auto position = _fe3d->sound3d_getPosition(_activeSoundId);
+			auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSoundId);
+			auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSoundId);
 
 			_handleValueChanging("soundPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / SOUND_POSITION_DIVIDER));
 			_handleValueChanging("soundPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / SOUND_POSITION_DIVIDER));
@@ -96,16 +97,16 @@ void WorldEditor::_updateSoundEditing()
 			_handleValueChanging("soundPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / SOUND_POSITION_DIVIDER));
 			_handleValueChanging("soundPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / SOUND_POSITION_DIVIDER));
 			_handleValueChanging("soundPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / SOUND_POSITION_DIVIDER));
-			_fe3d->sound3d_setPosition(activeSoundId, position);
-			_fe3d->model_setBasePosition(_activeSoundId, position);
+			_fe3d->sound3d_setPosition(_activeSoundId, position);
+			_fe3d->model_setBasePosition(("speaker_" + _activeSoundId), position);
 
 			_handleValueChanging("soundPropertiesMenu", "distancePlus", "distance", maxDistance, (_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);
 			_handleValueChanging("soundPropertiesMenu", "distanceMinus", "distance", maxDistance, -(_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);
-			_fe3d->sound3d_setMaxDistance(activeSoundId, maxDistance);
+			_fe3d->sound3d_setMaxDistance(_activeSoundId, maxDistance);
 
 			_handleValueChanging("soundPropertiesMenu", "volumePlus", "volume", maxVolume, SOUND_VOLUME_SPEED, SOUND_VOLUME_MULTIPLIER, 0.0f, 1.0f);
 			_handleValueChanging("soundPropertiesMenu", "volumeMinus", "volume", maxVolume, -SOUND_VOLUME_SPEED, SOUND_VOLUME_MULTIPLIER, 0.0f, 1.0f);
-			_fe3d->sound3d_setMaxVolume(activeSoundId, maxVolume);
+			_fe3d->sound3d_setMaxVolume(_activeSoundId, maxVolume);
 		}
 	}
 }

@@ -56,10 +56,10 @@ void WorldEditor::_activateText3d(const string& id)
 
 void WorldEditor::_activatePointlight(const string& id)
 {
-	_activePointlightId = ("@@lamp_" + id);
+	_activePointlightId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activePointlightId);
+	auto position = _fe3d->pointlight_getPosition(_activePointlightId);
 
 	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
 	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("radius")->setHoverable(true);
@@ -74,10 +74,10 @@ void WorldEditor::_activatePointlight(const string& id)
 
 void WorldEditor::_activateSpotlight(const string& id)
 {
-	_activeSpotlightId = ("@@torch_" + id);
+	_activeSpotlightId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activeSpotlightId);
+	auto position = _fe3d->spotlight_getPosition(_activeSpotlightId);
 
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("color")->setHoverable(true);
@@ -91,10 +91,10 @@ void WorldEditor::_activateSpotlight(const string& id)
 
 void WorldEditor::_activateReflection(const string& id)
 {
-	_activeReflectionId = ("@@camera_" + id);
+	_activeReflectionId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activeReflectionId);
+	auto position = _fe3d->reflection_getPosition(_activeReflectionId);
 
 	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
 	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
@@ -105,12 +105,12 @@ void WorldEditor::_activateReflection(const string& id)
 
 void WorldEditor::_activateSound(const string& id)
 {
-	_activeSoundId = ("@@speaker_" + id);
+	_activeSoundId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->sound3d_getPosition(_activeSoundId.substr(string("@@speaker_").size()));
-	auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSoundId.substr(string("@@speaker_").size()));
-	auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSoundId.substr(string("@@speaker_").size()));
+	auto position = _fe3d->sound3d_getPosition(_activeSoundId);
+	auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSoundId);
+	auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSoundId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));

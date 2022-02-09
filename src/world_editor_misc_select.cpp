@@ -29,7 +29,7 @@ void WorldEditor::_selectText3d(const string& id)
 
 void WorldEditor::_selectPointlight(const string& id)
 {
-	_selectedPointlightId = ("@@lamp_" + id);
+	_selectedPointlightId = id;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
@@ -38,7 +38,7 @@ void WorldEditor::_selectPointlight(const string& id)
 
 void WorldEditor::_selectSpotlight(const string& id)
 {
-	_selectedSpotlightId = ("@@torch_" + id);
+	_selectedSpotlightId = id;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
@@ -47,7 +47,7 @@ void WorldEditor::_selectSpotlight(const string& id)
 
 void WorldEditor::_selectReflection(const string& id)
 {
-	_selectedReflectionId = ("@@camera_" + id);
+	_selectedReflectionId = id;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
@@ -56,7 +56,7 @@ void WorldEditor::_selectReflection(const string& id)
 
 void WorldEditor::_selectSound(const string& id)
 {
-	_selectedSoundId = ("@@speaker_" + id);
+	_selectedSoundId = id;
 
 	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
@@ -83,24 +83,24 @@ void WorldEditor::_deselectText3d(const string& id)
 
 void WorldEditor::_deselectPointlight(const string& id)
 {
-	_fe3d->model_setBaseSize(id, DEFAULT_LAMP_SIZE);
-	_fe3d->aabb_setLocalSize(id, DEFAULT_LAMP_AABB_SIZE);
+	_fe3d->model_setBaseSize(("@@lamp_" + id), DEFAULT_LAMP_SIZE);
+	_fe3d->aabb_setLocalSize(("@@lamp_" + id), DEFAULT_LAMP_AABB_SIZE);
 }
 
 void WorldEditor::_deselectSpotlight(const string& id)
 {
-	_fe3d->model_setBaseSize(id, DEFAULT_TORCH_SIZE);
-	_fe3d->aabb_setLocalSize(id, DEFAULT_TORCH_AABB_SIZE);
+	_fe3d->model_setBaseSize(("@@torch_" + id), DEFAULT_TORCH_SIZE);
+	_fe3d->aabb_setLocalSize(("@@torch_" + id), DEFAULT_TORCH_AABB_SIZE);
 }
 
 void WorldEditor::_deselectReflection(const string& id)
 {
-	_fe3d->model_setBaseSize(id, DEFAULT_CAMERA_SIZE);
-	_fe3d->aabb_setLocalSize(id, DEFAULT_CAMERA_AABB_SIZE);
+	_fe3d->model_setBaseSize(("@@camera_" + id), DEFAULT_CAMERA_SIZE);
+	_fe3d->aabb_setLocalSize(("@@camera_" + id), DEFAULT_CAMERA_AABB_SIZE);
 }
 
 void WorldEditor::_deselectSound(const string& id)
 {
-	_fe3d->model_setBaseSize(id, DEFAULT_SPEAKER_SIZE);
-	_fe3d->aabb_setLocalSize(id, DEFAULT_SPEAKER_AABB_SIZE);
+	_fe3d->model_setBaseSize(("@@speaker_" + id), DEFAULT_SPEAKER_SIZE);
+	_fe3d->aabb_setLocalSize(("@@speaker_" + id), DEFAULT_SPEAKER_AABB_SIZE);
 }

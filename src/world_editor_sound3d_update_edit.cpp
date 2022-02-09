@@ -107,10 +107,5 @@ void WorldEditor::_updateSoundEditing()
 			_handleValueChanging("soundPropertiesMenu", "volumeMinus", "volume", maxVolume, -SOUND_VOLUME_SPEED, SOUND_VOLUME_MULTIPLIER, 0.0f, 1.0f);
 			_fe3d->sound3d_setMaxVolume(activeSoundId, maxVolume);
 		}
-
-		if(_selectedSoundId.empty() && _activeSoundId.empty())
-		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
-		}
 	}
 }

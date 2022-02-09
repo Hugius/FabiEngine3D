@@ -145,6 +145,13 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->raycast_setTerrainIntersectionDistance(Math::calculateDistance(fvec3(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId())), fvec3(0.0f)));
 		_fe3d->raycast_setTerrainIntersectionPrecision(0.1f);
 	}
+
+	const auto isSelected = (!_selectedModelId.empty() || !_selectedQuadId.empty() || !_selectedTextId.empty() || !_selectedPointlightId.empty() || !_selectedSpotlightId.empty() || !_selectedReflectionId.empty());
+	const auto isActive = (!_activeModelId.empty() || !_activeQuadId.empty() || !_activeTextId.empty() || !_activePointlightId.empty() || !_activeSpotlightId.empty() || !_activeReflectionId.empty());
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("selectedId")->getEntityId(), isSelected);
+	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("activeId")->getEntityId(), isActive);
+	_fe3d->text2d_setPosition(_gui->getOverlay()->getTextField("selectedId")->getEntityId(), fvec2(0.0f, (isActive ? 0.75f : 0.85f)));
+	_fe3d->text2d_setPosition(_gui->getOverlay()->getTextField("activeId")->getEntityId(), fvec2(0.0f, 0.85f));
 }
 
 void WorldEditor::_updateWorldCreating()

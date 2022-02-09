@@ -12,7 +12,6 @@ void WorldEditor::_updateModelMenu()
 		{
 			if(!_currentTemplateModelId.empty())
 			{
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), false);
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
 				_currentTemplateModelId = "";
 			}
@@ -70,7 +69,6 @@ void WorldEditor::_updateModelPlacingMenu()
 
 						_currentTemplateModelId = modelId;
 						_fe3d->model_setVisible(_currentTemplateModelId, true);
-						_gui->getOverlay()->getTextField("modelId")->changeTextContent("Model: " + _currentTemplateModelId.substr(1));
 						_fe3d->misc_centerCursor();
 
 						if(_fe3d->terrain_getSelectedId().empty())

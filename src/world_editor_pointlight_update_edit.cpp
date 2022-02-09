@@ -181,10 +181,5 @@ void WorldEditor::_updatePointlightEditing()
 				_fe3d->quad2d_setDiffuseMap(quad2dEntityId, "engine\\assets\\image\\diffuse_map\\shape_square.tga");
 			}
 		}
-
-		if(_selectedPointlightId.empty() && _activePointlightId.empty())
-		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("pointlightId")->getEntityId(), false);
-		}
 	}
 }

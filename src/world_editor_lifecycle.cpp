@@ -86,13 +86,8 @@ void WorldEditor::_load()
 		screen->getScrollingList("soundList")->createButton(id, id.substr(1));
 	}
 
-	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("quadId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("textId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("pointlightId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("spotlightId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("reflectionId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("soundId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("selectedId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("activeId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 
 	_fe3d->collision_setCameraAabbResponseEnabled(true, true, true);
 
@@ -152,13 +147,8 @@ void WorldEditor::_unload()
 		_fe3d->sound3d_delete(id);
 	}
 
-	_gui->getOverlay()->deleteTextField("modelId");
-	_gui->getOverlay()->deleteTextField("quadId");
-	_gui->getOverlay()->deleteTextField("textId");
-	_gui->getOverlay()->deleteTextField("pointlightId");
-	_gui->getOverlay()->deleteTextField("spotlightId");
-	_gui->getOverlay()->deleteTextField("reflectionId");
-	_gui->getOverlay()->deleteTextField("soundId");
+	_gui->getOverlay()->deleteTextField("selectedId");
+	_gui->getOverlay()->deleteTextField("activeId");
 
 	_fe3d->collision_setCameraAabbResponseEnabled(false, false, false);
 

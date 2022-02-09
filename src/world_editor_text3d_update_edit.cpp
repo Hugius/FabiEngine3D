@@ -157,10 +157,5 @@ void WorldEditor::_updateText3dEditing()
 
 			screen->getButton("freeze")->changeTextContent(_fe3d->text3d_isFrozen(_activeTextId) ? "Unfreeze" : "Freeze");
 		}
-
-		if(_selectedTextId.empty() && _activeTextId.empty())
-		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
-		}
 	}
 }

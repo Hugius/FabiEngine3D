@@ -187,10 +187,5 @@ void WorldEditor::_updateQuad3dEditing()
 
 			screen->getButton("freeze")->changeTextContent(_fe3d->quad3d_isFrozen(_activeQuadId) ? "Unfreeze" : "Freeze");
 		}
-
-		if(_selectedQuadId.empty() && _activeQuadId.empty())
-		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), false);
-		}
 	}
 }

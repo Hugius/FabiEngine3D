@@ -158,10 +158,5 @@ void WorldEditor::_updateSpotlightEditing()
 			_handleValueChanging("spotlightPropertiesMenu", "distanceMinus", "distance", distance, -(_editorSpeed / SPOTLIGHT_DISTANCE_DIVIDER), 1.0f, 0.0f);
 			_fe3d->spotlight_setDistance(activeSpotlightId, distance);
 		}
-
-		if(_selectedSpotlightId.empty() && _activeSpotlightId.empty())
-		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("spotlightId")->getEntityId(), false);
-		}
 	}
 }

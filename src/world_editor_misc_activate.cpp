@@ -15,8 +15,7 @@ void WorldEditor::_activateModel(const string& id)
 	rightWindow->getScreen("modelPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	rightWindow->getScreen("modelPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("modelId")->changeTextContent("Model: " + _activeModelId);
+	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Model: " + _activeModelId);
 }
 
 void WorldEditor::_activateQuad3d(const string& id)
@@ -34,8 +33,7 @@ void WorldEditor::_activateQuad3d(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad3D: " + _activeQuadId);
+	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Quad3D: " + _activeQuadId);
 }
 
 void WorldEditor::_activateText3d(const string& id)
@@ -53,8 +51,7 @@ void WorldEditor::_activateText3d(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3D: " + _activeTextId);
+	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Text3D: " + _activeTextId);
 }
 
 void WorldEditor::_activatePointlight(const string& id)
@@ -72,8 +69,7 @@ void WorldEditor::_activatePointlight(const string& id)
 	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("pointlightId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("pointlightId")->changeTextContent("Pointlight: " + _activePointlightId);
+	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Pointlight: " + _activePointlightId);
 }
 
 void WorldEditor::_activateSpotlight(const string& id)
@@ -90,8 +86,7 @@ void WorldEditor::_activateSpotlight(const string& id)
 	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("spotlightId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("spotlightId")->changeTextContent("Spotlight: " + _activeSpotlightId);
+	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Spotlight: " + _activeSpotlightId);
 }
 
 void WorldEditor::_activateReflection(const string& id)
@@ -105,8 +100,7 @@ void WorldEditor::_activateReflection(const string& id)
 	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("reflectionId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("reflectionId")->changeTextContent("Reflection: " + _activeReflectionId);
+	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Reflection: " + _activeReflectionId);
 }
 
 void WorldEditor::_activateSound(const string& id)
@@ -124,8 +118,7 @@ void WorldEditor::_activateSound(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("volume")->changeTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
 
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
-	_gui->getOverlay()->getTextField("soundId")->changeTextContent("Sound: " + _activeSoundId);
+	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Sound: " + _activeSoundId);
 }
 
 void WorldEditor::_deactivateModel()
@@ -136,7 +129,6 @@ void WorldEditor::_deactivateModel()
 	}
 
 	_activeModelId = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateQuad3d()
@@ -147,7 +139,6 @@ void WorldEditor::_deactivateQuad3d()
 	}
 
 	_activeQuadId = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateText3d()
@@ -158,7 +149,6 @@ void WorldEditor::_deactivateText3d()
 	}
 
 	_activeTextId = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivatePointlight()
@@ -169,7 +159,6 @@ void WorldEditor::_deactivatePointlight()
 	}
 
 	_activePointlightId = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("pointlightId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateSpotlight()
@@ -180,7 +169,6 @@ void WorldEditor::_deactivateSpotlight()
 	}
 
 	_activeSpotlightId = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("spotlightId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateReflection()
@@ -191,7 +179,6 @@ void WorldEditor::_deactivateReflection()
 	}
 
 	_activeReflectionId = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("reflectionId")->getEntityId(), false);
 }
 
 void WorldEditor::_deactivateSound()
@@ -202,5 +189,4 @@ void WorldEditor::_deactivateSound()
 	}
 
 	_activeSoundId = "";
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
 }

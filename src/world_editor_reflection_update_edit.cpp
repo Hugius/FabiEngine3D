@@ -123,10 +123,5 @@ void WorldEditor::_updateReflectionEditing()
 			_fe3d->reflection_setPosition(activeReflectionId, position);
 			_fe3d->model_setBasePosition(_activeReflectionId, position);
 		}
-
-		if(_selectedReflectionId.empty() && _activeReflectionId.empty())
-		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("reflectionId")->getEntityId(), false);
-		}
 	}
 }

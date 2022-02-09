@@ -242,10 +242,5 @@ void WorldEditor::_updateModelEditing()
 
 			screen->getButton("freeze")->changeTextContent(_fe3d->model_isFrozen(_activeModelId) ? "Unfreeze" : "Freeze");
 		}
-
-		if(_selectedModelId.empty() && _activeModelId.empty())
-		{
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), false);
-		}
 	}
 }

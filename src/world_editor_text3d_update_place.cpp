@@ -27,7 +27,6 @@ void WorldEditor::_updateText3dPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
 				_currentTemplateTextId = "";
 			}
 		}
@@ -36,34 +35,29 @@ void WorldEditor::_updateText3dPlacing()
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
 				return;
 			}
 
 			if(!_fe3d->misc_isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
 				return;
 			}
 
 			if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
 				return;
 			}
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), false);
 				_currentTemplateTextId = "";
 				return;
 			}
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + TEXT3D_TERRAIN_OFFSET);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
 			_fe3d->text3d_setVisible(_currentTemplateTextId, true);
 			_fe3d->text3d_setPosition(_currentTemplateTextId, newPosition);
 

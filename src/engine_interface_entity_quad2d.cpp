@@ -134,6 +134,31 @@ void EngineInterface::quad2d_setUvOffset(const string& id, const fvec2& value)
 	_core->getQuad2dEntityManager()->getEntity(id)->setUvOffset(value);
 }
 
+void EngineInterface::quad2d_startAnimation(const string& quadId, const string& animationId, int playCount)
+{
+	_core->getAnimation2dPlayer()->startQuad2dAnimation(animationId, quadId, playCount);
+}
+
+void EngineInterface::quad2d_pauseAnimation(const string& quadId, const string& animationId)
+{
+	_core->getAnimation2dPlayer()->pauseQuad2dAnimation(animationId, quadId);
+}
+
+void EngineInterface::quad2d_autopauseAnimation(const string& quadId, const string& animationId)
+{
+	_core->getAnimation2dPlayer()->autopauseQuad2dAnimation(animationId, quadId);
+}
+
+void EngineInterface::quad2d_resumeAnimation(const string& quadId, const string& animationId)
+{
+	_core->getAnimation2dPlayer()->resumeQuad2dAnimation(animationId, quadId);
+}
+
+void EngineInterface::quad2d_stopAnimation(const string& quadId, const string& animationId)
+{
+	_core->getAnimation2dPlayer()->stopQuad2dAnimation(animationId, quadId);
+}
+
 void EngineInterface::quad2d_setHorizontallyFlipped(const string& id, bool value)
 {
 	_core->getQuad2dEntityManager()->getEntity(id)->setHorizontallyFlipped(value);
@@ -174,6 +199,11 @@ const vector<string> EngineInterface::quad2d_getIds() const
 	}
 
 	return result;
+}
+
+const vector<string> EngineInterface::quad2d_getAnimationIds(const string& id) const
+{
+	return _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds(id);
 }
 
 const string& EngineInterface::quad2d_getDiffuseMapPath(const string& id) const
@@ -234,6 +264,26 @@ const bool EngineInterface::quad2d_hasDiffuseMap(const string& id) const
 const bool EngineInterface::quad2d_isWireframed(const string& id) const
 {
 	return _core->getQuad2dEntityManager()->getEntity(id)->isWireframed();
+}
+
+const bool EngineInterface::quad2d_isAnimationStarted(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->isQuad2dAnimationStarted(animationId, quadId);
+}
+
+const bool EngineInterface::quad2d_isAnimationPlaying(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->isQuad2dAnimationPlaying(animationId, quadId);
+}
+
+const bool EngineInterface::quad2d_isAnimationPaused(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->isQuad2dAnimationPaused(animationId, quadId);
+}
+
+const bool EngineInterface::quad2d_isAnimationAutopaused(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->isQuad2dAnimationAutopaused(animationId, quadId);
 }
 
 const bool EngineInterface::quad2d_isHorizontallyFlipped(const string& id) const

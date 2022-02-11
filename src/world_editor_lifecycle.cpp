@@ -36,7 +36,7 @@ void WorldEditor::_load()
 		screen->getScrollingList("text3dList")->createButton(id, id.substr(1));
 	}
 
-	_animation2dEditor->loadFromFile(false);
+	_animation2dEditor->loadFromFile();
 	_animation3dEditor->loadFromFile(false);
 
 	_fe3d->model_create(TEMPLATE_LAMP_ID, LAMP_MODEL_PATH);

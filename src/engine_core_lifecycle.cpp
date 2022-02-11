@@ -30,8 +30,8 @@ EngineCore::EngineCore()
 	_reflectionEntityManager = make_shared<ReflectionEntityManager>();
 	_animation3dManager = make_shared<Animation3dManager>();
 	_animation2dManager = make_shared<Animation2dManager>();
-	_animation3dPlayer = make_shared<Animation3dPlayer>();
-	_animation2dPlayer = make_shared<Animation2dPlayer>();
+	_sound3dManager = make_shared<Sound3dManager>();
+	_sound2dManager = make_shared<Sound2dManager>();
 	_renderWindow = make_shared<RenderWindow>(_libraryLoader->getWindowPointer());
 	_masterRenderer = make_shared<MasterRenderer>();
 	_vertexBufferCache = make_shared<VertexBufferCache>();
@@ -44,8 +44,8 @@ EngineCore::EngineCore()
 	_cameraCollisionDetector = make_shared<CameraCollisionDetector>();
 	_networkingServer = make_shared<NetworkingServer>();
 	_networkingClient = make_shared<NetworkingClient>();
-	_sound3dManager = make_shared<Sound3dManager>();
-	_sound2dManager = make_shared<Sound2dManager>();
+	_animation3dPlayer = make_shared<Animation3dPlayer>();
+	_animation2dPlayer = make_shared<Animation2dPlayer>();
 	_sound3dPlayer = make_shared<Sound3dPlayer>();
 	_sound2dPlayer = make_shared<Sound2dPlayer>();
 	_timer = make_shared<Timer>();
@@ -71,6 +71,8 @@ EngineCore::EngineCore()
 	_aabbEntityManager->inject(_modelEntityManager);
 	_aabbEntityManager->inject(_quad3dEntityManager);
 	_aabbEntityManager->inject(_text3dEntityManager);
+	_sound3dManager->inject(_audioLoader);
+	_sound2dManager->inject(_audioLoader);
 	_masterRenderer->inject(_renderStorage);
 	_masterRenderer->inject(_camera);
 	_masterRenderer->inject(_timer);
@@ -95,8 +97,9 @@ EngineCore::EngineCore()
 	_cameraCollisionResponder->inject(_aabbEntityManager);
 	_cameraCollisionResponder->inject(_camera);
 	_cameraCollisionResponder->inject(_cameraCollisionDetector);
-	_sound3dManager->inject(_audioLoader);
-	_sound2dManager->inject(_audioLoader);
+	_animation2dPlayer->inject(_animation2dManager);
+	_animation2dPlayer->inject(_quad3dEntityManager);
+	_animation2dPlayer->inject(_quad2dEntityManager);
 	_sound3dPlayer->inject(_sound3dManager);
 	_sound3dPlayer->inject(_camera);
 	_sound2dPlayer->inject(_sound2dManager);
@@ -288,6 +291,11 @@ void EngineCore::update()
 
 	_timer->startDeltaPart("renderUpdate");
 	_masterRenderer->update();
+	_timer->stopDeltaPart();
+
+	_timer->startDeltaPart("animationUpdate");
+	//_animation3dPlayer->update();
+	_animation2dPlayer->update();
 	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("soundUpdate");

@@ -90,6 +90,16 @@ const shared_ptr<ReflectionEntityManager> EngineCore::getReflectionEntityManager
 	return _reflectionEntityManager;
 }
 
+const shared_ptr<Animation3dManager> EngineCore::getAnimation3dManager() const
+{
+	return _animation3dManager;
+}
+
+const shared_ptr<Animation2dManager> EngineCore::getAnimation2dManager() const
+{
+	return _animation2dManager;
+}
+
 const shared_ptr<RenderWindow> EngineCore::getRenderWindow() const
 {
 	return _renderWindow;
@@ -138,6 +148,16 @@ const shared_ptr<CameraCollisionDetector> EngineCore::getCameraCollisionDetector
 const shared_ptr<CameraCollisionResponder> EngineCore::getCameraCollisionResponder() const
 {
 	return _cameraCollisionResponder;
+}
+
+const shared_ptr<Animation3dPlayer> EngineCore::getAnimation3dPlayer() const
+{
+	return _animation3dPlayer;
+}
+
+const shared_ptr<Animation2dPlayer> EngineCore::getAnimation2dPlayer() const
+{
+	return _animation2dPlayer;
 }
 
 const shared_ptr<Sound2dManager> EngineCore::getSound2dManager() const

@@ -344,8 +344,14 @@ public:
 	void quad3d_setBright(const string& id, bool value);
 	void quad3d_setWireframed(const string& id, bool value);
 	void quad3d_setFrozen(const string& id, bool value);
+	void quad3d_startAnimation(const string& quadId, const string& animationId, int playCount);
+	void quad3d_pauseAnimation(const string& quadId, const string& animationId);
+	void quad3d_autopauseAnimation(const string& quadId, const string& animationId);
+	void quad3d_resumeAnimation(const string& quadId, const string& animationId);
+	void quad3d_stopAnimation(const string& quadId, const string& animationId);
 
 	const vector<string> quad3d_getIds() const;
+	const vector<string> quad3d_getAnimationIds(const string& id) const;
 	const string& quad3d_getDiffuseMapPath(const string& id) const;
 	const string& quad3d_getEmissionMapPath(const string& id) const;
 	const fvec3& quad3d_getPosition(const string& id) const;
@@ -374,6 +380,10 @@ public:
 	const bool quad3d_hasDiffuseMap(const string& id) const;
 	const bool quad3d_hasEmissionMap(const string& id) const;
 	const bool quad3d_isFrozen(const string& id) const;
+	const bool quad3d_isAnimationStarted(const string& quadId, const string& animationId) const;
+	const bool quad3d_isAnimationPlaying(const string& quadId, const string& animationId) const;
+	const bool quad3d_isAnimationPaused(const string& quadId, const string& animationId) const;
+	const bool quad3d_isAnimationAutopaused(const string& quadId, const string& animationId) const;
 
 	void text3d_create(const string& id, const string& fontMapPath, bool isCentered);
 	void text3d_delete(const string& id);
@@ -456,8 +466,14 @@ public:
 	void quad2d_setWireframeColor(const string& id, const fvec3& value);
 	void quad2d_setUvMultiplier(const string& id, const fvec2& value);
 	void quad2d_setUvOffset(const string& id, const fvec2& value);
+	void quad2d_startAnimation(const string& quadId, const string& animationId, int playCount);
+	void quad2d_pauseAnimation(const string& quadId, const string& animationId);
+	void quad2d_autopauseAnimation(const string& quadId, const string& animationId);
+	void quad2d_resumeAnimation(const string& quadId, const string& animationId);
+	void quad2d_stopAnimation(const string& quadId, const string& animationId);
 
 	const vector<string> quad2d_getIds() const;
+	const vector<string> quad2d_getAnimationIds(const string& id) const;
 	const string& quad2d_getDiffuseMapPath(const string& id) const;
 	const fvec3& quad2d_getWireframeColor(const string& id) const;
 	const fvec3& quad2d_getColor(const string& id) const;
@@ -476,6 +492,10 @@ public:
 	const bool quad2d_isVerticallyFlipped(const string& id) const;
 	const bool quad2d_hasDiffuseMap(const string& id) const;
 	const bool quad2d_isWireframed(const string& id) const;
+	const bool quad2d_isAnimationStarted(const string& quadId, const string& animationId) const;
+	const bool quad2d_isAnimationPlaying(const string& quadId, const string& animationId) const;
+	const bool quad2d_isAnimationPaused(const string& quadId, const string& animationId) const;
+	const bool quad2d_isAnimationAutopaused(const string& quadId, const string& animationId) const;
 
 	void text2d_create(const string& id, const string& fontMapPath, bool isCentered);
 	void text2d_delete(const string& id);
@@ -614,6 +634,19 @@ public:
 	const fvec3& reflection_getPosition(const string& id) const;
 	const bool reflection_isExisting(const string& id) const;
 	const bool reflection_isVisible(const string& id) const;
+
+	void animation2d_create(const string& id);
+	void animation2d_delete(const string& id);
+	void animation2d_deleteAll();
+	void animation2d_setRowCount(const string& id, unsigned int value);
+	void animation2d_setColumnCount(const string& id, unsigned int value);
+	void animation2d_setInterval(const string& id, unsigned int value);
+
+	const vector<string> animation2d_getIds() const;
+	const unsigned int animation2d_getRowCount(const string& id) const;
+	const unsigned int animation2d_getColumnCount(const string& id) const;
+	const unsigned int animation2d_getInterval(const string& id) const;
+	const bool animation2d_isExisting(const string& id) const;
 
 	void sound2d_create(const string& id, const string& audioPath);
 	void sound2d_delete(const string& id);

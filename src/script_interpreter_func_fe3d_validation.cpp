@@ -240,7 +240,7 @@ const bool ScriptInterpreter::_validateFe3dAnimation2d(const string& id)
 		return false;
 	}
 
-	if(!_animation2dEditor->isAnimationExisting(id))
+	if(!_fe3d->animation2d_isExisting(id))
 	{
 		_throwRuntimeError("animation2D does not exist");
 		return false;

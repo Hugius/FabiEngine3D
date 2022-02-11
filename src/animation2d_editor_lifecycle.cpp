@@ -25,15 +25,14 @@ void Animation2dEditor::_unload()
 
 	_fe3d->quad3d_delete(PREVIEW_QUAD_ID);
 
+	for(const auto& id : _loadedAnimationIds)
+	{
+		_fe3d->animation2d_delete(id);
+	}
+
 	_gui->getOverlay()->deleteTextField("animationId");
 
-	_startedQuad3dAnimations.clear();
-	_startedQuad2dAnimations.clear();
-	_animations.clear();
-	_quad3dAnimationsToStop.clear();
-	_quad3dAnimationsToStart.clear();
-	_quad2dAnimationsToStop.clear();
-	_quad2dAnimationsToStart.clear();
+	_loadedAnimationIds.clear();
 	_hoveredAnimationId = "";
 	_currentAnimationId = "";
 	_isCreatingAnimation = false;
@@ -71,9 +70,6 @@ void Animation2dEditor::_unloadGUI()
 
 void Animation2dEditor::update()
 {
-	_updateQuad3dAnimationExecution();
-	_updateQuad2dAnimationExecution();
-
 	if(isLoaded())
 	{
 		_updateMainMenu();

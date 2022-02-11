@@ -237,7 +237,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 				if(!animationId.empty())
 				{
-					_animation2dEditor->startQuad3dAnimation(animationId, quadId, -1);
+					_fe3d->quad3d_startAnimation(quadId, animationId, -1);
 				}
 			}
 		}

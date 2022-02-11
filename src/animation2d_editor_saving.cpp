@@ -21,29 +21,17 @@ const bool Animation2dEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation2d.fe3d");
 
-	for(const auto& animation : _animations)
+	for(const auto& animationId : _loadedAnimationIds)
 	{
-		auto animationId = animation->getId();
-		auto previewTexturePath = animation->getPreviewTexturePath();
-		auto rowCount = animation->getRowCount();
-		auto columnCount = animation->getColumnCount();
-		auto interval = animation->getInterval();
+		auto rowCount = _fe3d->animation2d_getRowCount(animationId);
+		auto columnCount = _fe3d->animation2d_getColumnCount(animationId);
+		auto interval = _fe3d->animation2d_getInterval(animationId);
 
-		if(!previewTexturePath.empty())
-		{
-			previewTexturePath = (previewTexturePath.empty() ? "" : previewTexturePath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
-
-			previewTexturePath = (previewTexturePath.empty()) ? "?" : previewTexturePath;
-
-			replace(previewTexturePath.begin(), previewTexturePath.end(), ' ', '?');
-
-			file
-				<< animationId << " "
-				<< previewTexturePath << " "
-				<< rowCount << " "
-				<< columnCount << " "
-				<< interval << endl;
-		}
+		file
+			<< animationId << " "
+			<< rowCount << " "
+			<< columnCount << " "
+			<< interval << endl;
 	}
 
 	file.close();

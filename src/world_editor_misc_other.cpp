@@ -81,13 +81,6 @@ void WorldEditor::unloadEditorWorld()
 
 	for(const auto& [key, templateId] : _loadedQuadIds)
 	{
-		auto animationIds = _animation2dEditor->getStartedQuad3dAnimationIds(key);
-
-		if(!animationIds.empty())
-		{
-			_animation2dEditor->stopQuad3dAnimation(animationIds[0], key);
-		}
-
 		_fe3d->quad3d_delete(key);
 	}
 

@@ -7,14 +7,12 @@
 
 using std::istringstream;
 
-const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
+const bool Animation2dEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
-
-	_animations.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -31,7 +29,6 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 	while(getline(file, line))
 	{
 		string animationId;
-		string previewTexturePath;
 		unsigned int rowCount;
 		unsigned int columnCount;
 		unsigned int interval;
@@ -40,41 +37,16 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 
 		iss >>
 			animationId >>
-			previewTexturePath >>
 			rowCount >>
 			columnCount >>
 			interval;
 
-		previewTexturePath = (previewTexturePath == "?") ? "" : previewTexturePath;
+		_loadedAnimationIds.push_back(animationId);
 
-		replace(previewTexturePath.begin(), previewTexturePath.end(), '?', ' ');
-
-		if(!Config::getInst().isApplicationExported())
-		{
-			previewTexturePath = ("projects\\" + getCurrentProjectId() + "\\" + previewTexturePath);
-		}
-
-		if(mustCheckPreviewTexture)
-		{
-			if(Tools::isFileExisting(rootPath + previewTexturePath))
-			{
-				_fe3d->misc_cacheImage(previewTexturePath, false);
-			}
-			else
-			{
-				Logger::throwWarning("Preview texture of animation with ID \"" + animationId + "\" does not exist");
-				continue;
-			}
-		}
-
-		auto newAnimation = make_shared<Animation2d>(animationId);
-
-		newAnimation->setPreviewTexturePath(previewTexturePath);
-		newAnimation->setRowCount(rowCount);
-		newAnimation->setColumnCount(columnCount);
-		newAnimation->setInterval(interval);
-
-		_animations.push_back(newAnimation);
+		_fe3d->animation2d_create(animationId);
+		_fe3d->animation2d_setRowCount(animationId, rowCount);
+		_fe3d->animation2d_setColumnCount(animationId, columnCount);
+		_fe3d->animation2d_setInterval(animationId, interval);
 	}
 
 	file.close();

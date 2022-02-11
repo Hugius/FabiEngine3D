@@ -236,6 +236,7 @@ const vector<pair<string, int>> EngineInterface::misc_getUpdateProfilingStatisti
 		pair<string, int>("3dEntityUpdate", 0),
 		pair<string, int>("2dEntityUpdate", 0),
 		pair<string, int>("renderUpdate", 0),
+		pair<string, int>("animationUpdate", 0),
 		pair<string, int>("soundUpdate", 0),
 		pair<string, int>("networkUpdate", 0),
 		pair<string, int>("miscUpdate", 0)

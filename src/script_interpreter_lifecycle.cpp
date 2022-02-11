@@ -195,7 +195,7 @@ void ScriptInterpreter::load()
 	_quad3dEditor->loadFromFile();
 	_quad2dEditor->loadFromFile();
 	_text2dEditor->loadFromFile();
-	_animation2dEditor->loadFromFile(false);
+	_animation2dEditor->loadFromFile();
 	_animation3dEditor->loadFromFile(false);
 	_soundEditor->loadFromFile();
 
@@ -212,8 +212,6 @@ void ScriptInterpreter::load()
 
 void ScriptInterpreter::unload()
 {
-	_animation2dEditor->stopQuad3dAnimations();
-	_animation2dEditor->stopQuad2dAnimations();
 	_animation3dEditor->stopModelAnimations();
 
 	_worldEditor->unloadEditorWorld();

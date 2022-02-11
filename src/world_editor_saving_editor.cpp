@@ -159,8 +159,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	{
 		if(quadId[0] != '@')
 		{
-			auto startedAnimations = _animation2dEditor->getStartedQuad3dAnimationIds(quadId);
-
+			auto startedAnimations = _fe3d->quad3d_getAnimationIds(quadId);
 			auto position = _fe3d->quad3d_getPosition(quadId);
 			auto rotation = _fe3d->quad3d_getRotation(quadId);
 			auto size = _fe3d->quad3d_getSize(quadId);

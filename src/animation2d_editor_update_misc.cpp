@@ -5,13 +5,10 @@ void Animation2dEditor::_updateMiscellaneous()
 {
 	if(!_currentAnimationId.empty())
 	{
-		if(!isQuad3dAnimationStarted(_currentAnimationId, PREVIEW_QUAD_ID))
+		if(!_fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD_ID, _currentAnimationId))
 		{
-			if(isLoaded())
-			{
-				_fe3d->quad3d_setUvMultiplier(PREVIEW_QUAD_ID, fvec2(1.0f));
-				_fe3d->quad3d_setUvOffset(PREVIEW_QUAD_ID, fvec2(0.0f));
-			}
+			_fe3d->quad3d_setUvMultiplier(PREVIEW_QUAD_ID, fvec2(1.0f));
+			_fe3d->quad3d_setUvOffset(PREVIEW_QUAD_ID, fvec2(0.0f));
 		}
 	}
 }
@@ -42,16 +39,17 @@ void Animation2dEditor::_updateAnimationCreating()
 				return;
 			}
 
-			auto animationIds = getAnimationIds();
+			auto animationIds = getLoadedIds();
 			if(find(animationIds.begin(), animationIds.end(), newAnimationId) != animationIds.end())
 			{
 				Logger::throwWarning("Animation already exists");
 				return;
 			}
 
-			_animations.push_back(make_shared<Animation2d>(newAnimationId));
-
+			_loadedAnimationIds.push_back(newAnimationId);
 			_currentAnimationId = newAnimationId;
+
+			_fe3d->animation2d_create(newAnimationId);
 
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, true);
 
@@ -79,7 +77,6 @@ void Animation2dEditor::_updateAnimationChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 
-					_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, _getAnimation(_currentAnimationId)->getPreviewTexturePath());
 					_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, true);
 
 					_gui->getOverlay()->getTextField("animationId")->changeTextContent("Animation: " + selectedButtonId);
@@ -113,7 +110,7 @@ void Animation2dEditor::_updateAnimationDeleting()
 			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, "");
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
 
-			_deleteAnimation(_currentAnimationId);
+			_fe3d->animation2d_delete(_currentAnimationId);
 
 			_currentAnimationId = "";
 			_isDeletingAnimation = false;

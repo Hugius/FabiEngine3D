@@ -1,20 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Data">
-      <UniqueIdentifier>{bc255949-f297-48cd-8369-c8bf21dbea9b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{80f1eb86-5b68-41e5-8339-a9b3e2cc5dc8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Player">
       <UniqueIdentifier>{d3e5d200-f865-43e2-b599-49bd11757a91}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\2D">
-      <UniqueIdentifier>{7526b00a-b42d-4d45-864b-198723a1d1f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\3D">
-      <UniqueIdentifier>{1b5d895e-e6ee-4daf-be3b-8938f16e6f53}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager\2D">
       <UniqueIdentifier>{f540c7f6-5e60-4673-a060-f1d7854f8cb5}</UniqueIdentifier>
@@ -28,51 +19,87 @@
     <Filter Include="Player\3D">
       <UniqueIdentifier>{a12ee432-4a42-4698-bda7-397e17a93081}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\2D\Data">
+      <UniqueIdentifier>{008e2b3a-67ed-473d-9397-5fa2c1234a73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\2D\Main">
+      <UniqueIdentifier>{3e8d58c6-2a64-454a-be3f-58f91d0492b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\3D\Data">
+      <UniqueIdentifier>{243f51fb-f29a-4787-9e4d-f72320b42242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\3D\Main">
+      <UniqueIdentifier>{40fd2d3b-d069-428b-9fbf-92b0c0826323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\2D\Data">
+      <UniqueIdentifier>{97289457-4438-4566-acfb-fa26e3a1f574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\2D\Main">
+      <UniqueIdentifier>{971a5e78-1614-483b-8047-3a5b3076e2fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\3D\Main">
+      <UniqueIdentifier>{6a51b428-152d-418d-8ee8-c6a4fed3005d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\3D\Data">
+      <UniqueIdentifier>{6f0e1b53-c681-4659-8e99-e34cb56f264f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\animation2d_player.cpp">
-      <Filter>Player\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\animation3d_player.cpp">
-      <Filter>Player\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\animation3d_manager.cpp">
-      <Filter>Manager\3D</Filter>
+    <ClCompile Include="..\..\..\src\animation2d.cpp">
+      <Filter>Manager\2D\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation2d_manager.cpp">
-      <Filter>Manager\2D</Filter>
+      <Filter>Manager\2D\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d.cpp">
-      <Filter>Data\3D</Filter>
+      <Filter>Manager\3D\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_frame.cpp">
-      <Filter>Data\3D</Filter>
+      <Filter>Manager\3D\Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation2d.cpp">
-      <Filter>Data\2D</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_manager.cpp">
+      <Filter>Manager\3D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\started_animation2d.cpp">
+      <Filter>Player\2D\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation2d_player_misc.cpp">
+      <Filter>Player\2D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation2d_player_update.cpp">
+      <Filter>Player\2D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation2d_player_control.cpp">
+      <Filter>Player\2D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation3d_player.cpp">
+      <Filter>Player\3D\Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\animation2d_player.hpp">
-      <Filter>Player\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\animation3d_player.hpp">
-      <Filter>Player\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\animation3d_manager.hpp">
-      <Filter>Manager\3D</Filter>
+    <ClInclude Include="..\..\..\src\animation2d.hpp">
+      <Filter>Manager\2D\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation2d_manager.hpp">
-      <Filter>Manager\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\animation3d_frame.hpp">
-      <Filter>Data\3D</Filter>
+      <Filter>Manager\2D\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation3d.hpp">
-      <Filter>Data\3D</Filter>
+      <Filter>Manager\3D\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\animation2d.hpp">
-      <Filter>Data\2D</Filter>
+    <ClInclude Include="..\..\..\src\animation3d_frame.hpp">
+      <Filter>Manager\3D\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\animation3d_manager.hpp">
+      <Filter>Manager\3D\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\started_animation2d.hpp">
+      <Filter>Player\2D\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\animation2d_player.hpp">
+      <Filter>Player\2D\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\animation3d_player.hpp">
+      <Filter>Player\3D\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

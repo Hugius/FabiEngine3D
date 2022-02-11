@@ -70,6 +70,10 @@ public:
 	const shared_ptr<PointlightEntityManager> getPointlightEntityManager() const;
 	const shared_ptr<SpotlightEntityManager> getSpotlightEntityManager() const;
 	const shared_ptr<ReflectionEntityManager> getReflectionEntityManager() const;
+	const shared_ptr<Animation3dManager> getAnimation3dManager() const;
+	const shared_ptr<Animation2dManager> getAnimation2dManager() const;
+	const shared_ptr<Sound3dManager> getSound3dManager() const;
+	const shared_ptr<Sound2dManager> getSound2dManager() const;
 	const shared_ptr<RenderWindow> getRenderWindow() const;
 	const shared_ptr<MasterRenderer> getMasterRenderer() const;
 	const shared_ptr<VertexBufferCache> getVertexBufferCache() const;
@@ -80,10 +84,10 @@ public:
 	const shared_ptr<RaycastIntersector> getRaycastIntersector() const;
 	const shared_ptr<CameraCollisionDetector> getCameraCollisionDetector() const;
 	const shared_ptr<CameraCollisionResponder> getCameraCollisionResponder() const;
-	const shared_ptr<Sound2dManager> getSound2dManager() const;
-	const shared_ptr<Sound3dManager> getSound3dManager() const;
-	const shared_ptr<Sound2dPlayer> getSound2dPlayer() const;
+	const shared_ptr<Animation3dPlayer> getAnimation3dPlayer() const;
+	const shared_ptr<Animation2dPlayer> getAnimation2dPlayer() const;
 	const shared_ptr<Sound3dPlayer> getSound3dPlayer() const;
+	const shared_ptr<Sound2dPlayer> getSound2dPlayer() const;
 	const shared_ptr<NetworkingServer> getNetworkingServer() const;
 	const shared_ptr<NetworkingClient> getNetworkingClient() const;
 	const shared_ptr<Timer> getTimer() const;
@@ -113,8 +117,8 @@ private:
 	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
 	shared_ptr<Animation3dManager> _animation3dManager = nullptr;
 	shared_ptr<Animation2dManager> _animation2dManager = nullptr;
-	shared_ptr<Animation3dPlayer> _animation3dPlayer = nullptr;
-	shared_ptr<Animation2dPlayer> _animation2dPlayer = nullptr;
+	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
+	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
 	shared_ptr<RenderWindow> _renderWindow = nullptr;
 	shared_ptr<MasterRenderer> _masterRenderer = nullptr;
 	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
@@ -125,8 +129,8 @@ private:
 	shared_ptr<RaycastIntersector> _raycastIntersector = nullptr;
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
 	shared_ptr<CameraCollisionResponder> _cameraCollisionResponder = nullptr;
-	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
-	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
+	shared_ptr<Animation3dPlayer> _animation3dPlayer = nullptr;
+	shared_ptr<Animation2dPlayer> _animation2dPlayer = nullptr;
 	shared_ptr<Sound3dPlayer> _sound3dPlayer = nullptr;
 	shared_ptr<Sound2dPlayer> _sound2dPlayer = nullptr;
 	shared_ptr<NetworkingServer> _networkingServer = nullptr;

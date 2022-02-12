@@ -15,34 +15,172 @@ void Animation2dPlayer::inject(shared_ptr<Quad2dEntityManager> quad2dEntityManag
 	_quad2dEntityManager = quad2dEntityManager;
 }
 
-const vector<string> Animation2dPlayer::getStartedQuad3dAnimationIds(const string& quadId) const
+const vector<pair<string, string>> Animation2dPlayer::getStartedQuad3dAnimationIds() const
 {
-	set<string> ids;
+	vector<pair<string, string>> ids;
 
 	for(const auto& [key, animation] : _startedQuad3dAnimations)
 	{
-		if(quadId == key.second)
-		{
-			ids.insert(key.first);
-		}
+		ids.push_back(key);
 	}
 
-	return vector<string>(ids.begin(), ids.end());
+	return ids;
 }
 
-const vector<string> Animation2dPlayer::getStartedQuad2dAnimationIds(const string& quadId) const
+const vector<pair<string, string>> Animation2dPlayer::getStartedQuad2dAnimationIds() const
 {
-	set<string> ids;
+	vector<pair<string, string>> ids;
 
 	for(const auto& [key, animation] : _startedQuad2dAnimations)
 	{
-		if(quadId == key.second)
-		{
-			ids.insert(key.first);
-		}
+		ids.push_back(key);
 	}
 
-	return vector<string>(ids.begin(), ids.end());
+	return ids;
+}
+
+const int Animation2dPlayer::getQuad3dAnimationPlayCount(const string& animationId, const string& quadId) const
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad3dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad3dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->getPlayCount();
+}
+
+const int Animation2dPlayer::getQuad2dAnimationPlayCount(const string& animationId, const string& quadId) const
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad2dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad2dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getPlayCount();
+}
+
+const unsigned int Animation2dPlayer::getQuad3dAnimationRowIndex(const string& animationId, const string& quadId) const
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad3dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad3dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->getRowIndex();
+}
+
+const unsigned int Animation2dPlayer::getQuad2dAnimationRowIndex(const string& animationId, const string& quadId) const
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad2dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad2dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getRowIndex();
+}
+
+const unsigned int Animation2dPlayer::getQuad3dAnimationColumnIndex(const string& animationId, const string& quadId) const
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad3dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad3dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	return _startedQuad3dAnimations.at(make_pair(animationId, quadId))->getColumnIndex();
+}
+
+const unsigned int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string& animationId, const string& quadId) const
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad2dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad2dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getColumnIndex();
+}
+
+const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const string& animationId, const string& quadId) const
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad3dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad3dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getIntervalDivider();
+}
+
+const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalDivider(const string& animationId, const string& quadId) const
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad2dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad2dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getIntervalDivider();
 }
 
 const bool Animation2dPlayer::isQuad3dAnimationStarted(const string& animationId, const string& quadId) const

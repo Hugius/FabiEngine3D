@@ -8,6 +8,16 @@ void EngineInterface::animation2d_create(const string& id)
 
 void EngineInterface::animation2d_delete(const string& id)
 {
+	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
+	{
+		_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
+	}
+
+	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
+	{
+		_core->getAnimation2dPlayer()->stopQuad2dAnimation(animationId, quadId);
+	}
+
 	_core->getAnimation2dManager()->deleteAnimation(id);
 }
 

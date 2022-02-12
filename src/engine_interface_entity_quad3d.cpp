@@ -21,6 +21,14 @@ void EngineInterface::quad3d_delete(const string& id)
 		_core->getAabbEntityManager()->deleteEntity(aabbId);
 	}
 
+	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
+	{
+		if(id == quadId)
+		{
+			_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
+		}
+	}
+
 	_core->getQuad3dEntityManager()->deleteEntity(id);
 }
 
@@ -189,6 +197,21 @@ void EngineInterface::quad3d_stopAnimation(const string& quadId, const string& a
 	_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
 }
 
+void EngineInterface::quad3d_setAnimationRowIndex(const string& quadId, const string& animationId, unsigned int value)
+{
+	_core->getAnimation2dPlayer()->setQuad3dAnimationRowIndex(animationId, quadId, value);
+}
+
+void EngineInterface::quad3d_setAnimationColumnIndex(const string& quadId, const string& animationId, unsigned int value)
+{
+	_core->getAnimation2dPlayer()->setQuad3dAnimationColumnIndex(animationId, quadId, value);
+}
+
+void EngineInterface::quad3d_setAnimationIntervalDivider(const string& quadId, const string& animationId, unsigned int value)
+{
+	_core->getAnimation2dPlayer()->setQuad3dAnimationIntervalDivider(animationId, quadId, value);
+}
+
 void EngineInterface::quad3d_setFacingCameraHorizontally(const string& id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setFacingCameraHorizontally(value);
@@ -289,6 +312,26 @@ const float EngineInterface::quad3d_getMinTextureAlpha(const string& id) const
 	return _core->getQuad3dEntityManager()->getEntity(id)->getMinTextureAlpha();
 }
 
+const int EngineInterface::quad3d_getAnimationPlayCount(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->getQuad3dAnimationPlayCount(quadId, animationId);
+}
+
+const unsigned int EngineInterface::quad3d_getAnimationRowIndex(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->getQuad3dAnimationRowIndex(quadId, animationId);
+}
+
+const unsigned int EngineInterface::quad3d_getAnimationColumnIndex(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->getQuad3dAnimationColumnIndex(quadId, animationId);
+}
+
+const unsigned int EngineInterface::quad3d_getAnimationIntervalDivider(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->getQuad3dAnimationIntervalDivider(quadId, animationId);
+}
+
 const bool EngineInterface::quad3d_isExisting(const string& id) const
 {
 	return _core->getQuad3dEntityManager()->isEntityExisting(id);
@@ -348,7 +391,17 @@ const vector<string> EngineInterface::quad3d_getIds() const
 
 const vector<string> EngineInterface::quad3d_getAnimationIds(const string& id) const
 {
-	return _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds(id);
+	vector<string> result;
+
+	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
+	{
+		if(id == quadId)
+		{
+			result.push_back(animationId);
+		}
+	}
+
+	return result;
 }
 
 const bool EngineInterface::quad3d_isFacingCameraHorizontally(const string& id) const

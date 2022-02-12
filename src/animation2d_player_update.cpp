@@ -12,25 +12,14 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 
 	for(auto& [key, startedAnimation] : _startedQuad3dAnimations)
 	{
-		if(!_animation2dManager->isAnimationExisting(key.first))
-		{
-			quad3dAnimationsToStop.insert(key);
-			continue;
-		}
-		if(!_quad3dEntityManager->isEntityExisting(key.second))
-		{
-			quad3dAnimationsToStop.insert(key);
-			continue;
-		}
-
 		const auto animation = _animation2dManager->getAnimation(key.first);
 		const auto quad = _quad3dEntityManager->getEntity(key.second);
 
 		if(!startedAnimation->isPaused())
 		{
-			if(startedAnimation->getPassedFrames() == animation->getInterval())
+			if(startedAnimation->getPassedCycles() == (animation->getInterval() / startedAnimation->getIntervalDivider()))
 			{
-				startedAnimation->setPassedFrames(0);
+				startedAnimation->setPassedCycles(0);
 
 				if(startedAnimation->getColumnIndex() == (animation->getColumnCount() - 1))
 				{
@@ -62,7 +51,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 			}
 			else
 			{
-				startedAnimation->setPassedFrames(startedAnimation->getPassedFrames() + 1);
+				startedAnimation->setPassedCycles(startedAnimation->getPassedCycles() + 1);
 			}
 
 			if(startedAnimation->isAutopaused())
@@ -92,25 +81,14 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 
 	for(auto& [key, startedAnimation] : _startedQuad2dAnimations)
 	{
-		if(!_animation2dManager->isAnimationExisting(key.first))
-		{
-			quad2dAnimationsToStop.insert(key);
-			continue;
-		}
-		if(!_quad2dEntityManager->isEntityExisting(key.second))
-		{
-			quad2dAnimationsToStop.insert(key);
-			continue;
-		}
-
 		const auto animation = _animation2dManager->getAnimation(key.first);
 		const auto quad = _quad2dEntityManager->getEntity(key.second);
 
 		if(!startedAnimation->isPaused())
 		{
-			if(startedAnimation->getPassedFrames() == animation->getInterval())
+			if(startedAnimation->getPassedCycles() == (animation->getInterval() / startedAnimation->getIntervalDivider()))
 			{
-				startedAnimation->setPassedFrames(0);
+				startedAnimation->setPassedCycles(0);
 
 				if(startedAnimation->getColumnIndex() == (animation->getColumnCount() - 1))
 				{
@@ -142,7 +120,7 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 			}
 			else
 			{
-				startedAnimation->setPassedFrames(startedAnimation->getPassedFrames() + 1);
+				startedAnimation->setPassedCycles(startedAnimation->getPassedCycles() + 1);
 			}
 		}
 

@@ -227,6 +227,7 @@ void ScriptInterpreter::unload()
 	_fe3d->pointlight_deleteAll();
 	_fe3d->spotlight_deleteAll();
 	_fe3d->reflection_deleteAll();
+	_fe3d->animation2d_deleteAll();
 
 	for(const auto& id : _fe3d->quad2d_getIds())
 	{

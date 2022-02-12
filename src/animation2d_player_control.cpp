@@ -114,6 +114,60 @@ void Animation2dPlayer::stopQuad3dAnimation(const string& animationId, const str
 	_startedQuad3dAnimations.erase(make_pair(animationId, quadId));
 }
 
+void Animation2dPlayer::setQuad3dAnimationRowIndex(const string& animationId, const string& quadId, unsigned int value)
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad3dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad3dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	_startedQuad3dAnimations.at(make_pair(animationId, quadId))->setRowIndex(value);
+}
+
+void Animation2dPlayer::setQuad3dAnimationColumnIndex(const string& animationId, const string& quadId, unsigned int value)
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad3dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad3dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	_startedQuad3dAnimations.at(make_pair(animationId, quadId))->setColumnIndex(value);
+}
+
+void Animation2dPlayer::setQuad3dAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value)
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad3dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad3dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	_startedQuad3dAnimations.at(make_pair(animationId, quadId))->setIntervalDivider(value);
+}
+
 void Animation2dPlayer::startQuad2dAnimation(const string& animationId, const string& quadId, int playCount)
 {
 	if(!_animation2dManager->isAnimationExisting(animationId))
@@ -224,4 +278,58 @@ void Animation2dPlayer::stopQuad2dAnimation(const string& animationId, const str
 	}
 
 	_startedQuad2dAnimations.erase(make_pair(animationId, quadId));
+}
+
+void Animation2dPlayer::setQuad2dAnimationRowIndex(const string& animationId, const string& quadId, unsigned int value)
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad2dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad2dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	_startedQuad2dAnimations.at(make_pair(animationId, quadId))->setRowIndex(value);
+}
+
+void Animation2dPlayer::setQuad2dAnimationColumnIndex(const string& animationId, const string& quadId, unsigned int value)
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad2dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad2dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	_startedQuad2dAnimations.at(make_pair(animationId, quadId))->setColumnIndex(value);
+}
+
+void Animation2dPlayer::setQuad2dAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value)
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad2dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad2dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	_startedQuad2dAnimations.at(make_pair(animationId, quadId))->setIntervalDivider(value);
 }

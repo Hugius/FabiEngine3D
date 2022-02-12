@@ -349,6 +349,9 @@ public:
 	void quad3d_autopauseAnimation(const string& quadId, const string& animationId);
 	void quad3d_resumeAnimation(const string& quadId, const string& animationId);
 	void quad3d_stopAnimation(const string& quadId, const string& animationId);
+	void quad3d_setAnimationRowIndex(const string& quadId, const string& animationId, unsigned int value);
+	void quad3d_setAnimationColumnIndex(const string& quadId, const string& animationId, unsigned int value);
+	void quad3d_setAnimationIntervalDivider(const string& quadId, const string& animationId, unsigned int value);
 
 	const vector<string> quad3d_getIds() const;
 	const vector<string> quad3d_getAnimationIds(const string& id) const;
@@ -368,6 +371,10 @@ public:
 	const float quad3d_getTextureRepeat(const string& id) const;
 	const float quad3d_getEmissionIntensity(const string& id) const;
 	const float quad3d_getMinTextureAlpha(const string& id) const;
+	const int quad3d_getAnimationPlayCount(const string& quadId, const string& animationId) const;
+	const unsigned int quad3d_getAnimationRowIndex(const string& quadId, const string& animationId) const;
+	const unsigned int quad3d_getAnimationColumnIndex(const string& quadId, const string& animationId) const;
+	const unsigned int quad3d_getAnimationIntervalDivider(const string& quadId, const string& animationId) const;
 	const bool quad3d_isExisting(const string& id) const;
 	const bool quad3d_isVisible(const string& id) const;
 	const bool quad3d_isFacingCameraHorizontally(const string& id) const;
@@ -471,6 +478,9 @@ public:
 	void quad2d_autopauseAnimation(const string& quadId, const string& animationId);
 	void quad2d_resumeAnimation(const string& quadId, const string& animationId);
 	void quad2d_stopAnimation(const string& quadId, const string& animationId);
+	void quad2d_setAnimationRowIndex(const string& animationId, const string& quadId, unsigned int value);
+	void quad2d_setAnimationColumnIndex(const string& animationId, const string& quadId, unsigned int value);
+	void quad2d_setAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value);
 
 	const vector<string> quad2d_getIds() const;
 	const vector<string> quad2d_getAnimationIds(const string& id) const;
@@ -485,6 +495,10 @@ public:
 	const fvec2& quad2d_getUvOffset(const string& id) const;
 	const float quad2d_getRotation(const string& id) const;
 	const float quad2d_getOpacity(const string& id) const;
+	const int quad2d_getAnimationPlayCount(const string& quadId, const string& animationId) const;
+	const unsigned int quad2d_getAnimationRowIndex(const string& quadId, const string& animationId) const;
+	const unsigned int quad2d_getAnimationColumnIndex(const string& quadId, const string& animationId) const;
+	const unsigned int quad2d_getAnimationIntervalDivider(const string& quadId, const string& animationId) const;
 	const bool quad2d_isExisting(const string& id) const;
 	const bool quad2d_isVisible(const string& id) const;
 	const bool quad2d_isCentered(const string& id) const;

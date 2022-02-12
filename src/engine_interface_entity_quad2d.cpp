@@ -13,6 +13,14 @@ void EngineInterface::quad2d_create(const string& id, bool isCentered)
 
 void EngineInterface::quad2d_delete(const string& id)
 {
+	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
+	{
+		if(id == quadId)
+		{
+			_core->getAnimation2dPlayer()->stopQuad2dAnimation(animationId, quadId);
+		}
+	}
+
 	_core->getQuad2dEntityManager()->deleteEntity(id);
 }
 
@@ -159,6 +167,21 @@ void EngineInterface::quad2d_stopAnimation(const string& quadId, const string& a
 	_core->getAnimation2dPlayer()->stopQuad2dAnimation(animationId, quadId);
 }
 
+void EngineInterface::quad2d_setAnimationRowIndex(const string& animationId, const string& quadId, unsigned int value)
+{
+	_core->getAnimation2dPlayer()->setQuad2dAnimationRowIndex(animationId, quadId, value);
+}
+
+void EngineInterface::quad2d_setAnimationColumnIndex(const string& animationId, const string& quadId, unsigned int value)
+{
+	_core->getAnimation2dPlayer()->setQuad2dAnimationColumnIndex(animationId, quadId, value);
+}
+
+void EngineInterface::quad2d_setAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value)
+{
+	_core->getAnimation2dPlayer()->setQuad2dAnimationIntervalDivider(animationId, quadId, value);
+}
+
 void EngineInterface::quad2d_setHorizontallyFlipped(const string& id, bool value)
 {
 	_core->getQuad2dEntityManager()->getEntity(id)->setHorizontallyFlipped(value);
@@ -189,6 +212,26 @@ const float EngineInterface::quad2d_getOpacity(const string& id) const
 	return _core->getQuad2dEntityManager()->getEntity(id)->getOpacity();
 }
 
+const int EngineInterface::quad2d_getAnimationPlayCount(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->getQuad2dAnimationPlayCount(quadId, animationId);
+}
+
+const unsigned int EngineInterface::quad2d_getAnimationRowIndex(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->getQuad2dAnimationRowIndex(quadId, animationId);
+}
+
+const unsigned int EngineInterface::quad2d_getAnimationColumnIndex(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->getQuad2dAnimationColumnIndex(quadId, animationId);
+}
+
+const unsigned int EngineInterface::quad2d_getAnimationIntervalDivider(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->getQuad2dAnimationIntervalDivider(quadId, animationId);
+}
+
 const vector<string> EngineInterface::quad2d_getIds() const
 {
 	vector<string> result;
@@ -203,7 +246,17 @@ const vector<string> EngineInterface::quad2d_getIds() const
 
 const vector<string> EngineInterface::quad2d_getAnimationIds(const string& id) const
 {
-	return _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds(id);
+	vector<string> result;
+
+	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
+	{
+		if(id == quadId)
+		{
+			result.push_back(animationId);
+		}
+	}
+
+	return result;
 }
 
 const string& EngineInterface::quad2d_getDiffuseMapPath(const string& id) const

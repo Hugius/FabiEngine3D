@@ -1,5 +1,7 @@
 #include "started_animation2d.hpp"
 
+using std::max;
+
 StartedAnimation2d::StartedAnimation2d(const string& animationId, const string& quadId)
 	:
 	_animationId(animationId),
@@ -23,9 +25,9 @@ const int StartedAnimation2d::getPlayCount() const
 	return _playCount;
 }
 
-const unsigned int StartedAnimation2d::getPassedFrames() const
+const unsigned int StartedAnimation2d::getPassedCycles() const
 {
-	return _passedFrames;
+	return _passedCycles;
 }
 
 const unsigned int StartedAnimation2d::getRowIndex() const
@@ -36,6 +38,11 @@ const unsigned int StartedAnimation2d::getRowIndex() const
 const unsigned int StartedAnimation2d::getColumnIndex() const
 {
 	return _columnIndex;
+}
+
+const unsigned int StartedAnimation2d::getIntervalDivider() const
+{
+	return _intervalDivider;
 }
 
 const bool StartedAnimation2d::isPaused() const
@@ -73,7 +80,12 @@ void StartedAnimation2d::setColumnIndex(unsigned int value)
 	_columnIndex = value;
 }
 
-void StartedAnimation2d::setPassedFrames(unsigned int value)
+void StartedAnimation2d::setPassedCycles(unsigned int value)
 {
-	_passedFrames = value;
+	_passedCycles = value;
+}
+
+void StartedAnimation2d::setIntervalDivider(unsigned int value)
+{
+	_intervalDivider = max(unsigned int(1), value);
 }

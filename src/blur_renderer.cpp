@@ -25,7 +25,7 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 {
 	_shader->uploadUniform("u_intensity", intensity);
 
-	if((direction == BlurDirection::HORIZONTAL) || (direction == BlurDirection::BOTH))
+	if((direction == BlurDirection::BOTH) || (direction == BlurDirection::HORIZONTAL))
 	{
 		_shader->uploadUniform("u_isHorizontal", true);
 
@@ -38,7 +38,7 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 		}
 	}
 
-	if((direction == BlurDirection::VERTICAL) || (direction == BlurDirection::BOTH))
+	if((direction == BlurDirection::BOTH) || (direction == BlurDirection::VERTICAL))
 	{
 		_shader->uploadUniform("u_isHorizontal", false);
 

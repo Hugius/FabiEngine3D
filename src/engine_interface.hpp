@@ -352,6 +352,7 @@ public:
 	void quad3d_stopAnimation(const string& quadId, const string& animationId);
 	void quad3d_setAnimationRowIndex(const string& quadId, const string& animationId, unsigned int value);
 	void quad3d_setAnimationColumnIndex(const string& quadId, const string& animationId, unsigned int value);
+	void quad3d_setAnimationIntervalMultiplier(const string& quadId, const string& animationId, unsigned int value);
 	void quad3d_setAnimationIntervalDivider(const string& quadId, const string& animationId, unsigned int value);
 
 	const vector<string> quad3d_getIds() const;
@@ -376,6 +377,7 @@ public:
 	const int quad3d_getAnimationPlayCount(const string& quadId, const string& animationId) const;
 	const unsigned int quad3d_getAnimationRowIndex(const string& quadId, const string& animationId) const;
 	const unsigned int quad3d_getAnimationColumnIndex(const string& quadId, const string& animationId) const;
+	const unsigned int quad3d_getAnimationIntervalMultiplier(const string& quadId, const string& animationId) const;
 	const unsigned int quad3d_getAnimationIntervalDivider(const string& quadId, const string& animationId) const;
 	const bool quad3d_isExisting(const string& id) const;
 	const bool quad3d_isVisible(const string& id) const;
@@ -483,6 +485,7 @@ public:
 	void quad2d_stopAnimation(const string& quadId, const string& animationId);
 	void quad2d_setAnimationRowIndex(const string& animationId, const string& quadId, unsigned int value);
 	void quad2d_setAnimationColumnIndex(const string& animationId, const string& quadId, unsigned int value);
+	void quad2d_setAnimationIntervalMultiplier(const string& animationId, const string& quadId, unsigned int value);
 	void quad2d_setAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value);
 
 	const vector<string> quad2d_getIds() const;
@@ -501,6 +504,7 @@ public:
 	const int quad2d_getAnimationPlayCount(const string& quadId, const string& animationId) const;
 	const unsigned int quad2d_getAnimationRowIndex(const string& quadId, const string& animationId) const;
 	const unsigned int quad2d_getAnimationColumnIndex(const string& quadId, const string& animationId) const;
+	const unsigned int quad2d_getAnimationIntervalMultiplier(const string& quadId, const string& animationId) const;
 	const unsigned int quad2d_getAnimationIntervalDivider(const string& quadId, const string& animationId) const;
 	const bool quad2d_isExisting(const string& id) const;
 	const bool quad2d_isVisible(const string& id) const;

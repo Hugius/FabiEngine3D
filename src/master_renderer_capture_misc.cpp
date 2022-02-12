@@ -230,7 +230,7 @@ void MasterRenderer::_captureAntiAliasing()
 
 void MasterRenderer::_captureBloom()
 {
-	if(_renderStorage->isBloomEnabled() && (_renderStorage->getBloomBlurCount() > 0) && (_renderStorage->getBloomIntensity() > 0.0f))
+	if(_renderStorage->isBloomEnabled())
 	{
 		if(_renderStorage->getBloomType() == BloomType::EVERYTHING)
 		{

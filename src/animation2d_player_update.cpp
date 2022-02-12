@@ -14,12 +14,13 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 	{
 		const auto animation = _animation2dManager->getAnimation(key.first);
 		const auto quad = _quad3dEntityManager->getEntity(key.second);
+		const auto interval = static_cast<unsigned int>((animation->getInterval() * startedAnimation->getIntervalMultiplier()) / startedAnimation->getIntervalDivider());
 
 		if(!startedAnimation->isPaused())
 		{
-			if(startedAnimation->getCycleCount() == static_cast<unsigned int>(animation->getInterval() / startedAnimation->getIntervalDivider()))
+			if(startedAnimation->getUpdateCount() == interval)
 			{
-				startedAnimation->setCycleCount(0);
+				startedAnimation->setUpdateCount(0);
 
 				if(startedAnimation->getColumnIndex() >= (animation->getColumnCount() - 1))
 				{
@@ -51,7 +52,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 			}
 			else
 			{
-				startedAnimation->setCycleCount(startedAnimation->getCycleCount() + 1);
+				startedAnimation->setUpdateCount(startedAnimation->getUpdateCount() + 1);
 			}
 
 			if(startedAnimation->isAutopaused())
@@ -86,9 +87,9 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 
 		if(!startedAnimation->isPaused())
 		{
-			if(startedAnimation->getCycleCount() == static_cast<unsigned int>(animation->getInterval() / startedAnimation->getIntervalDivider()))
+			if(startedAnimation->getUpdateCount() == static_cast<unsigned int>(animation->getInterval() / startedAnimation->getIntervalDivider()))
 			{
-				startedAnimation->setCycleCount(0);
+				startedAnimation->setUpdateCount(0);
 
 				if(startedAnimation->getColumnIndex() >= (animation->getColumnCount() - 1))
 				{
@@ -120,7 +121,7 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 			}
 			else
 			{
-				startedAnimation->setCycleCount(startedAnimation->getCycleCount() + 1);
+				startedAnimation->setUpdateCount(startedAnimation->getUpdateCount() + 1);
 			}
 		}
 

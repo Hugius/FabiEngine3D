@@ -150,6 +150,24 @@ void Animation2dPlayer::setQuad3dAnimationColumnIndex(const string& animationId,
 	_startedQuad3dAnimations.at(make_pair(animationId, quadId))->setColumnIndex(value);
 }
 
+void Animation2dPlayer::setQuad3dAnimationIntervalMultiplier(const string& animationId, const string& quadId, unsigned int value)
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad3dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad3dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	_startedQuad3dAnimations.at(make_pair(animationId, quadId))->setIntervalMultiplier(value);
+}
+
 void Animation2dPlayer::setQuad3dAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value)
 {
 	if(!_animation2dManager->isAnimationExisting(animationId))
@@ -314,6 +332,24 @@ void Animation2dPlayer::setQuad2dAnimationColumnIndex(const string& animationId,
 	}
 
 	_startedQuad2dAnimations.at(make_pair(animationId, quadId))->setColumnIndex(value);
+}
+
+void Animation2dPlayer::setQuad2dAnimationIntervalMultiplier(const string& animationId, const string& quadId, unsigned int value)
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad2dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad2dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	_startedQuad2dAnimations.at(make_pair(animationId, quadId))->setIntervalMultiplier(value);
 }
 
 void Animation2dPlayer::setQuad2dAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value)

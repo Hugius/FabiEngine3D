@@ -216,6 +216,11 @@ void EngineInterface::quad3d_setAnimationColumnIndex(const string& quadId, const
 	_core->getAnimation2dPlayer()->setQuad3dAnimationColumnIndex(animationId, quadId, value);
 }
 
+void EngineInterface::quad3d_setAnimationIntervalMultiplier(const string& quadId, const string& animationId, unsigned int value)
+{
+	_core->getAnimation2dPlayer()->setQuad3dAnimationIntervalMultiplier(animationId, quadId, value);
+}
+
 void EngineInterface::quad3d_setAnimationIntervalDivider(const string& quadId, const string& animationId, unsigned int value)
 {
 	_core->getAnimation2dPlayer()->setQuad3dAnimationIntervalDivider(animationId, quadId, value);
@@ -334,6 +339,11 @@ const unsigned int EngineInterface::quad3d_getAnimationRowIndex(const string& qu
 const unsigned int EngineInterface::quad3d_getAnimationColumnIndex(const string& quadId, const string& animationId) const
 {
 	return _core->getAnimation2dPlayer()->getQuad3dAnimationColumnIndex(quadId, animationId);
+}
+
+const unsigned int EngineInterface::quad3d_getAnimationIntervalMultiplier(const string& quadId, const string& animationId) const
+{
+	return _core->getAnimation2dPlayer()->getQuad3dAnimationIntervalMultiplier(quadId, animationId);
 }
 
 const unsigned int EngineInterface::quad3d_getAnimationIntervalDivider(const string& quadId, const string& animationId) const

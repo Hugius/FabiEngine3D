@@ -227,13 +227,13 @@
 
 - **Intensity**: the intensity of the bloom effect
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Quality**: the quality of the bloom effect
   - Type: `integer`
   - Constraints: between `1` and `5`
 - **Blur Count**: the amount of blurs used for the bloom effect
   - Type: `integer`
-  - Constraints: at least `1`
+  - Constraints: at least `0`
 - **Enabled**: the bloom effect is enabled
   - Type: `boolean`
   - Constraints: none

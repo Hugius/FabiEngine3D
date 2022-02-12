@@ -493,6 +493,26 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:quad2d_set_animation_interval_multiplier")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
+			{
+				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwRuntimeError("animation is not started");
+					return true;
+				}
+
+				_fe3d->quad2d_setAnimationIntervalMultiplier(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:quad2d_set_animation_interval_divider")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};

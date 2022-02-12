@@ -147,6 +147,42 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string
 	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getColumnIndex();
 }
 
+const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalMultiplier(const string& animationId, const string& quadId) const
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad3dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad3dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getIntervalMultiplier();
+}
+
+const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalMultiplier(const string& animationId, const string& quadId) const
+{
+	if(!_animation2dManager->isAnimationExisting(animationId))
+	{
+		abort();
+	}
+	if(!_quad2dEntityManager->isEntityExisting(quadId))
+	{
+		abort();
+	}
+	if(!isQuad2dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+
+	return _startedQuad2dAnimations.at(make_pair(animationId, quadId))->getIntervalMultiplier();
+}
+
 const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const string& animationId, const string& quadId) const
 {
 	if(!_animation2dManager->isAnimationExisting(animationId))

@@ -25,9 +25,9 @@ const int StartedAnimation2d::getPlayCount() const
 	return _playCount;
 }
 
-const unsigned int StartedAnimation2d::getCycleCount() const
+const unsigned int StartedAnimation2d::getUpdateCount() const
 {
-	return _cycleCount;
+	return _updateCount;
 }
 
 const unsigned int StartedAnimation2d::getRowIndex() const
@@ -38,6 +38,11 @@ const unsigned int StartedAnimation2d::getRowIndex() const
 const unsigned int StartedAnimation2d::getColumnIndex() const
 {
 	return _columnIndex;
+}
+
+const unsigned int StartedAnimation2d::getIntervalMultiplier() const
+{
+	return _intervalMultiplier;
 }
 
 const unsigned int StartedAnimation2d::getIntervalDivider() const
@@ -80,9 +85,14 @@ void StartedAnimation2d::setColumnIndex(unsigned int value)
 	_columnIndex = value;
 }
 
-void StartedAnimation2d::setCycleCount(unsigned int value)
+void StartedAnimation2d::setUpdateCount(unsigned int value)
 {
-	_cycleCount = value;
+	_updateCount = value;
+}
+
+void StartedAnimation2d::setIntervalMultiplier(unsigned int value)
+{
+	_intervalMultiplier = max(unsigned int(1), value);
 }
 
 void StartedAnimation2d::setIntervalDivider(unsigned int value)

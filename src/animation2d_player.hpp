@@ -35,6 +35,8 @@ public:
 	void setQuad2dAnimationRowIndex(const string& animationId, const string& quadId, unsigned int value);
 	void setQuad3dAnimationColumnIndex(const string& animationId, const string& quadId, unsigned int value);
 	void setQuad2dAnimationColumnIndex(const string& animationId, const string& quadId, unsigned int value);
+	void setQuad3dAnimationIntervalMultiplier(const string& animationId, const string& quadId, unsigned int value);
+	void setQuad2dAnimationIntervalMultiplier(const string& animationId, const string& quadId, unsigned int value);
 	void setQuad3dAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value);
 	void setQuad2dAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value);
 
@@ -47,6 +49,8 @@ public:
 	const unsigned int getQuad2dAnimationRowIndex(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad3dAnimationColumnIndex(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad2dAnimationColumnIndex(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad3dAnimationIntervalMultiplier(const string& animationId, const string& quadId) const;
+	const unsigned int getQuad2dAnimationIntervalMultiplier(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad3dAnimationIntervalDivider(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad2dAnimationIntervalDivider(const string& animationId, const string& quadId) const;
 

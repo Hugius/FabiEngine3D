@@ -10,7 +10,7 @@ public:
 	void update();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedIds();
+	const vector<string>& getLoadedEntityIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
@@ -33,7 +33,7 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	vector <string> _loadedTerrainIds;
+	vector <string> _loadedEntityIds;
 	string _currentTerrainId = "";
 
 	static inline constexpr float CW = 0.115f;

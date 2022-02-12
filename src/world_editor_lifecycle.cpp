@@ -16,21 +16,21 @@ void WorldEditor::_load()
 	_waterEditor->loadFromFile();
 
 	_modelEditor->loadFromFile();
-	for(const auto& id : _modelEditor->getLoadedIds())
+	for(const auto& id : _modelEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace");
 		screen->getScrollingList("modelList")->createButton(id, id.substr(1));
 	}
 
 	_quad3dEditor->loadFromFile();
-	for(const auto& id : _quad3dEditor->getLoadedIds())
+	for(const auto& id : _quad3dEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace");
 		screen->getScrollingList("quad3dList")->createButton(id, id.substr(1));
 	}
 
 	_text3dEditor->loadFromFile();
-	for(const auto& id : _text3dEditor->getLoadedIds())
+	for(const auto& id : _text3dEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace");
 		screen->getScrollingList("text3dList")->createButton(id, id.substr(1));
@@ -76,7 +76,7 @@ void WorldEditor::_load()
 	_fe3d->model_setShadowed(TEMPLATE_SPEAKER_ID, false);
 	_fe3d->model_setReflected(TEMPLATE_SPEAKER_ID, false);
 	_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-	for(const auto& id : _soundEditor->getLoadedIds())
+	for(const auto& id : _soundEditor->getLoadedSoundIds())
 	{
 		_fe3d->sound3d_create(id, _fe3d->sound2d_getAudioPath(id));
 		_fe3d->sound3d_setMaxVolume(id, DEFAULT_SOUND_MAX_VOLUME);
@@ -101,32 +101,32 @@ void WorldEditor::_unload()
 	_fe3d->gfx_setAntiAliasingEnabled(false);
 	_fe3d->gfx_setAnisotropicFilteringQuality(0);
 
-	for(const auto& id : _skyEditor->getLoadedIds())
+	for(const auto& id : _skyEditor->getLoadedEntityIds())
 	{
 		_fe3d->sky_delete(id);
 	}
 
-	for(const auto& id : _terrainEditor->getLoadedIds())
+	for(const auto& id : _terrainEditor->getLoadedEntityIds())
 	{
 		_fe3d->terrain_delete(id);
 	}
 
-	for(const auto& id : _waterEditor->getLoadedIds())
+	for(const auto& id : _waterEditor->getLoadedEntityIds())
 	{
 		_fe3d->water_delete(id);
 	}
 
-	for(const auto& id : _modelEditor->getLoadedIds())
+	for(const auto& id : _modelEditor->getLoadedEntityIds())
 	{
 		_fe3d->model_delete(id);
 	}
 
-	for(const auto& id : _quad3dEditor->getLoadedIds())
+	for(const auto& id : _quad3dEditor->getLoadedEntityIds())
 	{
 		_fe3d->quad3d_delete(id);
 	}
 
-	for(const auto& id : _text3dEditor->getLoadedIds())
+	for(const auto& id : _text3dEditor->getLoadedEntityIds())
 	{
 		_fe3d->text3d_delete(id);
 	}
@@ -141,7 +141,7 @@ void WorldEditor::_unload()
 	_fe3d->reflection_delete(TEMPLATE_REFLECTION_ID);
 
 	_fe3d->model_delete(TEMPLATE_SPEAKER_ID);
-	for(const auto& id : _soundEditor->getLoadedIds())
+	for(const auto& id : _soundEditor->getLoadedSoundIds())
 	{
 		_fe3d->sound2d_delete(id);
 		_fe3d->sound3d_delete(id);

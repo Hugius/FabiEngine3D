@@ -21,7 +21,7 @@ const bool Text2dEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\text2d.fe3d");
 
-	for(const auto& textId : _loadedTextIds)
+	for(const auto& textId : _loadedEntityIds)
 	{
 		auto fontMapPath = _fe3d->text2d_getFontMapPath(textId);
 		auto color = _fe3d->text2d_getColor(textId);

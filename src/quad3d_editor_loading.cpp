@@ -92,7 +92,7 @@ const bool Quad3dEditor::loadFromFile()
 		abort();
 	}
 
-	_loadedQuadIds.clear();
+	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -152,7 +152,8 @@ const bool Quad3dEditor::loadFromFile()
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-		_loadedQuadIds.push_back(quadId);
+		_loadedEntityIds.push_back(quadId);
+		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 		_fe3d->quad3d_create(quadId, false);
 		_fe3d->quad3d_setVisible(quadId, false);

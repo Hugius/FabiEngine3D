@@ -52,7 +52,7 @@ void WorldEditor::_updateModelPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& modelId : _modelEditor->getLoadedIds())
+			for(const auto& modelId : _modelEditor->getLoadedEntityIds())
 			{
 				if(_fe3d->model_isExisting(modelId))
 				{

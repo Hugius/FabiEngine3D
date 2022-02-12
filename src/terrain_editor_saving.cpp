@@ -17,7 +17,7 @@ const bool TerrainEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\terrain.fe3d");
 
-	for(const auto& terrainId : _loadedTerrainIds)
+	for(const auto& terrainId : _loadedEntityIds)
 	{
 		auto heightMapPath = _fe3d->terrain_getHeightMapPath(terrainId);
 		auto diffuseMapPath = _fe3d->terrain_getDiffuseMapPath(terrainId);

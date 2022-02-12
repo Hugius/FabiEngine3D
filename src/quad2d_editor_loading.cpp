@@ -66,7 +66,7 @@ const bool Quad2dEditor::loadFromFile()
 		abort();
 	}
 
-	_loadedQuadIds.clear();
+	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -105,7 +105,8 @@ const bool Quad2dEditor::loadFromFile()
 
 		if(_fe3d->quad2d_isExisting(quadId))
 		{
-			_loadedQuadIds.push_back(quadId);
+			_loadedEntityIds.push_back(quadId);
+			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 			_fe3d->quad2d_setVisible(quadId, false);
 			_fe3d->quad2d_setPosition(quadId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));

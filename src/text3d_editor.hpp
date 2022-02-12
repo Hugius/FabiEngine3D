@@ -10,7 +10,7 @@ public:
 	void update();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedIds();
+	const vector<string>& getLoadedEntityIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
@@ -31,7 +31,7 @@ private:
 	void _updateMiscellaneous();
 
 	static inline const string TEXT_CONTENT = "Text123";
-	vector<string> _loadedTextIds;
+	vector<string> _loadedEntityIds;
 	string _hoveredTextId = "";
 	string _currentTextId = "";
 

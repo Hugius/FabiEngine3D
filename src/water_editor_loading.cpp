@@ -95,7 +95,7 @@ const bool WaterEditor::loadFromFile()
 		abort();
 	}
 
-	_loadedWaterIds.clear();
+	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -164,7 +164,8 @@ const bool WaterEditor::loadFromFile()
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
-		_loadedWaterIds.push_back(waterId);
+		_loadedEntityIds.push_back(waterId);
+		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 		_fe3d->water_create(waterId);
 		_fe3d->water_setHeight(waterId, height);

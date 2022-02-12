@@ -2,8 +2,7 @@
 
 #include <algorithm>
 
-const vector<string>& Text2dEditor::getLoadedIds()
+const vector<string>& Text2dEditor::getLoadedEntityIds()
 {
-	sort(_loadedTextIds.begin(), _loadedTextIds.end());
-	return _loadedTextIds;
+	return _loadedEntityIds;
 }

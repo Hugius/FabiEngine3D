@@ -10,7 +10,7 @@ public:
 	void update();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedIds();
+	const vector<string>& getLoadedEntityIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
@@ -27,7 +27,7 @@ private:
 	void _updateTextDeleting();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedTextIds;
+	vector<string> _loadedEntityIds;
 	string _currentTextId = "";
 	string _hoveredTextId = "";
 

@@ -57,7 +57,7 @@ void Animation3dEditor::_load()
 
 void Animation3dEditor::_unload()
 {
-	for(const auto& id : _modelEditor->getLoadedIds())
+	for(const auto& id : _modelEditor->getLoadedEntityIds())
 	{
 		_fe3d->model_delete(id);
 	}

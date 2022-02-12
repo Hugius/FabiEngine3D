@@ -43,7 +43,7 @@ void WaterEditor::_load()
 
 void WaterEditor::_unload()
 {
-	for(const auto& id : _loadedWaterIds)
+	for(const auto& id : _loadedEntityIds)
 	{
 		_fe3d->water_delete(id);
 	}
@@ -65,7 +65,7 @@ void WaterEditor::_unload()
 
 	_fe3d->camera_setThirdPersonEnabled(false);
 
-	_loadedWaterIds.clear();
+	_loadedEntityIds.clear();
 	_currentWaterId = "";
 	_isCreatingWater = false;
 	_isChoosingWater = false;

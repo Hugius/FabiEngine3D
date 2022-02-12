@@ -2,8 +2,7 @@
 
 #include <algorithm>
 
-const vector<string>& SoundEditor::getLoadedIds()
+const vector<string>& SoundEditor::getLoadedSoundIds()
 {
-	sort(_loadedSoundIds.begin(), _loadedSoundIds.end());
 	return _loadedSoundIds;
 }

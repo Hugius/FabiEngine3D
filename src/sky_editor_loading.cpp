@@ -75,7 +75,7 @@ const bool SkyEditor::loadFromFile()
 		abort();
 	}
 
-	_loadedSkyIds.clear();
+	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -128,7 +128,8 @@ const bool SkyEditor::loadFromFile()
 			}
 		}
 
-		_loadedSkyIds.push_back(skyId);
+		_loadedEntityIds.push_back(skyId);
+		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 		_fe3d->sky_create(skyId);
 		_fe3d->sky_setCubeMaps(skyId, cubeMapPaths);

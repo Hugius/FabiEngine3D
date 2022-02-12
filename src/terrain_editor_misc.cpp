@@ -2,8 +2,7 @@
 
 #include <algorithm>
 
-const vector<string>& TerrainEditor::getLoadedIds()
+const vector<string>& TerrainEditor::getLoadedEntityIds()
 {
-	sort(_loadedTerrainIds.begin(), _loadedTerrainIds.end());
-	return _loadedTerrainIds;
+	return _loadedEntityIds;
 }

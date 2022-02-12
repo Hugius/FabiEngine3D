@@ -15,14 +15,14 @@ void Text2dEditor::_load()
 
 void Text2dEditor::_unload()
 {
-	for(const auto& id : _loadedTextIds)
+	for(const auto& id : _loadedEntityIds)
 	{
 		_fe3d->text2d_delete(id);
 	}
 
 	_gui->getOverlay()->deleteTextField("textId");
 
-	_loadedTextIds.clear();
+	_loadedEntityIds.clear();
 	_currentTextId = "";
 	_hoveredTextId = "";
 	_isCreatingText = false;

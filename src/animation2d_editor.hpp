@@ -10,7 +10,7 @@ public:
 
 	void update();
 
-	const vector<string> getLoadedIds();
+	const vector<string>& getLoadedAnimationIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;

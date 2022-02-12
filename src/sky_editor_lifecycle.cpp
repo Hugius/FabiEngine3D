@@ -19,7 +19,7 @@ void SkyEditor::_load()
 
 void SkyEditor::_unload()
 {
-	for(const auto& id : _loadedSkyIds)
+	for(const auto& id : _loadedEntityIds)
 	{
 		_fe3d->sky_delete(id);
 	}
@@ -32,7 +32,7 @@ void SkyEditor::_unload()
 
 	_fe3d->camera_setThirdPersonEnabled(false);
 
-	_loadedSkyIds.clear();
+	_loadedEntityIds.clear();
 	_currentSkyId = "";
 	_isCreatingSky = false;
 	_isChoosingSky = false;

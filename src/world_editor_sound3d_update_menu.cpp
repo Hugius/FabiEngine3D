@@ -58,7 +58,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& soundId : _soundEditor->getLoadedIds())
+			for(const auto& soundId : _soundEditor->getLoadedSoundIds())
 			{
 				if(screen->getScrollingList("soundList")->getButton(soundId)->isHovered())
 				{

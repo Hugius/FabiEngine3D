@@ -52,7 +52,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& textId : _text3dEditor->getLoadedIds())
+			for(const auto& textId : _text3dEditor->getLoadedEntityIds())
 			{
 				if(_fe3d->text3d_isExisting(textId))
 				{

@@ -10,7 +10,7 @@ public:
 	void update();
 
 	const vector<string> getAudioPathsFromFile() const;
-	const vector<string>& getLoadedIds();
+	const vector<string>& getLoadedSoundIds();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;

@@ -74,14 +74,15 @@ void WaterEditor::_updateWaterCreating()
 
 			newWaterId = ("@" + newWaterId);
 
-			if(find(_loadedWaterIds.begin(), _loadedWaterIds.end(), newWaterId) != _loadedWaterIds.end())
+			if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newWaterId) != _loadedEntityIds.end())
 			{
 				Logger::throwWarning("Water already exists");
 				return;
 			}
 
 			_currentWaterId = newWaterId;
-			_loadedWaterIds.push_back(newWaterId);
+			_loadedEntityIds.push_back(newWaterId);
+			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 			_fe3d->water_create(newWaterId);
 			_fe3d->water_select(newWaterId);
@@ -146,7 +147,7 @@ void WaterEditor::_updateWaterDeleting()
 		{
 			_fe3d->water_delete(_currentWaterId);
 
-			_loadedWaterIds.erase(remove(_loadedWaterIds.begin(), _loadedWaterIds.end(), _currentWaterId), _loadedWaterIds.end());
+			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentWaterId), _loadedEntityIds.end());
 			_currentWaterId = "";
 			_isDeletingWater = false;
 		}

@@ -39,8 +39,7 @@ void Animation2dEditor::_updateAnimationCreating()
 				return;
 			}
 
-			auto animationIds = getLoadedIds();
-			if(find(animationIds.begin(), animationIds.end(), newAnimationId) != animationIds.end())
+			if(find(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), newAnimationId) != _loadedAnimationIds.end())
 			{
 				Logger::throwWarning("Animation already exists");
 				return;

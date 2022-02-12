@@ -67,14 +67,15 @@ void SkyEditor::_updateSkyCreating()
 
 			newSkyId = ("@" + newSkyId);
 
-			if(find(_loadedSkyIds.begin(), _loadedSkyIds.end(), newSkyId) != _loadedSkyIds.end())
+			if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newSkyId) != _loadedEntityIds.end())
 			{
 				Logger::throwWarning("Sky already exists");
 				return;
 			}
 
 			_currentSkyId = newSkyId;
-			_loadedSkyIds.push_back(newSkyId);
+			_loadedEntityIds.push_back(newSkyId);
+			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 			_fe3d->sky_create(newSkyId);
 			_fe3d->sky_select(newSkyId);
@@ -139,7 +140,7 @@ void SkyEditor::_updateSkyDeleting()
 		{
 			_fe3d->sky_delete(_currentSkyId);
 
-			_loadedSkyIds.erase(remove(_loadedSkyIds.begin(), _loadedSkyIds.end(), _currentSkyId), _loadedSkyIds.end());
+			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentSkyId), _loadedEntityIds.end());
 			_currentSkyId = "";
 			_isDeletingSky = false;
 

@@ -43,7 +43,7 @@ void TerrainEditor::_load()
 
 void TerrainEditor::_unload()
 {
-	for(const auto& id : _loadedTerrainIds)
+	for(const auto& id : _loadedEntityIds)
 	{
 		_fe3d->terrain_delete(id);
 	}
@@ -65,7 +65,7 @@ void TerrainEditor::_unload()
 
 	_fe3d->camera_setThirdPersonEnabled(false);
 
-	_loadedTerrainIds.clear();
+	_loadedEntityIds.clear();
 	_currentTerrainId = "";
 	_isCreatingTerrain = false;
 	_isChoosingTerrain = false;

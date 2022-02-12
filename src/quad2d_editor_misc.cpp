@@ -2,9 +2,7 @@
 
 #include <algorithm>
 
-const vector<string>& Quad2dEditor::getLoadedIds()
+const vector<string>& Quad2dEditor::getLoadedEntityIds()
 {
-	sort(_loadedQuadIds.begin(), _loadedQuadIds.end());
-
-	return _loadedQuadIds;
+	return _loadedEntityIds;
 }

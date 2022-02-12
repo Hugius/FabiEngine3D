@@ -205,7 +205,7 @@ const bool TerrainEditor::loadFromFile()
 		abort();
 	}
 
-	_loadedTerrainIds.clear();
+	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -297,7 +297,8 @@ const bool TerrainEditor::loadFromFile()
 
 		if(_fe3d->terrain_isExisting(terrainId))
 		{
-			_loadedTerrainIds.push_back(terrainId);
+			_loadedEntityIds.push_back(terrainId);
+			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 			_fe3d->terrain_setMaxHeight(terrainId, maxHeight);
 			_fe3d->terrain_setTextureRepeat(terrainId, textureRepeat);

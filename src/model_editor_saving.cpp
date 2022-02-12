@@ -24,7 +24,7 @@ const bool ModelEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\model.fe3d");
 
-	for(const auto& modelId : _loadedModelIds)
+	for(const auto& modelId : _loadedEntityIds)
 	{
 		auto partIds = _fe3d->model_getPartIds(modelId);
 		auto aabbIds = _fe3d->model_getChildAabbIds(modelId);

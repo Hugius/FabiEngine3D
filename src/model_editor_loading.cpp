@@ -190,7 +190,7 @@ const bool ModelEditor::loadFromFile()
 		abort();
 	}
 
-	_loadedModelIds.clear();
+	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -250,7 +250,8 @@ const bool ModelEditor::loadFromFile()
 
 			if(_fe3d->model_isExisting(modelId))
 			{
-				_loadedModelIds.push_back(modelId);
+				_loadedEntityIds.push_back(modelId);
+				sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 				_fe3d->model_setVisible(modelId, false);
 				_fe3d->model_setBaseSize(modelId, size);

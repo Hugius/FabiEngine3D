@@ -126,7 +126,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 			{
 				_fe3d->model_setLevelOfDetailEntityId(_currentModelId, "");
 			}
-			else if(find(_loadedModelIds.begin(), _loadedModelIds.end(), ("@" + levelOfDetailEntityId)) == _loadedModelIds.end())
+			else if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), ("@" + levelOfDetailEntityId)) == _loadedEntityIds.end())
 			{
 				Logger::throwWarning("LOD entity does not exist");
 			}

@@ -14,7 +14,7 @@ void WorldEditor::_updateSkyMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> skyIds;
-			for(const auto& id : _skyEditor->getLoadedIds())
+			for(const auto& id : _skyEditor->getLoadedEntityIds())
 			{
 				if(id[0] == '@')
 				{

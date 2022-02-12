@@ -2,8 +2,7 @@
 
 #include <algorithm>
 
-const vector<string>& SkyEditor::getLoadedIds()
+const vector<string>& SkyEditor::getLoadedEntityIds()
 {
-	sort(_loadedSkyIds.begin(), _loadedSkyIds.end());
-	return _loadedSkyIds;
+	return _loadedEntityIds;
 }

@@ -51,7 +51,7 @@ void Text3dEditor::_load()
 
 void Text3dEditor::_unload()
 {
-	for(const auto& id : _loadedTextIds)
+	for(const auto& id : _loadedEntityIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
@@ -81,7 +81,7 @@ void Text3dEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("textId");
 
-	_loadedTextIds.clear();
+	_loadedEntityIds.clear();
 	_hoveredTextId = "";
 	_currentTextId = "";
 	_isCreatingText3d = false;

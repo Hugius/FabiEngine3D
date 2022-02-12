@@ -22,7 +22,7 @@ const bool SkyEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\sky.fe3d");
 
-	for(const auto& skyId : _loadedSkyIds)
+	for(const auto& skyId : _loadedEntityIds)
 	{
 		auto cubeMapPaths = _fe3d->sky_getCubeMapPaths(skyId);
 		auto rotation = _fe3d->sky_getRotation(skyId);

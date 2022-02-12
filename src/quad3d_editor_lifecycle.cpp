@@ -51,7 +51,7 @@ void Quad3dEditor::_load()
 
 void Quad3dEditor::_unload()
 {
-	for(const auto& id : _loadedQuadIds)
+	for(const auto& id : _loadedEntityIds)
 	{
 		_fe3d->quad3d_delete(id);
 	}
@@ -81,7 +81,7 @@ void Quad3dEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("quadId");
 
-	_loadedQuadIds.clear();
+	_loadedEntityIds.clear();
 	_hoveredQuadId = "";
 	_currentQuadId = "";
 	_isCreatingQuad3d = false;

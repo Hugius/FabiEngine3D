@@ -93,14 +93,15 @@ void Quad3dEditor::_updateQuad3dCreating()
 
 			newQuadId = ("@" + newQuadId);
 
-			if(find(_loadedQuadIds.begin(), _loadedQuadIds.end(), newQuadId) != _loadedQuadIds.end())
+			if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newQuadId) != _loadedEntityIds.end())
 			{
 				Logger::throwWarning("Quad already exists");
 				return;
 			}
 
 			_currentQuadId = newQuadId;
-			_loadedQuadIds.push_back(newQuadId);
+			_loadedEntityIds.push_back(newQuadId);
+			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 			_fe3d->quad3d_create(newQuadId, false);
 
@@ -174,7 +175,7 @@ void Quad3dEditor::_updateQuad3dDeleting()
 		{
 			_fe3d->quad3d_delete(_currentQuadId);
 
-			_loadedQuadIds.erase(remove(_loadedQuadIds.begin(), _loadedQuadIds.end(), _currentQuadId), _loadedQuadIds.end());
+			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentQuadId), _loadedEntityIds.end());
 			_currentQuadId = "";
 			_isDeletingQuad3d = false;
 		}

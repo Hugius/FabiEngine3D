@@ -2,8 +2,7 @@
 
 #include <algorithm>
 
-const vector<string>& ModelEditor::getLoadedIds()
+const vector<string>& ModelEditor::getLoadedEntityIds()
 {
-	sort(_loadedModelIds.begin(), _loadedModelIds.end());
-	return _loadedModelIds;
+	return _loadedEntityIds;
 }

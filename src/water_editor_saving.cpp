@@ -22,7 +22,7 @@ const bool WaterEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\water.fe3d");
 
-	for(const auto& waterId : _loadedWaterIds)
+	for(const auto& waterId : _loadedEntityIds)
 	{
 		auto dudvMapPath = _fe3d->water_getDudvMapPath(waterId);
 		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);

@@ -2,8 +2,7 @@
 
 #include <algorithm>
 
-const vector<string>& WaterEditor::getLoadedIds()
+const vector<string>& WaterEditor::getLoadedEntityIds()
 {
-	sort(_loadedWaterIds.begin(), _loadedWaterIds.end());
-	return _loadedWaterIds;
+	return _loadedEntityIds;
 }

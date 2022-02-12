@@ -15,14 +15,14 @@ void Quad2dEditor::_load()
 
 void Quad2dEditor::_unload()
 {
-	for(const auto& id : _loadedQuadIds)
+	for(const auto& id : _loadedEntityIds)
 	{
 		_fe3d->quad2d_delete(id);
 	}
 
 	_gui->getOverlay()->deleteTextField("quadId");
 
-	_loadedQuadIds.clear();
+	_loadedEntityIds.clear();
 	_currentQuadId = "";
 	_hoveredQuadId = "";
 	_isCreatingQuad = false;

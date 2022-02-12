@@ -78,7 +78,7 @@ const bool Text3dEditor::loadFromFile()
 		abort();
 	}
 
-	_loadedTextIds.clear();
+	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -139,7 +139,8 @@ const bool Text3dEditor::loadFromFile()
 
 		if(_fe3d->text3d_isExisting(textId))
 		{
-			_loadedTextIds.push_back(textId);
+			_loadedEntityIds.push_back(textId);
+			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 			_fe3d->text3d_setVisible(textId, false);
 			_fe3d->text3d_setSize(textId, size);

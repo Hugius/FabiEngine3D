@@ -52,7 +52,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& quadId : _quad3dEditor->getLoadedIds())
+			for(const auto& quadId : _quad3dEditor->getLoadedEntityIds())
 			{
 				if(_fe3d->quad3d_isExisting(quadId))
 				{

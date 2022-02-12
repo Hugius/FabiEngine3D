@@ -4,8 +4,7 @@
 
 using std::min;
 
-void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex,
-									   unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged)
+void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex, unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged)
 {
 	bool isControlKeyDown = (_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL));
 
@@ -17,11 +16,11 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 		   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_V)) ||
 		   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_X)))
 		{
-			for(const auto& id : _fe3d->text3d_getIds())
+			for(const auto& id : _fe3d->quad3d_getIds())
 			{
 				if(id.substr(0, string("selection_").size()) == "selection_")
 				{
-					_fe3d->text3d_delete(id);
+					_fe3d->quad3d_delete(id);
 				}
 			}
 
@@ -90,7 +89,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			string selectionId = ("selection_" + to_string(hoveredLineIndex));
 			string textId = ("text_" + to_string(hoveredLineIndex));
 
-			if(!_fe3d->text3d_isExisting(selectionId) && _fe3d->text3d_isExisting(textId))
+			if(!_fe3d->quad3d_isExisting(selectionId) && _fe3d->text3d_isExisting(textId))
 			{
 				if(_fe3d->text3d_getContent(textId).empty())
 				{
@@ -124,10 +123,9 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					int lastDirection = _firstSelectedLineIndex - _lastSelectedLineIndex;
 					int currentDirection = _lastSelectedLineIndex - hoveredLineIndex;
 
-					if((lastDirection < 0 && currentDirection > 0) ||
-					   (currentDirection < 0 && lastDirection > 0))
+					if((lastDirection < 0 && currentDirection > 0) || (currentDirection < 0 && lastDirection > 0))
 					{
-						_fe3d->text3d_delete("selection_" + to_string(_lastSelectedLineIndex));
+						_fe3d->quad3d_delete("selection_" + to_string(_lastSelectedLineIndex));
 					}
 				}
 

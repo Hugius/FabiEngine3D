@@ -1,5 +1,5 @@
 #include "script_editor.hpp"
-
+#include <iostream>
 #include <windows.h>
 
 void ScriptEditor::_updateTextWriter()
@@ -399,6 +399,7 @@ void ScriptEditor::_updateTextWriter()
 		{
 			_fe3d->text3d_create("cursor", FONT_MAP_PATH, false);
 			_fe3d->text3d_setSize("cursor", TEXT_CHARACTER_SIZE);
+			_fe3d->text3d_setMinTextureAlpha("cursor", 0.15f);
 		}
 
 		fvec3 position;

@@ -34,7 +34,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			fvec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
 		_fe3d->text3d_create(lineNumberId, FONT_MAP_PATH, false);
-		_fe3d->text3d_setMinTextureAlpha(lineNumberId, 0.0f);
+		_fe3d->text3d_setMinTextureAlpha(lineNumberId, 0.05f);
 		_fe3d->text3d_setContent(lineNumberId, lineNumberString);
 		_fe3d->text3d_setPosition(lineNumberId, (lineNumberPosition - fvec3(0.0f, (lineNumberSize.y * 0.5f), 0.0f)));
 		_fe3d->text3d_setSize(lineNumberId, lineNumberSize);
@@ -52,7 +52,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		iss >> noWhiteSpace;
 		const auto isComment = (noWhiteSpace.substr(0, 3) == "///");
 		_fe3d->text3d_create(lineTextId, FONT_MAP_PATH, false);
-		_fe3d->text3d_setMinTextureAlpha(lineTextId, 0.0f);
+		_fe3d->text3d_setMinTextureAlpha(lineTextId, 0.05f);
 		_fe3d->text3d_setContent(lineTextId, lineTextString);
 		_fe3d->text3d_setPosition(lineTextId, (lineTextPosition - fvec3(0.0f, (lineTextSize.y * 0.5f), 0.0f)));
 		_fe3d->text3d_setSize(lineTextId, lineTextSize);

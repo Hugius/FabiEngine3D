@@ -100,7 +100,7 @@ void WorldEditor::_updateMiscellaneous()
 				_fe3d->model_setWireframed(modelId, partId, _isWireframeModeEnabled);
 			}
 
-			for(const auto& aabbId : _fe3d->aabb_getChildIds(modelId, AabbParentEntityType::MODEL))
+			for(const auto& aabbId : _fe3d->model_getChildAabbIds(modelId))
 			{
 				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 			}
@@ -110,7 +110,7 @@ void WorldEditor::_updateMiscellaneous()
 		{
 			_fe3d->quad3d_setWireframed(quadId, _isWireframeModeEnabled);
 
-			for(const auto& aabbId : _fe3d->aabb_getChildIds(quadId, AabbParentEntityType::QUAD3D))
+			for(const auto& aabbId : _fe3d->quad3d_getChildAabbIds(quadId))
 			{
 				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 			}
@@ -120,7 +120,7 @@ void WorldEditor::_updateMiscellaneous()
 		{
 			_fe3d->text3d_setWireframed(textId, _isWireframeModeEnabled);
 
-			for(const auto& aabbId : _fe3d->aabb_getChildIds(textId, AabbParentEntityType::TEXT3D))
+			for(const auto& aabbId : _fe3d->text3d_getChildAabbIds(textId))
 			{
 				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 			}

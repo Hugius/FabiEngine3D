@@ -451,7 +451,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->aabb_getChildIds(args[0]->getString(), AabbParentEntityType::MODEL);
+				auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
 
 				if(aabbIds.empty())
 				{
@@ -476,7 +476,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->aabb_getChildIds(args[0]->getString(), AabbParentEntityType::MODEL);
+				auto aabbIds = _fe3d->model_getChildAabbIds(args[0]->getString());
 
 				if(aabbIds.empty())
 				{

@@ -258,8 +258,9 @@ public:
 	void model_setBright(const string& modelId, const string& partId, bool value);
 	void model_setRotationOrder(const string& id, DirectionOrder value);
 
-	const vector<string> model_getPartIds(const string& id) const;
 	const vector<string> model_getIds() const;
+	const vector<string> model_getPartIds(const string& id) const;
+	const vector<string> model_getChildAabbIds(const string& id);
 	const string& model_getMeshPath(const string& id) const;
 	const string& model_getDiffuseMapPath(const string& modelId, const string& partId) const;
 	const string& model_getEmissionMapPath(const string& modelId, const string& partId) const;
@@ -355,6 +356,7 @@ public:
 
 	const vector<string> quad3d_getIds() const;
 	const vector<string> quad3d_getAnimationIds(const string& id) const;
+	const vector<string> quad3d_getChildAabbIds(const string& id) const;
 	const string& quad3d_getDiffuseMapPath(const string& id) const;
 	const string& quad3d_getEmissionMapPath(const string& id) const;
 	const fvec3& quad3d_getPosition(const string& id) const;
@@ -423,6 +425,7 @@ public:
 	void text3d_setFrozen(const string& id, bool value);
 
 	const vector<string> text3d_getIds() const;
+	const vector<string> text3d_getChildAabbIds(const string& id) const;
 	const string& text3d_getFontMapPath(const string& id) const;
 	const string& text3d_getContent(const string& id) const;
 	const fvec3& text3d_getPosition(const string& id) const;
@@ -571,7 +574,6 @@ public:
 	void aabb_moveTo(const string& id, const fvec3& target, float speed);
 	void aabb_scaleTo(const string& id, const fvec3& target, float speed);
 
-	const vector<string> aabb_getChildIds(const string& parentId, AabbParentEntityType parentEntityType) const;
 	const vector<string> aabb_getIds() const;
 	const string& aabb_getParentEntityId(const string& id) const;
 	const fvec3& aabb_getPosition(const string& id) const;

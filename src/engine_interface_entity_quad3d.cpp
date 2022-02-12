@@ -16,16 +16,25 @@ void EngineInterface::quad3d_deleteAll()
 
 void EngineInterface::quad3d_delete(const string& id)
 {
-	for(const auto& aabbId : aabb_getChildIds(id, AabbParentEntityType::QUAD3D))
-	{
-		_core->getAabbEntityManager()->deleteEntity(aabbId);
-	}
-
 	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
 	{
 		if(id == quadId)
 		{
 			_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
+		}
+	}
+
+	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
+	{
+		if(entity->hasParent())
+		{
+			if(id == entity->getParentEntityId())
+			{
+				if(entity->getParentEntityType() == AabbParentEntityType::QUAD3D)
+				{
+					_core->getAabbEntityManager()->deleteEntity(key);
+				}
+			}
 		}
 	}
 
@@ -398,6 +407,27 @@ const vector<string> EngineInterface::quad3d_getAnimationIds(const string& id) c
 		if(id == quadId)
 		{
 			result.push_back(animationId);
+		}
+	}
+
+	return result;
+}
+
+const vector<string> EngineInterface::quad3d_getChildAabbIds(const string& id) const
+{
+	vector<string> result;
+
+	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
+	{
+		if(entity->hasParent())
+		{
+			if(id == entity->getParentEntityId())
+			{
+				if(entity->getParentEntityType() == AabbParentEntityType::QUAD3D)
+				{
+					result.push_back(entity->getId());
+				}
+			}
 		}
 	}
 

@@ -306,7 +306,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->aabb_getChildIds(args[0]->getString(), AabbParentEntityType::TEXT3D);
+				auto aabbIds = _fe3d->text3d_getChildAabbIds(args[0]->getString());
 
 				if(aabbIds.empty())
 				{
@@ -331,7 +331,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string& functionNam
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
-				auto aabbIds = _fe3d->aabb_getChildIds(args[0]->getString(), AabbParentEntityType::TEXT3D);
+				auto aabbIds = _fe3d->text3d_getChildAabbIds(args[0]->getString());
 
 				if(aabbIds.empty())
 				{

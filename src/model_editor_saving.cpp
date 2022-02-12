@@ -27,7 +27,7 @@ const bool ModelEditor::saveToFile() const
 	for(const auto& modelId : _loadedModelIds)
 	{
 		auto partIds = _fe3d->model_getPartIds(modelId);
-		auto aabbIds = _fe3d->aabb_getChildIds(modelId, AabbParentEntityType::MODEL);
+		auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
 		auto isMultiParted = _fe3d->model_isMultiParted(modelId);
 		auto meshPath = _fe3d->model_getMeshPath(modelId);
 		auto modelSize = _fe3d->model_getBaseSize(modelId);

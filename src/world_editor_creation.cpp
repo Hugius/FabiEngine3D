@@ -191,7 +191,7 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 		}
 	}
 
-	for(const auto& templateAabbId : _fe3d->aabb_getChildIds(templateId, AabbParentEntityType::MODEL))
+	for(const auto& templateAabbId : _fe3d->model_getChildAabbIds(templateId))
 	{
 		const string newAabbId = (newId + "@" + templateAabbId.substr((templateId + "_").size()));
 		_fe3d->aabb_create(newAabbId, false);

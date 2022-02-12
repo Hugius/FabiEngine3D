@@ -21,9 +21,18 @@ void EngineInterface::text3d_setContent(const string& id, const string& value)
 
 void EngineInterface::text3d_delete(const string& id)
 {
-	for(const auto& aabbId : aabb_getChildIds(id, AabbParentEntityType::TEXT3D))
+	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
-		_core->getAabbEntityManager()->deleteEntity(aabbId);
+		if(entity->hasParent())
+		{
+			if(id == entity->getParentEntityId())
+			{
+				if(entity->getParentEntityType() == AabbParentEntityType::TEXT3D)
+				{
+					_core->getAabbEntityManager()->deleteEntity(key);
+				}
+			}
+		}
 	}
 
 	_core->getText3dEntityManager()->deleteEntity(id);
@@ -231,6 +240,27 @@ const vector<string> EngineInterface::text3d_getIds() const
 	for(const auto& [key, entity] : _core->getText3dEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
+	}
+
+	return result;
+}
+
+const vector<string> EngineInterface::text3d_getChildAabbIds(const string& id) const
+{
+	vector<string> result;
+
+	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
+	{
+		if(entity->hasParent())
+		{
+			if(id == entity->getParentEntityId())
+			{
+				if(entity->getParentEntityType() == AabbParentEntityType::TEXT3D)
+				{
+					result.push_back(entity->getId());
+				}
+			}
+		}
 	}
 
 	return result;

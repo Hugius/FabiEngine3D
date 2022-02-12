@@ -21,7 +21,7 @@ void ModelEditor::_updateMainAabbMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _fe3d->aabb_getChildIds(_currentModelId, AabbParentEntityType::MODEL);
+			auto ids = _fe3d->model_getChildAabbIds(_currentModelId);
 			for(auto& id : ids)
 			{
 				id = id.substr((_currentModelId + "@").size());
@@ -32,7 +32,7 @@ void ModelEditor::_updateMainAabbMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _fe3d->aabb_getChildIds(_currentModelId, AabbParentEntityType::MODEL);
+			auto ids = _fe3d->model_getChildAabbIds(_currentModelId);
 			for(auto& id : ids)
 			{
 				id = id.substr((_currentModelId + "@").size());

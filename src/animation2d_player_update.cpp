@@ -17,15 +17,15 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 
 		if(!startedAnimation->isPaused())
 		{
-			if(startedAnimation->getPassedCycles() == (animation->getInterval() / startedAnimation->getIntervalDivider()))
+			if(startedAnimation->getCycleCount() == static_cast<unsigned int>(animation->getInterval() / startedAnimation->getIntervalDivider()))
 			{
-				startedAnimation->setPassedCycles(0);
+				startedAnimation->setCycleCount(0);
 
-				if(startedAnimation->getColumnIndex() == (animation->getColumnCount() - 1))
+				if(startedAnimation->getColumnIndex() >= (animation->getColumnCount() - 1))
 				{
 					startedAnimation->setColumnIndex(0);
 
-					if(startedAnimation->getRowIndex() == (animation->getRowCount() - 1))
+					if(startedAnimation->getRowIndex() >= (animation->getRowCount() - 1))
 					{
 						startedAnimation->setRowIndex(0);
 
@@ -51,7 +51,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 			}
 			else
 			{
-				startedAnimation->setPassedCycles(startedAnimation->getPassedCycles() + 1);
+				startedAnimation->setCycleCount(startedAnimation->getCycleCount() + 1);
 			}
 
 			if(startedAnimation->isAutopaused())
@@ -86,15 +86,15 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 
 		if(!startedAnimation->isPaused())
 		{
-			if(startedAnimation->getPassedCycles() == (animation->getInterval() / startedAnimation->getIntervalDivider()))
+			if(startedAnimation->getCycleCount() == static_cast<unsigned int>(animation->getInterval() / startedAnimation->getIntervalDivider()))
 			{
-				startedAnimation->setPassedCycles(0);
+				startedAnimation->setCycleCount(0);
 
-				if(startedAnimation->getColumnIndex() == (animation->getColumnCount() - 1))
+				if(startedAnimation->getColumnIndex() >= (animation->getColumnCount() - 1))
 				{
 					startedAnimation->setColumnIndex(0);
 
-					if(startedAnimation->getRowIndex() == (animation->getRowCount() - 1))
+					if(startedAnimation->getRowIndex() >= (animation->getRowCount() - 1))
 					{
 						startedAnimation->setRowIndex(0);
 
@@ -120,7 +120,7 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 			}
 			else
 			{
-				startedAnimation->setPassedCycles(startedAnimation->getPassedCycles() + 1);
+				startedAnimation->setCycleCount(startedAnimation->getCycleCount() + 1);
 			}
 		}
 

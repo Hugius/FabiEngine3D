@@ -25,9 +25,9 @@ const int StartedAnimation2d::getPlayCount() const
 	return _playCount;
 }
 
-const unsigned int StartedAnimation2d::getPassedCycles() const
+const unsigned int StartedAnimation2d::getCycleCount() const
 {
-	return _passedCycles;
+	return _cycleCount;
 }
 
 const unsigned int StartedAnimation2d::getRowIndex() const
@@ -80,9 +80,9 @@ void StartedAnimation2d::setColumnIndex(unsigned int value)
 	_columnIndex = value;
 }
 
-void StartedAnimation2d::setPassedCycles(unsigned int value)
+void StartedAnimation2d::setCycleCount(unsigned int value)
 {
-	_passedCycles = value;
+	_cycleCount = value;
 }
 
 void StartedAnimation2d::setIntervalDivider(unsigned int value)

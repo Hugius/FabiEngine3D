@@ -246,12 +246,6 @@
     <ClCompile Include="..\..\..\src\script_interpreter_execution.cpp">
       <Filter>Interpreter\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation2d_set.cpp">
-      <Filter>Interpreter\Function\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation2d_get.cpp">
-      <Filter>Interpreter\Function\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_validation.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>

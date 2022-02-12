@@ -14,7 +14,7 @@ public:
 	void setAutopaused(bool value);
 	void setRowIndex(unsigned int value);
 	void setColumnIndex(unsigned int value);
-	void setPassedCycles(unsigned int value);
+	void setCycleCount(unsigned int value);
 	void setIntervalDivider(unsigned int value);
 
 	const string& getAnimationId() const;
@@ -22,7 +22,7 @@ public:
 
 	const int getPlayCount() const;
 
-	const unsigned int getPassedCycles() const;
+	const unsigned int getCycleCount() const;
 	const unsigned int getRowIndex() const;
 	const unsigned int getColumnIndex() const;
 	const unsigned int getIntervalDivider() const;
@@ -38,7 +38,7 @@ private:
 
 	unsigned int _rowIndex = 0;
 	unsigned int _columnIndex = 0;
-	unsigned int _passedCycles = 0;
+	unsigned int _cycleCount = 0;
 	unsigned int _intervalDivider = 1;
 
 	bool _isPaused = false;

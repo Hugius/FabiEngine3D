@@ -23,7 +23,6 @@ public:
 	void setTotalRotation(const string& partId, const fvec3& value);
 	void setTotalScaling(const string& partId, const fvec3& value);
 	void setTotalSpeed(const string& partId, const fvec3& value);
-	void setInitialSize(const fvec3& value);
 
 	const vector<string>& getPartIds() const;
 	const string& getAnimationId() const;
@@ -33,7 +32,6 @@ public:
 	const fvec3& getTotalRotation(const string& partId) const;
 	const fvec3& getTotalScaling(const string& partId) const;
 	const fvec3& getTotalSpeed(const string& partId) const;
-	const fvec3& getInitialSize() const;
 
 	const int getPlayCount() const;
 
@@ -54,7 +52,6 @@ private:
 	map<string, fvec3> _totalRotations;
 	map<string, fvec3> _totalScalings;
 	map<string, fvec3> _totalSpeeds;
-	fvec3 _initialSize = fvec3(0.0f);
 
 	int _playCount = 0;
 

@@ -54,6 +54,7 @@ void StartedAnimation3d::setPartIds(const vector<string>& value)
 		_totalMovements.insert(make_pair(partId, fvec3(0.0f)));
 		_totalRotations.insert(make_pair(partId, fvec3(0.0f)));
 		_totalScalings.insert(make_pair(partId, fvec3(0.0f)));
+		_totalSpeeds.insert(make_pair(partId, fvec3(0.0f)));
 	}
 }
 
@@ -102,11 +103,6 @@ void StartedAnimation3d::setTotalSpeed(const string& partId, const fvec3& value)
 	_totalSpeeds.at(partId) = value;
 }
 
-void StartedAnimation3d::setInitialSize(const fvec3& value)
-{
-	_initialSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-}
-
 const fvec3& StartedAnimation3d::getTotalMovement(const string& partId) const
 {
 	return _totalMovements.at(partId);
@@ -125,11 +121,6 @@ const fvec3& StartedAnimation3d::getTotalScaling(const string& partId) const
 const fvec3& StartedAnimation3d::getTotalSpeed(const string& partId) const
 {
 	return _totalSpeeds.at(partId);
-}
-
-const fvec3& StartedAnimation3d::getInitialSize() const
-{
-	return _initialSize;
 }
 
 const vector<string>& StartedAnimation3d::getPartIds() const

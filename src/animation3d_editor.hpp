@@ -34,8 +34,6 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	const bool _comparePartIds(vector<string> first, vector<string> second) const;
-
 	vector<string> _loadedAnimationIds;
 	string _currentAnimationId = "";
 	string _currentPartId = "";

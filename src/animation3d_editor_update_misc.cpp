@@ -298,7 +298,7 @@ void Animation3dEditor::_updateModelChoosing()
 				{
 					if(!partId.empty())
 					{
-						hasAllParts = hasAllParts && _fe3d->model_hasPart(_hoveredModelId, partId);
+						hasAllParts = (hasAllParts && _fe3d->model_hasPart(_hoveredModelId, partId));
 					}
 				}
 
@@ -313,6 +313,8 @@ void Animation3dEditor::_updateModelChoosing()
 
 				if(_fe3d->animation3d_getFrameCount(_currentAnimationId) == 0)
 				{
+					_fe3d->animation3d_createPart(_currentAnimationId, "");
+
 					for(const auto& partId : _fe3d->model_getPartIds(_previewModelId))
 					{
 						_fe3d->animation3d_createPart(_currentAnimationId, partId);

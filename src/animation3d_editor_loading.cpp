@@ -49,22 +49,24 @@ const bool Animation3dEditor::loadFromFile()
 		{
 			string partId;
 
+			iss >> partId;
+
 			if(partId == "?")
 			{
 				partId = "";
 			}
 
-			iss >> partId;
-
 			_fe3d->animation3d_createPart(animationId, partId);
 		}
 
+		const auto partIds = _fe3d->animation3d_getPartIds(animationId);
+
 		for(unsigned int frameIndex = 0; frameIndex < frameCount; frameIndex++)
 		{
+			_fe3d->animation3d_createFrame(animationId, frameIndex);
+
 			for(unsigned int partIndex = 0; partIndex < partCount; partIndex++)
 			{
-				const auto partIds = _fe3d->animation3d_getPartIds(animationId);
-
 				fvec3 targetTransformation;
 				fvec3 rotationOrigin;
 				fvec3 speed;
@@ -84,7 +86,6 @@ const bool Animation3dEditor::loadFromFile()
 					>> speedType
 					>> transformationType;
 
-				_fe3d->animation3d_createFrame(animationId, 1);
 				_fe3d->animation3d_setTargetTransformation(animationId, frameIndex, partIds[partIndex], targetTransformation);
 				_fe3d->animation3d_setRotationOrigin(animationId, frameIndex, partIds[partIndex], rotationOrigin);
 				_fe3d->animation3d_setSpeed(animationId, frameIndex, partIds[partIndex], speed);

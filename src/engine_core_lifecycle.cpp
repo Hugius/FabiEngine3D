@@ -296,7 +296,7 @@ void EngineCore::update()
 	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("animationUpdate");
-	//_animation3dPlayer->update();
+	_animation3dPlayer->update();
 	_animation2dPlayer->update();
 	_timer->stopDeltaPart();
 

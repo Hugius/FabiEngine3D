@@ -36,39 +36,35 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 			const auto isMovement = (transformationType == TransformationType::MOVEMENT);
 			const auto isRotation = (transformationType == TransformationType::ROTATION);
 			const auto isScaling = (transformationType == TransformationType::SCALING);
-			const auto speedMultiplier = (partId.empty() || (isMovement || isScaling)) ? startedAnimation->getInitialSize() : fvec3(1.0f);
 			const auto speedType = animation->getSpeedType(startedAnimation->getFrameIndex(), partId);
 			const auto rotationOrigin = animation->getRotationOrigin(startedAnimation->getFrameIndex(), partId);
 			const auto speed = (animation->getSpeed(startedAnimation->getFrameIndex(), partId) * startedAnimation->getSpeedMultiplier());
-			const auto xSpeed = (!isRotation ? (speedMultiplier.x * speed.x) : speed.x);
-			const auto ySpeed = (!isRotation ? (speedMultiplier.y * speed.y) : speed.y);
-			const auto zSpeed = (!isRotation ? (speedMultiplier.z * speed.z) : speed.z);
-			const auto targetMovement = (startedAnimation->getInitialSize() * animation->getTargetTransformation(startedAnimation->getFrameIndex(), partId));
+			const auto targetMovement = animation->getTargetTransformation(startedAnimation->getFrameIndex(), partId);
 			const auto targetRotation = animation->getTargetTransformation(startedAnimation->getFrameIndex(), partId);
-			const auto targetScaling = ((partId.empty() ? startedAnimation->getInitialSize() : fvec3(1.0f)) * animation->getTargetTransformation(startedAnimation->getFrameIndex(), partId));
+			const auto targetScaling = animation->getTargetTransformation(startedAnimation->getFrameIndex(), partId);
 			const auto targetTransformation = (isMovement ? targetMovement : isRotation ? targetRotation : targetScaling);
 
-			if(((isMovement && _hasReachedTarget(totalMovement.x, targetTransformation.x, xSpeed)) &&
-			   (isMovement && _hasReachedTarget(totalMovement.y, targetTransformation.y, xSpeed)) &&
-			   (isMovement && _hasReachedTarget(totalMovement.z, targetTransformation.z, xSpeed)))
+			if(((isMovement && _hasReachedTarget(totalMovement.x, targetTransformation.x, speed.x)) &&
+			   (isMovement && _hasReachedTarget(totalMovement.y, targetTransformation.y, speed.x)) &&
+			   (isMovement && _hasReachedTarget(totalMovement.z, targetTransformation.z, speed.x)))
 			   ||
-			   ((isRotation && _hasReachedTarget(totalRotation.x, targetTransformation.x, ySpeed)) &&
-			   (isRotation && _hasReachedTarget(totalRotation.y, targetTransformation.y, ySpeed)) &&
-			   (isRotation && _hasReachedTarget(totalRotation.z, targetTransformation.z, ySpeed)))
+			   ((isRotation && _hasReachedTarget(totalRotation.x, targetTransformation.x, speed.y)) &&
+			   (isRotation && _hasReachedTarget(totalRotation.y, targetTransformation.y, speed.y)) &&
+			   (isRotation && _hasReachedTarget(totalRotation.z, targetTransformation.z, speed.y)))
 			   ||
-			   ((isScaling && _hasReachedTarget(totalScaling.x, targetTransformation.x, zSpeed)) &&
-			   (isScaling && _hasReachedTarget(totalScaling.y, targetTransformation.y, zSpeed)) &&
-			   (isScaling && _hasReachedTarget(totalScaling.z, targetTransformation.z, zSpeed))))
+			   ((isScaling && _hasReachedTarget(totalScaling.x, targetTransformation.x, speed.z)) &&
+			   (isScaling && _hasReachedTarget(totalScaling.y, targetTransformation.y, speed.z)) &&
+			   (isScaling && _hasReachedTarget(totalScaling.z, targetTransformation.z, speed.z))))
 			{
 				finishedPartCount++;
 			}
 			else
 			{
-				if((isMovement && !_hasReachedTarget(totalMovement.x, targetTransformation.x, xSpeed)) ||
-				   (isRotation && !_hasReachedTarget(totalRotation.x, targetTransformation.x, xSpeed)) ||
-				   (isScaling && !_hasReachedTarget(totalScaling.x, targetTransformation.x, xSpeed)))
+				if((isMovement && !_hasReachedTarget(totalMovement.x, targetTransformation.x, speed.x)) ||
+				   (isRotation && !_hasReachedTarget(totalRotation.x, targetTransformation.x, speed.x)) ||
+				   (isScaling && !_hasReachedTarget(totalScaling.x, targetTransformation.x, speed.x)))
 				{
-					float finalSpeed = xSpeed;
+					float finalSpeed = speed.x;
 
 					if(transformationType == TransformationType::MOVEMENT)
 					{
@@ -104,9 +100,9 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 					}
 
 					float difference = 0.0f;
-					if((isMovement && _hasReachedTarget(totalMovement.x, targetTransformation.x, xSpeed)) ||
-					   (isRotation && _hasReachedTarget(totalRotation.x, targetTransformation.x, xSpeed)) ||
-					   (isScaling && _hasReachedTarget(totalScaling.x, targetTransformation.x, xSpeed)))
+					if((isMovement && _hasReachedTarget(totalMovement.x, targetTransformation.x, speed.x)) ||
+					   (isRotation && _hasReachedTarget(totalRotation.x, targetTransformation.x, speed.x)) ||
+					   (isScaling && _hasReachedTarget(totalScaling.x, targetTransformation.x, speed.x)))
 					{
 						if(transformationType == TransformationType::MOVEMENT)
 						{
@@ -162,11 +158,11 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 					}
 				}
 
-				if((isMovement && !_hasReachedTarget(totalMovement.y, targetTransformation.y, ySpeed)) ||
-				   (isRotation && !_hasReachedTarget(totalRotation.y, targetTransformation.y, ySpeed)) ||
-				   (isScaling && !_hasReachedTarget(totalScaling.y, targetTransformation.y, ySpeed)))
+				if((isMovement && !_hasReachedTarget(totalMovement.y, targetTransformation.y, speed.y)) ||
+				   (isRotation && !_hasReachedTarget(totalRotation.y, targetTransformation.y, speed.y)) ||
+				   (isScaling && !_hasReachedTarget(totalScaling.y, targetTransformation.y, speed.y)))
 				{
-					float finalSpeed = ySpeed;
+					float finalSpeed = speed.y;
 
 					if(transformationType == TransformationType::MOVEMENT)
 					{
@@ -202,9 +198,9 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 					}
 
 					float difference = 0.0f;
-					if((isMovement && _hasReachedTarget(totalMovement.y, targetTransformation.y, ySpeed)) ||
-					   (isRotation && _hasReachedTarget(totalRotation.y, targetTransformation.y, ySpeed)) ||
-					   (isScaling && _hasReachedTarget(totalScaling.y, targetTransformation.y, ySpeed)))
+					if((isMovement && _hasReachedTarget(totalMovement.y, targetTransformation.y, speed.y)) ||
+					   (isRotation && _hasReachedTarget(totalRotation.y, targetTransformation.y, speed.y)) ||
+					   (isScaling && _hasReachedTarget(totalScaling.y, targetTransformation.y, speed.y)))
 					{
 						if(transformationType == TransformationType::MOVEMENT)
 						{
@@ -260,11 +256,11 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 					}
 				}
 
-				if((isMovement && !_hasReachedTarget(totalMovement.z, targetTransformation.z, zSpeed)) ||
-				   (isRotation && !_hasReachedTarget(totalRotation.z, targetTransformation.z, zSpeed)) ||
-				   (isScaling && !_hasReachedTarget(totalScaling.z, targetTransformation.z, zSpeed)))
+				if((isMovement && !_hasReachedTarget(totalMovement.z, targetTransformation.z, speed.z)) ||
+				   (isRotation && !_hasReachedTarget(totalRotation.z, targetTransformation.z, speed.z)) ||
+				   (isScaling && !_hasReachedTarget(totalScaling.z, targetTransformation.z, speed.z)))
 				{
-					float finalSpeed = zSpeed;
+					float finalSpeed = speed.z;
 
 					if(transformationType == TransformationType::MOVEMENT)
 					{
@@ -373,7 +369,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 				startedAnimation->setPaused(true);
 			}
 
-			if(startedAnimation->getFrameIndex() == (static_cast<unsigned int>(animation->getFrameCount()) - 1))
+			if(startedAnimation->getFrameIndex() == (animation->getFrameCount() - unsigned int(1)))
 			{
 				startedAnimation->setFrameIndex(0);
 

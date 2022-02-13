@@ -167,7 +167,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				_fe3d->animation3d_setTargetTransformation(_currentAnimationId, _currentFrameIndex, partId, targetTransformation);
 				_fe3d->animation3d_setRotationOrigin(_currentAnimationId, _currentFrameIndex, partId, rotationOrigin);
 				_fe3d->animation3d_setSpeed(_currentAnimationId, _currentFrameIndex, partId, speed);
-				_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, partId, Animation3dSpeedType(speedType));
+				_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, partId, SpeedType(speedType));
 				_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, partId, TransformationType(transformationType));
 			}
 		}

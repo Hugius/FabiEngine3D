@@ -69,17 +69,17 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speedType")->isHovered())
 		{
-			if(speedType == Animation3dSpeedType::LINEAR)
+			if(speedType == SpeedType::LINEAR)
 			{
-				speedType = Animation3dSpeedType::EXPONENTIAL;
+				speedType = SpeedType::EXPONENTIAL;
 			}
-			else if(speedType == Animation3dSpeedType::EXPONENTIAL)
+			else if(speedType == SpeedType::EXPONENTIAL)
 			{
-				speedType = Animation3dSpeedType::INSTANTLY;
+				speedType = SpeedType::INSTANTLY;
 			}
 			else
 			{
-				speedType = Animation3dSpeedType::LINEAR;
+				speedType = SpeedType::LINEAR;
 			}
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())
@@ -169,17 +169,17 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		switch(speedType)
 		{
-			case Animation3dSpeedType::LINEAR:
+			case SpeedType::LINEAR:
 			{
 				screen->getButton("speedType")->changeTextContent("Type: LINEAR");
 				break;
 			}
-			case Animation3dSpeedType::EXPONENTIAL:
+			case SpeedType::EXPONENTIAL:
 			{
 				screen->getButton("speedType")->changeTextContent("Type: EXPONENT");
 				break;
 			}
-			case Animation3dSpeedType::INSTANTLY:
+			case SpeedType::INSTANTLY:
 			{
 				screen->getButton("speedType")->changeTextContent("Type: INSTANT");
 				break;

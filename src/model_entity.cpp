@@ -5,18 +5,21 @@
 
 using std::max;
 using std::clamp;
+using std::make_unique;
 
 void ModelEntity::createPart(const string& id)
 {
-	for(const auto& part : _parts)
-	{
-		if(id == part.id)
-		{
-			abort();
-		}
-	}
+	_parts.insert(make_pair(id, make_unique<ModelEntityPart>()));
+}
 
-	_parts.push_back(ModelEntityPart(id));
+void ModelEntity::deletePart(const string& id)
+{
+	_parts.erase(id);
+}
+
+void ModelEntity::deleteParts()
+{
+	_parts.clear();
 }
 
 void ModelEntity::updateTarget()
@@ -49,112 +52,112 @@ void ModelEntity::updateTarget()
 		_correctSizeTarget(_baseSize, _baseSizeTarget, _baseSizeTargetSpeed);
 	}
 
-	for(auto& part : _parts)
+	for(auto& [key, part] : _parts)
 	{
-		if(part.position != part.positionTarget)
+		if(part->position != part->positionTarget)
 		{
-			auto speedMultiplier = Math::normalize(part.positionTarget - part.position);
-			part.position += (speedMultiplier * part.positionTargetSpeed);
-			_correctPositionTarget(part.position, part.positionTarget, part.positionTargetSpeed);
+			auto speedMultiplier = Math::normalize(part->positionTarget - part->position);
+			part->position += (speedMultiplier * part->positionTargetSpeed);
+			_correctPositionTarget(part->position, part->positionTarget, part->positionTargetSpeed);
 		}
 
-		if(part.rotation != part.rotationTarget)
+		if(part->rotation != part->rotationTarget)
 		{
-			auto difference = Math::calculateDifference(part.rotation, part.rotationTarget);
+			auto difference = Math::calculateDifference(part->rotation, part->rotationTarget);
 			fvec3 multiplier = fvec3(
 				((difference.x < 180.0f) ? 1.0f : -1.0f),
 				((difference.y < 180.0f) ? 1.0f : -1.0f),
 				((difference.z < 180.0f) ? 1.0f : -1.0f));
-			fvec3 speed = (fvec3(part.rotationTargetSpeed) * multiplier);
-			fvec3 rotation = part.rotation;
-			fvec3 target = part.rotationTarget;
-			part.rotation.x += ((rotation.x < target.x) ? speed.x : (rotation.x > target.x) ? -speed.x : 0.0f);
-			part.rotation.y += ((rotation.y < target.y) ? speed.y : (rotation.y > target.y) ? -speed.y : 0.0f);
-			part.rotation.z += ((rotation.z < target.z) ? speed.z : (rotation.z > target.z) ? -speed.z : 0.0f);
-			_correctRotationTarget(part.rotation, part.rotationTarget, part.rotationTargetSpeed);
+			fvec3 speed = (fvec3(part->rotationTargetSpeed) * multiplier);
+			fvec3 rotation = part->rotation;
+			fvec3 target = part->rotationTarget;
+			part->rotation.x += ((rotation.x < target.x) ? speed.x : (rotation.x > target.x) ? -speed.x : 0.0f);
+			part->rotation.y += ((rotation.y < target.y) ? speed.y : (rotation.y > target.y) ? -speed.y : 0.0f);
+			part->rotation.z += ((rotation.z < target.z) ? speed.z : (rotation.z > target.z) ? -speed.z : 0.0f);
+			_correctRotationTarget(part->rotation, part->rotationTarget, part->rotationTargetSpeed);
 		}
 
-		if(part.size != part.sizeTarget)
+		if(part->size != part->sizeTarget)
 		{
-			auto speedMultiplier = Math::normalize(part.sizeTarget - part.size);
-			part.size += (speedMultiplier * part.sizeTargetSpeed);
-			_correctSizeTarget(part.size, part.sizeTarget, part.sizeTargetSpeed);
+			auto speedMultiplier = Math::normalize(part->sizeTarget - part->size);
+			part->size += (speedMultiplier * part->sizeTargetSpeed);
+			_correctSizeTarget(part->size, part->sizeTarget, part->sizeTargetSpeed);
 		}
 	}
 }
 
 void ModelEntity::updateTransformation()
 {
-	for(size_t i = 0; i < _parts.size(); i++)
+	for(auto& [key, part] : _parts)
 	{
-		_parts[i].transformation = mat44(1.0f);
+		part->transformation = mat44(1.0f);
 
 		auto baseTranslationMatrix = Math::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
-		_parts[i].transformation = (_parts[i].transformation * baseTranslationMatrix);
+		part->transformation = (part->transformation * baseTranslationMatrix);
 
-		auto translationMatrix = Math::createTranslationMatrix(_parts[i].position.x, _parts[i].position.y, _parts[i].position.z);
-		_parts[i].transformation = (_parts[i].transformation * translationMatrix);
+		auto translationMatrix = Math::createTranslationMatrix(part->position.x, part->position.y, part->position.z);
+		part->transformation = (part->transformation * translationMatrix);
 
 		auto baseRotationOriginMatrix = Math::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
-		_parts[i].transformation = (_parts[i].transformation * baseRotationOriginMatrix);
+		part->transformation = (part->transformation * baseRotationOriginMatrix);
 
 		auto baseRotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_baseRotation.x),
 			Math::convertToRadians(_baseRotation.y),
 			Math::convertToRadians(_baseRotation.z), _rotationOrder);
-		_parts[i].transformation = (_parts[i].transformation * baseRotationMatrix);
+		part->transformation = (part->transformation * baseRotationMatrix);
 
 		baseRotationOriginMatrix = Math::createTranslationMatrix(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
-		_parts[i].transformation = (_parts[i].transformation * baseRotationOriginMatrix);
+		part->transformation = (part->transformation * baseRotationOriginMatrix);
 
-		auto rotationOriginMatrix = Math::createTranslationMatrix(_parts[i].rotationOrigin.x, _parts[i].rotationOrigin.y, _parts[i].rotationOrigin.z);
-		_parts[i].transformation = (_parts[i].transformation * rotationOriginMatrix);
+		auto rotationOriginMatrix = Math::createTranslationMatrix(part->rotationOrigin.x, part->rotationOrigin.y, part->rotationOrigin.z);
+		part->transformation = (part->transformation * rotationOriginMatrix);
 
 		auto rotationMatrix = Math::createRotationMatrix(
-			Math::convertToRadians(_parts[i].rotation.x),
-			Math::convertToRadians(_parts[i].rotation.y),
-			Math::convertToRadians(_parts[i].rotation.z), _rotationOrder);
-		_parts[i].transformation = (_parts[i].transformation * rotationMatrix);
+			Math::convertToRadians(part->rotation.x),
+			Math::convertToRadians(part->rotation.y),
+			Math::convertToRadians(part->rotation.z), _rotationOrder);
+		part->transformation = (part->transformation * rotationMatrix);
 
-		rotationOriginMatrix = Math::createTranslationMatrix(-_parts[i].rotationOrigin.x, -_parts[i].rotationOrigin.y, -_parts[i].rotationOrigin.z);
-		_parts[i].transformation = (_parts[i].transformation * rotationOriginMatrix);
+		rotationOriginMatrix = Math::createTranslationMatrix(-part->rotationOrigin.x, -part->rotationOrigin.y, -part->rotationOrigin.z);
+		part->transformation = (part->transformation * rotationOriginMatrix);
 
 		auto baseScalingMatrix = Math::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
-		_parts[i].transformation = (_parts[i].transformation * baseScalingMatrix);
+		part->transformation = (part->transformation * baseScalingMatrix);
 
-		auto scalingMatrix = Math::createScalingMatrix(_parts[i].size.x, _parts[i].size.y, _parts[i].size.z);
-		_parts[i].transformation = (_parts[i].transformation * scalingMatrix);
+		auto scalingMatrix = Math::createScalingMatrix(part->size.x, part->size.y, part->size.z);
+		part->transformation = (part->transformation * scalingMatrix);
 	}
 }
 
 void ModelEntity::setMesh(const string& partId, shared_ptr<VertexBuffer> value)
 {
-	_parts[_getPartIndex(partId)].vertexBuffer = value;
+	_parts.at(partId)->vertexBuffer = value;
 }
 
 void ModelEntity::setDiffuseMap(const string& partId, shared_ptr<TextureBuffer> value)
 {
-	_parts[_getPartIndex(partId)].diffuseMap = value;
+	_parts.at(partId)->diffuseMap = value;
 }
 
 void ModelEntity::setEmissionMap(const string& partId, shared_ptr<TextureBuffer> value)
 {
-	_parts[_getPartIndex(partId)].emissionMap = value;
+	_parts.at(partId)->emissionMap = value;
 }
 
 void ModelEntity::setSpecularMap(const string& partId, shared_ptr<TextureBuffer> value)
 {
-	_parts[_getPartIndex(partId)].specularMap = value;
+	_parts.at(partId)->specularMap = value;
 }
 
 void ModelEntity::setReflectionMap(const string& partId, shared_ptr<TextureBuffer> value)
 {
-	_parts[_getPartIndex(partId)].reflectionMap = value;
+	_parts.at(partId)->reflectionMap = value;
 }
 
 void ModelEntity::setNormalMap(const string& partId, shared_ptr<TextureBuffer> value)
 {
-	_parts[_getPartIndex(partId)].normalMap = value;
+	_parts.at(partId)->normalMap = value;
 }
 
 void ModelEntity::setBasePosition(const fvec3& value)
@@ -182,25 +185,25 @@ void ModelEntity::setBaseSize(const fvec3& value)
 
 void ModelEntity::setPartPosition(const string& partId, const fvec3& value)
 {
-	_parts[_getPartIndex(partId)].position = value;
-	_parts[_getPartIndex(partId)].positionTarget = value;
+	_parts.at(partId)->position = value;
+	_parts.at(partId)->positionTarget = value;
 }
 
 void ModelEntity::setPartRotation(const string& partId, const fvec3& value)
 {
-	_parts[_getPartIndex(partId)].rotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-	_parts[_getPartIndex(partId)].rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_parts.at(partId)->rotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_parts.at(partId)->rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
 void ModelEntity::setPartRotationOrigin(const string& partId, const fvec3& value)
 {
-	_parts[_getPartIndex(partId)].rotationOrigin = value;
+	_parts.at(partId)->rotationOrigin = value;
 }
 
 void ModelEntity::setPartSize(const string& partId, const fvec3& value)
 {
-	_parts[_getPartIndex(partId)].size = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-	_parts[_getPartIndex(partId)].sizeTarget = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_parts.at(partId)->size = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_parts.at(partId)->sizeTarget = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
 void ModelEntity::moveBase(const fvec3& value)
@@ -227,14 +230,14 @@ void ModelEntity::scaleBase(const fvec3& value)
 
 void ModelEntity::movePart(const string& partId, const fvec3& value)
 {
-	_parts[_getPartIndex(partId)].position += value;
-	_parts[_getPartIndex(partId)].positionTarget += value;
+	_parts.at(partId)->position += value;
+	_parts.at(partId)->positionTarget += value;
 }
 
 void ModelEntity::rotatePart(const string& partId, const fvec3& value)
 {
-	fvec3& rotation = _parts[_getPartIndex(partId)].rotation;
-	fvec3& rotationTarget = _parts[_getPartIndex(partId)].rotationTarget;
+	fvec3& rotation = _parts.at(partId)->rotation;
+	fvec3& rotationTarget = _parts.at(partId)->rotationTarget;
 	rotation += value;
 	rotationTarget += value;
 	rotation = fvec3(Math::limitAngle(rotation.x), Math::limitAngle(rotation.y), Math::limitAngle(rotation.z));
@@ -243,8 +246,8 @@ void ModelEntity::rotatePart(const string& partId, const fvec3& value)
 
 void ModelEntity::scalePart(const string& partId, const fvec3& value)
 {
-	fvec3& size = _parts[_getPartIndex(partId)].size;
-	fvec3& sizeTarget = _parts[_getPartIndex(partId)].sizeTarget;
+	fvec3& size = _parts.at(partId)->size;
+	fvec3& sizeTarget = _parts.at(partId)->sizeTarget;
 	size += value;
 	sizeTarget += value;
 	size = fvec3(max(0.0f, size.x), max(0.0f, size.y), max(0.0f, size.z));
@@ -271,30 +274,30 @@ void ModelEntity::scaleBaseTo(const fvec3& target, float speed)
 
 void ModelEntity::movePartTo(const string& partId, const fvec3& target, float speed)
 {
-	_parts[_getPartIndex(partId)].positionTarget = target;
-	_parts[_getPartIndex(partId)].positionTargetSpeed = max(0.0f, speed);
+	_parts.at(partId)->positionTarget = target;
+	_parts.at(partId)->positionTargetSpeed = max(0.0f, speed);
 }
 
 void ModelEntity::rotatePartTo(const string& partId, const fvec3& target, float speed)
 {
-	_parts[_getPartIndex(partId)].rotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
-	_parts[_getPartIndex(partId)].rotationTargetSpeed = max(0.0f, speed);
+	_parts.at(partId)->rotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
+	_parts.at(partId)->rotationTargetSpeed = max(0.0f, speed);
 }
 
 void ModelEntity::scalePartTo(const string& partId, const fvec3& target, float speed)
 {
-	_parts[_getPartIndex(partId)].sizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
-	_parts[_getPartIndex(partId)].sizeTargetSpeed = max(0.0f, speed);
+	_parts.at(partId)->sizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
+	_parts.at(partId)->sizeTargetSpeed = max(0.0f, speed);
 }
 
 void ModelEntity::setColor(const string& partId, const fvec3& value)
 {
-	_parts[_getPartIndex(partId)].color = fvec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
+	_parts.at(partId)->color = fvec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 }
 
 void ModelEntity::setWireframeColor(const string& partId, const fvec3& value)
 {
-	_parts[_getPartIndex(partId)].wireframeColor = fvec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
+	_parts.at(partId)->wireframeColor = fvec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 }
 
 void ModelEntity::setMeshPath(const string& value)
@@ -309,27 +312,27 @@ void ModelEntity::setLevelOfDetailSize(const fvec3& value)
 
 void ModelEntity::setDiffuseMapPath(const string& partId, const string& value)
 {
-	_parts[_getPartIndex(partId)].diffuseMapPath = value;
+	_parts.at(partId)->diffuseMapPath = value;
 }
 
 void ModelEntity::setEmissionMapPath(const string& partId, const string& value)
 {
-	_parts[_getPartIndex(partId)].emissionMapPath = value;
+	_parts.at(partId)->emissionMapPath = value;
 }
 
 void ModelEntity::setSpecularMapPath(const string& partId, const string& value)
 {
-	_parts[_getPartIndex(partId)].specularMapPath = value;
+	_parts.at(partId)->specularMapPath = value;
 }
 
 void ModelEntity::setReflectionMapPath(const string& partId, const string& value)
 {
-	_parts[_getPartIndex(partId)].reflectionMapPath = value;
+	_parts.at(partId)->reflectionMapPath = value;
 }
 
 void ModelEntity::setNormalMapPath(const string& partId, const string& value)
 {
-	_parts[_getPartIndex(partId)].normalMapPath = value;
+	_parts.at(partId)->normalMapPath = value;
 }
 
 void ModelEntity::setLevelOfDetailEntityId(const string& value)
@@ -354,12 +357,12 @@ void ModelEntity::setCubeReflectionMixValue(float value)
 
 void ModelEntity::setReflectivity(const string& partId, float value)
 {
-	_parts[_getPartIndex(partId)].reflectivity = clamp(value, 0.0f, 1.0f);
+	_parts.at(partId)->reflectivity = clamp(value, 0.0f, 1.0f);
 }
 
 void ModelEntity::setFaceCulled(const string& partId, bool value)
 {
-	_parts[_getPartIndex(partId)].isFaceCulled = value;
+	_parts.at(partId)->isFaceCulled = value;
 }
 
 void ModelEntity::setRotationOrder(DirectionOrder value)
@@ -369,22 +372,22 @@ void ModelEntity::setRotationOrder(DirectionOrder value)
 
 void ModelEntity::setMinTextureAlpha(const string& partId, float value)
 {
-	_parts[_getPartIndex(partId)].minTextureAlpha = clamp(value, 0.0f, 1.0f);
+	_parts.at(partId)->minTextureAlpha = clamp(value, 0.0f, 1.0f);
 }
 
 void ModelEntity::setReflectionType(const string& partId, ReflectionType value)
 {
-	_parts[_getPartIndex(partId)].reflectionType = value;
+	_parts.at(partId)->reflectionType = value;
 }
 
 void ModelEntity::setSpecular(const string& partId, bool value)
 {
-	_parts[_getPartIndex(partId)].isSpecular = value;
+	_parts.at(partId)->isSpecular = value;
 }
 
 void ModelEntity::setReflective(const string& partId, bool value)
 {
-	_parts[_getPartIndex(partId)].isReflective = value;
+	_parts.at(partId)->isReflective = value;
 }
 
 void ModelEntity::setShadowed(bool value)
@@ -414,32 +417,27 @@ void ModelEntity::setLevelOfDetailed(bool value)
 
 void ModelEntity::setWireframed(const string& partId, bool value)
 {
-	_parts[_getPartIndex(partId)].isWireframed = value;
+	_parts.at(partId)->isWireframed = value;
 }
 
 void ModelEntity::setBright(const string& partId, bool value)
 {
-	_parts[_getPartIndex(partId)].isBright = value;
-}
-
-void ModelEntity::deleteParts()
-{
-	_parts.clear();
+	_parts.at(partId)->isBright = value;
 }
 
 void ModelEntity::setLightness(const string& partId, float value)
 {
-	_parts[_getPartIndex(partId)].lightness = max(0.0f, value);
+	_parts.at(partId)->lightness = max(0.0f, value);
 }
 
 void ModelEntity::setSpecularShininess(const string& partId, float value)
 {
-	_parts[_getPartIndex(partId)].specularShininess = max(0.0f, value);
+	_parts.at(partId)->specularShininess = max(0.0f, value);
 }
 
 void ModelEntity::setSpecularIntensity(const string& partId, float value)
 {
-	_parts[_getPartIndex(partId)].specularIntensity = max(0.0f, value);
+	_parts.at(partId)->specularIntensity = max(0.0f, value);
 }
 
 void ModelEntity::setMinHeight(float value)
@@ -459,17 +457,17 @@ void ModelEntity::setLevelOfDetailDistance(float value)
 
 void ModelEntity::setOpacity(const string& partId, float value)
 {
-	_parts[_getPartIndex(partId)].opacity = clamp(value, 0.0f, 1.0f);
+	_parts.at(partId)->opacity = clamp(value, 0.0f, 1.0f);
 }
 
 void ModelEntity::setTextureRepeat(const string& partId, float value)
 {
-	_parts[_getPartIndex(partId)].textureRepeat = max(0.0f, value);
+	_parts.at(partId)->textureRepeat = max(0.0f, value);
 }
 
 void ModelEntity::setEmissionIntensity(const string& partId, float value)
 {
-	_parts[_getPartIndex(partId)].emissionIntensity = max(0.0f, value);
+	_parts.at(partId)->emissionIntensity = max(0.0f, value);
 }
 
 void ModelEntity::_correctPositionTarget(fvec3& current, const fvec3& target, float speed)
@@ -532,47 +530,47 @@ void ModelEntity::_correctSizeTarget(fvec3& current, const fvec3& target, float 
 
 const shared_ptr<VertexBuffer> ModelEntity::getMesh(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].vertexBuffer;
+	return _parts.at(partId)->vertexBuffer;
 }
 
 const mat44& ModelEntity::getTransformation(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].transformation;
+	return _parts.at(partId)->transformation;
 }
 
 const shared_ptr<TextureBuffer> ModelEntity::getDiffuseMap(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].diffuseMap;
+	return _parts.at(partId)->diffuseMap;
 }
 
 const shared_ptr<TextureBuffer> ModelEntity::getEmissionMap(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].emissionMap;
+	return _parts.at(partId)->emissionMap;
 }
 
 const shared_ptr<TextureBuffer> ModelEntity::getSpecularMap(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].specularMap;
+	return _parts.at(partId)->specularMap;
 }
 
 const shared_ptr<TextureBuffer> ModelEntity::getReflectionMap(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].reflectionMap;
+	return _parts.at(partId)->reflectionMap;
 }
 
 const shared_ptr<TextureBuffer> ModelEntity::getNormalMap(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].normalMap;
+	return _parts.at(partId)->normalMap;
 }
 
 const fvec3& ModelEntity::getColor(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].color;
+	return _parts.at(partId)->color;
 }
 
 const fvec3& ModelEntity::getWireframeColor(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].wireframeColor;
+	return _parts.at(partId)->wireframeColor;
 }
 
 const fvec3& ModelEntity::getBasePosition() const
@@ -597,22 +595,22 @@ const fvec3& ModelEntity::getBaseSize() const
 
 const fvec3& ModelEntity::getPartPosition(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].position;
+	return _parts.at(partId)->position;
 }
 
 const fvec3& ModelEntity::getPartRotation(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].rotation;
+	return _parts.at(partId)->rotation;
 }
 
 const fvec3& ModelEntity::getPartRotationOrigin(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].rotationOrigin;
+	return _parts.at(partId)->rotationOrigin;
 }
 
 const fvec3& ModelEntity::getPartSize(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].size;
+	return _parts.at(partId)->size;
 }
 
 const fvec3& ModelEntity::getLevelOfDetailSize() const
@@ -627,7 +625,7 @@ const float ModelEntity::getCubeReflectionMixValue() const
 
 const float ModelEntity::getReflectivity(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].reflectivity;
+	return _parts.at(partId)->reflectivity;
 }
 
 const string& ModelEntity::getMeshPath() const
@@ -637,27 +635,27 @@ const string& ModelEntity::getMeshPath() const
 
 const string& ModelEntity::getDiffuseMapPath(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].diffuseMapPath;
+	return _parts.at(partId)->diffuseMapPath;
 }
 
 const string& ModelEntity::getEmissionMapPath(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].emissionMapPath;
+	return _parts.at(partId)->emissionMapPath;
 }
 
 const string& ModelEntity::getSpecularMapPath(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].specularMapPath;
+	return _parts.at(partId)->specularMapPath;
 }
 
 const string& ModelEntity::getReflectionMapPath(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].reflectionMapPath;
+	return _parts.at(partId)->reflectionMapPath;
 }
 
 const string& ModelEntity::getNormalMapPath(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].normalMapPath;
+	return _parts.at(partId)->normalMapPath;
 }
 
 const string& ModelEntity::getLevelOfDetailEntityId() const
@@ -679,9 +677,9 @@ const vector<string> ModelEntity::getPartIds() const
 {
 	vector<string> result;
 
-	for(const auto& part : _parts)
+	for(const auto& [key, part] : _parts)
 	{
-		result.push_back(part.id);
+		result.push_back(key);
 	}
 
 	return result;
@@ -689,22 +687,22 @@ const vector<string> ModelEntity::getPartIds() const
 
 const bool ModelEntity::isFaceCulled(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].isFaceCulled;
+	return _parts.at(partId)->isFaceCulled;
 }
 
 const bool ModelEntity::isWireframed(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].isWireframed;
+	return _parts.at(partId)->isWireframed;
 }
 
 const bool ModelEntity::isSpecular(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].isSpecular;
+	return _parts.at(partId)->isSpecular;
 }
 
 const bool ModelEntity::isReflective(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].isReflective;
+	return _parts.at(partId)->isReflective;
 }
 
 const bool ModelEntity::isShadowed() const
@@ -719,7 +717,7 @@ const bool ModelEntity::isReflected() const
 
 const ReflectionType ModelEntity::getReflectionType(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].reflectionType;
+	return _parts.at(partId)->reflectionType;
 }
 
 const DirectionOrder ModelEntity::getRotationOrder() const
@@ -729,7 +727,7 @@ const DirectionOrder ModelEntity::getRotationOrder() const
 
 const bool ModelEntity::isBright(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].isBright;
+	return _parts.at(partId)->isBright;
 }
 
 const bool ModelEntity::isFrozen() const
@@ -749,17 +747,17 @@ const bool ModelEntity::isLevelOfDetailed() const
 
 const float ModelEntity::getLightness(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].lightness;
+	return _parts.at(partId)->lightness;
 }
 
 const float ModelEntity::getSpecularShininess(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].specularShininess;
+	return _parts.at(partId)->specularShininess;
 }
 
 const float ModelEntity::getSpecularIntensity(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].specularIntensity;
+	return _parts.at(partId)->specularIntensity;
 }
 
 const float ModelEntity::getMinHeight() const
@@ -779,45 +777,20 @@ const float ModelEntity::getLevelOfDetailDistance() const
 
 const float ModelEntity::getEmissionIntensity(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].emissionIntensity;
+	return _parts.at(partId)->emissionIntensity;
 }
 
 const float ModelEntity::getMinTextureAlpha(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].minTextureAlpha;
+	return _parts.at(partId)->minTextureAlpha;
 }
 
 const float ModelEntity::getOpacity(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].opacity;
+	return _parts.at(partId)->opacity;
 }
 
 const float ModelEntity::getTextureRepeat(const string& partId) const
 {
-	return _parts[_getPartIndex(partId)].textureRepeat;
-}
-
-const unsigned int ModelEntity::_getPartIndex(const string& partId) const
-{
-	if(partId.empty())
-	{
-		if(_parts.size() > 1)
-		{
-			abort();
-		}
-		else
-		{
-			return 0;
-		}
-	}
-
-	for(size_t i = 0; i < _parts.size(); i++)
-	{
-		if(partId == _parts[i].id)
-		{
-			return static_cast<unsigned int>(i);
-		}
-	}
-
-	abort();
+	return _parts.at(partId)->textureRepeat;
 }

@@ -1,19 +1,11 @@
-#include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "reflection_type.hpp"
 #include "texture_buffer.hpp"
 
 class ModelEntityPart final
 {
-public:
-	ModelEntityPart(const string& id)
-		:
-		id(id)
-	{
+	friend class ModelEntity;
 
-	}
-
-	const string id;
 	string diffuseMapPath = "";
 	string emissionMapPath = "";
 	string specularMapPath = "";

@@ -74,7 +74,7 @@ void EngineInterface::animation3d_setSpeed(const string& animationId, unsigned i
 	_core->getAnimation3dManager()->getAnimation(animationId)->setSpeed(frameIndex, partId, value);
 }
 
-void EngineInterface::animation3d_setSpeedType(const string& animationId, unsigned int frameIndex, const string& partId, Animation3dSpeedType value)
+void EngineInterface::animation3d_setSpeedType(const string& animationId, unsigned int frameIndex, const string& partId, SpeedType value)
 {
 	_core->getAnimation3dManager()->getAnimation(animationId)->setSpeedType(frameIndex, partId, value);
 }
@@ -104,7 +104,7 @@ const fvec3& EngineInterface::animation3d_getSpeed(const string& animationId, un
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getSpeed(frameIndex, partId);
 }
 
-const Animation3dSpeedType& EngineInterface::animation3d_getSpeedType(const string& animationId, unsigned int frameIndex, const string& partId) const
+const SpeedType& EngineInterface::animation3d_getSpeedType(const string& animationId, unsigned int frameIndex, const string& partId) const
 {
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getSpeedType(frameIndex, partId);
 }

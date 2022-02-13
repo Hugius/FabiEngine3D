@@ -1,6 +1,6 @@
 #pragma once
 
-enum class Animation3dSpeedType
+enum class SpeedType
 {
 	LINEAR,
 	EXPONENTIAL,

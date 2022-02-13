@@ -20,7 +20,7 @@ void Animation3d::createPart(const string& partId)
 		frame->targetTransformations.insert(make_pair(partId, fvec3(0.0f)));
 		frame->rotationOrigins.insert(make_pair(partId, fvec3(0.0f)));
 		frame->speeds.insert(make_pair(partId, fvec3(0.0f)));
-		frame->speedTypes.insert(make_pair(partId, Animation3dSpeedType::LINEAR));
+		frame->speedTypes.insert(make_pair(partId, SpeedType::LINEAR));
 		frame->transformationTypes.insert(make_pair(partId, TransformationType::MOVEMENT));
 	}
 }
@@ -62,7 +62,7 @@ void Animation3d::createFrame(unsigned int index)
 		_frames[index]->targetTransformations.insert(make_pair(partId, fvec3(0.0f)));
 		_frames[index]->rotationOrigins.insert(make_pair(partId, fvec3(0.0f)));
 		_frames[index]->speeds.insert(make_pair(partId, fvec3(0.0f)));
-		_frames[index]->speedTypes.insert(make_pair(partId, Animation3dSpeedType::LINEAR));
+		_frames[index]->speedTypes.insert(make_pair(partId, SpeedType::LINEAR));
 		_frames[index]->transformationTypes.insert(make_pair(partId, TransformationType::MOVEMENT));
 	}
 }
@@ -107,7 +107,7 @@ void Animation3d::setSpeed(unsigned int frameIndex, const string& partId, const 
 	_frames[frameIndex]->speeds.at(partId) = value;
 }
 
-void Animation3d::setSpeedType(unsigned int frameIndex, const string& partId, Animation3dSpeedType value)
+void Animation3d::setSpeedType(unsigned int frameIndex, const string& partId, SpeedType value)
 {
 	_frames[frameIndex]->speedTypes.at(partId) = value;
 }
@@ -132,7 +132,7 @@ const fvec3& Animation3d::getSpeed(unsigned int frameIndex, const string& partId
 	return _frames[frameIndex]->speeds.at(partId);
 }
 
-const Animation3dSpeedType& Animation3d::getSpeedType(unsigned int frameIndex, const string& partId) const
+const SpeedType& Animation3d::getSpeedType(unsigned int frameIndex, const string& partId) const
 {
 	return _frames[frameIndex]->speedTypes.at(partId);
 }

@@ -12,7 +12,7 @@
     <ClInclude Include="..\..\..\src\aabb_parent_entity_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\animation3d_speed_type.hpp">
+    <ClInclude Include="..\..\..\src\speed_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\blur_direction.hpp">

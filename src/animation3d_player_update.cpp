@@ -68,7 +68,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 
 					if(transformationType == TransformationType::MOVEMENT)
 					{
-						if(speedType == Animation3dSpeedType::INSTANTLY)
+						if(speedType == SpeedType::INSTANTLY)
 						{
 							finalSpeed = (targetTransformation.x - totalMovement.x);
 						}
@@ -77,7 +77,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 					}
 					else if(transformationType == TransformationType::ROTATION)
 					{
-						if(speedType == Animation3dSpeedType::INSTANTLY)
+						if(speedType == SpeedType::INSTANTLY)
 						{
 							finalSpeed = (targetTransformation.x - totalRotation.x);
 						}
@@ -86,7 +86,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 					}
 					else if(transformationType == TransformationType::SCALING)
 					{
-						if(speedType == Animation3dSpeedType::INSTANTLY)
+						if(speedType == SpeedType::INSTANTLY)
 						{
 							finalSpeed = (targetTransformation.x - totalScaling.x);
 						}
@@ -94,7 +94,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 						totalScaling.x += finalSpeed;
 					}
 
-					if(speedType == Animation3dSpeedType::EXPONENTIAL)
+					if(speedType == SpeedType::EXPONENTIAL)
 					{
 						totalSpeed.x += (speed.x / 100.0f);
 					}
@@ -166,7 +166,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 
 					if(transformationType == TransformationType::MOVEMENT)
 					{
-						if(speedType == Animation3dSpeedType::INSTANTLY)
+						if(speedType == SpeedType::INSTANTLY)
 						{
 							finalSpeed = (targetTransformation.y - totalMovement.y);
 						}
@@ -175,7 +175,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 					}
 					else if(transformationType == TransformationType::ROTATION)
 					{
-						if(speedType == Animation3dSpeedType::INSTANTLY)
+						if(speedType == SpeedType::INSTANTLY)
 						{
 							finalSpeed = (targetTransformation.y - totalRotation.y);
 						}
@@ -184,7 +184,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 					}
 					else if(transformationType == TransformationType::SCALING)
 					{
-						if(speedType == Animation3dSpeedType::INSTANTLY)
+						if(speedType == SpeedType::INSTANTLY)
 						{
 							finalSpeed = (targetTransformation.y - totalScaling.y);
 						}
@@ -192,7 +192,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 						totalScaling.y += finalSpeed;
 					}
 
-					if(speedType == Animation3dSpeedType::EXPONENTIAL)
+					if(speedType == SpeedType::EXPONENTIAL)
 					{
 						totalSpeed.y += (speed.y / 100.0f);
 					}
@@ -264,7 +264,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 
 					if(transformationType == TransformationType::MOVEMENT)
 					{
-						if(speedType == Animation3dSpeedType::INSTANTLY)
+						if(speedType == SpeedType::INSTANTLY)
 						{
 							finalSpeed = (targetTransformation.z - totalMovement.z);
 						}
@@ -273,7 +273,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 					}
 					else if(transformationType == TransformationType::ROTATION)
 					{
-						if(speedType == Animation3dSpeedType::INSTANTLY)
+						if(speedType == SpeedType::INSTANTLY)
 						{
 							finalSpeed = (targetTransformation.z - totalRotation.z);
 						}
@@ -282,7 +282,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 					}
 					else if(transformationType == TransformationType::SCALING)
 					{
-						if(speedType == Animation3dSpeedType::INSTANTLY)
+						if(speedType == SpeedType::INSTANTLY)
 						{
 							finalSpeed = (targetTransformation.z - totalScaling.z);
 						}
@@ -290,7 +290,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 						totalScaling.z += finalSpeed;
 					}
 
-					if(speedType == Animation3dSpeedType::EXPONENTIAL)
+					if(speedType == SpeedType::EXPONENTIAL)
 					{
 						totalSpeed.z += (speed.z / 100.0f);
 					}

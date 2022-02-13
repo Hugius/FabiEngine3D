@@ -22,7 +22,7 @@ public:
 	void setTargetTransformation(unsigned int frameIndex, const string& partId, const fvec3& value);
 	void setRotationOrigin(unsigned int frameIndex, const string& partId, const fvec3& value);
 	void setSpeed(unsigned int frameIndex, const string& partId, const fvec3& value);
-	void setSpeedType(unsigned int frameIndex, const string& partId, Animation3dSpeedType value);
+	void setSpeedType(unsigned int frameIndex, const string& partId, SpeedType value);
 	void setTransformationType(unsigned int frameIndex, const string& partId, TransformationType value);
 
 	const string& getId() const;
@@ -34,7 +34,7 @@ public:
 	const fvec3& getTargetTransformation(unsigned int frameIndex, const string& partId) const;
 	const fvec3& getRotationOrigin(unsigned int frameIndex, const string& partId) const;
 	const fvec3& getSpeed(unsigned int frameIndex, const string& partId) const;
-	const Animation3dSpeedType& getSpeedType(unsigned int frameIndex, const string& partId) const;
+	const SpeedType& getSpeedType(unsigned int frameIndex, const string& partId) const;
 	const TransformationType& getTransformationType(unsigned int frameIndex, const string& partId) const;
 
 private:

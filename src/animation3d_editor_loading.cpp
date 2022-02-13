@@ -89,7 +89,7 @@ const bool Animation3dEditor::loadFromFile()
 				_fe3d->animation3d_setTargetTransformation(animationId, frameIndex, partIds[partIndex], targetTransformation);
 				_fe3d->animation3d_setRotationOrigin(animationId, frameIndex, partIds[partIndex], rotationOrigin);
 				_fe3d->animation3d_setSpeed(animationId, frameIndex, partIds[partIndex], speed);
-				_fe3d->animation3d_setSpeedType(animationId, frameIndex, partIds[partIndex], Animation3dSpeedType(speedType));
+				_fe3d->animation3d_setSpeedType(animationId, frameIndex, partIds[partIndex], SpeedType(speedType));
 				_fe3d->animation3d_setTransformationType(animationId, frameIndex, partIds[partIndex], TransformationType(transformationType));
 			}
 		}

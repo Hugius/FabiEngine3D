@@ -1,6 +1,12 @@
 #pragma once
 
+#include "base_entity.hpp"
 #include "model_entity_part.hpp"
+
+#include <map>
+
+using std::unique_ptr;
+using std::map;
 
 class ModelEntity final : public BaseEntity
 {
@@ -8,6 +14,7 @@ public:
 	using BaseEntity::BaseEntity;
 
 	void createPart(const string& id);
+	void deletePart(const string& id);
 	void deleteParts();
 	void updateTarget();
 	void updateTransformation();
@@ -167,6 +174,6 @@ private:
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed = false;
 
-	vector<ModelEntityPart> _parts;
+	map<string, unique_ptr<ModelEntityPart>> _parts;
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;
 };

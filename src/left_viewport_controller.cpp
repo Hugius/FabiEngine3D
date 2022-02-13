@@ -108,7 +108,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
 		{
-			if(_modelEditor->loadFromFile() && _animation3dEditor->loadFromFile(true))
+			if(_modelEditor->loadFromFile() && _animation3dEditor->loadFromFile())
 			{
 				_animation3dEditor->load();
 				window->setActiveScreen("animation3dEditorMenuMain");

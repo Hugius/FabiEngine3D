@@ -8,14 +8,12 @@
 using std::ifstream;
 using std::istringstream;
 
-const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
+const bool Animation3dEditor::loadFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
-
-	_animations.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -32,137 +30,68 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 	while(getline(file, line))
 	{
 		string animationId;
-		string previewModelId;
+		unsigned int partCount;
+		unsigned int frameCount;
 
 		istringstream iss(line);
 
 		iss
 			>> animationId
-			>> previewModelId;
+			>> partCount
+			>> frameCount;
 
-		if(mustCheckPreviewModel)
+		_loadedAnimationIds.push_back(animationId);
+		sort(_loadedAnimationIds.begin(), _loadedAnimationIds.end());
+
+		_fe3d->animation3d_create(animationId);
+
+		for(unsigned int partIndex = 0; partIndex < partCount; partIndex++)
 		{
-			if(!_fe3d->model_isExisting(previewModelId))
+			string partId;
+
+			if(partId == "?")
 			{
-				Logger::throwWarning("Preview model of animation with id \"" + animationId + "\" does not exist");
-				continue;
+				partId = "";
 			}
+
+			iss >> partId;
+
+			_fe3d->animation3d_createPart(animationId, partId);
 		}
 
-		auto newAnimation = make_shared<Animation3d>(animationId);
-		newAnimation->setPreviewModelId(previewModelId);
-
-		Animation3dFrame defaultFrame;
-
-		newAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
-		defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
-
-		auto partIds = _fe3d->model_getPartIds(previewModelId);
-		if(partIds.size() > 1)
+		for(unsigned int frameIndex = 0; frameIndex < frameCount; frameIndex++)
 		{
-			for(const auto& partId : partIds)
+			for(unsigned int partIndex = 0; partIndex < partCount; partIndex++)
 			{
-				newAnimation->addPart(partId, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
+				const auto partIds = _fe3d->animation3d_getPartIds(animationId);
 
-				defaultFrame.addPart(partId, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
+				fvec3 targetTransformation;
+				fvec3 rotationOrigin;
+				fvec3 speed;
+				int speedType;
+				int transformationType;
+
+				iss
+					>> targetTransformation.x
+					>> targetTransformation.y
+					>> targetTransformation.z
+					>> rotationOrigin.x
+					>> rotationOrigin.y
+					>> rotationOrigin.z
+					>> speed.x
+					>> speed.y
+					>> speed.z
+					>> speedType
+					>> transformationType;
+
+				_fe3d->animation3d_createFrame(animationId, 1);
+				_fe3d->animation3d_setTargetTransformation(animationId, frameIndex, partIds[partIndex], targetTransformation);
+				_fe3d->animation3d_setRotationOrigin(animationId, frameIndex, partIds[partIndex], rotationOrigin);
+				_fe3d->animation3d_setSpeed(animationId, frameIndex, partIds[partIndex], speed);
+				_fe3d->animation3d_setSpeedType(animationId, frameIndex, partIds[partIndex], Animation3dSpeedType(speedType));
+				_fe3d->animation3d_setTransformationType(animationId, frameIndex, partIds[partIndex], TransformationType(transformationType));
 			}
 		}
-
-		newAnimation->addFrame(defaultFrame);
-
-		string temp;
-		if(iss >> temp)
-		{
-			iss = istringstream(line);
-
-			iss
-				>> animationId
-				>> previewModelId;
-
-			vector<Animation3dFrame> customFrames;
-			while(true)
-			{
-				unsigned int modelPartCount;
-
-				if(iss >> modelPartCount)
-				{
-					Animation3dFrame customFrame;
-
-					for(unsigned int i = 0; i < modelPartCount; i++)
-					{
-						string partId;
-						fvec3 targetTransformation, rotationOrigin, speed;
-						int speedType, transformationType;
-
-						iss
-							>> partId
-							>> targetTransformation.x
-							>> targetTransformation.y
-							>> targetTransformation.z
-							>> rotationOrigin.x
-							>> rotationOrigin.y
-							>> rotationOrigin.z
-							>> speed.x
-							>> speed.y
-							>> speed.z
-							>> speedType
-							>> transformationType;
-
-						if(partId == "?")
-						{
-							partId = "";
-						}
-
-						if(customFrames.empty())
-						{
-							newAnimation->addPart(partId, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
-						}
-
-						if(customFrames.empty())
-						{
-							defaultFrame.addPart(partId, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
-						}
-
-						customFrame.addPart(partId, targetTransformation, rotationOrigin, speed, Animation3dSpeedType(speedType), TransformationType(transformationType));
-					}
-
-					customFrames.push_back(customFrame);
-				}
-				else
-				{
-					break;
-				}
-			}
-
-			for(const auto& customFrame : customFrames)
-			{
-				newAnimation->addFrame(customFrame);
-			}
-		}
-
-		if(mustCheckPreviewModel)
-		{
-			bool hasAllParts = true;
-			for(const auto& partId : newAnimation->getPartIds())
-			{
-				if(!partId.empty())
-				{
-					hasAllParts = hasAllParts && _fe3d->model_hasPart(newAnimation->getPreviewModelId(), partId);
-				}
-			}
-
-			if(hasAllParts)
-			{
-				newAnimation->setInitialSize(_fe3d->model_getBaseSize(newAnimation->getPreviewModelId()));
-			}
-			else
-			{
-				Logger::throwWarning("Preview model of animation with id \"" + newAnimation->getId() + "\" does not have the required animation parts");
-				continue;
-			}
-		}
-
-		_animations.push_back(newAnimation);
 	}
 
 	file.close();

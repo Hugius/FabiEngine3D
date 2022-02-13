@@ -259,9 +259,17 @@ public:
 	void model_setTextureRepeat(const string& modelId, const string& partId, float value);
 	void model_setBright(const string& modelId, const string& partId, bool value);
 	void model_setRotationOrder(const string& id, DirectionOrder value);
+	void model_startAnimation(const string& modelId, const string& animationId, int playCount);
+	void model_pauseAnimation(const string& modelId, const string& animationId);
+	void model_autopauseAnimation(const string& modelId, const string& animationId);
+	void model_resumeAnimation(const string& modelId, const string& animationId);
+	void model_stopAnimation(const string& modelId, const string& animationId);
+	void model_setAnimationSpeedMultiplier(const string& modelId, const string& animationId, float value);
+	void model_setAnimationFrameIndex(const string& modelId, const string& animationId, unsigned int value);
 
 	const vector<string> model_getIds() const;
 	const vector<string> model_getPartIds(const string& id) const;
+	const vector<string> model_getAnimationIds(const string& id) const;
 	const vector<string> model_getChildAabbIds(const string& id);
 	const string& model_getMeshPath(const string& id) const;
 	const string& model_getDiffuseMapPath(const string& modelId, const string& partId) const;
@@ -292,6 +300,9 @@ public:
 	const float model_getTextureRepeat(const string& modelId, const string& partId) const;
 	const float model_getEmissionIntensity(const string& modelId, const string& partId) const;
 	const float model_getMinTextureAlpha(const string& modelId, const string& partId) const;
+	const float model_getAnimationSpeedMultiplier(const string& modelId, const string& animationId) const;
+	const int model_getAnimationPlayCount(const string& modelId, const string& animationId) const;
+	const unsigned int model_getAnimationFrameIndex(const string& modelId, const string& animationId) const;
 	const bool model_isExisting(const string& id) const;
 	const bool model_isVisible(const string& id) const;
 	const bool model_isMultiParted(const string& id) const;
@@ -310,6 +321,10 @@ public:
 	const bool model_hasSpecularMap(const string& modelId, const string& partId) const;
 	const bool model_hasReflectionMap(const string& modelId, const string& partId) const;
 	const bool model_hasNormalMap(const string& modelId, const string& partId) const;
+	const bool model_isAnimationStarted(const string& modelId, const string& animationId) const;
+	const bool model_isAnimationPlaying(const string& modelId, const string& animationId) const;
+	const bool model_isAnimationPaused(const string& modelId, const string& animationId) const;
+	const bool model_isAnimationAutopaused(const string& modelId, const string& animationId) const;
 	const ReflectionType model_getReflectionType(const string& modelId, const string& partId) const;
 	const DirectionOrder model_getRotationOrder(const string& id) const;
 
@@ -660,12 +675,12 @@ public:
 	void animation3d_create(const string& id);
 	void animation3d_delete(const string& id);
 	void animation3d_deleteAll();
-	void animation3d_createFrame(const string& animationId, unsigned int index);
-	void animation3d_deleteFrame(const string& animationId, unsigned int index);
-	void animation3d_deleteFrames(const string& animationId);
 	void animation3d_createPart(const string& animationId, const string& partId);
 	void animation3d_deletePart(const string& animationId, const string& partId);
 	void animation3d_deleteParts(const string& animationId);
+	void animation3d_createFrame(const string& animationId, unsigned int index);
+	void animation3d_deleteFrame(const string& animationId, unsigned int index);
+	void animation3d_deleteFrames(const string& animationId);
 	void animation3d_setTargetTransformation(const string& animationId, unsigned int frameIndex, const string& partId, const fvec3& value);
 	void animation3d_setRotationOrigin(const string& animationId, unsigned int frameIndex, const string& partId, const fvec3& value);
 	void animation3d_setSpeed(const string& animationId, unsigned int frameIndex, const string& partId, const fvec3& value);

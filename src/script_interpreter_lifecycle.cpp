@@ -196,7 +196,7 @@ void ScriptInterpreter::load()
 	_quad2dEditor->loadFromFile();
 	_text2dEditor->loadFromFile();
 	_animation2dEditor->loadFromFile();
-	_animation3dEditor->loadFromFile(false);
+	_animation3dEditor->loadFromFile();
 	_soundEditor->loadFromFile();
 
 	_fe3d->camera_reset();

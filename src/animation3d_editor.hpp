@@ -15,7 +15,7 @@ public:
 
 	const vector<string> getLoadedAnimationIds() const;
 
-	const bool loadFromFile(bool mustCheckPreviewModel);
+	const bool loadFromFile();
 	const bool saveToFile() const;
 
 private:
@@ -41,8 +41,10 @@ private:
 	string _currentPartId = "";
 	string _hoveredModelId = "";
 	string _hoveredPartId = "";
+	string _previewModelId = "";
 
 	fvec3 _cameraLookatPosition = fvec3(0.0f);
+	fvec3 _initialModelSize = fvec3(0.0f);
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;

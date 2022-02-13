@@ -42,6 +42,7 @@ const bool Animation2dEditor::loadFromFile()
 			>> interval;
 
 		_loadedAnimationIds.push_back(animationId);
+		sort(_loadedAnimationIds.begin(), _loadedAnimationIds.end());
 
 		_fe3d->animation2d_create(animationId);
 		_fe3d->animation2d_setRowCount(animationId, rowCount);

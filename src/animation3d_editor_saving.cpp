@@ -24,34 +24,41 @@ const bool Animation3dEditor::saveToFile() const
 
 	for(const auto& animationId : _loadedAnimationIds)
 	{
-		const auto frameCount = _fe3d->animation3d_getFrameCount(animationId);
 		const auto partIds = _fe3d->animation3d_getPartIds(animationId);
+		const auto partCount = partIds.size();
+		const auto frameCount = _fe3d->animation3d_getFrameCount(animationId);
 
 		file
 			<< animationId
 			<< " "
-			<< _fe3d->animation3d_getPartIds(animationId).size()
+			<< partCount
+			<< " "
+			<< frameCount
 			<< " ";
 
-		for(unsigned int frameIndex = 1; frameIndex < frameCount; frameIndex++)
+		for(auto partId : partIds)
 		{
-			for(unsigned int partIndex = 1; partIndex < partIds.size(); partIndex++)
+			if(partId.empty())
 			{
-				auto partId = partIds[partIndex];
-				auto targetTransformation = _fe3d->animation3d_getTargetTransformation(animationId, frameIndex, partId);
-				auto rotationOrigin = _fe3d->animation3d_getRotationOrigin(animationId, frameIndex, partId);
-				auto speed = _fe3d->animation3d_getSpeed(animationId, frameIndex, partId);
-				auto speedType = static_cast<int>(_fe3d->animation3d_getSpeedType(animationId, frameIndex, partId));
-				auto transformationType = static_cast<int>(_fe3d->animation3d_getTransformationType(animationId, frameIndex, partId));
+				partId = "?";
+			}
 
-				if(partId.empty())
-				{
-					partId = "?";
-				}
+			file
+				<< partId
+				<< " ";
+		}
+
+		for(unsigned int frameIndex = 0; frameIndex < frameCount; frameIndex++)
+		{
+			for(unsigned int partIndex = 0; partIndex < partCount; partIndex++)
+			{
+				auto targetTransformation = _fe3d->animation3d_getTargetTransformation(animationId, frameIndex, partIds[partIndex]);
+				auto rotationOrigin = _fe3d->animation3d_getRotationOrigin(animationId, frameIndex, partIds[partIndex]);
+				auto speed = _fe3d->animation3d_getSpeed(animationId, frameIndex, partIds[partIndex]);
+				auto speedType = static_cast<int>(_fe3d->animation3d_getSpeedType(animationId, frameIndex, partIds[partIndex]));
+				auto transformationType = static_cast<int>(_fe3d->animation3d_getTransformationType(animationId, frameIndex, partIds[partIndex]));
 
 				file
-					<< partId
-					<< " "
 					<< targetTransformation.x
 					<< " "
 					<< targetTransformation.y
@@ -74,7 +81,7 @@ const bool Animation3dEditor::saveToFile() const
 					<< " "
 					<< transformationType;
 
-				if(partIndex != (partIds.size() - 1))
+				if(partIndex != (partCount - 1))
 				{
 					file << " ";
 				}

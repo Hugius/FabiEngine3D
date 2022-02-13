@@ -7,20 +7,18 @@ void Animation3dEditor::_updateFrameMenu()
 
 	if(screen->getId() == "animation3dEditorMenuFrame")
 	{
-		auto currentAnimation = _getAnimation(_currentAnimationId);
-		auto frame = currentAnimation->getFrames()[_currentFrameIndex];
-		auto transformation = frame.getTargetTransformations().at(_currentPartId);
-		auto rotationOrigin = frame.getRotationOrigins().at(_currentPartId);
-		auto speed = frame.getSpeeds().at(_currentPartId);
-		auto speedType = frame.getSpeedTypes().at(_currentPartId);
-		auto transformationType = frame.getTransformationTypes().at(_currentPartId);
+		auto transformation = _fe3d->animation3d_getTargetTransformation(_currentAnimationId, _currentFrameIndex, _currentPartId);
+		auto rotationOrigin = _fe3d->animation3d_getRotationOrigin(_currentAnimationId, _currentFrameIndex, _currentPartId);
+		auto speed = _fe3d->animation3d_getSpeed(_currentAnimationId, _currentFrameIndex, _currentPartId);
+		auto speedType = _fe3d->animation3d_getSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId);
+		auto transformationType = _fe3d->animation3d_getTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId);
 		auto multiplier = (transformationType == TransformationType::MOVEMENT) ? 1000.0f : (transformationType == TransformationType::SCALING) ? 100.0f : 1.0f;
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			if(!_currentPartId.empty())
 			{
-				_fe3d->model_setOpacity(currentAnimation->getPreviewModelId(), _currentPartId, _originalPartOpacity);
+				_fe3d->model_setOpacity(_previewModelId, _currentPartId, _originalPartOpacity);
 				_currentPartId = "";
 			}
 
@@ -31,14 +29,14 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			if(_currentPartId.empty())
 			{
-				auto partIds = currentAnimation->getPartIds();
+				auto partIds = _fe3d->animation3d_getPartIds(_currentAnimationId);
 				partIds.erase(partIds.begin());
 				_gui->getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), partIds);
 				_isChoosingPart = true;
 			}
 			else
 			{
-				_fe3d->model_setOpacity(currentAnimation->getPreviewModelId(), _currentPartId, _originalPartOpacity);
+				_fe3d->model_setOpacity(_previewModelId, _currentPartId, _originalPartOpacity);
 				_currentPartId = "";
 			}
 		}
@@ -97,11 +95,11 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			if(_currentPartId.empty())
 			{
-				_fe3d->model_rotateBase(currentAnimation->getPreviewModelId(), frame.getSpeeds().at(_currentPartId));
+				_fe3d->model_rotateBase(_previewModelId, _fe3d->animation3d_getSpeed(_currentAnimationId, _currentFrameIndex, _currentPartId));
 			}
 			else
 			{
-				_fe3d->model_rotatePart(currentAnimation->getPreviewModelId(), _currentPartId, frame.getSpeeds().at(_currentPartId));
+				_fe3d->model_rotatePart(_previewModelId, _currentPartId, _fe3d->animation3d_getSpeed(_currentAnimationId, _currentFrameIndex, _currentPartId));
 			}
 			_mustUpdateCurrentFramePreview = false;
 		}
@@ -188,12 +186,10 @@ void Animation3dEditor::_updateFrameMenu()
 			}
 		}
 
-		frame.setTargetTransformation(_currentPartId, transformation);
-		frame.setTransformationType(_currentPartId, transformationType);
-		frame.setSpeed(_currentPartId, speed);
-		frame.setSpeedType(_currentPartId, speedType);
-		frame.setRotationOrigin(_currentPartId, rotationOrigin);
-
-		currentAnimation->setFrame(_currentFrameIndex, frame);
+		_fe3d->animation3d_setTargetTransformation(_currentAnimationId, _currentFrameIndex, _currentPartId, transformation);
+		_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, transformationType);
+		_fe3d->animation3d_setSpeed(_currentAnimationId, _currentFrameIndex, _currentPartId, speed);
+		_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, speedType);
+		_fe3d->animation3d_setRotationOrigin(_currentAnimationId, _currentFrameIndex, _currentPartId, rotationOrigin);
 	}
 }

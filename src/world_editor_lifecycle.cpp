@@ -37,7 +37,7 @@ void WorldEditor::_load()
 	}
 
 	_animation2dEditor->loadFromFile();
-	_animation3dEditor->loadFromFile(false);
+	_animation3dEditor->loadFromFile();
 
 	_fe3d->model_create(TEMPLATE_LAMP_ID, LAMP_MODEL_PATH);
 	_fe3d->model_setBaseSize(TEMPLATE_LAMP_ID, DEFAULT_LAMP_SIZE);

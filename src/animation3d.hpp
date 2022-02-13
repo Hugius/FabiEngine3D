@@ -13,12 +13,12 @@ class Animation3d final
 public:
 	Animation3d(const string& id);
 
-	void createFrame(unsigned int index);
-	void deleteFrame(unsigned int index);
-	void deleteFrames();
 	void createPart(const string& partId);
 	void deletePart(const string& partId);
 	void deleteParts();
+	void createFrame(unsigned int index);
+	void deleteFrame(unsigned int index);
+	void deleteFrames();
 	void setTargetTransformation(unsigned int frameIndex, const string& partId, const fvec3& value);
 	void setRotationOrigin(unsigned int frameIndex, const string& partId, const fvec3& value);
 	void setSpeed(unsigned int frameIndex, const string& partId, const fvec3& value);

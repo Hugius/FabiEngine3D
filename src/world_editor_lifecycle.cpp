@@ -162,9 +162,6 @@ void WorldEditor::_unload()
 	_outsideLoadedTextIds.clear();
 	_loadedSoundIds.clear();
 	_outsideLoadedSoundIds.clear();
-	_initialModelPosition.clear();
-	_initialModelRotation.clear();
-	_initialModelSize.clear();
 	_customWorldModelIds.clear();
 	_customWorldQuadIds.clear();
 	_customWorldTextIds.clear();

@@ -184,9 +184,6 @@ private:
 	map<string, string> _outsideLoadedTextIds;
 	map<string, string> _loadedSoundIds;
 	map<string, string> _outsideLoadedSoundIds;
-	map<string, fvec3> _initialModelPosition;
-	map<string, fvec3> _initialModelRotation;
-	map<string, fvec3> _initialModelSize;
 	vector<string> _customWorldModelIds;
 	vector<string> _customWorldQuadIds;
 	vector<string> _customWorldTextIds;

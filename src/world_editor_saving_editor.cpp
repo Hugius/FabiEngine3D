@@ -119,11 +119,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			if(!startedAnimationIds.empty())
 			{
-				_fe3d->model_setBasePosition(modelId, _initialModelPosition[modelId]);
-				_fe3d->model_setBaseRotationOrigin(modelId, fvec3(0.0f));
-				_fe3d->model_setBaseRotation(modelId, _initialModelRotation[modelId]);
-				_fe3d->model_setBaseSize(modelId, _initialModelSize[modelId]);
-
 				for(const auto& partId : _fe3d->model_getPartIds(modelId))
 				{
 					if(!partId.empty())

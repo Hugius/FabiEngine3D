@@ -185,13 +185,6 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->model_setBaseSize(modelId, size);
 				_fe3d->model_setFrozen(modelId, isFrozen);
 
-				if(isLoaded())
-				{
-					_initialModelPosition.insert(make_pair(modelId, position));
-					_initialModelRotation.insert(make_pair(modelId, rotation));
-					_initialModelSize.insert(make_pair(modelId, size));
-				}
-
 				if(!animationId.empty())
 				{
 					_fe3d->model_startAnimation(modelId, animationId, -1);

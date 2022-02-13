@@ -34,11 +34,16 @@ const bool Text2dEditor::saveToFile() const
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
 		file
-			<< textId << " "
-			<< fontMapPath << " "
-			<< color.r << " "
-			<< color.g << " "
-			<< color.b << " "
+			<< textId
+			<< " "
+			<< fontMapPath
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
+			<< color.b
+			<< " "
 			<< opacity
 			<< endl;
 	}

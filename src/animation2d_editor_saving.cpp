@@ -28,9 +28,12 @@ const bool Animation2dEditor::saveToFile() const
 		auto interval = _fe3d->animation2d_getInterval(animationId);
 
 		file
-			<< animationId << " "
-			<< rowCount << " "
-			<< columnCount << " "
+			<< animationId
+			<< " "
+			<< rowCount
+			<< " "
+			<< columnCount
+			<< " "
 			<< interval << endl;
 	}
 

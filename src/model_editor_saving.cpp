@@ -47,15 +47,24 @@ const bool ModelEditor::saveToFile() const
 
 		file
 			<< "MODEL "
-			<< modelId << " "
-			<< meshPath << " "
-			<< modelSize.x << " "
-			<< modelSize.y << " "
-			<< modelSize.z << " "
-			<< levelOfDetailEntityId << " "
-			<< levelOfDetailDistance << " "
-			<< rotationOrder << " "
-			<< isShadowed << " "
+			<< modelId
+			<< " "
+			<< meshPath
+			<< " "
+			<< modelSize.x
+			<< " "
+			<< modelSize.y
+			<< " "
+			<< modelSize.z
+			<< " "
+			<< levelOfDetailEntityId
+			<< " "
+			<< levelOfDetailDistance
+			<< " "
+			<< rotationOrder
+			<< " "
+			<< isShadowed
+			<< " "
 			<< isReflected
 			<< endl;
 
@@ -103,28 +112,50 @@ const bool ModelEditor::saveToFile() const
 
 			file
 				<< "PART "
-				<< modelId << " "
-				<< partId << " "
-				<< diffuseMapPath << " "
-				<< emissionMapPath << " "
-				<< specularMapPath << " "
-				<< reflectionMapPath << " "
-				<< normalMapPath << " "
-				<< reflectionType << " "
-				<< isSpecular << " "
-				<< isReflective << " "
-				<< specularShininess << " "
-				<< specularIntensity << " "
-				<< reflectivity << " "
-				<< lightness << " "
-				<< color.r << " "
-				<< color.g << " "
-				<< color.b << " "
-				<< textureRepeat << " "
-				<< isFaceCulled << " "
-				<< isBright << " "
-				<< emissionIntensity << " "
-				<< opacity << " "
+				<< modelId
+				<< " "
+				<< partId
+				<< " "
+				<< diffuseMapPath
+				<< " "
+				<< emissionMapPath
+				<< " "
+				<< specularMapPath
+				<< " "
+				<< reflectionMapPath
+				<< " "
+				<< normalMapPath
+				<< " "
+				<< reflectionType
+				<< " "
+				<< isSpecular
+				<< " "
+				<< isReflective
+				<< " "
+				<< specularShininess
+				<< " "
+				<< specularIntensity
+				<< " "
+				<< reflectivity
+				<< " "
+				<< lightness
+				<< " "
+				<< color.r
+				<< " "
+				<< color.g
+				<< " "
+				<< color.b
+				<< " "
+				<< textureRepeat
+				<< " "
+				<< isFaceCulled
+				<< " "
+				<< isBright
+				<< " "
+				<< emissionIntensity
+				<< " "
+				<< opacity
+				<< " "
 				<< minTextureAlpha
 				<< endl;
 		}
@@ -137,13 +168,20 @@ const bool ModelEditor::saveToFile() const
 
 			file
 				<< "AABB "
-				<< modelId << " "
-				<< aabbId << " "
-				<< position.x << " "
-				<< position.y << " "
-				<< position.z << " "
-				<< size.x << " "
-				<< size.y << " "
+				<< modelId
+				<< " "
+				<< aabbId
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
+				<< size.x
+				<< " "
+				<< size.y
+				<< " "
 				<< size.z
 				<< endl;
 		}

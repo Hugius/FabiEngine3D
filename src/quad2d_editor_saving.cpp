@@ -34,11 +34,16 @@ const bool Quad2dEditor::saveToFile() const
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 
 		file
-			<< quadId << " "
-			<< diffuseMapPath << " "
-			<< color.r << " "
-			<< color.g << " "
-			<< color.b << " "
+			<< quadId
+			<< " "
+			<< diffuseMapPath
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
+			<< color.b
+			<< " "
 			<< opacity
 			<< endl;
 	}

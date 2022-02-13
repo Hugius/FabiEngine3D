@@ -73,25 +73,44 @@ const bool TerrainEditor::saveToFile() const
 		replace(blueNormalMapPath.begin(), blueNormalMapPath.end(), ' ', '?');
 
 		file
-			<< terrainId << " "
-			<< heightMapPath << " "
-			<< diffuseMapPath << " "
-			<< maxHeight << " "
-			<< textureRepeat << " "
-			<< lightness << " "
-			<< blendMapPath << " "
-			<< redDiffuseMapPath << " "
-			<< greenDiffuseMapPath << " "
-			<< blueDiffuseMapPath << " "
-			<< redTextureRepeat << " "
-			<< greenTextureRepeat << " "
-			<< blueTextureRepeat << " "
-			<< normalMapPath << " "
-			<< redNormalMapPath << " "
-			<< greenNormalMapPath << " "
-			<< blueNormalMapPath << " "
-			<< isSpecular << " "
-			<< specularShininess << " "
+			<< terrainId
+			<< " "
+			<< heightMapPath
+			<< " "
+			<< diffuseMapPath
+			<< " "
+			<< maxHeight
+			<< " "
+			<< textureRepeat
+			<< " "
+			<< lightness
+			<< " "
+			<< blendMapPath
+			<< " "
+			<< redDiffuseMapPath
+			<< " "
+			<< greenDiffuseMapPath
+			<< " "
+			<< blueDiffuseMapPath
+			<< " "
+			<< redTextureRepeat
+			<< " "
+			<< greenTextureRepeat
+			<< " "
+			<< blueTextureRepeat
+			<< " "
+			<< normalMapPath
+			<< " "
+			<< redNormalMapPath
+			<< " "
+			<< greenNormalMapPath
+			<< " "
+			<< blueNormalMapPath
+			<< " "
+			<< isSpecular
+			<< " "
+			<< specularShininess
+			<< " "
 			<< specularIntensity
 			<< endl;
 	}

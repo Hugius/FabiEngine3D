@@ -43,20 +43,34 @@ const bool Text3dEditor::saveToFile() const
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
 		file
-			<< textId << " "
-			<< size.x << " "
-			<< size.y << " "
-			<< color.r << " "
-			<< color.g << " "
-			<< color.b << " "
-			<< isFacingCameraHorizontally << " "
-			<< isFacingCameraVertically << " "
-			<< fontMapPath << " "
-			<< isReflected << " "
-			<< isShadowed << " "
-			<< lightness << " "
-			<< isBright << " "
-			<< opacity << " "
+			<< textId
+			<< " "
+			<< size.x
+			<< " "
+			<< size.y
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
+			<< color.b
+			<< " "
+			<< isFacingCameraHorizontally
+			<< " "
+			<< isFacingCameraVertically
+			<< " "
+			<< fontMapPath
+			<< " "
+			<< isReflected
+			<< " "
+			<< isShadowed
+			<< " "
+			<< lightness
+			<< " "
+			<< isBright
+			<< " "
+			<< opacity
+			<< " "
 			<< minTextureAlpha
 			<< endl;
 	}

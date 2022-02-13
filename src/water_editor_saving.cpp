@@ -55,27 +55,48 @@ const bool WaterEditor::saveToFile() const
 		replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
 
 		file
-			<< waterId << " "
-			<< dudvMapPath << " "
-			<< normalMapPath << " "
-			<< displacementMapPath << " "
-			<< isSpecular << " "
-			<< isReflective << " "
-			<< isRefractive << " "
-			<< color.r << " "
-			<< color.g << " "
-			<< color.b << " "
-			<< size << " "
-			<< height << " "
-			<< textureRepeat << " "
-			<< waveHeight << " "
-			<< rippleSpeed.x << " "
-			<< rippleSpeed.y << " "
-			<< waveSpeed.x << " "
-			<< waveSpeed.y << " "
-			<< isEdged << " "
-			<< specularShininess << " "
-			<< specularIntensity << " "
+			<< waterId
+			<< " "
+			<< dudvMapPath
+			<< " "
+			<< normalMapPath
+			<< " "
+			<< displacementMapPath
+			<< " "
+			<< isSpecular
+			<< " "
+			<< isReflective
+			<< " "
+			<< isRefractive
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
+			<< color.b
+			<< " "
+			<< size
+			<< " "
+			<< height
+			<< " "
+			<< textureRepeat
+			<< " "
+			<< waveHeight
+			<< " "
+			<< rippleSpeed.x
+			<< " "
+			<< rippleSpeed.y
+			<< " "
+			<< waveSpeed.x
+			<< " "
+			<< waveSpeed.y
+			<< " "
+			<< isEdged
+			<< " "
+			<< specularShininess
+			<< " "
+			<< specularIntensity
+			<< " "
 			<< maxDepth
 			<< endl;
 	}

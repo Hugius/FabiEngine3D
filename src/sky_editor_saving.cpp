@@ -38,18 +38,26 @@ const bool SkyEditor::saveToFile() const
 			replace(cubeMapPath.begin(), cubeMapPath.end(), ' ', '?');
 		}
 
-		file << skyId << " ";
+		file
+			<< skyId
+			<< " ";
 
 		for(const auto& cubeMapPath : cubeMapPaths)
 		{
-			file << cubeMapPath << " ";
+			file
+				<< cubeMapPath
+				<< " ";
 		}
 
 		file
-			<< rotation << " "
-			<< lightness << " "
-			<< color.r << " "
-			<< color.g << " "
+			<< rotation
+			<< " "
+			<< lightness
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
 			<< color.b
 			<< endl;
 	}

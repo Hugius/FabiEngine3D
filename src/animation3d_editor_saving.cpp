@@ -28,8 +28,10 @@ const bool Animation3dEditor::saveToFile() const
 		const auto partIds = _fe3d->animation3d_getPartIds(animationId);
 
 		file
-			<< animationId << " "
-			<< _fe3d->animation3d_getPartIds(animationId).size() << " ";
+			<< animationId
+			<< " "
+			<< _fe3d->animation3d_getPartIds(animationId).size()
+			<< " ";
 
 		for(unsigned int frameIndex = 1; frameIndex < frameCount; frameIndex++)
 		{
@@ -48,17 +50,28 @@ const bool Animation3dEditor::saveToFile() const
 				}
 
 				file
-					<< partId << " "
-					<< targetTransformation.x << " "
-					<< targetTransformation.y << " "
-					<< targetTransformation.z << " "
-					<< rotationOrigin.x << " "
-					<< rotationOrigin.y << " "
-					<< rotationOrigin.z << " "
-					<< speed.x << " "
-					<< speed.y << " "
-					<< speed.z << " "
-					<< speedType << " "
+					<< partId
+					<< " "
+					<< targetTransformation.x
+					<< " "
+					<< targetTransformation.y
+					<< " "
+					<< targetTransformation.z
+					<< " "
+					<< rotationOrigin.x
+					<< " "
+					<< rotationOrigin.y
+					<< " "
+					<< rotationOrigin.z
+					<< " "
+					<< speed.x
+					<< " "
+					<< speed.y
+					<< " "
+					<< speed.z
+					<< " "
+					<< speedType
+					<< " "
 					<< transformationType;
 
 				if(partIndex != (partIds.size() - 1))

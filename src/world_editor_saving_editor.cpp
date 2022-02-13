@@ -46,8 +46,10 @@ const bool WorldEditor::saveEditorWorldToFile()
 		const auto cameraPosition = _fe3d->camera_getPosition();
 		file
 			<< "CAMERA_POSITION "
-			<< cameraPosition.x << " "
-			<< cameraPosition.y << " "
+			<< cameraPosition.x
+			<< " "
+			<< cameraPosition.y
+			<< " "
 			<< cameraPosition.z
 			<< endl;
 	}
@@ -73,7 +75,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "SKY "
-			<< skyId << " "
+			<< skyId
+			<< " "
 			<< templateId
 			<< endl;
 	}
@@ -85,7 +88,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "TERRAIN "
-			<< terrainId << " "
+			<< terrainId
+			<< " "
 			<< templateId
 			<< endl;
 	}
@@ -98,8 +102,10 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "WATER "
-			<< waterId << " "
-			<< templateId << " "
+			<< waterId
+			<< " "
+			<< templateId
+			<< " "
 			<< height
 			<< endl;
 	}
@@ -144,18 +150,30 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			file
 				<< "MODEL "
-				<< modelId << " "
-				<< templateId << " "
-				<< position.x << " "
-				<< position.y << " "
-				<< position.z << " "
-				<< rotation.x << " "
-				<< rotation.y << " "
-				<< rotation.z << " "
-				<< size.x << " "
-				<< size.y << " "
-				<< size.z << " "
-				<< isFrozen << " "
+				<< modelId
+				<< " "
+				<< templateId
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
+				<< rotation.x
+				<< " "
+				<< rotation.y
+				<< " "
+				<< rotation.z
+				<< " "
+				<< size.x
+				<< " "
+				<< size.y
+				<< " "
+				<< size.z
+				<< " "
+				<< isFrozen
+				<< " "
 				<< animationId;
 
 			file << endl;
@@ -180,16 +198,26 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			file
 				<< "QUAD3D "
-				<< quadId << " "
-				<< templateId << " "
-				<< position.x << " "
-				<< position.y << " "
-				<< position.z << " "
-				<< rotation.x << " "
-				<< rotation.y << " "
-				<< rotation.z << " "
-				<< size.x << " "
-				<< size.y << " "
+				<< quadId
+				<< " "
+				<< templateId
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
+				<< rotation.x
+				<< " "
+				<< rotation.y
+				<< " "
+				<< rotation.z
+				<< " "
+				<< size.x
+				<< " "
+				<< size.y
+				<< " "
 				<< animationId
 				<< endl;
 		}
@@ -207,15 +235,24 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			file
 				<< "TEXT3D "
-				<< textID << " "
-				<< templateId << " "
-				<< position.x << " "
-				<< position.y << " "
-				<< position.z << " "
-				<< rotation.x << " "
-				<< rotation.y << " "
-				<< rotation.z << " "
-				<< size.x << " "
+				<< textID
+				<< " "
+				<< templateId
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
+				<< rotation.x
+				<< " "
+				<< rotation.y
+				<< " "
+				<< rotation.z
+				<< " "
+				<< size.x
+				<< " "
 				<< size.y
 				<< endl;
 		}
@@ -233,12 +270,18 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			file
 				<< "SOUND "
-				<< soundId << " "
-				<< templateId << " "
-				<< position.x << " "
-				<< position.y << " "
-				<< position.z << " "
-				<< maxVolume << " "
+				<< soundId
+				<< " "
+				<< templateId
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
+				<< maxVolume
+				<< " "
 				<< maxDistance
 				<< endl;
 		}
@@ -256,17 +299,28 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			file
 				<< "POINTLIGHT "
-				<< pointlightId << " "
-				<< position.x << " "
-				<< position.y << " "
-				<< position.z << " "
-				<< radius.x << " "
-				<< radius.y << " "
-				<< radius.z << " "
-				<< color.r << " "
-				<< color.g << " "
-				<< color.b << " "
-				<< intensity << " "
+				<< pointlightId
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
+				<< radius.x
+				<< " "
+				<< radius.y
+				<< " "
+				<< radius.z
+				<< " "
+				<< color.r
+				<< " "
+				<< color.g
+				<< " "
+				<< color.b
+				<< " "
+				<< intensity
+				<< " "
 				<< shape
 				<< endl;
 		}
@@ -286,17 +340,28 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			file
 				<< "SPOTLIGHT "
-				<< spotlightId << " "
-				<< position.x << " "
-				<< position.y << " "
-				<< position.z << " "
-				<< color.r << " "
-				<< color.g << " "
-				<< color.b << " "
-				<< yaw << " "
-				<< pitch << " "
-				<< intensity << " "
-				<< angle << " "
+				<< spotlightId
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
+				<< color.r
+				<< " "
+				<< color.g
+				<< " "
+				<< color.b
+				<< " "
+				<< yaw
+				<< " "
+				<< pitch
+				<< " "
+				<< intensity
+				<< " "
+				<< angle
+				<< " "
 				<< distance
 				<< endl;
 		}
@@ -311,10 +376,14 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			file
 				<< "REFLECTION "
-				<< reflectionId << " "
-				<< position.x << " "
-				<< position.y << " "
-				<< position.z << " "
+				<< reflectionId
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
 				<< exceptionModelId
 				<< endl;
 		}
@@ -334,9 +403,12 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "LIGHTING_AMBIENT "
-			<< ambientLightingColor.r << " "
-			<< ambientLightingColor.g << " "
-			<< ambientLightingColor.b << " "
+			<< ambientLightingColor.r
+			<< " "
+			<< ambientLightingColor.g
+			<< " "
+			<< ambientLightingColor.b
+			<< " "
 			<< ambientLightingIntensity
 			<< endl;
 	}
@@ -349,12 +421,18 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "LIGHTING_DIRECTIONAL "
-			<< directionalLightingPosition.x << " "
-			<< directionalLightingPosition.y << " "
-			<< directionalLightingPosition.z << " "
-			<< directionalLightingColor.r << " "
-			<< directionalLightingColor.g << " "
-			<< directionalLightingColor.b << " "
+			<< directionalLightingPosition.x
+			<< " "
+			<< directionalLightingPosition.y
+			<< " "
+			<< directionalLightingPosition.z
+			<< " "
+			<< directionalLightingColor.r
+			<< " "
+			<< directionalLightingColor.g
+			<< " "
+			<< directionalLightingColor.b
+			<< " "
 			<< directionalLightingIntensity
 			<< endl;
 	}
@@ -371,16 +449,26 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "GRAPHICS_SHADOWS "
-			<< size << " "
-			<< lightness << " "
-			<< position.x << " "
-			<< position.y << " "
-			<< position.z << " "
-			<< lookat.x << " "
-			<< lookat.y << " "
-			<< lookat.z << " "
-			<< isFollowingCamera << " "
-			<< interval << " "
+			<< size
+			<< " "
+			<< lightness
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< lookat.x
+			<< " "
+			<< lookat.y
+			<< " "
+			<< lookat.z
+			<< " "
+			<< isFollowingCamera
+			<< " "
+			<< interval
+			<< " "
 			<< quality
 			<< endl;
 	}
@@ -392,8 +480,10 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "GRAPHICS_REFLECTIONS "
-			<< planarHeight << " "
-			<< cubeQuality << " "
+			<< planarHeight
+			<< " "
+			<< cubeQuality
+			<< " "
 			<< planarQuality
 			<< endl;
 	}
@@ -416,9 +506,12 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "GRAPHICS_DOF "
-			<< dynamic << " "
-			<< blurDistance << " "
-			<< maxDistance << " "
+			<< dynamic
+			<< " "
+			<< blurDistance
+			<< " "
+			<< maxDistance
+			<< " "
 			<< quality
 			<< endl;
 	}
@@ -432,11 +525,16 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "GRAPHICS_FOG "
-			<< minDistance << " "
-			<< maxDistance << " "
-			<< thickness << " "
-			<< color.r << " "
-			<< color.g << " "
+			<< minDistance
+			<< " "
+			<< maxDistance
+			<< " "
+			<< thickness
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
 			<< color.b
 			<< endl;
 	}
@@ -455,8 +553,10 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "GRAPHICS_LENS_FLARE "
-			<< flareMapPath << " "
-			<< intensity << " "
+			<< flareMapPath
+			<< " "
+			<< intensity
+			<< " "
 			<< sensitivity
 			<< endl;
 	}
@@ -465,7 +565,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 	{
 		file
 			<< "GRAPHICS_SKY_EXPOSURE "
-			<< _fe3d->gfx_getSkyExposureIntensity() << " "
+			<< _fe3d->gfx_getSkyExposureIntensity()
+			<< " "
 			<< _fe3d->gfx_getSkyExposureSpeed()
 			<< endl;
 	}
@@ -479,9 +580,12 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		file
 			<< "GRAPHICS_BLOOM "
-			<< type << " "
-			<< intensity << " "
-			<< blurCount << " "
+			<< type
+			<< " "
+			<< intensity
+			<< " "
+			<< blurCount
+			<< " "
 			<< quality
 			<< endl;
 	}

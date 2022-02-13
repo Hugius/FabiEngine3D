@@ -8,10 +8,7 @@ void EngineInterface::sky_create(const string& id)
 
 void EngineInterface::sky_deleteAll()
 {
-	for(const auto& [key, entity] : _core->getSkyEntityManager()->getEntities())
-	{
-		sky_delete(entity->getId());
-	}
+	_core->getSkyEntityManager()->deleteEntities();
 }
 
 void EngineInterface::sky_setCubeMaps(const string& id, const array<string, 6>& value)

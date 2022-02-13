@@ -93,8 +93,6 @@ void Animation3dEditor::_unload()
 	_gui->getOverlay()->deleteTextField("animationId");
 	_gui->getOverlay()->deleteTextField("animationFrame");
 
-	_modelAnimationsToStop.clear();
-	_modelAnimationsToStart.clear();
 	_currentAnimationId = "";
 	_currentPartId = "";
 	_hoveredModelId = "";

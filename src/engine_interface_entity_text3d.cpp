@@ -8,10 +8,18 @@ void EngineInterface::text3d_create(const string& id, const string& fontMapPath,
 
 void EngineInterface::text3d_deleteAll()
 {
-	for(const auto& [key, entity] : _core->getText3dEntityManager()->getEntities())
+	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
-		text3d_delete(entity->getId());
+		if(entity->hasParent())
+		{
+			if(entity->getParentEntityType() == AabbParentEntityType::TEXT3D)
+			{
+				_core->getAabbEntityManager()->deleteEntity(key);
+			}
+		}
 	}
+
+	_core->getText3dEntityManager()->deleteEntities();
 }
 
 void EngineInterface::text3d_setContent(const string& id, const string& value)

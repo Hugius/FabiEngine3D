@@ -10,7 +10,10 @@ void EngineInterface::animation3d_delete(const string& id)
 {
 	for(const auto& [animationId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimationIds())
 	{
-		_core->getAnimation3dPlayer()->stopModelAnimation(animationId, modelId);
+		if(id == animationId)
+		{
+			_core->getAnimation3dPlayer()->stopModelAnimation(animationId, modelId);
+		}
 	}
 
 	_core->getAnimation3dManager()->deleteAnimation(id);
@@ -18,6 +21,11 @@ void EngineInterface::animation3d_delete(const string& id)
 
 void EngineInterface::animation3d_deleteAll()
 {
+	for(const auto& [animationId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimationIds())
+	{
+		_core->getAnimation3dPlayer()->stopModelAnimation(animationId, modelId);
+	}
+
 	_core->getAnimation3dManager()->deleteAnimations();
 }
 

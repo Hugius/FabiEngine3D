@@ -10,6 +10,27 @@ void EngineInterface::animation2d_delete(const string& id)
 {
 	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
 	{
+		if(id == animationId)
+		{
+			_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
+		}
+	}
+
+	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
+	{
+		if(id == animationId)
+		{
+			_core->getAnimation2dPlayer()->stopQuad2dAnimation(animationId, quadId);
+		}
+	}
+
+	_core->getAnimation2dManager()->deleteAnimation(id);
+}
+
+void EngineInterface::animation2d_deleteAll()
+{
+	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
+	{
 		_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
 	}
 
@@ -18,11 +39,6 @@ void EngineInterface::animation2d_delete(const string& id)
 		_core->getAnimation2dPlayer()->stopQuad2dAnimation(animationId, quadId);
 	}
 
-	_core->getAnimation2dManager()->deleteAnimation(id);
-}
-
-void EngineInterface::animation2d_deleteAll()
-{
 	_core->getAnimation2dManager()->deleteAnimations();
 }
 

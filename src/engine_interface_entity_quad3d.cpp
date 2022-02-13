@@ -8,10 +8,23 @@ void EngineInterface::quad3d_create(const string& id, bool isCentered)
 
 void EngineInterface::quad3d_deleteAll()
 {
-	for(const auto& [key, entity] : _core->getQuad3dEntityManager()->getEntities())
+	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
 	{
-		quad3d_delete(entity->getId());
+		_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
 	}
+
+	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
+	{
+		if(entity->hasParent())
+		{
+			if(entity->getParentEntityType() == AabbParentEntityType::QUAD3D)
+			{
+				_core->getAabbEntityManager()->deleteEntity(key);
+			}
+		}
+	}
+
+	_core->getQuad3dEntityManager()->deleteEntities();
 }
 
 void EngineInterface::quad3d_delete(const string& id)

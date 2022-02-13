@@ -62,6 +62,11 @@ void Animation3dEditor::_unload()
 		_fe3d->model_delete(id);
 	}
 
+	for(const auto& id : _loadedAnimationIds)
+	{
+		_fe3d->animation3d_delete(id);
+	}
+
 	_fe3d->camera_setThirdPersonEnabled(false);
 
 	_fe3d->gfx_setAntiAliasingEnabled(false);
@@ -107,8 +112,6 @@ void Animation3dEditor::_unload()
 	_isDeletingAnimation = false;
 	_isChoosingModel = false;
 	_isChoosingPart = false;
-	_startedModelAnimations.clear();
-	_animations.clear();
 }
 
 void Animation3dEditor::_loadGUI()
@@ -154,8 +157,6 @@ void Animation3dEditor::_unloadGUI()
 
 void Animation3dEditor::update()
 {
-	_updateModelAnimationExecution();
-
 	if(isLoaded())
 	{
 		_updateMainMenu();

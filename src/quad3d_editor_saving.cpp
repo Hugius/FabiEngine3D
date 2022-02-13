@@ -48,25 +48,26 @@ const bool Quad3dEditor::saveToFile() const
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 
-		file <<
-			quadId << " " <<
-			size.x << " " <<
-			size.y << " " <<
-			color.r << " " <<
-			color.g << " " <<
-			color.b << " " <<
-			isFacingCameraHorizontally << " " <<
-			isFacingCameraVertically << " " <<
-			diffuseMapPath << " " <<
-			emissionMapPath << " " <<
-			isReflected << " " <<
-			isShadowed << " " <<
-			lightness << " " <<
-			textureRepeat << " " <<
-			isBright << " " <<
-			emissionIntensity << " " <<
-			opacity << " " <<
-			minTextureAlpha << endl;
+		file
+			<< quadId << " "
+			<< size.x << " "
+			<< size.y << " "
+			<< color.r << " "
+			<< color.g << " "
+			<< color.b << " "
+			<< isFacingCameraHorizontally << " "
+			<< isFacingCameraVertically << " "
+			<< diffuseMapPath << " "
+			<< emissionMapPath << " "
+			<< isReflected << " "
+			<< isShadowed << " "
+			<< lightness << " "
+			<< textureRepeat << " "
+			<< isBright << " "
+			<< emissionIntensity << " "
+			<< opacity << " "
+			<< minTextureAlpha
+			<< endl;
 	}
 
 	file.close();

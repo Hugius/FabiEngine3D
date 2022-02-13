@@ -22,71 +22,58 @@ const bool Animation3dEditor::saveToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation3d.fe3d");
 
-	for(const auto& animation : _animations)
+	for(const auto& animationId : _loadedAnimationIds)
 	{
-		auto animationId = animation->getId();
-		auto previewModelId = animation->getPreviewModelId();
+		const auto frameCount = _fe3d->animation3d_getFrameCount(animationId);
+		const auto partIds = _fe3d->animation3d_getPartIds(animationId);
 
-		if(!previewModelId.empty())
+		file
+			<< animationId << " "
+			<< _fe3d->animation3d_getPartIds(animationId).size() << " ";
+
+		for(unsigned int frameIndex = 1; frameIndex < frameCount; frameIndex++)
 		{
-			file <<
-				animationId << " " <<
-				previewModelId;
-
-			if(animation->getFrames().size() > 1)
+			for(unsigned int partIndex = 1; partIndex < partIds.size(); partIndex++)
 			{
-				file << " ";
+				auto partId = partIds[partIndex];
+				auto targetTransformation = _fe3d->animation3d_getTargetTransformation(animationId, frameIndex, partId);
+				auto rotationOrigin = _fe3d->animation3d_getRotationOrigin(animationId, frameIndex, partId);
+				auto speed = _fe3d->animation3d_getSpeed(animationId, frameIndex, partId);
+				auto speedType = static_cast<int>(_fe3d->animation3d_getSpeedType(animationId, frameIndex, partId));
+				auto transformationType = static_cast<int>(_fe3d->animation3d_getTransformationType(animationId, frameIndex, partId));
 
-				for(unsigned int frameIndex = 1; frameIndex < animation->getFrames().size(); frameIndex++)
+				if(partId.empty())
 				{
-					file << animation->getPartIds().size() << " ";
+					partId = "?";
+				}
 
-					unsigned int partIndex = 0;
-					for(auto partId : animation->getPartIds())
-					{
-						auto frame = animation->getFrames()[frameIndex];
-						auto targetTransformation = frame.getTargetTransformations().at(partId);
-						auto rotationOrigin = frame.getRotationOrigins().at(partId);
-						auto speed = frame.getSpeeds().at(partId);
-						auto speedType = static_cast<int>(frame.getSpeedTypes().at(partId));
-						auto transformationType = static_cast<int>(frame.getTransformationTypes().at(partId));
+				file
+					<< partId << " "
+					<< targetTransformation.x << " "
+					<< targetTransformation.y << " "
+					<< targetTransformation.z << " "
+					<< rotationOrigin.x << " "
+					<< rotationOrigin.y << " "
+					<< rotationOrigin.z << " "
+					<< speed.x << " "
+					<< speed.y << " "
+					<< speed.z << " "
+					<< speedType << " "
+					<< transformationType;
 
-						if(partId.empty())
-						{
-							partId = "?";
-						}
-
-						file <<
-							partId << " " <<
-							targetTransformation.x << " " <<
-							targetTransformation.y << " " <<
-							targetTransformation.z << " " <<
-							rotationOrigin.x << " " <<
-							rotationOrigin.y << " " <<
-							rotationOrigin.z << " " <<
-							speed.x << " " <<
-							speed.y << " " <<
-							speed.z << " " <<
-							speedType << " " <<
-							transformationType;
-
-						if(partIndex != (animation->getPartIds().size() - 1))
-						{
-							file << " ";
-						}
-
-						partIndex++;
-					}
-
-					if(frameIndex != (animation->getFrames().size() - 1))
-					{
-						file << " ";
-					}
+				if(partIndex != (partIds.size() - 1))
+				{
+					file << " ";
 				}
 			}
 
-			file << endl;
+			if(frameIndex != (frameCount - 1))
+			{
+				file << " ";
+			}
 		}
+
+		file << endl;
 	}
 
 	file.close();

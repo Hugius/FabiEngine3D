@@ -35,11 +35,11 @@ const bool Animation2dEditor::loadFromFile()
 
 		istringstream iss(line);
 
-		iss >>
-			animationId >>
-			rowCount >>
-			columnCount >>
-			interval;
+		iss
+			>> animationId
+			>> rowCount
+			>> columnCount
+			>> interval;
 
 		_loadedAnimationIds.push_back(animationId);
 

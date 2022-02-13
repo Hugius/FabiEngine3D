@@ -24,6 +24,7 @@ void Animation3dPlayer::startModelAnimation(const string& animationId, const str
 	const auto newAnimation = make_shared<StartedAnimation3d>(animationId, modelId);
 
 	newAnimation->setPlayCount(playCount);
+	newAnimation->setPartIds(_animation3dManager->getAnimation(animationId)->getPartIds());
 
 	_startedModelAnimations.insert(make_pair(make_pair(animationId, modelId), newAnimation));
 }

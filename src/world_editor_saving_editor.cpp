@@ -36,30 +36,34 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	{
-		file <<
-			"ID_COUNTER " <<
-			_idCounter << endl;
+		file
+			<< "ID_COUNTER "
+			<< _idCounter
+			<< endl;
 	}
 
 	{
 		const auto cameraPosition = _fe3d->camera_getPosition();
-		file <<
-			"CAMERA_POSITION " <<
-			cameraPosition.x << " " <<
-			cameraPosition.y << " " <<
-			cameraPosition.z << endl;
+		file
+			<< "CAMERA_POSITION "
+			<< cameraPosition.x << " "
+			<< cameraPosition.y << " "
+			<< cameraPosition.z
+			<< endl;
 	}
 
 	{
-		file <<
-			"CAMERA_YAW " <<
-			_fe3d->camera_getYaw() << endl;
+		file
+			<< "CAMERA_YAW "
+			<< _fe3d->camera_getYaw()
+			<< endl;
 	}
 
 	{
-		file <<
-			"CAMERA_PITCH " <<
-			_fe3d->camera_getPitch() << endl;
+		file
+			<< "CAMERA_PITCH "
+			<< _fe3d->camera_getPitch()
+			<< endl;
 	}
 
 	string skyId = _fe3d->sky_getSelectedId();
@@ -67,10 +71,11 @@ const bool WorldEditor::saveEditorWorldToFile()
 	{
 		string templateId = ("@" + skyId);
 
-		file <<
-			"SKY " <<
-			skyId << " " <<
-			templateId << endl;
+		file
+			<< "SKY "
+			<< skyId << " "
+			<< templateId
+			<< endl;
 	}
 
 	string terrainId = _fe3d->terrain_getSelectedId();
@@ -78,10 +83,11 @@ const bool WorldEditor::saveEditorWorldToFile()
 	{
 		string templateId = ("@" + terrainId);
 
-		file <<
-			"TERRAIN " <<
-			terrainId << " " <<
-			templateId << endl;
+		file
+			<< "TERRAIN "
+			<< terrainId << " "
+			<< templateId
+			<< endl;
 	}
 
 	string waterId = _fe3d->water_getSelectedId();
@@ -90,11 +96,12 @@ const bool WorldEditor::saveEditorWorldToFile()
 		string templateId = ("@" + waterId);
 		auto height = _fe3d->water_getHeight(waterId);
 
-		file <<
-			"WATER " <<
-			waterId << " " <<
-			templateId << " " <<
-			height << endl;
+		file
+			<< "WATER "
+			<< waterId << " "
+			<< templateId << " "
+			<< height
+			<< endl;
 	}
 
 	for(const auto& modelId : _fe3d->model_getIds())
@@ -135,21 +142,21 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			string templateId = _loadedModelIds.at(modelId);
 
-			file <<
-				"MODEL " <<
-				modelId << " " <<
-				templateId << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				rotation.x << " " <<
-				rotation.y << " " <<
-				rotation.z << " " <<
-				size.x << " " <<
-				size.y << " " <<
-				size.z << " " <<
-				isFrozen << " " <<
-				animationId;
+			file
+				<< "MODEL "
+				<< modelId << " "
+				<< templateId << " "
+				<< position.x << " "
+				<< position.y << " "
+				<< position.z << " "
+				<< rotation.x << " "
+				<< rotation.y << " "
+				<< rotation.z << " "
+				<< size.x << " "
+				<< size.y << " "
+				<< size.z << " "
+				<< isFrozen << " "
+				<< animationId;
 
 			file << endl;
 		}
@@ -171,19 +178,20 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			string templateId = _loadedQuadIds.at(quadId);
 
-			file <<
-				"QUAD3D " <<
-				quadId << " " <<
-				templateId << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				rotation.x << " " <<
-				rotation.y << " " <<
-				rotation.z << " " <<
-				size.x << " " <<
-				size.y << " " <<
-				animationId << endl;
+			file
+				<< "QUAD3D "
+				<< quadId << " "
+				<< templateId << " "
+				<< position.x << " "
+				<< position.y << " "
+				<< position.z << " "
+				<< rotation.x << " "
+				<< rotation.y << " "
+				<< rotation.z << " "
+				<< size.x << " "
+				<< size.y << " "
+				<< animationId
+				<< endl;
 		}
 	}
 
@@ -197,18 +205,19 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			string templateId = _loadedTextIds.at(textID);
 
-			file <<
-				"TEXT3D " <<
-				textID << " " <<
-				templateId << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				rotation.x << " " <<
-				rotation.y << " " <<
-				rotation.z << " " <<
-				size.x << " " <<
-				size.y << endl;
+			file
+				<< "TEXT3D "
+				<< textID << " "
+				<< templateId << " "
+				<< position.x << " "
+				<< position.y << " "
+				<< position.z << " "
+				<< rotation.x << " "
+				<< rotation.y << " "
+				<< rotation.z << " "
+				<< size.x << " "
+				<< size.y
+				<< endl;
 		}
 	}
 
@@ -222,15 +231,16 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 			string templateId = _loadedSoundIds.at(soundId);
 
-			file <<
-				"SOUND " <<
-				soundId << " " <<
-				templateId << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				maxVolume << " " <<
-				maxDistance << endl;
+			file
+				<< "SOUND "
+				<< soundId << " "
+				<< templateId << " "
+				<< position.x << " "
+				<< position.y << " "
+				<< position.z << " "
+				<< maxVolume << " "
+				<< maxDistance
+				<< endl;
 		}
 	}
 
@@ -244,20 +254,21 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
 			auto shape = static_cast<unsigned int>(_fe3d->pointlight_getShape(pointlightId));
 
-			file <<
-				"POINTLIGHT " <<
-				pointlightId << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				radius.x << " " <<
-				radius.y << " " <<
-				radius.z << " " <<
-				color.r << " " <<
-				color.g << " " <<
-				color.b << " " <<
-				intensity << " " <<
-				shape << endl;
+			file
+				<< "POINTLIGHT "
+				<< pointlightId << " "
+				<< position.x << " "
+				<< position.y << " "
+				<< position.z << " "
+				<< radius.x << " "
+				<< radius.y << " "
+				<< radius.z << " "
+				<< color.r << " "
+				<< color.g << " "
+				<< color.b << " "
+				<< intensity << " "
+				<< shape
+				<< endl;
 		}
 	}
 
@@ -273,20 +284,21 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto angle = _fe3d->spotlight_getAngle(spotlightId);
 			auto distance = _fe3d->spotlight_getDistance(spotlightId);
 
-			file <<
-				"SPOTLIGHT " <<
-				spotlightId << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				color.r << " " <<
-				color.g << " " <<
-				color.b << " " <<
-				yaw << " " <<
-				pitch << " " <<
-				intensity << " " <<
-				angle << " " <<
-				distance << endl;
+			file
+				<< "SPOTLIGHT "
+				<< spotlightId << " "
+				<< position.x << " "
+				<< position.y << " "
+				<< position.z << " "
+				<< color.r << " "
+				<< color.g << " "
+				<< color.b << " "
+				<< yaw << " "
+				<< pitch << " "
+				<< intensity << " "
+				<< angle << " "
+				<< distance
+				<< endl;
 		}
 	}
 
@@ -297,20 +309,22 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto position = _fe3d->reflection_getPosition(reflectionId);
 			auto exceptionModelId = _fe3d->reflection_getExceptionModelId(reflectionId);
 
-			file <<
-				"REFLECTION " <<
-				reflectionId << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				exceptionModelId << endl;
+			file
+				<< "REFLECTION "
+				<< reflectionId << " "
+				<< position.x << " "
+				<< position.y << " "
+				<< position.z << " "
+				<< exceptionModelId
+				<< endl;
 		}
 	}
 
 	{
-		file <<
-			"EDITOR_SPEED " <<
-			_editorSpeed << endl;
+		file
+			<< "EDITOR_SPEED "
+			<< _editorSpeed
+			<< endl;
 	}
 
 	if(_fe3d->gfx_isAmbientLightingEnabled())
@@ -318,12 +332,13 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto ambientLightingColor = _fe3d->gfx_getAmbientLightingColor();
 		auto ambientLightingIntensity = _fe3d->gfx_getAmbientLightingIntensity();
 
-		file <<
-			"LIGHTING_AMBIENT " <<
-			ambientLightingColor.r << " " <<
-			ambientLightingColor.g << " " <<
-			ambientLightingColor.b << " " <<
-			ambientLightingIntensity << endl;
+		file
+			<< "LIGHTING_AMBIENT "
+			<< ambientLightingColor.r << " "
+			<< ambientLightingColor.g << " "
+			<< ambientLightingColor.b << " "
+			<< ambientLightingIntensity
+			<< endl;
 	}
 
 	if(_fe3d->gfx_isDirectionalLightingEnabled())
@@ -332,15 +347,16 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto directionalLightingPosition = _fe3d->gfx_getDirectionalLightingPosition();
 		auto directionalLightingIntensity = _fe3d->gfx_getDirectionalLightingIntensity();
 
-		file <<
-			"LIGHTING_DIRECTIONAL " <<
-			directionalLightingPosition.x << " " <<
-			directionalLightingPosition.y << " " <<
-			directionalLightingPosition.z << " " <<
-			directionalLightingColor.r << " " <<
-			directionalLightingColor.g << " " <<
-			directionalLightingColor.b << " " <<
-			directionalLightingIntensity << endl;
+		file
+			<< "LIGHTING_DIRECTIONAL "
+			<< directionalLightingPosition.x << " "
+			<< directionalLightingPosition.y << " "
+			<< directionalLightingPosition.z << " "
+			<< directionalLightingColor.r << " "
+			<< directionalLightingColor.g << " "
+			<< directionalLightingColor.b << " "
+			<< directionalLightingIntensity
+			<< endl;
 	}
 
 	if(_fe3d->gfx_isShadowsEnabled())
@@ -353,19 +369,20 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto interval = _fe3d->gfx_getShadowInterval();
 		auto quality = _fe3d->gfx_getShadowQuality();
 
-		file <<
-			"GRAPHICS_SHADOWS " <<
-			size << " " <<
-			lightness << " " <<
-			position.x << " " <<
-			position.y << " " <<
-			position.z << " " <<
-			lookat.x << " " <<
-			lookat.y << " " <<
-			lookat.z << " " <<
-			isFollowingCamera << " " <<
-			interval << " " <<
-			quality << endl;
+		file
+			<< "GRAPHICS_SHADOWS "
+			<< size << " "
+			<< lightness << " "
+			<< position.x << " "
+			<< position.y << " "
+			<< position.z << " "
+			<< lookat.x << " "
+			<< lookat.y << " "
+			<< lookat.z << " "
+			<< isFollowingCamera << " "
+			<< interval << " "
+			<< quality
+			<< endl;
 	}
 
 	{
@@ -373,19 +390,21 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto cubeQuality = _fe3d->gfx_getCubeReflectionQuality();
 		auto planarQuality = _fe3d->gfx_getPlanarReflectionQuality();
 
-		file <<
-			"GRAPHICS_REFLECTIONS " <<
-			planarHeight << " " <<
-			cubeQuality << " " <<
-			planarQuality << endl;
+		file
+			<< "GRAPHICS_REFLECTIONS "
+			<< planarHeight << " "
+			<< cubeQuality << " "
+			<< planarQuality
+			<< endl;
 	}
 
 	{
 		auto planarQuality = _fe3d->gfx_getPlanarReflectionQuality();
 
-		file <<
-			"GRAPHICS_REFRACTIONS " <<
-			planarQuality << endl;
+		file
+			<< "GRAPHICS_REFRACTIONS "
+			<< planarQuality
+			<< endl;
 	}
 
 	if(_fe3d->gfx_isDofEnabled())
@@ -395,12 +414,13 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto maxDistance = _fe3d->gfx_getDofDynamicDistance();
 		auto quality = _fe3d->gfx_getDofQuality();
 
-		file <<
-			"GRAPHICS_DOF " <<
-			dynamic << " " <<
-			blurDistance << " " <<
-			maxDistance << " " <<
-			quality << endl;
+		file
+			<< "GRAPHICS_DOF "
+			<< dynamic << " "
+			<< blurDistance << " "
+			<< maxDistance << " "
+			<< quality
+			<< endl;
 	}
 
 	if(_fe3d->gfx_isFogEnabled())
@@ -410,14 +430,15 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto thickness = _fe3d->gfx_getFogThickness();
 		auto color = _fe3d->gfx_getFogColor();
 
-		file <<
-			"GRAPHICS_FOG " <<
-			minDistance << " " <<
-			maxDistance << " " <<
-			thickness << " " <<
-			color.r << " " <<
-			color.g << " " <<
-			color.b << endl;
+		file
+			<< "GRAPHICS_FOG "
+			<< minDistance << " "
+			<< maxDistance << " "
+			<< thickness << " "
+			<< color.r << " "
+			<< color.g << " "
+			<< color.b
+			<< endl;
 	}
 
 	if(_fe3d->gfx_isLensFlareEnabled())
@@ -432,19 +453,21 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 		replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
 
-		file <<
-			"GRAPHICS_LENS_FLARE " <<
-			flareMapPath << " " <<
-			intensity << " " <<
-			sensitivity << endl;
+		file
+			<< "GRAPHICS_LENS_FLARE "
+			<< flareMapPath << " "
+			<< intensity << " "
+			<< sensitivity
+			<< endl;
 	}
 
 	if(_fe3d->gfx_isSkyExposureEnabled())
 	{
-		file <<
-			"GRAPHICS_SKY_EXPOSURE " <<
-			_fe3d->gfx_getSkyExposureIntensity() << " "
-			<< _fe3d->gfx_getSkyExposureSpeed() << endl;
+		file
+			<< "GRAPHICS_SKY_EXPOSURE "
+			<< _fe3d->gfx_getSkyExposureIntensity() << " "
+			<< _fe3d->gfx_getSkyExposureSpeed()
+			<< endl;
 	}
 
 	if(_fe3d->gfx_isBloomEnabled())
@@ -454,12 +477,13 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto blurCount = _fe3d->gfx_getBloomBlurCount();
 		auto quality = _fe3d->gfx_getBloomQuality();
 
-		file <<
-			"GRAPHICS_BLOOM " <<
-			type << " " <<
-			intensity << " " <<
-			blurCount << " " <<
-			quality << endl;
+		file
+			<< "GRAPHICS_BLOOM "
+			<< type << " "
+			<< intensity << " "
+			<< blurCount << " "
+			<< quality
+			<< endl;
 	}
 
 	file.close();

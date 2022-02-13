@@ -13,8 +13,7 @@ public:
 
 	void update();
 
-	const vector<string> getAnimationIds() const;
-	const vector<string> getAnimationPartIds(const string& id) const;
+	const vector<string> getLoadedAnimationIds() const;
 
 	const bool loadFromFile(bool mustCheckPreviewModel);
 	const bool saveToFile() const;
@@ -37,6 +36,7 @@ private:
 
 	const bool _comparePartIds(vector<string> first, vector<string> second) const;
 
+	vector<string> _loadedAnimationIds;
 	string _currentAnimationId = "";
 	string _currentPartId = "";
 	string _hoveredModelId = "";

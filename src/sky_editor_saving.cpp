@@ -45,12 +45,13 @@ const bool SkyEditor::saveToFile() const
 			file << cubeMapPath << " ";
 		}
 
-		file <<
-			rotation << " " <<
-			lightness << " " <<
-			color.r << " " <<
-			color.g << " " <<
-			color.b << endl;
+		file
+			<< rotation << " "
+			<< lightness << " "
+			<< color.r << " "
+			<< color.g << " "
+			<< color.b
+			<< endl;
 	}
 
 	file.close();

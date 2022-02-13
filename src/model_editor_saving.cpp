@@ -45,18 +45,19 @@ const bool ModelEditor::saveToFile() const
 		replace(meshPath.begin(), meshPath.end(), ' ', '?');
 		replace(levelOfDetailEntityId.begin(), levelOfDetailEntityId.end(), ' ', '?');
 
-		file <<
-			"MODEL " <<
-			modelId << " " <<
-			meshPath << " " <<
-			modelSize.x << " " <<
-			modelSize.y << " " <<
-			modelSize.z << " " <<
-			levelOfDetailEntityId << " " <<
-			levelOfDetailDistance << " " <<
-			rotationOrder << " " <<
-			isShadowed << " " <<
-			isReflected << endl;
+		file
+			<< "MODEL "
+			<< modelId << " "
+			<< meshPath << " "
+			<< modelSize.x << " "
+			<< modelSize.y << " "
+			<< modelSize.z << " "
+			<< levelOfDetailEntityId << " "
+			<< levelOfDetailDistance << " "
+			<< rotationOrder << " "
+			<< isShadowed << " "
+			<< isReflected
+			<< endl;
 
 		for(size_t i = 0; i < partIds.size(); i++)
 		{
@@ -100,31 +101,32 @@ const bool ModelEditor::saveToFile() const
 			replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 
-			file <<
-				"PART " <<
-				modelId << " " <<
-				partId << " " <<
-				diffuseMapPath << " " <<
-				emissionMapPath << " " <<
-				specularMapPath << " " <<
-				reflectionMapPath << " " <<
-				normalMapPath << " " <<
-				reflectionType << " " <<
-				isSpecular << " " <<
-				isReflective << " " <<
-				specularShininess << " " <<
-				specularIntensity << " " <<
-				reflectivity << " " <<
-				lightness << " " <<
-				color.r << " " <<
-				color.g << " " <<
-				color.b << " " <<
-				textureRepeat << " " <<
-				isFaceCulled << " " <<
-				isBright << " " <<
-				emissionIntensity << " " <<
-				opacity << " " <<
-				minTextureAlpha << endl;
+			file
+				<< "PART "
+				<< modelId << " "
+				<< partId << " "
+				<< diffuseMapPath << " "
+				<< emissionMapPath << " "
+				<< specularMapPath << " "
+				<< reflectionMapPath << " "
+				<< normalMapPath << " "
+				<< reflectionType << " "
+				<< isSpecular << " "
+				<< isReflective << " "
+				<< specularShininess << " "
+				<< specularIntensity << " "
+				<< reflectivity << " "
+				<< lightness << " "
+				<< color.r << " "
+				<< color.g << " "
+				<< color.b << " "
+				<< textureRepeat << " "
+				<< isFaceCulled << " "
+				<< isBright << " "
+				<< emissionIntensity << " "
+				<< opacity << " "
+				<< minTextureAlpha
+				<< endl;
 		}
 
 		for(size_t i = 0; i < aabbIds.size(); i++)
@@ -133,16 +135,17 @@ const bool ModelEditor::saveToFile() const
 			auto position = _fe3d->aabb_getPosition(aabbId);
 			auto size = _fe3d->aabb_getSize(aabbId);
 
-			file <<
-				"AABB " <<
-				modelId << " " <<
-				aabbId << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				size.x << " " <<
-				size.y << " " <<
-				size.z << endl;
+			file
+				<< "AABB "
+				<< modelId << " "
+				<< aabbId << " "
+				<< position.x << " "
+				<< position.y << " "
+				<< position.z << " "
+				<< size.x << " "
+				<< size.y << " "
+				<< size.z
+				<< endl;
 		}
 	}
 

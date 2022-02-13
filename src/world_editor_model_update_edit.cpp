@@ -72,7 +72,7 @@ void WorldEditor::_updateModelEditing()
 		if(!_activeModelId.empty())
 		{
 			auto screen = rightWindow->getScreen("modelPropertiesMenu");
-			auto currentAnimationIds = _animation3dEditor->getStartedModelAnimationIds(_activeModelId);
+			auto currentAnimationIds = _fe3d->model_getAnimationIds(_activeModelId);
 
 			rightWindow->setActiveScreen("modelPropertiesMenu");
 
@@ -100,13 +100,13 @@ void WorldEditor::_updateModelEditing()
 			}
 			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 			{
-				_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor->getAnimationIds());
+				_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor->getLoadedAnimationIds());
 			}
 			else if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				if(!currentAnimationIds.empty())
 				{
-					_animation3dEditor->stopModelAnimation(currentAnimationIds[0], _activeModelId);
+					_fe3d->model_stopAnimation(_activeModelId, currentAnimationIds[0]);
 				}
 
 				_fe3d->model_delete(_activeModelId);
@@ -123,7 +123,7 @@ void WorldEditor::_updateModelEditing()
 				{
 					if(!currentAnimationIds.empty())
 					{
-						_animation3dEditor->stopModelAnimation(currentAnimationIds[0], _activeModelId);
+						_fe3d->model_stopAnimation(_activeModelId, currentAnimationIds[0]);
 
 						_fe3d->model_setBasePosition(_activeModelId, _initialModelPosition.at(_activeModelId));
 						_fe3d->model_setBaseRotationOrigin(_activeModelId, fvec3(0.0f));
@@ -142,7 +142,7 @@ void WorldEditor::_updateModelEditing()
 						}
 					}
 
-					_animation3dEditor->startModelAnimation(selectedButtonId, _activeModelId, -1);
+					_fe3d->model_startAnimation(_activeModelId, selectedButtonId, -1);
 
 					_gui->getOverlay()->deleteChoiceForm("animationList");
 				}
@@ -189,10 +189,9 @@ void WorldEditor::_updateModelEditing()
 
 			if((position != oldPosition) || (rotation != oldRotation) || (size != oldSize))
 			{
-				auto animationIds = _animation3dEditor->getStartedModelAnimationIds(_activeModelId);
-				if(!animationIds.empty())
+				if(!currentAnimationIds.empty())
 				{
-					_animation3dEditor->stopModelAnimation(animationIds[0], _activeModelId);
+					_fe3d->model_stopAnimation(_activeModelId, currentAnimationIds[0]);
 
 					if(position != oldPosition)
 					{
@@ -225,7 +224,7 @@ void WorldEditor::_updateModelEditing()
 						}
 					}
 
-					_animation3dEditor->startModelAnimation(animationIds[0], _activeModelId, -1);
+					_fe3d->model_startAnimation(_activeModelId, selectedButtonId, -1);
 				}
 				else
 				{

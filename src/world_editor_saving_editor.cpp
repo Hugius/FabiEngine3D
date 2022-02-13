@@ -115,9 +115,9 @@ const bool WorldEditor::saveEditorWorldToFile()
 		bool isLevelOfDetailEntity = find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelId) != levelOfDetailEntityIds.end();
 		if((modelId[0] != '@') || isLevelOfDetailEntity)
 		{
-			auto startedAnimations = _animation3dEditor->getStartedModelAnimationIds(modelId);
+			auto startedAnimationIds = _fe3d->model_getAnimationIds(modelId);
 
-			if(!startedAnimations.empty())
+			if(!startedAnimationIds.empty())
 			{
 				_fe3d->model_setBasePosition(modelId, _initialModelPosition[modelId]);
 				_fe3d->model_setBaseRotationOrigin(modelId, fvec3(0.0f));
@@ -140,7 +140,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto rotation = _fe3d->model_getBaseRotation(modelId);
 			auto size = _fe3d->model_getBaseSize(modelId);
 			auto isFrozen = _fe3d->model_isFrozen(modelId);
-			auto animationId = (startedAnimations.empty()) ? "" : startedAnimations[0];
+			auto animationId = (startedAnimationIds.empty()) ? "" : startedAnimationIds[0];
 
 			animationId = (animationId.empty()) ? "?" : animationId;
 
@@ -184,11 +184,11 @@ const bool WorldEditor::saveEditorWorldToFile()
 	{
 		if(quadId[0] != '@')
 		{
-			auto startedAnimations = _fe3d->quad3d_getAnimationIds(quadId);
+			auto startedAnimationIds = _fe3d->quad3d_getAnimationIds(quadId);
 			auto position = _fe3d->quad3d_getPosition(quadId);
 			auto rotation = _fe3d->quad3d_getRotation(quadId);
 			auto size = _fe3d->quad3d_getSize(quadId);
-			auto animationId = (startedAnimations.empty() ? "" : startedAnimations[0]);
+			auto animationId = (startedAnimationIds.empty() ? "" : startedAnimationIds[0]);
 
 			animationId = (animationId.empty()) ? "?" : animationId;
 

@@ -212,8 +212,6 @@ void ScriptInterpreter::load()
 
 void ScriptInterpreter::unload()
 {
-	_animation3dEditor->stopModelAnimations();
-
 	_worldEditor->unloadEditorWorld();
 
 	_fe3d->sky_deleteAll();

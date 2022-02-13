@@ -4,7 +4,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
 {
-	if(functionName == "fe3d:animation3d_is_model_started")
+	/*if(functionName == "fe3d:animation3d_is_model_started")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -147,7 +147,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 	{
 		_throwRuntimeError("cannot access `fe3d:animation3d` functionality as a networking server");
 		return true;
-	}
+	}*/
 
 	return true;
 }

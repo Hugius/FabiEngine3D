@@ -45,8 +45,9 @@ void Animation2dEditor::_updateAnimationCreating()
 				return;
 			}
 
-			_loadedAnimationIds.push_back(newAnimationId);
 			_currentAnimationId = newAnimationId;
+			_loadedAnimationIds.push_back(newAnimationId);
+			sort(_loadedAnimationIds.begin(), _loadedAnimationIds.end());
 
 			_fe3d->animation2d_create(newAnimationId);
 
@@ -111,6 +112,7 @@ void Animation2dEditor::_updateAnimationDeleting()
 
 			_fe3d->animation2d_delete(_currentAnimationId);
 
+			_loadedAnimationIds.erase(remove(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), _currentAnimationId), _loadedAnimationIds.end());
 			_currentAnimationId = "";
 			_isDeletingAnimation = false;
 		}

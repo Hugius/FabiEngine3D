@@ -54,13 +54,13 @@ void Animation3dEditor::_updateChoiceMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(_fe3d->model_isAnimationStarted(_previewModelId, _currentAnimationId))
-			{
-				_fe3d->model_stopAnimation(_previewModelId, _currentAnimationId);
-			}
-
 			if(_fe3d->model_isExisting(_previewModelId))
 			{
+				if(_fe3d->model_isAnimationStarted(_previewModelId, _currentAnimationId))
+				{
+					_fe3d->model_stopAnimation(_previewModelId, _currentAnimationId);
+				}
+
 				for(const auto& partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 				{
 					_fe3d->model_setVisible(_previewModelId, false);

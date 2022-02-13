@@ -55,18 +55,16 @@ void Animation3d::deleteParts()
 
 void Animation3d::createFrame(unsigned int index)
 {
-	auto newFrame = make_unique<Animation3dFrame>();
+	_frames.insert((_frames.begin() + index), make_unique<Animation3dFrame>());
 
 	for(auto& partId : _partIds)
 	{
-		newFrame->targetTransformations.insert(make_pair(partId, fvec3(0.0f)));
-		newFrame->rotationOrigins.insert(make_pair(partId, fvec3(0.0f)));
-		newFrame->speeds.insert(make_pair(partId, fvec3(0.0f)));
-		newFrame->speedTypes.insert(make_pair(partId, Animation3dSpeedType::LINEAR));
-		newFrame->transformationTypes.insert(make_pair(partId, TransformationType::MOVEMENT));
+		_frames[index]->targetTransformations.insert(make_pair(partId, fvec3(0.0f)));
+		_frames[index]->rotationOrigins.insert(make_pair(partId, fvec3(0.0f)));
+		_frames[index]->speeds.insert(make_pair(partId, fvec3(0.0f)));
+		_frames[index]->speedTypes.insert(make_pair(partId, Animation3dSpeedType::LINEAR));
+		_frames[index]->transformationTypes.insert(make_pair(partId, TransformationType::MOVEMENT));
 	}
-
-	_frames.insert((_frames.begin() + index), newFrame);
 }
 
 void Animation3d::deleteFrame(unsigned int index)
@@ -91,7 +89,7 @@ const vector<string>& Animation3d::getPartIds() const
 
 const unsigned int Animation3d::getFrameCount() const
 {
-	return _frames.size();
+	return static_cast<unsigned int>(_frames.size());
 }
 
 void Animation3d::setTargetTransformation(unsigned int frameIndex, const string& partId, const fvec3& value)

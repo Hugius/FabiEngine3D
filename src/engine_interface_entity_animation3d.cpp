@@ -118,3 +118,8 @@ const unsigned int EngineInterface::animation3d_getFrameCount(const string& anim
 {
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getFrameCount();
 }
+
+const bool EngineInterface::animation3d_isExisting(const string& id) const
+{
+	return _core->getAnimation3dManager()->isAnimationExisting(id);
+}

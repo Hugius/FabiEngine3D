@@ -694,6 +694,7 @@ public:
 	const Animation3dSpeedType& animation3d_getSpeedType(const string& animationId, unsigned int frameIndex, const string& partId) const;
 	const TransformationType& animation3d_getTransformationType(const string& animationId, unsigned int frameIndex, const string& partId) const;
 	const unsigned int animation3d_getFrameCount(const string& animationId);
+	const bool animation3d_isExisting(const string& id) const;
 
 	void animation2d_create(const string& id);
 	void animation2d_delete(const string& id);

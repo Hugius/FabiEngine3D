@@ -256,7 +256,7 @@ const bool ScriptInterpreter::_validateFe3dAnimation3d(const string& id)
 		return false;
 	}
 
-	if(!_animation3dEditor->isAnimationExisting(id))
+	if(!_fe3d->animation3d_isExisting(id))
 	{
 		_throwRuntimeError("animation3D does not exist");
 		return false;

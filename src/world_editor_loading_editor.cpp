@@ -194,7 +194,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 				if(!animationId.empty())
 				{
-					_animation3dEditor->startModelAnimation(animationId, modelId, -1);
+					_fe3d->model_startAnimation(modelId, animationId, -1);
 				}
 
 				if(makeInvisible)

@@ -203,10 +203,11 @@ void Animation3dEditor::_updateAnimationCreating()
 				return;
 			}
 
-			_loadedAnimationIds.push_back(newAnimationId);
 			_currentAnimationId = newAnimationId;
+			_loadedAnimationIds.push_back(newAnimationId);
+			sort(_loadedAnimationIds.begin(), _loadedAnimationIds.end());
 
-			_fe3d->animation3d_create("");
+			_fe3d->animation3d_create(newAnimationId);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 			_gui->getOverlay()->getTextField("animationId")->changeTextContent("Animation: " + newAnimationId);
@@ -262,8 +263,9 @@ void Animation3dEditor::_updateAnimationDeleting()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d->animation2d_delete(_currentAnimationId);
+			_fe3d->animation3d_delete(_currentAnimationId);
 
+			_loadedAnimationIds.erase(remove(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), _currentAnimationId), _loadedAnimationIds.end());
 			_currentAnimationId = "";
 			_isDeletingAnimation = false;
 		}

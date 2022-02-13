@@ -130,7 +130,7 @@ void Animation3dPlayer::setModelAnimationSpeedMultiplier(const string& animation
 		abort();
 	}
 
-	_startedModelAnimations.at(make_pair(animationId, modelId))->setFrameIndex(value);
+	_startedModelAnimations.at(make_pair(animationId, modelId))->setSpeedMultiplier(value);
 }
 
 void Animation3dPlayer::setModelAnimationFrameIndex(const string& animationId, const string& modelId, unsigned int value)

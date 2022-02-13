@@ -69,13 +69,6 @@ void WorldEditor::unloadEditorWorld()
 
 	for(const auto& [key, templateId] : _loadedModelIds)
 	{
-		auto animationIds = _animation3dEditor->getStartedModelAnimationIds(key);
-
-		if(!animationIds.empty())
-		{
-			_animation3dEditor->stopModelAnimation(animationIds[0], key);
-		}
-
 		_fe3d->model_delete(key);
 	}
 

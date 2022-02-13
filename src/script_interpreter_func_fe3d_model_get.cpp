@@ -1164,6 +1164,140 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_is_started")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			{
+				const auto result = _fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_is_playing")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			{
+				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwRuntimeError("animation is not started");
+					return true;
+				}
+
+				const auto result = _fe3d->model_isAnimationPlaying(args[0]->getString(), args[1]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_is_autopaused")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			{
+				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwRuntimeError("animation is not started");
+					return true;
+				}
+
+				const auto result = _fe3d->model_isAnimationAutopaused(args[0]->getString(), args[1]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_is_paused")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			{
+				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwRuntimeError("animation is not started");
+					return true;
+				}
+
+				const auto result = _fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_speed_multiplier")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			{
+				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwRuntimeError("animation is not started");
+					return true;
+				}
+
+				const auto result = _fe3d->model_getAnimationSpeedMultiplier(args[0]->getString(), args[1]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_play_count")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			{
+				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwRuntimeError("animation is not started");
+					return true;
+				}
+
+				const auto result = _fe3d->model_getAnimationPlayCount(args[0]->getString(), args[1]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_frame_index")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation3d(args[0]->getString()) && _validateFe3dModel(args[1]->getString(), false))
+			{
+				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
+				{
+					_throwRuntimeError("animation is not started");
+					return true;
+				}
+
+				const auto result = static_cast<int>(_fe3d->model_getAnimationFrameIndex(args[0]->getString(), args[1]->getString()));
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

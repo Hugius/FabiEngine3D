@@ -60,6 +60,8 @@ void Animation3dEditor::_updateFrameMenu()
 			{
 				transformationType = TransformationType::MOVEMENT;
 			}
+
+			_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, transformationType);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
@@ -81,6 +83,8 @@ void Animation3dEditor::_updateFrameMenu()
 			{
 				speedType = SpeedType::LINEAR;
 			}
+
+			_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, speedType);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())
 		{
@@ -111,41 +115,56 @@ void Animation3dEditor::_updateFrameMenu()
 		if(_gui->getOverlay()->checkValueForm("targetTransformationX", targetTransformation.x, {}))
 		{
 			targetTransformation.x /= multiplier;
+
+			_fe3d->animation3d_setTargetTransformation(_currentAnimationId, _currentFrameIndex, _currentPartId, targetTransformation);
 		}
 		if(_gui->getOverlay()->checkValueForm("targetTransformationY", targetTransformation.y, {}))
 		{
 			targetTransformation.y /= multiplier;
+
+			_fe3d->animation3d_setTargetTransformation(_currentAnimationId, _currentFrameIndex, _currentPartId, targetTransformation);
 		}
 		if(_gui->getOverlay()->checkValueForm("targetTransformationZ", targetTransformation.z, {}))
 		{
 			targetTransformation.z /= multiplier;
+
+			_fe3d->animation3d_setTargetTransformation(_currentAnimationId, _currentFrameIndex, _currentPartId, targetTransformation);
 		}
 		if(_gui->getOverlay()->checkValueForm("speedX", speed.x, {}))
 		{
 			speed.x /= 1000.0f;
+
+			_fe3d->animation3d_setSpeed(_currentAnimationId, _currentFrameIndex, _currentPartId, speed);
 		}
 		if(_gui->getOverlay()->checkValueForm("speedY", speed.y, {}))
 		{
 			speed.y /= 1000.0f;
+
+			_fe3d->animation3d_setSpeed(_currentAnimationId, _currentFrameIndex, _currentPartId, speed);
 		}
 		if(_gui->getOverlay()->checkValueForm("speedZ", speed.z, {}))
 		{
 			speed.z /= 1000.0f;
+
+			_fe3d->animation3d_setSpeed(_currentAnimationId, _currentFrameIndex, _currentPartId, speed);
 		}
 		if(_gui->getOverlay()->checkValueForm("rotationOriginX", rotationOrigin.x, {}))
 		{
 			rotationOrigin.x /= 1000.0f;
 			_mustUpdateCurrentFramePreview = true;
+			_fe3d->animation3d_setRotationOrigin(_currentAnimationId, _currentFrameIndex, _currentPartId, rotationOrigin);
 		}
 		if(_gui->getOverlay()->checkValueForm("rotationOriginY", rotationOrigin.y, {}))
 		{
 			rotationOrigin.y /= 1000.0f;
 			_mustUpdateCurrentFramePreview = true;
+			_fe3d->animation3d_setRotationOrigin(_currentAnimationId, _currentFrameIndex, _currentPartId, rotationOrigin);
 		}
 		if(_gui->getOverlay()->checkValueForm("rotationOriginZ", rotationOrigin.z, {}))
 		{
 			rotationOrigin.z /= 1000.0f;
 			_mustUpdateCurrentFramePreview = true;
+			_fe3d->animation3d_setRotationOrigin(_currentAnimationId, _currentFrameIndex, _currentPartId, rotationOrigin);
 		}
 
 		screen->getButton("part")->changeTextContent(_currentPartId.empty() ? "Select Part" : "Unselect Part");
@@ -185,11 +204,5 @@ void Animation3dEditor::_updateFrameMenu()
 				break;
 			}
 		}
-
-		_fe3d->animation3d_setTargetTransformation(_currentAnimationId, _currentFrameIndex, _currentPartId, targetTransformation);
-		_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, transformationType);
-		_fe3d->animation3d_setSpeed(_currentAnimationId, _currentFrameIndex, _currentPartId, speed);
-		_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, speedType);
-		_fe3d->animation3d_setRotationOrigin(_currentAnimationId, _currentFrameIndex, _currentPartId, rotationOrigin);
 	}
 }

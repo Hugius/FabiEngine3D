@@ -25,9 +25,6 @@
     <Filter Include="Interpreter\Function\Physics">
       <UniqueIdentifier>{569ec7b6-6e81-47d4-9f5b-7a8d10b21ac0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interpreter\Function\Animation">
-      <UniqueIdentifier>{7c0525b1-4b6e-4549-af78-5e27139a1d56}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interpreter\Function\Entity">
       <UniqueIdentifier>{8fb47fb8-c477-475e-9548-5caeef410d6c}</UniqueIdentifier>
     </Filter>
@@ -230,12 +227,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_list_misc.cpp">
       <Filter>Interpreter\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation3d_set.cpp">
-      <Filter>Interpreter\Function\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation3d_get.cpp">
-      <Filter>Interpreter\Function\Animation</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script.cpp">
       <Filter>Data</Filter>

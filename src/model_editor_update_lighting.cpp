@@ -80,6 +80,7 @@ void ModelEditor::_updateLightingMenu()
 			{
 				reflectionType = ReflectionType::CUBE;
 			}
+
 			_fe3d->model_setReflectionType(_currentModelId, _currentPartId, reflectionType);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectivity")->isHovered())

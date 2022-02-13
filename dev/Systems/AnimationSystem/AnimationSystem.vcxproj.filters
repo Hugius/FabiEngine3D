@@ -54,9 +54,6 @@
     <ClCompile Include="..\..\..\src\animation3d.cpp">
       <Filter>Manager\3D\Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation3d_frame.cpp">
-      <Filter>Manager\3D\Data</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_manager.cpp">
       <Filter>Manager\3D\Main</Filter>
     </ClCompile>
@@ -72,7 +69,16 @@
     <ClCompile Include="..\..\..\src\animation2d_player_control.cpp">
       <Filter>Player\2D\Main</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation3d_player.cpp">
+    <ClCompile Include="..\..\..\src\animation3d_player_control.cpp">
+      <Filter>Player\3D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\started_animation3d.cpp">
+      <Filter>Player\3D\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation3d_player_misc.cpp">
+      <Filter>Player\3D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation3d_player_update.cpp">
       <Filter>Player\3D\Main</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,9 +92,6 @@
     <ClInclude Include="..\..\..\src\animation3d.hpp">
       <Filter>Manager\3D\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\animation3d_frame.hpp">
-      <Filter>Manager\3D\Data</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\animation3d_manager.hpp">
       <Filter>Manager\3D\Main</Filter>
     </ClInclude>
@@ -100,6 +103,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation3d_player.hpp">
       <Filter>Player\3D\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\started_animation3d.hpp">
+      <Filter>Player\3D\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\animation3d_frame.hpp">
+      <Filter>Manager\3D\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

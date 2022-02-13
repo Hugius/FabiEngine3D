@@ -11,6 +11,8 @@
 #include "reflection_type.hpp"
 #include "pointlight_shape.hpp"
 #include "ray.hpp"
+#include "animation3d_speed_type.hpp"
+#include "transformation_type.hpp"
 
 #include <array>
 #include <vector>
@@ -654,6 +656,29 @@ public:
 	const fvec3& reflection_getPosition(const string& id) const;
 	const bool reflection_isExisting(const string& id) const;
 	const bool reflection_isVisible(const string& id) const;
+
+	void animation3d_create(const string& id);
+	void animation3d_delete(const string& id);
+	void animation3d_deleteAll();
+	void animation3d_createFrame(const string& animationId, unsigned int index);
+	void animation3d_deleteFrame(const string& animationId, unsigned int index);
+	void animation3d_deleteFrames(const string& animationId);
+	void animation3d_createPart(const string& animationId, const string& partId);
+	void animation3d_deletePart(const string& animationId, const string& partId);
+	void animation3d_deleteParts(const string& animationId);
+	void animation3d_setTargetTransformation(const string& animationId, unsigned int frameIndex, const string& partId, const fvec3& value);
+	void animation3d_setRotationOrigin(const string& animationId, unsigned int frameIndex, const string& partId, const fvec3& value);
+	void animation3d_setSpeed(const string& animationId, unsigned int frameIndex, const string& partId, const fvec3& value);
+	void animation3d_setSpeedType(const string& animationId, unsigned int frameIndex, const string& partId, Animation3dSpeedType value);
+	void animation3d_setTransformationType(const string& animationId, unsigned int frameIndex, const string& partId, TransformationType value);
+
+	const vector<string>& animation3d_getPartIds(const string& animationId) const;
+	const fvec3& animation3d_getTargetTransformation(const string& animationId, unsigned int frameIndex, const string& partId) const;
+	const fvec3& animation3d_getRotationOrigin(const string& animationId, unsigned int frameIndex, const string& partId) const;
+	const fvec3& animation3d_getSpeed(const string& animationId, unsigned int frameIndex, const string& partId) const;
+	const Animation3dSpeedType& animation3d_getSpeedType(const string& animationId, unsigned int frameIndex, const string& partId) const;
+	const TransformationType& animation3d_getTransformationType(const string& animationId, unsigned int frameIndex, const string& partId) const;
+	const unsigned int animation3d_getFrameCount(const string& animationId);
 
 	void animation2d_create(const string& id);
 	void animation2d_delete(const string& id);

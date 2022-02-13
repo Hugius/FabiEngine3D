@@ -114,6 +114,9 @@
     <ClCompile Include="..\..\..\src\engine_interface_graphics.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_interface_entity_animation3d.cpp">
+      <Filter>Interface\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\engine_core.hpp">

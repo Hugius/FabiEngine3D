@@ -1,5 +1,9 @@
 #include "animation2d_player.hpp"
 
+#include <set>
+
+using std::set;
+
 void Animation2dPlayer::update()
 {
 	_updateQuad3dAnimationExecution();

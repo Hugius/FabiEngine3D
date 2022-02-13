@@ -20,8 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_loading.cpp" />
-    <ClCompile Include="..\..\..\src\animation3d_editor_update_execution.cpp" />
-    <ClCompile Include="..\..\..\src\animation3d_editor_control.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_misc.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_saving.cpp" />

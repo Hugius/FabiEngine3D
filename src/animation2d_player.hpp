@@ -7,11 +7,9 @@
 
 #include <vector>
 #include <map>
-#include <set>
 
 using std::vector;
 using std::map;
-using std::set;
 using std::pair;
 
 class Animation2dPlayer final

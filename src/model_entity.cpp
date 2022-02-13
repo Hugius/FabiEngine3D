@@ -8,6 +8,14 @@ using std::clamp;
 
 void ModelEntity::createPart(const string& id)
 {
+	for(const auto& part : _parts)
+	{
+		if(id == part.id)
+		{
+			abort();
+		}
+	}
+
 	_parts.push_back(ModelEntityPart(id));
 }
 

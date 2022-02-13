@@ -25,10 +25,12 @@
     <ClCompile Include="..\..\..\src\animation2d_player_update.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_player_control.cpp" />
     <ClCompile Include="..\..\..\src\animation3d.cpp" />
-    <ClCompile Include="..\..\..\src\animation3d_frame.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_manager.cpp" />
-    <ClCompile Include="..\..\..\src\animation3d_player.cpp" />
+    <ClCompile Include="..\..\..\src\animation3d_player_control.cpp" />
+    <ClCompile Include="..\..\..\src\animation3d_player_misc.cpp" />
+    <ClCompile Include="..\..\..\src\animation3d_player_update.cpp" />
     <ClCompile Include="..\..\..\src\started_animation2d.cpp" />
+    <ClCompile Include="..\..\..\src\started_animation3d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation2d.hpp" />
@@ -39,6 +41,7 @@
     <ClInclude Include="..\..\..\src\animation3d_manager.hpp" />
     <ClInclude Include="..\..\..\src\animation3d_player.hpp" />
     <ClInclude Include="..\..\..\src\started_animation2d.hpp" />
+    <ClInclude Include="..\..\..\src\started_animation3d.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

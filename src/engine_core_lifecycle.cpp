@@ -97,6 +97,8 @@ EngineCore::EngineCore()
 	_cameraCollisionResponder->inject(_aabbEntityManager);
 	_cameraCollisionResponder->inject(_camera);
 	_cameraCollisionResponder->inject(_cameraCollisionDetector);
+	_animation3dPlayer->inject(_animation3dManager);
+	_animation3dPlayer->inject(_modelEntityManager);
 	_animation2dPlayer->inject(_animation2dManager);
 	_animation2dPlayer->inject(_quad3dEntityManager);
 	_animation2dPlayer->inject(_quad2dEntityManager);

@@ -3,8 +3,9 @@
 #include "reflection_type.hpp"
 #include "texture_buffer.hpp"
 
-struct ModelEntityPart final
+class ModelEntityPart final
 {
+public:
 	ModelEntityPart(const string& id)
 		:
 		id(id)

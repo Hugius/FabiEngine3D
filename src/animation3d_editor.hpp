@@ -12,32 +12,10 @@ public:
 	void inject(shared_ptr<ModelEditor> modelEditor);
 
 	void update();
-	void startModelAnimation(const string& animationId, const string& modelId, int playCount);
-	void pauseModelAnimation(const string& animationId, const string& modelId);
-	void autopauseModelAnimation(const string& animationId, const string& modelId);
-	void resumeModelAnimation(const string& animationId, const string& modelId);
-	void stopModelAnimation(const string& animationId, const string& modelId);
-	void pauseModelAnimations();
-	void autopauseModelAnimations();
-	void resumeModelAnimations();
-	void stopModelAnimations();
-	void setModelAnimationSpeed(const string& animationId, const string& modelId, float value);
 
 	const vector<string> getAnimationIds() const;
-	const vector<string> getStartedModelAnimationIds(const string& modelId) const;
 	const vector<string> getAnimationPartIds(const string& id) const;
 
-	const float getModelAnimationSpeed(const string& animationId, const string& modelId) const;
-
-	const int getModelAnimationPlayCount(const string& animationId, const string& modelId) const;
-
-	const unsigned int getModelAnimationFrameIndex(const string& animationId, const string& modelId) const;
-
-	const bool isAnimationExisting(const string& id) const;
-	const bool isModelAnimationStarted(const string& animationId, const string& modelId) const;
-	const bool isModelAnimationPlaying(const string& animationId, const string& modelId) const;
-	const bool isModelAnimationPaused(const string& animationId, const string& modelId) const;
-	const bool isModelAnimationAutopaused(const string& animationId, const string& modelId) const;
 	const bool loadFromFile(bool mustCheckPreviewModel);
 	const bool saveToFile() const;
 
@@ -54,18 +32,11 @@ private:
 	void _updateAnimationDeleting();
 	void _updateModelChoosing();
 	void _updatePartChoosing();
-	void _updateModelAnimationExecution();
 	void _updateCamera();
 	void _updateMiscellaneous();
-	void _deleteAnimation(const string& id);
 
-	const bool _hasReachedFloat(float first, float second, float speed) const;
 	const bool _comparePartIds(vector<string> first, vector<string> second) const;
 
-	shared_ptr<Animation3d> _getAnimation(const string& id) const;
-
-	set<pair<string, string>> _modelAnimationsToStop;
-	set<pair<string, string>> _modelAnimationsToStart;
 	string _currentAnimationId = "";
 	string _currentPartId = "";
 	string _hoveredModelId = "";
@@ -101,7 +72,5 @@ private:
 	bool _isChoosingModel = false;
 	bool _isChoosingPart = false;
 
-	map<pair<string, string>, shared_ptr<Animation3d>> _startedModelAnimations;
-	vector<shared_ptr<Animation3d>> _animations;
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 };

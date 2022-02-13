@@ -2,6 +2,7 @@
 
 using std::make_pair;
 using std::max;
+using std::make_unique;
 
 Animation3d::Animation3d(const string& id)
 	:
@@ -10,82 +11,72 @@ Animation3d::Animation3d(const string& id)
 
 }
 
-void Animation3d::setFrames(const vector<Animation3dFrame>& value)
-{
-	_frames = value;
-}
-
-void Animation3d::setFrame(unsigned int index, const Animation3dFrame& value)
-{
-	_frames[index] = value;
-}
-
-void Animation3d::addFrame(const Animation3dFrame& value)
-{
-	_frames.push_back(value);
-}
-
-void Animation3d::addPart(const string& partId, const fvec3& totalMovement, const fvec3& totalRotation, const fvec3& totalScaling)
+void Animation3d::createPart(const string& partId)
 {
 	_partIds.push_back(partId);
-	_totalMovements.insert(make_pair(partId, totalMovement));
-	_totalRotations.insert(make_pair(partId, totalRotation));
-	_totalScalings.insert(make_pair(partId, totalScaling));
+
+	for(auto& frame : _frames)
+	{
+		frame->targetTransformations.insert(make_pair(partId, fvec3(0.0f)));
+		frame->rotationOrigins.insert(make_pair(partId, fvec3(0.0f)));
+		frame->speeds.insert(make_pair(partId, fvec3(0.0f)));
+		frame->speedTypes.insert(make_pair(partId, Animation3dSpeedType::LINEAR));
+		frame->transformationTypes.insert(make_pair(partId, TransformationType::MOVEMENT));
+	}
 }
 
-void Animation3d::setTotalMovement(const string& partId, const fvec3& value)
+void Animation3d::deletePart(const string& partId)
 {
-	_totalMovements.at(partId) = value;
+	_partIds.erase(remove(_partIds.begin(), _partIds.end(), partId), _partIds.end());
+
+	for(auto& frame : _frames)
+	{
+		frame->targetTransformations.erase(partId);
+		frame->rotationOrigins.erase(partId);
+		frame->speeds.erase(partId);
+		frame->speedTypes.erase(partId);
+		frame->transformationTypes.erase(partId);
+	}
 }
 
-void Animation3d::setTotalRotation(const string& partId, const fvec3& value)
+void Animation3d::deleteParts()
 {
-	_totalRotations.at(partId) = value;
+	_partIds.clear();
+
+	for(auto& frame : _frames)
+	{
+		frame->targetTransformations.clear();
+		frame->rotationOrigins.clear();
+		frame->speeds.clear();
+		frame->speedTypes.clear();
+		frame->transformationTypes.clear();
+	}
 }
 
-void Animation3d::setTotalScaling(const string& partId, const fvec3& value)
+void Animation3d::createFrame(unsigned int index)
 {
-	_totalScalings.at(partId) = value;
+	auto newFrame = make_unique<Animation3dFrame>();
+
+	for(auto& partId : _partIds)
+	{
+		newFrame->targetTransformations.insert(make_pair(partId, fvec3(0.0f)));
+		newFrame->rotationOrigins.insert(make_pair(partId, fvec3(0.0f)));
+		newFrame->speeds.insert(make_pair(partId, fvec3(0.0f)));
+		newFrame->speedTypes.insert(make_pair(partId, Animation3dSpeedType::LINEAR));
+		newFrame->transformationTypes.insert(make_pair(partId, TransformationType::MOVEMENT));
+	}
+
+	_frames.insert((_frames.begin() + index), newFrame);
 }
 
-void Animation3d::setPreviewModelId(const string& value)
+void Animation3d::deleteFrame(unsigned int index)
 {
-	_previewModelId = value;
+	_frames.erase(_frames.begin() + index);
 }
 
-void Animation3d::setInitialSize(const fvec3& value)
+void Animation3d::deleteFrames()
 {
-	_initialSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-}
-
-void Animation3d::setSpeed(float value)
-{
-	_speed = max(0.0f, value);
-}
-
-void Animation3d::setPlayCount(int value)
-{
-	_playCount = value;
-}
-
-void Animation3d::setFrameIndex(unsigned int value)
-{
-	_frameIndex = value;
-}
-
-void Animation3d::setPaused(bool value)
-{
-	_isPaused = value;
-}
-
-void Animation3d::setAutopaused(bool value)
-{
-	_isAutopaused = value;
-}
-
-const vector<Animation3dFrame>& Animation3d::getFrames() const
-{
-	return _frames;
+	_frames.clear();
 }
 
 const string& Animation3d::getId() const
@@ -93,57 +84,62 @@ const string& Animation3d::getId() const
 	return _id;
 }
 
-const map<string, fvec3>& Animation3d::getTotalMovements() const
-{
-	return _totalMovements;
-}
-
-const map<string, fvec3>& Animation3d::getTotalRotations() const
-{
-	return _totalRotations;
-}
-
-const map<string, fvec3>& Animation3d::getTotalScalings() const
-{
-	return _totalScalings;
-}
-
 const vector<string>& Animation3d::getPartIds() const
 {
 	return _partIds;
 }
 
-const string& Animation3d::getPreviewModelId() const
+const unsigned int Animation3d::getFrameCount() const
 {
-	return _previewModelId;
+	return _frames.size();
 }
 
-const fvec3& Animation3d::getInitialSize() const
+void Animation3d::setTargetTransformation(unsigned int frameIndex, const string& partId, const fvec3& value)
 {
-	return _initialSize;
+	_frames[frameIndex]->targetTransformations.at(partId) = value;
 }
 
-const float Animation3d::getSpeed() const
+void Animation3d::setRotationOrigin(unsigned int frameIndex, const string& partId, const fvec3& value)
 {
-	return _speed;
+	_frames[frameIndex]->rotationOrigins.at(partId) = value;
 }
 
-const int Animation3d::getPlayCount() const
+void Animation3d::setSpeed(unsigned int frameIndex, const string& partId, const fvec3& value)
 {
-	return _playCount;
+	_frames[frameIndex]->speeds.at(partId) = value;
 }
 
-const unsigned int Animation3d::getFrameIndex() const
+void Animation3d::setSpeedType(unsigned int frameIndex, const string& partId, Animation3dSpeedType value)
 {
-	return _frameIndex;
+	_frames[frameIndex]->speedTypes.at(partId) = value;
 }
 
-const bool Animation3d::isPaused() const
+void Animation3d::setTransformationType(unsigned int frameIndex, const string& partId, TransformationType value)
 {
-	return _isPaused;
+	_frames[frameIndex]->transformationTypes.at(partId) = value;
 }
 
-const bool Animation3d::isAutopaused() const
+const fvec3& Animation3d::getTargetTransformation(unsigned int frameIndex, const string& partId) const
 {
-	return _isAutopaused;
+	return _frames[frameIndex]->targetTransformations.at(partId);
+}
+
+const fvec3& Animation3d::getRotationOrigin(unsigned int frameIndex, const string& partId) const
+{
+	return _frames[frameIndex]->rotationOrigins.at(partId);
+}
+
+const fvec3& Animation3d::getSpeed(unsigned int frameIndex, const string& partId) const
+{
+	return _frames[frameIndex]->speeds.at(partId);
+}
+
+const Animation3dSpeedType& Animation3d::getSpeedType(unsigned int frameIndex, const string& partId) const
+{
+	return _frames[frameIndex]->speedTypes.at(partId);
+}
+
+const TransformationType& Animation3d::getTransformationType(unsigned int frameIndex, const string& partId) const
+{
+	return _frames[frameIndex]->transformationTypes.at(partId);
 }

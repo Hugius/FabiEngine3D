@@ -489,9 +489,6 @@
     <ClCompile Include="..\..\..\src\terrain_editor_update_miscellaneous.cpp">
       <Filter>Terrain Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation3d_editor_update_execution.cpp">
-      <Filter>Animation3D Editor\Update</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_saving.cpp">
       <Filter>Script Editor\Persistence</Filter>
     </ClCompile>
@@ -572,9 +569,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_update_misc_other.cpp">
       <Filter>World Editor\Update\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\animation3d_editor_control.cpp">
-      <Filter>Animation3D Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_gui.cpp">
       <Filter>World Editor\Miscellaneous</Filter>

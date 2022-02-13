@@ -13,7 +13,7 @@ void RaycastIntersector::update()
 	}
 	else
 	{
-		_pointOnTerrain = fvec3(0.0f);
+		_pointOnTerrain = fvec3(-1.0f);
 		_distanceToTerrain = -1.0f;
 	}
 
@@ -220,6 +220,11 @@ const fvec3 RaycastIntersector::_calculatePointOnTerrain() const
 
 const float RaycastIntersector::_calculateDistanceToTerrain() const
 {
+	if(_pointOnTerrain == fvec3(-1.0f))
+	{
+		return -1.0f;
+	}
+
 	return Math::calculateDistance(_raycastCalculator->getCursorRay()->getPosition(), _pointOnTerrain);
 }
 

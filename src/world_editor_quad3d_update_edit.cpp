@@ -101,7 +101,13 @@ void WorldEditor::_updateQuad3dEditing()
 			{
 				if(currentAnimationIds.empty())
 				{
-					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation2dEditor->getLoadedAnimationIds());
+					auto ids = _animation2dEditor->getLoadedAnimationIds();
+					for(auto& id : ids)
+					{
+						id = id.substr(1);
+					}
+
+					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), ids);
 				}
 				else
 				{
@@ -135,7 +141,7 @@ void WorldEditor::_updateQuad3dEditing()
 						_fe3d->quad3d_stopAnimation(_activeQuadId, currentAnimationIds[0]);
 					}
 
-					_fe3d->quad3d_startAnimation(_activeQuadId, selectedButtonId, -1);
+					_fe3d->quad3d_startAnimation(_activeQuadId, ("@" + selectedButtonId), -1);
 
 					_gui->getOverlay()->deleteChoiceForm("animationList");
 				}

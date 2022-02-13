@@ -98,7 +98,13 @@ void WorldEditor::_updateModelEditing()
 			{
 				if(currentAnimationIds.empty())
 				{
-					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor->getLoadedAnimationIds());
+					auto ids = _animation3dEditor->getLoadedAnimationIds();
+					for(auto& id : ids)
+					{
+						id = id.substr(1);
+					}
+
+					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), ids);
 				}
 				else
 				{
@@ -155,7 +161,7 @@ void WorldEditor::_updateModelEditing()
 						}
 					}
 
-					_fe3d->model_startAnimation(_activeModelId, selectedButtonId, -1);
+					_fe3d->model_startAnimation(_activeModelId, ("@" + selectedButtonId), -1);
 
 					_gui->getOverlay()->deleteChoiceForm("animationList");
 				}
@@ -177,6 +183,8 @@ void WorldEditor::_updateModelEditing()
 				_handleValueChanging("modelPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / MODEL_POSITION_DIVIDER));
 				_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / MODEL_POSITION_DIVIDER));
 				_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / MODEL_POSITION_DIVIDER));
+
+				_fe3d->model_setBasePosition(_activeModelId, position);
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
@@ -186,6 +194,8 @@ void WorldEditor::_updateModelEditing()
 				_handleValueChanging("modelPropertiesMenu", "yMinus", "y", rotation.y, -MODEL_ROTATION_SPEED);
 				_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, MODEL_ROTATION_SPEED);
 				_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -MODEL_ROTATION_SPEED);
+
+				_fe3d->model_setBaseRotation(_activeModelId, rotation);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
@@ -195,6 +205,8 @@ void WorldEditor::_updateModelEditing()
 				_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -(_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, (_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -(_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
+
+				_fe3d->model_setBaseSize(_activeModelId, size);
 			}
 
 			screen->getButton("animation")->changeTextContent(currentAnimationIds.empty() ? "Start Animation" : "Stop Animation");

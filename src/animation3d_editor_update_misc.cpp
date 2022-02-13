@@ -197,6 +197,8 @@ void Animation3dEditor::_updateAnimationCreating()
 				return;
 			}
 
+			newAnimationId = ("@" + newAnimationId);
+
 			if(find(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), newAnimationId) != _loadedAnimationIds.end())
 			{
 				Logger::throwWarning("Animation already exists");
@@ -228,7 +230,7 @@ void Animation3dEditor::_updateAnimationChoosing()
 		{
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentAnimationId = selectedButtonId;
+				_currentAnimationId = ("@" + selectedButtonId);
 
 				if(!_isDeletingAnimation)
 				{

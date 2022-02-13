@@ -253,7 +253,6 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	filePaths.push_back(projectDirectoryPath + "data\\model.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\quad2d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\quad3d.fe3d");
-	filePaths.push_back(projectDirectoryPath + "data\\settings.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\sky.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\sound.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\terrain.fe3d");

@@ -2,7 +2,6 @@
 
 #include "base_editor.hpp"
 #include "script.hpp"
-#include "script_executor.hpp"
 
 class ScriptEditor final : public BaseEditor
 {

@@ -140,6 +140,16 @@ void WorldEditor::_unload()
 	_fe3d->model_delete(TEMPLATE_CAMERA_ID);
 	_fe3d->reflection_delete(TEMPLATE_REFLECTION_ID);
 
+	for(const auto& id : _animation3dEditor->getLoadedAnimationIds())
+	{
+		_fe3d->animation3d_delete(id);
+	}
+
+	for(const auto& id : _animation2dEditor->getLoadedAnimationIds())
+	{
+		_fe3d->animation2d_delete(id);
+	}
+
 	_fe3d->model_delete(TEMPLATE_SPEAKER_ID);
 	for(const auto& id : _soundEditor->getLoadedSoundIds())
 	{
@@ -155,26 +165,13 @@ void WorldEditor::_unload()
 	_fe3d->raycast_setAabbIntersectionEnabled(false);
 
 	_loadedModelIds.clear();
-	_outsideLoadedModelIds.clear();
 	_loadedQuadIds.clear();
-	_outsideLoadedQuadIds.clear();
 	_loadedTextIds.clear();
-	_outsideLoadedTextIds.clear();
 	_loadedSoundIds.clear();
-	_outsideLoadedSoundIds.clear();
-	_customWorldModelIds.clear();
-	_customWorldQuadIds.clear();
-	_customWorldTextIds.clear();
-	_customWorldAabbIds.clear();
-	_customWorldPointlightIds.clear();
-	_customWorldSpotlightIds.clear();
-	_customWorldReflectionIds.clear();
-	_customWorldSoundIds.clear();
 	_loadedAabbIds.clear();
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
 	_loadedReflectionIds.clear();
-	_customWorldId = "";
 	_loadedSkyId = "";
 	_loadedTerrainId = "";
 	_loadedWaterId = "";
@@ -216,11 +213,6 @@ void WorldEditor::_unload()
 	_activeReflectionHighlightDirection = 1;
 	_selectedSoundHighlightDirection = 1;
 	_activeSoundHighlightDirection = 1;
-	_hasCustomWorldLighting = false;
-	_hasCustomWorldGraphics = false;
-	_hasCustomWorldSky = false;
-	_hasCustomWorldTerrain = false;
-	_hasCustomWorldWater = false;
 	_dontResetSelectedModel = false;
 	_dontResetSelectedQuad3d = false;
 	_dontResetSelectedText3d = false;

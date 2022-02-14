@@ -212,3 +212,8 @@ void ScriptInterpreter::inject(shared_ptr<WorldEditor> worldEditor)
 {
 	_worldEditor = worldEditor;
 }
+
+void ScriptInterpreter::inject(shared_ptr<World> world)
+{
+	_world = world;
+}

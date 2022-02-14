@@ -8,7 +8,7 @@
 using std::ifstream;
 using std::ofstream;
 
-const bool WorldEditor::saveEditorWorldToFile()
+const bool WorldEditor::saveToFile()
 {
 	if(_currentWorldId.empty())
 	{

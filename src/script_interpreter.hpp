@@ -1,10 +1,5 @@
 #pragma once
 
-#include "script.hpp"
-#include "script_type.hpp"
-#include "script_value.hpp"
-#include "script_variable.hpp"
-#include "script_condition_statement.hpp"
 #include "sky_editor.hpp"
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
@@ -17,6 +12,12 @@
 #include "animation2d_editor.hpp"
 #include "sound_editor.hpp"
 #include "world_editor.hpp"
+#include "script.hpp"
+#include "script_type.hpp"
+#include "script_value.hpp"
+#include "script_variable.hpp"
+#include "script_condition_statement.hpp"
+#include "world.hpp"
 
 class ScriptInterpreter final
 {
@@ -35,6 +36,7 @@ public:
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<SoundEditor> soundEditor);
 	void inject(shared_ptr<WorldEditor> worldEditor);
+	void inject(shared_ptr<World> world);
 
 	void setCurrentProjectId(const string& projectId);
 	void load();
@@ -240,6 +242,7 @@ private:
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
+	shared_ptr<World> _world = nullptr;
 
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =
 	{

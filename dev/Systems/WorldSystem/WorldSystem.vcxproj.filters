@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Main">
+      <UniqueIdentifier>{a7511681-4353-4e85-ba1a-e0b7d1d99d01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Miscellaneous">
+      <UniqueIdentifier>{f4031a77-3f10-4870-b7cb-f51ce4bffbee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Persistence">
+      <UniqueIdentifier>{17a9e7f9-7270-4bda-81f9-bb6718d77aba}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\world_creation.cpp">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_misc.cpp">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_saving.cpp">
+      <Filter>Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_loading.cpp">
+      <Filter>Persistence</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\world.hpp">
+      <Filter>Main</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

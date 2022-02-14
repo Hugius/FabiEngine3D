@@ -105,9 +105,9 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
 
-			saveEditorWorldToFile();
+			saveToFile();
 
-			unloadEditorWorld();
+			clearLoadedWorld();
 
 			_currentWorldId = "";
 			_currentSkyId = "";
@@ -127,7 +127,7 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
 
-			unloadEditorWorld();
+			clearLoadedWorld();
 
 			_currentWorldId = "";
 			_currentSkyId = "";

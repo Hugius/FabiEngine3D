@@ -43,12 +43,6 @@
     <Filter Include="World Editor\Persistence">
       <UniqueIdentifier>{4f779ec4-4d0d-44ed-92ff-ad5c3244da08}</UniqueIdentifier>
     </Filter>
-    <Filter Include="World Editor\Persistence\Editor">
-      <UniqueIdentifier>{d501544b-39db-41f9-9471-343b717f5762}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World Editor\Persistence\Custom">
-      <UniqueIdentifier>{4ceef589-4ca6-4266-a3a4-efaca2751088}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script Editor\Persistence">
       <UniqueIdentifier>{292288e6-2bf3-44d2-9fa5-79da4ac1130f}</UniqueIdentifier>
     </Filter>
@@ -333,9 +327,6 @@
     <ClCompile Include="..\..\..\src\world_editor_settings_update_graphics.cpp">
       <Filter>World Editor\Update\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_creation.cpp">
-      <Filter>World Editor\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_misc_select.cpp">
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
@@ -441,18 +432,6 @@
     <ClCompile Include="..\..\..\src\water_editor_update_miscellaneous.cpp">
       <Filter>Water Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_loading_custom.cpp">
-      <Filter>World Editor\Persistence\Custom</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_saving_custom.cpp">
-      <Filter>World Editor\Persistence\Custom</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_loading_editor.cpp">
-      <Filter>World Editor\Persistence\Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_saving_editor.cpp">
-      <Filter>World Editor\Persistence\Editor</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_sky_update.cpp">
       <Filter>World Editor\Update\Sky</Filter>
     </ClCompile>
@@ -518,9 +497,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_spotlight_update_place.cpp">
       <Filter>World Editor\Update\Spotlight</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_misc_custom.cpp">
-      <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_editor_loading.cpp">
       <Filter>Sky Editor\Persistence</Filter>
@@ -647,6 +623,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_text3d_update_menu.cpp">
       <Filter>World Editor\Update\Text3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_editor_loading.cpp">
+      <Filter>World Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_editor_saving.cpp">
+      <Filter>World Editor\Persistence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

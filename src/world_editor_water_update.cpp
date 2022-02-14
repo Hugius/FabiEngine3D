@@ -27,6 +27,7 @@ void WorldEditor::_updateWaterMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_fe3d->water_delete(_currentWaterId);
+			_loadedWaterId = "";
 			_currentWaterId = "";
 		}
 		else if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("up")->isHovered())
@@ -48,8 +49,11 @@ void WorldEditor::_updateWaterMenu()
 					_fe3d->water_delete(selectedButtonId);
 				}
 
-				_currentWaterId = selectedButtonId;
-				_copyTemplateWater(_currentWaterId, ("@" + selectedButtonId));
+				_world->copyTemplateWater(selectedButtonId, ("@" + selectedButtonId));
+				_loadedWaterId = selectedButtonId;
+				_currentWaterId = _loadedWaterId;
+
+				_fe3d->water_select(_currentWaterId);
 				_gui->getOverlay()->deleteChoiceForm("waterList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("waterList"))
@@ -61,7 +65,5 @@ void WorldEditor::_updateWaterMenu()
 		screen->getButton("up")->setHoverable(!_currentWaterId.empty());
 		screen->getButton("down")->setHoverable(!_currentWaterId.empty());
 		screen->getButton("delete")->setHoverable(!_currentWaterId.empty());
-
-		_fe3d->water_select(_currentWaterId);
 	}
 }

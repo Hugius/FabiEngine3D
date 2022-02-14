@@ -7,7 +7,7 @@
 
 using std::clamp;
 
-void WorldEditor::unloadEditorWorld()
+void WorldEditor::clearLoadedWorld()
 {
 	_fe3d->gfx_setAmbientLightingEnabled(false);
 	_fe3d->gfx_setDirectionalLightingEnabled(false);
@@ -136,11 +136,6 @@ void WorldEditor::unloadEditorWorld()
 	_loadedSoundIds.clear();
 }
 
-void WorldEditor::unloadCustomWorld()
-{
-
-}
-
 const string& WorldEditor::getLoadedWorldId() const
 {
 	return _loadedWorldId;
@@ -262,4 +257,9 @@ void WorldEditor::inject(shared_ptr<Animation3dEditor> animation3dEditor)
 void WorldEditor::inject(shared_ptr<SoundEditor> soundEditor)
 {
 	_soundEditor = soundEditor;
+}
+
+void WorldEditor::inject(shared_ptr<World> world)
+{
+	_world = world;
 }

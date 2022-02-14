@@ -212,7 +212,7 @@ void ScriptInterpreter::load()
 
 void ScriptInterpreter::unload()
 {
-	_worldEditor->unloadEditorWorld();
+	_worldEditor->clearLoadedWorld();
 
 	_fe3d->sky_deleteAll();
 	_fe3d->terrain_deleteAll();
@@ -225,6 +225,7 @@ void ScriptInterpreter::unload()
 	_fe3d->pointlight_deleteAll();
 	_fe3d->spotlight_deleteAll();
 	_fe3d->reflection_deleteAll();
+	_fe3d->animation3d_deleteAll();
 	_fe3d->animation2d_deleteAll();
 
 	for(const auto& id : _fe3d->quad2d_getIds())

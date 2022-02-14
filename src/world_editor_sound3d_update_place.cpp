@@ -23,7 +23,9 @@ void WorldEditor::_updateSoundPlacing()
 
 				_loadedSoundIds.insert(make_pair(newId, _currentTemplateSoundId));
 
-				_fe3d->sound3d_create(newId, _fe3d->sound3d_getAudioPath(_currentTemplateSoundId));
+				_world->copyTemplateSound(newId, _currentTemplateSoundId);
+				_loadedSoundIds.insert(make_pair(newId, _currentTemplateSoundId));
+
 				_fe3d->sound3d_setPosition(newId, newPosition);
 				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND_MAX_VOLUME);
 				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND_MAX_DISTANCE);
@@ -110,7 +112,9 @@ void WorldEditor::_updateSoundPlacing()
 
 				_loadedSoundIds.insert(make_pair(newId, _currentTemplateSoundId));
 
-				_fe3d->sound3d_create(newId, _fe3d->sound3d_getAudioPath(_currentTemplateSoundId));
+				_world->copyTemplateSound(newId, _currentTemplateSoundId);
+				_loadedSoundIds.insert(make_pair(newId, _currentTemplateSoundId));
+
 				_fe3d->sound3d_setPosition(newId, newPosition);
 				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND_MAX_VOLUME);
 				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND_MAX_DISTANCE);

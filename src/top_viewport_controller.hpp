@@ -14,6 +14,7 @@
 #include "sound_editor.hpp"
 #include "world_editor.hpp"
 #include "script_editor.hpp"
+#include "script_executor.hpp"
 
 class TopViewportController final : public BaseViewportController
 {

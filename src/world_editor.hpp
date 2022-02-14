@@ -11,6 +11,7 @@
 #include "animation2d_editor.hpp"
 #include "sound_editor.hpp"
 #include "transformation_type.hpp"
+#include "world.hpp"
 
 class WorldEditor final : public BaseEditor
 {
@@ -26,35 +27,14 @@ public:
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<SoundEditor> soundEditor);
-
+	void inject(shared_ptr<World> world);
 	void update();
-	void createCustomWorld(const string& id);
-	void addLightingToCustomWorld();
-	void addGraphicsToCustomWorld();
-	void addSkyToCustomWorld();
-	void addTerrainToCustomWorld();
-	void addWaterToCustomWorld();
-	void addModelToCustomWorld(const string& id);
-	void addQuad3dToCustomWorld(const string& id);
-	void addText3dToCustomWorld(const string& id);
-	void addAabbToCustomWorld(const string& id);
-	void addSoundToCustomWorld(const string& id);
-	void addPointlightToCustomWorld(const string& id);
-	void addSpotlightToCustomWorld(const string& id);
-	void addReflectionToCustomWorld(const string& id);
-	void copyTemplateModel(const string& newId, const string& templateId);
-	void copyTemplateQuad3d(const string& newId, const string& templateId);
-	void copyTemplateText3d(const string& newId, const string& templateId);
-	void copyTemplateSound(const string& newId, const string& templateId);
-	void unloadEditorWorld();
-	void unloadCustomWorld();
+	void clearLoadedWorld();
 
 	const string& getLoadedWorldId() const;
 
-	const bool loadEditorWorldFromFile(const string& fileName);
-	const bool saveEditorWorldToFile();
-	const bool loadCustomWorldFromFile(const string& fileName);
-	const bool saveCustomWorldToFile();
+	const bool loadFromFile(const string& fileName);
+	const bool saveToFile();
 
 private:
 	void _load();
@@ -156,14 +136,6 @@ private:
 
 	const vector<string> _getWorldIds() const;
 
-	const bool _copyTemplateSky(const string& newId, const string& templateId);
-	const bool _copyTemplateTerrain(const string& newId, const string& templateId);
-	const bool _copyTemplateWater(const string& newId, const string& templateId);
-	const bool _copyTemplateModel(const string& newId, const string& templateId, bool isFromOutside);
-	const bool _copyTemplateQuad3d(const string& newId, const string& templateId, bool isFromOutside);
-	const bool _copyTemplateText3d(const string& newId, const string& templateId, bool isFromOutside);
-	const bool _copyTemplateSound(const string& newId, const string& templateId, bool isFromOutside);
-
 	static inline const string TEMPLATE_POINTLIGHT_ID = "@@template_pointlight";
 	static inline const string TEMPLATE_SPOTLIGHT_ID = "@@template_spotlight";
 	static inline const string TEMPLATE_REFLECTION_ID = "@@template_reflection";
@@ -177,26 +149,13 @@ private:
 	static inline const string CAMERA_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
 	static inline const string SPEAKER_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
 	map<string, string> _loadedModelIds;
-	map<string, string> _outsideLoadedModelIds;
 	map<string, string> _loadedQuadIds;
-	map<string, string> _outsideLoadedQuadIds;
 	map<string, string> _loadedTextIds;
-	map<string, string> _outsideLoadedTextIds;
 	map<string, string> _loadedSoundIds;
-	map<string, string> _outsideLoadedSoundIds;
-	vector<string> _customWorldModelIds;
-	vector<string> _customWorldQuadIds;
-	vector<string> _customWorldTextIds;
-	vector<string> _customWorldAabbIds;
-	vector<string> _customWorldPointlightIds;
-	vector<string> _customWorldSpotlightIds;
-	vector<string> _customWorldReflectionIds;
-	vector<string> _customWorldSoundIds;
 	vector<string> _loadedAabbIds;
 	vector<string> _loadedPointlightIds;
 	vector<string> _loadedSpotlightIds;
 	vector<string> _loadedReflectionIds;
-	string _customWorldId = "";
 	string _loadedSkyId = "";
 	string _loadedTerrainId = "";
 	string _loadedWaterId = "";
@@ -308,11 +267,6 @@ private:
 	int _selectedSoundHighlightDirection = 1;
 	int _activeSoundHighlightDirection = 1;
 
-	bool _hasCustomWorldLighting = false;
-	bool _hasCustomWorldGraphics = false;
-	bool _hasCustomWorldSky = false;
-	bool _hasCustomWorldTerrain = false;
-	bool _hasCustomWorldWater = false;
 	bool _dontResetSelectedModel = false;
 	bool _dontResetSelectedQuad3d = false;
 	bool _dontResetSelectedText3d = false;
@@ -338,4 +292,5 @@ private:
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
+	shared_ptr<World> _world = nullptr;
 };

@@ -208,7 +208,7 @@ void WorldEditor::_updateWorldChoosing()
 
 				if(!_isDeletingWorld)
 				{
-					if(loadEditorWorldFromFile(_currentWorldId))
+					if(loadFromFile(_currentWorldId))
 					{
 						_fe3d->misc_setVsyncEnabled(false);
 						_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");

@@ -1,27 +1,6 @@
-#include "world_editor.hpp"
-#include "logger.hpp"
+#include "world.hpp"
 
-void WorldEditor::copyTemplateModel(const string& newId, const string& templateId)
-{
-	_copyTemplateModel(newId, templateId, true);
-}
-
-void WorldEditor::copyTemplateQuad3d(const string& newId, const string& templateId)
-{
-	_copyTemplateQuad3d(newId, templateId, true);
-}
-
-void WorldEditor::copyTemplateText3d(const string& newId, const string& templateId)
-{
-	_copyTemplateText3d(newId, templateId, true);
-}
-
-void WorldEditor::copyTemplateSound(const string& newId, const string& templateId)
-{
-	_copyTemplateSound(newId, templateId, true);
-}
-
-const bool WorldEditor::_copyTemplateSky(const string& newId, const string& templateId)
+const bool World::copyTemplateSky(const string& newId, const string& templateId)
 {
 	_fe3d->sky_create(newId);
 	_fe3d->sky_select(newId);
@@ -30,12 +9,10 @@ const bool WorldEditor::_copyTemplateSky(const string& newId, const string& temp
 	_fe3d->sky_setRotation(newId, _fe3d->sky_getRotation(templateId));
 	_fe3d->sky_setColor(newId, _fe3d->sky_getColor(templateId));
 
-	_loadedSkyId = newId;
-
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateTerrain(const string& newId, const string& templateId)
+const bool World::copyTemplateTerrain(const string& newId, const string& templateId)
 {
 	_fe3d->terrain_create(newId, _fe3d->terrain_getHeightMapPath(templateId));
 	_fe3d->terrain_select(newId);
@@ -94,12 +71,10 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newId, const string& 
 		_fe3d->terrain_setBlueDiffuseMap(newId, _fe3d->terrain_getBlueDiffuseMapPath(templateId));
 	}
 
-	_loadedTerrainId = newId;
-
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateWater(const string& newId, const string& templateId)
+const bool World::copyTemplateWater(const string& newId, const string& templateId)
 {
 	_fe3d->water_create(newId);
 	_fe3d->water_select(newId);
@@ -133,12 +108,10 @@ const bool WorldEditor::_copyTemplateWater(const string& newId, const string& te
 		_fe3d->water_setDisplacementMap(newId, _fe3d->water_getDisplacementMapPath(templateId));
 	}
 
-	_loadedWaterId = newId;
-
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateModel(const string& newId, const string& templateId, bool isFromOutside)
+const bool World::copyTemplateModel(const string& newId, const string& templateId)
 {
 	_fe3d->model_create(newId, _fe3d->model_getMeshPath(templateId));
 	_fe3d->model_setBaseSize(newId, _fe3d->model_getBaseSize(templateId));
@@ -201,19 +174,10 @@ const bool WorldEditor::_copyTemplateModel(const string& newId, const string& te
 		_fe3d->aabb_setLocalSize(newAabbId, _fe3d->aabb_getSize(templateAabbId));
 	}
 
-	if(isFromOutside)
-	{
-		_outsideLoadedModelIds.insert(make_pair(newId, templateId));
-	}
-	else
-	{
-		_loadedModelIds.insert(make_pair(newId, templateId));
-	}
-
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& templateId, bool isFromOutside)
+const bool World::copyTemplateQuad3d(const string& newId, const string& templateId)
 {
 	_fe3d->quad3d_create(newId, false);
 	_fe3d->quad3d_setSize(newId, _fe3d->quad3d_getSize(templateId));
@@ -243,19 +207,10 @@ const bool WorldEditor::_copyTemplateQuad3d(const string& newId, const string& t
 	_fe3d->aabb_setParentEntityId(newId, newId);
 	_fe3d->aabb_setParentEntityType(newId, AabbParentEntityType::QUAD3D);
 
-	if(isFromOutside)
-	{
-		_outsideLoadedQuadIds.insert(make_pair(newId, templateId));
-	}
-	else
-	{
-		_loadedQuadIds.insert(make_pair(newId, templateId));
-	}
-
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& templateId, bool isFromOutside)
+const bool World::copyTemplateText3d(const string& newId, const string& templateId)
 {
 	_fe3d->text3d_create(newId, _fe3d->text3d_getFontMapPath(templateId), false);
 	_fe3d->text3d_setSize(newId, _fe3d->text3d_getSize(templateId));
@@ -274,30 +229,12 @@ const bool WorldEditor::_copyTemplateText3d(const string& newId, const string& t
 	_fe3d->aabb_setParentEntityId(newId, newId);
 	_fe3d->aabb_setParentEntityType(newId, AabbParentEntityType::TEXT3D);
 
-	if(isFromOutside)
-	{
-		_outsideLoadedTextIds.insert(make_pair(newId, templateId));
-	}
-	else
-	{
-		_loadedTextIds.insert(make_pair(newId, templateId));
-	}
-
 	return true;
 }
 
-const bool WorldEditor::_copyTemplateSound(const string& newId, const string& templateId, bool isFromOutside)
+const bool World::copyTemplateSound(const string& newId, const string& templateId)
 {
 	_fe3d->sound3d_create(newId, _fe3d->sound2d_getAudioPath(templateId));
-
-	if(isFromOutside)
-	{
-		_outsideLoadedSoundIds.insert(make_pair(newId, templateId));
-	}
-	else
-	{
-		_loadedSoundIds.insert(make_pair(newId, templateId));
-	}
 
 	return true;
 }

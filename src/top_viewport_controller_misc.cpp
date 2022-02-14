@@ -301,7 +301,7 @@ void TopViewportController::_saveCurrentProject()
 	_animation2dEditor->saveToFile();
 	_animation3dEditor->saveToFile();
 	_soundEditor->saveToFile();
-	_worldEditor->saveEditorWorldToFile();
+	_worldEditor->saveToFile();
 	_scriptEditor->saveScriptFiles();
 
 	Logger::throwInfo("Project \"" + _currentProjectId + "\" saved");

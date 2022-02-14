@@ -10,7 +10,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
+const bool WorldEditor::loadFromFile(const string& fileName)
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
@@ -89,8 +89,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> skyId
 				>> templateId;
 
-			if(_copyTemplateSky(skyId, templateId))
+			if(_world->copyTemplateSky(skyId, templateId))
 			{
+				_loadedSkyId = skyId;
+
 				if(isLoaded())
 				{
 					_currentSkyId = skyId;
@@ -106,8 +108,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> terrainId
 				>> templateId;
 
-			if(_copyTemplateTerrain(terrainId, templateId))
+			if(_world->copyTemplateTerrain(terrainId, templateId))
 			{
+				_loadedTerrainId = terrainId;
+
 				if(isLoaded())
 				{
 					_currentTerrainId = terrainId;
@@ -125,8 +129,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> templateId
 				>> height;
 
-			if(_copyTemplateWater(waterId, templateId))
+			if(_world->copyTemplateWater(waterId, templateId))
 			{
+				_loadedWaterId = waterId;
+
 				if(isLoaded())
 				{
 					_currentWaterId = waterId;
@@ -178,8 +184,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_copyTemplateModel(modelId, templateId, false))
+			if(_world->copyTemplateModel(modelId, templateId))
 			{
+				_loadedModelIds.insert(make_pair(modelId, templateId));
+
 				_fe3d->model_setBasePosition(modelId, position);
 				_fe3d->model_setBaseRotation(modelId, rotation);
 				_fe3d->model_setBaseSize(modelId, size);
@@ -222,8 +230,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_copyTemplateQuad3d(quadId, templateId, false))
+			if(_world->copyTemplateQuad3d(quadId, templateId))
 			{
+				_loadedQuadIds.insert(make_pair(quadId, templateId));
+
 				_fe3d->quad3d_setPosition(quadId, position);
 				_fe3d->quad3d_setRotation(quadId, rotation);
 				_fe3d->quad3d_setSize(quadId, size);
@@ -254,8 +264,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				>> size.x
 				>> size.y;
 
-			if(_copyTemplateText3d(textId, templateId, false))
+			if(_world->copyTemplateText3d(textId, templateId))
 			{
+				_loadedTextIds.insert(make_pair(textId, templateId));
+
 				_fe3d->text3d_setPosition(textId, position);
 				_fe3d->text3d_setRotation(textId, rotation);
 				_fe3d->text3d_setSize(textId, size);
@@ -294,8 +306,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			if(_copyTemplateSound(soundId, templateId, false))
+			if(_world->copyTemplateSound(soundId, templateId))
 			{
+				_loadedSoundIds.insert(make_pair(soundId, templateId));
+
 				_fe3d->sound3d_setPosition(soundId, position);
 				_fe3d->sound3d_setMaxVolume(soundId, maxVolume);
 				_fe3d->sound3d_setMaxDistance(soundId, maxDistance);

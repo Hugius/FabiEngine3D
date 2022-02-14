@@ -110,9 +110,6 @@ void WorldEditor::_updateChoiceMenu()
 			clearLoadedWorld();
 
 			_currentWorldId = "";
-			_currentSkyId = "";
-			_currentTerrainId = "";
-			_currentWaterId = "";
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 			return;
@@ -130,9 +127,6 @@ void WorldEditor::_updateChoiceMenu()
 			clearLoadedWorld();
 
 			_currentWorldId = "";
-			_currentSkyId = "";
-			_currentTerrainId = "";
-			_currentWaterId = "";
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 			return;

@@ -78,19 +78,19 @@ void WorldEditor::_updateMiscellaneous()
 			_isAabbModeEnabled = !_isAabbModeEnabled;
 		}
 
-		if(!_loadedSkyId.empty())
+		if(!_fe3d->sky_getSelectedId().empty())
 		{
-			_fe3d->sky_setWireframed(_loadedSkyId, _isWireframeModeEnabled);
+			_fe3d->sky_setWireframed(_fe3d->sky_getSelectedId(), _isWireframeModeEnabled);
 		}
 
-		if(!_loadedTerrainId.empty())
+		if(!_fe3d->terrain_getSelectedId().empty())
 		{
-			_fe3d->terrain_setWireframed(_loadedTerrainId, _isWireframeModeEnabled);
+			_fe3d->terrain_setWireframed(_fe3d->terrain_getSelectedId(), _isWireframeModeEnabled);
 		}
 
-		if(!_loadedWaterId.empty())
+		if(!_fe3d->water_getSelectedId().empty())
 		{
-			_fe3d->water_setWireframed(_loadedWaterId, _isWireframeModeEnabled);
+			_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), _isWireframeModeEnabled);
 		}
 
 		for(const auto& modelId : _fe3d->model_getIds())

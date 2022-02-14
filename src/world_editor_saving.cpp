@@ -10,7 +10,7 @@ using std::ofstream;
 
 const bool WorldEditor::saveToFile()
 {
-	if(_currentWorldId.empty())
+	if(!isLoaded())
 	{
 		return false;
 	}

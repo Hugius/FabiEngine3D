@@ -91,12 +91,7 @@ const bool WorldEditor::loadFromFile(const string& fileName)
 
 			if(_world->copyTemplateSky(skyId, templateId))
 			{
-				_loadedSkyId = skyId;
-
-				if(isLoaded())
-				{
-					_currentSkyId = skyId;
-				}
+				_fe3d->sky_select(skyId);
 			}
 		}
 		else if(lineType == "TERRAIN")
@@ -110,12 +105,7 @@ const bool WorldEditor::loadFromFile(const string& fileName)
 
 			if(_world->copyTemplateTerrain(terrainId, templateId))
 			{
-				_loadedTerrainId = terrainId;
-
-				if(isLoaded())
-				{
-					_currentTerrainId = terrainId;
-				}
+				_fe3d->terrain_select(terrainId);
 			}
 		}
 		else if(lineType == "WATER")
@@ -131,14 +121,9 @@ const bool WorldEditor::loadFromFile(const string& fileName)
 
 			if(_world->copyTemplateWater(waterId, templateId))
 			{
-				_loadedWaterId = waterId;
-
-				if(isLoaded())
-				{
-					_currentWaterId = waterId;
-				}
-
 				_fe3d->water_setHeight(waterId, height);
+
+				_fe3d->water_select(waterId);
 			}
 		}
 		else if(lineType == "MODEL")

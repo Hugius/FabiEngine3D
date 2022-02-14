@@ -172,12 +172,6 @@ void WorldEditor::_unload()
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
 	_loadedReflectionIds.clear();
-	_loadedSkyId = "";
-	_loadedTerrainId = "";
-	_loadedWaterId = "";
-	_currentSkyId = "";
-	_currentTerrainId = "";
-	_currentWaterId = "";
 	_currentTemplateModelId = "";
 	_selectedModelId = "";
 	_activeModelId = "";

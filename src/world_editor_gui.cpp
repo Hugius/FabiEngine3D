@@ -46,9 +46,9 @@ void WorldEditor::_loadGUI()
 	positions = Math::calculateDistributedPositions(5, CH);
 	leftWindow->createScreen("worldEditorMenuWater");
 	leftWindow->getScreen("worldEditorMenuWater")->createButton("choose", fvec2(0.0f, positions[0]), TEXT_SIZE("Choose Water"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuWater")->createButton("delete", fvec2(0.0f, positions[1]), TEXT_SIZE("Delete Water"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuWater")->createButton("up", fvec2(0.0f, positions[2]), TEXT_SIZE("Move Up"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Move Up", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuWater")->createButton("down", fvec2(0.0f, positions[3]), TEXT_SIZE("Move Down"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Move Down", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuWater")->createButton("up", fvec2(0.0f, positions[1]), TEXT_SIZE("Move Up"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Move Up", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuWater")->createButton("down", fvec2(0.0f, positions[2]), TEXT_SIZE("Move Down"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Move Down", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuWater")->createButton("delete", fvec2(0.0f, positions[3]), TEXT_SIZE("Delete Water"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Water", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuWater")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Math::calculateDistributedPositions(3, CH);

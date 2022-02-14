@@ -52,19 +52,19 @@ void WorldEditor::clearLoadedWorld()
 	_fe3d->gfx_setPlanarRefractionQuality(0);
 	_fe3d->gfx_setPlanarReflectionHeight(0.0f);
 
-	if(!_loadedSkyId.empty())
+	if(!_fe3d->sky_getSelectedId().empty())
 	{
-		_fe3d->sky_delete(_loadedSkyId);
+		_fe3d->sky_delete(_fe3d->sky_getSelectedId());
 	}
 
-	if(!_loadedTerrainId.empty())
+	if(!_fe3d->terrain_getSelectedId().empty())
 	{
-		_fe3d->terrain_delete(_loadedTerrainId);
+		_fe3d->terrain_delete(_fe3d->terrain_getSelectedId());
 	}
 
-	if(!_loadedWaterId.empty())
+	if(!_fe3d->water_getSelectedId().empty())
 	{
-		_fe3d->water_delete(_loadedWaterId);
+		_fe3d->water_delete(_fe3d->water_getSelectedId());
 	}
 
 	for(const auto& [key, templateId] : _loadedModelIds)
@@ -86,7 +86,7 @@ void WorldEditor::clearLoadedWorld()
 	{
 		_fe3d->pointlight_delete(id);
 
-		if(!_currentWorldId.empty())
+		if(isLoaded())
 		{
 			_fe3d->model_delete("@@lamp_" + id);
 		}
@@ -96,7 +96,7 @@ void WorldEditor::clearLoadedWorld()
 	{
 		_fe3d->spotlight_delete(id);
 
-		if(!_currentWorldId.empty())
+		if(isLoaded())
 		{
 			_fe3d->model_delete("@@torch_" + id);
 		}
@@ -106,7 +106,7 @@ void WorldEditor::clearLoadedWorld()
 	{
 		_fe3d->reflection_delete(id);
 
-		if(!_currentWorldId.empty())
+		if(isLoaded())
 		{
 			_fe3d->model_delete("@@camera_" + id);
 		}
@@ -116,7 +116,7 @@ void WorldEditor::clearLoadedWorld()
 	{
 		_fe3d->sound3d_delete(key);
 
-		if(!_currentWorldId.empty())
+		if(isLoaded())
 		{
 			_fe3d->model_delete("@@speaker_" + key);
 		}
@@ -124,9 +124,6 @@ void WorldEditor::clearLoadedWorld()
 
 	_idCounter = 0;
 	_loadedWorldId = "";
-	_loadedSkyId = "";
-	_loadedTerrainId = "";
-	_loadedWaterId = "";
 	_loadedModelIds.clear();
 	_loadedQuadIds.clear();
 	_loadedTextIds.clear();

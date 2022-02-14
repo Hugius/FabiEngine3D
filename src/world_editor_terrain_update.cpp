@@ -26,9 +26,7 @@ void WorldEditor::_updateTerrainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_fe3d->terrain_delete(_currentTerrainId);
-			_loadedTerrainId = "";
-			_currentTerrainId = "";
+			_fe3d->terrain_delete(_fe3d->terrain_getSelectedId());
 		}
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -36,16 +34,10 @@ void WorldEditor::_updateTerrainMenu()
 			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("terrainList");
 			if(!selectedButtonId.empty())
 			{
-				if(_fe3d->terrain_isExisting(selectedButtonId))
-				{
-					_fe3d->terrain_delete(selectedButtonId);
-				}
-
 				_world->copyTemplateTerrain(selectedButtonId, ("@" + selectedButtonId));
-				_loadedTerrainId = selectedButtonId;
-				_currentTerrainId = _loadedTerrainId;
 
-				_fe3d->terrain_select(_currentTerrainId);
+				_fe3d->terrain_select(selectedButtonId);
+
 				_gui->getOverlay()->deleteChoiceForm("terrainList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("terrainList"))
@@ -54,6 +46,7 @@ void WorldEditor::_updateTerrainMenu()
 			}
 		}
 
-		screen->getButton("delete")->setHoverable(!_currentTerrainId.empty());
+		screen->getButton("choose")->setHoverable(_fe3d->terrain_getSelectedId().empty());
+		screen->getButton("delete")->setHoverable(!_fe3d->terrain_getSelectedId().empty());
 	}
 }

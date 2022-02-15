@@ -2,7 +2,7 @@
 
 const bool CustomWorldBuilder::loadWorldFromFile(const string& fileName)
 {
-
+	return false;
 }
 
 //{

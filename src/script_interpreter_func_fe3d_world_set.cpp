@@ -57,6 +57,12 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_customWorldBuilder->isSkyAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
 			_customWorldBuilder->addSky(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -68,6 +74,12 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_customWorldBuilder->isTerrainAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
 			_customWorldBuilder->addTerrain(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -79,6 +91,12 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_customWorldBuilder->isWaterAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
 			_customWorldBuilder->addWater(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -90,6 +108,12 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_customWorldBuilder->isModelAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
 			_customWorldBuilder->addModel(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -101,6 +125,12 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_customWorldBuilder->isQuad3dAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
 			_customWorldBuilder->addQuad3d(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -112,6 +142,12 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_customWorldBuilder->isText3dAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
 			_customWorldBuilder->addText3d(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -123,29 +159,47 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_customWorldBuilder->isAabbAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
 			_customWorldBuilder->addAabb(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:world_add_custom_sound")
+	else if(functionName == "fe3d:world_add_custom_pointlight")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_customWorldBuilder->addSound(args[0]->getString());
+			if(_customWorldBuilder->isPointlightAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
+			_customWorldBuilder->addPointlight(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:world_add_custom_light")
+	else if(functionName == "fe3d:world_add_custom_spotlight")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_customWorldBuilder->addPointlight(args[0]->getString());
+			if(_customWorldBuilder->isSpotlightAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
+			_customWorldBuilder->addSpotlight(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -156,7 +210,30 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_customWorldBuilder->isReflectionAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
 			_customWorldBuilder->addReflection(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:world_add_custom_sound")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_customWorldBuilder->isSoundAdded(args[0]->getString()))
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
+			_customWorldBuilder->addSound(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -165,6 +242,12 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
+			if(_customWorldBuilder->isGraphicsAdded())
+			{
+				_throwRuntimeError("sky already added");
+				return true;
+			}
+
 			_customWorldBuilder->addGraphics();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));

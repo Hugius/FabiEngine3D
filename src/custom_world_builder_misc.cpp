@@ -5,22 +5,6 @@ void CustomWorldBuilder::inject(shared_ptr<EngineInterface> fe3d)
 	_fe3d = fe3d;
 }
 
-void CustomWorldBuilder::resetWorldBuild()
-{
-	_addedSkyIds.clear();
-	_addedTerrainIds.clear();
-	_addedWaterIds.clear();
-	_addedModelIds.clear();
-	_addedQuad3dIds.clear();
-	_addedText3dIds.clear();
-	_addedAabbIds.clear();
-	_addedPointlightIds.clear();
-	_addedSpotlightIds.clear();
-	_addedReflectionIds.clear();
-	_addedSoundIds.clear();
-	_isGraphicsAdded = false;
-}
-
 void CustomWorldBuilder::addGraphics()
 {
 	if(_isGraphicsAdded)
@@ -267,4 +251,80 @@ void CustomWorldBuilder::clearLoadedWorld()
 const string& CustomWorldBuilder::getLoadedWorldId() const
 {
 	return _loadedWorldId;
+}
+
+const bool CustomWorldBuilder::isSkyAdded(const string& id) const
+{
+	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
+}
+
+const bool CustomWorldBuilder::isTerrainAdded(const string& id) const
+{
+	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
+}
+
+const bool CustomWorldBuilder::isWaterAdded(const string& id) const
+{
+	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
+}
+
+const bool CustomWorldBuilder::isModelAdded(const string& id) const
+{
+	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
+}
+
+const bool CustomWorldBuilder::isQuad3dAdded(const string& id) const
+{
+	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
+}
+
+const bool CustomWorldBuilder::isText3dAdded(const string& id) const
+{
+	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
+}
+
+const bool CustomWorldBuilder::isAabbAdded(const string& id) const
+{
+	return find(_addedAabbIds.begin(), _addedAabbIds.end(), id) != _addedAabbIds.end();
+}
+
+const bool CustomWorldBuilder::isPointlightAdded(const string& id) const
+{
+	return find(_addedPointlightIds.begin(), _addedPointlightIds.end(), id) != _addedPointlightIds.end();
+}
+
+const bool CustomWorldBuilder::isSpotlightAdded(const string& id) const
+{
+	return find(_addedSpotlightIds.begin(), _addedSpotlightIds.end(), id) != _addedSpotlightIds.end();
+}
+
+const bool CustomWorldBuilder::isReflectionAdded(const string& id) const
+{
+	return find(_addedReflectionIds.begin(), _addedReflectionIds.end(), id) != _addedReflectionIds.end();
+}
+
+const bool CustomWorldBuilder::isSoundAdded(const string& id) const
+{
+	return find(_addedSoundIds.begin(), _addedSoundIds.end(), id) != _addedSoundIds.end();
+}
+
+const bool CustomWorldBuilder::isGraphicsAdded() const
+{
+	return _isGraphicsAdded;
+}
+
+void CustomWorldBuilder::resetWorldBuild()
+{
+	_addedSkyIds.clear();
+	_addedTerrainIds.clear();
+	_addedWaterIds.clear();
+	_addedModelIds.clear();
+	_addedQuad3dIds.clear();
+	_addedText3dIds.clear();
+	_addedAabbIds.clear();
+	_addedPointlightIds.clear();
+	_addedSpotlightIds.clear();
+	_addedReflectionIds.clear();
+	_addedSoundIds.clear();
+	_isGraphicsAdded = false;
 }

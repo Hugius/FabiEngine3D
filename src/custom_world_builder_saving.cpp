@@ -2,7 +2,7 @@
 
 const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 {
-
+	return false;
 }
 
 //{

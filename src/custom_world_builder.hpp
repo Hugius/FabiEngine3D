@@ -14,10 +14,10 @@ public:
 	void addQuad3d(const string& id);
 	void addText3d(const string& id);
 	void addAabb(const string& id);
-	void addSound(const string& id);
 	void addPointlight(const string& id);
 	void addSpotlight(const string& id);
 	void addReflection(const string& id);
+	void addSound(const string& id);
 	void addGraphics();
 	void clearLoadedWorld();
 
@@ -33,10 +33,10 @@ public:
 	const bool isQuad3dAdded(const string& id) const;
 	const bool isText3dAdded(const string& id) const;
 	const bool isAabbAdded(const string& id) const;
-	const bool isSoundAdded(const string& id) const;
 	const bool isPointlightAdded(const string& id) const;
 	const bool isSpotlightAdded(const string& id) const;
 	const bool isReflectionAdded(const string& id) const;
+	const bool isSoundAdded(const string& id) const;
 	const bool isGraphicsAdded() const;
 
 private:

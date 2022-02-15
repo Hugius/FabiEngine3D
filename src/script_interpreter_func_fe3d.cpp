@@ -57,8 +57,6 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processFe3dFunctionCal
 	isExecuted = (isExecuted || _executeFe3dSound2dGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dSound3dSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dSound3dGetter(functionName, args, returnValues));
-	isExecuted = (isExecuted || _executeFe3dLightingSetter(functionName, args, returnValues));
-	isExecuted = (isExecuted || _executeFe3dLightingGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dGraphicsSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dGraphicsGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dWorldSetter(functionName, args, returnValues));

@@ -10,7 +10,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-const bool WorldEditor::loadFromFile(const string& fileName)
+const bool WorldEditor::loadWorldFromFile(const string& fileName)
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

@@ -40,7 +40,7 @@ void Quad3dEditor::_updateMainMenu()
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			saveToFile();
+			saveEntitiesToFile();
 			unload();
 			return;
 		}

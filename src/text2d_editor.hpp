@@ -8,12 +8,13 @@ public:
 	using BaseEditor::inject;
 
 	void update();
+	void deleteLoadedEntities();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedEntityIds();
+	const vector<string>& getLoadedEntityIds() const;
 
-	const bool loadFromFile();
-	const bool saveToFile() const;
+	const bool loadEntitiesFromFile();
+	const bool saveEntitiesToFile() const;
 
 private:
 	void _load();

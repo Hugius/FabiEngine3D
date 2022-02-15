@@ -9,7 +9,7 @@
 using std::ifstream;
 using std::ofstream;
 
-const bool ModelEditor::saveToFile() const
+const bool ModelEditor::saveEntitiesToFile() const
 {
 	if(!isLoaded())
 	{

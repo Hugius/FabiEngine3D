@@ -290,18 +290,18 @@ void TopViewportController::_saveCurrentProject()
 		abort();
 	}
 
-	_skyEditor->saveToFile();
-	_terrainEditor->saveToFile();
-	_waterEditor->saveToFile();
-	_modelEditor->saveToFile();
-	_quad3dEditor->saveToFile();
-	_text3dEditor->saveToFile();
-	_quad2dEditor->saveToFile();
-	_text2dEditor->saveToFile();
-	_animation2dEditor->saveToFile();
-	_animation3dEditor->saveToFile();
-	_soundEditor->saveToFile();
-	_worldEditor->saveToFile();
+	_skyEditor->saveEntitiesToFile();
+	_terrainEditor->saveEntitiesToFile();
+	_waterEditor->saveEntitiesToFile();
+	_modelEditor->saveEntitiesToFile();
+	_quad3dEditor->saveEntitiesToFile();
+	_text3dEditor->saveEntitiesToFile();
+	_quad2dEditor->saveEntitiesToFile();
+	_text2dEditor->saveEntitiesToFile();
+	_animation2dEditor->saveAnimationsToFile();
+	_animation3dEditor->saveAnimationsToFile();
+	_soundEditor->saveSoundsToFile();
+	_worldEditor->saveWorldToFile();
 	_scriptEditor->saveScriptFiles();
 
 	Logger::throwInfo("Project \"" + _currentProjectId + "\" saved");

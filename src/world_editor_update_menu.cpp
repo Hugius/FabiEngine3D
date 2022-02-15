@@ -105,7 +105,7 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
 
-			saveToFile();
+			saveWorldToFile();
 
 			clearLoadedWorld();
 

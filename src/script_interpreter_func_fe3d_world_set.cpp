@@ -14,7 +14,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		{
 			_worldEditor->clearLoadedWorld();
 
-			if(!_worldEditor->loadFromFile(args[0]->getString()))
+			if(!_worldEditor->loadWorldFromFile(args[0]->getString()))
 			{
 				_throwStartupError("Cannot load world");
 			}

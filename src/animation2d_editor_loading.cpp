@@ -7,7 +7,7 @@
 
 using std::istringstream;
 
-const bool Animation2dEditor::loadFromFile()
+const bool Animation2dEditor::loadAnimationsFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

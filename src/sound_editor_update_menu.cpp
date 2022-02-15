@@ -41,7 +41,7 @@ void SoundEditor::_updateMainMenu()
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			saveToFile();
+			saveSoundsToFile();
 			unload();
 			return;
 		}

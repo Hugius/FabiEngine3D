@@ -188,16 +188,16 @@ void ScriptInterpreter::load()
 		_fe3d->misc_cacheAudios(audioPaths, false);
 	}
 
-	_skyEditor->loadFromFile();
-	_terrainEditor->loadFromFile();
-	_waterEditor->loadFromFile();
-	_modelEditor->loadFromFile();
-	_quad3dEditor->loadFromFile();
-	_quad2dEditor->loadFromFile();
-	_text2dEditor->loadFromFile();
-	_animation2dEditor->loadFromFile();
-	_animation3dEditor->loadFromFile();
-	_soundEditor->loadFromFile();
+	_skyEditor->loadEntitiesFromFile();
+	_terrainEditor->loadEntitiesFromFile();
+	_waterEditor->loadEntitiesFromFile();
+	_modelEditor->loadEntitiesFromFile();
+	_quad3dEditor->loadEntitiesFromFile();
+	_quad2dEditor->loadEntitiesFromFile();
+	_text2dEditor->loadEntitiesFromFile();
+	_animation2dEditor->loadAnimationsFromFile();
+	_animation3dEditor->loadAnimationsFromFile();
+	_soundEditor->loadSoundsFromFile();
 
 	_fe3d->camera_reset();
 

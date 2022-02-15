@@ -33,8 +33,8 @@ public:
 
 	const string& getLoadedWorldId() const;
 
-	const bool loadFromFile(const string& fileName);
-	const bool saveToFile();
+	const bool loadWorldFromFile(const string& fileName);
+	const bool saveWorldToFile();
 
 private:
 	void _load();

@@ -8,12 +8,13 @@ public:
 	using BaseEditor::inject;
 
 	void update();
+	void deleteLoadedSounds();
 
 	const vector<string> getAudioPathsFromFile() const;
-	const vector<string>& getLoadedSoundIds();
+	const vector<string>& getLoadedSoundIds() const;
 
-	const bool loadFromFile();
-	const bool saveToFile() const;
+	const bool loadSoundsFromFile();
+	const bool saveSoundsToFile() const;
 
 private:
 	void _load();

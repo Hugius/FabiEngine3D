@@ -6,7 +6,7 @@
 
 using std::ofstream;
 
-const bool SoundEditor::saveToFile() const
+const bool SoundEditor::saveSoundsToFile() const
 {
 	if(!isLoaded())
 	{

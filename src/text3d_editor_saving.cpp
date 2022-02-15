@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool Text3dEditor::saveToFile() const
+const bool Text3dEditor::saveEntitiesToFile() const
 {
 	if(!isLoaded())
 	{

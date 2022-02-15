@@ -71,14 +71,12 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool Text3dEditor::loadFromFile()
+const bool Text3dEditor::loadEntitiesFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
-
-	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();

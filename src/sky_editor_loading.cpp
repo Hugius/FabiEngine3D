@@ -68,14 +68,12 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool SkyEditor::loadFromFile()
+const bool SkyEditor::loadEntitiesFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
-
-	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();

@@ -12,11 +12,12 @@ public:
 	void inject(shared_ptr<ModelEditor> modelEditor);
 
 	void update();
+	void deleteLoadedAnimations();
 
-	const vector<string> getLoadedAnimationIds() const;
+	const vector<string>& getLoadedAnimationIds() const;
 
-	const bool loadFromFile();
-	const bool saveToFile() const;
+	const bool loadAnimationsFromFile();
+	const bool saveAnimationsToFile() const;
 
 private:
 	void _load();

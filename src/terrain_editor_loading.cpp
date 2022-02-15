@@ -198,14 +198,12 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool TerrainEditor::loadFromFile()
+const bool TerrainEditor::loadEntitiesFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
-
-	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();

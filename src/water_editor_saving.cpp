@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool WaterEditor::saveToFile() const
+const bool WaterEditor::saveEntitiesToFile() const
 {
 	if(!isLoaded())
 	{

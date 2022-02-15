@@ -9,35 +9,35 @@ void WorldEditor::_load()
 	_fe3d->gfx_setAntiAliasingEnabled(true);
 	_fe3d->gfx_setAnisotropicFilteringQuality(16);
 
-	_skyEditor->loadFromFile();
+	_skyEditor->loadEntitiesFromFile();
 
-	_terrainEditor->loadFromFile();
+	_terrainEditor->loadEntitiesFromFile();
 
-	_waterEditor->loadFromFile();
+	_waterEditor->loadEntitiesFromFile();
 
-	_modelEditor->loadFromFile();
+	_modelEditor->loadEntitiesFromFile();
 	for(const auto& id : _modelEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace");
 		screen->getScrollingList("modelList")->createButton(id, id.substr(1));
 	}
 
-	_quad3dEditor->loadFromFile();
+	_quad3dEditor->loadEntitiesFromFile();
 	for(const auto& id : _quad3dEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace");
 		screen->getScrollingList("quad3dList")->createButton(id, id.substr(1));
 	}
 
-	_text3dEditor->loadFromFile();
+	_text3dEditor->loadEntitiesFromFile();
 	for(const auto& id : _text3dEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace");
 		screen->getScrollingList("text3dList")->createButton(id, id.substr(1));
 	}
 
-	_animation2dEditor->loadFromFile();
-	_animation3dEditor->loadFromFile();
+	_animation2dEditor->loadAnimationsFromFile();
+	_animation3dEditor->loadAnimationsFromFile();
 
 	_fe3d->model_create(TEMPLATE_LAMP_ID, LAMP_MODEL_PATH);
 	_fe3d->model_setBaseSize(TEMPLATE_LAMP_ID, DEFAULT_LAMP_SIZE);
@@ -70,7 +70,7 @@ void WorldEditor::_load()
 	_fe3d->reflection_create(TEMPLATE_REFLECTION_ID);
 	_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
 
-	_soundEditor->loadFromFile();
+	_soundEditor->loadSoundsFromFile();
 	_fe3d->model_create(TEMPLATE_SPEAKER_ID, SPEAKER_MODEL_PATH);
 	_fe3d->model_setBaseSize(TEMPLATE_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
 	_fe3d->model_setShadowed(TEMPLATE_SPEAKER_ID, false);
@@ -101,61 +101,29 @@ void WorldEditor::_unload()
 	_fe3d->gfx_setAntiAliasingEnabled(false);
 	_fe3d->gfx_setAnisotropicFilteringQuality(0);
 
-	for(const auto& id : _skyEditor->getLoadedEntityIds())
-	{
-		_fe3d->sky_delete(id);
-	}
-
-	for(const auto& id : _terrainEditor->getLoadedEntityIds())
-	{
-		_fe3d->terrain_delete(id);
-	}
-
-	for(const auto& id : _waterEditor->getLoadedEntityIds())
-	{
-		_fe3d->water_delete(id);
-	}
-
-	for(const auto& id : _modelEditor->getLoadedEntityIds())
-	{
-		_fe3d->model_delete(id);
-	}
-
-	for(const auto& id : _quad3dEditor->getLoadedEntityIds())
-	{
-		_fe3d->quad3d_delete(id);
-	}
-
-	for(const auto& id : _text3dEditor->getLoadedEntityIds())
-	{
-		_fe3d->text3d_delete(id);
-	}
-
 	_fe3d->model_delete(TEMPLATE_LAMP_ID);
-	_fe3d->pointlight_delete(TEMPLATE_POINTLIGHT_ID);
-
 	_fe3d->model_delete(TEMPLATE_TORCH_ID);
-	_fe3d->spotlight_delete(TEMPLATE_SPOTLIGHT_ID);
-
 	_fe3d->model_delete(TEMPLATE_CAMERA_ID);
+	_fe3d->model_delete(TEMPLATE_SPEAKER_ID);
+
+	_fe3d->pointlight_delete(TEMPLATE_POINTLIGHT_ID);
+	_fe3d->spotlight_delete(TEMPLATE_SPOTLIGHT_ID);
 	_fe3d->reflection_delete(TEMPLATE_REFLECTION_ID);
 
-	for(const auto& id : _animation3dEditor->getLoadedAnimationIds())
-	{
-		_fe3d->animation3d_delete(id);
-	}
-
-	for(const auto& id : _animation2dEditor->getLoadedAnimationIds())
-	{
-		_fe3d->animation2d_delete(id);
-	}
-
-	_fe3d->model_delete(TEMPLATE_SPEAKER_ID);
 	for(const auto& id : _soundEditor->getLoadedSoundIds())
 	{
-		_fe3d->sound2d_delete(id);
 		_fe3d->sound3d_delete(id);
 	}
+
+	_skyEditor->deleteLoadedEntities();
+	_terrainEditor->deleteLoadedEntities();
+	_waterEditor->deleteLoadedEntities();
+	_modelEditor->deleteLoadedEntities();
+	_quad3dEditor->deleteLoadedEntities();
+	_text3dEditor->deleteLoadedEntities();
+	_animation3dEditor->deleteLoadedAnimations();
+	_animation2dEditor->deleteLoadedAnimations();
+	_soundEditor->deleteLoadedSounds();
 
 	_gui->getOverlay()->deleteTextField("selectedId");
 	_gui->getOverlay()->deleteTextField("activeId");

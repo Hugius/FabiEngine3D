@@ -59,14 +59,12 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool Quad2dEditor::loadFromFile()
+const bool Quad2dEditor::loadEntitiesFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
-
-	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();

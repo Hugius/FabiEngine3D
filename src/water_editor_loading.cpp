@@ -88,14 +88,12 @@ const vector<string> WaterEditor::getImagePathsFromFile() const
 	return imagePaths;
 }
 
-const bool WaterEditor::loadFromFile()
+const bool WaterEditor::loadEntitiesFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
-
-	_loadedEntityIds.clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();

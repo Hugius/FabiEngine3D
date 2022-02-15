@@ -56,7 +56,7 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 	return audioPaths;
 }
 
-const bool SoundEditor::loadFromFile()
+const bool SoundEditor::loadSoundsFromFile()
 {
 	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{

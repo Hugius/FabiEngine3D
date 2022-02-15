@@ -44,7 +44,7 @@ void Animation2dEditor::_updateMainMenu()
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			saveToFile();
+			saveAnimationsToFile();
 			unload();
 			return;
 		}

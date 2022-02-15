@@ -62,96 +62,72 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dTerrain())
-			{
-				const auto result = _fe3d->raycast_isTerrainIntersectionEnabled();
+			const auto result = _fe3d->raycast_isTerrainIntersectionEnabled();
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-			}
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_terrain_intersection_distance")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dTerrain())
-			{
-				const auto result = _fe3d->raycast_getTerrainIntersectionDistance();
+			const auto result = _fe3d->raycast_getTerrainIntersectionDistance();
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_terrain_intersection_precision")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dTerrain())
-			{
-				const auto result = _fe3d->raycast_getTerrainIntersectionPrecision();
+			const auto result = _fe3d->raycast_getTerrainIntersectionPrecision();
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_is_aabb_intersection_enabled")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dTerrain())
-			{
-				const auto result = _fe3d->raycast_isAabbIntersectionEnabled();
+			const auto result = _fe3d->raycast_isAabbIntersectionEnabled();
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-			}
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dTerrain())
-			{
-				const auto result = _fe3d->raycast_getPointOnTerrain().x;
+			const auto result = _fe3d->raycast_getPointOnTerrain().x;
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_y")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dTerrain())
-			{
-				const auto result = _fe3d->raycast_getPointOnTerrain().y;
+			const auto result = _fe3d->raycast_getPointOnTerrain().y;
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_z")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dTerrain())
-			{
-				const auto result = _fe3d->raycast_getPointOnTerrain().z;
+			const auto result = _fe3d->raycast_getPointOnTerrain().z;
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_is_point_on_terrain_valid")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dTerrain())
-			{
-				const auto result = _fe3d->raycast_isPointOnTerrainValid();
+			const auto result = _fe3d->raycast_isPointOnTerrainValid();
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-			}
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_closest_model")

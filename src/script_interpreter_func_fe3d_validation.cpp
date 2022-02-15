@@ -211,23 +211,55 @@ const bool ScriptInterpreter::_validateFe3dReflection(const string& id)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSky()
+const bool ScriptInterpreter::_validateFe3dSky(const string& id, bool isTemplate)
 {
-	if(_fe3d->sky_getSelectedId().empty())
+	if(!_validateFe3dId(id))
 	{
-		_throwRuntimeError("sky not selected");
 		return false;
+	}
+
+	if(isTemplate)
+	{
+		if(!_fe3d->sky_isExisting("@" + id))
+		{
+			_throwRuntimeError("template sky does not exist");
+			return false;
+		}
+	}
+	else
+	{
+		if(!_fe3d->sky_isExisting(id))
+		{
+			_throwRuntimeError("sky does not exist");
+			return false;
+		}
 	}
 
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dTerrain()
+const bool ScriptInterpreter::_validateFe3dTerrain(const string& id, bool isTemplate)
 {
-	if(_fe3d->terrain_getSelectedId().empty())
+	if(!_validateFe3dId(id))
 	{
-		_throwRuntimeError("terrain not selected");
 		return false;
+	}
+
+	if(isTemplate)
+	{
+		if(!_fe3d->terrain_isExisting("@" + id))
+		{
+			_throwRuntimeError("template terrain does not exist");
+			return false;
+		}
+	}
+	else
+	{
+		if(!_fe3d->terrain_isExisting(id))
+		{
+			_throwRuntimeError("terrain does not exist");
+			return false;
+		}
 	}
 
 	return true;
@@ -265,12 +297,28 @@ const bool ScriptInterpreter::_validateFe3dAnimation3d(const string& id)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dWater()
+const bool ScriptInterpreter::_validateFe3dWater(const string& id, bool isTemplate)
 {
-	if(_fe3d->water_getSelectedId().empty())
+	if(!_validateFe3dId(id))
 	{
-		_throwRuntimeError("water not selected");
 		return false;
+	}
+
+	if(isTemplate)
+	{
+		if(!_fe3d->water_isExisting("@" + id))
+		{
+			_throwRuntimeError("template water does not exist");
+			return false;
+		}
+	}
+	else
+	{
+		if(!_fe3d->water_isExisting(id))
+		{
+			_throwRuntimeError("water does not exist");
+			return false;
+		}
 	}
 
 	return true;

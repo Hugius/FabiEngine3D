@@ -45,7 +45,7 @@ private:
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
-	shared_ptr<CustomWorldBuilder> _customWorldManager = nullptr;
+	shared_ptr<CustomWorldBuilder> _customWorldBuilder = nullptr;
 	shared_ptr<WorldUtilities> _worldUtilities = nullptr;
 	shared_ptr<Script> _script = nullptr;
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;

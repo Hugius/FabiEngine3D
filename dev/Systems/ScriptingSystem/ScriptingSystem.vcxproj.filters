@@ -63,9 +63,6 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_filesystem_set.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_lighting_set.cpp">
-      <Filter>Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_world_set.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
@@ -175,9 +172,6 @@
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_graphics_get.cpp">
-      <Filter>Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_lighting_get.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_get.cpp">

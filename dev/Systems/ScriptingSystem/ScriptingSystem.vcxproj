@@ -42,9 +42,7 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad2d_set.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad2d_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_input_get.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_lighting_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_set.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_lighting_set.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_set.cpp" />

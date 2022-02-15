@@ -11,25 +11,24 @@ void CustomWorldBuilder::resetWorldBuild()
 	_addedTerrainIds.clear();
 	_addedWaterIds.clear();
 	_addedModelIds.clear();
-	_addedQuadIds.clear();
-	_addedTextIds.clear();
+	_addedQuad3dIds.clear();
+	_addedText3dIds.clear();
 	_addedAabbIds.clear();
 	_addedPointlightIds.clear();
 	_addedSpotlightIds.clear();
 	_addedReflectionIds.clear();
 	_addedSoundIds.clear();
-	_hasAddedLighting = false;
-	_hasAddedGraphics = false;
-}
-
-void CustomWorldBuilder::addLighting()
-{
-	_hasAddedLighting = true;
+	_isGraphicsAdded = false;
 }
 
 void CustomWorldBuilder::addGraphics()
 {
-	_hasAddedGraphics = true;
+	if(_isGraphicsAdded)
+	{
+		abort();
+	}
+
+	_isGraphicsAdded = true;
 }
 
 void CustomWorldBuilder::addSky(const string& id)
@@ -74,22 +73,22 @@ void CustomWorldBuilder::addModel(const string& id)
 
 void CustomWorldBuilder::addQuad3d(const string& id)
 {
-	if(find(_addedQuadIds.begin(), _addedQuadIds.end(), id) != _addedQuadIds.end())
+	if(find(_addedQuad3dIds.begin(), _addedQuad3dIds.end(), id) != _addedQuad3dIds.end())
 	{
 		abort();
 	}
 
-	_addedQuadIds.push_back(id);
+	_addedQuad3dIds.push_back(id);
 }
 
-void CustomWorldBuilder::addText(const string& id)
+void CustomWorldBuilder::addText3d(const string& id)
 {
-	if(find(_addedTextIds.begin(), _addedTextIds.end(), id) != _addedTextIds.end())
+	if(find(_addedText3dIds.begin(), _addedText3dIds.end(), id) != _addedText3dIds.end())
 	{
 		abort();
 	}
 
-	_addedTextIds.push_back(id);
+	_addedText3dIds.push_back(id);
 }
 
 void CustomWorldBuilder::addAabb(const string& id)
@@ -144,48 +143,56 @@ void CustomWorldBuilder::addReflection(const string& id)
 
 void CustomWorldBuilder::clearLoadedWorld()
 {
-	_fe3d->gfx_setAmbientLightingEnabled(false);
-	_fe3d->gfx_setDirectionalLightingEnabled(false);
-	_fe3d->gfx_setFogEnabled(false);
-	_fe3d->gfx_setShadowsEnabled(false);
-	_fe3d->gfx_setSkyExposureEnabled(false);
-	_fe3d->gfx_setDofEnabled(false);
-	_fe3d->gfx_setLensFlareEnabled(false);
-	_fe3d->gfx_setBloomEnabled(false);
-	_fe3d->gfx_setAmbientLightingColor(fvec3(0.0f));
-	_fe3d->gfx_setAmbientLightingIntensity(0.0f);
-	_fe3d->gfx_setDirectionalLightingPosition(fvec3(0.0f));
-	_fe3d->gfx_setDirectionalLightingColor(fvec3(0.0f));
-	_fe3d->gfx_setDirectionalLightingIntensity(0.0f);
-	_fe3d->gfx_setFogColor(fvec3(0.0f));
-	_fe3d->gfx_setFogThickness(0.0f);
-	_fe3d->gfx_setFogMinDistance(0.0f);
-	_fe3d->gfx_setFogMaxDistance(0.0f);
-	_fe3d->gfx_setShadowCircleEnabled(false);
-	_fe3d->gfx_setShadowPositionOffset(fvec3(0.0f));
-	_fe3d->gfx_setShadowLookatOffset(fvec3(0.0f));
-	_fe3d->gfx_setShadowSize(0.0f);
-	_fe3d->gfx_setShadowLightness(0.0f);
-	_fe3d->gfx_setShadowQuality(0);
-	_fe3d->gfx_setShadowInterval(0);
-	_fe3d->gfx_setShadowFollowingCamera(false);
-	_fe3d->gfx_setBloomIntensity(0.0f);
-	_fe3d->gfx_setBloomBlurCount(0);
-	_fe3d->gfx_setBloomType(BloomType::EVERYTHING);
-	_fe3d->gfx_setBloomQuality(0);
-	_fe3d->gfx_setSkyExposureIntensity(0.0f);
-	_fe3d->gfx_setSkyExposureSpeed(0.0f);
-	_fe3d->gfx_setDofDynamicDistance(0.0f);
-	_fe3d->gfx_setDofBlurDistance(0.0f);
-	_fe3d->gfx_setDofDynamic(false);
-	_fe3d->gfx_setDofQuality(0);
-	_fe3d->gfx_setLensFlareMap("");
-	_fe3d->gfx_setLensFlareIntensity(0.0f);
-	_fe3d->gfx_setLensFlareSensitivity(0.0f);
-	_fe3d->gfx_setCubeReflectionQuality(0);
-	_fe3d->gfx_setPlanarReflectionQuality(0);
-	_fe3d->gfx_setPlanarRefractionQuality(0);
-	_fe3d->gfx_setPlanarReflectionHeight(0.0f);
+	if(_loadedWorldId.empty())
+	{
+		abort();
+	}
+
+	if(_isGraphicsLoaded)
+	{
+		_fe3d->gfx_setAmbientLightingEnabled(false);
+		_fe3d->gfx_setDirectionalLightingEnabled(false);
+		_fe3d->gfx_setFogEnabled(false);
+		_fe3d->gfx_setShadowsEnabled(false);
+		_fe3d->gfx_setSkyExposureEnabled(false);
+		_fe3d->gfx_setDofEnabled(false);
+		_fe3d->gfx_setLensFlareEnabled(false);
+		_fe3d->gfx_setBloomEnabled(false);
+		_fe3d->gfx_setAmbientLightingColor(fvec3(0.0f));
+		_fe3d->gfx_setAmbientLightingIntensity(0.0f);
+		_fe3d->gfx_setDirectionalLightingPosition(fvec3(0.0f));
+		_fe3d->gfx_setDirectionalLightingColor(fvec3(0.0f));
+		_fe3d->gfx_setDirectionalLightingIntensity(0.0f);
+		_fe3d->gfx_setFogColor(fvec3(0.0f));
+		_fe3d->gfx_setFogThickness(0.0f);
+		_fe3d->gfx_setFogMinDistance(0.0f);
+		_fe3d->gfx_setFogMaxDistance(0.0f);
+		_fe3d->gfx_setShadowCircleEnabled(false);
+		_fe3d->gfx_setShadowPositionOffset(fvec3(0.0f));
+		_fe3d->gfx_setShadowLookatOffset(fvec3(0.0f));
+		_fe3d->gfx_setShadowSize(0.0f);
+		_fe3d->gfx_setShadowLightness(0.0f);
+		_fe3d->gfx_setShadowQuality(0);
+		_fe3d->gfx_setShadowInterval(0);
+		_fe3d->gfx_setShadowFollowingCamera(false);
+		_fe3d->gfx_setBloomIntensity(0.0f);
+		_fe3d->gfx_setBloomBlurCount(0);
+		_fe3d->gfx_setBloomType(BloomType::EVERYTHING);
+		_fe3d->gfx_setBloomQuality(0);
+		_fe3d->gfx_setSkyExposureIntensity(0.0f);
+		_fe3d->gfx_setSkyExposureSpeed(0.0f);
+		_fe3d->gfx_setDofDynamicDistance(0.0f);
+		_fe3d->gfx_setDofBlurDistance(0.0f);
+		_fe3d->gfx_setDofDynamic(false);
+		_fe3d->gfx_setDofQuality(0);
+		_fe3d->gfx_setLensFlareMap("");
+		_fe3d->gfx_setLensFlareIntensity(0.0f);
+		_fe3d->gfx_setLensFlareSensitivity(0.0f);
+		_fe3d->gfx_setCubeReflectionQuality(0);
+		_fe3d->gfx_setPlanarReflectionQuality(0);
+		_fe3d->gfx_setPlanarRefractionQuality(0);
+		_fe3d->gfx_setPlanarReflectionHeight(0.0f);
+	}
 
 	for(const auto& id : _loadedSkyIds)
 	{
@@ -207,12 +214,12 @@ void CustomWorldBuilder::clearLoadedWorld()
 		_fe3d->model_delete(id);
 	}
 
-	for(const auto& id : _loadedQuadIds)
+	for(const auto& id : _loadedQuad3dIds)
 	{
 		_fe3d->quad3d_delete(id);
 	}
 
-	for(const auto& id : _loadedTextIds)
+	for(const auto& id : _loadedText3dIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
@@ -246,11 +253,18 @@ void CustomWorldBuilder::clearLoadedWorld()
 	_loadedTerrainIds.clear();
 	_loadedWaterIds.clear();
 	_loadedModelIds.clear();
-	_loadedQuadIds.clear();
-	_loadedTextIds.clear();
+	_loadedQuad3dIds.clear();
+	_loadedText3dIds.clear();
 	_loadedAabbIds.clear();
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
 	_loadedReflectionIds.clear();
 	_loadedSoundIds.clear();
+	_loadedWorldId = "";
+	_isGraphicsLoaded = false;
+}
+
+const string& CustomWorldBuilder::getLoadedWorldId() const
+{
+	return _loadedWorldId;
 }

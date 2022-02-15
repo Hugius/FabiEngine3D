@@ -1,6 +1,10 @@
-//#include "custom_world_builder.hpp"
-//
-//const bool WorldBuilder::saveWorldToFile(const string& fileName)
+#include "custom_world_builder.hpp"
+
+const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
+{
+
+}
+
 //{
 //	//if(getCurrentProjectId().empty())
 //	//{

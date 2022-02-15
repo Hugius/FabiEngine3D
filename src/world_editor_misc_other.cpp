@@ -9,6 +9,11 @@ using std::clamp;
 
 void WorldEditor::clearLoadedWorld()
 {
+	if(_loadedWorldId.empty())
+	{
+		abort();
+	}
+
 	_fe3d->gfx_setAmbientLightingEnabled(false);
 	_fe3d->gfx_setDirectionalLightingEnabled(false);
 	_fe3d->gfx_setFogEnabled(false);
@@ -122,8 +127,6 @@ void WorldEditor::clearLoadedWorld()
 		}
 	}
 
-	_idCounter = 0;
-	_loadedWorldId = "";
 	_loadedModelIds.clear();
 	_loadedQuadIds.clear();
 	_loadedTextIds.clear();
@@ -131,6 +134,8 @@ void WorldEditor::clearLoadedWorld()
 	_loadedSpotlightIds.clear();
 	_loadedReflectionIds.clear();
 	_loadedSoundIds.clear();
+	_loadedWorldId = "";
+	_idCounter = 0;
 }
 
 const string& WorldEditor::getLoadedWorldId() const

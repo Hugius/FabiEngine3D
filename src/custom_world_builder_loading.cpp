@@ -1,6 +1,10 @@
-//#include "custom_world_builder.hpp"
-//
-//const bool WorldBuilder::loadWorldFromFile(const string& fileName)
+#include "custom_world_builder.hpp"
+
+const bool CustomWorldBuilder::loadWorldFromFile(const string& fileName)
+{
+
+}
+
 //{
 //	//if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 //	//{

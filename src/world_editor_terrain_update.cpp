@@ -34,7 +34,7 @@ void WorldEditor::_updateTerrainMenu()
 			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("terrainList");
 			if(!selectedButtonId.empty())
 			{
-				_world->copyTemplateTerrain(selectedButtonId, ("@" + selectedButtonId));
+				_worldUtilities->copyTemplateTerrain(selectedButtonId, ("@" + selectedButtonId));
 
 				_fe3d->terrain_select(selectedButtonId);
 

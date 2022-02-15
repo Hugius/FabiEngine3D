@@ -1,6 +1,11 @@
-#include "world.hpp"
+#include "world_utilities.hpp"
 
-const bool World::copyTemplateSky(const string& newId, const string& templateId)
+void WorldUtilities::inject(shared_ptr<EngineInterface> fe3d)
+{
+	_fe3d = fe3d;
+}
+
+const bool WorldUtilities::copyTemplateSky(const string& newId, const string& templateId)
 {
 	_fe3d->sky_create(newId);
 	_fe3d->sky_select(newId);
@@ -12,7 +17,7 @@ const bool World::copyTemplateSky(const string& newId, const string& templateId)
 	return true;
 }
 
-const bool World::copyTemplateTerrain(const string& newId, const string& templateId)
+const bool WorldUtilities::copyTemplateTerrain(const string& newId, const string& templateId)
 {
 	_fe3d->terrain_create(newId, _fe3d->terrain_getHeightMapPath(templateId));
 	_fe3d->terrain_select(newId);
@@ -74,7 +79,7 @@ const bool World::copyTemplateTerrain(const string& newId, const string& templat
 	return true;
 }
 
-const bool World::copyTemplateWater(const string& newId, const string& templateId)
+const bool WorldUtilities::copyTemplateWater(const string& newId, const string& templateId)
 {
 	_fe3d->water_create(newId);
 	_fe3d->water_select(newId);
@@ -111,7 +116,7 @@ const bool World::copyTemplateWater(const string& newId, const string& templateI
 	return true;
 }
 
-const bool World::copyTemplateModel(const string& newId, const string& templateId)
+const bool WorldUtilities::copyTemplateModel(const string& newId, const string& templateId)
 {
 	_fe3d->model_create(newId, _fe3d->model_getMeshPath(templateId));
 	_fe3d->model_setBaseSize(newId, _fe3d->model_getBaseSize(templateId));
@@ -177,7 +182,7 @@ const bool World::copyTemplateModel(const string& newId, const string& templateI
 	return true;
 }
 
-const bool World::copyTemplateQuad3d(const string& newId, const string& templateId)
+const bool WorldUtilities::copyTemplateQuad3d(const string& newId, const string& templateId)
 {
 	_fe3d->quad3d_create(newId, false);
 	_fe3d->quad3d_setSize(newId, _fe3d->quad3d_getSize(templateId));
@@ -210,7 +215,7 @@ const bool World::copyTemplateQuad3d(const string& newId, const string& template
 	return true;
 }
 
-const bool World::copyTemplateText3d(const string& newId, const string& templateId)
+const bool WorldUtilities::copyTemplateText3d(const string& newId, const string& templateId)
 {
 	_fe3d->text3d_create(newId, _fe3d->text3d_getFontMapPath(templateId), false);
 	_fe3d->text3d_setSize(newId, _fe3d->text3d_getSize(templateId));
@@ -232,7 +237,7 @@ const bool World::copyTemplateText3d(const string& newId, const string& template
 	return true;
 }
 
-const bool World::copyTemplateSound(const string& newId, const string& templateId)
+const bool WorldUtilities::copyTemplateSound(const string& newId, const string& templateId)
 {
 	_fe3d->sound3d_create(newId, _fe3d->sound2d_getAudioPath(templateId));
 

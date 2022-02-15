@@ -42,7 +42,7 @@ void WorldEditor::_updateWaterMenu()
 			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("waterList");
 			if(!selectedButtonId.empty())
 			{
-				_world->copyTemplateWater(selectedButtonId, ("@" + selectedButtonId));
+				_worldUtilities->copyTemplateWater(selectedButtonId, ("@" + selectedButtonId));
 
 				_fe3d->water_select(selectedButtonId);
 

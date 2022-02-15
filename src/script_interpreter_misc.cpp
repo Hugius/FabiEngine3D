@@ -213,7 +213,12 @@ void ScriptInterpreter::inject(shared_ptr<WorldEditor> worldEditor)
 	_worldEditor = worldEditor;
 }
 
-void ScriptInterpreter::inject(shared_ptr<World> world)
+void ScriptInterpreter::inject(shared_ptr<CustomWorldManager> customWorldManager)
 {
-	_world = world;
+	_customWorldManager = customWorldManager;
+}
+
+void ScriptInterpreter::inject(shared_ptr<WorldUtilities> worldUtilities)
+{
+	_worldUtilities = worldUtilities;
 }

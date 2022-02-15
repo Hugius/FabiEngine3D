@@ -89,7 +89,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> skyId
 				>> templateId;
 
-			if(_world->copyTemplateSky(skyId, templateId))
+			if(_worldUtilities->copyTemplateSky(skyId, templateId))
 			{
 				_fe3d->sky_select(skyId);
 			}
@@ -103,7 +103,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> terrainId
 				>> templateId;
 
-			if(_world->copyTemplateTerrain(terrainId, templateId))
+			if(_worldUtilities->copyTemplateTerrain(terrainId, templateId))
 			{
 				_fe3d->terrain_select(terrainId);
 			}
@@ -119,7 +119,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> templateId
 				>> height;
 
-			if(_world->copyTemplateWater(waterId, templateId))
+			if(_worldUtilities->copyTemplateWater(waterId, templateId))
 			{
 				_fe3d->water_setHeight(waterId, height);
 
@@ -169,7 +169,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_world->copyTemplateModel(modelId, templateId))
+			if(_worldUtilities->copyTemplateModel(modelId, templateId))
 			{
 				_loadedModelIds.insert(make_pair(modelId, templateId));
 
@@ -215,7 +215,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_world->copyTemplateQuad3d(quadId, templateId))
+			if(_worldUtilities->copyTemplateQuad3d(quadId, templateId))
 			{
 				_loadedQuadIds.insert(make_pair(quadId, templateId));
 
@@ -249,7 +249,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> size.x
 				>> size.y;
 
-			if(_world->copyTemplateText3d(textId, templateId))
+			if(_worldUtilities->copyTemplateText3d(textId, templateId))
 			{
 				_loadedTextIds.insert(make_pair(textId, templateId));
 
@@ -291,7 +291,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			if(_world->copyTemplateSound(soundId, templateId))
+			if(_worldUtilities->copyTemplateSound(soundId, templateId))
 			{
 				_loadedSoundIds.insert(make_pair(soundId, templateId));
 

@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 			if(!_worldEditor->loadWorldFromFile(args[0]->getString()))
 			{
-				_throwStartupError("Cannot load world");
+				_throwRuntimeError("cannot load world");
 			}
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));

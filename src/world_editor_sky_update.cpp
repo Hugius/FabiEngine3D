@@ -35,7 +35,7 @@ void WorldEditor::_updateSkyMenu()
 
 			if(!selectedButtonId.empty())
 			{
-				_world->copyTemplateSky(selectedButtonId, ("@" + selectedButtonId));
+				_worldUtilities->copyTemplateSky(selectedButtonId, ("@" + selectedButtonId));
 
 				_fe3d->sky_select(selectedButtonId);
 

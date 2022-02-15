@@ -20,7 +20,7 @@ void WorldEditor::_updateModelPlacing()
 
 				_idCounter++;
 
-				_world->copyTemplateModel(newId, _currentTemplateModelId);
+				_worldUtilities->copyTemplateModel(newId, _currentTemplateModelId);
 				_loadedModelIds.insert(make_pair(newId, _currentTemplateModelId));
 
 				_fe3d->model_setBasePosition(newId, newPosition);
@@ -69,7 +69,7 @@ void WorldEditor::_updateModelPlacing()
 
 				_idCounter++;
 
-				_world->copyTemplateModel(newId, _currentTemplateModelId);
+				_worldUtilities->copyTemplateModel(newId, _currentTemplateModelId);
 				_loadedModelIds.insert(make_pair(newId, _currentTemplateModelId));
 
 				_fe3d->model_setBasePosition(newId, newPosition);

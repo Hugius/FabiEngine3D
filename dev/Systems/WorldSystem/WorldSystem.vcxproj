@@ -19,13 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\world_loading.cpp" />
-    <ClCompile Include="..\..\..\src\world_misc.cpp" />
-    <ClCompile Include="..\..\..\src\world_creation.cpp" />
-    <ClCompile Include="..\..\..\src\world_saving.cpp" />
+    <ClCompile Include="..\..\..\src\custom_world_manager_loading.cpp" />
+    <ClCompile Include="..\..\..\src\custom_world_manager_misc.cpp" />
+    <ClCompile Include="..\..\..\src\custom_world_manager_saving.cpp" />
+    <ClCompile Include="..\..\..\src\world_utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\world.hpp" />
+    <ClInclude Include="..\..\..\src\custom_world_manager.hpp" />
+    <ClInclude Include="..\..\..\src\world_utilities.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

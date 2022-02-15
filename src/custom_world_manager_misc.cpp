@@ -1,11 +1,11 @@
-#include "world.hpp"
+#include "custom_world_manager.hpp"
 
-void World::inject(shared_ptr<EngineInterface> fe3d)
+void CustomWorldManager::inject(shared_ptr<EngineInterface> fe3d)
 {
 	_fe3d = fe3d;
 }
 
-void World::createCustomWorld(const string& id)
+void CustomWorldManager::createCustomWorld(const string& id)
 {
 	_customWorldId = id;
 	_hasCustomWorldLighting = false;
@@ -22,7 +22,7 @@ void World::createCustomWorld(const string& id)
 	_customWorldSpotlightIds.clear();
 }
 
-void World::addLightingToCustomWorld()
+void CustomWorldManager::addLightingToCustomWorld()
 {
 	if(!_customWorldId.empty())
 	{
@@ -34,7 +34,7 @@ void World::addLightingToCustomWorld()
 	}
 }
 
-void World::addGraphicsToCustomWorld()
+void CustomWorldManager::addGraphicsToCustomWorld()
 {
 	if(!_customWorldId.empty())
 	{
@@ -46,7 +46,7 @@ void World::addGraphicsToCustomWorld()
 	}
 }
 
-void World::addSkyToCustomWorld()
+void CustomWorldManager::addSkyToCustomWorld()
 {
 	if(!_customWorldId.empty())
 	{
@@ -58,7 +58,7 @@ void World::addSkyToCustomWorld()
 	}
 }
 
-void World::addTerrainToCustomWorld()
+void CustomWorldManager::addTerrainToCustomWorld()
 {
 	if(!_customWorldId.empty())
 	{
@@ -70,7 +70,7 @@ void World::addTerrainToCustomWorld()
 	}
 }
 
-void World::addWaterToCustomWorld()
+void CustomWorldManager::addWaterToCustomWorld()
 {
 	if(!_customWorldId.empty())
 	{
@@ -82,7 +82,7 @@ void World::addWaterToCustomWorld()
 	}
 }
 
-void World::addModelToCustomWorld(const string& id)
+void CustomWorldManager::addModelToCustomWorld(const string& id)
 {
 	if(!_customWorldId.empty())
 	{
@@ -94,7 +94,7 @@ void World::addModelToCustomWorld(const string& id)
 	}
 }
 
-void World::addQuad3dToCustomWorld(const string& id)
+void CustomWorldManager::addQuad3dToCustomWorld(const string& id)
 {
 	if(!_customWorldId.empty())
 	{
@@ -106,7 +106,7 @@ void World::addQuad3dToCustomWorld(const string& id)
 	}
 }
 
-void World::addText3dToCustomWorld(const string& id)
+void CustomWorldManager::addText3dToCustomWorld(const string& id)
 {
 	if(!_customWorldId.empty())
 	{
@@ -118,7 +118,7 @@ void World::addText3dToCustomWorld(const string& id)
 	}
 }
 
-void World::addAabbToCustomWorld(const string& id)
+void CustomWorldManager::addAabbToCustomWorld(const string& id)
 {
 	if(!_customWorldId.empty())
 	{
@@ -130,7 +130,7 @@ void World::addAabbToCustomWorld(const string& id)
 	}
 }
 
-void World::addSoundToCustomWorld(const string& id)
+void CustomWorldManager::addSoundToCustomWorld(const string& id)
 {
 	if(!_customWorldId.empty())
 	{
@@ -142,7 +142,7 @@ void World::addSoundToCustomWorld(const string& id)
 	}
 }
 
-void World::addPointlightToCustomWorld(const string& id)
+void CustomWorldManager::addPointlightToCustomWorld(const string& id)
 {
 	if(!_customWorldId.empty())
 	{
@@ -154,7 +154,7 @@ void World::addPointlightToCustomWorld(const string& id)
 	}
 }
 
-void World::addSpotlightToCustomWorld(const string& id)
+void CustomWorldManager::addSpotlightToCustomWorld(const string& id)
 {
 	if(!_customWorldId.empty())
 	{
@@ -166,7 +166,7 @@ void World::addSpotlightToCustomWorld(const string& id)
 	}
 }
 
-void World::addReflectionToCustomWorld(const string& id)
+void CustomWorldManager::addReflectionToCustomWorld(const string& id)
 {
 	if(!_customWorldId.empty())
 	{

@@ -256,7 +256,7 @@ void WorldEditor::inject(shared_ptr<SoundEditor> soundEditor)
 	_soundEditor = soundEditor;
 }
 
-void WorldEditor::inject(shared_ptr<World> world)
+void WorldEditor::inject(shared_ptr<WorldUtilities> worldUtilities)
 {
-	_world = world;
+	_worldUtilities = worldUtilities;
 }

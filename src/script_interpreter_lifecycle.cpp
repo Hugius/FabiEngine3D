@@ -16,13 +16,13 @@ void ScriptInterpreter::load()
 
 		if(scriptFile->getLineCount() == 0)
 		{
-			_throwStartupError("No `script_type` found in script \"" + scriptId + "\"");
+			_throwStartupError("no`script_type` found in script \"" + scriptId + "\"");
 			return;
 		}
 
 		if(scriptFile->getLineCount() < 2)
 		{
-			_throwStartupError("No `script_state` found in script \"" + scriptId + "\"");
+			_throwStartupError("no`script_state` found in script \"" + scriptId + "\"");
 			return;
 		}
 
@@ -44,7 +44,7 @@ void ScriptInterpreter::load()
 		}
 		else
 		{
-			_throwStartupError("Incorrect `script_type` in script \"" + scriptId + "\"");
+			_throwStartupError("incorrect `script_type` in script \"" + scriptId + "\"");
 			return;
 		}
 
@@ -58,7 +58,7 @@ void ScriptInterpreter::load()
 				}
 				else
 				{
-					_throwStartupError("Too many `script_state_entry` found for `script_type_initialize` scripts");
+					_throwStartupError("too many `script_state_entry` found for `script_type_initialize` scripts");
 					return;
 				}
 			}
@@ -70,7 +70,7 @@ void ScriptInterpreter::load()
 				}
 				else
 				{
-					_throwStartupError("Too many `script_state_entry` found for `script_type_update` scripts");
+					_throwStartupError("too many `script_state_entry` found for `script_type_update` scripts");
 					return;
 				}
 			}
@@ -82,7 +82,7 @@ void ScriptInterpreter::load()
 				}
 				else
 				{
-					_throwStartupError("Too many `script_state_entry` found for `script_type_terminate` scripts");
+					_throwStartupError("too many `script_state_entry` found for `script_type_terminate` scripts");
 					return;
 				}
 			}
@@ -93,40 +93,40 @@ void ScriptInterpreter::load()
 		}
 		else
 		{
-			_throwStartupError("Incorrect `script_state` in script \"" + scriptId + "\"");
+			_throwStartupError("incorrect `script_state` in script \"" + scriptId + "\"");
 			return;
 		}
 	}
 
 	if(_initializeScriptIds.empty())
 	{
-		_throwStartupError("No `script_type_initialize` scripts found");
+		_throwStartupError("no`script_type_initialize` scripts found");
 		return;
 	}
 	if(_updateScriptIds.empty())
 	{
-		_throwStartupError("No `script_type_update` scripts found");
+		_throwStartupError("no`script_type_update` scripts found");
 		return;
 	}
 	if(_terminateScriptIds.empty())
 	{
-		_throwStartupError("No `script_type_terminate` scripts found");
+		_throwStartupError("no`script_type_terminate` scripts found");
 		return;
 	}
 
 	if(_initEntryId.empty())
 	{
-		_throwStartupError("No `script_state_entry` found for `script_type_initialize` scripts");
+		_throwStartupError("no`script_state_entry` found for `script_type_initialize` scripts");
 		return;
 	}
 	if(_updateEntryId.empty())
 	{
-		_throwStartupError("No `script_state_entry` found for `script_type_update` scripts");
+		_throwStartupError("no`script_state_entry` found for `script_type_update` scripts");
 		return;
 	}
 	if(_terminateEntryId.empty())
 	{
-		_throwStartupError("No `script_state_entry` found for `script_type_terminate` scripts");
+		_throwStartupError("no`script_state_entry` found for `script_type_terminate` scripts");
 		return;
 	}
 

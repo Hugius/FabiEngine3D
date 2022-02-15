@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 			{
 				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
 				{
-					_throwRuntimeError("cannot delete AABB with id \"" + args[0]->getString() + "\": bound to model or quad3d");
+					_throwRuntimeError("cannot access a bound AABB");
 					return true;
 				}
 

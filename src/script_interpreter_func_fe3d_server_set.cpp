@@ -188,7 +188,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 			}
 			if(_fe3d->server_isMessageReserved(args[0]->getString()))
 			{
-				_throwRuntimeError("networking server tried to send UDP message: \"" + args[0]->getString() + "\" is reserved");
+				_throwRuntimeError("message is reserved");
 				return true;
 			}
 			if(args[0]->getString().size() > _fe3d->server_getMaxMessageSize())

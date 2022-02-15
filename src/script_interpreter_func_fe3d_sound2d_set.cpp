@@ -67,7 +67,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_fe3d->sound2d_isStarted(args[0]->getString()))
 			{
-				_throwRuntimeError("Tried to play sound2D with id \"" + args[0]->getString() + "\": sound is already started");
+				_throwRuntimeError("sound2D is already started");
 				return true;
 			}
 

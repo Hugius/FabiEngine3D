@@ -89,10 +89,12 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> skyId
 				>> templateId;
 
-			if(_worldUtilities->copyTemplateSky(skyId, templateId))
+			if(!_worldUtilities->copyTemplateSky(skyId, templateId))
 			{
-				_fe3d->sky_select(skyId);
+				continue;
 			}
+
+			_fe3d->sky_select(skyId);
 		}
 		else if(lineType == "TERRAIN")
 		{
@@ -103,10 +105,12 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> terrainId
 				>> templateId;
 
-			if(_worldUtilities->copyTemplateTerrain(terrainId, templateId))
+			if(!_worldUtilities->copyTemplateTerrain(terrainId, templateId))
 			{
-				_fe3d->terrain_select(terrainId);
+				continue;
 			}
+
+			_fe3d->terrain_select(terrainId);
 		}
 		else if(lineType == "WATER")
 		{
@@ -119,12 +123,14 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> templateId
 				>> height;
 
-			if(_worldUtilities->copyTemplateWater(waterId, templateId))
+			if(!_worldUtilities->copyTemplateWater(waterId, templateId))
 			{
-				_fe3d->water_setHeight(waterId, height);
-
-				_fe3d->water_select(waterId);
+				continue;
 			}
+
+			_fe3d->water_setHeight(waterId, height);
+
+			_fe3d->water_select(waterId);
 		}
 		else if(lineType == "MODEL")
 		{
@@ -169,24 +175,26 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_worldUtilities->copyTemplateModel(modelId, templateId))
+			if(!_worldUtilities->copyTemplateModel(modelId, templateId))
 			{
-				_loadedModelIds.insert(make_pair(modelId, templateId));
+				continue;
+			}
 
-				_fe3d->model_setBasePosition(modelId, position);
-				_fe3d->model_setBaseRotation(modelId, rotation);
-				_fe3d->model_setBaseSize(modelId, size);
-				_fe3d->model_setFrozen(modelId, isFrozen);
+			_loadedModelIds.insert(make_pair(modelId, templateId));
 
-				if(!animationId.empty())
-				{
-					_fe3d->model_startAnimation(modelId, animationId, -1);
-				}
+			_fe3d->model_setBasePosition(modelId, position);
+			_fe3d->model_setBaseRotation(modelId, rotation);
+			_fe3d->model_setBaseSize(modelId, size);
+			_fe3d->model_setFrozen(modelId, isFrozen);
 
-				if(makeInvisible)
-				{
-					_fe3d->model_setVisible(modelId, false);
-				}
+			if(!animationId.empty())
+			{
+				_fe3d->model_startAnimation(modelId, animationId, -1);
+			}
+
+			if(makeInvisible)
+			{
+				_fe3d->model_setVisible(modelId, false);
 			}
 		}
 		else if(lineType == "QUAD3D")
@@ -215,18 +223,20 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(_worldUtilities->copyTemplateQuad3d(quadId, templateId))
+			if(!_worldUtilities->copyTemplateQuad3d(quadId, templateId))
 			{
-				_loadedQuadIds.insert(make_pair(quadId, templateId));
+				continue;
+			}
 
-				_fe3d->quad3d_setPosition(quadId, position);
-				_fe3d->quad3d_setRotation(quadId, rotation);
-				_fe3d->quad3d_setSize(quadId, size);
+			_loadedQuadIds.insert(make_pair(quadId, templateId));
 
-				if(!animationId.empty())
-				{
-					_fe3d->quad3d_startAnimation(quadId, animationId, -1);
-				}
+			_fe3d->quad3d_setPosition(quadId, position);
+			_fe3d->quad3d_setRotation(quadId, rotation);
+			_fe3d->quad3d_setSize(quadId, size);
+
+			if(!animationId.empty())
+			{
+				_fe3d->quad3d_startAnimation(quadId, animationId, -1);
 			}
 		}
 		else if(lineType == "TEXT3D")
@@ -249,14 +259,16 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> size.x
 				>> size.y;
 
-			if(_worldUtilities->copyTemplateText3d(textId, templateId))
+			if(!_worldUtilities->copyTemplateText3d(textId, templateId))
 			{
-				_loadedTextIds.insert(make_pair(textId, templateId));
-
-				_fe3d->text3d_setPosition(textId, position);
-				_fe3d->text3d_setRotation(textId, rotation);
-				_fe3d->text3d_setSize(textId, size);
+				continue;
 			}
+
+			_loadedTextIds.insert(make_pair(textId, templateId));
+
+			_fe3d->text3d_setPosition(textId, position);
+			_fe3d->text3d_setRotation(textId, rotation);
+			_fe3d->text3d_setSize(textId, size);
 		}
 		else if(lineType == "SOUND")
 		{
@@ -291,15 +303,17 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			if(_worldUtilities->copyTemplateSound(soundId, templateId))
+			if(!_worldUtilities->copyTemplateSound3d(soundId, templateId))
 			{
-				_loadedSoundIds.insert(make_pair(soundId, templateId));
-
-				_fe3d->sound3d_setPosition(soundId, position);
-				_fe3d->sound3d_setMaxVolume(soundId, maxVolume);
-				_fe3d->sound3d_setMaxDistance(soundId, maxDistance);
-				_fe3d->sound3d_start(soundId, -1, 0, false);
+				continue;
 			}
+
+			_loadedSoundIds.insert(make_pair(soundId, templateId));
+
+			_fe3d->sound3d_setPosition(soundId, position);
+			_fe3d->sound3d_setMaxVolume(soundId, maxVolume);
+			_fe3d->sound3d_setMaxDistance(soundId, maxDistance);
+			_fe3d->sound3d_start(soundId, -1, 0, false);
 		}
 		else if(lineType == "POINTLIGHT")
 		{

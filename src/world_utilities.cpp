@@ -7,6 +7,11 @@ void WorldUtilities::inject(shared_ptr<EngineInterface> fe3d)
 
 const bool WorldUtilities::copyTemplateSky(const string& newId, const string& templateId)
 {
+	if(!_fe3d->sky_isExisting(templateId))
+	{
+		return false;
+	}
+
 	_fe3d->sky_create(newId);
 	_fe3d->sky_select(newId);
 	_fe3d->sky_setCubeMaps(newId, _fe3d->sky_getCubeMapPaths(templateId));
@@ -19,6 +24,11 @@ const bool WorldUtilities::copyTemplateSky(const string& newId, const string& te
 
 const bool WorldUtilities::copyTemplateTerrain(const string& newId, const string& templateId)
 {
+	if(!_fe3d->terrain_isExisting(templateId))
+	{
+		return false;
+	}
+
 	_fe3d->terrain_create(newId, _fe3d->terrain_getHeightMapPath(templateId));
 	_fe3d->terrain_select(newId);
 	_fe3d->terrain_setMaxHeight(newId, _fe3d->terrain_getMaxHeight(templateId));
@@ -81,6 +91,11 @@ const bool WorldUtilities::copyTemplateTerrain(const string& newId, const string
 
 const bool WorldUtilities::copyTemplateWater(const string& newId, const string& templateId)
 {
+	if(!_fe3d->water_isExisting(templateId))
+	{
+		return false;
+	}
+
 	_fe3d->water_create(newId);
 	_fe3d->water_select(newId);
 	_fe3d->water_setHeight(newId, _fe3d->water_getHeight(templateId));
@@ -118,6 +133,11 @@ const bool WorldUtilities::copyTemplateWater(const string& newId, const string& 
 
 const bool WorldUtilities::copyTemplateModel(const string& newId, const string& templateId)
 {
+	if(!_fe3d->model_isExisting(templateId))
+	{
+		return false;
+	}
+
 	_fe3d->model_create(newId, _fe3d->model_getMeshPath(templateId));
 	_fe3d->model_setBaseSize(newId, _fe3d->model_getBaseSize(templateId));
 	_fe3d->model_setLevelOfDetailSize(newId, _fe3d->model_getBaseSize(templateId));
@@ -184,6 +204,11 @@ const bool WorldUtilities::copyTemplateModel(const string& newId, const string& 
 
 const bool WorldUtilities::copyTemplateQuad3d(const string& newId, const string& templateId)
 {
+	if(!_fe3d->quad3d_isExisting(templateId))
+	{
+		return false;
+	}
+
 	_fe3d->quad3d_create(newId, false);
 	_fe3d->quad3d_setSize(newId, _fe3d->quad3d_getSize(templateId));
 	_fe3d->quad3d_setFacingCameraHorizontally(newId, _fe3d->quad3d_isFacingCameraHorizontally(templateId));
@@ -217,6 +242,11 @@ const bool WorldUtilities::copyTemplateQuad3d(const string& newId, const string&
 
 const bool WorldUtilities::copyTemplateText3d(const string& newId, const string& templateId)
 {
+	if(!_fe3d->text3d_isExisting(templateId))
+	{
+		return false;
+	}
+
 	_fe3d->text3d_create(newId, _fe3d->text3d_getFontMapPath(templateId), false);
 	_fe3d->text3d_setSize(newId, _fe3d->text3d_getSize(templateId));
 	_fe3d->text3d_setFacingCameraHorizontally(newId, _fe3d->text3d_isFacingCameraHorizontally(templateId));
@@ -237,8 +267,13 @@ const bool WorldUtilities::copyTemplateText3d(const string& newId, const string&
 	return true;
 }
 
-const bool WorldUtilities::copyTemplateSound(const string& newId, const string& templateId)
+const bool WorldUtilities::copyTemplateSound3d(const string& newId, const string& templateId)
 {
+	if(!_fe3d->sound2d_isExisting(templateId))
+	{
+		return false;
+	}
+
 	_fe3d->sound3d_create(newId, _fe3d->sound2d_getAudioPath(templateId));
 
 	return true;

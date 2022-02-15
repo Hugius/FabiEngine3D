@@ -13,7 +13,7 @@ public:
 	const bool copyTemplateModel(const string& newId, const string& templateId);
 	const bool copyTemplateQuad3d(const string& newId, const string& templateId);
 	const bool copyTemplateText3d(const string& newId, const string& templateId);
-	const bool copyTemplateSound(const string& newId, const string& templateId);
+	const bool copyTemplateSound3d(const string& newId, const string& templateId);
 
 private:
 	shared_ptr<EngineInterface> _fe3d = nullptr;

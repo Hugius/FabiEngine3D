@@ -23,7 +23,7 @@ EngineController::EngineController()
 	_soundEditor = make_shared<SoundEditor>();
 	_worldEditor = make_shared<WorldEditor>();
 	_scriptEditor = make_shared<ScriptEditor>();
-	_customWorldManager = make_shared<CustomWorldManager>();
+	_customWorldManager = make_shared<CustomWorldBuilder>();
 	_worldUtilities = make_shared<WorldUtilities>();
 	_script = make_shared<Script>();
 	_scriptExecutor = make_shared<ScriptExecutor>();

@@ -89,10 +89,12 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> skyId
 				>> templateId;
 
-			if(!_worldUtilities->copyTemplateSky(skyId, templateId))
+			if(!_fe3d->sky_isExisting(templateId))
 			{
 				continue;
 			}
+
+			_worldUtilities->copyTemplateSky(skyId, templateId);
 
 			_fe3d->sky_select(skyId);
 		}
@@ -105,10 +107,12 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> terrainId
 				>> templateId;
 
-			if(!_worldUtilities->copyTemplateTerrain(terrainId, templateId))
+			if(!_fe3d->terrain_isExisting(templateId))
 			{
 				continue;
 			}
+
+			_worldUtilities->copyTemplateTerrain(terrainId, templateId);
 
 			_fe3d->terrain_select(terrainId);
 		}
@@ -123,10 +127,12 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> templateId
 				>> height;
 
-			if(!_worldUtilities->copyTemplateWater(waterId, templateId))
+			if(!_fe3d->water_isExisting(templateId))
 			{
 				continue;
 			}
+
+			_worldUtilities->copyTemplateWater(waterId, templateId);
 
 			_fe3d->water_setHeight(waterId, height);
 
@@ -175,12 +181,14 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(!_worldUtilities->copyTemplateModel(modelId, templateId))
+			if(!_fe3d->model_isExisting(templateId))
 			{
 				continue;
 			}
 
 			_loadedModelIds.insert(make_pair(modelId, templateId));
+
+			_worldUtilities->copyTemplateModel(modelId, templateId);
 
 			_fe3d->model_setBasePosition(modelId, position);
 			_fe3d->model_setBaseRotation(modelId, rotation);
@@ -223,12 +231,14 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 
 			replace(animationId.begin(), animationId.end(), '?', ' ');
 
-			if(!_worldUtilities->copyTemplateQuad3d(quadId, templateId))
+			if(!_fe3d->quad3d_isExisting(templateId))
 			{
 				continue;
 			}
 
 			_loadedQuadIds.insert(make_pair(quadId, templateId));
+
+			_worldUtilities->copyTemplateQuad3d(quadId, templateId);
 
 			_fe3d->quad3d_setPosition(quadId, position);
 			_fe3d->quad3d_setRotation(quadId, rotation);
@@ -259,12 +269,14 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> size.x
 				>> size.y;
 
-			if(!_worldUtilities->copyTemplateText3d(textId, templateId))
+			if(!_fe3d->text3d_isExisting(templateId))
 			{
 				continue;
 			}
 
 			_loadedTextIds.insert(make_pair(textId, templateId));
+
+			_worldUtilities->copyTemplateText3d(textId, templateId);
 
 			_fe3d->text3d_setPosition(textId, position);
 			_fe3d->text3d_setRotation(textId, rotation);
@@ -303,12 +315,14 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			if(!_worldUtilities->copyTemplateSound3d(soundId, templateId))
+			if(!_fe3d->sound2d_isExisting(templateId))
 			{
 				continue;
 			}
 
 			_loadedSoundIds.insert(make_pair(soundId, templateId));
+
+			_worldUtilities->copyTemplateSound3d(soundId, templateId);
 
 			_fe3d->sound3d_setPosition(soundId, position);
 			_fe3d->sound3d_setMaxVolume(soundId, maxVolume);

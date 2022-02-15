@@ -17,7 +17,7 @@
 #include "script_value.hpp"
 #include "script_variable.hpp"
 #include "script_condition_statement.hpp"
-#include "custom_world_manager.hpp"
+#include "custom_world_builder.hpp"
 
 class ScriptInterpreter final
 {
@@ -36,7 +36,7 @@ public:
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<SoundEditor> soundEditor);
 	void inject(shared_ptr<WorldEditor> worldEditor);
-	void inject(shared_ptr<CustomWorldManager> customWorldManager);
+	void inject(shared_ptr<CustomWorldBuilder> customWorldManager);
 	void inject(shared_ptr<WorldUtilities> worldUtilities);
 
 	void setCurrentProjectId(const string& projectId);
@@ -243,7 +243,7 @@ private:
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
-	shared_ptr<CustomWorldManager> _customWorldManager = nullptr;
+	shared_ptr<CustomWorldBuilder> _customWorldManager = nullptr;
 	shared_ptr<WorldUtilities> _worldUtilities = nullptr;
 
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =

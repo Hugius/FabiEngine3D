@@ -1,6 +1,6 @@
-//#include "custom_world_manager.hpp"
+//#include "custom_world_builder.hpp"
 //
-//const bool WorldEditor::saveCustomWorldToFile()
+//const bool WorldBuilder::saveWorldToFile(const string& fileName)
 //{
 //	//if(getCurrentProjectId().empty())
 //	//{

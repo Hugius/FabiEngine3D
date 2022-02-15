@@ -5,11 +5,11 @@ void WorldUtilities::inject(shared_ptr<EngineInterface> fe3d)
 	_fe3d = fe3d;
 }
 
-const bool WorldUtilities::copyTemplateSky(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateSky(const string& newId, const string& templateId)
 {
 	if(!_fe3d->sky_isExisting(templateId))
 	{
-		return false;
+		abort();
 	}
 
 	_fe3d->sky_create(newId);
@@ -18,15 +18,13 @@ const bool WorldUtilities::copyTemplateSky(const string& newId, const string& te
 	_fe3d->sky_setLightness(newId, _fe3d->sky_getLightness(templateId));
 	_fe3d->sky_setRotation(newId, _fe3d->sky_getRotation(templateId));
 	_fe3d->sky_setColor(newId, _fe3d->sky_getColor(templateId));
-
-	return true;
 }
 
-const bool WorldUtilities::copyTemplateTerrain(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateTerrain(const string& newId, const string& templateId)
 {
 	if(!_fe3d->terrain_isExisting(templateId))
 	{
-		return false;
+		abort();
 	}
 
 	_fe3d->terrain_create(newId, _fe3d->terrain_getHeightMapPath(templateId));
@@ -85,15 +83,13 @@ const bool WorldUtilities::copyTemplateTerrain(const string& newId, const string
 	{
 		_fe3d->terrain_setBlueDiffuseMap(newId, _fe3d->terrain_getBlueDiffuseMapPath(templateId));
 	}
-
-	return true;
 }
 
-const bool WorldUtilities::copyTemplateWater(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateWater(const string& newId, const string& templateId)
 {
 	if(!_fe3d->water_isExisting(templateId))
 	{
-		return false;
+		abort();
 	}
 
 	_fe3d->water_create(newId);
@@ -127,15 +123,13 @@ const bool WorldUtilities::copyTemplateWater(const string& newId, const string& 
 	{
 		_fe3d->water_setDisplacementMap(newId, _fe3d->water_getDisplacementMapPath(templateId));
 	}
-
-	return true;
 }
 
-const bool WorldUtilities::copyTemplateModel(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateModel(const string& newId, const string& templateId)
 {
 	if(!_fe3d->model_isExisting(templateId))
 	{
-		return false;
+		abort();
 	}
 
 	_fe3d->model_create(newId, _fe3d->model_getMeshPath(templateId));
@@ -198,15 +192,13 @@ const bool WorldUtilities::copyTemplateModel(const string& newId, const string& 
 		_fe3d->aabb_setLocalPosition(newAabbId, _fe3d->aabb_getPosition(templateAabbId));
 		_fe3d->aabb_setLocalSize(newAabbId, _fe3d->aabb_getSize(templateAabbId));
 	}
-
-	return true;
 }
 
-const bool WorldUtilities::copyTemplateQuad3d(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateQuad3d(const string& newId, const string& templateId)
 {
 	if(!_fe3d->quad3d_isExisting(templateId))
 	{
-		return false;
+		abort();
 	}
 
 	_fe3d->quad3d_create(newId, false);
@@ -236,15 +228,13 @@ const bool WorldUtilities::copyTemplateQuad3d(const string& newId, const string&
 	_fe3d->aabb_create(newId, false);
 	_fe3d->aabb_setParentEntityId(newId, newId);
 	_fe3d->aabb_setParentEntityType(newId, AabbParentEntityType::QUAD3D);
-
-	return true;
 }
 
-const bool WorldUtilities::copyTemplateText3d(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateText3d(const string& newId, const string& templateId)
 {
 	if(!_fe3d->text3d_isExisting(templateId))
 	{
-		return false;
+		abort();
 	}
 
 	_fe3d->text3d_create(newId, _fe3d->text3d_getFontMapPath(templateId), false);
@@ -263,18 +253,14 @@ const bool WorldUtilities::copyTemplateText3d(const string& newId, const string&
 	_fe3d->aabb_create(newId, false);
 	_fe3d->aabb_setParentEntityId(newId, newId);
 	_fe3d->aabb_setParentEntityType(newId, AabbParentEntityType::TEXT3D);
-
-	return true;
 }
 
-const bool WorldUtilities::copyTemplateSound3d(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateSound3d(const string& newId, const string& templateId)
 {
 	if(!_fe3d->sound2d_isExisting(templateId))
 	{
-		return false;
+		abort();
 	}
 
 	_fe3d->sound3d_create(newId, _fe3d->sound2d_getAudioPath(templateId));
-
-	return true;
 }

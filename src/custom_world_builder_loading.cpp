@@ -1,6 +1,6 @@
-//#include "custom_world_manager.hpp"
+//#include "custom_world_builder.hpp"
 //
-//const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
+//const bool WorldBuilder::loadWorldFromFile(const string& fileName)
 //{
 //	//if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
 //	//{

@@ -51,8 +51,8 @@ void ModelEditor::_updateChoiceAabbMenu()
 
 	if(screen->getId() == "modelEditorMenuAabbChoice")
 	{
-		auto position = _fe3d->aabb_getPosition((_currentModelId + "@" + _currentAabbId));
-		auto size = _fe3d->aabb_getSize((_currentModelId + "@" + _currentAabbId));
+		auto position = _fe3d->aabb_getLocalPosition((_currentModelId + "@" + _currentAabbId));
+		auto size = _fe3d->aabb_getLocalSize((_currentModelId + "@" + _currentAabbId));
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{

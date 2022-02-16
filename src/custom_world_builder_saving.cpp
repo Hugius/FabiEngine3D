@@ -478,8 +478,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 
 		for(const string& aabbId : aabbIds)
 		{
-			auto position = _fe3d->aabb_getPosition(aabbId);
-			auto size = _fe3d->aabb_getSize(aabbId);
+			auto position = _fe3d->aabb_getLocalPosition(aabbId);
+			auto size = _fe3d->aabb_getLocalSize(aabbId);
 			auto color = _fe3d->aabb_getColor(aabbId);
 			auto isVisible = _fe3d->aabb_isVisible(aabbId);
 			auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
@@ -634,8 +634,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 
 		for(const string& aabbId : aabbIds)
 		{
-			auto position = _fe3d->aabb_getPosition(aabbId);
-			auto size = _fe3d->aabb_getSize(aabbId);
+			auto position = _fe3d->aabb_getLocalPosition(aabbId);
+			auto size = _fe3d->aabb_getLocalSize(aabbId);
 			auto color = _fe3d->aabb_getColor(aabbId);
 			auto isVisible = _fe3d->aabb_isVisible(aabbId);
 			auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
@@ -770,8 +770,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 
 		for(const string& aabbId : aabbIds)
 		{
-			auto position = _fe3d->aabb_getPosition(aabbId);
-			auto size = _fe3d->aabb_getSize(aabbId);
+			auto position = _fe3d->aabb_getLocalPosition(aabbId);
+			auto size = _fe3d->aabb_getLocalSize(aabbId);
 			auto color = _fe3d->aabb_getColor(aabbId);
 			auto isVisible = _fe3d->aabb_isVisible(aabbId);
 			auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
@@ -812,8 +812,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 
 	for(const string& aabbId : _addedAabbIds)
 	{
-		auto position = _fe3d->aabb_getPosition(aabbId);
-		auto size = _fe3d->aabb_getSize(aabbId);
+		auto position = _fe3d->aabb_getBasePosition(aabbId);
+		auto size = _fe3d->aabb_getBaseSize(aabbId);
 		auto color = _fe3d->aabb_getColor(aabbId);
 		auto isVisible = _fe3d->aabb_isVisible(aabbId);
 		auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);

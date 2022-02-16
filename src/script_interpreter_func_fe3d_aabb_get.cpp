@@ -86,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				const auto result = _fe3d->aabb_getPosition(args[0]->getString()).x;
+				const auto result = _fe3d->aabb_getBasePosition(args[0]->getString()).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				const auto result = _fe3d->aabb_getPosition(args[0]->getString()).y;
+				const auto result = _fe3d->aabb_getBasePosition(args[0]->getString()).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				const auto result = _fe3d->aabb_getPosition(args[0]->getString()).z;
+				const auto result = _fe3d->aabb_getBasePosition(args[0]->getString()).z;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -146,7 +146,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				const auto result = _fe3d->aabb_getSize(args[0]->getString()).x;
+				const auto result = _fe3d->aabb_getBaseSize(args[0]->getString()).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -166,7 +166,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				const auto result = _fe3d->aabb_getSize(args[0]->getString()).y;
+				const auto result = _fe3d->aabb_getBaseSize(args[0]->getString()).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				const auto result = _fe3d->aabb_getSize(args[0]->getString()).z;
+				const auto result = _fe3d->aabb_getBaseSize(args[0]->getString()).z;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -208,6 +208,26 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 			}
 		}
 	}
+	else if(functionName == "fe3d:aabb_is_collision_responsive")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString()))
+			{
+				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				{
+					_throwRuntimeError("cannot access a bound AABB");
+					return true;
+				}
+
+				const auto result = _fe3d->aabb_isCollisionResponsive(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:aabb_is_raycast_responsive")
 	{
 		auto types = {SVT::STRING};
@@ -222,9 +242,9 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 					return true;
 				}
 
-				const auto result = _fe3d->aabb_getSize(args[0]->getString()).z;
+				const auto result = _fe3d->aabb_isRaycastResponsive(args[0]->getString());
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}

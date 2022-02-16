@@ -189,8 +189,8 @@ void WorldUtilities::copyTemplateModel(const string& newId, const string& templa
 		_fe3d->aabb_create(newAabbId, false);
 		_fe3d->aabb_setParentEntityId(newAabbId, newId);
 		_fe3d->aabb_setParentEntityType(newAabbId, AabbParentEntityType::MODEL);
-		_fe3d->aabb_setLocalPosition(newAabbId, _fe3d->aabb_getPosition(templateAabbId));
-		_fe3d->aabb_setLocalSize(newAabbId, _fe3d->aabb_getSize(templateAabbId));
+		_fe3d->aabb_setLocalPosition(newAabbId, _fe3d->aabb_getLocalPosition(templateAabbId));
+		_fe3d->aabb_setLocalSize(newAabbId, _fe3d->aabb_getLocalSize(templateAabbId));
 	}
 }
 

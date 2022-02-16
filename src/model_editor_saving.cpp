@@ -161,8 +161,8 @@ const bool ModelEditor::saveEntitiesToFile() const
 
 		for(const auto& aabbId : aabbIds)
 		{
-			auto position = _fe3d->aabb_getPosition(aabbId);
-			auto size = _fe3d->aabb_getSize(aabbId);
+			auto position = _fe3d->aabb_getLocalPosition(aabbId);
+			auto size = _fe3d->aabb_getLocalSize(aabbId);
 
 			file
 				<< "AABB "

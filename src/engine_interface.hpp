@@ -584,10 +584,10 @@ public:
 	void aabb_setColor(const string& id, const fvec3& value);
 	void aabb_setRaycastResponsive(const string& id, bool value);
 	void aabb_setCollisionResponsive(const string& id, bool value);
-	void aabb_setLocalPosition(const string& id, const fvec3& value);
-	void aabb_setLocalSize(const string& id, const fvec3& value);
 	void aabb_setBasePosition(const string& id, const fvec3& value);
 	void aabb_setBaseSize(const string& id, const fvec3& value);
+	void aabb_setLocalPosition(const string& id, const fvec3& value);
+	void aabb_setLocalSize(const string& id, const fvec3& value);
 	void aabb_move(const string& id, const fvec3& change);
 	void aabb_scale(const string& id, const fvec3& change);
 	void aabb_moveTo(const string& id, const fvec3& target, float speed);
@@ -595,8 +595,10 @@ public:
 
 	const vector<string> aabb_getIds() const;
 	const string& aabb_getParentEntityId(const string& id) const;
-	const fvec3& aabb_getPosition(const string& id) const;
-	const fvec3& aabb_getSize(const string& id) const;
+	const fvec3& aabb_getBasePosition(const string& id) const;
+	const fvec3& aabb_getBaseSize(const string& id) const;
+	const fvec3& aabb_getLocalPosition(const string& id) const;
+	const fvec3& aabb_getLocalSize(const string& id) const;
 	const fvec3& aabb_getColor(const string& id) const;
 	const bool aabb_isRaycastResponsive(const string& id) const;
 	const bool aabb_isCollisionResponsive(const string& id) const;

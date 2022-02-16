@@ -43,6 +43,13 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				iss >> _idCounter;
 			}
 		}
+		else if(lineType == "EDITOR_SPEED")
+		{
+			if(isLoaded())
+			{
+				iss >> _editorSpeed;
+			}
+		}
 		else if(lineType == "CAMERA_POSITION")
 		{
 			if(isLoaded())
@@ -466,13 +473,6 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 			_fe3d->reflection_capture(reflectionId);
 
 			_loadedReflectionIds.push_back(reflectionId);
-		}
-		else if(lineType == "EDITOR_SPEED")
-		{
-			if(isLoaded())
-			{
-				iss >> _editorSpeed;
-			}
 		}
 		else if(lineType == "LIGHTING_AMBIENT")
 		{

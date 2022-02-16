@@ -34,6 +34,7 @@ public:
 	void inject(shared_ptr<SoundEditor> soundEditor);
 	void inject(shared_ptr<WorldEditor> worldEditor);
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
+	void inject(shared_ptr<CustomWorldBuilder> customWorldBuilder);
 	void inject(shared_ptr<Script> script);
 	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
 
@@ -78,6 +79,7 @@ private:
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
+	shared_ptr<CustomWorldBuilder> _customWorldBuilder = nullptr;
 	shared_ptr<Script> _script = nullptr;
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
 

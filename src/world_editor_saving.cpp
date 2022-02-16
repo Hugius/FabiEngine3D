@@ -23,22 +23,17 @@ const bool WorldEditor::saveWorldToFile()
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\worlds\\editor\\" + _currentWorldId + ".fe3d");
 
-	set<string> levelOfDetailEntityIds;
-	for(const auto& modelId : _fe3d->model_getIds())
-	{
-		if(modelId[0] != '@')
-		{
-			if(!_fe3d->model_getLevelOfDetailEntityId(modelId).empty())
-			{
-				levelOfDetailEntityIds.insert(_fe3d->model_getLevelOfDetailEntityId(modelId));
-			}
-		}
-	}
-
 	{
 		file
 			<< "ID_COUNTER "
 			<< _idCounter
+			<< endl;
+	}
+
+	{
+		file
+			<< "EDITOR_SPEED "
+			<< _editorSpeed
 			<< endl;
 	}
 
@@ -112,8 +107,7 @@ const bool WorldEditor::saveWorldToFile()
 
 	for(const auto& modelId : _fe3d->model_getIds())
 	{
-		bool isLevelOfDetailEntity = find(levelOfDetailEntityIds.begin(), levelOfDetailEntityIds.end(), modelId) != levelOfDetailEntityIds.end();
-		if((modelId[0] != '@') || isLevelOfDetailEntity)
+		if(modelId[0] != '@')
 		{
 			auto startedAnimationIds = _fe3d->model_getAnimationIds(modelId);
 
@@ -382,13 +376,6 @@ const bool WorldEditor::saveWorldToFile()
 				<< exceptionModelId
 				<< endl;
 		}
-	}
-
-	{
-		file
-			<< "EDITOR_SPEED "
-			<< _editorSpeed
-			<< endl;
 	}
 
 	if(_fe3d->gfx_isAmbientLightingEnabled())

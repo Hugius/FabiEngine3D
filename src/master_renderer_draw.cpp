@@ -162,7 +162,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 				levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
 				levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
-				levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
+				levelOfDetailEntity->setBaseSize(modelEntity->getBaseSize());
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
 				levelOfDetailEntity->updateTransformation();
 
@@ -222,7 +222,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 				levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
 				levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
-				levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
+				levelOfDetailEntity->setBaseSize(modelEntity->getBaseSize());
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
 				levelOfDetailEntity->updateTransformation();
 

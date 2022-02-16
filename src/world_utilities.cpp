@@ -134,10 +134,10 @@ void WorldUtilities::copyTemplateModel(const string& newId, const string& templa
 
 	_fe3d->model_create(newId, _fe3d->model_getMeshPath(templateId));
 	_fe3d->model_setBaseSize(newId, _fe3d->model_getBaseSize(templateId));
-	_fe3d->model_setLevelOfDetailSize(newId, _fe3d->model_getBaseSize(templateId));
 	_fe3d->model_setShadowed(newId, _fe3d->model_isShadowed(templateId));
 	_fe3d->model_setReflected(newId, _fe3d->model_isReflected(templateId));
 	_fe3d->model_setLevelOfDetailEntityId(newId, _fe3d->model_getLevelOfDetailEntityId(templateId));
+	_fe3d->model_setLevelOfDetailDistance(newId, _fe3d->model_getLevelOfDetailDistance(templateId));
 	_fe3d->model_setRotationOrder(newId, _fe3d->model_getRotationOrder(templateId));
 
 	for(const auto& partId : _fe3d->model_getPartIds(templateId))

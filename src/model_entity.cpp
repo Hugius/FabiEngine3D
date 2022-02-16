@@ -305,11 +305,6 @@ void ModelEntity::setMeshPath(const string& value)
 	_meshPath = value;
 }
 
-void ModelEntity::setLevelOfDetailSize(const fvec3& value)
-{
-	_levelOfDetailSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-}
-
 void ModelEntity::setDiffuseMapPath(const string& partId, const string& value)
 {
 	_parts.at(partId)->diffuseMapPath = value;
@@ -611,11 +606,6 @@ const fvec3& ModelEntity::getPartRotationOrigin(const string& partId) const
 const fvec3& ModelEntity::getPartSize(const string& partId) const
 {
 	return _parts.at(partId)->size;
-}
-
-const fvec3& ModelEntity::getLevelOfDetailSize() const
-{
-	return _levelOfDetailSize;
 }
 
 const float ModelEntity::getCubeReflectionMixValue() const

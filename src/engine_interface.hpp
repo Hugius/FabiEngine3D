@@ -243,7 +243,6 @@ public:
 	void model_movePartTo(const string& modelId, const string& partId, const fvec3& target, float speed);
 	void model_rotatePartTo(const string& modelId, const string& partId, const fvec3& target, float speed);
 	void model_scalePartTo(const string& modelId, const string& partId, const fvec3& target, float speed);
-	void model_setLevelOfDetailSize(const string& id, const fvec3& value);
 	void model_setSpecularShininess(const string& modelId, const string& partId, float value);
 	void model_setSpecularIntensity(const string& modelId, const string& partId, float value);
 	void model_setReflectivity(const string& modelId, const string& partId, float value);
@@ -278,7 +277,6 @@ public:
 	const string& model_getReflectionMapPath(const string& modelId, const string& partId) const;
 	const string& model_getNormalMapPath(const string& modelId, const string& partId) const;
 	const string& model_getLevelOfDetailEntityId(const string& id) const;
-	const fvec3& model_getLevelOfDetailSize(const string& id) const;
 	const fvec3& model_getBasePosition(const string& id) const;
 	const fvec3& model_getBaseRotation(const string& id) const;
 	const fvec3& model_getBaseRotationOrigin(const string& id) const;

@@ -264,6 +264,16 @@ void EngineInterface::model_setBaseRotationOrigin(const string& id, const fvec3&
 
 void EngineInterface::model_setBaseSize(const string& id, const fvec3& value)
 {
+	const auto sizeChange = (value / _core->getModelEntityManager()->getEntity(id)->getBaseSize());
+	const auto levelOfDetailEntityId = _core->getModelEntityManager()->getEntity(id)->getLevelOfDetailEntityId();
+
+	if(!levelOfDetailEntityId.empty())
+	{
+		const auto currentSize = _core->getModelEntityManager()->getEntity(levelOfDetailEntityId)->getBaseSize();
+
+		_core->getModelEntityManager()->getEntity(levelOfDetailEntityId)->setBaseSize(currentSize * sizeChange);
+	}
+
 	_core->getModelEntityManager()->getEntity(id)->setBaseSize(value);
 }
 
@@ -385,11 +395,6 @@ void EngineInterface::model_rotatePartTo(const string& modelId, const string& pa
 void EngineInterface::model_scalePartTo(const string& modelId, const string& partId, const fvec3& target, float speed)
 {
 	_core->getModelEntityManager()->getEntity(modelId)->scalePartTo(partId, target, speed);
-}
-
-void EngineInterface::model_setLevelOfDetailSize(const string& id, const fvec3& value)
-{
-	_core->getModelEntityManager()->getEntity(id)->setLevelOfDetailSize(value);
 }
 
 void EngineInterface::model_setTextureRepeat(const string& modelId, const string& partId, float value)
@@ -663,11 +668,6 @@ const fvec3& EngineInterface::model_getColor(const string& modelId, const string
 const fvec3& EngineInterface::model_getWireframeColor(const string& modelId, const string& partId) const
 {
 	return _core->getModelEntityManager()->getEntity(modelId)->getWireframeColor(partId);
-}
-
-const fvec3& EngineInterface::model_getLevelOfDetailSize(const string& id) const
-{
-	return _core->getModelEntityManager()->getEntity(id)->getLevelOfDetailSize();
 }
 
 const float EngineInterface::model_getLightness(const string& modelId, const string& partId) const

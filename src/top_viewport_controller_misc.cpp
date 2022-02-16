@@ -200,7 +200,9 @@ void TopViewportController::_applyProjectChange()
 	_animation3dEditor->setCurrentProjectId(_currentProjectId);
 	_soundEditor->setCurrentProjectId(_currentProjectId);
 	_worldEditor->setCurrentProjectId(_currentProjectId);
+	_customWorldBuilder->setCurrentProjectId(_currentProjectId);
 	_scriptEditor->setCurrentProjectId(_currentProjectId);
+	_scriptExecutor->setCurrentProjectId(_currentProjectId);
 }
 
 const bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath) const
@@ -370,6 +372,11 @@ void TopViewportController::inject(shared_ptr<WorldEditor> worldEditor)
 void TopViewportController::inject(shared_ptr<ScriptEditor> scriptEditor)
 {
 	_scriptEditor = scriptEditor;
+}
+
+void TopViewportController::inject(shared_ptr<CustomWorldBuilder> customWorldBuilder)
+{
+	_customWorldBuilder = customWorldBuilder;
 }
 
 void TopViewportController::inject(shared_ptr<Script> script)

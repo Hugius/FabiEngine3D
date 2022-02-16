@@ -61,6 +61,7 @@ EngineController::EngineController()
 	_topViewportController->inject(_soundEditor);
 	_topViewportController->inject(_worldEditor);
 	_topViewportController->inject(_scriptEditor);
+	_topViewportController->inject(_customWorldBuilder);
 	_topViewportController->inject(_script);
 	_topViewportController->inject(_scriptExecutor);
 	_skyEditor->inject(_guiManager);

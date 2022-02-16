@@ -5,6 +5,11 @@ void CustomWorldBuilder::inject(shared_ptr<EngineInterface> fe3d)
 	_fe3d = fe3d;
 }
 
+void CustomWorldBuilder::setCurrentProjectId(const string& currentProjectId)
+{
+	_currentProjectId = currentProjectId;
+}
+
 void CustomWorldBuilder::addGraphics()
 {
 	if(_isGraphicsAdded)

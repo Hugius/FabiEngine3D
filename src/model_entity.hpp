@@ -23,7 +23,6 @@ public:
 	void setFrozen(bool value);
 	void setDepthMapIncluded(bool value);
 	void setLevelOfDetailed(bool value);
-	void setLevelOfDetailSize(const fvec3& value);
 	void setLevelOfDetailEntityId(const string& value);
 	void setPreviousReflectionEntityId(const string& value);
 	void setCurrentReflectionEntityId(const string& value);
@@ -96,7 +95,6 @@ public:
 
 	const fvec3& getColor(const string& partId) const;
 	const fvec3& getWireframeColor(const string& partId) const;
-	const fvec3& getLevelOfDetailSize() const;
 	const fvec3& getBasePosition() const;
 	const fvec3& getBaseRotation() const;
 	const fvec3& getBaseRotationOrigin() const;
@@ -158,7 +156,6 @@ private:
 	fvec3 _basePositionTarget = fvec3(0.0f);
 	fvec3 _baseRotationTarget = fvec3(0.0f);
 	fvec3 _baseSizeTarget = fvec3(1.0f);
-	fvec3 _levelOfDetailSize = fvec3(1.0f);
 
 	float _basePositionTargetSpeed = 0.0f;
 	float _baseRotationTargetSpeed = 0.0f;

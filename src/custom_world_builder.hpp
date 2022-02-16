@@ -6,6 +6,7 @@ class CustomWorldBuilder final
 {
 public:
 	void inject(shared_ptr<EngineInterface> fe3d);
+	void setCurrentProjectId(const string& currentProjectId);
 	void resetWorldBuild();
 	void addSky(const string& id);
 	void addTerrain(const string& id);
@@ -65,6 +66,7 @@ private:
 	vector<string> _loadedReflectionIds;
 	vector<string> _loadedSoundIds;
 
+	string _currentProjectId = "";
 	string _loadedWorldId = "";
 
 	bool _isGraphicsAdded = false;

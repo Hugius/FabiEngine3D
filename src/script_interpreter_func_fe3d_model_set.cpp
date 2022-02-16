@@ -938,7 +938,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_start")
+	else if(functionName == "fe3d:model_start_animation")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
@@ -975,7 +975,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_pause")
+	else if(functionName == "fe3d:model_pause_animation")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -1000,7 +1000,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_autopause")
+	else if(functionName == "fe3d:model_autopause_animation")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -1025,7 +1025,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_resume")
+	else if(functionName == "fe3d:model_resume_animation")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -1050,7 +1050,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_stop")
+	else if(functionName == "fe3d:model_stop_animation")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -1070,7 +1070,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_speed_multiplier")
+	else if(functionName == "fe3d:model_set_animation_speed_multiplier")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
@@ -1090,7 +1090,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_frame_index")
+	else if(functionName == "fe3d:model_set_animation_frame_index")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 

@@ -28,7 +28,6 @@ const bool WaterEditor::saveEntitiesToFile() const
 		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);
 		auto displacementMapPath = _fe3d->water_getDisplacementMapPath(waterId);
 		auto color = _fe3d->water_getColor(waterId);
-		auto height = _fe3d->water_getHeight(waterId);
 		auto rippleSpeed = _fe3d->water_getRippleSpeed(waterId);
 		auto waveSpeed = _fe3d->water_getWaveSpeed(waterId);
 		auto size = _fe3d->water_getSize(waterId);
@@ -76,8 +75,6 @@ const bool WaterEditor::saveEntitiesToFile() const
 			<< color.b
 			<< " "
 			<< size
-			<< " "
-			<< height
 			<< " "
 			<< textureRepeat
 			<< " "

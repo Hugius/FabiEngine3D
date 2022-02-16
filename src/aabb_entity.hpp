@@ -19,12 +19,12 @@ public:
 	void updateTransformation();
 	void setLocalPosition(const fvec3& value);
 	void setLocalSize(const fvec3& value);
-	void setPosition(const fvec3& value);
-	void setSize(const fvec3& value);
-	void move(const fvec3& value);
-	void scale(const fvec3& value);
-	void moveTo(const fvec3& target, float speed);
-	void scaleTo(const fvec3& target, float speed);
+	void setBasePosition(const fvec3& value);
+	void setBaseSize(const fvec3& value);
+	void moveBase(const fvec3& value);
+	void scaleBase(const fvec3& value);
+	void moveBaseTo(const fvec3& target, float speed);
+	void scaleBaseTo(const fvec3& target, float speed);
 	void setParentEntityId(const string& value);
 	void setParentEntityType(AabbParentEntityType value);
 	void setCollisionDirection(Direction value);
@@ -40,8 +40,8 @@ public:
 
 	const fvec3& getLocalPosition() const;
 	const fvec3& getLocalSize() const;
-	const fvec3& getPosition() const;
-	const fvec3& getSize() const;
+	const fvec3& getBasePosition() const;
+	const fvec3& getBaseSize() const;
 	const fvec3& getColor() const;
 
 	const bool isCentered() const;
@@ -61,14 +61,14 @@ private:
 
 	fvec3 _localPosition = fvec3(0.0f);
 	fvec3 _localSize = fvec3(1.0f);
-	fvec3 _position = fvec3(0.0f);
-	fvec3 _size = fvec3(1.0f);
-	fvec3 _positionTarget = fvec3(0.0f);
-	fvec3 _sizeTarget = fvec3(1.0f);
+	fvec3 _basePosition = fvec3(0.0f);
+	fvec3 _baseSize = fvec3(1.0f);
+	fvec3 _basePositionTarget = fvec3(0.0f);
+	fvec3 _baseSizeTarget = fvec3(1.0f);
 	fvec3 _color = fvec3(1.0f);
 
-	float _positionTargetSpeed = 0.0f;
-	float _sizeTargetSpeed = 0.0f;
+	float _basePositionTargetSpeed = 0.0f;
+	float _baseSizeTargetSpeed = 0.0f;
 
 	bool _isCentered = false;
 	bool _isRaycastResponsive = true;

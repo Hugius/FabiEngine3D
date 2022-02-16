@@ -232,26 +232,26 @@ const float RaycastIntersector::_calculateDistanceToAabb(shared_ptr<AabbEntity> 
 {
 	if(entity->isCentered())
 	{
-		const auto position = entity->getPosition();
-		const auto left = (entity->getSize().x * 0.5f);
-		const auto right = (entity->getSize().x * 0.5f);
-		const auto bottom = (entity->getSize().y * 0.5f);
-		const auto top = (entity->getSize().y * 0.5f);
-		const auto back = (entity->getSize().z * 0.5f);
-		const auto front = (entity->getSize().z * 0.5f);
+		const auto position = entity->getBasePosition();
+		const auto left = (entity->getBaseSize().x * 0.5f);
+		const auto right = (entity->getBaseSize().x * 0.5f);
+		const auto bottom = (entity->getBaseSize().y * 0.5f);
+		const auto top = (entity->getBaseSize().y * 0.5f);
+		const auto back = (entity->getBaseSize().z * 0.5f);
+		const auto front = (entity->getBaseSize().z * 0.5f);
 		const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
 		return _calculateRayBoxIntersectionDistance(_raycastCalculator->getCursorRay(), box);
 	}
 	else
 	{
-		const auto position = entity->getPosition();
-		const auto left = (entity->getSize().x * 0.5f);
-		const auto right = (entity->getSize().x * 0.5f);
+		const auto position = entity->getBasePosition();
+		const auto left = (entity->getBaseSize().x * 0.5f);
+		const auto right = (entity->getBaseSize().x * 0.5f);
 		const auto bottom = 0.0f;
-		const auto top = entity->getSize().y;
-		const auto back = (entity->getSize().z * 0.5f);
-		const auto front = (entity->getSize().z * 0.5f);
+		const auto top = entity->getBaseSize().y;
+		const auto back = (entity->getBaseSize().z * 0.5f);
+		const auto front = (entity->getBaseSize().z * 0.5f);
 		const auto box = make_shared<Box>(position, left, right, bottom, top, back, front);
 
 		return _calculateRayBoxIntersectionDistance(_raycastCalculator->getCursorRay(), box);

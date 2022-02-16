@@ -154,26 +154,26 @@ void AabbEntityManager::update()
 					{
 						if(rotationDirection == Direction::X)
 						{
-							entity->setSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
+							entity->setBaseSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
 						}
 						else if(rotationDirection == Direction::Y)
 						{
-							entity->setSize(fvec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
+							entity->setBaseSize(fvec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
 						}
 						else if(rotationDirection == Direction::Z)
 						{
-							entity->setSize(fvec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
+							entity->setBaseSize(fvec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
 						}
 					}
 					else
 					{
-						entity->setSize(newAabbSize);
+						entity->setBaseSize(newAabbSize);
 					}
 
 					if((roundedRotation == 0.0f) || entity->isCentered())
 					{
 						const fvec3 localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
-						entity->setPosition(parentEntity->getBasePosition() + localPosition);
+						entity->setBasePosition(parentEntity->getBasePosition() + localPosition);
 					}
 					else
 					{
@@ -208,7 +208,7 @@ void AabbEntityManager::update()
 
 						auto rotatedLocalPosition = (rotationMatrix * fvec4(localPosition.x, localPosition.y, localPosition.z, 1.0f));
 						rotatedLocalPosition += rotationOffset;
-						entity->setPosition(parentEntity->getBasePosition() + rotatedLocalPosition);
+						entity->setBasePosition(parentEntity->getBasePosition() + rotatedLocalPosition);
 					}
 
 					if(!parentEntity->isVisible() || parentEntity->isFrozen())
@@ -280,8 +280,8 @@ void AabbEntityManager::update()
 						newAabbPosition.y -= ((newAabbSize.y - parentSize.y) * 0.5f);
 					}
 
-					entity->setPosition(newAabbPosition);
-					entity->setSize(newAabbSize);
+					entity->setBasePosition(newAabbPosition);
+					entity->setBaseSize(newAabbSize);
 
 					if(!parentEntity->isVisible() || parentEntity->isFrozen())
 					{
@@ -352,8 +352,8 @@ void AabbEntityManager::update()
 						newAabbPosition.y -= ((newAabbSize.y - parentSize.y) * 0.5f);
 					}
 
-					entity->setPosition(newAabbPosition);
-					entity->setSize(newAabbSize);
+					entity->setBasePosition(newAabbPosition);
+					entity->setBaseSize(newAabbSize);
 
 					if(!parentEntity->isVisible() || parentEntity->isFrozen())
 					{

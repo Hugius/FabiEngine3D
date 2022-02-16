@@ -68,9 +68,8 @@ const bool ModelEditor::saveEntitiesToFile() const
 			<< isReflected
 			<< endl;
 
-		for(size_t i = 0; i < partIds.size(); i++)
+		for(auto partId : partIds)
 		{
-			auto partId = partIds[i];
 			auto diffuseMapPath = _fe3d->model_getDiffuseMapPath(modelId, partId);
 			auto emissionMapPath = _fe3d->model_getEmissionMapPath(modelId, partId);
 			auto specularMapPath = _fe3d->model_getSpecularMapPath(modelId, partId);
@@ -160,9 +159,8 @@ const bool ModelEditor::saveEntitiesToFile() const
 				<< endl;
 		}
 
-		for(size_t i = 0; i < aabbIds.size(); i++)
+		for(const auto& aabbId : aabbIds)
 		{
-			auto aabbId = aabbIds[i];
 			auto position = _fe3d->aabb_getPosition(aabbId);
 			auto size = _fe3d->aabb_getSize(aabbId);
 

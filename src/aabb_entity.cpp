@@ -12,51 +12,51 @@ void AabbEntity::setMesh(shared_ptr<VertexBuffer> value)
 
 void AabbEntity::updateTarget()
 {
-	if(_position != _positionTarget)
+	if(_basePosition != _basePositionTarget)
 	{
-		auto speedMultiplier = Math::normalize(_positionTarget - _position);
-		_position += (speedMultiplier * _positionTargetSpeed);
+		auto speedMultiplier = Math::normalize(_basePositionTarget - _basePosition);
+		_basePosition += (speedMultiplier * _basePositionTargetSpeed);
 
-		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
+		if(fabsf(_basePositionTarget.x - _basePosition.x) <= _basePositionTargetSpeed)
 		{
-			_position.x = _positionTarget.x;
+			_basePosition.x = _basePositionTarget.x;
 		}
-		if(fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
+		if(fabsf(_basePositionTarget.y - _basePosition.y) <= _basePositionTargetSpeed)
 		{
-			_position.y = _positionTarget.y;
+			_basePosition.y = _basePositionTarget.y;
 		}
-		if(fabsf(_positionTarget.z - _position.z) <= _positionTargetSpeed)
+		if(fabsf(_basePositionTarget.z - _basePosition.z) <= _basePositionTargetSpeed)
 		{
-			_position.z = _positionTarget.z;
+			_basePosition.z = _basePositionTarget.z;
 		}
 	}
 
-	if(_size != _sizeTarget)
+	if(_baseSize != _baseSizeTarget)
 	{
-		auto speedMultiplier = Math::normalize(_sizeTarget - _size);
-		_size += (speedMultiplier * _sizeTargetSpeed);
+		auto speedMultiplier = Math::normalize(_baseSizeTarget - _baseSize);
+		_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
 
-		_size = fvec3(max(0.0f, _size.x), max(0.0f, _size.y), max(0.0f, _size.z));
-		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
+		_baseSize = fvec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
+		if(fabsf(_baseSizeTarget.x - _baseSize.x) <= _baseSizeTargetSpeed)
 		{
-			_size.x = _positionTarget.x;
+			_baseSize.x = _basePositionTarget.x;
 		}
-		if(fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
+		if(fabsf(_baseSizeTarget.y - _baseSize.y) <= _baseSizeTargetSpeed)
 		{
-			_size.y = _positionTarget.y;
+			_baseSize.y = _basePositionTarget.y;
 		}
-		if(fabsf(_sizeTarget.z - _size.z) <= _sizeTargetSpeed)
+		if(fabsf(_baseSizeTarget.z - _baseSize.z) <= _baseSizeTargetSpeed)
 		{
-			_size.z = _positionTarget.z;
+			_baseSize.z = _basePositionTarget.z;
 		}
 	}
 }
 
 void AabbEntity::updateTransformation()
 {
-	auto translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
+	auto translationMatrix = Math::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
 
-	auto scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, _size.z);
+	auto scalingMatrix = Math::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
 
 	_transformation = (translationMatrix * scalingMatrix);
 }
@@ -91,42 +91,42 @@ void AabbEntity::setCentered(bool value)
 	_isCentered = value;
 }
 
-void AabbEntity::setPosition(const fvec3& value)
+void AabbEntity::setBasePosition(const fvec3& value)
 {
-	_position = value;
-	_positionTarget = value;
+	_basePosition = value;
+	_basePositionTarget = value;
 }
 
-void AabbEntity::setSize(const fvec3& value)
+void AabbEntity::setBaseSize(const fvec3& value)
 {
-	_size = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-	_sizeTarget = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_baseSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_baseSizeTarget = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-void AabbEntity::move(const fvec3& value)
+void AabbEntity::moveBase(const fvec3& value)
 {
-	_position += value;
-	_positionTarget += value;
+	_basePosition += value;
+	_basePositionTarget += value;
 }
 
-void AabbEntity::scale(const fvec3& value)
+void AabbEntity::scaleBase(const fvec3& value)
 {
-	_size += value;
-	_sizeTarget += value;
-	_size = fvec3(max(0.0f, _size.x), max(0.0f, _size.y), max(0.0f, _size.z));
-	_sizeTarget = fvec3(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y), max(0.0f, _sizeTarget.z));
+	_baseSize += value;
+	_baseSizeTarget += value;
+	_baseSize = fvec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
+	_baseSizeTarget = fvec3(max(0.0f, _baseSizeTarget.x), max(0.0f, _baseSizeTarget.y), max(0.0f, _baseSizeTarget.z));
 }
 
-void AabbEntity::moveTo(const fvec3& target, float speed)
+void AabbEntity::moveBaseTo(const fvec3& target, float speed)
 {
-	_positionTarget = target;
-	_positionTargetSpeed = speed;
+	_basePositionTarget = target;
+	_basePositionTargetSpeed = speed;
 }
 
-void AabbEntity::scaleTo(const fvec3& target, float speed)
+void AabbEntity::scaleBaseTo(const fvec3& target, float speed)
 {
-	_sizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
-	_sizeTargetSpeed = speed;
+	_baseSizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
+	_baseSizeTargetSpeed = speed;
 }
 
 void AabbEntity::setParentEntityId(const string& value)
@@ -169,14 +169,14 @@ const fvec3& AabbEntity::getLocalSize() const
 	return _localSize;
 }
 
-const fvec3& AabbEntity::getPosition() const
+const fvec3& AabbEntity::getBasePosition() const
 {
-	return _position;
+	return _basePosition;
 }
 
-const fvec3& AabbEntity::getSize() const
+const fvec3& AabbEntity::getBaseSize() const
 {
-	return _size;
+	return _baseSize;
 }
 
 const fvec3& AabbEntity::getColor() const

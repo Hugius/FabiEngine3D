@@ -116,7 +116,6 @@ const bool WaterEditor::loadEntitiesFromFile()
 		fvec3 color;
 		fvec2 rippleSpeed;
 		fvec2 waveSpeed;
-		float height;
 		float size;
 		float textureRepeat;
 		float waveHeight;
@@ -142,7 +141,6 @@ const bool WaterEditor::loadEntitiesFromFile()
 			>> color.g
 			>> color.b
 			>> size
-			>> height
 			>> textureRepeat
 			>> waveHeight
 			>> rippleSpeed.x
@@ -166,7 +164,6 @@ const bool WaterEditor::loadEntitiesFromFile()
 		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 		_fe3d->water_create(waterId);
-		_fe3d->water_setHeight(waterId, height);
 		_fe3d->water_setSize(waterId, size);
 		_fe3d->water_setSpecular(waterId, isSpecular);
 		_fe3d->water_setReflective(waterId, isReflective);

@@ -19,6 +19,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 		auto color = _fe3d->sky_getColor(skyId);
 		auto isWireframed = _fe3d->sky_isWireframed(skyId);
 		auto wireframeColor = _fe3d->sky_getWireframeColor(skyId);
+		auto isVisible = _fe3d->sky_isVisible(skyId);
 
 		for(auto& cubeMapPath : cubeMapPaths)
 		{
@@ -59,6 +60,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			<< wireframeColor.g
 			<< " "
 			<< wireframeColor.b
+			<< " "
+			<< isVisible
 			<< endl;
 	}
 
@@ -85,6 +88,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 		auto isSpecular = _fe3d->terrain_isSpecular(terrainId);
 		auto isWireframed = _fe3d->terrain_isWireframed(terrainId);
 		auto wireframeColor = _fe3d->terrain_getWireframeColor(terrainId);
+		auto isVisible = _fe3d->terrain_isVisible(terrainId);
 
 		heightMapPath = (heightMapPath.empty() ? "" : heightMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
@@ -120,6 +124,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 		replace(blueNormalMapPath.begin(), blueNormalMapPath.end(), ' ', '?');
 
 		file
+			<< "TERRAIN "
 			<< terrainId
 			<< " "
 			<< heightMapPath
@@ -167,6 +172,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			<< wireframeColor.g
 			<< " "
 			<< wireframeColor.b
+			<< " "
+			<< isVisible
 			<< endl;
 	}
 
@@ -191,6 +198,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 		auto isRefractive = _fe3d->water_isRefractive(waterId);
 		auto isWireframed = _fe3d->water_isWireframed(waterId);
 		auto wireframeColor = _fe3d->water_getWireframeColor(waterId);
+		auto isVisible = _fe3d->water_isVisible(waterId);
 
 		dudvMapPath = (dudvMapPath.empty() ? "" : dudvMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		normalMapPath = (normalMapPath.empty() ? "" : normalMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
@@ -205,6 +213,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 		replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
 
 		file
+			<< "WATER "
 			<< waterId
 			<< " "
 			<< dudvMapPath
@@ -256,6 +265,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			<< wireframeColor.g
 			<< " "
 			<< wireframeColor.b
+			<< " "
+			<< isVisible
 			<< endl;
 	}
 
@@ -265,12 +276,19 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 		auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
 		auto isMultiParted = _fe3d->model_isMultiParted(modelId);
 		auto meshPath = _fe3d->model_getMeshPath(modelId);
-		auto modelSize = _fe3d->model_getBaseSize(modelId);
+		auto basePosition = _fe3d->model_getBasePosition(modelId);
+		auto baseRotation = _fe3d->model_getBaseRotation(modelId);
+		auto baseRotationOrigin = _fe3d->model_getBaseRotationOrigin(modelId);
+		auto baseSize = _fe3d->model_getBaseSize(modelId);
 		auto levelOfDetailEntityId = _fe3d->model_getLevelOfDetailEntityId(modelId);
 		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(modelId);
 		auto rotationOrder = static_cast<unsigned int>(_fe3d->model_getRotationOrder(modelId));
 		auto isShadowed = _fe3d->model_isShadowed(modelId);
 		auto isReflected = _fe3d->model_isReflected(modelId);
+		auto isFrozen = _fe3d->model_isFrozen(modelId);
+		auto minHeight = _fe3d->model_getMinHeight(modelId);
+		auto maxHeight = _fe3d->model_getMaxHeight(modelId);
+		auto isVisible = _fe3d->model_isVisible(modelId);
 
 		meshPath = (meshPath.empty() ? "" : meshPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 
@@ -286,11 +304,29 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			<< " "
 			<< meshPath
 			<< " "
-			<< modelSize.x
+			<< basePosition.x
 			<< " "
-			<< modelSize.y
+			<< basePosition.y
 			<< " "
-			<< modelSize.z
+			<< basePosition.z
+			<< " "
+			<< baseRotation.x
+			<< " "
+			<< baseRotation.y
+			<< " "
+			<< baseRotation.z
+			<< " "
+			<< baseRotationOrigin.x
+			<< " "
+			<< baseRotationOrigin.y
+			<< " "
+			<< baseRotationOrigin.z
+			<< " "
+			<< baseSize.x
+			<< " "
+			<< baseSize.y
+			<< " "
+			<< baseSize.z
 			<< " "
 			<< levelOfDetailEntityId
 			<< " "
@@ -301,11 +337,22 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			<< isShadowed
 			<< " "
 			<< isReflected
+			<< " "
+			<< isFrozen
+			<< " "
+			<< minHeight
+			<< " "
+			<< maxHeight
+			<< " "
+			<< isVisible
 			<< endl;
 
-		for(size_t i = 0; i < partIds.size(); i++)
+		for(auto partId : partIds)
 		{
-			auto partId = partIds[i];
+			auto partPosition = _fe3d->model_getPartPosition(modelId, partId);
+			auto partRotation = _fe3d->model_getPartRotation(modelId, partId);
+			auto partRotationOrigin = _fe3d->model_getPartRotationOrigin(modelId, partId);
+			auto partSize = _fe3d->model_getPartSize(modelId, partId);
 			auto diffuseMapPath = _fe3d->model_getDiffuseMapPath(modelId, partId);
 			auto emissionMapPath = _fe3d->model_getEmissionMapPath(modelId, partId);
 			auto specularMapPath = _fe3d->model_getSpecularMapPath(modelId, partId);
@@ -325,6 +372,8 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelId, partId);
 			auto opacity = _fe3d->model_getOpacity(modelId, partId);
 			auto minTextureAlpha = _fe3d->model_getMinTextureAlpha(modelId, partId);
+			auto isWireframed = _fe3d->model_isWireframed(modelId, partId);
+			auto wireframeColor = _fe3d->model_getWireframeColor(modelId, partId);
 
 			diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 			emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
@@ -392,14 +441,49 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 				<< opacity
 				<< " "
 				<< minTextureAlpha
+				<< " "
+				<< partPosition.x
+				<< " "
+				<< partPosition.y
+				<< " "
+				<< partPosition.z
+				<< " "
+				<< partRotation.x
+				<< " "
+				<< partRotation.y
+				<< " "
+				<< partRotation.z
+				<< " "
+				<< partRotationOrigin.x
+				<< " "
+				<< partRotationOrigin.y
+				<< " "
+				<< partRotationOrigin.z
+				<< " "
+				<< partSize.x
+				<< " "
+				<< partSize.y
+				<< " "
+				<< partSize.z
+				<< " "
+				<< isWireframed
+				<< " "
+				<< wireframeColor.r
+				<< " "
+				<< wireframeColor.g
+				<< " "
+				<< wireframeColor.b
 				<< endl;
 		}
 
-		for(size_t i = 0; i < aabbIds.size(); i++)
+		for(const string& aabbId : aabbIds)
 		{
-			auto aabbId = aabbIds[i];
 			auto position = _fe3d->aabb_getPosition(aabbId);
 			auto size = _fe3d->aabb_getSize(aabbId);
+			auto color = _fe3d->aabb_getColor(aabbId);
+			auto isVisible = _fe3d->aabb_isVisible(aabbId);
+			auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
+			auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
 
 			file
 				<< "MODEL_AABB "
@@ -418,12 +502,29 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 				<< size.y
 				<< " "
 				<< size.z
+				<< " "
+				<< color.r
+				<< " "
+				<< color.g
+				<< " "
+				<< color.b
+				<< " "
+				<< isVisible
+				<< " "
+				<< isRaycastResponsive
+				<< " "
+				<< isCollisionResponsive
 				<< endl;
 		}
+
+		// ANIMATION
 	}
 
 	for(const auto& quadId : _addedQuad3dIds)
 	{
+		auto aabbIds = _fe3d->quad3d_getChildAabbIds(quadId);
+		auto position = _fe3d->quad3d_getPosition(quadId);
+		auto rotation = _fe3d->quad3d_getRotation(quadId);
 		auto size = _fe3d->quad3d_getSize(quadId);
 		auto color = _fe3d->quad3d_getColor(quadId);
 		auto diffuseMapPath = _fe3d->quad3d_getDiffuseMapPath(quadId);
@@ -438,6 +539,14 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(quadId);
 		auto opacity = _fe3d->quad3d_getOpacity(quadId);
 		auto minTextureAlpha = _fe3d->quad3d_getMinTextureAlpha(quadId);
+		auto isVisible = _fe3d->quad3d_isVisible(quadId);
+		auto isWireframed = _fe3d->quad3d_isWireframed(quadId);
+		auto wireframeColor = _fe3d->quad3d_getWireframeColor(quadId);
+		auto isFrozen = _fe3d->quad3d_isFrozen(quadId);
+		auto minHeight = _fe3d->quad3d_getMinHeight(quadId);
+		auto maxHeight = _fe3d->quad3d_getMaxHeight(quadId);
+		auto uvMultiplier = _fe3d->quad3d_getUvMultiplier(quadId);
+		auto uvOffset = _fe3d->quad3d_getUvOffset(quadId);
 
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 		emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
@@ -449,7 +558,20 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 
 		file
+			<< "QUAD3D "
 			<< quadId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< rotation.x
+			<< " "
+			<< rotation.y
+			<< " "
+			<< rotation.z
 			<< " "
 			<< size.x
 			<< " "
@@ -484,12 +606,83 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			<< opacity
 			<< " "
 			<< minTextureAlpha
+			<< " "
+			<< isWireframed
+			<< " "
+			<< wireframeColor.r
+			<< " "
+			<< wireframeColor.g
+			<< " "
+			<< wireframeColor.b
+			<< " "
+			<< isVisible
+			<< " "
+			<< isFrozen
+			<< " "
+			<< minHeight
+			<< " "
+			<< maxHeight
+			<< " "
+			<< uvMultiplier.x
+			<< " "
+			<< uvMultiplier.y
+			<< " "
+			<< uvOffset.x
+			<< " "
+			<< uvOffset.y
 			<< endl;
+
+		for(const string& aabbId : aabbIds)
+		{
+			auto position = _fe3d->aabb_getPosition(aabbId);
+			auto size = _fe3d->aabb_getSize(aabbId);
+			auto color = _fe3d->aabb_getColor(aabbId);
+			auto isVisible = _fe3d->aabb_isVisible(aabbId);
+			auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
+			auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
+
+			file
+				<< "QUAD3D_AABB "
+				<< quadId
+				<< " "
+				<< aabbId
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
+				<< size.x
+				<< " "
+				<< size.y
+				<< " "
+				<< size.z
+				<< " "
+				<< color.r
+				<< " "
+				<< color.g
+				<< " "
+				<< color.b
+				<< " "
+				<< isVisible
+				<< " "
+				<< isRaycastResponsive
+				<< " "
+				<< isCollisionResponsive
+				<< endl;
+		}
+
+		// ANIMATION
 	}
 
 	for(const auto& textId : _addedText3dIds)
 	{
+		auto aabbIds = _fe3d->text3d_getChildAabbIds(textId);
+		auto position = _fe3d->text3d_getPosition(textId);
+		auto rotation = _fe3d->text3d_getRotation(textId);
 		auto size = _fe3d->text3d_getSize(textId);
+		auto content = _fe3d->text3d_getContent(textId);
 		auto color = _fe3d->text3d_getColor(textId);
 		auto fontMapPath = _fe3d->text3d_getFontMapPath(textId);
 		auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(textId);
@@ -500,6 +693,12 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 		auto isBright = _fe3d->text3d_isBright(textId);
 		auto opacity = _fe3d->text3d_getOpacity(textId);
 		auto minTextureAlpha = _fe3d->text3d_getMinTextureAlpha(textId);
+		auto isVisible = _fe3d->text3d_isVisible(textId);
+		auto isWireframed = _fe3d->text3d_isWireframed(textId);
+		auto wireframeColor = _fe3d->text3d_getWireframeColor(textId);
+		auto isFrozen = _fe3d->text3d_isFrozen(textId);
+		auto minHeight = _fe3d->text3d_getMinHeight(textId);
+		auto maxHeight = _fe3d->text3d_getMaxHeight(textId);
 
 		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 
@@ -509,6 +708,18 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 
 		file
 			<< textId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< rotation.x
+			<< " "
+			<< rotation.y
+			<< " "
+			<< rotation.z
 			<< " "
 			<< size.x
 			<< " "
@@ -537,13 +748,76 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			<< opacity
 			<< " "
 			<< minTextureAlpha
+			<< " "
+			<< content
+			<< " "
+			<< isWireframed
+			<< " "
+			<< wireframeColor.r
+			<< " "
+			<< wireframeColor.g
+			<< " "
+			<< wireframeColor.b
+			<< " "
+			<< isVisible
+			<< " "
+			<< isFrozen
+			<< " "
+			<< minHeight
+			<< " "
+			<< maxHeight
 			<< endl;
+
+		for(const string& aabbId : aabbIds)
+		{
+			auto position = _fe3d->aabb_getPosition(aabbId);
+			auto size = _fe3d->aabb_getSize(aabbId);
+			auto color = _fe3d->aabb_getColor(aabbId);
+			auto isVisible = _fe3d->aabb_isVisible(aabbId);
+			auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
+			auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
+
+			file
+				<< "TEXT3D_AABB "
+				<< textId
+				<< " "
+				<< aabbId
+				<< " "
+				<< position.x
+				<< " "
+				<< position.y
+				<< " "
+				<< position.z
+				<< " "
+				<< size.x
+				<< " "
+				<< size.y
+				<< " "
+				<< size.z
+				<< " "
+				<< color.r
+				<< " "
+				<< color.g
+				<< " "
+				<< color.b
+				<< " "
+				<< isVisible
+				<< " "
+				<< isRaycastResponsive
+				<< " "
+				<< isCollisionResponsive
+				<< endl;
+		}
 	}
 
-	for(const auto& aabbId : _addedAabbIds)
+	for(const string& aabbId : _addedAabbIds)
 	{
 		auto position = _fe3d->aabb_getPosition(aabbId);
 		auto size = _fe3d->aabb_getSize(aabbId);
+		auto color = _fe3d->aabb_getColor(aabbId);
+		auto isVisible = _fe3d->aabb_isVisible(aabbId);
+		auto isRaycastResponsive = _fe3d->aabb_isRaycastResponsive(aabbId);
+		auto isCollisionResponsive = _fe3d->aabb_isCollisionResponsive(aabbId);
 
 		file
 			<< "AABB "
@@ -560,6 +834,18 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			<< size.y
 			<< " "
 			<< size.z
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
+			<< color.b
+			<< " "
+			<< isVisible
+			<< " "
+			<< isRaycastResponsive
+			<< " "
+			<< isCollisionResponsive
 			<< endl;
 	}
 

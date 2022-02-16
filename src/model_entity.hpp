@@ -142,8 +142,6 @@ private:
 	void _correctRotationTarget(fvec3& current, const fvec3& target, float speed);
 	void _correctSizeTarget(fvec3& current, const fvec3& target, float speed);
 
-	const unsigned int _getPartIndex(const string& partId) const;
-
 	string _meshPath = "";
 	string _levelOfDetailEntityId = "";
 	string _previousReflectionEntityId = "";

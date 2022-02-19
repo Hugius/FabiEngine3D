@@ -134,11 +134,6 @@ void EngineInterface::misc_cacheAudios(const vector<string>& filePaths, bool isC
 	_core->getAudioLoader()->cacheChunks(filePaths);
 }
 
-void EngineInterface::misc_startMillisecondTimer()
-{
-	_core->getTimer()->start();
-}
-
 const unsigned int EngineInterface::misc_getTriangleCount() const
 {
 	return _core->getRenderStorage()->getTriangleCount();
@@ -154,14 +149,9 @@ const unsigned int EngineInterface::misc_getPassedUpdateCount() const
 	return _core->getTimer()->getPassedUpdateCount();
 }
 
-const float EngineInterface::misc_getFPS() const
+const float EngineInterface::misc_getTotalDeltaTime() const
 {
-	return (1000.0f / _core->getDeltaTime());
-}
-
-const float EngineInterface::misc_stopMillisecondTimer() const
-{
-	return _core->getTimer()->stop();
+	return _core->getTotalDeltaTime();
 }
 
 const string EngineInterface::misc_getCpuName() const
@@ -182,11 +172,6 @@ const string EngineInterface::misc_getOpenglVersion() const
 const ivec2 EngineInterface::misc_getCursorPosition() const
 {
 	return _core->getRenderWindow()->getCursorPosition();
-}
-
-const bool EngineInterface::misc_isMillisecondTimerStarted() const
-{
-	return _core->getTimer()->isStarted();
 }
 
 const bool EngineInterface::misc_isCursorVisible() const
@@ -227,51 +212,14 @@ const bool EngineInterface::misc_isCursorInsideWindow() const
 	return false;
 }
 
-const vector<pair<string, int>> EngineInterface::misc_getUpdateProfilingStatistics() const
+const map<string, float>& EngineInterface::misc_getUpdateDeltaTimes() const
 {
-	vector<pair<string, int>> result =
-	{
-		pair<string, int>("coreUpdate", 0),
-		pair<string, int>("physicsUpdate", 0),
-		pair<string, int>("3dEntityUpdate", 0),
-		pair<string, int>("2dEntityUpdate", 0),
-		pair<string, int>("renderUpdate", 0),
-		pair<string, int>("animationUpdate", 0),
-		pair<string, int>("soundUpdate", 0),
-		pair<string, int>("networkUpdate", 0),
-		pair<string, int>("miscUpdate", 0)
-	};
-
-	for(auto& [key, percentage] : result)
-	{
-		percentage = static_cast<int>((_core->getTimer()->getDeltaPart(key) / _core->getTimer()->getDeltaPartSum()) * 100.0f);
-	}
-
-	return result;
+	return _core->getUpdateDeltaTimes();
 }
 
-const vector<pair<string, int>> EngineInterface::misc_getRenderProfilingStatistics() const
+const map<string, float>& EngineInterface::misc_getRenderDeltaTimes() const
 {
-	vector<pair<string, int>> result =
-	{
-		pair<string, int>("depthPreRender", 0),
-		pair<string, int>("shadowPreRender", 0),
-		pair<string, int>("reflectionPreRender", 0),
-		pair<string, int>("refractionPreRender", 0),
-		pair<string, int>("waterPreRender", 0),
-		pair<string, int>("3dEntityRender", 0),
-		pair<string, int>("postProcessing", 0),
-		pair<string, int>("2dEntityRender", 0),
-		pair<string, int>("bufferSwap", 0)
-	};
-
-	for(auto& [key, percentage] : result)
-	{
-		int newPercentage = static_cast<int>((_core->getTimer()->getDeltaPart(key) / _core->getTimer()->getDeltaPartSum()) * 100.0f);
-		percentage = newPercentage;
-	}
-
-	return result;
+	return _core->getRenderDeltaTimes();
 }
 
 const string EngineInterface::misc_getCursorEntityId() const

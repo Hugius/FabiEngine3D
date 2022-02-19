@@ -208,6 +208,8 @@ void ScriptInterpreter::load()
 	_fe3d->misc_setCursorVisible(true);
 
 	_checkEngineWarnings(lastLoggerMessageCount);
+
+	_fe3d->clock_create("scriptDebug");
 }
 
 void ScriptInterpreter::unload()
@@ -324,10 +326,12 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d->misc_setVsyncEnabled(true);
 	}
-	if(_fe3d->misc_isMillisecondTimerStarted())
+
+	for(const auto& clockId : _fe3d->clock_getIds())
 	{
-		_fe3d->misc_stopMillisecondTimer();
+		_fe3d->clock_delete(clockId);
 	}
+
 	_fe3d->misc_setCursorVisible(false);
 
 	_debuggingTimes.clear();

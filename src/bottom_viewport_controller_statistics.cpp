@@ -25,7 +25,7 @@ void BottomViewportController::_updateStatistics()
 	}
 	else
 	{
-		fpsList.push_back(_fe3d->misc_getFPS());
+		fpsList.push_back(1000.0f / _fe3d->misc_getTotalDeltaTime());
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 100)) == 0))
@@ -208,12 +208,19 @@ void BottomViewportController::_updateStatistics()
 
 	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0))
 	{
-		auto updateStatistics = _fe3d->misc_getUpdateProfilingStatistics();
+		auto deltaTimes = _fe3d->misc_getUpdateDeltaTimes();
+		float totalDeltaTime = 0.0f;
 
-		for(const auto& [key, value] : updateStatistics)
+		for(auto& [key, deltaTime] : deltaTimes)
 		{
+			totalDeltaTime += deltaTime;
+		}
+
+		for(const auto& [key, deltaTime] : deltaTimes)
+		{
+			const auto percentage = static_cast<unsigned int>((deltaTime / totalDeltaTime) * 100.0f);
 			const auto textId = statisticsScreen->getTextField(key)->getEntityId();
-			const auto text = (key + ": " + to_string(value) + "%");
+			const auto text = (key + ": " + to_string(percentage) + "%");
 
 			_fe3d->text2d_setContent(textId, text);
 			_fe3d->text2d_setSize(textId, fvec2(CHAR_SIZE.x * static_cast<float>(text.size()), CHAR_SIZE.y));
@@ -222,12 +229,19 @@ void BottomViewportController::_updateStatistics()
 
 	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0))
 	{
-		auto renderStatistics = _fe3d->misc_getRenderProfilingStatistics();
+		auto deltaTimes = _fe3d->misc_getRenderDeltaTimes();
+		float totalDeltaTime = 0.0f;
 
-		for(const auto& [key, value] : renderStatistics)
+		for(auto& [key, deltaTime] : deltaTimes)
 		{
+			totalDeltaTime += deltaTime;
+		}
+
+		for(const auto& [key, deltaTime] : deltaTimes)
+		{
+			const auto percentage = static_cast<unsigned int>((deltaTime / totalDeltaTime) * 100.0f);
 			const auto textId = statisticsScreen->getTextField(key)->getEntityId();
-			const auto text = (key + ": " + to_string(value) + "%");
+			const auto text = (key + ": " + to_string(percentage) + "%");
 
 			_fe3d->text2d_setContent(textId, text);
 			_fe3d->text2d_setSize(textId, fvec2(CHAR_SIZE.x * static_cast<float>(text.size()), CHAR_SIZE.y));

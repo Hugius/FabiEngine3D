@@ -53,12 +53,6 @@ void ScriptExecutor::pause()
 		_wasThirdPersonEnabled = _fe3d->camera_isThirdPersonEnabled();
 		_fe3d->camera_setThirdPersonEnabled(false);
 
-		_wasTimerStarted = _fe3d->misc_isMillisecondTimerStarted();
-		if(_wasTimerStarted)
-		{
-			_fe3d->misc_stopMillisecondTimer();
-		}
-
 		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
 			if(_fe3d->sound2d_isPaused(soundId))
@@ -75,9 +69,25 @@ void ScriptExecutor::pause()
 			}
 		}
 
+		for(const auto& clockId : _fe3d->clock_getIds())
+		{
+			if(_fe3d->clock_isPaused(clockId))
+			{
+				_pausedClockIds.push_back(clockId);
+			}
+		}
+
 		_fe3d->sound2d_pauseAll();
 
 		_fe3d->sound3d_pauseAll();
+
+		for(const auto& clockId : _fe3d->clock_getIds())
+		{
+			if(_fe3d->clock_isStarted(clockId) && !_fe3d->clock_isPaused(clockId))
+			{
+				_fe3d->clock_pause(clockId);
+			}
+		}
 
 		_isRunning = false;
 	}
@@ -93,11 +103,6 @@ void ScriptExecutor::resume()
 		_fe3d->camera_setFirstPersonEnabled(_wasFirstPersonEnabled);
 		_fe3d->camera_setThirdPersonEnabled(_wasThirdPersonEnabled);
 
-		if(_wasTimerStarted)
-		{
-			_fe3d->misc_startMillisecondTimer();
-		}
-
 		_fe3d->sound2d_resumeAll();
 		for(const auto& soundId : _pausedSoundIds)
 		{
@@ -108,6 +113,19 @@ void ScriptExecutor::resume()
 		for(const auto& soundId : _pausedSoundIds)
 		{
 			_fe3d->sound3d_pause(soundId);
+		}
+
+		for(const auto& clockId : _fe3d->clock_getIds())
+		{
+			if(_fe3d->clock_isStarted(clockId) && _fe3d->clock_isPaused(clockId))
+			{
+				_fe3d->clock_resume(clockId);
+			}
+		}
+
+		for(const auto& clockId : _pausedClockIds)
+		{
+			_fe3d->clock_pause(clockId);
 		}
 
 		_isRunning = true;
@@ -123,15 +141,15 @@ void ScriptExecutor::stop()
 
 		_scriptInterpreter->unload();
 
+		_pausedSoundIds.clear();
+		_pausedClockIds.clear();
 		_isStarted = false;
 		_isRunning = false;
 		_wasVsyncEnabled = false;
 		_wasCursorVisible = false;
 		_wasFirstPersonEnabled = false;
 		_wasThirdPersonEnabled = false;
-		_wasTimerStarted = false;
 		_mustSkipUpdate = false;
-		_pausedSoundIds.clear();
 	}
 }
 
@@ -165,15 +183,16 @@ void ScriptExecutor::_validateExecution()
 	if(_scriptInterpreter->hasThrownError())
 	{
 		_scriptInterpreter->unload();
+
+		_pausedSoundIds.clear();
+		_pausedClockIds.clear();
 		_isStarted = false;
 		_isRunning = false;
 		_wasVsyncEnabled = false;
 		_wasCursorVisible = false;
 		_wasFirstPersonEnabled = false;
 		_wasThirdPersonEnabled = false;
-		_wasTimerStarted = false;
 		_mustSkipUpdate = false;
-		_pausedSoundIds.clear();
 	}
 	else if(_scriptInterpreter->gameMustStop())
 	{

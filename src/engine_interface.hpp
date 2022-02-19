@@ -986,6 +986,19 @@ public:
 	const bool client_isAcceptedByServer() const;
 	const bool client_isMessageReserved(const string& message);
 
+	void clock_create(const string& id);
+	void clock_delete(const string& id);
+	void clock_start(const string& id);
+	void clock_pause(const string& id);
+	void clock_resume(const string& id);
+	void clock_stop(const string& id);
+
+	const vector<string> clock_getIds() const;
+	const float clock_getDeltaTime(const string& id) const;
+	const bool clock_isExisting(const string& id) const;
+	const bool clock_isStarted(const string& id) const;
+	const bool clock_isPaused(const string& id) const;
+
 	void misc_setVsyncEnabled(bool value);
 	void misc_setCursorVisible(bool value);
 	void misc_setCursorEntityId(const string& value);
@@ -1004,24 +1017,21 @@ public:
 	void misc_clearMeshesCache();
 	void misc_clearImagesCache();
 	void misc_clearAudiosCache();
-	void misc_startMillisecondTimer();
 
-	const vector<pair<string, int>> misc_getUpdateProfilingStatistics() const;
-	const vector<pair<string, int>> misc_getRenderProfilingStatistics() const;
+	const map<string, float>& misc_getUpdateDeltaTimes() const;
+	const map<string, float>& misc_getRenderDeltaTimes() const;
 	const string misc_getCursorEntityId() const;
 	const string misc_getCpuName() const;
 	const string misc_getGpuName() const;
 	const string misc_getOpenglVersion() const;
 	const ivec2 misc_getCursorPosition() const;
-	const float misc_getFPS() const;
-	const float misc_stopMillisecondTimer() const;
+	const float misc_getTotalDeltaTime() const;
 	const unsigned int misc_getTriangleCount() const;
 	const unsigned int misc_getUpdateCountPerSecond() const;
 	const unsigned int misc_getPassedUpdateCount() const;
 	const bool misc_isCursorVisible() const;
 	const bool misc_isCursorInsideDisplay() const;
 	const bool misc_isCursorInsideWindow() const;
-	const bool misc_isMillisecondTimerStarted() const;
 	const bool misc_isVsyncEnabled() const;
 
 private:

@@ -89,32 +89,156 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:timer_start")
+	else if(functionName == "fe3d:clock_create")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_fe3d->misc_isMillisecondTimerStarted())
+			if(_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("timer is already started");
+				_throwRuntimeError("clock is already existing");
 				return true;
 			}
 
-			_fe3d->misc_startMillisecondTimer();
+			_fe3d->clock_create(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:timer_stop")
+	else if(functionName == "fe3d:clock_delete")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(!_fe3d->misc_isMillisecondTimerStarted())
+			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("timer is not started");
+				_throwRuntimeError("clock is not existing");
 				return true;
 			}
 
-			const auto result = _fe3d->misc_stopMillisecondTimer();
+			_fe3d->clock_delete(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:clock_start")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_fe3d->clock_isExisting(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not existing");
+				return true;
+			}
+			if(_fe3d->clock_isStarted(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is already started");
+				return true;
+			}
+
+			_fe3d->clock_start(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:clock_pause")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_fe3d->clock_isExisting(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not existing");
+				return true;
+			}
+			if(!_fe3d->clock_isStarted(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not started");
+				return true;
+			}
+			if(_fe3d->clock_isPaused(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is already paused");
+				return true;
+			}
+
+			_fe3d->clock_pause(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:clock_resume")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_fe3d->clock_isExisting(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not existing");
+				return true;
+			}
+			if(!_fe3d->clock_isStarted(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not started");
+				return true;
+			}
+			if(!_fe3d->clock_isPaused(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not paused");
+				return true;
+			}
+
+			_fe3d->clock_pause(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:clock_stop")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_fe3d->clock_isExisting(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not existing");
+				return true;
+			}
+			if(!_fe3d->clock_isStarted(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not started");
+				return true;
+			}
+
+			_fe3d->clock_stop(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:clock_get_delta")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_fe3d->clock_isExisting(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not existing");
+				return true;
+			}
+			if(_fe3d->clock_isStarted(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is still started");
+				return true;
+			}
+
+			const auto result = _fe3d->clock_getDeltaTime(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}

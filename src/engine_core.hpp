@@ -48,10 +48,12 @@ public:
 	void inject(shared_ptr<EngineController> engineController);
 
 	void start();
-	void update();
 	void stop();
 
-	const float getDeltaTime() const;
+	const map<string, float>& getUpdateDeltaTimes() const;
+	const map<string, float>& getRenderDeltaTimes() const;
+
+	const float getTotalDeltaTime() const;
 
 	const shared_ptr<LibraryLoader> getLibraryLoader() const;
 	const shared_ptr<InputHandler> getInputHandler() const;
@@ -93,12 +95,18 @@ public:
 	const shared_ptr<Timer> getTimer() const;
 
 private:
-	float _deltaTime = 0.0f;
+	void _update();
+
+	map<string, float> _updateDeltaTimes;
+	map<string, float> _renderDeltaTimes;
+
+	float _totalDeltaTime = 0.0f;
 
 	bool _isPaused = false;
 	bool _isRunning = false;
 
 	shared_ptr<LibraryLoader> _libraryLoader = nullptr;
+	shared_ptr<Timer> _timer = nullptr;
 	shared_ptr<InputHandler> _inputHandler = nullptr;
 	shared_ptr<MeshLoader> _meshLoader = nullptr;
 	shared_ptr<ImageLoader> _imageLoader = nullptr;
@@ -119,23 +127,22 @@ private:
 	shared_ptr<Animation2dManager> _animation2dManager = nullptr;
 	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
 	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
-	shared_ptr<RenderWindow> _renderWindow = nullptr;
-	shared_ptr<MasterRenderer> _masterRenderer = nullptr;
-	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
-	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;
-	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<RaycastCalculator> _raycastCalculator = nullptr;
 	shared_ptr<RaycastIntersector> _raycastIntersector = nullptr;
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
 	shared_ptr<CameraCollisionResponder> _cameraCollisionResponder = nullptr;
+	shared_ptr<RenderWindow> _renderWindow = nullptr;
+	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
+	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;
+	shared_ptr<RenderStorage> _renderStorage = nullptr;
+	shared_ptr<MasterRenderer> _masterRenderer = nullptr;
 	shared_ptr<Animation3dPlayer> _animation3dPlayer = nullptr;
 	shared_ptr<Animation2dPlayer> _animation2dPlayer = nullptr;
 	shared_ptr<Sound3dPlayer> _sound3dPlayer = nullptr;
 	shared_ptr<Sound2dPlayer> _sound2dPlayer = nullptr;
 	shared_ptr<NetworkingServer> _networkingServer = nullptr;
 	shared_ptr<NetworkingClient> _networkingClient = nullptr;
-	shared_ptr<Timer> _timer = nullptr;
 
 	shared_ptr<EngineController> _engineController = nullptr;
 };

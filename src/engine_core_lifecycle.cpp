@@ -3,15 +3,10 @@
 #include "engine_controller.hpp"
 #include "tools.hpp"
 
-#include <chrono>
-
-using std::chrono::duration_cast;
-using std::chrono::high_resolution_clock;
-using std::chrono::nanoseconds;
-
 EngineCore::EngineCore()
 {
 	_libraryLoader = make_shared<LibraryLoader>();
+	_timer = make_shared<Timer>();
 	_inputHandler = make_shared<InputHandler>();
 	_meshLoader = make_shared<MeshLoader>();
 	_imageLoader = make_shared<ImageLoader>();
@@ -33,22 +28,21 @@ EngineCore::EngineCore()
 	_sound3dManager = make_shared<Sound3dManager>();
 	_sound2dManager = make_shared<Sound2dManager>();
 	_renderWindow = make_shared<RenderWindow>(_libraryLoader->getWindowPointer());
-	_masterRenderer = make_shared<MasterRenderer>();
 	_vertexBufferCache = make_shared<VertexBufferCache>();
 	_textureBufferCache = make_shared<TextureBufferCache>();
 	_renderStorage = make_shared<RenderStorage>();
+	_masterRenderer = make_shared<MasterRenderer>();
 	_camera = make_shared<Camera>();
 	_raycastCalculator = make_shared<RaycastCalculator>();
 	_raycastIntersector = make_shared<RaycastIntersector>();
 	_cameraCollisionResponder = make_shared<CameraCollisionResponder>();
 	_cameraCollisionDetector = make_shared<CameraCollisionDetector>();
-	_networkingServer = make_shared<NetworkingServer>();
-	_networkingClient = make_shared<NetworkingClient>();
 	_animation3dPlayer = make_shared<Animation3dPlayer>();
 	_animation2dPlayer = make_shared<Animation2dPlayer>();
 	_sound3dPlayer = make_shared<Sound3dPlayer>();
 	_sound2dPlayer = make_shared<Sound2dPlayer>();
-	_timer = make_shared<Timer>();
+	_networkingServer = make_shared<NetworkingServer>();
+	_networkingClient = make_shared<NetworkingClient>();
 
 	_skyEntityManager->inject(_renderStorage);
 	_terrainEntityManager->inject(_imageLoader);
@@ -105,6 +99,46 @@ EngineCore::EngineCore()
 	_sound3dPlayer->inject(_sound3dManager);
 	_sound3dPlayer->inject(_camera);
 	_sound2dPlayer->inject(_sound2dManager);
+
+	_timer->createClock("total");
+	_timer->createClock("coreUpdate");
+	_timer->createClock("physicsUpdate");
+	_timer->createClock("3dEntityUpdate");
+	_timer->createClock("2dEntityUpdate");
+	_timer->createClock("renderUpdate");
+	_timer->createClock("animationUpdate");
+	_timer->createClock("soundUpdate");
+	_timer->createClock("networkUpdate");
+	_timer->createClock("miscUpdate");
+	_timer->createClock("depthPreRender");
+	_timer->createClock("shadowPreRender");
+	_timer->createClock("reflectionPreRender");
+	_timer->createClock("refractionPreRender");
+	_timer->createClock("waterPreRender");
+	_timer->createClock("3dEntityRender");
+	_timer->createClock("postProcessing");
+	_timer->createClock("2dEntityRender");
+	_timer->createClock("bufferSwap");
+
+	_updateDeltaTimes.insert(make_pair("coreUpdate", 0.0f));
+	_updateDeltaTimes.insert(make_pair("physicsUpdate", 0.0f));
+	_updateDeltaTimes.insert(make_pair("3dEntityUpdate", 0.0f));
+	_updateDeltaTimes.insert(make_pair("2dEntityUpdate", 0.0f));
+	_updateDeltaTimes.insert(make_pair("renderUpdate", 0.0f));
+	_updateDeltaTimes.insert(make_pair("animationUpdate", 0.0f));
+	_updateDeltaTimes.insert(make_pair("soundUpdate", 0.0f));
+	_updateDeltaTimes.insert(make_pair("networkUpdate", 0.0f));
+	_updateDeltaTimes.insert(make_pair("miscUpdate", 0.0f));
+
+	_renderDeltaTimes.insert(make_pair("depthPreRender", 0.0f));
+	_renderDeltaTimes.insert(make_pair("shadowPreRender", 0.0f));
+	_renderDeltaTimes.insert(make_pair("reflectionPreRender", 0.0f));
+	_renderDeltaTimes.insert(make_pair("refractionPreRender", 0.0f));
+	_renderDeltaTimes.insert(make_pair("waterPreRender", 0.0f));
+	_renderDeltaTimes.insert(make_pair("3dEntityRender", 0.0f));
+	_renderDeltaTimes.insert(make_pair("postProcessing", 0.0f));
+	_renderDeltaTimes.insert(make_pair("2dEntityRender", 0.0f));
+	_renderDeltaTimes.insert(make_pair("bufferSwap", 0.0f));
 }
 
 void EngineCore::start()
@@ -189,7 +223,7 @@ void EngineCore::start()
 
 	while(_isRunning)
 	{
-		const auto previousTime = high_resolution_clock::now();
+		_timer->startClock("total");
 
 		if(_networkingServer->isRunning())
 		{
@@ -210,14 +244,15 @@ void EngineCore::start()
 
 				_masterRenderer->renderApplication();
 
-				_timer->startDeltaPart("bufferSwap");
+				_timer->startClock("bufferSwap");
 				_renderWindow->swapBackBuffer();
-				_timer->stopDeltaPart();
+				_timer->stopClock("bufferSwap");
+				_renderDeltaTimes.at("bufferSwap") = _timer->getClockDeltaTime("bufferSwap");
 			}
 		}
 		else
 		{
-			renderLag += _deltaTime;
+			renderLag += _totalDeltaTime;
 
 			if(renderLag > (millisecondsPerUpdate * 10.0f))
 			{
@@ -230,7 +265,7 @@ void EngineCore::start()
 
 				_inputHandler->update();
 
-				update();
+				_update();
 
 				renderLag -= millisecondsPerUpdate;
 				renderLag = max(0.0f, renderLag);
@@ -240,41 +275,43 @@ void EngineCore::start()
 
 			_masterRenderer->renderApplication();
 
-			_timer->startDeltaPart("bufferSwap");
+			_timer->startClock("bufferSwap");
 			_renderWindow->swapBackBuffer();
-			_timer->stopDeltaPart();
+			_timer->stopClock("bufferSwap");
+			_renderDeltaTimes.at("bufferSwap") = _timer->getClockDeltaTime("bufferSwap");
 		}
 
-		const auto currentTime = high_resolution_clock::now();
-		const auto timeDifference = duration_cast<nanoseconds>(currentTime - previousTime);
-		_deltaTime = static_cast<float>(timeDifference.count()) / 1000000.0f;
+		_timer->stopClock("total");
+		_totalDeltaTime = _timer->getClockDeltaTime("total");
 	}
 
 	_engineController->terminate();
 }
 
-void EngineCore::update()
+void EngineCore::_update()
 {
 	static ivec2 lastCursorPosition = _renderWindow->getCursorPosition();
 
-	_timer->startDeltaPart("coreUpdate");
+	_timer->startClock("coreUpdate");
 	if(_inputHandler->isKeyDown(InputType::WINDOW_X_BUTTON))
 	{
 		stop();
 		return;
 	}
 	_engineController->update();
-	_timer->stopDeltaPart();
+	_timer->stopClock("coreUpdate");
+	_updateDeltaTimes.at("coreUpdate") = _timer->getClockDeltaTime("coreUpdate");
 
-	_timer->startDeltaPart("physicsUpdate");
+	_timer->startClock("physicsUpdate");
 	_camera->update(lastCursorPosition);
 	_cameraCollisionResponder->update();
 	_raycastCalculator->update(_renderWindow->getCursorPosition());
 	_raycastIntersector->update();
 	_camera->updateMatrices();
-	_timer->stopDeltaPart();
+	_timer->stopClock("physicsUpdate");
+	_updateDeltaTimes.at("physicsUpdate") = _timer->getClockDeltaTime("physicsUpdate");
 
-	_timer->startDeltaPart("3dEntityUpdate");
+	_timer->startClock("3dEntityUpdate");
 	_skyEntityManager->update();
 	_waterEntityManager->update();
 	_modelEntityManager->update();
@@ -284,35 +321,41 @@ void EngineCore::update()
 	_pointlightEntityManager->update();
 	_spotlightEntityManager->update();
 	_reflectionEntityManager->update();
-	_timer->stopDeltaPart();
+	_timer->stopClock("3dEntityUpdate");
+	_updateDeltaTimes.at("3dEntityUpdate") = _timer->getClockDeltaTime("3dEntityUpdate");
 
-	_timer->startDeltaPart("2dEntityUpdate");
+	_timer->startClock("2dEntityUpdate");
 	_quad2dEntityManager->update();
 	_text2dEntityManager->update();
-	_timer->stopDeltaPart();
+	_timer->stopClock("2dEntityUpdate");
+	_updateDeltaTimes.at("2dEntityUpdate") = _timer->getClockDeltaTime("2dEntityUpdate");
 
-	_timer->startDeltaPart("renderUpdate");
+	_timer->startClock("renderUpdate");
 	_masterRenderer->update();
-	_timer->stopDeltaPart();
+	_timer->stopClock("renderUpdate");
+	_updateDeltaTimes.at("renderUpdate") = _timer->getClockDeltaTime("renderUpdate");
 
-	_timer->startDeltaPart("animationUpdate");
+	_timer->startClock("animationUpdate");
 	_animation3dPlayer->update();
 	_animation2dPlayer->update();
-	_timer->stopDeltaPart();
+	_timer->stopClock("animationUpdate");
+	_updateDeltaTimes.at("animationUpdate") = _timer->getClockDeltaTime("animationUpdate");
 
-	_timer->startDeltaPart("soundUpdate");
+	_timer->startClock("soundUpdate");
 	_sound3dManager->update();
 	_sound2dManager->update();
 	_sound3dPlayer->update();
 	_sound2dPlayer->update();
-	_timer->stopDeltaPart();
+	_timer->stopClock("soundUpdate");
+	_updateDeltaTimes.at("soundUpdate") = _timer->getClockDeltaTime("soundUpdate");
 
-	_timer->startDeltaPart("networkUpdate");
+	_timer->startClock("networkUpdate");
 	_networkingServer->update();
 	_networkingClient->update();
-	_timer->stopDeltaPart();
+	_timer->stopClock("networkUpdate");
+	_updateDeltaTimes.at("networkUpdate") = _timer->getClockDeltaTime("networkUpdate");
 
-	_timer->startDeltaPart("miscUpdate");
+	_timer->startClock("miscUpdate");
 	if(!Config::getInst().isApplicationExported())
 	{
 		static float opacity = 0.0f;
@@ -329,7 +372,8 @@ void EngineCore::update()
 		}
 	}
 	lastCursorPosition = _renderWindow->getCursorPosition();
-	_timer->stopDeltaPart();
+	_timer->stopClock("miscUpdate");
+	_updateDeltaTimes.at("miscUpdate") = _timer->getClockDeltaTime("miscUpdate");
 }
 
 void EngineCore::stop()

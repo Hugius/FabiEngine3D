@@ -22,26 +22,26 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& view
 
 void MasterRenderer::renderApplication()
 {
-	_timer->startDeltaPart("depthPreRender");
+	_timer->startClock("depthPreRender");
 	_captureWorldDepth();
-	_timer->stopDeltaPart();
-	_timer->startDeltaPart("shadowPreRender");
+	_timer->stopClock("depthPreRender");
+	_timer->startClock("shadowPreRender");
 	_captureShadows();
-	_timer->stopDeltaPart();
-	_timer->startDeltaPart("reflectionPreRender");
+	_timer->stopClock("shadowPreRender");
+	_timer->startClock("reflectionPreRender");
 	_captureCubeReflections();
 	_capturePlanarReflections();
-	_timer->stopDeltaPart();
-	_timer->startDeltaPart("refractionPreRender");
+	_timer->stopClock("reflectionPreRender");
+	_timer->startClock("refractionPreRender");
 	// insert capture cube/planar refractions here
-	_timer->stopDeltaPart();
-	_timer->startDeltaPart("waterPreRender");
+	_timer->stopClock("refractionPreRender");
+	_timer->startClock("waterPreRender");
 	_captureWaterReflections();
 	_captureWaterRefractions();
 	_captureWaterEdges();
-	_timer->stopDeltaPart();
+	_timer->stopClock("waterPreRender");
 
-	_timer->startDeltaPart("3dEntityRender");
+	_timer->startClock("3dEntityRender");
 	_worldColorCaptor->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	_renderStorage->setTriangleCountingEnabled(true);
@@ -60,9 +60,9 @@ void MasterRenderer::renderApplication()
 	_renderStorage->setPrimarySceneMap(_worldColorCaptor->getTexture(0));
 	_renderStorage->setSecondarySceneMap(_worldColorCaptor->getTexture(1));
 	_renderStorage->setFinalSceneMap(_renderStorage->getPrimarySceneMap());
-	_timer->stopDeltaPart();
+	_timer->stopClock("3dEntityRender");
 
-	_timer->startDeltaPart("postProcessing");
+	_timer->startClock("postProcessing");
 	_captureAntiAliasing();
 	_captureBloom();
 	_captureDof();
@@ -72,13 +72,13 @@ void MasterRenderer::renderApplication()
 	glViewport(Config::getInst().getDisplayPosition().x, Config::getInst().getDisplayPosition().y, Config::getInst().getDisplaySize().x, Config::getInst().getDisplaySize().y);
 	_renderFinalSceneMap();
 	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
-	_timer->stopDeltaPart();
+	_timer->stopClock("postProcessing");
 
-	_timer->startDeltaPart("2dEntityRender");
+	_timer->startClock("2dEntityRender");
 	_renderStorage->setTriangleCountingEnabled(true);
 	_renderGUI();
 	_renderStorage->setTriangleCountingEnabled(false);
-	_timer->stopDeltaPart();
+	_timer->stopClock("2dEntityRender");
 }
 
 void MasterRenderer::_renderSkyEntity()

@@ -1,10 +1,5 @@
 #include "engine_core.hpp"
 
-const float EngineCore::getDeltaTime() const
-{
-	return _deltaTime;
-}
-
 const shared_ptr<LibraryLoader> EngineCore::getLibraryLoader() const
 {
 	return _libraryLoader;
@@ -198,4 +193,19 @@ const shared_ptr<Timer> EngineCore::getTimer() const
 void EngineCore::inject(shared_ptr<EngineController> engineController)
 {
 	_engineController = engineController;
+}
+
+const float EngineCore::getTotalDeltaTime() const
+{
+	return _totalDeltaTime;
+}
+
+const map<string, float>& EngineCore::getUpdateDeltaTimes() const
+{
+	return _updateDeltaTimes;
+}
+
+const map<string, float>& EngineCore::getRenderDeltaTimes() const
+{
+	return _renderDeltaTimes;
 }

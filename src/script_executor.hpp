@@ -22,6 +22,7 @@ private:
 	void _validateExecution();
 
 	vector<string> _pausedSoundIds;
+	vector<string> _pausedClockIds;
 
 	bool _isStarted = false;
 	bool _isRunning = false;
@@ -29,7 +30,6 @@ private:
 	bool _wasCursorVisible = false;
 	bool _wasFirstPersonEnabled = false;
 	bool _wasThirdPersonEnabled = false;
-	bool _wasTimerStarted = false;
 	bool _mustSkipUpdate = false;
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;

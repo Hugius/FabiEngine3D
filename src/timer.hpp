@@ -1,49 +1,43 @@
 #pragma once
 
-#define NOMINMAX
+#include "clock.hpp"
 
-#include <windows.h>
 #include <map>
 #include <string>
+#include <memory>
+#include <vector>
 
 using std::string;
 using std::map;
+using std::unique_ptr;
+using std::vector;
 
 class Timer final
 {
 public:
-	void start();
-	void startDeltaPart(const string& id);
-	void stopDeltaPart();
-	void sleep(unsigned int milliseconds);
+	void createClock(const string& id);
+	void startClock(const string& id);
+	void pauseClock(const string& id);
+	void resumeClock(const string& id);
+	void stopClock(const string& id);
+	void deleteClock(const string& id);
 	void increasePassedUpdateCount();
-	void clearDeltaParts();
 
-	const float stop();
-	const float getDeltaPart(const string& id);
-	const float getDeltaPartSum() const;
+	const vector<string> getClockIds() const;
+
+	const float getClockDeltaTime(const string& id) const;
 
 	const unsigned int getUpdateCountPerSecond() const;
 	const unsigned int getPassedUpdateCount() const;
 
-	const bool isStarted() const;
-	const bool isDeltaPartStarted(const string& id) const;
+	const bool isClockExisting(const string& id) const;
+	const bool isClockStarted(const string& id) const;
+	const bool isClockPaused(const string& id) const;
 
 private:
-	string _currentId = "";
-
-	map<string, float> _deltaParts;
+	map<string, unique_ptr<Clock>> _clocks;
 
 	unsigned int _passedUpdateCount = -1;
-
-	bool _isStarted = false;
-
-	LARGE_INTEGER _frequency = {};
-	LARGE_INTEGER _time1 = {};
-	LARGE_INTEGER _time2 = {};
-	LARGE_INTEGER _specificFrequency = {};
-	LARGE_INTEGER _specificTime1 = {};
-	LARGE_INTEGER _specificTime2 = {};
 
 	static inline const unsigned int UPDATES_PER_SECOND = 144;
 };

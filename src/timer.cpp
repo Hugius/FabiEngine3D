@@ -1,85 +1,156 @@
 #include "timer.hpp"
 #include "logger.hpp"
 
-void Timer::start()
+#include <chrono>
+
+using std::chrono::high_resolution_clock;
+using std::chrono::nanoseconds;
+using std::chrono::duration_cast;
+using std::make_pair;
+using std::make_unique;
+
+void Timer::createClock(const string& id)
 {
-	if(_isStarted)
+	if(isClockExisting(id))
 	{
 		abort();
 	}
 
-	QueryPerformanceFrequency(&_frequency);
-	QueryPerformanceCounter(&_time1);
-	_isStarted = true;
+	_clocks.insert(make_pair(id, make_unique<Clock>()));
 }
 
-const float Timer::stop()
+void Timer::deleteClock(const string& id)
 {
-	if(!_isStarted)
+	if(!isClockExisting(id))
 	{
 		abort();
 	}
 
-	QueryPerformanceCounter(&_time2);
-	_isStarted = false;
-	return static_cast<float>((_time2.QuadPart - _time1.QuadPart) * 1000.0f / _frequency.QuadPart);
+	_clocks.erase(id);
 }
 
-void Timer::startDeltaPart(const string& id)
+void Timer::startClock(const string& id)
 {
-	if(!_currentId.empty())
+	if(!isClockExisting(id))
+	{
+		abort();
+	}
+	if(isClockStarted(id))
 	{
 		abort();
 	}
 
-	QueryPerformanceFrequency(&_specificFrequency);
-	QueryPerformanceCounter(&_specificTime1);
-	_currentId = id;
+	const auto epoch = duration_cast<nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
+
+	_clocks.at(id)->startEpoch = epoch;
+	_clocks.at(id)->isStarted = true;
 }
 
-void Timer::stopDeltaPart()
+void Timer::pauseClock(const string& id)
 {
-	if(_currentId.empty())
+	if(!isClockExisting(id))
+	{
+		abort();
+	}
+	if(!isClockStarted(id))
+	{
+		abort();
+	}
+	if(isClockPaused(id))
 	{
 		abort();
 	}
 
-	QueryPerformanceCounter(&_specificTime2);
-	_deltaParts[_currentId] = static_cast<float>((_specificTime2.QuadPart - _specificTime1.QuadPart) * 1000.0f / _specificFrequency.QuadPart);
-	_currentId = "";
+	const auto epoch = duration_cast<nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
+
+	_clocks.at(id)->pauseEpoch = epoch;
+	_clocks.at(id)->isPaused = true;
 }
 
-const float Timer::getDeltaPart(const string& id)
+void Timer::resumeClock(const string& id)
 {
-	return _deltaParts[id];
-}
-
-const float Timer::getDeltaPartSum() const
-{
-	float sum = 0.0f;
-
-	for(const auto& part : _deltaParts)
+	if(!isClockExisting(id))
 	{
-		sum += part.second;
+		abort();
+	}
+	if(!isClockStarted(id))
+	{
+		abort();
+	}
+	if(!isClockPaused(id))
+	{
+		abort();
 	}
 
-	return sum;
+	const auto epoch = duration_cast<nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
+
+	const auto difference = (epoch - _clocks.at(id)->pauseEpoch);
+
+	_clocks.at(id)->startEpoch += difference;
+	_clocks.at(id)->isPaused = false;
 }
 
-void Timer::sleep(unsigned int milliseconds)
+void Timer::stopClock(const string& id)
 {
-	__int64 time1 = 0;
-	__int64 time2 = 0;
-	__int64 frequency = 0;
-
-	QueryPerformanceCounter((LARGE_INTEGER*)&time1);
-	QueryPerformanceFrequency((LARGE_INTEGER*)&frequency);
-
-	do
+	if(!isClockExisting(id))
 	{
-		QueryPerformanceCounter((LARGE_INTEGER*)&time2);
+		abort();
 	}
-	while((time2 - time1) < (milliseconds * 1000));
+	if(!isClockStarted(id))
+	{
+		abort();
+	}
+
+	const auto epoch = duration_cast<nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
+
+	_clocks.at(id)->stopEpoch = epoch;
+	_clocks.at(id)->isStarted = false;
+}
+
+const float Timer::getClockDeltaTime(const string& id) const
+{
+	if(!isClockExisting(id))
+	{
+		abort();
+	}
+	if(isClockStarted(id))
+	{
+		abort();
+	}
+
+	const auto difference = (_clocks.at(id)->stopEpoch - _clocks.at(id)->startEpoch);
+	const auto deltaTime = static_cast<float>(difference / 1000000.0f);
+
+	return deltaTime;
+}
+
+const bool Timer::isClockExisting(const string& id) const
+{
+	return (_clocks.find(id) != _clocks.end());
+}
+
+const bool Timer::isClockStarted(const string& id) const
+{
+	if(!isClockExisting(id))
+	{
+		abort();
+	}
+
+	return _clocks.at(id)->isStarted;
+}
+
+const bool Timer::isClockPaused(const string& id) const
+{
+	if(!isClockExisting(id))
+	{
+		abort();
+	}
+	if(!isClockStarted(id))
+	{
+		abort();
+	}
+
+	return _clocks.at(id)->isPaused;
 }
 
 void Timer::increasePassedUpdateCount()
@@ -87,9 +158,16 @@ void Timer::increasePassedUpdateCount()
 	_passedUpdateCount++;
 }
 
-void Timer::clearDeltaParts()
+const vector<string> Timer::getClockIds() const
 {
-	_deltaParts.clear();
+	vector<string> result;
+
+	for(const auto& [key, clock] : _clocks)
+	{
+		result.push_back(key);
+	}
+
+	return result;
 }
 
 const unsigned int Timer::getUpdateCountPerSecond() const
@@ -100,14 +178,4 @@ const unsigned int Timer::getUpdateCountPerSecond() const
 const unsigned int Timer::getPassedUpdateCount() const
 {
 	return _passedUpdateCount;
-}
-
-const bool Timer::isStarted() const
-{
-	return _isStarted;
-}
-
-const bool Timer::isDeltaPartStarted(const string& id) const
-{
-	return (!_currentId.empty()) && (id == _currentId);
 }

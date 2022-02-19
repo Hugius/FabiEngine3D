@@ -86,11 +86,74 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
-	else if(functionName == "fe3d:timer_is_started")
+	else if(functionName == "fe3d:clock_is_existing")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = _fe3d->misc_isMillisecondTimerStarted();
+			const auto result = _fe3d->clock_isExisting(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:clock_is_started")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_fe3d->clock_isExisting(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not existing");
+				return true;
+			}
+
+			const auto result = _fe3d->clock_isStarted(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:clock_is_ticking")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_fe3d->clock_isExisting(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not existing");
+				return true;
+			}
+			if(!_fe3d->clock_isStarted(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not started");
+				return true;
+			}
+
+			const auto result = (_fe3d->clock_isStarted(args[0]->getString()) && !_fe3d->clock_isPaused(args[0]->getString()));
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:clock_is_paused")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_fe3d->clock_isExisting(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not existing");
+				return true;
+			}
+			if(!_fe3d->clock_isStarted(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not started");
+				return true;
+			}
+
+			const auto result = _fe3d->clock_isPaused(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}

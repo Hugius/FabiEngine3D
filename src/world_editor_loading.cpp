@@ -157,19 +157,6 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 
 			iss >> modelId;
 
-			bool makeInvisible = false;
-			if(modelId[0] == '@')
-			{
-				if(isLoaded())
-				{
-					continue;
-				}
-				else
-				{
-					makeInvisible = true;
-				}
-			}
-
 			iss
 				>> templateId
 				>> position.x
@@ -202,14 +189,9 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 			_fe3d->model_setBaseSize(modelId, size);
 			_fe3d->model_setFrozen(modelId, isFrozen);
 
-			if(!animationId.empty())
+			if(_fe3d->animation3d_isExisting(animationId))
 			{
 				_fe3d->model_startAnimation(modelId, animationId, -1);
-			}
-
-			if(makeInvisible)
-			{
-				_fe3d->model_setVisible(modelId, false);
 			}
 		}
 		else if(lineType == "QUAD3D")
@@ -251,7 +233,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 			_fe3d->quad3d_setRotation(quadId, rotation);
 			_fe3d->quad3d_setSize(quadId, size);
 
-			if(!animationId.empty())
+			if(_fe3d->animation2d_isExisting(animationId))
 			{
 				_fe3d->quad3d_startAnimation(quadId, animationId, -1);
 			}

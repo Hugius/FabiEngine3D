@@ -42,7 +42,7 @@ void Quad3dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 
 void Quad3dEntityManager::inject(shared_ptr<Camera> camera)
 {
-	camera = camera;
+	_camera = camera;
 }
 
 shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& id)

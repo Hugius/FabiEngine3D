@@ -50,8 +50,8 @@ public:
 	void start();
 	void stop();
 
-	const map<string, float>& getUpdateDeltaTimes() const;
-	const map<string, float>& getRenderDeltaTimes() const;
+	const unordered_map<string, float>& getUpdateDeltaTimes() const;
+	const unordered_map<string, float>& getRenderDeltaTimes() const;
 
 	const float getTotalDeltaTime() const;
 
@@ -96,9 +96,10 @@ public:
 
 private:
 	void _update();
+	void _render();
 
-	map<string, float> _updateDeltaTimes;
-	map<string, float> _renderDeltaTimes;
+	unordered_map<string, float> _updateDeltaTimes;
+	unordered_map<string, float> _renderDeltaTimes;
 
 	float _totalDeltaTime = 0.0f;
 

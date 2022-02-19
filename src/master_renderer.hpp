@@ -60,7 +60,8 @@ public:
 
 	void update();
 	void renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport);
-	void renderApplication();
+	void render3dEntities();
+	void render2dEntities();
 	void reloadBloomBlurQuality();
 	void reloadDofBlurQuality();
 	void reloadMotionBlurBlurQuality();
@@ -71,6 +72,19 @@ public:
 	void reloadShadowQuality();
 	void setBackgroundColor(const fvec3& color);
 
+	void captureCubeReflections();
+	void capturePlanarReflections();
+	void captureWaterReflections();
+	void captureWaterRefractions();
+	void captureWaterEdges();
+	void captureWorldDepth();
+	void captureShadows();
+	void captureAntiAliasing();
+	void captureBloom();
+	void captureDof();
+	void captureLensFlare();
+	void captureMotionBlur();
+
 	const string getCpuName() const;
 	const string getGpuName() const;
 	const string getOpenglVersion() const;
@@ -80,19 +94,6 @@ private:
 	void _updateShadows();
 	void _updateMotionBlur();
 	void _updateLensFlare();
-
-	void _captureCubeReflections();
-	void _capturePlanarReflections();
-	void _captureWaterReflections();
-	void _captureWaterRefractions();
-	void _captureWaterEdges();
-	void _captureWorldDepth();
-	void _captureShadows();
-	void _captureAntiAliasing();
-	void _captureBloom();
-	void _captureDof();
-	void _captureLensFlare();
-	void _captureMotionBlur();
 
 	void _renderSkyEntity();
 	void _renderTerrainEntity();

@@ -1012,8 +1012,8 @@ public:
 	void misc_clearImagesCache();
 	void misc_clearAudiosCache();
 
-	const map<string, float>& misc_getUpdateDeltaTimes() const;
-	const map<string, float>& misc_getRenderDeltaTimes() const;
+	const unordered_map<string, float>& misc_getUpdateDeltaTimes() const;
+	const unordered_map<string, float>& misc_getRenderDeltaTimes() const;
 	const string misc_getCursorEntityId() const;
 	const string misc_getCpuName() const;
 	const string misc_getGpuName() const;

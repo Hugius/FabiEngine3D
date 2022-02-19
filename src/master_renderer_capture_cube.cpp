@@ -1,6 +1,6 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::_captureCubeReflections()
+void MasterRenderer::captureCubeReflections()
 {
 	if(_reflectionEntityManager->getEntities().empty())
 	{
@@ -122,8 +122,8 @@ void MasterRenderer::_captureCubeReflections()
 
 				_updateShadows();
 
-				_captureShadows();
-				_captureWaterEdges();
+				captureShadows();
+				captureWaterEdges();
 
 				_cubeReflectionCaptor->bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

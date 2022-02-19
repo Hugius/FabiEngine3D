@@ -200,12 +200,12 @@ const float EngineCore::getTotalDeltaTime() const
 	return _totalDeltaTime;
 }
 
-const map<string, float>& EngineCore::getUpdateDeltaTimes() const
+const unordered_map<string, float>& EngineCore::getUpdateDeltaTimes() const
 {
 	return _updateDeltaTimes;
 }
 
-const map<string, float>& EngineCore::getRenderDeltaTimes() const
+const unordered_map<string, float>& EngineCore::getRenderDeltaTimes() const
 {
 	return _renderDeltaTimes;
 }

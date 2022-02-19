@@ -1,6 +1,6 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::_captureWaterReflections()
+void MasterRenderer::captureWaterReflections()
 {
 	const auto waterEntity = _waterEntityManager->getSelectedEntity();
 
@@ -115,7 +115,7 @@ void MasterRenderer::_captureWaterReflections()
 	_waterReflectionCaptor->unbind();
 }
 
-void MasterRenderer::_captureWaterRefractions()
+void MasterRenderer::captureWaterRefractions()
 {
 	const auto waterEntity = _waterEntityManager->getSelectedEntity();
 
@@ -161,7 +161,7 @@ void MasterRenderer::_captureWaterRefractions()
 	_waterRefractionCaptor->unbind();
 }
 
-void MasterRenderer::_captureWaterEdges()
+void MasterRenderer::captureWaterEdges()
 {
 	const auto waterEntity = _waterEntityManager->getSelectedEntity();
 

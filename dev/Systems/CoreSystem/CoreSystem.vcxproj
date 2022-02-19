@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\engine_core_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\engine_core_misc.cpp" />
+    <ClCompile Include="..\..\..\src\engine_core_execution.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_clock.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_animation2d.cpp" />

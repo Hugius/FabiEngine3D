@@ -1,6 +1,6 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::_capturePlanarReflections()
+void MasterRenderer::capturePlanarReflections()
 {
 	vector<shared_ptr<ModelEntity>> reflectiveModelEntities;
 

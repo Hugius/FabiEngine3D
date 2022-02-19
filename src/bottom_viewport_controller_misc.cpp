@@ -43,14 +43,14 @@ void BottomViewportController::initialize()
 	int uCounter = 1;
 	for(const auto& [key, deltaTime] : _fe3d->misc_getUpdateDeltaTimes())
 	{
-		statisticsScreen->createTextField(key, fvec2(-0.075f, 1.0f - (static_cast<float>(uCounter) * 0.15f)), fvec2(0.0f, 0.15f), "", fvec3(1.0f), false);
+		statisticsScreen->createTextField(key, fvec2(0.0f, 1.0f - (static_cast<float>(uCounter) * 0.15f)), fvec2(0.0f, 0.15f), "", fvec3(1.0f), false);
 		uCounter++;
 	}
 
 	int rCounter = 1;
 	for(const auto& [key, deltaTime] : _fe3d->misc_getRenderDeltaTimes())
 	{
-		statisticsScreen->createTextField(key, fvec2(0.475f, 1.0f - (static_cast<float>(rCounter) * 0.15f)), fvec2(0.0f, 0.15f), "", fvec3(1.0f), false);
+		statisticsScreen->createTextField(key, fvec2(0.4f, 1.0f - (static_cast<float>(rCounter) * 0.15f)), fvec2(0.0f, 0.15f), "", fvec3(1.0f), false);
 		rCounter++;
 	}
 }

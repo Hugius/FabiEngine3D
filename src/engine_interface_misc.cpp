@@ -212,12 +212,12 @@ const bool EngineInterface::misc_isCursorInsideWindow() const
 	return false;
 }
 
-const map<string, float>& EngineInterface::misc_getUpdateDeltaTimes() const
+const unordered_map<string, float>& EngineInterface::misc_getUpdateDeltaTimes() const
 {
 	return _core->getUpdateDeltaTimes();
 }
 
-const map<string, float>& EngineInterface::misc_getRenderDeltaTimes() const
+const unordered_map<string, float>& EngineInterface::misc_getRenderDeltaTimes() const
 {
 	return _core->getRenderDeltaTimes();
 }

@@ -1,7 +1,7 @@
 #include "master_renderer.hpp"
 #include "render_storage.hpp"
 
-void MasterRenderer::_captureWorldDepth()
+void MasterRenderer::captureWorldDepth()
 {
 	if(!_renderStorage->isDofEnabled() && !_renderStorage->isLensFlareEnabled())
 	{
@@ -121,7 +121,7 @@ void MasterRenderer::_captureWorldDepth()
 	_renderStorage->setDepthMap(_worldDepthCaptor->getTexture(0));
 }
 
-void MasterRenderer::_captureDof()
+void MasterRenderer::captureDof()
 {
 	if(_renderStorage->isDofEnabled())
 	{
@@ -143,7 +143,7 @@ void MasterRenderer::_captureDof()
 	}
 }
 
-void MasterRenderer::_captureLensFlare()
+void MasterRenderer::captureLensFlare()
 {
 	if(_renderStorage->isLensFlareEnabled())
 	{
@@ -157,7 +157,7 @@ void MasterRenderer::_captureLensFlare()
 	}
 }
 
-void MasterRenderer::_captureMotionBlur()
+void MasterRenderer::captureMotionBlur()
 {
 	if(_renderStorage->isMotionBlurEnabled())
 	{
@@ -208,7 +208,7 @@ void MasterRenderer::_captureMotionBlur()
 	}
 }
 
-void MasterRenderer::_captureAntiAliasing()
+void MasterRenderer::captureAntiAliasing()
 {
 	if(_renderStorage->isAntiAliasingEnabled())
 	{
@@ -222,7 +222,7 @@ void MasterRenderer::_captureAntiAliasing()
 	}
 }
 
-void MasterRenderer::_captureBloom()
+void MasterRenderer::captureBloom()
 {
 	if(_renderStorage->isBloomEnabled())
 	{
@@ -257,7 +257,7 @@ void MasterRenderer::_captureBloom()
 	}
 }
 
-void MasterRenderer::_captureShadows()
+void MasterRenderer::captureShadows()
 {
 	if(_renderStorage->isShadowsEnabled())
 	{

@@ -92,6 +92,12 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_fe3d->clock_isIdReserved(args[0]->getString()))
+			{
+				_throwRuntimeError("clock ID is reserved");
+				return true;
+			}
+
 			const auto result = _fe3d->clock_isExisting(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
@@ -103,6 +109,11 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_fe3d->clock_isIdReserved(args[0]->getString()))
+			{
+				_throwRuntimeError("clock ID is reserved");
+				return true;
+			}
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
@@ -120,6 +131,11 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_fe3d->clock_isIdReserved(args[0]->getString()))
+			{
+				_throwRuntimeError("clock ID is reserved");
+				return true;
+			}
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
@@ -142,6 +158,11 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(_fe3d->clock_isIdReserved(args[0]->getString()))
+			{
+				_throwRuntimeError("clock ID is reserved");
+				return true;
+			}
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
@@ -156,6 +177,33 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 			const auto result = _fe3d->clock_isPaused(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:clock_get_delta")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_fe3d->clock_isIdReserved(args[0]->getString()))
+			{
+				_throwRuntimeError("clock ID is reserved");
+				return true;
+			}
+			if(!_fe3d->clock_isExisting(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is not existing");
+				return true;
+			}
+			if(_fe3d->clock_isStarted(args[0]->getString()))
+			{
+				_throwRuntimeError("clock is still started");
+				return true;
+			}
+
+			const auto result = _fe3d->clock_getDeltaTime(args[0]->getString());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:vsync_is_enabled")

@@ -992,6 +992,7 @@ public:
 	const bool clock_isExisting(const string& id) const;
 	const bool clock_isStarted(const string& id) const;
 	const bool clock_isPaused(const string& id) const;
+	const bool clock_isIdReserved(const string& id) const;
 
 	void misc_setVsyncEnabled(bool value);
 	void misc_setCursorVisible(bool value);

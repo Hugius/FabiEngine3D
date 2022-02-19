@@ -129,7 +129,6 @@ void Text3dEntity::setContent(const string& value)
 			characterEntity->setVisible(_isVisible);
 			characterEntity->setFacingCameraHorizontally(_isFacingCameraHorizontally);
 			characterEntity->setFacingCameraVertically(_isFacingCameraVertically);
-			characterEntity->setDepthMapIncluded(_isDepthMapIncluded);
 			characterEntity->setShadowed(_isShadowed);
 			characterEntity->setReflected(_isReflected);
 			characterEntity->setBright(_isBright);
@@ -212,16 +211,6 @@ void Text3dEntity::setWireframeColor(const fvec3& value)
 	for(const auto& character : _characterEntities)
 	{
 		character->setWireframeColor(_wireframeColor);
-	}
-}
-
-void Text3dEntity::setDepthMapIncluded(bool value)
-{
-	_isDepthMapIncluded = value;
-
-	for(const auto& character : _characterEntities)
-	{
-		character->setDepthMapIncluded(_isDepthMapIncluded);
 	}
 }
 
@@ -501,11 +490,6 @@ const bool Text3dEntity::isFacingCameraHorizontally() const
 const bool Text3dEntity::isFacingCameraVertically() const
 {
 	return _isFacingCameraVertically;
-}
-
-const bool Text3dEntity::isDepthMapIncluded() const
-{
-	return _isDepthMapIncluded;
 }
 
 const bool Text3dEntity::isShadowed() const

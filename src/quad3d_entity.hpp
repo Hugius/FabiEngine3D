@@ -18,7 +18,6 @@ public:
 	void setMesh(shared_ptr<VertexBuffer> value);
 	void setFacingCameraHorizontally(bool value);
 	void setFacingCameraVertically(bool value);
-	void setDepthMapIncluded(bool value);
 	void setShadowed(bool value);
 	void setCentered(bool value);
 	void setReflected(bool value);
@@ -74,7 +73,6 @@ public:
 
 	const bool isFacingCameraHorizontally() const;
 	const bool isFacingCameraVertically() const;
-	const bool isDepthMapIncluded() const;
 	const bool isShadowed() const;
 	const bool isReflected() const;
 	const bool isBright() const;
@@ -117,7 +115,6 @@ private:
 
 	bool _isFacingCameraHorizontally = false;
 	bool _isFacingCameraVertically = false;
-	bool _isDepthMapIncluded = true;
 	bool _isShadowed = true;
 	bool _isReflected = true;
 	bool _isBright = false;

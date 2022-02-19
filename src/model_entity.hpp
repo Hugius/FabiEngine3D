@@ -21,7 +21,6 @@ public:
 	void setShadowed(bool value);
 	void setReflected(bool value);
 	void setFrozen(bool value);
-	void setDepthMapIncluded(bool value);
 	void setLevelOfDetailed(bool value);
 	void setLevelOfDetailEntityId(const string& value);
 	void setPreviousReflectionEntityId(const string& value);
@@ -118,7 +117,6 @@ public:
 	const float getMinTextureAlpha(const string& partId) const;
 
 	const bool isFrozen() const;
-	const bool isDepthMapIncluded() const;
 	const bool isLevelOfDetailed() const;
 	const bool isShadowed() const;
 	const bool isReflected() const;
@@ -166,7 +164,6 @@ private:
 	bool _isFrozen = false;
 	bool _isShadowed = true;
 	bool _isReflected = true;
-	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed = false;
 
 	map<string, unique_ptr<ModelEntityPart>> _parts;

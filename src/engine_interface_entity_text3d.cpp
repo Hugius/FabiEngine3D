@@ -126,11 +126,6 @@ void EngineInterface::text3d_setFacingCameraVertically(const string& id, bool va
 	_core->getText3dEntityManager()->getEntity(id)->setFacingCameraVertically(value);
 }
 
-void EngineInterface::text3d_setDepthMapIncluded(const string& id, bool value)
-{
-	_core->getText3dEntityManager()->getEntity(id)->setDepthMapIncluded(value);
-}
-
 void EngineInterface::text3d_setShadowed(const string& id, bool value)
 {
 	_core->getText3dEntityManager()->getEntity(id)->setShadowed(value);
@@ -292,11 +287,6 @@ const bool EngineInterface::text3d_isFacingCameraHorizontally(const string& id) 
 const bool EngineInterface::text3d_isFacingCameraVertically(const string& id) const
 {
 	return _core->getText3dEntityManager()->getEntity(id)->isFacingCameraVertically();
-}
-
-const bool EngineInterface::text3d_isDepthMapIncluded(const string& id) const
-{
-	return _core->getText3dEntityManager()->getEntity(id)->isDepthMapIncluded();
 }
 
 const bool EngineInterface::text3d_isShadowed(const string& id) const

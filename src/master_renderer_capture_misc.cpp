@@ -37,43 +37,40 @@ void MasterRenderer::_captureWorldDepth()
 
 		for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
 		{
-			if(modelEntity->isDepthMapIncluded())
+			if(modelEntity->isLevelOfDetailed())
 			{
-				if(modelEntity->isLevelOfDetailed())
+				auto foundPair = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId());
+
+				if(foundPair != _modelEntityManager->getEntities().end())
 				{
-					auto foundPair = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId());
+					const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId())->second;
+					const auto originalPosition = levelOfDetailEntity->getBasePosition();
+					const auto originalRotation = levelOfDetailEntity->getBaseRotation();
+					const auto originalSize = levelOfDetailEntity->getBaseSize();
+					const auto originalVisibility = levelOfDetailEntity->isVisible();
 
-					if(foundPair != _modelEntityManager->getEntities().end())
-					{
-						const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(modelEntity->getLevelOfDetailEntityId())->second;
-						const auto originalPosition = levelOfDetailEntity->getBasePosition();
-						const auto originalRotation = levelOfDetailEntity->getBaseRotation();
-						const auto originalSize = levelOfDetailEntity->getBaseSize();
-						const auto originalVisibility = levelOfDetailEntity->isVisible();
+					levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
+					levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
+					levelOfDetailEntity->setBaseSize(modelEntity->getBaseSize());
+					levelOfDetailEntity->setVisible(modelEntity->isVisible());
+					levelOfDetailEntity->updateTransformation();
 
-						levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
-						levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
-						levelOfDetailEntity->setBaseSize(modelEntity->getBaseSize());
-						levelOfDetailEntity->setVisible(modelEntity->isVisible());
-						levelOfDetailEntity->updateTransformation();
+					_modelEntityDepthRenderer->render(levelOfDetailEntity);
 
-						_modelEntityDepthRenderer->render(levelOfDetailEntity);
-
-						levelOfDetailEntity->setBasePosition(originalPosition);
-						levelOfDetailEntity->setBaseRotation(originalRotation);
-						levelOfDetailEntity->setBaseSize(originalSize);
-						levelOfDetailEntity->setVisible(originalVisibility);
-						levelOfDetailEntity->updateTransformation();
-					}
-					else
-					{
-						abort();
-					}
+					levelOfDetailEntity->setBasePosition(originalPosition);
+					levelOfDetailEntity->setBaseRotation(originalRotation);
+					levelOfDetailEntity->setBaseSize(originalSize);
+					levelOfDetailEntity->setVisible(originalVisibility);
+					levelOfDetailEntity->updateTransformation();
 				}
 				else
 				{
-					_modelEntityDepthRenderer->render(modelEntity);
+					abort();
 				}
+			}
+			else
+			{
+				_modelEntityDepthRenderer->render(modelEntity);
 			}
 		}
 
@@ -86,10 +83,7 @@ void MasterRenderer::_captureWorldDepth()
 
 		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
 		{
-			if(entity->isDepthMapIncluded())
-			{
-				_quad3dEntityDepthRenderer->render(entity);
-			}
+			_quad3dEntityDepthRenderer->render(entity);
 		}
 
 		_quad3dEntityDepthRenderer->unbind();

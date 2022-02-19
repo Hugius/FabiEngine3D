@@ -220,7 +220,6 @@ public:
 	void model_setReflective(const string& modelId, const string& partId, bool value);
 	void model_setShadowed(const string& id, bool value);
 	void model_setReflected(const string& id, bool value);
-	void model_setDepthMapIncluded(const string& id, bool value);
 	void model_setFrozen(const string& id, bool value);
 	void model_setWireframed(const string& modelId, const string& partId, bool value);
 	void model_setBasePosition(const string& id, const fvec3& value);
@@ -310,7 +309,6 @@ public:
 	const bool model_isReflected(const string& id) const;
 	const bool model_isFrozen(const string& id) const;
 	const bool model_isWireframed(const string& modelId, const string& partId) const;
-	const bool model_isDepthMapIncluded(const string& id) const;
 	const bool model_hasPart(const string& modelId, const string& partId) const;
 	const bool model_isBright(const string& modelId, const string& partId) const;
 	const bool model_isReflective(const string& modelId, const string& partId) const;
@@ -354,7 +352,6 @@ public:
 	void quad3d_setVisible(const string& id, bool value);
 	void quad3d_setFacingCameraHorizontally(const string& id, bool value);
 	void quad3d_setFacingCameraVertically(const string& id, bool value);
-	void quad3d_setDepthMapIncluded(const string& id, bool value);
 	void quad3d_setShadowed(const string& id, bool value);
 	void quad3d_setReflected(const string& id, bool value);
 	void quad3d_setBright(const string& id, bool value);
@@ -398,7 +395,6 @@ public:
 	const bool quad3d_isVisible(const string& id) const;
 	const bool quad3d_isFacingCameraHorizontally(const string& id) const;
 	const bool quad3d_isFacingCameraVertically(const string& id) const;
-	const bool quad3d_isDepthMapIncluded(const string& id) const;
 	const bool quad3d_isShadowed(const string& id) const;
 	const bool quad3d_isReflected(const string& id) const;
 	const bool quad3d_isBright(const string& id) const;
@@ -434,7 +430,6 @@ public:
 	void text3d_setVisible(const string& id, bool value);
 	void text3d_setFacingCameraHorizontally(const string& id, bool value);
 	void text3d_setFacingCameraVertically(const string& id, bool value);
-	void text3d_setDepthMapIncluded(const string& id, bool value);
 	void text3d_setShadowed(const string& id, bool value);
 	void text3d_setReflected(const string& id, bool value);
 	void text3d_setBright(const string& id, bool value);
@@ -461,7 +456,6 @@ public:
 	const bool text3d_isVisible(const string& id) const;
 	const bool text3d_isFacingCameraHorizontally(const string& id) const;
 	const bool text3d_isFacingCameraVertically(const string& id) const;
-	const bool text3d_isDepthMapIncluded(const string& id) const;
 	const bool text3d_isShadowed(const string& id) const;
 	const bool text3d_isReflected(const string& id) const;
 	const bool text3d_isBright(const string& id) const;

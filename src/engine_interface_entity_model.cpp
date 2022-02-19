@@ -472,11 +472,6 @@ void EngineInterface::model_setShadowed(const string& id, bool value)
 	_core->getModelEntityManager()->getEntity(id)->setShadowed(value);
 }
 
-void EngineInterface::model_setDepthMapIncluded(const string& id, bool value)
-{
-	_core->getModelEntityManager()->getEntity(id)->setDepthMapIncluded(value);
-}
-
 void EngineInterface::model_setColor(const string& modelId, const string& partId, const fvec3& value)
 {
 	_core->getModelEntityManager()->getEntity(modelId)->setColor(partId, value);
@@ -535,11 +530,6 @@ const bool EngineInterface::model_isFrozen(const string& id) const
 const bool EngineInterface::model_isWireframed(const string& modelId, const string& partId) const
 {
 	return _core->getModelEntityManager()->getEntity(modelId)->isWireframed(partId);
-}
-
-const bool EngineInterface::model_isDepthMapIncluded(const string& id) const
-{
-	return _core->getModelEntityManager()->getEntity(id)->isDepthMapIncluded();
 }
 
 const bool EngineInterface::model_hasPart(const string& modelId, const string& partId) const

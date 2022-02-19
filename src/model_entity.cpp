@@ -400,11 +400,6 @@ void ModelEntity::setFrozen(bool value)
 	_isFrozen = value;
 }
 
-void ModelEntity::setDepthMapIncluded(bool value)
-{
-	_isDepthMapIncluded = value;
-}
-
 void ModelEntity::setLevelOfDetailed(bool value)
 {
 	_isLevelOfDetailed = value;
@@ -723,11 +718,6 @@ const bool ModelEntity::isBright(const string& partId) const
 const bool ModelEntity::isFrozen() const
 {
 	return _isFrozen;
-}
-
-const bool ModelEntity::isDepthMapIncluded() const
-{
-	return _isDepthMapIncluded;
 }
 
 const bool ModelEntity::isLevelOfDetailed() const

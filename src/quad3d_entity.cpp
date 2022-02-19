@@ -215,11 +215,6 @@ void Quad3dEntity::setEmissionMapPath(const string& value)
 	_emissionMapPath = value;
 }
 
-void Quad3dEntity::setDepthMapIncluded(bool value)
-{
-	_isDepthMapIncluded = value;
-}
-
 void Quad3dEntity::setReflected(bool value)
 {
 	_isReflected = value;
@@ -393,11 +388,6 @@ const bool Quad3dEntity::isFacingCameraHorizontally() const
 const bool Quad3dEntity::isFacingCameraVertically() const
 {
 	return _isFacingCameraVertically;
-}
-
-const bool Quad3dEntity::isDepthMapIncluded() const
-{
-	return _isDepthMapIncluded;
 }
 
 const bool Quad3dEntity::isShadowed() const

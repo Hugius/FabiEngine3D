@@ -6,27 +6,6 @@ void EngineInterface::quad3d_create(const string& id, bool isCentered)
 	_core->getQuad3dEntityManager()->createEntity(id, isCentered);
 }
 
-void EngineInterface::quad3d_deleteAll()
-{
-	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
-	{
-		_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
-	}
-
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
-	{
-		if(entity->hasParent())
-		{
-			if(entity->getParentType() == AabbParentType::QUAD3D)
-			{
-				_core->getAabbEntityManager()->deleteEntity(key);
-			}
-		}
-	}
-
-	_core->getQuad3dEntityManager()->deleteEntities();
-}
-
 void EngineInterface::quad3d_delete(const string& id)
 {
 	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())

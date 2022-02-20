@@ -100,7 +100,7 @@ void EngineInterface::misc_clearMeshesCache()
 {
 	_core->getMeshLoader()->clearMeshesCache();
 
-	_core->getVertexBufferCache()->clear();
+	_core->getVertexBufferCache()->clearBuffers();
 }
 
 void EngineInterface::misc_clearImagesCache()

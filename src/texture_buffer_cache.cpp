@@ -85,28 +85,14 @@ const shared_ptr<TextureBuffer> TextureBufferCache::get3dBuffer(const array<stri
 	return nullptr;
 }
 
-const vector<shared_ptr<TextureBuffer>> TextureBufferCache::get2dBuffers() const
+const unordered_map<string, shared_ptr<TextureBuffer>>& TextureBufferCache::get2dBuffers() const
 {
-	vector<shared_ptr<TextureBuffer>> result;
-
-	for(const auto& [key, buffer] : _2dBuffers)
-	{
-		result.push_back(buffer);
-	}
-
-	return result;
+	return _2dBuffers;
 }
 
-const vector<shared_ptr<TextureBuffer>> TextureBufferCache::get3dBuffers() const
+const unordered_map<string, shared_ptr<TextureBuffer>>& TextureBufferCache::get3dBuffers() const
 {
-	vector<shared_ptr<TextureBuffer>> result;
-
-	for(const auto& [key, buffer] : _3dBuffers)
-	{
-		result.push_back(buffer);
-	}
-
-	return result;
+	return _3dBuffers;
 }
 
 const vector<string> TextureBufferCache::get2dFilePaths() const

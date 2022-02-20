@@ -6,11 +6,6 @@ void EngineInterface::sky_create(const string& id)
 	_core->getSkyEntityManager()->createEntity(id);
 }
 
-void EngineInterface::sky_deleteAll()
-{
-	_core->getSkyEntityManager()->deleteEntities();
-}
-
 void EngineInterface::sky_setCubeMaps(const string& id, const array<string, 6>& value)
 {
 	auto texture = _core->getTextureBufferCache()->get3dBuffer(value);

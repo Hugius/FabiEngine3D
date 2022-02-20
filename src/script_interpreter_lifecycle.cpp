@@ -219,19 +219,30 @@ void ScriptInterpreter::unload()
 		_worldEditor->clearLoadedWorld();
 	}
 
-	_fe3d->sky_deleteAll();
-	_fe3d->terrain_deleteAll();
-	_fe3d->water_deleteAll();
-	_fe3d->model_deleteAll();
-	_fe3d->quad3d_deleteAll();
-	_fe3d->aabb_deleteAll();
-	_fe3d->sound2d_deleteAll();
-	_fe3d->sound3d_deleteAll();
-	_fe3d->pointlight_deleteAll();
-	_fe3d->spotlight_deleteAll();
-	_fe3d->reflection_deleteAll();
-	_fe3d->animation3d_deleteAll();
-	_fe3d->animation2d_deleteAll();
+	for(const auto& id : _fe3d->sky_getIds())
+	{
+		_fe3d->sky_delete(id);
+	}
+
+	for(const auto& id : _fe3d->terrain_getIds())
+	{
+		_fe3d->terrain_delete(id);
+	}
+
+	for(const auto& id : _fe3d->water_getIds())
+	{
+		_fe3d->water_delete(id);
+	}
+
+	for(const auto& id : _fe3d->model_getIds())
+	{
+		_fe3d->model_delete(id);
+	}
+
+	for(const auto& id : _fe3d->quad3d_getIds())
+	{
+		_fe3d->quad3d_delete(id);
+	}
 
 	for(const auto& id : _fe3d->quad2d_getIds())
 	{
@@ -241,12 +252,57 @@ void ScriptInterpreter::unload()
 		}
 	}
 
+	for(const auto& id : _fe3d->text3d_getIds())
+	{
+		_fe3d->text3d_delete(id);
+	}
+
 	for(const auto& id : _fe3d->text2d_getIds())
 	{
 		if(id[0] != '@')
 		{
 			_fe3d->text2d_delete(id);
 		}
+	}
+
+	for(const auto& id : _fe3d->aabb_getIds())
+	{
+		_fe3d->aabb_delete(id);
+	}
+
+	for(const auto& id : _fe3d->pointlight_getIds())
+	{
+		_fe3d->pointlight_delete(id);
+	}
+
+	for(const auto& id : _fe3d->spotlight_getIds())
+	{
+		_fe3d->spotlight_delete(id);
+	}
+
+	for(const auto& id : _fe3d->reflection_getIds())
+	{
+		_fe3d->reflection_delete(id);
+	}
+
+	for(const auto& id : _fe3d->animation3d_getIds())
+	{
+		_fe3d->animation3d_delete(id);
+	}
+
+	for(const auto& id : _fe3d->animation2d_getIds())
+	{
+		_fe3d->animation2d_delete(id);
+	}
+
+	for(const auto& id : _fe3d->sound3d_getIds())
+	{
+		_fe3d->sound3d_delete(id);
+	}
+
+	for(const auto& id : _fe3d->sound2d_getIds())
+	{
+		_fe3d->sound2d_delete(id);
 	}
 
 	_quad2dEditor->deleteLoadedEntities();

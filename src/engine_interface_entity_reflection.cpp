@@ -6,11 +6,6 @@ void EngineInterface::reflection_create(const string& id)
 	_core->getReflectionEntityManager()->createEntity(id);
 }
 
-void EngineInterface::reflection_deleteAll()
-{
-	_core->getReflectionEntityManager()->deleteEntities();
-}
-
 void EngineInterface::reflection_delete(const string& id)
 {
 	_core->getReflectionEntityManager()->deleteEntity(id);

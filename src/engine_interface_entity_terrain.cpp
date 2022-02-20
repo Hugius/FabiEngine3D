@@ -6,11 +6,6 @@ void EngineInterface::terrain_create(const string& id, const string& heightMapPa
 	_core->getTerrainEntityManager()->createEntity(id, heightMapPath);
 }
 
-void EngineInterface::terrain_deleteAll()
-{
-	_core->getTerrainEntityManager()->deleteEntities();
-}
-
 void EngineInterface::terrain_delete(const string& id)
 {
 	_core->getTerrainEntityManager()->deleteEntity(id);

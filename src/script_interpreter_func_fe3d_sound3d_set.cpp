@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d->sound3d_pauseAll();
+			//_fe3d->sound3d_pauseAll();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -154,7 +154,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d->sound3d_resumeAll();
+			//_fe3d->sound3d_resumeAll();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -183,7 +183,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d->sound3d_stopAll();
+			//_fe3d->sound3d_stopAll();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

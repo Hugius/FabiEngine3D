@@ -6,11 +6,6 @@ void EngineInterface::water_create(const string& id)
 	_core->getWaterEntityManager()->createEntity(id);
 }
 
-void EngineInterface::water_deleteAll()
-{
-	_core->getWaterEntityManager()->deleteEntities();
-}
-
 void EngineInterface::water_delete(const string& id)
 {
 	_core->getWaterEntityManager()->deleteEntity(id);

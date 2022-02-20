@@ -38,7 +38,10 @@ void ScriptEditor::_updateGUI()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_scriptFileNamesToDelete.push_back(_currentScriptFileId);
-			_fe3d->text3d_deleteAll();
+			for(const auto& id : _fe3d->text3d_getIds())
+			{
+				_fe3d->text3d_delete(id);
+			}
 			_script->deleteScriptFile(_currentScriptFileId);
 			_isWritingScript = false;
 			_currentScriptFileId = "";

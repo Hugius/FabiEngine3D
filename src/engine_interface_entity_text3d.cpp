@@ -6,22 +6,6 @@ void EngineInterface::text3d_create(const string& id, const string& fontMapPath,
 	_core->getText3dEntityManager()->createEntity(id, fontMapPath, isCentered);
 }
 
-void EngineInterface::text3d_deleteAll()
-{
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
-	{
-		if(entity->hasParent())
-		{
-			if(entity->getParentType() == AabbParentType::TEXT3D)
-			{
-				_core->getAabbEntityManager()->deleteEntity(key);
-			}
-		}
-	}
-
-	_core->getText3dEntityManager()->deleteEntities();
-}
-
 void EngineInterface::text3d_setContent(const string& id, const string& value)
 {
 	_core->getText3dEntityManager()->getEntity(id)->setContent(value);

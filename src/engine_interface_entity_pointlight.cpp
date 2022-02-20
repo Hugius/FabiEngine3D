@@ -6,11 +6,6 @@ void EngineInterface::pointlight_create(const string& id)
 	_core->getPointlightEntityManager()->createEntity(id);
 }
 
-void EngineInterface::pointlight_deleteAll()
-{
-	_core->getPointlightEntityManager()->deleteEntities();
-}
-
 void EngineInterface::pointlight_delete(const string& id)
 {
 	_core->getPointlightEntityManager()->deleteEntity(id);

@@ -6,32 +6,6 @@ void EngineInterface::model_create(const string& id, const string& meshPath)
 	_core->getModelEntityManager()->createEntity(id, meshPath);
 }
 
-void EngineInterface::model_deleteAll()
-{
-	for(const auto& [animationId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimationIds())
-	{
-		_core->getAnimation3dPlayer()->stopModelAnimation(animationId, modelId);
-	}
-
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
-	{
-		if(entity->hasParent())
-		{
-			if(entity->getParentType() == AabbParentType::MODEL)
-			{
-				_core->getAabbEntityManager()->deleteEntity(key);
-			}
-		}
-	}
-
-	for(const auto& reflectionId : reflection_getIds())
-	{
-		_core->getReflectionEntityManager()->getEntity(reflectionId)->setExceptionModelId("");
-	}
-
-	_core->getModelEntityManager()->deleteEntities();
-}
-
 void EngineInterface::model_delete(const string& id)
 {
 	for(const auto& [animationId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimationIds())

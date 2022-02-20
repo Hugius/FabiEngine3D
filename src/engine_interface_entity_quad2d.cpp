@@ -1,16 +1,6 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::quad2d_deleteAll()
-{
-	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
-	{
-		_core->getAnimation2dPlayer()->stopQuad2dAnimation(animationId, quadId);
-	}
-
-	_core->getQuad2dEntityManager()->deleteEntities();
-}
-
 void EngineInterface::quad2d_create(const string& id, bool isCentered)
 {
 	_core->getQuad2dEntityManager()->createEntity(id, isCentered);

@@ -19,13 +19,6 @@ void EngineInterface::sound3d_delete(const string& id)
 	_core->getSound3dManager()->deleteSound(id);
 }
 
-void EngineInterface::sound3d_deleteAll()
-{
-	sound3d_stopAll();
-
-	_core->getSound3dManager()->deleteSounds();
-}
-
 void EngineInterface::sound3d_start(const string& id, int playCount, unsigned int fadeMS, bool mustForce)
 {
 	_core->getSound3dPlayer()->startSound(_core->getSound3dManager()->getSound(id), playCount, fadeMS, mustForce);
@@ -36,29 +29,14 @@ void EngineInterface::sound3d_pause(const string& id)
 	_core->getSound3dPlayer()->pauseSound(_core->getSound3dManager()->getSound(id));
 }
 
-void EngineInterface::sound3d_pauseAll()
-{
-	_core->getSound3dPlayer()->pauseSounds(_core->getSound3dManager()->getSounds());
-}
-
 void EngineInterface::sound3d_resume(const string& id)
 {
 	_core->getSound3dPlayer()->resumeSound(_core->getSound3dManager()->getSound(id));
 }
 
-void EngineInterface::sound3d_resumeAll()
-{
-	_core->getSound3dPlayer()->resumeSounds(_core->getSound3dManager()->getSounds());
-}
-
 void EngineInterface::sound3d_stop(const string& id, unsigned int fadeMS)
 {
 	_core->getSound3dPlayer()->stopSound(_core->getSound3dManager()->getSound(id), fadeMS);
-}
-
-void EngineInterface::sound3d_stopAll()
-{
-	_core->getSound3dPlayer()->stopSounds(_core->getSound3dManager()->getSounds());
 }
 
 void EngineInterface::sound3d_setPosition(const string& id, const fvec3& value)

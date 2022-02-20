@@ -49,7 +49,6 @@ public:
 
 	void sky_create(const string& id);
 	void sky_delete(const string& id);
-	void sky_deleteAll();
 	void sky_setVisible(const string& id, bool value);
 	void sky_select(const string& id);
 	void sky_setCubeMaps(const string& id, const array<string, 6>& value);
@@ -90,7 +89,6 @@ public:
 
 	void terrain_create(const string& id, const string& heightMapPath);
 	void terrain_delete(const string& id);
-	void terrain_deleteAll();
 	void terrain_setVisible(const string& id, bool value);
 	void terrain_select(const string& id);
 	void terrain_setBlendMap(const string& id, const string& value);
@@ -154,7 +152,6 @@ public:
 
 	void water_create(const string& id);
 	void water_delete(const string& id);
-	void water_deleteAll();
 	void water_setVisible(const string& id, bool value);
 	void water_select(const string& id);
 	void water_setRippleSpeed(const string& id, const fvec2& value);
@@ -206,7 +203,6 @@ public:
 
 	void model_create(const string& id, const string& meshPath);
 	void model_delete(const string& id);
-	void model_deleteAll();
 	void model_setVisible(const string& id, bool value);
 	void model_setDiffuseMap(const string& modelId, const string& partId, const string& value);
 	void model_setEmissionMap(const string& modelId, const string& partId, const string& value);
@@ -326,7 +322,6 @@ public:
 
 	void quad3d_create(const string& id, bool isCentered);
 	void quad3d_delete(const string& id);
-	void quad3d_deleteAll();
 	void quad3d_setDiffuseMap(const string& id, const string& value);
 	void quad3d_setEmissionMap(const string& id, const string& value);
 	void quad3d_setPosition(const string& id, const fvec3& value);
@@ -409,7 +404,6 @@ public:
 
 	void text3d_create(const string& id, const string& fontMapPath, bool isCentered);
 	void text3d_delete(const string& id);
-	void text3d_deleteAll();
 	void text3d_setContent(const string& id, const string& value);
 	void text3d_setPosition(const string& id, const fvec3& value);
 	void text3d_setRotation(const string& id, const fvec3& value);
@@ -465,7 +459,6 @@ public:
 
 	void quad2d_create(const string& id, bool isCentered);
 	void quad2d_delete(const string& id);
-	void quad2d_deleteAll();
 	void quad2d_setVisible(const string& id, bool value);
 	void quad2d_setDiffuseMap(const string& id, const string& value);
 	void quad2d_setColor(const string& id, const fvec3& value);
@@ -529,7 +522,6 @@ public:
 
 	void text2d_create(const string& id, const string& fontMapPath, bool isCentered);
 	void text2d_delete(const string& id);
-	void text2d_deleteAll();
 	void text2d_setVisible(const string& id, bool value);
 	void text2d_setContent(const string& id, const string& value);
 	void text2d_setColor(const string& id, const fvec3& value);
@@ -571,7 +563,6 @@ public:
 
 	void aabb_create(const string& id, bool isCentered);
 	void aabb_delete(const string& id);
-	void aabb_deleteAll();
 	void aabb_setParentId(const string& id, const string& value);
 	void aabb_setParentType(const string& id, AabbParentType value);
 	void aabb_setVisible(const string& id, bool value);
@@ -603,7 +594,6 @@ public:
 
 	void pointlight_create(const string& id);
 	void pointlight_delete(const string& id);
-	void pointlight_deleteAll();
 	void pointlight_setVisible(const string& id, bool value);
 	void pointlight_setPosition(const string& id, const fvec3& value);
 	void pointlight_move(const string& id, const fvec3& change);
@@ -625,7 +615,6 @@ public:
 
 	void spotlight_create(const string& id);
 	void spotlight_delete(const string& id);
-	void spotlight_deleteAll();
 	void spotlight_setVisible(const string& id, bool value);
 	void spotlight_setPosition(const string& id, const fvec3& value);
 	void spotlight_move(const string& id, const fvec3& change);
@@ -652,7 +641,6 @@ public:
 
 	void reflection_create(const string& id);
 	void reflection_delete(const string& id);
-	void reflection_deleteAll();
 	void reflection_setVisible(const string& id, bool value);
 	void reflection_setPosition(const string& id, const fvec3& value);
 	void reflection_move(const string& id, const fvec3& change);
@@ -668,7 +656,6 @@ public:
 
 	void animation3d_create(const string& id);
 	void animation3d_delete(const string& id);
-	void animation3d_deleteAll();
 	void animation3d_createPart(const string& animationId, const string& partId);
 	void animation3d_deletePart(const string& animationId, const string& partId);
 	void animation3d_deleteParts(const string& animationId);
@@ -681,6 +668,7 @@ public:
 	void animation3d_setSpeedType(const string& animationId, unsigned int frameIndex, const string& partId, SpeedType value);
 	void animation3d_setTransformationType(const string& animationId, unsigned int frameIndex, const string& partId, TransformationType value);
 
+	const vector<string> animation3d_getIds() const;
 	const vector<string>& animation3d_getPartIds(const string& animationId) const;
 	const fvec3& animation3d_getTargetTransformation(const string& animationId, unsigned int frameIndex, const string& partId) const;
 	const fvec3& animation3d_getRotationOrigin(const string& animationId, unsigned int frameIndex, const string& partId) const;
@@ -692,7 +680,6 @@ public:
 
 	void animation2d_create(const string& id);
 	void animation2d_delete(const string& id);
-	void animation2d_deleteAll();
 	void animation2d_setRowCount(const string& id, unsigned int value);
 	void animation2d_setColumnCount(const string& id, unsigned int value);
 	void animation2d_setInterval(const string& id, unsigned int value);
@@ -705,14 +692,10 @@ public:
 
 	void sound2d_create(const string& id, const string& audioPath);
 	void sound2d_delete(const string& id);
-	void sound2d_deleteAll();
 	void sound2d_start(const string& id, int playCount, unsigned int fadeMS, bool mustForce);
 	void sound2d_pause(const string& id);
-	void sound2d_pauseAll();
 	void sound2d_resume(const string& id);
-	void sound2d_resumeAll();
 	void sound2d_stop(const string& id, unsigned int fadeMS);
-	void sound2d_stopAll();
 	void sound2d_setVolume(const string& id, float value);
 
 	const vector<string> sound2d_getIds() const;
@@ -725,14 +708,10 @@ public:
 
 	void sound3d_create(const string& id, const string& audioPath);
 	void sound3d_delete(const string& id);
-	void sound3d_deleteAll();
 	void sound3d_start(const string& id, int playCount, unsigned int fadeMS, bool mustForce);
 	void sound3d_pause(const string& id);
-	void sound3d_pauseAll();
 	void sound3d_resume(const string& id);
-	void sound3d_resumeAll();
 	void sound3d_stop(const string& id, unsigned int fadeMS);
-	void sound3d_stopAll();
 	void sound3d_setPosition(const string& id, const fvec3& value);
 	void sound3d_move(const string& id, const fvec3& change);
 	void sound3d_moveTo(const string& id, const fvec3& target, float speed);

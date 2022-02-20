@@ -6,9 +6,18 @@ using std::istringstream;
 
 void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 {
-	_fe3d->quad3d_deleteAll();
-	_fe3d->text3d_deleteAll();
-	_fe3d->aabb_deleteAll();
+	for(const auto& id : _fe3d->quad3d_getIds())
+	{
+		_fe3d->quad3d_delete(id);
+	}
+	for(const auto& id : _fe3d->text3d_getIds())
+	{
+		_fe3d->text3d_delete(id);
+	}
+	for(const auto& id : _fe3d->aabb_getIds())
+	{
+		_fe3d->aabb_delete(id);
+	}
 
 	const auto lineCount = static_cast<float>(_script->getScriptFile(_currentScriptFileId)->getLineCount());
 	const auto separatorSize = fvec2((TEXT_CHARACTER_SIZE.x / 4.0f), (lineCount * VERTICAL_LINE_OFFSET));

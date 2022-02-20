@@ -27,7 +27,7 @@ void VertexBufferCache::deleteBuffer(const string& filePath, const string& partI
 	_buffers.erase(key);
 }
 
-void VertexBufferCache::clear()
+void VertexBufferCache::clearBuffers()
 {
 	_buffers.clear();
 }
@@ -46,16 +46,9 @@ const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& filePa
 	return nullptr;
 }
 
-const vector<shared_ptr<VertexBuffer>> VertexBufferCache::getBuffers() const
+const unordered_map<string, shared_ptr<VertexBuffer>>& VertexBufferCache::getBuffers() const
 {
-	vector<shared_ptr<VertexBuffer>> result;
-
-	for(const auto& [key, buffer] : _buffers)
-	{
-		result.push_back(buffer);
-	}
-
-	return result;
+	return _buffers;
 }
 
 const vector<string> VertexBufferCache::getFilePaths() const

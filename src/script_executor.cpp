@@ -53,19 +53,19 @@ void ScriptExecutor::pause()
 		_wasThirdPersonEnabled = _fe3d->camera_isThirdPersonEnabled();
 		_fe3d->camera_setThirdPersonEnabled(false);
 
-		for(const auto& soundId : _fe3d->sound2d_getIds())
+		for(const auto& soundId : _fe3d->sound3d_getIds())
 		{
-			if(_fe3d->sound2d_isPaused(soundId))
+			if(_fe3d->sound3d_isStarted(soundId) && _fe3d->sound3d_isPaused(soundId))
 			{
-				_pausedSoundIds.push_back(soundId);
+				_pausedSound3dIds.push_back(soundId);
 			}
 		}
 
-		for(const auto& soundId : _fe3d->sound3d_getIds())
+		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
-			if(_fe3d->sound3d_isPaused(soundId))
+			if(_fe3d->sound2d_isStarted(soundId) && _fe3d->sound2d_isPaused(soundId))
 			{
-				_pausedSoundIds.push_back(soundId);
+				_pausedSound2dIds.push_back(soundId);
 			}
 		}
 
@@ -77,9 +77,21 @@ void ScriptExecutor::pause()
 			}
 		}
 
-		_fe3d->sound2d_pauseAll();
+		for(const auto& soundId : _fe3d->sound3d_getIds())
+		{
+			if(_fe3d->sound3d_isStarted(soundId) && !_fe3d->sound3d_isPaused(soundId))
+			{
+				_fe3d->sound3d_pause(soundId);
+			}
+		}
 
-		_fe3d->sound3d_pauseAll();
+		for(const auto& soundId : _fe3d->sound2d_getIds())
+		{
+			if(_fe3d->sound2d_isStarted(soundId) && !_fe3d->sound2d_isPaused(soundId))
+			{
+				_fe3d->sound2d_pause(soundId);
+			}
+		}
 
 		for(const auto& clockId : _fe3d->clock_getIds())
 		{
@@ -103,16 +115,20 @@ void ScriptExecutor::resume()
 		_fe3d->camera_setFirstPersonEnabled(_wasFirstPersonEnabled);
 		_fe3d->camera_setThirdPersonEnabled(_wasThirdPersonEnabled);
 
-		_fe3d->sound2d_resumeAll();
-		for(const auto& soundId : _pausedSoundIds)
+		for(const auto& soundId : _fe3d->sound3d_getIds())
 		{
-			_fe3d->sound2d_pause(soundId);
+			if(_fe3d->sound3d_isStarted(soundId) && _fe3d->sound3d_isPaused(soundId))
+			{
+				_fe3d->sound3d_resume(soundId);
+			}
 		}
 
-		_fe3d->sound3d_resumeAll();
-		for(const auto& soundId : _pausedSoundIds)
+		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
-			_fe3d->sound3d_pause(soundId);
+			if(_fe3d->sound2d_isStarted(soundId) && _fe3d->sound2d_isPaused(soundId))
+			{
+				_fe3d->sound2d_resume(soundId);
+			}
 		}
 
 		for(const auto& clockId : _fe3d->clock_getIds())
@@ -121,6 +137,16 @@ void ScriptExecutor::resume()
 			{
 				_fe3d->clock_resume(clockId);
 			}
+		}
+
+		for(const auto& soundId : _pausedSound3dIds)
+		{
+			_fe3d->sound3d_pause(soundId);
+		}
+
+		for(const auto& soundId : _pausedSound2dIds)
+		{
+			_fe3d->sound2d_pause(soundId);
 		}
 
 		for(const auto& clockId : _pausedClockIds)
@@ -141,7 +167,8 @@ void ScriptExecutor::stop()
 
 		_scriptInterpreter->unload();
 
-		_pausedSoundIds.clear();
+		_pausedSound3dIds.clear();
+		_pausedSound2dIds.clear();
 		_pausedClockIds.clear();
 		_isStarted = false;
 		_isRunning = false;
@@ -184,7 +211,8 @@ void ScriptExecutor::_validateExecution()
 	{
 		_scriptInterpreter->unload();
 
-		_pausedSoundIds.clear();
+		_pausedSound3dIds.clear();
+		_pausedSound2dIds.clear();
 		_pausedClockIds.clear();
 		_isStarted = false;
 		_isRunning = false;

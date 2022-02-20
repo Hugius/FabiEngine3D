@@ -21,8 +21,8 @@ public:
 	const shared_ptr<TextureBuffer> get2dBuffer(const string& filePath) const;
 	const shared_ptr<TextureBuffer> get3dBuffer(const array<string, 6>& filePath) const;
 
-	const vector<shared_ptr<TextureBuffer>> get2dBuffers() const;
-	const vector<shared_ptr<TextureBuffer>> get3dBuffers() const;
+	const unordered_map<string, shared_ptr<TextureBuffer>>& get2dBuffers() const;
+	const unordered_map<string, shared_ptr<TextureBuffer>>& get3dBuffers() const;
 
 	const vector<string> get2dFilePaths() const;
 	const vector<array<string, 6>> get3dFilePaths() const;

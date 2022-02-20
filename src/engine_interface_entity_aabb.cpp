@@ -16,11 +16,6 @@ void EngineInterface::aabb_setParentType(const string& id, AabbParentType value)
 	_core->getAabbEntityManager()->getEntity(id)->setParentType(value);
 }
 
-void EngineInterface::aabb_deleteAll()
-{
-	_core->getAabbEntityManager()->deleteEntities();
-}
-
 void EngineInterface::aabb_delete(const string& id)
 {
 	_core->getAabbEntityManager()->deleteEntity(id);

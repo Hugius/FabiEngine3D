@@ -1,11 +1,6 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::text2d_deleteAll()
-{
-	_core->getText2dEntityManager()->deleteEntities();
-}
-
 void EngineInterface::text2d_create(const string& id, const string& fontMapPath, bool isCentered)
 {
 	_core->getText2dEntityManager()->createEntity(id, fontMapPath, isCentered);

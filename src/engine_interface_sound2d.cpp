@@ -19,13 +19,6 @@ void EngineInterface::sound2d_delete(const string& id)
 	_core->getSound2dManager()->deleteSound(id);
 }
 
-void EngineInterface::sound2d_deleteAll()
-{
-	sound2d_stopAll();
-
-	_core->getSound2dManager()->deleteSounds();
-}
-
 void EngineInterface::sound2d_start(const string& id, int playCount, unsigned int fadeMS, bool mustForce)
 {
 	_core->getSound2dPlayer()->startSound(_core->getSound2dManager()->getSound(id), playCount, fadeMS, mustForce);
@@ -36,29 +29,14 @@ void EngineInterface::sound2d_pause(const string& id)
 	_core->getSound2dPlayer()->pauseSound(_core->getSound2dManager()->getSound(id));
 }
 
-void EngineInterface::sound2d_pauseAll()
-{
-	_core->getSound2dPlayer()->pauseSounds(_core->getSound2dManager()->getSounds());
-}
-
 void EngineInterface::sound2d_resume(const string& id)
 {
 	_core->getSound2dPlayer()->resumeSound(_core->getSound2dManager()->getSound(id));
 }
 
-void EngineInterface::sound2d_resumeAll()
-{
-	_core->getSound2dPlayer()->resumeSounds(_core->getSound2dManager()->getSounds());
-}
-
 void EngineInterface::sound2d_stop(const string& id, unsigned int fadeMS)
 {
 	_core->getSound2dPlayer()->stopSound(_core->getSound2dManager()->getSound(id), fadeMS);
-}
-
-void EngineInterface::sound2d_stopAll()
-{
-	_core->getSound2dPlayer()->stopSounds(_core->getSound2dManager()->getSounds());
 }
 
 void EngineInterface::sound2d_setVolume(const string& id, float value)

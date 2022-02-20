@@ -19,16 +19,6 @@ void EngineInterface::animation3d_delete(const string& id)
 	_core->getAnimation3dManager()->deleteAnimation(id);
 }
 
-void EngineInterface::animation3d_deleteAll()
-{
-	for(const auto& [animationId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimationIds())
-	{
-		_core->getAnimation3dPlayer()->stopModelAnimation(animationId, modelId);
-	}
-
-	_core->getAnimation3dManager()->deleteAnimations();
-}
-
 void EngineInterface::animation3d_createFrame(const string& animationId, unsigned int index)
 {
 	_core->getAnimation3dManager()->getAnimation(animationId)->createFrame(index);
@@ -82,6 +72,18 @@ void EngineInterface::animation3d_setSpeedType(const string& animationId, unsign
 void EngineInterface::animation3d_setTransformationType(const string& animationId, unsigned int frameIndex, const string& partId, TransformationType value)
 {
 	_core->getAnimation3dManager()->getAnimation(animationId)->setTransformationType(frameIndex, partId, value);
+}
+
+const vector<string> EngineInterface::animation3d_getIds() const
+{
+	vector<string> result;
+
+	for(const auto& [key, entity] : _core->getAnimation3dManager()->getAnimations())
+	{
+		result.push_back(entity->getId());
+	}
+
+	return result;
 }
 
 const vector<string>& EngineInterface::animation3d_getPartIds(const string& animationId) const

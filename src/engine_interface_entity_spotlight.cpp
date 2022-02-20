@@ -6,11 +6,6 @@ void EngineInterface::spotlight_create(const string& id)
 	_core->getSpotlightEntityManager()->createEntity(id);
 }
 
-void EngineInterface::spotlight_deleteAll()
-{
-	_core->getSpotlightEntityManager()->deleteEntities();
-}
-
 void EngineInterface::spotlight_delete(const string& id)
 {
 	_core->getSpotlightEntityManager()->deleteEntity(id);

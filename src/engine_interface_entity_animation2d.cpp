@@ -27,21 +27,6 @@ void EngineInterface::animation2d_delete(const string& id)
 	_core->getAnimation2dManager()->deleteAnimation(id);
 }
 
-void EngineInterface::animation2d_deleteAll()
-{
-	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
-	{
-		_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
-	}
-
-	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
-	{
-		_core->getAnimation2dPlayer()->stopQuad2dAnimation(animationId, quadId);
-	}
-
-	_core->getAnimation2dManager()->deleteAnimations();
-}
-
 void EngineInterface::animation2d_setRowCount(const string& id, unsigned int value)
 {
 	_core->getAnimation2dManager()->getAnimation(id)->setRowCount(value);

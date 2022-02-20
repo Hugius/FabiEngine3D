@@ -101,26 +101,6 @@ const bool Animation3dPlayer::isModelAnimationStarted(const string& animationId,
 	return (_startedModelAnimations.find(key) != _startedModelAnimations.end());
 }
 
-const bool Animation3dPlayer::isModelAnimationPlaying(const string& animationId, const string& modelId) const
-{
-	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
-
-	if(!_animation3dManager->isAnimationExisting(animationId))
-	{
-		abort();
-	}
-	if(!_modelEntityManager->isEntityExisting(modelId))
-	{
-		abort();
-	}
-	if(!isModelAnimationStarted(animationId, modelId))
-	{
-		abort();
-	}
-
-	return !_startedModelAnimations.at(key)->isPaused();
-}
-
 const bool Animation3dPlayer::isModelAnimationPaused(const string& animationId, const string& modelId) const
 {
 	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);

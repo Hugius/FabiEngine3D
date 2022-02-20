@@ -486,11 +486,6 @@ const bool EngineInterface::quad3d_isAnimationStarted(const string& quadId, cons
 	return _core->getAnimation2dPlayer()->isQuad3dAnimationStarted(animationId, quadId);
 }
 
-const bool EngineInterface::quad3d_isAnimationPlaying(const string& quadId, const string& animationId) const
-{
-	return _core->getAnimation2dPlayer()->isQuad3dAnimationPlaying(animationId, quadId);
-}
-
 const bool EngineInterface::quad3d_isAnimationPaused(const string& quadId, const string& animationId) const
 {
 	return _core->getAnimation2dPlayer()->isQuad3dAnimationPaused(animationId, quadId);

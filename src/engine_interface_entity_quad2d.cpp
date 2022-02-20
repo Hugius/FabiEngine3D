@@ -329,11 +329,6 @@ const bool EngineInterface::quad2d_isAnimationStarted(const string& quadId, cons
 	return _core->getAnimation2dPlayer()->isQuad2dAnimationStarted(animationId, quadId);
 }
 
-const bool EngineInterface::quad2d_isAnimationPlaying(const string& quadId, const string& animationId) const
-{
-	return _core->getAnimation2dPlayer()->isQuad2dAnimationPlaying(animationId, quadId);
-}
-
 const bool EngineInterface::quad2d_isAnimationPaused(const string& quadId, const string& animationId) const
 {
 	return _core->getAnimation2dPlayer()->isQuad2dAnimationPaused(animationId, quadId);

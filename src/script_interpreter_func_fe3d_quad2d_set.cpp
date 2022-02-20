@@ -373,7 +373,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 				}
 				if(_fe3d->quad2d_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not playing");
+					_throwRuntimeError("animation already paused");
 					return true;
 				}
 
@@ -398,7 +398,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 				}
 				if(_fe3d->quad2d_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not playing");
+					_throwRuntimeError("animation already paused");
 					return true;
 				}
 

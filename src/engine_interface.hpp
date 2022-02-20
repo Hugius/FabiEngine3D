@@ -314,7 +314,6 @@ public:
 	const bool model_hasReflectionMap(const string& modelId, const string& partId) const;
 	const bool model_hasNormalMap(const string& modelId, const string& partId) const;
 	const bool model_isAnimationStarted(const string& modelId, const string& animationId) const;
-	const bool model_isAnimationPlaying(const string& modelId, const string& animationId) const;
 	const bool model_isAnimationPaused(const string& modelId, const string& animationId) const;
 	const bool model_isAnimationAutopaused(const string& modelId, const string& animationId) const;
 	const ReflectionType model_getReflectionType(const string& modelId, const string& partId) const;
@@ -398,7 +397,6 @@ public:
 	const bool quad3d_hasEmissionMap(const string& id) const;
 	const bool quad3d_isFrozen(const string& id) const;
 	const bool quad3d_isAnimationStarted(const string& quadId, const string& animationId) const;
-	const bool quad3d_isAnimationPlaying(const string& quadId, const string& animationId) const;
 	const bool quad3d_isAnimationPaused(const string& quadId, const string& animationId) const;
 	const bool quad3d_isAnimationAutopaused(const string& quadId, const string& animationId) const;
 
@@ -516,7 +514,6 @@ public:
 	const bool quad2d_hasDiffuseMap(const string& id) const;
 	const bool quad2d_isWireframed(const string& id) const;
 	const bool quad2d_isAnimationStarted(const string& quadId, const string& animationId) const;
-	const bool quad2d_isAnimationPlaying(const string& quadId, const string& animationId) const;
 	const bool quad2d_isAnimationPaused(const string& quadId, const string& animationId) const;
 	const bool quad2d_isAnimationAutopaused(const string& quadId, const string& animationId) const;
 

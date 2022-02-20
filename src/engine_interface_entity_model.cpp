@@ -559,11 +559,6 @@ const bool EngineInterface::model_isAnimationStarted(const string& modelId, cons
 	return _core->getAnimation3dPlayer()->isModelAnimationStarted(animationId, modelId);
 }
 
-const bool EngineInterface::model_isAnimationPlaying(const string& modelId, const string& animationId) const
-{
-	return _core->getAnimation3dPlayer()->isModelAnimationPlaying(animationId, modelId);
-}
-
 const bool EngineInterface::model_isAnimationPaused(const string& modelId, const string& animationId) const
 {
 	return _core->getAnimation3dPlayer()->isModelAnimationPaused(animationId, modelId);

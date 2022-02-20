@@ -27,7 +27,6 @@ public:
 	const unsigned int getModelAnimationFrameIndex(const string& animationId, const string& modelId) const;
 
 	const bool isModelAnimationStarted(const string& animationId, const string& modelId) const;
-	const bool isModelAnimationPlaying(const string& animationId, const string& modelId) const;
 	const bool isModelAnimationPaused(const string& animationId, const string& modelId) const;
 	const bool isModelAnimationAutopaused(const string& animationId, const string& modelId) const;
 

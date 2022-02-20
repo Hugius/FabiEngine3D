@@ -990,7 +990,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 				}
 				if(_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation is not playing");
+					_throwRuntimeError("animation is already paused");
 					return true;
 				}
 
@@ -1015,7 +1015,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 				}
 				if(_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
-					_throwRuntimeError("animation not playing");
+					_throwRuntimeError("animation is already paused");
 					return true;
 				}
 

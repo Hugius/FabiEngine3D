@@ -260,26 +260,6 @@ const bool Animation2dPlayer::isQuad3dAnimationStarted(const string& animationId
 	return (_startedQuad3dAnimations.find(key) != _startedQuad3dAnimations.end());
 }
 
-const bool Animation2dPlayer::isQuad3dAnimationPlaying(const string& animationId, const string& quadId) const
-{
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
-
-	if(!_animation2dManager->isAnimationExisting(animationId))
-	{
-		abort();
-	}
-	if(!_quad3dEntityManager->isEntityExisting(quadId))
-	{
-		abort();
-	}
-	if(!isQuad3dAnimationStarted(animationId, quadId))
-	{
-		abort();
-	}
-
-	return !_startedQuad3dAnimations.at(key)->isPaused();
-}
-
 const bool Animation2dPlayer::isQuad3dAnimationPaused(const string& animationId, const string& quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
@@ -334,26 +314,6 @@ const bool Animation2dPlayer::isQuad2dAnimationStarted(const string& animationId
 	}
 
 	return (_startedQuad2dAnimations.find(key) != _startedQuad2dAnimations.end());
-}
-
-const bool Animation2dPlayer::isQuad2dAnimationPlaying(const string& animationId, const string& quadId) const
-{
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
-
-	if(!_animation2dManager->isAnimationExisting(animationId))
-	{
-		abort();
-	}
-	if(!_quad2dEntityManager->isEntityExisting(quadId))
-	{
-		abort();
-	}
-	if(!isQuad2dAnimationStarted(animationId, quadId))
-	{
-		abort();
-	}
-
-	return !_startedQuad2dAnimations.at(key)->isPaused();
 }
 
 const bool Animation2dPlayer::isQuad2dAnimationPaused(const string& animationId, const string& quadId) const

@@ -52,8 +52,6 @@ public:
 
 	const bool isQuad3dAnimationStarted(const string& animationId, const string& quadId) const;
 	const bool isQuad2dAnimationStarted(const string& animationId, const string& quadId) const;
-	const bool isQuad3dAnimationPlaying(const string& animationId, const string& quadId) const;
-	const bool isQuad2dAnimationPlaying(const string& animationId, const string& quadId) const;
 	const bool isQuad3dAnimationPaused(const string& animationId, const string& quadId) const;
 	const bool isQuad2dAnimationPaused(const string& animationId, const string& quadId) const;
 	const bool isQuad3dAnimationAutopaused(const string& animationId, const string& quadId) const;

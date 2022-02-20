@@ -74,3 +74,8 @@ const bool SpotlightEntityManager::isEntityExisting(const string& id) const
 {
 	return (_entities.find(id) != _entities.end());
 }
+
+const bool SpotlightEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}

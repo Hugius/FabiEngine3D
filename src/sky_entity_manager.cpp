@@ -154,3 +154,8 @@ const bool SkyEntityManager::isEntityExisting(const string& id) const
 {
 	return (_entities.find(id) != _entities.end());
 }
+
+const bool SkyEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}

@@ -66,6 +66,11 @@ const bool Quad2dEntityManager::isEntityExisting(const string& id) const
 	return (_entities.find(id) != _entities.end());
 }
 
+const bool Quad2dEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}
+
 void Quad2dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
 	_renderStorage = renderStorage;

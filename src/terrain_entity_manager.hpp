@@ -21,6 +21,7 @@ public:
 	const float getPixelHeight(const string& id, float x, float z);
 
 	const bool isEntityExisting(const string& id) const;
+	const bool isEntitiesExisting() const;
 	const bool isInside(const string& id, float x, float z);
 
 	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities();

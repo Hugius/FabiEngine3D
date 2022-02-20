@@ -17,6 +17,7 @@ public:
 	void deleteSounds();
 
 	const bool isSoundExisting(const string& id) const;
+	const bool isSoundsExisting() const;
 
 	Sound2d& getSound(const string& id);
 	vector<Sound2d>& getSounds();

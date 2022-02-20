@@ -11,4 +11,5 @@ public:
 	virtual void deleteEntities() = 0;
 
 	virtual const bool isEntityExisting(const string& id) const = 0;
+	virtual const bool isEntitiesExisting() const = 0;
 };

@@ -72,7 +72,7 @@ void AabbEntityManager::inject(shared_ptr<Text3dEntityManager> text3dEntityManag
 	_text3dEntityManager = text3dEntityManager;
 }
 
-shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& id)
+const shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& id)
 {
 	auto iterator = _entities.find(id);
 
@@ -396,4 +396,9 @@ void AabbEntityManager::deleteEntities()
 const bool AabbEntityManager::isEntityExisting(const string& id) const
 {
 	return (_entities.find(id) != _entities.end());
+}
+
+const bool AabbEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
 }

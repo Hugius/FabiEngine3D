@@ -34,7 +34,12 @@ const bool Animation3dManager::isAnimationExisting(const string& id) const
 	return (_animations.find(id) != _animations.end());
 }
 
-shared_ptr<Animation3d> Animation3dManager::getAnimation(const string& id)
+const bool Animation3dManager::isAnimationsExisting() const
+{
+	return !_animations.empty();
+}
+
+const shared_ptr<Animation3d> Animation3dManager::getAnimation(const string& id)
 {
 	auto iterator = _animations.find(id);
 

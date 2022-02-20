@@ -18,6 +18,7 @@ public:
 	void deleteEntities();
 
 	const bool isEntityExisting(const string& id) const;
+	const bool isEntitiesExisting() const;
 
 	const unordered_map<string, shared_ptr<ReflectionEntity>>& getEntities();
 

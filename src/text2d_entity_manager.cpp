@@ -85,6 +85,11 @@ const bool Text2dEntityManager::isEntityExisting(const string& id) const
 	return (_entities.find(id) != _entities.end());
 }
 
+const bool Text2dEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}
+
 void Text2dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 {
 	_renderStorage = renderStorage;

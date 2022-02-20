@@ -113,6 +113,11 @@ const bool TerrainEntityManager::isEntityExisting(const string& id) const
 	return (_entities.find(id) != _entities.end());
 }
 
+const bool TerrainEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}
+
 void TerrainEntityManager::loadMesh(const string& id)
 {
 	_loadMesh(getEntity(id), getEntity(id)->getSize(), getEntity(id)->getMaxHeight(), getEntity(id)->getPixels());

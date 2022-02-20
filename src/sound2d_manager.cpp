@@ -56,6 +56,11 @@ const bool Sound2dManager::isSoundExisting(const string& id) const
 	return (_findSoundIndex(id) != -1);
 }
 
+const bool Sound2dManager::isSoundsExisting() const
+{
+	return !_sounds.empty();
+}
+
 vector<Sound2d>& Sound2dManager::getSounds()
 {
 	return _sounds;

@@ -16,8 +16,9 @@ public:
 	void deleteAnimations();
 
 	const bool isAnimationExisting(const string& id) const;
+	const bool isAnimationsExisting() const;
 
-	shared_ptr<Animation3d> getAnimation(const string& id);
+	const shared_ptr<Animation3d> getAnimation(const string& id);
 	const unordered_map<string, shared_ptr<Animation3d>>& getAnimations();
 
 private:

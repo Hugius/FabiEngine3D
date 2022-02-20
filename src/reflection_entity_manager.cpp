@@ -59,3 +59,8 @@ const bool ReflectionEntityManager::isEntityExisting(const string& id) const
 {
 	return (_entities.find(id) != _entities.end());
 }
+
+const bool ReflectionEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}

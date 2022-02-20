@@ -131,6 +131,11 @@ const bool ModelEntityManager::isEntityExisting(const string& id) const
 	return (_entities.find(id) != _entities.end());
 }
 
+const bool ModelEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}
+
 void ModelEntityManager::update()
 {
 	for(const auto& [key, entity] : _entities)

@@ -62,6 +62,11 @@ const bool PointlightEntityManager::isEntityExisting(const string& id) const
 	return (_entities.find(id) != _entities.end());
 }
 
+const bool PointlightEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}
+
 void PointlightEntityManager::update()
 {
 	for(const auto& [key, entity] : _entities)

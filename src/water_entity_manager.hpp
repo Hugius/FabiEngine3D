@@ -18,6 +18,7 @@ public:
 	void selectEntity(const string& id);
 
 	const bool isEntityExisting(const string& id) const;
+	const bool isEntitiesExisting() const;
 
 	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities();
 

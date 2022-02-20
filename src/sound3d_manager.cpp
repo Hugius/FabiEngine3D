@@ -59,6 +59,11 @@ const bool Sound3dManager::isSoundExisting(const string& id) const
 	return (_findSoundIndex(id) != -1);
 }
 
+const bool Sound3dManager::isSoundsExisting() const
+{
+	return !_sounds.empty();
+}
+
 vector<Sound3d>& Sound3dManager::getSounds()
 {
 	return _sounds;

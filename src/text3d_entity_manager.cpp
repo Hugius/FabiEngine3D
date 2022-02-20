@@ -159,3 +159,8 @@ const bool Text3dEntityManager::isEntityExisting(const string& id) const
 {
 	return (_entities.find(id) != _entities.end());
 }
+
+const bool Text3dEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}

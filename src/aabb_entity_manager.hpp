@@ -25,10 +25,10 @@ public:
 	void deleteEntities();
 
 	const bool isEntityExisting(const string& id) const;
+	const bool isEntitiesExisting() const;
 
+	const shared_ptr<AabbEntity> getEntity(const string& id);
 	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities();
-
-	shared_ptr<AabbEntity> getEntity(const string& id);
 
 private:
 	static inline constexpr float MIN_SIZE = 0.1f;

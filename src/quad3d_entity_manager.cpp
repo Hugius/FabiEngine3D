@@ -129,3 +129,8 @@ const bool Quad3dEntityManager::isEntityExisting(const string& id) const
 {
 	return (_entities.find(id) != _entities.end());
 }
+
+const bool Quad3dEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}

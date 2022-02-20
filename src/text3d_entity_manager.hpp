@@ -25,6 +25,7 @@ public:
 	void deleteEntities();
 
 	const bool isEntityExisting(const string& id) const;
+	const bool isEntitiesExisting() const;
 
 	const unordered_map<string, shared_ptr<Text3dEntity>>& getEntities();
 	shared_ptr<Text3dEntity> getEntity(const string& id);

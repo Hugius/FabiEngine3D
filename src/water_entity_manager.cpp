@@ -87,6 +87,11 @@ const bool WaterEntityManager::isEntityExisting(const string& id) const
 	return (_entities.find(id) != _entities.end());
 }
 
+const bool WaterEntityManager::isEntitiesExisting() const
+{
+	return !_entities.empty();
+}
+
 void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 {
 	const float halfSize = (size * 0.5f);

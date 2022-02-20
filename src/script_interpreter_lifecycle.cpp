@@ -214,7 +214,10 @@ void ScriptInterpreter::load()
 
 void ScriptInterpreter::unload()
 {
-	_worldEditor->clearLoadedWorld();
+	if(!_worldEditor->getLoadedWorldId().empty())
+	{
+		_worldEditor->clearLoadedWorld();
+	}
 
 	_fe3d->sky_deleteAll();
 	_fe3d->terrain_deleteAll();

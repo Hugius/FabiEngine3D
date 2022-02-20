@@ -17,7 +17,7 @@ const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimationId
 
 	for(const auto& [key, animation] : _startedModelAnimations)
 	{
-		const auto splitKey = Tools::splitString(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
 
 		ids.push_back(splitKey);
 	}
@@ -27,6 +27,8 @@ const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimationId
 
 const float Animation3dPlayer::getModelAnimationSpeedMultiplier(const string& animationId, const string& modelId) const
 {
+	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
 		abort();
@@ -40,11 +42,13 @@ const float Animation3dPlayer::getModelAnimationSpeedMultiplier(const string& an
 		abort();
 	}
 
-	return _startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->getSpeedMultiplier();
+	return _startedModelAnimations.at(key)->getSpeedMultiplier();
 }
 
 const int Animation3dPlayer::getModelAnimationPlayCount(const string& animationId, const string& modelId) const
 {
+	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
 		abort();
@@ -58,11 +62,13 @@ const int Animation3dPlayer::getModelAnimationPlayCount(const string& animationI
 		abort();
 	}
 
-	return _startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->getPlayCount();
+	return _startedModelAnimations.at(key)->getPlayCount();
 }
 
 const unsigned int Animation3dPlayer::getModelAnimationFrameIndex(const string& animationId, const string& modelId) const
 {
+	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
 		abort();
@@ -76,11 +82,13 @@ const unsigned int Animation3dPlayer::getModelAnimationFrameIndex(const string& 
 		abort();
 	}
 
-	return _startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->getFrameIndex();
+	return _startedModelAnimations.at(key)->getFrameIndex();
 }
 
 const bool Animation3dPlayer::isModelAnimationStarted(const string& animationId, const string& modelId) const
 {
+	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
 		abort();
@@ -90,11 +98,13 @@ const bool Animation3dPlayer::isModelAnimationStarted(const string& animationId,
 		abort();
 	}
 
-	return (_startedModelAnimations.find(Tools::mergeStrings(animationId, modelId, DELIMITER)) != _startedModelAnimations.end());
+	return (_startedModelAnimations.find(key) != _startedModelAnimations.end());
 }
 
 const bool Animation3dPlayer::isModelAnimationPlaying(const string& animationId, const string& modelId) const
 {
+	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
 		abort();
@@ -108,11 +118,13 @@ const bool Animation3dPlayer::isModelAnimationPlaying(const string& animationId,
 		abort();
 	}
 
-	return !isModelAnimationPaused(animationId, modelId);
+	return !_startedModelAnimations.at(key)->isPaused();
 }
 
 const bool Animation3dPlayer::isModelAnimationPaused(const string& animationId, const string& modelId) const
 {
+	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
 		abort();
@@ -126,11 +138,13 @@ const bool Animation3dPlayer::isModelAnimationPaused(const string& animationId, 
 		abort();
 	}
 
-	return _startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->isPaused();
+	return _startedModelAnimations.at(key)->isPaused();
 }
 
 const bool Animation3dPlayer::isModelAnimationAutopaused(const string& animationId, const string& modelId) const
 {
+	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
 		abort();
@@ -144,7 +158,7 @@ const bool Animation3dPlayer::isModelAnimationAutopaused(const string& animation
 		abort();
 	}
 
-	return _startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->isAutopaused();
+	return _startedModelAnimations.at(key)->isAutopaused();
 }
 
 const bool Animation3dPlayer::_hasReachedTarget(float total, float target, float speed) const

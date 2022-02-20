@@ -74,15 +74,15 @@ void EngineInterface::misc_clearImageCache(const string& filePath)
 {
 	_core->getImageLoader()->clearImageCache(filePath);
 
-	for(const auto& [key, texture] : _core->getTextureBufferCache()->get2dBuffers())
+	for(const auto& key : _core->getTextureBufferCache()->get2dFilePaths())
 	{
-		if(key == filePath)
+		if(filePath == key)
 		{
 			_core->getTextureBufferCache()->delete2dBuffer(key);
 		}
 	}
 
-	for(const auto& [key, texture] : _core->getTextureBufferCache()->get3dBuffers())
+	for(const auto& key : _core->getTextureBufferCache()->get3dFilePaths())
 	{
 		if(find(key.begin(), key.end(), filePath) != key.end())
 		{

@@ -21,7 +21,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 			continue;
 		}
 
-		const auto splitKey = Tools::splitString(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
 		const auto animation = _animation3dManager->getAnimation(splitKey.first);
 		const auto model = _modelEntityManager->getEntity(splitKey.second);
 

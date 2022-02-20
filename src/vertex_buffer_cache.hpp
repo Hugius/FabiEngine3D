@@ -20,6 +20,8 @@ public:
 
 	const shared_ptr<VertexBuffer> getBuffer(const string& filePath, const string& partId) const;
 
+	const vector<shared_ptr<VertexBuffer>> getBuffers() const;
+	const vector<string> getFilePaths() const;
 	const vector<string> getPartIds(const string& filePath) const;
 
 private:

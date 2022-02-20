@@ -1,6 +1,5 @@
 #include "texture_buffer_cache.hpp"
-
-#include "logger.hpp"
+#include "tools.hpp"
 
 void TextureBufferCache::store2dBuffer(const string& filePath, shared_ptr<TextureBuffer> buffer)
 {
@@ -16,30 +15,38 @@ void TextureBufferCache::store2dBuffer(const string& filePath, shared_ptr<Textur
 
 void TextureBufferCache::store3dBuffer(const array<string, 6>& filePaths, shared_ptr<TextureBuffer> buffer)
 {
-	auto cacheIterator = _3dBuffers.find(filePaths);
+	const auto key = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
+
+	auto cacheIterator = _3dBuffers.find(key);
 
 	if(cacheIterator != _3dBuffers.end())
 	{
 		abort();
 	}
 
-	_3dBuffers.insert(make_pair(filePaths, buffer));
+	_3dBuffers.insert(make_pair(key, buffer));
 }
 
 void TextureBufferCache::delete2dBuffer(const string& filePath)
 {
-	if(_2dBuffers.find(filePath) != _2dBuffers.end())
+	if(_2dBuffers.find(filePath) == _2dBuffers.end())
 	{
-		_2dBuffers.erase(filePath);
+		abort();
 	}
+
+	_2dBuffers.erase(filePath);
 }
 
 void TextureBufferCache::delete3dBuffer(const array<string, 6>& filePaths)
 {
-	if(_3dBuffers.find(filePaths) != _3dBuffers.end())
+	const auto key = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
+
+	if(_3dBuffers.find(key) == _3dBuffers.end())
 	{
-		_3dBuffers.erase(filePaths);
+		abort();
 	}
+
+	_3dBuffers.erase(key);
 }
 
 void TextureBufferCache::clear2dBuffers()
@@ -66,7 +73,9 @@ const shared_ptr<TextureBuffer> TextureBufferCache::get2dBuffer(const string& fi
 
 const shared_ptr<TextureBuffer> TextureBufferCache::get3dBuffer(const array<string, 6>& filePaths) const
 {
-	auto cacheIterator = _3dBuffers.find(filePaths);
+	const auto key = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
+
+	auto cacheIterator = _3dBuffers.find(key);
 
 	if(cacheIterator != _3dBuffers.end())
 	{
@@ -76,12 +85,52 @@ const shared_ptr<TextureBuffer> TextureBufferCache::get3dBuffer(const array<stri
 	return nullptr;
 }
 
-const unordered_map<string, shared_ptr<TextureBuffer>>& TextureBufferCache::get2dBuffers() const
+const vector<shared_ptr<TextureBuffer>> TextureBufferCache::get2dBuffers() const
 {
-	return _2dBuffers;
+	vector<shared_ptr<TextureBuffer>> result;
+
+	for(const auto& [key, buffer] : _2dBuffers)
+	{
+		result.push_back(buffer);
+	}
+
+	return result;
 }
 
-const map<array<string, 6>, shared_ptr<TextureBuffer>>& TextureBufferCache::get3dBuffers() const
+const vector<shared_ptr<TextureBuffer>> TextureBufferCache::get3dBuffers() const
 {
-	return _3dBuffers;
+	vector<shared_ptr<TextureBuffer>> result;
+
+	for(const auto& [key, buffer] : _3dBuffers)
+	{
+		result.push_back(buffer);
+	}
+
+	return result;
+}
+
+const vector<string> TextureBufferCache::get2dFilePaths() const
+{
+	vector<string> result;
+
+	for(const auto& [key, buffer] : _2dBuffers)
+	{
+		result.push_back(key);
+	}
+
+	return result;
+}
+
+const vector<array<string, 6>> TextureBufferCache::get3dFilePaths() const
+{
+	vector<array<string, 6>> result;
+
+	for(const auto& [key, buffer] : _3dBuffers)
+	{
+		const auto splitKey = Tools::splitStringIntoMultiple(key, DELIMITER);
+
+		result.push_back({splitKey[0], splitKey[1], splitKey[2], splitKey[3], splitKey[4], splitKey[5]});
+	}
+
+	return result;
 }

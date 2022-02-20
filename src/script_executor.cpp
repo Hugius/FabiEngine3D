@@ -71,7 +71,7 @@ void ScriptExecutor::pause()
 
 		for(const auto& clockId : _fe3d->clock_getIds())
 		{
-			if(_fe3d->clock_isPaused(clockId))
+			if(_fe3d->clock_isStarted(clockId) && _fe3d->clock_isPaused(clockId))
 			{
 				_pausedClockIds.push_back(clockId);
 			}

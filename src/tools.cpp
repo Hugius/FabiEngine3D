@@ -167,7 +167,27 @@ const string Tools::mergeStrings(const string& firstString, const string& second
 	return (firstString + delimiter + secondString);
 }
 
-const pair<string, string> Tools::splitString(const string& mergedString, char delimiter)
+const string Tools::mergeStrings(const vector<string>& stringList, char delimiter)
+{
+	if(stringList.empty())
+	{
+		return "";
+	}
+
+	string result = "";
+
+	for(const auto& value : stringList)
+	{
+		result += value;
+		result += delimiter;
+	}
+
+	result.pop_back();
+
+	return result;
+}
+
+const pair<string, string> Tools::splitStringIntoTwo(const string& mergedString, char delimiter)
 {
 	const auto delimiterIndex = mergedString.find(delimiter);
 
@@ -180,6 +200,40 @@ const pair<string, string> Tools::splitString(const string& mergedString, char d
 	const auto secondString = mergedString.substr(delimiterIndex + 1);
 
 	return make_pair(firstString, secondString);
+}
+
+const vector<string> Tools::splitStringIntoMultiple(const string& mergedString, char delimiter)
+{
+	vector<string> result;
+
+	string tempString = "";
+
+	for(unsigned int i = 0; i < mergedString.size(); i++)
+	{
+		if(mergedString[i] == delimiter)
+		{
+			if(i == 0)
+			{
+				continue;
+			}
+			else
+			{
+				result.push_back(tempString);
+				tempString = "";
+			}
+		}
+		else if(i == (mergedString.size() - 1))
+		{
+			tempString += mergedString[i];
+			result.push_back(tempString);
+		}
+		else
+		{
+			tempString += mergedString[i];
+		}
+	}
+
+	return result;
 }
 
 const bool Tools::isDirectoryExisting(const string& path)

@@ -3,11 +3,9 @@
 #include "texture_buffer.hpp"
 
 #include <unordered_map>
-#include <map>
 #include <vector>
 
 using std::unordered_map;
-using std::map;
 using std::vector;
 
 class TextureBufferCache final
@@ -23,10 +21,15 @@ public:
 	const shared_ptr<TextureBuffer> get2dBuffer(const string& filePath) const;
 	const shared_ptr<TextureBuffer> get3dBuffer(const array<string, 6>& filePath) const;
 
-	const unordered_map<string, shared_ptr<TextureBuffer>>& get2dBuffers() const;
-	const map<array<string, 6>, shared_ptr<TextureBuffer>>& get3dBuffers() const;
+	const vector<shared_ptr<TextureBuffer>> get2dBuffers() const;
+	const vector<shared_ptr<TextureBuffer>> get3dBuffers() const;
+
+	const vector<string> get2dFilePaths() const;
+	const vector<array<string, 6>> get3dFilePaths() const;
 
 private:
+	static inline const char DELIMITER = '|';
+
 	unordered_map<string, shared_ptr<TextureBuffer>> _2dBuffers;
-	map<array<string, 6>, shared_ptr<TextureBuffer>> _3dBuffers;
+	unordered_map<string, shared_ptr<TextureBuffer>> _3dBuffers;
 };

@@ -17,7 +17,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 
 	for(auto& [key, startedAnimation] : _startedQuad3dAnimations)
 	{
-		const auto splitKey = Tools::splitString(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
 		const auto animation = _animation2dManager->getAnimation(splitKey.first);
 		const auto quad = _quad3dEntityManager->getEntity(splitKey.second);
 		const auto interval = static_cast<unsigned int>((animation->getInterval() * startedAnimation->getIntervalMultiplier()) / startedAnimation->getIntervalDivider());
@@ -88,7 +88,7 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 
 	for(auto& [key, startedAnimation] : _startedQuad2dAnimations)
 	{
-		const auto splitKey = Tools::splitString(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
 		const auto animation = _animation2dManager->getAnimation(splitKey.first);
 		const auto quad = _quad2dEntityManager->getEntity(splitKey.second);
 

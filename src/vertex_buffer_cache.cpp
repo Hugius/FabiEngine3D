@@ -3,22 +3,28 @@
 
 void VertexBufferCache::storeBuffer(const string& filePath, const string& partId, shared_ptr<VertexBuffer> buffer)
 {
-	auto cacheIterator = _buffers.find(Tools::mergeStrings(filePath, partId, DELIMITER));
+	const auto key = Tools::mergeStrings(filePath, partId, DELIMITER);
+
+	auto cacheIterator = _buffers.find(key);
 
 	if(cacheIterator != _buffers.end())
 	{
 		abort();
 	}
 
-	_buffers.insert(make_pair(Tools::mergeStrings(filePath, partId, DELIMITER), buffer));
+	_buffers.insert(make_pair(key, buffer));
 }
 
 void VertexBufferCache::deleteBuffer(const string& filePath, const string& partId)
 {
-	if(_buffers.find(Tools::mergeStrings(filePath, partId, DELIMITER)) != _buffers.end())
+	const auto key = Tools::mergeStrings(filePath, partId, DELIMITER);
+
+	if(_buffers.find(key) == _buffers.end())
 	{
-		_buffers.erase(Tools::mergeStrings(filePath, partId, DELIMITER));
+		abort();
 	}
+
+	_buffers.erase(key);
 }
 
 void VertexBufferCache::clear()
@@ -28,7 +34,9 @@ void VertexBufferCache::clear()
 
 const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& filePath, const string& partId) const
 {
-	auto cacheIterator = _buffers.find(Tools::mergeStrings(filePath, partId, DELIMITER));
+	const auto key = Tools::mergeStrings(filePath, partId, DELIMITER);
+
+	auto cacheIterator = _buffers.find(key);
 
 	if(cacheIterator != _buffers.end())
 	{
@@ -38,13 +46,39 @@ const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& filePa
 	return nullptr;
 }
 
+const vector<shared_ptr<VertexBuffer>> VertexBufferCache::getBuffers() const
+{
+	vector<shared_ptr<VertexBuffer>> result;
+
+	for(const auto& [key, buffer] : _buffers)
+	{
+		result.push_back(buffer);
+	}
+
+	return result;
+}
+
+const vector<string> VertexBufferCache::getFilePaths() const
+{
+	vector<string> result;
+
+	for(const auto& [key, buffer] : _buffers)
+	{
+		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
+
+		result.push_back(splitKey.first);
+	}
+
+	return result;
+}
+
 const vector<string> VertexBufferCache::getPartIds(const string& filePath) const
 {
 	vector<string> result;
 
 	for(const auto& [key, buffer] : _buffers)
 	{
-		const auto splitKey = Tools::splitString(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
 
 		if(filePath == splitKey.first)
 		{

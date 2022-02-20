@@ -31,7 +31,9 @@ public:
 	static const string chooseExplorerFile(const string& startingDirectory, const string& fileType);
 	static const string chooseExplorerDirectory(const string& startingDirectory);
 	static const string mergeStrings(const string& firstString, const string& secondString, char delimiter);
-	static const pair<string, string> splitString(const string& mergedString, char delimiter);
+	static const string mergeStrings(const vector<string>& stringList, char delimiter);
+	static const pair<string, string> splitStringIntoTwo(const string& mergedString, char delimiter);
+	static const vector<string> splitStringIntoMultiple(const string& mergedString, char delimiter);
 
 	static const fvec2 convertToNdc(const ivec2& position);
 	static const fvec2 convertPositionRelativeToDisplay(const fvec2& position);

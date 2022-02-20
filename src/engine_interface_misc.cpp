@@ -64,12 +64,9 @@ void EngineInterface::misc_clearMeshCache(const string& filePath)
 {
 	_core->getMeshLoader()->clearMeshCache(filePath);
 
-	for(const auto& [key, texture] : _core->getVertexBufferCache()->getBuffers())
+	for(const auto& partId : _core->getVertexBufferCache()->getPartIds(filePath))
 	{
-		if(key.first == filePath)
-		{
-			_core->getVertexBufferCache()->deleteBuffer(key.first, key.second);
-		}
+		_core->getVertexBufferCache()->deleteBuffer(filePath, partId);
 	}
 }
 

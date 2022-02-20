@@ -109,9 +109,9 @@ const vector<string> Script::getScriptFileIds() const
 	return result;
 }
 
-const vector<pair<string, unsigned int>> Script::findKeyword(const string& keyword) const
+const unordered_map<string, unsigned int> Script::findKeyword(const string& keyword) const
 {
-	vector<pair<string, unsigned int>> result;
+	unordered_map<string, unsigned int> result;
 
 	for(const auto& file : _scriptFiles)
 	{
@@ -123,7 +123,7 @@ const vector<pair<string, unsigned int>> Script::findKeyword(const string& keywo
 			{
 				if(line.substr(i, keyword.size()) == keyword)
 				{
-					result.push_back(make_pair(file->getId(), lineNumber + 1));
+					result.insert(make_pair(file->getId(), lineNumber + 1));
 					break;
 				}
 			}

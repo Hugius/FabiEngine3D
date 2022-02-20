@@ -1,4 +1,5 @@
 #include "animation3d_player.hpp"
+#include "tools.hpp"
 
 using std::make_shared;
 
@@ -26,7 +27,7 @@ void Animation3dPlayer::startModelAnimation(const string& animationId, const str
 	newAnimation->setPlayCount(playCount);
 	newAnimation->setPartIds(_animation3dManager->getAnimation(animationId)->getPartIds());
 
-	_startedModelAnimations.insert(make_pair(make_pair(animationId, modelId), newAnimation));
+	_startedModelAnimations.insert(make_pair(Tools::mergeStrings(animationId, modelId, DELIMITER), newAnimation));
 }
 
 void Animation3dPlayer::pauseModelAnimation(const string& animationId, const string& modelId)
@@ -49,7 +50,7 @@ void Animation3dPlayer::pauseModelAnimation(const string& animationId, const str
 		abort();
 	}
 
-	_startedModelAnimations.at(make_pair(animationId, modelId))->setPaused(true);
+	_startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->setPaused(true);
 }
 
 void Animation3dPlayer::autopauseModelAnimation(const string& animationId, const string& modelId)
@@ -72,7 +73,7 @@ void Animation3dPlayer::autopauseModelAnimation(const string& animationId, const
 		abort();
 	}
 
-	_startedModelAnimations.at(make_pair(animationId, modelId))->setAutopaused(true);
+	_startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->setAutopaused(true);
 }
 
 void Animation3dPlayer::resumeModelAnimation(const string& animationId, const string& modelId)
@@ -94,7 +95,7 @@ void Animation3dPlayer::resumeModelAnimation(const string& animationId, const st
 		abort();
 	}
 
-	_startedModelAnimations.at(make_pair(animationId, modelId))->setPaused(false);
+	_startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->setPaused(false);
 }
 
 void Animation3dPlayer::stopModelAnimation(const string& animationId, const string& modelId)
@@ -112,7 +113,7 @@ void Animation3dPlayer::stopModelAnimation(const string& animationId, const stri
 		abort();
 	}
 
-	_startedModelAnimations.erase(make_pair(animationId, modelId));
+	_startedModelAnimations.erase(Tools::mergeStrings(animationId, modelId, DELIMITER));
 }
 
 void Animation3dPlayer::setModelAnimationSpeedMultiplier(const string& animationId, const string& modelId, float value)
@@ -130,7 +131,7 @@ void Animation3dPlayer::setModelAnimationSpeedMultiplier(const string& animation
 		abort();
 	}
 
-	_startedModelAnimations.at(make_pair(animationId, modelId))->setSpeedMultiplier(value);
+	_startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->setSpeedMultiplier(value);
 }
 
 void Animation3dPlayer::setModelAnimationFrameIndex(const string& animationId, const string& modelId, unsigned int value)
@@ -148,5 +149,5 @@ void Animation3dPlayer::setModelAnimationFrameIndex(const string& animationId, c
 		abort();
 	}
 
-	_startedModelAnimations.at(make_pair(animationId, modelId))->setFrameIndex(value);
+	_startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->setFrameIndex(value);
 }

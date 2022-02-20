@@ -1,8 +1,11 @@
 #include "model_entity_manager.hpp"
 #include "logger.hpp"
 
+#include <map>
+
 using std::make_shared;
 using std::max;
+using std::map;
 
 shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& id)
 {
@@ -175,7 +178,7 @@ void ModelEntityManager::update()
 
 		if((_renderStorage->getCubeReflectionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeReflectionInterval()) == 0)
 		{
-			map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
+			map<float, shared_ptr<ReflectionEntity>> orderedReflectionEntities;
 
 			for(const auto& [key, reflectionEntity] : _reflectionManager->getEntities())
 			{
@@ -183,13 +186,13 @@ void ModelEntityManager::update()
 				{
 					const auto absoluteDistance = Math::calculateDistance(entity->getBasePosition(), reflectionEntity->getPosition());
 
-					reflectionDistanceMap.insert(make_pair(absoluteDistance, reflectionEntity));
+					orderedReflectionEntities.insert(make_pair(absoluteDistance, reflectionEntity));
 				}
 			}
 
-			if(!reflectionDistanceMap.empty())
+			if(!orderedReflectionEntities.empty())
 			{
-				const auto closestReflectionEntityId = reflectionDistanceMap.begin()->second->getId();
+				const auto closestReflectionEntityId = orderedReflectionEntities.begin()->second->getId();
 
 				if(entity->getCurrentReflectionEntityId() != closestReflectionEntityId)
 				{

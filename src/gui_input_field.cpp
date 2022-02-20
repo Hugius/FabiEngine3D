@@ -1,6 +1,5 @@
 #include "gui_input_field.hpp"
 
-#include <map>
 #include <windows.h>
 
 GuiInputField::GuiInputField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
@@ -54,7 +53,7 @@ void GuiInputField::_updateTyping()
 		{
 			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
 
-			map<char, char> numberCharacterMap;
+			unordered_map<char, char> numberCharacterMap;
 			numberCharacterMap['0'] = ')';
 			numberCharacterMap['1'] = '!';
 			numberCharacterMap['2'] = '@';
@@ -66,7 +65,7 @@ void GuiInputField::_updateTyping()
 			numberCharacterMap['8'] = '*';
 			numberCharacterMap['9'] = '(';
 
-			map<char, char> specialCharacterMap;
+			unordered_map<char, char> specialCharacterMap;
 			specialCharacterMap['.'] = '>';
 			specialCharacterMap[','] = '<';
 			specialCharacterMap['/'] = '?';

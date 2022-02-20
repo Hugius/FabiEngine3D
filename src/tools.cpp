@@ -1,4 +1,6 @@
 #include "tools.hpp"
+#include "tools.hpp"
+#include "tools.hpp"
 #include "configuration.hpp"
 #include "logger.hpp"
 
@@ -8,6 +10,7 @@
 #include <shlobj_core.h>
 
 using std::to_string;
+using std::make_pair;
 using std::filesystem::exists;
 using std::filesystem::create_directory;
 using std::filesystem::absolute;
@@ -157,6 +160,26 @@ const string Tools::chooseExplorerDirectory(const string& startingDirectory)
 	}
 
 	return "";
+}
+
+const string Tools::mergeStrings(const string& firstString, const string& secondString, char delimiter)
+{
+	return (firstString + delimiter + secondString);
+}
+
+const pair<string, string> Tools::splitString(const string& mergedString, char delimiter)
+{
+	const auto delimiterIndex = mergedString.find(delimiter);
+
+	if(delimiterIndex == string::npos)
+	{
+		return make_pair("", "");
+	}
+
+	const auto firstString = mergedString.substr(0, delimiterIndex);
+	const auto secondString = mergedString.substr(delimiterIndex + 1);
+
+	return make_pair(firstString, secondString);
 }
 
 const bool Tools::isDirectoryExisting(const string& path)

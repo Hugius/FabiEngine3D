@@ -5,14 +5,14 @@
 
 #include <array>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <string>
 
 using std::pair;
 using std::array;
 using std::vector;
 using std::string;
-using std::map;
+using std::unordered_map;
 using std::shared_ptr;
 using std::make_shared;
 
@@ -29,5 +29,5 @@ public:
 private:
 	shared_ptr<Image> _loadImage(const string& filePath);
 
-	map<string, shared_ptr<Image>> _cache;
+	unordered_map<string, shared_ptr<Image>> _cache;
 };

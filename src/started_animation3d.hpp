@@ -3,10 +3,10 @@
 #include "mathematics.hpp"
 
 #include <string>
-#include <map>
+#include <unordered_map>
 
 using std::string;
-using std::map;
+using std::unordered_map;
 
 class StartedAnimation3d final
 {
@@ -48,10 +48,10 @@ private:
 
 	vector<string> _partIds;
 
-	map<string, fvec3> _totalMovements;
-	map<string, fvec3> _totalRotations;
-	map<string, fvec3> _totalScalings;
-	map<string, fvec3> _totalSpeeds;
+	unordered_map<string, fvec3> _totalMovements;
+	unordered_map<string, fvec3> _totalRotations;
+	unordered_map<string, fvec3> _totalScalings;
+	unordered_map<string, fvec3> _totalSpeeds;
 
 	int _playCount = 0;
 

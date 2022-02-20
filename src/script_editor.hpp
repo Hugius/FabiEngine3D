@@ -73,7 +73,7 @@ private:
 	static inline constexpr unsigned int BLOOM_QUALITY = 1;
 	unsigned int _passedFrames = 0;
 
-	static inline const vector<pair<char, char>> NUMBER_CHARACTERS =
+	static inline const unordered_map<char, char> NUMBER_CHARACTERS =
 	{
 		{'0', ')'},
 		{'1', '!'},
@@ -86,7 +86,7 @@ private:
 		{'8', '*'},
 		{'9', '('}
 	};
-	static inline const vector<pair<char, char>> SPECIAL_CHARACTERS =
+	static inline const unordered_map<char, char> SPECIAL_CHARACTERS =
 	{
 		{'.', '>'},
 		{',', '<'},

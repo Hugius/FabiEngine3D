@@ -2,9 +2,9 @@
 
 #include "mesh.hpp"
 
-#include <map>
+#include <unordered_map>
 
-using std::map;
+using std::unordered_map;
 using std::pair;
 
 class MeshLoader final
@@ -20,5 +20,5 @@ public:
 private:
 	shared_ptr<Mesh> _loadMesh(const string& filePath);
 
-	map<string, shared_ptr<Mesh>> _cache;
+	unordered_map<string, shared_ptr<Mesh>> _cache;
 };

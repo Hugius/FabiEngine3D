@@ -160,7 +160,7 @@ private:
 	shared_ptr<ScriptVariable> _getLocalVariable(const string& variableId);
 	shared_ptr<ScriptVariable> _getGlobalVariable(const string& variableId);
 
-	map<string, float> _debuggingTimes;
+	unordered_map<string, float> _debuggingTimes;
 
 	unordered_map<unsigned int, unordered_map<string, shared_ptr<ScriptVariable>>> _localVariables;
 	unordered_map<string, shared_ptr<ScriptVariable>> _globalVariables;
@@ -244,7 +244,7 @@ private:
 	shared_ptr<CustomWorldBuilder> _customWorldBuilder = nullptr;
 	shared_ptr<WorldUtilities> _worldUtilities = nullptr;
 
-	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =
+	static inline const unordered_map<string, InputType> KEY_INPUT_STRING_MAP =
 	{
 		{"KEY_A", InputType::KEY_A},
 		{"KEY_B", InputType::KEY_B},
@@ -341,7 +341,7 @@ private:
 		{"KEY_SLASH", InputType::KEY_SLASH}
 	};
 
-	static inline const map<string, InputType> MOUSE_INPUT_STRING_MAP =
+	static inline const unordered_map<string, InputType> MOUSE_INPUT_STRING_MAP =
 	{
 		{"BUTTON_LEFT", InputType::MOUSE_BUTTON_LEFT},
 		{"BUTTON_MIDDLE", InputType::MOUSE_BUTTON_MIDDLE},

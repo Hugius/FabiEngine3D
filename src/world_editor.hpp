@@ -148,10 +148,10 @@ private:
 	static inline const string TORCH_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
 	static inline const string CAMERA_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
 	static inline const string SPEAKER_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
-	map<string, string> _loadedModelIds;
-	map<string, string> _loadedQuadIds;
-	map<string, string> _loadedTextIds;
-	map<string, string> _loadedSoundIds;
+	unordered_map<string, string> _loadedModelIds;
+	unordered_map<string, string> _loadedQuadIds;
+	unordered_map<string, string> _loadedTextIds;
+	unordered_map<string, string> _loadedSoundIds;
 	vector<string> _loadedAabbIds;
 	vector<string> _loadedPointlightIds;
 	vector<string> _loadedSpotlightIds;

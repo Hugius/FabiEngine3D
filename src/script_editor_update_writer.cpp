@@ -250,32 +250,32 @@ void ScriptEditor::_updateTextWriter()
 					}
 				}
 
-				for(const auto& element : NUMBER_CHARACTERS)
+				for(const auto& [normalCharacter, shiftCharacter] : NUMBER_CHARACTERS)
 				{
-					if(_fe3d->input_isKeyPressed(InputType(element.first)))
+					if(_fe3d->input_isKeyPressed(InputType(normalCharacter)))
 					{
 						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 						{
-							newCharacters += element.second;
+							newCharacters += shiftCharacter;
 						}
 						else
 						{
-							newCharacters += element.first;
+							newCharacters += normalCharacter;
 						}
 					}
 				}
 
-				for(const auto& element : SPECIAL_CHARACTERS)
+				for(const auto& [normalCharacter, shiftCharacter] : SPECIAL_CHARACTERS)
 				{
-					if(_fe3d->input_isKeyPressed(InputType(element.first)))
+					if(_fe3d->input_isKeyPressed(InputType(normalCharacter)))
 					{
 						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 						{
-							newCharacters += element.second;
+							newCharacters += shiftCharacter;
 						}
 						else
 						{
-							newCharacters += element.first;
+							newCharacters += normalCharacter;
 						}
 					}
 				}

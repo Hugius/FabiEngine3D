@@ -1,12 +1,12 @@
 #pragma once
 
 #include <SDL_mixer.h>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <vector>
 
 using std::string;
-using std::map;
+using std::unordered_map;
 using std::vector;
 
 class AudioLoader final
@@ -28,5 +28,5 @@ private:
 
 	Mix_Chunk* _loadChunk(const string& filePath, unsigned char* data) const;
 
-	map<string, Mix_Chunk*> _cache;
+	unordered_map<string, Mix_Chunk*> _cache;
 };

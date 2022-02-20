@@ -12,7 +12,7 @@ public:
 
 	const vector<string> getScriptFileIds() const;
 
-	const vector<pair<string, unsigned int>> findKeyword(const string& keyword) const;
+	const unordered_map<string, unsigned int> findKeyword(const string& keyword) const;
 
 	const unsigned int getScriptFileCount() const;
 	const unsigned int getTotalLineCount() const;

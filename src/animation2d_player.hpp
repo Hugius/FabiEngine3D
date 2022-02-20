@@ -6,10 +6,8 @@
 #include "started_animation2d.hpp"
 
 #include <vector>
-#include <map>
 
 using std::vector;
-using std::map;
 using std::pair;
 
 class Animation2dPlayer final
@@ -65,8 +63,10 @@ private:
 	void _updateQuad3dAnimationExecution();
 	void _updateQuad2dAnimationExecution();
 
-	map<pair<string, string>, shared_ptr<StartedAnimation2d>> _startedQuad3dAnimations;
-	map<pair<string, string>, shared_ptr<StartedAnimation2d>> _startedQuad2dAnimations;
+	static inline const char DELIMITER = '|';
+
+	unordered_map<string, shared_ptr<StartedAnimation2d>> _startedQuad3dAnimations;
+	unordered_map<string, shared_ptr<StartedAnimation2d>> _startedQuad2dAnimations;
 
 	shared_ptr<Animation2dManager> _animation2dManager = nullptr;
 	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;

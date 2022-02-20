@@ -1,4 +1,5 @@
 #include "animation3d_player.hpp"
+#include "tools.hpp"
 
 #include <set>
 
@@ -11,7 +12,7 @@ void Animation3dPlayer::update()
 
 void Animation3dPlayer::_updateModelAnimationExecution()
 {
-	set<pair<string, string>> modelAnimationsToStop;
+	set<string> modelAnimationsToStop;
 
 	for(auto& [key, startedAnimation] : _startedModelAnimations)
 	{
@@ -20,8 +21,9 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 			continue;
 		}
 
-		const auto animation = _animation3dManager->getAnimation(key.first);
-		const auto model = _modelEntityManager->getEntity(key.second);
+		const auto splitKey = Tools::splitString(key, DELIMITER);
+		const auto animation = _animation3dManager->getAnimation(splitKey.first);
+		const auto model = _modelEntityManager->getEntity(splitKey.second);
 
 		unsigned int finishedPartCount = 0;
 		for(const auto& partId : startedAnimation->getPartIds())
@@ -400,6 +402,6 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 
 	for(const auto& key : modelAnimationsToStop)
 	{
-		_startedModelAnimations.erase(make_pair(key.first, key.second));
+		_startedModelAnimations.erase(key);
 	}
 }

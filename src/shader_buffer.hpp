@@ -3,10 +3,10 @@
 #include "logger.hpp"
 #include "mathematics.hpp" 
 
-#include <map>
+#include <unordered_map>
 #include <glew.h>
 
-using std::map;
+using std::unordered_map;
 using BufferId = GLuint;
 
 class ShaderBuffer final
@@ -38,7 +38,7 @@ private:
 	void _uploadUniform(const BufferId& uniformId, const mat33& data);
 	void _uploadUniform(const BufferId& uniformId, const mat44& data);
 
-	map<string, BufferId> _uniformCache;
+	unordered_map<string, BufferId> _uniformCache;
 
 	BufferId _programId = 0;
 };

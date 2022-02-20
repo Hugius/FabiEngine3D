@@ -1,4 +1,5 @@
 #include "animation3d_player.hpp"
+#include "tools.hpp"
 
 void Animation3dPlayer::inject(shared_ptr<Animation3dManager> animation3dManager)
 {
@@ -16,7 +17,9 @@ const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimationId
 
 	for(const auto& [key, animation] : _startedModelAnimations)
 	{
-		ids.push_back(key);
+		const auto splitKey = Tools::splitString(key, DELIMITER);
+
+		ids.push_back(splitKey);
 	}
 
 	return ids;
@@ -37,7 +40,7 @@ const float Animation3dPlayer::getModelAnimationSpeedMultiplier(const string& an
 		abort();
 	}
 
-	return _startedModelAnimations.at(make_pair(animationId, modelId))->getSpeedMultiplier();
+	return _startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->getSpeedMultiplier();
 }
 
 const int Animation3dPlayer::getModelAnimationPlayCount(const string& animationId, const string& modelId) const
@@ -55,7 +58,7 @@ const int Animation3dPlayer::getModelAnimationPlayCount(const string& animationI
 		abort();
 	}
 
-	return _startedModelAnimations.at(make_pair(animationId, modelId))->getPlayCount();
+	return _startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->getPlayCount();
 }
 
 const unsigned int Animation3dPlayer::getModelAnimationFrameIndex(const string& animationId, const string& modelId) const
@@ -73,7 +76,7 @@ const unsigned int Animation3dPlayer::getModelAnimationFrameIndex(const string& 
 		abort();
 	}
 
-	return _startedModelAnimations.at(make_pair(animationId, modelId))->getFrameIndex();
+	return _startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->getFrameIndex();
 }
 
 const bool Animation3dPlayer::isModelAnimationStarted(const string& animationId, const string& modelId) const
@@ -87,7 +90,7 @@ const bool Animation3dPlayer::isModelAnimationStarted(const string& animationId,
 		abort();
 	}
 
-	return (_startedModelAnimations.find(make_pair(animationId, modelId)) != _startedModelAnimations.end());
+	return (_startedModelAnimations.find(Tools::mergeStrings(animationId, modelId, DELIMITER)) != _startedModelAnimations.end());
 }
 
 const bool Animation3dPlayer::isModelAnimationPlaying(const string& animationId, const string& modelId) const
@@ -123,7 +126,7 @@ const bool Animation3dPlayer::isModelAnimationPaused(const string& animationId, 
 		abort();
 	}
 
-	return _startedModelAnimations.at(make_pair(animationId, modelId))->isPaused();
+	return _startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->isPaused();
 }
 
 const bool Animation3dPlayer::isModelAnimationAutopaused(const string& animationId, const string& modelId) const
@@ -141,7 +144,7 @@ const bool Animation3dPlayer::isModelAnimationAutopaused(const string& animation
 		abort();
 	}
 
-	return _startedModelAnimations.at(make_pair(animationId, modelId))->isAutopaused();
+	return _startedModelAnimations.at(Tools::mergeStrings(animationId, modelId, DELIMITER))->isAutopaused();
 }
 
 const bool Animation3dPlayer::_hasReachedTarget(float total, float target, float speed) const

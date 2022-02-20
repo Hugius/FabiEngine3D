@@ -2,10 +2,12 @@
 #include "render_storage.hpp"
 
 #include <functional>
+#include <map>
 
 using std::make_shared;
 using std::dynamic_pointer_cast;
 using std::function;
+using std::map;
 
 void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport)
 {
@@ -335,20 +337,20 @@ void MasterRenderer::_renderGUI()
 	{
 		_quad2dEntityColorRenderer->bind();
 
-		map<unsigned int, shared_ptr<BaseEntity>> orderedEntityMap;
+		map<unsigned int, shared_ptr<BaseEntity>> orderedQuad2dEntities;
 		for(const auto& [key, entity] : _quad2dEntityManager->getEntities())
 		{
 			if(entity->getId() != _renderStorage->getCursorEntityId())
 			{
-				orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
+				orderedQuad2dEntities.insert(make_pair(entity->getDepth(), entity));
 			}
 		}
 		for(const auto& [key, entity] : _text2dEntityManager->getEntities())
 		{
-			orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
+			orderedQuad2dEntities.insert(make_pair(entity->getDepth(), entity));
 		}
 
-		for(const auto& [key, entity] : orderedEntityMap)
+		for(const auto& [key, entity] : orderedQuad2dEntities)
 		{
 			auto castedQuad2dEntity = dynamic_pointer_cast<Quad2dEntity>(entity);
 			auto castedText2dEntity = dynamic_pointer_cast<Text2dEntity>(entity);

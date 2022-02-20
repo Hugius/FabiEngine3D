@@ -3,10 +3,10 @@
 #include "quad2d_entity.hpp"
 
 #include <memory>
-#include <map>
+#include <unordered_map>
 
 using std::shared_ptr;
-using std::map;
+using std::unordered_map;
 
 class Text2dEntity final : public BaseEntity
 {
@@ -66,7 +66,7 @@ public:
 	const shared_ptr<TextureBuffer> getFontMap() const;
 
 private:
-	static inline const map<char, ivec2> _fontMapIndices =
+	static inline const unordered_map<char, ivec2> _fontMapIndices =
 	{
 		{' ', ivec2(0, 5)},
 		{'!', ivec2(1, 5)},

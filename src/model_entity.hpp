@@ -3,10 +3,10 @@
 #include "base_entity.hpp"
 #include "model_entity_part.hpp"
 
-#include <map>
+#include <unordered_map>
 
 using std::unique_ptr;
-using std::map;
+using std::unordered_map;
 
 class ModelEntity final : public BaseEntity
 {
@@ -166,6 +166,6 @@ private:
 	bool _isReflected = true;
 	bool _isLevelOfDetailed = false;
 
-	map<string, unique_ptr<ModelEntityPart>> _parts;
+	unordered_map<string, unique_ptr<ModelEntityPart>> _parts;
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;
 };

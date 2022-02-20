@@ -1,4 +1,5 @@
 #include "animation2d_player.hpp"
+#include "tools.hpp"
 
 #include <set>
 
@@ -12,12 +13,13 @@ void Animation2dPlayer::update()
 
 void Animation2dPlayer::_updateQuad3dAnimationExecution()
 {
-	set<pair<string, string>> quad3dAnimationsToStop;
+	set<string> quad3dAnimationsToStop;
 
 	for(auto& [key, startedAnimation] : _startedQuad3dAnimations)
 	{
-		const auto animation = _animation2dManager->getAnimation(key.first);
-		const auto quad = _quad3dEntityManager->getEntity(key.second);
+		const auto splitKey = Tools::splitString(key, DELIMITER);
+		const auto animation = _animation2dManager->getAnimation(splitKey.first);
+		const auto quad = _quad3dEntityManager->getEntity(splitKey.second);
 		const auto interval = static_cast<unsigned int>((animation->getInterval() * startedAnimation->getIntervalMultiplier()) / startedAnimation->getIntervalDivider());
 
 		if(!startedAnimation->isPaused())
@@ -76,18 +78,19 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 
 	for(const auto& key : quad3dAnimationsToStop)
 	{
-		_startedQuad3dAnimations.erase(make_pair(key.first, key.second));
+		_startedQuad3dAnimations.erase(key);
 	}
 }
 
 void Animation2dPlayer::_updateQuad2dAnimationExecution()
 {
-	set<pair<string, string>> quad2dAnimationsToStop;
+	set<string> quad2dAnimationsToStop;
 
 	for(auto& [key, startedAnimation] : _startedQuad2dAnimations)
 	{
-		const auto animation = _animation2dManager->getAnimation(key.first);
-		const auto quad = _quad2dEntityManager->getEntity(key.second);
+		const auto splitKey = Tools::splitString(key, DELIMITER);
+		const auto animation = _animation2dManager->getAnimation(splitKey.first);
+		const auto quad = _quad2dEntityManager->getEntity(splitKey.second);
 
 		if(!startedAnimation->isPaused())
 		{
@@ -140,6 +143,6 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 
 	for(const auto& key : quad2dAnimationsToStop)
 	{
-		_startedQuad2dAnimations.erase(make_pair(key.first, key.second));
+		_startedQuad2dAnimations.erase(key);
 	}
 }

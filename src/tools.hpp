@@ -3,8 +3,10 @@
 #include "mathematics.hpp"
 
 #include <string>
+#include <utility>
 
 using std::string;
+using std::pair;
 
 class Tools final
 {
@@ -28,6 +30,8 @@ public:
 	static const string getRootDirectoryPath();
 	static const string chooseExplorerFile(const string& startingDirectory, const string& fileType);
 	static const string chooseExplorerDirectory(const string& startingDirectory);
+	static const string mergeStrings(const string& firstString, const string& secondString, char delimiter);
+	static const pair<string, string> splitString(const string& mergedString, char delimiter);
 
 	static const fvec2 convertToNdc(const ivec2& position);
 	static const fvec2 convertPositionRelativeToDisplay(const fvec2& position);

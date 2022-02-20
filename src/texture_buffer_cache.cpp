@@ -76,7 +76,7 @@ const shared_ptr<TextureBuffer> TextureBufferCache::get3dBuffer(const array<stri
 	return nullptr;
 }
 
-const map<string, shared_ptr<TextureBuffer>>& TextureBufferCache::get2dBuffers() const
+const unordered_map<string, shared_ptr<TextureBuffer>>& TextureBufferCache::get2dBuffers() const
 {
 	return _2dBuffers;
 }

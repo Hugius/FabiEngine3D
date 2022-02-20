@@ -1,24 +1,23 @@
 #include "vertex_buffer_cache.hpp"
-
-#include "logger.hpp"
+#include "tools.hpp"
 
 void VertexBufferCache::storeBuffer(const string& filePath, const string& partId, shared_ptr<VertexBuffer> buffer)
 {
-	auto cacheIterator = _buffers.find(make_pair(filePath, partId));
+	auto cacheIterator = _buffers.find(Tools::mergeStrings(filePath, partId, DELIMITER));
 
 	if(cacheIterator != _buffers.end())
 	{
 		abort();
 	}
 
-	_buffers.insert(make_pair(make_pair(filePath, partId), buffer));
+	_buffers.insert(make_pair(Tools::mergeStrings(filePath, partId, DELIMITER), buffer));
 }
 
 void VertexBufferCache::deleteBuffer(const string& filePath, const string& partId)
 {
-	if(_buffers.find(make_pair(filePath, partId)) != _buffers.end())
+	if(_buffers.find(Tools::mergeStrings(filePath, partId, DELIMITER)) != _buffers.end())
 	{
-		_buffers.erase(make_pair(filePath, partId));
+		_buffers.erase(Tools::mergeStrings(filePath, partId, DELIMITER));
 	}
 }
 
@@ -29,7 +28,7 @@ void VertexBufferCache::clear()
 
 const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& filePath, const string& partId) const
 {
-	auto cacheIterator = _buffers.find(make_pair(filePath, partId));
+	auto cacheIterator = _buffers.find(Tools::mergeStrings(filePath, partId, DELIMITER));
 
 	if(cacheIterator != _buffers.end())
 	{
@@ -39,7 +38,19 @@ const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& filePa
 	return nullptr;
 }
 
-const map<pair<string, string>, shared_ptr<VertexBuffer>> VertexBufferCache::getBuffers() const
+const vector<string> VertexBufferCache::getPartIds(const string& filePath) const
 {
-	return _buffers;
+	vector<string> result;
+
+	for(const auto& [key, buffer] : _buffers)
+	{
+		const auto splitKey = Tools::splitString(key, DELIMITER);
+
+		if(filePath == splitKey.first)
+		{
+			result.push_back(splitKey.second);
+		}
+	}
+
+	return result;
 }

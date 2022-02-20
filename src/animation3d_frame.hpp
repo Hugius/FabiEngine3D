@@ -4,20 +4,20 @@
 #include "speed_type.hpp"
 #include "transformation_type.hpp"
 
-#include <map>
+#include <unordered_map>
 #include <string>
 
-using std::map;
+using std::unordered_map;
 using std::string;
 
 class Animation3dFrame final
 {
 	friend class Animation3d;
 
-	map<string, fvec3> targetTransformations;
-	map<string, fvec3> rotationOrigins;
-	map<string, fvec3> speeds;
+	unordered_map<string, fvec3> targetTransformations;
+	unordered_map<string, fvec3> rotationOrigins;
+	unordered_map<string, fvec3> speeds;
 
-	map<string, SpeedType> speedTypes;
-	map<string, TransformationType> transformationTypes;
+	unordered_map<string, SpeedType> speedTypes;
+	unordered_map<string, TransformationType> transformationTypes;
 };

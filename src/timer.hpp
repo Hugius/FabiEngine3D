@@ -2,13 +2,13 @@
 
 #include "clock.hpp"
 
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <memory>
 #include <vector>
 
 using std::string;
-using std::map;
+using std::unordered_map;
 using std::unique_ptr;
 using std::vector;
 
@@ -35,7 +35,7 @@ public:
 	const bool isClockPaused(const string& id) const;
 
 private:
-	map<string, unique_ptr<Clock>> _clocks;
+	unordered_map<string, unique_ptr<Clock>> _clocks;
 
 	unsigned int _passedUpdateCount = -1;
 

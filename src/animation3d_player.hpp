@@ -36,7 +36,9 @@ private:
 
 	const bool _hasReachedTarget(float total, float target, float speed) const;
 
-	map<pair<string, string>, shared_ptr<StartedAnimation3d>> _startedModelAnimations;
+	static inline const char DELIMITER = '|';
+
+	unordered_map<string, shared_ptr<StartedAnimation3d>> _startedModelAnimations;
 
 	shared_ptr<Animation3dManager> _animation3dManager = nullptr;
 	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;

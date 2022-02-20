@@ -32,7 +32,6 @@ public:
 
 	const bool isClockExisting(const string& id) const;
 	const bool isClockStarted(const string& id) const;
-	const bool isClockTicking(const string& id) const;
 	const bool isClockPaused(const string& id) const;
 
 private:

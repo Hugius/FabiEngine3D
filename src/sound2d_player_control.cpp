@@ -45,11 +45,6 @@ void Sound2dPlayer::pauseSounds(vector<Sound2d>& sounds)
 
 void Sound2dPlayer::pauseSound(Sound2d& sound)
 {
-	if(!isSoundStreaming(sound))
-	{
-		abort();
-	}
-
 	if(isSoundPaused(sound))
 	{
 		abort();
@@ -148,11 +143,6 @@ const bool Sound2dPlayer::isSoundStarted(Sound2d& sound) const
 	}
 
 	return false;
-}
-
-const bool Sound2dPlayer::isSoundStreaming(Sound2d& sound) const
-{
-	return (isSoundStarted(sound) && !isSoundPaused(sound));
 }
 
 const bool Sound2dPlayer::isSoundPaused(Sound2d& sound) const

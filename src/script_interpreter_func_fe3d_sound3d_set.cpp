@@ -104,9 +104,9 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				if(!_fe3d->sound3d_isStreaming(args[0]->getString()))
+				if(!_fe3d->sound3d_isStarted(args[0]->getString()))
 				{
-					_throwRuntimeError("sound3D is not streaming");
+					_throwRuntimeError("sound3D is not started");
 					return true;
 				}
 				if(_fe3d->sound3d_isPaused(args[0]->getString()))

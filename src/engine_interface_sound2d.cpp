@@ -71,11 +71,6 @@ const bool EngineInterface::sound2d_isStarted(const string& id) const
 	return _core->getSound2dPlayer()->isSoundStarted(_core->getSound2dManager()->getSound(id));
 }
 
-const bool EngineInterface::sound2d_isStreaming(const string& id) const
-{
-	return _core->getSound2dPlayer()->isSoundStreaming(_core->getSound2dManager()->getSound(id));
-}
-
 const bool EngineInterface::sound2d_isPaused(const string& id) const
 {
 	return _core->getSound2dPlayer()->isSoundPaused(_core->getSound2dManager()->getSound(id));

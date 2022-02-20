@@ -139,20 +139,6 @@ const bool Timer::isClockStarted(const string& id) const
 	return _clocks.at(id)->isStarted;
 }
 
-const bool Timer::isClockTicking(const string& id) const
-{
-	if(!isClockExisting(id))
-	{
-		abort();
-	}
-	if(!isClockStarted(id))
-	{
-		abort();
-	}
-
-	return !_clocks.at(id)->isPaused;
-}
-
 const bool Timer::isClockPaused(const string& id) const
 {
 	if(!isClockExisting(id))

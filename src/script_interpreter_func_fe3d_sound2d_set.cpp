@@ -87,9 +87,9 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
-				if(!_fe3d->sound2d_isStreaming(args[0]->getString()))
+				if(!_fe3d->sound2d_isStarted(args[0]->getString()))
 				{
-					_throwRuntimeError("sound2D is not streaming");
+					_throwRuntimeError("sound2D is not started");
 					return true;
 				}
 				if(_fe3d->sound2d_isPaused(args[0]->getString()))

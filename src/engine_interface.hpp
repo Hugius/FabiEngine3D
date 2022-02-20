@@ -700,7 +700,6 @@ public:
 	const float sound2d_getVolume(const string& id) const;
 	const bool sound2d_isExisting(const string& id) const;
 	const bool sound2d_isStarted(const string& id) const;
-	const bool sound2d_isStreaming(const string& id) const;
 	const bool sound2d_isPaused(const string& id) const;
 
 	void sound3d_create(const string& id, const string& audioPath);
@@ -723,7 +722,6 @@ public:
 	const float sound3d_getMaxVolume(const string& id) const;
 	const bool sound3d_isExisting(const string& id) const;
 	const bool sound3d_isStarted(const string& id) const;
-	const bool sound3d_isStreaming(const string& id) const;
 	const bool sound3d_isPaused(const string& id) const;
 
 	void input_setLocked(bool locked);
@@ -967,7 +965,6 @@ public:
 	const float clock_getDeltaTime(const string& id) const;
 	const bool clock_isExisting(const string& id) const;
 	const bool clock_isStarted(const string& id) const;
-	const bool clock_isTicking(const string& id) const;
 	const bool clock_isPaused(const string& id) const;
 	const bool clock_isIdReserved(const string& id) const;
 

@@ -32,7 +32,6 @@ public:
 
 	const bool isChannelAvailable() const;
 	const bool isSoundStarted(Sound3d& sound) const;
-	const bool isSoundStreaming(Sound3d& sound) const;
 	const bool isSoundPaused(Sound3d& sound) const;
 
 private:

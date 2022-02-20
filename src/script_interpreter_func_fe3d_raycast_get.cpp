@@ -143,11 +143,11 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			{
 				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					if(_fe3d->aabb_getParentEntityType(aabbId) == AabbParentEntityType::MODEL)
+					if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::MODEL)
 					{
 						if(args[0]->getString().empty())
 						{
-							result = _fe3d->aabb_getParentEntityId(aabbId);
+							result = _fe3d->aabb_getParentId(aabbId);
 						}
 						else
 						{
@@ -158,7 +158,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 
 							if(partId == args[1]->getString())
 							{
-								result = _fe3d->aabb_getParentEntityId(aabbId);
+								result = _fe3d->aabb_getParentId(aabbId);
 							}
 						}
 					}
@@ -179,9 +179,9 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			{
 				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					if(_fe3d->aabb_getParentEntityType(aabbId) == AabbParentEntityType::QUAD3D)
+					if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::QUAD3D)
 					{
-						result = _fe3d->aabb_getParentEntityId(aabbId);
+						result = _fe3d->aabb_getParentId(aabbId);
 					}
 				}
 			}
@@ -200,9 +200,9 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			{
 				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					if(_fe3d->aabb_getParentEntityType(aabbId) == AabbParentEntityType::TEXT3D)
+					if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::TEXT3D)
 					{
-						result = _fe3d->aabb_getParentEntityId(aabbId);
+						result = _fe3d->aabb_getParentId(aabbId);
 					}
 				}
 			}

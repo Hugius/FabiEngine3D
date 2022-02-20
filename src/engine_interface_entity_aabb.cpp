@@ -6,14 +6,14 @@ void EngineInterface::aabb_create(const string& id, bool isCentered)
 	_core->getAabbEntityManager()->createEntity(id, isCentered);
 }
 
-void EngineInterface::aabb_setParentEntityId(const string& id, const string& value)
+void EngineInterface::aabb_setParentId(const string& id, const string& value)
 {
-	_core->getAabbEntityManager()->getEntity(id)->setParentEntityId(value);
+	_core->getAabbEntityManager()->getEntity(id)->setParentId(value);
 }
 
-void EngineInterface::aabb_setParentEntityType(const string& id, AabbParentEntityType value)
+void EngineInterface::aabb_setParentType(const string& id, AabbParentType value)
 {
-	_core->getAabbEntityManager()->getEntity(id)->setParentEntityType(value);
+	_core->getAabbEntityManager()->getEntity(id)->setParentType(value);
 }
 
 void EngineInterface::aabb_deleteAll()
@@ -148,12 +148,12 @@ const vector<string> EngineInterface::aabb_getIds() const
 	return result;
 }
 
-const string& EngineInterface::aabb_getParentEntityId(const string& id) const
+const string& EngineInterface::aabb_getParentId(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(id)->getParentEntityId();
+	return _core->getAabbEntityManager()->getEntity(id)->getParentId();
 }
 
-const AabbParentEntityType EngineInterface::aabb_getParentEntityType(const string& id) const
+const AabbParentType EngineInterface::aabb_getParentType(const string& id) const
 {
-	return _core->getAabbEntityManager()->getEntity(id)->getParentEntityType();
+	return _core->getAabbEntityManager()->getEntity(id)->getParentType();
 }

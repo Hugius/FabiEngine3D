@@ -144,8 +144,8 @@ void ModelEditor::_updateAabbCreating()
 
 			_fe3d->aabb_create((_currentModelId + "@" + _currentAabbId), false);
 			_fe3d->aabb_setVisible((_currentModelId + "@" + _currentAabbId), true);
-			_fe3d->aabb_setParentEntityId((_currentModelId + "@" + _currentAabbId), _currentModelId);
-			_fe3d->aabb_setParentEntityType((_currentModelId + "@" + _currentAabbId), AabbParentEntityType::MODEL);
+			_fe3d->aabb_setParentId((_currentModelId + "@" + _currentAabbId), _currentModelId);
+			_fe3d->aabb_setParentType((_currentModelId + "@" + _currentAabbId), AabbParentType::MODEL);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 			_gui->getOverlay()->getTextField("aabbId")->changeTextContent("AABB: " + _currentAabbId);

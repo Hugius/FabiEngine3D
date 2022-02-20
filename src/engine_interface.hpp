@@ -3,7 +3,7 @@
 #include "input_type.hpp"
 #include "direction.hpp"
 #include "direction_order.hpp"
-#include "aabb_parent_entity_type.hpp"
+#include "aabb_parent_type.hpp"
 #include "networking_client_message.hpp"
 #include "networking_server_message.hpp"
 #include "mathematics.hpp"
@@ -572,8 +572,8 @@ public:
 	void aabb_create(const string& id, bool isCentered);
 	void aabb_delete(const string& id);
 	void aabb_deleteAll();
-	void aabb_setParentEntityId(const string& id, const string& value);
-	void aabb_setParentEntityType(const string& id, AabbParentEntityType value);
+	void aabb_setParentId(const string& id, const string& value);
+	void aabb_setParentType(const string& id, AabbParentType value);
 	void aabb_setVisible(const string& id, bool value);
 	void aabb_setColor(const string& id, const fvec3& value);
 	void aabb_setRaycastResponsive(const string& id, bool value);
@@ -588,7 +588,7 @@ public:
 	void aabb_scaleTo(const string& id, const fvec3& target, float speed);
 
 	const vector<string> aabb_getIds() const;
-	const string& aabb_getParentEntityId(const string& id) const;
+	const string& aabb_getParentId(const string& id) const;
 	const fvec3& aabb_getBasePosition(const string& id) const;
 	const fvec3& aabb_getBaseSize(const string& id) const;
 	const fvec3& aabb_getLocalPosition(const string& id) const;
@@ -599,7 +599,7 @@ public:
 	const bool aabb_isExisting(const string& id) const;
 	const bool aabb_isVisible(const string& id) const;
 	const bool aabb_hasParent(const string& id) const;
-	const AabbParentEntityType aabb_getParentEntityType(const string& id) const;
+	const AabbParentType aabb_getParentType(const string& id) const;
 
 	void pointlight_create(const string& id);
 	void pointlight_delete(const string& id);

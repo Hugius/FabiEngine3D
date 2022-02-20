@@ -129,14 +129,14 @@ void AabbEntity::scaleBaseTo(const fvec3& target, float speed)
 	_baseSizeTargetSpeed = speed;
 }
 
-void AabbEntity::setParentEntityId(const string& value)
+void AabbEntity::setParentId(const string& value)
 {
-	_parentEntityId = value;
+	_parentId = value;
 }
 
-void AabbEntity::setParentEntityType(AabbParentEntityType value)
+void AabbEntity::setParentType(AabbParentType value)
 {
-	_parentEntityType = value;
+	_parentType = value;
 }
 
 void AabbEntity::setLocalPosition(const fvec3& value)
@@ -184,14 +184,14 @@ const fvec3& AabbEntity::getColor() const
 	return _color;
 }
 
-const string& AabbEntity::getParentEntityId() const
+const string& AabbEntity::getParentId() const
 {
-	return _parentEntityId;
+	return _parentId;
 }
 
-const AabbParentEntityType AabbEntity::getParentEntityType() const
+const AabbParentType AabbEntity::getParentType() const
 {
-	return _parentEntityType;
+	return _parentType;
 }
 
 const Direction AabbEntity::getCollisionDirection() const
@@ -216,7 +216,7 @@ const bool AabbEntity::isCollisionResponsive() const
 
 const bool AabbEntity::hasParent() const
 {
-	return !_parentEntityId.empty();
+	return !_parentId.empty();
 }
 
 const bool AabbEntity::hasCollided() const

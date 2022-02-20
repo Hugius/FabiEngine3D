@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				return true;
 			}
 
-			if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+			if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 			{
 				_throwRuntimeError("cannot access a bound AABB");
 				return true;
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -140,7 +140,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -160,7 +160,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -180,7 +180,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -216,7 +216,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -236,7 +236,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -256,7 +256,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -276,7 +276,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;
@@ -296,7 +296,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
-				if(!_fe3d->aabb_getParentEntityId(args[0]->getString()).empty())
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
 				{
 					_throwRuntimeError("cannot access a bound AABB");
 					return true;

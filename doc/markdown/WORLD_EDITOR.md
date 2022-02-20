@@ -43,7 +43,7 @@
 
 ## 7. Quad3D
 
-- You can place/edit/delete Quad3D entities in the world.
+- You can place/edit/delete quad3D entities in the world.
 - If a terrain entity is selected, you can place the model entity on top of the terrain entity with your mouse.
 - If no terrain entity is selected, you must specify the position of the sound.
 

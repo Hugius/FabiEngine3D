@@ -45,8 +45,8 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->model_setReflected(newModelId, false);
 
 				_fe3d->aabb_create(newModelId, true);
-				_fe3d->aabb_setParentEntityId(newModelId, newModelId);
-				_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setParentId(newModelId, newModelId);
+				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_TORCH_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 
@@ -129,8 +129,8 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->model_setReflected(newModelId, false);
 
 				_fe3d->aabb_create(newModelId, true);
-				_fe3d->aabb_setParentEntityId(newModelId, newModelId);
-				_fe3d->aabb_setParentEntityType(newModelId, AabbParentEntityType::MODEL);
+				_fe3d->aabb_setParentId(newModelId, newModelId);
+				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_TORCH_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}

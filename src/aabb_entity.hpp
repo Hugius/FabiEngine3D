@@ -3,7 +3,7 @@
 #include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "direction.hpp"
-#include "aabb_parent_entity_type.hpp"
+#include "aabb_parent_type.hpp"
 
 #include <memory>
 
@@ -25,8 +25,8 @@ public:
 	void scaleBase(const fvec3& value);
 	void moveBaseTo(const fvec3& target, float speed);
 	void scaleBaseTo(const fvec3& target, float speed);
-	void setParentEntityId(const string& value);
-	void setParentEntityType(AabbParentEntityType value);
+	void setParentId(const string& value);
+	void setParentType(AabbParentType value);
 	void setCollisionDirection(Direction value);
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
@@ -34,7 +34,7 @@ public:
 	void setColor(const fvec3& value);
 	void setCentered(bool value);
 
-	const string& getParentEntityId() const;
+	const string& getParentId() const;
 
 	const mat44& getTransformation() const;
 
@@ -51,11 +51,11 @@ public:
 	const bool hasCollided() const;
 
 	const shared_ptr<VertexBuffer> getMesh() const;
-	const AabbParentEntityType getParentEntityType() const;
+	const AabbParentType getParentType() const;
 	const Direction getCollisionDirection() const;
 
 private:
-	string _parentEntityId = "";
+	string _parentId = "";
 
 	mat44 _transformation = mat44(1.0f);
 
@@ -76,6 +76,6 @@ private:
 	bool _hasCollided = false;
 
 	shared_ptr<VertexBuffer> _mesh = nullptr;
-	AabbParentEntityType _parentEntityType = AabbParentEntityType::MODEL;
+	AabbParentType _parentType = AabbParentType::MODEL;
 	Direction _collisionDirection = Direction::X;
 };

@@ -4,7 +4,7 @@
 
 - The model entity is a 3D object in 3D space.
 - A variety of textures can be used for a more detailed mesh.
-- Each model can be the parent of multipe AABB entities.
+- Each model entity can be the parent of multipe AABB entities.
 - If the mesh is multiparted, each part has its own properties.
 
 ## 2. Assets

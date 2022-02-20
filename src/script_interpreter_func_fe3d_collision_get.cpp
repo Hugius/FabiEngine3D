@@ -262,7 +262,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 			for(const auto& aabbId : aabbIds)
 			{
-				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentEntityType(aabbId) == AabbParentEntityType::MODEL))
+				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::MODEL))
 				{
 					const auto modelId = aabbId.substr(0, aabbId.find('@'));
 
@@ -318,7 +318,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 			for(const auto& aabbId : aabbIds)
 			{
-				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentEntityType(aabbId) == AabbParentEntityType::QUAD3D))
+				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::QUAD3D))
 				{
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, aabbId));
 				}
@@ -357,7 +357,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 			for(const auto& aabbId : aabbIds)
 			{
-				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentEntityType(aabbId) == AabbParentEntityType::TEXT3D))
+				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::TEXT3D))
 				{
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, aabbId));
 				}

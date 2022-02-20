@@ -9,7 +9,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\aabb_parent_entity_type.hpp">
+    <ClInclude Include="..\..\..\src\aabb_parent_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\speed_type.hpp">

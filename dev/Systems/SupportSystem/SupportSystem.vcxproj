@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\aabb_parent_entity_type.hpp" />
+    <ClInclude Include="..\..\..\src\aabb_parent_type.hpp" />
     <ClInclude Include="..\..\..\src\clock.hpp" />
     <ClInclude Include="..\..\..\src\speed_type.hpp" />
     <ClInclude Include="..\..\..\src\bloom_type.hpp" />

@@ -2,8 +2,8 @@
 
 ## 1. General
 
-- The Text3D entity is a composition of Quad3D entities.
-- Every Quad3D entity represents a text character.
+- The Text3D entity is a composition of quad3D entities.
+- Every quad3D entity represents a text character.
 - The text is generated using a font map.
 
 ## 2. Assets

@@ -111,11 +111,11 @@ void AabbEntityManager::update()
 	{
 		if(entity->hasParent())
 		{
-			switch(entity->getParentEntityType())
+			switch(entity->getParentType())
 			{
-				case AabbParentEntityType::MODEL:
+				case AabbParentType::MODEL:
 				{
-					auto foundPair = _modelEntityManager->getEntities().find(entity->getParentEntityId());
+					auto foundPair = _modelEntityManager->getEntities().find(entity->getParentId());
 
 					if(foundPair == _modelEntityManager->getEntities().end())
 					{
@@ -220,9 +220,9 @@ void AabbEntityManager::update()
 
 					break;
 				}
-				case AabbParentEntityType::QUAD3D:
+				case AabbParentType::QUAD3D:
 				{
-					auto foundPair = _quad3dEntityManager->getEntities().find(entity->getParentEntityId());
+					auto foundPair = _quad3dEntityManager->getEntities().find(entity->getParentId());
 
 					if(foundPair == _quad3dEntityManager->getEntities().end())
 					{
@@ -292,9 +292,9 @@ void AabbEntityManager::update()
 
 					break;
 				}
-				case AabbParentEntityType::TEXT3D:
+				case AabbParentType::TEXT3D:
 				{
-					auto foundPair = _text3dEntityManager->getEntities().find(entity->getParentEntityId());
+					auto foundPair = _text3dEntityManager->getEntities().find(entity->getParentId());
 
 					if(foundPair == _text3dEntityManager->getEntities().end())
 					{

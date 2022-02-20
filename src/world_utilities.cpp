@@ -187,8 +187,8 @@ void WorldUtilities::copyTemplateModel(const string& newId, const string& templa
 	{
 		const string newAabbId = (newId + "@" + templateAabbId.substr((templateId + "_").size()));
 		_fe3d->aabb_create(newAabbId, false);
-		_fe3d->aabb_setParentEntityId(newAabbId, newId);
-		_fe3d->aabb_setParentEntityType(newAabbId, AabbParentEntityType::MODEL);
+		_fe3d->aabb_setParentId(newAabbId, newId);
+		_fe3d->aabb_setParentType(newAabbId, AabbParentType::MODEL);
 		_fe3d->aabb_setLocalPosition(newAabbId, _fe3d->aabb_getLocalPosition(templateAabbId));
 		_fe3d->aabb_setLocalSize(newAabbId, _fe3d->aabb_getLocalSize(templateAabbId));
 	}
@@ -226,8 +226,8 @@ void WorldUtilities::copyTemplateQuad3d(const string& newId, const string& templ
 	}
 
 	_fe3d->aabb_create(newId, false);
-	_fe3d->aabb_setParentEntityId(newId, newId);
-	_fe3d->aabb_setParentEntityType(newId, AabbParentEntityType::QUAD3D);
+	_fe3d->aabb_setParentId(newId, newId);
+	_fe3d->aabb_setParentType(newId, AabbParentType::QUAD3D);
 }
 
 void WorldUtilities::copyTemplateText3d(const string& newId, const string& templateId)
@@ -251,8 +251,8 @@ void WorldUtilities::copyTemplateText3d(const string& newId, const string& templ
 	_fe3d->text3d_setMinTextureAlpha(newId, _fe3d->text3d_getMinTextureAlpha(templateId));
 
 	_fe3d->aabb_create(newId, false);
-	_fe3d->aabb_setParentEntityId(newId, newId);
-	_fe3d->aabb_setParentEntityType(newId, AabbParentEntityType::TEXT3D);
+	_fe3d->aabb_setParentId(newId, newId);
+	_fe3d->aabb_setParentType(newId, AabbParentType::TEXT3D);
 }
 
 void WorldUtilities::copyTemplateSound3d(const string& newId, const string& templateId)

@@ -93,9 +93,9 @@ const bool EngineInterface::sound2d_isStarted(const string& id) const
 	return _core->getSound2dPlayer()->isSoundStarted(_core->getSound2dManager()->getSound(id));
 }
 
-const bool EngineInterface::sound2d_isPlaying(const string& id) const
+const bool EngineInterface::sound2d_isStreaming(const string& id) const
 {
-	return _core->getSound2dPlayer()->isSoundPlaying(_core->getSound2dManager()->getSound(id));
+	return _core->getSound2dPlayer()->isSoundStreaming(_core->getSound2dManager()->getSound(id));
 }
 
 const bool EngineInterface::sound2d_isPaused(const string& id) const

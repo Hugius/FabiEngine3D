@@ -113,9 +113,9 @@ const bool EngineInterface::sound3d_isStarted(const string& id) const
 	return _core->getSound3dPlayer()->isSoundStarted(_core->getSound3dManager()->getSound(id));
 }
 
-const bool EngineInterface::sound3d_isPlaying(const string& id) const
+const bool EngineInterface::sound3d_isStreaming(const string& id) const
 {
-	return _core->getSound3dPlayer()->isSoundPlaying(_core->getSound3dManager()->getSound(id));
+	return _core->getSound3dPlayer()->isSoundStreaming(_core->getSound3dManager()->getSound(id));
 }
 
 const bool EngineInterface::sound3d_isPaused(const string& id) const

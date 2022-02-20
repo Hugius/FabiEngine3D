@@ -106,6 +106,16 @@ const bool EngineInterface::clock_isStarted(const string& id) const
 	return _core->getTimer()->isClockStarted(id);
 }
 
+const bool EngineInterface::clock_isTicking(const string& id) const
+{
+	if(clock_isIdReserved(id))
+	{
+		abort();
+	}
+
+	return _core->getTimer()->isClockTicking(id);
+}
+
 const bool EngineInterface::clock_isPaused(const string& id) const
 {
 	if(clock_isIdReserved(id))

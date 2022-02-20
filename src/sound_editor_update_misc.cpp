@@ -5,10 +5,10 @@
 void SoundEditor::_updateMiscellaneous()
 {
 	bool isExisting = _fe3d->sound2d_isExisting(_currentSoundId);
-	bool isPlaying = isExisting && _fe3d->sound2d_isPlaying(_currentSoundId);
+	bool isStreaming = isExisting && _fe3d->sound2d_isStreaming(_currentSoundId);
 	bool isPaused = isExisting && _fe3d->sound2d_isPaused(_currentSoundId);
 
-	if(isPlaying)
+	if(isStreaming)
 	{
 		_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\start.tga");
 	}

@@ -32,7 +32,7 @@ public:
 
 	const bool isChannelAvailable() const;
 	const bool isSoundStarted(Sound2d& sound) const;
-	const bool isSoundPlaying(Sound2d& sound) const;
+	const bool isSoundStreaming(Sound2d& sound) const;
 	const bool isSoundPaused(Sound2d& sound) const;
 
 private:

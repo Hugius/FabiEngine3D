@@ -147,7 +147,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 				return true;
 			}
 
-			const auto result = (_fe3d->clock_isStarted(args[0]->getString()) && !_fe3d->clock_isPaused(args[0]->getString()));
+			const auto result = _fe3d->clock_isTicking(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}

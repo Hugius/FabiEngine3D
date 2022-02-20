@@ -249,15 +249,8 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	for(const auto& id : _quad2dEditor->getLoadedEntityIds())
-	{
-		_fe3d->quad2d_delete(id);
-	}
-
-	for(const auto& id : _text2dEditor->getLoadedEntityIds())
-	{
-		_fe3d->text2d_delete(id);
-	}
+	_quad2dEditor->deleteLoadedEntities();
+	_text2dEditor->deleteLoadedEntities();
 
 	_fe3d->camera_reset();
 

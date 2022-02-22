@@ -1,20 +1,16 @@
 #pragma once
 
-#include "render_storage.hpp"
 #include "image.hpp"
 
-#include <array>
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <memory>
 
-using std::pair;
-using std::array;
 using std::vector;
 using std::string;
 using std::unordered_map;
 using std::shared_ptr;
-using std::make_shared;
 
 class ImageLoader final
 {

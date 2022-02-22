@@ -1,7 +1,7 @@
 #pragma once
 
-#include "sound2d.hpp"
 #include "audio_loader.hpp"
+#include "sound2d.hpp"
 
 #include <memory>
 
@@ -19,13 +19,11 @@ public:
 	const bool isSoundExisting(const string& id) const;
 	const bool isSoundsExisting() const;
 
-	Sound2d& getSound(const string& id);
-	vector<Sound2d>& getSounds();
+	const shared_ptr<Sound2d> getSound(const string& id) const;
+	const unordered_map<string, shared_ptr<Sound2d>>& getSounds() const;
 
 private:
-	const int _findSoundIndex(const string& id) const;
-
-	vector<Sound2d> _sounds;
+	unordered_map<string, shared_ptr<Sound2d>> _sounds;
 
 	shared_ptr<AudioLoader> _audioLoader = nullptr;
 };

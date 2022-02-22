@@ -2,10 +2,9 @@
 #pragma warning(disable:6386)
 
 #include "image_loader.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
 
-using std::clamp;
+using std::make_shared;
 
 shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 {
@@ -31,8 +30,6 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 	unsigned short rawWidth = ((header[13] << 8) | header[12]);
 	unsigned short rawHeight = ((header[15] << 8) | header[14]);
 	unsigned char rawFormat = (header[16]);
-
-	delete[] header;
 
 	if(rawIdLength != 0)
 	{
@@ -66,18 +63,18 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 
 	const auto width = static_cast<unsigned int>(rawWidth);
 	const auto height = static_cast<unsigned int>(rawHeight);
-	const auto bitFormat = static_cast<unsigned int>(rawFormat);
-	const auto byteFormat = (bitFormat / 8);
-	const auto size = (width * height * byteFormat);
+	const auto bitsPerPixel = static_cast<unsigned int>(rawFormat);
+	const auto bytesPerPixel = (bitsPerPixel / 8);
+	const auto size = (width * height * bytesPerPixel);
 	const auto pixels = new unsigned char[size];
 
-	for(unsigned y = 0; y < height; y++)
+	for(unsigned int y = 0; y < height; y++)
 	{
-		for(unsigned x = 0; x < width; x++)
+		for(unsigned int x = 0; x < width; x++)
 		{
-			const auto index = ((y * width * byteFormat) + (x * byteFormat));
+			const auto index = ((y * width * bytesPerPixel) + (x * bytesPerPixel));
 
-			if(byteFormat == 3)
+			if(bytesPerPixel == 3)
 			{
 				auto b = static_cast<unsigned char>(getc(file));
 				auto g = static_cast<unsigned char>(getc(file));
@@ -87,7 +84,7 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 				pixels[index + 1] = g;
 				pixels[index + 2] = b;
 			}
-			if(byteFormat == 4)
+			if(bytesPerPixel == 4)
 			{
 				auto b = static_cast<unsigned char>(getc(file));
 				auto g = static_cast<unsigned char>(getc(file));
@@ -102,10 +99,9 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 		}
 	}
 
+	delete[] header;
+
 	fclose(file);
 
-	return make_shared<Image>(pixels,
-							  static_cast<unsigned int>(width),
-							  static_cast<unsigned int>(height),
-							  PixelFormat(bitFormat == 24 ? PixelFormat::RGB : PixelFormat::RGBA));
+	return make_shared<Image>(pixels, width, height, (bitsPerPixel == 24 ? PixelFormat::RGB : PixelFormat::RGBA));
 }

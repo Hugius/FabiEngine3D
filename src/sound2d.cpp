@@ -4,13 +4,14 @@
 
 using std::clamp;
 
-Sound2d::Sound2d(const string& id, const string& audioPath, Mix_Chunk* dataPointer)
+Sound2d::Sound2d(const string& id)
 	:
-	_id(id),
-	_audioPath(audioPath),
-	_dataPointer(dataPointer)
+	_id(id)
 {
-
+	if(id.empty())
+	{
+		abort();
+	}
 }
 
 const string& Sound2d::getId() const
@@ -23,9 +24,14 @@ const string& Sound2d::getAudioPath() const
 	return _audioPath;
 }
 
-Mix_Chunk* Sound2d::getDataPointer() const
+void Sound2d::setAudio(shared_ptr<Audio> value)
 {
-	return _dataPointer;
+	_audio = value;
+}
+
+void Sound2d::setAudioPath(const string& value)
+{
+	_audioPath = value;
 }
 
 void Sound2d::setVolume(float value)
@@ -36,4 +42,9 @@ void Sound2d::setVolume(float value)
 const float Sound2d::getVolume() const
 {
 	return _volume;
+}
+
+const shared_ptr<Audio> Sound2d::getAudio() const
+{
+	return _audio;
 }

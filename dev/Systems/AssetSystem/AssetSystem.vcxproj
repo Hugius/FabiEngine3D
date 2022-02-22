@@ -144,7 +144,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\audio_loader.cpp" />
+    <ClCompile Include="..\..\..\src\audio.cpp" />
+    <ClCompile Include="..\..\..\src\audio_loader_private.cpp" />
+    <ClCompile Include="..\..\..\src\audio_loader_public.cpp" />
     <ClCompile Include="..\..\..\src\mesh.cpp" />
     <ClCompile Include="..\..\..\src\mesh_loader_public.cpp" />
     <ClCompile Include="..\..\..\src\mesh_loader_private.cpp" />
@@ -154,6 +156,7 @@
     <ClCompile Include="..\..\..\src\image_loader_private.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\audio.hpp" />
     <ClInclude Include="..\..\..\src\audio_loader.hpp" />
     <ClInclude Include="..\..\..\src\mesh.hpp" />
     <ClInclude Include="..\..\..\src\mesh_loader.hpp" />

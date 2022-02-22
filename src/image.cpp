@@ -1,7 +1,8 @@
 #pragma warning(disable:6386)
 
 #include "image.hpp"
-#include "logger.hpp"
+
+#include <stdlib.h>
 
 Image::Image(unsigned char* pixels, unsigned int width, unsigned int height, PixelFormat pixelFormat)
 	:
@@ -10,12 +11,12 @@ Image::Image(unsigned char* pixels, unsigned int width, unsigned int height, Pix
 	_height(height),
 	_pixelFormat(pixelFormat)
 {
-	if(pixels == nullptr)
+	if(_pixels == nullptr)
 	{
 		abort();
 	}
 
-	if((width == 0) || (height == 0))
+	if((_width == 0) || (_height == 0))
 	{
 		abort();
 	}

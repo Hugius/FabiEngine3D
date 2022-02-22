@@ -48,11 +48,17 @@
     <ClCompile Include="..\..\..\src\image_loader_private.cpp">
       <Filter>Image\Loader</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\audio_loader.cpp">
+    <ClCompile Include="..\..\..\src\audio_loader_public.cpp">
       <Filter>Audio\Loader</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mesh.cpp">
       <Filter>Mesh\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\audio.cpp">
+      <Filter>Audio\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\audio_loader_private.cpp">
+      <Filter>Audio\Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\mesh.hpp">
       <Filter>Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\audio.hpp">
+      <Filter>Audio\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

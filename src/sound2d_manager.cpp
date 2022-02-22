@@ -1,7 +1,4 @@
 #include "sound2d_manager.hpp"
-#include "logger.hpp"
-
-#include <algorithm>
 
 void Sound2dManager::deleteSounds()
 {
@@ -10,16 +7,12 @@ void Sound2dManager::deleteSounds()
 
 void Sound2dManager::deleteSound(const string& id)
 {
-	auto index = _findSoundIndex(id);
-
-	if(index == -1)
+	if(!isSoundExisting(id))
 	{
 		abort();
 	}
-	else
-	{
-		_sounds.erase(_sounds.begin() + index);
-	}
+
+	_sounds.erase(id);
 }
 
 void Sound2dManager::inject(shared_ptr<AudioLoader> audioLoader)
@@ -34,26 +27,26 @@ void Sound2dManager::update()
 
 void Sound2dManager::createSound(const string& id, const string& audioPath)
 {
-	if(_findSoundIndex(id) != -1)
-	{
-		abort();
-	}
-	if(id.empty())
+	if(isSoundExisting(id))
 	{
 		abort();
 	}
 
-	auto dataPointer = _audioLoader->loadChunk(audioPath);
+	auto audio = _audioLoader->loadAudio(audioPath);
 
-	if(dataPointer != nullptr)
+	if(audio == nullptr)
 	{
-		_sounds.push_back(Sound2d(id, audioPath, dataPointer));
+		return;
 	}
+
+	auto sound = make_shared<Sound2d>(id);
+
+	_sounds.insert(make_pair(id, sound));
 }
 
 const bool Sound2dManager::isSoundExisting(const string& id) const
 {
-	return (_findSoundIndex(id) != -1);
+	return (_sounds.find(id) != _sounds.end());
 }
 
 const bool Sound2dManager::isSoundsExisting() const
@@ -61,34 +54,19 @@ const bool Sound2dManager::isSoundsExisting() const
 	return !_sounds.empty();
 }
 
-vector<Sound2d>& Sound2dManager::getSounds()
+const unordered_map<string, shared_ptr<Sound2d>>& Sound2dManager::getSounds() const
 {
 	return _sounds;
 }
 
-Sound2d& Sound2dManager::getSound(const string& id)
+const shared_ptr<Sound2d> Sound2dManager::getSound(const string& id) const
 {
-	auto index = _findSoundIndex(id);
+	auto iterator = _sounds.find(id);
 
-	if(index == -1)
+	if(iterator == _sounds.end())
 	{
 		abort();
 	}
-	else
-	{
-		return _sounds[index];
-	}
-}
 
-const int Sound2dManager::_findSoundIndex(const string& id) const
-{
-	for(size_t i = 0; i < _sounds.size(); i++)
-	{
-		if(_sounds[i].getId() == id)
-		{
-			return static_cast<int>(i);
-		}
-	}
-
-	return -1;
+	return iterator->second;
 }

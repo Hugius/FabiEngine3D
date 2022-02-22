@@ -8,7 +8,10 @@ Animation3d::Animation3d(const string& id)
 	:
 	_id(id)
 {
-
+	if(id.empty())
+	{
+		abort();
+	}
 }
 
 void Animation3d::createPart(const string& partId)

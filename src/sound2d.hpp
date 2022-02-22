@@ -1,15 +1,20 @@
 #pragma once
 
+#include "audio.hpp"
+
 #include <string>
-#include <SDL_mixer.h>
+#include <memory>
 
 using std::string;
+using std::shared_ptr;
 
 class Sound2d
 {
 public:
-	Sound2d(const string& id, const string& audioPath, Mix_Chunk* dataPointer);
+	Sound2d(const string& id);
 
+	void setAudio(shared_ptr<Audio> value);
+	void setAudioPath(const string& value);
 	void setVolume(float value);
 
 	const string& getId() const;
@@ -17,13 +22,14 @@ public:
 
 	const float getVolume() const;
 
-	Mix_Chunk* getDataPointer() const;
+	const shared_ptr<Audio> getAudio() const;
 
 private:
-	string _id = "";
+	const string _id;
+
+	shared_ptr<Audio> _audio = nullptr;
+
 	string _audioPath = "";
 
 	float _volume = 1.0f;
-
-	Mix_Chunk* _dataPointer = nullptr;
 };

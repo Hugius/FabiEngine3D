@@ -1,32 +1,31 @@
 #pragma once
 
-#include <SDL_mixer.h>
+#include "audio.hpp"
+
+#include <vector>
 #include <unordered_map>
 #include <string>
-#include <vector>
+#include <memory>
 
+using std::pair;
+using std::vector;
 using std::string;
 using std::unordered_map;
-using std::vector;
+using std::shared_ptr;
+using std::make_shared;
 
 class AudioLoader final
 {
 public:
-	~AudioLoader();
+	void cacheAudio(const string& filePath, bool isCrucial);
+	void cacheAudios(const vector<string>& filePaths, bool isCrucial);
+	void clearAudioCache(const string& filePath);
+	void clearAudiosCache();
 
-	void cacheChunk(const string& filePath);
-	void cacheChunks(const vector<string>& filePaths);
-	void clearChunkCache(const string& filePath);
-	void clearChunksCache();
-
-	Mix_Chunk* loadChunk(const string& filePath);
+	const shared_ptr<Audio> loadAudio(const string& filePath);
 
 private:
-	void _throwLoadedMessage(const string& filePath);
+	shared_ptr<Audio> _loadAudio(const string& filePath);
 
-	const char* _loadWaveFile(const string& filePath) const;
-
-	Mix_Chunk* _loadChunk(const string& filePath, unsigned char* data) const;
-
-	unordered_map<string, Mix_Chunk*> _cache;
+	unordered_map<string, shared_ptr<Audio>> _cache;
 };

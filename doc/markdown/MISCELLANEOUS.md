@@ -11,7 +11,6 @@
 ## 2. Known issues
 
 - There is a very rare bug when using the first person camera; if the cursor does not center anymore and the camera keeps spinning very fast, click on the window border once. This bug does not occur in fullscreen mode.
-- If FabiEngine3D crashes with the error `SDL_MIX could not be initialized: WASAPI can't find requested audio endpoint: Element not found.`, then you do not have an active audio device enabled or you have sound driver problems.
 
 ## 3. Miscellaneous
 

@@ -6,7 +6,10 @@ Animation2d::Animation2d(const string& id)
 	:
 	_id(id)
 {
-
+	if(id.empty())
+	{
+		abort();
+	}
 }
 
 const string& Animation2d::getId() const

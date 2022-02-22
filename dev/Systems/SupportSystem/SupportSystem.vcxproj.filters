@@ -87,6 +87,9 @@
     <ClInclude Include="..\..\..\src\clock.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\channel_format.hpp">
+      <Filter>Enumeration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\configuration.cpp">

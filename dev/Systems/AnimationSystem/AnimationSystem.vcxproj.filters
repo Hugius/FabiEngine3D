@@ -22,14 +22,8 @@
     <Filter Include="Manager\2D\Data">
       <UniqueIdentifier>{008e2b3a-67ed-473d-9397-5fa2c1234a73}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\2D\Main">
-      <UniqueIdentifier>{3e8d58c6-2a64-454a-be3f-58f91d0492b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager\3D\Data">
       <UniqueIdentifier>{243f51fb-f29a-4787-9e4d-f72320b42242}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\3D\Main">
-      <UniqueIdentifier>{40fd2d3b-d069-428b-9fbf-92b0c0826323}</UniqueIdentifier>
     </Filter>
     <Filter Include="Player\2D\Data">
       <UniqueIdentifier>{97289457-4438-4566-acfb-fa26e3a1f574}</UniqueIdentifier>
@@ -42,6 +36,12 @@
     </Filter>
     <Filter Include="Player\3D\Data">
       <UniqueIdentifier>{6f0e1b53-c681-4659-8e99-e34cb56f264f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\2D\Main">
+      <UniqueIdentifier>{3e8d58c6-2a64-454a-be3f-58f91d0492b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\3D\Main">
+      <UniqueIdentifier>{40fd2d3b-d069-428b-9fbf-92b0c0826323}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

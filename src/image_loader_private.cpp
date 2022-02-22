@@ -8,15 +8,18 @@ using std::make_shared;
 
 shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 {
-	FILE* file = nullptr;
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto fullFilePath = (rootPath + filePath);
+
+	FILE* file = nullptr;
+
 	if(fopen_s(&file, fullFilePath.c_str(), "rb") != 0)
 	{
 		return nullptr;
 	}
 
-	auto header = new unsigned char[18];
+	auto header = new unsigned char[HEADER_SIZE];
+
 	for(int i = 0; i < 18; i++)
 	{
 		header[i] = getc(file);

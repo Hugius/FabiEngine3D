@@ -110,9 +110,9 @@ void SkyEntityManager::createEntity(const string& id)
 
 	auto entity = make_shared<SkyEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
-
 	entity->setMesh(_mesh);
+
+	_entities.insert(make_pair(id, entity));
 }
 
 void SkyEntityManager::update()

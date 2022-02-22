@@ -7,12 +7,10 @@
 #include <string>
 #include <memory>
 
-using std::pair;
 using std::vector;
 using std::string;
 using std::unordered_map;
 using std::shared_ptr;
-using std::make_shared;
 
 class AudioLoader final
 {
@@ -28,4 +26,6 @@ private:
 	shared_ptr<Audio> _loadAudio(const string& filePath);
 
 	unordered_map<string, shared_ptr<Audio>> _cache;
+
+	static inline const unsigned int HEADER_SIZE = 44;
 };

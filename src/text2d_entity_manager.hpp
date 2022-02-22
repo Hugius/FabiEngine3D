@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
 #include "image_loader.hpp"
 #include "text2d_entity.hpp"
 #include "texture_buffer_cache.hpp"
@@ -10,7 +9,7 @@
 
 using std::unordered_map;
 
-class Text2dEntityManager final : public BaseEntityManager
+class Text2dEntityManager final
 {
 public:
 	Text2dEntityManager();

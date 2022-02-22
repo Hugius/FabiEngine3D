@@ -47,8 +47,6 @@ void TerrainEntityManager::createEntity(const string& id, const string& heightMa
 
 	auto entity = make_shared<TerrainEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
-
 	const auto size = min(min(image->getWidth(), image->getHeight()), static_cast<unsigned int>(MAX_SIZE));
 	const auto bitsPerPixel = ((image->getPixelFormat() == PixelFormat::RGB) ? 3 : 4);
 
@@ -67,6 +65,8 @@ void TerrainEntityManager::createEntity(const string& id, const string& heightMa
 	entity->setHeightMapPath(heightMapPath);
 	entity->setPixels(pixels);
 	entity->setSize(static_cast<float>(size));
+
+	_entities.insert(make_pair(id, entity));
 
 	loadMesh(id);
 }

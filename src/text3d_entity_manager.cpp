@@ -98,13 +98,13 @@ void Text3dEntityManager::createEntity(const string& id, const string& fontMapPa
 
 	auto entity = make_shared<Text3dEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
-
 	entity->setMesh(isCentered ? _centeredMesh : _standingMesh);
 	entity->setCentered(isCentered);
 	entity->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
 	entity->setFontMapPath(fontMapPath);
 	entity->setContent("text");
+
+	_entities.insert(make_pair(id, entity));
 }
 
 void Text3dEntityManager::update()

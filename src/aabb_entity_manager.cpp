@@ -98,11 +98,11 @@ void AabbEntityManager::createEntity(const string& id, bool isCentered)
 
 	auto entity = make_shared<AabbEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
-
 	entity->setMesh(isCentered ? _centeredMesh : _standingMesh);
 	entity->setCentered(isCentered);
 	entity->setVisible(false);
+
+	_entities.insert(make_pair(id, entity));
 }
 
 void AabbEntityManager::update()

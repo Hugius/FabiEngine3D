@@ -49,7 +49,6 @@
     <ClInclude Include="..\..\..\src\aabb_entity.hpp" />
     <ClInclude Include="..\..\..\src\aabb_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\base_entity.hpp" />
-    <ClInclude Include="..\..\..\src\base_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\text3d_entity.hpp" />
     <ClInclude Include="..\..\..\src\quad3d_entity.hpp" />
     <ClInclude Include="..\..\..\src\quad3d_entity_manager.hpp" />

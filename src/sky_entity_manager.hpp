@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
 #include "render_storage.hpp"
 #include "sky_entity.hpp"
 
@@ -8,7 +7,7 @@
 
 using std::unordered_map;
 
-class SkyEntityManager final : public BaseEntityManager
+class SkyEntityManager final
 {
 public:
 	SkyEntityManager();

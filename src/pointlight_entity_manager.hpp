@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
 #include "pointlight_entity.hpp"
 
 #include <unordered_map>
@@ -9,7 +8,7 @@
 using std::unordered_map;
 using std::shared_ptr;
 
-class PointlightEntityManager final : public BaseEntityManager
+class PointlightEntityManager final
 {
 public:
 	void update();

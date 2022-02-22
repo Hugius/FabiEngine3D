@@ -1,14 +1,21 @@
 #include "audio_loader.hpp"
+#include "tools.hpp"
+
+using std::make_shared;
 
 shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 {
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const auto fullFilePath = (rootPath + filePath);
+
 	FILE* file = nullptr;
-	if(fopen_s(&file, std::string("Medxion - I feel bass.wav").c_str(), "rb") != 0)
+
+	if(fopen_s(&file, fullFilePath.c_str(), "rb") != 0)
 	{
-		return 0;
+		return nullptr;
 	}
 
-	auto header = new unsigned char[44];
+	auto header = new unsigned char[HEADER_SIZE];
 
 	for(int i = 0; i < 44; i++)
 	{
@@ -34,7 +41,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 
 	if(secondString != "WAVE")
 	{
-
+		return nullptr;
 	}
 
 	string thirdString = "";
@@ -61,6 +68,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 
 	const auto compressionFormat = static_cast<unsigned int>((header[21] << 8) | header[20]);
 
+	// 1 = PCM
 	if(compressionFormat != 1)
 	{
 		return nullptr;

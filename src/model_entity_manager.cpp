@@ -70,8 +70,6 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 
 	auto entity = make_shared<ModelEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
-
 	for(const auto& part : mesh->getParts())
 	{
 		vector<float> bufferData;
@@ -109,6 +107,8 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 	}
 
 	entity->setMeshPath(meshPath);
+
+	_entities.insert(make_pair(id, entity));
 }
 
 void ModelEntityManager::deleteEntity(const string& id)

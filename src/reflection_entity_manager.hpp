@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
 #include "reflection_entity.hpp"
 
 #include <unordered_map>
@@ -9,7 +8,7 @@
 using std::unordered_map;
 using std::shared_ptr;
 
-class ReflectionEntityManager final : public BaseEntityManager
+class ReflectionEntityManager final
 {
 public:
 	void update();

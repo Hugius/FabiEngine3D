@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
 #include "camera.hpp"
 #include "text3d_entity.hpp"
 #include "texture_buffer_cache.hpp"
@@ -10,7 +9,7 @@
 
 using std::unordered_map;
 
-class Text3dEntityManager final : public BaseEntityManager
+class Text3dEntityManager final
 {
 public:
 	Text3dEntityManager();

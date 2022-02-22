@@ -37,11 +37,11 @@ void Quad2dEntityManager::createEntity(const string& id, bool isCentered)
 
 	auto entity = make_shared<Quad2dEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
-
 	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
 	entity->setCentered(isCentered);
 	entity->setDepth(_renderStorage->getGuiDepth());
+
+	_entities.insert(make_pair(id, entity));
 
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }

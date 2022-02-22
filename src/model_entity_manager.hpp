@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
 #include "render_storage.hpp"
 #include "mesh_loader.hpp"
 #include "timer.hpp"
@@ -13,7 +12,7 @@
 
 using std::unordered_map;
 
-class ModelEntityManager final : public BaseEntityManager
+class ModelEntityManager final
 {
 public:
 	void inject(shared_ptr<RenderStorage> renderStorage);

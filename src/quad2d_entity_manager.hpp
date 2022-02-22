@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
 #include "render_storage.hpp"
 #include "quad2d_entity.hpp"
 
@@ -8,7 +7,7 @@
 
 using std::unordered_map;
 
-class Quad2dEntityManager final : public BaseEntityManager
+class Quad2dEntityManager final
 {
 public:
 	Quad2dEntityManager();

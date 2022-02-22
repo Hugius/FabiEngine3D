@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
 #include "image_loader.hpp"
 #include "terrain_entity.hpp"
 
@@ -8,7 +7,7 @@
 
 using std::unordered_map;
 
-class TerrainEntityManager final : public BaseEntityManager
+class TerrainEntityManager final
 {
 public:
 	void inject(shared_ptr<ImageLoader> imageLoader);

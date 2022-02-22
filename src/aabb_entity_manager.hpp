@@ -1,6 +1,5 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
 #include "vertex_buffer.hpp"
 #include "aabb_entity.hpp"
 #include "model_entity_manager.hpp"
@@ -11,7 +10,7 @@
 
 using std::unordered_map;
 
-class AabbEntityManager final : public BaseEntityManager
+class AabbEntityManager final
 {
 public:
 	AabbEntityManager();

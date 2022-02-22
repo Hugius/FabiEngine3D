@@ -13,17 +13,8 @@
     <Filter Include="Data\Base">
       <UniqueIdentifier>{44c1a87c-9396-4875-9ad7-6e6e4fa701c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Base">
-      <UniqueIdentifier>{84cef25a-8d14-4595-8ac2-ac7a5c4f8bfc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager\Entity">
       <UniqueIdentifier>{b9811820-3a2e-453b-8032-3a61ab05d49d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Entity\2D">
-      <UniqueIdentifier>{9c269b2e-5f39-4569-8230-fef0b9605672}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Entity\3D">
-      <UniqueIdentifier>{b3da1681-98b5-4ed2-adc9-045b6025fc12}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager\Entity\2D">
       <UniqueIdentifier>{745e382e-e5f6-4631-9c85-d2670c293c3e}</UniqueIdentifier>
@@ -31,46 +22,16 @@
     <Filter Include="Manager\Entity\3D">
       <UniqueIdentifier>{938c1284-eeb1-4887-9efd-5cff51c6bd65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\2D">
+      <UniqueIdentifier>{9c269b2e-5f39-4569-8230-fef0b9605672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\3D">
+      <UniqueIdentifier>{b3da1681-98b5-4ed2-adc9-045b6025fc12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\base_entity.cpp">
       <Filter>Data\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\quad2d_entity.cpp">
-      <Filter>Data\Entity\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\text2d_entity.cpp">
-      <Filter>Data\Entity\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\aabb_entity.cpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\model_entity.cpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\pointlight_entity.cpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\text3d_entity.cpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\quad3d_entity.cpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\reflection_entity.cpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sky_entity.cpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\spotlight_entity.cpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\terrain_entity.cpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\water_entity.cpp">
-      <Filter>Data\Entity\3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\aabb_entity_manager.cpp">
       <Filter>Manager\Entity\3D</Filter>
@@ -108,52 +69,46 @@
     <ClCompile Include="..\..\..\src\quad2d_entity_manager.cpp">
       <Filter>Manager\Entity\2D</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\aabb_entity.cpp">
+      <Filter>Data\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\model_entity.cpp">
+      <Filter>Data\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\pointlight_entity.cpp">
+      <Filter>Data\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_entity.cpp">
+      <Filter>Data\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\reflection_entity.cpp">
+      <Filter>Data\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sky_entity.cpp">
+      <Filter>Data\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spotlight_entity.cpp">
+      <Filter>Data\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\terrain_entity.cpp">
+      <Filter>Data\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text3d_entity.cpp">
+      <Filter>Data\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\water_entity.cpp">
+      <Filter>Data\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text2d_entity.cpp">
+      <Filter>Data\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad2d_entity.cpp">
+      <Filter>Data\2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\base_entity.hpp">
       <Filter>Data\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\base_entity_manager.hpp">
-      <Filter>Manager\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\quad2d_entity.hpp">
-      <Filter>Data\Entity\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\text2d_entity.hpp">
-      <Filter>Data\Entity\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\aabb_entity.hpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\model_entity.hpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\model_entity_part.hpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\pointlight_entity.hpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\text3d_entity.hpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\quad3d_entity.hpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\reflection_entity.hpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\sky_entity.hpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\spotlight_entity.hpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\terrain_entity.hpp">
-      <Filter>Data\Entity\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\water_entity.hpp">
-      <Filter>Data\Entity\3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\aabb_entity_manager.hpp">
       <Filter>Manager\Entity\3D</Filter>
@@ -190,6 +145,45 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad2d_entity_manager.hpp">
       <Filter>Manager\Entity\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\aabb_entity.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\model_entity.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\model_entity_part.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\pointlight_entity.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\quad3d_entity.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\reflection_entity.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sky_entity.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spotlight_entity.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\terrain_entity.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\text3d_entity.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\water_entity.hpp">
+      <Filter>Data\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\text2d_entity.hpp">
+      <Filter>Data\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\quad2d_entity.hpp">
+      <Filter>Data\2D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

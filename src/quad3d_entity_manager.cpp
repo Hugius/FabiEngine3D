@@ -71,10 +71,10 @@ void Quad3dEntityManager::createEntity(const string& id, bool isCentered)
 
 	auto entity = make_shared<Quad3dEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
-
 	entity->setMesh(isCentered ? _centeredMesh : _standingMesh);
 	entity->setCentered(isCentered);
+
+	_entities.insert(make_pair(id, entity));
 }
 
 void Quad3dEntityManager::update()

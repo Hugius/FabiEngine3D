@@ -1,13 +1,12 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
 #include "water_entity.hpp"
 
 #include <unordered_map>
 
 using std::unordered_map;
 
-class WaterEntityManager final : public BaseEntityManager
+class WaterEntityManager final
 {
 public:
 	void update();

@@ -53,14 +53,14 @@ void Text2dEntityManager::createEntity(const string& id, const string& fontMapPa
 
 	auto entity = make_shared<Text2dEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
-
 	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
 	entity->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
 	entity->setFontMapPath(fontMapPath);
 	entity->setCentered(isCentered);
 	entity->setContent("text");
 	entity->setDepth(_renderStorage->getGuiDepth());
+
+	_entities.insert(make_pair(id, entity));
 
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }

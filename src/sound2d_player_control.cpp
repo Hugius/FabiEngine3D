@@ -1,21 +1,21 @@
 #include "sound2d_player.hpp"
 #include "logger.hpp"
 
-void Sound2dPlayer::startSound(Sound2d& sound, int playCount, unsigned int fadeMS, bool mustForce)
+void Sound2dPlayer::startSound(const string& id, int playCount, bool mustForce)
 {
 	if((playCount < -1) || (playCount == 0))
 	{
 		abort();
 	}
 
-	if(isSoundStarted(sound) && !mustForce)
+	if(isSoundStarted(id) && !mustForce)
 	{
 		abort();
 	}
 
 	auto channel = _getFreeChannel();
 
-	_channels[channel] = sound.getId();
+	_channels[channel] = id;
 
 	if(fadeMS == 0)
 	{

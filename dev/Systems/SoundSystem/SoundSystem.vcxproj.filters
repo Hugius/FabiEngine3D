@@ -1,60 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{d0c52f57-a55e-42b4-bad3-2f4d6f7e5a97}</UniqueIdentifier>
+    <Filter Include="Buffer">
+      <UniqueIdentifier>{c7f77ed0-d136-4c43-95cc-c39d5a579fa3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Player">
+    <Filter Include="Sound">
+      <UniqueIdentifier>{1fdb1c2d-549b-467c-9653-61ad20077149}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Player">
       <UniqueIdentifier>{1bbcdce4-f0a7-40ad-bcdc-292ccd343cd5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data">
+    <Filter Include="Sound\Manager">
+      <UniqueIdentifier>{d0c52f57-a55e-42b4-bad3-2f4d6f7e5a97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Data">
       <UniqueIdentifier>{cde7f474-004e-4d0a-8561-93f1d15f3abe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buffer\Cache">
+      <UniqueIdentifier>{8ad7b7a2-12ff-469e-8756-5863f2545fa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buffer\Data">
+      <UniqueIdentifier>{6c91e200-6345-44ec-84d6-e4dc704eefcf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\sound3d_manager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>Sound\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound3d_player_misc.cpp">
-      <Filter>Player</Filter>
+      <Filter>Sound\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound3d_player_control.cpp">
-      <Filter>Player</Filter>
+      <Filter>Sound\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d.cpp">
-      <Filter>Data</Filter>
+      <Filter>Sound\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound3d.cpp">
-      <Filter>Data</Filter>
+      <Filter>Sound\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d_player_control.cpp">
-      <Filter>Player</Filter>
+      <Filter>Sound\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d_player_misc.cpp">
-      <Filter>Player</Filter>
+      <Filter>Sound\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d_manager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>Sound\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wave_buffer.cpp">
+      <Filter>Buffer\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wave_buffer_cache.cpp">
+      <Filter>Buffer\Cache</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\sound3d_manager.hpp">
-      <Filter>Manager</Filter>
+      <Filter>Sound\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound2d_player.hpp">
-      <Filter>Player</Filter>
+      <Filter>Sound\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound2d.hpp">
-      <Filter>Data</Filter>
+      <Filter>Sound\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound3d.hpp">
-      <Filter>Data</Filter>
+      <Filter>Sound\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound2d_manager.hpp">
-      <Filter>Manager</Filter>
+      <Filter>Sound\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound3d_player.hpp">
-      <Filter>Player</Filter>
+      <Filter>Sound\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\wave_buffer.hpp">
+      <Filter>Buffer\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\wave_buffer_cache.hpp">
+      <Filter>Buffer\Cache</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -28,6 +28,7 @@ EngineCore::EngineCore()
 	_renderWindow = make_shared<RenderWindow>(_libraryLoader->getWindowPointer());
 	_vertexBufferCache = make_shared<VertexBufferCache>();
 	_textureBufferCache = make_shared<TextureBufferCache>();
+	_waveBufferCache = make_shared<WaveBufferCache>();
 	_renderStorage = make_shared<RenderStorage>();
 	_masterRenderer = make_shared<MasterRenderer>();
 	_camera = make_shared<Camera>();

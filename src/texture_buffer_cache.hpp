@@ -3,9 +3,11 @@
 #include "texture_buffer.hpp"
 
 #include <unordered_map>
+#include <string>
 #include <vector>
 
 using std::unordered_map;
+using std::string;
 using std::vector;
 
 class TextureBufferCache final

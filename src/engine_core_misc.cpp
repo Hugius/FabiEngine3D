@@ -115,6 +115,11 @@ const shared_ptr<TextureBufferCache> EngineCore::getTextureBufferCache() const
 	return _textureBufferCache;
 }
 
+const shared_ptr<WaveBufferCache> EngineCore::getWaveBufferCache() const
+{
+	return _waveBufferCache;
+}
+
 const shared_ptr<RenderStorage> EngineCore::getRenderStorage() const
 {
 	return _renderStorage;

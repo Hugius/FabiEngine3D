@@ -1,5 +1,7 @@
 #include "sound2d_manager.hpp"
 
+using std::make_shared;
+
 void Sound2dManager::deleteSounds()
 {
 	_sounds.clear();
@@ -40,6 +42,22 @@ void Sound2dManager::createSound(const string& id, const string& audioPath)
 	}
 
 	auto sound = make_shared<Sound2d>(id);
+
+	auto buffer = _waveBufferCache->getBuffer(audioPath);
+
+	if(buffer == nullptr)
+	{
+		auto audio = _audioLoader->loadAudio(audioPath);
+
+		if(audio == nullptr)
+		{
+			return;
+		}
+
+		buffer = make_shared<WaveBuffer>(audio);
+
+		_waveBufferCache->storeBuffer(audioPath, buffer);
+	}
 
 	_sounds.insert(make_pair(id, sound));
 }

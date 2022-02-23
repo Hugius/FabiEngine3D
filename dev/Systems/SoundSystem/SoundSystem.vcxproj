@@ -27,6 +27,8 @@
     <ClCompile Include="..\..\..\src\sound2d_player_misc.cpp" />
     <ClCompile Include="..\..\..\src\sound2d.cpp" />
     <ClCompile Include="..\..\..\src\sound3d.cpp" />
+    <ClCompile Include="..\..\..\src\wave_buffer.cpp" />
+    <ClCompile Include="..\..\..\src\wave_buffer_cache.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\sound2d_manager.hpp" />
@@ -35,6 +37,8 @@
     <ClInclude Include="..\..\..\src\sound2d_player.hpp" />
     <ClInclude Include="..\..\..\src\sound2d.hpp" />
     <ClInclude Include="..\..\..\src\sound3d.hpp" />
+    <ClInclude Include="..\..\..\src\wave_buffer.hpp" />
+    <ClInclude Include="..\..\..\src\wave_buffer_cache.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

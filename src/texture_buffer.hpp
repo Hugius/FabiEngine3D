@@ -2,13 +2,11 @@
 
 #include "image.hpp"
 
-#include <string>
 #include <array>
 #include <memory>
 #include <glew.h>
 
 using std::array;
-using std::string;
 using std::shared_ptr;
 
 using BufferId = GLuint;

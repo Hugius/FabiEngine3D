@@ -57,7 +57,7 @@ void EngineInterface::misc_cacheImage(const string& filePath, bool isCrucial)
 
 void EngineInterface::misc_cacheAudio(const string& filePath, bool isCrucial)
 {
-	_core->getAudioLoader()->cacheChunk(filePath);
+	_core->getAudioLoader()->cacheAudio(filePath, isCrucial);
 }
 
 void EngineInterface::misc_clearMeshCache(const string& filePath)
@@ -93,7 +93,7 @@ void EngineInterface::misc_clearImageCache(const string& filePath)
 
 void EngineInterface::misc_clearAudioCache(const string& filePath)
 {
-	_core->getAudioLoader()->clearChunkCache(filePath);
+	_core->getAudioLoader()->clearAudioCache(filePath);
 }
 
 void EngineInterface::misc_clearMeshesCache()
@@ -113,7 +113,7 @@ void EngineInterface::misc_clearImagesCache()
 
 void EngineInterface::misc_clearAudiosCache()
 {
-	_core->getAudioLoader()->clearChunksCache();
+	_core->getAudioLoader()->clearAudiosCache();
 }
 
 void EngineInterface::misc_cacheMeshes(const vector<string>& filePaths, bool isCrucial)
@@ -128,7 +128,7 @@ void EngineInterface::misc_cacheImages(const vector<string>& filePaths, bool isC
 
 void EngineInterface::misc_cacheAudios(const vector<string>& filePaths, bool isCrucial)
 {
-	_core->getAudioLoader()->cacheChunks(filePaths);
+	_core->getAudioLoader()->cacheAudios(filePaths, isCrucial);
 }
 
 const unsigned int EngineInterface::misc_getTriangleCount() const

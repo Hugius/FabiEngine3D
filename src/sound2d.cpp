@@ -24,9 +24,9 @@ const string& Sound2d::getAudioPath() const
 	return _audioPath;
 }
 
-void Sound2d::setAudio(shared_ptr<Audio> value)
+void Sound2d::setWaveBuffer(shared_ptr<WaveBuffer> value)
 {
-	_audio = value;
+	_waveBuffer = value;
 }
 
 void Sound2d::setAudioPath(const string& value)
@@ -44,7 +44,7 @@ const float Sound2d::getVolume() const
 	return _volume;
 }
 
-const shared_ptr<Audio> Sound2d::getAudio() const
+const shared_ptr<WaveBuffer> Sound2d::getWaveBuffer() const
 {
-	return _audio;
+	return _waveBuffer;
 }

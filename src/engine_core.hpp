@@ -33,6 +33,7 @@
 #include "networking_client.hpp"
 #include "vertex_buffer_cache.hpp"
 #include "texture_buffer_cache.hpp"
+#include "wave_buffer_cache.hpp"
 #include "animation3d_manager.hpp"
 #include "animation2d_manager.hpp"
 #include "animation3d_player.hpp"
@@ -80,6 +81,7 @@ public:
 	const shared_ptr<MasterRenderer> getMasterRenderer() const;
 	const shared_ptr<VertexBufferCache> getVertexBufferCache() const;
 	const shared_ptr<TextureBufferCache> getTextureBufferCache() const;
+	const shared_ptr<WaveBufferCache> getWaveBufferCache() const;
 	const shared_ptr<RenderStorage> getRenderStorage() const;
 	const shared_ptr<Camera> getCamera() const;
 	const shared_ptr<RaycastCalculator> getRaycastCalculator() const;
@@ -136,6 +138,7 @@ private:
 	shared_ptr<RenderWindow> _renderWindow = nullptr;
 	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
 	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;
+	shared_ptr<WaveBufferCache> _waveBufferCache = nullptr;
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<MasterRenderer> _masterRenderer = nullptr;
 	shared_ptr<Animation3dPlayer> _animation3dPlayer = nullptr;

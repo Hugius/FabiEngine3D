@@ -19,20 +19,17 @@ public:
 
 	void inject(shared_ptr<Sound2dManager> sound2dManager);
 	void update();
-	void startSound(Sound2d& sound, int playCount, unsigned int fadeMS, bool mustForce);
-	void pauseSound(Sound2d& sound);
-	void resumeSound(Sound2d& sound);
-	void stopSound(Sound2d& sound, unsigned int fadeMS);
-	void pauseSounds(vector<Sound2d>& sounds);
-	void resumeSounds(vector<Sound2d>& sounds);
-	void stopSounds(vector<Sound2d>& sounds);
+	void startSound(const string& id, int playCount, bool mustForce);
+	void pauseSound(const string& id);
+	void resumeSound(const string& id);
+	void stopSound(const string& id);
 
 	const unsigned int getUsedChannelCount() const;
 	const unsigned int getAllocatedChannelCount() const;
 
 	const bool isChannelAvailable() const;
-	const bool isSoundStarted(Sound2d& sound) const;
-	const bool isSoundPaused(Sound2d& sound) const;
+	const bool isSoundStarted(const string& id) const;
+	const bool isSoundPaused(const string& id) const;
 
 private:
 	void _updateSoundVolume(Sound2d& sound);

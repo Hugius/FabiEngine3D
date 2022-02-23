@@ -1,6 +1,7 @@
 #pragma once
 
 #include "audio_loader.hpp"
+#include "wave_buffer_cache.hpp"
 #include "sound2d.hpp"
 
 #include <memory>
@@ -11,6 +12,7 @@ class Sound2dManager final
 {
 public:
 	void inject(shared_ptr<AudioLoader> audioLoader);
+	void inject(shared_ptr<WaveBufferCache> waveBufferCache);
 	void update();
 	void createSound(const string& id, const string& audioPath);
 	void deleteSound(const string& id);
@@ -26,4 +28,5 @@ private:
 	unordered_map<string, shared_ptr<Sound2d>> _sounds;
 
 	shared_ptr<AudioLoader> _audioLoader = nullptr;
+	shared_ptr<WaveBufferCache> _waveBufferCache = nullptr;
 };

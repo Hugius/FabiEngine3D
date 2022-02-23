@@ -1,6 +1,6 @@
 #pragma once
 
-#include "audio.hpp"
+#include "wave_buffer.hpp"
 
 #include <string>
 #include <memory>
@@ -13,7 +13,7 @@ class Sound2d
 public:
 	Sound2d(const string& id);
 
-	void setAudio(shared_ptr<Audio> value);
+	void setWaveBuffer(shared_ptr<WaveBuffer> value);
 	void setAudioPath(const string& value);
 	void setVolume(float value);
 
@@ -22,12 +22,12 @@ public:
 
 	const float getVolume() const;
 
-	const shared_ptr<Audio> getAudio() const;
+	const shared_ptr<WaveBuffer> getWaveBuffer() const;
 
 private:
 	const string _id;
 
-	shared_ptr<Audio> _audio = nullptr;
+	shared_ptr<WaveBuffer> _waveBuffer = nullptr;
 
 	string _audioPath = "";
 

@@ -1,5 +1,7 @@
 #include "sound3d_manager.hpp"
 
+using std::make_shared;
+
 void Sound3dManager::deleteSounds()
 {
 	_sounds.clear();
@@ -18,6 +20,11 @@ void Sound3dManager::deleteSound(const string& id)
 void Sound3dManager::inject(shared_ptr<AudioLoader> audioLoader)
 {
 	_audioLoader = audioLoader;
+}
+
+void Sound3dManager::inject(shared_ptr<WaveBufferCache> waveBufferCache)
+{
+	_waveBufferCache = waveBufferCache;
 }
 
 void Sound3dManager::update()
@@ -40,6 +47,22 @@ void Sound3dManager::createSound(const string& id, const string& audioPath)
 	}
 
 	auto sound = make_shared<Sound3d>(id);
+
+	auto buffer = _waveBufferCache->getBuffer(audioPath);
+
+	if(buffer == nullptr)
+	{
+		auto audio = _audioLoader->loadAudio(audioPath);
+
+		if(audio == nullptr)
+		{
+			return;
+		}
+
+		buffer = make_shared<WaveBuffer>(audio);
+
+		_waveBufferCache->storeBuffer(audioPath, buffer);
+	}
 
 	_sounds.insert(make_pair(id, sound));
 }

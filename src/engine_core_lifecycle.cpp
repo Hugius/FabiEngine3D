@@ -65,7 +65,9 @@ EngineCore::EngineCore()
 	_aabbEntityManager->inject(_quad3dEntityManager);
 	_aabbEntityManager->inject(_text3dEntityManager);
 	_sound3dManager->inject(_audioLoader);
+	_sound3dManager->inject(_waveBufferCache);
 	_sound2dManager->inject(_audioLoader);
+	_sound2dManager->inject(_waveBufferCache);
 	_masterRenderer->inject(_renderStorage);
 	_masterRenderer->inject(_camera);
 	_masterRenderer->inject(_timer);

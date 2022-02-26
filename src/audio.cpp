@@ -2,13 +2,15 @@
 
 #include <stdlib.h>
 
-Audio::Audio(unsigned char* samples, unsigned int sampleCount, unsigned int sampleRate, unsigned int bitsPerSample, ChannelFormat channelFormat)
+Audio::Audio(unsigned char* samples, unsigned int sampleCount, ChannelFormat channelFormat, unsigned int sampleRate, unsigned int byteRate, unsigned int bytesPerBlock, unsigned int bitsPerSample)
 	:
 	_samples(samples),
 	_sampleCount(sampleCount),
+	_channelFormat(channelFormat),
 	_sampleRate(sampleRate),
-	_bitsPerSample(bitsPerSample),
-	_channelFormat(channelFormat)
+	_byteRate(byteRate),
+	_bytesPerBlock(bytesPerBlock),
+	_bitsPerSample(bitsPerSample)
 {
 	if(_samples == nullptr)
 	{
@@ -34,6 +36,16 @@ const unsigned int Audio::getBitsPerSample() const
 const unsigned int Audio::getSampleCount() const
 {
 	return _sampleCount;
+}
+
+const unsigned int Audio::getByteRate() const
+{
+	return _byteRate;
+}
+
+const unsigned int Audio::getBytesPerBlock() const
+{
+	return _bytesPerBlock;
 }
 
 const unsigned int Audio::getSampleRate() const

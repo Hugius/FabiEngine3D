@@ -1,5 +1,7 @@
 #include "master_renderer.hpp"
 
+using std::make_shared;
+
 void MasterRenderer::captureCubeReflections()
 {
 	if(_reflectionEntityManager->getEntities().empty())

@@ -6,7 +6,7 @@ using std::clamp;
 
 Sound3dPlayer::Sound3dPlayer()
 {
-	Mix_AllocateChannels(MAX_CHANNEL_COUNT);
+	//Mix_AllocateChannels(MAX_CHANNEL_COUNT);
 }
 
 void Sound3dPlayer::inject(shared_ptr<Sound3dManager> sound3dManager)
@@ -21,61 +21,41 @@ void Sound3dPlayer::inject(shared_ptr<Camera> camera)
 
 void Sound3dPlayer::update()
 {
-	for(auto& sound : _sound3dManager->getSounds())
-	{
-		if(isSoundStarted(sound))
-		{
-			const auto cameraPosition = _camera->getPosition();
-			const auto distance = Math::calculateDistance(cameraPosition, sound.getPosition());
-			const auto volume = (1.0f - (distance / sound.getMaxDistance()));
-			sound.setVolume(clamp(volume, 0.0f, 1.0f) * sound.getMaxVolume());
+	//for(auto& sound : _sound3dManager->getSounds())
+	//{
+	//	if(isSoundStarted(sound))
+	//	{
+	//		const auto cameraPosition = _camera->getPosition();
+	//		const auto distance = Math::calculateDistance(cameraPosition, sound.getPosition());
+	//		const auto volume = (1.0f - (distance / sound.getMaxDistance()));
+	//		//sound.setVolume(clamp(volume, 0.0f, 1.0f) * sound.getMaxVolume());
 
-			const auto cameraDirection = _camera->getFront();
-			const auto soundDirection = (cameraPosition - sound.getPosition());
-			const auto rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
-			const auto rotatedSoundDirection = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
-			const auto normalizedSoundDirection = Math::normalize(fvec3(rotatedSoundDirection.x, rotatedSoundDirection.y, rotatedSoundDirection.z));
-			const auto dotProduct = Math::calculateDotProduct(normalizedSoundDirection, cameraDirection);
-			const auto panningRange = ((dotProduct * 0.5f) + 0.5f);
-			const auto leftIntensity = Uint8(255.0f * panningRange);
-			const auto rightIntensity = Uint8(255 - leftIntensity);
+	//		const auto cameraDirection = _camera->getFront();
+	//		const auto soundDirection = (cameraPosition - sound.getPosition());
+	//		const auto rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
+	//		const auto rotatedSoundDirection = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
+	//		const auto normalizedSoundDirection = Math::normalize(fvec3(rotatedSoundDirection.x, rotatedSoundDirection.y, rotatedSoundDirection.z));
+	//		const auto dotProduct = Math::calculateDotProduct(normalizedSoundDirection, cameraDirection);
+	//		const auto panningRange = ((dotProduct * 0.5f) + 0.5f);
+	//		const auto leftIntensity = Uint8(255.0f * panningRange);
+	//		const auto rightIntensity = Uint8(255 - leftIntensity);
 
-			for(const auto& channel : _findChannels(sound))
-			{
-				Mix_SetPanning(channel, leftIntensity, rightIntensity);
-			}
-		}
+	//		for(const auto& channel : _findChannels(sound))
+	//		{
+	//			Mix_SetPanning(channel, leftIntensity, rightIntensity);
+	//		}
+	//	}
 
-		_updateSoundVolume(sound);
-	}
+	//	_updateSoundVolume(sound);
+	//}
 
-	for(size_t i = 0; i < _channels.size(); i++)
-	{
-		if(!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
-		{
-			_channels[i] = "";
-		}
-	}
-}
-
-const unsigned int Sound3dPlayer::getUsedChannelCount() const
-{
-	int count = 0;
-
-	for(const auto& soundId : _channels)
-	{
-		if(soundId.empty())
-		{
-			count++;
-		}
-	}
-
-	return count;
-}
-
-const unsigned int Sound3dPlayer::getAllocatedChannelCount() const
-{
-	return static_cast<unsigned int>(_channels.size());
+	//for(size_t i = 0; i < _channels.size(); i++)
+	//{
+	//	if(!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
+	//	{
+	//		_channels[i] = "";
+	//	}
+	//}
 }
 
 const int Sound3dPlayer::_getFreeChannel() const
@@ -110,7 +90,7 @@ void Sound3dPlayer::_updateSoundVolume(Sound3d& sound)
 	{
 		for(const auto& channel : _findChannels(sound))
 		{
-			Mix_Volume(channel, static_cast<int>(sound.getVolume() * 128.0f));
+			//Mix_Volume(channel, static_cast<int>(sound.getVolume() * 128.0f));
 		}
 	}
 }

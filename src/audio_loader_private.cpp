@@ -1,5 +1,8 @@
+#pragma warning(disable:6001)
+
 #include "audio_loader.hpp"
 #include "tools.hpp"
+#include "logger.hpp"
 
 using std::make_shared;
 
@@ -15,79 +18,102 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 		return nullptr;
 	}
 
-	auto header = new unsigned char[HEADER_SIZE];
+	auto chunkHeaderData = new unsigned char[CHUNK_HEADER_SIZE];
 
-	for(int i = 0; i < 44; i++)
+	for(int i = 0; i < CHUNK_HEADER_SIZE; i++)
 	{
-		header[i] = getc(file);
+		chunkHeaderData[i] = static_cast<unsigned int>(getc(file));
 	}
 
-	string firstString = "";
-	firstString.push_back(header[0]);
-	firstString.push_back(header[1]);
-	firstString.push_back(header[2]);
-	firstString.push_back(header[3]);
+	string chunkId = "";
+	chunkId.push_back(chunkHeaderData[0]);
+	chunkId.push_back(chunkHeaderData[1]);
+	chunkId.push_back(chunkHeaderData[2]);
+	chunkId.push_back(chunkHeaderData[3]);
 
-	if(firstString != "RIFF")
-	{
-		return nullptr;
-	}
-
-	string secondString = "";
-	secondString.push_back(header[8]);
-	secondString.push_back(header[9]);
-	secondString.push_back(header[10]);
-	secondString.push_back(header[11]);
-
-	if(secondString != "WAVE")
+	if(chunkId != "RIFF")
 	{
 		return nullptr;
 	}
 
-	string thirdString = "";
-	thirdString.push_back(header[12]);
-	thirdString.push_back(header[13]);
-	thirdString.push_back(header[14]);
-	thirdString.push_back(header[15]);
+	const auto chunkSize = static_cast<unsigned int>((chunkHeaderData[7] << 24) | (chunkHeaderData[6] << 16) | (chunkHeaderData[5] << 8) | chunkHeaderData[4]);
 
-	if(thirdString != "fmt")
+	string format = "";
+	format.push_back(chunkHeaderData[8]);
+	format.push_back(chunkHeaderData[9]);
+	format.push_back(chunkHeaderData[10]);
+	format.push_back(chunkHeaderData[11]);
+
+	if(format != "WAVE")
 	{
 		return nullptr;
 	}
 
-	string fourthString = "";
-	fourthString.push_back(header[36]);
-	fourthString.push_back(header[37]);
-	fourthString.push_back(header[38]);
-	fourthString.push_back(header[39]);
+	unsigned int channelCount = 0;
+	unsigned int sampleRate = 0;
+	unsigned int byteRate = 0;
+	unsigned int bytesPerBlock = 0;
+	unsigned int bitsPerSample = 0;
 
-	if(fourthString != "data")
+	while(true)
 	{
-		return nullptr;
+		auto subChunkHeaderData = new unsigned char[SUB_CHUNK_HEADER_SIZE];
+
+		for(int i = 0; i < SUB_CHUNK_HEADER_SIZE; i++)
+		{
+			subChunkHeaderData[i] = static_cast<unsigned int>(getc(file));
+		}
+
+		string subChunkId = "";
+		subChunkId.push_back(subChunkHeaderData[0]);
+		subChunkId.push_back(subChunkHeaderData[1]);
+		subChunkId.push_back(subChunkHeaderData[2]);
+		subChunkId.push_back(subChunkHeaderData[3]);
+
+		const auto subChunkSize = static_cast<unsigned int>((subChunkHeaderData[7] << 24) | (subChunkHeaderData[6] << 16) | (subChunkHeaderData[5] << 8) | subChunkHeaderData[4]);
+
+		if(subChunkId == "fmt ")
+		{
+			auto subChunkBodyData = new unsigned char[16];
+
+			for(int i = 0; i < 16; i++)
+			{
+				subChunkBodyData[i] = static_cast<unsigned int>(getc(file));
+			}
+
+			const auto compressionFormat = static_cast<unsigned int>((subChunkBodyData[1] << 8) | subChunkBodyData[0]);
+
+			// 1 = PCM
+			if(compressionFormat != 1)
+			{
+				return nullptr;
+			}
+
+			channelCount = static_cast<unsigned int>((subChunkBodyData[3] << 8) | subChunkBodyData[2]);
+			sampleRate = static_cast<unsigned int>((subChunkBodyData[7] << 24) | (subChunkBodyData[6] << 16) | (subChunkBodyData[5] << 8) | subChunkBodyData[4]);
+			byteRate = static_cast<unsigned int>((subChunkBodyData[11] << 24) | (subChunkBodyData[10] << 16) | (subChunkBodyData[9] << 8) | subChunkBodyData[8]);
+			bytesPerBlock = static_cast<unsigned int>((subChunkBodyData[13] << 8) | subChunkBodyData[12]);
+			bitsPerSample = static_cast<unsigned int>((subChunkBodyData[15] << 8) | subChunkBodyData[14]);
+		}
+		else if(subChunkId == "data")
+		{
+			const auto samples = new unsigned char[subChunkSize];
+
+			for(unsigned int i = 0; i < subChunkSize; i++)
+			{
+				samples[i] = static_cast<unsigned char>(getc(file));
+			}
+
+			fclose(file);
+
+			return make_shared<Audio>(samples, subChunkSize, (channelCount == 1 ? ChannelFormat::MONO : ChannelFormat::STEREO), sampleRate, byteRate, bytesPerBlock, bitsPerSample);
+		}
+		else
+		{
+			for(unsigned int i = 0; i < subChunkSize; i++)
+			{
+				const auto temp = getc(file);
+			}
+		}
 	}
-
-	const auto compressionFormat = static_cast<unsigned int>((header[21] << 8) | header[20]);
-
-	// 1 = PCM
-	if(compressionFormat != 1)
-	{
-		return nullptr;
-	}
-
-	const auto channelCount = static_cast<unsigned int>((header[23] << 8) | header[22]);
-	const auto bitsPerSample = static_cast<unsigned int>((header[35] << 8) | header[34]);
-	const auto sampleRate = static_cast<unsigned int>((header[27] << 24) | (header[26] << 16) | (header[25] << 8) | header[24]);
-	const auto sampleCount = static_cast<unsigned int>((header[43] << 24) | (header[42] << 16) | (header[41] << 8) | header[40]);
-	const auto samples = new unsigned char[sampleCount];
-
-	for(unsigned int i = 0; i < sampleCount; i++)
-	{
-		samples[i] = static_cast<unsigned char>(getc(file));
-	}
-
-	delete[] header;
-
-	fclose(file);
-
-	return make_shared<Audio>(samples, sampleCount, sampleRate, bitsPerSample, (channelCount == 1 ? ChannelFormat::MONO : ChannelFormat::STEREO));
 }

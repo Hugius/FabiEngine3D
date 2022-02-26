@@ -1,5 +1,6 @@
 #include "camera_collision_responder.hpp"
-#include "logger.hpp"
+
+using std::make_shared;
 
 CameraCollisionResponder::CameraCollisionResponder()
 {

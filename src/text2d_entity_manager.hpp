@@ -4,6 +4,7 @@
 #include "text2d_entity.hpp"
 #include "texture_buffer_cache.hpp"
 #include "image_loader.hpp"
+#include "render_storage.hpp"
 
 #include <unordered_map>
 

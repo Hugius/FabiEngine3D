@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound2d_start")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER, SVT::BOOLEAN};
+		auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
-				_fe3d->sound2d_start(args[0]->getString(), args[1]->getInteger(), args[2]->getInteger(), args[3]->getBoolean());
+				_fe3d->sound2d_start(args[0]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -144,7 +144,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound2d_stop")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER};
+		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -156,7 +156,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 					return true;
 				}
 
-				_fe3d->sound2d_stop(args[0]->getString(), args[1]->getInteger());
+				_fe3d->sound2d_stop(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

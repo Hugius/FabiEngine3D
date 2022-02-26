@@ -19,9 +19,9 @@ void EngineInterface::sound2d_delete(const string& id)
 	_core->getSound2dManager()->deleteSound(id);
 }
 
-void EngineInterface::sound2d_start(const string& id, int playCount, bool mustForce)
+void EngineInterface::sound2d_start(const string& id, int playCount)
 {
-	_core->getSound2dPlayer()->startSound(id, playCount, mustForce);
+	_core->getSound2dPlayer()->startSound(id, playCount);
 }
 
 void EngineInterface::sound2d_pause(const string& id)
@@ -48,7 +48,7 @@ const vector<string> EngineInterface::sound2d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto& sound : _core->getSound2dManager()->getSounds())
+	for(const auto& [key, sound] : _core->getSound2dManager()->getSounds())
 	{
 		result.push_back(sound->getId());
 	}
@@ -68,7 +68,7 @@ const bool EngineInterface::sound2d_isExisting(const string& id) const
 
 const bool EngineInterface::sound2d_isStarted(const string& id) const
 {
-	return _core->getSound2dPlayer()->isSoundStarted(_id);
+	return _core->getSound2dPlayer()->isSoundStarted(id);
 }
 
 const bool EngineInterface::sound2d_isPaused(const string& id) const

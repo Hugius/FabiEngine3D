@@ -48,9 +48,9 @@ void Sound3dManager::createSound(const string& id, const string& audioPath)
 
 	auto sound = make_shared<Sound3d>(id);
 
-	auto buffer = _waveBufferCache->getBuffer(audioPath);
+	auto waveBuffer = _waveBufferCache->getBuffer(audioPath);
 
-	if(buffer == nullptr)
+	if(waveBuffer == nullptr)
 	{
 		auto audio = _audioLoader->loadAudio(audioPath);
 
@@ -59,10 +59,13 @@ void Sound3dManager::createSound(const string& id, const string& audioPath)
 			return;
 		}
 
-		buffer = make_shared<WaveBuffer>(audio);
+		waveBuffer = make_shared<WaveBuffer>(audio);
 
-		_waveBufferCache->storeBuffer(audioPath, buffer);
+		_waveBufferCache->storeBuffer(audioPath, waveBuffer);
 	}
+
+	sound->setWaveBuffer(waveBuffer);
+	sound->setAudioPath(audioPath);
 
 	_sounds.insert(make_pair(id, sound));
 }

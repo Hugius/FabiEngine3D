@@ -98,7 +98,7 @@ void Quad2dEditor::_updateQuadChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad2D: " + selectedButtonId.substr(1));
+					_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad2D: " + _currentQuadId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
 				}
 

@@ -689,10 +689,10 @@ public:
 
 	void sound2d_create(const string& id, const string& audioPath);
 	void sound2d_delete(const string& id);
-	void sound2d_start(const string& id, int playCount, unsigned int fadeMS, bool mustForce);
+	void sound2d_start(const string& id, int playCount);
 	void sound2d_pause(const string& id);
 	void sound2d_resume(const string& id);
-	void sound2d_stop(const string& id, unsigned int fadeMS);
+	void sound2d_stop(const string& id);
 	void sound2d_setVolume(const string& id, float value);
 
 	const vector<string> sound2d_getIds() const;

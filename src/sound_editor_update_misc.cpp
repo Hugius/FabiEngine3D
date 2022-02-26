@@ -4,16 +4,23 @@
 
 void SoundEditor::_updateMiscellaneous()
 {
-	bool isExisting = _fe3d->sound2d_isExisting(_currentSoundId);
-	bool isPaused = isExisting && _fe3d->sound2d_isPaused(_currentSoundId);
-
-	if(isPaused)
+	if(_fe3d->sound2d_isExisting(_currentSoundId))
 	{
-		_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\start.tga");
-	}
-	else if(isPaused)
-	{
-		_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\pause.tga");
+		if(_fe3d->sound2d_isStarted(_currentSoundId))
+		{
+			if(_fe3d->sound2d_isPaused(_currentSoundId))
+			{
+				_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\pause.tga");
+			}
+			else
+			{
+				_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\start.tga");
+			}
+		}
+		else
+		{
+			_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
+		}
 	}
 	else
 	{
@@ -95,6 +102,7 @@ void SoundEditor::_updateSoundCreating()
 			{
 				_currentSoundId = newSoundId;
 				_loadedSoundIds.push_back(newSoundId);
+				sort(_loadedSoundIds.begin(), _loadedSoundIds.end());
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 				_gui->getOverlay()->getTextField("soundId")->changeTextContent("Sound: " + newSoundId.substr(1));
@@ -121,7 +129,7 @@ void SoundEditor::_updateSoundChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("soundId")->changeTextContent("Sound: " + selectedButtonId.substr(1));
+					_gui->getOverlay()->getTextField("soundId")->changeTextContent("Sound: " + _currentSoundId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), true);
 				}
 

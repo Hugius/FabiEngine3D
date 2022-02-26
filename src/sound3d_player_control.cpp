@@ -3,30 +3,30 @@
 
 void Sound3dPlayer::startSound(Sound3d& sound, int playCount, unsigned int fadeMS, bool mustForce)
 {
-	if((playCount < -1) || (playCount == 0))
-	{
-		abort();
-	}
+	//if((playCount < -1) || (playCount == 0))
+	//{
+	//	abort();
+	//}
 
-	if(isSoundStarted(sound) && !mustForce)
-	{
-		abort();
-	}
+	//if(isSoundStarted(sound) && !mustForce)
+	//{
+	//	abort();
+	//}
 
-	auto channel = _getFreeChannel();
+	//auto channel = _getFreeChannel();
 
-	_channels[channel] = sound.getId();
+	//_channels[channel] = sound.getId();
 
-	if(fadeMS == 0)
-	{
-		Mix_PlayChannel(channel, sound.getDataPointer(), (playCount - 1));
-	}
-	else
-	{
-		Mix_FadeInChannel(channel, sound.getDataPointer(), (playCount - 1), fadeMS);
-	}
+	//if(fadeMS == 0)
+	//{
+	//	Mix_PlayChannel(channel, sound.getDataPointer(), (playCount - 1));
+	//}
+	//else
+	//{
+	//	Mix_FadeInChannel(channel, sound.getDataPointer(), (playCount - 1), fadeMS);
+	//}
 
-	_updateSoundVolume(sound);
+	//_updateSoundVolume(sound);
 }
 
 void Sound3dPlayer::pauseSounds(vector<Sound3d>& sounds)
@@ -37,7 +37,7 @@ void Sound3dPlayer::pauseSounds(vector<Sound3d>& sounds)
 		{
 			if(_channels[i] == sound.getId())
 			{
-				Mix_Pause(static_cast<int>(i));
+				//Mix_Pause(static_cast<int>(i));
 			}
 		}
 	}
@@ -52,7 +52,7 @@ void Sound3dPlayer::pauseSound(Sound3d& sound)
 
 	for(const auto& channel : _findChannels(sound))
 	{
-		Mix_Pause(channel);
+		//Mix_Pause(channel);
 	}
 }
 
@@ -64,7 +64,7 @@ void Sound3dPlayer::resumeSounds(vector<Sound3d>& sounds)
 		{
 			if(_channels[i] == sound.getId())
 			{
-				Mix_Resume(static_cast<int>(i));
+				//Mix_Resume(static_cast<int>(i));
 			}
 		}
 	}
@@ -79,7 +79,7 @@ void Sound3dPlayer::resumeSound(Sound3d& sound)
 
 	for(const auto& channel : _findChannels(sound))
 	{
-		Mix_Resume(channel);
+		//Mix_Resume(channel);
 	}
 }
 
@@ -93,7 +93,7 @@ void Sound3dPlayer::stopSounds(vector<Sound3d>& sounds)
 		{
 			if(_channels[i] == sound.getId())
 			{
-				Mix_HaltChannel(static_cast<int>(i));
+				//Mix_HaltChannel(static_cast<int>(i));
 			}
 		}
 	}
@@ -115,14 +115,14 @@ void Sound3dPlayer::stopSound(Sound3d& sound, unsigned int fadeMS)
 	{
 		for(const auto& channel : _findChannels(sound))
 		{
-			Mix_HaltChannel(channel);
+			//Mix_HaltChannel(channel);
 		}
 	}
 	else
 	{
 		for(const auto& channel : _findChannels(sound))
 		{
-			Mix_FadeOutChannel(channel, fadeMS);
+			//Mix_FadeOutChannel(channel, fadeMS);
 		}
 	}
 
@@ -147,5 +147,5 @@ const bool Sound3dPlayer::isSoundStarted(Sound3d& sound) const
 
 const bool Sound3dPlayer::isSoundPaused(Sound3d& sound) const
 {
-	return (isSoundStarted(sound) && Mix_Paused(_findChannels(sound)[0]));
+	//return (isSoundStarted(sound) && Mix_Paused(_findChannels(sound)[0]));
 }

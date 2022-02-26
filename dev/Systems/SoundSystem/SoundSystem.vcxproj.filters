@@ -13,40 +13,52 @@
     <Filter Include="Sound\Manager">
       <UniqueIdentifier>{d0c52f57-a55e-42b4-bad3-2f4d6f7e5a97}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sound\Data">
-      <UniqueIdentifier>{cde7f474-004e-4d0a-8561-93f1d15f3abe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Buffer\Cache">
       <UniqueIdentifier>{8ad7b7a2-12ff-469e-8756-5863f2545fa4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Buffer\Data">
       <UniqueIdentifier>{6c91e200-6345-44ec-84d6-e4dc704eefcf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound\Manager\2D">
+      <UniqueIdentifier>{04346414-c0cd-498a-b638-b862ca606f7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Manager\2D\Data">
+      <UniqueIdentifier>{cde7f474-004e-4d0a-8561-93f1d15f3abe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Manager\2D\Main">
+      <UniqueIdentifier>{57f20dad-573d-4655-939f-4d4547a9ff1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Manager\3D">
+      <UniqueIdentifier>{287495f0-fc16-411a-91c5-a71d684fbd4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Manager\3D\Main">
+      <UniqueIdentifier>{2e4d912f-09a6-4a82-a0a7-6670d605507b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Manager\3D\Data">
+      <UniqueIdentifier>{e6d94c02-9661-4296-940e-7f59630d554d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Player\2D">
+      <UniqueIdentifier>{363de9ee-0263-4e5b-94ad-96d8ce353594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Player\3D">
+      <UniqueIdentifier>{1d66aad1-4ec3-4b98-933f-152c34c26518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Player\2D\Main">
+      <UniqueIdentifier>{f37dc954-9fa9-47b5-9bcc-cecec9cc28dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Player\2D\Data">
+      <UniqueIdentifier>{d2fb6ce6-df66-4157-afb8-86c57da910fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Player\3D\Main">
+      <UniqueIdentifier>{3acbf7bb-b1b7-4bba-b79a-987659c02c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Player\3D\Data">
+      <UniqueIdentifier>{e9d3fd06-fce4-491d-b04c-e2498b5f1b44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\sound3d_manager.cpp">
-      <Filter>Sound\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sound3d_player_misc.cpp">
-      <Filter>Sound\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sound3d_player_control.cpp">
-      <Filter>Sound\Player</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d.cpp">
-      <Filter>Sound\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sound3d.cpp">
-      <Filter>Sound\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sound2d_player_control.cpp">
-      <Filter>Sound\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sound2d_player_misc.cpp">
-      <Filter>Sound\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sound2d_manager.cpp">
-      <Filter>Sound\Manager</Filter>
+      <Filter>Sound\Manager\2D\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\wave_buffer.cpp">
       <Filter>Buffer\Data</Filter>
@@ -54,31 +66,61 @@
     <ClCompile Include="..\..\..\src\wave_buffer_cache.cpp">
       <Filter>Buffer\Cache</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d_manager.cpp">
+      <Filter>Sound\Manager\2D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_manager.cpp">
+      <Filter>Sound\Manager\3D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d.cpp">
+      <Filter>Sound\Manager\3D\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d_player_control.cpp">
+      <Filter>Sound\Player\2D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d_player_misc.cpp">
+      <Filter>Sound\Player\2D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_player_control.cpp">
+      <Filter>Sound\Player\3D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_player_misc.cpp">
+      <Filter>Sound\Player\3D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\started_sound2d.cpp">
+      <Filter>Sound\Player\2D\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d_player_update.cpp">
+      <Filter>Sound\Player\2D\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\sound3d_manager.hpp">
-      <Filter>Sound\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\sound2d_player.hpp">
-      <Filter>Sound\Player</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\sound2d.hpp">
-      <Filter>Sound\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\sound3d.hpp">
-      <Filter>Sound\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\sound2d_manager.hpp">
-      <Filter>Sound\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\sound3d_player.hpp">
-      <Filter>Sound\Player</Filter>
+      <Filter>Sound\Manager\2D\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\wave_buffer.hpp">
       <Filter>Buffer\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\wave_buffer_cache.hpp">
       <Filter>Buffer\Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound2d_manager.hpp">
+      <Filter>Sound\Manager\2D\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound3d_manager.hpp">
+      <Filter>Sound\Manager\3D\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound3d.hpp">
+      <Filter>Sound\Manager\3D\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound2d_player.hpp">
+      <Filter>Sound\Player\2D\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound3d_player.hpp">
+      <Filter>Sound\Player\3D\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\started_sound2d.hpp">
+      <Filter>Sound\Player\2D\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

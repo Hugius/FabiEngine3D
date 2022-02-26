@@ -1,62 +1,17 @@
 #include "sound2d_player.hpp"
-#include "logger.hpp"
-#include "configuration.hpp"
-
-using std::clamp;
-
-Sound2dPlayer::Sound2dPlayer()
-{
-	Mix_AllocateChannels(MAX_CHANNEL_COUNT);
-}
 
 void Sound2dPlayer::inject(shared_ptr<Sound2dManager> sound2dManager)
 {
 	_sound2dManager = sound2dManager;
 }
 
-void Sound2dPlayer::update()
+const unsigned int Sound2dPlayer::_getFreeChannel() const
 {
-	for(auto& sound : _sound2dManager->getSounds())
+	for(unsigned int i = 0; i < _startedSounds.size(); i++)
 	{
-		_updateSoundVolume(sound);
-	}
-
-	for(size_t i = 0; i < _channels.size(); i++)
-	{
-		if(!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
+		if(_startedSounds[i] == nullptr)
 		{
-			_channels[i] = "";
-		}
-	}
-}
-
-const unsigned int Sound2dPlayer::getUsedChannelCount() const
-{
-	int count = 0;
-
-	for(const auto& soundId : _channels)
-	{
-		if(soundId.empty())
-		{
-			count++;
-		}
-	}
-
-	return count;
-}
-
-const unsigned int Sound2dPlayer::getAllocatedChannelCount() const
-{
-	return static_cast<unsigned int>(_channels.size());
-}
-
-const int Sound2dPlayer::_getFreeChannel() const
-{
-	for(size_t i = 0; i < _channels.size(); i++)
-	{
-		if(_channels[i].empty())
-		{
-			return static_cast<int>(i);
+			return i;
 		}
 	}
 
@@ -65,9 +20,9 @@ const int Sound2dPlayer::_getFreeChannel() const
 
 const bool Sound2dPlayer::isChannelAvailable() const
 {
-	for(size_t i = 0; i < _channels.size(); i++)
+	for(const auto& startedSound : _startedSounds)
 	{
-		if(_channels[i].empty())
+		if(startedSound == nullptr)
 		{
 			return true;
 		}
@@ -76,33 +31,48 @@ const bool Sound2dPlayer::isChannelAvailable() const
 	return false;
 }
 
-void Sound2dPlayer::_updateSoundVolume(Sound2d& sound)
+const bool Sound2dPlayer::isSoundStarted(const string& id) const
 {
-	if(isSoundStarted(sound))
-	{
-		for(const auto& channel : _findChannels(sound))
-		{
-			Mix_Volume(channel, static_cast<int>(sound.getVolume() * 128.0f));
-		}
-	}
-}
-
-const vector<unsigned int> Sound2dPlayer::_findChannels(Sound2d& sound) const
-{
-	vector<unsigned int> channels;
-
-	for(size_t i = 0; i < _channels.size(); i++)
-	{
-		if(_channels[i] == sound.getId())
-		{
-			channels.push_back(static_cast<unsigned int>(i));
-		}
-	}
-
-	if(channels.empty())
+	if(!_sound2dManager->isSoundExisting(id))
 	{
 		abort();
 	}
 
-	return channels;
+	for(const auto& startedSound : _startedSounds)
+	{
+		if(startedSound != nullptr)
+		{
+			if(id == startedSound->getSoundId())
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+const bool Sound2dPlayer::isSoundPaused(const string& id) const
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id))
+	{
+		abort();
+	}
+
+	for(const auto& startedSound : _startedSounds)
+	{
+		if(startedSound != nullptr)
+		{
+			if(id == startedSound->getSoundId())
+			{
+				return startedSound->isPaused();
+			}
+		}
+	}
+
+	abort();
 }

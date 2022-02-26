@@ -3,7 +3,6 @@
 #include "library_loader.hpp"
 #include "logger.hpp"
 
-#include <SDL_mixer.h>
 #include <glew.h>
 #include <winsock2.h>
 #include <ShellScalingAPI.h>
@@ -33,12 +32,6 @@ LibraryLoader::LibraryLoader()
 	}
 	Logger::throwInfo("Initialized OpenGL");
 
-	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
-	{
-		Logger::throwError("SDL_Mixer could not be initialized: ", Mix_GetError());
-	}
-	Logger::throwInfo("Initialized SDL_Mixer");
-
 	WSADATA wsaData;
 	auto winsockResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if(winsockResult != 0)
@@ -51,7 +44,6 @@ LibraryLoader::LibraryLoader()
 LibraryLoader::~LibraryLoader()
 {
 	WSACleanup();
-	Mix_Quit();
 	SDL_Quit();
 }
 

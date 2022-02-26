@@ -1,151 +1,93 @@
 #include "sound2d_player.hpp"
-#include "logger.hpp"
 
-void Sound2dPlayer::startSound(const string& id, int playCount, bool mustForce)
+using std::make_shared;
+
+void Sound2dPlayer::startSound(const string& id, int playCount)
 {
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(isSoundStarted(id))
+	{
+		abort();
+	}
 	if((playCount < -1) || (playCount == 0))
 	{
 		abort();
 	}
 
-	if(isSoundStarted(id) && !mustForce)
+	const auto channelIndex = _getFreeChannel();
+
+	const auto newSound = make_shared<StartedSound2D>(id, channelIndex, _sound2dManager->getSound(id)->getWaveBuffer());
+
+	newSound->setPlayCount(playCount);
+
+	_startedSounds[channelIndex] = newSound;
+}
+
+void Sound2dPlayer::pauseSound(const string& id)
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id))
+	{
+		abort();
+	}
+	if(isSoundPaused(id))
 	{
 		abort();
 	}
 
-	auto channel = _getFreeChannel();
-
-	_channels[channel] = id;
-
-	if(fadeMS == 0)
+	for(const auto& startedSound : _startedSounds)
 	{
-		Mix_PlayChannel(channel, sound.getDataPointer(), (playCount - 1));
+		startedSound->pause();
 	}
-	else
-	{
-		Mix_FadeInChannel(channel, sound.getDataPointer(), (playCount - 1), fadeMS);
-	}
-
-	_updateSoundVolume(sound);
 }
 
-void Sound2dPlayer::pauseSounds(vector<Sound2d>& sounds)
+void Sound2dPlayer::resumeSound(const string& id)
 {
-	for(const auto& sound : sounds)
+	if(!_sound2dManager->isSoundExisting(id))
 	{
-		for(size_t i = 0; i < _channels.size(); i++)
+		abort();
+	}
+	if(!isSoundStarted(id))
+	{
+		abort();
+
+	}
+	if(!isSoundPaused(id))
+	{
+		abort();
+	}
+
+	for(const auto& startedSound : _startedSounds)
+	{
+		startedSound->resume();
+	}
+}
+
+void Sound2dPlayer::stopSound(const string& id)
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id))
+	{
+		abort();
+	}
+
+	for(unsigned int i = 0; i < _startedSounds.size(); i++)
+	{
+		if(_startedSounds[i] != nullptr)
 		{
-			if(_channels[i] == sound.getId())
+			if(id == _startedSounds[i]->getSoundId())
 			{
-				Mix_Pause(static_cast<int>(i));
+				_startedSounds[i] = nullptr;
 			}
 		}
 	}
-}
-
-void Sound2dPlayer::pauseSound(Sound2d& sound)
-{
-	if(isSoundPaused(sound))
-	{
-		abort();
-	}
-
-	for(const auto& channel : _findChannels(sound))
-	{
-		Mix_Pause(channel);
-	}
-}
-
-void Sound2dPlayer::resumeSounds(vector<Sound2d>& sounds)
-{
-	for(const auto& sound : sounds)
-	{
-		for(size_t i = 0; i < _channels.size(); i++)
-		{
-			if(_channels[i] == sound.getId())
-			{
-				Mix_Resume(static_cast<int>(i));
-			}
-		}
-	}
-}
-
-void Sound2dPlayer::resumeSound(Sound2d& sound)
-{
-	if(!isSoundPaused(sound))
-	{
-		abort();
-	}
-
-	for(const auto& channel : _findChannels(sound))
-	{
-		Mix_Resume(channel);
-	}
-}
-
-void Sound2dPlayer::stopSounds(vector<Sound2d>& sounds)
-{
-	resumeSounds(sounds);
-
-	for(const auto& sound : sounds)
-	{
-		for(size_t i = 0; i < _channels.size(); i++)
-		{
-			if(_channels[i] == sound.getId())
-			{
-				Mix_HaltChannel(static_cast<int>(i));
-			}
-		}
-	}
-}
-
-void Sound2dPlayer::stopSound(Sound2d& sound, unsigned int fadeMS)
-{
-	if(!isSoundStarted(sound))
-	{
-		abort();
-	}
-
-	if(isSoundPaused(sound))
-	{
-		resumeSound(sound);
-	}
-
-	if(fadeMS == 0)
-	{
-		for(const auto& channel : _findChannels(sound))
-		{
-			Mix_HaltChannel(channel);
-		}
-	}
-	else
-	{
-		for(const auto& channel : _findChannels(sound))
-		{
-			Mix_FadeOutChannel(channel, fadeMS);
-		}
-	}
-
-	for(const auto& channel : _findChannels(sound))
-	{
-		_channels[channel] = "";
-	}
-}
-
-const bool Sound2dPlayer::isSoundStarted(Sound2d& sound) const
-{
-	for(const auto& soundId : _channels)
-	{
-		if(soundId == sound.getId())
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-const bool Sound2dPlayer::isSoundPaused(Sound2d& sound) const
-{
-	return (isSoundStarted(sound) && Mix_Paused(_findChannels(sound)[0]));
 }

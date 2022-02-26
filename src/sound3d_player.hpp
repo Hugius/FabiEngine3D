@@ -27,9 +27,6 @@ public:
 	void resumeSounds(vector<Sound3d>& sounds);
 	void stopSounds(vector<Sound3d>& sounds);
 
-	const unsigned int getUsedChannelCount() const;
-	const unsigned int getAllocatedChannelCount() const;
-
 	const bool isChannelAvailable() const;
 	const bool isSoundStarted(Sound3d& sound) const;
 	const bool isSoundPaused(Sound3d& sound) const;

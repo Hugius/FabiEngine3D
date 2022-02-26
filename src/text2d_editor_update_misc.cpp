@@ -125,7 +125,7 @@ void Text2dEditor::_updateTextChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("textId")->changeTextContent("Text: " + selectedButtonId.substr(1));
+					_gui->getOverlay()->getTextField("textId")->changeTextContent("Text: " + _currentTextId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
 				}
 

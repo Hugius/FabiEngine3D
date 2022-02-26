@@ -236,7 +236,7 @@ void Animation3dEditor::_updateAnimationChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("animationId")->changeTextContent("Animation: " + selectedButtonId);
+					_gui->getOverlay()->getTextField("animationId")->changeTextContent("Animation: " + _currentAnimationId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), true);
 				}

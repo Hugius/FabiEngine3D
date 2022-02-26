@@ -81,7 +81,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 
 					_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, true);
 
-					_gui->getOverlay()->getTextField("animationId")->changeTextContent("Animation: " + selectedButtonId);
+					_gui->getOverlay()->getTextField("animationId")->changeTextContent("Animation: " + _currentAnimationId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
 				}
 

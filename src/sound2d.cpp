@@ -34,16 +34,6 @@ void Sound2d::setAudioPath(const string& value)
 	_audioPath = value;
 }
 
-void Sound2d::setVolume(float value)
-{
-	_volume = clamp(value, 0.0f, 1.0f);
-}
-
-const float Sound2d::getVolume() const
-{
-	return _volume;
-}
-
 const shared_ptr<WaveBuffer> Sound2d::getWaveBuffer() const
 {
 	return _waveBuffer;

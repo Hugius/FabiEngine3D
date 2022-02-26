@@ -1,5 +1,5 @@
 #include "sound2d_player.hpp"
-
+#include <iostream>
 void Sound2dPlayer::update()
 {
 	vector<string> soundsToStop;
@@ -8,7 +8,7 @@ void Sound2dPlayer::update()
 	{
 		for(unsigned int i = 0; i < startedSounds.size(); i++)
 		{
-			if(startedSounds[i]->getHeader()->dwFlags == WHDR_DONE)
+			if(startedSounds[i]->getHeader()->dwFlags &= WHDR_DONE)
 			{
 				if(startedSounds[i]->getPlayCount() == -1)
 				{
@@ -40,6 +40,17 @@ void Sound2dPlayer::update()
 				{
 					waveOutRestart(startedSounds[i]->getHandle());
 				}
+
+				const auto volume = static_cast<unsigned short>(startedSounds[i]->getVolume() * static_cast<float>(USHRT_MAX));
+				waveOutSetVolume(startedSounds[i]->getHandle(), MAKELONG(volume, volume));
+
+				const auto speedIntegral = static_cast<unsigned short>(startedSounds[i]->getSpeed());
+				const auto speedFraction = static_cast<unsigned short>(fmodf(startedSounds[i]->getSpeed(), 1.0f) * static_cast<float>(USHRT_MAX));
+				waveOutSetPlaybackRate(startedSounds[i]->getHandle(), MAKELONG(speedFraction, speedIntegral));
+
+				const auto pitchIntegral = static_cast<unsigned short>(startedSounds[i]->getPitch());
+				const auto pitchFraction = static_cast<unsigned short>(fmodf(startedSounds[i]->getPitch(), 1.0f) * static_cast<float>(USHRT_MAX));
+				waveOutSetPitch(startedSounds[i]->getHandle(), MAKELONG(pitchFraction, pitchIntegral));
 			}
 		}
 

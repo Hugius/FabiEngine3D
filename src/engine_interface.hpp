@@ -694,10 +694,14 @@ public:
 	void sound2d_resume(const string& id);
 	void sound2d_stop(const string& id);
 	void sound2d_setVolume(const string& id, float value);
+	void sound2d_setSpeed(const string& id, float value);
+	void sound2d_setPitch(const string& id, float value);
 
 	const vector<string> sound2d_getIds() const;
 	const string& sound2d_getAudioPath(const string& id) const;
 	const float sound2d_getVolume(const string& id) const;
+	const float sound2d_getSpeed(const string& id) const;
+	const float sound2d_getPitch(const string& id) const;
 	const bool sound2d_isExisting(const string& id) const;
 	const bool sound2d_isStarted(const string& id) const;
 	const bool sound2d_isPaused(const string& id) const;

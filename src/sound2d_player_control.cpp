@@ -76,7 +76,6 @@ void Sound2dPlayer::resumeSound(const string& id)
 	if(!isSoundStarted(id))
 	{
 		abort();
-
 	}
 	if(!isSoundPaused(id))
 	{
@@ -114,4 +113,97 @@ void Sound2dPlayer::stopSound(const string& id)
 	}
 
 	_startedSounds.erase(id);
+}
+
+void Sound2dPlayer::setSoundVolume(const string& id, float value)
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id))
+	{
+		abort();
+	}
+
+	for(const auto& startedSound : _startedSounds.at(id))
+	{
+		startedSound->setVolume(value);
+	}
+}
+
+void Sound2dPlayer::setSoundSpeed(const string& id, float value)
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id))
+	{
+		abort();
+	}
+
+	for(const auto& startedSound : _startedSounds.at(id))
+	{
+		startedSound->setSpeed(value);
+	}
+}
+
+void Sound2dPlayer::setSoundPitch(const string& id, float value)
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id))
+	{
+		abort();
+	}
+
+	for(const auto& startedSound : _startedSounds.at(id))
+	{
+		startedSound->setPitch(value);
+	}
+}
+
+const float Sound2dPlayer::getSoundVolume(const string& id) const
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id))
+	{
+		abort();
+	}
+
+	_startedSounds.at(id)[0]->getVolume();
+}
+
+const float Sound2dPlayer::getSoundSpeed(const string& id) const
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id))
+	{
+		abort();
+	}
+
+	_startedSounds.at(id)[0]->getSpeed();
+}
+
+const float Sound2dPlayer::getSoundPitch(const string& id) const
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id))
+	{
+		abort();
+	}
+
+	_startedSounds.at(id)[0]->getPitch();
 }

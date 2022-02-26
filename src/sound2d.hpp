@@ -15,12 +15,9 @@ public:
 
 	void setWaveBuffer(shared_ptr<WaveBuffer> value);
 	void setAudioPath(const string& value);
-	void setVolume(float value);
 
 	const string& getId() const;
 	const string& getAudioPath() const;
-
-	const float getVolume() const;
 
 	const shared_ptr<WaveBuffer> getWaveBuffer() const;
 
@@ -30,6 +27,4 @@ private:
 	shared_ptr<WaveBuffer> _waveBuffer = nullptr;
 
 	string _audioPath = "";
-
-	float _volume = 1.0f;
 };

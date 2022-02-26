@@ -12,8 +12,15 @@ class StartedSound2D final
 public:
 	void setPaused(bool value);
 	void setPlayCount(int value);
+	void setVolume(float value);
+	void setSpeed(float value);
+	void setPitch(float value);
 	void setHandle(HWAVEOUT value);
 	void setHeader(PWAVEHDR value);
+
+	const float getVolume() const;
+	const float getSpeed() const;
+	const float getPitch() const;
 
 	const int getPlayCount() const;
 
@@ -24,6 +31,10 @@ public:
 
 private:
 	int _playCount = 0;
+
+	float _volume = 1.0f;
+	float _speed = 1.0f;
+	float _pitch = 1.0f;
 
 	bool _isPaused = false;
 

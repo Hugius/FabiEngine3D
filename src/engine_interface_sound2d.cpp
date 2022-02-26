@@ -41,7 +41,17 @@ void EngineInterface::sound2d_stop(const string& id)
 
 void EngineInterface::sound2d_setVolume(const string& id, float value)
 {
-	_core->getSound2dManager()->getSound(id)->setVolume(value);
+	_core->getSound2dPlayer()->setSoundVolume(id, value);
+}
+
+void EngineInterface::sound2d_setSpeed(const string& id, float value)
+{
+	_core->getSound2dPlayer()->setSoundSpeed(id, value);
+}
+
+void EngineInterface::sound2d_setPitch(const string& id, float value)
+{
+	_core->getSound2dPlayer()->setSoundPitch(id, value);
 }
 
 const vector<string> EngineInterface::sound2d_getIds() const
@@ -78,5 +88,15 @@ const bool EngineInterface::sound2d_isPaused(const string& id) const
 
 const float EngineInterface::sound2d_getVolume(const string& id) const
 {
-	return _core->getSound2dManager()->getSound(id)->getVolume();
+	return _core->getSound2dPlayer()->getSoundVolume(id);
+}
+
+const float EngineInterface::sound2d_getSpeed(const string& id) const
+{
+	return _core->getSound2dPlayer()->getSoundSpeed(id);
+}
+
+const float EngineInterface::sound2d_getPitch(const string& id) const
+{
+	return _core->getSound2dPlayer()->getSoundPitch(id);
 }

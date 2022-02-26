@@ -22,6 +22,13 @@ public:
 	void pauseSound(const string& id);
 	void resumeSound(const string& id);
 	void stopSound(const string& id);
+	void setSoundVolume(const string& id, float value);
+	void setSoundSpeed(const string& id, float value);
+	void setSoundPitch(const string& id, float value);
+
+	const float getSoundVolume(const string& id) const;
+	const float getSoundSpeed(const string& id) const;
+	const float getSoundPitch(const string& id) const;
 
 	const bool isChannelAvailable() const;
 	const bool isSoundStarted(const string& id) const;

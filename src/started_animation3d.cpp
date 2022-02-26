@@ -2,14 +2,6 @@
 
 using std::max;
 
-StartedAnimation3d::StartedAnimation3d(const string& animationId, const string& modelId)
-	:
-	_animationId(animationId),
-	_modelId(modelId)
-{
-
-}
-
 const string& StartedAnimation3d::getAnimationId() const
 {
 	return _animationId;

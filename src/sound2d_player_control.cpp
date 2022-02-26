@@ -16,14 +16,34 @@ void Sound2dPlayer::startSound(const string& id, int playCount)
 	{
 		abort();
 	}
+	if(!isChannelAvailable())
+	{
+		abort();
+	}
 
-	const auto channelIndex = _getFreeChannel();
+	const auto newSound = make_shared<StartedSound2D>();
 
-	const auto newSound = make_shared<StartedSound2D>(id, channelIndex, _sound2dManager->getSound(id)->getWaveBuffer());
+	const auto waveBuffer = _sound2dManager->getSound(id)->getWaveBuffer();
 
+	HWAVEOUT handle = nullptr;
+	PWAVEHDR header = new WAVEHDR(*waveBuffer->getHeader());
+
+	waveOutOpen(&handle, WAVE_MAPPER, waveBuffer->getFormat(), 0, 0, CALLBACK_NULL);
+	waveOutPrepareHeader(handle, header, sizeof(*header));
+	waveOutWrite(handle, header, sizeof(*header));
+
+	newSound->setHandle(handle);
+	newSound->setHeader(header);
 	newSound->setPlayCount(playCount);
 
-	_startedSounds[channelIndex] = newSound;
+	if(!isSoundStarted(id))
+	{
+		_startedSounds.insert({id, {}});
+	}
+
+	_startedSounds.at(id).push_back(newSound);
+
+	_channelCounter++;
 }
 
 void Sound2dPlayer::pauseSound(const string& id)
@@ -41,9 +61,9 @@ void Sound2dPlayer::pauseSound(const string& id)
 		abort();
 	}
 
-	for(const auto& startedSound : _startedSounds)
+	for(const auto& startedSound : _startedSounds.at(id))
 	{
-		startedSound->pause();
+		startedSound->setPaused(true);
 	}
 }
 
@@ -63,9 +83,9 @@ void Sound2dPlayer::resumeSound(const string& id)
 		abort();
 	}
 
-	for(const auto& startedSound : _startedSounds)
+	for(const auto& startedSound : _startedSounds.at(id))
 	{
-		startedSound->resume();
+		startedSound->setPaused(false);
 	}
 }
 
@@ -80,14 +100,18 @@ void Sound2dPlayer::stopSound(const string& id)
 		abort();
 	}
 
-	for(unsigned int i = 0; i < _startedSounds.size(); i++)
+	for(const auto& startedSound : _startedSounds.at(id))
 	{
-		if(_startedSounds[i] != nullptr)
-		{
-			if(id == _startedSounds[i]->getSoundId())
-			{
-				_startedSounds[i] = nullptr;
-			}
-		}
+		waveOutReset(startedSound->getHandle());
+
+		waveOutUnprepareHeader(startedSound->getHandle(), startedSound->getHeader(), sizeof(*startedSound->getHeader()));
+
+		waveOutClose(startedSound->getHandle());
+
+		delete startedSound->getHeader();
+
+		_channelCounter--;
 	}
+
+	_startedSounds.erase(id);
 }

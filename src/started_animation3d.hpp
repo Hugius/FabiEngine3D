@@ -11,8 +11,6 @@ using std::unordered_map;
 class StartedAnimation3d final
 {
 public:
-	StartedAnimation3d(const string& animationId, const string& modelId);
-
 	void setPartIds(const vector<string>& value);
 	void setPlayCount(int value);
 	void setPaused(bool value);

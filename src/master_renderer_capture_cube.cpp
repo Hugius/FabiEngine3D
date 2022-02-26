@@ -68,7 +68,7 @@ void MasterRenderer::captureCubeReflections()
 
 			_camera->setPosition(entity->getPosition());
 
-			BufferId textureId;
+			unsigned int textureId;
 			glGenTextures(1, &textureId);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

@@ -7,8 +7,6 @@ using std::string;
 class StartedAnimation2d final
 {
 public:
-	StartedAnimation2d(const string& animationId, const string& quadId);
-
 	void setPlayCount(int value);
 	void setPaused(bool value);
 	void setAutopaused(bool value);

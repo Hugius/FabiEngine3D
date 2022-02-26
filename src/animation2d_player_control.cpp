@@ -24,7 +24,7 @@ void Animation2dPlayer::startQuad3dAnimation(const string& animationId, const st
 		abort();
 	}
 
-	const auto newAnimation = make_shared<StartedAnimation2d>(animationId, quadId);
+	const auto newAnimation = make_shared<StartedAnimation2d>();
 
 	newAnimation->setPlayCount(playCount);
 
@@ -226,7 +226,7 @@ void Animation2dPlayer::startQuad2dAnimation(const string& animationId, const st
 		abort();
 	}
 
-	const auto newAnimation = make_shared<StartedAnimation2d>(animationId, quadId);
+	const auto newAnimation = make_shared<StartedAnimation2d>();
 
 	newAnimation->setPlayCount(playCount);
 

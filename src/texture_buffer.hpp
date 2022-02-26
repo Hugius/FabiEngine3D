@@ -9,12 +9,10 @@
 using std::array;
 using std::shared_ptr;
 
-using BufferId = GLuint;
-
 class TextureBuffer final
 {
 public:
-	TextureBuffer(BufferId id);
+	TextureBuffer(unsigned int id);
 	TextureBuffer(shared_ptr<Image> image);
 	TextureBuffer(const array<shared_ptr<Image>, 6>& images);
 	~TextureBuffer();
@@ -24,8 +22,8 @@ public:
 
 	const unsigned int getAnisotropicFilteringQuality() const;
 
-	const BufferId getId() const;
+	const unsigned int getId() const;
 
 private:
-	BufferId _id;
+	unsigned int _id;
 };

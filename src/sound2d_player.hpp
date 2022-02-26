@@ -28,11 +28,11 @@ public:
 	const bool isSoundPaused(const string& id) const;
 
 private:
-	const unsigned int _getFreeChannel() const;
-
 	static inline constexpr unsigned int MAX_CHANNEL_COUNT = 1024;
 
-	array<shared_ptr<StartedSound2D>, MAX_CHANNEL_COUNT> _startedSounds;
+	unordered_map<string, vector<shared_ptr<StartedSound2D>>> _startedSounds;
 
 	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
+
+	unsigned int _channelCounter = 0;
 };

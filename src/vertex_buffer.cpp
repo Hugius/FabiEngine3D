@@ -119,12 +119,12 @@ VertexBuffer::~VertexBuffer()
 	glDeleteBuffers(1, &_vboId);
 }
 
-const BufferId VertexBuffer::getVaoId() const
+const unsigned int VertexBuffer::getVaoId() const
 {
 	return _vaoId;
 }
 
-const BufferId VertexBuffer::getVboId() const
+const unsigned int VertexBuffer::getVboId() const
 {
 	return _vboId;
 }

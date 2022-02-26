@@ -10,25 +10,19 @@ using std::string;
 class StartedSound2D final
 {
 public:
-	StartedSound2D(const string& soundId, unsigned int channelIndex, shared_ptr<WaveBuffer> waveBuffer);
-	~StartedSound2D();
-
-	void pause();
-	void resume();
+	void setPaused(bool value);
 	void setPlayCount(int value);
-
-	const string& getSoundId() const;
+	void setHandle(HWAVEOUT value);
+	void setHeader(PWAVEHDR value);
 
 	const int getPlayCount() const;
 
-	const unsigned int getChannelIndex() const;
-
 	const bool isPaused() const;
 
-private:
-	const string _soundId;
-	const unsigned int _channelIndex;
+	const HWAVEOUT getHandle() const;
+	const PWAVEHDR getHeader() const;
 
+private:
 	int _playCount = 0;
 
 	bool _isPaused = false;

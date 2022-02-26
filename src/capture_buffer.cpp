@@ -22,7 +22,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 
 	for(unsigned int i = 0; i < count; i++)
 	{
-		BufferId textureId;
+		unsigned int textureId;
 		glGenTextures(1, &textureId);
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _size.x, _size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
@@ -43,7 +43,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _rbo);
 
-	vector<BufferId> attachments;
+	vector<unsigned int> attachments;
 	for(unsigned int i = 0; i < count; i++)
 	{
 		attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
@@ -67,7 +67,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size)
 
 	bind();
 
-	BufferId textureId;
+	unsigned int textureId;
 	glGenTextures(1, &textureId);
 	_textures.push_back(make_shared<TextureBuffer>(textureId));
 
@@ -117,12 +117,12 @@ const ivec2& CaptureBuffer::getSize() const
 	return _size;
 }
 
-const BufferId CaptureBuffer::getFbo() const
+const unsigned int CaptureBuffer::getFbo() const
 {
 	return _fbo;
 }
 
-const BufferId CaptureBuffer::getRbo() const
+const unsigned int CaptureBuffer::getRbo() const
 {
 	return _rbo;
 }

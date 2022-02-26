@@ -3,7 +3,7 @@
 
 using std::clamp;
 
-TextureBuffer::TextureBuffer(BufferId id)
+TextureBuffer::TextureBuffer(unsigned int id)
 	:
 	_id(id)
 {
@@ -85,7 +85,7 @@ TextureBuffer::~TextureBuffer()
 	glDeleteTextures(1, &_id);
 }
 
-const BufferId TextureBuffer::getId() const
+const unsigned int TextureBuffer::getId() const
 {
 	return _id;
 }

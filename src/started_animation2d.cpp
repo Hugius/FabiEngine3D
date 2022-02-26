@@ -2,14 +2,6 @@
 
 using std::max;
 
-StartedAnimation2d::StartedAnimation2d(const string& animationId, const string& quadId)
-	:
-	_animationId(animationId),
-	_quadId(quadId)
-{
-
-}
-
 const string& StartedAnimation2d::getAnimationId() const
 {
 	return _animationId;

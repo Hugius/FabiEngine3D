@@ -7,7 +7,6 @@
 #include <glew.h>
 
 using std::unordered_map;
-using BufferId = GLuint;
 
 class ShaderBuffer final
 {
@@ -23,22 +22,22 @@ public:
 		_uploadUniform(uniformId, data);
 	}
 
-	const BufferId getProgramId() const;
-	const BufferId getUniformId(const string& name);
+	const unsigned int getProgramId() const;
+	const unsigned int getUniformId(const string& name);
 
 private:
-	void _uploadUniform(const BufferId& uniformId, const bool& data);
-	void _uploadUniform(const BufferId& uniformId, const int& data);
-	void _uploadUniform(const BufferId& uniformId, const float& data);
-	void _uploadUniform(const BufferId& uniformId, const double& data);
-	void _uploadUniform(const BufferId& uniformId, const fvec2& data);
-	void _uploadUniform(const BufferId& uniformId, const fvec3& data);
-	void _uploadUniform(const BufferId& uniformId, const fvec4& data);
-	void _uploadUniform(const BufferId& uniformId, const mat22& data);
-	void _uploadUniform(const BufferId& uniformId, const mat33& data);
-	void _uploadUniform(const BufferId& uniformId, const mat44& data);
+	void _uploadUniform(const unsigned int& uniformId, const bool& data);
+	void _uploadUniform(const unsigned int& uniformId, const int& data);
+	void _uploadUniform(const unsigned int& uniformId, const float& data);
+	void _uploadUniform(const unsigned int& uniformId, const double& data);
+	void _uploadUniform(const unsigned int& uniformId, const fvec2& data);
+	void _uploadUniform(const unsigned int& uniformId, const fvec3& data);
+	void _uploadUniform(const unsigned int& uniformId, const fvec4& data);
+	void _uploadUniform(const unsigned int& uniformId, const mat22& data);
+	void _uploadUniform(const unsigned int& uniformId, const mat33& data);
+	void _uploadUniform(const unsigned int& uniformId, const mat44& data);
 
-	unordered_map<string, BufferId> _uniformCache;
+	unordered_map<string, unsigned int> _uniformCache;
 
-	BufferId _programId = 0;
+	unsigned int _programId = 0;
 };

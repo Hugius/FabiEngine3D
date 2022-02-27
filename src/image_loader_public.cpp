@@ -28,7 +28,7 @@ const shared_ptr<Image> ImageLoader::loadImage(const string& filePath)
 		return nullptr;
 	}
 
-	_cache.insert(make_pair(filePath, loadedImage));
+	_cache.insert({filePath, loadedImage});
 
 	Logger::throwInfo("Loaded image: \"" + filePath + "\"");
 
@@ -60,7 +60,7 @@ void ImageLoader::cacheImage(const string& filePath, bool isCrucial)
 		return;
 	}
 
-	_cache.insert(make_pair(filePath, loadedImage));
+	_cache.insert({filePath, loadedImage});
 
 	Logger::throwInfo("Loaded image: \"" + filePath + "\"");
 }
@@ -112,7 +112,7 @@ void ImageLoader::cacheImages(const vector<string>& filePaths, bool isCrucial)
 						continue;
 					}
 
-					_cache.insert(make_pair(threadFilePaths[i], loadedImage));
+					_cache.insert({threadFilePaths[i], loadedImage});
 
 					Logger::throwInfo("Loaded image: \"" + threadFilePaths[i] + "\"");
 				}

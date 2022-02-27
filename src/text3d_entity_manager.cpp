@@ -104,7 +104,7 @@ void Text3dEntityManager::createEntity(const string& id, const string& fontMapPa
 	entity->setFontMapPath(fontMapPath);
 	entity->setContent("text");
 
-	_entities.insert(make_pair(id, entity));
+	_entities.insert({id, entity});
 }
 
 void Text3dEntityManager::update()

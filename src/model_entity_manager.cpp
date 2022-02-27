@@ -108,7 +108,7 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 
 	entity->setMeshPath(meshPath);
 
-	_entities.insert(make_pair(id, entity));
+	_entities.insert({id, entity});
 }
 
 void ModelEntityManager::deleteEntity(const string& id)
@@ -191,7 +191,7 @@ void ModelEntityManager::update()
 				{
 					const auto absoluteDistance = Math::calculateDistance(entity->getBasePosition(), reflectionEntity->getPosition());
 
-					orderedReflectionEntities.insert(make_pair(absoluteDistance, reflectionEntity));
+					orderedReflectionEntities.insert({absoluteDistance, reflectionEntity});
 				}
 			}
 

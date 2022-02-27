@@ -342,12 +342,12 @@ void MasterRenderer::_renderGUI()
 		{
 			if(entity->getId() != _renderStorage->getCursorEntityId())
 			{
-				orderedQuad2dEntities.insert(make_pair(entity->getDepth(), entity));
+				orderedQuad2dEntities.insert({entity->getDepth(), entity});
 			}
 		}
 		for(const auto& [key, entity] : _text2dEntityManager->getEntities())
 		{
-			orderedQuad2dEntities.insert(make_pair(entity->getDepth(), entity));
+			orderedQuad2dEntities.insert({entity->getDepth(), entity});
 		}
 
 		for(const auto& [key, entity] : orderedQuad2dEntities)

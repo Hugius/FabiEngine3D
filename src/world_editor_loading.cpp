@@ -180,7 +180,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				continue;
 			}
 
-			_loadedModelIds.insert(make_pair(modelId, templateId));
+			_loadedModelIds.insert({modelId, templateId});
 
 			_worldUtilities->copyTemplateModel(modelId, templateId);
 
@@ -225,7 +225,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				continue;
 			}
 
-			_loadedQuadIds.insert(make_pair(quadId, templateId));
+			_loadedQuadIds.insert({quadId, templateId});
 
 			_worldUtilities->copyTemplateQuad3d(quadId, templateId);
 
@@ -263,7 +263,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				continue;
 			}
 
-			_loadedTextIds.insert(make_pair(textId, templateId));
+			_loadedTextIds.insert({textId, templateId});
 
 			_worldUtilities->copyTemplateText3d(textId, templateId);
 
@@ -309,7 +309,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				continue;
 			}
 
-			_loadedSoundIds.insert(make_pair(soundId, templateId));
+			_loadedSoundIds.insert({soundId, templateId});
 
 			_worldUtilities->copyTemplateSound3d(soundId, templateId);
 

@@ -125,29 +125,29 @@ EngineCore::EngineCore()
 	_timer->createClock("2dEntityRender");
 	_timer->createClock("bufferSwap");
 
-	_updateDeltaTimes.insert(make_pair("coreUpdate", 0.0f));
-	_updateDeltaTimes.insert(make_pair("physicsUpdate", 0.0f));
-	_updateDeltaTimes.insert(make_pair("3dEntityUpdate", 0.0f));
-	_updateDeltaTimes.insert(make_pair("2dEntityUpdate", 0.0f));
-	_updateDeltaTimes.insert(make_pair("renderUpdate", 0.0f));
-	_updateDeltaTimes.insert(make_pair("animationUpdate", 0.0f));
-	_updateDeltaTimes.insert(make_pair("soundUpdate", 0.0f));
-	_updateDeltaTimes.insert(make_pair("networkUpdate", 0.0f));
-	_updateDeltaTimes.insert(make_pair("miscUpdate", 0.0f));
+	_updateDeltaTimes.insert({"coreUpdate", 0.0f});
+	_updateDeltaTimes.insert({"physicsUpdate", 0.0f});
+	_updateDeltaTimes.insert({"3dEntityUpdate", 0.0f});
+	_updateDeltaTimes.insert({"2dEntityUpdate", 0.0f});
+	_updateDeltaTimes.insert({"renderUpdate", 0.0f});
+	_updateDeltaTimes.insert({"animationUpdate", 0.0f});
+	_updateDeltaTimes.insert({"soundUpdate", 0.0f});
+	_updateDeltaTimes.insert({"networkUpdate", 0.0f});
+	_updateDeltaTimes.insert({"miscUpdate", 0.0f});
 
-	_renderDeltaTimes.insert(make_pair("depthPreRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("shadowPreRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("reflectionPreRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("refractionPreRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("waterPreRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("3dEntityRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("antiAliasingPostRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("bloomPreRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("dofPreRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("lensFlarePreRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("motionBlurPreRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("2dEntityRender", 0.0f));
-	_renderDeltaTimes.insert(make_pair("bufferSwap", 0.0f));
+	_renderDeltaTimes.insert({"depthPreRender", 0.0f});
+	_renderDeltaTimes.insert({"shadowPreRender", 0.0f});
+	_renderDeltaTimes.insert({"reflectionPreRender", 0.0f});
+	_renderDeltaTimes.insert({"refractionPreRender", 0.0f});
+	_renderDeltaTimes.insert({"waterPreRender", 0.0f});
+	_renderDeltaTimes.insert({"3dEntityRender", 0.0f});
+	_renderDeltaTimes.insert({"antiAliasingPostRender", 0.0f});
+	_renderDeltaTimes.insert({"bloomPreRender", 0.0f});
+	_renderDeltaTimes.insert({"dofPreRender", 0.0f});
+	_renderDeltaTimes.insert({"lensFlarePreRender", 0.0f});
+	_renderDeltaTimes.insert({"motionBlurPreRender", 0.0f});
+	_renderDeltaTimes.insert({"2dEntityRender", 0.0f});
+	_renderDeltaTimes.insert({"bufferSwap", 0.0f});
 }
 
 void EngineCore::start()

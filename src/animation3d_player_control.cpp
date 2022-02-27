@@ -33,7 +33,7 @@ void Animation3dPlayer::startModelAnimation(const string& animationId, const str
 	newAnimation->setPlayCount(playCount);
 	newAnimation->setPartIds(_animation3dManager->getAnimation(animationId)->getPartIds());
 
-	_startedModelAnimations.insert(make_pair(key, newAnimation));
+	_startedModelAnimations.insert({key, newAnimation});
 }
 
 void Animation3dPlayer::pauseModelAnimation(const string& animationId, const string& modelId)

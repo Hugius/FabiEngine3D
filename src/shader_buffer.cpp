@@ -127,7 +127,7 @@ const unsigned int ShaderBuffer::getUniformId(const string& name)
 		abort();
 	}
 
-	_uniformCache.insert(make_pair(name, id));
+	_uniformCache.insert({name, id});
 
 	return id;
 }

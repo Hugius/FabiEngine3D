@@ -62,7 +62,7 @@ void Sound2dManager::createSound(const string& id, const string& audioPath)
 	sound->setWaveBuffer(waveBuffer);
 	sound->setAudioPath(audioPath);
 
-	_sounds.insert(make_pair(id, sound));
+	_sounds.insert({id, sound});
 }
 
 const bool Sound2dManager::isSoundExisting(const string& id) const

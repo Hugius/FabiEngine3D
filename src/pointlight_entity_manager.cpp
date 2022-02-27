@@ -34,7 +34,7 @@ void PointlightEntityManager::createEntity(const string& id)
 
 	auto entity = make_shared<PointlightEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
+	_entities.insert({id, entity});
 }
 
 void PointlightEntityManager::deleteEntity(const string& id)

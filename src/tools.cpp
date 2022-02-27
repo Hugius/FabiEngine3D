@@ -10,7 +10,6 @@
 #include <shlobj_core.h>
 
 using std::to_string;
-using std::make_pair;
 using std::filesystem::exists;
 using std::filesystem::create_directory;
 using std::filesystem::absolute;
@@ -193,13 +192,13 @@ const pair<string, string> Tools::splitStringIntoTwo(const string& mergedString,
 
 	if(delimiterIndex == string::npos)
 	{
-		return make_pair("", "");
+		return {"", ""};
 	}
 
 	const auto firstString = mergedString.substr(0, delimiterIndex);
 	const auto secondString = mergedString.substr(delimiterIndex + 1);
 
-	return make_pair(firstString, secondString);
+	return {firstString, secondString};
 }
 
 const vector<string> Tools::splitStringIntoMultiple(const string& mergedString, char delimiter)

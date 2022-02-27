@@ -28,7 +28,7 @@ const shared_ptr<Mesh> MeshLoader::loadMesh(const string& filePath)
 		return nullptr;
 	}
 
-	_cache.insert(make_pair(filePath, loadedMesh));
+	_cache.insert({filePath, loadedMesh});
 
 	Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
 
@@ -60,7 +60,7 @@ void MeshLoader::cacheMesh(const string& filePath, bool isCrucial)
 		return;
 	}
 
-	_cache.insert(make_pair(filePath, loadedMesh));
+	_cache.insert({filePath, loadedMesh});
 
 	Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
 }
@@ -112,7 +112,7 @@ void MeshLoader::cacheMeshes(const vector<string>& filePaths, bool isCrucial)
 						continue;
 					}
 
-					_cache.insert(make_pair(threadFilePaths[i], loadedMesh));
+					_cache.insert({threadFilePaths[i], loadedMesh});
 
 					Logger::throwInfo("Loaded mesh: \"" + threadFilePaths[i] + "\"");
 				}

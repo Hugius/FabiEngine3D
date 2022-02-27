@@ -123,7 +123,7 @@ const unordered_map<string, unsigned int> Script::findKeyword(const string& keyw
 			{
 				if(line.substr(i, keyword.size()) == keyword)
 				{
-					result.insert(make_pair(file->getId(), lineNumber + 1));
+					result.insert({file->getId(), lineNumber + 1});
 					break;
 				}
 			}

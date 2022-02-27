@@ -102,7 +102,7 @@ void AabbEntityManager::createEntity(const string& id, bool isCentered)
 	entity->setCentered(isCentered);
 	entity->setVisible(false);
 
-	_entities.insert(make_pair(id, entity));
+	_entities.insert({id, entity});
 }
 
 void AabbEntityManager::update()

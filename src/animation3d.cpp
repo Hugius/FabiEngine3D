@@ -1,6 +1,5 @@
 #include "animation3d.hpp"
 
-using std::make_pair;
 using std::max;
 using std::make_unique;
 
@@ -20,11 +19,11 @@ void Animation3d::createPart(const string& partId)
 
 	for(auto& frame : _frames)
 	{
-		frame->targetTransformations.insert(make_pair(partId, fvec3(0.0f)));
-		frame->rotationOrigins.insert(make_pair(partId, fvec3(0.0f)));
-		frame->speeds.insert(make_pair(partId, fvec3(0.0f)));
-		frame->speedTypes.insert(make_pair(partId, SpeedType::LINEAR));
-		frame->transformationTypes.insert(make_pair(partId, TransformationType::MOVEMENT));
+		frame->targetTransformations.insert({partId, fvec3(0.0f)});
+		frame->rotationOrigins.insert({partId, fvec3(0.0f)});
+		frame->speeds.insert({partId, fvec3(0.0f)});
+		frame->speedTypes.insert({partId, SpeedType::LINEAR});
+		frame->transformationTypes.insert({partId, TransformationType::MOVEMENT});
 	}
 }
 
@@ -62,11 +61,11 @@ void Animation3d::createFrame(unsigned int index)
 
 	for(auto& partId : _partIds)
 	{
-		_frames[index]->targetTransformations.insert(make_pair(partId, fvec3(0.0f)));
-		_frames[index]->rotationOrigins.insert(make_pair(partId, fvec3(0.0f)));
-		_frames[index]->speeds.insert(make_pair(partId, fvec3(0.0f)));
-		_frames[index]->speedTypes.insert(make_pair(partId, SpeedType::LINEAR));
-		_frames[index]->transformationTypes.insert(make_pair(partId, TransformationType::MOVEMENT));
+		_frames[index]->targetTransformations.insert({partId, fvec3(0.0f)});
+		_frames[index]->rotationOrigins.insert({partId, fvec3(0.0f)});
+		_frames[index]->speeds.insert({partId, fvec3(0.0f)});
+		_frames[index]->speedTypes.insert({partId, SpeedType::LINEAR});
+		_frames[index]->transformationTypes.insert({partId, TransformationType::MOVEMENT});
 	}
 }
 

@@ -32,7 +32,7 @@ void Animation2dPlayer::startQuad3dAnimation(const string& animationId, const st
 
 	newAnimation->setPlayCount(playCount);
 
-	_startedQuad3dAnimations.insert(make_pair(key, newAnimation));
+	_startedQuad3dAnimations.insert({key, newAnimation});
 }
 
 void Animation2dPlayer::pauseQuad3dAnimation(const string& animationId, const string& quadId)
@@ -238,7 +238,7 @@ void Animation2dPlayer::startQuad2dAnimation(const string& animationId, const st
 
 	newAnimation->setPlayCount(playCount);
 
-	_startedQuad2dAnimations.insert(make_pair(key, newAnimation));
+	_startedQuad2dAnimations.insert({key, newAnimation});
 }
 
 void Animation2dPlayer::pauseQuad2dAnimation(const string& animationId, const string& quadId)

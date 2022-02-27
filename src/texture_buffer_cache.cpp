@@ -10,7 +10,7 @@ void TextureBufferCache::store2dBuffer(const string& filePath, shared_ptr<Textur
 		abort();
 	}
 
-	_2dBuffers.insert(make_pair(filePath, buffer));
+	_2dBuffers.insert({filePath, buffer});
 }
 
 void TextureBufferCache::store3dBuffer(const array<string, 6>& filePaths, shared_ptr<TextureBuffer> buffer)
@@ -24,7 +24,7 @@ void TextureBufferCache::store3dBuffer(const array<string, 6>& filePaths, shared
 		abort();
 	}
 
-	_3dBuffers.insert(make_pair(key, buffer));
+	_3dBuffers.insert({key, buffer});
 }
 
 void TextureBufferCache::delete2dBuffer(const string& filePath)

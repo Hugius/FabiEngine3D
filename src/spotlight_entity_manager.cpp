@@ -34,7 +34,7 @@ void SpotlightEntityManager::createEntity(const string& id)
 
 	auto entity = make_shared<SpotlightEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
+	_entities.insert({id, entity});
 }
 
 void SpotlightEntityManager::update()

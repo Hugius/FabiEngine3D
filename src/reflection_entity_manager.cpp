@@ -29,7 +29,7 @@ void ReflectionEntityManager::createEntity(const string& id)
 
 	auto entity = make_shared<ReflectionEntity>(id);
 
-	_entities.insert(make_pair(id, entity));
+	_entities.insert({id, entity});
 }
 
 void ReflectionEntityManager::update()

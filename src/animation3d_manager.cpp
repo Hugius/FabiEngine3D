@@ -11,7 +11,7 @@ void Animation3dManager::createAnimation(const string& id)
 
 	auto animation = make_shared<Animation3d>(id);
 
-	_animations.insert(make_pair(id, animation));
+	_animations.insert({id, animation});
 }
 
 void Animation3dManager::deleteAnimation(const string& id)

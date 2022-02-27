@@ -9,7 +9,7 @@ void WaveBufferCache::storeBuffer(const string& filePath, shared_ptr<WaveBuffer>
 		abort();
 	}
 
-	_buffers.insert(make_pair(filePath, buffer));
+	_buffers.insert({filePath, buffer});
 }
 
 void WaveBufferCache::deleteBuffer(const string& filePath)

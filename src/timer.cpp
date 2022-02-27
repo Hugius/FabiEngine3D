@@ -6,7 +6,6 @@
 using std::chrono::high_resolution_clock;
 using std::chrono::nanoseconds;
 using std::chrono::duration_cast;
-using std::make_pair;
 using std::make_unique;
 
 void Timer::createClock(const string& id)
@@ -16,7 +15,7 @@ void Timer::createClock(const string& id)
 		abort();
 	}
 
-	_clocks.insert(make_pair(id, make_unique<Clock>()));
+	_clocks.insert({id, make_unique<Clock>()});
 }
 
 void Timer::deleteClock(const string& id)

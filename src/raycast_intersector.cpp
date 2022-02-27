@@ -2,7 +2,6 @@
 
 using std::min;
 using std::max;
-using std::make_pair;
 using std::make_shared;
 
 void RaycastIntersector::update()
@@ -25,7 +24,7 @@ void RaycastIntersector::update()
 	{
 		if(!_isAabbIntersectionEnabled || !entity->isRaycastResponsive())
 		{
-			_aabbIntersections.insert(make_pair(entity->getId(), -1.0f));
+			_aabbIntersections.insert({entity->getId(), -1.0f});
 			continue;
 		}
 
@@ -45,7 +44,7 @@ void RaycastIntersector::update()
 			}
 		}
 
-		_aabbIntersections.insert(make_pair(entity->getId(), distanceToAabb));
+		_aabbIntersections.insert({entity->getId(), distanceToAabb});
 
 		if(distanceToAabb != -1.0f)
 		{

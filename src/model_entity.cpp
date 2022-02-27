@@ -9,7 +9,7 @@ using std::make_unique;
 
 void ModelEntity::createPart(const string& id)
 {
-	_parts.insert(make_pair(id, make_unique<ModelEntityPart>()));
+	_parts.insert({id, make_unique<ModelEntityPart>()});
 }
 
 void ModelEntity::deletePart(const string& id)

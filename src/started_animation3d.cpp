@@ -33,10 +33,10 @@ void StartedAnimation3d::setPartIds(const vector<string>& value)
 
 	for(const auto& partId : _partIds)
 	{
-		_totalMovements.insert(make_pair(partId, fvec3(0.0f)));
-		_totalRotations.insert(make_pair(partId, fvec3(0.0f)));
-		_totalScalings.insert(make_pair(partId, fvec3(0.0f)));
-		_totalSpeeds.insert(make_pair(partId, fvec3(0.0f)));
+		_totalMovements.insert({partId, fvec3(0.0f)});
+		_totalRotations.insert({partId, fvec3(0.0f)});
+		_totalScalings.insert({partId, fvec3(0.0f)});
+		_totalSpeeds.insert({partId, fvec3(0.0f)});
 	}
 }
 

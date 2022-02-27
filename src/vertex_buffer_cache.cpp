@@ -12,7 +12,7 @@ void VertexBufferCache::storeBuffer(const string& filePath, const string& partId
 		abort();
 	}
 
-	_buffers.insert(make_pair(key, buffer));
+	_buffers.insert({key, buffer});
 }
 
 void VertexBufferCache::deleteBuffer(const string& filePath, const string& partId)

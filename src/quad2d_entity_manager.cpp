@@ -41,7 +41,7 @@ void Quad2dEntityManager::createEntity(const string& id, bool isCentered)
 	entity->setCentered(isCentered);
 	entity->setDepth(_renderStorage->getGuiDepth());
 
-	_entities.insert(make_pair(id, entity));
+	_entities.insert({id, entity});
 
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }

@@ -66,7 +66,7 @@ void TerrainEntityManager::createEntity(const string& id, const string& heightMa
 	entity->setPixels(pixels);
 	entity->setSize(static_cast<float>(size));
 
-	_entities.insert(make_pair(id, entity));
+	_entities.insert({id, entity});
 
 	loadMesh(id);
 }

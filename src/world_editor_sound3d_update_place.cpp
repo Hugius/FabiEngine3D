@@ -21,10 +21,10 @@ void WorldEditor::_updateSoundPlacing()
 
 				_idCounter++;
 
-				_loadedSoundIds.insert(make_pair(newId, _currentTemplateSoundId));
+				_loadedSoundIds.insert({newId, _currentTemplateSoundId});
 
 				_worldUtilities->copyTemplateSound3d(newId, _currentTemplateSoundId);
-				_loadedSoundIds.insert(make_pair(newId, _currentTemplateSoundId));
+				_loadedSoundIds.insert({newId, _currentTemplateSoundId});
 
 				_fe3d->sound3d_setPosition(newId, newPosition);
 				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND_MAX_VOLUME);
@@ -110,10 +110,10 @@ void WorldEditor::_updateSoundPlacing()
 
 				_idCounter++;
 
-				_loadedSoundIds.insert(make_pair(newId, _currentTemplateSoundId));
+				_loadedSoundIds.insert({newId, _currentTemplateSoundId});
 
 				_worldUtilities->copyTemplateSound3d(newId, _currentTemplateSoundId);
-				_loadedSoundIds.insert(make_pair(newId, _currentTemplateSoundId));
+				_loadedSoundIds.insert({newId, _currentTemplateSoundId});
 
 				_fe3d->sound3d_setPosition(newId, newPosition);
 				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND_MAX_VOLUME);

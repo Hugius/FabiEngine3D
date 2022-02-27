@@ -60,7 +60,7 @@ void Text2dEntityManager::createEntity(const string& id, const string& fontMapPa
 	entity->setContent("text");
 	entity->setDepth(_renderStorage->getGuiDepth());
 
-	_entities.insert(make_pair(id, entity));
+	_entities.insert({id, entity});
 
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }

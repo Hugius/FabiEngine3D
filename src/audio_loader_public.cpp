@@ -28,7 +28,7 @@ const shared_ptr<Audio> AudioLoader::loadAudio(const string& filePath)
 		return nullptr;
 	}
 
-	_cache.insert(make_pair(filePath, loadedAudio));
+	_cache.insert({filePath, loadedAudio});
 
 	Logger::throwInfo("Loaded audio: \"" + filePath + "\"");
 
@@ -60,7 +60,7 @@ void AudioLoader::cacheAudio(const string& filePath, bool isCrucial)
 		return;
 	}
 
-	_cache.insert(make_pair(filePath, loadedAudio));
+	_cache.insert({filePath, loadedAudio});
 
 	Logger::throwInfo("Loaded audio: \"" + filePath + "\"");
 }
@@ -112,7 +112,7 @@ void AudioLoader::cacheAudios(const vector<string>& filePaths, bool isCrucial)
 						continue;
 					}
 
-					_cache.insert(make_pair(threadFilePaths[i], loadedAudio));
+					_cache.insert({threadFilePaths[i], loadedAudio});
 
 					Logger::throwInfo("Loaded audio: \"" + threadFilePaths[i] + "\"");
 				}

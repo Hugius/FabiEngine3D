@@ -67,7 +67,7 @@ void ScriptExecutor::pause()
 			{
 				if(_fe3d->sound2d_isStarted(soundId, i) && _fe3d->sound2d_isPaused(soundId, i))
 				{
-					_pausedSound2dIds.push_back(soundId);
+					_pausedSound2dIds.push_back({soundId, i});
 				}
 			}
 		}
@@ -153,12 +153,9 @@ void ScriptExecutor::resume()
 			_fe3d->sound3d_pause(soundId);
 		}
 
-		for(const auto& soundId : _pausedSound2dIds)
+		for(const auto& [soundId, index] : _pausedSound2dIds)
 		{
-			for(unsigned int i = 0; i < _fe3d->sound2d_getStartedCount(soundId); i++)
-			{
-				_fe3d->sound2d_pause(soundId, i);
-			}
+			_fe3d->sound2d_pause(soundId, index);
 		}
 
 		for(const auto& clockId : _pausedClockIds)

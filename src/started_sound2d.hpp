@@ -18,6 +18,9 @@ public:
 	void setHandle(HWAVEOUT value);
 	void setHeader(PWAVEHDR value);
 
+	const HWAVEOUT getHandle() const;
+	const PWAVEHDR getHeader() const;
+
 	const float getVolume() const;
 	const float getSpeed() const;
 	const float getPitch() const;
@@ -25,9 +28,6 @@ public:
 	const int getPlayCount() const;
 
 	const bool isPaused() const;
-
-	const HWAVEOUT getHandle() const;
-	const PWAVEHDR getHeader() const;
 
 private:
 	int _playCount = 0;

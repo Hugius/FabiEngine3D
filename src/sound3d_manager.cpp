@@ -27,11 +27,6 @@ void Sound3dManager::inject(shared_ptr<WaveBufferCache> waveBufferCache)
 	_waveBufferCache = waveBufferCache;
 }
 
-void Sound3dManager::update()
-{
-
-}
-
 void Sound3dManager::createSound(const string& id, const string& audioPath)
 {
 	if(isSoundExisting(id))

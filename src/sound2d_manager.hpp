@@ -13,7 +13,6 @@ class Sound2dManager final
 public:
 	void inject(shared_ptr<AudioLoader> audioLoader);
 	void inject(shared_ptr<WaveBufferCache> waveBufferCache);
-	void update();
 	void createSound(const string& id, const string& audioPath);
 	void deleteSound(const string& id);
 	void deleteSounds();

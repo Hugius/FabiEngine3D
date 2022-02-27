@@ -49,8 +49,6 @@ void EngineCore::_update()
 	_timer->stopClock("animationUpdate");
 
 	_timer->startClock("soundUpdate");
-	_sound3dManager->update();
-	_sound2dManager->update();
 	_sound3dPlayer->update();
 	_sound2dPlayer->update();
 	_timer->stopClock("soundUpdate");

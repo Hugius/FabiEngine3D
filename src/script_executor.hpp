@@ -22,7 +22,7 @@ private:
 	void _validateExecution();
 
 	vector<string> _pausedSound3dIds;
-	vector<string> _pausedSound2dIds;
+	vector<pair<string, unsigned int>> _pausedSound2dIds;
 	vector<string> _pausedClockIds;
 
 	bool _isStarted = false;

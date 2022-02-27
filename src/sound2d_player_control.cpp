@@ -4,6 +4,10 @@ using std::make_shared;
 
 void Sound2dPlayer::startSound(const string& id, int playCount)
 {
+	if(!isChannelAvailable())
+	{
+		return;
+	}
 	if(playCount == 0)
 	{
 		return;
@@ -13,10 +17,6 @@ void Sound2dPlayer::startSound(const string& id, int playCount)
 		abort();
 	}
 	if(!_sound2dManager->isSoundExisting(id))
-	{
-		abort();
-	}
-	if(!isChannelAvailable())
 	{
 		abort();
 	}

@@ -1,5 +1,5 @@
 #include "sound2d_player.hpp"
-#include <iostream>
+
 void Sound2dPlayer::update()
 {
 	vector<string> soundsToStop;

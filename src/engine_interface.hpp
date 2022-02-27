@@ -706,6 +706,7 @@ public:
 	const bool sound2d_isExisting(const string& id) const;
 	const bool sound2d_isStarted(const string& id, unsigned int index) const;
 	const bool sound2d_isPaused(const string& id, unsigned int index) const;
+	const bool sound2d_isChannelAvailable() const;
 
 	void sound3d_create(const string& id, const string& audioPath);
 	void sound3d_delete(const string& id);

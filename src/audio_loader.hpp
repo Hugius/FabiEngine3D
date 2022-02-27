@@ -26,7 +26,4 @@ private:
 	shared_ptr<Audio> _loadAudio(const string& filePath);
 
 	unordered_map<string, shared_ptr<Audio>> _cache;
-
-	static inline const unsigned int CHUNK_HEADER_SIZE = 12;
-	static inline const unsigned int SUB_CHUNK_HEADER_SIZE = 8;
 };

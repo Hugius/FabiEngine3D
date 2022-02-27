@@ -18,9 +18,9 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 		return nullptr;
 	}
 
-	auto chunkHeaderData = new unsigned char[CHUNK_HEADER_SIZE];
+	auto chunkHeaderData = new unsigned char[12];
 
-	for(int i = 0; i < CHUNK_HEADER_SIZE; i++)
+	for(int i = 0; i < 12; i++)
 	{
 		chunkHeaderData[i] = static_cast<unsigned int>(getc(file));
 	}
@@ -57,9 +57,9 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 
 	while(true)
 	{
-		auto subChunkHeaderData = new unsigned char[SUB_CHUNK_HEADER_SIZE];
+		auto subChunkHeaderData = new unsigned char[8];
 
-		for(int i = 0; i < SUB_CHUNK_HEADER_SIZE; i++)
+		for(int i = 0; i < 8; i++)
 		{
 			subChunkHeaderData[i] = static_cast<unsigned int>(getc(file));
 		}
@@ -90,6 +90,12 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 			}
 
 			channelCount = static_cast<unsigned int>((subChunkBodyData[3] << 8) | subChunkBodyData[2]);
+
+			if(channelCount != 1 && channelCount != 2)
+			{
+				return nullptr;
+			}
+
 			sampleRate = static_cast<unsigned int>((subChunkBodyData[7] << 24) | (subChunkBodyData[6] << 16) | (subChunkBodyData[5] << 8) | subChunkBodyData[4]);
 			byteRate = static_cast<unsigned int>((subChunkBodyData[11] << 24) | (subChunkBodyData[10] << 16) | (subChunkBodyData[9] << 8) | subChunkBodyData[8]);
 			bytesPerBlock = static_cast<unsigned int>((subChunkBodyData[13] << 8) | subChunkBodyData[12]);

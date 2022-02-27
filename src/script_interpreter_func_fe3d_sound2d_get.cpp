@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound2d_is_started")
+	else if(functionName == "fe3d:sound2d_get_audio_path")
 	{
 		auto types = {SVT::STRING};
 
@@ -64,7 +64,21 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->sound2d_isStarted(args[0]->getString(), 0);
+				const auto result = _fe3d->sound2d_getAudioPath(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sound2d_is_started")
+	{
+		auto types = {SVT::STRING, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSound2d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->sound2d_isStarted(args[0]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -72,13 +86,13 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound2d_is_paused")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->sound2d_isPaused(args[0]->getString(), 0);
+				const auto result = _fe3d->sound2d_isPaused(args[0]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -86,15 +100,69 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound2d_get_volume")
 	{
+		auto types = {SVT::STRING, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSound2d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->sound2d_getVolume(args[0]->getString(), args[1]->getInteger());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sound2d_get_speed")
+	{
+		auto types = {SVT::STRING, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSound2d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->sound2d_getSpeed(args[0]->getString(), args[1]->getInteger());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sound2d_get_pitch")
+	{
+		auto types = {SVT::STRING, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSound2d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->sound2d_getPitch(args[0]->getString(), args[1]->getInteger());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sound2d_get_started_count")
+	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->sound2d_getVolume(args[0]->getString(), 0);
+				const auto result = _fe3d->sound2d_getStartedCount(args[0]->getString());
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sound2d_is_channel_available")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSound2d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->sound2d_isChannelAvailable();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
 		}
 	}

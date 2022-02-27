@@ -83,6 +83,11 @@ const bool EngineInterface::sound2d_isPaused(const string& id, unsigned int inde
 	return _core->getSound2dPlayer()->isSoundPaused(id, index);
 }
 
+const bool EngineInterface::sound2d_isChannelAvailable() const
+{
+	return _core->getSound2dPlayer()->isChannelAvailable();
+}
+
 const float EngineInterface::sound2d_getVolume(const string& id, unsigned int index) const
 {
 	return _core->getSound2dPlayer()->getSoundVolume(id, index);

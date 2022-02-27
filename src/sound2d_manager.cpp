@@ -27,11 +27,6 @@ void Sound2dManager::inject(shared_ptr<WaveBufferCache> waveBufferCache)
 	_waveBufferCache = waveBufferCache;
 }
 
-void Sound2dManager::update()
-{
-
-}
-
 void Sound2dManager::createSound(const string& id, const string& audioPath)
 {
 	if(isSoundExisting(id))

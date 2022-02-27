@@ -158,12 +158,18 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_validateFe3dSound2d(args[0]->getString(), false))
-			{
-				const auto result = _fe3d->sound2d_isChannelAvailable();
+			const auto result = _fe3d->sound2d_isChannelAvailable();
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-			}
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:sound2d_is_device_connected")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = _fe3d->sound2d_isDeviceConnected();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else

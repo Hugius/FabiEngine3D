@@ -88,6 +88,11 @@ const bool EngineInterface::sound2d_isChannelAvailable() const
 	return _core->getSound2dPlayer()->isChannelAvailable();
 }
 
+const bool EngineInterface::sound2d_isDeviceConnected() const
+{
+	return _core->getSound2dPlayer()->isDeviceConnected();
+}
+
 const float EngineInterface::sound2d_getVolume(const string& id, unsigned int index) const
 {
 	return _core->getSound2dPlayer()->getSoundVolume(id, index);

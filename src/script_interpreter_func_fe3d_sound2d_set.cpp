@@ -69,7 +69,12 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 				_throwRuntimeError("sound2D is already started");
 				return true;
 			}
-			if(args[1]->getInteger() < -1)
+			if(!_fe3d->sound2d_isChannelAvailable())
+			{
+				_throwRuntimeError("no channel available");
+				return true;
+			}
+			if((args[1]->getInteger() == 0) || (args[1]->getInteger() < -1))
 			{
 				_throwRuntimeError("play count is invalid");
 				return true;

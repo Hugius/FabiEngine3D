@@ -13,7 +13,7 @@ void Animation2dPlayer::update()
 
 void Animation2dPlayer::_updateQuad3dAnimationExecution()
 {
-	set<string> quad3dAnimationsToStop;
+	vector<string> quad3dAnimationsToStop;
 
 	for(auto& [key, startedAnimation] : _startedQuad3dAnimations)
 	{
@@ -42,7 +42,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 
 							if(startedAnimation->getPlayCount() == 0)
 							{
-								quad3dAnimationsToStop.insert(key);
+								quad3dAnimationsToStop.push_back(key);
 							}
 						}
 					}
@@ -84,7 +84,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 
 void Animation2dPlayer::_updateQuad2dAnimationExecution()
 {
-	set<string> quad2dAnimationsToStop;
+	vector<string> quad2dAnimationsToStop;
 
 	for(auto& [key, startedAnimation] : _startedQuad2dAnimations)
 	{
@@ -112,7 +112,7 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 
 							if(startedAnimation->getPlayCount() == 0)
 							{
-								quad2dAnimationsToStop.insert(key);
+								quad2dAnimationsToStop.push_back(key);
 							}
 						}
 					}

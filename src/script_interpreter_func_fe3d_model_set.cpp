@@ -951,7 +951,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 					_throwRuntimeError("animation is already started");
 					return true;
 				}
-				if(args[2]->getInteger() < -1)
+				if((args[2]->getInteger() == 0) || (args[2]->getInteger() < -1))
 				{
 					_throwRuntimeError("play count is invalid");
 					return true;

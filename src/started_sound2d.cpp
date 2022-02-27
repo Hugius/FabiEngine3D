@@ -6,8 +6,6 @@ using std::clamp;
 
 void StartedSound2D::setPaused(bool value)
 {
-	waveOutPause(_handle);
-
 	_isPaused = value;
 }
 

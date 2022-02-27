@@ -34,9 +34,10 @@ public:
 
 	const unsigned int getStartedSoundCount(const string& id) const;
 
-	const bool isChannelAvailable() const;
 	const bool isSoundStarted(const string& id, unsigned int index) const;
 	const bool isSoundPaused(const string& id, unsigned int index) const;
+	const bool isChannelAvailable() const;
+	const bool isDeviceConnected() const;
 
 private:
 	static inline constexpr unsigned int MAX_CHANNEL_COUNT = 1024;

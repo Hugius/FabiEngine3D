@@ -12,7 +12,7 @@ void Animation3dPlayer::update()
 
 void Animation3dPlayer::_updateModelAnimationExecution()
 {
-	set<string> modelAnimationsToStop;
+	vector<string> modelAnimationsToStop;
 
 	for(auto& [key, startedAnimation] : _startedModelAnimations)
 	{
@@ -389,7 +389,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 
 					if(startedAnimation->getPlayCount() == 0)
 					{
-						modelAnimationsToStop.insert(key);
+						modelAnimationsToStop.push_back(key);
 					}
 				}
 			}

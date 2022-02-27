@@ -5,6 +5,11 @@ void Sound2dPlayer::inject(shared_ptr<Sound2dManager> sound2dManager)
 	_sound2dManager = sound2dManager;
 }
 
+const bool Sound2dPlayer::isDeviceConnected() const
+{
+	return (waveOutGetNumDevs() > 0);
+}
+
 const bool Sound2dPlayer::isChannelAvailable() const
 {
 	return (_channelCounter < MAX_CHANNEL_COUNT);

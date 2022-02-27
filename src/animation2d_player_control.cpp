@@ -7,14 +7,6 @@ void Animation2dPlayer::startQuad3dAnimation(const string& animationId, const st
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
-	if(playCount == 0)
-	{
-		return;
-	}
-	if(playCount < -1)
-	{
-		abort();
-	}
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
 		abort();
@@ -24,6 +16,10 @@ void Animation2dPlayer::startQuad3dAnimation(const string& animationId, const st
 		abort();
 	}
 	if(isQuad3dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+	if((playCount == 0) || (playCount < -1))
 	{
 		abort();
 	}
@@ -213,14 +209,6 @@ void Animation2dPlayer::startQuad2dAnimation(const string& animationId, const st
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
-	if(playCount == 0)
-	{
-		return;
-	}
-	if(playCount < -1)
-	{
-		abort();
-	}
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
 		abort();
@@ -230,6 +218,10 @@ void Animation2dPlayer::startQuad2dAnimation(const string& animationId, const st
 		abort();
 	}
 	if(isQuad2dAnimationStarted(animationId, quadId))
+	{
+		abort();
+	}
+	if((playCount == 0) || (playCount < -1))
 	{
 		abort();
 	}

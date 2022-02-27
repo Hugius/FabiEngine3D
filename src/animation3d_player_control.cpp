@@ -7,14 +7,6 @@ void Animation3dPlayer::startModelAnimation(const string& animationId, const str
 {
 	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
-	if(playCount == 0)
-	{
-		return;
-	}
-	if(playCount < -1)
-	{
-		abort();
-	}
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
 		abort();
@@ -24,6 +16,10 @@ void Animation3dPlayer::startModelAnimation(const string& animationId, const str
 		abort();
 	}
 	if(isModelAnimationStarted(animationId, modelId))
+	{
+		abort();
+	}
+	if((playCount == 0) || (playCount < -1))
 	{
 		abort();
 	}

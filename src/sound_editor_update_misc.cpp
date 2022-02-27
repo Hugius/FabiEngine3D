@@ -6,9 +6,9 @@ void SoundEditor::_updateMiscellaneous()
 {
 	if(_fe3d->sound2d_isExisting(_currentSoundId))
 	{
-		if(_fe3d->sound2d_isStarted(_currentSoundId))
+		if(_fe3d->sound2d_isStarted(_currentSoundId, 0))
 		{
-			if(_fe3d->sound2d_isPaused(_currentSoundId))
+			if(_fe3d->sound2d_isPaused(_currentSoundId, 0))
 			{
 				_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\pause.tga");
 			}

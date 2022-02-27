@@ -529,7 +529,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 					_throwRuntimeError("animation is already started");
 					return true;
 				}
-				if((args[2]->getInteger() < -1) || (args[2]->getInteger() == 0))
+				if(args[2]->getInteger() < -1)
 				{
 					_throwRuntimeError("play count is invalid");
 					return true;

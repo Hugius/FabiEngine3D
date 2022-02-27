@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->sound2d_isStarted(args[0]->getString());
+				const auto result = _fe3d->sound2d_isStarted(args[0]->getString(), 0);
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->sound2d_isPaused(args[0]->getString());
+				const auto result = _fe3d->sound2d_isPaused(args[0]->getString(), 0);
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->sound2d_getVolume(args[0]->getString());
+				const auto result = _fe3d->sound2d_getVolume(args[0]->getString(), 0);
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}

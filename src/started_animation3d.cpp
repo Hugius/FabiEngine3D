@@ -2,16 +2,6 @@
 
 using std::max;
 
-const string& StartedAnimation3d::getAnimationId() const
-{
-	return _animationId;
-}
-
-const string& StartedAnimation3d::getModelId() const
-{
-	return _modelId;
-}
-
 const int StartedAnimation3d::getPlayCount() const
 {
 	return _playCount;

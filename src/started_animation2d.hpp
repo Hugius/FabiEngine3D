@@ -31,9 +31,6 @@ public:
 	const bool isAutopaused() const;
 
 private:
-	const string _animationId;
-	const string _quadId;
-
 	int _playCount = 0;
 
 	unsigned int _rowIndex = 0;

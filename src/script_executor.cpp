@@ -63,9 +63,12 @@ void ScriptExecutor::pause()
 
 		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
-			if(_fe3d->sound2d_isStarted(soundId) && _fe3d->sound2d_isPaused(soundId))
+			for(unsigned int i = 0; i < _fe3d->sound2d_getStartedCount(soundId); i++)
 			{
-				_pausedSound2dIds.push_back(soundId);
+				if(_fe3d->sound2d_isStarted(soundId, i) && _fe3d->sound2d_isPaused(soundId, i))
+				{
+					_pausedSound2dIds.push_back(soundId);
+				}
 			}
 		}
 
@@ -87,9 +90,12 @@ void ScriptExecutor::pause()
 
 		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
-			if(_fe3d->sound2d_isStarted(soundId) && !_fe3d->sound2d_isPaused(soundId))
+			for(unsigned int i = 0; i < _fe3d->sound2d_getStartedCount(soundId); i++)
 			{
-				_fe3d->sound2d_pause(soundId);
+				if(_fe3d->sound2d_isStarted(soundId, i) && !_fe3d->sound2d_isPaused(soundId, i))
+				{
+					_fe3d->sound2d_pause(soundId, i);
+				}
 			}
 		}
 
@@ -125,9 +131,12 @@ void ScriptExecutor::resume()
 
 		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
-			if(_fe3d->sound2d_isStarted(soundId) && _fe3d->sound2d_isPaused(soundId))
+			for(unsigned int i = 0; i < _fe3d->sound2d_getStartedCount(soundId); i++)
 			{
-				_fe3d->sound2d_resume(soundId);
+				if(_fe3d->sound2d_isStarted(soundId, i) && _fe3d->sound2d_isPaused(soundId, i))
+				{
+					_fe3d->sound2d_resume(soundId, i);
+				}
 			}
 		}
 
@@ -146,7 +155,10 @@ void ScriptExecutor::resume()
 
 		for(const auto& soundId : _pausedSound2dIds)
 		{
-			_fe3d->sound2d_pause(soundId);
+			for(unsigned int i = 0; i < _fe3d->sound2d_getStartedCount(soundId); i++)
+			{
+				_fe3d->sound2d_pause(soundId, i);
+			}
 		}
 
 		for(const auto& clockId : _pausedClockIds)

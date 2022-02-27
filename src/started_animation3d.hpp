@@ -23,8 +23,6 @@ public:
 	void setTotalSpeed(const string& partId, const fvec3& value);
 
 	const vector<string>& getPartIds() const;
-	const string& getAnimationId() const;
-	const string& getModelId() const;
 
 	const fvec3& getTotalMovement(const string& partId) const;
 	const fvec3& getTotalRotation(const string& partId) const;
@@ -41,9 +39,6 @@ public:
 	const bool isAutopaused() const;
 
 private:
-	const string _animationId;
-	const string _modelId;
-
 	vector<string> _partIds;
 
 	unordered_map<string, fvec3> _totalMovements;

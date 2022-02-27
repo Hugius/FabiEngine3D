@@ -62,9 +62,9 @@ void SoundEditor::_updateChoiceMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(_fe3d->sound2d_isStarted(_currentSoundId))
+			if(_fe3d->sound2d_isStarted(_currentSoundId, 0))
 			{
-				_fe3d->sound2d_stop(_currentSoundId);
+				_fe3d->sound2d_stop(_currentSoundId, 0);
 			}
 
 			_currentSoundId = "";
@@ -78,20 +78,20 @@ void SoundEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("pause")->isHovered())
 		{
-			_fe3d->sound2d_pause(_currentSoundId);
+			_fe3d->sound2d_pause(_currentSoundId, 0);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("resume")->isHovered())
 		{
-			_fe3d->sound2d_resume(_currentSoundId);
+			_fe3d->sound2d_resume(_currentSoundId, 0);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
-			_fe3d->sound2d_stop(_currentSoundId);
+			_fe3d->sound2d_stop(_currentSoundId, 0);
 		}
 
-		screen->getButton("play")->setHoverable(!_fe3d->sound2d_isStarted(_currentSoundId));
-		screen->getButton("resume")->setHoverable(_fe3d->sound2d_isStarted(_currentSoundId) && _fe3d->sound2d_isPaused(_currentSoundId));
-		screen->getButton("pause")->setHoverable(_fe3d->sound2d_isStarted(_currentSoundId) && !_fe3d->sound2d_isPaused(_currentSoundId));
-		screen->getButton("stop")->setHoverable(_fe3d->sound2d_isStarted(_currentSoundId));
+		screen->getButton("play")->setHoverable(!_fe3d->sound2d_isStarted(_currentSoundId, 0));
+		screen->getButton("resume")->setHoverable(_fe3d->sound2d_isStarted(_currentSoundId, 0) && _fe3d->sound2d_isPaused(_currentSoundId, 0));
+		screen->getButton("pause")->setHoverable(_fe3d->sound2d_isStarted(_currentSoundId, 0) && !_fe3d->sound2d_isPaused(_currentSoundId, 0));
+		screen->getButton("stop")->setHoverable(_fe3d->sound2d_isStarted(_currentSoundId, 0));
 	}
 }

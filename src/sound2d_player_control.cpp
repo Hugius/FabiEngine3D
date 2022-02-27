@@ -4,15 +4,15 @@ using std::make_shared;
 
 void Sound2dPlayer::startSound(const string& id, int playCount)
 {
+	if(playCount == 0)
+	{
+		return;
+	}
+	if(playCount < -1)
+	{
+		abort();
+	}
 	if(!_sound2dManager->isSoundExisting(id))
-	{
-		abort();
-	}
-	if(isSoundStarted(id))
-	{
-		abort();
-	}
-	if((playCount < -1) || (playCount == 0))
 	{
 		abort();
 	}
@@ -36,7 +36,7 @@ void Sound2dPlayer::startSound(const string& id, int playCount)
 	newSound->setHeader(header);
 	newSound->setPlayCount(playCount);
 
-	if(!isSoundStarted(id))
+	if(_startedSounds.find(id) == _startedSounds.end())
 	{
 		_startedSounds.insert({id, {}});
 	}
@@ -46,164 +46,111 @@ void Sound2dPlayer::startSound(const string& id, int playCount)
 	_channelCounter++;
 }
 
-void Sound2dPlayer::pauseSound(const string& id)
+void Sound2dPlayer::pauseSound(const string& id, unsigned int index)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id))
+	if(!isSoundStarted(id, index))
 	{
 		abort();
 	}
-	if(isSoundPaused(id))
+	if(isSoundPaused(id, index))
 	{
 		abort();
 	}
 
-	for(const auto& startedSound : _startedSounds.at(id))
-	{
-		startedSound->setPaused(true);
-	}
+	_startedSounds.at(id)[index]->setPaused(true);
 }
 
-void Sound2dPlayer::resumeSound(const string& id)
+void Sound2dPlayer::resumeSound(const string& id, unsigned int index)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id))
+	if(!isSoundStarted(id, index))
 	{
 		abort();
 	}
-	if(!isSoundPaused(id))
+	if(!isSoundPaused(id, index))
 	{
 		abort();
 	}
 
-	for(const auto& startedSound : _startedSounds.at(id))
-	{
-		startedSound->setPaused(false);
-	}
+	_startedSounds.at(id)[index]->setPaused(false);
 }
 
-void Sound2dPlayer::stopSound(const string& id)
+void Sound2dPlayer::stopSound(const string& id, unsigned int index)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id))
+	if(!isSoundStarted(id, index))
 	{
 		abort();
 	}
 
-	for(const auto& startedSound : _startedSounds.at(id))
+	const auto startedSound = _startedSounds.at(id)[index];
+
+	waveOutReset(startedSound->getHandle());
+
+	waveOutUnprepareHeader(startedSound->getHandle(), startedSound->getHeader(), sizeof(*startedSound->getHeader()));
+
+	waveOutClose(startedSound->getHandle());
+
+	delete startedSound->getHeader();
+
+	_startedSounds.at(id).erase(_startedSounds.at(id).begin() + index);
+
+	if(_startedSounds.at(id).empty())
 	{
-		waveOutReset(startedSound->getHandle());
-
-		waveOutUnprepareHeader(startedSound->getHandle(), startedSound->getHeader(), sizeof(*startedSound->getHeader()));
-
-		waveOutClose(startedSound->getHandle());
-
-		delete startedSound->getHeader();
-
-		_channelCounter--;
+		_startedSounds.erase(id);
 	}
 
-	_startedSounds.erase(id);
+	_channelCounter--;
 }
 
-void Sound2dPlayer::setSoundVolume(const string& id, float value)
+void Sound2dPlayer::setSoundVolume(const string& id, unsigned int index, float value)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id))
+	if(!isSoundStarted(id, index))
 	{
 		abort();
 	}
 
-	for(const auto& startedSound : _startedSounds.at(id))
-	{
-		startedSound->setVolume(value);
-	}
+	_startedSounds.at(id)[index]->setVolume(value);
 }
 
-void Sound2dPlayer::setSoundSpeed(const string& id, float value)
+void Sound2dPlayer::setSoundSpeed(const string& id, unsigned int index, float value)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id))
+	if(!isSoundStarted(id, index))
 	{
 		abort();
 	}
 
-	for(const auto& startedSound : _startedSounds.at(id))
-	{
-		startedSound->setSpeed(value);
-	}
+	_startedSounds.at(id)[index]->setSpeed(value);
 }
 
-void Sound2dPlayer::setSoundPitch(const string& id, float value)
+void Sound2dPlayer::setSoundPitch(const string& id, unsigned int index, float value)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
 		abort();
 	}
-	if(!isSoundStarted(id))
+	if(!isSoundStarted(id, index))
 	{
 		abort();
 	}
 
-	for(const auto& startedSound : _startedSounds.at(id))
-	{
-		startedSound->setPitch(value);
-	}
-}
-
-const float Sound2dPlayer::getSoundVolume(const string& id) const
-{
-	if(!_sound2dManager->isSoundExisting(id))
-	{
-		abort();
-	}
-	if(!isSoundStarted(id))
-	{
-		abort();
-	}
-
-	_startedSounds.at(id)[0]->getVolume();
-}
-
-const float Sound2dPlayer::getSoundSpeed(const string& id) const
-{
-	if(!_sound2dManager->isSoundExisting(id))
-	{
-		abort();
-	}
-	if(!isSoundStarted(id))
-	{
-		abort();
-	}
-
-	_startedSounds.at(id)[0]->getSpeed();
-}
-
-const float Sound2dPlayer::getSoundPitch(const string& id) const
-{
-	if(!_sound2dManager->isSoundExisting(id))
-	{
-		abort();
-	}
-	if(!isSoundStarted(id))
-	{
-		abort();
-	}
-
-	_startedSounds.at(id)[0]->getPitch();
+	_startedSounds.at(id)[index]->setPitch(value);
 }

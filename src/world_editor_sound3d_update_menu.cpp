@@ -14,7 +14,7 @@ void WorldEditor::_updateSoundMenu()
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
@@ -73,7 +73,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 
 					_currentTemplateSoundId = soundId;
 					_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, true);
-					_fe3d->sound3d_start(_currentTemplateSoundId, -1, 0, false);
+					_fe3d->sound3d_start(_currentTemplateSoundId, -1);
 					_fe3d->misc_centerCursor();
 
 					if(_fe3d->terrain_getSelectedId().empty())

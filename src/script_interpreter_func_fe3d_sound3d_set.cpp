@@ -6,7 +6,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 {
 	if(functionName == "fe3d:sound3d_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -17,17 +17,13 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 			if(_fe3d->sound3d_isExisting(args[0]->getString()))
 			{
-				_throwRuntimeError("sound3d already exists");
+				_throwRuntimeError("sound already exists");
 				return true;
 			}
 
 			if(_validateFe3dSound3d(args[1]->getString(), true))
 			{
-				_worldUtilities->copyTemplateSound3d(args[0]->getString(), ("@" + args[1]->getString()));
-
-				_fe3d->sound3d_setPosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
-				_fe3d->sound3d_setMaxVolume(args[0]->getString(), args[5]->getDecimal());
-				_fe3d->sound3d_setMaxDistance(args[0]->getString(), args[6]->getDecimal());
+				_fe3d->sound3d_create(args[0]->getString(), _fe3d->sound3d_getAudioPath("@" + args[1]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -64,33 +60,29 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound3d_start")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
+		auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(args[0]->getString(), false))
+			if(_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 			{
-				if(_fe3d->sound3d_isStarted(args[0]->getString()))
-				{
-					_throwRuntimeError("sound3D is already started");
-					return true;
-				}
-
-				_fe3d->sound3d_start(args[0]->getString(), args[1]->getInteger(), args[2]->getInteger(), false);
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				_throwRuntimeError("sound2D is already started");
+				return true;
 			}
-		}
-	}
-	else if(functionName == "fe3d:sound3d_play_forced")
-	{
-		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
+			if(!_fe3d->sound3d_isChannelAvailable())
+			{
+				_throwRuntimeError("no channel available");
+				return true;
+			}
+			if((args[1]->getInteger() == 0) || (args[1]->getInteger() < -1))
+			{
+				_throwRuntimeError("play count is invalid");
+				return true;
+			}
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				_fe3d->sound3d_start(args[0]->getString(), args[1]->getInteger(), args[2]->getInteger(), true);
+				_fe3d->sound3d_start(args[0]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -98,65 +90,52 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound3d_pause")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				if(!_fe3d->sound3d_isStarted(args[0]->getString()))
+				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound3D is not started");
+					_throwRuntimeError("sound2D is not started");
 					return true;
 				}
-				if(_fe3d->sound3d_isPaused(args[0]->getString()))
+				if(_fe3d->sound3d_isPaused(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound3D is already paused");
+					_throwRuntimeError("sound2D is already paused");
 					return true;
 				}
 
-				_fe3d->sound3d_pause(args[0]->getString());
+				_fe3d->sound3d_pause(args[0]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
-		}
-	}
-	else if(functionName == "fe3d:sound3d_pause_all")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			//_fe3d->sound3d_pauseAll();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:sound3d_resume")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				if(!_fe3d->sound3d_isPaused(args[0]->getString()))
+				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound3D is not paused");
+					_throwRuntimeError("sound2D is not started");
+					return true;
+				}
+				if(!_fe3d->sound3d_isPaused(args[0]->getString(), args[1]->getInteger()))
+				{
+					_throwRuntimeError("sound2D is not paused");
 					return true;
 				}
 
-				_fe3d->sound3d_resume(args[0]->getString());
+				_fe3d->sound3d_resume(args[0]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
-		}
-	}
-	else if(functionName == "fe3d:sound3d_resume_all")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			//_fe3d->sound3d_resumeAll();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:sound3d_stop")
@@ -167,9 +146,9 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
-				if(!_fe3d->sound3d_isStarted(args[0]->getString()))
+				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
-					_throwRuntimeError("sound3D is not started");
+					_throwRuntimeError("sound2D is not started");
 					return true;
 				}
 
@@ -179,13 +158,44 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound3d_stop_all")
+	else if(functionName == "fe3d:sound3d_set_speed")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			//_fe3d->sound3d_stopAll();
+		auto types = {SVT::STRING, SVT::INTEGER, SVT::DECIMAL};
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSound3d(args[0]->getString(), false))
+			{
+				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
+				{
+					_throwRuntimeError("sound2D is not started");
+					return true;
+				}
+
+				_fe3d->sound3d_setSpeed(args[0]->getString(), args[1]->getInteger(), args[2]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sound3d_set_pitch")
+	{
+		auto types = {SVT::STRING, SVT::INTEGER, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSound3d(args[0]->getString(), false))
+			{
+				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
+				{
+					_throwRuntimeError("sound2D is not started");
+					return true;
+				}
+
+				_fe3d->sound3d_setPitch(args[0]->getString(), args[1]->getInteger(), args[2]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
 		}
 	}
 	else if(functionName == "fe3d:sound3d_set_position")

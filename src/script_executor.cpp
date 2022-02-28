@@ -55,9 +55,12 @@ void ScriptExecutor::pause()
 
 		for(const auto& soundId : _fe3d->sound3d_getIds())
 		{
-			if(_fe3d->sound3d_isStarted(soundId) && _fe3d->sound3d_isPaused(soundId))
+			for(unsigned int index = 0; index < _fe3d->sound3d_getStartedCount(soundId); index++)
 			{
-				_pausedSound3dIds.push_back(soundId);
+				if(_fe3d->sound3d_isStarted(soundId, index) && _fe3d->sound3d_isPaused(soundId, index))
+				{
+					_pausedSound3dIds.push_back({soundId, index});
+				}
 			}
 		}
 
@@ -82,9 +85,12 @@ void ScriptExecutor::pause()
 
 		for(const auto& soundId : _fe3d->sound3d_getIds())
 		{
-			if(_fe3d->sound3d_isStarted(soundId) && !_fe3d->sound3d_isPaused(soundId))
+			for(unsigned int index = 0; index < _fe3d->sound3d_getStartedCount(soundId); index++)
 			{
-				_fe3d->sound3d_pause(soundId);
+				if(_fe3d->sound3d_isStarted(soundId, index) && !_fe3d->sound3d_isPaused(soundId, index))
+				{
+					_fe3d->sound3d_pause(soundId, index);
+				}
 			}
 		}
 
@@ -123,9 +129,12 @@ void ScriptExecutor::resume()
 
 		for(const auto& soundId : _fe3d->sound3d_getIds())
 		{
-			if(_fe3d->sound3d_isStarted(soundId) && _fe3d->sound3d_isPaused(soundId))
+			for(unsigned int index = 0; index < _fe3d->sound3d_getStartedCount(soundId); index++)
 			{
-				_fe3d->sound3d_resume(soundId);
+				if(_fe3d->sound3d_isStarted(soundId, index) && _fe3d->sound3d_isPaused(soundId, index))
+				{
+					_fe3d->sound3d_resume(soundId, index);
+				}
 			}
 		}
 
@@ -148,9 +157,9 @@ void ScriptExecutor::resume()
 			}
 		}
 
-		for(const auto& soundId : _pausedSound3dIds)
+		for(const auto& [soundId, index] : _pausedSound3dIds)
 		{
-			_fe3d->sound3d_pause(soundId);
+			_fe3d->sound3d_pause(soundId, index);
 		}
 
 		for(const auto& [soundId, index] : _pausedSound2dIds)

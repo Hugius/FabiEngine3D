@@ -29,7 +29,7 @@ void WorldEditor::_updateSoundPlacing()
 				_fe3d->sound3d_setPosition(newId, newPosition);
 				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND_MAX_VOLUME);
 				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND_MAX_DISTANCE);
-				_fe3d->sound3d_start(newId, -1, 0, false);
+				_fe3d->sound3d_start(newId, -1);
 
 				_fe3d->model_create(newModelId, _fe3d->model_getMeshPath(TEMPLATE_SPEAKER_ID));
 				_fe3d->model_setBasePosition(newModelId, newPosition);
@@ -56,7 +56,7 @@ void WorldEditor::_updateSoundPlacing()
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
@@ -66,7 +66,7 @@ void WorldEditor::_updateSoundPlacing()
 			if(!_fe3d->misc_isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
@@ -76,7 +76,7 @@ void WorldEditor::_updateSoundPlacing()
 			if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
@@ -86,7 +86,7 @@ void WorldEditor::_updateSoundPlacing()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId))
+				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
@@ -95,9 +95,9 @@ void WorldEditor::_updateSoundPlacing()
 			}
 
 			const auto newPosition = (_fe3d->raycast_getPointOnTerrain() + SOUND_TERRAIN_OFFSET);
-			if(!_fe3d->sound3d_isStarted(_currentTemplateSoundId))
+			if(!_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
 			{
-				_fe3d->sound3d_start(_currentTemplateSoundId, -1, 0, false);
+				_fe3d->sound3d_start(_currentTemplateSoundId, -1);
 			}
 			_fe3d->sound3d_setPosition(_currentTemplateSoundId, newPosition);
 			_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, true);
@@ -118,7 +118,7 @@ void WorldEditor::_updateSoundPlacing()
 				_fe3d->sound3d_setPosition(newId, newPosition);
 				_fe3d->sound3d_setMaxVolume(newId, DEFAULT_SOUND_MAX_VOLUME);
 				_fe3d->sound3d_setMaxDistance(newId, DEFAULT_SOUND_MAX_DISTANCE);
-				_fe3d->sound3d_start(newId, -1, 0, false);
+				_fe3d->sound3d_start(newId, -1);
 
 				_fe3d->model_create(newModelId, _fe3d->model_getMeshPath(TEMPLATE_SPEAKER_ID));
 				_fe3d->model_setBasePosition(newModelId, newPosition);

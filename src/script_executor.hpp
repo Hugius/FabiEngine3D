@@ -21,7 +21,7 @@ public:
 private:
 	void _validateExecution();
 
-	vector<string> _pausedSound3dIds;
+	vector<pair<string, unsigned int>> _pausedSound3dIds;
 	vector<pair<string, unsigned int>> _pausedSound2dIds;
 	vector<string> _pausedClockIds;
 

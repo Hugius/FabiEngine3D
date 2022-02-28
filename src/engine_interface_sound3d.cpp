@@ -8,69 +8,76 @@ void EngineInterface::sound3d_create(const string& id, const string& audioPath)
 
 void EngineInterface::sound3d_delete(const string& id)
 {
-	//if(_core->getSound3dManager()->isSoundExisting(id))
-	//{
-	//	if(_core->getSound3dPlayer()->isSoundStarted(_core->getSound3dManager()->getSound(id)))
-	//	{
-	//		_core->getSound3dPlayer()->stopSound(_core->getSound3dManager()->getSound(id), 0);
-	//	}
-	//}
+	for(unsigned int index = 0; index < _core->getSound3dPlayer()->getStartedSoundCount(id); index++)
+	{
+		_core->getSound3dPlayer()->stopSound(id, 0);
+	}
 
-	//_core->getSound3dManager()->deleteSound(id);
-}
-
-void EngineInterface::sound3d_start(const string& id, int playCount, unsigned int fadeMS, bool mustForce)
-{
-	//_core->getSound3dPlayer()->startSound(_core->getSound3dManager()->getSound(id), playCount, fadeMS, mustForce);
-}
-
-void EngineInterface::sound3d_pause(const string& id)
-{
-	//_core->getSound3dPlayer()->pauseSound(_core->getSound3dManager()->getSound(id));
-}
-
-void EngineInterface::sound3d_resume(const string& id)
-{
-	//_core->getSound3dPlayer()->resumeSound(_core->getSound3dManager()->getSound(id));
-}
-
-void EngineInterface::sound3d_stop(const string& id, unsigned int fadeMS)
-{
-	//_core->getSound3dPlayer()->stopSound(_core->getSound3dManager()->getSound(id), fadeMS);
+	_core->getSound3dManager()->deleteSound(id);
 }
 
 void EngineInterface::sound3d_setPosition(const string& id, const fvec3& value)
 {
-	//_core->getSound3dManager()->getSound(id).setPosition(value);
+	_core->getSound3dManager()->getSound(id)->setPosition(value);
 }
 
 void EngineInterface::sound3d_move(const string& id, const fvec3& change)
 {
-	//_core->getSound3dManager()->getSound(id).move(change);
+	_core->getSound3dManager()->getSound(id)->move(change);
 }
 
 void EngineInterface::sound3d_moveTo(const string& id, const fvec3& target, float speed)
 {
-	//_core->getSound3dManager()->getSound(id).moveTo(target, speed);
-}
-
-void EngineInterface::sound3d_setMaxDistance(const string& id, float value)
-{
-	//_core->getSound3dManager()->getSound(id).setMaxDistance(value);
+	_core->getSound3dManager()->getSound(id)->moveTo(target, speed);
 }
 
 void EngineInterface::sound3d_setMaxVolume(const string& id, float value)
 {
-	//_core->getSound3dManager()->getSound(id).setMaxVolume(value);
+	_core->getSound3dManager()->getSound(id)->setMaxVolume(value);
+}
+
+void EngineInterface::sound3d_setMaxDistance(const string& id, float value)
+{
+	_core->getSound3dManager()->getSound(id)->setMaxDistance(value);
+}
+
+void EngineInterface::sound3d_start(const string& id, int playCount)
+{
+	_core->getSound3dPlayer()->startSound(id, playCount);
+}
+
+void EngineInterface::sound3d_pause(const string& id, unsigned int index)
+{
+	_core->getSound3dPlayer()->pauseSound(id, index);
+}
+
+void EngineInterface::sound3d_resume(const string& id, unsigned int index)
+{
+	_core->getSound3dPlayer()->resumeSound(id, index);
+}
+
+void EngineInterface::sound3d_stop(const string& id, unsigned int index)
+{
+	_core->getSound3dPlayer()->stopSound(id, index);
+}
+
+void EngineInterface::sound3d_setSpeed(const string& id, unsigned int index, float value)
+{
+	_core->getSound3dPlayer()->setSoundSpeed(id, index, value);
+}
+
+void EngineInterface::sound3d_setPitch(const string& id, unsigned int index, float value)
+{
+	_core->getSound3dPlayer()->setSoundPitch(id, index, value);
 }
 
 const vector<string> EngineInterface::sound3d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto& chunk : _core->getSound3dManager()->getSounds())
+	for(const auto& [key, sound] : _core->getSound3dManager()->getSounds())
 	{
-		//result.push_back(chunk.getId());
+		result.push_back(sound->getId());
 	}
 
 	return result;
@@ -78,8 +85,22 @@ const vector<string> EngineInterface::sound3d_getIds() const
 
 const string& EngineInterface::sound3d_getAudioPath(const string& id) const
 {
-	//return _core->getSound3dManager()->getSound(id).getAudioPath();
-	return 0;
+	return _core->getSound3dManager()->getSound(id)->getAudioPath();
+}
+
+const fvec3& EngineInterface::sound3d_getPosition(const string& id) const
+{
+	return _core->getSound3dManager()->getSound(id)->getPosition();
+}
+
+const float EngineInterface::sound3d_getMaxDistance(const string& id) const
+{
+	return _core->getSound3dManager()->getSound(id)->getMaxDistance();
+}
+
+const float EngineInterface::sound3d_getMaxVolume(const string& id) const
+{
+	return _core->getSound3dManager()->getSound(id)->getMaxVolume();
 }
 
 const bool EngineInterface::sound3d_isExisting(const string& id) const
@@ -87,38 +108,42 @@ const bool EngineInterface::sound3d_isExisting(const string& id) const
 	return _core->getSound3dManager()->isSoundExisting(id);
 }
 
-const bool EngineInterface::sound3d_isStarted(const string& id) const
+const bool EngineInterface::sound3d_isStarted(const string& id, unsigned int index) const
 {
-	//return _core->getSound3dPlayer()->isSoundStarted(_core->getSound3dManager()->getSound(id));
-	return 0;
+	return _core->getSound3dPlayer()->isSoundStarted(id, index);
 }
 
-const bool EngineInterface::sound3d_isPaused(const string& id) const
+const bool EngineInterface::sound3d_isPaused(const string& id, unsigned int index) const
 {
-	//return _core->getSound3dPlayer()->isSoundPaused(_core->getSound3dManager()->getSound(id));
-	return 0;
+	return _core->getSound3dPlayer()->isSoundPaused(id, index);
 }
 
-const float EngineInterface::sound3d_getVolume(const string& id) const
+const bool EngineInterface::sound3d_isChannelAvailable() const
 {
-	//return _core->getSound3dManager()->getSound(id).getVolume();
-	return 0;
+	return _core->getSound3dPlayer()->isChannelAvailable();
 }
 
-const float EngineInterface::sound3d_getMaxVolume(const string& id) const
+const bool EngineInterface::sound3d_isDeviceConnected() const
 {
-	//return _core->getSound3dManager()->getSound(id).getMaxVolume();
-	return 0;
+	return _core->getSound3dPlayer()->isDeviceConnected();
 }
 
-const fvec3& EngineInterface::sound3d_getPosition(const string& id) const
+const float EngineInterface::sound3d_getVolume(const string& id, unsigned int index) const
 {
-	//return _core->getSound3dManager()->getSound(id).getPosition();
-	return 0;
+	return _core->getSound3dPlayer()->getSoundVolume(id, index);
 }
 
-const float EngineInterface::sound3d_getMaxDistance(const string& id) const
+const float EngineInterface::sound3d_getSpeed(const string& id, unsigned int index) const
 {
-	//return _core->getSound3dManager()->getSound(id).getMaxDistance();
-	return 0;
+	return _core->getSound3dPlayer()->getSoundSpeed(id, index);
+}
+
+const float EngineInterface::sound3d_getPitch(const string& id, unsigned int index) const
+{
+	return _core->getSound3dPlayer()->getSoundPitch(id, index);
+}
+
+const unsigned int EngineInterface::sound3d_getStartedCount(const string& id) const
+{
+	return _core->getSound3dPlayer()->getStartedSoundCount(id);
 }

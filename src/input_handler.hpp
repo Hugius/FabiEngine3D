@@ -12,12 +12,10 @@ class InputHandler final
 {
 public:
 	void update();
-	void setLocked(bool locked);
 
 	const int getMouseWheelX() const;
 	const int getMouseWheelY() const;
 
-	const bool isLocked() const;
 	const bool isKeyDown(InputType key) const;
 	const bool isKeyPressed(InputType key) const;
 	const bool isMouseDown(InputType button) const;
@@ -45,8 +43,6 @@ private:
 
 	int _mouseWheelX = 0;
 	int _mouseWheelY = 0;
-
-	bool _isLocked = false;
 
 	vector<InputType> _keysDown;
 	vector<InputType> _keysPressed;

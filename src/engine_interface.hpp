@@ -710,31 +710,35 @@ public:
 
 	void sound3d_create(const string& id, const string& audioPath);
 	void sound3d_delete(const string& id);
-	void sound3d_start(const string& id, int playCount, unsigned int fadeMS, bool mustForce);
-	void sound3d_pause(const string& id);
-	void sound3d_resume(const string& id);
-	void sound3d_stop(const string& id, unsigned int fadeMS);
 	void sound3d_setPosition(const string& id, const fvec3& value);
 	void sound3d_move(const string& id, const fvec3& change);
 	void sound3d_moveTo(const string& id, const fvec3& target, float speed);
 	void sound3d_setMaxVolume(const string& id, float value);
 	void sound3d_setMaxDistance(const string& id, float value);
+	void sound3d_start(const string& id, int playCount);
+	void sound3d_pause(const string& id, unsigned int index);
+	void sound3d_resume(const string& id, unsigned int index);
+	void sound3d_stop(const string& id, unsigned int index);
+	void sound3d_setSpeed(const string& id, unsigned int index, float value);
+	void sound3d_setPitch(const string& id, unsigned int index, float value);
 
 	const vector<string> sound3d_getIds() const;
 	const string& sound3d_getAudioPath(const string& id) const;
 	const fvec3& sound3d_getPosition(const string& id) const;
 	const float sound3d_getMaxDistance(const string& id) const;
-	const float sound3d_getVolume(const string& id) const;
 	const float sound3d_getMaxVolume(const string& id) const;
+	const float sound3d_getVolume(const string& id, unsigned int index) const;
+	const float sound3d_getSpeed(const string& id, unsigned int index) const;
+	const float sound3d_getPitch(const string& id, unsigned int index) const;
+	const unsigned int sound3d_getStartedCount(const string& id) const;
 	const bool sound3d_isExisting(const string& id) const;
-	const bool sound3d_isStarted(const string& id) const;
-	const bool sound3d_isPaused(const string& id) const;
-
-	void input_setLocked(bool locked);
+	const bool sound3d_isStarted(const string& id, unsigned int index) const;
+	const bool sound3d_isPaused(const string& id, unsigned int index) const;
+	const bool sound3d_isChannelAvailable() const;
+	const bool sound3d_isDeviceConnected() const;
 
 	const int input_getMouseWheelX() const;
 	const int input_getMouseWheelY() const;
-	const bool input_isLocked() const;
 	const bool input_isKeyDown(InputType key) const;
 	const bool input_isKeyPressed(InputType key) const;
 	const bool input_isMouseDown(InputType button) const;

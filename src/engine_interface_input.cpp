@@ -1,11 +1,6 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::input_setLocked(bool value)
-{
-	return _core->getInputHandler()->setLocked(value);
-}
-
 const bool EngineInterface::input_isKeyDown(InputType key) const
 {
 	return _core->getInputHandler()->isKeyDown(key);
@@ -34,9 +29,4 @@ const int EngineInterface::input_getMouseWheelX() const
 const int EngineInterface::input_getMouseWheelY() const
 {
 	return _core->getInputHandler()->getMouseWheelY();
-}
-
-const bool EngineInterface::input_isLocked() const
-{
-	return _core->getInputHandler()->isLocked();
 }

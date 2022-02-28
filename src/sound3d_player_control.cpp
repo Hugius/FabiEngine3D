@@ -1,151 +1,193 @@
 #include "sound3d_player.hpp"
 #include "logger.hpp"
 
-void Sound3dPlayer::startSound(Sound3d& sound, int playCount, unsigned int fadeMS, bool mustForce)
+using std::make_shared;
+
+void Sound3dPlayer::startSound(const string& id, int playCount)
 {
-	//if((playCount < -1) || (playCount == 0))
-	//{
-	//	abort();
-	//}
-
-	//if(isSoundStarted(sound) && !mustForce)
-	//{
-	//	abort();
-	//}
-
-	//auto channel = _getFreeChannel();
-
-	//_channels[channel] = sound.getId();
-
-	//if(fadeMS == 0)
-	//{
-	//	Mix_PlayChannel(channel, sound.getDataPointer(), (playCount - 1));
-	//}
-	//else
-	//{
-	//	Mix_FadeInChannel(channel, sound.getDataPointer(), (playCount - 1), fadeMS);
-	//}
-
-	//_updateSoundVolume(sound);
-}
-
-void Sound3dPlayer::pauseSounds(vector<Sound3d>& sounds)
-{
-	for(const auto& sound : sounds)
-	{
-		for(unsigned int index = 0; index < _channels.size(); index++)
-		{
-			if(_channels[index] == sound.getId())
-			{
-				//Mix_Pause(static_cast<int>(index));
-			}
-		}
-	}
-}
-
-void Sound3dPlayer::pauseSound(Sound3d& sound)
-{
-	if(isSoundPaused(sound))
+	if(!_sound3dManager->isSoundExisting(id))
 	{
 		abort();
 	}
-
-	for(const auto& channel : _findChannels(sound))
-	{
-		//Mix_Pause(channel);
-	}
-}
-
-void Sound3dPlayer::resumeSounds(vector<Sound3d>& sounds)
-{
-	for(const auto& sound : sounds)
-	{
-		for(unsigned int index = 0; index < _channels.size(); index++)
-		{
-			if(_channels[index] == sound.getId())
-			{
-				//Mix_Resume(static_cast<int>(index));
-			}
-		}
-	}
-}
-
-void Sound3dPlayer::resumeSound(Sound3d& sound)
-{
-	if(!isSoundPaused(sound))
+	if(!isChannelAvailable())
 	{
 		abort();
 	}
-
-	for(const auto& channel : _findChannels(sound))
-	{
-		//Mix_Resume(channel);
-	}
-}
-
-void Sound3dPlayer::stopSounds(vector<Sound3d>& sounds)
-{
-	resumeSounds(sounds);
-
-	for(const auto& sound : sounds)
-	{
-		for(unsigned int index = 0; index < _channels.size(); index++)
-		{
-			if(_channels[index] == sound.getId())
-			{
-				//Mix_HaltChannel(static_cast<int>(index));
-			}
-		}
-	}
-}
-
-void Sound3dPlayer::stopSound(Sound3d& sound, unsigned int fadeMS)
-{
-	if(!isSoundStarted(sound))
+	if((playCount == 0) || (playCount < -1))
 	{
 		abort();
 	}
-
-	if(isSoundPaused(sound))
+	if(waveOutGetNumDevs() == 0)
 	{
-		resumeSound(sound);
+		return;
 	}
 
-	if(fadeMS == 0)
+	const auto newSound = make_shared<StartedSound3D>();
+
+	const auto waveBuffer = _sound3dManager->getSound(id)->getWaveBuffer();
+
+	HWAVEOUT handle = nullptr;
+	PWAVEHDR header = new WAVEHDR(*waveBuffer->getHeader());
+
+	const auto openResult = waveOutOpen(&handle, WAVE_MAPPER, waveBuffer->getFormat(), 0, 0, CALLBACK_NULL);
+	if(openResult != MMSYSERR_NOERROR)
 	{
-		for(const auto& channel : _findChannels(sound))
-		{
-			//Mix_HaltChannel(channel);
-		}
-	}
-	else
-	{
-		for(const auto& channel : _findChannels(sound))
-		{
-			//Mix_FadeOutChannel(channel, fadeMS);
-		}
+		Logger::throwDebug(openResult);
+		abort();
 	}
 
-	for(const auto& channel : _findChannels(sound))
+	const auto prepareResult = waveOutPrepareHeader(handle, header, sizeof(*header));
+	if(prepareResult != MMSYSERR_NOERROR)
 	{
-		_channels[channel] = "";
+		Logger::throwDebug(prepareResult);
+		abort();
 	}
+
+	const auto writeResult = waveOutWrite(handle, header, sizeof(*header));
+	if(writeResult != MMSYSERR_NOERROR)
+	{
+		Logger::throwDebug(writeResult);
+		abort();
+	}
+
+	newSound->setHandle(handle);
+	newSound->setHeader(header);
+	newSound->setPlayCount(playCount);
+
+	if(_startedSounds.find(id) == _startedSounds.end())
+	{
+		_startedSounds.insert({id, {}});
+	}
+
+	_startedSounds.at(id).push_back(newSound);
+
+	_channelCounter++;
 }
 
-const bool Sound3dPlayer::isSoundStarted(Sound3d& sound) const
+void Sound3dPlayer::pauseSound(const string& id, unsigned int index)
 {
-	for(const auto& soundId : _channels)
+	if(!_sound3dManager->isSoundExisting(id))
 	{
-		if(soundId == sound.getId())
-		{
-			return true;
-		}
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+	if(isSoundPaused(id, index))
+	{
+		abort();
+	}
+	if(waveOutGetNumDevs() == 0)
+	{
+		return;
 	}
 
-	return false;
+	_startedSounds.at(id)[index]->setPaused(true);
 }
 
-const bool Sound3dPlayer::isSoundPaused(Sound3d& sound) const
+void Sound3dPlayer::resumeSound(const string& id, unsigned int index)
 {
-	//return (isSoundStarted(sound) && Mix_Paused(_findChannels(sound)[0]));
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+	if(!isSoundPaused(id, index))
+	{
+		abort();
+	}
+	if(waveOutGetNumDevs() == 0)
+	{
+		return;
+	}
+
+	_startedSounds.at(id)[index]->setPaused(false);
+}
+
+void Sound3dPlayer::stopSound(const string& id, unsigned int index)
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+	if(waveOutGetNumDevs() == 0)
+	{
+		return;
+	}
+
+	const auto resetResult = waveOutReset(_startedSounds.at(id)[index]->getHandle());
+	if(resetResult != MMSYSERR_NOERROR)
+	{
+		Logger::throwDebug(resetResult);
+		abort();
+	}
+
+	const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(*_startedSounds.at(id)[index]->getHeader()));
+	if(unprepareResult != MMSYSERR_NOERROR)
+	{
+		Logger::throwDebug(unprepareResult);
+		abort();
+	}
+
+	const auto closeResult = waveOutClose(_startedSounds.at(id)[index]->getHandle());
+	if(closeResult != MMSYSERR_NOERROR)
+	{
+		Logger::throwDebug(closeResult);
+		abort();
+	}
+
+	delete _startedSounds.at(id)[index]->getHeader();
+
+	_startedSounds.at(id).erase(_startedSounds.at(id).begin() + index);
+
+	if(_startedSounds.at(id).empty())
+	{
+		_startedSounds.erase(id);
+	}
+
+	_channelCounter--;
+}
+
+void Sound3dPlayer::setSoundSpeed(const string& id, unsigned int index, float value)
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+	if(waveOutGetNumDevs() == 0)
+	{
+		return;
+	}
+
+	_startedSounds.at(id)[index]->setSpeed(value);
+}
+
+void Sound3dPlayer::setSoundPitch(const string& id, unsigned int index, float value)
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+	if(waveOutGetNumDevs() == 0)
+	{
+		return;
+	}
+
+	_startedSounds.at(id)[index]->setPitch(value);
 }

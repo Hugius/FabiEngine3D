@@ -81,17 +81,23 @@
     <ClCompile Include="..\..\..\src\sound2d_player_misc.cpp">
       <Filter>Sound\Player\2D\Main</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\started_sound2d.cpp">
+      <Filter>Sound\Player\2D\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d_player_update.cpp">
+      <Filter>Sound\Player\2D\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_player_update.cpp">
+      <Filter>Sound\Player\3D\Main</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\src\sound3d_player_control.cpp">
       <Filter>Sound\Player\3D\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound3d_player_misc.cpp">
       <Filter>Sound\Player\3D\Main</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\started_sound2d.cpp">
-      <Filter>Sound\Player\2D\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\sound2d_player_update.cpp">
-      <Filter>Sound\Player\2D\Main</Filter>
+    <ClCompile Include="..\..\..\src\started_sound3d.cpp">
+      <Filter>Sound\Player\3D\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,11 +122,14 @@
     <ClInclude Include="..\..\..\src\sound2d_player.hpp">
       <Filter>Sound\Player\2D\Main</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\started_sound2d.hpp">
+      <Filter>Sound\Player\2D\Data</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\src\sound3d_player.hpp">
       <Filter>Sound\Player\3D\Main</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\started_sound2d.hpp">
-      <Filter>Sound\Player\2D\Data</Filter>
+    <ClInclude Include="..\..\..\src\started_sound3d.hpp">
+      <Filter>Sound\Player\3D\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

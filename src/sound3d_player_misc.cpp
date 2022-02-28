@@ -1,13 +1,4 @@
 #include "sound3d_player.hpp"
-#include "logger.hpp"
-
-using std::max;
-using std::clamp;
-
-Sound3dPlayer::Sound3dPlayer()
-{
-	//Mix_AllocateChannels(MAX_CHANNEL_COUNT);
-}
 
 void Sound3dPlayer::inject(shared_ptr<Sound3dManager> sound3dManager)
 {
@@ -19,98 +10,112 @@ void Sound3dPlayer::inject(shared_ptr<Camera> camera)
 	_camera = camera;
 }
 
-void Sound3dPlayer::update()
+const bool Sound3dPlayer::isDeviceConnected() const
 {
-	//for(auto& sound : _sound3dManager->getSounds())
-	//{
-	//	if(isSoundStarted(sound))
-	//	{
-	//		const auto cameraPosition = _camera->getPosition();
-	//		const auto distance = Math::calculateDistance(cameraPosition, sound.getPosition());
-	//		const auto volume = (1.0f - (distance / sound.getMaxDistance()));
-	//		//sound.setVolume(clamp(volume, 0.0f, 1.0f) * sound.getMaxVolume());
-
-	//		const auto cameraDirection = _camera->getFront();
-	//		const auto soundDirection = (cameraPosition - sound.getPosition());
-	//		const auto rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
-	//		const auto rotatedSoundDirection = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
-	//		const auto normalizedSoundDirection = Math::normalize(fvec3(rotatedSoundDirection.x, rotatedSoundDirection.y, rotatedSoundDirection.z));
-	//		const auto dotProduct = Math::calculateDotProduct(normalizedSoundDirection, cameraDirection);
-	//		const auto panningRange = ((dotProduct * 0.5f) + 0.5f);
-	//		const auto leftIntensity = Uint8(255.0f * panningRange);
-	//		const auto rightIntensity = Uint8(255 - leftIntensity);
-
-	//		for(const auto& channel : _findChannels(sound))
-	//		{
-	//			Mix_SetPanning(channel, leftIntensity, rightIntensity);
-	//		}
-	//	}
-
-	//	_updateSoundVolume(sound);
-	//}
-
-	//for(unsigned int index = 0; index < _channels.size(); index++)
-	//{
-	//	if(!Mix_Playing(static_cast<int>(index)) && !Mix_Paused(static_cast<int>(index)))
-	//	{
-	//		_channels[index] = "";
-	//	}
-	//}
-}
-
-const int Sound3dPlayer::_getFreeChannel() const
-{
-	for(unsigned int index = 0; index < _channels.size(); index++)
-	{
-		if(_channels[index].empty())
-		{
-			return static_cast<int>(index);
-		}
-	}
-
-	abort();
+	return (waveOutGetNumDevs() > 0);
 }
 
 const bool Sound3dPlayer::isChannelAvailable() const
 {
-	for(unsigned int index = 0; index < _channels.size(); index++)
-	{
-		if(_channels[index].empty())
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return (_channelCounter < MAX_CHANNEL_COUNT);
 }
 
-void Sound3dPlayer::_updateSoundVolume(Sound3d& sound)
+const bool Sound3dPlayer::isSoundStarted(const string& id, unsigned int index) const
 {
-	if(isSoundStarted(sound))
-	{
-		for(const auto& channel : _findChannels(sound))
-		{
-			//Mix_Volume(channel, static_cast<int>(sound.getVolume() * 128.0f));
-		}
-	}
-}
-
-const vector<unsigned int> Sound3dPlayer::_findChannels(Sound3d& sound) const
-{
-	vector<unsigned int> channels;
-
-	for(unsigned int index = 0; index < _channels.size(); index++)
-	{
-		if(_channels[index] == sound.getId())
-		{
-			channels.push_back(static_cast<unsigned int>(index));
-		}
-	}
-
-	if(channels.empty())
+	if(!_sound3dManager->isSoundExisting(id))
 	{
 		abort();
 	}
 
-	return channels;
+	if(_startedSounds.find(id) == _startedSounds.end())
+	{
+		return false;
+	}
+
+	return (index < _startedSounds.at(id).size());
+}
+
+const bool Sound3dPlayer::isSoundPaused(const string& id, unsigned int index) const
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	return _startedSounds.at(id)[index]->isPaused();
+}
+
+const float Sound3dPlayer::getSoundVolume(const string& id, unsigned int index) const
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	return _startedSounds.at(id)[index]->getVolume();
+}
+
+const float Sound3dPlayer::getSoundSpeed(const string& id, unsigned int index) const
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	return _startedSounds.at(id)[index]->getSpeed();
+}
+
+const float Sound3dPlayer::getSoundPitch(const string& id, unsigned int index) const
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	return _startedSounds.at(id)[index]->getPitch();
+}
+
+const int Sound3dPlayer::getPlayCount(const string& id, unsigned int index) const
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	return _startedSounds.at(id)[index]->getPlayCount();
+}
+
+const unsigned int Sound3dPlayer::getStartedSoundCount(const string& id) const
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+
+	if(_startedSounds.find(id) == _startedSounds.end())
+	{
+		return 0;
+	}
+
+	return static_cast<unsigned int>(_startedSounds.at(id).size());
 }

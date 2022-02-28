@@ -1,45 +1,52 @@
 #pragma once
 
 #include "sound3d_manager.hpp"
+#include "started_sound3d.hpp"
 #include "camera.hpp"
 
 #include <string>
 #include <array>
 #include <vector>
+#include <memory>
 
 using std::string;
 using std::array;
 using std::vector;
+using std::shared_ptr;
 
 class Sound3dPlayer final
 {
 public:
-	Sound3dPlayer();
-
 	void inject(shared_ptr<Sound3dManager> sound3dManager);
 	void inject(shared_ptr<Camera> camera);
 	void update();
-	void startSound(Sound3d& sound, int playCount, unsigned int fadeMS, bool mustForce);
-	void pauseSound(Sound3d& sound);
-	void resumeSound(Sound3d& sound);
-	void stopSound(Sound3d& sound, unsigned int fadeMS);
-	void pauseSounds(vector<Sound3d>& sounds);
-	void resumeSounds(vector<Sound3d>& sounds);
-	void stopSounds(vector<Sound3d>& sounds);
+	void startSound(const string& id, int playCount);
+	void pauseSound(const string& id, unsigned int index);
+	void resumeSound(const string& id, unsigned int index);
+	void stopSound(const string& id, unsigned int index);
+	void setSoundSpeed(const string& id, unsigned int index, float value);
+	void setSoundPitch(const string& id, unsigned int index, float value);
 
+	const float getSoundVolume(const string& id, unsigned int index) const;
+	const float getSoundSpeed(const string& id, unsigned int index) const;
+	const float getSoundPitch(const string& id, unsigned int index) const;
+
+	const int getPlayCount(const string& id, unsigned int index) const;
+
+	const unsigned int getStartedSoundCount(const string& id) const;
+
+	const bool isSoundStarted(const string& id, unsigned int index) const;
+	const bool isSoundPaused(const string& id, unsigned int index) const;
 	const bool isChannelAvailable() const;
-	const bool isSoundStarted(Sound3d& sound) const;
-	const bool isSoundPaused(Sound3d& sound) const;
+	const bool isDeviceConnected() const;
 
 private:
-	void _updateSoundVolume(Sound3d& sound);
-
-	const vector<unsigned int> _findChannels(Sound3d& sound) const;
-	const int _getFreeChannel() const;
-
 	static inline constexpr unsigned int MAX_CHANNEL_COUNT = 1024;
-	array<string, MAX_CHANNEL_COUNT> _channels;
+
+	unordered_map<string, vector<shared_ptr<StartedSound3D>>> _startedSounds;
 
 	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
+
+	unsigned int _channelCounter = 0;
 };

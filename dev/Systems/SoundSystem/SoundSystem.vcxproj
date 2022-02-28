@@ -20,25 +20,28 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\sound2d_manager.cpp" />
+    <ClCompile Include="..\..\..\src\sound3d_player_control.cpp" />
+    <ClCompile Include="..\..\..\src\sound3d_player_misc.cpp" />
+    <ClCompile Include="..\..\..\src\sound3d_player_update.cpp" />
     <ClCompile Include="..\..\..\src\sound2d_player_update.cpp" />
     <ClCompile Include="..\..\..\src\sound3d_manager.cpp" />
     <ClCompile Include="..\..\..\src\sound2d_player_control.cpp" />
-    <ClCompile Include="..\..\..\src\sound3d_player_control.cpp" />
-    <ClCompile Include="..\..\..\src\sound3d_player_misc.cpp" />
     <ClCompile Include="..\..\..\src\sound2d_player_misc.cpp" />
     <ClCompile Include="..\..\..\src\sound2d.cpp" />
     <ClCompile Include="..\..\..\src\sound3d.cpp" />
+    <ClCompile Include="..\..\..\src\started_sound3d.cpp" />
     <ClCompile Include="..\..\..\src\started_sound2d.cpp" />
     <ClCompile Include="..\..\..\src\wave_buffer.cpp" />
     <ClCompile Include="..\..\..\src\wave_buffer_cache.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\sound2d_manager.hpp" />
-    <ClInclude Include="..\..\..\src\sound3d_manager.hpp" />
     <ClInclude Include="..\..\..\src\sound3d_player.hpp" />
+    <ClInclude Include="..\..\..\src\sound3d_manager.hpp" />
     <ClInclude Include="..\..\..\src\sound2d_player.hpp" />
     <ClInclude Include="..\..\..\src\sound2d.hpp" />
     <ClInclude Include="..\..\..\src\sound3d.hpp" />
+    <ClInclude Include="..\..\..\src\started_sound3d.hpp" />
     <ClInclude Include="..\..\..\src\started_sound2d.hpp" />
     <ClInclude Include="..\..\..\src\wave_buffer.hpp" />
     <ClInclude Include="..\..\..\src\wave_buffer_cache.hpp" />

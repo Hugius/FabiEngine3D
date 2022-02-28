@@ -195,7 +195,7 @@ const vector<shared_ptr<GuiTextField>>& GuiOverlay::getTextFields() const
 
 void GuiOverlay::deleteScrollingList(const string& id)
 {
-	for(size_t i = 0; i < _scrollingLists.size(); i++)
+	for(unsigned int i = 0; i < _scrollingLists.size(); i++)
 	{
 		if(id == _scrollingLists[i]->getId())
 		{
@@ -209,7 +209,7 @@ void GuiOverlay::deleteScrollingList(const string& id)
 
 void GuiOverlay::deleteInputField(const string& id)
 {
-	for(size_t i = 0; i < _inputFields.size(); i++)
+	for(unsigned int i = 0; i < _inputFields.size(); i++)
 	{
 		if(id == _inputFields[i]->getId())
 		{
@@ -223,7 +223,7 @@ void GuiOverlay::deleteInputField(const string& id)
 
 void GuiOverlay::deleteButton(const string& id)
 {
-	for(size_t i = 0; i < _buttons.size(); i++)
+	for(unsigned int i = 0; i < _buttons.size(); i++)
 	{
 		if(id == _buttons[i]->getId())
 		{
@@ -237,7 +237,7 @@ void GuiOverlay::deleteButton(const string& id)
 
 void GuiOverlay::deleteRectangle(const string& id)
 {
-	for(size_t i = 0; i < _rectangles.size(); i++)
+	for(unsigned int i = 0; i < _rectangles.size(); i++)
 	{
 		if(id == _rectangles[i]->getId())
 		{
@@ -251,7 +251,7 @@ void GuiOverlay::deleteRectangle(const string& id)
 
 void GuiOverlay::deleteTextField(const string& id)
 {
-	for(size_t i = 0; i < _textFields.size(); i++)
+	for(unsigned int i = 0; i < _textFields.size(); i++)
 	{
 		if(id == _textFields[i]->getId())
 		{

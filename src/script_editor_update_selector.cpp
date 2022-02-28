@@ -161,7 +161,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				{
 					unsigned int pastedCount = 0;
 					bool firstLineEmpty = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).empty();
-					for(size_t i = 0; i < _copyClipboard.size(); i++)
+					for(unsigned int i = 0; i < _copyClipboard.size(); i++)
 					{
 						if((cursorLineIndex + i) < _script->getScriptFile(_currentScriptFileId)->getLineCount())
 						{

@@ -45,7 +45,7 @@ void GuiScrollingList::createButton(const string& id, const string& textContent)
 
 void GuiScrollingList::deleteButton(const string& id)
 {
-	for(size_t i = 0; i < _buttons.size(); i++)
+	for(unsigned int i = 0; i < _buttons.size(); i++)
 	{
 		if(id == _buttons[i]->getId())
 		{
@@ -53,7 +53,7 @@ void GuiScrollingList::deleteButton(const string& id)
 
 			vector<string> buttonIds;
 			vector<string> textContents;
-			for(size_t j = 0; j < _buttons.size(); j++)
+			for(unsigned int j = 0; j < _buttons.size(); j++)
 			{
 				buttonIds.push_back(_buttons[j]->getId());
 				textContents.push_back(_fe3d->text2d_getContent(_buttons[j]->getTextField()->getEntityId()));
@@ -61,7 +61,7 @@ void GuiScrollingList::deleteButton(const string& id)
 
 			deleteButtons();
 
-			for(size_t j = 0; j < buttonIds.size(); j++)
+			for(unsigned int j = 0; j < buttonIds.size(); j++)
 			{
 				createButton(buttonIds[j], textContents[j]);
 			}

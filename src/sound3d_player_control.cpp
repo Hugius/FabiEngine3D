@@ -33,7 +33,7 @@ void Sound3dPlayer::pauseSounds(vector<Sound3d>& sounds)
 {
 	for(const auto& sound : sounds)
 	{
-		for(size_t i = 0; i < _channels.size(); i++)
+		for(unsigned int i = 0; i < _channels.size(); i++)
 		{
 			if(_channels[i] == sound.getId())
 			{
@@ -60,7 +60,7 @@ void Sound3dPlayer::resumeSounds(vector<Sound3d>& sounds)
 {
 	for(const auto& sound : sounds)
 	{
-		for(size_t i = 0; i < _channels.size(); i++)
+		for(unsigned int i = 0; i < _channels.size(); i++)
 		{
 			if(_channels[i] == sound.getId())
 			{
@@ -89,7 +89,7 @@ void Sound3dPlayer::stopSounds(vector<Sound3d>& sounds)
 
 	for(const auto& sound : sounds)
 	{
-		for(size_t i = 0; i < _channels.size(); i++)
+		for(unsigned int i = 0; i < _channels.size(); i++)
 		{
 			if(_channels[i] == sound.getId())
 			{

@@ -58,7 +58,7 @@ void NetworkingServer::update()
 		_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
 	}
 
-	for(size_t i = 0; i < _clientSockets.size(); i++)
+	for(unsigned int i = 0; i < _clientSockets.size(); i++)
 	{
 		if(_tcpMessageThreads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 		{
@@ -186,7 +186,7 @@ void NetworkingServer::update()
 					auto username = messageContent.substr(0, messageContent.find(';'));
 					auto content = messageContent.substr(messageContent.find(';') + 1);
 
-					for(size_t i = 0; i < _clientUsernames.size(); i++)
+					for(unsigned int i = 0; i < _clientUsernames.size(); i++)
 					{
 						if(username == _clientUsernames[i])
 						{

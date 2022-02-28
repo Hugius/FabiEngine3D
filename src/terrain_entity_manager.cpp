@@ -192,7 +192,7 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	}
 
 	vector<fvec3> tangents;
-	for(size_t i = 0; i < positions.size(); i += 3)
+	for(unsigned int i = 0; i < positions.size(); i += 3)
 	{
 		const auto pos1 = positions[i + 0];
 		const auto pos2 = positions[i + 1];
@@ -218,7 +218,7 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	}
 
 	vector<float> bufferData;
-	for(size_t i = 0; i < positions.size(); i++)
+	for(unsigned int i = 0; i < positions.size(); i++)
 	{
 		bufferData.push_back(positions[i].x);
 		bufferData.push_back(positions[i].y);

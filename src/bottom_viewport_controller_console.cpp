@@ -87,7 +87,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 		unsigned int typePartLength = 0;
 		string typeString = "";
-		for(size_t i = 0; i < message.size(); i++)
+		for(unsigned int i = 0; i < message.size(); i++)
 		{
 			typeString.push_back(message[i]);
 
@@ -106,7 +106,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 		vector<string> messageParts;
 		BEGIN:;
-		for(size_t i = 0; i < messagePartText.size(); i++)
+		for(unsigned int i = 0; i < messagePartText.size(); i++)
 		{
 			float offset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH + 3);
 			if(offset + (static_cast<float>(i) * CHAR_SIZE.x) > window->getInitialSize().x)
@@ -151,7 +151,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			reverse(messageParts.begin(), messageParts.end());
 		}
 
-		for(size_t i = 0; i < messageParts.size(); i++)
+		for(unsigned int i = 0; i < messageParts.size(); i++)
 		{
 			floatIndex = static_cast<float>(index);
 

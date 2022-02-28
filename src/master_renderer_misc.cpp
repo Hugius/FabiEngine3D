@@ -28,7 +28,7 @@ const string MasterRenderer::getCpuName() const
 
 	string result;
 	reverse(nameString.begin(), nameString.end());
-	for(size_t i = 0; i < nameString.size(); i++)
+	for(unsigned int i = 0; i < nameString.size(); i++)
 	{
 		if(nameString[i] != 0)
 		{

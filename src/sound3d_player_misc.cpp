@@ -49,7 +49,7 @@ void Sound3dPlayer::update()
 	//	_updateSoundVolume(sound);
 	//}
 
-	//for(size_t i = 0; i < _channels.size(); i++)
+	//for(unsigned int i = 0; i < _channels.size(); i++)
 	//{
 	//	if(!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
 	//	{
@@ -60,7 +60,7 @@ void Sound3dPlayer::update()
 
 const int Sound3dPlayer::_getFreeChannel() const
 {
-	for(size_t i = 0; i < _channels.size(); i++)
+	for(unsigned int i = 0; i < _channels.size(); i++)
 	{
 		if(_channels[i].empty())
 		{
@@ -73,7 +73,7 @@ const int Sound3dPlayer::_getFreeChannel() const
 
 const bool Sound3dPlayer::isChannelAvailable() const
 {
-	for(size_t i = 0; i < _channels.size(); i++)
+	for(unsigned int i = 0; i < _channels.size(); i++)
 	{
 		if(_channels[i].empty())
 		{
@@ -99,7 +99,7 @@ const vector<unsigned int> Sound3dPlayer::_findChannels(Sound3d& sound) const
 {
 	vector<unsigned int> channels;
 
-	for(size_t i = 0; i < _channels.size(); i++)
+	for(unsigned int i = 0; i < _channels.size(); i++)
 	{
 		if(_channels[i] == sound.getId())
 		{

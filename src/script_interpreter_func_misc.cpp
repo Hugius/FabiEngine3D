@@ -465,7 +465,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			const auto splitter = args[1]->getString();
 
 			string result = "";
-			for(size_t i = 0; i < fullString.size(); i++)
+			for(unsigned int i = 0; i < fullString.size(); i++)
 			{
 				if(fullString[i] == splitter.back())
 				{

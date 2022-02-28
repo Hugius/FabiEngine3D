@@ -87,7 +87,7 @@ void AudioLoader::cacheAudios(const vector<string>& filePaths, bool isCrucial)
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		for(size_t i = 0; i < threadStatuses.size(); i++)
+		for(unsigned int i = 0; i < threadStatuses.size(); i++)
 		{
 			if(!threadStatuses[i])
 			{

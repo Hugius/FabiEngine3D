@@ -24,7 +24,7 @@ const unsigned int ScriptInterpreter::_countLeadingSpaces(const string& scriptLi
 {
 	int countedSpaces = 0;
 
-	for(size_t i = 0; i < scriptLineText.size(); i++)
+	for(unsigned int i = 0; i < scriptLineText.size(); i++)
 	{
 		if(scriptLineText[i] == ' ')
 		{

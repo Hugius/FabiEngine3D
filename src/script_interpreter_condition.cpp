@@ -196,7 +196,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 	bool finalCondition = conditions[0];
 	string currentLogicOperator = "";
-	for(size_t i = 1; i < conditions.size(); i++)
+	for(unsigned int i = 1; i < conditions.size(); i++)
 	{
 		if(currentLogicOperator.empty())
 		{

@@ -30,7 +30,7 @@ void Script::renameScriptFile(const string& id, const string& newId)
 
 void Script::deleteScriptFile(const string& id)
 {
-	for(size_t i = 0; i < _scriptFiles.size(); i++)
+	for(unsigned int i = 0; i < _scriptFiles.size(); i++)
 	{
 		if(_scriptFiles[i]->getId() == id)
 		{
@@ -119,7 +119,7 @@ const unordered_map<string, unsigned int> Script::findKeyword(const string& keyw
 		{
 			string line = file->getLines()[lineNumber];
 
-			for(size_t i = 0; i < line.size(); i++)
+			for(unsigned int i = 0; i < line.size(); i++)
 			{
 				if(line.substr(i, keyword.size()) == keyword)
 				{

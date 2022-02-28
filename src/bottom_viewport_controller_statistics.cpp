@@ -270,7 +270,7 @@ void BottomViewportController::_updateStatistics()
 		reverse(loggerMessages.begin(), loggerMessages.end());
 
 		vector<string> newMessages;
-		for(size_t i = 0; i < (loggerMessages.size() - static_cast<size_t>(MAX_CONSOLE_MESSAGES)); i++)
+		for(unsigned int i = 0; i < (static_cast<unsigned int>(loggerMessages.size()) - MAX_CONSOLE_MESSAGES); i++)
 		{
 			newMessages.push_back(loggerMessages[i]);
 		}
@@ -293,9 +293,9 @@ void BottomViewportController::_updateStatistics()
 
 	if(_consoleMessageQueue.size() != loggerMessages.size())
 	{
-		auto synchronizationCount = loggerMessages.size() - _consoleMessageQueue.size();
+		auto synchronizationCount = (loggerMessages.size() - _consoleMessageQueue.size());
 
-		for(size_t i = loggerMessages.size() - synchronizationCount; i < loggerMessages.size(); i++)
+		for(unsigned int i = static_cast<unsigned int>(loggerMessages.size() - synchronizationCount); i < loggerMessages.size(); i++)
 		{
 			_addConsoleMessage(loggerMessages[i]);
 		}

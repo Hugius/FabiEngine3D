@@ -45,7 +45,7 @@ void GuiScreen::createTextField(const string& id, const fvec2& position, const f
 
 void GuiScreen::deleteScrollingList(const string& id)
 {
-	for(size_t i = 0; i < _scrollingLists.size(); i++)
+	for(unsigned int i = 0; i < _scrollingLists.size(); i++)
 	{
 		if(id == _scrollingLists[i]->getId())
 		{
@@ -59,7 +59,7 @@ void GuiScreen::deleteScrollingList(const string& id)
 
 void GuiScreen::deleteInputField(const string& id)
 {
-	for(size_t i = 0; i < _inputFields.size(); i++)
+	for(unsigned int i = 0; i < _inputFields.size(); i++)
 	{
 		if(id == _inputFields[i]->getId())
 		{
@@ -73,7 +73,7 @@ void GuiScreen::deleteInputField(const string& id)
 
 void GuiScreen::deleteButton(const string& id)
 {
-	for(size_t i = 0; i < _buttons.size(); i++)
+	for(unsigned int i = 0; i < _buttons.size(); i++)
 	{
 		if(id == _buttons[i]->getId())
 		{
@@ -87,7 +87,7 @@ void GuiScreen::deleteButton(const string& id)
 
 void GuiScreen::deleteRectangle(const string& id)
 {
-	for(size_t i = 0; i < _rectangles.size(); i++)
+	for(unsigned int i = 0; i < _rectangles.size(); i++)
 	{
 		if(id == _rectangles[i]->getId())
 		{
@@ -101,7 +101,7 @@ void GuiScreen::deleteRectangle(const string& id)
 
 void GuiScreen::deleteTextField(const string& id)
 {
-	for(size_t i = 0; i < _textFields.size(); i++)
+	for(unsigned int i = 0; i < _textFields.size(); i++)
 	{
 		if(id == _textFields[i]->getId())
 		{

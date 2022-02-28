@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_isDecimalValue(const string& valueString) const
 	}
 
 	unsigned dots = 0;
-	for(size_t i = startingIndex; i < valueString.size(); i++)
+	for(unsigned int i = startingIndex; i < valueString.size(); i++)
 	{
 		if(!isdigit(valueString[i]) && valueString[i] != '.')
 		{
@@ -71,7 +71,7 @@ const bool ScriptInterpreter::_isIntegerValue(const string& valueString) const
 		startingIndex = 1;
 	}
 
-	for(size_t i = startingIndex; i < valueString.size(); i++)
+	for(unsigned int i = startingIndex; i < valueString.size(); i++)
 	{
 		if(!isdigit(valueString[i]))
 		{

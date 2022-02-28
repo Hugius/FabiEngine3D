@@ -8,7 +8,7 @@ const bool NetworkingServer::isRunning() const
 
 const bool NetworkingServer::isClientConnected(const string& username) const
 {
-	for(size_t i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{
@@ -70,7 +70,7 @@ const vector<string> NetworkingServer::getClientIps() const
 {
 	vector<string> result;
 
-	for(size_t i = 0; i < _clientIps.size(); i++)
+	for(unsigned int i = 0; i < _clientIps.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{
@@ -85,7 +85,7 @@ const vector<string> NetworkingServer::getClientUsernames() const
 {
 	vector<string> clientUsernames;
 
-	for(size_t i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{
@@ -115,7 +115,7 @@ void NetworkingServer::sendTcpMessageToClient(const string& username, const stri
 		abort();
 	}
 
-	for(size_t i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{
@@ -149,7 +149,7 @@ void NetworkingServer::sendUdpMessageToClient(const string& username, const stri
 		abort();
 	}
 
-	for(size_t i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{
@@ -183,7 +183,7 @@ void NetworkingServer::broadcastTcpMessageToClients(const string& content)
 		abort();
 	}
 
-	for(size_t i = 0; i < _clientSockets.size(); i++)
+	for(unsigned int i = 0; i < _clientSockets.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{
@@ -211,7 +211,7 @@ void NetworkingServer::broadcastUdpMessageToClients(const string& content)
 		abort();
 	}
 
-	for(size_t i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{
@@ -227,7 +227,7 @@ void NetworkingServer::disconnectClient(const string& username)
 		abort();
 	}
 
-	for(size_t i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{
@@ -249,7 +249,7 @@ void NetworkingServer::disconnectClients()
 		abort();
 	}
 
-	for(size_t i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
 		{

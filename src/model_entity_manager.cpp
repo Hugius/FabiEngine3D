@@ -74,7 +74,7 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 	{
 		vector<float> bufferData;
 
-		for(size_t i = 0; i < part->getPositions().size(); i++)
+		for(unsigned int i = 0; i < part->getPositions().size(); i++)
 		{
 			bufferData.push_back(part->getPositions()[i].x);
 			bufferData.push_back(part->getPositions()[i].y);

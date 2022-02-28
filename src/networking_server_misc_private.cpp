@@ -94,7 +94,7 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string& clientIp, con
 
 void NetworkingServer::_disconnectClient(SOCKET socket)
 {
-	for(size_t i = 0; i < _clientSockets.size(); i++)
+	for(unsigned int i = 0; i < _clientSockets.size(); i++)
 	{
 		if(socket == _clientSockets[i])
 		{

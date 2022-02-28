@@ -48,7 +48,7 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 		}
 	}
 
-	for(size_t i = 0; i < images.size(); i++)
+	for(unsigned int i = 0; i < images.size(); i++)
 	{
 		const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<unsigned int>(i));
 

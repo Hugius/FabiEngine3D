@@ -51,11 +51,11 @@ void TerrainEntityManager::createEntity(const string& id, const string& heightMa
 	const auto bitsPerPixel = ((image->getPixelFormat() == PixelFormat::RGB) ? 3 : 4);
 
 	vector<float> pixels;
-	for(unsigned int i = 0; i < (size * size * bitsPerPixel); i += bitsPerPixel)
+	for(unsigned int index = 0; index < (size * size * bitsPerPixel); index += bitsPerPixel)
 	{
-		const auto r = (static_cast<float>(image->getPixels()[i + 0]) / 255.0f);
-		const auto g = (static_cast<float>(image->getPixels()[i + 1]) / 255.0f);
-		const auto b = (static_cast<float>(image->getPixels()[i + 2]) / 255.0f);
+		const auto r = (static_cast<float>(image->getPixels()[index + 0]) / 255.0f);
+		const auto g = (static_cast<float>(image->getPixels()[index + 1]) / 255.0f);
+		const auto b = (static_cast<float>(image->getPixels()[index + 2]) / 255.0f);
 
 		const auto intensity = ((r + g + b) / 3.0f);
 
@@ -192,18 +192,18 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	}
 
 	vector<fvec3> tangents;
-	for(unsigned int i = 0; i < positions.size(); i += 3)
+	for(unsigned int index = 0; index < positions.size(); index += 3)
 	{
-		const auto pos1 = positions[i + 0];
-		const auto pos2 = positions[i + 1];
-		const auto pos3 = positions[i + 2];
+		const auto pos1 = positions[index + 0];
+		const auto pos2 = positions[index + 1];
+		const auto pos3 = positions[index + 2];
 
 		const auto deltaPos1 = (pos2 - pos1);
 		const auto deltaPos2 = (pos3 - pos1);
 
-		const auto uv1 = uvs[i + 0];
-		const auto uv2 = uvs[i + 1];
-		const auto uv3 = uvs[i + 2];
+		const auto uv1 = uvs[index + 0];
+		const auto uv2 = uvs[index + 1];
+		const auto uv3 = uvs[index + 2];
 
 		const auto deltaUv1 = (uv2 - uv1);
 		const auto deltaUv2 = (uv3 - uv1);
@@ -218,22 +218,22 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	}
 
 	vector<float> bufferData;
-	for(unsigned int i = 0; i < positions.size(); i++)
+	for(unsigned int index = 0; index < positions.size(); index++)
 	{
-		bufferData.push_back(positions[i].x);
-		bufferData.push_back(positions[i].y);
-		bufferData.push_back(positions[i].z);
+		bufferData.push_back(positions[index].x);
+		bufferData.push_back(positions[index].y);
+		bufferData.push_back(positions[index].z);
 
-		bufferData.push_back(uvs[i].x);
-		bufferData.push_back(uvs[i].y);
+		bufferData.push_back(uvs[index].x);
+		bufferData.push_back(uvs[index].y);
 
-		bufferData.push_back(normals[i].x);
-		bufferData.push_back(normals[i].y);
-		bufferData.push_back(normals[i].z);
+		bufferData.push_back(normals[index].x);
+		bufferData.push_back(normals[index].y);
+		bufferData.push_back(normals[index].z);
 
-		bufferData.push_back(tangents[i].x);
-		bufferData.push_back(tangents[i].y);
-		bufferData.push_back(tangents[i].z);
+		bufferData.push_back(tangents[index].x);
+		bufferData.push_back(tangents[index].y);
+		bufferData.push_back(tangents[index].z);
 	}
 
 	auto bufferDataCount = static_cast<unsigned int>(bufferData.size());

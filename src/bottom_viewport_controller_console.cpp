@@ -77,23 +77,23 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	_consoleMessageQueue.push_back({newId, newMessage});
 
 	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end());
-	unsigned int index = 0;
+	unsigned int messageIndex = 0;
 	for(const auto& [key, message] : _consoleMessageQueue)
 	{
 		bool alreadyExisting = screen->isTextFieldExisting(key + "_time");
-		float floatIndex = static_cast<float>(index);
+		float floatIndex = static_cast<float>(messageIndex);
 		fvec3 timePartColor = fvec3(1.0f, 0.0f, 1.0f);
 		fvec3 separatorPartColor = fvec3(1.0f, 0.85f, 0.0f);
 
 		unsigned int typePartLength = 0;
 		string typeString = "";
-		for(unsigned int i = 0; i < message.size(); i++)
+		for(unsigned int index = 0; index < message.size(); index++)
 		{
-			typeString.push_back(message[i]);
+			typeString.push_back(message[index]);
 
-			if(message[i] == ']')
+			if(message[index] == ']')
 			{
-				typePartLength = static_cast<unsigned int>(i + 1);
+				typePartLength = static_cast<unsigned int>(index + 1);
 				break;
 			}
 		}
@@ -106,14 +106,14 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 		vector<string> messageParts;
 		BEGIN:;
-		for(unsigned int i = 0; i < messagePartText.size(); i++)
+		for(unsigned int index = 0; index < messagePartText.size(); index++)
 		{
 			float offset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH + 3);
-			if(offset + (static_cast<float>(i) * CHAR_SIZE.x) > window->getInitialSize().x)
+			if(offset + (static_cast<float>(index) * CHAR_SIZE.x) > window->getInitialSize().x)
 			{
-				messageParts.push_back(messagePartText.substr(0, i));
+				messageParts.push_back(messagePartText.substr(0, index));
 
-				messagePartText = messagePartText.substr(i, messagePartText.size() - i);
+				messagePartText = messagePartText.substr(index, messagePartText.size() - index);
 				goto BEGIN;
 			}
 		}
@@ -151,11 +151,11 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			reverse(messageParts.begin(), messageParts.end());
 		}
 
-		for(unsigned int i = 0; i < messageParts.size(); i++)
+		for(unsigned int index = 0; index < messageParts.size(); index++)
 		{
-			floatIndex = static_cast<float>(index);
+			floatIndex = static_cast<float>(messageIndex);
 
-			string textFieldId = key + "_msg_" + to_string(i);
+			string textFieldId = key + "_msg_" + to_string(index);
 
 			if(alreadyExisting)
 			{
@@ -167,14 +167,14 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 				screen->createTextField(textFieldId, fvec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)),
 										fvec2(0.0f), "", messagePartColor, false);
 
-				_fe3d->text2d_setContent(screen->getTextField(textFieldId)->getEntityId(), messageParts[i]);
-				_fe3d->text2d_setSize(screen->getTextField(textFieldId)->getEntityId(), fvec2(CHAR_SIZE.x * static_cast<float>(messageParts[i].size()), CHAR_SIZE.y));
+				_fe3d->text2d_setContent(screen->getTextField(textFieldId)->getEntityId(), messageParts[index]);
+				_fe3d->text2d_setSize(screen->getTextField(textFieldId)->getEntityId(), fvec2(CHAR_SIZE.x * static_cast<float>(messageParts[index].size()), CHAR_SIZE.y));
 
 				_fe3d->text2d_setMinPosition(screen->getTextField(textFieldId)->getEntityId(), minPosition);
 				_fe3d->text2d_setMaxPosition(screen->getTextField(textFieldId)->getEntityId(), maxPosition);
 			}
 
-			if((messageParts.size() > 1) && i == (messageParts.size() - 1))
+			if((messageParts.size() > 1) && index == (messageParts.size() - 1))
 			{
 				if(alreadyExisting)
 				{
@@ -201,7 +201,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 				}
 			}
 
-			index++;
+			messageIndex++;
 		}
 	}
 	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end());

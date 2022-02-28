@@ -13,9 +13,9 @@ mat22::mat22(const float m00, const float m01, const float m10, const float m11)
 
 mat22::mat22()
 {
-	for(int i = 0; i < 4; i++)
+	for(int index = 0; index < 4; index++)
 	{
-		f[i] = 0.0f;
+		f[index] = 0.0f;
 	}
 
 	this->m[0][0] = 1.0f;
@@ -48,9 +48,9 @@ mat22::mat22(const mat44& other)
 
 mat22::mat22(const float value)
 {
-	for(int i = 0; i < 4; i++)
+	for(int index = 0; index < 4; index++)
 	{
-		f[i] = 0.0f;
+		f[index] = 0.0f;
 	}
 
 	this->m[0][0] = value;
@@ -61,9 +61,9 @@ const mat22 mat22::operator+(const mat22& other) const
 {
 	mat22 result;
 
-	for(int i = 0; i < 4; i++)
+	for(int index = 0; index < 4; index++)
 	{
-		result.f[i] = (this->f[i] + other.f[i]);
+		result.f[index] = (this->f[index] + other.f[index]);
 	}
 
 	return result;
@@ -73,9 +73,9 @@ const mat22 mat22::operator-(const mat22& other) const
 {
 	mat22 result;
 
-	for(int i = 0; i < 4; i++)
+	for(int index = 0; index < 4; index++)
 	{
-		result.f[i] = (this->f[i] - other.f[i]);
+		result.f[index] = (this->f[index] - other.f[index]);
 	}
 
 	return result;

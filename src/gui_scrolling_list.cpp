@@ -45,11 +45,11 @@ void GuiScrollingList::createButton(const string& id, const string& textContent)
 
 void GuiScrollingList::deleteButton(const string& id)
 {
-	for(unsigned int i = 0; i < _buttons.size(); i++)
+	for(unsigned int index = 0; index < _buttons.size(); index++)
 	{
-		if(id == _buttons[i]->getId())
+		if(id == _buttons[index]->getId())
 		{
-			_buttons.erase(_buttons.begin() + i);
+			_buttons.erase(_buttons.begin() + index);
 
 			vector<string> buttonIds;
 			vector<string> textContents;

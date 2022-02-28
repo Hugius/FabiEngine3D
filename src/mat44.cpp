@@ -25,9 +25,9 @@ mat44::mat44(const float m00, const float m01, const float m02, const float m03,
 
 mat44::mat44()
 {
-	for(int i = 0; i < 16; i++)
+	for(int index = 0; index < 16; index++)
 	{
-		f[i] = 0.0f;
+		f[index] = 0.0f;
 	}
 
 	this->m[0][0] = 1.0f;
@@ -58,9 +58,9 @@ mat44::mat44(const mat22& other)
 
 mat44::mat44(const float value)
 {
-	for(int i = 0; i < 16; i++)
+	for(int index = 0; index < 16; index++)
 	{
-		f[i] = 0.0f;
+		f[index] = 0.0f;
 	}
 
 	this->m[0][0] = value;
@@ -125,9 +125,9 @@ const mat44 mat44::operator+(const mat44& other) const
 {
 	mat44 result;
 
-	for(int i = 0; i < 16; i++)
+	for(int index = 0; index < 16; index++)
 	{
-		result.f[i] = (this->f[i] + other.f[i]);
+		result.f[index] = (this->f[index] + other.f[index]);
 	}
 
 	return result;
@@ -137,9 +137,9 @@ const mat44 mat44::operator-(const mat44& other) const
 {
 	mat44 result;
 
-	for(int i = 0; i < 16; i++)
+	for(int index = 0; index < 16; index++)
 	{
-		result.f[i] = (this->f[i] - other.f[i]);
+		result.f[index] = (this->f[index] - other.f[index]);
 	}
 
 	return result;

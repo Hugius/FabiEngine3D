@@ -93,11 +93,11 @@ void GuiViewport::createWindow(const string& id, const fvec2& position, const fv
 
 void GuiViewport::deleteWindow(const string& id)
 {
-	for(unsigned int i = 0; i < _windows.size(); i++)
+	for(unsigned int index = 0; index < _windows.size(); index++)
 	{
-		if(_windows[i]->getId() == id)
+		if(_windows[index]->getId() == id)
 		{
-			_windows.erase(_windows.begin() + i);
+			_windows.erase(_windows.begin() + index);
 			return;
 		}
 	}

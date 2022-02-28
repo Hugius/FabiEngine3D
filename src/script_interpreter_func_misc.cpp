@@ -68,13 +68,13 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			for(unsigned int i = 0; i < firstListVariable->getValueCount(); i++)
+			for(unsigned int index = 0; index < firstListVariable->getValueCount(); index++)
 			{
-				returnValues.push_back(firstListVariable->getValue(i));
+				returnValues.push_back(firstListVariable->getValue(index));
 			}
-			for(unsigned int i = 0; i < secondListVariable->getValueCount(); i++)
+			for(unsigned int index = 0; index < secondListVariable->getValueCount(); index++)
 			{
-				returnValues.push_back(secondListVariable->getValue(i));
+				returnValues.push_back(secondListVariable->getValue(index));
 			}
 		}
 	}
@@ -131,35 +131,35 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			}
 
 			bool result = false;
-			for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
+			for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
 			{
 				if((args[1]->getType() == SVT::STRING) &&
-				   (listVariable->getValue(i)->getType() == SVT::STRING) &&
-				   (listVariable->getValue(i)->getString() == args[1]->getString()))
+				   (listVariable->getValue(index)->getType() == SVT::STRING) &&
+				   (listVariable->getValue(index)->getString() == args[1]->getString()))
 				{
 					result = true;
 					break;
 				}
 
 				if((args[1]->getType() == SVT::DECIMAL) &&
-				   (listVariable->getValue(i)->getType() == SVT::DECIMAL) &&
-				   (listVariable->getValue(i)->getDecimal() == args[1]->getDecimal()))
+				   (listVariable->getValue(index)->getType() == SVT::DECIMAL) &&
+				   (listVariable->getValue(index)->getDecimal() == args[1]->getDecimal()))
 				{
 					result = true;
 					break;
 				}
 
 				if((args[1]->getType() == SVT::INTEGER) &&
-				   (listVariable->getValue(i)->getType() == SVT::INTEGER) &&
-				   (listVariable->getValue(i)->getInteger() == args[1]->getInteger()))
+				   (listVariable->getValue(index)->getType() == SVT::INTEGER) &&
+				   (listVariable->getValue(index)->getInteger() == args[1]->getInteger()))
 				{
 					result = true;
 					break;
 				}
 
 				if((args[1]->getType() == SVT::BOOLEAN) &&
-				   (listVariable->getValue(i)->getType() == SVT::BOOLEAN) &&
-				   (listVariable->getValue(i)->getBoolean() == args[1]->getBoolean()))
+				   (listVariable->getValue(index)->getType() == SVT::BOOLEAN) &&
+				   (listVariable->getValue(index)->getBoolean() == args[1]->getBoolean()))
 				{
 					result = true;
 					break;
@@ -196,37 +196,37 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			}
 
 			int result = -1;
-			for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
+			for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
 			{
 				if((args[1]->getType() == SVT::STRING) &&
-				   (listVariable->getValue(i)->getType() == SVT::STRING) &&
-				   (listVariable->getValue(i)->getString() == args[1]->getString()))
+				   (listVariable->getValue(index)->getType() == SVT::STRING) &&
+				   (listVariable->getValue(index)->getString() == args[1]->getString()))
 				{
-					result = i;
+					result = index;
 					break;
 				}
 
 				if((args[1]->getType() == SVT::DECIMAL) &&
-				   (listVariable->getValue(i)->getType() == SVT::DECIMAL) &&
-				   (listVariable->getValue(i)->getDecimal() == args[1]->getDecimal()))
+				   (listVariable->getValue(index)->getType() == SVT::DECIMAL) &&
+				   (listVariable->getValue(index)->getDecimal() == args[1]->getDecimal()))
 				{
-					result = i;
+					result = index;
 					break;
 				}
 
 				if((args[1]->getType() == SVT::INTEGER) &&
-				   (listVariable->getValue(i)->getType() == SVT::INTEGER) &&
-				   (listVariable->getValue(i)->getInteger() == args[1]->getInteger()))
+				   (listVariable->getValue(index)->getType() == SVT::INTEGER) &&
+				   (listVariable->getValue(index)->getInteger() == args[1]->getInteger()))
 				{
-					result = i;
+					result = index;
 					break;
 				}
 
 				if((args[1]->getType() == SVT::BOOLEAN) &&
-				   (listVariable->getValue(i)->getType() == SVT::BOOLEAN) &&
-				   (listVariable->getValue(i)->getBoolean() == args[1]->getBoolean()))
+				   (listVariable->getValue(index)->getType() == SVT::BOOLEAN) &&
+				   (listVariable->getValue(index)->getBoolean() == args[1]->getBoolean()))
 				{
-					result = i;
+					result = index;
 					break;
 				}
 			}
@@ -262,9 +262,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			}
 
 			auto type = listVariable->getValue(0)->getType();
-			for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
+			for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
 			{
-				if(listVariable->getValue(i)->getType() != type)
+				if(listVariable->getValue(index)->getType() != type)
 				{
 					_throwRuntimeError("values inside LIST \"" + listName + "\" not of same type");
 					return {};
@@ -274,9 +274,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(type == ScriptValueType::INTEGER)
 			{
 				vector<int> rawValues;
-				for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
+				for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
 				{
-					rawValues.push_back(listVariable->getValue(i)->getInteger());
+					rawValues.push_back(listVariable->getValue(index)->getInteger());
 				}
 
 				const auto result = *min_element(begin(rawValues), end(rawValues));
@@ -286,9 +286,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			else if(type == ScriptValueType::DECIMAL)
 			{
 				vector<float> rawValues;
-				for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
+				for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
 				{
-					rawValues.push_back(listVariable->getValue(i)->getDecimal());
+					rawValues.push_back(listVariable->getValue(index)->getDecimal());
 				}
 
 				const auto result = *min_element(begin(rawValues), end(rawValues));
@@ -330,9 +330,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			}
 
 			auto type = listVariable->getValue(0)->getType();
-			for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
+			for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
 			{
-				if(listVariable->getValue(i)->getType() != type)
+				if(listVariable->getValue(index)->getType() != type)
 				{
 					_throwRuntimeError("values inside LIST \"" + listName + "\" not of same type");
 					return {};
@@ -342,9 +342,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(type == ScriptValueType::INTEGER)
 			{
 				vector<int> rawValues;
-				for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
+				for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
 				{
-					rawValues.push_back(listVariable->getValue(i)->getInteger());
+					rawValues.push_back(listVariable->getValue(index)->getInteger());
 				}
 
 				const auto result = *max_element(begin(rawValues), end(rawValues));
@@ -354,9 +354,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			else if(type == ScriptValueType::DECIMAL)
 			{
 				vector<float> rawValues;
-				for(unsigned int i = 0; i < listVariable->getValueCount(); i++)
+				for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
 				{
-					rawValues.push_back(listVariable->getValue(i)->getDecimal());
+					rawValues.push_back(listVariable->getValue(index)->getDecimal());
 				}
 
 				const auto result = *max_element(begin(rawValues), end(rawValues));
@@ -391,9 +391,9 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			for(int i = (static_cast<int>(listVariable->getValueCount()) - 1); i > -1; i--)
+			for(int index = (static_cast<int>(listVariable->getValueCount()) - 1); index > -1; index--)
 			{
-				returnValues.push_back(listVariable->getValue(i));
+				returnValues.push_back(listVariable->getValue(index));
 			}
 		}
 	}
@@ -465,21 +465,21 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			const auto splitter = args[1]->getString();
 
 			string result = "";
-			for(unsigned int i = 0; i < fullString.size(); i++)
+			for(unsigned int index = 0; index < fullString.size(); index++)
 			{
-				if(fullString[i] == splitter.back())
+				if(fullString[index] == splitter.back())
 				{
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 					result = "";
 				}
-				else if(i == (fullString.size() - 1))
+				else if(index == (fullString.size() - 1))
 				{
-					result += fullString[i];
+					result += fullString[index];
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 				}
 				else
 				{
-					result += fullString[i];
+					result += fullString[index];
 				}
 			}
 		}

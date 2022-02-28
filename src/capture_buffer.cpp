@@ -20,7 +20,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 
 	bind();
 
-	for(unsigned int i = 0; i < count; i++)
+	for(unsigned int index = 0; index < count; index++)
 	{
 		unsigned int textureId;
 		glGenTextures(1, &textureId);
@@ -32,7 +32,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, (isTextureClamped ? GL_CLAMP_TO_EDGE : GL_REPEAT));
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, textureId, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + index, GL_TEXTURE_2D, textureId, 0);
 
 		_textures.push_back(make_shared<TextureBuffer>(textureId));
 	}
@@ -44,9 +44,9 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _rbo);
 
 	vector<unsigned int> attachments;
-	for(unsigned int i = 0; i < count; i++)
+	for(unsigned int index = 0; index < count; index++)
 	{
-		attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
+		attachments.push_back(GL_COLOR_ATTACHMENT0 + index);
 	}
 	glDrawBuffers(count, &attachments[0]);
 

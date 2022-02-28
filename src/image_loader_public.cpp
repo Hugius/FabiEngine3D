@@ -87,34 +87,34 @@ void ImageLoader::cacheImages(const vector<string>& filePaths, bool isCrucial)
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		for(unsigned int i = 0; i < threadStatuses.size(); i++)
+		for(unsigned int index = 0; index < threadStatuses.size(); index++)
 		{
-			if(!threadStatuses[i])
+			if(!threadStatuses[index])
 			{
-				if(threads[i].wait_for(seconds(0)) == future_status::ready)
+				if(threads[index].wait_for(seconds(0)) == future_status::ready)
 				{
-					threadStatuses[i] = true;
+					threadStatuses[index] = true;
 					finishedThreadCount++;
 
-					auto loadedImage = threads[i].get();
+					auto loadedImage = threads[index].get();
 
 					if(loadedImage == nullptr)
 					{
 						if(isCrucial)
 						{
-							Logger::throwError("Cannot load image: \"" + threadFilePaths[i] + "\"");
+							Logger::throwError("Cannot load image: \"" + threadFilePaths[index] + "\"");
 						}
 						else
 						{
-							Logger::throwWarning("Cannot load image: \"" + threadFilePaths[i] + "\"");
+							Logger::throwWarning("Cannot load image: \"" + threadFilePaths[index] + "\"");
 						}
 
 						continue;
 					}
 
-					_cache.insert({threadFilePaths[i], loadedImage});
+					_cache.insert({threadFilePaths[index], loadedImage});
 
-					Logger::throwInfo("Loaded image: \"" + threadFilePaths[i] + "\"");
+					Logger::throwInfo("Loaded image: \"" + threadFilePaths[index] + "\"");
 				}
 			}
 		}

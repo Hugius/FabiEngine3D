@@ -24,11 +24,11 @@ const unsigned int ScriptInterpreter::_countLeadingSpaces(const string& scriptLi
 {
 	int countedSpaces = 0;
 
-	for(unsigned int i = 0; i < scriptLineText.size(); i++)
+	for(unsigned int index = 0; index < scriptLineText.size(); index++)
 	{
-		if(scriptLineText[i] == ' ')
+		if(scriptLineText[index] == ' ')
 		{
-			if(i == (scriptLineText.size() - 1))
+			if(index == (scriptLineText.size() - 1))
 			{
 				_throwRuntimeError("unnecessary indentation");
 				return 0;
@@ -133,9 +133,9 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 	auto messageCount = Logger::getMessageCount();
 	if(messageCount > lastLoggerMessageCount)
 	{
-		for(unsigned int i = lastLoggerMessageCount - 1; i < messageCount; i++)
+		for(unsigned int index = lastLoggerMessageCount - 1; index < messageCount; index++)
 		{
-			if(Logger::getMessageQueue()[i].substr(0, string("[Warn]").size()) == "[Warn]")
+			if(Logger::getMessageQueue()[index].substr(0, string("[Warn]").size()) == "[Warn]")
 			{
 				_hasThrownError = true;
 			}

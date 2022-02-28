@@ -20,9 +20,9 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 
 	auto header = new unsigned char[HEADER_SIZE];
 
-	for(int i = 0; i < 18; i++)
+	for(int index = 0; index < 18; index++)
 	{
-		header[i] = getc(file);
+		header[index] = getc(file);
 	}
 
 	unsigned char rawIdLength = (header[0]);

@@ -102,10 +102,10 @@ void ScriptEditor::_copySelectedText()
 		}
 		else
 		{
-			for(int i = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
-				i <= ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _firstSelectedLineIndex : _lastSelectedLineIndex); i++)
+			for(int index = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
+				index <= ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _firstSelectedLineIndex : _lastSelectedLineIndex); index++)
 			{
-				_copyClipboard.push_back(_script->getScriptFile(_currentScriptFileId)->getLineText(i));
+				_copyClipboard.push_back(_script->getScriptFile(_currentScriptFileId)->getLineText(index));
 			}
 		}
 	}

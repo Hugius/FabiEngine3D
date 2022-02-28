@@ -42,14 +42,14 @@ const bool ScriptInterpreter::_isDecimalValue(const string& valueString) const
 	}
 
 	unsigned dots = 0;
-	for(unsigned int i = startingIndex; i < valueString.size(); i++)
+	for(unsigned int index = startingIndex; index < valueString.size(); index++)
 	{
-		if(!isdigit(valueString[i]) && valueString[i] != '.')
+		if(!isdigit(valueString[index]) && valueString[index] != '.')
 		{
 			return false;
 		}
 
-		if(valueString[i] == '.')
+		if(valueString[index] == '.')
 		{
 			dots++;
 		}
@@ -71,9 +71,9 @@ const bool ScriptInterpreter::_isIntegerValue(const string& valueString) const
 		startingIndex = 1;
 	}
 
-	for(unsigned int i = startingIndex; i < valueString.size(); i++)
+	for(unsigned int index = startingIndex; index < valueString.size(); index++)
 	{
-		if(!isdigit(valueString[i]))
+		if(!isdigit(valueString[index]))
 		{
 			return false;
 		}

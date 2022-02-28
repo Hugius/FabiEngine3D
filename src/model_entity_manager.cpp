@@ -74,22 +74,22 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 	{
 		vector<float> bufferData;
 
-		for(unsigned int i = 0; i < part->getPositions().size(); i++)
+		for(unsigned int index = 0; index < part->getPositions().size(); index++)
 		{
-			bufferData.push_back(part->getPositions()[i].x);
-			bufferData.push_back(part->getPositions()[i].y);
-			bufferData.push_back(part->getPositions()[i].z);
+			bufferData.push_back(part->getPositions()[index].x);
+			bufferData.push_back(part->getPositions()[index].y);
+			bufferData.push_back(part->getPositions()[index].z);
 
-			bufferData.push_back(part->getUvs()[i].x);
-			bufferData.push_back(part->getUvs()[i].y);
+			bufferData.push_back(part->getUvs()[index].x);
+			bufferData.push_back(part->getUvs()[index].y);
 
-			bufferData.push_back(part->getNormals()[i].x);
-			bufferData.push_back(part->getNormals()[i].y);
-			bufferData.push_back(part->getNormals()[i].z);
+			bufferData.push_back(part->getNormals()[index].x);
+			bufferData.push_back(part->getNormals()[index].y);
+			bufferData.push_back(part->getNormals()[index].z);
 
-			bufferData.push_back(part->getTangents()[i].x);
-			bufferData.push_back(part->getTangents()[i].y);
-			bufferData.push_back(part->getTangents()[i].z);
+			bufferData.push_back(part->getTangents()[index].x);
+			bufferData.push_back(part->getTangents()[index].y);
+			bufferData.push_back(part->getTangents()[index].z);
 		}
 
 		entity->createPart(part->getId());

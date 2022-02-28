@@ -184,7 +184,7 @@ const vector<float> Math::calculateDistributedPositions(unsigned int count, floa
 
 	position -= (gapSpace + (size * 0.5f));
 
-	for(unsigned int i = 0; i < count; i++)
+	for(unsigned int index = 0; index < count; index++)
 	{
 		result.push_back(position);
 		position -= (gapSpace + size);

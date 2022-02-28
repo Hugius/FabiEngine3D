@@ -94,24 +94,24 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string& clientIp, con
 
 void NetworkingServer::_disconnectClient(SOCKET socket)
 {
-	for(unsigned int i = 0; i < _clientSockets.size(); i++)
+	for(unsigned int index = 0; index < _clientSockets.size(); index++)
 	{
-		if(socket == _clientSockets[i])
+		if(socket == _clientSockets[index])
 		{
-			auto clientUsername = _clientUsernames[i];
+			auto clientUsername = _clientUsernames[index];
 
 			closesocket(socket);
 
-			_oldClientIps.push_back(_clientIps[i]);
-			_oldClientUsernames.push_back(_clientUsernames[i]);
+			_oldClientIps.push_back(_clientIps[index]);
+			_oldClientUsernames.push_back(_clientUsernames[index]);
 
-			_clientSockets.erase(_clientSockets.begin() + i);
-			_clientIps.erase(_clientIps.begin() + i);
-			_tcpClientPorts.erase(_tcpClientPorts.begin() + i);
-			_udpClientPorts.erase(_udpClientPorts.begin() + i);
-			_clientUsernames.erase(_clientUsernames.begin() + i);
-			_tcpMessageBuilds.erase(_tcpMessageBuilds.begin() + i);
-			_tcpMessageThreads.erase(_tcpMessageThreads.begin() + i);
+			_clientSockets.erase(_clientSockets.begin() + index);
+			_clientIps.erase(_clientIps.begin() + index);
+			_tcpClientPorts.erase(_tcpClientPorts.begin() + index);
+			_udpClientPorts.erase(_udpClientPorts.begin() + index);
+			_clientUsernames.erase(_clientUsernames.begin() + index);
+			_tcpMessageBuilds.erase(_tcpMessageBuilds.begin() + index);
+			_tcpMessageThreads.erase(_tcpMessageThreads.begin() + index);
 
 			if(!clientUsername.empty())
 			{

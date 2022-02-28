@@ -28,52 +28,52 @@ void main()
 
     if(u_isHorizontal)
     {
-        for (int i = 1; i < KERNEL_SIZE; i++)
+        for (int index = 1; index < KERNEL_SIZE; index++)
         {
-            vec2 leftUv = f_uv - vec2(uvOffset.x * i, 0.0f);
+            vec2 leftUv = f_uv - vec2(uvOffset.x * index, 0.0f);
             if(leftUv.x >= 0.0f && leftUv.x <= 1.0f)
             {
-                result += (texture(u_diffuseMap, leftUv).rgb * kernel[i] * u_intensity);
+                result += (texture(u_diffuseMap, leftUv).rgb * kernel[index] * u_intensity);
             }
             else
             {
-                result += (texture(u_diffuseMap, f_uv).rgb * kernel[i] * u_intensity);
+                result += (texture(u_diffuseMap, f_uv).rgb * kernel[index] * u_intensity);
             }
 
-            vec2 rightUv = f_uv + vec2(uvOffset.x * i, 0.0f);
+            vec2 rightUv = f_uv + vec2(uvOffset.x * index, 0.0f);
             if(rightUv.x >= 0.0f && rightUv.x <= 1.0f)
             {
-                result += (texture(u_diffuseMap, rightUv).rgb * kernel[i] * u_intensity);
+                result += (texture(u_diffuseMap, rightUv).rgb * kernel[index] * u_intensity);
             }
             else
             {
-                result += (texture(u_diffuseMap, f_uv).rgb * kernel[i] * u_intensity);
+                result += (texture(u_diffuseMap, f_uv).rgb * kernel[index] * u_intensity);
             }
 
         }
     }
     else
     {
-        for (int i = 1; i < KERNEL_SIZE; i++)
+        for (int index = 1; index < KERNEL_SIZE; index++)
         {
-            vec2 bottomUv = f_uv - vec2(0.0f, uvOffset.y * i);
+            vec2 bottomUv = f_uv - vec2(0.0f, uvOffset.y * index);
             if(bottomUv.y >= 0.0f && bottomUv.y <= 1.0f)
             {
-                result += texture(u_diffuseMap, bottomUv).rgb * kernel[i] * u_intensity;
+                result += texture(u_diffuseMap, bottomUv).rgb * kernel[index] * u_intensity;
             }
             else
             {
-                result += (texture(u_diffuseMap, f_uv).rgb * kernel[i] * u_intensity);
+                result += (texture(u_diffuseMap, f_uv).rgb * kernel[index] * u_intensity);
             }
 
-            vec2 topUv = f_uv + vec2(0.0f, uvOffset.y * i);
+            vec2 topUv = f_uv + vec2(0.0f, uvOffset.y * index);
             if(topUv.y >= 0.0f && topUv.y <= 1.0f)
             {
-           	    result += texture(u_diffuseMap, topUv).rgb * kernel[i] * u_intensity;
+           	    result += texture(u_diffuseMap, topUv).rgb * kernel[index] * u_intensity;
             }
             else
             {
-                result += (texture(u_diffuseMap, f_uv).rgb * kernel[i] * u_intensity);
+                result += (texture(u_diffuseMap, f_uv).rgb * kernel[index] * u_intensity);
             }
 
         }

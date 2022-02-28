@@ -8,7 +8,7 @@ void EngineInterface::sound2d_create(const string& id, const string& audioPath)
 
 void EngineInterface::sound2d_delete(const string& id)
 {
-	for(unsigned int i = 0; i < _core->getSound2dPlayer()->getStartedSoundCount(id); i++)
+	for(unsigned int index = 0; index < _core->getSound2dPlayer()->getStartedSoundCount(id); index++)
 	{
 		_core->getSound2dPlayer()->stopSound(id, 0);
 	}

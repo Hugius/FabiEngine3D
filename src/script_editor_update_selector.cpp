@@ -43,7 +43,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				else
 				{
 					int lineIndexToDelete = (_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex;
-					for(int i = 0; i <= abs(_firstSelectedLineIndex - _lastSelectedLineIndex); i++)
+					for(int index = 0; index <= abs(_firstSelectedLineIndex - _lastSelectedLineIndex); index++)
 					{
 						_script->getScriptFile(_currentScriptFileId)->deleteLine(static_cast<unsigned int>(lineIndexToDelete));
 					}
@@ -161,13 +161,13 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				{
 					unsigned int pastedCount = 0;
 					bool firstLineEmpty = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).empty();
-					for(unsigned int i = 0; i < _copyClipboard.size(); i++)
+					for(unsigned int index = 0; index < _copyClipboard.size(); index++)
 					{
-						if((cursorLineIndex + i) < _script->getScriptFile(_currentScriptFileId)->getLineCount())
+						if((cursorLineIndex + index) < _script->getScriptFile(_currentScriptFileId)->getLineCount())
 						{
-							if(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex + static_cast<unsigned int>(i)).empty())
+							if(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex + static_cast<unsigned int>(index)).empty())
 							{
-								_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
+								_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex + static_cast<unsigned int>(index), _copyClipboard[index]);
 								pastedCount++;
 								continue;
 							}
@@ -175,7 +175,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 
 						if(_script->getScriptFile(_currentScriptFileId)->getLineCount() < MAX_LINE_COUNT)
 						{
-							_script->getScriptFile(_currentScriptFileId)->insertNewLine(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
+							_script->getScriptFile(_currentScriptFileId)->insertNewLine(cursorLineIndex + static_cast<unsigned int>(index), _copyClipboard[index]);
 							pastedCount++;
 						}
 						else

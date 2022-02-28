@@ -10,20 +10,20 @@ void WorldEditor::_updateModelHighlighting(const string& id, int& direction)
 
 	auto partIds = _fe3d->model_getPartIds(id);
 
-	for(unsigned int i = 0; i < partIds.size(); i++)
+	for(unsigned int index = 0; index < partIds.size(); index++)
 	{
-		auto opacity = _fe3d->model_getOpacity(id, partIds[i]);
+		auto opacity = _fe3d->model_getOpacity(id, partIds[index]);
 
-		if((opacity == 0.0f) && (i == 0))
+		if((opacity == 0.0f) && (index == 0))
 		{
 			direction *= -1;
 		}
-		if((opacity == 1.0f) && (i == 0))
+		if((opacity == 1.0f) && (index == 0))
 		{
 			direction *= -1;
 		}
 		const float speed = (MODEL_HIGHLIGHT_SPEED * static_cast<float>(direction));
-		_fe3d->model_setOpacity(id, partIds[i], (opacity + speed));
+		_fe3d->model_setOpacity(id, partIds[index], (opacity + speed));
 	}
 }
 

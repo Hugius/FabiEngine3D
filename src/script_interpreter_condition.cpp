@@ -9,7 +9,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 	vector<bool> conditions;
 	string elementBuild = "";
 	string comparisonOperator = "";
-	unsigned int index = 0;
+	unsigned int characterIndex = 0;
 	bool isBuildingString = false;
 	bool mustBeValue = true;
 	bool mustBeComparisonOperator = false;
@@ -21,38 +21,38 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 		return false;
 	}
 
-	for(const auto& c : conditionString)
+	for(const auto& character : conditionString)
 	{
-		if(c == ' ' && elementBuild.empty() && !isBuildingString)
+		if(character == ' ' && elementBuild.empty() && !isBuildingString)
 		{
-			index++;
+			characterIndex++;
 			continue;
 		}
-		else if(index == conditionString.size() - 1)
+		else if(characterIndex == conditionString.size() - 1)
 		{
-			elementBuild += c;
+			elementBuild += character;
 			elements.push_back(elementBuild);
 		}
-		else if(c == ' ' && !isBuildingString)
+		else if(character == ' ' && !isBuildingString)
 		{
 			elements.push_back(elementBuild);
 			elementBuild.clear();
 		}
 		else
 		{
-			if(c == '"' && !isBuildingString)
+			if(character == '"' && !isBuildingString)
 			{
 				isBuildingString = true;
 			}
-			else if(c == '"' && isBuildingString)
+			else if(character == '"' && isBuildingString)
 			{
 				isBuildingString = false;
 			}
 
-			elementBuild += c;
+			elementBuild += character;
 		}
 
-		index++;
+		characterIndex++;
 	}
 
 	if(elements.size() < 3)
@@ -196,25 +196,25 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 	bool finalCondition = conditions[0];
 	string currentLogicOperator = "";
-	for(unsigned int i = 1; i < conditions.size(); i++)
+	for(unsigned int index = 1; index < conditions.size(); index++)
 	{
 		if(currentLogicOperator.empty())
 		{
-			currentLogicOperator = logicOperators[i - 1];
+			currentLogicOperator = logicOperators[index - 1];
 		}
-		else if(currentLogicOperator != logicOperators[i - 1])
+		else if(currentLogicOperator != logicOperators[index - 1])
 		{
 			_throwRuntimeError("cannot use different logic operators");
 			return false;
 		}
 
-		if(logicOperators[i - 1] == AND_KEYWORD)
+		if(logicOperators[index - 1] == AND_KEYWORD)
 		{
-			finalCondition = finalCondition && conditions[i];
+			finalCondition = finalCondition && conditions[index];
 		}
-		else if(logicOperators[i - 1] == OR_KEYWORD)
+		else if(logicOperators[index - 1] == OR_KEYWORD)
 		{
-			finalCondition = finalCondition || conditions[i];
+			finalCondition = finalCondition || conditions[index];
 		}
 	}
 

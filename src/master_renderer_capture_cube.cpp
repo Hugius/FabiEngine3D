@@ -78,9 +78,9 @@ void MasterRenderer::captureCubeReflections()
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-			for(unsigned int i = 0; i < 6; i++)
+			for(unsigned int index = 0; index < 6; index++)
 			{
-				switch(i)
+				switch(index)
 				{
 					case 0:
 					{
@@ -147,7 +147,7 @@ void MasterRenderer::captureCubeReflections()
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
+				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + index);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
 				glTexImage2D(cubeIndex, 0, GL_RGB, _renderStorage->getCubeReflectionQuality(), _renderStorage->getCubeReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);

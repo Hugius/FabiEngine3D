@@ -87,34 +87,34 @@ void MeshLoader::cacheMeshes(const vector<string>& filePaths, bool isCrucial)
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		for(unsigned int i = 0; i < threadStatuses.size(); i++)
+		for(unsigned int index = 0; index < threadStatuses.size(); index++)
 		{
-			if(!threadStatuses[i])
+			if(!threadStatuses[index])
 			{
-				if(threads[i].wait_for(seconds(0)) == future_status::ready)
+				if(threads[index].wait_for(seconds(0)) == future_status::ready)
 				{
-					threadStatuses[i] = true;
+					threadStatuses[index] = true;
 					finishedThreadCount++;
 
-					auto loadedMesh = threads[i].get();
+					auto loadedMesh = threads[index].get();
 
 					if(loadedMesh == nullptr)
 					{
 						if(isCrucial)
 						{
-							Logger::throwError("Cannot load mesh: \"" + threadFilePaths[i] + "\"");
+							Logger::throwError("Cannot load mesh: \"" + threadFilePaths[index] + "\"");
 						}
 						else
 						{
-							Logger::throwWarning("Cannot load mesh: \"" + threadFilePaths[i] + "\"");
+							Logger::throwWarning("Cannot load mesh: \"" + threadFilePaths[index] + "\"");
 						}
 
 						continue;
 					}
 
-					_cache.insert({threadFilePaths[i], loadedMesh});
+					_cache.insert({threadFilePaths[index], loadedMesh});
 
-					Logger::throwInfo("Loaded mesh: \"" + threadFilePaths[i] + "\"");
+					Logger::throwInfo("Loaded mesh: \"" + threadFilePaths[index] + "\"");
 				}
 			}
 		}

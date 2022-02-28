@@ -20,9 +20,9 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 
 	auto chunkHeaderData = new unsigned char[12];
 
-	for(int i = 0; i < 12; i++)
+	for(int index = 0; index < 12; index++)
 	{
-		chunkHeaderData[i] = static_cast<unsigned int>(getc(file));
+		chunkHeaderData[index] = static_cast<unsigned int>(getc(file));
 	}
 
 	string chunkId = "";
@@ -59,9 +59,9 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 	{
 		auto subChunkHeaderData = new unsigned char[8];
 
-		for(int i = 0; i < 8; i++)
+		for(int index = 0; index < 8; index++)
 		{
-			subChunkHeaderData[i] = static_cast<unsigned int>(getc(file));
+			subChunkHeaderData[index] = static_cast<unsigned int>(getc(file));
 		}
 
 		string subChunkId = "";
@@ -76,9 +76,9 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 		{
 			auto subChunkBodyData = new unsigned char[16];
 
-			for(int i = 0; i < 16; i++)
+			for(int index = 0; index < 16; index++)
 			{
-				subChunkBodyData[i] = static_cast<unsigned int>(getc(file));
+				subChunkBodyData[index] = static_cast<unsigned int>(getc(file));
 			}
 
 			const auto compressionFormat = static_cast<unsigned int>((subChunkBodyData[1] << 8) | subChunkBodyData[0]);
@@ -105,9 +105,9 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 		{
 			const auto samples = new unsigned char[subChunkSize];
 
-			for(unsigned int i = 0; i < subChunkSize; i++)
+			for(unsigned int index = 0; index < subChunkSize; index++)
 			{
-				samples[i] = static_cast<unsigned char>(getc(file));
+				samples[index] = static_cast<unsigned char>(getc(file));
 			}
 
 			fclose(file);
@@ -116,7 +116,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 		}
 		else
 		{
-			for(unsigned int i = 0; i < subChunkSize; i++)
+			for(unsigned int index = 0; index < subChunkSize; index++)
 			{
 				const auto temp = getc(file);
 			}

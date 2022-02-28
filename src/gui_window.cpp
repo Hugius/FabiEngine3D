@@ -100,11 +100,11 @@ void GuiWindow::createScreen(const string& id)
 void GuiWindow::deleteScreen(const string& id)
 {
 	bool isFound = false;
-	for(unsigned int i = 0; i < _screens.size(); i++)
+	for(unsigned int index = 0; index < _screens.size(); index++)
 	{
-		if(_screens[i]->getId() == id)
+		if(_screens[index]->getId() == id)
 		{
-			_screens.erase(_screens.begin() + i);
+			_screens.erase(_screens.begin() + index);
 			isFound = true;
 		}
 	}

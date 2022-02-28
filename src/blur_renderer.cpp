@@ -29,7 +29,7 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 	{
 		_shader->uploadUniform("u_isHorizontal", true);
 
-		for(unsigned int i = 0; i < blurCount; i++)
+		for(unsigned int index = 0; index < blurCount; index++)
 		{
 			_captor->bind();
 			_render(entity, texture);
@@ -42,7 +42,7 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 	{
 		_shader->uploadUniform("u_isHorizontal", false);
 
-		for(unsigned int i = 0; i < blurCount; i++)
+		for(unsigned int index = 0; index < blurCount; index++)
 		{
 			_captor->bind();
 			_render(entity, texture);

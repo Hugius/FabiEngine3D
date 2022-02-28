@@ -8,11 +8,11 @@ const bool NetworkingServer::isRunning() const
 
 const bool NetworkingServer::isClientConnected(const string& username) const
 {
-	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
 	{
-		if(!_clientUsernames[i].empty())
+		if(!_clientUsernames[index].empty())
 		{
-			if(username == _clientUsernames[i])
+			if(username == _clientUsernames[index])
 			{
 				return true;
 			}
@@ -70,11 +70,11 @@ const vector<string> NetworkingServer::getClientIps() const
 {
 	vector<string> result;
 
-	for(unsigned int i = 0; i < _clientIps.size(); i++)
+	for(unsigned int index = 0; index < _clientIps.size(); index++)
 	{
-		if(!_clientUsernames[i].empty())
+		if(!_clientUsernames[index].empty())
 		{
-			result.push_back(_clientIps[i]);
+			result.push_back(_clientIps[index]);
 		}
 	}
 
@@ -85,11 +85,11 @@ const vector<string> NetworkingServer::getClientUsernames() const
 {
 	vector<string> clientUsernames;
 
-	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
 	{
-		if(!_clientUsernames[i].empty())
+		if(!_clientUsernames[index].empty())
 		{
-			clientUsernames.push_back(_clientUsernames[i]);
+			clientUsernames.push_back(_clientUsernames[index]);
 		}
 	}
 
@@ -115,13 +115,13 @@ void NetworkingServer::sendTcpMessageToClient(const string& username, const stri
 		abort();
 	}
 
-	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
 	{
-		if(!_clientUsernames[i].empty())
+		if(!_clientUsernames[index].empty())
 		{
-			if(username == _clientUsernames[i])
+			if(username == _clientUsernames[index])
 			{
-				_sendTcpMessageToClient(_clientSockets[i], content, false);
+				_sendTcpMessageToClient(_clientSockets[index], content, false);
 				return;
 			}
 		}
@@ -149,13 +149,13 @@ void NetworkingServer::sendUdpMessageToClient(const string& username, const stri
 		abort();
 	}
 
-	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
 	{
-		if(!_clientUsernames[i].empty())
+		if(!_clientUsernames[index].empty())
 		{
-			if(username == _clientUsernames[i])
+			if(username == _clientUsernames[index])
 			{
-				_sendUdpMessageToClient(_clientIps[i], _udpClientPorts[i], content, false);
+				_sendUdpMessageToClient(_clientIps[index], _udpClientPorts[index], content, false);
 				return;
 			}
 		}
@@ -183,11 +183,11 @@ void NetworkingServer::broadcastTcpMessageToClients(const string& content)
 		abort();
 	}
 
-	for(unsigned int i = 0; i < _clientSockets.size(); i++)
+	for(unsigned int index = 0; index < _clientSockets.size(); index++)
 	{
-		if(!_clientUsernames[i].empty())
+		if(!_clientUsernames[index].empty())
 		{
-			_sendTcpMessageToClient(_clientSockets[i], content, false);
+			_sendTcpMessageToClient(_clientSockets[index], content, false);
 		}
 	}
 }
@@ -211,11 +211,11 @@ void NetworkingServer::broadcastUdpMessageToClients(const string& content)
 		abort();
 	}
 
-	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
 	{
-		if(!_clientUsernames[i].empty())
+		if(!_clientUsernames[index].empty())
 		{
-			_sendUdpMessageToClient(_clientIps[i], _udpClientPorts[i], content, false);
+			_sendUdpMessageToClient(_clientIps[index], _udpClientPorts[index], content, false);
 		}
 	}
 }
@@ -227,13 +227,13 @@ void NetworkingServer::disconnectClient(const string& username)
 		abort();
 	}
 
-	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
 	{
-		if(!_clientUsernames[i].empty())
+		if(!_clientUsernames[index].empty())
 		{
-			if(username == _clientUsernames[i])
+			if(username == _clientUsernames[index])
 			{
-				_sendTcpMessageToClient(_clientSockets[i], "DISCONNECTED", true);
+				_sendTcpMessageToClient(_clientSockets[index], "DISCONNECTED", true);
 				return;
 			}
 		}
@@ -249,11 +249,11 @@ void NetworkingServer::disconnectClients()
 		abort();
 	}
 
-	for(unsigned int i = 0; i < _clientUsernames.size(); i++)
+	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
 	{
-		if(!_clientUsernames[i].empty())
+		if(!_clientUsernames[index].empty())
 		{
-			_sendTcpMessageToClient(_clientSockets[i], "DISCONNECTED", true);
+			_sendTcpMessageToClient(_clientSockets[index], "DISCONNECTED", true);
 			return;
 		}
 	}

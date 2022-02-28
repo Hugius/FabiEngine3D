@@ -195,11 +195,11 @@ const vector<shared_ptr<GuiTextField>>& GuiOverlay::getTextFields() const
 
 void GuiOverlay::deleteScrollingList(const string& id)
 {
-	for(unsigned int i = 0; i < _scrollingLists.size(); i++)
+	for(unsigned int index = 0; index < _scrollingLists.size(); index++)
 	{
-		if(id == _scrollingLists[i]->getId())
+		if(id == _scrollingLists[index]->getId())
 		{
-			_scrollingLists.erase(_scrollingLists.begin() + i);
+			_scrollingLists.erase(_scrollingLists.begin() + index);
 			return;
 		}
 	}
@@ -209,11 +209,11 @@ void GuiOverlay::deleteScrollingList(const string& id)
 
 void GuiOverlay::deleteInputField(const string& id)
 {
-	for(unsigned int i = 0; i < _inputFields.size(); i++)
+	for(unsigned int index = 0; index < _inputFields.size(); index++)
 	{
-		if(id == _inputFields[i]->getId())
+		if(id == _inputFields[index]->getId())
 		{
-			_inputFields.erase(_inputFields.begin() + i);
+			_inputFields.erase(_inputFields.begin() + index);
 			return;
 		}
 	}
@@ -223,11 +223,11 @@ void GuiOverlay::deleteInputField(const string& id)
 
 void GuiOverlay::deleteButton(const string& id)
 {
-	for(unsigned int i = 0; i < _buttons.size(); i++)
+	for(unsigned int index = 0; index < _buttons.size(); index++)
 	{
-		if(id == _buttons[i]->getId())
+		if(id == _buttons[index]->getId())
 		{
-			_buttons.erase(_buttons.begin() + i);
+			_buttons.erase(_buttons.begin() + index);
 			return;
 		}
 	}
@@ -237,11 +237,11 @@ void GuiOverlay::deleteButton(const string& id)
 
 void GuiOverlay::deleteRectangle(const string& id)
 {
-	for(unsigned int i = 0; i < _rectangles.size(); i++)
+	for(unsigned int index = 0; index < _rectangles.size(); index++)
 	{
-		if(id == _rectangles[i]->getId())
+		if(id == _rectangles[index]->getId())
 		{
-			_rectangles.erase(_rectangles.begin() + i);
+			_rectangles.erase(_rectangles.begin() + index);
 			return;
 		}
 	}
@@ -251,11 +251,11 @@ void GuiOverlay::deleteRectangle(const string& id)
 
 void GuiOverlay::deleteTextField(const string& id)
 {
-	for(unsigned int i = 0; i < _textFields.size(); i++)
+	for(unsigned int index = 0; index < _textFields.size(); index++)
 	{
-		if(id == _textFields[i]->getId())
+		if(id == _textFields[index]->getId())
 		{
-			_textFields.erase(_textFields.begin() + i);
+			_textFields.erase(_textFields.begin() + index);
 			return;
 		}
 	}

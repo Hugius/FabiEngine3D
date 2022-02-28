@@ -33,11 +33,11 @@ void Sound3dPlayer::pauseSounds(vector<Sound3d>& sounds)
 {
 	for(const auto& sound : sounds)
 	{
-		for(unsigned int i = 0; i < _channels.size(); i++)
+		for(unsigned int index = 0; index < _channels.size(); index++)
 		{
-			if(_channels[i] == sound.getId())
+			if(_channels[index] == sound.getId())
 			{
-				//Mix_Pause(static_cast<int>(i));
+				//Mix_Pause(static_cast<int>(index));
 			}
 		}
 	}
@@ -60,11 +60,11 @@ void Sound3dPlayer::resumeSounds(vector<Sound3d>& sounds)
 {
 	for(const auto& sound : sounds)
 	{
-		for(unsigned int i = 0; i < _channels.size(); i++)
+		for(unsigned int index = 0; index < _channels.size(); index++)
 		{
-			if(_channels[i] == sound.getId())
+			if(_channels[index] == sound.getId())
 			{
-				//Mix_Resume(static_cast<int>(i));
+				//Mix_Resume(static_cast<int>(index));
 			}
 		}
 	}
@@ -89,11 +89,11 @@ void Sound3dPlayer::stopSounds(vector<Sound3d>& sounds)
 
 	for(const auto& sound : sounds)
 	{
-		for(unsigned int i = 0; i < _channels.size(); i++)
+		for(unsigned int index = 0; index < _channels.size(); index++)
 		{
-			if(_channels[i] == sound.getId())
+			if(_channels[index] == sound.getId())
 			{
-				//Mix_HaltChannel(static_cast<int>(i));
+				//Mix_HaltChannel(static_cast<int>(index));
 			}
 		}
 	}

@@ -87,34 +87,34 @@ void AudioLoader::cacheAudios(const vector<string>& filePaths, bool isCrucial)
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		for(unsigned int i = 0; i < threadStatuses.size(); i++)
+		for(unsigned int index = 0; index < threadStatuses.size(); index++)
 		{
-			if(!threadStatuses[i])
+			if(!threadStatuses[index])
 			{
-				if(threads[i].wait_for(seconds(0)) == future_status::ready)
+				if(threads[index].wait_for(seconds(0)) == future_status::ready)
 				{
-					threadStatuses[i] = true;
+					threadStatuses[index] = true;
 					finishedThreadCount++;
 
-					auto loadedAudio = threads[i].get();
+					auto loadedAudio = threads[index].get();
 
 					if(loadedAudio == nullptr)
 					{
 						if(isCrucial)
 						{
-							Logger::throwError("Cannot load audio: \"" + threadFilePaths[i] + "\"");
+							Logger::throwError("Cannot load audio: \"" + threadFilePaths[index] + "\"");
 						}
 						else
 						{
-							Logger::throwWarning("Cannot load audio: \"" + threadFilePaths[i] + "\"");
+							Logger::throwWarning("Cannot load audio: \"" + threadFilePaths[index] + "\"");
 						}
 
 						continue;
 					}
 
-					_cache.insert({threadFilePaths[i], loadedAudio});
+					_cache.insert({threadFilePaths[index], loadedAudio});
 
-					Logger::throwInfo("Loaded audio: \"" + threadFilePaths[i] + "\"");
+					Logger::throwInfo("Loaded audio: \"" + threadFilePaths[index] + "\"");
 				}
 			}
 		}

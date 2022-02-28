@@ -276,34 +276,34 @@ vec3 calculatePointlights(vec3 specularMapColor, vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 
-	for (int i = 0; i < u_pointlightCount; i++)
+	for (int index = 0; index < u_pointlightCount; index++)
 	{
-		vec3 direction = normalize(u_pointlightPositions[i] - f_worldSpacePos);
+		vec3 direction = normalize(u_pointlightPositions[index] - f_worldSpacePos);
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
-		float specular = calculateSpecularLighting(specularMapColor, u_pointlightPositions[i], normal);
+		float specular = calculateSpecularLighting(specularMapColor, u_pointlightPositions[index], normal);
 
 		float attenuation;
-		if(u_pointlightShapes[i] == 0)
+		if(u_pointlightShapes[index] == 0)
 		{
-			float fragmentDistance = distance(u_pointlightPositions[i], f_worldSpacePos);
-			float averageRadius = ((u_pointlightRadiuses[i].x + u_pointlightRadiuses[i].y + u_pointlightRadiuses[i].z) / 3.0f);
+			float fragmentDistance = distance(u_pointlightPositions[index], f_worldSpacePos);
+			float averageRadius = ((u_pointlightRadiuses[index].x + u_pointlightRadiuses[index].y + u_pointlightRadiuses[index].z) / 3.0f);
 			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
 		}
 		else
 		{
-			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_worldSpacePos);
-			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_pointlightRadiuses[i].x)));
-			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_pointlightRadiuses[i].y)));
-			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_pointlightRadiuses[i].z)));
+			vec3 fragmentDistance = abs(u_pointlightPositions[index] - f_worldSpacePos);
+			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_pointlightRadiuses[index].x)));
+			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_pointlightRadiuses[index].y)));
+			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_pointlightRadiuses[index].z)));
 			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
 		}
 
 		vec3 current = vec3(0.0f);
 		current += vec3(diffuse);
 		current += vec3(specular);
-		current *= u_pointlightColors[i];
+		current *= u_pointlightColors[index];
 		current *= (attenuation * attenuation);
-		current *= u_pointlightIntensities[i];
+		current *= u_pointlightIntensities[index];
 
 		result += current;
 	}
@@ -315,25 +315,25 @@ vec3 calculateSpotlights(vec3 specularMapColor, vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 
-	for (int i = 0; i < u_spotlightCount; i++)
+	for (int index = 0; index < u_spotlightCount; index++)
 	{
-		vec3 direction = normalize(u_spotlightPositions[i] - f_worldSpacePos);
-		float spot = dot(direction, normalize(-u_spotlightFronts[i]));
+		vec3 direction = normalize(u_spotlightPositions[index] - f_worldSpacePos);
+		float spot = dot(direction, normalize(-u_spotlightFronts[index]));
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
-		float specular = calculateSpecularLighting(specularMapColor, u_spotlightPositions[i], normal);
-		float smoothingAngle = (u_spotlightAngles[i] * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
-		float intensity = clamp(((spot - (u_spotlightAngles[i] * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
+		float specular = calculateSpecularLighting(specularMapColor, u_spotlightPositions[index], normal);
+		float smoothingAngle = (u_spotlightAngles[index] * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
+		float intensity = clamp(((spot - (u_spotlightAngles[index] * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
 
-		float fragmentDistance = distance(u_spotlightPositions[i], f_worldSpacePos);
-		float distanceMultiplier = (fragmentDistance / u_spotlightDistances[i]);
+		float fragmentDistance = distance(u_spotlightPositions[index], f_worldSpacePos);
+		float distanceMultiplier = (fragmentDistance / u_spotlightDistances[index]);
 		distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
 		distanceMultiplier = (1.0f - distanceMultiplier);
 
 		vec3 current = vec3(0.0f);
 		current += vec3(diffuse * intensity);
 		current += vec3(specular * intensity);
-		current *= u_spotlightColors[i];
-		current *= u_spotlightIntensities[i];
+		current *= u_spotlightColors[index];
+		current *= u_spotlightIntensities[index];
 		current *= distanceMultiplier;
 
 		result += current;

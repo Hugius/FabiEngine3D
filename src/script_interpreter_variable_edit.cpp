@@ -231,9 +231,9 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		if((leftVariable->getType() == ScriptVariableType::MULTIPLE) && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
 			vector<shared_ptr<ScriptValue>> values = {};
-			for(unsigned int i = 0; i < rightVariable->getValueCount(); i++)
+			for(unsigned int index = 0; index < rightVariable->getValueCount(); index++)
 			{
-				values.push_back(rightVariable->getValue(i));
+				values.push_back(rightVariable->getValue(index));
 			}
 
 			leftVariable->setValues(values);

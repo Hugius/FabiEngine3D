@@ -63,11 +63,11 @@ void ScriptExecutor::pause()
 
 		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
-			for(unsigned int i = 0; i < _fe3d->sound2d_getStartedCount(soundId); i++)
+			for(unsigned int index = 0; index < _fe3d->sound2d_getStartedCount(soundId); index++)
 			{
-				if(_fe3d->sound2d_isStarted(soundId, i) && _fe3d->sound2d_isPaused(soundId, i))
+				if(_fe3d->sound2d_isStarted(soundId, index) && _fe3d->sound2d_isPaused(soundId, index))
 				{
-					_pausedSound2dIds.push_back({soundId, i});
+					_pausedSound2dIds.push_back({soundId, index});
 				}
 			}
 		}
@@ -90,11 +90,11 @@ void ScriptExecutor::pause()
 
 		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
-			for(unsigned int i = 0; i < _fe3d->sound2d_getStartedCount(soundId); i++)
+			for(unsigned int index = 0; index < _fe3d->sound2d_getStartedCount(soundId); index++)
 			{
-				if(_fe3d->sound2d_isStarted(soundId, i) && !_fe3d->sound2d_isPaused(soundId, i))
+				if(_fe3d->sound2d_isStarted(soundId, index) && !_fe3d->sound2d_isPaused(soundId, index))
 				{
-					_fe3d->sound2d_pause(soundId, i);
+					_fe3d->sound2d_pause(soundId, index);
 				}
 			}
 		}
@@ -131,11 +131,11 @@ void ScriptExecutor::resume()
 
 		for(const auto& soundId : _fe3d->sound2d_getIds())
 		{
-			for(unsigned int i = 0; i < _fe3d->sound2d_getStartedCount(soundId); i++)
+			for(unsigned int index = 0; index < _fe3d->sound2d_getStartedCount(soundId); index++)
 			{
-				if(_fe3d->sound2d_isStarted(soundId, i) && _fe3d->sound2d_isPaused(soundId, i))
+				if(_fe3d->sound2d_isStarted(soundId, index) && _fe3d->sound2d_isPaused(soundId, index))
 				{
-					_fe3d->sound2d_resume(soundId, i);
+					_fe3d->sound2d_resume(soundId, index);
 				}
 			}
 		}

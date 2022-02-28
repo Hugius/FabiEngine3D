@@ -18,9 +18,9 @@ const mat22 Math::invertMatrix(const mat22& matrix)
 
 	mat22 result;
 
-	for(unsigned int i = 0; i < 4; i++)
+	for(unsigned int index = 0; index < 4; index++)
 	{
-		result.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
+		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
 	}
 
 	return result;
@@ -49,9 +49,9 @@ const mat33 Math::invertMatrix(const mat33& matrix)
 
 	mat33 result;
 
-	for(unsigned int i = 0; i < 9; i++)
+	for(unsigned int index = 0; index < 9; index++)
 	{
-		result.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
+		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
 	}
 
 	return result;
@@ -183,9 +183,9 @@ const mat44 Math::invertMatrix(const mat44& matrix)
 
 	mat44 result;
 
-	for(unsigned int i = 0; i < 16; i++)
+	for(unsigned int index = 0; index < 16; index++)
 	{
-		result.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
+		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
 	}
 
 	return result;

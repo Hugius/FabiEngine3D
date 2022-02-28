@@ -310,9 +310,9 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		if((typeString == LIST_KEYWORD) && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
 			vector<shared_ptr<ScriptValue>> values = {};
-			for(unsigned int i = 0; i < rightVariable->getValueCount(); i++)
+			for(unsigned int index = 0; index < rightVariable->getValueCount(); index++)
 			{
-				values.push_back(rightVariable->getValue(i));
+				values.push_back(rightVariable->getValue(index));
 			}
 
 			variableList.insert({nameString, make_shared<ScriptVariable>(nameString, scope, ScriptVariableType::MULTIPLE, isConstant, values)});

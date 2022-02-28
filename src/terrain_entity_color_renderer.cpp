@@ -88,13 +88,13 @@ void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<s
 		}
 	}
 
-	for(unsigned int i = 0; i < visibleEntities.size(); i++)
+	for(unsigned int index = 0; index < visibleEntities.size(); index++)
 	{
-		_shader->uploadUniform("u_pointlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
-		_shader->uploadUniform("u_pointlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
-		_shader->uploadUniform("u_pointlightIntensities[" + to_string(i) + "]", visibleEntities[i]->getIntensity());
-		_shader->uploadUniform("u_pointlightRadiuses[" + to_string(i) + "]", visibleEntities[i]->getRadius());
-		_shader->uploadUniform("u_pointlightShapes[" + to_string(i) + "]", static_cast<int>(visibleEntities[i]->getShape()));
+		_shader->uploadUniform("u_pointlightPositions[" + to_string(index) + "]", visibleEntities[index]->getPosition());
+		_shader->uploadUniform("u_pointlightColors[" + to_string(index) + "]", visibleEntities[index]->getColor());
+		_shader->uploadUniform("u_pointlightIntensities[" + to_string(index) + "]", visibleEntities[index]->getIntensity());
+		_shader->uploadUniform("u_pointlightRadiuses[" + to_string(index) + "]", visibleEntities[index]->getRadius());
+		_shader->uploadUniform("u_pointlightShapes[" + to_string(index) + "]", static_cast<int>(visibleEntities[index]->getShape()));
 	}
 
 	_shader->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
@@ -111,14 +111,14 @@ void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<st
 		}
 	}
 
-	for(unsigned int i = 0; i < visibleEntities.size(); i++)
+	for(unsigned int index = 0; index < visibleEntities.size(); index++)
 	{
-		_shader->uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
-		_shader->uploadUniform("u_spotlightFronts[" + to_string(i) + "]", visibleEntities[i]->getFront());
-		_shader->uploadUniform("u_spotlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
-		_shader->uploadUniform("u_spotlightIntensities[" + to_string(i) + "]", visibleEntities[i]->getIntensity());
-		_shader->uploadUniform("u_spotlightAngles[" + to_string(i) + "]", cosf(Math::convertToRadians(visibleEntities[i]->getAngle())));
-		_shader->uploadUniform("u_spotlightDistances[" + to_string(i) + "]", visibleEntities[i]->getDistance());
+		_shader->uploadUniform("u_spotlightPositions[" + to_string(index) + "]", visibleEntities[index]->getPosition());
+		_shader->uploadUniform("u_spotlightFronts[" + to_string(index) + "]", visibleEntities[index]->getFront());
+		_shader->uploadUniform("u_spotlightColors[" + to_string(index) + "]", visibleEntities[index]->getColor());
+		_shader->uploadUniform("u_spotlightIntensities[" + to_string(index) + "]", visibleEntities[index]->getIntensity());
+		_shader->uploadUniform("u_spotlightAngles[" + to_string(index) + "]", cosf(Math::convertToRadians(visibleEntities[index]->getAngle())));
+		_shader->uploadUniform("u_spotlightDistances[" + to_string(index) + "]", visibleEntities[index]->getDistance());
 	}
 
 	_shader->uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));

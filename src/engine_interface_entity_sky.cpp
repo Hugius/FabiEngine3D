@@ -13,15 +13,15 @@ void EngineInterface::sky_setCubeMaps(const string& id, const array<string, 6>& 
 	if(texture == nullptr)
 	{
 		array<shared_ptr<Image>, 6> images;
-		for(unsigned int i = 0; i < 6; i++)
+		for(unsigned int index = 0; index < 6; index++)
 		{
-			if(value[i].empty())
+			if(value[index].empty())
 			{
-				images[i] = nullptr;
+				images[index] = nullptr;
 			}
 			else
 			{
-				images[i] = _core->getImageLoader()->loadImage(value[i]);
+				images[index] = _core->getImageLoader()->loadImage(value[index]);
 			}
 		}
 

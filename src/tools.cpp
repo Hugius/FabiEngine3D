@@ -207,11 +207,11 @@ const vector<string> Tools::splitStringIntoMultiple(const string& mergedString, 
 
 	string tempString = "";
 
-	for(unsigned int i = 0; i < mergedString.size(); i++)
+	for(unsigned int index = 0; index < mergedString.size(); index++)
 	{
-		if(mergedString[i] == delimiter)
+		if(mergedString[index] == delimiter)
 		{
-			if(i == 0)
+			if(index == 0)
 			{
 				continue;
 			}
@@ -221,14 +221,14 @@ const vector<string> Tools::splitStringIntoMultiple(const string& mergedString, 
 				tempString = "";
 			}
 		}
-		else if(i == (mergedString.size() - 1))
+		else if(index == (mergedString.size() - 1))
 		{
-			tempString += mergedString[i];
+			tempString += mergedString[index];
 			result.push_back(tempString);
 		}
 		else
 		{
-			tempString += mergedString[i];
+			tempString += mergedString[index];
 		}
 	}
 

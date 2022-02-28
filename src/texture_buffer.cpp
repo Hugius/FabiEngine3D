@@ -48,17 +48,17 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 		}
 	}
 
-	for(unsigned int i = 0; i < images.size(); i++)
+	for(unsigned int index = 0; index < images.size(); index++)
 	{
-		const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<unsigned int>(i));
+		const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<unsigned int>(index));
 
-		if(images[i] == nullptr)
+		if(images[index] == nullptr)
 		{
 			unsigned char* pixels = new unsigned char[imageSize * imageSize * 3];
 
-			for(unsigned int i = 0; i < (imageSize * imageSize * 3); i++)
+			for(unsigned int index = 0; index < (imageSize * imageSize * 3); index++)
 			{
-				pixels[i] = 255;
+				pixels[index] = 255;
 			}
 
 			glTexImage2D(cubeIndex, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
@@ -67,7 +67,7 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 		}
 		else
 		{
-			glTexImage2D(cubeIndex, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->getPixels());
+			glTexImage2D(cubeIndex, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[index]->getPixels());
 		}
 	}
 

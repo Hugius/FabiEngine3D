@@ -28,7 +28,7 @@ public:
 
 	const bool mustCapture() const;
 
-	const shared_ptr<TextureBuffer> getCubeMap() const;
+	const shared_ptr<TextureBuffer> getCubeTextureBuffer() const;
 
 private:
 	string _exceptionModelId = "";
@@ -41,5 +41,5 @@ private:
 	bool _mustCapture = false;
 	bool _isCaptured = false;
 
-	shared_ptr<TextureBuffer> _cubeMap;
+	shared_ptr<TextureBuffer> _cubeTextureBuffer;
 };

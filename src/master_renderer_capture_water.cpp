@@ -16,7 +16,7 @@ void MasterRenderer::captureWaterReflections()
 		return;
 	}
 
-	_waterReflectionCaptor->bind();
+	_waterReflectionCaptureBuffer->bind();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -106,13 +106,13 @@ void MasterRenderer::captureWaterReflections()
 
 	_camera->updateMatrices();
 
-	_renderStorage->setWaterReflectionMap(_waterReflectionCaptor->getTexture(0));
+	_renderStorage->setWaterReflectionMap(_waterReflectionCaptureBuffer->getTexture(0));
 	_renderStorage->setMinPosition(fvec3(-FLT_MAX));
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
 	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);
 
-	_waterReflectionCaptor->unbind();
+	_waterReflectionCaptureBuffer->unbind();
 }
 
 void MasterRenderer::captureWaterRefractions()
@@ -131,7 +131,7 @@ void MasterRenderer::captureWaterRefractions()
 		return;
 	}
 
-	_waterRefractionCaptor->bind();
+	_waterRefractionCaptureBuffer->bind();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -152,13 +152,13 @@ void MasterRenderer::captureWaterRefractions()
 	_renderTransparentQuad3dEntities();
 	_renderTransparentText3dEntities();
 
-	_renderStorage->setWaterRefractionMap(_waterRefractionCaptor->getTexture(0));
+	_renderStorage->setWaterRefractionMap(_waterRefractionCaptureBuffer->getTexture(0));
 	_renderStorage->setMinPosition(fvec3(-FLT_MAX));
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
 	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);
 
-	_waterRefractionCaptor->unbind();
+	_waterRefractionCaptureBuffer->unbind();
 }
 
 void MasterRenderer::captureWaterEdges()
@@ -167,7 +167,7 @@ void MasterRenderer::captureWaterEdges()
 
 	if((waterEntity != nullptr) && waterEntity->isEdged())
 	{
-		_waterOpacityCaptor->bind();
+		_waterOpacityCaptureBuffer->bind();
 
 		glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -180,9 +180,9 @@ void MasterRenderer::captureWaterEdges()
 			_terrainEntityDepthRenderer->unbind();
 		}
 
-		_waterOpacityCaptor->unbind();
+		_waterOpacityCaptureBuffer->unbind();
 
-		_renderStorage->setWaterEdgeMap(_waterOpacityCaptor->getTexture(0));
+		_renderStorage->setWaterEdgeMap(_waterOpacityCaptureBuffer->getTexture(0));
 	}
 	else
 	{

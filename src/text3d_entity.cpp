@@ -119,7 +119,7 @@ void Text3dEntity::setContent(const string& value)
 			auto characterEntity = make_shared<Quad3dEntity>("dummy");
 			characterEntity->setVertexBuffer(_vertexBuffer);
 			characterEntity->setDiffuseMapPath(_fontMapPath);
-			characterEntity->setDiffuseMap(_fontMap);
+			characterEntity->setDiffuseMap(_fontTextureBuffer);
 			characterEntity->setOpacity(_opacity);
 			characterEntity->setMinTextureAlpha(_minTextureAlpha);
 			characterEntity->setWireframeColor(_wireframeColor);
@@ -166,11 +166,11 @@ void Text3dEntity::setFontMapPath(const string& value)
 
 void Text3dEntity::setFontMap(shared_ptr<TextureBuffer> value)
 {
-	_fontMap = value;
+	_fontTextureBuffer = value;
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setDiffuseMap(_fontMap);
+		character->setDiffuseMap(_fontTextureBuffer);
 	}
 }
 
@@ -412,9 +412,9 @@ const shared_ptr<VertexBuffer> Text3dEntity::getVertexBuffer() const
 	return _vertexBuffer;
 }
 
-const shared_ptr<TextureBuffer> Text3dEntity::getFontMap() const
+const shared_ptr<TextureBuffer> Text3dEntity::getFontTextureBuffer() const
 {
-	return _fontMap;
+	return _fontTextureBuffer;
 }
 
 const mat44& Text3dEntity::getTransformation() const

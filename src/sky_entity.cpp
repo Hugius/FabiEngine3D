@@ -27,7 +27,7 @@ void SkyEntity::setColor(const fvec3& value)
 
 void SkyEntity::setCubeMap(shared_ptr<TextureBuffer> value)
 {
-	_cubeMap = value;
+	_cubeTextureBuffer = value;
 }
 
 void SkyEntity::setLightness(float value)
@@ -75,9 +75,9 @@ const fvec3& SkyEntity::getColor() const
 	return _color;
 }
 
-const shared_ptr<TextureBuffer> SkyEntity::getCubeMap() const
+const shared_ptr<TextureBuffer> SkyEntity::getCubeTextureBuffer() const
 {
-	return _cubeMap;
+	return _cubeTextureBuffer;
 }
 
 const float SkyEntity::getLightness() const

@@ -4,26 +4,26 @@
 
 void AntiAliasingRenderer::bind()
 {
-	_shader->bind();
+	_shaderBuffer->bind();
 
-	_shader->uploadUniform("u_sceneMap", 0);
+	_shaderBuffer->uploadUniform("u_sceneMap", 0);
 
-	if(_renderStorage->getFinalSceneMap() != nullptr)
+	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getId());
 	}
 }
 
 void AntiAliasingRenderer::unbind()
 {
-	if(_renderStorage->getFinalSceneMap() != nullptr)
+	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	_shader->unbind();
+	_shaderBuffer->unbind();
 }
 
 void AntiAliasingRenderer::render(const shared_ptr<Quad2dEntity> entity)

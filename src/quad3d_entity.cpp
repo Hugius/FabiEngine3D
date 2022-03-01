@@ -119,12 +119,12 @@ void Quad3dEntity::setFacingCameraVertically(bool value)
 
 void Quad3dEntity::setDiffuseMap(shared_ptr<TextureBuffer> value)
 {
-	_diffuseMap = value;
+	_diffuseTextureBuffer = value;
 }
 
 void Quad3dEntity::setEmissionMap(shared_ptr<TextureBuffer> value)
 {
-	_emissionMap = value;
+	_emissionTextureBuffer = value;
 }
 
 void Quad3dEntity::setPosition(const fvec3& value)
@@ -290,14 +290,14 @@ const mat44& Quad3dEntity::getTransformation() const
 	return _transformation;
 }
 
-const shared_ptr<TextureBuffer> Quad3dEntity::getDiffuseMap() const
+const shared_ptr<TextureBuffer> Quad3dEntity::getDiffuseTextureBuffer() const
 {
-	return _diffuseMap;
+	return _diffuseTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> Quad3dEntity::getEmissionMap() const
+const shared_ptr<TextureBuffer> Quad3dEntity::getEmissionTextureBuffer() const
 {
-	return _emissionMap;
+	return _emissionTextureBuffer;
 }
 
 const fvec3& Quad3dEntity::getPosition() const

@@ -53,7 +53,7 @@ void ReflectionEntity::moveTo(const fvec3& target, float speed)
 
 void ReflectionEntity::setCubeMap(shared_ptr<TextureBuffer> value)
 {
-	_cubeMap = value;
+	_cubeTextureBuffer = value;
 }
 
 void ReflectionEntity::setExceptionModelId(const string& id)
@@ -76,7 +76,7 @@ const bool ReflectionEntity::mustCapture() const
 	return _mustCapture;
 }
 
-const shared_ptr<TextureBuffer> ReflectionEntity::getCubeMap() const
+const shared_ptr<TextureBuffer> ReflectionEntity::getCubeTextureBuffer() const
 {
-	return _cubeMap;
+	return _cubeTextureBuffer;
 }

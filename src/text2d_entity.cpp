@@ -113,7 +113,7 @@ void Text2dEntity::setContent(const string& value)
 			auto characterEntity = make_shared<Quad2dEntity>("dummy");
 			characterEntity->setVertexBuffer(_vertexBuffer);
 			characterEntity->setDiffuseMapPath(_fontMapPath);
-			characterEntity->setDiffuseMap(_fontMap);
+			characterEntity->setDiffuseMap(_fontTextureBuffer);
 			characterEntity->setHorizontallyFlipped(_isHorizontallyFlipped);
 			characterEntity->setVerticallyFlipped(_isVerticallyFlipped);
 			characterEntity->setOpacity(_opacity);
@@ -215,11 +215,11 @@ void Text2dEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 
 void Text2dEntity::setFontMap(shared_ptr<TextureBuffer> value)
 {
-	_fontMap = value;
+	_fontTextureBuffer = value;
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setDiffuseMap(_fontMap);
+		character->setDiffuseMap(_fontTextureBuffer);
 	}
 }
 
@@ -351,9 +351,9 @@ const shared_ptr<VertexBuffer> Text2dEntity::getVertexBuffer() const
 	return _vertexBuffer;
 }
 
-const shared_ptr<TextureBuffer> Text2dEntity::getFontMap() const
+const shared_ptr<TextureBuffer> Text2dEntity::getFontTextureBuffer() const
 {
-	return _fontMap;
+	return _fontTextureBuffer;
 }
 
 const fvec3& Text2dEntity::getWireframeColor() const

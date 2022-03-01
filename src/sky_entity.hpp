@@ -37,7 +37,7 @@ public:
 	const bool isWireframed() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getCubeMap() const;
+	const shared_ptr<TextureBuffer> getCubeTextureBuffer() const;
 
 private:
 	array<string, 6> _cubeMapPaths = {"", "", "", "", "", ""};
@@ -53,5 +53,5 @@ private:
 	bool _isWireframed = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _cubeMap = nullptr;
+	shared_ptr<TextureBuffer> _cubeTextureBuffer = nullptr;
 };

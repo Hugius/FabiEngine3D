@@ -26,7 +26,7 @@ void MasterRenderer::capturePlanarReflections()
 		return;
 	}
 
-	_planarReflectionCaptor->bind();
+	_planarReflectionCaptureBuffer->bind();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -105,11 +105,11 @@ void MasterRenderer::capturePlanarReflections()
 
 	_camera->updateMatrices();
 
-	_renderStorage->setPlanarReflectionMap(_planarReflectionCaptor->getTexture(0));
+	_renderStorage->setPlanarReflectionMap(_planarReflectionCaptureBuffer->getTexture(0));
 	_renderStorage->setMinPosition(fvec3(-FLT_MAX));
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
 	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);
 
-	_planarReflectionCaptor->unbind();
+	_planarReflectionCaptureBuffer->unbind();
 }

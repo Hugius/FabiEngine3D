@@ -10,7 +10,7 @@ class BlurRenderer final : public BaseRenderer
 public:
 	using BaseRenderer::inject;
 
-	void inject(shared_ptr<CaptureBuffer> captor);
+	void inject(shared_ptr<CaptureBuffer> captureBuffer);
 	void bind();
 	void unbind();
 
@@ -19,5 +19,5 @@ public:
 private:
 	void _render(const shared_ptr<Quad2dEntity> entity, shared_ptr<TextureBuffer> texture);
 
-	shared_ptr<CaptureBuffer> _captor = nullptr;
+	shared_ptr<CaptureBuffer> _captureBuffer = nullptr;
 };

@@ -2,16 +2,16 @@
 
 void SkyEntityColorRenderer::bind()
 {
-	_shader->bind();
+	_shaderBuffer->bind();
 
-	_shader->uploadUniform("u_cameraView", mat44(mat33(_camera->getView())));
-	_shader->uploadUniform("u_cameraProjection", _camera->getProjection());
-	_shader->uploadUniform("u_cubeMap", 0);
+	_shaderBuffer->uploadUniform("u_cameraView", mat44(mat33(_camera->getView())));
+	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
+	_shaderBuffer->uploadUniform("u_cubeMap", 0);
 }
 
 void SkyEntityColorRenderer::unbind()
 {
-	_shader->unbind();
+	_shaderBuffer->unbind();
 }
 
 void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
@@ -26,17 +26,17 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	_shader->uploadUniform("u_isWireframed", entity->isWireframed());
-	_shader->uploadUniform("u_transformation", entity->getTransformation());
-	_shader->uploadUniform("u_lightness", (entity->getLightness() + (_renderStorage->isSkyExposureEnabled() ? _renderStorage->getSkyExposureLightness() : 0.0f)));
-	_shader->uploadUniform("u_color", entity->getColor());
-	_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
-	_shader->uploadUniform("u_hasCubeMap", (entity->getCubeMap() != nullptr));
+	_shaderBuffer->uploadUniform("u_isWireframed", entity->isWireframed());
+	_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation());
+	_shaderBuffer->uploadUniform("u_lightness", (entity->getLightness() + (_renderStorage->isSkyExposureEnabled() ? _renderStorage->getSkyExposureLightness() : 0.0f)));
+	_shaderBuffer->uploadUniform("u_color", entity->getColor());
+	_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor());
+	_shaderBuffer->uploadUniform("u_hasCubeMap", (entity->getCubeTextureBuffer() != nullptr));
 
-	if(entity->getCubeMap() != nullptr)
+	if(entity->getCubeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap()->getId());
+		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeTextureBuffer()->getId());
 	}
 
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
@@ -46,7 +46,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 
 	glBindVertexArray(0);
 
-	if(entity->getCubeMap() != nullptr)
+	if(entity->getCubeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);

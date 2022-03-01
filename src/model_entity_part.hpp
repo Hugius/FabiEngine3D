@@ -43,10 +43,10 @@ class ModelEntityPart final
 	bool isFaceCulled = false;
 
 	shared_ptr<VertexBuffer> vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> diffuseMap = nullptr;
-	shared_ptr<TextureBuffer> emissionMap = nullptr;
-	shared_ptr<TextureBuffer> specularMap = nullptr;
-	shared_ptr<TextureBuffer> reflectionMap = nullptr;
-	shared_ptr<TextureBuffer> normalMap = nullptr;
+	shared_ptr<TextureBuffer> diffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> emissionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> specularTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> reflectionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> normalTextureBuffer = nullptr;
 	ReflectionType reflectionType = ReflectionType::CUBE;
 };

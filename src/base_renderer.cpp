@@ -1,8 +1,8 @@
 #include "base_renderer.hpp"
 
-void BaseRenderer::inject(shared_ptr<ShaderBuffer> shader)
+void BaseRenderer::inject(shared_ptr<ShaderBuffer> shaderBuffer)
 {
-	_shader = shader;
+	_shaderBuffer = shaderBuffer;
 }
 
 void BaseRenderer::inject(shared_ptr<RenderStorage> renderStorage)

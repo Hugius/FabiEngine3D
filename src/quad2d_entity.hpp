@@ -65,7 +65,7 @@ public:
 	const bool isVerticallyFlipped() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getDiffuseMap() const;
+	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
 
 private:
 	mat44 _transformation = mat44(1.0f);
@@ -99,5 +99,5 @@ private:
 	bool _isWireframed = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _diffuseMap = nullptr;
+	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
 };

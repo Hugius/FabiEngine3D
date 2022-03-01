@@ -232,30 +232,30 @@ const bool EngineInterface::sky_isWireframed(const string& id) const
 
 const bool EngineInterface::sky_hasRightCubeMap(const string& id) const
 {
-	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeMap() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[0].empty());
+	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeTextureBuffer() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[0].empty());
 }
 
 const bool EngineInterface::sky_hasLeftCubeMap(const string& id) const
 {
-	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeMap() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[1].empty());
+	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeTextureBuffer() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[1].empty());
 }
 
 const bool EngineInterface::sky_hasTopCubeMap(const string& id) const
 {
-	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeMap() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[2].empty());
+	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeTextureBuffer() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[2].empty());
 }
 
 const bool EngineInterface::sky_hasBottomCubeMap(const string& id) const
 {
-	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeMap() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[3].empty());
+	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeTextureBuffer() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[3].empty());
 }
 
 const bool EngineInterface::sky_hasBackCubeMap(const string& id) const
 {
-	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeMap() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[4].empty());
+	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeTextureBuffer() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[4].empty());
 }
 
 const bool EngineInterface::sky_hasFrontCubeMap(const string& id) const
 {
-	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeMap() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[5].empty());
+	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeTextureBuffer() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[5].empty());
 }

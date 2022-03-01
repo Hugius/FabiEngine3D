@@ -68,9 +68,9 @@ public:
 
 	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
 	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getDudvMap() const;
-	const shared_ptr<TextureBuffer> getNormalMap() const;
-	const shared_ptr<TextureBuffer> getDisplacementMap() const;
+	const shared_ptr<TextureBuffer> getDudvTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getNormalTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getDisplacementTextureBuffer() const;
 
 private:
 	static inline constexpr float MAX_SIZE = 1024.0f;
@@ -103,7 +103,7 @@ private:
 
 	shared_ptr<VertexBuffer> _lowQualityVertexBuffer = nullptr;
 	shared_ptr<VertexBuffer> _highQualityVertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _dudvMap = nullptr;
-	shared_ptr<TextureBuffer> _normalMap = nullptr;
-	shared_ptr<TextureBuffer> _displacementMap = nullptr;
+	shared_ptr<TextureBuffer> _dudvTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _normalTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _displacementTextureBuffer = nullptr;
 };

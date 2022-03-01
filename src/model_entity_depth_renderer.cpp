@@ -5,11 +5,11 @@ using std::max;
 
 void ModelEntityDepthRenderer::bind()
 {
-	_shader->bind();
+	_shaderBuffer->bind();
 
-	_shader->uploadUniform("u_cameraView", _camera->getView());
-	_shader->uploadUniform("u_cameraProjection", _camera->getProjection());
-	_shader->uploadUniform("u_diffuseMap", 0);
+	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
+	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
+	_shaderBuffer->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
@@ -30,7 +30,7 @@ void ModelEntityDepthRenderer::unbind()
 	glDisable(GL_CLIP_DISTANCE4);
 	glDisable(GL_CLIP_DISTANCE5);
 
-	_shader->unbind();
+	_shaderBuffer->unbind();
 }
 
 void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity)
@@ -40,29 +40,29 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity)
 		return;
 	}
 
-	_shader->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
-	_shader->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
-	_shader->uploadUniform("u_minY", max(_renderStorage->getMinPosition().y, entity->getMinHeight()));
-	_shader->uploadUniform("u_maxY", min(_renderStorage->getMaxPosition().y, entity->getMaxHeight()));
-	_shader->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
-	_shader->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
-	_shader->uploadUniform("u_cameraView", (entity->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
+	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
+	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
+	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinPosition().y, entity->getMinHeight()));
+	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxPosition().y, entity->getMaxHeight()));
+	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
+	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
+	_shaderBuffer->uploadUniform("u_cameraView", (entity->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
 
 	for(const auto& partId : entity->getPartIds())
 	{
-		_shader->uploadUniform("u_transformation", entity->getTransformation(partId));
-		_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
-		_shader->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha(partId));
+		_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation(partId));
+		_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
+		_shaderBuffer->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha(partId));
 
 		if(entity->isFaceCulled(partId))
 		{
 			glEnable(GL_CULL_FACE);
 		}
 
-		if(entity->getDiffuseMap(partId) != nullptr)
+		if(entity->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partId)->getId());
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseTextureBuffer(partId)->getId());
 		}
 
 		glBindVertexArray(entity->getVertexBuffer(partId)->getVaoId());
@@ -71,7 +71,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity)
 
 		glBindVertexArray(0);
 
-		if(entity->getDiffuseMap(partId) != nullptr)
+		if(entity->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);

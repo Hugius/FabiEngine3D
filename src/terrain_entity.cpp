@@ -20,7 +20,7 @@ void TerrainEntity::setHeightMapPath(const string& value)
 
 void TerrainEntity::setDiffuseMap(shared_ptr<TextureBuffer> value)
 {
-	_diffuseMap = value;
+	_diffuseTextureBuffer = value;
 }
 
 void TerrainEntity::setDiffuseMapPath(const string& value)
@@ -30,7 +30,7 @@ void TerrainEntity::setDiffuseMapPath(const string& value)
 
 void TerrainEntity::setNormalMap(shared_ptr<TextureBuffer> value)
 {
-	_normalMap = value;
+	_normalTextureBuffer = value;
 }
 
 void TerrainEntity::setNormalMapPath(const string& value)
@@ -40,7 +40,7 @@ void TerrainEntity::setNormalMapPath(const string& value)
 
 void TerrainEntity::setBlendMap(shared_ptr<TextureBuffer> value)
 {
-	_blendMap = value;
+	_blendTextureBuffer = value;
 }
 
 void TerrainEntity::setBlendMapPath(const string& value)
@@ -50,7 +50,7 @@ void TerrainEntity::setBlendMapPath(const string& value)
 
 void TerrainEntity::setRedDiffuseMap(shared_ptr<TextureBuffer> value)
 {
-	_redDiffuseMap = value;
+	_redDiffuseTextureBuffer = value;
 }
 
 void TerrainEntity::setRedDiffuseMapPath(const string& value)
@@ -60,7 +60,7 @@ void TerrainEntity::setRedDiffuseMapPath(const string& value)
 
 void TerrainEntity::setGreenDiffuseMap(shared_ptr<TextureBuffer> value)
 {
-	_greenDiffuseMap = value;
+	_greenDiffuseTextureBuffer = value;
 }
 
 void TerrainEntity::setGreenDiffuseMapPath(const string& value)
@@ -70,7 +70,7 @@ void TerrainEntity::setGreenDiffuseMapPath(const string& value)
 
 void TerrainEntity::setBlueDiffuseMap(shared_ptr<TextureBuffer> value)
 {
-	_blueDiffuseMap = value;
+	_blueDiffuseTextureBuffer = value;
 }
 
 void TerrainEntity::setBlueDiffuseMapPath(const string& value)
@@ -80,7 +80,7 @@ void TerrainEntity::setBlueDiffuseMapPath(const string& value)
 
 void TerrainEntity::setRedNormalMap(shared_ptr<TextureBuffer> value)
 {
-	_redNormalMap = value;
+	_redNormalTextureBuffer = value;
 }
 
 void TerrainEntity::setRedNormalMapPath(const string& value)
@@ -90,7 +90,7 @@ void TerrainEntity::setRedNormalMapPath(const string& value)
 
 void TerrainEntity::setGreenNormalMap(shared_ptr<TextureBuffer> value)
 {
-	_greenNormalMap = value;
+	_greenNormalTextureBuffer = value;
 }
 
 void TerrainEntity::setGreenNormalMapPath(const string& value)
@@ -100,7 +100,7 @@ void TerrainEntity::setGreenNormalMapPath(const string& value)
 
 void TerrainEntity::setBlueNormalMap(shared_ptr<TextureBuffer> value)
 {
-	_blueNormalMap = value;
+	_blueNormalTextureBuffer = value;
 }
 
 void TerrainEntity::setBlueNormalMapPath(const string& filePath)
@@ -168,49 +168,49 @@ void TerrainEntity::setSpecularIntensity(float value)
 	_specularIntensity = max(0.0f, value);
 }
 
-const shared_ptr<TextureBuffer> TerrainEntity::getDiffuseMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getDiffuseTextureBuffer() const
 {
-	return _diffuseMap;
+	return _diffuseTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> TerrainEntity::getNormalMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getNormalTextureBuffer() const
 {
-	return _normalMap;
+	return _normalTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> TerrainEntity::getBlendMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getBlendTextureBuffer() const
 {
-	return _blendMap;
+	return _blendTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> TerrainEntity::getRedDiffuseMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getRedDiffuseTextureBuffer() const
 {
-	return _redDiffuseMap;
+	return _redDiffuseTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> TerrainEntity::getGreenDiffuseMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getGreenDiffuseTextureBuffer() const
 {
-	return _greenDiffuseMap;
+	return _greenDiffuseTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> TerrainEntity::getBlueDiffuseMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getBlueDiffuseTextureBuffer() const
 {
-	return _blueDiffuseMap;
+	return _blueDiffuseTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> TerrainEntity::getRedNormalMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getRedNormalTextureBuffer() const
 {
-	return _redNormalMap;
+	return _redNormalTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> TerrainEntity::getGreenNormalMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getGreenNormalTextureBuffer() const
 {
-	return _greenNormalMap;
+	return _greenNormalTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> TerrainEntity::getBlueNormalMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getBlueNormalTextureBuffer() const
 {
-	return _blueNormalMap;
+	return _blueNormalTextureBuffer;
 }
 
 const string& TerrainEntity::getHeightMapPath() const

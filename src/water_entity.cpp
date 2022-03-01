@@ -17,17 +17,17 @@ void WaterEntity::setColor(const fvec3& value)
 
 void WaterEntity::setDudvMap(shared_ptr<TextureBuffer> value)
 {
-	_dudvMap = value;
+	_dudvTextureBuffer = value;
 }
 
 void WaterEntity::setNormalMap(shared_ptr<TextureBuffer> value)
 {
-	_normalMap = value;
+	_normalTextureBuffer = value;
 }
 
 void WaterEntity::setDisplacementMap(shared_ptr<TextureBuffer> value)
 {
-	_displacementMap = value;
+	_displacementTextureBuffer = value;
 }
 
 void WaterEntity::setDudvMapPath(const string& value)
@@ -145,19 +145,19 @@ const fvec3& WaterEntity::getColor() const
 	return _color;
 }
 
-const shared_ptr<TextureBuffer> WaterEntity::getDudvMap() const
+const shared_ptr<TextureBuffer> WaterEntity::getDudvTextureBuffer() const
 {
-	return _dudvMap;
+	return _dudvTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> WaterEntity::getNormalMap() const
+const shared_ptr<TextureBuffer> WaterEntity::getNormalTextureBuffer() const
 {
-	return _normalMap;
+	return _normalTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> WaterEntity::getDisplacementMap() const
+const shared_ptr<TextureBuffer> WaterEntity::getDisplacementTextureBuffer() const
 {
-	return _displacementMap;
+	return _displacementTextureBuffer;
 }
 
 const string& WaterEntity::getDudvMapPath() const

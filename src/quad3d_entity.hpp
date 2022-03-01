@@ -81,8 +81,8 @@ public:
 	const bool isCentered() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getDiffuseMap() const;
-	const shared_ptr<TextureBuffer> getEmissionMap() const;
+	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getEmissionTextureBuffer() const;
 
 private:
 	string _diffuseMapPath = "";
@@ -123,6 +123,6 @@ private:
 	bool _isCentered = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _diffuseMap = nullptr;
-	shared_ptr<TextureBuffer> _emissionMap = nullptr;
+	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _emissionTextureBuffer = nullptr;
 };

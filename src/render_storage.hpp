@@ -180,19 +180,19 @@ public:
 	const bool isSkyExposureEnabled() const;
 	const bool isShadowsFollowingCamera() const;
 
-	const shared_ptr<TextureBuffer> getPrimarySceneMap() const;
-	const shared_ptr<TextureBuffer> getSecondarySceneMap() const;
-	const shared_ptr<TextureBuffer> getPlanarReflectionMap() const;
-	const shared_ptr<TextureBuffer> getWaterReflectionMap() const;
-	const shared_ptr<TextureBuffer> getWaterRefractionMap() const;
-	const shared_ptr<TextureBuffer> getWaterEdgeMap() const;
-	const shared_ptr<TextureBuffer> getShadowMap() const;
-	const shared_ptr<TextureBuffer> getBloomMap() const;
-	const shared_ptr<TextureBuffer> getDepthMap() const;
-	const shared_ptr<TextureBuffer> getDofMap() const;
-	const shared_ptr<TextureBuffer> getLensFlareMap() const;
-	const shared_ptr<TextureBuffer> getFinalSceneMap() const;
-	const shared_ptr<TextureBuffer> getMotionBlurMap() const;
+	const shared_ptr<TextureBuffer> getPrimarySceneTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getSecondarySceneTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getPlanarReflectionTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getWaterReflectionTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getWaterRefractionTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getWaterEdgeTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getShadowTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getBloomTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getDepthTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getDofTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getLensFlareTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getFinalSceneTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getMotionBlurTextureBuffer() const;
 	const BloomType getBloomType() const;
 
 private:
@@ -212,19 +212,19 @@ private:
 	static inline constexpr unsigned int MIN_REFRACTION_QUALITY = 128;
 	static inline constexpr unsigned int MAX_REFRACTION_QUALITY = 1024;
 
-	shared_ptr<TextureBuffer> _primarySceneMap = nullptr;
-	shared_ptr<TextureBuffer> _secondarySceneMap = nullptr;
-	shared_ptr<TextureBuffer> _planarReflectionMap = nullptr;
-	shared_ptr<TextureBuffer> _waterReflectionMap = nullptr;
-	shared_ptr<TextureBuffer> _waterRefractionMap = nullptr;
-	shared_ptr<TextureBuffer> _waterEdgeMap = nullptr;
-	shared_ptr<TextureBuffer> _shadowMap = nullptr;
-	shared_ptr<TextureBuffer> _bloomMap = nullptr;
-	shared_ptr<TextureBuffer> _depthMap = nullptr;
-	shared_ptr<TextureBuffer> _dofMap = nullptr;
-	shared_ptr<TextureBuffer> _lensFlareMap = nullptr;
-	shared_ptr<TextureBuffer> _finalSceneMap = nullptr;
-	shared_ptr<TextureBuffer> _motionBlurMap = nullptr;
+	shared_ptr<TextureBuffer> _primarySceneTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _secondarySceneTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _planarReflectionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _waterReflectionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _waterRefractionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _waterEdgeTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _shadowTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _bloomTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _depthTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _dofTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _lensFlareTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _finalSceneTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _motionBlurTextureBuffer = nullptr;
 
 	string _cursorEntityId = "";
 	string _lensFlareMapPath = "";

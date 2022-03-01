@@ -31,11 +31,11 @@ public:
 	void setLevelOfDetailDistance(float value);
 	void setBright(const string& partId, bool value);
 	void setVertexBuffer(const string& partId, shared_ptr<VertexBuffer> value);
-	void setDiffuseMap(const string& partId, shared_ptr<TextureBuffer> value);
-	void setEmissionMap(const string& partId, shared_ptr<TextureBuffer> value);
-	void setSpecularMap(const string& partId, shared_ptr<TextureBuffer> value);
-	void setReflectionMap(const string& partId, shared_ptr<TextureBuffer> value);
-	void setNormalMap(const string& partId, shared_ptr<TextureBuffer> value);
+	void setDiffuseTextureBuffer(const string& partId, shared_ptr<TextureBuffer> value);
+	void setEmissionTextureBuffer(const string& partId, shared_ptr<TextureBuffer> value);
+	void setSpecularTextureBuffer(const string& partId, shared_ptr<TextureBuffer> value);
+	void setReflectionTextureBuffer(const string& partId, shared_ptr<TextureBuffer> value);
+	void setNormalTextureBuffer(const string& partId, shared_ptr<TextureBuffer> value);
 	void setBasePosition(const fvec3& value);
 	void setBaseRotation(const fvec3& value);
 	void setBaseRotationOrigin(const fvec3& value);
@@ -127,11 +127,11 @@ public:
 	const bool isReflective(const string& partId) const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer(const string& partId) const;
-	const shared_ptr<TextureBuffer> getDiffuseMap(const string& partId) const;
-	const shared_ptr<TextureBuffer> getEmissionMap(const string& partId) const;
-	const shared_ptr<TextureBuffer> getSpecularMap(const string& partId) const;
-	const shared_ptr<TextureBuffer> getReflectionMap(const string& partId) const;
-	const shared_ptr<TextureBuffer> getNormalMap(const string& partId) const;
+	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer(const string& partId) const;
+	const shared_ptr<TextureBuffer> getEmissionTextureBuffer(const string& partId) const;
+	const shared_ptr<TextureBuffer> getSpecularTextureBuffer(const string& partId) const;
+	const shared_ptr<TextureBuffer> getReflectionTextureBuffer(const string& partId) const;
+	const shared_ptr<TextureBuffer> getNormalTextureBuffer(const string& partId) const;
 	const ReflectionType getReflectionType(const string& partId) const;
 	const DirectionOrder getRotationOrder() const;
 

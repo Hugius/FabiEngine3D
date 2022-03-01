@@ -26,7 +26,7 @@ void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& view
 
 void MasterRenderer::render3dEntities()
 {
-	_worldColorCaptor->bind();
+	_worldColorCaptureBuffer->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	_renderStorage->setTriangleCountingEnabled(true);
 	_renderSkyEntity();
@@ -40,17 +40,17 @@ void MasterRenderer::render3dEntities()
 	_renderTransparentQuad3dEntities();
 	_renderTransparentText3dEntities();
 	_renderStorage->setTriangleCountingEnabled(false);
-	_worldColorCaptor->unbind();
-	_renderStorage->setPrimarySceneMap(_worldColorCaptor->getTexture(0));
-	_renderStorage->setSecondarySceneMap(_worldColorCaptor->getTexture(1));
-	_renderStorage->setFinalSceneMap(_renderStorage->getPrimarySceneMap());
+	_worldColorCaptureBuffer->unbind();
+	_renderStorage->setPrimarySceneMap(_worldColorCaptureBuffer->getTexture(0));
+	_renderStorage->setSecondarySceneMap(_worldColorCaptureBuffer->getTexture(1));
+	_renderStorage->setFinalSceneMap(_renderStorage->getPrimarySceneTextureBuffer());
 }
 
 void MasterRenderer::render2dEntities()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glViewport(Config::getInst().getDisplayPosition().x, Config::getInst().getDisplayPosition().y, Config::getInst().getDisplaySize().x, Config::getInst().getDisplaySize().y);
-	_renderFinalSceneMap();
+	_renderFinalScene();
 	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 
 	_renderStorage->setTriangleCountingEnabled(true);
@@ -322,9 +322,9 @@ void MasterRenderer::_renderAabbEntities()
 	}
 }
 
-void MasterRenderer::_renderFinalSceneMap()
+void MasterRenderer::_renderFinalScene()
 {
-	_renderSurface->setDiffuseMap(_renderStorage->getFinalSceneMap());
+	_renderSurface->setDiffuseMap(_renderStorage->getFinalSceneTextureBuffer());
 
 	_quad2dEntityColorRenderer->bind();
 	_quad2dEntityColorRenderer->render(_renderSurface);

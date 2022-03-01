@@ -5,10 +5,10 @@ using std::max;
 
 void AabbEntityDepthRenderer::bind()
 {
-	_shader->bind();
+	_shaderBuffer->bind();
 
-	_shader->uploadUniform("u_cameraView", _camera->getView());
-	_shader->uploadUniform("u_cameraProjection", _camera->getProjection());
+	_shaderBuffer->uploadUniform("u_cameraView", _camera->getView());
+	_shaderBuffer->uploadUniform("u_cameraProjection", _camera->getProjection());
 
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
@@ -29,7 +29,7 @@ void AabbEntityDepthRenderer::unbind()
 	glDisable(GL_CLIP_DISTANCE4);
 	glDisable(GL_CLIP_DISTANCE5);
 
-	_shader->unbind();
+	_shaderBuffer->unbind();
 }
 
 void AabbEntityDepthRenderer::render(const shared_ptr<AabbEntity> entity)
@@ -39,13 +39,13 @@ void AabbEntityDepthRenderer::render(const shared_ptr<AabbEntity> entity)
 		return;
 	}
 
-	_shader->uploadUniform("u_transformation", entity->getTransformation());
-	_shader->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
-	_shader->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
-	_shader->uploadUniform("u_minY", _renderStorage->getMinPosition().y);
-	_shader->uploadUniform("u_maxY", _renderStorage->getMaxPosition().y);
-	_shader->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
-	_shader->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
+	_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation());
+	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
+	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
+	_shaderBuffer->uploadUniform("u_minY", _renderStorage->getMinPosition().y);
+	_shaderBuffer->uploadUniform("u_maxY", _renderStorage->getMaxPosition().y);
+	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
+	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
 
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 

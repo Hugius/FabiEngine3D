@@ -76,7 +76,7 @@ public:
 
 	const vector<shared_ptr<Quad3dEntity>>& getCharacterEntities() const;
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getFontMap() const;
+	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
 
 private:
 	static inline const unordered_map<char, ivec2> _fontMapIndices =
@@ -217,5 +217,5 @@ private:
 
 	vector<shared_ptr<Quad3dEntity>> _characterEntities;
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _fontMap = nullptr;
+	shared_ptr<TextureBuffer> _fontTextureBuffer = nullptr;
 };

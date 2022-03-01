@@ -70,7 +70,7 @@ void Quad2dEntity::updateTransformation()
 
 void Quad2dEntity::setDiffuseMap(shared_ptr<TextureBuffer> value)
 {
-	_diffuseMap = value;
+	_diffuseTextureBuffer = value;
 }
 
 void Quad2dEntity::setDiffuseMapPath(const string& value)
@@ -191,9 +191,9 @@ const shared_ptr<VertexBuffer> Quad2dEntity::getVertexBuffer() const
 	return _vertexBuffer;
 }
 
-const shared_ptr<TextureBuffer> Quad2dEntity::getDiffuseMap() const
+const shared_ptr<TextureBuffer> Quad2dEntity::getDiffuseTextureBuffer() const
 {
-	return _diffuseMap;
+	return _diffuseTextureBuffer;
 }
 
 const string& Quad2dEntity::getDiffuseMapPath() const

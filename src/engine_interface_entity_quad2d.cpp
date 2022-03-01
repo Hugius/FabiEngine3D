@@ -316,7 +316,7 @@ const bool EngineInterface::quad2d_isCentered(const string& id) const
 
 const bool EngineInterface::quad2d_hasDiffuseMap(const string& id) const
 {
-	return (_core->getQuad2dEntityManager()->getEntity(id)->getDiffuseMap() != nullptr);
+	return (_core->getQuad2dEntityManager()->getEntity(id)->getDiffuseTextureBuffer() != nullptr);
 }
 
 const bool EngineInterface::quad2d_isWireframed(const string& id) const

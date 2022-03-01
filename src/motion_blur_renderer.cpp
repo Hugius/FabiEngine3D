@@ -3,39 +3,39 @@
 
 void MotionBlurRenderer::bind()
 {
-	_shader->bind();
+	_shaderBuffer->bind();
 
-	_shader->uploadUniform("u_sceneMap", 0);
-	_shader->uploadUniform("u_motionBlurMap", 1);
-	_shader->uploadUniform("u_mixValue", _renderStorage->getMotionBlurMixValue());
-	_shader->uploadUniform("u_isMotionBlurEnabled", _renderStorage->isMotionBlurEnabled());
+	_shaderBuffer->uploadUniform("u_sceneMap", 0);
+	_shaderBuffer->uploadUniform("u_motionBlurMap", 1);
+	_shaderBuffer->uploadUniform("u_mixValue", _renderStorage->getMotionBlurMixValue());
+	_shaderBuffer->uploadUniform("u_isMotionBlurEnabled", _renderStorage->isMotionBlurEnabled());
 
-	if(_renderStorage->getFinalSceneMap() != nullptr)
+	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getId());
 	}
-	if(_renderStorage->getMotionBlurMap() != nullptr)
+	if(_renderStorage->getMotionBlurTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getMotionBlurMap()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getMotionBlurTextureBuffer()->getId());
 	}
 }
 
 void MotionBlurRenderer::unbind()
 {
-	if(_renderStorage->getFinalSceneMap() != nullptr)
+	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	if(_renderStorage->getMotionBlurMap() != nullptr)
+	if(_renderStorage->getMotionBlurTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	_shader->unbind();
+	_shaderBuffer->unbind();
 }
 
 void MotionBlurRenderer::render(const shared_ptr<Quad2dEntity> entity)

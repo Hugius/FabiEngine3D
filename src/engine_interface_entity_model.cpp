@@ -50,7 +50,7 @@ void EngineInterface::model_setDiffuseMap(const string& modelId, const string& p
 {
 	if(value.empty())
 	{
-		_core->getModelEntityManager()->getEntity(modelId)->setDiffuseMap(partId, 0);
+		_core->getModelEntityManager()->getEntity(modelId)->setDiffuseTextureBuffer(partId, 0);
 		_core->getModelEntityManager()->getEntity(modelId)->setDiffuseMapPath(partId, "");
 	}
 	else
@@ -71,7 +71,7 @@ void EngineInterface::model_setDiffuseMap(const string& modelId, const string& p
 			}
 		}
 
-		_core->getModelEntityManager()->getEntity(modelId)->setDiffuseMap(partId, texture);
+		_core->getModelEntityManager()->getEntity(modelId)->setDiffuseTextureBuffer(partId, texture);
 		_core->getModelEntityManager()->getEntity(modelId)->setDiffuseMapPath(partId, value);
 	}
 }
@@ -80,7 +80,7 @@ void EngineInterface::model_setEmissionMap(const string& modelId, const string& 
 {
 	if(value.empty())
 	{
-		_core->getModelEntityManager()->getEntity(modelId)->setEmissionMap(partId, 0);
+		_core->getModelEntityManager()->getEntity(modelId)->setEmissionTextureBuffer(partId, 0);
 		_core->getModelEntityManager()->getEntity(modelId)->setEmissionMapPath(partId, "");
 	}
 	else
@@ -101,7 +101,7 @@ void EngineInterface::model_setEmissionMap(const string& modelId, const string& 
 			}
 		}
 
-		_core->getModelEntityManager()->getEntity(modelId)->setEmissionMap(partId, texture);
+		_core->getModelEntityManager()->getEntity(modelId)->setEmissionTextureBuffer(partId, texture);
 		_core->getModelEntityManager()->getEntity(modelId)->setEmissionMapPath(partId, value);
 	}
 }
@@ -110,7 +110,7 @@ void EngineInterface::model_setSpecularMap(const string& modelId, const string& 
 {
 	if(value.empty())
 	{
-		_core->getModelEntityManager()->getEntity(modelId)->setSpecularMap(partId, 0);
+		_core->getModelEntityManager()->getEntity(modelId)->setSpecularTextureBuffer(partId, 0);
 		_core->getModelEntityManager()->getEntity(modelId)->setSpecularMapPath(partId, "");
 	}
 	else
@@ -131,7 +131,7 @@ void EngineInterface::model_setSpecularMap(const string& modelId, const string& 
 			}
 		}
 
-		_core->getModelEntityManager()->getEntity(modelId)->setSpecularMap(partId, texture);
+		_core->getModelEntityManager()->getEntity(modelId)->setSpecularTextureBuffer(partId, texture);
 		_core->getModelEntityManager()->getEntity(modelId)->setSpecularMapPath(partId, value);
 	}
 }
@@ -140,7 +140,7 @@ void EngineInterface::model_setNormalMap(const string& modelId, const string& pa
 {
 	if(value.empty())
 	{
-		_core->getModelEntityManager()->getEntity(modelId)->setNormalMap(partId, 0);
+		_core->getModelEntityManager()->getEntity(modelId)->setNormalTextureBuffer(partId, 0);
 		_core->getModelEntityManager()->getEntity(modelId)->setNormalMapPath(partId, "");
 	}
 	else
@@ -161,7 +161,7 @@ void EngineInterface::model_setNormalMap(const string& modelId, const string& pa
 			}
 		}
 
-		_core->getModelEntityManager()->getEntity(modelId)->setNormalMap(partId, texture);
+		_core->getModelEntityManager()->getEntity(modelId)->setNormalTextureBuffer(partId, texture);
 		_core->getModelEntityManager()->getEntity(modelId)->setNormalMapPath(partId, value);
 	}
 }
@@ -170,7 +170,7 @@ void EngineInterface::model_setReflectionMap(const string& modelId, const string
 {
 	if(value.empty())
 	{
-		_core->getModelEntityManager()->getEntity(modelId)->setReflectionMap(partId, 0);
+		_core->getModelEntityManager()->getEntity(modelId)->setReflectionTextureBuffer(partId, 0);
 		_core->getModelEntityManager()->getEntity(modelId)->setReflectionMapPath(partId, "");
 	}
 	else
@@ -191,7 +191,7 @@ void EngineInterface::model_setReflectionMap(const string& modelId, const string
 			}
 		}
 
-		_core->getModelEntityManager()->getEntity(modelId)->setReflectionMap(partId, texture);
+		_core->getModelEntityManager()->getEntity(modelId)->setReflectionTextureBuffer(partId, texture);
 		_core->getModelEntityManager()->getEntity(modelId)->setReflectionMapPath(partId, value);
 	}
 }
@@ -531,27 +531,27 @@ const bool EngineInterface::model_isReflective(const string& modelId, const stri
 
 const bool EngineInterface::model_hasDiffuseMap(const string& modelId, const string& partId) const
 {
-	return (_core->getModelEntityManager()->getEntity(modelId)->getDiffuseMap(partId) != nullptr);
+	return (_core->getModelEntityManager()->getEntity(modelId)->getDiffuseTextureBuffer(partId) != nullptr);
 }
 
 const bool EngineInterface::model_hasEmissionMap(const string& modelId, const string& partId) const
 {
-	return (_core->getModelEntityManager()->getEntity(modelId)->getEmissionMap(partId) != nullptr);
+	return (_core->getModelEntityManager()->getEntity(modelId)->getEmissionTextureBuffer(partId) != nullptr);
 }
 
 const bool EngineInterface::model_hasSpecularMap(const string& modelId, const string& partId) const
 {
-	return (_core->getModelEntityManager()->getEntity(modelId)->getSpecularMap(partId) != nullptr);
+	return (_core->getModelEntityManager()->getEntity(modelId)->getSpecularTextureBuffer(partId) != nullptr);
 }
 
 const bool EngineInterface::model_hasReflectionMap(const string& modelId, const string& partId) const
 {
-	return (_core->getModelEntityManager()->getEntity(modelId)->getReflectionMap(partId) != nullptr);
+	return (_core->getModelEntityManager()->getEntity(modelId)->getReflectionTextureBuffer(partId) != nullptr);
 }
 
 const bool EngineInterface::model_hasNormalMap(const string& modelId, const string& partId) const
 {
-	return (_core->getModelEntityManager()->getEntity(modelId)->getNormalMap(partId) != nullptr);
+	return (_core->getModelEntityManager()->getEntity(modelId)->getNormalTextureBuffer(partId) != nullptr);
 }
 
 const bool EngineInterface::model_isAnimationStarted(const string& modelId, const string& animationId) const

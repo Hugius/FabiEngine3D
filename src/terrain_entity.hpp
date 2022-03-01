@@ -75,15 +75,15 @@ public:
 	const bool isWireframed() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getDiffuseMap() const;
-	const shared_ptr<TextureBuffer> getNormalMap() const;
-	const shared_ptr<TextureBuffer> getBlendMap() const;
-	const shared_ptr<TextureBuffer> getRedDiffuseMap() const;
-	const shared_ptr<TextureBuffer> getGreenDiffuseMap() const;
-	const shared_ptr<TextureBuffer> getBlueDiffuseMap() const;
-	const shared_ptr<TextureBuffer> getRedNormalMap() const;
-	const shared_ptr<TextureBuffer> getGreenNormalMap() const;
-	const shared_ptr<TextureBuffer> getBlueNormalMap() const;
+	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getNormalTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getBlendTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getRedDiffuseTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getGreenDiffuseTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getBlueDiffuseTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getRedNormalTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getGreenNormalTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getBlueNormalTextureBuffer() const;
 
 private:
 	string _heightMapPath = "";
@@ -115,13 +115,13 @@ private:
 	bool _isWireframed = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _diffuseMap = nullptr;
-	shared_ptr<TextureBuffer> _normalMap = nullptr;
-	shared_ptr<TextureBuffer> _blendMap = nullptr;
-	shared_ptr<TextureBuffer> _redDiffuseMap = nullptr;
-	shared_ptr<TextureBuffer> _greenDiffuseMap = nullptr;
-	shared_ptr<TextureBuffer> _blueDiffuseMap = nullptr;
-	shared_ptr<TextureBuffer> _redNormalMap = nullptr;
-	shared_ptr<TextureBuffer> _greenNormalMap = nullptr;
-	shared_ptr<TextureBuffer> _blueNormalMap = nullptr;
+	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _normalTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _blendTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _redDiffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _greenDiffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _blueDiffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _redNormalTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _greenNormalTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _blueNormalTextureBuffer = nullptr;
 };

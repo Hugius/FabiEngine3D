@@ -7,7 +7,7 @@
 class BaseRenderer
 {
 public:
-	void inject(shared_ptr<ShaderBuffer> shader);
+	void inject(shared_ptr<ShaderBuffer> shaderBuffer);
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 
@@ -15,7 +15,7 @@ public:
 	virtual void unbind() = 0;
 
 protected:
-	shared_ptr<ShaderBuffer> _shader = nullptr;
+	shared_ptr<ShaderBuffer> _shaderBuffer = nullptr;
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 };

@@ -127,7 +127,7 @@ void MasterRenderer::captureCubeReflections()
 				captureShadows();
 				captureWaterEdges();
 
-				_cubeReflectionCaptor->bind();
+				_cubeReflectionCaptureBuffer->bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				_renderSkyEntity();
 				_renderTerrainEntity();
@@ -139,11 +139,11 @@ void MasterRenderer::captureCubeReflections()
 				_renderTransparentModelEntities();
 				_renderTransparentQuad3dEntities();
 				_renderTransparentText3dEntities();
-				_cubeReflectionCaptor->unbind();
+				_cubeReflectionCaptureBuffer->unbind();
 
 				const auto dataSize = (_renderStorage->getCubeReflectionQuality() * _renderStorage->getCubeReflectionQuality() * 3);
 				auto data = new unsigned char[dataSize];
-				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptor->getTexture(0)->getId());
+				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer->getTexture(0)->getId());
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 

@@ -135,29 +135,29 @@ void ModelEntity::setVertexBuffer(const string& partId, shared_ptr<VertexBuffer>
 	_parts.at(partId)->vertexBuffer = value;
 }
 
-void ModelEntity::setDiffuseMap(const string& partId, shared_ptr<TextureBuffer> value)
+void ModelEntity::setDiffuseTextureBuffer(const string& partId, shared_ptr<TextureBuffer> value)
 {
-	_parts.at(partId)->diffuseMap = value;
+	_parts.at(partId)->diffuseTextureBuffer = value;
 }
 
-void ModelEntity::setEmissionMap(const string& partId, shared_ptr<TextureBuffer> value)
+void ModelEntity::setEmissionTextureBuffer(const string& partId, shared_ptr<TextureBuffer> value)
 {
-	_parts.at(partId)->emissionMap = value;
+	_parts.at(partId)->emissionTextureBuffer = value;
 }
 
-void ModelEntity::setSpecularMap(const string& partId, shared_ptr<TextureBuffer> value)
+void ModelEntity::setSpecularTextureBuffer(const string& partId, shared_ptr<TextureBuffer> value)
 {
-	_parts.at(partId)->specularMap = value;
+	_parts.at(partId)->specularTextureBuffer = value;
 }
 
-void ModelEntity::setReflectionMap(const string& partId, shared_ptr<TextureBuffer> value)
+void ModelEntity::setReflectionTextureBuffer(const string& partId, shared_ptr<TextureBuffer> value)
 {
-	_parts.at(partId)->reflectionMap = value;
+	_parts.at(partId)->reflectionTextureBuffer = value;
 }
 
-void ModelEntity::setNormalMap(const string& partId, shared_ptr<TextureBuffer> value)
+void ModelEntity::setNormalTextureBuffer(const string& partId, shared_ptr<TextureBuffer> value)
 {
-	_parts.at(partId)->normalMap = value;
+	_parts.at(partId)->normalTextureBuffer = value;
 }
 
 void ModelEntity::setBasePosition(const fvec3& value)
@@ -528,29 +528,29 @@ const mat44& ModelEntity::getTransformation(const string& partId) const
 	return _parts.at(partId)->transformation;
 }
 
-const shared_ptr<TextureBuffer> ModelEntity::getDiffuseMap(const string& partId) const
+const shared_ptr<TextureBuffer> ModelEntity::getDiffuseTextureBuffer(const string& partId) const
 {
-	return _parts.at(partId)->diffuseMap;
+	return _parts.at(partId)->diffuseTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> ModelEntity::getEmissionMap(const string& partId) const
+const shared_ptr<TextureBuffer> ModelEntity::getEmissionTextureBuffer(const string& partId) const
 {
-	return _parts.at(partId)->emissionMap;
+	return _parts.at(partId)->emissionTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> ModelEntity::getSpecularMap(const string& partId) const
+const shared_ptr<TextureBuffer> ModelEntity::getSpecularTextureBuffer(const string& partId) const
 {
-	return _parts.at(partId)->specularMap;
+	return _parts.at(partId)->specularTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> ModelEntity::getReflectionMap(const string& partId) const
+const shared_ptr<TextureBuffer> ModelEntity::getReflectionTextureBuffer(const string& partId) const
 {
-	return _parts.at(partId)->reflectionMap;
+	return _parts.at(partId)->reflectionTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> ModelEntity::getNormalMap(const string& partId) const
+const shared_ptr<TextureBuffer> ModelEntity::getNormalTextureBuffer(const string& partId) const
 {
-	return _parts.at(partId)->normalMap;
+	return _parts.at(partId)->normalTextureBuffer;
 }
 
 const fvec3& ModelEntity::getColor(const string& partId) const

@@ -7,67 +7,67 @@ using std::clamp;
 
 void RenderStorage::setPlanarReflectionMap(shared_ptr<TextureBuffer> value)
 {
-	_planarReflectionMap = value;
+	_planarReflectionTextureBuffer = value;
 }
 
 void RenderStorage::setWaterReflectionMap(shared_ptr<TextureBuffer> value)
 {
-	_waterReflectionMap = value;
+	_waterReflectionTextureBuffer = value;
 }
 
 void RenderStorage::setWaterRefractionMap(shared_ptr<TextureBuffer> value)
 {
-	_waterRefractionMap = value;
+	_waterRefractionTextureBuffer = value;
 }
 
 void RenderStorage::setWaterEdgeMap(shared_ptr<TextureBuffer> value)
 {
-	_waterEdgeMap = value;
+	_waterEdgeTextureBuffer = value;
 }
 
 void RenderStorage::setBloomMap(shared_ptr<TextureBuffer> value)
 {
-	_bloomMap = value;
+	_bloomTextureBuffer = value;
 }
 
 void RenderStorage::setPrimarySceneMap(shared_ptr<TextureBuffer> value)
 {
-	_primarySceneMap = value;
+	_primarySceneTextureBuffer = value;
 }
 
 void RenderStorage::setSecondarySceneMap(shared_ptr<TextureBuffer> value)
 {
-	_secondarySceneMap = value;
+	_secondarySceneTextureBuffer = value;
 }
 
 void RenderStorage::setShadowMap(shared_ptr<TextureBuffer> value)
 {
-	_shadowMap = value;
+	_shadowTextureBuffer = value;
 }
 
 void RenderStorage::setMotionBlurMap(shared_ptr<TextureBuffer> value)
 {
-	_motionBlurMap = value;
+	_motionBlurTextureBuffer = value;
 }
 
 void RenderStorage::setLensFlareMap(shared_ptr<TextureBuffer> value)
 {
-	_lensFlareMap = value;
+	_lensFlareTextureBuffer = value;
 }
 
 void RenderStorage::setDepthMap(shared_ptr<TextureBuffer> value)
 {
-	_depthMap = value;
+	_depthTextureBuffer = value;
 }
 
 void RenderStorage::setDofMap(shared_ptr<TextureBuffer> value)
 {
-	_dofMap = value;
+	_dofTextureBuffer = value;
 }
 
 void RenderStorage::setFinalSceneMap(shared_ptr<TextureBuffer> value)
 {
-	_finalSceneMap = value;
+	_finalSceneTextureBuffer = value;
 }
 
 void RenderStorage::setShadowView(const mat44& value)
@@ -408,69 +408,69 @@ void RenderStorage::setCubeReflectionInterval(unsigned int value)
 	_cubeReflectionInterval = value;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getPlanarReflectionMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getPlanarReflectionTextureBuffer() const
 {
-	return _planarReflectionMap;
+	return _planarReflectionTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getWaterReflectionMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getWaterReflectionTextureBuffer() const
 {
-	return _waterReflectionMap;
+	return _waterReflectionTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getWaterRefractionMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getWaterRefractionTextureBuffer() const
 {
-	return _waterRefractionMap;
+	return _waterRefractionTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getWaterEdgeMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getWaterEdgeTextureBuffer() const
 {
-	return _waterEdgeMap;
+	return _waterEdgeTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getBloomMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getBloomTextureBuffer() const
 {
-	return _bloomMap;
+	return _bloomTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getPrimarySceneMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getPrimarySceneTextureBuffer() const
 {
-	return _primarySceneMap;
+	return _primarySceneTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getSecondarySceneMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getSecondarySceneTextureBuffer() const
 {
-	return _secondarySceneMap;
+	return _secondarySceneTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getShadowMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getShadowTextureBuffer() const
 {
-	return _shadowMap;
+	return _shadowTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getMotionBlurMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getMotionBlurTextureBuffer() const
 {
-	return _motionBlurMap;
+	return _motionBlurTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getLensFlareMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getLensFlareTextureBuffer() const
 {
-	return _lensFlareMap;
+	return _lensFlareTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getDepthMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getDepthTextureBuffer() const
 {
-	return _depthMap;
+	return _depthTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getDofMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getDofTextureBuffer() const
 {
-	return _dofMap;
+	return _dofTextureBuffer;
 }
 
-const shared_ptr<TextureBuffer> RenderStorage::getFinalSceneMap() const
+const shared_ptr<TextureBuffer> RenderStorage::getFinalSceneTextureBuffer() const
 {
-	return _finalSceneMap;
+	return _finalSceneTextureBuffer;
 }
 
 const mat44& RenderStorage::getShadowView() const

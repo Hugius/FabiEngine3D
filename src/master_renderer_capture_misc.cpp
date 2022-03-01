@@ -9,7 +9,7 @@ void MasterRenderer::captureWorldDepth()
 		return;
 	}
 
-	_worldDepthCaptor->bind();
+	_worldDepthCaptureBuffer->bind();
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -116,9 +116,9 @@ void MasterRenderer::captureWorldDepth()
 		_aabbEntityDepthRenderer->unbind();
 	}
 
-	_worldDepthCaptor->unbind();
+	_worldDepthCaptureBuffer->unbind();
 
-	_renderStorage->setDepthMap(_worldDepthCaptor->getTexture(0));
+	_renderStorage->setDepthMap(_worldDepthCaptureBuffer->getTexture(0));
 }
 
 void MasterRenderer::captureDof()
@@ -126,16 +126,16 @@ void MasterRenderer::captureDof()
 	if(_renderStorage->isDofEnabled())
 	{
 		_dofBlurRenderer->bind();
-		_renderStorage->setDofMap(_dofBlurRenderer->blurTexture(_renderSurface, _renderStorage->getFinalSceneMap(), 2, 1.0f, BlurDirection::BOTH));
+		_renderStorage->setDofMap(_dofBlurRenderer->blurTexture(_renderSurface, _renderStorage->getFinalSceneTextureBuffer(), 2, 1.0f, BlurDirection::BOTH));
 		_dofBlurRenderer->unbind();
 
-		_dofCaptor->bind();
+		_dofCaptureBuffer->bind();
 		_dofRenderer->bind();
 		_dofRenderer->render(_renderSurface);
 		_dofRenderer->unbind();
-		_dofCaptor->unbind();
+		_dofCaptureBuffer->unbind();
 
-		_renderStorage->setFinalSceneMap(_dofCaptor->getTexture(0));
+		_renderStorage->setFinalSceneMap(_dofCaptureBuffer->getTexture(0));
 	}
 	else
 	{
@@ -147,13 +147,13 @@ void MasterRenderer::captureLensFlare()
 {
 	if(_renderStorage->isLensFlareEnabled())
 	{
-		_lensFlareCaptor->bind();
+		_lensFlareCaptureBuffer->bind();
 		_lensFlareRenderer->bind();
 		_lensFlareRenderer->render(_renderSurface);
 		_lensFlareRenderer->unbind();
-		_lensFlareCaptor->unbind();
+		_lensFlareCaptureBuffer->unbind();
 
-		_renderStorage->setFinalSceneMap(_lensFlareCaptor->getTexture(0));
+		_renderStorage->setFinalSceneMap(_lensFlareCaptureBuffer->getTexture(0));
 	}
 }
 
@@ -185,7 +185,7 @@ void MasterRenderer::captureMotionBlur()
 		if(hasMoved)
 		{
 			_motionBlurBlurRenderer->bind();
-			_renderStorage->setMotionBlurMap(_motionBlurBlurRenderer->blurTexture(_renderSurface, _renderStorage->getFinalSceneMap(), 5, 1.0f, direction));
+			_renderStorage->setMotionBlurMap(_motionBlurBlurRenderer->blurTexture(_renderSurface, _renderStorage->getFinalSceneTextureBuffer(), 5, 1.0f, direction));
 			_motionBlurBlurRenderer->unbind();
 		}
 		else
@@ -194,13 +194,13 @@ void MasterRenderer::captureMotionBlur()
 			_renderStorage->setMotionBlurMap(nullptr);
 		}
 
-		_motionBlurCaptor->bind();
+		_motionBlurCaptureBuffer->bind();
 		_motionBlurRenderer->bind();
 		_motionBlurRenderer->render(_renderSurface);
 		_motionBlurRenderer->unbind();
-		_motionBlurCaptor->unbind();
+		_motionBlurCaptureBuffer->unbind();
 
-		_renderStorage->setFinalSceneMap(_motionBlurCaptor->getTexture(0));
+		_renderStorage->setFinalSceneMap(_motionBlurCaptureBuffer->getTexture(0));
 	}
 	else
 	{
@@ -212,13 +212,13 @@ void MasterRenderer::captureAntiAliasing()
 {
 	if(_renderStorage->isAntiAliasingEnabled())
 	{
-		_antiAliasingCaptor->bind();
+		_antiAliasingCaptureBuffer->bind();
 		_antiAliasingRenderer->bind();
 		_antiAliasingRenderer->render(_renderSurface);
 		_antiAliasingRenderer->unbind();
-		_antiAliasingCaptor->unbind();
+		_antiAliasingCaptureBuffer->unbind();
 
-		_renderStorage->setFinalSceneMap(_antiAliasingCaptor->getTexture(0));
+		_renderStorage->setFinalSceneMap(_antiAliasingCaptureBuffer->getTexture(0));
 	}
 }
 
@@ -228,28 +228,28 @@ void MasterRenderer::captureBloom()
 	{
 		if(_renderStorage->getBloomType() == BloomType::EVERYTHING)
 		{
-			_renderStorage->setBloomMap(_renderStorage->getPrimarySceneMap());
+			_renderStorage->setBloomMap(_renderStorage->getPrimarySceneTextureBuffer());
 		}
 		else
 		{
-			_renderStorage->setBloomMap(_renderStorage->getSecondarySceneMap());
+			_renderStorage->setBloomMap(_renderStorage->getSecondarySceneTextureBuffer());
 		}
 
 		_bloomBlurRendererHighQuality->bind();
-		_renderStorage->setBloomMap(_bloomBlurRendererHighQuality->blurTexture(_renderSurface, _renderStorage->getBloomMap(), _renderStorage->getBloomBlurCount(), _renderStorage->getBloomIntensity(), BlurDirection::BOTH));
+		_renderStorage->setBloomMap(_bloomBlurRendererHighQuality->blurTexture(_renderSurface, _renderStorage->getBloomTextureBuffer(), _renderStorage->getBloomBlurCount(), _renderStorage->getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererHighQuality->unbind();
 
 		_bloomBlurRendererLowQuality->bind();
-		_renderStorage->setBloomMap(_bloomBlurRendererLowQuality->blurTexture(_renderSurface, _renderStorage->getBloomMap(), _renderStorage->getBloomBlurCount(), _renderStorage->getBloomIntensity(), BlurDirection::BOTH));
+		_renderStorage->setBloomMap(_bloomBlurRendererLowQuality->blurTexture(_renderSurface, _renderStorage->getBloomTextureBuffer(), _renderStorage->getBloomBlurCount(), _renderStorage->getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererLowQuality->unbind();
 
-		_bloomCaptor->bind();
+		_bloomCaptureBuffer->bind();
 		_bloomRenderer->bind();
 		_bloomRenderer->render(_renderSurface);
 		_bloomRenderer->unbind();
-		_bloomCaptor->unbind();
+		_bloomCaptureBuffer->unbind();
 
-		_renderStorage->setFinalSceneMap(_bloomCaptor->getTexture(0));
+		_renderStorage->setFinalSceneMap(_bloomCaptureBuffer->getTexture(0));
 	}
 	else
 	{
@@ -261,7 +261,7 @@ void MasterRenderer::captureShadows()
 {
 	if(_renderStorage->isShadowsEnabled())
 	{
-		_shadowCaptor->bind();
+		_shadowCaptureBuffer->bind();
 
 		glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -338,9 +338,9 @@ void MasterRenderer::captureShadows()
 			_quad3dEntityShadowRenderer->unbind();
 		}
 
-		_shadowCaptor->unbind();
+		_shadowCaptureBuffer->unbind();
 
-		_renderStorage->setShadowMap(_shadowCaptor->getTexture(0));
+		_renderStorage->setShadowMap(_shadowCaptureBuffer->getTexture(0));
 	}
 	else
 	{

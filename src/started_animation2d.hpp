@@ -16,9 +16,6 @@ public:
 	void setIntervalMultiplier(unsigned int value);
 	void setIntervalDivider(unsigned int value);
 
-	const string& getAnimationId() const;
-	const string& getQuadId() const;
-
 	const int getPlayCount() const;
 
 	const unsigned int getUpdateCount() const;

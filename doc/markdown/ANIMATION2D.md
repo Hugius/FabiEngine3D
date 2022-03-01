@@ -25,7 +25,7 @@
 
 - **Play Count**: the amount of (remaining) times the animation must play
   - Type: `integer`
-  - Constraints: at least `0` or `-1`
+  - Constraints: at least `-1`
 - **Row Index**: the row index of the current animated texture frame
   - Type: `integer`
   - Constraints: at least `0`

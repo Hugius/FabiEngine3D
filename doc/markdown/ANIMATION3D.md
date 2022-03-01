@@ -9,26 +9,11 @@
 - The last keyframe should be the same as the first keyframe.
 - If the model entity is multiparted, each part can be animated independently.
 
-## 2. Animation Properties
+## 2. Base Properties
 
 - **ID**: the identifier of the sound
   - Type: `string`
   - Constraints: must be unique, cannot be changed
-- **Speed**: the speed multiplier of the animation
-  - Type: `decimal`
-  - Constraints: at least `0`
-- **Play Count**: the amount of (remaining) times the animation must play
-  - Type: `integer`
-  - Constraints: at least `0` or `-1`
-- **Frame Index**: the index of the current animation frame
-  - Type: `integer`
-  - Constraints: at least `0`
-- **Paused**: the animation is paused immediately
-  - Type: `boolean`
-  - Constraints: none
-- **Autopaused**: the animation is automatically paused after the current frame
-  - Type: `boolean`
-  - Constraints: none
 
 ## 3. Frame Properties
 
@@ -47,3 +32,21 @@
 - **Speed Type**: the type of speed
   - Type: `enumeration`
   - Constraints: `LINEAR` or `EXPONENT` or `INSTANT`
+
+## 4. Started Properties
+
+- **Play Count**: the amount of (remaining) times the animation must play
+  - Type: `integer`
+  - Constraints: at least `-1`
+- **Speed Multiplier**: the speed multiplier of the animation
+  - Type: `decimal`
+  - Constraints: at least `0`
+- **Frame Index**: the index of the current animation frame
+  - Type: `integer`
+  - Constraints: at least `0`
+- **Paused**: the animation is paused
+  - Type: `boolean`
+  - Constraints: none
+- **Autopaused**: the animation is automatically paused after the current frame
+  - Type: `boolean`
+  - Constraints: none

@@ -26,15 +26,21 @@
 ## 2.1 Cursor Ray
 
 - The cursor ray is a normalized ray from the cursor to 3D space.
-- Every engine update the cursor ray is recalculated.
-- The ray is the 3D direction of the cursor.
+- The position of the ray is simply the camera position.
+- The direction of the ray is simply to where the cursor is pointing at.
+- Every engine update the cursor ray is calculated.
 
-## 2.1 Terrain Entity Pointing
+## 2.1 Terrain Entity Intersection
 
-- FabiEngine3D supports 3D cursor picking on the terrain entity.
+- FabiEngine3D supports cursor intersection with the terrain entity.
+- Used in the mouse picking system of the world editor.
+- Can be used for determining the distance from the camera to the terrain entity.
 - Terrain entity pointing can be configured for performance.
 
-## 2.2 AABB Entity Selection
+## 2.2 AABB Entity Intersection
 
-- FabiEngine3D supports AABB entity selection with the cursor.
-- Intersection between the cursor ray and AABB entities is calculated.
+- FabiEngine3D supports cursor intersection with AABB entities.
+- Used in the entity selection system of the world editor.
+- Can be used to check if the camera is looking at a certain AABB entity.
+- Can be used for determining the distance from the camera to a certain AABB entity.
+- If terrain entity intersection is enabled, the terrain entity can block AABB intersection.

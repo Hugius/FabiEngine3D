@@ -11,9 +11,13 @@
 
 ## 2. Base Properties
 
-- **ID**: the identifier of the sound
+- **ID**: the identifier of the animation
   - Type: `string`
   - Constraints: must be unique, cannot be changed
+- **Part IDs**: the identifiers of the animation parts
+  - Type: `string`
+  - Constraints: must be unique, cannot be changed
+- **Frames**: the frames of the animation
 
 ## 3. Frame Properties
 

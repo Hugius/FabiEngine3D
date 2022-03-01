@@ -6,6 +6,8 @@
 - Every entity that you place is based on the version in their own editor.
 - Only the changes in the entities made in the world editor are saved.
 - Placed entities can be selected if it has 1 or more bound AABB entities.
+- Each world has its own ID counter, which starts from 0.
+- Every entity that you place will increase the ID counter by 1, so that all entities are unique.
 
 ## 2. Controls
 

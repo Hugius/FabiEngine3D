@@ -219,6 +219,17 @@ void ScriptInterpreter::unload()
 		_worldEditor->clearLoadedWorld();
 	}
 
+	_skyEditor->deleteLoadedEntities();
+	_terrainEditor->deleteLoadedEntities();
+	_waterEditor->deleteLoadedEntities();
+	_modelEditor->deleteLoadedEntities();
+	_quad3dEditor->deleteLoadedEntities();
+	_quad2dEditor->deleteLoadedEntities();
+	_text2dEditor->deleteLoadedEntities();
+	_animation2dEditor->deleteLoadedAnimations();
+	_animation3dEditor->deleteLoadedAnimations();
+	_soundEditor->deleteLoadedSounds();
+
 	for(const auto& id : _fe3d->sky_getIds())
 	{
 		_fe3d->sky_delete(id);
@@ -304,9 +315,6 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d->sound2d_delete(id);
 	}
-
-	_quad2dEditor->deleteLoadedEntities();
-	_text2dEditor->deleteLoadedEntities();
 
 	_fe3d->camera_reset();
 

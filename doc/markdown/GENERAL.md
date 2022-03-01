@@ -11,24 +11,25 @@
 
 ### 1.2 Rendering
 
-- **3D Entities**: Sky, Terrain, Water, Model, Quad3D
-- **2D Entities**: Quad2D, Text2D
+- **3D Entities**: sky, terrain, water, model, quad3D, text3D
+- **2D Entities**: quad2D, text2D
 - **Textures**: blend, cube, diffuse, displacement, dudv, emission, flare, font, height, normal, reflection, specular
 - **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting
-- **Post Processing**: bloom, DOF, motion blur, anti aliasing, lens flare, gamma correction
+- **Post-Processing**: bloom, DOF, motion blur, anti-aliasing, lens flare, gamma correction
 - **Miscellaneous**: shadows, cube reflections, planar reflections, fog, sky exposure, anisotropic filtering
 
 ### 1.3 Physics
 
+- 3D camera system
 - 3D AABB system
 - 3D collision detection system
 - 3D collision response system
-- 3D raycasting system
-- 3D camera system
+- 3D raycast detection system
+- 3D raycast response system
 
 ### 1.4 Animations
 
-- 2D sprite animations
+- 2D texture animations
 - 3D mesh animations
 
 ### 1.5 Audio
@@ -48,6 +49,7 @@
 - Multiple networking clients
 - TCP messaging
 - UDP messaging
+- Multithreading
 
 ### 1.8 Miscellaneous
 
@@ -60,20 +62,17 @@
 
 ## 2. Folder Structure
 
-> You can start the engine by running `~\app\binaries\fe3d.exe`
-
-### 2.1 Overview
-
 ```text
 ~
 └── app
-  └── binaries (do NOT touch)
-  └── engine (do NOT touch)
+  └── binaries (do NOT change)
+  └── engine (do NOT change)
   └── projects
     └── <your_project>
       └── assets
         └── audio
         └── image
+        └── mesh
           └── entity
             └── model
             └── quad2d
@@ -81,48 +80,35 @@
             └── sky
             └── terrain
             └── text2d
+            └── text3d
             └── water
           └── misc
             └── flare_map
         └── mesh
-      └── data (do NOT touch)
-      └── saves (do NOT touch)
-      └── scripts (do NOT touch)
-      └── worlds (do NOT touch)
-└── dev (do NOT touch)
-└── doc (do NOT touch)
-└── src (do NOT touch)
+      └── data (do NOT change)
+      └── saves (do NOT change)
+      └── scripts (do NOT change)
+      └── worlds (do NOT change)
+└── dev (do NOT change)
+└── doc (do NOT change)
+└── src (do NOT change)
 ```
 
-### 2.2 Explanation
+## 3. Executable
 
-- `~\app\`: contains the engine application
-  - `binaries\`: contains the engine executable
-  - `engine\`: contains runtime engine files
-  - `projects\`: contains all your projects
-    - `assets\`: contains all project assets
-      - `audio\`: contains all project audio files
-      - `image\`: contains all project image files
-      - `mesh\`: contains all project mesh files
-    - `data\`: contains all project editor data
-    - `saves\`: contains all project save files
-    - `worlds\`: contains all project world files
-    - `scripts\`: contains all project script files
-- `~\dev\`: contains the engine development systems
-- `~\doc\`: contains the engine documentation
-- `~\src\`: contains the engine source code
+&#8594; You can start the engine by running `~\app\binaries\fe3d.exe` &#8592;
 
-## 3. Engine Interface
+## 4. Engine Interface
 
+- **Mid Viewport**: 3D display screen
 - **Left Viewport**: editors
-- **Top Viewport**: project management & preview management
+- **Top Viewport**: project/preview management
 - **Right Viewport**: controls & properties
 - **Bottom Viewport**: statistics & logging
-- **Mid Viewport**: 3D display screen
 
-## 4. Terminology
+## 5. Terminology
 
-- **String**: a concatenation of characters(example: `hello123!@#`)
+- **String**: a concatenation of characters (example: `hello123!@#`)
 - **Decimal3**: a collection of 3 decimals
 - **Decimal2**: a collection of 2 decimals
 - **Decimal**: a floating point number (example: `3.1415`)

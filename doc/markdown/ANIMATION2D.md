@@ -3,7 +3,7 @@
 ## 1. General
 
 - Animation2D is used for creating 2D texture animations.
-- These animations can be applied to Quad2D/Quad3D entities.
+- These animations can be applied to quad2D/quad3D entities.
 - Animated textures should consist of multiple smaller animation frames, divided by rows and columns.
 
 ## 2. Base Properties

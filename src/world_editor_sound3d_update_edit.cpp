@@ -79,7 +79,7 @@ void WorldEditor::_updateSoundEditing()
 
 			if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d->model_delete("speaker_" + _activeSoundId);
+				_fe3d->model_delete("@@speaker_" + _activeSoundId);
 				_fe3d->sound3d_delete(_activeSoundId);
 				_loadedSoundIds.erase(_activeSoundId);
 				_activeSoundId = "";
@@ -98,7 +98,7 @@ void WorldEditor::_updateSoundEditing()
 			_handleValueChanging("soundPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / SOUND_POSITION_DIVIDER));
 			_handleValueChanging("soundPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / SOUND_POSITION_DIVIDER));
 			_fe3d->sound3d_setPosition(_activeSoundId, position);
-			_fe3d->model_setBasePosition(("speaker_" + _activeSoundId), position);
+			_fe3d->model_setBasePosition(("@@speaker_" + _activeSoundId), position);
 
 			_handleValueChanging("soundPropertiesMenu", "distancePlus", "distance", maxDistance, (_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);
 			_handleValueChanging("soundPropertiesMenu", "distanceMinus", "distance", maxDistance, -(_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);

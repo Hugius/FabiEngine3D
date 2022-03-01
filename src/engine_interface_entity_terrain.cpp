@@ -24,7 +24,7 @@ void EngineInterface::terrain_select(const string& id)
 void EngineInterface::terrain_setMaxHeight(const string& id, float value)
 {
 	_core->getTerrainEntityManager()->getEntity(id)->setMaxHeight(value);
-	_core->getTerrainEntityManager()->loadMesh(id);
+	_core->getTerrainEntityManager()->loadVertexBuffer(id);
 }
 
 void EngineInterface::terrain_setTextureRepeat(const string& id, float value)

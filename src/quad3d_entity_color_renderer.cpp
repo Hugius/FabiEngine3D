@@ -87,10 +87,10 @@ void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 		glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap()->getId());
 	}
 
-	glBindVertexArray(entity->getMesh()->getVaoId());
+	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
-	_renderStorage->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
+	glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer()->getVertexCount());
+	_renderStorage->increaseTriangleCount(entity->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 

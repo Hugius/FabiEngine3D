@@ -6,9 +6,9 @@
 using std::max;
 using std::clamp;
 
-void Quad2dEntity::setMesh(shared_ptr<VertexBuffer> value)
+void Quad2dEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_mesh = value;
+	_vertexBuffer = value;
 }
 
 void Quad2dEntity::updateTarget()
@@ -186,9 +186,9 @@ void Quad2dEntity::setUvOffset(const fvec2& value)
 	_uvOffset = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-const shared_ptr<VertexBuffer> Quad2dEntity::getMesh() const
+const shared_ptr<VertexBuffer> Quad2dEntity::getVertexBuffer() const
 {
-	return _mesh;
+	return _vertexBuffer;
 }
 
 const shared_ptr<TextureBuffer> Quad2dEntity::getDiffuseMap() const

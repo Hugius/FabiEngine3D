@@ -68,7 +68,7 @@ void TerrainEntityManager::createEntity(const string& id, const string& heightMa
 
 	_entities.insert({id, entity});
 
-	loadMesh(id);
+	loadVertexBuffer(id);
 }
 
 void TerrainEntityManager::selectEntity(const string& id)
@@ -118,12 +118,12 @@ const bool TerrainEntityManager::isEntitiesExisting() const
 	return !_entities.empty();
 }
 
-void TerrainEntityManager::loadMesh(const string& id)
+void TerrainEntityManager::loadVertexBuffer(const string& id)
 {
-	_loadMesh(getEntity(id), getEntity(id)->getSize(), getEntity(id)->getMaxHeight(), getEntity(id)->getPixels());
+	_loadVertexBuffer(getEntity(id), getEntity(id)->getSize(), getEntity(id)->getMaxHeight(), getEntity(id)->getPixels());
 }
 
-void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float>& pixels)
+void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float>& pixels)
 {
 	const auto halfSize = (size * 0.5f);
 	const auto uSize = static_cast<unsigned int>(size);
@@ -238,7 +238,7 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 
 	auto bufferDataCount = static_cast<unsigned int>(bufferData.size());
 
-	entity->setMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], bufferDataCount));
+	entity->setVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], bufferDataCount));
 }
 
 const float TerrainEntityManager::getPixelHeight(const string& id, float x, float z)

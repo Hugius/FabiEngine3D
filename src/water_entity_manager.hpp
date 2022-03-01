@@ -13,7 +13,7 @@ public:
 	void createEntity(const string& id);
 	void deleteEntity(const string& id);
 	void deleteEntities();
-	void loadMesh(const string& id);
+	void loadVertexBuffer(const string& id);
 	void selectEntity(const string& id);
 
 	const bool isEntityExisting(const string& id) const;
@@ -25,7 +25,7 @@ public:
 	shared_ptr<WaterEntity> getSelectedEntity();
 
 private:
-	void _loadMesh(shared_ptr<WaterEntity> entity, float size);
+	void _loadVertexBuffer(shared_ptr<WaterEntity> entity, float size);
 
 	string _selectedEntityId = "";
 

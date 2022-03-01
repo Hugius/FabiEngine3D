@@ -130,7 +130,7 @@ void ModelEntity::updateTransformation()
 	}
 }
 
-void ModelEntity::setMesh(const string& partId, shared_ptr<VertexBuffer> value)
+void ModelEntity::setVertexBuffer(const string& partId, shared_ptr<VertexBuffer> value)
 {
 	_parts.at(partId)->vertexBuffer = value;
 }
@@ -518,7 +518,7 @@ void ModelEntity::_correctSizeTarget(fvec3& current, const fvec3& target, float 
 	}
 }
 
-const shared_ptr<VertexBuffer> ModelEntity::getMesh(const string& partId) const
+const shared_ptr<VertexBuffer> ModelEntity::getVertexBuffer(const string& partId) const
 {
 	return _parts.at(partId)->vertexBuffer;
 }

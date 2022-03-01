@@ -13,7 +13,7 @@ class TerrainEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setMesh(shared_ptr<VertexBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setPixels(const vector<float>& value);
 	void setHeightMapPath(const string& value);
 	void setDiffuseMap(shared_ptr<TextureBuffer> value);
@@ -74,7 +74,7 @@ public:
 	const bool isSpecular() const;
 	const bool isWireframed() const;
 
-	const shared_ptr<VertexBuffer> getMesh() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDiffuseMap() const;
 	const shared_ptr<TextureBuffer> getNormalMap() const;
 	const shared_ptr<TextureBuffer> getBlendMap() const;
@@ -114,7 +114,7 @@ private:
 	bool _isSpecular = false;
 	bool _isWireframed = false;
 
-	shared_ptr<VertexBuffer> _mesh = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _diffuseMap = nullptr;
 	shared_ptr<TextureBuffer> _normalMap = nullptr;
 	shared_ptr<TextureBuffer> _blendMap = nullptr;

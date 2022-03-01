@@ -15,7 +15,7 @@ public:
 
 	void updateTarget();
 	void updateCharacterEntities();
-	void setMesh(shared_ptr<VertexBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setContent(const string& value);
 	void setFontMapPath(const string& value);
 	void setFontMap(shared_ptr<TextureBuffer> value);
@@ -75,7 +75,7 @@ public:
 	const bool isCentered() const;
 
 	const vector<shared_ptr<Quad3dEntity>>& getCharacterEntities() const;
-	const shared_ptr<VertexBuffer> getMesh() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getFontMap() const;
 
 private:
@@ -216,6 +216,6 @@ private:
 	bool _isCentered = false;
 
 	vector<shared_ptr<Quad3dEntity>> _characterEntities;
-	shared_ptr<VertexBuffer> _mesh = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _fontMap = nullptr;
 };

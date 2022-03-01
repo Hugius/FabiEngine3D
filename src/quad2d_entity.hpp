@@ -13,7 +13,7 @@ class Quad2dEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setMesh(shared_ptr<VertexBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTarget();
 	void updateTransformation();
 	void setDiffuseMap(shared_ptr<TextureBuffer> value);
@@ -64,7 +64,7 @@ public:
 	const bool isFlippedHorizonally() const;
 	const bool isVerticallyFlipped() const;
 
-	const shared_ptr<VertexBuffer> getMesh() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDiffuseMap() const;
 
 private:
@@ -98,6 +98,6 @@ private:
 	bool _isVerticallyFlipped = false;
 	bool _isWireframed = false;
 
-	shared_ptr<VertexBuffer> _mesh = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _diffuseMap = nullptr;
 };

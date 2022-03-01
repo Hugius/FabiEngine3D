@@ -52,7 +52,7 @@ void WaterEntityManager::createEntity(const string& id)
 
 	_entities.insert({id, entity});
 
-	loadMesh(id);
+	loadVertexBuffer(id);
 }
 
 void WaterEntityManager::deleteEntity(const string& id)
@@ -77,9 +77,9 @@ void WaterEntityManager::deleteEntities()
 	selectEntity("");
 }
 
-void WaterEntityManager::loadMesh(const string& id)
+void WaterEntityManager::loadVertexBuffer(const string& id)
 {
-	_loadMesh(getEntity(id), getEntity(id)->getSize());
+	_loadVertexBuffer(getEntity(id), getEntity(id)->getSize());
 }
 
 const bool WaterEntityManager::isEntityExisting(const string& id) const
@@ -92,7 +92,7 @@ const bool WaterEntityManager::isEntitiesExisting() const
 	return !_entities.empty();
 }
 
-void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
+void WaterEntityManager::_loadVertexBuffer(shared_ptr<WaterEntity> entity, float size)
 {
 	const float halfSize = (size * 0.5f);
 
@@ -176,8 +176,8 @@ void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 	auto lowQualityBufferDataCount = static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float));
 	auto highQualityBufferDataCount = static_cast<unsigned int>(highQualityBufferData.size());
 
-	entity->setLowQualityMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
-	entity->setHighQualityMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &highQualityBufferData[0], highQualityBufferDataCount));
+	entity->setLowQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
+	entity->setHighQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &highQualityBufferData[0], highQualityBufferDataCount));
 }
 
 void WaterEntityManager::update()

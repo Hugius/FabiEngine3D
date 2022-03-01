@@ -5,8 +5,8 @@ using std::make_shared;
 
 Text2dEntityManager::Text2dEntityManager()
 	:
-	_centeredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
-	_corneredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
+	_centeredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
+	_corneredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
 
 }
@@ -53,7 +53,7 @@ void Text2dEntityManager::createEntity(const string& id, const string& fontMapPa
 
 	auto entity = make_shared<Text2dEntity>(id);
 
-	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
+	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
 	entity->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
 	entity->setFontMapPath(fontMapPath);
 	entity->setCentered(isCentered);

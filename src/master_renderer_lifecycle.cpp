@@ -40,7 +40,7 @@ MasterRenderer::MasterRenderer()
 	_motionBlurBlurRenderer = make_unique<BlurRenderer>();
 
 	_renderSurface = make_shared<Quad2dEntity>("renderQuad");
-	_renderSurface->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
+	_renderSurface->setVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	_renderSurface->setCentered(true);
 
 	_skyEntityColorShader = make_shared<ShaderBuffer>("sky_entity_color_shader.vert", "sky_entity_color_shader.frag");

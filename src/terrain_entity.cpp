@@ -3,9 +3,9 @@
 using std::max;
 using std::clamp;
 
-void TerrainEntity::setMesh(shared_ptr<VertexBuffer> value)
+void TerrainEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_mesh = value;
+	_vertexBuffer = value;
 }
 
 void TerrainEntity::setPixels(const vector<float>& value)
@@ -313,9 +313,9 @@ const float TerrainEntity::getSpecularIntensity() const
 	return _specularIntensity;
 }
 
-const shared_ptr<VertexBuffer> TerrainEntity::getMesh() const
+const shared_ptr<VertexBuffer> TerrainEntity::getVertexBuffer() const
 {
-	return _mesh;
+	return _vertexBuffer;
 }
 
 const vector<float>& TerrainEntity::getPixels() const

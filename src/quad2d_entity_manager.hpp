@@ -25,8 +25,8 @@ public:
 	shared_ptr<Quad2dEntity> getEntity(const string& id);
 
 private:
-	const shared_ptr<VertexBuffer> _centeredMesh;
-	const shared_ptr<VertexBuffer> _corneredMesh;
+	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
+	const shared_ptr<VertexBuffer> _corneredVertexBuffer;
 
 	unordered_map<string, shared_ptr<Quad2dEntity>> _entities;
 

@@ -117,7 +117,7 @@ void Text3dEntity::setContent(const string& value)
 			const auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
 
 			auto characterEntity = make_shared<Quad3dEntity>("dummy");
-			characterEntity->setMesh(_mesh);
+			characterEntity->setVertexBuffer(_vertexBuffer);
 			characterEntity->setDiffuseMapPath(_fontMapPath);
 			characterEntity->setDiffuseMap(_fontMap);
 			characterEntity->setOpacity(_opacity);
@@ -144,13 +144,13 @@ void Text3dEntity::setContent(const string& value)
 	}
 }
 
-void Text3dEntity::setMesh(shared_ptr<VertexBuffer> value)
+void Text3dEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_mesh = value;
+	_vertexBuffer = value;
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setMesh(_mesh);
+		character->setVertexBuffer(_vertexBuffer);
 	}
 }
 
@@ -407,9 +407,9 @@ const vector<shared_ptr<Quad3dEntity>>& Text3dEntity::getCharacterEntities() con
 	return _characterEntities;
 }
 
-const shared_ptr<VertexBuffer> Text3dEntity::getMesh() const
+const shared_ptr<VertexBuffer> Text3dEntity::getVertexBuffer() const
 {
-	return _mesh;
+	return _vertexBuffer;
 }
 
 const shared_ptr<TextureBuffer> Text3dEntity::getFontMap() const

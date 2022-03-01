@@ -29,8 +29,8 @@ constexpr unsigned int standingBufferDataCount = static_cast<unsigned int>(sizeo
 
 Text3dEntityManager::Text3dEntityManager()
 	:
-	_centeredMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
-	_standingMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
+	_centeredVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
+	_standingVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
 {
 
 }
@@ -98,7 +98,7 @@ void Text3dEntityManager::createEntity(const string& id, const string& fontMapPa
 
 	auto entity = make_shared<Text3dEntity>(id);
 
-	entity->setMesh(isCentered ? _centeredMesh : _standingMesh);
+	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	entity->setCentered(isCentered);
 	entity->setFontMap(_textureBufferCache->get2dBuffer(fontMapPath));
 	entity->setFontMapPath(fontMapPath);

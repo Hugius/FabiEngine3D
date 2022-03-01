@@ -47,10 +47,10 @@ void AabbEntityDepthRenderer::render(const shared_ptr<AabbEntity> entity)
 	_shader->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
 	_shader->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
 
-	glBindVertexArray(entity->getMesh()->getVaoId());
+	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_LINE_STRIP, 0, entity->getMesh()->getVertexCount());
-	_renderStorage->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
+	glDrawArrays(GL_LINE_STRIP, 0, entity->getVertexBuffer()->getVertexCount());
+	_renderStorage->increaseTriangleCount(entity->getVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 }

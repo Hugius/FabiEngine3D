@@ -6,9 +6,9 @@
 using std::clamp;
 using std::max;
 
-void Quad3dEntity::setMesh(shared_ptr<VertexBuffer> value)
+void Quad3dEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_mesh = value;
+	_vertexBuffer = value;
 }
 
 void Quad3dEntity::updateTarget()
@@ -280,9 +280,9 @@ void Quad3dEntity::setMinTextureAlpha(float value)
 	_minTextureAlpha = value;
 }
 
-const shared_ptr<VertexBuffer> Quad3dEntity::getMesh() const
+const shared_ptr<VertexBuffer> Quad3dEntity::getVertexBuffer() const
 {
-	return _mesh;
+	return _vertexBuffer;
 }
 
 const mat44& Quad3dEntity::getTransformation() const

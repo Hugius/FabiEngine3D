@@ -13,8 +13,8 @@ class WaterEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setLowQualityMesh(shared_ptr<VertexBuffer> value);
-	void setHighQualityMesh(shared_ptr<VertexBuffer> value);
+	void setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value);
+	void setHighQualityVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setRippleSpeed(const fvec2& value);
 	void setWaveSpeed(const fvec2& value);
 	void setRippleOffset(const fvec2& value);
@@ -66,8 +66,8 @@ public:
 	const bool isWireframed() const;
 	const bool isEdged() const;
 
-	const shared_ptr<VertexBuffer> getLowQualityMesh() const;
-	const shared_ptr<VertexBuffer> getHighQualityMesh() const;
+	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
+	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDudvMap() const;
 	const shared_ptr<TextureBuffer> getNormalMap() const;
 	const shared_ptr<TextureBuffer> getDisplacementMap() const;
@@ -101,8 +101,8 @@ private:
 	bool _isRefractive = false;
 	bool _isWireframed = false;
 
-	shared_ptr<VertexBuffer> _lowQualityMesh = nullptr;
-	shared_ptr<VertexBuffer> _highQualityMesh = nullptr;
+	shared_ptr<VertexBuffer> _lowQualityVertexBuffer = nullptr;
+	shared_ptr<VertexBuffer> _highQualityVertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _dudvMap = nullptr;
 	shared_ptr<TextureBuffer> _normalMap = nullptr;
 	shared_ptr<TextureBuffer> _displacementMap = nullptr;

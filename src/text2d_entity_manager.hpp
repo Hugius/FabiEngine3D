@@ -30,8 +30,8 @@ public:
 	shared_ptr<Text2dEntity> getEntity(const string& id);
 
 private:
-	const shared_ptr<VertexBuffer> _centeredMesh;
-	const shared_ptr<VertexBuffer> _corneredMesh;
+	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
+	const shared_ptr<VertexBuffer> _corneredVertexBuffer;
 
 	unordered_map<string, shared_ptr<Text2dEntity>> _entities;
 

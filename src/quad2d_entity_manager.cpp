@@ -5,8 +5,8 @@ using std::make_shared;
 
 Quad2dEntityManager::Quad2dEntityManager()
 	:
-	_centeredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
-	_corneredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
+	_centeredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
+	_corneredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
 
 }
@@ -37,7 +37,7 @@ void Quad2dEntityManager::createEntity(const string& id, bool isCentered)
 
 	auto entity = make_shared<Quad2dEntity>(id);
 
-	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
+	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
 	entity->setCentered(isCentered);
 	entity->setDepth(_renderStorage->getGuiDepth());
 

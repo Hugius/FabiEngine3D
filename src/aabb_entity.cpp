@@ -5,9 +5,9 @@
 using std::max;
 using std::clamp;
 
-void AabbEntity::setMesh(shared_ptr<VertexBuffer> value)
+void AabbEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_mesh = value;
+	_vertexBuffer = value;
 }
 
 void AabbEntity::updateTarget()
@@ -149,9 +149,9 @@ void AabbEntity::setLocalSize(const fvec3& value)
 	_localSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-const shared_ptr<VertexBuffer> AabbEntity::getMesh()const
+const shared_ptr<VertexBuffer> AabbEntity::getVertexBuffer()const
 {
-	return _mesh;
+	return _vertexBuffer;
 }
 
 const mat44& AabbEntity::getTransformation() const

@@ -47,10 +47,10 @@ void WaterEntityDepthRenderer::render(const shared_ptr<WaterEntity> entity)
 	_shader->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
 	_shader->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
 
-	glBindVertexArray(entity->getLowQualityMesh()->getVaoId());
+	glBindVertexArray(entity->getLowQualityVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityMesh()->getVertexCount());
-	_renderStorage->increaseTriangleCount(entity->getLowQualityMesh()->getVertexCount() / 3);
+	glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityVertexBuffer()->getVertexCount());
+	_renderStorage->increaseTriangleCount(entity->getLowQualityVertexBuffer()->getVertexCount() / 3);
 
 	glBindVertexArray(0);
 }

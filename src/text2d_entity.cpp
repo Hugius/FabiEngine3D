@@ -111,7 +111,7 @@ void Text2dEntity::setContent(const string& value)
 			const auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
 
 			auto characterEntity = make_shared<Quad2dEntity>("dummy");
-			characterEntity->setMesh(_mesh);
+			characterEntity->setVertexBuffer(_vertexBuffer);
 			characterEntity->setDiffuseMapPath(_fontMapPath);
 			characterEntity->setDiffuseMap(_fontMap);
 			characterEntity->setHorizontallyFlipped(_isHorizontallyFlipped);
@@ -203,13 +203,13 @@ void Text2dEntity::setFontMapPath(const string& value)
 	}
 }
 
-void Text2dEntity::setMesh(shared_ptr<VertexBuffer> value)
+void Text2dEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_mesh = value;
+	_vertexBuffer = value;
 
 	for(const auto& character : _characterEntities)
 	{
-		character->setMesh(_mesh);
+		character->setVertexBuffer(_vertexBuffer);
 	}
 }
 
@@ -346,9 +346,9 @@ const vector<shared_ptr<Quad2dEntity>>& Text2dEntity::getCharacterEntities() con
 	return _characterEntities;
 }
 
-const shared_ptr<VertexBuffer> Text2dEntity::getMesh() const
+const shared_ptr<VertexBuffer> Text2dEntity::getVertexBuffer() const
 {
-	return _mesh;
+	return _vertexBuffer;
 }
 
 const shared_ptr<TextureBuffer> Text2dEntity::getFontMap() const

@@ -103,7 +103,7 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 			_vertexBufferCache->storeBuffer(meshPath, part->getId(), vertexBuffer);
 		}
 
-		entity->setMesh(part->getId(), vertexBuffer);
+		entity->setVertexBuffer(part->getId(), vertexBuffer);
 	}
 
 	entity->setMeshPath(meshPath);

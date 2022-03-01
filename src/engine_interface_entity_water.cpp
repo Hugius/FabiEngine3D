@@ -30,7 +30,7 @@ void EngineInterface::water_setSize(const string& id, float value)
 {
 	_core->getWaterEntityManager()->getEntity(id)->setSize(value);
 
-	_core->getWaterEntityManager()->loadMesh(id);
+	_core->getWaterEntityManager()->loadVertexBuffer(id);
 }
 
 void EngineInterface::water_setSpecular(const string& id, bool value)

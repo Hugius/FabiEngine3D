@@ -40,9 +40,9 @@ void MotionBlurRenderer::unbind()
 
 void MotionBlurRenderer::render(const shared_ptr<Quad2dEntity> entity)
 {
-	glBindVertexArray(entity->getMesh()->getVaoId());
+	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
+	glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer()->getVertexCount());
 
 	glBindVertexArray(0);
 }

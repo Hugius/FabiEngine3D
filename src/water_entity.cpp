@@ -55,14 +55,14 @@ void WaterEntity::setTextureRepeat(float value)
 	_textureRepeat = max(0.0f, value);
 }
 
-void WaterEntity::setLowQualityMesh(shared_ptr<VertexBuffer> value)
+void WaterEntity::setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_lowQualityMesh = value;
+	_lowQualityVertexBuffer = value;
 }
 
-void WaterEntity::setHighQualityMesh(shared_ptr<VertexBuffer> value)
+void WaterEntity::setHighQualityVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_highQualityMesh = value;
+	_highQualityVertexBuffer = value;
 }
 
 void WaterEntity::setRippleSpeed(const fvec2& value)
@@ -185,14 +185,14 @@ const float WaterEntity::getTextureRepeat() const
 	return _textureRepeat;
 }
 
-const shared_ptr<VertexBuffer> WaterEntity::getLowQualityMesh() const
+const shared_ptr<VertexBuffer> WaterEntity::getLowQualityVertexBuffer() const
 {
-	return _lowQualityMesh;
+	return _lowQualityVertexBuffer;
 }
 
-const shared_ptr<VertexBuffer> WaterEntity::getHighQualityMesh() const
+const shared_ptr<VertexBuffer> WaterEntity::getHighQualityVertexBuffer() const
 {
-	return _highQualityMesh;
+	return _highQualityVertexBuffer;
 }
 
 const fvec2& WaterEntity::getRippleSpeed() const

@@ -29,7 +29,7 @@ public:
 private:
 	string _selectedEntityId = "";
 
-	const shared_ptr<VertexBuffer> _mesh;
+	const shared_ptr<VertexBuffer> _vertexBuffer;
 
 	unordered_map<string, shared_ptr<SkyEntity>> _entities;
 

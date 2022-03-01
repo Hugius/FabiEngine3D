@@ -15,7 +15,7 @@ public:
 	using BaseEntity::BaseEntity;
 
 	void updateTransformation();
-	void setMesh(shared_ptr<VertexBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setCubeMapPaths(const array<string, 6>& value);
 	void setColor(const fvec3& value);
 	void setCubeMap(shared_ptr<TextureBuffer> value);
@@ -36,7 +36,7 @@ public:
 
 	const bool isWireframed() const;
 
-	const shared_ptr<VertexBuffer> getMesh() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getCubeMap() const;
 
 private:
@@ -52,6 +52,6 @@ private:
 
 	bool _isWireframed = false;
 
-	shared_ptr<VertexBuffer> _mesh = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _cubeMap = nullptr;
 };

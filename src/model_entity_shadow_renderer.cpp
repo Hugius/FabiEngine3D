@@ -65,9 +65,9 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partId)->getId());
 		}
 
-		glBindVertexArray(entity->getMesh(partId)->getVaoId());
+		glBindVertexArray(entity->getVertexBuffer(partId)->getVaoId());
 
-		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh(partId)->getVertexCount());
+		glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer(partId)->getVertexCount());
 
 		glBindVertexArray(0);
 

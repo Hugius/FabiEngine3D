@@ -59,9 +59,9 @@ void BlurRenderer::_render(const shared_ptr<Quad2dEntity> entity, shared_ptr<Tex
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture->getId());
 
-	glBindVertexArray(entity->getMesh()->getVaoId());
+	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 
-	glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
+	glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer()->getVertexCount());
 
 	glBindVertexArray(0);
 

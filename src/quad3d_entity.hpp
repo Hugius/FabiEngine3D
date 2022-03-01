@@ -15,7 +15,7 @@ public:
 
 	void updateTarget();
 	void updateTransformation();
-	void setMesh(shared_ptr<VertexBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setFacingCameraHorizontally(bool value);
 	void setFacingCameraVertically(bool value);
 	void setShadowed(bool value);
@@ -80,7 +80,7 @@ public:
 	const bool isWireframed() const;
 	const bool isCentered() const;
 
-	const shared_ptr<VertexBuffer> getMesh() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDiffuseMap() const;
 	const shared_ptr<TextureBuffer> getEmissionMap() const;
 
@@ -122,7 +122,7 @@ private:
 	bool _isFrozen = false;
 	bool _isCentered = false;
 
-	shared_ptr<VertexBuffer> _mesh = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _diffuseMap = nullptr;
 	shared_ptr<TextureBuffer> _emissionMap = nullptr;
 };

@@ -15,7 +15,7 @@ public:
 
 	void updateTarget();
 	void updateCharacterEntities();
-	void setMesh(shared_ptr<VertexBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setContent(const string& value);
 	void setFontMapPath(const string& value);
 	void setFontMap(shared_ptr<TextureBuffer> value);
@@ -62,7 +62,7 @@ public:
 	const bool isVerticallyFlipped() const;
 
 	const vector<shared_ptr<Quad2dEntity>>& getCharacterEntities() const;
-	const shared_ptr<VertexBuffer> getMesh() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getFontMap() const;
 
 private:
@@ -194,6 +194,6 @@ private:
 	bool _isWireframed = false;
 
 	vector<shared_ptr<Quad2dEntity>> _characterEntities;
-	shared_ptr<VertexBuffer> _mesh = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _fontMap = nullptr;
 };

@@ -30,7 +30,7 @@ public:
 	void setMaxHeight(float value);
 	void setLevelOfDetailDistance(float value);
 	void setBright(const string& partId, bool value);
-	void setMesh(const string& partId, shared_ptr<VertexBuffer> value);
+	void setVertexBuffer(const string& partId, shared_ptr<VertexBuffer> value);
 	void setDiffuseMap(const string& partId, shared_ptr<TextureBuffer> value);
 	void setEmissionMap(const string& partId, shared_ptr<TextureBuffer> value);
 	void setSpecularMap(const string& partId, shared_ptr<TextureBuffer> value);
@@ -126,7 +126,7 @@ public:
 	const bool isSpecular(const string& partId) const;
 	const bool isReflective(const string& partId) const;
 
-	const shared_ptr<VertexBuffer> getMesh(const string& partId) const;
+	const shared_ptr<VertexBuffer> getVertexBuffer(const string& partId) const;
 	const shared_ptr<TextureBuffer> getDiffuseMap(const string& partId) const;
 	const shared_ptr<TextureBuffer> getEmissionMap(const string& partId) const;
 	const shared_ptr<TextureBuffer> getSpecularMap(const string& partId) const;

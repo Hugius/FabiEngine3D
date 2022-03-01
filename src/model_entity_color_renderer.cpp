@@ -230,10 +230,10 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partId)->getId());
 		}
 
-		glBindVertexArray(entity->getMesh(partId)->getVaoId());
+		glBindVertexArray(entity->getVertexBuffer(partId)->getVaoId());
 
-		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh(partId)->getVertexCount());
-		_renderStorage->increaseTriangleCount(entity->getMesh(partId)->getVertexCount() / 3);
+		glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer(partId)->getVertexCount());
+		_renderStorage->increaseTriangleCount(entity->getVertexBuffer(partId)->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 

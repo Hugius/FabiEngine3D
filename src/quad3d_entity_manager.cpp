@@ -29,8 +29,8 @@ constexpr unsigned int standingBufferDataCount = static_cast<unsigned int>(sizeo
 
 Quad3dEntityManager::Quad3dEntityManager()
 	:
-	_centeredMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
-	_standingMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
+	_centeredVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
+	_standingVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
 {
 
 }
@@ -71,7 +71,7 @@ void Quad3dEntityManager::createEntity(const string& id, bool isCentered)
 
 	auto entity = make_shared<Quad3dEntity>(id);
 
-	entity->setMesh(isCentered ? _centeredMesh : _standingMesh);
+	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	entity->setCentered(isCentered);
 
 	_entities.insert({id, entity});

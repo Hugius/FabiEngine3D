@@ -14,7 +14,7 @@ public:
 	void createEntity(const string& id, const string& heightMapPath);
 	void deleteEntity(const string& id);
 	void deleteEntities();
-	void loadMesh(const string& id);
+	void loadVertexBuffer(const string& id);
 	void selectEntity(const string& id);
 
 	const float getPixelHeight(const string& id, float x, float z);
@@ -28,7 +28,7 @@ public:
 	shared_ptr<TerrainEntity> getSelectedEntity();
 
 private:
-	void _loadMesh(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float>& pixels);
+	void _loadVertexBuffer(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float>& pixels);
 
 	float _getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixels);
 

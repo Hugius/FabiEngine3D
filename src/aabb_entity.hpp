@@ -14,7 +14,7 @@ class AabbEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setMesh(shared_ptr<VertexBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTarget();
 	void updateTransformation();
 	void setLocalPosition(const fvec3& value);
@@ -50,7 +50,7 @@ public:
 	const bool hasParent() const;
 	const bool hasCollided() const;
 
-	const shared_ptr<VertexBuffer> getMesh() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const AabbParentType getParentType() const;
 	const Direction getCollisionDirection() const;
 
@@ -75,7 +75,7 @@ private:
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;
 
-	shared_ptr<VertexBuffer> _mesh = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	AabbParentType _parentType = AabbParentType::MODEL;
 	Direction _collisionDirection = Direction::X;
 };

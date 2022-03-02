@@ -408,7 +408,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "misc:string_get_size")
+	else if(functionName == "misc:string_size")
 	{
 		auto types = {SVT::STRING};
 
@@ -430,7 +430,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
-	else if(functionName == "misc:string_get_part")
+	else if(functionName == "misc:string_part")
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
@@ -457,17 +457,17 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 		{
 			if((args[1]->getString().size() > 1) || (args[0]->getString().find(args[1]->getString()) == string::npos))
 			{
-				_throwRuntimeError("string splitter not found");
+				_throwRuntimeError("string delimiter not found");
 				return {};
 			}
 
 			const auto fullString = args[0]->getString();
-			const auto splitter = args[1]->getString();
+			const auto delimiter = args[1]->getString();
 
 			string result = "";
 			for(unsigned int index = 0; index < fullString.size(); index++)
 			{
-				if(fullString[index] == splitter.back())
+				if(fullString[index] == delimiter.back())
 				{
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 					result = "";
@@ -501,7 +501,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
-	else if(functionName == "misc:get_random_integer")
+	else if(functionName == "misc:random_integer")
 	{
 		auto types = {SVT::INTEGER, SVT::INTEGER};
 
@@ -512,7 +512,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
 	}
-	else if(functionName == "misc:get_random_decimal")
+	else if(functionName == "misc:random_decimal")
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 

@@ -281,7 +281,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "math:is_even")
+	else if(functionName == "math:even")
 	{
 		auto types = {SVT::INTEGER};
 

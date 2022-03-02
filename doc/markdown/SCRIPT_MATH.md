@@ -1,42 +1,28 @@
 # Mathematical Scripting functions
 
-- `math:tan`(`DEC` degrees) ---> `DEC`  
-  Returns the tangent of **degrees**.
-- `math:sin`(`DEC` degrees) ---> `DEC`  
-  Returns the sine of **degrees**.
-- `math:cos`(`DEC` degrees) ---> `DEC`  
-  Returns the cosine of **degrees**.
-- `math:atan`(`DEC` value) ---> `DEC`  
-  Returns the arc tangent of **value**.
-- `math:asin`(`DEC` value) ---> `DEC`  
-  Returns the arc sine of **value**.
-- `math:acos`(`DEC` value) ---> `DEC`  
-  Returns the arc cosine of **value**.
-- `math:atan2`(`DEC` first, `DEC` second) ---> `DEC`  
-  Returns the arc tangent of **first** and **second**.
-- `math:pow`(`INT` base, `INT` exponent) ---> `INT`  
-  Returns the result of **base** to the power of **exponent**.
-- `math:pow`(`DEC` base, `DEC` exponent) ---> `DEC`  
-  Returns the result of **base** to the power of **exponent**.
-- `math:min`(`INT`/`DEC` first, `INT`/`DEC` second) ---> `INT`/`DEC`  
-  Returns the lower value of **first** and **second**.
-- `math:max`(`INT`/`DEC` first, `INT`/`DEC` second) ---> `INT`/`DEC`  
-  Returns the higher value of **first** and **second**.
-- `math:round`(`DEC` value) ---> `DEC`  
-  Returns the rounded **value**.
-- `math:floor`(`DEC` value) ---> `DEC`  
-  Returns the floored **value**.
-- `math:ceil`(`DEC` value) ---> `DEC`  
-  Returns the ceiled **value**.
-- `math:clamp`(`INT`/`DEC` value, `INT`/`DEC` min, `INT`/`DEC` max) ---> `INT`/`DEC`  
-  Returns the clamped **value** between **min** and **max**.
-- `math:sqrt`(`DEC` value) ---> `DEC`  
-  Returns the square root of **value**.
-- `math:abs`(`INT`/`DEC` value) ---> `INT`/`DEC`  
-  Returns the absolute value of **value**.
-- `math:get_pi`() ---> `DEC`  
-- Returns a high-precision value of pi.
-- `math:is_even`(`INT` value) ---> `BOOL`  
-- Returns true if **value** is an even number.
-- `math:distance`(`VEC3` first, `VEC3` second) ---> `DEC`  
-  Returns the absolute distance between **first** and **second**.
+- `math:tan`(`DEC` degrees) -----> `DEC`
+- `math:sin`(`DEC` degrees) -----> `DEC`
+- `math:cos`(`DEC` degrees) -----> `DEC`
+- `math:atan`(`DEC` degrees) -----> `DEC`
+- `math:asin`(`DEC` degrees) -----> `DEC`
+- `math:acos`(`DEC` degrees) -----> `DEC`
+- `math:atan2`(`DEC` degrees, `DEC` degrees) -----> `DEC`
+- `math:pow`(`INT` base, `INT` exponent) -----> `INT`
+- `math:pow`(`DEC` base, `DEC` exponent) -----> `DEC`
+- `math:min`(`INT` value, `INT` value) -----> `INT`
+- `math:min`(`DEC` value, `DEC` value) -----> `DEC`
+- `math:max`(`INT` value, `INT` value) -----> `INT`
+- `math:max`(`DEC` value, `DEC` value) -----> `DEC`
+- `math:round`(`DEC` value) -----> `DEC`
+- `math:floor`(`DEC` value) -----> `DEC`
+- `math:ceil`(`DEC` value) -----> `DEC`
+- `math:clamp`(`INT` value, `INT` min, `INT` max) -----> `INT`
+- `math:clamp`(`DEC` value, `DEC` min, `DEC` max) -----> `DEC`
+- `math:sqrt`(`DEC` value) -----> `DEC`
+- `math:abs`(`INT` value) -----> `INT`
+- `math:abs`(`DEC` value) -----> `DEC`
+- `math:pi`() -----> `DEC`
+- `math:even`(`INT` value) -----> `BOOL`
+- `math:angle_difference`(`DEC` degrees, `DEC` degrees) -----> `DEC`
+- `math:reference_angle`(`DEC` degrees) -----> `DEC`
+- `math:vector_distance`(`DEC` x, `DEC` y, `DEC` z, `DEC` x, `DEC` y, `DEC` z) -----> `DEC`

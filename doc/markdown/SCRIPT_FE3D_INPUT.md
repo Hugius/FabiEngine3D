@@ -1,18 +1,18 @@
 # Input
 ### Getters
-- `fe3d:input_is_key_down`(`STR` key) ---> `BOOL`  
+- `fe3d:input_is_key_down`(`STR` key) -----> `BOOL`  
   Returns true is a keyboard **key** is being pushed down.
-- `fe3d:input_is_key_pressed`(`STR` key) ---> `BOOL`  
+- `fe3d:input_is_key_pressed`(`STR` key) -----> `BOOL`  
   Returns true is a keyboard **key** is pressed.
-- `fe3d:input_is_key_toggled`(`STR` key) ---> `BOOL`  
+- `fe3d:input_is_key_toggled`(`STR` key) -----> `BOOL`  
   Returns true is a keyboard **key** is toggled by a press.
-- `fe3d:input_is_mouse_down`(`STR` button) ---> `BOOL`  
+- `fe3d:input_is_mouse_down`(`STR` button) -----> `BOOL`  
   Returns true is a mouse **button** is being pushed down.
-- `fe3d:input_is_mouse_pressed`(`STR` button) ---> `BOOL`  
+- `fe3d:input_is_mouse_pressed`(`STR` button) -----> `BOOL`  
   Returns true is a mouse **button** is pressed.
-- `fe3d:input_is_mouse_toggled`(`STR` button) ---> `BOOL`  
+- `fe3d:input_is_mouse_toggled`(`STR` button) -----> `BOOL`  
   Returns true is a mouse **button** is toggled by a press.
-- `fe3d:input_get_mousewheel_direction`() ---> `INT`  
+- `fe3d:input_get_mousewheel_direction`() -----> `INT`  
   Returns the direction of the scrolling wheel. 1 = up, -1 = down, 0 = not scrolling.
   
 # Mouse buttons

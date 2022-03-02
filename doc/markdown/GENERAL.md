@@ -39,9 +39,11 @@
 
 ### 1.6 Scripting
 
+- Gameplay preview
 - Custom scripting language
 - Engine API
 - Math API
+- Miscellaneous API
 
 ### 1.7 Networking
 

@@ -246,6 +246,12 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_set.cpp">
       <Filter>Interpreter\Function\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_clock_set.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_clock_get.cpp">
+      <Filter>Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\script_variable.hpp">

@@ -27,6 +27,8 @@
     <ClCompile Include="..\..\..\src\script_interpreter_execution.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_clock_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_clock_set.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad3d_set.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad3d_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_get.cpp" />

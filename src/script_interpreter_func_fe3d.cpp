@@ -53,10 +53,10 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processFe3dFunctionCal
 	isExecuted = (isExecuted || _executeFe3dSpotlightGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dReflectionSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dReflectionGetter(functionName, args, returnValues));
-	isExecuted = (isExecuted || _executeFe3dSound2dSetter(functionName, args, returnValues));
-	isExecuted = (isExecuted || _executeFe3dSound2dGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dSound3dSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dSound3dGetter(functionName, args, returnValues));
+	isExecuted = (isExecuted || _executeFe3dSound2dSetter(functionName, args, returnValues));
+	isExecuted = (isExecuted || _executeFe3dSound2dGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dGraphicsSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dGraphicsGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dWorldSetter(functionName, args, returnValues));
@@ -74,6 +74,8 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processFe3dFunctionCal
 	isExecuted = (isExecuted || _executeFe3dClientGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dFilesystemSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dFilesystemGetter(functionName, args, returnValues));
+	isExecuted = (isExecuted || _executeFe3dClockSetter(functionName, args, returnValues));
+	isExecuted = (isExecuted || _executeFe3dClockGetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dMiscSetter(functionName, args, returnValues));
 	isExecuted = (isExecuted || _executeFe3dMiscGetter(functionName, args, returnValues));
 

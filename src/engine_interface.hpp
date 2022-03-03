@@ -436,8 +436,6 @@ public:
 	const fvec3& text3d_getColor(const string& id) const;
 	const fvec3& text3d_getWireframeColor(const string& id) const;
 	const fvec2& text3d_getSize(const string& id) const;
-	const fvec2& text3d_getUvMultiplier(const string& id) const;
-	const fvec2& text3d_getUvOffset(const string& id) const;
 	const float text3d_getLightness(const string& id) const;
 	const float text3d_getMinHeight(const string& id) const;
 	const float text3d_getMaxHeight(const string& id) const;

@@ -420,61 +420,6 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text3d_get_uv_multiplier_x")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dText3d(args[0]->getString(), false))
-			{
-				const auto result = _fe3d->text3d_getUvMultiplier(args[0]->getString()).x;
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:text3d_get_uv_multiplier_y")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dText3d(args[0]->getString(), false))
-			{
-				const auto result = _fe3d->text3d_getUvMultiplier(args[0]->getString()).y;
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:text3d_get_uv_offset_x")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dText3d(args[0]->getString(), false))
-			{
-				const auto result = _fe3d->text3d_getUvOffset(args[0]->getString()).x;
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:text3d_get_uv_offset_y")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dText3d(args[0]->getString(), false))
-			{
-				const auto result = _fe3d->text3d_getUvOffset(args[0]->getString()).y;
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
-			}
-		}
-	}
 	else
 	{
 		return false;

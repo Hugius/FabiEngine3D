@@ -200,16 +200,6 @@ const fvec2& EngineInterface::text3d_getSize(const string& id) const
 	return _core->getText3dEntityManager()->getEntity(id)->getSize();
 }
 
-const fvec2& EngineInterface::text3d_getUvMultiplier(const string& id) const
-{
-	return _core->getText3dEntityManager()->getEntity(id)->getUvMultiplier();
-}
-
-const fvec2& EngineInterface::text3d_getUvOffset(const string& id) const
-{
-	return _core->getText3dEntityManager()->getEntity(id)->getUvOffset();
-}
-
 const fvec3& EngineInterface::text3d_getColor(const string& id) const
 {
 	return _core->getText3dEntityManager()->getEntity(id)->getColor();

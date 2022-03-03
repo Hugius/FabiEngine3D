@@ -6,8 +6,6 @@ FabiEngine3D is a game engine, created for simple 3D video games on PC. It conta
 
 `Development started on April 7, 2020.`
 
-<img src="doc/image/engine.png" width="100%"/>
-
 ## Games
 
 ### Starvation

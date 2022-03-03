@@ -1,93 +1,140 @@
-# Model
-### Setters
-- `fe3d:model_delete`(`STR` ID) -----> `NONE`
-  Deletes model with **ID** if existing.
-- `fe3d:model_set_visible`(`STR` ID, `BOL` visible) -----> `NONE`
-  Sets the visibility of model with **ID** to **visible**.
-- `fe3d:model_set_position`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Sets the position as **xyz** of model with **ID**.
-- `fe3d:model_move`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Moves the model with factor **xyz** of model with **ID**.
-- `fe3d:model_set_rotation_origin`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Sets the rotation origin of model with **ID** to **xyz** in local space. The model will be rotated around this origin. An xyz of 0 means the rotation will be centered.
-- `fe3d:model_set_rotation`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Sets the rotation as **xyz** of model with **ID**.
-- `fe3d:model_rotate`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Rotates the model with factor **xyz** of model with **ID**.
-- `fe3d:model_set_size`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Sets the size as **xyz** of model with **ID**.
-- `fe3d:model_scale`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Scales the model with factor **xyz** of model with **ID**.
-- `fe3d:model_set_color`(`STR` ID, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
-  Sets the color as **rgb** of model with **ID**.
-- `fe3d:model_set_min_height`(`STR` ID, `DEC` height) -----> `NONE`
-  Sets the local minimum **height** of model with **ID**. The height is relative to the model position.
-- `fe3d:model_set_max_height`(`STR` ID, `DEC` height) -----> `NONE`
-  Sets the local maximum **height** of model with **ID**. The height is relative to the model position.
-- `fe3d:model_set_lightness`(`STR` ID, `DEC` lightness) -----> `NONE`
-  Sets the **lightness** of model with **ID**.
-- `fe3d:model_set_aabb_raycast_responsive`(`STR` ID, `BOL` responsive) -----> `NONE`
-  Sets the model's parent AABB raycasting responsiveness to **responsive** of model with **ID**.
-- `fe3d:model_set_aabb_collision_responsive`(`STR` ID, `BOL` responsive) -----> `NONE`
-  Sets the model's parent AABB collision responsiveness to **responsive** of model with **ID**.
-- `fe3d:model_set_alpha`(`STR` ID, `DEC` alpha) -----> `NONE`
-  Sets the **alpha** value for transparency of model with **ID**. Keep in mind FabiEngine3D does not support transparency sorting!
-### Getters
-- `fe3d:model_is_existing`(`STR` ID) -----> `BOL`
-  Returns true if model with **ID** is existing.
-- `fe3d:model_find_ids`(`STR` subID) -----> `LIST`
-  Returns a list of strings with the IDs of all models which IDs start with **subID**.
-- `fe3d:model_get_all_ids`() -----> `LIST`
-  Returns a list of strings with the IDs of all models.
-- `fe3d:model_is_visible`(`STR` ID) -----> `BOL`
-  Returns true if model with **ID** is visible.
-- `fe3d:model_get_position`(`STR` ID) -----> `VEC3`
-  Returns the position of model with **ID**.
-- `fe3d:model_get_rotation_origin`() -----> `VEC3`
-  Returns the rotation origin of model with **ID**.
-- `fe3d:model_get_rotation`(`STR` ID) -----> `VEC3`
-  Returns the rotation of model with **ID**.
-- `fe3d:model_get_size`(`STR` ID) -----> `VEC3`
-  Returns the size of model with **ID**.
-- `fe3d:model_get_color`(`STR` ID) -----> `VEC3`
-  Returns the color of model with **ID**.
-- `fe3d:model_get_min_height`(`STR` ID) -----> `DEC`
-  Returns the minimum local height of model with **ID**.
-- `fe3d:model_get_max_height`(`STR` ID) -----> `DEC`
-  Returns the maximum local height of model with **ID**.
-- `fe3d:model_get_lightness`(`STR` ID) -----> `DEC`
-  Returns the lightness of model with **ID**.
-- `fe3d:model_get_alpha`(`STR` ID) -----> `DEC`
-  Returns the alpha value of model with **ID**.
-  
-# Animation
-### Setters
-- `fe3d:model_start_animation`(`STR` modelID, `STR` animationID, `INT` loops, `BOL` autoPause) -----> `NONE`
-  Starts the animation with **animationID** on model with **modelID** and repeats the play **loops** times (0 = once, -1 = endless). If **autoPause** is enabled, the animation automatically pauses playback after every frame.
-- `fe3d:model_pause_animation`(`STR` modelID, `STR` animationID) -----> `NONE`
-  Pauses the playing animation with **animationID** on model with **modelID**.
-- `fe3d:model_resume_animation`(`STR` modelID, `STR` animationID) -----> `NONE`
-  Resumes the paused animation with **animationID** on model with **modelID**. Only possible when animation is currently paused.
-- `fe3d:model_fade_animation`(`STR` modelID, `STR` animationID, `INT` frameStep) -----> `NONE`
-  Fades the playing animation with **animationID** on model with **modelID** to an end. Every **frameStep** the animation will stop.
-- `fe3d:model_stop_animation`(`STR` modelID, `STR` animationID) -----> `NONE`
-  Stops the playing animation with **animationID** on model with **modelID**.
-- `fe3d:model_set_animation_speed`(`STR` modelID, `STR` animationID, `DEC` speed) -----> `NONE`
-  Sets the animation **speed** of animation with **animationID** on model with **modelID**. Cannot be lower than 0.
-- `fe3d:model_set_animation_autopaused`(`STR` modelID, `STR` animationID, `BOL` enabled) -----> `NONE`
-  Sets auto-pausing to **enabled** for animation with **animationID** on model with **modelID**. Automatically pauses animation after every frame.
-### Getters
-- `fe3d:model_is_animation_started`(`STR` modelID, `STR` animationID) -----> `BOL`
-  Returns true if animation with **animationID** was started on model with **modelID**.
-- `fe3d:model_is_animation_playing`(`STR` modelID, `STR` animationID) -----> `BOL`
-  Returns true if animation with **animationID** is currently playing on model with **modelID**.
-- `fe3d:model_is_animation_paused`(`STR` modelID, `STR` animationID) -----> `BOL`
-  Returns true if animation with **animationID** is currently paused on model with **modelID**.
-- `fe3d:model_is_animation_fading`(`STR` modelID, `STR` animationID) -----> `BOL`
-  Returns true if animation with **animationID** is currently fading on model with **modelID**.
-- `fe3d:model_get_animation_speed`(`STR` modelID, `STR` animationID) -----> `DEC`
-  Returns the animation speed of animation with **animationID** on model with **modelID**.
-- `fe3d:model_is_animation_autopaused`(`STR` modelID, `STR` animationID) -----> `BOL`
-  Returns true if auto-pausing is enabled for animation with **animationID** on model with **modelID**.
-- `fe3d:model_get_animation_frame_index`(`STR` modelID, `STR` animationID) -----> `INT`
-  Returns the current animation frame index of animation with **animationID** on model with **modelID**. Remember: an index starts at 0!
+# Model Scripting Functions
+
+## Setters
+
+- `fe3d:model_place` (`STR` new_id, `STR` editor_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_delete` (`STR` id) -----> `NONE`
+- `fe3d:model_delete_all` () -----> `NONE`
+- `fe3d:model_set_visible` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_face_culled` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_base_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_base_rotation` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_base_rotation_origin` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_base_size` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_part_position` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_part_rotation` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_part_rotation_origin` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_part_size` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_move_base` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_rotate_base` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_scale_base` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_move_part` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_rotate_part` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_scale_part` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_move_base_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_rotate_base_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_scale_base_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_move_part_to` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_rotate_part_to` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_scale_part_to` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_min_height` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_max_height` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_aabb_raycast_responsive` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_aabb_collision_responsive` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_texture_repeat` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_diffuse_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
+- `fe3d:model_set_emission_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
+- `fe3d:model_set_specular_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
+- `fe3d:model_set_reflection_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
+- `fe3d:model_set_normal_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
+- `fe3d:model_set_color` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_wireframe_color` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_lod_entity_id` (`STR` id, `STR` value) -----> `NONE`
+- `fe3d:model_set_lightness` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_specular_shininess` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_specular_intensity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_reflectivity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_lod_distance` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_opacity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_specular` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_reflected` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_reflective` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_shadowed` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_frozen` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_wireframed` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_bright` (`STR` model_id, `STR` part_id, `BOL` value) -----> `NONE`
+- `fe3d:model_set_emission_intensity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_reflection_type` (`STR` model_id, `STR` part_id, `STR` value) -----> `NONE`
+- `fe3d:model_set_rotation_order` (`STR` id, `STR` value) -----> `NONE`
+- `fe3d:model_start_animation` (`STR` model_id, `STR` animation_id, `INT` play_count) -----> `NONE`
+- `fe3d:model_pause_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
+- `fe3d:model_autopause_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
+- `fe3d:model_resume_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
+- `fe3d:model_stop_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
+- `fe3d:model_set_animation_speed_multiplier` (`STR` model_id, `STR` animation_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_animation_frame_index` (`STR` model_id, `STR` animation_id, `INT` value) -----> `NONE`
+
+## Getters
+
+- `fe3d:model_is_existing` (`STR` id) -----> `BOL`
+- `fe3d:model_find_ids` (`STR` id) -----> `LIST`
+- `fe3d:model_get_ids` () -----> `LIST`
+- `fe3d:model_is_visible` (`STR` id) -----> `BOL`
+- `fe3d:model_get_base_position_x` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_position_y` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_position_z` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_rotation_x` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_rotation_y` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_rotation_z` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_rotation_origin_x` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_rotation_origin_y` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_rotation_origin_z` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_size_x` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_size_y` (`STR` id) -----> `DEC`
+- `fe3d:model_get_base_size_z` (`STR` id) -----> `DEC`
+- `fe3d:model_get_part_position_x` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_position_y` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_position_z` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_rotation_x` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_rotation_y` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_rotation_z` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_rotation_origin_x` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_rotation_origin_y` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_rotation_origin_z` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_size_x` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_size_y` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_part_size_z` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_min_height` (`STR` id) -----> `DEC`
+- `fe3d:model_get_max_height` (`STR` id) -----> `DEC`
+- `fe3d:model_get_lightness` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_color_r` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_color_g` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_color_b` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_wireframe_color_r` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_wireframe_color_g` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_wireframe_color_b` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_opacity` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_emission_intensity` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_texture_repeat` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_specular_shininess` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_specular_intensity` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_reflectivity` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_lod_distance` (`STR` id) -----> `DEC`
+- `fe3d:model_get_lod_entity_id` (`STR` id) -----> `STR`
+- `fe3d:model_get_mesh_path` (`STR` id) -----> `STR`
+- `fe3d:model_get_diffuse_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
+- `fe3d:model_get_emission_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
+- `fe3d:model_get_specular_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
+- `fe3d:model_get_reflection_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
+- `fe3d:model_get_normal_map_path` (`STR` model_id, `STR` part_id) -----> `STR`
+- `fe3d:model_has_diffuse_map` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_has_emission_map` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_has_specular_map` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_has_reflection_map` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_has_normal_map` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_is_shadowed` (`STR` id) -----> `BOL`
+- `fe3d:model_is_frozen` (`STR` id) -----> `BOL`
+- `fe3d:model_is_reflected` (`STR` id) -----> `BOL`
+- `fe3d:model_is_bright` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_is_face_culled` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_is_reflective` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_get_reflection_type` (`STR` model_id, `STR` part_id) -----> `STR`
+- `fe3d:model_is_specular` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_is_wireframed` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_get_rotation_order` (`STR` id) -----> `STR`
+- `fe3d:model_is_animation_started` (`STR` model_id, `STR` animation_id) -----> `BOL`
+- `fe3d:model_is_animation_paused` (`STR` model_id, `STR` animation_id) -----> `BOL`
+- `fe3d:model_is_animation_autopaused` (`STR` model_id, `STR` animation_id) -----> `BOL`
+- `fe3d:model_get_animation_speed_multiplier` (`STR` model_id, `STR` animation_id) -----> `DEC`
+- `fe3d:model_get_animation_play_count` (`STR` model_id, `STR` animation_id) -----> `INT`
+- `fe3d:model_get_animation_frame_index` (`STR` model_id, `STR` animation_id) -----> `INT`

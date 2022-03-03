@@ -170,20 +170,6 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_set_edged")
-	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dWater(args[0]->getString(), false))
-			{
-				_fe3d->water_setEdged(_fe3d->water_getSelectedId(), args[1]->getBoolean());
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-		}
-	}
 	else if(functionName == "fe3d:water_set_height")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
@@ -305,6 +291,20 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
 				_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), args[1]->getBoolean());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_edged")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_setEdged(_fe3d->water_getSelectedId(), args[1]->getBoolean());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

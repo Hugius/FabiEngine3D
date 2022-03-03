@@ -21,3 +21,4 @@
 - Transparency in 2D space is based on the order of placed entities.
 - Transparency in 3D space is very complex and can sometimes be incorrect.
 - Graphical effects that are set to low quality can flicker.
+- All rotational values are in degrees, not radians.

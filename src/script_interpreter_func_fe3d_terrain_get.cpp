@@ -476,7 +476,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:terrain_get_is_wireframed")
+	else if(functionName == "fe3d:terrain_is_wireframed")
 	{
 		auto types = {SVT::STRING};
 

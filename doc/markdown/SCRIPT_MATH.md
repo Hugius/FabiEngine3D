@@ -1,12 +1,12 @@
 # Mathematical Scripting functions
 
-- `math:tan`(`DEC` degrees) -----> `DEC`
-- `math:sin`(`DEC` degrees) -----> `DEC`
-- `math:cos`(`DEC` degrees) -----> `DEC`
-- `math:atan`(`DEC` degrees) -----> `DEC`
-- `math:asin`(`DEC` degrees) -----> `DEC`
-- `math:acos`(`DEC` degrees) -----> `DEC`
-- `math:atan2`(`DEC` degrees, `DEC` degrees) -----> `DEC`
+- `math:tan`(`DEC` value) -----> `DEC`
+- `math:sin`(`DEC` value) -----> `DEC`
+- `math:cos`(`DEC` value) -----> `DEC`
+- `math:atan`(`DEC` value) -----> `DEC`
+- `math:asin`(`DEC` value) -----> `DEC`
+- `math:acos`(`DEC` value) -----> `DEC`
+- `math:atan2`(`DEC` x, `DEC` y) -----> `DEC`
 - `math:pow`(`INT` base, `INT` exponent) -----> `INT`
 - `math:pow`(`DEC` base, `DEC` exponent) -----> `DEC`
 - `math:min`(`INT` value, `INT` value) -----> `INT`
@@ -22,7 +22,7 @@
 - `math:abs`(`INT` value) -----> `INT`
 - `math:abs`(`DEC` value) -----> `DEC`
 - `math:pi`() -----> `DEC`
-- `math:even`(`INT` value) -----> `BOOL`
-- `math:angle_difference`(`DEC` degrees, `DEC` degrees) -----> `DEC`
-- `math:reference_angle`(`DEC` degrees) -----> `DEC`
+- `math:even`(`INT` value) -----> `BOL`
+- `math:angle_difference`(`DEC` value, `DEC` value) -----> `DEC`
+- `math:reference_angle`(`DEC` value) -----> `DEC`
 - `math:vector_distance`(`DEC` x, `DEC` y, `DEC` z, `DEC` x, `DEC` y, `DEC` z) -----> `DEC`

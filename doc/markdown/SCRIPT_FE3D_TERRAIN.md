@@ -1,50 +1,64 @@
-# Sky
-### Setters
-- `fe3d:sky_mix_with_current`(`STR` skyID) -----> `NONE`  
-  Blends the selected sky texture with the texture of **skyID**.
-- `fe3d:sky_set_mix_value`(`DEC` value) -----> `NONE`  
-  Sets the mix **value** to blend the 2 sky textures. The value must be between 0.0 and 1.0 (0% and 100% respectively).
-- `fe3d:sky_set_rotation_speed`(`DEC` speed) -----> `NONE`  
-  Sets the rotation **speed** of the selected sky.
-- `fe3d:sky_set_lightness`(`DEC` lightness) -----> `NONE`  
-  Sets the **lightness** of the selected sky.
-- `fe3d:sky_set_color`(`DEC` r, `DEC` g, `DEC` b) -----> `NONE`  
-  Sets the color as **rgb** of the selected sky.
-### Getters
-- `fe3d:sky_get_mix_value`() -----> `DEC`  
-  Returns the mix value of the selected sky.
-- `fe3d:sky_get_rotation_speed`() -----> `DEC`  
-  Returns the rotation speed of the selected sky.
-- `fe3d:sky_get_lightness`() -----> `DEC`  
-  Returns the lightness of the selected sky.
-- `fe3d:sky_get_color`() -----> `VEC3`  
-  Returns the color of the selected sky.
+# Terrain Scripting Functions
 
-# Terrain
-### Getters
-- `fe3d:terrain_get_max_height`() -----> `DEC`  
-  Returns the maximum height of the selected terrain (based on the heightmap pixels values).
-- `fe3d:terrain_get_size`() -----> `DEC`  
-  Returns size of the selected terrain.
-- `fe3d:terrain_get_pixel_height`(`DEC` x, `DEC` z) -----> `DEC`  
-  Returns the height of the pixel in the selected terrain height map based on X and Z. Returns 0.0 if **x** or **z** is invalid.
+## Setters
 
-# Water
-### Setters
-- `fe3d:water_set_speed`(`DEC` x, `DEC` z) -----> `NONE`  
-  Sets the rippling/waving speed of the selected water in the **x** direction and **z** direction.
-- `fe3d:water_set_color`(`DEC` r, `DEC` g, `DEC` b) -----> `NONE`  
-  Sets the color as **rgb** of the selected water.
-- `fe3d:water_set_transparency`(`DEC` transparency) -----> `NONE`  
-  Sets the **transparency** of the selected water.
-### Getters
-- `fe3d:water_get_speed_x`() -----> `DEC`  
-  Returns the rippling/waving speed of the selected water in the X direction.
-- `fe3d:water_get_speed_z`() -----> `DEC`  
-  Returns the rippling/waving speed of the selected water in the Z direction.
-- `fe3d:water_get_height`() -----> `DEC`  
-  Returns the height (Y position) of the selected water.
-- `fe3d:water_get_color`() -----> `VEC3`  
-  Returns the color of the selected water.
-- `fe3d:water_get_transparency`() -----> `DEC`  
-  Returns the transparency of the selected water.
+- `fe3d:terrain_place`(`STR` new_id, `STR` editor_id) -----> `NONE`
+- `fe3d:terrain_select`(`STR` id) -----> `NONE`
+- `fe3d:terrain_set_lightness`(`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_max_height`(`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_diffuse_map`(`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_normal_map`(`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_blend_map`(`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_red_diffuse_map`(`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_green_diffuse_map`(`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_blue_diffuse_map`(`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_red_normal_map`(`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_green_normal_map`(`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_blue_normal_map`(`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:terrain_set_wireframe_color`(`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
+- `fe3d:terrain_set_specular_shininess`(`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_specular_intensity`(`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_texture_repeat`(`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_red_repeat`(`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_green_repeat`(`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_blue_repeat`(`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:terrain_set_specular`(`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:terrain_set_wireframed`(`STR` id, `BOL` value) -----> `NONE`
+
+## Getters
+
+- `fe3d:terrain_get_selected_id`(`STR` id) -----> `STR`
+- `fe3d:terrain_get_pixel_height`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_height_map_path`(`STR` id) -----> `STR`
+- `fe3d:terrain_get_diffuse_map_path`(`STR` id) -----> `STR`
+- `fe3d:terrain_get_normal_map_path`(`STR` id) -----> `STR`
+- `fe3d:terrain_get_blend_map_path`(`STR` id) -----> `STR`
+- `fe3d:terrain_get_red_diffuse_map_path`(`STR` id) -----> `STR`
+- `fe3d:terrain_get_green_diffuse_map_path`(`STR` id) -----> `STR`
+- `fe3d:terrain_get_blue_diffuse_map_path`(`STR` id) -----> `STR`
+- `fe3d:terrain_get_red_normal_map_path`(`STR` id) -----> `STR`
+- `fe3d:terrain_get_green_normal_map_path`(`STR` id) -----> `STR`
+- `fe3d:terrain_get_blue_normal_map_path`(`STR` id) -----> `STR`
+- `fe3d:terrain_has_diffuse_map`(`STR` id) -----> `BOL`
+- `fe3d:terrain_has_normal_map`(`STR` id) -----> `BOL`
+- `fe3d:terrain_has_blend_map`(`STR` id) -----> `BOL`
+- `fe3d:terrain_has_red_diffuse_map`(`STR` id) -----> `BOL`
+- `fe3d:terrain_has_green_diffuse_map`(`STR` id) -----> `BOL`
+- `fe3d:terrain_has_blue_diffuse_map`(`STR` id) -----> `BOL`
+- `fe3d:terrain_has_red_normal_map`(`STR` id) -----> `BOL`
+- `fe3d:terrain_has_green_normal_map`(`STR` id) -----> `BOL`
+- `fe3d:terrain_has_blue_normal_map`(`STR` id) -----> `BOL`
+- `fe3d:terrain_get_max_height`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_size`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_lightness`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_specular_shininess`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_specular_intensity`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_wireframe_color_r`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_wireframe_color_g`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_wireframe_color_b`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_texture_repeat`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_red_repeat`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_green_repeat`(`STR` id) -----> `DEC`
+- `fe3d:terrain_get_blue_repeat`(`STR` id) -----> `DEC`
+- `fe3d:terrain_is_specular`(`STR` id) -----> `BOL`
+- `fe3d:terrain_is_wireframed`(`STR` id) -----> `BOL`

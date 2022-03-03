@@ -36,9 +36,6 @@
 - **Size**: the XYZ size multiplier of the mesh
   - Type: `decimal3`
   - Constraints: at least `0.0`
-- **LOD Size**: the XYZ size multiplier of the LOD entity mesh
-  - Type: `decimal3`
-  - Constraints: at least `0.0`
 - **LOD Distance**: the minimum distance by which the LOD entity will appear/disappear
   - Type: `decimal`
   - Constraints: at least `0`

@@ -136,11 +136,6 @@ const bool EngineInterface::text2d_isWireframed(const string& id) const
 	return _core->getText2dEntityManager()->getEntity(id)->isWireframed();
 }
 
-const bool EngineInterface::text2d_hasFontMap(const string& id) const
-{
-	return (_core->getText2dEntityManager()->getEntity(id)->getFontTextureBuffer() != nullptr);
-}
-
 const fvec2& EngineInterface::text2d_getPosition(const string& id) const
 {
 	return _core->getText2dEntityManager()->getEntity(id)->getPosition();

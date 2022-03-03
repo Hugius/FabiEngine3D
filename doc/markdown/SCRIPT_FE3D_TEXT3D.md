@@ -31,6 +31,7 @@
 - `fe3d:text3d_set_frozen` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_facing_camera_horizontally` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_facing_camera_vertically` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:text3d_set_min_texture_alpha` (`STR` id, `DEC` value) -----> `NONE`
 
 ## Getters
 
@@ -70,3 +71,6 @@
 - `fe3d:text3d_get_uv_multiplier_y` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_uv_offset_x` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_uv_offset_y` (`STR` id) -----> `DEC`
+- `fe3d:text3d_get_font_map_path` (`STR` id) -----> `STR`
+- `fe3d:text3d_get_content` (`STR` id) -----> `STR`
+- `fe3d:text3d_get_min_texture_alpha` (`STR` id) -----> `DEC`

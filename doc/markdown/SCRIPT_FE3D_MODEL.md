@@ -56,6 +56,7 @@
 - `fe3d:model_set_emission_intensity` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_reflection_type` (`STR` model_id, `STR` part_id, `STR` value) -----> `NONE`
 - `fe3d:model_set_rotation_order` (`STR` id, `STR` value) -----> `NONE`
+- `fe3d:model_set_min_texture_alpha` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
 - `fe3d:model_start_animation` (`STR` model_id, `STR` animation_id, `INT` play_count) -----> `NONE`
 - `fe3d:model_pause_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
 - `fe3d:model_autopause_animation` (`STR` model_id, `STR` animation_id) -----> `NONE`
@@ -131,6 +132,7 @@
 - `fe3d:model_get_reflection_type` (`STR` model_id, `STR` part_id) -----> `STR`
 - `fe3d:model_is_specular` (`STR` model_id, `STR` part_id) -----> `BOL`
 - `fe3d:model_is_wireframed` (`STR` model_id, `STR` part_id) -----> `BOL`
+- `fe3d:model_get_min_texture_alpha` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_rotation_order` (`STR` id) -----> `STR`
 - `fe3d:model_is_animation_started` (`STR` model_id, `STR` animation_id) -----> `BOL`
 - `fe3d:model_is_animation_paused` (`STR` model_id, `STR` animation_id) -----> `BOL`

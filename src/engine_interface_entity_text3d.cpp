@@ -283,11 +283,6 @@ const bool EngineInterface::text3d_isFrozen(const string& id) const
 	return _core->getText3dEntityManager()->getEntity(id)->isFrozen();
 }
 
-const bool EngineInterface::text3d_hasFontMap(const string& id) const
-{
-	return (_core->getText3dEntityManager()->getEntity(id)->getFontTextureBuffer() != nullptr);
-}
-
 const bool EngineInterface::text3d_isWireframed(const string& id) const
 {
 	return _core->getText3dEntityManager()->getEntity(id)->isWireframed();

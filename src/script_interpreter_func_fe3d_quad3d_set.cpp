@@ -516,6 +516,20 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:quad3d_set_min_texture_alpha")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
+			{
+				_fe3d->quad3d_setMinTextureAlpha(args[0]->getString(), args[1]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:quad3d_start_animation")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};

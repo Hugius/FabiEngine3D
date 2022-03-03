@@ -450,7 +450,6 @@ public:
 	const bool text3d_isBright(const string& id) const;
 	const bool text3d_isWireframed(const string& id) const;
 	const bool text3d_isFrozen(const string& id) const;
-	const bool text3d_hasFontMap(const string& id) const;
 
 	void aabb_create(const string& id, bool isCentered);
 	void aabb_delete(const string& id);
@@ -584,7 +583,6 @@ public:
 	const bool text2d_isHorizontallyFlipped(const string& id) const;
 	const bool text2d_isVerticallyFlipped(const string& id) const;
 	const bool text2d_isWireframed(const string& id) const;
-	const bool text2d_hasFontMap(const string& id) const;
 
 	void pointlight_create(const string& id);
 	void pointlight_delete(const string& id);

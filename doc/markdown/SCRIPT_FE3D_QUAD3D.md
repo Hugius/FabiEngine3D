@@ -36,6 +36,7 @@
 - `fe3d:quad3d_set_facing_camera_vertically` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_uv_multiplier` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
 - `fe3d:quad3d_set_uv_offset` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
+- `fe3d:quad3d_set_min_texture_alpha` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:quad3d_start_animation` (`STR` quad_id, `STR` animation_id, `INT` play_count) -----> `NONE`
 - `fe3d:quad3d_pause_animation` (`STR` quad_id, `STR` animation_id) -----> `NONE`
 - `fe3d:quad3d_autopause_animation` (`STR` quad_id, `STR` animation_id) -----> `NONE`
@@ -88,6 +89,7 @@
 - `fe3d:quad3d_get_uv_multiplier_y` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_uv_offset_x` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_uv_offset_y` (`STR` id) -----> `DEC`
+- `fe3d:quad3d_get_min_texture_alpha` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_is_animation_started` (`STR` quad_id, `STR` animation_id) -----> `BOL`
 - `fe3d:quad3d_is_animation_paused` (`STR` quad_id, `STR` animation_id) -----> `BOL`
 - `fe3d:quad3d_is_animation_autopaused` (`STR` quad_id, `STR` animation_id) -----> `BOL`

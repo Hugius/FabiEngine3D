@@ -68,10 +68,10 @@
 - **Reflected**: the mesh is captured for reflections
   - Type: `boolean`
   - Constraints: none
-- **Facing Camera X**: the mesh is horizontally facing the camera
+- **Facing Camera Horizontally**: the mesh is horizontally facing the camera
   - Type: `boolean`
   - Constraints: none
-- **Facing Camera Y**: the mesh is vertically facing the camera
+- **Facing Camera Vertically**: the mesh is vertically facing the camera
   - Type: `boolean`
   - Constraints: none
 - **Bright**: the mesh is captured for bloom

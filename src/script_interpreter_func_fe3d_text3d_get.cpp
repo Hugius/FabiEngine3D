@@ -420,6 +420,48 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string& functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:text3d_get_font_map_path")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText3d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->text3d_getFontMapPath(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text3d_get_content")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText3d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->text3d_getContent(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text3d_get_min_texture_alpha")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText3d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->text3d_getMinTextureAlpha(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

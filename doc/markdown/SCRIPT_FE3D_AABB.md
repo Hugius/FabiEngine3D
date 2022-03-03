@@ -1,37 +1,35 @@
-# AABB
+# AABB Scripting Functions
 
 ## Setters
 
-- `fe3d:aabb_place`(`STR` newID, `DEC` x, `DEC` y, `DEC` z, `DEC` width, `DEC` height, `DEC` depth) -----> `NONE`
-  Places a new AABB with **newID** (cannot start with @) with size of **width**, **height**, **depth** at position as **xyz**.
-- `fe3d:aabb_delete`(`STR` ID) -----> `NONE`
-  Deletes non-bound AABB with **ID** if existing.
-- `fe3d:aabb_set_visible`(`STR` ID, `BOL` visible) -----> `NONE`
-  Sets the visibility of non-bound AABB with **ID** to **visible**.
-- `fe3d:aabb_set_position`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Sets the position as **xyz** of non-bound AABB with **ID**.
-- `fe3d:aabb_move`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Moves the non-bound AABB with factor **xyz** of AABB with **ID**.
-- `fe3d:aabb_set_size`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Sets the size as **xyz** of non-bound AABB with **ID**.
-- `fe3d:aabb_scale`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-  Scales the non-bound AABB with factor **xyz** of AABB with **ID**.
-- `fe3d:aabb_set_raycast_responsive`(`STR` ID, `BOL` responsive) -----> `NONE`
-  Sets the non-bound AABB raycasting responsiveness to **responsive** of AABB with **ID**.
-- `fe3d:aabb_set_collision_responsive`(`STR` ID, `BOL` responsive) -----> `NONE`
-  Sets the non-bound AABB collision responsiveness to **responsive** of AABB with **ID**.
+- `fe3d:aabb_place` (`STR` new_id, `STR` editor_id) -----> `NONE`
+- `fe3d:aabb_delete` (`STR` id) -----> `NONE`
+- `fe3d:aabb_delete_all` () -----> `NONE`
+- `fe3d:aabb_set_visible` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:aabb_set_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:aabb_set_size` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:aabb_move` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:aabb_scale` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:aabb_move_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:aabb_scale_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:aabb_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
+- `fe3d:aabb_set_raycast_responsive` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:aabb_set_collision_responsive` (`STR` id, `BOL` value) -----> `NONE`
 
 ## Getters
 
-- `fe3d:aabb_is_existing`(`STR` ID) -----> `BOL`
-  Returns true if AABB with **ID** is existing.
-- `fe3d:aabb_find_ids`(`STR` subID) -----> `LIST`
-  Returns a list of strings with the IDs of all AABBs which IDs start with **subID**.
-- `fe3d:aabb_get_all_ids`() -----> `LIST`
-  Returns a list of strings with the full IDs of all AABB.
-- `fe3d:aabb_is_visible`(`STR` ID) -----> `BOL`
-  Returns true if AABB with **ID** is visible.
-- `fe3d:aabb_get_position`(`STR` ID) -----> `VEC3`
-  Returns the position of AABB with **ID**.
-- `fe3d:aabb_get_size`(`STR` ID) -----> `VEC3`
-  Returns the size of AABB with **ID**.
+- `fe3d:aabb_find_ids` (`STR` id) -----> `LIST`
+- `fe3d:aabb_is_existing` (`STR` id) -----> `BOL`
+- `fe3d:aabb_is_visible` (`STR` id) -----> `BOL`
+- `fe3d:aabb_get_position_x` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_position_y` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_position_z` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_size_x` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_size_y` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_size_z` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_ids` () -----> `LIST`
+- `fe3d:aabb_is_collision_responsive` (`STR` id) -----> `BOL`
+- `fe3d:aabb_is_raycast_responsive` (`STR` id) -----> `BOL`
+- `fe3d:aabb_get_color_r` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_color_g` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_color_b` (`STR` id) -----> `DEC`

@@ -309,7 +309,7 @@ const bool ScriptInterpreter::_executeFe3dText2dGetter(const string& functionNam
 			}
 		}
 	}
-	else if(functionName == "fe3d:text2d_get_font_path")
+	else if(functionName == "fe3d:text2d_get_font_map_path")
 	{
 		auto types = {SVT::STRING};
 

@@ -43,6 +43,9 @@
 - **Wave Height**: the height of the waves
   - Type: `decimal`
   - Constraints: at least `0.0`
+- **Max Depth**: the maximum visible transparent edge depth
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Texture Repeat**: the amount of times the textures are repeated
   - Type: `decimal`
   - Constraints: at least `0.0`
@@ -55,10 +58,10 @@
 - **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Reflective**: planar reflections are rendered on the mesh
+- **Reflective**: planar reflections are rendered if the camera is above the mesh
   - Type: `boolean`
   - Constraints: none
-- **Refractive**: planar refractions are rendered on the mesh
+- **Refractive**: planar refractions are rendered if the camera is under the mesh
   - Type: `boolean`
   - Constraints: none
 - **Specular**: specular lighting is rendered on the mesh
@@ -67,6 +70,6 @@
 - **Wireframed**: the mesh is rendered as a wireframe
   - Type: `boolean`
   - Constraints: none
-- **Quality**: determines what is captured by reflections/refractions
-  - Type: `enumeration`
-  - Constraints: `SKY` or `SKY_TERRAIN` or `SKY_TERRAIN_MODEL` or `SKY_TERRAIN_MODELS_QUAD3D`
+- **Edged**: the parts of the mesh that cross with the terrain mesh are transparent
+  - Type: `boolean`
+  - Constraints: none

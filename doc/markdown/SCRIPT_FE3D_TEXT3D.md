@@ -13,9 +13,9 @@
 - `fe3d:text3d_move` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:text3d_rotate` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:text3d_scale` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:text3d_move_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:text3d_rotate_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:text3d_scale_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:text3d_move_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:text3d_rotate_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:text3d_scale_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:text3d_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:text3d_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:text3d_set_min_height` (`STR` id, `DEC` value) -----> `NONE`

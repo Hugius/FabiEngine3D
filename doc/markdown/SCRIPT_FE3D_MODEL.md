@@ -21,12 +21,12 @@
 - `fe3d:model_move_part` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_rotate_part` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_scale_part` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_move_base_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_rotate_base_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_scale_base_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_move_part_to` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_rotate_part_to` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_scale_part_to` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_move_base_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:model_rotate_base_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:model_scale_base_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:model_move_part_to` (`STR` model_id, `STR` part_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:model_rotate_part_to` (`STR` model_id, `STR` part_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:model_scale_part_to` (`STR` model_id, `STR` part_id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:model_set_min_height` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_max_height` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_aabb_raycast_responsive` (`STR` id, `BOL` value) -----> `NONE`

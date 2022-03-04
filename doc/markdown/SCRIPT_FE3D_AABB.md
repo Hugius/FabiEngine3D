@@ -10,8 +10,8 @@
 - `fe3d:aabb_set_size` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:aabb_move` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:aabb_scale` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:aabb_move_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:aabb_scale_to` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:aabb_move_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:aabb_scale_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:aabb_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:aabb_set_raycast_responsive` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:aabb_set_collision_responsive` (`STR` id, `BOL` value) -----> `NONE`

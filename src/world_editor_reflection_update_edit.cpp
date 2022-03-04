@@ -106,7 +106,7 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_fe3d->reflection_setExceptionModelId(_activeReflectionId, selectedButtonId);
+					_fe3d->reflection_setExceptionEntityId(_activeReflectionId, selectedButtonId);
 					_gui->getOverlay()->deleteChoiceForm("exceptionList");
 				}
 			}

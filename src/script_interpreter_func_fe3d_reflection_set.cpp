@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			}
 		}
 	}
-	else if(functionName == "fe3d:reflection_capture")
+	else if(functionName == "fe3d:reflection_set_exception_entity_id")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -133,7 +133,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0]->getString()))
 			{
-				_fe3d->reflection_setExceptionModelId(args[0]->getString(), args[1]->getString());
+				_fe3d->reflection_setExceptionEntityId(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

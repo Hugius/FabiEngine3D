@@ -112,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			}
 		}
 	}
-	else if(functionName == "fe3d:reflection_get_exception_model_id")
+	else if(functionName == "fe3d:reflection_get_exception_entity_id")
 	{
 		auto types = {SVT::STRING};
 
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0]->getString()))
 			{
-				const auto result = _fe3d->reflection_getExceptionModelId(args[0]->getString());
+				const auto result = _fe3d->reflection_getExceptionEntityId(args[0]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}

@@ -36,9 +36,9 @@ void EngineInterface::reflection_capture(const string& id)
 	_core->getReflectionEntityManager()->getEntity(id)->capture();
 }
 
-void EngineInterface::reflection_setExceptionModelId(const string& reflectionId, const string& modelId)
+void EngineInterface::reflection_setExceptionEntityId(const string& id, const string& value)
 {
-	_core->getReflectionEntityManager()->getEntity(reflectionId)->setExceptionModelId(modelId);
+	_core->getReflectionEntityManager()->getEntity(id)->setExceptionEntityId(value);
 }
 
 const vector<string> EngineInterface::reflection_getIds() const
@@ -53,9 +53,9 @@ const vector<string> EngineInterface::reflection_getIds() const
 	return result;
 }
 
-const string& EngineInterface::reflection_getExceptionModelId(const string& id) const
+const string& EngineInterface::reflection_getExceptionEntityId(const string& id) const
 {
-	return _core->getReflectionEntityManager()->getEntity(id)->getExceptionModelId();
+	return _core->getReflectionEntityManager()->getEntity(id)->getExceptionEntityId();
 }
 
 const fvec3& EngineInterface::reflection_getPosition(const string& id) const

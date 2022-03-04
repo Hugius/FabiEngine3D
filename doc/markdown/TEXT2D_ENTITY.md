@@ -36,10 +36,10 @@
 - **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Horizontally Mirrored**: the characters horizontally mirrored
+- **Horizontally Flipped**: the characters horizontally flipped
   - Type: `boolean`
   - Constraints: none
-- **Vertically Mirrored**: the characters are vertically mirrored
+- **Vertically Flipped**: the characters are vertically flipped
   - Type: `boolean`
   - Constraints: none
 - **Wireframed**: the mesh is rendered as a wireframe

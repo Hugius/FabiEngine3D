@@ -40,10 +40,10 @@
 - **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Horizontally Mirrored**: the diffuse map is horizontally mirrored
+- **Horizontally Flipped**: the diffuse map is horizontally flipped
   - Type: `boolean`
   - Constraints: none
-- **Vertically Mirrored**: the diffuse map is vertically mirrored
+- **Vertically Flipped**: the diffuse map is vertically flipped
   - Type: `boolean`
   - Constraints: none
 - **Wireframed**: the mesh is rendered as a wireframe

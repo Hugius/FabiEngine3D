@@ -56,14 +56,14 @@ void ReflectionEntity::setCubeMap(shared_ptr<TextureBuffer> value)
 	_cubeTextureBuffer = value;
 }
 
-void ReflectionEntity::setExceptionModelId(const string& id)
+void ReflectionEntity::setExceptionEntityId(const string& id)
 {
-	_exceptionModelId = id;
+	_exceptionEntityId = id;
 }
 
-const string& ReflectionEntity::getExceptionModelId() const
+const string& ReflectionEntity::getExceptionEntityId() const
 {
-	return _exceptionModelId;
+	return _exceptionEntityId;
 }
 
 const fvec3& ReflectionEntity::getPosition() const

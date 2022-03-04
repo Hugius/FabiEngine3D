@@ -60,10 +60,10 @@ void MasterRenderer::captureCubeReflections()
 	{
 		if(entity->mustCapture())
 		{
-			const auto wasExceptionModelVisible = (entity->getExceptionModelId().empty() ? false : _modelEntityManager->getEntity(entity->getExceptionModelId())->isVisible());
-			if(!entity->getExceptionModelId().empty())
+			const auto wasExceptionEntityVisible = (entity->getExceptionEntityId().empty() ? false : _modelEntityManager->getEntity(entity->getExceptionEntityId())->isVisible());
+			if(!entity->getExceptionEntityId().empty())
 			{
-				_modelEntityManager->getEntity(entity->getExceptionModelId())->setVisible(false);
+				_modelEntityManager->getEntity(entity->getExceptionEntityId())->setVisible(false);
 			}
 
 			_camera->setPosition(entity->getPosition());
@@ -156,9 +156,9 @@ void MasterRenderer::captureCubeReflections()
 			entity->setCubeMap(make_shared<TextureBuffer>(textureId));
 			entity->setCaptured();
 
-			if(!entity->getExceptionModelId().empty())
+			if(!entity->getExceptionEntityId().empty())
 			{
-				_modelEntityManager->getEntity(entity->getExceptionModelId())->setVisible(wasExceptionModelVisible);
+				_modelEntityManager->getEntity(entity->getExceptionEntityId())->setVisible(wasExceptionEntityVisible);
 			}
 		}
 	}

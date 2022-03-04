@@ -926,7 +926,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 	for(const auto& reflectionId : _addedReflectionIds)
 	{
 		auto position = _fe3d->reflection_getPosition(reflectionId);
-		auto exceptionModelId = _fe3d->reflection_getExceptionModelId(reflectionId);
+		auto exceptionEntityId = _fe3d->reflection_getExceptionEntityId(reflectionId);
 
 		file
 			<< "REFLECTION "
@@ -938,7 +938,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			<< " "
 			<< position.z
 			<< " "
-			<< exceptionModelId
+			<< exceptionEntityId
 			<< endl;
 	}
 

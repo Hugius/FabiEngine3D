@@ -32,9 +32,9 @@ void EngineInterface::model_delete(const string& id)
 
 	for(const auto& reflectionId : reflection_getIds())
 	{
-		if(id == _core->getReflectionEntityManager()->getEntity(reflectionId)->getExceptionModelId())
+		if(id == _core->getReflectionEntityManager()->getEntity(reflectionId)->getExceptionEntityId())
 		{
-			_core->getReflectionEntityManager()->getEntity(reflectionId)->setExceptionModelId("");
+			_core->getReflectionEntityManager()->getEntity(reflectionId)->setExceptionEntityId("");
 		}
 	}
 

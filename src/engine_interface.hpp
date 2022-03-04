@@ -638,10 +638,10 @@ public:
 	void reflection_move(const string& id, const fvec3& change);
 	void reflection_moveTo(const string& id, const fvec3& target, float speed);
 	void reflection_capture(const string& id);
-	void reflection_setExceptionModelId(const string& reflectionId, const string& modelId);
+	void reflection_setExceptionEntityId(const string& id, const string& value);
 
 	const vector<string> reflection_getIds() const;
-	const string& reflection_getExceptionModelId(const string& id) const;
+	const string& reflection_getExceptionEntityId(const string& id) const;
 	const fvec3& reflection_getPosition(const string& id) const;
 	const bool reflection_isExisting(const string& id) const;
 	const bool reflection_isVisible(const string& id) const;

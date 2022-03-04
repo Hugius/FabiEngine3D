@@ -2,7 +2,7 @@
 
 ## Setters
 
-- `fe3d:text2d_place` (`STR` new_id, `STR` editor_id) -----> `NONE`
+- `fe3d:text2d_place` (`STR` new_id, `STR` editor_id, `DEC` position_x, `DEC` position_y, `DEC` size_x, `DEC` size_y) -----> `NONE`
 - `fe3d:text2d_delete` (`STR` id) -----> `NONE`
 - `fe3d:text2d_delete_all` () -----> `NONE`
 - `fe3d:text2d_set_visible` (`STR` id, `BOL` value) -----> `NONE`

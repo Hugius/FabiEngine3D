@@ -2,7 +2,7 @@
 
 ## Setters
 
-- `fe3d:aabb_place` (`STR` new_id, `STR` editor_id) -----> `NONE`
+- `fe3d:aabb_place` (`STR` new_id, `DEC` position_x, `DEC` position_y, `DEC` position_z, `DEC` size_x, `DEC` size_y, `DEC` size_z) -----> `NONE`
 - `fe3d:aabb_delete` (`STR` id) -----> `NONE`
 - `fe3d:aabb_delete_all` () -----> `NONE`
 - `fe3d:aabb_set_visible` (`STR` id, `BOL` value) -----> `NONE`

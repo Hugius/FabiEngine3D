@@ -2,7 +2,7 @@
 
 ## Setters
 
-- `fe3d:text3d_place` (`STR` new_id, `STR` editor_id) -----> `NONE`
+- `fe3d:text3d_place` (`STR` new_id, `STR` editor_id, `DEC` position_x, `DEC` position_y, `DEC` position_z) -----> `NONE`
 - `fe3d:text3d_delete` (`STR` id) -----> `NONE`
 - `fe3d:text3d_delete_all` () -----> `NONE`
 - `fe3d:text3d_set_content` (`STR` id, `STR` value) -----> `NONE`

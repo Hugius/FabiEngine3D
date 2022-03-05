@@ -272,12 +272,12 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					}
 					else
 					{
-						auto partId = aabbId;
-						reverse(partId.begin(), partId.end());
-						partId = partId.substr(0, partId.find('@'));
-						reverse(partId.begin(), partId.end());
+						auto rawAabbId = aabbId;
+						reverse(rawAabbId.begin(), rawAabbId.end());
+						rawAabbId = rawAabbId.substr(0, rawAabbId.find('@'));
+						reverse(rawAabbId.begin(), rawAabbId.end());
 
-						if(partId == args[0]->getString())
+						if(rawAabbId == args[0]->getString())
 						{
 							returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, modelId));
 						}

@@ -297,7 +297,7 @@ Line 2 of every script file must specify its state: entry or wait.
 ### 11.3 Types
 
 - [Engine Functions](SCRIPT_FE3D.md)
-- [Mathematical Functions](SCRIPT_MATH.md)
+- [Mathematics Functions](SCRIPT_MATH.md)
 - [Miscellaneous Functions](SCRIPT_MISC.md)
 
 ## 12. Tips & Tricks

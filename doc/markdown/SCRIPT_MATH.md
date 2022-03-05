@@ -1,4 +1,4 @@
-# Mathematical Scripting functions
+# Mathematics Scripting functions
 
 - `math:tan`(`DEC` value) -----> `DEC`
 - `math:sin`(`DEC` value) -----> `DEC`

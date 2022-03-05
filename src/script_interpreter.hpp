@@ -130,8 +130,8 @@ private:
 	const bool _executeFe3dFilesystemGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues);
 	const bool _executeFe3dClockSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues);
 	const bool _executeFe3dClockGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues);
-	const bool _executeFe3dMiscSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues);
-	const bool _executeFe3dMiscGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues);
+	const bool _executeFe3dUncategorizedSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues);
+	const bool _executeFe3dUncategorizedGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues);
 	const bool _validateFe3dSky(const string& id, bool isTemplate);
 	const bool _validateFe3dTerrain(const string& id, bool isTemplate);
 	const bool _validateFe3dWater(const string& id, bool isTemplate);

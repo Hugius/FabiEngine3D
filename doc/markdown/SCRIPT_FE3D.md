@@ -24,4 +24,4 @@
 - [Client](SCRIPT_FE3D_CLIENT.md)
 - [Filesystem](SCRIPT_FE3D_FILESYSTEM.md)
 - [Clock](SCRIPT_FE3D_CLOCK.md)
-- [Miscellaneous](SCRIPT_FE3D_MISCELLANEOUS.md)
+- [Uncategorized](SCRIPT_FE3D_MISCELLANEOUS.md)

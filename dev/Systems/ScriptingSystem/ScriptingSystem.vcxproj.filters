@@ -72,7 +72,7 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_input_get.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_set.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_uncategorized_set.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_math.cpp">
@@ -174,7 +174,7 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_graphics_get.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_get.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_uncategorized_get.cpp">
       <Filter>Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound2d_get.cpp">

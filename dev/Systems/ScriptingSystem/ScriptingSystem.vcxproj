@@ -47,8 +47,8 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_set.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_get.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_set.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_uncategorized_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_uncategorized_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_set.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_get.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_get.cpp" />

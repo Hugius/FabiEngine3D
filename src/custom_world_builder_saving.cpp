@@ -942,7 +942,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
 			<< endl;
 	}
 
-	for(const auto& soundId : _loadedSoundIds)
+	for(const auto& soundId : _loadedSound3dIds)
 	{
 		auto position = _fe3d->sound3d_getPosition(soundId);
 		auto maxVolume = _fe3d->sound3d_getMaxVolume(soundId);

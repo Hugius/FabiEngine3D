@@ -37,7 +37,7 @@ public:
 	const bool isPointlightAdded(const string& id) const;
 	const bool isSpotlightAdded(const string& id) const;
 	const bool isReflectionAdded(const string& id) const;
-	const bool isSoundAdded(const string& id) const;
+	const bool isSound3dAdded(const string& id) const;
 	const bool isGraphicsAdded() const;
 
 private:
@@ -53,7 +53,7 @@ private:
 	vector<string> _addedPointlightIds;
 	vector<string> _addedSpotlightIds;
 	vector<string> _addedReflectionIds;
-	vector<string> _addedSoundIds;
+	vector<string> _addedSound3dIds;
 	vector<string> _loadedSkyIds;
 	vector<string> _loadedTerrainIds;
 	vector<string> _loadedWaterIds;
@@ -64,7 +64,7 @@ private:
 	vector<string> _loadedPointlightIds;
 	vector<string> _loadedSpotlightIds;
 	vector<string> _loadedReflectionIds;
-	vector<string> _loadedSoundIds;
+	vector<string> _loadedSound3dIds;
 
 	string _currentProjectId = "";
 	string _loadedWorldId = "";

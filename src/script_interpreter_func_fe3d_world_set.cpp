@@ -221,13 +221,13 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:world_add_custom_sound")
+	else if(functionName == "fe3d:world_add_custom_sound3d")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_customWorldBuilder->isSoundAdded(args[0]->getString()))
+			if(_customWorldBuilder->isSound3dAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
 				return true;

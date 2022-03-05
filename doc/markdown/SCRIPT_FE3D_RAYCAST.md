@@ -1,57 +1,31 @@
-# Water Scripting Functions
+# Raycast Scripting Functions
 
 ## Setters
 
-- `fe3d:water_place` (`STR` new_id, `STR` editor_id) -----> `NONE`
-- `fe3d:water_select` (`STR` id) -----> `NONE`
-- `fe3d:water_set_ripple_speed` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
-- `fe3d:water_set_wave_speed` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
-- `fe3d:water_max_depth` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_size` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_dudv_map` (`STR` id, `STR` file_path) -----> `NONE`
-- `fe3d:water_set_normal_map` (`STR` id, `STR` file_path) -----> `NONE`
-- `fe3d:water_set_displacement_map` (`STR` id, `STR` file_path) -----> `NONE`
-- `fe3d:water_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
-- `fe3d:water_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
-- `fe3d:water_set_height` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_wave_height` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_texture_repeat` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_specular_shininess` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_specular_intensity` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_reflective` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:water_set_refractive` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:water_set_specular` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:water_set_wireframed` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:water_set_edged` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:raycast_set_terrain_intersection_enabled` (`BOL` value) -----> `NONE`
+- `fe3d:raycast_set_terrain_intersection_distance` (`DEC` value) -----> `NONE`
+- `fe3d:raycast_set_terrain_intersection_precision` (`DEC` value) -----> `NONE`
+- `fe3d:raycast_set_aabb_intersection_enabled` (`BOL` value) -----> `NONE`
 
 ## Getters
 
-- `fe3d:water_get_selected_id` (`STR` id) -----> `STR`
-- `fe3d:water_get_dudv_map_path` (`STR` id) -----> `STR`
-- `fe3d:water_get_displacement_map_path` (`STR` id) -----> `STR`
-- `fe3d:water_get_normal_map_path` (`STR` id) -----> `STR`
-- `fe3d:water_has_dudv_map` (`STR` id) -----> `BOL`
-- `fe3d:water_has_displacement_map` (`STR` id) -----> `BOL`
-- `fe3d:water_has_normal_map` (`STR` id) -----> `BOL`
-- `fe3d:water_get_max_depth` (`STR` id) -----> `DEC`
-- `fe3d:water_get_ripple_speed_x` (`STR` id) -----> `DEC`
-- `fe3d:water_get_ripple_speed_y` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wave_speed_x` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wave_speed_y` (`STR` id) -----> `DEC`
-- `fe3d:water_get_height` (`STR` id) -----> `DEC`
-- `fe3d:water_get_color_r` (`STR` id) -----> `DEC`
-- `fe3d:water_get_color_g` (`STR` id) -----> `DEC`
-- `fe3d:water_get_color_b` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wireframe_color_r` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wireframe_color_g` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wireframe_color_b` (`STR` id) -----> `DEC`
-- `fe3d:water_get_size` (`STR` id) -----> `DEC`
-- `fe3d:water_get_texture_repeat` (`STR` id) -----> `DEC`
-- `fe3d:water_get_wave_height` (`STR` id) -----> `DEC`
-- `fe3d:water_get_specular_shininess` (`STR` id) -----> `DEC`
-- `fe3d:water_get_specular_intensity` (`STR` id) -----> `DEC`
-- `fe3d:water_is_reflective` (`STR` id) -----> `BOL`
-- `fe3d:water_is_refractive` (`STR` id) -----> `BOL`
-- `fe3d:water_is_specular` (`STR` id) -----> `BOL`
-- `fe3d:water_is_edged` (`STR` id) -----> `BOL`
-- `fe3d:water_is_wireframed` (`STR` id) -----> `BOL`
+- `fe3d:raycast_get_cursor_ray_position_x` () -----> `DEC`
+- `fe3d:raycast_get_cursor_ray_position_y` () -----> `DEC`
+- `fe3d:raycast_get_cursor_ray_position_z` () -----> `DEC`
+- `fe3d:raycast_get_cursor_ray_direction_x` () -----> `DEC`
+- `fe3d:raycast_get_cursor_ray_direction_y` () -----> `DEC`
+- `fe3d:raycast_get_cursor_ray_direction_z` () -----> `DEC`
+- `fe3d:raycast_is_terrain_intersection_enabled` () -----> `BOL`
+- `fe3d:raycast_get_terrain_intersection_distance` () -----> `DEC`
+- `fe3d:raycast_get_terrain_intersection_precision` () -----> `DEC`
+- `fe3d:raycast_is_aabb_intersection_enabled` () -----> `BOL`
+- `fe3d:raycast_get_point_on_terrain_x` () -----> `DEC`
+- `fe3d:raycast_get_point_on_terrain_y` () -----> `DEC`
+- `fe3d:raycast_get_point_on_terrain_z` () -----> `DEC`
+- `fe3d:raycast_is_point_on_terrain_valid` () -----> `BOL`
+- `fe3d:raycast_get_closest_model` (`STR` part_id) -----> `STR`
+- `fe3d:raycast_get_closest_quad3d` () -----> `STR`
+- `fe3d:raycast_get_closest_text3d` () -----> `STR`
+- `fe3d:raycast_get_distance_to_model` (`STR` model_id, `STR` part_id) -----> `STR`
+- `fe3d:raycast_get_distance_to_quad3d` (`STR` id) -----> `STR`
+- `fe3d:raycast_get_distance_to_text3d` (`STR` id) -----> `STR`

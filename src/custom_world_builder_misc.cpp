@@ -92,12 +92,12 @@ void CustomWorldBuilder::addAabb(const string& id)
 
 void CustomWorldBuilder::addSound(const string& id)
 {
-	if(find(_addedSoundIds.begin(), _addedSoundIds.end(), id) != _addedSoundIds.end())
+	if(find(_addedSound3dIds.begin(), _addedSound3dIds.end(), id) != _addedSound3dIds.end())
 	{
 		abort();
 	}
 
-	_addedSoundIds.push_back(id);
+	_addedSound3dIds.push_back(id);
 }
 
 void CustomWorldBuilder::addPointlight(const string& id)
@@ -233,7 +233,7 @@ void CustomWorldBuilder::clearLoadedWorld()
 		_fe3d->reflection_delete(id);
 	}
 
-	for(const auto& id : _loadedSoundIds)
+	for(const auto& id : _loadedSound3dIds)
 	{
 		_fe3d->sound3d_delete(id);
 	}
@@ -248,7 +248,7 @@ void CustomWorldBuilder::clearLoadedWorld()
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
 	_loadedReflectionIds.clear();
-	_loadedSoundIds.clear();
+	_loadedSound3dIds.clear();
 	_loadedWorldId = "";
 	_isGraphicsLoaded = false;
 }
@@ -308,9 +308,9 @@ const bool CustomWorldBuilder::isReflectionAdded(const string& id) const
 	return find(_addedReflectionIds.begin(), _addedReflectionIds.end(), id) != _addedReflectionIds.end();
 }
 
-const bool CustomWorldBuilder::isSoundAdded(const string& id) const
+const bool CustomWorldBuilder::isSound3dAdded(const string& id) const
 {
-	return find(_addedSoundIds.begin(), _addedSoundIds.end(), id) != _addedSoundIds.end();
+	return find(_addedSound3dIds.begin(), _addedSound3dIds.end(), id) != _addedSound3dIds.end();
 }
 
 const bool CustomWorldBuilder::isGraphicsAdded() const
@@ -330,6 +330,6 @@ void CustomWorldBuilder::resetWorldBuild()
 	_addedPointlightIds.clear();
 	_addedSpotlightIds.clear();
 	_addedReflectionIds.clear();
-	_addedSoundIds.clear();
+	_addedSound3dIds.clear();
 	_isGraphicsAdded = false;
 }

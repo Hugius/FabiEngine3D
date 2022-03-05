@@ -1,7 +1,6 @@
 #include "script_interpreter.hpp"
 #include "configuration.hpp"
 #include "tools.hpp"
-#include "logger.hpp"
 
 using SVT = ScriptValueType;
 
@@ -305,7 +304,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:graphics_set_dof_dynamic")
+	else if(functionName == "fe3d:graphics_set_dof_quality")
 	{
 		auto types = {SVT::INTEGER};
 

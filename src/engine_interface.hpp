@@ -514,6 +514,7 @@ public:
 	void quad2d_setAnimationColumnIndex(const string& animationId, const string& quadId, unsigned int value);
 	void quad2d_setAnimationIntervalMultiplier(const string& animationId, const string& quadId, unsigned int value);
 	void quad2d_setAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value);
+	void quad2d_setTextureRepeat(const string& id, float value);
 
 	const vector<string> quad2d_getIds() const;
 	const vector<string> quad2d_getAnimationIds(const string& id) const;
@@ -528,6 +529,7 @@ public:
 	const fvec2& quad2d_getUvOffset(const string& id) const;
 	const float quad2d_getRotation(const string& id) const;
 	const float quad2d_getOpacity(const string& id) const;
+	const float quad2d_getTextureRepeat(const string& id) const;
 	const int quad2d_getAnimationPlayCount(const string& quadId, const string& animationId) const;
 	const unsigned int quad2d_getAnimationRowIndex(const string& quadId, const string& animationId) const;
 	const unsigned int quad2d_getAnimationColumnIndex(const string& quadId, const string& animationId) const;

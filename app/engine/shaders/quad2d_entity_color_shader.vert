@@ -8,6 +8,8 @@ uniform mat4 u_transformation;
 uniform vec2 u_uvMultiplier;
 uniform vec2 u_uvOffset;
 
+uniform float u_textureRepeat;
+
 uniform bool u_isHorizontallyFlipped;
 uniform bool u_isVerticallyFlipped;
 
@@ -15,10 +17,11 @@ out vec2 f_uv;
 
 void main()
 {
+	f_uv = (v_uv * u_textureRepeat);
 	f_uv.x = (u_isHorizontallyFlipped ? (1.0f - v_uv.x) : v_uv.x);
 	f_uv.y = (u_isVerticallyFlipped ? (1.0f - v_uv.y) : v_uv.y);
-	f_uv.x = (u_uvOffset.x + (f_uv.x * u_uvMultiplier.x));
-	f_uv.y = (u_uvOffset.y + (f_uv.y * u_uvMultiplier.y));
+	f_uv.x = ((u_uvOffset.x + (f_uv.x * u_uvMultiplier.x)) * u_textureRepeat);
+	f_uv.y = ((u_uvOffset.y + (f_uv.y * u_uvMultiplier.y)) * u_textureRepeat);
 
 	gl_Position = (u_transformation * vec4(v_position, 0.0f, 1.0f));
 }

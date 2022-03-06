@@ -83,7 +83,7 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 		string quadId;
 		string diffuseMapPath;
 		fvec3 color;
-		float opacity;
+		float opacity, textureRepeat;
 
 		istringstream iss(line);
 
@@ -93,7 +93,8 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 			>> color.r
 			>> color.g
 			>> color.b
-			>> opacity;
+			>> opacity
+			>> textureRepeat;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 
@@ -111,6 +112,7 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 			_fe3d->quad2d_setSize(quadId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->quad2d_setColor(quadId, color);
 			_fe3d->quad2d_setOpacity(quadId, opacity);
+			_fe3d->quad2d_setTextureRepeat(quadId, textureRepeat);
 
 			if(!diffuseMapPath.empty())
 			{

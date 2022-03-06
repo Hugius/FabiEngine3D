@@ -63,6 +63,7 @@ void Quad2dEditor::_updateChoiceMenu()
 	{
 		auto color = _fe3d->quad2d_getColor(_currentQuadId);
 		auto opacity = _fe3d->quad2d_getOpacity(_currentQuadId);
+		auto textureRepeat = _fe3d->quad2d_getTextureRepeat(_currentQuadId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -114,6 +115,10 @@ void Quad2dEditor::_updateChoiceMenu()
 		{
 			_gui->getOverlay()->createValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
+		{
+			_gui->getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
 
 		if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
 		{
@@ -134,6 +139,10 @@ void Quad2dEditor::_updateChoiceMenu()
 		{
 			opacity /= 100.0f;
 			_fe3d->quad2d_setOpacity(_currentQuadId, opacity);
+		}
+		if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
+		{
+			_fe3d->quad2d_setTextureRepeat(_currentQuadId, textureRepeat);
 		}
 	}
 }

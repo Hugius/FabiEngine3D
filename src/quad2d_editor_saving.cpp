@@ -26,6 +26,7 @@ const bool Quad2dEditor::saveEntitiesToFile() const
 		auto diffuseMapPath = _fe3d->quad2d_getDiffuseMapPath(quadId);
 		auto color = _fe3d->quad2d_getColor(quadId);
 		auto opacity = _fe3d->quad2d_getOpacity(quadId);
+		auto textureRepeat = _fe3d->quad2d_getTextureRepeat(quadId);
 
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -45,6 +46,8 @@ const bool Quad2dEditor::saveEntitiesToFile() const
 			<< color.b
 			<< " "
 			<< opacity
+			<< " "
+			<< textureRepeat
 			<< endl;
 	}
 

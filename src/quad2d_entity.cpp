@@ -251,6 +251,11 @@ const float Quad2dEntity::getRotation() const
 	return _rotation;
 }
 
+const float Quad2dEntity::getTextureRepeat() const
+{
+	return _textureRepeat;
+}
+
 const fvec2& Quad2dEntity::getSize() const
 {
 	return _size;
@@ -289,4 +294,9 @@ void Quad2dEntity::setWireframed(bool value)
 void Quad2dEntity::setCentered(bool value)
 {
 	_isCentered = value;
+}
+
+void Quad2dEntity::setTextureRepeat(float value)
+{
+	_textureRepeat = max(0.0f, value);
 }

@@ -56,6 +56,7 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 	_shaderBuffer->uploadUniform("u_minPosition", entity->getMinPosition());
 	_shaderBuffer->uploadUniform("u_maxPosition", entity->getMaxPosition());
 	_shaderBuffer->uploadUniform("u_opacity", entity->getOpacity());
+	_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 	_shaderBuffer->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor());
 	_shaderBuffer->uploadUniform("u_isWireframed", entity->isWireframed());

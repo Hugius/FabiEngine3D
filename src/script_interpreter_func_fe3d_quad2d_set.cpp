@@ -262,6 +262,20 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string& functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:quad2d_set_texture_repeat")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad2d(args[0]->getString(), false))
+			{
+				_fe3d->quad2d_setTextureRepeat(args[0]->getString(), args[1]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:quad2d_set_wireframed")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};

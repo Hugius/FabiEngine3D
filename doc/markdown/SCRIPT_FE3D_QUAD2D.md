@@ -19,6 +19,7 @@
 - `fe3d:quad2d_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:quad2d_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:quad2d_set_opacity` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:quad2d_set_texture_repeat` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:quad2d_set_wireframed` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad2d_set_horizontally_flipped` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad2d_set_vertically_flipped` (`STR` id, `BOL` value) -----> `NONE`
@@ -49,6 +50,7 @@
 - `fe3d:quad2d_get_wireframe_color_g` (`STR` id) -----> `DEC`
 - `fe3d:quad2d_get_wireframe_color_b` (`STR` id) -----> `DEC`
 - `fe3d:quad2d_get_opacity` (`STR` id) -----> `DEC`
+- `fe3d:quad2d_get_texture_repeat` (`STR` id) -----> `DEC`
 - `fe3d:quad2d_is_horizontally_flipped` (`STR` id) -----> `BOL`
 - `fe3d:quad2d_is_vertically_flipped` (`STR` id) -----> `BOL`
 - `fe3d:quad2d_is_wireframed` (`STR` id) -----> `BOL`

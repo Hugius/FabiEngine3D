@@ -91,7 +91,6 @@ void ScriptEditor::_unloadGUI()
 
 void ScriptEditor::update()
 {
-
 	if(isLoaded())
 	{
 		_updateGUI();

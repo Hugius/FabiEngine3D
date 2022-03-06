@@ -223,7 +223,7 @@ void ScriptEditor::_updateMiscellaneous()
 	{
 		const unsigned int currentLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
 		const unsigned int lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
-		const float lastLineHeight = _fe3d->text3d_getPosition(to_string(lineCount - 1)).y;
+		const float lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;
 
 		if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 		{

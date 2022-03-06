@@ -94,7 +94,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				if(_fe3d->text3d_getContent(textId).empty())
 				{
 					fvec3 lineTextPosition = (_fe3d->text3d_getPosition(textId));
-					lineTextPosition.x = (SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
+					lineTextPosition.x = (TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
 					lineTextPosition.z -= SELECTION_DEPTH;
 					_fe3d->quad3d_create(selectionId, false);
 					_fe3d->quad3d_setColor(selectionId, SELECTION_COLOR);

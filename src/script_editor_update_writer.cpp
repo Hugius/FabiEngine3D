@@ -405,12 +405,12 @@ void ScriptEditor::_updateTextWriter()
 		fvec3 position;
 		if(cursorCharIndex == 0)
 		{
-			fvec3 linePosition = _fe3d->text3d_getPosition(to_string(cursorLineIndex));
-			position = fvec3(SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET, linePosition.y, linePosition.z);
+			fvec3 linePosition = _fe3d->aabb_getBasePosition(to_string(cursorLineIndex));
+			position = fvec3(TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET, linePosition.y, linePosition.z);
 		}
 		else
 		{
-			position = _fe3d->text3d_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
+			position = _fe3d->aabb_getBasePosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
 		}
 		position += fvec3(TEXT_CHARACTER_SIZE.x * 0.5f, 0.0f, 0.0f);
 		_fe3d->text3d_setPosition("cursor", position);

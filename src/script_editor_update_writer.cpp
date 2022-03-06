@@ -18,75 +18,38 @@ void ScriptEditor::_updateTextWriter()
 			return;
 		}
 
-		bool textHasChanged = false;
-		unsigned int cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
-		unsigned int cursorCharIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharIndex();
-		string newCharacters = "";
-
-		auto hoveredTextId = _fe3d->raycast_getClosestAabbId();
+		const auto hoveredTextId = _fe3d->raycast_getClosestAabbId();
 		int hoveredLineIndex = -1;
 		int hoveredCharacterIndex = -1;
+
 		if(!hoveredTextId.empty())
 		{
-			bool extractingLineNumber = true;
-			string lineIndexString = "";
-			string charIndexString = "";
-
-			for(const auto& c : hoveredTextId)
+			if(hoveredTextId.find('_') == string::npos)
 			{
-				if(extractingLineNumber)
-				{
-					lineIndexString += c;
-				}
-				else
-				{
-					charIndexString += c;
-				}
-
-				if(c == '_')
-				{
-					extractingLineNumber = false;
-				}
-			}
-
-			hoveredLineIndex = stoi(lineIndexString);
-			if(!charIndexString.empty())
-			{
-				hoveredCharacterIndex = stoi(charIndexString);
-			}
-		}
-
-		if(_activeActionKey == InputType::NONE)
-		{
-			for(InputType actionKey : ACTION_KEYS)
-			{
-				if(_fe3d->input_isKeyPressed(actionKey))
-				{
-					_activeActionKey = actionKey;
-					break;
-				}
-			}
-		}
-		else
-		{
-			if(_passedFrames == CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM)
-			{
-				_isContinuousActionAllowed = true;
-				_passedFrames = 0;
+				hoveredLineIndex = stoi(hoveredTextId);
 			}
 			else
 			{
-				_passedFrames++;
+				hoveredLineIndex = stoi(hoveredTextId.substr(0, hoveredTextId.find('_')));
+				hoveredCharacterIndex = stoi(hoveredTextId.substr(hoveredTextId.find('_') + 1));
 			}
 		}
 
-		if(!_fe3d->input_isKeyDown(_activeActionKey))
+		_pressedActionKey = InputType::NONE;
+
+		for(InputType actionKey : ACTION_KEYS)
 		{
-			_activeActionKey = InputType::NONE;
-			_passedFrames = 0;
-			_isSingleActionAllowed = true;
-			_isContinuousActionAllowed = false;
+			if(_fe3d->input_isKeyPressed(actionKey))
+			{
+				_pressedActionKey = actionKey;
+				break;
+			}
 		}
+
+		string newCharacters = "";
+		unsigned int cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
+		unsigned int cursorCharIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharIndex();
+		bool hasTextChanged = false;
 
 		if(_hasClickedLMB)
 		{
@@ -104,117 +67,78 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_ENTER)
+		else if(_pressedActionKey == InputType::KEY_ENTER)
 		{
 			if(_firstSelectedLineIndex == -1)
 			{
 				if(_script->getScriptFile(_currentScriptFileId)->getLineCount() < MAX_LINE_COUNT)
 				{
-					if(_isSingleActionAllowed || _isContinuousActionAllowed)
-					{
-						if(((_fe3d->misc_getPassedUpdateCount() % CONTINUOUS_TEXT_ACTION_INTERVAL) == 0) || _isSingleActionAllowed)
-						{
-							_isSingleActionAllowed = false;
+					string currentLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex);
+					string textToExtract = currentLineText;
+					textToExtract = textToExtract.substr(cursorCharIndex, textToExtract.size() - cursorCharIndex);
 
-							string currentLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex);
-							string textToExtract = currentLineText;
-							textToExtract = textToExtract.substr(cursorCharIndex, textToExtract.size() - cursorCharIndex);
+					_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText.substr(0, cursorCharIndex));
 
-							_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText.substr(0, cursorCharIndex));
+					cursorCharIndex = 0;
+					cursorLineIndex++;
 
-							cursorCharIndex = 0;
-							cursorLineIndex++;
-
-							_script->getScriptFile(_currentScriptFileId)->insertNewLine(cursorLineIndex, textToExtract);
-							textHasChanged = true;
-						}
-					}
+					_script->getScriptFile(_currentScriptFileId)->insertNewLine(cursorLineIndex, textToExtract);
+					hasTextChanged = true;
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_LEFT)
+		else if(_pressedActionKey == InputType::KEY_LEFT)
 		{
-			if(_isSingleActionAllowed || _isContinuousActionAllowed)
+			if(cursorCharIndex > 0)
 			{
-				if(((_fe3d->misc_getPassedUpdateCount() % CONTINUOUS_TEXT_ACTION_INTERVAL) == 0) || _isSingleActionAllowed)
+				cursorCharIndex--;
+			}
+			else
+			{
+				if(cursorLineIndex > 0)
 				{
-					_isSingleActionAllowed = false;
-
-					if(cursorCharIndex > 0)
-					{
-						cursorCharIndex--;
-					}
-					else
-					{
-						if(cursorLineIndex > 0)
-						{
-							cursorLineIndex--;
-							cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
-						}
-					}
+					cursorLineIndex--;
+					cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_RIGHT)
+		else if(_pressedActionKey == InputType::KEY_RIGHT)
 		{
-			if(_isSingleActionAllowed || _isContinuousActionAllowed)
-			{
-				if(((_fe3d->misc_getPassedUpdateCount() % CONTINUOUS_TEXT_ACTION_INTERVAL) == 0) || _isSingleActionAllowed)
-				{
-					_isSingleActionAllowed = false;
 
-					if(cursorCharIndex < _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size())
-					{
-						cursorCharIndex++;
-					}
-					else
-					{
-						if(cursorLineIndex < _script->getScriptFile(_currentScriptFileId)->getLineCount() - 1)
-						{
-							cursorLineIndex++;
-							cursorCharIndex = 0;
-						}
-					}
+			if(cursorCharIndex < _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size())
+			{
+				cursorCharIndex++;
+			}
+			else
+			{
+				if(cursorLineIndex < _script->getScriptFile(_currentScriptFileId)->getLineCount() - 1)
+				{
+					cursorLineIndex++;
+					cursorCharIndex = 0;
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_UP)
+		else if(_pressedActionKey == InputType::KEY_UP)
 		{
-			if(_isSingleActionAllowed || _isContinuousActionAllowed)
+			if(cursorLineIndex > 0)
 			{
-				if(((_fe3d->misc_getPassedUpdateCount() % CONTINUOUS_TEXT_ACTION_INTERVAL) == 0) || _isSingleActionAllowed)
+				cursorLineIndex--;
+
+				if(cursorCharIndex > _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size())
 				{
-					_isSingleActionAllowed = false;
-
-					if(cursorLineIndex > 0)
-					{
-						cursorLineIndex--;
-
-						if(cursorCharIndex > _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size())
-						{
-							cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
-						}
-					}
+					cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_DOWN)
+		else if(_pressedActionKey == InputType::KEY_DOWN)
 		{
-			if(_isSingleActionAllowed || _isContinuousActionAllowed)
+			if(cursorLineIndex < _script->getScriptFile(_currentScriptFileId)->getLineCount() - 1)
 			{
-				if(((_fe3d->misc_getPassedUpdateCount() % CONTINUOUS_TEXT_ACTION_INTERVAL) == 0) || _isSingleActionAllowed)
+				cursorLineIndex++;
+
+				if(cursorCharIndex > _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size())
 				{
-					_isSingleActionAllowed = false;
-
-					if(cursorLineIndex < _script->getScriptFile(_currentScriptFileId)->getLineCount() - 1)
-					{
-						cursorLineIndex++;
-
-						if(cursorCharIndex > _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size())
-						{
-							cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
-						}
-					}
+					cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
 				}
 			}
 		}
@@ -286,60 +210,52 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 
-			if(_activeActionKey == InputType::KEY_BACKSPACE || _activeActionKey == InputType::KEY_DELETE)
+			if(_pressedActionKey == InputType::KEY_BACKSPACE || _pressedActionKey == InputType::KEY_DELETE)
 			{
 				if(_firstSelectedLineIndex == -1)
 				{
-					if(_isSingleActionAllowed || _isContinuousActionAllowed)
+					if(cursorCharIndex == 0 && _pressedActionKey == InputType::KEY_BACKSPACE)
 					{
-						if(((_fe3d->misc_getPassedUpdateCount() % CONTINUOUS_TEXT_ACTION_INTERVAL) == 0) || _isSingleActionAllowed)
+						if(cursorLineIndex > 0)
 						{
-							_isSingleActionAllowed = false;
+							string textToMerge = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex);
+							_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex);
+							cursorLineIndex--;
 
-							if(cursorCharIndex == 0 && _activeActionKey == InputType::KEY_BACKSPACE)
+							cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
+							_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex,
+																					  _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex) + textToMerge);
+							hasTextChanged = true;
+						}
+					}
+					else if(cursorCharIndex == currentLineText.size() && _pressedActionKey == InputType::KEY_DELETE)
+					{
+						if(cursorLineIndex < _script->getScriptFile(_currentScriptFileId)->getLineCount() - 1)
+						{
+							string textToMerge = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex + 1);
+
+							if((currentLineText.size() + textToMerge.size()) <= MAX_CHARACTERS_PER_LINE)
 							{
-								if(cursorLineIndex > 0)
-								{
-									string textToMerge = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex);
-									_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex);
-									cursorLineIndex--;
+								_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex + 1);
 
-									cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
-									_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex,
-																							  _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex) + textToMerge);
-									textHasChanged = true;
-								}
-							}
-							else if(cursorCharIndex == currentLineText.size() && _activeActionKey == InputType::KEY_DELETE)
-							{
-								if(cursorLineIndex < _script->getScriptFile(_currentScriptFileId)->getLineCount() - 1)
-								{
-									string textToMerge = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex + 1);
-
-									if((currentLineText.size() + textToMerge.size()) <= MAX_CHARACTERS_PER_LINE)
-									{
-										_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex + 1);
-
-										currentLineText += textToMerge;
-										_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText);
-										textHasChanged = true;
-									}
-								}
-							}
-							else if(cursorCharIndex > 0 && _fe3d->input_isKeyDown(InputType::KEY_BACKSPACE))
-							{
-								cursorCharIndex--;
-								currentLineText.erase(currentLineText.begin() + cursorCharIndex);
-								textHasChanged = true;
+								currentLineText += textToMerge;
 								_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText);
-							}
-							else if(_fe3d->input_isKeyDown(InputType::KEY_DELETE))
-							{
-								currentLineText.erase(currentLineText.begin() + cursorCharIndex);
-								textHasChanged = true;
-								_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText);
+								hasTextChanged = true;
 							}
 						}
+					}
+					else if(cursorCharIndex > 0 && _fe3d->input_isKeyDown(InputType::KEY_BACKSPACE))
+					{
+						cursorCharIndex--;
+						currentLineText.erase(currentLineText.begin() + cursorCharIndex);
+						hasTextChanged = true;
+						_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText);
+					}
+					else if(_fe3d->input_isKeyDown(InputType::KEY_DELETE))
+					{
+						currentLineText.erase(currentLineText.begin() + cursorCharIndex);
+						hasTextChanged = true;
+						_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText);
 					}
 				}
 			}
@@ -367,7 +283,7 @@ void ScriptEditor::_updateTextWriter()
 							}
 						}
 
-						textHasChanged = true;
+						hasTextChanged = true;
 
 						_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText);
 					}
@@ -375,9 +291,9 @@ void ScriptEditor::_updateTextWriter()
 			}
 		}
 
-		_updateTextSelector(newCharacters, cursorLineIndex, cursorCharIndex, hoveredLineIndex, textHasChanged);
+		_updateTextSelector(newCharacters, cursorLineIndex, cursorCharIndex, hoveredLineIndex, hasTextChanged);
 
-		if(textHasChanged || _hasClickedLMB)
+		if(hasTextChanged || _hasClickedLMB)
 		{
 			_reloadScriptTextDisplay(false);
 		}
@@ -414,7 +330,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 		position += fvec3(TEXT_CHARACTER_SIZE.x * 0.5f, 0.0f, 0.0f);
 		_fe3d->text3d_setPosition("cursor", position);
-		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
+		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _pressedActionKey != InputType::NONE);
 		_fe3d->text3d_setContent("cursor", (showBar ? "|" : " "));
 
 		_script->getScriptFile(_currentScriptFileId)->setCursorLineIndex(cursorLineIndex);

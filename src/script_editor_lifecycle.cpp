@@ -58,15 +58,13 @@ void ScriptEditor::_unload()
 	_passedFrames = 0;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
-	_isSingleActionAllowed = true;
-	_isContinuousActionAllowed = false;
 	_wasGuiFocused = false;
 	_hasClickedLMB = false;
 	_isCreatingScriptFile = false;
 	_isChoosingScriptFile = false;
 	_isRenamingScriptFile = false;
 	_isSearchingScriptFile = false;
-	_activeActionKey = InputType::NONE;
+	_pressedActionKey = InputType::NONE;
 }
 
 void ScriptEditor::_loadGUI()

@@ -68,7 +68,7 @@ private:
 	static inline constexpr unsigned int CONTINUOUS_TEXT_ACTION_INTERVAL = 5;
 	static inline constexpr unsigned int MAX_PASSED_BAR_FRAMES = 50;
 	static inline constexpr unsigned int MAX_CHARACTERS_PER_LINE = 88;
-	static inline constexpr unsigned int MAX_LINE_COUNT = 100;
+	static inline constexpr unsigned int MAX_LINE_COUNT = 99;
 	static inline constexpr unsigned int MAX_VISIBLE_LINES = 13;
 	static inline constexpr unsigned int BLOOM_QUALITY = 1;
 	unsigned int _passedFrames = 0;
@@ -102,8 +102,6 @@ private:
 
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
-	bool _isSingleActionAllowed = true;
-	bool _isContinuousActionAllowed = false;
 	bool _wasGuiFocused = false;
 	bool _hasClickedLMB = false;
 	bool _isCreatingScriptFile = false;
@@ -111,7 +109,7 @@ private:
 	bool _isRenamingScriptFile = false;
 	bool _isSearchingScriptFile = false;
 
-	InputType _activeActionKey = InputType::NONE;
+	InputType _pressedActionKey = InputType::NONE;
 	static inline const vector<InputType> ACTION_KEYS =
 	{
 		InputType::KEY_ENTER,

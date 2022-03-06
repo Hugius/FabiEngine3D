@@ -11,7 +11,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 	if(_firstSelectedLineIndex != -1)
 	{
 		if(_hasClickedLMB || _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT) ||
-		   _activeActionKey != InputType::NONE ||
+		   _pressedActionKey != InputType::NONE ||
 		   !newCharacters.empty() ||
 		   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_V)) ||
 		   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_X)))
@@ -74,7 +74,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 
 				textHasChanged = true;
 
-				_activeActionKey = InputType::NONE;
+				_pressedActionKey = InputType::NONE;
 			}
 
 			_firstSelectedLineIndex = -1;

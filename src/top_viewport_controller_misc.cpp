@@ -232,6 +232,7 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\terrain\\blend_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\terrain\\diffuse_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\terrain\\height_map\\");
+	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\terrain\\normal_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\text2d\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\text2d\\font_map\\");
 	directoryPaths.push_back(projectDirectoryPath + "assets\\image\\entity\\text3d\\");

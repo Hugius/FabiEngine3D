@@ -371,7 +371,7 @@ void EngineInterface::model_scalePartTo(const string& modelId, const string& par
 	_core->getModelEntityManager()->getEntity(modelId)->scalePartTo(partId, target, speed);
 }
 
-void EngineInterface::model_setTextureRepeat(const string& modelId, const string& partId, float value)
+void EngineInterface::model_setTextureRepeat(const string& modelId, const string& partId, unsigned int value)
 {
 	_core->getModelEntityManager()->getEntity(modelId)->setTextureRepeat(partId, value);
 }
@@ -669,7 +669,7 @@ const float EngineInterface::model_getLevelOfDetailDistance(const string& id) co
 	return _core->getModelEntityManager()->getEntity(id)->getLevelOfDetailDistance();
 }
 
-const float EngineInterface::model_getTextureRepeat(const string& modelId, const string& partId) const
+const unsigned int EngineInterface::model_getTextureRepeat(const string& modelId, const string& partId) const
 {
 	return _core->getModelEntityManager()->getEntity(modelId)->getTextureRepeat(partId);
 }

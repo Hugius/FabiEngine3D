@@ -44,9 +44,6 @@
 - **Emission Intenstiy**: the intensity of the emission map
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Texture Repeat**: the amount of times the textures are repeated
-  - Type: `decimal`
-  - Constraints: at least `0.0`
 - **Lightness**: the lightness multiplier of the mesh
   - Type: `decimal`
   - Constraints: at least `0.0`
@@ -62,6 +59,9 @@
 - **Max Height**: the maximum Y position to which fragments are visible
   - Type: `decimal`
   - Constraints: none
+- **Texture Repeat**: the amount of times the textures are repeated
+  - Type: `integer`
+  - Constraints: at least `1`
 - **Shadowed**: the mesh is captured for shadows
   - Type: `boolean`
   - Constraints: none

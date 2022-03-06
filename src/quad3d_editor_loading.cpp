@@ -112,10 +112,10 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		fvec2 size;
 		fvec3 color;
 		float lightness;
-		float textureRepeat;
 		float opacity;
 		float minTextureAlpha;
 		float emissionIntensity;
+		unsigned int textureRepeat;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
 		bool isReflected;

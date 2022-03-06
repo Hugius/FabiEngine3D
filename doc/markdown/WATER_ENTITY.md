@@ -46,9 +46,6 @@
 - **Max Depth**: the maximum visible transparent edge depth
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Texture Repeat**: the amount of times the textures are repeated
-  - Type: `decimal`
-  - Constraints: at least `0.0`
 - **Specular Shininess**: the shininess of the specular lighting
   - Type: `decimal`
   - Constraints: at least `0.0`
@@ -58,6 +55,9 @@
 - **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
+- **Texture Repeat**: the amount of times the textures are repeated
+  - Type: `integer`
+  - Constraints: at least `1`
 - **Reflective**: planar reflections are rendered if the camera is above the mesh
   - Type: `boolean`
   - Constraints: none

@@ -50,9 +50,9 @@ void WaterEntity::setRippleOffset(const fvec2& value)
 	_rippleOffset = value;
 }
 
-void WaterEntity::setTextureRepeat(float value)
+void WaterEntity::setTextureRepeat(unsigned int value)
 {
-	_textureRepeat = max(0.0f, value);
+	_textureRepeat = max(unsigned int(1), value);
 }
 
 void WaterEntity::setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value)
@@ -180,7 +180,7 @@ const fvec2& WaterEntity::getRippleOffset() const
 	return _rippleOffset;
 }
 
-const float WaterEntity::getTextureRepeat() const
+const unsigned int WaterEntity::getTextureRepeat() const
 {
 	return _textureRepeat;
 }

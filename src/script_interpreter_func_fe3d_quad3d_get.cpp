@@ -278,9 +278,9 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string& functionNam
 		{
 			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->quad3d_getTextureRepeat(args[0]->getString());
+				const auto result = static_cast<int>(_fe3d->quad3d_getTextureRepeat(args[0]->getString()));
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}

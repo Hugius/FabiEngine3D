@@ -83,7 +83,8 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 		string quadId;
 		string diffuseMapPath;
 		fvec3 color;
-		float opacity, textureRepeat;
+		float opacity;
+		unsigned int textureRepeat;
 
 		istringstream iss(line);
 

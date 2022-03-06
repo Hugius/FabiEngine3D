@@ -15,7 +15,7 @@
 - `fe3d:water_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:water_set_height` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:water_set_wave_height` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:water_set_texture_repeat` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:water_set_texture_repeat` (`STR` id, `INT` value) -----> `NONE`
 - `fe3d:water_set_specular_shininess` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:water_set_specular_intensity` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:water_set_reflective` (`STR` id, `BOL` value) -----> `NONE`
@@ -46,7 +46,7 @@
 - `fe3d:water_get_wireframe_color_g` (`STR` id) -----> `DEC`
 - `fe3d:water_get_wireframe_color_b` (`STR` id) -----> `DEC`
 - `fe3d:water_get_size` (`STR` id) -----> `DEC`
-- `fe3d:water_get_texture_repeat` (`STR` id) -----> `DEC`
+- `fe3d:water_get_texture_repeat` (`STR` id) -----> `INT`
 - `fe3d:water_get_wave_height` (`STR` id) -----> `DEC`
 - `fe3d:water_get_specular_shininess` (`STR` id) -----> `DEC`
 - `fe3d:water_get_specular_intensity` (`STR` id) -----> `DEC`

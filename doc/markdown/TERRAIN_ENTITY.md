@@ -62,18 +62,18 @@
 - **Specular Intensity**: the intensity of the specular lighting
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Texture Repeat**: the amount of times the base textures are repeated
-  - Type: `decimal`
-  - Constraints: at least `0.0`
+- **Texture Repeat**: the amount of times the textures are repeated
+  - Type: `integer`
+  - Constraints: at least `1`
 - **Red Texture Repeat**: the amount of times the textures of the red blend map channel are repeated
-  - Type: `decimal`
-  - Constraints: at least `0.0`
+  - Type: `integer`
+  - Constraints: at least `1`
 - **Green Texture Repeat**: the amount of times the textures of the green blend map channel are repeated
-  - Type: `decimal`
-  - Constraints: at least `0.0`
+  - Type: `integer`
+  - Constraints: at least `1`
 - **Blue Texture Repeat**: the amount of times the textures of the blue blend map channel are repeated
-  - Type: `decimal`
-  - Constraints: at least `0.0`
+  - Type: `integer`
+  - Constraints: at least `1`
 - **Specular**: specular lighting is rendered on the mesh
   - Type: `boolean`
   - Constraints: none

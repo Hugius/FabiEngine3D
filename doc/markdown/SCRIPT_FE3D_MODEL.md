@@ -31,7 +31,7 @@
 - `fe3d:model_set_max_height` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:model_set_aabb_raycast_responsive` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_aabb_collision_responsive` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:model_set_texture_repeat` (`STR` model_id, `STR` part_id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_texture_repeat` (`STR` model_id, `STR` part_id, `INT` value) -----> `NONE`
 - `fe3d:model_set_diffuse_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
 - `fe3d:model_set_emission_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
 - `fe3d:model_set_specular_map` (`STR` model_id, `STR` part_id, `STR` file_path) -----> `NONE`
@@ -106,7 +106,7 @@
 - `fe3d:model_get_wireframe_color_b` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_opacity` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_emission_intensity` (`STR` model_id, `STR` part_id) -----> `DEC`
-- `fe3d:model_get_texture_repeat` (`STR` model_id, `STR` part_id) -----> `DEC`
+- `fe3d:model_get_texture_repeat` (`STR` model_id, `STR` part_id) -----> `INT`
 - `fe3d:model_get_specular_shininess` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_specular_intensity` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_reflectivity` (`STR` model_id, `STR` part_id) -----> `DEC`

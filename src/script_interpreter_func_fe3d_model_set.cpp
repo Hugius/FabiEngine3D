@@ -481,7 +481,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_set_texture_repeat")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -489,7 +489,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			{
 				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					_fe3d->model_setTextureRepeat(args[0]->getString(), args[1]->getString(), args[2]->getDecimal());
+					_fe3d->model_setTextureRepeat(args[0]->getString(), args[1]->getString(), args[2]->getInteger());
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 				}

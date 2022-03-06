@@ -69,7 +69,7 @@ public:
 	void setSpecularShininess(const string& partId, float value);
 	void setSpecularIntensity(const string& partId, float value);
 	void setOpacity(const string& partId, float value);
-	void setTextureRepeat(const string& partId, float value);
+	void setTextureRepeat(const string& partId, unsigned int value);
 	void setEmissionIntensity(const string& partId, float value);
 	void setSpecular(const string& partId, bool value);
 	void setReflective(const string& partId, bool value);
@@ -112,9 +112,10 @@ public:
 	const float getSpecularShininess(const string& partId) const;
 	const float getSpecularIntensity(const string& partId) const;
 	const float getOpacity(const string& partId) const;
-	const float getTextureRepeat(const string& partId) const;
 	const float getEmissionIntensity(const string& partId) const;
 	const float getMinTextureAlpha(const string& partId) const;
+
+	const unsigned int getTextureRepeat(const string& partId) const;
 
 	const bool isFrozen() const;
 	const bool isLevelOfDetailed() const;

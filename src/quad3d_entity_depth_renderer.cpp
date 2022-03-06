@@ -48,7 +48,7 @@ void Quad3dEntityDepthRenderer::render(const shared_ptr<Quad3dEntity> entity)
 	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxPosition().y, entity->getMaxHeight()));
 	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
 	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
-	_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
+	_shaderBuffer->uploadUniform("u_textureRepeat", static_cast<int>(entity->getTextureRepeat()));
 	_shaderBuffer->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 	_shaderBuffer->uploadUniform("u_uvOffset", entity->getUvOffset());
 	_shaderBuffer->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha());

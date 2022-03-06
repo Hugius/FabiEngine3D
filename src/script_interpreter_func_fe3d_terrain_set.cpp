@@ -241,13 +241,13 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:terrain_set_texture_repeat")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dTerrain(args[0]->getString(), false))
 			{
-				_fe3d->terrain_setTextureRepeat(_fe3d->terrain_getSelectedId(), args[1]->getDecimal());
+				_fe3d->terrain_setTextureRepeat(_fe3d->terrain_getSelectedId(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -255,13 +255,13 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:terrain_set_red_repeat")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dTerrain(args[0]->getString(), false))
 			{
-				_fe3d->terrain_setRedTextureRepeat(_fe3d->terrain_getSelectedId(), args[1]->getDecimal());
+				_fe3d->terrain_setRedTextureRepeat(_fe3d->terrain_getSelectedId(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -269,13 +269,13 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:terrain_set_green_repeat")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dTerrain(args[0]->getString(), false))
 			{
-				_fe3d->terrain_setGreenTextureRepeat(_fe3d->terrain_getSelectedId(), args[1]->getDecimal());
+				_fe3d->terrain_setGreenTextureRepeat(_fe3d->terrain_getSelectedId(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -283,13 +283,13 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:terrain_set_blue_repeat")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dTerrain(args[0]->getString(), false))
 			{
-				_fe3d->terrain_setBlueTextureRepeat(_fe3d->terrain_getSelectedId(), args[1]->getDecimal());
+				_fe3d->terrain_setBlueTextureRepeat(_fe3d->terrain_getSelectedId(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

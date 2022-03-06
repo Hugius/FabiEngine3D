@@ -108,24 +108,24 @@ void TerrainEntity::setBlueNormalMapPath(const string& filePath)
 	_blueNormalMapPath = filePath;
 }
 
-void TerrainEntity::setTextureRepeat(float value)
+void TerrainEntity::setTextureRepeat(unsigned int value)
 {
-	_textureRepeat = max(0.0f, value);
+	_textureRepeat = max(unsigned int(1), value);
 }
 
-void TerrainEntity::setRedTextureRepeat(float value)
+void TerrainEntity::setRedTextureRepeat(unsigned int value)
 {
-	_redTextureRepeat = max(0.0f, value);
+	_redTextureRepeat = max(unsigned int(1), value);
 }
 
-void TerrainEntity::setGreenTextureRepeat(float value)
+void TerrainEntity::setGreenTextureRepeat(unsigned int value)
 {
-	_greenTextureRepeat = max(0.0f, value);
+	_greenTextureRepeat = max(unsigned int(1), value);
 }
 
-void TerrainEntity::setBlueTextureRepeat(float value)
+void TerrainEntity::setBlueTextureRepeat(unsigned int value)
 {
-	_blueTextureRepeat = max(0.0f, value);
+	_blueTextureRepeat = max(unsigned int(1), value);
 }
 
 void TerrainEntity::setSize(float value)
@@ -268,22 +268,22 @@ const fvec3& TerrainEntity::getWireframeColor() const
 	return _wireframeColor;
 }
 
-const float TerrainEntity::getTextureRepeat() const
+const unsigned int TerrainEntity::getTextureRepeat() const
 {
 	return _textureRepeat;
 }
 
-const float TerrainEntity::getRedTextureRepeat() const
+const unsigned int TerrainEntity::getRedTextureRepeat() const
 {
 	return _redTextureRepeat;
 }
 
-const float TerrainEntity::getGreenTextureRepeat() const
+const unsigned int TerrainEntity::getGreenTextureRepeat() const
 {
 	return _greenTextureRepeat;
 }
 
-const float TerrainEntity::getBlueTextureRepeat() const
+const unsigned int TerrainEntity::getBlueTextureRepeat() const
 {
 	return _blueTextureRepeat;
 }

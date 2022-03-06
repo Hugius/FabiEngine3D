@@ -44,7 +44,7 @@ public:
 	void setOpacity(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
-	void setTextureRepeat(float value);
+	void setTextureRepeat(unsigned int value);
 	void setEmissionIntensity(float value);
 	void setFrozen(bool value);
 	void setMinTextureAlpha(float value);
@@ -67,9 +67,10 @@ public:
 	const float getOpacity() const;
 	const float getMinHeight() const;
 	const float getMaxHeight() const;
-	const float getTextureRepeat() const;
 	const float getEmissionIntensity() const;
 	const float getMinTextureAlpha() const;
+
+	const unsigned int getTextureRepeat() const;
 
 	const bool isFacingCameraHorizontally() const;
 	const bool isFacingCameraVertically() const;
@@ -104,7 +105,6 @@ private:
 
 	float _minTextureAlpha = 1.0f;
 	float _emissionIntensity = 1.0f;
-	float _textureRepeat = 1.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
@@ -112,6 +112,8 @@ private:
 	float _opacity = 1.0f;
 	float _minHeight = -FLT_MAX;
 	float _maxHeight = FLT_MAX;
+
+	unsigned int _textureRepeat = 1;
 
 	bool _isFacingCameraHorizontally = false;
 	bool _isFacingCameraVertically = false;

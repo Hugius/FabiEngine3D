@@ -26,7 +26,7 @@ public:
 	void setDudvMapPath(const string& value);
 	void setNormalMapPath(const string& value);
 	void setDisplacementMapPath(const string& value);
-	void setTextureRepeat(float value);
+	void setTextureRepeat(unsigned int value);
 	void setWaveHeight(float value);
 	void setSpecularShininess(float value);
 	void setSpecularIntensity(float value);
@@ -53,12 +53,13 @@ public:
 	const fvec2& getWaveSpeed() const;
 
 	const float getHeight() const;
-	const float getTextureRepeat() const;
 	const float getWaveHeight() const;
 	const float getMaxDepth() const;
 	const float getSpecularShininess() const;
 	const float getSpecularIntensity() const;
 	const float getSize() const;
+
+	const unsigned int getTextureRepeat() const;
 
 	const bool isSpecular() const;
 	const bool isReflective() const;
@@ -89,11 +90,12 @@ private:
 
 	float _height = 0.0f;
 	float _size = 1.0f;
-	float _textureRepeat = 1.0f;
 	float _waveHeight = 0.0f;
 	float _maxDepth = 0.0f;
 	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;
+
+	unsigned int _textureRepeat = 1;
 
 	bool _isSpecular = false;
 	bool _isEdged = 1.0f;

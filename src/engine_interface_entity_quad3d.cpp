@@ -263,7 +263,7 @@ void EngineInterface::quad3d_setOpacity(const string& id, float value)
 	_core->getQuad3dEntityManager()->getEntity(id)->setOpacity(value);
 }
 
-void EngineInterface::quad3d_setTextureRepeat(const string& id, float value)
+void EngineInterface::quad3d_setTextureRepeat(const string& id, unsigned int value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setTextureRepeat(value);
 }
@@ -298,7 +298,7 @@ const float EngineInterface::quad3d_getOpacity(const string& id) const
 	return _core->getQuad3dEntityManager()->getEntity(id)->getOpacity();
 }
 
-const float EngineInterface::quad3d_getTextureRepeat(const string& id) const
+const unsigned int EngineInterface::quad3d_getTextureRepeat(const string& id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getTextureRepeat();
 }

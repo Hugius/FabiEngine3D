@@ -268,7 +268,6 @@ const bool ModelEditor::loadEntitiesFromFile()
 			string reflectionMapPath;
 			string normalMapPath;
 			fvec3 color;
-			float textureRepeat;
 			float specularShininess;
 			float specularIntensity;
 			float reflectivity;
@@ -277,6 +276,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 			float opacity;
 			float minTextureAlpha;
 			unsigned int reflectionType;
+			unsigned int textureRepeat;
 			bool isSpecular;
 			bool isReflective;
 			bool isFaceCulled;

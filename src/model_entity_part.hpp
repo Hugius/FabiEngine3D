@@ -33,8 +33,9 @@ class ModelEntityPart final
 	float specularIntensity = 1.0f;
 	float opacity = 1.0f;
 	float emissionIntensity = 1.0f;
-	float textureRepeat = 1.0f;
 	float minTextureAlpha = 1.0f;
+
+	unsigned int textureRepeat = 1;
 
 	bool isSpecular = false;
 	bool isReflective = false;

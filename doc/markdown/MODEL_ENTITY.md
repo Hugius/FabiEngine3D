@@ -93,9 +93,6 @@
 - **Wireframe Color**: the RGB color multiplier of the wireframe
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
-- **Texture Repeat**: the amount of times the textures are repeated
-  - Type: `decimal`
-  - Constraints: at least `0.0`
 - **Lightness**: the lightness multiplier of the mesh
   - Type: `decimal`
   - Constraints: at least `0.0`
@@ -117,6 +114,9 @@
 - **Emission Intensity**: the intensity of the emission map
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
+- **Texture Repeat**: the amount of times the textures are repeated
+  - Type: `integer`
+  - Constraints: at least `1`
 - **Specular**: specular lighting is rendered on the mesh
   - Type: `boolean`
   - Constraints: none

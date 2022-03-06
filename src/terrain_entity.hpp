@@ -34,10 +34,10 @@ public:
 	void setGreenNormalMapPath(const string& value);
 	void setBlueNormalMap(shared_ptr<TextureBuffer> value);
 	void setBlueNormalMapPath(const string& value);
-	void setTextureRepeat(float value);
-	void setRedTextureRepeat(float value);
-	void setGreenTextureRepeat(float value);
-	void setBlueTextureRepeat(float value);
+	void setTextureRepeat(unsigned int value);
+	void setRedTextureRepeat(unsigned int value);
+	void setGreenTextureRepeat(unsigned int value);
+	void setBlueTextureRepeat(unsigned int value);
 	void setSize(float value);
 	void setMaxHeight(float value);
 	void setLightness(float value);
@@ -61,15 +61,16 @@ public:
 	const fvec3& getWireframeColor() const;
 
 	const vector<float>& getPixels() const;
-	const float getTextureRepeat() const;
-	const float getRedTextureRepeat() const;
-	const float getGreenTextureRepeat() const;
-	const float getBlueTextureRepeat() const;
 	const float getSize() const;
 	const float getMaxHeight() const;
 	const float getLightness() const;
 	const float getSpecularShininess() const;
 	const float getSpecularIntensity() const;
+
+	const unsigned int getRedTextureRepeat() const;
+	const unsigned int getGreenTextureRepeat() const;
+	const unsigned int getBlueTextureRepeat() const;
+	const unsigned int getTextureRepeat() const;
 
 	const bool isSpecular() const;
 	const bool isWireframed() const;
@@ -101,15 +102,16 @@ private:
 	fvec3 _wireframeColor = fvec3(1.0f);
 
 	vector<float> _pixels;
-	float _redTextureRepeat = 1.0f;
-	float _greenTextureRepeat = 1.0f;
-	float _blueTextureRepeat = 1.0f;
-	float _textureRepeat = 1.0f;
 	float _maxHeight = 1.0f;
 	float _size = 0.0f;
 	float _lightness = 1.0f;
 	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;
+
+	unsigned int _redTextureRepeat = 1;
+	unsigned int _greenTextureRepeat = 1;
+	unsigned int _blueTextureRepeat = 1;
+	unsigned int _textureRepeat = 1;
 
 	bool _isSpecular = false;
 	bool _isWireframed = false;

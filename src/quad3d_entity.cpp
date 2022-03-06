@@ -260,9 +260,9 @@ void Quad3dEntity::setMaxHeight(float value)
 	_maxHeight = value;
 }
 
-void Quad3dEntity::setTextureRepeat(float value)
+void Quad3dEntity::setTextureRepeat(unsigned int value)
 {
-	_textureRepeat = max(0.0f, value);
+	_textureRepeat = max(unsigned int(1), value);
 }
 
 void Quad3dEntity::setEmissionIntensity(float value)
@@ -365,7 +365,7 @@ const float Quad3dEntity::getMaxHeight() const
 	return _maxHeight;
 }
 
-const float Quad3dEntity::getTextureRepeat() const
+const unsigned int Quad3dEntity::getTextureRepeat() const
 {
 	return _textureRepeat;
 }

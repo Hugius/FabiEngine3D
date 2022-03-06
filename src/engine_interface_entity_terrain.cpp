@@ -27,7 +27,7 @@ void EngineInterface::terrain_setMaxHeight(const string& id, float value)
 	_core->getTerrainEntityManager()->loadVertexBuffer(id);
 }
 
-void EngineInterface::terrain_setTextureRepeat(const string& id, float value)
+void EngineInterface::terrain_setTextureRepeat(const string& id, unsigned int value)
 {
 	_core->getTerrainEntityManager()->getEntity(id)->setTextureRepeat(value);
 }
@@ -302,17 +302,17 @@ void EngineInterface::terrain_setBlueNormalMap(const string& id, const string& v
 	}
 }
 
-void EngineInterface::terrain_setRedTextureRepeat(const string& id, float value)
+void EngineInterface::terrain_setRedTextureRepeat(const string& id, unsigned int value)
 {
 	_core->getTerrainEntityManager()->getEntity(id)->setRedTextureRepeat(value);
 }
 
-void EngineInterface::terrain_setGreenTextureRepeat(const string& id, float value)
+void EngineInterface::terrain_setGreenTextureRepeat(const string& id, unsigned int value)
 {
 	_core->getTerrainEntityManager()->getEntity(id)->setGreenTextureRepeat(value);
 }
 
-void EngineInterface::terrain_setBlueTextureRepeat(const string& id, float value)
+void EngineInterface::terrain_setBlueTextureRepeat(const string& id, unsigned int value)
 {
 	_core->getTerrainEntityManager()->getEntity(id)->setBlueTextureRepeat(value);
 }
@@ -377,7 +377,7 @@ const float EngineInterface::terrain_getMaxHeight(const string& id) const
 	return _core->getTerrainEntityManager()->getEntity(id)->getMaxHeight();
 }
 
-const float EngineInterface::terrain_getTextureRepeat(const string& id) const
+const unsigned int EngineInterface::terrain_getTextureRepeat(const string& id) const
 {
 	return _core->getTerrainEntityManager()->getEntity(id)->getTextureRepeat();
 }
@@ -519,17 +519,17 @@ const fvec3& EngineInterface::terrain_getWireframeColor(const string& id) const
 	return _core->getTerrainEntityManager()->getEntity(id)->getWireframeColor();
 }
 
-const float EngineInterface::terrain_getRedTextureRepeat(const string& id) const
+const unsigned int EngineInterface::terrain_getRedTextureRepeat(const string& id) const
 {
 	return _core->getTerrainEntityManager()->getEntity(id)->getRedTextureRepeat();
 }
 
-const float EngineInterface::terrain_getGreenTextureRepeat(const string& id) const
+const unsigned int EngineInterface::terrain_getGreenTextureRepeat(const string& id) const
 {
 	return _core->getTerrainEntityManager()->getEntity(id)->getGreenTextureRepeat();
 }
 
-const float EngineInterface::terrain_getBlueTextureRepeat(const string& id) const
+const unsigned int EngineInterface::terrain_getBlueTextureRepeat(const string& id) const
 {
 	return _core->getTerrainEntityManager()->getEntity(id)->getBlueTextureRepeat();
 }

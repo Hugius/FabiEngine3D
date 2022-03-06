@@ -140,10 +140,10 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 
 	_shaderBuffer->uploadUniform("u_isWireframed", entity->isWireframed());
 	_shaderBuffer->uploadUniform("u_isSpecular", entity->isSpecular());
-	_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-	_shaderBuffer->uploadUniform("u_redTextureRepeat", entity->getRedTextureRepeat());
-	_shaderBuffer->uploadUniform("u_greenTextureRepeat", entity->getGreenTextureRepeat());
-	_shaderBuffer->uploadUniform("u_blueTextureRepeat", entity->getBlueTextureRepeat());
+	_shaderBuffer->uploadUniform("u_textureRepeat", static_cast<int>(entity->getTextureRepeat()));
+	_shaderBuffer->uploadUniform("u_redTextureRepeat", static_cast<int>(entity->getRedTextureRepeat()));
+	_shaderBuffer->uploadUniform("u_greenTextureRepeat", static_cast<int>(entity->getGreenTextureRepeat()));
+	_shaderBuffer->uploadUniform("u_blueTextureRepeat", static_cast<int>(entity->getBlueTextureRepeat()));
 	_shaderBuffer->uploadUniform("u_lightness", entity->getLightness());
 	_shaderBuffer->uploadUniform("u_specularShininess", entity->getSpecularShininess());
 	_shaderBuffer->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());

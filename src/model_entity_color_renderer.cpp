@@ -174,7 +174,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shaderBuffer->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha(partId));
 		_shaderBuffer->uploadUniform("u_isReflective", entity->isReflective(partId));
 		_shaderBuffer->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partId));
-		_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
+		_shaderBuffer->uploadUniform("u_textureRepeat", static_cast<int>(entity->getTextureRepeat(partId)));
 		_shaderBuffer->uploadUniform("u_opacity", entity->getOpacity(partId));
 		_shaderBuffer->uploadUniform("u_isSpecular", entity->isSpecular(partId));
 		_shaderBuffer->uploadUniform("u_reflectivity", entity->getReflectivity(partId));

@@ -16,7 +16,8 @@ uniform float u_minZ;
 uniform float u_maxX;
 uniform float u_maxY;
 uniform float u_maxZ;
-uniform float u_textureRepeat;
+
+uniform int u_textureRepeat;
 
 out vec2 f_uv;
 
@@ -26,8 +27,8 @@ void main()
 	vec4 viewSpacePosition  = (u_cameraView * worldSpacePosition);
 	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
 
-    f_uv.x = ((u_uvOffset.x + (v_uv.x * u_uvMultiplier.x)) * u_textureRepeat);
-	f_uv.y = ((u_uvOffset.y + (v_uv.y * u_uvMultiplier.y)) * u_textureRepeat);
+    f_uv.x = ((u_uvOffset.x + (v_uv.x * u_uvMultiplier.x)) * float(u_textureRepeat));
+	f_uv.y = ((u_uvOffset.y + (v_uv.y * u_uvMultiplier.y)) * float(u_textureRepeat));
 
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));

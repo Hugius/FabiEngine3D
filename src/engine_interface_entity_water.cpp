@@ -38,7 +38,7 @@ void EngineInterface::water_setSpecular(const string& id, bool value)
 	_core->getWaterEntityManager()->getEntity(id)->setSpecular(value);
 }
 
-void EngineInterface::water_setTextureRepeat(const string& id, float value)
+void EngineInterface::water_setTextureRepeat(const string& id, unsigned int value)
 {
 	_core->getWaterEntityManager()->getEntity(id)->setTextureRepeat(value);
 }
@@ -270,7 +270,7 @@ const float EngineInterface::water_getSize(const string& id) const
 	return _core->getWaterEntityManager()->getEntity(id)->getSize();
 }
 
-const float EngineInterface::water_getTextureRepeat(const string& id) const
+const unsigned int EngineInterface::water_getTextureRepeat(const string& id) const
 {
 	return _core->getWaterEntityManager()->getEntity(id)->getTextureRepeat();
 }

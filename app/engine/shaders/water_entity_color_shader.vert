@@ -17,8 +17,9 @@ uniform float u_maxX;
 uniform float u_maxY;
 uniform float u_maxZ;
 uniform float u_height;
-uniform float u_textureRepeat;
 uniform float u_waveHeight;
+
+uniform int u_textureRepeat;
 
 uniform bool u_hasDisplacementMap;
 
@@ -33,7 +34,7 @@ void main()
 
 	if(u_hasDisplacementMap)
 	{
-		float heightPercentage = texture(u_displacementMap, ((v_uv * u_textureRepeat) + (u_waveOffset))).r;
+		float heightPercentage = texture(u_displacementMap, ((v_uv * float(u_textureRepeat)) + (u_waveOffset))).r;
 		newPosition.y += (heightPercentage * u_waveHeight);
 	}
 
@@ -43,7 +44,7 @@ void main()
 
 	f_clipSpacePos = clipSpacePosition;
 	f_worldSpacePos = worldSpacePosition.xyz;
-	f_uv = (v_uv * u_textureRepeat);
+	f_uv = (v_uv * float(u_textureRepeat));
 
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));

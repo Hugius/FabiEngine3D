@@ -251,7 +251,7 @@ const float Quad2dEntity::getRotation() const
 	return _rotation;
 }
 
-const float Quad2dEntity::getTextureRepeat() const
+const unsigned int Quad2dEntity::getTextureRepeat() const
 {
 	return _textureRepeat;
 }
@@ -296,7 +296,7 @@ void Quad2dEntity::setCentered(bool value)
 	_isCentered = value;
 }
 
-void Quad2dEntity::setTextureRepeat(float value)
+void Quad2dEntity::setTextureRepeat(unsigned int value)
 {
-	_textureRepeat = max(0.0f, value);
+	_textureRepeat = max(unsigned int(1), value);
 }

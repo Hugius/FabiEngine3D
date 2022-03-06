@@ -450,9 +450,9 @@ void ModelEntity::setOpacity(const string& partId, float value)
 	_parts.at(partId)->opacity = clamp(value, 0.0f, 1.0f);
 }
 
-void ModelEntity::setTextureRepeat(const string& partId, float value)
+void ModelEntity::setTextureRepeat(const string& partId, unsigned int value)
 {
-	_parts.at(partId)->textureRepeat = max(0.0f, value);
+	_parts.at(partId)->textureRepeat = max(unsigned int(1), value);
 }
 
 void ModelEntity::setEmissionIntensity(const string& partId, float value)
@@ -770,7 +770,7 @@ const float ModelEntity::getOpacity(const string& partId) const
 	return _parts.at(partId)->opacity;
 }
 
-const float ModelEntity::getTextureRepeat(const string& partId) const
+const unsigned int ModelEntity::getTextureRepeat(const string& partId) const
 {
 	return _parts.at(partId)->textureRepeat;
 }

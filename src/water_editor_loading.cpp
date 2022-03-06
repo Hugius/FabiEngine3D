@@ -117,11 +117,11 @@ const bool WaterEditor::loadEntitiesFromFile()
 		fvec2 rippleSpeed;
 		fvec2 waveSpeed;
 		float size;
-		float textureRepeat;
 		float waveHeight;
 		float specularShininess;
 		float specularIntensity;
 		float maxDepth;
+		unsigned int textureRepeat;
 		bool isSpecular;
 		bool isReflective;
 		bool isRefractive;

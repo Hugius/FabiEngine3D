@@ -55,7 +55,6 @@
 - `fe3d:text3d_get_max_height` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_opacity` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_emission_intensity` (`STR` id) -----> `DEC`
-- `fe3d:text3d_get_texture_repeat` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_lightness` (`STR` id) -----> `DEC`
 - `fe3d:text3d_is_facing_camera_horizontally` (`STR` id) -----> `BOL`
 - `fe3d:text3d_is_facing_camera_vertically` (`STR` id) -----> `BOL`

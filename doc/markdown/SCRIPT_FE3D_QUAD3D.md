@@ -23,7 +23,7 @@
 - `fe3d:quad3d_set_max_height` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:quad3d_set_opacity` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:quad3d_set_emission_intensity` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:quad3d_set_texture_repeat` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:quad3d_set_texture_repeat` (`STR` id, `INT` value) -----> `NONE`
 - `fe3d:quad3d_set_lightness` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:quad3d_set_aabb_raycast_responsive` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_aabb_collision_responsive` (`STR` id, `BOL` value) -----> `NONE`
@@ -69,7 +69,7 @@
 - `fe3d:quad3d_get_max_height` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_opacity` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_emission_intensity` (`STR` id) -----> `DEC`
-- `fe3d:quad3d_get_texture_repeat` (`STR` id) -----> `DEC`
+- `fe3d:quad3d_get_texture_repeat` (`STR` id) -----> `INT`
 - `fe3d:quad3d_get_lightness` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_is_facing_camera_horizontally` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_is_facing_camera_vertically` (`STR` id) -----> `BOL`

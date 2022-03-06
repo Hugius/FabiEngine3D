@@ -19,7 +19,8 @@ uniform float u_minZ;
 uniform float u_maxX;
 uniform float u_maxY;
 uniform float u_maxZ;
-uniform float u_textureRepeat;
+
+uniform int u_textureRepeat;
 
 uniform bool u_hasNormalMap;
 
@@ -41,7 +42,7 @@ void main()
 	f_clipSpacePos = clipSpacePosition;
 	f_shadowSpacePos = (u_shadowProjection * u_shadowView * worldSpacePosition);
 	f_worldSpacePos = worldSpacePosition.xyz;
-	f_uv = (v_uv * u_textureRepeat);
+	f_uv = (v_uv * float(u_textureRepeat));
 	f_normal = normalize(u_normalTransformation * v_normal);
     f_tbn = calculateTBN();
 

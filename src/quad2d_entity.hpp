@@ -39,7 +39,7 @@ public:
 	void setUvOffset(const fvec2& value);
 	void setWireframed(bool value);
 	void setCentered(bool value);
-	void setTextureRepeat(float value);
+	void setTextureRepeat(unsigned int value);
 
 	const string& getDiffuseMapPath() const;
 
@@ -57,8 +57,8 @@ public:
 
 	const float getOpacity() const;
 	const float getRotation() const;
-	const float getTextureRepeat() const;
 
+	const unsigned int getTextureRepeat() const;
 	const unsigned int getDepth() const;
 
 	const bool isWireframed() const;
@@ -92,8 +92,8 @@ private:
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
 	float _opacity = 1.0f;
-	float _textureRepeat = 1.0f;
 
+	unsigned int _textureRepeat = 1;
 	unsigned int _depth = 0;
 
 	bool _isCentered = false;

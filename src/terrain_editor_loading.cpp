@@ -43,11 +43,11 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		string greenDiffuseMapPath;
 		string blueDiffuseMapPath;
 		float maxHeight;
-		float textureRepeat;
 		float lightness;
-		float redTextureRepeat;
-		float greenTextureRepeat;
-		float blueTextureRepeat;
+		unsigned int textureRepeat;
+		unsigned int redTextureRepeat;
+		unsigned int greenTextureRepeat;
+		unsigned int blueTextureRepeat;
 
 		istringstream iss(line);
 
@@ -231,13 +231,13 @@ const bool TerrainEditor::loadEntitiesFromFile()
 		string greenDiffuseMapPath;
 		string blueDiffuseMapPath;
 		float maxHeight;
-		float textureRepeat;
 		float lightness;
-		float redTextureRepeat;
-		float greenTextureRepeat;
-		float blueTextureRepeat;
 		float specularShininess;
 		float specularIntensity;
+		unsigned int textureRepeat;
+		unsigned int redTextureRepeat;
+		unsigned int greenTextureRepeat;
+		unsigned int blueTextureRepeat;
 		bool isSpecular;
 
 		istringstream iss(line);

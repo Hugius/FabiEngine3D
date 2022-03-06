@@ -200,13 +200,13 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_set_texture_repeat")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::INTEGER};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dWater(args[0]->getString(), false))
 			{
-				_fe3d->water_setTextureRepeat(_fe3d->water_getSelectedId(), args[1]->getDecimal());
+				_fe3d->water_setTextureRepeat(_fe3d->water_getSelectedId(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

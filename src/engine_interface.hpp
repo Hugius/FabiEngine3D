@@ -99,11 +99,11 @@ public:
 	void terrain_setRedNormalMap(const string& id, const string& value);
 	void terrain_setGreenNormalMap(const string& id, const string& value);
 	void terrain_setBlueNormalMap(const string& id, const string& value);
-	void terrain_setRedTextureRepeat(const string& id, float value);
-	void terrain_setGreenTextureRepeat(const string& id, float value);
-	void terrain_setBlueTextureRepeat(const string& id, float value);
+	void terrain_setRedTextureRepeat(const string& id, unsigned int value);
+	void terrain_setGreenTextureRepeat(const string& id, unsigned int value);
+	void terrain_setBlueTextureRepeat(const string& id, unsigned int value);
 	void terrain_setMaxHeight(const string& id, float value);
-	void terrain_setTextureRepeat(const string& id, float value);
+	void terrain_setTextureRepeat(const string& id, unsigned int value);
 	void terrain_setLightness(const string& id, float value);
 	void terrain_setSpecularShininess(const string& id, float value);
 	void terrain_setSpecularIntensity(const string& id, float value);
@@ -125,15 +125,15 @@ public:
 	const string& terrain_getBlueNormalMapPath(const string& id) const;
 	const fvec3& terrain_getWireframeColor(const string& id) const;
 	const float terrain_getMaxHeight(const string& id) const;
-	const float terrain_getTextureRepeat(const string& id) const;
 	const float terrain_getLightness(const string& id) const;
-	const float terrain_getRedTextureRepeat(const string& id) const;
-	const float terrain_getGreenTextureRepeat(const string& id) const;
-	const float terrain_getBlueTextureRepeat(const string& id) const;
 	const float terrain_getSize(const string& id) const;
 	const float terrain_getPixelHeight(const string& id, float x, float z) const;
 	const float terrain_getSpecularShininess(const string& id) const;
 	const float terrain_getSpecularIntensity(const string& id) const;
+	const unsigned int terrain_getTextureRepeat(const string& id) const;
+	const unsigned int terrain_getRedTextureRepeat(const string& id) const;
+	const unsigned int terrain_getGreenTextureRepeat(const string& id) const;
+	const unsigned int terrain_getBlueTextureRepeat(const string& id) const;
 	const bool terrain_isExisting(const string& id) const;
 	const bool terrain_isVisible(const string& id) const;
 	const bool terrain_isSpecular(const string& id) const;
@@ -171,7 +171,7 @@ public:
 	void water_setMaxDepth(const string& id, float value);
 	void water_setEdged(const string& id, bool value);
 	void water_setColor(const string& id, const fvec3& value);
-	void water_setTextureRepeat(const string& id, float value);
+	void water_setTextureRepeat(const string& id, unsigned int value);
 
 	const vector<string> water_getIds() const;
 	const string& water_getDudvMapPath(const string& id) const;
@@ -185,10 +185,10 @@ public:
 	const float water_getHeight(const string& id) const;
 	const float water_getMaxDepth(const string& id) const;
 	const float water_getSize(const string& id) const;
-	const float water_getTextureRepeat(const string& id) const;
 	const float water_getWaveHeight(const string& id) const;
 	const float water_getSpecularShininess(const string& id) const;
 	const float water_getSpecularIntensity(const string& id) const;
+	const unsigned int water_getTextureRepeat(const string& id) const;
 	const bool water_isEdged(const string& id) const;
 	const bool water_isExisting(const string& id) const;
 	const bool water_isVisible(const string& id) const;
@@ -249,7 +249,7 @@ public:
 	void model_setMinHeight(const string& id, float value);
 	void model_setMaxHeight(const string& id, float value);
 	void model_setLevelOfDetailDistance(const string& id, float value);
-	void model_setTextureRepeat(const string& modelId, const string& partId, float value);
+	void model_setTextureRepeat(const string& modelId, const string& partId, unsigned int value);
 	void model_setBright(const string& modelId, const string& partId, bool value);
 	void model_setRotationOrder(const string& id, DirectionOrder value);
 	void model_startAnimation(const string& modelId, const string& animationId, int playCount);
@@ -289,11 +289,11 @@ public:
 	const float model_getMinHeight(const string& id) const;
 	const float model_getMaxHeight(const string& id) const;
 	const float model_getLevelOfDetailDistance(const string& id) const;
-	const float model_getTextureRepeat(const string& modelId, const string& partId) const;
 	const float model_getEmissionIntensity(const string& modelId, const string& partId) const;
 	const float model_getMinTextureAlpha(const string& modelId, const string& partId) const;
 	const float model_getAnimationSpeedMultiplier(const string& modelId, const string& animationId) const;
 	const int model_getAnimationPlayCount(const string& modelId, const string& animationId) const;
+	const unsigned int model_getTextureRepeat(const string& modelId, const string& partId) const;
 	const unsigned int model_getAnimationFrameIndex(const string& modelId, const string& animationId) const;
 	const bool model_isExisting(const string& id) const;
 	const bool model_isVisible(const string& id) const;
@@ -339,7 +339,7 @@ public:
 	void quad3d_setMaxHeight(const string& id, float value);
 	void quad3d_setLightness(const string& id, float value);
 	void quad3d_setOpacity(const string& id, float value);
-	void quad3d_setTextureRepeat(const string& id, float value);
+	void quad3d_setTextureRepeat(const string& id, unsigned int value);
 	void quad3d_setEmissionIntensity(const string& id, float value);
 	void quad3d_setMinTextureAlpha(const string& id, float value);
 	void quad3d_setVisible(const string& id, bool value);
@@ -376,10 +376,10 @@ public:
 	const float quad3d_getMinHeight(const string& id) const;
 	const float quad3d_getMaxHeight(const string& id) const;
 	const float quad3d_getOpacity(const string& id) const;
-	const float quad3d_getTextureRepeat(const string& id) const;
 	const float quad3d_getEmissionIntensity(const string& id) const;
 	const float quad3d_getMinTextureAlpha(const string& id) const;
 	const int quad3d_getAnimationPlayCount(const string& quadId, const string& animationId) const;
+	const unsigned int quad3d_getTextureRepeat(const string& id) const;
 	const unsigned int quad3d_getAnimationRowIndex(const string& quadId, const string& animationId) const;
 	const unsigned int quad3d_getAnimationColumnIndex(const string& quadId, const string& animationId) const;
 	const unsigned int quad3d_getAnimationIntervalMultiplier(const string& quadId, const string& animationId) const;
@@ -514,7 +514,7 @@ public:
 	void quad2d_setAnimationColumnIndex(const string& animationId, const string& quadId, unsigned int value);
 	void quad2d_setAnimationIntervalMultiplier(const string& animationId, const string& quadId, unsigned int value);
 	void quad2d_setAnimationIntervalDivider(const string& animationId, const string& quadId, unsigned int value);
-	void quad2d_setTextureRepeat(const string& id, float value);
+	void quad2d_setTextureRepeat(const string& id, unsigned int value);
 
 	const vector<string> quad2d_getIds() const;
 	const vector<string> quad2d_getAnimationIds(const string& id) const;
@@ -529,8 +529,8 @@ public:
 	const fvec2& quad2d_getUvOffset(const string& id) const;
 	const float quad2d_getRotation(const string& id) const;
 	const float quad2d_getOpacity(const string& id) const;
-	const float quad2d_getTextureRepeat(const string& id) const;
 	const int quad2d_getAnimationPlayCount(const string& quadId, const string& animationId) const;
+	const unsigned int quad2d_getTextureRepeat(const string& id) const;
 	const unsigned int quad2d_getAnimationRowIndex(const string& quadId, const string& animationId) const;
 	const unsigned int quad2d_getAnimationColumnIndex(const string& quadId, const string& animationId) const;
 	const unsigned int quad2d_getAnimationIntervalMultiplier(const string& quadId, const string& animationId) const;

@@ -182,7 +182,7 @@ void EngineInterface::quad2d_setAnimationIntervalDivider(const string& animation
 	_core->getAnimation2dPlayer()->setQuad2dAnimationIntervalDivider(animationId, quadId, value);
 }
 
-void EngineInterface::quad2d_setTextureRepeat(const string& id, float value)
+void EngineInterface::quad2d_setTextureRepeat(const string& id, unsigned int value)
 {
 	_core->getQuad2dEntityManager()->getEntity(id)->setTextureRepeat(value);
 }
@@ -217,7 +217,7 @@ const float EngineInterface::quad2d_getOpacity(const string& id) const
 	return _core->getQuad2dEntityManager()->getEntity(id)->getOpacity();
 }
 
-const float EngineInterface::quad2d_getTextureRepeat(const string& id) const
+const unsigned int EngineInterface::quad2d_getTextureRepeat(const string& id) const
 {
 	return _core->getQuad2dEntityManager()->getEntity(id)->getTextureRepeat();
 }

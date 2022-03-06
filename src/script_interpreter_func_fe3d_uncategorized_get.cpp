@@ -100,6 +100,17 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string& func
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
+	else if(functionName == "fe3d:time_is_passed")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			const auto result = ((_fe3d->misc_getPassedUpdateCount() % args[0]->getInteger()) == 0);
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
 	else
 	{
 		return false;

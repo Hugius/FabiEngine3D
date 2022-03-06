@@ -28,7 +28,7 @@
   - `fe3d:clock_*`
   - `fe3d:application_stop`
   - `fe3d:print`
-  - `fe3d:time_interval`
+  - `fe3d:time_is_passed`
 
 ## 2. Client
 

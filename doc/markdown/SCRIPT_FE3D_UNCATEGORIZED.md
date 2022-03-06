@@ -10,7 +10,6 @@
 - `fe3d:cursor_set_visible` (`BOL` value) -----> `NONE`
 - `fe3d:cursor_center` () -----> `NONE`
 - `fe3d:vsync_set_enabled` (`BOL` value) -----> `NONE`
-- `fe3d:time_interval` (`INT` update_count) -----> `NONE`
 
 ## Getters
 
@@ -20,3 +19,4 @@
 - `fe3d:window_get_width` () -----> `INT`
 - `fe3d:window_get_height` () -----> `INT`
 - `fe3d:vsync_is_enabled` () -----> `BOL`
+- `fe3d:time_is_passed` (`INT` update_count) -----> `BOOL`

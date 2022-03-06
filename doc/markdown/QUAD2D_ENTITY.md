@@ -40,6 +40,9 @@
 - **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
+- **Texture Repeat**: the amount of times the textures are repeated
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Horizontally Flipped**: the diffuse map is horizontally flipped
   - Type: `boolean`
   - Constraints: none

@@ -320,7 +320,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 		{
 			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setTextureRepeat(args[0]->getString(), args[1]->getInteger());
+				_fe3d->quad3d_setTextureRepeat(args[0]->getString(), static_cast<unsigned int>(args[1]->getInteger()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -666,7 +666,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 					return true;
 				}
 
-				_fe3d->quad3d_setAnimationRowIndex(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
+				_fe3d->quad3d_setAnimationRowIndex(args[0]->getString(), args[1]->getString(), static_cast<unsigned int>(args[1]->getInteger()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -686,7 +686,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 					return true;
 				}
 
-				_fe3d->quad3d_setAnimationColumnIndex(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
+				_fe3d->quad3d_setAnimationColumnIndex(args[0]->getString(), args[1]->getString(), static_cast<unsigned int>(args[1]->getInteger()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -706,7 +706,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 					return true;
 				}
 
-				_fe3d->quad3d_setAnimationIntervalMultiplier(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
+				_fe3d->quad3d_setAnimationIntervalMultiplier(args[0]->getString(), args[1]->getString(), static_cast<unsigned int>(args[1]->getInteger()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -726,7 +726,7 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string& functionNam
 					return true;
 				}
 
-				_fe3d->quad3d_setAnimationIntervalDivider(args[0]->getString(), args[1]->getString(), args[1]->getInteger());
+				_fe3d->quad3d_setAnimationIntervalDivider(args[0]->getString(), args[1]->getString(), static_cast<unsigned int>(args[1]->getInteger()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

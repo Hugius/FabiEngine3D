@@ -4,7 +4,7 @@
 
 using std::istringstream;
 
-void ScriptEditor::_reloadScriptTextDisplay(bool mustLoadAabbs)
+void ScriptEditor::_loadScriptText()
 {
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 

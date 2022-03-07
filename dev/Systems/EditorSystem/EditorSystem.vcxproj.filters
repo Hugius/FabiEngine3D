@@ -369,9 +369,6 @@
     <ClCompile Include="..\..\..\src\script_editor_update_misc.cpp">
       <Filter>Script Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_editor_update_selector.cpp">
-      <Filter>Script Editor\Update</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_misc.cpp">
       <Filter>Script Editor\Miscellaneous</Filter>
     </ClCompile>

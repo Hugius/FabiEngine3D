@@ -39,7 +39,7 @@ const bool ScriptEditor::saveScriptFiles()
 		file
 			<< _script->getScriptFile(scriptId)->getCursorLineIndex()
 			<< " "
-			<< _script->getScriptFile(scriptId)->getCursorCharIndex()
+			<< _script->getScriptFile(scriptId)->getCursorCharacterIndex()
 			<< endl;
 
 		for(unsigned int lineIndex = 0; lineIndex < _script->getScriptFile(scriptId)->getLineCount(); lineIndex++)

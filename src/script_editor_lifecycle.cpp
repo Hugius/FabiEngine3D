@@ -52,14 +52,11 @@ void ScriptEditor::_unload()
 	_scriptFileNamesToDelete.clear();
 	_copyClipboard.clear();
 	_currentScriptFileId = "";
-	_scrollingAcceleration = 0.0f;
 	_firstSelectedLineIndex = -1;
 	_lastSelectedLineIndex = -1;
-	_passedFrames = 0;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_wasGuiFocused = false;
-	_hasClickedLMB = false;
 	_isCreatingScriptFile = false;
 	_isChoosingScriptFile = false;
 	_isRenamingScriptFile = false;

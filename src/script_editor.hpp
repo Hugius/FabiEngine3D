@@ -23,13 +23,12 @@ private:
 	void _unloadGUI();
 	void _updateGUI();
 	void _updateTextWriter();
-	void _updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex, unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged);
 	void _updateScriptFileCreating();
 	void _updateScriptFileChoosing();
 	void _updateScriptFileRenaming();
 	void _updateScriptSearching();
 	void _updateMiscellaneous();
-	void _reloadScriptTextDisplay(bool reloadAabbs);
+	void _loadScriptText();
 	void _copySelectedText();
 
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
@@ -59,7 +58,6 @@ private:
 	static inline constexpr float CAMERA_FOV = 70.0f;
 	static inline constexpr float SELECTION_DEPTH = 0.001f;
 	static inline constexpr float AABB_DEPTH = 0.01f;
-	float _scrollingAcceleration = 0.0f;
 
 	int _firstSelectedLineIndex = -1;
 	int _lastSelectedLineIndex = -1;
@@ -71,7 +69,6 @@ private:
 	static inline constexpr unsigned int MAX_LINE_COUNT = 99;
 	static inline constexpr unsigned int MAX_VISIBLE_LINES = 13;
 	static inline constexpr unsigned int BLOOM_QUALITY = 1;
-	unsigned int _passedFrames = 0;
 
 	static inline const unordered_map<char, char> NUMBER_CHARACTERS =
 	{
@@ -103,7 +100,6 @@ private:
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
 	bool _wasGuiFocused = false;
-	bool _hasClickedLMB = false;
 	bool _isCreatingScriptFile = false;
 	bool _isChoosingScriptFile = false;
 	bool _isRenamingScriptFile = false;

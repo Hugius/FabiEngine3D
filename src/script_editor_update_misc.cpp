@@ -109,13 +109,15 @@ void ScriptEditor::_updateScriptFileCreating()
 				return;
 			}
 
+			_script->createScriptFile(newScriptFileId);
+			_script->getScriptFile(newScriptFileId)->insertNewLine(0, "");
+
 			_currentScriptFileId = newScriptFileId;
 			_isWritingScript = true;
 			_firstSelectedLineIndex = -1;
 			_lastSelectedLineIndex = -1;
-			_script->createScriptFile(_currentScriptFileId);
-			_script->getScriptFile(_currentScriptFileId)->insertNewLine(0, "");
-			_reloadScriptTextDisplay(true);
+
+			_loadScriptText();
 
 			_isCreatingScriptFile = false;
 		}
@@ -136,7 +138,8 @@ void ScriptEditor::_updateScriptFileChoosing()
 				_isWritingScript = true;
 				_firstSelectedLineIndex = -1;
 				_lastSelectedLineIndex = -1;
-				_reloadScriptTextDisplay(true);
+
+				_loadScriptText();
 
 				_gui->getOverlay()->deleteChoiceForm("scriptFileList");
 				_isChoosingScriptFile = false;

@@ -47,9 +47,9 @@ void ScriptFile::setCursorLineIndex(unsigned int index)
 	_cursorLineIndex = index;
 }
 
-void ScriptFile::setCursorCharIndex(unsigned int index)
+void ScriptFile::setCursorCharacterIndex(unsigned int index)
 {
-	_cursorCharIndex = index;
+	_cursorCharacterIndex = index;
 }
 
 void ScriptFile::changeId(const string& newId)
@@ -84,9 +84,9 @@ const unsigned int ScriptFile::getCursorLineIndex() const
 	return _cursorLineIndex;
 }
 
-const unsigned int ScriptFile::getCursorCharIndex() const
+const unsigned int ScriptFile::getCursorCharacterIndex() const
 {
-	return _cursorCharIndex;
+	return _cursorCharacterIndex;
 }
 
 const vector<string>& ScriptFile::getLines() const

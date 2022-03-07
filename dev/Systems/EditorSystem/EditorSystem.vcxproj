@@ -146,7 +146,6 @@
     <ClCompile Include="..\..\..\src\script_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\script_editor_misc.cpp" />
     <ClCompile Include="..\..\..\src\script_editor_saving.cpp" />
-    <ClCompile Include="..\..\..\src\script_editor_update_selector.cpp" />
     <ClCompile Include="..\..\..\src\script_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\script_editor_update_writer.cpp" />
     <ClCompile Include="..\..\..\src\water_editor_update_miscellaneous.cpp" />

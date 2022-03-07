@@ -62,7 +62,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 			>> cursorCharIndex;
 
 		_script->getScriptFile(scriptFileId)->setCursorLineIndex(cursorLineIndex);
-		_script->getScriptFile(scriptFileId)->setCursorCharIndex(cursorCharIndex);
+		_script->getScriptFile(scriptFileId)->setCursorCharacterIndex(cursorCharIndex);
 
 		unsigned int lineIndex = 0;
 		while(getline(file, line))

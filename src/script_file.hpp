@@ -12,7 +12,7 @@ public:
 	void setLineText(unsigned int index, const string& textContent);
 	void deleteLine(unsigned int index);
 	void setCursorLineIndex(unsigned int index);
-	void setCursorCharIndex(unsigned int index);
+	void setCursorCharacterIndex(unsigned int index);
 	void changeId(const string& newId);
 
 	const vector<string>& getLines() const;
@@ -22,7 +22,7 @@ public:
 
 	const unsigned int getLineCount() const;
 	const unsigned int getCursorLineIndex() const;
-	const unsigned int getCursorCharIndex() const;
+	const unsigned int getCursorCharacterIndex() const;
 
 private:
 	vector<string> _lines;
@@ -30,5 +30,5 @@ private:
 	string _id;
 
 	unsigned int _cursorLineIndex = 0;
-	unsigned int _cursorCharIndex = 0;
+	unsigned int _cursorCharacterIndex = 0;
 };

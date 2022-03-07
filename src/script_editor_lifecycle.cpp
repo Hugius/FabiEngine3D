@@ -8,10 +8,9 @@
 void ScriptEditor::_load()
 {
 	_fe3d->camera_reset();
-	_fe3d->camera_setPosition(CAMERA_POSITION);
 	_fe3d->camera_setFov(CAMERA_FOV);
-	_fe3d->camera_setYaw(270.0f);
-	_fe3d->camera_setPitch(0.0f);
+	_fe3d->camera_setYaw(CAMERA_YAW);
+	_fe3d->camera_setPitch(CAMERA_PITCH);
 
 	_fe3d->raycast_setAabbIntersectionEnabled(true);
 
@@ -20,6 +19,11 @@ void ScriptEditor::_load()
 	_fe3d->gfx_setBloomIntensity(0.95f);
 	_fe3d->gfx_setBloomBlurCount(2);
 	_fe3d->gfx_setBloomQuality(BLOOM_QUALITY);
+
+	_fe3d->text3d_create("cursor", FONT_MAP_PATH, false);
+	_fe3d->text3d_setContent("cursor", " ");
+	_fe3d->text3d_setSize("cursor", TEXT_CHARACTER_SIZE);
+	_fe3d->text3d_setMinTextureAlpha("cursor", 0.05f);
 }
 
 void ScriptEditor::_unload()
@@ -52,6 +56,7 @@ void ScriptEditor::_unload()
 	_scriptFileNamesToDelete.clear();
 	_copyClipboard.clear();
 	_currentScriptFileId = "";
+	_cameraOffset = 0.0f;
 	_firstSelectedLineIndex = -1;
 	_lastSelectedLineIndex = -1;
 	_isScriptLoadedFromFile = false;

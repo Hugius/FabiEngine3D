@@ -224,61 +224,17 @@ void ScriptEditor::_updateMiscellaneous()
 {
 	if(_isWritingScript)
 	{
-		const unsigned int currentLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
-		const unsigned int lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
-		const float lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;
+		const auto scrollSpeed = static_cast<float>(_fe3d->input_getMouseWheelY());
+		const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
+		const auto lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;
 
 		if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 		{
-			if(_fe3d->input_getMouseWheelY() == -1 && lineCount > (MAX_VISIBLE_LINES - 1))
-			{
-				_scrollingAcceleration -= SCROLLING_SPEED;
-			}
-			else if(_fe3d->input_getMouseWheelY() == 1)
-			{
-				_scrollingAcceleration += SCROLLING_SPEED;
-			}
-		}
+			_cameraOffset += scrollSpeed;
 
-		if(_fe3d->camera_getPosition().y > CAMERA_POSITION.y)
-		{
-			_scrollingAcceleration = 0.0f;
-			_fe3d->camera_setPosition(CAMERA_POSITION);
-		}
-		else if(_fe3d->camera_getPosition().y == CAMERA_POSITION.y && _scrollingAcceleration > 0.0f)
-		{
-			_scrollingAcceleration = 0.0f;
-		}
+			_cameraOffset = clamp(_cameraOffset, MIN_CAMERA_OFFSET, MAX_CAMERA_OFFSET);
 
-		if(lineCount > (MAX_VISIBLE_LINES - 1))
-		{
-			if(_fe3d->camera_getPosition().y < (lastLineHeight + CAMERA_OFFSET))
-			{
-				_scrollingAcceleration = 0.0f;
-				_fe3d->camera_setPosition(fvec3(CAMERA_POSITION.x, lastLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
-			}
-			else if(_fe3d->camera_getPosition().y == (lastLineHeight + CAMERA_OFFSET) && _scrollingAcceleration < 0.0f)
-			{
-				_scrollingAcceleration = 0.0f;
-			}
+			_fe3d->camera_setPosition(fvec3(0.0f, _cameraOffset, CAMERA_DISTANCE));
 		}
-		else
-		{
-			_scrollingAcceleration = 0.0f;
-			_fe3d->camera_setPosition(CAMERA_POSITION);
-		}
-
-		static unsigned int lastLineIndex = currentLineIndex;
-		if((currentLineIndex > (MAX_VISIBLE_LINES - 1)) && (currentLineIndex != lastLineIndex) && (currentLineIndex == lineCount - 1))
-		{
-			_scrollingAcceleration = 0.0f;
-			float currentLineHeight = _fe3d->text3d_getPosition(to_string(currentLineIndex)).y;
-			_fe3d->camera_setPosition(fvec3(CAMERA_POSITION.x, currentLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
-		}
-		lastLineIndex = currentLineIndex;
 	}
-
-	_scrollingAcceleration = clamp(_scrollingAcceleration, -MAX_SCROLLING_ACCELERATION, MAX_SCROLLING_ACCELERATION);
-	_scrollingAcceleration *= 0.95f;
-	_fe3d->camera_move(fvec3(0.0f, _scrollingAcceleration, 0.0f));
 }

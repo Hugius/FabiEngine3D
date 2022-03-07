@@ -37,7 +37,6 @@ private:
 	vector<string> _copyClipboard;
 	string _currentScriptFileId = "";
 
-	static inline const fvec3 CAMERA_POSITION = fvec3(0.0f, 0.0f, 10.0f);
 	static inline const fvec3 TEXT_STARTING_POSITION = fvec3(-12.0f, 6.0, 0.0f);
 	static inline const fvec3 SELECTION_COLOR = fvec3(0.075f);
 	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
@@ -49,15 +48,19 @@ private:
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
-	static inline constexpr float SCROLLING_SPEED = 0.1f;
-	static inline constexpr float MAX_SCROLLING_ACCELERATION = 10.0f;
-	static inline constexpr float HORIZONTAL_CHARACTER_OFFSET = 0.25f;
+	static inline constexpr float CHARACTER_OFFSET = 0.25f;
 	static inline constexpr float HORIZONTAL_LINE_OFFSET = 1.0f;
 	static inline constexpr float VERTICAL_LINE_OFFSET = 1.0f;
-	static inline constexpr float CAMERA_OFFSET = 0.25f;
 	static inline constexpr float CAMERA_FOV = 70.0f;
-	static inline constexpr float SELECTION_DEPTH = 0.001f;
-	static inline constexpr float AABB_DEPTH = 0.01f;
+	static inline constexpr float CAMERA_YAW = 270.0f;
+	static inline constexpr float CAMERA_PITCH = 0.0f;
+	static inline constexpr float SELECTION_DEPTH = 0.0001f;
+	static inline constexpr float AABB_DEPTH = 0.0001f;
+	static inline constexpr float MIN_CAMERA_OFFSET = -86.0f;
+	static inline constexpr float MAX_CAMERA_OFFSET = 0.0f;
+	static inline constexpr float CAMERA_DISTANCE = 10.0f;
+
+	float _cameraOffset = 0.0f;
 
 	int _firstSelectedLineIndex = -1;
 	int _lastSelectedLineIndex = -1;

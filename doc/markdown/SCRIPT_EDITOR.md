@@ -5,7 +5,7 @@
 - All scripts will be saved in `~\projects\<your_project>\scripts\`.
 - You can create/edit/rename/delete scripts.
 - You can search in scripts for a certain keyword (case sensitive).
-- Script files have a line limit of 100, to force you to create small but readable scripts.
+- Script files have a line limit of 99, to force you to create small but readable scripts.
 
 ## 2. Controls
 

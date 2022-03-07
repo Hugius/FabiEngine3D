@@ -487,14 +487,6 @@ void ScriptEditor::_updateTextWriter()
 			_loadScriptText();
 		}
 
-		if(!_fe3d->text3d_isExisting("cursor"))
-		{
-			_fe3d->text3d_create("cursor", FONT_MAP_PATH, false);
-			_fe3d->text3d_setContent("cursor", " ");
-			_fe3d->text3d_setSize("cursor", TEXT_CHARACTER_SIZE);
-			_fe3d->text3d_setMinTextureAlpha("cursor", 0.15f);
-		}
-
 		if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
 		{
 			if(_firstSelectedLineIndex != -1)
@@ -517,7 +509,7 @@ void ScriptEditor::_updateTextWriter()
 		if(cursorCharacterIndex == 0)
 		{
 			const auto linePosition = _fe3d->aabb_getBasePosition(to_string(cursorLineIndex));
-			const auto cursorPosition = fvec3((TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET + (TEXT_CHARACTER_SIZE.x * 0.5f)), linePosition.y, linePosition.z);
+			const auto cursorPosition = fvec3((TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - CHARACTER_OFFSET + (TEXT_CHARACTER_SIZE.x * 0.5f)), linePosition.y, linePosition.z);
 
 			_fe3d->text3d_setPosition("cursor", cursorPosition);
 		}

@@ -12,10 +12,15 @@ void ScriptEditor::_loadScriptText()
 	{
 		_fe3d->quad3d_delete(id);
 	}
+
 	for(const auto& id : _fe3d->text3d_getIds())
 	{
-		_fe3d->text3d_delete(id);
+		if(id != "cursor")
+		{
+			_fe3d->text3d_delete(id);
+		}
 	}
+
 	for(const auto& id : _fe3d->aabb_getIds())
 	{
 		_fe3d->aabb_delete(id);
@@ -77,7 +82,7 @@ void ScriptEditor::_loadScriptText()
 		for(unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
 		{
 			const auto characterId = (to_string(lineIndex) + "_" + to_string(charIndex));
-			const auto characterOffset = fvec3(((HORIZONTAL_CHARACTER_OFFSET * static_cast<float>(charIndex)) + HORIZONTAL_LINE_OFFSET), (-VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);
+			const auto characterOffset = fvec3(((CHARACTER_OFFSET * static_cast<float>(charIndex)) + HORIZONTAL_LINE_OFFSET), (-VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);
 			const auto characterPosition = (TEXT_STARTING_POSITION + characterOffset);
 			const auto characterAabbOffset = -fvec3(0.0f, (TEXT_CHARACTER_SIZE.y * 0.5f), 0.0f);
 			const auto characterAabbPosition = (characterPosition + characterAabbOffset);

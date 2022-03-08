@@ -2,44 +2,41 @@
 
 void WorldEditor::_updateQuad3dEditing()
 {
-	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-
-	if(!_dontResetSelectedQuad3d)
-	{
-		_selectedQuadId = "";
-	}
-	else
-	{
-		_dontResetSelectedQuad3d = false;
-	}
-
 	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
-		for(const auto& id : _fe3d->quad3d_getIds())
+		if(!_dontResetSelectedQuad3d)
 		{
-			if(id[0] != '@')
+			_selectedQuadId = "";
+		}
+		else
+		{
+			_dontResetSelectedQuad3d = false;
+		}
+
+		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
+
+		for(const auto& [quadId, templateId] : _loadedQuadIds)
+		{
+			const auto isHovered = (hoveredAabbId == quadId);
+
+			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
-				bool isHovered = (hoveredAabbId.size() >= id.size()) && (hoveredAabbId.substr(0, id.size()) == id);
+				_selectQuad3d(quadId);
 
-				if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_selectQuad3d(id);
-
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_selectedQuadId != _activeQuadId)
 					{
-						if(_selectedQuadId != _activeQuadId)
-						{
-							_activateQuad3d(_selectedQuadId);
-						}
+						_activateQuad3d(_selectedQuadId);
 					}
 				}
-				else
+			}
+			else
+			{
+				if((quadId != _selectedQuadId) && (quadId != _activeQuadId))
 				{
-					if((id != _selectedQuadId) && (id != _activeQuadId))
-					{
-						_deselectQuad3d(id);
-					}
+					_deselectQuad3d(quadId);
 				}
 			}
 		}

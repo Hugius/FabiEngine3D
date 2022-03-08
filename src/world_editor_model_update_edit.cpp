@@ -2,10 +2,11 @@
 
 void WorldEditor::_updateModelEditing()
 {
-	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-
 	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
+		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
+
 		if(!_dontResetSelectedModel)
 		{
 			_selectedModelId = "";
@@ -15,32 +16,27 @@ void WorldEditor::_updateModelEditing()
 			_dontResetSelectedModel = false;
 		}
 
-		auto hoveredId = _fe3d->raycast_getClosestAabbId();
-
-		for(const auto& id : _fe3d->model_getIds())
+		for(const auto& [modelId, templateId] : _loadedModelIds)
 		{
-			if(id[0] != '@')
+			const auto isHovered = (hoveredAabbId.substr(0, modelId.size()) == modelId);
+
+			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				bool isHovered = (hoveredId.size() >= id.size()) && (hoveredId.substr(0, id.size()) == id);
+				_selectModel(modelId);
 
-				if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_selectModel(id);
-
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_selectedModelId != _activeModelId)
 					{
-						if(_selectedModelId != _activeModelId)
-						{
-							_activateModel(_selectedModelId);
-						}
+						_activateModel(_selectedModelId);
 					}
 				}
-				else
+			}
+			else
+			{
+				if((modelId != _selectedModelId) && (modelId != _activeModelId))
 				{
-					if((id != _selectedModelId) && (id != _activeModelId))
-					{
-						_deselectModel(id);
-					}
+					_deselectModel(modelId);
 				}
 			}
 		}
@@ -98,13 +94,14 @@ void WorldEditor::_updateModelEditing()
 			{
 				if(currentAnimationIds.empty())
 				{
-					auto ids = _animation3dEditor->getLoadedAnimationIds();
-					for(auto& id : ids)
+					auto animationIds = _animation3dEditor->getLoadedAnimationIds();
+
+					for(auto& id : animationIds)
 					{
 						id = id.substr(1);
 					}
 
-					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), ids);
+					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), animationIds);
 				}
 				else
 				{

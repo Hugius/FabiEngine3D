@@ -34,16 +34,14 @@ void Sound3dPlayer::update()
 	{
 		for(unsigned int index = 0; index < startedSounds.size(); index++)
 		{
-			const auto startedSound = startedSounds[index];
-
-			if(startedSound->getHeader()->dwFlags &= WHDR_DONE)
+			if(startedSounds[index]->getHeader()->dwFlags &= WHDR_DONE)
 			{
-				if(startedSound->getPlayCount() != -1)
+				if(startedSounds[index]->getPlayCount() != -1)
 				{
-					startedSound->setPlayCount(startedSound->getPlayCount() - 1);
+					startedSounds[index]->setPlayCount(startedSounds[index]->getPlayCount() - 1);
 				}
 
-				if(startedSound->getPlayCount() == 0)
+				if(startedSounds[index]->getPlayCount() == 0)
 				{
 					startedSounds.erase(startedSounds.begin() + index);
 
@@ -56,8 +54,21 @@ void Sound3dPlayer::update()
 				}
 				else
 				{
-					const auto writeResult = waveOutWrite(startedSound->getHandle(), startedSound->getHeader(), sizeof(*startedSound->getHeader()));
+					const auto unprepareResult = waveOutUnprepareHeader(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(*startedSounds[index]->getHeader()));
+					if((unprepareResult != MMSYSERR_NOERROR) && (unprepareResult != MMSYSERR_NODRIVER))
+					{
+						Logger::throwDebug(unprepareResult);
+						abort();
+					}
 
+					const auto prepareResult = waveOutPrepareHeader(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(*startedSounds[index]->getHeader()));
+					if((prepareResult != MMSYSERR_NOERROR) && (prepareResult != MMSYSERR_NODRIVER))
+					{
+						Logger::throwDebug(prepareResult);
+						abort();
+					}
+
+					const auto writeResult = waveOutWrite(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(*startedSounds[index]->getHeader()));
 					if((writeResult != MMSYSERR_NOERROR) && (writeResult != MMSYSERR_NODRIVER))
 					{
 						Logger::throwDebug(writeResult);
@@ -67,9 +78,9 @@ void Sound3dPlayer::update()
 			}
 			else
 			{
-				if(startedSound->isPaused())
+				if(startedSounds[index]->isPaused())
 				{
-					const auto pauseResult = waveOutPause(startedSound->getHandle());
+					const auto pauseResult = waveOutPause(startedSounds[index]->getHandle());
 
 					if((pauseResult != MMSYSERR_NOERROR) && (pauseResult != MMSYSERR_NODRIVER))
 					{
@@ -79,7 +90,7 @@ void Sound3dPlayer::update()
 				}
 				else
 				{
-					const auto restartResult = waveOutRestart(startedSound->getHandle());
+					const auto restartResult = waveOutRestart(startedSounds[index]->getHandle());
 
 					if((restartResult != MMSYSERR_NOERROR) && (restartResult != MMSYSERR_NODRIVER))
 					{
@@ -88,27 +99,27 @@ void Sound3dPlayer::update()
 					}
 				}
 
-				const auto leftVolumeIntegral = static_cast<unsigned short>(startedSound->getVolume() * startedSound->getLeftIntensity() * static_cast<float>(USHRT_MAX));
-				const auto rightVolumeIntegral = static_cast<unsigned short>(startedSound->getVolume() * startedSound->getRightIntensity() * static_cast<float>(USHRT_MAX));
-				const auto volumeResult = waveOutSetVolume(startedSound->getHandle(), MAKELONG(leftVolumeIntegral, rightVolumeIntegral));
+				const auto leftVolumeIntegral = static_cast<unsigned short>(startedSounds[index]->getVolume() * startedSounds[index]->getLeftIntensity() * static_cast<float>(USHRT_MAX));
+				const auto rightVolumeIntegral = static_cast<unsigned short>(startedSounds[index]->getVolume() * startedSounds[index]->getRightIntensity() * static_cast<float>(USHRT_MAX));
+				const auto volumeResult = waveOutSetVolume(startedSounds[index]->getHandle(), MAKELONG(leftVolumeIntegral, rightVolumeIntegral));
 				if((volumeResult != MMSYSERR_NOERROR) && (volumeResult != MMSYSERR_NODRIVER) && (volumeResult != MMSYSERR_NOTSUPPORTED))
 				{
 					Logger::throwDebug(volumeResult);
 					abort();
 				}
 
-				const auto speedIntegral = static_cast<unsigned short>(startedSound->getSpeed());
-				const auto speedFraction = static_cast<unsigned short>(fmodf(startedSound->getSpeed(), 1.0f) * static_cast<float>(USHRT_MAX));
-				const auto speedResult = waveOutSetPlaybackRate(startedSound->getHandle(), MAKELONG(speedFraction, speedIntegral));
+				const auto speedIntegral = static_cast<unsigned short>(startedSounds[index]->getSpeed());
+				const auto speedFraction = static_cast<unsigned short>(fmodf(startedSounds[index]->getSpeed(), 1.0f) * static_cast<float>(USHRT_MAX));
+				const auto speedResult = waveOutSetPlaybackRate(startedSounds[index]->getHandle(), MAKELONG(speedFraction, speedIntegral));
 				if((speedResult != MMSYSERR_NOERROR) && (speedResult != MMSYSERR_NODRIVER) && (speedResult != MMSYSERR_NOTSUPPORTED))
 				{
 					Logger::throwDebug(speedResult);
 					abort();
 				}
 
-				const auto pitchIntegral = static_cast<unsigned short>(startedSound->getPitch());
-				const auto pitchFraction = static_cast<unsigned short>(fmodf(startedSound->getPitch(), 1.0f) * static_cast<float>(USHRT_MAX));
-				const auto pitchResult = waveOutSetPitch(startedSound->getHandle(), MAKELONG(pitchFraction, pitchIntegral));
+				const auto pitchIntegral = static_cast<unsigned short>(startedSounds[index]->getPitch());
+				const auto pitchFraction = static_cast<unsigned short>(fmodf(startedSounds[index]->getPitch(), 1.0f) * static_cast<float>(USHRT_MAX));
+				const auto pitchResult = waveOutSetPitch(startedSounds[index]->getHandle(), MAKELONG(pitchFraction, pitchIntegral));
 				if((pitchResult != MMSYSERR_NOERROR) && (pitchResult != MMSYSERR_NODRIVER) && (pitchResult != MMSYSERR_NOTSUPPORTED))
 				{
 					Logger::throwDebug(pitchResult);

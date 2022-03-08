@@ -2,44 +2,41 @@
 
 void WorldEditor::_updateText3dEditing()
 {
-	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-
-	if(!_dontResetSelectedText3d)
-	{
-		_selectedTextId = "";
-	}
-	else
-	{
-		_dontResetSelectedText3d = false;
-	}
-
 	if(_currentTemplateModelId.empty() && _currentTemplateTextId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
-		for(const auto& id : _fe3d->text3d_getIds())
+		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
+
+		if(!_dontResetSelectedText3d)
 		{
-			if(id[0] != '@')
+			_selectedTextId = "";
+		}
+		else
+		{
+			_dontResetSelectedText3d = false;
+		}
+
+		for(const auto& [textId, templateId] : _loadedTextIds)
+		{
+			const auto isHovered = (hoveredAabbId == textId);
+
+			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
-				bool isHovered = (hoveredAabbId.size() >= id.size()) && (hoveredAabbId.substr(0, id.size()) == id);
+				_selectText3d(textId);
 
-				if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_selectText3d(id);
-
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_selectedTextId != _activeTextId)
 					{
-						if(_selectedTextId != _activeTextId)
-						{
-							_activateText3d(_selectedTextId);
-						}
+						_activateText3d(_selectedTextId);
 					}
 				}
-				else
+			}
+			else
+			{
+				if((textId != _selectedTextId) && (textId != _activeTextId))
 				{
-					if((id != _selectedTextId) && (id != _activeTextId))
-					{
-						_deselectText3d(id);
-					}
+					_deselectText3d(textId);
 				}
 			}
 		}

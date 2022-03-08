@@ -2,10 +2,11 @@
 
 void WorldEditor::_updateSoundEditing()
 {
-	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-
 	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
+		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
+
 		if(!_dontResetSelectedSound)
 		{
 			_selectedSoundId = "";
@@ -15,34 +16,29 @@ void WorldEditor::_updateSoundEditing()
 			_dontResetSelectedSound = false;
 		}
 
-		auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
-
-		for(const auto& modelId : _fe3d->model_getIds())
+		for(const auto& [soundId, templateId] : _loadedSoundIds)
 		{
-			if(modelId.substr(0, string("@@speaker").size()) == "@@speaker")
+			const auto isHovered = (hoveredAabbId == ("@@speaker_" + soundId));
+
+			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				const auto soundId = modelId.substr(string("@@speaker_").size());
+				_selectSound(soundId);
 
-				if(hoveredAabbId == modelId && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_selectSound(soundId);
-
-					_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
-
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_selectedSoundId != _activeSoundId)
 					{
-						if(_selectedSoundId != _activeSoundId)
-						{
-							_activateSound(_selectedSoundId);
-						}
+						_activateSound(_selectedSoundId);
 					}
 				}
-				else
+			}
+			else
+			{
+				if((soundId != _selectedSoundId) && (soundId != _activeSoundId))
 				{
-					if((soundId != _selectedSoundId) && (soundId != _activeSoundId))
-					{
-						_deselectSound(soundId);
-					}
+					_deselectSound(soundId);
 				}
 			}
 		}

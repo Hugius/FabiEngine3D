@@ -3,10 +3,11 @@
 
 void WorldEditor::_updateReflectionEditing()
 {
-	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-
 	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
+		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
+
 		if(!_dontResetSelectedReflection)
 		{
 			_selectedReflectionId = "";
@@ -16,32 +17,27 @@ void WorldEditor::_updateReflectionEditing()
 			_dontResetSelectedReflection = false;
 		}
 
-		auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
-
-		for(const auto& modelId : _fe3d->model_getIds())
+		for(const auto& reflectionId : _loadedReflectionIds)
 		{
-			if(modelId.substr(0, string("@@camera").size()) == "@@camera")
+			const auto isHovered = (hoveredAabbId == ("@@camera_" + reflectionId));
+
+			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				const auto reflectionId = modelId.substr(string("@@camera_").size());
+				_selectReflection(reflectionId);
 
-				if(hoveredAabbId == modelId && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_selectReflection(modelId.substr(string("@@camera_").size()));
-
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_selectedReflectionId != _activeReflectionId)
 					{
-						if(_selectedReflectionId != _activeReflectionId)
-						{
-							_activateReflection(_selectedReflectionId);
-						}
+						_activateReflection(_selectedReflectionId);
 					}
 				}
-				else
+			}
+			else
+			{
+				if((reflectionId != _selectedReflectionId) && (reflectionId != _activeReflectionId))
 				{
-					if((reflectionId != _selectedReflectionId) && (reflectionId != _activeReflectionId))
-					{
-						_deselectReflection(reflectionId);
-					}
+					_deselectReflection(reflectionId);
 				}
 			}
 		}

@@ -3,10 +3,11 @@
 
 void WorldEditor::_updatePointlightEditing()
 {
-	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-
 	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
+		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
+
 		if(!_dontResetSelectedPointlight)
 		{
 			_selectedPointlightId = "";
@@ -16,32 +17,27 @@ void WorldEditor::_updatePointlightEditing()
 			_dontResetSelectedPointlight = false;
 		}
 
-		auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
-
-		for(const auto& modelId : _fe3d->model_getIds())
+		for(const auto& pointlightId : _loadedPointlightIds)
 		{
-			if(modelId.substr(0, string("@@lamp").size()) == "@@lamp")
+			const auto isHovered = (hoveredAabbId == ("@@lamp_" + pointlightId));
+
+			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				const auto pointlightId = modelId.substr(string("@@lamp_").size());
+				_selectPointlight(pointlightId);
 
-				if(hoveredAabbId == modelId && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_selectPointlight(pointlightId);
-
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_selectedPointlightId != _activePointlightId)
 					{
-						if(_selectedPointlightId != _activePointlightId)
-						{
-							_activatePointlight(_selectedPointlightId);
-						}
+						_activatePointlight(_selectedPointlightId);
 					}
 				}
-				else
+			}
+			else
+			{
+				if((pointlightId != _selectedPointlightId) && (pointlightId != _activePointlightId))
 				{
-					if((pointlightId != _selectedPointlightId) && (pointlightId != _activePointlightId))
-					{
-						_deselectPointlight(pointlightId);
-					}
+					_deselectPointlight(pointlightId);
 				}
 			}
 		}

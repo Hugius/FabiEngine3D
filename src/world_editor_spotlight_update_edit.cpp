@@ -3,10 +3,11 @@
 
 void WorldEditor::_updateSpotlightEditing()
 {
-	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-
 	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
+		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
+		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
+
 		if(!_dontResetSelectedSpotlight)
 		{
 			_selectedSpotlightId = "";
@@ -16,32 +17,27 @@ void WorldEditor::_updateSpotlightEditing()
 			_dontResetSelectedSpotlight = false;
 		}
 
-		auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
-
-		for(const auto& modelId : _fe3d->model_getIds())
+		for(const auto& spotlightId : _loadedSpotlightIds)
 		{
-			if(modelId.substr(0, string("@@torch").size()) == "@@torch")
+			const auto isHovered = (hoveredAabbId == ("@@torch_" + spotlightId));
+
+			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				const auto spotlightId = modelId.substr(string("@@torch_").size());
+				_selectSpotlight(spotlightId);
 
-				if(hoveredAabbId == modelId && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_selectSpotlight(modelId.substr(string("@@torch_").size()));
-
-					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_selectedSpotlightId != _activeSpotlightId)
 					{
-						if(_selectedSpotlightId != _activeSpotlightId)
-						{
-							_activateSpotlight(_selectedSpotlightId);
-						}
+						_activateSpotlight(_selectedSpotlightId);
 					}
 				}
-				else
+			}
+			else
+			{
+				if((spotlightId != _selectedSpotlightId) && (spotlightId != _activeSpotlightId))
 				{
-					if((spotlightId != _selectedSpotlightId) && (spotlightId != _activeSpotlightId))
-					{
-						_deselectSpotlight(spotlightId);
-					}
+					_deselectSpotlight(spotlightId);
 				}
 			}
 		}

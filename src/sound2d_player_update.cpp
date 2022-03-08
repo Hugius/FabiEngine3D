@@ -29,8 +29,21 @@ void Sound2dPlayer::update()
 				}
 				else
 				{
-					const auto writeResult = waveOutWrite(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(*startedSounds[index]->getHeader()));
+					const auto unprepareResult = waveOutUnprepareHeader(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(*startedSounds[index]->getHeader()));
+					if((unprepareResult != MMSYSERR_NOERROR) && (unprepareResult != MMSYSERR_NODRIVER))
+					{
+						Logger::throwDebug(unprepareResult);
+						abort();
+					}
 
+					const auto prepareResult = waveOutPrepareHeader(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(*startedSounds[index]->getHeader()));
+					if((prepareResult != MMSYSERR_NOERROR) && (prepareResult != MMSYSERR_NODRIVER))
+					{
+						Logger::throwDebug(prepareResult);
+						abort();
+					}
+
+					const auto writeResult = waveOutWrite(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(*startedSounds[index]->getHeader()));
 					if((writeResult != MMSYSERR_NOERROR) && (writeResult != MMSYSERR_NODRIVER))
 					{
 						Logger::throwDebug(writeResult);

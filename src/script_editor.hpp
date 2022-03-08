@@ -28,9 +28,8 @@ private:
 	void _updateScriptFileRenaming();
 	void _updateScriptSearching();
 	void _updateMiscellaneous();
-	void _loadScriptDisplayEntities();
-	void _unloadScriptDisplayEntities();
-	void _copySelectedText();
+	void _createScriptDisplayEntities();
+	void _deleteScriptDisplayEntities();
 
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
@@ -42,7 +41,6 @@ private:
 	string _currentScriptFileId = "";
 
 	static inline const fvec3 TEXT_STARTING_POSITION = fvec3(-12.0f, 6.0, 0.0f);
-	static inline const fvec3 SELECTION_COLOR = fvec3(0.075f);
 	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
 	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);
 	static inline const fvec3 DEFAULT_TEXT_COLOR = fvec3(1.0f);
@@ -58,7 +56,6 @@ private:
 	static inline constexpr float CAMERA_FOV = 70.0f;
 	static inline constexpr float CAMERA_YAW = 270.0f;
 	static inline constexpr float CAMERA_PITCH = 0.0f;
-	static inline constexpr float SELECTION_DEPTH = 0.0001f;
 	static inline constexpr float AABB_DEPTH = 0.0001f;
 	static inline constexpr float MIN_CAMERA_OFFSET = -86.0f;
 	static inline constexpr float MAX_CAMERA_OFFSET = 0.0f;
@@ -66,15 +63,7 @@ private:
 
 	float _cameraOffset = 0.0f;
 
-	int _firstSelectedLineIndex = -1;
-	int _lastSelectedLineIndex = -1;
-
-	static inline constexpr unsigned int CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM = 75;
-	static inline constexpr unsigned int CONTINUOUS_TEXT_ACTION_INTERVAL = 5;
-	static inline constexpr unsigned int MAX_PASSED_BAR_FRAMES = 50;
-	static inline constexpr unsigned int MAX_CHARACTERS_PER_LINE = 88;
 	static inline constexpr unsigned int MAX_LINE_COUNT = 99;
-	static inline constexpr unsigned int MAX_VISIBLE_LINES = 13;
 	static inline constexpr unsigned int BLOOM_QUALITY = 1;
 
 	static inline const unordered_map<char, char> NUMBER_CHARACTERS =
@@ -111,18 +100,6 @@ private:
 	bool _isChoosingScriptFile = false;
 	bool _isRenamingScriptFile = false;
 	bool _isSearchingScriptFile = false;
-
-	InputType _pressedActionKey = InputType::NONE;
-	static inline const vector<InputType> ACTION_KEYS =
-	{
-		InputType::KEY_ENTER,
-		InputType::KEY_BACKSPACE,
-		InputType::KEY_DELETE,
-		InputType::KEY_LEFT,
-		InputType::KEY_RIGHT,
-		InputType::KEY_UP,
-		InputType::KEY_DOWN
-	};
 
 	shared_ptr<Script> _script = nullptr;
 };

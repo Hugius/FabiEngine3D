@@ -4,7 +4,7 @@
 
 using std::istringstream;
 
-void ScriptEditor::_loadScriptDisplayEntities()
+void ScriptEditor::_createScriptDisplayEntities()
 {
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 
@@ -62,7 +62,7 @@ void ScriptEditor::_loadScriptDisplayEntities()
 		const auto lineAabbId = to_string(lineIndex);
 		const auto lineAabbOffset = -fvec3(0.0f, (TEXT_CHARACTER_SIZE.y * 0.5f), AABB_DEPTH);
 		const auto lineAabbPosition = (lineNumberPosition + lineAabbOffset);
-		const auto lineAabbSize = fvec3(TEXT_CHARACTER_SIZE.x * static_cast<float>(MAX_CHARACTERS_PER_LINE * 2) * 1.1f, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
+		const auto lineAabbSize = fvec3(FLT_MAX, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
 
 		_fe3d->aabb_create(lineAabbId, false);
 		_fe3d->aabb_setBasePosition(lineAabbId, lineAabbPosition);
@@ -88,7 +88,7 @@ void ScriptEditor::_loadScriptDisplayEntities()
 	}
 }
 
-void ScriptEditor::_unloadScriptDisplayEntities()
+void ScriptEditor::_deleteScriptDisplayEntities()
 {
 	for(const auto& id : _loadedQuadIds)
 	{
@@ -108,27 +108,6 @@ void ScriptEditor::_unloadScriptDisplayEntities()
 	_loadedQuadIds.clear();
 	_loadedTextIds.clear();
 	_loadedAabbIds.clear();
-}
-
-void ScriptEditor::_copySelectedText()
-{
-	if(_firstSelectedLineIndex != -1)
-	{
-		_copyClipboard.clear();
-
-		if(_lastSelectedLineIndex == -1)
-		{
-			_copyClipboard.push_back(_script->getScriptFile(_currentScriptFileId)->getLineText(_firstSelectedLineIndex));
-		}
-		else
-		{
-			for(int index = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
-				index <= ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _firstSelectedLineIndex : _lastSelectedLineIndex); index++)
-			{
-				_copyClipboard.push_back(_script->getScriptFile(_currentScriptFileId)->getLineText(index));
-			}
-		}
-	}
 }
 
 void ScriptEditor::inject(shared_ptr<Script> script)

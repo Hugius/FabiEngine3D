@@ -39,6 +39,8 @@ void ScriptEditor::_unload()
 	_fe3d->gfx_setBloomBlurCount(0);
 	_fe3d->gfx_setBloomQuality(0);
 
+	_fe3d->text3d_delete("cursor");
+
 	for(const auto& id : _loadedQuadIds)
 	{
 		_fe3d->quad3d_delete(id);
@@ -63,8 +65,6 @@ void ScriptEditor::_unload()
 	_copyClipboard.clear();
 	_currentScriptFileId = "";
 	_cameraOffset = 0.0f;
-	_firstSelectedLineIndex = -1;
-	_lastSelectedLineIndex = -1;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_wasGuiFocused = false;
@@ -72,7 +72,6 @@ void ScriptEditor::_unload()
 	_isChoosingScriptFile = false;
 	_isRenamingScriptFile = false;
 	_isSearchingScriptFile = false;
-	_pressedActionKey = InputType::NONE;
 }
 
 void ScriptEditor::_loadGUI()

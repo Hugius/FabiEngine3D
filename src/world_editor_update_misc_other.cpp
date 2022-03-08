@@ -77,53 +77,53 @@ void WorldEditor::_updateMiscellaneous()
 		{
 			_isAabbModeEnabled = !_isAabbModeEnabled;
 		}
+	}
 
-		if(!_fe3d->sky_getSelectedId().empty())
+	if(!_fe3d->sky_getSelectedId().empty())
+	{
+		_fe3d->sky_setWireframed(_fe3d->sky_getSelectedId(), _isWireframeModeEnabled);
+	}
+
+	if(!_fe3d->terrain_getSelectedId().empty())
+	{
+		_fe3d->terrain_setWireframed(_fe3d->terrain_getSelectedId(), _isWireframeModeEnabled);
+	}
+
+	if(!_fe3d->water_getSelectedId().empty())
+	{
+		_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), _isWireframeModeEnabled);
+	}
+
+	for(const auto& [modelId, templateId] : _loadedModelIds)
+	{
+		for(const auto& partId : _fe3d->model_getPartIds(modelId))
 		{
-			_fe3d->sky_setWireframed(_fe3d->sky_getSelectedId(), _isWireframeModeEnabled);
+			_fe3d->model_setWireframed(modelId, partId, _isWireframeModeEnabled);
 		}
 
-		if(!_fe3d->terrain_getSelectedId().empty())
+		for(const auto& aabbId : _fe3d->model_getChildAabbIds(modelId))
 		{
-			_fe3d->terrain_setWireframed(_fe3d->terrain_getSelectedId(), _isWireframeModeEnabled);
+			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
+	}
 
-		if(!_fe3d->water_getSelectedId().empty())
+	for(const auto& [quadId, templateId] : _loadedQuadIds)
+	{
+		_fe3d->quad3d_setWireframed(quadId, _isWireframeModeEnabled);
+
+		for(const auto& aabbId : _fe3d->quad3d_getChildAabbIds(quadId))
 		{
-			_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), _isWireframeModeEnabled);
+			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
+	}
 
-		for(const auto& modelId : _fe3d->model_getIds())
+	for(const auto& [textId, templateId] : _loadedTextIds)
+	{
+		_fe3d->text3d_setWireframed(textId, _isWireframeModeEnabled);
+
+		for(const auto& aabbId : _fe3d->text3d_getChildAabbIds(textId))
 		{
-			for(const auto& partId : _fe3d->model_getPartIds(modelId))
-			{
-				_fe3d->model_setWireframed(modelId, partId, _isWireframeModeEnabled);
-			}
-
-			for(const auto& aabbId : _fe3d->model_getChildAabbIds(modelId))
-			{
-				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
-			}
-		}
-
-		for(const auto& quadId : _fe3d->quad3d_getIds())
-		{
-			_fe3d->quad3d_setWireframed(quadId, _isWireframeModeEnabled);
-
-			for(const auto& aabbId : _fe3d->quad3d_getChildAabbIds(quadId))
-			{
-				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
-			}
-		}
-
-		for(const auto& textId : _fe3d->text3d_getIds())
-		{
-			_fe3d->text3d_setWireframed(textId, _isWireframeModeEnabled);
-
-			for(const auto& aabbId : _fe3d->text3d_getChildAabbIds(textId))
-			{
-				_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
-			}
+			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
 	}
 
@@ -148,6 +148,7 @@ void WorldEditor::_updateMiscellaneous()
 
 	const auto isSelected = (!_selectedModelId.empty() || !_selectedQuadId.empty() || !_selectedTextId.empty() || !_selectedPointlightId.empty() || !_selectedSpotlightId.empty() || !_selectedReflectionId.empty());
 	const auto isActive = (!_activeModelId.empty() || !_activeQuadId.empty() || !_activeTextId.empty() || !_activePointlightId.empty() || !_activeSpotlightId.empty() || !_activeReflectionId.empty());
+
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("selectedId")->getEntityId(), isSelected);
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("activeId")->getEntityId(), isActive);
 	_fe3d->text2d_setPosition(_gui->getOverlay()->getTextField("selectedId")->getEntityId(), fvec2(0.0f, (isActive ? 0.75f : 0.85f)));

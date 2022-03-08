@@ -38,7 +38,8 @@ const bool WorldEditor::saveWorldToFile()
 	}
 
 	{
-		const auto cameraPosition = _fe3d->camera_getPosition();
+		auto cameraPosition = _fe3d->camera_getPosition();
+
 		file
 			<< "CAMERA_POSITION "
 			<< cameraPosition.x
@@ -50,332 +51,313 @@ const bool WorldEditor::saveWorldToFile()
 	}
 
 	{
+		auto cameraYaw = _fe3d->camera_getYaw();
+
 		file
 			<< "CAMERA_YAW "
-			<< _fe3d->camera_getYaw()
+			<< cameraYaw
 			<< endl;
 	}
 
 	{
+		auto cameraPitch = _fe3d->camera_getPitch();
+
 		file
 			<< "CAMERA_PITCH "
-			<< _fe3d->camera_getPitch()
+			<< cameraPitch
 			<< endl;
 	}
 
-	string skyId = _fe3d->sky_getSelectedId();
-	if(!skyId.empty())
 	{
-		string templateId = ("@" + skyId);
+		auto skyId = _fe3d->sky_getSelectedId();
+		auto templateId = ("@" + skyId);
 
-		file
-			<< "SKY "
-			<< skyId
-			<< " "
-			<< templateId
-			<< endl;
+		if(!skyId.empty())
+		{
+			file
+				<< "SKY "
+				<< skyId
+				<< " "
+				<< templateId
+				<< endl;
+		}
 	}
 
-	string terrainId = _fe3d->terrain_getSelectedId();
-	if(!terrainId.empty())
 	{
-		string templateId = ("@" + terrainId);
+		auto terrainId = _fe3d->terrain_getSelectedId();
+		auto templateId = ("@" + terrainId);
 
-		file
-			<< "TERRAIN "
-			<< terrainId
-			<< " "
-			<< templateId
-			<< endl;
+		if(!terrainId.empty())
+		{
+			file
+				<< "TERRAIN "
+				<< terrainId
+				<< " "
+				<< templateId
+				<< endl;
+		}
 	}
 
-	string waterId = _fe3d->water_getSelectedId();
-	if(!waterId.empty())
 	{
-		string templateId = ("@" + waterId);
+		auto waterId = _fe3d->water_getSelectedId();
+		auto templateId = ("@" + waterId);
 		auto height = _fe3d->water_getHeight(waterId);
 
+		if(!waterId.empty())
+		{
+			file
+				<< "WATER "
+				<< waterId
+				<< " "
+				<< templateId
+				<< " "
+				<< height
+				<< endl;
+		}
+	}
+
+	for(const auto& [modelId, templateId] : _loadedModelIds)
+	{
+		auto startedAnimationIds = _fe3d->model_getAnimationIds(modelId);
+
+		if(!startedAnimationIds.empty())
+		{
+			for(const auto& partId : _fe3d->model_getPartIds(modelId))
+			{
+				if(!partId.empty())
+				{
+					_fe3d->model_setPartPosition(modelId, partId, fvec3(0.0f));
+					_fe3d->model_setPartRotationOrigin(modelId, partId, fvec3(0.0f));
+					_fe3d->model_setPartRotation(modelId, partId, fvec3(0.0f));
+					_fe3d->model_setPartSize(modelId, partId, fvec3(1.0f));
+				}
+			}
+		}
+
+		auto position = _fe3d->model_getBasePosition(modelId);
+		auto rotation = _fe3d->model_getBaseRotation(modelId);
+		auto size = _fe3d->model_getBaseSize(modelId);
+		auto isFrozen = _fe3d->model_isFrozen(modelId);
+		auto animationId = (startedAnimationIds.empty()) ? "" : startedAnimationIds[0];
+
+		animationId = (animationId.empty()) ? "?" : animationId;
+
+		replace(animationId.begin(), animationId.end(), ' ', '?');
+
 		file
-			<< "WATER "
-			<< waterId
+			<< "MODEL "
+			<< modelId
 			<< " "
 			<< templateId
 			<< " "
-			<< height
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< rotation.x
+			<< " "
+			<< rotation.y
+			<< " "
+			<< rotation.z
+			<< " "
+			<< size.x
+			<< " "
+			<< size.y
+			<< " "
+			<< size.z
+			<< " "
+			<< isFrozen
+			<< " "
+			<< animationId;
+
+		file << endl;
+	}
+
+	for(const auto& [quadId, templateId] : _loadedQuadIds)
+	{
+		auto startedAnimationIds = _fe3d->quad3d_getAnimationIds(quadId);
+		auto position = _fe3d->quad3d_getPosition(quadId);
+		auto rotation = _fe3d->quad3d_getRotation(quadId);
+		auto size = _fe3d->quad3d_getSize(quadId);
+		auto animationId = (startedAnimationIds.empty() ? "" : startedAnimationIds[0]);
+
+		animationId = (animationId.empty()) ? "?" : animationId;
+
+		replace(animationId.begin(), animationId.end(), ' ', '?');
+
+		file
+			<< "QUAD3D "
+			<< quadId
+			<< " "
+			<< templateId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< rotation.x
+			<< " "
+			<< rotation.y
+			<< " "
+			<< rotation.z
+			<< " "
+			<< size.x
+			<< " "
+			<< size.y
+			<< " "
+			<< animationId
 			<< endl;
 	}
 
-	for(const auto& modelId : _fe3d->model_getIds())
+	for(const auto& [textID, templateId] : _loadedTextIds)
 	{
-		if(modelId[0] != '@')
-		{
-			auto startedAnimationIds = _fe3d->model_getAnimationIds(modelId);
+		auto position = _fe3d->text3d_getPosition(textID);
+		auto rotation = _fe3d->text3d_getRotation(textID);
+		auto size = _fe3d->text3d_getSize(textID);
 
-			if(!startedAnimationIds.empty())
-			{
-				for(const auto& partId : _fe3d->model_getPartIds(modelId))
-				{
-					if(!partId.empty())
-					{
-						_fe3d->model_setPartPosition(modelId, partId, fvec3(0.0f));
-						_fe3d->model_setPartRotationOrigin(modelId, partId, fvec3(0.0f));
-						_fe3d->model_setPartRotation(modelId, partId, fvec3(0.0f));
-						_fe3d->model_setPartSize(modelId, partId, fvec3(1.0f));
-					}
-				}
-			}
-
-			auto position = _fe3d->model_getBasePosition(modelId);
-			auto rotation = _fe3d->model_getBaseRotation(modelId);
-			auto size = _fe3d->model_getBaseSize(modelId);
-			auto isFrozen = _fe3d->model_isFrozen(modelId);
-			auto animationId = (startedAnimationIds.empty()) ? "" : startedAnimationIds[0];
-
-			animationId = (animationId.empty()) ? "?" : animationId;
-
-			replace(animationId.begin(), animationId.end(), ' ', '?');
-
-			string templateId = _loadedModelIds.at(modelId);
-
-			file
-				<< "MODEL "
-				<< modelId
-				<< " "
-				<< templateId
-				<< " "
-				<< position.x
-				<< " "
-				<< position.y
-				<< " "
-				<< position.z
-				<< " "
-				<< rotation.x
-				<< " "
-				<< rotation.y
-				<< " "
-				<< rotation.z
-				<< " "
-				<< size.x
-				<< " "
-				<< size.y
-				<< " "
-				<< size.z
-				<< " "
-				<< isFrozen
-				<< " "
-				<< animationId;
-
-			file << endl;
-		}
+		file
+			<< "TEXT3D "
+			<< textID
+			<< " "
+			<< templateId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< rotation.x
+			<< " "
+			<< rotation.y
+			<< " "
+			<< rotation.z
+			<< " "
+			<< size.x
+			<< " "
+			<< size.y
+			<< endl;
 	}
 
-	for(const auto& quadId : _fe3d->quad3d_getIds())
+	for(const auto& [soundId, templateId] : _loadedSoundIds)
 	{
-		if(quadId[0] != '@')
-		{
-			auto startedAnimationIds = _fe3d->quad3d_getAnimationIds(quadId);
-			auto position = _fe3d->quad3d_getPosition(quadId);
-			auto rotation = _fe3d->quad3d_getRotation(quadId);
-			auto size = _fe3d->quad3d_getSize(quadId);
-			auto animationId = (startedAnimationIds.empty() ? "" : startedAnimationIds[0]);
+		auto position = _fe3d->sound3d_getPosition(soundId);
+		auto maxVolume = _fe3d->sound3d_getMaxVolume(soundId);
+		auto maxDistance = _fe3d->sound3d_getMaxDistance(soundId);
 
-			animationId = (animationId.empty()) ? "?" : animationId;
-
-			replace(animationId.begin(), animationId.end(), ' ', '?');
-
-			string templateId = _loadedQuadIds.at(quadId);
-
-			file
-				<< "QUAD3D "
-				<< quadId
-				<< " "
-				<< templateId
-				<< " "
-				<< position.x
-				<< " "
-				<< position.y
-				<< " "
-				<< position.z
-				<< " "
-				<< rotation.x
-				<< " "
-				<< rotation.y
-				<< " "
-				<< rotation.z
-				<< " "
-				<< size.x
-				<< " "
-				<< size.y
-				<< " "
-				<< animationId
-				<< endl;
-		}
+		file
+			<< "SOUND "
+			<< soundId
+			<< " "
+			<< templateId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< maxVolume
+			<< " "
+			<< maxDistance
+			<< endl;
 	}
 
-	for(const auto& textID : _fe3d->text3d_getIds())
+	for(const auto& pointlightId : _loadedPointlightIds)
 	{
-		if(textID[0] != '@')
-		{
-			auto position = _fe3d->text3d_getPosition(textID);
-			auto rotation = _fe3d->text3d_getRotation(textID);
-			auto size = _fe3d->text3d_getSize(textID);
+		auto position = _fe3d->pointlight_getPosition(pointlightId);
+		auto radius = _fe3d->pointlight_getRadius(pointlightId);
+		auto color = _fe3d->pointlight_getColor(pointlightId);
+		auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
+		auto shape = static_cast<unsigned int>(_fe3d->pointlight_getShape(pointlightId));
 
-			string templateId = _loadedTextIds.at(textID);
-
-			file
-				<< "TEXT3D "
-				<< textID
-				<< " "
-				<< templateId
-				<< " "
-				<< position.x
-				<< " "
-				<< position.y
-				<< " "
-				<< position.z
-				<< " "
-				<< rotation.x
-				<< " "
-				<< rotation.y
-				<< " "
-				<< rotation.z
-				<< " "
-				<< size.x
-				<< " "
-				<< size.y
-				<< endl;
-		}
+		file
+			<< "POINTLIGHT "
+			<< pointlightId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< radius.x
+			<< " "
+			<< radius.y
+			<< " "
+			<< radius.z
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
+			<< color.b
+			<< " "
+			<< intensity
+			<< " "
+			<< shape
+			<< endl;
 	}
 
-	for(const auto& soundId : _fe3d->sound3d_getIds())
+	for(const auto& spotlightId : _loadedSpotlightIds)
 	{
-		if(soundId[0] != '@')
-		{
-			auto position = _fe3d->sound3d_getPosition(soundId);
-			auto maxVolume = _fe3d->sound3d_getMaxVolume(soundId);
-			auto maxDistance = _fe3d->sound3d_getMaxDistance(soundId);
+		auto position = _fe3d->spotlight_getPosition(spotlightId);
+		auto color = _fe3d->spotlight_getColor(spotlightId);
+		auto yaw = _fe3d->spotlight_getYaw(spotlightId);
+		auto pitch = _fe3d->spotlight_getPitch(spotlightId);
+		auto intensity = _fe3d->spotlight_getIntensity(spotlightId);
+		auto angle = _fe3d->spotlight_getAngle(spotlightId);
+		auto distance = _fe3d->spotlight_getDistance(spotlightId);
 
-			string templateId = _loadedSoundIds.at(soundId);
-
-			file
-				<< "SOUND "
-				<< soundId
-				<< " "
-				<< templateId
-				<< " "
-				<< position.x
-				<< " "
-				<< position.y
-				<< " "
-				<< position.z
-				<< " "
-				<< maxVolume
-				<< " "
-				<< maxDistance
-				<< endl;
-		}
+		file
+			<< "SPOTLIGHT "
+			<< spotlightId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
+			<< color.b
+			<< " "
+			<< yaw
+			<< " "
+			<< pitch
+			<< " "
+			<< intensity
+			<< " "
+			<< angle
+			<< " "
+			<< distance
+			<< endl;
 	}
 
-	for(const auto& pointlightId : _fe3d->pointlight_getIds())
+	for(const auto& reflectionId : _loadedReflectionIds)
 	{
-		if(pointlightId[0] != '@')
-		{
-			auto position = _fe3d->pointlight_getPosition(pointlightId);
-			auto radius = _fe3d->pointlight_getRadius(pointlightId);
-			auto color = _fe3d->pointlight_getColor(pointlightId);
-			auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
-			auto shape = static_cast<unsigned int>(_fe3d->pointlight_getShape(pointlightId));
+		auto position = _fe3d->reflection_getPosition(reflectionId);
+		auto exceptionEntityId = _fe3d->reflection_getExceptionEntityId(reflectionId);
 
-			file
-				<< "POINTLIGHT "
-				<< pointlightId
-				<< " "
-				<< position.x
-				<< " "
-				<< position.y
-				<< " "
-				<< position.z
-				<< " "
-				<< radius.x
-				<< " "
-				<< radius.y
-				<< " "
-				<< radius.z
-				<< " "
-				<< color.r
-				<< " "
-				<< color.g
-				<< " "
-				<< color.b
-				<< " "
-				<< intensity
-				<< " "
-				<< shape
-				<< endl;
-		}
-	}
-
-	for(const auto& spotlightId : _fe3d->spotlight_getIds())
-	{
-		if(spotlightId[0] != '@')
-		{
-			auto position = _fe3d->spotlight_getPosition(spotlightId);
-			auto color = _fe3d->spotlight_getColor(spotlightId);
-			auto yaw = _fe3d->spotlight_getYaw(spotlightId);
-			auto pitch = _fe3d->spotlight_getPitch(spotlightId);
-			auto intensity = _fe3d->spotlight_getIntensity(spotlightId);
-			auto angle = _fe3d->spotlight_getAngle(spotlightId);
-			auto distance = _fe3d->spotlight_getDistance(spotlightId);
-
-			file
-				<< "SPOTLIGHT "
-				<< spotlightId
-				<< " "
-				<< position.x
-				<< " "
-				<< position.y
-				<< " "
-				<< position.z
-				<< " "
-				<< color.r
-				<< " "
-				<< color.g
-				<< " "
-				<< color.b
-				<< " "
-				<< yaw
-				<< " "
-				<< pitch
-				<< " "
-				<< intensity
-				<< " "
-				<< angle
-				<< " "
-				<< distance
-				<< endl;
-		}
-	}
-
-	for(const auto& reflectionId : _fe3d->reflection_getIds())
-	{
-		if(reflectionId[0] != '@')
-		{
-			auto position = _fe3d->reflection_getPosition(reflectionId);
-			auto exceptionEntityId = _fe3d->reflection_getExceptionEntityId(reflectionId);
-
-			file
-				<< "REFLECTION "
-				<< reflectionId
-				<< " "
-				<< position.x
-				<< " "
-				<< position.y
-				<< " "
-				<< position.z
-				<< " "
-				<< exceptionEntityId
-				<< endl;
-		}
+		file
+			<< "REFLECTION "
+			<< reflectionId
+			<< " "
+			<< position.x
+			<< " "
+			<< position.y
+			<< " "
+			<< position.z
+			<< " "
+			<< exceptionEntityId
+			<< endl;
 	}
 
 	if(_fe3d->gfx_isAmbientLightingEnabled())

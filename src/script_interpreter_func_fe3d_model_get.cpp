@@ -33,9 +33,9 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 
 			for(const auto& result : _fe3d->model_getIds())
 			{
-				if(args[0]->getString() == result.substr(0, args[0]->getString().size()))
+				if(result[0] != '@')
 				{
-					if(result[0] != '@')
+					if(args[0]->getString() == result.substr(0, args[0]->getString().size()))
 					{
 						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 					}

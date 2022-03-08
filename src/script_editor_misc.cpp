@@ -4,36 +4,21 @@
 
 using std::istringstream;
 
-void ScriptEditor::_loadScriptText()
+void ScriptEditor::_loadScriptDisplayEntities()
 {
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 
-	for(const auto& id : _fe3d->quad3d_getIds())
-	{
-		_fe3d->quad3d_delete(id);
-	}
-
-	for(const auto& id : _fe3d->text3d_getIds())
-	{
-		if(id != "cursor")
-		{
-			_fe3d->text3d_delete(id);
-		}
-	}
-
-	for(const auto& id : _fe3d->aabb_getIds())
-	{
-		_fe3d->aabb_delete(id);
-	}
-
+	const auto separatorId = "separator";
 	const auto separatorPosition = (TEXT_STARTING_POSITION + fvec3(HORIZONTAL_LINE_OFFSET * 0.5f, -(((static_cast<float>(lineCount) - 1) * 0.5f) * VERTICAL_LINE_OFFSET), 0.0f));
 	const auto separatorSize = fvec2((TEXT_CHARACTER_SIZE.x * 0.25f), (static_cast<float>(lineCount) * VERTICAL_LINE_OFFSET));
 
-	_fe3d->quad3d_create("separator", false);
-	_fe3d->quad3d_setPosition("separator", (separatorPosition - fvec3(0.0f, separatorSize.y * 0.5f, 0.0f)));
-	_fe3d->quad3d_setSize("separator", separatorSize);
-	_fe3d->quad3d_setColor("separator", SEPARATOR_COLOR);
-	_fe3d->quad3d_setBright("separator", true);
+	_fe3d->quad3d_create(separatorId, false);
+	_fe3d->quad3d_setPosition(separatorId, (separatorPosition - fvec3(0.0f, separatorSize.y * 0.5f, 0.0f)));
+	_fe3d->quad3d_setSize(separatorId, separatorSize);
+	_fe3d->quad3d_setColor(separatorId, SEPARATOR_COLOR);
+	_fe3d->quad3d_setBright(separatorId, true);
+
+	_loadedQuadIds.push_back(separatorId);
 
 	for(unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 	{
@@ -50,6 +35,8 @@ void ScriptEditor::_loadScriptText()
 		_fe3d->text3d_setSize(lineNumberId, lineNumberSize);
 		_fe3d->text3d_setColor(lineNumberId, LINE_NUMBER_COLOR);
 		_fe3d->text3d_setBright(lineNumberId, true);
+
+		_loadedTextIds.push_back(lineNumberId);
 
 		const auto lineTextId = ("text_" + to_string(lineIndex));
 		const auto lineTextString = _script->getScriptFile(_currentScriptFileId)->getLineText(lineIndex);
@@ -70,6 +57,8 @@ void ScriptEditor::_loadScriptText()
 		_fe3d->text3d_setColor(lineTextId, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
 		_fe3d->text3d_setBright(lineTextId, true);
 
+		_loadedTextIds.push_back(lineTextId);
+
 		const auto lineAabbId = to_string(lineIndex);
 		const auto lineAabbOffset = -fvec3(0.0f, (TEXT_CHARACTER_SIZE.y * 0.5f), AABB_DEPTH);
 		const auto lineAabbPosition = (lineNumberPosition + lineAabbOffset);
@@ -78,6 +67,8 @@ void ScriptEditor::_loadScriptText()
 		_fe3d->aabb_create(lineAabbId, false);
 		_fe3d->aabb_setBasePosition(lineAabbId, lineAabbPosition);
 		_fe3d->aabb_setBaseSize(lineAabbId, lineAabbSize);
+
+		_loadedAabbIds.push_back(lineAabbId);
 
 		for(unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
 		{
@@ -91,8 +82,32 @@ void ScriptEditor::_loadScriptText()
 			_fe3d->aabb_create(characterId, false);
 			_fe3d->aabb_setBasePosition(characterId, characterAabbPosition);
 			_fe3d->aabb_setBaseSize(characterId, characterAabbSize);
+
+			_loadedAabbIds.push_back(characterId);
 		}
 	}
+}
+
+void ScriptEditor::_unloadScriptDisplayEntities()
+{
+	for(const auto& id : _loadedQuadIds)
+	{
+		_fe3d->quad3d_delete(id);
+	}
+
+	for(const auto& id : _loadedTextIds)
+	{
+		_fe3d->text3d_delete(id);
+	}
+
+	for(const auto& id : _loadedAabbIds)
+	{
+		_fe3d->aabb_delete(id);
+	}
+
+	_loadedQuadIds.clear();
+	_loadedTextIds.clear();
+	_loadedAabbIds.clear();
 }
 
 void ScriptEditor::_copySelectedText()

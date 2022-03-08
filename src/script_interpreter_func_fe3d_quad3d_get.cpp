@@ -425,9 +425,9 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string& functionNam
 
 			for(const auto& result : _fe3d->quad3d_getIds())
 			{
-				if(args[0]->getString() == result.substr(0, args[0]->getString().size()))
+				if(result[0] != '@')
 				{
-					if(result[0] != '@')
+					if(args[0]->getString() == result.substr(0, args[0]->getString().size()))
 					{
 						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 					}

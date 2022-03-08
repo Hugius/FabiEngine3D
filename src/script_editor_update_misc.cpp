@@ -38,11 +38,9 @@ void ScriptEditor::_updateGUI()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_scriptFileNamesToDelete.push_back(_currentScriptFileId);
-			for(const auto& id : _fe3d->text3d_getIds())
-			{
-				_fe3d->text3d_delete(id);
-			}
+			_unloadScriptDisplayEntities();
 			_script->deleteScriptFile(_currentScriptFileId);
+			_fe3d->text3d_setVisible("cursor", false);
 			_isWritingScript = false;
 			_currentScriptFileId = "";
 		}
@@ -117,7 +115,9 @@ void ScriptEditor::_updateScriptFileCreating()
 			_firstSelectedLineIndex = -1;
 			_lastSelectedLineIndex = -1;
 
-			_loadScriptText();
+			_unloadScriptDisplayEntities();
+			_loadScriptDisplayEntities();
+			_fe3d->text3d_setVisible("cursor", true);
 
 			_isCreatingScriptFile = false;
 		}
@@ -139,7 +139,9 @@ void ScriptEditor::_updateScriptFileChoosing()
 				_firstSelectedLineIndex = -1;
 				_lastSelectedLineIndex = -1;
 
-				_loadScriptText();
+				_unloadScriptDisplayEntities();
+				_loadScriptDisplayEntities();
+				_fe3d->text3d_setVisible("cursor", true);
 
 				_gui->getOverlay()->deleteChoiceForm("scriptFileList");
 				_isChoosingScriptFile = false;

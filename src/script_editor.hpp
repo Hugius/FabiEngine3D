@@ -28,13 +28,17 @@ private:
 	void _updateScriptFileRenaming();
 	void _updateScriptSearching();
 	void _updateMiscellaneous();
-	void _loadScriptText();
+	void _loadScriptDisplayEntities();
+	void _unloadScriptDisplayEntities();
 	void _copySelectedText();
 
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;
+	vector<string> _loadedQuadIds;
+	vector<string> _loadedTextIds;
+	vector<string> _loadedAabbIds;
 	string _currentScriptFileId = "";
 
 	static inline const fvec3 TEXT_STARTING_POSITION = fvec3(-12.0f, 6.0, 0.0f);

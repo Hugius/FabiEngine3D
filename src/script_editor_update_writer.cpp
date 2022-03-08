@@ -295,13 +295,7 @@ void ScriptEditor::_updateTextWriter()
 			   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_V)) ||
 			   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_X)))
 			{
-				for(const auto& id : _fe3d->quad3d_getIds())
-				{
-					if(id.substr(0, string("selection_").size()) == "selection_")
-					{
-						_fe3d->quad3d_delete(id);
-					}
-				}
+				_fe3d->quad3d_setVisible("selection", false);
 
 				if(isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_X))
 				{
@@ -376,18 +370,15 @@ void ScriptEditor::_updateTextWriter()
 						lineTextPosition.x = (TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
 						lineTextPosition.z -= SELECTION_DEPTH;
 
-						_fe3d->quad3d_create(selectionId, false);
-						_fe3d->quad3d_setColor(selectionId, SELECTION_COLOR);
+						_fe3d->quad3d_setVisible(selectionId, true);
 						_fe3d->quad3d_setPosition(selectionId, lineTextPosition);
-						_fe3d->quad3d_setSize(selectionId, TEXT_CHARACTER_SIZE);
 					}
 					else
 					{
 						const auto lineTextPosition = (_fe3d->text3d_getPosition(textId) - fvec3(0.0f, 0.0f, SELECTION_DEPTH));
 						const auto lineTextSize = (_fe3d->text3d_getSize(textId));
 
-						_fe3d->quad3d_create(selectionId, false);
-						_fe3d->quad3d_setColor(selectionId, SELECTION_COLOR);
+						_fe3d->quad3d_setVisible(selectionId, true);
 						_fe3d->quad3d_setPosition(selectionId, lineTextPosition);
 						_fe3d->quad3d_setSize(selectionId, lineTextSize);
 					}
@@ -406,7 +397,7 @@ void ScriptEditor::_updateTextWriter()
 
 						if(((lastDirection < 0) && (currentDirection > 0)) || ((currentDirection < 0) && (lastDirection > 0)))
 						{
-							_fe3d->quad3d_delete("selection_" + to_string(_lastSelectedLineIndex));
+							//_fe3d->quad3d_setsi("selection_" + to_string(_lastSelectedLineIndex));
 						}
 					}
 
@@ -484,7 +475,8 @@ void ScriptEditor::_updateTextWriter()
 
 		if(hasTextChanged)
 		{
-			_loadScriptText();
+			_unloadScriptDisplayEntities();
+			_loadScriptDisplayEntities();
 		}
 
 		if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)

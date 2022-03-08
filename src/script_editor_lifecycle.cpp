@@ -21,7 +21,8 @@ void ScriptEditor::_load()
 	_fe3d->gfx_setBloomQuality(BLOOM_QUALITY);
 
 	_fe3d->text3d_create("cursor", FONT_MAP_PATH, false);
-	_fe3d->text3d_setContent("cursor", " ");
+	_fe3d->text3d_setVisible("cursor", false);
+	_fe3d->text3d_setContent("cursor", "|");
 	_fe3d->text3d_setSize("cursor", TEXT_CHARACTER_SIZE);
 	_fe3d->text3d_setMinTextureAlpha("cursor", 0.05f);
 }
@@ -38,15 +39,17 @@ void ScriptEditor::_unload()
 	_fe3d->gfx_setBloomBlurCount(0);
 	_fe3d->gfx_setBloomQuality(0);
 
-	for(const auto& id : _fe3d->quad3d_getIds())
+	for(const auto& id : _loadedQuadIds)
 	{
 		_fe3d->quad3d_delete(id);
 	}
-	for(const auto& id : _fe3d->text3d_getIds())
+
+	for(const auto& id : _loadedTextIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
-	for(const auto& id : _fe3d->aabb_getIds())
+
+	for(const auto& id : _loadedAabbIds)
 	{
 		_fe3d->aabb_delete(id);
 	}
@@ -54,6 +57,9 @@ void ScriptEditor::_unload()
 	_script->clear();
 
 	_scriptFileNamesToDelete.clear();
+	_loadedQuadIds.clear();
+	_loadedTextIds.clear();
+	_loadedAabbIds.clear();
 	_copyClipboard.clear();
 	_currentScriptFileId = "";
 	_cameraOffset = 0.0f;

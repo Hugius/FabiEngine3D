@@ -146,8 +146,21 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->raycast_setTerrainIntersectionPrecision(0.1f);
 	}
 
-	const auto isSelected = (!_selectedModelId.empty() || !_selectedQuadId.empty() || !_selectedTextId.empty() || !_selectedPointlightId.empty() || !_selectedSpotlightId.empty() || !_selectedReflectionId.empty());
-	const auto isActive = (!_activeModelId.empty() || !_activeQuadId.empty() || !_activeTextId.empty() || !_activePointlightId.empty() || !_activeSpotlightId.empty() || !_activeReflectionId.empty());
+	const auto isSelected = (!_selectedModelId.empty() ||
+							 !_selectedQuadId.empty() ||
+							 !_selectedTextId.empty() ||
+							 !_selectedPointlightId.empty() ||
+							 !_selectedSpotlightId.empty() ||
+							 !_selectedReflectionId.empty() ||
+							 !_selectedSoundId.empty());
+
+	const auto isActive = (!_activeModelId.empty() ||
+						   !_activeQuadId.empty() ||
+						   !_activeTextId.empty() ||
+						   !_activePointlightId.empty() ||
+						   !_activeSpotlightId.empty() ||
+						   !_activeReflectionId.empty() ||
+						   !_activeSoundId.empty());
 
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("selectedId")->getEntityId(), isSelected);
 	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("activeId")->getEntityId(), isActive);

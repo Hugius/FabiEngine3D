@@ -114,8 +114,12 @@ void Sound2dPlayer::update()
 		{
 			for(unsigned int index = 0; index < startedSounds.size(); index++)
 			{
-				stopSound(key, index);
+				delete _startedSounds.at(key)[index]->getHeader();
 			}
 		}
+
+		_startedSounds.clear();
+
+		_channelCounter = 0;
 	}
 }

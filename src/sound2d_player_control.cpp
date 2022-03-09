@@ -191,21 +191,3 @@ void Sound2dPlayer::setSoundSpeed(const string& id, unsigned int index, float va
 
 	_startedSounds.at(id)[index]->setSpeed(value);
 }
-
-void Sound2dPlayer::setSoundPitch(const string& id, unsigned int index, float value)
-{
-	if(!_sound2dManager->isSoundExisting(id))
-	{
-		abort();
-	}
-	if(!isSoundStarted(id, index))
-	{
-		abort();
-	}
-	if(waveOutGetNumDevs() == 0)
-	{
-		return;
-	}
-
-	_startedSounds.at(id)[index]->setPitch(value);
-}

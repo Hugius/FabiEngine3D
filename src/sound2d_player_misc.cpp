@@ -72,20 +72,6 @@ const float Sound2dPlayer::getSoundSpeed(const string& id, unsigned int index) c
 	return _startedSounds.at(id)[index]->getSpeed();
 }
 
-const float Sound2dPlayer::getSoundPitch(const string& id, unsigned int index) const
-{
-	if(!_sound2dManager->isSoundExisting(id))
-	{
-		abort();
-	}
-	if(!isSoundStarted(id, index))
-	{
-		abort();
-	}
-
-	return _startedSounds.at(id)[index]->getPitch();
-}
-
 const int Sound2dPlayer::getPlayCount(const string& id, unsigned int index) const
 {
 	if(!_sound2dManager->isSoundExisting(id))

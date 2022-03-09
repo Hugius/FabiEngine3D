@@ -16,7 +16,6 @@ public:
 	void setRightIntensity(float value);
 	void setVolume(float value);
 	void setSpeed(float value);
-	void setPitch(float value);
 	void setHandle(HWAVEOUT value);
 	void setHeader(PWAVEHDR value);
 
@@ -27,7 +26,6 @@ public:
 	const float getRightIntensity() const;
 	const float getVolume() const;
 	const float getSpeed() const;
-	const float getPitch() const;
 
 	const int getPlayCount() const;
 
@@ -40,7 +38,6 @@ private:
 	float _rightIntensity = 0.0f;
 	float _volume = 1.0f;
 	float _speed = 1.0f;
-	float _pitch = 1.0f;
 
 	bool _isPaused = false;
 

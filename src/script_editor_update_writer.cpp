@@ -151,12 +151,15 @@ void ScriptEditor::_updateTextWriter()
 			auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
 			auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
 			auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex);
-			auto nextLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex + 1);
 
 			if(cursorCharacterIndex == currentLineText.size())
 			{
-				if(cursorLineIndex < (_script->getScriptFile(_currentScriptFileId)->getLineCount() - 1))
+				const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
+
+				if(cursorLineIndex < (lineCount - 1))
 				{
+					const auto nextLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex + 1);
+
 					_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, (currentLineText + nextLineText));
 					_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex + 1);
 					hasTextChanged = true;
@@ -177,17 +180,21 @@ void ScriptEditor::_updateTextWriter()
 			auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
 			auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
 			auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex);
-			auto previousLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex - 1);
 
-			if(cursorCharacterIndex == 0 && cursorLineIndex > 0)
+			if(cursorCharacterIndex == 0)
 			{
-				_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex);
-				cursorLineIndex--;
-				_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, previousLineText + currentLineText);
-				cursorCharacterIndex = static_cast<unsigned int>(previousLineText.size());
-				hasTextChanged = true;
+				if(cursorLineIndex > 0)
+				{
+					const auto previousLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex - 1);
+
+					_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex);
+					cursorLineIndex--;
+					_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, previousLineText + currentLineText);
+					cursorCharacterIndex = static_cast<unsigned int>(previousLineText.size());
+					hasTextChanged = true;
+				}
 			}
-			else if(cursorCharacterIndex > 0)
+			else
 			{
 				cursorCharacterIndex--;
 				currentLineText.erase(currentLineText.begin() + cursorCharacterIndex);

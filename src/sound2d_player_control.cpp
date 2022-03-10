@@ -27,7 +27,6 @@ void Sound2dPlayer::startSound(const string& id, int playCount)
 	const auto waveBuffer = _sound2dManager->getSound(id)->getWaveBuffer();
 
 	HWAVEOUT handle = nullptr;
-	PWAVEHDR header = new WAVEHDR(*waveBuffer->getHeader());
 
 	const auto openResult = waveOutOpen(&handle, WAVE_MAPPER, waveBuffer->getFormat(), 0, 0, CALLBACK_NULL);
 	if(openResult != MMSYSERR_NOERROR)
@@ -36,22 +35,30 @@ void Sound2dPlayer::startSound(const string& id, int playCount)
 		abort();
 	}
 
-	const auto prepareResult = waveOutPrepareHeader(handle, header, sizeof(*header));
+	auto header = new WAVEHDR();
+	header->dwBufferLength = waveBuffer->getHeader()->dwBufferLength;
+	header->lpData = new char[header->dwBufferLength];
+	for(unsigned int i = 0; i < header->dwBufferLength; i++)
+	{
+		header->lpData[i] = waveBuffer->getHeader()->lpData[i];
+	}
+
+	const auto prepareResult = waveOutPrepareHeader(handle, header, sizeof(WAVEHDR));
 	if(prepareResult != MMSYSERR_NOERROR)
 	{
 		Logger::throwDebug(prepareResult);
 		abort();
 	}
 
-	const auto writeResult = waveOutWrite(handle, header, sizeof(*header));
+	const auto writeResult = waveOutWrite(handle, header, sizeof(WAVEHDR));
 	if(writeResult != MMSYSERR_NOERROR)
 	{
 		Logger::throwDebug(writeResult);
 		abort();
 	}
 
-	newSound->setHandle(handle);
 	newSound->setHeader(header);
+	newSound->setHandle(handle);
 	newSound->setPlayCount(playCount);
 
 	if(_startedSounds.find(id) == _startedSounds.end())
@@ -84,6 +91,14 @@ void Sound2dPlayer::pauseSound(const string& id, unsigned int index)
 	}
 
 	_startedSounds.at(id)[index]->setPaused(true);
+
+	const auto pauseResult = waveOutPause(_startedSounds.at(id)[index]->getHandle());
+
+	if(pauseResult != MMSYSERR_NOERROR)
+	{
+		Logger::throwDebug(pauseResult);
+		abort();
+	}
 }
 
 void Sound2dPlayer::resumeSound(const string& id, unsigned int index)
@@ -106,6 +121,14 @@ void Sound2dPlayer::resumeSound(const string& id, unsigned int index)
 	}
 
 	_startedSounds.at(id)[index]->setPaused(false);
+
+	const auto restartResult = waveOutRestart(_startedSounds.at(id)[index]->getHandle());
+
+	if(restartResult != MMSYSERR_NOERROR)
+	{
+		Logger::throwDebug(restartResult);
+		abort();
+	}
 }
 
 void Sound2dPlayer::stopSound(const string& id, unsigned int index)
@@ -130,7 +153,7 @@ void Sound2dPlayer::stopSound(const string& id, unsigned int index)
 		abort();
 	}
 
-	const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(*_startedSounds.at(id)[index]->getHeader()));
+	const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(WAVEHDR));
 	if(unprepareResult != MMSYSERR_NOERROR)
 	{
 		Logger::throwDebug(unprepareResult);
@@ -172,6 +195,17 @@ void Sound2dPlayer::setSoundVolume(const string& id, unsigned int index, float v
 	}
 
 	_startedSounds.at(id)[index]->setVolume(value);
+
+	const auto waveBuffer = _sound2dManager->getSound(id)->getWaveBuffer();
+
+	auto originalSamples = reinterpret_cast<short*>(waveBuffer->getHeader()->lpData);
+	auto currentSamples = reinterpret_cast<short*>(_startedSounds.at(id)[index]->getHeader()->lpData);
+	auto sampleCount = (_startedSounds.at(id)[index]->getHeader()->dwBufferLength / 2);
+
+	for(unsigned int i = 0; i < sampleCount; i++)
+	{
+		currentSamples[i] = static_cast<short>(static_cast<float>(originalSamples[i]) * _startedSounds.at(id)[index]->getVolume());
+	}
 }
 
 void Sound2dPlayer::setSoundSpeed(const string& id, unsigned int index, float value)

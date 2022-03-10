@@ -15,11 +15,11 @@ public:
 	void setVolume(float value);
 	void setSpeed(float value);
 	void setPitch(float value);
-	void setHandle(HWAVEOUT value);
 	void setHeader(PWAVEHDR value);
+	void setHandle(HWAVEOUT value);
 
-	const HWAVEOUT getHandle() const;
 	const PWAVEHDR getHeader() const;
+	const HWAVEOUT getHandle() const;
 
 	const float getVolume() const;
 	const float getSpeed() const;
@@ -38,7 +38,6 @@ private:
 
 	bool _isPaused = false;
 
-	HWAVEOUT _handle = nullptr;
-
 	PWAVEHDR _header = nullptr;
+	HWAVEOUT _handle = nullptr;
 };

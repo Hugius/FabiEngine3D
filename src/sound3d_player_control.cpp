@@ -36,14 +36,14 @@ void Sound3dPlayer::startSound(const string& id, int playCount)
 		abort();
 	}
 
-	const auto prepareResult = waveOutPrepareHeader(handle, header, sizeof(*header));
+	const auto prepareResult = waveOutPrepareHeader(handle, header, sizeof(WAVEHDR));
 	if(prepareResult != MMSYSERR_NOERROR)
 	{
 		Logger::throwDebug(prepareResult);
 		abort();
 	}
 
-	const auto writeResult = waveOutWrite(handle, header, sizeof(*header));
+	const auto writeResult = waveOutWrite(handle, header, sizeof(WAVEHDR));
 	if(writeResult != MMSYSERR_NOERROR)
 	{
 		Logger::throwDebug(writeResult);
@@ -130,7 +130,7 @@ void Sound3dPlayer::stopSound(const string& id, unsigned int index)
 		abort();
 	}
 
-	const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(*_startedSounds.at(id)[index]->getHeader()));
+	const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(WAVEHDR));
 	if(unprepareResult != MMSYSERR_NOERROR)
 	{
 		Logger::throwDebug(unprepareResult);

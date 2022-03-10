@@ -126,6 +126,20 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:sound2d_get_pitch")
+	{
+		auto types = {SVT::STRING, SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSound2d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->sound2d_getPitch(args[0]->getString(), args[1]->getInteger());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:sound2d_get_started_count")
 	{
 		auto types = {SVT::STRING};

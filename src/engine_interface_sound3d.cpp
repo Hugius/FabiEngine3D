@@ -66,6 +66,11 @@ void EngineInterface::sound3d_setSpeed(const string& id, unsigned int index, flo
 	_core->getSound3dPlayer()->setSoundSpeed(id, index, value);
 }
 
+void EngineInterface::sound3d_setPitch(const string& id, unsigned int index, float value)
+{
+	_core->getSound3dPlayer()->setSoundPitch(id, index, value);
+}
+
 const vector<string> EngineInterface::sound3d_getIds() const
 {
 	vector<string> result;
@@ -131,6 +136,11 @@ const float EngineInterface::sound3d_getVolume(const string& id, unsigned int in
 const float EngineInterface::sound3d_getSpeed(const string& id, unsigned int index) const
 {
 	return _core->getSound3dPlayer()->getSoundSpeed(id, index);
+}
+
+const float EngineInterface::sound3d_getPitch(const string& id, unsigned int index) const
+{
+	return _core->getSound3dPlayer()->getSoundPitch(id, index);
 }
 
 const unsigned int EngineInterface::sound3d_getStartedCount(const string& id) const

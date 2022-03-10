@@ -53,8 +53,31 @@ void Sound2dPlayer::startSound(const string& id, int playCount)
 	const auto writeResult = waveOutWrite(handle, header, sizeof(WAVEHDR));
 	if(writeResult != MMSYSERR_NOERROR)
 	{
-		Logger::throwDebug(writeResult);
-		abort();
+		if(writeResult == MMSYSERR_NOMEM)
+		{
+			const auto unprepareResult = waveOutUnprepareHeader(handle, header, sizeof(WAVEHDR));
+			if(unprepareResult != MMSYSERR_NOERROR)
+			{
+				Logger::throwDebug(unprepareResult);
+				abort();
+			}
+
+			const auto closeResult = waveOutClose(handle);
+			if(closeResult != MMSYSERR_NOERROR)
+			{
+				Logger::throwDebug(closeResult);
+				abort();
+			}
+
+			delete header;
+
+			return;
+		}
+		else
+		{
+			Logger::throwDebug(writeResult);
+			abort();
+		}
 	}
 
 	newSound->setHeader(header);

@@ -107,24 +107,6 @@ void Sound3dPlayer::update()
 					Logger::throwDebug(volumeResult);
 					abort();
 				}
-
-				const auto speedIntegral = static_cast<unsigned short>(startedSounds[index]->getSpeed());
-				const auto speedFraction = static_cast<unsigned short>(fmodf(startedSounds[index]->getSpeed(), 1.0f) * static_cast<float>(USHRT_MAX));
-				const auto speedResult = waveOutSetPlaybackRate(startedSounds[index]->getHandle(), MAKELONG(speedFraction, speedIntegral));
-				if((speedResult != MMSYSERR_NOERROR) && (speedResult != MMSYSERR_NODRIVER) && (speedResult != MMSYSERR_NOTSUPPORTED))
-				{
-					Logger::throwDebug(speedResult);
-					abort();
-				}
-
-				const auto pitchIntegral = static_cast<unsigned short>(startedSounds[index]->getPitch());
-				const auto pitchFraction = static_cast<unsigned short>(fmodf(startedSounds[index]->getPitch(), 1.0f) * static_cast<float>(USHRT_MAX));
-				const auto pitchResult = waveOutSetPitch(startedSounds[index]->getHandle(), MAKELONG(pitchFraction, pitchIntegral));
-				if((pitchResult != MMSYSERR_NOERROR) && (pitchResult != MMSYSERR_NODRIVER) && (pitchResult != MMSYSERR_NOTSUPPORTED))
-				{
-					Logger::throwDebug(pitchResult);
-					abort();
-				}
 			}
 		}
 	}

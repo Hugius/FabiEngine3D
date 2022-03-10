@@ -695,8 +695,6 @@ public:
 	void sound3d_pause(const string& id, unsigned int index);
 	void sound3d_resume(const string& id, unsigned int index);
 	void sound3d_stop(const string& id, unsigned int index);
-	void sound3d_setSpeed(const string& id, unsigned int index, float value);
-	void sound3d_setPitch(const string& id, unsigned int index, float value);
 
 	const vector<string> sound3d_getIds() const;
 	const string& sound3d_getAudioPath(const string& id) const;
@@ -704,8 +702,6 @@ public:
 	const float sound3d_getMaxDistance(const string& id) const;
 	const float sound3d_getMaxVolume(const string& id) const;
 	const float sound3d_getVolume(const string& id, unsigned int index) const;
-	const float sound3d_getSpeed(const string& id, unsigned int index) const;
-	const float sound3d_getPitch(const string& id, unsigned int index) const;
 	const unsigned int sound3d_getStartedCount(const string& id) const;
 	const bool sound3d_isExisting(const string& id) const;
 	const bool sound3d_isStarted(const string& id, unsigned int index) const;
@@ -720,14 +716,10 @@ public:
 	void sound2d_resume(const string& id, unsigned int index);
 	void sound2d_stop(const string& id, unsigned int index);
 	void sound2d_setVolume(const string& id, unsigned int index, float value);
-	void sound2d_setSpeed(const string& id, unsigned int index, float value);
-	void sound2d_setPitch(const string& id, unsigned int index, float value);
 
 	const vector<string> sound2d_getIds() const;
 	const string& sound2d_getAudioPath(const string& id) const;
 	const float sound2d_getVolume(const string& id, unsigned int index) const;
-	const float sound2d_getSpeed(const string& id, unsigned int index) const;
-	const float sound2d_getPitch(const string& id, unsigned int index) const;
 	const unsigned int sound2d_getStartedCount(const string& id) const;
 	const bool sound2d_isExisting(const string& id) const;
 	const bool sound2d_isStarted(const string& id, unsigned int index) const;

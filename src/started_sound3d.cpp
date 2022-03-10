@@ -29,16 +29,6 @@ void StartedSound3D::setVolume(float value)
 	_volume = clamp(value, 0.0f, 1.0f);
 }
 
-void StartedSound3D::setSpeed(float value)
-{
-	_speed = max(0.0f, value);
-}
-
-void StartedSound3D::setPitch(float value)
-{
-	_pitch = max(0.0f, value);
-}
-
 void StartedSound3D::setHandle(HWAVEOUT value)
 {
 	_handle = value;
@@ -52,16 +42,6 @@ void StartedSound3D::setHeader(PWAVEHDR value)
 const float StartedSound3D::getVolume() const
 {
 	return _volume;
-}
-
-const float StartedSound3D::getSpeed() const
-{
-	return _speed;
-}
-
-const float StartedSound3D::getPitch() const
-{
-	return _pitch;
 }
 
 const int StartedSound3D::getPlayCount() const

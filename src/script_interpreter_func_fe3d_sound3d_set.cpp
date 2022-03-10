@@ -158,46 +158,6 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound3d_set_speed")
-	{
-		auto types = {SVT::STRING, SVT::INTEGER, SVT::DECIMAL};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dSound3d(args[0]->getString(), false))
-			{
-				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
-				{
-					_throwRuntimeError("sound2D is not started");
-					return true;
-				}
-
-				_fe3d->sound3d_setSpeed(args[0]->getString(), args[1]->getInteger(), args[2]->getDecimal());
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:sound3d_set_pitch")
-	{
-		auto types = {SVT::STRING, SVT::INTEGER, SVT::DECIMAL};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dSound3d(args[0]->getString(), false))
-			{
-				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
-				{
-					_throwRuntimeError("sound2D is not started");
-					return true;
-				}
-
-				_fe3d->sound3d_setPitch(args[0]->getString(), args[1]->getInteger(), args[2]->getDecimal());
-
-				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-			}
-		}
-	}
 	else if(functionName == "fe3d:sound3d_set_position")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};

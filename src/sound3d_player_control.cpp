@@ -155,39 +155,3 @@ void Sound3dPlayer::stopSound(const string& id, unsigned int index)
 
 	_channelCounter--;
 }
-
-void Sound3dPlayer::setSoundSpeed(const string& id, unsigned int index, float value)
-{
-	if(!_sound3dManager->isSoundExisting(id))
-	{
-		abort();
-	}
-	if(!isSoundStarted(id, index))
-	{
-		abort();
-	}
-	if(waveOutGetNumDevs() == 0)
-	{
-		return;
-	}
-
-	_startedSounds.at(id)[index]->setSpeed(value);
-}
-
-void Sound3dPlayer::setSoundPitch(const string& id, unsigned int index, float value)
-{
-	if(!_sound3dManager->isSoundExisting(id))
-	{
-		abort();
-	}
-	if(!isSoundStarted(id, index))
-	{
-		abort();
-	}
-	if(waveOutGetNumDevs() == 0)
-	{
-		return;
-	}
-
-	_startedSounds.at(id)[index]->setPitch(value);
-}

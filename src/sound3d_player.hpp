@@ -24,12 +24,8 @@ public:
 	void pauseSound(const string& id, unsigned int index);
 	void resumeSound(const string& id, unsigned int index);
 	void stopSound(const string& id, unsigned int index);
-	void setSoundSpeed(const string& id, unsigned int index, float value);
-	void setSoundPitch(const string& id, unsigned int index, float value);
 
 	const float getSoundVolume(const string& id, unsigned int index) const;
-	const float getSoundSpeed(const string& id, unsigned int index) const;
-	const float getSoundPitch(const string& id, unsigned int index) const;
 
 	const int getPlayCount(const string& id, unsigned int index) const;
 

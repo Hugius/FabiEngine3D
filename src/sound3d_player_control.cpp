@@ -27,13 +27,20 @@ void Sound3dPlayer::startSound(const string& id, int playCount)
 	const auto waveBuffer = _sound3dManager->getSound(id)->getWaveBuffer();
 
 	HWAVEOUT handle = nullptr;
-	PWAVEHDR header = new WAVEHDR(*waveBuffer->getHeader());
 
 	const auto openResult = waveOutOpen(&handle, WAVE_MAPPER, waveBuffer->getFormat(), 0, 0, CALLBACK_NULL);
 	if(openResult != MMSYSERR_NOERROR)
 	{
 		Logger::throwDebug(openResult);
 		abort();
+	}
+
+	auto header = new WAVEHDR();
+	header->dwBufferLength = waveBuffer->getHeader()->dwBufferLength;
+	header->lpData = new char[header->dwBufferLength];
+	for(unsigned int i = 0; i < header->dwBufferLength; i++)
+	{
+		header->lpData[i] = waveBuffer->getHeader()->lpData[i];
 	}
 
 	const auto prepareResult = waveOutPrepareHeader(handle, header, sizeof(WAVEHDR));
@@ -107,6 +114,14 @@ void Sound3dPlayer::pauseSound(const string& id, unsigned int index)
 	}
 
 	_startedSounds.at(id)[index]->setPaused(true);
+
+	const auto pauseResult = waveOutPause(_startedSounds.at(id)[index]->getHandle());
+
+	if(pauseResult != MMSYSERR_NOERROR)
+	{
+		Logger::throwDebug(pauseResult);
+		abort();
+	}
 }
 
 void Sound3dPlayer::resumeSound(const string& id, unsigned int index)
@@ -129,6 +144,14 @@ void Sound3dPlayer::resumeSound(const string& id, unsigned int index)
 	}
 
 	_startedSounds.at(id)[index]->setPaused(false);
+
+	const auto restartResult = waveOutRestart(_startedSounds.at(id)[index]->getHandle());
+
+	if(restartResult != MMSYSERR_NOERROR)
+	{
+		Logger::throwDebug(restartResult);
+		abort();
+	}
 }
 
 void Sound3dPlayer::stopSound(const string& id, unsigned int index)

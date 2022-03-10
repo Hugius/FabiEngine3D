@@ -27,6 +27,24 @@ void Sound3dPlayer::update()
 			startedSounds[index]->setVolume(volume);
 			startedSounds[index]->setLeftIntensity(leftIntensity);
 			startedSounds[index]->setRightIntensity(rightIntensity);
+
+			const auto waveBuffer = _sound3dManager->getSound(key)->getWaveBuffer();
+
+			auto originalSamples = reinterpret_cast<short*>(waveBuffer->getHeader()->lpData);
+			auto currentSamples = reinterpret_cast<short*>(startedSounds[index]->getHeader()->lpData);
+			auto sampleCount = (startedSounds[index]->getHeader()->dwBufferLength / 2);
+
+			for(unsigned int i = 0; i < sampleCount; i++)
+			{
+				if(((i + 1) % 2) == 0)
+				{
+					currentSamples[i] = static_cast<short>(static_cast<float>(originalSamples[i]) * volume * rightIntensity);
+				}
+				else
+				{
+					currentSamples[i] = static_cast<short>(static_cast<float>(originalSamples[i]) * volume * leftIntensity);
+				}
+			}
 		}
 	}
 
@@ -54,58 +72,18 @@ void Sound3dPlayer::update()
 				}
 				else
 				{
-					const auto unprepareResult = waveOutUnprepareHeader(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(WAVEHDR));
-					if((unprepareResult != MMSYSERR_NOERROR) && (unprepareResult != MMSYSERR_NODRIVER))
+					if(waveOutGetNumDevs() > 0)
 					{
-						Logger::throwDebug(unprepareResult);
-						abort();
-					}
+						startedSounds[index]->getHeader()->dwFlags = WHDR_PREPARED;
 
-					const auto prepareResult = waveOutPrepareHeader(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(WAVEHDR));
-					if((prepareResult != MMSYSERR_NOERROR) && (prepareResult != MMSYSERR_NODRIVER))
-					{
-						Logger::throwDebug(prepareResult);
-						abort();
-					}
+						const auto writeResult = waveOutWrite(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(WAVEHDR));
 
-					const auto writeResult = waveOutWrite(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(WAVEHDR));
-					if((writeResult != MMSYSERR_NOERROR) && (writeResult != MMSYSERR_NODRIVER))
-					{
-						Logger::throwDebug(writeResult);
-						abort();
+						if(writeResult != MMSYSERR_NOERROR)
+						{
+							Logger::throwDebug(writeResult);
+							abort();
+						}
 					}
-				}
-			}
-			else
-			{
-				if(startedSounds[index]->isPaused())
-				{
-					const auto pauseResult = waveOutPause(startedSounds[index]->getHandle());
-
-					if((pauseResult != MMSYSERR_NOERROR) && (pauseResult != MMSYSERR_NODRIVER))
-					{
-						Logger::throwDebug(pauseResult);
-						abort();
-					}
-				}
-				else
-				{
-					const auto restartResult = waveOutRestart(startedSounds[index]->getHandle());
-
-					if((restartResult != MMSYSERR_NOERROR) && (restartResult != MMSYSERR_NODRIVER))
-					{
-						Logger::throwDebug(restartResult);
-						abort();
-					}
-				}
-
-				const auto leftVolumeIntegral = static_cast<unsigned short>(startedSounds[index]->getVolume() * startedSounds[index]->getLeftIntensity() * static_cast<float>(USHRT_MAX));
-				const auto rightVolumeIntegral = static_cast<unsigned short>(startedSounds[index]->getVolume() * startedSounds[index]->getRightIntensity() * static_cast<float>(USHRT_MAX));
-				const auto volumeResult = waveOutSetVolume(startedSounds[index]->getHandle(), MAKELONG(leftVolumeIntegral, rightVolumeIntegral));
-				if((volumeResult != MMSYSERR_NOERROR) && (volumeResult != MMSYSERR_NODRIVER) && (volumeResult != MMSYSERR_NOTSUPPORTED))
-				{
-					Logger::throwDebug(volumeResult);
-					abort();
 				}
 			}
 		}

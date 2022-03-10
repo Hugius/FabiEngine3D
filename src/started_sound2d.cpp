@@ -4,11 +4,6 @@
 
 using std::clamp;
 
-void StartedSound2D::setSampleIndex(unsigned int value)
-{
-	_sampleIndex = value;
-}
-
 void StartedSound2D::setPaused(bool value)
 {
 	_isPaused = value;
@@ -27,6 +22,11 @@ void StartedSound2D::setVolume(float value)
 void StartedSound2D::setSpeed(float value)
 {
 	_speed = max(0.0f, value);
+}
+
+void StartedSound2D::setPitch(float value)
+{
+	_pitch = max(0.0f, value);
 }
 
 void StartedSound2D::setHandle(HWAVEOUT value)
@@ -49,9 +49,9 @@ const float StartedSound2D::getSpeed() const
 	return _speed;
 }
 
-const unsigned int StartedSound2D::getSampleIndex() const
+const float StartedSound2D::getPitch() const
 {
-	return _sampleIndex;
+	return _pitch;
 }
 
 const int StartedSound2D::getPlayCount() const

@@ -10,11 +10,11 @@ using std::string;
 class StartedSound2D final
 {
 public:
-	void setSampleIndex(unsigned int value);
 	void setPaused(bool value);
 	void setPlayCount(int value);
 	void setVolume(float value);
 	void setSpeed(float value);
+	void setPitch(float value);
 	void setHandle(HWAVEOUT value);
 	void setHeader(PWAVEHDR value);
 
@@ -23,20 +23,18 @@ public:
 
 	const float getVolume() const;
 	const float getSpeed() const;
-
-	const unsigned int getSampleIndex() const;
+	const float getPitch() const;
 
 	const int getPlayCount() const;
 
 	const bool isPaused() const;
 
 private:
-	unsigned int _sampleIndex = 0;
-
 	int _playCount = 0;
 
 	float _volume = 1.0f;
 	float _speed = 1.0f;
+	float _pitch = 1.0f;
 
 	bool _isPaused = false;
 

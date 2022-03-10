@@ -30,9 +30,3 @@
 - **Volume**: the volume of the audio
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Speed**: the speed of the audio
-  - Type: `decimal`
-  - Constraints: at least `0.0`
-- **Pitch**: the pitch of the audio
-  - Type: `decimal`
-  - Constraints: at least `0.0`

@@ -3,8 +3,8 @@
 
 #include <thread>
 
-using std::make_shared;
 using std::thread;
+using std::make_shared;
 
 void Sound2dPlayer::startSound(const string& id, int playCount)
 {
@@ -47,9 +47,9 @@ void Sound2dPlayer::startSound(const string& id, int playCount)
 	header->lpData = new char[header->dwBufferLength];
 	header->dwFlags = 0;
 
-	for(unsigned int i = 0; i < header->dwBufferLength; i++)
+	for(unsigned int index = 0; index < header->dwBufferLength; index++)
 	{
-		header->lpData[i] = waveBuffer->getHeader()->lpData[i];
+		header->lpData[index] = waveBuffer->getHeader()->lpData[index];
 	}
 
 	const auto prepareResult = waveOutPrepareHeader(handle, header, sizeof(WAVEHDR));

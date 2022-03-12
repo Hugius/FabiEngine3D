@@ -7,7 +7,7 @@ void Sound2dPlayer::update()
 {
 	vector<pair<string, unsigned int>> soundsToStop;
 
-	for(auto& [soundId, startedSounds] : _startedSounds)
+	for(auto& [id, startedSounds] : _startedSounds)
 	{
 		for(unsigned int index = 0; index < startedSounds.size(); index++)
 		{
@@ -20,7 +20,7 @@ void Sound2dPlayer::update()
 
 				if(startedSounds[index]->getPlayCount() == 0)
 				{
-					soundsToStop.push_back({soundId, index});
+					soundsToStop.push_back({id, index});
 				}
 				else
 				{

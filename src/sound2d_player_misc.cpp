@@ -28,9 +28,9 @@ void Sound2dPlayer::_terminateSounds()
 
 void Sound2dPlayer::_processVolumeChange(unsigned int sampleCount, short* originalSamples, short* currentSamples, float volume)
 {
-	for(unsigned int i = 0; i < sampleCount; i++)
+	for(unsigned int index = 0; index < sampleCount; index++)
 	{
-		currentSamples[i] = static_cast<short>(static_cast<float>(originalSamples[i]) * volume);
+		currentSamples[index] = static_cast<short>(static_cast<float>(originalSamples[index]) * volume);
 	}
 }
 

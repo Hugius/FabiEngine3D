@@ -36,6 +36,9 @@ public:
 	const bool isDeviceConnected() const;
 
 private:
+	void _terminateSound(const string& id, unsigned int index);
+	void _terminateSounds();
+
 	static inline constexpr unsigned int MAX_CHANNEL_COUNT = 1024;
 
 	unordered_map<string, vector<shared_ptr<StartedSound2D>>> _startedSounds;

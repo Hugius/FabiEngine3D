@@ -1,15 +1,17 @@
 #include "sound2d_player.hpp"
 #include "logger.hpp"
 
+using std::pair;
+
 void Sound2dPlayer::update()
 {
-	vector<string> soundsToStop;
+	vector<pair<string, unsigned int>> soundsToStop;
 
-	for(auto& [key, startedSounds] : _startedSounds)
+	for(auto& [soundId, startedSounds] : _startedSounds)
 	{
 		for(unsigned int index = 0; index < startedSounds.size(); index++)
 		{
-			if(startedSounds[index]->getHeader()->dwFlags &= WHDR_DONE)
+			if((startedSounds[index]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
 			{
 				if(startedSounds[index]->getPlayCount() != -1)
 				{
@@ -18,24 +20,22 @@ void Sound2dPlayer::update()
 
 				if(startedSounds[index]->getPlayCount() == 0)
 				{
-					startedSounds.erase(startedSounds.begin() + index);
-
-					if(startedSounds.empty())
-					{
-						soundsToStop.push_back(key);
-					}
-
-					index--;
+					soundsToStop.push_back({soundId, index});
 				}
 				else
 				{
-					if(waveOutGetNumDevs() > 0)
+					startedSounds[index]->getHeader()->dwFlags = WHDR_PREPARED;
+
+					const auto writeResult = waveOutWrite(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(WAVEHDR));
+
+					if(writeResult != MMSYSERR_NOERROR)
 					{
-						startedSounds[index]->getHeader()->dwFlags = WHDR_PREPARED;
-
-						const auto writeResult = waveOutWrite(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(WAVEHDR));
-
-						if(writeResult != MMSYSERR_NOERROR)
+						if(writeResult == MMSYSERR_NODRIVER)
+						{
+							_terminateSounds();
+							return;
+						}
+						else
 						{
 							Logger::throwDebug(writeResult);
 							abort();
@@ -46,23 +46,38 @@ void Sound2dPlayer::update()
 		}
 	}
 
-	for(const auto& key : soundsToStop)
+	for(const auto& [id, index] : soundsToStop)
 	{
-		_startedSounds.erase(key);
-	}
-
-	if(waveOutGetNumDevs() == 0)
-	{
-		for(const auto& [key, startedSounds] : _startedSounds)
+		const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(WAVEHDR));
+		if(unprepareResult != MMSYSERR_NOERROR)
 		{
-			for(unsigned int index = 0; index < startedSounds.size(); index++)
+			if(unprepareResult == MMSYSERR_NODRIVER)
 			{
-				delete _startedSounds.at(key)[index]->getHeader();
+				_terminateSounds();
+				return;
+			}
+			else
+			{
+				Logger::throwDebug(unprepareResult);
+				abort();
 			}
 		}
 
-		_startedSounds.clear();
+		const auto closeResult = waveOutClose(_startedSounds.at(id)[index]->getHandle());
+		if(closeResult != MMSYSERR_NOERROR)
+		{
+			if(closeResult == MMSYSERR_NODRIVER)
+			{
+				_terminateSounds();
+				return;
+			}
+			else
+			{
+				Logger::throwDebug(closeResult);
+				abort();
+			}
+		}
 
-		_channelCounter = 0;
+		_terminateSound(id, index);
 	}
 }

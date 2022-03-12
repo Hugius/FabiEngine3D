@@ -10,6 +10,37 @@ const bool Sound2dPlayer::isDeviceConnected() const
 	return (waveOutGetNumDevs() > 0);
 }
 
+void Sound2dPlayer::_terminateSounds()
+{
+	for(const auto& [key, startedSounds] : _startedSounds)
+	{
+		for(unsigned int index = 0; index < startedSounds.size(); index++)
+		{
+			delete[] _startedSounds.at(key)[index]->getHeader()->lpData;
+			delete _startedSounds.at(key)[index]->getHeader();
+		}
+	}
+
+	_startedSounds.clear();
+
+	_channelCounter = 0;
+}
+
+void Sound2dPlayer::_terminateSound(const string& id, unsigned int index)
+{
+	delete[] _startedSounds.at(id)[index]->getHeader()->lpData;
+	delete _startedSounds.at(id)[index]->getHeader();
+
+	_startedSounds.at(id).erase(_startedSounds.at(id).begin() + index);
+
+	if(_startedSounds.at(id).empty())
+	{
+		_startedSounds.erase(id);
+	}
+
+	_channelCounter--;
+}
+
 const bool Sound2dPlayer::isChannelAvailable() const
 {
 	return (_channelCounter < MAX_CHANNEL_COUNT);

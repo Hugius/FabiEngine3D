@@ -23,8 +23,12 @@ public:
 	void resumeSound(const string& id, unsigned int index);
 	void stopSound(const string& id, unsigned int index);
 	void setSoundVolume(const string& id, unsigned int index, float value);
+	void setSoundLeftIntensity(const string& id, unsigned int index, float value);
+	void setSoundRightIntensity(const string& id, unsigned int index, float value);
 
 	const float getSoundVolume(const string& id, unsigned int index) const;
+	const float getSoundLeftIntensity(const string& id, unsigned int index) const;
+	const float getSoundRightIntensity(const string& id, unsigned int index) const;
 
 	const int getPlayCount(const string& id, unsigned int index) const;
 

@@ -19,6 +19,16 @@ void StartedSound2D::setVolume(float value)
 	_volume = clamp(value, 0.0f, 1.0f);
 }
 
+void StartedSound2D::setLeftIntensity(float value)
+{
+	_leftIntensity = value;
+}
+
+void StartedSound2D::setRightIntensity(float value)
+{
+	_rightIntensity = value;
+}
+
 void StartedSound2D::setHandle(HWAVEOUT value)
 {
 	_handle = value;
@@ -47,6 +57,16 @@ const bool StartedSound2D::isPaused() const
 const HWAVEOUT StartedSound2D::getHandle() const
 {
 	return _handle;
+}
+
+const float StartedSound2D::getLeftIntensity() const
+{
+	return _leftIntensity;
+}
+
+const float StartedSound2D::getRightIntensity() const
+{
+	return _rightIntensity;
 }
 
 const PWAVEHDR StartedSound2D::getHeader() const

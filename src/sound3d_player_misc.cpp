@@ -63,6 +63,34 @@ const float Sound3dPlayer::getSoundVolume(const string& id, unsigned int index) 
 	return _startedSounds.at(id)[index]->getVolume();
 }
 
+const float Sound3dPlayer::getSoundLeftIntensity(const string& id, unsigned int index) const
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	return _startedSounds.at(id)[index]->getLeftIntensity();
+}
+
+const float Sound3dPlayer::getSoundRightIntensity(const string& id, unsigned int index) const
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	return _startedSounds.at(id)[index]->getRightIntensity();
+}
+
 const int Sound3dPlayer::getPlayCount(const string& id, unsigned int index) const
 {
 	if(!_sound3dManager->isSoundExisting(id))

@@ -97,6 +97,34 @@ const float Sound2dPlayer::getSoundVolume(const string& id, unsigned int index) 
 	return _startedSounds.at(id)[index]->getVolume();
 }
 
+const float Sound2dPlayer::getSoundLeftIntensity(const string& id, unsigned int index) const
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	return _startedSounds.at(id)[index]->getLeftIntensity();
+}
+
+const float Sound2dPlayer::getSoundRightIntensity(const string& id, unsigned int index) const
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	return _startedSounds.at(id)[index]->getRightIntensity();
+}
+
 const int Sound2dPlayer::getPlayCount(const string& id, unsigned int index) const
 {
 	if(!_sound2dManager->isSoundExisting(id))

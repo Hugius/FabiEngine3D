@@ -41,6 +41,16 @@ void EngineInterface::sound2d_setVolume(const string& id, unsigned int index, fl
 	_core->getSound2dPlayer()->setSoundVolume(id, index, value);
 }
 
+void EngineInterface::sound2d_setLeftIntensity(const string& id, unsigned int index, float value)
+{
+	_core->getSound2dPlayer()->setSoundLeftIntensity(id, index, value);
+}
+
+void EngineInterface::sound2d_setRightIntensity(const string& id, unsigned int index, float value)
+{
+	_core->getSound2dPlayer()->setSoundRightIntensity(id, index, value);
+}
+
 const vector<string> EngineInterface::sound2d_getIds() const
 {
 	vector<string> result;
@@ -86,6 +96,16 @@ const bool EngineInterface::sound2d_isDeviceConnected() const
 const float EngineInterface::sound2d_getVolume(const string& id, unsigned int index) const
 {
 	return _core->getSound2dPlayer()->getSoundVolume(id, index);
+}
+
+const float EngineInterface::sound2d_getLeftIntensity(const string& id, unsigned int index) const
+{
+	return _core->getSound2dPlayer()->getSoundLeftIntensity(id, index);
+}
+
+const float EngineInterface::sound2d_getRightIntensity(const string& id, unsigned int index) const
+{
+	return _core->getSound2dPlayer()->getSoundRightIntensity(id, index);
 }
 
 const unsigned int EngineInterface::sound2d_getStartedCount(const string& id) const

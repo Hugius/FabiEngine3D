@@ -31,3 +31,9 @@
 - **Volume**: the volume of the audio
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
+- **Left Intensity**: the left speaker volume intensity of the audio
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
+- **Right Intensity**: the right speaker volume intensity of the audio
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`

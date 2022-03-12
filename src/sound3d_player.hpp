@@ -26,6 +26,8 @@ public:
 	void stopSound(const string& id, unsigned int index);
 
 	const float getSoundVolume(const string& id, unsigned int index) const;
+	const float getSoundLeftIntensity(const string& id, unsigned int index) const;
+	const float getSoundRightIntensity(const string& id, unsigned int index) const;
 
 	const int getPlayCount(const string& id, unsigned int index) const;
 

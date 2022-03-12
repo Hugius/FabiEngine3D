@@ -277,3 +277,31 @@ void Sound2dPlayer::setSoundVolume(const string& id, unsigned int index, float v
 
 	thread(&Sound2dPlayer::_processVolumeChange, this, sampleCount, originalSamples, currentSamples, volume).detach();
 }
+
+void Sound2dPlayer::setSoundLeftIntensity(const string& id, unsigned int index, float value)
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	_startedSounds.at(id)[index]->setLeftIntensity(value);
+}
+
+void Sound2dPlayer::setSoundRightIntensity(const string& id, unsigned int index, float value)
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	_startedSounds.at(id)[index]->setRightIntensity(value);
+}

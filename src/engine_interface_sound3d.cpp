@@ -123,6 +123,16 @@ const float EngineInterface::sound3d_getVolume(const string& id, unsigned int in
 	return _core->getSound3dPlayer()->getSoundVolume(id, index);
 }
 
+const float EngineInterface::sound3d_getLeftIntensity(const string& id, unsigned int index) const
+{
+	return _core->getSound3dPlayer()->getSoundLeftIntensity(id, index);
+}
+
+const float EngineInterface::sound3d_getRightIntensity(const string& id, unsigned int index) const
+{
+	return _core->getSound3dPlayer()->getSoundRightIntensity(id, index);
+}
+
 const unsigned int EngineInterface::sound3d_getStartedCount(const string& id) const
 {
 	return _core->getSound3dPlayer()->getStartedSoundCount(id);

@@ -10,7 +10,7 @@ using std::to_string;
 using std::get;
 using std::future_status;
 using std::launch;
-using std::chrono::system_clock;
+using std::chrono::seconds;
 
 void NetworkingServer::update()
 {
@@ -33,7 +33,7 @@ void NetworkingServer::update()
 
 	_pendingMessages.clear();
 
-	if(_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
+	if(_connectionThread.wait_for(seconds(0)) == future_status::ready)
 	{
 		const auto clientSocket = _connectionThread.get();
 
@@ -60,7 +60,7 @@ void NetworkingServer::update()
 
 	for(unsigned int index = 0; index < _clientSockets.size(); index++)
 	{
-		if(_tcpMessageThreads[index].wait_until(system_clock::time_point::min()) == future_status::ready)
+		if(_tcpMessageThreads[index].wait_for(seconds(0)) == future_status::ready)
 		{
 			const auto messageResult = _tcpMessageThreads[index].get();
 			const auto messageStatusCode = get<0>(messageResult);

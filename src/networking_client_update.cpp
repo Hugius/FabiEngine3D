@@ -8,7 +8,7 @@
 
 using std::future_status;
 using std::launch;
-using std::chrono::system_clock;
+using std::chrono::seconds;
 using std::get;
 
 void NetworkingClient::update()
@@ -28,7 +28,7 @@ void NetworkingClient::update()
 
 	if(_isConnectingToServer)
 	{
-		if(_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
+		if(_connectionThread.wait_for(seconds(0)) == future_status::ready)
 		{
 			auto connectionErrorCode = _connectionThread.get();
 
@@ -76,7 +76,7 @@ void NetworkingClient::update()
 		_lastMilliseconds = Tools::getTimeSinceEpochMS();
 	}
 
-	if(_tcpMessageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
+	if(_tcpMessageThread.wait_for(seconds(0)) == future_status::ready)
 	{
 		const auto messageResult = _tcpMessageThread.get();
 		const auto messageStatusCode = get<0>(messageResult);

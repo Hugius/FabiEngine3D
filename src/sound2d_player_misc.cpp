@@ -26,6 +26,14 @@ void Sound2dPlayer::_terminateSounds()
 	_channelCounter = 0;
 }
 
+void Sound2dPlayer::_processVolumeChange(unsigned int sampleCount, short* originalSamples, short* currentSamples, float volume)
+{
+	for(unsigned int i = 0; i < sampleCount; i++)
+	{
+		currentSamples[i] = static_cast<short>(static_cast<float>(originalSamples[i]) * volume);
+	}
+}
+
 void Sound2dPlayer::_terminateSound(const string& id, unsigned int index)
 {
 	delete[] _startedSounds.at(id)[index]->getHeader()->lpData;

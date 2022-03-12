@@ -1,7 +1,10 @@
 #include "sound2d_player.hpp"
 #include "logger.hpp"
 
+#include <thread>
+
 using std::make_shared;
+using std::thread;
 
 void Sound2dPlayer::startSound(const string& id, int playCount)
 {
@@ -267,14 +270,10 @@ void Sound2dPlayer::setSoundVolume(const string& id, unsigned int index, float v
 
 	_startedSounds.at(id)[index]->setVolume(value);
 
-	const auto waveBuffer = _sound2dManager->getSound(id)->getWaveBuffer();
+	const auto sampleCount = (_startedSounds.at(id)[index]->getHeader()->dwBufferLength / 2);
+	const auto originalSamples = reinterpret_cast<short*>(_sound2dManager->getSound(id)->getWaveBuffer()->getHeader()->lpData);
+	const auto currentSamples = reinterpret_cast<short*>(_startedSounds.at(id)[index]->getHeader()->lpData);
+	const auto volume = _startedSounds.at(id)[index]->getVolume();
 
-	auto originalSamples = reinterpret_cast<short*>(waveBuffer->getHeader()->lpData);
-	auto currentSamples = reinterpret_cast<short*>(_startedSounds.at(id)[index]->getHeader()->lpData);
-	auto sampleCount = (_startedSounds.at(id)[index]->getHeader()->dwBufferLength / 2);
-
-	for(unsigned int i = 0; i < sampleCount; i++)
-	{
-		currentSamples[i] = static_cast<short>(static_cast<float>(originalSamples[i]) * _startedSounds.at(id)[index]->getVolume());
-	}
+	thread(&Sound2dPlayer::_processVolumeChange, this, sampleCount, originalSamples, currentSamples, volume).detach();
 }

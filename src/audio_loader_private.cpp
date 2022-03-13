@@ -75,22 +75,19 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 		if(subChunkId == "fmt ")
 		{
 			auto subChunkBodyData = new unsigned char[16];
-
 			for(int index = 0; index < 16; index++)
 			{
 				subChunkBodyData[index] = static_cast<unsigned int>(getc(file));
 			}
 
-			const auto compressionFormat = static_cast<unsigned int>((subChunkBodyData[1] << 8) | subChunkBodyData[0]);
-
 			// 1 = PCM
+			const auto compressionFormat = static_cast<unsigned int>((subChunkBodyData[1] << 8) | subChunkBodyData[0]);
 			if(compressionFormat != 1)
 			{
 				return nullptr;
 			}
 
 			channelCount = static_cast<unsigned int>((subChunkBodyData[3] << 8) | subChunkBodyData[2]);
-
 			if(channelCount != 1 && channelCount != 2)
 			{
 				return nullptr;
@@ -99,7 +96,12 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 			sampleRate = static_cast<unsigned int>((subChunkBodyData[7] << 24) | (subChunkBodyData[6] << 16) | (subChunkBodyData[5] << 8) | subChunkBodyData[4]);
 			byteRate = static_cast<unsigned int>((subChunkBodyData[11] << 24) | (subChunkBodyData[10] << 16) | (subChunkBodyData[9] << 8) | subChunkBodyData[8]);
 			bytesPerBlock = static_cast<unsigned int>((subChunkBodyData[13] << 8) | subChunkBodyData[12]);
+
 			bitsPerSample = static_cast<unsigned int>((subChunkBodyData[15] << 8) | subChunkBodyData[14]);
+			if(bitsPerSample != 16)
+			{
+				return nullptr;
+			}
 		}
 		else if(subChunkId == "data")
 		{

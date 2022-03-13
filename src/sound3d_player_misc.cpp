@@ -123,31 +123,11 @@ const unsigned int Sound3dPlayer::getStartedSoundCount(const string& id) const
 
 void Sound3dPlayer::_terminateSounds()
 {
-	for(const auto& [key, startedSounds] : _startedSounds)
+	for(const auto& [soundId, instances] : _startedSounds)
 	{
-		for(unsigned int index = 0; index < startedSounds.size(); index++)
+		for(unsigned int instanceIndex = 0; instanceIndex < instances.size(); instanceIndex++)
 		{
-			delete[] _startedSounds.at(key)[index]->getHeader()->lpData;
-			delete _startedSounds.at(key)[index]->getHeader();
-		}
-	}
-
-	_startedSounds.clear();
-
-	_channelCounter = 0;
-}
-
-void Sound3dPlayer::_processVolumeChange(unsigned int sampleCount, short* originalSamples, short* currentSamples, float volume, float leftIntensity, float rightIntensity)
-{
-	for(unsigned int index = 0; index < sampleCount; index++)
-	{
-		if(((index + 1) % 2) == 0)
-		{
-			currentSamples[index] = static_cast<short>(static_cast<float>(originalSamples[index]) * volume * rightIntensity);
-		}
-		else
-		{
-			currentSamples[index] = static_cast<short>(static_cast<float>(originalSamples[index]) * volume * leftIntensity);
+			_terminateSound(soundId, instanceIndex);
 		}
 	}
 }

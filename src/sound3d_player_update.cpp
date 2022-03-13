@@ -11,9 +11,9 @@ void Sound3dPlayer::update()
 {
 	vector<pair<string, unsigned int>> soundsToStop;
 
-	for(auto& [id, startedSounds] : _startedSounds)
+	for(auto& [soundId, instances] : _startedSounds)
 	{
-		const auto sound = _sound3dManager->getSound(id);
+		const auto sound = _sound3dManager->getSound(soundId);
 		const auto cameraPosition = _camera->getPosition();
 		const auto distance = Math::calculateDistance(cameraPosition, sound->getPosition());
 		const auto volume = (clamp((1.0f - (distance / sound->getMaxDistance())), 0.0f, 1.0f) * sound->getMaxVolume());
@@ -26,34 +26,24 @@ void Sound3dPlayer::update()
 		const auto leftIntensity = ((dotProduct * 0.5f) + 0.5f);
 		const auto rightIntensity = (1.0f - leftIntensity);
 
-		for(unsigned int index = 0; index < startedSounds.size(); index++)
+		for(unsigned int instanceIndex = 0; instanceIndex < instances.size(); instanceIndex++)
 		{
-			startedSounds[index]->setVolume(volume);
-			startedSounds[index]->setLeftIntensity(leftIntensity);
-			startedSounds[index]->setRightIntensity(rightIntensity);
-
-			const auto sampleCount = (_startedSounds.at(id)[index]->getHeader()->dwBufferLength / 2);
-			const auto originalSamples = reinterpret_cast<short*>(_sound3dManager->getSound(id)->getWaveBuffer()->getHeader()->lpData);
-			const auto currentSamples = reinterpret_cast<short*>(_startedSounds.at(id)[index]->getHeader()->lpData);
-
-			thread(&Sound3dPlayer::_processVolumeChange, this, sampleCount, originalSamples, currentSamples, volume, leftIntensity, rightIntensity).detach();
-
-			if((startedSounds[index]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
+			if((instances[instanceIndex]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
 			{
-				if(startedSounds[index]->getPlayCount() != -1)
+				if(instances[instanceIndex]->getPlayCount() != -1)
 				{
-					startedSounds[index]->setPlayCount(startedSounds[index]->getPlayCount() - 1);
+					instances[instanceIndex]->setPlayCount(instances[instanceIndex]->getPlayCount() - 1);
 				}
 
-				if(startedSounds[index]->getPlayCount() == 0)
+				if(instances[instanceIndex]->getPlayCount() == 0)
 				{
-					soundsToStop.push_back({id, index});
+					soundsToStop.push_back({soundId, instanceIndex});
 				}
 				else
 				{
-					startedSounds[index]->getHeader()->dwFlags = WHDR_PREPARED;
+					instances[instanceIndex]->getHeader()->dwFlags = WHDR_PREPARED;
 
-					const auto writeResult = waveOutWrite(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(WAVEHDR));
+					const auto writeResult = waveOutWrite(instances[instanceIndex]->getHandle(), instances[instanceIndex]->getHeader(), sizeof(WAVEHDR));
 
 					if(writeResult != MMSYSERR_NOERROR)
 					{
@@ -70,6 +60,32 @@ void Sound3dPlayer::update()
 					}
 				}
 			}
+
+			auto currentSoundTime = new MMTIME();
+			currentSoundTime->wType = TIME_SAMPLES;
+			waveOutGetPosition(instances[instanceIndex]->getHandle(), currentSoundTime, sizeof(MMTIME));
+
+			const auto sampleCount = (sound->getWaveBuffer()->getHeader()->dwBufferLength / 2);
+			const auto currentSampleIndex = (currentSoundTime->u.sample * 2);
+			const auto nextSampleIndex = min((currentSampleIndex + 10000), (sampleCount - 1));
+			const auto originalSamples = reinterpret_cast<short*>(sound->getWaveBuffer()->getHeader()->lpData);
+			const auto currentSamples = reinterpret_cast<short*>(instances[instanceIndex]->getHeader()->lpData);
+
+			for(unsigned int sampleIndex = currentSampleIndex; sampleIndex < nextSampleIndex; sampleIndex++)
+			{
+				if(((sampleIndex + 1) % 2) == 0)
+				{
+					currentSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * rightIntensity);
+				}
+				else
+				{
+					currentSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * leftIntensity);
+				}
+			}
+
+			instances[instanceIndex]->setVolume(volume);
+			instances[instanceIndex]->setLeftIntensity(leftIntensity);
+			instances[instanceIndex]->setRightIntensity(rightIntensity);
 		}
 	}
 

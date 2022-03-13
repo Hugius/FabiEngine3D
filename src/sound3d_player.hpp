@@ -41,7 +41,6 @@ public:
 private:
 	void _terminateSound(const string& id, unsigned int index);
 	void _terminateSounds();
-	void _processVolumeChange(unsigned int sampleCount, short* originalSamples, short* currentSamples, float volume, float leftIntensity, float rightIntensity);
 
 	static inline constexpr unsigned int MAX_CHANNEL_COUNT = 1024;
 

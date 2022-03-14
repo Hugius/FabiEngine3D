@@ -1,10 +1,10 @@
 #include "sound3d_player.hpp"
 #include "logger.hpp"
 
-#include <thread>
-
-using std::thread;
 using std::pair;
+using std::launch;
+using std::future_status;
+using std::chrono::seconds;
 using std::clamp;
 
 void Sound3dPlayer::update()
@@ -60,30 +60,6 @@ void Sound3dPlayer::update()
 				}
 			}
 
-			const auto originalSamples = reinterpret_cast<short*>(sound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
-			const auto currentSamples = reinterpret_cast<short*>(instances[instanceIndex]->getHeader()->lpData); // short = 2 bytes
-			const auto sampleCount = (sound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
-
-			auto currentSoundTime = new MMTIME();
-			currentSoundTime->wType = TIME_SAMPLES;
-			waveOutGetPosition(instances[instanceIndex]->getHandle(), currentSoundTime, sizeof(MMTIME));
-
-			const auto currentSampleIndex = ((currentSoundTime->u.sample * 2) % sampleCount); // Looped audio stacks position
-			const auto nextSampleIndex = min((currentSampleIndex + 10000), (sampleCount - 1)); // Cannot go out of range
-
-			for(unsigned int sampleIndex = currentSampleIndex; sampleIndex < nextSampleIndex; sampleIndex++)
-			{
-				// Stereo: LRLRLR...
-				if(((sampleIndex + 1) % 2) == 0)
-				{
-					currentSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * rightIntensity);
-				}
-				else
-				{
-					currentSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * leftIntensity);
-				}
-			}
-
 			instances[instanceIndex]->setVolume(volume);
 			instances[instanceIndex]->setLeftIntensity(leftIntensity);
 			instances[instanceIndex]->setRightIntensity(rightIntensity);
@@ -123,5 +99,57 @@ void Sound3dPlayer::update()
 		}
 
 		_terminateSound(id, index);
+	}
+
+	if(_volumeThreadQueue.empty())
+	{
+		for(auto& [soundId, instances] : _startedSounds)
+		{
+			for(unsigned int instanceIndex = 0; instanceIndex < instances.size(); instanceIndex++)
+			{
+				_volumeThreadQueue.push_back({soundId, instanceIndex});
+			}
+		}
+	}
+
+	if(_volumeThread.valid() && (_volumeThread.wait_for(seconds(0)) == future_status::ready))
+	{
+		_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+		_volumeThread = {};
+	}
+
+	while(!_volumeThread.valid() && !_volumeThreadQueue.empty())
+	{
+		const auto soundId = _volumeThreadQueue.front().first;
+		const auto instanceIndex = _volumeThreadQueue.front().second;
+
+		if(!_sound3dManager->isSoundExisting(soundId))
+		{
+			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+			continue;
+		}
+		if(_startedSounds.find(soundId) == _startedSounds.end())
+		{
+			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+			continue;
+		}
+		if(instanceIndex >= _startedSounds.at(soundId).size())
+		{
+			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+			continue;
+		}
+
+		const auto startedSound = _startedSounds.at(soundId)[instanceIndex];
+		const auto originalSound = _sound3dManager->getSound(soundId);
+
+		const auto sampleCount = (originalSound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+		const auto originalSamples = reinterpret_cast<short*>(originalSound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
+		const auto startedSamples = reinterpret_cast<short*>(startedSound->getHeader()->lpData); // short = 2 bytes
+
+		const auto volume = startedSound->getVolume();
+		const auto leftIntensity = startedSound->getLeftIntensity();
+		const auto rightIntensity = startedSound->getRightIntensity();
+
+		_volumeThread = async(launch::async, &Sound3dPlayer::_updateSamplesVolume, this, sampleCount, originalSamples, startedSamples, volume, leftIntensity, rightIntensity);
 	}
 }

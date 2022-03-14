@@ -1,10 +1,7 @@
 #include "sound3d_player.hpp"
 #include "logger.hpp"
 
-#include <thread>
-
 using std::make_shared;
-using std::thread;
 
 void Sound3dPlayer::startSound(const string& id, int playCount)
 {

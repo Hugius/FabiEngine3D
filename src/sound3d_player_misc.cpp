@@ -1,5 +1,8 @@
 #include "sound3d_player.hpp"
 
+using std::future_status;
+using std::chrono::seconds;
+
 void Sound3dPlayer::inject(shared_ptr<Sound3dManager> sound3dManager)
 {
 	_sound3dManager = sound3dManager;
@@ -134,6 +137,20 @@ void Sound3dPlayer::_terminateSounds()
 
 void Sound3dPlayer::_terminateSound(const string& id, unsigned int index)
 {
+	if(!_volumeThreadQueue.empty())
+	{
+		if((id == _volumeThreadQueue.front().first) && (index == _volumeThreadQueue.front().second))
+		{
+			while(true)
+			{
+				if(_volumeThread.wait_for(seconds(0)) == future_status::ready)
+				{
+					break;
+				}
+			}
+		}
+	}
+
 	delete[] _startedSounds.at(id)[index]->getHeader()->lpData;
 	delete _startedSounds.at(id)[index]->getHeader();
 
@@ -145,4 +162,20 @@ void Sound3dPlayer::_terminateSound(const string& id, unsigned int index)
 	}
 
 	_channelCounter--;
+}
+
+void Sound3dPlayer::_updateSamplesVolume(unsigned int sampleCount, short* originalSamples, short* startedSamples, float volume, float leftIntensity, float rightIntensity)
+{
+	for(unsigned int sampleIndex = 0; sampleIndex < sampleCount; sampleIndex++)
+	{
+		// Stereo samples: LRLRLR...
+		if(((sampleIndex + 1) % 2) == 0)
+		{
+			startedSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * rightIntensity);
+		}
+		else
+		{
+			startedSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * leftIntensity);
+		}
+	}
 }

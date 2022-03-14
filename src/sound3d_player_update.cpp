@@ -60,15 +60,16 @@ void Sound3dPlayer::update()
 				}
 			}
 
+			const auto originalSamples = reinterpret_cast<short*>(sound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
+			const auto currentSamples = reinterpret_cast<short*>(instances[instanceIndex]->getHeader()->lpData); // short = 2 bytes
+			const auto sampleCount = (sound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+
 			auto currentSoundTime = new MMTIME();
 			currentSoundTime->wType = TIME_SAMPLES;
 			waveOutGetPosition(instances[instanceIndex]->getHandle(), currentSoundTime, sizeof(MMTIME));
 
-			const auto sampleCount = (sound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
 			const auto currentSampleIndex = ((currentSoundTime->u.sample * 2) % sampleCount); // Looped audio stacks position
 			const auto nextSampleIndex = min((currentSampleIndex + 10000), (sampleCount - 1)); // Cannot go out of range
-			const auto originalSamples = reinterpret_cast<short*>(sound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
-			const auto currentSamples = reinterpret_cast<short*>(instances[instanceIndex]->getHeader()->lpData); // short = 2 bytes
 
 			for(unsigned int sampleIndex = currentSampleIndex; sampleIndex < nextSampleIndex; sampleIndex++)
 			{

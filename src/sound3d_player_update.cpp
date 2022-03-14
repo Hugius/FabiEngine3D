@@ -44,7 +44,6 @@ void Sound3dPlayer::update()
 					instances[instanceIndex]->getHeader()->dwFlags = WHDR_PREPARED;
 
 					const auto writeResult = waveOutWrite(instances[instanceIndex]->getHandle(), instances[instanceIndex]->getHeader(), sizeof(WAVEHDR));
-
 					if(writeResult != MMSYSERR_NOERROR)
 					{
 						if(writeResult == MMSYSERR_NODRIVER)
@@ -65,14 +64,15 @@ void Sound3dPlayer::update()
 			currentSoundTime->wType = TIME_SAMPLES;
 			waveOutGetPosition(instances[instanceIndex]->getHandle(), currentSoundTime, sizeof(MMTIME));
 
-			const auto sampleCount = (sound->getWaveBuffer()->getHeader()->dwBufferLength / 2);
-			const auto currentSampleIndex = (currentSoundTime->u.sample * 2);
-			const auto nextSampleIndex = min((currentSampleIndex + 10000), (sampleCount - 1));
-			const auto originalSamples = reinterpret_cast<short*>(sound->getWaveBuffer()->getHeader()->lpData);
-			const auto currentSamples = reinterpret_cast<short*>(instances[instanceIndex]->getHeader()->lpData);
+			const auto sampleCount = (sound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+			const auto currentSampleIndex = ((currentSoundTime->u.sample * 2) % sampleCount); // Looped audio stacks position
+			const auto nextSampleIndex = min((currentSampleIndex + 10000), (sampleCount - 1)); // Cannot go out of range
+			const auto originalSamples = reinterpret_cast<short*>(sound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
+			const auto currentSamples = reinterpret_cast<short*>(instances[instanceIndex]->getHeader()->lpData); // short = 2 bytes
 
 			for(unsigned int sampleIndex = currentSampleIndex; sampleIndex < nextSampleIndex; sampleIndex++)
 			{
+				// Stereo: LRLRLR...
 				if(((sampleIndex + 1) % 2) == 0)
 				{
 					currentSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * rightIntensity);

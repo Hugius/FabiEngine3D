@@ -21,12 +21,12 @@ void StartedSound2D::setVolume(float value)
 
 void StartedSound2D::setLeftIntensity(float value)
 {
-	_leftIntensity = value;
+	_leftIntensity = clamp(value, 0.0f, 1.0f);
 }
 
 void StartedSound2D::setRightIntensity(float value)
 {
-	_rightIntensity = value;
+	_rightIntensity = clamp(value, 0.0f, 1.0f);
 }
 
 void StartedSound2D::setHandle(HWAVEOUT value)

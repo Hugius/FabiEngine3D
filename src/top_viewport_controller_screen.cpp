@@ -218,8 +218,8 @@ void TopViewportController::_updateMiscScreenManagement()
 
 			Tools::copyFile((rootPath + "engine\\assets\\image\\diffuse_map\\logo.tga"), (exportDirectoryPath + "logo\\logo.tga"));
 
-			auto oldPath = (exportDirectoryPath + "binaries\\fe3d.exe");
-			auto newPath = (exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe");
+			const auto oldPath = (exportDirectoryPath + "binaries\\fe3d.exe");
+			const auto newPath = (exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe");
 			Tools::renameFile(oldPath, newPath);
 
 			const auto filePath = (exportDirectoryPath + "config.fe3d");

@@ -1,7 +1,6 @@
 #include "sound3d_player.hpp"
 #include "logger.hpp"
 
-using std::pair;
 using std::launch;
 using std::future_status;
 using std::chrono::seconds;

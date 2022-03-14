@@ -1,5 +1,8 @@
 #include "sound2d_player.hpp"
 
+using std::future_status;
+using std::chrono::seconds;
+
 void Sound2dPlayer::inject(shared_ptr<Sound2dManager> sound2dManager)
 {
 	_sound2dManager = sound2dManager;
@@ -12,30 +15,46 @@ const bool Sound2dPlayer::isDeviceConnected() const
 
 void Sound2dPlayer::_terminateSounds()
 {
-	for(const auto& [key, startedSounds] : _startedSounds)
+	for(const auto& [soundId, instances] : _startedSounds)
 	{
-		for(unsigned int index = 0; index < startedSounds.size(); index++)
+		for(unsigned int instanceIndex = 0; instanceIndex < instances.size(); instanceIndex++)
 		{
-			delete[] _startedSounds.at(key)[index]->getHeader()->lpData;
-			delete _startedSounds.at(key)[index]->getHeader();
+			_terminateSound(soundId, instanceIndex);
 		}
 	}
-
-	_startedSounds.clear();
-
-	_channelCounter = 0;
 }
 
-void Sound2dPlayer::_processVolumeChange(unsigned int sampleCount, short* originalSamples, short* currentSamples, float volume)
+void Sound2dPlayer::_updateSamplesVolume(unsigned int sampleCount, short* originalSamples, short* startedSamples, float volume, float leftIntensity, float rightIntensity)
 {
-	for(unsigned int index = 0; index < sampleCount; index++)
+	for(unsigned int sampleIndex = 0; sampleIndex < sampleCount; sampleIndex++)
 	{
-		currentSamples[index] = static_cast<short>(static_cast<float>(originalSamples[index]) * volume);
+		if(((sampleIndex + 1) % 2) == 0)
+		{
+			startedSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * rightIntensity);
+		}
+		else
+		{
+			startedSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * leftIntensity);
+		}
 	}
 }
 
 void Sound2dPlayer::_terminateSound(const string& id, unsigned int index)
 {
+	if(!_volumeThreadQueue.empty())
+	{
+		if((id == _volumeThreadQueue.front().first) && (index == _volumeThreadQueue.front().second))
+		{
+			while(true)
+			{
+				if(_volumeThread.wait_for(seconds(0)) == future_status::ready)
+				{
+					break;
+				}
+			}
+		}
+	}
+
 	delete[] _startedSounds.at(id)[index]->getHeader()->lpData;
 	delete _startedSounds.at(id)[index]->getHeader();
 

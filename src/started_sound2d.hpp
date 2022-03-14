@@ -32,8 +32,8 @@ public:
 private:
 	int _playCount = 0;
 
-	float _leftIntensity = 0.0f;
-	float _rightIntensity = 0.0f;
+	float _leftIntensity = 1.0f;
+	float _rightIntensity = 1.0f;
 	float _volume = 1.0f;
 
 	bool _isPaused = false;

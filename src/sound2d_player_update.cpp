@@ -1,33 +1,34 @@
 #include "sound2d_player.hpp"
 #include "logger.hpp"
 
-using std::pair;
+using std::launch;
+using std::future_status;
+using std::chrono::seconds;
 
 void Sound2dPlayer::update()
 {
 	vector<pair<string, unsigned int>> soundsToStop;
 
-	for(auto& [id, startedSounds] : _startedSounds)
+	for(auto& [soundId, instances] : _startedSounds)
 	{
-		for(unsigned int index = 0; index < startedSounds.size(); index++)
+		for(unsigned int instanceIndex = 0; instanceIndex < instances.size(); instanceIndex++)
 		{
-			if((startedSounds[index]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
+			if((instances[instanceIndex]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
 			{
-				if(startedSounds[index]->getPlayCount() != -1)
+				if(instances[instanceIndex]->getPlayCount() != -1)
 				{
-					startedSounds[index]->setPlayCount(startedSounds[index]->getPlayCount() - 1);
+					instances[instanceIndex]->setPlayCount(instances[instanceIndex]->getPlayCount() - 1);
 				}
 
-				if(startedSounds[index]->getPlayCount() == 0)
+				if(instances[instanceIndex]->getPlayCount() == 0)
 				{
-					soundsToStop.push_back({id, index});
+					soundsToStop.push_back({soundId, instanceIndex});
 				}
 				else
 				{
-					startedSounds[index]->getHeader()->dwFlags = WHDR_PREPARED;
+					instances[instanceIndex]->getHeader()->dwFlags = WHDR_PREPARED;
 
-					const auto writeResult = waveOutWrite(startedSounds[index]->getHandle(), startedSounds[index]->getHeader(), sizeof(WAVEHDR));
-
+					const auto writeResult = waveOutWrite(instances[instanceIndex]->getHandle(), instances[instanceIndex]->getHeader(), sizeof(WAVEHDR));
 					if(writeResult != MMSYSERR_NOERROR)
 					{
 						if(writeResult == MMSYSERR_NODRIVER)
@@ -79,5 +80,57 @@ void Sound2dPlayer::update()
 		}
 
 		_terminateSound(id, index);
+	}
+
+	if(_volumeThreadQueue.empty())
+	{
+		for(auto& [soundId, instances] : _startedSounds)
+		{
+			for(unsigned int instanceIndex = 0; instanceIndex < instances.size(); instanceIndex++)
+			{
+				_volumeThreadQueue.push_back({soundId, instanceIndex});
+			}
+		}
+	}
+
+	if(_volumeThread.valid() && (_volumeThread.wait_for(seconds(0)) == future_status::ready))
+	{
+		_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+		_volumeThread = {};
+	}
+
+	while(!_volumeThread.valid() && !_volumeThreadQueue.empty())
+	{
+		const auto soundId = _volumeThreadQueue.front().first;
+		const auto instanceIndex = _volumeThreadQueue.front().second;
+
+		if(!_sound2dManager->isSoundExisting(soundId))
+		{
+			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+			continue;
+		}
+		if(_startedSounds.find(soundId) == _startedSounds.end())
+		{
+			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+			continue;
+		}
+		if(instanceIndex >= _startedSounds.at(soundId).size())
+		{
+			_volumeThreadQueue.erase(_volumeThreadQueue.begin());
+			continue;
+		}
+
+		const auto startedSound = _startedSounds.at(soundId)[instanceIndex];
+		const auto originalSound = _sound2dManager->getSound(soundId);
+
+		const auto sampleCount = (originalSound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
+		const auto originalSamples = reinterpret_cast<short*>(originalSound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
+		const auto startedSamples = reinterpret_cast<short*>(startedSound->getHeader()->lpData); // short = 2 bytes
+
+		const auto volume = startedSound->getVolume();
+		const auto leftIntensity = startedSound->getLeftIntensity();
+		const auto rightIntensity = startedSound->getRightIntensity();
+
+		_volumeThread = async(launch::async, &Sound2dPlayer::_updateSamplesVolume, this, sampleCount, originalSamples, startedSamples, volume, leftIntensity, rightIntensity);
 	}
 }

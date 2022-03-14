@@ -168,7 +168,6 @@ void Sound3dPlayer::_updateSamplesVolume(unsigned int sampleCount, short* origin
 {
 	for(unsigned int sampleIndex = 0; sampleIndex < sampleCount; sampleIndex++)
 	{
-		// Stereo samples: LRLRLR...
 		if(((sampleIndex + 1) % 2) == 0)
 		{
 			startedSamples[sampleIndex] = static_cast<short>(static_cast<float>(originalSamples[sampleIndex]) * volume * rightIntensity);

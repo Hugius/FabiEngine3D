@@ -10,6 +10,7 @@
 - Changes in volume can be delayed if too many sounds are playing simultanously.
 - If no audio memory is available, sounds cannot be started.
 - If no audio device is connected, sounds cannot be started and all sounds are stopped immediately.
+- Sounds with a large audio file (5 minutes long for example) can cause a lag spike when started.
 
 ## 2. Base Properties
 

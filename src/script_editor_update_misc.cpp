@@ -220,21 +220,18 @@ void ScriptEditor::_updateScriptSearching()
 
 void ScriptEditor::_updateMiscellaneous()
 {
-	if(_isWritingScript)
+	if(_isWritingScript && !_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 	{
-		if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
-		{
-			const auto scrollSpeed = static_cast<float>(_fe3d->input_getMouseWheelY());
-			const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
-			const auto lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;
-			const auto minCameraOffset = min(0.0f, (lastLineHeight + TEXT_STARTING_POSITION.y));
-			const auto maxCameraOffset = 0.0f;
+		const auto scrollSpeed = static_cast<float>(_fe3d->input_getMouseWheelY());
+		const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
+		const auto lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;
+		const auto minCameraOffset = min(0.0f, (lastLineHeight + TEXT_STARTING_POSITION.y));
+		const auto maxCameraOffset = 0.0f;
 
-			_cameraOffset += scrollSpeed;
+		_cameraOffset += scrollSpeed;
 
-			_cameraOffset = clamp(_cameraOffset, minCameraOffset, maxCameraOffset);
+		_cameraOffset = clamp(_cameraOffset, minCameraOffset, maxCameraOffset);
 
-			_fe3d->camera_setPosition(fvec3(0.0f, _cameraOffset, CAMERA_DISTANCE));
-		}
+		_fe3d->camera_setPosition(fvec3(0.0f, _cameraOffset, CAMERA_DISTANCE));
 	}
 }

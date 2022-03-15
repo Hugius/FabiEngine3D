@@ -20,7 +20,7 @@ void ScriptEditor::_load()
 	_fe3d->gfx_setBloomBlurCount(2);
 	_fe3d->gfx_setBloomQuality(BLOOM_QUALITY);
 
-	_fe3d->text3d_create("cursor", FONT_MAP_PATH, false);
+	_fe3d->text3d_create("cursor", FONT_MAP_PATH, true);
 	_fe3d->text3d_setVisible("cursor", false);
 	_fe3d->text3d_setContent("cursor", "|");
 	_fe3d->text3d_setSize("cursor", TEXT_CHARACTER_SIZE);

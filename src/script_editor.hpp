@@ -57,8 +57,6 @@ private:
 	static inline constexpr float CAMERA_YAW = 270.0f;
 	static inline constexpr float CAMERA_PITCH = 0.0f;
 	static inline constexpr float AABB_DEPTH = 0.0001f;
-	static inline constexpr float MIN_CAMERA_OFFSET = -86.0f;
-	static inline constexpr float MAX_CAMERA_OFFSET = 0.0f;
 	static inline constexpr float CAMERA_DISTANCE = 10.0f;
 
 	float _cameraOffset = 0.0f;

@@ -12,8 +12,8 @@ void ScriptEditor::_createScriptDisplayEntities()
 	const auto separatorPosition = (TEXT_STARTING_POSITION + fvec3(HORIZONTAL_LINE_OFFSET * 0.5f, -(((static_cast<float>(lineCount) - 1) * 0.5f) * VERTICAL_LINE_OFFSET), 0.0f));
 	const auto separatorSize = fvec2((TEXT_CHARACTER_SIZE.x * 0.25f), (static_cast<float>(lineCount) * VERTICAL_LINE_OFFSET));
 
-	_fe3d->quad3d_create(separatorId, false);
-	_fe3d->quad3d_setPosition(separatorId, (separatorPosition - fvec3(0.0f, separatorSize.y * 0.5f, 0.0f)));
+	_fe3d->quad3d_create(separatorId, true);
+	_fe3d->quad3d_setPosition(separatorId, separatorPosition);
 	_fe3d->quad3d_setSize(separatorId, separatorSize);
 	_fe3d->quad3d_setColor(separatorId, SEPARATOR_COLOR);
 	_fe3d->quad3d_setBright(separatorId, true);
@@ -28,10 +28,10 @@ void ScriptEditor::_createScriptDisplayEntities()
 		const auto lineNumberPosition = (TEXT_STARTING_POSITION + lineNumberOffset);
 		const auto lineNumberSize = fvec2((lineNumberString.size() * TEXT_CHARACTER_SIZE.x), TEXT_CHARACTER_SIZE.y);
 
-		_fe3d->text3d_create(lineNumberId, FONT_MAP_PATH, false);
+		_fe3d->text3d_create(lineNumberId, FONT_MAP_PATH, true);
 		_fe3d->text3d_setMinTextureAlpha(lineNumberId, 0.05f);
 		_fe3d->text3d_setContent(lineNumberId, lineNumberString);
-		_fe3d->text3d_setPosition(lineNumberId, (lineNumberPosition - fvec3(0.0f, (lineNumberSize.y * 0.5f), 0.0f)));
+		_fe3d->text3d_setPosition(lineNumberId, lineNumberPosition);
 		_fe3d->text3d_setSize(lineNumberId, lineNumberSize);
 		_fe3d->text3d_setColor(lineNumberId, LINE_NUMBER_COLOR);
 		_fe3d->text3d_setBright(lineNumberId, true);
@@ -49,10 +49,10 @@ void ScriptEditor::_createScriptDisplayEntities()
 		iss >> noWhiteSpace;
 		const auto isComment = (noWhiteSpace.substr(0, 3) == "///");
 
-		_fe3d->text3d_create(lineTextId, FONT_MAP_PATH, false);
+		_fe3d->text3d_create(lineTextId, FONT_MAP_PATH, true);
 		_fe3d->text3d_setMinTextureAlpha(lineTextId, 0.05f);
 		_fe3d->text3d_setContent(lineTextId, lineTextString);
-		_fe3d->text3d_setPosition(lineTextId, (lineTextPosition - fvec3(0.0f, (lineTextSize.y * 0.5f), 0.0f)));
+		_fe3d->text3d_setPosition(lineTextId, lineTextPosition);
 		_fe3d->text3d_setSize(lineTextId, lineTextSize);
 		_fe3d->text3d_setColor(lineTextId, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
 		_fe3d->text3d_setBright(lineTextId, true);
@@ -60,11 +60,11 @@ void ScriptEditor::_createScriptDisplayEntities()
 		_loadedTextIds.push_back(lineTextId);
 
 		const auto lineAabbId = to_string(lineIndex);
-		const auto lineAabbOffset = -fvec3(0.0f, (TEXT_CHARACTER_SIZE.y * 0.5f), AABB_DEPTH);
-		const auto lineAabbPosition = (lineNumberPosition + lineAabbOffset);
+		const auto lineAabbOffset = fvec3(0.0f, 0.0f, -AABB_DEPTH);
+		const auto lineAabbPosition = (lineTextPosition + lineAabbOffset);
 		const auto lineAabbSize = fvec3(FLT_MAX, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
 
-		_fe3d->aabb_create(lineAabbId, false);
+		_fe3d->aabb_create(lineAabbId, true);
 		_fe3d->aabb_setBasePosition(lineAabbId, lineAabbPosition);
 		_fe3d->aabb_setBaseSize(lineAabbId, lineAabbSize);
 
@@ -75,11 +75,11 @@ void ScriptEditor::_createScriptDisplayEntities()
 			const auto characterId = (to_string(lineIndex) + "_" + to_string(charIndex));
 			const auto characterOffset = fvec3(((CHARACTER_OFFSET * static_cast<float>(charIndex)) + HORIZONTAL_LINE_OFFSET), (-VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);
 			const auto characterPosition = (TEXT_STARTING_POSITION + characterOffset);
-			const auto characterAabbOffset = -fvec3(0.0f, (TEXT_CHARACTER_SIZE.y * 0.5f), 0.0f);
+			const auto characterAabbOffset = fvec3(0.0f);
 			const auto characterAabbPosition = (characterPosition + characterAabbOffset);
 			const auto characterAabbSize = fvec3(TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
 
-			_fe3d->aabb_create(characterId, false);
+			_fe3d->aabb_create(characterId, true);
 			_fe3d->aabb_setBasePosition(characterId, characterAabbPosition);
 			_fe3d->aabb_setBaseSize(characterId, characterAabbSize);
 

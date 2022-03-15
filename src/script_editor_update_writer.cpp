@@ -334,10 +334,8 @@ void ScriptEditor::_updateTextWriter()
 		else
 		{
 			const auto characterPosition = _fe3d->aabb_getBasePosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharacterIndex - 1));
-			const auto cursorOffset = fvec3((TEXT_CHARACTER_SIZE.x * 0.5f), 0.0f, 0.0f);
-			const auto cursorPosition = (characterPosition + cursorOffset);
 
-			_fe3d->text3d_setPosition("cursor", cursorPosition);
+			_fe3d->text3d_setPosition("cursor", characterPosition);
 		}
 	}
 

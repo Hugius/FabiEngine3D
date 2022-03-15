@@ -5,6 +5,9 @@
 - Audio files are used to play 2D/3D sounds.
 - Audio assets must be placed in `~\projects\<your_project>\assets\audio\`.
 - The file format is `.wav` because it delivers high audio quality.
+- Every audio file must be uncompressed.
+- Every audio file must be stereo (2 channels).
+- Every audio file must be of decent quality (16 bits per sample)
 
 ## 3. Mesh
 
@@ -38,10 +41,10 @@
 - Images are used for a variety of reasons for rendering.
 - Image assets must be placed in `~\projects\<your_project>\assets\image\`.
 - The file format is `.tga` because it delivers high image quality.
-- Every image must be exported without RLE compression.
-- Every image must be exported with the lower-left corner as the origin.
-- Every image must have a resolution of at least 1x1.
-- Every image must have a bit depth of 24 or 32.
+- Every image file must be uncompressed.
+- Every image file must have the lower-left corner as the origin.
+- Every image file must have a resolution of at least 1x1.
+- Every image file must have a bit depth of 24 or 32.
 
 ### 4.1 Blend Map
 
@@ -72,9 +75,9 @@
 - Recommended bit depth: **24**
 - Cube maps are used to render a skybox around the camera.
 - A cube map consists of 6 images: left, right, bottom, top, back, front.
-- All images must have a squared resolution.
-- All images must have the same resolution.
-- All images must have the same bit depth.
+- Every image file must have a squared resolution.
+- Every image file must have the same resolution.
+- Every image file must have the same bit depth.
 
 ### 4.3 Diffuse Map
 

@@ -7,7 +7,6 @@
 - Each of these sound instances can be started and stopped individually.
 - Every sound instance plays on a unique sound channel (with a maximum of 1024).
 - Sound channels make sure that all the sound waves are mixed together.
-- Stereo audio is supported.
 - Changes in volume can be delayed if too many sounds are playing simultanously.
 - If no audio memory is available, sounds cannot be started.
 - If no audio device is connected, sounds cannot be started and all sounds are stopped immediately.

@@ -87,14 +87,18 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 				return nullptr;
 			}
 
+			// 1 = mono
+			// 2 = stereo
 			channelCount = static_cast<unsigned int>((subChunkBodyData[3] << 8) | subChunkBodyData[2]);
-			if(channelCount != 1 && channelCount != 2)
+			if(channelCount != 2)
 			{
 				return nullptr;
 			}
 
 			sampleRate = static_cast<unsigned int>((subChunkBodyData[7] << 24) | (subChunkBodyData[6] << 16) | (subChunkBodyData[5] << 8) | subChunkBodyData[4]);
+
 			byteRate = static_cast<unsigned int>((subChunkBodyData[11] << 24) | (subChunkBodyData[10] << 16) | (subChunkBodyData[9] << 8) | subChunkBodyData[8]);
+
 			bytesPerBlock = static_cast<unsigned int>((subChunkBodyData[13] << 8) | subChunkBodyData[12]);
 
 			bitsPerSample = static_cast<unsigned int>((subChunkBodyData[15] << 8) | subChunkBodyData[14]);
@@ -114,7 +118,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
 
 			fclose(file);
 
-			return make_shared<Audio>(samples, subChunkSize, (channelCount == 1 ? ChannelFormat::MONO : ChannelFormat::STEREO), sampleRate, byteRate, bytesPerBlock, bitsPerSample);
+			return make_shared<Audio>(samples, subChunkSize, channelCount, sampleRate, byteRate, bytesPerBlock, bitsPerSample);
 		}
 		else
 		{

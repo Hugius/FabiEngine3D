@@ -5,7 +5,7 @@
 class Audio final
 {
 public:
-	Audio(unsigned char* samples, unsigned int sampleCount, ChannelFormat channelFormat, unsigned int sampleRate, unsigned int byteRate, unsigned int bytesPerBlock, unsigned int bitsPerSample);
+	Audio(unsigned char* samples, unsigned int sampleCount, unsigned int channelCount, unsigned int sampleRate, unsigned int byteRate, unsigned int bytesPerBlock, unsigned int bitsPerSample);
 	~Audio();
 
 	const unsigned char* getSamples() const;
@@ -16,7 +16,7 @@ public:
 	const unsigned int getSampleRate() const;
 	const unsigned int getBitsPerSample() const;
 
-	const ChannelFormat getChannelFormat() const;
+	const unsigned int getChannelCount() const;
 
 private:
 	const unsigned char* _samples;
@@ -27,5 +27,5 @@ private:
 	const unsigned int _bytesPerBlock;
 	const unsigned int _bitsPerSample;
 
-	const ChannelFormat _channelFormat;
+	const unsigned int _channelCount;
 };

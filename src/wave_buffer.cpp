@@ -4,7 +4,7 @@ WaveBuffer::WaveBuffer(shared_ptr<Audio> audio)
 {
 	_format = new WAVEFORMATEX();
 	_format->wFormatTag = WAVE_FORMAT_PCM;
-	_format->nChannels = (audio->getChannelFormat() == ChannelFormat::MONO ? 1 : 2);
+	_format->nChannels = audio->getChannelCount();
 	_format->nSamplesPerSec = audio->getSampleRate();
 	_format->nAvgBytesPerSec = audio->getByteRate();
 	_format->nBlockAlign = audio->getBytesPerBlock();

@@ -2,11 +2,11 @@
 
 #include <stdlib.h>
 
-Audio::Audio(unsigned char* samples, unsigned int sampleCount, ChannelFormat channelFormat, unsigned int sampleRate, unsigned int byteRate, unsigned int bytesPerBlock, unsigned int bitsPerSample)
+Audio::Audio(unsigned char* samples, unsigned int sampleCount, unsigned int channelCount, unsigned int sampleRate, unsigned int byteRate, unsigned int bytesPerBlock, unsigned int bitsPerSample)
 	:
 	_samples(samples),
 	_sampleCount(sampleCount),
-	_channelFormat(channelFormat),
+	_channelCount(channelCount),
 	_sampleRate(sampleRate),
 	_byteRate(byteRate),
 	_bytesPerBlock(bytesPerBlock),
@@ -53,7 +53,7 @@ const unsigned int Audio::getSampleRate() const
 	return _sampleRate;
 }
 
-const ChannelFormat Audio::getChannelFormat() const
+const unsigned int Audio::getChannelCount() const
 {
-	return _channelFormat;
+	return _channelCount;
 }

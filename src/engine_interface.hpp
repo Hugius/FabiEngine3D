@@ -705,6 +705,7 @@ public:
 	const float sound3d_getLeftIntensity(const string& id, unsigned int index) const;
 	const float sound3d_getRightIntensity(const string& id, unsigned int index) const;
 	const unsigned int sound3d_getStartedCount(const string& id) const;
+	const unsigned int sound3d_getTime(const string& id, unsigned int index) const;
 	const bool sound3d_isExisting(const string& id) const;
 	const bool sound3d_isStarted(const string& id, unsigned int index) const;
 	const bool sound3d_isPaused(const string& id, unsigned int index) const;

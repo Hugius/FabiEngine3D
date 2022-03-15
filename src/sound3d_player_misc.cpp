@@ -178,3 +178,28 @@ void Sound3dPlayer::_updateSamplesVolume(unsigned int sampleCount, short* origin
 		}
 	}
 }
+
+const unsigned int Sound3dPlayer::getSoundTime(const string& id, unsigned int index) const
+{
+	if(!_sound3dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	auto currentSoundTime = new MMTIME();
+	currentSoundTime->wType = TIME_SAMPLES;
+
+	waveOutGetPosition(_startedSounds.at(id)[index]->getHandle(), currentSoundTime, sizeof(MMTIME));
+
+	const auto sampleIndex = currentSoundTime->u.sample;
+	const auto sampleRate = _sound3dManager->getSound(id)->getWaveBuffer()->getFormat()->nSamplesPerSec;
+	const auto result = static_cast<unsigned int>(static_cast<float>(sampleIndex) / static_cast<float>(sampleRate));
+
+	delete currentSoundTime;
+
+	return result;
+}

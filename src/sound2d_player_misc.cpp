@@ -172,3 +172,28 @@ const unsigned int Sound2dPlayer::getStartedSoundCount(const string& id) const
 
 	return static_cast<unsigned int>(_startedSounds.at(id).size());
 }
+
+const unsigned int Sound2dPlayer::getSoundTime(const string& id, unsigned int index) const
+{
+	if(!_sound2dManager->isSoundExisting(id))
+	{
+		abort();
+	}
+	if(!isSoundStarted(id, index))
+	{
+		abort();
+	}
+
+	auto currentSoundTime = new MMTIME();
+	currentSoundTime->wType = TIME_SAMPLES;
+
+	waveOutGetPosition(_startedSounds.at(id)[index]->getHandle(), currentSoundTime, sizeof(MMTIME));
+
+	const auto sampleIndex = currentSoundTime->u.sample;
+	const auto sampleRate = _sound2dManager->getSound(id)->getWaveBuffer()->getFormat()->nSamplesPerSec;
+	const auto result = static_cast<unsigned int>(static_cast<float>(sampleIndex) / static_cast<float>(sampleRate));
+
+	delete currentSoundTime;
+
+	return result;
+}

@@ -727,6 +727,7 @@ public:
 	const float sound2d_getLeftIntensity(const string& id, unsigned int index) const;
 	const float sound2d_getRightIntensity(const string& id, unsigned int index) const;
 	const unsigned int sound2d_getStartedCount(const string& id) const;
+	const unsigned int sound2d_getTime(const string& id, unsigned int index) const;
 	const bool sound2d_isExisting(const string& id) const;
 	const bool sound2d_isStarted(const string& id, unsigned int index) const;
 	const bool sound2d_isPaused(const string& id, unsigned int index) const;

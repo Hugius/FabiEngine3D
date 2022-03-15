@@ -112,3 +112,8 @@ const unsigned int EngineInterface::sound2d_getStartedCount(const string& id) co
 {
 	return _core->getSound2dPlayer()->getStartedSoundCount(id);
 }
+
+const unsigned int EngineInterface::sound2d_getTime(const string& id, unsigned int index) const
+{
+	return _core->getSound2dPlayer()->getSoundTime(id, index);
+}

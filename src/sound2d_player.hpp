@@ -36,6 +36,7 @@ public:
 	const int getPlayCount(const string& id, unsigned int index) const;
 
 	const unsigned int getStartedSoundCount(const string& id) const;
+	const unsigned int getSoundTime(const string& id, unsigned int index) const;
 
 	const bool isSoundStarted(const string& id, unsigned int index) const;
 	const bool isSoundPaused(const string& id, unsigned int index) const;

@@ -8,8 +8,9 @@
 - Every sound instance plays on a unique sound channel (with a maximum of 1024).
 - Sound channels make sure that all the sound waves are mixed together.
 - Stereo audio is supported.
-- Volume cannot be changed, because it is calculated by FabiEngine3D based on the sound position.
+- Volume cannot be changed directly, because it is calculated by FabiEngine3D based on the sound position.
 - The calculated volume uses stereo panning to achieve a 3D effect.
+- Changes in volume can be delayed if too many sounds are playing simultanously.
 - If no audio memory is available, sounds cannot be started.
 - If no audio device is connected, sounds cannot be started and all sounds are stopped immediately.
 

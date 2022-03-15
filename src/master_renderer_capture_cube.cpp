@@ -151,6 +151,8 @@ void MasterRenderer::captureCubeReflections()
 				glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
 				glTexImage2D(cubeIndex, 0, GL_RGB, _renderStorage->getCubeReflectionQuality(), _renderStorage->getCubeReflectionQuality(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+				delete[] data;
 			}
 
 			entity->setCubeMap(make_shared<TextureBuffer>(textureId));

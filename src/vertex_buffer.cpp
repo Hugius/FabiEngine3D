@@ -110,6 +110,8 @@ VertexBuffer::VertexBuffer(float x, float y, float w, float h, bool isCentered)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
+	delete[] data;
+
 	_vertexCount = 6;
 }
 

@@ -59,8 +59,6 @@ private:
 	static inline constexpr float AABB_DEPTH = 0.0001f;
 	static inline constexpr float CAMERA_DISTANCE = 10.0f;
 
-	float _cameraOffset = 0.0f;
-
 	static inline constexpr unsigned int MAX_LINE_COUNT = 99;
 	static inline constexpr unsigned int BLOOM_QUALITY = 1;
 

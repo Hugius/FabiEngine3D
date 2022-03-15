@@ -11,6 +11,7 @@ void ScriptEditor::_load()
 	_fe3d->camera_setFov(CAMERA_FOV);
 	_fe3d->camera_setYaw(CAMERA_YAW);
 	_fe3d->camera_setPitch(CAMERA_PITCH);
+	_fe3d->camera_setPosition(fvec3(0.0f, 0.0f, CAMERA_DISTANCE));
 
 	_fe3d->raycast_setAabbIntersectionEnabled(true);
 
@@ -64,7 +65,6 @@ void ScriptEditor::_unload()
 	_loadedAabbIds.clear();
 	_copyClipboard.clear();
 	_currentScriptFileId = "";
-	_cameraOffset = 0.0f;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_wasGuiFocused = false;

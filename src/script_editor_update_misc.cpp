@@ -225,13 +225,23 @@ void ScriptEditor::_updateMiscellaneous()
 		const auto scrollSpeed = static_cast<float>(_fe3d->input_getMouseWheelY());
 		const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 		const auto lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;
-		const auto minCameraOffset = min(0.0f, (lastLineHeight + TEXT_STARTING_POSITION.y));
-		const auto maxCameraOffset = 0.0f;
+		const auto minCameraOffset = fvec2(0.0f, min(0.0f, (lastLineHeight + TEXT_STARTING_POSITION.y)));
+		const auto maxCameraOffset = fvec2(FLT_MAX, 0.0f);
 
-		_cameraOffset += scrollSpeed;
+		auto cameraPosition = _fe3d->camera_getPosition();
 
-		_cameraOffset = clamp(_cameraOffset, minCameraOffset, maxCameraOffset);
+		if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT))
+		{
+			cameraPosition.x += scrollSpeed;
+		}
+		else
+		{
+			cameraPosition.y += scrollSpeed;
+		}
 
-		_fe3d->camera_setPosition(fvec3(0.0f, _cameraOffset, CAMERA_DISTANCE));
+		cameraPosition.x = clamp(cameraPosition.x, minCameraOffset.x, maxCameraOffset.x);
+		cameraPosition.y = clamp(cameraPosition.y, minCameraOffset.y, maxCameraOffset.y);
+
+		_fe3d->camera_setPosition(cameraPosition);
 	}
 }

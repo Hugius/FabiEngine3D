@@ -627,6 +627,9 @@
     <ClCompile Include="..\..\..\src\world_editor_saving.cpp">
       <Filter>World Editor\Persistence</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\script_editor_update_selector.cpp">
+      <Filter>Script Editor\Update</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">

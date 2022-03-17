@@ -23,6 +23,7 @@ private:
 	void _unloadGUI();
 	void _updateGUI();
 	void _updateTextWriter();
+	void _updateTextSelector();
 	void _updateScriptFileCreating();
 	void _updateScriptFileChoosing();
 	void _updateScriptFileRenaming();
@@ -95,7 +96,6 @@ private:
 
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
-	bool _wasGuiFocused = false;
 	bool _isCreatingScriptFile = false;
 	bool _isChoosingScriptFile = false;
 	bool _isRenamingScriptFile = false;

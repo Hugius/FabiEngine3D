@@ -73,7 +73,6 @@ void ScriptEditor::_unload()
 	_currentScriptFileId = "";
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
-	_wasGuiFocused = false;
 	_isCreatingScriptFile = false;
 	_isChoosingScriptFile = false;
 	_isRenamingScriptFile = false;
@@ -121,6 +120,10 @@ void ScriptEditor::update()
 	if(isLoaded())
 	{
 		_updateScriptSearching();
+	}
+	if(isLoaded())
+	{
+		_updateTextSelector();
 	}
 	if(isLoaded())
 	{

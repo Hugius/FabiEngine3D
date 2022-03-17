@@ -243,5 +243,37 @@ void ScriptEditor::_updateMiscellaneous()
 		cameraPosition.y = clamp(cameraPosition.y, minCameraOffset.y, maxCameraOffset.y);
 
 		_fe3d->camera_setPosition(cameraPosition);
+
+		_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
+
+		if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
+		{
+			if(_fe3d->text3d_getContent("cursor") == "|")
+			{
+				_fe3d->text3d_setContent("cursor", " ");
+			}
+			else
+			{
+				_fe3d->text3d_setContent("cursor", "|");
+			}
+		}
+
+		const auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
+		const auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
+
+		if(cursorCharacterIndex == 0)
+		{
+			const auto linePosition = _fe3d->aabb_getBasePosition(to_string(_script->getScriptFile(_currentScriptFileId)->getCursorLineIndex()));
+			const auto cursorPosition = fvec3((TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - (TEXT_CHARACTER_SIZE.x * 0.5f)), linePosition.y, linePosition.z);
+
+			_fe3d->text3d_setPosition("cursor", cursorPosition);
+		}
+		else
+		{
+			const auto characterPosition = _fe3d->aabb_getBasePosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharacterIndex - 1));
+			const auto cursorPosition = fvec3((characterPosition.x + (TEXT_CHARACTER_SIZE.x * 0.5f)), characterPosition.y, characterPosition.z);
+
+			_fe3d->text3d_setPosition("cursor", cursorPosition);
+		}
 	}
 }

@@ -21,6 +21,10 @@ void ScriptEditor::_load()
 	_fe3d->gfx_setBloomBlurCount(2);
 	_fe3d->gfx_setBloomQuality(BLOOM_QUALITY);
 
+	_fe3d->quad3d_create("selection", true);
+	_fe3d->quad3d_setVisible("selection", false);
+	_fe3d->quad3d_setColor("selection", SELECTION_COLOR);
+
 	_fe3d->text3d_create("cursor", FONT_MAP_PATH, true);
 	_fe3d->text3d_setVisible("cursor", false);
 	_fe3d->text3d_setContent("cursor", "|");
@@ -39,6 +43,8 @@ void ScriptEditor::_unload()
 	_fe3d->gfx_setBloomIntensity(0.0f);
 	_fe3d->gfx_setBloomBlurCount(0);
 	_fe3d->gfx_setBloomQuality(0);
+
+	_fe3d->quad3d_delete("selection");
 
 	_fe3d->text3d_delete("cursor");
 

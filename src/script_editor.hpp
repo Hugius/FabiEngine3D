@@ -43,6 +43,7 @@ private:
 	static inline const fvec3 TEXT_STARTING_POSITION = fvec3(-12.0f, 6.0, 0.0f);
 	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
 	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);
+	static inline const fvec3 SELECTION_COLOR = fvec3(0.1f, 0.1f, 0.1f);
 	static inline const fvec3 DEFAULT_TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 COMMENT_TEXT_COLOR = fvec3(0.0f, 0.75f, 0.0f);
 
@@ -88,6 +89,9 @@ private:
 		{'-', '_'},
 		{'=', '+'}
 	};
+
+	fvec2 _selectionPosition = fvec2(0.0f);
+	fvec2 _selectionSize = fvec2(0.0f);
 
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;

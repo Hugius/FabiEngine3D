@@ -10,7 +10,7 @@ void EngineInterface::sound3d_delete(const string& id)
 {
 	for(unsigned int index = 0; index < _core->getSound3dPlayer()->getStartedSoundCount(id); index++)
 	{
-		_core->getSound3dPlayer()->stopSound(id, 0);
+		sound3d_stop(id, index);
 	}
 
 	_core->getSound3dManager()->deleteSound(id);

@@ -12,7 +12,7 @@ void EngineInterface::animation2d_delete(const string& id)
 	{
 		if(id == animationId)
 		{
-			_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
+			quad3d_stopAnimation(quadId, animationId);
 		}
 	}
 
@@ -20,7 +20,7 @@ void EngineInterface::animation2d_delete(const string& id)
 	{
 		if(id == animationId)
 		{
-			_core->getAnimation2dPlayer()->stopQuad2dAnimation(animationId, quadId);
+			quad2d_stopAnimation(quadId, animationId);
 		}
 	}
 

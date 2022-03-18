@@ -12,7 +12,7 @@ void EngineInterface::animation3d_delete(const string& id)
 	{
 		if(id == animationId)
 		{
-			_core->getAnimation3dPlayer()->stopModelAnimation(animationId, modelId);
+			model_stopAnimation(modelId, animationId);
 		}
 	}
 

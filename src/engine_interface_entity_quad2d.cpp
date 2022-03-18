@@ -12,7 +12,7 @@ void EngineInterface::quad2d_delete(const string& id)
 	{
 		if(id == quadId)
 		{
-			_core->getAnimation2dPlayer()->stopQuad2dAnimation(animationId, quadId);
+			quad2d_stopAnimation(quadId, animationId);
 		}
 	}
 

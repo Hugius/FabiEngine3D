@@ -10,7 +10,7 @@ void EngineInterface::sound2d_delete(const string& id)
 {
 	for(unsigned int index = 0; index < _core->getSound2dPlayer()->getStartedSoundCount(id); index++)
 	{
-		_core->getSound2dPlayer()->stopSound(id, 0);
+		sound2d_stop(id, index);
 	}
 
 	_core->getSound2dManager()->deleteSound(id);

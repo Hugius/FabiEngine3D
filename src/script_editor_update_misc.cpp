@@ -218,9 +218,30 @@ void ScriptEditor::_updateScriptSearching()
 	}
 }
 
-void ScriptEditor::_updateMiscellaneous()
+void ScriptEditor::_updateDisplay()
 {
-	if(_isWritingScript && !_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
+	if(!_isWritingScript || _gui->getOverlay()->isFocused())
+	{
+		return;
+	}
+
+	if(_hasTextChanged)
+	{
+		_deleteScriptDisplayEntities();
+		_createScriptDisplayEntities();
+
+		_hasTextChanged = false;
+	}
+}
+
+void ScriptEditor::_updateCamera()
+{
+	if(!_isWritingScript || _gui->getOverlay()->isFocused())
+	{
+		return;
+	}
+
+	if(_fe3d->misc_isCursorInsideDisplay())
 	{
 		const auto scrollSpeed = static_cast<float>(_fe3d->input_getMouseWheelY());
 		const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
@@ -243,37 +264,45 @@ void ScriptEditor::_updateMiscellaneous()
 		cameraPosition.y = clamp(cameraPosition.y, minCameraOffset.y, maxCameraOffset.y);
 
 		_fe3d->camera_setPosition(cameraPosition);
+	}
+}
 
-		_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
+void ScriptEditor::_updateMiscellaneous()
+{
+	if(!_isWritingScript || _gui->getOverlay()->isFocused())
+	{
+		return;
+	}
 
-		if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
+	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
+
+	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
+	{
+		if(_fe3d->text3d_getContent("cursor") == "|")
 		{
-			if(_fe3d->text3d_getContent("cursor") == "|")
-			{
-				_fe3d->text3d_setContent("cursor", " ");
-			}
-			else
-			{
-				_fe3d->text3d_setContent("cursor", "|");
-			}
-		}
-
-		const auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
-		const auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
-
-		if(cursorCharacterIndex == 0)
-		{
-			const auto linePosition = _fe3d->aabb_getBasePosition(to_string(_script->getScriptFile(_currentScriptFileId)->getCursorLineIndex()));
-			const auto cursorPosition = fvec3((TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - (TEXT_CHARACTER_SIZE.x * 0.5f)), linePosition.y, linePosition.z);
-
-			_fe3d->text3d_setPosition("cursor", cursorPosition);
+			_fe3d->text3d_setContent("cursor", " ");
 		}
 		else
 		{
-			const auto characterPosition = _fe3d->aabb_getBasePosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharacterIndex - 1));
-			const auto cursorPosition = fvec3((characterPosition.x + (TEXT_CHARACTER_SIZE.x * 0.5f)), characterPosition.y, characterPosition.z);
-
-			_fe3d->text3d_setPosition("cursor", cursorPosition);
+			_fe3d->text3d_setContent("cursor", "|");
 		}
+	}
+
+	const auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
+	const auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
+
+	if(cursorCharacterIndex == 0)
+	{
+		const auto linePosition = _fe3d->aabb_getBasePosition(to_string(_script->getScriptFile(_currentScriptFileId)->getCursorLineIndex()));
+		const auto cursorPosition = fvec3((TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - (TEXT_CHARACTER_SIZE.x * 0.5f)), linePosition.y, linePosition.z);
+
+		_fe3d->text3d_setPosition("cursor", cursorPosition);
+	}
+	else
+	{
+		const auto characterPosition = _fe3d->aabb_getBasePosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharacterIndex - 1));
+		const auto cursorPosition = fvec3((characterPosition.x + (TEXT_CHARACTER_SIZE.x * 0.5f)), characterPosition.y, characterPosition.z);
+
+		_fe3d->text3d_setPosition("cursor", cursorPosition);
 	}
 }

@@ -71,6 +71,7 @@ void ScriptEditor::_unload()
 	_loadedAabbIds.clear();
 	_copyClipboard.clear();
 	_currentScriptFileId = "";
+	_characterSelectionRootAabbId = "";
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_isCreatingScriptFile = false;
@@ -128,6 +129,14 @@ void ScriptEditor::update()
 	if(isLoaded())
 	{
 		_updateTextWriter();
+	}
+	if(isLoaded())
+	{
+		_updateDisplay();
+	}
+	if(isLoaded())
+	{
+		_updateCamera();
 	}
 	if(isLoaded())
 	{

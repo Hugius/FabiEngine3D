@@ -28,6 +28,8 @@ private:
 	void _updateScriptFileChoosing();
 	void _updateScriptFileRenaming();
 	void _updateScriptSearching();
+	void _updateDisplay();
+	void _updateCamera();
 	void _updateMiscellaneous();
 	void _createScriptDisplayEntities();
 	void _deleteScriptDisplayEntities();
@@ -91,8 +93,7 @@ private:
 		{'=', '+'}
 	};
 
-	fvec2 _selectionPosition = fvec2(0.0f);
-	fvec2 _selectionSize = fvec2(0.0f);
+	string _characterSelectionRootAabbId = "";
 
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
@@ -100,6 +101,7 @@ private:
 	bool _isChoosingScriptFile = false;
 	bool _isRenamingScriptFile = false;
 	bool _isSearchingScriptFile = false;
+	bool _hasTextChanged = false;
 
 	shared_ptr<Script> _script = nullptr;
 };

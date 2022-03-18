@@ -16,7 +16,10 @@ public:
 	void setTerrainIntersectionDistance(float distance);
 	void setTerrainIntersectionPrecision(float precision);
 	void setAabbIntersectionEnabled(bool value);
+	void resetTerrainStatus(const string& terrainId);
+	void resetAabbStatus(const string& aabbId);
 
+	const string& getTerrainId() const;
 	const string& getClosestAabbId() const;
 
 	const fvec3& getPointOnTerrain() const;
@@ -38,6 +41,7 @@ private:
 
 	const bool _isUnderTerrain(float distance) const;
 
+	string _terrainId = "";
 	string _closestAabbId = "";
 
 	fvec3 _pointOnTerrain = fvec3(0.0f);

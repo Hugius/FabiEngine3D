@@ -19,6 +19,8 @@ void EngineInterface::aabb_setParentType(const string& id, AabbParentType value)
 void EngineInterface::aabb_delete(const string& id)
 {
 	_core->getAabbEntityManager()->deleteEntity(id);
+
+	_core->getRaycastIntersector()->resetAabbStatus(id);
 }
 
 void EngineInterface::aabb_setVisible(const string& id, bool value)
@@ -34,6 +36,11 @@ void EngineInterface::aabb_setColor(const string& id, const fvec3& value)
 void EngineInterface::aabb_setRaycastResponsive(const string& id, bool value)
 {
 	_core->getAabbEntityManager()->getEntity(id)->setRaycastResponsive(value);
+
+	if(!value)
+	{
+		_core->getRaycastIntersector()->resetAabbStatus(id);
+	}
 }
 
 void EngineInterface::aabb_setCollisionResponsive(const string& id, bool value)

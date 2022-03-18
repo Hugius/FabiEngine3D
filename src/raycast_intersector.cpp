@@ -8,11 +8,13 @@ void RaycastIntersector::update()
 {
 	if(_isTerrainIntersectionEnabled && (_terrainManager->getSelectedEntity() != nullptr))
 	{
+		_terrainId = _terrainManager->getSelectedEntity()->getId();
 		_pointOnTerrain = _calculatePointOnTerrain();
 		_distanceToTerrain = _calculateDistanceToTerrain();
 	}
 	else
 	{
+		_terrainId = "";
 		_pointOnTerrain = fvec3(-1.0f);
 		_distanceToTerrain = -1.0f;
 	}
@@ -89,6 +91,32 @@ void RaycastIntersector::setTerrainIntersectionPrecision(float precision)
 void RaycastIntersector::setAabbIntersectionEnabled(bool value)
 {
 	_isAabbIntersectionEnabled = value;
+}
+
+void RaycastIntersector::resetTerrainStatus(const string& terrainId)
+{
+	if(terrainId == _terrainId)
+	{
+		_terrainId = "";
+	}
+}
+
+void RaycastIntersector::resetAabbStatus(const string& aabbId)
+{
+	if(aabbId == _closestAabbId)
+	{
+		_closestAabbId = "";
+	}
+
+	if(_aabbIntersections.find(aabbId) != _aabbIntersections.end())
+	{
+		_aabbIntersections.erase(aabbId);
+	}
+}
+
+const string& RaycastIntersector::getTerrainId() const
+{
+	return _terrainId;
 }
 
 const string& RaycastIntersector::getClosestAabbId() const

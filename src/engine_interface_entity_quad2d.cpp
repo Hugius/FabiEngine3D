@@ -16,6 +16,11 @@ void EngineInterface::quad2d_delete(const string& id)
 		}
 	}
 
+	if(id == _core->getRenderStorage()->getCursorEntityId())
+	{
+		_core->getRenderStorage()->setCursorEntityId("");
+	}
+
 	_core->getQuad2dEntityManager()->deleteEntity(id);
 }
 

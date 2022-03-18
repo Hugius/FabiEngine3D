@@ -13,15 +13,15 @@ void EngineInterface::text3d_setContent(const string& id, const string& value)
 
 void EngineInterface::text3d_delete(const string& id)
 {
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto& [aabbId, aabbEntity] : _core->getAabbEntityManager()->getEntities())
 	{
-		if(entity->hasParent())
+		if(aabbEntity->hasParent())
 		{
-			if(id == entity->getParentId())
+			if(id == aabbEntity->getParentId())
 			{
-				if(entity->getParentType() == AabbParentType::TEXT3D)
+				if(aabbEntity->getParentType() == AabbParentType::TEXT3D)
 				{
-					_core->getAabbEntityManager()->deleteEntity(key);
+					aabb_delete(aabbId);
 				}
 			}
 		}

@@ -9,6 +9,8 @@ void EngineInterface::terrain_create(const string& id, const string& heightMapPa
 void EngineInterface::terrain_delete(const string& id)
 {
 	_core->getTerrainEntityManager()->deleteEntity(id);
+
+	_core->getRaycastIntersector()->resetTerrainStatus(id);
 }
 
 void EngineInterface::terrain_setVisible(const string& id, bool value)
@@ -19,6 +21,11 @@ void EngineInterface::terrain_setVisible(const string& id, bool value)
 void EngineInterface::terrain_select(const string& id)
 {
 	_core->getTerrainEntityManager()->selectEntity(id);
+
+	if(id.empty() || (id != _core->getRaycastIntersector()->getTerrainId()))
+	{
+		_core->getRaycastIntersector()->resetTerrainStatus(id);
+	}
 }
 
 void EngineInterface::terrain_setMaxHeight(const string& id, float value)

@@ -12,19 +12,19 @@ void EngineInterface::model_delete(const string& id)
 	{
 		if(id == modelId)
 		{
-			_core->getAnimation3dPlayer()->stopModelAnimation(animationId, modelId);
+			model_stopAnimation(modelId, animationId);
 		}
 	}
 
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto& [aabbId, aabbEntity] : _core->getAabbEntityManager()->getEntities())
 	{
-		if(entity->hasParent())
+		if(aabbEntity->hasParent())
 		{
-			if(id == entity->getParentId())
+			if(id == aabbEntity->getParentId())
 			{
-				if(entity->getParentType() == AabbParentType::MODEL)
+				if(aabbEntity->getParentType() == AabbParentType::MODEL)
 				{
-					_core->getAabbEntityManager()->deleteEntity(key);
+					aabb_delete(aabbId);
 				}
 			}
 		}
@@ -32,9 +32,9 @@ void EngineInterface::model_delete(const string& id)
 
 	for(const auto& reflectionId : reflection_getIds())
 	{
-		if(id == _core->getReflectionEntityManager()->getEntity(reflectionId)->getExceptionEntityId())
+		if(id == reflection_getExceptionEntityId(reflectionId))
 		{
-			_core->getReflectionEntityManager()->getEntity(reflectionId)->setExceptionEntityId("");
+			reflection_setExceptionEntityId(reflectionId, "");
 		}
 	}
 

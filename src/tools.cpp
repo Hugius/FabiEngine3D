@@ -23,7 +23,7 @@ using std::chrono::duration_cast;
 using std::chrono::milliseconds;
 using std::chrono::system_clock;
 
-const vector<string> Tools::getFilesFromDirectory(const string& path)
+const vector<string> Tools::getFileNamesFromDirectory(const string& path)
 {
 	if(!isDirectoryExisting(path))
 	{
@@ -37,10 +37,11 @@ const vector<string> Tools::getFilesFromDirectory(const string& path)
 		filePath.erase(0, path.size());
 		fileNames.push_back(filePath);
 	}
+
 	return fileNames;
 }
 
-const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
+const vector<string> Tools::getDirectoryNamesFromDirectory(const string& path)
 {
 	if(!isDirectoryExisting(path))
 	{
@@ -58,6 +59,7 @@ const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
 			directoryNames.push_back(directoryPath);
 		}
 	}
+
 	return directoryNames;
 }
 

@@ -110,6 +110,15 @@ void ScriptEditor::_deleteScriptDisplayEntities()
 	_loadedAabbIds.clear();
 }
 
+void ScriptEditor::_clearDisplay()
+{
+	_deleteScriptDisplayEntities();
+	_fe3d->quad3d_setVisible("selection", false);
+	_fe3d->text3d_setVisible("cursor", false);
+	_isWritingScript = false;
+	_currentScriptFileId = "";
+}
+
 void ScriptEditor::inject(shared_ptr<Script> script)
 {
 	_script = script;

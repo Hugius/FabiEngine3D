@@ -73,14 +73,19 @@ void ScriptEditor::_updateTextSelector()
 	}
 	else
 	{
-		if(_fe3d->quad3d_isVisible("selection"))
+		if(_canSelectCharacter)
 		{
-			_canSelectCharacter = false;
+			if(_fe3d->quad3d_isVisible("selection"))
+			{
+				_canSelectCharacter = false;
+			}
 		}
-
-		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+		else
 		{
-			_canSelectCharacter = true;
+			if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+			{
+				_canSelectCharacter = true;
+			}
 		}
 
 		_fe3d->quad3d_setVisible("selection", false);

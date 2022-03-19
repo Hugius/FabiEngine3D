@@ -24,19 +24,20 @@ private:
 	void _updateGUI();
 	void _updateTextWriter();
 	void _updateTextSelector();
+	void _updateScriptSearching();
 	void _updateScriptFileCreating();
 	void _updateScriptFileChoosing();
 	void _updateScriptFileRenaming();
-	void _updateScriptSearching();
+	void _updateScriptDeleting();
 	void _updateDisplay();
 	void _updateCamera();
 	void _updateMiscellaneous();
 	void _createScriptDisplayEntities();
 	void _deleteScriptDisplayEntities();
+	void _clearDisplay();
 
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
-	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;
 	vector<string> _loadedQuadIds;
 	vector<string> _loadedTextIds;
@@ -96,12 +97,13 @@ private:
 	string _characterSelectionFirstAabbId = "";
 	string _characterSelectionSecondAabbId = "";
 
-	bool _isScriptLoadedFromFile = false;
-	bool _isWritingScript = false;
+	bool _isSearchingScriptFile = false;
 	bool _isCreatingScriptFile = false;
 	bool _isChoosingScriptFile = false;
 	bool _isRenamingScriptFile = false;
-	bool _isSearchingScriptFile = false;
+	bool _isDeletingScriptFile = false;
+	bool _isScriptLoadedFromFile = false;
+	bool _isWritingScript = false;
 	bool _hasTextChanged = false;
 	bool _canSelectCharacter = true;
 

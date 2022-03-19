@@ -19,22 +19,26 @@ const bool ScriptEditor::saveScriptFiles()
 		abort();
 	}
 
-	for(const auto& fileName : _scriptFileNamesToDelete)
-	{
-		const auto rootPath = Tools::getRootDirectoryPath();
-		const auto filePath = (rootPath + "projects\\" + getCurrentProjectId() + "\\scripts\\" + fileName + ".fe3d");
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const auto directoryPath = (rootPath + "projects\\" + getCurrentProjectId() + "\\scripts\\");
 
-		if(Tools::isFileExisting(filePath))
+	for(const auto& fileName : Tools::getFileNamesFromDirectory(directoryPath))
+	{
+		const auto extension = fileName.substr(fileName.size() - 5, 5);
+		if(extension != ".fe3d")
 		{
-			Tools::deleteFile(filePath);
+			continue;
+		}
+
+		if(Tools::isFileExisting(directoryPath + fileName))
+		{
+			Tools::deleteFile(directoryPath + fileName);
 		}
 	}
-	_scriptFileNamesToDelete.clear();
 
 	for(const auto& scriptId : _script->getScriptFileIds())
 	{
-		const auto rootPath = Tools::getRootDirectoryPath();
-		auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\scripts\\" + scriptId + ".fe3d");
+		auto file = ofstream(directoryPath + scriptId + ".fe3d");
 
 		file
 			<< _script->getScriptFile(scriptId)->getCursorLineIndex()

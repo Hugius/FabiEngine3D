@@ -35,15 +35,14 @@ void ScriptEditor::_updateGUI()
 			_gui->getOverlay()->createValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isRenamingScriptFile = true;
 		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clear")->isHovered())
+		{
+			_clearDisplay();
+		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_scriptFileNamesToDelete.push_back(_currentScriptFileId);
-			_deleteScriptDisplayEntities();
-			_script->deleteScriptFile(_currentScriptFileId);
-			_fe3d->quad3d_setVisible("selection", false);
-			_fe3d->text3d_setVisible("cursor", false);
-			_isWritingScript = false;
-			_currentScriptFileId = "";
+			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_isDeletingScriptFile = true;
 		}
 
 		if(_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL))
@@ -69,6 +68,7 @@ void ScriptEditor::_updateGUI()
 		}
 
 		screen->getButton("rename")->setHoverable(!_currentScriptFileId.empty());
+		screen->getButton("clear")->setHoverable(!_currentScriptFileId.empty());
 		screen->getButton("delete")->setHoverable(!_currentScriptFileId.empty());
 
 		screen->getTextField("lineCount")->changeTextContent("Lines: " + to_string(_script->getTotalLineCount()));
@@ -184,10 +184,8 @@ void ScriptEditor::_updateScriptFileRenaming()
 				Logger::throwWarning("Script already exists");
 			}
 
-			_scriptFileNamesToDelete.push_back(_currentScriptFileId);
 			_script->renameScriptFile(_currentScriptFileId, newScriptFileId);
 			_currentScriptFileId = newScriptFileId;
-
 			_isRenamingScriptFile = false;
 		}
 	}
@@ -237,35 +235,32 @@ void ScriptEditor::_updateDisplay()
 
 void ScriptEditor::_updateCamera()
 {
-	if(!_isWritingScript || _gui->getOverlay()->isFocused())
+	if(!_isWritingScript || _gui->getOverlay()->isFocused() || !_fe3d->misc_isCursorInsideDisplay())
 	{
 		return;
 	}
 
-	if(_fe3d->misc_isCursorInsideDisplay())
+	const auto scrollSpeed = static_cast<float>(_fe3d->input_getMouseWheelY());
+	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
+	const auto lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;
+	const auto minCameraOffset = fvec2(0.0f, min(0.0f, (lastLineHeight + TEXT_STARTING_POSITION.y)));
+	const auto maxCameraOffset = fvec2(FLT_MAX, 0.0f);
+
+	auto cameraPosition = _fe3d->camera_getPosition();
+
+	if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT))
 	{
-		const auto scrollSpeed = static_cast<float>(_fe3d->input_getMouseWheelY());
-		const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
-		const auto lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;
-		const auto minCameraOffset = fvec2(0.0f, min(0.0f, (lastLineHeight + TEXT_STARTING_POSITION.y)));
-		const auto maxCameraOffset = fvec2(FLT_MAX, 0.0f);
-
-		auto cameraPosition = _fe3d->camera_getPosition();
-
-		if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT))
-		{
-			cameraPosition.x += scrollSpeed;
-		}
-		else
-		{
-			cameraPosition.y += scrollSpeed;
-		}
-
-		cameraPosition.x = clamp(cameraPosition.x, minCameraOffset.x, maxCameraOffset.x);
-		cameraPosition.y = clamp(cameraPosition.y, minCameraOffset.y, maxCameraOffset.y);
-
-		_fe3d->camera_setPosition(cameraPosition);
+		cameraPosition.x += scrollSpeed;
 	}
+	else
+	{
+		cameraPosition.y += scrollSpeed;
+	}
+
+	cameraPosition.x = clamp(cameraPosition.x, minCameraOffset.x, maxCameraOffset.x);
+	cameraPosition.y = clamp(cameraPosition.y, minCameraOffset.y, maxCameraOffset.y);
+
+	_fe3d->camera_setPosition(cameraPosition);
 }
 
 void ScriptEditor::_updateMiscellaneous()
@@ -276,7 +271,10 @@ void ScriptEditor::_updateMiscellaneous()
 		return;
 	}
 
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
+	if(_fe3d->misc_isCursorInsideDisplay())
+	{
+		_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
+	}
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
 	{
@@ -306,5 +304,22 @@ void ScriptEditor::_updateMiscellaneous()
 		const auto cursorPosition = fvec3((characterPosition.x + (TEXT_CHARACTER_SIZE.x * 0.5f)), characterPosition.y, characterPosition.z);
 
 		_fe3d->text3d_setPosition("cursor", cursorPosition);
+	}
+}
+
+void ScriptEditor::_updateScriptDeleting()
+{
+	if(_isDeletingScriptFile)
+	{
+		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		{
+			_script->deleteScriptFile(_currentScriptFileId);
+			_clearDisplay();
+			_isDeletingScriptFile = false;
+		}
+		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
+		{
+			_isDeletingScriptFile = false;
+		}
 	}
 }

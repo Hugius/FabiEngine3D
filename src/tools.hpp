@@ -21,8 +21,8 @@ public:
 	static void deleteDirectory(const string& path);
 	static void deleteFile(const string& path);
 
-	static const vector<string> getFilesFromDirectory(const string& path);
-	static const vector<string> getDirectoriesFromDirectory(const string& path);
+	static const vector<string> getFileNamesFromDirectory(const string& path);
+	static const vector<string> getDirectoryNamesFromDirectory(const string& path);
 	static const string vec2str(const ivec2& vec);
 	static const string vec2str(const fvec2& vec);
 	static const string vec2str(const fvec3& vec);

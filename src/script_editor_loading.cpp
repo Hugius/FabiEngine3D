@@ -29,10 +29,11 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		{
 			Logger::throwWarning("Project corrupted: directory `scripts\\` does not exist");
 		}
+
 		return false;
 	}
 
-	for(const auto& fileName : Tools::getFilesFromDirectory(directoryPath))
+	for(const auto& fileName : Tools::getFileNamesFromDirectory(directoryPath))
 	{
 		const auto extension = fileName.substr(fileName.size() - 5, 5);
 		if(extension != ".fe3d")

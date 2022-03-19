@@ -4,7 +4,7 @@ void ScriptEditor::_updateTextSelector()
 {
 	if(!_isWritingScript || _gui->getOverlay()->isFocused() || !_fe3d->misc_isCursorInsideDisplay())
 	{
-		_clearSelection();
+		_clearCharacterSelection();
 
 		return;
 	}
@@ -72,7 +72,7 @@ void ScriptEditor::_updateTextSelector()
 	}
 	else
 	{
-		_clearSelection();
+		_clearCharacterSelection();
 
 		_fe3d->text3d_setVisible("cursor", true);
 	}
@@ -83,21 +83,21 @@ void ScriptEditor::_updateTextSelector()
 	}
 
 	const auto lineIndex = static_cast<unsigned int>(stoi(_characterSelectionFirstAabbId.substr(0, _characterSelectionFirstAabbId.find('_'))));
-	const auto rootCharacterIndex = static_cast<unsigned int>(stoi(_characterSelectionFirstAabbId.substr(_characterSelectionFirstAabbId.find('_') + 1)));
-	const auto hoveredCharacterIndex = static_cast<unsigned int>(stoi(_characterSelectionSecondAabbId.substr(_characterSelectionSecondAabbId.find('_') + 1)));
+	const auto firstCharacterIndex = static_cast<unsigned int>(stoi(_characterSelectionFirstAabbId.substr(_characterSelectionFirstAabbId.find('_') + 1)));
+	const auto secondCharacterIndex = static_cast<unsigned int>(stoi(_characterSelectionSecondAabbId.substr(_characterSelectionSecondAabbId.find('_') + 1)));
 	const auto scriptFile = _script->getScriptFile(_currentScriptFileId);
 
 	if(_fe3d->input_isKeyPressed(InputType::KEY_R))
 	{
 		auto lineText = scriptFile->getLineText(lineIndex);
 
-		if(rootCharacterIndex < hoveredCharacterIndex)
+		if(firstCharacterIndex < secondCharacterIndex)
 		{
-			lineText.erase(static_cast<size_t>(rootCharacterIndex), static_cast<size_t>(hoveredCharacterIndex - rootCharacterIndex + 1));
+			lineText.erase(static_cast<size_t>(firstCharacterIndex), static_cast<size_t>(secondCharacterIndex - firstCharacterIndex + 1));
 		}
 		else
 		{
-			lineText.erase(static_cast<size_t>(hoveredCharacterIndex), static_cast<size_t>(rootCharacterIndex - hoveredCharacterIndex + 1));
+			lineText.erase(static_cast<size_t>(secondCharacterIndex), static_cast<size_t>(firstCharacterIndex - secondCharacterIndex + 1));
 		}
 
 		scriptFile->setLineText(lineIndex, lineText);
@@ -109,6 +109,6 @@ void ScriptEditor::_updateTextSelector()
 
 		_hasTextChanged = true;
 
-		_clearSelection();
+		_clearCharacterSelection();
 	}
 }

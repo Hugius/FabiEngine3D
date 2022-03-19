@@ -119,7 +119,7 @@ void ScriptEditor::_clearDisplay()
 	_currentScriptFileId = "";
 }
 
-void ScriptEditor::_clearSelection()
+void ScriptEditor::_clearCharacterSelection()
 {
 	if(_canSelectCharacter)
 	{

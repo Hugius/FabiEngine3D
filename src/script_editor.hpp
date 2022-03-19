@@ -35,7 +35,7 @@ private:
 	void _createScriptDisplayEntities();
 	void _deleteScriptDisplayEntities();
 	void _clearDisplay();
-	void _clearSelection();
+	void _clearCharacterSelection();
 
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";

@@ -132,11 +132,11 @@ void ScriptEditor::update()
 	}
 	if(isLoaded())
 	{
-		_updateTextSelector();
+		_updateTextWriter();
 	}
 	if(isLoaded())
 	{
-		_updateTextWriter();
+		_updateTextSelector();
 	}
 	if(isLoaded())
 	{

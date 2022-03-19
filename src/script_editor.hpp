@@ -31,10 +31,11 @@ private:
 	void _updateScriptDeleting();
 	void _updateDisplay();
 	void _updateCamera();
-	void _updateMiscellaneous();
+	void _updateCursor();
 	void _createScriptDisplayEntities();
 	void _deleteScriptDisplayEntities();
 	void _clearDisplay();
+	void _clearSelection();
 
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";

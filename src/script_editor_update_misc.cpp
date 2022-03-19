@@ -263,11 +263,12 @@ void ScriptEditor::_updateCamera()
 	_fe3d->camera_setPosition(cameraPosition);
 }
 
-void ScriptEditor::_updateMiscellaneous()
+void ScriptEditor::_updateCursor()
 {
 	if(!_isWritingScript || _gui->getOverlay()->isFocused())
 	{
 		_fe3d->text3d_setVisible("cursor", false);
+
 		return;
 	}
 

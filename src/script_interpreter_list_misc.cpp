@@ -192,10 +192,10 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		return;
 	}
 
-	unsigned int index = -1;
+	unsigned int index;
 	if(_isIntegerValue(indexString))
 	{
-		index = stoi(_limitIntegerString(indexString));
+		index = static_cast<unsigned int>(stoi(_limitIntegerString(indexString)));
 	}
 	else
 	{
@@ -207,7 +207,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 			return;
 		}
 
-		index = indexVariable->getValue()->getInteger();
+		index = static_cast<unsigned int>(indexVariable->getValue()->getInteger());
 	}
 
 	if(!_validateListIndex(listVariable, index))

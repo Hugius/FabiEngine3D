@@ -119,6 +119,33 @@ void ScriptEditor::_clearDisplay()
 	_currentScriptFileId = "";
 }
 
+void ScriptEditor::_clearSelection()
+{
+	if(_canSelectCharacter)
+	{
+		if(_fe3d->quad3d_isVisible("selection"))
+		{
+			_canSelectCharacter = false;
+		}
+	}
+	else
+	{
+		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+		{
+			_canSelectCharacter = true;
+		}
+	}
+
+	_fe3d->quad3d_setVisible("selection", false);
+
+
+	_fe3d->quad3d_setPosition("selection", fvec3(0.0f));
+	_fe3d->quad3d_setSize("selection", fvec2(0.0f));
+
+	_characterSelectionFirstAabbId = "";
+	_characterSelectionSecondAabbId = "";
+}
+
 void ScriptEditor::inject(shared_ptr<Script> script)
 {
 	_script = script;

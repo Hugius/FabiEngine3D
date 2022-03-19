@@ -148,6 +148,6 @@ void ScriptEditor::update()
 	}
 	if(isLoaded())
 	{
-		_updateMiscellaneous();
+		_updateCursor();
 	}
 }

@@ -4,50 +4,12 @@
 
 void ScriptEditor::_updateTextWriter()
 {
-	if(!_isWritingScript || _gui->getOverlay()->isFocused())
+	if(!_isWritingScript || _gui->getOverlay()->isFocused() || _fe3d->quad3d_isVisible("selection"))
 	{
 		return;
 	}
 
-	string newCharacters = "";
-
-	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d->misc_isCursorInsideDisplay())
-	{
-		const auto hoveredTextId = _fe3d->raycast_getClosestAabbId();
-
-		if(!hoveredTextId.empty() && !_fe3d->quad3d_isVisible("selection"))
-		{
-			auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
-			auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
-			int hoveredLineIndex = -1;
-			int hoveredCharacterIndex = -1;
-
-			if(hoveredTextId.find('_') == string::npos)
-			{
-				hoveredLineIndex = stoi(hoveredTextId);
-			}
-			else
-			{
-				hoveredLineIndex = stoi(hoveredTextId.substr(0, hoveredTextId.find('_')));
-				hoveredCharacterIndex = stoi(hoveredTextId.substr(hoveredTextId.find('_') + 1));
-			}
-
-			cursorLineIndex = hoveredLineIndex;
-
-			if(hoveredCharacterIndex == -1)
-			{
-				cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
-			}
-			else
-			{
-				cursorCharacterIndex = hoveredCharacterIndex;
-			}
-
-			_script->getScriptFile(_currentScriptFileId)->setCursorLineIndex(cursorLineIndex);
-			_script->getScriptFile(_currentScriptFileId)->setCursorCharacterIndex(cursorCharacterIndex);
-		}
-	}
-	else if(_fe3d->input_isKeyPressed(InputType::KEY_LEFT))
+	if(_fe3d->input_isKeyPressed(InputType::KEY_LEFT))
 	{
 		auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
 		auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
@@ -210,6 +172,8 @@ void ScriptEditor::_updateTextWriter()
 
 		if(!_fe3d->input_isKeyDown(InputType::KEY_LCTRL) && !_fe3d->input_isKeyDown(InputType::KEY_RCTRL))
 		{
+			string newCharacters = "";
+
 			for(const auto& c : ALPHABET_CHARACTERS)
 			{
 				if(_fe3d->input_isKeyPressed(InputType(c)))

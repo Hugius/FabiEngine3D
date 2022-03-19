@@ -93,7 +93,8 @@ private:
 		{'=', '+'}
 	};
 
-	string _characterSelectionRootAabbId = "";
+	string _characterSelectionFirstAabbId = "";
+	string _characterSelectionSecondAabbId = "";
 
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
@@ -102,6 +103,7 @@ private:
 	bool _isRenamingScriptFile = false;
 	bool _isSearchingScriptFile = false;
 	bool _hasTextChanged = false;
+	bool _canSelectCharacter = true;
 
 	shared_ptr<Script> _script = nullptr;
 };

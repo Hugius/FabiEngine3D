@@ -71,7 +71,8 @@ void ScriptEditor::_unload()
 	_loadedAabbIds.clear();
 	_copyClipboard.clear();
 	_currentScriptFileId = "";
-	_characterSelectionRootAabbId = "";
+	_characterSelectionFirstAabbId = "";
+	_characterSelectionSecondAabbId = "";
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_isCreatingScriptFile = false;

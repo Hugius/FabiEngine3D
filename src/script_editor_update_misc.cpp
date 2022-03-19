@@ -40,6 +40,7 @@ void ScriptEditor::_updateGUI()
 			_scriptFileNamesToDelete.push_back(_currentScriptFileId);
 			_deleteScriptDisplayEntities();
 			_script->deleteScriptFile(_currentScriptFileId);
+			_fe3d->quad3d_setVisible("selection", false);
 			_fe3d->text3d_setVisible("cursor", false);
 			_isWritingScript = false;
 			_currentScriptFileId = "";
@@ -271,6 +272,7 @@ void ScriptEditor::_updateMiscellaneous()
 {
 	if(!_isWritingScript || _gui->getOverlay()->isFocused())
 	{
+		_fe3d->text3d_setVisible("cursor", false);
 		return;
 	}
 

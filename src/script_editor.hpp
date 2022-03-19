@@ -97,6 +97,7 @@ private:
 
 	string _characterSelectionFirstAabbId = "";
 	string _characterSelectionSecondAabbId = "";
+	string _characterSelectionClipboard = "";
 
 	bool _isSearchingScriptFile = false;
 	bool _isCreatingScriptFile = false;

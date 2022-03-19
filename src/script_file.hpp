@@ -7,9 +7,8 @@ class ScriptFile final
 public:
 	ScriptFile(const string& id);
 
-	void addNewLine(const string& textContent);
-	void insertNewLine(unsigned int index, const string& textContent);
-	void setLineText(unsigned int index, const string& textContent);
+	void createLine(unsigned int index, const string& textContent);
+	void editLine(unsigned int index, const string& textContent);
 	void deleteLine(unsigned int index);
 	void setCursorLineIndex(unsigned int index);
 	void setCursorCharacterIndex(unsigned int index);
@@ -18,7 +17,7 @@ public:
 	const vector<string>& getLines() const;
 
 	const string& getId() const;
-	const string& getLineText(unsigned int index) const;
+	const string& getLine(unsigned int index) const;
 
 	const unsigned int getLineCount() const;
 	const unsigned int getCursorLineIndex() const;

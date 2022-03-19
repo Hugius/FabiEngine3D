@@ -27,17 +27,17 @@ void ScriptInterpreter::load()
 		}
 
 		string scriptType = "";
-		if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_initialize"))
+		if(scriptFile->getLine(0) == (META_KEYWORD + " script_type_initialize"))
 		{
 			_initializeScriptIds.push_back(scriptId);
 			scriptType = "script_type_initialize";
 		}
-		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_update"))
+		else if(scriptFile->getLine(0) == (META_KEYWORD + " script_type_update"))
 		{
 			_updateScriptIds.push_back(scriptId);
 			scriptType = "script_type_update";
 		}
-		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_terminate"))
+		else if(scriptFile->getLine(0) == (META_KEYWORD + " script_type_terminate"))
 		{
 			_terminateScriptIds.push_back(scriptId);
 			scriptType = "script_type_terminate";
@@ -48,7 +48,7 @@ void ScriptInterpreter::load()
 			return;
 		}
 
-		if(scriptFile->getLineText(1) == (META_KEYWORD + " script_state_entry"))
+		if(scriptFile->getLine(1) == (META_KEYWORD + " script_state_entry"))
 		{
 			if(scriptType == "script_type_initialize")
 			{
@@ -87,7 +87,7 @@ void ScriptInterpreter::load()
 				}
 			}
 		}
-		else if(scriptFile->getLineText(1) == (META_KEYWORD + " script_state_wait"))
+		else if(scriptFile->getLine(1) == (META_KEYWORD + " script_state_wait"))
 		{
 			// Purposely left blank
 		}
@@ -136,7 +136,7 @@ void ScriptInterpreter::load()
 
 		for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 		{
-			auto scriptLineText = scriptFile->getLineText(lineIndex);
+			auto scriptLineText = scriptFile->getLine(lineIndex);
 			auto scriptLineTextStream = istringstream(scriptLineText);
 			string noWhiteSpace;
 			scriptLineTextStream >> noWhiteSpace;
@@ -152,7 +152,7 @@ void ScriptInterpreter::load()
 					}
 				}
 
-				scriptFile->setLineText(lineIndex, scriptLineText.substr(charIndex));
+				scriptFile->editLine(lineIndex, scriptLineText.substr(charIndex));
 			}
 		}
 	}

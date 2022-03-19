@@ -105,7 +105,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 
 		_currentLineIndexStack.back() = lineIndex;
 
-		string scriptLineText = scriptFile->getLineText(lineIndex);
+		string scriptLineText = scriptFile->getLine(lineIndex);
 
 		if(lineIndex == 0 || lineIndex == 1)
 		{

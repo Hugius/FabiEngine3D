@@ -39,7 +39,7 @@ void ScriptEditor::_createScriptDisplayEntities()
 		_loadedTextIds.push_back(lineNumberId);
 
 		const auto lineTextId = ("text_" + to_string(lineIndex));
-		const auto lineTextString = _script->getScriptFile(_currentScriptFileId)->getLineText(lineIndex);
+		const auto lineTextString = _script->getScriptFile(_currentScriptFileId)->getLine(lineIndex);
 		const auto lineTextOffset = fvec3((((lineTextString.size() - 1) * (TEXT_CHARACTER_SIZE.x * 0.5f)) + HORIZONTAL_LINE_OFFSET), (-VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);
 		const auto lineTextPosition = (TEXT_STARTING_POSITION + lineTextOffset);
 		const auto lineTextSize = fvec2(lineTextString.size() * TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y);

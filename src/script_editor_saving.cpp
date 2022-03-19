@@ -48,7 +48,7 @@ const bool ScriptEditor::saveScriptFiles()
 
 		for(unsigned int lineIndex = 0; lineIndex < _script->getScriptFile(scriptId)->getLineCount(); lineIndex++)
 		{
-			file << _script->getScriptFile(scriptId)->getLineText(lineIndex) << endl;
+			file << _script->getScriptFile(scriptId)->getLine(lineIndex) << endl;
 		}
 
 		file.close();

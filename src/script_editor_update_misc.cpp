@@ -109,7 +109,7 @@ void ScriptEditor::_updateScriptFileCreating()
 			}
 
 			_script->createScriptFile(newScriptFileId);
-			_script->getScriptFile(newScriptFileId)->insertNewLine(0, "");
+			_script->getScriptFile(newScriptFileId)->createLine(0, "");
 
 			_currentScriptFileId = newScriptFileId;
 			_isWritingScript = true;
@@ -240,6 +240,7 @@ void ScriptEditor::_updateCamera()
 		return;
 	}
 
+	const auto isControlDown = (_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL));
 	const auto scrollSpeed = static_cast<float>(_fe3d->input_getMouseWheelY());
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 	const auto lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;
@@ -248,7 +249,7 @@ void ScriptEditor::_updateCamera()
 
 	auto cameraPosition = _fe3d->camera_getPosition();
 
-	if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT))
+	if(isControlDown)
 	{
 		cameraPosition.x += scrollSpeed;
 	}

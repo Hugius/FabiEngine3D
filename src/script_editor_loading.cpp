@@ -68,7 +68,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		unsigned int lineIndex = 0;
 		while(getline(file, line))
 		{
-			_script->getScriptFile(scriptFileId)->insertNewLine(lineIndex, line);
+			_script->getScriptFile(scriptFileId)->createLine(lineIndex, line);
 			lineIndex++;
 		}
 

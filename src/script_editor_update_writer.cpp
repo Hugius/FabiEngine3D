@@ -23,7 +23,7 @@ void ScriptEditor::_updateTextWriter()
 			if(cursorLineIndex > 0)
 			{
 				cursorLineIndex--;
-				cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
+				cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
 			}
 		}
 
@@ -35,7 +35,7 @@ void ScriptEditor::_updateTextWriter()
 		auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
 		auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
 
-		if(cursorCharacterIndex < _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size())
+		if(cursorCharacterIndex < _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size())
 		{
 			cursorCharacterIndex++;
 		}
@@ -60,9 +60,9 @@ void ScriptEditor::_updateTextWriter()
 		{
 			cursorLineIndex--;
 
-			if(cursorCharacterIndex > _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size())
+			if(cursorCharacterIndex > _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size())
 			{
-				cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
+				cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
 			}
 		}
 
@@ -78,9 +78,9 @@ void ScriptEditor::_updateTextWriter()
 		{
 			cursorLineIndex++;
 
-			if(cursorCharacterIndex > _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size())
+			if(cursorCharacterIndex > _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size())
 			{
-				cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
+				cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
 			}
 		}
 
@@ -93,11 +93,11 @@ void ScriptEditor::_updateTextWriter()
 		{
 			auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
 			auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
-			auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex);
+			auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex);
 
-			_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText.substr(0, cursorCharacterIndex));
+			_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, currentLineText.substr(0, cursorCharacterIndex));
 			cursorLineIndex++;
-			_script->getScriptFile(_currentScriptFileId)->insertNewLine(cursorLineIndex, currentLineText.substr(cursorCharacterIndex));
+			_script->getScriptFile(_currentScriptFileId)->createLine(cursorLineIndex, currentLineText.substr(cursorCharacterIndex));
 			cursorCharacterIndex = 0;
 			_hasTextChanged = true;
 
@@ -109,7 +109,7 @@ void ScriptEditor::_updateTextWriter()
 	{
 		auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
 		auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
-		auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex);
+		auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex);
 
 		if(cursorCharacterIndex == currentLineText.size())
 		{
@@ -117,9 +117,9 @@ void ScriptEditor::_updateTextWriter()
 
 			if(cursorLineIndex < (lineCount - 1))
 			{
-				const auto nextLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex + 1);
+				const auto nextLineText = _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex + 1);
 
-				_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, (currentLineText + nextLineText));
+				_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, (currentLineText + nextLineText));
 				_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex + 1);
 				_hasTextChanged = true;
 			}
@@ -127,7 +127,7 @@ void ScriptEditor::_updateTextWriter()
 		else
 		{
 			currentLineText.erase(currentLineText.begin() + cursorCharacterIndex);
-			_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText);
+			_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, currentLineText);
 			_hasTextChanged = true;
 		}
 
@@ -138,17 +138,17 @@ void ScriptEditor::_updateTextWriter()
 	{
 		auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
 		auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
-		auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex);
+		auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex);
 
 		if(cursorCharacterIndex == 0)
 		{
 			if(cursorLineIndex > 0)
 			{
-				const auto previousLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex - 1);
+				const auto previousLineText = _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex - 1);
 
 				_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex);
 				cursorLineIndex--;
-				_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, previousLineText + currentLineText);
+				_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, previousLineText + currentLineText);
 				cursorCharacterIndex = static_cast<unsigned int>(previousLineText.size());
 				_hasTextChanged = true;
 			}
@@ -157,7 +157,7 @@ void ScriptEditor::_updateTextWriter()
 		{
 			cursorCharacterIndex--;
 			currentLineText.erase(currentLineText.begin() + cursorCharacterIndex);
-			_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText);
+			_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, currentLineText);
 			_hasTextChanged = true;
 		}
 
@@ -168,7 +168,7 @@ void ScriptEditor::_updateTextWriter()
 	{
 		auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
 		auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
-		auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex);
+		auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex);
 
 		if(!_fe3d->input_isKeyDown(InputType::KEY_LCTRL) && !_fe3d->input_isKeyDown(InputType::KEY_RCTRL))
 		{
@@ -256,7 +256,7 @@ void ScriptEditor::_updateTextWriter()
 
 				_hasTextChanged = true;
 
-				_script->getScriptFile(_currentScriptFileId)->setLineText(cursorLineIndex, currentLineText);
+				_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, currentLineText);
 			}
 		}
 

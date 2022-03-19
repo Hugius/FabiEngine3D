@@ -10,6 +10,8 @@ void ScriptEditor::_updateTextSelector()
 	}
 
 	const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
+	const auto scriptFile = _script->getScriptFile(_currentScriptFileId);
+	const auto isControlDown = (_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL));
 
 	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !hoveredAabbId.empty())
 	{
@@ -32,7 +34,7 @@ void ScriptEditor::_updateTextSelector()
 
 		if(hoveredCharacterIndex == -1)
 		{
-			cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLineText(cursorLineIndex).size());
+			cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
 		}
 		else
 		{
@@ -77,38 +79,67 @@ void ScriptEditor::_updateTextSelector()
 		_fe3d->text3d_setVisible("cursor", true);
 	}
 
-	if(!_fe3d->quad3d_isVisible("selection"))
+	if(_fe3d->quad3d_isVisible("selection"))
 	{
-		return;
+		const auto lineIndex = static_cast<unsigned int>(stoi(_characterSelectionFirstAabbId.substr(0, _characterSelectionFirstAabbId.find('_'))));
+		const auto firstCharacterIndex = static_cast<unsigned int>(stoi(_characterSelectionFirstAabbId.substr(_characterSelectionFirstAabbId.find('_') + 1)));
+		const auto secondCharacterIndex = static_cast<unsigned int>(stoi(_characterSelectionSecondAabbId.substr(_characterSelectionSecondAabbId.find('_') + 1)));
+
+		if(isControlDown && _fe3d->input_isKeyPressed(InputType::KEY_R))
+		{
+			auto lineText = scriptFile->getLine(lineIndex);
+
+			if(firstCharacterIndex < secondCharacterIndex)
+			{
+				lineText.erase(static_cast<size_t>(firstCharacterIndex), static_cast<size_t>(secondCharacterIndex - firstCharacterIndex + 1));
+			}
+			else
+			{
+				lineText.erase(static_cast<size_t>(secondCharacterIndex), static_cast<size_t>(firstCharacterIndex - secondCharacterIndex + 1));
+			}
+
+			scriptFile->editLine(lineIndex, lineText);
+
+			if(scriptFile->getCursorCharacterIndex() > lineText.size())
+			{
+				scriptFile->setCursorCharacterIndex(static_cast<unsigned int>(lineText.size()));
+			}
+
+			_hasTextChanged = true;
+
+			_clearCharacterSelection();
+		}
+
+		if(isControlDown && _fe3d->input_isKeyPressed(InputType::KEY_C))
+		{
+			const auto lineText = scriptFile->getLine(lineIndex);
+
+			if(firstCharacterIndex < secondCharacterIndex)
+			{
+				_characterSelectionClipboard = lineText.substr(static_cast<size_t>(firstCharacterIndex), static_cast<size_t>(secondCharacterIndex - firstCharacterIndex + 1));
+			}
+			else
+			{
+				_characterSelectionClipboard = lineText.substr(static_cast<size_t>(secondCharacterIndex), static_cast<size_t>(firstCharacterIndex - secondCharacterIndex + 1));
+			}
+		}
 	}
-
-	const auto lineIndex = static_cast<unsigned int>(stoi(_characterSelectionFirstAabbId.substr(0, _characterSelectionFirstAabbId.find('_'))));
-	const auto firstCharacterIndex = static_cast<unsigned int>(stoi(_characterSelectionFirstAabbId.substr(_characterSelectionFirstAabbId.find('_') + 1)));
-	const auto secondCharacterIndex = static_cast<unsigned int>(stoi(_characterSelectionSecondAabbId.substr(_characterSelectionSecondAabbId.find('_') + 1)));
-	const auto scriptFile = _script->getScriptFile(_currentScriptFileId);
-
-	if(_fe3d->input_isKeyPressed(InputType::KEY_R))
+	else
 	{
-		auto lineText = scriptFile->getLineText(lineIndex);
-
-		if(firstCharacterIndex < secondCharacterIndex)
+		if(isControlDown && _fe3d->input_isKeyPressed(InputType::KEY_V))
 		{
-			lineText.erase(static_cast<size_t>(firstCharacterIndex), static_cast<size_t>(secondCharacterIndex - firstCharacterIndex + 1));
+			if(!_characterSelectionClipboard.empty())
+			{
+				const auto lineText = scriptFile->getLine(scriptFile->getCursorLineIndex());
+				const auto firstPart = lineText.substr(0, scriptFile->getCursorCharacterIndex());
+				const auto secondPart = lineText.substr(scriptFile->getCursorCharacterIndex());
+
+				scriptFile->editLine(scriptFile->getCursorLineIndex(), (firstPart + _characterSelectionClipboard + secondPart));
+
+				scriptFile->setCursorCharacterIndex(scriptFile->getCursorCharacterIndex() + static_cast<unsigned int>(_characterSelectionClipboard.size()));
+
+				_hasTextChanged = true;
+			}
 		}
-		else
-		{
-			lineText.erase(static_cast<size_t>(secondCharacterIndex), static_cast<size_t>(firstCharacterIndex - secondCharacterIndex + 1));
-		}
-
-		scriptFile->setLineText(lineIndex, lineText);
-
-		if(scriptFile->getCursorCharacterIndex() > lineText.size())
-		{
-			scriptFile->setCursorCharacterIndex(static_cast<unsigned int>(lineText.size()));
-		}
-
-		_hasTextChanged = true;
-
-		_clearCharacterSelection();
 	}
 }

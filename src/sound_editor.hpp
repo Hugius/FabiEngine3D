@@ -32,7 +32,7 @@ private:
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
 
-	vector<string> _loadedSoundIds;
+	vector<string> _loadedSoundIds = {};
 
 	string _currentSoundId = "";
 	string _hoveredSoundId = "";

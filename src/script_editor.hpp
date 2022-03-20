@@ -85,10 +85,9 @@ private:
 		{'=', '+'}
 	};
 
-	vector<string> _copyClipboard;
-	vector<string> _loadedQuadIds;
-	vector<string> _loadedTextIds;
-	vector<string> _loadedAabbIds;
+	vector<string> _loadedQuadIds = {};
+	vector<string> _loadedTextIds = {};
+	vector<string> _loadedAabbIds = {};
 
 	string _currentScriptFileId = "";
 	string _firstSelectionAabbId = "";

@@ -51,7 +51,7 @@ private:
 	static inline constexpr unsigned int GRID_REPEAT = 10;
 	static inline constexpr unsigned int MAX_FRAME_COUNT = 100;
 
-	vector<string> _loadedAnimationIds;
+	vector<string> _loadedAnimationIds = {};
 
 	string _currentAnimationId = "";
 	string _currentPartId = "";

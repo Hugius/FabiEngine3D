@@ -47,7 +47,7 @@ private:
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline constexpr unsigned int GRID_REPEAT = 10;
 
-	vector <string> _loadedEntityIds;
+	vector <string> _loadedEntityIds = {};
 
 	string _currentTerrainId = "";
 

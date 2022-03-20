@@ -68,7 +68,6 @@ void ScriptEditor::_unload()
 	_loadedQuadIds.clear();
 	_loadedTextIds.clear();
 	_loadedAabbIds.clear();
-	_copyClipboard.clear();
 	_currentScriptFileId = "";
 	_firstSelectionAabbId = "";
 	_secondSelectionAabbId = "";

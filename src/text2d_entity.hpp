@@ -168,7 +168,7 @@ private:
 	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
 	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;
 
-	vector<shared_ptr<Quad2dEntity>> _characterEntities;
+	vector<shared_ptr<Quad2dEntity>> _characterEntities = {};
 
 	string _content = "";
 	string _fontMapPath = "";

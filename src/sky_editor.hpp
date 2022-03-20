@@ -35,7 +35,7 @@ private:
 	static inline constexpr float CH = 0.0875f;
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 
-	vector <string> _loadedEntityIds;
+	vector <string> _loadedEntityIds = {};
 
 	string _currentSkyId = "";
 

@@ -88,7 +88,7 @@ public:
 	const shared_ptr<TextureBuffer> getBlueNormalTextureBuffer() const;
 
 private:
-	vector<float> _pixels;
+	vector<float> _pixels = {};
 
 	string _heightMapPath = "";
 	string _diffuseMapPath = "";

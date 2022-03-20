@@ -55,7 +55,7 @@ private:
 	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.025f;
 	static inline constexpr unsigned int GRID_REPEAT = 10;
 
-	vector<string> _loadedEntityIds;
+	vector<string> _loadedEntityIds = {};
 
 	string _currentModelId = "";
 	string _currentPartId = "";

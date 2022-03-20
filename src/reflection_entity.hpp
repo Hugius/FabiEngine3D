@@ -41,5 +41,5 @@ private:
 	bool _mustCapture = false;
 	bool _isCaptured = false;
 
-	shared_ptr<TextureBuffer> _cubeTextureBuffer;
+	shared_ptr<TextureBuffer> _cubeTextureBuffer = nullptr;
 };

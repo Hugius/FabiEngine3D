@@ -79,5 +79,5 @@ private:
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 
 	AabbParentType _parentType = {};
-	Direction _collisionDirection = Direction::X;
+	Direction _collisionDirection = {};
 };

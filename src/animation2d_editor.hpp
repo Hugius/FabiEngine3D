@@ -33,7 +33,7 @@ private:
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
 
-	vector<string> _loadedAnimationIds;
+	vector<string> _loadedAnimationIds = {};
 
 	string _hoveredAnimationId = "";
 	string _currentAnimationId = "";

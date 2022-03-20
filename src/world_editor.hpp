@@ -34,7 +34,7 @@ public:
 	const string& getLoadedWorldId() const;
 
 	const bool loadWorldFromFile(const string& fileName);
-	const bool saveWorldToFile();
+	const bool saveWorldToFile() const;
 
 private:
 	void _load();
@@ -214,15 +214,15 @@ private:
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
 
-	unordered_map<string, string> _loadedModelIds;
-	unordered_map<string, string> _loadedQuadIds;
-	unordered_map<string, string> _loadedTextIds;
-	unordered_map<string, string> _loadedSoundIds;
+	unordered_map<string, string> _loadedModelIds = {};
+	unordered_map<string, string> _loadedQuadIds = {};
+	unordered_map<string, string> _loadedTextIds = {};
+	unordered_map<string, string> _loadedSoundIds = {};
 
-	vector<string> _loadedAabbIds;
-	vector<string> _loadedPointlightIds;
-	vector<string> _loadedSpotlightIds;
-	vector<string> _loadedReflectionIds;
+	vector<string> _loadedAabbIds = {};
+	vector<string> _loadedPointlightIds = {};
+	vector<string> _loadedSpotlightIds = {};
+	vector<string> _loadedReflectionIds = {};
 
 	string _currentTemplateModelId = "";
 	string _currentTemplateQuadId = "";

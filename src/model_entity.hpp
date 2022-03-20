@@ -169,7 +169,7 @@ private:
 	bool _isReflected = true;
 	bool _isLevelOfDetailed = false;
 
-	unordered_map<string, unique_ptr<ModelEntityPart>> _parts;
+	unordered_map<string, unique_ptr<ModelEntityPart>> _parts = {};
 
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;
 };

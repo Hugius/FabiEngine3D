@@ -11,7 +11,7 @@ Quad2dEntityManager::Quad2dEntityManager()
 
 }
 
-shared_ptr<Quad2dEntity> Quad2dEntityManager::getEntity(const string& id)
+const shared_ptr<Quad2dEntity> Quad2dEntityManager::getEntity(const string& id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -23,7 +23,7 @@ shared_ptr<Quad2dEntity> Quad2dEntityManager::getEntity(const string& id)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Quad2dEntity>>& Quad2dEntityManager::getEntities()
+const unordered_map<string, shared_ptr<Quad2dEntity>>& Quad2dEntityManager::getEntities() const
 {
 	return _entities;
 }

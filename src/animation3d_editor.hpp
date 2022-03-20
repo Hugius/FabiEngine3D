@@ -35,16 +35,6 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedAnimationIds;
-	string _currentAnimationId = "";
-	string _currentPartId = "";
-	string _hoveredModelId = "";
-	string _hoveredPartId = "";
-	string _previewModelId = "";
-
-	fvec3 _cameraLookatPosition = fvec3(0.0f);
-	fvec3 _initialModelSize = fvec3(0.0f);
-
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
@@ -59,12 +49,24 @@ private:
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.025f;
 	static inline constexpr unsigned int GRID_REPEAT = 10;
+	static inline constexpr unsigned int MAX_FRAME_COUNT = 100;
+
+	vector<string> _loadedAnimationIds;
+
+	string _currentAnimationId = "";
+	string _currentPartId = "";
+	string _hoveredModelId = "";
+	string _hoveredPartId = "";
+	string _previewModelId = "";
+
+	fvec3 _cameraLookatPosition = fvec3(0.0f);
+	fvec3 _initialModelSize = fvec3(0.0f);
+
 	float _originalPartOpacity = 0.0f;
 
-	int _selectedPartHighlightDirection = 1;
-
-	static inline constexpr unsigned int MAX_FRAME_COUNT = 100;
 	unsigned int _currentFrameIndex = 0;
+
+	int _selectedPartHighlightDirection = 1;
 
 	bool _mustUpdateCurrentFramePreview = true;
 	bool _isCreatingAnimation = false;

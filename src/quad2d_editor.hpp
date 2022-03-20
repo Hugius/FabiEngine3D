@@ -28,14 +28,14 @@ private:
 	void _updateQuadDeleting();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedEntityIds;
-	string _currentQuadId = "";
-	string _hoveredQuadId = "";
-
 	static inline const fvec2 QUAD_SIZE = fvec2(0.75f);
-
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
+
+	vector<string> _loadedEntityIds;
+
+	string _currentQuadId = "";
+	string _hoveredQuadId = "";
 
 	bool _isCreatingQuad = false;
 	bool _isChoosingQuad = false;

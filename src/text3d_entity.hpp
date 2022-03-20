@@ -45,6 +45,8 @@ public:
 	void setFrozen(bool value);
 	void setVisible(bool value);
 
+	const vector<shared_ptr<Quad3dEntity>>& getCharacterEntities() const;
+
 	const string& getContent() const;
 	const string& getFontMapPath() const;
 
@@ -74,7 +76,6 @@ public:
 	const bool isWireframed() const;
 	const bool isCentered() const;
 
-	const vector<shared_ptr<Quad3dEntity>>& getCharacterEntities() const;
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
 
@@ -177,6 +178,11 @@ private:
 		{'}', ivec2(13, 0)},
 		{'~', ivec2(14, 0)}
 	};
+	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
+	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;
+
+	vector<shared_ptr<Quad3dEntity>> _characterEntities;
+
 	string _content = "";
 	string _fontMapPath = "";
 
@@ -203,9 +209,6 @@ private:
 	float _minHeight = -FLT_MAX;
 	float _maxHeight = FLT_MAX;
 
-	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
-	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;
-
 	bool _isFacingCameraHorizontally = false;
 	bool _isFacingCameraVertically = false;
 	bool _isShadowed = true;
@@ -215,7 +218,6 @@ private:
 	bool _isFrozen = false;
 	bool _isCentered = false;
 
-	vector<shared_ptr<Quad3dEntity>> _characterEntities;
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _fontTextureBuffer = nullptr;
 };

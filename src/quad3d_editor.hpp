@@ -32,10 +32,6 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedEntityIds;
-	string _hoveredQuadId = "";
-	string _currentQuadId = "";
-
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
@@ -49,6 +45,11 @@ private:
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.125f;
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline constexpr unsigned int GRID_REPEAT = 10;
+
+	vector<string> _loadedEntityIds;
+
+	string _hoveredQuadId = "";
+	string _currentQuadId = "";
 
 	bool _isCreatingQuad3d = false;
 	bool _isChoosingQuad3d = false;

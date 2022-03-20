@@ -28,16 +28,15 @@ private:
 	void _updateTextDeleting();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedEntityIds;
-	string _currentTextId = "";
-	string _hoveredTextId = "";
-
 	static inline const string TEXT_CONTENT = "Text123";
-
 	static inline const fvec2 TEXT_SIZE = fvec2(1.0f, 0.2f);
-
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
+
+	vector<string> _loadedEntityIds;
+
+	string _currentTextId = "";
+	string _hoveredTextId = "";
 
 	bool _isCreatingText = false;
 	bool _isChoosingText = false;

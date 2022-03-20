@@ -34,9 +34,6 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	vector <string> _loadedEntityIds;
-	string _currentTerrainId = "";
-
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
@@ -49,6 +46,10 @@ private:
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 5.0f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline constexpr unsigned int GRID_REPEAT = 10;
+
+	vector <string> _loadedEntityIds;
+
+	string _currentTerrainId = "";
 
 	bool _isCreatingTerrain = false;
 	bool _isChoosingTerrain = false;

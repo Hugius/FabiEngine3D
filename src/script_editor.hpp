@@ -10,7 +10,6 @@ public:
 	using BaseEditor::inject;
 
 	void inject(shared_ptr<Script> script);
-
 	void update();
 
 	const bool loadScriptFiles(bool isLoggingEnabled);
@@ -40,21 +39,13 @@ private:
 
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
-	vector<string> _copyClipboard;
-	vector<string> _loadedQuadIds;
-	vector<string> _loadedTextIds;
-	vector<string> _loadedAabbIds;
-	string _currentScriptFileId = "";
-
 	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
 	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);
 	static inline const fvec3 SELECTION_COLOR = fvec3(0.1f, 0.1f, 0.1f);
 	static inline const fvec3 DEFAULT_TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 COMMENT_TEXT_COLOR = fvec3(0.0f, 0.75f, 0.0f);
 	static inline const fvec3 ROOT_TEXT_POSITION = fvec3(-12.0f, 6.0, 0.0f);
-
 	static inline const fvec2 CHARACTER_SIZE = fvec2(0.25f, 0.75f);
-
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
 	static inline constexpr float CHARACTER_OFFSET = 0.25f;
@@ -65,10 +56,8 @@ private:
 	static inline constexpr float CAMERA_PITCH = 0.0f;
 	static inline constexpr float AABB_DEPTH = 0.0001f;
 	static inline constexpr float CAMERA_DISTANCE = 10.0f;
-
 	static inline constexpr unsigned int MAX_LINE_COUNT = 99;
 	static inline constexpr unsigned int BLOOM_QUALITY = 1;
-
 	static inline const unordered_map<char, char> NUMBER_CHARACTERS =
 	{
 		{'0', ')'},
@@ -96,6 +85,12 @@ private:
 		{'=', '+'}
 	};
 
+	vector<string> _copyClipboard;
+	vector<string> _loadedQuadIds;
+	vector<string> _loadedTextIds;
+	vector<string> _loadedAabbIds;
+
+	string _currentScriptFileId = "";
 	string _firstSelectionAabbId = "";
 	string _secondSelectionAabbId = "";
 	string _selectionClipboard = "";
@@ -109,7 +104,7 @@ private:
 	bool _isWritingScript = false;
 	bool _hasTextChanged = false;
 
-	ScriptSelectionType _selectionType = {};
-
 	shared_ptr<Script> _script = nullptr;
+
+	ScriptSelectionType _selectionType = {};
 };

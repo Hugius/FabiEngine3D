@@ -32,10 +32,6 @@ private:
 	void _updateMiscellaneous();
 
 	static inline const string TEXT_CONTENT = "Text123";
-	vector<string> _loadedEntityIds;
-	string _hoveredTextId = "";
-	string _currentTextId = "";
-
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
@@ -49,6 +45,11 @@ private:
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.125f;
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline constexpr unsigned int GRID_REPEAT = 10;
+
+	vector<string> _loadedEntityIds;
+
+	string _hoveredTextId = "";
+	string _currentTextId = "";
 
 	bool _isCreatingText3d = false;
 	bool _isChoosingText3d = false;

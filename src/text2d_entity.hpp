@@ -40,6 +40,8 @@ public:
 	void setCentered(bool value);
 	void setVisible(bool value);
 
+	const vector<shared_ptr<Quad2dEntity>>& getCharacterEntities() const;
+
 	const string& getContent() const;
 	const string& getFontMapPath() const;
 
@@ -61,7 +63,6 @@ public:
 	const bool isFlippedHorizonally() const;
 	const bool isVerticallyFlipped() const;
 
-	const vector<shared_ptr<Quad2dEntity>>& getCharacterEntities() const;
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
 
@@ -164,6 +165,11 @@ private:
 		{'}', ivec2(13, 0)},
 		{'~', ivec2(14, 0)}
 	};
+	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
+	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;
+
+	vector<shared_ptr<Quad2dEntity>> _characterEntities;
+
 	string _content = "";
 	string _fontMapPath = "";
 
@@ -184,8 +190,6 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 	float _opacity = 1.0f;
 
-	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
-	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;
 	unsigned int _depth = 0;
 
 	bool _isCentered = false;
@@ -193,7 +197,6 @@ private:
 	bool _isVerticallyFlipped = false;
 	bool _isWireframed = false;
 
-	vector<shared_ptr<Quad2dEntity>> _characterEntities;
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> _fontTextureBuffer = nullptr;
 };

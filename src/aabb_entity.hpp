@@ -51,6 +51,7 @@ public:
 	const bool hasCollided() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
+
 	const AabbParentType getParentType() const;
 	const Direction getCollisionDirection() const;
 
@@ -76,6 +77,7 @@ private:
 	bool _hasCollided = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	AabbParentType _parentType = AabbParentType::MODEL;
+
+	AabbParentType _parentType = {};
 	Direction _collisionDirection = Direction::X;
 };

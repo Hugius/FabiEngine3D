@@ -49,5 +49,6 @@ class ModelEntityPart final
 	shared_ptr<TextureBuffer> specularTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> reflectionTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> normalTextureBuffer = nullptr;
-	ReflectionType reflectionType = ReflectionType::CUBE;
+
+	ReflectionType reflectionType = {};
 };

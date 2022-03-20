@@ -47,6 +47,8 @@ public:
 	void setWireframed(bool value);
 	void setWireframeColor(const fvec3& value);
 
+	const vector<float>& getPixels() const;
+
 	const string& getHeightMapPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getNormalMapPath() const;
@@ -60,7 +62,6 @@ public:
 
 	const fvec3& getWireframeColor() const;
 
-	const vector<float>& getPixels() const;
 	const float getSize() const;
 	const float getMaxHeight() const;
 	const float getLightness() const;
@@ -87,6 +88,8 @@ public:
 	const shared_ptr<TextureBuffer> getBlueNormalTextureBuffer() const;
 
 private:
+	vector<float> _pixels;
+
 	string _heightMapPath = "";
 	string _diffuseMapPath = "";
 	string _normalMapPath = "";
@@ -101,7 +104,6 @@ private:
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
 
-	vector<float> _pixels;
 	float _maxHeight = 1.0f;
 	float _size = 0.0f;
 	float _lightness = 1.0f;

@@ -31,12 +31,13 @@ public:
 	const float getDistance() const;
 
 private:
+	static inline constexpr float MAX_ANGLE = 45.0f;
+
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _positionTarget = fvec3(0.0f);
 	fvec3 _front = fvec3(0.0f);
 	fvec3 _color = fvec3(1.0f);
 
-	static inline constexpr float MAX_ANGLE = 45.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _yaw = 0.0f;
 	float _pitch = 0.0f;

@@ -40,14 +40,6 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedEntityIds;
-	string _currentModelId = "";
-	string _currentPartId = "";
-	string _currentAabbId = "";
-	string _hoveredModelId = "";
-	string _hoveredPartId = "";
-	string _hoveredAabbId = "";
-
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
@@ -62,6 +54,16 @@ private:
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.025f;
 	static inline constexpr unsigned int GRID_REPEAT = 10;
+
+	vector<string> _loadedEntityIds;
+
+	string _currentModelId = "";
+	string _currentPartId = "";
+	string _currentAabbId = "";
+	string _hoveredModelId = "";
+	string _hoveredPartId = "";
+	string _hoveredAabbId = "";
+
 	float _originalPartOpacity = 0.0f;
 
 	int _selectedPartHighlightDirection = 1;

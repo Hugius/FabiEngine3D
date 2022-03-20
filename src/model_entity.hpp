@@ -80,6 +80,7 @@ public:
 	void setMinTextureAlpha(const string& partId, float value);
 
 	const vector<string> getPartIds() const;
+
 	const string& getMeshPath() const;
 	const string& getLevelOfDetailEntityId() const;
 	const string& getPreviousReflectionEntityId() const;
@@ -133,6 +134,7 @@ public:
 	const shared_ptr<TextureBuffer> getSpecularTextureBuffer(const string& partId) const;
 	const shared_ptr<TextureBuffer> getReflectionTextureBuffer(const string& partId) const;
 	const shared_ptr<TextureBuffer> getNormalTextureBuffer(const string& partId) const;
+
 	const ReflectionType getReflectionType(const string& partId) const;
 	const DirectionOrder getRotationOrder() const;
 
@@ -168,5 +170,6 @@ private:
 	bool _isLevelOfDetailed = false;
 
 	unordered_map<string, unique_ptr<ModelEntityPart>> _parts;
+
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;
 };

@@ -148,35 +148,6 @@ private:
 	static inline const string TORCH_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
 	static inline const string CAMERA_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
 	static inline const string SPEAKER_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
-	unordered_map<string, string> _loadedModelIds;
-	unordered_map<string, string> _loadedQuadIds;
-	unordered_map<string, string> _loadedTextIds;
-	unordered_map<string, string> _loadedSoundIds;
-	vector<string> _loadedAabbIds;
-	vector<string> _loadedPointlightIds;
-	vector<string> _loadedSpotlightIds;
-	vector<string> _loadedReflectionIds;
-	string _currentTemplateModelId = "";
-	string _currentTemplateQuadId = "";
-	string _currentTemplateTextId = "";
-	string _currentTemplateSoundId = "";
-	string _selectedModelId = "";
-	string _activeModelId = "";
-	string _selectedQuadId = "";
-	string _activeQuadId = "";
-	string _selectedTextId = "";
-	string _activeTextId = "";
-	string _selectedPointlightId = "";
-	string _activePointlightId = "";
-	string _selectedSpotlightId = "";
-	string _activeSpotlightId = "";
-	string _selectedReflectionId = "";
-	string _activeReflectionId = "";
-	string _selectedSoundId = "";
-	string _activeSoundId = "";
-	string _loadedWorldId = "";
-	string _currentWorldId = "";
-
 	static inline const fvec3 DEFAULT_LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
 	static inline const fvec3 DEFAULT_LAMP_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);
 	static inline const fvec3 DEFAULT_TORCH_ROTATION = fvec3(0.0f, 0.0f, -90.0f);
@@ -193,7 +164,6 @@ private:
 	static inline const fvec3 SPOTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
 	static inline const fvec3 REFLECTION_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 SOUND_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
-
 	static inline constexpr float MODEL_POSITION_DIVIDER = 100.0f;
 	static inline constexpr float MODEL_ROTATION_SPEED = 0.5f;
 	static inline constexpr float MODEL_SIZE_DIVIDER = 100.0f;
@@ -243,9 +213,42 @@ private:
 	static inline constexpr float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
+
+	unordered_map<string, string> _loadedModelIds;
+	unordered_map<string, string> _loadedQuadIds;
+	unordered_map<string, string> _loadedTextIds;
+	unordered_map<string, string> _loadedSoundIds;
+
+	vector<string> _loadedAabbIds;
+	vector<string> _loadedPointlightIds;
+	vector<string> _loadedSpotlightIds;
+	vector<string> _loadedReflectionIds;
+
+	string _currentTemplateModelId = "";
+	string _currentTemplateQuadId = "";
+	string _currentTemplateTextId = "";
+	string _currentTemplateSoundId = "";
+	string _selectedModelId = "";
+	string _activeModelId = "";
+	string _selectedQuadId = "";
+	string _activeQuadId = "";
+	string _selectedTextId = "";
+	string _activeTextId = "";
+	string _selectedPointlightId = "";
+	string _activePointlightId = "";
+	string _selectedSpotlightId = "";
+	string _activeSpotlightId = "";
+	string _selectedReflectionId = "";
+	string _activeReflectionId = "";
+	string _selectedSoundId = "";
+	string _activeSoundId = "";
+	string _loadedWorldId = "";
+	string _currentWorldId = "";
+
 	float _editorSpeed = 1.0f;
 
 	unsigned int _idCounter = 0;
+
 	int _selectedModelHighlightDirection = 1;
 	int _activeModelHighlightDirection = 1;
 	int _selectedQuad3dHighlightDirection = 1;

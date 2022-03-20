@@ -28,14 +28,14 @@ private:
 	void _updateSoundDeleting();
 	void _updateMiscellaneous();
 
-	vector<string> _loadedSoundIds;
-	string _currentSoundId = "";
-	string _hoveredSoundId = "";
-
 	static inline const fvec3 ICON_QUAD_POSITION = fvec3(0.0f, 0.0f, -1.5f);
-
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
+
+	vector<string> _loadedSoundIds;
+
+	string _currentSoundId = "";
+	string _hoveredSoundId = "";
 
 	bool _isCreatingSound = false;
 	bool _isChoosingSound = false;

@@ -23,11 +23,7 @@ private:
 	void _updateActivation();
 	void _updateTyping();
 
-	string _lastTextContent = "";
-	string _currentTextContent = "";
-
 	static inline constexpr float CHAR_WIDTH = 0.02f;
-
 	static inline constexpr int MAX_PASSED_BAR_FRAMES = 50;
 	static inline constexpr int MAX_PASSED_BACKSPACE_FRAMES = 20;
 
@@ -36,6 +32,10 @@ private:
 	const bool _noSpecials;
 	const bool _noLetters;
 	const bool _minusAllowed;
+
+	string _lastTextContent = "";
+	string _currentTextContent = "";
+
 	bool _isActive = false;
 	bool _confirmedInput = false;
 };

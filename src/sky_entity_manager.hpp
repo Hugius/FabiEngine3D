@@ -22,16 +22,16 @@ public:
 	const bool isEntityExisting(const string& id) const;
 	const bool isEntitiesExisting() const;
 
-	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();
-	shared_ptr<SkyEntity> getEntity(const string& id);
-	shared_ptr<SkyEntity> getSelectedEntity();
+	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities() const;
+	const shared_ptr<SkyEntity> getEntity(const string& id) const;
+	const shared_ptr<SkyEntity> getSelectedEntity() const;
 
 private:
-	string _selectedEntityId = "";
-
 	const shared_ptr<VertexBuffer> _vertexBuffer;
 
-	unordered_map<string, shared_ptr<SkyEntity>> _entities;
+	unordered_map<string, shared_ptr<SkyEntity>> _entities = {};
+
+	string _selectedEntityId = "";
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 };

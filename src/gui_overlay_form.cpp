@@ -208,7 +208,7 @@ void GuiOverlay::createChoiceForm(const string& id, const string& title, const f
 	_choiceFormId = id;
 }
 
-const string GuiOverlay::checkChoiceForm(const string& id)
+const string GuiOverlay::checkChoiceForm(const string& id) const
 {
 	if(id == _choiceFormId)
 	{

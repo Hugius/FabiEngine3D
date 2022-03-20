@@ -16,18 +16,18 @@ public:
 	void loadVertexBuffer(const string& id);
 	void selectEntity(const string& id);
 
+	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities() const;
+
 	const bool isEntityExisting(const string& id) const;
 	const bool isEntitiesExisting() const;
 
-	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities();
-
-	shared_ptr<WaterEntity> getEntity(const string& id);
-	shared_ptr<WaterEntity> getSelectedEntity();
+	const shared_ptr<WaterEntity> getEntity(const string& id) const;
+	const shared_ptr<WaterEntity> getSelectedEntity() const;
 
 private:
 	void _loadVertexBuffer(shared_ptr<WaterEntity> entity, float size);
 
-	string _selectedEntityId = "";
+	unordered_map<string, shared_ptr<WaterEntity>> _entities = {};
 
-	unordered_map<string, shared_ptr<WaterEntity>> _entities;
+	string _selectedEntityId = "";
 };

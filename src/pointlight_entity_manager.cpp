@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const string& id)
+const shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const string& id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -15,7 +15,7 @@ shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const string& id
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<PointlightEntity>>& PointlightEntityManager::getEntities()
+const unordered_map<string, shared_ptr<PointlightEntity>>& PointlightEntityManager::getEntities() const
 {
 	return _entities;
 }

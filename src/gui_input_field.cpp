@@ -224,7 +224,9 @@ const bool GuiInputField::isActive() const
 const bool GuiInputField::hasTextContentChanged()
 {
 	bool result = (_lastTextContent != _currentTextContent);
+
 	_lastTextContent = _currentTextContent;
+
 	return result;
 }
 

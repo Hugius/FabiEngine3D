@@ -45,7 +45,7 @@ void Quad3dEntityManager::inject(shared_ptr<Camera> camera)
 	_camera = camera;
 }
 
-shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& id)
+const shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -57,7 +57,7 @@ shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& id)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Quad3dEntity>>& Quad3dEntityManager::getEntities()
+const unordered_map<string, shared_ptr<Quad3dEntity>>& Quad3dEntityManager::getEntities() const
 {
 	return _entities;
 }

@@ -55,7 +55,7 @@ void Text3dEntityManager::inject(shared_ptr<TextureBufferCache> textureBufferCac
 	_textureBufferCache = textureBufferCache;
 }
 
-shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string& id)
+const shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string& id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -67,7 +67,7 @@ shared_ptr<Text3dEntity> Text3dEntityManager::getEntity(const string& id)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Text3dEntity>>& Text3dEntityManager::getEntities()
+const unordered_map<string, shared_ptr<Text3dEntity>>& Text3dEntityManager::getEntities() const
 {
 	return _entities;
 }

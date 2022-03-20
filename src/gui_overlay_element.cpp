@@ -103,7 +103,7 @@ const bool GuiOverlay::isTextFieldExisting(const string& id) const
 	return false;
 }
 
-shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string& id) const
+const shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string& id) const
 {
 	for(const auto& scrollingList : _scrollingLists)
 	{
@@ -116,7 +116,7 @@ shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string& id) cons
 	abort();
 }
 
-shared_ptr<GuiInputField> GuiOverlay::getInputField(const string& id) const
+const shared_ptr<GuiInputField> GuiOverlay::getInputField(const string& id) const
 {
 	for(const auto& inputField : _inputFields)
 	{
@@ -129,7 +129,7 @@ shared_ptr<GuiInputField> GuiOverlay::getInputField(const string& id) const
 	abort();
 }
 
-shared_ptr<GuiButton> GuiOverlay::getButton(const string& id) const
+const shared_ptr<GuiButton> GuiOverlay::getButton(const string& id) const
 {
 	for(const auto& button : _buttons)
 	{
@@ -142,7 +142,7 @@ shared_ptr<GuiButton> GuiOverlay::getButton(const string& id) const
 	abort();
 }
 
-shared_ptr<GuiRectangle> GuiOverlay::getRectangle(const string& id) const
+const shared_ptr<GuiRectangle> GuiOverlay::getRectangle(const string& id) const
 {
 	for(const auto& rectangle : _rectangles)
 	{
@@ -155,7 +155,7 @@ shared_ptr<GuiRectangle> GuiOverlay::getRectangle(const string& id) const
 	abort();
 }
 
-shared_ptr<GuiTextField> GuiOverlay::getTextField(const string& id) const
+const shared_ptr<GuiTextField> GuiOverlay::getTextField(const string& id) const
 {
 	for(const auto& textField : _textFields)
 	{

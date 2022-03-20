@@ -35,7 +35,13 @@ public:
 	void deleteChoiceForm(const string& id);
 	void createAnswerForm(const string& id, const string& title, const fvec2& position);
 
-	const string checkChoiceForm(const string& id);
+	const vector<shared_ptr<GuiScrollingList>>& getScrollingLists() const;
+	const vector<shared_ptr<GuiInputField>>& getInputFields() const;
+	const vector<shared_ptr<GuiButton>>& getButtons() const;
+	const vector<shared_ptr<GuiRectangle>>& getRectangles() const;
+	const vector<shared_ptr<GuiTextField>>& getTextFields() const;
+
+	const string checkChoiceForm(const string& id) const;
 
 	const bool isFocused() const;
 	const bool isScrollingListExisting(const string& id) const;
@@ -57,16 +63,11 @@ public:
 	const bool isAnswerFormDenied(const string& id);
 	const bool isAnswerFormExisting(const string& id) const;
 
-	const vector<shared_ptr<GuiScrollingList>>& getScrollingLists() const;
-	const vector<shared_ptr<GuiInputField>>& getInputFields() const;
-	const vector<shared_ptr<GuiButton>>& getButtons() const;
-	const vector<shared_ptr<GuiRectangle>>& getRectangles() const;
-	const vector<shared_ptr<GuiTextField>>& getTextFields() const;
-	shared_ptr<GuiScrollingList> getScrollingList(const string& id) const;
-	shared_ptr<GuiInputField> getInputField(const string& id) const;
-	shared_ptr<GuiButton> getButton(const string& id) const;
-	shared_ptr<GuiRectangle> getRectangle(const string& id) const;
-	shared_ptr<GuiTextField> getTextField(const string& id) const;
+	const shared_ptr<GuiScrollingList> getScrollingList(const string& id) const;
+	const shared_ptr<GuiInputField> getInputField(const string& id) const;
+	const shared_ptr<GuiButton> getButton(const string& id) const;
+	const shared_ptr<GuiRectangle> getRectangle(const string& id) const;
+	const shared_ptr<GuiTextField> getTextField(const string& id) const;
 
 private:
 	void _createValueForm(const string& id, const string& title, const string& valueString, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition, bool onlyNumbers, bool minusAllowed);
@@ -75,18 +76,18 @@ private:
 
 	const bool _checkValueForm(const string& id, string& valueString, const vector<string>& forbiddenValueStrings);
 
-	vector<shared_ptr<GuiScrollingList>> _scrollingLists;
-	vector<shared_ptr<GuiInputField>> _inputFields;
-	vector<shared_ptr<GuiButton>> _buttons;
-	vector<shared_ptr<GuiRectangle>> _rectangles;
-	vector<shared_ptr<GuiTextField>> _textFields;
-
-	vector<string> _valueFormIds;
-	string _choiceFormId = "";
-	string _answerFormId = "";
-
 	static inline const fvec3 FORM_TITLE_RECT_COLOR = fvec3(0.05f);
 	static inline const fvec3 FORM_TITLE_TEXT_COLOR = fvec3(1.0f);
+
+	vector<shared_ptr<GuiScrollingList>> _scrollingLists = {};
+	vector<shared_ptr<GuiInputField>> _inputFields = {};
+	vector<shared_ptr<GuiButton>> _buttons = {};
+	vector<shared_ptr<GuiRectangle>> _rectangles = {};
+	vector<shared_ptr<GuiTextField>> _textFields = {};
+	vector<string> _valueFormIds = {};
+
+	string _choiceFormId = "";
+	string _answerFormId = "";
 
 	bool _isFocused = false;
 	bool _mustDeleteValueForms = false;

@@ -64,7 +64,7 @@ void SkyEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 	_renderStorage = renderStorage;
 }
 
-shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& id)
+const shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -76,7 +76,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& id)
 	return iterator->second;
 }
 
-shared_ptr<SkyEntity> SkyEntityManager::getSelectedEntity()
+const shared_ptr<SkyEntity> SkyEntityManager::getSelectedEntity() const
 {
 	if(_entities.empty() || _selectedEntityId.empty())
 	{
@@ -86,7 +86,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getSelectedEntity()
 	return getEntity(_selectedEntityId);
 }
 
-const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntities()
+const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntities() const
 {
 	return _entities;
 }

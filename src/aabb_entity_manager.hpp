@@ -23,11 +23,12 @@ public:
 	void deleteEntity(const string& id);
 	void deleteEntities();
 
+	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities() const;
+
 	const bool isEntityExisting(const string& id) const;
 	const bool isEntitiesExisting() const;
 
-	const shared_ptr<AabbEntity> getEntity(const string& id);
-	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities();
+	const shared_ptr<AabbEntity> getEntity(const string& id) const;
 
 private:
 	static inline constexpr float MIN_SIZE = 0.1f;
@@ -35,7 +36,7 @@ private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _standingVertexBuffer;
 
-	unordered_map<string, shared_ptr<AabbEntity>> _entities;
+	unordered_map<string, shared_ptr<AabbEntity>> _entities = {};
 
 	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
 	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;

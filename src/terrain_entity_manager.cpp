@@ -4,7 +4,7 @@
 using std::make_shared;
 using std::min;
 
-shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& id)
+const shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -16,7 +16,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& id)
 	return iterator->second;
 }
 
-shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedEntity()
+const shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedEntity() const
 {
 	if(_entities.empty() || _selectedEntityId.empty())
 	{
@@ -26,7 +26,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedEntity()
 	return getEntity(_selectedEntityId);
 }
 
-const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::getEntities()
+const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::getEntities() const
 {
 	return _entities;
 }

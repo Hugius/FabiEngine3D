@@ -138,12 +138,12 @@ const string& GuiButton::getParentId() const
 	return _parentId;
 }
 
-shared_ptr<GuiRectangle> GuiButton::getRectangle() const
+const shared_ptr<GuiRectangle> GuiButton::getRectangle() const
 {
 	return _rectangle;
 }
 
-shared_ptr<GuiTextField> GuiButton::getTextField() const
+const shared_ptr<GuiTextField> GuiButton::getTextField() const
 {
 	return _textField;
 }

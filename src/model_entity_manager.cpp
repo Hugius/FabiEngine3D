@@ -7,7 +7,7 @@ using std::make_shared;
 using std::max;
 using std::map;
 
-shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& id)
+const shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -19,7 +19,7 @@ shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& id)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEntities()
+const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEntities() const
 {
 	return _entities;
 }

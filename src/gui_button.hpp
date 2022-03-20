@@ -14,6 +14,7 @@ public:
 
 	virtual void update(bool isHoverable);
 	virtual void changeTextContent(const string& content);
+
 	void setVisible(bool isVisible);
 	void setHoverable(bool isHoverable);
 
@@ -23,15 +24,14 @@ public:
 	const bool isHoverable() const;
 	const bool isHovered() const;
 
-	shared_ptr<GuiRectangle> getRectangle() const;
-	shared_ptr<GuiTextField> getTextField() const;
+	const shared_ptr<GuiRectangle> getRectangle() const;
+	const shared_ptr<GuiTextField> getTextField() const;
 
 protected:
 	void _updateHovering(bool isHoverable);
 
 	const string _id;
 	const string _parentId;
-
 	const fvec3 _hoverColor;
 	const fvec3 _textHoverColor;
 

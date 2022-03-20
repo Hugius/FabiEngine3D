@@ -24,17 +24,18 @@ public:
 	void deleteEntity(const string& id);
 	void deleteEntities();
 
+	const unordered_map<string, shared_ptr<Text3dEntity>>& getEntities() const;
+
 	const bool isEntityExisting(const string& id) const;
 	const bool isEntitiesExisting() const;
 
-	const unordered_map<string, shared_ptr<Text3dEntity>>& getEntities();
-	shared_ptr<Text3dEntity> getEntity(const string& id);
+	const shared_ptr<Text3dEntity> getEntity(const string& id) const;
 
 private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
 	const shared_ptr<VertexBuffer> _standingVertexBuffer;
 
-	unordered_map<string, shared_ptr<Text3dEntity>> _entities;
+	unordered_map<string, shared_ptr<Text3dEntity>> _entities = {};
 
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;

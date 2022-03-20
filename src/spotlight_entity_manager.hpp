@@ -21,12 +21,12 @@ public:
 	const bool isEntityExisting(const string& id) const;
 	const bool isEntitiesExisting() const;
 
-	const unordered_map<string, shared_ptr<SpotlightEntity>>& getEntities();
+	const unordered_map<string, shared_ptr<SpotlightEntity>>& getEntities() const;
 
-	shared_ptr<SpotlightEntity> getEntity(const string& id);
+	const shared_ptr<SpotlightEntity> getEntity(const string& id) const;
 
 private:
-	unordered_map<string, shared_ptr<SpotlightEntity>> _entities;
-
 	static inline constexpr unsigned int MAX_ENTITY_COUNT = 64;
+
+	unordered_map<string, shared_ptr<SpotlightEntity>> _entities = {};
 };

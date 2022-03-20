@@ -5,16 +5,20 @@
 - All scripts will be saved in `~\projects\<your_project>\scripts\`.
 - You can create/edit/rename/delete scripts.
 - You can search in scripts for a certain keyword (case sensitive).
-- Script files have a line limit of 99, to force you to create small but readable scripts.
+- Script files have a line limit of 99.
 
 ## 2. Controls
 
-- You can use the mouse or arrow keys to navigate through the code
-- Press `LMB` to place the cursor
-- Hold `RMB` to select lines
-- Scroll `MMB` to scroll through the lines
-- Press `ENTER` to add a new line
-- Press `BACKSPACE` to remove a character
-- Press `CTRL` + `C` to copy 1 or more lines
-- Press `CTRL` + `V` to paste 1 or more lines
-- Press `ESC` to go back
+- Press `LMB` or the arrow keys to move the cursor.
+- Scroll `MMB` to scroll vertically.
+- Scroll `MMB` while holding `CTRL` to scroll horizontally.
+- Press `ENTER` to create a new line.
+- Press `BACKSPACE` to delete the left character.
+- Press `DELETE` to delete the right character.
+- Hold `RMB` to select characters.
+- Hold `A`while holding `CTRL` to select all characters in the current line.
+- Press `Z` while holding `CTRL` to delete the selected characters.
+- Press `C` while holding `CTRL` to copy the selected characters.
+- Press `X` while holding `CTRL` to copy and delete the selected characters.
+- Press `V` while holding `CTRL` to paste the selected characters.
+- Press `ESC` to go back.

@@ -80,7 +80,7 @@ void ScriptEditor::_updateTextSelector()
 		}
 	}
 
-	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE) && hoveredAabbId.find('_') != string::npos)
+	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && hoveredAabbId.find('_') != string::npos)
 	{
 		if(!(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::FULL)))
 		{
@@ -129,7 +129,21 @@ void ScriptEditor::_updateTextSelector()
 		const auto firstCharacterIndex = static_cast<unsigned int>(stoi(_firstSelectionAabbId.substr(_firstSelectionAabbId.find('_') + 1)));
 		const auto secondCharacterIndex = static_cast<unsigned int>(stoi(_secondSelectionAabbId.substr(_secondSelectionAabbId.find('_') + 1)));
 
-		if(isControlDown && _fe3d->input_isKeyPressed(InputType::KEY_R))
+		if(isControlDown && (_fe3d->input_isKeyPressed(InputType::KEY_C) || _fe3d->input_isKeyPressed(InputType::KEY_X)))
+		{
+			const auto lineText = scriptFile->getLine(lineIndex);
+
+			if(firstCharacterIndex < secondCharacterIndex)
+			{
+				_selectionClipboard = lineText.substr(static_cast<size_t>(firstCharacterIndex), static_cast<size_t>(secondCharacterIndex - firstCharacterIndex + 1));
+			}
+			else
+			{
+				_selectionClipboard = lineText.substr(static_cast<size_t>(secondCharacterIndex), static_cast<size_t>(firstCharacterIndex - secondCharacterIndex + 1));
+			}
+		}
+
+		if(isControlDown && (_fe3d->input_isKeyPressed(InputType::KEY_Z) || _fe3d->input_isKeyPressed(InputType::KEY_X)))
 		{
 			auto lineText = scriptFile->getLine(lineIndex);
 
@@ -152,20 +166,6 @@ void ScriptEditor::_updateTextSelector()
 			_hasTextChanged = true;
 
 			_clearSelection();
-		}
-
-		if(isControlDown && _fe3d->input_isKeyPressed(InputType::KEY_C))
-		{
-			const auto lineText = scriptFile->getLine(lineIndex);
-
-			if(firstCharacterIndex < secondCharacterIndex)
-			{
-				_selectionClipboard = lineText.substr(static_cast<size_t>(firstCharacterIndex), static_cast<size_t>(secondCharacterIndex - firstCharacterIndex + 1));
-			}
-			else
-			{
-				_selectionClipboard = lineText.substr(static_cast<size_t>(secondCharacterIndex), static_cast<size_t>(firstCharacterIndex - secondCharacterIndex + 1));
-			}
 		}
 	}
 	else

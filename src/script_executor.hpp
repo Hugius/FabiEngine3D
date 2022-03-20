@@ -21,9 +21,9 @@ public:
 private:
 	void _validateExecution();
 
-	vector<pair<string, unsigned int>> _pausedSound3dIds;
-	vector<pair<string, unsigned int>> _pausedSound2dIds;
-	vector<string> _pausedClockIds;
+	vector<pair<string, unsigned int>> _pausedSound3dIds = {};
+	vector<pair<string, unsigned int>> _pausedSound2dIds = {};
+	vector<string> _pausedClockIds = {};
 
 	bool _isStarted = false;
 	bool _isRunning = false;

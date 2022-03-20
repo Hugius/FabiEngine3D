@@ -21,16 +21,16 @@ public:
 
 	const bool isConstant() const;
 
-	shared_ptr<ScriptValue> getValue(unsigned int index = 0) const;
+	const shared_ptr<ScriptValue> getValue(unsigned int index = 0) const;
+
 	const ScriptVariableScope getScope() const;
 	const ScriptVariableType getType() const;
 
 private:
-	string _id;
+	const string _id;
+	const bool _isConstant;
+	const ScriptVariableScope _scope;
+	const ScriptVariableType _type;
 
-	bool _isConstant;
-
-	vector<shared_ptr<ScriptValue>> _values;
-	ScriptVariableScope _scope;
-	ScriptVariableType _type;
+	vector<shared_ptr<ScriptValue>> _values = {};
 };

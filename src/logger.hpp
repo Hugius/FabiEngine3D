@@ -83,8 +83,6 @@ public:
 	static unsigned int getMessageCount();
 
 private:
-	static void _printPrefix(LogMessageType type);
-
 	template<typename T, typename...Rest> static void _printMessage(T first, Rest&&...rest)
 	{
 		ostringstream oss;
@@ -99,6 +97,8 @@ private:
 		_messageQueue.back() += oss.str();
 		_messageCount++;
 	}
+
+	static void _printPrefix(LogMessageType type);
 
 	static inline vector<string> _messageQueue = {};
 

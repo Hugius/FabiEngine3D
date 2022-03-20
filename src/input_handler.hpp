@@ -41,13 +41,13 @@ private:
 		return find(list.begin(), list.end(), element) != list.end();
 	}
 
+	vector<InputType> _keysDown = {};
+	vector<InputType> _keysPressed = {};
+	vector<InputType> _keysPressed_mayNotPress = {};
+	vector<InputType> _mouseDown = {};
+	vector<InputType> _mousePressed = {};
+	vector<InputType> _mousePressed_mayNotPress = {};
+
 	int _mouseWheelX = 0;
 	int _mouseWheelY = 0;
-
-	vector<InputType> _keysDown;
-	vector<InputType> _keysPressed;
-	vector<InputType> _keysPressed_mayNotPress;
-	vector<InputType> _mouseDown;
-	vector<InputType> _mousePressed;
-	vector<InputType> _mousePressed_mayNotPress;
 };

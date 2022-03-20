@@ -32,10 +32,10 @@ public:
 	const float getSoundLeftIntensity(const string& id, unsigned int index) const;
 	const float getSoundRightIntensity(const string& id, unsigned int index) const;
 
-	const int getPlayCount(const string& id, unsigned int index) const;
-
 	const unsigned int getStartedSoundCount(const string& id) const;
 	const unsigned int getSoundTime(const string& id, unsigned int index) const;
+
+	const int getPlayCount(const string& id, unsigned int index) const;
 
 	const bool isSoundStarted(const string& id, unsigned int index) const;
 	const bool isSoundPaused(const string& id, unsigned int index) const;
@@ -49,14 +49,14 @@ private:
 
 	static inline constexpr unsigned int MAX_CHANNEL_COUNT = 1024;
 
-	unordered_map<string, vector<shared_ptr<StartedSound3D>>> _startedSounds;
+	unordered_map<string, vector<shared_ptr<StartedSound3D>>> _startedSounds = {};
+
+	vector<pair<string, unsigned int>> _volumeThreadQueue;
+
+	unsigned int _channelCounter = 0;
 
 	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 
-	unsigned int _channelCounter = 0;
-
 	future<void> _volumeThread = {};
-
-	vector<pair<string, unsigned int>> _volumeThreadQueue;
 };

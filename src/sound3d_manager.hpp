@@ -17,14 +17,15 @@ public:
 	void deleteSound(const string& id);
 	void deleteSounds();
 
+	const unordered_map<string, shared_ptr<Sound3d>>& getSounds() const;
+
 	const bool isSoundExisting(const string& id) const;
 	const bool isSoundsExisting() const;
 
 	const shared_ptr<Sound3d> getSound(const string& id) const;
-	const unordered_map<string, shared_ptr<Sound3d>>& getSounds() const;
 
 private:
-	unordered_map<string, shared_ptr<Sound3d>> _sounds;
+	unordered_map<string, shared_ptr<Sound3d>> _sounds = {};
 
 	shared_ptr<AudioLoader> _audioLoader = nullptr;
 	shared_ptr<WaveBufferCache> _waveBufferCache = nullptr;

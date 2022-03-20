@@ -24,7 +24,7 @@ public:
 private:
 	const string _id;
 
-	shared_ptr<WaveBuffer> _waveBuffer = nullptr;
-
 	string _audioPath = "";
+
+	shared_ptr<WaveBuffer> _waveBuffer = nullptr;
 };

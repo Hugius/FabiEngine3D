@@ -72,7 +72,7 @@ void ScriptVariable::deleteValues()
 	_values.clear();
 }
 
-shared_ptr<ScriptValue> ScriptVariable::getValue(unsigned int index) const
+const shared_ptr<ScriptValue> ScriptVariable::getValue(unsigned int index) const
 {
 	if(index >= _values.size())
 	{

@@ -35,9 +35,9 @@ public:
 	const bool isClockPaused(const string& id) const;
 
 private:
+	static inline const unsigned int UPDATES_PER_SECOND = 144;
+
 	unordered_map<string, unique_ptr<Clock>> _clocks;
 
 	unsigned int _passedUpdateCount = -1;
-
-	static inline const unsigned int UPDATES_PER_SECOND = 144;
 };

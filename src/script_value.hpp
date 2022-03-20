@@ -36,5 +36,5 @@ private:
 
 	bool _boolean = false;
 
-	ScriptValueType _type;
+	ScriptValueType _type = {};
 };

@@ -6,7 +6,7 @@
 using std::ofstream;
 using std::endl;
 
-const bool CustomWorldBuilder::saveWorldToFile(const string& fileName)
+const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + _currentProjectId + "\\worlds\\custom\\" + fileName + ".fe3d");

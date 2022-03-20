@@ -82,7 +82,7 @@ const bool Script::isEmpty()
 	return (getScriptFileCount() == 0);
 }
 
-shared_ptr<ScriptFile> Script::getScriptFile(const string& id) const
+const shared_ptr<ScriptFile> Script::getScriptFile(const string& id) const
 {
 	for(const auto& file : _scriptFiles)
 	{

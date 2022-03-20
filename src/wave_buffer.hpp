@@ -14,11 +14,9 @@ public:
 	~WaveBuffer();
 
 	const PWAVEFORMATEX getFormat() const;
-
 	const PWAVEHDR getHeader() const;
 
 private:
 	PWAVEFORMATEX _format = nullptr;
-
 	PWAVEHDR _header = nullptr;
 };

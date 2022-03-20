@@ -10,9 +10,9 @@ public:
 	void deleteScriptFile(const string& id);
 	void clear();
 
-	const vector<string> getScriptFileIds() const;
-
 	const unordered_map<string, unsigned int> findKeyword(const string& keyword) const;
+
+	const vector<string> getScriptFileIds() const;
 
 	const unsigned int getScriptFileCount() const;
 	const unsigned int getTotalLineCount() const;
@@ -20,8 +20,8 @@ public:
 	const bool isScriptFileExisting(const string& id) const;
 	const bool isEmpty();
 
-	shared_ptr<ScriptFile> getScriptFile(const string& id) const;
+	const shared_ptr<ScriptFile> getScriptFile(const string& id) const;
 
 private:
-	vector<shared_ptr<ScriptFile>> _scriptFiles;
+	vector<shared_ptr<ScriptFile>> _scriptFiles = {};
 };

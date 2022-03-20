@@ -18,9 +18,6 @@ public:
 	void setHeader(PWAVEHDR value);
 	void setHandle(HWAVEOUT value);
 
-	const PWAVEHDR getHeader() const;
-	const HWAVEOUT getHandle() const;
-
 	const float getLeftIntensity() const;
 	const float getRightIntensity() const;
 	const float getVolume() const;
@@ -29,12 +26,15 @@ public:
 
 	const bool isPaused() const;
 
-private:
-	int _playCount = 0;
+	const PWAVEHDR getHeader() const;
+	const HWAVEOUT getHandle() const;
 
+private:
 	float _leftIntensity = 1.0f;
 	float _rightIntensity = 1.0f;
 	float _volume = 1.0f;
+
+	int _playCount = 0;
 
 	bool _isPaused = false;
 

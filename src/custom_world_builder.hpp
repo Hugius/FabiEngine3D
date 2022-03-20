@@ -25,8 +25,7 @@ public:
 	const string& getLoadedWorldId() const;
 
 	const bool loadWorldFromFile(const string& fileName);
-	const bool saveWorldToFile(const string& fileName);
-
+	const bool saveWorldToFile(const string& fileName) const;
 	const bool isSkyAdded(const string& id) const;
 	const bool isTerrainAdded(const string& id) const;
 	const bool isWaterAdded(const string& id) const;
@@ -41,34 +40,34 @@ public:
 	const bool isGraphicsAdded() const;
 
 private:
-	shared_ptr<EngineInterface> _fe3d = nullptr;
-
-	vector<string> _addedSkyIds;
-	vector<string> _addedTerrainIds;
-	vector<string> _addedWaterIds;
-	vector<string> _addedModelIds;
-	vector<string> _addedQuad3dIds;
-	vector<string> _addedText3dIds;
-	vector<string> _addedAabbIds;
-	vector<string> _addedPointlightIds;
-	vector<string> _addedSpotlightIds;
-	vector<string> _addedReflectionIds;
-	vector<string> _addedSound3dIds;
-	vector<string> _loadedSkyIds;
-	vector<string> _loadedTerrainIds;
-	vector<string> _loadedWaterIds;
-	vector<string> _loadedModelIds;
-	vector<string> _loadedQuad3dIds;
-	vector<string> _loadedText3dIds;
-	vector<string> _loadedAabbIds;
-	vector<string> _loadedPointlightIds;
-	vector<string> _loadedSpotlightIds;
-	vector<string> _loadedReflectionIds;
-	vector<string> _loadedSound3dIds;
+	vector<string> _addedSkyIds = {};
+	vector<string> _addedTerrainIds = {};
+	vector<string> _addedWaterIds = {};
+	vector<string> _addedModelIds = {};
+	vector<string> _addedQuad3dIds = {};
+	vector<string> _addedText3dIds = {};
+	vector<string> _addedAabbIds = {};
+	vector<string> _addedPointlightIds = {};
+	vector<string> _addedSpotlightIds = {};
+	vector<string> _addedReflectionIds = {};
+	vector<string> _addedSound3dIds = {};
+	vector<string> _loadedSkyIds = {};
+	vector<string> _loadedTerrainIds = {};
+	vector<string> _loadedWaterIds = {};
+	vector<string> _loadedModelIds = {};
+	vector<string> _loadedQuad3dIds = {};
+	vector<string> _loadedText3dIds = {};
+	vector<string> _loadedAabbIds = {};
+	vector<string> _loadedPointlightIds = {};
+	vector<string> _loadedSpotlightIds = {};
+	vector<string> _loadedReflectionIds = {};
+	vector<string> _loadedSound3dIds = {};
 
 	string _currentProjectId = "";
 	string _loadedWorldId = "";
 
 	bool _isGraphicsAdded = false;
 	bool _isGraphicsLoaded = false;
+
+	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

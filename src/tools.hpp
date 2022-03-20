@@ -23,6 +23,10 @@ public:
 
 	static const vector<string> getFileNamesFromDirectory(const string& path);
 	static const vector<string> getDirectoryNamesFromDirectory(const string& path);
+	static const vector<string> splitStringIntoMultiple(const string& mergedString, char delimiter);
+
+	static const pair<string, string> splitStringIntoTwo(const string& mergedString, char delimiter);
+
 	static const string vec2str(const ivec2& vec);
 	static const string vec2str(const fvec2& vec);
 	static const string vec2str(const fvec3& vec);
@@ -32,8 +36,6 @@ public:
 	static const string chooseExplorerDirectory(const string& startingDirectory);
 	static const string mergeStrings(const string& firstString, const string& secondString, char delimiter);
 	static const string mergeStrings(const vector<string>& stringList, char delimiter);
-	static const pair<string, string> splitStringIntoTwo(const string& mergedString, char delimiter);
-	static const vector<string> splitStringIntoMultiple(const string& mergedString, char delimiter);
 
 	static const fvec2 convertToNdc(const ivec2& position);
 	static const fvec2 convertPositionRelativeToDisplay(const fvec2& position);

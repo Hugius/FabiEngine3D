@@ -19,11 +19,12 @@ public:
 	void deleteBuffer(const string& filePath);
 	void clearBuffers();
 
-	const shared_ptr<WaveBuffer> getBuffer(const string& filePath) const;
-
 	const unordered_map<string, shared_ptr<WaveBuffer>>& getBuffers() const;
+
 	const vector<string> getFilePaths() const;
 
+	const shared_ptr<WaveBuffer> getBuffer(const string& filePath) const;
+
 private:
-	unordered_map<string, shared_ptr<WaveBuffer>> _buffers;
+	unordered_map<string, shared_ptr<WaveBuffer>> _buffers = {};
 };

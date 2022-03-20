@@ -113,7 +113,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	}
 }
 
-const bool ScriptInterpreter::_isLocalVariableExisting(const string& variableId)
+const bool ScriptInterpreter::_isLocalVariableExisting(const string& variableId) const
 {
 	const auto variables = _localVariables[_executionDepth];
 
@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_isGlobalVariableExisting(const string& variableId
 	return (_globalVariables.find(variableId) != _globalVariables.end());
 }
 
-shared_ptr<ScriptVariable> ScriptInterpreter::_getLocalVariable(const string& variableId)
+const shared_ptr<ScriptVariable> ScriptInterpreter::_getLocalVariable(const string& variableId) const
 {
 	auto& variables = _localVariables[_executionDepth];
 	auto iterator = variables.find(variableId);
@@ -138,7 +138,7 @@ shared_ptr<ScriptVariable> ScriptInterpreter::_getLocalVariable(const string& va
 	abort();
 }
 
-shared_ptr<ScriptVariable> ScriptInterpreter::_getGlobalVariable(const string& variableId)
+const shared_ptr<ScriptVariable> ScriptInterpreter::_getGlobalVariable(const string& variableId) const
 {
 	auto iterator = _globalVariables.find(variableId);
 

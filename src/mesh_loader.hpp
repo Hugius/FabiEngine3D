@@ -18,7 +18,7 @@ public:
 	const shared_ptr<Mesh> loadMesh(const string& filePath);
 
 private:
-	shared_ptr<Mesh> _loadMesh(const string& filePath);
+	shared_ptr<Mesh> _loadMesh(const string& filePath) const;
 
-	unordered_map<string, shared_ptr<Mesh>> _cache;
+	unordered_map<string, shared_ptr<Mesh>> _cache = {};
 };

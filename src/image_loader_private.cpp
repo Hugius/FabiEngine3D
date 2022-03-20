@@ -6,7 +6,7 @@
 
 using std::make_shared;
 
-shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
+shared_ptr<Image> ImageLoader::_loadImage(const string& filePath) const
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto fullFilePath = (rootPath + filePath);

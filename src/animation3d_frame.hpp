@@ -17,7 +17,6 @@ class Animation3dFrame final
 	unordered_map<string, fvec3> targetTransformations;
 	unordered_map<string, fvec3> rotationOrigins;
 	unordered_map<string, fvec3> speeds;
-
 	unordered_map<string, SpeedType> speedTypes;
 	unordered_map<string, TransformationType> transformationTypes;
 };

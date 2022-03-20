@@ -23,9 +23,9 @@ public:
 	const shared_ptr<Image> loadImage(const string& filePath);
 
 private:
-	shared_ptr<Image> _loadImage(const string& filePath);
-
-	unordered_map<string, shared_ptr<Image>> _cache;
+	shared_ptr<Image> _loadImage(const string& filePath) const;
 
 	static inline const unsigned int HEADER_SIZE = 18;
+
+	unordered_map<string, shared_ptr<Image>> _cache = {};
 };

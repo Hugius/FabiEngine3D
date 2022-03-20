@@ -39,7 +39,7 @@ const bool Animation2dManager::isAnimationsExisting() const
 	return !_animations.empty();
 }
 
-const shared_ptr<Animation2d> Animation2dManager::getAnimation(const string& id)
+const shared_ptr<Animation2d> Animation2dManager::getAnimation(const string& id) const
 {
 	auto iterator = _animations.find(id);
 
@@ -51,7 +51,7 @@ const shared_ptr<Animation2d> Animation2dManager::getAnimation(const string& id)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Animation2d>>& Animation2dManager::getAnimations()
+const unordered_map<string, shared_ptr<Animation2d>>& Animation2dManager::getAnimations() const
 {
 	return _animations;
 }

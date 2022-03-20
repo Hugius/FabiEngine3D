@@ -39,8 +39,6 @@ public:
 	const vector<pair<string, string>> getStartedQuad3dAnimationIds() const;
 	const vector<pair<string, string>> getStartedQuad2dAnimationIds() const;
 
-	const int getQuad3dAnimationPlayCount(const string& animationId, const string& quadId) const;
-	const int getQuad2dAnimationPlayCount(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad3dAnimationRowIndex(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad2dAnimationRowIndex(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad3dAnimationColumnIndex(const string& animationId, const string& quadId) const;
@@ -49,6 +47,9 @@ public:
 	const unsigned int getQuad2dAnimationIntervalMultiplier(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad3dAnimationIntervalDivider(const string& animationId, const string& quadId) const;
 	const unsigned int getQuad2dAnimationIntervalDivider(const string& animationId, const string& quadId) const;
+
+	const int getQuad3dAnimationPlayCount(const string& animationId, const string& quadId) const;
+	const int getQuad2dAnimationPlayCount(const string& animationId, const string& quadId) const;
 
 	const bool isQuad3dAnimationStarted(const string& animationId, const string& quadId) const;
 	const bool isQuad2dAnimationStarted(const string& animationId, const string& quadId) const;
@@ -63,8 +64,8 @@ private:
 
 	static inline const char DELIMITER = '|';
 
-	unordered_map<string, shared_ptr<StartedAnimation2d>> _startedQuad3dAnimations;
-	unordered_map<string, shared_ptr<StartedAnimation2d>> _startedQuad2dAnimations;
+	unordered_map<string, shared_ptr<StartedAnimation2d>> _startedQuad3dAnimations = {};
+	unordered_map<string, shared_ptr<StartedAnimation2d>> _startedQuad2dAnimations = {};
 
 	shared_ptr<Animation2dManager> _animation2dManager = nullptr;
 	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;

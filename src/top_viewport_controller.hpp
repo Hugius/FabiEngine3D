@@ -37,7 +37,6 @@ public:
 	void inject(shared_ptr<CustomWorldBuilder> customWorldBuilder);
 	void inject(shared_ptr<Script> script);
 	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
-
 	void initialize();
 	void update();
 
@@ -58,9 +57,13 @@ private:
 
 	const bool _prepareProjectChoosing(const string& title) const;
 
-	string _currentProjectId = "";
-
 	static inline const fvec3 FRAME_COLOR = fvec3(0.075f);
+	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
+	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
+	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
+	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
+
+	string _currentProjectId = "";
 
 	bool _isCreatingProject = false;
 	bool _isLoadingProject = false;
@@ -82,9 +85,4 @@ private:
 	shared_ptr<CustomWorldBuilder> _customWorldBuilder = nullptr;
 	shared_ptr<Script> _script = nullptr;
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
-
-	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
-	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
-	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
-	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 };

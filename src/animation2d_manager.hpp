@@ -15,12 +15,13 @@ public:
 	void deleteAnimation(const string& id);
 	void deleteAnimations();
 
+	const unordered_map<string, shared_ptr<Animation2d>>& getAnimations() const;
+
+	const shared_ptr<Animation2d> getAnimation(const string& id) const;
+
 	const bool isAnimationExisting(const string& id) const;
 	const bool isAnimationsExisting() const;
 
-	const shared_ptr<Animation2d> getAnimation(const string& id);
-	const unordered_map<string, shared_ptr<Animation2d>>& getAnimations();
-
 private:
-	unordered_map<string, shared_ptr<Animation2d>> _animations;
+	unordered_map<string, shared_ptr<Animation2d>> _animations = {};
 };

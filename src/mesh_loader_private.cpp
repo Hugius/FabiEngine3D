@@ -12,7 +12,7 @@ using std::ifstream;
 using std::istringstream;
 using std::array;
 
-shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
+shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath) const
 {
 	vector<shared_ptr<MeshPart>> meshParts;
 	vector<fvec3> temp_positions;

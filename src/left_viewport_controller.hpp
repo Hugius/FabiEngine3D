@@ -33,17 +33,19 @@ public:
 	void inject(shared_ptr<SoundEditor> soundEditor);
 	void inject(shared_ptr<WorldEditor> worldEditor);
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
-
 	void initialize();
 	void update();
 
 private:
-	string _lastActiveEditorScreen = "";
-
 	static inline const fvec3 FRAME_COLOR = fvec3(0.175f);
-
+	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);
+	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.5f, 0.5f, 1.0f);
+	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
+	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
+
+	string _lastActiveEditorScreen = "";
 
 	shared_ptr<SkyEditor> _skyEditor = nullptr;
 	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
@@ -58,9 +60,4 @@ private:
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
-
-	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);
-	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.5f, 0.5f, 1.0f);
-	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
-	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 };

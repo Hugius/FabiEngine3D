@@ -23,7 +23,7 @@ public:
 	const shared_ptr<Audio> loadAudio(const string& filePath);
 
 private:
-	shared_ptr<Audio> _loadAudio(const string& filePath);
+	shared_ptr<Audio> _loadAudio(const string& filePath) const;
 
-	unordered_map<string, shared_ptr<Audio>> _cache;
+	unordered_map<string, shared_ptr<Audio>> _cache = {};
 };

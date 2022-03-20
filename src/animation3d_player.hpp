@@ -22,9 +22,9 @@ public:
 
 	const float getModelAnimationSpeedMultiplier(const string& animationId, const string& modelId) const;
 
-	const int getModelAnimationPlayCount(const string& animationId, const string& modelId) const;
-
 	const unsigned int getModelAnimationFrameIndex(const string& animationId, const string& modelId) const;
+
+	const int getModelAnimationPlayCount(const string& animationId, const string& modelId) const;
 
 	const bool isModelAnimationStarted(const string& animationId, const string& modelId) const;
 	const bool isModelAnimationPaused(const string& animationId, const string& modelId) const;

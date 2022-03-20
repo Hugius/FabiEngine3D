@@ -6,7 +6,7 @@
 
 using std::make_shared;
 
-shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath)
+shared_ptr<Audio> AudioLoader::_loadAudio(const string& filePath) const
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto fullFilePath = (rootPath + filePath);

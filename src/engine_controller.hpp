@@ -13,20 +13,17 @@ public:
 	EngineController();
 
 	void inject(shared_ptr<EngineInterface> fe3d);
-
 	void initialize();
 	void update();
 	void terminate();
 
 private:
-	bool _mustPromptOnExit = false;
-
 	static inline const fvec4 RENDER_COLOR = fvec4(0.0f, 0.0f, 0.0f, 1.0f);
-
 	static inline const fvec2 CURSOR_SIZE = fvec2(0.075f);
 
-	shared_ptr<EngineInterface> _fe3d = nullptr;
+	bool _mustPromptOnExit = false;
 
+	shared_ptr<EngineInterface> _fe3d = nullptr;
 	shared_ptr<GuiManager> _guiManager = nullptr;
 	shared_ptr<LeftViewportController> _leftViewportController = nullptr;
 	shared_ptr<RightViewportController> _rightViewportController = nullptr;

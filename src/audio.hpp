@@ -13,7 +13,6 @@ public:
 	const unsigned int getBytesPerBlock() const;
 	const unsigned int getSampleRate() const;
 	const unsigned int getBitsPerSample() const;
-
 	const unsigned int getChannelCount() const;
 
 private:

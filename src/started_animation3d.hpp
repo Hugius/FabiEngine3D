@@ -29,28 +29,28 @@ public:
 	const fvec3& getTotalScaling(const string& partId) const;
 	const fvec3& getTotalSpeed(const string& partId) const;
 
-	const int getPlayCount() const;
-
 	const float getSpeedMultiplier() const;
 
 	const unsigned int getFrameIndex() const;
+
+	const int getPlayCount() const;
 
 	const bool isPaused() const;
 	const bool isAutopaused() const;
 
 private:
-	vector<string> _partIds;
+	unordered_map<string, fvec3> _totalMovements = {};
+	unordered_map<string, fvec3> _totalRotations = {};
+	unordered_map<string, fvec3> _totalScalings = {};
+	unordered_map<string, fvec3> _totalSpeeds = {};
 
-	unordered_map<string, fvec3> _totalMovements;
-	unordered_map<string, fvec3> _totalRotations;
-	unordered_map<string, fvec3> _totalScalings;
-	unordered_map<string, fvec3> _totalSpeeds;
-
-	int _playCount = 0;
+	vector<string> _partIds = {};
 
 	float _speedMultiplier = 1.0f;
 
 	unsigned int _frameIndex = 0;
+
+	int _playCount = 0;
 
 	bool _isPaused = false;
 	bool _isAutopaused = false;

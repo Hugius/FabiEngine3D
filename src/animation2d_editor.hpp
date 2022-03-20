@@ -29,14 +29,14 @@ private:
 	void _updateMiscellaneous();
 
 	static inline const string PREVIEW_QUAD_ID = "@@preview_quad3d";
-	vector<string> _loadedAnimationIds;
-	string _hoveredAnimationId = "";
-	string _currentAnimationId = "";
-
 	static inline const fvec3 PREVIEW_QUAD_POSITION = fvec3(0.0f, 0.0f, -0.75f);
-
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
+
+	vector<string> _loadedAnimationIds;
+
+	string _hoveredAnimationId = "";
+	string _currentAnimationId = "";
 
 	bool _isCreatingAnimation = false;
 	bool _isChoosingAnimation = false;

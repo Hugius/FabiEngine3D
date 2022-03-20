@@ -47,7 +47,6 @@ public:
 	EngineCore();
 
 	void inject(shared_ptr<EngineController> engineController);
-
 	void start();
 	void stop();
 
@@ -147,6 +146,5 @@ private:
 	shared_ptr<Sound2dPlayer> _sound2dPlayer = nullptr;
 	shared_ptr<NetworkingServer> _networkingServer = nullptr;
 	shared_ptr<NetworkingClient> _networkingClient = nullptr;
-
 	shared_ptr<EngineController> _engineController = nullptr;
 };

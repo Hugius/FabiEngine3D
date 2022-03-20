@@ -14,5 +14,5 @@ public:
 	const vector<shared_ptr<MeshPart>>& getParts() const;
 
 private:
-	vector<shared_ptr<MeshPart>> _parts;
+	vector<shared_ptr<MeshPart>> _parts = {};
 };

@@ -39,7 +39,7 @@ const bool Animation3dManager::isAnimationsExisting() const
 	return !_animations.empty();
 }
 
-const shared_ptr<Animation3d> Animation3dManager::getAnimation(const string& id)
+const shared_ptr<Animation3d> Animation3dManager::getAnimation(const string& id) const
 {
 	auto iterator = _animations.find(id);
 
@@ -51,7 +51,7 @@ const shared_ptr<Animation3d> Animation3dManager::getAnimation(const string& id)
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Animation3d>>& Animation3dManager::getAnimations()
+const unordered_map<string, shared_ptr<Animation3d>>& Animation3dManager::getAnimations() const
 {
 	return _animations;
 }

@@ -57,7 +57,6 @@ public:
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<Timer> timer);
-
 	void update();
 	void renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport);
 	void render3dEntities();
@@ -71,7 +70,6 @@ public:
 	void reloadWaterRefractionQuality();
 	void reloadShadowQuality();
 	void setBackgroundColor(const fvec3& color);
-
 	void captureCubeReflections();
 	void capturePlanarReflections();
 	void captureWaterReflections();
@@ -94,7 +92,6 @@ private:
 	void _updateShadows();
 	void _updateMotionBlur();
 	void _updateLensFlare();
-
 	void _renderSkyEntity();
 	void _renderTerrainEntity();
 	void _renderWaterEntity();
@@ -107,6 +104,60 @@ private:
 	void _renderAabbEntities();
 	void _renderFinalScene();
 	void _renderGUI();
+
+	shared_ptr<Quad2dEntity> _renderSurface = nullptr;
+	shared_ptr<ShaderBuffer> _skyEntityColorShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _terrainEntityColorShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _terrainEntityDepthShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _waterEntityColorShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _waterEntityDepthShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _modelEntityColorShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _modelEntityDepthShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _modelEntityShadowShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _quad3dEntityColorShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _quad3dEntityDepthShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _quad3dEntityShadowShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _quad2dEntityColorShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _aabbEntityColorShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _aabbEntityDepthShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _antiAliasingShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _bloomShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _dofShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _lensFlareShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _motionBlurShaderBuffer = nullptr;
+	shared_ptr<ShaderBuffer> _blurShaderBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _cubeReflectionCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _planarReflectionCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _waterReflectionCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _waterRefractionCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _waterOpacityCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _shadowCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _worldDepthCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _worldColorCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _antiAliasingCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _bloomCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _dofCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _lensFlareCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _motionBlurCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _bloomBlurHighQualityCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _bloomBlurLowQualityCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _dofBlurCaptureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _motionBlurBlurCaptureBuffer = nullptr;
+	shared_ptr<SkyEntityManager> _skyEntityManager = nullptr;
+	shared_ptr<TerrainEntityManager> _terrainEntityManager = nullptr;
+	shared_ptr<WaterEntityManager> _waterEntityManager = nullptr;
+	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
+	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;
+	shared_ptr<Text3dEntityManager> _text3dEntityManager = nullptr;
+	shared_ptr<Quad2dEntityManager> _quad2dEntityManager = nullptr;
+	shared_ptr<Text2dEntityManager> _text2dEntityManager = nullptr;
+	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
+	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
+	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
+	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
+	shared_ptr<RenderStorage> _renderStorage = nullptr;
+	shared_ptr<Camera> _camera = nullptr;
+	shared_ptr<Timer> _timer = nullptr;
 
 	unique_ptr<SkyEntityColorRenderer> _skyEntityColorRenderer = nullptr;
 	unique_ptr<TerrainEntityColorRenderer> _terrainEntityColorRenderer = nullptr;
@@ -131,61 +182,4 @@ private:
 	unique_ptr<BlurRenderer> _bloomBlurRendererLowQuality = nullptr;
 	unique_ptr<BlurRenderer> _dofBlurRenderer = nullptr;
 	unique_ptr<BlurRenderer> _motionBlurBlurRenderer = nullptr;
-
-	shared_ptr<Quad2dEntity> _renderSurface = nullptr;
-
-	shared_ptr<ShaderBuffer> _skyEntityColorShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _terrainEntityColorShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _terrainEntityDepthShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _waterEntityColorShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _waterEntityDepthShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _modelEntityColorShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _modelEntityDepthShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _modelEntityShadowShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _quad3dEntityColorShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _quad3dEntityDepthShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _quad3dEntityShadowShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _quad2dEntityColorShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _aabbEntityColorShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _aabbEntityDepthShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _antiAliasingShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _bloomShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _dofShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _lensFlareShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _motionBlurShaderBuffer = nullptr;
-	shared_ptr<ShaderBuffer> _blurShaderBuffer = nullptr;
-
-	shared_ptr<CaptureBuffer> _cubeReflectionCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _planarReflectionCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _waterReflectionCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _waterRefractionCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _waterOpacityCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _shadowCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _worldDepthCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _worldColorCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _antiAliasingCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _bloomCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _dofCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _lensFlareCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _motionBlurCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _bloomBlurHighQualityCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _bloomBlurLowQualityCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _dofBlurCaptureBuffer = nullptr;
-	shared_ptr<CaptureBuffer> _motionBlurBlurCaptureBuffer = nullptr;
-
-	shared_ptr<SkyEntityManager> _skyEntityManager = nullptr;
-	shared_ptr<TerrainEntityManager> _terrainEntityManager = nullptr;
-	shared_ptr<WaterEntityManager> _waterEntityManager = nullptr;
-	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
-	shared_ptr<Quad3dEntityManager> _quad3dEntityManager = nullptr;
-	shared_ptr<Text3dEntityManager> _text3dEntityManager = nullptr;
-	shared_ptr<Quad2dEntityManager> _quad2dEntityManager = nullptr;
-	shared_ptr<Text2dEntityManager> _text2dEntityManager = nullptr;
-	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
-	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
-	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
-	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
-	shared_ptr<RenderStorage> _renderStorage = nullptr;
-	shared_ptr<Camera> _camera = nullptr;
-	shared_ptr<Timer> _timer = nullptr;
 };

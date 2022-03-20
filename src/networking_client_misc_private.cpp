@@ -9,7 +9,7 @@
 using std::launch;
 using std::to_string;
 
-bool NetworkingClient::_sendTcpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted)
+const bool NetworkingClient::_sendTcpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted)
 {
 	if(!_isRunning)
 	{
@@ -57,7 +57,7 @@ bool NetworkingClient::_sendTcpMessageToServer(const string& content, bool isRes
 	return true;
 }
 
-bool NetworkingClient::_sendUdpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted) const
+const bool NetworkingClient::_sendUdpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted) const
 {
 	if(!_isRunning)
 	{
@@ -102,7 +102,7 @@ bool NetworkingClient::_sendUdpMessageToServer(const string& content, bool isRes
 	return true;
 }
 
-int NetworkingClient::_waitForServerConnection(SOCKET socket, const string& ip) const
+const int NetworkingClient::_waitForServerConnection(SOCKET socket, const string& ip) const
 {
 	auto socketAddress = _composeSocketAddress(ip, SERVER_PORT);
 
@@ -186,7 +186,7 @@ void NetworkingClient::_setupUdp()
 	freeaddrinfo(addressInfo);
 }
 
-tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET socket) const
+const tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET socket) const
 {
 	char buffer[TCP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(TCP_BUFFER_BYTES);
@@ -202,7 +202,7 @@ tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET s
 	}
 }
 
-tuple<int, int, string, string, string> NetworkingClient::_receiveUdpMessage(SOCKET socket) const
+const tuple<int, int, string, string, string> NetworkingClient::_receiveUdpMessage(SOCKET socket) const
 {
 	char buffer[UDP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(UDP_BUFFER_BYTES);

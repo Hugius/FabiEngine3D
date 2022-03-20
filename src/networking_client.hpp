@@ -34,6 +34,8 @@ public:
 	void sendUdpMessageToServer(const string& content);
 	void stop();
 
+	const vector<NetworkingServerMessage>& getPendingMessages() const;
+
 	const string& getUsername() const;
 	const string& getServerIp() const;
 
@@ -48,11 +50,25 @@ public:
 	const bool isAcceptedByServer() const;
 	const bool isMessageReserved(const string& message) const;
 
-	const vector<NetworkingServerMessage>& getPendingMessages() const;
-
 private:
 	void _setupTcp();
 	void _setupUdp();
+
+	const tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
+	const tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
+
+	const string _extractSocketIp(SOCKET socket) const;
+	const string _extractSocketPort(SOCKET socket) const;
+	const string _extractAddressIp(sockaddr_in* address) const;
+	const string _extractAddressPort(sockaddr_in* address) const;
+
+	const int _waitForServerConnection(SOCKET socket, const string& ip) const;
+
+	const bool _isMessageReadyUDP(SOCKET socket) const;
+	const bool _sendTcpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted);
+	const bool _sendUdpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted) const;
+
+	const sockaddr_in _composeSocketAddress(const string& ip, const string& port) const;
 
 	static inline const string SERVER_PORT = "61295";
 	static inline constexpr unsigned int MAX_PING_COUNT = 10;
@@ -62,30 +78,14 @@ private:
 	static inline constexpr unsigned int TCP_BUFFER_BYTES = 4096;
 	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_SIZE);
 
-	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
-	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
+	vector<unsigned int> _pingLatencies = {};
+	vector<NetworkingServerMessage> _pendingMessages = {};
 
-	const string _extractSocketIp(SOCKET socket) const;
-	const string _extractSocketPort(SOCKET socket) const;
-
-	int _waitForServerConnection(SOCKET socket, const string& ip) const;
-	const string _extractAddressIp(sockaddr_in* address) const;
-	const string _extractAddressPort(sockaddr_in* address) const;
-	const bool _isMessageReadyUDP(SOCKET socket) const;
-	const sockaddr_in _composeSocketAddress(const string& ip, const string& port) const;
-	bool _sendTcpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted);
-	bool _sendUdpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted) const;
-
-	future<tuple<int, int, long long, string>> _tcpMessageThread;
 	string _username = "";
 	string _serverIp = "";
 	string _tcpMessageBuild = "";
 
 	long long _lastMilliseconds = 0;
-
-	future<int> _connectionThread;
-
-	vector<unsigned int> _pingLatencies;
 
 	bool _isRunning = false;
 	bool _isConnectingToServer = false;
@@ -94,7 +94,9 @@ private:
 	bool _isWaitingForPing = false;
 	bool _mustDisconnectFromServer = false;
 
-	vector<NetworkingServerMessage> _pendingMessages;
-	SOCKET _tcpSocket;
-	SOCKET _udpSocket;
+	SOCKET _tcpSocket = {};
+	SOCKET _udpSocket = {};
+
+	future<tuple<int, int, long long, string>> _tcpMessageThread = {};
+	future<int> _connectionThread = {};
 };

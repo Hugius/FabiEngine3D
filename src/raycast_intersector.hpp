@@ -41,6 +41,8 @@ private:
 
 	const bool _isUnderTerrain(float distance) const;
 
+	unordered_map<string, float> _aabbIntersections = {};
+
 	string _terrainId = "";
 	string _closestAabbId = "";
 
@@ -52,8 +54,6 @@ private:
 
 	bool _isTerrainIntersectionEnabled = false;
 	bool _isAabbIntersectionEnabled = false;
-
-	unordered_map<string, float> _aabbIntersections;
 
 	shared_ptr<RaycastCalculator> _raycastCalculator = nullptr;
 	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;

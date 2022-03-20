@@ -11,6 +11,6 @@ public:
 	const fvec3& getDirection() const;
 
 private:
-	fvec3 _position;
-	fvec3 _direction;
+	const fvec3 _position;
+	const fvec3 _direction;
 };

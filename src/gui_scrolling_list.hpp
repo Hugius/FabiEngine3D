@@ -16,31 +16,31 @@ public:
 	void deleteButtons();
 	void setVisible(bool isVisible);
 
+	const vector<shared_ptr<GuiButton>>& getButtons() const;
+
 	const bool isHovered() const;
 
-	const vector<shared_ptr<GuiButton>>& getButtons() const;
-	shared_ptr<GuiButton> getButton(const string& id) const;
+	const shared_ptr<GuiButton> getButton(const string& id) const;
 
 private:
 	void _updateHovering();
 	void _updateButtons(bool isHoverable);
 	void _updateScrolling();
 
+	static inline constexpr float SCROLL_WHEEL_DIVIDER = 100.0f;
+
 	const fvec3 _buttonColor;
 	const fvec3 _buttonHoverColor;
 	const fvec3 _textColor;
 	const fvec3 _textHoverColor;
-
 	const fvec2 _convertPosition(const fvec2& position) const;
 	const fvec2 _convertSize(const fvec2& size) const;
-
 	const fvec2 _charSize;
 
-	static inline constexpr float SCROLL_WHEEL_DIVIDER = 100.0f;
+	vector<shared_ptr<GuiButton>> _buttons = {};
+
 	float _scrollingOffset = 0.0f;
 	float _scrollingSpeed = 0.0f;
 
 	bool _isHovered = false;
-
-	vector<shared_ptr<GuiButton>> _buttons;
 };

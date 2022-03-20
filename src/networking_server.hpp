@@ -36,6 +36,8 @@ public:
 
 	const vector<string> getClientIps() const;
 	const vector<string> getClientUsernames() const;
+	const vector<NetworkingClientMessage>& getPendingMessages() const;
+
 	const string getNewClientIp() const;
 	const string getNewClientUsername() const;
 	const string getOldClientIp() const;
@@ -47,10 +49,23 @@ public:
 	const bool isClientConnected(const string& username) const;
 	const bool isMessageReserved(const string& message) const;
 
-	const vector<NetworkingClientMessage>& getPendingMessages() const;
-
 private:
 	void _disconnectClient(SOCKET socket);
+
+	const tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
+	const tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
+
+	const string _extractPeerIp(SOCKET socket) const;
+	const string _extractPeerPort(SOCKET socket) const;
+	const string _extractAddressIp(sockaddr_in* address) const;
+	const string _extractAddressPort(sockaddr_in* address) const;
+
+	const bool _sendTcpMessageToClient(SOCKET socket, const string& content, bool isReserved);
+	const bool _sendUdpMessageToClient(const string& clientIp, const string& clientPort, const string& content, bool isReserved) const;
+	const bool _isMessageReadyUDP(SOCKET socket) const;
+
+	const SOCKET _waitForClientConnection(SOCKET socket) const;
+	const sockaddr_in _composeSocketAddress(const string& ip, const string& port) const;
 
 	static inline const string SERVER_PORT = "61295";
 	static inline constexpr unsigned int PORT_DIGIT_COUNT = 5;
@@ -60,30 +75,17 @@ private:
 	static inline constexpr unsigned int TCP_BUFFER_BYTES = 4096;
 	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_SIZE);
 
-	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
-	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
+	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads = {};
+	vector<string> _tcpMessageBuilds = {};
+	vector<string> _clientIps = {};
+	vector<string> _tcpClientPorts = {};
+	vector<string> _udpClientPorts = {};
+	vector<string> _clientUsernames = {};
+	vector<string> _oldClientIps = {};
+	vector<string> _oldClientUsernames = {};
+	vector<NetworkingClientMessage> _pendingMessages = {};
+	vector<SOCKET> _clientSockets = {};
 
-	const string _extractPeerIp(SOCKET socket);
-	const string _extractPeerPort(SOCKET socket);
-
-	const bool _sendTcpMessageToClient(SOCKET socket, const string& content, bool isReserved);
-	const bool _sendUdpMessageToClient(const string& clientIp, const string& clientPort, const string& content, bool isReserved) const;
-
-	const SOCKET _waitForClientConnection(SOCKET socket) const;
-
-	const string _extractAddressIp(sockaddr_in* address) const;
-	const string _extractAddressPort(sockaddr_in* address) const;
-	const bool _isMessageReadyUDP(SOCKET socket) const;
-	const sockaddr_in _composeSocketAddress(const string& ip, const string& port) const;
-
-	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads;
-	vector<string> _tcpMessageBuilds;
-	vector<string> _clientIps;
-	vector<string> _tcpClientPorts;
-	vector<string> _udpClientPorts;
-	vector<string> _clientUsernames;
-	vector<string> _oldClientIps;
-	vector<string> _oldClientUsernames;
 	string _newClientIp = "";
 	string _newClientUsername = "";
 
@@ -91,9 +93,8 @@ private:
 
 	bool _isRunning = false;
 
-	vector<NetworkingClientMessage> _pendingMessages;
-	vector<SOCKET> _clientSockets;
-	future<SOCKET> _connectionThread;
 	SOCKET _tcpSocket;
 	SOCKET _udpSocket;
+
+	future<SOCKET> _connectionThread;
 };

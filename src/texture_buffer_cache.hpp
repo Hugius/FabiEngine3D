@@ -20,18 +20,18 @@ public:
 	void clear2dBuffers();
 	void clear3dBuffers();
 
-	const shared_ptr<TextureBuffer> get2dBuffer(const string& filePath) const;
-	const shared_ptr<TextureBuffer> get3dBuffer(const array<string, 6>& filePath) const;
-
 	const unordered_map<string, shared_ptr<TextureBuffer>>& get2dBuffers() const;
 	const unordered_map<string, shared_ptr<TextureBuffer>>& get3dBuffers() const;
 
 	const vector<string> get2dFilePaths() const;
 	const vector<array<string, 6>> get3dFilePaths() const;
 
+	const shared_ptr<TextureBuffer> get2dBuffer(const string& filePath) const;
+	const shared_ptr<TextureBuffer> get3dBuffer(const array<string, 6>& filePath) const;
+
 private:
 	static inline const char DELIMITER = '|';
 
-	unordered_map<string, shared_ptr<TextureBuffer>> _2dBuffers;
-	unordered_map<string, shared_ptr<TextureBuffer>> _3dBuffers;
+	unordered_map<string, shared_ptr<TextureBuffer>> _2dBuffers = {};
+	unordered_map<string, shared_ptr<TextureBuffer>> _3dBuffers = {};
 };

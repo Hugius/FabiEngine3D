@@ -128,7 +128,7 @@ const SOCKET NetworkingServer::_waitForClientConnection(SOCKET socket) const
 	return accept(socket, nullptr, nullptr);
 }
 
-tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET socket) const
+const tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET socket) const
 {
 	char buffer[TCP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(TCP_BUFFER_BYTES);
@@ -148,7 +148,7 @@ tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET s
 	}
 }
 
-tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOCKET socket) const
+const tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOCKET socket) const
 {
 	char buffer[UDP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(UDP_BUFFER_BYTES);
@@ -170,7 +170,7 @@ tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOC
 	}
 }
 
-const string NetworkingServer::_extractPeerIp(SOCKET socket)
+const string NetworkingServer::_extractPeerIp(SOCKET socket) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
@@ -179,7 +179,7 @@ const string NetworkingServer::_extractPeerIp(SOCKET socket)
 	return _extractAddressIp(&socketAddress);
 }
 
-const string NetworkingServer::_extractPeerPort(SOCKET socket)
+const string NetworkingServer::_extractPeerPort(SOCKET socket) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);

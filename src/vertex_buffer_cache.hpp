@@ -18,14 +18,15 @@ public:
 	void deleteBuffer(const string& filePath, const string& partId);
 	void clearBuffers();
 
-	const shared_ptr<VertexBuffer> getBuffer(const string& filePath, const string& partId) const;
-
 	const unordered_map<string, shared_ptr<VertexBuffer>>& getBuffers() const;
+
 	const vector<string> getFilePaths() const;
 	const vector<string> getPartIds(const string& filePath) const;
+
+	const shared_ptr<VertexBuffer> getBuffer(const string& filePath, const string& partId) const;
 
 private:
 	static inline const char DELIMITER = '|';
 
-	unordered_map<string, shared_ptr<VertexBuffer>> _buffers;
+	unordered_map<string, shared_ptr<VertexBuffer>> _buffers = {};
 };

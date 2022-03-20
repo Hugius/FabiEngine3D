@@ -46,11 +46,11 @@ private:
 	bool _isCameraTerrainResponseEnabled = false;
 	bool _isCameraUnderTerrain = false;
 
-	DirectionOrder _responseDirectionOrder = DirectionOrder::XYZ;
 	shared_ptr<Box> _cameraBox = nullptr;
-
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
 	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
 	shared_ptr<AabbEntityManager> _aabbManager = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
+
+	DirectionOrder _responseDirectionOrder = DirectionOrder::XYZ;
 };

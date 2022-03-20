@@ -136,12 +136,12 @@ const vector<shared_ptr<GuiScreen>>& GuiWindow::getScreens()const
 	return _screens;
 }
 
-shared_ptr<GuiScreen> GuiWindow::getActiveScreen() const
+const shared_ptr<GuiScreen> GuiWindow::getActiveScreen() const
 {
 	return getScreen(_activeScreenId);
 }
 
-shared_ptr<GuiScreen> GuiWindow::getScreen(const string& id) const
+const shared_ptr<GuiScreen> GuiWindow::getScreen(const string& id) const
 {
 	for(const auto& screen : _screens)
 	{

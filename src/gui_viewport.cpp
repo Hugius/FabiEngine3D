@@ -110,7 +110,7 @@ const vector<shared_ptr<GuiWindow>>& GuiViewport::getWindows() const
 	return _windows;
 }
 
-shared_ptr<GuiWindow> GuiViewport::getWindow(const string& id) const
+const shared_ptr<GuiWindow> GuiViewport::getWindow(const string& id) const
 {
 	for(const auto& window : _windows)
 	{

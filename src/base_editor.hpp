@@ -6,13 +6,13 @@
 class BaseEditor
 {
 public:
+	virtual void update() = 0;
+
 	void inject(shared_ptr<EngineInterface> fe3d);
 	void inject(shared_ptr<GuiManager> gui);
 	void setCurrentProjectId(const string& currentProjectId);
 	void load();
 	void unload();
-
-	virtual void update() = 0;
 
 	const bool isLoaded() const;
 

@@ -24,15 +24,16 @@ public:
 	const fvec2& getInitialSize() const;
 
 private:
+	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
+
 	const string _id;
 	const string _entityId;
 	const string _parentId;
-	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 
-	fvec3 _initialColor;
+	fvec3 _initialColor = fvec3(0.0f);
 
-	fvec2 _initialPosition;
-	fvec2 _initialSize;
+	fvec2 _initialPosition = fvec2(0.0f);
+	fvec2 _initialSize = fvec3(0.0f);
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

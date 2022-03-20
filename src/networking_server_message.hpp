@@ -16,7 +16,7 @@ public:
 	const NetworkProtocol getProtocol() const;
 
 private:
-	string _content;
+	const string _content;
 
-	NetworkProtocol _protocol;
+	const NetworkProtocol _protocol;
 };

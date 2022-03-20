@@ -26,10 +26,10 @@ public:
 	const shared_ptr<TextureBuffer> getTexture(unsigned int index) const;
 
 private:
+	vector<shared_ptr<TextureBuffer>> _textures = {};
+
 	ivec2 _position = ivec2(0);
 	ivec2 _size = ivec2(0);
-
-	vector<shared_ptr<TextureBuffer>> _textures;
 
 	unsigned int _fbo = 0;
 	unsigned int _rbo = 0;

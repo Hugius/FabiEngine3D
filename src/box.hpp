@@ -18,12 +18,12 @@ public:
 	const float getFront() const;
 
 private:
-	fvec3 _position;
+	const fvec3 _position;
 
-	float _left;
-	float _right;
-	float _bottom;
-	float _top;
-	float _back;
-	float _front;
+	const float _left;
+	const float _right;
+	const float _bottom;
+	const float _top;
+	const float _back;
+	const float _front;
 };

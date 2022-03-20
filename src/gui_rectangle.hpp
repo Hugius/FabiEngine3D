@@ -10,6 +10,7 @@ public:
 	~GuiRectangle();
 
 	virtual void setVisible(bool isVisible);
+
 	void updateInitialPosition();
 	void updateInitialSize();
 	void updateInitialColor();

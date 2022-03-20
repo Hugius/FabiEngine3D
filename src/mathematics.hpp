@@ -23,6 +23,8 @@ class Math final
 public:
 	Math() = delete;
 
+	static const vector<float> calculateDistributedPositions(unsigned int buttonCount, float buttonHeight);
+
 	static const mat22 invertMatrix(const mat22& matrix);
 	static const mat33 invertMatrix(const mat33& matrix);
 	static const mat44 invertMatrix(const mat44& matrix);
@@ -57,7 +59,6 @@ public:
 	static const fvec2 calculateDifference(const fvec2& firstPosition, const fvec2& secondPosition);
 	static const fvec2 normalize(const fvec2& vector);
 
-	static const vector<float> calculateDistributedPositions(unsigned int buttonCount, float buttonHeight);
 	static const float calculateDeterminant(const mat22& matrix);
 	static const float calculateDeterminant(const mat33& matrix);
 	static const float calculateDeterminant(const mat44& matrix);

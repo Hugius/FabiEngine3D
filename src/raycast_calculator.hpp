@@ -23,6 +23,5 @@ private:
 	const shared_ptr<Ray> _calculateCursorRay(const ivec2& cursorPosition) const;
 
 	shared_ptr<Ray> _cursorRay = nullptr;
-
 	shared_ptr<Camera> _camera = nullptr;
 };

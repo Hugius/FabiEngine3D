@@ -204,7 +204,7 @@ const bool GuiScrollingList::isHovered() const
 	return _isHovered;
 }
 
-shared_ptr<GuiButton> GuiScrollingList::getButton(const string& id) const
+const shared_ptr<GuiButton> GuiScrollingList::getButton(const string& id) const
 {
 	for(const auto& button : _buttons)
 	{

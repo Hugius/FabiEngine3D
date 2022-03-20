@@ -178,7 +178,7 @@ const bool GuiScreen::isTextFieldExisting(const string& id) const
 	return false;
 }
 
-shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string& id) const
+const shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string& id) const
 {
 	for(const auto& scrollingList : _scrollingLists)
 	{
@@ -191,7 +191,7 @@ shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string& id) const
 	abort();
 }
 
-shared_ptr<GuiInputField> GuiScreen::getInputField(const string& id) const
+const shared_ptr<GuiInputField> GuiScreen::getInputField(const string& id) const
 {
 	for(const auto& inputField : _inputFields)
 	{
@@ -204,7 +204,7 @@ shared_ptr<GuiInputField> GuiScreen::getInputField(const string& id) const
 	abort();
 }
 
-shared_ptr<GuiButton> GuiScreen::getButton(const string& id) const
+const shared_ptr<GuiButton> GuiScreen::getButton(const string& id) const
 {
 	for(const auto& button : _buttons)
 	{
@@ -217,7 +217,7 @@ shared_ptr<GuiButton> GuiScreen::getButton(const string& id) const
 	abort();
 }
 
-shared_ptr<GuiRectangle> GuiScreen::getRectangle(const string& id) const
+const shared_ptr<GuiRectangle> GuiScreen::getRectangle(const string& id) const
 {
 	for(const auto& rectangle : _rectangles)
 	{
@@ -230,7 +230,7 @@ shared_ptr<GuiRectangle> GuiScreen::getRectangle(const string& id) const
 	abort();
 }
 
-shared_ptr<GuiTextField> GuiScreen::getTextField(const string& id) const
+const shared_ptr<GuiTextField> GuiScreen::getTextField(const string& id) const
 {
 	for(const auto& textField : _textFields)
 	{

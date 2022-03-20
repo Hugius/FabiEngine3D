@@ -14,13 +14,13 @@ public:
 	ShaderBuffer(const string& vertexFileName, const string& fragmentFileName);
 	~ShaderBuffer();
 
-	void bind();
-	void unbind();
 	template<typename T> void uploadUniform(const string& name, const T& data)
 	{
-		auto uniformId = getUniformId(name);
-		_uploadUniform(uniformId, data);
+		_uploadUniform(getUniformId(name), data);
 	}
+
+	void bind();
+	void unbind();
 
 	const unsigned int getProgramId() const;
 	const unsigned int getUniformId(const string& name);
@@ -37,7 +37,7 @@ private:
 	void _uploadUniform(const unsigned int& uniformId, const mat33& data);
 	void _uploadUniform(const unsigned int& uniformId, const mat44& data);
 
-	unordered_map<string, unsigned int> _uniformCache;
+	unordered_map<string, unsigned int> _uniformCache = {};
 
 	unsigned int _programId = 0;
 };

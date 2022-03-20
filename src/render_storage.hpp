@@ -193,10 +193,10 @@ public:
 	const shared_ptr<TextureBuffer> getLensFlareTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getFinalSceneTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getMotionBlurTextureBuffer() const;
+
 	const BloomType getBloomType() const;
 
 private:
-
 	static inline constexpr unsigned int MIN_BLOOM_QUALITY = 1;
 	static inline constexpr unsigned int MAX_BLOOM_QUALITY = 5;
 	static inline constexpr unsigned int MIN_DOF_QUALITY = 1;
@@ -211,20 +211,6 @@ private:
 	static inline constexpr unsigned int MAX_REFLECTION_QUALITY = 1024;
 	static inline constexpr unsigned int MIN_REFRACTION_QUALITY = 128;
 	static inline constexpr unsigned int MAX_REFRACTION_QUALITY = 1024;
-
-	shared_ptr<TextureBuffer> _primarySceneTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _secondarySceneTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _planarReflectionTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _waterReflectionTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _waterRefractionTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _waterEdgeTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _shadowTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _bloomTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _depthTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _dofTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _lensFlareTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _finalSceneTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _motionBlurTextureBuffer = nullptr;
 
 	string _cursorEntityId = "";
 	string _lensFlareMapPath = "";
@@ -297,6 +283,20 @@ private:
 	bool _isDofDynamic = false;
 	bool _isSkyExposureEnabled = false;
 	bool _isShadowsFollowingCamera = false;
+
+	shared_ptr<TextureBuffer> _primarySceneTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _secondarySceneTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _planarReflectionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _waterReflectionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _waterRefractionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _waterEdgeTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _shadowTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _bloomTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _depthTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _dofTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _lensFlareTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _finalSceneTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _motionBlurTextureBuffer = nullptr;
 
 	BloomType _bloomType = BloomType::EVERYTHING;
 };

@@ -47,7 +47,7 @@ const unsigned int NetworkingClient::getPingLatency() const
 		return 0;
 	}
 
-	return Math::calculateAverage(_pingLatencies);
+	return Mathematics::calculateAverage(_pingLatencies);
 }
 
 const string& NetworkingClient::getUsername() const

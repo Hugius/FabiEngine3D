@@ -26,14 +26,14 @@ void ModelEntity::updateTarget()
 {
 	if(_basePosition != _basePositionTarget)
 	{
-		auto speedMultiplier = Math::normalize(_basePositionTarget - _basePosition);
+		auto speedMultiplier = Mathematics::normalize(_basePositionTarget - _basePosition);
 		_basePosition += (speedMultiplier * _basePositionTargetSpeed);
 		_correctPositionTarget(_basePosition, _basePositionTarget, _basePositionTargetSpeed);
 	}
 
 	if(_baseRotation != _baseRotationTarget)
 	{
-		auto difference = Math::calculateDifference(_baseRotation, _baseRotationTarget);
+		auto difference = Mathematics::calculateDifference(_baseRotation, _baseRotationTarget);
 		fvec3 multiplier = fvec3(
 			((difference.x < 180.0f) ? 1.0f : -1.0f),
 			((difference.y < 180.0f) ? 1.0f : -1.0f),
@@ -47,7 +47,7 @@ void ModelEntity::updateTarget()
 
 	if(_baseSize != _baseSizeTarget)
 	{
-		auto speedMultiplier = Math::normalize(_baseSizeTarget - _baseSize);
+		auto speedMultiplier = Mathematics::normalize(_baseSizeTarget - _baseSize);
 		_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
 		_correctSizeTarget(_baseSize, _baseSizeTarget, _baseSizeTargetSpeed);
 	}
@@ -56,14 +56,14 @@ void ModelEntity::updateTarget()
 	{
 		if(part->position != part->positionTarget)
 		{
-			auto speedMultiplier = Math::normalize(part->positionTarget - part->position);
+			auto speedMultiplier = Mathematics::normalize(part->positionTarget - part->position);
 			part->position += (speedMultiplier * part->positionTargetSpeed);
 			_correctPositionTarget(part->position, part->positionTarget, part->positionTargetSpeed);
 		}
 
 		if(part->rotation != part->rotationTarget)
 		{
-			auto difference = Math::calculateDifference(part->rotation, part->rotationTarget);
+			auto difference = Mathematics::calculateDifference(part->rotation, part->rotationTarget);
 			fvec3 multiplier = fvec3(
 				((difference.x < 180.0f) ? 1.0f : -1.0f),
 				((difference.y < 180.0f) ? 1.0f : -1.0f),
@@ -79,7 +79,7 @@ void ModelEntity::updateTarget()
 
 		if(part->size != part->sizeTarget)
 		{
-			auto speedMultiplier = Math::normalize(part->sizeTarget - part->size);
+			auto speedMultiplier = Mathematics::normalize(part->sizeTarget - part->size);
 			part->size += (speedMultiplier * part->sizeTargetSpeed);
 			_correctSizeTarget(part->size, part->sizeTarget, part->sizeTargetSpeed);
 		}
@@ -92,40 +92,40 @@ void ModelEntity::updateTransformation()
 	{
 		part->transformation = mat44(1.0f);
 
-		auto baseTranslationMatrix = Math::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
+		auto baseTranslationMatrix = Mathematics::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
 		part->transformation = (part->transformation * baseTranslationMatrix);
 
-		auto translationMatrix = Math::createTranslationMatrix(part->position.x, part->position.y, part->position.z);
+		auto translationMatrix = Mathematics::createTranslationMatrix(part->position.x, part->position.y, part->position.z);
 		part->transformation = (part->transformation * translationMatrix);
 
-		auto baseRotationOriginMatrix = Math::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
+		auto baseRotationOriginMatrix = Mathematics::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
 		part->transformation = (part->transformation * baseRotationOriginMatrix);
 
-		auto baseRotationMatrix = Math::createRotationMatrix(
-			Math::convertToRadians(_baseRotation.x),
-			Math::convertToRadians(_baseRotation.y),
-			Math::convertToRadians(_baseRotation.z), _rotationOrder);
+		auto baseRotationMatrix = Mathematics::createRotationMatrix(
+			Mathematics::convertToRadians(_baseRotation.x),
+			Mathematics::convertToRadians(_baseRotation.y),
+			Mathematics::convertToRadians(_baseRotation.z), _rotationOrder);
 		part->transformation = (part->transformation * baseRotationMatrix);
 
-		baseRotationOriginMatrix = Math::createTranslationMatrix(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
+		baseRotationOriginMatrix = Mathematics::createTranslationMatrix(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
 		part->transformation = (part->transformation * baseRotationOriginMatrix);
 
-		auto rotationOriginMatrix = Math::createTranslationMatrix(part->rotationOrigin.x, part->rotationOrigin.y, part->rotationOrigin.z);
+		auto rotationOriginMatrix = Mathematics::createTranslationMatrix(part->rotationOrigin.x, part->rotationOrigin.y, part->rotationOrigin.z);
 		part->transformation = (part->transformation * rotationOriginMatrix);
 
-		auto rotationMatrix = Math::createRotationMatrix(
-			Math::convertToRadians(part->rotation.x),
-			Math::convertToRadians(part->rotation.y),
-			Math::convertToRadians(part->rotation.z), _rotationOrder);
+		auto rotationMatrix = Mathematics::createRotationMatrix(
+			Mathematics::convertToRadians(part->rotation.x),
+			Mathematics::convertToRadians(part->rotation.y),
+			Mathematics::convertToRadians(part->rotation.z), _rotationOrder);
 		part->transformation = (part->transformation * rotationMatrix);
 
-		rotationOriginMatrix = Math::createTranslationMatrix(-part->rotationOrigin.x, -part->rotationOrigin.y, -part->rotationOrigin.z);
+		rotationOriginMatrix = Mathematics::createTranslationMatrix(-part->rotationOrigin.x, -part->rotationOrigin.y, -part->rotationOrigin.z);
 		part->transformation = (part->transformation * rotationOriginMatrix);
 
-		auto baseScalingMatrix = Math::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
+		auto baseScalingMatrix = Mathematics::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
 		part->transformation = (part->transformation * baseScalingMatrix);
 
-		auto scalingMatrix = Math::createScalingMatrix(part->size.x, part->size.y, part->size.z);
+		auto scalingMatrix = Mathematics::createScalingMatrix(part->size.x, part->size.y, part->size.z);
 		part->transformation = (part->transformation * scalingMatrix);
 	}
 }
@@ -168,8 +168,8 @@ void ModelEntity::setBasePosition(const fvec3& value)
 
 void ModelEntity::setBaseRotation(const fvec3& value)
 {
-	_baseRotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-	_baseRotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_baseRotation = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
+	_baseRotationTarget = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
 }
 
 void ModelEntity::setBaseRotationOrigin(const fvec3& value)
@@ -191,8 +191,8 @@ void ModelEntity::setPartPosition(const string& partId, const fvec3& value)
 
 void ModelEntity::setPartRotation(const string& partId, const fvec3& value)
 {
-	_parts.at(partId)->rotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-	_parts.at(partId)->rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_parts.at(partId)->rotation = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
+	_parts.at(partId)->rotationTarget = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
 }
 
 void ModelEntity::setPartRotationOrigin(const string& partId, const fvec3& value)
@@ -216,8 +216,8 @@ void ModelEntity::rotateBase(const fvec3& value)
 {
 	_baseRotation += value;
 	_baseRotationTarget += value;
-	_baseRotation = fvec3(Math::limitAngle(_baseRotation.x), Math::limitAngle(_baseRotation.y), Math::limitAngle(_baseRotation.z));
-	_baseRotationTarget = fvec3(Math::limitAngle(_baseRotationTarget.x), Math::limitAngle(_baseRotationTarget.y), Math::limitAngle(_baseRotationTarget.z));
+	_baseRotation = fvec3(Mathematics::limitAngle(_baseRotation.x), Mathematics::limitAngle(_baseRotation.y), Mathematics::limitAngle(_baseRotation.z));
+	_baseRotationTarget = fvec3(Mathematics::limitAngle(_baseRotationTarget.x), Mathematics::limitAngle(_baseRotationTarget.y), Mathematics::limitAngle(_baseRotationTarget.z));
 }
 
 void ModelEntity::scaleBase(const fvec3& value)
@@ -240,8 +240,8 @@ void ModelEntity::rotatePart(const string& partId, const fvec3& value)
 	fvec3& rotationTarget = _parts.at(partId)->rotationTarget;
 	rotation += value;
 	rotationTarget += value;
-	rotation = fvec3(Math::limitAngle(rotation.x), Math::limitAngle(rotation.y), Math::limitAngle(rotation.z));
-	rotationTarget = fvec3(Math::limitAngle(rotationTarget.x), Math::limitAngle(rotationTarget.y), Math::limitAngle(rotationTarget.z));
+	rotation = fvec3(Mathematics::limitAngle(rotation.x), Mathematics::limitAngle(rotation.y), Mathematics::limitAngle(rotation.z));
+	rotationTarget = fvec3(Mathematics::limitAngle(rotationTarget.x), Mathematics::limitAngle(rotationTarget.y), Mathematics::limitAngle(rotationTarget.z));
 }
 
 void ModelEntity::scalePart(const string& partId, const fvec3& value)
@@ -262,7 +262,7 @@ void ModelEntity::moveBaseTo(const fvec3& target, float speed)
 
 void ModelEntity::rotateBaseTo(const fvec3& target, float speed)
 {
-	_baseRotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
+	_baseRotationTarget = fvec3(Mathematics::limitAngle(target.x), Mathematics::limitAngle(target.y), Mathematics::limitAngle(target.z));
 	_baseRotationTargetSpeed = max(0.0f, speed);
 }
 
@@ -280,7 +280,7 @@ void ModelEntity::movePartTo(const string& partId, const fvec3& target, float sp
 
 void ModelEntity::rotatePartTo(const string& partId, const fvec3& target, float speed)
 {
-	_parts.at(partId)->rotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
+	_parts.at(partId)->rotationTarget = fvec3(Mathematics::limitAngle(target.x), Mathematics::limitAngle(target.y), Mathematics::limitAngle(target.z));
 	_parts.at(partId)->rotationTargetSpeed = max(0.0f, speed);
 }
 
@@ -480,19 +480,19 @@ void ModelEntity::_correctPositionTarget(fvec3& current, const fvec3& target, fl
 
 void ModelEntity::_correctRotationTarget(fvec3& current, const fvec3& target, float speed)
 {
-	current = fvec3(Math::limitAngle(current.x), Math::limitAngle(current.y), Math::limitAngle(current.z));
+	current = fvec3(Mathematics::limitAngle(current.x), Mathematics::limitAngle(current.y), Mathematics::limitAngle(current.z));
 
-	if(Math::calculateAngleDifference(current.x, target.x) <= speed)
+	if(Mathematics::calculateAngleDifference(current.x, target.x) <= speed)
 	{
 		current.x = target.x;
 	}
 
-	if(Math::calculateAngleDifference(current.y, target.y) <= speed)
+	if(Mathematics::calculateAngleDifference(current.y, target.y) <= speed)
 	{
 		current.y = target.y;
 	}
 
-	if(Math::calculateAngleDifference(current.z, target.z) <= speed)
+	if(Mathematics::calculateAngleDifference(current.z, target.z) <= speed)
 	{
 		current.z = target.z;
 	}

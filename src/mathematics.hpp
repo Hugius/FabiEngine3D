@@ -18,10 +18,10 @@
 using std::vector;
 using std::mt19937;
 
-class Math final
+class Mathematics final
 {
 public:
-	Math() = delete;
+	Mathematics() = delete;
 
 	static const vector<float> calculateDistributedPositions(unsigned int buttonCount, float buttonHeight);
 

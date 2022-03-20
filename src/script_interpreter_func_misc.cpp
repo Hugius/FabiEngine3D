@@ -507,7 +507,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = Math::getRandomNumber(args[0]->getInteger(), args[1]->getInteger());
+			const auto result = Mathematics::getRandomNumber(args[0]->getInteger(), args[1]->getInteger());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -518,7 +518,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto result = Math::getRandomNumber(args[0]->getDecimal(), args[1]->getDecimal());
+			const auto result = Mathematics::getRandomNumber(args[0]->getDecimal(), args[1]->getDecimal());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}

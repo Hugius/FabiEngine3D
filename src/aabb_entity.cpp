@@ -14,7 +14,7 @@ void AabbEntity::updateTarget()
 {
 	if(_basePosition != _basePositionTarget)
 	{
-		auto speedMultiplier = Math::normalize(_basePositionTarget - _basePosition);
+		auto speedMultiplier = Mathematics::normalize(_basePositionTarget - _basePosition);
 		_basePosition += (speedMultiplier * _basePositionTargetSpeed);
 
 		if(fabsf(_basePositionTarget.x - _basePosition.x) <= _basePositionTargetSpeed)
@@ -33,7 +33,7 @@ void AabbEntity::updateTarget()
 
 	if(_baseSize != _baseSizeTarget)
 	{
-		auto speedMultiplier = Math::normalize(_baseSizeTarget - _baseSize);
+		auto speedMultiplier = Mathematics::normalize(_baseSizeTarget - _baseSize);
 		_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
 
 		_baseSize = fvec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
@@ -54,9 +54,9 @@ void AabbEntity::updateTarget()
 
 void AabbEntity::updateTransformation()
 {
-	auto translationMatrix = Math::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
+	auto translationMatrix = Mathematics::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
 
-	auto scalingMatrix = Math::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
+	auto scalingMatrix = Mathematics::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
 
 	_transformation = (translationMatrix * scalingMatrix);
 }

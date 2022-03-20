@@ -192,17 +192,17 @@ void AabbEntityManager::update()
 						fvec3 rotationOffset;
 						if(rotationDirection == Direction::X)
 						{
-							rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(roundedRotation));
+							rotationMatrix = Mathematics::createRotationMatrixX(Mathematics::convertToRadians(roundedRotation));
 							rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.z) * 0.5f), 0.0f);
 						}
 						else if(rotationDirection == Direction::Y)
 						{
-							rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(roundedRotation));
+							rotationMatrix = Mathematics::createRotationMatrixY(Mathematics::convertToRadians(roundedRotation));
 							rotationOffset = fvec3(0.0f);
 						}
 						else if(rotationDirection == Direction::Z)
 						{
-							rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(roundedRotation));
+							rotationMatrix = Mathematics::createRotationMatrixZ(Mathematics::convertToRadians(roundedRotation));
 							rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.x) * 0.5f), 0.0f);
 						}
 
@@ -235,9 +235,9 @@ void AabbEntityManager::update()
 					const auto parentRotation = parentEntity->getRotation();
 					const auto parentSize = parentEntity->getSize();
 
-					float refRotationX = Math::calculateReferenceAngle(parentRotation.x);
-					float refRotationY = Math::calculateReferenceAngle(parentRotation.y);
-					float refRotationZ = Math::calculateReferenceAngle(parentRotation.z);
+					float refRotationX = Mathematics::calculateReferenceAngle(parentRotation.x);
+					float refRotationY = Mathematics::calculateReferenceAngle(parentRotation.y);
+					float refRotationZ = Mathematics::calculateReferenceAngle(parentRotation.z);
 					refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
 					refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
 					refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
@@ -245,24 +245,24 @@ void AabbEntityManager::update()
 					fvec3 newAabbSize;
 					if(refRotationX > refRotationY && refRotationX > refRotationZ)
 					{
-						const auto xSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.x)));
-						const auto xCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.x)));
+						const auto xSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.x)));
+						const auto xCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.x)));
 						newAabbSize.x = max(MIN_SIZE, parentSize.x);
 						newAabbSize.y = max(MIN_SIZE, (xCosRotation * parentSize.y));
 						newAabbSize.z = max(MIN_SIZE, (xSinRotation * parentSize.y));
 					}
 					else if(refRotationY > refRotationX && refRotationY > refRotationZ)
 					{
-						const auto ySinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.y)));
-						const auto yCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.y)));
+						const auto ySinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.y)));
+						const auto yCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.y)));
 						newAabbSize.x = max(MIN_SIZE, (yCosRotation * parentSize.x));
 						newAabbSize.y = max(MIN_SIZE, parentSize.y);
 						newAabbSize.z = max(MIN_SIZE, (ySinRotation * parentSize.x));
 					}
 					else if(refRotationZ > refRotationX && refRotationZ > refRotationY)
 					{
-						const auto zSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.z)));
-						const auto zCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.z)));
+						const auto zSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.z)));
+						const auto zCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.z)));
 						newAabbSize.x = max(MIN_SIZE, ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y)));
 						newAabbSize.y = max(MIN_SIZE, ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y)));
 						newAabbSize.z = MIN_SIZE;
@@ -307,9 +307,9 @@ void AabbEntityManager::update()
 					const auto parentRotation = parentEntity->getRotation();
 					const auto parentSize = parentEntity->getSize();
 
-					float refRotationX = Math::calculateReferenceAngle(parentRotation.x);
-					float refRotationY = Math::calculateReferenceAngle(parentRotation.y);
-					float refRotationZ = Math::calculateReferenceAngle(parentRotation.z);
+					float refRotationX = Mathematics::calculateReferenceAngle(parentRotation.x);
+					float refRotationY = Mathematics::calculateReferenceAngle(parentRotation.y);
+					float refRotationZ = Mathematics::calculateReferenceAngle(parentRotation.z);
 					refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
 					refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
 					refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
@@ -317,24 +317,24 @@ void AabbEntityManager::update()
 					fvec3 newAabbSize;
 					if(refRotationX > refRotationY && refRotationX > refRotationZ)
 					{
-						const auto xSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.x)));
-						const auto xCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.x)));
+						const auto xSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.x)));
+						const auto xCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.x)));
 						newAabbSize.x = max(MIN_SIZE, parentSize.x);
 						newAabbSize.y = max(MIN_SIZE, (xCosRotation * parentSize.y));
 						newAabbSize.z = max(MIN_SIZE, (xSinRotation * parentSize.y));
 					}
 					else if(refRotationY > refRotationX && refRotationY > refRotationZ)
 					{
-						const auto ySinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.y)));
-						const auto yCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.y)));
+						const auto ySinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.y)));
+						const auto yCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.y)));
 						newAabbSize.x = max(MIN_SIZE, (yCosRotation * parentSize.x));
 						newAabbSize.y = max(MIN_SIZE, parentSize.y);
 						newAabbSize.z = max(MIN_SIZE, (ySinRotation * parentSize.x));
 					}
 					else if(refRotationZ > refRotationX && refRotationZ > refRotationY)
 					{
-						const auto zSinRotation = fabsf(sinf(Math::convertToRadians(parentRotation.z)));
-						const auto zCosRotation = fabsf(cosf(Math::convertToRadians(parentRotation.z)));
+						const auto zSinRotation = fabsf(sinf(Mathematics::convertToRadians(parentRotation.z)));
+						const auto zCosRotation = fabsf(cosf(Mathematics::convertToRadians(parentRotation.z)));
 						newAabbSize.x = max(MIN_SIZE, ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y)));
 						newAabbSize.y = max(MIN_SIZE, ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y)));
 						newAabbSize.z = MIN_SIZE;

@@ -31,12 +31,12 @@ const shared_ptr<Ray> RaycastCalculator::_calculateCursorRay(const ivec2& cursor
 	const auto viewSpaceCoords = _convertToViewSpace(clipSpaceCoords);
 	const auto worldSpaceCoords = _convertToWorldSpace(viewSpaceCoords);
 
-	return make_shared<Ray>(_camera->getPosition(), Math::normalize(worldSpaceCoords));
+	return make_shared<Ray>(_camera->getPosition(), Mathematics::normalize(worldSpaceCoords));
 }
 
 const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4& clipCoords) const
 {
-	const auto invertedProjection = Math::invertMatrix(_camera->getProjection());
+	const auto invertedProjection = Mathematics::invertMatrix(_camera->getProjection());
 
 	const auto viewCoords = (invertedProjection * clipCoords);
 
@@ -45,7 +45,7 @@ const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4& clipCoords) cons
 
 const fvec3 RaycastCalculator::_convertToWorldSpace(const fvec4& viewCoords) const
 {
-	const auto invertedView = Math::invertMatrix(_camera->getView());
+	const auto invertedView = Mathematics::invertMatrix(_camera->getView());
 
 	const auto worldCoords = (invertedView * viewCoords);
 

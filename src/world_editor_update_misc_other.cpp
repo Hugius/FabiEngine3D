@@ -142,7 +142,7 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->collision_setCameraTerrainResponseHeight(1.0f);
 		_fe3d->collision_setCameraTerrainResponseSpeed(_editorSpeed);
 		_fe3d->raycast_setTerrainIntersectionEnabled(true);
-		_fe3d->raycast_setTerrainIntersectionDistance(Math::calculateDistance(fvec3(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId())), fvec3(0.0f)));
+		_fe3d->raycast_setTerrainIntersectionDistance(Mathematics::calculateDistance(fvec3(_fe3d->terrain_getSize(_fe3d->terrain_getSelectedId())), fvec3(0.0f)));
 		_fe3d->raycast_setTerrainIntersectionPrecision(0.1f);
 	}
 

@@ -117,7 +117,7 @@ void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<st
 		_shaderBuffer->uploadUniform("u_spotlightFronts[" + to_string(index) + "]", visibleEntities[index]->getFront());
 		_shaderBuffer->uploadUniform("u_spotlightColors[" + to_string(index) + "]", visibleEntities[index]->getColor());
 		_shaderBuffer->uploadUniform("u_spotlightIntensities[" + to_string(index) + "]", visibleEntities[index]->getIntensity());
-		_shaderBuffer->uploadUniform("u_spotlightAngles[" + to_string(index) + "]", cosf(Math::convertToRadians(visibleEntities[index]->getAngle())));
+		_shaderBuffer->uploadUniform("u_spotlightAngles[" + to_string(index) + "]", cosf(Mathematics::convertToRadians(visibleEntities[index]->getAngle())));
 		_shaderBuffer->uploadUniform("u_spotlightDistances[" + to_string(index) + "]", visibleEntities[index]->getDistance());
 	}
 

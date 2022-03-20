@@ -15,7 +15,7 @@ void Quad2dEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
-		auto speedMultiplier = Math::normalize(_positionTarget - _position);
+		auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
@@ -35,8 +35,8 @@ void Quad2dEntity::updateTarget()
 		float speed = (_rotationTargetSpeed * multiplier);
 		_rotation += ((_rotation < _rotationTarget) ? speed : (_rotation > _rotationTarget) ? -speed : 0.0f);
 
-		_rotation = Math::limitAngle(_rotation);
-		if(Math::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
+		_rotation = Mathematics::limitAngle(_rotation);
+		if(Mathematics::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
 		{
 			_rotation = _rotationTarget;
 		}
@@ -44,7 +44,7 @@ void Quad2dEntity::updateTarget()
 
 	if(_size != _sizeTarget)
 	{
-		auto speedMultiplier = Math::normalize(_sizeTarget - _size);
+		auto speedMultiplier = Mathematics::normalize(_sizeTarget - _size);
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
 		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
@@ -61,9 +61,9 @@ void Quad2dEntity::updateTarget()
 
 void Quad2dEntity::updateTransformation()
 {
-	auto translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, 0.0f);
-	auto rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(_rotation));
-	auto scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
+	auto translationMatrix = Mathematics::createTranslationMatrix(_position.x, _position.y, 0.0f);
+	auto rotationMatrix = Mathematics::createRotationMatrixZ(Mathematics::convertToRadians(_rotation));
+	auto scalingMatrix = Mathematics::createScalingMatrix(_size.x, _size.y, 1.0f);
 
 	_transformation = (translationMatrix * rotationMatrix * scalingMatrix);
 }
@@ -111,8 +111,8 @@ void Quad2dEntity::setPosition(const fvec2& value)
 
 void Quad2dEntity::setRotation(float value)
 {
-	_rotation = Math::limitAngle(value);
-	_rotationTarget = Math::limitAngle(value);
+	_rotation = Mathematics::limitAngle(value);
+	_rotationTarget = Mathematics::limitAngle(value);
 }
 
 void Quad2dEntity::setSize(const fvec2& value)
@@ -131,8 +131,8 @@ void Quad2dEntity::rotate(float value)
 {
 	_rotation += value;
 	_rotationTarget += value;
-	_rotation = Math::limitAngle(_rotation);
-	_rotationTarget = Math::limitAngle(_rotationTarget);
+	_rotation = Mathematics::limitAngle(_rotation);
+	_rotationTarget = Mathematics::limitAngle(_rotationTarget);
 }
 
 void Quad2dEntity::scale(const fvec2& value)
@@ -151,7 +151,7 @@ void Quad2dEntity::moveTo(const fvec2& target, float speed)
 
 void Quad2dEntity::rotateTo(float target, float speed)
 {
-	_rotationTarget = Math::limitAngle(target);
+	_rotationTarget = Mathematics::limitAngle(target);
 	_rotationTargetSpeed = speed;
 }
 

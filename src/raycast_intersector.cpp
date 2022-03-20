@@ -253,7 +253,7 @@ const float RaycastIntersector::_calculateDistanceToTerrain() const
 		return -1.0f;
 	}
 
-	return Math::calculateDistance(_raycastCalculator->getCursorRay()->getPosition(), _pointOnTerrain);
+	return Mathematics::calculateDistance(_raycastCalculator->getCursorRay()->getPosition(), _pointOnTerrain);
 }
 
 const float RaycastIntersector::_calculateDistanceToAabb(shared_ptr<AabbEntity> entity) const

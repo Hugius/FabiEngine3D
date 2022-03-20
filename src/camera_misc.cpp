@@ -16,8 +16,8 @@ void Camera::followRightXZ(float speed)
 void Camera::followFrontXZ(float speed)
 {
 	fvec3 tempFront = _front;
-	tempFront.x = cos(Math::convertToRadians(_yaw));
-	tempFront.z = sin(Math::convertToRadians(_yaw));
+	tempFront.x = cos(Mathematics::convertToRadians(_yaw));
+	tempFront.z = sin(Mathematics::convertToRadians(_yaw));
 
 	_position.x += (tempFront.x * speed);
 	_position.z += (tempFront.z * speed);
@@ -54,7 +54,7 @@ void Camera::setCursorSensitivity(float value)
 
 void Camera::setYaw(float value)
 {
-	_yaw = Math::limitAngle(value);
+	_yaw = Mathematics::limitAngle(value);
 }
 
 void Camera::setPitch(float value)
@@ -64,7 +64,7 @@ void Camera::setPitch(float value)
 
 void Camera::setFirstPersonYaw(float value)
 {
-	_firstPersonYaw = Math::limitAngle(value);
+	_firstPersonYaw = Mathematics::limitAngle(value);
 }
 
 void Camera::setFirstPersonPitch(float value)
@@ -74,7 +74,7 @@ void Camera::setFirstPersonPitch(float value)
 
 void Camera::setThirdPersonYaw(float value)
 {
-	_thirdPersonYaw = Math::limitAngle(value);
+	_thirdPersonYaw = Mathematics::limitAngle(value);
 }
 
 void Camera::setThirdPersonPitch(float value)
@@ -273,15 +273,15 @@ void Camera::updateMatrices()
 		_up = DEFAULT_UP;
 	}
 
-	_front.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
-	_front.y = sin(Math::convertToRadians(_pitch));
-	_front.z = (sin(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
-	_front = Math::normalize(_front);
+	_front.x = (cos(Mathematics::convertToRadians(_yaw)) * cos(Mathematics::convertToRadians(_pitch)));
+	_front.y = sin(Mathematics::convertToRadians(_pitch));
+	_front.z = (sin(Mathematics::convertToRadians(_yaw)) * cos(Mathematics::convertToRadians(_pitch)));
+	_front = Mathematics::normalize(_front);
 
-	_right = Math::calculateCrossProduct(_front, _up);
-	_right = Math::normalize(_right);
+	_right = Mathematics::calculateCrossProduct(_front, _up);
+	_right = Mathematics::normalize(_right);
 
-	_view = Math::createViewMatrix(_position, (_position + _front), _up);
+	_view = Mathematics::createViewMatrix(_position, (_position + _front), _up);
 
-	_projection = Math::createPerspectiveProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _near, _far);
+	_projection = Mathematics::createPerspectiveProjectionMatrix(Mathematics::convertToRadians(_fov), _aspectRatio, _near, _far);
 }

@@ -145,7 +145,7 @@ void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, f
 
 			const auto position = fvec3((x - halfSize), height, (z - halfSize));
 			const auto uv = fvec2((x / size), (flippedZ / size));
-			const auto normal = Math::normalize(fvec3((leftHeight - rightHeight), 3.0f, (downHeight - upHeight)));
+			const auto normal = Mathematics::normalize(fvec3((leftHeight - rightHeight), 3.0f, (downHeight - upHeight)));
 
 			tempPositions.push_back(position);
 			tempUvs.push_back(uv);

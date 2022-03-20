@@ -160,7 +160,7 @@ void ModelEntityManager::update()
 
 			const auto cameraPosition = _camera->getPosition();
 			const auto entityPosition = entity->getBasePosition();
-			const auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
+			const auto absolsuteDistance = Mathematics::calculateDistance(cameraPosition, entityPosition);
 
 			entity->setLevelOfDetailed((absolsuteDistance > entity->getLevelOfDetailDistance()));
 		}
@@ -189,7 +189,7 @@ void ModelEntityManager::update()
 			{
 				if(reflectionEntity->isVisible())
 				{
-					const auto absoluteDistance = Math::calculateDistance(entity->getBasePosition(), reflectionEntity->getPosition());
+					const auto absoluteDistance = Mathematics::calculateDistance(entity->getBasePosition(), reflectionEntity->getPosition());
 
 					orderedReflectionEntities.insert({absoluteDistance, reflectionEntity});
 				}

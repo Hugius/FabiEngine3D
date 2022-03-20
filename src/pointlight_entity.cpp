@@ -9,7 +9,7 @@ void PointlightEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
-		auto speedMultiplier = Math::normalize(_positionTarget - _position);
+		auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)

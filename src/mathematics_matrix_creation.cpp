@@ -1,6 +1,6 @@
 #include "mathematics.hpp"
 
-const mat44 Math::createTranslationMatrixX(float value)
+const mat44 Mathematics::createTranslationMatrixX(float value)
 {
 	mat44 result;
 
@@ -9,7 +9,7 @@ const mat44 Math::createTranslationMatrixX(float value)
 	return result;
 }
 
-const mat44 Math::createTranslationMatrixY(float value)
+const mat44 Mathematics::createTranslationMatrixY(float value)
 {
 	mat44 result;
 
@@ -18,7 +18,7 @@ const mat44 Math::createTranslationMatrixY(float value)
 	return result;
 }
 
-const mat44 Math::createTranslationMatrixZ(float value)
+const mat44 Mathematics::createTranslationMatrixZ(float value)
 {
 	mat44 result;
 
@@ -27,7 +27,7 @@ const mat44 Math::createTranslationMatrixZ(float value)
 	return result;
 }
 
-const mat44 Math::createTranslationMatrix(float x, float y, float z)
+const mat44 Mathematics::createTranslationMatrix(float x, float y, float z)
 {
 	mat44 result;
 
@@ -38,7 +38,7 @@ const mat44 Math::createTranslationMatrix(float x, float y, float z)
 	return result;
 }
 
-const mat44 Math::createScalingMatrix(float x, float y, float z)
+const mat44 Mathematics::createScalingMatrix(float x, float y, float z)
 {
 	mat44 result;
 
@@ -49,7 +49,7 @@ const mat44 Math::createScalingMatrix(float x, float y, float z)
 	return result;
 }
 
-const mat44 Math::createScalingMatrixX(float value)
+const mat44 Mathematics::createScalingMatrixX(float value)
 {
 	mat44 result;
 
@@ -58,7 +58,7 @@ const mat44 Math::createScalingMatrixX(float value)
 	return result;
 }
 
-const mat44 Math::createScalingMatrixY(float value)
+const mat44 Mathematics::createScalingMatrixY(float value)
 {
 	mat44 result;
 
@@ -67,7 +67,7 @@ const mat44 Math::createScalingMatrixY(float value)
 	return result;
 }
 
-const mat44 Math::createScalingMatrixZ(float value)
+const mat44 Mathematics::createScalingMatrixZ(float value)
 {
 	mat44 result;
 
@@ -76,7 +76,7 @@ const mat44 Math::createScalingMatrixZ(float value)
 	return result;
 }
 
-const mat44 Math::createRotationMatrix(float x, float y, float z, DirectionOrder order)
+const mat44 Mathematics::createRotationMatrix(float x, float y, float z, DirectionOrder order)
 {
 	mat44 result;
 
@@ -120,7 +120,7 @@ const mat44 Math::createRotationMatrix(float x, float y, float z, DirectionOrder
 	return result;
 }
 
-const mat44 Math::createRotationMatrixX(float angle)
+const mat44 Mathematics::createRotationMatrixX(float angle)
 {
 	mat44 result;
 
@@ -132,7 +132,7 @@ const mat44 Math::createRotationMatrixX(float angle)
 	return result;
 }
 
-const mat44 Math::createRotationMatrixY(float angle)
+const mat44 Mathematics::createRotationMatrixY(float angle)
 {
 	mat44 result;
 
@@ -144,7 +144,7 @@ const mat44 Math::createRotationMatrixY(float angle)
 	return result;
 }
 
-const mat44 Math::createRotationMatrixZ(float angle)
+const mat44 Mathematics::createRotationMatrixZ(float angle)
 {
 	mat44 result;
 
@@ -156,7 +156,7 @@ const mat44 Math::createRotationMatrixZ(float angle)
 	return result;
 }
 
-const mat44 Math::createOrthographicProjectionMatrix(float leftX, float rightX, float bottomY, float topY, float nearZ, float farZ)
+const mat44 Mathematics::createOrthographicProjectionMatrix(float leftX, float rightX, float bottomY, float topY, float nearZ, float farZ)
 {
 	mat44 result;
 
@@ -170,7 +170,7 @@ const mat44 Math::createOrthographicProjectionMatrix(float leftX, float rightX, 
 	return result;
 };
 
-const mat44 Math::createViewMatrix(const fvec3& eye, const fvec3& center, const fvec3& up)
+const mat44 Mathematics::createViewMatrix(const fvec3& eye, const fvec3& center, const fvec3& up)
 {
 	fvec3 finalFront = normalize(center - eye);
 	fvec3 finalRight = normalize(calculateCrossProduct(finalFront, up));
@@ -193,7 +193,7 @@ const mat44 Math::createViewMatrix(const fvec3& eye, const fvec3& center, const 
 	return result;
 }
 
-const mat44 Math::createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far)
+const mat44 Mathematics::createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far)
 {
 	const float tanHalfFovY = tan(fov * 0.5f);
 

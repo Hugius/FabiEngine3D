@@ -93,7 +93,7 @@ void Camera::update(const ivec2& lastCursorPosition)
 		_firstPersonPitch += _firstPersonPitchAcceleration;
 		_firstPersonPitchAcceleration *= ACCELERATION_RESISTANCE;
 
-		_firstPersonYaw = Math::limitAngle(_firstPersonYaw);
+		_firstPersonYaw = Mathematics::limitAngle(_firstPersonYaw);
 		_firstPersonPitch = clamp(clamp(_firstPersonPitch, _minFirstPersonPitch, _maxFirstPersonPitch), MIN_PITCH, MAX_PITCH);
 
 		_yaw = _firstPersonYaw;
@@ -125,18 +125,18 @@ void Camera::update(const ivec2& lastCursorPosition)
 		_thirdPersonPitch -= _thirdPersonPitchAcceleration;
 		_thirdPersonPitchAcceleration *= ACCELERATION_RESISTANCE;
 
-		_thirdPersonYaw = Math::limitAngle(_thirdPersonYaw);
+		_thirdPersonYaw = Mathematics::limitAngle(_thirdPersonYaw);
 		_thirdPersonPitch = clamp(clamp(_thirdPersonPitch, _minThirdPersonPitch, _maxThirdPersonPitch), MIN_PITCH, MAX_PITCH);
 
-		const auto xMultiplier = cos(Math::convertToRadians(_thirdPersonPitch)) * sin(Math::convertToRadians(_thirdPersonYaw));
-		const auto yMultiplier = sin(Math::convertToRadians(_thirdPersonPitch));
-		const auto zMultiplier = cos(Math::convertToRadians(_thirdPersonPitch)) * cos(Math::convertToRadians(_thirdPersonYaw));
+		const auto xMultiplier = cos(Mathematics::convertToRadians(_thirdPersonPitch)) * sin(Mathematics::convertToRadians(_thirdPersonYaw));
+		const auto yMultiplier = sin(Mathematics::convertToRadians(_thirdPersonPitch));
+		const auto zMultiplier = cos(Mathematics::convertToRadians(_thirdPersonPitch)) * cos(Mathematics::convertToRadians(_thirdPersonYaw));
 
 		_position.x = (_thirdPersonLookat.x + (_thirdPersonDistance * xMultiplier));
 		_position.y = (_thirdPersonLookat.y + (_thirdPersonDistance * yMultiplier));
 		_position.z = (_thirdPersonLookat.z + (_thirdPersonDistance * zMultiplier));
 
-		_yaw = (Math::convertToDegrees(atan2f((_position.z - _thirdPersonLookat.z), (_position.x - _thirdPersonLookat.x))) + 180.0f);
+		_yaw = (Mathematics::convertToDegrees(atan2f((_position.z - _thirdPersonLookat.z), (_position.x - _thirdPersonLookat.x))) + 180.0f);
 		_pitch = -_thirdPersonPitch;
 
 		_renderWindow->setCursorPosition(middle);
@@ -147,6 +147,6 @@ void Camera::update(const ivec2& lastCursorPosition)
 		_thirdPersonPitchAcceleration = 0.0f;
 	}
 
-	_yaw = Math::limitAngle(_yaw);
+	_yaw = Mathematics::limitAngle(_yaw);
 	_pitch = clamp(_pitch, MIN_PITCH, MAX_PITCH);
 }

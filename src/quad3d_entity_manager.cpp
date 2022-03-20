@@ -96,8 +96,8 @@ void Quad3dEntityManager::update()
 			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y * 0.5f), 0.0f));
 			auto direction = (position - _camera->getPosition());
 
-			auto degreesX = Math::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
-			auto degreesY = Math::convertToDegrees(atan2f(direction.z, direction.x));
+			auto degreesX = Mathematics::convertToDegrees(atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z)));
+			auto degreesY = Mathematics::convertToDegrees(atan2f(direction.z, direction.x));
 
 			auto rotation = entity->getRotation();
 			rotation.x = (degreesX * static_cast<float>(isFacingCameraHorizontally));

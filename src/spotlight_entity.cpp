@@ -9,7 +9,7 @@ void SpotlightEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
-		auto speedMultiplier = Math::normalize(_positionTarget - _position);
+		auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
@@ -29,10 +29,10 @@ void SpotlightEntity::updateTarget()
 
 void SpotlightEntity::updateFront()
 {
-	_front.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
-	_front.y = sin(Math::convertToRadians(_pitch));
-	_front.z = (sin(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
-	_front = Math::normalize(_front);
+	_front.x = (cos(Mathematics::convertToRadians(_yaw)) * cos(Mathematics::convertToRadians(_pitch)));
+	_front.y = sin(Mathematics::convertToRadians(_pitch));
+	_front.z = (sin(Mathematics::convertToRadians(_yaw)) * cos(Mathematics::convertToRadians(_pitch)));
+	_front = Mathematics::normalize(_front);
 }
 
 void SpotlightEntity::setPosition(const fvec3& value)
@@ -60,12 +60,12 @@ void SpotlightEntity::setColor(const fvec3& value)
 
 void SpotlightEntity::setYaw(float value)
 {
-	_yaw = Math::limitAngle(value);
+	_yaw = Mathematics::limitAngle(value);
 }
 
 void SpotlightEntity::setPitch(float value)
 {
-	_pitch = Math::limitAngle(value);
+	_pitch = Mathematics::limitAngle(value);
 }
 
 void SpotlightEntity::setIntensity(float value)

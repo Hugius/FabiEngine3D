@@ -14,14 +14,14 @@ void Sound3dPlayer::update()
 	{
 		const auto sound = _sound3dManager->getSound(soundId);
 		const auto cameraPosition = _camera->getPosition();
-		const auto distance = Math::calculateDistance(cameraPosition, sound->getPosition());
+		const auto distance = Mathematics::calculateDistance(cameraPosition, sound->getPosition());
 		const auto volume = (clamp((1.0f - (distance / sound->getMaxDistance())), 0.0f, 1.0f) * sound->getMaxVolume());
 		const auto cameraDirection = _camera->getFront();
 		const auto soundDirection = (cameraPosition - sound->getPosition());
-		const auto rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
+		const auto rotationMatrix = Mathematics::createRotationMatrixY(Mathematics::convertToRadians(90.0f));
 		const auto rotatedSoundDirection = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
-		const auto normalizedSoundDirection = Math::normalize(fvec3(rotatedSoundDirection.x, rotatedSoundDirection.y, rotatedSoundDirection.z));
-		const auto dotProduct = Math::calculateDotProduct(normalizedSoundDirection, cameraDirection);
+		const auto normalizedSoundDirection = Mathematics::normalize(fvec3(rotatedSoundDirection.x, rotatedSoundDirection.y, rotatedSoundDirection.z));
+		const auto dotProduct = Mathematics::calculateDotProduct(normalizedSoundDirection, cameraDirection);
 		const auto leftIntensity = ((dotProduct * 0.5f) + 0.5f);
 		const auto rightIntensity = (1.0f - leftIntensity);
 

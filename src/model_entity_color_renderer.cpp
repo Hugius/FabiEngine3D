@@ -129,7 +129,7 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 		_shaderBuffer->uploadUniform("u_spotlightFronts[" + to_string(index) + "]", visibleEntities[index]->getFront());
 		_shaderBuffer->uploadUniform("u_spotlightColors[" + to_string(index) + "]", visibleEntities[index]->getColor());
 		_shaderBuffer->uploadUniform("u_spotlightIntensities[" + to_string(index) + "]", visibleEntities[index]->getIntensity());
-		_shaderBuffer->uploadUniform("u_spotlightAngles[" + to_string(index) + "]", cosf(Math::convertToRadians(visibleEntities[index]->getAngle())));
+		_shaderBuffer->uploadUniform("u_spotlightAngles[" + to_string(index) + "]", cosf(Mathematics::convertToRadians(visibleEntities[index]->getAngle())));
 		_shaderBuffer->uploadUniform("u_spotlightDistances[" + to_string(index) + "]", visibleEntities[index]->getDistance());
 	}
 
@@ -189,7 +189,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shaderBuffer->uploadUniform("u_hasReflectionMap", (entity->getReflectionTextureBuffer(partId) != nullptr));
 		_shaderBuffer->uploadUniform("u_hasNormalMap", (entity->getNormalTextureBuffer(partId) != nullptr));
 		_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation(partId));
-		_shaderBuffer->uploadUniform("u_normalTransformation", Math::transposeMatrix(Math::invertMatrix(mat33(entity->getTransformation(partId)))));
+		_shaderBuffer->uploadUniform("u_normalTransformation", Mathematics::transposeMatrix(Mathematics::invertMatrix(mat33(entity->getTransformation(partId)))));
 		_shaderBuffer->uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partId)));
 		_shaderBuffer->uploadUniform("u_isWireframed", entity->isWireframed(partId));
 		_shaderBuffer->uploadUniform("u_isBright", entity->isBright(partId));

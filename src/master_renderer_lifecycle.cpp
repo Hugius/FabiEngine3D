@@ -170,10 +170,10 @@ void MasterRenderer::_updateShadows()
 			const auto bottomY = -(_renderStorage->getShadowSize() * 0.5f);
 			const auto topY = (_renderStorage->getShadowSize() * 0.5f);
 			const auto nearZ = 0.01f;
-			const auto farZ = Math::calculateDistance(fvec3(_renderStorage->getShadowSize()), fvec3(0.0f));
+			const auto farZ = Mathematics::calculateDistance(fvec3(_renderStorage->getShadowSize()), fvec3(0.0f));
 
-			const auto viewMatrix = Math::createViewMatrix(_renderStorage->getShadowPosition(), _renderStorage->getShadowLookat(), fvec3(0.0f, 1.0f, 0.0f));
-			const auto projectionMatrix = Math::createOrthographicProjectionMatrix(leftX, rightX, bottomY, topY, nearZ, farZ);
+			const auto viewMatrix = Mathematics::createViewMatrix(_renderStorage->getShadowPosition(), _renderStorage->getShadowLookat(), fvec3(0.0f, 1.0f, 0.0f));
+			const auto projectionMatrix = Mathematics::createOrthographicProjectionMatrix(leftX, rightX, bottomY, topY, nearZ, farZ);
 
 			_renderStorage->setShadowView(viewMatrix);
 			_renderStorage->setShadowProjection(projectionMatrix);
@@ -189,8 +189,8 @@ void MasterRenderer::_updateMotionBlur()
 		static auto lastPitch = _camera->getPitch();
 
 		fvec2 difference;
-		difference.x = fabsf(Math::calculateReferenceAngle(_camera->getYaw()) - Math::calculateReferenceAngle(lastYaw));
-		difference.y = fabsf(Math::calculateReferenceAngle(_camera->getPitch()) - Math::calculateReferenceAngle(lastPitch));
+		difference.x = fabsf(Mathematics::calculateReferenceAngle(_camera->getYaw()) - Mathematics::calculateReferenceAngle(lastYaw));
+		difference.y = fabsf(Mathematics::calculateReferenceAngle(_camera->getPitch()) - Mathematics::calculateReferenceAngle(lastPitch));
 		_renderStorage->setMotionBlurDifference(difference);
 
 		lastYaw = _camera->getYaw();
@@ -215,7 +215,7 @@ void MasterRenderer::_updateLensFlare()
 		float opacity = 0.0f;
 		if((flareSourceNdc.x > -1.0f) && (flareSourceNdc.x < 1.0f) && (flareSourceNdc.y > -1.0f) && (flareSourceNdc.y < 1.0f))
 		{
-			const auto distance = (Math::calculateDistance(flareSourceNdc, fvec2(0.0f)) / _renderStorage->getLensFlareSensitivity());
+			const auto distance = (Mathematics::calculateDistance(flareSourceNdc, fvec2(0.0f)) / _renderStorage->getLensFlareSensitivity());
 
 			opacity = (1.0f - distance);
 			opacity = clamp(opacity, 0.0f, 1.0f);

@@ -11,7 +11,7 @@ void Text3dEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
-		auto speedMultiplier = Math::normalize(_positionTarget - _position);
+		auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
 
 		_position += (speedMultiplier * _positionTargetSpeed);
 
@@ -31,7 +31,7 @@ void Text3dEntity::updateTarget()
 
 	if(_rotation != _rotationTarget)
 	{
-		auto difference = Math::calculateDifference(_rotation, _rotationTarget);
+		auto difference = Mathematics::calculateDifference(_rotation, _rotationTarget);
 		auto multiplier = fvec3(((difference.x < 180.0f) ? 1.0f : -1.0f), ((difference.y < 180.0f) ? 1.0f : -1.0f), ((difference.z < 180.0f) ? 1.0f : -1.0f));
 		auto speed = (fvec3(_rotationTargetSpeed) * multiplier);
 
@@ -39,17 +39,17 @@ void Text3dEntity::updateTarget()
 		_rotation.y += ((_rotation.y < _rotationTarget.y) ? speed.y : (_rotation.y > _rotationTarget.y) ? -speed.y : 0.0f);
 		_rotation.z += ((_rotation.z < _rotationTarget.z) ? speed.z : (_rotation.z > _rotationTarget.z) ? -speed.z : 0.0f);
 
-		_rotation = fvec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
+		_rotation = fvec3(Mathematics::limitAngle(_rotation.x), Mathematics::limitAngle(_rotation.y), Mathematics::limitAngle(_rotation.z));
 
-		if(Math::calculateAngleDifference(_rotation.x, _rotationTarget.x) <= _rotationTargetSpeed)
+		if(Mathematics::calculateAngleDifference(_rotation.x, _rotationTarget.x) <= _rotationTargetSpeed)
 		{
 			_rotation.x = _rotationTarget.x;
 		}
-		if(Math::calculateAngleDifference(_rotation.y, _rotationTarget.y) <= _rotationTargetSpeed)
+		if(Mathematics::calculateAngleDifference(_rotation.y, _rotationTarget.y) <= _rotationTargetSpeed)
 		{
 			_rotation.y = _rotationTarget.y;
 		}
-		if(Math::calculateAngleDifference(_rotation.z, _rotationTarget.z) <= _rotationTargetSpeed)
+		if(Mathematics::calculateAngleDifference(_rotation.z, _rotationTarget.z) <= _rotationTargetSpeed)
 		{
 			_rotation.z = _rotationTarget.z;
 		}
@@ -57,7 +57,7 @@ void Text3dEntity::updateTarget()
 
 	if(_size != _sizeTarget)
 	{
-		auto speedMultiplier = Math::normalize(_sizeTarget - _size);
+		auto speedMultiplier = Mathematics::normalize(_sizeTarget - _size);
 
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
@@ -76,10 +76,10 @@ void Text3dEntity::updateTarget()
 
 void Text3dEntity::updateCharacterEntities()
 {
-	const auto rotationMatrix = Math::createRotationMatrix(
-		Math::convertToRadians(_rotation.x),
-		Math::convertToRadians(_rotation.y),
-		Math::convertToRadians(_rotation.z), DirectionOrder::YXZ);
+	const auto rotationMatrix = Mathematics::createRotationMatrix(
+		Mathematics::convertToRadians(_rotation.x),
+		Mathematics::convertToRadians(_rotation.y),
+		Mathematics::convertToRadians(_rotation.z), DirectionOrder::YXZ);
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
@@ -342,8 +342,8 @@ void Text3dEntity::setPosition(const fvec3& value)
 
 void Text3dEntity::setRotation(const fvec3& value)
 {
-	_rotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-	_rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_rotation = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
+	_rotationTarget = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
 }
 
 void Text3dEntity::setSize(const fvec2& value)
@@ -362,8 +362,8 @@ void Text3dEntity::rotate(const fvec3& value)
 {
 	_rotation += value;
 	_rotationTarget += value;
-	_rotation = fvec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
-	_rotationTarget = fvec3(Math::limitAngle(_rotationTarget.x), Math::limitAngle(_rotationTarget.y), Math::limitAngle(_rotationTarget.z));
+	_rotation = fvec3(Mathematics::limitAngle(_rotation.x), Mathematics::limitAngle(_rotation.y), Mathematics::limitAngle(_rotation.z));
+	_rotationTarget = fvec3(Mathematics::limitAngle(_rotationTarget.x), Mathematics::limitAngle(_rotationTarget.y), Mathematics::limitAngle(_rotationTarget.z));
 }
 
 void Text3dEntity::scale(const fvec2& value)
@@ -382,7 +382,7 @@ void Text3dEntity::moveTo(const fvec3& target, float speed)
 
 void Text3dEntity::rotateTo(const fvec3& target, float speed)
 {
-	_rotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
+	_rotationTarget = fvec3(Mathematics::limitAngle(target.x), Mathematics::limitAngle(target.y), Mathematics::limitAngle(target.z));
 	_rotationTargetSpeed = speed;
 }
 

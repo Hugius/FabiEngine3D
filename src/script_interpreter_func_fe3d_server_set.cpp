@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 				return true;
 			}
 
-			if(Config::getInst().isApplicationExported())
+			if(Configuration::getInst().isApplicationExported())
 			{
 				_fe3d->application_stop();
 			}

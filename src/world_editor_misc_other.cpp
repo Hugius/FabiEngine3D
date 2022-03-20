@@ -147,7 +147,7 @@ const vector<string> WorldEditor::_getWorldIds() const
 {
 	vector<string> worldIds;
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\");
 
@@ -169,7 +169,7 @@ const vector<string> WorldEditor::_getWorldIds() const
 
 void WorldEditor::_deleteWorldFile(const string& id)
 {
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\" + id + ".fe3d");
 

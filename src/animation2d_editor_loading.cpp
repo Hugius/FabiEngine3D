@@ -9,12 +9,12 @@ using std::istringstream;
 
 const bool Animation2dEditor::loadAnimationsFromFile()
 {
-	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\animation2d.fe3d");
 

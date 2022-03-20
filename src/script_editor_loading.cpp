@@ -12,14 +12,14 @@ using std::istringstream;
 
 const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
-	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
 	_script->clear();
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "scripts\\");
 

@@ -160,7 +160,7 @@ void EngineCore::start()
 	_isRunning = true;
 
 	string logoDirectoryPath;
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		logoDirectoryPath = "logo\\";
 	}
@@ -201,22 +201,22 @@ void EngineCore::start()
 		if(!_networkingServer->isRunning())
 		{
 			_renderWindow->showWindow();
-			_renderWindow->setSize(Config::getInst().getWindowSize());
+			_renderWindow->setSize(Configuration::getInst().getWindowSize());
 
-			if(Config::getInst().isWindowFullscreen())
+			if(Configuration::getInst().isWindowFullscreen())
 			{
 				_renderWindow->enableFullscreen();
 			}
-			if(!Config::getInst().isWindowBorderless())
+			if(!Configuration::getInst().isWindowBorderless())
 			{
 				_renderWindow->showBorder();
 			}
-			if(Config::getInst().isApplicationExported())
+			if(Configuration::getInst().isApplicationExported())
 			{
-				_renderWindow->setTitle(Config::getInst().getWindowTitle());
+				_renderWindow->setTitle(Configuration::getInst().getWindowTitle());
 			}
 
-			if(Config::getInst().isApplicationExported())
+			if(Configuration::getInst().isApplicationExported())
 			{
 				_renderWindow->setOpacity(1.0f);
 			}
@@ -234,7 +234,7 @@ void EngineCore::start()
 	{
 		_timer->startClock("total");
 
-		if(Config::getInst().isApplicationExported() && _networkingServer->isRunning())
+		if(Configuration::getInst().isApplicationExported() && _networkingServer->isRunning())
 		{
 			_timer->increasePassedUpdateCount();
 

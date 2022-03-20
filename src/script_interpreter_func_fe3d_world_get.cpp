@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto isExported = Config::getInst().isApplicationExported();
+			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\editor\\");
 			const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");
@@ -46,7 +46,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto isExported = Config::getInst().isApplicationExported();
+			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\");
 			const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");

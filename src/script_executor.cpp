@@ -27,7 +27,7 @@ void ScriptExecutor::update(bool isDebugging)
 			_mustSkipUpdate = false;
 		}
 
-		if(!Config::getInst().isApplicationExported())
+		if(!Configuration::getInst().isApplicationExported())
 		{
 			_fe3d->quad2d_setVisible("@@cursor", !_fe3d->misc_isCursorInsideDisplay());
 			_fe3d->misc_setCursorVisible(_fe3d->misc_isCursorInsideDisplay());

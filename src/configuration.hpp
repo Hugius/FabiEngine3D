@@ -9,12 +9,12 @@
 using std::string;
 using std::ifstream;
 
-class Config final
+class Configuration final
 {
 public:
-	Config(Config const&) = delete;
+	Configuration(Configuration const&) = delete;
 
-	void operator=(Config const&) = delete;
+	void operator=(Configuration const&) = delete;
 
 	const string& getWindowTitle() const;
 
@@ -29,14 +29,15 @@ public:
 	const bool isWindowBorderless()	const;
 	const bool isApplicationExported() const;
 
-	static Config& getInst()
+	static Configuration& getInst()
 	{
-		static Config instance;
+		static Configuration instance;
+
 		return instance;
 	}
 
 private:
-	Config();
+	Configuration();
 
 	void _processOption(ifstream& file, string& option, const string& name);
 	void _processOption(ifstream& file, float& option, const string& name);

@@ -369,7 +369,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 				abort();
 			}
 
-			const auto isExported = Config::getInst().isApplicationExported();
+			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto targetDirectoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "assets\\image\\misc\\flare_map\\");
 			const auto filePath = (targetDirectoryPath + args[0]->getString());

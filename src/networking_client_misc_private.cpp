@@ -186,7 +186,7 @@ void NetworkingClient::_setupUdp()
 	freeaddrinfo(addressInfo);
 }
 
-const tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET socket) const
+tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET socket) const
 {
 	char buffer[TCP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(TCP_BUFFER_BYTES);

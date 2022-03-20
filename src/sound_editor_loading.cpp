@@ -10,12 +10,12 @@ using std::istringstream;
 
 const vector<string> SoundEditor::getAudioPathsFromFile() const
 {
-	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound.fe3d");
 
@@ -43,7 +43,7 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-		if(!Config::getInst().isApplicationExported())
+		if(!Configuration::getInst().isApplicationExported())
 		{
 			audioPath = ("projects\\" + getCurrentProjectId() + "\\" + audioPath);
 		}
@@ -58,14 +58,14 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 
 const bool SoundEditor::loadSoundsFromFile()
 {
-	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
 	_loadedSoundIds.clear();
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\sound.fe3d");
 
@@ -91,7 +91,7 @@ const bool SoundEditor::loadSoundsFromFile()
 
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-		if(!Config::getInst().isApplicationExported())
+		if(!Configuration::getInst().isApplicationExported())
 		{
 			audioPath = ("projects\\" + getCurrentProjectId() + "\\" + audioPath);
 		}

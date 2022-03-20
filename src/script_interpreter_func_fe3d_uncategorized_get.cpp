@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string& func
 				return true;
 			}
 
-			const auto result = Config::getInst().getWindowSize().x;
+			const auto result = Configuration::getInst().getWindowSize().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string& func
 				return true;
 			}
 
-			const auto result = Config::getInst().getWindowSize().y;
+			const auto result = Configuration::getInst().getWindowSize().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}

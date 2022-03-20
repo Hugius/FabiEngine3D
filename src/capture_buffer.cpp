@@ -104,7 +104,7 @@ void CaptureBuffer::bind()
 void CaptureBuffer::unbind()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
+	glViewport(0, 0, Configuration::getInst().getWindowSize().x, Configuration::getInst().getWindowSize().y);
 }
 
 const ivec2& CaptureBuffer::getPosition() const

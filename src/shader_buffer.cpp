@@ -11,7 +11,7 @@ using std::ofstream;
 ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentFileName)
 {
 	string shaderDirectoryPath;
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		shaderDirectoryPath = "shaders\\";
 	}

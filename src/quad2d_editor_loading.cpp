@@ -10,12 +10,12 @@ using std::istringstream;
 
 const vector<string> Quad2dEditor::getImagePathsFromFile() const
 {
-	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\quad2d.fe3d");
 
@@ -45,7 +45,7 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 
 		if(!diffuseMapPath.empty())
 		{
-			if(!Config::getInst().isApplicationExported())
+			if(!Configuration::getInst().isApplicationExported())
 			{
 				diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 			}
@@ -61,12 +61,12 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 
 const bool Quad2dEditor::loadEntitiesFromFile()
 {
-	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\quad2d.fe3d");
 
@@ -117,7 +117,7 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 
 			if(!diffuseMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 				}

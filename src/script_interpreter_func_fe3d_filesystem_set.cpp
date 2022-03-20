@@ -20,7 +20,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
-			const auto isExported = Config::getInst().isApplicationExported();
+			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto newDirectoryPath = (directoryPath + args[0]->getString());
@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
-			const auto isExported = Config::getInst().isApplicationExported();
+			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const string newDirectoryPath = (directoryPath + args[0]->getString());
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, 2) && _validateSavesDirectory())
 		{
-			const auto isExported = Config::getInst().isApplicationExported();
+			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = (directoryPath + args[0]->getString());
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
-			const auto isExported = Config::getInst().isApplicationExported();
+			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = (directoryPath + args[0]->getString());
@@ -110,7 +110,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, 2) && _validateSavesDirectory())
 		{
-			const auto isExported = Config::getInst().isApplicationExported();
+			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = (directoryPath + args[0]->getString());
@@ -151,7 +151,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
-			const auto isExported = Config::getInst().isApplicationExported();
+			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = (directoryPath + args[0]->getString());
@@ -177,7 +177,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
-			const auto isExported = Config::getInst().isApplicationExported();
+			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = (directoryPath + args[0]->getString());

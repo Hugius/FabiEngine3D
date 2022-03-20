@@ -13,12 +13,12 @@ using std::istringstream;
 
 const vector<string> ModelEditor::getMeshPathsFromFile() const
 {
-	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\model.fe3d");
 
@@ -52,7 +52,7 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
 
-			if(!Config::getInst().isApplicationExported())
+			if(!Configuration::getInst().isApplicationExported())
 			{
 				meshPath = ("projects\\" + getCurrentProjectId() + "\\" + meshPath);
 			}
@@ -68,12 +68,12 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 
 const vector<string> ModelEditor::getImagePathsFromFile() const
 {
-	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\model.fe3d");
 
@@ -128,7 +128,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 			if(!diffuseMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 				}
@@ -138,7 +138,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 			if(!emissionMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					emissionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
 				}
@@ -148,7 +148,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 			if(!specularMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					specularMapPath = ("projects\\" + getCurrentProjectId() + "\\" + specularMapPath);
 				}
@@ -158,7 +158,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 			if(!reflectionMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					reflectionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + reflectionMapPath);
 				}
@@ -168,7 +168,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 			if(!normalMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					normalMapPath = ("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
 				}
@@ -185,12 +185,12 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 const bool ModelEditor::loadEntitiesFromFile()
 {
-	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "data\\model.fe3d");
 
@@ -239,7 +239,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
 			replace(levelOfDetailEntityId.begin(), levelOfDetailEntityId.end(), '?', ' ');
 
-			if(!Config::getInst().isApplicationExported())
+			if(!Configuration::getInst().isApplicationExported())
 			{
 				meshPath = ("projects\\" + getCurrentProjectId() + "\\" + meshPath);
 			}
@@ -347,7 +347,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 
 			if(!diffuseMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 				}
@@ -357,7 +357,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 
 			if(!specularMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					specularMapPath = ("projects\\" + getCurrentProjectId() + "\\" + specularMapPath);
 				}
@@ -367,7 +367,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 
 			if(!emissionMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					emissionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
 				}
@@ -377,7 +377,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 
 			if(!reflectionMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					reflectionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + reflectionMapPath);
 				}
@@ -387,7 +387,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 
 			if(!normalMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if(!Configuration::getInst().isApplicationExported())
 				{
 					normalMapPath = ("projects\\" + getCurrentProjectId() + "\\" + normalMapPath);
 				}

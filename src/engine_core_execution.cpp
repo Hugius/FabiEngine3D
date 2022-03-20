@@ -59,7 +59,7 @@ void EngineCore::_update()
 	_timer->stopClock("networkUpdate");
 
 	_timer->startClock("miscUpdate");
-	if(!Config::getInst().isApplicationExported())
+	if(!Configuration::getInst().isApplicationExported())
 	{
 		static float opacity = 0.0f;
 

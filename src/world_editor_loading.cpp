@@ -12,12 +12,12 @@ using std::istringstream;
 
 const bool WorldEditor::loadWorldFromFile(const string& fileName)
 {
-	if(!Config::getInst().isApplicationExported() && getCurrentProjectId().empty())
+	if(!Configuration::getInst().isApplicationExported() && getCurrentProjectId().empty())
 	{
 		abort();
 	}
 
-	const auto isExported = Config::getInst().isApplicationExported();
+	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\" + fileName + ".fe3d");
 
@@ -603,7 +603,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 
 			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
-			if(!Config::getInst().isApplicationExported())
+			if(!Configuration::getInst().isApplicationExported())
 			{
 				flareMapPath = ("projects\\" + getCurrentProjectId() + "\\" + flareMapPath);
 			}

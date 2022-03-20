@@ -142,7 +142,7 @@ void EngineController::initialize()
 	const auto diffuseMapDirectoryPath = string("engine\\assets\\image\\diffuse_map\\");
 	const auto fontMapDirectoryPath = string("engine\\assets\\image\\font_map\\");
 
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		if(_topViewportController->isProjectCorrupted(rootPath))
 		{
@@ -214,7 +214,7 @@ void EngineController::initialize()
 
 void EngineController::update()
 {
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		if(_scriptExecutor->isRunning())
 		{
@@ -254,7 +254,7 @@ void EngineController::update()
 
 void EngineController::terminate()
 {
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		if(_scriptExecutor->isRunning())
 		{

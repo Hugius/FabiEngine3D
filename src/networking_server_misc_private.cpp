@@ -128,7 +128,7 @@ const SOCKET NetworkingServer::_waitForClientConnection(SOCKET socket) const
 	return accept(socket, nullptr, nullptr);
 }
 
-const tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET socket) const
+tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET socket) const
 {
 	char buffer[TCP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(TCP_BUFFER_BYTES);

@@ -24,9 +24,9 @@ public:
 	const unsigned int getCursorCharacterIndex() const;
 
 private:
-	const string _id;
-
 	vector<string> _lines = {};
+
+	string _id;
 
 	unsigned int _cursorLineIndex = 0;
 	unsigned int _cursorCharacterIndex = 0;

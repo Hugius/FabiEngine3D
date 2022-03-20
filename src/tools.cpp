@@ -101,7 +101,7 @@ const string Tools::getRootDirectoryPath()
 
 const float Tools::getWindowAspectRatio()
 {
-	return (static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y));
+	return (static_cast<float>(Configuration::getInst().getWindowSize().x) / static_cast<float>(Configuration::getInst().getWindowSize().y));
 }
 
 const long long Tools::getTimeSinceEpochMS()
@@ -316,12 +316,12 @@ void Tools::deleteFile(const string& path)
 
 const fvec2 Tools::getMinViewportPosition()
 {
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		return fvec2(0.0f);
 	}
 
-	const auto rawPosition = Config::getInst().getDisplayPosition();
+	const auto rawPosition = Configuration::getInst().getDisplayPosition();
 	const auto result = convertToNdc(rawPosition);
 
 	return result;
@@ -329,12 +329,12 @@ const fvec2 Tools::getMinViewportPosition()
 
 const fvec2 Tools::getMaxViewportPosition()
 {
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		return fvec2(1.0f);
 	}
 
-	const auto rawPosition = (Config::getInst().getDisplayPosition() + Config::getInst().getDisplaySize());
+	const auto rawPosition = (Configuration::getInst().getDisplayPosition() + Configuration::getInst().getDisplaySize());
 	const auto result = convertToNdc(rawPosition);
 
 	return result;
@@ -342,13 +342,13 @@ const fvec2 Tools::getMaxViewportPosition()
 
 const fvec2 Tools::convertPositionRelativeToDisplay(const fvec2& position)
 {
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		return position;
 	}
 
-	const auto sizeMultiplier = (fvec2(Config::getInst().getDisplaySize()) / fvec2(Config::getInst().getWindowSize()));
-	const auto positionMultiplier = (fvec2(Config::getInst().getDisplayPosition()) / fvec2(Config::getInst().getWindowSize()));
+	const auto sizeMultiplier = (fvec2(Configuration::getInst().getDisplaySize()) / fvec2(Configuration::getInst().getWindowSize()));
+	const auto positionMultiplier = (fvec2(Configuration::getInst().getDisplayPosition()) / fvec2(Configuration::getInst().getWindowSize()));
 	const auto offset = (fvec2(1.0f) - fvec2(((positionMultiplier.x * 2.0f) + sizeMultiplier.x), ((positionMultiplier.y * 2.0f) + sizeMultiplier.y)));
 
 	fvec2 result = position;
@@ -360,15 +360,15 @@ const fvec2 Tools::convertPositionRelativeToDisplay(const fvec2& position)
 
 const fvec2 Tools::convertPositionRelativeFromDisplay(const fvec2& position)
 {
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		return position;
 	}
 
-	const auto sizeMultiplier = (fvec2(Config::getInst().getDisplaySize()) / fvec2(Config::getInst().getWindowSize()));
-	const auto positionMultiplier = (fvec2(Config::getInst().getDisplayPosition()) / fvec2(Config::getInst().getWindowSize()));
-	const auto invertedSizeMultiplier = fvec2(Config::getInst().getWindowSize()) / fvec2(Config::getInst().getDisplaySize());
-	const auto invertedPositionMultiplier = (fvec2(Config::getInst().getWindowSize()) / fvec2(Config::getInst().getDisplayPosition()));
+	const auto sizeMultiplier = (fvec2(Configuration::getInst().getDisplaySize()) / fvec2(Configuration::getInst().getWindowSize()));
+	const auto positionMultiplier = (fvec2(Configuration::getInst().getDisplayPosition()) / fvec2(Configuration::getInst().getWindowSize()));
+	const auto invertedSizeMultiplier = fvec2(Configuration::getInst().getWindowSize()) / fvec2(Configuration::getInst().getDisplaySize());
+	const auto invertedPositionMultiplier = (fvec2(Configuration::getInst().getWindowSize()) / fvec2(Configuration::getInst().getDisplayPosition()));
 	const auto offset = (fvec2(1.0f) - fvec2(((positionMultiplier.x * 2.0f) + sizeMultiplier.x), ((positionMultiplier.y * 2.0f) + sizeMultiplier.y)));
 
 	fvec2 result = position;
@@ -380,12 +380,12 @@ const fvec2 Tools::convertPositionRelativeFromDisplay(const fvec2& position)
 
 const fvec2 Tools::convertSizeRelativeToDisplay(const fvec2& size)
 {
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		return size;
 	}
 
-	const auto sizeMultiplier = (fvec2(Config::getInst().getDisplaySize()) / fvec2(Config::getInst().getWindowSize()));
+	const auto sizeMultiplier = (fvec2(Configuration::getInst().getDisplaySize()) / fvec2(Configuration::getInst().getWindowSize()));
 
 	fvec2 result = size;
 	result *= sizeMultiplier;
@@ -395,12 +395,12 @@ const fvec2 Tools::convertSizeRelativeToDisplay(const fvec2& size)
 
 const fvec2 Tools::convertSizeRelativeFromDisplay(const fvec2& size)
 {
-	if(!Config::getInst().isApplicationExported())
+	if(!Configuration::getInst().isApplicationExported())
 	{
 		return size;
 	}
 
-	const auto sizeMultiplier = (fvec2(Config::getInst().getDisplaySize()) / fvec2(Config::getInst().getWindowSize()));
+	const auto sizeMultiplier = (fvec2(Configuration::getInst().getDisplaySize()) / fvec2(Configuration::getInst().getWindowSize()));
 
 	fvec2 result = size;
 	result /= sizeMultiplier;
@@ -410,8 +410,8 @@ const fvec2 Tools::convertSizeRelativeFromDisplay(const fvec2& size)
 
 const fvec2 Tools::convertToNdc(const ivec2& position)
 {
-	const auto x = (static_cast<float>(position.x) / static_cast<float>(Config::getInst().getWindowSize().x));
-	const auto y = (static_cast<float>(position.y) / static_cast<float>(Config::getInst().getWindowSize().y));
+	const auto x = (static_cast<float>(position.x) / static_cast<float>(Configuration::getInst().getWindowSize().x));
+	const auto y = (static_cast<float>(position.y) / static_cast<float>(Configuration::getInst().getWindowSize().y));
 
 	auto ndc = fvec2(x, y);
 
@@ -432,8 +432,8 @@ const ivec2 Tools::convertFromNdc(const fvec2& position)
 	ndc.x *= 0.5f;
 	ndc.y *= 0.5f;
 
-	const auto x = (ndc.x * static_cast<float>(Config::getInst().getWindowSize().x));
-	const auto y = (ndc.y * static_cast<float>(Config::getInst().getWindowSize().y));
+	const auto x = (ndc.x * static_cast<float>(Configuration::getInst().getWindowSize().x));
+	const auto y = (ndc.y * static_cast<float>(Configuration::getInst().getWindowSize().y));
 
 	return ivec2(static_cast<int>(x), static_cast<int>(y));
 }

@@ -79,7 +79,7 @@ private:
 	const bool _isDecimalValue(const string& valueString) const;
 	const bool _isIntegerValue(const string& valueString) const;
 	const bool _isBooleanValue(const string& valueString) const;
-	const bool _isLocalVariableExisting(const string& variableId) const;
+	const bool _isLocalVariableExisting(const string& variableId);
 	const bool _isGlobalVariableExisting(const string& variableId) const;
 	const bool _checkConditionString(const string& conditionString);
 	const bool _validateCondition(shared_ptr<ScriptValue> firstValue, const string& comparisonOperator, shared_ptr<ScriptValue> secondValue);
@@ -159,7 +159,7 @@ private:
 	const bool _validateMouseInputString(const string& inputString);
 	const bool _validateSavesDirectory();
 
-	const shared_ptr<ScriptVariable> _getLocalVariable(const string& variableId) const;
+	const shared_ptr<ScriptVariable> _getLocalVariable(const string& variableId);
 	const shared_ptr<ScriptVariable> _getGlobalVariable(const string& variableId) const;
 
 	static inline const unordered_map<string, InputType> KEY_INPUT_STRING_MAP =

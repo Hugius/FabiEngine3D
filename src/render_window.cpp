@@ -113,7 +113,7 @@ void RenderWindow::hideCursor()
 void RenderWindow::setCursorPosition(const ivec2& pos)
 {
 	int x = pos.x;
-	int y = (Config::getInst().getWindowSize().y - pos.y);
+	int y = (Configuration::getInst().getWindowSize().y - pos.y);
 
 	SDL_WarpMouseInWindow(_windowPointer, x, y);
 }
@@ -124,7 +124,7 @@ const ivec2 RenderWindow::getCursorPosition() const
 
 	SDL_GetMouseState(&x, &y);
 
-	return ivec2(x, (Config::getInst().getWindowSize().y - y));
+	return ivec2(x, (Configuration::getInst().getWindowSize().y - y));
 }
 
 const bool RenderWindow::isCursorVisible() const

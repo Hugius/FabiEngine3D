@@ -179,8 +179,8 @@ const bool EngineInterface::misc_isCursorVisible() const
 const bool EngineInterface::misc_isCursorInsideDisplay() const
 {
 	auto cursorPosition = misc_getCursorPosition();
-	auto viewportPosition = Config::getInst().getDisplayPosition();
-	auto viewportSize = Config::getInst().getDisplaySize();
+	auto viewportPosition = Configuration::getInst().getDisplayPosition();
+	auto viewportSize = Configuration::getInst().getDisplaySize();
 
 	if((cursorPosition.x > viewportPosition.x) && (cursorPosition.x < (viewportPosition.x + viewportSize.x)))
 	{
@@ -196,7 +196,7 @@ const bool EngineInterface::misc_isCursorInsideDisplay() const
 const bool EngineInterface::misc_isCursorInsideWindow() const
 {
 	auto cursorPosition = misc_getCursorPosition();
-	auto windowSize = Config::getInst().getWindowSize();
+	auto windowSize = Configuration::getInst().getWindowSize();
 
 	if((cursorPosition.x > 1) && (cursorPosition.x < (windowSize.x - 1)))
 	{

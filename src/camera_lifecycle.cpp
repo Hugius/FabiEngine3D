@@ -28,7 +28,7 @@ void Camera::reset()
 	_position = fvec3(0.0f);
 	_thirdPersonLookat = fvec3(0.0f);
 
-	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
+	_aspectRatio = static_cast<float>(Configuration::getInst().getWindowSize().x) / static_cast<float>(Configuration::getInst().getWindowSize().y);
 	_fov = DEFAULT_FOV;
 	_cursorSensitivity = DEFAULT_CURSOR_SENSITIVITY;
 	_minFirstPersonPitch = MIN_PITCH;

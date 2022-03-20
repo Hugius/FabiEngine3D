@@ -157,7 +157,7 @@ void ScriptInterpreter::load()
 		}
 	}
 
-	if(Config::getInst().isApplicationExported())
+	if(Configuration::getInst().isApplicationExported())
 	{
 		auto skyImagePaths = _skyEditor->getImagePathsFromFile();
 		auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();

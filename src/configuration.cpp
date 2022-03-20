@@ -6,10 +6,10 @@
 
 using std::istringstream;
 
-Config::Config()
+Configuration::Configuration()
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + "config.fe3d");
+	const auto filePath = (rootPath + "configuration.fe3d");
 
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);
@@ -55,7 +55,7 @@ Config::Config()
 	}
 }
 
-void Config::_processOption(ifstream& file, string& option, const string& name)
+void Configuration::_processOption(ifstream& file, string& option, const string& name)
 {
 	string line;
 	string field;
@@ -79,7 +79,7 @@ void Config::_processOption(ifstream& file, string& option, const string& name)
 	}
 }
 
-void Config::_processOption(ifstream& file, float& option, const string& name)
+void Configuration::_processOption(ifstream& file, float& option, const string& name)
 {
 	string line;
 	string field;
@@ -103,7 +103,7 @@ void Config::_processOption(ifstream& file, float& option, const string& name)
 	}
 }
 
-void Config::_processOption(ifstream& file, int& option, const string& name)
+void Configuration::_processOption(ifstream& file, int& option, const string& name)
 {
 	string line;
 	string field;
@@ -127,7 +127,7 @@ void Config::_processOption(ifstream& file, int& option, const string& name)
 	}
 }
 
-void Config::_processOption(ifstream& file, bool& option, const string& name)
+void Configuration::_processOption(ifstream& file, bool& option, const string& name)
 {
 	string line;
 	string field;
@@ -164,47 +164,47 @@ void Config::_processOption(ifstream& file, bool& option, const string& name)
 	}
 }
 
-const string& Config::getWindowTitle() const
+const string& Configuration::getWindowTitle() const
 {
 	return _windowTitle;
 }
 
-const ivec2& Config::getMonitorSize() const
+const ivec2& Configuration::getMonitorSize() const
 {
 	return _monitorSize;
 }
 
-const ivec2& Config::getWindowSize() const
+const ivec2& Configuration::getWindowSize() const
 {
 	return _windowSize;
 }
 
-const ivec2& Config::getDisplayPosition() const
+const ivec2& Configuration::getDisplayPosition() const
 {
 	return _displayPosition;
 }
 
-const float Config::getWindowSizeMultiplier() const
+const float Configuration::getWindowSizeMultiplier() const
 {
 	return _windowSizeMultiplier;
 }
 
-const ivec2& Config::getDisplaySize() const
+const ivec2& Configuration::getDisplaySize() const
 {
 	return _displaySize;
 }
 
-const bool Config::isWindowFullscreen() const
+const bool Configuration::isWindowFullscreen() const
 {
 	return _isWindowFullscreen;
 }
 
-const bool Config::isWindowBorderless() const
+const bool Configuration::isWindowBorderless() const
 {
 	return _isWindowBorderless;
 }
 
-const bool Config::isApplicationExported() const
+const bool Configuration::isApplicationExported() const
 {
 	return _isApplicationExported;
 }

@@ -52,7 +52,7 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 	_shaderBuffer->uploadUniform("u_isHorizontallyFlipped", entity->isFlippedHorizonally());
 	_shaderBuffer->uploadUniform("u_isVerticallyFlipped", entity->isVerticallyFlipped());
 	_shaderBuffer->uploadUniform("u_color", entity->getColor());
-	_shaderBuffer->uploadUniform("u_windowSize", fvec2(Config::getInst().getWindowSize()));
+	_shaderBuffer->uploadUniform("u_windowSize", fvec2(Configuration::getInst().getWindowSize()));
 	_shaderBuffer->uploadUniform("u_minPosition", entity->getMinPosition());
 	_shaderBuffer->uploadUniform("u_maxPosition", entity->getMaxPosition());
 	_shaderBuffer->uploadUniform("u_opacity", entity->getOpacity());

@@ -27,7 +27,7 @@ public:
 
 	template<typename T, typename...Rest> static void throwInfo(T first, Rest...rest)
 	{
-		if(Config::getInst().isApplicationExported())
+		if(Configuration::getInst().isApplicationExported())
 		{
 			return;
 		}
@@ -38,7 +38,7 @@ public:
 
 	template<typename T, typename...Rest> static void throwDebug(T first, Rest...rest)
 	{
-		if(Config::getInst().isApplicationExported())
+		if(Configuration::getInst().isApplicationExported())
 		{
 			return;
 		}
@@ -49,7 +49,7 @@ public:
 
 	template<typename T, typename...Rest> static void throwWarning(T first, Rest...rest)
 	{
-		if(Config::getInst().isApplicationExported())
+		if(Configuration::getInst().isApplicationExported())
 		{
 			exit(69);
 		}
@@ -60,7 +60,7 @@ public:
 
 	template<typename T, typename...Rest> static void throwError(T first, Rest...rest)
 	{
-		if(Config::getInst().isApplicationExported())
+		if(Configuration::getInst().isApplicationExported())
 		{
 			exit(420);
 		}

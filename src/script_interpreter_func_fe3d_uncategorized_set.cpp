@@ -15,7 +15,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string& func
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(Config::getInst().isApplicationExported())
+			if(Configuration::getInst().isApplicationExported())
 			{
 				_fe3d->application_stop();
 			}

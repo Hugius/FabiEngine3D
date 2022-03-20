@@ -222,7 +222,7 @@ void TopViewportController::_updateMiscScreenManagement()
 			const auto newPath = (exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe");
 			Tools::renameFile(oldPath, newPath);
 
-			const auto filePath = (exportDirectoryPath + "config.fe3d");
+			const auto filePath = (exportDirectoryPath + "configuration.fe3d");
 			auto file = ofstream(filePath);
 			file << "window_size       = 0.75" << endl;
 			file << "window_fullscreen = false" << endl;

@@ -185,7 +185,7 @@ void MasterRenderer::inject(shared_ptr<RenderStorage> renderStorage)
 
 void MasterRenderer::reloadBloomBlurQuality()
 {
-	const auto viewportSize = Config::getInst().getDisplaySize();
+	const auto viewportSize = Configuration::getInst().getDisplaySize();
 
 	_bloomBlurHighQualityCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderStorage->getBloomQuality()), 1, true);
 	_bloomBlurLowQualityCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / (_renderStorage->getBloomQuality() * 2)), 1, true);
@@ -196,7 +196,7 @@ void MasterRenderer::reloadBloomBlurQuality()
 
 void MasterRenderer::reloadDofBlurQuality()
 {
-	const auto viewportSize = Config::getInst().getDisplaySize();
+	const auto viewportSize = Configuration::getInst().getDisplaySize();
 
 	_dofBlurCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderStorage->getDofQuality()), 1, true);
 
@@ -205,7 +205,7 @@ void MasterRenderer::reloadDofBlurQuality()
 
 void MasterRenderer::reloadMotionBlurBlurQuality()
 {
-	const auto viewportSize = Config::getInst().getDisplaySize();
+	const auto viewportSize = Configuration::getInst().getDisplaySize();
 
 	_motionBlurBlurCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), (viewportSize / _renderStorage->getMotionBlurQuality()), 1, true);
 

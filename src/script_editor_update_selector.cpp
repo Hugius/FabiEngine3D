@@ -48,6 +48,8 @@ void ScriptEditor::_updateTextSelector()
 	const auto cursorLineIndex = scriptFile->getCursorLineIndex();
 	const auto cursorCharacterIndex = scriptFile->getCursorCharacterIndex();
 
+	_fe3d->text3d_setVisible("cursor", true);
+
 	if(isControlDown && _fe3d->input_isKeyDown(InputType::KEY_A) && !scriptFile->getLine(cursorLineIndex).empty())
 	{
 		if(!(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::PART)))
@@ -75,8 +77,6 @@ void ScriptEditor::_updateTextSelector()
 		if(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::FULL))
 		{
 			_clearSelection();
-
-			_fe3d->text3d_setVisible("cursor", true);
 		}
 	}
 
@@ -118,47 +118,45 @@ void ScriptEditor::_updateTextSelector()
 		if(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::PART))
 		{
 			_clearSelection();
-
-			_fe3d->text3d_setVisible("cursor", true);
 		}
 	}
 
 	if(_fe3d->quad3d_isVisible("selection"))
 	{
-		const auto lineIndex = static_cast<unsigned int>(stoi(_firstSelectionAabbId.substr(0, _firstSelectionAabbId.find('_'))));
-		const auto firstCharacterIndex = static_cast<unsigned int>(stoi(_firstSelectionAabbId.substr(_firstSelectionAabbId.find('_') + 1)));
-		const auto secondCharacterIndex = static_cast<unsigned int>(stoi(_secondSelectionAabbId.substr(_secondSelectionAabbId.find('_') + 1)));
+		const auto selectionLineIndex = static_cast<unsigned int>(stoi(_firstSelectionAabbId.substr(0, _firstSelectionAabbId.find('_'))));
+		const auto firstSelectionCharacterIndex = static_cast<unsigned int>(stoi(_firstSelectionAabbId.substr(_firstSelectionAabbId.find('_') + 1)));
+		const auto secondSelectionCharacterIndex = static_cast<unsigned int>(stoi(_secondSelectionAabbId.substr(_secondSelectionAabbId.find('_') + 1)));
 
 		if(isControlDown && (_fe3d->input_isKeyPressed(InputType::KEY_C) || _fe3d->input_isKeyPressed(InputType::KEY_X)))
 		{
-			const auto lineText = scriptFile->getLine(lineIndex);
+			const auto lineText = scriptFile->getLine(selectionLineIndex);
 
-			if(firstCharacterIndex < secondCharacterIndex)
+			if(firstSelectionCharacterIndex < secondSelectionCharacterIndex)
 			{
-				_selectionClipboard = lineText.substr(static_cast<size_t>(firstCharacterIndex), static_cast<size_t>(secondCharacterIndex - firstCharacterIndex + 1));
+				_selectionClipboard = lineText.substr(static_cast<size_t>(firstSelectionCharacterIndex), static_cast<size_t>(secondSelectionCharacterIndex - firstSelectionCharacterIndex + 1));
 			}
 			else
 			{
-				_selectionClipboard = lineText.substr(static_cast<size_t>(secondCharacterIndex), static_cast<size_t>(firstCharacterIndex - secondCharacterIndex + 1));
+				_selectionClipboard = lineText.substr(static_cast<size_t>(secondSelectionCharacterIndex), static_cast<size_t>(firstSelectionCharacterIndex - secondSelectionCharacterIndex + 1));
 			}
 		}
 
 		if(isControlDown && (_fe3d->input_isKeyPressed(InputType::KEY_Z) || _fe3d->input_isKeyPressed(InputType::KEY_X)))
 		{
-			auto lineText = scriptFile->getLine(lineIndex);
+			auto lineText = scriptFile->getLine(selectionLineIndex);
 
-			if(firstCharacterIndex < secondCharacterIndex)
+			if(firstSelectionCharacterIndex < secondSelectionCharacterIndex)
 			{
-				lineText.erase(static_cast<size_t>(firstCharacterIndex), static_cast<size_t>(secondCharacterIndex - firstCharacterIndex + 1));
+				lineText.erase(static_cast<size_t>(firstSelectionCharacterIndex), static_cast<size_t>(secondSelectionCharacterIndex - firstSelectionCharacterIndex + 1));
 			}
 			else
 			{
-				lineText.erase(static_cast<size_t>(secondCharacterIndex), static_cast<size_t>(firstCharacterIndex - secondCharacterIndex + 1));
+				lineText.erase(static_cast<size_t>(secondSelectionCharacterIndex), static_cast<size_t>(firstSelectionCharacterIndex - secondSelectionCharacterIndex + 1));
 			}
 
-			scriptFile->editLine(lineIndex, lineText);
+			scriptFile->editLine(selectionLineIndex, lineText);
 
-			if(cursorCharacterIndex > lineText.size())
+			if((selectionLineIndex == cursorLineIndex) && (cursorCharacterIndex > lineText.size()))
 			{
 				scriptFile->setCursorCharacterIndex(static_cast<unsigned int>(lineText.size()));
 			}

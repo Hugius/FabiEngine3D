@@ -9,8 +9,8 @@ void ScriptEditor::_createScriptDisplayEntities()
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 
 	const auto separatorId = "separator";
-	const auto separatorPosition = (TEXT_STARTING_POSITION + fvec3(HORIZONTAL_LINE_OFFSET * 0.5f, -(((static_cast<float>(lineCount) - 1) * 0.5f) * VERTICAL_LINE_OFFSET), 0.0f));
-	const auto separatorSize = fvec2((TEXT_CHARACTER_SIZE.x * 0.25f), (static_cast<float>(lineCount) * VERTICAL_LINE_OFFSET));
+	const auto separatorPosition = (ROOT_TEXT_POSITION + fvec3(HORIZONTAL_LINE_OFFSET * 0.5f, -(((static_cast<float>(lineCount) - 1) * 0.5f) * VERTICAL_LINE_OFFSET), 0.0f));
+	const auto separatorSize = fvec2((CHARACTER_SIZE.x * 0.25f), (static_cast<float>(lineCount) * VERTICAL_LINE_OFFSET));
 
 	_fe3d->quad3d_create(separatorId, true);
 	_fe3d->quad3d_setPosition(separatorId, separatorPosition);
@@ -24,9 +24,9 @@ void ScriptEditor::_createScriptDisplayEntities()
 	{
 		const auto lineNumberId = ("number_" + to_string(lineIndex));
 		const auto lineNumberString = to_string(lineIndex + 1);
-		const auto lineNumberOffset = -fvec3((lineNumberString.size() - 1) * (TEXT_CHARACTER_SIZE.x * 0.5f), VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f);
-		const auto lineNumberPosition = (TEXT_STARTING_POSITION + lineNumberOffset);
-		const auto lineNumberSize = fvec2((lineNumberString.size() * TEXT_CHARACTER_SIZE.x), TEXT_CHARACTER_SIZE.y);
+		const auto lineNumberOffset = -fvec3((lineNumberString.size() - 1) * (CHARACTER_SIZE.x * 0.5f), VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f);
+		const auto lineNumberPosition = (ROOT_TEXT_POSITION + lineNumberOffset);
+		const auto lineNumberSize = fvec2((lineNumberString.size() * CHARACTER_SIZE.x), CHARACTER_SIZE.y);
 
 		_fe3d->text3d_create(lineNumberId, FONT_MAP_PATH, true);
 		_fe3d->text3d_setMinTextureAlpha(lineNumberId, 0.05f);
@@ -40,9 +40,9 @@ void ScriptEditor::_createScriptDisplayEntities()
 
 		const auto lineTextId = ("text_" + to_string(lineIndex));
 		const auto lineTextString = _script->getScriptFile(_currentScriptFileId)->getLine(lineIndex);
-		const auto lineTextOffset = fvec3((((lineTextString.size() - 1) * (TEXT_CHARACTER_SIZE.x * 0.5f)) + HORIZONTAL_LINE_OFFSET), (-VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);
-		const auto lineTextPosition = (TEXT_STARTING_POSITION + lineTextOffset);
-		const auto lineTextSize = fvec2(lineTextString.size() * TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y);
+		const auto lineTextOffset = fvec3((((lineTextString.size() - 1) * (CHARACTER_SIZE.x * 0.5f)) + HORIZONTAL_LINE_OFFSET), (-VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);
+		const auto lineTextPosition = (ROOT_TEXT_POSITION + lineTextOffset);
+		const auto lineTextSize = fvec2(lineTextString.size() * CHARACTER_SIZE.x, CHARACTER_SIZE.y);
 
 		istringstream iss(lineTextString);
 		string noWhiteSpace;
@@ -62,7 +62,7 @@ void ScriptEditor::_createScriptDisplayEntities()
 		const auto lineAabbId = to_string(lineIndex);
 		const auto lineAabbOffset = fvec3(0.0f, 0.0f, -AABB_DEPTH);
 		const auto lineAabbPosition = (lineTextPosition + lineAabbOffset);
-		const auto lineAabbSize = fvec3(FLT_MAX, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
+		const auto lineAabbSize = fvec3(FLT_MAX, CHARACTER_SIZE.y, AABB_DEPTH);
 
 		_fe3d->aabb_create(lineAabbId, true);
 		_fe3d->aabb_setBasePosition(lineAabbId, lineAabbPosition);
@@ -74,10 +74,10 @@ void ScriptEditor::_createScriptDisplayEntities()
 		{
 			const auto characterId = (to_string(lineIndex) + "_" + to_string(charIndex));
 			const auto characterOffset = fvec3(((CHARACTER_OFFSET * static_cast<float>(charIndex)) + HORIZONTAL_LINE_OFFSET), (-VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);
-			const auto characterPosition = (TEXT_STARTING_POSITION + characterOffset);
+			const auto characterPosition = (ROOT_TEXT_POSITION + characterOffset);
 			const auto characterAabbOffset = fvec3(0.0f);
 			const auto characterAabbPosition = (characterPosition + characterAabbOffset);
-			const auto characterAabbSize = fvec3(TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
+			const auto characterAabbSize = fvec3(CHARACTER_SIZE.x, CHARACTER_SIZE.y, AABB_DEPTH);
 
 			_fe3d->aabb_create(characterId, true);
 			_fe3d->aabb_setBasePosition(characterId, characterAabbPosition);
@@ -119,31 +119,15 @@ void ScriptEditor::_clearDisplay()
 	_currentScriptFileId = "";
 }
 
-void ScriptEditor::_clearCharacterSelection()
+void ScriptEditor::_clearSelection()
 {
-	if(_canSelectCharacter)
-	{
-		if(_fe3d->quad3d_isVisible("selection"))
-		{
-			_canSelectCharacter = false;
-		}
-	}
-	else
-	{
-		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
-		{
-			_canSelectCharacter = true;
-		}
-	}
-
 	_fe3d->quad3d_setVisible("selection", false);
-
-
 	_fe3d->quad3d_setPosition("selection", fvec3(0.0f));
 	_fe3d->quad3d_setSize("selection", fvec2(0.0f));
 
-	_characterSelectionFirstAabbId = "";
-	_characterSelectionSecondAabbId = "";
+	_firstSelectionAabbId = "";
+	_secondSelectionAabbId = "";
+	_selectionType = {};
 }
 
 void ScriptEditor::inject(shared_ptr<Script> script)

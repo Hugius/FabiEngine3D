@@ -2,6 +2,7 @@
 
 #include "base_editor.hpp"
 #include "script.hpp"
+#include "script_selection_type.hpp"
 
 class ScriptEditor final : public BaseEditor
 {
@@ -35,7 +36,7 @@ private:
 	void _createScriptDisplayEntities();
 	void _deleteScriptDisplayEntities();
 	void _clearDisplay();
-	void _clearCharacterSelection();
+	void _clearSelection();
 
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
@@ -45,14 +46,14 @@ private:
 	vector<string> _loadedAabbIds;
 	string _currentScriptFileId = "";
 
-	static inline const fvec3 TEXT_STARTING_POSITION = fvec3(-12.0f, 6.0, 0.0f);
 	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
 	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);
 	static inline const fvec3 SELECTION_COLOR = fvec3(0.1f, 0.1f, 0.1f);
 	static inline const fvec3 DEFAULT_TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 COMMENT_TEXT_COLOR = fvec3(0.0f, 0.75f, 0.0f);
+	static inline const fvec3 ROOT_TEXT_POSITION = fvec3(-12.0f, 6.0, 0.0f);
 
-	static inline const fvec2 TEXT_CHARACTER_SIZE = fvec2(0.25f, 0.75f);
+	static inline const fvec2 CHARACTER_SIZE = fvec2(0.25f, 0.75f);
 
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
@@ -95,9 +96,9 @@ private:
 		{'=', '+'}
 	};
 
-	string _characterSelectionFirstAabbId = "";
-	string _characterSelectionSecondAabbId = "";
-	string _characterSelectionClipboard = "";
+	string _firstSelectionAabbId = "";
+	string _secondSelectionAabbId = "";
+	string _selectionClipboard = "";
 
 	bool _isSearchingScriptFile = false;
 	bool _isCreatingScriptFile = false;
@@ -107,7 +108,8 @@ private:
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
 	bool _hasTextChanged = false;
-	bool _canSelectCharacter = true;
+
+	ScriptSelectionType _selectionType = {};
 
 	shared_ptr<Script> _script = nullptr;
 };

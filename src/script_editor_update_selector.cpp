@@ -4,19 +4,18 @@ void ScriptEditor::_updateTextSelector()
 {
 	if(!_isWritingScript || _gui->getOverlay()->isFocused() || !_fe3d->misc_isCursorInsideDisplay())
 	{
-		_clearCharacterSelection();
+		_clearSelection();
 
 		return;
 	}
 
 	const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 	const auto scriptFile = _script->getScriptFile(_currentScriptFileId);
-	const auto isControlDown = (_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL));
 
 	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !hoveredAabbId.empty())
 	{
-		auto cursorLineIndex = _script->getScriptFile(_currentScriptFileId)->getCursorLineIndex();
-		auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
+		auto cursorLineIndex = scriptFile->getCursorLineIndex();
+		auto cursorCharacterIndex = scriptFile->getCursorCharacterIndex();
 		int hoveredLineIndex = -1;
 		int hoveredCharacterIndex = -1;
 
@@ -34,56 +33,101 @@ void ScriptEditor::_updateTextSelector()
 
 		if(hoveredCharacterIndex == -1)
 		{
-			cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
+			cursorCharacterIndex = static_cast<unsigned int>(scriptFile->getLine(cursorLineIndex).size());
 		}
 		else
 		{
 			cursorCharacterIndex = hoveredCharacterIndex;
 		}
 
-		_script->getScriptFile(_currentScriptFileId)->setCursorLineIndex(cursorLineIndex);
-		_script->getScriptFile(_currentScriptFileId)->setCursorCharacterIndex(cursorCharacterIndex);
+		scriptFile->setCursorLineIndex(cursorLineIndex);
+		scriptFile->setCursorCharacterIndex(cursorCharacterIndex);
 	}
 
-	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE) && hoveredAabbId.find('_') != string::npos && _canSelectCharacter)
+	const auto isControlDown = (_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL));
+	const auto cursorLineIndex = scriptFile->getCursorLineIndex();
+	const auto cursorCharacterIndex = scriptFile->getCursorCharacterIndex();
+
+	if(isControlDown && _fe3d->input_isKeyDown(InputType::KEY_A) && !scriptFile->getLine(cursorLineIndex).empty())
 	{
-		_fe3d->quad3d_setVisible("selection", true);
-		_fe3d->text3d_setVisible("cursor", false);
-
-		if(_characterSelectionFirstAabbId.empty())
+		if(!(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::PART)))
 		{
-			_characterSelectionFirstAabbId = hoveredAabbId;
+			_fe3d->quad3d_setVisible("selection", true);
+			_fe3d->text3d_setVisible("cursor", false);
+
+			_selectionType = ScriptSelectionType::FULL;
+			_firstSelectionAabbId = (to_string(cursorLineIndex) + "_0");
+			_secondSelectionAabbId = (to_string(cursorLineIndex) + "_" + to_string(scriptFile->getLine(cursorLineIndex).size() - 1));
+
+			const auto firstAabbPosition = _fe3d->aabb_getBasePosition(_firstSelectionAabbId);
+			const auto secondAabbPosition = _fe3d->aabb_getBasePosition(_secondSelectionAabbId);
+			const auto selectionWidth = (static_cast<float>(scriptFile->getLine(cursorLineIndex).size()) * CHARACTER_SIZE.x);
+			const auto selectionHeight = CHARACTER_SIZE.y;
+			const auto selectionX = ((firstAabbPosition.x + secondAabbPosition.x) / 2.0f);
+			const auto selectionY = firstAabbPosition.y;
+
+			_fe3d->quad3d_setPosition("selection", fvec3(selectionX, selectionY, 0.0f));
+			_fe3d->quad3d_setSize("selection", fvec2(selectionWidth, selectionHeight));
 		}
-
-		const auto firstAabbPosition = _fe3d->aabb_getBasePosition(_characterSelectionFirstAabbId);
-		const auto hoveredAabbPosition = _fe3d->aabb_getBasePosition(hoveredAabbId);
-		const auto selectionWidth = (fabsf(firstAabbPosition.x - hoveredAabbPosition.x) + TEXT_CHARACTER_SIZE.x);
-
-		if(hoveredAabbPosition.x < firstAabbPosition.x)
-		{
-			_fe3d->quad3d_setPosition("selection", fvec2((firstAabbPosition.x - (selectionWidth / 2.0f) + (TEXT_CHARACTER_SIZE.x / 2.0f)), firstAabbPosition.y));
-		}
-		else
-		{
-			_fe3d->quad3d_setPosition("selection", fvec2((firstAabbPosition.x + (selectionWidth / 2.0f) - (TEXT_CHARACTER_SIZE.x / 2.0f)), firstAabbPosition.y));
-		}
-
-		_fe3d->quad3d_setSize("selection", fvec2(selectionWidth, TEXT_CHARACTER_SIZE.y));
-
-		_characterSelectionSecondAabbId = hoveredAabbId;
 	}
 	else
 	{
-		_clearCharacterSelection();
+		if(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::FULL))
+		{
+			_clearSelection();
 
-		_fe3d->text3d_setVisible("cursor", true);
+			_fe3d->text3d_setVisible("cursor", true);
+		}
+	}
+
+	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE) && hoveredAabbId.find('_') != string::npos)
+	{
+		if(!(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::FULL)))
+		{
+			_fe3d->quad3d_setVisible("selection", true);
+			_fe3d->text3d_setVisible("cursor", false);
+
+			_selectionType = ScriptSelectionType::PART;
+			_firstSelectionAabbId = (_firstSelectionAabbId.empty() ? hoveredAabbId : _firstSelectionAabbId);
+			_secondSelectionAabbId = hoveredAabbId;
+
+			const auto firstAabbPosition = _fe3d->aabb_getBasePosition(_firstSelectionAabbId);
+			const auto secondAabbPosition = _fe3d->aabb_getBasePosition(_secondSelectionAabbId);
+			const auto selectionWidth = (fabsf(firstAabbPosition.x - secondAabbPosition.x) + CHARACTER_SIZE.x);
+			const auto selectionHeight = CHARACTER_SIZE.y;
+
+			float selectionX;
+			float selectionY;
+			if(secondAabbPosition.x < firstAabbPosition.x)
+			{
+				selectionX = (firstAabbPosition.x - (selectionWidth / 2.0f) + (CHARACTER_SIZE.x / 2.0f));
+				selectionY = firstAabbPosition.y;
+			}
+			else
+			{
+				selectionX = (firstAabbPosition.x + (selectionWidth / 2.0f) - (CHARACTER_SIZE.x / 2.0f));
+				selectionY = firstAabbPosition.y;
+			}
+
+			_fe3d->quad3d_setPosition("selection", fvec3(selectionX, selectionY, 0.0f));
+			_fe3d->quad3d_setSize("selection", fvec2(selectionWidth, selectionHeight));
+		}
+	}
+	else
+	{
+		if(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::PART))
+		{
+			_clearSelection();
+
+			_fe3d->text3d_setVisible("cursor", true);
+		}
 	}
 
 	if(_fe3d->quad3d_isVisible("selection"))
 	{
-		const auto lineIndex = static_cast<unsigned int>(stoi(_characterSelectionFirstAabbId.substr(0, _characterSelectionFirstAabbId.find('_'))));
-		const auto firstCharacterIndex = static_cast<unsigned int>(stoi(_characterSelectionFirstAabbId.substr(_characterSelectionFirstAabbId.find('_') + 1)));
-		const auto secondCharacterIndex = static_cast<unsigned int>(stoi(_characterSelectionSecondAabbId.substr(_characterSelectionSecondAabbId.find('_') + 1)));
+		const auto lineIndex = static_cast<unsigned int>(stoi(_firstSelectionAabbId.substr(0, _firstSelectionAabbId.find('_'))));
+		const auto firstCharacterIndex = static_cast<unsigned int>(stoi(_firstSelectionAabbId.substr(_firstSelectionAabbId.find('_') + 1)));
+		const auto secondCharacterIndex = static_cast<unsigned int>(stoi(_secondSelectionAabbId.substr(_secondSelectionAabbId.find('_') + 1)));
 
 		if(isControlDown && _fe3d->input_isKeyPressed(InputType::KEY_R))
 		{
@@ -100,14 +144,14 @@ void ScriptEditor::_updateTextSelector()
 
 			scriptFile->editLine(lineIndex, lineText);
 
-			if(scriptFile->getCursorCharacterIndex() > lineText.size())
+			if(cursorCharacterIndex > lineText.size())
 			{
 				scriptFile->setCursorCharacterIndex(static_cast<unsigned int>(lineText.size()));
 			}
 
 			_hasTextChanged = true;
 
-			_clearCharacterSelection();
+			_clearSelection();
 		}
 
 		if(isControlDown && _fe3d->input_isKeyPressed(InputType::KEY_C))
@@ -116,11 +160,11 @@ void ScriptEditor::_updateTextSelector()
 
 			if(firstCharacterIndex < secondCharacterIndex)
 			{
-				_characterSelectionClipboard = lineText.substr(static_cast<size_t>(firstCharacterIndex), static_cast<size_t>(secondCharacterIndex - firstCharacterIndex + 1));
+				_selectionClipboard = lineText.substr(static_cast<size_t>(firstCharacterIndex), static_cast<size_t>(secondCharacterIndex - firstCharacterIndex + 1));
 			}
 			else
 			{
-				_characterSelectionClipboard = lineText.substr(static_cast<size_t>(secondCharacterIndex), static_cast<size_t>(firstCharacterIndex - secondCharacterIndex + 1));
+				_selectionClipboard = lineText.substr(static_cast<size_t>(secondCharacterIndex), static_cast<size_t>(firstCharacterIndex - secondCharacterIndex + 1));
 			}
 		}
 	}
@@ -128,15 +172,15 @@ void ScriptEditor::_updateTextSelector()
 	{
 		if(isControlDown && _fe3d->input_isKeyPressed(InputType::KEY_V))
 		{
-			if(!_characterSelectionClipboard.empty())
+			if(!_selectionClipboard.empty())
 			{
-				const auto lineText = scriptFile->getLine(scriptFile->getCursorLineIndex());
-				const auto firstPart = lineText.substr(0, scriptFile->getCursorCharacterIndex());
-				const auto secondPart = lineText.substr(scriptFile->getCursorCharacterIndex());
+				const auto lineText = scriptFile->getLine(cursorLineIndex);
+				const auto firstPart = lineText.substr(0, cursorCharacterIndex);
+				const auto secondPart = lineText.substr(cursorCharacterIndex);
 
-				scriptFile->editLine(scriptFile->getCursorLineIndex(), (firstPart + _characterSelectionClipboard + secondPart));
+				scriptFile->editLine(cursorLineIndex, (firstPart + _selectionClipboard + secondPart));
 
-				scriptFile->setCursorCharacterIndex(scriptFile->getCursorCharacterIndex() + static_cast<unsigned int>(_characterSelectionClipboard.size()));
+				scriptFile->setCursorCharacterIndex(cursorCharacterIndex + static_cast<unsigned int>(_selectionClipboard.size()));
 
 				_hasTextChanged = true;
 			}

@@ -28,7 +28,7 @@ void ScriptEditor::_load()
 	_fe3d->text3d_create("cursor", FONT_MAP_PATH, true);
 	_fe3d->text3d_setVisible("cursor", false);
 	_fe3d->text3d_setContent("cursor", "|");
-	_fe3d->text3d_setSize("cursor", TEXT_CHARACTER_SIZE);
+	_fe3d->text3d_setSize("cursor", CHARACTER_SIZE);
 	_fe3d->text3d_setMinTextureAlpha("cursor", 0.05f);
 }
 
@@ -70,8 +70,8 @@ void ScriptEditor::_unload()
 	_loadedAabbIds.clear();
 	_copyClipboard.clear();
 	_currentScriptFileId = "";
-	_characterSelectionFirstAabbId = "";
-	_characterSelectionSecondAabbId = "";
+	_firstSelectionAabbId = "";
+	_secondSelectionAabbId = "";
 	_isSearchingScriptFile = false;
 	_isCreatingScriptFile = false;
 	_isChoosingScriptFile = false;
@@ -80,7 +80,7 @@ void ScriptEditor::_unload()
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_hasTextChanged = false;
-	_canSelectCharacter = true;
+	_selectionType = {};
 }
 
 void ScriptEditor::_loadGUI()

@@ -40,6 +40,12 @@ public:
 	void setWireframed(bool value);
 	void setWireframeColor(const fvec3& value);
 
+	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
+	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
+	const shared_ptr<TextureBuffer> getDudvTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getNormalTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getDisplacementTextureBuffer() const;
+
 	const string& getDudvMapPath() const;
 	const string& getNormalMapPath() const;
 	const string& getDisplacementMapPath() const;
@@ -67,14 +73,14 @@ public:
 	const bool isWireframed() const;
 	const bool isEdged() const;
 
-	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
-	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getDudvTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getNormalTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getDisplacementTextureBuffer() const;
-
 private:
 	static inline constexpr float MAX_SIZE = 1024.0f;
+
+	shared_ptr<VertexBuffer> _lowQualityVertexBuffer = nullptr;
+	shared_ptr<VertexBuffer> _highQualityVertexBuffer = nullptr;
+	shared_ptr<TextureBuffer> _dudvTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _normalTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _displacementTextureBuffer = nullptr;
 
 	string _dudvMapPath = "";
 	string _normalMapPath = "";
@@ -102,10 +108,4 @@ private:
 	bool _isReflective = false;
 	bool _isRefractive = false;
 	bool _isWireframed = false;
-
-	shared_ptr<VertexBuffer> _lowQualityVertexBuffer = nullptr;
-	shared_ptr<VertexBuffer> _highQualityVertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _dudvTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _normalTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _displacementTextureBuffer = nullptr;
 };

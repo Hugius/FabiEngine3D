@@ -49,6 +49,10 @@ public:
 	void setFrozen(bool value);
 	void setMinTextureAlpha(float value);
 
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
+	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getEmissionTextureBuffer() const;
+
 	const string& getDiffuseMapPath() const;
 	const string& getEmissionMapPath() const;
 
@@ -81,11 +85,11 @@ public:
 	const bool isWireframed() const;
 	const bool isCentered() const;
 
-	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getEmissionTextureBuffer() const;
-
 private:
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
+	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _emissionTextureBuffer = nullptr;
+
 	string _diffuseMapPath = "";
 	string _emissionMapPath = "";
 
@@ -123,8 +127,4 @@ private:
 	bool _isWireframed = false;
 	bool _isFrozen = false;
 	bool _isCentered = false;
-
-	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _emissionTextureBuffer = nullptr;
 };

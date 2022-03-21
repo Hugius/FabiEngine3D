@@ -6,6 +6,13 @@ class ModelEntityPart final
 {
 	friend class ModelEntity;
 
+	shared_ptr<VertexBuffer> vertexBuffer = nullptr;
+	shared_ptr<TextureBuffer> diffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> emissionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> specularTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> reflectionTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> normalTextureBuffer = nullptr;
+
 	string diffuseMapPath = "";
 	string emissionMapPath = "";
 	string specularMapPath = "";
@@ -42,13 +49,6 @@ class ModelEntityPart final
 	bool isWireframed = false;
 	bool isBright = false;
 	bool isFaceCulled = false;
-
-	shared_ptr<VertexBuffer> vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> diffuseTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> emissionTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> specularTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> reflectionTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> normalTextureBuffer = nullptr;
 
 	ReflectionType reflectionType = {};
 };

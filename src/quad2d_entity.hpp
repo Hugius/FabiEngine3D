@@ -41,6 +41,9 @@ public:
 	void setCentered(bool value);
 	void setTextureRepeat(unsigned int value);
 
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
+	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
+
 	const string& getDiffuseMapPath() const;
 
 	const mat44& getTransformation() const;
@@ -66,13 +69,13 @@ public:
 	const bool isFlippedHorizonally() const;
 	const bool isVerticallyFlipped() const;
 
-	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
-
 private:
-	mat44 _transformation = mat44(1.0f);
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
+	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
 
 	string _diffuseMapPath = "";
+
+	mat44 _transformation = mat44(1.0f);
 
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
@@ -100,7 +103,4 @@ private:
 	bool _isHorizontallyFlipped = false;
 	bool _isVerticallyFlipped = false;
 	bool _isWireframed = false;
-
-	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
 };

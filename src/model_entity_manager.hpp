@@ -28,10 +28,10 @@ public:
 
 	const unordered_map<string, shared_ptr<ModelEntity>>& getEntities() const;
 
+	const shared_ptr<ModelEntity> getEntity(const string& id) const;
+
 	const bool isEntityExisting(const string& id) const;
 	const bool isEntitiesExisting() const;
-
-	const shared_ptr<ModelEntity> getEntity(const string& id) const;
 
 private:
 	static inline constexpr float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;

@@ -29,8 +29,8 @@ private:
 
 	vector<pair<string, string>> _consoleMessageQueue;
 
-	float _scrollingAcceleration = 0.0f;
-
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
+
+	float _scrollingAcceleration = 0.0f;
 };

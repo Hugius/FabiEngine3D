@@ -26,6 +26,9 @@ public:
 
 	const array<string, 6>& getCubeMapPaths() const;
 
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
+	const shared_ptr<TextureBuffer> getCubeTextureBuffer() const;
+
 	const mat44& getTransformation() const;
 
 	const fvec3& getWireframeColor() const;
@@ -36,11 +39,11 @@ public:
 
 	const bool isWireframed() const;
 
-	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getCubeTextureBuffer() const;
-
 private:
 	array<string, 6> _cubeMapPaths = {"", "", "", "", "", ""};
+
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
+	shared_ptr<TextureBuffer> _cubeTextureBuffer = nullptr;
 
 	mat44 _transformation = mat44(1.0f);
 
@@ -51,7 +54,4 @@ private:
 	float _rotation = 0.0f;
 
 	bool _isWireframed = false;
-
-	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _cubeTextureBuffer = nullptr;
 };

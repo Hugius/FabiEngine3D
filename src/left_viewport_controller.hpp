@@ -45,8 +45,6 @@ private:
 	static inline constexpr float CW = 0.115f;
 	static inline constexpr float CH = 0.0875f;
 
-	string _lastActiveEditorScreen = "";
-
 	shared_ptr<SkyEditor> _skyEditor = nullptr;
 	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
 	shared_ptr<WaterEditor> _waterEditor = nullptr;
@@ -60,4 +58,6 @@ private:
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
 	shared_ptr<WorldEditor> _worldEditor = nullptr;
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
+
+	string _lastActiveEditorScreen = "";
 };

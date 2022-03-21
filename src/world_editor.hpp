@@ -224,6 +224,17 @@ private:
 	vector<string> _loadedSpotlightIds = {};
 	vector<string> _loadedReflectionIds = {};
 
+	shared_ptr<SkyEditor> _skyEditor = nullptr;
+	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
+	shared_ptr<WaterEditor> _waterEditor = nullptr;
+	shared_ptr<ModelEditor> _modelEditor = nullptr;
+	shared_ptr<Quad3dEditor> _quad3dEditor = nullptr;
+	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
+	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
+	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
+	shared_ptr<SoundEditor> _soundEditor = nullptr;
+	shared_ptr<WorldUtilities> _worldUtilities = nullptr;
+
 	string _currentTemplateModelId = "";
 	string _currentTemplateQuadId = "";
 	string _currentTemplateTextId = "";
@@ -279,15 +290,4 @@ private:
 	bool _isDeletingWorld = false;
 	bool _isWireframeModeEnabled = false;
 	bool _isAabbModeEnabled = false;
-
-	shared_ptr<SkyEditor> _skyEditor = nullptr;
-	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
-	shared_ptr<WaterEditor> _waterEditor = nullptr;
-	shared_ptr<ModelEditor> _modelEditor = nullptr;
-	shared_ptr<Quad3dEditor> _quad3dEditor = nullptr;
-	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
-	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
-	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
-	shared_ptr<SoundEditor> _soundEditor = nullptr;
-	shared_ptr<WorldUtilities> _worldUtilities = nullptr;
 };

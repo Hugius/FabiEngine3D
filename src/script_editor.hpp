@@ -89,6 +89,8 @@ private:
 	vector<string> _loadedTextIds = {};
 	vector<string> _loadedAabbIds = {};
 
+	shared_ptr<Script> _script = nullptr;
+
 	string _currentScriptFileId = "";
 	string _firstSelectionAabbId = "";
 	string _secondSelectionAabbId = "";
@@ -102,8 +104,6 @@ private:
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
 	bool _hasTextChanged = false;
-
-	shared_ptr<Script> _script = nullptr;
 
 	ScriptSelectionType _selectionType = {};
 };

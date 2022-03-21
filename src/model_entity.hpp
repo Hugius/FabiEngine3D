@@ -81,6 +81,13 @@ public:
 
 	const vector<string> getPartIds() const;
 
+	const shared_ptr<VertexBuffer> getVertexBuffer(const string& partId) const;
+	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer(const string& partId) const;
+	const shared_ptr<TextureBuffer> getEmissionTextureBuffer(const string& partId) const;
+	const shared_ptr<TextureBuffer> getSpecularTextureBuffer(const string& partId) const;
+	const shared_ptr<TextureBuffer> getReflectionTextureBuffer(const string& partId) const;
+	const shared_ptr<TextureBuffer> getNormalTextureBuffer(const string& partId) const;
+
 	const string& getMeshPath() const;
 	const string& getLevelOfDetailEntityId() const;
 	const string& getPreviousReflectionEntityId() const;
@@ -128,13 +135,6 @@ public:
 	const bool isSpecular(const string& partId) const;
 	const bool isReflective(const string& partId) const;
 
-	const shared_ptr<VertexBuffer> getVertexBuffer(const string& partId) const;
-	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer(const string& partId) const;
-	const shared_ptr<TextureBuffer> getEmissionTextureBuffer(const string& partId) const;
-	const shared_ptr<TextureBuffer> getSpecularTextureBuffer(const string& partId) const;
-	const shared_ptr<TextureBuffer> getReflectionTextureBuffer(const string& partId) const;
-	const shared_ptr<TextureBuffer> getNormalTextureBuffer(const string& partId) const;
-
 	const ReflectionType getReflectionType(const string& partId) const;
 	const DirectionOrder getRotationOrder() const;
 
@@ -142,6 +142,8 @@ private:
 	void _correctPositionTarget(fvec3& current, const fvec3& target, float speed);
 	void _correctRotationTarget(fvec3& current, const fvec3& target, float speed);
 	void _correctSizeTarget(fvec3& current, const fvec3& target, float speed);
+
+	unordered_map<string, unique_ptr<ModelEntityPart>> _parts = {};
 
 	string _meshPath = "";
 	string _levelOfDetailEntityId = "";
@@ -168,8 +170,6 @@ private:
 	bool _isShadowed = true;
 	bool _isReflected = true;
 	bool _isLevelOfDetailed = false;
-
-	unordered_map<string, unique_ptr<ModelEntityPart>> _parts = {};
 
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;
 };

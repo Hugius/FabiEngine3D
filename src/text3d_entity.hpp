@@ -47,6 +47,9 @@ public:
 
 	const vector<shared_ptr<Quad3dEntity>>& getCharacterEntities() const;
 
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
+	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
+
 	const string& getContent() const;
 	const string& getFontMapPath() const;
 
@@ -75,9 +78,6 @@ public:
 	const bool isFrozen() const;
 	const bool isWireframed() const;
 	const bool isCentered() const;
-
-	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
 
 private:
 	static inline const unordered_map<char, ivec2> _fontMapIndices =
@@ -183,6 +183,9 @@ private:
 
 	vector<shared_ptr<Quad3dEntity>> _characterEntities = {};
 
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
+	shared_ptr<TextureBuffer> _fontTextureBuffer = nullptr;
+
 	string _content = "";
 	string _fontMapPath = "";
 
@@ -217,7 +220,4 @@ private:
 	bool _isWireframed = false;
 	bool _isFrozen = false;
 	bool _isCentered = false;
-
-	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _fontTextureBuffer = nullptr;
 };

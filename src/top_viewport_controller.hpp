@@ -63,12 +63,6 @@ private:
 	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 
-	string _currentProjectId = "";
-
-	bool _isCreatingProject = false;
-	bool _isLoadingProject = false;
-	bool _isDeletingProject = false;
-
 	shared_ptr<SkyEditor> _skyEditor = nullptr;
 	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
 	shared_ptr<WaterEditor> _waterEditor = nullptr;
@@ -85,4 +79,10 @@ private:
 	shared_ptr<CustomWorldBuilder> _customWorldBuilder = nullptr;
 	shared_ptr<Script> _script = nullptr;
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
+
+	string _currentProjectId = "";
+
+	bool _isCreatingProject = false;
+	bool _isLoadingProject = false;
+	bool _isDeletingProject = false;
 };

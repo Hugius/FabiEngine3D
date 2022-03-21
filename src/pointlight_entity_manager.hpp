@@ -18,12 +18,12 @@ public:
 
 	const unordered_map<string, shared_ptr<PointlightEntity>>& getEntities() const;
 
+	const shared_ptr<PointlightEntity> getEntity(const string& id) const;
+
 	const unsigned int getMaxEntityCount() const;
 
 	const bool isEntityExisting(const string& id) const;
 	const bool isEntitiesExisting() const;
-
-	const shared_ptr<PointlightEntity> getEntity(const string& id) const;
 
 private:
 	static inline constexpr unsigned int MAX_ENTITY_COUNT = 64;

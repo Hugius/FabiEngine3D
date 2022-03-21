@@ -17,10 +17,10 @@ public:
 
 	const unordered_map<string, shared_ptr<Animation3d>>& getAnimations() const;
 
+	const shared_ptr<Animation3d> getAnimation(const string& id) const;
+
 	const bool isAnimationExisting(const string& id) const;
 	const bool isAnimationsExisting() const;
-
-	const shared_ptr<Animation3d> getAnimation(const string& id) const;
 
 private:
 	unordered_map<string, shared_ptr<Animation3d>> _animations = {};

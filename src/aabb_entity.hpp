@@ -34,6 +34,8 @@ public:
 	void setColor(const fvec3& value);
 	void setCentered(bool value);
 
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
+
 	const string& getParentId() const;
 
 	const mat44& getTransformation() const;
@@ -50,12 +52,12 @@ public:
 	const bool hasParent() const;
 	const bool hasCollided() const;
 
-	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-
 	const AabbParentType getParentType() const;
 	const Direction getCollisionDirection() const;
 
 private:
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
+
 	string _parentId = "";
 
 	mat44 _transformation = mat44(1.0f);
@@ -75,8 +77,6 @@ private:
 	bool _isRaycastResponsive = true;
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;
-
-	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 
 	AabbParentType _parentType = {};
 	Direction _collisionDirection = {};

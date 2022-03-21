@@ -19,14 +19,14 @@ public:
 
 	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities() const;
 
+	const shared_ptr<TerrainEntity> getEntity(const string& id) const;
+	const shared_ptr<TerrainEntity> getSelectedEntity() const;
+
 	const float getPixelHeight(const string& id, float x, float z);
 
 	const bool isEntityExisting(const string& id) const;
 	const bool isEntitiesExisting() const;
 	const bool isInside(const string& id, float x, float z);
-
-	const shared_ptr<TerrainEntity> getEntity(const string& id) const;
-	const shared_ptr<TerrainEntity> getSelectedEntity() const;
 
 private:
 	void _loadVertexBuffer(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float>& pixels);
@@ -37,7 +37,7 @@ private:
 
 	unordered_map<string, shared_ptr<TerrainEntity>> _entities = {};
 
-	string _selectedEntityId = "";
-
 	shared_ptr<ImageLoader> _imageLoader = nullptr;
+
+	string _selectedEntityId = "";
 };

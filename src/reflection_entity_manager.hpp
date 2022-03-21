@@ -18,10 +18,10 @@ public:
 
 	const unordered_map<string, shared_ptr<ReflectionEntity>>& getEntities() const;
 
+	const shared_ptr<ReflectionEntity> getEntity(const string& id) const;
+
 	const bool isEntityExisting(const string& id) const;
 	const bool isEntitiesExisting() const;
-
-	const shared_ptr<ReflectionEntity> getEntity(const string& id) const;
 
 private:
 	unordered_map<string, shared_ptr<ReflectionEntity>> _entities = {};

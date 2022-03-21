@@ -22,15 +22,17 @@ public:
 	void setCubeMap(shared_ptr<TextureBuffer> value);
 	void setExceptionEntityId(const string& id);
 
+	const shared_ptr<TextureBuffer> getCubeTextureBuffer() const;
+
 	const string& getExceptionEntityId() const;
 
 	const fvec3& getPosition() const;
 
 	const bool mustCapture() const;
 
-	const shared_ptr<TextureBuffer> getCubeTextureBuffer() const;
-
 private:
+	shared_ptr<TextureBuffer> _cubeTextureBuffer = nullptr;
+
 	string _exceptionEntityId = "";
 
 	fvec3 _position = fvec3(0.0f);
@@ -40,6 +42,4 @@ private:
 
 	bool _mustCapture = false;
 	bool _isCaptured = false;
-
-	shared_ptr<TextureBuffer> _cubeTextureBuffer = nullptr;
 };

@@ -53,6 +53,8 @@ private:
 
 	vector<string> _loadedAnimationIds = {};
 
+	shared_ptr<ModelEditor> _modelEditor = nullptr;
+
 	string _currentAnimationId = "";
 	string _currentPartId = "";
 	string _hoveredModelId = "";
@@ -74,6 +76,4 @@ private:
 	bool _isDeletingAnimation = false;
 	bool _isChoosingModel = false;
 	bool _isChoosingPart = false;
-
-	shared_ptr<ModelEditor> _modelEditor = nullptr;
 };

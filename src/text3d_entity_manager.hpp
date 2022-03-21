@@ -26,10 +26,10 @@ public:
 
 	const unordered_map<string, shared_ptr<Text3dEntity>>& getEntities() const;
 
+	const shared_ptr<Text3dEntity> getEntity(const string& id) const;
+
 	const bool isEntityExisting(const string& id) const;
 	const bool isEntitiesExisting() const;
-
-	const shared_ptr<Text3dEntity> getEntity(const string& id) const;
 
 private:
 	const shared_ptr<VertexBuffer> _centeredVertexBuffer;

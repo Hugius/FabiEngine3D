@@ -53,8 +53,6 @@ public:
 	const unordered_map<string, float>& getUpdateDeltaTimes() const;
 	const unordered_map<string, float>& getRenderDeltaTimes() const;
 
-	const float getTotalDeltaTime() const;
-
 	const shared_ptr<LibraryLoader> getLibraryLoader() const;
 	const shared_ptr<InputHandler> getInputHandler() const;
 	const shared_ptr<MeshLoader> getMeshLoader() const;
@@ -95,17 +93,14 @@ public:
 	const shared_ptr<NetworkingClient> getNetworkingClient() const;
 	const shared_ptr<Timer> getTimer() const;
 
+	const float getTotalDeltaTime() const;
+
 private:
 	void _update();
 	void _render();
 
 	unordered_map<string, float> _updateDeltaTimes;
 	unordered_map<string, float> _renderDeltaTimes;
-
-	float _totalDeltaTime = 0.0f;
-
-	bool _isPaused = false;
-	bool _isRunning = false;
 
 	shared_ptr<LibraryLoader> _libraryLoader = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
@@ -147,4 +142,9 @@ private:
 	shared_ptr<NetworkingServer> _networkingServer = nullptr;
 	shared_ptr<NetworkingClient> _networkingClient = nullptr;
 	shared_ptr<EngineController> _engineController = nullptr;
+
+	float _totalDeltaTime = 0.0f;
+
+	bool _isPaused = false;
+	bool _isRunning = false;
 };

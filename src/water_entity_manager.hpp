@@ -18,11 +18,11 @@ public:
 
 	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities() const;
 
-	const bool isEntityExisting(const string& id) const;
-	const bool isEntitiesExisting() const;
-
 	const shared_ptr<WaterEntity> getEntity(const string& id) const;
 	const shared_ptr<WaterEntity> getSelectedEntity() const;
+
+	const bool isEntityExisting(const string& id) const;
+	const bool isEntitiesExisting() const;
 
 private:
 	void _loadVertexBuffer(shared_ptr<WaterEntity> entity, float size);

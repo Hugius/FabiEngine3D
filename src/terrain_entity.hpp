@@ -49,6 +49,17 @@ public:
 
 	const vector<float>& getPixels() const;
 
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
+	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getNormalTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getBlendTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getRedDiffuseTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getGreenDiffuseTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getBlueDiffuseTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getRedNormalTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getGreenNormalTextureBuffer() const;
+	const shared_ptr<TextureBuffer> getBlueNormalTextureBuffer() const;
+
 	const string& getHeightMapPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getNormalMapPath() const;
@@ -76,19 +87,19 @@ public:
 	const bool isSpecular() const;
 	const bool isWireframed() const;
 
-	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getNormalTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getBlendTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getRedDiffuseTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getGreenDiffuseTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getBlueDiffuseTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getRedNormalTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getGreenNormalTextureBuffer() const;
-	const shared_ptr<TextureBuffer> getBlueNormalTextureBuffer() const;
-
 private:
 	vector<float> _pixels = {};
+
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
+	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _normalTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _blendTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _redDiffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _greenDiffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _blueDiffuseTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _redNormalTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _greenNormalTextureBuffer = nullptr;
+	shared_ptr<TextureBuffer> _blueNormalTextureBuffer = nullptr;
 
 	string _heightMapPath = "";
 	string _diffuseMapPath = "";
@@ -117,15 +128,4 @@ private:
 
 	bool _isSpecular = false;
 	bool _isWireframed = false;
-
-	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _diffuseTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _normalTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _blendTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _redDiffuseTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _greenDiffuseTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _blueDiffuseTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _redNormalTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _greenNormalTextureBuffer = nullptr;
-	shared_ptr<TextureBuffer> _blueNormalTextureBuffer = nullptr;
 };

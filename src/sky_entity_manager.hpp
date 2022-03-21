@@ -19,19 +19,20 @@ public:
 	void deleteEntities();
 	void selectEntity(const string& id);
 
-	const bool isEntityExisting(const string& id) const;
-	const bool isEntitiesExisting() const;
-
 	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities() const;
+
 	const shared_ptr<SkyEntity> getEntity(const string& id) const;
 	const shared_ptr<SkyEntity> getSelectedEntity() const;
+
+	const bool isEntityExisting(const string& id) const;
+	const bool isEntitiesExisting() const;
 
 private:
 	const shared_ptr<VertexBuffer> _vertexBuffer;
 
 	unordered_map<string, shared_ptr<SkyEntity>> _entities = {};
 
-	string _selectedEntityId = "";
-
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
+
+	string _selectedEntityId = "";
 };

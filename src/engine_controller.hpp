@@ -21,8 +21,6 @@ private:
 	static inline const fvec4 RENDER_COLOR = fvec4(0.0f, 0.0f, 0.0f, 1.0f);
 	static inline const fvec2 CURSOR_SIZE = fvec2(0.075f);
 
-	bool _mustPromptOnExit = false;
-
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 	shared_ptr<GuiManager> _guiManager = nullptr;
 	shared_ptr<LeftViewportController> _leftViewportController = nullptr;
@@ -47,4 +45,6 @@ private:
 	shared_ptr<Script> _script = nullptr;
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
 	shared_ptr<ScriptInterpreter> _scriptInterpreter = nullptr;
+
+	bool _mustPromptOnExit = false;
 };

@@ -111,29 +111,29 @@ void WaterEntityManager::_loadVertexBuffer(shared_ptr<WaterEntity> entity, float
 	{
 		for(float z = -halfSize; z < halfSize; z++)
 		{
-			float firstPositionX = x;
-			float firstPositionY = 0.0f;
-			float firstPositionZ = z + 1;
-			float firstUvX = ((x + halfSize) / size);
-			float firstUvY = (((z + halfSize) / size) + (1.0f / size));
+			const float firstPositionX = x;
+			const float firstPositionY = 0.0f;
+			const float firstPositionZ = (z + 1);
+			const float firstUvX = ((x + halfSize) / size);
+			const float firstUvY = (((z + halfSize) / size) + (1.0f / size));
 
-			float secondPositionX = x + 1;
-			float secondPositionY = 0.0f;
-			float secondPositionZ = z + 1;
-			float secondUvX = (((x + halfSize) / size) + (1.0f / size));
-			float secondUvY = (((z + halfSize) / size) + (1.0f / size));
+			const float secondPositionX = (x + 1.0f);
+			const float secondPositionY = 0.0f;
+			const float secondPositionZ = (z + 1.0f);
+			const float secondUvX = (((x + halfSize) / size) + (1.0f / size));
+			const float secondUvY = (((z + halfSize) / size) + (1.0f / size));
 
-			float thirdPositionX = x + 1;
-			float thirdPositionY = 0.0f;
-			float thirdPositionZ = z;
-			float thirdUvX = (((x + halfSize) / size) + (1.0f / size));
-			float thirdUvY = ((z + halfSize) / size);
+			const float thirdPositionX = (x + 1.0f);
+			const float thirdPositionY = 0.0f;
+			const float thirdPositionZ = z;
+			const float thirdUvX = (((x + halfSize) / size) + (1.0f / size));
+			const float thirdUvY = ((z + halfSize) / size);
 
-			float fourthPositionX = x;
-			float fourthPositionY = 0.0f;
-			float fourthPositionZ = z;
-			float fourthUvX = ((x + halfSize) / size);
-			float fourthUvY = ((z + halfSize) / size);
+			const float fourthPositionX = x;
+			const float fourthPositionY = 0.0f;
+			const float fourthPositionZ = z;
+			const float fourthUvX = ((x + halfSize) / size);
+			const float fourthUvY = ((z + halfSize) / size);
 
 			highQualityBufferData.push_back(firstPositionX);
 			highQualityBufferData.push_back(firstPositionY);
@@ -173,8 +173,8 @@ void WaterEntityManager::_loadVertexBuffer(shared_ptr<WaterEntity> entity, float
 		}
 	}
 
-	auto lowQualityBufferDataCount = static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float));
-	auto highQualityBufferDataCount = static_cast<unsigned int>(highQualityBufferData.size());
+	const auto lowQualityBufferDataCount = static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float));
+	const auto highQualityBufferDataCount = static_cast<unsigned int>(highQualityBufferData.size());
 
 	entity->setLowQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
 	entity->setHighQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &highQualityBufferData[0], highQualityBufferDataCount));

@@ -63,11 +63,11 @@ private:
 	vector<string> _loadedReflectionIds = {};
 	vector<string> _loadedSound3dIds = {};
 
+	shared_ptr<EngineInterface> _fe3d = nullptr;
+
 	string _currentProjectId = "";
 	string _loadedWorldId = "";
 
 	bool _isGraphicsAdded = false;
 	bool _isGraphicsLoaded = false;
-
-	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

@@ -34,6 +34,12 @@ public:
 	const vector<shared_ptr<GuiRectangle>>& getRectangles() const;
 	const vector<shared_ptr<GuiTextField>>& getTextFields() const;
 
+	const shared_ptr<GuiScrollingList> getScrollingList(const string& id) const;
+	const shared_ptr<GuiInputField> getInputField(const string& id) const;
+	const shared_ptr<GuiButton> getButton(const string& id) const;
+	const shared_ptr<GuiRectangle> getRectangle(const string& id) const;
+	const shared_ptr<GuiTextField> getTextField(const string& id) const;
+
 	const string& getId() const;
 	const string& getParentId() const;
 
@@ -45,12 +51,6 @@ public:
 	const bool isButtonExisting(const string& id) const;
 	const bool isRectangleExisting(const string& id) const;
 	const bool isTextFieldExisting(const string& id) const;
-
-	const shared_ptr<GuiScrollingList> getScrollingList(const string& id) const;
-	const shared_ptr<GuiInputField> getInputField(const string& id) const;
-	const shared_ptr<GuiButton> getButton(const string& id) const;
-	const shared_ptr<GuiRectangle> getRectangle(const string& id) const;
-	const shared_ptr<GuiTextField> getTextField(const string& id) const;
 
 private:
 	const fvec4 _convertDimensions(const fvec2& position, const fvec2& size) const;
@@ -64,10 +64,10 @@ private:
 	vector<shared_ptr<GuiRectangle>> _rectangles = {};
 	vector<shared_ptr<GuiTextField>> _textFields = {};
 
+	shared_ptr<EngineInterface> _fe3d = nullptr;
+
 	fvec2 _parentPosition;
 	fvec2 _parentSize;
 
 	bool _isActive = false;
-
-	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

@@ -17,13 +17,13 @@ public:
 	void bind();
 	void unbind();
 
+	const shared_ptr<TextureBuffer> getTexture(unsigned int index) const;
+
 	const ivec2& getPosition() const;
 	const ivec2& getSize() const;
 
 	const unsigned int getFbo() const;
 	const unsigned int getRbo() const;
-
-	const shared_ptr<TextureBuffer> getTexture(unsigned int index) const;
 
 private:
 	vector<shared_ptr<TextureBuffer>> _textures = {};

@@ -15,13 +15,13 @@ public:
 	void deleteValue(unsigned int index);
 	void deleteValues();
 
+	const shared_ptr<ScriptValue> getValue(unsigned int index = 0) const;
+
 	const string& getId() const;
 
 	const unsigned int getValueCount() const;
 
 	const bool isConstant() const;
-
-	const shared_ptr<ScriptValue> getValue(unsigned int index = 0) const;
 
 	const ScriptVariableScope getScope() const;
 	const ScriptVariableType getType() const;

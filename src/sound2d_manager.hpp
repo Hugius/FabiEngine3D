@@ -19,10 +19,10 @@ public:
 
 	const unordered_map<string, shared_ptr<Sound2d>>& getSounds() const;
 
+	const shared_ptr<Sound2d> getSound(const string& id) const;
+
 	const bool isSoundExisting(const string& id) const;
 	const bool isSoundsExisting() const;
-
-	const shared_ptr<Sound2d> getSound(const string& id) const;
 
 private:
 	unordered_map<string, shared_ptr<Sound2d>> _sounds = {};

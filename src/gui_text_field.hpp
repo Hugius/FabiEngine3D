@@ -30,10 +30,10 @@ private:
 	const string _entityId;
 	const string _parentId;
 
+	shared_ptr<EngineInterface> _fe3d = nullptr;
+
 	fvec3 _initialColor = fvec3(0.0f);
 
 	fvec2 _initialPosition = fvec2(0.0f);
 	fvec2 _initialSize = fvec3(0.0f);
-
-	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

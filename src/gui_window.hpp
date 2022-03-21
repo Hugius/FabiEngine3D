@@ -16,6 +16,9 @@ public:
 
 	const vector<shared_ptr<GuiScreen>>& getScreens() const;
 
+	const shared_ptr<GuiScreen> getScreen(const string& id) const;
+	const shared_ptr<GuiScreen> getActiveScreen() const;
+
 	const string& getId() const;
 	const string& getEntityId() const;
 	const string& getParentId() const;
@@ -27,9 +30,6 @@ public:
 
 	const bool isHovered() const;
 
-	const shared_ptr<GuiScreen> getScreen(const string& id) const;
-	const shared_ptr<GuiScreen> getActiveScreen() const;
-
 private:
 	const string _id;
 	const string _entityId;
@@ -40,7 +40,7 @@ private:
 
 	vector<shared_ptr<GuiScreen>> _screens = {};
 
-	string _activeScreenId = "";
-
 	shared_ptr<EngineInterface> _fe3d = nullptr;
+
+	string _activeScreenId = "";
 };

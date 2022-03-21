@@ -83,6 +83,8 @@ private:
 	static inline constexpr float MAX_ACCELERATION = 10.0f;
 	static inline constexpr float ACCELERATION_RESISTANCE = 0.75f;
 
+	shared_ptr<RenderWindow> _renderWindow = nullptr;
+
 	mat44 _view = mat44(1.0f);
 	mat44 _projection = mat44(1.0f);
 
@@ -118,6 +120,4 @@ private:
 	bool _mustCenterCursor = false;
 	bool _isCursorBeingCentered = false;
 	bool _isUpInverted = false;
-
-	shared_ptr<RenderWindow> _renderWindow = nullptr;
 };

@@ -25,11 +25,6 @@ public:
 
 	static const vector<float> calculateDistributedPositions(unsigned int buttonCount, float buttonHeight);
 
-	static const mat22 invertMatrix(const mat22& matrix);
-	static const mat33 invertMatrix(const mat33& matrix);
-	static const mat44 invertMatrix(const mat44& matrix);
-	static const mat33 transposeMatrix(const mat33& matrix);
-	static const mat44 transposeMatrix(const mat44& matrix);
 	static const mat44 createTranslationMatrix(float x, float y, float z);
 	static const mat44 createTranslationMatrixX(float value);
 	static const mat44 createTranslationMatrixY(float value);
@@ -45,6 +40,13 @@ public:
 	static const mat44 createViewMatrix(const fvec3& eye, const fvec3& center, const fvec3& up);
 	static const mat44 createOrthographicProjectionMatrix(float leftZ, float rightZ, float bottomZ, float topZ, float nearZ, float farZ);
 	static const mat44 createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far);
+	static const mat44 invertMatrix(const mat44& matrix);
+	static const mat44 transposeMatrix(const mat44& matrix);
+
+	static const mat33 invertMatrix(const mat33& matrix);
+	static const mat33 transposeMatrix(const mat33& matrix);
+
+	static const mat22 invertMatrix(const mat22& matrix);
 
 	static const fvec4 calculateAverage(const vector<fvec4>& values);
 	static const fvec4 calculateDifference(const fvec4& firstPosition, const fvec4& secondPosition);

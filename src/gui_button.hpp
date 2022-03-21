@@ -18,14 +18,14 @@ public:
 	void setVisible(bool isVisible);
 	void setHoverable(bool isHoverable);
 
+	const shared_ptr<GuiRectangle> getRectangle() const;
+	const shared_ptr<GuiTextField> getTextField() const;
+
 	const string& getId() const;
 	const string& getParentId() const;
 
 	const bool isHoverable() const;
 	const bool isHovered() const;
-
-	const shared_ptr<GuiRectangle> getRectangle() const;
-	const shared_ptr<GuiTextField> getTextField() const;
 
 protected:
 	void _updateHovering(bool isHoverable);
@@ -35,12 +35,12 @@ protected:
 	const fvec3 _hoverColor;
 	const fvec3 _textHoverColor;
 
-	bool _isHovered = false;
-	bool _isHoverable = true;
-
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 	shared_ptr<GuiRectangle> _rectangle = nullptr;
 	shared_ptr<GuiTextField> _textField = nullptr;
+
+	bool _isHovered = false;
+	bool _isHoverable = true;
 
 private:
 	static inline constexpr float TEXT_WIDTH_MULTIPLIER = 0.9f;

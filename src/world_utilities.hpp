@@ -6,7 +6,6 @@ class WorldUtilities final
 {
 public:
 	void inject(shared_ptr<EngineInterface> fe3d);
-
 	void copyTemplateSky(const string& newId, const string& templateId);
 	void copyTemplateTerrain(const string& newId, const string& templateId);
 	void copyTemplateWater(const string& newId, const string& templateId);

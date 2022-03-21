@@ -66,6 +66,9 @@ private:
 	const vector<shared_ptr<ScriptValue>> _processMathFunctionCall(const string& scriptLine);
 	const vector<shared_ptr<ScriptValue>> _processMiscFunctionCall(const string& scriptLine);
 
+	const shared_ptr<ScriptVariable> _getLocalVariable(const string& variableId);
+	const shared_ptr<ScriptVariable> _getGlobalVariable(const string& variableId) const;
+
 	const string _limitIntegerString(const string& valueString) const;
 	const string _limitDecimalString(const string& valueString) const;
 
@@ -158,9 +161,6 @@ private:
 	const bool _validateKeyInputString(const string& inputString);
 	const bool _validateMouseInputString(const string& inputString);
 	const bool _validateSavesDirectory();
-
-	const shared_ptr<ScriptVariable> _getLocalVariable(const string& variableId);
-	const shared_ptr<ScriptVariable> _getGlobalVariable(const string& variableId) const;
 
 	static inline const unordered_map<string, InputType> KEY_INPUT_STRING_MAP =
 	{
@@ -311,6 +311,23 @@ private:
 	vector<string> _terminateScriptIds = {};
 	vector<unsigned int> _currentLineIndexStack = {};
 
+	shared_ptr<EngineInterface> _fe3d = nullptr;
+	shared_ptr<Script> _script = nullptr;
+	shared_ptr<SkyEditor> _skyEditor = nullptr;
+	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
+	shared_ptr<WaterEditor> _waterEditor = nullptr;
+	shared_ptr<ModelEditor> _modelEditor = nullptr;
+	shared_ptr<Quad3dEditor> _quad3dEditor = nullptr;
+	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
+	shared_ptr<Quad2dEditor> _quad2dEditor = nullptr;
+	shared_ptr<Text2dEditor> _text2dEditor = nullptr;
+	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
+	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
+	shared_ptr<SoundEditor> _soundEditor = nullptr;
+	shared_ptr<WorldEditor> _worldEditor = nullptr;
+	shared_ptr<CustomWorldBuilder> _customWorldBuilder = nullptr;
+	shared_ptr<WorldUtilities> _worldUtilities = nullptr;
+
 	string _currentProjectId = "";
 	string _initEntryId = "";
 	string _updateEntryId = "";
@@ -330,21 +347,4 @@ private:
 	bool _isExecutingInitialization = false;
 	bool _isExecutingUpdate = false;
 	bool _isExecutingTerminate = false;
-
-	shared_ptr<EngineInterface> _fe3d = nullptr;
-	shared_ptr<Script> _script = nullptr;
-	shared_ptr<SkyEditor> _skyEditor = nullptr;
-	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
-	shared_ptr<WaterEditor> _waterEditor = nullptr;
-	shared_ptr<ModelEditor> _modelEditor = nullptr;
-	shared_ptr<Quad3dEditor> _quad3dEditor = nullptr;
-	shared_ptr<Text3dEditor> _text3dEditor = nullptr;
-	shared_ptr<Quad2dEditor> _quad2dEditor = nullptr;
-	shared_ptr<Text2dEditor> _text2dEditor = nullptr;
-	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
-	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
-	shared_ptr<SoundEditor> _soundEditor = nullptr;
-	shared_ptr<WorldEditor> _worldEditor = nullptr;
-	shared_ptr<CustomWorldBuilder> _customWorldBuilder = nullptr;
-	shared_ptr<WorldUtilities> _worldUtilities = nullptr;
 };

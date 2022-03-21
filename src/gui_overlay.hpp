@@ -41,6 +41,12 @@ public:
 	const vector<shared_ptr<GuiRectangle>>& getRectangles() const;
 	const vector<shared_ptr<GuiTextField>>& getTextFields() const;
 
+	const shared_ptr<GuiScrollingList> getScrollingList(const string& id) const;
+	const shared_ptr<GuiInputField> getInputField(const string& id) const;
+	const shared_ptr<GuiButton> getButton(const string& id) const;
+	const shared_ptr<GuiRectangle> getRectangle(const string& id) const;
+	const shared_ptr<GuiTextField> getTextField(const string& id) const;
+
 	const string checkChoiceForm(const string& id) const;
 
 	const bool isFocused() const;
@@ -63,12 +69,6 @@ public:
 	const bool isAnswerFormDenied(const string& id);
 	const bool isAnswerFormExisting(const string& id) const;
 
-	const shared_ptr<GuiScrollingList> getScrollingList(const string& id) const;
-	const shared_ptr<GuiInputField> getInputField(const string& id) const;
-	const shared_ptr<GuiButton> getButton(const string& id) const;
-	const shared_ptr<GuiRectangle> getRectangle(const string& id) const;
-	const shared_ptr<GuiTextField> getTextField(const string& id) const;
-
 private:
 	void _createValueForm(const string& id, const string& title, const string& valueString, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition, bool onlyNumbers, bool minusAllowed);
 	void _updateValueFormDeleting();
@@ -86,11 +86,11 @@ private:
 	vector<shared_ptr<GuiTextField>> _textFields = {};
 	vector<string> _valueFormIds = {};
 
+	shared_ptr<EngineInterface> _fe3d = nullptr;
+
 	string _choiceFormId = "";
 	string _answerFormId = "";
 
 	bool _isFocused = false;
 	bool _mustDeleteValueForms = false;
-
-	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

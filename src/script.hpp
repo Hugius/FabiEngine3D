@@ -14,13 +14,13 @@ public:
 
 	const vector<string> getScriptFileIds() const;
 
+	const shared_ptr<ScriptFile> getScriptFile(const string& id) const;
+
 	const unsigned int getScriptFileCount() const;
 	const unsigned int getTotalLineCount() const;
 
 	const bool isScriptFileExisting(const string& id) const;
 	const bool isEmpty();
-
-	const shared_ptr<ScriptFile> getScriptFile(const string& id) const;
 
 private:
 	vector<shared_ptr<ScriptFile>> _scriptFiles = {};

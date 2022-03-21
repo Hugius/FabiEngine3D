@@ -53,10 +53,10 @@ private:
 
 	vector<pair<string, unsigned int>> _volumeThreadQueue;
 
-	unsigned int _channelCounter = 0;
-
 	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 
 	future<void> _volumeThread = {};
+
+	unsigned int _channelCounter = 0;
 };

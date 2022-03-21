@@ -15,6 +15,8 @@ public:
 
 	const vector<shared_ptr<GuiWindow>>& getWindows() const;
 
+	const shared_ptr<GuiWindow> getWindow(const string& id) const;
+
 	const string& getId();
 	const string& getEntityId();
 
@@ -24,8 +26,6 @@ public:
 	const fvec2& getInitialSize() const;
 
 	const bool isHovered() const;
-
-	const shared_ptr<GuiWindow> getWindow(const string& id) const;
 
 private:
 	const string _id;

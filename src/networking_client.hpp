@@ -55,7 +55,7 @@ private:
 	void _setupUdp();
 
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
-	const tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
+	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
 
 	const string _extractSocketIp(SOCKET socket) const;
 	const string _extractSocketPort(SOCKET socket) const;
@@ -81,6 +81,9 @@ private:
 	vector<unsigned int> _pingLatencies = {};
 	vector<NetworkingServerMessage> _pendingMessages = {};
 
+	future<tuple<int, int, long long, string>> _tcpMessageThread = {};
+	future<int> _connectionThread = {};
+
 	string _username = "";
 	string _serverIp = "";
 	string _tcpMessageBuild = "";
@@ -96,7 +99,4 @@ private:
 
 	SOCKET _tcpSocket = {};
 	SOCKET _udpSocket = {};
-
-	future<tuple<int, int, long long, string>> _tcpMessageThread = {};
-	future<int> _connectionThread = {};
 };

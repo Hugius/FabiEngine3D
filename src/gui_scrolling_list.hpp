@@ -18,9 +18,9 @@ public:
 
 	const vector<shared_ptr<GuiButton>>& getButtons() const;
 
-	const bool isHovered() const;
-
 	const shared_ptr<GuiButton> getButton(const string& id) const;
+
+	const bool isHovered() const;
 
 private:
 	void _updateHovering();

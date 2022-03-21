@@ -35,6 +35,12 @@ public:
 private:
 	const bool _handleCollision(Direction direction) const;
 
+	shared_ptr<Box> _cameraBox = nullptr;
+	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
+	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
+	shared_ptr<AabbEntityManager> _aabbManager = nullptr;
+	shared_ptr<Camera> _camera = nullptr;
+
 	fvec3 _lastCameraPosition = fvec3(0.0f);
 
 	float _cameraTerrainResponseHeight = 0.0f;
@@ -45,12 +51,6 @@ private:
 	bool _isCameraAabbResponseEnabledZ = false;
 	bool _isCameraTerrainResponseEnabled = false;
 	bool _isCameraUnderTerrain = false;
-
-	shared_ptr<Box> _cameraBox = nullptr;
-	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
-	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
-	shared_ptr<AabbEntityManager> _aabbManager = nullptr;
-	shared_ptr<Camera> _camera = nullptr;
 
 	DirectionOrder _responseDirectionOrder = DirectionOrder::XYZ;
 };

@@ -53,7 +53,7 @@ private:
 	void _disconnectClient(SOCKET socket);
 
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
-	const tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
+	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
 
 	const string _extractPeerIp(SOCKET socket) const;
 	const string _extractPeerPort(SOCKET socket) const;
@@ -86,6 +86,8 @@ private:
 	vector<NetworkingClientMessage> _pendingMessages = {};
 	vector<SOCKET> _clientSockets = {};
 
+	future<SOCKET> _connectionThread;
+
 	string _newClientIp = "";
 	string _newClientUsername = "";
 
@@ -95,6 +97,4 @@ private:
 
 	SOCKET _tcpSocket;
 	SOCKET _udpSocket;
-
-	future<SOCKET> _connectionThread;
 };

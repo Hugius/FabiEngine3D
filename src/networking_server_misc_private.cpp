@@ -148,7 +148,7 @@ tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET s
 	}
 }
 
-const tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOCKET socket) const
+tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOCKET socket) const
 {
 	char buffer[UDP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(UDP_BUFFER_BYTES);

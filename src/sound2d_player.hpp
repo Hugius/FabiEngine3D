@@ -54,9 +54,9 @@ private:
 
 	vector<pair<string, unsigned int>> _volumeThreadQueue;
 
-	unsigned int _channelCounter = 0;
-
 	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
 
 	future<void> _volumeThread = {};
+
+	unsigned int _channelCounter = 0;
 };

@@ -29,10 +29,10 @@ protected:
 	const string _entityId;
 	const string _parentId;
 
+	shared_ptr<EngineInterface> _fe3d = nullptr;
+
 	fvec3 _initialColor;
 
 	fvec2 _initialPosition;
 	fvec2 _initialSize;
-
-	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

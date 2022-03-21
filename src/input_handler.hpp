@@ -22,7 +22,7 @@ public:
 	const bool isMousePressed(InputType button) const;
 
 private:
-	inline const unsigned int _getVectorIndex(const vector<InputType>& list, InputType element) const
+	const unsigned int _getVectorIndex(const vector<InputType>& list, InputType element) const
 	{
 		auto iterator = find(list.begin(), list.end(), element);
 
@@ -36,7 +36,7 @@ private:
 		}
 	}
 
-	inline const bool _isInVector(const vector<InputType>& list, InputType element) const
+	const bool _isInVector(const vector<InputType>& list, InputType element) const
 	{
 		return find(list.begin(), list.end(), element) != list.end();
 	}

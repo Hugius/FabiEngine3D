@@ -43,6 +43,10 @@ private:
 
 	unordered_map<string, float> _aabbIntersections = {};
 
+	shared_ptr<RaycastCalculator> _raycastCalculator = nullptr;
+	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
+	shared_ptr<AabbEntityManager> _aabbManager = nullptr;
+
 	string _terrainId = "";
 	string _closestAabbId = "";
 
@@ -54,8 +58,4 @@ private:
 
 	bool _isTerrainIntersectionEnabled = false;
 	bool _isAabbIntersectionEnabled = false;
-
-	shared_ptr<RaycastCalculator> _raycastCalculator = nullptr;
-	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
-	shared_ptr<AabbEntityManager> _aabbManager = nullptr;
 };

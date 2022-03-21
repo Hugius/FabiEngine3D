@@ -25,6 +25,9 @@ private:
 	vector<pair<string, unsigned int>> _pausedSound2dIds = {};
 	vector<string> _pausedClockIds = {};
 
+	shared_ptr<EngineInterface> _fe3d = nullptr;
+	shared_ptr<ScriptInterpreter> _scriptInterpreter = nullptr;
+
 	bool _isStarted = false;
 	bool _isRunning = false;
 	bool _wasVsyncEnabled = false;
@@ -32,7 +35,4 @@ private:
 	bool _wasFirstPersonEnabled = false;
 	bool _wasThirdPersonEnabled = false;
 	bool _mustSkipUpdate = false;
-
-	shared_ptr<EngineInterface> _fe3d = nullptr;
-	shared_ptr<ScriptInterpreter> _scriptInterpreter = nullptr;
 };

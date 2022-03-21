@@ -21,7 +21,6 @@ public:
 	void loadAnisotropicFiltering(unsigned int quality);
 
 	const unsigned int getAnisotropicFilteringQuality() const;
-
 	const unsigned int getId() const;
 
 private:

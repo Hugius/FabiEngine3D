@@ -171,7 +171,7 @@
     <ClCompile Include="..\..\..\src\engine_interface_entity_water.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_graphics.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_input.cpp" />
-    <ClCompile Include="..\..\..\src\engine_interface_misc.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_miscellaneous.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_raycast.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_spotlight.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_server.cpp" />

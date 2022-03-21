@@ -45,7 +45,7 @@
     <ClCompile Include="..\..\..\src\engine_interface_input.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_misc.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_miscellaneous.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_client.cpp">

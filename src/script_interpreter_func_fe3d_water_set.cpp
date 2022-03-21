@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_max_depth")
+	else if(functionName == "fe3d:water_set_max_depth")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 

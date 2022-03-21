@@ -15,16 +15,16 @@
 
 ## Getters
 
+- `fe3d:sound2d_find_ids` (`STR` id) -----> `LIST`
+- `fe3d:sound2d_is_channel_available` () -----> `BOL`
+- `fe3d:sound2d_is_device_connected` () -----> `BOL`
+- `fe3d:sound2d_is_existing` (`STR` id) -----> `BOL`
+- `fe3d:sound2d_is_started` (`STR` id, `INT` index) -----> `BOL`
+- `fe3d:sound2d_is_paused` (`STR` id, `INT` index) -----> `BOL`
 - `fe3d:sound2d_get_volume` (`STR` id, `INT` index) -----> `DEC`
 - `fe3d:sound2d_get_left_intensity` (`STR` id, `INT` index) -----> `DEC`
 - `fe3d:sound2d_get_right_intensity` (`STR` id, `INT` index) -----> `DEC`
 - `fe3d:sound2d_get_started_count` (`STR` id) -----> `INT`
 - `fe3d:sound2d_get_time` (`STR` id) -----> `INT`
-- `fe3d:sound2d_is_channel_available` () -----> `BOL`
-- `fe3d:sound2d_is_device_connected` () -----> `BOL`
-- `fe3d:sound2d_is_existing` (`STR` id) -----> `BOL`
-- `fe3d:sound2d_find_ids` (`STR` id) -----> `LIST`
 - `fe3d:sound2d_get_ids` () -----> `LIST`
-- `fe3d:sound2d_is_started` (`STR` id, `INT` index) -----> `BOL`
-- `fe3d:sound2d_is_paused` (`STR` id, `INT` index) -----> `BOL`
 - `fe3d:sound2d_get_audio_path` (`STR` id) -----> `STR`

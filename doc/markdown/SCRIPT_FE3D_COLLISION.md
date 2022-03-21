@@ -10,12 +10,6 @@
 
 ## Getters
 
-- `fe3d:collision_is_camera_terrain_response_enabled` () -----> `BOL`
-- `fe3d:collision_get_camera_terrain_response_height` () -----> `DEC`
-- `fe3d:collision_get_camera_terrain_response_speed` () -----> `DEC`
-- `fe3d:collision_is_camera_aabb_response_enabled_x` () -----> `BOL`
-- `fe3d:collision_is_camera_aabb_response_enabled_y` () -----> `BOL`
-- `fe3d:collision_is_camera_aabb_response_enabled_z` () -----> `BOL`
 - `fe3d:collision_check_camera_terrain` () -----> `BOL`
 - `fe3d:collision_check_camera_model` (`STR` model_id, `STR` aabb_id, `STR` xyz) -----> `BOL`
 - `fe3d:collision_check_camera_quad3d` (`STR` id, `STR` xyz) -----> `DEC`
@@ -25,3 +19,9 @@
 - `fe3d:collision_check_camera_quad3ds` (`STR` xyz) -----> `DEC`
 - `fe3d:collision_check_camera_text3ds` (`STR` xyz) -----> `DEC`
 - `fe3d:collision_check_camera_aabbs` (`STR` xyz) -----> `DEC`
+- `fe3d:collision_is_camera_terrain_response_enabled` () -----> `BOL`
+- `fe3d:collision_is_camera_aabb_response_enabled_x` () -----> `BOL`
+- `fe3d:collision_is_camera_aabb_response_enabled_y` () -----> `BOL`
+- `fe3d:collision_is_camera_aabb_response_enabled_z` () -----> `BOL`
+- `fe3d:collision_get_camera_terrain_response_height` () -----> `DEC`
+- `fe3d:collision_get_camera_terrain_response_speed` () -----> `DEC`

@@ -5,18 +5,23 @@
 - `fe3d:quad3d_place` (`STR` new_id, `STR` editor_id, `DEC` position_x, `DEC` position_y, `DEC` position_z) -----> `NONE`
 - `fe3d:quad3d_delete` (`STR` id) -----> `NONE`
 - `fe3d:quad3d_delete_all` () -----> `NONE`
-- `fe3d:quad3d_set_visible` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:quad3d_set_diffuse_map` (`STR` id, `STR` file_path) -----> `NONE`
-- `fe3d:quad3d_set_emission_map` (`STR` id, `STR` file_path) -----> `NONE`
-- `fe3d:quad3d_set_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:quad3d_set_rotation` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:quad3d_set_size` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:quad3d_move` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:quad3d_rotate` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:quad3d_scale` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:quad3d_move_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:quad3d_rotate_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:quad3d_scale_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:quad3d_start_animation` (`STR` quad_id, `STR` animation_id, `INT` play_count) -----> `NONE`
+- `fe3d:quad3d_pause_animation` (`STR` quad_id, `STR` animation_id) -----> `NONE`
+- `fe3d:quad3d_autopause_animation` (`STR` quad_id, `STR` animation_id) -----> `NONE`
+- `fe3d:quad3d_resume_animation` (`STR` quad_id, `STR` animation_id) -----> `NONE`
+- `fe3d:quad3d_stop_animation` (`STR` quad_id, `STR` animation_id) -----> `NONE`
+- `fe3d:quad3d_set_visible` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:quad3d_set_diffuse_map` (`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:quad3d_set_emission_map` (`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:quad3d_set_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:quad3d_set_rotation` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:quad3d_set_size` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:quad3d_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:quad3d_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:quad3d_set_min_height` (`STR` id, `DEC` value) -----> `NONE`
@@ -37,11 +42,6 @@
 - `fe3d:quad3d_set_uv_multiplier` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
 - `fe3d:quad3d_set_uv_offset` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
 - `fe3d:quad3d_set_min_texture_alpha` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:quad3d_start_animation` (`STR` quad_id, `STR` animation_id, `INT` play_count) -----> `NONE`
-- `fe3d:quad3d_pause_animation` (`STR` quad_id, `STR` animation_id) -----> `NONE`
-- `fe3d:quad3d_autopause_animation` (`STR` quad_id, `STR` animation_id) -----> `NONE`
-- `fe3d:quad3d_resume_animation` (`STR` quad_id, `STR` animation_id) -----> `NONE`
-- `fe3d:quad3d_stop_animation` (`STR` quad_id, `STR` animation_id) -----> `NONE`
 - `fe3d:quad3d_set_animation_row_index` (`STR` quad_id, `STR` animation_id, `INT` value) -----> `NONE`
 - `fe3d:quad3d_set_animation_column_index` (`STR` quad_id, `STR` animation_id, `INT` value) -----> `NONE`
 - `fe3d:quad3d_set_animation_interval_multiplier` (`STR` quad_id, `STR` animation_id, `INT` value) -----> `NONE`
@@ -49,7 +49,21 @@
 
 ## Getters
 
+- `fe3d:quad3d_find_ids` (`STR` id) -----> `LIST`
 - `fe3d:quad3d_is_visible` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_facing_camera_horizontally` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_facing_camera_vertically` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_shadowed` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_reflected` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_bright` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_wireframed` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_frozen` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_existing` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_animation_started` (`STR` quad_id, `STR` animation_id) -----> `BOL`
+- `fe3d:quad3d_is_animation_paused` (`STR` quad_id, `STR` animation_id) -----> `BOL`
+- `fe3d:quad3d_is_animation_autopaused` (`STR` quad_id, `STR` animation_id) -----> `BOL`
+- `fe3d:quad3d_has_diffuse_map` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_has_emission_map` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_get_position_x` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_position_y` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_position_z` (`STR` id) -----> `DEC`
@@ -71,28 +85,14 @@
 - `fe3d:quad3d_get_emission_intensity` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_texture_repeat` (`STR` id) -----> `INT`
 - `fe3d:quad3d_get_lightness` (`STR` id) -----> `DEC`
-- `fe3d:quad3d_is_facing_camera_horizontally` (`STR` id) -----> `BOL`
-- `fe3d:quad3d_is_facing_camera_vertically` (`STR` id) -----> `BOL`
-- `fe3d:quad3d_is_shadowed` (`STR` id) -----> `BOL`
-- `fe3d:quad3d_is_reflected` (`STR` id) -----> `BOL`
-- `fe3d:quad3d_is_bright` (`STR` id) -----> `BOL`
-- `fe3d:quad3d_is_wireframed` (`STR` id) -----> `BOL`
-- `fe3d:quad3d_is_frozen` (`STR` id) -----> `BOL`
-- `fe3d:quad3d_is_existing` (`STR` id) -----> `BOL`
-- `fe3d:quad3d_find_ids` (`STR` id) -----> `LIST`
 - `fe3d:quad3d_get_ids` () -----> `LIST`
 - `fe3d:quad3d_get_diffuse_map_path` (`STR` id) -----> `STR`
 - `fe3d:quad3d_get_emission_map_path` (`STR` id) -----> `STR`
-- `fe3d:quad3d_has_diffuse_map` (`STR` id) -----> `BOL`
-- `fe3d:quad3d_has_emission_map` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_get_uv_multiplier_x` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_uv_multiplier_y` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_uv_offset_x` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_uv_offset_y` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_min_texture_alpha` (`STR` id) -----> `DEC`
-- `fe3d:quad3d_is_animation_started` (`STR` quad_id, `STR` animation_id) -----> `BOL`
-- `fe3d:quad3d_is_animation_paused` (`STR` quad_id, `STR` animation_id) -----> `BOL`
-- `fe3d:quad3d_is_animation_autopaused` (`STR` quad_id, `STR` animation_id) -----> `BOL`
 - `fe3d:quad3d_get_animation_row_index` (`STR` quad_id, `STR` animation_id) -----> `INT`
 - `fe3d:quad3d_get_animation_column_index` (`STR` quad_id, `STR` animation_id) -----> `INT`
 - `fe3d:quad3d_get_animation_play_count` (`STR` quad_id, `STR` animation_id) -----> `INT`

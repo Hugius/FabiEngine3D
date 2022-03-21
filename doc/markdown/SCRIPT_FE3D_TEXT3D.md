@@ -5,17 +5,17 @@
 - `fe3d:text3d_place` (`STR` new_id, `STR` editor_id, `DEC` position_x, `DEC` position_y, `DEC` position_z) -----> `NONE`
 - `fe3d:text3d_delete` (`STR` id) -----> `NONE`
 - `fe3d:text3d_delete_all` () -----> `NONE`
-- `fe3d:text3d_set_content` (`STR` id, `STR` value) -----> `NONE`
-- `fe3d:text3d_set_visible` (`STR` id, `BOL` value) -----> `NONE`
-- `fe3d:text3d_set_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:text3d_set_rotation` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:text3d_set_size` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:text3d_move` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:text3d_rotate` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:text3d_scale` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:text3d_move_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:text3d_rotate_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:text3d_scale_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
+- `fe3d:text3d_set_content` (`STR` id, `STR` value) -----> `NONE`
+- `fe3d:text3d_set_visible` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:text3d_set_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:text3d_set_rotation` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:text3d_set_size` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:text3d_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:text3d_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:text3d_set_min_height` (`STR` id, `DEC` value) -----> `NONE`
@@ -35,7 +35,16 @@
 
 ## Getters
 
+- `fe3d:text3d_find_ids` (`STR` id) -----> `LIST`
 - `fe3d:text3d_is_visible` (`STR` id) -----> `BOL`
+- `fe3d:text3d_is_facing_camera_horizontally` (`STR` id) -----> `BOL`
+- `fe3d:text3d_is_facing_camera_vertically` (`STR` id) -----> `BOL`
+- `fe3d:text3d_is_shadowed` (`STR` id) -----> `BOL`
+- `fe3d:text3d_is_reflected` (`STR` id) -----> `BOL`
+- `fe3d:text3d_is_bright` (`STR` id) -----> `BOL`
+- `fe3d:text3d_is_wireframed` (`STR` id) -----> `BOL`
+- `fe3d:text3d_is_frozen` (`STR` id) -----> `BOL`
+- `fe3d:text3d_is_existing` (`STR` id) -----> `BOL`
 - `fe3d:text3d_get_position_x` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_position_y` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_position_z` (`STR` id) -----> `DEC`
@@ -56,15 +65,6 @@
 - `fe3d:text3d_get_opacity` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_emission_intensity` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_lightness` (`STR` id) -----> `DEC`
-- `fe3d:text3d_is_facing_camera_horizontally` (`STR` id) -----> `BOL`
-- `fe3d:text3d_is_facing_camera_vertically` (`STR` id) -----> `BOL`
-- `fe3d:text3d_is_shadowed` (`STR` id) -----> `BOL`
-- `fe3d:text3d_is_reflected` (`STR` id) -----> `BOL`
-- `fe3d:text3d_is_bright` (`STR` id) -----> `BOL`
-- `fe3d:text3d_is_wireframed` (`STR` id) -----> `BOL`
-- `fe3d:text3d_is_frozen` (`STR` id) -----> `BOL`
-- `fe3d:text3d_is_existing` (`STR` id) -----> `BOL`
-- `fe3d:text3d_find_ids` (`STR` id) -----> `LIST`
 - `fe3d:text3d_get_ids` () -----> `LIST`
 - `fe3d:text3d_get_uv_multiplier_x` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_uv_multiplier_y` (`STR` id) -----> `DEC`

@@ -24,7 +24,7 @@
 
 ## Getters
 
-- `fe3d:world_get_current_editor_id` () -----> `STR`
-- `fe3d:world_get_current_custom_id` () -----> `STR`
 - `fe3d:world_is_editor_existing` (`STR` id) -----> `BOL`
 - `fe3d:world_is_custom_existing` (`STR` id) -----> `BOL`
+- `fe3d:world_get_current_editor_id` () -----> `STR`
+- `fe3d:world_get_current_custom_id` () -----> `STR`

@@ -15,6 +15,6 @@
 
 ## Getters
 
+- `fe3d:file_read` (`STR` path) -----> `LIST`
 - `fe3d:directory_is_existing` (`STR` path) -----> `BOL`
 - `fe3d:file_is_existing` (`STR` path) -----> `BOL`
-- `fe3d:file_read` (`STR` path) -----> `LIST`

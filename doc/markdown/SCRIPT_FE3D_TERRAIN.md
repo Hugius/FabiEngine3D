@@ -27,6 +27,17 @@
 
 ## Getters
 
+- `fe3d:terrain_is_specular` (`STR` id) -----> `BOL`
+- `fe3d:terrain_is_wireframed` (`STR` id) -----> `BOL`
+- `fe3d:terrain_has_diffuse_map` (`STR` id) -----> `BOL`
+- `fe3d:terrain_has_normal_map` (`STR` id) -----> `BOL`
+- `fe3d:terrain_has_blend_map` (`STR` id) -----> `BOL`
+- `fe3d:terrain_has_red_diffuse_map` (`STR` id) -----> `BOL`
+- `fe3d:terrain_has_green_diffuse_map` (`STR` id) -----> `BOL`
+- `fe3d:terrain_has_blue_diffuse_map` (`STR` id) -----> `BOL`
+- `fe3d:terrain_has_red_normal_map` (`STR` id) -----> `BOL`
+- `fe3d:terrain_has_green_normal_map` (`STR` id) -----> `BOL`
+- `fe3d:terrain_has_blue_normal_map` (`STR` id) -----> `BOL`
 - `fe3d:terrain_get_selected_id` (`STR` id) -----> `STR`
 - `fe3d:terrain_get_pixel_height` (`STR` id) -----> `DEC`
 - `fe3d:terrain_get_height_map_path` (`STR` id) -----> `STR`
@@ -39,15 +50,6 @@
 - `fe3d:terrain_get_red_normal_map_path` (`STR` id) -----> `STR`
 - `fe3d:terrain_get_green_normal_map_path` (`STR` id) -----> `STR`
 - `fe3d:terrain_get_blue_normal_map_path` (`STR` id) -----> `STR`
-- `fe3d:terrain_has_diffuse_map` (`STR` id) -----> `BOL`
-- `fe3d:terrain_has_normal_map` (`STR` id) -----> `BOL`
-- `fe3d:terrain_has_blend_map` (`STR` id) -----> `BOL`
-- `fe3d:terrain_has_red_diffuse_map` (`STR` id) -----> `BOL`
-- `fe3d:terrain_has_green_diffuse_map` (`STR` id) -----> `BOL`
-- `fe3d:terrain_has_blue_diffuse_map` (`STR` id) -----> `BOL`
-- `fe3d:terrain_has_red_normal_map` (`STR` id) -----> `BOL`
-- `fe3d:terrain_has_green_normal_map` (`STR` id) -----> `BOL`
-- `fe3d:terrain_has_blue_normal_map` (`STR` id) -----> `BOL`
 - `fe3d:terrain_get_max_height` (`STR` id) -----> `DEC`
 - `fe3d:terrain_get_size` (`STR` id) -----> `DEC`
 - `fe3d:terrain_get_lightness` (`STR` id) -----> `DEC`
@@ -60,5 +62,3 @@
 - `fe3d:terrain_get_red_repeat` (`STR` id) -----> `INT`
 - `fe3d:terrain_get_green_repeat` (`STR` id) -----> `INT`
 - `fe3d:terrain_get_blue_repeat` (`STR` id) -----> `INT`
-- `fe3d:terrain_is_specular` (`STR` id) -----> `BOL`
-- `fe3d:terrain_is_wireframed` (`STR` id) -----> `BOL`

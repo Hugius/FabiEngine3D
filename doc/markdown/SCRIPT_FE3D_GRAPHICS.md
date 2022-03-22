@@ -50,61 +50,61 @@
 
 ## Getters
 
-- `fe3d:graphics_is_ambient_lighting_enabled` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_is_shadow_following_camera` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_is_fog_enabled` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_is_directional_lighting_enabled` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_is_dof_enabled` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_is_dof_dynamic` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_is_motion_blur_enabled` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_is_lens_flare_enabled` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_is_bloom_enabled` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_is_sky_exposure_enabled` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_is_anti_aliasing_enabled` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_has_lens_flare_map` (`BOL` value) -----> `BOL`
-- `fe3d:graphics_get_anisotropic_filtering_quality` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_ambient_lighting_color_r` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_ambient_lighting_color_g` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_ambient_lighting_color_b` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_ambient_lighting_intensity` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_directional_lighting_position_x` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_directional_lighting_position_y` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_directional_lighting_position_z` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_directional_lighting_color_r` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_directional_lighting_color_g` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_directional_lighting_color_b` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_directional_lighting_intensity` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_cube_reflection_quality` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_planar_reflection_quality` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_planar_refraction_quality` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_planar_reflection_height` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_shadow_position_x` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_shadow_position_y` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_shadow_position_z` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_shadow_lookat_x` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_shadow_lookat_y` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_shadow_lookat_z` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_shadow_size` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_shadow_lightness` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_shadow_quality` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_shadow_interval` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_min_fog_distance` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_max_fog_distance` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_fog_thickness` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_fog_color_r` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_fog_color_g` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_fog_color_b` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_dof_quality` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_dof_dynamic_distance` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_dof_blur_distance` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_motion_blur_intensity` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_motion_blur_quality` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_lens_flare_map_path` (`BOL` value) -----> `STR`
-- `fe3d:graphics_get_lens_flare_intensity` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_lens_flare_sensitivity` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_bloom_intensity` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_bloom_quality` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_bloom_blur_count` (`BOL` value) -----> `INT`
-- `fe3d:graphics_get_bloom_type` (`BOL` value) -----> `STR`
-- `fe3d:graphics_get_sky_exposure_speed` (`BOL` value) -----> `DEC`
-- `fe3d:graphics_get_sky_exposure_intensity` (`BOL` value) -----> `DEC`
+- `fe3d:graphics_is_ambient_lighting_enabled` () -----> `BOL`
+- `fe3d:graphics_is_shadow_following_camera` () -----> `BOL`
+- `fe3d:graphics_is_fog_enabled` () -----> `BOL`
+- `fe3d:graphics_is_directional_lighting_enabled` () -----> `BOL`
+- `fe3d:graphics_is_dof_enabled` () -----> `BOL`
+- `fe3d:graphics_is_dof_dynamic` () -----> `BOL`
+- `fe3d:graphics_is_motion_blur_enabled` () -----> `BOL`
+- `fe3d:graphics_is_lens_flare_enabled` () -----> `BOL`
+- `fe3d:graphics_is_bloom_enabled` () -----> `BOL`
+- `fe3d:graphics_is_sky_exposure_enabled` () -----> `BOL`
+- `fe3d:graphics_is_anti_aliasing_enabled` () -----> `BOL`
+- `fe3d:graphics_has_lens_flare_map` () -----> `BOL`
+- `fe3d:graphics_get_anisotropic_filtering_quality` () -----> `INT`
+- `fe3d:graphics_get_ambient_lighting_color_r` () -----> `DEC`
+- `fe3d:graphics_get_ambient_lighting_color_g` () -----> `DEC`
+- `fe3d:graphics_get_ambient_lighting_color_b` () -----> `DEC`
+- `fe3d:graphics_get_ambient_lighting_intensity` () -----> `DEC`
+- `fe3d:graphics_get_directional_lighting_position_x` () -----> `DEC`
+- `fe3d:graphics_get_directional_lighting_position_y` () -----> `DEC`
+- `fe3d:graphics_get_directional_lighting_position_z` () -----> `DEC`
+- `fe3d:graphics_get_directional_lighting_color_r` () -----> `DEC`
+- `fe3d:graphics_get_directional_lighting_color_g` () -----> `DEC`
+- `fe3d:graphics_get_directional_lighting_color_b` () -----> `DEC`
+- `fe3d:graphics_get_directional_lighting_intensity` () -----> `DEC`
+- `fe3d:graphics_get_cube_reflection_quality` () -----> `INT`
+- `fe3d:graphics_get_planar_reflection_quality` () -----> `INT`
+- `fe3d:graphics_get_planar_refraction_quality` () -----> `INT`
+- `fe3d:graphics_get_planar_reflection_height` () -----> `DEC`
+- `fe3d:graphics_get_shadow_position_x` () -----> `DEC`
+- `fe3d:graphics_get_shadow_position_y` () -----> `DEC`
+- `fe3d:graphics_get_shadow_position_z` () -----> `DEC`
+- `fe3d:graphics_get_shadow_lookat_x` () -----> `DEC`
+- `fe3d:graphics_get_shadow_lookat_y` () -----> `DEC`
+- `fe3d:graphics_get_shadow_lookat_z` () -----> `DEC`
+- `fe3d:graphics_get_shadow_size` () -----> `DEC`
+- `fe3d:graphics_get_shadow_lightness` () -----> `DEC`
+- `fe3d:graphics_get_shadow_quality` () -----> `INT`
+- `fe3d:graphics_get_shadow_interval` () -----> `INT`
+- `fe3d:graphics_get_min_fog_distance` () -----> `DEC`
+- `fe3d:graphics_get_max_fog_distance` () -----> `DEC`
+- `fe3d:graphics_get_fog_thickness` () -----> `DEC`
+- `fe3d:graphics_get_fog_color_r` () -----> `DEC`
+- `fe3d:graphics_get_fog_color_g` () -----> `DEC`
+- `fe3d:graphics_get_fog_color_b` () -----> `DEC`
+- `fe3d:graphics_get_dof_quality` () -----> `INT`
+- `fe3d:graphics_get_dof_dynamic_distance` () -----> `DEC`
+- `fe3d:graphics_get_dof_blur_distance` () -----> `DEC`
+- `fe3d:graphics_get_motion_blur_intensity` () -----> `INT`
+- `fe3d:graphics_get_motion_blur_quality` () -----> `INT`
+- `fe3d:graphics_get_lens_flare_map_path` () -----> `STR`
+- `fe3d:graphics_get_lens_flare_intensity` () -----> `DEC`
+- `fe3d:graphics_get_lens_flare_sensitivity` () -----> `DEC`
+- `fe3d:graphics_get_bloom_intensity` () -----> `DEC`
+- `fe3d:graphics_get_bloom_quality` () -----> `INT`
+- `fe3d:graphics_get_bloom_blur_count` () -----> `INT`
+- `fe3d:graphics_get_bloom_type` () -----> `STR`
+- `fe3d:graphics_get_sky_exposure_speed` () -----> `DEC`
+- `fe3d:graphics_get_sky_exposure_intensity` () -----> `DEC`

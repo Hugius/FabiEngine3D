@@ -503,6 +503,28 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:graphics_set_anti_aliasing_enabled")
+	{
+		auto types = {SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->graphics_setAntiAliasingEnabled(args[0]->getBoolean());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:graphics_set_anisotropic_filtering_quality")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->graphics_setAnisotropicFilteringQuality(args[0]->getInteger());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else
 	{
 		return false;

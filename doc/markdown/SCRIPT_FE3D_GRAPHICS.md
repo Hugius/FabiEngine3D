@@ -45,6 +45,8 @@
 - `fe3d:graphics_set_sky_exposure_speed` (`DEC` value) -----> `NONE`
 - `fe3d:graphics_set_sky_exposure_intensity` (`DEC` value) -----> `NONE`
 - `fe3d:graphics_set_sky_exposure_enabled` (`BOL` value) -----> `NONE`
+- `fe3d:graphics_set_anti_aliasing_enabled` (`BOL` value) -----> `NONE`
+- `fe3d:graphics_set_anisotropic_filtering_quality` (`INT` value) -----> `NONE`
 
 ## Getters
 
@@ -58,7 +60,9 @@
 - `fe3d:graphics_is_lens_flare_enabled` (`BOL` value) -----> `BOL`
 - `fe3d:graphics_is_bloom_enabled` (`BOL` value) -----> `BOL`
 - `fe3d:graphics_is_sky_exposure_enabled` (`BOL` value) -----> `BOL`
+- `fe3d:graphics_is_anti_aliasing_enabled` (`BOL` value) -----> `BOL`
 - `fe3d:graphics_has_lens_flare_map` (`BOL` value) -----> `BOL`
+- `fe3d:graphics_get_anisotropic_filtering_quality` (`BOL` value) -----> `INT`
 - `fe3d:graphics_get_ambient_lighting_color_r` (`BOL` value) -----> `DEC`
 - `fe3d:graphics_get_ambient_lighting_color_g` (`BOL` value) -----> `DEC`
 - `fe3d:graphics_get_ambient_lighting_color_b` (`BOL` value) -----> `DEC`

@@ -519,6 +519,24 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
 	}
+	else if(functionName == "fe3d:graphics_is_anti_aliasing_enabled")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = _fe3d->graphics_isAntiAliasingEnabled();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_anisotropic_filtering_quality")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			const auto result = static_cast<int>(_fe3d->graphics_getAnisotropicFilteringQuality());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
+		}
+	}
 	else
 	{
 		return false;

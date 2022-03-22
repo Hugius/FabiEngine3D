@@ -1,7 +1,6 @@
 #include "texture_buffer.hpp"
-#include "configuration.hpp"
 
-using std::clamp;
+using std::min;
 
 TextureBuffer::TextureBuffer(unsigned int id)
 	:
@@ -90,6 +89,16 @@ const unsigned int TextureBuffer::getId() const
 	return _id;
 }
 
+const bool TextureBuffer::isMipMapped() const
+{
+	return _isMipMapped;
+}
+
+const bool TextureBuffer::isAnisotropicallyFiltered() const
+{
+	return _isAnisotropicallyFiltered;
+}
+
 void TextureBuffer::loadMipMapping()
 {
 	glBindTexture(GL_TEXTURE_2D, _id);
@@ -99,6 +108,8 @@ void TextureBuffer::loadMipMapping()
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	_isMipMapped = true;
 }
 
 void TextureBuffer::loadAnisotropicFiltering(unsigned int quality)
@@ -108,13 +119,6 @@ void TextureBuffer::loadAnisotropicFiltering(unsigned int quality)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, static_cast<int>(quality));
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-}
 
-const unsigned int TextureBuffer::getAnisotropicFilteringQuality() const
-{
-	int quality;
-
-	glGetIntegerv(GL_TEXTURE_MAX_ANISOTROPY, &quality);
-
-	return quality;
+	_isAnisotropicallyFiltered = true;
 }

@@ -20,9 +20,14 @@ public:
 	void loadMipMapping();
 	void loadAnisotropicFiltering(unsigned int quality);
 
-	const unsigned int getAnisotropicFilteringQuality() const;
 	const unsigned int getId() const;
+
+	const bool isMipMapped() const;
+	const bool isAnisotropicallyFiltered() const;
 
 private:
 	unsigned int _id;
+
+	bool _isMipMapped = false;
+	bool _isAnisotropicallyFiltered = false;
 };

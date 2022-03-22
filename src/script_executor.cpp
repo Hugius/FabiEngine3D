@@ -10,6 +10,7 @@ void ScriptExecutor::start()
 	_isStarted = true;
 	_isRunning = true;
 	_mustSkipUpdate = true;
+	_wasCursorVisible = _fe3d->misc_isCursorVisible();
 
 	_validateExecution();
 }
@@ -29,8 +30,22 @@ void ScriptExecutor::update(bool isDebugging)
 
 		if(!Configuration::getInst().isApplicationExported())
 		{
-			_fe3d->quad2d_setVisible("@@cursor", !_fe3d->misc_isCursorInsideDisplay());
-			_fe3d->misc_setCursorVisible(_fe3d->misc_isCursorInsideDisplay());
+			const auto isCursorInsideDisplay = _fe3d->misc_isCursorInsideDisplay();
+
+			_fe3d->quad2d_setVisible("@@cursor", !isCursorInsideDisplay);
+
+			if(_wasCursorInsideDisplay && !isCursorInsideDisplay)
+			{
+				_wasCursorVisible = _fe3d->misc_isCursorVisible();
+
+				_fe3d->misc_setCursorVisible(false);
+			}
+			if(!_wasCursorInsideDisplay && isCursorInsideDisplay)
+			{
+				_fe3d->misc_setCursorVisible(_wasCursorVisible);
+			}
+
+			_wasCursorInsideDisplay = isCursorInsideDisplay;
 		}
 
 		_validateExecution();
@@ -42,16 +57,8 @@ void ScriptExecutor::pause()
 	if(_isStarted && _isRunning)
 	{
 		_wasVsyncEnabled = _fe3d->misc_isVsyncEnabled();
-		_fe3d->misc_setVsyncEnabled(true);
-
-		_wasCursorVisible = _fe3d->misc_isCursorVisible();
-		_fe3d->misc_setCursorVisible(false);
-
 		_wasFirstPersonEnabled = _fe3d->camera_isFirstPersonEnabled();
-		_fe3d->camera_setFirstPersonEnabled(false);
-
 		_wasThirdPersonEnabled = _fe3d->camera_isThirdPersonEnabled();
-		_fe3d->camera_setThirdPersonEnabled(false);
 
 		for(const auto& soundId : _fe3d->sound3d_getIds())
 		{
@@ -82,6 +89,11 @@ void ScriptExecutor::pause()
 				_pausedClockIds.push_back(clockId);
 			}
 		}
+
+		_fe3d->misc_setVsyncEnabled(true);
+		_fe3d->misc_setCursorVisible(false);
+		_fe3d->camera_setFirstPersonEnabled(false);
+		_fe3d->camera_setThirdPersonEnabled(false);
 
 		for(const auto& soundId : _fe3d->sound3d_getIds())
 		{
@@ -192,6 +204,7 @@ void ScriptExecutor::stop()
 		_isRunning = false;
 		_wasVsyncEnabled = false;
 		_wasCursorVisible = false;
+		_wasCursorInsideDisplay = false;
 		_wasFirstPersonEnabled = false;
 		_wasThirdPersonEnabled = false;
 		_mustSkipUpdate = false;
@@ -236,6 +249,7 @@ void ScriptExecutor::_validateExecution()
 		_isRunning = false;
 		_wasVsyncEnabled = false;
 		_wasCursorVisible = false;
+		_wasCursorInsideDisplay = false;
 		_wasFirstPersonEnabled = false;
 		_wasThirdPersonEnabled = false;
 		_mustSkipUpdate = false;

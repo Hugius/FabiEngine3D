@@ -467,9 +467,9 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> color.b
 				>> intensity;
 
-			_fe3d->gfx_setAmbientLightingEnabled(true);
-			_fe3d->gfx_setAmbientLightingColor(color);
-			_fe3d->gfx_setAmbientLightingIntensity(intensity);
+			_fe3d->graphics_setAmbientLightingEnabled(true);
+			_fe3d->graphics_setAmbientLightingColor(color);
+			_fe3d->graphics_setAmbientLightingIntensity(intensity);
 		}
 		else if(lineType == "LIGHTING_DIRECTIONAL")
 		{
@@ -488,10 +488,10 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> intensity
 				>> quad3dSize;
 
-			_fe3d->gfx_setDirectionalLightingEnabled(true);
-			_fe3d->gfx_setDirectionalLightingPosition(position);
-			_fe3d->gfx_setDirectionalLightingIntensity(intensity);
-			_fe3d->gfx_setDirectionalLightingColor(color);
+			_fe3d->graphics_setDirectionalLightingEnabled(true);
+			_fe3d->graphics_setDirectionalLightingPosition(position);
+			_fe3d->graphics_setDirectionalLightingIntensity(intensity);
+			_fe3d->graphics_setDirectionalLightingColor(color);
 		}
 		else if(lineType == "GRAPHICS_SHADOWS")
 		{
@@ -516,14 +516,14 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> interval
 				>> quality;
 
-			_fe3d->gfx_setShadowsEnabled(true);
-			_fe3d->gfx_setShadowPositionOffset(position);
-			_fe3d->gfx_setShadowLookatOffset(center);
-			_fe3d->gfx_setShadowSize(size);
-			_fe3d->gfx_setShadowLightness(lightness);
-			_fe3d->gfx_setShadowFollowingCamera(isFollowingCamera);
-			_fe3d->gfx_setShadowInterval(interval);
-			_fe3d->gfx_setShadowQuality(quality);
+			_fe3d->graphics_setShadowsEnabled(true);
+			_fe3d->graphics_setShadowPositionOffset(position);
+			_fe3d->graphics_setShadowLookatOffset(center);
+			_fe3d->graphics_setShadowSize(size);
+			_fe3d->graphics_setShadowLightness(lightness);
+			_fe3d->graphics_setShadowFollowingCamera(isFollowingCamera);
+			_fe3d->graphics_setShadowInterval(interval);
+			_fe3d->graphics_setShadowQuality(quality);
 		}
 		else if(lineType == "GRAPHICS_REFLECTIONS")
 		{
@@ -536,9 +536,9 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> cubeQuality
 				>> planarQuality;
 
-			_fe3d->gfx_setPlanarReflectionHeight(planarHeight);
-			_fe3d->gfx_setCubeReflectionQuality(cubeQuality);
-			_fe3d->gfx_setPlanarReflectionQuality(planarQuality);
+			_fe3d->graphics_setPlanarReflectionHeight(planarHeight);
+			_fe3d->graphics_setCubeReflectionQuality(cubeQuality);
+			_fe3d->graphics_setPlanarReflectionQuality(planarQuality);
 		}
 		else if(lineType == "GRAPHICS_REFRACTIONS")
 		{
@@ -546,7 +546,7 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 
 			iss >> planarQuality;
 
-			_fe3d->gfx_setPlanarRefractionQuality(planarQuality);
+			_fe3d->graphics_setPlanarRefractionQuality(planarQuality);
 		}
 		else if(lineType == "GRAPHICS_DOF")
 		{
@@ -561,11 +561,11 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> maxDistance
 				>> quality;
 
-			_fe3d->gfx_setDofEnabled(true);
-			_fe3d->gfx_setDofDynamic(isDynamic);
-			_fe3d->gfx_setDofDynamicDistance(maxDistance);
-			_fe3d->gfx_setDofBlurDistance(blurDistance);
-			_fe3d->gfx_setDofQuality(quality);
+			_fe3d->graphics_setDofEnabled(true);
+			_fe3d->graphics_setDofDynamic(isDynamic);
+			_fe3d->graphics_setDofDynamicDistance(maxDistance);
+			_fe3d->graphics_setDofBlurDistance(blurDistance);
+			_fe3d->graphics_setDofQuality(quality);
 		}
 		else if(lineType == "GRAPHICS_FOG")
 		{
@@ -582,11 +582,11 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> color.g
 				>> color.b;
 
-			_fe3d->gfx_setFogEnabled(true);
-			_fe3d->gfx_setFogMinDistance(minDistance);
-			_fe3d->gfx_setFogMaxDistance(maxDistance);
-			_fe3d->gfx_setFogThickness(thickness);
-			_fe3d->gfx_setFogColor(color);
+			_fe3d->graphics_setFogEnabled(true);
+			_fe3d->graphics_setFogMinDistance(minDistance);
+			_fe3d->graphics_setFogMaxDistance(maxDistance);
+			_fe3d->graphics_setFogThickness(thickness);
+			_fe3d->graphics_setFogColor(color);
 		}
 		else if(lineType == "GRAPHICS_LENS_FLARE")
 		{
@@ -608,10 +608,10 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				flareMapPath = ("projects\\" + getCurrentProjectId() + "\\" + flareMapPath);
 			}
 
-			_fe3d->gfx_setLensFlareEnabled(true);
-			_fe3d->gfx_setLensFlareMap(flareMapPath);
-			_fe3d->gfx_setLensFlareIntensity(intensity);
-			_fe3d->gfx_setLensFlareSensitivity(sensitivity);
+			_fe3d->graphics_setLensFlareEnabled(true);
+			_fe3d->graphics_setLensFlareMap(flareMapPath);
+			_fe3d->graphics_setLensFlareIntensity(intensity);
+			_fe3d->graphics_setLensFlareSensitivity(sensitivity);
 		}
 		else if(lineType == "GRAPHICS_SKY_EXPOSURE")
 		{
@@ -622,9 +622,9 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> intensity
 				>> speed;
 
-			_fe3d->gfx_setSkyExposureEnabled(true);
-			_fe3d->gfx_setSkyExposureIntensity(intensity);
-			_fe3d->gfx_setSkyExposureSpeed(speed);
+			_fe3d->graphics_setSkyExposureEnabled(true);
+			_fe3d->graphics_setSkyExposureIntensity(intensity);
+			_fe3d->graphics_setSkyExposureSpeed(speed);
 		}
 		else if(lineType == "GRAPHICS_BLOOM")
 		{
@@ -639,11 +639,11 @@ const bool WorldEditor::loadWorldFromFile(const string& fileName)
 				>> blurCount
 				>> quality;
 
-			_fe3d->gfx_setBloomEnabled(true);
-			_fe3d->gfx_setBloomType(BloomType(type));
-			_fe3d->gfx_setBloomIntensity(intensity);
-			_fe3d->gfx_setBloomBlurCount(blurCount);
-			_fe3d->gfx_setBloomQuality(quality);
+			_fe3d->graphics_setBloomEnabled(true);
+			_fe3d->graphics_setBloomType(BloomType(type));
+			_fe3d->graphics_setBloomIntensity(intensity);
+			_fe3d->graphics_setBloomBlurCount(blurCount);
+			_fe3d->graphics_setBloomQuality(quality);
 		}
 		else
 		{

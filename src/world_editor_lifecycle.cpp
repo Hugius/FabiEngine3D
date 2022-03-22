@@ -6,8 +6,8 @@ void WorldEditor::_load()
 {
 	_fe3d->camera_reset();
 
-	_fe3d->gfx_setAntiAliasingEnabled(true);
-	_fe3d->gfx_setAnisotropicFilteringQuality(16);
+	_fe3d->graphics_setAntiAliasingEnabled(true);
+	_fe3d->graphics_setAnisotropicFilteringQuality(16);
 
 	_skyEditor->loadEntitiesFromFile();
 
@@ -98,8 +98,8 @@ void WorldEditor::_load()
 
 void WorldEditor::_unload()
 {
-	_fe3d->gfx_setAntiAliasingEnabled(false);
-	_fe3d->gfx_setAnisotropicFilteringQuality(0);
+	_fe3d->graphics_setAntiAliasingEnabled(false);
+	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 
 	_fe3d->model_delete(TEMPLATE_LAMP_ID);
 	_fe3d->model_delete(TEMPLATE_TORCH_ID);

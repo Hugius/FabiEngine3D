@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_isAmbientLightingEnabled();
+			const auto result = _fe3d->graphics_isAmbientLightingEnabled();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getAmbientLightingColor().r;
+			const auto result = _fe3d->graphics_getAmbientLightingColor().r;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getAmbientLightingColor().g;
+			const auto result = _fe3d->graphics_getAmbientLightingColor().g;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getAmbientLightingColor().b;
+			const auto result = _fe3d->graphics_getAmbientLightingColor().b;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getAmbientLightingIntensity();
+			const auto result = _fe3d->graphics_getAmbientLightingIntensity();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -53,7 +53,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_isDirectionalLightingEnabled();
+			const auto result = _fe3d->graphics_isDirectionalLightingEnabled();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getDirectionalLightingPosition().x;
+			const auto result = _fe3d->graphics_getDirectionalLightingPosition().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -71,7 +71,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getDirectionalLightingPosition().y;
+			const auto result = _fe3d->graphics_getDirectionalLightingPosition().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getDirectionalLightingPosition().z;
+			const auto result = _fe3d->graphics_getDirectionalLightingPosition().z;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getDirectionalLightingColor().r;
+			const auto result = _fe3d->graphics_getDirectionalLightingColor().r;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getDirectionalLightingColor().g;
+			const auto result = _fe3d->graphics_getDirectionalLightingColor().g;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getDirectionalLightingColor().b;
+			const auto result = _fe3d->graphics_getDirectionalLightingColor().b;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getDirectionalLightingIntensity();
+			const auto result = _fe3d->graphics_getDirectionalLightingIntensity();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->gfx_getCubeReflectionQuality());
+			const auto result = static_cast<int>(_fe3d->graphics_getCubeReflectionQuality());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -134,7 +134,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->gfx_getPlanarReflectionQuality());
+			const auto result = static_cast<int>(_fe3d->graphics_getPlanarReflectionQuality());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -143,7 +143,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->gfx_getPlanarRefractionQuality());
+			const auto result = static_cast<int>(_fe3d->graphics_getPlanarRefractionQuality());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -152,7 +152,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->gfx_getPlanarReflectionHeight());
+			const auto result = static_cast<int>(_fe3d->graphics_getPlanarReflectionHeight());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -161,7 +161,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowPositionOffset().x;
+			const auto result = _fe3d->graphics_getShadowPositionOffset().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowPositionOffset().y;
+			const auto result = _fe3d->graphics_getShadowPositionOffset().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -179,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowPositionOffset().z;
+			const auto result = _fe3d->graphics_getShadowPositionOffset().z;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -188,7 +188,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowLookatOffset().x;
+			const auto result = _fe3d->graphics_getShadowLookatOffset().x;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -197,7 +197,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowLookatOffset().y;
+			const auto result = _fe3d->graphics_getShadowLookatOffset().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -206,7 +206,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowLookatOffset().z;
+			const auto result = _fe3d->graphics_getShadowLookatOffset().z;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -215,7 +215,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowSize();
+			const auto result = _fe3d->graphics_getShadowSize();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -224,7 +224,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getShadowLightness();
+			const auto result = _fe3d->graphics_getShadowLightness();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -233,7 +233,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->gfx_getShadowQuality());
+			const auto result = static_cast<int>(_fe3d->graphics_getShadowQuality());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -242,7 +242,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->gfx_getShadowInterval());
+			const auto result = static_cast<int>(_fe3d->graphics_getShadowInterval());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -251,7 +251,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_isShadowFollowingCamera();
+			const auto result = _fe3d->graphics_isShadowFollowingCamera();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -260,7 +260,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_isFogEnabled();
+			const auto result = _fe3d->graphics_isFogEnabled();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -269,7 +269,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getFogMinDistance();
+			const auto result = _fe3d->graphics_getFogMinDistance();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -278,7 +278,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getFogMaxDistance();
+			const auto result = _fe3d->graphics_getFogMaxDistance();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -287,7 +287,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getFogThickness();
+			const auto result = _fe3d->graphics_getFogThickness();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -296,7 +296,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getFogColor().r;
+			const auto result = _fe3d->graphics_getFogColor().r;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -305,7 +305,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getFogColor().g;
+			const auto result = _fe3d->graphics_getFogColor().g;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -314,7 +314,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getFogColor().b;
+			const auto result = _fe3d->graphics_getFogColor().b;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -323,7 +323,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->gfx_getDofQuality());
+			const auto result = static_cast<int>(_fe3d->graphics_getDofQuality());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -332,7 +332,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_isDofEnabled();
+			const auto result = _fe3d->graphics_isDofEnabled();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -341,7 +341,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_isDofDynamic();
+			const auto result = _fe3d->graphics_isDofDynamic();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -350,7 +350,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getDofDynamicDistance();
+			const auto result = _fe3d->graphics_getDofDynamicDistance();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -359,7 +359,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getDofBlurDistance();
+			const auto result = _fe3d->graphics_getDofBlurDistance();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -368,7 +368,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getMotionBlurIntensity();
+			const auto result = _fe3d->graphics_getMotionBlurIntensity();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -377,7 +377,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->gfx_getMotionBlurQuality());
+			const auto result = static_cast<int>(_fe3d->graphics_getMotionBlurQuality());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -386,7 +386,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_isMotionBlurEnabled();
+			const auto result = _fe3d->graphics_isMotionBlurEnabled();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -395,7 +395,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_isLensFlareEnabled();
+			const auto result = _fe3d->graphics_isLensFlareEnabled();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -404,7 +404,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getLensFlareMapPath();
+			const auto result = _fe3d->graphics_getLensFlareMapPath();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
@@ -413,7 +413,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_hasLensFlareMap();
+			const auto result = _fe3d->graphics_hasLensFlareMap();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -422,7 +422,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getLensFlareIntensity();
+			const auto result = _fe3d->graphics_getLensFlareIntensity();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -431,7 +431,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getLensFlareSensitivity();
+			const auto result = _fe3d->graphics_getLensFlareSensitivity();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -440,7 +440,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getBloomIntensity();
+			const auto result = _fe3d->graphics_getBloomIntensity();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -449,7 +449,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->gfx_getBloomQuality());
+			const auto result = static_cast<int>(_fe3d->graphics_getBloomQuality());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -458,7 +458,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->gfx_getBloomBlurCount());
+			const auto result = static_cast<int>(_fe3d->graphics_getBloomBlurCount());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -467,7 +467,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_isBloomEnabled();
+			const auto result = _fe3d->graphics_isBloomEnabled();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -476,7 +476,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto bloomType = _fe3d->gfx_getBloomType();
+			const auto bloomType = _fe3d->graphics_getBloomType();
 
 			if(bloomType == BloomType::EVERYTHING)
 			{
@@ -496,7 +496,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_isSkyExposureEnabled();
+			const auto result = _fe3d->graphics_isSkyExposureEnabled();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -505,7 +505,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getSkyExposureSpeed();
+			const auto result = _fe3d->graphics_getSkyExposureSpeed();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -514,7 +514,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = _fe3d->gfx_getSkyExposureIntensity();
+			const auto result = _fe3d->graphics_getSkyExposureIntensity();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}

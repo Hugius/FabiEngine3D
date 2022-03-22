@@ -360,10 +360,10 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	if(_fe3d->gfx_isAmbientLightingEnabled())
+	if(_fe3d->graphics_isAmbientLightingEnabled())
 	{
-		auto ambientLightingColor = _fe3d->gfx_getAmbientLightingColor();
-		auto ambientLightingIntensity = _fe3d->gfx_getAmbientLightingIntensity();
+		auto ambientLightingColor = _fe3d->graphics_getAmbientLightingColor();
+		auto ambientLightingIntensity = _fe3d->graphics_getAmbientLightingIntensity();
 
 		file
 			<< "LIGHTING_AMBIENT "
@@ -377,11 +377,11 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	if(_fe3d->gfx_isDirectionalLightingEnabled())
+	if(_fe3d->graphics_isDirectionalLightingEnabled())
 	{
-		auto directionalLightingColor = _fe3d->gfx_getDirectionalLightingColor();
-		auto directionalLightingPosition = _fe3d->gfx_getDirectionalLightingPosition();
-		auto directionalLightingIntensity = _fe3d->gfx_getDirectionalLightingIntensity();
+		auto directionalLightingColor = _fe3d->graphics_getDirectionalLightingColor();
+		auto directionalLightingPosition = _fe3d->graphics_getDirectionalLightingPosition();
+		auto directionalLightingIntensity = _fe3d->graphics_getDirectionalLightingIntensity();
 
 		file
 			<< "LIGHTING_DIRECTIONAL "
@@ -401,15 +401,15 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	if(_fe3d->gfx_isShadowsEnabled())
+	if(_fe3d->graphics_isShadowsEnabled())
 	{
-		auto size = _fe3d->gfx_getShadowSize();
-		auto lightness = _fe3d->gfx_getShadowLightness();
-		auto position = _fe3d->gfx_getShadowPositionOffset();
-		auto lookat = _fe3d->gfx_getShadowLookatOffset();
-		auto isFollowingCamera = _fe3d->gfx_isShadowFollowingCamera();
-		auto interval = _fe3d->gfx_getShadowInterval();
-		auto quality = _fe3d->gfx_getShadowQuality();
+		auto size = _fe3d->graphics_getShadowSize();
+		auto lightness = _fe3d->graphics_getShadowLightness();
+		auto position = _fe3d->graphics_getShadowPositionOffset();
+		auto lookat = _fe3d->graphics_getShadowLookatOffset();
+		auto isFollowingCamera = _fe3d->graphics_isShadowFollowingCamera();
+		auto interval = _fe3d->graphics_getShadowInterval();
+		auto quality = _fe3d->graphics_getShadowQuality();
 
 		file
 			<< "GRAPHICS_SHADOWS "
@@ -438,9 +438,9 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		auto planarHeight = _fe3d->gfx_getPlanarReflectionHeight();
-		auto cubeQuality = _fe3d->gfx_getCubeReflectionQuality();
-		auto planarQuality = _fe3d->gfx_getPlanarReflectionQuality();
+		auto planarHeight = _fe3d->graphics_getPlanarReflectionHeight();
+		auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
+		auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		file
 			<< "GRAPHICS_REFLECTIONS "
@@ -453,7 +453,7 @@ const bool WorldEditor::saveWorldToFile() const
 	}
 
 	{
-		auto planarQuality = _fe3d->gfx_getPlanarReflectionQuality();
+		auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		file
 			<< "GRAPHICS_REFRACTIONS "
@@ -461,12 +461,12 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	if(_fe3d->gfx_isDofEnabled())
+	if(_fe3d->graphics_isDofEnabled())
 	{
-		auto dynamic = _fe3d->gfx_isDofDynamic();
-		auto blurDistance = _fe3d->gfx_getDofBlurDistance();
-		auto maxDistance = _fe3d->gfx_getDofDynamicDistance();
-		auto quality = _fe3d->gfx_getDofQuality();
+		auto dynamic = _fe3d->graphics_isDofDynamic();
+		auto blurDistance = _fe3d->graphics_getDofBlurDistance();
+		auto maxDistance = _fe3d->graphics_getDofDynamicDistance();
+		auto quality = _fe3d->graphics_getDofQuality();
 
 		file
 			<< "GRAPHICS_DOF "
@@ -480,12 +480,12 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	if(_fe3d->gfx_isFogEnabled())
+	if(_fe3d->graphics_isFogEnabled())
 	{
-		auto minDistance = _fe3d->gfx_getFogMinDistance();
-		auto maxDistance = _fe3d->gfx_getFogMaxDistance();
-		auto thickness = _fe3d->gfx_getFogThickness();
-		auto color = _fe3d->gfx_getFogColor();
+		auto minDistance = _fe3d->graphics_getFogMinDistance();
+		auto maxDistance = _fe3d->graphics_getFogMaxDistance();
+		auto thickness = _fe3d->graphics_getFogThickness();
+		auto color = _fe3d->graphics_getFogColor();
 
 		file
 			<< "GRAPHICS_FOG "
@@ -503,11 +503,11 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	if(_fe3d->gfx_isLensFlareEnabled())
+	if(_fe3d->graphics_isLensFlareEnabled())
 	{
-		auto flareMapPath = _fe3d->gfx_getLensFlareMapPath();
-		auto intensity = _fe3d->gfx_getLensFlareIntensity();
-		auto sensitivity = _fe3d->gfx_getLensFlareSensitivity();
+		auto flareMapPath = _fe3d->graphics_getLensFlareMapPath();
+		auto intensity = _fe3d->graphics_getLensFlareIntensity();
+		auto sensitivity = _fe3d->graphics_getLensFlareSensitivity();
 
 		flareMapPath = (flareMapPath.empty() ? "" : flareMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -525,22 +525,22 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	if(_fe3d->gfx_isSkyExposureEnabled())
+	if(_fe3d->graphics_isSkyExposureEnabled())
 	{
 		file
 			<< "GRAPHICS_SKY_EXPOSURE "
-			<< _fe3d->gfx_getSkyExposureIntensity()
+			<< _fe3d->graphics_getSkyExposureIntensity()
 			<< " "
-			<< _fe3d->gfx_getSkyExposureSpeed()
+			<< _fe3d->graphics_getSkyExposureSpeed()
 			<< endl;
 	}
 
-	if(_fe3d->gfx_isBloomEnabled())
+	if(_fe3d->graphics_isBloomEnabled())
 	{
-		auto type = static_cast<unsigned int>(_fe3d->gfx_getBloomType());
-		auto intensity = _fe3d->gfx_getBloomIntensity();
-		auto blurCount = _fe3d->gfx_getBloomBlurCount();
-		auto quality = _fe3d->gfx_getBloomQuality();
+		auto type = static_cast<unsigned int>(_fe3d->graphics_getBloomType());
+		auto intensity = _fe3d->graphics_getBloomIntensity();
+		auto blurCount = _fe3d->graphics_getBloomBlurCount();
+		auto quality = _fe3d->graphics_getBloomQuality();
 
 		file
 			<< "GRAPHICS_BLOOM "

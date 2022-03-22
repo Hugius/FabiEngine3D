@@ -24,9 +24,9 @@ void Animation3dEditor::_updateCamera()
 		_fe3d->quad2d_setVisible("@@cursor", false);
 
 		const auto distance = _fe3d->camera_getThirdPersonDistance();
-		_fe3d->gfx_setShadowPositionOffset(fvec3(cameraLookat + fvec3(distance)));
-		_fe3d->gfx_setShadowLookatOffset(cameraLookat);
-		_fe3d->gfx_setShadowSize(distance * 2.0f);
+		_fe3d->graphics_setShadowPositionOffset(fvec3(cameraLookat + fvec3(distance)));
+		_fe3d->graphics_setShadowLookatOffset(cameraLookat);
+		_fe3d->graphics_setShadowSize(distance * 2.0f);
 	}
 
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())

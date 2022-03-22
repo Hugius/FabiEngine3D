@@ -16,15 +16,15 @@ void WaterEditor::_load()
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
-	_fe3d->gfx_setAntiAliasingEnabled(true);
-	_fe3d->gfx_setAnisotropicFilteringQuality(16);
-	_fe3d->gfx_setAmbientLightingEnabled(true);
-	_fe3d->gfx_setAmbientLightingColor(fvec3(1.0f));
-	_fe3d->gfx_setAmbientLightingIntensity(1.0f);
-	_fe3d->gfx_setDirectionalLightingEnabled(true);
-	_fe3d->gfx_setDirectionalLightingColor(fvec3(1.0f));
-	_fe3d->gfx_setDirectionalLightingPosition(fvec3(10000.0f));
-	_fe3d->gfx_setDirectionalLightingIntensity(3.0f);
+	_fe3d->graphics_setAntiAliasingEnabled(true);
+	_fe3d->graphics_setAnisotropicFilteringQuality(16);
+	_fe3d->graphics_setAmbientLightingEnabled(true);
+	_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
+	_fe3d->graphics_setAmbientLightingIntensity(1.0f);
+	_fe3d->graphics_setDirectionalLightingEnabled(true);
+	_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
+	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));
+	_fe3d->graphics_setDirectionalLightingIntensity(3.0f);
 
 	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d->model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
@@ -48,15 +48,15 @@ void WaterEditor::_unload()
 		_fe3d->water_delete(id);
 	}
 
-	_fe3d->gfx_setAntiAliasingEnabled(false);
-	_fe3d->gfx_setAnisotropicFilteringQuality(0);
-	_fe3d->gfx_setAmbientLightingEnabled(false);
-	_fe3d->gfx_setAmbientLightingColor(fvec3(0.0f));
-	_fe3d->gfx_setAmbientLightingIntensity(0.0f);
-	_fe3d->gfx_setDirectionalLightingEnabled(false);
-	_fe3d->gfx_setDirectionalLightingColor(fvec3(0.0f));
-	_fe3d->gfx_setDirectionalLightingPosition(fvec3(0.0f));
-	_fe3d->gfx_setDirectionalLightingIntensity(0.0f);
+	_fe3d->graphics_setAntiAliasingEnabled(false);
+	_fe3d->graphics_setAnisotropicFilteringQuality(0);
+	_fe3d->graphics_setAmbientLightingEnabled(false);
+	_fe3d->graphics_setAmbientLightingColor(fvec3(0.0f));
+	_fe3d->graphics_setAmbientLightingIntensity(0.0f);
+	_fe3d->graphics_setDirectionalLightingEnabled(false);
+	_fe3d->graphics_setDirectionalLightingColor(fvec3(0.0f));
+	_fe3d->graphics_setDirectionalLightingPosition(fvec3(0.0f));
+	_fe3d->graphics_setDirectionalLightingIntensity(0.0f);
 
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");

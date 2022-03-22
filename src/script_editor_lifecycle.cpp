@@ -15,11 +15,11 @@ void ScriptEditor::_load()
 
 	_fe3d->raycast_setAabbIntersectionEnabled(true);
 
-	_fe3d->gfx_setBloomEnabled(true);
-	_fe3d->gfx_setBloomType(BloomType::PARTS);
-	_fe3d->gfx_setBloomIntensity(0.95f);
-	_fe3d->gfx_setBloomBlurCount(2);
-	_fe3d->gfx_setBloomQuality(BLOOM_QUALITY);
+	_fe3d->graphics_setBloomEnabled(true);
+	_fe3d->graphics_setBloomType(BloomType::PARTS);
+	_fe3d->graphics_setBloomIntensity(0.95f);
+	_fe3d->graphics_setBloomBlurCount(2);
+	_fe3d->graphics_setBloomQuality(BLOOM_QUALITY);
 
 	_fe3d->quad3d_create("selection", true);
 	_fe3d->quad3d_setVisible("selection", false);
@@ -38,11 +38,11 @@ void ScriptEditor::_unload()
 
 	_fe3d->raycast_setAabbIntersectionEnabled(false);
 
-	_fe3d->gfx_setBloomEnabled(false);
-	_fe3d->gfx_setBloomType(BloomType::EVERYTHING);
-	_fe3d->gfx_setBloomIntensity(0.0f);
-	_fe3d->gfx_setBloomBlurCount(0);
-	_fe3d->gfx_setBloomQuality(0);
+	_fe3d->graphics_setBloomEnabled(false);
+	_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
+	_fe3d->graphics_setBloomIntensity(0.0f);
+	_fe3d->graphics_setBloomBlurCount(0);
+	_fe3d->graphics_setBloomQuality(0);
 
 	_fe3d->quad3d_delete("selection");
 

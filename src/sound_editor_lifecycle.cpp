@@ -7,13 +7,13 @@
 
 void SoundEditor::_load()
 {
-	_fe3d->gfx_setAntiAliasingEnabled(true);
-	_fe3d->gfx_setAnisotropicFilteringQuality(16);
-	_fe3d->gfx_setBloomEnabled(true);
-	_fe3d->gfx_setBloomType(BloomType::PARTS);
-	_fe3d->gfx_setBloomIntensity(1.0f);
-	_fe3d->gfx_setBloomBlurCount(5);
-	_fe3d->gfx_setBloomQuality(5);
+	_fe3d->graphics_setAntiAliasingEnabled(true);
+	_fe3d->graphics_setAnisotropicFilteringQuality(16);
+	_fe3d->graphics_setBloomEnabled(true);
+	_fe3d->graphics_setBloomType(BloomType::PARTS);
+	_fe3d->graphics_setBloomIntensity(1.0f);
+	_fe3d->graphics_setBloomBlurCount(5);
+	_fe3d->graphics_setBloomQuality(5);
 
 	_fe3d->camera_reset();
 	_fe3d->camera_setYaw(270.0f);
@@ -33,13 +33,13 @@ void SoundEditor::_unload()
 		_fe3d->sound2d_delete(id);
 	}
 
-	_fe3d->gfx_setAntiAliasingEnabled(false);
-	_fe3d->gfx_setAnisotropicFilteringQuality(0);
-	_fe3d->gfx_setBloomEnabled(false);
-	_fe3d->gfx_setBloomType(BloomType::EVERYTHING);
-	_fe3d->gfx_setBloomIntensity(0.0f);
-	_fe3d->gfx_setBloomBlurCount(0);
-	_fe3d->gfx_setBloomQuality(0);
+	_fe3d->graphics_setAntiAliasingEnabled(false);
+	_fe3d->graphics_setAnisotropicFilteringQuality(0);
+	_fe3d->graphics_setBloomEnabled(false);
+	_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
+	_fe3d->graphics_setBloomIntensity(0.0f);
+	_fe3d->graphics_setBloomBlurCount(0);
+	_fe3d->graphics_setBloomQuality(0);
 
 	_fe3d->quad3d_delete("@@icon");
 

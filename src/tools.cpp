@@ -10,6 +10,8 @@
 #include <shlobj_core.h>
 
 using std::to_string;
+using std::filesystem::copy;
+using std::filesystem::copy_file;
 using std::filesystem::exists;
 using std::filesystem::create_directory;
 using std::filesystem::absolute;
@@ -18,24 +20,33 @@ using std::filesystem::remove;
 using std::filesystem::remove_all;
 using std::filesystem::exists;
 using std::filesystem::is_directory;
-using std::filesystem::directory_iterator;
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
 using std::chrono::system_clock;
+using std::filesystem::directory_iterator;
+using std::filesystem::copy_options;
+using std::error_code;
 
 const vector<string> Tools::getFileNamesFromDirectory(const string& path)
 {
-	if(!isDirectoryExisting(path))
+	error_code error = {};
+	const auto iterator = directory_iterator(path, error);
+
+	if(error.value() != 0)
 	{
-		abort();
+		return {};
 	}
 
 	vector<string> fileNames;
-	for(const auto& entry : directory_iterator(path))
+	for(const auto& entry : iterator)
 	{
-		string filePath = entry.path().string();
-		filePath.erase(0, path.size());
-		fileNames.push_back(filePath);
+		auto entryPath = entry.path().string();
+
+		if(!isDirectoryExisting(entryPath))
+		{
+			entryPath.erase(0, path.size());
+			fileNames.push_back(entryPath);
+		}
 	}
 
 	return fileNames;
@@ -43,20 +54,23 @@ const vector<string> Tools::getFileNamesFromDirectory(const string& path)
 
 const vector<string> Tools::getDirectoryNamesFromDirectory(const string& path)
 {
-	if(!isDirectoryExisting(path))
+	error_code error = {};
+	const auto iterator = directory_iterator(path, error);
+
+	if(error.value() != 0)
 	{
-		abort();
+		return {};
 	}
 
 	vector<string> directoryNames;
-	for(const auto& entry : directory_iterator(path))
+	for(const auto& entry : iterator)
 	{
-		string directoryPath = entry.path().string();
+		auto entryPath = entry.path().string();
 
-		if(isDirectoryExisting(directoryPath))
+		if(isDirectoryExisting(entryPath))
 		{
-			directoryPath.erase(0, path.size());
-			directoryNames.push_back(directoryPath);
+			entryPath.erase(0, path.size());
+			directoryNames.push_back(entryPath);
 		}
 	}
 
@@ -247,71 +261,70 @@ const bool Tools::isFileExisting(const string& path)
 	return (exists(path) && !is_directory(path));
 }
 
-void Tools::createDirectory(const string& path)
+const bool Tools::createDirectory(const string& path)
 {
+	if(isDirectoryExisting(path))
+	{
+		return false;
+	}
+
 	create_directory(path);
+
+	return true;
 }
 
-void Tools::copyDirectory(const string& fromPath, const string& toPath)
+const bool Tools::copyDirectory(const string& fromPath, const string& toPath)
 {
-	if(!isDirectoryExisting(fromPath))
-	{
-		abort();
-	}
+	error_code error = {};
 
-	using namespace std;
-	filesystem::copy(fromPath, toPath, filesystem::copy_options::recursive);
+	copy(fromPath, toPath, copy_options::recursive, error);
+
+	return (error.value() == 0);
 }
 
-void Tools::copyFile(const string& fromPath, const string& toPath)
+const bool Tools::copyFile(const string& fromPath, const string& toPath)
 {
-	if(!isFileExisting(fromPath))
-	{
-		abort();
-	}
+	error_code error = {};
 
-	using namespace std;
-	filesystem::copy_file(fromPath, toPath);
+	copy_file(fromPath, toPath, error);
+
+	return (error.value() == 0);
 }
 
-void Tools::renameDirectory(const string& oldPath, const string& newPath)
+const bool Tools::renameDirectory(const string& oldPath, const string& newPath)
 {
-	if(!isDirectoryExisting(oldPath))
-	{
-		abort();
-	}
+	error_code error = {};
 
-	rename(oldPath, newPath);
+	rename(oldPath, newPath, error);
+
+	return (error.value() == 0);
 }
 
-void Tools::renameFile(const string& oldPath, const string& newPath)
+const bool Tools::renameFile(const string& oldPath, const string& newPath)
 {
-	if(!isFileExisting(oldPath))
-	{
-		abort();
-	}
+	error_code error = {};
 
-	rename(oldPath, newPath);
+	rename(oldPath, newPath, error);
+
+	return (error.value() == 0);
 }
 
-void Tools::deleteDirectory(const string& path)
+const bool Tools::deleteDirectory(const string& path)
 {
-	if(!isDirectoryExisting(path))
-	{
-		abort();
-	}
+	error_code error = {};
 
-	remove_all(path);
+	remove_all(path, error);
+
+	return (error.value() == 0);
 }
 
-void Tools::deleteFile(const string& path)
+const bool Tools::deleteFile(const string& path)
 {
-	if(!isFileExisting(path))
-	{
-		abort();
-	}
+	error_code error = {};
 
-	remove(path);
+	remove(path, error);
+
+	return (error.value() == 0);
 }
 
 const fvec2 Tools::getMinViewportPosition()

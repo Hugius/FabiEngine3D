@@ -13,14 +13,6 @@ class Tools final
 public:
 	Tools() = delete;
 
-	static void createDirectory(const string& path);
-	static void copyDirectory(const string& fromPath, const string& toPath);
-	static void copyFile(const string& fromPath, const string& toPath);
-	static void renameDirectory(const string& oldPath, const string& newPath);
-	static void renameFile(const string& oldPath, const string& newPath);
-	static void deleteDirectory(const string& path);
-	static void deleteFile(const string& path);
-
 	static const vector<string> getFileNamesFromDirectory(const string& path);
 	static const vector<string> getDirectoryNamesFromDirectory(const string& path);
 	static const vector<string> splitStringIntoMultiple(const string& mergedString, char delimiter);
@@ -53,4 +45,11 @@ public:
 
 	static const bool isDirectoryExisting(const string& path);
 	static const bool isFileExisting(const string& path);
+	static const bool createDirectory(const string& path);
+	static const bool copyDirectory(const string& fromPath, const string& toPath);
+	static const bool copyFile(const string& fromPath, const string& toPath);
+	static const bool renameDirectory(const string& oldPath, const string& newPath);
+	static const bool renameFile(const string& oldPath, const string& newPath);
+	static const bool deleteDirectory(const string& path);
+	static const bool deleteFile(const string& path);
 };

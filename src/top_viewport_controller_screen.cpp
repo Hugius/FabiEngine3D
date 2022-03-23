@@ -171,64 +171,96 @@ void TopViewportController::_updateMiscScreenManagement()
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{
 			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
-			return;
 		}
-
-		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "");
-		if(filePath.empty())
+		else
 		{
-			return;
-		}
+			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "");
 
-		if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) && filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
-		{
-			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
-			return;
-		}
+			if(!filePath.empty())
+			{
+				if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) && filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+				}
+				else
+				{
+					const string finalFilePath = filePath.substr(rootPath.size());
 
-		const string finalFilePath = filePath.substr(rootPath.size());
-		_fe3d->misc_clearMeshCache(finalFilePath);
-		_fe3d->misc_clearImageCache(finalFilePath);
-		_fe3d->misc_clearAudioCache(finalFilePath);
+					_fe3d->misc_clearMeshCache(finalFilePath);
+					_fe3d->misc_clearImageCache(finalFilePath);
+					_fe3d->misc_clearAudioCache(finalFilePath);
+				}
+			}
+		}
 	}
 	else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("export")->isHovered())
 	{
 		const string chosenDirectoryPath = Tools::chooseExplorerDirectory("");
-		if(chosenDirectoryPath.empty())
+
+		if(!chosenDirectoryPath.empty())
 		{
-			return;
-		}
+			const string rootPath = Tools::getRootDirectoryPath();
+			const string exportDirectoryPath = (chosenDirectoryPath + "\\" + _currentProjectId + "\\");
 
-		const string rootPath = Tools::getRootDirectoryPath();
-		const string exportDirectoryPath = (chosenDirectoryPath + "\\" + _currentProjectId + "\\");
+			if(Tools::isDirectoryExisting(exportDirectoryPath))
+			{
+				Logger::throwWarning("Project already exported to that location");
+			}
+			else
+			{
+				bool hasFailed = false;
 
-		if(Tools::isDirectoryExisting(exportDirectoryPath))
-		{
-			Logger::throwWarning("Project already exported to that location");
-		}
-		else
-		{
-			Tools::createDirectory(exportDirectoryPath);
-			Tools::createDirectory(exportDirectoryPath + "logo\\");
-			Tools::createDirectory(exportDirectoryPath + "shaders\\");
+				if(!Tools::createDirectory(exportDirectoryPath))
+				{
+					hasFailed = true;
+				}
+				if(!Tools::createDirectory(exportDirectoryPath + "logo\\"))
+				{
+					hasFailed = true;
+				}
+				if(!Tools::createDirectory(exportDirectoryPath + "shaders\\"))
+				{
+					hasFailed = true;
+				}
+				if(!Tools::copyDirectory((rootPath + "binaries\\"), (exportDirectoryPath + "binaries\\")))
+				{
+					hasFailed = true;
+				}
+				if(!Tools::copyDirectory((rootPath + "engine\\shaders\\"), (exportDirectoryPath + "shaders\\")))
+				{
+					hasFailed = true;
+				}
+				if(!Tools::copyDirectory((rootPath + "projects\\" + _currentProjectId), exportDirectoryPath))
+				{
+					hasFailed = true;
+				}
+				if(!Tools::copyFile((rootPath + "engine\\assets\\image\\diffuse_map\\logo.tga"), (exportDirectoryPath + "logo\\logo.tga")))
+				{
+					hasFailed = true;
+				}
+				if(!Tools::renameFile((exportDirectoryPath + "binaries\\fe3d.exe"), (exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe")))
+				{
+					hasFailed = true;
+				}
 
-			Tools::copyDirectory((rootPath + "binaries\\"), (exportDirectoryPath + "binaries\\"));
-			Tools::copyDirectory((rootPath + "engine\\shaders\\"), (exportDirectoryPath + "shaders\\"));
-			Tools::copyDirectory((rootPath + "projects\\" + _currentProjectId), exportDirectoryPath);
+				if(hasFailed)
+				{
+					Tools::deleteDirectory(exportDirectoryPath);
 
-			Tools::copyFile((rootPath + "engine\\assets\\image\\diffuse_map\\logo.tga"), (exportDirectoryPath + "logo\\logo.tga"));
+					Logger::throwWarning("Project exporting failed");
+				}
+				else
+				{
+					const auto filePath = (exportDirectoryPath + "configuration.fe3d");
 
-			const auto oldPath = (exportDirectoryPath + "binaries\\fe3d.exe");
-			const auto newPath = (exportDirectoryPath + "binaries\\" + _currentProjectId + ".exe");
-			Tools::renameFile(oldPath, newPath);
-
-			const auto filePath = (exportDirectoryPath + "configuration.fe3d");
-			auto file = ofstream(filePath);
-			file << "window_size       = 0.75" << endl;
-			file << "window_fullscreen = false" << endl;
-			file << "window_borderless = false" << endl;
-			file << "window_title      = MyGame";
-			file.close();
+					auto file = ofstream(filePath);
+					file << "window_size       = 0.75" << endl;
+					file << "window_fullscreen = false" << endl;
+					file << "window_borderless = false" << endl;
+					file << "window_title      = MyGame";
+					file.close();
+				}
+			}
 		}
 	}
 	else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("documentation")->isHovered())

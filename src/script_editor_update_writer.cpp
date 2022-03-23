@@ -1,5 +1,4 @@
 #include "script_editor.hpp"
-#include <iostream>
 #include <windows.h>
 
 void ScriptEditor::_updateTextWriter()

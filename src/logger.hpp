@@ -51,7 +51,7 @@ public:
 	{
 		if(Configuration::getInst().isApplicationExported())
 		{
-			exit(69);
+			return;
 		}
 
 		_printPrefix(LogMessageType::WARNING);
@@ -70,9 +70,10 @@ public:
 		_printMessage(first, rest...);
 		cout << endl;
 
-		throwInfo("Press a key to continue");
-		auto temp = _getch();
-		exit(420);
+		while(true)
+		{
+
+		}
 	}
 
 	static void setCustomMessageQueue(const vector<string>& customMessages);

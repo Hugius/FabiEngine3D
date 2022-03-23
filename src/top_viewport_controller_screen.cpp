@@ -233,7 +233,7 @@ void TopViewportController::_updateMiscScreenManagement()
 	}
 	else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("documentation")->isHovered())
 	{
-		ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
+		ShellExecute(0, 0, "https://github.com/Hugius/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
 	}
 
 	screen->getButton("uncache")->setHoverable(!_currentProjectId.empty() && !_scriptExecutor->isStarted() && (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main"));

@@ -68,7 +68,6 @@ public:
 		cout << endl;
 		_printPrefix(LogMessageType::ERR);
 		_printMessage(first, rest...);
-		cout << endl;
 
 		while(true)
 		{

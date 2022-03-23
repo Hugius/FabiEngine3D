@@ -45,6 +45,4 @@ private:
 	shared_ptr<Script> _script = nullptr;
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
 	shared_ptr<ScriptInterpreter> _scriptInterpreter = nullptr;
-
-	bool _mustPromptOnExit = false;
 };

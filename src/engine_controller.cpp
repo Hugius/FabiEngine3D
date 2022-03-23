@@ -188,7 +188,6 @@ void EngineController::initialize()
 		if(!_scriptExecutor->isRunning())
 		{
 			_fe3d->application_stop();
-			_mustPromptOnExit = true;
 		}
 	}
 	else
@@ -254,7 +253,6 @@ void EngineController::update()
 		else
 		{
 			_fe3d->application_stop();
-			_mustPromptOnExit = true;
 		}
 	}
 	else
@@ -292,12 +290,5 @@ void EngineController::terminate()
 	else
 	{
 
-	}
-
-	if(_mustPromptOnExit)
-	{
-		cout << endl;
-		cout << "Press a key to continue...";
-		auto temp = _getch();
 	}
 }

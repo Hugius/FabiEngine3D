@@ -33,6 +33,8 @@ void WorldEditor::_updateSoundEditing()
 						_activateSound(_selectedSoundId);
 					}
 				}
+
+				_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 			}
 			else
 			{

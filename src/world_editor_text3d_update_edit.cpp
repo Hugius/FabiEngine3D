@@ -31,6 +31,8 @@ void WorldEditor::_updateText3dEditing()
 						_activateText3d(_selectedTextId);
 					}
 				}
+
+				_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 			}
 			else
 			{

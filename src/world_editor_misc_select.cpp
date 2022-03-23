@@ -4,16 +4,12 @@ void WorldEditor::_selectModel(const string& id)
 {
 	_selectedModelId = id;
 
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
-
 	_gui->getOverlay()->getTextField("selectedId")->changeTextContent("Selected Model: " + _selectedModelId);
 }
 
 void WorldEditor::_selectQuad3d(const string& id)
 {
 	_selectedQuadId = id;
-
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 	_gui->getOverlay()->getTextField("selectedId")->changeTextContent("Selected Quad3D: " + _selectedQuadId);
 }
@@ -22,16 +18,12 @@ void WorldEditor::_selectText3d(const string& id)
 {
 	_selectedTextId = id;
 
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
-
 	_gui->getOverlay()->getTextField("selectedId")->changeTextContent("Selected Text3D: " + _selectedTextId);
 }
 
 void WorldEditor::_selectPointlight(const string& id)
 {
 	_selectedPointlightId = id;
-
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 	_gui->getOverlay()->getTextField("selectedId")->changeTextContent("Selected Pointlight: " + _selectedPointlightId);
 }
@@ -40,8 +32,6 @@ void WorldEditor::_selectSpotlight(const string& id)
 {
 	_selectedSpotlightId = id;
 
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
-
 	_gui->getOverlay()->getTextField("selectedId")->changeTextContent("Selected Spotlight: " + _selectedSpotlightId);
 }
 
@@ -49,16 +39,12 @@ void WorldEditor::_selectReflection(const string& id)
 {
 	_selectedReflectionId = id;
 
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
-
 	_gui->getOverlay()->getTextField("selectedId")->changeTextContent("Selected Reflection: " + _selectedReflectionId);
 }
 
 void WorldEditor::_selectSound(const string& id)
 {
 	_selectedSoundId = id;
-
-	_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
 	_gui->getOverlay()->getTextField("selectedId")->changeTextContent("Selected Sound: " + _selectedSoundId);
 }

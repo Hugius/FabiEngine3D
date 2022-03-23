@@ -311,13 +311,11 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "worlds\\custom\\");
 			const auto filePath = (directoryPath + args[0]->getString() + ".fe3d");
 
-			if(!Tools::isFileExisting(filePath))
+			if(!Tools::deleteFile(filePath))
 			{
 				_throwRuntimeError("cannot delete custom world");
 				return true;
 			}
-
-			Tools::deleteFile(filePath);
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

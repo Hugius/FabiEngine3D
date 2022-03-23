@@ -24,16 +24,13 @@ const bool ScriptEditor::saveScriptFiles()
 
 	for(const auto& fileName : Tools::getFileNamesFromDirectory(directoryPath))
 	{
-		const auto extension = fileName.substr(fileName.size() - 5, 5);
+		const auto extension = fileName.substr((fileName.size() - 5), 5);
 		if(extension != ".fe3d")
 		{
 			continue;
 		}
 
-		if(Tools::isFileExisting(directoryPath + fileName))
-		{
-			Tools::deleteFile(directoryPath + fileName);
-		}
+		Tools::deleteFile(directoryPath + fileName);
 	}
 
 	for(const auto& scriptId : _script->getScriptFileIds())

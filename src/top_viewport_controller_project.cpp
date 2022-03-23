@@ -207,20 +207,25 @@ void TopViewportController::_updateProjectDeleting()
 
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + "projects\\" + chosenButtonId);
+
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
-				Logger::throwWarning("Directory `projects\\" + chosenButtonId + "\\` does not exist");
+				Logger::throwWarning("Project does not exist");
 				return;
 			}
 
-			Tools::deleteDirectory(directoryPath);
+			if(!Tools::deleteDirectory(directoryPath))
+			{
+				Logger::throwWarning("Project deletion failed");
+				return;
+			}
 
 			Logger::throwInfo("Project \"" + chosenButtonId + "\" deleted");
 
 			_isDeletingProject = false;
 			chosenButtonId = "";
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
+		else if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingProject = false;
 			chosenButtonId = "";

@@ -45,15 +45,13 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const string newDirectoryPath = (directoryPath + args[0]->getString());
+			const auto newDirectoryPath = (directoryPath + args[0]->getString());
 
-			if(!Tools::isDirectoryExisting(newDirectoryPath))
+			if(!Tools::deleteDirectory(newDirectoryPath))
 			{
 				_throwRuntimeError("cannot delete directory");
 				return true;
 			}
-
-			Tools::deleteDirectory(newDirectoryPath);
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
@@ -93,13 +91,11 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
 			const auto filePath = (directoryPath + args[0]->getString());
 
-			if(!Tools::isFileExisting(filePath))
+			if(!Tools::deleteFile(filePath))
 			{
 				_throwRuntimeError("cannot delete file");
 				return true;
 			}
-
-			Tools::deleteFile(filePath);
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

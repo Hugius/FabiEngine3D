@@ -173,10 +173,7 @@ void WorldEditor::_deleteWorldFile(const string& id)
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + (isExported ? "" : ("projects\\" + getCurrentProjectId() + "\\")) + "worlds\\editor\\" + id + ".fe3d");
 
-	if(Tools::isFileExisting(filePath))
-	{
-		Tools::deleteFile(filePath);
-	}
+	Tools::deleteFile(filePath);
 }
 
 void WorldEditor::_handleValueChanging(const string& screenId, const string& buttonId, const string& inputFieldId, float& value, float adder, float multiplier, float minimum, float maximum)

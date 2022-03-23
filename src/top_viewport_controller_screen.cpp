@@ -247,7 +247,7 @@ void TopViewportController::_updateMiscScreenManagement()
 				{
 					Tools::deleteDirectory(exportDirectoryPath);
 
-					Logger::throwWarning("Project exporting failed");
+					Logger::throwWarning("Project exportation failed");
 				}
 				else
 				{

@@ -18,11 +18,6 @@ const bool Sound3dPlayer::isDeviceConnected() const
 	return (waveOutGetNumDevs() > 0);
 }
 
-const bool Sound3dPlayer::isChannelAvailable() const
-{
-	return (_channelCounter < MAX_CHANNEL_COUNT);
-}
-
 const bool Sound3dPlayer::isSoundStarted(const string& id, unsigned int index) const
 {
 	if(!_sound3dManager->isSoundExisting(id))
@@ -160,8 +155,6 @@ void Sound3dPlayer::_terminateSound(const string& id, unsigned int index)
 	{
 		_startedSounds.erase(id);
 	}
-
-	_channelCounter--;
 }
 
 void Sound3dPlayer::_updateSamplesVolume(unsigned int sampleCount, short* originalSamples, short* startedSamples, float volume, float leftIntensity, float rightIntensity)

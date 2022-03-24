@@ -198,15 +198,6 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound3d_is_channel_available")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			const auto result = _fe3d->sound3d_isChannelAvailable();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
-		}
-	}
 	else if(functionName == "fe3d:sound3d_is_device_connected")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

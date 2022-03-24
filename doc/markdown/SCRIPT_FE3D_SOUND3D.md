@@ -18,7 +18,6 @@
 ## Getters
 
 - `fe3d:sound3d_find_ids` (`STR` id) -----> `LIST`
-- `fe3d:sound3d_is_channel_available` () -----> `BOL`
 - `fe3d:sound3d_is_device_connected` () -----> `BOL`
 - `fe3d:sound3d_is_existing` (`STR` id) -----> `BOL`
 - `fe3d:sound3d_is_started` (`STR` id, `INT` index) -----> `BOL`

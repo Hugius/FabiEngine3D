@@ -64,13 +64,6 @@ void Sound2dPlayer::_terminateSound(const string& id, unsigned int index)
 	{
 		_startedSounds.erase(id);
 	}
-
-	_channelCounter--;
-}
-
-const bool Sound2dPlayer::isChannelAvailable() const
-{
-	return (_channelCounter < MAX_CHANNEL_COUNT);
 }
 
 const bool Sound2dPlayer::isSoundStarted(const string& id, unsigned int index) const

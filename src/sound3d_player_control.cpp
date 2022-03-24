@@ -9,10 +9,6 @@ void Sound3dPlayer::startSound(const string& id, int playCount)
 	{
 		abort();
 	}
-	if(!isChannelAvailable())
-	{
-		abort();
-	}
 	if((playCount == 0) || (playCount < -1))
 	{
 		abort();
@@ -123,8 +119,6 @@ void Sound3dPlayer::startSound(const string& id, int playCount)
 	}
 
 	_startedSounds.at(id).push_back(newSound);
-
-	_channelCounter++;
 }
 
 void Sound3dPlayer::pauseSound(const string& id, unsigned int index)

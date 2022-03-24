@@ -52,7 +52,7 @@
   - Constraints: at least `0.0`
 - **Size**: the size of the mesh
   - Type: `decimal`
-  - Constraints: between `0.0` and `1024`
+  - Constraints: between `0.0` and `1024.0`
 - **Lightness**: the lightness multiplier of the fragments
   - Type: `decimal`
   - Constraints: at least `0.0`

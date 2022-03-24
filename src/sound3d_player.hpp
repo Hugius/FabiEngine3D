@@ -39,15 +39,12 @@ public:
 
 	const bool isSoundStarted(const string& id, unsigned int index) const;
 	const bool isSoundPaused(const string& id, unsigned int index) const;
-	const bool isChannelAvailable() const;
 	const bool isDeviceConnected() const;
 
 private:
 	void _terminateSound(const string& id, unsigned int index);
 	void _terminateSounds();
 	void _updateSamplesVolume(unsigned int sampleCount, short* originalSamples, short* currentSamples, float volume, float leftIntensity, float rightIntensity);
-
-	static inline constexpr unsigned int MAX_CHANNEL_COUNT = 1024;
 
 	unordered_map<string, vector<shared_ptr<StartedSound3D>>> _startedSounds = {};
 
@@ -57,6 +54,4 @@ private:
 	shared_ptr<Camera> _camera = nullptr;
 
 	future<void> _volumeThread = {};
-
-	unsigned int _channelCounter = 0;
 };

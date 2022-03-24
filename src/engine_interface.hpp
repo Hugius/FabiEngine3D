@@ -709,7 +709,6 @@ public:
 	const bool sound3d_isExisting(const string& id) const;
 	const bool sound3d_isStarted(const string& id, unsigned int index) const;
 	const bool sound3d_isPaused(const string& id, unsigned int index) const;
-	const bool sound3d_isChannelAvailable() const;
 	const bool sound3d_isDeviceConnected() const;
 
 	void sound2d_create(const string& id, const string& audioPath);
@@ -732,7 +731,6 @@ public:
 	const bool sound2d_isExisting(const string& id) const;
 	const bool sound2d_isStarted(const string& id, unsigned int index) const;
 	const bool sound2d_isPaused(const string& id, unsigned int index) const;
-	const bool sound2d_isChannelAvailable() const;
 	const bool sound2d_isDeviceConnected() const;
 
 	void graphics_setAmbientLightingEnabled(bool value);

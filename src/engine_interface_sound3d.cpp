@@ -108,11 +108,6 @@ const bool EngineInterface::sound3d_isPaused(const string& id, unsigned int inde
 	return _core->getSound3dPlayer()->isSoundPaused(id, index);
 }
 
-const bool EngineInterface::sound3d_isChannelAvailable() const
-{
-	return _core->getSound3dPlayer()->isChannelAvailable();
-}
-
 const bool EngineInterface::sound3d_isDeviceConnected() const
 {
 	return _core->getSound3dPlayer()->isDeviceConnected();

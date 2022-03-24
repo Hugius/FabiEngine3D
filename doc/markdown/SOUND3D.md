@@ -5,7 +5,7 @@
 - Sound3D is stereo audio in 3D space.
 - A single sound can be simultaneously started multiple times.
 - Each of these sound instances can be started and stopped individually.
-- Every sound instance plays on a unique sound channel (with a maximum of 1024).
+- Every sound instance plays on a unique sound channel.
 - Sound channels make sure that all the sound waves are mixed together.
 - Volume cannot be changed directly, because it is calculated by FabiEngine3D based on the sound position.
 - The calculated volume uses stereo panning to achieve a 3D effect.

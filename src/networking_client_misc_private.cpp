@@ -6,7 +6,6 @@
 
 #include <ws2tcpip.h>
 
-using std::launch;
 using std::to_string;
 
 const bool NetworkingClient::_sendTcpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted)
@@ -118,7 +117,7 @@ const int NetworkingClient::_waitForServerConnection(SOCKET socket, const string
 	}
 }
 
-void NetworkingClient::_setupTcp()
+const bool NetworkingClient::_setupTcp()
 {
 	addrinfo hints;
 	ZeroMemory(&hints, sizeof(hints));
@@ -150,10 +149,10 @@ void NetworkingClient::_setupTcp()
 
 	freeaddrinfo(addressInfo);
 
-	_connectionThread = async(launch::async, &NetworkingClient::_waitForServerConnection, this, _tcpSocket, _serverIp);
+	return true;
 }
 
-void NetworkingClient::_setupUdp()
+const bool NetworkingClient::_setupUdp()
 {
 	addrinfo hints;
 	ZeroMemory(&hints, sizeof(hints));
@@ -184,6 +183,8 @@ void NetworkingClient::_setupUdp()
 	}
 
 	freeaddrinfo(addressInfo);
+
+	return true;
 }
 
 tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET socket) const

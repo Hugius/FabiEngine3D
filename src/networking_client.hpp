@@ -51,9 +51,6 @@ public:
 	const bool isMessageReserved(const string& message) const;
 
 private:
-	void _setupTcp();
-	void _setupUdp();
-
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
 
@@ -64,6 +61,8 @@ private:
 
 	const int _waitForServerConnection(SOCKET socket, const string& ip) const;
 
+	const bool _setupTcp();
+	const bool _setupUdp();
 	const bool _isMessageReadyUDP(SOCKET socket) const;
 	const bool _sendTcpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted);
 	const bool _sendUdpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted) const;
@@ -75,7 +74,7 @@ private:
 	static inline constexpr unsigned int IPV4_ADDRESS_LENGTH = 16;
 	static inline constexpr unsigned int MAX_MESSAGE_SIZE = 128;
 	static inline constexpr unsigned int MAX_USERNAME_SIZE = 16;
-	static inline constexpr unsigned int TCP_BUFFER_BYTES = 4096;
+	static inline constexpr unsigned int TCP_BUFFER_BYTES = 8192;
 	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_SIZE);
 
 	vector<unsigned int> _pingLatencies = {};

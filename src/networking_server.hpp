@@ -60,6 +60,8 @@ private:
 	const string _extractAddressIp(sockaddr_in* address) const;
 	const string _extractAddressPort(sockaddr_in* address) const;
 
+	const bool _setupTcp();
+	const bool _setupUdp();
 	const bool _sendTcpMessageToClient(SOCKET socket, const string& content, bool isReserved);
 	const bool _sendUdpMessageToClient(const string& clientIp, const string& clientPort, const string& content, bool isReserved) const;
 	const bool _isMessageReadyUDP(SOCKET socket) const;
@@ -72,7 +74,7 @@ private:
 	static inline constexpr unsigned int IPV4_ADDRESS_LENGTH = 16;
 	static inline constexpr unsigned int MAX_MESSAGE_SIZE = 128;
 	static inline constexpr unsigned int MAX_USERNAME_SIZE = 16;
-	static inline constexpr unsigned int TCP_BUFFER_BYTES = 4096;
+	static inline constexpr unsigned int TCP_BUFFER_BYTES = 8192;
 	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_SIZE);
 
 	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads = {};

@@ -5,6 +5,8 @@
 
 #include <ws2tcpip.h>
 
+using std::launch;
+
 NetworkingClient::NetworkingClient()
 	:
 	_tcpSocket(INVALID_SOCKET),
@@ -71,12 +73,18 @@ void NetworkingClient::connectToServer(const string& ip)
 		abort();
 	}
 
+	if(!_setupTcp())
+	{
+		return;
+	}
+	if(!_setupUdp())
+	{
+		return;
+	}
+
+	_connectionThread = async(launch::async, &NetworkingClient::_waitForServerConnection, this, _tcpSocket, ip);
+
 	_serverIp = ip;
-
-	_setupTcp();
-
-	_setupUdp();
-
 	_isConnectingToServer = true;
 }
 

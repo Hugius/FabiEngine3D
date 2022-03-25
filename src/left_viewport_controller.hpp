@@ -33,7 +33,7 @@ public:
 	void inject(shared_ptr<SoundEditor> soundEditor);
 	void inject(shared_ptr<WorldEditor> worldEditor);
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
-	void load();
+	void initialize();
 	void update();
 
 private:

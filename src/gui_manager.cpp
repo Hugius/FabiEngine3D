@@ -5,7 +5,7 @@ void GuiManager::inject(shared_ptr<EngineInterface> fe3d)
 	_fe3d = fe3d;
 }
 
-void GuiManager::load()
+void GuiManager::initialize()
 {
 	_leftViewport = make_shared<GuiViewport>(_fe3d, "left", fvec2(-0.875f, 0.15f), fvec2(0.25f, 1.5f), FRAME_COLOR);
 	_rightViewport = make_shared<GuiViewport>(_fe3d, "right", fvec2(0.875f, 0.15f), fvec2(0.25f, 1.5f), FRAME_COLOR);

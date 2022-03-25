@@ -232,11 +232,11 @@ void EngineController::initialize()
 		_fe3d->misc_setCursorEntityId("@@cursor");
 		_fe3d->misc_setCursorVisible(false);
 
-		_guiManager->load();
-		_leftViewportController->load();
-		_rightViewportController->load();
-		_bottomViewportController->load();
-		_topViewportController->load();
+		_guiManager->initialize();
+		_leftViewportController->initialize();
+		_rightViewportController->initialize();
+		_bottomViewportController->initialize();
+		_topViewportController->initialize();
 
 		_fe3d->misc_setVsyncEnabled(true);
 	}

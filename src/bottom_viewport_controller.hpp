@@ -11,7 +11,7 @@ public:
 
 	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
-	void load();
+	void initialize();
 	void update();
 
 private:

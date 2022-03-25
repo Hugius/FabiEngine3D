@@ -37,7 +37,7 @@ public:
 	void inject(shared_ptr<CustomWorldBuilder> customWorldBuilder);
 	void inject(shared_ptr<Script> script);
 	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
-	void load();
+	void initialize();
 	void update();
 
 	const bool isScriptStarted() const;

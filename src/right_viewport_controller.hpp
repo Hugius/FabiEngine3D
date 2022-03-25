@@ -7,7 +7,7 @@ class RightViewportController final : public BaseViewportController
 public:
 	using BaseViewportController::inject;
 
-	void load();
+	void initialize();
 	void update();
 
 private:

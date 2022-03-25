@@ -7,9 +7,6 @@
     <Filter Include="Element">
       <UniqueIdentifier>{88bbef55-fccf-476a-ae9c-e0178d570227}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Element\Rectangle">
-      <UniqueIdentifier>{f25dce86-74f9-4824-a64a-076658e03b1e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Element\Screen">
       <UniqueIdentifier>{f8490761-21d5-44db-8125-51cc83bb9f8c}</UniqueIdentifier>
     </Filter>
@@ -34,6 +31,9 @@
     <Filter Include="Element\Input Field">
       <UniqueIdentifier>{e8139af9-336f-41bb-98fb-ee253efd10f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Element\Quad Field">
+      <UniqueIdentifier>{f25dce86-74f9-4824-a64a-076658e03b1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\gui_manager.cpp">
@@ -42,8 +42,8 @@
     <ClCompile Include="..\..\..\src\gui_button.cpp">
       <Filter>Element\Button</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\gui_rectangle.cpp">
-      <Filter>Element\Rectangle</Filter>
+    <ClCompile Include="..\..\..\src\gui_quad_field.cpp">
+      <Filter>Element\Quad Field</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\gui_scrolling_list.cpp">
       <Filter>Element\Scrolling List</Filter>
@@ -83,8 +83,8 @@
     <ClInclude Include="..\..\..\src\gui_button.hpp">
       <Filter>Element\Button</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\gui_rectangle.hpp">
-      <Filter>Element\Rectangle</Filter>
+    <ClInclude Include="..\..\..\src\gui_quad_field.hpp">
+      <Filter>Element\Quad Field</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\gui_scrolling_list.hpp">
       <Filter>Element\Scrolling List</Filter>

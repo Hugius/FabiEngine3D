@@ -35,9 +35,9 @@ void GuiScreen::update(bool isHoverable)
 		button->setVisible(_isVisible);
 	}
 
-	for(const auto& [rectangleId, rectangle] : _rectangles)
+	for(const auto& [quadFieldId, quadField] : _quadFields)
 	{
-		rectangle->setVisible(_isVisible);
+		quadField->setVisible(_isVisible);
 	}
 
 	for(const auto& [textFieldId, textField] : _textFields)

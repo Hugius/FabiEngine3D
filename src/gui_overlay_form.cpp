@@ -114,7 +114,7 @@ void GuiOverlay::_createValueForm(const string& id, const string& title, const s
 	}
 
 	_valueFormIds.push_back(id);
-	createRectangle(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.0275f, 0.125f), FORM_TITLE_RECT_COLOR, true);
+	createQuadField(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.0275f, 0.125f), FORM_TITLE_RECT_COLOR, true);
 	createTextField(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.025f, 0.1f), title, FORM_TITLE_TEXT_COLOR, true);
 	createInputField(id, position, size, fvec3(0.25f), fvec3(0.5f), fvec3(1.0f), fvec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, (onlyNumbers && minusAllowed), true);
 	getInputField(id)->changeTextContent(valueString);
@@ -189,7 +189,7 @@ void GuiOverlay::createChoiceForm(const string& id, const string& title, const f
 		abort();
 	}
 
-	createRectangle(id, position + fvec2(0.0f, 0.475f), fvec2(title.size() * 0.0275f, 0.125f), FORM_TITLE_RECT_COLOR, true);
+	createQuadField(id, position + fvec2(0.0f, 0.475f), fvec2(title.size() * 0.0275f, 0.125f), FORM_TITLE_RECT_COLOR, true);
 	createTextField(id, position + fvec2(0.0f, 0.475f), fvec2(title.size() * 0.025f, 0.1f), title, FORM_TITLE_TEXT_COLOR, true);
 	createScrollingList(id, position, fvec2(0.5, 0.75f), fvec3(0.25f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), fvec3(1.0f), fvec3(0.0f), fvec2(0.075f, 0.2f), true);
 	createButton("choice_form_cancel", position + fvec2(0.0f, -0.45f), fvec2(0.15f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "Cancel", fvec3(1.0f), fvec3(0.0f), true);
@@ -243,7 +243,7 @@ void GuiOverlay::deleteChoiceForm(const string& id)
 		abort();
 	}
 
-	deleteRectangle(_choiceFormId);
+	deleteQuadField(_choiceFormId);
 	deleteTextField(_choiceFormId);
 	deleteScrollingList(_choiceFormId);
 	deleteButton("choice_form_cancel");
@@ -264,7 +264,7 @@ void GuiOverlay::createAnswerForm(const string& id, const string& title, const f
 		abort();
 	}
 
-	createRectangle("question", position, fvec2(title.size() * 0.0275f, 0.125f), FORM_TITLE_RECT_COLOR, true);
+	createQuadField("question", position, fvec2(title.size() * 0.0275f, 0.125f), FORM_TITLE_RECT_COLOR, true);
 	createTextField("question", position, fvec2(title.size() * 0.025f, 0.1f), title, FORM_TITLE_TEXT_COLOR, true);
 	createButton("answer_form_yes", position + fvec2(-0.1f, -0.2f), fvec2(0.075f, 0.1f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), "Yes", fvec3(1.0f), fvec3(0.0f), true);
 	createButton("answer_form_no", position + fvec2(0.1f, -0.2f), fvec2(0.075f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "No", fvec3(1.0f), fvec3(0.0f), true);
@@ -312,7 +312,7 @@ void GuiOverlay::_deleteAnswerForm(const string& id)
 		abort();
 	}
 
-	deleteRectangle("question");
+	deleteQuadField("question");
 	deleteTextField("question");
 	deleteButton("answer_form_yes");
 	deleteButton("answer_form_no");
@@ -332,7 +332,7 @@ void GuiOverlay::_updateValueFormDeleting()
 	{
 		for(const auto& tempId : _valueFormIds)
 		{
-			deleteRectangle(tempId);
+			deleteQuadField(tempId);
 			deleteTextField(tempId);
 			deleteInputField(tempId);
 		}

@@ -1,6 +1,6 @@
-#include "gui_rectangle.hpp"
+#include "gui_quad_field.hpp"
 
-GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
+GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -16,7 +16,7 @@ GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& paren
 	_fe3d->quad2d_setColor(_entityId, color);
 }
 
-GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
+GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -32,57 +32,57 @@ GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& paren
 	_fe3d->quad2d_setDiffuseMap(_entityId, ("engine\\assets\\image\\diffuse_map\\" + texturePath));
 }
 
-GuiRectangle::~GuiRectangle()
+GuiQuadField::~GuiQuadField()
 {
 	_fe3d->quad2d_delete(_entityId);
 }
 
-void GuiRectangle::setVisible(bool isVisible)
+void GuiQuadField::setVisible(bool isVisible)
 {
 	_fe3d->quad2d_setVisible(_entityId, isVisible);
 }
 
-void GuiRectangle::updateInitialPosition()
+void GuiQuadField::updateInitialPosition()
 {
 	_initialPosition = _fe3d->quad2d_getPosition(_entityId);
 }
 
-void GuiRectangle::updateInitialSize()
+void GuiQuadField::updateInitialSize()
 {
 	_initialSize = _fe3d->quad2d_getSize(_entityId);
 }
 
-void GuiRectangle::updateInitialColor()
+void GuiQuadField::updateInitialColor()
 {
 	_initialColor = _fe3d->quad2d_getColor(_entityId);
 }
 
-const fvec2& GuiRectangle::getInitialPosition() const
+const fvec2& GuiQuadField::getInitialPosition() const
 {
 	return _initialPosition;
 }
 
-const fvec2& GuiRectangle::getInitialSize() const
+const fvec2& GuiQuadField::getInitialSize() const
 {
 	return _initialSize;
 }
 
-const fvec3& GuiRectangle::getInitialColor() const
+const fvec3& GuiQuadField::getInitialColor() const
 {
 	return _initialColor;
 }
 
-const string& GuiRectangle::getId() const
+const string& GuiQuadField::getId() const
 {
 	return _id;
 }
 
-const string& GuiRectangle::getEntityId() const
+const string& GuiQuadField::getEntityId() const
 {
 	return _entityId;
 }
 
-const string& GuiRectangle::getParentId() const
+const string& GuiQuadField::getParentId() const
 {
 	return _parentId;
 }

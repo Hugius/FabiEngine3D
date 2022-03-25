@@ -4,7 +4,7 @@
 #include "gui_scrolling_list.hpp"
 #include "gui_input_field.hpp"
 #include "gui_button.hpp"
-#include "gui_rectangle.hpp"
+#include "gui_quad_field.hpp"
 #include "gui_text_field.hpp"
 
 class GuiOverlay final
@@ -18,13 +18,13 @@ public:
 	void createInputField(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
 	void createButton(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered);
 	void createButton(const string& id, const fvec2& position, const fvec2& size, const string& texturePath, const fvec3& hoverColor, bool isCentered);
-	void createRectangle(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered);
-	void createRectangle(const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered);
+	void createQuadField(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered);
+	void createQuadField(const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered);
 	void createTextField(const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& textColor, bool isCentered);
 	void deleteScrollingList(const string& id);
 	void deleteInputField(const string& id);
 	void deleteButton(const string& id);
-	void deleteRectangle(const string& id);
+	void deleteQuadField(const string& id);
 	void deleteTextField(const string& id);
 	void createValueForm(const string& id, const string& title, unsigned int value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition);
 	void createValueForm(const string& id, const string& title, int value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition);
@@ -38,13 +38,13 @@ public:
 	const vector<shared_ptr<GuiScrollingList>>& getScrollingLists() const;
 	const vector<shared_ptr<GuiInputField>>& getInputFields() const;
 	const vector<shared_ptr<GuiButton>>& getButtons() const;
-	const vector<shared_ptr<GuiRectangle>>& getRectangles() const;
+	const vector<shared_ptr<GuiQuadField>>& getQuadFields() const;
 	const vector<shared_ptr<GuiTextField>>& getTextFields() const;
 
 	const shared_ptr<GuiScrollingList> getScrollingList(const string& id) const;
 	const shared_ptr<GuiInputField> getInputField(const string& id) const;
 	const shared_ptr<GuiButton> getButton(const string& id) const;
-	const shared_ptr<GuiRectangle> getRectangle(const string& id) const;
+	const shared_ptr<GuiQuadField> getQuadField(const string& id) const;
 	const shared_ptr<GuiTextField> getTextField(const string& id) const;
 
 	const string checkChoiceForm(const string& id) const;
@@ -53,7 +53,7 @@ public:
 	const bool isScrollingListExisting(const string& id) const;
 	const bool isInputFieldExisting(const string& id) const;
 	const bool isButtonExisting(const string& id) const;
-	const bool isRectangleExisting(const string& id) const;
+	const bool isQuadFieldExisting(const string& id) const;
 	const bool isTextFieldExisting(const string& id) const;
 	const bool checkValueForm(const string& id, unsigned int& value, const vector<unsigned int>& forbiddenValues = {});
 	const bool checkValueForm(const string& id, int& value, const vector<int>& forbiddenValues = {});
@@ -82,7 +82,7 @@ private:
 	vector<shared_ptr<GuiScrollingList>> _scrollingLists = {};
 	vector<shared_ptr<GuiInputField>> _inputFields = {};
 	vector<shared_ptr<GuiButton>> _buttons = {};
-	vector<shared_ptr<GuiRectangle>> _rectangles = {};
+	vector<shared_ptr<GuiQuadField>> _quadFields = {};
 	vector<shared_ptr<GuiTextField>> _textFields = {};
 	vector<string> _valueFormIds = {};
 

@@ -1,10 +1,10 @@
 #pragma once
 
 #include "engine_interface.hpp"
-#include "gui_rectangle.hpp"
+#include "gui_quad_field.hpp"
 #include "gui_button.hpp"
 
-class GuiScrollingList final : public GuiRectangle
+class GuiScrollingList final : public GuiQuadField
 {
 public:
 	GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color,

@@ -23,14 +23,14 @@ void GuiOverlay::createButton(const string& id, const fvec2& position, const fve
 	_buttons.push_back(make_shared<GuiButton>(_fe3d, "overlay", id, position, size, texturePath, hoverColor, isCentered));
 }
 
-void GuiOverlay::createRectangle(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
+void GuiOverlay::createQuadField(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
 {
-	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, "overlay", id, position, size, color, isCentered));
+	_quadFields.push_back(make_shared<GuiQuadField>(_fe3d, "overlay", id, position, size, color, isCentered));
 }
 
-void GuiOverlay::createRectangle(const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
+void GuiOverlay::createQuadField(const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
 {
-	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, "overlay", id, position, size, texturePath, isCentered));
+	_quadFields.push_back(make_shared<GuiQuadField>(_fe3d, "overlay", id, position, size, texturePath, isCentered));
 }
 
 void GuiOverlay::createTextField(const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& textColor, bool isCentered)
@@ -77,11 +77,11 @@ const bool GuiOverlay::isButtonExisting(const string& id) const
 	return false;
 }
 
-const bool GuiOverlay::isRectangleExisting(const string& id) const
+const bool GuiOverlay::isQuadFieldExisting(const string& id) const
 {
-	for(const auto& rectangle : _rectangles)
+	for(const auto& quadField : _quadFields)
 	{
-		if(id == rectangle->getId())
+		if(id == quadField->getId())
 		{
 			return true;
 		}
@@ -142,13 +142,13 @@ const shared_ptr<GuiButton> GuiOverlay::getButton(const string& id) const
 	abort();
 }
 
-const shared_ptr<GuiRectangle> GuiOverlay::getRectangle(const string& id) const
+const shared_ptr<GuiQuadField> GuiOverlay::getQuadField(const string& id) const
 {
-	for(const auto& rectangle : _rectangles)
+	for(const auto& quadField : _quadFields)
 	{
-		if(id == rectangle->getId())
+		if(id == quadField->getId())
 		{
-			return rectangle;
+			return quadField;
 		}
 	}
 
@@ -183,9 +183,9 @@ const vector<shared_ptr<GuiButton>>& GuiOverlay::getButtons() const
 	return _buttons;
 }
 
-const vector<shared_ptr<GuiRectangle>>& GuiOverlay::getRectangles() const
+const vector<shared_ptr<GuiQuadField>>& GuiOverlay::getQuadFields() const
 {
-	return _rectangles;
+	return _quadFields;
 }
 
 const vector<shared_ptr<GuiTextField>>& GuiOverlay::getTextFields() const
@@ -235,13 +235,13 @@ void GuiOverlay::deleteButton(const string& id)
 	abort();
 }
 
-void GuiOverlay::deleteRectangle(const string& id)
+void GuiOverlay::deleteQuadField(const string& id)
 {
-	for(unsigned int index = 0; index < _rectangles.size(); index++)
+	for(unsigned int index = 0; index < _quadFields.size(); index++)
 	{
-		if(id == _rectangles[index]->getId())
+		if(id == _quadFields[index]->getId())
 		{
-			_rectangles.erase(_rectangles.begin() + index);
+			_quadFields.erase(_quadFields.begin() + index);
 			return;
 		}
 	}

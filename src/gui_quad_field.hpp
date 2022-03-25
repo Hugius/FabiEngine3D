@@ -2,12 +2,12 @@
 
 #include "engine_interface.hpp"
 
-class GuiRectangle
+class GuiQuadField
 {
 public:
-	GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered);
-	GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered);
-	~GuiRectangle();
+	GuiQuadField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered);
+	GuiQuadField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered);
+	~GuiQuadField();
 
 	virtual void setVisible(bool isVisible);
 

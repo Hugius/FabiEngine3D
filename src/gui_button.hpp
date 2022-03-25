@@ -1,7 +1,7 @@
 #pragma once
 
 #include "engine_interface.hpp"
-#include "gui_rectangle.hpp"
+#include "gui_quad_field.hpp"
 #include "gui_text_field.hpp"
 
 class GuiButton
@@ -18,7 +18,7 @@ public:
 	void setVisible(bool isVisible);
 	void setHoverable(bool isHoverable);
 
-	const shared_ptr<GuiRectangle> getRectangle() const;
+	const shared_ptr<GuiQuadField> getQuadField() const;
 	const shared_ptr<GuiTextField> getTextField() const;
 
 	const string& getId() const;
@@ -36,7 +36,7 @@ protected:
 	const fvec3 _textHoverColor;
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
-	shared_ptr<GuiRectangle> _rectangle = nullptr;
+	shared_ptr<GuiQuadField> _quadField = nullptr;
 	shared_ptr<GuiTextField> _textField = nullptr;
 
 	bool _isHovered = false;

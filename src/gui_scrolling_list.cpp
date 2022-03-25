@@ -6,7 +6,7 @@
 
 GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
 	:
-	GuiRectangle(fe3d, parentId + "_scrollingList", id, position, size, color, isCentered),
+	GuiQuadField(fe3d, parentId + "_scrollingList", id, position, size, color, isCentered),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),
 	_textColor(textColor),
@@ -35,12 +35,12 @@ void GuiScrollingList::createButton(const string& id, const string& textContent)
 	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentId, id, fvec2(position.x, position.y), fvec2(size.x, size.y),
 					   _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, _fe3d->quad2d_isCentered(_entityId)));
 
-	string rectangleId = _buttons.back()->getRectangle()->getEntityId();
-	string textId = _buttons.back()->getTextField()->getEntityId();
-	_fe3d->quad2d_setMinPosition(rectangleId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y * 0.5f)));
-	_fe3d->text2d_setMinPosition(textId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y * 0.5f)));
-	_fe3d->quad2d_setMaxPosition(rectangleId, fvec2(1.0f, _initialPosition.y + (_initialSize.y * 0.5f)));
-	_fe3d->text2d_setMaxPosition(textId, fvec2(1.0f, _initialPosition.y + (_initialSize.y * 0.5f)));
+	string quadFieldId = _buttons.back()->getQuadField()->getEntityId();
+	string textFieldId = _buttons.back()->getTextField()->getEntityId();
+	_fe3d->quad2d_setMinPosition(quadFieldId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y * 0.5f)));
+	_fe3d->text2d_setMinPosition(textFieldId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y * 0.5f)));
+	_fe3d->quad2d_setMaxPosition(quadFieldId, fvec2(1.0f, _initialPosition.y + (_initialSize.y * 0.5f)));
+	_fe3d->text2d_setMaxPosition(textFieldId, fvec2(1.0f, _initialPosition.y + (_initialSize.y * 0.5f)));
 }
 
 void GuiScrollingList::deleteButton(const string& id)
@@ -82,7 +82,7 @@ void GuiScrollingList::deleteButtons()
 
 void GuiScrollingList::setVisible(bool isVisible)
 {
-	GuiRectangle::setVisible(isVisible);
+	GuiQuadField::setVisible(isVisible);
 
 	for(const auto& button : _buttons)
 	{
@@ -134,8 +134,8 @@ void GuiScrollingList::_updateScrolling()
 			mustReset = true;
 		}
 
-		float firstButtonHeight = _fe3d->quad2d_getPosition(_buttons[0]->getRectangle()->getEntityId()).y;
-		float lastButtonHeight = _fe3d->quad2d_getPosition(_buttons[_buttons.size() - 1]->getRectangle()->getEntityId()).y;
+		float firstButtonHeight = _fe3d->quad2d_getPosition(_buttons[0]->getQuadField()->getEntityId()).y;
+		float lastButtonHeight = _fe3d->quad2d_getPosition(_buttons[_buttons.size() - 1]->getQuadField()->getEntityId()).y;
 		float listHeight = _fe3d->quad2d_getPosition(_entityId).y;
 		float edgeOffset = (_fe3d->quad2d_getSize(_entityId).y * 0.5f);
 		if(lastButtonHeight >= listHeight - edgeOffset + (_charSize.y / 3.0f))
@@ -156,18 +156,18 @@ void GuiScrollingList::_updateScrolling()
 
 		for(const auto& button : _buttons)
 		{
-			string rectangleId = button->getRectangle()->getEntityId();
-			string textId = button->getTextField()->getEntityId();
+			string quadFieldId = button->getQuadField()->getEntityId();
+			string textFieldId = button->getTextField()->getEntityId();
 
 			if(mustReset)
 			{
-				_fe3d->quad2d_setPosition(rectangleId, button->getRectangle()->getInitialPosition());
-				_fe3d->text2d_setPosition(textId, button->getTextField()->getInitialPosition());
+				_fe3d->quad2d_setPosition(quadFieldId, button->getQuadField()->getInitialPosition());
+				_fe3d->text2d_setPosition(textFieldId, button->getTextField()->getInitialPosition());
 			}
 			else
 			{
-				_fe3d->quad2d_move(rectangleId, fvec2(0.0f, _scrollingSpeed));
-				_fe3d->text2d_move(textId, fvec2(0.0f, _scrollingSpeed));
+				_fe3d->quad2d_move(quadFieldId, fvec2(0.0f, _scrollingSpeed));
+				_fe3d->text2d_move(textFieldId, fvec2(0.0f, _scrollingSpeed));
 			}
 		}
 	}

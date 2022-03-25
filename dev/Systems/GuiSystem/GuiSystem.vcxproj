@@ -24,7 +24,7 @@
     <ClCompile Include="..\..\..\src\gui_overlay_form.cpp" />
     <ClCompile Include="..\..\..\src\gui_overlay_misc.cpp" />
     <ClCompile Include="..\..\..\src\gui_manager.cpp" />
-    <ClCompile Include="..\..\..\src\gui_rectangle.cpp" />
+    <ClCompile Include="..\..\..\src\gui_quad_field.cpp" />
     <ClCompile Include="..\..\..\src\gui_screen_element.cpp" />
     <ClCompile Include="..\..\..\src\gui_screen_misc.cpp" />
     <ClCompile Include="..\..\..\src\gui_scrolling_list.cpp" />
@@ -37,7 +37,7 @@
     <ClInclude Include="..\..\..\src\gui_button.hpp" />
     <ClInclude Include="..\..\..\src\gui_overlay.hpp" />
     <ClInclude Include="..\..\..\src\gui_manager.hpp" />
-    <ClInclude Include="..\..\..\src\gui_rectangle.hpp" />
+    <ClInclude Include="..\..\..\src\gui_quad_field.hpp" />
     <ClInclude Include="..\..\..\src\gui_screen.hpp" />
     <ClInclude Include="..\..\..\src\gui_scrolling_list.hpp" />
     <ClInclude Include="..\..\..\src\gui_text_field.hpp" />

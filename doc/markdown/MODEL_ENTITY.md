@@ -6,6 +6,8 @@
 - A variety of textures can be used for a more detailed mesh.
 - Each model entity can be the parent of multipe AABB entities.
 - If the mesh is multiparted, each part has its own properties.
+- Model entities can be rendered as another model entity to achieve LOD.
+- The instead rendered LOD model entity uses the transformation and visibility of the main model entity.
 
 ## 2. Assets
 
@@ -21,7 +23,7 @@
 - **Mesh Path**: the path of the mesh file
   - Type: `string`
   - Constraints: cannot be changed
-- **LOD Entity ID**: the ID of another model entity representing the LOD version of the current model entity
+- **LOD Entity ID**: the ID of another model entity representing the LOD version of the main model entity
   - Type: `string`
   - Constraints: entity must exist
 - **Position**: the XYZ position of the mesh
@@ -36,7 +38,7 @@
 - **Size**: the XYZ size multiplier of the mesh
   - Type: `decimal3`
   - Constraints: at least `0.0`
-- **LOD Distance**: the minimum distance by which the LOD entity will appear/disappear
+- **LOD Distance**: the minimum distance by which the LOD model entity will appear/disappear
   - Type: `decimal`
   - Constraints: at least `0`
 - **Frozen**: the XYZ position of the mesh is not affected by the camera position

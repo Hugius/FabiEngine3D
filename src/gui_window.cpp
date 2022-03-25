@@ -2,15 +2,12 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color)
+GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& id, const string& parentId, const fvec2& position, const fvec2& size, const fvec3& color)
 	:
 	_fe3d(fe3d),
 	_id(id),
-	_entityId("@" + parentId + "_" + id),
 	_parentId(parentId),
-	_initialPosition(position),
-	_initialSize(size),
-	_initialColor(color)
+	_entityId("@" + parentId + "_" + id)
 {
 	_fe3d->quad2d_create(_entityId, true);
 	_fe3d->quad2d_setPosition(_entityId, position);
@@ -25,25 +22,36 @@ GuiWindow::~GuiWindow()
 
 void GuiWindow::update(bool isHoverable)
 {
-	for(const auto& screen : _screens)
+	for(const auto& [screenId, screen] : _screens)
 	{
 		screen->update(isHoverable);
 	}
+}
+
+const bool GuiWindow::hasScreen(const string& id) const
+{
+	return (_screens.find(id) != _screens.end());
 }
 
 const bool GuiWindow::isHovered() const
 {
 	if(_fe3d->quad2d_isVisible(_entityId))
 	{
-		fvec2 cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
-		fvec2 buttonPosition = _fe3d->quad2d_getPosition(_entityId);
-		fvec2 buttonSize = _fe3d->quad2d_getSize(_entityId);
+		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+		const auto windowPosition = getPosition();
+		const auto windowSize = getSize();
 
-		if(cursorPosition.x > buttonPosition.x - (buttonSize.x * 0.5f) && cursorPosition.x < buttonPosition.x + (buttonSize.x * 0.5f))
+		if(cursorPosition.x > (windowPosition.x - (windowSize.x * 0.5f)))
 		{
-			if(cursorPosition.y > buttonPosition.y - (buttonSize.y * 0.5f) && cursorPosition.y < buttonPosition.y + (buttonSize.y * 0.5f))
+			if(cursorPosition.x < (windowPosition.x + (windowSize.x * 0.5f)))
 			{
-				return true;
+				if(cursorPosition.y > (windowPosition.y - (windowSize.y * 0.5f)))
+				{
+					if(cursorPosition.y < (windowPosition.y + (windowSize.y * 0.5f)))
+					{
+						return true;
+					}
+				}
 			}
 		}
 	}
@@ -56,68 +64,54 @@ const string& GuiWindow::getId() const
 	return _id;
 }
 
-const string& GuiWindow::getEntityId() const
-{
-	return _entityId;
-}
-
 const string& GuiWindow::getParentId() const
 {
 	return _parentId;
 }
 
-const fvec3& GuiWindow::getInitialColor() const
+const fvec3& GuiWindow::getColor() const
 {
-	return _initialColor;
+	return _fe3d->quad2d_getColor(_entityId);
 }
 
-const fvec2& GuiWindow::getInitialPosition() const
+const fvec2& GuiWindow::getPosition() const
 {
-	return _initialPosition;
+	return _fe3d->quad2d_getPosition(_entityId);
 }
 
-const fvec2& GuiWindow::getInitialSize() const
+const fvec2& GuiWindow::getSize() const
 {
-	return _initialSize;
+	return _fe3d->quad2d_getSize(_entityId);
 }
 
 void GuiWindow::createScreen(const string& id)
 {
-	for(const auto& screen : _screens)
+	if(hasScreen(id))
 	{
-		if(screen->getId() == id)
-		{
-			abort();
-		}
+		abort();
 	}
 
-	auto windowPosition = _fe3d->quad2d_getPosition(_entityId);
-	auto windowSize = _fe3d->quad2d_getSize(_entityId);
-
-	_screens.push_back(make_shared<GuiScreen>(_fe3d, _parentId + "_" + _id, id, windowPosition, windowSize));
+	_screens.insert({id, make_shared<GuiScreen>(_fe3d, _parentId + "_" + _id, id, getPosition(), getSize())});
 }
 
 void GuiWindow::deleteScreen(const string& id)
 {
-	bool isFound = false;
-	for(unsigned int index = 0; index < _screens.size(); index++)
+	if(!hasScreen(id))
 	{
-		if(_screens[index]->getId() == id)
-		{
-			_screens.erase(_screens.begin() + index);
-			isFound = true;
-		}
+		abort();
 	}
+
+	_screens.erase(id);
 
 	if(id == _activeScreenId)
 	{
 		_activeScreenId = "";
 	}
+}
 
-	if(!isFound)
-	{
-		abort();
-	}
+void GuiWindow::deleteScreens()
+{
+	_screens.clear();
 }
 
 void GuiWindow::setActiveScreen(const string& id)
@@ -128,10 +122,11 @@ void GuiWindow::setActiveScreen(const string& id)
 	}
 
 	_activeScreenId = id;
+
 	getActiveScreen()->show();
 }
 
-const vector<shared_ptr<GuiScreen>>& GuiWindow::getScreens()const
+const unordered_map<string, shared_ptr<GuiScreen>>& GuiWindow::getScreens() const
 {
 	return _screens;
 }
@@ -143,13 +138,12 @@ const shared_ptr<GuiScreen> GuiWindow::getActiveScreen() const
 
 const shared_ptr<GuiScreen> GuiWindow::getScreen(const string& id) const
 {
-	for(const auto& screen : _screens)
+	auto iterator = _screens.find(id);
+
+	if(iterator == _screens.end())
 	{
-		if(id == screen->getId())
-		{
-			return screen;
-		}
+		abort();
 	}
 
-	abort();
+	return iterator->second;
 }

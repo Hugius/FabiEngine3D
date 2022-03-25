@@ -12,29 +12,27 @@ public:
 	void update(bool isHoverable);
 	void createWindow(const string& id, const fvec2& position, const fvec2& size, const fvec3& color);
 	void deleteWindow(const string& id);
+	void deleteWindows();
 
-	const vector<shared_ptr<GuiWindow>>& getWindows() const;
+	const unordered_map<string, shared_ptr<GuiWindow>>& getWindows() const;
 
 	const shared_ptr<GuiWindow> getWindow(const string& id) const;
 
 	const string& getId();
-	const string& getEntityId();
 
-	const fvec3& getInitialColor() const;
+	const fvec3& getColor() const;
 
-	const fvec2& getInitialPosition() const;
-	const fvec2& getInitialSize() const;
+	const fvec2& getPosition() const;
+	const fvec2& getSize() const;
 
+	const bool hasWindow(const string& id) const;
 	const bool isHovered() const;
 
 private:
 	const string _id;
 	const string _entityId;
-	const fvec3 _initialColor;
-	const fvec2 _initialPosition;
-	const fvec2 _initialSize;
 
-	vector<shared_ptr<GuiWindow>> _windows = {};
+	unordered_map<string, shared_ptr<GuiWindow>> _windows = {};
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

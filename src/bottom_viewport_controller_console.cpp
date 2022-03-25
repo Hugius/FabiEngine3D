@@ -13,8 +13,8 @@ void BottomViewportController::_updateConsole()
 	if(!_consoleMessageQueue.empty() && scrollingSpeed != 0.0f)
 	{
 		const auto screen = window->getScreen("main");
-		const float minY = window->getInitialPosition().y - (window->getInitialSize().y * 0.5f);
-		const float maxY = window->getInitialPosition().y + (window->getInitialSize().y * 0.5f);
+		const float minY = window->getPosition().y - (window->getSize().y * 0.5f);
+		const float maxY = window->getPosition().y + (window->getSize().y * 0.5f);
 		const float oldestMessage = _fe3d->text2d_getPosition(screen->getTextField(_consoleMessageQueue[0].first + "_time")->getEntityId()).y + CHAR_SIZE.y;
 
 		const string latestMessageId = _consoleMessageQueue.back().first;
@@ -35,7 +35,7 @@ void BottomViewportController::_updateConsole()
 			}
 		}
 
-		if((static_cast<float>(messageLineCount) * CHAR_SIZE.y) > window->getInitialSize().y)
+		if((static_cast<float>(messageLineCount) * CHAR_SIZE.y) > window->getSize().y)
 		{
 			if
 				(
@@ -70,8 +70,8 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	auto screen = window->getScreen("main");
 	const float timePartOffset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH) * 2.0f;
 	const float separatorPartOffset = CHAR_SIZE.x * static_cast<float>(SEPARATOR_PART_LENGTH) * 2.0f;
-	const fvec2 minPosition = fvec2(-1.0f, window->getInitialPosition().y - (window->getInitialSize().y * 0.5f));
-	const fvec2 maxPosition = fvec2(0.995f, window->getInitialPosition().y + (window->getInitialSize().y * 0.5f));
+	const fvec2 minPosition = fvec2(-1.0f, window->getPosition().y - (window->getSize().y * 0.5f));
+	const fvec2 maxPosition = fvec2(0.995f, window->getPosition().y + (window->getSize().y * 0.5f));
 
 	const auto newId = to_string(_consoleMessageQueue.size());
 	_consoleMessageQueue.push_back({newId, newMessage});
@@ -109,7 +109,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		for(unsigned int index = 0; index < messagePartText.size(); index++)
 		{
 			float offset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH + 3);
-			if(offset + (static_cast<float>(index) * CHAR_SIZE.x) > window->getInitialSize().x)
+			if(offset + (static_cast<float>(index) * CHAR_SIZE.x) > window->getSize().x)
 			{
 				messageParts.push_back(messagePartText.substr(0, index));
 

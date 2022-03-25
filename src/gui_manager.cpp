@@ -16,11 +16,12 @@ void GuiManager::initialize()
 
 void GuiManager::update()
 {
+	_overlay->update();
+
 	_leftViewport->update(!_overlay->isFocused());
 	_rightViewport->update(!_overlay->isFocused());
 	_bottomViewport->update(!_overlay->isFocused());
 	_topViewport->update(!_overlay->isFocused());
-	_overlay->update();
 }
 
 const shared_ptr<GuiViewport> GuiManager::getLeftViewport()

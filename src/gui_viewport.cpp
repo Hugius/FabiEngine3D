@@ -6,10 +6,7 @@ GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string& id, con
 	:
 	_fe3d(fe3d),
 	_id(id),
-	_entityId("@" + id),
-	_initialPosition(position),
-	_initialSize(size),
-	_initialColor(color)
+	_entityId("@" + id)
 {
 	_fe3d->quad2d_create(_entityId, true);
 	_fe3d->quad2d_setPosition(_entityId, position);
@@ -24,27 +21,32 @@ GuiViewport::~GuiViewport()
 
 void GuiViewport::update(bool isHoverable)
 {
-	for(const auto& window : _windows)
+	for(const auto& [windowId, window] : _windows)
 	{
 		window->update(isHoverable);
 	}
+}
+
+const bool GuiViewport::hasWindow(const string& id) const
+{
+	return (_windows.find(id) != _windows.end());
 }
 
 const bool GuiViewport::isHovered() const
 {
 	if(_fe3d->quad2d_isVisible(_entityId))
 	{
-		auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
-		auto buttonPosition = _fe3d->quad2d_getPosition(_entityId);
-		auto buttonSize = _fe3d->quad2d_getSize(_entityId);
+		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+		const auto viewportPosition = getPosition();
+		const auto viewportSize = getSize();
 
-		if(cursorPosition.x > (buttonPosition.x - (buttonSize.x * 0.5f)))
+		if(cursorPosition.x > (viewportPosition.x - (viewportSize.x * 0.5f)))
 		{
-			if(cursorPosition.x < (buttonPosition.x + (buttonSize.x * 0.5f)))
+			if(cursorPosition.x < (viewportPosition.x + (viewportSize.x * 0.5f)))
 			{
-				if(cursorPosition.y > (buttonPosition.y - (buttonSize.y * 0.5f)))
+				if(cursorPosition.y > (viewportPosition.y - (viewportSize.y * 0.5f)))
 				{
-					if(cursorPosition.y < (buttonPosition.y + (buttonSize.y * 0.5f)))
+					if(cursorPosition.y < (viewportPosition.y + (viewportSize.y * 0.5f)))
 					{
 						return true;
 					}
@@ -61,64 +63,64 @@ const string& GuiViewport::getId()
 	return _id;
 }
 
-const string& GuiViewport::getEntityId()
+const fvec3& GuiViewport::getColor() const
 {
-	return _entityId;
+	return _fe3d->quad2d_getColor(_entityId);
 }
 
-const fvec3& GuiViewport::getInitialColor() const
+const fvec2& GuiViewport::getPosition() const
 {
-	return _initialColor;
+	return _fe3d->quad2d_getPosition(_entityId);
 }
 
-const fvec2& GuiViewport::getInitialPosition() const
+const fvec2& GuiViewport::getSize() const
 {
-	return _initialPosition;
-}
-
-const fvec2& GuiViewport::getInitialSize() const
-{
-	return _initialSize;
+	return _fe3d->quad2d_getSize(_entityId);
 }
 
 void GuiViewport::createWindow(const string& id, const fvec2& position, const fvec2& size, const fvec3& color)
 {
-	auto viewportPosition = _fe3d->quad2d_getPosition(_entityId);
-	auto viewportSize = _fe3d->quad2d_getSize(_entityId);
-	auto windowPosition = (viewportPosition + (position * viewportSize));
-	auto windowSize = ((size * 0.5f) * viewportSize);
+	if(hasWindow(id))
+	{
+		abort();
+	}
 
-	_windows.push_back(make_shared<GuiWindow>(_fe3d, _id, id, windowPosition, windowSize, color));
+	const auto viewportPosition = _fe3d->quad2d_getPosition(_entityId);
+	const auto viewportSize = _fe3d->quad2d_getSize(_entityId);
+	const auto windowPosition = (viewportPosition + (position * viewportSize));
+	const auto windowSize = ((size * 0.5f) * viewportSize);
+
+	_windows.insert({id, make_shared<GuiWindow>(_fe3d, id, _id, windowPosition, windowSize, color)});
 }
 
 void GuiViewport::deleteWindow(const string& id)
 {
-	for(unsigned int index = 0; index < _windows.size(); index++)
+	if(!hasWindow(id))
 	{
-		if(_windows[index]->getId() == id)
-		{
-			_windows.erase(_windows.begin() + index);
-			return;
-		}
+		abort();
 	}
 
-	abort();
+	_windows.erase(id);
 }
 
-const vector<shared_ptr<GuiWindow>>& GuiViewport::getWindows() const
+void GuiViewport::deleteWindows()
+{
+	_windows.clear();
+}
+
+const unordered_map<string, shared_ptr<GuiWindow>>& GuiViewport::getWindows() const
 {
 	return _windows;
 }
 
 const shared_ptr<GuiWindow> GuiViewport::getWindow(const string& id) const
 {
-	for(const auto& window : _windows)
+	auto iterator = _windows.find(id);
+
+	if(iterator == _windows.end())
 	{
-		if(id == window->getId())
-		{
-			return window;
-		}
+		abort();
 	}
 
-	abort();
+	return iterator->second;
 }

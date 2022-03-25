@@ -6,39 +6,37 @@
 class GuiWindow final
 {
 public:
-	GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color);
+	GuiWindow(shared_ptr<EngineInterface> fe3d, const string& id, const string& parentId, const fvec2& position, const fvec2& size, const fvec3& color);
 	~GuiWindow();
 
+	void update(bool isHoverable);
 	void createScreen(const string& id);
 	void deleteScreen(const string& id);
+	void deleteScreens();
 	void setActiveScreen(const string& id);
-	void update(bool isHoverable);
 
-	const vector<shared_ptr<GuiScreen>>& getScreens() const;
+	const unordered_map<string, shared_ptr<GuiScreen>>& getScreens() const;
 
 	const shared_ptr<GuiScreen> getScreen(const string& id) const;
 	const shared_ptr<GuiScreen> getActiveScreen() const;
 
 	const string& getId() const;
-	const string& getEntityId() const;
 	const string& getParentId() const;
 
-	const fvec3& getInitialColor() const;
+	const fvec3& getColor() const;
 
-	const fvec2& getInitialPosition() const;
-	const fvec2& getInitialSize() const;
+	const fvec2& getPosition() const;
+	const fvec2& getSize() const;
 
+	const bool hasScreen(const string& id) const;
 	const bool isHovered() const;
 
 private:
 	const string _id;
-	const string _entityId;
 	const string _parentId;
-	const fvec3 _initialColor;
-	const fvec2 _initialPosition;
-	const fvec2 _initialSize;
+	const string _entityId;
 
-	vector<shared_ptr<GuiScreen>> _screens = {};
+	unordered_map<string, shared_ptr<GuiScreen>> _screens = {};
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 

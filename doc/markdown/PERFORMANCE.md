@@ -9,7 +9,7 @@
 - `physicsUpdate` contains: camera, raycasting, collision.
 - `bufferSwap` means the actual buffering on the output screen.
 
-## 3. Performance Killers
+## 3. Dangers
 
 - Rendering planar reflections
 - Rendering water reflections

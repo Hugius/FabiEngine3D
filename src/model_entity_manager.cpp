@@ -153,7 +153,7 @@ void ModelEntityManager::update()
 		}
 		else
 		{
-			if(getEntities().find(entity->getId()) == getEntities().end())
+			if(getEntities().find(entity->getLevelOfDetailEntityId()) == getEntities().end())
 			{
 				abort();
 			}

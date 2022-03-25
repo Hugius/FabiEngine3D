@@ -238,16 +238,6 @@ void EngineInterface::model_setBaseRotationOrigin(const string& id, const fvec3&
 
 void EngineInterface::model_setBaseSize(const string& id, const fvec3& value)
 {
-	const auto sizeChange = (value / _core->getModelEntityManager()->getEntity(id)->getBaseSize());
-	const auto levelOfDetailEntityId = _core->getModelEntityManager()->getEntity(id)->getLevelOfDetailEntityId();
-
-	if(!levelOfDetailEntityId.empty())
-	{
-		const auto currentSize = _core->getModelEntityManager()->getEntity(levelOfDetailEntityId)->getBaseSize();
-
-		_core->getModelEntityManager()->getEntity(levelOfDetailEntityId)->setBaseSize(currentSize * sizeChange);
-	}
-
 	_core->getModelEntityManager()->getEntity(id)->setBaseSize(value);
 }
 

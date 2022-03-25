@@ -10,7 +10,7 @@ void BottomViewportController::inject(shared_ptr<ScriptEditor> scriptEditor)
 	_scriptEditor = scriptEditor;
 }
 
-void BottomViewportController::initialize()
+void BottomViewportController::load()
 {
 	_gui->getBottomViewport()->createWindow("statistics", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.875f), FRAME_COLOR);
 	auto statisticsWindow = _gui->getBottomViewport()->getWindow("statistics");

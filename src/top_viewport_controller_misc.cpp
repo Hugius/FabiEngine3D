@@ -6,7 +6,7 @@
 
 using std::ofstream;
 
-void TopViewportController::initialize()
+void TopViewportController::load()
 {
 	_gui->getTopViewport()->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), FRAME_COLOR);
 	auto projectWindow = _gui->getTopViewport()->getWindow("projectWindow");

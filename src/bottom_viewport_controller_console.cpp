@@ -25,7 +25,7 @@ void BottomViewportController::_updateConsole()
 		for(const auto& [key, message] : _consoleMessageQueue)
 		{
 			int count = 0;
-			while(screen->isTextFieldExisting(key + "_msg_" + to_string(count)))
+			while(screen->hasTextField(key + "_msg_" + to_string(count)))
 			{
 				count++;
 			}
@@ -54,7 +54,7 @@ void BottomViewportController::_updateConsole()
 				_fe3d->text2d_move(screen->getTextField(key + "_separator")->getEntityId(), fvec2(0.0f, -scrollingSpeed));
 
 				unsigned int index = 0;
-				while(screen->isTextFieldExisting(key + "_msg_" + to_string(index)))
+				while(screen->hasTextField(key + "_msg_" + to_string(index)))
 				{
 					_fe3d->text2d_move(screen->getTextField(key + "_msg_" + to_string(index))->getEntityId(), fvec2(0.0f, -scrollingSpeed));
 					index++;
@@ -80,7 +80,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	unsigned int messageIndex = 0;
 	for(const auto& [key, message] : _consoleMessageQueue)
 	{
-		bool alreadyExisting = screen->isTextFieldExisting(key + "_time");
+		bool alreadyExisting = screen->hasTextField(key + "_time");
 		float floatIndex = static_cast<float>(messageIndex);
 		fvec3 timePartColor = fvec3(1.0f, 0.0f, 1.0f);
 		fvec3 separatorPartColor = fvec3(1.0f, 0.85f, 0.0f);
@@ -217,7 +217,7 @@ void BottomViewportController::_deleteConsoleMessage(const string& id)
 	screen->deleteTextField(id + "_separator");
 
 	unsigned int index = 0;
-	while(screen->isTextFieldExisting(id + "_msg_" + to_string(index)))
+	while(screen->hasTextField(id + "_msg_" + to_string(index)))
 	{
 		screen->deleteTextField(id + "_msg_" + to_string(index));
 		index++;

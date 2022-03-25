@@ -1,7 +1,7 @@
 #include "gui_screen.hpp"
 #include "logger.hpp"
 
-GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size)
+GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& id, const string& parentId, const fvec2& position, const fvec2& size)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -14,43 +14,41 @@ GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentId, c
 
 void GuiScreen::update(bool isHoverable)
 {
-	for(const auto& scrollingList : _scrollingLists)
+	for(const auto& [scrollingListId, scrollingList] : _scrollingLists)
 	{
 		scrollingList->update(isHoverable);
-		scrollingList->setVisible(_isActive);
+
+		scrollingList->setVisible(_isVisible);
 	}
 
-	for(const auto& inputField : _inputFields)
+	for(const auto& [inputFieldId, inputField] : _inputFields)
 	{
 		inputField->update(isHoverable);
-		inputField->setVisible(_isActive);
+
+		inputField->setVisible(_isVisible);
 	}
 
-	for(const auto& button : _buttons)
+	for(const auto& [buttonId, button] : _buttons)
 	{
 		button->update(isHoverable);
-		button->setVisible(_isActive);
+
+		button->setVisible(_isVisible);
 	}
 
-	for(const auto& rectangle : _rectangles)
+	for(const auto& [rectangleId, rectangle] : _rectangles)
 	{
-		rectangle->setVisible(_isActive);
+		rectangle->setVisible(_isVisible);
 	}
 
-	for(const auto& textField : _textFields)
+	for(const auto& [textFieldId, textField] : _textFields)
 	{
-		textField->setVisible(_isActive);
+		textField->setVisible(_isVisible);
 	}
 }
 
-void GuiScreen::show()
+void GuiScreen::setVisible(bool value)
 {
-	_isActive = true;
-}
-
-void GuiScreen::hide()
-{
-	_isActive = false;
+	_isVisible = value;
 }
 
 const string& GuiScreen::getId() const
@@ -65,28 +63,28 @@ const string& GuiScreen::getParentId() const
 
 const fvec2 GuiScreen::convertPosition(const fvec2& position) const
 {
-	fvec2 screenPosition = _parentPosition;
-	fvec2 screenSize = _parentSize;
-	fvec2 buttonPosition = (screenPosition + (position * (screenSize * 0.5f)));
+	const auto screenPosition = _parentPosition;
+	const auto screenSize = _parentSize;
+	const auto buttonPosition = (screenPosition + (position * (screenSize * 0.5f)));
 
 	return buttonPosition;
 }
 
 const fvec2 GuiScreen::convertSize(const fvec2& size) const
 {
-	fvec2 screenPosition = _parentPosition;
-	fvec2 screenSize = _parentSize;
-	fvec2 buttonSize = (size * 0.5f) * screenSize;
+	const auto screenPosition = _parentPosition;
+	const auto screenSize = _parentSize;
+	const auto buttonSize = ((size * 0.5f) * screenSize);
 
 	return buttonSize;
 }
 
 const fvec4 GuiScreen::_convertDimensions(const fvec2& position, const fvec2& size) const
 {
-	fvec2 screenPosition = _parentPosition;
-	fvec2 screenSize = _parentSize;
-	fvec2 buttonPosition = (screenPosition + (position * (screenSize * 0.5f)));
-	fvec2 buttonSize = (size * 0.5f) * screenSize;
+	const auto screenPosition = _parentPosition;
+	const auto screenSize = _parentSize;
+	const auto buttonPosition = (screenPosition + (position * (screenSize * 0.5f)));
+	const auto buttonSize = ((size * 0.5f) * screenSize);
 
 	return fvec4(buttonPosition.x, buttonPosition.y, buttonSize.x, buttonSize.y);
 }

@@ -91,7 +91,7 @@ void GuiWindow::createScreen(const string& id)
 		abort();
 	}
 
-	_screens.insert({id, make_shared<GuiScreen>(_fe3d, _parentId + "_" + _id, id, getPosition(), getSize())});
+	_screens.insert({id, make_shared<GuiScreen>(_fe3d, id, (_parentId + "_" + _id), getPosition(), getSize())});
 }
 
 void GuiWindow::deleteScreen(const string& id)
@@ -118,12 +118,12 @@ void GuiWindow::setActiveScreen(const string& id)
 {
 	if(!_activeScreenId.empty())
 	{
-		getActiveScreen()->hide();
+		getActiveScreen()->setVisible(false);
 	}
 
 	_activeScreenId = id;
 
-	getActiveScreen()->show();
+	getActiveScreen()->setVisible(true);
 }
 
 const unordered_map<string, shared_ptr<GuiScreen>>& GuiWindow::getScreens() const

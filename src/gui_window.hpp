@@ -32,6 +32,8 @@ public:
 	const bool isHovered() const;
 
 private:
+	void _updateHovering();
+
 	const string _id;
 	const string _parentId;
 	const string _entityId;
@@ -41,4 +43,6 @@ private:
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 
 	string _activeScreenId = "";
+
+	bool _isHovered = false;
 };

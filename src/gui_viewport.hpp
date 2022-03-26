@@ -29,10 +29,14 @@ public:
 	const bool isHovered() const;
 
 private:
+	void _updateHovering();
+
 	const string _id;
 	const string _entityId;
 
 	unordered_map<string, shared_ptr<GuiWindow>> _windows = {};
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
+
+	bool _isHovered = false;
 };

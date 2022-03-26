@@ -5,10 +5,7 @@ GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string& paren
 	_fe3d(fe3d),
 	_id(id),
 	_entityId("@" + parentId + "_" + id),
-	_parentId(parentId),
-	_initialPosition(position),
-	_initialSize(size),
-	_initialColor(color)
+	_parentId(parentId)
 {
 	_fe3d->quad2d_create(_entityId, isCentered);
 	_fe3d->quad2d_setPosition(_entityId, position);
@@ -21,10 +18,7 @@ GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string& paren
 	_fe3d(fe3d),
 	_id(id),
 	_entityId("@" + parentId + "_" + id),
-	_parentId(parentId),
-	_initialPosition(position),
-	_initialSize(size),
-	_initialColor(fvec3(1.0f))
+	_parentId(parentId)
 {
 	_fe3d->quad2d_create(_entityId, isCentered);
 	_fe3d->quad2d_setPosition(_entityId, position);
@@ -42,34 +36,19 @@ void GuiQuadField::setVisible(bool isVisible)
 	_fe3d->quad2d_setVisible(_entityId, isVisible);
 }
 
-void GuiQuadField::updateInitialPosition()
+const fvec2& GuiQuadField::getPosition() const
 {
-	_initialPosition = _fe3d->quad2d_getPosition(_entityId);
+	return _fe3d->quad2d_getPosition(_entityId);
 }
 
-void GuiQuadField::updateInitialSize()
+const fvec2& GuiQuadField::getSize() const
 {
-	_initialSize = _fe3d->quad2d_getSize(_entityId);
+	return _fe3d->quad2d_getSize(_entityId);
 }
 
-void GuiQuadField::updateInitialColor()
+const fvec3& GuiQuadField::getColor() const
 {
-	_initialColor = _fe3d->quad2d_getColor(_entityId);
-}
-
-const fvec2& GuiQuadField::getInitialPosition() const
-{
-	return _initialPosition;
-}
-
-const fvec2& GuiQuadField::getInitialSize() const
-{
-	return _initialSize;
-}
-
-const fvec3& GuiQuadField::getInitialColor() const
-{
-	return _initialColor;
+	return _fe3d->quad2d_getColor(_entityId);
 }
 
 const string& GuiQuadField::getId() const

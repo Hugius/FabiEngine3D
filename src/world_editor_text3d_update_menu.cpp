@@ -92,7 +92,7 @@ void WorldEditor::_updateText3dChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuText3dChoice")
 	{
-		for(const auto& button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->getButtons())
+		for(const auto& [buttonId, button] : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->getButtons())
 		{
 			if(!_fe3d->text3d_isExisting(button->getId()))
 			{

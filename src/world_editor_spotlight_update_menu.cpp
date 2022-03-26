@@ -66,7 +66,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuSpotlightChoice")
 	{
-		for(const auto& button : screen->getScrollingList("spotlightList")->getButtons())
+		for(const auto& [buttonId, button] : screen->getScrollingList("spotlightList")->getButtons())
 		{
 			if(!_fe3d->spotlight_isExisting(button->getId()))
 			{

@@ -97,7 +97,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuSoundChoice")
 	{
-		for(const auto& button : screen->getScrollingList("soundList")->getButtons())
+		for(const auto& [buttonId, button] : screen->getScrollingList("soundList")->getButtons())
 		{
 			if(!_fe3d->sound3d_isExisting(button->getId()))
 			{

@@ -65,7 +65,7 @@ void ScriptEditor::_updateTextSelector()
 			const auto secondAabbPosition = _fe3d->aabb_getBasePosition(_secondSelectionAabbId);
 			const auto selectionWidth = (static_cast<float>(scriptFile->getLine(cursorLineIndex).size()) * CHARACTER_SIZE.x);
 			const auto selectionHeight = CHARACTER_SIZE.y;
-			const auto selectionX = ((firstAabbPosition.x + secondAabbPosition.x) / 2.0f);
+			const auto selectionX = ((firstAabbPosition.x + secondAabbPosition.x) * 0.5f);
 			const auto selectionY = firstAabbPosition.y;
 
 			_fe3d->quad3d_setPosition("selection", fvec3(selectionX, selectionY, 0.0f));
@@ -100,12 +100,12 @@ void ScriptEditor::_updateTextSelector()
 			float selectionY;
 			if(secondAabbPosition.x < firstAabbPosition.x)
 			{
-				selectionX = (firstAabbPosition.x - (selectionWidth / 2.0f) + (CHARACTER_SIZE.x / 2.0f));
+				selectionX = (firstAabbPosition.x - (selectionWidth * 0.5f) + (CHARACTER_SIZE.x * 0.5f));
 				selectionY = firstAabbPosition.y;
 			}
 			else
 			{
-				selectionX = (firstAabbPosition.x + (selectionWidth / 2.0f) - (CHARACTER_SIZE.x / 2.0f));
+				selectionX = (firstAabbPosition.x + (selectionWidth * 0.5f) - (CHARACTER_SIZE.x * 0.5f));
 				selectionY = firstAabbPosition.y;
 			}
 

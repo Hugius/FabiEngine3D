@@ -66,7 +66,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuReflectionChoice")
 	{
-		for(const auto& button : screen->getScrollingList("reflectionList")->getButtons())
+		for(const auto& [buttonId, button] : screen->getScrollingList("reflectionList")->getButtons())
 		{
 			if(!_fe3d->reflection_isExisting(button->getId()))
 			{

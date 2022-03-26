@@ -22,6 +22,8 @@ GuiWindow::~GuiWindow()
 
 void GuiWindow::update(bool isHoverable)
 {
+	_updateHovering();
+
 	for(const auto& [screenId, screen] : _screens)
 	{
 		screen->update(isHoverable);
@@ -35,28 +37,30 @@ const bool GuiWindow::hasScreen(const string& id) const
 
 const bool GuiWindow::isHovered() const
 {
-	if(_fe3d->quad2d_isVisible(_entityId))
-	{
-		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
-		const auto windowPosition = getPosition();
-		const auto windowSize = getSize();
+	return _isHovered;
+}
 
-		if(cursorPosition.x > (windowPosition.x - (windowSize.x * 0.5f)))
+void GuiWindow::_updateHovering()
+{
+	_isHovered = false;
+
+	const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+	const auto windowPosition = getPosition();
+	const auto windowSize = getSize();
+
+	if(cursorPosition.x > (windowPosition.x - (windowSize.x * 0.5f)))
+	{
+		if(cursorPosition.x < (windowPosition.x + (windowSize.x * 0.5f)))
 		{
-			if(cursorPosition.x < (windowPosition.x + (windowSize.x * 0.5f)))
+			if(cursorPosition.y > (windowPosition.y - (windowSize.y * 0.5f)))
 			{
-				if(cursorPosition.y > (windowPosition.y - (windowSize.y * 0.5f)))
+				if(cursorPosition.y < (windowPosition.y + (windowSize.y * 0.5f)))
 				{
-					if(cursorPosition.y < (windowPosition.y + (windowSize.y * 0.5f)))
-					{
-						return true;
-					}
+					_isHovered = true;
 				}
 			}
 		}
 	}
-
-	return false;
 }
 
 const string& GuiWindow::getId() const

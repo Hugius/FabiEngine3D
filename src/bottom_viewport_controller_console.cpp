@@ -124,10 +124,10 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		{
 			if(alreadyExisting)
 			{
-				_fe3d->text2d_setPosition(screen->getTextField(key + "_time")->getEntityId(),
-										  screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
-				_fe3d->text2d_setPosition(screen->getTextField(key + "_separator")->getEntityId(),
-										  screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+				//_fe3d->text2d_setPosition(screen->getTextField(key + "_time")->getEntityId(),
+				//						  screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+				//_fe3d->text2d_setPosition(screen->getTextField(key + "_separator")->getEntityId(),
+				//						  screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
 			else
 			{
@@ -159,8 +159,8 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 			if(alreadyExisting)
 			{
-				_fe3d->text2d_setPosition(screen->getTextField(textFieldId)->getEntityId(),
-										  screen->convertPosition(fvec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+				//_fe3d->text2d_setPosition(screen->getTextField(textFieldId)->getEntityId(),
+				//						  screen->convertPosition(fvec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
 			else
 			{
@@ -178,10 +178,10 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			{
 				if(alreadyExisting)
 				{
-					_fe3d->text2d_setPosition(screen->getTextField(key + "_time")->getEntityId(),
-											  screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
-					_fe3d->text2d_setPosition(screen->getTextField(key + "_separator")->getEntityId(),
-											  screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+					//_fe3d->text2d_setPosition(screen->getTextField(key + "_time")->getEntityId(),
+					//						  screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+					//_fe3d->text2d_setPosition(screen->getTextField(key + "_separator")->getEntityId(),
+					//						  screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 				}
 				else
 				{

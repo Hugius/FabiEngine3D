@@ -70,7 +70,7 @@ void GuiButton::_updateHovering(bool isHoverable)
 
 		if(!_isHovered)
 		{
-			_fe3d->quad2d_setColor(_quadField->getEntityId(), _quadField->getInitialColor());
+			_fe3d->quad2d_setColor(_quadField->getEntityId(), _quadField->getColor());
 
 			if(_textField != nullptr)
 			{
@@ -115,7 +115,6 @@ void GuiButton::changeTextContent(const string& content)
 
 	auto newQuadFieldSize = fvec2(_textField->getInitialSize() / fvec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));
 	_fe3d->quad2d_setSize(_quadField->getEntityId(), newQuadFieldSize);
-	_quadField->updateInitialSize();
 }
 
 const bool GuiButton::isHoverable() const

@@ -66,7 +66,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuPointlightChoice")
 	{
-		for(const auto& button : screen->getScrollingList("pointlightList")->getButtons())
+		for(const auto& [buttonId, button] : screen->getScrollingList("pointlightList")->getButtons())
 		{
 			if(!_fe3d->pointlight_isExisting(button->getId()))
 			{

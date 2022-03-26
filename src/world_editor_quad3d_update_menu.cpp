@@ -92,7 +92,7 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuQuad3dChoice")
 	{
-		for(const auto& button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->getButtons())
+		for(const auto& [buttonId, button] : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->getButtons())
 		{
 			if(!_fe3d->quad3d_isExisting(button->getId()))
 			{

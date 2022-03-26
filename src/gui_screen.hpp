@@ -47,9 +47,6 @@ public:
 	const string& getId() const;
 	const string& getParentId() const;
 
-	const fvec2 convertPosition(const fvec2& position) const;
-	const fvec2 convertSize(const fvec2& size) const;
-
 	const bool hasScrollingList(const string& id) const;
 	const bool hasInputField(const string& id) const;
 	const bool hasButton(const string& id) const;
@@ -58,7 +55,8 @@ public:
 	const bool isVisible() const;
 
 private:
-	const fvec4 _convertDimensions(const fvec2& position, const fvec2& size) const;
+	const fvec2 _convertPosition(const fvec2& position) const;
+	const fvec2 _convertSize(const fvec2& size) const;
 
 	const string _id;
 	const string _parentId;

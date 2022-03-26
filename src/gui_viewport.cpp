@@ -34,28 +34,30 @@ const bool GuiViewport::hasWindow(const string& id) const
 
 const bool GuiViewport::isHovered() const
 {
-	if(_fe3d->quad2d_isVisible(_entityId))
-	{
-		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
-		const auto viewportPosition = getPosition();
-		const auto viewportSize = getSize();
+	return _isHovered;
+}
 
-		if(cursorPosition.x > (viewportPosition.x - (viewportSize.x * 0.5f)))
+void GuiViewport::_updateHovering()
+{
+	_isHovered = false;
+
+	const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+	const auto viewportPosition = getPosition();
+	const auto viewportSize = getSize();
+
+	if(cursorPosition.x > (viewportPosition.x - (viewportSize.x * 0.5f)))
+	{
+		if(cursorPosition.x < (viewportPosition.x + (viewportSize.x * 0.5f)))
 		{
-			if(cursorPosition.x < (viewportPosition.x + (viewportSize.x * 0.5f)))
+			if(cursorPosition.y > (viewportPosition.y - (viewportSize.y * 0.5f)))
 			{
-				if(cursorPosition.y > (viewportPosition.y - (viewportSize.y * 0.5f)))
+				if(cursorPosition.y < (viewportPosition.y + (viewportSize.y * 0.5f)))
 				{
-					if(cursorPosition.y < (viewportPosition.y + (viewportSize.y * 0.5f)))
-					{
-						return true;
-					}
+					_isHovered = true;
 				}
 			}
 		}
 	}
-
-	return false;
 }
 
 const string& GuiViewport::getId()

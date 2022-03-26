@@ -212,7 +212,7 @@ const string GuiOverlay::checkChoiceForm(const string& id) const
 {
 	if(id == _choiceFormId)
 	{
-		for(const auto& button : getScrollingList(id)->getButtons())
+		for(const auto& [buttonId, button] : getScrollingList(id)->getButtons())
 		{
 			if(button->isHovered())
 			{

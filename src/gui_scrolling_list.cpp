@@ -4,9 +4,11 @@
 
 #include <algorithm>
 
-GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
+using std::clamp;
+
+GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string& id, const string& parentId, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
 	:
-	GuiQuadField(fe3d, parentId + "_scrollingList", id, position, size, color, isCentered),
+	GuiQuadField(fe3d, (parentId + "_" + id), "GuiScrollingList", position, size, color, isCentered),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),
 	_textColor(textColor),
@@ -20,71 +22,50 @@ void GuiScrollingList::update(bool isHoverable)
 {
 	_updateHovering();
 	_updateScrolling();
-	_updateButtons(isHoverable);
+
+	for(const auto& [buttonId, button] : _buttons)
+	{
+		button->update(isHoverable && _isHovered);
+	}
 }
 
 void GuiScrollingList::createButton(const string& id, const string& textContent)
 {
-	float x = 0.0f;
-	float y = (1.0f - _charSize.y - (_buttons.size() * (_charSize.y * 1.5f)));
-	float w = (_charSize.x * textContent.size());
-	float h = _charSize.y;
+	if(hasButton(id))
+	{
+		abort();
+	}
 
-	fvec2 position = _convertPosition(fvec2(x, y));
-	fvec2 size = _convertSize(fvec2(w, h));
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentId, id, fvec2(position.x, position.y), fvec2(size.x, size.y),
-					   _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, _fe3d->quad2d_isCentered(_entityId)));
+	_buttons.insert({id, make_shared<GuiButton>(_fe3d, _parentId, id, fvec2(0.0f), fvec2(0.0f), _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, _fe3d->quad2d_isCentered(_entityId))});
 
-	string quadFieldId = _buttons.back()->getQuadField()->getEntityId();
-	string textFieldId = _buttons.back()->getTextField()->getEntityId();
-	_fe3d->quad2d_setMinPosition(quadFieldId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y * 0.5f)));
-	_fe3d->text2d_setMinPosition(textFieldId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y * 0.5f)));
-	_fe3d->quad2d_setMaxPosition(quadFieldId, fvec2(1.0f, _initialPosition.y + (_initialSize.y * 0.5f)));
-	_fe3d->text2d_setMaxPosition(textFieldId, fvec2(1.0f, _initialPosition.y + (_initialSize.y * 0.5f)));
+	//string quadFieldId = _buttons.back()->getQuadField()->getEntityId();
+	//string textFieldId = _buttons.back()->getTextField()->getEntityId();
+	//_fe3d->quad2d_setMinPosition(quadFieldId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y * 0.5f)));
+	//_fe3d->text2d_setMinPosition(textFieldId, fvec2(-1.0f, _initialPosition.y - (_initialSize.y * 0.5f)));
+	//_fe3d->quad2d_setMaxPosition(quadFieldId, fvec2(1.0f, _initialPosition.y + (_initialSize.y * 0.5f)));
+	//_fe3d->text2d_setMaxPosition(textFieldId, fvec2(1.0f, _initialPosition.y + (_initialSize.y * 0.5f)));
 }
 
 void GuiScrollingList::deleteButton(const string& id)
 {
-	for(unsigned int index = 0; index < _buttons.size(); index++)
+	if(!hasButton(id))
 	{
-		if(id == _buttons[index]->getId())
-		{
-			_buttons.erase(_buttons.begin() + index);
-
-			vector<string> buttonIds;
-			vector<string> textContents;
-			for(unsigned int j = 0; j < _buttons.size(); j++)
-			{
-				buttonIds.push_back(_buttons[j]->getId());
-				textContents.push_back(_fe3d->text2d_getContent(_buttons[j]->getTextField()->getEntityId()));
-			}
-
-			deleteButtons();
-
-			for(unsigned int j = 0; j < buttonIds.size(); j++)
-			{
-				createButton(buttonIds[j], textContents[j]);
-			}
-
-			return;
-		}
+		abort();
 	}
 
-	abort();
+	_buttons.erase(id);
 }
 
 void GuiScrollingList::deleteButtons()
 {
 	_buttons.clear();
-	_scrollingOffset = 0.0f;
-	_scrollingSpeed = 0.0f;
 }
 
 void GuiScrollingList::setVisible(bool isVisible)
 {
 	GuiQuadField::setVisible(isVisible);
 
-	for(const auto& button : _buttons)
+	for(const auto& [buttonId, button] : _buttons)
 	{
 		button->setVisible(isVisible);
 	}
@@ -94,15 +75,21 @@ void GuiScrollingList::_updateHovering()
 {
 	_isHovered = false;
 
-	fvec2 cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
-	fvec2 listPosition = _fe3d->quad2d_getPosition(_entityId);
-	fvec2 listSize = _fe3d->quad2d_getSize(_entityId);
+	const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+	const auto listPosition = getPosition();
+	const auto listSize = getSize();
 
-	if(cursorPosition.x > listPosition.x - (listSize.x * 0.5f) && cursorPosition.x < listPosition.x + (listSize.x * 0.5f))
+	if(cursorPosition.x > (listPosition.x - (listSize.x * 0.5f)))
 	{
-		if(cursorPosition.y > listPosition.y - (listSize.y * 0.5f) && cursorPosition.y < listPosition.y + (listSize.y * 0.5f))
+		if(cursorPosition.x < (listPosition.x + (listSize.x * 0.5f)))
 		{
-			_isHovered = true;
+			if(cursorPosition.y > (listPosition.y - (listSize.y * 0.5f)))
+			{
+				if(cursorPosition.y < (listPosition.y + (listSize.y * 0.5f)))
+				{
+					_isHovered = true;
+				}
+			}
 		}
 	}
 }
@@ -111,92 +98,41 @@ void GuiScrollingList::_updateScrolling()
 {
 	if(!_buttons.empty())
 	{
-		bool mustReset = false;
-
-		fvec2 cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
-		if(cursorPosition.x > _initialPosition.x - (_initialSize.x * 0.5f) && cursorPosition.x < _initialPosition.x + (_initialSize.x * 0.5f))
+		if(_isHovered)
 		{
-			if(cursorPosition.y > _initialPosition.y - (_initialSize.y * 0.5f) && cursorPosition.y < _initialPosition.y + (_initialSize.y * 0.5f))
-			{
-				float scrollingAcceleration = (static_cast<float>(-_fe3d->input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER);
-				_scrollingSpeed += scrollingAcceleration;
-			}
+			_scrollingOffset -= static_cast<float>(_fe3d->input_getMouseWheelY());
 		}
 
-		_scrollingSpeed *= 0.95f;
+		_scrollingOffset = clamp(_scrollingOffset, 0.0f, 1.0f);
 
-		_scrollingOffset += _scrollingSpeed;
-
-		if(_scrollingOffset < 0.0f)
+		for(const auto& [buttonId, button] : _buttons)
 		{
-			_scrollingOffset = 0.0f;
-			_scrollingSpeed = 0.0f;
-			mustReset = true;
+
 		}
-
-		float firstButtonHeight = _fe3d->quad2d_getPosition(_buttons[0]->getQuadField()->getEntityId()).y;
-		float lastButtonHeight = _fe3d->quad2d_getPosition(_buttons[_buttons.size() - 1]->getQuadField()->getEntityId()).y;
-		float listHeight = _fe3d->quad2d_getPosition(_entityId).y;
-		float edgeOffset = (_fe3d->quad2d_getSize(_entityId).y * 0.5f);
-		if(lastButtonHeight >= listHeight - edgeOffset + (_charSize.y / 3.0f))
-		{
-			if(_scrollingSpeed > 0.0f)
-			{
-				_scrollingSpeed = 0.0f;
-			}
-		}
-
-		if(firstButtonHeight <= listHeight + edgeOffset - (_charSize.y / 3.0f))
-		{
-			if(_scrollingSpeed < 0.0f)
-			{
-				_scrollingSpeed = 0.0f;
-			}
-		}
-
-		for(const auto& button : _buttons)
-		{
-			string quadFieldId = button->getQuadField()->getEntityId();
-			string textFieldId = button->getTextField()->getEntityId();
-
-			if(mustReset)
-			{
-				_fe3d->quad2d_setPosition(quadFieldId, button->getQuadField()->getInitialPosition());
-				_fe3d->text2d_setPosition(textFieldId, button->getTextField()->getInitialPosition());
-			}
-			else
-			{
-				_fe3d->quad2d_move(quadFieldId, fvec2(0.0f, _scrollingSpeed));
-				_fe3d->text2d_move(textFieldId, fvec2(0.0f, _scrollingSpeed));
-			}
-		}
-	}
-}
-
-void GuiScrollingList::_updateButtons(bool isHoverable)
-{
-	for(const auto& button : _buttons)
-	{
-		button->update(isHoverable && _isHovered);
 	}
 }
 
 const fvec2 GuiScrollingList::_convertPosition(const fvec2& position) const
 {
-	fvec2 listPosition = _fe3d->quad2d_getPosition(_entityId);
-	fvec2 listSize = _fe3d->quad2d_getSize(_entityId);
-	fvec2 buttonPosition = (listPosition + (position * (listSize * 0.5f)));
+	const auto listPosition = _fe3d->quad2d_getPosition(_entityId);
+	const auto listSize = _fe3d->quad2d_getSize(_entityId);
+	const auto buttonPosition = (listPosition + (position * (listSize * 0.5f)));
 
 	return buttonPosition;
 }
 
 const fvec2 GuiScrollingList::_convertSize(const fvec2& size) const
 {
-	fvec2 listPosition = _fe3d->quad2d_getPosition(_entityId);
-	fvec2 listSize = _fe3d->quad2d_getSize(_entityId);
-	fvec2 buttonSize = (size * 0.5f) * listSize;
+	const auto listPosition = _fe3d->quad2d_getPosition(_entityId);
+	const auto listSize = _fe3d->quad2d_getSize(_entityId);
+	const auto buttonSize = ((size * 0.5f) * listSize);
 
 	return buttonSize;
+}
+
+const bool GuiScrollingList::hasButton(const string& id)
+{
+	return (_buttons.find(id) != _buttons.end());
 }
 
 const bool GuiScrollingList::isHovered() const
@@ -206,18 +142,17 @@ const bool GuiScrollingList::isHovered() const
 
 const shared_ptr<GuiButton> GuiScrollingList::getButton(const string& id) const
 {
-	for(const auto& button : _buttons)
+	auto iterator = _buttons.find(id);
+
+	if(iterator == _buttons.end())
 	{
-		if(id == button->getId())
-		{
-			return button;
-		}
+		abort();
 	}
 
-	return nullptr;
+	return iterator->second;
 }
 
-const vector<shared_ptr<GuiButton>>& GuiScrollingList::getButtons() const
+const unordered_map<string, shared_ptr<GuiButton>>& GuiScrollingList::getButtons() const
 {
 	return _buttons;
 }

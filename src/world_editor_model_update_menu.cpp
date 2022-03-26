@@ -93,7 +93,7 @@ void WorldEditor::_updateModelChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuModelChoice")
 	{
-		for(const auto& button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
+		for(const auto& [buttonId, button] : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
 		{
 			if(!_fe3d->model_isExisting(button->getId()))
 			{

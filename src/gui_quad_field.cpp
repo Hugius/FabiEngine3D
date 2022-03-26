@@ -1,11 +1,11 @@
 #include "gui_quad_field.hpp"
 
-GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
+GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & parentId, const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
-	_entityId("@" + parentId + "_" + id),
-	_parentId(parentId)
+	_parentId(parentId),
+	_entityId("@" + parentId + "_" + id)
 {
 	_fe3d->quad2d_create(_entityId, isCentered);
 	_fe3d->quad2d_setPosition(_entityId, position);
@@ -13,12 +13,12 @@ GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string& paren
 	_fe3d->quad2d_setColor(_entityId, color);
 }
 
-GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
+GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & parentId, const string & id, const fvec2 & position, const fvec2 & size, const string & texturePath, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
-	_entityId("@" + parentId + "_" + id),
-	_parentId(parentId)
+	_parentId(parentId),
+	_entityId("@" + parentId + "_" + id)
 {
 	_fe3d->quad2d_create(_entityId, isCentered);
 	_fe3d->quad2d_setPosition(_entityId, position);
@@ -31,37 +31,57 @@ GuiQuadField::~GuiQuadField()
 	_fe3d->quad2d_delete(_entityId);
 }
 
-void GuiQuadField::setVisible(bool isVisible)
+void GuiQuadField::setVisible(bool value)
 {
-	_fe3d->quad2d_setVisible(_entityId, isVisible);
+	_fe3d->quad2d_setVisible(_entityId, value);
 }
 
-const fvec2& GuiQuadField::getPosition() const
+void GuiQuadField::setColor(const fvec3 & value)
+{
+	_fe3d->quad2d_setColor(_entityId, value);
+}
+
+void GuiQuadField::setPosition(const fvec2 & value)
+{
+	_fe3d->quad2d_setPosition(_entityId, value);
+}
+
+void GuiQuadField::setSize(const fvec2 & value)
+{
+	_fe3d->quad2d_setSize(_entityId, value);
+}
+
+void GuiQuadField::setOpacity(float value)
+{
+	_fe3d->quad2d_setOpacity(_entityId, value);
+}
+
+const fvec2 & GuiQuadField::getPosition() const
 {
 	return _fe3d->quad2d_getPosition(_entityId);
 }
 
-const fvec2& GuiQuadField::getSize() const
+const fvec2 & GuiQuadField::getSize() const
 {
 	return _fe3d->quad2d_getSize(_entityId);
 }
 
-const fvec3& GuiQuadField::getColor() const
+const bool GuiQuadField::isVisible() const
+{
+	return _fe3d->quad2d_isVisible(_entityId);
+}
+
+const fvec3 & GuiQuadField::getColor() const
 {
 	return _fe3d->quad2d_getColor(_entityId);
 }
 
-const string& GuiQuadField::getId() const
+const string & GuiQuadField::getId() const
 {
 	return _id;
 }
 
-const string& GuiQuadField::getEntityId() const
-{
-	return _entityId;
-}
-
-const string& GuiQuadField::getParentId() const
+const string & GuiQuadField::getParentId() const
 {
 	return _parentId;
 }

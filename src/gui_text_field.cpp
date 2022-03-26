@@ -1,14 +1,11 @@
 #include "gui_text_field.hpp"
 
-GuiTextField::GuiTextField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& color, bool isCentered)
+GuiTextField::GuiTextField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
-	_entityId("@" + parentId + "_" + id),
 	_parentId(parentId),
-	_initialPosition(position),
-	_initialSize(size),
-	_initialColor(color)
+	_entityId("@" + parentId + "_" + id)
 {
 	_fe3d->text2d_create(_entityId, FONT_MAP_PATH, isCentered);
 	_fe3d->text2d_setPosition(_entityId, position);
@@ -22,67 +19,77 @@ GuiTextField::~GuiTextField()
 	_fe3d->text2d_delete(_entityId);
 }
 
-void GuiTextField::setVisible(bool isVisible)
+void GuiTextField::setVisible(bool value)
 {
-	_fe3d->text2d_setVisible(_entityId, isVisible);
+	_fe3d->text2d_setVisible(_entityId, value);
 }
 
-void GuiTextField::changeTextContent(const string& content)
+void GuiTextField::setColor(const fvec3 & value)
+{
+	_fe3d->text2d_setColor(_entityId, value);
+}
+
+void GuiTextField::setPosition(const fvec2 & value)
+{
+	_fe3d->text2d_setPosition(_entityId, value);
+}
+
+void GuiTextField::setSize(const fvec2 & value)
+{
+	_fe3d->text2d_setSize(_entityId, value);
+}
+
+void GuiTextField::changeTextContent(const string & content)
 {
 	const auto currentContent = _fe3d->text2d_getContent(_entityId);
 
 	if(content != currentContent)
 	{
-		const auto characterWidth = (_initialSize.x / static_cast<float>(currentContent.size()));
-		const auto characterHeight = _initialSize.y;
+		const auto textSize = getSize();
+		const auto characterWidth = (textSize.x / static_cast<float>(currentContent.size()));
+		const auto characterHeight = textSize.y;
 
 		_fe3d->text2d_setContent(_entityId, content);
 		_fe3d->text2d_setSize(_entityId, fvec2((characterWidth * static_cast<float>(content.size())), characterHeight));
-		updateInitialSize();
 	}
 }
 
-void GuiTextField::updateInitialPosition()
+void GuiTextField::setOpacity(float value)
 {
-	_initialPosition = _fe3d->text2d_getPosition(_entityId);
+	_fe3d->text2d_setOpacity(_entityId, value);
 }
 
-void GuiTextField::updateInitialSize()
+const fvec2 & GuiTextField::getPosition() const
 {
-	_initialSize = _fe3d->text2d_getSize(_entityId);
+	return _fe3d->text2d_getPosition(_entityId);
 }
 
-void GuiTextField::updateInitialColor()
+const fvec2 & GuiTextField::getSize() const
 {
-	_initialColor = _fe3d->text2d_getColor(_entityId);
+	return _fe3d->text2d_getSize(_entityId);
 }
 
-const fvec2& GuiTextField::getInitialPosition() const
+const bool GuiTextField::isVisible() const
 {
-	return _initialPosition;
+	return _fe3d->text2d_isVisible(_entityId);
 }
 
-const fvec2& GuiTextField::getInitialSize() const
+const fvec3 & GuiTextField::getColor() const
 {
-	return _initialSize;
+	return _fe3d->text2d_getColor(_entityId);
 }
 
-const fvec3& GuiTextField::getInitialColor() const
-{
-	return _initialColor;
-}
-
-const string& GuiTextField::getId() const
+const string & GuiTextField::getId() const
 {
 	return _id;
 }
 
-const string& GuiTextField::getEntityId() const
+const string & GuiTextField::getEntityId() const
 {
 	return _entityId;
 }
 
-const string& GuiTextField::getParentId() const
+const string & GuiTextField::getParentId() const
 {
 	return _parentId;
 }

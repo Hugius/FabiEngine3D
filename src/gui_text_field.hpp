@@ -5,35 +5,33 @@
 class GuiTextField final
 {
 public:
-	GuiTextField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& color, bool isCentered);
+	GuiTextField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & color, bool isCentered);
 	~GuiTextField();
 
-	void setVisible(bool isVisible);
-	void changeTextContent(const string& content);
-	void updateInitialPosition();
-	void updateInitialSize();
-	void updateInitialColor();
+	void changeTextContent(const string & content);
+	void setVisible(bool value);
+	void setColor(const fvec3 & value);
+	void setPosition(const fvec2 & value);
+	void setSize(const fvec2 & value);
+	void setOpacity(float value);
 
-	const string& getId() const;
-	const string& getEntityId() const;
-	const string& getParentId() const;
+	const string & getId() const;
+	const string & getParentId() const;
+	const string & getEntityId() const;
 
-	const fvec3& getInitialColor() const;
+	const fvec3 & getColor() const;
 
-	const fvec2& getInitialPosition() const;
-	const fvec2& getInitialSize() const;
+	const fvec2 & getPosition() const;
+	const fvec2 & getSize() const;
+
+	const bool isVisible() const;
 
 private:
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 
 	const string _id;
-	const string _entityId;
 	const string _parentId;
+	const string _entityId;
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
-
-	fvec3 _initialColor = fvec3(0.0f);
-
-	fvec2 _initialPosition = fvec2(0.0f);
-	fvec2 _initialSize = fvec3(0.0f);
 };

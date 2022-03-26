@@ -7,42 +7,44 @@
 class GuiButton
 {
 public:
-	GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size,
-			  const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered);
-	GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size,
-			  const string& texturePath, const fvec3& hoverColor, bool isCentered);
+	GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered);
+	GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & texturePath, const fvec3 & hoveredQuadColor, bool isCentered);
 
 	virtual void update(bool isHoverable);
-	virtual void changeTextContent(const string& content);
+	virtual void changeTextContent(const string & content);
 
-	void setVisible(bool isVisible);
-	void setHoverable(bool isHoverable);
+	void setVisible(bool value);
+	void setHoverable(bool value);
 
-	const shared_ptr<GuiQuadField> getQuadField() const;
-	const shared_ptr<GuiTextField> getTextField() const;
-
-	const string& getId() const;
-	const string& getParentId() const;
+	const string & getId() const;
+	const string & getParentId() const;
 
 	const bool isHoverable() const;
 	const bool isHovered() const;
+
+	const bool isVisible() const;
 
 protected:
 	void _updateHovering(bool isHoverable);
 
 	const string _id;
 	const string _parentId;
-	const fvec3 _hoverColor;
-	const fvec3 _textHoverColor;
+	const fvec3 _defaultQuadColor;
+	const fvec3 _hoveredQuadColor;
+	const fvec3 _defaultTextColor;
+	const fvec3 _hoveredTextColor;
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 	shared_ptr<GuiQuadField> _quadField = nullptr;
 	shared_ptr<GuiTextField> _textField = nullptr;
 
+	bool _isVisible = true;
 	bool _isHovered = false;
 	bool _isHoverable = true;
 
 private:
 	static inline constexpr float TEXT_WIDTH_MULTIPLIER = 0.9f;
 	static inline constexpr float TEXT_HEIGHT_MULTIPLIER = 0.75f;
+	static inline constexpr float DEFAULT_OPACITY = 1.0f;
+	static inline constexpr float HOVER_OPACITY = 0.25f;
 };

@@ -1,26 +1,29 @@
 #include "gui_button.hpp"
 #include "tools.hpp"
 
-GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
+GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
 	_parentId(parentId),
-	_quadField(make_shared<GuiQuadField>(fe3d, parentId + "_button", id, position, size, color, isCentered)),
-	_textField(make_shared<GuiTextField>(fe3d, parentId + "_button", id, position, fvec2(size.x* TEXT_WIDTH_MULTIPLIER, size.y* TEXT_HEIGHT_MULTIPLIER), textContent, textColor, isCentered)),
-	_hoverColor(hoverColor),
-	_textHoverColor(textHoverColor)
+	_quadField(make_shared<GuiQuadField>(fe3d, "GuiButton", (parentId + "_" + id), position, size, defaultQuadColor, isCentered)),
+	_textField(make_shared<GuiTextField>(fe3d, "GuiButton", (parentId + "_" + id), position, fvec2((size.x * TEXT_WIDTH_MULTIPLIER), (size.y * TEXT_HEIGHT_MULTIPLIER)), textContent, defaultTextColor, isCentered)),
+	_defaultQuadColor(defaultQuadColor),
+	_hoveredQuadColor(hoveredQuadColor),
+	_defaultTextColor(defaultTextColor),
+	_hoveredTextColor(hoveredTextColor)
 {
 
 }
 
-GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const string& texturePath, const fvec3& hoverColor, bool isCentered)
+GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & texturePath, const fvec3 & hoveredQuadColor, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
 	_parentId(parentId),
-	_quadField(make_shared<GuiQuadField>(fe3d, parentId + "_button", id, position, size, texturePath, isCentered)),
-	_hoverColor(hoverColor)
+	_quadField(make_shared<GuiQuadField>(fe3d, "GuiButton", (parentId + "_" + id), position, size, texturePath, isCentered)),
+	_defaultQuadColor(fvec3(1.0f)),
+	_hoveredQuadColor(hoveredQuadColor)
 {
 
 }
@@ -28,93 +31,84 @@ GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string& parentId, c
 void GuiButton::update(bool isHoverable)
 {
 	_updateHovering(isHoverable);
-}
 
-void GuiButton::setVisible(bool isVisible)
-{
-	_quadField->setVisible(isVisible);
+	_quadField->setVisible(_isVisible);
+	_quadField->setOpacity(_isHoverable ? DEFAULT_OPACITY : HOVER_OPACITY);
 
 	if(_textField != nullptr)
 	{
-		_textField->setVisible(isVisible);
+		_textField->setVisible(_isVisible);
+		_textField->setOpacity(_isHoverable ? DEFAULT_OPACITY : HOVER_OPACITY);
 	}
+}
+
+void GuiButton::setVisible(bool value)
+{
+	_isVisible = value;
 }
 
 void GuiButton::_updateHovering(bool isHoverable)
 {
 	_isHovered = false;
 
-	if(_fe3d->quad2d_isVisible(_quadField->getEntityId()))
+	if(_isVisible)
 	{
-		fvec2 cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
-		fvec2 buttonPosition = _fe3d->quad2d_getPosition(_quadField->getEntityId());
-		fvec2 buttonSize = _fe3d->quad2d_getSize(_quadField->getEntityId());
+		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+		const auto buttonPosition = _quadField->getPosition();
+		const auto buttonSize = _quadField->getSize();
 
-		if(cursorPosition.x > buttonPosition.x - (buttonSize.x * 0.5f) && cursorPosition.x < buttonPosition.x + (buttonSize.x * 0.5f))
+		if(cursorPosition.x > (buttonPosition.x - (buttonSize.x * 0.5f)))
 		{
-			if(cursorPosition.y > buttonPosition.y - (buttonSize.y * 0.5f) && cursorPosition.y < buttonPosition.y + (buttonSize.y * 0.5f))
+			if(cursorPosition.x < (buttonPosition.x + (buttonSize.x * 0.5f)))
 			{
-				if(isHoverable && _isHoverable)
+				if(cursorPosition.y > (buttonPosition.y - (buttonSize.y * 0.5f)))
 				{
-					_isHovered = true;
-
-					_fe3d->quad2d_setColor(_quadField->getEntityId(), _hoverColor);
-
-					if(_textField != nullptr)
+					if(cursorPosition.y < (buttonPosition.y + (buttonSize.y * 0.5f)))
 					{
-						_fe3d->text2d_setColor(_textField->getEntityId(), _textHoverColor);
+						if(isHoverable && _isHoverable)
+						{
+							_isHovered = true;
+						}
 					}
 				}
 			}
 		}
 
-		if(!_isHovered)
+		if(_isHovered)
 		{
-			_fe3d->quad2d_setColor(_quadField->getEntityId(), _quadField->getColor());
+			_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+
+			_quadField->setColor(_hoveredQuadColor);
 
 			if(_textField != nullptr)
 			{
-				_fe3d->text2d_setColor(_textField->getEntityId(), _textField->getInitialColor());
+				_textField->setColor(_hoveredTextColor);
+			}
+		}
+		else
+		{
+			_quadField->setColor(_defaultQuadColor);
+
+			if(_textField != nullptr)
+			{
+				_textField->setColor(_defaultTextColor);
 			}
 		}
 	}
-
-	if(_isHovered)
-	{
-		_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
-	}
 }
 
-void GuiButton::setHoverable(bool isHoverable)
+void GuiButton::setHoverable(bool value)
 {
-	_isHoverable = isHoverable;
-
-	if(isHoverable)
-	{
-		_fe3d->quad2d_setOpacity(_quadField->getEntityId(), 1.0f);
-
-		if(_textField != nullptr)
-		{
-			_fe3d->text2d_setOpacity(_textField->getEntityId(), 1.0f);
-		}
-	}
-	else
-	{
-		_fe3d->quad2d_setOpacity(_quadField->getEntityId(), 0.25f);
-
-		if(_textField != nullptr)
-		{
-			_fe3d->text2d_setOpacity(_textField->getEntityId(), 0.25f);
-		}
-	}
+	_isHoverable = value;
 }
 
-void GuiButton::changeTextContent(const string& content)
+void GuiButton::changeTextContent(const string & content)
 {
 	_textField->changeTextContent(content);
 
-	auto newQuadFieldSize = fvec2(_textField->getInitialSize() / fvec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));
-	_fe3d->quad2d_setSize(_quadField->getEntityId(), newQuadFieldSize);
+	auto newQuadFieldSize = fvec2(_textField->getSize() / fvec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));
+
+	_quadField->setSize(newQuadFieldSize);
 }
 
 const bool GuiButton::isHoverable() const
@@ -127,22 +121,17 @@ const bool GuiButton::isHovered() const
 	return _isHovered;
 }
 
-const string& GuiButton::getId() const
+const bool GuiButton::isVisible() const
+{
+	return _quadField->isVisible();
+}
+
+const string & GuiButton::getId() const
 {
 	return _id;
 }
 
-const string& GuiButton::getParentId() const
+const string & GuiButton::getParentId() const
 {
 	return _parentId;
-}
-
-const shared_ptr<GuiQuadField> GuiButton::getQuadField() const
-{
-	return _quadField;
-}
-
-const shared_ptr<GuiTextField> GuiButton::getTextField() const
-{
-	return _textField;
 }

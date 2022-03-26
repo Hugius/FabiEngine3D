@@ -70,72 +70,72 @@ void RenderStorage::setFinalSceneMap(shared_ptr<TextureBuffer> value)
 	_finalSceneTextureBuffer = value;
 }
 
-void RenderStorage::setShadowView(const mat44& value)
+void RenderStorage::setShadowView(const mat44 & value)
 {
 	_shadowView = value;
 }
 
-void RenderStorage::setShadowProjection(const mat44& value)
+void RenderStorage::setShadowProjection(const mat44 & value)
 {
 	_shadowProjection = value;
 }
 
-void RenderStorage::setMinPosition(const fvec3& value)
+void RenderStorage::setMinPosition(const fvec3 & value)
 {
 	_minPosition = value;
 }
 
-void RenderStorage::setMaxPosition(const fvec3& value)
+void RenderStorage::setMaxPosition(const fvec3 & value)
 {
 	_maxPosition = value;
 }
 
-void RenderStorage::setFlareSourceUv(const fvec2& value)
+void RenderStorage::setFlareSourceUv(const fvec2 & value)
 {
 	_flareSourceUv = fvec2(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f));
 }
 
-void RenderStorage::setAmbientLightingColor(const fvec3& value)
+void RenderStorage::setAmbientLightingColor(const fvec3 & value)
 {
 	_ambientLightingColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderStorage::setDirectionalLightingPosition(const fvec3& value)
+void RenderStorage::setDirectionalLightingPosition(const fvec3 & value)
 {
 	_directionalLightingPosition = value;
 }
 
-void RenderStorage::setDirectionalLightingColor(const fvec3& value)
+void RenderStorage::setDirectionalLightingColor(const fvec3 & value)
 {
 	_directionalLightingColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderStorage::setShadowPosition(const fvec3& value)
+void RenderStorage::setShadowPosition(const fvec3 & value)
 {
 	_shadowPosition = value;
 }
 
-void RenderStorage::setShadowPositionOffset(const fvec3& value)
+void RenderStorage::setShadowPositionOffset(const fvec3 & value)
 {
 	_shadowPositionOffset = value;
 }
 
-void RenderStorage::setShadowLookat(const fvec3& value)
+void RenderStorage::setShadowLookat(const fvec3 & value)
 {
 	_shadowLookat = value;
 }
 
-void RenderStorage::setShadowLookatOffset(const fvec3& value)
+void RenderStorage::setShadowLookatOffset(const fvec3 & value)
 {
 	_shadowLookatOffset = value;
 }
 
-void RenderStorage::setFogColor(const fvec3& value)
+void RenderStorage::setFogColor(const fvec3 & value)
 {
 	_fogColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderStorage::setFlareSourcePosition(const fvec3& value)
+void RenderStorage::setFlareSourcePosition(const fvec3 & value)
 {
 	_flareSourcePosition = value;
 }
@@ -180,7 +180,7 @@ void RenderStorage::setMotionBlurMixValue(float value)
 	_motionBlurMixValue = clamp(value, 0.0f, 1.0f);
 }
 
-void RenderStorage::setMotionBlurDifference(fvec2 value)
+void RenderStorage::setMotionBlurDifference(const fvec2 & value)
 {
 	_motionBlurDifference = value;
 }
@@ -363,12 +363,12 @@ void RenderStorage::setAnisotropicFilteringQuality(unsigned int value)
 	_anisotropicFilteringQuality = clamp(value, MIN_ANISOTROPIC_FILTERING_QUALITY, MAX_ANISOTROPIC_FILTERING_QUALITY);
 }
 
-void RenderStorage::setCursorEntityId(const string& value)
+void RenderStorage::setCursorEntityId(const string & value)
 {
 	_cursorEntityId = value;
 }
 
-void RenderStorage::setLensFlareMapPath(const string& value)
+void RenderStorage::setLensFlareMapPath(const string & value)
 {
 	_lensFlareMapPath = value;
 }
@@ -473,72 +473,72 @@ const shared_ptr<TextureBuffer> RenderStorage::getFinalSceneTextureBuffer() cons
 	return _finalSceneTextureBuffer;
 }
 
-const mat44& RenderStorage::getShadowView() const
+const mat44 & RenderStorage::getShadowView() const
 {
 	return _shadowView;
 }
 
-const mat44& RenderStorage::getShadowProjection() const
+const mat44 & RenderStorage::getShadowProjection() const
 {
 	return _shadowProjection;
 }
 
-const fvec3& RenderStorage::getMinPosition() const
+const fvec3 & RenderStorage::getMinPosition() const
 {
 	return _minPosition;
 }
 
-const fvec3& RenderStorage::getMaxPosition() const
+const fvec3 & RenderStorage::getMaxPosition() const
 {
 	return _maxPosition;
 }
 
-const fvec2& RenderStorage::getFlareSourceUv() const
+const fvec2 & RenderStorage::getFlareSourceUv() const
 {
 	return _flareSourceUv;
 }
 
-const fvec3& RenderStorage::getAmbientLightingColor() const
+const fvec3 & RenderStorage::getAmbientLightingColor() const
 {
 	return _ambientLightingColor;
 }
 
-const fvec3& RenderStorage::getDirectionalLightingPosition() const
+const fvec3 & RenderStorage::getDirectionalLightingPosition() const
 {
 	return _directionalLightingPosition;
 }
 
-const fvec3& RenderStorage::getShadowPosition() const
+const fvec3 & RenderStorage::getShadowPosition() const
 {
 	return _shadowPosition;
 }
 
-const fvec3& RenderStorage::getShadowPositionOffset() const
+const fvec3 & RenderStorage::getShadowPositionOffset() const
 {
 	return _shadowPositionOffset;
 }
 
-const fvec3& RenderStorage::getShadowLookat() const
+const fvec3 & RenderStorage::getShadowLookat() const
 {
 	return _shadowLookat;
 }
 
-const fvec3& RenderStorage::getShadowLookatOffset() const
+const fvec3 & RenderStorage::getShadowLookatOffset() const
 {
 	return _shadowLookatOffset;
 }
 
-const fvec3& RenderStorage::getFogColor() const
+const fvec3 & RenderStorage::getFogColor() const
 {
 	return _fogColor;
 }
 
-const fvec3& RenderStorage::getFlareSourcePosition() const
+const fvec3 & RenderStorage::getFlareSourcePosition() const
 {
 	return _flareSourcePosition;
 }
 
-const fvec3& RenderStorage::getDirectionalLightingColor() const
+const fvec3 & RenderStorage::getDirectionalLightingColor() const
 {
 	return _directionalLightingColor;
 }
@@ -833,12 +833,12 @@ const BloomType RenderStorage::getBloomType() const
 	return _bloomType;
 }
 
-const string& RenderStorage::getCursorEntityId() const
+const string & RenderStorage::getCursorEntityId() const
 {
 	return _cursorEntityId;
 }
 
-const string& RenderStorage::getLensFlareMapPath() const
+const string & RenderStorage::getLensFlareMapPath() const
 {
 	return _lensFlareMapPath;
 }

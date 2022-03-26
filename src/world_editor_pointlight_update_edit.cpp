@@ -17,7 +17,7 @@ void WorldEditor::_updatePointlightEditing()
 			_dontResetSelectedPointlight = false;
 		}
 
-		for(const auto& pointlightId : _loadedPointlightIds)
+		for(const auto & pointlightId : _loadedPointlightIds)
 		{
 			const auto isHovered = (hoveredAabbId == ("@@lamp_" + pointlightId));
 
@@ -170,15 +170,15 @@ void WorldEditor::_updatePointlightEditing()
 			_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
 			_fe3d->pointlight_setIntensity(_activePointlightId, intensity);
 
-			const auto quad2dEntityId = screen->getButton("shape")->getQuadField()->getEntityId();
-			if(_fe3d->pointlight_getShape(_activePointlightId) == PointlightShape::CIRCLE)
-			{
-				_fe3d->quad2d_setDiffuseMap(quad2dEntityId, "engine\\assets\\image\\diffuse_map\\shape_circle.tga");
-			}
-			else
-			{
-				_fe3d->quad2d_setDiffuseMap(quad2dEntityId, "engine\\assets\\image\\diffuse_map\\shape_square.tga");
-			}
+			//const auto quad2dEntityId = screen->getButton("shape")->getQuadField()->getEntityId();
+			//if(_fe3d->pointlight_getShape(_activePointlightId) == PointlightShape::CIRCLE)
+			//{
+			//	_fe3d->quad2d_setDiffuseMap(quad2dEntityId, "engine\\assets\\image\\diffuse_map\\shape_circle.tga");
+			//}
+			//else
+			//{
+			//	_fe3d->quad2d_setDiffuseMap(quad2dEntityId, "engine\\assets\\image\\diffuse_map\\shape_square.tga");
+			//}
 		}
 	}
 }

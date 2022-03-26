@@ -49,7 +49,7 @@ void GuiInputField::_updateTyping()
 			passedBarFrames++;
 		}
 
-		if((static_cast<float>(_currentTextContent.size() + 1) * CHAR_WIDTH) < _textField->getInitialSize().x)
+		if((static_cast<float>(_currentTextContent.size() + 1) * CHAR_WIDTH) < _textField->getSize().x)
 		{
 			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
 

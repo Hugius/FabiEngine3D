@@ -16,24 +16,24 @@ void WorldEditor::_load()
 	_waterEditor->loadEntitiesFromFile();
 
 	_modelEditor->loadEntitiesFromFile();
-	for(const auto& id : _modelEditor->getLoadedEntityIds())
+	for(const auto & id : _modelEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace");
-		screen->getScrollingList("modelList")->createButton(id, id.substr(1));
+		screen->getScrollingList("modelList")->createButton(id, id.substr(1), fvec2(0.9f, 0.1f));
 	}
 
 	_quad3dEditor->loadEntitiesFromFile();
-	for(const auto& id : _quad3dEditor->getLoadedEntityIds())
+	for(const auto & id : _quad3dEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace");
-		screen->getScrollingList("quad3dList")->createButton(id, id.substr(1));
+		screen->getScrollingList("quad3dList")->createButton(id, id.substr(1), fvec2(0.9f, 0.1f));
 	}
 
 	_text3dEditor->loadEntitiesFromFile();
-	for(const auto& id : _text3dEditor->getLoadedEntityIds())
+	for(const auto & id : _text3dEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace");
-		screen->getScrollingList("text3dList")->createButton(id, id.substr(1));
+		screen->getScrollingList("text3dList")->createButton(id, id.substr(1), fvec2(0.9f, 0.1f));
 	}
 
 	_animation2dEditor->loadAnimationsFromFile();
@@ -76,14 +76,14 @@ void WorldEditor::_load()
 	_fe3d->model_setShadowed(TEMPLATE_SPEAKER_ID, false);
 	_fe3d->model_setReflected(TEMPLATE_SPEAKER_ID, false);
 	_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-	for(const auto& id : _soundEditor->getLoadedSoundIds())
+	for(const auto & id : _soundEditor->getLoadedSoundIds())
 	{
 		_fe3d->sound3d_create(id, _fe3d->sound2d_getAudioPath(id));
 		_fe3d->sound3d_setMaxVolume(id, DEFAULT_SOUND_MAX_VOLUME);
 		_fe3d->sound3d_setMaxDistance(id, DEFAULT_SOUND_MAX_DISTANCE);
 
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundPlace");
-		screen->getScrollingList("soundList")->createButton(id, id.substr(1));
+		screen->getScrollingList("soundList")->createButton(id, id.substr(1), fvec2(0.9f, 0.1f));
 	}
 
 	_gui->getOverlay()->createTextField("selectedId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
@@ -110,7 +110,7 @@ void WorldEditor::_unload()
 	_fe3d->spotlight_delete(TEMPLATE_SPOTLIGHT_ID);
 	_fe3d->reflection_delete(TEMPLATE_REFLECTION_ID);
 
-	for(const auto& id : _soundEditor->getLoadedSoundIds())
+	for(const auto & id : _soundEditor->getLoadedSoundIds())
 	{
 		_fe3d->sound3d_delete(id);
 	}

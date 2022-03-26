@@ -1,35 +1,35 @@
 #include "gui_overlay.hpp"
 #include "logger.hpp"
 
-void GuiOverlay::createValueForm(const string& id, const string& title, unsigned int value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition)
+void GuiOverlay::createValueForm(const string & id, const string & title, unsigned int value, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition)
 {
 	_createValueForm(id, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, false);
 }
 
-void GuiOverlay::createValueForm(const string& id, const string& title, int value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition)
+void GuiOverlay::createValueForm(const string & id, const string & title, int value, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition)
 {
 	_createValueForm(id, title, to_string(value), position, size, buttonsPosition, true, true);
 }
 
-void GuiOverlay::createValueForm(const string& id, const string& title, float value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition)
+void GuiOverlay::createValueForm(const string & id, const string & title, float value, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition)
 {
 	_createValueForm(id, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, true);
 }
 
-void GuiOverlay::createValueForm(const string& id, const string& title, double value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition)
+void GuiOverlay::createValueForm(const string & id, const string & title, double value, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition)
 {
 	_createValueForm(id, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, true);
 }
 
-void GuiOverlay::createValueForm(const string& id, const string& title, const string& value, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition)
+void GuiOverlay::createValueForm(const string & id, const string & title, const string & value, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition)
 {
 	_createValueForm(id, title, value, position, size, buttonsPosition, false, false);
 }
 
-const bool GuiOverlay::checkValueForm(const string& id, unsigned int& value, const vector<unsigned int>& forbiddenValues)
+const bool GuiOverlay::checkValueForm(const string & id, unsigned int & value, const vector<unsigned int> & forbiddenValues)
 {
 	vector<string> forbiddenValueStrings;
-	for(const auto& forbiddenValue : forbiddenValues)
+	for(const auto & forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(forbiddenValue));
 	}
@@ -41,10 +41,10 @@ const bool GuiOverlay::checkValueForm(const string& id, unsigned int& value, con
 	return result;
 }
 
-const bool GuiOverlay::checkValueForm(const string& id, int& value, const vector<int>& forbiddenValues)
+const bool GuiOverlay::checkValueForm(const string & id, int & value, const vector<int> & forbiddenValues)
 {
 	vector<string> forbiddenValueStrings;
-	for(const auto& forbiddenValue : forbiddenValues)
+	for(const auto & forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(forbiddenValue));
 	}
@@ -56,10 +56,10 @@ const bool GuiOverlay::checkValueForm(const string& id, int& value, const vector
 	return result;
 }
 
-const bool GuiOverlay::checkValueForm(const string& id, float& value, const vector<float>& forbiddenValues)
+const bool GuiOverlay::checkValueForm(const string & id, float & value, const vector<float> & forbiddenValues)
 {
 	vector<string> forbiddenValueStrings;
-	for(const auto& forbiddenValue : forbiddenValues)
+	for(const auto & forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(static_cast<int>(forbiddenValue)));
 	}
@@ -71,10 +71,10 @@ const bool GuiOverlay::checkValueForm(const string& id, float& value, const vect
 	return result;
 }
 
-const bool GuiOverlay::checkValueForm(const string& id, double& value, const vector<double>& forbiddenValues)
+const bool GuiOverlay::checkValueForm(const string & id, double & value, const vector<double> & forbiddenValues)
 {
 	vector<string> forbiddenValueStrings;
-	for(const auto& forbiddenValue : forbiddenValues)
+	for(const auto & forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(static_cast<int>(forbiddenValue)));
 	}
@@ -86,7 +86,7 @@ const bool GuiOverlay::checkValueForm(const string& id, double& value, const vec
 	return result;
 }
 
-const bool GuiOverlay::checkValueForm(const string& id, string& value, const vector<string>& forbiddenValues)
+const bool GuiOverlay::checkValueForm(const string & id, string & value, const vector<string> & forbiddenValues)
 {
 	return _checkValueForm(id, value, forbiddenValues);
 }
@@ -101,12 +101,12 @@ const bool GuiOverlay::isValueFormCancelled() const
 	return (_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered());
 }
 
-const bool GuiOverlay::isValueFormExisting(const string& id) const
+const bool GuiOverlay::isValueFormExisting(const string & id) const
 {
 	return find(_valueFormIds.begin(), _valueFormIds.end(), id) != _valueFormIds.end();
 }
 
-void GuiOverlay::_createValueForm(const string& id, const string& title, const string& valueString, const fvec2& position, const fvec2& size, const fvec2& buttonsPosition, bool onlyNumbers, bool minusAllowed)
+void GuiOverlay::_createValueForm(const string & id, const string & title, const string & valueString, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition, bool onlyNumbers, bool minusAllowed)
 {
 	if(isValueFormExisting(id))
 	{
@@ -125,14 +125,14 @@ void GuiOverlay::_createValueForm(const string& id, const string& title, const s
 		_isFocused = true;
 	}
 
-	if(!isButtonExisting("value_form_done"))
+	if(!hasButton("value_form_done"))
 	{
 		createButton("value_form_done", buttonsPosition + fvec2(-0.15f, -0.2f), fvec2(0.12f, 0.1f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), "Done", fvec3(1.0f), fvec3(0.0f), true);
 		createButton("value_form_cancel", buttonsPosition + fvec2(0.15f, -0.2f), fvec2(0.18f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "Cancel", fvec3(1.0f), fvec3(0.0f), true);
 	}
 }
 
-const bool GuiOverlay::_checkValueForm(const string& id, string& valueString, const vector<string>& forbiddenValueStrings)
+const bool GuiOverlay::_checkValueForm(const string & id, string & valueString, const vector<string> & forbiddenValueStrings)
 {
 	bool changed = false;
 
@@ -153,7 +153,7 @@ const bool GuiOverlay::_checkValueForm(const string& id, string& valueString, co
 					return false;
 				}
 
-				for(const auto& forbiddenValue : forbiddenValueStrings)
+				for(const auto & forbiddenValue : forbiddenValueStrings)
 				{
 					if(content == forbiddenValue)
 					{
@@ -182,7 +182,7 @@ const bool GuiOverlay::_checkValueForm(const string& id, string& valueString, co
 	return changed;
 }
 
-void GuiOverlay::createChoiceForm(const string& id, const string& title, const fvec2& position, const vector<string>& buttonTitles)
+void GuiOverlay::createChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles)
 {
 	if(!_choiceFormId.empty())
 	{
@@ -194,25 +194,25 @@ void GuiOverlay::createChoiceForm(const string& id, const string& title, const f
 	createScrollingList(id, position, fvec2(0.5, 0.75f), fvec3(0.25f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), fvec3(1.0f), fvec3(0.0f), fvec2(0.075f, 0.2f), true);
 	createButton("choice_form_cancel", position + fvec2(0.0f, -0.45f), fvec2(0.15f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "Cancel", fvec3(1.0f), fvec3(0.0f), true);
 
-	for(const auto& buttonTitle : buttonTitles)
+	for(const auto & buttonTitle : buttonTitles)
 	{
 		if(buttonTitle.empty())
 		{
 			abort();
 		}
 
-		getScrollingList(id)->createButton(buttonTitle, buttonTitle);
+		getScrollingList(id)->createButton(buttonTitle, buttonTitle, fvec2(0.9f, 0.1f));
 	}
 
 	_isFocused = true;
 	_choiceFormId = id;
 }
 
-const string GuiOverlay::checkChoiceForm(const string& id) const
+const string GuiOverlay::checkChoiceForm(const string & id) const
 {
 	if(id == _choiceFormId)
 	{
-		for(const auto& [buttonId, button] : getScrollingList(id)->getButtons())
+		for(const auto & button : getScrollingList(id)->getButtons())
 		{
 			if(button->isHovered())
 			{
@@ -224,7 +224,7 @@ const string GuiOverlay::checkChoiceForm(const string& id) const
 	return "";
 }
 
-const bool GuiOverlay::isChoiceFormCancelled(const string& id) const
+const bool GuiOverlay::isChoiceFormCancelled(const string & id) const
 {
 	if(id == _choiceFormId)
 	{
@@ -236,7 +236,7 @@ const bool GuiOverlay::isChoiceFormCancelled(const string& id) const
 	}
 }
 
-void GuiOverlay::deleteChoiceForm(const string& id)
+void GuiOverlay::deleteChoiceForm(const string & id)
 {
 	if(id != _choiceFormId)
 	{
@@ -252,12 +252,12 @@ void GuiOverlay::deleteChoiceForm(const string& id)
 	_choiceFormId = "";
 }
 
-const bool GuiOverlay::isChoiceFormExisting(const string& id) const
+const bool GuiOverlay::isChoiceFormExisting(const string & id) const
 {
 	return (id == _choiceFormId);
 }
 
-void GuiOverlay::createAnswerForm(const string& id, const string& title, const fvec2& position)
+void GuiOverlay::createAnswerForm(const string & id, const string & title, const fvec2 & position)
 {
 	if(!_answerFormId.empty())
 	{
@@ -273,7 +273,7 @@ void GuiOverlay::createAnswerForm(const string& id, const string& title, const f
 	_answerFormId = id;
 }
 
-const bool GuiOverlay::isAnswerFormConfirmed(const string& id)
+const bool GuiOverlay::isAnswerFormConfirmed(const string & id)
 {
 	if(id == _answerFormId)
 	{
@@ -289,9 +289,9 @@ const bool GuiOverlay::isAnswerFormConfirmed(const string& id)
 	return false;
 }
 
-const bool GuiOverlay::isAnswerFormDenied(const string& id)
+const bool GuiOverlay::isAnswerFormDenied(const string & id)
 {
-	if(isButtonExisting("answer_form_no") && (id == _answerFormId))
+	if(hasButton("answer_form_no") && (id == _answerFormId))
 	{
 		if(getButton("answer_form_no")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
@@ -305,7 +305,7 @@ const bool GuiOverlay::isAnswerFormDenied(const string& id)
 	return false;
 }
 
-void GuiOverlay::_deleteAnswerForm(const string& id)
+void GuiOverlay::_deleteAnswerForm(const string & id)
 {
 	if(id != _answerFormId)
 	{
@@ -321,7 +321,7 @@ void GuiOverlay::_deleteAnswerForm(const string& id)
 	_answerFormId = "";
 }
 
-const bool GuiOverlay::isAnswerFormExisting(const string& id) const
+const bool GuiOverlay::isAnswerFormExisting(const string & id) const
 {
 	return (id == _answerFormId);
 }
@@ -330,7 +330,7 @@ void GuiOverlay::_updateValueFormDeleting()
 {
 	if(_mustDeleteValueForms)
 	{
-		for(const auto& tempId : _valueFormIds)
+		for(const auto & tempId : _valueFormIds)
 		{
 			deleteQuadField(tempId);
 			deleteTextField(tempId);

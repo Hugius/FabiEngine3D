@@ -9,7 +9,7 @@ public:
 	GuiWindow(shared_ptr<EngineInterface> fe3d, const string& id, const string& parentId, const fvec2& position, const fvec2& size, const fvec3& color);
 	~GuiWindow();
 
-	void update(bool isHoverable);
+	void update(bool isFocused);
 	void createScreen(const string& id);
 	void deleteScreen(const string& id);
 	void deleteScreens();

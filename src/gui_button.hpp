@@ -10,22 +10,28 @@ public:
 	GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered);
 	GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & texturePath, const fvec3 & hoveredQuadColor, bool isCentered);
 
-	virtual void update(bool isHoverable);
+	virtual void update(bool isFocused);
 	virtual void changeTextContent(const string & content);
 
 	void setVisible(bool value);
 	void setHoverable(bool value);
+	void setPosition(const fvec2 & value);
+	void setSize(const fvec2 & value);
+	void setMinPosition(const fvec2 & value);
+	void setMaxPosition(const fvec2 & value);
 
 	const string & getId() const;
 	const string & getParentId() const;
 
+	const fvec2 & getPosition() const;
+	const fvec2 & getSize() const;
+
 	const bool isHoverable() const;
 	const bool isHovered() const;
-
 	const bool isVisible() const;
 
 protected:
-	void _updateHovering(bool isHoverable);
+	void _updateHovering(bool isFocused);
 
 	const string _id;
 	const string _parentId;
@@ -38,7 +44,6 @@ protected:
 	shared_ptr<GuiQuadField> _quadField = nullptr;
 	shared_ptr<GuiTextField> _textField = nullptr;
 
-	bool _isVisible = true;
 	bool _isHovered = false;
 	bool _isHoverable = true;
 

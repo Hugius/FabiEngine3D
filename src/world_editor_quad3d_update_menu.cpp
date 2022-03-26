@@ -29,9 +29,9 @@ void WorldEditor::_updateQuad3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButtons();
 
-			for(auto& [key, templateId] : _loadedQuadIds)
+			for(auto & [key, templateId] : _loadedQuadIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createButton(key, key);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createButton(key, key, fvec2(0.9f, 0.1f));
 			}
 		}
 
@@ -52,7 +52,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& quadId : _quad3dEditor->getLoadedEntityIds())
+			for(const auto & quadId : _quad3dEditor->getLoadedEntityIds())
 			{
 				if(_fe3d->quad3d_isExisting(quadId))
 				{
@@ -92,7 +92,7 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuQuad3dChoice")
 	{
-		for(const auto& [buttonId, button] : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->getButtons())
+		for(const auto & button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->getButtons())
 		{
 			if(!_fe3d->quad3d_isExisting(button->getId()))
 			{
@@ -101,7 +101,7 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 			}
 		}
 
-		for(auto& [key, templateId] : _loadedQuadIds)
+		for(auto & [key, templateId] : _loadedQuadIds)
 		{
 			if(screen->getScrollingList("quad3dList")->getButton(key)->isHovered())
 			{

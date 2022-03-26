@@ -1,264 +1,221 @@
 #include "gui_overlay.hpp"
-#include "logger.hpp"
 
-void GuiOverlay::createScrollingList(const string& id, const fvec2& position, const fvec2& size, const fvec3& color,
-									 const fvec3& buttonColor, const fvec3& buttonHoverColor, const fvec3& textColor, const fvec3& textHoverColor, const fvec2& charSize, bool isCentered)
+void GuiOverlay::createScrollingList(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & buttonColor, const fvec3 & buttonHoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, const fvec2 & charSize, bool isCentered)
 {
-	_scrollingLists.push_back(make_shared<GuiScrollingList>(_fe3d, "overlay", id, position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize, isCentered));
+	_scrollingLists.insert({id, make_shared<GuiScrollingList>(_fe3d, id, "overlay", position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize, isCentered)});
 }
 
-void GuiOverlay::createInputField(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor,
-								  bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+void GuiOverlay::createInputField(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 {
-	_inputFields.push_back(make_shared<GuiInputField>(_fe3d, "overlay", id, position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered));
+	_inputFields.insert({id, make_shared<GuiInputField>(_fe3d, id, "overlay", position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered)});
 }
 
-void GuiOverlay::createButton(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const string& textContent, const fvec3& textColor, const fvec3& textHoverColor, bool isCentered)
+void GuiOverlay::createButton(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const string & textContent, const fvec3 & textColor, const fvec3 & textHoverColor, bool isCentered)
 {
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, "overlay", id, position, size, color, hoverColor, textContent, textColor, textHoverColor, isCentered));
+	_buttons.insert({id, make_shared<GuiButton>(_fe3d, id, "overlay", position, size, color, hoverColor, textContent, textColor, textHoverColor, isCentered)});
 }
 
-void GuiOverlay::createButton(const string& id, const fvec2& position, const fvec2& size, const string& texturePath, const fvec3& hoverColor, bool isCentered)
+void GuiOverlay::createButton(const string & id, const fvec2 & position, const fvec2 & size, const string & texturePath, const fvec3 & hoverColor, bool isCentered)
 {
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, "overlay", id, position, size, texturePath, hoverColor, isCentered));
+	_buttons.insert({id, make_shared<GuiButton>(_fe3d, id, "overlay", position, size, texturePath, hoverColor, isCentered)});
 }
 
-void GuiOverlay::createQuadField(const string& id, const fvec2& position, const fvec2& size, const fvec3& color, bool isCentered)
+void GuiOverlay::createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, bool isCentered)
 {
-	_quadFields.push_back(make_shared<GuiQuadField>(_fe3d, "overlay", id, position, size, color, isCentered));
+	_quadFields.insert({id, make_shared<GuiQuadField>(_fe3d, id, "overlay", position, size, color, isCentered)});
 }
 
-void GuiOverlay::createQuadField(const string& id, const fvec2& position, const fvec2& size, const string& texturePath, bool isCentered)
+void GuiOverlay::createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const string & texturePath, bool isCentered)
 {
-	_quadFields.push_back(make_shared<GuiQuadField>(_fe3d, "overlay", id, position, size, texturePath, isCentered));
+	_quadFields.insert({id, make_shared<GuiQuadField>(_fe3d, id, "overlay", position, size, texturePath, isCentered)});
 }
 
-void GuiOverlay::createTextField(const string& id, const fvec2& position, const fvec2& size, const string& textContent, const fvec3& textColor, bool isCentered)
+void GuiOverlay::createTextField(const string & id, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & textColor, bool isCentered)
 {
-	_textFields.push_back(make_shared<GuiTextField>(_fe3d, "overlay", id, position, size, textContent, textColor, isCentered));
+	_textFields.insert({id, make_shared<GuiTextField>(_fe3d, id, "overlay", position, size, textContent, textColor, isCentered)});
 }
 
-const bool GuiOverlay::isScrollingListExisting(const string& id) const
+const bool GuiOverlay::hasScrollingList(const string & id) const
 {
-	for(const auto& scrollingList : _scrollingLists)
+	return (_scrollingLists.find(id) != _scrollingLists.end());
+}
+
+const bool GuiOverlay::hasInputField(const string & id) const
+{
+	return (_inputFields.find(id) != _inputFields.end());
+}
+
+const bool GuiOverlay::hasButton(const string & id) const
+{
+	return (_buttons.find(id) != _buttons.end());
+}
+
+const bool GuiOverlay::hasQuadField(const string & id) const
+{
+	return (_quadFields.find(id) != _quadFields.end());
+}
+
+const bool GuiOverlay::hasTextField(const string & id) const
+{
+	return (_textFields.find(id) != _textFields.end());
+}
+
+const shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string & id) const
+{
+	auto iterator = _scrollingLists.find(id);
+
+	if(iterator == _scrollingLists.end())
 	{
-		if(id == scrollingList->getId())
-		{
-			return true;
-		}
+		abort();
 	}
 
-	return false;
+	return iterator->second;
 }
 
-const bool GuiOverlay::isInputFieldExisting(const string& id) const
+const shared_ptr<GuiInputField> GuiOverlay::getInputField(const string & id) const
 {
-	for(const auto& inputField : _inputFields)
+	auto iterator = _inputFields.find(id);
+
+	if(iterator == _inputFields.end())
 	{
-		if(id == inputField->getId())
-		{
-			return true;
-		}
+		abort();
 	}
 
-	return false;
+	return iterator->second;
 }
 
-const bool GuiOverlay::isButtonExisting(const string& id) const
+const shared_ptr<GuiButton> GuiOverlay::getButton(const string & id) const
 {
-	for(const auto& button : _buttons)
+	auto iterator = _buttons.find(id);
+
+	if(iterator == _buttons.end())
 	{
-		if(id == button->getId())
-		{
-			return true;
-		}
+		abort();
 	}
 
-	return false;
+	return iterator->second;
 }
 
-const bool GuiOverlay::isQuadFieldExisting(const string& id) const
+const shared_ptr<GuiQuadField> GuiOverlay::getQuadField(const string & id) const
 {
-	for(const auto& quadField : _quadFields)
+	auto iterator = _quadFields.find(id);
+
+	if(iterator == _quadFields.end())
 	{
-		if(id == quadField->getId())
-		{
-			return true;
-		}
+		abort();
 	}
 
-	return false;
+	return iterator->second;
 }
 
-const bool GuiOverlay::isTextFieldExisting(const string& id) const
+const shared_ptr<GuiTextField> GuiOverlay::getTextField(const string & id) const
 {
-	for(const auto& textField : _textFields)
+	auto iterator = _textFields.find(id);
+
+	if(iterator == _textFields.end())
 	{
-		if(id == textField->getId())
-		{
-			return true;
-		}
+		abort();
 	}
 
-	return false;
+	return iterator->second;
 }
 
-const shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string& id) const
-{
-	for(const auto& scrollingList : _scrollingLists)
-	{
-		if(id == scrollingList->getId())
-		{
-			return scrollingList;
-		}
-	}
-
-	abort();
-}
-
-const shared_ptr<GuiInputField> GuiOverlay::getInputField(const string& id) const
-{
-	for(const auto& inputField : _inputFields)
-	{
-		if(id == inputField->getId())
-		{
-			return inputField;
-		}
-	}
-
-	abort();
-}
-
-const shared_ptr<GuiButton> GuiOverlay::getButton(const string& id) const
-{
-	for(const auto& button : _buttons)
-	{
-		if(id == button->getId())
-		{
-			return button;
-		}
-	}
-
-	abort();
-}
-
-const shared_ptr<GuiQuadField> GuiOverlay::getQuadField(const string& id) const
-{
-	for(const auto& quadField : _quadFields)
-	{
-		if(id == quadField->getId())
-		{
-			return quadField;
-		}
-	}
-
-	abort();
-}
-
-const shared_ptr<GuiTextField> GuiOverlay::getTextField(const string& id) const
-{
-	for(const auto& textField : _textFields)
-	{
-		if(id == textField->getId())
-		{
-			return textField;
-		}
-	}
-
-	abort();
-}
-
-const vector<shared_ptr<GuiScrollingList>>& GuiOverlay::getScrollingLists() const
+const unordered_map<string, shared_ptr<GuiScrollingList>> & GuiOverlay::getScrollingLists() const
 {
 	return _scrollingLists;
 }
 
-const vector<shared_ptr<GuiInputField>>& GuiOverlay::getInputFields() const
+const unordered_map<string, shared_ptr<GuiInputField>> & GuiOverlay::getInputFields() const
 {
 	return _inputFields;
 }
 
-const vector<shared_ptr<GuiButton>>& GuiOverlay::getButtons() const
+const unordered_map<string, shared_ptr<GuiButton>> & GuiOverlay::getButtons() const
 {
 	return _buttons;
 }
 
-const vector<shared_ptr<GuiQuadField>>& GuiOverlay::getQuadFields() const
+const unordered_map<string, shared_ptr<GuiQuadField>> & GuiOverlay::getQuadFields() const
 {
 	return _quadFields;
 }
 
-const vector<shared_ptr<GuiTextField>>& GuiOverlay::getTextFields() const
+const unordered_map<string, shared_ptr<GuiTextField>> & GuiOverlay::getTextFields() const
 {
 	return _textFields;
 }
 
-void GuiOverlay::deleteScrollingList(const string& id)
+void GuiOverlay::deleteScrollingList(const string & id)
 {
-	for(unsigned int index = 0; index < _scrollingLists.size(); index++)
+	if(!hasScrollingList(id))
 	{
-		if(id == _scrollingLists[index]->getId())
-		{
-			_scrollingLists.erase(_scrollingLists.begin() + index);
-			return;
-		}
+		abort();
 	}
 
-	abort();
+	_scrollingLists.erase(id);
 }
 
-void GuiOverlay::deleteInputField(const string& id)
+void GuiOverlay::deleteInputField(const string & id)
 {
-	for(unsigned int index = 0; index < _inputFields.size(); index++)
+	if(!hasInputField(id))
 	{
-		if(id == _inputFields[index]->getId())
-		{
-			_inputFields.erase(_inputFields.begin() + index);
-			return;
-		}
+		abort();
 	}
 
-	abort();
+	_inputFields.erase(id);
 }
 
-void GuiOverlay::deleteButton(const string& id)
+void GuiOverlay::deleteButton(const string & id)
 {
-	for(unsigned int index = 0; index < _buttons.size(); index++)
+	if(!hasButton(id))
 	{
-		if(id == _buttons[index]->getId())
-		{
-			_buttons.erase(_buttons.begin() + index);
-			return;
-		}
+		abort();
 	}
 
-	abort();
+	_buttons.erase(id);
 }
 
-void GuiOverlay::deleteQuadField(const string& id)
+void GuiOverlay::deleteQuadField(const string & id)
 {
-	for(unsigned int index = 0; index < _quadFields.size(); index++)
+	if(!hasQuadField(id))
 	{
-		if(id == _quadFields[index]->getId())
-		{
-			_quadFields.erase(_quadFields.begin() + index);
-			return;
-		}
+		abort();
 	}
 
-	abort();
+	_quadFields.erase(id);
 }
 
-void GuiOverlay::deleteTextField(const string& id)
+void GuiOverlay::deleteTextField(const string & id)
 {
-	for(unsigned int index = 0; index < _textFields.size(); index++)
+	if(!hasTextField(id))
 	{
-		if(id == _textFields[index]->getId())
-		{
-			_textFields.erase(_textFields.begin() + index);
-			return;
-		}
+		abort();
 	}
 
-	abort();
+	_textFields.erase(id);
+}
+
+void GuiOverlay::deleteScrollingLists()
+{
+	_scrollingLists.clear();
+}
+
+void GuiOverlay::deleteInputFields()
+{
+	_inputFields.clear();
+}
+
+void GuiOverlay::deleteButtons()
+{
+	_buttons.clear();
+}
+
+void GuiOverlay::deleteQuadFields()
+{
+	_quadFields.clear();
+}
+
+void GuiOverlay::deleteTextFields()
+{
+	_textFields.clear();
 }

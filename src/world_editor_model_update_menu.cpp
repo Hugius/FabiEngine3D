@@ -29,9 +29,9 @@ void WorldEditor::_updateModelMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
-			for(auto& [key, templateId] : _loadedModelIds)
+			for(auto & [key, templateId] : _loadedModelIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createButton(key, key);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createButton(key, key, fvec2(0.9f, 0.1f));
 			}
 		}
 
@@ -52,7 +52,7 @@ void WorldEditor::_updateModelPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& modelId : _modelEditor->getLoadedEntityIds())
+			for(const auto & modelId : _modelEditor->getLoadedEntityIds())
 			{
 				if(_fe3d->model_isExisting(modelId))
 				{
@@ -93,7 +93,7 @@ void WorldEditor::_updateModelChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuModelChoice")
 	{
-		for(const auto& [buttonId, button] : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
+		for(const auto & button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
 		{
 			if(!_fe3d->model_isExisting(button->getId()))
 			{
@@ -102,7 +102,7 @@ void WorldEditor::_updateModelChoosingMenu()
 			}
 		}
 
-		for(auto& [key, templateId] : _loadedModelIds)
+		for(auto & [key, templateId] : _loadedModelIds)
 		{
 			if(screen->getScrollingList("modelList")->getButton(key)->isHovered())
 			{

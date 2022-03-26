@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& id, const string& parentId, const fvec2& position, const fvec2& size, const fvec3& color)
+GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -20,17 +20,19 @@ GuiWindow::~GuiWindow()
 	_fe3d->quad2d_delete(_entityId);
 }
 
-void GuiWindow::update(bool isHoverable)
+void GuiWindow::update(bool isFocused)
 {
 	_updateHovering();
 
-	for(const auto& [screenId, screen] : _screens)
+	for(const auto & [screenId, screen] : _screens)
 	{
-		screen->update(isHoverable);
+		screen->update(isFocused);
+
+		screen->setVisible(screenId == _activeScreenId);
 	}
 }
 
-const bool GuiWindow::hasScreen(const string& id) const
+const bool GuiWindow::hasScreen(const string & id) const
 {
 	return (_screens.find(id) != _screens.end());
 }
@@ -63,32 +65,32 @@ void GuiWindow::_updateHovering()
 	}
 }
 
-const string& GuiWindow::getId() const
+const string & GuiWindow::getId() const
 {
 	return _id;
 }
 
-const string& GuiWindow::getParentId() const
+const string & GuiWindow::getParentId() const
 {
 	return _parentId;
 }
 
-const fvec3& GuiWindow::getColor() const
+const fvec3 & GuiWindow::getColor() const
 {
 	return _fe3d->quad2d_getColor(_entityId);
 }
 
-const fvec2& GuiWindow::getPosition() const
+const fvec2 & GuiWindow::getPosition() const
 {
 	return _fe3d->quad2d_getPosition(_entityId);
 }
 
-const fvec2& GuiWindow::getSize() const
+const fvec2 & GuiWindow::getSize() const
 {
 	return _fe3d->quad2d_getSize(_entityId);
 }
 
-void GuiWindow::createScreen(const string& id)
+void GuiWindow::createScreen(const string & id)
 {
 	if(hasScreen(id))
 	{
@@ -98,7 +100,7 @@ void GuiWindow::createScreen(const string& id)
 	_screens.insert({id, make_shared<GuiScreen>(_fe3d, id, (_parentId + "_" + _id), getPosition(), getSize())});
 }
 
-void GuiWindow::deleteScreen(const string& id)
+void GuiWindow::deleteScreen(const string & id)
 {
 	if(!hasScreen(id))
 	{
@@ -118,19 +120,17 @@ void GuiWindow::deleteScreens()
 	_screens.clear();
 }
 
-void GuiWindow::setActiveScreen(const string& id)
+void GuiWindow::setActiveScreen(const string & id)
 {
-	if(!_activeScreenId.empty())
+	if(!hasScreen(id))
 	{
-		getActiveScreen()->setVisible(false);
+		abort();
 	}
 
 	_activeScreenId = id;
-
-	getActiveScreen()->setVisible(true);
 }
 
-const unordered_map<string, shared_ptr<GuiScreen>>& GuiWindow::getScreens() const
+const unordered_map<string, shared_ptr<GuiScreen>> & GuiWindow::getScreens() const
 {
 	return _screens;
 }
@@ -140,7 +140,7 @@ const shared_ptr<GuiScreen> GuiWindow::getActiveScreen() const
 	return getScreen(_activeScreenId);
 }
 
-const shared_ptr<GuiScreen> GuiWindow::getScreen(const string& id) const
+const shared_ptr<GuiScreen> GuiWindow::getScreen(const string & id) const
 {
 	auto iterator = _screens.find(id);
 

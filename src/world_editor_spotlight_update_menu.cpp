@@ -50,9 +50,9 @@ void WorldEditor::_updateSpotlightMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->deleteButtons();
 
-			for(auto& id : _loadedSpotlightIds)
+			for(auto & id : _loadedSpotlightIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createButton(id, id);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createButton(id, id, fvec2(0.9f, 0.1f));
 			}
 		}
 
@@ -66,7 +66,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuSpotlightChoice")
 	{
-		for(const auto& [buttonId, button] : screen->getScrollingList("spotlightList")->getButtons())
+		for(const auto & button : screen->getScrollingList("spotlightList")->getButtons())
 		{
 			if(!_fe3d->spotlight_isExisting(button->getId()))
 			{
@@ -75,7 +75,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 			}
 		}
 
-		for(auto& id : _loadedSpotlightIds)
+		for(auto & id : _loadedSpotlightIds)
 		{
 			if(screen->getScrollingList("spotlightList")->getButton(id)->isHovered())
 			{

@@ -29,9 +29,9 @@ void WorldEditor::_updateText3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteButtons();
 
-			for(auto& [key, templateId] : _loadedTextIds)
+			for(auto & [key, templateId] : _loadedTextIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createButton(key, key);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createButton(key, key, fvec2(0.9f, 0.1f));
 			}
 		}
 
@@ -52,7 +52,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& textId : _text3dEditor->getLoadedEntityIds())
+			for(const auto & textId : _text3dEditor->getLoadedEntityIds())
 			{
 				if(_fe3d->text3d_isExisting(textId))
 				{
@@ -92,7 +92,7 @@ void WorldEditor::_updateText3dChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuText3dChoice")
 	{
-		for(const auto& [buttonId, button] : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->getButtons())
+		for(const auto & button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->getButtons())
 		{
 			if(!_fe3d->text3d_isExisting(button->getId()))
 			{
@@ -101,7 +101,7 @@ void WorldEditor::_updateText3dChoosingMenu()
 			}
 		}
 
-		for(auto& [key, templateId] : _loadedTextIds)
+		for(auto & [key, templateId] : _loadedTextIds)
 		{
 			if(screen->getScrollingList("text3dList")->getButton(key)->isHovered())
 			{

@@ -28,30 +28,33 @@ GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const 
 
 }
 
-void GuiButton::update(bool isHoverable)
+void GuiButton::update(bool isFocused)
 {
-	_updateHovering(isHoverable);
+	_updateHovering(isFocused);
 
-	_quadField->setVisible(_isVisible);
 	_quadField->setOpacity(_isHoverable ? DEFAULT_OPACITY : HOVER_OPACITY);
 
 	if(_textField != nullptr)
 	{
-		_textField->setVisible(_isVisible);
 		_textField->setOpacity(_isHoverable ? DEFAULT_OPACITY : HOVER_OPACITY);
 	}
 }
 
 void GuiButton::setVisible(bool value)
 {
-	_isVisible = value;
+	_quadField->setVisible(value);
+
+	if(_textField != nullptr)
+	{
+		_textField->setVisible(value);
+	}
 }
 
-void GuiButton::_updateHovering(bool isHoverable)
+void GuiButton::_updateHovering(bool isFocused)
 {
 	_isHovered = false;
 
-	if(_isVisible)
+	if(isVisible())
 	{
 		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
 		const auto buttonPosition = _quadField->getPosition();
@@ -65,7 +68,7 @@ void GuiButton::_updateHovering(bool isHoverable)
 				{
 					if(cursorPosition.y < (buttonPosition.y + (buttonSize.y * 0.5f)))
 					{
-						if(isHoverable && _isHoverable)
+						if(isFocused && _isHoverable)
 						{
 							_isHovered = true;
 						}
@@ -102,6 +105,46 @@ void GuiButton::setHoverable(bool value)
 	_isHoverable = value;
 }
 
+void GuiButton::setPosition(const fvec2 & value)
+{
+	_quadField->setPosition(value);
+
+	if(_textField != nullptr)
+	{
+		_textField->setPosition(value);
+	}
+}
+
+void GuiButton::setSize(const fvec2 & value)
+{
+	_quadField->setSize(value);
+
+	if(_textField != nullptr)
+	{
+		_textField->setSize(value);
+	}
+}
+
+void GuiButton::setMinPosition(const fvec2 & value)
+{
+	_quadField->setMinPosition(value);
+
+	if(_textField != nullptr)
+	{
+		_textField->setMinPosition(value);
+	}
+}
+
+void GuiButton::setMaxPosition(const fvec2 & value)
+{
+	_quadField->setMaxPosition(value);
+
+	if(_textField != nullptr)
+	{
+		_textField->setMaxPosition(value);
+	}
+}
+
 void GuiButton::changeTextContent(const string & content)
 {
 	_textField->changeTextContent(content);
@@ -134,4 +177,14 @@ const string & GuiButton::getId() const
 const string & GuiButton::getParentId() const
 {
 	return _parentId;
+}
+
+const fvec2 & GuiButton::getPosition() const
+{
+	return _quadField->getPosition();
+}
+
+const fvec2 & GuiButton::getSize() const
+{
+	return _quadField->getSize();
 }

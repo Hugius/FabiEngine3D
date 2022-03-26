@@ -1,6 +1,6 @@
 #include "gui_quad_field.hpp"
 
-GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & parentId, const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, bool isCentered)
+GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -13,7 +13,7 @@ GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & pare
 	_fe3d->quad2d_setColor(_entityId, color);
 }
 
-GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & parentId, const string & id, const fvec2 & position, const fvec2 & size, const string & texturePath, bool isCentered)
+GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & texturePath, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -54,6 +54,16 @@ void GuiQuadField::setSize(const fvec2 & value)
 void GuiQuadField::setOpacity(float value)
 {
 	_fe3d->quad2d_setOpacity(_entityId, value);
+}
+
+void GuiQuadField::setMinPosition(const fvec2 & value)
+{
+	_fe3d->quad2d_setMinPosition(_entityId, value);
+}
+
+void GuiQuadField::setMaxPosition(const fvec2 & value)
+{
+	_fe3d->quad2d_setMaxPosition(_entityId, value);
 }
 
 const fvec2 & GuiQuadField::getPosition() const

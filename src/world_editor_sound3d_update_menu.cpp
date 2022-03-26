@@ -35,9 +35,9 @@ void WorldEditor::_updateSoundMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->deleteButtons();
 
-			for(auto& [key, templateId] : _loadedSoundIds)
+			for(auto & [key, templateId] : _loadedSoundIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->createButton(key, key);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->createButton(key, key, fvec2(0.9f, 0.1f));
 			}
 		}
 
@@ -58,7 +58,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto& soundId : _soundEditor->getLoadedSoundIds())
+			for(const auto & soundId : _soundEditor->getLoadedSoundIds())
 			{
 				if(screen->getScrollingList("soundList")->getButton(soundId)->isHovered())
 				{
@@ -97,7 +97,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuSoundChoice")
 	{
-		for(const auto& [buttonId, button] : screen->getScrollingList("soundList")->getButtons())
+		for(const auto & button : screen->getScrollingList("soundList")->getButtons())
 		{
 			if(!_fe3d->sound3d_isExisting(button->getId()))
 			{
@@ -106,7 +106,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 			}
 		}
 
-		for(auto& [key, templateId] : _loadedSoundIds)
+		for(auto & [key, templateId] : _loadedSoundIds)
 		{
 			if(screen->getScrollingList("soundList")->getButton(key)->isHovered())
 			{

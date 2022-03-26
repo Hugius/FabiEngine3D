@@ -9,17 +9,17 @@ GuiOverlay::GuiOverlay(shared_ptr<EngineInterface> fe3d)
 
 void GuiOverlay::update()
 {
-	for(const auto& scrollingList : _scrollingLists)
+	for(const auto & [scrollingListId, scrollingList] : _scrollingLists)
 	{
 		scrollingList->update(true);
 	}
 
-	for(const auto& inputField : _inputFields)
+	for(const auto & [inputFieldId, inputField] : _inputFields)
 	{
 		inputField->update(true);
 	}
 
-	for(const auto& button : _buttons)
+	for(const auto & [buttonId, button] : _buttons)
 	{
 		button->update(true);
 	}

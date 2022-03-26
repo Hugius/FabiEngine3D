@@ -6,12 +6,12 @@
 class GuiInputField final : public GuiButton
 {
 public:
-	GuiInputField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor,
-				  const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
+	GuiInputField(shared_ptr<EngineInterface> fe3d, const string & parentId, const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor,
+				  const fvec3 & textColor, const fvec3 & textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
 
-	void update(bool isHoverable);
+	void update(bool isFocused);
 	void setActive(bool active);
-	void changeTextContent(const string& content);
+	void changeTextContent(const string & content);
 
 	const string getTextContent() const;
 

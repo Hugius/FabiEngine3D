@@ -59,6 +59,16 @@ void GuiTextField::setOpacity(float value)
 	_fe3d->text2d_setOpacity(_entityId, value);
 }
 
+void GuiTextField::setMinPosition(const fvec2 & value)
+{
+	_fe3d->text2d_setMinPosition(_entityId, value);
+}
+
+void GuiTextField::setMaxPosition(const fvec2 & value)
+{
+	_fe3d->text2d_setMaxPosition(_entityId, value);
+}
+
 const fvec2 & GuiTextField::getPosition() const
 {
 	return _fe3d->text2d_getPosition(_entityId);

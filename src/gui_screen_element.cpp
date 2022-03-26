@@ -47,7 +47,7 @@ void GuiScreen::deleteScrollingList(const string & id)
 
 void GuiScreen::deleteInputField(const string & id)
 {
-	if(!hasScrollingList(id))
+	if(!hasInputField(id))
 	{
 		abort();
 	}
@@ -57,7 +57,7 @@ void GuiScreen::deleteInputField(const string & id)
 
 void GuiScreen::deleteButton(const string & id)
 {
-	if(!hasScrollingList(id))
+	if(!hasButton(id))
 	{
 		abort();
 	}
@@ -67,7 +67,7 @@ void GuiScreen::deleteButton(const string & id)
 
 void GuiScreen::deleteQuadField(const string & id)
 {
-	if(!hasScrollingList(id))
+	if(!hasQuadField(id))
 	{
 		abort();
 	}
@@ -77,7 +77,7 @@ void GuiScreen::deleteQuadField(const string & id)
 
 void GuiScreen::deleteTextField(const string & id)
 {
-	if(!hasScrollingList(id))
+	if(!hasTextField(id))
 	{
 		abort();
 	}
@@ -133,11 +133,6 @@ const bool GuiScreen::hasQuadField(const string & id) const
 const bool GuiScreen::hasTextField(const string & id) const
 {
 	return (_textFields.find(id) != _textFields.end());
-}
-
-const bool GuiScreen::isVisible() const
-{
-	return _isVisible;
 }
 
 const shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string & id) const

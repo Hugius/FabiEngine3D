@@ -1,67 +1,73 @@
 #include "gui_screen.hpp"
-#include "logger.hpp"
 
-GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& id, const string& parentId, const fvec2& position, const fvec2& size)
+GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & parentPosition, const fvec2 & parentSize)
 	:
 	_fe3d(fe3d),
 	_id(id),
 	_parentId(parentId),
-	_parentPosition(position),
-	_parentSize(size)
+	_parentPosition(parentPosition),
+	_parentSize(parentSize)
 {
 
 }
 
-void GuiScreen::update(bool isHoverable)
+void GuiScreen::update(bool isFocused)
 {
-	for(const auto& [scrollingListId, scrollingList] : _scrollingLists)
+	for(const auto & [scrollingListId, scrollingList] : _scrollingLists)
 	{
-		scrollingList->update(isHoverable);
-
-		scrollingList->setVisible(_isVisible);
+		scrollingList->update(isFocused);
 	}
 
-	for(const auto& [inputFieldId, inputField] : _inputFields)
+	for(const auto & [inputFieldId, inputField] : _inputFields)
 	{
-		inputField->update(isHoverable);
-
-		inputField->setVisible(_isVisible);
+		inputField->update(isFocused);
 	}
 
-	for(const auto& [buttonId, button] : _buttons)
+	for(const auto & [buttonId, button] : _buttons)
 	{
-		button->update(isHoverable);
-
-		button->setVisible(_isVisible);
-	}
-
-	for(const auto& [quadFieldId, quadField] : _quadFields)
-	{
-		quadField->setVisible(_isVisible);
-	}
-
-	for(const auto& [textFieldId, textField] : _textFields)
-	{
-		textField->setVisible(_isVisible);
+		button->update(isFocused);
 	}
 }
 
 void GuiScreen::setVisible(bool value)
 {
-	_isVisible = value;
+	for(const auto & [scrollingListId, scrollingList] : _scrollingLists)
+	{
+		scrollingList->setVisible(value);
+	}
+
+	for(const auto & [inputFieldId, inputField] : _inputFields)
+	{
+		inputField->setVisible(value);
+	}
+
+	for(const auto & [buttonId, button] : _buttons)
+	{
+		button->setVisible(value);
+	}
+
+	for(const auto & [quadFieldId, quadField] : _quadFields)
+	{
+		quadField->setVisible(value);
+	}
+
+	for(const auto & [textFieldId, textField] : _textFields)
+	{
+		textField->setVisible(value);
+	}
 }
 
-const string& GuiScreen::getId() const
+const string & GuiScreen::getId() const
 {
 	return _id;
 }
 
-const string& GuiScreen::getParentId() const
+const string & GuiScreen::getParentId() const
 {
 	return _parentId;
 }
 
-const fvec2 GuiScreen::_convertPosition(const fvec2& position) const
+const fvec2 GuiScreen::_convertPosition(const fvec2 & position) const
 {
 	const auto screenPosition = _parentPosition;
 	const auto screenSize = _parentSize;
@@ -70,7 +76,7 @@ const fvec2 GuiScreen::_convertPosition(const fvec2& position) const
 	return buttonPosition;
 }
 
-const fvec2 GuiScreen::_convertSize(const fvec2& size) const
+const fvec2 GuiScreen::_convertSize(const fvec2 & size) const
 {
 	const auto screenPosition = _parentPosition;
 	const auto screenSize = _parentSize;

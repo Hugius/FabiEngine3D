@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string& id, const fvec2& position, const fvec2& size, const fvec3& color)
+GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -19,15 +19,15 @@ GuiViewport::~GuiViewport()
 	_fe3d->quad2d_delete(_entityId);
 }
 
-void GuiViewport::update(bool isHoverable)
+void GuiViewport::update(bool isFocused)
 {
-	for(const auto& [windowId, window] : _windows)
+	for(const auto & [windowId, window] : _windows)
 	{
-		window->update(isHoverable);
+		window->update(isFocused);
 	}
 }
 
-const bool GuiViewport::hasWindow(const string& id) const
+const bool GuiViewport::hasWindow(const string & id) const
 {
 	return (_windows.find(id) != _windows.end());
 }
@@ -60,27 +60,27 @@ void GuiViewport::_updateHovering()
 	}
 }
 
-const string& GuiViewport::getId()
+const string & GuiViewport::getId()
 {
 	return _id;
 }
 
-const fvec3& GuiViewport::getColor() const
+const fvec3 & GuiViewport::getColor() const
 {
 	return _fe3d->quad2d_getColor(_entityId);
 }
 
-const fvec2& GuiViewport::getPosition() const
+const fvec2 & GuiViewport::getPosition() const
 {
 	return _fe3d->quad2d_getPosition(_entityId);
 }
 
-const fvec2& GuiViewport::getSize() const
+const fvec2 & GuiViewport::getSize() const
 {
 	return _fe3d->quad2d_getSize(_entityId);
 }
 
-void GuiViewport::createWindow(const string& id, const fvec2& position, const fvec2& size, const fvec3& color)
+void GuiViewport::createWindow(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color)
 {
 	if(hasWindow(id))
 	{
@@ -95,7 +95,7 @@ void GuiViewport::createWindow(const string& id, const fvec2& position, const fv
 	_windows.insert({id, make_shared<GuiWindow>(_fe3d, id, _id, windowPosition, windowSize, color)});
 }
 
-void GuiViewport::deleteWindow(const string& id)
+void GuiViewport::deleteWindow(const string & id)
 {
 	if(!hasWindow(id))
 	{
@@ -110,12 +110,12 @@ void GuiViewport::deleteWindows()
 	_windows.clear();
 }
 
-const unordered_map<string, shared_ptr<GuiWindow>>& GuiViewport::getWindows() const
+const unordered_map<string, shared_ptr<GuiWindow>> & GuiViewport::getWindows() const
 {
 	return _windows;
 }
 
-const shared_ptr<GuiWindow> GuiViewport::getWindow(const string& id) const
+const shared_ptr<GuiWindow> GuiViewport::getWindow(const string & id) const
 {
 	auto iterator = _windows.find(id);
 

@@ -2,7 +2,7 @@
 
 #include <windows.h>
 
-GuiInputField::GuiInputField(shared_ptr<EngineInterface> fe3d, const string& parentId, const string& id, const fvec2& position, const fvec2& size, const fvec3& color, const fvec3& hoverColor, const fvec3& textColor, const fvec3& textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+GuiInputField::GuiInputField(shared_ptr<EngineInterface> fe3d, const string & parentId, const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 	:
 	GuiButton(fe3d, parentId, id, position, size, color, hoverColor, "", textColor, textHoverColor, isCentered),
 	_noNumbers(noNumbers),
@@ -15,9 +15,9 @@ GuiInputField::GuiInputField(shared_ptr<EngineInterface> fe3d, const string& par
 	_fe3d->text2d_setSize(_textField->getEntityId(), fvec2(CHAR_WIDTH, _fe3d->text2d_getSize(_textField->getEntityId()).y));
 }
 
-void GuiInputField::update(bool isHoverable)
+void GuiInputField::update(bool isFocused)
 {
-	_updateHovering(isHoverable && !_isActive);
+	_updateHovering(isFocused && !_isActive);
 	_updateActivation();
 	_updateTyping();
 }
@@ -79,7 +79,7 @@ void GuiInputField::_updateTyping()
 
 			if(!_noLetters)
 			{
-				for(const auto& c : letterCharacters)
+				for(const auto & c : letterCharacters)
 				{
 					if(_fe3d->input_isKeyPressed(InputType(c)))
 					{
@@ -113,7 +113,7 @@ void GuiInputField::_updateTyping()
 
 			if(!_noNumbers)
 			{
-				for(const auto& element : numberCharacterMap)
+				for(const auto & element : numberCharacterMap)
 				{
 					if(_fe3d->input_isKeyPressed(InputType(element.first)))
 					{
@@ -131,7 +131,7 @@ void GuiInputField::_updateTyping()
 
 			if(!_noSpecials)
 			{
-				for(const auto& element : specialCharacterMap)
+				for(const auto & element : specialCharacterMap)
 				{
 					if(_fe3d->input_isKeyPressed(InputType(element.first)))
 					{
@@ -242,7 +242,7 @@ const string GuiInputField::getTextContent() const
 	}
 }
 
-void GuiInputField::changeTextContent(const string& content)
+void GuiInputField::changeTextContent(const string & content)
 {
 	_currentTextContent = content;
 }

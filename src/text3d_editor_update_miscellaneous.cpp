@@ -63,8 +63,8 @@ void Text3dEditor::_updateMiscellaneousMenu()
 			_fe3d->text3d_setMinTextureAlpha(_currentTextId, minTextureAlpha);
 		}
 
-		screen->getButton("isFacingCameraHorizontally")->changeTextContent(isFacingCameraHorizontally ? "Facing X: ON" : "Facing X: OFF");
-		screen->getButton("isFacingCameraVertically")->changeTextContent(isFacingCameraVertically ? "Facing Y: ON" : "Facing Y: OFF");
+		screen->getButton("isFacingCameraHorizontally")->setTextContent(isFacingCameraHorizontally ? "Facing X: ON" : "Facing X: OFF");
+		screen->getButton("isFacingCameraVertically")->setTextContent(isFacingCameraVertically ? "Facing Y: ON" : "Facing Y: OFF");
 
 		auto rotation = _fe3d->text3d_getRotation(_currentTextId);
 		if(!isFacingCameraHorizontally)

@@ -52,7 +52,7 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 			_fe3d->graphics_setAmbientLightingIntensity(intensity);
 		}
 
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
+		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
 
@@ -127,6 +127,6 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 			_fe3d->graphics_setDirectionalLightingIntensity(intensity);
 		}
 
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
+		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }

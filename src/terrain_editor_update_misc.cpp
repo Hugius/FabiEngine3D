@@ -13,7 +13,7 @@ void TerrainEditor::_updateCamera()
 		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED));
 		_fe3d->camera_setThirdPersonDistance(cameraDistance);
 
-		_fe3d->quad2d_setVisible("@@cursor", false);
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 	}
 
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
@@ -126,7 +126,7 @@ void TerrainEditor::_updateTerrainCreating()
 				sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-				_gui->getOverlay()->getTextField("terrainId")->changeTextContent("Terrain: " + newTerrainId.substr(1));
+				_gui->getOverlay()->getTextField("terrainId")->setTextContent("Terrain: " + newTerrainId.substr(1));
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("terrainId")->getEntityId(), true);
 				_isCreatingTerrain = false;
 			}
@@ -152,7 +152,7 @@ void TerrainEditor::_updateTerrainChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("terrainId")->changeTextContent("Terrain: " + _currentTerrainId.substr(1));
+					_gui->getOverlay()->getTextField("terrainId")->setTextContent("Terrain: " + _currentTerrainId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("terrainId")->getEntityId(), true);
 				}
 

@@ -71,7 +71,7 @@ void ScriptEditor::_updateGUI()
 		screen->getButton("clear")->setHoverable(!_currentScriptFileId.empty());
 		screen->getButton("delete")->setHoverable(!_currentScriptFileId.empty());
 
-		screen->getTextField("lineCount")->changeTextContent("Lines: " + to_string(_script->getTotalLineCount()));
+		screen->getTextField("lineCount")->setTextContent("Lines: " + to_string(_script->getTotalLineCount()));
 	}
 }
 
@@ -207,7 +207,7 @@ void ScriptEditor::_updateScriptSearching()
 				return;
 			}
 
-			for(const auto& [key, lineNumber] : result)
+			for(const auto & [key, lineNumber] : result)
 			{
 				Logger::throwInfo("Keyword found in script \"" + key + "\" @ line " + to_string(lineNumber));
 			}
@@ -275,7 +275,7 @@ void ScriptEditor::_updateCursor()
 
 	if(_fe3d->misc_isCursorInsideDisplay())
 	{
-		_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
+		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)

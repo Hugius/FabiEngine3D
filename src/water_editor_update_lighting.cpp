@@ -80,9 +80,9 @@ void WaterEditor::_updateLightingMenu()
 			_fe3d->water_setSpecularIntensity(_currentWaterId, specularIntensity);
 		}
 
-		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
-		screen->getButton("isRefractive")->changeTextContent(isRefractive ? "Refractive: ON" : "Refractive: OFF");
-		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
-		screen->getButton("isEdged")->changeTextContent(isEdged ? "Edged: ON" : "Edged: OFF");
+		screen->getButton("isReflective")->setTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
+		screen->getButton("isRefractive")->setTextContent(isRefractive ? "Refractive: ON" : "Refractive: OFF");
+		screen->getButton("isSpecular")->setTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
+		screen->getButton("isEdged")->setTextContent(isEdged ? "Edged: ON" : "Edged: OFF");
 	}
 }

@@ -17,7 +17,7 @@ void WorldEditor::_updateReflectionEditing()
 			_dontResetSelectedReflection = false;
 		}
 
-		for(const auto& reflectionId : _loadedReflectionIds)
+		for(const auto & reflectionId : _loadedReflectionIds)
 		{
 			const auto isHovered = (hoveredAabbId == ("@@camera_" + reflectionId));
 
@@ -33,7 +33,7 @@ void WorldEditor::_updateReflectionEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 			}
 			else
 			{
@@ -78,7 +78,7 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				vector<string> modelIds;
 
-				for(auto& [key, templateId] : _loadedModelIds)
+				for(auto & [key, templateId] : _loadedModelIds)
 				{
 					modelIds.push_back(key);
 				}

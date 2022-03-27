@@ -104,8 +104,8 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 			_fe3d->graphics_setShadowQuality(quality);
 		}
 
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
-		screen->getButton("isFollowingCamera")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
+		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
+		screen->getButton("isFollowingCamera")->setTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
 	}
 }
 
@@ -230,8 +230,8 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 			_fe3d->graphics_setDofQuality(quality);
 		}
 
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
-		screen->getButton("isDynamic")->changeTextContent(isDynamic ? "Dynamic: ON" : "Dynamic: OFF");
+		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
+		screen->getButton("isDynamic")->setTextContent(isDynamic ? "Dynamic: ON" : "Dynamic: OFF");
 	}
 }
 
@@ -305,7 +305,7 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 			_fe3d->graphics_setFogColor(color);
 		}
 
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
+		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
 
@@ -382,7 +382,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 			_fe3d->graphics_setLensFlareSensitivity(sensitivity);
 		}
 
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
+		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
 
@@ -426,7 +426,7 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 			_fe3d->graphics_setSkyExposureSpeed(speed);
 		}
 
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
+		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
 
@@ -491,7 +491,7 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 			_fe3d->graphics_setBloomQuality(quality);
 		}
 
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
-		screen->getButton("type")->changeTextContent((type == BloomType::EVERYTHING) ? "Type: EVERYTHING" : "Type: PARTS");
+		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
+		screen->getButton("type")->setTextContent((type == BloomType::EVERYTHING) ? "Type: EVERYTHING" : "Type: PARTS");
 	}
 }

@@ -17,7 +17,7 @@ void WorldEditor::_updateSpotlightEditing()
 			_dontResetSelectedSpotlight = false;
 		}
 
-		for(const auto& spotlightId : _loadedSpotlightIds)
+		for(const auto & spotlightId : _loadedSpotlightIds)
 		{
 			const auto isHovered = (hoveredAabbId == ("@@torch_" + spotlightId));
 
@@ -33,7 +33,7 @@ void WorldEditor::_updateSpotlightEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 			}
 			else
 			{
@@ -104,9 +104,9 @@ void WorldEditor::_updateSpotlightEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("x")->changeTextContent("X");
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->changeTextContent("Y");
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->changeTextContent("Z");
+				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("x")->setTextContent("X");
+				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
+				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
 
 				_handleValueChanging("spotlightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
 				_handleValueChanging("spotlightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
@@ -120,9 +120,9 @@ void WorldEditor::_updateSpotlightEditing()
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("x")->changeTextContent("R");
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->changeTextContent("G");
-				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->changeTextContent("B");
+				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("x")->setTextContent("R");
+				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("G");
+				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("B");
 
 				_handleValueChanging("spotlightPropertiesMenu", "xPlus", "x", color.r, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("spotlightPropertiesMenu", "xMinus", "x", color.r, -SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);

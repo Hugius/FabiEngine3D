@@ -21,7 +21,7 @@ void Animation3dEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedAnimationIds;
-			for(auto& id : ids)
+			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
@@ -32,7 +32,7 @@ void Animation3dEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedAnimationIds;
-			for(auto& id : ids)
+			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
@@ -73,7 +73,7 @@ void Animation3dEditor::_updateChoiceMenu()
 					_fe3d->model_stopAnimation(_previewModelId, _currentAnimationId);
 				}
 
-				for(const auto& partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
+				for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 				{
 					_fe3d->model_setVisible(_previewModelId, false);
 
@@ -111,7 +111,7 @@ void Animation3dEditor::_updateChoiceMenu()
 			}
 
 			auto modelIds = _modelEditor->getLoadedEntityIds();
-			for(auto& id : modelIds)
+			for(auto & id : modelIds)
 			{
 				id = id.substr(1);
 			}
@@ -120,7 +120,7 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
-			for(const auto& partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
+			for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 			{
 				if(partId.empty())
 				{
@@ -144,7 +144,7 @@ void Animation3dEditor::_updateChoiceMenu()
 		{
 			_fe3d->model_stopAnimation(_previewModelId, _currentAnimationId);
 
-			for(const auto& partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
+			for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 			{
 				if(partId.empty())
 				{
@@ -168,7 +168,7 @@ void Animation3dEditor::_updateChoiceMenu()
 
 			_fe3d->animation3d_createFrame(_currentAnimationId, _currentFrameIndex);
 
-			for(const auto& partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
+			for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 			{
 				const auto targetTransformation = _fe3d->animation3d_getTargetTransformation(_currentAnimationId, (_currentFrameIndex - 1), partId);
 				const auto rotationOrigin = _fe3d->animation3d_getRotationOrigin(_currentAnimationId, (_currentFrameIndex - 1), partId);
@@ -214,7 +214,7 @@ void Animation3dEditor::_updateChoiceMenu()
 
 		if(!isStarted)
 		{
-			_gui->getOverlay()->getTextField("animationFrame")->changeTextContent("Frame: " + to_string(_currentFrameIndex + 1));
+			_gui->getOverlay()->getTextField("animationFrame")->setTextContent("Frame: " + to_string(_currentFrameIndex + 1));
 		}
 	}
 }

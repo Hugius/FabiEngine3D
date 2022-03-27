@@ -18,7 +18,7 @@ void ModelEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
-			for(auto& id : ids)
+			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
@@ -28,7 +28,7 @@ void ModelEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
-			for(auto& id : ids)
+			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
@@ -61,7 +61,7 @@ void ModelEditor::_updateChoiceMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			for(const auto& partId : _fe3d->model_getPartIds(_currentModelId))
+			for(const auto & partId : _fe3d->model_getPartIds(_currentModelId))
 			{
 				_fe3d->model_setWireframed(_currentModelId, partId, false);
 			}
@@ -112,6 +112,6 @@ void ModelEditor::_updateChoiceMenu()
 
 		screen->getButton("part")->setHoverable(_fe3d->model_isMultiParted(_currentModelId));
 
-		screen->getButton("part")->changeTextContent(_currentPartId.empty() ? "Select Part" : "Unselect Part");
+		screen->getButton("part")->setTextContent(_currentPartId.empty() ? "Select Part" : "Unselect Part");
 	}
 }

@@ -23,7 +23,7 @@ void ModelEditor::_updateCamera()
 		cameraLookat.y = max(-GRID_Y_OFFSET, cameraLookat.y);
 		_fe3d->camera_setThirdPersonLookat(cameraLookat);
 
-		_fe3d->quad2d_setVisible("@@cursor", false);
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 
 		const auto distance = _fe3d->camera_getThirdPersonDistance();
 		_fe3d->graphics_setShadowPositionOffset(fvec3(cameraLookat + fvec3(distance)));
@@ -58,7 +58,7 @@ void ModelEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				for(const auto& partId : _fe3d->model_getPartIds(_currentModelId))
+				for(const auto & partId : _fe3d->model_getPartIds(_currentModelId))
 				{
 					_fe3d->model_setWireframed(_currentModelId, partId, !_fe3d->model_isWireframed(_currentModelId, partId));
 				}
@@ -169,7 +169,7 @@ void ModelEditor::_updateModelCreating()
 				sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-				_gui->getOverlay()->getTextField("modelId")->changeTextContent("Model: " + newModelId.substr(1));
+				_gui->getOverlay()->getTextField("modelId")->setTextContent("Model: " + newModelId.substr(1));
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
 				_isCreatingModel = false;
 			}
@@ -200,7 +200,7 @@ void ModelEditor::_updateModelChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("modelId")->changeTextContent("Model: " + _currentModelId.substr(1));
+					_gui->getOverlay()->getTextField("modelId")->setTextContent("Model: " + _currentModelId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("modelId")->getEntityId(), true);
 				}
 

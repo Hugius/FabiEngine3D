@@ -1,6 +1,6 @@
 #include "gui_quad_field.hpp"
 
-GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, bool isCentered)
+GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -11,19 +11,11 @@ GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, 
 	_fe3d->quad2d_setPosition(_entityId, position);
 	_fe3d->quad2d_setSize(_entityId, size);
 	_fe3d->quad2d_setColor(_entityId, color);
-}
 
-GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & texturePath, bool isCentered)
-	:
-	_fe3d(fe3d),
-	_id(id),
-	_parentId(parentId),
-	_entityId("@" + parentId + "_" + id)
-{
-	_fe3d->quad2d_create(_entityId, isCentered);
-	_fe3d->quad2d_setPosition(_entityId, position);
-	_fe3d->quad2d_setSize(_entityId, size);
-	_fe3d->quad2d_setDiffuseMap(_entityId, ("engine\\assets\\image\\diffuse_map\\" + texturePath));
+	if(!diffuseMapPath.empty())
+	{
+		_fe3d->quad2d_setDiffuseMap(_entityId, ("engine\\assets\\image\\diffuse_map\\" + diffuseMapPath));
+	}
 }
 
 GuiQuadField::~GuiQuadField()
@@ -64,6 +56,11 @@ void GuiQuadField::setMinPosition(const fvec2 & value)
 void GuiQuadField::setMaxPosition(const fvec2 & value)
 {
 	_fe3d->quad2d_setMaxPosition(_entityId, value);
+}
+
+void GuiQuadField::setDiffuseMap(const string & value)
+{
+	_fe3d->quad2d_setDiffuseMap(_entityId, value);
 }
 
 const fvec2 & GuiQuadField::getPosition() const

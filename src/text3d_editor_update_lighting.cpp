@@ -65,8 +65,8 @@ void Text3dEditor::_updateLightingMenu()
 			_fe3d->text3d_setLightness(_currentTextId, lightness);
 		}
 
-		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
-		screen->getButton("isReflected")->changeTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
-		screen->getButton("isShadowed")->changeTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
+		screen->getButton("isBright")->setTextContent(isBright ? "Bright: ON" : "Bright: OFF");
+		screen->getButton("isReflected")->setTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
+		screen->getButton("isShadowed")->setTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
 	}
 }

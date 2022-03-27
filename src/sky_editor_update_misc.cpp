@@ -5,7 +5,7 @@ void SkyEditor::_updateCamera()
 {
 	if(_fe3d->camera_isFirstPersonEnabled())
 	{
-		_fe3d->quad2d_setVisible("@@cursor", false);
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 	}
 
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
@@ -81,7 +81,7 @@ void SkyEditor::_updateSkyCreating()
 			_fe3d->sky_select(newSkyId);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-			_gui->getOverlay()->getTextField("skyId")->changeTextContent("Sky: " + newSkyId.substr(1));
+			_gui->getOverlay()->getTextField("skyId")->setTextContent("Sky: " + newSkyId.substr(1));
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyId")->getEntityId(), true);
 			_isCreatingSky = false;
 		}
@@ -106,7 +106,7 @@ void SkyEditor::_updateSkyChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("skyId")->changeTextContent("Sky: " + _currentSkyId.substr(1));
+					_gui->getOverlay()->getTextField("skyId")->setTextContent("Sky: " + _currentSkyId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("skyId")->getEntityId(), true);
 				}
 

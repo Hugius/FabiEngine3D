@@ -24,7 +24,7 @@ void Quad3dEditor::_updateCamera()
 		cameraLookat.y = max(-GRID_Y_OFFSET, cameraLookat.y);
 		_fe3d->camera_setThirdPersonLookat(cameraLookat);
 
-		_fe3d->quad2d_setVisible("@@cursor", false);
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 
 		const auto distance = _fe3d->camera_getThirdPersonDistance();
 		_fe3d->graphics_setShadowPositionOffset(fvec3(cameraLookat + fvec3(distance)));
@@ -106,7 +106,7 @@ void Quad3dEditor::_updateQuad3dCreating()
 			_fe3d->quad3d_create(newQuadId, false);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
-			_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad3D: " + newQuadId.substr(1));
+			_gui->getOverlay()->getTextField("quadId")->setTextContent("Quad3D: " + newQuadId.substr(1));
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
 			_isCreatingQuad3d = false;
 		}
@@ -136,7 +136,7 @@ void Quad3dEditor::_updateQuad3dChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("quadId")->changeTextContent("Quad3D: " + _currentQuadId.substr(1));
+					_gui->getOverlay()->getTextField("quadId")->setTextContent("Quad3D: " + _currentQuadId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("quadId")->getEntityId(), true);
 				}
 

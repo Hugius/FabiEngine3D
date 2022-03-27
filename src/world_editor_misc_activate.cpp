@@ -1,6 +1,6 @@
 #include "world_editor.hpp"
 
-void WorldEditor::_activateModel(const string& id)
+void WorldEditor::_activateModel(const string & id)
 {
 	_activeModelId = id;
 
@@ -15,10 +15,10 @@ void WorldEditor::_activateModel(const string& id)
 	rightWindow->getScreen("modelPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	rightWindow->getScreen("modelPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Model: " + _activeModelId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Model: " + _activeModelId);
 }
 
-void WorldEditor::_activateQuad3d(const string& id)
+void WorldEditor::_activateQuad3d(const string & id)
 {
 	_activeQuadId = id;
 
@@ -33,10 +33,10 @@ void WorldEditor::_activateQuad3d(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Quad3D: " + _activeQuadId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Quad3D: " + _activeQuadId);
 }
 
-void WorldEditor::_activateText3d(const string& id)
+void WorldEditor::_activateText3d(const string & id)
 {
 	_activeTextId = id;
 
@@ -51,10 +51,10 @@ void WorldEditor::_activateText3d(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Text3D: " + _activeTextId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Text3D: " + _activeTextId);
 }
 
-void WorldEditor::_activatePointlight(const string& id)
+void WorldEditor::_activatePointlight(const string & id)
 {
 	_activePointlightId = id;
 
@@ -69,10 +69,10 @@ void WorldEditor::_activatePointlight(const string& id)
 	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Pointlight: " + _activePointlightId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Pointlight: " + _activePointlightId);
 }
 
-void WorldEditor::_activateSpotlight(const string& id)
+void WorldEditor::_activateSpotlight(const string & id)
 {
 	_activeSpotlightId = id;
 
@@ -86,10 +86,10 @@ void WorldEditor::_activateSpotlight(const string& id)
 	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Spotlight: " + _activeSpotlightId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Spotlight: " + _activeSpotlightId);
 }
 
-void WorldEditor::_activateReflection(const string& id)
+void WorldEditor::_activateReflection(const string & id)
 {
 	_activeReflectionId = id;
 
@@ -100,10 +100,10 @@ void WorldEditor::_activateReflection(const string& id)
 	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Reflection: " + _activeReflectionId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Reflection: " + _activeReflectionId);
 }
 
-void WorldEditor::_activateSound(const string& id)
+void WorldEditor::_activateSound(const string & id)
 {
 	_activeSoundId = id;
 
@@ -118,7 +118,7 @@ void WorldEditor::_activateSound(const string& id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("volume")->changeTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
 
-	_gui->getOverlay()->getTextField("activeId")->changeTextContent("Active Sound: " + _activeSoundId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Sound: " + _activeSoundId);
 }
 
 void WorldEditor::_deactivateModel()

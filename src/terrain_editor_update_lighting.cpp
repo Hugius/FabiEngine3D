@@ -54,6 +54,6 @@ void TerrainEditor::_updateLightingMenu()
 			_fe3d->terrain_setLightness(_currentTerrainId, lightness);
 		}
 
-		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
+		screen->getButton("isSpecular")->setTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 	}
 }

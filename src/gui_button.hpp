@@ -7,11 +7,10 @@
 class GuiButton
 {
 public:
-	GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered);
-	GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & texturePath, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered);
+	GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered);
 
 	virtual void update(bool isFocused);
-	virtual void changeTextContent(const string & content);
+	virtual void setTextContent(const string & value);
 
 	void setVisible(bool value);
 	void setHoverable(bool value);
@@ -19,6 +18,7 @@ public:
 	void setSize(const fvec2 & value);
 	void setMinPosition(const fvec2 & value);
 	void setMaxPosition(const fvec2 & value);
+	void setDiffuseMap(const string & value);
 
 	const string & getId() const;
 	const string & getParentId() const;

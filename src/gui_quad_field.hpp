@@ -5,8 +5,7 @@
 class GuiQuadField final
 {
 public:
-	GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, bool isCentered);
-	GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & texturePath, bool isCentered);
+	GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & color, bool isCentered);
 	~GuiQuadField();
 
 	void setVisible(bool value);
@@ -16,6 +15,7 @@ public:
 	void setOpacity(float value);
 	void setMinPosition(const fvec2 & value);
 	void setMaxPosition(const fvec2 & value);
+	void setDiffuseMap(const string & value);
 
 	const string & getId() const;
 	const string & getParentId() const;

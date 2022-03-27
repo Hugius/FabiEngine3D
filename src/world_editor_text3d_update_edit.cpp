@@ -16,7 +16,7 @@ void WorldEditor::_updateText3dEditing()
 			_dontResetSelectedText3d = false;
 		}
 
-		for(const auto& [textId, templateId] : _loadedTextIds)
+		for(const auto & [textId, templateId] : _loadedTextIds)
 		{
 			const auto isHovered = (hoveredAabbId == textId);
 
@@ -32,7 +32,7 @@ void WorldEditor::_updateText3dEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 			}
 			else
 			{
@@ -154,7 +154,7 @@ void WorldEditor::_updateText3dEditing()
 				_fe3d->text3d_setSize(_activeTextId, size);
 			}
 
-			screen->getButton("freeze")->changeTextContent(_fe3d->text3d_isFrozen(_activeTextId) ? "Unfreeze" : "Freeze");
+			screen->getButton("freeze")->setTextContent(_fe3d->text3d_isFrozen(_activeTextId) ? "Unfreeze" : "Freeze");
 		}
 	}
 }

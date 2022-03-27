@@ -1,29 +1,14 @@
 #include "gui_button.hpp"
 #include "tools.hpp"
-#include <iostream>
-GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
+
+GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
 	_parentId(parentId),
-	_quadField(make_shared<GuiQuadField>(fe3d, "GuiButton", (parentId + "_" + id), position, size, defaultQuadColor, isCentered)),
+	_quadField(make_shared<GuiQuadField>(fe3d, "GuiButton", (parentId + "_" + id), position, size, diffuseMapPath, defaultQuadColor, isCentered)),
 	_textField(make_shared<GuiTextField>(fe3d, "GuiButton", (parentId + "_" + id), position, fvec2((size.x * TEXT_WIDTH_MULTIPLIER), (size.y * TEXT_HEIGHT_MULTIPLIER)), textContent, defaultTextColor, isCentered)),
 	_defaultQuadColor(defaultQuadColor),
-	_hoveredQuadColor(hoveredQuadColor),
-	_defaultTextColor(defaultTextColor),
-	_hoveredTextColor(hoveredTextColor)
-{
-
-}
-
-GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & texturePath, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
-	:
-	_fe3d(fe3d),
-	_id(id),
-	_parentId(parentId),
-	_quadField(make_shared<GuiQuadField>(fe3d, "GuiButton", (parentId + "_" + id), position, size, texturePath, isCentered)),
-	_textField(make_shared<GuiTextField>(fe3d, "GuiButton", (parentId + "_" + id), position, fvec2((size.x * TEXT_WIDTH_MULTIPLIER), (size.y * TEXT_HEIGHT_MULTIPLIER)), textContent, defaultTextColor, isCentered)),
-	_defaultQuadColor(fvec3(1.0f)),
 	_hoveredQuadColor(hoveredQuadColor),
 	_defaultTextColor(defaultTextColor),
 	_hoveredTextColor(hoveredTextColor)
@@ -74,8 +59,8 @@ void GuiButton::_updateHovering(bool isFocused)
 
 		if(_isHovered)
 		{
-			_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
-			std::cout << _hoveredQuadColor.r << std::endl;
+			_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+
 			_quadField->setColor(_hoveredQuadColor);
 			_textField->setColor(_hoveredTextColor);
 		}
@@ -116,9 +101,14 @@ void GuiButton::setMaxPosition(const fvec2 & value)
 	_textField->setMaxPosition(value);
 }
 
-void GuiButton::changeTextContent(const string & content)
+void GuiButton::setDiffuseMap(const string & value)
 {
-	_textField->changeTextContent(content);
+	_quadField->setDiffuseMap(value);
+}
+
+void GuiButton::setTextContent(const string & value)
+{
+	_textField->setTextContent(value);
 
 	_quadField->setSize(fvec2(_textField->getSize() / fvec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER)));
 }

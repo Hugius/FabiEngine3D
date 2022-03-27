@@ -8,7 +8,7 @@ public:
 	GuiTextField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & color, bool isCentered);
 	~GuiTextField();
 
-	void changeTextContent(const string & content);
+	void setTextContent(const string & value);
 	void setVisible(bool value);
 	void setColor(const fvec3 & value);
 	void setPosition(const fvec2 & value);

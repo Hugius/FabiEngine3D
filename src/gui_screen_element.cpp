@@ -10,24 +10,14 @@ void GuiScreen::createInputField(const string & id, const fvec2 & position, cons
 	_inputFields.insert({id, make_shared<GuiInputField>(_fe3d, (_parentId + "_" + _id), id, _convertPosition(position), _convertSize(size), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered)});
 }
 
-void GuiScreen::createButton(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
+void GuiScreen::createButton(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
 {
-	_buttons.insert({id, make_shared<GuiButton>(_fe3d, id, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), defaultQuadColor, hoveredQuadColor, textContent, defaultTextColor, hoveredTextColor, isCentered)});
+	_buttons.insert({id, make_shared<GuiButton>(_fe3d, id, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), diffuseMapPath, defaultQuadColor, hoveredQuadColor, textContent, defaultTextColor, hoveredTextColor, isCentered)});
 }
 
-void GuiScreen::createButton(const string & id, const fvec2 & position, const fvec2 & size, const string & texturePath, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
+void GuiScreen::createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & color, bool isCentered)
 {
-	_buttons.insert({id, make_shared<GuiButton>(_fe3d, id, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), texturePath, hoveredQuadColor, textContent, defaultTextColor, hoveredTextColor, isCentered)});
-}
-
-void GuiScreen::createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, bool isCentered)
-{
-	_quadFields.insert({id, make_shared<GuiQuadField>(_fe3d, id, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), color, isCentered)});
-}
-
-void GuiScreen::createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const string & texturePath, bool isCentered)
-{
-	_quadFields.insert({id, make_shared<GuiQuadField>(_fe3d, id, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), texturePath, isCentered)});
+	_quadFields.insert({id, make_shared<GuiQuadField>(_fe3d, id, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), diffuseMapPath, color, isCentered)});
 }
 
 void GuiScreen::createTextField(const string & id, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & textColor, bool isCentered)

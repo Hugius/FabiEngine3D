@@ -16,7 +16,7 @@ void WorldEditor::_updateModelEditing()
 			_dontResetSelectedModel = false;
 		}
 
-		for(const auto& [modelId, templateId] : _loadedModelIds)
+		for(const auto & [modelId, templateId] : _loadedModelIds)
 		{
 			const auto isHovered = (hoveredAabbId.substr(0, modelId.size()) == modelId);
 
@@ -32,7 +32,7 @@ void WorldEditor::_updateModelEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 			}
 			else
 			{
@@ -98,7 +98,7 @@ void WorldEditor::_updateModelEditing()
 				{
 					auto animationIds = _animation3dEditor->getLoadedAnimationIds();
 
-					for(auto& id : animationIds)
+					for(auto & id : animationIds)
 					{
 						id = id.substr(1);
 					}
@@ -109,7 +109,7 @@ void WorldEditor::_updateModelEditing()
 				{
 					_fe3d->model_stopAnimation(_activeModelId, currentAnimationIds[0]);
 
-					for(const auto& partId : _fe3d->model_getPartIds(_activeModelId))
+					for(const auto & partId : _fe3d->model_getPartIds(_activeModelId))
 					{
 						if(!partId.empty())
 						{
@@ -148,7 +148,7 @@ void WorldEditor::_updateModelEditing()
 					{
 						_fe3d->model_stopAnimation(_activeModelId, currentAnimationIds[0]);
 
-						for(const auto& partId : _fe3d->model_getPartIds(_activeModelId))
+						for(const auto & partId : _fe3d->model_getPartIds(_activeModelId))
 						{
 							if(!partId.empty())
 							{
@@ -208,8 +208,8 @@ void WorldEditor::_updateModelEditing()
 				_fe3d->model_setBaseSize(_activeModelId, size);
 			}
 
-			screen->getButton("animation")->changeTextContent(currentAnimationIds.empty() ? "Start Animation" : "Stop Animation");
-			screen->getButton("freeze")->changeTextContent(_fe3d->model_isFrozen(_activeModelId) ? "Unfreeze" : "Freeze");
+			screen->getButton("animation")->setTextContent(currentAnimationIds.empty() ? "Start Animation" : "Stop Animation");
+			screen->getButton("freeze")->setTextContent(_fe3d->model_isFrozen(_activeModelId) ? "Unfreeze" : "Freeze");
 		}
 	}
 }

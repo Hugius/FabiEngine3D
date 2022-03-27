@@ -148,30 +148,30 @@ void ModelEditor::_updateMiscellaneousMenu()
 		screen->getButton("levelOfDetailDistance")->setHoverable(isNoPartSelected);
 		screen->getButton("rotationOrder")->setHoverable(isNoPartSelected);
 
-		screen->getButton("isFaceCulled")->changeTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");
+		screen->getButton("isFaceCulled")->setTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");
 		if(rotationOrder == DirectionOrder::XYZ)
 		{
-			screen->getButton("rotationOrder")->changeTextContent("Rotation: X Y Z");
+			screen->getButton("rotationOrder")->setTextContent("Rotation: X Y Z");
 		}
 		else if(rotationOrder == DirectionOrder::XZY)
 		{
-			screen->getButton("rotationOrder")->changeTextContent("Rotation: X Z Y");
+			screen->getButton("rotationOrder")->setTextContent("Rotation: X Z Y");
 		}
 		else if(rotationOrder == DirectionOrder::YXZ)
 		{
-			screen->getButton("rotationOrder")->changeTextContent("Rotation: Y X Z");
+			screen->getButton("rotationOrder")->setTextContent("Rotation: Y X Z");
 		}
 		else if(rotationOrder == DirectionOrder::YZX)
 		{
-			screen->getButton("rotationOrder")->changeTextContent("Rotation: Y Z X");
+			screen->getButton("rotationOrder")->setTextContent("Rotation: Y Z X");
 		}
 		else if(rotationOrder == DirectionOrder::ZXY)
 		{
-			screen->getButton("rotationOrder")->changeTextContent("Rotation: Z X Y");
+			screen->getButton("rotationOrder")->setTextContent("Rotation: Z X Y");
 		}
 		else if(rotationOrder == DirectionOrder::ZYX)
 		{
-			screen->getButton("rotationOrder")->changeTextContent("Rotation: Z Y X");
+			screen->getButton("rotationOrder")->setTextContent("Rotation: Z Y X");
 		}
 	}
 }

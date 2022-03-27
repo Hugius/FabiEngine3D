@@ -25,7 +25,7 @@ void Text3dEditor::_updateCamera()
 		cameraLookat.y = max(-GRID_Y_OFFSET, cameraLookat.y);
 		_fe3d->camera_setThirdPersonLookat(cameraLookat);
 
-		_fe3d->quad2d_setVisible("@@cursor", false);
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 
 		const auto distance = _fe3d->camera_getThirdPersonDistance();
 		_fe3d->graphics_setShadowPositionOffset(fvec3(cameraLookat + fvec3(distance)));
@@ -141,7 +141,7 @@ void Text3dEditor::_updateText3dCreating()
 				sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
-				_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3D: " + newTextId.substr(1));
+				_gui->getOverlay()->getTextField("textId")->setTextContent("Text3D: " + newTextId.substr(1));
 				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
 				_isCreatingText3d = false;
 			}
@@ -172,7 +172,7 @@ void Text3dEditor::_updateText3dChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("textId")->changeTextContent("Text3D: " + _currentTextId.substr(1));
+					_gui->getOverlay()->getTextField("textId")->setTextContent("Text3D: " + _currentTextId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
 				}
 

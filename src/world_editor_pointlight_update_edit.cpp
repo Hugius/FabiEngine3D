@@ -33,7 +33,7 @@ void WorldEditor::_updatePointlightEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 			}
 			else
 			{
@@ -120,9 +120,9 @@ void WorldEditor::_updatePointlightEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("x")->changeTextContent("X");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->changeTextContent("Y");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->changeTextContent("Z");
+				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("X");
+				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
+				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
 
 				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
@@ -136,9 +136,9 @@ void WorldEditor::_updatePointlightEditing()
 			}
 			else if(!screen->getButton("radius")->isHoverable())
 			{
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("x")->changeTextContent("X");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->changeTextContent("Y");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->changeTextContent("Z");
+				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("X");
+				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
+				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
 
 				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", radius.x, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", radius.x, -(_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
@@ -151,9 +151,9 @@ void WorldEditor::_updatePointlightEditing()
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("x")->changeTextContent("R");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->changeTextContent("G");
-				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->changeTextContent("B");
+				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("x")->setTextContent("R");
+				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("G");
+				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("B");
 
 				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", color.r, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", color.r, -POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
@@ -170,15 +170,14 @@ void WorldEditor::_updatePointlightEditing()
 			_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
 			_fe3d->pointlight_setIntensity(_activePointlightId, intensity);
 
-			//const auto quad2dEntityId = screen->getButton("shape")->getQuadField()->getEntityId();
-			//if(_fe3d->pointlight_getShape(_activePointlightId) == PointlightShape::CIRCLE)
-			//{
-			//	_fe3d->quad2d_setDiffuseMap(quad2dEntityId, "engine\\assets\\image\\diffuse_map\\shape_circle.tga");
-			//}
-			//else
-			//{
-			//	_fe3d->quad2d_setDiffuseMap(quad2dEntityId, "engine\\assets\\image\\diffuse_map\\shape_square.tga");
-			//}
+			if(_fe3d->pointlight_getShape(_activePointlightId) == PointlightShape::CIRCLE)
+			{
+				screen->getButton("shape")->setDiffuseMap("engine\\assets\\image\\diffuse_map\\shape_circle.tga");
+			}
+			else
+			{
+				screen->getButton("shape")->setDiffuseMap("engine\\assets\\image\\diffuse_map\\shape_square.tga");
+			}
 		}
 	}
 }

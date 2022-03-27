@@ -145,21 +145,21 @@ void ModelEditor::_updateLightingMenu()
 		screen->getButton("isReflected")->setHoverable(isNoPartSelected);
 		screen->getButton("emissionIntensity")->setHoverable(isPartSelected);
 
-		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
-		screen->getButton("isShadowed")->changeTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
-		screen->getButton("isReflected")->changeTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
-		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
-		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
+		screen->getButton("isBright")->setTextContent(isBright ? "Bright: ON" : "Bright: OFF");
+		screen->getButton("isShadowed")->setTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
+		screen->getButton("isReflected")->setTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
+		screen->getButton("isSpecular")->setTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
+		screen->getButton("isReflective")->setTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
 		switch(reflectionType)
 		{
 			case ReflectionType::CUBE:
 			{
-				screen->getButton("reflectionType")->changeTextContent("Type: CUBE");
+				screen->getButton("reflectionType")->setTextContent("Type: CUBE");
 				break;
 			}
 			case ReflectionType::PLANAR:
 			{
-				screen->getButton("reflectionType")->changeTextContent("Type: PLANAR");
+				screen->getButton("reflectionType")->setTextContent("Type: PLANAR");
 				break;
 			}
 		}

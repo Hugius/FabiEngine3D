@@ -16,7 +16,7 @@ void WorldEditor::_updateQuad3dEditing()
 		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
-		for(const auto& [quadId, templateId] : _loadedQuadIds)
+		for(const auto & [quadId, templateId] : _loadedQuadIds)
 		{
 			const auto isHovered = (hoveredAabbId == quadId);
 
@@ -32,7 +32,7 @@ void WorldEditor::_updateQuad3dEditing()
 					}
 				}
 
-				_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 			}
 			else
 			{
@@ -101,7 +101,7 @@ void WorldEditor::_updateQuad3dEditing()
 				if(currentAnimationIds.empty())
 				{
 					auto ids = _animation2dEditor->getLoadedAnimationIds();
-					for(auto& id : ids)
+					for(auto & id : ids)
 					{
 						id = id.substr(1);
 					}
@@ -200,8 +200,8 @@ void WorldEditor::_updateQuad3dEditing()
 				_fe3d->quad3d_setSize(_activeQuadId, size);
 			}
 
-			screen->getButton("animation")->changeTextContent(currentAnimationIds.empty() ? "Start Animation" : "Stop Animation");
-			screen->getButton("freeze")->changeTextContent(_fe3d->quad3d_isFrozen(_activeQuadId) ? "Unfreeze" : "Freeze");
+			screen->getButton("animation")->setTextContent(currentAnimationIds.empty() ? "Start Animation" : "Stop Animation");
+			screen->getButton("freeze")->setTextContent(_fe3d->quad3d_isFrozen(_activeQuadId) ? "Unfreeze" : "Freeze");
 		}
 	}
 }

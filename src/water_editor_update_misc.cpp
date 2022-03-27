@@ -10,7 +10,7 @@ void WaterEditor::_updateCamera()
 		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED));
 		_fe3d->camera_setThirdPersonDistance(cameraDistance);
 
-		_fe3d->quad2d_setVisible("@@cursor", false);
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 	}
 
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
@@ -88,7 +88,7 @@ void WaterEditor::_updateWaterCreating()
 			_fe3d->water_select(newWaterId);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-			_gui->getOverlay()->getTextField("waterId")->changeTextContent("Water: " + newWaterId.substr(1));
+			_gui->getOverlay()->getTextField("waterId")->setTextContent("Water: " + newWaterId.substr(1));
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("waterId")->getEntityId(), true);
 			_isCreatingWater = false;
 		}
@@ -113,7 +113,7 @@ void WaterEditor::_updateWaterChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("waterId")->changeTextContent("Water: " + _currentWaterId.substr(1));
+					_gui->getOverlay()->getTextField("waterId")->setTextContent("Water: " + _currentWaterId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("waterId")->getEntityId(), true);
 				}
 

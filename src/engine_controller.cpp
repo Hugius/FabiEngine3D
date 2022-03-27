@@ -265,9 +265,9 @@ void EngineController::update()
 		}
 		lastScreen = activeScreen;
 
-		_fe3d->quad2d_setPosition("@@cursor", Tools::convertToNdc(_fe3d->misc_getCursorPosition()));
-		_fe3d->quad2d_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
-		_fe3d->quad2d_setVisible("@@cursor", _fe3d->misc_isCursorInsideWindow());
+		_fe3d->quad2d_setPosition(_fe3d->misc_getCursorEntityId(), Tools::convertToNdc(_fe3d->misc_getCursorPosition()));
+		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), _fe3d->misc_isCursorInsideWindow());
 
 		_guiManager->update();
 

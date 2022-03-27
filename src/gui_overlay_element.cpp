@@ -10,24 +10,14 @@ void GuiOverlay::createInputField(const string & id, const fvec2 & position, con
 	_inputFields.insert({id, make_shared<GuiInputField>(_fe3d, id, "overlay", position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered)});
 }
 
-void GuiOverlay::createButton(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
+void GuiOverlay::createButton(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
 {
-	_buttons.insert({id, make_shared<GuiButton>(_fe3d, id, "overlay", position, size, defaultQuadColor, hoveredQuadColor, textContent, defaultTextColor, hoveredTextColor, isCentered)});
+	_buttons.insert({id, make_shared<GuiButton>(_fe3d, id, "overlay", position, size, diffuseMapPath, hoveredQuadColor, textContent, defaultQuadColor, defaultTextColor, hoveredTextColor, isCentered)});
 }
 
-void GuiOverlay::createButton(const string & id, const fvec2 & position, const fvec2 & size, const string & texturePath, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
+void GuiOverlay::createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & color, bool isCentered)
 {
-	_buttons.insert({id, make_shared<GuiButton>(_fe3d, id, "overlay", position, size, texturePath, hoveredQuadColor, textContent, defaultTextColor, hoveredTextColor, isCentered)});
-}
-
-void GuiOverlay::createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, bool isCentered)
-{
-	_quadFields.insert({id, make_shared<GuiQuadField>(_fe3d, id, "overlay", position, size, color, isCentered)});
-}
-
-void GuiOverlay::createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const string & texturePath, bool isCentered)
-{
-	_quadFields.insert({id, make_shared<GuiQuadField>(_fe3d, id, "overlay", position, size, texturePath, isCentered)});
+	_quadFields.insert({id, make_shared<GuiQuadField>(_fe3d, id, "overlay", position, size, diffuseMapPath, color, isCentered)});
 }
 
 void GuiOverlay::createTextField(const string & id, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & textColor, bool isCentered)

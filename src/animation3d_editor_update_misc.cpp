@@ -21,7 +21,7 @@ void Animation3dEditor::_updateCamera()
 		}
 		_fe3d->camera_setThirdPersonLookat(cameraLookat);
 
-		_fe3d->quad2d_setVisible("@@cursor", false);
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 
 		const auto distance = _fe3d->camera_getThirdPersonDistance();
 		_fe3d->graphics_setShadowPositionOffset(fvec3(cameraLookat + fvec3(distance)));
@@ -63,7 +63,7 @@ void Animation3dEditor::_updateMiscellaneous()
 				{
 					if(_fe3d->model_isExisting(_previewModelId))
 					{
-						for(const auto& partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
+						for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 						{
 							if(partId.empty())
 							{
@@ -85,7 +85,7 @@ void Animation3dEditor::_updateMiscellaneous()
 						{
 							for(unsigned int frameIndex = 1; frameIndex <= _currentFrameIndex; frameIndex++)
 							{
-								for(const auto& partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
+								for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 								{
 									if(_fe3d->model_hasPart(_previewModelId, partId) || partId.empty())
 									{
@@ -212,7 +212,7 @@ void Animation3dEditor::_updateAnimationCreating()
 			_fe3d->animation3d_create(newAnimationId);
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-			_gui->getOverlay()->getTextField("animationId")->changeTextContent("Animation: " + newAnimationId);
+			_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + newAnimationId);
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
 			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), true);
 			_isCreatingAnimation = false;
@@ -236,7 +236,7 @@ void Animation3dEditor::_updateAnimationChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("animationId")->changeTextContent("Animation: " + _currentAnimationId.substr(1));
+					_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + _currentAnimationId.substr(1));
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
 					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), true);
 				}
@@ -296,7 +296,7 @@ void Animation3dEditor::_updateModelChoosing()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				bool hasAllParts = true;
-				for(const auto& partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
+				for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 				{
 					if(!partId.empty())
 					{
@@ -317,7 +317,7 @@ void Animation3dEditor::_updateModelChoosing()
 				{
 					_fe3d->animation3d_createPart(_currentAnimationId, "");
 
-					for(const auto& partId : _fe3d->model_getPartIds(_previewModelId))
+					for(const auto & partId : _fe3d->model_getPartIds(_previewModelId))
 					{
 						_fe3d->animation3d_createPart(_currentAnimationId, partId);
 					}

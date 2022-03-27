@@ -14,7 +14,7 @@ void WorldEditor::_updateCamera()
 
 			if(_fe3d->camera_isFirstPersonEnabled())
 			{
-				_fe3d->quad2d_setVisible("@@cursor", false);
+				_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 			}
 		}
 		else
@@ -23,7 +23,7 @@ void WorldEditor::_updateCamera()
 
 			if(_fe3d->misc_isCursorInsideWindow())
 			{
-				_fe3d->quad2d_setVisible("@@cursor", true);
+				_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), true);
 			}
 		}
 
@@ -94,34 +94,34 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), _isWireframeModeEnabled);
 	}
 
-	for(const auto& [modelId, templateId] : _loadedModelIds)
+	for(const auto & [modelId, templateId] : _loadedModelIds)
 	{
-		for(const auto& partId : _fe3d->model_getPartIds(modelId))
+		for(const auto & partId : _fe3d->model_getPartIds(modelId))
 		{
 			_fe3d->model_setWireframed(modelId, partId, _isWireframeModeEnabled);
 		}
 
-		for(const auto& aabbId : _fe3d->model_getChildAabbIds(modelId))
+		for(const auto & aabbId : _fe3d->model_getChildAabbIds(modelId))
 		{
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
 	}
 
-	for(const auto& [quadId, templateId] : _loadedQuadIds)
+	for(const auto & [quadId, templateId] : _loadedQuadIds)
 	{
 		_fe3d->quad3d_setWireframed(quadId, _isWireframeModeEnabled);
 
-		for(const auto& aabbId : _fe3d->quad3d_getChildAabbIds(quadId))
+		for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(quadId))
 		{
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
 	}
 
-	for(const auto& [textId, templateId] : _loadedTextIds)
+	for(const auto & [textId, templateId] : _loadedTextIds)
 	{
 		_fe3d->text3d_setWireframed(textId, _isWireframeModeEnabled);
 
-		for(const auto& aabbId : _fe3d->text3d_getChildAabbIds(textId))
+		for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(textId))
 		{
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}

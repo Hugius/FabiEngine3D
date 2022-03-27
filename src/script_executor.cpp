@@ -32,7 +32,7 @@ void ScriptExecutor::update(bool isDebugging)
 		{
 			const auto isCursorInsideDisplay = _fe3d->misc_isCursorInsideDisplay();
 
-			_fe3d->quad2d_setVisible("@@cursor", !isCursorInsideDisplay);
+			_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), !isCursorInsideDisplay);
 
 			if(_wasCursorInsideDisplay && !isCursorInsideDisplay)
 			{
@@ -60,7 +60,7 @@ void ScriptExecutor::pause()
 		_wasFirstPersonEnabled = _fe3d->camera_isFirstPersonEnabled();
 		_wasThirdPersonEnabled = _fe3d->camera_isThirdPersonEnabled();
 
-		for(const auto& soundId : _fe3d->sound3d_getIds())
+		for(const auto & soundId : _fe3d->sound3d_getIds())
 		{
 			for(unsigned int index = 0; index < _fe3d->sound3d_getStartedCount(soundId); index++)
 			{
@@ -71,7 +71,7 @@ void ScriptExecutor::pause()
 			}
 		}
 
-		for(const auto& soundId : _fe3d->sound2d_getIds())
+		for(const auto & soundId : _fe3d->sound2d_getIds())
 		{
 			for(unsigned int index = 0; index < _fe3d->sound2d_getStartedCount(soundId); index++)
 			{
@@ -82,7 +82,7 @@ void ScriptExecutor::pause()
 			}
 		}
 
-		for(const auto& clockId : _fe3d->clock_getIds())
+		for(const auto & clockId : _fe3d->clock_getIds())
 		{
 			if(_fe3d->clock_isStarted(clockId) && _fe3d->clock_isPaused(clockId))
 			{
@@ -95,7 +95,7 @@ void ScriptExecutor::pause()
 		_fe3d->camera_setFirstPersonEnabled(false);
 		_fe3d->camera_setThirdPersonEnabled(false);
 
-		for(const auto& soundId : _fe3d->sound3d_getIds())
+		for(const auto & soundId : _fe3d->sound3d_getIds())
 		{
 			for(unsigned int index = 0; index < _fe3d->sound3d_getStartedCount(soundId); index++)
 			{
@@ -106,7 +106,7 @@ void ScriptExecutor::pause()
 			}
 		}
 
-		for(const auto& soundId : _fe3d->sound2d_getIds())
+		for(const auto & soundId : _fe3d->sound2d_getIds())
 		{
 			for(unsigned int index = 0; index < _fe3d->sound2d_getStartedCount(soundId); index++)
 			{
@@ -117,7 +117,7 @@ void ScriptExecutor::pause()
 			}
 		}
 
-		for(const auto& clockId : _fe3d->clock_getIds())
+		for(const auto & clockId : _fe3d->clock_getIds())
 		{
 			if(_fe3d->clock_isStarted(clockId) && !_fe3d->clock_isPaused(clockId))
 			{
@@ -139,7 +139,7 @@ void ScriptExecutor::resume()
 		_fe3d->camera_setFirstPersonEnabled(_wasFirstPersonEnabled);
 		_fe3d->camera_setThirdPersonEnabled(_wasThirdPersonEnabled);
 
-		for(const auto& soundId : _fe3d->sound3d_getIds())
+		for(const auto & soundId : _fe3d->sound3d_getIds())
 		{
 			for(unsigned int index = 0; index < _fe3d->sound3d_getStartedCount(soundId); index++)
 			{
@@ -150,7 +150,7 @@ void ScriptExecutor::resume()
 			}
 		}
 
-		for(const auto& soundId : _fe3d->sound2d_getIds())
+		for(const auto & soundId : _fe3d->sound2d_getIds())
 		{
 			for(unsigned int index = 0; index < _fe3d->sound2d_getStartedCount(soundId); index++)
 			{
@@ -161,7 +161,7 @@ void ScriptExecutor::resume()
 			}
 		}
 
-		for(const auto& clockId : _fe3d->clock_getIds())
+		for(const auto & clockId : _fe3d->clock_getIds())
 		{
 			if(_fe3d->clock_isStarted(clockId) && _fe3d->clock_isPaused(clockId))
 			{
@@ -169,17 +169,17 @@ void ScriptExecutor::resume()
 			}
 		}
 
-		for(const auto& [soundId, index] : _pausedSound3dIds)
+		for(const auto & [soundId, index] : _pausedSound3dIds)
 		{
 			_fe3d->sound3d_pause(soundId, index);
 		}
 
-		for(const auto& [soundId, index] : _pausedSound2dIds)
+		for(const auto & [soundId, index] : _pausedSound2dIds)
 		{
 			_fe3d->sound2d_pause(soundId, index);
 		}
 
-		for(const auto& clockId : _pausedClockIds)
+		for(const auto & clockId : _pausedClockIds)
 		{
 			_fe3d->clock_pause(clockId);
 		}
@@ -221,7 +221,7 @@ void ScriptExecutor::inject(shared_ptr<ScriptInterpreter> scriptInterpreter)
 	_scriptInterpreter = scriptInterpreter;
 }
 
-void ScriptExecutor::setCurrentProjectId(const string& projectId)
+void ScriptExecutor::setCurrentProjectId(const string & projectId)
 {
 	_scriptInterpreter->setCurrentProjectId(projectId);
 }

@@ -16,7 +16,7 @@ GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const strin
 	_defaultTextColor(defaultTextColor),
 	_hoveredTextColor(hoveredTextColor)
 {
-	_quadField = make_shared<GuiQuadField>(fe3d, "GuiScrollingList", (parentId + "_" + id), position, size, color, isCentered);
+	_quadField = make_shared<GuiQuadField>(fe3d, "GuiScrollingList", (parentId + "_" + id), position, size, "", color, isCentered);
 }
 
 void GuiScrollingList::update(bool isFocused)
@@ -37,7 +37,7 @@ void GuiScrollingList::createOption(const string & id, const string & textConten
 		abort();
 	}
 
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, id, _parentId, fvec2(0.0f), fvec2(0.0f), _defaultQuadColor, _hoveredQuadColor, textContent, _defaultTextColor, _hoveredTextColor, _quadField->isCentered()));
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, id, _parentId, fvec2(0.0f), fvec2(0.0f), "", _defaultQuadColor, _hoveredQuadColor, textContent, _defaultTextColor, _hoveredTextColor, _quadField->isCentered()));
 
 	_buttons.back()->setVisible(isVisible());
 }

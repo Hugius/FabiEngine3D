@@ -4,7 +4,7 @@
 
 GuiInputField::GuiInputField(shared_ptr<EngineInterface> fe3d, const string & parentId, const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 	:
-	GuiButton(fe3d, parentId, id, position, size, color, hoverColor, "", textColor, textHoverColor, isCentered),
+	GuiButton(fe3d, parentId, id, position, size, "", color, hoverColor, "", textColor, textHoverColor, isCentered),
 	_noNumbers(noNumbers),
 	_noCaps(noCaps),
 	_noSpecials(noSpecials),

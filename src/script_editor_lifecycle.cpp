@@ -48,17 +48,17 @@ void ScriptEditor::_unload()
 
 	_fe3d->text3d_delete("cursor");
 
-	for(const auto& id : _loadedQuadIds)
+	for(const auto & id : _loadedQuadIds)
 	{
 		_fe3d->quad3d_delete(id);
 	}
 
-	for(const auto& id : _loadedTextIds)
+	for(const auto & id : _loadedTextIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
 
-	for(const auto& id : _loadedAabbIds)
+	for(const auto & id : _loadedAabbIds)
 	{
 		_fe3d->aabb_delete(id);
 	}
@@ -89,13 +89,13 @@ void ScriptEditor::_loadGUI()
 	auto positions = Mathematics::calculateDistributedPositions(8, CH);
 	leftWindow->createScreen("scriptEditorMenuMain");
 	leftWindow->getScreen("scriptEditorMenuMain")->createTextField("lineCount", fvec2(0.0f, positions[0]), TEXT_SIZE("Lines: 0"), "Lines: 0", fvec3(1.0f), true);
-	leftWindow->getScreen("scriptEditorMenuMain")->createButton("search", fvec2(0.0f, positions[1]), TEXT_SIZE("Search"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Search", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("scriptEditorMenuMain")->createButton("create", fvec2(0.0f, positions[2]), TEXT_SIZE("Create Script"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("scriptEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[3]), TEXT_SIZE("Edit Script"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("scriptEditorMenuMain")->createButton("rename", fvec2(0.0f, positions[4]), TEXT_SIZE("Rename Script"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rename Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("scriptEditorMenuMain")->createButton("clear", fvec2(0.0f, positions[5]), TEXT_SIZE("Clear Script"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("scriptEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[6]), TEXT_SIZE("Delete Script"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("scriptEditorMenuMain")->createButton("back", fvec2(0.0f, positions[7]), TEXT_SIZE("Go Back"), BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("scriptEditorMenuMain")->createButton("search", fvec2(0.0f, positions[1]), TEXT_SIZE("Search"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Search", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("scriptEditorMenuMain")->createButton("create", fvec2(0.0f, positions[2]), TEXT_SIZE("Create Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("scriptEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[3]), TEXT_SIZE("Edit Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("scriptEditorMenuMain")->createButton("rename", fvec2(0.0f, positions[4]), TEXT_SIZE("Rename Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rename Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("scriptEditorMenuMain")->createButton("clear", fvec2(0.0f, positions[5]), TEXT_SIZE("Clear Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Clear Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("scriptEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[6]), TEXT_SIZE("Delete Script"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Script", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("scriptEditorMenuMain")->createButton("back", fvec2(0.0f, positions[7]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 }
 
 void ScriptEditor::_unloadGUI()

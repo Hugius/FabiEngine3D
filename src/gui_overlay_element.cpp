@@ -12,7 +12,7 @@ void GuiOverlay::createInputField(const string & id, const fvec2 & position, con
 
 void GuiOverlay::createButton(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
 {
-	_buttons.insert({id, make_shared<GuiButton>(_fe3d, id, "overlay", position, size, diffuseMapPath, hoveredQuadColor, textContent, defaultQuadColor, defaultTextColor, hoveredTextColor, isCentered)});
+	_buttons.insert({id, make_shared<GuiButton>(_fe3d, id, "overlay", position, size, diffuseMapPath, defaultQuadColor, hoveredQuadColor, textContent, defaultTextColor, hoveredTextColor, isCentered)});
 }
 
 void GuiOverlay::createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & color, bool isCentered)

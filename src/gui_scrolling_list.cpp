@@ -6,16 +6,17 @@
 
 using std::clamp;
 
-GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & buttonColor, const fvec3 & buttonHoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, const fvec2 & charSize, bool isCentered)
+GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
 	:
-	GuiQuadField(fe3d, "GuiScrollingList", (parentId + "_" + id), position, size, color, isCentered),
-	_buttonColor(buttonColor),
-	_buttonHoverColor(buttonHoverColor),
-	_textColor(textColor),
-	_textHoverColor(textHoverColor),
-	_charSize(charSize)
+	_fe3d(fe3d),
+	_id(id),
+	_parentId(parentId),
+	_defaultQuadColor(defaultQuadColor),
+	_hoveredQuadColor(hoveredQuadColor),
+	_defaultTextColor(defaultTextColor),
+	_hoveredTextColor(hoveredTextColor)
 {
-
+	_quadField = make_shared<GuiQuadField>(fe3d, "GuiScrollingList", (parentId + "_" + id), position, size, color, isCentered);
 }
 
 void GuiScrollingList::update(bool isFocused)
@@ -29,19 +30,19 @@ void GuiScrollingList::update(bool isFocused)
 	}
 }
 
-void GuiScrollingList::createButton(const string & id, const string & textContent, const fvec2 & size)
+void GuiScrollingList::createOption(const string & id, const string & textContent)
 {
-	if(hasButton(id))
+	if(hasOption(id))
 	{
 		abort();
 	}
 
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, id, _parentId, fvec2(0.0f), size, _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, _fe3d->quad2d_isCentered(_entityId)));
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, id, _parentId, fvec2(0.0f), fvec2(0.0f), _defaultQuadColor, _hoveredQuadColor, textContent, _defaultTextColor, _hoveredTextColor, _quadField->isCentered()));
 
 	_buttons.back()->setVisible(isVisible());
 }
 
-void GuiScrollingList::deleteButton(const string & id)
+void GuiScrollingList::deleteOption(const string & id)
 {
 	for(unsigned int index = 0; index < _buttons.size(); index++)
 	{
@@ -55,19 +56,41 @@ void GuiScrollingList::deleteButton(const string & id)
 	abort();
 }
 
-void GuiScrollingList::deleteButtons()
+void GuiScrollingList::deleteOptions()
 {
 	_buttons.clear();
 }
 
+void GuiScrollingList::setPosition(const fvec2 & value)
+{
+	_quadField->setPosition(value);
+}
+
+void GuiScrollingList::setSize(const fvec2 & value)
+{
+	_quadField->setSize(value);
+}
+
 void GuiScrollingList::setVisible(bool value)
 {
-	GuiQuadField::setVisible(value);
+	_quadField->setVisible(value);
 
 	for(const auto & button : _buttons)
 	{
 		button->setVisible(value);
 	}
+}
+
+const vector<string> GuiScrollingList::getOptionIds() const
+{
+	vector<string> result = {};
+
+	for(const auto & button : _buttons)
+	{
+		result.push_back(button->getId());
+	}
+
+	return result;
 }
 
 void GuiScrollingList::_updateHovering()
@@ -99,26 +122,25 @@ void GuiScrollingList::_updateScrolling()
 	{
 		if(_isHovered)
 		{
-			_scrollingOffset -= static_cast<float>(_fe3d->input_getMouseWheelY());
+			_scrollingOffset += (static_cast<float>(_fe3d->input_getMouseWheelY()) * SCROLLING_SPEED);
 		}
 
 		_scrollingOffset = clamp(_scrollingOffset, 0.0f, 999999999999999.0f);
 
-		float y = 0.0f;
+		float yOffset = CHARACTER_HEIGHT;
 
 		for(const auto & button : _buttons)
 		{
 			const auto listPosition = getPosition();
 			const auto listSize = getSize();
-
-			const auto buttonPosition = fvec2(listPosition.x, listPosition.y - y - _scrollingOffset);
-			const auto buttonSize = button->getSize();
+			const auto buttonPosition = _convertPosition(fvec2(0.0f, (1.0f - yOffset + _scrollingOffset)));
+			const auto buttonSize = _convertSize(fvec2(CHARACTER_WIDTH * 5.0f, CHARACTER_HEIGHT));
 
 			button->setPosition(buttonPosition);
 			button->setMinPosition(fvec2(-1.0f, listPosition.y - (listSize.y * 0.5f)));
 			button->setMaxPosition(fvec2(1.0f, listPosition.y + (listSize.y * 0.5f)));
 
-			y += buttonSize.y;
+			yOffset += (CHARACTER_HEIGHT * 1.5f);
 		}
 	}
 }
@@ -141,7 +163,7 @@ const fvec2 GuiScrollingList::_convertSize(const fvec2 & size) const
 	return buttonSize;
 }
 
-const bool GuiScrollingList::hasButton(const string & id)
+const bool GuiScrollingList::hasOption(const string & id) const
 {
 	for(const auto & button : _buttons)
 	{
@@ -154,35 +176,40 @@ const bool GuiScrollingList::hasButton(const string & id)
 	return false;
 }
 
+const string GuiScrollingList::getHoveredOptionId() const
+{
+	for(const auto & button : _buttons)
+	{
+		if(button->isHovered())
+		{
+			return button->getId();
+		}
+	}
+
+	return "";
+}
+
 const bool GuiScrollingList::isHovered() const
 {
 	return _isHovered;
 }
 
-const shared_ptr<GuiButton> GuiScrollingList::getButton(const string & id) const
+const bool GuiScrollingList::isVisible() const
 {
-	for(const auto & button : _buttons)
-	{
-		if(id == button->getId())
-		{
-			return button;
-		}
-	}
+	return _quadField->isVisible();
+}
 
-	abort();
+const bool GuiScrollingList::isCentered() const
+{
+	return _quadField->isCentered();
 }
 
 const fvec2 & GuiScrollingList::getPosition() const
 {
-	return _fe3d->quad2d_getPosition(_entityId);
+	return _quadField->getPosition();
 }
 
 const fvec2 & GuiScrollingList::getSize() const
 {
-	return _fe3d->quad2d_getSize(_entityId);
-}
-
-const vector<shared_ptr<GuiButton>> & GuiScrollingList::getButtons() const
-{
-	return _buttons;
+	return _quadField->getSize();
 }

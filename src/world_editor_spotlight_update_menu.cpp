@@ -48,11 +48,11 @@ void WorldEditor::_updateSpotlightMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->deleteOptions();
 
 			for(auto & id : _loadedSpotlightIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createButton(id, id, fvec2(0.9f, 0.1f));
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlightList")->createOption(id, id);
 			}
 		}
 
@@ -66,38 +66,35 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuSpotlightChoice")
 	{
-		for(const auto & button : screen->getScrollingList("spotlightList")->getButtons())
+		for(const auto & optionId : screen->getScrollingList("spotlightList")->getOptionIds())
 		{
-			if(!_fe3d->spotlight_isExisting(button->getId()))
+			if(!_fe3d->spotlight_isExisting(optionId))
 			{
-				screen->getScrollingList("spotlightList")->deleteButton(button->getId());
+				screen->getScrollingList("spotlightList")->deleteOption(optionId);
 				break;
 			}
 		}
 
-		for(auto & id : _loadedSpotlightIds)
+		const auto hoveredOptionId = screen->getScrollingList("spotlightList")->getHoveredOptionId();
+
+		if(!hoveredOptionId.empty())
 		{
-			if(screen->getScrollingList("spotlightList")->getButton(id)->isHovered())
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-				{
-					_deactivateModel();
-					_deactivateQuad3d();
-					_deactivateSound();
-					_deactivatePointlight();
-					_deactivateSpotlight();
-					_deactivateReflection();
+				_deactivateModel();
+				_deactivateQuad3d();
+				_deactivateSound();
+				_deactivatePointlight();
+				_deactivateSpotlight();
+				_deactivateReflection();
 
-					_activateSpotlight(id);
-				}
-				else
-				{
-					_selectSpotlight(id);
+				_activateSpotlight(hoveredOptionId);
+			}
+			else
+			{
+				_selectSpotlight(hoveredOptionId);
 
-					_dontResetSelectedSpotlight = true;
-				}
-
-				break;
+				_dontResetSelectedSpotlight = true;
 			}
 		}
 

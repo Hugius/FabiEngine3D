@@ -33,11 +33,11 @@ void WorldEditor::_updateSoundMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSoundChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->deleteOptions();
 
 			for(auto & [key, templateId] : _loadedSoundIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->createButton(key, key, fvec2(0.9f, 0.1f));
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->createOption(key, key);
 			}
 		}
 
@@ -60,7 +60,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 		{
 			for(const auto & soundId : _soundEditor->getLoadedSoundIds())
 			{
-				if(screen->getScrollingList("soundList")->getButton(soundId)->isHovered())
+				if(soundId == screen->getScrollingList("soundList")->getHoveredOptionId())
 				{
 					_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
@@ -97,38 +97,35 @@ void WorldEditor::_updateSoundChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuSoundChoice")
 	{
-		for(const auto & button : screen->getScrollingList("soundList")->getButtons())
+		for(const auto & optionId : screen->getScrollingList("soundList")->getOptionIds())
 		{
-			if(!_fe3d->sound3d_isExisting(button->getId()))
+			if(!_fe3d->sound3d_isExisting(optionId))
 			{
-				screen->getScrollingList("soundList")->deleteButton(button->getId());
+				screen->getScrollingList("soundList")->deleteOption(optionId);
 				break;
 			}
 		}
 
-		for(auto & [key, templateId] : _loadedSoundIds)
+		const auto hoveredOptionId = screen->getScrollingList("soundList")->getHoveredOptionId();
+
+		if(!hoveredOptionId.empty())
 		{
-			if(screen->getScrollingList("soundList")->getButton(key)->isHovered())
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-				{
-					_deactivateModel();
-					_deactivateQuad3d();
-					_deactivateSound();
-					_deactivatePointlight();
-					_deactivateSpotlight();
-					_deactivateReflection();
+				_deactivateModel();
+				_deactivateQuad3d();
+				_deactivateSound();
+				_deactivatePointlight();
+				_deactivateSpotlight();
+				_deactivateReflection();
 
-					_activateSound(key);
-				}
-				else
-				{
-					_selectSound(key);
+				_activateSound(hoveredOptionId);
+			}
+			else
+			{
+				_selectSound(hoveredOptionId);
 
-					_dontResetSelectedSound = true;
-				}
-
-				break;
+				_dontResetSelectedSound = true;
 			}
 		}
 

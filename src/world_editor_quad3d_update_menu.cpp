@@ -27,11 +27,11 @@ void WorldEditor::_updateQuad3dMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3dChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteOptions();
 
 			for(auto & [key, templateId] : _loadedQuadIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createButton(key, key, fvec2(0.9f, 0.1f));
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createOption(key, key);
 			}
 		}
 
@@ -56,7 +56,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 			{
 				if(_fe3d->quad3d_isExisting(quadId))
 				{
-					if(screen->getScrollingList("quad3dList")->getButton(quadId)->isHovered())
+					if(quadId == screen->getScrollingList("quad3dList")->getHoveredOptionId())
 					{
 						_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
@@ -92,38 +92,35 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuQuad3dChoice")
 	{
-		for(const auto & button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->getButtons())
+		for(const auto & optionId : screen->getScrollingList("quad3dList")->getOptionIds())
 		{
-			if(!_fe3d->quad3d_isExisting(button->getId()))
+			if(!_fe3d->quad3d_isExisting(optionId))
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteButton(button->getId());
+				screen->getScrollingList("quad3dList")->deleteOption(optionId);
 				break;
 			}
 		}
 
-		for(auto & [key, templateId] : _loadedQuadIds)
+		const auto hoveredOptionId = screen->getScrollingList("quad3dList")->getHoveredOptionId();
+
+		if(!hoveredOptionId.empty())
 		{
-			if(screen->getScrollingList("quad3dList")->getButton(key)->isHovered())
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-				{
-					_deactivateModel();
-					_deactivateQuad3d();
-					_deactivateSound();
-					_deactivatePointlight();
-					_deactivateSpotlight();
-					_deactivateReflection();
+				_deactivateModel();
+				_deactivateQuad3d();
+				_deactivateSound();
+				_deactivatePointlight();
+				_deactivateSpotlight();
+				_deactivateReflection();
 
-					_activateQuad3d(key);
-				}
-				else
-				{
-					_selectQuad3d(key);
+				_activateQuad3d(hoveredOptionId);
+			}
+			else
+			{
+				_selectQuad3d(hoveredOptionId);
 
-					_dontResetSelectedQuad3d = true;
-				}
-
-				break;
+				_dontResetSelectedQuad3d = true;
 			}
 		}
 

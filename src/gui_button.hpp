@@ -29,6 +29,7 @@ public:
 	const bool isHoverable() const;
 	const bool isHovered() const;
 	const bool isVisible() const;
+	const bool isCentered() const;
 
 protected:
 	void _updateHovering(bool isFocused);

@@ -48,11 +48,11 @@ void WorldEditor::_updateReflectionMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuReflectionChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->deleteOptions();
 
 			for(auto & id : _loadedReflectionIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->createButton(id, id, fvec2(0.9f, 0.1f));
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflectionList")->createOption(id, id);
 			}
 		}
 
@@ -66,38 +66,35 @@ void WorldEditor::_updateReflectionChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuReflectionChoice")
 	{
-		for(const auto & button : screen->getScrollingList("reflectionList")->getButtons())
+		for(const auto & optionId : screen->getScrollingList("reflectionList")->getOptionIds())
 		{
-			if(!_fe3d->reflection_isExisting(button->getId()))
+			if(!_fe3d->reflection_isExisting(optionId))
 			{
-				screen->getScrollingList("reflectionList")->deleteButton(button->getId());
+				screen->getScrollingList("reflectionList")->deleteOption(optionId);
 				break;
 			}
 		}
 
-		for(auto & id : _loadedReflectionIds)
+		const auto hoveredOptionId = screen->getScrollingList("reflectionList")->getHoveredOptionId();
+
+		if(!hoveredOptionId.empty())
 		{
-			if(screen->getScrollingList("reflectionList")->getButton(id)->isHovered())
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-				{
-					_deactivateModel();
-					_deactivateQuad3d();
-					_deactivateSound();
-					_deactivatePointlight();
-					_deactivateSpotlight();
-					_deactivateReflection();
+				_deactivateModel();
+				_deactivateQuad3d();
+				_deactivateSound();
+				_deactivatePointlight();
+				_deactivateSpotlight();
+				_deactivateReflection();
 
-					_activateReflection(id);
-				}
-				else
-				{
-					_selectReflection(id);
+				_activateReflection(hoveredOptionId);
+			}
+			else
+			{
+				_selectReflection(hoveredOptionId);
 
-					_dontResetSelectedReflection = true;
-				}
-
-				break;
+				_dontResetSelectedReflection = true;
 			}
 		}
 

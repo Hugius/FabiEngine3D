@@ -2,7 +2,7 @@
 
 #include "engine_interface.hpp"
 
-class GuiQuadField
+class GuiQuadField final
 {
 public:
 	GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, bool isCentered);
@@ -26,6 +26,7 @@ public:
 	const fvec2 & getSize() const;
 
 	const bool isVisible() const;
+	const bool isCentered() const;
 
 protected:
 	const string _id;

@@ -169,6 +169,11 @@ const bool GuiButton::isVisible() const
 	return _quadField->isVisible();
 }
 
+const bool GuiButton::isCentered() const
+{
+	return _quadField->isCentered();
+}
+
 const string & GuiButton::getId() const
 {
 	return _id;

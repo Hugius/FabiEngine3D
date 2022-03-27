@@ -19,21 +19,21 @@ void WorldEditor::_load()
 	for(const auto & id : _modelEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace");
-		screen->getScrollingList("modelList")->createButton(id, id.substr(1), fvec2(0.9f, 0.1f));
+		screen->getScrollingList("modelList")->createOption(id, id.substr(1));
 	}
 
 	_quad3dEditor->loadEntitiesFromFile();
 	for(const auto & id : _quad3dEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace");
-		screen->getScrollingList("quad3dList")->createButton(id, id.substr(1), fvec2(0.9f, 0.1f));
+		screen->getScrollingList("quad3dList")->createOption(id, id.substr(1));
 	}
 
 	_text3dEditor->loadEntitiesFromFile();
 	for(const auto & id : _text3dEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace");
-		screen->getScrollingList("text3dList")->createButton(id, id.substr(1), fvec2(0.9f, 0.1f));
+		screen->getScrollingList("text3dList")->createOption(id, id.substr(1));
 	}
 
 	_animation2dEditor->loadAnimationsFromFile();
@@ -83,7 +83,7 @@ void WorldEditor::_load()
 		_fe3d->sound3d_setMaxDistance(id, DEFAULT_SOUND_MAX_DISTANCE);
 
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundPlace");
-		screen->getScrollingList("soundList")->createButton(id, id.substr(1), fvec2(0.9f, 0.1f));
+		screen->getScrollingList("soundList")->createOption(id, id.substr(1));
 	}
 
 	_gui->getOverlay()->createTextField("selectedId", fvec2(0.0f, 0.0f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);

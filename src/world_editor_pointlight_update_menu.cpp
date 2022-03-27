@@ -48,11 +48,11 @@ void WorldEditor::_updatePointlightMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->deleteOptions();
 
 			for(auto & id : _loadedPointlightIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createButton(id, id, fvec2(0.9f, 0.1f));
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlightList")->createOption(id, id);
 			}
 		}
 
@@ -66,38 +66,35 @@ void WorldEditor::_updatePointlightChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuPointlightChoice")
 	{
-		for(const auto & button : screen->getScrollingList("pointlightList")->getButtons())
+		for(const auto & optionId : screen->getScrollingList("pointlightList")->getOptionIds())
 		{
-			if(!_fe3d->pointlight_isExisting(button->getId()))
+			if(!_fe3d->pointlight_isExisting(optionId))
 			{
-				screen->getScrollingList("pointlightList")->deleteButton(button->getId());
+				screen->getScrollingList("pointlightList")->deleteOption(optionId);
 				break;
 			}
 		}
 
-		for(auto & id : _loadedPointlightIds)
+		const auto hoveredOptionId = screen->getScrollingList("pointlightList")->getHoveredOptionId();
+
+		if(!hoveredOptionId.empty())
 		{
-			if(screen->getScrollingList("pointlightList")->getButton(id)->isHovered())
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-				{
-					_deactivateModel();
-					_deactivateQuad3d();
-					_deactivateSound();
-					_deactivatePointlight();
-					_deactivateSpotlight();
-					_deactivateReflection();
+				_deactivateModel();
+				_deactivateQuad3d();
+				_deactivateSound();
+				_deactivatePointlight();
+				_deactivateSpotlight();
+				_deactivateReflection();
 
-					_activatePointlight(id);
-				}
-				else
-				{
-					_selectPointlight(id);
+				_activatePointlight(hoveredOptionId);
+			}
+			else
+			{
+				_selectPointlight(hoveredOptionId);
 
-					_dontResetSelectedPointlight = true;
-				}
-
-				break;
+				_dontResetSelectedPointlight = true;
 			}
 		}
 

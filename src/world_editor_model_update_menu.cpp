@@ -27,11 +27,11 @@ void WorldEditor::_updateModelMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuModelChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteOptions();
 
 			for(auto & [key, templateId] : _loadedModelIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createButton(key, key, fvec2(0.9f, 0.1f));
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createOption(key, key);
 			}
 		}
 
@@ -56,7 +56,7 @@ void WorldEditor::_updateModelPlacingMenu()
 			{
 				if(_fe3d->model_isExisting(modelId))
 				{
-					if(screen->getScrollingList("modelList")->getButton(modelId)->isHovered())
+					if(modelId == screen->getScrollingList("modelList")->getHoveredOptionId())
 					{
 						_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
@@ -93,38 +93,35 @@ void WorldEditor::_updateModelChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuModelChoice")
 	{
-		for(const auto & button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
+		for(const auto & optionId : screen->getScrollingList("modelList")->getOptionIds())
 		{
-			if(!_fe3d->model_isExisting(button->getId()))
+			if(!_fe3d->model_isExisting(optionId))
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButton(button->getId());
+				screen->getScrollingList("modelList")->deleteOption(optionId);
 				break;
 			}
 		}
 
-		for(auto & [key, templateId] : _loadedModelIds)
+		const auto hoveredOptionId = screen->getScrollingList("modelList")->getHoveredOptionId();
+
+		if(!hoveredOptionId.empty())
 		{
-			if(screen->getScrollingList("modelList")->getButton(key)->isHovered())
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-				{
-					_deactivateModel();
-					_deactivateQuad3d();
-					_deactivateSound();
-					_deactivatePointlight();
-					_deactivateSpotlight();
-					_deactivateReflection();
+				_deactivateModel();
+				_deactivateQuad3d();
+				_deactivateSound();
+				_deactivatePointlight();
+				_deactivateSpotlight();
+				_deactivateReflection();
 
-					_activateModel(key);
-				}
-				else
-				{
-					_selectModel(key);
+				_activateModel(hoveredOptionId);
+			}
+			else
+			{
+				_selectModel(hoveredOptionId);
 
-					_dontResetSelectedModel = true;
-				}
-
-				break;
+				_dontResetSelectedModel = true;
 			}
 		}
 

@@ -81,6 +81,11 @@ const bool GuiQuadField::isVisible() const
 	return _fe3d->quad2d_isVisible(_entityId);
 }
 
+const bool GuiQuadField::isCentered() const
+{
+	return _fe3d->quad2d_isCentered(_entityId);
+}
+
 const fvec3 & GuiQuadField::getColor() const
 {
 	return _fe3d->quad2d_getColor(_entityId);

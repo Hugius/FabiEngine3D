@@ -28,6 +28,7 @@ public:
 	const fvec2 & getSize() const;
 
 	const bool isVisible() const;
+	const bool isCentered() const;
 
 private:
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";

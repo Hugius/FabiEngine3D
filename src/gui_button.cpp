@@ -77,6 +77,26 @@ void GuiButton::setHoverable(bool value)
 	_isHoverable = value;
 }
 
+void GuiButton::setDefaultQuadColor(const fvec3 & value)
+{
+	_hoveredQuadColor = value;
+}
+
+void GuiButton::setHoveredQuadColor(const fvec3 & value)
+{
+	_hoveredTextColor = value;
+}
+
+void GuiButton::setDefaultTextColor(const fvec3 & value)
+{
+	_defaultQuadColor = value;
+}
+
+void GuiButton::setHoveredTextColor(const fvec3 & value)
+{
+	_defaultTextColor = value;
+}
+
 void GuiButton::setPosition(const fvec2 & value)
 {
 	_quadField->setPosition(value);
@@ -146,6 +166,26 @@ const string & GuiButton::getParentId() const
 const string & GuiButton::getTextContent() const
 {
 	return _textField->getTextContent();
+}
+
+const fvec3 & GuiButton::getDefaultQuadColor()
+{
+	return _defaultQuadColor;
+}
+
+const fvec3 & GuiButton::getHoveredQuadColor()
+{
+	return _hoveredQuadColor;
+}
+
+const fvec3 & GuiButton::getDefaultTextColor()
+{
+	return _defaultTextColor;
+}
+
+const fvec3 & GuiButton::getHoveredTextColor()
+{
+	return _hoveredTextColor;
 }
 
 const fvec2 & GuiButton::getPosition() const

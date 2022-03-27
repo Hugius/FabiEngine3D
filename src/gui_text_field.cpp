@@ -84,6 +84,11 @@ const bool GuiTextField::isVisible() const
 	return _fe3d->text2d_isVisible(_entityId);
 }
 
+const bool GuiTextField::isCentered() const
+{
+	return _fe3d->text2d_isCentered(_entityId);
+}
+
 const fvec3 & GuiTextField::getColor() const
 {
 	return _fe3d->text2d_getColor(_entityId);

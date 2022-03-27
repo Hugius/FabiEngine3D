@@ -12,13 +12,24 @@ public:
 	void createOption(const string & id, const string & textContent);
 	void deleteOption(const string & id);
 	void deleteOptions();
+	void setColor(const fvec3 & value);
 	void setPosition(const fvec2 & value);
 	void setSize(const fvec2 & value);
 	void setVisible(bool value);
+	void setDefaultQuadColor(const fvec3 & value);
+	void setHoveredQuadColor(const fvec3 & value);
+	void setDefaultTextColor(const fvec3 & value);
+	void setHoveredTextColor(const fvec3 & value);
 
 	const vector<string> getOptionIds() const;
 
 	const string getHoveredOptionId() const;
+
+	const fvec3 & getColor() const;
+	const fvec3 & getDefaultQuadColor();
+	const fvec3 & getHoveredQuadColor();
+	const fvec3 & getDefaultTextColor();
+	const fvec3 & getHoveredTextColor();
 
 	const fvec2 & getPosition() const;
 	const fvec2 & getSize() const;
@@ -42,11 +53,10 @@ private:
 	const string _id;
 	const string _parentId;
 
-	const fvec3 _defaultQuadColor;
-	const fvec3 _hoveredQuadColor;
-	const fvec3 _defaultTextColor;
-	const fvec3 _hoveredTextColor;
-	const fvec2 _charSize;
+	fvec3 _defaultQuadColor = fvec3(0.0f);
+	fvec3 _hoveredQuadColor = fvec3(0.0f);
+	fvec3 _defaultTextColor = fvec3(0.0f);
+	fvec3 _hoveredTextColor = fvec3(0.0f);
 
 	vector<shared_ptr<GuiButton>> _buttons = {};
 

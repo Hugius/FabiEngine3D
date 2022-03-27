@@ -61,6 +61,11 @@ void GuiScrollingList::deleteOptions()
 	_buttons.clear();
 }
 
+void GuiScrollingList::setColor(const fvec3 & value)
+{
+	_quadField->setColor(value);
+}
+
 void GuiScrollingList::setPosition(const fvec2 & value)
 {
 	_quadField->setPosition(value);
@@ -69,6 +74,66 @@ void GuiScrollingList::setPosition(const fvec2 & value)
 void GuiScrollingList::setSize(const fvec2 & value)
 {
 	_quadField->setSize(value);
+}
+
+const fvec3 & GuiScrollingList::getDefaultQuadColor()
+{
+	return _defaultQuadColor;
+}
+
+const fvec3 & GuiScrollingList::getHoveredQuadColor()
+{
+	return _hoveredQuadColor;
+}
+
+const fvec3 & GuiScrollingList::getDefaultTextColor()
+{
+	return _defaultTextColor;
+}
+
+const fvec3 & GuiScrollingList::getHoveredTextColor()
+{
+	return _hoveredTextColor;
+}
+
+void GuiScrollingList::setDefaultQuadColor(const fvec3 & value)
+{
+	_hoveredQuadColor = value;
+
+	for(const auto & button : _buttons)
+	{
+		button->setDefaultQuadColor(value);
+	}
+}
+
+void GuiScrollingList::setHoveredQuadColor(const fvec3 & value)
+{
+	_hoveredTextColor = value;
+
+	for(const auto & button : _buttons)
+	{
+		button->setHoveredQuadColor(value);
+	}
+}
+
+void GuiScrollingList::setDefaultTextColor(const fvec3 & value)
+{
+	_defaultQuadColor = value;
+
+	for(const auto & button : _buttons)
+	{
+		button->setDefaultTextColor(value);
+	}
+}
+
+void GuiScrollingList::setHoveredTextColor(const fvec3 & value)
+{
+	_defaultTextColor = value;
+
+	for(const auto & button : _buttons)
+	{
+		button->setHoveredTextColor(value);
+	}
 }
 
 void GuiScrollingList::setVisible(bool value)
@@ -197,6 +262,11 @@ const string GuiScrollingList::getHoveredOptionId() const
 	}
 
 	return "";
+}
+
+const fvec3 & GuiScrollingList::getColor() const
+{
+	return _quadField->getColor();
 }
 
 const bool GuiScrollingList::isHovered() const

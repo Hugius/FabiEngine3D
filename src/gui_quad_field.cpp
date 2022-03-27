@@ -100,3 +100,8 @@ const string & GuiQuadField::getParentId() const
 {
 	return _parentId;
 }
+
+const string & GuiQuadField::getDiffuseMapPath() const
+{
+	return _fe3d->quad2d_getDiffuseMapPath(_entityId);
+}

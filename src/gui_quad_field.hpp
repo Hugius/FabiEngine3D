@@ -9,7 +9,7 @@ public:
 	GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & texturePath, bool isCentered);
 	~GuiQuadField();
 
-	virtual void setVisible(bool value);
+	void setVisible(bool value);
 	void setColor(const fvec3 & value);
 	void setPosition(const fvec2 & value);
 	void setSize(const fvec2 & value);
@@ -19,6 +19,7 @@ public:
 
 	const string & getId() const;
 	const string & getParentId() const;
+	const string & getDiffuseMapPath() const;
 
 	const fvec3 & getColor() const;
 

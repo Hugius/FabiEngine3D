@@ -51,7 +51,7 @@ void Text3dEditor::_load()
 
 void Text3dEditor::_unload()
 {
-	for(const auto& id : _loadedEntityIds)
+	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->text3d_delete(id);
 	}

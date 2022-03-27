@@ -27,11 +27,11 @@ void TopViewportController::initialize()
 
 	executionWindow->createScreen("main");
 	executionWindow->setActiveScreen("main");
-	executionWindow->getScreen("main")->createButton("start", fvec2(-0.73f, 0.0f), fvec2(0.2f, 1.75f), "start.tga", fvec3(2.0f), true);
-	executionWindow->getScreen("main")->createButton("pause", fvec2(-0.36f, 0.0f), fvec2(0.2f, 1.75f), "pause.tga", fvec3(2.0f), true);
-	executionWindow->getScreen("main")->createButton("restart", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.75f), "restart.tga", fvec3(2.0f), true);
-	executionWindow->getScreen("main")->createButton("stop", fvec2(0.36f, 0.0f), fvec2(0.2f, 1.75f), "stop.tga", fvec3(2.0f), true);
-	executionWindow->getScreen("main")->createButton("debug", fvec2(0.73f, 0.0f), fvec2(0.2f, 1.75f), "debug.tga", fvec3(2.0f), true);
+	executionWindow->getScreen("main")->createButton("start", fvec2(-0.73f, 0.0f), fvec2(0.2f, 1.75f), "start.tga", fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("pause", fvec2(-0.36f, 0.0f), fvec2(0.2f, 1.75f), "pause.tga", fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("restart", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.75f), "restart.tga", fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("stop", fvec2(0.36f, 0.0f), fvec2(0.2f, 1.75f), "stop.tga", fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("debug", fvec2(0.73f, 0.0f), fvec2(0.2f, 1.75f), "debug.tga", fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
 
 	miscellaneousWindow->createScreen("main");
 	miscellaneousWindow->setActiveScreen("main");
@@ -92,7 +92,7 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("scriptEditor")->setHoverable(isHoverable);
 }
 
-const bool TopViewportController::_prepareProjectChoosing(const string& title) const
+const bool TopViewportController::_prepareProjectChoosing(const string & title) const
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string projectDirectoryPath = (rootPath + "projects\\");
@@ -205,7 +205,7 @@ void TopViewportController::_applyProjectChange()
 	_scriptExecutor->setCurrentProjectId(_currentProjectId);
 }
 
-const bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath) const
+const bool TopViewportController::isProjectCorrupted(const string & projectDirectoryPath) const
 {
 	vector<string> directoryPaths;
 	vector<string> filePaths;
@@ -263,7 +263,7 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	filePaths.push_back(projectDirectoryPath + "data\\text3d.fe3d");
 	filePaths.push_back(projectDirectoryPath + "data\\water.fe3d");
 
-	for(const auto& path : directoryPaths)
+	for(const auto & path : directoryPaths)
 	{
 		if(!Tools::isDirectoryExisting(path))
 		{
@@ -273,7 +273,7 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 		}
 	}
 
-	for(const auto& path : filePaths)
+	for(const auto & path : filePaths)
 	{
 		if(!Tools::isFileExisting(path))
 		{

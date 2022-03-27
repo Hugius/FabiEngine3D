@@ -184,6 +184,16 @@ const string & GuiButton::getParentId() const
 	return _parentId;
 }
 
+const string & GuiButton::getTextContent() const
+{
+	if(_textField == nullptr)
+	{
+		abort();
+	}
+
+	return _textField->getTextContent();
+}
+
 const fvec2 & GuiButton::getPosition() const
 {
 	return _quadField->getPosition();

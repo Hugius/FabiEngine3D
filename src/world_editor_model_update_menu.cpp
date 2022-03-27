@@ -52,35 +52,29 @@ void WorldEditor::_updateModelPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			for(const auto & modelId : _modelEditor->getLoadedEntityIds())
+			const auto hoveredOptionId = screen->getScrollingList("modelList")->getHoveredOptionId();
+
+			if(!hoveredOptionId.empty())
 			{
-				if(_fe3d->model_isExisting(modelId))
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
+
+				_deactivateModel();
+				_deactivateQuad3d();
+				_deactivateSound();
+				_deactivatePointlight();
+				_deactivateSpotlight();
+				_deactivateReflection();
+
+				_currentTemplateModelId = hoveredOptionId;
+				_fe3d->model_setVisible(_currentTemplateModelId, true);
+				_fe3d->misc_centerCursor();
+
+				if(_fe3d->terrain_getSelectedId().empty())
 				{
-					if(modelId == screen->getScrollingList("modelList")->getHoveredOptionId())
-					{
-						_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
-
-						_deactivateModel();
-						_deactivateQuad3d();
-						_deactivateSound();
-						_deactivatePointlight();
-						_deactivateSpotlight();
-						_deactivateReflection();
-
-						_currentTemplateModelId = modelId;
-						_fe3d->model_setVisible(_currentTemplateModelId, true);
-						_fe3d->misc_centerCursor();
-
-						if(_fe3d->terrain_getSelectedId().empty())
-						{
-							_fe3d->model_setBasePosition(_currentTemplateModelId, fvec3(0.0f));
-							_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-							_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-							_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-						}
-
-						break;
-					}
+					_fe3d->model_setBasePosition(_currentTemplateModelId, fvec3(0.0f));
+					_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+					_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+					_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 				}
 			}
 		}

@@ -125,18 +125,28 @@ void GuiScrollingList::_updateScrolling()
 			_scrollingOffset += (static_cast<float>(_fe3d->input_getMouseWheelY()) * SCROLLING_SPEED);
 		}
 
-		_scrollingOffset = clamp(_scrollingOffset, 0.0f, 999999999999999.0f);
+		const auto totalHeight = ((static_cast<float>(_buttons.size()) * CHARACTER_HEIGHT * 1.5f) + (CHARACTER_HEIGHT * 0.5f));
 
-		float yOffset = CHARACTER_HEIGHT;
+		if(totalHeight < 2.0f)
+		{
+			_scrollingOffset = 0.0f;
+		}
+		else
+		{
+			_scrollingOffset = clamp(_scrollingOffset, -(totalHeight - 2.0f), 0.0f);
+		}
+
+		auto yOffset = CHARACTER_HEIGHT;
 
 		for(const auto & button : _buttons)
 		{
 			const auto listPosition = getPosition();
 			const auto listSize = getSize();
-			const auto buttonPosition = _convertPosition(fvec2(0.0f, (1.0f - yOffset + _scrollingOffset)));
-			const auto buttonSize = _convertSize(fvec2(CHARACTER_WIDTH * 5.0f, CHARACTER_HEIGHT));
+			const auto buttonPosition = _convertPosition(fvec2(0.0f, (1.0f - yOffset - _scrollingOffset)));
+			const auto buttonSize = _convertSize(fvec2((CHARACTER_WIDTH * static_cast<float>(button->getTextContent().size())), CHARACTER_HEIGHT));
 
 			button->setPosition(buttonPosition);
+			button->setSize(buttonSize);
 			button->setMinPosition(fvec2(-1.0f, listPosition.y - (listSize.y * 0.5f)));
 			button->setMaxPosition(fvec2(1.0f, listPosition.y + (listSize.y * 0.5f)));
 

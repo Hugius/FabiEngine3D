@@ -35,9 +35,9 @@ private:
 	const fvec2 _convertPosition(const fvec2 & position) const;
 	const fvec2 _convertSize(const fvec2 & size) const;
 
-	static inline constexpr float SCROLLING_SPEED = 0.01f;
-	static inline constexpr float CHARACTER_WIDTH = 0.1f;
-	static inline constexpr float CHARACTER_HEIGHT = 0.1f;
+	static inline constexpr float SCROLLING_SPEED = 0.25f;
+	static inline constexpr float CHARACTER_WIDTH = 0.075f;
+	static inline constexpr float CHARACTER_HEIGHT = 0.15f;
 
 	const string _id;
 	const string _parentId;

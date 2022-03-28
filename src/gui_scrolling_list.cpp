@@ -6,7 +6,7 @@
 
 using std::clamp;
 
-GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
+GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, const fvec2 & characterSize, float scrollingSpeed, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -14,7 +14,9 @@ GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const strin
 	_defaultQuadColor(defaultQuadColor),
 	_hoveredQuadColor(hoveredQuadColor),
 	_defaultTextColor(defaultTextColor),
-	_hoveredTextColor(hoveredTextColor)
+	_hoveredTextColor(hoveredTextColor),
+	_characterSize(characterSize),
+	_scrollingSpeed(scrollingSpeed)
 {
 	_quadField = make_shared<GuiQuadField>(fe3d, "GuiScrollingList", (parentId + "_" + id), position, size, "", color, isCentered);
 }
@@ -136,6 +138,16 @@ void GuiScrollingList::setHoveredTextColor(const fvec3 & value)
 	}
 }
 
+void GuiScrollingList::setCharacterSize(const fvec2 & value)
+{
+	_characterSize = value;
+}
+
+void GuiScrollingList::setScrollingSpeed(float value)
+{
+	_scrollingSpeed = value;
+}
+
 void GuiScrollingList::setVisible(bool value)
 {
 	_quadField->setVisible(value);
@@ -187,10 +199,10 @@ void GuiScrollingList::_updateScrolling()
 	{
 		if(_isHovered)
 		{
-			_scrollingOffset += (static_cast<float>(_fe3d->input_getMouseWheelY()) * SCROLLING_SPEED);
+			_scrollingOffset += (static_cast<float>(_fe3d->input_getMouseWheelY()) * _scrollingSpeed);
 		}
 
-		const auto totalHeight = ((static_cast<float>(_buttons.size()) * CHARACTER_HEIGHT * 1.5f) + (CHARACTER_HEIGHT * 0.5f));
+		const auto totalHeight = ((static_cast<float>(_buttons.size()) * _characterSize.y * 1.5f) + (_characterSize.y * 0.5f));
 
 		if(totalHeight < 2.0f)
 		{
@@ -201,21 +213,21 @@ void GuiScrollingList::_updateScrolling()
 			_scrollingOffset = clamp(_scrollingOffset, -(totalHeight - 2.0f), 0.0f);
 		}
 
-		auto yOffset = CHARACTER_HEIGHT;
+		auto yOffset = _characterSize.y;
 
 		for(const auto & button : _buttons)
 		{
 			const auto listPosition = getPosition();
 			const auto listSize = getSize();
 			const auto buttonPosition = _convertPosition(fvec2(0.0f, (1.0f - yOffset - _scrollingOffset)));
-			const auto buttonSize = _convertSize(fvec2((CHARACTER_WIDTH * static_cast<float>(button->getTextContent().size())), CHARACTER_HEIGHT));
+			const auto buttonSize = _convertSize(fvec2((_characterSize.x * static_cast<float>(button->getTextContent().size())), _characterSize.y));
 
 			button->setPosition(buttonPosition);
 			button->setSize(buttonSize);
 			button->setMinPosition(fvec2(-1.0f, listPosition.y - (listSize.y * 0.5f)));
 			button->setMaxPosition(fvec2(1.0f, listPosition.y + (listSize.y * 0.5f)));
 
-			yOffset += (CHARACTER_HEIGHT * 1.5f);
+			yOffset += (_characterSize.y * 1.5f);
 		}
 	}
 }
@@ -292,4 +304,14 @@ const fvec2 & GuiScrollingList::getPosition() const
 const fvec2 & GuiScrollingList::getSize() const
 {
 	return _quadField->getSize();
+}
+
+const fvec2 & GuiScrollingList::getCharacterSize() const
+{
+	return _characterSize;
+}
+
+const float GuiScrollingList::getScrollingSpeed() const
+{
+	return _scrollingSpeed;
 }

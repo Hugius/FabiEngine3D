@@ -25,6 +25,7 @@ public:
 
 	const string & getId() const;
 	const string & getParentId() const;
+	const string & getDiffuseMapPath() const;
 	const string & getTextContent() const;
 
 	const fvec3 & getDefaultQuadColor();

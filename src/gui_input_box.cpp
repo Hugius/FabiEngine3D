@@ -18,8 +18,8 @@ GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, co
 	_noLetters(noLetters),
 	_minusAllowed(minusAllowed)
 {
-	_quadField = make_shared<GuiQuadField>(fe3d, id, parentId, position, size, "", defaultQuadColor, isCentered);
-	_textField = make_shared<GuiTextField>(fe3d, id, parentId, position, size, "", defaultTextColor, isCentered);
+	_quadField = make_shared<GuiQuadField>(fe3d, "GuiInputBox", parentId, position, size, "", defaultQuadColor, isCentered);
+	_textField = make_shared<GuiTextField>(fe3d, "GuiInputBox", parentId, position, (size / static_cast<float>(MAX_CHARACTER_COUNT)), "|", defaultTextColor, isCentered);
 }
 
 void GuiInputBox::update(bool isFocused)
@@ -39,79 +39,38 @@ void GuiInputBox::_updateActivation()
 
 void GuiInputBox::_updateTyping()
 {
+	auto textContent = _textField->getTextContent();
+
 	if(_isActive)
 	{
-		static int passedBarFrames = MAX_PASSED_BAR_FRAMES;
-		static int passedBackspaceFrames = MAX_PASSED_BACKSPACE_FRAMES;
-		static bool barEnabled = true;
-
-		if(passedBarFrames >= MAX_PASSED_BAR_FRAMES)
+		if(textContent.size() < MAX_CHARACTER_COUNT)
 		{
-			passedBarFrames = 0;
-
-			barEnabled = !barEnabled;
-		}
-		else
-		{
-			passedBarFrames++;
-		}
-
-		if((static_cast<float>(_currentTextContent.size() + 1) * CHAR_WIDTH) < _textField->getSize().x)
-		{
-			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
-
-			unordered_map<char, char> numberCharacterMap;
-			numberCharacterMap['0'] = ')';
-			numberCharacterMap['1'] = '!';
-			numberCharacterMap['2'] = '@';
-			numberCharacterMap['3'] = '#';
-			numberCharacterMap['4'] = '$';
-			numberCharacterMap['5'] = '%';
-			numberCharacterMap['6'] = '^';
-			numberCharacterMap['7'] = '&';
-			numberCharacterMap['8'] = '*';
-			numberCharacterMap['9'] = '(';
-
-			unordered_map<char, char> specialCharacterMap;
-			specialCharacterMap['.'] = '>';
-			specialCharacterMap[','] = '<';
-			specialCharacterMap['/'] = '?';
-			specialCharacterMap[';'] = ':';
-			specialCharacterMap['\''] = '\"';
-			specialCharacterMap['['] = '{';
-			specialCharacterMap[']'] = '}';
-			specialCharacterMap['\\'] = '|';
-			specialCharacterMap['-'] = '_';
-			specialCharacterMap['='] = '+';
-
 			if(!_noLetters)
 			{
-				for(const auto & c : letterCharacters)
+				for(const auto & character : ALPHABET_CHARACTERS)
 				{
-					if(_fe3d->input_isKeyPressed(InputType(c)))
+					if(_fe3d->input_isKeyPressed(InputType(character)))
 					{
-						if(c == ' ')
+						if(character == ' ')
 						{
-							_currentTextContent += c;
+							textContent += character;
 						}
 						else
 						{
 							if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 							{
-								{
-									_currentTextContent += (c - 32);
-								}
+								textContent += (character - 32);
 							}
 							else if((GetKeyState(VK_CAPITAL) & 0x0001) != 0)
 							{
 								if(!_noCaps)
 								{
-									_currentTextContent += (c - 32);
+									textContent += (character - 32);
 								}
 							}
 							else
 							{
-								_currentTextContent += c;
+								textContent += character;
 							}
 						}
 					}
@@ -120,17 +79,17 @@ void GuiInputBox::_updateTyping()
 
 			if(!_noNumbers)
 			{
-				for(const auto & element : numberCharacterMap)
+				for(const auto & character : NUMBER_CHARACTERS)
 				{
-					if(_fe3d->input_isKeyPressed(InputType(element.first)))
+					if(_fe3d->input_isKeyPressed(InputType(character.first)))
 					{
 						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 						{
-							_currentTextContent += element.second;
+							textContent += character.second;
 						}
 						else
 						{
-							_currentTextContent += element.first;
+							textContent += character.first;
 						}
 					}
 				}
@@ -138,17 +97,17 @@ void GuiInputBox::_updateTyping()
 
 			if(!_noSpecials)
 			{
-				for(const auto & element : specialCharacterMap)
+				for(const auto & character : SPECIAL_CHARACTERS)
 				{
-					if(_fe3d->input_isKeyPressed(InputType(element.first)))
+					if(_fe3d->input_isKeyPressed(InputType(character.first)))
 					{
 						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 						{
-							_currentTextContent += element.second;
+							textContent += character.second;
 						}
 						else
 						{
-							_currentTextContent += element.first;
+							textContent += character.first;
 						}
 					}
 				}
@@ -159,9 +118,9 @@ void GuiInputBox::_updateTyping()
 				{
 					if(!_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) && !_fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 					{
-						if(_currentTextContent.empty())
+						if(textContent.empty())
 						{
-							_currentTextContent += '-';
+							textContent += '-';
 						}
 					}
 				}
@@ -170,49 +129,41 @@ void GuiInputBox::_updateTyping()
 
 		if(_fe3d->input_isKeyDown(InputType::KEY_BACKSPACE))
 		{
-			if(passedBackspaceFrames >= MAX_PASSED_BACKSPACE_FRAMES)
+			if(textContent.size() == 1)
 			{
-				passedBackspaceFrames = 0;
-
-				if(_currentTextContent.size() == 1)
-				{
-					_currentTextContent = "";
-				}
-				else
-				{
-					_currentTextContent = _currentTextContent.substr(0, _currentTextContent.size() - 1);
-				}
+				textContent = "";
 			}
 			else
 			{
-				passedBackspaceFrames++;
+				textContent = textContent.substr(0, textContent.size() - 1);
 			}
+		}
+
+		if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
+		{
+			_textField->setTextContent(textContent);
 		}
 		else
 		{
-			passedBackspaceFrames = MAX_PASSED_BACKSPACE_FRAMES;
+			_textField->setTextContent(textContent + "|");
 		}
-
-		_fe3d->text2d_setContent(_textField->getEntityId(), _currentTextContent + (barEnabled ? "|" : " "));
-		_fe3d->text2d_setSize(_textField->getEntityId(), fvec2(CHAR_WIDTH * static_cast<float>(_currentTextContent.size()), _fe3d->text2d_getSize(_textField->getEntityId()).y));
 
 		if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 		{
-			if(!_currentTextContent.empty())
+			if(!textContent.empty())
 			{
-				_confirmedInput = true;
+				_isConfirmed = true;
 				_isActive = false;
 			}
 		}
 	}
 	else
 	{
-		_fe3d->text2d_setContent(_textField->getEntityId(), _currentTextContent);
-		_fe3d->text2d_setSize(_textField->getEntityId(), fvec2(CHAR_WIDTH * static_cast<float>(_currentTextContent.size()), _fe3d->text2d_getSize(_textField->getEntityId()).y));
-		_confirmedInput = false;
+		_textField->setTextContent(textContent);
+		_isConfirmed = false;
 	}
 
-	_lastTextContent = _currentTextContent;
+	_lastTextContent = textContent;
 }
 
 void GuiInputBox::setActive(bool value)
@@ -235,9 +186,9 @@ const bool GuiInputBox::isVisible() const
 	return _quadField->isVisible();
 }
 
-const bool GuiInputBox::confirmedInput() const
+const bool GuiInputBox::isConfirmed() const
 {
-	return _confirmedInput;
+	return _isConfirmed;
 }
 
 const bool GuiInputBox::isActive() const
@@ -247,7 +198,7 @@ const bool GuiInputBox::isActive() const
 
 const bool GuiInputBox::hasTextContentChanged() const
 {
-	return (_lastTextContent != _currentTextContent);
+	return (_lastTextContent != getTextContent());
 }
 
 const bool GuiInputBox::isCentered() const
@@ -257,14 +208,36 @@ const bool GuiInputBox::isCentered() const
 
 const string GuiInputBox::getTextContent() const
 {
-	if(_currentTextContent == "-" && _noSpecials && _minusAllowed)
-	{
-		return "";
-	}
-	else
-	{
-		return _currentTextContent;
-	}
+	//if(textContent == "-" && _noSpecials && _minusAllowed)
+	//{
+	//	return "";
+	//}
+	//else
+	//{
+	//	return textContent;
+	//}
+
+	return _textField->getTextContent();
+}
+
+const fvec3 & GuiInputBox::getDefaultQuadColor()
+{
+	return _defaultQuadColor;
+}
+
+const fvec3 & GuiInputBox::getHoveredQuadColor()
+{
+	return _hoveredQuadColor;
+}
+
+const fvec3 & GuiInputBox::getDefaultTextColor()
+{
+	return _defaultTextColor;
+}
+
+const fvec3 & GuiInputBox::getHoveredTextColor()
+{
+	return _hoveredTextColor;
 }
 
 const fvec2 & GuiInputBox::getPosition() const
@@ -279,7 +252,7 @@ const fvec2 & GuiInputBox::getSize() const
 
 void GuiInputBox::setTextContent(const string & content)
 {
-	_currentTextContent = content;
+	_textField->setTextContent(content);
 }
 
 void GuiInputBox::setVisible(bool value)

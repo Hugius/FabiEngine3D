@@ -140,7 +140,7 @@ const bool GuiOverlay::_checkValueForm(const string & id, string & valueString, 
 	{
 		bool done = _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
 		bool cancelled = _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
-		bool entered = getInputBox(id)->confirmedInput();
+		bool entered = getInputBox(id)->isConfirmed();
 
 		if(done || entered || cancelled)
 		{

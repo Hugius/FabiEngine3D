@@ -18,13 +18,18 @@ public:
 	const string getParentId() const;
 	const string getTextContent() const;
 
+	const fvec3 & getDefaultQuadColor();
+	const fvec3 & getHoveredQuadColor();
+	const fvec3 & getDefaultTextColor();
+	const fvec3 & getHoveredTextColor();
+
 	const fvec2 & getPosition() const;
 	const fvec2 & getSize() const;
 
 	const bool isHovered() const;
 	const bool isHoverable() const;
 	const bool isVisible() const;
-	const bool confirmedInput() const;
+	const bool isConfirmed() const;
 	const bool isActive() const;
 	const bool hasTextContentChanged() const;
 	const bool isCentered() const;
@@ -34,11 +39,36 @@ private:
 	void _updateActivation();
 	void _updateTyping();
 
+	static inline const unordered_map<char, char> SPECIAL_CHARACTERS =
+	{
+		{'.', '>'},
+		{',', '<'},
+		{'/', '?'},
+		{';', ':'},
+		{'\'', '\"'},
+		{'[', '{'},
+		{']', '}'},
+		{'\\', '|'},
+		{'-', '_'},
+		{'=', '+'}
+	};
+	static inline const unordered_map<char, char> NUMBER_CHARACTERS =
+	{
+		{'0', ')'},
+		{'1', '!'},
+		{'2', '@'},
+		{'3', '#'},
+		{'4', '$'},
+		{'5', '%'},
+		{'6', '^'},
+		{'7', '&'},
+		{'8', '*'},
+		{'9', '('}
+	};
+	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	static inline constexpr float FULL_OPACITY = 1.0f;
 	static inline constexpr float PART_OPACITY = 0.25f;
-	static inline constexpr float CHAR_WIDTH = 0.02f;
-	static inline constexpr int MAX_PASSED_BAR_FRAMES = 50;
-	static inline constexpr int MAX_PASSED_BACKSPACE_FRAMES = 20;
+	static inline constexpr unsigned int MAX_CHARACTER_COUNT = 10;
 
 	const string _id;
 	const string _parentId;
@@ -48,7 +78,6 @@ private:
 	shared_ptr<GuiTextField> _textField = nullptr;
 
 	string _lastTextContent = "";
-	string _currentTextContent = "";
 
 	fvec3 _defaultQuadColor = fvec3(0.0f);
 	fvec3 _hoveredQuadColor = fvec3(0.0f);
@@ -58,7 +87,7 @@ private:
 	bool _isHovered = false;
 	bool _isHoverable = true;
 	bool _isActive = false;
-	bool _confirmedInput = false;
+	bool _isConfirmed = false;
 	bool _noNumbers = false;
 	bool _noCaps = false;
 	bool _noSpecials = false;

@@ -163,6 +163,11 @@ const string & GuiButton::getParentId() const
 	return _parentId;
 }
 
+const string & GuiButton::getDiffuseMapPath() const
+{
+	return _quadField->getDiffuseMapPath();
+}
+
 const string & GuiButton::getTextContent() const
 {
 	return _textField->getTextContent();

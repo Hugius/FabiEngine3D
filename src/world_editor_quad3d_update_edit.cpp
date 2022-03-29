@@ -156,19 +156,19 @@ void WorldEditor::_updateQuad3dEditing()
 
 			screen->getButton("xMinus")->setHoverable(true);
 			screen->getButton("xPlus")->setHoverable(true);
-			screen->getInputField("x")->setHoverable(true);
+			screen->getInputBox("x")->setHoverable(true);
 			screen->getButton("yMinus")->setHoverable(true);
 			screen->getButton("yPlus")->setHoverable(true);
-			screen->getInputField("y")->setHoverable(true);
+			screen->getInputBox("y")->setHoverable(true);
 			screen->getButton("zMinus")->setHoverable(true);
 			screen->getButton("zPlus")->setHoverable(true);
-			screen->getInputField("z")->setHoverable(true);
+			screen->getInputBox("z")->setHoverable(true);
 
 			if(!screen->getButton("size")->isHoverable())
 			{
 				screen->getButton("zMinus")->setHoverable(false);
 				screen->getButton("zPlus")->setHoverable(false);
-				screen->getInputField("z")->setHoverable(false);
+				screen->getInputBox("z")->setHoverable(false);
 			}
 
 			if(!screen->getButton("position")->isHoverable())

@@ -116,12 +116,12 @@ void GuiOverlay::_createValueForm(const string & id, const string & title, const
 	_valueFormIds.push_back(id);
 	createQuadField(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.0275f, 0.125f), "", FORM_TITLE_RECT_COLOR, true);
 	createTextField(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.025f, 0.1f), title, FORM_TITLE_TEXT_COLOR, true);
-	createInputField(id, position, size, fvec3(0.25f), fvec3(0.5f), fvec3(1.0f), fvec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, (onlyNumbers && minusAllowed), true);
-	getInputField(id)->setTextContent(valueString);
+	createInputBox(id, position, size, fvec3(0.25f), fvec3(0.5f), fvec3(1.0f), fvec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, (onlyNumbers && minusAllowed), true);
+	getInputBox(id)->setTextContent(valueString);
 
 	if(!_isFocused)
 	{
-		getInputField(id)->setActive(true);
+		getInputBox(id)->setActive(true);
 		_isFocused = true;
 	}
 
@@ -140,13 +140,13 @@ const bool GuiOverlay::_checkValueForm(const string & id, string & valueString, 
 	{
 		bool done = _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
 		bool cancelled = _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
-		bool entered = getInputField(id)->confirmedInput();
+		bool entered = getInputBox(id)->confirmedInput();
 
 		if(done || entered || cancelled)
 		{
 			if(done || entered)
 			{
-				auto content = getInputField(id)->getTextContent();
+				auto content = getInputBox(id)->getTextContent();
 
 				if(content.empty())
 				{
@@ -162,7 +162,7 @@ const bool GuiOverlay::_checkValueForm(const string & id, string & valueString, 
 				}
 
 				valueString = content;
-				changed = getInputField(id)->hasTextContentChanged();
+				changed = getInputBox(id)->hasTextContentChanged();
 			}
 
 			if(_valueFormIds.size() == 1)
@@ -328,7 +328,7 @@ void GuiOverlay::_updateValueFormDeleting()
 		{
 			deleteQuadField(tempId);
 			deleteTextField(tempId);
-			deleteInputField(tempId);
+			deleteInputBox(tempId);
 		}
 		_valueFormIds.clear();
 

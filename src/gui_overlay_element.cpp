@@ -5,9 +5,9 @@ void GuiOverlay::createScrollingList(const string & id, const fvec2 & position, 
 	_scrollingLists.insert({id, make_shared<GuiScrollingList>(_fe3d, id, "overlay", position, size, color, defaultQuadColor, hoveredQuadColor, defaultTextColor, hoveredTextColor, characterSize, scrollingSpeed, isCentered)});
 }
 
-void GuiOverlay::createInputField(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+void GuiOverlay::createInputBox(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 {
-	_inputFields.insert({id, make_shared<GuiInputField>(_fe3d, id, "overlay", position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered)});
+	_inputBoxes.insert({id, make_shared<GuiInputBox>(_fe3d, id, "overlay", position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered)});
 }
 
 void GuiOverlay::createButton(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
@@ -30,9 +30,9 @@ const bool GuiOverlay::hasScrollingList(const string & id) const
 	return (_scrollingLists.find(id) != _scrollingLists.end());
 }
 
-const bool GuiOverlay::hasInputField(const string & id) const
+const bool GuiOverlay::hasInputBox(const string & id) const
 {
-	return (_inputFields.find(id) != _inputFields.end());
+	return (_inputBoxes.find(id) != _inputBoxes.end());
 }
 
 const bool GuiOverlay::hasButton(const string & id) const
@@ -62,11 +62,11 @@ const shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string & i
 	return iterator->second;
 }
 
-const shared_ptr<GuiInputField> GuiOverlay::getInputField(const string & id) const
+const shared_ptr<GuiInputBox> GuiOverlay::getInputBox(const string & id) const
 {
-	auto iterator = _inputFields.find(id);
+	auto iterator = _inputBoxes.find(id);
 
-	if(iterator == _inputFields.end())
+	if(iterator == _inputBoxes.end())
 	{
 		abort();
 	}
@@ -115,9 +115,9 @@ const unordered_map<string, shared_ptr<GuiScrollingList>> & GuiOverlay::getScrol
 	return _scrollingLists;
 }
 
-const unordered_map<string, shared_ptr<GuiInputField>> & GuiOverlay::getInputFields() const
+const unordered_map<string, shared_ptr<GuiInputBox>> & GuiOverlay::getInputBoxes() const
 {
-	return _inputFields;
+	return _inputBoxes;
 }
 
 const unordered_map<string, shared_ptr<GuiButton>> & GuiOverlay::getButtons() const
@@ -145,14 +145,14 @@ void GuiOverlay::deleteScrollingList(const string & id)
 	_scrollingLists.erase(id);
 }
 
-void GuiOverlay::deleteInputField(const string & id)
+void GuiOverlay::deleteInputBox(const string & id)
 {
-	if(!hasInputField(id))
+	if(!hasInputBox(id))
 	{
 		abort();
 	}
 
-	_inputFields.erase(id);
+	_inputBoxes.erase(id);
 }
 
 void GuiOverlay::deleteButton(const string & id)
@@ -190,9 +190,9 @@ void GuiOverlay::deleteScrollingLists()
 	_scrollingLists.clear();
 }
 
-void GuiOverlay::deleteInputFields()
+void GuiOverlay::deleteInputBoxes()
 {
-	_inputFields.clear();
+	_inputBoxes.clear();
 }
 
 void GuiOverlay::deleteButtons()

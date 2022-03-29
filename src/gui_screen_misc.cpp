@@ -18,9 +18,9 @@ void GuiScreen::update(bool isFocused)
 		scrollingList->update(isFocused);
 	}
 
-	for(const auto & [inputFieldId, inputField] : _inputFields)
+	for(const auto & [inputBoxId, inputBox] : _inputBoxes)
 	{
-		inputField->update(isFocused);
+		inputBox->update(isFocused);
 	}
 
 	for(const auto & [buttonId, button] : _buttons)
@@ -36,9 +36,9 @@ void GuiScreen::setVisible(bool value)
 		scrollingList->setVisible(value);
 	}
 
-	for(const auto & [inputFieldId, inputField] : _inputFields)
+	for(const auto & [inputBoxId, inputBox] : _inputBoxes)
 	{
-		inputField->setVisible(value);
+		inputBox->setVisible(value);
 	}
 
 	for(const auto & [buttonId, button] : _buttons)

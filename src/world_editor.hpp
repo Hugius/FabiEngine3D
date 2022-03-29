@@ -31,9 +31,9 @@ public:
 	void update();
 	void clearLoadedWorld();
 
-	const string& getLoadedWorldId() const;
+	const string & getLoadedWorldId() const;
 
-	const bool loadWorldFromFile(const string& fileName);
+	const bool loadWorldFromFile(const string & fileName);
 	const bool saveWorldToFile() const;
 
 private:
@@ -96,35 +96,35 @@ private:
 	void _updateWorldDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
-	void _updateModelHighlighting(const string& id, int& direction);
-	void _updateQuad3dHighlighting(const string& id, int& direction);
-	void _updateText3dHighlighting(const string& id, int& direction);
-	void _updatePointlightHighlighting(const string& id, int& direction);
-	void _updateSpotlightHighlighting(const string& id, int& direction);
-	void _updateReflectionHighlighting(const string& id, int& direction);
-	void _updateSoundHighlighting(const string& id, int& direction);
-	void _deleteWorldFile(const string& id);
-	void _selectModel(const string& id);
-	void _selectQuad3d(const string& id);
-	void _selectText3d(const string& id);
-	void _selectPointlight(const string& id);
-	void _selectSpotlight(const string& id);
-	void _selectReflection(const string& id);
-	void _selectSound(const string& id);
-	void _deselectModel(const string& id);
-	void _deselectQuad3d(const string& id);
-	void _deselectText3d(const string& id);
-	void _deselectPointlight(const string& id);
-	void _deselectSpotlight(const string& id);
-	void _deselectReflection(const string& id);
-	void _deselectSound(const string& id);
-	void _activateModel(const string& id);
-	void _activateQuad3d(const string& id);
-	void _activateText3d(const string& id);
-	void _activatePointlight(const string& id);
-	void _activateSpotlight(const string& id);
-	void _activateReflection(const string& id);
-	void _activateSound(const string& id);
+	void _updateModelHighlighting(const string & id, int & direction);
+	void _updateQuad3dHighlighting(const string & id, int & direction);
+	void _updateText3dHighlighting(const string & id, int & direction);
+	void _updatePointlightHighlighting(const string & id, int & direction);
+	void _updateSpotlightHighlighting(const string & id, int & direction);
+	void _updateReflectionHighlighting(const string & id, int & direction);
+	void _updateSoundHighlighting(const string & id, int & direction);
+	void _deleteWorldFile(const string & id);
+	void _selectModel(const string & id);
+	void _selectQuad3d(const string & id);
+	void _selectText3d(const string & id);
+	void _selectPointlight(const string & id);
+	void _selectSpotlight(const string & id);
+	void _selectReflection(const string & id);
+	void _selectSound(const string & id);
+	void _deselectModel(const string & id);
+	void _deselectQuad3d(const string & id);
+	void _deselectText3d(const string & id);
+	void _deselectPointlight(const string & id);
+	void _deselectSpotlight(const string & id);
+	void _deselectReflection(const string & id);
+	void _deselectSound(const string & id);
+	void _activateModel(const string & id);
+	void _activateQuad3d(const string & id);
+	void _activateText3d(const string & id);
+	void _activatePointlight(const string & id);
+	void _activateSpotlight(const string & id);
+	void _activateReflection(const string & id);
+	void _activateSound(const string & id);
 	void _deactivateModel();
 	void _deactivateQuad3d();
 	void _deactivateText3d();
@@ -132,7 +132,7 @@ private:
 	void _deactivateSpotlight();
 	void _deactivateReflection();
 	void _deactivateSound();
-	void _handleValueChanging(const string& screenId, const string& buttonId, const string& inputFieldId, float& value, float adder, float multiplier = 1.0f, float minimum = -FLT_MAX, float maximum = FLT_MAX);
+	void _handleValueChanging(const string & screenId, const string & buttonId, const string & inputBoxId, float & value, float adder, float multiplier = 1.0f, float minimum = -FLT_MAX, float maximum = FLT_MAX);
 
 	const vector<string> _getWorldIds() const;
 

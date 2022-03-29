@@ -1,9 +1,9 @@
-#include "gui_input_field.hpp"
+#include "gui_input_box.hpp"
 #include "tools.hpp"
 
 #include <windows.h>
 
-GuiInputField::GuiInputField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -22,14 +22,14 @@ GuiInputField::GuiInputField(shared_ptr<EngineInterface> fe3d, const string & id
 	_textField = make_shared<GuiTextField>(fe3d, id, parentId, position, size, "", defaultTextColor, isCentered);
 }
 
-void GuiInputField::update(bool isFocused)
+void GuiInputBox::update(bool isFocused)
 {
 	_updateHovering(isFocused);
 	_updateActivation();
 	_updateTyping();
 }
 
-void GuiInputField::_updateActivation()
+void GuiInputBox::_updateActivation()
 {
 	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
@@ -37,7 +37,7 @@ void GuiInputField::_updateActivation()
 	}
 }
 
-void GuiInputField::_updateTyping()
+void GuiInputBox::_updateTyping()
 {
 	if(_isActive)
 	{
@@ -215,47 +215,47 @@ void GuiInputField::_updateTyping()
 	_lastTextContent = _currentTextContent;
 }
 
-void GuiInputField::setActive(bool value)
+void GuiInputBox::setActive(bool value)
 {
 	_isActive = value;
 }
 
-const bool GuiInputField::isHovered() const
+const bool GuiInputBox::isHovered() const
 {
 	return _isHovered;
 }
 
-const bool GuiInputField::isHoverable() const
+const bool GuiInputBox::isHoverable() const
 {
 	return _isHoverable;
 }
 
-const bool GuiInputField::isVisible() const
+const bool GuiInputBox::isVisible() const
 {
 	return _quadField->isVisible();
 }
 
-const bool GuiInputField::confirmedInput() const
+const bool GuiInputBox::confirmedInput() const
 {
 	return _confirmedInput;
 }
 
-const bool GuiInputField::isActive() const
+const bool GuiInputBox::isActive() const
 {
 	return _isActive;
 }
 
-const bool GuiInputField::hasTextContentChanged() const
+const bool GuiInputBox::hasTextContentChanged() const
 {
 	return (_lastTextContent != _currentTextContent);
 }
 
-const bool GuiInputField::isCentered() const
+const bool GuiInputBox::isCentered() const
 {
 	return _quadField->isCentered();
 }
 
-const string GuiInputField::getTextContent() const
+const string GuiInputBox::getTextContent() const
 {
 	if(_currentTextContent == "-" && _noSpecials && _minusAllowed)
 	{
@@ -267,28 +267,28 @@ const string GuiInputField::getTextContent() const
 	}
 }
 
-const fvec2 & GuiInputField::getPosition() const
+const fvec2 & GuiInputBox::getPosition() const
 {
 	return _quadField->getPosition();
 }
 
-const fvec2 & GuiInputField::getSize() const
+const fvec2 & GuiInputBox::getSize() const
 {
 	return _quadField->getSize();
 }
 
-void GuiInputField::setTextContent(const string & content)
+void GuiInputBox::setTextContent(const string & content)
 {
 	_currentTextContent = content;
 }
 
-void GuiInputField::setVisible(bool value)
+void GuiInputBox::setVisible(bool value)
 {
 	_quadField->setVisible(value);
 	_textField->setVisible(value);
 }
 
-void GuiInputField::setHoverable(bool value)
+void GuiInputBox::setHoverable(bool value)
 {
 	_isHoverable = value;
 
@@ -296,17 +296,17 @@ void GuiInputField::setHoverable(bool value)
 	_textField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
 }
 
-const string GuiInputField::getId() const
+const string GuiInputBox::getId() const
 {
 	return _id;
 }
 
-const string GuiInputField::getParentId() const
+const string GuiInputBox::getParentId() const
 {
 	return _parentId;
 }
 
-void GuiInputField::_updateHovering(bool isFocused)
+void GuiInputBox::_updateHovering(bool isFocused)
 {
 	_isHovered = false;
 

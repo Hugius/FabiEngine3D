@@ -11,9 +11,9 @@ void WorldEditor::_activateModel(const string & id)
 	rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
 	rightWindow->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	rightWindow->getScreen("modelPropertiesMenu")->getInputField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("modelPropertiesMenu")->getInputField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("modelPropertiesMenu")->getInputField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	rightWindow->getScreen("modelPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("modelPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("modelPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Model: " + _activeModelId);
 }
@@ -29,9 +29,9 @@ void WorldEditor::_activateQuad3d(const string & id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Quad3D: " + _activeQuadId);
 }
@@ -47,9 +47,9 @@ void WorldEditor::_activateText3d(const string & id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Text3D: " + _activeTextId);
 }
@@ -65,9 +65,9 @@ void WorldEditor::_activatePointlight(const string & id)
 	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("radius")->setHoverable(true);
 	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("color")->setHoverable(true);
 
-	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("pointlightPropertiesMenu")->getInputField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	rightWindow->getScreen("pointlightPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("pointlightPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("pointlightPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Pointlight: " + _activePointlightId);
 }
@@ -82,9 +82,9 @@ void WorldEditor::_activateSpotlight(const string & id)
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("color")->setHoverable(true);
 
-	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("spotlightPropertiesMenu")->getInputField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	rightWindow->getScreen("spotlightPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("spotlightPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("spotlightPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Spotlight: " + _activeSpotlightId);
 }
@@ -96,9 +96,9 @@ void WorldEditor::_activateReflection(const string & id)
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->reflection_getPosition(_activeReflectionId);
 
-	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("reflectionPropertiesMenu")->getInputField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	rightWindow->getScreen("reflectionPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("reflectionPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("reflectionPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Reflection: " + _activeReflectionId);
 }
@@ -112,11 +112,11 @@ void WorldEditor::_activateSound(const string & id)
 	auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSoundId);
 	auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSoundId);
 
-	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("z")->setTextContent(to_string(static_cast<int>(position.z)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("volume")->setTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
-	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputField("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("volume")->setTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
 
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Sound: " + _activeSoundId);
 }

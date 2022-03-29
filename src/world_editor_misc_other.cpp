@@ -72,22 +72,22 @@ void WorldEditor::clearLoadedWorld()
 		_fe3d->water_delete(_fe3d->water_getSelectedId());
 	}
 
-	for(const auto& [key, templateId] : _loadedModelIds)
+	for(const auto & [key, templateId] : _loadedModelIds)
 	{
 		_fe3d->model_delete(key);
 	}
 
-	for(const auto& [key, templateId] : _loadedQuadIds)
+	for(const auto & [key, templateId] : _loadedQuadIds)
 	{
 		_fe3d->quad3d_delete(key);
 	}
 
-	for(const auto& [key, templateId] : _loadedTextIds)
+	for(const auto & [key, templateId] : _loadedTextIds)
 	{
 		_fe3d->text3d_delete(key);
 	}
 
-	for(const auto& id : _loadedPointlightIds)
+	for(const auto & id : _loadedPointlightIds)
 	{
 		_fe3d->pointlight_delete(id);
 
@@ -97,7 +97,7 @@ void WorldEditor::clearLoadedWorld()
 		}
 	}
 
-	for(const auto& id : _loadedSpotlightIds)
+	for(const auto & id : _loadedSpotlightIds)
 	{
 		_fe3d->spotlight_delete(id);
 
@@ -107,7 +107,7 @@ void WorldEditor::clearLoadedWorld()
 		}
 	}
 
-	for(const auto& id : _loadedReflectionIds)
+	for(const auto & id : _loadedReflectionIds)
 	{
 		_fe3d->reflection_delete(id);
 
@@ -117,7 +117,7 @@ void WorldEditor::clearLoadedWorld()
 		}
 	}
 
-	for(const auto& [key, templateId] : _loadedSoundIds)
+	for(const auto & [key, templateId] : _loadedSoundIds)
 	{
 		_fe3d->sound3d_delete(key);
 
@@ -138,7 +138,7 @@ void WorldEditor::clearLoadedWorld()
 	_idCounter = 0;
 }
 
-const string& WorldEditor::getLoadedWorldId() const
+const string & WorldEditor::getLoadedWorldId() const
 {
 	return _loadedWorldId;
 }
@@ -153,7 +153,7 @@ const vector<string> WorldEditor::_getWorldIds() const
 
 	if(Tools::isDirectoryExisting(directoryPath))
 	{
-		for(const auto& fileName : Tools::getFileNamesFromDirectory(directoryPath))
+		for(const auto & fileName : Tools::getFileNamesFromDirectory(directoryPath))
 		{
 			auto nameSize = (fileName.size() - string(".fe3d").size());
 			worldIds.push_back(fileName.substr(0, nameSize));
@@ -167,7 +167,7 @@ const vector<string> WorldEditor::_getWorldIds() const
 	return worldIds;
 }
 
-void WorldEditor::_deleteWorldFile(const string& id)
+void WorldEditor::_deleteWorldFile(const string & id)
 {
 	const auto isExported = Configuration::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -176,7 +176,7 @@ void WorldEditor::_deleteWorldFile(const string& id)
 	Tools::deleteFile(filePath);
 }
 
-void WorldEditor::_handleValueChanging(const string& screenId, const string& buttonId, const string& inputFieldId, float& value, float adder, float multiplier, float minimum, float maximum)
+void WorldEditor::_handleValueChanging(const string & screenId, const string & buttonId, const string & inputFieldId, float & value, float adder, float multiplier, float minimum, float maximum)
 {
 	auto inputField = _gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getInputField(inputFieldId);
 
@@ -190,7 +190,7 @@ void WorldEditor::_handleValueChanging(const string& screenId, const string& but
 
 	if(!inputField->isActive())
 	{
-		inputField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
+		inputField->setTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 
 	if(inputField->getTextContent().empty())
@@ -209,7 +209,7 @@ void WorldEditor::_handleValueChanging(const string& screenId, const string& but
 
 	if(!inputField->isActive())
 	{
-		inputField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
+		inputField->setTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 }
 

@@ -22,9 +22,12 @@ public:
 	void setHoveredTextColor(const fvec3 & value);
 	void setCharacterSize(const fvec2 & value);
 	void setScrollingSpeed(float value);
+	void setHoverable(bool value);
 
 	const vector<string> getOptionIds() const;
 
+	const string getId() const;
+	const string getParentId() const;
 	const string getHoveredOptionId() const;
 
 	const fvec3 & getColor() const;
@@ -41,12 +44,16 @@ public:
 
 	const bool hasOption(const string & id) const;
 	const bool isHovered() const;
+	const bool isHoverable() const;
 	const bool isVisible() const;
 	const bool isCentered() const;
 
 private:
-	void _updateHovering();
+	void _updateHovering(bool isFocused);
 	void _updateScrolling();
+
+	static inline constexpr float FULL_OPACITY = 1.0f;
+	static inline constexpr float PART_OPACITY = 0.25f;
 
 	const fvec2 _convertPosition(const fvec2 & position) const;
 	const fvec2 _convertSize(const fvec2 & size) const;
@@ -70,4 +77,5 @@ private:
 	float _scrollingSpeed = 0.0f;
 
 	bool _isHovered = false;
+	bool _isHoverable = true;
 };

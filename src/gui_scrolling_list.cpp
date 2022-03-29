@@ -23,12 +23,12 @@ GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const strin
 
 void GuiScrollingList::update(bool isFocused)
 {
-	_updateHovering();
+	_updateHovering(isFocused);
 	_updateScrolling();
 
 	for(const auto & button : _buttons)
 	{
-		button->update(isFocused && _isHovered);
+		button->update(isFocused);
 	}
 }
 
@@ -148,6 +148,18 @@ void GuiScrollingList::setScrollingSpeed(float value)
 	_scrollingSpeed = value;
 }
 
+void GuiScrollingList::setHoverable(bool value)
+{
+	_isHoverable = value;
+
+	_quadField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+
+	for(const auto & button : _buttons)
+	{
+		button->setHoverable(value);
+	}
+}
+
 void GuiScrollingList::setVisible(bool value)
 {
 	_quadField->setVisible(value);
@@ -170,7 +182,17 @@ const vector<string> GuiScrollingList::getOptionIds() const
 	return result;
 }
 
-void GuiScrollingList::_updateHovering()
+const string GuiScrollingList::getId() const
+{
+	return _id;
+}
+
+const string GuiScrollingList::getParentId() const
+{
+	return _parentId;
+}
+
+void GuiScrollingList::_updateHovering(bool isFocused)
 {
 	_isHovered = false;
 
@@ -186,7 +208,10 @@ void GuiScrollingList::_updateHovering()
 			{
 				if(cursorPosition.y < (listPosition.y + (listSize.y * 0.5f)))
 				{
-					_isHovered = true;
+					if(isFocused && _isHoverable)
+					{
+						_isHovered = true;
+					}
 				}
 			}
 		}
@@ -284,6 +309,11 @@ const fvec3 & GuiScrollingList::getColor() const
 const bool GuiScrollingList::isHovered() const
 {
 	return _isHovered;
+}
+
+const bool GuiScrollingList::isHoverable() const
+{
+	return _isHoverable;
 }
 
 const bool GuiScrollingList::isVisible() const

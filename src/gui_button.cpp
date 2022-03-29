@@ -19,9 +19,6 @@ GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const 
 void GuiButton::update(bool isFocused)
 {
 	_updateHovering(isFocused);
-
-	_quadField->setOpacity(_isHoverable ? DEFAULT_OPACITY : HOVER_OPACITY);
-	_textField->setOpacity(_isHoverable ? DEFAULT_OPACITY : HOVER_OPACITY);
 }
 
 void GuiButton::setVisible(bool value)
@@ -75,6 +72,9 @@ void GuiButton::_updateHovering(bool isFocused)
 void GuiButton::setHoverable(bool value)
 {
 	_isHoverable = value;
+
+	_quadField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+	_textField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
 }
 
 void GuiButton::setDefaultQuadColor(const fvec3 & value)

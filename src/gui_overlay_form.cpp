@@ -117,7 +117,7 @@ void GuiOverlay::_createValueForm(const string & id, const string & title, const
 	createQuadField(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.0275f, 0.125f), "", FORM_TITLE_RECT_COLOR, true);
 	createTextField(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.025f, 0.1f), title, FORM_TITLE_TEXT_COLOR, true);
 	createInputField(id, position, size, fvec3(0.25f), fvec3(0.5f), fvec3(1.0f), fvec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, (onlyNumbers && minusAllowed), true);
-	getInputField(id)->changeTextContent(valueString);
+	getInputField(id)->setTextContent(valueString);
 
 	if(!_isFocused)
 	{

@@ -4,7 +4,7 @@
 #include "gui_quad_field.hpp"
 #include "gui_text_field.hpp"
 
-class GuiButton
+class GuiButton final
 {
 public:
 	GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered);
@@ -40,8 +40,13 @@ public:
 	const bool isVisible() const;
 	const bool isCentered() const;
 
-protected:
+private:
 	void _updateHovering(bool isFocused);
+
+	static inline constexpr float TEXT_WIDTH_MULTIPLIER = 0.9f;
+	static inline constexpr float TEXT_HEIGHT_MULTIPLIER = 0.75f;
+	static inline constexpr float FULL_OPACITY = 1.0f;
+	static inline constexpr float PART_OPACITY = 0.25f;
 
 	const string _id;
 	const string _parentId;
@@ -57,10 +62,4 @@ protected:
 
 	bool _isHovered = false;
 	bool _isHoverable = true;
-
-private:
-	static inline constexpr float TEXT_WIDTH_MULTIPLIER = 0.9f;
-	static inline constexpr float TEXT_HEIGHT_MULTIPLIER = 0.75f;
-	static inline constexpr float DEFAULT_OPACITY = 1.0f;
-	static inline constexpr float HOVER_OPACITY = 0.25f;
 };

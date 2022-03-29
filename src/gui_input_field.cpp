@@ -1,23 +1,30 @@
 #include "gui_input_field.hpp"
+#include "tools.hpp"
 
 #include <windows.h>
 
-GuiInputField::GuiInputField(shared_ptr<EngineInterface> fe3d, const string & parentId, const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+GuiInputField::GuiInputField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 	:
-	GuiButton(fe3d, parentId, id, position, size, "", color, hoverColor, "", textColor, textHoverColor, isCentered),
+	_fe3d(fe3d),
+	_id(id),
+	_parentId(id),
+	_defaultQuadColor(defaultQuadColor),
+	_hoveredQuadColor(hoveredQuadColor),
+	_defaultTextColor(defaultTextColor),
+	_hoveredTextColor(hoveredTextColor),
 	_noNumbers(noNumbers),
 	_noCaps(noCaps),
 	_noSpecials(noSpecials),
 	_noLetters(noLetters),
 	_minusAllowed(minusAllowed)
 {
-	_fe3d->text2d_setContent(_textField->getEntityId(), "|");
-	_fe3d->text2d_setSize(_textField->getEntityId(), fvec2(CHAR_WIDTH, _fe3d->text2d_getSize(_textField->getEntityId()).y));
+	_quadField = make_shared<GuiQuadField>(fe3d, id, parentId, position, size, "", defaultQuadColor, isCentered);
+	_textField = make_shared<GuiTextField>(fe3d, id, parentId, position, size, "", defaultTextColor, isCentered);
 }
 
 void GuiInputField::update(bool isFocused)
 {
-	_updateHovering(isFocused && !_isActive);
+	_updateHovering(isFocused);
 	_updateActivation();
 	_updateTyping();
 }
@@ -204,11 +211,28 @@ void GuiInputField::_updateTyping()
 		_fe3d->text2d_setSize(_textField->getEntityId(), fvec2(CHAR_WIDTH * static_cast<float>(_currentTextContent.size()), _fe3d->text2d_getSize(_textField->getEntityId()).y));
 		_confirmedInput = false;
 	}
+
+	_lastTextContent = _currentTextContent;
 }
 
-void GuiInputField::setActive(bool active)
+void GuiInputField::setActive(bool value)
 {
-	_isActive = active;
+	_isActive = value;
+}
+
+const bool GuiInputField::isHovered() const
+{
+	return _isHovered;
+}
+
+const bool GuiInputField::isHoverable() const
+{
+	return _isHoverable;
+}
+
+const bool GuiInputField::isVisible() const
+{
+	return _quadField->isVisible();
 }
 
 const bool GuiInputField::confirmedInput() const
@@ -221,13 +245,14 @@ const bool GuiInputField::isActive() const
 	return _isActive;
 }
 
-const bool GuiInputField::hasTextContentChanged()
+const bool GuiInputField::hasTextContentChanged() const
 {
-	bool result = (_lastTextContent != _currentTextContent);
+	return (_lastTextContent != _currentTextContent);
+}
 
-	_lastTextContent = _currentTextContent;
-
-	return result;
+const bool GuiInputField::isCentered() const
+{
+	return _quadField->isCentered();
 }
 
 const string GuiInputField::getTextContent() const
@@ -242,7 +267,83 @@ const string GuiInputField::getTextContent() const
 	}
 }
 
-void GuiInputField::changeTextContent(const string & content)
+const fvec2 & GuiInputField::getPosition() const
+{
+	return _quadField->getPosition();
+}
+
+const fvec2 & GuiInputField::getSize() const
+{
+	return _quadField->getSize();
+}
+
+void GuiInputField::setTextContent(const string & content)
 {
 	_currentTextContent = content;
+}
+
+void GuiInputField::setVisible(bool value)
+{
+	_quadField->setVisible(value);
+	_textField->setVisible(value);
+}
+
+void GuiInputField::setHoverable(bool value)
+{
+	_isHoverable = value;
+
+	_quadField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+	_textField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+}
+
+const string GuiInputField::getId() const
+{
+	return _id;
+}
+
+const string GuiInputField::getParentId() const
+{
+	return _parentId;
+}
+
+void GuiInputField::_updateHovering(bool isFocused)
+{
+	_isHovered = false;
+
+	if(isVisible())
+	{
+		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+		const auto boxPosition = getPosition();
+		const auto boxSize = getSize();
+
+		if(cursorPosition.x > (boxPosition.x - (boxSize.x * 0.5f)))
+		{
+			if(cursorPosition.x < (boxPosition.x + (boxSize.x * 0.5f)))
+			{
+				if(cursorPosition.y > (boxPosition.y - (boxSize.y * 0.5f)))
+				{
+					if(cursorPosition.y < (boxPosition.y + (boxSize.y * 0.5f)))
+					{
+						if(isFocused && _isHoverable)
+						{
+							_isHovered = true;
+						}
+					}
+				}
+			}
+		}
+
+		if(_isHovered)
+		{
+			_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+
+			_quadField->setColor(_hoveredQuadColor);
+			_textField->setColor(_hoveredTextColor);
+		}
+		else
+		{
+			_quadField->setColor(_defaultQuadColor);
+			_textField->setColor(_defaultTextColor);
+		}
+	}
 }

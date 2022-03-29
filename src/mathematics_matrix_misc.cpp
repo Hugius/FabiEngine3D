@@ -1,6 +1,6 @@
 #include "mathematics.hpp"
 
-const mat22 Mathematics::invertMatrix(const mat22& matrix)
+const mat22 Mathematics::invertMatrix(const mat22 & matrix)
 {
 	auto determinant = calculateDeterminant(matrix);
 
@@ -26,7 +26,7 @@ const mat22 Mathematics::invertMatrix(const mat22& matrix)
 	return result;
 }
 
-const mat33 Mathematics::invertMatrix(const mat33& matrix)
+const mat33 Mathematics::invertMatrix(const mat33 & matrix)
 {
 	auto determinant = calculateDeterminant(matrix);
 
@@ -57,7 +57,7 @@ const mat33 Mathematics::invertMatrix(const mat33& matrix)
 	return result;
 }
 
-const mat44 Mathematics::invertMatrix(const mat44& matrix)
+const mat44 Mathematics::invertMatrix(const mat44 & matrix)
 {
 	auto determinant = calculateDeterminant(matrix);
 
@@ -191,7 +191,7 @@ const mat44 Mathematics::invertMatrix(const mat44& matrix)
 	return result;
 }
 
-const mat33 Mathematics::transposeMatrix(const mat33& matrix)
+const mat33 Mathematics::transposeMatrix(const mat33 & matrix)
 {
 	mat33 result;
 
@@ -206,22 +206,22 @@ const mat33 Mathematics::transposeMatrix(const mat33& matrix)
 	return result;
 }
 
-const mat44 Mathematics::transposeMatrix(const mat44& matrix)
+const mat44 Mathematics::transposeMatrix(const mat44 & matrix)
 {
 	mat44 result;
 
-	for(unsigned int r = 0; r < 4; r++)
+	for(unsigned int rowIndex = 0; rowIndex < 4; rowIndex++)
 	{
-		for(unsigned int c = 0; c < 4; c++)
+		for(unsigned int columnIndex = 0; columnIndex < 4; columnIndex++)
 		{
-			result.m[r][c] = matrix.m[c][r];
+			result.m[rowIndex][columnIndex] = matrix.m[columnIndex][rowIndex];
 		}
 	}
 
 	return result;
 }
 
-const float Mathematics::calculateDeterminant(const mat22& matrix)
+const float Mathematics::calculateDeterminant(const mat22 & matrix)
 {
 	float values[2] = {};
 
@@ -231,7 +231,7 @@ const float Mathematics::calculateDeterminant(const mat22& matrix)
 	return (values[0] - values[1]);
 }
 
-const float Mathematics::calculateDeterminant(const mat33& matrix)
+const float Mathematics::calculateDeterminant(const mat33 & matrix)
 {
 	float values[3] = {};
 
@@ -242,7 +242,7 @@ const float Mathematics::calculateDeterminant(const mat33& matrix)
 	return (values[0] - values[1] + values[2]);
 }
 
-const float Mathematics::calculateDeterminant(const mat44& matrix)
+const float Mathematics::calculateDeterminant(const mat44 & matrix)
 {
 	float values[4] = {};
 

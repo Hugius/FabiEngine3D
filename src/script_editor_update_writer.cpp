@@ -173,33 +173,33 @@ void ScriptEditor::_updateTextWriter()
 		{
 			string newCharacters = "";
 
-			for(const auto& c : ALPHABET_CHARACTERS)
+			for(const auto & character : ALPHABET_CHARACTERS)
 			{
-				if(_fe3d->input_isKeyPressed(InputType(c)))
+				if(_fe3d->input_isKeyPressed(InputType(character)))
 				{
-					if(c == ' ')
+					if(character == ' ')
 					{
-						newCharacters += c;
+						newCharacters += character;
 					}
 					else
 					{
 						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 						{
-							newCharacters += (c - 32);
+							newCharacters += (character - 32);
 						}
 						else if((GetKeyState(VK_CAPITAL) & 0x0001) != 0)
 						{
-							newCharacters += (c - 32);
+							newCharacters += (character - 32);
 						}
 						else
 						{
-							newCharacters += c;
+							newCharacters += character;
 						}
 					}
 				}
 			}
 
-			for(const auto& [normalCharacter, shiftCharacter] : NUMBER_CHARACTERS)
+			for(const auto & [normalCharacter, shiftCharacter] : NUMBER_CHARACTERS)
 			{
 				if(_fe3d->input_isKeyPressed(InputType(normalCharacter)))
 				{
@@ -214,7 +214,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 
-			for(const auto& [normalCharacter, shiftCharacter] : SPECIAL_CHARACTERS)
+			for(const auto & [normalCharacter, shiftCharacter] : SPECIAL_CHARACTERS)
 			{
 				if(_fe3d->input_isKeyPressed(InputType(normalCharacter)))
 				{
@@ -238,7 +238,7 @@ void ScriptEditor::_updateTextWriter()
 			{
 				if(currentLineText.empty() || cursorCharacterIndex == currentLineText.size())
 				{
-					for(const auto& character : newCharacters)
+					for(const auto & character : newCharacters)
 					{
 						currentLineText += character;
 						cursorCharacterIndex++;
@@ -246,7 +246,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 				else
 				{
-					for(const auto& character : newCharacters)
+					for(const auto & character : newCharacters)
 					{
 						currentLineText.insert(currentLineText.begin() + cursorCharacterIndex, character);
 						cursorCharacterIndex++;

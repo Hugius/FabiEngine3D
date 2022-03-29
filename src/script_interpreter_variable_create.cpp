@@ -3,7 +3,7 @@
 
 using std::initializer_list;
 
-void ScriptInterpreter::_processVariableCreation(const string& scriptLine, ScriptVariableScope scope)
+void ScriptInterpreter::_processVariableCreation(const string & scriptLine, ScriptVariableScope scope)
 {
 	auto forbiddenVariableNames = {
 		META_KEYWORD,
@@ -57,9 +57,9 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	unsigned int wordIndex = 0;
 	typeIndex += static_cast<unsigned int>((scope == ScriptVariableScope::GLOBAL) ? (GLOBAL_KEYWORD.size() + 1) : 0);
 	typeIndex += static_cast<unsigned int>(isConstant ? (CONST_KEYWORD.size() + 1) : 0);
-	for(const auto& c : scriptLine.substr(typeIndex))
+	for(const auto & character : scriptLine.substr(typeIndex))
 	{
-		if(c == ' ')
+		if(character == ' ')
 		{
 			wordIndex++;
 
@@ -70,7 +70,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		}
 		else
 		{
-			words[wordIndex] += c;
+			words[wordIndex] += character;
 		}
 	}
 	string typeString = words[0];
@@ -106,14 +106,14 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		!isdigit(nameString[0]) &&
 		(isalnum(nameString[0]) || nameString[0] == '_');
 
-	for(const auto& word : forbiddenVariableNames)
+	for(const auto & word : forbiddenVariableNames)
 	{
 		isValidName = (isValidName && (nameString != word));
 	}
 
-	for(const auto& c : nameString)
+	for(const auto & character : nameString)
 	{
-		if(c != '_' && !isalnum(c))
+		if(character != '_' && !isalnum(character))
 		{
 			isValidName = false;
 		}
@@ -137,7 +137,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		return;
 	}
 
-	auto& variableList = ((scope == ScriptVariableScope::LOCAL) ? _localVariables[_executionDepth] : _globalVariables);
+	auto & variableList = ((scope == ScriptVariableScope::LOCAL) ? _localVariables[_executionDepth] : _globalVariables);
 
 	if((scope == ScriptVariableScope::LOCAL && _isLocalVariableExisting(nameString)) ||
 	   (scope == ScriptVariableScope::GLOBAL && _isGlobalVariableExisting(nameString)))
@@ -221,7 +221,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			return;
 		}
 
-		for(const auto& value : returnValues)
+		for(const auto & value : returnValues)
 		{
 			if(value->getType() == ScriptValueType::EMPTY)
 			{

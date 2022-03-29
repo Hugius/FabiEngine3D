@@ -1,12 +1,12 @@
 #include "script_interpreter.hpp"
 
-void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
+void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 {
 	string words[2] = {"", ""};
 	unsigned int wordIndex = 0;
-	for(const auto& c : scriptLine)
+	for(const auto & character : scriptLine)
 	{
-		if(c == ' ')
+		if(character == ' ')
 		{
 			wordIndex++;
 
@@ -17,7 +17,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 		else
 		{
-			words[wordIndex] += c;
+			words[wordIndex] += character;
 		}
 	}
 
@@ -204,7 +204,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 }
 
-void ScriptInterpreter::_performArithmeticOperation(shared_ptr<ScriptValue> leftValue, const string& operatorString, shared_ptr<ScriptValue> rightValue)
+void ScriptInterpreter::_performArithmeticOperation(shared_ptr<ScriptValue> leftValue, const string & operatorString, shared_ptr<ScriptValue> rightValue)
 {
 	if(((leftValue->getType() == ScriptValueType::INTEGER)) && (rightValue->getType() == ScriptValueType::INTEGER))
 	{

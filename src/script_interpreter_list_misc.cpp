@@ -23,7 +23,7 @@ const bool ScriptInterpreter::_validateListIndex(const shared_ptr<ScriptVariable
 	return true;
 }
 
-const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<ScriptValue>>& values, unsigned int count)
+const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<ScriptValue>> & values, unsigned int count)
 {
 	if(values.size() == count)
 	{
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<Scr
 	}
 }
 
-const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<ScriptValue>>& values, const vector<ScriptValueType>& types)
+const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<ScriptValue>> & values, const vector<ScriptValueType> & types)
 {
 	for(unsigned int index = 0; index < values.size(); index++)
 	{
@@ -55,18 +55,18 @@ const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<Scr
 	return true;
 }
 
-void ScriptInterpreter::_processListPush(const string& scriptLine)
+void ScriptInterpreter::_processListPush(const string & scriptLine)
 {
 	string nameString = "";
-	for(const auto& c : scriptLine.substr(PUSHING_KEYWORD.size() + 1))
+	for(const auto & character : scriptLine.substr(PUSHING_KEYWORD.size() + 1))
 	{
-		if(c == ' ')
+		if(character == ' ')
 		{
 			break;
 		}
 		else
 		{
-			nameString += c;
+			nameString += character;
 		}
 	}
 
@@ -143,18 +143,18 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 }
 
-void ScriptInterpreter::_processListPull(const string& scriptLine)
+void ScriptInterpreter::_processListPull(const string & scriptLine)
 {
 	string nameString = "";
-	for(const auto& c : scriptLine.substr(PULLING_KEYWORD.size() + 1))
+	for(const auto & character : scriptLine.substr(PULLING_KEYWORD.size() + 1))
 	{
-		if(c == ' ')
+		if(character == ' ')
 		{
 			break;
 		}
 		else
 		{
-			nameString += c;
+			nameString += character;
 		}
 	}
 

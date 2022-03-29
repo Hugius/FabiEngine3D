@@ -145,7 +145,7 @@ void GuiInputBox::_updateTyping()
 		}
 		else
 		{
-			_textField->setTextContent(textContent + "|");
+			_textField->setTextContent(textContent);
 		}
 
 		if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))

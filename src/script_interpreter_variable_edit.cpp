@@ -1,13 +1,13 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
 
-void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
+void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 {
 	string words[2] = {"", ""};
 	unsigned int wordIndex = 0;
-	for(const auto& c : scriptLine.substr(EDIT_KEYWORD.size() + 1))
+	for(const auto & character : scriptLine.substr(EDIT_KEYWORD.size() + 1))
 	{
-		if(c == ' ')
+		if(character == ' ')
 		{
 			wordIndex++;
 
@@ -18,7 +18,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		}
 		else
 		{
-			words[wordIndex] += c;
+			words[wordIndex] += character;
 		}
 	}
 	string nameString = words[0];
@@ -142,7 +142,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			return;
 		}
 
-		for(const auto& value : returnValues)
+		for(const auto & value : returnValues)
 		{
 			if(value->getType() == ScriptValueType::EMPTY)
 			{

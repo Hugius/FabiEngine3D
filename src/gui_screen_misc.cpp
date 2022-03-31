@@ -5,6 +5,11 @@ GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string & id, const 
 	_id(id),
 	_parentId(parentId)
 {
+	if(_id.empty())
+	{
+		abort();
+	}
+
 	_fe3d = fe3d;
 	_parentPosition = parentPosition;
 	_parentSize = parentSize;

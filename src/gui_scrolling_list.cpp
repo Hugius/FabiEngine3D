@@ -8,17 +8,23 @@ using std::clamp;
 
 GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, const fvec2 & characterSize, float scrollingSpeed, bool isCentered)
 	:
-	_fe3d(fe3d),
 	_id(id),
-	_parentId(parentId),
-	_defaultQuadColor(defaultQuadColor),
-	_hoveredQuadColor(hoveredQuadColor),
-	_defaultTextColor(defaultTextColor),
-	_hoveredTextColor(hoveredTextColor),
-	_characterSize(characterSize),
-	_scrollingSpeed(scrollingSpeed)
+	_parentId(parentId)
 {
-	_quadField = make_shared<GuiQuadField>(fe3d, "GuiScrollingList", (parentId + "_" + id), position, size, "", color, isCentered);
+	if(_id.empty())
+	{
+		abort();
+	}
+
+	_fe3d = fe3d;
+	_defaultQuadColor = defaultQuadColor;
+	_hoveredQuadColor = hoveredQuadColor;
+	_defaultTextColor = defaultTextColor;
+	_hoveredTextColor = hoveredTextColor;
+	_characterSize = characterSize;
+	_scrollingSpeed = scrollingSpeed;
+
+	_quadField = make_shared<GuiQuadField>(_fe3d, "GuiScrollingList", (_parentId + "_" + _id), position, size, "", color, isCentered);
 }
 
 void GuiScrollingList::update(bool isFocused)

@@ -8,6 +8,11 @@ ScriptVariable::ScriptVariable(const string & id, ScriptVariableScope scope, Scr
 	_id(id),
 	_isConstant(isConstant)
 {
+	if(_id.empty())
+	{
+		abort();
+	}
+
 	_values = values;
 }
 

@@ -7,11 +7,11 @@ using std::string;
 class BaseEntity
 {
 public:
-	BaseEntity(const string& id);
+	BaseEntity(const string & id);
 
 	virtual void setVisible(bool value);
 
-	const string& getId() const;
+	const string & getId() const;
 
 	const bool isVisible() const;
 
@@ -19,10 +19,4 @@ protected:
 	const string _id;
 
 	bool _isVisible = true;
-
-private:
-	virtual void _dummy()
-	{
-
-	}
 };

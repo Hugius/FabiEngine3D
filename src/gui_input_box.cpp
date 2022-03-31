@@ -19,6 +19,11 @@ GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, co
 	_noLetters(noLetters),
 	_minusAllowed(minusAllowed)
 {
+	if(_id.empty())
+	{
+		abort();
+	}
+
 	_quadField = make_shared<GuiQuadField>(fe3d, "GuiInputBox", (parentId + "_" + id), position, size, "", defaultQuadColor, isCentered);
 	_textField = make_shared<GuiTextField>(fe3d, "GuiInputBox", (parentId + "_" + id), position, fvec2((size.x / static_cast<float>(maxCharacterCount)), size.y), "", fvec3(1.0f), isCentered);
 }

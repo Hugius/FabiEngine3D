@@ -1,45 +1,45 @@
 #include "script.hpp"
 #include "logger.hpp"
 
-void Script::createScriptFile(const string& id)
+void Script::createScriptFile(const string & id)
 {
-	for(const auto& file : _scriptFiles)
+	if(isScriptFileExisting(id))
 	{
-		if(file->getId() == id)
-		{
-			abort();
-		}
+		abort();
 	}
 
-	_scriptFiles.push_back(make_shared<ScriptFile>(id));
+	_scriptFiles.insert({id, make_shared<ScriptFile>(id)});
 }
 
-void Script::renameScriptFile(const string& id, const string& newId)
+void Script::renameScriptFile(const string & id, const string & newId)
 {
-	for(const auto& file : _scriptFiles)
+	if(!isScriptFileExisting(id))
 	{
-		if(file->getId() == id)
-		{
-			file->changeId(newId);
-			return;
-		}
+		abort();
 	}
+
+	const auto cursorLineIndex = getScriptFile(id)->getCursorLineIndex();
+	const auto cursorCharacterIndex = getScriptFile(id)->getCursorCharacterIndex();
+	const auto lines = getScriptFile(id)->getLines();
+
+	deleteScriptFile(id);
+	createScriptFile(newId);
+
+	getScriptFile(newId)->setCursorLineIndex(cursorLineIndex);
+	getScriptFile(newId)->setCursorCharacterIndex(cursorCharacterIndex);
+	getScriptFile(newId)->setLines(lines);
 
 	abort();
 }
 
-void Script::deleteScriptFile(const string& id)
+void Script::deleteScriptFile(const string & id)
 {
-	for(unsigned int index = 0; index < _scriptFiles.size(); index++)
+	if(!isScriptFileExisting(id))
 	{
-		if(_scriptFiles[index]->getId() == id)
-		{
-			_scriptFiles.erase(_scriptFiles.begin() + index);
-			return;
-		}
+		abort();
 	}
 
-	abort();
+	_scriptFiles.erase(id);
 }
 
 void Script::clear()
@@ -56,7 +56,7 @@ const unsigned int Script::getTotalLineCount() const
 {
 	unsigned int total = 0;
 
-	for(const auto& scriptFile : _scriptFiles)
+	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
 	{
 		total += scriptFile->getLineCount();
 	}
@@ -64,17 +64,9 @@ const unsigned int Script::getTotalLineCount() const
 	return total;
 }
 
-const bool Script::isScriptFileExisting(const string& id) const
+const bool Script::isScriptFileExisting(const string & id) const
 {
-	for(const auto& file : _scriptFiles)
-	{
-		if(file->getId() == id)
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return (_scriptFiles.find(id) != _scriptFiles.end());
 }
 
 const bool Script::isEmpty()
@@ -82,48 +74,43 @@ const bool Script::isEmpty()
 	return (getScriptFileCount() == 0);
 }
 
-const shared_ptr<ScriptFile> Script::getScriptFile(const string& id) const
+const shared_ptr<ScriptFile> Script::getScriptFile(const string & id) const
 {
-	for(const auto& file : _scriptFiles)
+	if(!isScriptFileExisting(id))
 	{
-		if(file->getId() == id)
-		{
-			return file;
-		}
+		abort();
 	}
 
-	abort();
+	return _scriptFiles.at(id);
 }
 
 const vector<string> Script::getScriptFileIds() const
 {
 	vector<string> result;
 
-	for(const auto& file : _scriptFiles)
+	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
 	{
-		result.push_back(file->getId());
+		result.push_back(scriptFileId);
 	}
-
-	sort(result.begin(), result.end());
 
 	return result;
 }
 
-const unordered_map<string, unsigned int> Script::findKeyword(const string& keyword) const
+const unordered_map<string, unsigned int> Script::findKeyword(const string & keyword) const
 {
 	unordered_map<string, unsigned int> result;
 
-	for(const auto& file : _scriptFiles)
+	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
 	{
-		for(unsigned int lineNumber = 0; lineNumber < file->getLines().size(); lineNumber++)
+		for(unsigned int lineNumber = 0; lineNumber < scriptFile->getLines().size(); lineNumber++)
 		{
-			string line = file->getLines()[lineNumber];
+			const auto line = scriptFile->getLines()[lineNumber];
 
 			for(unsigned int index = 0; index < line.size(); index++)
 			{
 				if(line.substr(index, keyword.size()) == keyword)
 				{
-					result.insert({file->getId(), lineNumber + 1});
+					result.insert({scriptFileId, lineNumber + 1});
 					break;
 				}
 			}

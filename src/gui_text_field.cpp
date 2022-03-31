@@ -6,6 +6,11 @@ GuiTextField::GuiTextField(shared_ptr<EngineInterface> fe3d, const string & id, 
 	_parentId(parentId),
 	_entityId("@" + parentId + "_" + id)
 {
+	if(_id.empty())
+	{
+		abort();
+	}
+
 	_fe3d = fe3d;
 
 	_fe3d->text2d_create(_entityId, FONT_MAP_PATH, isCentered);

@@ -6,6 +6,11 @@ GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const 
 	_id(id),
 	_parentId(parentId)
 {
+	if(_id.empty())
+	{
+		abort();
+	}
+
 	_fe3d = fe3d;
 	_quadField = make_shared<GuiQuadField>(fe3d, "GuiButton", (parentId + "_" + id), position, size, diffuseMapPath, defaultQuadColor, isCentered);
 	_textField = make_shared<GuiTextField>(fe3d, "GuiButton", (parentId + "_" + id), position, fvec2((size.x * TEXT_WIDTH_MULTIPLIER), (size.y * TEXT_HEIGHT_MULTIPLIER)), textContent, defaultTextColor, isCentered);

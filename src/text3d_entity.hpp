@@ -16,8 +16,8 @@ public:
 	void updateTarget();
 	void updateCharacterEntities();
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
-	void setContent(const string& value);
-	void setFontMapPath(const string& value);
+	void setContent(const string & value);
+	void setFontMapPath(const string & value);
 	void setFontMap(shared_ptr<TextureBuffer> value);
 	void setFacingCameraHorizontally(bool value);
 	void setFacingCameraVertically(bool value);
@@ -26,43 +26,43 @@ public:
 	void setReflected(bool value);
 	void setBright(bool value);
 	void setWireframed(bool value);
-	void setPosition(const fvec3& value);
-	void setRotation(const fvec3& value);
-	void setSize(const fvec2& value);
-	void move(const fvec3& value);
-	void rotate(const fvec3& value);
-	void scale(const fvec2& value);
-	void moveTo(const fvec3& target, float speed);
-	void rotateTo(const fvec3& target, float speed);
-	void scaleTo(const fvec2& target, float speed);
-	void setColor(const fvec3& value);
-	void setWireframeColor(const fvec3& value);
+	void setPosition(const fvec3 & value);
+	void setRotation(const fvec3 & value);
+	void setSize(const fvec2 & value);
+	void move(const fvec3 & value);
+	void rotate(const fvec3 & value);
+	void scale(const fvec2 & value);
+	void moveTo(const fvec3 & target, float speed);
+	void rotateTo(const fvec3 & target, float speed);
+	void scaleTo(const fvec2 & target, float speed);
+	void setColor(const fvec3 & value);
+	void setWireframeColor(const fvec3 & value);
 	void setLightness(float value);
 	void setOpacity(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
 	void setMinTextureAlpha(float value);
 	void setFrozen(bool value);
-	void setVisible(bool value);
+	void setVisible(bool value) override;
 
-	const vector<shared_ptr<Quad3dEntity>>& getCharacterEntities() const;
+	const vector<shared_ptr<Quad3dEntity>> & getCharacterEntities() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
 
-	const string& getContent() const;
-	const string& getFontMapPath() const;
+	const string & getContent() const;
+	const string & getFontMapPath() const;
 
-	const mat44& getTransformation() const;
+	const mat44 & getTransformation() const;
 
-	const fvec3& getPosition() const;
-	const fvec3& getRotation() const;
-	const fvec3& getColor() const;
-	const fvec3& getWireframeColor() const;
+	const fvec3 & getPosition() const;
+	const fvec3 & getRotation() const;
+	const fvec3 & getColor() const;
+	const fvec3 & getWireframeColor() const;
 
-	const fvec2& getSize() const;
-	const fvec2& getUvMultiplier() const;
-	const fvec2& getUvOffset() const;
+	const fvec2 & getSize() const;
+	const fvec2 & getUvMultiplier() const;
+	const fvec2 & getUvOffset() const;
 
 	const float getMinTextureAlpha() const;
 	const float getLightness() const;

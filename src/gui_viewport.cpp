@@ -7,6 +7,11 @@ GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string & id, co
 	_id(id),
 	_entityId("@" + id)
 {
+	if(_id.empty())
+	{
+		abort();
+	}
+
 	_fe3d = fe3d;
 
 	_fe3d->quad2d_create(_entityId, true);

@@ -8,6 +8,11 @@ GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string & id, const 
 	_parentId(parentId),
 	_entityId("@" + parentId + "_" + id)
 {
+	if(_id.empty())
+	{
+		abort();
+	}
+
 	_fe3d = fe3d;
 
 	_fe3d->quad2d_create(_entityId, true);

@@ -4,7 +4,10 @@ ScriptFile::ScriptFile(const string & id)
 	:
 	_id(id)
 {
-
+	if(_id.empty())
+	{
+		abort();
+	}
 }
 
 void ScriptFile::createLine(unsigned int index, const string & textContent)
@@ -36,19 +39,19 @@ void ScriptFile::deleteLine(unsigned int index)
 	}
 }
 
-void ScriptFile::setCursorLineIndex(unsigned int index)
+void ScriptFile::setLines(const vector<string> & value)
 {
-	_cursorLineIndex = index;
+	_lines = value;
 }
 
-void ScriptFile::setCursorCharacterIndex(unsigned int index)
+void ScriptFile::setCursorLineIndex(unsigned int value)
 {
-	_cursorCharacterIndex = index;
+	_cursorLineIndex = value;
 }
 
-void ScriptFile::changeId(const string & newId)
+void ScriptFile::setCursorCharacterIndex(unsigned int value)
 {
-	_id = newId;
+	_cursorCharacterIndex = value;
 }
 
 const string & ScriptFile::getId() const

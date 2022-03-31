@@ -16,45 +16,45 @@ public:
 	void updateTarget();
 	void updateCharacterEntities();
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
-	void setContent(const string& value);
-	void setFontMapPath(const string& value);
+	void setContent(const string & value);
+	void setFontMapPath(const string & value);
 	void setFontMap(shared_ptr<TextureBuffer> value);
 	void setHorizontallyFlipped(bool value);
 	void setVerticallyFlipped(bool value);
 	void setOpacity(float value);
-	void setWireframeColor(const fvec3& value);
-	void setColor(const fvec3& value);
-	void setMinPosition(const fvec2& value);
-	void setMaxPosition(const fvec2& value);
-	void setPosition(const fvec2& value);
+	void setWireframeColor(const fvec3 & value);
+	void setColor(const fvec3 & value);
+	void setMinPosition(const fvec2 & value);
+	void setMaxPosition(const fvec2 & value);
+	void setPosition(const fvec2 & value);
 	void setRotation(float value);
-	void setSize(const fvec2& value);
-	void move(const fvec2& value);
+	void setSize(const fvec2 & value);
+	void move(const fvec2 & value);
 	void rotate(float value);
-	void scale(const fvec2& value);
-	void moveTo(const fvec2& target, float speed);
+	void scale(const fvec2 & value);
+	void moveTo(const fvec2 & target, float speed);
 	void rotateTo(float target, float speed);
-	void scaleTo(const fvec2& target, float speed);
+	void scaleTo(const fvec2 & target, float speed);
 	void setDepth(unsigned int value);
 	void setWireframed(bool value);
 	void setCentered(bool value);
-	void setVisible(bool value);
+	void setVisible(bool value) override;
 
-	const vector<shared_ptr<Quad2dEntity>>& getCharacterEntities() const;
+	const vector<shared_ptr<Quad2dEntity>> & getCharacterEntities() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getFontTextureBuffer() const;
 
-	const string& getContent() const;
-	const string& getFontMapPath() const;
+	const string & getContent() const;
+	const string & getFontMapPath() const;
 
-	const fvec3& getWireframeColor() const;
-	const fvec3& getColor() const;
+	const fvec3 & getWireframeColor() const;
+	const fvec3 & getColor() const;
 
-	const fvec2& getPosition() const;
-	const fvec2& getSize() const;
-	const fvec2& getMinPosition() const;
-	const fvec2& getMaxPosition() const;
+	const fvec2 & getPosition() const;
+	const fvec2 & getSize() const;
+	const fvec2 & getMinPosition() const;
+	const fvec2 & getMaxPosition() const;
 
 	const float getOpacity() const;
 	const float getRotation() const;

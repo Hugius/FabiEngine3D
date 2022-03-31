@@ -7,7 +7,7 @@ using std::make_shared;
 using std::max;
 using std::map;
 
-const shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& id) const
+const shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string & id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -19,7 +19,7 @@ const shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& id) co
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<ModelEntity>> & ModelEntityManager::getEntities() const
 {
 	return _entities;
 }
@@ -54,7 +54,7 @@ void ModelEntityManager::inject(shared_ptr<VertexBufferCache> vertexBufferCache)
 	_vertexBufferCache = vertexBufferCache;
 }
 
-void ModelEntityManager::createEntity(const string& id, const string& meshPath)
+void ModelEntityManager::createEntity(const string & id, const string & meshPath)
 {
 	if(isEntityExisting(id))
 	{
@@ -70,7 +70,7 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 
 	auto entity = make_shared<ModelEntity>(id);
 
-	for(const auto& part : mesh->getParts())
+	for(const auto & part : mesh->getParts())
 	{
 		vector<float> bufferData;
 
@@ -92,18 +92,18 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 			bufferData.push_back(part->getTangents()[index].z);
 		}
 
-		entity->createPart(part->getId());
+		entity->createPart(part->getName());
 
-		auto vertexBuffer = _vertexBufferCache->getBuffer(meshPath, part->getId());
+		auto vertexBuffer = _vertexBufferCache->getBuffer(meshPath, part->getName());
 
 		if(vertexBuffer == nullptr)
 		{
 			vertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<unsigned int>(bufferData.size()));
 
-			_vertexBufferCache->storeBuffer(meshPath, part->getId(), vertexBuffer);
+			_vertexBufferCache->storeBuffer(meshPath, part->getName(), vertexBuffer);
 		}
 
-		entity->setVertexBuffer(part->getId(), vertexBuffer);
+		entity->setVertexBuffer(part->getName(), vertexBuffer);
 	}
 
 	entity->setMeshPath(meshPath);
@@ -111,7 +111,7 @@ void ModelEntityManager::createEntity(const string& id, const string& meshPath)
 	_entities.insert({id, entity});
 }
 
-void ModelEntityManager::deleteEntity(const string& id)
+void ModelEntityManager::deleteEntity(const string & id)
 {
 	if(!isEntityExisting(id))
 	{
@@ -126,7 +126,7 @@ void ModelEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool ModelEntityManager::isEntityExisting(const string& id) const
+const bool ModelEntityManager::isEntityExisting(const string & id) const
 {
 	return (_entities.find(id) != _entities.end());
 }
@@ -138,7 +138,7 @@ const bool ModelEntityManager::isEntitiesExisting() const
 
 void ModelEntityManager::update()
 {
-	for(const auto& [key, entity] : _entities)
+	for(const auto & [key, entity] : _entities)
 	{
 		entity->updateTarget();
 
@@ -185,7 +185,7 @@ void ModelEntityManager::update()
 		{
 			map<float, shared_ptr<ReflectionEntity>> orderedReflectionEntities;
 
-			for(const auto& [key, reflectionEntity] : _reflectionManager->getEntities())
+			for(const auto & [key, reflectionEntity] : _reflectionManager->getEntities())
 			{
 				if(reflectionEntity->isVisible())
 				{

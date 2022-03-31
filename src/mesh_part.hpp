@@ -11,22 +11,22 @@ using std::string;
 class MeshPart final
 {
 public:
-	MeshPart(const string& id);
+	MeshPart(const string & name);
 
-	void addPosition(const fvec3& value);
-	void addUv(const fvec2& value);
-	void addNormal(const fvec3& value);
-	void addTangent(const fvec3& value);
+	void addPosition(const fvec3 & value);
+	void addUv(const fvec2 & value);
+	void addNormal(const fvec3 & value);
+	void addTangent(const fvec3 & value);
 
-	const vector<fvec3>& getPositions() const;
-	const vector<fvec2>& getUvs() const;
-	const vector<fvec3>& getNormals() const;
-	const vector<fvec3>& getTangents() const;
+	const vector<fvec3> & getPositions() const;
+	const vector<fvec2> & getUvs() const;
+	const vector<fvec3> & getNormals() const;
+	const vector<fvec3> & getTangents() const;
 
-	const string& getId() const;
+	const string & getName() const;
 
 private:
-	const string _id;
+	const string _name;
 
 	vector<fvec3> _positions = {};
 	vector<fvec2> _uvs = {};

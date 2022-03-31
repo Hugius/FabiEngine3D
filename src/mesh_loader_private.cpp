@@ -12,7 +12,7 @@ using std::ifstream;
 using std::istringstream;
 using std::array;
 
-shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath) const
+shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 {
 	vector<shared_ptr<MeshPart>> meshParts;
 	vector<fvec3> temp_positions;
@@ -102,7 +102,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath) const
 				>> indices[7]
 				>> indices[8];
 
-			for(auto& index : indices)
+			for(auto & index : indices)
 			{
 				index--;
 			}
@@ -113,9 +113,9 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath) const
 			}
 
 			bool isAlreadyExisting = false;
-			for(const auto& meshPart : meshParts)
+			for(const auto & meshPart : meshParts)
 			{
-				if(meshPart->getId() == selectedPartId)
+				if(meshPart->getName() == selectedPartId)
 				{
 					isAlreadyExisting = true;
 
@@ -152,7 +152,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath) const
 		}
 	}
 
-	for(const auto& meshPart : meshParts)
+	for(const auto & meshPart : meshParts)
 	{
 		for(unsigned int index = 0; index < meshPart->getPositions().size(); index += 3)
 		{
@@ -186,9 +186,9 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath) const
 
 	if(meshParts.size() > 1)
 	{
-		for(const auto& meshPart : meshParts)
+		for(const auto & meshPart : meshParts)
 		{
-			if(meshPart->getId().empty())
+			if(meshPart->getName().empty())
 			{
 				return nullptr;
 			}
@@ -197,7 +197,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath) const
 
 	auto mesh = make_shared<Mesh>();
 
-	for(const auto& meshPart : meshParts)
+	for(const auto & meshPart : meshParts)
 	{
 		mesh->addPart(meshPart);
 	}

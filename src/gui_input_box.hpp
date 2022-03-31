@@ -6,13 +6,14 @@
 class GuiInputBox final
 {
 public:
-	GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
+	GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
 
 	void update(bool isFocused);
 	void setActive(bool value);
 	void setTextContent(const string & value);
 	void setVisible(bool value);
 	void setHoverable(bool value);
+	void setMaxCharacterCount(unsigned int value);
 
 	const string getId() const;
 	const string getParentId() const;
@@ -25,6 +26,8 @@ public:
 
 	const fvec2 & getPosition() const;
 	const fvec2 & getSize() const;
+
+	const unsigned int getMaxCharacterCount() const;
 
 	const bool isHovered() const;
 	const bool isHoverable() const;
@@ -68,7 +71,6 @@ private:
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	static inline constexpr float FULL_OPACITY = 1.0f;
 	static inline constexpr float PART_OPACITY = 0.25f;
-	static inline constexpr unsigned int MAX_CHARACTER_COUNT = 10;
 
 	const string _id;
 	const string _parentId;
@@ -83,6 +85,8 @@ private:
 	fvec3 _hoveredQuadColor = fvec3(0.0f);
 	fvec3 _defaultTextColor = fvec3(0.0f);
 	fvec3 _hoveredTextColor = fvec3(0.0f);
+
+	unsigned int _maxCharacterCount = 0;
 
 	bool _isHovered = false;
 	bool _isHoverable = true;

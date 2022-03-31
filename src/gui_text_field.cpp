@@ -46,11 +46,27 @@ void GuiTextField::setTextContent(const string & value)
 	if(value != currentContent)
 	{
 		const auto textSize = getSize();
-		const auto characterWidth = (textSize.x / static_cast<float>(currentContent.size()));
-		const auto characterHeight = textSize.y;
 
 		_fe3d->text2d_setContent(_entityId, value);
-		_fe3d->text2d_setSize(_entityId, fvec2((characterWidth * static_cast<float>(value.size())), characterHeight));
+
+		if(currentContent.empty())
+		{
+			_fe3d->text2d_setSize(_entityId, fvec2((textSize.x * static_cast<float>(value.size())), textSize.y));
+		}
+		else
+		{
+			const auto characterWidth = (textSize.x / static_cast<float>(currentContent.size()));
+			const auto characterHeight = textSize.y;
+
+			if(value.empty())
+			{
+				_fe3d->text2d_setSize(_entityId, fvec2(characterWidth, characterHeight));
+			}
+			else
+			{
+				_fe3d->text2d_setSize(_entityId, fvec2((characterWidth * static_cast<float>(value.size())), characterHeight));
+			}
+		}
 	}
 }
 

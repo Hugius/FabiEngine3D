@@ -3,7 +3,7 @@
 
 #include <windows.h>
 
-GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -12,6 +12,7 @@ GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, co
 	_hoveredQuadColor(hoveredQuadColor),
 	_defaultTextColor(defaultTextColor),
 	_hoveredTextColor(hoveredTextColor),
+	_maxCharacterCount(maxCharacterCount),
 	_noNumbers(noNumbers),
 	_noCaps(noCaps),
 	_noSpecials(noSpecials),
@@ -19,7 +20,7 @@ GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, co
 	_minusAllowed(minusAllowed)
 {
 	_quadField = make_shared<GuiQuadField>(fe3d, "GuiInputBox", parentId, position, size, "", defaultQuadColor, isCentered);
-	_textField = make_shared<GuiTextField>(fe3d, "GuiInputBox", parentId, position, (size / static_cast<float>(MAX_CHARACTER_COUNT)), "|", defaultTextColor, isCentered);
+	_textField = make_shared<GuiTextField>(fe3d, "GuiInputBox", parentId, position, fvec2((size.x / static_cast<float>(maxCharacterCount)), size.y), "", fvec3(1.0f), isCentered);
 }
 
 void GuiInputBox::update(bool isFocused)
@@ -43,7 +44,7 @@ void GuiInputBox::_updateTyping()
 
 	if(_isActive)
 	{
-		if(textContent.size() < MAX_CHARACTER_COUNT)
+		if(textContent.size() < _maxCharacterCount)
 		{
 			if(!_noLetters)
 			{
@@ -127,7 +128,7 @@ void GuiInputBox::_updateTyping()
 			}
 		}
 
-		if(_fe3d->input_isKeyDown(InputType::KEY_BACKSPACE))
+		if(_fe3d->input_isKeyPressed(InputType::KEY_BACKSPACE))
 		{
 			if(textContent.size() == 1)
 			{
@@ -250,6 +251,11 @@ const fvec2 & GuiInputBox::getSize() const
 	return _quadField->getSize();
 }
 
+const unsigned int GuiInputBox::getMaxCharacterCount() const
+{
+	return _maxCharacterCount;
+}
+
 void GuiInputBox::setTextContent(const string & content)
 {
 	_textField->setTextContent(content);
@@ -267,6 +273,11 @@ void GuiInputBox::setHoverable(bool value)
 
 	_quadField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
 	_textField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
+}
+
+void GuiInputBox::setMaxCharacterCount(unsigned int value)
+{
+	_maxCharacterCount = value;
 }
 
 const string GuiInputBox::getId() const

@@ -123,4 +123,5 @@ private:
 	bool _isNumbersAllowed = false;
 	bool _isSpecialsAllowed = false;
 	bool _isCapsAllowed = false;
+	bool _isBarVisible = false;
 };

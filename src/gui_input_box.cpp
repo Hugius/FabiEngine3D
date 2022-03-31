@@ -24,7 +24,7 @@ GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, co
 	}
 
 	_quadField = make_shared<GuiQuadField>(fe3d, "GuiInputBox", (parentId + "_" + id), position, size, "", defaultQuadColor, isCentered);
-	_textField = make_shared<GuiTextField>(fe3d, "GuiInputBox", (parentId + "_" + id), position, fvec2((size.x / static_cast<float>(maxCharacterCount)), size.y), "", fvec3(1.0f), isCentered);
+	_textField = make_shared<GuiTextField>(fe3d, "GuiInputBox", (parentId + "_" + id), position, fvec2((size.x / static_cast<float>(maxCharacterCount)), size.y), " ", fvec3(1.0f), isCentered);
 }
 
 void GuiInputBox::update(bool isFocused)
@@ -44,10 +44,10 @@ void GuiInputBox::_updateActivation()
 
 void GuiInputBox::_updateTyping()
 {
+	auto textContent = getTextContent();
+
 	if(_isActive)
 	{
-		auto textContent = _textField->getTextContent();
-
 		if(textContent.size() < _maxCharacterCount)
 		{
 			if(_isLettersAllowed)
@@ -147,17 +147,16 @@ void GuiInputBox::_updateTyping()
 
 		if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
 		{
-			_textField->setTextContent(textContent);
-		}
-		else
-		{
-			_textField->setTextContent(textContent);
+			_isBarVisible = !_isBarVisible;
 		}
 	}
 	else
 	{
 		_isConfirmed = false;
+		_isBarVisible = false;
 	}
+
+	_textField->setTextContent(textContent + (_isBarVisible ? "|" : " "));
 }
 
 void GuiInputBox::setActive(bool value)
@@ -206,7 +205,9 @@ const string GuiInputBox::getTextContent() const
 	//	return textContent;
 	//}
 
-	return _textField->getTextContent();
+	const auto textContent = _textField->getTextContent();
+
+	return textContent.substr(0, (textContent.size() - 1));
 }
 
 const fvec3 & GuiInputBox::getDefaultQuadColor()
@@ -246,7 +247,7 @@ const unsigned int GuiInputBox::getMaxCharacterCount() const
 
 void GuiInputBox::setTextContent(const string & content)
 {
-	_textField->setTextContent(content);
+	_textField->setTextContent(content + " ");
 }
 
 void GuiInputBox::setVisible(bool value)

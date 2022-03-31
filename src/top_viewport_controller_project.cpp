@@ -23,6 +23,12 @@ void TopViewportController::_updateProjectCreating()
 				return;
 			}
 
+			if(newProjectId.empty())
+			{
+				Logger::throwWarning("Project ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newProjectId.begin(), newProjectId.end(), isspace))
 			{
 				Logger::throwWarning("Project ID cannot contain any spaces");

@@ -2,8 +2,8 @@
 #include "tools.hpp"
 
 #include <windows.h>
-
-GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+#include <iostream>
+GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCapsAllowed, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -13,11 +13,10 @@ GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, co
 	_defaultTextColor(defaultTextColor),
 	_hoveredTextColor(hoveredTextColor),
 	_maxCharacterCount(maxCharacterCount),
-	_noNumbers(noNumbers),
-	_noCaps(noCaps),
-	_noSpecials(noSpecials),
-	_noLetters(noLetters),
-	_minusAllowed(minusAllowed)
+	_isLettersAllowed(isLettersAllowed),
+	_isNumbersAllowed(isNumbersAllowed),
+	_isSpecialsAllowed(isSpecialsAllowed),
+	_isCapsAllowed(isCapsAllowed)
 {
 	if(_id.empty())
 	{
@@ -45,51 +44,28 @@ void GuiInputBox::_updateActivation()
 
 void GuiInputBox::_updateTyping()
 {
-	auto textContent = _textField->getTextContent();
-
 	if(_isActive)
 	{
+		auto textContent = _textField->getTextContent();
+
 		if(textContent.size() < _maxCharacterCount)
 		{
-			if(!_noLetters)
+			if(_isLettersAllowed)
 			{
+				if(_fe3d->input_isKeyPressed(InputType(' ')))
+				{
+					textContent += ' ';
+				}
+
 				for(const auto & character : ALPHABET_CHARACTERS)
 				{
-					if(_fe3d->input_isKeyPressed(InputType(character)))
-					{
-						if(character == ' ')
-						{
-							textContent += character;
-						}
-						else
-						{
-							if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
-							{
-								textContent += (character - 32);
-							}
-							else if((GetKeyState(VK_CAPITAL) & 0x0001) != 0)
-							{
-								if(!_noCaps)
-								{
-									textContent += (character - 32);
-								}
-							}
-							else
-							{
-								textContent += character;
-							}
-						}
-					}
-				}
-			}
-
-			if(!_noNumbers)
-			{
-				for(const auto & character : NUMBER_CHARACTERS)
-				{
 					if(_fe3d->input_isKeyPressed(InputType(character.first)))
 					{
 						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+						{
+							textContent += character.second;
+						}
+						else if(((GetKeyState(VK_CAPITAL) & 0x0001) != 0) && _isCapsAllowed)
 						{
 							textContent += character.second;
 						}
@@ -101,32 +77,50 @@ void GuiInputBox::_updateTyping()
 				}
 			}
 
-			if(!_noSpecials)
+			for(const auto & character : NUMBER_CHARACTERS)
 			{
-				for(const auto & character : SPECIAL_CHARACTERS)
+				if(_fe3d->input_isKeyPressed(InputType(character.first)))
 				{
-					if(_fe3d->input_isKeyPressed(InputType(character.first)))
+					if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 					{
-						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+						if(_isSpecialsAllowed)
 						{
 							textContent += character.second;
 						}
-						else
+					}
+					else
+					{
+						if(_isNumbersAllowed)
 						{
 							textContent += character.first;
 						}
 					}
 				}
 			}
-			else if(_minusAllowed && !_noNumbers)
+
+			for(const auto & character : SPECIAL_CHARACTERS)
 			{
-				if(_fe3d->input_isKeyPressed(InputType('-')))
+				if(_fe3d->input_isKeyPressed(InputType(character.first)))
 				{
-					if(!_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) && !_fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+					if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 					{
-						if(textContent.empty())
+						if(_isSpecialsAllowed)
 						{
-							textContent += '-';
+							textContent += character.second;
+						}
+					}
+					else
+					{
+						if(_isSpecialsAllowed)
+						{
+							textContent += character.first;
+						}
+						else
+						{
+							if((character.first == '-') && textContent.empty())
+							{
+								textContent += character.first;
+							}
 						}
 					}
 				}
@@ -145,6 +139,12 @@ void GuiInputBox::_updateTyping()
 			}
 		}
 
+		if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
+		{
+			_isConfirmed = true;
+			_isActive = false;
+		}
+
 		if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
 		{
 			_textField->setTextContent(textContent);
@@ -153,23 +153,11 @@ void GuiInputBox::_updateTyping()
 		{
 			_textField->setTextContent(textContent);
 		}
-
-		if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
-		{
-			if(!textContent.empty())
-			{
-				_isConfirmed = true;
-				_isActive = false;
-			}
-		}
 	}
 	else
 	{
-		_textField->setTextContent(textContent);
 		_isConfirmed = false;
 	}
-
-	_lastTextContent = textContent;
 }
 
 void GuiInputBox::setActive(bool value)
@@ -200,11 +188,6 @@ const bool GuiInputBox::isConfirmed() const
 const bool GuiInputBox::isActive() const
 {
 	return _isActive;
-}
-
-const bool GuiInputBox::hasTextContentChanged() const
-{
-	return (_lastTextContent != getTextContent());
 }
 
 const bool GuiInputBox::isCentered() const

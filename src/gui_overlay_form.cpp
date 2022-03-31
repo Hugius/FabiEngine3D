@@ -116,7 +116,7 @@ void GuiOverlay::_createValueForm(const string & id, const string & title, const
 	_valueFormIds.push_back(id);
 	createQuadField(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.0275f, 0.125f), "", FORM_TITLE_RECT_COLOR, true);
 	createTextField(id, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.025f, 0.1f), title, FORM_TITLE_TEXT_COLOR, true);
-	createInputBox(id, position, size, fvec3(0.25f), fvec3(0.5f), fvec3(1.0f), fvec3(0.0f), 15, false, onlyNumbers, onlyNumbers, onlyNumbers, (onlyNumbers && minusAllowed), true);
+	createInputBox(id, position, size, fvec3(0.25f), fvec3(0.5f), fvec3(1.0f), fvec3(0.0f), 15, false, true, true, true, true);
 	getInputBox(id)->setTextContent(valueString);
 
 	if(!_isFocused)
@@ -134,8 +134,6 @@ void GuiOverlay::_createValueForm(const string & id, const string & title, const
 
 const bool GuiOverlay::_checkValueForm(const string & id, string & valueString, const vector<string> & forbiddenValueStrings)
 {
-	bool changed = false;
-
 	if(find(_valueFormIds.begin(), _valueFormIds.end(), id) != _valueFormIds.end())
 	{
 		bool done = _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
@@ -144,27 +142,6 @@ const bool GuiOverlay::_checkValueForm(const string & id, string & valueString, 
 
 		if(done || entered || cancelled)
 		{
-			if(done || entered)
-			{
-				auto content = getInputBox(id)->getTextContent();
-
-				if(content.empty())
-				{
-					return false;
-				}
-
-				for(const auto & forbiddenValue : forbiddenValueStrings)
-				{
-					if(content == forbiddenValue)
-					{
-						return false;
-					}
-				}
-
-				valueString = content;
-				changed = getInputBox(id)->hasTextContentChanged();
-			}
-
 			if(_valueFormIds.size() == 1)
 			{
 				_mustDeleteValueForms = true;
@@ -176,10 +153,27 @@ const bool GuiOverlay::_checkValueForm(const string & id, string & valueString, 
 					_mustDeleteValueForms = true;
 				}
 			}
+
+			if(done || entered)
+			{
+				auto content = getInputBox(id)->getTextContent();
+
+				for(const auto & forbiddenValue : forbiddenValueStrings)
+				{
+					if(content == forbiddenValue)
+					{
+						return false;
+					}
+				}
+
+				valueString = content;
+
+				return true;
+			}
 		}
 	}
 
-	return changed;
+	return false;
 }
 
 void GuiOverlay::createChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles)

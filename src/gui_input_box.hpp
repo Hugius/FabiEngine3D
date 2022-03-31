@@ -6,7 +6,7 @@
 class GuiInputBox final
 {
 public:
-	GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
+	GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCapsAllowed, bool isCentered);
 
 	void update(bool isFocused);
 	void setActive(bool value);
@@ -34,7 +34,6 @@ public:
 	const bool isVisible() const;
 	const bool isConfirmed() const;
 	const bool isActive() const;
-	const bool hasTextContentChanged() const;
 	const bool isCentered() const;
 
 private:
@@ -68,7 +67,35 @@ private:
 		{'8', '*'},
 		{'9', '('}
 	};
-	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
+	static inline const unordered_map<char, char> ALPHABET_CHARACTERS =
+	{
+		{'a', 'A'},
+		{'b', 'B'},
+		{'c', 'C'},
+		{'d', 'D'},
+		{'e', 'E'},
+		{'f', 'F'},
+		{'g', 'G'},
+		{'h', 'H'},
+		{'i', 'I'},
+		{'j', 'J'},
+		{'k', 'K'},
+		{'l', 'L'},
+		{'m', 'M'},
+		{'n', 'N'},
+		{'o', 'O'},
+		{'p', 'P'},
+		{'q', 'Q'},
+		{'r', 'R'},
+		{'s', 'S'},
+		{'t', 'T'},
+		{'u', 'U'},
+		{'v', 'V'},
+		{'w', 'W'},
+		{'x', 'X'},
+		{'y', 'Y'},
+		{'z', 'Z'},
+	};
 	static inline constexpr float FULL_OPACITY = 1.0f;
 	static inline constexpr float PART_OPACITY = 0.25f;
 
@@ -92,9 +119,8 @@ private:
 	bool _isHoverable = true;
 	bool _isActive = false;
 	bool _isConfirmed = false;
-	bool _noNumbers = false;
-	bool _noCaps = false;
-	bool _noSpecials = false;
-	bool _noLetters = false;
-	bool _minusAllowed = false;
+	bool _isLettersAllowed = false;
+	bool _isNumbersAllowed = false;
+	bool _isSpecialsAllowed = false;
+	bool _isCapsAllowed = false;
 };

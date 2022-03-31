@@ -20,17 +20,17 @@ void LensFlareRenderer::bind()
 	if(_renderStorage->getDepthTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getDepthTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getDepthTextureBuffer()->getTboId());
 	}
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getTboId());
 	}
 	if(_renderStorage->getLensFlareTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getLensFlareTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getLensFlareTextureBuffer()->getTboId());
 	}
 }
 

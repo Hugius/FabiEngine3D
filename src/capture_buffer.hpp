@@ -10,8 +10,8 @@ using std::vector;
 class CaptureBuffer final
 {
 public:
-	CaptureBuffer(const ivec2& position, const ivec2& size, unsigned int count, bool isTextureClamped);
-	CaptureBuffer(const ivec2& position, const ivec2& size);
+	CaptureBuffer(const ivec2 & position, const ivec2 & size, unsigned int count, bool isTextureClamped);
+	CaptureBuffer(const ivec2 & position, const ivec2 & size);
 	~CaptureBuffer();
 
 	void bind();
@@ -19,11 +19,11 @@ public:
 
 	const shared_ptr<TextureBuffer> getTexture(unsigned int index) const;
 
-	const ivec2& getPosition() const;
-	const ivec2& getSize() const;
+	const ivec2 & getPosition() const;
+	const ivec2 & getSize() const;
 
-	const unsigned int getFbo() const;
-	const unsigned int getRbo() const;
+	const unsigned int getFboId() const;
+	const unsigned int getRboId() const;
 
 private:
 	vector<shared_ptr<TextureBuffer>> _textures = {};
@@ -31,6 +31,6 @@ private:
 	ivec2 _position = ivec2(0);
 	ivec2 _size = ivec2(0);
 
-	unsigned int _fbo = 0;
-	unsigned int _rbo = 0;
+	unsigned int _fboId = 0;
+	unsigned int _rboId = 0;
 };

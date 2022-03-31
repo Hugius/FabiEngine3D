@@ -36,7 +36,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> entity)
 	if(entity->getCubeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeTextureBuffer()->getTboId());
 	}
 
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());

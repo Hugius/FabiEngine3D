@@ -2,11 +2,12 @@
 
 GuiTextField::GuiTextField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & color, bool isCentered)
 	:
-	_fe3d(fe3d),
 	_id(id),
 	_parentId(parentId),
 	_entityId("@" + parentId + "_" + id)
 {
+	_fe3d = fe3d;
+
 	_fe3d->text2d_create(_entityId, FONT_MAP_PATH, isCentered);
 	_fe3d->text2d_setPosition(_entityId, position);
 	_fe3d->text2d_setSize(_entityId, size);
@@ -45,9 +46,9 @@ void GuiTextField::setTextContent(const string & value)
 
 	if(value != currentContent)
 	{
-		const auto textSize = getSize();
-
 		_fe3d->text2d_setContent(_entityId, value);
+
+		const auto textSize = getSize();
 
 		if(currentContent.empty())
 		{

@@ -8,11 +8,9 @@
 using std::launch;
 
 NetworkingServer::NetworkingServer()
-	:
-	_tcpSocket(INVALID_SOCKET),
-	_udpSocket(INVALID_SOCKET)
 {
-
+	_tcpSocket = INVALID_SOCKET;
+	_udpSocket = INVALID_SOCKET;
 }
 
 NetworkingServer::~NetworkingServer()

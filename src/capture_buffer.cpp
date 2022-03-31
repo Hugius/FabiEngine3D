@@ -7,16 +7,16 @@ using std::make_shared;
 
 CaptureBuffer::~CaptureBuffer()
 {
-	glDeleteFramebuffers(1, &_fbo);
-	glDeleteBuffers(1, &_rbo);
+	glDeleteFramebuffers(1, &_fboId);
+	glDeleteBuffers(1, &_rboId);
 }
 
-CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned int count, bool isTextureClamped)
+CaptureBuffer::CaptureBuffer(const ivec2 & position, const ivec2 & size, unsigned int count, bool isTextureClamped)
 {
 	_position = position;
 	_size = size;
 
-	glGenFramebuffers(1, &_fbo);
+	glGenFramebuffers(1, &_fboId);
 
 	bind();
 
@@ -37,11 +37,11 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 		_textures.push_back(make_shared<TextureBuffer>(textureId));
 	}
 
-	glGenRenderbuffers(1, &_rbo);
-	glBindRenderbuffer(GL_RENDERBUFFER, _rbo);
+	glGenRenderbuffers(1, &_rboId);
+	glBindRenderbuffer(GL_RENDERBUFFER, _rboId);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, _size.x, _size.y);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _rbo);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _rboId);
 
 	vector<unsigned int> attachments;
 	for(unsigned int index = 0; index < count; index++)
@@ -58,12 +58,12 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size, unsigned 
 	}
 }
 
-CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size)
+CaptureBuffer::CaptureBuffer(const ivec2 & position, const ivec2 & size)
 {
 	_position = position;
 	_size = size;
 
-	glGenFramebuffers(1, &_fbo);
+	glGenFramebuffers(1, &_fboId);
 
 	bind();
 
@@ -71,7 +71,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size)
 	glGenTextures(1, &textureId);
 	_textures.push_back(make_shared<TextureBuffer>(textureId));
 
-	glBindTexture(GL_TEXTURE_2D, _textures[0]->getId());
+	glBindTexture(GL_TEXTURE_2D, _textures[0]->getTboId());
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _size.x, _size.y, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 
@@ -85,7 +85,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size)
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _textures[0]->getId(), 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _textures[0]->getTboId(), 0);
 
 	unbind();
 
@@ -98,7 +98,7 @@ CaptureBuffer::CaptureBuffer(const ivec2& position, const ivec2& size)
 void CaptureBuffer::bind()
 {
 	glViewport(_position.x, _position.y, _size.x, _size.y);
-	glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, _fboId);
 }
 
 void CaptureBuffer::unbind()
@@ -107,24 +107,24 @@ void CaptureBuffer::unbind()
 	glViewport(0, 0, Configuration::getInst().getWindowSize().x, Configuration::getInst().getWindowSize().y);
 }
 
-const ivec2& CaptureBuffer::getPosition() const
+const ivec2 & CaptureBuffer::getPosition() const
 {
 	return _position;
 }
 
-const ivec2& CaptureBuffer::getSize() const
+const ivec2 & CaptureBuffer::getSize() const
 {
 	return _size;
 }
 
-const unsigned int CaptureBuffer::getFbo() const
+const unsigned int CaptureBuffer::getFboId() const
 {
-	return _fbo;
+	return _fboId;
 }
 
-const unsigned int CaptureBuffer::getRbo() const
+const unsigned int CaptureBuffer::getRboId() const
 {
-	return _rbo;
+	return _rboId;
 }
 
 const shared_ptr<TextureBuffer> CaptureBuffer::getTexture(unsigned int index) const

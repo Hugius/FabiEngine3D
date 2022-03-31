@@ -57,7 +57,7 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 void BlurRenderer::_render(const shared_ptr<Quad2dEntity> entity, shared_ptr<TextureBuffer> texture)
 {
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture->getId());
+	glBindTexture(GL_TEXTURE_2D, texture->getTboId());
 
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 

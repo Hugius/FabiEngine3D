@@ -1,19 +1,18 @@
 #include "script_file.hpp"
-#include "logger.hpp"
 
-ScriptFile::ScriptFile(const string& id)
+ScriptFile::ScriptFile(const string & id)
 	:
 	_id(id)
 {
 
 }
 
-void ScriptFile::createLine(unsigned int index, const string& textContent)
+void ScriptFile::createLine(unsigned int index, const string & textContent)
 {
 	_lines.insert(_lines.begin() + index, textContent);
 }
 
-void ScriptFile::editLine(unsigned int index, const string& textContent)
+void ScriptFile::editLine(unsigned int index, const string & textContent)
 {
 	if(index >= _lines.size())
 	{
@@ -47,17 +46,17 @@ void ScriptFile::setCursorCharacterIndex(unsigned int index)
 	_cursorCharacterIndex = index;
 }
 
-void ScriptFile::changeId(const string& newId)
+void ScriptFile::changeId(const string & newId)
 {
 	_id = newId;
 }
 
-const string& ScriptFile::getId() const
+const string & ScriptFile::getId() const
 {
 	return _id;
 }
 
-const string& ScriptFile::getLine(unsigned int index) const
+const string & ScriptFile::getLine(unsigned int index) const
 {
 	if(index >= _lines.size())
 	{
@@ -84,7 +83,7 @@ const unsigned int ScriptFile::getCursorCharacterIndex() const
 	return _cursorCharacterIndex;
 }
 
-const vector<string>& ScriptFile::getLines() const
+const vector<string> & ScriptFile::getLines() const
 {
 	return _lines;
 }

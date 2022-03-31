@@ -2,11 +2,12 @@
 
 GuiQuadField::GuiQuadField(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & color, bool isCentered)
 	:
-	_fe3d(fe3d),
 	_id(id),
 	_parentId(parentId),
 	_entityId("@" + parentId + "_" + id)
 {
+	_fe3d = fe3d;
+
 	_fe3d->quad2d_create(_entityId, isCentered);
 	_fe3d->quad2d_setPosition(_entityId, position);
 	_fe3d->quad2d_setSize(_entityId, size);

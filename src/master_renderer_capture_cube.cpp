@@ -10,7 +10,7 @@ void MasterRenderer::captureCubeReflections()
 	}
 
 	vector<shared_ptr<ModelEntity>> savedModelEntities;
-	for(const auto& [key, entity] : _modelEntityManager->getEntities())
+	for(const auto & [key, entity] : _modelEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -20,7 +20,7 @@ void MasterRenderer::captureCubeReflections()
 	}
 
 	vector<shared_ptr<Quad3dEntity>> savedQuad3dEntities;
-	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
+	for(const auto & [key, entity] : _quad3dEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -30,7 +30,7 @@ void MasterRenderer::captureCubeReflections()
 	}
 
 	vector<shared_ptr<Text3dEntity>> savedText3dEntities;
-	for(const auto& [key, entity] : _text3dEntityManager->getEntities())
+	for(const auto & [key, entity] : _text3dEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -56,7 +56,7 @@ void MasterRenderer::captureCubeReflections()
 	_renderStorage->setSkyExposureEnabled(false);
 	_renderStorage->setShadowInterval(0);
 
-	for(const auto& [key, entity] : _reflectionEntityManager->getEntities())
+	for(const auto & [key, entity] : _reflectionEntityManager->getEntities())
 	{
 		if(entity->mustCapture())
 		{
@@ -143,7 +143,7 @@ void MasterRenderer::captureCubeReflections()
 
 				const auto dataSize = (_renderStorage->getCubeReflectionQuality() * _renderStorage->getCubeReflectionQuality() * 3);
 				auto data = new unsigned char[dataSize];
-				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer->getTexture(0)->getId());
+				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer->getTexture(0)->getTboId());
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
@@ -165,17 +165,17 @@ void MasterRenderer::captureCubeReflections()
 		}
 	}
 
-	for(const auto& entity : savedModelEntities)
+	for(const auto & entity : savedModelEntities)
 	{
 		entity->setVisible(true);
 	}
 
-	for(const auto& entity : savedQuad3dEntities)
+	for(const auto & entity : savedQuad3dEntities)
 	{
 		entity->setVisible(true);
 	}
 
-	for(const auto& entity : savedText3dEntities)
+	for(const auto & entity : savedText3dEntities)
 	{
 		entity->setVisible(true);
 	}

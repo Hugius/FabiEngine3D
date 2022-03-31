@@ -13,12 +13,12 @@ void MotionBlurRenderer::bind()
 	if(_renderStorage->getFinalSceneTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getFinalSceneTextureBuffer()->getTboId());
 	}
 	if(_renderStorage->getMotionBlurTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getMotionBlurTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getMotionBlurTextureBuffer()->getTboId());
 	}
 }
 

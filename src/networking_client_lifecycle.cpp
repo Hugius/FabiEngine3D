@@ -8,11 +8,9 @@
 using std::launch;
 
 NetworkingClient::NetworkingClient()
-	:
-	_tcpSocket(INVALID_SOCKET),
-	_udpSocket(INVALID_SOCKET)
 {
-
+	_tcpSocket = INVALID_SOCKET;
+	_udpSocket = INVALID_SOCKET;
 }
 
 NetworkingClient::~NetworkingClient()
@@ -23,7 +21,7 @@ NetworkingClient::~NetworkingClient()
 	}
 }
 
-void NetworkingClient::start(const string& username)
+void NetworkingClient::start(const string & username)
 {
 	if(_isRunning)
 	{
@@ -51,7 +49,7 @@ void NetworkingClient::start(const string& username)
 	_isRunning = true;
 }
 
-void NetworkingClient::connectToServer(const string& ip)
+void NetworkingClient::connectToServer(const string & ip)
 {
 	if(!_isRunning)
 	{

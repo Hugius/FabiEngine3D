@@ -39,7 +39,7 @@ void GuiScrollingList::createOption(const string & id, const string & textConten
 		abort();
 	}
 
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, id, _parentId, fvec2(0.0f), fvec2(0.0f), "", _defaultQuadColor, _hoveredQuadColor, textContent, _defaultTextColor, _hoveredTextColor, _quadField->isCentered()));
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, id, (_parentId + "_" + _id), fvec2(0.0f), fvec2(0.0f), "", _defaultQuadColor, _hoveredQuadColor, textContent, _defaultTextColor, _hoveredTextColor, _quadField->isCentered()));
 
 	_buttons.back()->setVisible(isVisible());
 }

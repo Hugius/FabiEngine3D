@@ -1,18 +1,17 @@
 #include "script_variable.hpp"
 #include "logger.hpp"
 
-ScriptVariable::ScriptVariable(const string& id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>>& values)
+ScriptVariable::ScriptVariable(const string & id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>> & values)
 	:
 	_scope(scope),
 	_type(type),
 	_id(id),
-	_isConstant(isConstant),
-	_values(values)
+	_isConstant(isConstant)
 {
-
+	_values = values;
 }
 
-const string& ScriptVariable::getId() const
+const string & ScriptVariable::getId() const
 {
 	return _id;
 }
@@ -32,7 +31,7 @@ const bool ScriptVariable::isConstant() const
 	return _isConstant;
 }
 
-void ScriptVariable::setValues(const vector<shared_ptr<ScriptValue>>& values)
+void ScriptVariable::setValues(const vector<shared_ptr<ScriptValue>> & values)
 {
 	_values = values;
 }

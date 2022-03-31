@@ -64,7 +64,7 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 	if(entity->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseTextureBuffer()->getTboId());
 	}
 
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());

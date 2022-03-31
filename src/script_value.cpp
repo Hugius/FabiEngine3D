@@ -8,7 +8,7 @@ ScriptValue::ScriptValue(ScriptValueType type)
 
 }
 
-ScriptValue::ScriptValue(ScriptValueType type, const string& value)
+ScriptValue::ScriptValue(ScriptValueType type, const string & value)
 	:
 	ScriptValue(type)
 {
@@ -56,7 +56,7 @@ ScriptValue::ScriptValue(ScriptValueType type, bool value)
 	setBoolean(value);
 }
 
-void ScriptValue::setString(const string& value)
+void ScriptValue::setString(const string & value)
 {
 	if(_type != ScriptValueType::STRING)
 	{
@@ -96,7 +96,7 @@ void ScriptValue::setBoolean(bool value)
 	_boolean = value;
 }
 
-const string& ScriptValue::getString() const
+const string & ScriptValue::getString() const
 {
 	if(_type != ScriptValueType::STRING)
 	{
@@ -136,7 +136,7 @@ const bool ScriptValue::getBoolean() const
 	return _boolean;
 }
 
-const ScriptValueType& ScriptValue::getType() const
+const ScriptValueType & ScriptValue::getType() const
 {
 	return _type;
 }

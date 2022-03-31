@@ -37,17 +37,17 @@ void WaterEntityColorRenderer::bind()
 	if(_renderStorage->getWaterReflectionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterReflectionTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterReflectionTextureBuffer()->getTboId());
 	}
 	if(_renderStorage->getWaterRefractionTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterRefractionTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterRefractionTextureBuffer()->getTboId());
 	}
 	if(_renderStorage->getWaterEdgeTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterEdgeTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getWaterEdgeTextureBuffer()->getTboId());
 	}
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -90,10 +90,10 @@ void WaterEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
+void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>> & entities)
 {
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
-	for(const auto& [key, entity] : entities)
+	for(const auto & [key, entity] : entities)
 	{
 		if(entity->isVisible())
 		{
@@ -113,10 +113,10 @@ void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<str
 	//_shader->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities)
+void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities)
 {
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
-	for(const auto& [key, entity] : entities)
+	for(const auto & [key, entity] : entities)
 	{
 		if(entity->isVisible())
 		{
@@ -177,17 +177,17 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 	if(entity->getDudvTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, entity->getDudvTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getDudvTextureBuffer()->getTboId());
 	}
 	if(entity->getNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
-		glBindTexture(GL_TEXTURE_2D, entity->getNormalTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getNormalTextureBuffer()->getTboId());
 	}
 	if(entity->getDisplacementTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
-		glBindTexture(GL_TEXTURE_2D, entity->getDisplacementTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getDisplacementTextureBuffer()->getTboId());
 	}
 
 	if(entity->getDisplacementTextureBuffer() != nullptr)

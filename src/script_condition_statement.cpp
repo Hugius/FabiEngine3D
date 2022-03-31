@@ -2,10 +2,9 @@
 
 ScriptConditionStatement::ScriptConditionStatement(unsigned int scopeDepth, bool isTrue)
 	:
-	_scopeDepth(scopeDepth),
-	_conditionResult(isTrue)
+	_scopeDepth(scopeDepth)
 {
-
+	_conditionResult = isTrue;
 }
 
 void ScriptConditionStatement::setTrue()

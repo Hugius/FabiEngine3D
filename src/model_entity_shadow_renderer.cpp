@@ -48,7 +48,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
 	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
 
-	for(const auto& partId : entity->getPartIds())
+	for(const auto & partId : entity->getPartIds())
 	{
 		_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation(partId));
 		_shaderBuffer->uploadUniform("u_textureRepeat", static_cast<int>(entity->getTextureRepeat(partId)));
@@ -62,7 +62,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		if(entity->getDiffuseTextureBuffer(partId) != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseTextureBuffer(partId)->getId());
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseTextureBuffer(partId)->getTboId());
 		}
 
 		glBindVertexArray(entity->getVertexBuffer(partId)->getVaoId());

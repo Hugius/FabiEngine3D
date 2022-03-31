@@ -4,10 +4,10 @@
 
 #include <SDL_syswm.h>
 
-RenderWindow::RenderWindow(SDL_Window* windowPointer)
-	:
-	_windowPointer(windowPointer)
+RenderWindow::RenderWindow(SDL_Window * windowPointer)
 {
+	_windowPointer = windowPointer;
+
 	hideBorder();
 	setVsyncEnabled(false);
 }
@@ -17,12 +17,12 @@ RenderWindow::~RenderWindow()
 	SDL_DestroyWindow(_windowPointer);
 }
 
-void RenderWindow::setTitle(const string& title)
+void RenderWindow::setTitle(const string & title)
 {
 	SDL_SetWindowTitle(_windowPointer, title.c_str());
 }
 
-void RenderWindow::setSize(const ivec2& size)
+void RenderWindow::setSize(const ivec2 & size)
 {
 	SDL_SetWindowSize(_windowPointer, size.x, size.y);
 	center();
@@ -38,7 +38,7 @@ void RenderWindow::setOpacity(float value)
 	SDL_SetWindowOpacity(_windowPointer, value);
 }
 
-void RenderWindow::enableColorKeying(const fvec3& color)
+void RenderWindow::enableColorKeying(const fvec3 & color)
 {
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
@@ -49,7 +49,7 @@ void RenderWindow::enableColorKeying(const fvec3& color)
 	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_COLORKEY);
 }
 
-void RenderWindow::disableColorKeying(const fvec3& color)
+void RenderWindow::disableColorKeying(const fvec3 & color)
 {
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
@@ -110,7 +110,7 @@ void RenderWindow::hideCursor()
 	SDL_ShowCursor(SDL_DISABLE);
 }
 
-void RenderWindow::setCursorPosition(const ivec2& pos)
+void RenderWindow::setCursorPosition(const ivec2 & pos)
 {
 	int x = pos.x;
 	int y = (Configuration::getInst().getWindowSize().y - pos.y);

@@ -3,17 +3,16 @@
 
 GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)
 	:
-	_fe3d(fe3d),
 	_id(id),
-	_parentId(parentId),
-	_quadField(make_shared<GuiQuadField>(fe3d, "GuiButton", (parentId + "_" + id), position, size, diffuseMapPath, defaultQuadColor, isCentered)),
-	_textField(make_shared<GuiTextField>(fe3d, "GuiButton", (parentId + "_" + id), position, fvec2((size.x * TEXT_WIDTH_MULTIPLIER), (size.y * TEXT_HEIGHT_MULTIPLIER)), textContent, defaultTextColor, isCentered)),
-	_defaultQuadColor(defaultQuadColor),
-	_hoveredQuadColor(hoveredQuadColor),
-	_defaultTextColor(defaultTextColor),
-	_hoveredTextColor(hoveredTextColor)
+	_parentId(parentId)
 {
-
+	_fe3d = fe3d;
+	_quadField = make_shared<GuiQuadField>(fe3d, "GuiButton", (parentId + "_" + id), position, size, diffuseMapPath, defaultQuadColor, isCentered);
+	_textField = make_shared<GuiTextField>(fe3d, "GuiButton", (parentId + "_" + id), position, fvec2((size.x * TEXT_WIDTH_MULTIPLIER), (size.y * TEXT_HEIGHT_MULTIPLIER)), textContent, defaultTextColor, isCentered);
+	_defaultQuadColor = defaultQuadColor;
+	_hoveredQuadColor = hoveredQuadColor;
+	_defaultTextColor = defaultTextColor;
+	_hoveredTextColor = hoveredTextColor;
 }
 
 void GuiButton::update(bool isFocused)

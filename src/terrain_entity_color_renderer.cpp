@@ -46,7 +46,7 @@ void TerrainEntityColorRenderer::bind()
 	if(_renderStorage->getShadowTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderStorage->getShadowTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, _renderStorage->getShadowTextureBuffer()->getTboId());
 	}
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -77,10 +77,10 @@ void TerrainEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
+void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>> & entities)
 {
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
-	for(const auto& [key, entity] : entities)
+	for(const auto & [key, entity] : entities)
 	{
 		if(entity->isVisible())
 		{
@@ -100,10 +100,10 @@ void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<s
 	_shaderBuffer->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities)
+void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities)
 {
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
-	for(const auto& [key, entity] : entities)
+	for(const auto & [key, entity] : entities)
 	{
 		if(entity->isVisible())
 		{
@@ -167,47 +167,47 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 	if(entity->getDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseTextureBuffer()->getTboId());
 	}
 	if(entity->getNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, entity->getNormalTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getNormalTextureBuffer()->getTboId());
 	}
 	if(entity->getBlendTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, entity->getBlendTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getBlendTextureBuffer()->getTboId());
 	}
 	if(entity->getRedDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE4);
-		glBindTexture(GL_TEXTURE_2D, entity->getRedDiffuseTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getRedDiffuseTextureBuffer()->getTboId());
 	}
 	if(entity->getGreenDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE5);
-		glBindTexture(GL_TEXTURE_2D, entity->getGreenDiffuseTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getGreenDiffuseTextureBuffer()->getTboId());
 	}
 	if(entity->getBlueDiffuseTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE6);
-		glBindTexture(GL_TEXTURE_2D, entity->getBlueDiffuseTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getBlueDiffuseTextureBuffer()->getTboId());
 	}
 	if(entity->getRedNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE7);
-		glBindTexture(GL_TEXTURE_2D, entity->getRedNormalTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getRedNormalTextureBuffer()->getTboId());
 	}
 	if(entity->getGreenNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE8);
-		glBindTexture(GL_TEXTURE_2D, entity->getGreenNormalTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getGreenNormalTextureBuffer()->getTboId());
 	}
 	if(entity->getBlueNormalTextureBuffer() != nullptr)
 	{
 		glActiveTexture(GL_TEXTURE9);
-		glBindTexture(GL_TEXTURE_2D, entity->getBlueNormalTextureBuffer()->getId());
+		glBindTexture(GL_TEXTURE_2D, entity->getBlueNormalTextureBuffer()->getTboId());
 	}
 
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());

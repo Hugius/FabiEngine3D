@@ -2,13 +2,12 @@
 
 GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & parentPosition, const fvec2 & parentSize)
 	:
-	_fe3d(fe3d),
 	_id(id),
-	_parentId(parentId),
-	_parentPosition(parentPosition),
-	_parentSize(parentSize)
+	_parentId(parentId)
 {
-
+	_fe3d = fe3d;
+	_parentPosition = parentPosition;
+	_parentSize = parentSize;
 }
 
 void GuiScreen::update(bool isFocused)

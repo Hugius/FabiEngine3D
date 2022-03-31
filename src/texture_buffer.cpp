@@ -2,17 +2,17 @@
 
 using std::min;
 
-TextureBuffer::TextureBuffer(unsigned int id)
+TextureBuffer::TextureBuffer(unsigned int tboId)
 	:
-	_id(id)
+	_tboId(tboId)
 {
 
 }
 
 TextureBuffer::TextureBuffer(shared_ptr<Image> image)
 {
-	glGenTextures(1, &_id);
-	glBindTexture(GL_TEXTURE_2D, _id);
+	glGenTextures(1, &_tboId);
+	glBindTexture(GL_TEXTURE_2D, _tboId);
 
 	if(image->getPixelFormat() == PixelFormat::RGB)
 	{
@@ -31,14 +31,14 @@ TextureBuffer::TextureBuffer(shared_ptr<Image> image)
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
-TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
+TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6> & images)
 {
-	glGenTextures(1, &_id);
+	glGenTextures(1, &_tboId);
 
-	glBindTexture(GL_TEXTURE_CUBE_MAP, _id);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, _tboId);
 
 	unsigned int imageSize = 1;
-	for(const auto& image : images)
+	for(const auto & image : images)
 	{
 		if(image != nullptr)
 		{
@@ -53,7 +53,7 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 
 		if(images[index] == nullptr)
 		{
-			unsigned char* pixels = new unsigned char[imageSize * imageSize * 3];
+			unsigned char * pixels = new unsigned char[imageSize * imageSize * 3];
 
 			for(unsigned int index = 0; index < (imageSize * imageSize * 3); index++)
 			{
@@ -81,12 +81,12 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 
 TextureBuffer::~TextureBuffer()
 {
-	glDeleteTextures(1, &_id);
+	glDeleteTextures(1, &_tboId);
 }
 
-const unsigned int TextureBuffer::getId() const
+const unsigned int TextureBuffer::getTboId() const
 {
-	return _id;
+	return _tboId;
 }
 
 const bool TextureBuffer::isMipMapped() const
@@ -101,7 +101,7 @@ const bool TextureBuffer::isAnisotropicallyFiltered() const
 
 void TextureBuffer::loadMipMapping()
 {
-	glBindTexture(GL_TEXTURE_2D, _id);
+	glBindTexture(GL_TEXTURE_2D, _tboId);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
@@ -114,7 +114,7 @@ void TextureBuffer::loadMipMapping()
 
 void TextureBuffer::loadAnisotropicFiltering(unsigned int quality)
 {
-	glBindTexture(GL_TEXTURE_2D, _id);
+	glBindTexture(GL_TEXTURE_2D, _tboId);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, static_cast<int>(quality));
 

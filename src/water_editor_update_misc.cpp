@@ -95,7 +95,7 @@ void WaterEditor::_updateWaterCreating()
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			_gui->getOverlay()->getTextField("waterId")->setTextContent("Water: " + newWaterId.substr(1));
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("waterId")->getEntityId(), true);
+			_gui->getOverlay()->getTextField("waterId")->setVisible(true);
 			_isCreatingWater = false;
 		}
 	}
@@ -120,7 +120,7 @@ void WaterEditor::_updateWaterChoosing()
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 
 					_gui->getOverlay()->getTextField("waterId")->setTextContent("Water: " + _currentWaterId.substr(1));
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("waterId")->getEntityId(), true);
+					_gui->getOverlay()->getTextField("waterId")->setVisible(true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("waterList");

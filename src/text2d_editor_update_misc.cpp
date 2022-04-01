@@ -101,7 +101,7 @@ void Text2dEditor::_updateTextCreating()
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 				_gui->getOverlay()->getTextField("textId")->setTextContent("Text: " + newTextId.substr(1));
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
+				_gui->getOverlay()->getTextField("textId")->setVisible(true);
 				_isCreatingText = false;
 			}
 		}
@@ -132,7 +132,7 @@ void Text2dEditor::_updateTextChoosing()
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 
 					_gui->getOverlay()->getTextField("textId")->setTextContent("Text: " + _currentTextId.substr(1));
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
+					_gui->getOverlay()->getTextField("textId")->setVisible(true);
 				}
 
 				_fe3d->text2d_setVisible(_currentTextId, true);

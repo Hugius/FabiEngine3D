@@ -148,7 +148,7 @@ void Text3dEditor::_updateText3dCreating()
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
 				_gui->getOverlay()->getTextField("textId")->setTextContent("Text3D: " + newTextId.substr(1));
-				_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
+				_gui->getOverlay()->getTextField("textId")->setVisible(true);
 				_isCreatingText3d = false;
 			}
 		}
@@ -179,7 +179,7 @@ void Text3dEditor::_updateText3dChoosing()
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
 
 					_gui->getOverlay()->getTextField("textId")->setTextContent("Text3D: " + _currentTextId.substr(1));
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("textId")->getEntityId(), true);
+					_gui->getOverlay()->getTextField("textId")->setVisible(true);
 				}
 
 				_fe3d->text3d_setVisible(_currentTextId, true);

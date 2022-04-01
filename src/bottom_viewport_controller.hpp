@@ -17,11 +17,11 @@ public:
 private:
 	void _updateStatistics();
 	void _updateConsole();
-	void _addConsoleMessage(const string& newMessage);
-	void _deleteConsoleMessage(const string& id);
+	void _addConsoleMessage(const string & newMessage);
+	void _deleteConsoleMessage(const string & id);
 
 	static inline const fvec3 FRAME_COLOR = fvec3(0.0025f);
-	static inline const fvec2 CHAR_SIZE = fvec2(0.01f, 0.03f);
+	static inline const fvec2 CHARACTER_SIZE = fvec2(0.02f, 0.15f);
 	static inline constexpr float Y_OFFSET = 0.2f;
 	static inline constexpr unsigned int MAX_CONSOLE_MESSAGES = 1000;
 	static inline constexpr unsigned int TIME_PART_LENGTH = 10;

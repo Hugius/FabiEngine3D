@@ -121,11 +121,6 @@ const string & GuiTextField::getId() const
 	return _id;
 }
 
-const string & GuiTextField::getEntityId() const
-{
-	return _entityId;
-}
-
 const string & GuiTextField::getTextContent() const
 {
 	return _fe3d->text2d_getContent(_entityId);

@@ -162,10 +162,10 @@ void WorldEditor::_updateMiscellaneous()
 						   !_activeReflectionId.empty() ||
 						   !_activeSoundId.empty());
 
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("selectedId")->getEntityId(), isSelected);
-	_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("activeId")->getEntityId(), isActive);
-	_fe3d->text2d_setPosition(_gui->getOverlay()->getTextField("selectedId")->getEntityId(), fvec2(0.0f, (isActive ? 0.75f : 0.85f)));
-	_fe3d->text2d_setPosition(_gui->getOverlay()->getTextField("activeId")->getEntityId(), fvec2(0.0f, 0.85f));
+	_gui->getOverlay()->getTextField("selectedId")->setVisible(isSelected);
+	_gui->getOverlay()->getTextField("activeId")->setVisible(isActive);
+	_gui->getOverlay()->getTextField("selectedId")->setPosition(fvec2(0.0f, (isActive ? 0.75f : 0.85f)));
+	_gui->getOverlay()->getTextField("activeId")->setPosition(fvec2(0.0f, 0.85f));
 }
 
 void WorldEditor::_updateWorldCreating()

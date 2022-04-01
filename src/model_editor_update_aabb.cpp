@@ -58,7 +58,7 @@ void ModelEditor::_updateChoiceAabbMenu()
 		{
 			_fe3d->aabb_setVisible((_currentModelId + "@" + _currentAabbId), false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), false);
+			_gui->getOverlay()->getTextField("aabbId")->setVisible(false);
 			_currentAabbId = "";
 			return;
 		}
@@ -155,7 +155,7 @@ void ModelEditor::_updateAabbCreating()
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 			_gui->getOverlay()->getTextField("aabbId")->setTextContent("AABB: " + _currentAabbId);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), true);
+			_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
 
 			_isCreatingAabb = false;
 		}
@@ -186,7 +186,7 @@ void ModelEditor::_updateAabbChoosing()
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 
 					_gui->getOverlay()->getTextField("aabbId")->setTextContent("AABB: " + _currentAabbId);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("aabbId")->getEntityId(), true);
+					_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("aabbList");

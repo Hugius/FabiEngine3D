@@ -20,7 +20,7 @@ void Animation2dEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedAnimationIds;
-			for(auto& id : ids)
+			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
@@ -31,7 +31,7 @@ void Animation2dEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedAnimationIds;
-			for(auto& id : ids)
+			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
@@ -79,7 +79,7 @@ void Animation2dEditor::_updateChoiceMenu()
 
 			_currentAnimationId = "";
 			_isPreviewTextureChosen = false;
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), false);
+			_gui->getOverlay()->getTextField("animationId")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 			return;
 		}

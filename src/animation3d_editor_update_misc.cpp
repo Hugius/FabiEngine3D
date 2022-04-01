@@ -219,8 +219,8 @@ void Animation3dEditor::_updateAnimationCreating()
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 			_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + newAnimationId);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), true);
+			_gui->getOverlay()->getTextField("animationId")->setVisible(true);
+			_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
 			_isCreatingAnimation = false;
 		}
 	}
@@ -243,8 +243,8 @@ void Animation3dEditor::_updateAnimationChoosing()
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
 					_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + _currentAnimationId.substr(1));
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), true);
-					_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), true);
+					_gui->getOverlay()->getTextField("animationId")->setVisible(true);
+					_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
 				}
 
 				_gui->getOverlay()->deleteChoiceForm("animationList");

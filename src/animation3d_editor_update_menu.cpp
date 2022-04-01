@@ -98,8 +98,8 @@ void Animation3dEditor::_updateChoiceMenu()
 			_currentAnimationId = "";
 			_initialModelSize = fvec3(0.0f);
 			_currentFrameIndex = 0;
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationId")->getEntityId(), false);
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityId(), false);
+			_gui->getOverlay()->getTextField("animationId")->setVisible(false);
+			_gui->getOverlay()->getTextField("animationFrame")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 			return;
 		}

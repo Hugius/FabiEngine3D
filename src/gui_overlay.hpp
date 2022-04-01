@@ -28,15 +28,15 @@ public:
 	void deleteButtons();
 	void deleteQuadFields();
 	void deleteTextFields();
+	void setFocused(bool value);
+	void createChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles);
+	void createAnswerForm(const string & id, const string & title, const fvec2 & position);
 	void createValueForm(const string & id, const string & title, unsigned int value, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition);
 	void createValueForm(const string & id, const string & title, int value, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition);
 	void createValueForm(const string & id, const string & title, float value, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition);
 	void createValueForm(const string & id, const string & title, double value, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition);
 	void createValueForm(const string & id, const string & title, const string & value, const fvec2 & position, const fvec2 & size, const fvec2 & buttonsPosition);
-	void createChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles);
 	void deleteChoiceForm(const string & id);
-	void createAnswerForm(const string & id, const string & title, const fvec2 & position);
-	void setFocused(bool value);
 
 	const unordered_map<string, shared_ptr<GuiScrollingList>> & getScrollingLists() const;
 	const unordered_map<string, shared_ptr<GuiInputBox>> & getInputBoxes() const;

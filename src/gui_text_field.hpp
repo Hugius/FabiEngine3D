@@ -19,7 +19,6 @@ public:
 
 	const string & getId() const;
 	const string & getParentId() const;
-	const string & getEntityId() const;
 	const string & getTextContent() const;
 
 	const fvec3 & getColor() const;

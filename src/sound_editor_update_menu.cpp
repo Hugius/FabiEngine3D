@@ -19,7 +19,7 @@ void SoundEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedSoundIds;
-			for(auto& id : ids)
+			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
@@ -29,7 +29,7 @@ void SoundEditor::_updateMainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedSoundIds;
-			for(auto& id : ids)
+			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
@@ -68,7 +68,7 @@ void SoundEditor::_updateChoiceMenu()
 			}
 
 			_currentSoundId = "";
-			_fe3d->text2d_setVisible(_gui->getOverlay()->getTextField("soundId")->getEntityId(), false);
+			_gui->getOverlay()->getTextField("soundId")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuMain");
 			return;
 		}

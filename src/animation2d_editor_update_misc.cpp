@@ -21,6 +21,12 @@ void Animation2dEditor::_updateAnimationCreating()
 
 		if(_gui->getOverlay()->checkValueForm("animationCreate", newAnimationId, {_currentAnimationId}))
 		{
+			if(newAnimationId.empty())
+			{
+				Logger::throwWarning("Animation ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newAnimationId.begin(), newAnimationId.end(), isspace))
 			{
 				Logger::throwWarning("Animation ID cannot contain any spaces");

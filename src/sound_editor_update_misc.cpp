@@ -35,6 +35,12 @@ void SoundEditor::_updateSoundCreating()
 
 		if(_gui->getOverlay()->checkValueForm("soundCreate", newSoundId, {_currentSoundId}))
 		{
+			if(newSoundId.empty())
+			{
+				Logger::throwWarning("Sound ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newSoundId.begin(), newSoundId.end(), isspace))
 			{
 				Logger::throwWarning("Sound ID cannot contain any spaces");

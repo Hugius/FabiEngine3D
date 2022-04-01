@@ -24,6 +24,12 @@ void Quad2dEditor::_updateQuadCreating()
 
 		if(_gui->getOverlay()->checkValueForm("quadCreate", newQuadId, {_currentQuadId}))
 		{
+			if(newQuadId.empty())
+			{
+				Logger::throwWarning("Quad ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newQuadId.begin(), newQuadId.end(), isspace))
 			{
 				Logger::throwWarning("Quad ID cannot contain any spaces");

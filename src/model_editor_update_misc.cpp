@@ -102,6 +102,12 @@ void ModelEditor::_updateModelCreating()
 
 		if(_gui->getOverlay()->checkValueForm("modelCreate", newModelId, {}))
 		{
+			if(newModelId.empty())
+			{
+				Logger::throwWarning("Model ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newModelId.begin(), newModelId.end(), isspace))
 			{
 				Logger::throwWarning("Model ID cannot contain any spaces");

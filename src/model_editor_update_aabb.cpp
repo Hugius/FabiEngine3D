@@ -116,6 +116,12 @@ void ModelEditor::_updateAabbCreating()
 
 		if(_gui->getOverlay()->checkValueForm("aabbCreate", newAabbId, {}))
 		{
+			if(newAabbId.empty())
+			{
+				Logger::throwWarning("AABB ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newAabbId.begin(), newAabbId.end(), isspace))
 			{
 				Logger::throwWarning("AABB ID cannot contain any spaces");

@@ -176,6 +176,12 @@ void WorldEditor::_updateWorldCreating()
 
 		if(_gui->getOverlay()->checkValueForm("worldCreate", newWorldId, {}))
 		{
+			if(newWorldId.empty())
+			{
+				Logger::throwWarning("World ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newWorldId.begin(), newWorldId.end(), isspace))
 			{
 				Logger::throwWarning("World ID cannot contain any spaces");

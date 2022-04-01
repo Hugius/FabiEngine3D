@@ -122,7 +122,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		}
 		if(_gui->getOverlay()->checkValueForm("levelOfDetailEntityId", levelOfDetailEntityId, {}))
 		{
-			if(levelOfDetailEntityId == "@")
+			if(levelOfDetailEntityId == "")
 			{
 				_fe3d->model_setLevelOfDetailEntityId(_currentModelId, "");
 			}

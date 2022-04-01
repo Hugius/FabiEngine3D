@@ -47,6 +47,12 @@ void SkyEditor::_updateSkyCreating()
 
 		if(_gui->getOverlay()->checkValueForm("skyCreate", newSkyId, {}))
 		{
+			if(newSkyId.empty())
+			{
+				Logger::throwWarning("Sky ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newSkyId.begin(), newSkyId.end(), isspace))
 			{
 				Logger::throwWarning("Sky ID cannot contain any spaces");

@@ -57,6 +57,12 @@ void TerrainEditor::_updateTerrainCreating()
 
 		if(_gui->getOverlay()->checkValueForm("terrainCreate", newTerrainId, {}))
 		{
+			if(newTerrainId.empty())
+			{
+				Logger::throwWarning("Terrain ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newTerrainId.begin(), newTerrainId.end(), isspace))
 			{
 				Logger::throwWarning("Terrain ID cannot contain any spaces");

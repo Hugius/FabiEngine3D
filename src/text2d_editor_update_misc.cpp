@@ -24,6 +24,12 @@ void Text2dEditor::_updateTextCreating()
 
 		if(_gui->getOverlay()->checkValueForm("textCreate", newTextId, {_currentTextId}))
 		{
+			if(newTextId.empty())
+			{
+				Logger::throwWarning("Text ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newTextId.begin(), newTextId.end(), isspace))
 			{
 				Logger::throwWarning("Text ID cannot contain any spaces");

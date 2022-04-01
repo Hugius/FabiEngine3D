@@ -74,6 +74,12 @@ void Text3dEditor::_updateText3dCreating()
 
 		if(_gui->getOverlay()->checkValueForm("text3dCreate", newTextId, {_currentTextId}))
 		{
+			if(newTextId.empty())
+			{
+				Logger::throwWarning("Text ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newTextId.begin(), newTextId.end(), isspace))
 			{
 				Logger::throwWarning("Text ID cannot contain any spaces");

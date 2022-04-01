@@ -54,6 +54,12 @@ void WaterEditor::_updateWaterCreating()
 
 		if(_gui->getOverlay()->checkValueForm("waterCreate", newWaterId, {}))
 		{
+			if(newWaterId.empty())
+			{
+				Logger::throwWarning("Water ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newWaterId.begin(), newWaterId.end(), isspace))
 			{
 				Logger::throwWarning("Water ID cannot contain any spaces");

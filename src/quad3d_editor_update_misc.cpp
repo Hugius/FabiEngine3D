@@ -73,6 +73,12 @@ void Quad3dEditor::_updateQuad3dCreating()
 
 		if(_gui->getOverlay()->checkValueForm("quad3dCreate", newQuadId, {_currentQuadId}))
 		{
+			if(newQuadId.empty())
+			{
+				Logger::throwWarning("Quad ID cannot be empty");
+				return;
+			}
+
 			if(any_of(newQuadId.begin(), newQuadId.end(), isspace))
 			{
 				Logger::throwWarning("Quad ID cannot contain any spaces");

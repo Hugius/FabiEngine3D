@@ -10,11 +10,11 @@ void Animation2dEditor::_updateMainMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("animationCreate", "Create Animation", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("animationCreate", "Create Animation", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingAnimation = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -25,7 +25,7 @@ void Animation2dEditor::_updateMainMenu()
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->createChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->enableChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), ids);
 			_isChoosingAnimation = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -36,12 +36,12 @@ void Animation2dEditor::_updateMainMenu()
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->createChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->enableChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), ids);
 			_isChoosingAnimation = true;
 			_isDeletingAnimation = true;
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("back"))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveAnimationsToFile();
@@ -85,19 +85,19 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
 		{
-			_gui->getOverlay()->createAnswerForm("preview", "Quad3D Entity?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("preview", "Quad3D Entity?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rowCount")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("rowCount", "Row Count", rowCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("rowCount", "Row Count", rowCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("columnCount")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("columnCount", "Column Count", columnCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("columnCount", "Column Count", columnCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("interval")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("interval", "Interval", interval, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("interval", "Interval", interval, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
@@ -108,7 +108,7 @@ void Animation2dEditor::_updateChoiceMenu()
 			_fe3d->quad3d_stopAnimation(PREVIEW_QUAD_ID, _currentAnimationId);
 		}
 
-		const auto isConfirmed = _gui->getOverlay()->isAnswerFormConfirmed("preview");
+		const auto isConfirmed = _gui->getOverlay()->isAnswerFormAccepted("preview");
 		const auto isDenied = _gui->getOverlay()->isAnswerFormDenied("preview");
 		if(isConfirmed || isDenied)
 		{

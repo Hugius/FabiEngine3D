@@ -187,7 +187,7 @@ void ModelEditor::_updateModelChoosing()
 {
 	if(_isChoosingModel)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("modelList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("modelList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -210,13 +210,13 @@ void ModelEditor::_updateModelChoosing()
 					_gui->getOverlay()->getTextField("modelId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->deleteChoiceForm("modelList");
+				_gui->getOverlay()->disableChoiceForm("modelList");
 				_isChoosingModel = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("modelList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("modelList");
+			_gui->getOverlay()->disableChoiceForm("modelList");
 			_isChoosingModel = false;
 			_isDeletingModel = false;
 		}
@@ -235,12 +235,12 @@ void ModelEditor::_updateModelDeleting()
 {
 	if(_isDeletingModel && !_currentModelId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
 		{
-			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
 		{
 			_fe3d->model_delete(_currentModelId);
 
@@ -262,7 +262,7 @@ void ModelEditor::_updatePartChoosing()
 {
 	if(_isChoosingPart)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("partList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("partList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -277,13 +277,13 @@ void ModelEditor::_updatePartChoosing()
 				_currentPartId = _hoveredPartId;
 				_hoveredPartId = "";
 
-				_gui->getOverlay()->deleteChoiceForm("partList");
+				_gui->getOverlay()->disableChoiceForm("partList");
 				_isChoosingPart = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("partList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("partList");
+			_gui->getOverlay()->disableChoiceForm("partList");
 			_isChoosingPart = false;
 		}
 		else

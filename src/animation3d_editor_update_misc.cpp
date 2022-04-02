@@ -230,7 +230,7 @@ void Animation3dEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("animationList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -247,13 +247,13 @@ void Animation3dEditor::_updateAnimationChoosing()
 					_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
 				}
 
-				_gui->getOverlay()->deleteChoiceForm("animationList");
+				_gui->getOverlay()->disableChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("animationList");
+			_gui->getOverlay()->disableChoiceForm("animationList");
 			_isChoosingAnimation = false;
 			_isDeletingAnimation = false;
 		}
@@ -264,12 +264,12 @@ void Animation3dEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && !_currentAnimationId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
 		{
-			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
 		{
 			_fe3d->animation3d_delete(_currentAnimationId);
 
@@ -289,7 +289,7 @@ void Animation3dEditor::_updateModelChoosing()
 {
 	if(_isChoosingModel)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("modelList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("modelList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -331,7 +331,7 @@ void Animation3dEditor::_updateModelChoosing()
 					_fe3d->animation3d_createFrame(_currentAnimationId, 0);
 				}
 
-				_gui->getOverlay()->deleteChoiceForm("modelList");
+				_gui->getOverlay()->disableChoiceForm("modelList");
 				_hoveredModelId = "";
 				_isChoosingModel = false;
 			}
@@ -343,7 +343,7 @@ void Animation3dEditor::_updateModelChoosing()
 				_fe3d->model_setVisible(_previewModelId, true);
 			}
 
-			_gui->getOverlay()->deleteChoiceForm("modelList");
+			_gui->getOverlay()->disableChoiceForm("modelList");
 			_isChoosingModel = false;
 		}
 		else
@@ -361,7 +361,7 @@ void Animation3dEditor::_updatePartChoosing()
 {
 	if(_isChoosingPart)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("partList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("partList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -375,13 +375,13 @@ void Animation3dEditor::_updatePartChoosing()
 			{
 				_currentPartId = _hoveredPartId;
 				_hoveredPartId = "";
-				_gui->getOverlay()->deleteChoiceForm("partList");
+				_gui->getOverlay()->disableChoiceForm("partList");
 				_isChoosingPart = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("partList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("partList");
+			_gui->getOverlay()->disableChoiceForm("partList");
 			_isChoosingPart = false;
 		}
 		else

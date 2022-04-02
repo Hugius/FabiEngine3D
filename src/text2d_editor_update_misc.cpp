@@ -112,7 +112,7 @@ void Text2dEditor::_updateTextChoosing()
 {
 	if(_isChoosingText)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("textList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("textList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -136,13 +136,13 @@ void Text2dEditor::_updateTextChoosing()
 				}
 
 				_fe3d->text2d_setVisible(_currentTextId, true);
-				_gui->getOverlay()->deleteChoiceForm("textList");
+				_gui->getOverlay()->disableChoiceForm("textList");
 				_isChoosingText = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("textList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("textList");
+			_gui->getOverlay()->disableChoiceForm("textList");
 			_isChoosingText = false;
 			_isDeletingText = false;
 		}
@@ -161,12 +161,12 @@ void Text2dEditor::_updateTextDeleting()
 {
 	if(_isDeletingText && !_currentTextId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
 		{
-			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
 		{
 			_fe3d->text2d_delete(_currentTextId);
 

@@ -3,7 +3,7 @@
 
 #include <windows.h>
 #include <iostream>
-GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCapsAllowed, bool isCentered)
+GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_id(id),
@@ -15,8 +15,7 @@ GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, co
 	_maxCharacterCount(maxCharacterCount),
 	_isLettersAllowed(isLettersAllowed),
 	_isNumbersAllowed(isNumbersAllowed),
-	_isSpecialsAllowed(isSpecialsAllowed),
-	_isCapsAllowed(isCapsAllowed)
+	_isSpecialsAllowed(isSpecialsAllowed)
 {
 	if(_id.empty())
 	{
@@ -24,7 +23,7 @@ GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, co
 	}
 
 	_quadField = make_shared<GuiQuadField>(fe3d, "GuiInputBox", (parentId + "_" + id), position, size, "", defaultQuadColor, isCentered);
-	_textField = make_shared<GuiTextField>(fe3d, "GuiInputBox", (parentId + "_" + id), position, fvec2((size.x / static_cast<float>(maxCharacterCount)), size.y), " ", fvec3(1.0f), isCentered);
+	_textField = make_shared<GuiTextField>(fe3d, "GuiInputBox", (parentId + "_" + id), position, fvec2((size.x / static_cast<float>(maxCharacterCount + 1)), size.y), " ", fvec3(1.0f), isCentered);
 }
 
 void GuiInputBox::update(bool isFocused)
@@ -50,26 +49,28 @@ void GuiInputBox::_updateTyping()
 	{
 		if(textContent.size() < _maxCharacterCount)
 		{
-			if(_isLettersAllowed)
+			if(_isLettersAllowed || _isSpecialsAllowed)
 			{
 				if(_fe3d->input_isKeyPressed(InputType(' ')))
 				{
 					textContent += ' ';
 				}
+			}
 
-				for(const auto & character : ALPHABET_CHARACTERS)
+			for(const auto & character : ALPHABET_CHARACTERS)
+			{
+				if(_fe3d->input_isKeyPressed(InputType(character.first)))
 				{
-					if(_fe3d->input_isKeyPressed(InputType(character.first)))
+					if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT) || ((GetKeyState(VK_CAPITAL) & 0x0001) != 0))
 					{
-						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+						if(_isLettersAllowed)
 						{
 							textContent += character.second;
 						}
-						else if(((GetKeyState(VK_CAPITAL) & 0x0001) != 0) && _isCapsAllowed)
-						{
-							textContent += character.second;
-						}
-						else
+					}
+					else
+					{
+						if(_isLettersAllowed)
 						{
 							textContent += character.first;
 						}
@@ -117,9 +118,12 @@ void GuiInputBox::_updateTyping()
 						}
 						else
 						{
-							if((character.first == '-') && textContent.empty())
+							if(_isNumbersAllowed)
 							{
-								textContent += character.first;
+								if((character.first == '-') && textContent.empty())
+								{
+									textContent += character.first;
+								}
 							}
 						}
 					}
@@ -196,15 +200,6 @@ const bool GuiInputBox::isCentered() const
 
 const string GuiInputBox::getTextContent() const
 {
-	//if(textContent == "-" && _noSpecials && _minusAllowed)
-	//{
-	//	return "";
-	//}
-	//else
-	//{
-	//	return textContent;
-	//}
-
 	const auto textContent = _textField->getTextContent();
 
 	return textContent.substr(0, (textContent.size() - 1));

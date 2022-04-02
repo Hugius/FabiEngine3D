@@ -218,7 +218,7 @@ void WorldEditor::_updateWorldChoosing()
 {
 	if(_isChoosingWorld)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("worldList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("worldList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -235,13 +235,13 @@ void WorldEditor::_updateWorldChoosing()
 					}
 				}
 
-				_gui->getOverlay()->deleteChoiceForm("worldList");
+				_gui->getOverlay()->disableChoiceForm("worldList");
 				_isChoosingWorld = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("worldList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("worldList");
+			_gui->getOverlay()->disableChoiceForm("worldList");
 			_isChoosingWorld = false;
 			_isDeletingWorld = false;
 		}
@@ -252,12 +252,12 @@ void WorldEditor::_updateWorldDeleting()
 {
 	if(_isDeletingWorld && !_currentWorldId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
 		{
-			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
 		{
 			_deleteWorldFile(_currentWorldId);
 			_currentWorldId = "";

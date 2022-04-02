@@ -14,7 +14,7 @@ void WorldEditor::_updateSkyMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> skyIds;
-			for(const auto& id : _skyEditor->getLoadedEntityIds())
+			for(const auto & id : _skyEditor->getLoadedEntityIds())
 			{
 				if(id[0] == '@')
 				{
@@ -22,7 +22,7 @@ void WorldEditor::_updateSkyMenu()
 				}
 			}
 
-			_gui->getOverlay()->createChoiceForm("skyList", "Select Sky", fvec2(0.0f, 0.1f), skyIds);
+			_gui->getOverlay()->enableChoiceForm("skyList", "Select Sky", fvec2(0.0f, 0.1f), skyIds);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -31,7 +31,7 @@ void WorldEditor::_updateSkyMenu()
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("skyList");
+			auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("skyList");
 
 			if(!selectedButtonId.empty())
 			{
@@ -39,11 +39,11 @@ void WorldEditor::_updateSkyMenu()
 
 				_fe3d->sky_select(selectedButtonId);
 
-				_gui->getOverlay()->deleteChoiceForm("skyList");
+				_gui->getOverlay()->disableChoiceForm("skyList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("skyList"))
 			{
-				_gui->getOverlay()->deleteChoiceForm("skyList");
+				_gui->getOverlay()->disableChoiceForm("skyList");
 			}
 		}
 

@@ -103,7 +103,7 @@ void WorldEditor::_updateModelEditing()
 						id = id.substr(1);
 					}
 
-					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), animationIds);
+					_gui->getOverlay()->enableChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), animationIds);
 				}
 				else
 				{
@@ -139,7 +139,7 @@ void WorldEditor::_updateModelEditing()
 				return;
 			}
 
-			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
+			auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("animationList");
 			if(!selectedButtonId.empty())
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -162,12 +162,12 @@ void WorldEditor::_updateModelEditing()
 
 					_fe3d->model_startAnimation(_activeModelId, ("@" + selectedButtonId), -1);
 
-					_gui->getOverlay()->deleteChoiceForm("animationList");
+					_gui->getOverlay()->disableChoiceForm("animationList");
 				}
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 			{
-				_gui->getOverlay()->deleteChoiceForm("animationList");
+				_gui->getOverlay()->disableChoiceForm("animationList");
 			}
 
 			auto position = _fe3d->model_getBasePosition(_activeModelId);

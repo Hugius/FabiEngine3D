@@ -106,7 +106,7 @@ void WorldEditor::_updateQuad3dEditing()
 						id = id.substr(1);
 					}
 
-					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), ids);
+					_gui->getOverlay()->enableChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), ids);
 				}
 				else
 				{
@@ -130,7 +130,7 @@ void WorldEditor::_updateQuad3dEditing()
 				return;
 			}
 
-			auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
+			auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("animationList");
 			if(!selectedButtonId.empty())
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -142,12 +142,12 @@ void WorldEditor::_updateQuad3dEditing()
 
 					_fe3d->quad3d_startAnimation(_activeQuadId, ("@" + selectedButtonId), -1);
 
-					_gui->getOverlay()->deleteChoiceForm("animationList");
+					_gui->getOverlay()->disableChoiceForm("animationList");
 				}
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 			{
-				_gui->getOverlay()->deleteChoiceForm("animationList");
+				_gui->getOverlay()->disableChoiceForm("animationList");
 			}
 
 			auto position = _fe3d->quad3d_getPosition(_activeQuadId);

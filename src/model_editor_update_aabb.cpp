@@ -16,7 +16,7 @@ void ModelEditor::_updateMainAabbMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("aabbCreate", "Create AABB", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("aabbCreate", "Create AABB", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingAabb = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -27,7 +27,7 @@ void ModelEditor::_updateMainAabbMenu()
 				id = id.substr((_currentModelId + "@").size());
 			}
 			sort(ids.begin(), ids.end());
-			_gui->getOverlay()->createChoiceForm("aabbList", "Edit AABB", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->enableChoiceForm("aabbList", "Edit AABB", fvec2(-0.5f, 0.1f), ids);
 			_isChoosingAabb = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -38,7 +38,7 @@ void ModelEditor::_updateMainAabbMenu()
 				id = id.substr((_currentModelId + "@").size());
 			}
 			sort(ids.begin(), ids.end());
-			_gui->getOverlay()->createChoiceForm("aabbList", "Delete AABB", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->enableChoiceForm("aabbList", "Delete AABB", fvec2(-0.5f, 0.1f), ids);
 			_isChoosingAabb = true;
 			_isDeletingAabb = true;
 		}
@@ -64,15 +64,15 @@ void ModelEditor::_updateChoiceAabbMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("positionX", "X", (position.x * 100.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("positionY", "Y", (position.y * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("positionZ", "Z", (position.z * 100.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("positionX", "X", (position.x * 100.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("positionY", "Y", (position.y * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("positionZ", "Z", (position.z * 100.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		if(_gui->getOverlay()->checkValueForm("positionX", position.x))
@@ -166,7 +166,7 @@ void ModelEditor::_updateAabbChoosing()
 {
 	if(_isChoosingAabb)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("aabbList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("aabbList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -189,13 +189,13 @@ void ModelEditor::_updateAabbChoosing()
 					_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->deleteChoiceForm("aabbList");
+				_gui->getOverlay()->disableChoiceForm("aabbList");
 				_isChoosingAabb = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("aabbList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("aabbList");
+			_gui->getOverlay()->disableChoiceForm("aabbList");
 			_isChoosingAabb = false;
 			_isDeletingAabb = false;
 		}
@@ -214,12 +214,12 @@ void ModelEditor::_updateAabbDeleting()
 {
 	if(_isDeletingAabb && !_currentAabbId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
 		{
-			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
 		{
 			_fe3d->aabb_delete((_currentModelId + "@" + _currentAabbId));
 			_isDeletingAabb = false;

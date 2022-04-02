@@ -132,7 +132,7 @@ void TopViewportController::_updateProjectLoading()
 	if(_isLoadingProject)
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const string clickedButtonId = _gui->getOverlay()->checkChoiceForm("projectList");
+		const string clickedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("projectList");
 		const string projectDirectoryPath = (rootPath + "projects\\" + clickedButtonId + "\\");
 
 		if(!clickedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -173,12 +173,12 @@ void TopViewportController::_updateProjectLoading()
 
 			Logger::throwInfo("Project \"" + _currentProjectId + "\" loaded");
 
-			_gui->getOverlay()->deleteChoiceForm("projectList");
+			_gui->getOverlay()->disableChoiceForm("projectList");
 			_isLoadingProject = false;
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("projectList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("projectList");
+			_gui->getOverlay()->disableChoiceForm("projectList");
 			_isLoadingProject = false;
 		}
 	}
@@ -189,21 +189,21 @@ void TopViewportController::_updateProjectDeleting()
 	if(_isDeletingProject)
 	{
 		static string chosenButtonId = "";
-		string clickedButtonId = _gui->getOverlay()->checkChoiceForm("projectList");
+		string clickedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("projectList");
 
 		if(!clickedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 			chosenButtonId = clickedButtonId;
-			_gui->getOverlay()->deleteChoiceForm("projectList");
+			_gui->getOverlay()->disableChoiceForm("projectList");
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("projectList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("projectList");
+			_gui->getOverlay()->disableChoiceForm("projectList");
 			_isDeletingProject = false;
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
 		{
 			if(chosenButtonId == _currentProjectId)
 			{

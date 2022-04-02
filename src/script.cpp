@@ -28,8 +28,6 @@ void Script::renameScriptFile(const string & id, const string & newId)
 	getScriptFile(newId)->setCursorLineIndex(cursorLineIndex);
 	getScriptFile(newId)->setCursorCharacterIndex(cursorCharacterIndex);
 	getScriptFile(newId)->setLines(lines);
-
-	abort();
 }
 
 void Script::deleteScriptFile(const string & id)

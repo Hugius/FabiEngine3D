@@ -73,7 +73,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("animationList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("animationList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -91,13 +91,13 @@ void Animation2dEditor::_updateAnimationChoosing()
 					_gui->getOverlay()->getTextField("animationId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->deleteChoiceForm("animationList");
+				_gui->getOverlay()->disableChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("animationList");
+			_gui->getOverlay()->disableChoiceForm("animationList");
 			_isChoosingAnimation = false;
 			_isDeletingAnimation = false;
 		}
@@ -108,12 +108,12 @@ void Animation2dEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && !_currentAnimationId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
 		{
-			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
 		{
 			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, "");
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);

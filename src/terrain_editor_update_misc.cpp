@@ -144,7 +144,7 @@ void TerrainEditor::_updateTerrainChoosing()
 {
 	if(_isChoosingTerrain)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("terrainList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("terrainList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -162,13 +162,13 @@ void TerrainEditor::_updateTerrainChoosing()
 					_gui->getOverlay()->getTextField("terrainId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->deleteChoiceForm("terrainList");
+				_gui->getOverlay()->disableChoiceForm("terrainList");
 				_isChoosingTerrain = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("terrainList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("terrainList");
+			_gui->getOverlay()->disableChoiceForm("terrainList");
 			_isChoosingTerrain = false;
 			_isDeletingTerrain = false;
 		}
@@ -183,12 +183,12 @@ void TerrainEditor::_updateTerrainDeleting()
 {
 	if(_isDeletingTerrain && !_currentTerrainId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
 		{
-			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
 		{
 			_fe3d->terrain_delete(_currentTerrainId);
 

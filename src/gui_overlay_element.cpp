@@ -5,9 +5,9 @@ void GuiOverlay::createScrollingList(const string & id, const fvec2 & position, 
 	_scrollingLists.insert({id, make_shared<GuiScrollingList>(_fe3d, id, "overlay", position, size, color, defaultQuadColor, hoveredQuadColor, defaultTextColor, hoveredTextColor, characterSize, scrollingSpeed, isCentered)});
 }
 
-void GuiOverlay::createInputBox(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCapsAllowed, bool isCentered)
+void GuiOverlay::createInputBox(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered)
 {
-	_inputBoxes.insert({id, make_shared<GuiInputBox>(_fe3d, id, "overlay", position, size, defaultQuadColor, hoveredQuadColor, defaultTextColor, hoveredTextColor, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed, isCapsAllowed, isCentered)});
+	_inputBoxes.insert({id, make_shared<GuiInputBox>(_fe3d, id, "overlay", position, size, defaultQuadColor, hoveredQuadColor, defaultTextColor, hoveredTextColor, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed, isCentered)});
 }
 
 void GuiOverlay::createButton(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered)

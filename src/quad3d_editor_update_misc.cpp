@@ -123,7 +123,7 @@ void Quad3dEditor::_updateQuad3dChoosing()
 {
 	if(_isChoosingQuad3d)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("quad3dList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("quad3dList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -147,13 +147,13 @@ void Quad3dEditor::_updateQuad3dChoosing()
 				}
 
 				_fe3d->quad3d_setVisible(_currentQuadId, true);
-				_gui->getOverlay()->deleteChoiceForm("quad3dList");
+				_gui->getOverlay()->disableChoiceForm("quad3dList");
 				_isChoosingQuad3d = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("quad3dList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("quad3dList");
+			_gui->getOverlay()->disableChoiceForm("quad3dList");
 			_isChoosingQuad3d = false;
 			_isDeletingQuad3d = false;
 		}
@@ -172,12 +172,12 @@ void Quad3dEditor::_updateQuad3dDeleting()
 {
 	if(_isDeletingQuad3d && !_currentQuadId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
 		{
-			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
 		{
 			_fe3d->quad3d_delete(_currentQuadId);
 

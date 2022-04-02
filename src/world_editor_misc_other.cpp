@@ -193,7 +193,7 @@ void WorldEditor::_handleValueChanging(const string & screenId, const string & b
 		inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 
-	if(inputBox->getTextContent().empty())
+	if(inputBox->getTextContent().empty() || (inputBox->getTextContent() == "-"))
 	{
 		value = 0.0f;
 	}

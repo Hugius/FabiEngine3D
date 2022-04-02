@@ -13,26 +13,26 @@ void ScriptEditor::_updateGUI()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("search")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("search", "Search Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("search", "Search Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isSearchingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("scriptCreate", "Create Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("scriptCreate", "Create Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_gui->getOverlay()->createChoiceForm("scriptFileList", "Edit Script", fvec2(0.0f, 0.1f), _script->getScriptFileIds());
+			_gui->getOverlay()->enableChoiceForm("scriptFileList", "Edit Script", fvec2(0.0f, 0.1f), _script->getScriptFileIds());
 			_isChoosingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rename")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->enableValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isRenamingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clear")->isHovered())
@@ -41,7 +41,7 @@ void ScriptEditor::_updateGUI()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 			_isDeletingScriptFile = true;
 		}
 
@@ -49,11 +49,11 @@ void ScriptEditor::_updateGUI()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F) && !_gui->getOverlay()->isFocused())
 			{
-				_gui->getOverlay()->createValueForm("search", "Search Keyword", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+				_gui->getOverlay()->enableValueForm("search", "Search Keyword", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			}
 		}
 
-		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("back"))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveScriptFiles();
@@ -127,7 +127,7 @@ void ScriptEditor::_updateScriptFileChoosing()
 {
 	if(_isChoosingScriptFile)
 	{
-		auto selectedButtonId = _gui->getOverlay()->checkChoiceForm("scriptFileList");
+		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("scriptFileList");
 
 		if(!selectedButtonId.empty())
 		{
@@ -140,13 +140,13 @@ void ScriptEditor::_updateScriptFileChoosing()
 				_createScriptDisplayEntities();
 				_fe3d->text3d_setVisible("cursor", true);
 
-				_gui->getOverlay()->deleteChoiceForm("scriptFileList");
+				_gui->getOverlay()->disableChoiceForm("scriptFileList");
 				_isChoosingScriptFile = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("scriptFileList"))
 		{
-			_gui->getOverlay()->deleteChoiceForm("scriptFileList");
+			_gui->getOverlay()->disableChoiceForm("scriptFileList");
 			_isChoosingScriptFile = false;
 		}
 	}
@@ -313,7 +313,7 @@ void ScriptEditor::_updateScriptDeleting()
 {
 	if(_isDeletingScriptFile)
 	{
-		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
 		{
 			_script->deleteScriptFile(_currentScriptFileId);
 			_clearDisplay();

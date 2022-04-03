@@ -17,12 +17,12 @@ void ScriptEditor::_updateGUI()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("search")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("search", "Search Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("search", "Search Script", "", fvec2(0.0f, 0.1f), 10, true, true, true);
 			_isSearchingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("scriptCreate", "Create Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("scriptCreate", "Create Script", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isCreatingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -32,7 +32,7 @@ void ScriptEditor::_updateGUI()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rename")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isRenamingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clear")->isHovered())
@@ -49,22 +49,25 @@ void ScriptEditor::_updateGUI()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F) && !_gui->getOverlay()->isFocused())
 			{
-				_gui->getOverlay()->openValueForm("search", "Search Keyword", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+				//_gui->getOverlay()->openValueForm("search", "Search Keyword", "", fvec2(0.0f, 0.1f), 10, true, true, true);
 			}
 		}
 
-		if(_gui->getOverlay()->isAnswerFormAccepted("back"))
+		if(_gui->getOverlay()->getAnswerFormId() == "back")
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			saveScriptFiles();
-			unload();
-			return;
-		}
-		if(_gui->getOverlay()->isAnswerFormDenied("back"))
-		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			unload();
-			return;
+			if(_gui->getOverlay()->isAnswerFormAccepted())
+			{
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+				saveScriptFiles();
+				unload();
+				return;
+			}
+			if(_gui->getOverlay()->isAnswerFormDenied())
+			{
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+				unload();
+				return;
+			}
 		}
 
 		screen->getButton("rename")->setHoverable(!_currentScriptFileId.empty());
@@ -81,17 +84,17 @@ void ScriptEditor::_updateScriptFileCreating()
 	{
 		string newScriptFileId;
 
-		if(_gui->getOverlay()->checkValueForm("scriptCreate", newScriptFileId))
+		//if(_gui->getOverlay()->checkValueForm("scriptCreate", newScriptFileId))
 		{
-			if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
+			if(newScriptFileId.empty())
 			{
-				Logger::throwWarning("Script file ID cannot contain any spaces");
+				Logger::throwWarning("Script file ID cannot be empty");
 				return;
 			}
 
-			if(!all_of(newScriptFileId.begin(), newScriptFileId.end(), isalnum))
+			if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
 			{
-				Logger::throwWarning("Script file ID cannot contain any specials");
+				Logger::throwWarning("Script file ID cannot contain any spaces");
 				return;
 			}
 
@@ -127,26 +130,26 @@ void ScriptEditor::_updateScriptFileChoosing()
 {
 	if(_isChoosingScriptFile)
 	{
-		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("scriptFileList");
+		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
 
-		if(!selectedButtonId.empty())
+		if(!selectedOptionId.empty())
 		{
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentScriptFileId = selectedButtonId;
+				_currentScriptFileId = selectedOptionId;
 				_isWritingScript = true;
 
 				_deleteScriptDisplayEntities();
 				_createScriptDisplayEntities();
 				_fe3d->text3d_setVisible("cursor", true);
 
-				_gui->getOverlay()->closeChoiceForm("scriptFileList");
+				_gui->getOverlay()->closeChoiceForm();
 				_isChoosingScriptFile = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("scriptFileList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm("scriptFileList");
+			_gui->getOverlay()->closeChoiceForm();
 			_isChoosingScriptFile = false;
 		}
 	}
@@ -158,17 +161,17 @@ void ScriptEditor::_updateScriptFileRenaming()
 	{
 		string newScriptFileId;
 
-		if(_gui->getOverlay()->checkValueForm("scriptRename", newScriptFileId))
+		//if(_gui->getOverlay()->checkValueForm("scriptRename", newScriptFileId))
 		{
-			if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
+			if(newScriptFileId.empty())
 			{
-				Logger::throwWarning("Script file ID cannot contain any spaces");
+				Logger::throwWarning("Script file ID cannot be empty");
 				return;
 			}
 
-			if(!all_of(newScriptFileId.begin(), newScriptFileId.end(), isalnum))
+			if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
 			{
-				Logger::throwWarning("Script file ID cannot contain any specials");
+				Logger::throwWarning("Script file ID cannot contain any spaces");
 				return;
 			}
 
@@ -197,7 +200,7 @@ void ScriptEditor::_updateScriptSearching()
 	{
 		string keyword;
 
-		if(_gui->getOverlay()->checkValueForm("search", keyword))
+		//if(_gui->getOverlay()->checkValueForm("search", keyword))
 		{
 			const auto result = _script->findKeyword(keyword);
 
@@ -313,15 +316,19 @@ void ScriptEditor::_updateScriptDeleting()
 {
 	if(_isDeletingScriptFile)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted())
 		{
 			_script->deleteScriptFile(_currentScriptFileId);
 			_clearDisplay();
 			_isDeletingScriptFile = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui->getOverlay()->isAnswerFormDenied())
 		{
 			_isDeletingScriptFile = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
 	}
 }

@@ -20,8 +20,8 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingCameraHorizontally")->isHovered())
 		{
@@ -35,29 +35,29 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		if(_gui->getOverlay()->checkValueForm("sizeX", size.x))
+		//if(_gui->getOverlay()->checkValueForm("sizeX", size.x))
 		{
 			size.x /= 100.0f;
 			_fe3d->quad3d_setSize(_currentQuadId, size);
 		}
-		if(_gui->getOverlay()->checkValueForm("sizeY", size.y))
+		//if(_gui->getOverlay()->checkValueForm("sizeY", size.y))
 		{
 			size.y /= 100.0f;
 			_fe3d->quad3d_setSize(_currentQuadId, size);
 		}
-		if(_gui->getOverlay()->checkValueForm("opacity", opacity))
+		//if(_gui->getOverlay()->checkValueForm("opacity", opacity))
 		{
 			opacity /= 100.0f;
 			_fe3d->quad3d_setOpacity(_currentQuadId, opacity);
 		}
-		if(_gui->getOverlay()->checkValueForm("minTextureAlpha", minTextureAlpha))
+		//if(_gui->getOverlay()->checkValueForm("minTextureAlpha", minTextureAlpha))
 		{
 			minTextureAlpha /= 100.0f;
 			_fe3d->quad3d_setMinTextureAlpha(_currentQuadId, minTextureAlpha);

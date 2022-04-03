@@ -14,7 +14,7 @@ void Quad2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("quadCreate", "Create Quad2D", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("quadCreate", "Create Quad2D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isCreatingQuad = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -39,18 +39,20 @@ void Quad2dEditor::_updateMainMenu()
 			_isDeletingQuad = true;
 		}
 
-		if(_gui->getOverlay()->isAnswerFormAccepted("back"))
+		if(_gui->getOverlay()->isAnswerFormAccepted())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveEntitiesToFile();
 			unload();
-			return;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied("back"))
+		if(_gui->getOverlay()->isAnswerFormDenied())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			unload();
-			return;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
 	}
 }
@@ -107,40 +109,40 @@ void Quad2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
+		//if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
 			_fe3d->quad2d_setColor(_currentQuadId, color);
 		}
-		if(_gui->getOverlay()->checkValueForm("colorG", color.g, {}))
+		//if(_gui->getOverlay()->checkValueForm("colorG", color.g, {}))
 		{
 			color.g /= 255.0f;
 			_fe3d->quad2d_setColor(_currentQuadId, color);
 		}
-		if(_gui->getOverlay()->checkValueForm("colorB", color.b, {}))
+		//if(_gui->getOverlay()->checkValueForm("colorB", color.b, {}))
 		{
 			color.b /= 255.0f;
 			_fe3d->quad2d_setColor(_currentQuadId, color);
 		}
-		if(_gui->getOverlay()->checkValueForm("opacity", opacity, {}))
+		//if(_gui->getOverlay()->checkValueForm("opacity", opacity, {}))
 		{
 			opacity /= 100.0f;
 			_fe3d->quad2d_setOpacity(_currentQuadId, opacity);
 		}
-		if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
+		//if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
 			_fe3d->quad2d_setTextureRepeat(_currentQuadId, textureRepeat);
 		}

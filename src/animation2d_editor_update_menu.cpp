@@ -14,7 +14,7 @@ void Animation2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("animationCreate", "Create Animation", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("animationCreate", "Create Animation", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isCreatingAnimation = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -41,18 +41,23 @@ void Animation2dEditor::_updateMainMenu()
 			_isDeletingAnimation = true;
 		}
 
-		if(_gui->getOverlay()->isAnswerFormAccepted("back"))
+		if(_gui->getOverlay()->getAnswerFormId() == "back")
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			saveAnimationsToFile();
-			unload();
-			return;
-		}
-		if(_gui->getOverlay()->isAnswerFormDenied("back"))
-		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			unload();
-			return;
+			if(_gui->getOverlay()->isAnswerFormAccepted())
+			{
+				saveAnimationsToFile();
+				unload();
+
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+				_gui->getOverlay()->closeAnswerForm();
+			}
+			if(_gui->getOverlay()->isAnswerFormDenied())
+			{
+				unload();
+
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+				_gui->getOverlay()->closeAnswerForm();
+			}
 		}
 	}
 }
@@ -63,9 +68,9 @@ void Animation2dEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "animation2dEditorMenuChoice")
 	{
-		auto rowCount = _fe3d->animation2d_getRowCount(_currentAnimationId);
-		auto columnCount = _fe3d->animation2d_getColumnCount(_currentAnimationId);
-		auto interval = _fe3d->animation2d_getInterval(_currentAnimationId);
+		const auto rowCount = _fe3d->animation2d_getRowCount(_currentAnimationId);
+		const auto columnCount = _fe3d->animation2d_getColumnCount(_currentAnimationId);
+		const auto interval = _fe3d->animation2d_getInterval(_currentAnimationId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -89,15 +94,15 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rowCount")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("rowCount", "Row Count", rowCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("rowCount", "Row Count", to_string(rowCount), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("columnCount")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("columnCount", "Column Count", columnCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("columnCount", "Column Count", to_string(columnCount), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("interval")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("interval", "Interval", interval, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("interval", "Interval", to_string(interval), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
@@ -108,54 +113,78 @@ void Animation2dEditor::_updateChoiceMenu()
 			_fe3d->quad3d_stopAnimation(PREVIEW_QUAD_ID, _currentAnimationId);
 		}
 
-		const auto isConfirmed = _gui->getOverlay()->isAnswerFormAccepted("preview");
-		const auto isDenied = _gui->getOverlay()->isAnswerFormDenied("preview");
-		if(isConfirmed || isDenied)
+		if(_gui->getOverlay()->getValueFormId() == "rowCount")
 		{
-			if(getCurrentProjectId().empty())
+			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				abort();
+				_fe3d->animation2d_setRowCount(_currentAnimationId, _gui->getOverlay()->getValueFormUnsignedInteger());
 			}
-
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto entityType = (isConfirmed ? "quad3d" : "quad2d");
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\" + entityType + "\\diffuse_map\\");
-
-			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
-				return;
+				_gui->getOverlay()->closeValueForm();
 			}
-
-			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
-			if(filePath.empty())
+		}
+		if(_gui->getOverlay()->getValueFormId() == "columnCount")
+		{
+			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				return;
+				_fe3d->animation2d_setColumnCount(_currentAnimationId, _gui->getOverlay()->getValueFormUnsignedInteger());
 			}
-
-			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
-				return;
+				_gui->getOverlay()->closeValueForm();
 			}
-
-			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, finalFilePath);
-			_isPreviewTextureChosen = true;
+		}
+		if((_gui->getOverlay()->getValueFormId() == "interval"))
+		{
+			if(_gui->getOverlay()->isValueFormConfirmed())
+			{
+				_fe3d->animation2d_setInterval(_currentAnimationId, _gui->getOverlay()->getValueFormUnsignedInteger());
+			}
+			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			{
+				_gui->getOverlay()->closeValueForm();
+			}
 		}
 
-		if(_gui->getOverlay()->checkValueForm("rowCount", rowCount, {0}))
+		if(_gui->getOverlay()->getAnswerFormId() == "preview")
 		{
-			_fe3d->animation2d_setRowCount(_currentAnimationId, rowCount);
-		}
-		if(_gui->getOverlay()->checkValueForm("columnCount", columnCount, {0}))
-		{
-			_fe3d->animation2d_setColumnCount(_currentAnimationId, columnCount);
-		}
-		if(_gui->getOverlay()->checkValueForm("interval", interval, {}))
-		{
-			_fe3d->animation2d_setInterval(_currentAnimationId, interval);
+			if(_gui->getOverlay()->isAnswerFormAccepted() || _gui->getOverlay()->isAnswerFormDenied())
+			{
+				if(getCurrentProjectId().empty())
+				{
+					abort();
+				}
+
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto entityType = (_gui->getOverlay()->isAnswerFormAccepted() ? "quad3d" : "quad2d");
+				const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\" + entityType + "\\diffuse_map\\");
+
+				if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+				{
+					Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+					return;
+				}
+
+				const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+				if(filePath.empty())
+				{
+					return;
+				}
+
+				if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+					return;
+				}
+
+				const string finalFilePath = filePath.substr(rootPath.size());
+				_fe3d->misc_clearImageCache(finalFilePath);
+				_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, finalFilePath);
+				_isPreviewTextureChosen = true;
+
+				_gui->getOverlay()->closeAnswerForm();
+			}
 		}
 
 		const auto isStarted = _fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD_ID, _currentAnimationId);

@@ -130,8 +130,8 @@ void WorldEditor::_updateQuad3dEditing()
 				return;
 			}
 
-			auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("animationList");
-			if(!selectedButtonId.empty())
+			const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+			if(!selectedOptionId.empty())
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
@@ -140,14 +140,14 @@ void WorldEditor::_updateQuad3dEditing()
 						_fe3d->quad3d_stopAnimation(_activeQuadId, currentAnimationIds[0]);
 					}
 
-					_fe3d->quad3d_startAnimation(_activeQuadId, ("@" + selectedButtonId), -1);
+					_fe3d->quad3d_startAnimation(_activeQuadId, ("@" + selectedOptionId), -1);
 
-					_gui->getOverlay()->closeChoiceForm("animationList");
+					_gui->getOverlay()->closeChoiceForm();
 				}
 			}
-			else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
+			else if(_gui->getOverlay()->isChoiceFormCancelled())
 			{
-				_gui->getOverlay()->closeChoiceForm("animationList");
+				_gui->getOverlay()->closeChoiceForm();
 			}
 
 			auto position = _fe3d->quad3d_getPosition(_activeQuadId);

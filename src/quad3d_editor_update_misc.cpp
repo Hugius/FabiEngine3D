@@ -71,7 +71,7 @@ void Quad3dEditor::_updateQuad3dCreating()
 	{
 		string newQuadId;
 
-		if(_gui->getOverlay()->checkValueForm("quad3dCreate", newQuadId, {_currentQuadId}))
+		//if(_gui->getOverlay()->checkValueForm("quad3dCreate", newQuadId, {_currentQuadId}))
 		{
 			if(newQuadId.empty())
 			{
@@ -82,12 +82,6 @@ void Quad3dEditor::_updateQuad3dCreating()
 			if(any_of(newQuadId.begin(), newQuadId.end(), isspace))
 			{
 				Logger::throwWarning("Quad ID cannot contain any spaces");
-				return;
-			}
-
-			if(!all_of(newQuadId.begin(), newQuadId.end(), isalnum))
-			{
-				Logger::throwWarning("Quad ID cannot contain any specials");
 				return;
 			}
 
@@ -123,13 +117,13 @@ void Quad3dEditor::_updateQuad3dChoosing()
 {
 	if(_isChoosingQuad3d)
 	{
-		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("quad3dList");
+		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
 
-		if(!selectedButtonId.empty())
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredQuadId.empty())
 			{
-				_hoveredQuadId = ("@" + selectedButtonId);
+				_hoveredQuadId = ("@" + selectedOptionId);
 				_fe3d->quad3d_setVisible(_hoveredQuadId, true);
 			}
 
@@ -138,7 +132,11 @@ void Quad3dEditor::_updateQuad3dChoosing()
 				_currentQuadId = _hoveredQuadId;
 				_hoveredQuadId = "";
 
-				if(!_isDeletingQuad3d)
+				if(_isDeletingQuad3d)
+				{
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+				}
+				else
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 
@@ -147,13 +145,13 @@ void Quad3dEditor::_updateQuad3dChoosing()
 				}
 
 				_fe3d->quad3d_setVisible(_currentQuadId, true);
-				_gui->getOverlay()->closeChoiceForm("quad3dList");
+				_gui->getOverlay()->closeChoiceForm();
 				_isChoosingQuad3d = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("quad3dList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm("quad3dList");
+			_gui->getOverlay()->closeChoiceForm();
 			_isChoosingQuad3d = false;
 			_isDeletingQuad3d = false;
 		}
@@ -170,27 +168,26 @@ void Quad3dEditor::_updateQuad3dChoosing()
 
 void Quad3dEditor::_updateQuad3dDeleting()
 {
-	if(_isDeletingQuad3d && !_currentQuadId.empty())
+	if(_isDeletingQuad3d && !_isChoosingQuad3d)
 	{
-		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
-		{
-			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
-		}
-
-		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted())
 		{
 			_fe3d->quad3d_delete(_currentQuadId);
 
 			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentQuadId), _loadedEntityIds.end());
 			_currentQuadId = "";
 			_isDeletingQuad3d = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui->getOverlay()->isAnswerFormDenied())
 		{
 			_fe3d->quad3d_setVisible(_currentQuadId, false);
 
 			_currentQuadId = "";
 			_isDeletingQuad3d = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
 	}
 }

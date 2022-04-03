@@ -16,7 +16,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	{
 		if(topScreen->getButton("newProject")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("newProjectId", "Create Project", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("newProjectId", "Create Project", "", 10, true, true, false);
 			_isCreatingProject = true;
 		}
 		else if(topScreen->getButton("loadProject")->isHovered())
@@ -54,14 +54,21 @@ void TopViewportController::_updateProjectScreenManagement()
 	_updateProjectLoading();
 	_updateProjectDeleting();
 
-	if(_gui->getOverlay()->isAnswerFormAccepted("quit"))
+	if(_gui->getOverlay()->getAnswerFormId() == "quit")
 	{
-		_saveCurrentProject();
-		_fe3d->application_stop();
-	}
-	if(_gui->getOverlay()->isAnswerFormDenied("quit"))
-	{
-		_fe3d->application_stop();
+		if(_gui->getOverlay()->isAnswerFormAccepted())
+		{
+			_saveCurrentProject();
+			_fe3d->application_stop();
+
+			_gui->getOverlay()->closeAnswerForm();
+		}
+		if(_gui->getOverlay()->isAnswerFormDenied())
+		{
+			_fe3d->application_stop();
+
+			_gui->getOverlay()->closeAnswerForm();
+		}
 	}
 
 	topScreen->getButton("newProject")->setHoverable(!_scriptExecutor->isStarted());

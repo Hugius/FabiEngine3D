@@ -13,7 +13,7 @@ void SkyEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("skyCreate", "Create Sky", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("skyCreate", "Create Sky", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isCreatingSky = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -38,18 +38,21 @@ void SkyEditor::_updateMainMenu()
 			_isDeletingSky = true;
 		}
 
-		if(_gui->getOverlay()->isAnswerFormAccepted("back"))
+		if(_gui->getOverlay()->getAnswerFormId() == "back")
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			saveEntitiesToFile();
-			unload();
-			return;
-		}
-		if(_gui->getOverlay()->isAnswerFormDenied("back"))
-		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			unload();
-			return;
+			if(_gui->getOverlay()->isAnswerFormAccepted())
+			{
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+				saveEntitiesToFile();
+				unload();
+				return;
+			}
+			if(_gui->getOverlay()->isAnswerFormDenied())
+			{
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+				unload();
+				return;
+			}
 		}
 	}
 }

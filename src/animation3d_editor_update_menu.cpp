@@ -15,7 +15,7 @@ void Animation3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("animationCreate", "Create Animation", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("animationCreate", "Create Animation", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isCreatingAnimation = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -42,18 +42,20 @@ void Animation3dEditor::_updateMainMenu()
 			_isDeletingAnimation = true;
 		}
 
-		if(_gui->getOverlay()->isAnswerFormAccepted("back"))
+		if(_gui->getOverlay()->isAnswerFormAccepted())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveAnimationsToFile();
 			unload();
-			return;
-		}
-		if(_gui->getOverlay()->isAnswerFormDenied("back"))
-		{
+
+			_gui->getOverlay()->closeAnswerForm();
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+		}
+		if(_gui->getOverlay()->isAnswerFormDenied())
+		{
 			unload();
-			return;
+
+			_gui->getOverlay()->closeAnswerForm();
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 		}
 	}
 }

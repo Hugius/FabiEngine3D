@@ -174,7 +174,7 @@ void WorldEditor::_updateWorldCreating()
 	{
 		string newWorldId;
 
-		if(_gui->getOverlay()->checkValueForm("worldCreate", newWorldId, {}))
+		//if(_gui->getOverlay()->checkValueForm("worldCreate", newWorldId, {}))
 		{
 			if(newWorldId.empty())
 			{
@@ -185,12 +185,6 @@ void WorldEditor::_updateWorldCreating()
 			if(any_of(newWorldId.begin(), newWorldId.end(), isspace))
 			{
 				Logger::throwWarning("World ID cannot contain any spaces");
-				return;
-			}
-
-			if(!all_of(newWorldId.begin(), newWorldId.end(), isalnum))
-			{
-				Logger::throwWarning("World ID cannot contain any specials");
 				return;
 			}
 
@@ -218,15 +212,19 @@ void WorldEditor::_updateWorldChoosing()
 {
 	if(_isChoosingWorld)
 	{
-		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("worldList");
+		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
 
-		if(!selectedButtonId.empty())
+		if(!selectedOptionId.empty())
 		{
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_currentWorldId = selectedButtonId;
+				_currentWorldId = selectedOptionId;
 
-				if(!_isDeletingWorld)
+				if(_isDeletingWorld)
+				{
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+				}
+				else
 				{
 					if(loadWorldFromFile(_currentWorldId))
 					{
@@ -235,13 +233,13 @@ void WorldEditor::_updateWorldChoosing()
 					}
 				}
 
-				_gui->getOverlay()->closeChoiceForm("worldList");
+				_gui->getOverlay()->closeChoiceForm();
 				_isChoosingWorld = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("worldList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm("worldList");
+			_gui->getOverlay()->closeChoiceForm();
 			_isChoosingWorld = false;
 			_isDeletingWorld = false;
 		}
@@ -250,23 +248,22 @@ void WorldEditor::_updateWorldChoosing()
 
 void WorldEditor::_updateWorldDeleting()
 {
-	if(_isDeletingWorld && !_currentWorldId.empty())
+	if(_isDeletingWorld && !_isChoosingWorld)
 	{
-		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
-		{
-			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
-		}
-
-		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted())
 		{
 			_deleteWorldFile(_currentWorldId);
 			_currentWorldId = "";
 			_isDeletingWorld = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui->getOverlay()->isAnswerFormDenied())
 		{
 			_currentWorldId = "";
 			_isDeletingWorld = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
 	}
 }

@@ -40,12 +40,7 @@ const bool GuiOverlay::isValueFormCancelled() const
 	return false;
 }
 
-const bool GuiOverlay::isValueFormOpen(const string & id) const
-{
-	return (id == _valueFormId);
-}
-
-void GuiOverlay::openValueForm(const string & id, const string & title, const string & valueString, const fvec2 & position, const fvec2 & size, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
+void GuiOverlay::openValueForm(const string & id, const string & title, const string & valueString, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
 {
 	if(!_valueFormId.empty())
 	{
@@ -55,7 +50,7 @@ void GuiOverlay::openValueForm(const string & id, const string & title, const st
 	createQuadField("value_form_title", position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.0275f, 0.125f), "", FORM_TITLE_QUAD_COLOR, true);
 	createTextField("value_form_title", position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.025f, 0.1f), title, FORM_TITLE_TEXT_COLOR, true);
 
-	createInputBox("value_form_box", position, size, fvec3(0.25f), fvec3(0.5f), fvec3(1.0f), fvec3(0.0f), maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed, true);
+	createInputBox("value_form_box", position, fvec2(static_cast<float>(maxCharacterCount) * 0.0275f, 0.1f), fvec3(0.25f), fvec3(0.5f), fvec3(1.0f), fvec3(0.0f), maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed, true);
 	getInputBox("value_form_box")->setTextContent(valueString);
 	getInputBox("value_form_box")->setActive(true);
 
@@ -88,12 +83,27 @@ void GuiOverlay::openChoiceForm(const string & id, const string & title, const f
 			abort();
 		}
 
-		getScrollingList(id)->createOption(buttonTitle, buttonTitle);
+		getScrollingList("choice_form_list")->createOption(buttonTitle, buttonTitle);
 	}
 
 	_choiceFormId = id;
 
 	_isFocused = true;
+}
+
+const string GuiOverlay::getChoiceFormId() const
+{
+	return _choiceFormId;
+}
+
+const string GuiOverlay::getValueFormId() const
+{
+	return _valueFormId;
+}
+
+const string GuiOverlay::getAnswerFormId() const
+{
+	return _answerFormId;
 }
 
 const string GuiOverlay::getSelectedChoiceFormOptionId() const
@@ -106,7 +116,103 @@ const string GuiOverlay::getSelectedChoiceFormOptionId() const
 	return getScrollingList("choice_form_list")->getHoveredOptionId();
 }
 
-const string GuiOverlay::getValueFormContent() const
+const double GuiOverlay::getValueFormDouble() const
+{
+	if(_valueFormId.empty())
+	{
+		abort();
+	}
+
+	const auto content = getInputBox("value_form_box")->getTextContent();
+
+	if(content.empty())
+	{
+		return 0.0;
+	}
+
+	try
+	{
+		return stod(content);
+	}
+	catch(...)
+	{
+		abort();
+	}
+}
+
+const float GuiOverlay::getValueFormFloat() const
+{
+	if(_valueFormId.empty())
+	{
+		abort();
+	}
+
+	const auto content = getInputBox("value_form_box")->getTextContent();
+
+	if(content.empty())
+	{
+		return 0.0f;
+	}
+
+	try
+	{
+		return stof(content);
+	}
+	catch(...)
+	{
+		abort();
+	}
+}
+
+const unsigned int GuiOverlay::getValueFormUnsignedInteger() const
+{
+	if(_valueFormId.empty())
+	{
+		abort();
+	}
+
+	const auto content = getInputBox("value_form_box")->getTextContent();
+
+	if(content.empty())
+	{
+		return 0;
+	}
+
+	try
+	{
+		return static_cast<unsigned int>(max(0, stoi(content)));
+	}
+	catch(...)
+	{
+		abort();
+	}
+}
+
+const int GuiOverlay::getValueFormSignedInteger() const
+{
+	if(_valueFormId.empty())
+	{
+		abort();
+	}
+
+	const auto content = getInputBox("value_form_box")->getTextContent();
+
+	if(content.empty())
+	{
+		return 0;
+	}
+
+	try
+	{
+		return stoi(content);
+	}
+	catch(...)
+	{
+		abort();
+	}
+}
+
+const string GuiOverlay::getValueFormString() const
 {
 	if(_valueFormId.empty())
 	{
@@ -138,6 +244,11 @@ const bool GuiOverlay::isChoiceFormCancelled() const
 
 void GuiOverlay::closeChoiceForm()
 {
+	if(_choiceFormId.empty())
+	{
+		abort();
+	}
+
 	deleteQuadField("choice_form_title");
 	deleteTextField("choice_form_title");
 	deleteScrollingList("choice_form_list");
@@ -150,6 +261,11 @@ void GuiOverlay::closeChoiceForm()
 
 void GuiOverlay::closeValueForm()
 {
+	if(_valueFormId.empty())
+	{
+		abort();
+	}
+
 	deleteQuadField("value_form_title");
 	deleteTextField("value_form_title");
 	deleteScrollingList("value_form_box");
@@ -163,6 +279,11 @@ void GuiOverlay::closeValueForm()
 
 void GuiOverlay::closeAnswerForm()
 {
+	if(_answerFormId.empty())
+	{
+		abort();
+	}
+
 	deleteQuadField("answer_form_title");
 	deleteTextField("answer_form_title");
 	deleteButton("answer_form_yes");
@@ -171,11 +292,6 @@ void GuiOverlay::closeAnswerForm()
 	_answerFormId = "";
 
 	_isFocused = false;
-}
-
-const bool GuiOverlay::isChoiceFormOpen(const string & id) const
-{
-	return (id == _choiceFormId);
 }
 
 void GuiOverlay::openAnswerForm(const string & id, const string & title, const fvec2 & position)
@@ -196,7 +312,7 @@ void GuiOverlay::openAnswerForm(const string & id, const string & title, const f
 	_isFocused = true;
 }
 
-const bool GuiOverlay::isAnswerFormAccepted()
+const bool GuiOverlay::isAnswerFormAccepted() const
 {
 	if(_answerFormId.empty())
 	{
@@ -208,22 +324,7 @@ const bool GuiOverlay::isAnswerFormAccepted()
 		return true;
 	}
 
-	return false;
-}
-
-const bool GuiOverlay::isAnswerFormDenied()
-{
-	if(_answerFormId.empty())
-	{
-		abort();
-	}
-
-	return (getButton("answer_form_no")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT));
-}
-
-const bool GuiOverlay::isAnswerFormCancelled()
-{
-	if(_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE))
+	if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 	{
 		return true;
 	}
@@ -231,7 +332,22 @@ const bool GuiOverlay::isAnswerFormCancelled()
 	return false;
 }
 
-const bool GuiOverlay::isAnswerFormOpen(const string & id) const
+const bool GuiOverlay::isAnswerFormDenied() const
 {
-	return (id == _answerFormId);
+	if(_answerFormId.empty())
+	{
+		abort();
+	}
+
+	if(getButton("answer_form_no")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	{
+		return true;
+	}
+
+	if(_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE))
+	{
+		return true;
+	}
+
+	return false;
 }

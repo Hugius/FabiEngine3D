@@ -380,15 +380,15 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string& id, bool isTemp
 
 const bool ScriptInterpreter::_validateFe3dId(const string& id)
 {
-	if(any_of(id.begin(), id.end(), isspace))
+	if(id.empty())
 	{
-		_throwRuntimeError("ID cannot contain any spaces");
+		_throwRuntimeError("ID cannot be empty");
 		return false;
 	}
 
-	if(!all_of(id.begin(), id.end(), isalnum))
+	if(any_of(id.begin(), id.end(), isspace))
 	{
-		_throwRuntimeError("ID cannot contain any specials");
+		_throwRuntimeError("ID cannot contain any spaces");
 		return false;
 	}
 

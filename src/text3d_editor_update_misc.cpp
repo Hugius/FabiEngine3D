@@ -72,7 +72,7 @@ void Text3dEditor::_updateText3dCreating()
 	{
 		string newTextId;
 
-		if(_gui->getOverlay()->checkValueForm("text3dCreate", newTextId, {_currentTextId}))
+		//if(_gui->getOverlay()->checkValueForm("text3dCreate", newTextId, {_currentTextId}))
 		{
 			if(newTextId.empty())
 			{
@@ -83,12 +83,6 @@ void Text3dEditor::_updateText3dCreating()
 			if(any_of(newTextId.begin(), newTextId.end(), isspace))
 			{
 				Logger::throwWarning("Text ID cannot contain any spaces");
-				return;
-			}
-
-			if(!all_of(newTextId.begin(), newTextId.end(), isalnum))
-			{
-				Logger::throwWarning("Text ID cannot contain any specials");
 				return;
 			}
 
@@ -159,13 +153,13 @@ void Text3dEditor::_updateText3dChoosing()
 {
 	if(_isChoosingText3d)
 	{
-		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("text3dList");
+		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
 
-		if(!selectedButtonId.empty())
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredTextId.empty())
 			{
-				_hoveredTextId = ("@" + selectedButtonId);
+				_hoveredTextId = ("@" + selectedOptionId);
 				_fe3d->text3d_setVisible(_hoveredTextId, true);
 			}
 
@@ -174,7 +168,11 @@ void Text3dEditor::_updateText3dChoosing()
 				_currentTextId = _hoveredTextId;
 				_hoveredTextId = "";
 
-				if(!_isDeletingText3d)
+				if(_isDeletingText3d)
+				{
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+				}
+				else
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
 
@@ -183,13 +181,13 @@ void Text3dEditor::_updateText3dChoosing()
 				}
 
 				_fe3d->text3d_setVisible(_currentTextId, true);
-				_gui->getOverlay()->closeChoiceForm("text3dList");
+				_gui->getOverlay()->closeChoiceForm();
 				_isChoosingText3d = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("text3dList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm("text3dList");
+			_gui->getOverlay()->closeChoiceForm();
 			_isChoosingText3d = false;
 			_isDeletingText3d = false;
 		}
@@ -206,27 +204,26 @@ void Text3dEditor::_updateText3dChoosing()
 
 void Text3dEditor::_updateText3dDeleting()
 {
-	if(_isDeletingText3d && !_currentTextId.empty())
+	if(_isDeletingText3d && !_isChoosingText3d)
 	{
-		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
-		{
-			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
-		}
-
-		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted())
 		{
 			_fe3d->text3d_delete(_currentTextId);
 
 			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentTextId), _loadedEntityIds.end());
 			_currentTextId = "";
 			_isDeletingText3d = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui->getOverlay()->isAnswerFormDenied())
 		{
 			_fe3d->text3d_setVisible(_currentTextId, false);
 
 			_currentTextId = "";
 			_isDeletingText3d = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
 	}
 }

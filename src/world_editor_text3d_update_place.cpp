@@ -8,9 +8,9 @@ void WorldEditor::_updateText3dPlacing()
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
 			auto newPosition = _fe3d->text3d_getPosition(_currentTemplateTextId);
-			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
+			//_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			//_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			//_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 			_fe3d->text3d_setPosition(_currentTemplateTextId, newPosition);
 
 			if(_gui->getOverlay()->isValueFormConfirmed())

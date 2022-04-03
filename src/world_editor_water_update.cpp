@@ -39,18 +39,18 @@ void WorldEditor::_updateWaterMenu()
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("waterList");
-			if(!selectedButtonId.empty())
+			const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+			if(!selectedOptionId.empty())
 			{
-				_worldUtilities->copyTemplateWater(selectedButtonId, ("@" + selectedButtonId));
+				_worldUtilities->copyTemplateWater(selectedOptionId, ("@" + selectedOptionId));
 
-				_fe3d->water_select(selectedButtonId);
+				_fe3d->water_select(selectedOptionId);
 
-				_gui->getOverlay()->closeChoiceForm("waterList");
+				_gui->getOverlay()->closeChoiceForm();
 			}
-			else if(_gui->getOverlay()->isChoiceFormCancelled("waterList"))
+			else if(_gui->getOverlay()->isChoiceFormCancelled())
 			{
-				_gui->getOverlay()->closeChoiceForm("waterList");
+				_gui->getOverlay()->closeChoiceForm();
 			}
 		}
 

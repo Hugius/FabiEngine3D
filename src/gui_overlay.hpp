@@ -30,7 +30,7 @@ public:
 	void deleteQuadFields();
 	void deleteTextFields();
 	void openChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles);
-	void openValueForm(const string & id, const string & title, const string & value, const fvec2 & position, const fvec2 & size, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
+	void openValueForm(const string & id, const string & title, const string & value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
 	void openAnswerForm(const string & id, const string & title, const fvec2 & position);
 	void closeChoiceForm();
 	void closeValueForm();
@@ -48,8 +48,19 @@ public:
 	const shared_ptr<GuiQuadField> getQuadField(const string & id) const;
 	const shared_ptr<GuiTextField> getTextField(const string & id) const;
 
+	const string getChoiceFormId() const;
+	const string getValueFormId() const;
+	const string getAnswerFormId() const;
 	const string getSelectedChoiceFormOptionId() const;
-	const string getValueFormContent() const;
+	const string getValueFormString() const;
+
+	const double getValueFormDouble() const;
+
+	const float getValueFormFloat() const;
+
+	const unsigned int getValueFormUnsignedInteger() const;
+
+	const int getValueFormSignedInteger() const;
 
 	const bool isFocused() const;
 	const bool hasScrollingList(const string & id) const;
@@ -57,15 +68,11 @@ public:
 	const bool hasButton(const string & id) const;
 	const bool hasQuadField(const string & id) const;
 	const bool hasTextField(const string & id) const;
-	const bool isValueFormOpen(const string & id) const;
 	const bool isValueFormConfirmed() const;
 	const bool isValueFormCancelled() const;
-	const bool isChoiceFormOpen(const string & id) const;
 	const bool isChoiceFormCancelled() const;
-	const bool isAnswerFormOpen(const string & id) const;
-	const bool isAnswerFormAccepted();
-	const bool isAnswerFormDenied();
-	const bool isAnswerFormCancelled();
+	const bool isAnswerFormAccepted() const;
+	const bool isAnswerFormDenied() const;
 
 private:
 	static inline const fvec3 FORM_TITLE_QUAD_COLOR = fvec3(0.05f);

@@ -99,18 +99,18 @@ void WorldEditor::_updateReflectionEditing()
 				return;
 			}
 
-			auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("exceptionList");
-			if(!selectedButtonId.empty())
+			const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+			if(!selectedOptionId.empty())
 			{
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_fe3d->reflection_setExceptionEntityId(_activeReflectionId, selectedButtonId);
-					_gui->getOverlay()->closeChoiceForm("exceptionList");
+					_fe3d->reflection_setExceptionEntityId(_activeReflectionId, selectedOptionId);
+					_gui->getOverlay()->closeChoiceForm();
 				}
 			}
-			else if(_gui->getOverlay()->isChoiceFormCancelled("exceptionList"))
+			else if(_gui->getOverlay()->isChoiceFormCancelled())
 			{
-				_gui->getOverlay()->closeChoiceForm("exceptionList");
+				_gui->getOverlay()->closeChoiceForm();
 			}
 
 			auto position = _fe3d->reflection_getPosition(_activeReflectionId);

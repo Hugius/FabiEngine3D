@@ -100,84 +100,85 @@ void ModelEditor::_updateModelCreating()
 	{
 		string newModelId;
 
-		if(_gui->getOverlay()->checkValueForm("modelCreate", newModelId, {}))
+		if(_gui->getOverlay()->getValueFormId() == "modelCreate")
 		{
-			if(newModelId.empty())
+			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				Logger::throwWarning("Model ID cannot be empty");
-				return;
+				if(newModelId.empty())
+				{
+					Logger::throwWarning("Model ID cannot be empty");
+					return;
+				}
+
+				if(any_of(newModelId.begin(), newModelId.end(), isspace))
+				{
+					Logger::throwWarning("Model ID cannot contain any spaces");
+					return;
+				}
+
+				if(any_of(newModelId.begin(), newModelId.end(), isupper))
+				{
+					Logger::throwWarning("Model ID cannot contain any capitals");
+					return;
+				}
+
+				newModelId = ("@" + newModelId);
+
+				if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newModelId) != _loadedEntityIds.end())
+				{
+					Logger::throwWarning("Model already exists");
+					return;
+				}
+
+				if(getCurrentProjectId().empty())
+				{
+					abort();
+				}
+
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\mesh\\");
+
+				if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+				{
+					Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+					_isCreatingModel = false;
+					return;
+				}
+
+				const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "OBJ");
+				if(filePath.empty())
+				{
+					_isCreatingModel = false;
+					return;
+				}
+
+				if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+					_isCreatingModel = false;
+					return;
+				}
+
+				const string finalFilePath = filePath.substr(rootPath.size());
+				_fe3d->misc_clearMeshCache(finalFilePath);
+
+				_fe3d->model_create(newModelId, finalFilePath);
+
+				if(_fe3d->model_isExisting(newModelId))
+				{
+					_currentModelId = newModelId;
+					_loadedEntityIds.push_back(newModelId);
+					sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+					_gui->getOverlay()->getTextField("modelId")->setTextContent("Model: " + newModelId.substr(1));
+					_gui->getOverlay()->getTextField("modelId")->setVisible(true);
+					_isCreatingModel = false;
+				}
 			}
-
-			if(any_of(newModelId.begin(), newModelId.end(), isspace))
+			if(_gui->getOverlay()->isValueFormCancelled())
 			{
-				Logger::throwWarning("Model ID cannot contain any spaces");
-				return;
-			}
-
-			if(!all_of(newModelId.begin(), newModelId.end(), isalnum))
-			{
-				Logger::throwWarning("Model ID cannot contain any specials");
-				return;
-			}
-
-			if(any_of(newModelId.begin(), newModelId.end(), isupper))
-			{
-				Logger::throwWarning("Model ID cannot contain any capitals");
-				return;
-			}
-
-			newModelId = ("@" + newModelId);
-
-			if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newModelId) != _loadedEntityIds.end())
-			{
-				Logger::throwWarning("Model already exists");
-				return;
-			}
-
-			if(getCurrentProjectId().empty())
-			{
-				abort();
-			}
-
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\mesh\\");
-
-			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
-			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
-				_isCreatingModel = false;
-				return;
-			}
-
-			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "OBJ");
-			if(filePath.empty())
-			{
-				_isCreatingModel = false;
-				return;
-			}
-
-			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
-			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
-				_isCreatingModel = false;
-				return;
-			}
-
-			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d->misc_clearMeshCache(finalFilePath);
-
-			_fe3d->model_create(newModelId, finalFilePath);
-
-			if(_fe3d->model_isExisting(newModelId))
-			{
-				_currentModelId = newModelId;
-				_loadedEntityIds.push_back(newModelId);
-				sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
-
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-				_gui->getOverlay()->getTextField("modelId")->setTextContent("Model: " + newModelId.substr(1));
-				_gui->getOverlay()->getTextField("modelId")->setVisible(true);
-				_isCreatingModel = false;
+				_gui->getOverlay()->closeValueForm();
 			}
 		}
 	}
@@ -187,13 +188,13 @@ void ModelEditor::_updateModelChoosing()
 {
 	if(_isChoosingModel)
 	{
-		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("modelList");
+		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
 
-		if(!selectedButtonId.empty())
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredModelId.empty())
 			{
-				_hoveredModelId = ("@" + selectedButtonId);
+				_hoveredModelId = ("@" + selectedOptionId);
 				_fe3d->model_setVisible(_hoveredModelId, true);
 			}
 
@@ -201,8 +202,13 @@ void ModelEditor::_updateModelChoosing()
 			{
 				_currentModelId = _hoveredModelId;
 				_hoveredModelId = "";
+				_isChoosingModel = false;
 
-				if(!_isDeletingModel)
+				if(_isDeletingModel)
+				{
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+				}
+				else
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
@@ -210,15 +216,15 @@ void ModelEditor::_updateModelChoosing()
 					_gui->getOverlay()->getTextField("modelId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->closeChoiceForm("modelList");
-				_isChoosingModel = false;
+				_gui->getOverlay()->closeChoiceForm();
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("modelList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm("modelList");
 			_isChoosingModel = false;
 			_isDeletingModel = false;
+
+			_gui->getOverlay()->closeChoiceForm();
 		}
 		else
 		{
@@ -233,27 +239,26 @@ void ModelEditor::_updateModelChoosing()
 
 void ModelEditor::_updateModelDeleting()
 {
-	if(_isDeletingModel && !_currentModelId.empty())
+	if(_isDeletingModel && !_isChoosingModel)
 	{
-		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
-		{
-			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
-		}
-
-		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted())
 		{
 			_fe3d->model_delete(_currentModelId);
 
 			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentModelId), _loadedEntityIds.end());
 			_currentModelId = "";
 			_isDeletingModel = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui->getOverlay()->isAnswerFormDenied())
 		{
 			_fe3d->model_setVisible(_currentModelId, false);
 
 			_currentModelId = "";
 			_isDeletingModel = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
 	}
 }
@@ -262,13 +267,13 @@ void ModelEditor::_updatePartChoosing()
 {
 	if(_isChoosingPart)
 	{
-		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("partList");
+		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
 
-		if(!selectedButtonId.empty())
+		if(!selectedOptionId.empty())
 		{
 			if(_hoveredPartId.empty())
 			{
-				_hoveredPartId = selectedButtonId;
+				_hoveredPartId = selectedOptionId;
 				_originalPartOpacity = _fe3d->model_getOpacity(_currentModelId, _hoveredPartId);
 			}
 
@@ -276,15 +281,16 @@ void ModelEditor::_updatePartChoosing()
 			{
 				_currentPartId = _hoveredPartId;
 				_hoveredPartId = "";
-
-				_gui->getOverlay()->closeChoiceForm("partList");
 				_isChoosingPart = false;
+
+				_gui->getOverlay()->closeChoiceForm();
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("partList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm("partList");
 			_isChoosingPart = false;
+
+			_gui->getOverlay()->closeChoiceForm();
 		}
 		else
 		{

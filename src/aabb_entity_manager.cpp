@@ -1,6 +1,6 @@
 #include "aabb_entity_manager.hpp"
 #include "render_storage.hpp"
-#include "logger.hpp" 
+#include "logger.hpp"
 #include "tools.hpp"
 
 using std::make_shared;
@@ -72,7 +72,7 @@ void AabbEntityManager::inject(shared_ptr<Text3dEntityManager> text3dEntityManag
 	_text3dEntityManager = text3dEntityManager;
 }
 
-const shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& id) const
+const shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string & id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -84,12 +84,12 @@ const shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& id) cons
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<AabbEntity>>& AabbEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<AabbEntity>> & AabbEntityManager::getEntities() const
 {
 	return _entities;
 }
 
-void AabbEntityManager::createEntity(const string& id, bool isCentered)
+void AabbEntityManager::createEntity(const string & id, bool isCentered)
 {
 	if(isEntityExisting(id))
 	{
@@ -107,7 +107,7 @@ void AabbEntityManager::createEntity(const string& id, bool isCentered)
 
 void AabbEntityManager::update()
 {
-	for(const auto& [key, entity] : _entities)
+	for(const auto & [key, entity] : _entities)
 	{
 		if(entity->hasParent())
 		{
@@ -378,7 +378,7 @@ void AabbEntityManager::update()
 	}
 }
 
-void AabbEntityManager::deleteEntity(const string& id)
+void AabbEntityManager::deleteEntity(const string & id)
 {
 	if(!isEntityExisting(id))
 	{
@@ -393,7 +393,7 @@ void AabbEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool AabbEntityManager::isEntityExisting(const string& id) const
+const bool AabbEntityManager::isEntityExisting(const string & id) const
 {
 	return (_entities.find(id) != _entities.end());
 }

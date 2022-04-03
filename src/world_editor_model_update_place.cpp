@@ -9,9 +9,9 @@ void WorldEditor::_updateModelPlacing()
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
 			auto newPosition = _fe3d->model_getBasePosition(_currentTemplateModelId);
-			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
+			//_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			//_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			//_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 			_fe3d->model_setBasePosition(_currentTemplateModelId, newPosition);
 
 			if(_gui->getOverlay()->isValueFormConfirmed())

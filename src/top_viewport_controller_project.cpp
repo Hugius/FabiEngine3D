@@ -11,7 +11,7 @@ void TopViewportController::_updateProjectCreating()
 	{
 		string newProjectId;
 
-		if(_gui->getOverlay()->checkValueForm("newProjectId", newProjectId))
+		//if(_gui->getOverlay()->checkValueForm("newProjectId", newProjectId))
 		{
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string projectDirectoryPath = (rootPath + "projects\\");
@@ -32,12 +32,6 @@ void TopViewportController::_updateProjectCreating()
 			if(any_of(newProjectId.begin(), newProjectId.end(), isspace))
 			{
 				Logger::throwWarning("Project ID cannot contain any spaces");
-				return;
-			}
-
-			if(!all_of(newProjectId.begin(), newProjectId.end(), isalnum))
-			{
-				Logger::throwWarning("Project ID cannot contain any specials");
 				return;
 			}
 
@@ -132,17 +126,17 @@ void TopViewportController::_updateProjectLoading()
 	if(_isLoadingProject)
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const string clickedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("projectList");
-		const string projectDirectoryPath = (rootPath + "projects\\" + clickedButtonId + "\\");
+		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto projectDirectoryPath = (rootPath + "projects\\" + selectedOptionId + "\\");
 
-		if(!clickedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(!selectedOptionId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if(isProjectCorrupted(projectDirectoryPath))
 			{
 				return;
 			}
 
-			_currentProjectId = clickedButtonId;
+			_currentProjectId = selectedOptionId;
 			_applyProjectChange();
 
 			auto skyImagePaths = _skyEditor->getImagePathsFromFile();
@@ -173,12 +167,12 @@ void TopViewportController::_updateProjectLoading()
 
 			Logger::throwInfo("Project \"" + _currentProjectId + "\" loaded");
 
-			_gui->getOverlay()->closeChoiceForm("projectList");
+			_gui->getOverlay()->closeChoiceForm();
 			_isLoadingProject = false;
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("projectList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm("projectList");
+			_gui->getOverlay()->closeChoiceForm();
 			_isLoadingProject = false;
 		}
 	}
@@ -189,21 +183,21 @@ void TopViewportController::_updateProjectDeleting()
 	if(_isDeletingProject)
 	{
 		static string chosenButtonId = "";
-		string clickedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("projectList");
+		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
 
-		if(!clickedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(!selectedOptionId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
-			chosenButtonId = clickedButtonId;
-			_gui->getOverlay()->closeChoiceForm("projectList");
+			chosenButtonId = selectedOptionId;
+			_gui->getOverlay()->closeChoiceForm();
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("projectList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm("projectList");
+			_gui->getOverlay()->closeChoiceForm();
 			_isDeletingProject = false;
 		}
 
-		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted())
 		{
 			if(chosenButtonId == _currentProjectId)
 			{
@@ -231,7 +225,7 @@ void TopViewportController::_updateProjectDeleting()
 			_isDeletingProject = false;
 			chosenButtonId = "";
 		}
-		else if(_gui->getOverlay()->isAnswerFormDenied("delete"))
+		else if(_gui->getOverlay()->isAnswerFormDenied())
 		{
 			_isDeletingProject = false;
 			chosenButtonId = "";

@@ -18,7 +18,7 @@ void WorldEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("worldCreate", "Create World", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			//_gui->getOverlay()->openValueForm("worldCreate", "Create World", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isCreatingWorld = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -95,41 +95,46 @@ void WorldEditor::_updateChoiceMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettings");
 		}
 
-		if(_gui->getOverlay()->isAnswerFormAccepted("back"))
+		if(_gui->getOverlay()->getAnswerFormId() == "back")
 		{
-			_currentTemplateModelId = "";
-			_currentTemplateQuadId = "";
-			_currentTemplateTextId = "";
-			_currentTemplateSoundId = "";
-			_isPlacingPointlight = false;
-			_isPlacingSpotlight = false;
-			_isPlacingReflection = false;
+			if(_gui->getOverlay()->isAnswerFormAccepted())
+			{
+				_currentTemplateModelId = "";
+				_currentTemplateQuadId = "";
+				_currentTemplateTextId = "";
+				_currentTemplateSoundId = "";
+				_isPlacingPointlight = false;
+				_isPlacingSpotlight = false;
+				_isPlacingReflection = false;
 
-			saveWorldToFile();
+				saveWorldToFile();
 
-			clearLoadedWorld();
+				clearLoadedWorld();
 
-			_currentWorldId = "";
+				_currentWorldId = "";
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
-			return;
-		}
-		if(_gui->getOverlay()->isAnswerFormDenied("back"))
-		{
-			_currentTemplateModelId = "";
-			_currentTemplateQuadId = "";
-			_currentTemplateTextId = "";
-			_currentTemplateSoundId = "";
-			_isPlacingPointlight = false;
-			_isPlacingSpotlight = false;
-			_isPlacingReflection = false;
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 
-			clearLoadedWorld();
+				_gui->getOverlay()->closeAnswerForm();
+			}
+			if(_gui->getOverlay()->isAnswerFormDenied())
+			{
+				_currentTemplateModelId = "";
+				_currentTemplateQuadId = "";
+				_currentTemplateTextId = "";
+				_currentTemplateSoundId = "";
+				_isPlacingPointlight = false;
+				_isPlacingSpotlight = false;
+				_isPlacingReflection = false;
 
-			_currentWorldId = "";
+				clearLoadedWorld();
 
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
-			return;
+				_currentWorldId = "";
+
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
+
+				_gui->getOverlay()->closeAnswerForm();
+			}
 		}
 	}
 }

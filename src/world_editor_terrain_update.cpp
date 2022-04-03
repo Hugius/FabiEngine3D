@@ -31,18 +31,18 @@ void WorldEditor::_updateTerrainMenu()
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("terrainList");
-			if(!selectedButtonId.empty())
+			const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+			if(!selectedOptionId.empty())
 			{
-				_worldUtilities->copyTemplateTerrain(selectedButtonId, ("@" + selectedButtonId));
+				_worldUtilities->copyTemplateTerrain(selectedOptionId, ("@" + selectedOptionId));
 
-				_fe3d->terrain_select(selectedButtonId);
+				_fe3d->terrain_select(selectedOptionId);
 
-				_gui->getOverlay()->closeChoiceForm("terrainList");
+				_gui->getOverlay()->closeChoiceForm();
 			}
-			else if(_gui->getOverlay()->isChoiceFormCancelled("terrainList"))
+			else if(_gui->getOverlay()->isChoiceFormCancelled())
 			{
-				_gui->getOverlay()->closeChoiceForm("terrainList");
+				_gui->getOverlay()->closeChoiceForm();
 			}
 		}
 

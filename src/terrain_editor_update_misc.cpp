@@ -55,7 +55,7 @@ void TerrainEditor::_updateTerrainCreating()
 	{
 		string newTerrainId;
 
-		if(_gui->getOverlay()->checkValueForm("terrainCreate", newTerrainId, {}))
+		//if(_gui->getOverlay()->checkValueForm("terrainCreate", newTerrainId, {}))
 		{
 			if(newTerrainId.empty())
 			{
@@ -66,12 +66,6 @@ void TerrainEditor::_updateTerrainCreating()
 			if(any_of(newTerrainId.begin(), newTerrainId.end(), isspace))
 			{
 				Logger::throwWarning("Terrain ID cannot contain any spaces");
-				return;
-			}
-
-			if(!all_of(newTerrainId.begin(), newTerrainId.end(), isalnum))
-			{
-				Logger::throwWarning("Terrain ID cannot contain any specials");
 				return;
 			}
 
@@ -144,17 +138,21 @@ void TerrainEditor::_updateTerrainChoosing()
 {
 	if(_isChoosingTerrain)
 	{
-		auto selectedButtonId = _gui->getOverlay()->getSelectedChoiceFormOptionId("terrainList");
+		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
 
-		if(!selectedButtonId.empty())
+		if(!selectedOptionId.empty())
 		{
-			_fe3d->terrain_select("@" + selectedButtonId);
+			_fe3d->terrain_select("@" + selectedOptionId);
 
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentTerrainId = _fe3d->terrain_getSelectedId();
 
-				if(!_isDeletingTerrain)
+				if(_isDeletingTerrain)
+				{
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+				}
+				else
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 
@@ -162,13 +160,13 @@ void TerrainEditor::_updateTerrainChoosing()
 					_gui->getOverlay()->getTextField("terrainId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->closeChoiceForm("terrainList");
+				_gui->getOverlay()->closeChoiceForm();
 				_isChoosingTerrain = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled("terrainList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm("terrainList");
+			_gui->getOverlay()->closeChoiceForm();
 			_isChoosingTerrain = false;
 			_isDeletingTerrain = false;
 		}
@@ -181,25 +179,24 @@ void TerrainEditor::_updateTerrainChoosing()
 
 void TerrainEditor::_updateTerrainDeleting()
 {
-	if(_isDeletingTerrain && !_currentTerrainId.empty())
+	if(_isDeletingTerrain && !_isChoosingTerrain)
 	{
-		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
-		{
-			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
-		}
-
-		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
+		if(_gui->getOverlay()->isAnswerFormAccepted())
 		{
 			_fe3d->terrain_delete(_currentTerrainId);
 
 			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentTerrainId), _loadedEntityIds.end());
 			_currentTerrainId = "";
 			_isDeletingTerrain = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui->getOverlay()->isAnswerFormDenied())
 		{
 			_currentTerrainId = "";
 			_isDeletingTerrain = false;
+
+			_gui->getOverlay()->closeAnswerForm();
 		}
 	}
 }

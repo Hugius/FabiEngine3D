@@ -8,11 +8,11 @@ void ModelEditor::_updateMainMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->enableAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->enableValueForm("modelCreate", "Create Model", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("modelCreate", "Create Model", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingModel = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -22,7 +22,7 @@ void ModelEditor::_updateMainMenu()
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->enableChoiceForm("modelList", "Edit Model", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("modelList", "Edit Model", fvec2(-0.5f, 0.1f), ids);
 			_isChoosingModel = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -32,7 +32,7 @@ void ModelEditor::_updateMainMenu()
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->enableChoiceForm("modelList", "Delete Model", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("modelList", "Delete Model", fvec2(-0.5f, 0.1f), ids);
 			_isChoosingModel = true;
 			_isDeletingModel = true;
 		}
@@ -84,7 +84,7 @@ void ModelEditor::_updateChoiceMenu()
 			{
 				auto ids = _fe3d->model_getPartIds(_currentModelId);
 				sort(ids.begin(), ids.end());
-				_gui->getOverlay()->enableChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), ids);
+				_gui->getOverlay()->openChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), ids);
 				_isChoosingPart = true;
 			}
 			else

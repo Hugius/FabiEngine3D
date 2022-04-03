@@ -29,12 +29,12 @@ public:
 	void deleteButtons();
 	void deleteQuadFields();
 	void deleteTextFields();
-	void enableChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles);
-	void enableValueForm(const string & id, const string & title, const string & value, const fvec2 & position, const fvec2 & size, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
-	void enableAnswerForm(const string & id, const string & title, const fvec2 & position);
-	void disableChoiceForm();
-	void disableValueForm();
-	void disableAnswerForm();
+	void openChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles);
+	void openValueForm(const string & id, const string & title, const string & value, const fvec2 & position, const fvec2 & size, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
+	void openAnswerForm(const string & id, const string & title, const fvec2 & position);
+	void closeChoiceForm();
+	void closeValueForm();
+	void closeAnswerForm();
 
 	const unordered_map<string, shared_ptr<GuiScrollingList>> & getScrollingLists() const;
 	const unordered_map<string, shared_ptr<GuiInputBox>> & getInputBoxes() const;
@@ -57,14 +57,15 @@ public:
 	const bool hasButton(const string & id) const;
 	const bool hasQuadField(const string & id) const;
 	const bool hasTextField(const string & id) const;
-	const bool isValueFormActive(const string & id) const;
+	const bool isValueFormOpen(const string & id) const;
 	const bool isValueFormConfirmed() const;
 	const bool isValueFormCancelled() const;
-	const bool isChoiceFormActive(const string & id) const;
+	const bool isChoiceFormOpen(const string & id) const;
 	const bool isChoiceFormCancelled() const;
-	const bool isAnswerFormActive(const string & id) const;
+	const bool isAnswerFormOpen(const string & id) const;
 	const bool isAnswerFormAccepted();
 	const bool isAnswerFormDenied();
+	const bool isAnswerFormCancelled();
 
 private:
 	static inline const fvec3 FORM_TITLE_QUAD_COLOR = fvec3(0.05f);
@@ -78,9 +79,9 @@ private:
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 
-	string _activeChoiceFormId = "";
-	string _activeValueFormId = "";
-	string _activeAnswerFormId = "";
+	string _choiceFormId = "";
+	string _valueFormId = "";
+	string _answerFormId = "";
 
 	bool _isFocused = false;
 };

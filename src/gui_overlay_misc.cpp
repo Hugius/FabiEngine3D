@@ -21,8 +21,6 @@ void GuiOverlay::update()
 	{
 		button->update(true);
 	}
-
-	_updateValueFormDeleting();
 }
 
 void GuiOverlay::setFocused(bool value)

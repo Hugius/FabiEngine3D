@@ -210,13 +210,13 @@ void ModelEditor::_updateModelChoosing()
 					_gui->getOverlay()->getTextField("modelId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->disableChoiceForm("modelList");
+				_gui->getOverlay()->closeChoiceForm("modelList");
 				_isChoosingModel = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("modelList"))
 		{
-			_gui->getOverlay()->disableChoiceForm("modelList");
+			_gui->getOverlay()->closeChoiceForm("modelList");
 			_isChoosingModel = false;
 			_isDeletingModel = false;
 		}
@@ -235,9 +235,9 @@ void ModelEditor::_updateModelDeleting()
 {
 	if(_isDeletingModel && !_currentModelId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
+		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
 		{
-			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
@@ -277,13 +277,13 @@ void ModelEditor::_updatePartChoosing()
 				_currentPartId = _hoveredPartId;
 				_hoveredPartId = "";
 
-				_gui->getOverlay()->disableChoiceForm("partList");
+				_gui->getOverlay()->closeChoiceForm("partList");
 				_isChoosingPart = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("partList"))
 		{
-			_gui->getOverlay()->disableChoiceForm("partList");
+			_gui->getOverlay()->closeChoiceForm("partList");
 			_isChoosingPart = false;
 		}
 		else

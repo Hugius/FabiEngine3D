@@ -136,13 +136,13 @@ void Text2dEditor::_updateTextChoosing()
 				}
 
 				_fe3d->text2d_setVisible(_currentTextId, true);
-				_gui->getOverlay()->disableChoiceForm("textList");
+				_gui->getOverlay()->closeChoiceForm("textList");
 				_isChoosingText = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("textList"))
 		{
-			_gui->getOverlay()->disableChoiceForm("textList");
+			_gui->getOverlay()->closeChoiceForm("textList");
 			_isChoosingText = false;
 			_isDeletingText = false;
 		}
@@ -161,9 +161,9 @@ void Text2dEditor::_updateTextDeleting()
 {
 	if(_isDeletingText && !_currentTextId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
+		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
 		{
-			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))

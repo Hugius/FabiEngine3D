@@ -173,12 +173,12 @@ void TopViewportController::_updateProjectLoading()
 
 			Logger::throwInfo("Project \"" + _currentProjectId + "\" loaded");
 
-			_gui->getOverlay()->disableChoiceForm("projectList");
+			_gui->getOverlay()->closeChoiceForm("projectList");
 			_isLoadingProject = false;
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("projectList"))
 		{
-			_gui->getOverlay()->disableChoiceForm("projectList");
+			_gui->getOverlay()->closeChoiceForm("projectList");
 			_isLoadingProject = false;
 		}
 	}
@@ -193,13 +193,13 @@ void TopViewportController::_updateProjectDeleting()
 
 		if(!clickedButtonId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 			chosenButtonId = clickedButtonId;
-			_gui->getOverlay()->disableChoiceForm("projectList");
+			_gui->getOverlay()->closeChoiceForm("projectList");
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("projectList"))
 		{
-			_gui->getOverlay()->disableChoiceForm("projectList");
+			_gui->getOverlay()->closeChoiceForm("projectList");
 			_isDeletingProject = false;
 		}
 

@@ -11,11 +11,11 @@ void Animation3dEditor::_updateMainMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->enableAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->enableValueForm("animationCreate", "Create Animation", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("animationCreate", "Create Animation", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingAnimation = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -26,7 +26,7 @@ void Animation3dEditor::_updateMainMenu()
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->enableChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), ids);
 			_isChoosingAnimation = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -37,7 +37,7 @@ void Animation3dEditor::_updateMainMenu()
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->enableChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), ids);
 			_isChoosingAnimation = true;
 			_isDeletingAnimation = true;
 		}
@@ -115,7 +115,7 @@ void Animation3dEditor::_updateChoiceMenu()
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->enableChoiceForm("modelList", "Select Model", fvec2(-0.5f, 0.1f), modelIds);
+			_gui->getOverlay()->openChoiceForm("modelList", "Select Model", fvec2(-0.5f, 0.1f), modelIds);
 			_isChoosingModel = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())

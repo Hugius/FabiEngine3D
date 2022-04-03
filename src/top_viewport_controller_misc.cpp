@@ -105,7 +105,7 @@ const bool TopViewportController::_prepareProjectChoosing(const string & title) 
 
 	auto projectIds = Tools::getDirectoryNamesFromDirectory(projectDirectoryPath);
 
-	_gui->getOverlay()->enableChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIds);
+	_gui->getOverlay()->openChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIds);
 
 	return true;
 }

@@ -16,7 +16,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	{
 		if(topScreen->getButton("newProject")->isHovered())
 		{
-			_gui->getOverlay()->enableValueForm("newProjectId", "Create Project", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("newProjectId", "Create Project", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingProject = true;
 		}
 		else if(topScreen->getButton("loadProject")->isHovered())
@@ -41,7 +41,7 @@ void TopViewportController::_updateProjectScreenManagement()
 		{
 			if((!_currentProjectId.empty()) && (leftScreen->getId() != "main") && (leftScreen->getId() != "worldEditorMenuMain"))
 			{
-				_gui->getOverlay()->enableAnswerForm("quit", "Save Changes?", fvec2(0.0f, 0.25f));
+				_gui->getOverlay()->openAnswerForm("quit", "Save Changes?", fvec2(0.0f, 0.25f));
 			}
 			else
 			{

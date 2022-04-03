@@ -22,7 +22,7 @@ void WorldEditor::_updateTerrainMenu()
 				}
 			}
 
-			_gui->getOverlay()->enableChoiceForm("terrainList", "Select Terrain", fvec2(0.0f, 0.1f), terrainIds);
+			_gui->getOverlay()->openChoiceForm("terrainList", "Select Terrain", fvec2(0.0f, 0.1f), terrainIds);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -38,11 +38,11 @@ void WorldEditor::_updateTerrainMenu()
 
 				_fe3d->terrain_select(selectedButtonId);
 
-				_gui->getOverlay()->disableChoiceForm("terrainList");
+				_gui->getOverlay()->closeChoiceForm("terrainList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("terrainList"))
 			{
-				_gui->getOverlay()->disableChoiceForm("terrainList");
+				_gui->getOverlay()->closeChoiceForm("terrainList");
 			}
 		}
 

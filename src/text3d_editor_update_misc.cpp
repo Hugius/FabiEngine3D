@@ -183,13 +183,13 @@ void Text3dEditor::_updateText3dChoosing()
 				}
 
 				_fe3d->text3d_setVisible(_currentTextId, true);
-				_gui->getOverlay()->disableChoiceForm("text3dList");
+				_gui->getOverlay()->closeChoiceForm("text3dList");
 				_isChoosingText3d = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("text3dList"))
 		{
-			_gui->getOverlay()->disableChoiceForm("text3dList");
+			_gui->getOverlay()->closeChoiceForm("text3dList");
 			_isChoosingText3d = false;
 			_isDeletingText3d = false;
 		}
@@ -208,9 +208,9 @@ void Text3dEditor::_updateText3dDeleting()
 {
 	if(_isDeletingText3d && !_currentTextId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
+		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
 		{
-			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))

@@ -22,7 +22,7 @@ void WorldEditor::_updateSkyMenu()
 				}
 			}
 
-			_gui->getOverlay()->enableChoiceForm("skyList", "Select Sky", fvec2(0.0f, 0.1f), skyIds);
+			_gui->getOverlay()->openChoiceForm("skyList", "Select Sky", fvec2(0.0f, 0.1f), skyIds);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -39,11 +39,11 @@ void WorldEditor::_updateSkyMenu()
 
 				_fe3d->sky_select(selectedButtonId);
 
-				_gui->getOverlay()->disableChoiceForm("skyList");
+				_gui->getOverlay()->closeChoiceForm("skyList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("skyList"))
 			{
-				_gui->getOverlay()->disableChoiceForm("skyList");
+				_gui->getOverlay()->closeChoiceForm("skyList");
 			}
 		}
 

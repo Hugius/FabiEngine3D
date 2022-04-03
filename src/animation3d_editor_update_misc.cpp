@@ -247,13 +247,13 @@ void Animation3dEditor::_updateAnimationChoosing()
 					_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
 				}
 
-				_gui->getOverlay()->disableChoiceForm("animationList");
+				_gui->getOverlay()->closeChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 		{
-			_gui->getOverlay()->disableChoiceForm("animationList");
+			_gui->getOverlay()->closeChoiceForm("animationList");
 			_isChoosingAnimation = false;
 			_isDeletingAnimation = false;
 		}
@@ -264,9 +264,9 @@ void Animation3dEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && !_currentAnimationId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
+		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
 		{
-			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))
@@ -331,7 +331,7 @@ void Animation3dEditor::_updateModelChoosing()
 					_fe3d->animation3d_createFrame(_currentAnimationId, 0);
 				}
 
-				_gui->getOverlay()->disableChoiceForm("modelList");
+				_gui->getOverlay()->closeChoiceForm("modelList");
 				_hoveredModelId = "";
 				_isChoosingModel = false;
 			}
@@ -343,7 +343,7 @@ void Animation3dEditor::_updateModelChoosing()
 				_fe3d->model_setVisible(_previewModelId, true);
 			}
 
-			_gui->getOverlay()->disableChoiceForm("modelList");
+			_gui->getOverlay()->closeChoiceForm("modelList");
 			_isChoosingModel = false;
 		}
 		else
@@ -375,13 +375,13 @@ void Animation3dEditor::_updatePartChoosing()
 			{
 				_currentPartId = _hoveredPartId;
 				_hoveredPartId = "";
-				_gui->getOverlay()->disableChoiceForm("partList");
+				_gui->getOverlay()->closeChoiceForm("partList");
 				_isChoosingPart = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("partList"))
 		{
-			_gui->getOverlay()->disableChoiceForm("partList");
+			_gui->getOverlay()->closeChoiceForm("partList");
 			_isChoosingPart = false;
 		}
 		else

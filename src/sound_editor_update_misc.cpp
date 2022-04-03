@@ -136,13 +136,13 @@ void SoundEditor::_updateSoundChoosing()
 					_gui->getOverlay()->getTextField("soundId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->disableChoiceForm("soundList");
+				_gui->getOverlay()->closeChoiceForm("soundList");
 				_isChoosingSound = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("soundList"))
 		{
-			_gui->getOverlay()->disableChoiceForm("soundList");
+			_gui->getOverlay()->closeChoiceForm("soundList");
 			_isChoosingSound = false;
 			_isDeletingSound = false;
 		}
@@ -153,9 +153,9 @@ void SoundEditor::_updateSoundDeleting()
 {
 	if(_isDeletingSound && !_currentSoundId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
+		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
 		{
-			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))

@@ -106,7 +106,7 @@ void WorldEditor::_updateQuad3dEditing()
 						id = id.substr(1);
 					}
 
-					_gui->getOverlay()->enableChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), ids);
+					_gui->getOverlay()->openChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), ids);
 				}
 				else
 				{
@@ -142,12 +142,12 @@ void WorldEditor::_updateQuad3dEditing()
 
 					_fe3d->quad3d_startAnimation(_activeQuadId, ("@" + selectedButtonId), -1);
 
-					_gui->getOverlay()->disableChoiceForm("animationList");
+					_gui->getOverlay()->closeChoiceForm("animationList");
 				}
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 			{
-				_gui->getOverlay()->disableChoiceForm("animationList");
+				_gui->getOverlay()->closeChoiceForm("animationList");
 			}
 
 			auto position = _fe3d->quad3d_getPosition(_activeQuadId);

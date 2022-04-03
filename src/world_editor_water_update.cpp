@@ -22,7 +22,7 @@ void WorldEditor::_updateWaterMenu()
 				}
 			}
 
-			_gui->getOverlay()->enableChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIds);
+			_gui->getOverlay()->openChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIds);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -46,11 +46,11 @@ void WorldEditor::_updateWaterMenu()
 
 				_fe3d->water_select(selectedButtonId);
 
-				_gui->getOverlay()->disableChoiceForm("waterList");
+				_gui->getOverlay()->closeChoiceForm("waterList");
 			}
 			else if(_gui->getOverlay()->isChoiceFormCancelled("waterList"))
 			{
-				_gui->getOverlay()->disableChoiceForm("waterList");
+				_gui->getOverlay()->closeChoiceForm("waterList");
 			}
 		}
 

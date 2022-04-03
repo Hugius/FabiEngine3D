@@ -91,13 +91,13 @@ void Animation2dEditor::_updateAnimationChoosing()
 					_gui->getOverlay()->getTextField("animationId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->disableChoiceForm("animationList");
+				_gui->getOverlay()->closeChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}
 		}
 		else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 		{
-			_gui->getOverlay()->disableChoiceForm("animationList");
+			_gui->getOverlay()->closeChoiceForm("animationList");
 			_isChoosingAnimation = false;
 			_isDeletingAnimation = false;
 		}
@@ -108,9 +108,9 @@ void Animation2dEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && !_currentAnimationId.empty())
 	{
-		if(!_gui->getOverlay()->isAnswerFormActive("delete"))
+		if(!_gui->getOverlay()->isAnswerFormOpen("delete"))
 		{
-			_gui->getOverlay()->enableAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		if(_gui->getOverlay()->isAnswerFormAccepted("delete"))

@@ -17,7 +17,7 @@ void GuiManager::initialize()
 
 void GuiManager::update()
 {
-	_overlay->update();
+	_overlay->update(true);
 
 	_leftViewport->update(!_overlay->isFocused());
 	_rightViewport->update(!_overlay->isFocused());

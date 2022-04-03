@@ -27,14 +27,14 @@ GuiScrollingList::GuiScrollingList(shared_ptr<EngineInterface> fe3d, const strin
 	_quadField = make_shared<GuiQuadField>(_fe3d, "GuiScrollingList", (_parentId + "_" + _id), position, size, "", color, isCentered);
 }
 
-void GuiScrollingList::update(bool isFocused)
+void GuiScrollingList::update(bool isInteractable)
 {
-	_updateHovering(isFocused);
+	_updateHovering(isInteractable);
 	_updateScrolling();
 
 	for(const auto & button : _buttons)
 	{
-		button->update(isFocused);
+		button->update(isInteractable);
 	}
 }
 
@@ -198,25 +198,28 @@ const string GuiScrollingList::getParentId() const
 	return _parentId;
 }
 
-void GuiScrollingList::_updateHovering(bool isFocused)
+void GuiScrollingList::_updateHovering(bool isInteractable)
 {
 	_isHovered = false;
 
-	const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
-	const auto listPosition = getPosition();
-	const auto listSize = getSize();
-
-	if(cursorPosition.x > (listPosition.x - (listSize.x * 0.5f)))
+	if(isVisible())
 	{
-		if(cursorPosition.x < (listPosition.x + (listSize.x * 0.5f)))
+		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+		const auto listPosition = getPosition();
+		const auto listSize = getSize();
+
+		if(cursorPosition.x > (listPosition.x - (listSize.x * 0.5f)))
 		{
-			if(cursorPosition.y > (listPosition.y - (listSize.y * 0.5f)))
+			if(cursorPosition.x < (listPosition.x + (listSize.x * 0.5f)))
 			{
-				if(cursorPosition.y < (listPosition.y + (listSize.y * 0.5f)))
+				if(cursorPosition.y > (listPosition.y - (listSize.y * 0.5f)))
 				{
-					if(isFocused && _isHoverable)
+					if(cursorPosition.y < (listPosition.y + (listSize.y * 0.5f)))
 					{
-						_isHovered = true;
+						if(isInteractable && _isHoverable)
+						{
+							_isHovered = true;
+						}
 					}
 				}
 			}

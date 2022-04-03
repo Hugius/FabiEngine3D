@@ -20,9 +20,9 @@ GuiButton::GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const 
 	_hoveredTextColor = hoveredTextColor;
 }
 
-void GuiButton::update(bool isFocused)
+void GuiButton::update(bool isInteractable)
 {
-	_updateHovering(isFocused);
+	_updateHovering(isInteractable);
 }
 
 void GuiButton::setVisible(bool value)
@@ -31,7 +31,7 @@ void GuiButton::setVisible(bool value)
 	_textField->setVisible(value);
 }
 
-void GuiButton::_updateHovering(bool isFocused)
+void GuiButton::_updateHovering(bool isInteractable)
 {
 	_isHovered = false;
 
@@ -49,7 +49,7 @@ void GuiButton::_updateHovering(bool isFocused)
 				{
 					if(cursorPosition.y < (buttonPosition.y + (buttonSize.y * 0.5f)))
 					{
-						if(isFocused && _isHoverable)
+						if(isInteractable && _isHoverable)
 						{
 							_isHovered = true;
 						}

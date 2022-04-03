@@ -130,7 +130,7 @@ void ScriptEditor::_updateScriptFileChoosing()
 {
 	if(_isChoosingScriptFile)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

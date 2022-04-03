@@ -9,7 +9,7 @@ class GuiButton final
 public:
 	GuiButton(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered);
 
-	void update(bool isFocused);
+	void update(bool isInteractable);
 	void setVisible(bool value);
 	void setHoverable(bool value);
 	void setDefaultQuadColor(const fvec3 & value);
@@ -42,7 +42,7 @@ public:
 	const bool isCentered() const;
 
 private:
-	void _updateHovering(bool isFocused);
+	void _updateHovering(bool isInteractable);
 
 	static inline constexpr float TEXT_WIDTH_MULTIPLIER = 0.9f;
 	static inline constexpr float TEXT_HEIGHT_MULTIPLIER = 0.75f;

@@ -1,6 +1,7 @@
 #include "tools.hpp"
 #include "tools.hpp"
 #include "tools.hpp"
+#include "tools.hpp"
 #include "configuration.hpp"
 #include "logger.hpp"
 
@@ -9,6 +10,7 @@
 #include <direct.h>
 #include <shlobj_core.h>
 
+using std::max;
 using std::to_string;
 using std::filesystem::copy;
 using std::filesystem::copy_file;
@@ -27,7 +29,7 @@ using std::filesystem::directory_iterator;
 using std::filesystem::copy_options;
 using std::error_code;
 
-const vector<string> Tools::getFileNamesFromDirectory(const string& path)
+const vector<string> Tools::getFileNamesFromDirectory(const string & path)
 {
 	error_code error = {};
 	const auto iterator = directory_iterator(path, error);
@@ -38,7 +40,7 @@ const vector<string> Tools::getFileNamesFromDirectory(const string& path)
 	}
 
 	vector<string> fileNames;
-	for(const auto& entry : iterator)
+	for(const auto & entry : iterator)
 	{
 		auto entryPath = entry.path().string();
 
@@ -52,7 +54,7 @@ const vector<string> Tools::getFileNamesFromDirectory(const string& path)
 	return fileNames;
 }
 
-const vector<string> Tools::getDirectoryNamesFromDirectory(const string& path)
+const vector<string> Tools::getDirectoryNamesFromDirectory(const string & path)
 {
 	error_code error = {};
 	const auto iterator = directory_iterator(path, error);
@@ -63,7 +65,7 @@ const vector<string> Tools::getDirectoryNamesFromDirectory(const string& path)
 	}
 
 	vector<string> directoryNames;
-	for(const auto& entry : iterator)
+	for(const auto & entry : iterator)
 	{
 		auto entryPath = entry.path().string();
 
@@ -75,26 +77,6 @@ const vector<string> Tools::getDirectoryNamesFromDirectory(const string& path)
 	}
 
 	return directoryNames;
-}
-
-const string Tools::vec2str(const ivec2& vec)
-{
-	return (to_string(vec.x) + " " + to_string(vec.y));
-}
-
-const string Tools::vec2str(const fvec2& vec)
-{
-	return (to_string(vec.x) + " " + to_string(vec.y));
-}
-
-const string Tools::vec2str(const fvec3& vec)
-{
-	return (to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z));
-}
-
-const string Tools::vec2str(const fvec4& vec)
-{
-	return (to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w));
 }
 
 const string Tools::getRootDirectoryPath()
@@ -123,7 +105,50 @@ const long long Tools::getTimeSinceEpochMS()
 	return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
 }
 
-const string Tools::chooseExplorerFile(const string& startingDirectory, const string& fileType)
+const unsigned int Tools::parseUnsignedInteger(const string & valueString)
+{
+	if(valueString.empty())
+	{
+		abort();
+	}
+
+	for(unsigned int index = 0; index < valueString.size(); index++)
+	{
+		if(!isdigit(valueString[index]))
+		{
+			abort();
+		}
+	}
+
+	return static_cast<unsigned int>(stoi(valueString));
+}
+
+const int Tools::parseSignedInteger(const string & valueString)
+{
+	if(valueString.empty())
+	{
+		abort();
+	}
+
+	unsigned int startingIndex = 0;
+
+	if(valueString[0] == '-')
+	{
+		startingIndex = 1;
+	}
+
+	for(unsigned int index = startingIndex; index < valueString.size(); index++)
+	{
+		if(!isdigit(valueString[index]))
+		{
+			abort();
+		}
+	}
+
+	return stoi(valueString);
+}
+
+const string Tools::chooseExplorerFile(const string & startingDirectory, const string & fileType)
 {
 	string filter = fileType;
 	filter.push_back('\0');
@@ -150,7 +175,7 @@ const string Tools::chooseExplorerFile(const string& startingDirectory, const st
 	return ofn.lpstrFile;
 }
 
-const string Tools::chooseExplorerDirectory(const string& startingDirectory)
+const string Tools::chooseExplorerDirectory(const string & startingDirectory)
 {
 	BROWSEINFO browseInfo = {};
 	browseInfo.ulFlags = (BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE);
@@ -164,7 +189,7 @@ const string Tools::chooseExplorerDirectory(const string& startingDirectory)
 		char directoryPath[MAX_PATH];
 		SHGetPathFromIDList(pidl, directoryPath);
 
-		IMalloc* imalloc = 0;
+		IMalloc * imalloc = 0;
 		if(SUCCEEDED(SHGetMalloc(&imalloc)))
 		{
 			imalloc->Free(pidl);
@@ -177,12 +202,12 @@ const string Tools::chooseExplorerDirectory(const string& startingDirectory)
 	return "";
 }
 
-const string Tools::mergeStrings(const string& firstString, const string& secondString, char delimiter)
+const string Tools::mergeStrings(const string & firstString, const string & secondString, char delimiter)
 {
 	return (firstString + delimiter + secondString);
 }
 
-const string Tools::mergeStrings(const vector<string>& stringList, char delimiter)
+const string Tools::mergeStrings(const vector<string> & stringList, char delimiter)
 {
 	if(stringList.empty())
 	{
@@ -191,7 +216,7 @@ const string Tools::mergeStrings(const vector<string>& stringList, char delimite
 
 	string result = "";
 
-	for(const auto& value : stringList)
+	for(const auto & value : stringList)
 	{
 		result += value;
 		result += delimiter;
@@ -202,7 +227,7 @@ const string Tools::mergeStrings(const vector<string>& stringList, char delimite
 	return result;
 }
 
-const pair<string, string> Tools::splitStringIntoTwo(const string& mergedString, char delimiter)
+const pair<string, string> Tools::splitStringIntoTwo(const string & mergedString, char delimiter)
 {
 	const auto delimiterIndex = mergedString.find(delimiter);
 
@@ -217,7 +242,7 @@ const pair<string, string> Tools::splitStringIntoTwo(const string& mergedString,
 	return {firstString, secondString};
 }
 
-const vector<string> Tools::splitStringIntoMultiple(const string& mergedString, char delimiter)
+const vector<string> Tools::splitStringIntoMultiple(const string & mergedString, char delimiter)
 {
 	vector<string> result;
 
@@ -251,17 +276,17 @@ const vector<string> Tools::splitStringIntoMultiple(const string& mergedString, 
 	return result;
 }
 
-const bool Tools::isDirectoryExisting(const string& path)
+const bool Tools::isDirectoryExisting(const string & path)
 {
 	return (exists(path) && is_directory(path));
 }
 
-const bool Tools::isFileExisting(const string& path)
+const bool Tools::isFileExisting(const string & path)
 {
 	return (exists(path) && !is_directory(path));
 }
 
-const bool Tools::createDirectory(const string& path)
+const bool Tools::createDirectory(const string & path)
 {
 	if(isDirectoryExisting(path))
 	{
@@ -273,7 +298,7 @@ const bool Tools::createDirectory(const string& path)
 	return true;
 }
 
-const bool Tools::copyDirectory(const string& fromPath, const string& toPath)
+const bool Tools::copyDirectory(const string & fromPath, const string & toPath)
 {
 	error_code error = {};
 
@@ -282,7 +307,7 @@ const bool Tools::copyDirectory(const string& fromPath, const string& toPath)
 	return (error.value() == 0);
 }
 
-const bool Tools::copyFile(const string& fromPath, const string& toPath)
+const bool Tools::copyFile(const string & fromPath, const string & toPath)
 {
 	error_code error = {};
 
@@ -291,7 +316,7 @@ const bool Tools::copyFile(const string& fromPath, const string& toPath)
 	return (error.value() == 0);
 }
 
-const bool Tools::renameDirectory(const string& oldPath, const string& newPath)
+const bool Tools::renameDirectory(const string & oldPath, const string & newPath)
 {
 	error_code error = {};
 
@@ -300,7 +325,7 @@ const bool Tools::renameDirectory(const string& oldPath, const string& newPath)
 	return (error.value() == 0);
 }
 
-const bool Tools::renameFile(const string& oldPath, const string& newPath)
+const bool Tools::renameFile(const string & oldPath, const string & newPath)
 {
 	error_code error = {};
 
@@ -309,7 +334,7 @@ const bool Tools::renameFile(const string& oldPath, const string& newPath)
 	return (error.value() == 0);
 }
 
-const bool Tools::deleteDirectory(const string& path)
+const bool Tools::deleteDirectory(const string & path)
 {
 	error_code error = {};
 
@@ -318,7 +343,7 @@ const bool Tools::deleteDirectory(const string& path)
 	return (error.value() == 0);
 }
 
-const bool Tools::deleteFile(const string& path)
+const bool Tools::deleteFile(const string & path)
 {
 	error_code error = {};
 
@@ -353,7 +378,7 @@ const fvec2 Tools::getMaxViewportPosition()
 	return result;
 }
 
-const fvec2 Tools::convertPositionRelativeToDisplay(const fvec2& position)
+const fvec2 Tools::convertPositionRelativeToDisplay(const fvec2 & position)
 {
 	if(Configuration::getInst().isApplicationExported())
 	{
@@ -371,7 +396,7 @@ const fvec2 Tools::convertPositionRelativeToDisplay(const fvec2& position)
 	return result;
 }
 
-const fvec2 Tools::convertPositionRelativeFromDisplay(const fvec2& position)
+const fvec2 Tools::convertPositionRelativeFromDisplay(const fvec2 & position)
 {
 	if(Configuration::getInst().isApplicationExported())
 	{
@@ -391,7 +416,7 @@ const fvec2 Tools::convertPositionRelativeFromDisplay(const fvec2& position)
 	return result;
 }
 
-const fvec2 Tools::convertSizeRelativeToDisplay(const fvec2& size)
+const fvec2 Tools::convertSizeRelativeToDisplay(const fvec2 & size)
 {
 	if(Configuration::getInst().isApplicationExported())
 	{
@@ -406,7 +431,7 @@ const fvec2 Tools::convertSizeRelativeToDisplay(const fvec2& size)
 	return result;
 }
 
-const fvec2 Tools::convertSizeRelativeFromDisplay(const fvec2& size)
+const fvec2 Tools::convertSizeRelativeFromDisplay(const fvec2 & size)
 {
 	if(!Configuration::getInst().isApplicationExported())
 	{
@@ -421,7 +446,7 @@ const fvec2 Tools::convertSizeRelativeFromDisplay(const fvec2& size)
 	return result;
 }
 
-const fvec2 Tools::convertToNdc(const ivec2& position)
+const fvec2 Tools::convertToNdc(const ivec2 & position)
 {
 	const auto x = (static_cast<float>(position.x) / static_cast<float>(Configuration::getInst().getWindowSize().x));
 	const auto y = (static_cast<float>(position.y) / static_cast<float>(Configuration::getInst().getWindowSize().y));
@@ -436,7 +461,7 @@ const fvec2 Tools::convertToNdc(const ivec2& position)
 	return ndc;
 }
 
-const ivec2 Tools::convertFromNdc(const fvec2& position)
+const ivec2 Tools::convertFromNdc(const fvec2 & position)
 {
 	auto ndc = position;
 

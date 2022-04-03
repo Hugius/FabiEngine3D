@@ -188,7 +188,7 @@ void ModelEditor::_updateModelChoosing()
 {
 	if(_isChoosingModel)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{
@@ -267,7 +267,7 @@ void ModelEditor::_updatePartChoosing()
 {
 	if(_isChoosingPart)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

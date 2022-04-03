@@ -212,7 +212,7 @@ void WorldEditor::_updateWorldChoosing()
 {
 	if(_isChoosingWorld)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

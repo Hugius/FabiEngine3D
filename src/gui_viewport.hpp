@@ -9,7 +9,7 @@ public:
 	GuiViewport(shared_ptr<EngineInterface> fe3d, const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color);
 	~GuiViewport();
 
-	void update(bool isFocused);
+	void update(bool isInteractable);
 	void createWindow(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color);
 	void deleteWindow(const string & id);
 	void deleteWindows();
@@ -29,7 +29,7 @@ public:
 	const bool isHovered() const;
 
 private:
-	void _updateHovering();
+	void _updateHovering(bool isInteractable);
 
 	const string _id;
 	const string _entityId;

@@ -11,10 +11,10 @@ using std::unordered_map;
 class ShaderBuffer final
 {
 public:
-	ShaderBuffer(const string& vertexFileName, const string& fragmentFileName);
+	ShaderBuffer(const string & vertexFileName, const string & fragmentFileName);
 	~ShaderBuffer();
 
-	template<typename T> void uploadUniform(const string& name, const T& data)
+	template<typename T> void uploadUniform(const string & name, const T & data)
 	{
 		_uploadUniform(getUniformId(name), data);
 	}
@@ -23,19 +23,18 @@ public:
 	void unbind();
 
 	const unsigned int getProgramId() const;
-	const unsigned int getUniformId(const string& name);
+	const unsigned int getUniformId(const string & name);
 
 private:
-	void _uploadUniform(const unsigned int& uniformId, const bool& data);
-	void _uploadUniform(const unsigned int& uniformId, const int& data);
-	void _uploadUniform(const unsigned int& uniformId, const float& data);
-	void _uploadUniform(const unsigned int& uniformId, const double& data);
-	void _uploadUniform(const unsigned int& uniformId, const fvec2& data);
-	void _uploadUniform(const unsigned int& uniformId, const fvec3& data);
-	void _uploadUniform(const unsigned int& uniformId, const fvec4& data);
-	void _uploadUniform(const unsigned int& uniformId, const mat22& data);
-	void _uploadUniform(const unsigned int& uniformId, const mat33& data);
-	void _uploadUniform(const unsigned int& uniformId, const mat44& data);
+	void _uploadUniform(const unsigned int & uniformId, const bool & data);
+	void _uploadUniform(const unsigned int & uniformId, const int & data);
+	void _uploadUniform(const unsigned int & uniformId, const float & data);
+	void _uploadUniform(const unsigned int & uniformId, const fvec2 & data);
+	void _uploadUniform(const unsigned int & uniformId, const fvec3 & data);
+	void _uploadUniform(const unsigned int & uniformId, const fvec4 & data);
+	void _uploadUniform(const unsigned int & uniformId, const mat22 & data);
+	void _uploadUniform(const unsigned int & uniformId, const mat33 & data);
+	void _uploadUniform(const unsigned int & uniformId, const mat44 & data);
 
 	unordered_map<string, unsigned int> _uniformCache = {};
 

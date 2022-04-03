@@ -117,10 +117,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		{
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				_fe3d->animation2d_setRowCount(_currentAnimationId, _gui->getOverlay()->getValueFormUnsignedInteger());
-			}
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
-			{
+				_fe3d->animation2d_setRowCount(_currentAnimationId, Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent()));
 				_gui->getOverlay()->closeValueForm();
 			}
 		}
@@ -128,10 +125,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		{
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				_fe3d->animation2d_setColumnCount(_currentAnimationId, _gui->getOverlay()->getValueFormUnsignedInteger());
-			}
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
-			{
+				_fe3d->animation2d_setColumnCount(_currentAnimationId, Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent()));
 				_gui->getOverlay()->closeValueForm();
 			}
 		}
@@ -139,10 +133,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		{
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
-				_fe3d->animation2d_setInterval(_currentAnimationId, _gui->getOverlay()->getValueFormUnsignedInteger());
-			}
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
-			{
+				_fe3d->animation2d_setInterval(_currentAnimationId, Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent()));
 				_gui->getOverlay()->closeValueForm();
 			}
 		}

@@ -106,7 +106,7 @@ void Text2dEditor::_updateTextChoosing()
 {
 	if(_isChoosingText)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

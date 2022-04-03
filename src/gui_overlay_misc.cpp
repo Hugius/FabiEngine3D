@@ -5,21 +5,23 @@ GuiOverlay::GuiOverlay(shared_ptr<EngineInterface> fe3d)
 	_fe3d = fe3d;
 }
 
-void GuiOverlay::update()
+void GuiOverlay::update(bool isInteractable)
 {
+	_updateForms();
+
 	for(const auto & [scrollingListId, scrollingList] : _scrollingLists)
 	{
-		scrollingList->update(true);
+		scrollingList->update(isInteractable);
 	}
 
 	for(const auto & [inputBoxId, inputBox] : _inputBoxes)
 	{
-		inputBox->update(true);
+		inputBox->update(isInteractable);
 	}
 
 	for(const auto & [buttonId, button] : _buttons)
 	{
-		button->update(true);
+		button->update(isInteractable);
 	}
 }
 

@@ -160,7 +160,7 @@ void ModelEditor::_updateAabbChoosing()
 {
 	if(_isChoosingAabb)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

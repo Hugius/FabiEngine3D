@@ -224,38 +224,39 @@ void Animation3dEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
-
-		if(!selectedOptionId.empty())
+		if(_gui->getOverlay()->getChoiceFormId().empty())
 		{
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-			{
-				_currentAnimationId = ("@" + selectedOptionId);
-
-				if(_isDeletingAnimation)
-				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
-				}
-				else
-				{
-					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-
-					_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + _currentAnimationId.substr(1));
-					_gui->getOverlay()->getTextField("animationId")->setVisible(true);
-					_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
-				}
-
-				_gui->getOverlay()->closeChoiceForm();
-
-				_isChoosingAnimation = false;
-			}
-		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
-		{
-			_gui->getOverlay()->closeChoiceForm();
-
 			_isChoosingAnimation = false;
 			_isDeletingAnimation = false;
+		}
+		else
+		{
+			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+
+			if(!selectedOptionId.empty())
+			{
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				{
+					_currentAnimationId = ("@" + selectedOptionId);
+
+					if(_isDeletingAnimation)
+					{
+						_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+					}
+					else
+					{
+						_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
+
+						_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + _currentAnimationId.substr(1));
+						_gui->getOverlay()->getTextField("animationId")->setVisible(true);
+						_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
+					}
+
+					_gui->getOverlay()->closeChoiceForm();
+
+					_isChoosingAnimation = false;
+				}
+			}
 		}
 	}
 }
@@ -288,7 +289,7 @@ void Animation3dEditor::_updateModelChoosing()
 {
 	if(_isChoosingModel)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{
@@ -362,7 +363,7 @@ void Animation3dEditor::_updatePartChoosing()
 {
 	if(_isChoosingPart)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

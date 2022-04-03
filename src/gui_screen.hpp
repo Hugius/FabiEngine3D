@@ -12,7 +12,7 @@ class GuiScreen final
 public:
 	GuiScreen(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & parentPosition, const fvec2 & parentSize);
 
-	void update(bool isFocused);
+	void update(bool isInteractable);
 	void setVisible(bool value);
 	void createScrollingList(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, const fvec2 & characterSize, float scrollingSpeed, bool isCentered);
 	void createInputBox(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered);

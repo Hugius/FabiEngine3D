@@ -26,18 +26,21 @@ GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, co
 	_textField = make_shared<GuiTextField>(fe3d, "GuiInputBox", (parentId + "_" + id), position, fvec2((size.x / static_cast<float>(maxCharacterCount + 1)), size.y), " ", fvec3(1.0f), isCentered);
 }
 
-void GuiInputBox::update(bool isFocused)
+void GuiInputBox::update(bool isInteractable)
 {
-	_updateHovering(isFocused);
-	_updateActivation();
+	_updateHovering(isInteractable);
+	_updateActivation(isInteractable);
 	_updateTyping();
 }
 
-void GuiInputBox::_updateActivation()
+void GuiInputBox::_updateActivation(bool isInteractable)
 {
 	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
-		_isActive = _isHovered;
+		if(isInteractable)
+		{
+			_isActive = _isHovered;
+		}
 	}
 }
 
@@ -145,7 +148,7 @@ void GuiInputBox::_updateTyping()
 
 		if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 		{
-			_isConfirmed = true;
+			_isEntered = true;
 			_isActive = false;
 		}
 
@@ -156,7 +159,7 @@ void GuiInputBox::_updateTyping()
 	}
 	else
 	{
-		_isConfirmed = false;
+		_isEntered = false;
 		_isBarVisible = false;
 	}
 
@@ -183,9 +186,9 @@ const bool GuiInputBox::isVisible() const
 	return _quadField->isVisible();
 }
 
-const bool GuiInputBox::isConfirmed() const
+const bool GuiInputBox::isEntered() const
 {
-	return _isConfirmed;
+	return _isEntered;
 }
 
 const bool GuiInputBox::isActive() const
@@ -274,7 +277,7 @@ const string GuiInputBox::getParentId() const
 	return _parentId;
 }
 
-void GuiInputBox::_updateHovering(bool isFocused)
+void GuiInputBox::_updateHovering(bool isInteractable)
 {
 	_isHovered = false;
 
@@ -292,7 +295,7 @@ void GuiInputBox::_updateHovering(bool isFocused)
 				{
 					if(cursorPosition.y < (boxPosition.y + (boxSize.y * 0.5f)))
 					{
-						if(isFocused && _isHoverable)
+						if(isInteractable && _isHoverable)
 						{
 							_isHovered = true;
 						}
@@ -301,12 +304,15 @@ void GuiInputBox::_updateHovering(bool isFocused)
 			}
 		}
 
-		if(_isHovered)
+		if(_isActive || _isHovered)
 		{
-			_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
-
 			_quadField->setColor(_hoveredQuadColor);
 			_textField->setColor(_hoveredTextColor);
+
+			if(_isHovered)
+			{
+				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+			}
 		}
 		else
 		{

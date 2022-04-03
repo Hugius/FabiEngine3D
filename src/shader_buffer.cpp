@@ -8,7 +8,7 @@
 using std::ifstream;
 using std::ofstream;
 
-ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentFileName)
+ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmentFileName)
 {
 	string shaderDirectoryPath;
 	if(Configuration::getInst().isApplicationExported())
@@ -110,7 +110,7 @@ ShaderBuffer::~ShaderBuffer()
 	glDeleteProgram(_programId);
 }
 
-const unsigned int ShaderBuffer::getUniformId(const string& name)
+const unsigned int ShaderBuffer::getUniformId(const string & name)
 {
 	auto cacheIterator = _uniformCache.find(name);
 
@@ -147,52 +147,47 @@ const unsigned int ShaderBuffer::getProgramId() const
 	return _programId;
 }
 
-void ShaderBuffer::_uploadUniform(const unsigned int& uniformId, const bool& data)
+void ShaderBuffer::_uploadUniform(const unsigned int & uniformId, const bool & data)
 {
 	glUniform1i(uniformId, data);
 }
 
-void ShaderBuffer::_uploadUniform(const unsigned int& uniformId, const int& data)
+void ShaderBuffer::_uploadUniform(const unsigned int & uniformId, const int & data)
 {
 	glUniform1i(uniformId, data);
 }
 
-void ShaderBuffer::_uploadUniform(const unsigned int& uniformId, const float& data)
+void ShaderBuffer::_uploadUniform(const unsigned int & uniformId, const float & data)
 {
 	glUniform1f(uniformId, data);
 }
 
-void ShaderBuffer::_uploadUniform(const unsigned int& uniformId, const double& data)
-{
-	glUniform1d(uniformId, data);
-}
-
-void ShaderBuffer::_uploadUniform(const unsigned int& uniformId, const fvec2& data)
+void ShaderBuffer::_uploadUniform(const unsigned int & uniformId, const fvec2 & data)
 {
 	glUniform2f(uniformId, data.x, data.y);
 }
 
-void ShaderBuffer::_uploadUniform(const unsigned int& uniformId, const fvec3& data)
+void ShaderBuffer::_uploadUniform(const unsigned int & uniformId, const fvec3 & data)
 {
 	glUniform3f(uniformId, data.x, data.y, data.z);
 }
 
-void ShaderBuffer::_uploadUniform(const unsigned int& uniformId, const fvec4& data)
+void ShaderBuffer::_uploadUniform(const unsigned int & uniformId, const fvec4 & data)
 {
 	glUniform4f(uniformId, data.x, data.y, data.z, data.w);
 }
 
-void ShaderBuffer::_uploadUniform(const unsigned int& uniformId, const mat22& data)
+void ShaderBuffer::_uploadUniform(const unsigned int & uniformId, const mat22 & data)
 {
 	glUniformMatrix2fv(uniformId, 1, GL_FALSE, data.f);
 }
 
-void ShaderBuffer::_uploadUniform(const unsigned int& uniformId, const mat33& data)
+void ShaderBuffer::_uploadUniform(const unsigned int & uniformId, const mat33 & data)
 {
 	glUniformMatrix3fv(uniformId, 1, GL_FALSE, data.f);
 }
 
-void ShaderBuffer::_uploadUniform(const unsigned int& uniformId, const mat44& data)
+void ShaderBuffer::_uploadUniform(const unsigned int & uniformId, const mat44 & data)
 {
 	glUniformMatrix4fv(uniformId, 1, GL_FALSE, data.f);
 }

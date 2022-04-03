@@ -15,21 +15,21 @@ GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string & id, const 
 	_parentSize = parentSize;
 }
 
-void GuiScreen::update(bool isFocused)
+void GuiScreen::update(bool isInteractable)
 {
 	for(const auto & [scrollingListId, scrollingList] : _scrollingLists)
 	{
-		scrollingList->update(isFocused);
+		scrollingList->update(isInteractable);
 	}
 
 	for(const auto & [inputBoxId, inputBox] : _inputBoxes)
 	{
-		inputBox->update(isFocused);
+		inputBox->update(isInteractable);
 	}
 
 	for(const auto & [buttonId, button] : _buttons)
 	{
-		button->update(isFocused);
+		button->update(isInteractable);
 	}
 }
 

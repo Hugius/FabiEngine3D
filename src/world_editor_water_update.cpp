@@ -39,7 +39,7 @@ void WorldEditor::_updateWaterMenu()
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 			if(!selectedOptionId.empty())
 			{
 				_worldUtilities->copyTemplateWater(selectedOptionId, ("@" + selectedOptionId));

@@ -99,7 +99,7 @@ void WaterEditor::_updateWaterChoosing()
 {
 	if(_isChoosingWater)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

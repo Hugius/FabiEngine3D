@@ -77,7 +77,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

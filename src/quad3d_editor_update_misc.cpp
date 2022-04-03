@@ -117,7 +117,7 @@ void Quad3dEditor::_updateQuad3dChoosing()
 {
 	if(_isChoosingQuad3d)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

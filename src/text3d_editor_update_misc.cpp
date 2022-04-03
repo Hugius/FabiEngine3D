@@ -153,7 +153,7 @@ void Text3dEditor::_updateText3dChoosing()
 {
 	if(_isChoosingText3d)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

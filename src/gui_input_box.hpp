@@ -8,7 +8,7 @@ class GuiInputBox final
 public:
 	GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered);
 
-	void update(bool isFocused);
+	void update(bool isInteractable);
 	void setActive(bool value);
 	void setTextContent(const string & value);
 	void setVisible(bool value);
@@ -32,13 +32,13 @@ public:
 	const bool isHovered() const;
 	const bool isHoverable() const;
 	const bool isVisible() const;
-	const bool isConfirmed() const;
+	const bool isEntered() const;
 	const bool isActive() const;
 	const bool isCentered() const;
 
 private:
-	void _updateHovering(bool isFocused);
-	void _updateActivation();
+	void _updateHovering(bool isInteractable);
+	void _updateActivation(bool isInteractable);
 	void _updateTyping();
 
 	static inline const unordered_map<char, char> SPECIAL_CHARACTERS =
@@ -118,7 +118,7 @@ private:
 	bool _isHovered = false;
 	bool _isHoverable = true;
 	bool _isActive = false;
-	bool _isConfirmed = false;
+	bool _isEntered = false;
 	bool _isLettersAllowed = false;
 	bool _isNumbersAllowed = false;
 	bool _isSpecialsAllowed = false;

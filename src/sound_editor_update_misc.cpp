@@ -114,7 +114,7 @@ void SoundEditor::_updateSoundChoosing()
 {
 	if(_isChoosingSound)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

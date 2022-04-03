@@ -138,7 +138,7 @@ void TerrainEditor::_updateTerrainChoosing()
 {
 	if(_isChoosingTerrain)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

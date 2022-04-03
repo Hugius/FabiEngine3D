@@ -79,7 +79,7 @@ void Quad2dEditor::_updateQuadChoosing()
 {
 	if(_isChoosingQuad)
 	{
-		const auto selectedOptionId = _gui->getOverlay()->getSelectedChoiceFormOptionId();
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
 		if(!selectedOptionId.empty())
 		{

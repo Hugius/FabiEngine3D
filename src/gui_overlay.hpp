@@ -12,7 +12,7 @@ class GuiOverlay final
 public:
 	GuiOverlay(shared_ptr<EngineInterface> fe3d);
 
-	void update();
+	void update(bool isInteractable);
 	void setFocused(bool value);
 	void createScrollingList(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, const fvec2 & characterSize, float scrollingSpeed, bool isCentered);
 	void createInputBox(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered);
@@ -31,7 +31,7 @@ public:
 	void deleteTextFields();
 	void openChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles);
 	void openValueForm(const string & id, const string & title, const string & value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
-	void openAnswerForm(const string & id, const string & title, const fvec2 & position);
+	void openAnswerForm(const string & id, const string & title, const string & left, const string & right, const fvec2 & position);
 	void closeChoiceForm();
 	void closeValueForm();
 	void closeAnswerForm();
@@ -51,16 +51,9 @@ public:
 	const string getChoiceFormId() const;
 	const string getValueFormId() const;
 	const string getAnswerFormId() const;
-	const string getSelectedChoiceFormOptionId() const;
-	const string getValueFormString() const;
-
-	const double getValueFormDouble() const;
-
-	const float getValueFormFloat() const;
-
-	const unsigned int getValueFormUnsignedInteger() const;
-
-	const int getValueFormSignedInteger() const;
+	const string getChoiceFormOptionId() const;
+	const string getValueFormContent() const;
+	const string getAnswerFormDecision() const;
 
 	const bool isFocused() const;
 	const bool hasScrollingList(const string & id) const;
@@ -68,13 +61,13 @@ public:
 	const bool hasButton(const string & id) const;
 	const bool hasQuadField(const string & id) const;
 	const bool hasTextField(const string & id) const;
+	const bool isChoiceFormConfirmed() const;
 	const bool isValueFormConfirmed() const;
-	const bool isValueFormCancelled() const;
-	const bool isChoiceFormCancelled() const;
-	const bool isAnswerFormAccepted() const;
-	const bool isAnswerFormDenied() const;
+	const bool isAnswerFormConfirmed() const;
 
 private:
+	void _updateForms();
+
 	static inline const fvec3 FORM_TITLE_QUAD_COLOR = fvec3(0.05f);
 	static inline const fvec3 FORM_TITLE_TEXT_COLOR = fvec3(1.0f);
 
@@ -91,4 +84,7 @@ private:
 	string _answerFormId = "";
 
 	bool _isFocused = false;
+	bool _mustCloseChoiceForm = false;
+	bool _mustCloseValueForm = false;
+	bool _mustCloseAnswerForm = false;
 };

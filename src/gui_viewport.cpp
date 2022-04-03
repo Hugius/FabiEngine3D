@@ -25,11 +25,13 @@ GuiViewport::~GuiViewport()
 	_fe3d->quad2d_delete(_entityId);
 }
 
-void GuiViewport::update(bool isFocused)
+void GuiViewport::update(bool isInteractable)
 {
+	_updateHovering(isInteractable);
+
 	for(const auto & [windowId, window] : _windows)
 	{
-		window->update(isFocused);
+		window->update(isInteractable);
 	}
 }
 
@@ -43,7 +45,7 @@ const bool GuiViewport::isHovered() const
 	return _isHovered;
 }
 
-void GuiViewport::_updateHovering()
+void GuiViewport::_updateHovering(bool isInteractable)
 {
 	_isHovered = false;
 
@@ -59,7 +61,10 @@ void GuiViewport::_updateHovering()
 			{
 				if(cursorPosition.y < (viewportPosition.y + (viewportSize.y * 0.5f)))
 				{
-					_isHovered = true;
+					if(isInteractable)
+					{
+						_isHovered = true;
+					}
 				}
 			}
 		}

@@ -8,7 +8,7 @@ class GuiScrollingList final
 public:
 	GuiScrollingList(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, const fvec2 & characterSize, float scrollingSpeed, bool isCentered);
 
-	void update(bool isFocused);
+	void update(bool isInteractable);
 	void createOption(const string & id, const string & textContent);
 	void deleteOption(const string & id);
 	void deleteOptions();
@@ -49,7 +49,7 @@ public:
 	const bool isCentered() const;
 
 private:
-	void _updateHovering(bool isFocused);
+	void _updateHovering(bool isInteractable);
 	void _updateScrolling();
 
 	static inline constexpr float FULL_OPACITY = 1.0f;

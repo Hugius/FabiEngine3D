@@ -63,8 +63,8 @@ void ScriptEditor::_updateTextSelector()
 
 			const auto firstAabbPosition = _fe3d->aabb_getBasePosition(_firstSelectionAabbId);
 			const auto secondAabbPosition = _fe3d->aabb_getBasePosition(_secondSelectionAabbId);
-			const auto selectionWidth = (static_cast<float>(scriptFile->getLine(cursorLineIndex).size()) * CHARACTER_SIZE.x);
-			const auto selectionHeight = CHARACTER_SIZE.y;
+			const auto selectionWidth = (static_cast<float>(scriptFile->getLine(cursorLineIndex).size()) * CHAR_SIZE.x);
+			const auto selectionHeight = CHAR_SIZE.y;
 			const auto selectionX = ((firstAabbPosition.x + secondAabbPosition.x) * 0.5f);
 			const auto selectionY = firstAabbPosition.y;
 
@@ -93,19 +93,19 @@ void ScriptEditor::_updateTextSelector()
 
 			const auto firstAabbPosition = _fe3d->aabb_getBasePosition(_firstSelectionAabbId);
 			const auto secondAabbPosition = _fe3d->aabb_getBasePosition(_secondSelectionAabbId);
-			const auto selectionWidth = (fabsf(firstAabbPosition.x - secondAabbPosition.x) + CHARACTER_SIZE.x);
-			const auto selectionHeight = CHARACTER_SIZE.y;
+			const auto selectionWidth = (fabsf(firstAabbPosition.x - secondAabbPosition.x) + CHAR_SIZE.x);
+			const auto selectionHeight = CHAR_SIZE.y;
 
 			float selectionX;
 			float selectionY;
 			if(secondAabbPosition.x < firstAabbPosition.x)
 			{
-				selectionX = (firstAabbPosition.x - (selectionWidth * 0.5f) + (CHARACTER_SIZE.x * 0.5f));
+				selectionX = (firstAabbPosition.x - (selectionWidth * 0.5f) + (CHAR_SIZE.x * 0.5f));
 				selectionY = firstAabbPosition.y;
 			}
 			else
 			{
-				selectionX = (firstAabbPosition.x + (selectionWidth * 0.5f) - (CHARACTER_SIZE.x * 0.5f));
+				selectionX = (firstAabbPosition.x + (selectionWidth * 0.5f) - (CHAR_SIZE.x * 0.5f));
 				selectionY = firstAabbPosition.y;
 			}
 

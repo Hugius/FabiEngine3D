@@ -16,14 +16,22 @@ void TopViewportController::_updateProjectScreenManagement()
 	{
 		if(topScreen->getButton("newProject")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("projectId", "Create Project", "", fvec2(0.0f, 0.1f), 10, true, true, false);
-			_isCreatingProject = true;
+			_gui->getOverlay()->openValueForm("projectCreation", "Create Project", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(topScreen->getButton("loadProject")->isHovered())
 		{
-			if(_prepareProjectChoosing("Load Project"))
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const auto projectDirectoryPath = (rootPath + "projects\\");
+
+			if(Tools::isDirectoryExisting(projectDirectoryPath))
 			{
-				_isLoadingProject = true;
+				auto projectIds = Tools::getDirectoryNamesFromDirectory(projectDirectoryPath);
+
+				_gui->getOverlay()->openChoiceForm("projectLoading", "Load Project", fvec2(0.0f, 0.1f), projectIds);
+			}
+			else
+			{
+				Logger::throwWarning("Directory `projects\\` does not exist");
 			}
 		}
 		else if(topScreen->getButton("saveProject")->isHovered())
@@ -32,9 +40,18 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 		else if(topScreen->getButton("deleteProject")->isHovered())
 		{
-			if(_prepareProjectChoosing("Delete Project"))
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const auto projectDirectoryPath = (rootPath + "projects\\");
+
+			if(Tools::isDirectoryExisting(projectDirectoryPath))
 			{
-				_isDeletingProject = true;
+				auto projectIds = Tools::getDirectoryNamesFromDirectory(projectDirectoryPath);
+
+				_gui->getOverlay()->openChoiceForm("projectDeletion", "Delete Project", fvec2(0.0f, 0.1f), projectIds);
+			}
+			else
+			{
+				Logger::throwWarning("Directory `projects\\` does not exist");
 			}
 		}
 		else if(topScreen->getButton("quitEngine")->isHovered())

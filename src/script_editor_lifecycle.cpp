@@ -28,7 +28,7 @@ void ScriptEditor::_load()
 	_fe3d->text3d_create("cursor", FONT_MAP_PATH, true);
 	_fe3d->text3d_setVisible("cursor", false);
 	_fe3d->text3d_setContent("cursor", "|");
-	_fe3d->text3d_setSize("cursor", CHARACTER_SIZE);
+	_fe3d->text3d_setSize("cursor", CHAR_SIZE);
 	_fe3d->text3d_setMinTextureAlpha("cursor", 0.05f);
 }
 

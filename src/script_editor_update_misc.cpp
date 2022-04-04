@@ -299,14 +299,14 @@ void ScriptEditor::_updateCursor()
 	if(cursorCharacterIndex == 0)
 	{
 		const auto linePosition = _fe3d->aabb_getBasePosition(to_string(_script->getScriptFile(_currentScriptFileId)->getCursorLineIndex()));
-		const auto cursorPosition = fvec3((ROOT_TEXT_POSITION.x + HORIZONTAL_LINE_OFFSET - (CHARACTER_SIZE.x * 0.5f)), linePosition.y, linePosition.z);
+		const auto cursorPosition = fvec3((ROOT_TEXT_POSITION.x + HORIZONTAL_LINE_OFFSET - (CHAR_SIZE.x * 0.5f)), linePosition.y, linePosition.z);
 
 		_fe3d->text3d_setPosition("cursor", cursorPosition);
 	}
 	else
 	{
 		const auto characterPosition = _fe3d->aabb_getBasePosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharacterIndex - 1));
-		const auto cursorPosition = fvec3((characterPosition.x + (CHARACTER_SIZE.x * 0.5f)), characterPosition.y, characterPosition.z);
+		const auto cursorPosition = fvec3((characterPosition.x + (CHAR_SIZE.x * 0.5f)), characterPosition.y, characterPosition.z);
 
 		_fe3d->text3d_setPosition("cursor", cursorPosition);
 	}

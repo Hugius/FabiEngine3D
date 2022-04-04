@@ -113,12 +113,12 @@ private:
 	static inline const fvec2 CF_TITLE_OFFSET = fvec2(0.0f, 0.475f);
 	static inline const fvec2 CF_LIST_OFFSET = fvec2(0.0f, 0.475f);
 	static inline const fvec2 CF_LIST_SIZE = fvec2(0.5, 0.75f);
-	static inline const fvec2 CF_LIST_CHARACTER_SIZE = fvec2(0.1f, 0.15f);
-	static inline const fvec2 CF_CANCEL_OFFSET = fvec2(0.0f, -0.45f);
+	static inline const fvec2 CF_LIST_CHAR_SIZE = fvec2(0.1f, 0.15f);
+	static inline const fvec2 CF_CANCEL_OFFSET = fvec2(0.0f, -0.475f);
 	static inline const fvec2 CF_CANCEL_SIZE = fvec2(0.18f, 0.1f);
 	static inline const fvec2 VF_TITLE_QUAD_SIZE = fvec2(0.0275f, 0.125f);
 	static inline const fvec2 VF_TITLE_TEXT_SIZE = fvec2(0.025f, 0.1f);
-	static inline const fvec2 VF_TITLE_OFFSET = fvec2(0.0f, 0.15f);
+	static inline const fvec2 VF_TITLE_OFFSET = fvec2(0.0f, 0.2f);
 	static inline const fvec2 VF_BOX_SIZE = fvec2(0.025f, 0.1f);
 	static inline const fvec2 VF_ENTER_OFFSET = fvec2(-0.15f, -0.2f);
 	static inline const fvec2 VF_ENTER_SIZE = fvec2(0.15f, 0.1f);
@@ -126,13 +126,11 @@ private:
 	static inline const fvec2 VF_CANCEL_SIZE = fvec2(0.18f, 0.1f);
 	static inline const fvec2 AF_TITLE_QUAD_SIZE = fvec2(0.0275f, 0.125f);
 	static inline const fvec2 AF_TITLE_TEXT_SIZE = fvec2(0.025f, 0.1f);
-	static inline const fvec2 AF_TITLE_OFFSET = fvec2(0.0f, 0.0f);
-	static inline const fvec2 AF_LEFT_OFFSET = fvec2(-0.1f, -0.2f);
-	static inline const fvec2 AF_LEFT_SIZE = fvec2(0.03f, 0.1f);
+	static inline const fvec2 AF_TITLE_OFFSET = fvec2(0.0f, 0.2f);
+	static inline const fvec2 AF_LEFT_CHAR_SIZE = fvec2(0.03f, 0.1f);
 	static inline const fvec2 AF_CANCEL_OFFSET = fvec2(0.0f, -0.2f);
 	static inline const fvec2 AF_CANCEL_SIZE = fvec2(0.18f, 0.1f);
-	static inline const fvec2 AF_RIGHT_OFFSET = fvec2(0.1f, -0.2f);
-	static inline const fvec2 AF_RIGHT_SIZE = fvec2(0.03f, 0.1f);
+	static inline const fvec2 AF_RIGHT_CHAR_SIZE = fvec2(0.03f, 0.1f);
 
 	static inline constexpr float CF_SCROLLING_SPEED = 0.25f;
 

@@ -92,24 +92,6 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("scriptEditor")->setHoverable(isHoverable);
 }
 
-const bool TopViewportController::_prepareProjectChoosing(const string & title) const
-{
-	const auto rootPath = Tools::getRootDirectoryPath();
-	const string projectDirectoryPath = (rootPath + "projects\\");
-
-	if(!Tools::isDirectoryExisting(projectDirectoryPath))
-	{
-		Logger::throwWarning("Directory `projects\\` does not exist");
-		return false;
-	}
-
-	auto projectIds = Tools::getDirectoryNamesFromDirectory(projectDirectoryPath);
-
-	_gui->getOverlay()->openChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIds);
-
-	return true;
-}
-
 void TopViewportController::_applyProjectChange()
 {
 	if(_currentProjectId.empty())

@@ -42,7 +42,7 @@ public:
 
 	const bool isScriptStarted() const;
 	const bool isScriptRunning() const;
-	const bool isProjectCorrupted(const string& projectDirectoryPath) const;
+	const bool isProjectCorrupted(const string & projectDirectoryPath) const;
 
 private:
 	void _updateProjectScreenManagement();
@@ -54,8 +54,6 @@ private:
 	void _updateProjectDeleting();
 	void _saveCurrentProject();
 	void _applyProjectChange();
-
-	const bool _prepareProjectChoosing(const string& title) const;
 
 	static inline const fvec3 FRAME_COLOR = fvec3(0.075f);
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
@@ -81,8 +79,5 @@ private:
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
 
 	string _currentProjectId = "";
-
-	bool _isCreatingProject = false;
-	bool _isLoadingProject = false;
-	bool _isDeletingProject = false;
+	string _projectToDelete = "";
 };

@@ -32,13 +32,11 @@ public:
 	const bool isHovered() const;
 	const bool isHoverable() const;
 	const bool isVisible() const;
-	const bool isEntered() const;
 	const bool isActive() const;
 	const bool isCentered() const;
 
 private:
 	void _updateHovering(bool isInteractable);
-	void _updateActivation(bool isInteractable);
 	void _updateTyping();
 
 	static inline const unordered_map<char, char> SPECIAL_CHARACTERS =
@@ -118,7 +116,6 @@ private:
 	bool _isHovered = false;
 	bool _isHoverable = true;
 	bool _isActive = false;
-	bool _isEntered = false;
 	bool _isLettersAllowed = false;
 	bool _isNumbersAllowed = false;
 	bool _isSpecialsAllowed = false;

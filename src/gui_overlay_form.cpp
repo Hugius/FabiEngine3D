@@ -9,6 +9,7 @@ void GuiOverlay::_updateForms()
 		_mustCloseChoiceForm = false;
 	}
 
+
 	if(_mustCloseValueForm)
 	{
 		closeValueForm();
@@ -43,17 +44,19 @@ void GuiOverlay::_updateForms()
 
 	if(!_valueFormId.empty())
 	{
-		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(getInputBox("value_form_box")->isActive() && _fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 		{
-			if(getButton("value_form_enter")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-			{
-				_mustCloseValueForm = true;
-			}
+			_mustCloseValueForm = true;
+		}
 
-			if(getButton("value_form_cancel")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-			{
-				_mustCloseValueForm = true;
-			}
+		if(getButton("value_form_enter")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		{
+			_mustCloseValueForm = true;
+		}
+
+		if(getButton("value_form_cancel")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		{
+			_mustCloseValueForm = true;
 		}
 
 		if(_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -64,22 +67,19 @@ void GuiOverlay::_updateForms()
 
 	if(!_answerFormId.empty())
 	{
-		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(getButton("answer_form_left")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if(getButton("answer_form_left")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-			{
-				_mustCloseValueForm = true;
-			}
+			_mustCloseValueForm = true;
+		}
 
-			if(getButton("value_form_cancel")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-			{
-				_mustCloseValueForm = true;
-			}
+		if(getButton("value_form_cancel")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		{
+			_mustCloseValueForm = true;
+		}
 
-			if(getButton("answer_form_right")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-			{
-				_mustCloseValueForm = true;
-			}
+		if(getButton("answer_form_right")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		{
+			_mustCloseValueForm = true;
 		}
 
 		if(_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -116,7 +116,7 @@ const bool GuiOverlay::isValueFormConfirmed() const
 		return true;
 	}
 
-	if(getInputBox("value_form_box")->isEntered())
+	if(getInputBox("value_form_box")->isActive() && _fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 	{
 		return true;
 	}
@@ -151,8 +151,8 @@ void GuiOverlay::openValueForm(const string & id, const string & title, const st
 		abort();
 	}
 
-	createQuadField("value_form_title", (position + VF_TITLE_OFFSET), fvec2((title.size() * TITLE_QUAD_SIZE.x), TITLE_QUAD_SIZE.y), "", VF_TITLE_QUAD_COLOR, true);
-	createTextField("value_form_title", (position + VF_TITLE_OFFSET), fvec2((title.size() * TITLE_TEXT_SIZE.x), TITLE_TEXT_SIZE.y), title, VF_TITLE_TEXT_COLOR, true);
+	createQuadField("value_form_title", (position + VF_TITLE_OFFSET), fvec2((title.size() * VF_TITLE_QUAD_SIZE.x), VF_TITLE_QUAD_SIZE.y), "", VF_TITLE_QUAD_COLOR, true);
+	createTextField("value_form_title", (position + VF_TITLE_OFFSET), fvec2((title.size() * VF_TITLE_TEXT_SIZE.x), VF_TITLE_TEXT_SIZE.y), title, VF_TITLE_TEXT_COLOR, true);
 
 	createInputBox("value_form_box", position, fvec2((static_cast<float>(maxCharacterCount) * VF_BOX_SIZE.x), VF_BOX_SIZE.y), VF_DEFAULT_BOX_QUAD_COLOR, VF_HOVERED_BOX_QUAD_COLOR, VF_DEFAULT_BOX_TEXT_COLOR, VF_HOVERED_BOX_TEXT_COLOR, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed, true);
 	getInputBox("value_form_box")->setTextContent(valueString);
@@ -173,12 +173,10 @@ void GuiOverlay::openChoiceForm(const string & id, const string & title, const f
 		abort();
 	}
 
-	createQuadField("choice_form_title", (position + CF_TITLE_OFFSET), fvec2((title.size() * TITLE_QUAD_SIZE.x), TITLE_QUAD_SIZE.y), "", CF_TITLE_QUAD_COLOR, true);
-	createTextField("choice_form_title", (position + CF_TITLE_OFFSET), fvec2((title.size() * TITLE_TEXT_SIZE.x), TITLE_TEXT_SIZE.y), title, CF_TITLE_TEXT_COLOR, true);
+	createQuadField("choice_form_title", (position + CF_TITLE_OFFSET), fvec2((title.size() * CF_TITLE_QUAD_SIZE.x), CF_TITLE_QUAD_SIZE.y), "", CF_TITLE_QUAD_COLOR, true);
+	createTextField("choice_form_title", (position + CF_TITLE_OFFSET), fvec2((title.size() * CF_TITLE_TEXT_SIZE.x), CF_TITLE_TEXT_SIZE.y), title, CF_TITLE_TEXT_COLOR, true);
 
-	createScrollingList("choice_form_list", position, CF_LIST_SIZE, CF_LIST_COLOR, CF_DEFAULT_OPTION_QUAD_COLOR, CF_HOVERED_OPTION_QUAD_COLOR, CF_DEFAULT_OPTION_TEXT_COLOR, CF_HOVERED_OPTION_TEXT_COLOR, (CF_LIST_SIZE / 5.0f), CF_SCROLLING_SPEED, true);
-
-	createButton("choice_form_cancel", (position + CF_CANCEL_OFFSET), CF_CANCEL_SIZE, "", CF_DEFAULT_CANCEL_QUAD_COLOR, CF_HOVERED_CANCEL_QUAD_COLOR, "Cancel", CF_DEFAULT_CANCEL_TEXT_COLOR, CF_HOVERED_CANCEL_TEXT_COLOR, true);
+	createScrollingList("choice_form_list", position, CF_LIST_SIZE, CF_LIST_COLOR, CF_DEFAULT_OPTION_QUAD_COLOR, CF_HOVERED_OPTION_QUAD_COLOR, CF_DEFAULT_OPTION_TEXT_COLOR, CF_HOVERED_OPTION_TEXT_COLOR, CF_LIST_CHARACTER_SIZE, CF_SCROLLING_SPEED, true);
 
 	for(const auto & buttonTitle : buttonTitles)
 	{
@@ -189,6 +187,8 @@ void GuiOverlay::openChoiceForm(const string & id, const string & title, const f
 
 		getScrollingList("choice_form_list")->createOption(buttonTitle, buttonTitle);
 	}
+
+	createButton("choice_form_cancel", (position + CF_CANCEL_OFFSET), CF_CANCEL_SIZE, "", CF_DEFAULT_CANCEL_QUAD_COLOR, CF_HOVERED_CANCEL_QUAD_COLOR, "Cancel", CF_DEFAULT_CANCEL_TEXT_COLOR, CF_HOVERED_CANCEL_TEXT_COLOR, true);
 
 	_choiceFormId = id;
 
@@ -310,8 +310,8 @@ void GuiOverlay::openAnswerForm(const string & id, const string & title, const s
 		abort();
 	}
 
-	createQuadField("choice_form_title", (position + AF_TITLE_OFFSET), fvec2((title.size() * TITLE_QUAD_SIZE.x), TITLE_QUAD_SIZE.y), "", AF_TITLE_QUAD_COLOR, true);
-	createTextField("choice_form_title", (position + AF_TITLE_OFFSET), fvec2((title.size() * TITLE_TEXT_SIZE.x), TITLE_TEXT_SIZE.y), title, AF_TITLE_TEXT_COLOR, true);
+	createQuadField("choice_form_title", (position + AF_TITLE_OFFSET), fvec2((title.size() * AF_TITLE_QUAD_SIZE.x), AF_TITLE_QUAD_SIZE.y), "", AF_TITLE_QUAD_COLOR, true);
+	createTextField("choice_form_title", (position + AF_TITLE_OFFSET), fvec2((title.size() * AF_TITLE_TEXT_SIZE.x), AF_TITLE_TEXT_SIZE.y), title, AF_TITLE_TEXT_COLOR, true);
 
 	createButton("answer_form_left", (position + AF_LEFT_OFFSET), fvec2((left.size() * AF_LEFT_SIZE.x), AF_LEFT_SIZE.y), "", AF_DEFAULT_LEFT_QUAD_COLOR, AF_HOVERED_LEFT_QUAD_COLOR, left, AF_DEFAULT_LEFT_TEXT_COLOR, AF_HOVERED_LEFT_TEXT_COLOR, true);
 	createButton("answer_form_cancel", (position + AF_CANCEL_OFFSET), AF_CANCEL_SIZE, "", AF_DEFAULT_CANCEL_QUAD_COLOR, AF_HOVERED_CANCEL_QUAD_COLOR, "Cancel", AF_DEFAULT_CANCEL_TEXT_COLOR, AF_HOVERED_CANCEL_TEXT_COLOR, true);

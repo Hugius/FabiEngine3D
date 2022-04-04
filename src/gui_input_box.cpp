@@ -29,26 +29,14 @@ GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, co
 void GuiInputBox::update(bool isInteractable)
 {
 	_updateHovering(isInteractable);
-	_updateActivation(isInteractable);
 	_updateTyping();
-}
-
-void GuiInputBox::_updateActivation(bool isInteractable)
-{
-	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-	{
-		if(isInteractable)
-		{
-			_isActive = _isHovered;
-		}
-	}
 }
 
 void GuiInputBox::_updateTyping()
 {
 	auto textContent = getTextContent();
 
-	if(_isActive)
+	if(_isActive || _isHovered)
 	{
 		if(textContent.size() < _maxCharacterCount)
 		{
@@ -146,12 +134,6 @@ void GuiInputBox::_updateTyping()
 			}
 		}
 
-		if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
-		{
-			_isEntered = true;
-			_isActive = false;
-		}
-
 		if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 2)) == 0)
 		{
 			_isBarVisible = !_isBarVisible;
@@ -159,7 +141,6 @@ void GuiInputBox::_updateTyping()
 	}
 	else
 	{
-		_isEntered = false;
 		_isBarVisible = false;
 	}
 
@@ -184,11 +165,6 @@ const bool GuiInputBox::isHoverable() const
 const bool GuiInputBox::isVisible() const
 {
 	return _quadField->isVisible();
-}
-
-const bool GuiInputBox::isEntered() const
-{
-	return _isEntered;
 }
 
 const bool GuiInputBox::isActive() const

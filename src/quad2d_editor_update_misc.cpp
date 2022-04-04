@@ -96,7 +96,7 @@ void Quad2dEditor::_updateQuadChoosing()
 
 				if(_isDeletingQuad)
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -107,24 +107,24 @@ void Quad2dEditor::_updateQuadChoosing()
 				}
 
 				_fe3d->quad2d_setVisible(_currentQuadId, true);
-				_gui->getOverlay()->closeChoiceForm();
+
 				_isChoosingQuad = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isChoosingQuad = false;
 			_isDeletingQuad = false;
 		}
-		else
-		{
-			if(!_hoveredQuadId.empty())
-			{
-				_fe3d->quad2d_setVisible(_hoveredQuadId, true);
-				_hoveredQuadId = "";
-			}
-		}
+		//else
+		//{
+		//	if(!_hoveredQuadId.empty())
+		//	{
+		//		_fe3d->quad2d_setVisible(_hoveredQuadId, true);
+		//		_hoveredQuadId = "";
+		//	}
+		//}
 	}
 }
 
@@ -132,7 +132,7 @@ void Quad2dEditor::_updateQuadDeleting()
 {
 	if(_isDeletingQuad && !_isChoosingQuad)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->quad2d_delete(_currentQuadId);
 
@@ -140,14 +140,14 @@ void Quad2dEditor::_updateQuadDeleting()
 			_currentQuadId = "";
 			_isDeletingQuad = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentQuadId = "";
 			_isDeletingQuad = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 }

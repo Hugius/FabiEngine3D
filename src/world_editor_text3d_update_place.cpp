@@ -25,11 +25,11 @@ void WorldEditor::_updateText3dPlacing()
 				_fe3d->text3d_setPosition(newId, newPosition);
 			}
 
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
-			{
-				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
-				_currentTemplateTextId = "";
-			}
+			//if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			//{
+			//	_fe3d->text3d_setVisible(_currentTemplateTextId, false);
+			//	_currentTemplateTextId = "";
+			//}
 		}
 		else
 		{

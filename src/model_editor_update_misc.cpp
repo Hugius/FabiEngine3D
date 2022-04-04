@@ -176,10 +176,6 @@ void ModelEditor::_updateModelCreating()
 					_isCreatingModel = false;
 				}
 			}
-			if(_gui->getOverlay()->isValueFormCancelled())
-			{
-				_gui->getOverlay()->closeValueForm();
-			}
 		}
 	}
 }
@@ -206,7 +202,7 @@ void ModelEditor::_updateModelChoosing()
 
 				if(_isDeletingModel)
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -216,24 +212,24 @@ void ModelEditor::_updateModelChoosing()
 					_gui->getOverlay()->getTextField("modelId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->closeChoiceForm();
+
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
 			_isChoosingModel = false;
 			_isDeletingModel = false;
 
-			_gui->getOverlay()->closeChoiceForm();
+
 		}
-		else
-		{
-			if(!_hoveredModelId.empty())
-			{
-				_fe3d->model_setVisible(_hoveredModelId, false);
-				_hoveredModelId = "";
-			}
-		}
+		//else
+		//{
+		//	if(!_hoveredModelId.empty())
+		//	{
+		//		_fe3d->model_setVisible(_hoveredModelId, false);
+		//		_hoveredModelId = "";
+		//	}
+		//}
 	}
 }
 
@@ -241,7 +237,7 @@ void ModelEditor::_updateModelDeleting()
 {
 	if(_isDeletingModel && !_isChoosingModel)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->model_delete(_currentModelId);
 
@@ -249,16 +245,16 @@ void ModelEditor::_updateModelDeleting()
 			_currentModelId = "";
 			_isDeletingModel = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->model_setVisible(_currentModelId, false);
 
 			_currentModelId = "";
 			_isDeletingModel = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 }
@@ -283,22 +279,22 @@ void ModelEditor::_updatePartChoosing()
 				_hoveredPartId = "";
 				_isChoosingPart = false;
 
-				_gui->getOverlay()->closeChoiceForm();
+
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
 			_isChoosingPart = false;
 
-			_gui->getOverlay()->closeChoiceForm();
+
 		}
-		else
-		{
-			if(!_hoveredPartId.empty())
-			{
-				_fe3d->model_setOpacity(_currentModelId, _hoveredPartId, _originalPartOpacity);
-				_hoveredPartId = "";
-			}
-		}
+		//else
+		//{
+		//	if(!_hoveredPartId.empty())
+		//	{
+		//		_fe3d->model_setOpacity(_currentModelId, _hoveredPartId, _originalPartOpacity);
+		//		_hoveredPartId = "";
+		//	}
+		//}
 	}
 }

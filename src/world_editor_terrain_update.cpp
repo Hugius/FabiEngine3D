@@ -38,11 +38,11 @@ void WorldEditor::_updateTerrainMenu()
 
 				_fe3d->terrain_select(selectedOptionId);
 
-				_gui->getOverlay()->closeChoiceForm();
+
 			}
-			else if(_gui->getOverlay()->isChoiceFormCancelled())
+			//else if(_gui->getOverlay()->isChoiceFormCancelled())
 			{
-				_gui->getOverlay()->closeChoiceForm();
+
 			}
 		}
 

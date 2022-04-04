@@ -142,12 +142,12 @@ void WorldEditor::_updateQuad3dEditing()
 
 					_fe3d->quad3d_startAnimation(_activeQuadId, ("@" + selectedOptionId), -1);
 
-					_gui->getOverlay()->closeChoiceForm();
+
 				}
 			}
-			else if(_gui->getOverlay()->isChoiceFormCancelled())
+			//else if(_gui->getOverlay()->isChoiceFormCancelled())
 			{
-				_gui->getOverlay()->closeChoiceForm();
+
 			}
 
 			auto position = _fe3d->quad3d_getPosition(_activeQuadId);

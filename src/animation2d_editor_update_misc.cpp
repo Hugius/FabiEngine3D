@@ -61,13 +61,9 @@ void Animation2dEditor::_updateAnimationCreating()
 				_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + newAnimationId);
 				_gui->getOverlay()->getTextField("animationId")->setVisible(true);
 
-				_gui->getOverlay()->closeValueForm();
+
 
 				_isCreatingAnimation = false;
-			}
-			if(_gui->getOverlay()->isValueFormCancelled())
-			{
-				_gui->getOverlay()->closeValueForm();
 			}
 		}
 	}
@@ -87,7 +83,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 
 				if(_isDeletingAnimation)
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -101,15 +97,15 @@ void Animation2dEditor::_updateAnimationChoosing()
 
 				_isChoosingAnimation = false;
 
-				_gui->getOverlay()->closeChoiceForm();
+
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
 			_isChoosingAnimation = false;
 			_isDeletingAnimation = false;
 
-			_gui->getOverlay()->closeChoiceForm();
+
 		}
 	}
 }
@@ -118,7 +114,7 @@ void Animation2dEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && !_isChoosingAnimation)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, "");
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
@@ -129,14 +125,14 @@ void Animation2dEditor::_updateAnimationDeleting()
 			_currentAnimationId = "";
 			_isDeletingAnimation = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentAnimationId = "";
 			_isDeletingAnimation = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 }

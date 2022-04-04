@@ -44,12 +44,12 @@ void WorldEditor::_updateSoundPlacing()
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
-			{
-				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-				_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
-				_currentTemplateSoundId = "";
-			}
+			//if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			//{
+			//	_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
+			//	_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
+			//	_currentTemplateSoundId = "";
+			//}
 		}
 		else
 		{

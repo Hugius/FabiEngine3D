@@ -177,7 +177,7 @@ void ModelEditor::_updateAabbChoosing()
 
 				if(_isDeletingAabb)
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -187,24 +187,24 @@ void ModelEditor::_updateAabbChoosing()
 					_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->closeChoiceForm();
+
 				_isChoosingAabb = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isChoosingAabb = false;
 			_isDeletingAabb = false;
 		}
-		else
-		{
-			if(!_hoveredAabbId.empty())
-			{
-				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
-				_hoveredAabbId = "";
-			}
-		}
+		//else
+		//{
+		//	if(!_hoveredAabbId.empty())
+		//	{
+		//		_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
+		//		_hoveredAabbId = "";
+		//	}
+		//}
 	}
 }
 
@@ -212,20 +212,20 @@ void ModelEditor::_updateAabbDeleting()
 {
 	if(_isDeletingAabb && !_isChoosingAabb)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->aabb_delete((_currentModelId + "@" + _currentAabbId));
 			_isDeletingAabb = false;
 			_currentAabbId = "";
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_isDeletingAabb = false;
 			_currentAabbId = "";
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 }

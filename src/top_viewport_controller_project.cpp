@@ -118,8 +118,6 @@ void TopViewportController::_updateProjectCreating()
 				Logger::throwInfo("Project \"" + _currentProjectId + "\" created");
 
 				_isCreatingProject = false;
-
-				_gui->getOverlay()->closeValueForm();
 			}
 		}
 	}
@@ -171,12 +169,12 @@ void TopViewportController::_updateProjectLoading()
 
 			Logger::throwInfo("Project \"" + _currentProjectId + "\" loaded");
 
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isLoadingProject = false;
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isLoadingProject = false;
 		}
 	}
@@ -191,17 +189,17 @@ void TopViewportController::_updateProjectDeleting()
 
 		if(!selectedOptionId.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 			chosenButtonId = selectedOptionId;
-			_gui->getOverlay()->closeChoiceForm();
+
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isDeletingProject = false;
 		}
 
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			if(chosenButtonId == _currentProjectId)
 			{
@@ -229,7 +227,7 @@ void TopViewportController::_updateProjectDeleting()
 			_isDeletingProject = false;
 			chosenButtonId = "";
 		}
-		else if(_gui->getOverlay()->isAnswerFormDenied())
+		else if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_isDeletingProject = false;
 			chosenButtonId = "";

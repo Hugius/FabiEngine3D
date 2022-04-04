@@ -41,7 +41,7 @@ void TopViewportController::_updateProjectScreenManagement()
 		{
 			if((!_currentProjectId.empty()) && (leftScreen->getId() != "main") && (leftScreen->getId() != "worldEditorMenuMain"))
 			{
-				_gui->getOverlay()->openAnswerForm("quit", "Save Changes?", fvec2(0.0f, 0.25f));
+				_gui->getOverlay()->openAnswerForm("quit", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
 			}
 			else
 			{
@@ -56,18 +56,18 @@ void TopViewportController::_updateProjectScreenManagement()
 
 	if(_gui->getOverlay()->getAnswerFormId() == "quit")
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_saveCurrentProject();
 			_fe3d->application_stop();
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->application_stop();
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 

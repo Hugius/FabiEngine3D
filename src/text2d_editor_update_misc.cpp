@@ -123,7 +123,7 @@ void Text2dEditor::_updateTextChoosing()
 
 				if(_isDeletingText)
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -134,24 +134,24 @@ void Text2dEditor::_updateTextChoosing()
 				}
 
 				_fe3d->text2d_setVisible(_currentTextId, true);
-				_gui->getOverlay()->closeChoiceForm();
+
 				_isChoosingText = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isChoosingText = false;
 			_isDeletingText = false;
 		}
-		else
-		{
-			if(!_hoveredTextId.empty())
-			{
-				_fe3d->text2d_setVisible(_hoveredTextId, false);
-				_hoveredTextId = "";
-			}
-		}
+		//else
+		//{
+		//	if(!_hoveredTextId.empty())
+		//	{
+		//		_fe3d->text2d_setVisible(_hoveredTextId, false);
+		//		_hoveredTextId = "";
+		//	}
+		//}
 	}
 }
 
@@ -159,7 +159,7 @@ void Text2dEditor::_updateTextDeleting()
 {
 	if(_isDeletingText && !_isChoosingText)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->text2d_delete(_currentTextId);
 
@@ -167,14 +167,14 @@ void Text2dEditor::_updateTextDeleting()
 			_currentTextId = "";
 			_isDeletingText = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentTextId = "";
 			_isDeletingText = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 }

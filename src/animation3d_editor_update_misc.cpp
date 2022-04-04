@@ -241,7 +241,7 @@ void Animation3dEditor::_updateAnimationChoosing()
 
 					if(_isDeletingAnimation)
 					{
-						_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+						_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 					}
 					else
 					{
@@ -252,7 +252,7 @@ void Animation3dEditor::_updateAnimationChoosing()
 						_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
 					}
 
-					_gui->getOverlay()->closeChoiceForm();
+
 
 					_isChoosingAnimation = false;
 				}
@@ -265,7 +265,7 @@ void Animation3dEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && !_isChoosingAnimation)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->animation3d_delete(_currentAnimationId);
 
@@ -273,14 +273,14 @@ void Animation3dEditor::_updateAnimationDeleting()
 			_currentAnimationId = "";
 			_isDeletingAnimation = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentAnimationId = "";
 			_isDeletingAnimation = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 }
@@ -331,31 +331,31 @@ void Animation3dEditor::_updateModelChoosing()
 					_fe3d->animation3d_createFrame(_currentAnimationId, 0);
 				}
 
-				_gui->getOverlay()->closeChoiceForm();
+
 
 				_hoveredModelId = "";
 				_isChoosingModel = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
 			if(_fe3d->model_isExisting(_previewModelId))
 			{
 				_fe3d->model_setVisible(_previewModelId, true);
 			}
 
-			_gui->getOverlay()->closeChoiceForm();
+
 
 			_isChoosingModel = false;
 		}
-		else
-		{
-			if(!_hoveredModelId.empty())
-			{
-				_fe3d->model_setVisible(_hoveredModelId, false);
-				_hoveredModelId = "";
-			}
-		}
+		//else
+		//{
+		//	if(!_hoveredModelId.empty())
+		//	{
+		//		_fe3d->model_setVisible(_hoveredModelId, false);
+		//		_hoveredModelId = "";
+		//	}
+		//}
 	}
 }
 
@@ -377,22 +377,22 @@ void Animation3dEditor::_updatePartChoosing()
 			{
 				_currentPartId = _hoveredPartId;
 				_hoveredPartId = "";
-				_gui->getOverlay()->closeChoiceForm();
+
 				_isChoosingPart = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isChoosingPart = false;
 		}
-		else
-		{
-			if(!_hoveredPartId.empty())
-			{
-				_fe3d->model_setOpacity(_previewModelId, _hoveredPartId, _originalPartOpacity);
-				_hoveredPartId = "";
-			}
-		}
+		//else
+		//{
+		//	if(!_hoveredPartId.empty())
+		//	{
+		//		_fe3d->model_setOpacity(_previewModelId, _hoveredPartId, _originalPartOpacity);
+		//		_hoveredPartId = "";
+		//	}
+		//}
 	}
 }

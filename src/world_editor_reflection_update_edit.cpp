@@ -105,12 +105,12 @@ void WorldEditor::_updateReflectionEditing()
 				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					_fe3d->reflection_setExceptionEntityId(_activeReflectionId, selectedOptionId);
-					_gui->getOverlay()->closeChoiceForm();
+
 				}
 			}
-			else if(_gui->getOverlay()->isChoiceFormCancelled())
+			//else if(_gui->getOverlay()->isChoiceFormCancelled())
 			{
-				_gui->getOverlay()->closeChoiceForm();
+
 			}
 
 			auto position = _fe3d->reflection_getPosition(_activeReflectionId);

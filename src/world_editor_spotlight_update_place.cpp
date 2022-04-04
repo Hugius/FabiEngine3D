@@ -55,12 +55,12 @@ void WorldEditor::_updateSpotlightPlacing()
 				_isPlacingSpotlight = false;
 			}
 
-			if(_gui->getOverlay()->isValueFormCancelled())
-			{
-				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
-				_isPlacingSpotlight = false;
-			}
+			//if(_gui->getOverlay()->isValueFormCancelled())
+			//{
+			//	_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
+			//	_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+			//	_isPlacingSpotlight = false;
+			//}
 		}
 		else
 		{

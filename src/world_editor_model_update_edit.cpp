@@ -162,12 +162,12 @@ void WorldEditor::_updateModelEditing()
 
 					_fe3d->model_startAnimation(_activeModelId, ("@" + selectedOptionId), -1);
 
-					_gui->getOverlay()->closeChoiceForm();
+
 				}
 			}
-			else if(_gui->getOverlay()->isChoiceFormCancelled())
+			//else if(_gui->getOverlay()->isChoiceFormCancelled())
 			{
-				_gui->getOverlay()->closeChoiceForm();
+
 			}
 
 			auto position = _fe3d->model_getBasePosition(_activeModelId);

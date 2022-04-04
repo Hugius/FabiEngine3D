@@ -39,12 +39,12 @@ void WorldEditor::_updateReflectionPlacing()
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
-			{
-				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
-				_isPlacingReflection = false;
-			}
+			//if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			//{
+			//	_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
+			//	_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
+			//	_isPlacingReflection = false;
+			//}
 		}
 		else
 		{

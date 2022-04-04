@@ -47,7 +47,7 @@ void WorldEditor::_updateChoiceMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sky")->isHovered())
@@ -97,7 +97,7 @@ void WorldEditor::_updateChoiceMenu()
 
 		if(_gui->getOverlay()->getAnswerFormId() == "back")
 		{
-			if(_gui->getOverlay()->isAnswerFormAccepted())
+			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_currentTemplateModelId = "";
 				_currentTemplateQuadId = "";
@@ -115,9 +115,9 @@ void WorldEditor::_updateChoiceMenu()
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 
-				_gui->getOverlay()->closeAnswerForm();
+
 			}
-			if(_gui->getOverlay()->isAnswerFormDenied())
+			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				_currentTemplateModelId = "";
 				_currentTemplateQuadId = "";
@@ -133,7 +133,7 @@ void WorldEditor::_updateChoiceMenu()
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 
-				_gui->getOverlay()->closeAnswerForm();
+
 			}
 		}
 	}

@@ -39,11 +39,11 @@ void WorldEditor::_updateSkyMenu()
 
 				_fe3d->sky_select(selectedOptionId);
 
-				_gui->getOverlay()->closeChoiceForm();
+
 			}
-			else if(_gui->getOverlay()->isChoiceFormCancelled())
+			//else if(_gui->getOverlay()->isChoiceFormCancelled())
 			{
-				_gui->getOverlay()->closeChoiceForm();
+
 			}
 		}
 

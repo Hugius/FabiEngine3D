@@ -124,7 +124,7 @@ void SoundEditor::_updateSoundChoosing()
 
 				if(_isDeletingSound)
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -134,13 +134,13 @@ void SoundEditor::_updateSoundChoosing()
 					_gui->getOverlay()->getTextField("soundId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->closeChoiceForm();
+
 				_isChoosingSound = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isChoosingSound = false;
 			_isDeletingSound = false;
 		}
@@ -151,7 +151,7 @@ void SoundEditor::_updateSoundDeleting()
 {
 	if(_isDeletingSound && !_isChoosingSound)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->sound2d_delete(_currentSoundId);
 
@@ -159,14 +159,14 @@ void SoundEditor::_updateSoundDeleting()
 			_currentSoundId = "";
 			_isDeletingSound = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentSoundId = "";
 			_isDeletingSound = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 }

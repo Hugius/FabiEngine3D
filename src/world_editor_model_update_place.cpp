@@ -26,11 +26,11 @@ void WorldEditor::_updateModelPlacing()
 				_fe3d->model_setBasePosition(newId, newPosition);
 			}
 
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
-			{
-				_fe3d->model_setVisible(_currentTemplateModelId, false);
-				_currentTemplateModelId = "";
-			}
+			//if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			//{
+			//	_fe3d->model_setVisible(_currentTemplateModelId, false);
+			//	_currentTemplateModelId = "";
+			//}
 		}
 		else
 		{

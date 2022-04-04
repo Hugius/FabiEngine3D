@@ -52,12 +52,12 @@ void WorldEditor::_updatePointlightPlacing()
 				_isPlacingPointlight = false;
 			}
 
-			if(_gui->getOverlay()->isValueFormCancelled())
-			{
-				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
-				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
-				_isPlacingPointlight = false;
-			}
+			//if(_gui->getOverlay()->isValueFormCancelled())
+			//{
+			//	_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
+			//	_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+			//	_isPlacingPointlight = false;
+			//}
 		}
 		else
 		{

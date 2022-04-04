@@ -25,11 +25,11 @@ void WorldEditor::_updateQuad3dPlacing()
 				_fe3d->quad3d_setPosition(newId, newPosition);
 			}
 
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
-			{
-				_fe3d->quad3d_setVisible(_currentTemplateQuadId, false);
-				_currentTemplateQuadId = "";
-			}
+			//if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			//{
+			//	_fe3d->quad3d_setVisible(_currentTemplateQuadId, false);
+			//	_currentTemplateQuadId = "";
+			//}
 		}
 		else
 		{

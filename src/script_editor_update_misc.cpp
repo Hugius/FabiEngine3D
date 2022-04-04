@@ -13,7 +13,7 @@ void ScriptEditor::_updateGUI()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("search")->isHovered())
 		{
@@ -41,7 +41,7 @@ void ScriptEditor::_updateGUI()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 			_isDeletingScriptFile = true;
 		}
 
@@ -55,14 +55,14 @@ void ScriptEditor::_updateGUI()
 
 		if(_gui->getOverlay()->getAnswerFormId() == "back")
 		{
-			if(_gui->getOverlay()->isAnswerFormAccepted())
+			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveScriptFiles();
 				unload();
 				return;
 			}
-			if(_gui->getOverlay()->isAnswerFormDenied())
+			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
@@ -143,13 +143,13 @@ void ScriptEditor::_updateScriptFileChoosing()
 				_createScriptDisplayEntities();
 				_fe3d->text3d_setVisible("cursor", true);
 
-				_gui->getOverlay()->closeChoiceForm();
+
 				_isChoosingScriptFile = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isChoosingScriptFile = false;
 		}
 	}
@@ -316,19 +316,19 @@ void ScriptEditor::_updateScriptDeleting()
 {
 	if(_isDeletingScriptFile)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_script->deleteScriptFile(_currentScriptFileId);
 			_clearDisplay();
 			_isDeletingScriptFile = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_isDeletingScriptFile = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 }

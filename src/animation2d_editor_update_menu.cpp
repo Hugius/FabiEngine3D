@@ -10,7 +10,7 @@ void Animation2dEditor::_updateMainMenu()
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
@@ -43,20 +43,18 @@ void Animation2dEditor::_updateMainMenu()
 
 		if(_gui->getOverlay()->getAnswerFormId() == "back")
 		{
-			if(_gui->getOverlay()->isAnswerFormAccepted())
+			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveAnimationsToFile();
 				unload();
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-				_gui->getOverlay()->closeAnswerForm();
 			}
-			if(_gui->getOverlay()->isAnswerFormDenied())
+			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				unload();
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-				_gui->getOverlay()->closeAnswerForm();
 			}
 		}
 	}
@@ -90,7 +88,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
 		{
-			_gui->getOverlay()->openAnswerForm("preview", "Quad3D Entity?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("preview", "Entity Type?", "Quad3D", "Quad2D", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rowCount")->isHovered())
 		{
@@ -118,7 +116,6 @@ void Animation2dEditor::_updateChoiceMenu()
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				_fe3d->animation2d_setRowCount(_currentAnimationId, Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent()));
-				_gui->getOverlay()->closeValueForm();
 			}
 		}
 		if(_gui->getOverlay()->getValueFormId() == "columnCount")
@@ -126,7 +123,6 @@ void Animation2dEditor::_updateChoiceMenu()
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				_fe3d->animation2d_setColumnCount(_currentAnimationId, Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent()));
-				_gui->getOverlay()->closeValueForm();
 			}
 		}
 		if((_gui->getOverlay()->getValueFormId() == "interval"))
@@ -134,48 +130,41 @@ void Animation2dEditor::_updateChoiceMenu()
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				_fe3d->animation2d_setInterval(_currentAnimationId, Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent()));
-				_gui->getOverlay()->closeValueForm();
 			}
 		}
 
-		if(_gui->getOverlay()->getAnswerFormId() == "preview")
+		if(_gui->getOverlay()->getAnswerFormId() == "preview" && _gui->getOverlay()->isAnswerFormConfirmed())
 		{
-			if(_gui->getOverlay()->isAnswerFormAccepted() || _gui->getOverlay()->isAnswerFormDenied())
+			if(getCurrentProjectId().empty())
 			{
-				if(getCurrentProjectId().empty())
-				{
-					abort();
-				}
-
-				const auto rootPath = Tools::getRootDirectoryPath();
-				const auto entityType = (_gui->getOverlay()->isAnswerFormAccepted() ? "quad3d" : "quad2d");
-				const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\" + entityType + "\\diffuse_map\\");
-
-				if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
-				{
-					Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
-					return;
-				}
-
-				const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
-				if(filePath.empty())
-				{
-					return;
-				}
-
-				if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
-				{
-					Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
-					return;
-				}
-
-				const string finalFilePath = filePath.substr(rootPath.size());
-				_fe3d->misc_clearImageCache(finalFilePath);
-				_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, finalFilePath);
-				_isPreviewTextureChosen = true;
-
-				_gui->getOverlay()->closeAnswerForm();
+				abort();
 			}
+
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\" + _gui->getOverlay()->getAnswerFormDecision() + "\\diffuse_map\\");
+
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+			{
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+				return;
+			}
+
+			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+			if(filePath.empty())
+			{
+				return;
+			}
+
+			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+			{
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+				return;
+			}
+
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d->misc_clearImageCache(finalFilePath);
+			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, finalFilePath);
+			_isPreviewTextureChosen = true;
 		}
 
 		const auto isStarted = _fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD_ID, _currentAnimationId);

@@ -111,7 +111,7 @@ void WaterEditor::_updateWaterChoosing()
 
 				if(_isDeletingWater)
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -121,20 +121,20 @@ void WaterEditor::_updateWaterChoosing()
 					_gui->getOverlay()->getTextField("waterId")->setVisible(true);
 				}
 
-				_gui->getOverlay()->closeChoiceForm();
+
 				_isChoosingWater = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isChoosingWater = false;
 			_isDeletingWater = false;
 		}
-		else
-		{
-			_fe3d->water_select("");
-		}
+		//else
+		//{
+		//	_fe3d->water_select("");
+		//}
 	}
 }
 
@@ -142,7 +142,7 @@ void WaterEditor::_updateWaterDeleting()
 {
 	if(_isDeletingWater && !_isChoosingWater)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->water_delete(_currentWaterId);
 
@@ -150,14 +150,14 @@ void WaterEditor::_updateWaterDeleting()
 			_currentWaterId = "";
 			_isDeletingWater = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentWaterId = "";
 			_isDeletingWater = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 }

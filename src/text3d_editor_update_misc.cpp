@@ -170,7 +170,7 @@ void Text3dEditor::_updateText3dChoosing()
 
 				if(_isDeletingText3d)
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -181,24 +181,24 @@ void Text3dEditor::_updateText3dChoosing()
 				}
 
 				_fe3d->text3d_setVisible(_currentTextId, true);
-				_gui->getOverlay()->closeChoiceForm();
+
 				_isChoosingText3d = false;
 			}
 		}
-		else if(_gui->getOverlay()->isChoiceFormCancelled())
+		//else if(_gui->getOverlay()->isChoiceFormCancelled())
 		{
-			_gui->getOverlay()->closeChoiceForm();
+
 			_isChoosingText3d = false;
 			_isDeletingText3d = false;
 		}
-		else
-		{
-			if(!_hoveredTextId.empty())
-			{
-				_fe3d->text3d_setVisible(_hoveredTextId, false);
-				_hoveredTextId = "";
-			}
-		}
+		//else
+		//{
+		//	if(!_hoveredTextId.empty())
+		//	{
+		//		_fe3d->text3d_setVisible(_hoveredTextId, false);
+		//		_hoveredTextId = "";
+		//	}
+		//}
 	}
 }
 
@@ -206,7 +206,7 @@ void Text3dEditor::_updateText3dDeleting()
 {
 	if(_isDeletingText3d && !_isChoosingText3d)
 	{
-		if(_gui->getOverlay()->isAnswerFormAccepted())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
 			_fe3d->text3d_delete(_currentTextId);
 
@@ -214,16 +214,16 @@ void Text3dEditor::_updateText3dDeleting()
 			_currentTextId = "";
 			_isDeletingText3d = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
-		if(_gui->getOverlay()->isAnswerFormDenied())
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->text3d_setVisible(_currentTextId, false);
 
 			_currentTextId = "";
 			_isDeletingText3d = false;
 
-			_gui->getOverlay()->closeAnswerForm();
+
 		}
 	}
 }

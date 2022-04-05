@@ -12,7 +12,7 @@ void ModelEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			//_gui->getOverlay()->openValueForm("modelCreate", "Create Model", "", fvec2(0.0f, 0.1f), 10, true, true, true);
+			_gui->getOverlay()->openValueForm("modelCreate", "Create Model", "", fvec2(0.0f, 0.1f), 10, true, true, true);
 			_isCreatingModel = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())

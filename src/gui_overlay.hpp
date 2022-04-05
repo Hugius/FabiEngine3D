@@ -31,6 +31,9 @@ public:
 	void deleteTextFields();
 	void openChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles);
 	void openValueForm(const string & id, const string & title, const string & value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
+	void openValueForm(const string & id, const string & title, float value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
+	void openValueForm(const string & id, const string & title, unsigned int value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
+	void openValueForm(const string & id, const string & title, int value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
 	void openAnswerForm(const string & id, const string & title, const string & left, const string & right, const fvec2 & position);
 	void closeChoiceForm();
 	void closeValueForm();
@@ -113,7 +116,7 @@ private:
 	static inline const fvec2 CF_TITLE_OFFSET = fvec2(0.0f, 0.475f);
 	static inline const fvec2 CF_LIST_OFFSET = fvec2(0.0f, 0.475f);
 	static inline const fvec2 CF_LIST_SIZE = fvec2(0.5, 0.75f);
-	static inline const fvec2 CF_LIST_CHAR_SIZE = fvec2(0.1f, 0.15f);
+	static inline const fvec2 CF_LIST_CHAR_SIZE = fvec2(0.1f, 0.175f);
 	static inline const fvec2 CF_CANCEL_OFFSET = fvec2(0.0f, -0.475f);
 	static inline const fvec2 CF_CANCEL_SIZE = fvec2(0.18f, 0.1f);
 	static inline const fvec2 VF_TITLE_QUAD_SIZE = fvec2(0.0275f, 0.125f);

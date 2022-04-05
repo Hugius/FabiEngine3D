@@ -14,7 +14,7 @@ void Quad2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			//_gui->getOverlay()->openValueForm("quadCreate", "Create Quad2D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("quadCreate", "Create Quad2D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isCreatingQuad = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -109,42 +109,50 @@ void Quad2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			//_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			//_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			//_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
-			//_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			//_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		//if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.r /= 255.0f;
-			_fe3d->quad2d_setColor(_currentQuadId, color);
+			const auto content = Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->quad2d_setColor(_currentQuadId, (static_cast<float>(content) / 255.0f));
+
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		//if(_gui->getOverlay()->checkValueForm("colorG", color.g, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.g /= 255.0f;
-			_fe3d->quad2d_setColor(_currentQuadId, color);
+			const auto content = Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->quad2d_setColor(_currentQuadId, (static_cast<float>(content) / 255.0f));
+
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
 		}
-		//if(_gui->getOverlay()->checkValueForm("colorB", color.b, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.b /= 255.0f;
-			_fe3d->quad2d_setColor(_currentQuadId, color);
+			const auto content = Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->quad2d_setColor(_currentQuadId, (static_cast<float>(content) / 255.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("opacity", opacity, {}))
+		if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			opacity /= 100.0f;
-			_fe3d->quad2d_setOpacity(_currentQuadId, opacity);
+			const auto content = Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->quad2d_setOpacity(_currentQuadId, (static_cast<float>(content) / 100.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
+		if((_gui->getOverlay()->getValueFormId() == "textureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->quad2d_setTextureRepeat(_currentQuadId, textureRepeat);
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->quad2d_setTextureRepeat(_currentQuadId, content);
 		}
 	}
 }

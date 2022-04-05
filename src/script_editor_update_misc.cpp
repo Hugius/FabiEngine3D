@@ -17,12 +17,12 @@ void ScriptEditor::_updateGUI()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("search")->isHovered())
 		{
-			//_gui->getOverlay()->openValueForm("search", "Search Script", "", fvec2(0.0f, 0.1f), 10, true, true, true);
+			_gui->getOverlay()->openValueForm("search", "Search Script", "", fvec2(0.0f, 0.1f), 10, true, true, true);
 			_isSearchingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			//_gui->getOverlay()->openValueForm("scriptCreate", "Create Script", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("scriptCreate", "Create Script", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isCreatingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -32,7 +32,7 @@ void ScriptEditor::_updateGUI()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rename")->isHovered())
 		{
-			//_gui->getOverlay()->openValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isRenamingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clear")->isHovered())
@@ -49,7 +49,7 @@ void ScriptEditor::_updateGUI()
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F) && !_gui->getOverlay()->isFocused())
 			{
-				//_gui->getOverlay()->openValueForm("search", "Search Keyword", "", fvec2(0.0f, 0.1f), 10, true, true, true);
+				_gui->getOverlay()->openValueForm("search", "Search Keyword", "", fvec2(0.0f, 0.1f), 10, true, true, true);
 			}
 		}
 

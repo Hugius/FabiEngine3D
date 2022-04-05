@@ -12,7 +12,7 @@ void Quad3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			//_gui->getOverlay()->openValueForm("quad3dCreate", "Create Quad3D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("quad3dCreate", "Create Quad3D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 			_isCreatingQuad3d = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())

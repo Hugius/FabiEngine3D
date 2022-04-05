@@ -7,7 +7,7 @@ using std::ofstream;
 
 void TopViewportController::_updateProjectCreating()
 {
-	if((_gui->getOverlay()->getValueFormId() == "projectCreation") && _gui->getOverlay()->isValueFormConfirmed())
+	if((_gui->getOverlay()->getValueFormId() == "projectCreating") && _gui->getOverlay()->isValueFormConfirmed())
 	{
 		const auto newProjectId = _gui->getOverlay()->getValueFormContent();
 		const auto rootPath = Tools::getRootDirectoryPath();
@@ -163,7 +163,7 @@ void TopViewportController::_updateProjectLoading()
 
 void TopViewportController::_updateProjectDeleting()
 {
-	if((_gui->getOverlay()->getChoiceFormId() == "projectDeletion") && _gui->getOverlay()->isChoiceFormConfirmed())
+	if((_gui->getOverlay()->getChoiceFormId() == "projectDeleting") && _gui->getOverlay()->isChoiceFormConfirmed())
 	{
 		_projectToDelete = _gui->getOverlay()->getChoiceFormOptionId();
 

@@ -101,7 +101,6 @@ private:
 	bool _isChoosingScriptFile = false;
 	bool _isRenamingScriptFile = false;
 	bool _isDeletingScriptFile = false;
-	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
 	bool _hasTextChanged = false;
 

@@ -33,7 +33,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		return false;
 	}
 
-	for(const auto& fileName : Tools::getFileNamesFromDirectory(directoryPath))
+	for(const auto & fileName : Tools::getFileNamesFromDirectory(directoryPath))
 	{
 		const auto extension = fileName.substr(fileName.size() - 5, 5);
 		if(extension != ".fe3d")
@@ -79,8 +79,6 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	{
 		Logger::throwInfo("Script editor data loaded");
 	}
-
-	_isScriptLoadedFromFile = true;
 
 	return true;
 }

@@ -75,7 +75,7 @@ const bool TopViewportController::isScriptRunning() const
 void TopViewportController::_updateMiscellaneous()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("main");
-	bool isHoverable = (_currentProjectId.empty()) ? false : !_scriptExecutor->isStarted();
+	bool isHoverable = (_currentProjectId.empty() ? false : !_scriptExecutor->isStarted());
 
 	screen->getButton("skyEditor")->setHoverable(isHoverable);
 	screen->getButton("terrainEditor")->setHoverable(isHoverable);

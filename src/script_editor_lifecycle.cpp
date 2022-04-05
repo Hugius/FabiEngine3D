@@ -76,7 +76,6 @@ void ScriptEditor::_unload()
 	_isChoosingScriptFile = false;
 	_isRenamingScriptFile = false;
 	_isDeletingScriptFile = false;
-	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_hasTextChanged = false;
 	_selectionType = {};

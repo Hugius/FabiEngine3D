@@ -16,7 +16,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	{
 		if(topScreen->getButton("newProject")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("projectCreation", "Create Project", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("projectCreating", "Create Project", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(topScreen->getButton("loadProject")->isHovered())
 		{
@@ -47,7 +47,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			{
 				auto projectIds = Tools::getDirectoryNamesFromDirectory(projectDirectoryPath);
 
-				_gui->getOverlay()->openChoiceForm("projectDeletion", "Delete Project", fvec2(0.0f, 0.1f), projectIds);
+				_gui->getOverlay()->openChoiceForm("projectDeleting", "Delete Project", fvec2(0.0f, 0.1f), projectIds);
 			}
 			else
 			{
@@ -56,37 +56,13 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 		else if(topScreen->getButton("quitEngine")->isHovered())
 		{
-			if((!_currentProjectId.empty()) && (leftScreen->getId() != "main") && (leftScreen->getId() != "worldEditorMenuMain"))
-			{
-				_gui->getOverlay()->openAnswerForm("quit", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
-			}
-			else
-			{
-				_fe3d->application_stop();
-			}
+			_fe3d->application_stop();
 		}
 	}
 
 	_updateProjectCreating();
 	_updateProjectLoading();
 	_updateProjectDeleting();
-
-	if(_gui->getOverlay()->getAnswerFormId() == "quit")
-	{
-		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
-		{
-			_saveCurrentProject();
-			_fe3d->application_stop();
-
-
-		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
-		{
-			_fe3d->application_stop();
-
-
-		}
-	}
 
 	topScreen->getButton("newProject")->setHoverable(!_scriptExecutor->isStarted());
 	topScreen->getButton("loadProject")->setHoverable(!_scriptExecutor->isStarted());
@@ -144,22 +120,22 @@ void TopViewportController::_updateGameScreenManagement()
 			}
 		}
 
-		static bool wasInMainMenu = false;
-		const bool isInMainMenu = (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main");
-		screen->getButton("start")->setHoverable(isInMainMenu && !_script->isEmpty() && !isScriptRunning());
-		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d->server_isRunning());
-		screen->getButton("restart")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
-		screen->getButton("stop")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
-		screen->getButton("debug")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
+		const auto isInMainMenu = (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getId() == "main");
+		const auto isScriptEmpty = _script->isEmpty();
+		const auto isScriptStarted = _scriptExecutor->isStarted();
+		const auto isScriptRunning = _scriptExecutor->isRunning();
+		screen->getButton("start")->setHoverable(isInMainMenu && !isScriptEmpty && !isScriptRunning);
+		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning && !_fe3d->server_isRunning());
+		screen->getButton("restart")->setHoverable(isInMainMenu && isScriptStarted);
+		screen->getButton("stop")->setHoverable(isInMainMenu && isScriptStarted);
+		screen->getButton("debug")->setHoverable(isInMainMenu && isScriptStarted);
 
-		const bool cameIntoMainMenu = (!wasInMainMenu && isInMainMenu);
-		if(cameIntoMainMenu || (isInMainMenu && !isScriptStarted() && ((_fe3d->misc_getPassedUpdateCount() % _fe3d->misc_getUpdateCountPerSecond()) == 0)))
+		if(isInMainMenu && !isScriptStarted && _script->isEmpty())
 		{
 			_scriptEditor->loadScriptFiles(false);
 		}
-		wasInMainMenu = isInMainMenu;
 
-		if(_scriptExecutor->isRunning())
+		if(isScriptRunning)
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE))
 			{

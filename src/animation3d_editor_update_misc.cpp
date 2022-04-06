@@ -173,89 +173,68 @@ void Animation3dEditor::_updateMiscellaneous()
 
 void Animation3dEditor::_updateAnimationCreating()
 {
-	if(_isCreatingAnimation)
+	if((_gui->getOverlay()->getValueFormId() == "createAnimation") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		string newAnimationId;
+		auto newAnimationId = _gui->getOverlay()->getValueFormContent();
 
-		if(_gui->getOverlay()->checkValueForm("animationCreate", newAnimationId, {_currentAnimationId}))
+		if(newAnimationId.empty())
 		{
-			if(newAnimationId.empty())
-			{
-				Logger::throwWarning("Animation ID cannot be empty");
-				return;
-			}
-
-			if(any_of(newAnimationId.begin(), newAnimationId.end(), isspace))
-			{
-				Logger::throwWarning("Animation ID cannot contain any spaces");
-				return;
-			}
-
-			if(any_of(newAnimationId.begin(), newAnimationId.end(), isupper))
-			{
-				Logger::throwWarning("Animation ID cannot contain any capitals");
-				return;
-			}
-
-			newAnimationId = ("@" + newAnimationId);
-
-			if(find(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), newAnimationId) != _loadedAnimationIds.end())
-			{
-				Logger::throwWarning("Animation already exists");
-				return;
-			}
-
-			_currentAnimationId = newAnimationId;
-			_loadedAnimationIds.push_back(newAnimationId);
-			sort(_loadedAnimationIds.begin(), _loadedAnimationIds.end());
-
-			_fe3d->animation3d_create(newAnimationId);
-
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-			_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + newAnimationId);
-			_gui->getOverlay()->getTextField("animationId")->setVisible(true);
-			_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
-			_isCreatingAnimation = false;
+			Logger::throwWarning("Animation ID cannot be empty");
+			return;
 		}
+
+		if(any_of(newAnimationId.begin(), newAnimationId.end(), isspace))
+		{
+			Logger::throwWarning("Animation ID cannot contain any spaces");
+			return;
+		}
+
+		if(any_of(newAnimationId.begin(), newAnimationId.end(), isupper))
+		{
+			Logger::throwWarning("Animation ID cannot contain any capitals");
+			return;
+		}
+
+		newAnimationId = ("@" + newAnimationId);
+
+		if(find(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), newAnimationId) != _loadedAnimationIds.end())
+		{
+			Logger::throwWarning("Animation already exists");
+			return;
+		}
+
+		_currentAnimationId = newAnimationId;
+		_loadedAnimationIds.push_back(newAnimationId);
+		sort(_loadedAnimationIds.begin(), _loadedAnimationIds.end());
+
+		_fe3d->animation3d_create(newAnimationId);
+
+		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
+		_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + newAnimationId);
+		_gui->getOverlay()->getTextField("animationId")->setVisible(true);
+		_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
 	}
 }
 
 void Animation3dEditor::_updateAnimationChoosing()
 {
-	if(_isChoosingAnimation)
+	if((_gui->getOverlay()->getChoiceFormId() == "editAnimation") || (_gui->getOverlay()->getChoiceFormId() == "deleteAnimation"))
 	{
-		if(_gui->getOverlay()->getChoiceFormId().empty())
+		if(_gui->getOverlay()->isChoiceFormConfirmed())
 		{
-			_isChoosingAnimation = false;
-			_isDeletingAnimation = false;
-		}
-		else
-		{
-			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+			_currentAnimationId = ("@" + _gui->getOverlay()->getChoiceFormOptionId());
 
-			if(!selectedOptionId.empty())
+			if(_gui->getOverlay()->getChoiceFormId() == "deleteAnimation")
 			{
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-				{
-					_currentAnimationId = ("@" + selectedOptionId);
+				_gui->getOverlay()->openAnswerForm("deleteAnimation", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+			}
+			else
+			{
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
-					if(_isDeletingAnimation)
-					{
-						_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
-					}
-					else
-					{
-						_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-
-						_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + _currentAnimationId.substr(1));
-						_gui->getOverlay()->getTextField("animationId")->setVisible(true);
-						_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
-					}
-
-
-
-					_isChoosingAnimation = false;
-				}
+				_gui->getOverlay()->getTextField("animationId")->setTextContent("Animation: " + _currentAnimationId.substr(1));
+				_gui->getOverlay()->getTextField("animationId")->setVisible(true);
+				_gui->getOverlay()->getTextField("animationFrame")->setVisible(true);
 			}
 		}
 	}
@@ -263,7 +242,7 @@ void Animation3dEditor::_updateAnimationChoosing()
 
 void Animation3dEditor::_updateAnimationDeleting()
 {
-	if(_isDeletingAnimation && !_isChoosingAnimation)
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteAnimation") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
@@ -271,37 +250,42 @@ void Animation3dEditor::_updateAnimationDeleting()
 
 			_loadedAnimationIds.erase(remove(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), _currentAnimationId), _loadedAnimationIds.end());
 			_currentAnimationId = "";
-			_isDeletingAnimation = false;
-
-
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentAnimationId = "";
-			_isDeletingAnimation = false;
-
-
 		}
 	}
 }
 
 void Animation3dEditor::_updateModelChoosing()
 {
-	if(_isChoosingModel)
+	if(_gui->getOverlay()->getChoiceFormId() == "selectModel")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredModelId.empty())
+			{
+				_fe3d->model_setVisible(_hoveredModelId, false);
+
+				_hoveredModelId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredModelId.empty())
 			{
 				_hoveredModelId = ("@" + selectedOptionId);
+
 				_fe3d->model_setVisible(_hoveredModelId, true);
 			}
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				bool hasAllParts = true;
+
 				for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 				{
 					if(!partId.empty())
@@ -331,41 +315,28 @@ void Animation3dEditor::_updateModelChoosing()
 					_fe3d->animation3d_createFrame(_currentAnimationId, 0);
 				}
 
-
-
 				_hoveredModelId = "";
-				_isChoosingModel = false;
 			}
 		}
-		//else if(_gui->getOverlay()->isChoiceFormCancelled())
-		{
-			if(_fe3d->model_isExisting(_previewModelId))
-			{
-				_fe3d->model_setVisible(_previewModelId, true);
-			}
-
-
-
-			_isChoosingModel = false;
-		}
-		//else
-		//{
-		//	if(!_hoveredModelId.empty())
-		//	{
-		//		_fe3d->model_setVisible(_hoveredModelId, false);
-		//		_hoveredModelId = "";
-		//	}
-		//}
 	}
 }
 
 void Animation3dEditor::_updatePartChoosing()
 {
-	if(_isChoosingPart)
+	if(_gui->getOverlay()->getChoiceFormId() == "selectPart")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredPartId.empty())
+			{
+				_fe3d->model_setOpacity(_previewModelId, _hoveredPartId, _originalPartOpacity);
+
+				_hoveredPartId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredPartId.empty())
 			{
@@ -373,26 +344,11 @@ void Animation3dEditor::_updatePartChoosing()
 				_originalPartOpacity = _fe3d->model_getOpacity(_previewModelId, _hoveredPartId);
 			}
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				_currentPartId = _hoveredPartId;
 				_hoveredPartId = "";
-
-				_isChoosingPart = false;
 			}
 		}
-		//else if(_gui->getOverlay()->isChoiceFormCancelled())
-		{
-
-			_isChoosingPart = false;
-		}
-		//else
-		//{
-		//	if(!_hoveredPartId.empty())
-		//	{
-		//		_fe3d->model_setOpacity(_previewModelId, _hoveredPartId, _originalPartOpacity);
-		//		_hoveredPartId = "";
-		//	}
-		//}
 	}
 }

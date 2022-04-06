@@ -59,7 +59,7 @@ void Animation3dEditor::_unload()
 {
 	_modelEditor->deleteLoadedEntities();
 
-	for(const auto& id : _loadedAnimationIds)
+	for(const auto & id : _loadedAnimationIds)
 	{
 		_fe3d->animation3d_delete(id);
 	}
@@ -105,11 +105,6 @@ void Animation3dEditor::_unload()
 	_selectedPartHighlightDirection = 1;
 	_currentFrameIndex = 0;
 	_mustUpdateCurrentFramePreview = true;
-	_isCreatingAnimation = false;
-	_isChoosingAnimation = false;
-	_isDeletingAnimation = false;
-	_isChoosingModel = false;
-	_isChoosingPart = false;
 }
 
 void Animation3dEditor::_loadGUI()

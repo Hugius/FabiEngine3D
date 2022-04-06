@@ -8,9 +8,9 @@ void WorldEditor::_updateSoundPlacing()
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
 			auto newPosition = _fe3d->sound3d_getPosition(_currentTemplateSoundId);
-			//_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			//_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			//_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
+			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 			_fe3d->sound3d_setPosition(_currentTemplateSoundId, newPosition);
 			_fe3d->model_setBasePosition(TEMPLATE_SPEAKER_ID, newPosition);
 
@@ -44,12 +44,12 @@ void WorldEditor::_updateSoundPlacing()
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			//if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
-			//{
-			//	_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-			//	_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
-			//	_currentTemplateSoundId = "";
-			//}
+			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			{
+				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
+				_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
+				_currentTemplateSoundId = "";
+			}
 		}
 		else
 		{

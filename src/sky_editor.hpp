@@ -11,7 +11,7 @@ public:
 	void deleteLoadedEntities();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedEntityIds() const;
+	const vector<string> & getLoadedEntityIds() const;
 
 	const bool loadEntitiesFromFile();
 	const bool saveEntitiesToFile() const;
@@ -38,8 +38,4 @@ private:
 	vector <string> _loadedEntityIds = {};
 
 	string _currentSkyId = "";
-
-	bool _isCreatingSky = false;
-	bool _isChoosingSky = false;
-	bool _isDeletingSky = false;
 };

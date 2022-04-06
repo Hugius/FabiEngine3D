@@ -9,10 +9,18 @@ void GuiOverlay::_updateForms()
 		_mustCloseChoiceForm = false;
 	}
 
-
 	if(_mustCloseValueForm)
 	{
 		_closeValueForm();
+
+		if(!_valueFormQueue.empty())
+		{
+			const auto parameters = _valueFormQueue.front();
+
+			openValueForm(get<0>(parameters), get<1>(parameters), get<2>(parameters), get<3>(parameters), get<4>(parameters), get<5>(parameters), get<6>(parameters), get<7>(parameters));
+
+			_valueFormQueue.erase(_valueFormQueue.begin());
+		}
 
 		_mustCloseValueForm = false;
 	}
@@ -148,7 +156,7 @@ void GuiOverlay::openValueForm(const string & id, const string & title, const st
 {
 	if(!_valueFormId.empty())
 	{
-		abort();
+		_valueFormQueue.push_back(make_tuple(id, title, valueString, position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed));
 	}
 
 	createQuadField("value_form_title", (position + VF_TITLE_OFFSET), fvec2((title.size() * VF_TITLE_QUAD_SIZE.x), VF_TITLE_QUAD_SIZE.y), "", VF_TITLE_QUAD_COLOR, true);

@@ -285,9 +285,6 @@ private:
 	bool _isPlacingPointlight = false;
 	bool _isPlacingSpotlight = false;
 	bool _isPlacingReflection = false;
-	bool _isCreatingWorld = false;
-	bool _isChoosingWorld = false;
-	bool _isDeletingWorld = false;
 	bool _isWireframeModeEnabled = false;
 	bool _isAabbModeEnabled = false;
 };

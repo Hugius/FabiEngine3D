@@ -96,113 +96,112 @@ void ModelEditor::_updateMiscellaneous()
 
 void ModelEditor::_updateModelCreating()
 {
-	if(_isCreatingModel)
+	if((_gui->getOverlay()->getValueFormId() == "createModel") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		string newModelId;
+		auto newModelId = _gui->getOverlay()->getValueFormContent();
 
-		if(_gui->getOverlay()->getValueFormId() == "modelCreate")
+		if(newModelId.empty())
 		{
-			if(_gui->getOverlay()->isValueFormConfirmed())
-			{
-				if(newModelId.empty())
-				{
-					Logger::throwWarning("Model ID cannot be empty");
-					return;
-				}
+			Logger::throwWarning("Model ID cannot be empty");
+			return;
+		}
 
-				if(any_of(newModelId.begin(), newModelId.end(), isspace))
-				{
-					Logger::throwWarning("Model ID cannot contain any spaces");
-					return;
-				}
+		if(any_of(newModelId.begin(), newModelId.end(), isspace))
+		{
+			Logger::throwWarning("Model ID cannot contain any spaces");
+			return;
+		}
 
-				if(any_of(newModelId.begin(), newModelId.end(), isupper))
-				{
-					Logger::throwWarning("Model ID cannot contain any capitals");
-					return;
-				}
+		if(any_of(newModelId.begin(), newModelId.end(), isupper))
+		{
+			Logger::throwWarning("Model ID cannot contain any capitals");
+			return;
+		}
 
-				newModelId = ("@" + newModelId);
+		newModelId = ("@" + newModelId);
 
-				if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newModelId) != _loadedEntityIds.end())
-				{
-					Logger::throwWarning("Model already exists");
-					return;
-				}
+		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newModelId) != _loadedEntityIds.end())
+		{
+			Logger::throwWarning("Model already exists");
+			return;
+		}
 
-				if(getCurrentProjectId().empty())
-				{
-					abort();
-				}
+		if(getCurrentProjectId().empty())
+		{
+			abort();
+		}
 
-				const auto rootPath = Tools::getRootDirectoryPath();
-				const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\mesh\\");
+		const auto rootPath = Tools::getRootDirectoryPath();
+		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\mesh\\");
 
-				if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
-				{
-					Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
-					_isCreatingModel = false;
-					return;
-				}
+		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+		{
+			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+			return;
+		}
 
-				const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "OBJ");
-				if(filePath.empty())
-				{
-					_isCreatingModel = false;
-					return;
-				}
+		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "OBJ");
+		if(filePath.empty())
+		{
+			return;
+		}
 
-				if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
-				{
-					Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
-					_isCreatingModel = false;
-					return;
-				}
+		if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+		{
+			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+			return;
+		}
 
-				const string finalFilePath = filePath.substr(rootPath.size());
-				_fe3d->misc_clearMeshCache(finalFilePath);
+		const string finalFilePath = filePath.substr(rootPath.size());
+		_fe3d->misc_clearMeshCache(finalFilePath);
 
-				_fe3d->model_create(newModelId, finalFilePath);
+		_fe3d->model_create(newModelId, finalFilePath);
 
-				if(_fe3d->model_isExisting(newModelId))
-				{
-					_currentModelId = newModelId;
-					_loadedEntityIds.push_back(newModelId);
-					sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+		if(_fe3d->model_isExisting(newModelId))
+		{
+			_currentModelId = newModelId;
+			_loadedEntityIds.push_back(newModelId);
+			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
-					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-					_gui->getOverlay()->getTextField("modelId")->setTextContent("Model: " + newModelId.substr(1));
-					_gui->getOverlay()->getTextField("modelId")->setVisible(true);
-					_isCreatingModel = false;
-				}
-			}
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			_gui->getOverlay()->getTextField("modelId")->setTextContent("Model: " + newModelId.substr(1));
+			_gui->getOverlay()->getTextField("modelId")->setVisible(true);
 		}
 	}
 }
 
 void ModelEditor::_updateModelChoosing()
 {
-	if(_isChoosingModel)
+	if((_gui->getOverlay()->getChoiceFormId() == "editModel") || (_gui->getOverlay()->getChoiceFormId() == "deleteModel"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredModelId.empty())
+			{
+				_fe3d->model_setVisible(_hoveredModelId, false);
+
+				_hoveredModelId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredModelId.empty())
 			{
 				_hoveredModelId = ("@" + selectedOptionId);
+
 				_fe3d->model_setVisible(_hoveredModelId, true);
 			}
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				_currentModelId = _hoveredModelId;
 				_hoveredModelId = "";
-				_isChoosingModel = false;
 
-				if(_isDeletingModel)
+				if(_gui->getOverlay()->getChoiceFormId() == "deleteModel")
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteModel", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -211,31 +210,14 @@ void ModelEditor::_updateModelChoosing()
 					_gui->getOverlay()->getTextField("modelId")->setTextContent("Model: " + _currentModelId.substr(1));
 					_gui->getOverlay()->getTextField("modelId")->setVisible(true);
 				}
-
-
 			}
 		}
-		//else if(_gui->getOverlay()->isChoiceFormCancelled())
-		{
-			_isChoosingModel = false;
-			_isDeletingModel = false;
-
-
-		}
-		//else
-		//{
-		//	if(!_hoveredModelId.empty())
-		//	{
-		//		_fe3d->model_setVisible(_hoveredModelId, false);
-		//		_hoveredModelId = "";
-		//	}
-		//}
 	}
 }
 
 void ModelEditor::_updateModelDeleting()
 {
-	if(_isDeletingModel && !_isChoosingModel)
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteModel") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
@@ -243,8 +225,6 @@ void ModelEditor::_updateModelDeleting()
 
 			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentModelId), _loadedEntityIds.end());
 			_currentModelId = "";
-			_isDeletingModel = false;
-
 
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
@@ -252,20 +232,25 @@ void ModelEditor::_updateModelDeleting()
 			_fe3d->model_setVisible(_currentModelId, false);
 
 			_currentModelId = "";
-			_isDeletingModel = false;
-
-
 		}
 	}
 }
 
 void ModelEditor::_updatePartChoosing()
 {
-	if(_isChoosingPart)
+	if(_gui->getOverlay()->getChoiceFormId() == "selectPart")
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredPartId.empty())
+			{
+				_fe3d->model_setOpacity(_currentModelId, _hoveredPartId, _originalPartOpacity);
+				_hoveredPartId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredPartId.empty())
 			{
@@ -273,28 +258,115 @@ void ModelEditor::_updatePartChoosing()
 				_originalPartOpacity = _fe3d->model_getOpacity(_currentModelId, _hoveredPartId);
 			}
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				_currentPartId = _hoveredPartId;
 				_hoveredPartId = "";
-				_isChoosingPart = false;
-
-
 			}
 		}
-		//else if(_gui->getOverlay()->isChoiceFormCancelled())
+	}
+}
+
+void ModelEditor::_updateAabbCreating()
+{
+	if((_gui->getOverlay()->getValueFormId() == "aabbCreate") && _gui->getOverlay()->isValueFormConfirmed())
+	{
+		const auto newAabbId = _gui->getOverlay()->getValueFormContent();
+
+		if(newAabbId.empty())
 		{
-			_isChoosingPart = false;
-
-
+			Logger::throwWarning("AABB ID cannot be empty");
+			return;
 		}
-		//else
-		//{
-		//	if(!_hoveredPartId.empty())
-		//	{
-		//		_fe3d->model_setOpacity(_currentModelId, _hoveredPartId, _originalPartOpacity);
-		//		_hoveredPartId = "";
-		//	}
-		//}
+
+		if(any_of(newAabbId.begin(), newAabbId.end(), isspace))
+		{
+			Logger::throwWarning("AABB ID cannot contain any spaces");
+			return;
+		}
+
+		if(any_of(newAabbId.begin(), newAabbId.end(), isupper))
+		{
+			Logger::throwWarning("AABB ID cannot contain any capitals");
+			return;
+		}
+
+		if(_fe3d->aabb_isExisting(_currentModelId + "@" + newAabbId))
+		{
+			Logger::throwWarning("AABB already exists");
+			return;
+		}
+
+		_currentAabbId = newAabbId;
+
+		_fe3d->aabb_create((_currentModelId + "@" + _currentAabbId), false);
+		_fe3d->aabb_setVisible((_currentModelId + "@" + _currentAabbId), true);
+		_fe3d->aabb_setParentId((_currentModelId + "@" + _currentAabbId), _currentModelId);
+		_fe3d->aabb_setParentType((_currentModelId + "@" + _currentAabbId), AabbParentType::MODEL);
+
+		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
+		_gui->getOverlay()->getTextField("aabbId")->setTextContent("AABB: " + _currentAabbId);
+		_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
+	}
+}
+
+void ModelEditor::_updateAabbChoosing()
+{
+	if((_gui->getOverlay()->getChoiceFormId() == "editAabb") || (_gui->getOverlay()->getChoiceFormId() == "deleteAabb"))
+	{
+		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredAabbId.empty())
+			{
+				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), false);
+
+				_hoveredAabbId = "";
+			}
+		}
+		else
+		{
+			if(_hoveredAabbId.empty())
+			{
+				_hoveredAabbId = selectedOptionId;
+
+				_fe3d->aabb_setVisible((_currentModelId + "@" + _hoveredAabbId), true);
+			}
+
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
+			{
+				_currentAabbId = _hoveredAabbId;
+				_hoveredAabbId = "";
+
+				if(_gui->getOverlay()->getChoiceFormId() == "deleteAabb")
+				{
+					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+				}
+				else
+				{
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
+
+					_gui->getOverlay()->getTextField("aabbId")->setTextContent("AABB: " + _currentAabbId);
+					_gui->getOverlay()->getTextField("aabbId")->setVisible(true);
+				}
+			}
+		}
+	}
+}
+
+void ModelEditor::_updateAabbDeleting()
+{
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteAabb") && _gui->getOverlay()->isAnswerFormConfirmed())
+	{
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
+		{
+			_fe3d->aabb_delete((_currentModelId + "@" + _currentAabbId));
+			_currentAabbId = "";
+		}
+		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+		{
+			_currentAabbId = "";
+		}
 	}
 }

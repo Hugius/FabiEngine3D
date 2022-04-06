@@ -21,7 +21,7 @@ private:
 	void _unload();
 	void _loadGUI();
 	void _unloadGUI();
-	void _updateGUI();
+	void _updateMenu();
 	void _updateTextWriter();
 	void _updateTextSelector();
 	void _updateScriptSearching();
@@ -96,11 +96,6 @@ private:
 	string _secondSelectionAabbId = "";
 	string _selectionClipboard = "";
 
-	bool _isSearchingScriptFile = false;
-	bool _isCreatingScriptFile = false;
-	bool _isChoosingScriptFile = false;
-	bool _isRenamingScriptFile = false;
-	bool _isDeletingScriptFile = false;
 	bool _isWritingScript = false;
 	bool _hasTextChanged = false;
 

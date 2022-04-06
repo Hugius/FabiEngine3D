@@ -9,19 +9,18 @@ void ModelEditor::_updateLightingMenu()
 	{
 		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelId) || !_currentPartId.empty());
 		const auto isNoPartSelected = (!_fe3d->model_isMultiParted(_currentModelId) || _currentPartId.empty());
-
-		auto isSpecular = (isPartSelected ? _fe3d->model_isSpecular(_currentModelId, _currentPartId) : false);
-		auto isReflective = (isPartSelected ? _fe3d->model_isReflective(_currentModelId, _currentPartId) : false);
-		auto reflectionType = (isPartSelected ? _fe3d->model_getReflectionType(_currentModelId, _currentPartId) : ReflectionType::CUBE);
-		auto reflectivity = (isPartSelected ? _fe3d->model_getReflectivity(_currentModelId, _currentPartId) : 0.0f);
-		auto specularShininess = (isPartSelected ? _fe3d->model_getSpecularShininess(_currentModelId, _currentPartId) : 0.0f);
-		auto specularIntensity = (isPartSelected ? _fe3d->model_getSpecularIntensity(_currentModelId, _currentPartId) : 0.0f);
-		auto lightness = (isPartSelected ? _fe3d->model_getLightness(_currentModelId, _currentPartId) : 0.0f);
-		auto color = (isPartSelected ? _fe3d->model_getColor(_currentModelId, _currentPartId) : fvec3(0.0f));
-		auto isBright = (isPartSelected ? _fe3d->model_isBright(_currentModelId, _currentPartId) : false);
-		auto isShadowed = (isNoPartSelected ? _fe3d->model_isShadowed(_currentModelId) : false);
-		auto isReflected = (isNoPartSelected ? _fe3d->model_isReflected(_currentModelId) : false);
-		auto emissionIntensity = (isPartSelected ? _fe3d->model_getEmissionIntensity(_currentModelId, _currentPartId) : 0.0f);
+		const auto isSpecular = (isPartSelected ? _fe3d->model_isSpecular(_currentModelId, _currentPartId) : false);
+		const auto isReflective = (isPartSelected ? _fe3d->model_isReflective(_currentModelId, _currentPartId) : false);
+		const auto reflectionType = (isPartSelected ? _fe3d->model_getReflectionType(_currentModelId, _currentPartId) : ReflectionType::CUBE);
+		const auto reflectivity = (isPartSelected ? _fe3d->model_getReflectivity(_currentModelId, _currentPartId) : 0.0f);
+		const auto specularShininess = (isPartSelected ? _fe3d->model_getSpecularShininess(_currentModelId, _currentPartId) : 0.0f);
+		const auto specularIntensity = (isPartSelected ? _fe3d->model_getSpecularIntensity(_currentModelId, _currentPartId) : 0.0f);
+		const auto lightness = (isPartSelected ? _fe3d->model_getLightness(_currentModelId, _currentPartId) : 0.0f);
+		const auto color = (isPartSelected ? _fe3d->model_getColor(_currentModelId, _currentPartId) : fvec3(0.0f));
+		const auto isBright = (isPartSelected ? _fe3d->model_isBright(_currentModelId, _currentPartId) : false);
+		const auto isShadowed = (isNoPartSelected ? _fe3d->model_isShadowed(_currentModelId) : false);
+		const auto isReflected = (isNoPartSelected ? _fe3d->model_isReflected(_currentModelId) : false);
+		const auto emissionIntensity = (isPartSelected ? _fe3d->model_getEmissionIntensity(_currentModelId, _currentPartId) : 0.0f);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -31,6 +30,8 @@ void ModelEditor::_updateLightingMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
@@ -50,36 +51,30 @@ void ModelEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflective")->isHovered())
 		{
-			isReflective = !isReflective;
-			_fe3d->model_setReflective(_currentModelId, _currentPartId, isReflective);
+			_fe3d->model_setReflective(_currentModelId, _currentPartId, !isReflective);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
 		{
-			isBright = !isBright;
-			_fe3d->model_setBright(_currentModelId, _currentPartId, isBright);
+			_fe3d->model_setBright(_currentModelId, _currentPartId, !isBright);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isShadowed")->isHovered())
 		{
-			isShadowed = !isShadowed;
-			_fe3d->model_setShadowed(_currentModelId, isShadowed);
+			_fe3d->model_setShadowed(_currentModelId, !isShadowed);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflected")->isHovered())
 		{
-			isReflected = !isReflected;
-			_fe3d->model_setReflected(_currentModelId, isReflected);
+			_fe3d->model_setReflected(_currentModelId, !isReflected);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionType")->isHovered())
 		{
 			if(reflectionType == ReflectionType::CUBE)
 			{
-				reflectionType = ReflectionType::PLANAR;
+				_fe3d->model_setReflectionType(_currentModelId, _currentPartId, ReflectionType::PLANAR);
 			}
 			else
 			{
-				reflectionType = ReflectionType::CUBE;
+				_fe3d->model_setReflectionType(_currentModelId, _currentPartId, ReflectionType::CUBE);
 			}
-
-			_fe3d->model_setReflectionType(_currentModelId, _currentPartId, reflectionType);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectivity")->isHovered())
 		{
@@ -94,23 +89,19 @@ void ModelEditor::_updateLightingMenu()
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->model_setColor(_currentModelId, _currentPartId, (content / 255.0f));
-
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_fe3d->model_setColor(_currentModelId, _currentPartId, fvec3((content / 255.0f), color.g, color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->model_setColor(_currentModelId, _currentPartId, (content / 255.0f));
-
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
+			_fe3d->model_setColor(_currentModelId, _currentPartId, fvec3(color.r, (content / 255.0f), color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->model_setColor(_currentModelId, _currentPartId, (content / 255.0f));
+			_fe3d->model_setColor(_currentModelId, _currentPartId, fvec3(color.r, color.g, (content / 255.0f)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
 		{
@@ -161,6 +152,7 @@ void ModelEditor::_updateLightingMenu()
 		screen->getButton("isReflected")->setTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
 		screen->getButton("isSpecular")->setTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 		screen->getButton("isReflective")->setTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
+
 		switch(reflectionType)
 		{
 			case ReflectionType::CUBE:

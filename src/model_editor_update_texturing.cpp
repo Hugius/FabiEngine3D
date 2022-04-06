@@ -11,13 +11,12 @@ void ModelEditor::_updateTexturingMenu()
 	if(screen->getId() == "modelEditorMenuTexturing")
 	{
 		const auto isPartSelected = (!_fe3d->model_isMultiParted(_currentModelId) || !_currentPartId.empty());
-
-		auto hasDiffuseMap = (isPartSelected ? _fe3d->model_hasDiffuseMap(_currentModelId, _currentPartId) : false);
-		auto hasEmissionMap = (isPartSelected ? _fe3d->model_hasEmissionMap(_currentModelId, _currentPartId) : false);
-		auto hasSpecularMap = (isPartSelected ? _fe3d->model_hasSpecularMap(_currentModelId, _currentPartId) : false);
-		auto hasReflectionMap = (isPartSelected ? _fe3d->model_hasReflectionMap(_currentModelId, _currentPartId) : false);
-		auto hasNormalMap = (isPartSelected ? _fe3d->model_hasNormalMap(_currentModelId, _currentPartId) : false);
-		auto textureRepeat = (isPartSelected ? _fe3d->model_getTextureRepeat(_currentModelId, _currentPartId) : 0);
+		const auto hasDiffuseMap = (isPartSelected ? _fe3d->model_hasDiffuseMap(_currentModelId, _currentPartId) : false);
+		const auto hasEmissionMap = (isPartSelected ? _fe3d->model_hasEmissionMap(_currentModelId, _currentPartId) : false);
+		const auto hasSpecularMap = (isPartSelected ? _fe3d->model_hasSpecularMap(_currentModelId, _currentPartId) : false);
+		const auto hasReflectionMap = (isPartSelected ? _fe3d->model_hasReflectionMap(_currentModelId, _currentPartId) : false);
+		const auto hasNormalMap = (isPartSelected ? _fe3d->model_hasNormalMap(_currentModelId, _currentPartId) : false);
+		const auto textureRepeat = (isPartSelected ? _fe3d->model_getTextureRepeat(_currentModelId, _currentPartId) : 0);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -194,7 +193,7 @@ void ModelEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", to_string(textureRepeat), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "textureRepeat") && _gui->getOverlay()->isValueFormConfirmed())

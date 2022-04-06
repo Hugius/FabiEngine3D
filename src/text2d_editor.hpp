@@ -11,7 +11,7 @@ public:
 	void deleteLoadedEntities();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedEntityIds() const;
+	const vector<string> & getLoadedEntityIds() const;
 
 	const bool loadEntitiesFromFile();
 	const bool saveEntitiesToFile() const;
@@ -37,8 +37,4 @@ private:
 
 	string _currentTextId = "";
 	string _hoveredTextId = "";
-
-	bool _isCreatingText = false;
-	bool _isChoosingText = false;
-	bool _isDeletingText = false;
 };

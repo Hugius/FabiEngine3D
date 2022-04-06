@@ -35,9 +35,6 @@ void Animation2dEditor::_unload()
 	_loadedAnimationIds.clear();
 	_hoveredAnimationId = "";
 	_currentAnimationId = "";
-	_isCreatingAnimation = false;
-	_isChoosingAnimation = false;
-	_isDeletingAnimation = false;
 }
 
 void Animation2dEditor::_loadGUI()

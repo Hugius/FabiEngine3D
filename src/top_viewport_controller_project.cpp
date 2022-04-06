@@ -117,7 +117,7 @@ void TopViewportController::_updateProjectCreating()
 
 void TopViewportController::_updateProjectLoading()
 {
-	if((_gui->getOverlay()->getChoiceFormId() == "projectLoading") && _gui->getOverlay()->isChoiceFormConfirmed())
+	if((_gui->getOverlay()->getChoiceFormId() == "loadProject") && _gui->getOverlay()->isChoiceFormConfirmed())
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
@@ -129,6 +129,7 @@ void TopViewportController::_updateProjectLoading()
 		}
 
 		_currentProjectId = selectedOptionId;
+
 		_applyProjectChange();
 
 		auto skyImagePaths = _skyEditor->getImagePathsFromFile();
@@ -163,26 +164,12 @@ void TopViewportController::_updateProjectLoading()
 
 void TopViewportController::_updateProjectDeleting()
 {
-	if((_gui->getOverlay()->getChoiceFormId() == "projectDeleting") && _gui->getOverlay()->isChoiceFormConfirmed())
-	{
-		_projectToDelete = _gui->getOverlay()->getChoiceFormOptionId();
-
-		_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
-
-	}
-
-	if((_gui->getOverlay()->getAnswerFormId() == "delete") && _gui->getOverlay()->isAnswerFormConfirmed())
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteProject") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
-			if(_projectToDelete == _currentProjectId)
-			{
-				_currentProjectId = "";
-				_applyProjectChange();
-			}
-
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = (rootPath + "projects\\" + _projectToDelete);
+			const auto directoryPath = (rootPath + "projects\\" + _currentProjectId);
 
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
@@ -196,13 +183,11 @@ void TopViewportController::_updateProjectDeleting()
 				return;
 			}
 
-			Logger::throwInfo("Project \"" + _projectToDelete + "\" deleted");
+			_currentProjectId = "";
 
-			_projectToDelete = "";
-		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
-		{
-			_projectToDelete = "";
+			_applyProjectChange();
+
+			Logger::throwInfo("Project \"" + _projectToDelete + "\" deleted");
 		}
 	}
 }

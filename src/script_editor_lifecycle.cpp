@@ -106,7 +106,7 @@ void ScriptEditor::update()
 {
 	if(isLoaded())
 	{
-		_updateGUI();
+		_updateMenu();
 	}
 	if(isLoaded())
 	{

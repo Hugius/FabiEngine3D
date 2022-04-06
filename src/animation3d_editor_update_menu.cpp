@@ -15,43 +15,44 @@ void Animation3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("animationCreate", "Create Animation", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createAnimation", "Create Animation", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedAnimationIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editAnimation", "Edit Animation", fvec2(0.0f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedAnimationIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteAnimation", "Delete Animation", fvec2(0.0f, 0.1f), ids);
 		}
 
-		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
+		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
 		{
-			saveAnimationsToFile();
-			unload();
-
-
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
-		{
-			unload();
-
-
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
+			{
+				saveAnimationsToFile();
+				unload();
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+			}
+			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+			{
+				unload();
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+			}
 		}
 	}
 }
@@ -109,11 +110,13 @@ void Animation3dEditor::_updateChoiceMenu()
 			}
 
 			auto modelIds = _modelEditor->getLoadedEntityIds();
+
 			for(auto & id : modelIds)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("modelList", "Select Model", fvec2(-0.5f, 0.1f), modelIds);
+
+			_gui->getOverlay()->openChoiceForm("selectModel", "Select Model", fvec2(-0.5f, 0.1f), modelIds);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
@@ -200,6 +203,7 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 
 		auto isStarted = (!_previewModelId.empty() && _fe3d->model_isAnimationStarted(_previewModelId, _currentAnimationId));
+
 		screen->getButton("preview")->setHoverable(!isStarted);
 		screen->getButton("start")->setHoverable(!isStarted && !_previewModelId.empty() && (_fe3d->animation3d_getFrameCount(_currentAnimationId) > 1));
 		screen->getButton("stop")->setHoverable(isStarted && !_previewModelId.empty());

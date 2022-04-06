@@ -11,7 +11,7 @@ public:
 	void deleteLoadedEntities();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedEntityIds() const;
+	const vector<string> & getLoadedEntityIds() const;
 
 	const bool loadEntitiesFromFile();
 	const bool saveEntitiesToFile() const;
@@ -36,8 +36,4 @@ private:
 
 	string _currentQuadId = "";
 	string _hoveredQuadId = "";
-
-	bool _isCreatingQuad = false;
-	bool _isChoosingQuad = false;
-	bool _isDeletingQuad = false;
 };

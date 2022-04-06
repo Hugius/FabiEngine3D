@@ -7,6 +7,8 @@
 #include "gui_quad_field.hpp"
 #include "gui_text_field.hpp"
 
+using std::tuple;
+
 class GuiOverlay final
 {
 public:
@@ -142,6 +144,8 @@ private:
 	unordered_map<string, shared_ptr<GuiButton>> _buttons = {};
 	unordered_map<string, shared_ptr<GuiQuadField>> _quadFields = {};
 	unordered_map<string, shared_ptr<GuiTextField>> _textFields = {};
+
+	vector<tuple<string, string, string, fvec2, unsigned int, bool, bool, bool>> _valueFormQueue = {};
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 

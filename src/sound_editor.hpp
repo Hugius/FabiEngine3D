@@ -11,7 +11,7 @@ public:
 	void deleteLoadedSounds();
 
 	const vector<string> getAudioPathsFromFile() const;
-	const vector<string>& getLoadedSoundIds() const;
+	const vector<string> & getLoadedSoundIds() const;
 
 	const bool loadSoundsFromFile();
 	const bool saveSoundsToFile() const;
@@ -36,8 +36,4 @@ private:
 
 	string _currentSoundId = "";
 	string _hoveredSoundId = "";
-
-	bool _isCreatingSound = false;
-	bool _isChoosingSound = false;
-	bool _isDeletingSound = false;
 };

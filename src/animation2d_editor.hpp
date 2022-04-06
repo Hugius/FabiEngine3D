@@ -11,7 +11,7 @@ public:
 	void update();
 	void deleteLoadedAnimations();
 
-	const vector<string>& getLoadedAnimationIds() const;
+	const vector<string> & getLoadedAnimationIds() const;
 
 	const bool loadAnimationsFromFile();
 	const bool saveAnimationsToFile() const;
@@ -38,8 +38,5 @@ private:
 	string _hoveredAnimationId = "";
 	string _currentAnimationId = "";
 
-	bool _isCreatingAnimation = false;
-	bool _isChoosingAnimation = false;
-	bool _isDeletingAnimation = false;
 	bool _isPreviewTextureChosen = false;
 };

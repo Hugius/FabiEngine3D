@@ -54,7 +54,7 @@ void WorldEditor::_loadGUI()
 	positions = Mathematics::calculateDistributedPositions(3, CH);
 	leftWindow->createScreen("worldEditorMenuModel");
 	leftWindow->getScreen("worldEditorMenuModel")->createButton("place", fvec2(0.0f, positions[0]), TEXT_SIZE("Place Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuModel")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Choose Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuModel")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Model"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Model", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuModel")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("worldEditorMenuModelPlace");
@@ -68,7 +68,7 @@ void WorldEditor::_loadGUI()
 	positions = Mathematics::calculateDistributedPositions(3, CH);
 	leftWindow->createScreen("worldEditorMenuQuad3d");
 	leftWindow->getScreen("worldEditorMenuQuad3d")->createButton("place", fvec2(0.0f, positions[0]), TEXT_SIZE("Place Quad3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Quad3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuQuad3d")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Choose Quad3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Quad3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuQuad3d")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Quad3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Quad3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuQuad3d")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("worldEditorMenuQuad3dPlace");
@@ -82,7 +82,7 @@ void WorldEditor::_loadGUI()
 	positions = Mathematics::calculateDistributedPositions(3, CH);
 	leftWindow->createScreen("worldEditorMenuText3d");
 	leftWindow->getScreen("worldEditorMenuText3d")->createButton("place", fvec2(0.0f, positions[0]), TEXT_SIZE("Place Text3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Text3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuText3d")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Choose Text3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Text3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuText3d")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Text3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Text3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuText3d")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("worldEditorMenuText3dPlace");
@@ -96,7 +96,7 @@ void WorldEditor::_loadGUI()
 	positions = Mathematics::calculateDistributedPositions(3, CH);
 	leftWindow->createScreen("worldEditorMenuPointlight");
 	leftWindow->getScreen("worldEditorMenuPointlight")->createButton("place", fvec2(0.0f, positions[0]), TEXT_SIZE("Place Pointlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Pointlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuPointlight")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Choose Pointlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Pointlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuPointlight")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Pointlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Pointlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuPointlight")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("worldEditorMenuPointlightChoice");
@@ -106,7 +106,7 @@ void WorldEditor::_loadGUI()
 	positions = Mathematics::calculateDistributedPositions(3, CH);
 	leftWindow->createScreen("worldEditorMenuSpotlight");
 	leftWindow->getScreen("worldEditorMenuSpotlight")->createButton("place", fvec2(0.0f, positions[0]), TEXT_SIZE("Place Spotlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Spotlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuSpotlight")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Choose Spotlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Spotlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuSpotlight")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Spotlight"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Spotlight", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuSpotlight")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("worldEditorMenuSpotlightChoice");
@@ -116,7 +116,7 @@ void WorldEditor::_loadGUI()
 	positions = Mathematics::calculateDistributedPositions(3, CH);
 	leftWindow->createScreen("worldEditorMenuReflection");
 	leftWindow->getScreen("worldEditorMenuReflection")->createButton("place", fvec2(0.0f, positions[0]), TEXT_SIZE("Place Reflection"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Reflection", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuReflection")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Choose Reflection"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Reflection", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuReflection")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Reflection"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Reflection", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuReflection")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("worldEditorMenuReflectionChoice");
@@ -126,7 +126,7 @@ void WorldEditor::_loadGUI()
 	positions = Mathematics::calculateDistributedPositions(3, CH);
 	leftWindow->createScreen("worldEditorMenuSound");
 	leftWindow->getScreen("worldEditorMenuSound")->createButton("place", fvec2(0.0f, positions[0]), TEXT_SIZE("Place Sound"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Place Sound", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("worldEditorMenuSound")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Choose Sound"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Choose Sound", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("worldEditorMenuSound")->createButton("choice", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Sound"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Sound", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("worldEditorMenuSound")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	leftWindow->createScreen("worldEditorMenuSoundPlace");

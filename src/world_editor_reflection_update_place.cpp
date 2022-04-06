@@ -8,9 +8,9 @@ void WorldEditor::_updateReflectionPlacing()
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
 			auto newPosition = _fe3d->reflection_getPosition(TEMPLATE_CAMERA_ID);
-			//_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			//_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			//_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
+			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 			_fe3d->reflection_setPosition(TEMPLATE_REFLECTION_ID, newPosition);
 			_fe3d->model_setBasePosition(TEMPLATE_CAMERA_ID, newPosition);
 
@@ -39,12 +39,12 @@ void WorldEditor::_updateReflectionPlacing()
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			//if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
-			//{
-			//	_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
-			//	_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
-			//	_isPlacingReflection = false;
-			//}
+			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			{
+				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
+				_isPlacingReflection = false;
+			}
 		}
 		else
 		{

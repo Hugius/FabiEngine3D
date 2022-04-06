@@ -12,43 +12,46 @@ void ModelEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("modelCreate", "Create Model", "", fvec2(0.0f, 0.1f), 10, true, true, true);
-			_isCreatingModel = true;
+			_gui->getOverlay()->openValueForm("createModel", "Create Model", "", fvec2(0.0f, 0.1f), 10, true, true, true);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("modelList", "Edit Model", fvec2(-0.5f, 0.1f), ids);
-			_isChoosingModel = true;
+
+			_gui->getOverlay()->openChoiceForm("editModel", "Edit Model", fvec2(-0.5f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("modelList", "Delete Model", fvec2(-0.5f, 0.1f), ids);
-			_isChoosingModel = true;
-			_isDeletingModel = true;
+
+			_gui->getOverlay()->openChoiceForm("deleteModel", "Delete Model", fvec2(-0.5f, 0.1f), ids);
 		}
 
-		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
+		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			saveEntitiesToFile();
-			unload();
-			return;
-		}
-		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
-		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-			unload();
-			return;
+			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
+			{
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+				saveEntitiesToFile();
+				unload();
+				return;
+			}
+			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+			{
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
+				unload();
+				return;
+			}
 		}
 	}
 }
@@ -84,8 +87,7 @@ void ModelEditor::_updateChoiceMenu()
 			{
 				auto ids = _fe3d->model_getPartIds(_currentModelId);
 				sort(ids.begin(), ids.end());
-				_gui->getOverlay()->openChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), ids);
-				_isChoosingPart = true;
+				_gui->getOverlay()->openChoiceForm("selectPart", "Select Part", fvec2(-0.5f, 0.1f), ids);
 			}
 			else
 			{

@@ -8,9 +8,7 @@ void Quad3dEditor::_updateTexturingMenu()
 
 	if(screen->getId() == "quad3dEditorMenuTexturing")
 	{
-		auto hasDiffuseMap = _fe3d->quad3d_hasDiffuseMap(_currentQuadId);
-		auto hasEmissionMap = _fe3d->quad3d_hasEmissionMap(_currentQuadId);
-		auto textureRepeat = _fe3d->quad3d_getTextureRepeat(_currentQuadId);
+		const auto textureRepeat = _fe3d->quad3d_getTextureRepeat(_currentQuadId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{

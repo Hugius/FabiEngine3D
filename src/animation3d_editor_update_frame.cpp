@@ -32,7 +32,7 @@ void Animation3dEditor::_updateFrameMenu()
 			{
 				auto partIds = _fe3d->animation3d_getPartIds(_currentAnimationId);
 				partIds.erase(partIds.begin());
-				_gui->getOverlay()->openChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), partIds);
+				_gui->getOverlay()->openChoiceForm("selectPart", "Select Part", fvec2(-0.5f, 0.1f), partIds);
 			}
 			else
 			{

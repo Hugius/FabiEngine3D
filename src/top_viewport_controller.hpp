@@ -79,5 +79,4 @@ private:
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
 
 	string _currentProjectId = "";
-	string _projectToDelete = "";
 };

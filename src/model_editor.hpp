@@ -13,7 +13,7 @@ public:
 
 	const vector<string> getMeshPathsFromFile() const;
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedEntityIds() const;
+	const vector<string> & getLoadedEntityIds() const;
 
 	const bool loadEntitiesFromFile();
 	const bool saveEntitiesToFile() const;
@@ -67,12 +67,4 @@ private:
 	float _originalPartOpacity = 0.0f;
 
 	int _selectedPartHighlightDirection = 1;
-
-	bool _isCreatingModel = false;
-	bool _isChoosingModel = false;
-	bool _isDeletingModel = false;
-	bool _isChoosingPart = false;
-	bool _isCreatingAabb = false;
-	bool _isChoosingAabb = false;
-	bool _isDeletingAabb = false;
 };

@@ -9,9 +9,9 @@ void WorldEditor::_updatePointlightPlacing()
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
 			auto newPosition = _fe3d->pointlight_getPosition(TEMPLATE_POINTLIGHT_ID);
-			//_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			//_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			//_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
+			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 			_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, newPosition);
 			_fe3d->model_setBasePosition(TEMPLATE_LAMP_ID, newPosition);
 
@@ -52,12 +52,12 @@ void WorldEditor::_updatePointlightPlacing()
 				_isPlacingPointlight = false;
 			}
 
-			//if(_gui->getOverlay()->isValueFormCancelled())
-			//{
-			//	_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
-			//	_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
-			//	_isPlacingPointlight = false;
-			//}
+			if(_gui->getOverlay()->isValueFormCancelled())
+			{
+				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+				_isPlacingPointlight = false;
+			}
 		}
 		else
 		{

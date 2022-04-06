@@ -14,46 +14,42 @@ void Animation2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("animationCreate", "Create Animation", "", fvec2(0.0f, 0.1f), 10, true, true, false);
-			_isCreatingAnimation = true;
+			_gui->getOverlay()->openValueForm("createAnimation", "Create Animation", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedAnimationIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), ids);
-			_isChoosingAnimation = true;
+			_gui->getOverlay()->openChoiceForm("editAnimation", "Edit Animation", fvec2(0.0f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedAnimationIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), ids);
-			_isChoosingAnimation = true;
-			_isDeletingAnimation = true;
+			_gui->getOverlay()->openChoiceForm("deleteAnimation", "Delete Animation", fvec2(0.0f, 0.1f), ids);
 		}
 
-		if(_gui->getOverlay()->getAnswerFormId() == "back")
+		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveAnimationsToFile();
 				unload();
-
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				unload();
-
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			}
 		}
@@ -113,15 +109,21 @@ void Animation2dEditor::_updateChoiceMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "rowCount") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->animation2d_setRowCount(_currentAnimationId, Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->animation2d_setRowCount(_currentAnimationId, content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "columnCount") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->animation2d_setColumnCount(_currentAnimationId, Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->animation2d_setColumnCount(_currentAnimationId, content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "interval") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->animation2d_setInterval(_currentAnimationId, Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->animation2d_setInterval(_currentAnimationId, content);
 		}
 
 		if(_gui->getOverlay()->getAnswerFormId() == "preview" && _gui->getOverlay()->isAnswerFormConfirmed())

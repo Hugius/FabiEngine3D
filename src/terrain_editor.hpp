@@ -11,7 +11,7 @@ public:
 	void deleteLoadedEntities();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedEntityIds() const;
+	const vector<string> & getLoadedEntityIds() const;
 
 	const bool loadEntitiesFromFile();
 	const bool saveEntitiesToFile() const;
@@ -50,8 +50,4 @@ private:
 	vector <string> _loadedEntityIds = {};
 
 	string _currentTerrainId = "";
-
-	bool _isCreatingTerrain = false;
-	bool _isChoosingTerrain = false;
-	bool _isDeletingTerrain = false;
 };

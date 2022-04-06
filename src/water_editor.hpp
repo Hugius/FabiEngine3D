@@ -11,7 +11,7 @@ public:
 	void deleteLoadedEntities();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string>& getLoadedEntityIds() const;
+	const vector<string> & getLoadedEntityIds() const;
 
 	const bool loadEntitiesFromFile();
 	const bool saveEntitiesToFile() const;
@@ -48,8 +48,4 @@ private:
 	vector <string> _loadedEntityIds = {};
 
 	string _currentWaterId = "";
-
-	bool _isCreatingWater = false;
-	bool _isChoosingWater = false;
-	bool _isDeletingWater = false;
 };

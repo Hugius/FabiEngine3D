@@ -27,7 +27,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			{
 				auto projectIds = Tools::getDirectoryNamesFromDirectory(projectDirectoryPath);
 
-				_gui->getOverlay()->openChoiceForm("projectLoading", "Load Project", fvec2(0.0f, 0.1f), projectIds);
+				_gui->getOverlay()->openChoiceForm("loadProject", "Load Project", fvec2(0.0f, 0.1f), projectIds);
 			}
 			else
 			{
@@ -40,19 +40,7 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 		else if(topScreen->getButton("deleteProject")->isHovered())
 		{
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto projectDirectoryPath = (rootPath + "projects\\");
-
-			if(Tools::isDirectoryExisting(projectDirectoryPath))
-			{
-				auto projectIds = Tools::getDirectoryNamesFromDirectory(projectDirectoryPath);
-
-				_gui->getOverlay()->openChoiceForm("projectDeleting", "Delete Project", fvec2(0.0f, 0.1f), projectIds);
-			}
-			else
-			{
-				Logger::throwWarning("Directory `projects\\` does not exist");
-			}
+			_gui->getOverlay()->openAnswerForm("deleteProject", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
 		else if(topScreen->getButton("quitEngine")->isHovered())
 		{
@@ -67,7 +55,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	topScreen->getButton("newProject")->setHoverable(!_scriptExecutor->isStarted());
 	topScreen->getButton("loadProject")->setHoverable(!_scriptExecutor->isStarted());
 	topScreen->getButton("saveProject")->setHoverable(!_currentProjectId.empty() && !_scriptExecutor->isStarted());
-	topScreen->getButton("deleteProject")->setHoverable(!_scriptExecutor->isStarted());
+	topScreen->getButton("deleteProject")->setHoverable(!_currentProjectId.empty() && !_scriptExecutor->isStarted());
 }
 
 void TopViewportController::_updateGameScreenManagement()

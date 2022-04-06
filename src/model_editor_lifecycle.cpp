@@ -107,13 +107,6 @@ void ModelEditor::_unload()
 	_hoveredAabbId = "";
 	_originalPartOpacity = 0.0f;
 	_selectedPartHighlightDirection = 1;
-	_isCreatingModel = false;
-	_isChoosingModel = false;
-	_isDeletingModel = false;
-	_isChoosingPart = false;
-	_isCreatingAabb = false;
-	_isChoosingAabb = false;
-	_isDeletingAabb = false;
 }
 
 void ModelEditor::_loadGUI()

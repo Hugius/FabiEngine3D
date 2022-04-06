@@ -2,6 +2,7 @@
 #include "logger.hpp"
 
 #include <algorithm>
+#include "tools.hpp"
 
 using std::clamp;
 
@@ -82,39 +83,39 @@ void ScriptEditor::_updateScriptFileCreating()
 {
 	if(_isCreatingScriptFile)
 	{
-		string newScriptFileId;
-
-		//if(_gui->getOverlay()->checkValueForm("scriptCreate", newScriptFileId))
+		if((_gui->getOverlay()->getValueFormId() == "scriptCreate") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			if(newScriptFileId.empty())
+			const auto content = _gui->getOverlay()->getValueFormContent();
+
+			if(content.empty())
 			{
 				Logger::throwWarning("Script file ID cannot be empty");
 				return;
 			}
 
-			if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
+			if(any_of(content.begin(), content.end(), isspace))
 			{
 				Logger::throwWarning("Script file ID cannot contain any spaces");
 				return;
 			}
 
-			if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isupper))
+			if(any_of(content.begin(), content.end(), isupper))
 			{
 				Logger::throwWarning("Script file ID cannot contain any capitals");
 				return;
 			}
 
 			auto existingScriptFileIds = _script->getScriptFileIds();
-			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) != existingScriptFileIds.end())
+			if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), content) != existingScriptFileIds.end())
 			{
 				Logger::throwWarning("Script already exists");
 				return;
 			}
 
-			_script->createScriptFile(newScriptFileId);
-			_script->getScriptFile(newScriptFileId)->createLine(0, "");
+			_script->createScriptFile(content);
+			_script->getScriptFile(content)->createLine(0, "");
 
-			_currentScriptFileId = newScriptFileId;
+			_currentScriptFileId = content;
 			_isWritingScript = true;
 
 			_deleteScriptDisplayEntities();
@@ -161,7 +162,7 @@ void ScriptEditor::_updateScriptFileRenaming()
 	{
 		string newScriptFileId;
 
-		//if(_gui->getOverlay()->checkValueForm("scriptRename", newScriptFileId))
+		if(_gui->getOverlay()->checkValueForm("scriptRename", newScriptFileId))
 		{
 			if(newScriptFileId.empty())
 			{
@@ -200,7 +201,7 @@ void ScriptEditor::_updateScriptSearching()
 	{
 		string keyword;
 
-		//if(_gui->getOverlay()->checkValueForm("search", keyword))
+		if(_gui->getOverlay()->checkValueForm("search", keyword))
 		{
 			const auto result = _script->findKeyword(keyword);
 

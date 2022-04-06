@@ -4,7 +4,7 @@ void GuiOverlay::_updateForms()
 {
 	if(_mustCloseChoiceForm)
 	{
-		closeChoiceForm();
+		_closeChoiceForm();
 
 		_mustCloseChoiceForm = false;
 	}
@@ -12,14 +12,14 @@ void GuiOverlay::_updateForms()
 
 	if(_mustCloseValueForm)
 	{
-		closeValueForm();
+		_closeValueForm();
 
 		_mustCloseValueForm = false;
 	}
 
 	if(_mustCloseAnswerForm)
 	{
-		closeAnswerForm();
+		_closeAnswerForm();
 
 		_mustCloseAnswerForm = false;
 	}
@@ -265,7 +265,7 @@ const string GuiOverlay::getAnswerFormDecision() const
 	return "";
 }
 
-void GuiOverlay::closeChoiceForm()
+void GuiOverlay::_closeChoiceForm()
 {
 	if(_choiceFormId.empty())
 	{
@@ -282,7 +282,7 @@ void GuiOverlay::closeChoiceForm()
 	_isFocused = false;
 }
 
-void GuiOverlay::closeValueForm()
+void GuiOverlay::_closeValueForm()
 {
 	if(_valueFormId.empty())
 	{
@@ -300,7 +300,7 @@ void GuiOverlay::closeValueForm()
 	_isFocused = false;
 }
 
-void GuiOverlay::closeAnswerForm()
+void GuiOverlay::_closeAnswerForm()
 {
 	if(_answerFormId.empty())
 	{

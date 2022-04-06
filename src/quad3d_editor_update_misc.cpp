@@ -71,7 +71,7 @@ void Quad3dEditor::_updateQuad3dCreating()
 	{
 		string newQuadId;
 
-		//if(_gui->getOverlay()->checkValueForm("quad3dCreate", newQuadId, {_currentQuadId}))
+		if(_gui->getOverlay()->checkValueForm("quad3dCreate", newQuadId, {_currentQuadId}))
 		{
 			if(newQuadId.empty())
 			{

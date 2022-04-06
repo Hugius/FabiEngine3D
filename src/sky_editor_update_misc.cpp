@@ -45,7 +45,7 @@ void SkyEditor::_updateSkyCreating()
 	{
 		string newSkyId;
 
-		//if(_gui->getOverlay()->checkValueForm("skyCreate", newSkyId, {}))
+		if(_gui->getOverlay()->checkValueForm("skyCreate", newSkyId, {}))
 		{
 			if(newSkyId.empty())
 			{

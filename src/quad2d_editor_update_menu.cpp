@@ -122,31 +122,31 @@ void Quad2dEditor::_updateChoiceMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent());
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad2d_setColor(_currentQuadId, (static_cast<float>(content) / 255.0f));
+			_fe3d->quad2d_setColor(_currentQuadId, (content / 255.0f));
 
 			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent());
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad2d_setColor(_currentQuadId, (static_cast<float>(content) / 255.0f));
+			_fe3d->quad2d_setColor(_currentQuadId, (content / 255.0f));
 
 			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent());
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad2d_setColor(_currentQuadId, (static_cast<float>(content) / 255.0f));
+			_fe3d->quad2d_setColor(_currentQuadId, (content / 255.0f));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent());
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad2d_setOpacity(_currentQuadId, (static_cast<float>(content) / 100.0f));
+			_fe3d->quad2d_setOpacity(_currentQuadId, (content / 100.0f));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "textureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{

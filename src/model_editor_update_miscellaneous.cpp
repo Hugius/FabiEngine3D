@@ -1,5 +1,6 @@
 #include "model_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void ModelEditor::_updateMiscellaneousMenu()
 {
@@ -26,8 +27,6 @@ void ModelEditor::_updateMiscellaneousMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.25f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
@@ -87,57 +86,69 @@ void ModelEditor::_updateMiscellaneousMenu()
 			_fe3d->model_setRotationOrder(_currentModelId, rotationOrder);
 		}
 
-		//if(_gui->getOverlay()->checkValueForm("sizeX", size.x))
+		if((_gui->getOverlay()->getValueFormId() == "sizeX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			size.x /= 100.0f;
-			_fe3d->model_setBaseSize(_currentModelId, size);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setBaseSize(_currentModelId, (content / 100.0f));
+
+			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		//if(_gui->getOverlay()->checkValueForm("sizeY", size.y))
+		if((_gui->getOverlay()->getValueFormId() == "sizeY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			size.y /= 100.0f;
-			_fe3d->model_setBaseSize(_currentModelId, size);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setBaseSize(_currentModelId, (content / 100.0f));
+
+			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
 		}
-		//if(_gui->getOverlay()->checkValueForm("sizeZ", size.z))
+		if((_gui->getOverlay()->getValueFormId() == "sizeZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			size.z /= 100.0f;
-			_fe3d->model_setBaseSize(_currentModelId, size);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setBaseSize(_currentModelId, (content / 100.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("opacity", opacity))
+		if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			opacity /= 100.0f;
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
 			if(_currentPartId.empty())
 			{
-				_fe3d->model_setOpacity(_currentModelId, _currentPartId, opacity);
+				_fe3d->model_setOpacity(_currentModelId, _currentPartId, (content / 100.0f));
 			}
 			else
 			{
 				_originalPartOpacity = opacity;
 			}
 		}
-		//if(_gui->getOverlay()->checkValueForm("minTextureAlpha", minTextureAlpha))
+		if((_gui->getOverlay()->getValueFormId() == "minTextureAlpha") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			minTextureAlpha /= 100.0f;
-			_fe3d->model_setMinTextureAlpha(_currentModelId, _currentPartId, minTextureAlpha);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setMinTextureAlpha(_currentModelId, _currentPartId, (content / 100.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("levelOfDetailEntityId", levelOfDetailEntityId, {}))
+		if((_gui->getOverlay()->getValueFormId() == "levelOfDetailEntityId") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			if(levelOfDetailEntityId.empty())
+			const auto content = _gui->getOverlay()->getValueFormContent();
+
+			if(content.empty())
 			{
 				_fe3d->model_setLevelOfDetailEntityId(_currentModelId, "");
 			}
-			else if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), ("@" + levelOfDetailEntityId)) == _loadedEntityIds.end())
+			else if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), ("@" + content)) == _loadedEntityIds.end())
 			{
 				Logger::throwWarning("LOD entity does not exist");
 			}
 			else
 			{
-				_fe3d->model_setLevelOfDetailEntityId(_currentModelId, ("@" + levelOfDetailEntityId));
+				_fe3d->model_setLevelOfDetailEntityId(_currentModelId, ("@" + content));
 			}
 		}
-		//if(_gui->getOverlay()->checkValueForm("levelOfDetailDistance", levelOfDetailDistance, {}))
+		if((_gui->getOverlay()->getValueFormId() == "levelOfDetailDistance") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->model_setLevelOfDetailDistance(_currentModelId, levelOfDetailDistance);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setLevelOfDetailDistance(_currentModelId, content);
 		}
 
 		screen->getButton("size")->setHoverable(isNoPartSelected);

@@ -14,7 +14,7 @@ public:
 	void update();
 	void deleteLoadedAnimations();
 
-	const vector<string>& getLoadedAnimationIds() const;
+	const vector<string> & getLoadedAnimationIds() const;
 
 	const bool loadAnimationsFromFile();
 	const bool saveAnimationsToFile() const;
@@ -71,9 +71,4 @@ private:
 	int _selectedPartHighlightDirection = 1;
 
 	bool _mustUpdateCurrentFramePreview = true;
-	bool _isCreatingAnimation = false;
-	bool _isChoosingAnimation = false;
-	bool _isDeletingAnimation = false;
-	bool _isChoosingModel = false;
-	bool _isChoosingPart = false;
 };

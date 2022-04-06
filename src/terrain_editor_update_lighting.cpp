@@ -2,6 +2,7 @@
 #include "logger.hpp"
 
 #include <algorithm>
+#include "tools.hpp"
 
 using std::clamp;
 
@@ -28,30 +29,34 @@ void TerrainEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("specularShininess", "Specular Shininess", specularShininess, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("specularShininess", "Specular Shininess", specularShininess, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularIntensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		//if(_gui->getOverlay()->checkValueForm("specularShininess", specularShininess))
+		if((_gui->getOverlay()->getValueFormId() == "specularShininess") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->terrain_setSpecularShininess(_currentTerrainId, specularShininess);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->terrain_setSpecularShininess(_currentTerrainId, content);
 		}
-		//if(_gui->getOverlay()->checkValueForm("specularIntensity", specularIntensity))
+		if((_gui->getOverlay()->getValueFormId() == "specularIntensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			specularIntensity /= 100.0f;
-			_fe3d->terrain_setSpecularIntensity(_currentTerrainId, specularIntensity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->terrain_setSpecularIntensity(_currentTerrainId, (content / 100.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("lightness", lightness))
+		if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			lightness /= 100.0f;
-			_fe3d->terrain_setLightness(_currentTerrainId, lightness);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->terrain_setLightness(_currentTerrainId, (content / 100.0f));
 		}
 
 		screen->getButton("isSpecular")->setTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");

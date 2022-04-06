@@ -79,34 +79,38 @@ void Text2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		//if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.r /= 255.0f;
-			_fe3d->text2d_setColor(_currentTextId, color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->text2d_setColor(_currentTextId, fvec3((content / 255.0f), color.g, color.b));
 		}
-		//if(_gui->getOverlay()->checkValueForm("colorG", color.g, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.g /= 255.0f;
-			_fe3d->text2d_setColor(_currentTextId, color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->text2d_setColor(_currentTextId, fvec3(color.r, (content / 255.0f), color.b));
 		}
-		//if(_gui->getOverlay()->checkValueForm("colorB", color.b, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.b /= 255.0f;
-			_fe3d->text2d_setColor(_currentTextId, color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->text2d_setColor(_currentTextId, fvec3(color.r, color.g, (content / 255.0f)));
 		}
-		//if(_gui->getOverlay()->checkValueForm("opacity", opacity, {}))
+		if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			opacity /= 100.0f;
-			_fe3d->text2d_setOpacity(_currentTextId, opacity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->text2d_setOpacity(_currentTextId, (content / 100.0f));
 		}
 	}
 }

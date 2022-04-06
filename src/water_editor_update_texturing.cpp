@@ -122,10 +122,10 @@ void WaterEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		//if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat))
+		if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat))
 		{
 			_fe3d->water_setTextureRepeat(_currentWaterId, textureRepeat);
 		}

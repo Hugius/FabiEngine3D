@@ -1,4 +1,5 @@
 #include "model_editor.hpp"
+#include "tools.hpp"
 
 void ModelEditor::_updateLightingMenu()
 {
@@ -29,26 +30,23 @@ void ModelEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isSpecular")->isHovered())
 		{
-			isSpecular = !isSpecular;
-			_fe3d->model_setSpecular(_currentModelId, _currentPartId, isSpecular);
+			_fe3d->model_setSpecular(_currentModelId, _currentPartId, !isSpecular);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("specularShininess", "Specular Shininess", specularShininess, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("specularShininess", "Specular Shininess", specularShininess, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularIntensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflective")->isHovered())
 		{
@@ -85,51 +83,64 @@ void ModelEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectivity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("reflectivity", "Reflectivity", (reflectivity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("reflectivity", "Reflectivity", (reflectivity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionIntensity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("emissionIntensity", "Emission Intensity", (emissionIntensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("emissionIntensity", "Emission Intensity", (emissionIntensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		//if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.r /= 255.0f;
-			_fe3d->model_setColor(_currentModelId, _currentPartId, color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setColor(_currentModelId, _currentPartId, (content / 255.0f));
+
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		//if(_gui->getOverlay()->checkValueForm("colorG", color.g, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.g /= 255.0f;
-			_fe3d->model_setColor(_currentModelId, _currentPartId, color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setColor(_currentModelId, _currentPartId, (content / 255.0f));
+
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
 		}
-		//if(_gui->getOverlay()->checkValueForm("colorB", color.b, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.b /= 255.0f;
-			_fe3d->model_setColor(_currentModelId, _currentPartId, color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setColor(_currentModelId, _currentPartId, (content / 255.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("lightness", lightness))
+		if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			lightness /= 100.0f;
-			_fe3d->model_setLightness(_currentModelId, _currentPartId, lightness);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setLightness(_currentModelId, _currentPartId, (content / 100.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("specularShininess", specularShininess))
+		if((_gui->getOverlay()->getValueFormId() == "specularShininess") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->model_setSpecularShininess(_currentModelId, _currentPartId, specularShininess);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setSpecularShininess(_currentModelId, _currentPartId, content);
 		}
-		//if(_gui->getOverlay()->checkValueForm("specularIntensity", specularIntensity))
+		if((_gui->getOverlay()->getValueFormId() == "specularIntensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			specularIntensity /= 100.0f;
-			_fe3d->model_setSpecularIntensity(_currentModelId, _currentPartId, specularIntensity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setSpecularIntensity(_currentModelId, _currentPartId, (content / 100.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("reflectivity", reflectivity))
+		if((_gui->getOverlay()->getValueFormId() == "reflectivity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			reflectivity /= 100.0f;
-			_fe3d->model_setReflectivity(_currentModelId, _currentPartId, reflectivity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setReflectivity(_currentModelId, _currentPartId, (content / 100.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("emissionIntensity", emissionIntensity))
+		if((_gui->getOverlay()->getValueFormId() == "emissionIntensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			emissionIntensity /= 100.0f;
-			_fe3d->model_setEmissionIntensity(_currentModelId, _currentPartId, emissionIntensity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->model_setEmissionIntensity(_currentModelId, _currentPartId, (content / 100.0f));
 		}
 
 		screen->getButton("color")->setHoverable(isPartSelected);

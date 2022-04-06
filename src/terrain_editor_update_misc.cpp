@@ -55,7 +55,7 @@ void TerrainEditor::_updateTerrainCreating()
 	{
 		string newTerrainId;
 
-		//if(_gui->getOverlay()->checkValueForm("terrainCreate", newTerrainId, {}))
+		if(_gui->getOverlay()->checkValueForm("terrainCreate", newTerrainId, {}))
 		{
 			if(newTerrainId.empty())
 			{

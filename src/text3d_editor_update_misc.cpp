@@ -72,7 +72,7 @@ void Text3dEditor::_updateText3dCreating()
 	{
 		string newTextId;
 
-		//if(_gui->getOverlay()->checkValueForm("text3dCreate", newTextId, {_currentTextId}))
+		if(_gui->getOverlay()->checkValueForm("text3dCreate", newTextId, {_currentTextId}))
 		{
 			if(newTextId.empty())
 			{

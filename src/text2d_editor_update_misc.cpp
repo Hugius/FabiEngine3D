@@ -22,7 +22,7 @@ void Text2dEditor::_updateTextCreating()
 	{
 		string newTextId;
 
-		//if(_gui->getOverlay()->checkValueForm("textCreate", newTextId, {_currentTextId}))
+		if(_gui->getOverlay()->checkValueForm("textCreate", newTextId, {_currentTextId}))
 		{
 			if(newTextId.empty())
 			{

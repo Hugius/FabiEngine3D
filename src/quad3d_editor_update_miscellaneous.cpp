@@ -1,5 +1,6 @@
 #include "quad3d_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void Quad3dEditor::_updateMiscellaneousMenu()
 {
@@ -20,47 +21,49 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.15f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.15f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingCameraHorizontally")->isHovered())
 		{
-			isFacingCameraHorizontally = !isFacingCameraHorizontally;
-			_fe3d->quad3d_setFacingCameraHorizontally(_currentQuadId, isFacingCameraHorizontally);
+			_fe3d->quad3d_setFacingCameraHorizontally(_currentQuadId, !isFacingCameraHorizontally);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingCameraVertically")->isHovered())
 		{
-			isFacingCameraVertically = !isFacingCameraVertically;
-			_fe3d->quad3d_setFacingCameraVertically(_currentQuadId, isFacingCameraVertically);
+			_fe3d->quad3d_setFacingCameraVertically(_currentQuadId, !isFacingCameraVertically);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		//if(_gui->getOverlay()->checkValueForm("sizeX", size.x))
+		if((_gui->getOverlay()->getValueFormId() == "sizeX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			size.x /= 100.0f;
-			_fe3d->quad3d_setSize(_currentQuadId, size);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->quad3d_setSize(_currentQuadId, (content / 100.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("sizeY", size.y))
+		if((_gui->getOverlay()->getValueFormId() == "sizeY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			size.y /= 100.0f;
-			_fe3d->quad3d_setSize(_currentQuadId, size);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->quad3d_setSize(_currentQuadId, (content / 100.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("opacity", opacity))
+		if((_gui->getOverlay()->getValueFormId() == "sizeZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			opacity /= 100.0f;
-			_fe3d->quad3d_setOpacity(_currentQuadId, opacity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->quad3d_setOpacity(_currentQuadId, (content / 100.0f));
 		}
-		//if(_gui->getOverlay()->checkValueForm("minTextureAlpha", minTextureAlpha))
+		if((_gui->getOverlay()->getValueFormId() == "minTextureAlpha") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			minTextureAlpha /= 100.0f;
-			_fe3d->quad3d_setMinTextureAlpha(_currentQuadId, minTextureAlpha);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->quad3d_setMinTextureAlpha(_currentQuadId, (content / 100.0f));
 		}
 
 		screen->getButton("isFacingCameraHorizontally")->setTextContent(isFacingCameraHorizontally ? "Facing X: ON" : "Facing X: OFF");

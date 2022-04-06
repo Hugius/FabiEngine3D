@@ -177,7 +177,7 @@ void Animation3dEditor::_updateAnimationCreating()
 	{
 		string newAnimationId;
 
-		//if(_gui->getOverlay()->checkValueForm("animationCreate", newAnimationId, {_currentAnimationId}))
+		if(_gui->getOverlay()->checkValueForm("animationCreate", newAnimationId, {_currentAnimationId}))
 		{
 			if(newAnimationId.empty())
 			{

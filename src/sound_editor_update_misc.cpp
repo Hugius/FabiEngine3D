@@ -33,7 +33,7 @@ void SoundEditor::_updateSoundCreating()
 	{
 		string newSoundId;
 
-		//if(_gui->getOverlay()->checkValueForm("soundCreate", newSoundId, {_currentSoundId}))
+		if(_gui->getOverlay()->checkValueForm("soundCreate", newSoundId, {_currentSoundId}))
 		{
 			if(newSoundId.empty())
 			{

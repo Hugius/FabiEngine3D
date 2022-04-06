@@ -22,7 +22,7 @@ void Quad2dEditor::_updateQuadCreating()
 	{
 		string newQuadId;
 
-		//if(_gui->getOverlay()->checkValueForm("quadCreate", newQuadId, {_currentQuadId}))
+		if(_gui->getOverlay()->checkValueForm("quadCreate", newQuadId, {_currentQuadId}))
 		{
 			if(newQuadId.empty())
 			{

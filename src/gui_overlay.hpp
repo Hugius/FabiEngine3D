@@ -35,9 +35,6 @@ public:
 	void openValueForm(const string & id, const string & title, unsigned int value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
 	void openValueForm(const string & id, const string & title, int value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
 	void openAnswerForm(const string & id, const string & title, const string & left, const string & right, const fvec2 & position);
-	void closeChoiceForm();
-	void closeValueForm();
-	void closeAnswerForm();
 
 	const unordered_map<string, shared_ptr<GuiScrollingList>> & getScrollingLists() const;
 	const unordered_map<string, shared_ptr<GuiInputBox>> & getInputBoxes() const;
@@ -70,6 +67,9 @@ public:
 
 private:
 	void _updateForms();
+	void _closeChoiceForm();
+	void _closeValueForm();
+	void _closeAnswerForm();
 
 	static inline const fvec3 CF_TITLE_QUAD_COLOR = fvec3(0.05f);
 	static inline const fvec3 CF_TITLE_TEXT_COLOR = fvec3(1.0f);

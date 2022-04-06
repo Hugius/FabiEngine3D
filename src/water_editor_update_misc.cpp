@@ -52,7 +52,7 @@ void WaterEditor::_updateWaterCreating()
 	{
 		string newWaterId;
 
-		//if(_gui->getOverlay()->checkValueForm("waterCreate", newWaterId, {}))
+		if(_gui->getOverlay()->checkValueForm("waterCreate", newWaterId, {}))
 		{
 			if(newWaterId.empty())
 			{

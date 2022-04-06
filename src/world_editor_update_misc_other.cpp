@@ -174,7 +174,7 @@ void WorldEditor::_updateWorldCreating()
 	{
 		string newWorldId;
 
-		//if(_gui->getOverlay()->checkValueForm("worldCreate", newWorldId, {}))
+		if(_gui->getOverlay()->checkValueForm("worldCreate", newWorldId, {}))
 		{
 			if(newWorldId.empty())
 			{

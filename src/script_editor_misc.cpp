@@ -70,7 +70,7 @@ void ScriptEditor::_createScriptDisplayEntities()
 
 		_loadedAabbIds.push_back(lineAabbId);
 
-		for(unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
+		for(unsigned int charIndex = 0; charIndex < static_cast<unsigned int>(lineTextString.size()); charIndex++)
 		{
 			const auto characterId = (to_string(lineIndex) + "_" + to_string(charIndex));
 			const auto characterOffset = fvec3(((CHAR_OFFSET * static_cast<float>(charIndex)) + HORIZONTAL_LINE_OFFSET), (-VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex)), 0.0f);

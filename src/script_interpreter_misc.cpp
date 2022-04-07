@@ -5,7 +5,7 @@
 
 #include <sstream>
 
-void ScriptInterpreter::setCurrentProjectId(const string& projectId)
+void ScriptInterpreter::setCurrentProjectId(const string & projectId)
 {
 	_currentProjectId = projectId;
 }
@@ -20,11 +20,11 @@ const bool ScriptInterpreter::gameMustStop() const
 	return _mustStopApplication;
 }
 
-const unsigned int ScriptInterpreter::_countLeadingSpaces(const string& scriptLineText)
+const unsigned int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
 {
 	int countedSpaces = 0;
 
-	for(unsigned int index = 0; index < scriptLineText.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(scriptLineText.size()); index++)
 	{
 		if(scriptLineText[index] == ' ')
 		{
@@ -47,7 +47,7 @@ const unsigned int ScriptInterpreter::_countLeadingSpaces(const string& scriptLi
 	return countedSpaces;
 }
 
-const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth)
+const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string & scriptLineText, unsigned int & scopeDepth)
 {
 	const unsigned int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
 	const bool isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
@@ -116,13 +116,13 @@ const bool ScriptInterpreter::_validateSavesDirectory()
 	return true;
 }
 
-void ScriptInterpreter::_throwStartupError(const string& message)
+void ScriptInterpreter::_throwStartupError(const string & message)
 {
 	Logger::throwWarning("ERROR @ script: " + message);
 	_hasThrownError = true;
 }
 
-void ScriptInterpreter::_throwRuntimeError(const string& message)
+void ScriptInterpreter::_throwRuntimeError(const string & message)
 {
 	Logger::throwWarning("ERROR @ script \"" + _currentScriptIdsStack.back() + "\" @ line " + to_string(_currentLineIndexStack.back() + 1) + ": " + message);
 	_hasThrownError = true;

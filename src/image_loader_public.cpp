@@ -10,7 +10,7 @@ using std::launch;
 using std::future_status;
 using std::chrono::seconds;
 
-const shared_ptr<Image> ImageLoader::loadImage(const string& filePath)
+const shared_ptr<Image> ImageLoader::loadImage(const string & filePath)
 {
 	auto cacheIterator = _cache.find(filePath);
 
@@ -35,7 +35,7 @@ const shared_ptr<Image> ImageLoader::loadImage(const string& filePath)
 	return loadedImage;
 }
 
-void ImageLoader::cacheImage(const string& filePath, bool isCrucial)
+void ImageLoader::cacheImage(const string & filePath, bool isCrucial)
 {
 	auto cacheIterator = _cache.find(filePath);
 
@@ -65,7 +65,7 @@ void ImageLoader::cacheImage(const string& filePath, bool isCrucial)
 	Logger::throwInfo("Loaded image: \"" + filePath + "\"");
 }
 
-void ImageLoader::cacheImages(const vector<string>& filePaths, bool isCrucial)
+void ImageLoader::cacheImages(const vector<string> & filePaths, bool isCrucial)
 {
 	vector<future<shared_ptr<Image>>> threads;
 	vector<string> threadFilePaths;
@@ -75,7 +75,7 @@ void ImageLoader::cacheImages(const vector<string>& filePaths, bool isCrucial)
 	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
-	for(const auto& filePath : uniqueFilePaths)
+	for(const auto & filePath : uniqueFilePaths)
 	{
 		if(_cache.find(filePath) == _cache.end())
 		{
@@ -87,7 +87,7 @@ void ImageLoader::cacheImages(const vector<string>& filePaths, bool isCrucial)
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		for(unsigned int index = 0; index < threadStatuses.size(); index++)
+		for(unsigned int index = 0; index < static_cast<unsigned int>(threadStatuses.size()); index++)
 		{
 			if(!threadStatuses[index])
 			{
@@ -121,7 +121,7 @@ void ImageLoader::cacheImages(const vector<string>& filePaths, bool isCrucial)
 	}
 }
 
-void ImageLoader::clearImageCache(const string& filePath)
+void ImageLoader::clearImageCache(const string & filePath)
 {
 	if(_cache.find(filePath) != _cache.end())
 	{

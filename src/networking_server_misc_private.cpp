@@ -8,7 +8,7 @@
 
 using std::to_string;
 
-const bool NetworkingServer::_sendTcpMessageToClient(SOCKET socket, const string& content, bool isReserved)
+const bool NetworkingServer::_sendTcpMessageToClient(SOCKET socket, const string & content, bool isReserved)
 {
 	if(!_isRunning)
 	{
@@ -52,7 +52,7 @@ const bool NetworkingServer::_sendTcpMessageToClient(SOCKET socket, const string
 	return true;
 }
 
-const bool NetworkingServer::_sendUdpMessageToClient(const string& clientIp, const string& clientPort, const string& content, bool isReserved) const
+const bool NetworkingServer::_sendUdpMessageToClient(const string & clientIp, const string & clientPort, const string & content, bool isReserved) const
 {
 	if(!_isRunning)
 	{
@@ -73,7 +73,7 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string& clientIp, con
 
 	auto socketAddress = _composeSocketAddress(clientIp, clientPort);
 
-	auto sendStatusCode = sendto(_udpSocket, content.c_str(), static_cast<int>(content.size()), 0, reinterpret_cast<sockaddr*>(&socketAddress), sizeof(socketAddress));
+	auto sendStatusCode = sendto(_udpSocket, content.c_str(), static_cast<int>(content.size()), 0, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
 
 	if(sendStatusCode == SOCKET_ERROR)
 	{
@@ -99,7 +99,7 @@ const bool NetworkingServer::_setupTcp()
 	tcpHints.ai_socktype = SOCK_STREAM;
 	tcpHints.ai_protocol = IPPROTO_TCP;
 
-	addrinfo* tcpAddressInfo = nullptr;
+	addrinfo * tcpAddressInfo = nullptr;
 	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
 	if(tcpInfoStatusCode != 0)
 	{
@@ -116,8 +116,8 @@ const bool NetworkingServer::_setupTcp()
 
 	DWORD trueValue = 1;
 	DWORD falseValue = 0;
-	setsockopt(_tcpSocket, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
-	setsockopt(_tcpSocket, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
+	setsockopt(_tcpSocket, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char *>(&trueValue), sizeof(trueValue));
+	setsockopt(_tcpSocket, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char *>(&falseValue), sizeof(falseValue));
 
 	auto tcpBindStatusCode = bind(_tcpSocket, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));
 	if(tcpBindStatusCode == SOCKET_ERROR)
@@ -155,7 +155,7 @@ const bool NetworkingServer::_setupUdp()
 	udpHints.ai_socktype = SOCK_DGRAM;
 	udpHints.ai_protocol = IPPROTO_UDP;
 
-	addrinfo* udpAddressInfo = nullptr;
+	addrinfo * udpAddressInfo = nullptr;
 	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
 	if(udpInfoStatusCode != 0)
 	{
@@ -172,8 +172,8 @@ const bool NetworkingServer::_setupUdp()
 
 	DWORD trueValue = 1;
 	DWORD falseValue = 0;
-	setsockopt(_udpSocket, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
-	setsockopt(_udpSocket, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
+	setsockopt(_udpSocket, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char *>(&trueValue), sizeof(trueValue));
+	setsockopt(_udpSocket, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char *>(&falseValue), sizeof(falseValue));
 
 	auto udpBindStatusCode = bind(_udpSocket, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
 	if(udpBindStatusCode == SOCKET_ERROR)
@@ -198,7 +198,7 @@ const bool NetworkingServer::_setupUdp()
 
 void NetworkingServer::_disconnectClient(SOCKET socket)
 {
-	for(unsigned int index = 0; index < _clientSockets.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientSockets.size()); index++)
 	{
 		if(socket == _clientSockets[index])
 		{
@@ -259,7 +259,7 @@ tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOC
 	sockaddr_in sourceAddress = sockaddr_in();
 	int sourceAddressLength = sizeof(sourceAddress);
 
-	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
+	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
 
 	auto ip = _extractAddressIp(&sourceAddress);
 	auto port = _extractAddressPort(&sourceAddress);
@@ -278,7 +278,7 @@ const string NetworkingServer::_extractPeerIp(SOCKET socket) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+	auto peerResult = getpeername(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
 	return _extractAddressIp(&socketAddress);
 }
@@ -287,12 +287,12 @@ const string NetworkingServer::_extractPeerPort(SOCKET socket) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+	auto peerResult = getpeername(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
 	return _extractAddressPort(&socketAddress);
 }
 
-const sockaddr_in NetworkingServer::_composeSocketAddress(const string& ip, const string& port) const
+const sockaddr_in NetworkingServer::_composeSocketAddress(const string & ip, const string & port) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	socketAddress.sin_family = AF_INET;
@@ -302,7 +302,7 @@ const sockaddr_in NetworkingServer::_composeSocketAddress(const string& ip, cons
 	return socketAddress;
 }
 
-const string NetworkingServer::_extractAddressIp(sockaddr_in* address) const
+const string NetworkingServer::_extractAddressIp(sockaddr_in * address) const
 {
 	char ip[IPV4_ADDRESS_LENGTH];
 	inet_ntop(AF_INET, &(address->sin_addr), ip, sizeof(ip));
@@ -310,7 +310,7 @@ const string NetworkingServer::_extractAddressIp(sockaddr_in* address) const
 	return (ip);
 }
 
-const string NetworkingServer::_extractAddressPort(sockaddr_in* address) const
+const string NetworkingServer::_extractAddressPort(sockaddr_in * address) const
 {
 	return to_string(ntohs(address->sin_port));
 }
@@ -325,7 +325,7 @@ const bool NetworkingServer::_isMessageReadyUDP(SOCKET socket) const
 	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
 }
 
-const bool NetworkingServer::isMessageReserved(const string& message) const
+const bool NetworkingServer::isMessageReserved(const string & message) const
 {
 	return
 		(

@@ -271,7 +271,7 @@ void BottomViewportController::_updateStatistics()
 	{
 		auto synchronizationCount = (loggerMessages.size() - _consoleMessageQueue.size());
 
-		for(unsigned int index = static_cast<unsigned int>(loggerMessages.size() - synchronizationCount); index < loggerMessages.size(); index++)
+		for(unsigned int index = (static_cast<unsigned int>(loggerMessages.size()) - static_cast<unsigned int>(synchronizationCount)); index < static_cast<unsigned int>(loggerMessages.size()); index++)
 		{
 			_addConsoleMessage(loggerMessages[index]);
 		}

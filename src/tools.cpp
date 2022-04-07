@@ -112,7 +112,7 @@ const unsigned int Tools::parseUnsignedInteger(const string & valueString)
 		abort();
 	}
 
-	for(unsigned int index = 0; index < valueString.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(valueString.size()); index++)
 	{
 		if(!isdigit(valueString[index]))
 		{
@@ -137,7 +137,7 @@ const int Tools::parseSignedInteger(const string & valueString)
 		startingIndex = 1;
 	}
 
-	for(unsigned int index = startingIndex; index < valueString.size(); index++)
+	for(unsigned int index = startingIndex; index < static_cast<unsigned int>(valueString.size()); index++)
 	{
 		if(!isdigit(valueString[index]))
 		{
@@ -248,7 +248,7 @@ const vector<string> Tools::splitStringIntoMultiple(const string & mergedString,
 
 	string tempString = "";
 
-	for(unsigned int index = 0; index < mergedString.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(mergedString.size()); index++)
 	{
 		if(mergedString[index] == delimiter)
 		{

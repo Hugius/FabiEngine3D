@@ -2,7 +2,7 @@
 
 using std::make_shared;
 
-void MasterRenderer::setBackgroundColor(const fvec3& color)
+void MasterRenderer::setBackgroundColor(const fvec3 & color)
 {
 	glClearColor(color.r, color.g, color.b, 1.0f);
 }
@@ -28,7 +28,7 @@ const string MasterRenderer::getCpuName() const
 
 	string result;
 	reverse(nameString.begin(), nameString.end());
-	for(unsigned int index = 0; index < nameString.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(nameString.size()); index++)
 	{
 		if(nameString[index] != 0)
 		{
@@ -43,12 +43,12 @@ const string MasterRenderer::getCpuName() const
 
 const string MasterRenderer::getGpuName() const
 {
-	return (reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_RENDERER))));
+	return (reinterpret_cast<char *>(const_cast<GLubyte *>(glGetString(GL_RENDERER))));
 }
 
 const string MasterRenderer::getOpenglVersion() const
 {
-	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_VERSION)))).substr(0, 3);
+	return string(reinterpret_cast<char *>(const_cast<GLubyte *>(glGetString(GL_VERSION)))).substr(0, 3);
 }
 
 void MasterRenderer::inject(shared_ptr<Camera> camera)

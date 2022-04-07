@@ -3,7 +3,7 @@
 
 using SVT = ScriptValueType;
 
-const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCall(const string& scriptLine)
+const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCall(const string & scriptLine)
 {
 	vector<shared_ptr<ScriptValue>> returnValues;
 	auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
@@ -465,7 +465,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			const auto delimiter = args[1]->getString();
 
 			string result = "";
-			for(unsigned int index = 0; index < fullString.size(); index++)
+			for(unsigned int index = 0; index < static_cast<unsigned int>(fullString.size()); index++)
 			{
 				if(fullString[index] == delimiter.back())
 				{
@@ -493,7 +493,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			string result = "";
 			string content = args[0]->getString();
 			reverse(content.begin(), content.end());
-			for(const auto& character : content)
+			for(const auto & character : content)
 			{
 				result += character;
 			}

@@ -10,7 +10,7 @@ using std::launch;
 using std::future_status;
 using std::chrono::seconds;
 
-const shared_ptr<Audio> AudioLoader::loadAudio(const string& filePath)
+const shared_ptr<Audio> AudioLoader::loadAudio(const string & filePath)
 {
 	auto cacheIterator = _cache.find(filePath);
 
@@ -35,7 +35,7 @@ const shared_ptr<Audio> AudioLoader::loadAudio(const string& filePath)
 	return loadedAudio;
 }
 
-void AudioLoader::cacheAudio(const string& filePath, bool isCrucial)
+void AudioLoader::cacheAudio(const string & filePath, bool isCrucial)
 {
 	auto cacheIterator = _cache.find(filePath);
 
@@ -65,7 +65,7 @@ void AudioLoader::cacheAudio(const string& filePath, bool isCrucial)
 	Logger::throwInfo("Loaded audio: \"" + filePath + "\"");
 }
 
-void AudioLoader::cacheAudios(const vector<string>& filePaths, bool isCrucial)
+void AudioLoader::cacheAudios(const vector<string> & filePaths, bool isCrucial)
 {
 	vector<future<shared_ptr<Audio>>> threads;
 	vector<string> threadFilePaths;
@@ -75,7 +75,7 @@ void AudioLoader::cacheAudios(const vector<string>& filePaths, bool isCrucial)
 	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
-	for(const auto& filePath : uniqueFilePaths)
+	for(const auto & filePath : uniqueFilePaths)
 	{
 		if(_cache.find(filePath) == _cache.end())
 		{
@@ -87,7 +87,7 @@ void AudioLoader::cacheAudios(const vector<string>& filePaths, bool isCrucial)
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		for(unsigned int index = 0; index < threadStatuses.size(); index++)
+		for(unsigned int index = 0; index < static_cast<unsigned int>(threadStatuses.size()); index++)
 		{
 			if(!threadStatuses[index])
 			{
@@ -121,7 +121,7 @@ void AudioLoader::cacheAudios(const vector<string>& filePaths, bool isCrucial)
 	}
 }
 
-void AudioLoader::clearAudioCache(const string& filePath)
+void AudioLoader::clearAudioCache(const string & filePath)
 {
 	if(_cache.find(filePath) != _cache.end())
 	{

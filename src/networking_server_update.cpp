@@ -58,7 +58,7 @@ void NetworkingServer::update()
 		_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
 	}
 
-	for(unsigned int index = 0; index < _clientSockets.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientSockets.size()); index++)
 	{
 		if(_tcpMessageThreads[index].wait_for(seconds(0)) == future_status::ready)
 		{
@@ -70,7 +70,7 @@ void NetworkingServer::update()
 
 			if(messageStatusCode > 0)
 			{
-				for(const auto& character : messageContent)
+				for(const auto & character : messageContent)
 				{
 					if(character == ';')
 					{
@@ -186,7 +186,7 @@ void NetworkingServer::update()
 					auto username = messageContent.substr(0, messageContent.find(';'));
 					auto content = messageContent.substr(messageContent.find(';') + 1);
 
-					for(unsigned int index = 0; index < _clientUsernames.size(); index++)
+					for(unsigned int index = 0; index < static_cast<unsigned int>(_clientUsernames.size()); index++)
 					{
 						if(username == _clientUsernames[index])
 						{

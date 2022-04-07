@@ -1,7 +1,7 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
 
-const bool ScriptInterpreter::_checkConditionString(const string& conditionString)
+const bool ScriptInterpreter::_checkConditionString(const string & conditionString)
 {
 	vector<shared_ptr<ScriptValue>> comparisonValues;
 	vector<string> elements;
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 		return false;
 	}
 
-	for(const auto& character : conditionString)
+	for(const auto & character : conditionString)
 	{
 		if(character == ' ' && elementBuild.empty() && !isBuildingString)
 		{
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 		return false;
 	}
 
-	for(auto& elementString : elements)
+	for(auto & elementString : elements)
 	{
 		if(mustBeValue)
 		{
@@ -196,7 +196,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 	bool finalCondition = conditions[0];
 	string currentLogicOperator = "";
-	for(unsigned int index = 1; index < conditions.size(); index++)
+	for(unsigned int index = 1; index < static_cast<unsigned int>(conditions.size()); index++)
 	{
 		if(currentLogicOperator.empty())
 		{
@@ -221,7 +221,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 	return finalCondition;
 }
 
-const bool ScriptInterpreter::_validateCondition(shared_ptr<ScriptValue> firstValue, const string& comparisonOperator, shared_ptr<ScriptValue> secondValue)
+const bool ScriptInterpreter::_validateCondition(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue)
 {
 	if(firstValue->getType() != secondValue->getType())
 	{
@@ -244,7 +244,7 @@ const bool ScriptInterpreter::_validateCondition(shared_ptr<ScriptValue> firstVa
 	return true;
 }
 
-const bool ScriptInterpreter::_compareValues(shared_ptr<ScriptValue> firstValue, const string& comparisonOperator, shared_ptr<ScriptValue> secondValue) const
+const bool ScriptInterpreter::_compareValues(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue) const
 {
 	if(comparisonOperator == IS_KEYWORD)
 	{
@@ -314,7 +314,7 @@ const bool ScriptInterpreter::_compareValues(shared_ptr<ScriptValue> firstValue,
 	return false;
 }
 
-const int ScriptInterpreter::_getLastConditionStatementIndex(const vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const
+const int ScriptInterpreter::_getLastConditionStatementIndex(const vector<ScriptConditionStatement> & statements, unsigned int scopeDepth) const
 {
 	unsigned int index = static_cast<unsigned int>(statements.size());
 

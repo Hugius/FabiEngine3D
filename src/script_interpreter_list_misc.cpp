@@ -43,7 +43,7 @@ const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<Scr
 
 const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<ScriptValue>> & values, const vector<ScriptValueType> & types)
 {
-	for(unsigned int index = 0; index < values.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(values.size()); index++)
 	{
 		if(values[index]->getType() != types[index])
 		{

@@ -100,7 +100,7 @@ void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<str
 		}
 	}
 
-	for(unsigned int index = 0; index < visibleEntities.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(visibleEntities.size()); index++)
 	{
 		_shaderBuffer->uploadUniform("u_pointlightPositions[" + to_string(index) + "]", visibleEntities[index]->getPosition());
 		_shaderBuffer->uploadUniform("u_pointlightColors[" + to_string(index) + "]", visibleEntities[index]->getColor());
@@ -123,7 +123,7 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 		}
 	}
 
-	for(unsigned int index = 0; index < visibleEntities.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(visibleEntities.size()); index++)
 	{
 		_shaderBuffer->uploadUniform("u_spotlightPositions[" + to_string(index) + "]", visibleEntities[index]->getPosition());
 		_shaderBuffer->uploadUniform("u_spotlightFronts[" + to_string(index) + "]", visibleEntities[index]->getFront());

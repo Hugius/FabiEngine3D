@@ -154,7 +154,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 
 	for(const auto & meshPart : meshParts)
 	{
-		for(unsigned int index = 0; index < meshPart->getPositions().size(); index += 3)
+		for(unsigned int index = 0; index < static_cast<unsigned int>(meshPart->getPositions().size()); index += 3)
 		{
 			const auto v0 = meshPart->getPositions()[index + 0];
 			const auto v1 = meshPart->getPositions()[index + 1];

@@ -52,7 +52,7 @@ void GuiScrollingList::createOption(const string & id, const string & textConten
 
 void GuiScrollingList::deleteOption(const string & id)
 {
-	for(unsigned int index = 0; index < _buttons.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_buttons.size()); index++)
 	{
 		if(id == _buttons[index]->getId())
 		{

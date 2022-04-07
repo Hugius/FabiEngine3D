@@ -1,6 +1,6 @@
 #include "world_editor.hpp"
 
-void WorldEditor::_updateModelHighlighting(const string& id, int& direction)
+void WorldEditor::_updateModelHighlighting(const string & id, int & direction)
 {
 	if(id.empty())
 	{
@@ -10,7 +10,7 @@ void WorldEditor::_updateModelHighlighting(const string& id, int& direction)
 
 	auto partIds = _fe3d->model_getPartIds(id);
 
-	for(unsigned int index = 0; index < partIds.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(partIds.size()); index++)
 	{
 		auto opacity = _fe3d->model_getOpacity(id, partIds[index]);
 
@@ -27,7 +27,7 @@ void WorldEditor::_updateModelHighlighting(const string& id, int& direction)
 	}
 }
 
-void WorldEditor::_updateQuad3dHighlighting(const string& id, int& direction)
+void WorldEditor::_updateQuad3dHighlighting(const string & id, int & direction)
 {
 	if(id.empty())
 	{
@@ -50,7 +50,7 @@ void WorldEditor::_updateQuad3dHighlighting(const string& id, int& direction)
 	_fe3d->quad3d_setOpacity(id, (opacity + speed));
 }
 
-void WorldEditor::_updateText3dHighlighting(const string& id, int& direction)
+void WorldEditor::_updateText3dHighlighting(const string & id, int & direction)
 {
 	if(id.empty())
 	{
@@ -73,7 +73,7 @@ void WorldEditor::_updateText3dHighlighting(const string& id, int& direction)
 	_fe3d->text3d_setOpacity(id, (opacity + speed));
 }
 
-void WorldEditor::_updateSoundHighlighting(const string& id, int& direction)
+void WorldEditor::_updateSoundHighlighting(const string & id, int & direction)
 {
 	if(id.empty())
 	{
@@ -99,7 +99,7 @@ void WorldEditor::_updateSoundHighlighting(const string& id, int& direction)
 	_fe3d->model_setBaseSize(("@@speaker_" + id), (color + speed));
 }
 
-void WorldEditor::_updatePointlightHighlighting(const string& id, int& direction)
+void WorldEditor::_updatePointlightHighlighting(const string & id, int & direction)
 {
 	if(id.empty())
 	{
@@ -125,7 +125,7 @@ void WorldEditor::_updatePointlightHighlighting(const string& id, int& direction
 	_fe3d->model_setBaseSize(("@@lamp_" + id), (size + speed));
 }
 
-void WorldEditor::_updateSpotlightHighlighting(const string& id, int& direction)
+void WorldEditor::_updateSpotlightHighlighting(const string & id, int & direction)
 {
 	if(id.empty())
 	{
@@ -151,7 +151,7 @@ void WorldEditor::_updateSpotlightHighlighting(const string& id, int& direction)
 	_fe3d->model_setBaseSize(("@@torch_" + id), (size + speed));
 }
 
-void WorldEditor::_updateReflectionHighlighting(const string& id, int& direction)
+void WorldEditor::_updateReflectionHighlighting(const string & id, int & direction)
 {
 	if(id.empty())
 	{

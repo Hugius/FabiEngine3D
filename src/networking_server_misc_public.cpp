@@ -8,7 +8,7 @@ const bool NetworkingServer::isRunning() const
 
 const bool NetworkingServer::isClientConnected(const string& username) const
 {
-	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientUsernames.size()); index++)
 	{
 		if(!_clientUsernames[index].empty())
 		{
@@ -70,7 +70,7 @@ const vector<string> NetworkingServer::getClientIps() const
 {
 	vector<string> result;
 
-	for(unsigned int index = 0; index < _clientIps.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientIps.size()); index++)
 	{
 		if(!_clientUsernames[index].empty())
 		{
@@ -85,7 +85,7 @@ const vector<string> NetworkingServer::getClientUsernames() const
 {
 	vector<string> clientUsernames;
 
-	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientUsernames.size()); index++)
 	{
 		if(!_clientUsernames[index].empty())
 		{
@@ -115,7 +115,7 @@ void NetworkingServer::sendTcpMessageToClient(const string& username, const stri
 		abort();
 	}
 
-	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientUsernames.size()); index++)
 	{
 		if(!_clientUsernames[index].empty())
 		{
@@ -149,7 +149,7 @@ void NetworkingServer::sendUdpMessageToClient(const string& username, const stri
 		abort();
 	}
 
-	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientUsernames.size()); index++)
 	{
 		if(!_clientUsernames[index].empty())
 		{
@@ -183,7 +183,7 @@ void NetworkingServer::broadcastTcpMessageToClients(const string& content)
 		abort();
 	}
 
-	for(unsigned int index = 0; index < _clientSockets.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientSockets.size()); index++)
 	{
 		if(!_clientUsernames[index].empty())
 		{
@@ -211,7 +211,7 @@ void NetworkingServer::broadcastUdpMessageToClients(const string& content)
 		abort();
 	}
 
-	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientUsernames.size()); index++)
 	{
 		if(!_clientUsernames[index].empty())
 		{
@@ -227,7 +227,7 @@ void NetworkingServer::disconnectClient(const string& username)
 		abort();
 	}
 
-	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientUsernames.size()); index++)
 	{
 		if(!_clientUsernames[index].empty())
 		{
@@ -249,7 +249,7 @@ void NetworkingServer::disconnectClients()
 		abort();
 	}
 
-	for(unsigned int index = 0; index < _clientUsernames.size(); index++)
+	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientUsernames.size()); index++)
 	{
 		if(!_clientUsernames[index].empty())
 		{

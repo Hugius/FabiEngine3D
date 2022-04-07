@@ -87,7 +87,7 @@ void BottomViewportController::_addConsoleMessage(const string & newMessage)
 
 	//	unsigned int typePartLength = 0;
 	//	string typeString = "";
-	//	for(unsigned int index = 0; index < message.size(); index++)
+	//	for(unsigned int index = 0; index < static_cast<unsigned int>(message.size()); index++)
 	//	{
 	//		typeString.push_back(message[index]);
 
@@ -106,7 +106,7 @@ void BottomViewportController::_addConsoleMessage(const string & newMessage)
 
 	//	vector<string> messageParts;
 	//	BEGIN:;
-	//	for(unsigned int index = 0; index < messagePartText.size(); index++)
+	//	for(unsigned int index = 0; index < static_cast<unsigned int>(messagePartText.size()); index++)
 	//	{
 	//		float offset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH + 3);
 	//		if(offset + (static_cast<float>(index) * CHAR_SIZE.x) > window->getSize().x)
@@ -151,7 +151,7 @@ void BottomViewportController::_addConsoleMessage(const string & newMessage)
 	//		reverse(messageParts.begin(), messageParts.end());
 	//	}
 
-	//	for(unsigned int index = 0; index < messageParts.size(); index++)
+	//	for(unsigned int index = 0; index < static_cast<unsigned int>(messageParts.size()); index++)
 	//	{
 	//		floatIndex = static_cast<float>(messageIndex);
 

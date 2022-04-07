@@ -9,9 +9,9 @@ void Sound2dPlayer::update()
 {
 	vector<pair<string, unsigned int>> soundsToStop;
 
-	for(auto& [soundId, instances] : _startedSounds)
+	for(auto & [soundId, instances] : _startedSounds)
 	{
-		for(unsigned int instanceIndex = 0; instanceIndex < instances.size(); instanceIndex++)
+		for(unsigned int instanceIndex = 0; instanceIndex < static_cast<unsigned int>(instances.size()); instanceIndex++)
 		{
 			if((instances[instanceIndex]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
 			{
@@ -47,7 +47,7 @@ void Sound2dPlayer::update()
 		}
 	}
 
-	for(const auto& [id, index] : soundsToStop)
+	for(const auto & [id, index] : soundsToStop)
 	{
 		const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(WAVEHDR));
 		if(unprepareResult != MMSYSERR_NOERROR)
@@ -84,9 +84,9 @@ void Sound2dPlayer::update()
 
 	if(_volumeThreadQueue.empty())
 	{
-		for(auto& [soundId, instances] : _startedSounds)
+		for(auto & [soundId, instances] : _startedSounds)
 		{
-			for(unsigned int instanceIndex = 0; instanceIndex < instances.size(); instanceIndex++)
+			for(unsigned int instanceIndex = 0; instanceIndex < static_cast<unsigned int>(instances.size()); instanceIndex++)
 			{
 				_volumeThreadQueue.push_back({soundId, instanceIndex});
 			}
@@ -124,8 +124,8 @@ void Sound2dPlayer::update()
 		const auto originalSound = _sound2dManager->getSound(soundId);
 
 		const auto sampleCount = (originalSound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
-		const auto originalSamples = reinterpret_cast<short*>(originalSound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
-		const auto startedSamples = reinterpret_cast<short*>(startedSound->getHeader()->lpData); // short = 2 bytes
+		const auto originalSamples = reinterpret_cast<short *>(originalSound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
+		const auto startedSamples = reinterpret_cast<short *>(startedSound->getHeader()->lpData); // short = 2 bytes
 
 		const auto volume = startedSound->getVolume();
 		const auto leftIntensity = startedSound->getLeftIntensity();

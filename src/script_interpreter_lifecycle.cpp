@@ -10,7 +10,7 @@ void ScriptInterpreter::load()
 {
 	auto lastLoggerMessageCount = Logger::getMessageCount();
 
-	for(const auto& scriptId : _script->getScriptFileIds())
+	for(const auto & scriptId : _script->getScriptFileIds())
 	{
 		auto scriptFile = _script->getScriptFile(scriptId);
 
@@ -130,7 +130,7 @@ void ScriptInterpreter::load()
 		return;
 	}
 
-	for(const auto& scriptId : _script->getScriptFileIds())
+	for(const auto & scriptId : _script->getScriptFileIds())
 	{
 		auto scriptFile = _script->getScriptFile(scriptId);
 
@@ -144,7 +144,7 @@ void ScriptInterpreter::load()
 			if(noWhiteSpace.substr(0, 3) == "///")
 			{
 				unsigned int charIndex;
-				for(charIndex = 0; charIndex < scriptLineText.size(); charIndex++)
+				for(charIndex = 0; charIndex < static_cast<unsigned int>(scriptLineText.size()); charIndex++)
 				{
 					if(scriptLineText[charIndex] != ' ')
 					{
@@ -199,32 +199,32 @@ void ScriptInterpreter::unload()
 	_animation3dEditor->deleteLoadedAnimations();
 	_soundEditor->deleteLoadedSounds();
 
-	for(const auto& id : _fe3d->sky_getIds())
+	for(const auto & id : _fe3d->sky_getIds())
 	{
 		_fe3d->sky_delete(id);
 	}
 
-	for(const auto& id : _fe3d->terrain_getIds())
+	for(const auto & id : _fe3d->terrain_getIds())
 	{
 		_fe3d->terrain_delete(id);
 	}
 
-	for(const auto& id : _fe3d->water_getIds())
+	for(const auto & id : _fe3d->water_getIds())
 	{
 		_fe3d->water_delete(id);
 	}
 
-	for(const auto& id : _fe3d->model_getIds())
+	for(const auto & id : _fe3d->model_getIds())
 	{
 		_fe3d->model_delete(id);
 	}
 
-	for(const auto& id : _fe3d->quad3d_getIds())
+	for(const auto & id : _fe3d->quad3d_getIds())
 	{
 		_fe3d->quad3d_delete(id);
 	}
 
-	for(const auto& id : _fe3d->quad2d_getIds())
+	for(const auto & id : _fe3d->quad2d_getIds())
 	{
 		if(id[0] != '@')
 		{
@@ -232,12 +232,12 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	for(const auto& id : _fe3d->text3d_getIds())
+	for(const auto & id : _fe3d->text3d_getIds())
 	{
 		_fe3d->text3d_delete(id);
 	}
 
-	for(const auto& id : _fe3d->text2d_getIds())
+	for(const auto & id : _fe3d->text2d_getIds())
 	{
 		if(id[0] != '@')
 		{
@@ -245,42 +245,42 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	for(const auto& id : _fe3d->aabb_getIds())
+	for(const auto & id : _fe3d->aabb_getIds())
 	{
 		_fe3d->aabb_delete(id);
 	}
 
-	for(const auto& id : _fe3d->pointlight_getIds())
+	for(const auto & id : _fe3d->pointlight_getIds())
 	{
 		_fe3d->pointlight_delete(id);
 	}
 
-	for(const auto& id : _fe3d->spotlight_getIds())
+	for(const auto & id : _fe3d->spotlight_getIds())
 	{
 		_fe3d->spotlight_delete(id);
 	}
 
-	for(const auto& id : _fe3d->reflection_getIds())
+	for(const auto & id : _fe3d->reflection_getIds())
 	{
 		_fe3d->reflection_delete(id);
 	}
 
-	for(const auto& id : _fe3d->animation3d_getIds())
+	for(const auto & id : _fe3d->animation3d_getIds())
 	{
 		_fe3d->animation3d_delete(id);
 	}
 
-	for(const auto& id : _fe3d->animation2d_getIds())
+	for(const auto & id : _fe3d->animation2d_getIds())
 	{
 		_fe3d->animation2d_delete(id);
 	}
 
-	for(const auto& id : _fe3d->sound3d_getIds())
+	for(const auto & id : _fe3d->sound3d_getIds())
 	{
 		_fe3d->sound3d_delete(id);
 	}
 
-	for(const auto& id : _fe3d->sound2d_getIds())
+	for(const auto & id : _fe3d->sound2d_getIds())
 	{
 		_fe3d->sound2d_delete(id);
 	}
@@ -356,7 +356,7 @@ void ScriptInterpreter::unload()
 		_fe3d->misc_setVsyncEnabled(true);
 	}
 
-	for(const auto& clockId : _fe3d->clock_getIds())
+	for(const auto & clockId : _fe3d->clock_getIds())
 	{
 		_fe3d->clock_delete(clockId);
 	}

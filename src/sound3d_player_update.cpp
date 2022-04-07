@@ -10,7 +10,7 @@ void Sound3dPlayer::update()
 {
 	vector<pair<string, unsigned int>> soundsToStop;
 
-	for(auto& [soundId, instances] : _startedSounds)
+	for(auto & [soundId, instances] : _startedSounds)
 	{
 		const auto sound = _sound3dManager->getSound(soundId);
 		const auto cameraPosition = _camera->getPosition();
@@ -25,7 +25,7 @@ void Sound3dPlayer::update()
 		const auto leftIntensity = ((dotProduct * 0.5f) + 0.5f);
 		const auto rightIntensity = (1.0f - leftIntensity);
 
-		for(unsigned int instanceIndex = 0; instanceIndex < instances.size(); instanceIndex++)
+		for(unsigned int instanceIndex = 0; instanceIndex < static_cast<unsigned int>(instances.size()); instanceIndex++)
 		{
 			if((instances[instanceIndex]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
 			{
@@ -65,7 +65,7 @@ void Sound3dPlayer::update()
 		}
 	}
 
-	for(const auto& [id, index] : soundsToStop)
+	for(const auto & [id, index] : soundsToStop)
 	{
 		const auto unprepareResult = waveOutUnprepareHeader(_startedSounds.at(id)[index]->getHandle(), _startedSounds.at(id)[index]->getHeader(), sizeof(WAVEHDR));
 		if(unprepareResult != MMSYSERR_NOERROR)
@@ -102,9 +102,9 @@ void Sound3dPlayer::update()
 
 	if(_volumeThreadQueue.empty())
 	{
-		for(auto& [soundId, instances] : _startedSounds)
+		for(auto & [soundId, instances] : _startedSounds)
 		{
-			for(unsigned int instanceIndex = 0; instanceIndex < instances.size(); instanceIndex++)
+			for(unsigned int instanceIndex = 0; instanceIndex < static_cast<unsigned int>(instances.size()); instanceIndex++)
 			{
 				_volumeThreadQueue.push_back({soundId, instanceIndex});
 			}
@@ -142,8 +142,8 @@ void Sound3dPlayer::update()
 		const auto originalSound = _sound3dManager->getSound(soundId);
 
 		const auto sampleCount = (originalSound->getWaveBuffer()->getHeader()->dwBufferLength / 2); // 1 sample = 2 bytes
-		const auto originalSamples = reinterpret_cast<short*>(originalSound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
-		const auto startedSamples = reinterpret_cast<short*>(startedSound->getHeader()->lpData); // short = 2 bytes
+		const auto originalSamples = reinterpret_cast<short *>(originalSound->getWaveBuffer()->getHeader()->lpData); // short = 2 bytes
+		const auto startedSamples = reinterpret_cast<short *>(startedSound->getHeader()->lpData); // short = 2 bytes
 
 		const auto volume = startedSound->getVolume();
 		const auto leftIntensity = startedSound->getLeftIntensity();

@@ -1,4 +1,5 @@
 #include "world_editor.hpp"
+#include "tools.hpp"
 
 void WorldEditor::_updateAmbientLightingSettingsMenu()
 {
@@ -6,9 +7,9 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsLightingAmbient")
 	{
-		bool isEnabled = _fe3d->graphics_isAmbientLightingEnabled();
-		fvec3 color = _fe3d->graphics_getAmbientLightingColor();
-		float intensity = _fe3d->graphics_getAmbientLightingIntensity();
+		const auto color = _fe3d->graphics_getAmbientLightingColor();
+		const auto intensity = _fe3d->graphics_getAmbientLightingIntensity();
+		const auto isEnabled = _fe3d->graphics_isAmbientLightingEnabled();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -17,8 +18,7 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
-			isEnabled = !isEnabled;
-			_fe3d->graphics_setAmbientLightingEnabled(isEnabled);
+			_fe3d->graphics_setAmbientLightingEnabled(!isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
@@ -31,25 +31,29 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("colorR", color.r))
+		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.r /= 255.0f;
-			_fe3d->graphics_setAmbientLightingColor(color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setAmbientLightingColor(fvec3((content / 255.0f), color.g, color.b));
 		}
-		if(_gui->getOverlay()->checkValueForm("colorG", color.g))
+		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.g /= 255.0f;
-			_fe3d->graphics_setAmbientLightingColor(color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setAmbientLightingColor(fvec3(color.r, (content / 255.0f), color.b));
 		}
-		if(_gui->getOverlay()->checkValueForm("colorB", color.b))
+		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.b /= 255.0f;
-			_fe3d->graphics_setAmbientLightingColor(color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setAmbientLightingColor(fvec3(color.r, color.g, (content / 255.0f)));
 		}
-		if(_gui->getOverlay()->checkValueForm("intensity", intensity))
+		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			intensity /= 100.0f;
-			_fe3d->graphics_setAmbientLightingIntensity(intensity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setAmbientLightingIntensity(content / 100.0f);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -62,10 +66,10 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsLightingDirectional")
 	{
-		auto isEnabled = _fe3d->graphics_isDirectionalLightingEnabled();
-		auto color = _fe3d->graphics_getDirectionalLightingColor();
-		auto position = _fe3d->graphics_getDirectionalLightingPosition();
-		auto intensity = _fe3d->graphics_getDirectionalLightingIntensity();
+		const auto isEnabled = _fe3d->graphics_isDirectionalLightingEnabled();
+		const auto color = _fe3d->graphics_getDirectionalLightingColor();
+		const auto position = _fe3d->graphics_getDirectionalLightingPosition();
+		const auto intensity = _fe3d->graphics_getDirectionalLightingIntensity();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -74,8 +78,7 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
-			isEnabled = !isEnabled;
-			_fe3d->graphics_setDirectionalLightingEnabled(isEnabled);
+			_fe3d->graphics_setDirectionalLightingEnabled(!isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{
@@ -94,37 +97,47 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("positionX", position.x))
+		if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setDirectionalLightingPosition(position);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setDirectionalLightingPosition(fvec3((content / 255.0f), position.y, position.z));
 		}
-		if(_gui->getOverlay()->checkValueForm("positionY", position.y))
+		if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setDirectionalLightingPosition(position);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setDirectionalLightingPosition(fvec3(position.x, (content / 255.0f), position.z));
 		}
-		if(_gui->getOverlay()->checkValueForm("positionZ", position.z))
+		if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setDirectionalLightingPosition(position);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setDirectionalLightingPosition(fvec3(position.x, position.y, (content / 255.0f)));
 		}
-		if(_gui->getOverlay()->checkValueForm("colorR", color.r))
+		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.r /= 255.0f;
-			_fe3d->graphics_setDirectionalLightingColor(color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setDirectionalLightingColor(fvec3((content / 255.0f), color.g, color.b));
 		}
-		if(_gui->getOverlay()->checkValueForm("colorG", color.g))
+		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.g /= 255.0f;
-			_fe3d->graphics_setDirectionalLightingColor(color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setDirectionalLightingColor(fvec3(color.r, (content / 255.0f), color.b));
 		}
-		if(_gui->getOverlay()->checkValueForm("colorB", color.b))
+		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.b /= 255.0f;
-			_fe3d->graphics_setDirectionalLightingColor(color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setDirectionalLightingColor(fvec3(color.r, color.g, (content / 255.0f)));
 		}
-		if(_gui->getOverlay()->checkValueForm("intensity", intensity))
+		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			intensity /= 100.0f;
-			_fe3d->graphics_setDirectionalLightingIntensity(intensity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setDirectionalLightingIntensity(content / 100.0f);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");

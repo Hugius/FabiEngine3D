@@ -8,17 +8,27 @@ void WorldEditor::_updatePointlightPlacing()
 	{
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
-			auto newPosition = _fe3d->pointlight_getPosition(TEMPLATE_POINTLIGHT_ID);
-			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
-			_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, newPosition);
-			_fe3d->model_setBasePosition(TEMPLATE_LAMP_ID, newPosition);
+			const auto newPosition = _fe3d->pointlight_getPosition(TEMPLATE_POINTLIGHT_ID);
 
-			if(_gui->getOverlay()->isValueFormConfirmed())
+			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = ("pointlight_" + to_string(_idCounter));
-				auto newModelId = ("@@lamp_" + newId);
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+				_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, fvec3(content, newPosition.y, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_LAMP_ID, fvec3(content, newPosition.y, newPosition.z));
+			}
+			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
+			{
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+				_fe3d->pointlight_setPosition(TEMPLATE_POINTLIGHT_ID, fvec3(newPosition.x, content, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_LAMP_ID, fvec3(newPosition.x, content, newPosition.z));
+			}
+			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
+			{
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto newId = ("pointlight_" + to_string(_idCounter));
+				const auto newModelId = ("@@lamp_" + newId);
 
 				_idCounter++;
 
@@ -31,12 +41,12 @@ void WorldEditor::_updatePointlightPlacing()
 				_loadedPointlightIds.push_back(newId);
 
 				_fe3d->pointlight_create(newId);
-				_fe3d->pointlight_setPosition(newId, newPosition);
+				_fe3d->pointlight_setPosition(newId, fvec3(newPosition.x, newPosition.y, content));
 				_fe3d->pointlight_setRadius(newId, fvec3(DEFAULT_POINTLIGHT_RADIUS));
 				_fe3d->pointlight_setIntensity(newId, DEFAULT_POINTLIGHT_INTENSITY);
 
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\lamp.obj");
-				_fe3d->model_setBasePosition(newModelId, newPosition);
+				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, content));
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_LAMP_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
@@ -49,13 +59,15 @@ void WorldEditor::_updatePointlightPlacing()
 
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+
 				_isPlacingPointlight = false;
 			}
 
-			if(_gui->getOverlay()->isValueFormCancelled())
+			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+
 				_isPlacingPointlight = false;
 			}
 		}

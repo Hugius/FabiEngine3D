@@ -7,27 +7,41 @@ void WorldEditor::_updateQuad3dPlacing()
 	{
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
-			auto newPosition = _fe3d->quad3d_getPosition(_currentTemplateQuadId);
-			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
-			_fe3d->quad3d_setPosition(_currentTemplateQuadId, newPosition);
+			const auto newPosition = _fe3d->quad3d_getPosition(_currentTemplateQuadId);
 
-			if(_gui->getOverlay()->isValueFormConfirmed())
+			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = (_currentTemplateQuadId.substr(1) + "_" + to_string(_idCounter));
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+				_fe3d->quad3d_setPosition(_currentTemplateQuadId, fvec3(content, newPosition.y, newPosition.z));
+			}
+			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
+			{
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+				_fe3d->quad3d_setPosition(_currentTemplateQuadId, fvec3(newPosition.x, content, newPosition.z));
+			}
+			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
+			{
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto newId = (_currentTemplateQuadId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
 
 				_worldUtilities->copyTemplateQuad3d(newId, _currentTemplateQuadId);
 				_loadedQuadIds.insert({newId, _currentTemplateQuadId});
 
-				_fe3d->quad3d_setPosition(newId, newPosition);
+				_fe3d->quad3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, content));
+
+				_fe3d->quad3d_setVisible(_currentTemplateQuadId, false);
+
+				_currentTemplateQuadId = "";
 			}
 
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
 				_fe3d->quad3d_setVisible(_currentTemplateQuadId, false);
+
 				_currentTemplateQuadId = "";
 			}
 		}

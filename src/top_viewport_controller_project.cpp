@@ -187,7 +187,7 @@ void TopViewportController::_updateProjectDeleting()
 
 			_applyProjectChange();
 
-			Logger::throwInfo("Project \"" + _projectToDelete + "\" deleted");
+			Logger::throwInfo("Project \"" + _currentProjectId + "\" deleted");
 		}
 	}
 }

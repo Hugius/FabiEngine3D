@@ -14,6 +14,7 @@ void WorldEditor::_updateSkyMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> skyIds;
+
 			for(const auto & id : _skyEditor->getLoadedEntityIds())
 			{
 				if(id[0] == '@')
@@ -22,7 +23,7 @@ void WorldEditor::_updateSkyMenu()
 				}
 			}
 
-			_gui->getOverlay()->openChoiceForm("skyList", "Select Sky", fvec2(0.0f, 0.1f), skyIds);
+			_gui->getOverlay()->openChoiceForm("selectSky", "Select Sky", fvec2(0.0f, 0.1f), skyIds);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -38,12 +39,6 @@ void WorldEditor::_updateSkyMenu()
 				_worldUtilities->copyTemplateSky(selectedOptionId, ("@" + selectedOptionId));
 
 				_fe3d->sky_select(selectedOptionId);
-
-
-			}
-			//else if(_gui->getOverlay()->isChoiceFormCancelled())
-			{
-
 			}
 		}
 

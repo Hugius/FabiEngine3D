@@ -18,23 +18,19 @@ void WorldEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("worldCreate", "Create World", "", fvec2(0.0f, 0.1f), 10, true, true, false);
-			_isCreatingWorld = true;
+			_gui->getOverlay()->openValueForm("createWorld", "Create World", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _getWorldIds();
 			sort(ids.begin(), ids.end());
-			_gui->getOverlay()->openChoiceForm("worldList", "Edit World", fvec2(0.0f, 0.1f), ids);
-			_isChoosingWorld = true;
+			_gui->getOverlay()->openChoiceForm("editWorld", "Edit World", fvec2(0.0f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _getWorldIds();
 			sort(ids.begin(), ids.end());
-			_gui->getOverlay()->openChoiceForm("worldList", "Delete World", fvec2(0.0f, 0.1f), ids);
-			_isChoosingWorld = true;
-			_isDeletingWorld = true;
+			_gui->getOverlay()->openChoiceForm("deleteWorld", "Delete World", fvec2(0.0f, 0.1f), ids);
 		}
 	}
 }
@@ -95,7 +91,7 @@ void WorldEditor::_updateChoiceMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettings");
 		}
 
-		if(_gui->getOverlay()->getAnswerFormId() == "back")
+		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
@@ -132,8 +128,6 @@ void WorldEditor::_updateChoiceMenu()
 				_currentWorldId = "";
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
-
-
 			}
 		}
 	}

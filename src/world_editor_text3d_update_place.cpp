@@ -7,27 +7,41 @@ void WorldEditor::_updateText3dPlacing()
 	{
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
-			auto newPosition = _fe3d->text3d_getPosition(_currentTemplateTextId);
-			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
-			_fe3d->text3d_setPosition(_currentTemplateTextId, newPosition);
+			const auto newPosition = _fe3d->text3d_getPosition(_currentTemplateTextId);
 
-			if(_gui->getOverlay()->isValueFormConfirmed())
+			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = (_currentTemplateTextId.substr(1) + "_" + to_string(_idCounter));
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+				_fe3d->text3d_setPosition(_currentTemplateTextId, fvec3(content, newPosition.y, newPosition.z));
+			}
+			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
+			{
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+				_fe3d->text3d_setPosition(_currentTemplateTextId, fvec3(newPosition.x, content, newPosition.z));
+			}
+			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
+			{
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto newId = (_currentTemplateTextId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;
 
 				_worldUtilities->copyTemplateText3d(newId, _currentTemplateTextId);
 				_loadedTextIds.insert({newId, _currentTemplateTextId});
 
-				_fe3d->text3d_setPosition(newId, newPosition);
+				_fe3d->text3d_setPosition(newId, fvec3(newPosition.x, newPosition.y, content));
+
+				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
+
+				_currentTemplateTextId = "";
 			}
 
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
+
 				_currentTemplateTextId = "";
 			}
 		}

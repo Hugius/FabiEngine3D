@@ -8,14 +8,14 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsShadows")
 	{
-		auto isEnabled = _fe3d->graphics_isShadowsEnabled();
-		auto isFollowingCamera = _fe3d->graphics_isShadowFollowingCamera();
-		auto size = _fe3d->graphics_getShadowSize();
-		auto lightness = _fe3d->graphics_getShadowLightness();
-		auto position = _fe3d->graphics_getShadowPositionOffset();
-		auto lookat = _fe3d->graphics_getShadowLookatOffset();
-		auto interval = _fe3d->graphics_getShadowInterval();
-		auto quality = _fe3d->graphics_getShadowQuality();
+		const auto isEnabled = _fe3d->graphics_isShadowsEnabled();
+		const auto isFollowingCamera = _fe3d->graphics_isShadowFollowingCamera();
+		const auto size = _fe3d->graphics_getShadowSize();
+		const auto lightness = _fe3d->graphics_getShadowLightness();
+		const auto position = _fe3d->graphics_getShadowPositionOffset();
+		const auto lookat = _fe3d->graphics_getShadowLookatOffset();
+		const auto interval = _fe3d->graphics_getShadowInterval();
+		const auto quality = _fe3d->graphics_getShadowQuality();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -25,8 +25,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
-			isEnabled = !isEnabled;
-			_fe3d->graphics_setShadowsEnabled(isEnabled);
+			_fe3d->graphics_setShadowsEnabled(!isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
@@ -46,8 +45,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFollowingCamera")->isHovered())
 		{
-			isFollowingCamera = !isFollowingCamera;
-			_fe3d->graphics_setShadowFollowingCamera(isFollowingCamera);
+			_fe3d->graphics_setShadowFollowingCamera(!isFollowingCamera);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
@@ -62,46 +60,65 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("quality", "Quality", quality, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("size", size))
+		if((_gui->getOverlay()->getValueFormId() == "size") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setShadowSize(size);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setShadowSize(content);
 		}
-		if(_gui->getOverlay()->checkValueForm("positionX", position.x))
+		if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setShadowPositionOffset(position);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setShadowPositionOffset(fvec3((content / 255.0f), position.y, position.z));
 		}
-		if(_gui->getOverlay()->checkValueForm("positionY", position.y))
+		if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setShadowPositionOffset(position);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setShadowPositionOffset(fvec3(position.x, (content / 255.0f), position.z));
 		}
-		if(_gui->getOverlay()->checkValueForm("positionZ", position.z))
+		if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setShadowPositionOffset(position);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setShadowPositionOffset(fvec3(position.x, position.y, (content / 255.0f)));
 		}
-		if(_gui->getOverlay()->checkValueForm("lookatX", lookat.x))
+		if((_gui->getOverlay()->getValueFormId() == "lookatX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setShadowLookatOffset(lookat);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setShadowLookatOffset(fvec3((content / 255.0f), position.y, position.z));
 		}
-		if(_gui->getOverlay()->checkValueForm("lookatY", lookat.y))
+		if((_gui->getOverlay()->getValueFormId() == "lookatY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setShadowLookatOffset(lookat);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, (content / 255.0f), position.z));
 		}
-		if(_gui->getOverlay()->checkValueForm("lookatZ", lookat.z))
+		if((_gui->getOverlay()->getValueFormId() == "lookatZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setShadowLookatOffset(lookat);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, position.y, (content / 255.0f)));
 		}
-		if(_gui->getOverlay()->checkValueForm("lightness", lightness))
+		if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			lightness /= 100.0f;
-			_fe3d->graphics_setShadowLightness(lightness);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setShadowLightness(content / 100.0f);
 		}
-		if(_gui->getOverlay()->checkValueForm("interval", interval))
+		if((_gui->getOverlay()->getValueFormId() == "interval") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setShadowInterval(interval);
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->graphics_setShadowInterval(content);
 		}
-		if(_gui->getOverlay()->checkValueForm("quality", quality))
+		if((_gui->getOverlay()->getValueFormId() == "quality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setShadowQuality(quality);
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->graphics_setShadowQuality(content);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -115,9 +132,9 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsReflections")
 	{
-		auto planarHeight = _fe3d->graphics_getPlanarReflectionHeight();
-		auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
-		auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
+		const auto planarHeight = _fe3d->graphics_getPlanarReflectionHeight();
+		const auto cubeQuality = _fe3d->graphics_getCubeReflectionQuality();
+		const auto planarQuality = _fe3d->graphics_getPlanarReflectionQuality();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -137,17 +154,23 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("planarQuality", "Planar Quality", planarQuality, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("planarHeight", planarHeight))
+		if((_gui->getOverlay()->getValueFormId() == "planarHeight") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setPlanarReflectionHeight(planarHeight);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setPlanarReflectionHeight(content);
 		}
-		if(_gui->getOverlay()->checkValueForm("cubeQuality", cubeQuality))
+		if((_gui->getOverlay()->getValueFormId() == "cubeQuality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setCubeReflectionQuality(cubeQuality);
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->graphics_setCubeReflectionQuality(content);
 		}
-		if(_gui->getOverlay()->checkValueForm("planarQuality", planarQuality))
+		if((_gui->getOverlay()->getValueFormId() == "planarQuality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setPlanarReflectionQuality(planarQuality);
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->graphics_setPlanarReflectionQuality(content);
 		}
 	}
 }
@@ -158,7 +181,7 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsRefractions")
 	{
-		auto planarQuality = _fe3d->graphics_getPlanarRefractionQuality();
+		const auto planarQuality = _fe3d->graphics_getPlanarRefractionQuality();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -170,9 +193,11 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("planarQuality", "Planar Quality", planarQuality, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("planarQuality", planarQuality))
+		if((_gui->getOverlay()->getValueFormId() == "planarQuality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setPlanarRefractionQuality(planarQuality);
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->graphics_setPlanarRefractionQuality(content);
 		}
 	}
 }
@@ -183,11 +208,11 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsDof")
 	{
-		auto isEnabled = _fe3d->graphics_isDofEnabled();
-		auto isDynamic = _fe3d->graphics_isDofDynamic();
-		auto blurDistance = _fe3d->graphics_getDofBlurDistance();
-		auto dynamicDistance = _fe3d->graphics_getDofDynamicDistance();
-		auto quality = _fe3d->graphics_getDofQuality();
+		const auto isEnabled = _fe3d->graphics_isDofEnabled();
+		const auto isDynamic = _fe3d->graphics_isDofDynamic();
+		const auto blurDistance = _fe3d->graphics_getDofBlurDistance();
+		const auto dynamicDistance = _fe3d->graphics_getDofDynamicDistance();
+		const auto quality = _fe3d->graphics_getDofQuality();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -196,13 +221,11 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
-			isEnabled = !isEnabled;
-			_fe3d->graphics_setDofEnabled(isEnabled);
+			_fe3d->graphics_setDofEnabled(!isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isDynamic")->isHovered())
 		{
-			isDynamic = !isDynamic;
-			_fe3d->graphics_setDofDynamic(isDynamic);
+			_fe3d->graphics_setDofDynamic(!isDynamic);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dynamicDistance")->isHovered())
 		{
@@ -217,17 +240,23 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("quality", "Quality", quality, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("dynamicDistance", dynamicDistance))
+		if((_gui->getOverlay()->getValueFormId() == "dynamicDistance") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setDofDynamicDistance(dynamicDistance);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setDofDynamicDistance(content);
 		}
-		if(_gui->getOverlay()->checkValueForm("blurDistance", blurDistance))
+		if((_gui->getOverlay()->getValueFormId() == "blurDistance") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setDofBlurDistance(blurDistance);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setDofBlurDistance(content);
 		}
-		if(_gui->getOverlay()->checkValueForm("quality", quality))
+		if((_gui->getOverlay()->getValueFormId() == "quality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setDofQuality(quality);
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->graphics_setDofQuality(content);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -241,11 +270,11 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsFog")
 	{
-		auto isEnabled = _fe3d->graphics_isFogEnabled();
-		auto minDistance = _fe3d->graphics_getFogMinDistance();
-		auto maxDistance = _fe3d->graphics_getFogMaxDistance();
-		auto thickness = _fe3d->graphics_getFogThickness();
-		auto color = _fe3d->graphics_getFogColor();
+		const auto isEnabled = _fe3d->graphics_isFogEnabled();
+		const auto minDistance = _fe3d->graphics_getFogMinDistance();
+		const auto maxDistance = _fe3d->graphics_getFogMaxDistance();
+		const auto thickness = _fe3d->graphics_getFogThickness();
+		const auto color = _fe3d->graphics_getFogColor();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -254,8 +283,7 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
-			isEnabled = !isEnabled;
-			_fe3d->graphics_setFogEnabled(isEnabled);
+			_fe3d->graphics_setFogEnabled(!isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minDistance")->isHovered())
 		{
@@ -276,33 +304,41 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("minDistance", minDistance))
+		if((_gui->getOverlay()->getValueFormId() == "minDistance") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setFogMinDistance(minDistance);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setFogMinDistance(content);
 		}
-		if(_gui->getOverlay()->checkValueForm("maxDistance", maxDistance))
+		if((_gui->getOverlay()->getValueFormId() == "maxDistance") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setFogMaxDistance(maxDistance);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setFogMaxDistance(content);
 		}
-		if(_gui->getOverlay()->checkValueForm("thickness", thickness))
+		if((_gui->getOverlay()->getValueFormId() == "thickness") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			thickness /= 100.0f;
-			_fe3d->graphics_setFogThickness(thickness);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setFogThickness(content / 100.0f);
 		}
-		if(_gui->getOverlay()->checkValueForm("colorR", color.r, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.r /= 255.0f;
-			_fe3d->graphics_setFogColor(color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setFogColor(fvec3((content / 255.0f), color.g, color.b));
 		}
-		if(_gui->getOverlay()->checkValueForm("colorG", color.g, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.g /= 255.0f;
-			_fe3d->graphics_setFogColor(color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setFogColor(fvec3(color.r, (content / 255.0f), color.b));
 		}
-		if(_gui->getOverlay()->checkValueForm("colorB", color.b, {}))
+		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.b /= 255.0f;
-			_fe3d->graphics_setFogColor(color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setFogColor(fvec3(color.r, color.g, (content / 255.0f)));
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -315,10 +351,10 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsLensFlare")
 	{
-		auto isEnabled = _fe3d->graphics_isLensFlareEnabled();
-		auto flareMapPath = _fe3d->graphics_getLensFlareMapPath();
-		auto intensity = _fe3d->graphics_getLensFlareIntensity();
-		auto sensitivity = _fe3d->graphics_getLensFlareSensitivity();
+		const auto isEnabled = _fe3d->graphics_isLensFlareEnabled();
+		const auto flareMapPath = _fe3d->graphics_getLensFlareMapPath();
+		const auto intensity = _fe3d->graphics_getLensFlareIntensity();
+		const auto sensitivity = _fe3d->graphics_getLensFlareSensitivity();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -327,8 +363,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
-			isEnabled = !isEnabled;
-			_fe3d->graphics_setLensFlareEnabled(isEnabled);
+			_fe3d->graphics_setLensFlareEnabled(!isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("flareMap")->isHovered())
 		{
@@ -358,9 +393,8 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 				return;
 			}
 
-			flareMapPath = filePath.substr(rootPath.size());
-			_fe3d->misc_clearImageCache(flareMapPath);
-			_fe3d->graphics_setLensFlareMap(flareMapPath);
+			_fe3d->misc_clearImageCache(filePath.substr(rootPath.size()));
+			_fe3d->graphics_setLensFlareMap(filePath.substr(rootPath.size()));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
@@ -371,15 +405,17 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("sensitivity", "Sensitivity", (sensitivity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("intensity", intensity))
+		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			intensity /= 100.0f;
-			_fe3d->graphics_setLensFlareIntensity(intensity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setLensFlareIntensity(content / 100.0f);
 		}
-		if(_gui->getOverlay()->checkValueForm("sensitivity", sensitivity))
+		if((_gui->getOverlay()->getValueFormId() == "sensitivity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			sensitivity /= 100.0f;
-			_fe3d->graphics_setLensFlareSensitivity(sensitivity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setLensFlareSensitivity(content / 100.0f);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -392,9 +428,9 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsSkyExposure")
 	{
-		auto isEnabled = _fe3d->graphics_isSkyExposureEnabled();
-		auto intensity = _fe3d->graphics_getSkyExposureIntensity();
-		auto speed = _fe3d->graphics_getSkyExposureSpeed();
+		const auto isEnabled = _fe3d->graphics_isSkyExposureEnabled();
+		const auto intensity = _fe3d->graphics_getSkyExposureIntensity();
+		const auto speed = _fe3d->graphics_getSkyExposureSpeed();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -403,8 +439,7 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
-			isEnabled = !isEnabled;
-			_fe3d->graphics_setSkyExposureEnabled(isEnabled);
+			_fe3d->graphics_setSkyExposureEnabled(!isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
@@ -415,15 +450,17 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("speed", "Speed", (speed * 10000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("intensity", intensity))
+		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			intensity /= 100.0f;
-			_fe3d->graphics_setSkyExposureIntensity(intensity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setSkyExposureIntensity(content / 100.0f);
 		}
-		if(_gui->getOverlay()->checkValueForm("speed", speed))
+		if((_gui->getOverlay()->getValueFormId() == "speed") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			speed /= 10000.0f;
-			_fe3d->graphics_setSkyExposureSpeed(speed);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setSkyExposureSpeed(content / 100.0f);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -436,11 +473,11 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 
 	if(screen->getId() == "worldEditorMenuSettingsGraphicsBloom")
 	{
-		auto isEnabled = _fe3d->graphics_isBloomEnabled();
-		auto type = _fe3d->graphics_getBloomType();
-		auto intensity = _fe3d->graphics_getBloomIntensity();
-		auto blurCount = _fe3d->graphics_getBloomBlurCount();
-		auto quality = _fe3d->graphics_getBloomQuality();
+		const auto isEnabled = _fe3d->graphics_isBloomEnabled();
+		const auto type = _fe3d->graphics_getBloomType();
+		const auto intensity = _fe3d->graphics_getBloomIntensity();
+		const auto blurCount = _fe3d->graphics_getBloomBlurCount();
+		const auto quality = _fe3d->graphics_getBloomQuality();
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -449,20 +486,18 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
-			isEnabled = !isEnabled;
-			_fe3d->graphics_setBloomEnabled(isEnabled);
+			_fe3d->graphics_setBloomEnabled(!isEnabled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("type")->isHovered())
 		{
 			if(type == BloomType::EVERYTHING)
 			{
-				type = BloomType::PARTS;
+				_fe3d->graphics_setBloomType(BloomType::PARTS);
 			}
 			else
 			{
-				type = BloomType::EVERYTHING;
+				_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
 			}
-			_fe3d->graphics_setBloomType(type);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
@@ -477,18 +512,23 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 			_gui->getOverlay()->openValueForm("quality", "Quality", quality, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("intensity", intensity))
+		if((_gui->getOverlay()->getValueFormId() == "intensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			intensity /= 100.0f;
-			_fe3d->graphics_setBloomIntensity(intensity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->graphics_setBloomIntensity(content / 100.0f);
 		}
-		if(_gui->getOverlay()->checkValueForm("blurCount", blurCount))
+		if((_gui->getOverlay()->getValueFormId() == "blurCount") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setBloomBlurCount(blurCount);
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->graphics_setBloomBlurCount(content);
 		}
-		if(_gui->getOverlay()->checkValueForm("quality", quality))
+		if((_gui->getOverlay()->getValueFormId() == "quality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->graphics_setBloomQuality(quality);
+			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+
+			_fe3d->graphics_setBloomQuality(content);
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");

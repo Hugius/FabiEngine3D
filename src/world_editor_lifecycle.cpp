@@ -185,9 +185,6 @@ void WorldEditor::_unload()
 	_isPlacingPointlight = false;
 	_isPlacingSpotlight = false;
 	_isPlacingReflection = false;
-	_isCreatingWorld = false;
-	_isChoosingWorld = false;
-	_isDeletingWorld = false;
 	_isWireframeModeEnabled = false;
 	_isAabbModeEnabled = false;
 }

@@ -7,27 +7,37 @@ void WorldEditor::_updateReflectionPlacing()
 	{
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
-			auto newPosition = _fe3d->reflection_getPosition(TEMPLATE_CAMERA_ID);
-			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
-			_fe3d->reflection_setPosition(TEMPLATE_REFLECTION_ID, newPosition);
-			_fe3d->model_setBasePosition(TEMPLATE_CAMERA_ID, newPosition);
+			const auto newPosition = _fe3d->reflection_getPosition(TEMPLATE_CAMERA_ID);
 
-			if(_gui->getOverlay()->isValueFormConfirmed())
+			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				auto newId = ("reflection_" + to_string(_idCounter));
-				auto newModelId = ("@@camera_" + newId);
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+				_fe3d->reflection_setPosition(TEMPLATE_REFLECTION_ID, fvec3(content, newPosition.y, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_CAMERA_ID, fvec3(content, newPosition.y, newPosition.z));
+			}
+			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
+			{
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+				_fe3d->reflection_setPosition(TEMPLATE_REFLECTION_ID, fvec3(newPosition.x, content, newPosition.z));
+				_fe3d->model_setBasePosition(TEMPLATE_CAMERA_ID, fvec3(newPosition.x, content, newPosition.z));
+			}
+			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
+			{
+				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto newId = ("reflection_" + to_string(_idCounter));
+				const auto newModelId = ("@@camera_" + newId);
 
 				_idCounter++;
 
 				_loadedReflectionIds.push_back(newId);
 
 				_fe3d->reflection_create(newId);
-				_fe3d->reflection_setPosition(newId, newPosition);
+				_fe3d->reflection_setPosition(newId, fvec3(newPosition.x, newPosition.y, content));
 
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
-				_fe3d->model_setBasePosition(newModelId, newPosition);
+				_fe3d->model_setBasePosition(newModelId, fvec3(newPosition.x, newPosition.y, content));
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
 				_fe3d->model_setShadowed(newModelId, false);
 				_fe3d->model_setReflected(newModelId, false);
@@ -37,12 +47,18 @@ void WorldEditor::_updateReflectionPlacing()
 				_fe3d->aabb_setParentType(newModelId, AabbParentType::MODEL);
 				_fe3d->aabb_setLocalSize(newModelId, DEFAULT_CAMERA_AABB_SIZE);
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
+
+				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
+				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
+
+				_isPlacingReflection = false;
 			}
 
-			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
+			if((_gui->getOverlay()->getValueFormId() != "positionX") && (_gui->getOverlay()->getValueFormId() != "positionY") && (_gui->getOverlay()->getValueFormId() != "positionZ"))
 			{
 				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
+
 				_isPlacingReflection = false;
 			}
 		}

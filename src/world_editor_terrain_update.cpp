@@ -14,6 +14,7 @@ void WorldEditor::_updateTerrainMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> terrainIds;
+
 			for(const auto & id : _terrainEditor->getLoadedEntityIds())
 			{
 				if(id[0] == '@')
@@ -22,7 +23,7 @@ void WorldEditor::_updateTerrainMenu()
 				}
 			}
 
-			_gui->getOverlay()->openChoiceForm("terrainList", "Select Terrain", fvec2(0.0f, 0.1f), terrainIds);
+			_gui->getOverlay()->openChoiceForm("selectTerrain", "Select Terrain", fvec2(0.0f, 0.1f), terrainIds);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -32,17 +33,12 @@ void WorldEditor::_updateTerrainMenu()
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+
 			if(!selectedOptionId.empty())
 			{
 				_worldUtilities->copyTemplateTerrain(selectedOptionId, ("@" + selectedOptionId));
 
 				_fe3d->terrain_select(selectedOptionId);
-
-
-			}
-			//else if(_gui->getOverlay()->isChoiceFormCancelled())
-			{
-
 			}
 		}
 

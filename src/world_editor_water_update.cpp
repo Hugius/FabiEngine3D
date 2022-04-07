@@ -14,6 +14,7 @@ void WorldEditor::_updateWaterMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> waterIds;
+
 			for(const auto & id : _waterEditor->getLoadedEntityIds())
 			{
 				if(id[0] == '@')
@@ -40,17 +41,12 @@ void WorldEditor::_updateWaterMenu()
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
+
 			if(!selectedOptionId.empty())
 			{
 				_worldUtilities->copyTemplateWater(selectedOptionId, ("@" + selectedOptionId));
 
 				_fe3d->water_select(selectedOptionId);
-
-
-			}
-			//else if(_gui->getOverlay()->isChoiceFormCancelled())
-			{
-
 			}
 		}
 

@@ -1,4 +1,5 @@
 #include "world_editor.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -26,9 +27,9 @@ void WorldEditor::_updateSettingsMenu()
 			_gui->getOverlay()->openValueForm("editorSpeed", "Editor Speed", _editorSpeed, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("editorSpeed", _editorSpeed, {}))
+		if((_gui->getOverlay()->getValueFormId() == "editorSpeed") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_editorSpeed = max(0.0f, _editorSpeed);
+			_editorSpeed = max(0.0f, static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent())));
 		}
 	}
 }

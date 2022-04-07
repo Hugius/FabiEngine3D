@@ -41,70 +41,70 @@ void SkyEditor::_updateMiscellaneous()
 
 void SkyEditor::_updateSkyCreating()
 {
-	if(_isCreatingSky)
+	if((_gui->getOverlay()->getValueFormId() == "createSky") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		string newSkyId;
+		auto newSkyId = _gui->getOverlay()->getValueFormContent();
 
-		if(_gui->getOverlay()->checkValueForm("skyCreate", newSkyId, {}))
+		if(newSkyId.empty())
 		{
-			if(newSkyId.empty())
-			{
-				Logger::throwWarning("Sky ID cannot be empty");
-				return;
-			}
-
-			if(any_of(newSkyId.begin(), newSkyId.end(), isspace))
-			{
-				Logger::throwWarning("Sky ID cannot contain any spaces");
-				return;
-			}
-
-			if(any_of(newSkyId.begin(), newSkyId.end(), isupper))
-			{
-				Logger::throwWarning("Sky ID cannot contain any capitals");
-				return;
-			}
-
-			newSkyId = ("@" + newSkyId);
-
-			if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newSkyId) != _loadedEntityIds.end())
-			{
-				Logger::throwWarning("Sky already exists");
-				return;
-			}
-
-			_currentSkyId = newSkyId;
-			_loadedEntityIds.push_back(newSkyId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
-
-			_fe3d->sky_create(newSkyId);
-			_fe3d->sky_select(newSkyId);
-
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-			_gui->getOverlay()->getTextField("skyId")->setTextContent("Sky: " + newSkyId.substr(1));
-			_gui->getOverlay()->getTextField("skyId")->setVisible(true);
-			_isCreatingSky = false;
+			Logger::throwWarning("Sky ID cannot be empty");
+			return;
 		}
+
+		if(any_of(newSkyId.begin(), newSkyId.end(), isspace))
+		{
+			Logger::throwWarning("Sky ID cannot contain any spaces");
+			return;
+		}
+
+		if(any_of(newSkyId.begin(), newSkyId.end(), isupper))
+		{
+			Logger::throwWarning("Sky ID cannot contain any capitals");
+			return;
+		}
+
+		newSkyId = ("@" + newSkyId);
+
+		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newSkyId) != _loadedEntityIds.end())
+		{
+			Logger::throwWarning("Sky already exists");
+			return;
+		}
+
+		_currentSkyId = newSkyId;
+		_loadedEntityIds.push_back(newSkyId);
+		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+
+		_fe3d->sky_create(newSkyId);
+		_fe3d->sky_select(newSkyId);
+
+		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+		_gui->getOverlay()->getTextField("skyId")->setTextContent("Sky: " + newSkyId.substr(1));
+		_gui->getOverlay()->getTextField("skyId")->setVisible(true);
 	}
 }
 
 void SkyEditor::_updateSkyChoosing()
 {
-	if(_isChoosingSky)
+	if((_gui->getOverlay()->getChoiceFormId() == "editSky") || (_gui->getOverlay()->getChoiceFormId() == "deleteSky"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			_fe3d->sky_select("");
+		}
+		else
 		{
 			_fe3d->sky_select("@" + selectedOptionId);
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				_currentSkyId = _fe3d->sky_getSelectedId();
 
-				if(_isDeletingSky)
+				if(_gui->getOverlay()->getChoiceFormId() == "deleteSky")
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteSky", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -113,27 +113,14 @@ void SkyEditor::_updateSkyChoosing()
 					_gui->getOverlay()->getTextField("skyId")->setTextContent("Sky: " + _currentSkyId.substr(1));
 					_gui->getOverlay()->getTextField("skyId")->setVisible(true);
 				}
-
-
-				_isChoosingSky = false;
 			}
 		}
-		//else if(_gui->getOverlay()->isChoiceFormCancelled())
-		{
-
-			_isChoosingSky = false;
-			_isDeletingSky = false;
-		}
-		//else
-		//{
-		//	_fe3d->sky_select("");
-		//}
 	}
 }
 
 void SkyEditor::_updateSkyDeleting()
 {
-	if(_isDeletingSky && !_isChoosingSky)
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteSky") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
@@ -141,8 +128,6 @@ void SkyEditor::_updateSkyDeleting()
 
 			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentSkyId), _loadedEntityIds.end());
 			_currentSkyId = "";
-			_isDeletingSky = false;
-
 
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
@@ -150,9 +135,6 @@ void SkyEditor::_updateSkyDeleting()
 			_fe3d->sky_select("");
 
 			_currentSkyId = "";
-			_isDeletingSky = false;
-
-
 		}
 	}
 }

@@ -71,11 +71,6 @@ void ScriptEditor::_unload()
 	_currentScriptFileId = "";
 	_firstSelectionAabbId = "";
 	_secondSelectionAabbId = "";
-	_isSearchingScriptFile = false;
-	_isCreatingScriptFile = false;
-	_isChoosingScriptFile = false;
-	_isRenamingScriptFile = false;
-	_isDeletingScriptFile = false;
 	_isWritingScript = false;
 	_hasTextChanged = false;
 	_selectionType = {};

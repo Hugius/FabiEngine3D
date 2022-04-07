@@ -48,70 +48,70 @@ void WaterEditor::_updateMiscellaneous()
 
 void WaterEditor::_updateWaterCreating()
 {
-	if(_isCreatingWater)
+	if((_gui->getOverlay()->getValueFormId() == "createWater") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		string newWaterId;
+		auto newWaterId = _gui->getOverlay()->getValueFormContent();
 
-		if(_gui->getOverlay()->checkValueForm("waterCreate", newWaterId, {}))
+		if(newWaterId.empty())
 		{
-			if(newWaterId.empty())
-			{
-				Logger::throwWarning("Water ID cannot be empty");
-				return;
-			}
-
-			if(any_of(newWaterId.begin(), newWaterId.end(), isspace))
-			{
-				Logger::throwWarning("Water ID cannot contain any spaces");
-				return;
-			}
-
-			if(any_of(newWaterId.begin(), newWaterId.end(), isupper))
-			{
-				Logger::throwWarning("Water ID cannot contain any capitals");
-				return;
-			}
-
-			newWaterId = ("@" + newWaterId);
-
-			if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newWaterId) != _loadedEntityIds.end())
-			{
-				Logger::throwWarning("Water already exists");
-				return;
-			}
-
-			_currentWaterId = newWaterId;
-			_loadedEntityIds.push_back(newWaterId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
-
-			_fe3d->water_create(newWaterId);
-			_fe3d->water_select(newWaterId);
-
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-			_gui->getOverlay()->getTextField("waterId")->setTextContent("Water: " + newWaterId.substr(1));
-			_gui->getOverlay()->getTextField("waterId")->setVisible(true);
-			_isCreatingWater = false;
+			Logger::throwWarning("Water ID cannot be empty");
+			return;
 		}
+
+		if(any_of(newWaterId.begin(), newWaterId.end(), isspace))
+		{
+			Logger::throwWarning("Water ID cannot contain any spaces");
+			return;
+		}
+
+		if(any_of(newWaterId.begin(), newWaterId.end(), isupper))
+		{
+			Logger::throwWarning("Water ID cannot contain any capitals");
+			return;
+		}
+
+		newWaterId = ("@" + newWaterId);
+
+		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newWaterId) != _loadedEntityIds.end())
+		{
+			Logger::throwWarning("Water already exists");
+			return;
+		}
+
+		_currentWaterId = newWaterId;
+		_loadedEntityIds.push_back(newWaterId);
+		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+
+		_fe3d->water_create(newWaterId);
+		_fe3d->water_select(newWaterId);
+
+		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+		_gui->getOverlay()->getTextField("waterId")->setTextContent("Water: " + newWaterId.substr(1));
+		_gui->getOverlay()->getTextField("waterId")->setVisible(true);
 	}
 }
 
 void WaterEditor::_updateWaterChoosing()
 {
-	if(_isChoosingWater)
+	if((_gui->getOverlay()->getChoiceFormId() == "editWater") || (_gui->getOverlay()->getChoiceFormId() == "deleteWater"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			_fe3d->water_select("");
+		}
+		else
 		{
 			_fe3d->water_select("@" + selectedOptionId);
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				_currentWaterId = _fe3d->water_getSelectedId();
 
-				if(_isDeletingWater)
+				if(_gui->getOverlay()->getChoiceFormId() == "deleteWater")
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteWater", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -120,27 +120,14 @@ void WaterEditor::_updateWaterChoosing()
 					_gui->getOverlay()->getTextField("waterId")->setTextContent("Water: " + _currentWaterId.substr(1));
 					_gui->getOverlay()->getTextField("waterId")->setVisible(true);
 				}
-
-
-				_isChoosingWater = false;
 			}
 		}
-		//else if(_gui->getOverlay()->isChoiceFormCancelled())
-		{
-
-			_isChoosingWater = false;
-			_isDeletingWater = false;
-		}
-		//else
-		//{
-		//	_fe3d->water_select("");
-		//}
 	}
 }
 
 void WaterEditor::_updateWaterDeleting()
 {
-	if(_isDeletingWater && !_isChoosingWater)
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteWater") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
@@ -148,16 +135,10 @@ void WaterEditor::_updateWaterDeleting()
 
 			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentWaterId), _loadedEntityIds.end());
 			_currentWaterId = "";
-			_isDeletingWater = false;
-
-
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentWaterId = "";
-			_isDeletingWater = false;
-
-
 		}
 	}
 }

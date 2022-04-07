@@ -15,49 +15,43 @@ void WaterEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("waterCreate", "Create Water", "", fvec2(0.0f, 0.1f), 10, true, true, false);
-			_isCreatingWater = true;
+			_gui->getOverlay()->openValueForm("createWater", "Create Water", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("waterList", "Edit Water", fvec2(-0.5f, 0.1f), ids);
-			_isChoosingWater = true;
+
+			_gui->getOverlay()->openChoiceForm("editWater", "Edit Water", fvec2(-0.5f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("waterList", "Delete Water", fvec2(-0.5f, 0.1f), ids);
-			_isChoosingWater = true;
-			_isDeletingWater = true;
+
+			_gui->getOverlay()->openChoiceForm("deleteWater", "Delete Water", fvec2(-0.5f, 0.1f), ids);
 		}
 
-		if(_gui->getOverlay()->getAnswerFormId() == "back")
+		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveEntitiesToFile();
 				unload();
-
-
-
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
-
-
-
 			}
 		}
 	}

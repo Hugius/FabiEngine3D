@@ -34,9 +34,6 @@ void SkyEditor::_unload()
 
 	_loadedEntityIds.clear();
 	_currentSkyId = "";
-	_isCreatingSky = false;
-	_isChoosingSky = false;
-	_isDeletingSky = false;
 }
 
 void SkyEditor::_loadGUI()

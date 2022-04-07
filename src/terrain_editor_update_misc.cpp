@@ -51,106 +51,103 @@ void TerrainEditor::_updateMiscellaneous()
 
 void TerrainEditor::_updateTerrainCreating()
 {
-	if(_isCreatingTerrain)
+	if((_gui->getOverlay()->getValueFormId() == "createTerrain") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		string newTerrainId;
+		auto newTerrainId = _gui->getOverlay()->getValueFormContent();
 
-		if(_gui->getOverlay()->checkValueForm("terrainCreate", newTerrainId, {}))
+		if(newTerrainId.empty())
 		{
-			if(newTerrainId.empty())
-			{
-				Logger::throwWarning("Terrain ID cannot be empty");
-				return;
-			}
+			Logger::throwWarning("Terrain ID cannot be empty");
+			return;
+		}
 
-			if(any_of(newTerrainId.begin(), newTerrainId.end(), isspace))
-			{
-				Logger::throwWarning("Terrain ID cannot contain any spaces");
-				return;
-			}
+		if(any_of(newTerrainId.begin(), newTerrainId.end(), isspace))
+		{
+			Logger::throwWarning("Terrain ID cannot contain any spaces");
+			return;
+		}
 
-			if(any_of(newTerrainId.begin(), newTerrainId.end(), isupper))
-			{
-				Logger::throwWarning("Terrain ID cannot contain any capitals");
-				return;
-			}
+		if(any_of(newTerrainId.begin(), newTerrainId.end(), isupper))
+		{
+			Logger::throwWarning("Terrain ID cannot contain any capitals");
+			return;
+		}
 
-			newTerrainId = ("@" + newTerrainId);
+		newTerrainId = ("@" + newTerrainId);
 
-			if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newTerrainId) != _loadedEntityIds.end())
-			{
-				Logger::throwWarning("Terrain already exists");
-				return;
-			}
+		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newTerrainId) != _loadedEntityIds.end())
+		{
+			Logger::throwWarning("Terrain already exists");
+			return;
+		}
 
-			if(getCurrentProjectId().empty())
-			{
-				abort();
-			}
+		if(getCurrentProjectId().empty())
+		{
+			abort();
+		}
 
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\terrain\\height_map\\");
+		const auto rootPath = Tools::getRootDirectoryPath();
+		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\terrain\\height_map\\");
 
-			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
-			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
-				_isCreatingTerrain = false;
-				return;
-			}
+		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+		{
+			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+			return;
+		}
 
-			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
-			if(filePath.empty())
-			{
-				_isCreatingTerrain = false;
-				return;
-			}
+		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+		if(filePath.empty())
+		{
+			return;
+		}
 
-			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
-			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
-				_isCreatingTerrain = false;
-				return;
-			}
+		if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+		{
+			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+			return;
+		}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d->misc_clearImageCache(finalFilePath);
+		const string finalFilePath = filePath.substr(rootPath.size());
+		_fe3d->misc_clearImageCache(finalFilePath);
 
-			_fe3d->terrain_create(newTerrainId, finalFilePath);
+		_fe3d->terrain_create(newTerrainId, finalFilePath);
 
-			if(_fe3d->terrain_isExisting(newTerrainId))
-			{
-				_fe3d->terrain_select(newTerrainId);
+		if(_fe3d->terrain_isExisting(newTerrainId))
+		{
+			_fe3d->terrain_select(newTerrainId);
 
-				_currentTerrainId = newTerrainId;
-				_loadedEntityIds.push_back(newTerrainId);
-				sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+			_currentTerrainId = newTerrainId;
+			_loadedEntityIds.push_back(newTerrainId);
+			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-				_gui->getOverlay()->getTextField("terrainId")->setTextContent("Terrain: " + newTerrainId.substr(1));
-				_gui->getOverlay()->getTextField("terrainId")->setVisible(true);
-				_isCreatingTerrain = false;
-			}
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+			_gui->getOverlay()->getTextField("terrainId")->setTextContent("Terrain: " + newTerrainId.substr(1));
+			_gui->getOverlay()->getTextField("terrainId")->setVisible(true);
 		}
 	}
 }
 
 void TerrainEditor::_updateTerrainChoosing()
 {
-	if(_isChoosingTerrain)
+	if((_gui->getOverlay()->getChoiceFormId() == "editTerrain") || (_gui->getOverlay()->getChoiceFormId() == "deleteTerrain"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			_fe3d->terrain_select("");
+		}
+		else
 		{
 			_fe3d->terrain_select("@" + selectedOptionId);
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				_currentTerrainId = _fe3d->terrain_getSelectedId();
 
-				if(_isDeletingTerrain)
+				if(_gui->getOverlay()->getChoiceFormId() == "deleteTerrain")
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteTerrain", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -159,27 +156,14 @@ void TerrainEditor::_updateTerrainChoosing()
 					_gui->getOverlay()->getTextField("terrainId")->setTextContent("Terrain: " + _currentTerrainId.substr(1));
 					_gui->getOverlay()->getTextField("terrainId")->setVisible(true);
 				}
-
-
-				_isChoosingTerrain = false;
 			}
 		}
-		//else if(_gui->getOverlay()->isChoiceFormCancelled())
-		{
-
-			_isChoosingTerrain = false;
-			_isDeletingTerrain = false;
-		}
-		//else
-		//{
-		//	_fe3d->terrain_select("");
-		//}
 	}
 }
 
 void TerrainEditor::_updateTerrainDeleting()
 {
-	if(_isDeletingTerrain && !_isChoosingTerrain)
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteTerrain") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
@@ -187,16 +171,10 @@ void TerrainEditor::_updateTerrainDeleting()
 
 			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentTerrainId), _loadedEntityIds.end());
 			_currentTerrainId = "";
-			_isDeletingTerrain = false;
-
-
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_currentTerrainId = "";
-			_isDeletingTerrain = false;
-
-
 		}
 	}
 }

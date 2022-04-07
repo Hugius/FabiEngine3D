@@ -67,9 +67,6 @@ void WaterEditor::_unload()
 
 	_loadedEntityIds.clear();
 	_currentWaterId = "";
-	_isCreatingWater = false;
-	_isChoosingWater = false;
-	_isDeletingWater = false;
 }
 
 void WaterEditor::_loadGUI()

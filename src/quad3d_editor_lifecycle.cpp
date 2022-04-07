@@ -84,9 +84,6 @@ void Quad3dEditor::_unload()
 	_loadedEntityIds.clear();
 	_hoveredQuadId = "";
 	_currentQuadId = "";
-	_isCreatingQuad3d = false;
-	_isChoosingQuad3d = false;
-	_isDeletingQuad3d = false;
 }
 
 void Quad3dEditor::_loadGUI()

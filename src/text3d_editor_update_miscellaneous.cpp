@@ -1,5 +1,6 @@
 #include "text3d_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void Text3dEditor::_updateMiscellaneousMenu()
 {
@@ -7,11 +8,11 @@ void Text3dEditor::_updateMiscellaneousMenu()
 
 	if(screen->getId() == "text3dEditorMenuMiscellaneous")
 	{
-		auto size = _fe3d->text3d_getSize(_currentTextId);
-		auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(_currentTextId);
-		auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(_currentTextId);
-		auto opacity = _fe3d->text3d_getOpacity(_currentTextId);
-		auto minTextureAlpha = _fe3d->text3d_getMinTextureAlpha(_currentTextId);
+		const auto size = _fe3d->text3d_getSize(_currentTextId);
+		const auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(_currentTextId);
+		const auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(_currentTextId);
+		const auto opacity = _fe3d->text3d_getOpacity(_currentTextId);
+		const auto minTextureAlpha = _fe3d->text3d_getMinTextureAlpha(_currentTextId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -25,13 +26,25 @@ void Text3dEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingCameraHorizontally")->isHovered())
 		{
-			isFacingCameraHorizontally = !isFacingCameraHorizontally;
-			_fe3d->text3d_setFacingCameraHorizontally(_currentTextId, isFacingCameraHorizontally);
+			_fe3d->text3d_setFacingCameraHorizontally(_currentTextId, !isFacingCameraHorizontally);
+
+			if(isFacingCameraHorizontally)
+			{
+				auto rotation = _fe3d->text3d_getRotation(_currentTextId);
+
+				_fe3d->text3d_setRotation(_currentTextId, fvec3(0.0f, rotation.y, 0.0f));
+			}
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingCameraVertically")->isHovered())
 		{
-			isFacingCameraVertically = !isFacingCameraVertically;
-			_fe3d->text3d_setFacingCameraVertically(_currentTextId, isFacingCameraVertically);
+			_fe3d->text3d_setFacingCameraVertically(_currentTextId, !isFacingCameraVertically);
+
+			if(isFacingCameraVertically)
+			{
+				auto rotation = _fe3d->text3d_getRotation(_currentTextId);
+
+				_fe3d->text3d_setRotation(_currentTextId, fvec3(rotation.x, 0.0f, rotation.z));
+			}
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
@@ -42,40 +55,32 @@ void Text3dEditor::_updateMiscellaneousMenu()
 			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("sizeX", size.x))
+		if((_gui->getOverlay()->getValueFormId() == "sizeX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			size.x /= 100.0f;
-			_fe3d->text3d_setSize(_currentTextId, size);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->text3d_setSize(_currentTextId, fvec2((content / 100.0f), size.y));
 		}
-		if(_gui->getOverlay()->checkValueForm("sizeY", size.y))
+		if((_gui->getOverlay()->getValueFormId() == "sizeY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			size.y /= 100.0f;
-			_fe3d->text3d_setSize(_currentTextId, size);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->text3d_setSize(_currentTextId, fvec2(size.x, (content / 100.0f)));
 		}
-		if(_gui->getOverlay()->checkValueForm("opacity", opacity))
+		if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			opacity /= 100.0f;
-			_fe3d->text3d_setOpacity(_currentTextId, opacity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->text3d_setOpacity(_currentTextId, (content / 100.0f));
 		}
-		if(_gui->getOverlay()->checkValueForm("minTextureAlpha", minTextureAlpha))
+		if((_gui->getOverlay()->getValueFormId() == "minTextureAlpha") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			minTextureAlpha /= 100.0f;
-			_fe3d->text3d_setMinTextureAlpha(_currentTextId, minTextureAlpha);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->text3d_setMinTextureAlpha(_currentTextId, (content / 100.0f));
 		}
 
 		screen->getButton("isFacingCameraHorizontally")->setTextContent(isFacingCameraHorizontally ? "Facing X: ON" : "Facing X: OFF");
 		screen->getButton("isFacingCameraVertically")->setTextContent(isFacingCameraVertically ? "Facing Y: ON" : "Facing Y: OFF");
-
-		auto rotation = _fe3d->text3d_getRotation(_currentTextId);
-		if(!isFacingCameraHorizontally)
-		{
-			rotation.x = 0.0f;
-			rotation.z = 0.0f;
-		}
-		if(!isFacingCameraVertically)
-		{
-			rotation.y = 0.0f;
-		}
-		_fe3d->text3d_setRotation(_currentTextId, rotation);
 	}
 }

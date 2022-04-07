@@ -25,9 +25,6 @@ void Text2dEditor::_unload()
 	_loadedEntityIds.clear();
 	_currentTextId = "";
 	_hoveredTextId = "";
-	_isCreatingText = false;
-	_isChoosingText = false;
-	_isDeletingText = false;
 }
 
 void Text2dEditor::_loadGUI()

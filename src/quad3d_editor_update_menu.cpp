@@ -12,25 +12,29 @@ void Quad3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("quad3dCreate", "Create Quad3D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createQuad", "Create Quad3D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("quad3dList", "Edit Quad3D", fvec2(-0.5f, 0.1f), ids);
+
+			_gui->getOverlay()->openChoiceForm("editQuad", "Edit Quad3D", fvec2(-0.5f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("quad3dList", "Delete Quad3D", fvec2(-0.5f, 0.1f), ids);
+
+			_gui->getOverlay()->openChoiceForm("deleteQuad", "Delete Quad3D", fvec2(-0.5f, 0.1f), ids);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

@@ -14,47 +14,43 @@ void Text2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("textCreate", "Create Text", "", fvec2(0.0f, 0.1f), 10, true, true, false);
-			_isCreatingText = true;
+			_gui->getOverlay()->openValueForm("createText", "Create Text", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("textList", "Edit Text", fvec2(-0.5f, 0.1f), ids);
-			_isChoosingText = true;
+
+			_gui->getOverlay()->openChoiceForm("editText", "Edit Text", fvec2(-0.5f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("textList", "Delete Text", fvec2(-0.5f, 0.1f), ids);
-			_isChoosingText = true;
-			_isDeletingText = true;
+
+			_gui->getOverlay()->openChoiceForm("deleteText", "Delete Text", fvec2(-0.5f, 0.1f), ids);
 		}
 
-		if(_gui->getOverlay()->getAnswerFormId() == "back")
+		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveEntitiesToFile();
 				unload();
-
-
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
-
-
 			}
 		}
 	}
@@ -66,8 +62,8 @@ void Text2dEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "text2dEditorMenuChoice")
 	{
-		auto color = _fe3d->text2d_getColor(_currentTextId);
-		auto opacity = _fe3d->text2d_getOpacity(_currentTextId);
+		const auto color = _fe3d->text2d_getColor(_currentTextId);
+		const auto opacity = _fe3d->text2d_getOpacity(_currentTextId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{

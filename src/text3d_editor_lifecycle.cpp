@@ -84,9 +84,6 @@ void Text3dEditor::_unload()
 	_loadedEntityIds.clear();
 	_hoveredTextId = "";
 	_currentTextId = "";
-	_isCreatingText3d = false;
-	_isChoosingText3d = false;
-	_isDeletingText3d = false;
 }
 
 void Text3dEditor::_loadGUI()
@@ -153,15 +150,15 @@ void Text3dEditor::update()
 	}
 	if(isLoaded())
 	{
-		_updateText3dCreating();
+		_updateTextCreating();
 	}
 	if(isLoaded())
 	{
-		_updateText3dChoosing();
+		_updateTextChoosing();
 	}
 	if(isLoaded())
 	{
-		_updateText3dDeleting();
+		_updateTextDeleting();
 	}
 	if(isLoaded())
 	{

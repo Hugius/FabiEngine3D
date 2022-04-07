@@ -12,47 +12,43 @@ void Text3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("text3dCreate", "Create Text3D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
-			_isCreatingText3d = true;
+			_gui->getOverlay()->openValueForm("createText", "Create Text", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("text3dList", "Edit Text3D", fvec2(-0.5f, 0.1f), ids);
-			_isChoosingText3d = true;
+
+			_gui->getOverlay()->openChoiceForm("editText", "Edit Text", fvec2(-0.5f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("text3dList", "Delete Text3D", fvec2(-0.5f, 0.1f), ids);
-			_isChoosingText3d = true;
-			_isDeletingText3d = true;
+
+			_gui->getOverlay()->openChoiceForm("deleteText", "Delete Text", fvec2(-0.5f, 0.1f), ids);;
 		}
 
-		if(_gui->getOverlay()->getAnswerFormId() == "back")
+		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveEntitiesToFile();
 				unload();
-
-
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
-
-
 			}
 		}
 	}

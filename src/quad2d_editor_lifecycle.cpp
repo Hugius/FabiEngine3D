@@ -25,9 +25,6 @@ void Quad2dEditor::_unload()
 	_loadedEntityIds.clear();
 	_currentQuadId = "";
 	_hoveredQuadId = "";
-	_isCreatingQuad = false;
-	_isChoosingQuad = false;
-	_isDeletingQuad = false;
 }
 
 void Quad2dEditor::_loadGUI()

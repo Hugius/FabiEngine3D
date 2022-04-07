@@ -66,111 +66,114 @@ void Text3dEditor::_updateMiscellaneous()
 	}
 }
 
-void Text3dEditor::_updateText3dCreating()
+void Text3dEditor::_updateTextCreating()
 {
-	if(_isCreatingText3d)
+	if((_gui->getOverlay()->getValueFormId() == "createText") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		string newTextId;
+		auto newTextId = _gui->getOverlay()->getValueFormContent();
 
-		if(_gui->getOverlay()->checkValueForm("text3dCreate", newTextId, {_currentTextId}))
+		if(newTextId.empty())
 		{
-			if(newTextId.empty())
-			{
-				Logger::throwWarning("Text ID cannot be empty");
-				return;
-			}
+			Logger::throwWarning("Text ID cannot be empty");
+			return;
+		}
 
-			if(any_of(newTextId.begin(), newTextId.end(), isspace))
-			{
-				Logger::throwWarning("Text ID cannot contain any spaces");
-				return;
-			}
+		if(any_of(newTextId.begin(), newTextId.end(), isspace))
+		{
+			Logger::throwWarning("Text ID cannot contain any spaces");
+			return;
+		}
 
-			if(any_of(newTextId.begin(), newTextId.end(), isupper))
-			{
-				Logger::throwWarning("Text ID cannot contain any capitals");
-				return;
-			}
+		if(any_of(newTextId.begin(), newTextId.end(), isupper))
+		{
+			Logger::throwWarning("Text ID cannot contain any capitals");
+			return;
+		}
 
-			newTextId = ("@" + newTextId);
+		newTextId = ("@" + newTextId);
 
-			if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newTextId) != _loadedEntityIds.end())
-			{
-				Logger::throwWarning("Text already exists");
-				return;
-			}
+		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newTextId) != _loadedEntityIds.end())
+		{
+			Logger::throwWarning("Text already exists");
+			return;
+		}
 
-			if(getCurrentProjectId().empty())
-			{
-				abort();
-			}
+		if(getCurrentProjectId().empty())
+		{
+			abort();
+		}
 
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\text3d\\font_map\\");
+		const auto rootPath = Tools::getRootDirectoryPath();
+		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\text3d\\font_map\\");
 
-			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
-			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
-				_isCreatingText3d = false;
-				return;
-			}
+		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+		{
+			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+			return;
+		}
 
-			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
-			if(filePath.empty())
-			{
-				_isCreatingText3d = false;
-				return;
-			}
+		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+		if(filePath.empty())
+		{
+			return;
+		}
 
-			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
-			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
-				_isCreatingText3d = false;
-				return;
-			}
+		if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+		{
+			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+			return;
+		}
 
-			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d->misc_clearImageCache(finalFilePath);
+		const string finalFilePath = filePath.substr(rootPath.size());
+		_fe3d->misc_clearImageCache(finalFilePath);
 
-			_fe3d->text3d_create(newTextId, finalFilePath, false);
+		_fe3d->text3d_create(newTextId, finalFilePath, false);
 
-			if(_fe3d->text3d_isExisting(newTextId))
-			{
-				_currentTextId = newTextId;
-				_loadedEntityIds.push_back(newTextId);
-				sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+		if(_fe3d->text3d_isExisting(newTextId))
+		{
+			_currentTextId = newTextId;
+			_loadedEntityIds.push_back(newTextId);
+			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
-				_gui->getOverlay()->getTextField("textId")->setTextContent("Text3D: " + newTextId.substr(1));
-				_gui->getOverlay()->getTextField("textId")->setVisible(true);
-				_isCreatingText3d = false;
-			}
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
+			_gui->getOverlay()->getTextField("textId")->setTextContent("Text3D: " + newTextId.substr(1));
+			_gui->getOverlay()->getTextField("textId")->setVisible(true);
 		}
 	}
 }
 
-void Text3dEditor::_updateText3dChoosing()
+void Text3dEditor::_updateTextChoosing()
 {
-	if(_isChoosingText3d)
+	if((_gui->getOverlay()->getChoiceFormId() == "editText") || (_gui->getOverlay()->getChoiceFormId() == "deleteText"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(selectedOptionId.empty())
+		{
+			if(!_hoveredTextId.empty())
+			{
+				_fe3d->text3d_setVisible(_hoveredTextId, false);
+
+				_hoveredTextId = "";
+			}
+		}
+		else
 		{
 			if(_hoveredTextId.empty())
 			{
 				_hoveredTextId = ("@" + selectedOptionId);
+
 				_fe3d->text3d_setVisible(_hoveredTextId, true);
 			}
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
 				_currentTextId = _hoveredTextId;
 				_hoveredTextId = "";
 
-				if(_isDeletingText3d)
+				if(_gui->getOverlay()->getChoiceFormId() == "deleteText")
 				{
-					_gui->getOverlay()->openAnswerForm("delete", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteText", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -181,30 +184,14 @@ void Text3dEditor::_updateText3dChoosing()
 				}
 
 				_fe3d->text3d_setVisible(_currentTextId, true);
-
-				_isChoosingText3d = false;
 			}
 		}
-		//else if(_gui->getOverlay()->isChoiceFormCancelled())
-		{
-
-			_isChoosingText3d = false;
-			_isDeletingText3d = false;
-		}
-		//else
-		//{
-		//	if(!_hoveredTextId.empty())
-		//	{
-		//		_fe3d->text3d_setVisible(_hoveredTextId, false);
-		//		_hoveredTextId = "";
-		//	}
-		//}
 	}
 }
 
-void Text3dEditor::_updateText3dDeleting()
+void Text3dEditor::_updateTextDeleting()
 {
-	if(_isDeletingText3d && !_isChoosingText3d)
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteText") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
@@ -212,18 +199,12 @@ void Text3dEditor::_updateText3dDeleting()
 
 			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentTextId), _loadedEntityIds.end());
 			_currentTextId = "";
-			_isDeletingText3d = false;
-
-
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
 			_fe3d->text3d_setVisible(_currentTextId, false);
 
 			_currentTextId = "";
-			_isDeletingText3d = false;
-
-
 		}
 	}
 }

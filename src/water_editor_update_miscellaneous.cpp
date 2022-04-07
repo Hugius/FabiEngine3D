@@ -1,4 +1,5 @@
 #include "water_editor.hpp"
+#include "tools.hpp"
 
 void WaterEditor::_updateMiscellaneousMenu()
 {
@@ -6,11 +7,11 @@ void WaterEditor::_updateMiscellaneousMenu()
 
 	if(screen->getId() == "waterEditorMenuMiscellaneous")
 	{
-		auto size = _fe3d->water_getSize(_currentWaterId);
-		auto rippleSpeed = _fe3d->water_getRippleSpeed(_currentWaterId);
-		auto waveSpeed = _fe3d->water_getWaveSpeed(_currentWaterId);
-		auto waveHeight = _fe3d->water_getWaveHeight(_currentWaterId);
-		auto maxDepth = _fe3d->water_getMaxDepth(_currentWaterId);
+		const auto size = _fe3d->water_getSize(_currentWaterId);
+		const auto rippleSpeed = _fe3d->water_getRippleSpeed(_currentWaterId);
+		const auto waveSpeed = _fe3d->water_getWaveSpeed(_currentWaterId);
+		const auto waveHeight = _fe3d->water_getWaveHeight(_currentWaterId);
+		const auto maxDepth = _fe3d->water_getMaxDepth(_currentWaterId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -40,38 +41,47 @@ void WaterEditor::_updateMiscellaneousMenu()
 			_gui->getOverlay()->openValueForm("waveSpeedY", "Y", (waveSpeed.y * 100000.0f), fvec2(0.15f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("size", size, {0.0f}))
+		if((_gui->getOverlay()->getValueFormId() == "size") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->water_setSize(_currentWaterId, size);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setSize(_currentWaterId, content);
 		}
-		if(_gui->getOverlay()->checkValueForm("rippleSpeedX", rippleSpeed.x))
+		if((_gui->getOverlay()->getValueFormId() == "rippleSpeedX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			rippleSpeed.x /= 100000.0f;
-			_fe3d->water_setRippleSpeed(_currentWaterId, rippleSpeed);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setRippleSpeed(_currentWaterId, fvec2((content / 100000.0f), rippleSpeed.y));
 		}
-		if(_gui->getOverlay()->checkValueForm("rippleSpeedY", rippleSpeed.y))
+		if((_gui->getOverlay()->getValueFormId() == "rippleSpeedY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			rippleSpeed.y /= 100000.0f;
-			_fe3d->water_setRippleSpeed(_currentWaterId, rippleSpeed);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setRippleSpeed(_currentWaterId, fvec2(rippleSpeed.x, (content / 100000.0f)));
 		}
-		if(_gui->getOverlay()->checkValueForm("waveSpeedX", waveSpeed.x))
+		if((_gui->getOverlay()->getValueFormId() == "waveSpeedX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			waveSpeed.x /= 100000.0f;
-			_fe3d->water_setWaveSpeed(_currentWaterId, waveSpeed);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setWaveSpeed(_currentWaterId, fvec2((content / 100000.0f), waveSpeed.y));
 		}
-		if(_gui->getOverlay()->checkValueForm("waveSpeedY", waveSpeed.y))
+		if((_gui->getOverlay()->getValueFormId() == "waveSpeedY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			waveSpeed.y /= 100000.0f;
-			_fe3d->water_setWaveSpeed(_currentWaterId, waveSpeed);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setWaveSpeed(_currentWaterId, fvec2(waveSpeed.x, (content / 100000.0f)));
 		}
-		if(_gui->getOverlay()->checkValueForm("waveHeight", waveHeight))
+		if((_gui->getOverlay()->getValueFormId() == "waveHeight") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			waveHeight /= 100.0f;
-			_fe3d->water_setWaveHeight(_currentWaterId, waveHeight);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setWaveHeight(_currentWaterId, (content / 100.0f));
 		}
-		if(_gui->getOverlay()->checkValueForm("maxDepth", maxDepth))
+		if((_gui->getOverlay()->getValueFormId() == "maxDepth") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->water_setMaxDepth(_currentWaterId, maxDepth);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setMaxDepth(_currentWaterId, content);
 		}
 	}
 }

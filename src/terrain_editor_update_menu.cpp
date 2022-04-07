@@ -14,47 +14,43 @@ void TerrainEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_isCreatingTerrain = true;
-			_gui->getOverlay()->openValueForm("terrainCreate", "Create Terrain", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createTerrain", "Create Terrain", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("terrainList", "Edit Terrain", fvec2(-0.5f, 0.1f), ids);
-			_isChoosingTerrain = true;
+
+			_gui->getOverlay()->openChoiceForm("editTerrain", "Edit Terrain", fvec2(-0.5f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
+
 			for(auto & id : ids)
 			{
 				id = id.substr(1);
 			}
-			_gui->getOverlay()->openChoiceForm("terrainList", "Delete Terrain", fvec2(-0.5f, 0.1f), ids);
-			_isChoosingTerrain = true;
-			_isDeletingTerrain = true;
+
+			_gui->getOverlay()->openChoiceForm("deleteTerrain", "Delete Terrain", fvec2(-0.5f, 0.1f), ids);
 		}
 
-		if(_gui->getOverlay()->getAnswerFormId() == "back")
+		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveEntitiesToFile();
 				unload();
-
-
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
-
-
 			}
 		}
 	}

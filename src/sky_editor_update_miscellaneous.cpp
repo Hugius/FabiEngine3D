@@ -7,9 +7,9 @@ void SkyEditor::_updateMiscellaneousMenu()
 
 	if(screen->getId() == "skyEditorMenuMiscellaneous")
 	{
-		auto rotation = _fe3d->sky_getRotation(_currentSkyId);
-		auto lightness = _fe3d->sky_getLightness(_currentSkyId);
-		auto color = _fe3d->sky_getColor(_currentSkyId);
+		const auto rotation = _fe3d->sky_getRotation(_currentSkyId);
+		const auto lightness = _fe3d->sky_getLightness(_currentSkyId);
+		const auto color = _fe3d->sky_getColor(_currentSkyId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -47,19 +47,19 @@ void SkyEditor::_updateMiscellaneousMenu()
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->sky_setColor(_currentSkyId, (content / 255.0f));
+			_fe3d->sky_setColor(_currentSkyId, fvec3((content / 255.0f), color.g, color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->sky_setColor(_currentSkyId, (content / 255.0f));
+			_fe3d->sky_setColor(_currentSkyId, fvec3(color.r, (content / 255.0f), color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->sky_setColor(_currentSkyId, (content / 255.0f));
+			_fe3d->sky_setColor(_currentSkyId, fvec3(color.r, color.g, (content / 255.0f)));
 		}
 	}
 }

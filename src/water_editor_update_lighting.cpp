@@ -1,5 +1,6 @@
 #include "water_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void WaterEditor::_updateLightingMenu()
 {
@@ -7,13 +8,13 @@ void WaterEditor::_updateLightingMenu()
 
 	if(screen->getId() == "waterEditorMenuLighting")
 	{
-		auto color = _fe3d->water_getColor(_currentWaterId);
-		bool isReflective = _fe3d->water_isReflective(_currentWaterId);
-		bool isRefractive = _fe3d->water_isRefractive(_currentWaterId);
-		bool isSpecular = _fe3d->water_isSpecular(_currentWaterId);
-		bool isEdged = _fe3d->water_isEdged(_currentWaterId);
-		auto specularShininess = _fe3d->water_getSpecularShininess(_currentWaterId);
-		auto specularIntensity = _fe3d->water_getSpecularIntensity(_currentWaterId);
+		const auto color = _fe3d->water_getColor(_currentWaterId);
+		const auto isReflective = _fe3d->water_isReflective(_currentWaterId);
+		const auto isRefractive = _fe3d->water_isRefractive(_currentWaterId);
+		const auto isSpecular = _fe3d->water_isSpecular(_currentWaterId);
+		const auto isEdged = _fe3d->water_isEdged(_currentWaterId);
+		const auto specularShininess = _fe3d->water_getSpecularShininess(_currentWaterId);
+		const auto specularIntensity = _fe3d->water_getSpecularIntensity(_currentWaterId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -28,23 +29,19 @@ void WaterEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflective")->isHovered())
 		{
-			isReflective = !isReflective;
-			_fe3d->water_setReflective(_currentWaterId, isReflective);
+			_fe3d->water_setReflective(_currentWaterId, !isReflective);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isRefractive")->isHovered())
 		{
-			isRefractive = !isRefractive;
-			_fe3d->water_setRefractive(_currentWaterId, isRefractive);
+			_fe3d->water_setRefractive(_currentWaterId, !isRefractive);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isSpecular")->isHovered())
 		{
-			isSpecular = !isSpecular;
-			_fe3d->water_setSpecular(_currentWaterId, isSpecular);
+			_fe3d->water_setSpecular(_currentWaterId, !isSpecular);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEdged")->isHovered())
 		{
-			isEdged = !isEdged;
-			_fe3d->water_setEdged(_currentWaterId, isEdged);
+			_fe3d->water_setEdged(_currentWaterId, !isEdged);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
@@ -55,29 +52,35 @@ void WaterEditor::_updateLightingMenu()
 			_gui->getOverlay()->openValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if(_gui->getOverlay()->checkValueForm("colorR", color.r))
+		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.r /= 255.0f;
-			_fe3d->water_setColor(_currentWaterId, color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setColor(_currentWaterId, fvec3((content / 255.0f), color.g, color.b));
 		}
-		if(_gui->getOverlay()->checkValueForm("colorG", color.g))
+		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.g /= 255.0f;
-			_fe3d->water_setColor(_currentWaterId, color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setColor(_currentWaterId, fvec3(color.r, (content / 255.0f), color.b));
 		}
-		if(_gui->getOverlay()->checkValueForm("colorB", color.b))
+		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			color.b /= 255.0f;
-			_fe3d->water_setColor(_currentWaterId, color);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setColor(_currentWaterId, fvec3(color.r, color.g, (content / 255.0f)));
 		}
-		if(_gui->getOverlay()->checkValueForm("specularShininess", specularShininess))
+		if((_gui->getOverlay()->getValueFormId() == "specularShininess") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_fe3d->water_setSpecularShininess(_currentWaterId, specularShininess);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setSpecularShininess(_currentWaterId, content);
 		}
-		if(_gui->getOverlay()->checkValueForm("specularIntensity", specularIntensity))
+		if((_gui->getOverlay()->getValueFormId() == "specularIntensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			specularIntensity /= 100.0f;
-			_fe3d->water_setSpecularIntensity(_currentWaterId, specularIntensity);
+			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->water_setSpecularIntensity(_currentWaterId, (content / 100.0f));
 		}
 
 		screen->getButton("isReflective")->setTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");

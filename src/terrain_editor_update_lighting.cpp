@@ -12,10 +12,10 @@ void TerrainEditor::_updateLightingMenu()
 
 	if(screen->getId() == "terrainEditorMenuLighting")
 	{
-		bool isSpecular = _fe3d->terrain_isSpecular(_currentTerrainId);
-		float specularShininess = _fe3d->terrain_getSpecularShininess(_currentTerrainId);
-		float specularIntensity = _fe3d->terrain_getSpecularIntensity(_currentTerrainId);
-		float lightness = _fe3d->terrain_getLightness(_currentTerrainId);
+		const auto isSpecular = _fe3d->terrain_isSpecular(_currentTerrainId);
+		const auto specularShininess = _fe3d->terrain_getSpecularShininess(_currentTerrainId);
+		const auto specularIntensity = _fe3d->terrain_getSpecularIntensity(_currentTerrainId);
+		const auto lightness = _fe3d->terrain_getLightness(_currentTerrainId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -24,8 +24,7 @@ void TerrainEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isSpecular")->isHovered())
 		{
-			isSpecular = !isSpecular;
-			_fe3d->terrain_setSpecular(_currentTerrainId, isSpecular);
+			_fe3d->terrain_setSpecular(_currentTerrainId, !isSpecular);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{

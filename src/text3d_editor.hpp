@@ -25,9 +25,9 @@ private:
 	void _updateChoiceMenu();
 	void _updateLightingMenu();
 	void _updateMiscellaneousMenu();
-	void _updateText3dCreating();
-	void _updateText3dChoosing();
-	void _updateText3dDeleting();
+	void _updateTextCreating();
+	void _updateTextChoosing();
+	void _updateTextDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
 

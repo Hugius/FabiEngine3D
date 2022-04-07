@@ -7,20 +7,11 @@ void TerrainEditor::_updateMiscellaneousMenu()
 
 	if(screen->getId() == "terrainEditorMenuMiscellaneous")
 	{
-		auto maxHeight = _fe3d->terrain_getMaxHeight(_currentTerrainId);
-		auto textureRepeat = _fe3d->terrain_getTextureRepeat(_currentTerrainId);
-		auto redTextureRepeat = _fe3d->terrain_getRedTextureRepeat(_currentTerrainId);
-		auto greenTextureRepeat = _fe3d->terrain_getGreenTextureRepeat(_currentTerrainId);
-		auto blueTextureRepeat = _fe3d->terrain_getBlueTextureRepeat(_currentTerrainId);
-		auto hasBlendMap = _fe3d->terrain_hasBlendMap(_currentTerrainId);
-		auto hasDiffuseMap = _fe3d->terrain_hasDiffuseMap(_currentTerrainId);
-		auto hasNormalMap = _fe3d->terrain_hasNormalMap(_currentTerrainId);
-		auto hasRedDiffuseMap = _fe3d->terrain_hasRedDiffuseMap(_currentTerrainId);
-		auto hasGreenDiffuseMap = _fe3d->terrain_hasGreenDiffuseMap(_currentTerrainId);
-		auto hasBlueDiffuseMap = _fe3d->terrain_hasBlueDiffuseMap(_currentTerrainId);
-		auto hasRedNormalMap = _fe3d->terrain_hasRedNormalMap(_currentTerrainId);
-		auto hasGreenNormalMap = _fe3d->terrain_hasGreenNormalMap(_currentTerrainId);
-		auto hasBlueNormalMap = _fe3d->terrain_hasBlueNormalMap(_currentTerrainId);
+		const auto maxHeight = _fe3d->terrain_getMaxHeight(_currentTerrainId);
+		const auto textureRepeat = _fe3d->terrain_getTextureRepeat(_currentTerrainId);
+		const auto redTextureRepeat = _fe3d->terrain_getRedTextureRepeat(_currentTerrainId);
+		const auto greenTextureRepeat = _fe3d->terrain_getGreenTextureRepeat(_currentTerrainId);
+		const auto blueTextureRepeat = _fe3d->terrain_getBlueTextureRepeat(_currentTerrainId);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{

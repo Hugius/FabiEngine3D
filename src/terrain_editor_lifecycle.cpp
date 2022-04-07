@@ -67,9 +67,6 @@ void TerrainEditor::_unload()
 
 	_loadedEntityIds.clear();
 	_currentTerrainId = "";
-	_isCreatingTerrain = false;
-	_isChoosingTerrain = false;
-	_isDeletingTerrain = false;
 }
 
 void TerrainEditor::_loadGUI()

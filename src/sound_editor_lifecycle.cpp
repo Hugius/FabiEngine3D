@@ -48,9 +48,6 @@ void SoundEditor::_unload()
 	_loadedSoundIds.clear();
 	_currentSoundId = "";
 	_hoveredSoundId = "";
-	_isCreatingSound = false;
-	_isChoosingSound = false;
-	_isDeletingSound = false;
 }
 
 void SoundEditor::_loadGUI()

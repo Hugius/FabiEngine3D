@@ -111,14 +111,12 @@ void WorldEditor::_updateReflectionEditing()
 
 			auto position = _fe3d->reflection_getPosition(_activeReflectionId);
 
-			_handleValueChanging("reflectionPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / REFLECTION_POSITION_DIVIDER));
-			_handleValueChanging("reflectionPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / REFLECTION_POSITION_DIVIDER));
-			_handleValueChanging("reflectionPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / REFLECTION_POSITION_DIVIDER));
-			_handleValueChanging("reflectionPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / REFLECTION_POSITION_DIVIDER));
-			_handleValueChanging("reflectionPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / REFLECTION_POSITION_DIVIDER));
-			_handleValueChanging("reflectionPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / REFLECTION_POSITION_DIVIDER));
+			_handleInputBox("reflectionPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / REFLECTION_POSITION_DIVIDER));
+			_handleInputBox("reflectionPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / REFLECTION_POSITION_DIVIDER));
+			_handleInputBox("reflectionPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / REFLECTION_POSITION_DIVIDER));
 
 			_fe3d->reflection_setPosition(_activeReflectionId, position);
+
 			_fe3d->model_setBasePosition(("@@camera_" + _activeReflectionId), position);
 		}
 	}

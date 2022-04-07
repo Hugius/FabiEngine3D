@@ -176,30 +176,25 @@ void WorldEditor::_deleteWorldFile(const string & id)
 	Tools::deleteFile(filePath);
 }
 
-void WorldEditor::_handleValueChanging(const string & screenId, const string & buttonId, const string & inputBoxId, float & value, float adder, float multiplier, float minimum, float maximum)
+void WorldEditor::_handleInputBox(const string & screenId, const string & leftButtonId, const string & inputBoxId, const string & rightButtonId, float & value, float delta, float multiplier, float minimum, float maximum)
 {
-	auto inputBox = _gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getInputBox(inputBoxId);
+	const auto inputBox = _gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getInputBox(inputBoxId);
 
-	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
+	if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(leftButtonId)->isHovered() && _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
-		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(buttonId)->isHovered())
-		{
-			value += adder;
-		}
+		value -= delta;
 	}
-
-	if(!inputBox->isActive())
+	else if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
-		inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
-	}
-
-	if(inputBox->getTextContent().empty() || (inputBox->getTextContent() == "-"))
-	{
-		value = 0.0f;
+		value += delta;
 	}
 	else
 	{
-		if(inputBox->isActive())
+		if(inputBox->getTextContent().empty() || (inputBox->getTextContent() == "-"))
+		{
+			value = 0.0f;
+		}
+		else
 		{
 			value = (static_cast<float>(stoi(inputBox->getTextContent())) / multiplier);
 		}
@@ -207,10 +202,7 @@ void WorldEditor::_handleValueChanging(const string & screenId, const string & b
 
 	value = clamp(value, minimum, maximum);
 
-	if(!inputBox->isActive())
-	{
-		inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
-	}
+	inputBox->setTextContent(to_string(static_cast<int>(value)));
 }
 
 void WorldEditor::inject(shared_ptr<SkyEditor> skyEditor)

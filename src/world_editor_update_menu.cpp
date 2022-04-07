@@ -110,6 +110,7 @@ void WorldEditor::_updateChoiceMenu()
 				_currentWorldId = "";
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 
 			}
@@ -128,6 +129,7 @@ void WorldEditor::_updateChoiceMenu()
 				_currentWorldId = "";
 
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 			}
 		}
 	}

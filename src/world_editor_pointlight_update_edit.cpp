@@ -124,15 +124,9 @@ void WorldEditor::_updatePointlightEditing()
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
 
-				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-
-				_fe3d->pointlight_setPosition(_activePointlightId, position);
-				_fe3d->model_setBasePosition(("@@lamp_" + _activePointlightId), position);
+				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+				_handleInputBox("pointlightPropertiesMenu", "zMinus", "x", "zPlus", position.z, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 			}
 			else if(!screen->getButton("radius")->isHoverable())
 			{
@@ -140,14 +134,9 @@ void WorldEditor::_updatePointlightEditing()
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
 
-				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", radius.x, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", radius.x, -(_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", radius.y, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", radius.y, -(_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", radius.z, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", radius.z, -(_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
-
-				_fe3d->pointlight_setRadius(_activePointlightId, radius);
+				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", radius.x, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
+				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", radius.y, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
+				_handleInputBox("pointlightPropertiesMenu", "zMinus", "x", "zPlus", radius.z, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
@@ -155,20 +144,20 @@ void WorldEditor::_updatePointlightEditing()
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("G");
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("B");
 
-				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", color.r, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", color.r, -POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", color.g, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", color.g, -POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", color.b, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", color.b, -POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-
-				_fe3d->pointlight_setColor(_activePointlightId, color);
-				_fe3d->model_setColor(("@@lamp_" + _activePointlightId), "", color);
+				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleInputBox("pointlightPropertiesMenu", "zMinus", "x", "zPlus", color.b, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 			}
 
-			_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
-			_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
+			_handleInputBox("pointlightPropertiesMenu", "intensityMinus", "intensity", "intensityPlus", intensity, POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
+
+			_fe3d->pointlight_setPosition(_activePointlightId, position);
+			_fe3d->pointlight_setRadius(_activePointlightId, radius);
+			_fe3d->pointlight_setColor(_activePointlightId, color);
 			_fe3d->pointlight_setIntensity(_activePointlightId, intensity);
+
+			_fe3d->model_setBasePosition(("@@lamp_" + _activePointlightId), position);
+			_fe3d->model_setColor(("@@lamp_" + _activePointlightId), "", color);
 
 			if(_fe3d->pointlight_getShape(_activePointlightId) == PointlightShape::CIRCLE)
 			{

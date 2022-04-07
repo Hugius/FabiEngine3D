@@ -171,34 +171,25 @@ void WorldEditor::_updateModelEditing()
 
 			if(!screen->getButton("position")->isHoverable())
 			{
-				_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / MODEL_POSITION_DIVIDER));
-				_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / MODEL_POSITION_DIVIDER));
-				_handleValueChanging("modelPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / MODEL_POSITION_DIVIDER));
-				_handleValueChanging("modelPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / MODEL_POSITION_DIVIDER));
-				_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / MODEL_POSITION_DIVIDER));
-				_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / MODEL_POSITION_DIVIDER));
+				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / MODEL_POSITION_DIVIDER));
+				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / MODEL_POSITION_DIVIDER));
+				_handleInputBox("modelPropertiesMenu", "zMinus", "x", "zPlus", position.z, (_editorSpeed / MODEL_POSITION_DIVIDER));
 
 				_fe3d->model_setBasePosition(_activeModelId, position);
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
-				_handleValueChanging("modelPropertiesMenu", "xPlus", "x", rotation.x, MODEL_ROTATION_SPEED);
-				_handleValueChanging("modelPropertiesMenu", "xMinus", "x", rotation.x, -MODEL_ROTATION_SPEED);
-				_handleValueChanging("modelPropertiesMenu", "yPlus", "y", rotation.y, MODEL_ROTATION_SPEED);
-				_handleValueChanging("modelPropertiesMenu", "yMinus", "y", rotation.y, -MODEL_ROTATION_SPEED);
-				_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, MODEL_ROTATION_SPEED);
-				_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -MODEL_ROTATION_SPEED);
+				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", rotation.x, MODEL_ROTATION_SPEED);
+				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", rotation.y, MODEL_ROTATION_SPEED);
+				_handleInputBox("modelPropertiesMenu", "zMinus", "x", "zPlus", rotation.z, MODEL_ROTATION_SPEED);
 
 				_fe3d->model_setBaseRotation(_activeModelId, rotation);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
-				_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, (_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
-				_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
-				_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, (_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
-				_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -(_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
-				_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, (_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
-				_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -(_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
+				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", size.x, (_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
+				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", size.y, (_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
+				_handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", size.z, (_editorSpeed / MODEL_SIZE_DIVIDER), MODEL_SIZE_MULTIPLIER, 0.0f);
 
 				_fe3d->model_setBaseSize(_activeModelId, size);
 			}

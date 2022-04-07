@@ -219,9 +219,9 @@ const unsigned int GuiInputBox::getMaxCharacterCount() const
 	return _maxCharacterCount;
 }
 
-void GuiInputBox::setTextContent(const string & content)
+void GuiInputBox::setTextContent(const string & value)
 {
-	_textField->setTextContent(content + " ");
+	_textField->setTextContent(value + (_isBarVisible ? "|" : " "));
 }
 
 void GuiInputBox::setVisible(bool value)

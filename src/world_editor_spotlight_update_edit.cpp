@@ -108,15 +108,9 @@ void WorldEditor::_updateSpotlightEditing()
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("Y");
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("Z");
 
-				_handleValueChanging("spotlightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
-				_handleValueChanging("spotlightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
-				_handleValueChanging("spotlightPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
-				_handleValueChanging("spotlightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
-				_handleValueChanging("spotlightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
-				_handleValueChanging("spotlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
-
-				_fe3d->spotlight_setPosition(_activeSpotlightId, position);
-				_fe3d->model_setBasePosition(("@@torch_" + _activeSpotlightId), position);
+				_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
+				_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
+				_handleInputBox("spotlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
@@ -124,38 +118,29 @@ void WorldEditor::_updateSpotlightEditing()
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("G");
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("B");
 
-				_handleValueChanging("spotlightPropertiesMenu", "xPlus", "x", color.r, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("spotlightPropertiesMenu", "xMinus", "x", color.r, -SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("spotlightPropertiesMenu", "yPlus", "y", color.g, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("spotlightPropertiesMenu", "yMinus", "y", color.g, -SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("spotlightPropertiesMenu", "zPlus", "z", color.b, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("spotlightPropertiesMenu", "zMinus", "z", color.b, -SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-
-				_fe3d->spotlight_setColor(_activeSpotlightId, color);
-				_fe3d->model_setColor(("@@torch_" + _activeSpotlightId), "", color);
+				_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleInputBox("spotlightPropertiesMenu", "zMinus", "z", "zPlus", color.b, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 			}
 
-			_handleValueChanging("spotlightPropertiesMenu", "yawPlus", "yaw", yaw, SPOTLIGHT_YAW_SPEED);
-			_handleValueChanging("spotlightPropertiesMenu", "yawMinus", "yaw", yaw, -SPOTLIGHT_YAW_SPEED);
+			_handleInputBox("spotlightPropertiesMenu", "yawMinus", "yaw", "yawPlus", yaw, SPOTLIGHT_YAW_SPEED);
+			_handleInputBox("spotlightPropertiesMenu", "pitchMinus", "pitch", "pitchPlus", pitch, SPOTLIGHT_PITCH_SPEED);
+			_handleInputBox("spotlightPropertiesMenu", "intensityMinus", "intensity", "intensityPlus", intensity, SPOTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
+			_handleInputBox("spotlightPropertiesMenu", "angleMinus", "angle", "anglePlus", angle, SPOTLIGHT_ANGLE_SPEED, 1.0f, 0.0f, 45.0f);
+			_handleInputBox("spotlightPropertiesMenu", "distanceMinus", "distance", "distancePlus", distance, (_editorSpeed / SPOTLIGHT_DISTANCE_DIVIDER), 1.0f, 0.0f);
+
+			_fe3d->spotlight_setPosition(_activeSpotlightId, position);
+			_fe3d->spotlight_setColor(_activeSpotlightId, color);
 			_fe3d->spotlight_setYaw(_activeSpotlightId, yaw);
-			_fe3d->model_setBaseRotation(("@@torch_" + _activeSpotlightId), fvec3(0.0f, -yaw, _fe3d->model_getBaseRotation("@@torch_" + _activeSpotlightId).z));
-
-			_handleValueChanging("spotlightPropertiesMenu", "pitchPlus", "pitch", pitch, SPOTLIGHT_PITCH_SPEED);
-			_handleValueChanging("spotlightPropertiesMenu", "pitchMinus", "pitch", pitch, -SPOTLIGHT_PITCH_SPEED);
 			_fe3d->spotlight_setPitch(_activeSpotlightId, pitch);
-			_fe3d->model_setBaseRotation(("@@torch_" + _activeSpotlightId), fvec3(0.0f, _fe3d->model_getBaseRotation("@@torch_" + _activeSpotlightId).y, pitch));
-
-			_handleValueChanging("spotlightPropertiesMenu", "intensityPlus", "intensity", intensity, SPOTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
-			_handleValueChanging("spotlightPropertiesMenu", "intensityMinus", "intensity", intensity, -SPOTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
 			_fe3d->spotlight_setIntensity(_activeSpotlightId, intensity);
-
-			_handleValueChanging("spotlightPropertiesMenu", "anglePlus", "angle", angle, SPOTLIGHT_ANGLE_SPEED, 1.0f, 0.0f, 45.0f);
-			_handleValueChanging("spotlightPropertiesMenu", "angleMinus", "angle", angle, -SPOTLIGHT_ANGLE_SPEED, 1.0f, 0.0f, 45.0f);
 			_fe3d->spotlight_setAngle(_activeSpotlightId, angle);
-
-			_handleValueChanging("spotlightPropertiesMenu", "distancePlus", "distance", distance, (_editorSpeed / SPOTLIGHT_DISTANCE_DIVIDER), 1.0f, 0.0f);
-			_handleValueChanging("spotlightPropertiesMenu", "distanceMinus", "distance", distance, -(_editorSpeed / SPOTLIGHT_DISTANCE_DIVIDER), 1.0f, 0.0f);
 			_fe3d->spotlight_setDistance(_activeSpotlightId, distance);
+
+			_fe3d->model_setBasePosition(("@@torch_" + _activeSpotlightId), position);
+			_fe3d->model_setBaseRotation(("@@torch_" + _activeSpotlightId), fvec3(0.0f, -yaw, _fe3d->model_getBaseRotation("@@torch_" + _activeSpotlightId).z));
+			_fe3d->model_setBaseRotation(("@@torch_" + _activeSpotlightId), fvec3(0.0f, _fe3d->model_getBaseRotation("@@torch_" + _activeSpotlightId).y, pitch));
+			_fe3d->model_setColor(("@@torch_" + _activeSpotlightId), "", color);
 		}
 	}
 }

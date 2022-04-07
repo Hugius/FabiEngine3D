@@ -109,23 +109,20 @@ void SoundEditor::_updateSoundChoosing()
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-		if(!selectedOptionId.empty())
+		if(_gui->getOverlay()->isChoiceFormConfirmed())
 		{
-			if(_gui->getOverlay()->isChoiceFormConfirmed())
+			_currentSoundId = ("@" + selectedOptionId);
+
+			if(_gui->getOverlay()->getChoiceFormId() == "deleteSound")
 			{
-				_currentSoundId = ("@" + selectedOptionId);
+				_gui->getOverlay()->openAnswerForm("deleteSound", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+			}
+			else
+			{
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
-				if(_gui->getOverlay()->getChoiceFormId() == "deleteSound")
-				{
-					_gui->getOverlay()->openAnswerForm("deleteSound", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
-				}
-				else
-				{
-					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
-
-					_gui->getOverlay()->getTextField("soundId")->setTextContent("Sound: " + _currentSoundId.substr(1));
-					_gui->getOverlay()->getTextField("soundId")->setVisible(true);
-				}
+				_gui->getOverlay()->getTextField("soundId")->setTextContent("Sound: " + _currentSoundId.substr(1));
+				_gui->getOverlay()->getTextField("soundId")->setVisible(true);
 			}
 		}
 	}

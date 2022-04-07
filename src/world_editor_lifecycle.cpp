@@ -26,14 +26,14 @@ void WorldEditor::_load()
 	for(const auto & id : _quad3dEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace");
-		screen->getScrollingList("quad3dList")->createOption(id, id.substr(1));
+		screen->getScrollingList("quadList")->createOption(id, id.substr(1));
 	}
 
 	_text3dEditor->loadEntitiesFromFile();
 	for(const auto & id : _text3dEditor->getLoadedEntityIds())
 	{
 		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace");
-		screen->getScrollingList("text3dList")->createOption(id, id.substr(1));
+		screen->getScrollingList("textList")->createOption(id, id.substr(1));
 	}
 
 	_animation2dEditor->loadAnimationsFromFile();

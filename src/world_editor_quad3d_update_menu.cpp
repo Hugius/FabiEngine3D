@@ -27,11 +27,11 @@ void WorldEditor::_updateQuad3dMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3dChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteOptions();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quadList")->deleteOptions();
 
 			for(auto & [key, templateId] : _loadedQuadIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createOption(key, key);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quadList")->createOption(key, key);
 			}
 		}
 
@@ -52,7 +52,7 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("quad3dList")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("quadList")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
@@ -86,16 +86,16 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuQuad3dChoice")
 	{
-		for(const auto & optionId : screen->getScrollingList("quad3dList")->getOptionIds())
+		for(const auto & optionId : screen->getScrollingList("quadList")->getOptionIds())
 		{
 			if(!_fe3d->quad3d_isExisting(optionId))
 			{
-				screen->getScrollingList("quad3dList")->deleteOption(optionId);
+				screen->getScrollingList("quadList")->deleteOption(optionId);
 				break;
 			}
 		}
 
-		const auto hoveredOptionId = screen->getScrollingList("quad3dList")->getHoveredOptionId();
+		const auto hoveredOptionId = screen->getScrollingList("quadList")->getHoveredOptionId();
 
 		if(!hoveredOptionId.empty())
 		{

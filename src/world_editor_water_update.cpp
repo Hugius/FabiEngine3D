@@ -23,7 +23,7 @@ void WorldEditor::_updateWaterMenu()
 				}
 			}
 
-			_gui->getOverlay()->openChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIds);
+			_gui->getOverlay()->openChoiceForm("selectWater", "Select Water", fvec2(0.0f, 0.1f), waterIds);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -38,16 +38,13 @@ void WorldEditor::_updateWaterMenu()
 			_fe3d->water_setHeight(_fe3d->water_getSelectedId(), (_fe3d->water_getHeight(_fe3d->water_getSelectedId()) - (_editorSpeed / 100.0f)));
 		}
 
-		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if((_gui->getOverlay()->getChoiceFormId() == "selectWater") && _gui->getOverlay()->isChoiceFormConfirmed())
 		{
 			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-			if(!selectedOptionId.empty())
-			{
-				_worldUtilities->copyTemplateWater(selectedOptionId, ("@" + selectedOptionId));
+			_worldUtilities->copyTemplateWater(selectedOptionId, ("@" + selectedOptionId));
 
-				_fe3d->water_select(selectedOptionId);
-			}
+			_fe3d->water_select(selectedOptionId);
 		}
 
 		screen->getButton("choose")->setHoverable(_fe3d->water_getSelectedId().empty());

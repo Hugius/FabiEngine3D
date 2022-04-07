@@ -30,16 +30,13 @@ void WorldEditor::_updateSkyMenu()
 			_fe3d->sky_delete(_fe3d->sky_getSelectedId());
 		}
 
-		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if((_gui->getOverlay()->getChoiceFormId() == "selectSky") && _gui->getOverlay()->isChoiceFormConfirmed())
 		{
 			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-			if(!selectedOptionId.empty())
-			{
-				_worldUtilities->copyTemplateSky(selectedOptionId, ("@" + selectedOptionId));
+			_worldUtilities->copyTemplateSky(selectedOptionId, ("@" + selectedOptionId));
 
-				_fe3d->sky_select(selectedOptionId);
-			}
+			_fe3d->sky_select(selectedOptionId);
 		}
 
 		screen->getButton("choose")->setHoverable(_fe3d->sky_getSelectedId().empty());

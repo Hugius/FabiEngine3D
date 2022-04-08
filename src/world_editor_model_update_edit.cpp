@@ -173,7 +173,7 @@ void WorldEditor::_updateModelEditing()
 			{
 				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / MODEL_POSITION_DIVIDER));
 				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / MODEL_POSITION_DIVIDER));
-				_handleInputBox("modelPropertiesMenu", "zMinus", "x", "zPlus", position.z, (_editorSpeed / MODEL_POSITION_DIVIDER));
+				_handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / MODEL_POSITION_DIVIDER));
 
 				_fe3d->model_setBasePosition(_activeModelId, position);
 			}
@@ -181,7 +181,7 @@ void WorldEditor::_updateModelEditing()
 			{
 				_handleInputBox("modelPropertiesMenu", "xMinus", "x", "xPlus", rotation.x, MODEL_ROTATION_SPEED);
 				_handleInputBox("modelPropertiesMenu", "yMinus", "y", "yPlus", rotation.y, MODEL_ROTATION_SPEED);
-				_handleInputBox("modelPropertiesMenu", "zMinus", "x", "zPlus", rotation.z, MODEL_ROTATION_SPEED);
+				_handleInputBox("modelPropertiesMenu", "zMinus", "z", "zPlus", rotation.z, MODEL_ROTATION_SPEED);
 
 				_fe3d->model_setBaseRotation(_activeModelId, rotation);
 			}

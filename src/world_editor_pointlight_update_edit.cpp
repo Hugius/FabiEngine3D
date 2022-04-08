@@ -126,7 +126,7 @@ void WorldEditor::_updatePointlightEditing()
 
 				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
-				_handleInputBox("pointlightPropertiesMenu", "zMinus", "x", "zPlus", position.z, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+				_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 			}
 			else if(!screen->getButton("radius")->isHoverable())
 			{
@@ -136,7 +136,7 @@ void WorldEditor::_updatePointlightEditing()
 
 				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", radius.x, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", radius.y, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
-				_handleInputBox("pointlightPropertiesMenu", "zMinus", "x", "zPlus", radius.z, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
+				_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", radius.z, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
@@ -146,7 +146,7 @@ void WorldEditor::_updatePointlightEditing()
 
 				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleInputBox("pointlightPropertiesMenu", "zMinus", "x", "zPlus", color.b, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", color.b, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 			}
 
 			_handleInputBox("pointlightPropertiesMenu", "intensityMinus", "intensity", "intensityPlus", intensity, POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);

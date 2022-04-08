@@ -5,7 +5,7 @@ void WorldEditor::_activateModel(const string & id)
 	_activeModelId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->model_getBasePosition(_activeModelId);
+	const auto position = _fe3d->model_getBasePosition(_activeModelId);
 
 	rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
 	rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
@@ -23,7 +23,7 @@ void WorldEditor::_activateQuad3d(const string & id)
 	_activeQuadId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->quad3d_getPosition(_activeQuadId);
+	const auto position = _fe3d->quad3d_getPosition(_activeQuadId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
@@ -41,7 +41,7 @@ void WorldEditor::_activateText3d(const string & id)
 	_activeTextId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->text3d_getPosition(_activeTextId);
+	const auto position = _fe3d->text3d_getPosition(_activeTextId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
@@ -59,7 +59,7 @@ void WorldEditor::_activatePointlight(const string & id)
 	_activePointlightId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->pointlight_getPosition(_activePointlightId);
+	const auto position = _fe3d->pointlight_getPosition(_activePointlightId);
 
 	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
 	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("radius")->setHoverable(true);
@@ -77,7 +77,7 @@ void WorldEditor::_activateSpotlight(const string & id)
 	_activeSpotlightId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->spotlight_getPosition(_activeSpotlightId);
+	const auto position = _fe3d->spotlight_getPosition(_activeSpotlightId);
 
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("color")->setHoverable(true);
@@ -94,7 +94,7 @@ void WorldEditor::_activateReflection(const string & id)
 	_activeReflectionId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->reflection_getPosition(_activeReflectionId);
+	const auto position = _fe3d->reflection_getPosition(_activeReflectionId);
 
 	rightWindow->getScreen("reflectionPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	rightWindow->getScreen("reflectionPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
@@ -108,9 +108,9 @@ void WorldEditor::_activateSound(const string & id)
 	_activeSoundId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	auto position = _fe3d->sound3d_getPosition(_activeSoundId);
-	auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSoundId);
-	auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSoundId);
+	const auto position = _fe3d->sound3d_getPosition(_activeSoundId);
+	const auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSoundId);
+	const auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSoundId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));

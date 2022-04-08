@@ -112,13 +112,13 @@ void WorldEditor::_updateText3dEditing()
 			{
 				_handleInputBox("text3dPropertiesMenu", "xMinus", "x", "xPlus", position.x, (_editorSpeed / TEXT3D_POSITION_DIVIDER));
 				_handleInputBox("text3dPropertiesMenu", "yMinus", "y", "yPlus", position.y, (_editorSpeed / TEXT3D_POSITION_DIVIDER));
-				_handleInputBox("text3dPropertiesMenu", "zMinus", "x", "zPlus", position.z, (_editorSpeed / TEXT3D_POSITION_DIVIDER));
+				_handleInputBox("text3dPropertiesMenu", "zMinus", "z", "zPlus", position.z, (_editorSpeed / TEXT3D_POSITION_DIVIDER));
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
 				_handleInputBox("text3dPropertiesMenu", "xMinus", "x", "xPlus", rotation.x, TEXT3D_ROTATION_SPEED);
 				_handleInputBox("text3dPropertiesMenu", "yMinus", "y", "yPlus", rotation.y, TEXT3D_ROTATION_SPEED);
-				_handleInputBox("text3dPropertiesMenu", "zMinus", "x", "zPlus", rotation.z, TEXT3D_ROTATION_SPEED);
+				_handleInputBox("text3dPropertiesMenu", "zMinus", "z", "zPlus", rotation.z, TEXT3D_ROTATION_SPEED);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{

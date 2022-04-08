@@ -190,13 +190,18 @@ void WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 	}
 	else
 	{
-		if(inputBox->getTextContent().empty() || (inputBox->getTextContent() == "-"))
+		if(inputBox->isHovered())
 		{
-			value = 0.0f;
-		}
-		else
-		{
-			value = (static_cast<float>(stoi(inputBox->getTextContent())) / multiplier);
+			if(inputBox->getTextContent().empty() || (inputBox->getTextContent() == "-"))
+			{
+				value = 0.0f;
+			}
+			else
+			{
+				const auto content = static_cast<float>(Tools::parseSignedInteger(inputBox->getTextContent()));
+
+				value = (content / multiplier);
+			}
 		}
 	}
 

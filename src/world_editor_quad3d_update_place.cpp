@@ -11,19 +11,19 @@ void WorldEditor::_updateQuad3dPlacing()
 
 			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 				_fe3d->quad3d_setPosition(_currentTemplateQuadId, fvec3(content, newPosition.y, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 				_fe3d->quad3d_setPosition(_currentTemplateQuadId, fvec3(newPosition.x, content, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 				const auto newId = (_currentTemplateQuadId.substr(1) + "_" + to_string(_idCounter));
 
 				_idCounter++;

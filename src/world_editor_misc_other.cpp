@@ -188,7 +188,7 @@ void WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 		}
 		else
 		{
-			const auto content = static_cast<float>(Tools::parseSignedInteger(inputBox->getTextContent()));
+			const auto content = static_cast<float>(Tools::parseInteger(inputBox->getTextContent()));
 
 			value = clamp((content / multiplier), minimum, maximum);
 

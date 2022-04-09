@@ -39,9 +39,7 @@ public:
 
 	static const long long getTimeSinceEpochMS();
 
-	static const unsigned int parseUnsignedInteger(const string & valueString);
-
-	static const int parseSignedInteger(const string & valueString);
+	static const int parseInteger(const string & valueString);
 
 	static const bool isDirectoryExisting(const string & path);
 	static const bool isFileExisting(const string & path);

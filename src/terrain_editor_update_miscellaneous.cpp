@@ -41,31 +41,31 @@ void TerrainEditor::_updateMiscellaneousMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "maxHeight") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->terrain_setMaxHeight(_currentTerrainId, content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "textureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
 
 			_fe3d->terrain_setTextureRepeat(_currentTerrainId, content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "redTextureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
 
 			_fe3d->terrain_setRedTextureRepeat(_currentTerrainId, content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "greenTextureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
 
 			_fe3d->terrain_setGreenTextureRepeat(_currentTerrainId, content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "blueTextureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = Tools::parseUnsignedInteger(_gui->getOverlay()->getValueFormContent());
+			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
 
 			_fe3d->terrain_setBlueTextureRepeat(_currentTerrainId, content);
 		}

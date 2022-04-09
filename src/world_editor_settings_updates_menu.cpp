@@ -29,7 +29,7 @@ void WorldEditor::_updateSettingsMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "editorSpeed") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			_editorSpeed = max(0.0f, static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent())));
+			_editorSpeed = max(0.0f, static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
 		}
 	}
 }

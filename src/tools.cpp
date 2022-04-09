@@ -105,29 +105,11 @@ const long long Tools::getTimeSinceEpochMS()
 	return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
 }
 
-const unsigned int Tools::parseUnsignedInteger(const string & valueString)
+const int Tools::parseInteger(const string & valueString)
 {
 	if(valueString.empty())
 	{
-		abort();
-	}
-
-	for(unsigned int index = 0; index < static_cast<unsigned int>(valueString.size()); index++)
-	{
-		if(!isdigit(valueString[index]))
-		{
-			abort();
-		}
-	}
-
-	return static_cast<unsigned int>(stoi(valueString));
-}
-
-const int Tools::parseSignedInteger(const string & valueString)
-{
-	if(valueString.empty())
-	{
-		abort();
+		return 0;
 	}
 
 	unsigned int startingIndex = 0;

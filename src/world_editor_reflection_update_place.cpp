@@ -11,21 +11,21 @@ void WorldEditor::_updateReflectionPlacing()
 
 			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 				_fe3d->reflection_setPosition(TEMPLATE_REFLECTION_ID, fvec3(content, newPosition.y, newPosition.z));
 				_fe3d->model_setBasePosition(TEMPLATE_CAMERA_ID, fvec3(content, newPosition.y, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 				_fe3d->reflection_setPosition(TEMPLATE_REFLECTION_ID, fvec3(newPosition.x, content, newPosition.z));
 				_fe3d->model_setBasePosition(TEMPLATE_CAMERA_ID, fvec3(newPosition.x, content, newPosition.z));
 			}
 			if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 			{
-				const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
+				const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 				const auto newId = ("reflection_" + to_string(_idCounter));
 				const auto newModelId = ("@@camera_" + newId);
 

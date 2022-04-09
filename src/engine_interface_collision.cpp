@@ -30,7 +30,7 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
 {
 	vector<string> result;
 
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasCollided())
 		{
@@ -45,7 +45,7 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs(Direction d
 {
 	vector<string> result;
 
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasCollided())
 		{
@@ -64,7 +64,7 @@ const bool EngineInterface::collision_checkCameraWithTerrain() const
 	return _core->getCameraCollisionResponder()->isCameraUnderTerrain();
 }
 
-const bool EngineInterface::collision_checkCameraWithAabb(const string& id) const
+const bool EngineInterface::collision_checkCameraWithAabb(const string & id) const
 {
 	return _core->getAabbEntityManager()->getEntity(id)->hasCollided();
 }
@@ -94,7 +94,7 @@ const bool EngineInterface::collision_isCameraAabbResponseEnabledZ() const
 	return _core->getCameraCollisionResponder()->isCameraAabbResponseEnabledZ();
 }
 
-const bool EngineInterface::collision_checkCameraWithAabb(const string& id, Direction direction) const
+const bool EngineInterface::collision_checkCameraWithAabb(const string & id, Direction direction) const
 {
 	if(_core->getAabbEntityManager()->getEntity(id)->hasCollided())
 	{

@@ -22,7 +22,7 @@ const bool Quad3dEditor::saveEntitiesToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\quad3d.fe3d");
 
-	for(const auto& quadId : _loadedEntityIds)
+	for(const auto & quadId : _loadedEntityIds)
 	{
 		auto size = _fe3d->quad3d_getSize(quadId);
 		auto color = _fe3d->quad3d_getColor(quadId);

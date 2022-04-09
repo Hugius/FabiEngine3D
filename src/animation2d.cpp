@@ -2,7 +2,7 @@
 
 using std::max;
 
-Animation2d::Animation2d(const string& id)
+Animation2d::Animation2d(const string & id)
 	:
 	_id(id)
 {
@@ -12,7 +12,7 @@ Animation2d::Animation2d(const string& id)
 	}
 }
 
-const string& Animation2d::getId() const
+const string & Animation2d::getId() const
 {
 	return _id;
 }

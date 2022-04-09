@@ -13,15 +13,15 @@ class Sound2dManager final
 public:
 	void inject(shared_ptr<AudioLoader> audioLoader);
 	void inject(shared_ptr<WaveBufferCache> waveBufferCache);
-	void createSound(const string& id, const string& audioPath);
-	void deleteSound(const string& id);
+	void createSound(const string & id, const string & audioPath);
+	void deleteSound(const string & id);
 	void deleteSounds();
 
-	const unordered_map<string, shared_ptr<Sound2d>>& getSounds() const;
+	const unordered_map<string, shared_ptr<Sound2d>> & getSounds() const;
 
-	const shared_ptr<Sound2d> getSound(const string& id) const;
+	const shared_ptr<Sound2d> getSound(const string & id) const;
 
-	const bool isSoundExisting(const string& id) const;
+	const bool isSoundExisting(const string & id) const;
 	const bool isSoundsExisting() const;
 
 private:

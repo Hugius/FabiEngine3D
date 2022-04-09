@@ -6,12 +6,12 @@
 using std::ofstream;
 using std::endl;
 
-const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
+const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + _currentProjectId + "\\worlds\\custom\\" + fileName + ".fe3d");
 
-	for(const auto& skyId : _addedSkyIds)
+	for(const auto & skyId : _addedSkyIds)
 	{
 		auto cubeMapPaths = _fe3d->sky_getCubeMapPaths(skyId);
 		auto rotation = _fe3d->sky_getRotation(skyId);
@@ -21,7 +21,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 		auto wireframeColor = _fe3d->sky_getWireframeColor(skyId);
 		auto isVisible = _fe3d->sky_isVisible(skyId);
 
-		for(auto& cubeMapPath : cubeMapPaths)
+		for(auto & cubeMapPath : cubeMapPaths)
 		{
 			cubeMapPath = (cubeMapPath.empty() ? "" : cubeMapPath.substr(("projects\\" + _currentProjectId + "\\").size()));
 
@@ -35,7 +35,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 			<< skyId
 			<< " ";
 
-		for(const auto& cubeMapPath : cubeMapPaths)
+		for(const auto & cubeMapPath : cubeMapPaths)
 		{
 			file
 				<< cubeMapPath
@@ -65,7 +65,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 			<< endl;
 	}
 
-	for(const auto& terrainId : _addedTerrainIds)
+	for(const auto & terrainId : _addedTerrainIds)
 	{
 		auto heightMapPath = _fe3d->terrain_getHeightMapPath(terrainId);
 		auto diffuseMapPath = _fe3d->terrain_getDiffuseMapPath(terrainId);
@@ -177,7 +177,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 			<< endl;
 	}
 
-	for(const auto& waterId : _addedWaterIds)
+	for(const auto & waterId : _addedWaterIds)
 	{
 		auto dudvMapPath = _fe3d->water_getDudvMapPath(waterId);
 		auto normalMapPath = _fe3d->water_getNormalMapPath(waterId);
@@ -270,7 +270,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 			<< endl;
 	}
 
-	for(const auto& modelId : _addedModelIds)
+	for(const auto & modelId : _addedModelIds)
 	{
 		auto partIds = _fe3d->model_getPartIds(modelId);
 		auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
@@ -476,7 +476,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 				<< endl;
 		}
 
-		for(const string& aabbId : aabbIds)
+		for(const string & aabbId : aabbIds)
 		{
 			auto position = _fe3d->aabb_getLocalPosition(aabbId);
 			auto size = _fe3d->aabb_getLocalSize(aabbId);
@@ -520,7 +520,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 		// ANIMATION
 	}
 
-	for(const auto& quadId : _addedQuad3dIds)
+	for(const auto & quadId : _addedQuad3dIds)
 	{
 		auto aabbIds = _fe3d->quad3d_getChildAabbIds(quadId);
 		auto position = _fe3d->quad3d_getPosition(quadId);
@@ -632,7 +632,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 			<< uvOffset.y
 			<< endl;
 
-		for(const string& aabbId : aabbIds)
+		for(const string & aabbId : aabbIds)
 		{
 			auto position = _fe3d->aabb_getLocalPosition(aabbId);
 			auto size = _fe3d->aabb_getLocalSize(aabbId);
@@ -676,7 +676,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 		// ANIMATION
 	}
 
-	for(const auto& textId : _addedText3dIds)
+	for(const auto & textId : _addedText3dIds)
 	{
 		auto aabbIds = _fe3d->text3d_getChildAabbIds(textId);
 		auto position = _fe3d->text3d_getPosition(textId);
@@ -768,7 +768,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 			<< maxHeight
 			<< endl;
 
-		for(const string& aabbId : aabbIds)
+		for(const string & aabbId : aabbIds)
 		{
 			auto position = _fe3d->aabb_getLocalPosition(aabbId);
 			auto size = _fe3d->aabb_getLocalSize(aabbId);
@@ -810,7 +810,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 		}
 	}
 
-	for(const string& aabbId : _addedAabbIds)
+	for(const string & aabbId : _addedAabbIds)
 	{
 		auto position = _fe3d->aabb_getBasePosition(aabbId);
 		auto size = _fe3d->aabb_getBaseSize(aabbId);
@@ -849,7 +849,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 			<< endl;
 	}
 
-	for(const auto& pointlightId : _addedPointlightIds)
+	for(const auto & pointlightId : _addedPointlightIds)
 	{
 		auto position = _fe3d->pointlight_getPosition(pointlightId);
 		auto radius = _fe3d->pointlight_getRadius(pointlightId);
@@ -885,7 +885,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 			<< endl;
 	}
 
-	for(const auto& spotlightId : _addedSpotlightIds)
+	for(const auto & spotlightId : _addedSpotlightIds)
 	{
 		auto position = _fe3d->spotlight_getPosition(spotlightId);
 		auto color = _fe3d->spotlight_getColor(spotlightId);
@@ -923,7 +923,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 			<< endl;
 	}
 
-	for(const auto& reflectionId : _addedReflectionIds)
+	for(const auto & reflectionId : _addedReflectionIds)
 	{
 		auto position = _fe3d->reflection_getPosition(reflectionId);
 		auto exceptionEntityId = _fe3d->reflection_getExceptionEntityId(reflectionId);
@@ -942,7 +942,7 @@ const bool CustomWorldBuilder::saveWorldToFile(const string& fileName) const
 			<< endl;
 	}
 
-	for(const auto& soundId : _loadedSound3dIds)
+	for(const auto & soundId : _loadedSound3dIds)
 	{
 		auto position = _fe3d->sound3d_getPosition(soundId);
 		auto maxVolume = _fe3d->sound3d_getMaxVolume(soundId);

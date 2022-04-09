@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-Audio::Audio(unsigned char* samples, unsigned int sampleCount, unsigned int channelCount, unsigned int sampleRate, unsigned int byteRate, unsigned int bytesPerBlock, unsigned int bitsPerSample)
+Audio::Audio(unsigned char * samples, unsigned int sampleCount, unsigned int channelCount, unsigned int sampleRate, unsigned int byteRate, unsigned int bytesPerBlock, unsigned int bitsPerSample)
 	:
 	_samples(samples),
 	_sampleCount(sampleCount),
@@ -23,7 +23,7 @@ Audio::~Audio()
 	delete[] _samples;
 }
 
-const unsigned char* Audio::getSamples() const
+const unsigned char * Audio::getSamples() const
 {
 	return _samples;
 }

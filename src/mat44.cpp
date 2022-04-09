@@ -36,7 +36,7 @@ mat44::mat44()
 	this->m[3][3] = 1.0f;
 }
 
-mat44::mat44(const mat22& other)
+mat44::mat44(const mat22 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -69,7 +69,7 @@ mat44::mat44(const float value)
 	this->m[3][3] = value;
 }
 
-mat44::mat44(const mat33& other)
+mat44::mat44(const mat33 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -89,7 +89,7 @@ mat44::mat44(const mat33& other)
 	this->m[3][3] = 1.0f;
 }
 
-mat44::mat44(const mat44& other)
+mat44::mat44(const mat44 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -109,7 +109,7 @@ mat44::mat44(const mat44& other)
 	this->m[3][3] = other.m[3][3];
 }
 
-const fvec4 mat44::operator*(const fvec4& other) const
+const fvec4 mat44::operator*(const fvec4 & other) const
 {
 	fvec4 result;
 
@@ -121,7 +121,7 @@ const fvec4 mat44::operator*(const fvec4& other) const
 	return result;
 }
 
-const mat44 mat44::operator+(const mat44& other) const
+const mat44 mat44::operator+(const mat44 & other) const
 {
 	mat44 result;
 
@@ -133,7 +133,7 @@ const mat44 mat44::operator+(const mat44& other) const
 	return result;
 }
 
-const mat44 mat44::operator-(const mat44& other) const
+const mat44 mat44::operator-(const mat44 & other) const
 {
 	mat44 result;
 
@@ -145,7 +145,7 @@ const mat44 mat44::operator-(const mat44& other) const
 	return result;
 }
 
-const mat44 mat44::operator*(const mat44& other) const
+const mat44 mat44::operator*(const mat44 & other) const
 {
 	mat44 result(0.0f);
 

@@ -75,10 +75,10 @@ public:
 		}
 	}
 
-	static void setCustomMessageQueue(const vector<string>& customMessages);
+	static void setCustomMessageQueue(const vector<string> & customMessages);
 	static void clearMessageQueue();
 
-	static const vector<string>& getMessageQueue();
+	static const vector<string> & getMessageQueue();
 
 	static unsigned int getMessageCount();
 

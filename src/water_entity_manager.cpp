@@ -4,7 +4,7 @@
 
 using std::make_shared;
 
-const shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& id) const
+const shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string & id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -26,12 +26,12 @@ const shared_ptr<WaterEntity> WaterEntityManager::getSelectedEntity() const
 	return getEntity(_selectedEntityId);
 }
 
-const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<WaterEntity>> & WaterEntityManager::getEntities() const
 {
 	return _entities;
 }
 
-void WaterEntityManager::selectEntity(const string& id)
+void WaterEntityManager::selectEntity(const string & id)
 {
 	if(!isEntityExisting(id) && !id.empty())
 	{
@@ -41,7 +41,7 @@ void WaterEntityManager::selectEntity(const string& id)
 	_selectedEntityId = id;
 }
 
-void WaterEntityManager::createEntity(const string& id)
+void WaterEntityManager::createEntity(const string & id)
 {
 	if(isEntityExisting(id))
 	{
@@ -55,7 +55,7 @@ void WaterEntityManager::createEntity(const string& id)
 	loadVertexBuffer(id);
 }
 
-void WaterEntityManager::deleteEntity(const string& id)
+void WaterEntityManager::deleteEntity(const string & id)
 {
 	if(!isEntityExisting(id))
 	{
@@ -77,12 +77,12 @@ void WaterEntityManager::deleteEntities()
 	selectEntity("");
 }
 
-void WaterEntityManager::loadVertexBuffer(const string& id)
+void WaterEntityManager::loadVertexBuffer(const string & id)
 {
 	_loadVertexBuffer(getEntity(id), getEntity(id)->getSize());
 }
 
-const bool WaterEntityManager::isEntityExisting(const string& id) const
+const bool WaterEntityManager::isEntityExisting(const string & id) const
 {
 	return (_entities.find(id) != _entities.end());
 }

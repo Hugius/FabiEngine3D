@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processFe3dFunctionCall(const string& scriptLine)
+const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processFe3dFunctionCall(const string & scriptLine)
 {
 	auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
 	auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');

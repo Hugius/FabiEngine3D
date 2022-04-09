@@ -8,7 +8,7 @@ using std::chrono::nanoseconds;
 using std::chrono::duration_cast;
 using std::make_unique;
 
-void Timer::createClock(const string& id)
+void Timer::createClock(const string & id)
 {
 	if(isClockExisting(id))
 	{
@@ -18,7 +18,7 @@ void Timer::createClock(const string& id)
 	_clocks.insert({id, make_unique<Clock>()});
 }
 
-void Timer::deleteClock(const string& id)
+void Timer::deleteClock(const string & id)
 {
 	if(!isClockExisting(id))
 	{
@@ -28,7 +28,7 @@ void Timer::deleteClock(const string& id)
 	_clocks.erase(id);
 }
 
-void Timer::startClock(const string& id)
+void Timer::startClock(const string & id)
 {
 	if(!isClockExisting(id))
 	{
@@ -45,7 +45,7 @@ void Timer::startClock(const string& id)
 	_clocks.at(id)->isStarted = true;
 }
 
-void Timer::pauseClock(const string& id)
+void Timer::pauseClock(const string & id)
 {
 	if(!isClockExisting(id))
 	{
@@ -66,7 +66,7 @@ void Timer::pauseClock(const string& id)
 	_clocks.at(id)->isPaused = true;
 }
 
-void Timer::resumeClock(const string& id)
+void Timer::resumeClock(const string & id)
 {
 	if(!isClockExisting(id))
 	{
@@ -89,7 +89,7 @@ void Timer::resumeClock(const string& id)
 	_clocks.at(id)->isPaused = false;
 }
 
-void Timer::stopClock(const string& id)
+void Timer::stopClock(const string & id)
 {
 	if(!isClockExisting(id))
 	{
@@ -106,7 +106,7 @@ void Timer::stopClock(const string& id)
 	_clocks.at(id)->isStarted = false;
 }
 
-const float Timer::getClockDeltaTime(const string& id) const
+const float Timer::getClockDeltaTime(const string & id) const
 {
 	if(!isClockExisting(id))
 	{
@@ -123,12 +123,12 @@ const float Timer::getClockDeltaTime(const string& id) const
 	return deltaTime;
 }
 
-const bool Timer::isClockExisting(const string& id) const
+const bool Timer::isClockExisting(const string & id) const
 {
 	return (_clocks.find(id) != _clocks.end());
 }
 
-const bool Timer::isClockStarted(const string& id) const
+const bool Timer::isClockStarted(const string & id) const
 {
 	if(!isClockExisting(id))
 	{
@@ -138,7 +138,7 @@ const bool Timer::isClockStarted(const string& id) const
 	return _clocks.at(id)->isStarted;
 }
 
-const bool Timer::isClockPaused(const string& id) const
+const bool Timer::isClockPaused(const string & id) const
 {
 	if(!isClockExisting(id))
 	{
@@ -161,7 +161,7 @@ const vector<string> Timer::getClockIds() const
 {
 	vector<string> result;
 
-	for(const auto& [key, clock] : _clocks)
+	for(const auto & [key, clock] : _clocks)
 	{
 		result.push_back(key);
 	}

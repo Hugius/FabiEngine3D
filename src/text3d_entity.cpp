@@ -83,7 +83,7 @@ void Text3dEntity::updateCharacterEntities()
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
 		offset.x -= (this->getSize().x * 0.5f);
@@ -102,14 +102,14 @@ void Text3dEntity::updateCharacterEntities()
 	}
 }
 
-void Text3dEntity::setContent(const string& value)
+void Text3dEntity::setContent(const string & value)
 {
 	if(value != _content)
 	{
 		_content = value;
 		_characterEntities.clear();
 
-		for(const auto& character : _content)
+		for(const auto & character : _content)
 		{
 			const auto xIndex = _fontMapIndices.at(character).x;
 			const auto yIndex = _fontMapIndices.at(character).y;
@@ -148,17 +148,17 @@ void Text3dEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setVertexBuffer(_vertexBuffer);
 	}
 }
 
-void Text3dEntity::setFontMapPath(const string& value)
+void Text3dEntity::setFontMapPath(const string & value)
 {
 	_fontMapPath = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setDiffuseMapPath(_fontMapPath);
 	}
@@ -168,7 +168,7 @@ void Text3dEntity::setFontMap(shared_ptr<TextureBuffer> value)
 {
 	_fontTextureBuffer = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setDiffuseMap(_fontTextureBuffer);
 	}
@@ -178,7 +178,7 @@ void Text3dEntity::setFacingCameraHorizontally(bool value)
 {
 	_isFacingCameraHorizontally = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setFacingCameraHorizontally(_isFacingCameraHorizontally);
 	}
@@ -188,27 +188,27 @@ void Text3dEntity::setFacingCameraVertically(bool value)
 {
 	_isFacingCameraVertically = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setFacingCameraVertically(_isFacingCameraVertically);
 	}
 }
 
-void Text3dEntity::setColor(const fvec3& value)
+void Text3dEntity::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setColor(_color);
 	}
 }
 
-void Text3dEntity::setWireframeColor(const fvec3& value)
+void Text3dEntity::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setWireframeColor(_wireframeColor);
 	}
@@ -218,7 +218,7 @@ void Text3dEntity::setReflected(bool value)
 {
 	_isReflected = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setReflected(_isReflected);
 	}
@@ -228,7 +228,7 @@ void Text3dEntity::setBright(bool value)
 {
 	_isBright = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setBright(_isBright);
 	}
@@ -238,7 +238,7 @@ void Text3dEntity::setWireframed(bool value)
 {
 	_isWireframed = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setWireframed(_isWireframed);
 	}
@@ -248,7 +248,7 @@ void Text3dEntity::setShadowed(bool value)
 {
 	_isShadowed = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setShadowed(_isShadowed);
 	}
@@ -258,7 +258,7 @@ void Text3dEntity::setCentered(bool value)
 {
 	_isCentered = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setCentered(_isCentered);
 	}
@@ -268,7 +268,7 @@ void Text3dEntity::setLightness(float value)
 {
 	_lightness = max(0.0f, value);
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setLightness(_lightness);
 	}
@@ -278,7 +278,7 @@ void Text3dEntity::setOpacity(float value)
 {
 	_opacity = clamp(value, 0.0f, 1.0f);
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setOpacity(_opacity);
 	}
@@ -288,7 +288,7 @@ void Text3dEntity::setMinHeight(float value)
 {
 	_minHeight = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setMinHeight(_minHeight);
 	}
@@ -298,7 +298,7 @@ void Text3dEntity::setMaxHeight(float value)
 {
 	_maxHeight = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setMaxHeight(_maxHeight);
 	}
@@ -308,7 +308,7 @@ void Text3dEntity::setMinTextureAlpha(float value)
 {
 	_minTextureAlpha = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setMinTextureAlpha(_minTextureAlpha);
 	}
@@ -318,7 +318,7 @@ void Text3dEntity::setFrozen(bool value)
 {
 	_isFrozen = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setFrozen(_isFrozen);
 	}
@@ -328,37 +328,37 @@ void Text3dEntity::setVisible(bool value)
 {
 	_isVisible = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setVisible(_isVisible);
 	}
 }
 
-void Text3dEntity::setPosition(const fvec3& value)
+void Text3dEntity::setPosition(const fvec3 & value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void Text3dEntity::setRotation(const fvec3& value)
+void Text3dEntity::setRotation(const fvec3 & value)
 {
 	_rotation = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
 	_rotationTarget = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
 }
 
-void Text3dEntity::setSize(const fvec2& value)
+void Text3dEntity::setSize(const fvec2 & value)
 {
 	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Text3dEntity::move(const fvec3& value)
+void Text3dEntity::move(const fvec3 & value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void Text3dEntity::rotate(const fvec3& value)
+void Text3dEntity::rotate(const fvec3 & value)
 {
 	_rotation += value;
 	_rotationTarget += value;
@@ -366,7 +366,7 @@ void Text3dEntity::rotate(const fvec3& value)
 	_rotationTarget = fvec3(Mathematics::limitAngle(_rotationTarget.x), Mathematics::limitAngle(_rotationTarget.y), Mathematics::limitAngle(_rotationTarget.z));
 }
 
-void Text3dEntity::scale(const fvec2& value)
+void Text3dEntity::scale(const fvec2 & value)
 {
 	_size += value;
 	_sizeTarget += value;
@@ -374,35 +374,35 @@ void Text3dEntity::scale(const fvec2& value)
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void Text3dEntity::moveTo(const fvec3& target, float speed)
+void Text3dEntity::moveTo(const fvec3 & target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void Text3dEntity::rotateTo(const fvec3& target, float speed)
+void Text3dEntity::rotateTo(const fvec3 & target, float speed)
 {
 	_rotationTarget = fvec3(Mathematics::limitAngle(target.x), Mathematics::limitAngle(target.y), Mathematics::limitAngle(target.z));
 	_rotationTargetSpeed = speed;
 }
 
-void Text3dEntity::scaleTo(const fvec2& target, float speed)
+void Text3dEntity::scaleTo(const fvec2 & target, float speed)
 {
 	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
 }
 
-const string& Text3dEntity::getContent() const
+const string & Text3dEntity::getContent() const
 {
 	return _content;
 }
 
-const string& Text3dEntity::getFontMapPath() const
+const string & Text3dEntity::getFontMapPath() const
 {
 	return _fontMapPath;
 }
 
-const vector<shared_ptr<Quad3dEntity>>& Text3dEntity::getCharacterEntities() const
+const vector<shared_ptr<Quad3dEntity>> & Text3dEntity::getCharacterEntities() const
 {
 	return _characterEntities;
 }
@@ -417,42 +417,42 @@ const shared_ptr<TextureBuffer> Text3dEntity::getFontTextureBuffer() const
 	return _fontTextureBuffer;
 }
 
-const mat44& Text3dEntity::getTransformation() const
+const mat44 & Text3dEntity::getTransformation() const
 {
 	return _transformation;
 }
 
-const fvec3& Text3dEntity::getPosition() const
+const fvec3 & Text3dEntity::getPosition() const
 {
 	return _position;
 }
 
-const fvec3& Text3dEntity::getRotation() const
+const fvec3 & Text3dEntity::getRotation() const
 {
 	return _rotation;
 }
 
-const fvec2& Text3dEntity::getSize() const
+const fvec2 & Text3dEntity::getSize() const
 {
 	return _size;
 }
 
-const fvec2& Text3dEntity::getUvMultiplier() const
+const fvec2 & Text3dEntity::getUvMultiplier() const
 {
 	return _uvMultiplier;
 }
 
-const fvec2& Text3dEntity::getUvOffset() const
+const fvec2 & Text3dEntity::getUvOffset() const
 {
 	return _uvOffset;
 }
 
-const fvec3& Text3dEntity::getColor() const
+const fvec3 & Text3dEntity::getColor() const
 {
 	return _color;
 }
 
-const fvec3& Text3dEntity::getWireframeColor() const
+const fvec3 & Text3dEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }

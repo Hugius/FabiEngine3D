@@ -35,7 +35,7 @@ void CameraCollisionResponder::update()
 		unsigned int yPriority = 0;
 		unsigned int zPriority = 0;
 
-		for(const auto& [key, aabb] : _aabbManager->getEntities())
+		for(const auto & [key, aabb] : _aabbManager->getEntities())
 		{
 			aabb->setCollided(false);
 		}

@@ -6,7 +6,7 @@
 #include <chrono>
 #include <filesystem>
 
-void EngineInterface::misc_setCursorEntityId(const string& value)
+void EngineInterface::misc_setCursorEntityId(const string & value)
 {
 	_core->getRenderStorage()->setCursorEntityId(value);
 }
@@ -35,46 +35,46 @@ void EngineInterface::misc_centerCursor()
 	_core->getCamera()->notifyCursorCenter();
 }
 
-void EngineInterface::misc_setCursorPosition(const ivec2& value)
+void EngineInterface::misc_setCursorPosition(const ivec2 & value)
 {
 	_core->getRenderWindow()->setCursorPosition(value);
 }
 
-void EngineInterface::misc_setWindowTitle(const string& value)
+void EngineInterface::misc_setWindowTitle(const string & value)
 {
 	_core->getRenderWindow()->setTitle(value);
 }
 
-void EngineInterface::misc_cacheMesh(const string& filePath, bool isCrucial)
+void EngineInterface::misc_cacheMesh(const string & filePath, bool isCrucial)
 {
 	_core->getMeshLoader()->cacheMesh(filePath, isCrucial);
 }
 
-void EngineInterface::misc_cacheImage(const string& filePath, bool isCrucial)
+void EngineInterface::misc_cacheImage(const string & filePath, bool isCrucial)
 {
 	_core->getImageLoader()->cacheImage(filePath, isCrucial);
 }
 
-void EngineInterface::misc_cacheAudio(const string& filePath, bool isCrucial)
+void EngineInterface::misc_cacheAudio(const string & filePath, bool isCrucial)
 {
 	_core->getAudioLoader()->cacheAudio(filePath, isCrucial);
 }
 
-void EngineInterface::misc_clearMeshCache(const string& filePath)
+void EngineInterface::misc_clearMeshCache(const string & filePath)
 {
 	_core->getMeshLoader()->clearMeshCache(filePath);
 
-	for(const auto& partId : _core->getVertexBufferCache()->getPartIds(filePath))
+	for(const auto & partId : _core->getVertexBufferCache()->getPartIds(filePath))
 	{
 		_core->getVertexBufferCache()->deleteBuffer(filePath, partId);
 	}
 }
 
-void EngineInterface::misc_clearImageCache(const string& filePath)
+void EngineInterface::misc_clearImageCache(const string & filePath)
 {
 	_core->getImageLoader()->clearImageCache(filePath);
 
-	for(const auto& key : _core->getTextureBufferCache()->get2dFilePaths())
+	for(const auto & key : _core->getTextureBufferCache()->get2dFilePaths())
 	{
 		if(filePath == key)
 		{
@@ -82,7 +82,7 @@ void EngineInterface::misc_clearImageCache(const string& filePath)
 		}
 	}
 
-	for(const auto& key : _core->getTextureBufferCache()->get3dFilePaths())
+	for(const auto & key : _core->getTextureBufferCache()->get3dFilePaths())
 	{
 		if(find(key.begin(), key.end(), filePath) != key.end())
 		{
@@ -91,7 +91,7 @@ void EngineInterface::misc_clearImageCache(const string& filePath)
 	}
 }
 
-void EngineInterface::misc_clearAudioCache(const string& filePath)
+void EngineInterface::misc_clearAudioCache(const string & filePath)
 {
 	_core->getAudioLoader()->clearAudioCache(filePath);
 }
@@ -116,17 +116,17 @@ void EngineInterface::misc_clearAudiosCache()
 	_core->getAudioLoader()->clearAudiosCache();
 }
 
-void EngineInterface::misc_cacheMeshes(const vector<string>& filePaths, bool isCrucial)
+void EngineInterface::misc_cacheMeshes(const vector<string> & filePaths, bool isCrucial)
 {
 	_core->getMeshLoader()->cacheMeshes(filePaths, isCrucial);
 }
 
-void EngineInterface::misc_cacheImages(const vector<string>& filePaths, bool isCrucial)
+void EngineInterface::misc_cacheImages(const vector<string> & filePaths, bool isCrucial)
 {
 	_core->getImageLoader()->cacheImages(filePaths, isCrucial);
 }
 
-void EngineInterface::misc_cacheAudios(const vector<string>& filePaths, bool isCrucial)
+void EngineInterface::misc_cacheAudios(const vector<string> & filePaths, bool isCrucial)
 {
 	_core->getAudioLoader()->cacheAudios(filePaths, isCrucial);
 }
@@ -209,12 +209,12 @@ const bool EngineInterface::misc_isCursorInsideWindow() const
 	return false;
 }
 
-const unordered_map<string, float>& EngineInterface::misc_getUpdateDeltaTimes() const
+const unordered_map<string, float> & EngineInterface::misc_getUpdateDeltaTimes() const
 {
 	return _core->getUpdateDeltaTimes();
 }
 
-const unordered_map<string, float>& EngineInterface::misc_getRenderDeltaTimes() const
+const unordered_map<string, float> & EngineInterface::misc_getRenderDeltaTimes() const
 {
 	return _core->getRenderDeltaTimes();
 }

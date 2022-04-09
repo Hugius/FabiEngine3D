@@ -18,7 +18,7 @@ VertexBuffer::VertexBuffer(VertexBufferType type, const float data[], unsigned i
 		case VertexBufferType::POS:
 		{
 			_vertexCount = dataCount / 3;
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid *)(0 * sizeof(float)));
 			glEnableVertexAttribArray(0);
 			break;
 		}
@@ -27,8 +27,8 @@ VertexBuffer::VertexBuffer(VertexBufferType type, const float data[], unsigned i
 			_vertexCount = dataCount / 5;
 			glEnableVertexAttribArray(0);
 			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid *)(0 * sizeof(float)));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid *)(3 * sizeof(float)));
 			break;
 		}
 		case VertexBufferType::POS_UV_NOR:
@@ -37,9 +37,9 @@ VertexBuffer::VertexBuffer(VertexBufferType type, const float data[], unsigned i
 			glEnableVertexAttribArray(0);
 			glEnableVertexAttribArray(1);
 			glEnableVertexAttribArray(2);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid *)(0 * sizeof(float)));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid *)(3 * sizeof(float)));
+			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid *)(5 * sizeof(float)));
 			break;
 		}
 		case VertexBufferType::POS_UV_NOR_TAN:
@@ -49,10 +49,10 @@ VertexBuffer::VertexBuffer(VertexBufferType type, const float data[], unsigned i
 			glEnableVertexAttribArray(1);
 			glEnableVertexAttribArray(2);
 			glEnableVertexAttribArray(3);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
-			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(8 * sizeof(float)));
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid *)(0 * sizeof(float)));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid *)(3 * sizeof(float)));
+			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid *)(5 * sizeof(float)));
+			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid *)(8 * sizeof(float)));
 			break;
 		}
 	}
@@ -63,7 +63,7 @@ VertexBuffer::VertexBuffer(VertexBufferType type, const float data[], unsigned i
 
 VertexBuffer::VertexBuffer(float x, float y, float w, float h, bool isCentered)
 {
-	float* data = nullptr;
+	float * data = nullptr;
 
 	_bufferType = VertexBufferType::POS_UV;
 
@@ -104,8 +104,8 @@ VertexBuffer::VertexBuffer(float x, float y, float w, float h, bool isCentered)
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid*)(2 * sizeof(float)));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid *)(0 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid *)(2 * sizeof(float)));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);

@@ -15,15 +15,15 @@ using std::shared_ptr;
 class AudioLoader final
 {
 public:
-	void cacheAudio(const string& filePath, bool isCrucial);
-	void cacheAudios(const vector<string>& filePaths, bool isCrucial);
-	void clearAudioCache(const string& filePath);
+	void cacheAudio(const string & filePath, bool isCrucial);
+	void cacheAudios(const vector<string> & filePaths, bool isCrucial);
+	void clearAudioCache(const string & filePath);
 	void clearAudiosCache();
 
-	const shared_ptr<Audio> loadAudio(const string& filePath);
+	const shared_ptr<Audio> loadAudio(const string & filePath);
 
 private:
-	shared_ptr<Audio> _loadAudio(const string& filePath) const;
+	shared_ptr<Audio> _loadAudio(const string & filePath) const;
 
 	unordered_map<string, shared_ptr<Audio>> _cache = {};
 };

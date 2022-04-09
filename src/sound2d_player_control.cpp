@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-void Sound2dPlayer::startSound(const string& id, int playCount)
+void Sound2dPlayer::startSound(const string & id, int playCount)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
@@ -121,7 +121,7 @@ void Sound2dPlayer::startSound(const string& id, int playCount)
 	_startedSounds.at(id).push_back(newSound);
 }
 
-void Sound2dPlayer::pauseSound(const string& id, unsigned int index)
+void Sound2dPlayer::pauseSound(const string & id, unsigned int index)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
@@ -155,7 +155,7 @@ void Sound2dPlayer::pauseSound(const string& id, unsigned int index)
 	}
 }
 
-void Sound2dPlayer::resumeSound(const string& id, unsigned int index)
+void Sound2dPlayer::resumeSound(const string & id, unsigned int index)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
@@ -189,7 +189,7 @@ void Sound2dPlayer::resumeSound(const string& id, unsigned int index)
 	}
 }
 
-void Sound2dPlayer::stopSound(const string& id, unsigned int index)
+void Sound2dPlayer::stopSound(const string & id, unsigned int index)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
@@ -248,7 +248,7 @@ void Sound2dPlayer::stopSound(const string& id, unsigned int index)
 	_terminateSound(id, index);
 }
 
-void Sound2dPlayer::setSoundVolume(const string& id, unsigned int index, float value)
+void Sound2dPlayer::setSoundVolume(const string & id, unsigned int index, float value)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
@@ -262,7 +262,7 @@ void Sound2dPlayer::setSoundVolume(const string& id, unsigned int index, float v
 	_startedSounds.at(id)[index]->setVolume(value);
 }
 
-void Sound2dPlayer::setSoundLeftIntensity(const string& id, unsigned int index, float value)
+void Sound2dPlayer::setSoundLeftIntensity(const string & id, unsigned int index, float value)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
@@ -276,7 +276,7 @@ void Sound2dPlayer::setSoundLeftIntensity(const string& id, unsigned int index, 
 	_startedSounds.at(id)[index]->setLeftIntensity(value);
 }
 
-void Sound2dPlayer::setSoundRightIntensity(const string& id, unsigned int index, float value)
+void Sound2dPlayer::setSoundRightIntensity(const string & id, unsigned int index, float value)
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{

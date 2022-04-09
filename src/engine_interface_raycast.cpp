@@ -21,22 +21,22 @@ void EngineInterface::raycast_setAabbIntersectionEnabled(bool value)
 	_core->getRaycastIntersector()->setAabbIntersectionEnabled(value);
 }
 
-const string& EngineInterface::raycast_getClosestAabbId() const
+const string & EngineInterface::raycast_getClosestAabbId() const
 {
 	return _core->getRaycastIntersector()->getClosestAabbId();
 }
 
-const fvec3& EngineInterface::raycast_getCursorRayPosition() const
+const fvec3 & EngineInterface::raycast_getCursorRayPosition() const
 {
 	return _core->getRaycastCalculator()->getCursorRay()->getPosition();
 }
 
-const fvec3& EngineInterface::raycast_getPointOnTerrain() const
+const fvec3 & EngineInterface::raycast_getPointOnTerrain() const
 {
 	return _core->getRaycastIntersector()->getPointOnTerrain();
 }
 
-const fvec3& EngineInterface::raycast_getCursorRayDirection() const
+const fvec3 & EngineInterface::raycast_getCursorRayDirection() const
 {
 	return _core->getRaycastCalculator()->getCursorRay()->getDirection();
 }
@@ -56,7 +56,7 @@ const float EngineInterface::raycast_getDistanceToTerrain()
 	return _core->getRaycastIntersector()->getDistanceToTerrain();
 }
 
-const float EngineInterface::raycast_getDistanceToAabb(const string& id)
+const float EngineInterface::raycast_getDistanceToAabb(const string & id)
 {
 	return _core->getRaycastIntersector()->getDistanceToAabb(id);
 }

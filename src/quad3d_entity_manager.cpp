@@ -45,7 +45,7 @@ void Quad3dEntityManager::inject(shared_ptr<Camera> camera)
 	_camera = camera;
 }
 
-const shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& id) const
+const shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string & id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -57,12 +57,12 @@ const shared_ptr<Quad3dEntity> Quad3dEntityManager::getEntity(const string& id) 
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Quad3dEntity>>& Quad3dEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<Quad3dEntity>> & Quad3dEntityManager::getEntities() const
 {
 	return _entities;
 }
 
-void Quad3dEntityManager::createEntity(const string& id, bool isCentered)
+void Quad3dEntityManager::createEntity(const string & id, bool isCentered)
 {
 	if(isEntityExisting(id))
 	{
@@ -79,7 +79,7 @@ void Quad3dEntityManager::createEntity(const string& id, bool isCentered)
 
 void Quad3dEntityManager::update()
 {
-	for(const auto& [key, entity] : _entities)
+	for(const auto & [key, entity] : _entities)
 	{
 		entity->updateTarget();
 
@@ -110,7 +110,7 @@ void Quad3dEntityManager::update()
 	}
 }
 
-void Quad3dEntityManager::deleteEntity(const string& id)
+void Quad3dEntityManager::deleteEntity(const string & id)
 {
 	if(!isEntityExisting(id))
 	{
@@ -125,7 +125,7 @@ void Quad3dEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool Quad3dEntityManager::isEntityExisting(const string& id) const
+const bool Quad3dEntityManager::isEntityExisting(const string & id) const
 {
 	return (_entities.find(id) != _entities.end());
 }

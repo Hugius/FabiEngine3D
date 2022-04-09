@@ -5,10 +5,10 @@
 class Box final
 {
 public:
-	Box(const fvec3& position, float left, float right, float bottom, float top, float back, float front);
+	Box(const fvec3 & position, float left, float right, float bottom, float top, float back, float front);
 	Box(float left, float right, float bottom, float top, float back, float front);
 
-	const fvec3& getPosition() const;
+	const fvec3 & getPosition() const;
 
 	const float getLeft() const;
 	const float getRight() const;

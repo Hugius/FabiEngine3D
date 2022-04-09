@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
+const bool ScriptInterpreter::_executeFe3dServerGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
 	if(functionName == "fe3d:server_is_running")
 	{
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& result : _fe3d->server_getClientIps())
+			for(const auto & result : _fe3d->server_getClientIps())
 			{
 				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
@@ -74,7 +74,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& result : _fe3d->server_getClientUsernames())
+			for(const auto & result : _fe3d->server_getClientUsernames())
 			{
 				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& message : _fe3d->server_getPendingMessages())
+			for(const auto & message : _fe3d->server_getPendingMessages())
 			{
 				const auto result = ((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP");
 
@@ -96,7 +96,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& message : _fe3d->server_getPendingMessages())
+			for(const auto & message : _fe3d->server_getPendingMessages())
 			{
 				const auto result = message.getUsername();
 
@@ -108,7 +108,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& message : _fe3d->server_getPendingMessages())
+			for(const auto & message : _fe3d->server_getPendingMessages())
 			{
 				const auto result = message.getContent();
 

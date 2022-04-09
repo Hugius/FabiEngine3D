@@ -9,10 +9,10 @@ using std::string;
 class NetworkingClientMessage final
 {
 public:
-	NetworkingClientMessage(const string& username, const string& content, const NetworkProtocol protocol);
+	NetworkingClientMessage(const string & username, const string & content, const NetworkProtocol protocol);
 
-	const string& getUsername() const;
-	const string& getContent() const;
+	const string & getUsername() const;
+	const string & getContent() const;
 
 	const NetworkProtocol getProtocol() const;
 

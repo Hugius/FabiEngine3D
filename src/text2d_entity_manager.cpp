@@ -11,7 +11,7 @@ Text2dEntityManager::Text2dEntityManager()
 
 }
 
-const shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string& id) const
+const shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string & id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -23,12 +23,12 @@ const shared_ptr<Text2dEntity> Text2dEntityManager::getEntity(const string& id) 
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Text2dEntity>>& Text2dEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<Text2dEntity>> & Text2dEntityManager::getEntities() const
 {
 	return _entities;
 }
 
-void Text2dEntityManager::createEntity(const string& id, const string& fontMapPath, bool isCentered)
+void Text2dEntityManager::createEntity(const string & id, const string & fontMapPath, bool isCentered)
 {
 	if(isEntityExisting(id))
 	{
@@ -65,7 +65,7 @@ void Text2dEntityManager::createEntity(const string& id, const string& fontMapPa
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }
 
-void Text2dEntityManager::deleteEntity(const string& id)
+void Text2dEntityManager::deleteEntity(const string & id)
 {
 	if(!isEntityExisting(id))
 	{
@@ -80,7 +80,7 @@ void Text2dEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool Text2dEntityManager::isEntityExisting(const string& id) const
+const bool Text2dEntityManager::isEntityExisting(const string & id) const
 {
 	return (_entities.find(id) != _entities.end());
 }
@@ -97,7 +97,7 @@ void Text2dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 
 void Text2dEntityManager::update()
 {
-	for(const auto& [key, entity] : _entities)
+	for(const auto & [key, entity] : _entities)
 	{
 		entity->updateTarget();
 

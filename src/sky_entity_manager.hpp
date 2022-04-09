@@ -14,17 +14,17 @@ public:
 
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void update();
-	void createEntity(const string& id);
-	void deleteEntity(const string& id);
+	void createEntity(const string & id);
+	void deleteEntity(const string & id);
 	void deleteEntities();
-	void selectEntity(const string& id);
+	void selectEntity(const string & id);
 
-	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities() const;
+	const unordered_map<string, shared_ptr<SkyEntity>> & getEntities() const;
 
-	const shared_ptr<SkyEntity> getEntity(const string& id) const;
+	const shared_ptr<SkyEntity> getEntity(const string & id) const;
 	const shared_ptr<SkyEntity> getSelectedEntity() const;
 
-	const bool isEntityExisting(const string& id) const;
+	const bool isEntityExisting(const string & id) const;
 	const bool isEntitiesExisting() const;
 
 private:

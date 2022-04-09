@@ -55,7 +55,7 @@ void Camera::reset()
 	_isCursorBeingCentered = false;
 }
 
-void Camera::update(const ivec2& lastCursorPosition)
+void Camera::update(const ivec2 & lastCursorPosition)
 {
 	const auto currentCursorPosition = _renderWindow->getCursorPosition();
 	const auto middle = Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));

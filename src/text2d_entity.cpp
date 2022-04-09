@@ -65,7 +65,7 @@ void Text2dEntity::updateCharacterEntities()
 		reverse(_characterEntities.begin(), _characterEntities.end());
 	}
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
 
@@ -90,14 +90,14 @@ void Text2dEntity::updateCharacterEntities()
 	}
 }
 
-void Text2dEntity::setContent(const string& value)
+void Text2dEntity::setContent(const string & value)
 {
 	if(value != _content)
 	{
 		_content = value;
 		_characterEntities.clear();
 
-		for(const auto& character : _content)
+		for(const auto & character : _content)
 		{
 			if(_fontMapIndices.find(character) == _fontMapIndices.end())
 			{
@@ -132,21 +132,21 @@ void Text2dEntity::setContent(const string& value)
 	}
 }
 
-void Text2dEntity::setMinPosition(const fvec2& value)
+void Text2dEntity::setMinPosition(const fvec2 & value)
 {
 	_minPosition = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setMinPosition(_minPosition);
 	}
 }
 
-void Text2dEntity::setMaxPosition(const fvec2& value)
+void Text2dEntity::setMaxPosition(const fvec2 & value)
 {
 	_maxPosition = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setMaxPosition(_maxPosition);
 	}
@@ -156,7 +156,7 @@ void Text2dEntity::setDepth(unsigned int value)
 {
 	_depth = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setDepth(_depth);
 	}
@@ -166,7 +166,7 @@ void Text2dEntity::setWireframed(bool value)
 {
 	_isWireframed = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setWireframed(_isWireframed);
 	}
@@ -176,7 +176,7 @@ void Text2dEntity::setCentered(bool value)
 {
 	_isCentered = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setCentered(_isCentered);
 	}
@@ -186,17 +186,17 @@ void Text2dEntity::setVisible(bool value)
 {
 	_isVisible = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setVisible(_isVisible);
 	}
 }
 
-void Text2dEntity::setFontMapPath(const string& value)
+void Text2dEntity::setFontMapPath(const string & value)
 {
 	_fontMapPath = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setDiffuseMapPath(_fontMapPath);
 	}
@@ -206,7 +206,7 @@ void Text2dEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
 	_vertexBuffer = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setVertexBuffer(_vertexBuffer);
 	}
@@ -216,17 +216,17 @@ void Text2dEntity::setFontMap(shared_ptr<TextureBuffer> value)
 {
 	_fontTextureBuffer = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setDiffuseMap(_fontTextureBuffer);
 	}
 }
 
-void Text2dEntity::setColor(const fvec3& value)
+void Text2dEntity::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setColor(_color);
 	}
@@ -236,7 +236,7 @@ void Text2dEntity::setHorizontallyFlipped(bool value)
 {
 	_isHorizontallyFlipped = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setHorizontallyFlipped(_isHorizontallyFlipped);
 	}
@@ -246,7 +246,7 @@ void Text2dEntity::setVerticallyFlipped(bool value)
 {
 	_isVerticallyFlipped = value;
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setVerticallyFlipped(_isVerticallyFlipped);
 	}
@@ -256,23 +256,23 @@ void Text2dEntity::setOpacity(float value)
 {
 	_opacity = clamp(value, 0.0f, 1.0f);
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setOpacity(_opacity);
 	}
 }
 
-void Text2dEntity::setWireframeColor(const fvec3& value)
+void Text2dEntity::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 
-	for(const auto& character : _characterEntities)
+	for(const auto & character : _characterEntities)
 	{
 		character->setWireframeColor(_wireframeColor);
 	}
 }
 
-void Text2dEntity::setPosition(const fvec2& value)
+void Text2dEntity::setPosition(const fvec2 & value)
 {
 	_position = value;
 	_positionTarget = value;
@@ -284,13 +284,13 @@ void Text2dEntity::setRotation(float value)
 	_rotationTarget = Mathematics::limitAngle(value);
 }
 
-void Text2dEntity::setSize(const fvec2& value)
+void Text2dEntity::setSize(const fvec2 & value)
 {
 	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Text2dEntity::move(const fvec2& value)
+void Text2dEntity::move(const fvec2 & value)
 {
 	_position += value;
 	_positionTarget += value;
@@ -304,7 +304,7 @@ void Text2dEntity::rotate(float value)
 	_rotationTarget = Mathematics::limitAngle(_rotationTarget);
 }
 
-void Text2dEntity::scale(const fvec2& value)
+void Text2dEntity::scale(const fvec2 & value)
 {
 	_size += value;
 	_sizeTarget += value;
@@ -312,7 +312,7 @@ void Text2dEntity::scale(const fvec2& value)
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void Text2dEntity::moveTo(const fvec2& target, float speed)
+void Text2dEntity::moveTo(const fvec2 & target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
@@ -324,23 +324,23 @@ void Text2dEntity::rotateTo(float target, float speed)
 	_rotationTargetSpeed = speed;
 }
 
-void Text2dEntity::scaleTo(const fvec2& target, float speed)
+void Text2dEntity::scaleTo(const fvec2 & target, float speed)
 {
 	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
 }
 
-const string& Text2dEntity::getContent() const
+const string & Text2dEntity::getContent() const
 {
 	return _content;
 }
 
-const string& Text2dEntity::getFontMapPath() const
+const string & Text2dEntity::getFontMapPath() const
 {
 	return _fontMapPath;
 }
 
-const vector<shared_ptr<Quad2dEntity>>& Text2dEntity::getCharacterEntities() const
+const vector<shared_ptr<Quad2dEntity>> & Text2dEntity::getCharacterEntities() const
 {
 	return _characterEntities;
 }
@@ -355,12 +355,12 @@ const shared_ptr<TextureBuffer> Text2dEntity::getFontTextureBuffer() const
 	return _fontTextureBuffer;
 }
 
-const fvec3& Text2dEntity::getWireframeColor() const
+const fvec3 & Text2dEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const fvec3& Text2dEntity::getColor() const
+const fvec3 & Text2dEntity::getColor() const
 {
 	return _color;
 }
@@ -390,7 +390,7 @@ const bool Text2dEntity::isVerticallyFlipped() const
 	return _isVerticallyFlipped;
 }
 
-const fvec2& Text2dEntity::getPosition() const
+const fvec2 & Text2dEntity::getPosition() const
 {
 	return _position;
 }
@@ -400,17 +400,17 @@ const float Text2dEntity::getRotation() const
 	return _rotation;
 }
 
-const fvec2& Text2dEntity::getSize() const
+const fvec2 & Text2dEntity::getSize() const
 {
 	return _size;
 }
 
-const fvec2& Text2dEntity::getMinPosition() const
+const fvec2 & Text2dEntity::getMinPosition() const
 {
 	return _minPosition;
 }
 
-const fvec2& Text2dEntity::getMaxPosition() const
+const fvec2 & Text2dEntity::getMaxPosition() const
 {
 	return _maxPosition;
 }

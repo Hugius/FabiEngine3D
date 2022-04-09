@@ -3,7 +3,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
+const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
 	if(functionName == "fe3d:server_start")
 	{

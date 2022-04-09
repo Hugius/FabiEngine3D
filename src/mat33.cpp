@@ -28,7 +28,7 @@ mat33::mat33()
 	this->m[2][2] = 1.0f;
 }
 
-mat33::mat33(const mat22& other)
+mat33::mat33(const mat22 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -41,7 +41,7 @@ mat33::mat33(const mat22& other)
 	this->m[2][2] = 1.0f;
 }
 
-mat33::mat33(const mat33& other)
+mat33::mat33(const mat33 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -54,7 +54,7 @@ mat33::mat33(const mat33& other)
 	this->m[2][2] = other.m[2][2];
 }
 
-mat33::mat33(const mat44& other)
+mat33::mat33(const mat44 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -79,7 +79,7 @@ mat33::mat33(const float value)
 	this->m[2][2] = value;
 }
 
-const mat33 mat33::operator+(const mat33& other) const
+const mat33 mat33::operator+(const mat33 & other) const
 {
 	mat33 result;
 
@@ -91,7 +91,7 @@ const mat33 mat33::operator+(const mat33& other) const
 	return result;
 }
 
-const mat33 mat33::operator-(const mat33& other) const
+const mat33 mat33::operator-(const mat33 & other) const
 {
 	mat33 result;
 
@@ -103,7 +103,7 @@ const mat33 mat33::operator-(const mat33& other) const
 	return result;
 }
 
-const mat33 mat33::operator*(const mat33& other) const
+const mat33 mat33::operator*(const mat33 & other) const
 {
 	mat33 result(0.0f);
 
@@ -121,7 +121,7 @@ const mat33 mat33::operator*(const mat33& other) const
 	return result;
 }
 
-const fvec3 mat33::operator*(const fvec3& other) const
+const fvec3 mat33::operator*(const fvec3 & other) const
 {
 	fvec3 result;
 

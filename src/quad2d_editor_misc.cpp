@@ -2,14 +2,14 @@
 
 #include <algorithm>
 
-const vector<string>& Quad2dEditor::getLoadedEntityIds() const
+const vector<string> & Quad2dEditor::getLoadedEntityIds() const
 {
 	return _loadedEntityIds;
 }
 
 void Quad2dEditor::deleteLoadedEntities()
 {
-	for(const auto& id : _loadedEntityIds)
+	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->quad2d_delete(id);
 	}

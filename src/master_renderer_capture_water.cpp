@@ -21,7 +21,7 @@ void MasterRenderer::captureWaterReflections()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	vector<string> savedModelEntityIds;
-	for(const auto& [key, entity] : _modelEntityManager->getEntities())
+	for(const auto & [key, entity] : _modelEntityManager->getEntities())
 	{
 		if(!entity->isVisible())
 		{
@@ -35,7 +35,7 @@ void MasterRenderer::captureWaterReflections()
 			continue;
 		}
 
-		for(const auto& partId : entity->getPartIds())
+		for(const auto & partId : entity->getPartIds())
 		{
 			if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR))
 			{
@@ -47,7 +47,7 @@ void MasterRenderer::captureWaterReflections()
 	}
 
 	vector<string> savedQuad3dEntityIds;
-	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
+	for(const auto & [key, entity] : _quad3dEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -82,9 +82,9 @@ void MasterRenderer::captureWaterReflections()
 	_renderTransparentQuad3dEntities();
 	_renderTransparentText3dEntities();
 
-	for(const auto& savedId : savedModelEntityIds)
+	for(const auto & savedId : savedModelEntityIds)
 	{
-		for(const auto& [key, entity] : _modelEntityManager->getEntities())
+		for(const auto & [key, entity] : _modelEntityManager->getEntities())
 		{
 			if(entity->getId() == savedId)
 			{
@@ -93,9 +93,9 @@ void MasterRenderer::captureWaterReflections()
 		}
 	}
 
-	for(const auto& savedId : savedQuad3dEntityIds)
+	for(const auto & savedId : savedQuad3dEntityIds)
 	{
-		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [key, entity] : _quad3dEntityManager->getEntities())
 		{
 			if(entity->getId() == savedId)
 			{

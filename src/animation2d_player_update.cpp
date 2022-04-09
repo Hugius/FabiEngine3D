@@ -15,7 +15,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 {
 	vector<string> quad3dAnimationsToStop;
 
-	for(auto& [key, startedAnimation] : _startedQuad3dAnimations)
+	for(auto & [key, startedAnimation] : _startedQuad3dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
 		const auto animation = _animation2dManager->getAnimation(splitKey.first);
@@ -76,7 +76,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 		quad->setUvOffset(uvOffset);
 	}
 
-	for(const auto& key : quad3dAnimationsToStop)
+	for(const auto & key : quad3dAnimationsToStop)
 	{
 		_startedQuad3dAnimations.erase(key);
 	}
@@ -86,7 +86,7 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 {
 	vector<string> quad2dAnimationsToStop;
 
-	for(auto& [key, startedAnimation] : _startedQuad2dAnimations)
+	for(auto & [key, startedAnimation] : _startedQuad2dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
 		const auto animation = _animation2dManager->getAnimation(splitKey.first);
@@ -141,7 +141,7 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 		quad->setUvOffset(uvOffset);
 	}
 
-	for(const auto& key : quad2dAnimationsToStop)
+	for(const auto & key : quad2dAnimationsToStop)
 	{
 		_startedQuad2dAnimations.erase(key);
 	}

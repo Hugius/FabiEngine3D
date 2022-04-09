@@ -11,7 +11,7 @@ class Mesh final
 public:
 	void addPart(shared_ptr<MeshPart> value);
 
-	const vector<shared_ptr<MeshPart>>& getParts() const;
+	const vector<shared_ptr<MeshPart>> & getParts() const;
 
 private:
 	vector<shared_ptr<MeshPart>> _parts = {};

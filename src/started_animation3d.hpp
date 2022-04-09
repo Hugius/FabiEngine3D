@@ -11,23 +11,23 @@ using std::unordered_map;
 class StartedAnimation3d final
 {
 public:
-	void setPartIds(const vector<string>& value);
+	void setPartIds(const vector<string> & value);
 	void setPlayCount(int value);
 	void setPaused(bool value);
 	void setAutopaused(bool value);
 	void setSpeedMultiplier(float value);
 	void setFrameIndex(unsigned int value);
-	void setTotalMovement(const string& partId, const fvec3& value);
-	void setTotalRotation(const string& partId, const fvec3& value);
-	void setTotalScaling(const string& partId, const fvec3& value);
-	void setTotalSpeed(const string& partId, const fvec3& value);
+	void setTotalMovement(const string & partId, const fvec3 & value);
+	void setTotalRotation(const string & partId, const fvec3 & value);
+	void setTotalScaling(const string & partId, const fvec3 & value);
+	void setTotalSpeed(const string & partId, const fvec3 & value);
 
-	const vector<string>& getPartIds() const;
+	const vector<string> & getPartIds() const;
 
-	const fvec3& getTotalMovement(const string& partId) const;
-	const fvec3& getTotalRotation(const string& partId) const;
-	const fvec3& getTotalScaling(const string& partId) const;
-	const fvec3& getTotalSpeed(const string& partId) const;
+	const fvec3 & getTotalMovement(const string & partId) const;
+	const fvec3 & getTotalRotation(const string & partId) const;
+	const fvec3 & getTotalScaling(const string & partId) const;
+	const fvec3 & getTotalSpeed(const string & partId) const;
 
 	const float getSpeedMultiplier() const;
 

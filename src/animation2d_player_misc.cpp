@@ -20,7 +20,7 @@ const vector<pair<string, string>> Animation2dPlayer::getStartedQuad3dAnimationI
 {
 	vector<pair<string, string>> ids;
 
-	for(const auto& [key, animation] : _startedQuad3dAnimations)
+	for(const auto & [key, animation] : _startedQuad3dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
 
@@ -34,7 +34,7 @@ const vector<pair<string, string>> Animation2dPlayer::getStartedQuad2dAnimationI
 {
 	vector<pair<string, string>> ids;
 
-	for(const auto& [key, animation] : _startedQuad2dAnimations)
+	for(const auto & [key, animation] : _startedQuad2dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
 
@@ -44,7 +44,7 @@ const vector<pair<string, string>> Animation2dPlayer::getStartedQuad2dAnimationI
 	return ids;
 }
 
-const int Animation2dPlayer::getQuad3dAnimationPlayCount(const string& animationId, const string& quadId) const
+const int Animation2dPlayer::getQuad3dAnimationPlayCount(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -64,7 +64,7 @@ const int Animation2dPlayer::getQuad3dAnimationPlayCount(const string& animation
 	return _startedQuad3dAnimations.at(key)->getPlayCount();
 }
 
-const int Animation2dPlayer::getQuad2dAnimationPlayCount(const string& animationId, const string& quadId) const
+const int Animation2dPlayer::getQuad2dAnimationPlayCount(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -84,7 +84,7 @@ const int Animation2dPlayer::getQuad2dAnimationPlayCount(const string& animation
 	return _startedQuad2dAnimations.at(key)->getPlayCount();
 }
 
-const unsigned int Animation2dPlayer::getQuad3dAnimationRowIndex(const string& animationId, const string& quadId) const
+const unsigned int Animation2dPlayer::getQuad3dAnimationRowIndex(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -104,7 +104,7 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationRowIndex(const string& a
 	return _startedQuad3dAnimations.at(key)->getRowIndex();
 }
 
-const unsigned int Animation2dPlayer::getQuad2dAnimationRowIndex(const string& animationId, const string& quadId) const
+const unsigned int Animation2dPlayer::getQuad2dAnimationRowIndex(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -124,7 +124,7 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationRowIndex(const string& a
 	return _startedQuad2dAnimations.at(key)->getRowIndex();
 }
 
-const unsigned int Animation2dPlayer::getQuad3dAnimationColumnIndex(const string& animationId, const string& quadId) const
+const unsigned int Animation2dPlayer::getQuad3dAnimationColumnIndex(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -144,7 +144,7 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationColumnIndex(const string
 	return _startedQuad3dAnimations.at(key)->getColumnIndex();
 }
 
-const unsigned int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string& animationId, const string& quadId) const
+const unsigned int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -164,7 +164,7 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string
 	return _startedQuad2dAnimations.at(key)->getColumnIndex();
 }
 
-const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalMultiplier(const string& animationId, const string& quadId) const
+const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -184,7 +184,7 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalMultiplier(const
 	return _startedQuad2dAnimations.at(key)->getIntervalMultiplier();
 }
 
-const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalMultiplier(const string& animationId, const string& quadId) const
+const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -204,7 +204,7 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalMultiplier(const
 	return _startedQuad2dAnimations.at(key)->getIntervalMultiplier();
 }
 
-const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const string& animationId, const string& quadId) const
+const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -224,7 +224,7 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const st
 	return _startedQuad2dAnimations.at(key)->getIntervalDivider();
 }
 
-const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalDivider(const string& animationId, const string& quadId) const
+const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalDivider(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -244,7 +244,7 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalDivider(const st
 	return _startedQuad2dAnimations.at(key)->getIntervalDivider();
 }
 
-const bool Animation2dPlayer::isQuad3dAnimationStarted(const string& animationId, const string& quadId) const
+const bool Animation2dPlayer::isQuad3dAnimationStarted(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -260,7 +260,7 @@ const bool Animation2dPlayer::isQuad3dAnimationStarted(const string& animationId
 	return (_startedQuad3dAnimations.find(key) != _startedQuad3dAnimations.end());
 }
 
-const bool Animation2dPlayer::isQuad3dAnimationPaused(const string& animationId, const string& quadId) const
+const bool Animation2dPlayer::isQuad3dAnimationPaused(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -280,7 +280,7 @@ const bool Animation2dPlayer::isQuad3dAnimationPaused(const string& animationId,
 	return _startedQuad3dAnimations.at(key)->isPaused();
 }
 
-const bool Animation2dPlayer::isQuad3dAnimationAutopaused(const string& animationId, const string& quadId) const
+const bool Animation2dPlayer::isQuad3dAnimationAutopaused(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -300,7 +300,7 @@ const bool Animation2dPlayer::isQuad3dAnimationAutopaused(const string& animatio
 	return _startedQuad3dAnimations.at(key)->isAutopaused();
 }
 
-const bool Animation2dPlayer::isQuad2dAnimationStarted(const string& animationId, const string& quadId) const
+const bool Animation2dPlayer::isQuad2dAnimationStarted(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -316,7 +316,7 @@ const bool Animation2dPlayer::isQuad2dAnimationStarted(const string& animationId
 	return (_startedQuad2dAnimations.find(key) != _startedQuad2dAnimations.end());
 }
 
-const bool Animation2dPlayer::isQuad2dAnimationPaused(const string& animationId, const string& quadId) const
+const bool Animation2dPlayer::isQuad2dAnimationPaused(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -336,7 +336,7 @@ const bool Animation2dPlayer::isQuad2dAnimationPaused(const string& animationId,
 	return _startedQuad2dAnimations.at(key)->isPaused();
 }
 
-const bool Animation2dPlayer::isQuad2dAnimationAutopaused(const string& animationId, const string& quadId) const
+const bool Animation2dPlayer::isQuad2dAnimationAutopaused(const string & animationId, const string & quadId) const
 {
 	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
 

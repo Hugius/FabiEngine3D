@@ -15,15 +15,15 @@ using std::shared_ptr;
 class WaveBufferCache final
 {
 public:
-	void storeBuffer(const string& filePath, shared_ptr<WaveBuffer> buffer);
-	void deleteBuffer(const string& filePath);
+	void storeBuffer(const string & filePath, shared_ptr<WaveBuffer> buffer);
+	void deleteBuffer(const string & filePath);
 	void clearBuffers();
 
-	const unordered_map<string, shared_ptr<WaveBuffer>>& getBuffers() const;
+	const unordered_map<string, shared_ptr<WaveBuffer>> & getBuffers() const;
 
 	const vector<string> getFilePaths() const;
 
-	const shared_ptr<WaveBuffer> getBuffer(const string& filePath) const;
+	const shared_ptr<WaveBuffer> getBuffer(const string & filePath) const;
 
 private:
 	unordered_map<string, shared_ptr<WaveBuffer>> _buffers = {};

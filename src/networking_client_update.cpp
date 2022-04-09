@@ -86,7 +86,7 @@ void NetworkingClient::update()
 
 		if(messageStatusCode > 0)
 		{
-			for(const auto& character : messageContent)
+			for(const auto & character : messageContent)
 			{
 				if(character == ';')
 				{

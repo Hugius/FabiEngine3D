@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-void Animation3dPlayer::startModelAnimation(const string& animationId, const string& modelId, int playCount)
+void Animation3dPlayer::startModelAnimation(const string & animationId, const string & modelId, int playCount)
 {
 	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
@@ -32,7 +32,7 @@ void Animation3dPlayer::startModelAnimation(const string& animationId, const str
 	_startedModelAnimations.insert({key, newAnimation});
 }
 
-void Animation3dPlayer::pauseModelAnimation(const string& animationId, const string& modelId)
+void Animation3dPlayer::pauseModelAnimation(const string & animationId, const string & modelId)
 {
 	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
@@ -57,7 +57,7 @@ void Animation3dPlayer::pauseModelAnimation(const string& animationId, const str
 	_startedModelAnimations.at(key)->setPaused(true);
 }
 
-void Animation3dPlayer::autopauseModelAnimation(const string& animationId, const string& modelId)
+void Animation3dPlayer::autopauseModelAnimation(const string & animationId, const string & modelId)
 {
 	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
@@ -82,7 +82,7 @@ void Animation3dPlayer::autopauseModelAnimation(const string& animationId, const
 	_startedModelAnimations.at(key)->setAutopaused(true);
 }
 
-void Animation3dPlayer::resumeModelAnimation(const string& animationId, const string& modelId)
+void Animation3dPlayer::resumeModelAnimation(const string & animationId, const string & modelId)
 {
 	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
@@ -106,7 +106,7 @@ void Animation3dPlayer::resumeModelAnimation(const string& animationId, const st
 	_startedModelAnimations.at(key)->setPaused(false);
 }
 
-void Animation3dPlayer::stopModelAnimation(const string& animationId, const string& modelId)
+void Animation3dPlayer::stopModelAnimation(const string & animationId, const string & modelId)
 {
 	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
@@ -126,7 +126,7 @@ void Animation3dPlayer::stopModelAnimation(const string& animationId, const stri
 	_startedModelAnimations.erase(key);
 }
 
-void Animation3dPlayer::setModelAnimationSpeedMultiplier(const string& animationId, const string& modelId, float value)
+void Animation3dPlayer::setModelAnimationSpeedMultiplier(const string & animationId, const string & modelId, float value)
 {
 	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
@@ -146,7 +146,7 @@ void Animation3dPlayer::setModelAnimationSpeedMultiplier(const string& animation
 	_startedModelAnimations.at(key)->setSpeedMultiplier(value);
 }
 
-void Animation3dPlayer::setModelAnimationFrameIndex(const string& animationId, const string& modelId, unsigned int value)
+void Animation3dPlayer::setModelAnimationFrameIndex(const string & animationId, const string & modelId, unsigned int value)
 {
 	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
 

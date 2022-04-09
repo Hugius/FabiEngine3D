@@ -10,17 +10,17 @@ public:
 	using BaseEntity::BaseEntity;
 
 	void updateTarget();
-	void setPosition(const fvec3& value);
-	void move(const fvec3& value);
-	void moveTo(const fvec3& target, float speed);
-	void setRadius(const fvec3& value);
-	void setColor(const fvec3& value);
+	void setPosition(const fvec3 & value);
+	void move(const fvec3 & value);
+	void moveTo(const fvec3 & target, float speed);
+	void setRadius(const fvec3 & value);
+	void setColor(const fvec3 & value);
 	void setIntensity(float value);
 	void setShape(PointlightShape value);
 
-	const fvec3& getPosition() const;
-	const fvec3& getColor() const;
-	const fvec3& getRadius() const;
+	const fvec3 & getPosition() const;
+	const fvec3 & getColor() const;
+	const fvec3 & getRadius() const;
 
 	const float getIntensity() const;
 

@@ -170,7 +170,7 @@ const mat44 Mathematics::createOrthographicProjectionMatrix(float leftX, float r
 	return result;
 };
 
-const mat44 Mathematics::createViewMatrix(const fvec3& eye, const fvec3& center, const fvec3& up)
+const mat44 Mathematics::createViewMatrix(const fvec3 & eye, const fvec3 & center, const fvec3 & up)
 {
 	fvec3 finalFront = normalize(center - eye);
 	fvec3 finalRight = normalize(calculateCrossProduct(finalFront, up));

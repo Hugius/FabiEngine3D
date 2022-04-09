@@ -1,7 +1,7 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::clock_create(const string& id)
+void EngineInterface::clock_create(const string & id)
 {
 	if(clock_isIdReserved(id))
 	{
@@ -11,7 +11,7 @@ void EngineInterface::clock_create(const string& id)
 	_core->getTimer()->createClock(id);
 }
 
-void EngineInterface::clock_delete(const string& id)
+void EngineInterface::clock_delete(const string & id)
 {
 	if(clock_isIdReserved(id))
 	{
@@ -21,7 +21,7 @@ void EngineInterface::clock_delete(const string& id)
 	_core->getTimer()->deleteClock(id);
 }
 
-void EngineInterface::clock_start(const string& id)
+void EngineInterface::clock_start(const string & id)
 {
 	if(clock_isIdReserved(id))
 	{
@@ -31,7 +31,7 @@ void EngineInterface::clock_start(const string& id)
 	_core->getTimer()->startClock(id);
 }
 
-void EngineInterface::clock_pause(const string& id)
+void EngineInterface::clock_pause(const string & id)
 {
 	if(clock_isIdReserved(id))
 	{
@@ -41,7 +41,7 @@ void EngineInterface::clock_pause(const string& id)
 	_core->getTimer()->pauseClock(id);
 }
 
-void EngineInterface::clock_resume(const string& id)
+void EngineInterface::clock_resume(const string & id)
 {
 	if(clock_isIdReserved(id))
 	{
@@ -51,7 +51,7 @@ void EngineInterface::clock_resume(const string& id)
 	_core->getTimer()->resumeClock(id);
 }
 
-void EngineInterface::clock_stop(const string& id)
+void EngineInterface::clock_stop(const string & id)
 {
 	if(clock_isIdReserved(id))
 	{
@@ -65,7 +65,7 @@ const vector<string> EngineInterface::clock_getIds() const
 {
 	vector<string> result;
 
-	for(const auto& clockId : _core->getTimer()->getClockIds())
+	for(const auto & clockId : _core->getTimer()->getClockIds())
 	{
 		if(!clock_isIdReserved(clockId))
 		{
@@ -76,7 +76,7 @@ const vector<string> EngineInterface::clock_getIds() const
 	return result;
 }
 
-const float EngineInterface::clock_getDeltaTime(const string& id) const
+const float EngineInterface::clock_getDeltaTime(const string & id) const
 {
 	if(clock_isIdReserved(id))
 	{
@@ -86,7 +86,7 @@ const float EngineInterface::clock_getDeltaTime(const string& id) const
 	return _core->getTimer()->getClockDeltaTime(id);
 }
 
-const bool EngineInterface::clock_isExisting(const string& id) const
+const bool EngineInterface::clock_isExisting(const string & id) const
 {
 	if(clock_isIdReserved(id))
 	{
@@ -96,7 +96,7 @@ const bool EngineInterface::clock_isExisting(const string& id) const
 	return _core->getTimer()->isClockExisting(id);
 }
 
-const bool EngineInterface::clock_isStarted(const string& id) const
+const bool EngineInterface::clock_isStarted(const string & id) const
 {
 	if(clock_isIdReserved(id))
 	{
@@ -106,7 +106,7 @@ const bool EngineInterface::clock_isStarted(const string& id) const
 	return _core->getTimer()->isClockStarted(id);
 }
 
-const bool EngineInterface::clock_isPaused(const string& id) const
+const bool EngineInterface::clock_isPaused(const string & id) const
 {
 	if(clock_isIdReserved(id))
 	{
@@ -116,7 +116,7 @@ const bool EngineInterface::clock_isPaused(const string& id) const
 	return _core->getTimer()->isClockPaused(id);
 }
 
-const bool EngineInterface::clock_isIdReserved(const string& id) const
+const bool EngineInterface::clock_isIdReserved(const string & id) const
 {
 	return
 		(

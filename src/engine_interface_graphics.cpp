@@ -89,7 +89,7 @@ void EngineInterface::graphics_setAnisotropicFilteringQuality(unsigned int value
 
 	_core->getRenderStorage()->setAnisotropicFilteringQuality(value);
 
-	for(const auto& [key, texture] : _core->getTextureBufferCache()->get2dBuffers())
+	for(const auto & [key, texture] : _core->getTextureBufferCache()->get2dBuffers())
 	{
 		if(texture->isAnisotropicallyFiltered())
 		{
@@ -97,7 +97,7 @@ void EngineInterface::graphics_setAnisotropicFilteringQuality(unsigned int value
 		}
 	}
 
-	for(const auto& [key, texture] : _core->getTextureBufferCache()->get3dBuffers())
+	for(const auto & [key, texture] : _core->getTextureBufferCache()->get3dBuffers())
 	{
 		if(texture->isAnisotropicallyFiltered())
 		{
@@ -135,7 +135,7 @@ void EngineInterface::graphics_setShadowQuality(unsigned int value)
 	_core->getMasterRenderer()->reloadShadowQuality();
 }
 
-void EngineInterface::graphics_setAmbientLightingColor(const fvec3& value)
+void EngineInterface::graphics_setAmbientLightingColor(const fvec3 & value)
 {
 	_core->getRenderStorage()->setAmbientLightingColor(value);
 }
@@ -145,12 +145,12 @@ void EngineInterface::graphics_setAmbientLightingIntensity(float value)
 	_core->getRenderStorage()->setAmbientLightingIntensity(value);
 }
 
-void EngineInterface::graphics_setDirectionalLightingPosition(const fvec3& value)
+void EngineInterface::graphics_setDirectionalLightingPosition(const fvec3 & value)
 {
 	_core->getRenderStorage()->setDirectionalLightingPosition(value);
 }
 
-void EngineInterface::graphics_setDirectionalLightingColor(const fvec3& value)
+void EngineInterface::graphics_setDirectionalLightingColor(const fvec3 & value)
 {
 	_core->getRenderStorage()->setDirectionalLightingColor(value);
 }
@@ -160,7 +160,7 @@ void EngineInterface::graphics_setDirectionalLightingIntensity(float value)
 	_core->getRenderStorage()->setDirectionalLightingIntensity(value);
 }
 
-void EngineInterface::graphics_setFogColor(const fvec3& value)
+void EngineInterface::graphics_setFogColor(const fvec3 & value)
 {
 	_core->getRenderStorage()->setFogColor(value);
 }
@@ -185,12 +185,12 @@ void EngineInterface::graphics_setShadowCircleEnabled(bool value)
 	_core->getRenderStorage()->setShadowCircleEnabled(value);
 }
 
-void EngineInterface::graphics_setShadowPositionOffset(const fvec3& value)
+void EngineInterface::graphics_setShadowPositionOffset(const fvec3 & value)
 {
 	_core->getRenderStorage()->setShadowPositionOffset(value);
 }
 
-void EngineInterface::graphics_setShadowLookatOffset(const fvec3& value)
+void EngineInterface::graphics_setShadowLookatOffset(const fvec3 & value)
 {
 	_core->getRenderStorage()->setShadowLookatOffset(value);
 }
@@ -260,7 +260,7 @@ void EngineInterface::graphics_setMotionBlurIntensity(float value)
 	_core->getRenderStorage()->setMotionBlurIntensity(value);
 }
 
-void EngineInterface::graphics_setLensFlareMap(const string& value)
+void EngineInterface::graphics_setLensFlareMap(const string & value)
 {
 	if(value.empty())
 	{
@@ -378,7 +378,7 @@ const unsigned int EngineInterface::graphics_getPlanarRefractionQuality() const
 	return _core->getRenderStorage()->getPlanarRefractionQuality();
 }
 
-const fvec3& EngineInterface::graphics_getAmbientLightingColor() const
+const fvec3 & EngineInterface::graphics_getAmbientLightingColor() const
 {
 	return _core->getRenderStorage()->getAmbientLightingColor();
 }
@@ -393,12 +393,12 @@ const float EngineInterface::graphics_getDirectionalLightingIntensity() const
 	return _core->getRenderStorage()->getDirectionalLightingIntensity();
 }
 
-const fvec3& EngineInterface::graphics_getDirectionalLightingPosition() const
+const fvec3 & EngineInterface::graphics_getDirectionalLightingPosition() const
 {
 	return _core->getRenderStorage()->getDirectionalLightingPosition();
 }
 
-const fvec3& EngineInterface::graphics_getDirectionalLightingColor() const
+const fvec3 & EngineInterface::graphics_getDirectionalLightingColor() const
 {
 	return _core->getRenderStorage()->getDirectionalLightingColor();
 }
@@ -418,7 +418,7 @@ const float EngineInterface::graphics_getFogThickness() const
 	return _core->getRenderStorage()->getFogThickness();
 }
 
-const fvec3& EngineInterface::graphics_getFogColor() const
+const fvec3 & EngineInterface::graphics_getFogColor() const
 {
 	return _core->getRenderStorage()->getFogColor();
 }
@@ -428,17 +428,17 @@ const float EngineInterface::graphics_getPlanarReflectionHeight() const
 	return _core->getRenderStorage()->getPlanarReflectionHeight();
 }
 
-const fvec3& EngineInterface::graphics_getShadowPositionOffset() const
+const fvec3 & EngineInterface::graphics_getShadowPositionOffset() const
 {
 	return _core->getRenderStorage()->getShadowPositionOffset();
 }
 
-const fvec3& EngineInterface::graphics_getShadowLookatOffset() const
+const fvec3 & EngineInterface::graphics_getShadowLookatOffset() const
 {
 	return _core->getRenderStorage()->getShadowLookatOffset();
 }
 
-const string& EngineInterface::graphics_getLensFlareMapPath() const
+const string & EngineInterface::graphics_getLensFlareMapPath() const
 {
 	return _core->getRenderStorage()->getLensFlareMapPath();
 }

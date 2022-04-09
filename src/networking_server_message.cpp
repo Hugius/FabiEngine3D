@@ -1,6 +1,6 @@
 #include "networking_server_message.hpp"
 
-NetworkingServerMessage::NetworkingServerMessage(const string& content, const NetworkProtocol protocol)
+NetworkingServerMessage::NetworkingServerMessage(const string & content, const NetworkProtocol protocol)
 	:
 	_content(content),
 	_protocol(protocol)
@@ -8,7 +8,7 @@ NetworkingServerMessage::NetworkingServerMessage(const string& content, const Ne
 
 }
 
-const string& NetworkingServerMessage::getContent() const
+const string & NetworkingServerMessage::getContent() const
 {
 	return _content;
 }

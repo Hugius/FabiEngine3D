@@ -1,6 +1,6 @@
 #include "logger.hpp"
 
-void Logger::setCustomMessageQueue(const vector<string>& customMessages)
+void Logger::setCustomMessageQueue(const vector<string> & customMessages)
 {
 	_messageQueue = customMessages;
 }
@@ -11,7 +11,7 @@ void Logger::clearMessageQueue()
 	_messageQueue.clear();
 }
 
-const vector<string>& Logger::getMessageQueue()
+const vector<string> & Logger::getMessageQueue()
 {
 	return _messageQueue;
 }

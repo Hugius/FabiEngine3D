@@ -35,7 +35,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_modelEntityDepthRenderer->bind();
 
-		for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
+		for(const auto & [key, modelEntity] : _modelEntityManager->getEntities())
 		{
 			if(modelEntity->isLevelOfDetailed())
 			{
@@ -81,7 +81,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [key, entity] : _quad3dEntityManager->getEntities())
 		{
 			_quad3dEntityDepthRenderer->render(entity);
 		}
@@ -93,9 +93,9 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto& [key, textEntity] : _text3dEntityManager->getEntities())
+		for(const auto & [key, textEntity] : _text3dEntityManager->getEntities())
 		{
-			for(const auto& characterEntity : textEntity->getCharacterEntities())
+			for(const auto & characterEntity : textEntity->getCharacterEntities())
 			{
 				_quad3dEntityDepthRenderer->render(characterEntity);
 			}
@@ -108,7 +108,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_aabbEntityDepthRenderer->bind();
 
-		for(const auto& [key, entity] : _aabbEntityManager->getEntities())
+		for(const auto & [key, entity] : _aabbEntityManager->getEntities())
 		{
 			_aabbEntityDepthRenderer->render(entity);
 		}
@@ -269,7 +269,7 @@ void MasterRenderer::captureShadows()
 		{
 			_modelEntityShadowRenderer->bind();
 
-			for(const auto& [key, modelEntity] : _modelEntityManager->getEntities())
+			for(const auto & [key, modelEntity] : _modelEntityManager->getEntities())
 			{
 				if(modelEntity->isLevelOfDetailed())
 				{
@@ -315,7 +315,7 @@ void MasterRenderer::captureShadows()
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
+			for(const auto & [key, entity] : _quad3dEntityManager->getEntities())
 			{
 				_quad3dEntityShadowRenderer->render(entity);
 			}
@@ -327,9 +327,9 @@ void MasterRenderer::captureShadows()
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto& [key, textEntity] : _text3dEntityManager->getEntities())
+			for(const auto & [key, textEntity] : _text3dEntityManager->getEntities())
 			{
-				for(const auto& characterEntity : textEntity->getCharacterEntities())
+				for(const auto & characterEntity : textEntity->getCharacterEntities())
 				{
 					_quad3dEntityShadowRenderer->render(characterEntity);
 				}

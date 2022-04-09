@@ -116,13 +116,13 @@ const bool WorldEditor::saveWorldToFile() const
 		}
 	}
 
-	for(const auto& [modelId, templateId] : _loadedModelIds)
+	for(const auto & [modelId, templateId] : _loadedModelIds)
 	{
 		auto startedAnimationIds = _fe3d->model_getAnimationIds(modelId);
 
 		if(!startedAnimationIds.empty())
 		{
-			for(const auto& partId : _fe3d->model_getPartIds(modelId))
+			for(const auto & partId : _fe3d->model_getPartIds(modelId))
 			{
 				if(!partId.empty())
 				{
@@ -175,7 +175,7 @@ const bool WorldEditor::saveWorldToFile() const
 		file << endl;
 	}
 
-	for(const auto& [quadId, templateId] : _loadedQuadIds)
+	for(const auto & [quadId, templateId] : _loadedQuadIds)
 	{
 		auto startedAnimationIds = _fe3d->quad3d_getAnimationIds(quadId);
 		auto position = _fe3d->quad3d_getPosition(quadId);
@@ -213,7 +213,7 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto& [textID, templateId] : _loadedTextIds)
+	for(const auto & [textID, templateId] : _loadedTextIds)
 	{
 		auto position = _fe3d->text3d_getPosition(textID);
 		auto rotation = _fe3d->text3d_getRotation(textID);
@@ -243,7 +243,7 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto& [soundId, templateId] : _loadedSoundIds)
+	for(const auto & [soundId, templateId] : _loadedSoundIds)
 	{
 		auto position = _fe3d->sound3d_getPosition(soundId);
 		auto maxVolume = _fe3d->sound3d_getMaxVolume(soundId);
@@ -267,7 +267,7 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto& pointlightId : _loadedPointlightIds)
+	for(const auto & pointlightId : _loadedPointlightIds)
 	{
 		auto position = _fe3d->pointlight_getPosition(pointlightId);
 		auto radius = _fe3d->pointlight_getRadius(pointlightId);
@@ -303,7 +303,7 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto& spotlightId : _loadedSpotlightIds)
+	for(const auto & spotlightId : _loadedSpotlightIds)
 	{
 		auto position = _fe3d->spotlight_getPosition(spotlightId);
 		auto color = _fe3d->spotlight_getColor(spotlightId);
@@ -341,7 +341,7 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto& reflectionId : _loadedReflectionIds)
+	for(const auto & reflectionId : _loadedReflectionIds)
 	{
 		auto position = _fe3d->reflection_getPosition(reflectionId);
 		auto exceptionEntityId = _fe3d->reflection_getExceptionEntityId(reflectionId);

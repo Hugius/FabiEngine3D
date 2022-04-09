@@ -11,7 +11,7 @@ Quad2dEntityManager::Quad2dEntityManager()
 
 }
 
-const shared_ptr<Quad2dEntity> Quad2dEntityManager::getEntity(const string& id) const
+const shared_ptr<Quad2dEntity> Quad2dEntityManager::getEntity(const string & id) const
 {
 	auto iterator = _entities.find(id);
 
@@ -23,12 +23,12 @@ const shared_ptr<Quad2dEntity> Quad2dEntityManager::getEntity(const string& id) 
 	return iterator->second;
 }
 
-const unordered_map<string, shared_ptr<Quad2dEntity>>& Quad2dEntityManager::getEntities() const
+const unordered_map<string, shared_ptr<Quad2dEntity>> & Quad2dEntityManager::getEntities() const
 {
 	return _entities;
 }
 
-void Quad2dEntityManager::createEntity(const string& id, bool isCentered)
+void Quad2dEntityManager::createEntity(const string & id, bool isCentered)
 {
 	if(isEntityExisting(id))
 	{
@@ -46,7 +46,7 @@ void Quad2dEntityManager::createEntity(const string& id, bool isCentered)
 	_renderStorage->setGuiDepth(_renderStorage->getGuiDepth() + 1);
 }
 
-void Quad2dEntityManager::deleteEntity(const string& id)
+void Quad2dEntityManager::deleteEntity(const string & id)
 {
 	if(!isEntityExisting(id))
 	{
@@ -61,7 +61,7 @@ void Quad2dEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool Quad2dEntityManager::isEntityExisting(const string& id) const
+const bool Quad2dEntityManager::isEntityExisting(const string & id) const
 {
 	return (_entities.find(id) != _entities.end());
 }
@@ -78,7 +78,7 @@ void Quad2dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 
 void Quad2dEntityManager::update()
 {
-	for(const auto& [key, entity] : _entities)
+	for(const auto & [key, entity] : _entities)
 	{
 		entity->updateTarget();
 

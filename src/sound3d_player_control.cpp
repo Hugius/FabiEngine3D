@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-void Sound3dPlayer::startSound(const string& id, int playCount)
+void Sound3dPlayer::startSound(const string & id, int playCount)
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -121,7 +121,7 @@ void Sound3dPlayer::startSound(const string& id, int playCount)
 	_startedSounds.at(id).push_back(newSound);
 }
 
-void Sound3dPlayer::pauseSound(const string& id, unsigned int index)
+void Sound3dPlayer::pauseSound(const string & id, unsigned int index)
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -155,7 +155,7 @@ void Sound3dPlayer::pauseSound(const string& id, unsigned int index)
 	}
 }
 
-void Sound3dPlayer::resumeSound(const string& id, unsigned int index)
+void Sound3dPlayer::resumeSound(const string & id, unsigned int index)
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -189,7 +189,7 @@ void Sound3dPlayer::resumeSound(const string& id, unsigned int index)
 	}
 }
 
-void Sound3dPlayer::stopSound(const string& id, unsigned int index)
+void Sound3dPlayer::stopSound(const string & id, unsigned int index)
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{

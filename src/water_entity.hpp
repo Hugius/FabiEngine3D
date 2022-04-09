@@ -15,17 +15,17 @@ public:
 
 	void setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setHighQualityVertexBuffer(shared_ptr<VertexBuffer> value);
-	void setRippleSpeed(const fvec2& value);
-	void setWaveSpeed(const fvec2& value);
-	void setRippleOffset(const fvec2& value);
-	void setWaveOffset(const fvec2& value);
-	void setColor(const fvec3& value);
+	void setRippleSpeed(const fvec2 & value);
+	void setWaveSpeed(const fvec2 & value);
+	void setRippleOffset(const fvec2 & value);
+	void setWaveOffset(const fvec2 & value);
+	void setColor(const fvec3 & value);
 	void setDudvMap(shared_ptr<TextureBuffer> value);
 	void setNormalMap(shared_ptr<TextureBuffer> value);
 	void setDisplacementMap(shared_ptr<TextureBuffer> value);
-	void setDudvMapPath(const string& value);
-	void setNormalMapPath(const string& value);
-	void setDisplacementMapPath(const string& value);
+	void setDudvMapPath(const string & value);
+	void setNormalMapPath(const string & value);
+	void setDisplacementMapPath(const string & value);
 	void setTextureRepeat(unsigned int value);
 	void setWaveHeight(float value);
 	void setSpecularShininess(float value);
@@ -38,7 +38,7 @@ public:
 	void setReflective(bool value);
 	void setRefractive(bool value);
 	void setWireframed(bool value);
-	void setWireframeColor(const fvec3& value);
+	void setWireframeColor(const fvec3 & value);
 
 	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
 	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
@@ -46,17 +46,17 @@ public:
 	const shared_ptr<TextureBuffer> getNormalTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getDisplacementTextureBuffer() const;
 
-	const string& getDudvMapPath() const;
-	const string& getNormalMapPath() const;
-	const string& getDisplacementMapPath() const;
+	const string & getDudvMapPath() const;
+	const string & getNormalMapPath() const;
+	const string & getDisplacementMapPath() const;
 
-	const fvec3& getColor() const;
-	const fvec3& getWireframeColor() const;
+	const fvec3 & getColor() const;
+	const fvec3 & getWireframeColor() const;
 
-	const fvec2& getRippleOffset() const;
-	const fvec2& getRippleSpeed() const;
-	const fvec2& getWaveOffset() const;
-	const fvec2& getWaveSpeed() const;
+	const fvec2 & getRippleOffset() const;
+	const fvec2 & getRippleSpeed() const;
+	const fvec2 & getWaveOffset() const;
+	const fvec2 & getWaveSpeed() const;
 
 	const float getHeight() const;
 	const float getWaveHeight() const;

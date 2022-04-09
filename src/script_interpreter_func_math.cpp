@@ -6,7 +6,7 @@ using std::clamp;
 
 using SVT = ScriptValueType;
 
-const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCall(const string& scriptLine)
+const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCall(const string & scriptLine)
 {
 	auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
 	auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');

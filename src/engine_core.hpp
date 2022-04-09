@@ -50,8 +50,8 @@ public:
 	void start();
 	void stop();
 
-	const unordered_map<string, float>& getUpdateDeltaTimes() const;
-	const unordered_map<string, float>& getRenderDeltaTimes() const;
+	const unordered_map<string, float> & getUpdateDeltaTimes() const;
+	const unordered_map<string, float> & getRenderDeltaTimes() const;
 
 	const shared_ptr<LibraryLoader> getLibraryLoader() const;
 	const shared_ptr<InputHandler> getInputHandler() const;

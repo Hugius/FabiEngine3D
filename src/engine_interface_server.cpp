@@ -11,27 +11,27 @@ void EngineInterface::server_stop()
 	_core->getNetworkingServer()->stop();
 }
 
-void EngineInterface::server_sendTcpMessageToClient(const string& username, const string& content)
+void EngineInterface::server_sendTcpMessageToClient(const string & username, const string & content)
 {
 	_core->getNetworkingServer()->sendTcpMessageToClient(username, content);
 }
 
-void EngineInterface::server_sendUdpMessageToClient(const string& username, const string& content)
+void EngineInterface::server_sendUdpMessageToClient(const string & username, const string & content)
 {
 	_core->getNetworkingServer()->sendUdpMessageToClient(username, content);
 }
 
-void EngineInterface::server_broadcastTcpMessageToClients(const string& content)
+void EngineInterface::server_broadcastTcpMessageToClients(const string & content)
 {
 	_core->getNetworkingServer()->broadcastTcpMessageToClients(content);
 }
 
-void EngineInterface::server_broadcastUdpMessageToClients(const string& content)
+void EngineInterface::server_broadcastUdpMessageToClients(const string & content)
 {
 	_core->getNetworkingServer()->broadcastUdpMessageToClients(content);
 }
 
-void EngineInterface::server_disconnectClient(const string& username)
+void EngineInterface::server_disconnectClient(const string & username)
 {
 	_core->getNetworkingServer()->disconnectClient(username);
 }
@@ -46,12 +46,12 @@ const bool EngineInterface::server_isRunning() const
 	return _core->getNetworkingServer()->isRunning();
 }
 
-const bool EngineInterface::server_isClientConnected(const string& username) const
+const bool EngineInterface::server_isClientConnected(const string & username) const
 {
 	return _core->getNetworkingServer()->isClientConnected(username);
 }
 
-const bool EngineInterface::server_isMessageReserved(const string& message)
+const bool EngineInterface::server_isMessageReserved(const string & message)
 {
 	return _core->getNetworkingServer()->isMessageReserved(message);
 }

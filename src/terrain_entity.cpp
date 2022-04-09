@@ -8,12 +8,12 @@ void TerrainEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 	_vertexBuffer = value;
 }
 
-void TerrainEntity::setPixels(const vector<float>& value)
+void TerrainEntity::setPixels(const vector<float> & value)
 {
 	_pixels = value;
 }
 
-void TerrainEntity::setHeightMapPath(const string& value)
+void TerrainEntity::setHeightMapPath(const string & value)
 {
 	_heightMapPath = value;
 }
@@ -23,7 +23,7 @@ void TerrainEntity::setDiffuseMap(shared_ptr<TextureBuffer> value)
 	_diffuseTextureBuffer = value;
 }
 
-void TerrainEntity::setDiffuseMapPath(const string& value)
+void TerrainEntity::setDiffuseMapPath(const string & value)
 {
 	_diffuseMapPath = value;
 }
@@ -33,7 +33,7 @@ void TerrainEntity::setNormalMap(shared_ptr<TextureBuffer> value)
 	_normalTextureBuffer = value;
 }
 
-void TerrainEntity::setNormalMapPath(const string& value)
+void TerrainEntity::setNormalMapPath(const string & value)
 {
 	_normalMapPath = value;
 }
@@ -43,7 +43,7 @@ void TerrainEntity::setBlendMap(shared_ptr<TextureBuffer> value)
 	_blendTextureBuffer = value;
 }
 
-void TerrainEntity::setBlendMapPath(const string& value)
+void TerrainEntity::setBlendMapPath(const string & value)
 {
 	_blendMapPath = value;
 }
@@ -53,7 +53,7 @@ void TerrainEntity::setRedDiffuseMap(shared_ptr<TextureBuffer> value)
 	_redDiffuseTextureBuffer = value;
 }
 
-void TerrainEntity::setRedDiffuseMapPath(const string& value)
+void TerrainEntity::setRedDiffuseMapPath(const string & value)
 {
 	_redDiffuseMapPath = value;
 }
@@ -63,7 +63,7 @@ void TerrainEntity::setGreenDiffuseMap(shared_ptr<TextureBuffer> value)
 	_greenDiffuseTextureBuffer = value;
 }
 
-void TerrainEntity::setGreenDiffuseMapPath(const string& value)
+void TerrainEntity::setGreenDiffuseMapPath(const string & value)
 {
 	_greenDiffuseMapPath = value;
 }
@@ -73,7 +73,7 @@ void TerrainEntity::setBlueDiffuseMap(shared_ptr<TextureBuffer> value)
 	_blueDiffuseTextureBuffer = value;
 }
 
-void TerrainEntity::setBlueDiffuseMapPath(const string& value)
+void TerrainEntity::setBlueDiffuseMapPath(const string & value)
 {
 	_blueDiffuseMapPath = value;
 }
@@ -83,7 +83,7 @@ void TerrainEntity::setRedNormalMap(shared_ptr<TextureBuffer> value)
 	_redNormalTextureBuffer = value;
 }
 
-void TerrainEntity::setRedNormalMapPath(const string& value)
+void TerrainEntity::setRedNormalMapPath(const string & value)
 {
 	_redNormalMapPath = value;
 }
@@ -93,7 +93,7 @@ void TerrainEntity::setGreenNormalMap(shared_ptr<TextureBuffer> value)
 	_greenNormalTextureBuffer = value;
 }
 
-void TerrainEntity::setGreenNormalMapPath(const string& value)
+void TerrainEntity::setGreenNormalMapPath(const string & value)
 {
 	_greenNormalMapPath = value;
 }
@@ -103,7 +103,7 @@ void TerrainEntity::setBlueNormalMap(shared_ptr<TextureBuffer> value)
 	_blueNormalTextureBuffer = value;
 }
 
-void TerrainEntity::setBlueNormalMapPath(const string& filePath)
+void TerrainEntity::setBlueNormalMapPath(const string & filePath)
 {
 	_blueNormalMapPath = filePath;
 }
@@ -148,7 +148,7 @@ void TerrainEntity::setWireframed(bool value)
 	_isWireframed = value;
 }
 
-void TerrainEntity::setWireframeColor(const fvec3& value)
+void TerrainEntity::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -213,57 +213,57 @@ const shared_ptr<TextureBuffer> TerrainEntity::getBlueNormalTextureBuffer() cons
 	return _blueNormalTextureBuffer;
 }
 
-const string& TerrainEntity::getHeightMapPath() const
+const string & TerrainEntity::getHeightMapPath() const
 {
 	return _heightMapPath;
 }
 
-const string& TerrainEntity::getDiffuseMapPath() const
+const string & TerrainEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
 }
 
-const string& TerrainEntity::getNormalMapPath() const
+const string & TerrainEntity::getNormalMapPath() const
 {
 	return _normalMapPath;
 }
 
-const string& TerrainEntity::getBlendMapPath() const
+const string & TerrainEntity::getBlendMapPath() const
 {
 	return _blendMapPath;
 }
 
-const string& TerrainEntity::getRedDiffuseMapPath() const
+const string & TerrainEntity::getRedDiffuseMapPath() const
 {
 	return _redDiffuseMapPath;
 }
 
-const string& TerrainEntity::getGreenDiffuseMapPath() const
+const string & TerrainEntity::getGreenDiffuseMapPath() const
 {
 	return _greenDiffuseMapPath;
 }
 
-const string& TerrainEntity::getBlueDiffuseMapPath() const
+const string & TerrainEntity::getBlueDiffuseMapPath() const
 {
 	return _blueDiffuseMapPath;
 }
 
-const string& TerrainEntity::getRedNormalMapPath() const
+const string & TerrainEntity::getRedNormalMapPath() const
 {
 	return _redNormalMapPath;
 }
 
-const string& TerrainEntity::getGreenNormalMapPath() const
+const string & TerrainEntity::getGreenNormalMapPath() const
 {
 	return _greenNormalMapPath;
 }
 
-const string& TerrainEntity::getBlueNormalMapPath() const
+const string & TerrainEntity::getBlueNormalMapPath() const
 {
 	return _blueNormalMapPath;
 }
 
-const fvec3& TerrainEntity::getWireframeColor() const
+const fvec3 & TerrainEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
@@ -318,7 +318,7 @@ const shared_ptr<VertexBuffer> TerrainEntity::getVertexBuffer() const
 	return _vertexBuffer;
 }
 
-const vector<float>& TerrainEntity::getPixels() const
+const vector<float> & TerrainEntity::getPixels() const
 {
 	return _pixels;
 }

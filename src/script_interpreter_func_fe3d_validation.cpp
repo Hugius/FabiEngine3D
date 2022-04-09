@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-const bool ScriptInterpreter::_validateFe3dAabb(const string& id)
+const bool ScriptInterpreter::_validateFe3dAabb(const string & id)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_validateFe3dAabb(const string& id)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dQuad3d(const string& id, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dQuad3d(const string & id, bool isTemplate)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -43,7 +43,7 @@ const bool ScriptInterpreter::_validateFe3dQuad3d(const string& id, bool isTempl
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dText3d(const string& id, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dText3d(const string & id, bool isTemplate)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_validateFe3dText3d(const string& id, bool isTempl
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dQuad2d(const string& id, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dQuad2d(const string & id, bool isTemplate)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -97,7 +97,7 @@ const bool ScriptInterpreter::_validateFe3dQuad2d(const string& id, bool isTempl
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dText2d(const string& id, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dText2d(const string & id, bool isTemplate)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -124,7 +124,7 @@ const bool ScriptInterpreter::_validateFe3dText2d(const string& id, bool isTempl
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dPointlight(const string& id)
+const bool ScriptInterpreter::_validateFe3dPointlight(const string & id)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -140,7 +140,7 @@ const bool ScriptInterpreter::_validateFe3dPointlight(const string& id)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSpotlight(const string& id)
+const bool ScriptInterpreter::_validateFe3dSpotlight(const string & id)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -156,7 +156,7 @@ const bool ScriptInterpreter::_validateFe3dSpotlight(const string& id)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dModel(const string& id, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dModel(const string & id, bool isTemplate)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -184,7 +184,7 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& id, bool isTempla
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dModelPart(const string& modelId, const string& partId)
+const bool ScriptInterpreter::_validateFe3dModelPart(const string & modelId, const string & partId)
 {
 	if(_fe3d->model_hasPart(modelId, partId))
 	{
@@ -195,7 +195,7 @@ const bool ScriptInterpreter::_validateFe3dModelPart(const string& modelId, cons
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dReflection(const string& id)
+const bool ScriptInterpreter::_validateFe3dReflection(const string & id)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -211,7 +211,7 @@ const bool ScriptInterpreter::_validateFe3dReflection(const string& id)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSky(const string& id, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dSky(const string & id, bool isTemplate)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -238,7 +238,7 @@ const bool ScriptInterpreter::_validateFe3dSky(const string& id, bool isTemplate
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dTerrain(const string& id, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dTerrain(const string & id, bool isTemplate)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -265,7 +265,7 @@ const bool ScriptInterpreter::_validateFe3dTerrain(const string& id, bool isTemp
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dAnimation2d(const string& id)
+const bool ScriptInterpreter::_validateFe3dAnimation2d(const string & id)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -281,7 +281,7 @@ const bool ScriptInterpreter::_validateFe3dAnimation2d(const string& id)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dAnimation3d(const string& id)
+const bool ScriptInterpreter::_validateFe3dAnimation3d(const string & id)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -297,7 +297,7 @@ const bool ScriptInterpreter::_validateFe3dAnimation3d(const string& id)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dWater(const string& id, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dWater(const string & id, bool isTemplate)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -324,7 +324,7 @@ const bool ScriptInterpreter::_validateFe3dWater(const string& id, bool isTempla
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSound2d(const string& id, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dSound2d(const string & id, bool isTemplate)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -351,7 +351,7 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string& id, bool isTemp
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSound3d(const string& id, bool isTemplate)
+const bool ScriptInterpreter::_validateFe3dSound3d(const string & id, bool isTemplate)
 {
 	if(!_validateFe3dId(id))
 	{
@@ -378,7 +378,7 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string& id, bool isTemp
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dId(const string& id)
+const bool ScriptInterpreter::_validateFe3dId(const string & id)
 {
 	if(id.empty())
 	{

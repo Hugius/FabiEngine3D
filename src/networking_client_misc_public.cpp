@@ -6,7 +6,7 @@
 
 #include <ws2tcpip.h>
 
-const bool NetworkingClient::isValidIp(const string& ip) const
+const bool NetworkingClient::isValidIp(const string & ip) const
 {
 	if(ip == "0.0.0.0")
 	{
@@ -50,22 +50,22 @@ const unsigned int NetworkingClient::getPingLatency() const
 	return Mathematics::calculateAverage(_pingLatencies);
 }
 
-const string& NetworkingClient::getUsername() const
+const string & NetworkingClient::getUsername() const
 {
 	return _username;
 }
 
-const string& NetworkingClient::getServerIp() const
+const string & NetworkingClient::getServerIp() const
 {
 	return _serverIp;
 }
 
-const vector<NetworkingServerMessage>& NetworkingClient::getPendingMessages() const
+const vector<NetworkingServerMessage> & NetworkingClient::getPendingMessages() const
 {
 	return _pendingMessages;
 }
 
-void NetworkingClient::sendTcpMessageToServer(const string& content)
+void NetworkingClient::sendTcpMessageToServer(const string & content)
 {
 	if(!_isRunning)
 	{
@@ -91,7 +91,7 @@ void NetworkingClient::sendTcpMessageToServer(const string& content)
 	_sendTcpMessageToServer(content, false, true);
 }
 
-void NetworkingClient::sendUdpMessageToServer(const string& content)
+void NetworkingClient::sendUdpMessageToServer(const string & content)
 {
 	if(!_isRunning)
 	{

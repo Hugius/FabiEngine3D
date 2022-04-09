@@ -10,7 +10,7 @@ void BaseEditor::inject(shared_ptr<GuiManager> gui)
 	_gui = gui;
 }
 
-void BaseEditor::setCurrentProjectId(const string& currentProjectId)
+void BaseEditor::setCurrentProjectId(const string & currentProjectId)
 {
 	_currentProjectId = currentProjectId;
 }
@@ -36,7 +36,7 @@ const bool BaseEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const string& BaseEditor::getCurrentProjectId() const
+const string & BaseEditor::getCurrentProjectId() const
 {
 	return _currentProjectId;
 }

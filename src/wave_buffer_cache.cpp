@@ -1,6 +1,6 @@
 #include "wave_buffer_cache.hpp"
 
-void WaveBufferCache::storeBuffer(const string& filePath, shared_ptr<WaveBuffer> buffer)
+void WaveBufferCache::storeBuffer(const string & filePath, shared_ptr<WaveBuffer> buffer)
 {
 	auto cacheIterator = _buffers.find(filePath);
 
@@ -12,7 +12,7 @@ void WaveBufferCache::storeBuffer(const string& filePath, shared_ptr<WaveBuffer>
 	_buffers.insert({filePath, buffer});
 }
 
-void WaveBufferCache::deleteBuffer(const string& filePath)
+void WaveBufferCache::deleteBuffer(const string & filePath)
 {
 	if(_buffers.find(filePath) == _buffers.end())
 	{
@@ -27,7 +27,7 @@ void WaveBufferCache::clearBuffers()
 	_buffers.clear();
 }
 
-const shared_ptr<WaveBuffer> WaveBufferCache::getBuffer(const string& filePath) const
+const shared_ptr<WaveBuffer> WaveBufferCache::getBuffer(const string & filePath) const
 {
 	auto cacheIterator = _buffers.find(filePath);
 
@@ -39,7 +39,7 @@ const shared_ptr<WaveBuffer> WaveBufferCache::getBuffer(const string& filePath) 
 	return nullptr;
 }
 
-const unordered_map<string, shared_ptr<WaveBuffer>>& WaveBufferCache::getBuffers() const
+const unordered_map<string, shared_ptr<WaveBuffer>> & WaveBufferCache::getBuffers() const
 {
 	return _buffers;
 }
@@ -48,7 +48,7 @@ const vector<string> WaveBufferCache::getFilePaths() const
 {
 	vector<string> result;
 
-	for(const auto& [key, buffer] : _buffers)
+	for(const auto & [key, buffer] : _buffers)
 	{
 		result.push_back(key);
 	}

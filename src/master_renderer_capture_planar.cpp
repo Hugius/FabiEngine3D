@@ -4,9 +4,9 @@ void MasterRenderer::capturePlanarReflections()
 {
 	vector<shared_ptr<ModelEntity>> reflectiveModelEntities;
 
-	for(const auto& [key, entity] : _modelEntityManager->getEntities())
+	for(const auto & [key, entity] : _modelEntityManager->getEntities())
 	{
-		for(const auto& partId : entity->getPartIds())
+		for(const auto & partId : entity->getPartIds())
 		{
 			if(entity->isReflective(partId) && entity->isVisible())
 			{
@@ -32,7 +32,7 @@ void MasterRenderer::capturePlanarReflections()
 
 	vector<shared_ptr<ModelEntity>> savedModelEntities;
 	savedModelEntities.insert(savedModelEntities.end(), reflectiveModelEntities.begin(), reflectiveModelEntities.end());
-	for(const auto& [key, entity] : _modelEntityManager->getEntities())
+	for(const auto & [key, entity] : _modelEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -42,7 +42,7 @@ void MasterRenderer::capturePlanarReflections()
 	}
 
 	vector<shared_ptr<Quad3dEntity>> savedQuad3dEntities;
-	for(const auto& [key, entity] : _quad3dEntityManager->getEntities())
+	for(const auto & [key, entity] : _quad3dEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -52,7 +52,7 @@ void MasterRenderer::capturePlanarReflections()
 	}
 
 	vector<shared_ptr<Text3dEntity>> savedText3dEntities;
-	for(const auto& [key, entity] : _text3dEntityManager->getEntities())
+	for(const auto & [key, entity] : _text3dEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -88,17 +88,17 @@ void MasterRenderer::capturePlanarReflections()
 	_renderTransparentQuad3dEntities();
 	_renderTransparentText3dEntities();
 
-	for(const auto& entity : savedModelEntities)
+	for(const auto & entity : savedModelEntities)
 	{
 		entity->setVisible(true);
 	}
 
-	for(const auto& entity : savedQuad3dEntities)
+	for(const auto & entity : savedQuad3dEntities)
 	{
 		entity->setVisible(true);
 	}
 
-	for(const auto& entity : savedText3dEntities)
+	for(const auto & entity : savedText3dEntities)
 	{
 		entity->setVisible(true);
 	}

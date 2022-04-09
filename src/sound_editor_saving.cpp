@@ -21,7 +21,7 @@ const bool SoundEditor::saveSoundsToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\sound.fe3d");
 
-	for(const auto& soundId : _loadedSoundIds)
+	for(const auto & soundId : _loadedSoundIds)
 	{
 		auto audioPath = _fe3d->sound2d_getAudioPath(soundId);
 

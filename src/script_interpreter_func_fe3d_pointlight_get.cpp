@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
+const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
 	if(functionName == "fe3d:pointlight_is_existing")
 	{
@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 				return true;
 			}
 
-			for(const auto& result : _fe3d->pointlight_getIds())
+			for(const auto & result : _fe3d->pointlight_getIds())
 			{
 				if(result[0] != '@')
 				{
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& result : _fe3d->pointlight_getIds())
+			for(const auto & result : _fe3d->pointlight_getIds())
 			{
 				if(result[0] != '@')
 				{

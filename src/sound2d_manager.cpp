@@ -7,7 +7,7 @@ void Sound2dManager::deleteSounds()
 	_sounds.clear();
 }
 
-void Sound2dManager::deleteSound(const string& id)
+void Sound2dManager::deleteSound(const string & id)
 {
 	if(!isSoundExisting(id))
 	{
@@ -27,7 +27,7 @@ void Sound2dManager::inject(shared_ptr<WaveBufferCache> waveBufferCache)
 	_waveBufferCache = waveBufferCache;
 }
 
-void Sound2dManager::createSound(const string& id, const string& audioPath)
+void Sound2dManager::createSound(const string & id, const string & audioPath)
 {
 	if(isSoundExisting(id))
 	{
@@ -65,7 +65,7 @@ void Sound2dManager::createSound(const string& id, const string& audioPath)
 	_sounds.insert({id, sound});
 }
 
-const bool Sound2dManager::isSoundExisting(const string& id) const
+const bool Sound2dManager::isSoundExisting(const string & id) const
 {
 	return (_sounds.find(id) != _sounds.end());
 }
@@ -75,12 +75,12 @@ const bool Sound2dManager::isSoundsExisting() const
 	return !_sounds.empty();
 }
 
-const unordered_map<string, shared_ptr<Sound2d>>& Sound2dManager::getSounds() const
+const unordered_map<string, shared_ptr<Sound2d>> & Sound2dManager::getSounds() const
 {
 	return _sounds;
 }
 
-const shared_ptr<Sound2d> Sound2dManager::getSound(const string& id) const
+const shared_ptr<Sound2d> Sound2dManager::getSound(const string & id) const
 {
 	auto iterator = _sounds.find(id);
 

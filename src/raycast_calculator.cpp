@@ -9,7 +9,7 @@ RaycastCalculator::RaycastCalculator()
 	_cursorRay = make_shared<Ray>(fvec3(0.0f), fvec3(0.0f));
 }
 
-void RaycastCalculator::update(const ivec2& cursorPosition)
+void RaycastCalculator::update(const ivec2 & cursorPosition)
 {
 	_cursorRay = _calculateCursorRay(cursorPosition);
 }
@@ -24,7 +24,7 @@ const shared_ptr<Ray> RaycastCalculator::getCursorRay() const
 	return _cursorRay;
 }
 
-const shared_ptr<Ray> RaycastCalculator::_calculateCursorRay(const ivec2& cursorPosition) const
+const shared_ptr<Ray> RaycastCalculator::_calculateCursorRay(const ivec2 & cursorPosition) const
 {
 	const auto ndcCoords = Tools::convertPositionRelativeFromDisplay(Tools::convertToNdc(cursorPosition));
 	const auto clipSpaceCoords = fvec4(ndcCoords.x, ndcCoords.y, -1.0f, 1.0f);
@@ -34,7 +34,7 @@ const shared_ptr<Ray> RaycastCalculator::_calculateCursorRay(const ivec2& cursor
 	return make_shared<Ray>(_camera->getPosition(), Mathematics::normalize(worldSpaceCoords));
 }
 
-const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4& clipCoords) const
+const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4 & clipCoords) const
 {
 	const auto invertedProjection = Mathematics::invertMatrix(_camera->getProjection());
 
@@ -43,7 +43,7 @@ const fvec4 RaycastCalculator::_convertToViewSpace(const fvec4& clipCoords) cons
 	return fvec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
-const fvec3 RaycastCalculator::_convertToWorldSpace(const fvec4& viewCoords) const
+const fvec3 RaycastCalculator::_convertToWorldSpace(const fvec4 & viewCoords) const
 {
 	const auto invertedView = Mathematics::invertMatrix(_camera->getView());
 

@@ -11,7 +11,7 @@ WaveBuffer::WaveBuffer(shared_ptr<Audio> audio)
 	_format->wBitsPerSample = audio->getBitsPerSample();
 
 	_header = new WAVEHDR();
-	_header->lpData = const_cast<char*>(reinterpret_cast<const char*>(audio->getSamples()));
+	_header->lpData = const_cast<char *>(reinterpret_cast<const char *>(audio->getSamples()));
 	_header->dwBufferLength = audio->getSampleCount();
 }
 

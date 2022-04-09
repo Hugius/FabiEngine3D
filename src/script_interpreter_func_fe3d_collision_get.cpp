@@ -2,7 +2,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
+const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
 	if(functionName == "fe3d:collision_is_camera_terrain_response_enabled")
 	{
@@ -260,7 +260,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				return true;
 			}
 
-			for(const auto& aabbId : aabbIds)
+			for(const auto & aabbId : aabbIds)
 			{
 				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::MODEL))
 				{
@@ -316,7 +316,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				return true;
 			}
 
-			for(const auto& aabbId : aabbIds)
+			for(const auto & aabbId : aabbIds)
 			{
 				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::QUAD3D))
 				{
@@ -355,7 +355,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				return true;
 			}
 
-			for(const auto& aabbId : aabbIds)
+			for(const auto & aabbId : aabbIds)
 			{
 				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::TEXT3D))
 				{
@@ -394,7 +394,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				return true;
 			}
 
-			for(const auto& aabbId : aabbIds)
+			for(const auto & aabbId : aabbIds)
 			{
 				if(!_fe3d->aabb_hasParent(aabbId))
 				{

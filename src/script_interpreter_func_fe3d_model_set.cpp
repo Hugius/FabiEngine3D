@@ -3,7 +3,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
+const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
 	if(functionName == "fe3d:model_place")
 	{
@@ -50,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& id : _fe3d->model_getIds())
+			for(const auto & id : _fe3d->model_getIds())
 			{
 				if(id[0] != '@')
 				{
@@ -445,7 +445,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 					return true;
 				}
 
-				for(const auto& id : aabbIds)
+				for(const auto & id : aabbIds)
 				{
 					_fe3d->aabb_setRaycastResponsive(id, args[1]->getBoolean());
 				}
@@ -470,7 +470,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 					return true;
 				}
 
-				for(const auto& id : aabbIds)
+				for(const auto & id : aabbIds)
 				{
 					_fe3d->aabb_setCollisionResponsive(id, args[1]->getBoolean());
 				}
@@ -974,7 +974,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 					return true;
 				}
 
-				for(const auto& partId : _fe3d->animation3d_getPartIds(args[1]->getString()))
+				for(const auto & partId : _fe3d->animation3d_getPartIds(args[1]->getString()))
 				{
 					if(!partId.empty())
 					{

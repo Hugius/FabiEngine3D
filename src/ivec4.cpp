@@ -13,7 +13,7 @@ ivec4::ivec4()
 	this->w = 0;
 }
 
-ivec4::ivec4(const ivec2& other)
+ivec4::ivec4(const ivec2 & other)
 {
 	this->x = other.x;
 	this->y = other.y;
@@ -21,7 +21,7 @@ ivec4::ivec4(const ivec2& other)
 	this->w = 0;
 }
 
-ivec4::ivec4(const ivec3& other)
+ivec4::ivec4(const ivec3 & other)
 {
 	this->x = other.x;
 	this->y = other.y;
@@ -29,7 +29,7 @@ ivec4::ivec4(const ivec3& other)
 	this->w = 0;
 }
 
-ivec4::ivec4(const ivec4& other)
+ivec4::ivec4(const ivec4 & other)
 {
 	this->x = other.x;
 	this->y = other.y;
@@ -37,7 +37,7 @@ ivec4::ivec4(const ivec4& other)
 	this->w = other.w;
 }
 
-ivec4::ivec4(const fvec2& other)
+ivec4::ivec4(const fvec2 & other)
 {
 	this->x = static_cast<int>(other.x);
 	this->y = static_cast<int>(other.y);
@@ -45,7 +45,7 @@ ivec4::ivec4(const fvec2& other)
 	this->w = 0;
 }
 
-ivec4::ivec4(const fvec3& other)
+ivec4::ivec4(const fvec3 & other)
 {
 	this->x = static_cast<int>(other.x);
 	this->y = static_cast<int>(other.y);
@@ -53,7 +53,7 @@ ivec4::ivec4(const fvec3& other)
 	this->w = 0;
 }
 
-ivec4::ivec4(const fvec4& other)
+ivec4::ivec4(const fvec4 & other)
 {
 	this->x = static_cast<int>(other.x);
 	this->y = static_cast<int>(other.y);
@@ -61,7 +61,7 @@ ivec4::ivec4(const fvec4& other)
 	this->w = static_cast<int>(other.w);
 }
 
-ivec4::ivec4(const int& value)
+ivec4::ivec4(const int & value)
 {
 	this->x = value;
 	this->y = value;
@@ -69,7 +69,7 @@ ivec4::ivec4(const int& value)
 	this->w = value;
 }
 
-ivec4::ivec4(const int& x, const int& y, const int& z, const int& w)
+ivec4::ivec4(const int & x, const int & y, const int & z, const int & w)
 {
 	this->x = x;
 	this->y = y;
@@ -77,7 +77,7 @@ ivec4::ivec4(const int& x, const int& y, const int& z, const int& w)
 	this->w = w;
 }
 
-void ivec4::operator+=(const ivec4& v)
+void ivec4::operator+=(const ivec4 & v)
 {
 	this->x += v.x;
 	this->y += v.y;
@@ -85,7 +85,7 @@ void ivec4::operator+=(const ivec4& v)
 	this->w += v.w;
 }
 
-void ivec4::operator-=(const ivec4& v)
+void ivec4::operator-=(const ivec4 & v)
 {
 	this->x -= v.x;
 	this->y -= v.y;
@@ -93,7 +93,7 @@ void ivec4::operator-=(const ivec4& v)
 	this->w -= v.w;
 }
 
-void ivec4::operator*=(const ivec4& v)
+void ivec4::operator*=(const ivec4 & v)
 {
 	this->x *= v.x;
 	this->y *= v.y;
@@ -101,7 +101,7 @@ void ivec4::operator*=(const ivec4& v)
 	this->w *= v.w;
 }
 
-void ivec4::operator/=(const ivec4& v)
+void ivec4::operator/=(const ivec4 & v)
 {
 	this->x /= v.x;
 	this->y /= v.y;
@@ -109,7 +109,7 @@ void ivec4::operator/=(const ivec4& v)
 	this->w /= v.w;
 }
 
-void ivec4::operator+=(const int& value)
+void ivec4::operator+=(const int & value)
 {
 	this->x += value;
 	this->y += value;
@@ -117,7 +117,7 @@ void ivec4::operator+=(const int& value)
 	this->w += value;
 }
 
-void ivec4::operator-=(const int& value)
+void ivec4::operator-=(const int & value)
 {
 	this->x -= value;
 	this->y -= value;
@@ -125,7 +125,7 @@ void ivec4::operator-=(const int& value)
 	this->w -= value;
 }
 
-void ivec4::operator/=(const int& value)
+void ivec4::operator/=(const int & value)
 {
 	this->x /= value;
 	this->y /= value;
@@ -133,7 +133,7 @@ void ivec4::operator/=(const int& value)
 	this->w /= value;
 }
 
-void ivec4::operator*=(const int& value)
+void ivec4::operator*=(const int & value)
 {
 	this->x *= value;
 	this->y *= value;
@@ -146,52 +146,52 @@ const ivec4 ivec4::operator-() const
 	return ivec4(-this->x, -this->y, -this->z, -this->w);
 }
 
-const ivec4 ivec4::operator+(const ivec4& v) const
+const ivec4 ivec4::operator+(const ivec4 & v) const
 {
 	return ivec4((this->x + v.x), (this->y + v.y), (this->z + v.z), (this->w + v.w));
 }
 
-const ivec4 ivec4::operator-(const ivec4& v) const
+const ivec4 ivec4::operator-(const ivec4 & v) const
 {
 	return ivec4((this->x - v.x), (this->y - v.y), (this->z - v.z), (this->w - v.w));
 }
 
-const ivec4 ivec4::operator*(const ivec4& v) const
+const ivec4 ivec4::operator*(const ivec4 & v) const
 {
 	return ivec4((this->x * v.x), (this->y * v.y), (this->z * v.z), (this->w * v.w));
 }
 
-const ivec4 ivec4::operator/(const ivec4& v) const
+const ivec4 ivec4::operator/(const ivec4 & v) const
 {
 	return ivec4((this->x / v.x), (this->y / v.y), (this->z / v.z), (this->w / v.w));
 }
 
-const ivec4 ivec4::operator+(const int& value) const
+const ivec4 ivec4::operator+(const int & value) const
 {
 	return ivec4((this->x + value), (this->y + value), (this->z + value), (this->w + value));
 }
 
-const ivec4 ivec4::operator-(const int& value) const
+const ivec4 ivec4::operator-(const int & value) const
 {
 	return ivec4((this->x - value), (this->y - value), (this->z - value), (this->w - value));
 }
 
-const ivec4 ivec4::operator/(const int& value) const
+const ivec4 ivec4::operator/(const int & value) const
 {
 	return ivec4((this->x / value), (this->y / value), (this->z / value), (this->w / value));
 }
 
-const ivec4 ivec4::operator*(const int& value) const
+const ivec4 ivec4::operator*(const int & value) const
 {
 	return ivec4((this->x * value), (this->y * value), (this->z * value), (this->w * value));
 }
 
-const bool ivec4::operator==(const ivec4& other) const
+const bool ivec4::operator==(const ivec4 & other) const
 {
 	return ((this->x == other.x) && (this->y == other.y) && (this->z == other.z) && (this->w == other.w));
 }
 
-const bool ivec4::operator!=(const ivec4& other) const
+const bool ivec4::operator!=(const ivec4 & other) const
 {
 	return ((this->x != other.x) || (this->y != other.y) || (this->z != other.z) || (this->w != other.w));
 }

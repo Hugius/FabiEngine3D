@@ -11,8 +11,8 @@ public:
 	LibraryLoader();
 	~LibraryLoader();
 
-	SDL_Window* getWindowPointer();
+	SDL_Window * getWindowPointer();
 
 private:
-	SDL_Window* _windowPointer = nullptr;
+	SDL_Window * _windowPointer = nullptr;
 };

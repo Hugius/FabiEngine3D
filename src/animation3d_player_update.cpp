@@ -14,7 +14,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 {
 	vector<string> modelAnimationsToStop;
 
-	for(auto& [key, startedAnimation] : _startedModelAnimations)
+	for(auto & [key, startedAnimation] : _startedModelAnimations)
 	{
 		if(startedAnimation->isPaused())
 		{
@@ -26,7 +26,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 		const auto model = _modelEntityManager->getEntity(splitKey.second);
 
 		unsigned int finishedPartCount = 0;
-		for(const auto& partId : startedAnimation->getPartIds())
+		for(const auto & partId : startedAnimation->getPartIds())
 		{
 			auto totalMovement = startedAnimation->getTotalMovement(partId);
 			auto totalRotation = startedAnimation->getTotalRotation(partId);
@@ -375,7 +375,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 			{
 				startedAnimation->setFrameIndex(0);
 
-				for(const auto& partId : startedAnimation->getPartIds())
+				for(const auto & partId : startedAnimation->getPartIds())
 				{
 					startedAnimation->setTotalMovement(partId, fvec3(0.0f));
 					startedAnimation->setTotalRotation(partId, fvec3(0.0f));
@@ -400,7 +400,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 		}
 	}
 
-	for(const auto& key : modelAnimationsToStop)
+	for(const auto & key : modelAnimationsToStop)
 	{
 		_startedModelAnimations.erase(key);
 	}

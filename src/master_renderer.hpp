@@ -58,7 +58,7 @@ public:
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<Timer> timer);
 	void update();
-	void renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2& viewport);
+	void renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2 & viewport);
 	void render3dEntities();
 	void render2dEntities();
 	void reloadBloomBlurQuality();
@@ -69,7 +69,7 @@ public:
 	void reloadWaterReflectionQuality();
 	void reloadWaterRefractionQuality();
 	void reloadShadowQuality();
-	void setBackgroundColor(const fvec3& color);
+	void setBackgroundColor(const fvec3 & color);
 	void captureCubeReflections();
 	void capturePlanarReflections();
 	void captureWaterReflections();

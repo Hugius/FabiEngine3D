@@ -12,98 +12,98 @@ fvec3::fvec3()
 	this->z = 0.0f;
 }
 
-fvec3::fvec3(const fvec2& other)
+fvec3::fvec3(const fvec2 & other)
 {
 	this->x = other.x;
 	this->y = other.y;
 	this->z = 0.0f;
 }
 
-fvec3::fvec3(const fvec3& other)
+fvec3::fvec3(const fvec3 & other)
 {
 	this->x = other.x;
 	this->y = other.y;
 	this->z = other.z;
 }
 
-fvec3::fvec3(const fvec4& other)
+fvec3::fvec3(const fvec4 & other)
 {
 	this->x = other.x;
 	this->y = other.y;
 	this->z = other.z;
 }
 
-fvec3::fvec3(const ivec2& other)
+fvec3::fvec3(const ivec2 & other)
 {
 	this->x = static_cast<float>(other.x);
 	this->y = static_cast<float>(other.y);
 	this->z = 0.0f;
 }
 
-fvec3::fvec3(const ivec3& other)
+fvec3::fvec3(const ivec3 & other)
 {
 	this->x = static_cast<float>(other.x);
 	this->y = static_cast<float>(other.y);
 	this->z = static_cast<float>(other.z);
 }
 
-fvec3::fvec3(const ivec4& other)
+fvec3::fvec3(const ivec4 & other)
 {
 	this->x = static_cast<float>(other.x);
 	this->y = static_cast<float>(other.y);
 	this->z = static_cast<float>(other.z);
 }
 
-fvec3::fvec3(const float& value)
+fvec3::fvec3(const float & value)
 {
 	this->x = value;
 	this->y = value;
 	this->z = value;
 }
 
-fvec3::fvec3(const float& x, const float& y, const float& z)
+fvec3::fvec3(const float & x, const float & y, const float & z)
 {
 	this->x = x;
 	this->y = y;
 	this->z = z;
 }
 
-const fvec3 fvec3::operator+(const fvec3& other) const
+const fvec3 fvec3::operator+(const fvec3 & other) const
 {
 	return fvec3((this->x + other.x), (this->y + other.y), (this->z + other.z));
 }
 
-const fvec3 fvec3::operator-(const fvec3& other) const
+const fvec3 fvec3::operator-(const fvec3 & other) const
 {
 	return fvec3((this->x - other.x), (this->y - other.y), (this->z - other.z));
 }
 
-const fvec3 fvec3::operator*(const fvec3& other) const
+const fvec3 fvec3::operator*(const fvec3 & other) const
 {
 	return fvec3((this->x * other.x), (this->y * other.y), (this->z * other.z));
 }
 
-const fvec3 fvec3::operator/(const fvec3& other) const
+const fvec3 fvec3::operator/(const fvec3 & other) const
 {
 	return fvec3((this->x / other.x), (this->y / other.y), (this->z / other.z));
 }
 
-const fvec3 fvec3::operator+(const float& other) const
+const fvec3 fvec3::operator+(const float & other) const
 {
 	return fvec3((this->x + other), (this->y + other), (this->z + other));
 }
 
-const fvec3 fvec3::operator-(const float& other) const
+const fvec3 fvec3::operator-(const float & other) const
 {
 	return fvec3((this->x - other), (this->y - other), (this->z - other));
 }
 
-const fvec3 fvec3::operator*(const float& other) const
+const fvec3 fvec3::operator*(const float & other) const
 {
 	return fvec3((this->x * other), (this->y * other), (this->z * other));
 }
 
-const fvec3 fvec3::operator/(const float& other) const
+const fvec3 fvec3::operator/(const float & other) const
 {
 	return fvec3((this->x / other), (this->y / other), (this->z / other));
 }
@@ -113,68 +113,68 @@ const fvec3 fvec3::operator-() const
 	return fvec3(-this->x, -this->y, -this->z);
 }
 
-void fvec3::operator+=(const float& other)
+void fvec3::operator+=(const float & other)
 {
 	this->x += other;
 	this->y += other;
 	this->z += other;
 }
 
-void fvec3::operator-=(const float& other)
+void fvec3::operator-=(const float & other)
 {
 	this->x -= other;
 	this->y -= other;
 	this->z -= other;
 }
 
-void fvec3::operator+=(const fvec3& other)
+void fvec3::operator+=(const fvec3 & other)
 {
 	this->x += other.x;
 	this->y += other.y;
 	this->z += other.z;
 }
 
-void fvec3::operator-=(const fvec3& other)
+void fvec3::operator-=(const fvec3 & other)
 {
 	this->x -= other.x;
 	this->y -= other.y;
 	this->z -= other.z;
 }
 
-void fvec3::operator*=(const fvec3& other)
+void fvec3::operator*=(const fvec3 & other)
 {
 	this->x *= other.x;
 	this->y *= other.y;
 	this->z *= other.z;
 }
 
-void fvec3::operator/=(const fvec3& other)
+void fvec3::operator/=(const fvec3 & other)
 {
 	this->x /= other.x;
 	this->y /= other.y;
 	this->z /= other.z;
 }
 
-void fvec3::operator*=(const float& other)
+void fvec3::operator*=(const float & other)
 {
 	this->x *= other;
 	this->y *= other;
 	this->z *= other;
 }
 
-void fvec3::operator/=(const float& other)
+void fvec3::operator/=(const float & other)
 {
 	this->x /= other;
 	this->y /= other;
 	this->z /= other;
 }
 
-const bool fvec3::operator==(const fvec3& other) const
+const bool fvec3::operator==(const fvec3 & other) const
 {
 	return ((this->x == other.x) && (this->y == other.y) && (this->z == other.z));
 }
 
-const bool fvec3::operator!=(const fvec3& other) const
+const bool fvec3::operator!=(const fvec3 & other) const
 {
 	return ((this->x != other.x) || (this->y != other.y) || (this->z != other.z));
 }

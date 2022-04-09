@@ -17,34 +17,34 @@ public:
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTarget();
 	void updateTransformation();
-	void setLocalPosition(const fvec3& value);
-	void setLocalSize(const fvec3& value);
-	void setBasePosition(const fvec3& value);
-	void setBaseSize(const fvec3& value);
-	void moveBase(const fvec3& value);
-	void scaleBase(const fvec3& value);
-	void moveBaseTo(const fvec3& target, float speed);
-	void scaleBaseTo(const fvec3& target, float speed);
-	void setParentId(const string& value);
+	void setLocalPosition(const fvec3 & value);
+	void setLocalSize(const fvec3 & value);
+	void setBasePosition(const fvec3 & value);
+	void setBaseSize(const fvec3 & value);
+	void moveBase(const fvec3 & value);
+	void scaleBase(const fvec3 & value);
+	void moveBaseTo(const fvec3 & target, float speed);
+	void scaleBaseTo(const fvec3 & target, float speed);
+	void setParentId(const string & value);
 	void setParentType(AabbParentType value);
 	void setCollisionDirection(Direction value);
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
 	void setCollided(bool value);
-	void setColor(const fvec3& value);
+	void setColor(const fvec3 & value);
 	void setCentered(bool value);
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 
-	const string& getParentId() const;
+	const string & getParentId() const;
 
-	const mat44& getTransformation() const;
+	const mat44 & getTransformation() const;
 
-	const fvec3& getLocalPosition() const;
-	const fvec3& getLocalSize() const;
-	const fvec3& getBasePosition() const;
-	const fvec3& getBaseSize() const;
-	const fvec3& getColor() const;
+	const fvec3 & getLocalPosition() const;
+	const fvec3 & getLocalSize() const;
+	const fvec3 & getBasePosition() const;
+	const fvec3 & getBaseSize() const;
+	const fvec3 & getColor() const;
 
 	const bool isCentered() const;
 	const bool isRaycastResponsive() const;

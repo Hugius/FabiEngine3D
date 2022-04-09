@@ -8,7 +8,7 @@ using std::clamp;
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
+const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
 	if(functionName == "fe3d:cursor_is_visible")
 	{

@@ -8,7 +8,7 @@
 
 using std::to_string;
 
-const bool NetworkingClient::_sendTcpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted)
+const bool NetworkingClient::_sendTcpMessageToServer(const string & content, bool isReserved, bool mustBeAccepted)
 {
 	if(!_isRunning)
 	{
@@ -56,7 +56,7 @@ const bool NetworkingClient::_sendTcpMessageToServer(const string& content, bool
 	return true;
 }
 
-const bool NetworkingClient::_sendUdpMessageToServer(const string& content, bool isReserved, bool mustBeAccepted) const
+const bool NetworkingClient::_sendUdpMessageToServer(const string & content, bool isReserved, bool mustBeAccepted) const
 {
 	if(!_isRunning)
 	{
@@ -83,7 +83,7 @@ const bool NetworkingClient::_sendUdpMessageToServer(const string& content, bool
 
 	string message = (_username + ';' + content);
 
-	auto sendStatusCode = sendto(_udpSocket, message.c_str(), static_cast<int>(message.size()), 0, reinterpret_cast<sockaddr*>(&socketAddress), sizeof(socketAddress));
+	auto sendStatusCode = sendto(_udpSocket, message.c_str(), static_cast<int>(message.size()), 0, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
 
 	if(sendStatusCode == SOCKET_ERROR)
 	{
@@ -101,11 +101,11 @@ const bool NetworkingClient::_sendUdpMessageToServer(const string& content, bool
 	return true;
 }
 
-const int NetworkingClient::_waitForServerConnection(SOCKET socket, const string& ip) const
+const int NetworkingClient::_waitForServerConnection(SOCKET socket, const string & ip) const
 {
 	auto socketAddress = _composeSocketAddress(ip, SERVER_PORT);
 
-	auto connectStatusCode = connect(socket, reinterpret_cast<sockaddr*>(&socketAddress), sizeof(socketAddress));
+	auto connectStatusCode = connect(socket, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
 
 	if(connectStatusCode == SOCKET_ERROR)
 	{
@@ -125,7 +125,7 @@ const bool NetworkingClient::_setupTcp()
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
-	addrinfo* addressInfo = nullptr;
+	addrinfo * addressInfo = nullptr;
 	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", "0", &hints, &addressInfo);
 	if(tcpInfoStatusCode != 0)
 	{
@@ -160,7 +160,7 @@ const bool NetworkingClient::_setupUdp()
 	hints.ai_socktype = SOCK_DGRAM;
 	hints.ai_protocol = IPPROTO_UDP;
 
-	addrinfo* addressInfo = nullptr;
+	addrinfo * addressInfo = nullptr;
 	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", "0", &hints, &addressInfo);
 	if(udpInfoStatusCode != 0)
 	{
@@ -210,7 +210,7 @@ tuple<int, int, string, string, string> NetworkingClient::_receiveUdpMessage(SOC
 	sockaddr_in sourceAddress = sockaddr_in();
 	int sourceAddressLength = sizeof(sourceAddress);
 
-	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
+	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
 
 	auto ip = _extractAddressIp(&sourceAddress);
 	auto port = _extractAddressPort(&sourceAddress);
@@ -229,7 +229,7 @@ const string NetworkingClient::_extractSocketIp(SOCKET socket) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+	auto peerResult = getsockname(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
 	return _extractAddressIp(&socketAddress);
 }
@@ -238,12 +238,12 @@ const string NetworkingClient::_extractSocketPort(SOCKET socket) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+	auto peerResult = getsockname(socket, (sockaddr *)&socketAddress, &socketAddressLength);
 
 	return _extractAddressPort(&socketAddress);
 }
 
-const sockaddr_in NetworkingClient::_composeSocketAddress(const string& ip, const string& port) const
+const sockaddr_in NetworkingClient::_composeSocketAddress(const string & ip, const string & port) const
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	socketAddress.sin_family = AF_INET;
@@ -253,7 +253,7 @@ const sockaddr_in NetworkingClient::_composeSocketAddress(const string& ip, cons
 	return socketAddress;
 }
 
-const string NetworkingClient::_extractAddressIp(sockaddr_in* address) const
+const string NetworkingClient::_extractAddressIp(sockaddr_in * address) const
 {
 	char ip[IPV4_ADDRESS_LENGTH];
 
@@ -262,7 +262,7 @@ const string NetworkingClient::_extractAddressIp(sockaddr_in* address) const
 	return (ip);
 }
 
-const string NetworkingClient::_extractAddressPort(sockaddr_in* address) const
+const string NetworkingClient::_extractAddressPort(sockaddr_in * address) const
 {
 	return to_string(ntohs(address->sin_port));
 }
@@ -277,7 +277,7 @@ const bool NetworkingClient::_isMessageReadyUDP(SOCKET socket) const
 	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
 }
 
-const bool NetworkingClient::isMessageReserved(const string& message) const
+const bool NetworkingClient::isMessageReserved(const string & message) const
 {
 	return
 		(

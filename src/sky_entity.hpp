@@ -16,23 +16,23 @@ public:
 
 	void updateTransformation();
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
-	void setCubeMapPaths(const array<string, 6>& value);
-	void setColor(const fvec3& value);
+	void setCubeMapPaths(const array<string, 6> & value);
+	void setColor(const fvec3 & value);
 	void setCubeMap(shared_ptr<TextureBuffer> value);
 	void setLightness(float value);
 	void setRotation(float value);
 	void setWireframed(bool value);
-	void setWireframeColor(const fvec3& value);
+	void setWireframeColor(const fvec3 & value);
 
-	const array<string, 6>& getCubeMapPaths() const;
+	const array<string, 6> & getCubeMapPaths() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getCubeTextureBuffer() const;
 
-	const mat44& getTransformation() const;
+	const mat44 & getTransformation() const;
 
-	const fvec3& getWireframeColor() const;
-	const fvec3& getColor() const;
+	const fvec3 & getWireframeColor() const;
+	const fvec3 & getColor() const;
 
 	const float getLightness() const;
 	const float getRotation() const;

@@ -7,13 +7,13 @@ using std::string;
 class Animation2d final
 {
 public:
-	Animation2d(const string& id);
+	Animation2d(const string & id);
 
 	void setRowCount(unsigned int value);
 	void setColumnCount(unsigned int value);
 	void setInterval(unsigned int value);
 
-	const string& getId() const;
+	const string & getId() const;
 
 	const unsigned int getRowCount() const;
 	const unsigned int getColumnCount() const;

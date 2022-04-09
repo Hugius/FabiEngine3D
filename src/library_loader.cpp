@@ -28,7 +28,7 @@ LibraryLoader::LibraryLoader()
 	auto initGlew = glewInit();
 	if(initGlew != GLEW_OK)
 	{
-		Logger::throwError("GLEW could not be initialized: ", reinterpret_cast<char const*>(glewGetErrorString(initGlew)));
+		Logger::throwError("GLEW could not be initialized: ", reinterpret_cast<char const *>(glewGetErrorString(initGlew)));
 	}
 	Logger::throwInfo("Initialized OpenGL");
 
@@ -47,7 +47,7 @@ LibraryLoader::~LibraryLoader()
 	SDL_Quit();
 }
 
-SDL_Window* LibraryLoader::getWindowPointer()
+SDL_Window * LibraryLoader::getWindowPointer()
 {
 	auto temp = _windowPointer;
 	_windowPointer = nullptr;

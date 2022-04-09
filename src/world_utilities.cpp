@@ -5,7 +5,7 @@ void WorldUtilities::inject(shared_ptr<EngineInterface> fe3d)
 	_fe3d = fe3d;
 }
 
-void WorldUtilities::copyTemplateSky(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateSky(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sky_isExisting(templateId))
 	{
@@ -20,7 +20,7 @@ void WorldUtilities::copyTemplateSky(const string& newId, const string& template
 	_fe3d->sky_setColor(newId, _fe3d->sky_getColor(templateId));
 }
 
-void WorldUtilities::copyTemplateTerrain(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateTerrain(const string & newId, const string & templateId)
 {
 	if(!_fe3d->terrain_isExisting(templateId))
 	{
@@ -85,7 +85,7 @@ void WorldUtilities::copyTemplateTerrain(const string& newId, const string& temp
 	}
 }
 
-void WorldUtilities::copyTemplateWater(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateWater(const string & newId, const string & templateId)
 {
 	if(!_fe3d->water_isExisting(templateId))
 	{
@@ -125,7 +125,7 @@ void WorldUtilities::copyTemplateWater(const string& newId, const string& templa
 	}
 }
 
-void WorldUtilities::copyTemplateModel(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateModel(const string & newId, const string & templateId)
 {
 	if(!_fe3d->model_isExisting(templateId))
 	{
@@ -140,7 +140,7 @@ void WorldUtilities::copyTemplateModel(const string& newId, const string& templa
 	_fe3d->model_setLevelOfDetailDistance(newId, _fe3d->model_getLevelOfDetailDistance(templateId));
 	_fe3d->model_setRotationOrder(newId, _fe3d->model_getRotationOrder(templateId));
 
-	for(const auto& partId : _fe3d->model_getPartIds(templateId))
+	for(const auto & partId : _fe3d->model_getPartIds(templateId))
 	{
 		_fe3d->model_setLightness(newId, partId, _fe3d->model_getLightness(templateId, partId));
 		_fe3d->model_setBright(newId, partId, _fe3d->model_isBright(templateId, partId));
@@ -183,7 +183,7 @@ void WorldUtilities::copyTemplateModel(const string& newId, const string& templa
 		}
 	}
 
-	for(const auto& templateAabbId : _fe3d->model_getChildAabbIds(templateId))
+	for(const auto & templateAabbId : _fe3d->model_getChildAabbIds(templateId))
 	{
 		const string newAabbId = (newId + "@" + templateAabbId.substr((templateId + "_").size()));
 		_fe3d->aabb_create(newAabbId, false);
@@ -194,7 +194,7 @@ void WorldUtilities::copyTemplateModel(const string& newId, const string& templa
 	}
 }
 
-void WorldUtilities::copyTemplateQuad3d(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateQuad3d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->quad3d_isExisting(templateId))
 	{
@@ -230,7 +230,7 @@ void WorldUtilities::copyTemplateQuad3d(const string& newId, const string& templ
 	_fe3d->aabb_setParentType(newId, AabbParentType::QUAD3D);
 }
 
-void WorldUtilities::copyTemplateText3d(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateText3d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->text3d_isExisting(templateId))
 	{
@@ -255,7 +255,7 @@ void WorldUtilities::copyTemplateText3d(const string& newId, const string& templ
 	_fe3d->aabb_setParentType(newId, AabbParentType::TEXT3D);
 }
 
-void WorldUtilities::copyTemplateSound3d(const string& newId, const string& templateId)
+void WorldUtilities::copyTemplateSound3d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sound2d_isExisting(templateId))
 	{

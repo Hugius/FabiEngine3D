@@ -15,12 +15,12 @@ void SkyEntity::updateTransformation()
 	_transformation = Mathematics::createRotationMatrixY(Mathematics::convertToRadians(_rotation));
 }
 
-void SkyEntity::setCubeMapPaths(const array<string, 6>& value)
+void SkyEntity::setCubeMapPaths(const array<string, 6> & value)
 {
 	_cubeMapPaths = value;
 }
 
-void SkyEntity::setColor(const fvec3& value)
+void SkyEntity::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -45,7 +45,7 @@ void SkyEntity::setWireframed(bool value)
 	_isWireframed = value;
 }
 
-void SkyEntity::setWireframeColor(const fvec3& value)
+void SkyEntity::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -55,22 +55,22 @@ const shared_ptr<VertexBuffer> SkyEntity::getVertexBuffer() const
 	return _vertexBuffer;
 }
 
-const array<string, 6>& SkyEntity::getCubeMapPaths() const
+const array<string, 6> & SkyEntity::getCubeMapPaths() const
 {
 	return _cubeMapPaths;
 }
 
-const mat44& SkyEntity::getTransformation() const
+const mat44 & SkyEntity::getTransformation() const
 {
 	return _transformation;
 }
 
-const fvec3& SkyEntity::getWireframeColor() const
+const fvec3 & SkyEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const fvec3& SkyEntity::getColor() const
+const fvec3 & SkyEntity::getColor() const
 {
 	return _color;
 }

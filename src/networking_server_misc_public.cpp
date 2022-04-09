@@ -6,7 +6,7 @@ const bool NetworkingServer::isRunning() const
 	return _isRunning;
 }
 
-const bool NetworkingServer::isClientConnected(const string& username) const
+const bool NetworkingServer::isClientConnected(const string & username) const
 {
 	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientUsernames.size()); index++)
 	{
@@ -61,7 +61,7 @@ const unsigned int NetworkingServer::getMaxMessageSize() const
 	return MAX_MESSAGE_SIZE;
 }
 
-const vector<NetworkingClientMessage>& NetworkingServer::getPendingMessages() const
+const vector<NetworkingClientMessage> & NetworkingServer::getPendingMessages() const
 {
 	return _pendingMessages;
 }
@@ -96,7 +96,7 @@ const vector<string> NetworkingServer::getClientUsernames() const
 	return clientUsernames;
 }
 
-void NetworkingServer::sendTcpMessageToClient(const string& username, const string& content)
+void NetworkingServer::sendTcpMessageToClient(const string & username, const string & content)
 {
 	if(!_isRunning)
 	{
@@ -130,7 +130,7 @@ void NetworkingServer::sendTcpMessageToClient(const string& username, const stri
 	abort();
 }
 
-void NetworkingServer::sendUdpMessageToClient(const string& username, const string& content)
+void NetworkingServer::sendUdpMessageToClient(const string & username, const string & content)
 {
 	if(!_isRunning)
 	{
@@ -164,7 +164,7 @@ void NetworkingServer::sendUdpMessageToClient(const string& username, const stri
 	abort();
 }
 
-void NetworkingServer::broadcastTcpMessageToClients(const string& content)
+void NetworkingServer::broadcastTcpMessageToClients(const string & content)
 {
 	if(!_isRunning)
 	{
@@ -192,7 +192,7 @@ void NetworkingServer::broadcastTcpMessageToClients(const string& content)
 	}
 }
 
-void NetworkingServer::broadcastUdpMessageToClients(const string& content)
+void NetworkingServer::broadcastUdpMessageToClients(const string & content)
 {
 	if(!_isRunning)
 	{
@@ -220,7 +220,7 @@ void NetworkingServer::broadcastUdpMessageToClients(const string& content)
 	}
 }
 
-void NetworkingServer::disconnectClient(const string& username)
+void NetworkingServer::disconnectClient(const string & username)
 {
 	if(!_isRunning)
 	{

@@ -6,37 +6,37 @@ class CustomWorldBuilder final
 {
 public:
 	void inject(shared_ptr<EngineInterface> fe3d);
-	void setCurrentProjectId(const string& currentProjectId);
+	void setCurrentProjectId(const string & currentProjectId);
 	void resetWorldBuild();
-	void addSky(const string& id);
-	void addTerrain(const string& id);
-	void addWater(const string& id);
-	void addModel(const string& id);
-	void addQuad3d(const string& id);
-	void addText3d(const string& id);
-	void addAabb(const string& id);
-	void addPointlight(const string& id);
-	void addSpotlight(const string& id);
-	void addReflection(const string& id);
-	void addSound(const string& id);
+	void addSky(const string & id);
+	void addTerrain(const string & id);
+	void addWater(const string & id);
+	void addModel(const string & id);
+	void addQuad3d(const string & id);
+	void addText3d(const string & id);
+	void addAabb(const string & id);
+	void addPointlight(const string & id);
+	void addSpotlight(const string & id);
+	void addReflection(const string & id);
+	void addSound(const string & id);
 	void addGraphics();
 	void clearLoadedWorld();
 
-	const string& getLoadedWorldId() const;
+	const string & getLoadedWorldId() const;
 
-	const bool loadWorldFromFile(const string& fileName);
-	const bool saveWorldToFile(const string& fileName) const;
-	const bool isSkyAdded(const string& id) const;
-	const bool isTerrainAdded(const string& id) const;
-	const bool isWaterAdded(const string& id) const;
-	const bool isModelAdded(const string& id) const;
-	const bool isQuad3dAdded(const string& id) const;
-	const bool isText3dAdded(const string& id) const;
-	const bool isAabbAdded(const string& id) const;
-	const bool isPointlightAdded(const string& id) const;
-	const bool isSpotlightAdded(const string& id) const;
-	const bool isReflectionAdded(const string& id) const;
-	const bool isSound3dAdded(const string& id) const;
+	const bool loadWorldFromFile(const string & fileName);
+	const bool saveWorldToFile(const string & fileName) const;
+	const bool isSkyAdded(const string & id) const;
+	const bool isTerrainAdded(const string & id) const;
+	const bool isWaterAdded(const string & id) const;
+	const bool isModelAdded(const string & id) const;
+	const bool isQuad3dAdded(const string & id) const;
+	const bool isText3dAdded(const string & id) const;
+	const bool isAabbAdded(const string & id) const;
+	const bool isPointlightAdded(const string & id) const;
+	const bool isSpotlightAdded(const string & id) const;
+	const bool isReflectionAdded(const string & id) const;
+	const bool isSound3dAdded(const string & id) const;
 	const bool isGraphicsAdded() const;
 
 private:

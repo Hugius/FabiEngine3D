@@ -14,26 +14,26 @@ public:
 	using BaseEntity::BaseEntity;
 
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
-	void setPixels(const vector<float>& value);
-	void setHeightMapPath(const string& value);
+	void setPixels(const vector<float> & value);
+	void setHeightMapPath(const string & value);
 	void setDiffuseMap(shared_ptr<TextureBuffer> value);
-	void setDiffuseMapPath(const string& value);
+	void setDiffuseMapPath(const string & value);
 	void setNormalMap(shared_ptr<TextureBuffer> value);
-	void setNormalMapPath(const string& value);
+	void setNormalMapPath(const string & value);
 	void setBlendMap(shared_ptr<TextureBuffer> value);
-	void setBlendMapPath(const string& value);
+	void setBlendMapPath(const string & value);
 	void setRedDiffuseMap(shared_ptr<TextureBuffer> value);
-	void setRedDiffuseMapPath(const string& value);
+	void setRedDiffuseMapPath(const string & value);
 	void setGreenDiffuseMap(shared_ptr<TextureBuffer> value);
-	void setGreenDiffuseMapPath(const string& value);
+	void setGreenDiffuseMapPath(const string & value);
 	void setBlueDiffuseMap(shared_ptr<TextureBuffer> value);
-	void setBlueDiffuseMapPath(const string& value);
+	void setBlueDiffuseMapPath(const string & value);
 	void setRedNormalMap(shared_ptr<TextureBuffer> value);
-	void setRedNormalMapPath(const string& value);
+	void setRedNormalMapPath(const string & value);
 	void setGreenNormalMap(shared_ptr<TextureBuffer> value);
-	void setGreenNormalMapPath(const string& value);
+	void setGreenNormalMapPath(const string & value);
 	void setBlueNormalMap(shared_ptr<TextureBuffer> value);
-	void setBlueNormalMapPath(const string& value);
+	void setBlueNormalMapPath(const string & value);
 	void setTextureRepeat(unsigned int value);
 	void setRedTextureRepeat(unsigned int value);
 	void setGreenTextureRepeat(unsigned int value);
@@ -45,9 +45,9 @@ public:
 	void setSpecularIntensity(float value);
 	void setSpecular(bool value);
 	void setWireframed(bool value);
-	void setWireframeColor(const fvec3& value);
+	void setWireframeColor(const fvec3 & value);
 
-	const vector<float>& getPixels() const;
+	const vector<float> & getPixels() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
@@ -60,18 +60,18 @@ public:
 	const shared_ptr<TextureBuffer> getGreenNormalTextureBuffer() const;
 	const shared_ptr<TextureBuffer> getBlueNormalTextureBuffer() const;
 
-	const string& getHeightMapPath() const;
-	const string& getDiffuseMapPath() const;
-	const string& getNormalMapPath() const;
-	const string& getBlendMapPath() const;
-	const string& getRedDiffuseMapPath() const;
-	const string& getGreenDiffuseMapPath() const;
-	const string& getBlueDiffuseMapPath() const;
-	const string& getRedNormalMapPath() const;
-	const string& getGreenNormalMapPath() const;
-	const string& getBlueNormalMapPath() const;
+	const string & getHeightMapPath() const;
+	const string & getDiffuseMapPath() const;
+	const string & getNormalMapPath() const;
+	const string & getBlendMapPath() const;
+	const string & getRedDiffuseMapPath() const;
+	const string & getGreenDiffuseMapPath() const;
+	const string & getBlueDiffuseMapPath() const;
+	const string & getRedNormalMapPath() const;
+	const string & getGreenNormalMapPath() const;
+	const string & getBlueNormalMapPath() const;
 
-	const fvec3& getWireframeColor() const;
+	const fvec3 & getWireframeColor() const;
 
 	const float getSize() const;
 	const float getMaxHeight() const;

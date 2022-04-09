@@ -5,7 +5,7 @@ void CustomWorldBuilder::inject(shared_ptr<EngineInterface> fe3d)
 	_fe3d = fe3d;
 }
 
-void CustomWorldBuilder::setCurrentProjectId(const string& currentProjectId)
+void CustomWorldBuilder::setCurrentProjectId(const string & currentProjectId)
 {
 	_currentProjectId = currentProjectId;
 }
@@ -20,7 +20,7 @@ void CustomWorldBuilder::addGraphics()
 	_isGraphicsAdded = true;
 }
 
-void CustomWorldBuilder::addSky(const string& id)
+void CustomWorldBuilder::addSky(const string & id)
 {
 	if(find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end())
 	{
@@ -30,7 +30,7 @@ void CustomWorldBuilder::addSky(const string& id)
 	_addedSkyIds.push_back(id);
 }
 
-void CustomWorldBuilder::addTerrain(const string& id)
+void CustomWorldBuilder::addTerrain(const string & id)
 {
 	if(find(_addedTerrainIds.begin(), _addedTerrainIds.end(), id) != _addedTerrainIds.end())
 	{
@@ -40,7 +40,7 @@ void CustomWorldBuilder::addTerrain(const string& id)
 	_addedTerrainIds.push_back(id);
 }
 
-void CustomWorldBuilder::addWater(const string& id)
+void CustomWorldBuilder::addWater(const string & id)
 {
 	if(find(_addedWaterIds.begin(), _addedWaterIds.end(), id) != _addedWaterIds.end())
 	{
@@ -50,7 +50,7 @@ void CustomWorldBuilder::addWater(const string& id)
 	_addedWaterIds.push_back(id);
 }
 
-void CustomWorldBuilder::addModel(const string& id)
+void CustomWorldBuilder::addModel(const string & id)
 {
 	if(find(_addedModelIds.begin(), _addedModelIds.end(), id) != _addedModelIds.end())
 	{
@@ -60,7 +60,7 @@ void CustomWorldBuilder::addModel(const string& id)
 	_addedModelIds.push_back(id);
 }
 
-void CustomWorldBuilder::addQuad3d(const string& id)
+void CustomWorldBuilder::addQuad3d(const string & id)
 {
 	if(find(_addedQuad3dIds.begin(), _addedQuad3dIds.end(), id) != _addedQuad3dIds.end())
 	{
@@ -70,7 +70,7 @@ void CustomWorldBuilder::addQuad3d(const string& id)
 	_addedQuad3dIds.push_back(id);
 }
 
-void CustomWorldBuilder::addText3d(const string& id)
+void CustomWorldBuilder::addText3d(const string & id)
 {
 	if(find(_addedText3dIds.begin(), _addedText3dIds.end(), id) != _addedText3dIds.end())
 	{
@@ -80,7 +80,7 @@ void CustomWorldBuilder::addText3d(const string& id)
 	_addedText3dIds.push_back(id);
 }
 
-void CustomWorldBuilder::addAabb(const string& id)
+void CustomWorldBuilder::addAabb(const string & id)
 {
 	if(find(_addedAabbIds.begin(), _addedAabbIds.end(), id) != _addedAabbIds.end())
 	{
@@ -90,7 +90,7 @@ void CustomWorldBuilder::addAabb(const string& id)
 	_addedAabbIds.push_back(id);
 }
 
-void CustomWorldBuilder::addSound(const string& id)
+void CustomWorldBuilder::addSound(const string & id)
 {
 	if(find(_addedSound3dIds.begin(), _addedSound3dIds.end(), id) != _addedSound3dIds.end())
 	{
@@ -100,7 +100,7 @@ void CustomWorldBuilder::addSound(const string& id)
 	_addedSound3dIds.push_back(id);
 }
 
-void CustomWorldBuilder::addPointlight(const string& id)
+void CustomWorldBuilder::addPointlight(const string & id)
 {
 	if(find(_addedPointlightIds.begin(), _addedPointlightIds.end(), id) != _addedPointlightIds.end())
 	{
@@ -110,7 +110,7 @@ void CustomWorldBuilder::addPointlight(const string& id)
 	_addedPointlightIds.push_back(id);
 }
 
-void CustomWorldBuilder::addSpotlight(const string& id)
+void CustomWorldBuilder::addSpotlight(const string & id)
 {
 	if(find(_addedSpotlightIds.begin(), _addedSpotlightIds.end(), id) != _addedSpotlightIds.end())
 	{
@@ -120,7 +120,7 @@ void CustomWorldBuilder::addSpotlight(const string& id)
 	_addedSpotlightIds.push_back(id);
 }
 
-void CustomWorldBuilder::addReflection(const string& id)
+void CustomWorldBuilder::addReflection(const string & id)
 {
 	if(find(_addedReflectionIds.begin(), _addedReflectionIds.end(), id) != _addedReflectionIds.end())
 	{
@@ -183,57 +183,57 @@ void CustomWorldBuilder::clearLoadedWorld()
 		_fe3d->graphics_setPlanarReflectionHeight(0.0f);
 	}
 
-	for(const auto& id : _loadedSkyIds)
+	for(const auto & id : _loadedSkyIds)
 	{
 		_fe3d->sky_delete(id);
 	}
 
-	for(const auto& id : _loadedTerrainIds)
+	for(const auto & id : _loadedTerrainIds)
 	{
 		_fe3d->terrain_delete(id);
 	}
 
-	for(const auto& id : _loadedWaterIds)
+	for(const auto & id : _loadedWaterIds)
 	{
 		_fe3d->water_delete(id);
 	}
 
-	for(const auto& id : _loadedModelIds)
+	for(const auto & id : _loadedModelIds)
 	{
 		_fe3d->model_delete(id);
 	}
 
-	for(const auto& id : _loadedQuad3dIds)
+	for(const auto & id : _loadedQuad3dIds)
 	{
 		_fe3d->quad3d_delete(id);
 	}
 
-	for(const auto& id : _loadedText3dIds)
+	for(const auto & id : _loadedText3dIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
 
-	for(const auto& id : _loadedAabbIds)
+	for(const auto & id : _loadedAabbIds)
 	{
 		_fe3d->aabb_delete(id);
 	}
 
-	for(const auto& id : _loadedPointlightIds)
+	for(const auto & id : _loadedPointlightIds)
 	{
 		_fe3d->pointlight_delete(id);
 	}
 
-	for(const auto& id : _loadedSpotlightIds)
+	for(const auto & id : _loadedSpotlightIds)
 	{
 		_fe3d->spotlight_delete(id);
 	}
 
-	for(const auto& id : _loadedReflectionIds)
+	for(const auto & id : _loadedReflectionIds)
 	{
 		_fe3d->reflection_delete(id);
 	}
 
-	for(const auto& id : _loadedSound3dIds)
+	for(const auto & id : _loadedSound3dIds)
 	{
 		_fe3d->sound3d_delete(id);
 	}
@@ -253,62 +253,62 @@ void CustomWorldBuilder::clearLoadedWorld()
 	_isGraphicsLoaded = false;
 }
 
-const string& CustomWorldBuilder::getLoadedWorldId() const
+const string & CustomWorldBuilder::getLoadedWorldId() const
 {
 	return _loadedWorldId;
 }
 
-const bool CustomWorldBuilder::isSkyAdded(const string& id) const
+const bool CustomWorldBuilder::isSkyAdded(const string & id) const
 {
 	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
 }
 
-const bool CustomWorldBuilder::isTerrainAdded(const string& id) const
+const bool CustomWorldBuilder::isTerrainAdded(const string & id) const
 {
 	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
 }
 
-const bool CustomWorldBuilder::isWaterAdded(const string& id) const
+const bool CustomWorldBuilder::isWaterAdded(const string & id) const
 {
 	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
 }
 
-const bool CustomWorldBuilder::isModelAdded(const string& id) const
+const bool CustomWorldBuilder::isModelAdded(const string & id) const
 {
 	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
 }
 
-const bool CustomWorldBuilder::isQuad3dAdded(const string& id) const
+const bool CustomWorldBuilder::isQuad3dAdded(const string & id) const
 {
 	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
 }
 
-const bool CustomWorldBuilder::isText3dAdded(const string& id) const
+const bool CustomWorldBuilder::isText3dAdded(const string & id) const
 {
 	return find(_addedSkyIds.begin(), _addedSkyIds.end(), id) != _addedSkyIds.end();
 }
 
-const bool CustomWorldBuilder::isAabbAdded(const string& id) const
+const bool CustomWorldBuilder::isAabbAdded(const string & id) const
 {
 	return find(_addedAabbIds.begin(), _addedAabbIds.end(), id) != _addedAabbIds.end();
 }
 
-const bool CustomWorldBuilder::isPointlightAdded(const string& id) const
+const bool CustomWorldBuilder::isPointlightAdded(const string & id) const
 {
 	return find(_addedPointlightIds.begin(), _addedPointlightIds.end(), id) != _addedPointlightIds.end();
 }
 
-const bool CustomWorldBuilder::isSpotlightAdded(const string& id) const
+const bool CustomWorldBuilder::isSpotlightAdded(const string & id) const
 {
 	return find(_addedSpotlightIds.begin(), _addedSpotlightIds.end(), id) != _addedSpotlightIds.end();
 }
 
-const bool CustomWorldBuilder::isReflectionAdded(const string& id) const
+const bool CustomWorldBuilder::isReflectionAdded(const string & id) const
 {
 	return find(_addedReflectionIds.begin(), _addedReflectionIds.end(), id) != _addedReflectionIds.end();
 }
 
-const bool CustomWorldBuilder::isSound3dAdded(const string& id) const
+const bool CustomWorldBuilder::isSound3dAdded(const string & id) const
 {
 	return find(_addedSound3dIds.begin(), _addedSound3dIds.end(), id) != _addedSound3dIds.end();
 }

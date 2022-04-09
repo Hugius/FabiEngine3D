@@ -16,18 +16,18 @@ public:
 	void setTerrainIntersectionDistance(float distance);
 	void setTerrainIntersectionPrecision(float precision);
 	void setAabbIntersectionEnabled(bool value);
-	void resetTerrainStatus(const string& terrainId);
-	void resetAabbStatus(const string& aabbId);
+	void resetTerrainStatus(const string & terrainId);
+	void resetAabbStatus(const string & aabbId);
 
-	const string& getTerrainId() const;
-	const string& getClosestAabbId() const;
+	const string & getTerrainId() const;
+	const string & getClosestAabbId() const;
 
-	const fvec3& getPointOnTerrain() const;
+	const fvec3 & getPointOnTerrain() const;
 
 	const float getTerrainIntersectionDistance() const;
 	const float getTerrainIntersectionPrecision() const;
 	const float getDistanceToTerrain() const;
-	const float getDistanceToAabb(const string& id) const;
+	const float getDistanceToAabb(const string & id) const;
 
 	const bool isTerrainIntersectionEnabled() const;
 	const bool isAabbIntersectionEnabled() const;

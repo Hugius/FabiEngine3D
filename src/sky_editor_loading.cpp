@@ -45,7 +45,7 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 			>> cubeMapPaths[4]
 			>> cubeMapPaths[5];
 
-		for(auto& cubeMapPath : cubeMapPaths)
+		for(auto & cubeMapPath : cubeMapPaths)
 		{
 			cubeMapPath = (cubeMapPath == "?") ? "" : cubeMapPath;
 
@@ -111,7 +111,7 @@ const bool SkyEditor::loadEntitiesFromFile()
 			>> color.g
 			>> color.b;
 
-		for(auto& cubeMapPath : cubeMapPaths)
+		for(auto & cubeMapPath : cubeMapPaths)
 		{
 			cubeMapPath = (cubeMapPath == "?") ? "" : cubeMapPath;
 

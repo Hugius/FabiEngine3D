@@ -21,7 +21,7 @@ const bool Animation2dEditor::saveAnimationsToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation2d.fe3d");
 
-	for(const auto& animationId : _loadedAnimationIds)
+	for(const auto & animationId : _loadedAnimationIds)
 	{
 		auto rowCount = _fe3d->animation2d_getRowCount(animationId);
 		auto columnCount = _fe3d->animation2d_getColumnCount(animationId);

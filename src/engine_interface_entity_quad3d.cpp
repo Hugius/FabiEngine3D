@@ -1,14 +1,14 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::quad3d_create(const string& id, bool isCentered)
+void EngineInterface::quad3d_create(const string & id, bool isCentered)
 {
 	_core->getQuad3dEntityManager()->createEntity(id, isCentered);
 }
 
-void EngineInterface::quad3d_delete(const string& id)
+void EngineInterface::quad3d_delete(const string & id)
 {
-	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
+	for(const auto & [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
 	{
 		if(id == quadId)
 		{
@@ -16,7 +16,7 @@ void EngineInterface::quad3d_delete(const string& id)
 		}
 	}
 
-	for(const auto& [aabbId, aabbEntity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [aabbId, aabbEntity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(aabbEntity->hasParent())
 		{
@@ -33,77 +33,77 @@ void EngineInterface::quad3d_delete(const string& id)
 	_core->getQuad3dEntityManager()->deleteEntity(id);
 }
 
-void EngineInterface::quad3d_setVisible(const string& id, bool value)
+void EngineInterface::quad3d_setVisible(const string & id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setVisible(value);
 }
 
-void EngineInterface::quad3d_move(const string& id, const fvec3& change)
+void EngineInterface::quad3d_move(const string & id, const fvec3 & change)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->move(change);
 }
 
-void EngineInterface::quad3d_rotate(const string& id, const fvec3& change)
+void EngineInterface::quad3d_rotate(const string & id, const fvec3 & change)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->rotate(change);
 }
 
-void EngineInterface::quad3d_scale(const string& id, const fvec2& change)
+void EngineInterface::quad3d_scale(const string & id, const fvec2 & change)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->scale(change);
 }
 
-void EngineInterface::quad3d_moveTo(const string& id, const fvec3& target, float speed)
+void EngineInterface::quad3d_moveTo(const string & id, const fvec3 & target, float speed)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->moveTo(target, speed);
 }
 
-void EngineInterface::quad3d_rotateTo(const string& id, const fvec3& target, float speed)
+void EngineInterface::quad3d_rotateTo(const string & id, const fvec3 & target, float speed)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->rotateTo(target, speed);
 }
 
-void EngineInterface::quad3d_scaleTo(const string& id, const fvec2& target, float speed)
+void EngineInterface::quad3d_scaleTo(const string & id, const fvec2 & target, float speed)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->scaleTo(target, speed);
 }
 
-void EngineInterface::quad3d_setPosition(const string& id, const fvec3& value)
+void EngineInterface::quad3d_setPosition(const string & id, const fvec3 & value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setPosition(value);
 }
 
-void EngineInterface::quad3d_setRotation(const string& id, const fvec3& value)
+void EngineInterface::quad3d_setRotation(const string & id, const fvec3 & value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setRotation(value);
 }
 
-void EngineInterface::quad3d_setSize(const string& id, const fvec2& value)
+void EngineInterface::quad3d_setSize(const string & id, const fvec2 & value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setSize(value);
 }
 
-void EngineInterface::quad3d_setColor(const string& id, const fvec3& value)
+void EngineInterface::quad3d_setColor(const string & id, const fvec3 & value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setColor(value);
 }
 
-void EngineInterface::quad3d_setWireframeColor(const string& id, const fvec3& value)
+void EngineInterface::quad3d_setWireframeColor(const string & id, const fvec3 & value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setWireframeColor(value);
 }
 
-void EngineInterface::quad3d_setUvMultiplier(const string& id, const fvec2& value)
+void EngineInterface::quad3d_setUvMultiplier(const string & id, const fvec2 & value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setUvMultiplier(value);
 }
 
-void EngineInterface::quad3d_setUvOffset(const string& id, const fvec2& value)
+void EngineInterface::quad3d_setUvOffset(const string & id, const fvec2 & value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setUvOffset(value);
 }
 
-void EngineInterface::quad3d_setDiffuseMap(const string& id, const string& value)
+void EngineInterface::quad3d_setDiffuseMap(const string & id, const string & value)
 {
 	if(value.empty())
 	{
@@ -133,7 +133,7 @@ void EngineInterface::quad3d_setDiffuseMap(const string& id, const string& value
 	}
 }
 
-void EngineInterface::quad3d_setEmissionMap(const string& id, const string& value)
+void EngineInterface::quad3d_setEmissionMap(const string & id, const string & value)
 {
 	if(value.empty())
 	{
@@ -163,222 +163,222 @@ void EngineInterface::quad3d_setEmissionMap(const string& id, const string& valu
 	}
 }
 
-void EngineInterface::quad3d_setWireframed(const string& id, bool value)
+void EngineInterface::quad3d_setWireframed(const string & id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setWireframed(value);
 }
 
-void EngineInterface::quad3d_setFrozen(const string& id, bool value)
+void EngineInterface::quad3d_setFrozen(const string & id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setFrozen(value);
 }
 
-void EngineInterface::quad3d_startAnimation(const string& quadId, const string& animationId, int playCount)
+void EngineInterface::quad3d_startAnimation(const string & quadId, const string & animationId, int playCount)
 {
 	_core->getAnimation2dPlayer()->startQuad3dAnimation(animationId, quadId, playCount);
 }
 
-void EngineInterface::quad3d_pauseAnimation(const string& quadId, const string& animationId)
+void EngineInterface::quad3d_pauseAnimation(const string & quadId, const string & animationId)
 {
 	_core->getAnimation2dPlayer()->pauseQuad3dAnimation(animationId, quadId);
 }
 
-void EngineInterface::quad3d_autopauseAnimation(const string& quadId, const string& animationId)
+void EngineInterface::quad3d_autopauseAnimation(const string & quadId, const string & animationId)
 {
 	_core->getAnimation2dPlayer()->autopauseQuad3dAnimation(animationId, quadId);
 }
 
-void EngineInterface::quad3d_resumeAnimation(const string& quadId, const string& animationId)
+void EngineInterface::quad3d_resumeAnimation(const string & quadId, const string & animationId)
 {
 	_core->getAnimation2dPlayer()->resumeQuad3dAnimation(animationId, quadId);
 }
 
-void EngineInterface::quad3d_stopAnimation(const string& quadId, const string& animationId)
+void EngineInterface::quad3d_stopAnimation(const string & quadId, const string & animationId)
 {
 	_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
 }
 
-void EngineInterface::quad3d_setAnimationRowIndex(const string& quadId, const string& animationId, unsigned int value)
+void EngineInterface::quad3d_setAnimationRowIndex(const string & quadId, const string & animationId, unsigned int value)
 {
 	_core->getAnimation2dPlayer()->setQuad3dAnimationRowIndex(animationId, quadId, value);
 }
 
-void EngineInterface::quad3d_setAnimationColumnIndex(const string& quadId, const string& animationId, unsigned int value)
+void EngineInterface::quad3d_setAnimationColumnIndex(const string & quadId, const string & animationId, unsigned int value)
 {
 	_core->getAnimation2dPlayer()->setQuad3dAnimationColumnIndex(animationId, quadId, value);
 }
 
-void EngineInterface::quad3d_setAnimationIntervalMultiplier(const string& quadId, const string& animationId, unsigned int value)
+void EngineInterface::quad3d_setAnimationIntervalMultiplier(const string & quadId, const string & animationId, unsigned int value)
 {
 	_core->getAnimation2dPlayer()->setQuad3dAnimationIntervalMultiplier(animationId, quadId, value);
 }
 
-void EngineInterface::quad3d_setAnimationIntervalDivider(const string& quadId, const string& animationId, unsigned int value)
+void EngineInterface::quad3d_setAnimationIntervalDivider(const string & quadId, const string & animationId, unsigned int value)
 {
 	_core->getAnimation2dPlayer()->setQuad3dAnimationIntervalDivider(animationId, quadId, value);
 }
 
-void EngineInterface::quad3d_setFacingCameraHorizontally(const string& id, bool value)
+void EngineInterface::quad3d_setFacingCameraHorizontally(const string & id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setFacingCameraHorizontally(value);
 }
 
-void EngineInterface::quad3d_setFacingCameraVertically(const string& id, bool value)
+void EngineInterface::quad3d_setFacingCameraVertically(const string & id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setFacingCameraVertically(value);
 }
 
-void EngineInterface::quad3d_setShadowed(const string& id, bool value)
+void EngineInterface::quad3d_setShadowed(const string & id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setShadowed(value);
 }
 
-void EngineInterface::quad3d_setReflected(const string& id, bool value)
+void EngineInterface::quad3d_setReflected(const string & id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setReflected(value);
 }
 
-void EngineInterface::quad3d_setBright(const string& id, bool value)
+void EngineInterface::quad3d_setBright(const string & id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setBright(value);
 }
 
-void EngineInterface::quad3d_setMinHeight(const string& id, float value)
+void EngineInterface::quad3d_setMinHeight(const string & id, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setMinHeight(value);
 }
 
-void EngineInterface::quad3d_setMaxHeight(const string& id, float value)
+void EngineInterface::quad3d_setMaxHeight(const string & id, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setMaxHeight(value);
 }
 
-void EngineInterface::quad3d_setLightness(const string& id, float value)
+void EngineInterface::quad3d_setLightness(const string & id, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setLightness(value);
 }
 
-void EngineInterface::quad3d_setOpacity(const string& id, float value)
+void EngineInterface::quad3d_setOpacity(const string & id, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setOpacity(value);
 }
 
-void EngineInterface::quad3d_setTextureRepeat(const string& id, unsigned int value)
+void EngineInterface::quad3d_setTextureRepeat(const string & id, unsigned int value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setTextureRepeat(value);
 }
 
-void EngineInterface::quad3d_setEmissionIntensity(const string& id, float value)
+void EngineInterface::quad3d_setEmissionIntensity(const string & id, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setEmissionIntensity(value);
 }
 
-void EngineInterface::quad3d_setMinTextureAlpha(const string& id, float value)
+void EngineInterface::quad3d_setMinTextureAlpha(const string & id, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setMinTextureAlpha(value);
 }
 
-const float EngineInterface::quad3d_getLightness(const string& id) const
+const float EngineInterface::quad3d_getLightness(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getLightness();
 }
 
-const float EngineInterface::quad3d_getMinHeight(const string& id) const
+const float EngineInterface::quad3d_getMinHeight(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getMinHeight();
 }
 
-const float EngineInterface::quad3d_getMaxHeight(const string& id) const
+const float EngineInterface::quad3d_getMaxHeight(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getMaxHeight();
 }
 
-const float EngineInterface::quad3d_getOpacity(const string& id) const
+const float EngineInterface::quad3d_getOpacity(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getOpacity();
 }
 
-const unsigned int EngineInterface::quad3d_getTextureRepeat(const string& id) const
+const unsigned int EngineInterface::quad3d_getTextureRepeat(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getTextureRepeat();
 }
 
-const float EngineInterface::quad3d_getEmissionIntensity(const string& id) const
+const float EngineInterface::quad3d_getEmissionIntensity(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getEmissionIntensity();
 }
 
-const float EngineInterface::quad3d_getMinTextureAlpha(const string& id) const
+const float EngineInterface::quad3d_getMinTextureAlpha(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getMinTextureAlpha();
 }
 
-const int EngineInterface::quad3d_getAnimationPlayCount(const string& quadId, const string& animationId) const
+const int EngineInterface::quad3d_getAnimationPlayCount(const string & quadId, const string & animationId) const
 {
 	return _core->getAnimation2dPlayer()->getQuad3dAnimationPlayCount(quadId, animationId);
 }
 
-const unsigned int EngineInterface::quad3d_getAnimationRowIndex(const string& quadId, const string& animationId) const
+const unsigned int EngineInterface::quad3d_getAnimationRowIndex(const string & quadId, const string & animationId) const
 {
 	return _core->getAnimation2dPlayer()->getQuad3dAnimationRowIndex(quadId, animationId);
 }
 
-const unsigned int EngineInterface::quad3d_getAnimationColumnIndex(const string& quadId, const string& animationId) const
+const unsigned int EngineInterface::quad3d_getAnimationColumnIndex(const string & quadId, const string & animationId) const
 {
 	return _core->getAnimation2dPlayer()->getQuad3dAnimationColumnIndex(quadId, animationId);
 }
 
-const unsigned int EngineInterface::quad3d_getAnimationIntervalMultiplier(const string& quadId, const string& animationId) const
+const unsigned int EngineInterface::quad3d_getAnimationIntervalMultiplier(const string & quadId, const string & animationId) const
 {
 	return _core->getAnimation2dPlayer()->getQuad3dAnimationIntervalMultiplier(quadId, animationId);
 }
 
-const unsigned int EngineInterface::quad3d_getAnimationIntervalDivider(const string& quadId, const string& animationId) const
+const unsigned int EngineInterface::quad3d_getAnimationIntervalDivider(const string & quadId, const string & animationId) const
 {
 	return _core->getAnimation2dPlayer()->getQuad3dAnimationIntervalDivider(quadId, animationId);
 }
 
-const bool EngineInterface::quad3d_isExisting(const string& id) const
+const bool EngineInterface::quad3d_isExisting(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->isEntityExisting(id);
 }
 
-const bool EngineInterface::quad3d_isVisible(const string& id) const
+const bool EngineInterface::quad3d_isVisible(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->isVisible();
 }
 
-const fvec3& EngineInterface::quad3d_getPosition(const string& id) const
+const fvec3 & EngineInterface::quad3d_getPosition(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getPosition();
 }
 
-const fvec3& EngineInterface::quad3d_getRotation(const string& id) const
+const fvec3 & EngineInterface::quad3d_getRotation(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getRotation();
 }
 
-const fvec2& EngineInterface::quad3d_getSize(const string& id) const
+const fvec2 & EngineInterface::quad3d_getSize(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getSize();
 }
 
-const fvec2& EngineInterface::quad3d_getUvMultiplier(const string& id) const
+const fvec2 & EngineInterface::quad3d_getUvMultiplier(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getUvMultiplier();
 }
 
-const fvec2& EngineInterface::quad3d_getUvOffset(const string& id) const
+const fvec2 & EngineInterface::quad3d_getUvOffset(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getUvOffset();
 }
 
-const fvec3& EngineInterface::quad3d_getColor(const string& id) const
+const fvec3 & EngineInterface::quad3d_getColor(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getColor();
 }
 
-const fvec3& EngineInterface::quad3d_getWireframeColor(const string& id) const
+const fvec3 & EngineInterface::quad3d_getWireframeColor(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getWireframeColor();
 }
@@ -387,7 +387,7 @@ const vector<string> EngineInterface::quad3d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto& [key, entity] : _core->getQuad3dEntityManager()->getEntities())
+	for(const auto & [key, entity] : _core->getQuad3dEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}
@@ -395,11 +395,11 @@ const vector<string> EngineInterface::quad3d_getIds() const
 	return result;
 }
 
-const vector<string> EngineInterface::quad3d_getAnimationIds(const string& id) const
+const vector<string> EngineInterface::quad3d_getAnimationIds(const string & id) const
 {
 	vector<string> result;
 
-	for(const auto& [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
+	for(const auto & [animationId, quadId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
 	{
 		if(id == quadId)
 		{
@@ -410,11 +410,11 @@ const vector<string> EngineInterface::quad3d_getAnimationIds(const string& id) c
 	return result;
 }
 
-const vector<string> EngineInterface::quad3d_getChildAabbIds(const string& id) const
+const vector<string> EngineInterface::quad3d_getChildAabbIds(const string & id) const
 {
 	vector<string> result;
 
-	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasParent())
 		{
@@ -431,72 +431,72 @@ const vector<string> EngineInterface::quad3d_getChildAabbIds(const string& id) c
 	return result;
 }
 
-const bool EngineInterface::quad3d_isFacingCameraHorizontally(const string& id) const
+const bool EngineInterface::quad3d_isFacingCameraHorizontally(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->isFacingCameraHorizontally();
 }
 
-const bool EngineInterface::quad3d_isFacingCameraVertically(const string& id) const
+const bool EngineInterface::quad3d_isFacingCameraVertically(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->isFacingCameraVertically();
 }
 
-const bool EngineInterface::quad3d_isShadowed(const string& id) const
+const bool EngineInterface::quad3d_isShadowed(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->isShadowed();
 }
 
-const bool EngineInterface::quad3d_isReflected(const string& id) const
+const bool EngineInterface::quad3d_isReflected(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->isReflected();
 }
 
-const bool EngineInterface::quad3d_isBright(const string& id) const
+const bool EngineInterface::quad3d_isBright(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->isBright();
 }
 
-const string& EngineInterface::quad3d_getDiffuseMapPath(const string& id) const
+const string & EngineInterface::quad3d_getDiffuseMapPath(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getDiffuseMapPath();
 }
 
-const string& EngineInterface::quad3d_getEmissionMapPath(const string& id) const
+const string & EngineInterface::quad3d_getEmissionMapPath(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getEmissionMapPath();
 }
 
-const bool EngineInterface::quad3d_hasDiffuseMap(const string& id) const
+const bool EngineInterface::quad3d_hasDiffuseMap(const string & id) const
 {
 	return (_core->getQuad3dEntityManager()->getEntity(id)->getDiffuseTextureBuffer() != nullptr);
 }
 
-const bool EngineInterface::quad3d_hasEmissionMap(const string& id) const
+const bool EngineInterface::quad3d_hasEmissionMap(const string & id) const
 {
 	return (_core->getQuad3dEntityManager()->getEntity(id)->getEmissionTextureBuffer() != nullptr);
 }
 
-const bool EngineInterface::quad3d_isFrozen(const string& id) const
+const bool EngineInterface::quad3d_isFrozen(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->isFrozen();
 }
 
-const bool EngineInterface::quad3d_isAnimationStarted(const string& quadId, const string& animationId) const
+const bool EngineInterface::quad3d_isAnimationStarted(const string & quadId, const string & animationId) const
 {
 	return _core->getAnimation2dPlayer()->isQuad3dAnimationStarted(animationId, quadId);
 }
 
-const bool EngineInterface::quad3d_isAnimationPaused(const string& quadId, const string& animationId) const
+const bool EngineInterface::quad3d_isAnimationPaused(const string & quadId, const string & animationId) const
 {
 	return _core->getAnimation2dPlayer()->isQuad3dAnimationPaused(animationId, quadId);
 }
 
-const bool EngineInterface::quad3d_isAnimationAutopaused(const string& quadId, const string& animationId) const
+const bool EngineInterface::quad3d_isAnimationAutopaused(const string & quadId, const string & animationId) const
 {
 	return _core->getAnimation2dPlayer()->isQuad3dAnimationAutopaused(animationId, quadId);
 }
 
-const bool EngineInterface::quad3d_isWireframed(const string& id) const
+const bool EngineInterface::quad3d_isWireframed(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->isWireframed();
 }

@@ -127,31 +127,31 @@ void Quad3dEntity::setEmissionMap(shared_ptr<TextureBuffer> value)
 	_emissionTextureBuffer = value;
 }
 
-void Quad3dEntity::setPosition(const fvec3& value)
+void Quad3dEntity::setPosition(const fvec3 & value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void Quad3dEntity::setRotation(const fvec3& value)
+void Quad3dEntity::setRotation(const fvec3 & value)
 {
 	_rotation = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
 	_rotationTarget = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
 }
 
-void Quad3dEntity::setSize(const fvec2& value)
+void Quad3dEntity::setSize(const fvec2 & value)
 {
 	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Quad3dEntity::move(const fvec3& value)
+void Quad3dEntity::move(const fvec3 & value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void Quad3dEntity::rotate(const fvec3& value)
+void Quad3dEntity::rotate(const fvec3 & value)
 {
 	_rotation += value;
 	_rotationTarget += value;
@@ -159,7 +159,7 @@ void Quad3dEntity::rotate(const fvec3& value)
 	_rotationTarget = fvec3(Mathematics::limitAngle(_rotationTarget.x), Mathematics::limitAngle(_rotationTarget.y), Mathematics::limitAngle(_rotationTarget.z));
 }
 
-void Quad3dEntity::scale(const fvec2& value)
+void Quad3dEntity::scale(const fvec2 & value)
 {
 	_size += value;
 	_sizeTarget += value;
@@ -167,50 +167,50 @@ void Quad3dEntity::scale(const fvec2& value)
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void Quad3dEntity::moveTo(const fvec3& target, float speed)
+void Quad3dEntity::moveTo(const fvec3 & target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void Quad3dEntity::rotateTo(const fvec3& target, float speed)
+void Quad3dEntity::rotateTo(const fvec3 & target, float speed)
 {
 	_rotationTarget = fvec3(Mathematics::limitAngle(target.x), Mathematics::limitAngle(target.y), Mathematics::limitAngle(target.z));
 	_rotationTargetSpeed = speed;
 }
 
-void Quad3dEntity::scaleTo(const fvec2& target, float speed)
+void Quad3dEntity::scaleTo(const fvec2 & target, float speed)
 {
 	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
 }
 
-void Quad3dEntity::setColor(const fvec3& value)
+void Quad3dEntity::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void Quad3dEntity::setUvMultiplier(const fvec2& value)
+void Quad3dEntity::setUvMultiplier(const fvec2 & value)
 {
 	_uvMultiplier = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Quad3dEntity::setUvOffset(const fvec2& value)
+void Quad3dEntity::setUvOffset(const fvec2 & value)
 {
 	_uvOffset = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Quad3dEntity::setWireframeColor(const fvec3& value)
+void Quad3dEntity::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void Quad3dEntity::setDiffuseMapPath(const string& value)
+void Quad3dEntity::setDiffuseMapPath(const string & value)
 {
 	_diffuseMapPath = value;
 }
 
-void Quad3dEntity::setEmissionMapPath(const string& value)
+void Quad3dEntity::setEmissionMapPath(const string & value)
 {
 	_emissionMapPath = value;
 }
@@ -285,7 +285,7 @@ const shared_ptr<VertexBuffer> Quad3dEntity::getVertexBuffer() const
 	return _vertexBuffer;
 }
 
-const mat44& Quad3dEntity::getTransformation() const
+const mat44 & Quad3dEntity::getTransformation() const
 {
 	return _transformation;
 }
@@ -300,47 +300,47 @@ const shared_ptr<TextureBuffer> Quad3dEntity::getEmissionTextureBuffer() const
 	return _emissionTextureBuffer;
 }
 
-const fvec3& Quad3dEntity::getPosition() const
+const fvec3 & Quad3dEntity::getPosition() const
 {
 	return _position;
 }
 
-const fvec3& Quad3dEntity::getRotation() const
+const fvec3 & Quad3dEntity::getRotation() const
 {
 	return _rotation;
 }
 
-const fvec2& Quad3dEntity::getSize() const
+const fvec2 & Quad3dEntity::getSize() const
 {
 	return _size;
 }
 
-const fvec2& Quad3dEntity::getUvMultiplier() const
+const fvec2 & Quad3dEntity::getUvMultiplier() const
 {
 	return _uvMultiplier;
 }
 
-const fvec2& Quad3dEntity::getUvOffset() const
+const fvec2 & Quad3dEntity::getUvOffset() const
 {
 	return _uvOffset;
 }
 
-const fvec3& Quad3dEntity::getColor() const
+const fvec3 & Quad3dEntity::getColor() const
 {
 	return _color;
 }
 
-const fvec3& Quad3dEntity::getWireframeColor() const
+const fvec3 & Quad3dEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const string& Quad3dEntity::getDiffuseMapPath() const
+const string & Quad3dEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
 }
 
-const string& Quad3dEntity::getEmissionMapPath() const
+const string & Quad3dEntity::getEmissionMapPath() const
 {
 	return _emissionMapPath;
 }

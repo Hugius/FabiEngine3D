@@ -22,7 +22,7 @@ const bool Animation3dEditor::saveAnimationsToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation3d.fe3d");
 
-	for(const auto& animationId : _loadedAnimationIds)
+	for(const auto & animationId : _loadedAnimationIds)
 	{
 		const auto partIds = _fe3d->animation3d_getPartIds(animationId);
 		const auto partCount = partIds.size();

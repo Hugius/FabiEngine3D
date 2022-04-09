@@ -24,7 +24,7 @@ const bool ModelEditor::saveEntitiesToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\model.fe3d");
 
-	for(const auto& modelId : _loadedEntityIds)
+	for(const auto & modelId : _loadedEntityIds)
 	{
 		auto partIds = _fe3d->model_getPartIds(modelId);
 		auto aabbIds = _fe3d->model_getChildAabbIds(modelId);
@@ -159,7 +159,7 @@ const bool ModelEditor::saveEntitiesToFile() const
 				<< endl;
 		}
 
-		for(const auto& aabbId : aabbIds)
+		for(const auto & aabbId : aabbIds)
 		{
 			auto position = _fe3d->aabb_getLocalPosition(aabbId);
 			auto size = _fe3d->aabb_getLocalSize(aabbId);

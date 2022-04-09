@@ -10,7 +10,7 @@ void WaterEntity::setHeight(float value)
 	_height = value;
 }
 
-void WaterEntity::setColor(const fvec3& value)
+void WaterEntity::setColor(const fvec3 & value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -30,22 +30,22 @@ void WaterEntity::setDisplacementMap(shared_ptr<TextureBuffer> value)
 	_displacementTextureBuffer = value;
 }
 
-void WaterEntity::setDudvMapPath(const string& value)
+void WaterEntity::setDudvMapPath(const string & value)
 {
 	_dudvMapPath = value;
 }
 
-void WaterEntity::setNormalMapPath(const string& value)
+void WaterEntity::setNormalMapPath(const string & value)
 {
 	_normalMapPath = value;
 }
 
-void WaterEntity::setDisplacementMapPath(const string& value)
+void WaterEntity::setDisplacementMapPath(const string & value)
 {
 	_displacementMapPath = value;
 }
 
-void WaterEntity::setRippleOffset(const fvec2& value)
+void WaterEntity::setRippleOffset(const fvec2 & value)
 {
 	_rippleOffset = value;
 }
@@ -65,17 +65,17 @@ void WaterEntity::setHighQualityVertexBuffer(shared_ptr<VertexBuffer> value)
 	_highQualityVertexBuffer = value;
 }
 
-void WaterEntity::setRippleSpeed(const fvec2& value)
+void WaterEntity::setRippleSpeed(const fvec2 & value)
 {
 	_rippleSpeed = value;
 }
 
-void WaterEntity::setWaveSpeed(const fvec2& value)
+void WaterEntity::setWaveSpeed(const fvec2 & value)
 {
 	_waveSpeed = value;
 }
 
-void WaterEntity::setWaveOffset(const fvec2& value)
+void WaterEntity::setWaveOffset(const fvec2 & value)
 {
 	_waveOffset = value;
 }
@@ -115,7 +115,7 @@ void WaterEntity::setWireframed(bool value)
 	_isWireframed = value;
 }
 
-void WaterEntity::setWireframeColor(const fvec3& value)
+void WaterEntity::setWireframeColor(const fvec3 & value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -140,7 +140,7 @@ const float WaterEntity::getHeight() const
 	return _height;
 }
 
-const fvec3& WaterEntity::getColor() const
+const fvec3 & WaterEntity::getColor() const
 {
 	return _color;
 }
@@ -160,22 +160,22 @@ const shared_ptr<TextureBuffer> WaterEntity::getDisplacementTextureBuffer() cons
 	return _displacementTextureBuffer;
 }
 
-const string& WaterEntity::getDudvMapPath() const
+const string & WaterEntity::getDudvMapPath() const
 {
 	return _dudvMapPath;
 }
 
-const string& WaterEntity::getNormalMapPath() const
+const string & WaterEntity::getNormalMapPath() const
 {
 	return _normalMapPath;
 }
 
-const string& WaterEntity::getDisplacementMapPath() const
+const string & WaterEntity::getDisplacementMapPath() const
 {
 	return _displacementMapPath;
 }
 
-const fvec2& WaterEntity::getRippleOffset() const
+const fvec2 & WaterEntity::getRippleOffset() const
 {
 	return _rippleOffset;
 }
@@ -195,22 +195,22 @@ const shared_ptr<VertexBuffer> WaterEntity::getHighQualityVertexBuffer() const
 	return _highQualityVertexBuffer;
 }
 
-const fvec2& WaterEntity::getRippleSpeed() const
+const fvec2 & WaterEntity::getRippleSpeed() const
 {
 	return _rippleSpeed;
 }
 
-const fvec2& WaterEntity::getWaveOffset() const
+const fvec2 & WaterEntity::getWaveOffset() const
 {
 	return _waveOffset;
 }
 
-const fvec2& WaterEntity::getWaveSpeed() const
+const fvec2 & WaterEntity::getWaveSpeed() const
 {
 	return _waveSpeed;
 }
 
-const fvec3& WaterEntity::getWireframeColor() const
+const fvec3 & WaterEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }

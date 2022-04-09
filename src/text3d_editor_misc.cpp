@@ -2,14 +2,14 @@
 
 #include <algorithm>
 
-const vector<string>& Text3dEditor::getLoadedEntityIds() const
+const vector<string> & Text3dEditor::getLoadedEntityIds() const
 {
 	return _loadedEntityIds;
 }
 
 void Text3dEditor::deleteLoadedEntities()
 {
-	for(const auto& id : _loadedEntityIds)
+	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->text3d_delete(id);
 	}

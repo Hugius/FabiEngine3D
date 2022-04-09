@@ -28,14 +28,14 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 		{
 			float totalTime = 0.0f;
 
-			for(const auto& [key, time] : _debuggingTimes)
+			for(const auto & [key, time] : _debuggingTimes)
 			{
 				totalTime += time;
 			}
 
 			Logger::throwInfo("Debugging results:");
 
-			for(const auto& [key, time] : _debuggingTimes)
+			for(const auto & [key, time] : _debuggingTimes)
 			{
 				const auto percentage = ((time / totalTime) * 100.0f);
 				const auto percentageString = to_string(percentage);
@@ -63,7 +63,7 @@ void ScriptInterpreter::executeTerminateScripts()
 	}
 }
 
-void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType scriptType)
+void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scriptType)
 {
 	if(_isDebugging)
 	{
@@ -240,7 +240,7 @@ void ScriptInterpreter::_executeScript(const string& scriptId, ScriptType script
 				return;
 			}
 
-			auto& scriptList = ((scriptType == ScriptType::INITIALIZE) ? _initializeScriptIds : (scriptType == ScriptType::UPDATE) ? _updateScriptIds : _terminateScriptIds);
+			auto & scriptList = ((scriptType == ScriptType::INITIALIZE) ? _initializeScriptIds : (scriptType == ScriptType::UPDATE) ? _updateScriptIds : _terminateScriptIds);
 
 			if(find(scriptList.begin(), scriptList.end(), scriptToExecuteId) != scriptList.end())
 			{

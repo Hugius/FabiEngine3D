@@ -1,22 +1,22 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::client_start(const string& username)
+void EngineInterface::client_start(const string & username)
 {
 	_core->getNetworkingClient()->start(username);
 }
 
-void EngineInterface::client_connectToServer(const string& ip)
+void EngineInterface::client_connectToServer(const string & ip)
 {
 	_core->getNetworkingClient()->connectToServer(ip);
 }
 
-void EngineInterface::client_sendTcpMessageToServer(const string& content)
+void EngineInterface::client_sendTcpMessageToServer(const string & content)
 {
 	_core->getNetworkingClient()->sendTcpMessageToServer(content);
 }
 
-void EngineInterface::client_sendUdpMessageToServer(const string& content)
+void EngineInterface::client_sendUdpMessageToServer(const string & content)
 {
 	_core->getNetworkingClient()->sendUdpMessageToServer(content);
 }
@@ -51,7 +51,7 @@ const bool EngineInterface::client_isAcceptedByServer() const
 	return _core->getNetworkingClient()->isAcceptedByServer();
 }
 
-const bool EngineInterface::client_isMessageReserved(const string& message)
+const bool EngineInterface::client_isMessageReserved(const string & message)
 {
 	return _core->getNetworkingClient()->isMessageReserved(message);
 }
@@ -71,7 +71,7 @@ const unsigned int EngineInterface::client_getMaxMessageSize() const
 	return _core->getNetworkingClient()->getMaxMessageSize();
 }
 
-const bool EngineInterface::client_isValidIp(const string& ip) const
+const bool EngineInterface::client_isValidIp(const string & ip) const
 {
 	return _core->getNetworkingClient()->isValidIp(ip);
 }

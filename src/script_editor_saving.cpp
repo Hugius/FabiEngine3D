@@ -22,7 +22,7 @@ const bool ScriptEditor::saveScriptFiles()
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto directoryPath = (rootPath + "projects\\" + getCurrentProjectId() + "\\scripts\\");
 
-	for(const auto& fileName : Tools::getFileNamesFromDirectory(directoryPath))
+	for(const auto & fileName : Tools::getFileNamesFromDirectory(directoryPath))
 	{
 		const auto extension = fileName.substr((fileName.size() - 5), 5);
 		if(extension != ".fe3d")
@@ -33,7 +33,7 @@ const bool ScriptEditor::saveScriptFiles()
 		Tools::deleteFile(directoryPath + fileName);
 	}
 
-	for(const auto& scriptId : _script->getScriptFileIds())
+	for(const auto & scriptId : _script->getScriptFileIds())
 	{
 		auto file = ofstream(directoryPath + scriptId + ".fe3d");
 

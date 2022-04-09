@@ -22,7 +22,7 @@ mat22::mat22()
 	this->m[1][1] = 1.0f;
 }
 
-mat22::mat22(const mat22& other)
+mat22::mat22(const mat22 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -30,7 +30,7 @@ mat22::mat22(const mat22& other)
 	this->m[1][1] = other.m[1][1];
 }
 
-mat22::mat22(const mat33& other)
+mat22::mat22(const mat33 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -38,7 +38,7 @@ mat22::mat22(const mat33& other)
 	this->m[1][1] = other.m[1][1];
 }
 
-mat22::mat22(const mat44& other)
+mat22::mat22(const mat44 & other)
 {
 	this->m[0][0] = other.m[0][0];
 	this->m[1][0] = other.m[1][0];
@@ -57,7 +57,7 @@ mat22::mat22(const float value)
 	this->m[1][1] = value;
 }
 
-const mat22 mat22::operator+(const mat22& other) const
+const mat22 mat22::operator+(const mat22 & other) const
 {
 	mat22 result;
 
@@ -69,7 +69,7 @@ const mat22 mat22::operator+(const mat22& other) const
 	return result;
 }
 
-const mat22 mat22::operator-(const mat22& other) const
+const mat22 mat22::operator-(const mat22 & other) const
 {
 	mat22 result;
 
@@ -81,7 +81,7 @@ const mat22 mat22::operator-(const mat22& other) const
 	return result;
 }
 
-const mat22 mat22::operator*(const mat22& other) const
+const mat22 mat22::operator*(const mat22 & other) const
 {
 	mat22 result(0.0f);
 
@@ -99,7 +99,7 @@ const mat22 mat22::operator*(const mat22& other) const
 	return result;
 }
 
-const fvec2 mat22::operator*(const fvec2& other) const
+const fvec2 mat22::operator*(const fvec2 & other) const
 {
 	fvec2 result;
 

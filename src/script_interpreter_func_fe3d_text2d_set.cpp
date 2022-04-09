@@ -4,7 +4,7 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionName, const vector<shared_ptr<ScriptValue>>& args, vector<shared_ptr<ScriptValue>>& returnValues)
+const bool ScriptInterpreter::_executeFe3dText2dSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
 {
 	if(functionName == "fe3d:text2d_place")
 	{
@@ -53,7 +53,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& id : _fe3d->text2d_getIds())
+			for(const auto & id : _fe3d->text2d_getIds())
 			{
 				if(id[0] != '@')
 				{

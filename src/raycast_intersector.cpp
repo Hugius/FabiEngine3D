@@ -22,7 +22,7 @@ void RaycastIntersector::update()
 	_closestAabbId = "";
 	_aabbIntersections.clear();
 
-	for(const auto& [key, entity] : _aabbManager->getEntities())
+	for(const auto & [key, entity] : _aabbManager->getEntities())
 	{
 		if(!_isAabbIntersectionEnabled || !entity->isRaycastResponsive())
 		{
@@ -93,7 +93,7 @@ void RaycastIntersector::setAabbIntersectionEnabled(bool value)
 	_isAabbIntersectionEnabled = value;
 }
 
-void RaycastIntersector::resetTerrainStatus(const string& terrainId)
+void RaycastIntersector::resetTerrainStatus(const string & terrainId)
 {
 	if(terrainId == _terrainId)
 	{
@@ -101,7 +101,7 @@ void RaycastIntersector::resetTerrainStatus(const string& terrainId)
 	}
 }
 
-void RaycastIntersector::resetAabbStatus(const string& aabbId)
+void RaycastIntersector::resetAabbStatus(const string & aabbId)
 {
 	if(aabbId == _closestAabbId)
 	{
@@ -114,12 +114,12 @@ void RaycastIntersector::resetAabbStatus(const string& aabbId)
 	}
 }
 
-const string& RaycastIntersector::getTerrainId() const
+const string & RaycastIntersector::getTerrainId() const
 {
 	return _terrainId;
 }
 
-const string& RaycastIntersector::getClosestAabbId() const
+const string & RaycastIntersector::getClosestAabbId() const
 {
 	return _closestAabbId;
 }
@@ -149,12 +149,12 @@ const float RaycastIntersector::getDistanceToTerrain() const
 	return _distanceToTerrain;
 }
 
-const float RaycastIntersector::getDistanceToAabb(const string& id) const
+const float RaycastIntersector::getDistanceToAabb(const string & id) const
 {
 	return _aabbIntersections.at(id);
 }
 
-const fvec3& RaycastIntersector::getPointOnTerrain() const
+const fvec3 & RaycastIntersector::getPointOnTerrain() const
 {
 	return _pointOnTerrain;
 }

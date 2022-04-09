@@ -55,7 +55,7 @@ Configuration::Configuration()
 	}
 }
 
-void Configuration::_processOption(ifstream& file, string& option, const string& name)
+void Configuration::_processOption(ifstream & file, string & option, const string & name)
 {
 	string line;
 	string field;
@@ -79,7 +79,7 @@ void Configuration::_processOption(ifstream& file, string& option, const string&
 	}
 }
 
-void Configuration::_processOption(ifstream& file, float& option, const string& name)
+void Configuration::_processOption(ifstream & file, float & option, const string & name)
 {
 	string line;
 	string field;
@@ -103,7 +103,7 @@ void Configuration::_processOption(ifstream& file, float& option, const string& 
 	}
 }
 
-void Configuration::_processOption(ifstream& file, int& option, const string& name)
+void Configuration::_processOption(ifstream & file, int & option, const string & name)
 {
 	string line;
 	string field;
@@ -127,7 +127,7 @@ void Configuration::_processOption(ifstream& file, int& option, const string& na
 	}
 }
 
-void Configuration::_processOption(ifstream& file, bool& option, const string& name)
+void Configuration::_processOption(ifstream & file, bool & option, const string & name)
 {
 	string line;
 	string field;
@@ -164,22 +164,22 @@ void Configuration::_processOption(ifstream& file, bool& option, const string& n
 	}
 }
 
-const string& Configuration::getWindowTitle() const
+const string & Configuration::getWindowTitle() const
 {
 	return _windowTitle;
 }
 
-const ivec2& Configuration::getMonitorSize() const
+const ivec2 & Configuration::getMonitorSize() const
 {
 	return _monitorSize;
 }
 
-const ivec2& Configuration::getWindowSize() const
+const ivec2 & Configuration::getWindowSize() const
 {
 	return _windowSize;
 }
 
-const ivec2& Configuration::getDisplayPosition() const
+const ivec2 & Configuration::getDisplayPosition() const
 {
 	return _displayPosition;
 }
@@ -189,7 +189,7 @@ const float Configuration::getWindowSizeMultiplier() const
 	return _windowSizeMultiplier;
 }
 
-const ivec2& Configuration::getDisplaySize() const
+const ivec2 & Configuration::getDisplaySize() const
 {
 	return _displaySize;
 }

@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 
-Image::Image(unsigned char* pixels, unsigned int width, unsigned int height, PixelFormat pixelFormat)
+Image::Image(unsigned char * pixels, unsigned int width, unsigned int height, PixelFormat pixelFormat)
 	:
 	_pixels(pixels),
 	_width(width),
@@ -93,7 +93,7 @@ void Image::flipY()
 	_pixels = newPixels;
 }
 
-const unsigned char* Image::getPixels() const
+const unsigned char * Image::getPixels() const
 {
 	return _pixels;
 }

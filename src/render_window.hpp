@@ -11,15 +11,15 @@ using std::string;
 class RenderWindow final
 {
 public:
-	RenderWindow(SDL_Window* windowPointer);
+	RenderWindow(SDL_Window * windowPointer);
 	~RenderWindow();
 
-	void setTitle(const string& title);
-	void setSize(const ivec2& size);
+	void setTitle(const string & title);
+	void setSize(const ivec2 & size);
 	void center();
 	void setOpacity(float value);
-	void enableColorKeying(const fvec3& color);
-	void disableColorKeying(const fvec3& color);
+	void enableColorKeying(const fvec3 & color);
+	void disableColorKeying(const fvec3 & color);
 	void showBorder();
 	void hideBorder();
 	void enableFullscreen();
@@ -30,7 +30,7 @@ public:
 	void hideWindow();
 	void showCursor();
 	void hideCursor();
-	void setCursorPosition(const ivec2& pos);
+	void setCursorPosition(const ivec2 & pos);
 
 	const ivec2 getCursorPosition() const;
 
@@ -38,5 +38,5 @@ public:
 	const bool isVsyncEnabled() const;
 
 private:
-	SDL_Window* _windowPointer = nullptr;
+	SDL_Window * _windowPointer = nullptr;
 };

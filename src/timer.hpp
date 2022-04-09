@@ -15,27 +15,27 @@ using std::vector;
 class Timer final
 {
 public:
-	void createClock(const string& id);
-	void startClock(const string& id);
-	void pauseClock(const string& id);
-	void resumeClock(const string& id);
-	void stopClock(const string& id);
-	void deleteClock(const string& id);
+	void createClock(const string & id);
+	void startClock(const string & id);
+	void pauseClock(const string & id);
+	void resumeClock(const string & id);
+	void stopClock(const string & id);
+	void deleteClock(const string & id);
 	void increasePassedUpdateCount();
 
 	const vector<string> getClockIds() const;
 
-	const float getClockDeltaTime(const string& id) const;
+	const float getClockDeltaTime(const string & id) const;
 
 	const unsigned int getUpdateCountPerSecond() const;
 	const unsigned int getPassedUpdateCount() const;
 
-	const bool isClockExisting(const string& id) const;
-	const bool isClockStarted(const string& id) const;
-	const bool isClockPaused(const string& id) const;
+	const bool isClockExisting(const string & id) const;
+	const bool isClockStarted(const string & id) const;
+	const bool isClockPaused(const string & id) const;
 
 private:
-	static inline const unsigned int UPDATES_PER_SECOND = 144;
+	static inline constexpr unsigned int UPDATES_PER_SECOND = 144;
 
 	unordered_map<string, unique_ptr<Clock>> _clocks;
 

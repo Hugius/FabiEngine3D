@@ -22,7 +22,9 @@ private:
 
 	static inline const fvec3 FRAME_COLOR = fvec3(0.0025f);
 	static inline const fvec2 CHAR_SIZE = fvec2(0.02f, 0.15f);
+
 	static inline constexpr float Y_OFFSET = 0.2f;
+
 	static inline constexpr unsigned int MAX_CONSOLE_MESSAGES = 1000;
 	static inline constexpr unsigned int TIME_PART_LENGTH = 10;
 	static inline constexpr unsigned int SEPARATOR_PART_LENGTH = 3;

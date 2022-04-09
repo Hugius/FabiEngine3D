@@ -178,6 +178,7 @@ private:
 		{'}', ivec2(13, 0)},
 		{'~', ivec2(14, 0)}
 	};
+
 	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
 	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;
 

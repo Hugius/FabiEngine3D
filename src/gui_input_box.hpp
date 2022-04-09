@@ -94,6 +94,7 @@ private:
 		{'y', 'Y'},
 		{'z', 'Z'},
 	};
+
 	static inline constexpr float FULL_OPACITY = 1.0f;
 	static inline constexpr float PART_OPACITY = 0.25f;
 

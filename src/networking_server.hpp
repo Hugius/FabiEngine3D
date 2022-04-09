@@ -26,17 +26,17 @@ public:
 
 	void start(unsigned int maxClientCount);
 	void update();
-	void sendTcpMessageToClient(const string& username, const string& content);
-	void sendUdpMessageToClient(const string& username, const string& content);
-	void broadcastTcpMessageToClients(const string& content);
-	void broadcastUdpMessageToClients(const string& content);
-	void disconnectClient(const string& username);
+	void sendTcpMessageToClient(const string & username, const string & content);
+	void sendUdpMessageToClient(const string & username, const string & content);
+	void broadcastTcpMessageToClients(const string & content);
+	void broadcastUdpMessageToClients(const string & content);
+	void disconnectClient(const string & username);
 	void disconnectClients();
 	void stop();
 
 	const vector<string> getClientIps() const;
 	const vector<string> getClientUsernames() const;
-	const vector<NetworkingClientMessage>& getPendingMessages() const;
+	const vector<NetworkingClientMessage> & getPendingMessages() const;
 
 	const string getNewClientIp() const;
 	const string getNewClientUsername() const;
@@ -46,8 +46,8 @@ public:
 	const unsigned int getMaxMessageSize() const;
 
 	const bool isRunning() const;
-	const bool isClientConnected(const string& username) const;
-	const bool isMessageReserved(const string& message) const;
+	const bool isClientConnected(const string & username) const;
+	const bool isMessageReserved(const string & message) const;
 
 private:
 	void _disconnectClient(SOCKET socket);
@@ -57,19 +57,20 @@ private:
 
 	const string _extractPeerIp(SOCKET socket) const;
 	const string _extractPeerPort(SOCKET socket) const;
-	const string _extractAddressIp(sockaddr_in* address) const;
-	const string _extractAddressPort(sockaddr_in* address) const;
+	const string _extractAddressIp(sockaddr_in * address) const;
+	const string _extractAddressPort(sockaddr_in * address) const;
 
 	const bool _setupTcp();
 	const bool _setupUdp();
-	const bool _sendTcpMessageToClient(SOCKET socket, const string& content, bool isReserved);
-	const bool _sendUdpMessageToClient(const string& clientIp, const string& clientPort, const string& content, bool isReserved) const;
+	const bool _sendTcpMessageToClient(SOCKET socket, const string & content, bool isReserved);
+	const bool _sendUdpMessageToClient(const string & clientIp, const string & clientPort, const string & content, bool isReserved) const;
 	const bool _isMessageReadyUDP(SOCKET socket) const;
 
 	const SOCKET _waitForClientConnection(SOCKET socket) const;
-	const sockaddr_in _composeSocketAddress(const string& ip, const string& port) const;
+	const sockaddr_in _composeSocketAddress(const string & ip, const string & port) const;
 
 	static inline const string SERVER_PORT = "61295";
+
 	static inline constexpr unsigned int PORT_DIGIT_COUNT = 5;
 	static inline constexpr unsigned int IPV4_ADDRESS_LENGTH = 16;
 	static inline constexpr unsigned int MAX_MESSAGE_SIZE = 128;

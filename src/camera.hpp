@@ -13,11 +13,11 @@ public:
 
 	void inject(shared_ptr<RenderWindow> renderWindow);
 	void reset();
-	void update(const ivec2& lastCursorPosition);
+	void update(const ivec2 & lastCursorPosition);
 	void updateMatrices();
-	void move(const fvec3& speed);
-	void setPosition(const fvec3& value);
-	void setThirdPersonLookat(const fvec3& value);
+	void move(const fvec3 & speed);
+	void setPosition(const fvec3 & value);
+	void setThirdPersonLookat(const fvec3 & value);
 	void setThirdPersonDistance(float value);
 	void setAspectRatio(float value);
 	void setFov(float value);
@@ -40,14 +40,14 @@ public:
 	void notifyCursorCenter();
 	void invertUp();
 
-	const mat44& getView() const;
-	const mat44& getProjection() const;
+	const mat44 & getView() const;
+	const mat44 & getProjection() const;
 
-	const fvec3& getRight() const;
-	const fvec3& getUp() const;
-	const fvec3& getFront() const;
-	const fvec3& getPosition() const;
-	const fvec3& getThirdPersonLookat() const;
+	const fvec3 & getRight() const;
+	const fvec3 & getUp() const;
+	const fvec3 & getFront() const;
+	const fvec3 & getPosition() const;
+	const fvec3 & getThirdPersonLookat() const;
 
 	const float getFov() const;
 	const float getAspectRatio() const;
@@ -72,6 +72,7 @@ public:
 private:
 	static inline const fvec3 DEFAULT_UP = fvec3(0.0f, 1.0f, 0.0f);
 	static inline const fvec3 INVERTED_UP = fvec3(0.0f, -1.0f, 0.0f);
+
 	static inline constexpr float DEFAULT_NEAR = 0.01f;
 	static inline constexpr float DEFAULT_FAR = 2500.0f;
 	static inline constexpr float DEFAULT_CURSOR_SENSITIVITY = 0.01f;

@@ -148,6 +148,7 @@ private:
 	static inline const string TORCH_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
 	static inline const string CAMERA_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
 	static inline const string SPEAKER_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
+
 	static inline const fvec3 DEFAULT_LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
 	static inline const fvec3 DEFAULT_LAMP_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);
 	static inline const fvec3 DEFAULT_TORCH_ROTATION = fvec3(0.0f, 0.0f, -90.0f);
@@ -164,6 +165,7 @@ private:
 	static inline const fvec3 SPOTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
 	static inline const fvec3 REFLECTION_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 SOUND_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
+
 	static inline constexpr float MODEL_POSITION_DIVIDER = 100.0f;
 	static inline constexpr float MODEL_ROTATION_SPEED = 0.5f;
 	static inline constexpr float MODEL_SIZE_DIVIDER = 100.0f;

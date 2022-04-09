@@ -15,17 +15,17 @@ using std::shared_ptr;
 class ImageLoader final
 {
 public:
-	void cacheImage(const string& filePath, bool isCrucial);
-	void cacheImages(const vector<string>& filePaths, bool isCrucial);
-	void clearImageCache(const string& filePath);
+	void cacheImage(const string & filePath, bool isCrucial);
+	void cacheImages(const vector<string> & filePaths, bool isCrucial);
+	void clearImageCache(const string & filePath);
 	void clearImagesCache();
 
-	const shared_ptr<Image> loadImage(const string& filePath);
+	const shared_ptr<Image> loadImage(const string & filePath);
 
 private:
-	shared_ptr<Image> _loadImage(const string& filePath) const;
+	shared_ptr<Image> _loadImage(const string & filePath) const;
 
-	static inline const unsigned int HEADER_SIZE = 18;
+	static inline constexpr unsigned int HEADER_SIZE = 18;
 
 	unordered_map<string, shared_ptr<Image>> _cache = {};
 };

@@ -12,16 +12,16 @@ using std::ifstream;
 class Configuration final
 {
 public:
-	Configuration(Configuration const&) = delete;
+	Configuration(Configuration const &) = delete;
 
-	void operator=(Configuration const&) = delete;
+	void operator=(Configuration const &) = delete;
 
-	const string& getWindowTitle() const;
+	const string & getWindowTitle() const;
 
-	const ivec2& getMonitorSize() const;
-	const ivec2& getWindowSize()	const;
-	const ivec2& getDisplaySize() const;
-	const ivec2& getDisplayPosition() const;
+	const ivec2 & getMonitorSize() const;
+	const ivec2 & getWindowSize()	const;
+	const ivec2 & getDisplaySize() const;
+	const ivec2 & getDisplayPosition() const;
 
 	const float getWindowSizeMultiplier() const;
 
@@ -29,7 +29,7 @@ public:
 	const bool isWindowBorderless()	const;
 	const bool isApplicationExported() const;
 
-	static Configuration& getInst()
+	static Configuration & getInst()
 	{
 		static Configuration instance;
 
@@ -39,13 +39,14 @@ public:
 private:
 	Configuration();
 
-	void _processOption(ifstream& file, string& option, const string& name);
-	void _processOption(ifstream& file, float& option, const string& name);
-	void _processOption(ifstream& file, int& option, const string& name);
-	void _processOption(ifstream& file, bool& option, const string& name);
+	void _processOption(ifstream & file, string & option, const string & name);
+	void _processOption(ifstream & file, float & option, const string & name);
+	void _processOption(ifstream & file, int & option, const string & name);
+	void _processOption(ifstream & file, bool & option, const string & name);
 
 	static inline const fvec2 DISPLAY_POSITION_MULTIPLIER = fvec2(0.125f, 0.2f);
 	static inline const fvec2 DISPLAY_SIZE_MULTIPLIER = fvec2(0.75f, 0.75f);
+
 	static inline constexpr float DEFAULT_WINDOW_SIZE_MULTIPLIER = 0.9f;
 
 	string _windowTitle = "";

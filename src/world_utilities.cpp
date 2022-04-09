@@ -194,7 +194,7 @@ void WorldUtilities::copyTemplateModel(const string & newId, const string & temp
 	}
 }
 
-void WorldUtilities::copyTemplateQuad3d(const string & newId, const string & templateId)
+void WorldUtilities::copyTemplateQuad(const string & newId, const string & templateId)
 {
 	if(!_fe3d->quad3d_isExisting(templateId))
 	{
@@ -230,7 +230,7 @@ void WorldUtilities::copyTemplateQuad3d(const string & newId, const string & tem
 	_fe3d->aabb_setParentType(newId, AabbParentType::QUAD3D);
 }
 
-void WorldUtilities::copyTemplateText3d(const string & newId, const string & templateId)
+void WorldUtilities::copyTemplateText(const string & newId, const string & templateId)
 {
 	if(!_fe3d->text3d_isExisting(templateId))
 	{
@@ -255,7 +255,7 @@ void WorldUtilities::copyTemplateText3d(const string & newId, const string & tem
 	_fe3d->aabb_setParentType(newId, AabbParentType::TEXT3D);
 }
 
-void WorldUtilities::copyTemplateSound3d(const string & newId, const string & templateId)
+void WorldUtilities::copyTemplateSound(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sound2d_isExisting(templateId))
 	{

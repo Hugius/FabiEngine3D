@@ -10,9 +10,9 @@ public:
 	void copyTemplateTerrain(const string & newId, const string & templateId);
 	void copyTemplateWater(const string & newId, const string & templateId);
 	void copyTemplateModel(const string & newId, const string & templateId);
-	void copyTemplateQuad3d(const string & newId, const string & templateId);
-	void copyTemplateText3d(const string & newId, const string & templateId);
-	void copyTemplateSound3d(const string & newId, const string & templateId);
+	void copyTemplateQuad(const string & newId, const string & templateId);
+	void copyTemplateText(const string & newId, const string & templateId);
+	void copyTemplateSound(const string & newId, const string & templateId);
 
 private:
 	shared_ptr<EngineInterface> _fe3d = nullptr;

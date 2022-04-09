@@ -7,14 +7,14 @@ void WorldEditor::_selectModel(const string & id)
 	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Model: " + _selectedModelId);
 }
 
-void WorldEditor::_selectQuad3d(const string & id)
+void WorldEditor::_selectQuad(const string & id)
 {
 	_selectedQuadId = id;
 
 	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Quad3D: " + _selectedQuadId);
 }
 
-void WorldEditor::_selectText3d(const string & id)
+void WorldEditor::_selectText(const string & id)
 {
 	_selectedTextId = id;
 
@@ -57,12 +57,12 @@ void WorldEditor::_deselectModel(const string & id)
 	}
 }
 
-void WorldEditor::_deselectQuad3d(const string & id)
+void WorldEditor::_deselectQuad(const string & id)
 {
 	_fe3d->quad3d_setOpacity(id, 1.0f);
 }
 
-void WorldEditor::_deselectText3d(const string & id)
+void WorldEditor::_deselectText(const string & id)
 {
 	_fe3d->text3d_setOpacity(id, 1.0f);
 }

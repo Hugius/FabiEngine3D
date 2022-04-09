@@ -25,7 +25,7 @@ void WorldEditor::_updatePointlightMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 			_deactivateModel();
-			_deactivateQuad3d();
+			_deactivateQuad();
 			_deactivateSound();
 			_deactivatePointlight();
 			_deactivateSpotlight();
@@ -82,7 +82,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_deactivateModel();
-				_deactivateQuad3d();
+				_deactivateQuad();
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateSpotlight();

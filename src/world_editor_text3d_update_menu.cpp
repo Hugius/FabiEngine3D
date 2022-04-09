@@ -59,7 +59,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 				_deactivateModel();
-				_deactivateText3d();
+				_deactivateText();
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateReflection();
@@ -102,17 +102,17 @@ void WorldEditor::_updateText3dChoosingMenu()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_deactivateModel();
-				_deactivateQuad3d();
+				_deactivateQuad();
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateReflection();
 
-				_activateText3d(hoveredOptionId);
+				_activateText(hoveredOptionId);
 			}
 			else
 			{
-				_selectText3d(hoveredOptionId);
+				_selectText(hoveredOptionId);
 
 				_dontResetSelectedText3d = true;
 			}

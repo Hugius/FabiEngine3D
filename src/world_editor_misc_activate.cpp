@@ -18,7 +18,7 @@ void WorldEditor::_activateModel(const string & id)
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Model: " + _activeModelId);
 }
 
-void WorldEditor::_activateQuad3d(const string & id)
+void WorldEditor::_activateQuad(const string & id)
 {
 	_activeQuadId = id;
 
@@ -36,7 +36,7 @@ void WorldEditor::_activateQuad3d(const string & id)
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Quad3D: " + _activeQuadId);
 }
 
-void WorldEditor::_activateText3d(const string & id)
+void WorldEditor::_activateText(const string & id)
 {
 	_activeTextId = id;
 
@@ -131,21 +131,21 @@ void WorldEditor::_deactivateModel()
 	_activeModelId = "";
 }
 
-void WorldEditor::_deactivateQuad3d()
+void WorldEditor::_deactivateQuad()
 {
 	if(!_activeQuadId.empty())
 	{
-		_deselectQuad3d(_activeQuadId);
+		_deselectQuad(_activeQuadId);
 	}
 
 	_activeQuadId = "";
 }
 
-void WorldEditor::_deactivateText3d()
+void WorldEditor::_deactivateText()
 {
 	if(!_activeTextId.empty())
 	{
-		_deselectText3d(_activeTextId);
+		_deselectText(_activeTextId);
 	}
 
 	_activeTextId = "";

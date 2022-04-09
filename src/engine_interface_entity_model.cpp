@@ -16,15 +16,15 @@ void EngineInterface::model_delete(const string & id)
 		}
 	}
 
-	for(const auto & [aabbId, aabbEntity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
-		if(aabbEntity->hasParent())
+		if(entity->hasParent())
 		{
-			if(id == aabbEntity->getParentId())
+			if(id == entity->getParentId())
 			{
-				if(aabbEntity->getParentType() == AabbParentType::MODEL)
+				if(entity->getParentType() == AabbParentType::MODEL)
 				{
-					aabb_delete(aabbId);
+					aabb_delete(entityId);
 				}
 			}
 		}

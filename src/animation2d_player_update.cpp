@@ -76,9 +76,9 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 		quad->setUvOffset(uvOffset);
 	}
 
-	for(const auto & key : quad3dAnimationsToStop)
+	for(const auto & mergedId : quad3dAnimationsToStop)
 	{
-		_startedQuad3dAnimations.erase(key);
+		_startedQuad3dAnimations.erase(mergedId);
 	}
 }
 
@@ -141,8 +141,8 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 		quad->setUvOffset(uvOffset);
 	}
 
-	for(const auto & key : quad2dAnimationsToStop)
+	for(const auto & mergedId : quad2dAnimationsToStop)
 	{
-		_startedQuad2dAnimations.erase(key);
+		_startedQuad2dAnimations.erase(mergedId);
 	}
 }

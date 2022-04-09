@@ -46,7 +46,7 @@ const vector<pair<string, string>> Animation2dPlayer::getStartedQuad2dAnimationI
 
 const int Animation2dPlayer::getQuad3dAnimationPlayCount(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -61,12 +61,12 @@ const int Animation2dPlayer::getQuad3dAnimationPlayCount(const string & animatio
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(key)->getPlayCount();
+	return _startedQuad3dAnimations.at(mergedId)->getPlayCount();
 }
 
 const int Animation2dPlayer::getQuad2dAnimationPlayCount(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -81,12 +81,12 @@ const int Animation2dPlayer::getQuad2dAnimationPlayCount(const string & animatio
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(key)->getPlayCount();
+	return _startedQuad2dAnimations.at(mergedId)->getPlayCount();
 }
 
 const unsigned int Animation2dPlayer::getQuad3dAnimationRowIndex(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -101,12 +101,12 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationRowIndex(const string & 
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(key)->getRowIndex();
+	return _startedQuad3dAnimations.at(mergedId)->getRowIndex();
 }
 
 const unsigned int Animation2dPlayer::getQuad2dAnimationRowIndex(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -121,12 +121,12 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationRowIndex(const string & 
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(key)->getRowIndex();
+	return _startedQuad2dAnimations.at(mergedId)->getRowIndex();
 }
 
 const unsigned int Animation2dPlayer::getQuad3dAnimationColumnIndex(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -141,12 +141,12 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationColumnIndex(const string
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(key)->getColumnIndex();
+	return _startedQuad3dAnimations.at(mergedId)->getColumnIndex();
 }
 
 const unsigned int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -161,12 +161,12 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(key)->getColumnIndex();
+	return _startedQuad2dAnimations.at(mergedId)->getColumnIndex();
 }
 
 const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -181,12 +181,12 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalMultiplier(const
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(key)->getIntervalMultiplier();
+	return _startedQuad2dAnimations.at(mergedId)->getIntervalMultiplier();
 }
 
 const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -201,12 +201,12 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalMultiplier(const
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(key)->getIntervalMultiplier();
+	return _startedQuad2dAnimations.at(mergedId)->getIntervalMultiplier();
 }
 
 const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -221,12 +221,12 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const st
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(key)->getIntervalDivider();
+	return _startedQuad2dAnimations.at(mergedId)->getIntervalDivider();
 }
 
 const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalDivider(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -241,12 +241,12 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalDivider(const st
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(key)->getIntervalDivider();
+	return _startedQuad2dAnimations.at(mergedId)->getIntervalDivider();
 }
 
 const bool Animation2dPlayer::isQuad3dAnimationStarted(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -257,12 +257,12 @@ const bool Animation2dPlayer::isQuad3dAnimationStarted(const string & animationI
 		abort();
 	}
 
-	return (_startedQuad3dAnimations.find(key) != _startedQuad3dAnimations.end());
+	return (_startedQuad3dAnimations.find(mergedId) != _startedQuad3dAnimations.end());
 }
 
 const bool Animation2dPlayer::isQuad3dAnimationPaused(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -277,12 +277,12 @@ const bool Animation2dPlayer::isQuad3dAnimationPaused(const string & animationId
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(key)->isPaused();
+	return _startedQuad3dAnimations.at(mergedId)->isPaused();
 }
 
 const bool Animation2dPlayer::isQuad3dAnimationAutopaused(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -297,12 +297,12 @@ const bool Animation2dPlayer::isQuad3dAnimationAutopaused(const string & animati
 		abort();
 	}
 
-	return _startedQuad3dAnimations.at(key)->isAutopaused();
+	return _startedQuad3dAnimations.at(mergedId)->isAutopaused();
 }
 
 const bool Animation2dPlayer::isQuad2dAnimationStarted(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -313,12 +313,12 @@ const bool Animation2dPlayer::isQuad2dAnimationStarted(const string & animationI
 		abort();
 	}
 
-	return (_startedQuad2dAnimations.find(key) != _startedQuad2dAnimations.end());
+	return (_startedQuad2dAnimations.find(mergedId) != _startedQuad2dAnimations.end());
 }
 
 const bool Animation2dPlayer::isQuad2dAnimationPaused(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -333,12 +333,12 @@ const bool Animation2dPlayer::isQuad2dAnimationPaused(const string & animationId
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(key)->isPaused();
+	return _startedQuad2dAnimations.at(mergedId)->isPaused();
 }
 
 const bool Animation2dPlayer::isQuad2dAnimationAutopaused(const string & animationId, const string & quadId) const
 {
-	const auto key = Tools::mergeStrings(animationId, quadId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
 	if(!_animation2dManager->isAnimationExisting(animationId))
 	{
@@ -353,5 +353,5 @@ const bool Animation2dPlayer::isQuad2dAnimationAutopaused(const string & animati
 		abort();
 	}
 
-	return _startedQuad2dAnimations.at(key)->isAutopaused();
+	return _startedQuad2dAnimations.at(mergedId)->isAutopaused();
 }

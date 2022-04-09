@@ -400,8 +400,8 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 		}
 	}
 
-	for(const auto & key : modelAnimationsToStop)
+	for(const auto & mergedId : modelAnimationsToStop)
 	{
-		_startedModelAnimations.erase(key);
+		_startedModelAnimations.erase(mergedId);
 	}
 }

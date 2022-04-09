@@ -1,5 +1,4 @@
 #include "script.hpp"
-#include "logger.hpp"
 
 void Script::createScriptFile(const string & id)
 {

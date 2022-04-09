@@ -1,5 +1,4 @@
 #include "model_entity_manager.hpp"
-#include "logger.hpp"
 
 #include <map>
 

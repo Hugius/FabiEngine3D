@@ -1,5 +1,4 @@
 #include "script_value.hpp"
-#include "logger.hpp"
 
 ScriptValue::ScriptValue(ScriptValueType type)
 	:

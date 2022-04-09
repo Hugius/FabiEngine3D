@@ -1,7 +1,6 @@
 #include "script_interpreter.hpp"
 #include "configuration.hpp"
 #include "tools.hpp"
-#include "logger.hpp"
 
 using SVT = ScriptValueType;
 

@@ -1,5 +1,4 @@
 #include "sky_editor.hpp"
-#include "logger.hpp"
 
 void SkyEditor::_updateMainMenu()
 {

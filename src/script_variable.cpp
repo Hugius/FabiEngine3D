@@ -1,5 +1,4 @@
 #include "script_variable.hpp"
-#include "logger.hpp"
 
 ScriptVariable::ScriptVariable(const string & id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>> & values)
 	:

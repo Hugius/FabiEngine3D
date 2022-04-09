@@ -1,5 +1,4 @@
 #include "animation3d_editor.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
 
 void Animation3dEditor::_updateFrameMenu()

@@ -2,7 +2,6 @@
 
 #include "audio_loader.hpp"
 #include "tools.hpp"
-#include "logger.hpp"
 
 using std::make_shared;
 

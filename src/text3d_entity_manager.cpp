@@ -1,6 +1,5 @@
 #include "text3d_entity_manager.hpp"
 #include "render_storage.hpp"
-#include "logger.hpp"
 
 using std::make_shared;
 

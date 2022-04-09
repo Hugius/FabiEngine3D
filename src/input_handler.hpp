@@ -1,9 +1,9 @@
 #pragma once
 
 #include "input_type.hpp"
-#include "logger.hpp"
 
 #include <vector>
+#include <string>
 
 using std::to_string;
 using std::vector;

@@ -1,5 +1,4 @@
 #include "text3d_entity.hpp"
-#include "logger.hpp"
 
 #include <algorithm>
 

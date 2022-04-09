@@ -1,5 +1,4 @@
 #include "world_editor.hpp"
-#include "logger.hpp"
 
 void WorldEditor::_updateReflectionEditing()
 {

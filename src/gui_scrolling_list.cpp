@@ -1,5 +1,4 @@
 #include "gui_scrolling_list.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
 
 #include <algorithm>

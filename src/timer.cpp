@@ -1,5 +1,4 @@
 #include "timer.hpp"
-#include "logger.hpp"
 
 #include <chrono>
 

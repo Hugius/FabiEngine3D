@@ -1,5 +1,4 @@
 #include "script_interpreter.hpp"
-#include "logger.hpp"
 
 const bool ScriptInterpreter::_checkConditionString(const string & conditionString)
 {

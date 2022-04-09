@@ -1,5 +1,4 @@
 #include "render_window.hpp"
-#include "logger.hpp"
 #include "configuration.hpp"
 
 #include <SDL_syswm.h>

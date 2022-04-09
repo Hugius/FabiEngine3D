@@ -1,5 +1,4 @@
 #include "mesh_loader.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
 
 #include <fstream>

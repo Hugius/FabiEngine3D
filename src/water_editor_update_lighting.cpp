@@ -1,5 +1,4 @@
 #include "water_editor.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
 
 void WaterEditor::_updateLightingMenu()

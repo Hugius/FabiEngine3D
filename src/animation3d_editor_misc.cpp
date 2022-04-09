@@ -1,5 +1,4 @@
 #include "animation3d_editor.hpp"
-#include "logger.hpp"
 
 void Animation3dEditor::inject(shared_ptr<ModelEditor> modelEditor)
 {

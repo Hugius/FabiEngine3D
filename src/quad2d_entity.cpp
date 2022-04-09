@@ -1,5 +1,4 @@
 #include "quad2d_entity.hpp"
-#include "logger.hpp"
 
 #include <algorithm>
 

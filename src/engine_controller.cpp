@@ -1,6 +1,5 @@
 #include "engine_controller.hpp"
 #include "configuration.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
 
 EngineController::EngineController()

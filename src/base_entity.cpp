@@ -1,5 +1,4 @@
 #include "base_entity.hpp"
-#include "logger.hpp"
 
 BaseEntity::BaseEntity(const string & id)
 	:

@@ -1,5 +1,4 @@
 #include "vertex_buffer.hpp"
-#include "logger.hpp"
 
 VertexBuffer::VertexBuffer(VertexBufferType type, const float data[], unsigned int dataCount)
 {

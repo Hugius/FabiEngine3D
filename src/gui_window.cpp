@@ -1,5 +1,4 @@
 #include "gui_window.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
 
 GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & color)

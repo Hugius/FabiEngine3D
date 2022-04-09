@@ -1,5 +1,4 @@
 #include "reflection_entity.hpp"
-#include "logger.hpp"
 
 void ReflectionEntity::updateTarget()
 {

@@ -1,5 +1,4 @@
 #include "capture_buffer.hpp"
-#include "logger.hpp"
 #include "configuration.hpp"
 #include "render_storage.hpp"
 

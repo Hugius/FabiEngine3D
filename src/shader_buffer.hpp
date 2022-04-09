@@ -1,12 +1,13 @@
 #pragma once
 
-#include "logger.hpp"
 #include "mathematics.hpp" 
 
 #include <unordered_map>
 #include <glew.h>
+#include <string>
 
 using std::unordered_map;
+using std::string;
 
 class ShaderBuffer final
 {

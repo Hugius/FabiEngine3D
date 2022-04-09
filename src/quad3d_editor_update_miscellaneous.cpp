@@ -1,5 +1,4 @@
 #include "quad3d_editor.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
 
 void Quad3dEditor::_updateMiscellaneousMenu()

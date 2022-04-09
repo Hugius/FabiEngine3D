@@ -1,5 +1,4 @@
 #include "networking_server.hpp"
-#include "logger.hpp"
 
 const bool NetworkingServer::isRunning() const
 {

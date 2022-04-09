@@ -1,5 +1,4 @@
 #include "text2d_editor.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
 
 void Text2dEditor::_updateMainMenu()

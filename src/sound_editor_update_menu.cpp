@@ -1,5 +1,4 @@
 #include "sound_editor.hpp"
-#include "logger.hpp"
 
 void SoundEditor::_updateMainMenu()
 {

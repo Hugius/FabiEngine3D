@@ -1,5 +1,4 @@
 #include "gui_viewport.hpp"
-#include "logger.hpp"
 #include "tools.hpp"
 
 GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color)

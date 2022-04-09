@@ -1,5 +1,4 @@
 #include "script_interpreter.hpp"
-#include "logger.hpp"
 
 #include <sstream>
 

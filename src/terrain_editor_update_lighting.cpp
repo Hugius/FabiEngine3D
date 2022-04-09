@@ -1,5 +1,4 @@
 #include "terrain_editor.hpp"
-#include "logger.hpp"
 
 #include <algorithm>
 #include "tools.hpp"

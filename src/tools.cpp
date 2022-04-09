@@ -3,7 +3,6 @@
 #include "tools.hpp"
 #include "tools.hpp"
 #include "configuration.hpp"
-#include "logger.hpp"
 
 #include <filesystem>
 #include <windows.h>

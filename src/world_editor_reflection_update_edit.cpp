@@ -78,9 +78,9 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				vector<string> modelIds;
 
-				for(auto & [key, templateId] : _loadedModelIds)
+				for(auto & [placedId, templateId] : _loadedModelIds)
 				{
-					modelIds.push_back(key);
+					modelIds.push_back(placedId);
 				}
 
 				_gui->getOverlay()->openChoiceForm("selectException", "Select Exception", fvec2(0.0f, 0.1f), modelIds);

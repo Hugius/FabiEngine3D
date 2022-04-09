@@ -15,9 +15,9 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 {
 	vector<string> quad3dAnimationsToStop;
 
-	for(auto & [key, startedAnimation] : _startedQuad3dAnimations)
+	for(auto & [mergedId, startedAnimation] : _startedQuad3dAnimations)
 	{
-		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 		const auto animation = _animation2dManager->getAnimation(splitKey.first);
 		const auto quad = _quad3dEntityManager->getEntity(splitKey.second);
 		const auto interval = static_cast<unsigned int>((animation->getInterval() * startedAnimation->getIntervalMultiplier()) / startedAnimation->getIntervalDivider());
@@ -42,7 +42,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 
 							if(startedAnimation->getPlayCount() == 0)
 							{
-								quad3dAnimationsToStop.push_back(key);
+								quad3dAnimationsToStop.push_back(mergedId);
 							}
 						}
 					}
@@ -86,9 +86,9 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 {
 	vector<string> quad2dAnimationsToStop;
 
-	for(auto & [key, startedAnimation] : _startedQuad2dAnimations)
+	for(auto & [mergedId, startedAnimation] : _startedQuad2dAnimations)
 	{
-		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 		const auto animation = _animation2dManager->getAnimation(splitKey.first);
 		const auto quad = _quad2dEntityManager->getEntity(splitKey.second);
 
@@ -112,7 +112,7 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 
 							if(startedAnimation->getPlayCount() == 0)
 							{
-								quad2dAnimationsToStop.push_back(key);
+								quad2dAnimationsToStop.push_back(mergedId);
 							}
 						}
 					}

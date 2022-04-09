@@ -14,14 +14,14 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 {
 	vector<string> modelAnimationsToStop;
 
-	for(auto & [key, startedAnimation] : _startedModelAnimations)
+	for(auto & [mergedId, startedAnimation] : _startedModelAnimations)
 	{
 		if(startedAnimation->isPaused())
 		{
 			continue;
 		}
 
-		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 		const auto animation = _animation3dManager->getAnimation(splitKey.first);
 		const auto model = _modelEntityManager->getEntity(splitKey.second);
 
@@ -389,7 +389,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 
 					if(startedAnimation->getPlayCount() == 0)
 					{
-						modelAnimationsToStop.push_back(key);
+						modelAnimationsToStop.push_back(mergedId);
 					}
 				}
 			}

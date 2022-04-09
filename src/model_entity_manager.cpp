@@ -185,7 +185,7 @@ void ModelEntityManager::update()
 		{
 			map<float, shared_ptr<ReflectionEntity>> orderedReflectionEntities;
 
-			for(const auto & [key, reflectionEntity] : _reflectionManager->getEntities())
+			for(const auto & [reflectionEntityId, reflectionEntity] : _reflectionManager->getEntities())
 			{
 				if(reflectionEntity->isVisible())
 				{

@@ -35,7 +35,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_modelEntityDepthRenderer->bind();
 
-		for(const auto & [key, modelEntity] : _modelEntityManager->getEntities())
+		for(const auto & [modelEntityId, modelEntity] : _modelEntityManager->getEntities())
 		{
 			if(modelEntity->isLevelOfDetailed())
 			{
@@ -93,7 +93,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto & [key, textEntity] : _text3dEntityManager->getEntities())
+		for(const auto & [textEntityId, textEntity] : _text3dEntityManager->getEntities())
 		{
 			for(const auto & characterEntity : textEntity->getCharacterEntities())
 			{
@@ -269,7 +269,7 @@ void MasterRenderer::captureShadows()
 		{
 			_modelEntityShadowRenderer->bind();
 
-			for(const auto & [key, modelEntity] : _modelEntityManager->getEntities())
+			for(const auto & [modelEntityId, modelEntity] : _modelEntityManager->getEntities())
 			{
 				if(modelEntity->isLevelOfDetailed())
 				{
@@ -327,7 +327,7 @@ void MasterRenderer::captureShadows()
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto & [key, textEntity] : _text3dEntityManager->getEntities())
+			for(const auto & [textEntityId, textEntity] : _text3dEntityManager->getEntities())
 			{
 				for(const auto & characterEntity : textEntity->getCharacterEntities())
 				{

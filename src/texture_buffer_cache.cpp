@@ -15,16 +15,16 @@ void TextureBufferCache::store2dBuffer(const string & filePath, shared_ptr<Textu
 
 void TextureBufferCache::store3dBuffer(const array<string, 6> & filePaths, shared_ptr<TextureBuffer> buffer)
 {
-	const auto key = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
+	const auto mergedId = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
 
-	auto cacheIterator = _3dBuffers.find(key);
+	auto cacheIterator = _3dBuffers.find(mergedId);
 
 	if(cacheIterator != _3dBuffers.end())
 	{
 		abort();
 	}
 
-	_3dBuffers.insert({key, buffer});
+	_3dBuffers.insert({mergedId, buffer});
 }
 
 void TextureBufferCache::delete2dBuffer(const string & filePath)
@@ -39,14 +39,14 @@ void TextureBufferCache::delete2dBuffer(const string & filePath)
 
 void TextureBufferCache::delete3dBuffer(const array<string, 6> & filePaths)
 {
-	const auto key = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
+	const auto mergedId = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
 
-	if(_3dBuffers.find(key) == _3dBuffers.end())
+	if(_3dBuffers.find(mergedId) == _3dBuffers.end())
 	{
 		abort();
 	}
 
-	_3dBuffers.erase(key);
+	_3dBuffers.erase(mergedId);
 }
 
 void TextureBufferCache::clear2dBuffers()
@@ -73,9 +73,9 @@ const shared_ptr<TextureBuffer> TextureBufferCache::get2dBuffer(const string & f
 
 const shared_ptr<TextureBuffer> TextureBufferCache::get3dBuffer(const array<string, 6> & filePaths) const
 {
-	const auto key = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
+	const auto mergedId = Tools::mergeStrings({filePaths[0], filePaths[1], filePaths[2], filePaths[3], filePaths[4], filePaths[5]}, DELIMITER);
 
-	auto cacheIterator = _3dBuffers.find(key);
+	auto cacheIterator = _3dBuffers.find(mergedId);
 
 	if(cacheIterator != _3dBuffers.end())
 	{
@@ -99,9 +99,9 @@ const vector<string> TextureBufferCache::get2dFilePaths() const
 {
 	vector<string> result;
 
-	for(const auto & [key, buffer] : _2dBuffers)
+	for(const auto & [mergedId, buffer] : _2dBuffers)
 	{
-		result.push_back(key);
+		result.push_back(mergedId);
 	}
 
 	return result;
@@ -111,9 +111,9 @@ const vector<array<string, 6>> TextureBufferCache::get3dFilePaths() const
 {
 	vector<array<string, 6>> result;
 
-	for(const auto & [key, buffer] : _3dBuffers)
+	for(const auto & [mergedId, buffer] : _3dBuffers)
 	{
-		const auto splitKey = Tools::splitStringIntoMultiple(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoMultiple(mergedId, DELIMITER);
 
 		result.push_back({splitKey[0], splitKey[1], splitKey[2], splitKey[3], splitKey[4], splitKey[5]});
 	}

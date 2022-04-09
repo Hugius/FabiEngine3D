@@ -55,7 +55,7 @@ const vector<string> EngineInterface::sound2d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, sound] : _core->getSound2dManager()->getSounds())
+	for(const auto & [soundId, sound] : _core->getSound2dManager()->getSounds())
 	{
 		result.push_back(sound->getId());
 	}

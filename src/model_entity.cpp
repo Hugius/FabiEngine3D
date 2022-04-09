@@ -52,7 +52,7 @@ void ModelEntity::updateTarget()
 		_correctSizeTarget(_baseSize, _baseSizeTarget, _baseSizeTargetSpeed);
 	}
 
-	for(auto & [key, part] : _parts)
+	for(auto & [partId, part] : _parts)
 	{
 		if(part->position != part->positionTarget)
 		{
@@ -88,7 +88,7 @@ void ModelEntity::updateTarget()
 
 void ModelEntity::updateTransformation()
 {
-	for(auto & [key, part] : _parts)
+	for(auto & [partId, part] : _parts)
 	{
 		part->transformation = mat44(1.0f);
 
@@ -662,9 +662,9 @@ const vector<string> ModelEntity::getPartIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, part] : _parts)
+	for(const auto & [partId, part] : _parts)
 	{
-		result.push_back(key);
+		result.push_back(partId);
 	}
 
 	return result;

@@ -5,7 +5,7 @@ using std::make_shared;
 
 void Animation3dPlayer::startModelAnimation(const string & animationId, const string & modelId, int playCount)
 {
-	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
@@ -29,12 +29,12 @@ void Animation3dPlayer::startModelAnimation(const string & animationId, const st
 	newAnimation->setPlayCount(playCount);
 	newAnimation->setPartIds(_animation3dManager->getAnimation(animationId)->getPartIds());
 
-	_startedModelAnimations.insert({key, newAnimation});
+	_startedModelAnimations.insert({mergedId, newAnimation});
 }
 
 void Animation3dPlayer::pauseModelAnimation(const string & animationId, const string & modelId)
 {
-	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
@@ -54,12 +54,12 @@ void Animation3dPlayer::pauseModelAnimation(const string & animationId, const st
 		abort();
 	}
 
-	_startedModelAnimations.at(key)->setPaused(true);
+	_startedModelAnimations.at(mergedId)->setPaused(true);
 }
 
 void Animation3dPlayer::autopauseModelAnimation(const string & animationId, const string & modelId)
 {
-	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
@@ -79,12 +79,12 @@ void Animation3dPlayer::autopauseModelAnimation(const string & animationId, cons
 		abort();
 	}
 
-	_startedModelAnimations.at(key)->setAutopaused(true);
+	_startedModelAnimations.at(mergedId)->setAutopaused(true);
 }
 
 void Animation3dPlayer::resumeModelAnimation(const string & animationId, const string & modelId)
 {
-	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
@@ -103,12 +103,12 @@ void Animation3dPlayer::resumeModelAnimation(const string & animationId, const s
 		abort();
 	}
 
-	_startedModelAnimations.at(key)->setPaused(false);
+	_startedModelAnimations.at(mergedId)->setPaused(false);
 }
 
 void Animation3dPlayer::stopModelAnimation(const string & animationId, const string & modelId)
 {
-	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
@@ -123,12 +123,12 @@ void Animation3dPlayer::stopModelAnimation(const string & animationId, const str
 		abort();
 	}
 
-	_startedModelAnimations.erase(key);
+	_startedModelAnimations.erase(mergedId);
 }
 
 void Animation3dPlayer::setModelAnimationSpeedMultiplier(const string & animationId, const string & modelId, float value)
 {
-	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
@@ -143,12 +143,12 @@ void Animation3dPlayer::setModelAnimationSpeedMultiplier(const string & animatio
 		abort();
 	}
 
-	_startedModelAnimations.at(key)->setSpeedMultiplier(value);
+	_startedModelAnimations.at(mergedId)->setSpeedMultiplier(value);
 }
 
 void Animation3dPlayer::setModelAnimationFrameIndex(const string & animationId, const string & modelId, unsigned int value)
 {
-	const auto key = Tools::mergeStrings(animationId, modelId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(animationId, modelId, DELIMITER);
 
 	if(!_animation3dManager->isAnimationExisting(animationId))
 	{
@@ -163,5 +163,5 @@ void Animation3dPlayer::setModelAnimationFrameIndex(const string & animationId, 
 		abort();
 	}
 
-	_startedModelAnimations.at(key)->setFrameIndex(value);
+	_startedModelAnimations.at(mergedId)->setFrameIndex(value);
 }

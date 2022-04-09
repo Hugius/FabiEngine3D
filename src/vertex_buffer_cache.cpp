@@ -3,28 +3,28 @@
 
 void VertexBufferCache::storeBuffer(const string & filePath, const string & partId, shared_ptr<VertexBuffer> buffer)
 {
-	const auto key = Tools::mergeStrings(filePath, partId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(filePath, partId, DELIMITER);
 
-	auto cacheIterator = _buffers.find(key);
+	auto cacheIterator = _buffers.find(mergedId);
 
 	if(cacheIterator != _buffers.end())
 	{
 		abort();
 	}
 
-	_buffers.insert({key, buffer});
+	_buffers.insert({mergedId, buffer});
 }
 
 void VertexBufferCache::deleteBuffer(const string & filePath, const string & partId)
 {
-	const auto key = Tools::mergeStrings(filePath, partId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(filePath, partId, DELIMITER);
 
-	if(_buffers.find(key) == _buffers.end())
+	if(_buffers.find(mergedId) == _buffers.end())
 	{
 		abort();
 	}
 
-	_buffers.erase(key);
+	_buffers.erase(mergedId);
 }
 
 void VertexBufferCache::clearBuffers()
@@ -34,9 +34,9 @@ void VertexBufferCache::clearBuffers()
 
 const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string & filePath, const string & partId) const
 {
-	const auto key = Tools::mergeStrings(filePath, partId, DELIMITER);
+	const auto mergedId = Tools::mergeStrings(filePath, partId, DELIMITER);
 
-	auto cacheIterator = _buffers.find(key);
+	auto cacheIterator = _buffers.find(mergedId);
 
 	if(cacheIterator != _buffers.end())
 	{
@@ -55,9 +55,9 @@ const vector<string> VertexBufferCache::getFilePaths() const
 {
 	vector<string> result;
 
-	for(const auto & [key, buffer] : _buffers)
+	for(const auto & [mergedId, buffer] : _buffers)
 	{
-		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 
 		result.push_back(splitKey.first);
 	}
@@ -69,9 +69,9 @@ const vector<string> VertexBufferCache::getPartIds(const string & filePath) cons
 {
 	vector<string> result;
 
-	for(const auto & [key, buffer] : _buffers)
+	for(const auto & [mergedId, buffer] : _buffers)
 	{
-		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 
 		if(filePath == splitKey.first)
 		{

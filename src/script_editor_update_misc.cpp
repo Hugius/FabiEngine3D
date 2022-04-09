@@ -177,9 +177,9 @@ void ScriptEditor::_updateScriptSearching()
 			return;
 		}
 
-		for(const auto & [key, lineNumber] : searchResult)
+		for(const auto & [scriptId, lineNumber] : searchResult)
 		{
-			Logger::throwInfo("Keyword found in script \"" + key + "\" @ line " + to_string(lineNumber));
+			Logger::throwInfo("Keyword found in script \"" + scriptId + "\" @ line " + to_string(lineNumber));
 		}
 	}
 }

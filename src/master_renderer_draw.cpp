@@ -112,7 +112,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 		_modelEntityColorRenderer->processSpotlightEntities(_spotlightEntityManager->getEntities());
 
-		for(const auto & [key, modelEntity] : _modelEntityManager->getEntities())
+		for(const auto & [modelEntityId, modelEntity] : _modelEntityManager->getEntities())
 		{
 			bool isTransparent = false;
 
@@ -171,7 +171,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 		_modelEntityColorRenderer->processSpotlightEntities(_spotlightEntityManager->getEntities());
 
-		for(const auto & [key, modelEntity] : _modelEntityManager->getEntities())
+		for(const auto & [modelEntityId, modelEntity] : _modelEntityManager->getEntities())
 		{
 			bool isTransparent = false;
 
@@ -267,7 +267,7 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [key, textEntity] : _text3dEntityManager->getEntities())
+		for(const auto & [textEntityId, textEntity] : _text3dEntityManager->getEntities())
 		{
 			if(textEntity->getOpacity() < 1.0f)
 			{
@@ -290,7 +290,7 @@ void MasterRenderer::_renderTransparentText3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [key, textEntity] : _text3dEntityManager->getEntities())
+		for(const auto & [textEntityId, textEntity] : _text3dEntityManager->getEntities())
 		{
 			if(textEntity->getOpacity() == 1.0f)
 			{

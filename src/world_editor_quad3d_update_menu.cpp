@@ -29,9 +29,9 @@ void WorldEditor::_updateQuad3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quadList")->deleteOptions();
 
-			for(auto & [key, templateId] : _loadedQuadIds)
+			for(auto & [placedId, templateId] : _loadedQuadIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quadList")->createOption(key, key);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quadList")->createOption(placedId, placedId);
 			}
 		}
 

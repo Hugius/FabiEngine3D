@@ -35,9 +35,9 @@ void WorldEditor::_updateSoundMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->deleteOptions();
 
-			for(auto & [key, templateId] : _loadedSoundIds)
+			for(auto & [placedId, templateId] : _loadedSoundIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->createOption(key, key);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("soundList")->createOption(placedId, placedId);
 			}
 		}
 

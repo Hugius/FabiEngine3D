@@ -28,20 +28,20 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 		{
 			float totalTime = 0.0f;
 
-			for(const auto & [key, time] : _debuggingTimes)
+			for(const auto & [scriptId, time] : _debuggingTimes)
 			{
 				totalTime += time;
 			}
 
 			Logger::throwInfo("Debugging results:");
 
-			for(const auto & [key, time] : _debuggingTimes)
+			for(const auto & [scriptId, time] : _debuggingTimes)
 			{
 				const auto percentage = ((time / totalTime) * 100.0f);
 				const auto percentageString = to_string(percentage);
 				const auto fixedPercentageString = percentageString.substr(0, (percentageString.size() - 1));
 
-				Logger::throwInfo("Script \"" + key + "\" ---> " + fixedPercentageString + "%");
+				Logger::throwInfo("Script \"" + scriptId + "\" ---> " + fixedPercentageString + "%");
 			}
 
 			Logger::throwInfo("");

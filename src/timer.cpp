@@ -161,9 +161,9 @@ const vector<string> Timer::getClockIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, clock] : _clocks)
+	for(const auto & [clockId, clock] : _clocks)
 	{
-		result.push_back(key);
+		result.push_back(clockId);
 	}
 
 	return result;

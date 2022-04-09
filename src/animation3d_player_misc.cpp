@@ -15,9 +15,9 @@ const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimationId
 {
 	vector<pair<string, string>> ids;
 
-	for(const auto & [key, animation] : _startedModelAnimations)
+	for(const auto & [mergedId, animation] : _startedModelAnimations)
 	{
-		const auto splitKey = Tools::splitStringIntoTwo(key, DELIMITER);
+		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 
 		ids.push_back(splitKey);
 	}

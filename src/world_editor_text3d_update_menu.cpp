@@ -29,9 +29,9 @@ void WorldEditor::_updateText3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("textList")->deleteOptions();
 
-			for(auto & [key, templateId] : _loadedTextIds)
+			for(auto & [placedId, templateId] : _loadedTextIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("textList")->createOption(key, key);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("textList")->createOption(placedId, placedId);
 			}
 		}
 

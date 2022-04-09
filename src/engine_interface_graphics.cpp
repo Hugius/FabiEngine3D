@@ -89,7 +89,7 @@ void EngineInterface::graphics_setAnisotropicFilteringQuality(unsigned int value
 
 	_core->getRenderStorage()->setAnisotropicFilteringQuality(value);
 
-	for(const auto & [key, texture] : _core->getTextureBufferCache()->get2dBuffers())
+	for(const auto & [mergedId, texture] : _core->getTextureBufferCache()->get2dBuffers())
 	{
 		if(texture->isAnisotropicallyFiltered())
 		{
@@ -97,7 +97,7 @@ void EngineInterface::graphics_setAnisotropicFilteringQuality(unsigned int value
 		}
 	}
 
-	for(const auto & [key, texture] : _core->getTextureBufferCache()->get3dBuffers())
+	for(const auto & [mergedId, texture] : _core->getTextureBufferCache()->get3dBuffers())
 	{
 		if(texture->isAnisotropicallyFiltered())
 		{

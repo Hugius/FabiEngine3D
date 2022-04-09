@@ -48,9 +48,9 @@ const vector<string> WaveBufferCache::getFilePaths() const
 {
 	vector<string> result;
 
-	for(const auto & [key, buffer] : _buffers)
+	for(const auto & [filePath, buffer] : _buffers)
 	{
-		result.push_back(key);
+		result.push_back(filePath);
 	}
 
 	return result;

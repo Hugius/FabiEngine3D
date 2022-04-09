@@ -227,7 +227,7 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [key, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [entityId, entity] : _quad3dEntityManager->getEntities())
 		{
 			if(entity->getOpacity() < 1.0f)
 			{
@@ -247,7 +247,7 @@ void MasterRenderer::_renderTransparentQuad3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [key, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [entityId, entity] : _quad3dEntityManager->getEntities())
 		{
 			if(entity->getOpacity() == 1.0f)
 			{
@@ -313,7 +313,7 @@ void MasterRenderer::_renderAabbEntities()
 	{
 		_aabbEntityColorRenderer->bind();
 
-		for(const auto & [key, entity] : _aabbEntityManager->getEntities())
+		for(const auto & [entityId, entity] : _aabbEntityManager->getEntities())
 		{
 			_aabbEntityColorRenderer->render(entity);
 		}
@@ -338,19 +338,19 @@ void MasterRenderer::_renderGUI()
 		_quad2dEntityColorRenderer->bind();
 
 		map<unsigned int, shared_ptr<BaseEntity>> orderedQuad2dEntities;
-		for(const auto & [key, entity] : _quad2dEntityManager->getEntities())
+		for(const auto & [entityId, entity] : _quad2dEntityManager->getEntities())
 		{
 			if(entity->getId() != _renderStorage->getCursorEntityId())
 			{
 				orderedQuad2dEntities.insert({entity->getDepth(), entity});
 			}
 		}
-		for(const auto & [key, entity] : _text2dEntityManager->getEntities())
+		for(const auto & [entityId, entity] : _text2dEntityManager->getEntities())
 		{
 			orderedQuad2dEntities.insert({entity->getDepth(), entity});
 		}
 
-		for(const auto & [key, entity] : orderedQuad2dEntities)
+		for(const auto & [entityId, entity] : orderedQuad2dEntities)
 		{
 			auto castedQuad2dEntity = dynamic_pointer_cast<Quad2dEntity>(entity);
 			auto castedText2dEntity = dynamic_pointer_cast<Text2dEntity>(entity);

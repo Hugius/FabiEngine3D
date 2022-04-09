@@ -142,7 +142,7 @@ const vector<string> EngineInterface::aabb_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}

@@ -69,7 +69,7 @@ const bool PointlightEntityManager::isEntitiesExisting() const
 
 void PointlightEntityManager::update()
 {
-	for(const auto & [key, entity] : _entities)
+	for(const auto & [entityId, entity] : _entities)
 	{
 		entity->updateTarget();
 	}

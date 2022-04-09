@@ -109,7 +109,7 @@ void Text3dEntityManager::createEntity(const string & id, const string & fontMap
 
 void Text3dEntityManager::update()
 {
-	for(const auto & [key, entity] : _entities)
+	for(const auto & [entityId, entity] : _entities)
 	{
 		entity->updateTarget();
 

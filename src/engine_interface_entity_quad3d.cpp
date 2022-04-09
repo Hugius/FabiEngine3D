@@ -387,7 +387,7 @@ const vector<string> EngineInterface::quad3d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, entity] : _core->getQuad3dEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getQuad3dEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}
@@ -414,7 +414,7 @@ const vector<string> EngineInterface::quad3d_getChildAabbIds(const string & id) 
 {
 	vector<string> result;
 
-	for(const auto & [key, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasParent())
 		{

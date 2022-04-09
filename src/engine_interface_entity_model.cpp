@@ -748,7 +748,7 @@ const vector<string> EngineInterface::model_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, entity] : _core->getModelEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getModelEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}
@@ -760,7 +760,7 @@ const vector<string> EngineInterface::model_getChildAabbIds(const string & id)
 {
 	vector<string> result;
 
-	for(const auto & [key, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasParent())
 		{

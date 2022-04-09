@@ -22,7 +22,7 @@ void RaycastIntersector::update()
 	_closestAabbId = "";
 	_aabbIntersections.clear();
 
-	for(const auto & [key, entity] : _aabbManager->getEntities())
+	for(const auto & [entityId, entity] : _aabbManager->getEntities())
 	{
 		if(!_isAabbIntersectionEnabled || !entity->isRaycastResponsive())
 		{

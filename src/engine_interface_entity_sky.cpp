@@ -157,7 +157,7 @@ const vector<string> EngineInterface::sky_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, entity] : _core->getSkyEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getSkyEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}

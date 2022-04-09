@@ -34,7 +34,7 @@ void ReflectionEntityManager::createEntity(const string & id)
 
 void ReflectionEntityManager::update()
 {
-	for(const auto & [key, entity] : _entities)
+	for(const auto & [entityId, entity] : _entities)
 	{
 		entity->updateTarget();
 	}

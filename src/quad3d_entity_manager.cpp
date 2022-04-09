@@ -79,7 +79,7 @@ void Quad3dEntityManager::createEntity(const string & id, bool isCentered)
 
 void Quad3dEntityManager::update()
 {
-	for(const auto & [key, entity] : _entities)
+	for(const auto & [entityId, entity] : _entities)
 	{
 		entity->updateTarget();
 

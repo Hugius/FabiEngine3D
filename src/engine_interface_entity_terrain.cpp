@@ -468,7 +468,7 @@ const vector<string> EngineInterface::terrain_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, entity] : _core->getTerrainEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getTerrainEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}

@@ -185,7 +185,7 @@ const vector<string> EngineInterface::text2d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, entity] : _core->getText2dEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getText2dEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}

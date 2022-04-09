@@ -81,7 +81,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto & [key, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [entityId, entity] : _quad3dEntityManager->getEntities())
 		{
 			_quad3dEntityDepthRenderer->render(entity);
 		}
@@ -108,7 +108,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_aabbEntityDepthRenderer->bind();
 
-		for(const auto & [key, entity] : _aabbEntityManager->getEntities())
+		for(const auto & [entityId, entity] : _aabbEntityManager->getEntities())
 		{
 			_aabbEntityDepthRenderer->render(entity);
 		}
@@ -315,7 +315,7 @@ void MasterRenderer::captureShadows()
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto & [key, entity] : _quad3dEntityManager->getEntities())
+			for(const auto & [entityId, entity] : _quad3dEntityManager->getEntities())
 			{
 				_quad3dEntityShadowRenderer->render(entity);
 			}

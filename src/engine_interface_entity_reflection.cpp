@@ -45,7 +45,7 @@ const vector<string> EngineInterface::reflection_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, entity] : _core->getReflectionEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getReflectionEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}

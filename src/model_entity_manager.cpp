@@ -138,7 +138,7 @@ const bool ModelEntityManager::isEntitiesExisting() const
 
 void ModelEntityManager::update()
 {
-	for(const auto & [key, entity] : _entities)
+	for(const auto & [entityId, entity] : _entities)
 	{
 		entity->updateTarget();
 

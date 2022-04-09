@@ -78,7 +78,7 @@ void Quad2dEntityManager::inject(shared_ptr<RenderStorage> renderStorage)
 
 void Quad2dEntityManager::update()
 {
-	for(const auto & [key, entity] : _entities)
+	for(const auto & [entityId, entity] : _entities)
 	{
 		entity->updateTarget();
 

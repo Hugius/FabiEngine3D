@@ -92,7 +92,7 @@ void ModelEntityColorRenderer::unbind()
 void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>> & entities)
 {
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
-	for(const auto & [key, entity] : entities)
+	for(const auto & [entityId, entity] : entities)
 	{
 		if(entity->isVisible())
 		{
@@ -115,7 +115,7 @@ void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<str
 void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities)
 {
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
-	for(const auto & [key, entity] : entities)
+	for(const auto & [entityId, entity] : entities)
 	{
 		if(entity->isVisible())
 		{

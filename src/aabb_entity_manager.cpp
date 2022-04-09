@@ -107,7 +107,7 @@ void AabbEntityManager::createEntity(const string & id, bool isCentered)
 
 void AabbEntityManager::update()
 {
-	for(const auto & [key, entity] : _entities)
+	for(const auto & [entityId, entity] : _entities)
 	{
 		if(entity->hasParent())
 		{

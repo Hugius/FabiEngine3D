@@ -257,7 +257,7 @@ const vector<string> EngineInterface::water_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [key, entity] : _core->getWaterEntityManager()->getEntities())
+	for(const auto & [entityId, entity] : _core->getWaterEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}

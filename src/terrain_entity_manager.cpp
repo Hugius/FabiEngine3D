@@ -52,11 +52,11 @@ void TerrainEntityManager::createEntity(const string & id, const string & height
 	vector<float> pixels;
 	for(unsigned int index = 0; index < (size * size * bitsPerPixel); index += bitsPerPixel)
 	{
-		const auto r = (static_cast<float>(image->getPixels()[index + 0]) / 255.0f);
-		const auto g = (static_cast<float>(image->getPixels()[index + 1]) / 255.0f);
-		const auto b = (static_cast<float>(image->getPixels()[index + 2]) / 255.0f);
+		const auto red = (static_cast<float>(image->getPixels()[index + 0]) / 255.0f);
+		const auto green = (static_cast<float>(image->getPixels()[index + 1]) / 255.0f);
+		const auto blue = (static_cast<float>(image->getPixels()[index + 2]) / 255.0f);
 
-		const auto intensity = ((r + g + b) / 3.0f);
+		const auto intensity = ((red + green + blue) / 3.0f);
 
 		pixels.push_back(intensity);
 	}

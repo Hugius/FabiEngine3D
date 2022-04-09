@@ -26,6 +26,21 @@ const mat22 Mathematics::invertMatrix(const mat22 & matrix)
 	return result;
 }
 
+const mat22 Mathematics::transposeMatrix(const mat22 & matrix)
+{
+	mat22 result;
+
+	for(unsigned int rowIndex = 0; rowIndex < 2; rowIndex++)
+	{
+		for(unsigned columnIndex = 0; columnIndex < 2; columnIndex++)
+		{
+			result.m[rowIndex][columnIndex] = matrix.m[columnIndex][rowIndex];
+		}
+	}
+
+	return result;
+}
+
 const mat33 Mathematics::invertMatrix(const mat33 & matrix)
 {
 	auto determinant = calculateDeterminant(matrix);
@@ -195,11 +210,11 @@ const mat33 Mathematics::transposeMatrix(const mat33 & matrix)
 {
 	mat33 result;
 
-	for(unsigned int r = 0; r < 3; r++)
+	for(unsigned int rowIndex = 0; rowIndex < 3; rowIndex++)
 	{
-		for(unsigned c = 0; c < 3; c++)
+		for(unsigned columnIndex = 0; columnIndex < 3; columnIndex++)
 		{
-			result.m[r][c] = matrix.m[c][r];
+			result.m[rowIndex][columnIndex] = matrix.m[columnIndex][rowIndex];
 		}
 	}
 

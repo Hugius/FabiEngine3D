@@ -79,25 +79,25 @@ shared_ptr<Image> ImageLoader::_loadImage(const string & filePath) const
 
 			if(bytesPerPixel == 3)
 			{
-				auto b = static_cast<unsigned char>(getc(file));
-				auto g = static_cast<unsigned char>(getc(file));
-				auto r = static_cast<unsigned char>(getc(file));
+				auto blue = static_cast<unsigned char>(getc(file));
+				auto green = static_cast<unsigned char>(getc(file));
+				auto red = static_cast<unsigned char>(getc(file));
 
-				pixels[index + 0] = r;
-				pixels[index + 1] = g;
-				pixels[index + 2] = b;
+				pixels[index + 0] = red;
+				pixels[index + 1] = green;
+				pixels[index + 2] = blue;
 			}
 			if(bytesPerPixel == 4)
 			{
-				auto b = static_cast<unsigned char>(getc(file));
-				auto g = static_cast<unsigned char>(getc(file));
-				auto r = static_cast<unsigned char>(getc(file));
-				auto a = static_cast<unsigned char>(getc(file));
+				auto blue = static_cast<unsigned char>(getc(file));
+				auto green = static_cast<unsigned char>(getc(file));
+				auto red = static_cast<unsigned char>(getc(file));
+				auto alpha = static_cast<unsigned char>(getc(file));
 
-				pixels[index + 0] = r;
-				pixels[index + 1] = g;
-				pixels[index + 2] = b;
-				pixels[index + 3] = a;
+				pixels[index + 0] = red;
+				pixels[index + 1] = green;
+				pixels[index + 2] = blue;
+				pixels[index + 3] = alpha;
 			}
 		}
 	}

@@ -47,6 +47,7 @@ public:
 	static const mat33 transposeMatrix(const mat33 & matrix);
 
 	static const mat22 invertMatrix(const mat22 & matrix);
+	static const mat22 transposeMatrix(const mat22 & matrix);
 
 	static const fvec4 calculateAverage(const vector<fvec4> & values);
 	static const fvec4 calculateDifference(const fvec4 & firstPosition, const fvec4 & secondPosition);

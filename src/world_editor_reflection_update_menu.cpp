@@ -39,9 +39,9 @@ void WorldEditor::_updateReflectionMenu()
 			if(_fe3d->terrain_getSelectedId().empty())
 			{
 				_fe3d->reflection_setPosition(TEMPLATE_REFLECTION_ID, fvec3(0.0f));
-				_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), 5, false, true, false);
+				_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 				_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
-				_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), 5, false, true, false);
+				_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 			}
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())

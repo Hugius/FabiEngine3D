@@ -157,6 +157,7 @@ void GuiOverlay::openValueForm(const string & id, const string & title, const st
 	if(!_valueFormId.empty())
 	{
 		_valueFormQueue.push_back(make_tuple(id, title, valueString, position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed));
+		return;
 	}
 
 	createQuadField("value_form_title", (position + VF_TITLE_OFFSET), fvec2((title.size() * VF_TITLE_QUAD_SIZE.x), VF_TITLE_QUAD_SIZE.y), "", VF_TITLE_QUAD_COLOR, true);

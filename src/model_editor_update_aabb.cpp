@@ -67,15 +67,15 @@ void ModelEditor::_updateChoiceAabbMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("positionX", "X", (position.x * 100.0f), fvec2(-0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("positionX", "X", (position.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("positionY", "Y", (position.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("positionZ", "Z", (position.z * 100.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("positionZ", "Z", (position.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())

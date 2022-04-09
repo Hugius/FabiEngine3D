@@ -33,15 +33,15 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("positionX", "X", position.x, fvec2(-0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("positionX", "X", position.x, fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("positionY", "Y", position.y, fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("positionZ", "Z", position.z, fvec2(0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("positionZ", "Z", position.z, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lookat")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("lookatX", "X", lookat.x, fvec2(-0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("lookatX", "X", lookat.x, fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("lookatY", "Y", lookat.y, fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("lookatZ", "Z", lookat.z, fvec2(0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("lookatZ", "Z", lookat.z, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFollowingCamera")->isHovered())
 		{
@@ -299,9 +299,9 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_MULTIPLIER), fvec2(-0.25f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_MULTIPLIER), fvec2(0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "minDistance") && _gui->getOverlay()->isValueFormConfirmed())

@@ -6,7 +6,8 @@ void EngineCore::_update()
 	static ivec2 lastCursorPosition = _renderWindow->getCursorPosition();
 
 	_timer->startClock("coreUpdate");
-	if(_inputHandler->isKeyDown(InputType::WINDOW_X_BUTTON))
+	//if(_inputHandler->isKeyDown(InputType::WINDOW_X_BUTTON))
+	if(false)
 	{
 		stop();
 		return;

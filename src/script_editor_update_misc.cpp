@@ -40,7 +40,7 @@ void ScriptEditor::_updateMenu()
 			_gui->getOverlay()->openAnswerForm("deleteScript", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
 
-		if(_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL))
+		if(_fe3d->input_isKeyDown(InputType::KEY_CONTROL))
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_F) && !_gui->getOverlay()->isFocused())
 			{
@@ -207,7 +207,7 @@ void ScriptEditor::_updateCamera()
 		return;
 	}
 
-	const auto isControlDown = (_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL));
+	const auto isControlDown = _fe3d->input_isKeyDown(InputType::KEY_CONTROL);
 	const auto scrollSpeed = static_cast<float>(_fe3d->input_getMouseWheelY());
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 	const auto lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;

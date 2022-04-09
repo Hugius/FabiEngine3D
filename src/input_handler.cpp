@@ -1,126 +1,96 @@
 #include "input_handler.hpp"
 
+#include <windows.h>
 #include <SDL.h>
 
 void InputHandler::update()
 {
-	_keysPressed.clear();
-	_mousePressed.clear();
-	_mouseWheelX = 0;
-	_mouseWheelY = 0;
+	_pressedKeyboardKeys.clear();
+	_pressedMouseButtons.clear();
+	_horizontalMouseWheel = 0;
+	_verticalMouseWheel = 0;
 
 	SDL_Event event;
 
 	while(SDL_PollEvent(&event))
 	{
-		switch(event.type)
+	}
+
+	for(const auto button : _mouseButtons)
+	{
+		if(GetKeyState(static_cast<int>(button)) & 0x1000000000000000)
 		{
-			case SDL_QUIT:
+			if(!isMouseButtonHeld(button))
 			{
-				_keysDown.push_back(static_cast<InputType>(SDL_QUIT));
-				break;
+				_heldMouseButtons.push_back(button);
+				_pressedMouseButtons.push_back(button);
 			}
-
-			case SDL_MOUSEWHEEL:
+		}
+		else
+		{
+			for(unsigned int index = 0; index < static_cast<unsigned int>(_heldMouseButtons.size()); index++)
 			{
-				_mouseWheelX = event.wheel.x;
-				_mouseWheelY = event.wheel.y;
-				break;
+				if(button == _heldMouseButtons[index])
+				{
+					_heldMouseButtons.erase(_heldMouseButtons.begin() + index);
+
+					break;
+				}
 			}
+		}
+	}
 
-			case SDL_MOUSEBUTTONDOWN:
+	for(const auto key : _keyboardKeys)
+	{
+		if(GetKeyState(static_cast<int>(key)) & 0x1000000000000000)
+		{
+			if(!isKeyboardKeyHeld(key))
 			{
-				auto button = static_cast<InputType>(event.button.button);
-
-				if(!_isInVector(_mouseDown, button))
-				{
-					_mouseDown.push_back(button);
-				}
-
-				if(!_isInVector(_mousePressed_mayNotPress, button))
-				{
-					_mousePressed.push_back(button);
-					_mousePressed_mayNotPress.push_back(button);
-				}
-
-				break;
+				_heldKeyboardKeys.push_back(key);
+				_pressedKeyboardKeys.push_back(key);
 			}
-
-			case SDL_MOUSEBUTTONUP:
+		}
+		else
+		{
+			for(unsigned int index = 0; index < static_cast<unsigned int>(_heldKeyboardKeys.size()); index++)
 			{
-				auto button = static_cast<InputType>(event.button.button);
-
-				if(!_mouseDown.empty())
+				if(key == _heldKeyboardKeys[index])
 				{
-					_mouseDown.erase(_mouseDown.begin() + _getVectorIndex(_mouseDown, button));
+					_heldKeyboardKeys.erase(_heldKeyboardKeys.begin() + index);
+
+					break;
 				}
-
-				_mousePressed_mayNotPress.clear();
-
-				break;
-			}
-
-			case SDL_KEYDOWN:
-			{
-				auto key = static_cast<InputType>(event.key.keysym.sym);
-
-				if(!_isInVector(_keysDown, key))
-				{
-					_keysDown.push_back(key);
-				}
-
-				if(!_isInVector(_keysPressed_mayNotPress, key))
-				{
-					_keysPressed.push_back(key);
-					_keysPressed_mayNotPress.push_back(key);
-				}
-
-				break;
-			}
-
-			case SDL_KEYUP:
-			{
-				auto key = static_cast<InputType>(event.key.keysym.sym);
-
-				if(!_keysDown.empty())
-				{
-					_keysDown.erase(_keysDown.begin() + _getVectorIndex(_keysDown, key));
-				}
-
-				_keysPressed_mayNotPress.clear();
-
-				break;
 			}
 		}
 	}
 }
 
-const bool InputHandler::isKeyDown(InputType key) const
+const bool InputHandler::isKeyboardKeyHeld(InputType key) const
 {
-	return _isInVector(_keysDown, key);
+	return (find(_heldKeyboardKeys.begin(), _heldKeyboardKeys.end(), key) != _heldKeyboardKeys.end());
 }
 
-const bool InputHandler::isKeyPressed(InputType key) const
+const bool InputHandler::isKeyboardKeyPressed(InputType key) const
 {
-	return _isInVector(_keysPressed, key);
+	return (find(_pressedKeyboardKeys.begin(), _pressedKeyboardKeys.end(), key) != _pressedKeyboardKeys.end());
 }
 
-const bool InputHandler::isMouseDown(InputType button) const
+const bool InputHandler::isMouseButtonHeld(InputType button) const
 {
-	return _isInVector(_mouseDown, button);
+	return (find(_heldMouseButtons.begin(), _heldMouseButtons.end(), button) != _heldMouseButtons.end());
 }
 
-const bool InputHandler::isMousePressed(InputType button) const
+const bool InputHandler::isMouseButtonPressed(InputType button) const
 {
-	return _isInVector(_mousePressed, button);
+	return (find(_pressedMouseButtons.begin(), _pressedMouseButtons.end(), button) != _pressedMouseButtons.end());
 }
 
-const int InputHandler::getMouseWheelX() const
+const int InputHandler::getHorizontalMouseWheel() const
 {
-	return _mouseWheelX;
+	return _horizontalMouseWheel;
 }
 
-const int InputHandler::getMouseWheelY() const
+const int InputHandler::getVerticalMouseWheel() const
 {
-	return _mouseWheelY;
+	return _verticalMouseWheel;
 }

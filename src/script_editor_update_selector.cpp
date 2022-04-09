@@ -44,7 +44,7 @@ void ScriptEditor::_updateTextSelector()
 		scriptFile->setCursorCharacterIndex(cursorCharacterIndex);
 	}
 
-	const auto isControlDown = (_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL));
+	const auto isControlDown = _fe3d->input_isKeyDown(InputType::KEY_CONTROL);
 	const auto cursorLineIndex = scriptFile->getCursorLineIndex();
 	const auto cursorCharacterIndex = scriptFile->getCursorCharacterIndex();
 

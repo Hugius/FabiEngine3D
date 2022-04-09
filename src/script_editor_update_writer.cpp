@@ -169,7 +169,7 @@ void ScriptEditor::_updateTextWriter()
 		auto cursorCharacterIndex = _script->getScriptFile(_currentScriptFileId)->getCursorCharacterIndex();
 		auto currentLineText = _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex);
 
-		if(!_fe3d->input_isKeyDown(InputType::KEY_LCTRL) && !_fe3d->input_isKeyDown(InputType::KEY_RCTRL))
+		if(!_fe3d->input_isKeyDown(InputType::KEY_CONTROL))
 		{
 			string newCharacters = "";
 
@@ -183,7 +183,7 @@ void ScriptEditor::_updateTextWriter()
 					}
 					else
 					{
-						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+						if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
 						{
 							newCharacters += (character - 32);
 						}
@@ -203,7 +203,7 @@ void ScriptEditor::_updateTextWriter()
 			{
 				if(_fe3d->input_isKeyPressed(InputType(normalCharacter)))
 				{
-					if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+					if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
 					{
 						newCharacters += shiftCharacter;
 					}
@@ -218,7 +218,7 @@ void ScriptEditor::_updateTextWriter()
 			{
 				if(_fe3d->input_isKeyPressed(InputType(normalCharacter)))
 				{
-					if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+					if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
 					{
 						newCharacters += shiftCharacter;
 					}

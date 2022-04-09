@@ -3,30 +3,30 @@
 
 const bool EngineInterface::input_isKeyDown(InputType key) const
 {
-	return _core->getInputHandler()->isKeyDown(key);
+	return _core->getInputHandler()->isKeyboardKeyHeld(key);
 }
 
 const bool EngineInterface::input_isKeyPressed(InputType key) const
 {
-	return _core->getInputHandler()->isKeyPressed(key);
+	return _core->getInputHandler()->isKeyboardKeyPressed(key);
 }
 
 const bool EngineInterface::input_isMouseDown(InputType button) const
 {
-	return _core->getInputHandler()->isMouseDown(button);
+	return _core->getInputHandler()->isMouseButtonHeld(button);
 }
 
 const bool EngineInterface::input_isMousePressed(InputType button) const
 {
-	return _core->getInputHandler()->isMousePressed(button);
+	return _core->getInputHandler()->isMouseButtonPressed(button);
 }
 
 const int EngineInterface::input_getMouseWheelX() const
 {
-	return _core->getInputHandler()->getMouseWheelX();
+	return _core->getInputHandler()->getHorizontalMouseWheel();
 }
 
 const int EngineInterface::input_getMouseWheelY() const
 {
-	return _core->getInputHandler()->getMouseWheelY();
+	return _core->getInputHandler()->getVerticalMouseWheel();
 }

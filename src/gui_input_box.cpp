@@ -52,7 +52,7 @@ void GuiInputBox::_updateTyping()
 			{
 				if(_fe3d->input_isKeyPressed(InputType(character.first)))
 				{
-					if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT) || ((GetKeyState(VK_CAPITAL) & 0x0001) != 0))
+					if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT) || ((GetKeyState(VK_CAPITAL) & 0x0001) != 0))
 					{
 						if(_isLettersAllowed)
 						{
@@ -73,7 +73,7 @@ void GuiInputBox::_updateTyping()
 			{
 				if(_fe3d->input_isKeyPressed(InputType(character.first)))
 				{
-					if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+					if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
 					{
 						if(_isSpecialsAllowed)
 						{
@@ -94,7 +94,7 @@ void GuiInputBox::_updateTyping()
 			{
 				if(_fe3d->input_isKeyPressed(InputType(character.first)))
 				{
-					if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+					if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
 					{
 						if(_isSpecialsAllowed)
 						{

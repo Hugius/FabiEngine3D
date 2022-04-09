@@ -38,11 +38,11 @@ void WorldEditor::_updateCamera()
 				_fe3d->camera_followRightXZ(_editorSpeed / 100.0f);
 			}
 
-			if(_fe3d->input_isKeyDown(InputType::KEY_SPACE))
+			if(_fe3d->input_isKeyDown(InputType::KEY_SPACEBAR))
 			{
 				_fe3d->camera_move(fvec3(0.0f, _editorSpeed / 75.0f, 0.0f));
 			}
-			if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+			if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
 			{
 				_fe3d->camera_move(fvec3(0.0f, -(_editorSpeed / 75.0f), 0.0f));
 			}

@@ -11,11 +11,11 @@ void Animation3dEditor::_updateCamera()
 		_fe3d->camera_setThirdPersonDistance(cameraDistance);
 
 		auto cameraLookat = _fe3d->camera_getThirdPersonLookat();
-		if(_fe3d->input_isKeyDown(InputType::KEY_SPACE))
+		if(_fe3d->input_isKeyDown(InputType::KEY_SPACEBAR))
 		{
 			cameraLookat.y += CAMERA_LOOKAT_SPEED;
 		}
-		if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
+		if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
 		{
 			cameraLookat.y -= CAMERA_LOOKAT_SPEED;
 		}

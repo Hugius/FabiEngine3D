@@ -70,37 +70,37 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowPositionOffset(fvec3((content / 255.0f), position.y, position.z));
+			_fe3d->graphics_setShadowPositionOffset(fvec3((content / COLOR_MULTIPLIER), position.y, position.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "positionY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowPositionOffset(fvec3(position.x, (content / 255.0f), position.z));
+			_fe3d->graphics_setShadowPositionOffset(fvec3(position.x, (content / COLOR_MULTIPLIER), position.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "positionZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowPositionOffset(fvec3(position.x, position.y, (content / 255.0f)));
+			_fe3d->graphics_setShadowPositionOffset(fvec3(position.x, position.y, (content / COLOR_MULTIPLIER)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lookatX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowLookatOffset(fvec3((content / 255.0f), position.y, position.z));
+			_fe3d->graphics_setShadowLookatOffset(fvec3((content / COLOR_MULTIPLIER), position.y, position.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lookatY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, (content / 255.0f), position.z));
+			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, (content / COLOR_MULTIPLIER), position.z));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lookatZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, position.y, (content / 255.0f)));
+			_fe3d->graphics_setShadowLookatOffset(fvec3(position.x, position.y, (content / COLOR_MULTIPLIER)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
 		{
@@ -299,9 +299,9 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_MULTIPLIER), fvec2(-0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_MULTIPLIER), fvec2(0.25f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "minDistance") && _gui->getOverlay()->isValueFormConfirmed())
@@ -326,19 +326,19 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setFogColor(fvec3((content / 255.0f), color.g, color.b));
+			_fe3d->graphics_setFogColor(fvec3((content / COLOR_MULTIPLIER), color.g, color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setFogColor(fvec3(color.r, (content / 255.0f), color.b));
+			_fe3d->graphics_setFogColor(fvec3(color.r, (content / COLOR_MULTIPLIER), color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->graphics_setFogColor(fvec3(color.r, color.g, (content / 255.0f)));
+			_fe3d->graphics_setFogColor(fvec3(color.r, color.g, (content / COLOR_MULTIPLIER)));
 		}
 
 		screen->getButton("isEnabled")->setTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");

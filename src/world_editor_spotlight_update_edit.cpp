@@ -118,14 +118,14 @@ void WorldEditor::_updateSpotlightEditing()
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->setTextContent("G");
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->setTextContent("B");
 
-				_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleInputBox("spotlightPropertiesMenu", "zMinus", "z", "zPlus", color.b, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleInputBox("spotlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, SPOTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
+				_handleInputBox("spotlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, SPOTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
+				_handleInputBox("spotlightPropertiesMenu", "zMinus", "z", "zPlus", color.b, SPOTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
 			}
 
 			_handleInputBox("spotlightPropertiesMenu", "yawMinus", "yaw", "yawPlus", yaw, SPOTLIGHT_YAW_SPEED);
 			_handleInputBox("spotlightPropertiesMenu", "pitchMinus", "pitch", "pitchPlus", pitch, SPOTLIGHT_PITCH_SPEED);
-			_handleInputBox("spotlightPropertiesMenu", "intensityMinus", "intensity", "intensityPlus", intensity, SPOTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
+			_handleInputBox("spotlightPropertiesMenu", "intensityMinus", "intensity", "intensityPlus", intensity, SPOTLIGHT_INTENSITY_SPEED, SPOTLIGHT_INTENSITY_MULTIPLIER, 0.0f);
 			_handleInputBox("spotlightPropertiesMenu", "angleMinus", "angle", "anglePlus", angle, SPOTLIGHT_ANGLE_SPEED, 1.0f, 0.0f, 45.0f);
 			_handleInputBox("spotlightPropertiesMenu", "distanceMinus", "distance", "distancePlus", distance, (_editorSpeed / SPOTLIGHT_DISTANCE_DIVIDER), 1.0f, 0.0f);
 

@@ -116,9 +116,9 @@ void WorldEditor::_updateText3dEditing()
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
-				_handleInputBox("text3dPropertiesMenu", "xMinus", "x", "xPlus", rotation.x, TEXT3D_ROTATION_SPEED);
-				_handleInputBox("text3dPropertiesMenu", "yMinus", "y", "yPlus", rotation.y, TEXT3D_ROTATION_SPEED);
-				_handleInputBox("text3dPropertiesMenu", "zMinus", "z", "zPlus", rotation.z, TEXT3D_ROTATION_SPEED);
+				_handleInputBox("text3dPropertiesMenu", "xMinus", "x", "xPlus", rotation.x, TEXT3D_ROTATION_SPEED, 1.0f, 0.0f, 359.0f);
+				_handleInputBox("text3dPropertiesMenu", "yMinus", "y", "yPlus", rotation.y, TEXT3D_ROTATION_SPEED, 1.0f, 0.0f, 359.0f);
+				_handleInputBox("text3dPropertiesMenu", "zMinus", "z", "zPlus", rotation.z, TEXT3D_ROTATION_SPEED, 1.0f, 0.0f, 359.0f);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
@@ -130,21 +130,15 @@ void WorldEditor::_updateText3dEditing()
 			_fe3d->text3d_setRotation(_activeTextId, rotation);
 			_fe3d->text3d_setSize(_activeTextId, size);
 
-			screen->getButton("xMinus")->setHoverable(true);
-			screen->getButton("xPlus")->setHoverable(true);
 			screen->getInputBox("x")->setHoverable(true);
-			screen->getButton("yMinus")->setHoverable(true);
-			screen->getButton("yPlus")->setHoverable(true);
 			screen->getInputBox("y")->setHoverable(true);
-			screen->getButton("zMinus")->setHoverable(true);
-			screen->getButton("zPlus")->setHoverable(true);
-			screen->getInputBox("z")->setHoverable(true);
-			if(!screen->getButton("size")->isHoverable())
-			{
-				screen->getButton("zMinus")->setHoverable(false);
-				screen->getButton("zPlus")->setHoverable(false);
-				screen->getInputBox("z")->setHoverable(false);
-			}
+			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable());
+			screen->getButton("xMinus")->setHoverable(true);
+			screen->getButton("yMinus")->setHoverable(true);
+			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable());
+			screen->getButton("xPlus")->setHoverable(true);
+			screen->getButton("yPlus")->setHoverable(true);
+			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
 
 			screen->getButton("freeze")->setTextContent(_fe3d->text3d_isFrozen(_activeTextId) ? "Unfreeze" : "Freeze");
 		}

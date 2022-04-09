@@ -157,9 +157,9 @@ void WorldEditor::_updateQuad3dEditing()
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
-				_handleInputBox("quad3dPropertiesMenu", "xMinus", "x", "xPlus", rotation.x, QUAD3D_ROTATION_SPEED);
-				_handleInputBox("quad3dPropertiesMenu", "yMinus", "y", "yPlus", rotation.y, QUAD3D_ROTATION_SPEED);
-				_handleInputBox("quad3dPropertiesMenu", "zMinus", "z", "zPlus", rotation.z, QUAD3D_ROTATION_SPEED);
+				_handleInputBox("quad3dPropertiesMenu", "xMinus", "x", "xPlus", rotation.x, QUAD3D_ROTATION_SPEED, 1.0f, 0.0f, 360.0f);
+				_handleInputBox("quad3dPropertiesMenu", "yMinus", "y", "yPlus", rotation.y, QUAD3D_ROTATION_SPEED, 1.0f, 0.0f, 360.0f);
+				_handleInputBox("quad3dPropertiesMenu", "zMinus", "z", "zPlus", rotation.z, QUAD3D_ROTATION_SPEED, 1.0f, 0.0f, 360.0f);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
@@ -171,21 +171,15 @@ void WorldEditor::_updateQuad3dEditing()
 			_fe3d->quad3d_setRotation(_activeQuadId, rotation);
 			_fe3d->quad3d_setSize(_activeQuadId, size);
 
-			screen->getButton("xMinus")->setHoverable(true);
-			screen->getButton("xPlus")->setHoverable(true);
 			screen->getInputBox("x")->setHoverable(true);
-			screen->getButton("yMinus")->setHoverable(true);
-			screen->getButton("yPlus")->setHoverable(true);
 			screen->getInputBox("y")->setHoverable(true);
-			screen->getButton("zMinus")->setHoverable(true);
-			screen->getButton("zPlus")->setHoverable(true);
-			screen->getInputBox("z")->setHoverable(true);
-			if(!screen->getButton("size")->isHoverable())
-			{
-				screen->getButton("zMinus")->setHoverable(false);
-				screen->getButton("zPlus")->setHoverable(false);
-				screen->getInputBox("z")->setHoverable(false);
-			}
+			screen->getInputBox("z")->setHoverable(screen->getButton("size")->isHoverable());
+			screen->getButton("xMinus")->setHoverable(true);
+			screen->getButton("yMinus")->setHoverable(true);
+			screen->getButton("zMinus")->setHoverable(screen->getButton("size")->isHoverable());
+			screen->getButton("xPlus")->setHoverable(true);
+			screen->getButton("yPlus")->setHoverable(true);
+			screen->getButton("zPlus")->setHoverable(screen->getButton("size")->isHoverable());
 
 			screen->getButton("animation")->setTextContent(currentAnimationIds.empty() ? "Start Animation" : "Stop Animation");
 			screen->getButton("freeze")->setTextContent(_fe3d->quad3d_isFrozen(_activeQuadId) ? "Unfreeze" : "Freeze");

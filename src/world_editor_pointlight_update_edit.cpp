@@ -144,9 +144,9 @@ void WorldEditor::_updatePointlightEditing()
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->setTextContent("G");
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->setTextContent("B");
 
-				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", color.b, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleInputBox("pointlightPropertiesMenu", "xMinus", "x", "xPlus", color.r, POINTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
+				_handleInputBox("pointlightPropertiesMenu", "yMinus", "y", "yPlus", color.g, POINTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
+				_handleInputBox("pointlightPropertiesMenu", "zMinus", "z", "zPlus", color.b, POINTLIGHT_COLOR_SPEED, COLOR_MULTIPLIER, 0.0f, 1.0f);
 			}
 
 			_handleInputBox("pointlightPropertiesMenu", "intensityMinus", "intensity", "intensityPlus", intensity, POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);

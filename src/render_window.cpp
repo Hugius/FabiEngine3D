@@ -40,24 +40,24 @@ void RenderWindow::setOpacity(float value)
 
 void RenderWindow::enableColorKeying(const fvec3 & color)
 {
-	SDL_SysWMinfo wmInfo;
+	SDL_SysWMinfo wmInfo = {};
 	SDL_VERSION(&wmInfo.version);
 	SDL_GetWindowWMInfo(_windowPointer, &wmInfo);
 	HWND hwnd = wmInfo.info.win.window;
 
 	SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
-	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_COLORKEY);
+	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255.0f), static_cast<int>(color.b * 255.0f)), 0, LWA_COLORKEY);
 }
 
 void RenderWindow::disableColorKeying(const fvec3 & color)
 {
-	SDL_SysWMinfo wmInfo;
+	SDL_SysWMinfo wmInfo = {};
 	SDL_VERSION(&wmInfo.version);
 	SDL_GetWindowWMInfo(_windowPointer, &wmInfo);
 	HWND hwnd = wmInfo.info.win.window;
 
 	SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
-	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_ALPHA);
+	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255.0f), static_cast<int>(color.b * 255.0f)), 0, LWA_ALPHA);
 }
 
 void RenderWindow::showBorder()

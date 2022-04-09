@@ -190,6 +190,7 @@ private:
 	static inline constexpr float SPOTLIGHT_INTENSITY_SPEED = 0.1f;
 	static inline constexpr float SPOTLIGHT_ANGLE_SPEED = 0.1f;
 	static inline constexpr float SPOTLIGHT_DISTANCE_DIVIDER = 100.0f;
+	static inline constexpr float SPOTLIGHT_INTENSITY_MULTIPLIER = 10.0f;
 	static inline constexpr float REFLECTION_POSITION_DIVIDER = 100.0f;
 	static inline constexpr float SOUND_POSITION_DIVIDER = 100.0f;
 	static inline constexpr float SOUND_DISTANCE_DIVIDER = 100.0f;

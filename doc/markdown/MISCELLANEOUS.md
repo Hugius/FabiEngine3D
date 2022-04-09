@@ -1,6 +1,17 @@
 # Miscellaneous
 
-## 1. Tips & tricks
+## 1. Rotation system
+
+<img src="../image/rotation_system.png" width="40%"/>
+
+- X rotations go around the X axis.
+- Y rotations go around the Y axis.
+- Z rotations go around the Z axis.
+- All rotational values are in degrees, not radians.
+- Rotational degrees are automatically converted between 0&deg; and 360&deg; (example: 500&deg; = 140&deg;, -500&deg; = 220&deg;).
+- **WARNING**: Rotating objects in every direction (XYZ) at the same time can cause the infamous gimbal lock!
+
+## 2. Tips & tricks
 
 - You can create your own custom subfolders within the subfolders of `~\projects\<your_project>\assets\`.
 - The top viewport has a button called `UNCACHE` which deletes the chosen asset from the cache (if it was cached).
@@ -9,11 +20,11 @@
 - You can cancel any form by pressing `ESC`.
 - You can enter a value form by pressing `ENTER`.
 
-## 2. Known issues
+## 3. Known issues
 
 - There is a very rare bug when using the first person camera; if the cursor does not center anymore and the camera keeps spinning very fast, click on the window border once. This bug does not occur in fullscreen mode.
 
-## 3. Miscellaneous
+## 4. Miscellaneous
 
 - All quad2D/text2D entities are rendered on top of each other.
 - Centering the cursor might take 1 frame (or more) in time, because it might not be centered instantly by Microsoft Windows.
@@ -22,5 +33,4 @@
 - Transparency in 2D space is based on the order of placed entities.
 - Transparency in 3D space is very complex and can sometimes be incorrect.
 - Graphical effects that are set to low quality can flicker.
-- All rotational values are in degrees, not radians.
 - Internal engine updates happen after the scripting updates.

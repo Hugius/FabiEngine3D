@@ -12,17 +12,7 @@
 - The maximum absolute render distance is fixed at 2500.0.
 - The reference box used in FabiEngine3D editors has a size of 1.0.
 
-## 2. Rotation system
-
-<img src="../image/rotation_system.png" width="40%"/>
-
-- X rotations go around the X axis.
-- Y rotations go around the Y axis.
-- Z rotations go around the Z axis.
-- Rotational degrees are automatically converted between 0&deg; and 360&deg; (example: 500&deg; = 140&deg;, -500&deg; = 220&deg;).
-- **WARNING**: Rotating objects in every direction (XYZ) at the same time can cause the infamous gimbal lock!
-
-## 3. Camera angles
+## 2. Camera angles
 
 <img src="../image/camera_angles.png" width="100%"/>
 

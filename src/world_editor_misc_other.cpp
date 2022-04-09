@@ -180,34 +180,34 @@ void WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 {
 	const auto inputBox = _gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getInputBox(inputBoxId);
 
-	if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(leftButtonId)->isHovered() && _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
+	if(inputBox->isHovered())
 	{
-		value -= delta;
-	}
-	else if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
-	{
-		value += delta;
+		if(inputBox->getTextContent().empty() || (inputBox->getTextContent() == "-"))
+		{
+			value = 0.0f;
+		}
+		else
+		{
+			const auto content = static_cast<float>(Tools::parseSignedInteger(inputBox->getTextContent()));
+
+			value = clamp((content / multiplier), minimum, maximum);
+
+			inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
+		}
 	}
 	else
 	{
-		if(inputBox->isHovered())
+		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(leftButtonId)->isHovered() && _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if(inputBox->getTextContent().empty() || (inputBox->getTextContent() == "-"))
-			{
-				value = 0.0f;
-			}
-			else
-			{
-				const auto content = static_cast<float>(Tools::parseSignedInteger(inputBox->getTextContent()));
-
-				value = (content / multiplier);
-			}
+			value = clamp((value - delta), minimum, maximum);
 		}
+		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
+		{
+			value = clamp((value + delta), minimum, maximum);
+		}
+
+		inputBox->setTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
-
-	value = clamp(value, minimum, maximum);
-
-	inputBox->setTextContent(to_string(static_cast<int>(value)));
 }
 
 void WorldEditor::inject(shared_ptr<SkyEditor> skyEditor)

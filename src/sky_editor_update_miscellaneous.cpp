@@ -26,9 +26,9 @@ void SkyEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorR", "R", (color.r * COLOR_MULTIPLIER), fvec2(-0.25f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorG", "G", (color.g * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("colorB", "B", (color.b * COLOR_MULTIPLIER), fvec2(0.25f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "rotation") && _gui->getOverlay()->isValueFormConfirmed())
@@ -47,19 +47,19 @@ void SkyEditor::_updateMiscellaneousMenu()
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->sky_setColor(_currentSkyId, fvec3((content / 255.0f), color.g, color.b));
+			_fe3d->sky_setColor(_currentSkyId, fvec3((content / COLOR_MULTIPLIER), color.g, color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->sky_setColor(_currentSkyId, fvec3(color.r, (content / 255.0f), color.b));
+			_fe3d->sky_setColor(_currentSkyId, fvec3(color.r, (content / COLOR_MULTIPLIER), color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseSignedInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->sky_setColor(_currentSkyId, fvec3(color.r, color.g, (content / 255.0f)));
+			_fe3d->sky_setColor(_currentSkyId, fvec3(color.r, color.g, (content / COLOR_MULTIPLIER)));
 		}
 	}
 }

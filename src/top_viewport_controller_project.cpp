@@ -7,7 +7,7 @@ using std::ofstream;
 
 void TopViewportController::_updateProjectCreating()
 {
-	if((_gui->getOverlay()->getValueFormId() == "projectCreating") && _gui->getOverlay()->isValueFormConfirmed())
+	if((_gui->getOverlay()->getValueFormId() == "createProject") && _gui->getOverlay()->isValueFormConfirmed())
 	{
 		const auto newProjectId = _gui->getOverlay()->getValueFormContent();
 		const auto rootPath = Tools::getRootDirectoryPath();
@@ -108,8 +108,7 @@ void TopViewportController::_updateProjectCreating()
 		text3dFile.close();
 		waterFile.close();
 
-		_currentProjectId = newProjectId;
-		_applyProjectChange();
+		_setProject(newProjectId);
 
 		Logger::throwInfo("Project \"" + _currentProjectId + "\" created");
 	}
@@ -128,9 +127,7 @@ void TopViewportController::_updateProjectLoading()
 			return;
 		}
 
-		_currentProjectId = selectedOptionId;
-
-		_applyProjectChange();
+		_setProject(selectedOptionId);
 
 		auto skyImagePaths = _skyEditor->getImagePathsFromFile();
 		auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
@@ -183,11 +180,20 @@ void TopViewportController::_updateProjectDeleting()
 				return;
 			}
 
-			_currentProjectId = "";
-
-			_applyProjectChange();
+			_setProject("");
 
 			Logger::throwInfo("Project \"" + _currentProjectId + "\" deleted");
+		}
+	}
+}
+
+void TopViewportController::_updateEngineQuitting()
+{
+	if((_gui->getOverlay()->getAnswerFormId() == "quitEngine") && _gui->getOverlay()->isAnswerFormConfirmed())
+	{
+		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
+		{
+			_fe3d->application_stop();
 		}
 	}
 }

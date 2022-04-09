@@ -35,8 +35,6 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	static inline constexpr float CW = 0.115f;
-	static inline constexpr float CH = 0.0875f;
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
 	static inline constexpr float INITIAL_CAMERA_PITCH = 45.0f;
@@ -48,6 +46,7 @@ private:
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.25f;
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.025f;
+
 	static inline constexpr unsigned int GRID_REPEAT = 10;
 	static inline constexpr unsigned int MAX_FRAME_COUNT = 100;
 

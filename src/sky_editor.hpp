@@ -31,8 +31,6 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	static inline constexpr float CW = 0.115f;
-	static inline constexpr float CH = 0.0875f;
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 
 	vector <string> _loadedEntityIds = {};

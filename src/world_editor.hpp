@@ -212,8 +212,6 @@ private:
 	static inline constexpr float DEFAULT_SPOTLIGHT_DISTANCE = 10.0f;
 	static inline constexpr float DEFAULT_SOUND_MAX_VOLUME = 1.0f;
 	static inline constexpr float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
-	static inline constexpr float CW = 0.115f;
-	static inline constexpr float CH = 0.0875f;
 
 	unordered_map<string, string> _loadedModelIds = {};
 	unordered_map<string, string> _loadedQuadIds = {};

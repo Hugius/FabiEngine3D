@@ -32,8 +32,7 @@ private:
 	void _updateMiscellaneous();
 
 	static inline const string TEXT_CONTENT = "Text123";
-	static inline constexpr float CW = 0.115f;
-	static inline constexpr float CH = 0.0875f;
+
 	static inline constexpr float CURSOR_SENSITIVITY = 0.025f;
 	static inline constexpr float INITIAL_CAMERA_YAW = 45.0f;
 	static inline constexpr float INITIAL_CAMERA_PITCH = 45.0f;

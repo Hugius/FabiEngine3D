@@ -1,3 +1,6 @@
+#define LEFT_TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * LCW), CH)
+#define RIGHT_TEXT_SIZE(text) fvec2((static_cast<float>(string(text).size()) * RCW), CH)
+
 #include "top_viewport_controller.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
@@ -9,35 +12,36 @@ using std::ofstream;
 void TopViewportController::initialize()
 {
 	_gui->getTopViewport()->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), FRAME_COLOR);
-	auto projectWindow = _gui->getTopViewport()->getWindow("projectWindow");
-
 	_gui->getTopViewport()->createWindow("executionWindow", fvec2(0.125f, 0.0f), fvec2(0.4875f, 1.5f), FRAME_COLOR);
-	auto executionWindow = _gui->getTopViewport()->getWindow("executionWindow");
-
 	_gui->getTopViewport()->createWindow("miscellaneousWindow", fvec2(0.375f, 0.0f), fvec2(0.4875f, 1.5f), FRAME_COLOR);
+
+	auto projectWindow = _gui->getTopViewport()->getWindow("projectWindow");
+	auto executionWindow = _gui->getTopViewport()->getWindow("executionWindow");
 	auto miscellaneousWindow = _gui->getTopViewport()->getWindow("miscellaneousWindow");
 
+	auto positions = Mathematics::calculateDistributedPositions(4, LEFT_TEXT_SIZE("CREATE").x, true);
 	projectWindow->createScreen("main");
+	projectWindow->getScreen("main")->createButton("createProject", fvec2(positions[0], 0.0f), LEFT_TEXT_SIZE("CREATE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "CREATE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	projectWindow->getScreen("main")->createButton("loadProject", fvec2(positions[1], 0.0f), LEFT_TEXT_SIZE("LOAD"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "LOAD", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	projectWindow->getScreen("main")->createButton("deleteProject", fvec2(positions[2], 0.0f), LEFT_TEXT_SIZE("DELETE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DELETE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	projectWindow->getScreen("main")->createButton("quitEngine", fvec2(positions[3], 0.0f), LEFT_TEXT_SIZE("QUIT"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "QUIT", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	projectWindow->setActiveScreen("main");
-	projectWindow->getScreen("main")->createButton("newProject", fvec2(-0.767f, 0.0f), fvec2(0.15f, 1.25f), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "NEW", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	projectWindow->getScreen("main")->createButton("loadProject", fvec2(-0.384f, 0.0f), fvec2(0.2f, 1.25f), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "LOAD", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	projectWindow->getScreen("main")->createButton("saveProject", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.25f), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "SAVE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	projectWindow->getScreen("main")->createButton("deleteProject", fvec2(0.384f, 0.0f), fvec2(0.3f, 1.25f), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DELETE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	projectWindow->getScreen("main")->createButton("quitEngine", fvec2(0.767f, 0.0f), fvec2(0.2f, 1.25f), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "QUIT", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
+	positions = Mathematics::calculateDistributedPositions(5, 0.2f, true);
 	executionWindow->createScreen("main");
+	executionWindow->getScreen("main")->createButton("start", fvec2(positions[0], 0.0f), fvec2(0.2f, 1.75f), "start.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("pause", fvec2(positions[1], 0.0f), fvec2(0.2f, 1.75f), "pause.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("restart", fvec2(positions[2], 0.0f), fvec2(0.2f, 1.75f), "restart.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("stop", fvec2(positions[3], 0.0f), fvec2(0.2f, 1.75f), "stop.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
+	executionWindow->getScreen("main")->createButton("debug", fvec2(positions[4], 0.0f), fvec2(0.2f, 1.75f), "debug.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
 	executionWindow->setActiveScreen("main");
-	executionWindow->getScreen("main")->createButton("start", fvec2(-0.73f, 0.0f), fvec2(0.2f, 1.75f), "start.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("pause", fvec2(-0.36f, 0.0f), fvec2(0.2f, 1.75f), "pause.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("restart", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.75f), "restart.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("stop", fvec2(0.36f, 0.0f), fvec2(0.2f, 1.75f), "stop.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
-	executionWindow->getScreen("main")->createButton("debug", fvec2(0.73f, 0.0f), fvec2(0.2f, 1.75f), "debug.tga", fvec3(1.0f), fvec3(0.25f), "", fvec3(0.0f), fvec3(0.0f), true);
 
+	positions = Mathematics::calculateDistributedPositions(3, RIGHT_TEXT_SIZE("UNCACHE").x, true);
 	miscellaneousWindow->createScreen("main");
+	miscellaneousWindow->getScreen("main")->createButton("uncache", fvec2(positions[0], 0.0f), RIGHT_TEXT_SIZE("UNCACHE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "UNCACHE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	miscellaneousWindow->getScreen("main")->createButton("export", fvec2(positions[1], 0.0f), RIGHT_TEXT_SIZE("EXPORT"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "EXPORT", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	miscellaneousWindow->getScreen("main")->createButton("documentation", fvec2(positions[2], 0.0f), RIGHT_TEXT_SIZE("DOCS"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DOCS", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	miscellaneousWindow->setActiveScreen("main");
-	miscellaneousWindow->getScreen("main")->createButton("uncache", fvec2(-0.5875f, 0.0f), fvec2(0.55f, 1.25f), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "UNCACHE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	miscellaneousWindow->getScreen("main")->createButton("export", fvec2(0.075f, 0.0f), fvec2(0.5f, 1.25f), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "EXPORT", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	miscellaneousWindow->getScreen("main")->createButton("documentation", fvec2(0.6625f, 0.0f), fvec2(0.4f, 1.25f), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DOCS", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 }
 
 void TopViewportController::update()
@@ -92,8 +96,10 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("scriptEditor")->setHoverable(isHoverable);
 }
 
-void TopViewportController::_applyProjectChange()
+void TopViewportController::_setProject(const string & value)
 {
+	_currentProjectId = value;
+
 	if(_currentProjectId.empty())
 	{
 		_fe3d->misc_setWindowTitle("FabiEngine3D");
@@ -101,73 +107,6 @@ void TopViewportController::_applyProjectChange()
 	else
 	{
 		_fe3d->misc_setWindowTitle("FabiEngine3D - " + _currentProjectId);
-	}
-
-	_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
-
-	if(_skyEditor->isLoaded())
-	{
-		_skyEditor->unload();
-	}
-
-	if(_terrainEditor->isLoaded())
-	{
-		_terrainEditor->unload();
-	}
-
-	if(_waterEditor->isLoaded())
-	{
-		_waterEditor->unload();
-	}
-
-	if(_modelEditor->isLoaded())
-	{
-		_modelEditor->unload();
-	}
-
-	if(_quad3dEditor->isLoaded())
-	{
-		_quad3dEditor->unload();
-	}
-
-	if(_text3dEditor->isLoaded())
-	{
-		_text3dEditor->unload();
-	}
-
-	if(_quad2dEditor->isLoaded())
-	{
-		_quad2dEditor->unload();
-	}
-
-	if(_text2dEditor->isLoaded())
-	{
-		_text2dEditor->unload();
-	}
-
-	if(_animation2dEditor->isLoaded())
-	{
-		_animation2dEditor->unload();
-	}
-
-	if(_animation3dEditor->isLoaded())
-	{
-		_animation3dEditor->unload();
-	}
-
-	if(_soundEditor->isLoaded())
-	{
-		_soundEditor->unload();
-	}
-
-	if(_worldEditor->isLoaded())
-	{
-		_worldEditor->unload();
-	}
-
-	if(_scriptEditor->isLoaded())
-	{
-		_scriptEditor->unload();
 	}
 
 	_skyEditor->setCurrentProjectId(_currentProjectId);
@@ -185,6 +124,8 @@ void TopViewportController::_applyProjectChange()
 	_customWorldBuilder->setCurrentProjectId(_currentProjectId);
 	_scriptEditor->setCurrentProjectId(_currentProjectId);
 	_scriptExecutor->setCurrentProjectId(_currentProjectId);
+
+	_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 }
 
 const bool TopViewportController::isProjectCorrupted(const string & projectDirectoryPath) const
@@ -266,30 +207,6 @@ const bool TopViewportController::isProjectCorrupted(const string & projectDirec
 	}
 
 	return false;
-}
-
-void TopViewportController::_saveCurrentProject()
-{
-	if(_currentProjectId.empty())
-	{
-		abort();
-	}
-
-	_skyEditor->saveEntitiesToFile();
-	_terrainEditor->saveEntitiesToFile();
-	_waterEditor->saveEntitiesToFile();
-	_modelEditor->saveEntitiesToFile();
-	_quad3dEditor->saveEntitiesToFile();
-	_text3dEditor->saveEntitiesToFile();
-	_quad2dEditor->saveEntitiesToFile();
-	_text2dEditor->saveEntitiesToFile();
-	_animation2dEditor->saveAnimationsToFile();
-	_animation3dEditor->saveAnimationsToFile();
-	_soundEditor->saveSoundsToFile();
-	_worldEditor->saveWorldToFile();
-	_scriptEditor->saveScriptFiles();
-
-	Logger::throwInfo("Project \"" + _currentProjectId + "\" saved");
 }
 
 void TopViewportController::inject(shared_ptr<SkyEditor> skyEditor)

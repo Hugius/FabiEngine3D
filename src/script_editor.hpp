@@ -65,15 +65,16 @@ private:
 	};
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
+
 	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
 	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);
 	static inline const fvec3 SELECTION_COLOR = fvec3(0.1f, 0.1f, 0.1f);
 	static inline const fvec3 DEFAULT_TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 COMMENT_TEXT_COLOR = fvec3(0.0f, 0.75f, 0.0f);
 	static inline const fvec3 ROOT_TEXT_POSITION = fvec3(-12.0f, 6.0, 0.0f);
+
 	static inline const fvec2 CHAR_SIZE = fvec2(0.25f, 0.75f);
-	static inline constexpr float CW = 0.115f;
-	static inline constexpr float CH = 0.0875f;
+
 	static inline constexpr float CHAR_OFFSET = 0.25f;
 	static inline constexpr float HORIZONTAL_LINE_OFFSET = 1.0f;
 	static inline constexpr float VERTICAL_LINE_OFFSET = 1.0f;
@@ -82,6 +83,7 @@ private:
 	static inline constexpr float CAMERA_PITCH = 0.0f;
 	static inline constexpr float AABB_DEPTH = 0.0001f;
 	static inline constexpr float CAMERA_DISTANCE = 10.0f;
+
 	static inline constexpr unsigned int MAX_LINE_COUNT = 99;
 	static inline constexpr unsigned int BLOOM_QUALITY = 1;
 

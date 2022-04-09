@@ -80,7 +80,7 @@ void ScriptEditor::_loadGUI()
 {
 	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
-	auto positions = Mathematics::calculateDistributedPositions(8, CH);
+	auto positions = Mathematics::calculateDistributedPositions(8, CH, false);
 	leftWindow->createScreen("scriptEditorMenuMain");
 	leftWindow->getScreen("scriptEditorMenuMain")->createTextField("lineCount", fvec2(0.0f, positions[0]), TEXT_SIZE("Lines: 0"), "Lines: 0", fvec3(1.0f), true);
 	leftWindow->getScreen("scriptEditorMenuMain")->createButton("search", fvec2(0.0f, positions[1]), TEXT_SIZE("Search"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Search", TEXT_COLOR, TEXT_HOVER_COLOR, true);

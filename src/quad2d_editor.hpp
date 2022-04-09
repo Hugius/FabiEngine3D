@@ -29,8 +29,6 @@ private:
 	void _updateMiscellaneous();
 
 	static inline const fvec2 QUAD_SIZE = fvec2(0.75f);
-	static inline constexpr float CW = 0.115f;
-	static inline constexpr float CH = 0.0875f;
 
 	vector<string> _loadedEntityIds = {};
 

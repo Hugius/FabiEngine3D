@@ -52,14 +52,18 @@ private:
 	void _updateProjectCreating();
 	void _updateProjectLoading();
 	void _updateProjectDeleting();
-	void _saveCurrentProject();
-	void _applyProjectChange();
+	void _updateEngineQuitting();
+	void _setProject(const string & value);
 
 	static inline const fvec3 FRAME_COLOR = fvec3(0.075f);
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
 	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
 	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
+
+	static inline constexpr float LCW = 0.05f;
+	static inline constexpr float RCW = 0.075f;
+	static inline constexpr float CH = 1.5f;
 
 	shared_ptr<SkyEditor> _skyEditor = nullptr;
 	shared_ptr<TerrainEditor> _terrainEditor = nullptr;

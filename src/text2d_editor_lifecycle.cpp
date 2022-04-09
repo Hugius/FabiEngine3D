@@ -31,14 +31,14 @@ void Text2dEditor::_loadGUI()
 {
 	const auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
-	auto positions = Mathematics::calculateDistributedPositions(4, CH);
+	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
 	leftWindow->createScreen("text2dEditorMenuMain");
 	leftWindow->getScreen("text2dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Text"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Text", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text2dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Text"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Text", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text2dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Text"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Text", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text2dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	positions = Mathematics::calculateDistributedPositions(3, CH);
+	positions = Mathematics::calculateDistributedPositions(3, CH, false);
 	leftWindow->createScreen("text2dEditorMenuChoice");
 	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("opacity", fvec2(0.0f, positions[1]), TEXT_SIZE("Opacity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);

@@ -1,11 +1,7 @@
 #pragma once
 
-enum class InputType
+enum class KeyType
 {
-	MOUSE_BUTTON_LEFT = 0x01,
-	MOUSE_BUTTON_MIDDLE = 0x04,
-	MOUSE_BUTTON_RIGHT = 0x02,
-
 	KEY_BACKSPACE = 0x08,
 	KEY_TAB = 0x09,
 	KEY_ENTER = 0x0D,
@@ -61,6 +57,21 @@ enum class InputType
 	KEY_X = 0x58,
 	KEY_Y = 0x59,
 	KEY_Z = 0x5A,
+	KEY_NUMPAD0 = 0x60,
+	KEY_NUMPAD1 = 0x61,
+	KEY_NUMPAD2 = 0x62,
+	KEY_NUMPAD3 = 0x63,
+	KEY_NUMPAD4 = 0x64,
+	KEY_NUMPAD5 = 0x65,
+	KEY_NUMPAD6 = 0x66,
+	KEY_NUMPAD7 = 0x67,
+	KEY_NUMPAD8 = 0x68,
+	KEY_NUMPAD9 = 0x69,
+	KEY_MULTIPLY = 0x6A,
+	KEY_ADD = 0x6B,
+	KEY_SUBTRACT = 0x6D,
+	KEY_DECIMAL = 0x6E,
+	KEY_DIVIDE = 0x6F,
 	KEY_F1 = 0x70,
 	KEY_F2 = 0x71,
 	KEY_F3 = 0x72,

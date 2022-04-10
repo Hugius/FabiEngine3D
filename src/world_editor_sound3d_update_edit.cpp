@@ -20,13 +20,13 @@ void WorldEditor::_updateSoundEditing()
 		{
 			const auto isHovered = (hoveredAabbId == ("@@speaker_" + soundId));
 
-			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 			{
 				_selectSound(soundId);
 
 				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
 				{
 					if(_selectedSoundId != _activeSoundId)
 					{
@@ -45,13 +45,13 @@ void WorldEditor::_updateSoundEditing()
 			}
 		}
 
-		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+		if(!_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 		{
 			if(_fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeSoundId.empty())
 				{
-					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedSoundId.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && _selectedSoundId.empty()) || _fe3d->input_isMouseHeld(ButtonType::BUTTON_MIDDLE))
 					{
 						_activeSoundId = "";
 						rightWindow->setActiveScreen("main");
@@ -75,7 +75,7 @@ void WorldEditor::_updateSoundEditing()
 
 			rightWindow->setActiveScreen("soundPropertiesMenu");
 
-			if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
+			if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyType::KEY_DELETE))
 			{
 				_fe3d->model_delete("@@speaker_" + _activeSoundId);
 				_fe3d->sound3d_delete(_activeSoundId);

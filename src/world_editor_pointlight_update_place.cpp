@@ -80,14 +80,14 @@ void WorldEditor::_updatePointlightPlacing()
 				return;
 			}
 
-			if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			if(_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				return;
 			}
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
+			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
@@ -108,7 +108,7 @@ void WorldEditor::_updatePointlightPlacing()
 			_fe3d->model_setVisible(TEMPLATE_LAMP_ID, true);
 			_fe3d->model_setBasePosition(TEMPLATE_LAMP_ID, newPosition);
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
 			{
 				auto newId = ("pointlight_" + to_string(_idCounter));
 				auto newModelId = ("@@lamp_" + newId);

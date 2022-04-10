@@ -197,11 +197,11 @@ void WorldEditor::_handleInputBox(const string & screenId, const string & leftBu
 	}
 	else
 	{
-		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(leftButtonId)->isHovered() && _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
+		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(leftButtonId)->isHovered() && _fe3d->input_isMouseHeld(ButtonType::BUTTON_LEFT))
 		{
 			value = clamp((value - delta), minimum, maximum);
 		}
-		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
+		if(_gui->getRightViewport()->getWindow("main")->getScreen(screenId)->getButton(rightButtonId)->isHovered() && _fe3d->input_isMouseHeld(ButtonType::BUTTON_LEFT))
 		{
 			value = clamp((value + delta), minimum, maximum);
 		}

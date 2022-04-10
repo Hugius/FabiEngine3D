@@ -20,11 +20,11 @@ void WorldEditor::_updateQuad3dEditing()
 		{
 			const auto isHovered = (hoveredAabbId == quadId);
 
-			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 			{
 				_selectQuad(quadId);
 
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
 				{
 					if(_selectedQuadId != _activeQuadId)
 					{
@@ -43,13 +43,13 @@ void WorldEditor::_updateQuad3dEditing()
 			}
 		}
 
-		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+		if(!_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 		{
 			if(_fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeQuadId.empty())
 				{
-					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedQuadId.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && _selectedQuadId.empty()) || _fe3d->input_isMouseHeld(ButtonType::BUTTON_MIDDLE))
 					{
 						_activeQuadId = "";
 						rightWindow->setActiveScreen("main");
@@ -74,29 +74,29 @@ void WorldEditor::_updateQuad3dEditing()
 
 			rightWindow->setActiveScreen("quad3dPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
+			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
 				screen->getButton("position")->setHoverable(false);
 				screen->getButton("rotation")->setHoverable(true);
 				screen->getButton("size")->setHoverable(true);
 			}
-			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
+			else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
 			{
 				screen->getButton("position")->setHoverable(true);
 				screen->getButton("rotation")->setHoverable(false);
 				screen->getButton("size")->setHoverable(true);
 			}
-			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+			else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 			{
 				screen->getButton("position")->setHoverable(true);
 				screen->getButton("rotation")->setHoverable(true);
 				screen->getButton("size")->setHoverable(false);
 			}
-			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
+			else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 			{
 				_fe3d->quad3d_setFrozen(_activeQuadId, !_fe3d->quad3d_isFrozen(_activeQuadId));
 			}
-			else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
+			else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 			{
 				if(currentAnimationIds.empty())
 				{
@@ -116,7 +116,7 @@ void WorldEditor::_updateQuad3dEditing()
 					_fe3d->quad3d_setUvOffset(_activeQuadId, fvec2(0.0f));
 				}
 			}
-			else if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyPressed(InputType::KEY_DELETE))
+			else if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyType::KEY_DELETE))
 			{
 				if(!currentAnimationIds.empty())
 				{
@@ -134,7 +134,7 @@ void WorldEditor::_updateQuad3dEditing()
 			{
 				const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
 				{
 					if(!currentAnimationIds.empty())
 					{

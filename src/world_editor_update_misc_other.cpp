@@ -5,7 +5,7 @@ void WorldEditor::_updateCamera()
 {
 	if(!_currentWorldId.empty())
 	{
-		if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getOverlay()->isFocused())
+		if(_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT) && !_gui->getOverlay()->isFocused())
 		{
 			if(_fe3d->misc_isCursorInsideDisplay() && !_fe3d->camera_isFirstPersonEnabled())
 			{
@@ -29,29 +29,29 @@ void WorldEditor::_updateCamera()
 
 		if(!_gui->getOverlay()->isFocused())
 		{
-			if(_fe3d->input_isKeyDown(InputType::KEY_A))
+			if(_fe3d->input_isKeyboardHeld(KeyType::KEY_A))
 			{
 				_fe3d->camera_followRightXZ(-_editorSpeed / 100.0f);
 			}
-			if(_fe3d->input_isKeyDown(InputType::KEY_D))
+			if(_fe3d->input_isKeyboardHeld(KeyType::KEY_D))
 			{
 				_fe3d->camera_followRightXZ(_editorSpeed / 100.0f);
 			}
 
-			if(_fe3d->input_isKeyDown(InputType::KEY_SPACEBAR))
+			if(_fe3d->input_isKeyboardHeld(KeyType::KEY_SPACEBAR))
 			{
 				_fe3d->camera_move(fvec3(0.0f, _editorSpeed / 75.0f, 0.0f));
 			}
-			if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
+			if(_fe3d->input_isKeyboardHeld(KeyType::KEY_SHIFT))
 			{
 				_fe3d->camera_move(fvec3(0.0f, -(_editorSpeed / 75.0f), 0.0f));
 			}
 
-			if(_fe3d->input_isKeyDown(InputType::KEY_W))
+			if(_fe3d->input_isKeyboardHeld(KeyType::KEY_W))
 			{
 				_fe3d->camera_followFrontXZ(_editorSpeed / 100.0f);
 			}
-			if(_fe3d->input_isKeyDown(InputType::KEY_S))
+			if(_fe3d->input_isKeyboardHeld(KeyType::KEY_S))
 			{
 				_fe3d->camera_followFrontXZ(-_editorSpeed / 100.0f);
 			}
@@ -68,12 +68,12 @@ void WorldEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isKeyPressed(InputType::KEY_F))
+		if(_fe3d->input_isKeyboardPressed(KeyType::KEY_F))
 		{
 			_isWireframeModeEnabled = !_isWireframeModeEnabled;
 		}
 
-		if(_fe3d->input_isKeyPressed(InputType::KEY_B))
+		if(_fe3d->input_isKeyboardPressed(KeyType::KEY_B))
 		{
 			_isAabbModeEnabled = !_isAabbModeEnabled;
 		}

@@ -18,18 +18,18 @@ void ModelEditor::_updateMiscellaneousMenu()
 		const auto levelOfDetailDistance = (isNoPartSelected ? _fe3d->model_getLevelOfDetailDistance(_currentModelId) : 0.0f);
 		const auto rotationOrder = (isNoPartSelected ? _fe3d->model_getRotationOrder(_currentModelId) : DirectionOrder::XYZ);
 
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
 			if(_currentPartId.empty())
 			{
@@ -40,15 +40,15 @@ void ModelEditor::_updateMiscellaneousMenu()
 				_gui->getOverlay()->openValueForm("opacity", "Opacity", (_originalPartOpacity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			}
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
 			_fe3d->model_setFaceCulled(_currentModelId, _currentPartId, !isFaceCulled);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityId")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("levelOfDetailEntityId")->isHovered())
 		{
 			if(levelOfDetailEntityId.empty())
 			{
@@ -59,11 +59,11 @@ void ModelEditor::_updateMiscellaneousMenu()
 				_gui->getOverlay()->openValueForm("levelOfDetailEntityId", "LOD Entity ID", levelOfDetailEntityId.substr(1, levelOfDetailEntityId.size() - 1), fvec2(0.0f, 0.1f), 5, true, true, false);
 			}
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("levelOfDetailDistance", "LOD Distance", levelOfDetailDistance, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{
 			if(rotationOrder == DirectionOrder::XYZ)
 			{

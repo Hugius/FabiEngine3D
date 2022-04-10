@@ -8,15 +8,15 @@ void Animation3dEditor::_updateMainMenu()
 
 	if(screen->getId() == "animation3dEditorMenuMain")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("createAnimation", "Create Animation", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedAnimationIds;
 
@@ -27,7 +27,7 @@ void Animation3dEditor::_updateMainMenu()
 
 			_gui->getOverlay()->openChoiceForm("editAnimation", "Edit Animation", fvec2(0.0f, 0.1f), ids);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedAnimationIds;
 
@@ -62,7 +62,7 @@ void Animation3dEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "animation3dEditorMenuChoice")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			if(_fe3d->model_isExisting(_previewModelId))
 			{
@@ -101,7 +101,7 @@ void Animation3dEditor::_updateChoiceMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("preview")->isHovered())
 		{
 			if(_fe3d->model_isExisting(_previewModelId))
 			{
@@ -117,7 +117,7 @@ void Animation3dEditor::_updateChoiceMenu()
 
 			_gui->getOverlay()->openChoiceForm("selectModel", "Select Model", fvec2(-0.5f, 0.1f), modelIds);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
 			for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 			{
@@ -139,7 +139,7 @@ void Animation3dEditor::_updateChoiceMenu()
 
 			_fe3d->model_startAnimation(_previewModelId, _currentAnimationId, 1);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
 			_fe3d->model_stopAnimation(_previewModelId, _currentAnimationId);
 
@@ -161,7 +161,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				}
 			}
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_currentFrameIndex++;
 
@@ -182,21 +182,21 @@ void Animation3dEditor::_updateChoiceMenu()
 				_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, partId, TransformationType(transformationType));
 			}
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuFrame");
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_fe3d->animation3d_deleteFrame(_currentAnimationId, _currentFrameIndex);
 
 			_currentFrameIndex--;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("prev")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("prev")->isHovered())
 		{
 			_currentFrameIndex--;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("next")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("next")->isHovered())
 		{
 			_currentFrameIndex++;
 		}

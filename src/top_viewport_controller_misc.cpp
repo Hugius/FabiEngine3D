@@ -96,9 +96,9 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("scriptEditor")->setHoverable(isHoverable);
 }
 
-void TopViewportController::_setProject(const string & value)
+void TopViewportController::_setProject(const string & projectId)
 {
-	_currentProjectId = value;
+	_currentProjectId = projectId;
 
 	if(_currentProjectId.empty())
 	{

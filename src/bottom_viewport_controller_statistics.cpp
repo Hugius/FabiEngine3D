@@ -224,7 +224,7 @@ void BottomViewportController::_updateStatistics()
 		}
 	}
 
-	if(_fe3d->input_isKeyPressed(InputType::KEY_C) && _gui->getBottomViewport()->getWindow("console")->isHovered())
+	if(_fe3d->input_isKeyboardPressed(KeyType::KEY_C) && _gui->getBottomViewport()->getWindow("console")->isHovered())
 	{
 		if(!_scriptExecutor->isRunning() && !_gui->getOverlay()->isFocused() && !_scriptEditor->isWritingScript())
 		{

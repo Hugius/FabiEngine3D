@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 		{
 			if(_validateKeyInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isKeyDown(KEYBOARD_KEYS.at(args[0]->getString()));
+				const auto result = _fe3d->input_isKeyboardHeld(KEYBOARD_KEYS.at(args[0]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 		{
 			if(_validateKeyInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isKeyPressed(KEYBOARD_KEYS.at(args[0]->getString()));
+				const auto result = _fe3d->input_isKeyboardPressed(KEYBOARD_KEYS.at(args[0]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}
@@ -40,7 +40,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 		{
 			if(_validateMouseInputString(args[0]->getString()))
 			{
-				const auto result = _fe3d->input_isMouseDown(MOUSE_BUTTONS.at(args[0]->getString()));
+				const auto result = _fe3d->input_isMouseHeld(MOUSE_BUTTONS.at(args[0]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 			}

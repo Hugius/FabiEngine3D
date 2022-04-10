@@ -8,7 +8,7 @@ void WorldEditor::_updateReflectionMenu()
 
 	if(screen->getId() == "worldEditorMenuReflection")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			if(_isPlacingReflection)
 			{
@@ -20,7 +20,7 @@ void WorldEditor::_updateReflectionMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("place")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
@@ -44,7 +44,7 @@ void WorldEditor::_updateReflectionMenu()
 				_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 			}
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuReflectionChoice");
 
@@ -79,7 +79,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 
 		if(!hoveredOptionId.empty())
 		{
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
 			{
 				_deactivateModel();
 				_deactivateQuad();
@@ -98,7 +98,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 			}
 		}
 
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuReflection");
 			return;

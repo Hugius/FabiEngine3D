@@ -1,6 +1,7 @@
 #pragma once
 
-#include "input_type.hpp"
+#include "button_type.hpp"
+#include "key_type.hpp"
 #include "direction.hpp"
 #include "direction_order.hpp"
 #include "aabb_parent_type.hpp"
@@ -833,10 +834,12 @@ public:
 
 	const int input_getMouseWheelX() const;
 	const int input_getMouseWheelY() const;
-	const bool input_isKeyDown(InputType key) const;
-	const bool input_isKeyPressed(InputType key) const;
-	const bool input_isMouseDown(InputType button) const;
-	const bool input_isMousePressed(InputType button) const;
+	const bool input_isMouseHeld(ButtonType button) const;
+	const bool input_isMousePressed(ButtonType button) const;
+	const bool input_isMouseToggled(ButtonType button) const;
+	const bool input_isKeyboardHeld(KeyType key) const;
+	const bool input_isKeyboardPressed(KeyType key) const;
+	const bool input_isKeyboardToggled(KeyType key) const;
 
 	void camera_reset();
 	void camera_setFirstPersonEnabled(bool value);

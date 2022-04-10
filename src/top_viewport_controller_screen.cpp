@@ -12,7 +12,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	auto topScreen = _gui->getTopViewport()->getWindow("projectWindow")->getActiveScreen();
 	auto leftScreen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
 	{
 		if(topScreen->getButton("createProject")->isHovered())
 		{
@@ -72,7 +72,7 @@ void TopViewportController::_updateGameScreenManagement()
 	}
 	else
 	{
-		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
 		{
 			if(topScreen->getButton("start")->isHovered())
 			{
@@ -126,7 +126,7 @@ void TopViewportController::_updateGameScreenManagement()
 
 		if(isScriptRunning)
 		{
-			if(_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE))
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE))
 			{
 				if(_fe3d->server_isRunning())
 				{
@@ -147,7 +147,7 @@ void TopViewportController::_updateMiscScreenManagement()
 {
 	auto screen = _gui->getTopViewport()->getWindow("miscellaneousWindow")->getActiveScreen();
 
-	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
+	if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{
 		if(_currentProjectId.empty())
 		{
@@ -182,7 +182,7 @@ void TopViewportController::_updateMiscScreenManagement()
 			}
 		}
 	}
-	else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("export")->isHovered())
+	else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("export")->isHovered())
 	{
 		const string chosenDirectoryPath = Tools::chooseExplorerDirectory("");
 
@@ -252,7 +252,7 @@ void TopViewportController::_updateMiscScreenManagement()
 			}
 		}
 	}
-	else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("documentation")->isHovered())
+	else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("documentation")->isHovered())
 	{
 		ShellExecute(0, 0, "https://github.com/Hugius/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
 	}

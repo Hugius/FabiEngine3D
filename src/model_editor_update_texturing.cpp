@@ -18,12 +18,12 @@ void ModelEditor::_updateTexturingMenu()
 		const auto hasNormalMap = (isPartSelected ? _fe3d->model_hasNormalMap(_currentModelId, _currentPartId) : false);
 		const auto textureRepeat = (isPartSelected ? _fe3d->model_getTextureRepeat(_currentModelId, _currentPartId) : 0);
 
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -55,7 +55,7 @@ void ModelEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setDiffuseMap(_currentModelId, _currentPartId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -87,7 +87,7 @@ void ModelEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setEmissionMap(_currentModelId, _currentPartId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("specularMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -119,7 +119,7 @@ void ModelEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setSpecularMap(_currentModelId, _currentPartId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -151,7 +151,7 @@ void ModelEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setReflectionMap(_currentModelId, _currentPartId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -183,7 +183,7 @@ void ModelEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->model_setNormalMap(_currentModelId, _currentPartId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d->model_setDiffuseMap(_currentModelId, _currentPartId, "");
 			_fe3d->model_setEmissionMap(_currentModelId, _currentPartId, "");
@@ -191,7 +191,7 @@ void ModelEditor::_updateTexturingMenu()
 			_fe3d->model_setReflectionMap(_currentModelId, _currentPartId, "");
 			_fe3d->model_setNormalMap(_currentModelId, _currentPartId, "");
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}

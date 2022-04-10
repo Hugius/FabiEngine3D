@@ -89,7 +89,7 @@ void WorldEditor::_updateSoundPlacing()
 				return;
 			}
 
-			if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			if(_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
@@ -99,7 +99,7 @@ void WorldEditor::_updateSoundPlacing()
 				return;
 			}
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
+			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
 				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
@@ -119,7 +119,7 @@ void WorldEditor::_updateSoundPlacing()
 			_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, true);
 			_fe3d->model_setBasePosition(TEMPLATE_SPEAKER_ID, newPosition);
 
-			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
 			{
 				auto newId = (_currentTemplateSoundId.substr(1) + "_" + to_string(_idCounter));
 				auto newModelId = ("@@speaker_" + newId);

@@ -15,7 +15,7 @@ void WaterEditor::_updateCamera()
 
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
+		if(_fe3d->input_isMousePressed(ButtonType::BUTTON_RIGHT))
 		{
 			_fe3d->camera_setThirdPersonEnabled(!_fe3d->camera_isThirdPersonEnabled());
 		}
@@ -31,14 +31,14 @@ void WaterEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isKeyPressed(InputType::KEY_R))
+		if(_fe3d->input_isKeyboardPressed(KeyType::KEY_R))
 		{
 			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
 		}
 
 		if(!_currentWaterId.empty())
 		{
-			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_F))
 			{
 				_fe3d->water_setWireframed(_currentWaterId, !_fe3d->water_isWireframed(_currentWaterId));
 			}

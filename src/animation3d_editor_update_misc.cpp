@@ -11,11 +11,11 @@ void Animation3dEditor::_updateCamera()
 		_fe3d->camera_setThirdPersonDistance(cameraDistance);
 
 		auto cameraLookat = _fe3d->camera_getThirdPersonLookat();
-		if(_fe3d->input_isKeyDown(InputType::KEY_SPACEBAR))
+		if(_fe3d->input_isKeyboardHeld(KeyType::KEY_SPACEBAR))
 		{
 			cameraLookat.y += CAMERA_LOOKAT_SPEED;
 		}
-		if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
+		if(_fe3d->input_isKeyboardHeld(KeyType::KEY_SHIFT))
 		{
 			cameraLookat.y -= CAMERA_LOOKAT_SPEED;
 		}
@@ -31,7 +31,7 @@ void Animation3dEditor::_updateCamera()
 
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
+		if(_fe3d->input_isMousePressed(ButtonType::BUTTON_RIGHT))
 		{
 			_fe3d->camera_setThirdPersonEnabled(!_fe3d->camera_isThirdPersonEnabled());
 		}
@@ -47,7 +47,7 @@ void Animation3dEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isKeyPressed(InputType::KEY_R))
+		if(_fe3d->input_isKeyboardPressed(KeyType::KEY_R))
 		{
 			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
 		}

@@ -2,12 +2,13 @@
 
 #include <windows.h>
 #include <SDL.h>
-#include <iostream>
 
 void InputHandler::update()
 {
-	_pressedKeyboardKeys.clear();
 	_pressedMouseButtons.clear();
+	_pressedKeyboardKeys.clear();
+	_toggledMouseButtons.clear();
+	_toggledKeyboardKeys.clear();
 	_horizontalMouseWheel = 0;
 	_verticalMouseWheel = 0;
 
@@ -17,11 +18,11 @@ void InputHandler::update()
 	{
 	}
 
-	for(const auto button : _mouseButtons)
+	for(const auto button : _buttons)
 	{
 		if(GetKeyState(static_cast<int>(button)) & (1 << 15))
 		{
-			if(!isMouseButtonHeld(button))
+			if(!isMouseHeld(button))
 			{
 				_heldMouseButtons.push_back(button);
 				_pressedMouseButtons.push_back(button);
@@ -39,13 +40,18 @@ void InputHandler::update()
 				}
 			}
 		}
+
+		if(GetKeyState(static_cast<int>(button)) & 1)
+		{
+			_toggledMouseButtons.push_back(button);
+		}
 	}
 
-	for(const auto key : _keyboardKeys)
+	for(const auto key : _keys)
 	{
 		if(GetKeyState(static_cast<int>(key)) & (1 << 15))
 		{
-			if(!isKeyboardKeyHeld(key))
+			if(!isKeyboardHeld(key))
 			{
 				_heldKeyboardKeys.push_back(key);
 				_pressedKeyboardKeys.push_back(key);
@@ -63,27 +69,42 @@ void InputHandler::update()
 				}
 			}
 		}
+
+		if(GetKeyState(static_cast<int>(key)) & 1)
+		{
+			_toggledKeyboardKeys.push_back(key);
+		}
 	}
 }
 
-const bool InputHandler::isKeyboardKeyHeld(InputType key) const
+const bool InputHandler::isKeyboardHeld(KeyType key) const
 {
 	return (find(_heldKeyboardKeys.begin(), _heldKeyboardKeys.end(), key) != _heldKeyboardKeys.end());
 }
 
-const bool InputHandler::isKeyboardKeyPressed(InputType key) const
+const bool InputHandler::isKeyboardPressed(KeyType key) const
 {
 	return (find(_pressedKeyboardKeys.begin(), _pressedKeyboardKeys.end(), key) != _pressedKeyboardKeys.end());
 }
 
-const bool InputHandler::isMouseButtonHeld(InputType button) const
+const bool InputHandler::isKeyboardToggled(KeyType key) const
+{
+	return (find(_toggledKeyboardKeys.begin(), _toggledKeyboardKeys.end(), key) != _toggledKeyboardKeys.end());
+}
+
+const bool InputHandler::isMouseHeld(ButtonType button) const
 {
 	return (find(_heldMouseButtons.begin(), _heldMouseButtons.end(), button) != _heldMouseButtons.end());
 }
 
-const bool InputHandler::isMouseButtonPressed(InputType button) const
+const bool InputHandler::isMousePressed(ButtonType button) const
 {
 	return (find(_pressedMouseButtons.begin(), _pressedMouseButtons.end(), button) != _pressedMouseButtons.end());
+}
+
+const bool InputHandler::isMouseToggled(ButtonType button) const
+{
+	return (find(_toggledMouseButtons.begin(), _toggledMouseButtons.end(), button) != _toggledMouseButtons.end());
 }
 
 const int InputHandler::getHorizontalMouseWheel() const

@@ -53,7 +53,7 @@ private:
 	void _updateProjectLoading();
 	void _updateProjectDeleting();
 	void _updateEngineQuitting();
-	void _setProject(const string & value);
+	void _setProject(const string & projectId);
 
 	static inline const fvec3 FRAME_COLOR = fvec3(0.075f);
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);

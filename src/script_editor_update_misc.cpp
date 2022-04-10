@@ -11,38 +11,38 @@ void ScriptEditor::_updateMenu()
 
 	if(screen->getId() == "scriptEditorMenuMain")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("search")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("search")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("searchScript", "Search Script", "", fvec2(0.0f, 0.1f), 10, true, true, true);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("createScript", "Create Script", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			_gui->getOverlay()->openChoiceForm("editScript", "Edit Script", fvec2(0.0f, 0.1f), _script->getScriptFileIds());
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rename")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("rename")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("renameScript", "Rename Script", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clear")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("clear")->isHovered())
 		{
 			_clearDisplay();
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_gui->getOverlay()->openAnswerForm("deleteScript", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
 
-		if(_fe3d->input_isKeyDown(InputType::KEY_CONTROL))
+		if(_fe3d->input_isKeyboardHeld(KeyType::KEY_CONTROL))
 		{
-			if(_fe3d->input_isKeyPressed(InputType::KEY_F) && !_gui->getOverlay()->isFocused())
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_F) && !_gui->getOverlay()->isFocused())
 			{
 				_gui->getOverlay()->openValueForm("searchScript", "Search Keyword", "", fvec2(0.0f, 0.1f), 10, true, true, true);
 			}
@@ -207,7 +207,7 @@ void ScriptEditor::_updateCamera()
 		return;
 	}
 
-	const auto isControlDown = _fe3d->input_isKeyDown(InputType::KEY_CONTROL);
+	const auto isControlDown = _fe3d->input_isKeyboardHeld(KeyType::KEY_CONTROL);
 	const auto scrollSpeed = static_cast<float>(_fe3d->input_getMouseWheelY());
 	const auto lineCount = _script->getScriptFile(_currentScriptFileId)->getLineCount();
 	const auto lastLineHeight = _fe3d->text3d_getPosition("number_" + to_string(lineCount - 1)).y;

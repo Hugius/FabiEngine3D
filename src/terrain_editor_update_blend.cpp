@@ -8,12 +8,12 @@ void TerrainEditor::_updateBlendMapMenu()
 
 	if(screen->getId() == "terrainEditorMenuBlendTexturing")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -45,7 +45,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setBlendMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d->terrain_setBlendMap(_currentTerrainId, "");
 		}

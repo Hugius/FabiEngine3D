@@ -6,12 +6,12 @@ void WorldEditor::_updateWaterMenu()
 
 	if(screen->getId() == "worldEditorMenuWater")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> waterIds;
 
@@ -25,15 +25,15 @@ void WorldEditor::_updateWaterMenu()
 
 			_gui->getOverlay()->openChoiceForm("selectWater", "Select Water", fvec2(0.0f, 0.1f), waterIds);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_fe3d->water_delete(_fe3d->water_getSelectedId());
 		}
-		else if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("up")->isHovered())
+		else if(_fe3d->input_isMouseHeld(ButtonType::BUTTON_LEFT) && screen->getButton("up")->isHovered())
 		{
 			_fe3d->water_setHeight(_fe3d->water_getSelectedId(), (_fe3d->water_getHeight(_fe3d->water_getSelectedId()) + (_editorSpeed / 100.0f)));
 		}
-		else if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("down")->isHovered())
+		else if(_fe3d->input_isMouseHeld(ButtonType::BUTTON_LEFT) && screen->getButton("down")->isHovered())
 		{
 			_fe3d->water_setHeight(_fe3d->water_getSelectedId(), (_fe3d->water_getHeight(_fe3d->water_getSelectedId()) - (_editorSpeed / 100.0f)));
 		}

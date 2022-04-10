@@ -42,7 +42,7 @@
     <ClInclude Include="..\..\..\src\script_variable_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\input_type.hpp">
+    <ClInclude Include="..\..\..\src\key_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\transformation_type.hpp">
@@ -88,6 +88,9 @@
       <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_selection_type.hpp">
+      <Filter>Enumeration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\button_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
   </ItemGroup>

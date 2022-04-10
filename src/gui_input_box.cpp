@@ -40,107 +40,499 @@ void GuiInputBox::_updateTyping()
 	{
 		if(textContent.size() < _maxCharacterCount)
 		{
-			if(_isLettersAllowed || _isSpecialsAllowed)
+			const auto isShiftedOrCapsLocked = (_fe3d->input_isKeyboardHeld(KeyType::KEY_SHIFT) || _fe3d->input_isKeyboardToggled(KeyType::KEY_CAPSLOCK));
+
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_SPACEBAR))
 			{
-				if(_fe3d->input_isKeyPressed(InputType::KEY_SPACEBAR))
+				if(_isLettersAllowed)
 				{
 					textContent += ' ';
 				}
 			}
-
-			if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT) || ((GetKeyState(VK_CAPITAL) & 0x0001) != 0))
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_A))
 			{
-				for(const auto & [key, character] : SECOND_ALPHABET_CHARACTERS)
+				if(_isLettersAllowed)
 				{
-					if(_fe3d->input_isKeyPressed(key))
+					textContent += (isShiftedOrCapsLocked ? 'A' : 'a');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_B))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'B' : 'b');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_C))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'C' : 'c');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_D))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'D' : 'd');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_E))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'E' : 'e');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_F))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'F' : 'f');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_G))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'G' : 'g');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_H))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'H' : 'h');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_I))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'I' : 'i');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_J))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'J' : 'j');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_K))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'K' : 'k');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_L))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'L' : 'l');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_M))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'M' : 'm');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_N))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'N' : 'n');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_O))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'O' : 'o');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_P))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'P' : 'p');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_Q))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'Q' : 'q');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_R))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'R' : 'r');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_S))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'S' : 's');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_T))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'T' : 't');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_U))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'U' : 'u');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_V))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'V' : 'v');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_W))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'W' : 'w');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_X))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'X' : 'x');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_Y))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'Y' : 'y');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_Z))
+			{
+				if(_isLettersAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? 'Z' : 'z');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_0))
+			{
+				if(_isNumbersAllowed && !isShiftedOrCapsLocked)
+				{
+					textContent += '0';
+				}
+				if(_isSpecialsAllowed && isShiftedOrCapsLocked)
+				{
+					textContent += ')';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_1))
+			{
+				if(_isNumbersAllowed && !isShiftedOrCapsLocked)
+				{
+					textContent += '1';
+				}
+				if(_isSpecialsAllowed && isShiftedOrCapsLocked)
+				{
+					textContent += '!';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_2))
+			{
+				if(_isNumbersAllowed && !isShiftedOrCapsLocked)
+				{
+					textContent += '2';
+				}
+				if(_isSpecialsAllowed && isShiftedOrCapsLocked)
+				{
+					textContent += '@';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_3))
+			{
+				if(_isNumbersAllowed && !isShiftedOrCapsLocked)
+				{
+					textContent += '3';
+				}
+				if(_isSpecialsAllowed && isShiftedOrCapsLocked)
+				{
+					textContent += '#';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_4))
+			{
+				if(_isNumbersAllowed && !isShiftedOrCapsLocked)
+				{
+					textContent += '4';
+				}
+				if(_isSpecialsAllowed && isShiftedOrCapsLocked)
+				{
+					textContent += '$';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_5))
+			{
+				if(_isNumbersAllowed && !isShiftedOrCapsLocked)
+				{
+					textContent += '5';
+				}
+				if(_isSpecialsAllowed && isShiftedOrCapsLocked)
+				{
+					textContent += '%';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_6))
+			{
+				if(_isNumbersAllowed && !isShiftedOrCapsLocked)
+				{
+					textContent += '6';
+				}
+				if(_isSpecialsAllowed && isShiftedOrCapsLocked)
+				{
+					textContent += '^';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_7))
+			{
+				if(_isNumbersAllowed && !isShiftedOrCapsLocked)
+				{
+					textContent += '7';
+				}
+				if(_isSpecialsAllowed && isShiftedOrCapsLocked)
+				{
+					textContent += '&';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_8))
+			{
+				if(_isNumbersAllowed && !isShiftedOrCapsLocked)
+				{
+					textContent += '8';
+				}
+				if(_isSpecialsAllowed && isShiftedOrCapsLocked)
+				{
+					textContent += '*';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_9))
+			{
+				if(_isNumbersAllowed && !isShiftedOrCapsLocked)
+				{
+					textContent += '9';
+				}
+				if(_isSpecialsAllowed && isShiftedOrCapsLocked)
+				{
+					textContent += '(';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_NUMPAD0))
+			{
+				if(_isNumbersAllowed)
+				{
+					textContent += '0';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_NUMPAD1))
+			{
+				if(_isNumbersAllowed)
+				{
+					textContent += '1';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_NUMPAD2))
+			{
+				if(_isNumbersAllowed)
+				{
+					textContent += '2';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_NUMPAD3))
+			{
+				if(_isNumbersAllowed)
+				{
+					textContent += '3';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_NUMPAD4))
+			{
+				if(_isNumbersAllowed)
+				{
+					textContent += '4';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_NUMPAD5))
+			{
+				if(_isNumbersAllowed)
+				{
+					textContent += '5';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_NUMPAD6))
+			{
+				if(_isNumbersAllowed)
+				{
+					textContent += '6';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_NUMPAD7))
+			{
+				if(_isNumbersAllowed)
+				{
+					textContent += '7';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_NUMPAD8))
+			{
+				if(_isNumbersAllowed)
+				{
+					textContent += '8';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_NUMPAD9))
+			{
+				if(_isNumbersAllowed)
+				{
+					textContent += '9';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_SEMICOLON))
+			{
+				if(_isSpecialsAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? ':' : ';');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_EQUAL))
+			{
+				if(_isSpecialsAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? '+' : '=');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_COMMA))
+			{
+				if(_isSpecialsAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? '<' : ',');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_MINUS))
+			{
+				if(_isSpecialsAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? '_' : '-');
+				}
+				else
+				{
+					if(!isShiftedOrCapsLocked && _isNumbersAllowed && !_isLettersAllowed && textContent.empty())
 					{
-						if(_isLettersAllowed)
-						{
-							textContent += character;
-						}
+						textContent += '-';
 					}
 				}
 			}
-			else
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_PERIOD))
 			{
-				for(const auto & [key, character] : FIRST_ALPHABET_CHARACTERS)
+				if(_isSpecialsAllowed)
 				{
-					if(_fe3d->input_isKeyPressed(key))
-					{
-						if(_isLettersAllowed)
-						{
-							textContent += character;
-						}
-					}
+					textContent += (isShiftedOrCapsLocked ? '>' : '.');
 				}
 			}
-
-			if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_FORWARDSLASH))
 			{
-				for(const auto & [key, character] : SECOND_NUMBER_CHARACTERS)
+				if(_isSpecialsAllowed)
 				{
-					if(_fe3d->input_isKeyPressed(key))
-					{
-						if(_isSpecialsAllowed)
-						{
-							textContent += character;
-						}
-					}
+					textContent += (isShiftedOrCapsLocked ? '?' : '/');
 				}
 			}
-			else
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_GRAVE))
 			{
-				for(const auto & [key, character] : FIRST_NUMBER_CHARACTERS)
+				if(_isSpecialsAllowed)
 				{
-					if(_fe3d->input_isKeyPressed(key))
-					{
-						if(_isNumbersAllowed)
-						{
-							textContent += character;
-						}
-					}
+					textContent += (isShiftedOrCapsLocked ? '~' : '`');
 				}
 			}
-
-			if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_LEFTBRACKET))
 			{
-				for(const auto & [key, character] : SECOND_SPECIAL_CHARACTERS)
+				if(_isSpecialsAllowed)
 				{
-					if(_fe3d->input_isKeyPressed(key))
-					{
-						if(_isSpecialsAllowed)
-						{
-							textContent += character;
-						}
-					}
+					textContent += (isShiftedOrCapsLocked ? '{' : '[');
 				}
 			}
-			else
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_BACKWARDSLASH))
 			{
-				for(const auto & [key, character] : FIRST_SPECIAL_CHARACTERS)
+				if(_isSpecialsAllowed)
 				{
-					if(_fe3d->input_isKeyPressed(key))
-					{
-						if(!_isLettersAllowed && _isNumbersAllowed && !_isSpecialsAllowed)
-						{
-							if((character == "-") && textContent.empty())
-							{
-								textContent += character;
-							}
-						}
-						else
-						{
-							if(_isSpecialsAllowed)
-							{
-								textContent += character;
-							}
-						}
-					}
+					textContent += (isShiftedOrCapsLocked ? '|' : '\\');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_RIGHTBRACKET))
+			{
+				if(_isSpecialsAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? '}' : ']');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_QUOTE))
+			{
+				if(_isSpecialsAllowed)
+				{
+					textContent += (isShiftedOrCapsLocked ? '"' : '\'');
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_MULTIPLY))
+			{
+				if(_isSpecialsAllowed)
+				{
+					textContent += '*';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_DIVIDE))
+			{
+				if(_isSpecialsAllowed)
+				{
+					textContent += '/';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_ADD))
+			{
+				if(_isSpecialsAllowed)
+				{
+					textContent += '+';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_SUBTRACT))
+			{
+				if(_isSpecialsAllowed || (_isNumbersAllowed && !_isLettersAllowed && textContent.empty()))
+				{
+					textContent += '-';
+				}
+			}
+			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_DECIMAL))
+			{
+				if(_isSpecialsAllowed)
+				{
+					textContent += '.';
 				}
 			}
 		}
 
-		if(_fe3d->input_isKeyPressed(InputType::KEY_BACKSPACE))
+		if(_fe3d->input_isKeyboardPressed(KeyType::KEY_BACKSPACE))
 		{
 			if(textContent.size() == 1)
 			{

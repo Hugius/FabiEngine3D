@@ -37,34 +37,7 @@ private:
 	void _clearDisplay();
 	void _clearSelection();
 
-	static inline const unordered_map<char, char> SPECIAL_CHARACTERS =
-	{
-		{'.', '>'},
-		{',', '<'},
-		{'/', '?'},
-		{';', ':'},
-		{'\'', '\"'},
-		{'[', '{'},
-		{']', '}'},
-		{'\\', '|'},
-		{'-', '_'},
-		{'=', '+'}
-	};
-	static inline const unordered_map<char, char> NUMBER_CHARACTERS =
-	{
-		{'0', ')'},
-		{'1', '!'},
-		{'2', '@'},
-		{'3', '#'},
-		{'4', '$'},
-		{'5', '%'},
-		{'6', '^'},
-		{'7', '&'},
-		{'8', '*'},
-		{'9', '('}
-	};
 	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.tga";
-	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 
 	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
 	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);

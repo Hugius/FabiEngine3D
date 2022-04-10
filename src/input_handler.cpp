@@ -2,6 +2,7 @@
 
 #include <windows.h>
 #include <SDL.h>
+#include <iostream>
 
 void InputHandler::update()
 {
@@ -18,7 +19,7 @@ void InputHandler::update()
 
 	for(const auto button : _mouseButtons)
 	{
-		if(GetKeyState(static_cast<int>(button)) & 0x1000000000000000)
+		if(GetKeyState(static_cast<int>(button)) & (1 << 15))
 		{
 			if(!isMouseButtonHeld(button))
 			{
@@ -42,7 +43,7 @@ void InputHandler::update()
 
 	for(const auto key : _keyboardKeys)
 	{
-		if(GetKeyState(static_cast<int>(key)) & 0x1000000000000000)
+		if(GetKeyState(static_cast<int>(key)) & (1 << 15))
 		{
 			if(!isKeyboardKeyHeld(key))
 			{

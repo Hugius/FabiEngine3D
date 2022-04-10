@@ -86,7 +86,7 @@ enum class InputType
 	KEY_F23 = 0x86,
 	KEY_F24 = 0x87,
 	KEY_SEMICOLON = 0xBA,
-	KEY_PLUS = 0xBB,
+	KEY_EQUAL = 0xBB,
 	KEY_COMMA = 0xBC,
 	KEY_MINUS = 0xBD,
 	KEY_PERIOD = 0xBE,

@@ -109,7 +109,7 @@ private:
 		InputType::KEY_F23,
 		InputType::KEY_F24,
 		InputType::KEY_SEMICOLON,
-		InputType::KEY_PLUS,
+		InputType::KEY_EQUAL,
 		InputType::KEY_COMMA,
 		InputType::KEY_MINUS,
 		InputType::KEY_PERIOD,

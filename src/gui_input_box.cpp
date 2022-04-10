@@ -42,79 +42,97 @@ void GuiInputBox::_updateTyping()
 		{
 			if(_isLettersAllowed || _isSpecialsAllowed)
 			{
-				if(_fe3d->input_isKeyPressed(InputType(' ')))
+				if(_fe3d->input_isKeyPressed(InputType::KEY_SPACEBAR))
 				{
 					textContent += ' ';
 				}
 			}
 
-			for(const auto & character : ALPHABET_CHARACTERS)
+			if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT) || ((GetKeyState(VK_CAPITAL) & 0x0001) != 0))
 			{
-				if(_fe3d->input_isKeyPressed(InputType(character.first)))
+				for(const auto & [key, character] : SECOND_ALPHABET_CHARACTERS)
 				{
-					if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT) || ((GetKeyState(VK_CAPITAL) & 0x0001) != 0))
+					if(_fe3d->input_isKeyPressed(key))
 					{
 						if(_isLettersAllowed)
 						{
-							textContent += character.second;
+							textContent += character;
 						}
 					}
-					else
+				}
+			}
+			else
+			{
+				for(const auto & [key, character] : FIRST_ALPHABET_CHARACTERS)
+				{
+					if(_fe3d->input_isKeyPressed(key))
 					{
 						if(_isLettersAllowed)
 						{
-							textContent += character.first;
+							textContent += character;
 						}
 					}
 				}
 			}
 
-			for(const auto & character : NUMBER_CHARACTERS)
+			if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
 			{
-				if(_fe3d->input_isKeyPressed(InputType(character.first)))
+				for(const auto & [key, character] : SECOND_NUMBER_CHARACTERS)
 				{
-					if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
+					if(_fe3d->input_isKeyPressed(key))
 					{
 						if(_isSpecialsAllowed)
 						{
-							textContent += character.second;
+							textContent += character;
 						}
 					}
-					else
+				}
+			}
+			else
+			{
+				for(const auto & [key, character] : FIRST_NUMBER_CHARACTERS)
+				{
+					if(_fe3d->input_isKeyPressed(key))
 					{
 						if(_isNumbersAllowed)
 						{
-							textContent += character.first;
+							textContent += character;
 						}
 					}
 				}
 			}
 
-			for(const auto & character : SPECIAL_CHARACTERS)
+			if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
 			{
-				if(_fe3d->input_isKeyPressed(InputType(character.first)))
+				for(const auto & [key, character] : SECOND_SPECIAL_CHARACTERS)
 				{
-					if(_fe3d->input_isKeyDown(InputType::KEY_SHIFT))
+					if(_fe3d->input_isKeyPressed(key))
 					{
 						if(_isSpecialsAllowed)
 						{
-							textContent += character.second;
+							textContent += character;
 						}
 					}
-					else
+				}
+			}
+			else
+			{
+				for(const auto & [key, character] : FIRST_SPECIAL_CHARACTERS)
+				{
+					if(_fe3d->input_isKeyPressed(key))
 					{
-						if(_isSpecialsAllowed)
+						if(!_isLettersAllowed && _isNumbersAllowed && !_isSpecialsAllowed)
 						{
-							textContent += character.first;
+							if((character == "-") && textContent.empty())
+							{
+								textContent += character;
+							}
 						}
 						else
 						{
-							if(_isNumbersAllowed)
+							if(_isSpecialsAllowed)
 							{
-								if((character.first == '-') && textContent.empty())
-								{
-									textContent += character.first;
-								}
+								textContent += character;
 							}
 						}
 					}

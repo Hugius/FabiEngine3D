@@ -250,7 +250,7 @@ private:
 		{"KEY_F23", InputType::KEY_F23},
 		{"KEY_F24", InputType::KEY_F24},
 		{"KEY_SEMICOLON", InputType::KEY_SEMICOLON},
-		{"KEY_PLUS", InputType::KEY_PLUS},
+		{"KEY_PLUS", InputType::KEY_EQUAL},
 		{"KEY_COMMA", InputType::KEY_COMMA},
 		{"KEY_MINUS", InputType::KEY_MINUS},
 		{"KEY_PERIOD", InputType::KEY_PERIOD},

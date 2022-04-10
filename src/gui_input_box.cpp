@@ -54,133 +54,133 @@ void GuiInputBox::_updateTyping()
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'A' : 'a');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'A' : 'a');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_B))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'B' : 'b');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'B' : 'b');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_C))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'C' : 'c');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'C' : 'c');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_D))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'D' : 'd');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'D' : 'd');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_E))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'E' : 'e');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'E' : 'e');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_F))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'F' : 'f');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'F' : 'f');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_G))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'G' : 'g');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'G' : 'g');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_H))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'H' : 'h');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'H' : 'h');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_I))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'I' : 'i');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'I' : 'i');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_J))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'J' : 'j');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'J' : 'j');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_K))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'K' : 'k');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'K' : 'k');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_L))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'L' : 'l');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'L' : 'l');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_M))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'M' : 'm');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'M' : 'm');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_N))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'N' : 'n');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'N' : 'n');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_O))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'O' : 'o');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'O' : 'o');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_P))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'P' : 'p');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'P' : 'p');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_Q))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'Q' : 'q');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'Q' : 'q');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_R))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'R' : 'r');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'R' : 'r');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_S))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'S' : 's');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'S' : 's');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_T))
@@ -194,42 +194,42 @@ void GuiInputBox::_updateTyping()
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'U' : 'u');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'U' : 'u');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_V))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'V' : 'v');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'V' : 'v');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_W))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'W' : 'w');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'W' : 'w');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_X))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'X' : 'x');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'X' : 'x');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_Y))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'Y' : 'y');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'Y' : 'y');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_Z))
 			{
 				if(_isLettersAllowed)
 				{
-					textContent += ((isCapsLockToggled || isShiftHeld) ? 'Z' : 'z');
+					textContent += ((isCapsLockToggled != isShiftHeld) ? 'Z' : 'z');
 				}
 			}
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_0))

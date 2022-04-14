@@ -1,4 +1,6 @@
 #include "engine_core.hpp"
+#include "engine_controller.hpp"
+#include "tools.hpp"
 
 const shared_ptr<LibraryLoader> EngineCore::getLibraryLoader() const
 {
@@ -205,6 +207,11 @@ const float EngineCore::getTotalDeltaTime() const
 	return _totalDeltaTime;
 }
 
+const bool EngineCore::isRunning() const
+{
+	return _isRunning;
+}
+
 const unordered_map<string, float> & EngineCore::getUpdateDeltaTimes() const
 {
 	return _updateDeltaTimes;
@@ -213,4 +220,47 @@ const unordered_map<string, float> & EngineCore::getUpdateDeltaTimes() const
 const unordered_map<string, float> & EngineCore::getRenderDeltaTimes() const
 {
 	return _renderDeltaTimes;
+}
+
+void EngineCore::_initialize()
+{
+	const auto logoPath = (Configuration::getInst().isApplicationExported() ? "logo\\logo.tga" : "engine\\assets\\image\\diffuse_map\\logo.tga");
+	const auto monitorSize = Tools::getMonitorSize();
+	const auto windowSize = Configuration::getInst().getWindowSize();
+	const auto logoSize = ivec2(static_cast<int>(static_cast<float>(monitorSize.x) * 0.4f), static_cast<int>(static_cast<float>(monitorSize.y) * 0.2f));
+	const auto windowPosition = ((monitorSize - windowSize) / 2);
+	const auto logoPosition = ((monitorSize - logoSize) / 2);
+	const auto keyingColor = fvec3(0.1f);
+
+	_imageLoader->cacheImage(logoPath, true);
+
+	shared_ptr<Quad2dEntity> logo = make_shared<Quad2dEntity>("logo");
+	logo->setVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
+	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader->loadImage(logoPath)));
+	logo->setCentered(true);
+
+	_masterRenderer->setBackgroundColor(fvec4(keyingColor.r, keyingColor.g, keyingColor.b, 1.0f));
+	_renderWindow->setVisible(true);
+	_renderWindow->setColorKeyingEnabled(true);
+	_renderWindow->setKeyingColor(keyingColor);
+	_renderWindow->setPosition(logoPosition);
+	_renderWindow->setSize(logoSize);
+	_masterRenderer->renderLogo(logo, logoSize);
+	_renderWindow->swapBuffer();
+
+	_engineController->initialize();
+
+	if(_isRunning)
+	{
+		_renderWindow->setColorKeyingEnabled(false);
+
+		_masterRenderer->setBackgroundColor(fvec4(0.0f, 0.0f, 0.0f, 1.0f));
+
+		if(!_networkingServer->isRunning())
+		{
+			_renderWindow->setVisible(true);
+			_renderWindow->setPosition(windowPosition);
+			_renderWindow->setSize(windowSize);
+		}
+	}
 }

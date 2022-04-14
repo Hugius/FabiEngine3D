@@ -1,6 +1,6 @@
 #include "camera.hpp"
 #include "configuration.hpp"
-
+#include <iostream>
 #include <algorithm>
 
 using std::clamp;
@@ -31,13 +31,21 @@ void Camera::followFrontXYZ(float speed)
 
 void Camera::setFirstPersonEnabled(bool value)
 {
-	_mustCenterCursor = value;
+	if(!_mustCenterCursor)
+	{
+		_mustCenterCursor = value;
+	}
+
 	_isFirstPersonEnabled = value;
 }
 
 void Camera::setThirdPersonEnabled(bool value)
 {
-	_mustCenterCursor = value;
+	if(!_mustCenterCursor)
+	{
+		_mustCenterCursor = value;
+	}
+
 	_isThirdPersonEnabled = value;
 }
 
@@ -234,11 +242,6 @@ void Camera::setPosition(const fvec3 & value)
 void Camera::setThirdPersonLookat(const fvec3 & value)
 {
 	_thirdPersonLookat = value;
-}
-
-void Camera::notifyCursorCenter()
-{
-	_isCursorBeingCentered = true;
 }
 
 void Camera::invertUp()

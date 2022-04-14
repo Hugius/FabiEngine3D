@@ -37,7 +37,7 @@ void GuiButton::_updateHovering(bool isInteractable)
 
 	if(isVisible())
 	{
-		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+		const auto cursorPosition = Tools::convertToNdc(Tools::getCursorPosition());
 		const auto buttonPosition = _quadField->getPosition();
 		const auto buttonSize = _quadField->getSize();
 

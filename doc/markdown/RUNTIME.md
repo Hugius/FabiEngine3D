@@ -22,7 +22,6 @@
 
 ### 2.2 Configuration File
 
-- `window_size`: decimal value between 0.0 and 1.0; A value of 1.0 means the full monitor resolution.
-- `window_fullscreen`: boolean value; toggle window fullscreen.
-- `window_borderless`: boolean value; toggle window border visibility.
+- `window_width`: decimal value between 0.0 and 1.0; A value of 1.0 means the full monitor width.
+- `window_height`: decimal value between 0.0 and 1.0; A value of 1.0 means the full monitor height.
 - `window_title`: string value; title of the application window.

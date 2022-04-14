@@ -203,7 +203,7 @@ void GuiScrollingList::_updateHovering(bool isInteractable)
 
 	if(isVisible())
 	{
-		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+		const auto cursorPosition = Tools::convertToNdc(Tools::getCursorPosition());
 		const auto listPosition = getPosition();
 		const auto listSize = getSize();
 

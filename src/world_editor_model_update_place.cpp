@@ -55,7 +55,7 @@ void WorldEditor::_updateModelPlacing()
 				return;
 			}
 
-			if(!_fe3d->misc_isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
+			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
 				return;

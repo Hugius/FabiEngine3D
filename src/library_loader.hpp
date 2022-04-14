@@ -1,9 +1,6 @@
 #pragma once
 
-#include <SDL.h>
-#include <string>
-
-using std::string;
+#include <windows.h>
 
 class LibraryLoader final
 {
@@ -11,8 +8,8 @@ public:
 	LibraryLoader();
 	~LibraryLoader();
 
-	SDL_Window * getWindowPointer();
+	HWND getWindowHandle();
 
 private:
-	SDL_Window * _windowPointer = nullptr;
+	HWND _windowHandle = nullptr;
 };

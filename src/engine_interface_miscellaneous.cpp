@@ -6,43 +6,14 @@
 #include <chrono>
 #include <filesystem>
 
-void EngineInterface::misc_setCursorEntityId(const string & value)
-{
-	_core->getRenderStorage()->setCursorEntityId(value);
-}
-
-void EngineInterface::misc_setVsyncEnabled(bool value)
-{
-	_core->getRenderWindow()->setVsyncEnabled(value);
-}
-
-void EngineInterface::misc_setCursorVisible(bool value)
-{
-	if(value)
-	{
-		_core->getRenderWindow()->showCursor();
-	}
-	else
-	{
-		_core->getRenderWindow()->hideCursor();
-	}
-}
-
-void EngineInterface::misc_centerCursor()
-{
-	_core->getRenderWindow()->setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
-
-	_core->getCamera()->notifyCursorCenter();
-}
-
-void EngineInterface::misc_setCursorPosition(const ivec2 & value)
-{
-	_core->getRenderWindow()->setCursorPosition(value);
-}
-
 void EngineInterface::misc_setWindowTitle(const string & value)
 {
 	_core->getRenderWindow()->setTitle(value);
+}
+
+void EngineInterface::misc_setCursorEntityId(const string & value)
+{
+	_core->getRenderStorage()->setCursorEntityId(value);
 }
 
 void EngineInterface::misc_cacheMesh(const string & filePath, bool isCrucial)
@@ -166,49 +137,6 @@ const string EngineInterface::misc_getOpenglVersion() const
 	return _core->getMasterRenderer()->getOpenglVersion();
 }
 
-const ivec2 EngineInterface::misc_getCursorPosition() const
-{
-	return _core->getRenderWindow()->getCursorPosition();
-}
-
-const bool EngineInterface::misc_isCursorVisible() const
-{
-	return _core->getRenderWindow()->isCursorVisible();
-}
-
-const bool EngineInterface::misc_isCursorInsideDisplay() const
-{
-	auto cursorPosition = misc_getCursorPosition();
-	auto viewportPosition = Configuration::getInst().getDisplayPosition();
-	auto viewportSize = Configuration::getInst().getDisplaySize();
-
-	if((cursorPosition.x > viewportPosition.x) && (cursorPosition.x < (viewportPosition.x + viewportSize.x)))
-	{
-		if((cursorPosition.y > viewportPosition.y) && (cursorPosition.y < (viewportPosition.y + viewportSize.y)))
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-const bool EngineInterface::misc_isCursorInsideWindow() const
-{
-	auto cursorPosition = misc_getCursorPosition();
-	auto windowSize = Configuration::getInst().getWindowSize();
-
-	if((cursorPosition.x > 1) && (cursorPosition.x < (windowSize.x - 1)))
-	{
-		if((cursorPosition.y > 1) && (cursorPosition.y < (windowSize.y - 1)))
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
 const unordered_map<string, float> & EngineInterface::misc_getUpdateDeltaTimes() const
 {
 	return _core->getUpdateDeltaTimes();
@@ -219,12 +147,12 @@ const unordered_map<string, float> & EngineInterface::misc_getRenderDeltaTimes()
 	return _core->getRenderDeltaTimes();
 }
 
+const string EngineInterface::misc_getWindowTitle() const
+{
+	return _core->getRenderWindow()->getTitle();
+}
+
 const string EngineInterface::misc_getCursorEntityId() const
 {
 	return _core->getRenderStorage()->getCursorEntityId();
-}
-
-const bool EngineInterface::misc_isVsyncEnabled() const
-{
-	return _core->getRenderWindow()->isVsyncEnabled();
 }

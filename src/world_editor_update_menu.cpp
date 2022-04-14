@@ -11,7 +11,6 @@ void WorldEditor::_updateMainMenu()
 		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			unload();
-			_fe3d->misc_setVsyncEnabled(true);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			return;
 		}

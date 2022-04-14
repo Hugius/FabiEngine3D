@@ -69,14 +69,16 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 				return true;
 			}
 
-			_fe3d->misc_setCursorVisible(args[0]->getBoolean());
+			Tools::setCursorVisible(args[0]->getBoolean());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:cursor_center")
+	else if(functionName == "fe3d:cursor_set_position")
 	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		auto types = {SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_fe3d->server_isRunning())
 			{
@@ -84,24 +86,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 				return true;
 			}
 
-			_fe3d->misc_centerCursor();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:vsync_set_enabled")
-	{
-		auto types = {SVT::BOOLEAN};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_fe3d->server_isRunning())
-			{
-				_throwRuntimeError("cannot access `fe3d:vsync` functionality as a networking server");
-				return true;
-			}
-
-			_fe3d->misc_setVsyncEnabled(args[0]->getBoolean());
+			Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(args[0]->getDecimal(), args[1]->getDecimal()))));
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

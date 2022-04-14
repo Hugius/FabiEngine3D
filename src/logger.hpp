@@ -1,18 +1,13 @@
 #pragma once
 
-#define NOMINMAX
-
 #include "log_message_type.hpp"
 #include "configuration.hpp"
 
-#include <conio.h>
-#include <windows.h>
 #include <iostream>
-#include <ctime>
+
 #include <string>
 #include <vector>
 #include <sstream>
-#include <type_traits>
 
 using std::endl;
 using std::vector;

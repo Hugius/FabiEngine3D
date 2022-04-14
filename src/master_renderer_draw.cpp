@@ -9,15 +9,15 @@ using std::dynamic_pointer_cast;
 using std::function;
 using std::map;
 
-void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> logo, const ivec2 & viewport)
+void MasterRenderer::renderLogo(shared_ptr<Quad2dEntity> entity, const ivec2 & size)
 {
-	glViewport(0, 0, viewport.x, viewport.y);
+	glViewport(0, 0, size.x, size.y);
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	_quad2dEntityColorRenderer->bind();
 
-	_quad2dEntityColorRenderer->render(logo);
+	_quad2dEntityColorRenderer->render(entity);
 
 	_quad2dEntityColorRenderer->unbind();
 

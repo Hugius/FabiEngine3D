@@ -1,8 +1,9 @@
 #include "script_editor.hpp"
+#include "tools.hpp"
 
 void ScriptEditor::_updateTextSelector()
 {
-	if(!_isWritingScript || _gui->getOverlay()->isFocused() || !_fe3d->misc_isCursorInsideDisplay())
+	if(!_isWritingScript || _gui->getOverlay()->isFocused() || !Tools::isCursorInsideDisplay())
 	{
 		_clearSelection();
 

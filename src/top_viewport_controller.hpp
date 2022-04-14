@@ -46,13 +46,13 @@ public:
 
 private:
 	void _updateProjectScreenManagement();
-	void _updateGameScreenManagement();
+	void _updateApplicationScreenManagement();
 	void _updateMiscScreenManagement();
 	void _updateMiscellaneous();
 	void _updateProjectCreating();
 	void _updateProjectLoading();
 	void _updateProjectDeleting();
-	void _updateEngineQuitting();
+	void _updateWindowClosing();
 	void _setProject(const string & projectId);
 
 	static inline const fvec3 FRAME_COLOR = fvec3(0.075f);

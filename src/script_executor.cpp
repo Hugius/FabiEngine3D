@@ -1,16 +1,15 @@
 #include "script_executor.hpp"
 #include "configuration.hpp"
+#include "tools.hpp"
 
 void ScriptExecutor::start()
 {
-	_fe3d->misc_centerCursor();
-
 	_scriptInterpreter->load();
 	_scriptInterpreter->executeInitializeScripts();
 	_isStarted = true;
 	_isRunning = true;
 	_mustSkipUpdate = true;
-	_wasCursorVisible = _fe3d->misc_isCursorVisible();
+	_wasCursorVisible = Tools::isCursorVisible();
 
 	_validateExecution();
 }
@@ -30,19 +29,19 @@ void ScriptExecutor::update(bool isDebugging)
 
 		if(!Configuration::getInst().isApplicationExported())
 		{
-			const auto isCursorInsideDisplay = _fe3d->misc_isCursorInsideDisplay();
+			const auto isCursorInsideDisplay = Tools::isCursorInsideDisplay();
 
 			_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), !isCursorInsideDisplay);
 
 			if(_wasCursorInsideDisplay && !isCursorInsideDisplay)
 			{
-				_wasCursorVisible = _fe3d->misc_isCursorVisible();
+				_wasCursorVisible = Tools::isCursorVisible();
 
-				_fe3d->misc_setCursorVisible(false);
+				Tools::setCursorVisible(false);
 			}
 			if(!_wasCursorInsideDisplay && isCursorInsideDisplay)
 			{
-				_fe3d->misc_setCursorVisible(_wasCursorVisible);
+				Tools::setCursorVisible(_wasCursorVisible);
 			}
 
 			_wasCursorInsideDisplay = isCursorInsideDisplay;
@@ -56,7 +55,6 @@ void ScriptExecutor::pause()
 {
 	if(_isStarted && _isRunning)
 	{
-		_wasVsyncEnabled = _fe3d->misc_isVsyncEnabled();
 		_wasFirstPersonEnabled = _fe3d->camera_isFirstPersonEnabled();
 		_wasThirdPersonEnabled = _fe3d->camera_isThirdPersonEnabled();
 
@@ -90,8 +88,7 @@ void ScriptExecutor::pause()
 			}
 		}
 
-		_fe3d->misc_setVsyncEnabled(true);
-		_fe3d->misc_setCursorVisible(false);
+		Tools::setCursorVisible(false);
 		_fe3d->camera_setFirstPersonEnabled(false);
 		_fe3d->camera_setThirdPersonEnabled(false);
 
@@ -133,9 +130,7 @@ void ScriptExecutor::resume()
 {
 	if(_isStarted && !_isRunning)
 	{
-		_fe3d->misc_centerCursor();
-		_fe3d->misc_setVsyncEnabled(_wasVsyncEnabled);
-		_fe3d->misc_setCursorVisible(_wasCursorVisible);
+		Tools::setCursorVisible(_wasCursorVisible);
 		_fe3d->camera_setFirstPersonEnabled(_wasFirstPersonEnabled);
 		_fe3d->camera_setThirdPersonEnabled(_wasThirdPersonEnabled);
 
@@ -202,7 +197,6 @@ void ScriptExecutor::stop()
 		_pausedClockIds.clear();
 		_isStarted = false;
 		_isRunning = false;
-		_wasVsyncEnabled = false;
 		_wasCursorVisible = false;
 		_wasCursorInsideDisplay = false;
 		_wasFirstPersonEnabled = false;
@@ -247,14 +241,13 @@ void ScriptExecutor::_validateExecution()
 		_pausedClockIds.clear();
 		_isStarted = false;
 		_isRunning = false;
-		_wasVsyncEnabled = false;
 		_wasCursorVisible = false;
 		_wasCursorInsideDisplay = false;
 		_wasFirstPersonEnabled = false;
 		_wasThirdPersonEnabled = false;
 		_mustSkipUpdate = false;
 	}
-	else if(_scriptInterpreter->gameMustStop())
+	else if(_scriptInterpreter->mustStopApplication())
 	{
 		this->stop();
 	}

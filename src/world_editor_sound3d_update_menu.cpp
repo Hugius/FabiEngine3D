@@ -1,4 +1,5 @@
 #include "world_editor.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -74,7 +75,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 				_currentTemplateSoundId = hoveredOptionId;
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, true);
 				_fe3d->sound3d_start(_currentTemplateSoundId, -1);
-				_fe3d->misc_centerCursor();
+				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{

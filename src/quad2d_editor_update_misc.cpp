@@ -4,7 +4,7 @@
 
 void Quad2dEditor::_updateMiscellaneous()
 {
-	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
+	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
 		if(!_currentQuadId.empty())
 		{

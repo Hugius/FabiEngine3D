@@ -13,7 +13,7 @@ public:
 
 	void inject(shared_ptr<RenderWindow> renderWindow);
 	void reset();
-	void update(const ivec2 & lastCursorPosition);
+	void update();
 	void updateMatrices();
 	void move(const fvec3 & speed);
 	void setPosition(const fvec3 & value);
@@ -37,7 +37,6 @@ public:
 	void followFrontXZ(float speed);
 	void setFirstPersonEnabled(bool value);
 	void setThirdPersonEnabled(bool value);
-	void notifyCursorCenter();
 	void invertUp();
 
 	const mat44 & getView() const;
@@ -119,6 +118,5 @@ private:
 	bool _isThirdPersonEnabled = false;
 	bool _isFirstPersonEnabled = false;
 	bool _mustCenterCursor = false;
-	bool _isCursorBeingCentered = false;
 	bool _isUpInverted = false;
 };

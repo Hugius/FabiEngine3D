@@ -31,7 +31,7 @@ void ModelEditor::_updateCamera()
 		_fe3d->graphics_setShadowSize(distance * 2.0f);
 	}
 
-	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
+	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
 		if(_fe3d->input_isMousePressed(ButtonType::BUTTON_RIGHT))
 		{
@@ -47,7 +47,7 @@ void ModelEditor::_updateCamera()
 
 void ModelEditor::_updateMiscellaneous()
 {
-	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
+	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
 		if(_fe3d->input_isKeyboardPressed(KeyType::KEY_R))
 		{

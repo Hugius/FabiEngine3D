@@ -3,7 +3,6 @@
 #include "mathematics.hpp"
 
 #include <string>
-#include <utility>
 
 using std::string;
 using std::pair;
@@ -12,6 +11,9 @@ class Tools final
 {
 public:
 	Tools() = delete;
+
+	static void setCursorPosition(const ivec2 & value);
+	static void setCursorVisible(bool value);
 
 	static const vector<string> getFileNamesFromDirectory(const string & path);
 	static const vector<string> getDirectoryNamesFromDirectory(const string & path);
@@ -34,6 +36,8 @@ public:
 	static const fvec2 getMaxViewportPosition();
 
 	static const ivec2 convertFromNdc(const fvec2 & position);
+	static const ivec2 getCursorPosition();
+	static const ivec2 getMonitorSize();
 
 	static const float getWindowAspectRatio();
 
@@ -41,6 +45,9 @@ public:
 
 	static const int parseInteger(const string & valueString);
 
+	static const bool isCursorInsideDisplay();
+	static const bool isCursorInsideWindow();
+	static const bool isCursorVisible();
 	static const bool isDirectoryExisting(const string & path);
 	static const bool isFileExisting(const string & path);
 	static const bool createDirectory(const string & path);

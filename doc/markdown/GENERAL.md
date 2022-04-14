@@ -39,7 +39,6 @@
 
 ### 1.6 Scripting
 
-- Gameplay preview
 - Custom scripting language
 - Engine API
 - Math API

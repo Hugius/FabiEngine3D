@@ -1,42 +1,35 @@
 #pragma once
 
 #include "mathematics.hpp"
-#include "library_loader.hpp"
 
-#include <SDL.h>
 #include <string>
+#include <windows.h>
 
 using std::string;
 
 class RenderWindow final
 {
 public:
-	RenderWindow(SDL_Window * windowPointer);
-	~RenderWindow();
+	RenderWindow();
 
-	void setTitle(const string & title);
-	void setSize(const ivec2 & size);
-	void center();
-	void setOpacity(float value);
-	void enableColorKeying(const fvec3 & color);
-	void disableColorKeying(const fvec3 & color);
-	void showBorder();
-	void hideBorder();
-	void enableFullscreen();
-	void disableFullscreen();
-	void setVsyncEnabled(bool value);
-	void swapBackBuffer();
-	void showWindow();
-	void hideWindow();
-	void showCursor();
-	void hideCursor();
-	void setCursorPosition(const ivec2 & pos);
+	void update();
+	void setPosition(const ivec2 & value);
+	void setSize(const ivec2 & value);
+	void setVisible(bool value);
+	void setColorKeyingEnabled(bool value);
+	void setKeyingColor(const fvec3 & value);
+	void setTitle(const string & value);
+	void swapBuffer();
 
-	const ivec2 getCursorPosition() const;
+	const string getTitle() const;
 
-	const bool isCursorVisible() const;
-	const bool isVsyncEnabled() const;
+	const ivec2 getPosition() const;
+	const ivec2 getSize() const;
+
+	const bool isExisting() const;
 
 private:
-	SDL_Window * _windowPointer = nullptr;
+	static inline constexpr unsigned int MAX_TITLE_LENGTH = 100;
+
+	HWND _windowHandle = nullptr;
 };

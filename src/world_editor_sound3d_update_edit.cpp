@@ -1,4 +1,5 @@
 #include "world_editor.hpp"
+#include "tools.hpp"
 
 void WorldEditor::_updateSoundEditing()
 {
@@ -20,7 +21,7 @@ void WorldEditor::_updateSoundEditing()
 		{
 			const auto isHovered = (hoveredAabbId == ("@@speaker_" + soundId));
 
-			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
+			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 			{
 				_selectSound(soundId);
 
@@ -47,7 +48,7 @@ void WorldEditor::_updateSoundEditing()
 
 		if(!_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 		{
-			if(_fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
+			if(Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeSoundId.empty())
 				{

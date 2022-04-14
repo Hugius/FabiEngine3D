@@ -1,5 +1,7 @@
 #include "logger.hpp"
 
+#include <windows.h>
+
 void Logger::setCustomMessageQueue(const vector<string> & customMessages)
 {
 	_messageQueue = customMessages;

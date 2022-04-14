@@ -1,24 +1,18 @@
 #include "engine_core.hpp"
 #include "engine_controller.hpp"
+#include "tools.hpp"
 
 void EngineCore::_update()
 {
-	static ivec2 lastCursorPosition = _renderWindow->getCursorPosition();
-
-	_timer->startClock("coreUpdate");
-	//if(_inputHandler->isKeyDown(InputType::WINDOW_X_BUTTON))
-	if(false)
-	{
-		stop();
-		return;
-	}
+	_timer->startClock("mainUpdate");
+	_inputHandler->update();
 	_engineController->update();
-	_timer->stopClock("coreUpdate");
+	_timer->stopClock("mainUpdate");
 
 	_timer->startClock("physicsUpdate");
-	_camera->update(lastCursorPosition);
+	_camera->update();
 	_cameraCollisionResponder->update();
-	_raycastCalculator->update(_renderWindow->getCursorPosition());
+	_raycastCalculator->update(Tools::getCursorPosition());
 	_raycastIntersector->update();
 	_camera->updateMatrices();
 	_timer->stopClock("physicsUpdate");
@@ -41,6 +35,11 @@ void EngineCore::_update()
 	_timer->stopClock("2dEntityUpdate");
 
 	_timer->startClock("renderUpdate");
+	_renderWindow->update();
+	if(!_renderWindow->isExisting())
+	{
+		stop();
+	}
 	_masterRenderer->update();
 	_timer->stopClock("renderUpdate");
 
@@ -59,26 +58,7 @@ void EngineCore::_update()
 	_networkingClient->update();
 	_timer->stopClock("networkUpdate");
 
-	_timer->startClock("miscUpdate");
-	if(!Configuration::getInst().isApplicationExported())
-	{
-		static float opacity = 0.0f;
-
-		if(opacity < 1.0f)
-		{
-			_renderWindow->setOpacity(opacity);
-			opacity += 0.01f;
-		}
-		if(opacity > 1.0f)
-		{
-			opacity = 1.0f;
-			_renderWindow->setOpacity(opacity);
-		}
-	}
-	lastCursorPosition = _renderWindow->getCursorPosition();
-	_timer->stopClock("miscUpdate");
-
-	_updateDeltaTimes.at("coreUpdate") = _timer->getClockDeltaTime("coreUpdate");
+	_updateDeltaTimes.at("mainUpdate") = _timer->getClockDeltaTime("mainUpdate");
 	_updateDeltaTimes.at("physicsUpdate") = _timer->getClockDeltaTime("physicsUpdate");
 	_updateDeltaTimes.at("3dEntityUpdate") = _timer->getClockDeltaTime("3dEntityUpdate");
 	_updateDeltaTimes.at("2dEntityUpdate") = _timer->getClockDeltaTime("2dEntityUpdate");
@@ -86,7 +66,6 @@ void EngineCore::_update()
 	_updateDeltaTimes.at("animationUpdate") = _timer->getClockDeltaTime("animationUpdate");
 	_updateDeltaTimes.at("soundUpdate") = _timer->getClockDeltaTime("soundUpdate");
 	_updateDeltaTimes.at("networkUpdate") = _timer->getClockDeltaTime("networkUpdate");
-	_updateDeltaTimes.at("miscUpdate") = _timer->getClockDeltaTime("miscUpdate");
 }
 
 void EngineCore::_render()

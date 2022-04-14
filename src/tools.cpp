@@ -5,8 +5,6 @@
 #include "configuration.hpp"
 
 #include <filesystem>
-#include <windows.h>
-#include <direct.h>
 #include <shlobj_core.h>
 
 using std::max;
@@ -27,6 +25,53 @@ using std::chrono::system_clock;
 using std::filesystem::directory_iterator;
 using std::filesystem::copy_options;
 using std::error_code;
+
+const bool Tools::isCursorInsideDisplay()
+{
+	const auto cursorPosition = getCursorPosition();
+	const auto displayPosition = Configuration::getInst().getDisplayPosition();
+	const auto displaySize = Configuration::getInst().getDisplaySize();
+
+	if((cursorPosition.x > displayPosition.x) && (cursorPosition.x < (displayPosition.x + displaySize.x)))
+	{
+		if((cursorPosition.y > displayPosition.y) && (cursorPosition.y < (displayPosition.y + displaySize.y)))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+const bool Tools::isCursorInsideWindow()
+{
+	const auto cursorPosition = getCursorPosition();
+	const auto windowSize = Configuration::getInst().getWindowSize();
+
+	if((cursorPosition.x > 1) && (cursorPosition.x < (windowSize.x - 1)))
+	{
+		if((cursorPosition.y > 1) && (cursorPosition.y < (windowSize.y - 1)))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void Tools::setCursorPosition(const ivec2 & value)
+{
+	POINT point = {};
+	point.x = value.x;
+	point.y = value.y;
+
+	SetCursorPos(point.x, (Configuration::getInst().getWindowSize().y - point.y));
+}
+
+void Tools::setCursorVisible(bool value)
+{
+	ShowCursor(value);
+}
 
 const vector<string> Tools::getFileNamesFromDirectory(const string & path)
 {
@@ -257,6 +302,19 @@ const vector<string> Tools::splitStringIntoMultiple(const string & mergedString,
 	return result;
 }
 
+const bool Tools::isCursorVisible()
+{
+	CURSORINFO ci = {};
+	ci.cbSize = sizeof(CURSORINFO);
+
+	if(!GetCursorInfo(&ci))
+	{
+		abort();
+	}
+
+	return (ci.flags & CURSOR_SHOWING);
+}
+
 const bool Tools::isDirectoryExisting(const string & path)
 {
 	return (exists(path) && is_directory(path));
@@ -366,8 +424,12 @@ const fvec2 Tools::convertPositionRelativeToDisplay(const fvec2 & position)
 		return position;
 	}
 
-	const auto sizeMultiplier = (fvec2(Configuration::getInst().getDisplaySize()) / fvec2(Configuration::getInst().getWindowSize()));
-	const auto positionMultiplier = (fvec2(Configuration::getInst().getDisplayPosition()) / fvec2(Configuration::getInst().getWindowSize()));
+	const auto windowSize = Configuration::getInst().getWindowSize();
+	const auto displaySize = Configuration::getInst().getDisplaySize();
+	const auto displayPosition = Configuration::getInst().getDisplayPosition();
+
+	const auto sizeMultiplier = (fvec2(displaySize) / fvec2(windowSize));
+	const auto positionMultiplier = (fvec2(displayPosition) / fvec2(windowSize));
 	const auto offset = (fvec2(1.0f) - fvec2(((positionMultiplier.x * 2.0f) + sizeMultiplier.x), ((positionMultiplier.y * 2.0f) + sizeMultiplier.y)));
 
 	fvec2 result = position;
@@ -384,10 +446,14 @@ const fvec2 Tools::convertPositionRelativeFromDisplay(const fvec2 & position)
 		return position;
 	}
 
-	const auto sizeMultiplier = (fvec2(Configuration::getInst().getDisplaySize()) / fvec2(Configuration::getInst().getWindowSize()));
-	const auto positionMultiplier = (fvec2(Configuration::getInst().getDisplayPosition()) / fvec2(Configuration::getInst().getWindowSize()));
-	const auto invertedSizeMultiplier = fvec2(Configuration::getInst().getWindowSize()) / fvec2(Configuration::getInst().getDisplaySize());
-	const auto invertedPositionMultiplier = (fvec2(Configuration::getInst().getWindowSize()) / fvec2(Configuration::getInst().getDisplayPosition()));
+	const auto windowSize = Configuration::getInst().getWindowSize();
+	const auto displaySize = Configuration::getInst().getDisplaySize();
+	const auto displayPosition = Configuration::getInst().getDisplayPosition();
+
+	const auto sizeMultiplier = (fvec2(displaySize) / fvec2(windowSize));
+	const auto positionMultiplier = (fvec2(displayPosition) / fvec2(windowSize));
+	const auto invertedSizeMultiplier = fvec2(windowSize) / fvec2(displaySize);
+	const auto invertedPositionMultiplier = (fvec2(windowSize) / fvec2(displayPosition));
 	const auto offset = (fvec2(1.0f) - fvec2(((positionMultiplier.x * 2.0f) + sizeMultiplier.x), ((positionMultiplier.y * 2.0f) + sizeMultiplier.y)));
 
 	fvec2 result = position;
@@ -429,8 +495,9 @@ const fvec2 Tools::convertSizeRelativeFromDisplay(const fvec2 & size)
 
 const fvec2 Tools::convertToNdc(const ivec2 & position)
 {
-	const auto x = (static_cast<float>(position.x) / static_cast<float>(Configuration::getInst().getWindowSize().x));
-	const auto y = (static_cast<float>(position.y) / static_cast<float>(Configuration::getInst().getWindowSize().y));
+	const auto windowSize = Configuration::getInst().getWindowSize();
+	const auto x = (static_cast<float>(position.x) / static_cast<float>(windowSize.x));
+	const auto y = (static_cast<float>(position.y) / static_cast<float>(windowSize.y));
 
 	auto ndc = fvec2(x, y);
 
@@ -451,8 +518,25 @@ const ivec2 Tools::convertFromNdc(const fvec2 & position)
 	ndc.x *= 0.5f;
 	ndc.y *= 0.5f;
 
-	const auto x = (ndc.x * static_cast<float>(Configuration::getInst().getWindowSize().x));
-	const auto y = (ndc.y * static_cast<float>(Configuration::getInst().getWindowSize().y));
+	const auto windowSize = Configuration::getInst().getWindowSize();
+	const auto x = (ndc.x * static_cast<float>(windowSize.x));
+	const auto y = (ndc.y * static_cast<float>(windowSize.y));
 
 	return ivec2(static_cast<int>(x), static_cast<int>(y));
+}
+
+const ivec2 Tools::getCursorPosition()
+{
+	POINT point = {};
+	GetCursorPos(&point);
+
+	return ivec2(point.x, (Configuration::getInst().getWindowSize().y - point.y));
+}
+
+const ivec2 Tools::getMonitorSize()
+{
+	RECT rectangle;
+	GetWindowRect(GetDesktopWindow(), &rectangle);
+
+	return ivec2(rectangle.right, rectangle.bottom);
 }

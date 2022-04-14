@@ -2,7 +2,6 @@
 
 #include "wave_buffer.hpp"
 
-#include <windows.h>
 #include <string>
 
 using std::string;

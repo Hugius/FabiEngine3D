@@ -1,8 +1,6 @@
 #include "gui_input_box.hpp"
 #include "tools.hpp"
 
-#include <windows.h>
-
 GuiInputBox::GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered)
 	:
 	_fe3d(fe3d),
@@ -670,7 +668,7 @@ void GuiInputBox::_updateHovering(bool isInteractable)
 
 	if(isVisible())
 	{
-		const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+		const auto cursorPosition = Tools::convertToNdc(Tools::getCursorPosition());
 		const auto boxPosition = getPosition();
 		const auto boxSize = getSize();
 

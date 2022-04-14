@@ -2,36 +2,41 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#include <SDL.h>
+#include <windows.h>
 
 using std::istringstream;
 
 Configuration::Configuration()
 {
+	if(!SetProcessDPIAware())
+	{
+		abort();
+	}
+
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto filePath = (rootPath + "configuration.fe3d");
-
-	SDL_DisplayMode DM;
-	SDL_GetDesktopDisplayMode(0, &DM);
-	_monitorSize.x = DM.w;
-	_monitorSize.y = DM.h;
+	const auto monitorSize = Tools::getMonitorSize();
 
 	auto file = ifstream(filePath);
 
 	if(file)
 	{
-		_processOption(file, _windowSizeMultiplier, "window_size");
-		_processOption(file, _isWindowFullscreen, "window_fullscreen");
-		_processOption(file, _isWindowBorderless, "window_borderless");
+		_processOption(file, _windowSizeMultiplier.x, "window_width");
+		_processOption(file, _windowSizeMultiplier.y, "window_height");
 		_processOption(file, _windowTitle, "window_title");
 
-		if((_windowSizeMultiplier < 0.0f) || (_windowSizeMultiplier > 1.0f))
+		if((_windowSizeMultiplier.x < 0.0f) || (_windowSizeMultiplier.x > 1.0f))
 		{
-			Logger::throwError("Configuration file @ option `window_size`: must be between 0.0 and 1.0");
+			Logger::throwError("Configuration file @ option `window_width`: must be between 0.0 and 1.0");
 		}
 
-		_windowSize.x = static_cast<int>(static_cast<float>(_monitorSize.x) * _windowSizeMultiplier);
-		_windowSize.y = static_cast<int>(static_cast<float>(_monitorSize.y) * _windowSizeMultiplier);
+		if((_windowSizeMultiplier.y < 0.0f) || (_windowSizeMultiplier.y > 1.0f))
+		{
+			Logger::throwError("Configuration file @ option `window_height`: must be between 0.0 and 1.0");
+		}
+
+		_windowSize.x = static_cast<int>(static_cast<float>(monitorSize.x) * _windowSizeMultiplier.x);
+		_windowSize.y = static_cast<int>(static_cast<float>(monitorSize.y) * _windowSizeMultiplier.y);
 		_displaySize.x = static_cast<int>(static_cast<float>(_windowSize.x));
 		_displaySize.y = static_cast<int>(static_cast<float>(_windowSize.y));
 		_displayPosition.x = 0;
@@ -41,11 +46,9 @@ Configuration::Configuration()
 	}
 	else
 	{
-		_windowSizeMultiplier = DEFAULT_WINDOW_SIZE_MULTIPLIER;
-		_isWindowFullscreen = false;
-		_isWindowBorderless = false;
-		_windowSize.x = static_cast<int>(static_cast<float>(_monitorSize.x) * _windowSizeMultiplier);
-		_windowSize.y = static_cast<int>(static_cast<float>(_monitorSize.y) * _windowSizeMultiplier);
+		_windowSizeMultiplier = fvec2(1.0f);
+		_windowSize.x = static_cast<int>(static_cast<float>(monitorSize.x) * _windowSizeMultiplier.x);
+		_windowSize.y = static_cast<int>(static_cast<float>(monitorSize.y) * _windowSizeMultiplier.y);
 		_displaySize.x = static_cast<int>(static_cast<float>(_windowSize.x) * DISPLAY_SIZE_MULTIPLIER.x);
 		_displaySize.y = static_cast<int>(static_cast<float>(_windowSize.y) * DISPLAY_SIZE_MULTIPLIER.y);
 		_displayPosition.x = static_cast<int>(static_cast<float>(_windowSize.x) * DISPLAY_POSITION_MULTIPLIER.x);
@@ -164,16 +167,6 @@ void Configuration::_processOption(ifstream & file, bool & option, const string 
 	}
 }
 
-const string & Configuration::getWindowTitle() const
-{
-	return _windowTitle;
-}
-
-const ivec2 & Configuration::getMonitorSize() const
-{
-	return _monitorSize;
-}
-
 const ivec2 & Configuration::getWindowSize() const
 {
 	return _windowSize;
@@ -184,7 +177,12 @@ const ivec2 & Configuration::getDisplayPosition() const
 	return _displayPosition;
 }
 
-const float Configuration::getWindowSizeMultiplier() const
+const string & Configuration::getWindowTitle() const
+{
+	return _windowTitle;
+}
+
+const fvec2 Configuration::getWindowSizeMultiplier() const
 {
 	return _windowSizeMultiplier;
 }
@@ -192,16 +190,6 @@ const float Configuration::getWindowSizeMultiplier() const
 const ivec2 & Configuration::getDisplaySize() const
 {
 	return _displaySize;
-}
-
-const bool Configuration::isWindowFullscreen() const
-{
-	return _isWindowFullscreen;
-}
-
-const bool Configuration::isWindowBorderless() const
-{
-	return _isWindowBorderless;
 }
 
 const bool Configuration::isApplicationExported() const

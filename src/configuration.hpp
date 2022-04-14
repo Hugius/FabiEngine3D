@@ -3,7 +3,6 @@
 #include "mathematics.hpp"
 
 #include <fstream>
-#include <sstream>
 #include <string>
 
 using std::string;
@@ -18,15 +17,12 @@ public:
 
 	const string & getWindowTitle() const;
 
-	const ivec2 & getMonitorSize() const;
+	const fvec2 getWindowSizeMultiplier() const;
+
 	const ivec2 & getWindowSize()	const;
 	const ivec2 & getDisplaySize() const;
 	const ivec2 & getDisplayPosition() const;
 
-	const float getWindowSizeMultiplier() const;
-
-	const bool isWindowFullscreen()	const;
-	const bool isWindowBorderless()	const;
 	const bool isApplicationExported() const;
 
 	static Configuration & getInst()
@@ -51,14 +47,11 @@ private:
 
 	string _windowTitle = "";
 
-	ivec2 _monitorSize = ivec2(0);
+	fvec2 _windowSizeMultiplier = fvec2(0.0f);
+
 	ivec2 _windowSize = ivec2(0);
 	ivec2 _displaySize = ivec2(0);
 	ivec2 _displayPosition = ivec2(0);
 
-	float _windowSizeMultiplier = 0.0f;
-
-	bool _isWindowFullscreen = false;
-	bool _isWindowBorderless = false;
 	bool _isApplicationExported = false;
 };

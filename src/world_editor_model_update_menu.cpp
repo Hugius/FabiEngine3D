@@ -1,4 +1,5 @@
 #include "world_editor.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -67,7 +68,7 @@ void WorldEditor::_updateModelPlacingMenu()
 
 				_currentTemplateModelId = hoveredOptionId;
 				_fe3d->model_setVisible(_currentTemplateModelId, true);
-				_fe3d->misc_centerCursor();
+				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{

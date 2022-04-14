@@ -1,6 +1,7 @@
 #include "script_interpreter.hpp"
 #include "configuration.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <sstream>
 
@@ -170,11 +171,7 @@ void ScriptInterpreter::load()
 
 	_fe3d->camera_reset();
 
-	if(_fe3d->misc_isVsyncEnabled())
-	{
-		_fe3d->misc_setVsyncEnabled(false);
-	}
-	_fe3d->misc_setCursorVisible(true);
+	Tools::setCursorVisible(true);
 
 	_checkEngineWarnings(lastLoggerMessageCount);
 
@@ -351,17 +348,12 @@ void ScriptInterpreter::unload()
 		_fe3d->client_stop();
 	}
 
-	if(!_fe3d->misc_isVsyncEnabled())
-	{
-		_fe3d->misc_setVsyncEnabled(true);
-	}
-
 	for(const auto & clockId : _fe3d->clock_getIds())
 	{
 		_fe3d->clock_delete(clockId);
 	}
 
-	_fe3d->misc_setCursorVisible(false);
+	Tools::setCursorVisible(false);
 
 	_debuggingTimes.clear();
 	_localVariables.clear();

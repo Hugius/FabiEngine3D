@@ -1,4 +1,5 @@
 #include "world_editor.hpp"
+#include "tools.hpp"
 
 void WorldEditor::_updateQuad3dEditing()
 {
@@ -20,7 +21,7 @@ void WorldEditor::_updateQuad3dEditing()
 		{
 			const auto isHovered = (hoveredAabbId == quadId);
 
-			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
+			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 			{
 				_selectQuad(quadId);
 
@@ -45,7 +46,7 @@ void WorldEditor::_updateQuad3dEditing()
 
 		if(!_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 		{
-			if(_fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
+			if(Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeQuadId.empty())
 				{

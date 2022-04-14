@@ -24,7 +24,7 @@ void TopViewportController::initialize()
 	projectWindow->getScreen("main")->createButton("createProject", fvec2(positions[0], 0.0f), LEFT_TEXT_SIZE("CREATE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "CREATE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	projectWindow->getScreen("main")->createButton("loadProject", fvec2(positions[1], 0.0f), LEFT_TEXT_SIZE("LOAD"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "LOAD", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	projectWindow->getScreen("main")->createButton("deleteProject", fvec2(positions[2], 0.0f), LEFT_TEXT_SIZE("DELETE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "DELETE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	projectWindow->getScreen("main")->createButton("quitEngine", fvec2(positions[3], 0.0f), LEFT_TEXT_SIZE("QUIT"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "QUIT", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	projectWindow->getScreen("main")->createButton("closeWindow", fvec2(positions[3], 0.0f), LEFT_TEXT_SIZE("CLOSE"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "CLOSE", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	projectWindow->setActiveScreen("main");
 
 	positions = Mathematics::calculateDistributedPositions(5, 0.2f, true);
@@ -47,7 +47,7 @@ void TopViewportController::initialize()
 void TopViewportController::update()
 {
 	_updateProjectScreenManagement();
-	_updateGameScreenManagement();
+	_updateApplicationScreenManagement();
 	_updateMiscScreenManagement();
 	_updateMiscellaneous();
 }

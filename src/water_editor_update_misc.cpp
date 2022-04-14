@@ -1,5 +1,6 @@
 #include "water_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void WaterEditor::_updateCamera()
 {
@@ -13,7 +14,7 @@ void WaterEditor::_updateCamera()
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 	}
 
-	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
+	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
 		if(_fe3d->input_isMousePressed(ButtonType::BUTTON_RIGHT))
 		{
@@ -29,7 +30,7 @@ void WaterEditor::_updateCamera()
 
 void WaterEditor::_updateMiscellaneous()
 {
-	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
+	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
 		if(_fe3d->input_isKeyboardPressed(KeyType::KEY_R))
 		{

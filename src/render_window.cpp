@@ -1,137 +1,250 @@
 #include "render_window.hpp"
 #include "configuration.hpp"
+#include "logger.hpp"
 
-#include <SDL_syswm.h>
+#include <glew.h>
 
-RenderWindow::RenderWindow(SDL_Window * windowPointer)
+HDC windowContext = nullptr;
+HGLRC openglContext = nullptr;
+
+LRESULT CALLBACK processWindowMessage(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	_windowPointer = windowPointer;
+	switch(message)
+	{
+		case WM_DESTROY:
+		{
+			ReleaseDC(windowHandle, windowContext);
 
-	hideBorder();
-	setVsyncEnabled(false);
+			wglDeleteContext(openglContext);
+
+			PostQuitMessage(0);
+
+			break;
+		}
+		case WM_CREATE:
+		{
+			PIXELFORMATDESCRIPTOR pixelFormatDescriptor = {};
+
+			pixelFormatDescriptor.nSize = sizeof(PIXELFORMATDESCRIPTOR);
+			pixelFormatDescriptor.nVersion = 1;
+			pixelFormatDescriptor.dwFlags = (PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER);
+			pixelFormatDescriptor.iPixelType = PFD_TYPE_RGBA;
+			pixelFormatDescriptor.cColorBits = 32;
+			pixelFormatDescriptor.cRedBits = 0;
+			pixelFormatDescriptor.cRedShift = 0;
+			pixelFormatDescriptor.cGreenBits = 0;
+			pixelFormatDescriptor.cGreenShift = 0;
+			pixelFormatDescriptor.cBlueBits = 0;
+			pixelFormatDescriptor.cBlueShift = 0;
+			pixelFormatDescriptor.cAlphaBits = 0;
+			pixelFormatDescriptor.cAlphaShift = 0;
+			pixelFormatDescriptor.cAccumBits = 0;
+			pixelFormatDescriptor.cAccumRedBits = 0;
+			pixelFormatDescriptor.cAccumGreenBits = 0;
+			pixelFormatDescriptor.cAccumBlueBits = 0;
+			pixelFormatDescriptor.cAccumAlphaBits = 0;
+			pixelFormatDescriptor.cDepthBits = 24;
+			pixelFormatDescriptor.cStencilBits = 8;
+			pixelFormatDescriptor.cAuxBuffers = 0;
+			pixelFormatDescriptor.iLayerType = PFD_MAIN_PLANE;
+			pixelFormatDescriptor.bReserved = 0;
+			pixelFormatDescriptor.dwLayerMask = 0;
+			pixelFormatDescriptor.dwVisibleMask = 0;
+			pixelFormatDescriptor.dwDamageMask = 0;
+
+			windowContext = GetDC(windowHandle);
+
+			const auto pixelFormat = ChoosePixelFormat(windowContext, &pixelFormatDescriptor);
+
+			if(pixelFormat == 0)
+			{
+				abort();
+			}
+
+			SetPixelFormat(windowContext, pixelFormat, &pixelFormatDescriptor);
+
+			openglContext = wglCreateContext(windowContext);
+
+			wglMakeCurrent(windowContext, openglContext);
+
+			break;
+		}
+		default:
+		{
+			return DefWindowProc(windowHandle, message, wParam, lParam);
+		}
+	}
+
+	return 0;
 }
 
-RenderWindow::~RenderWindow()
+RenderWindow::RenderWindow()
 {
-	SDL_DestroyWindow(_windowPointer);
+	WNDCLASS windowClass = {};
+	windowClass.lpfnWndProc = processWindowMessage;
+	windowClass.hInstance = GetModuleHandle(NULL);
+	windowClass.lpszClassName = "FabiEngine3D";
+	windowClass.style = CS_OWNDC;
+
+	if(!RegisterClass(&windowClass))
+	{
+		abort();
+	}
+
+	_windowHandle = CreateWindow(windowClass.lpszClassName, "FabiEngine3D", WS_POPUP, 0, 0, 0, 0, 0, 0, windowClass.hInstance, 0);
+
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	auto glewStatus = glewInit();
+
+	if(glewStatus == GLEW_OK)
+	{
+		Logger::throwInfo("Initialized OpenGL");
+	}
+	else
+	{
+		Logger::throwError("GLEW could not be initialized: ", reinterpret_cast<const char *>(glewGetErrorString(glewStatus)));
+	}
 }
 
-void RenderWindow::setTitle(const string & title)
+void RenderWindow::update()
 {
-	SDL_SetWindowTitle(_windowPointer, title.c_str());
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	if(!IsWindow(_windowHandle))
+	{
+		_windowHandle = nullptr;
+		windowContext = nullptr;
+		openglContext = nullptr;
+
+		return;
+	}
+
+	MSG message = {};
+
+	while(PeekMessage(&message, _windowHandle, 0, 0, PM_REMOVE))
+	{
+		DispatchMessage(&message);
+	}
 }
 
-void RenderWindow::setSize(const ivec2 & size)
+void RenderWindow::setPosition(const ivec2 & value)
 {
-	SDL_SetWindowSize(_windowPointer, size.x, size.y);
-	center();
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	SetWindowPos(_windowHandle, nullptr, value.x, value.y, 0, 0, SWP_NOSIZE);
 }
 
-void RenderWindow::center()
+void RenderWindow::setSize(const ivec2 & value)
 {
-	SDL_SetWindowPosition(_windowPointer, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	SetWindowPos(_windowHandle, nullptr, 0, 0, value.x, value.y, SWP_NOMOVE);
 }
 
-void RenderWindow::setOpacity(float value)
+void RenderWindow::setColorKeyingEnabled(bool value)
 {
-	SDL_SetWindowOpacity(_windowPointer, value);
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	SetWindowLong(_windowHandle, GWL_EXSTYLE, (value ? WS_EX_LAYERED : CS_OWNDC));
 }
 
-void RenderWindow::enableColorKeying(const fvec3 & color)
+void RenderWindow::setKeyingColor(const fvec3 & value)
 {
-	SDL_SysWMinfo wmInfo = {};
-	SDL_VERSION(&wmInfo.version);
-	SDL_GetWindowWMInfo(_windowPointer, &wmInfo);
-	HWND hwnd = wmInfo.info.win.window;
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
 
-	SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
-	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255.0f), static_cast<int>(color.b * 255.0f)), 0, LWA_COLORKEY);
+	SetLayeredWindowAttributes(_windowHandle, RGB(static_cast<int>(value.r * 255.0f), static_cast<int>(value.g * 255.0f), static_cast<int>(value.b * 255.0f)), 0, LWA_COLORKEY);
 }
 
-void RenderWindow::disableColorKeying(const fvec3 & color)
+void RenderWindow::setTitle(const string & value)
 {
-	SDL_SysWMinfo wmInfo = {};
-	SDL_VERSION(&wmInfo.version);
-	SDL_GetWindowWMInfo(_windowPointer, &wmInfo);
-	HWND hwnd = wmInfo.info.win.window;
+	if(value.size() > MAX_TITLE_LENGTH)
+	{
+		abort();
+	}
 
-	SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
-	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255.0f), static_cast<int>(color.b * 255.0f)), 0, LWA_ALPHA);
+	SetWindowText(_windowHandle, value.c_str());
 }
 
-void RenderWindow::showBorder()
+void RenderWindow::swapBuffer()
 {
-	SDL_SetWindowBordered(_windowPointer, SDL_TRUE);
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	if(!wglSwapLayerBuffers(windowContext, WGL_SWAP_MAIN_PLANE))
+	{
+		abort();
+	}
 }
 
-void RenderWindow::hideBorder()
+const string RenderWindow::getTitle() const
 {
-	SDL_SetWindowBordered(_windowPointer, SDL_FALSE);
+	char title[MAX_TITLE_LENGTH] = {};
+
+	GetWindowText(_windowHandle, title, MAX_TITLE_LENGTH);
+
+	return string(title);
 }
 
-void RenderWindow::enableFullscreen()
+void RenderWindow::setVisible(bool value)
 {
-	SDL_SetWindowFullscreen(_windowPointer, SDL_TRUE);
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	ShowWindow(_windowHandle, (value ? SW_SHOW : SW_HIDE));
 }
 
-void RenderWindow::disableFullscreen()
+const ivec2 RenderWindow::getPosition() const
 {
-	SDL_SetWindowFullscreen(_windowPointer, SDL_FALSE);
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	RECT rectangle;
+
+	GetWindowRect(GetDesktopWindow(), &rectangle);
+
+	return ivec2(rectangle.left, rectangle.top);
 }
 
-void RenderWindow::setVsyncEnabled(bool value)
+const ivec2 RenderWindow::getSize() const
 {
-	SDL_GL_SetSwapInterval(static_cast<int>(value));
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	RECT rectangle;
+
+	GetWindowRect(GetDesktopWindow(), &rectangle);
+
+	return ivec2(rectangle.right, rectangle.bottom);
 }
 
-void RenderWindow::swapBackBuffer()
+const bool RenderWindow::isExisting() const
 {
-	SDL_GL_SwapWindow(_windowPointer);
-}
-
-void RenderWindow::showWindow()
-{
-	SDL_ShowWindow(_windowPointer);
-}
-
-void RenderWindow::hideWindow()
-{
-	SDL_HideWindow(_windowPointer);
-}
-
-void RenderWindow::showCursor()
-{
-	SDL_ShowCursor(SDL_ENABLE);
-}
-
-void RenderWindow::hideCursor()
-{
-	SDL_ShowCursor(SDL_DISABLE);
-}
-
-void RenderWindow::setCursorPosition(const ivec2 & pos)
-{
-	int x = pos.x;
-	int y = (Configuration::getInst().getWindowSize().y - pos.y);
-
-	SDL_WarpMouseInWindow(_windowPointer, x, y);
-}
-
-const ivec2 RenderWindow::getCursorPosition() const
-{
-	int x, y;
-
-	SDL_GetMouseState(&x, &y);
-
-	return ivec2(x, (Configuration::getInst().getWindowSize().y - y));
-}
-
-const bool RenderWindow::isCursorVisible() const
-{
-	return static_cast<bool>(SDL_ShowCursor(SDL_QUERY));
-}
-
-const bool RenderWindow::isVsyncEnabled() const
-{
-	return SDL_GL_GetSwapInterval();
+	return (_windowHandle != nullptr);
 }

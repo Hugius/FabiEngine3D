@@ -30,7 +30,6 @@ private:
 
 	bool _isStarted = false;
 	bool _isRunning = false;
-	bool _wasVsyncEnabled = false;
 	bool _wasCursorVisible = false;
 	bool _wasCursorInsideDisplay = false;
 	bool _wasFirstPersonEnabled = false;

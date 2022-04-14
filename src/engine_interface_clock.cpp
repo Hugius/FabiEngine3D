@@ -121,7 +121,7 @@ const bool EngineInterface::clock_isIdReserved(const string & id) const
 	return
 		(
 		id == "total" ||
-		id == "coreUpdate" ||
+		id == "mainUpdate" ||
 		id == "physicsUpdate" ||
 		id == "3dEntityUpdate" ||
 		id == "2dEntityUpdate" ||
@@ -129,7 +129,6 @@ const bool EngineInterface::clock_isIdReserved(const string & id) const
 		id == "animationUpdate" ||
 		id == "soundUpdate" ||
 		id == "networkUpdate" ||
-		id == "miscUpdate" ||
 		id == "depthPreRender" ||
 		id == "shadowPreRender" ||
 		id == "reflectionPreRender" ||

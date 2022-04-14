@@ -187,9 +187,9 @@ void TopViewportController::_updateProjectDeleting()
 	}
 }
 
-void TopViewportController::_updateEngineQuitting()
+void TopViewportController::_updateWindowClosing()
 {
-	if((_gui->getOverlay()->getAnswerFormId() == "quitEngine") && _gui->getOverlay()->isAnswerFormConfirmed())
+	if((_gui->getOverlay()->getAnswerFormId() == "closeWindow") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{

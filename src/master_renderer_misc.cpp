@@ -1,5 +1,7 @@
 #include "master_renderer.hpp"
 
+#include <intrin.h>
+
 using std::make_shared;
 
 void MasterRenderer::setBackgroundColor(const fvec3 & color)

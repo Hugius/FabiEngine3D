@@ -15,7 +15,7 @@ const bool ScriptInterpreter::hasThrownError() const
 	return _hasThrownError;
 }
 
-const bool ScriptInterpreter::gameMustStop() const
+const bool ScriptInterpreter::mustStopApplication() const
 {
 	return _mustStopApplication;
 }

@@ -977,12 +977,8 @@ public:
 	const bool clock_isPaused(const string & id) const;
 	const bool clock_isIdReserved(const string & id) const;
 
-	void misc_setVsyncEnabled(bool value);
-	void misc_setCursorVisible(bool value);
-	void misc_setCursorEntityId(const string & value);
-	void misc_centerCursor();
-	void misc_setCursorPosition(const ivec2 & value);
 	void misc_setWindowTitle(const string & value);
+	void misc_setCursorEntityId(const string & value);
 	void misc_cacheMesh(const string & filePath, bool isCrucial);
 	void misc_cacheImage(const string & filePath, bool isCrucial);
 	void misc_cacheAudio(const string & filePath, bool isCrucial);
@@ -998,19 +994,15 @@ public:
 
 	const unordered_map<string, float> & misc_getUpdateDeltaTimes() const;
 	const unordered_map<string, float> & misc_getRenderDeltaTimes() const;
+	const string misc_getWindowTitle() const;
 	const string misc_getCursorEntityId() const;
 	const string misc_getCpuName() const;
 	const string misc_getGpuName() const;
 	const string misc_getOpenglVersion() const;
-	const ivec2 misc_getCursorPosition() const;
 	const float misc_getTotalDeltaTime() const;
 	const unsigned int misc_getTriangleCount() const;
 	const unsigned int misc_getUpdateCountPerSecond() const;
 	const unsigned int misc_getPassedUpdateCount() const;
-	const bool misc_isCursorVisible() const;
-	const bool misc_isCursorInsideDisplay() const;
-	const bool misc_isCursorInsideWindow() const;
-	const bool misc_isVsyncEnabled() const;
 
 private:
 	shared_ptr<EngineCore> _core = nullptr;

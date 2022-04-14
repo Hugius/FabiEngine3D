@@ -1,4 +1,5 @@
 #include "world_editor.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -34,7 +35,7 @@ void WorldEditor::_updateReflectionMenu()
 			_isPlacingReflection = true;
 			_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, true);
 			_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, true);
-			_fe3d->misc_centerCursor();
+			Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 			if(_fe3d->terrain_getSelectedId().empty())
 			{

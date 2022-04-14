@@ -4,6 +4,7 @@
 #include "logger.hpp"
 
 #include <fstream>
+#include <shlobj.h>
 
 using std::ofstream;
 
@@ -38,16 +39,16 @@ void TopViewportController::_updateProjectScreenManagement()
 		{
 			_gui->getOverlay()->openAnswerForm("deleteProject", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
-		else if(topScreen->getButton("quitEngine")->isHovered())
+		else if(topScreen->getButton("closeWindow")->isHovered())
 		{
-			_gui->getOverlay()->openAnswerForm("quitEngine", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->openAnswerForm("closeWindow", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
 	}
 
 	_updateProjectCreating();
 	_updateProjectLoading();
 	_updateProjectDeleting();
-	_updateEngineQuitting();
+	_updateWindowClosing();
 
 	const auto isInMainMenu = (leftScreen->getId() == "main");
 	const auto isScriptStarted = _scriptExecutor->isStarted();
@@ -57,7 +58,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	topScreen->getButton("deleteProject")->setHoverable(!isScriptStarted && isInMainMenu && !_currentProjectId.empty());
 }
 
-void TopViewportController::_updateGameScreenManagement()
+void TopViewportController::_updateApplicationScreenManagement()
 {
 	auto topScreen = _gui->getTopViewport()->getWindow("executionWindow")->getActiveScreen();
 	auto leftScreen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
@@ -243,10 +244,8 @@ void TopViewportController::_updateMiscScreenManagement()
 					const auto filePath = (exportDirectoryPath + "configuration.fe3d");
 
 					auto file = ofstream(filePath);
-					file << "window_size       = 0.75" << endl;
-					file << "window_fullscreen = false" << endl;
-					file << "window_borderless = false" << endl;
-					file << "window_title      = MyGame";
+					file << "window_width  = 0.75" << endl;
+					file << "window_height = 0.75" << endl;
 					file.close();
 				}
 			}

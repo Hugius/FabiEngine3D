@@ -20,7 +20,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 				return true;
 			}
 
-			const auto result = _fe3d->misc_isCursorVisible();
+			const auto result = Tools::isCursorVisible();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 				return true;
 			}
 
-			const auto result = clamp(Tools::convertPositionRelativeToDisplay(Tools::convertToNdc(_fe3d->misc_getCursorPosition())).x, -1.0f, 1.0f);
+			const auto result = clamp(Tools::convertPositionRelativeToDisplay(Tools::convertToNdc(Tools::getCursorPosition())).x, -1.0f, 1.0f);
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -50,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 				return true;
 			}
 
-			const auto result = clamp(Tools::convertPositionRelativeToDisplay(Tools::convertToNdc(_fe3d->misc_getCursorPosition())).y, -1.0f, 1.0f);
+			const auto result = clamp(Tools::convertPositionRelativeToDisplay(Tools::convertToNdc(Tools::getCursorPosition())).y, -1.0f, 1.0f);
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 		}
@@ -83,21 +83,6 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 			const auto result = Configuration::getInst().getWindowSize().y;
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
-		}
-	}
-	else if(functionName == "fe3d:vsync_is_enabled")
-	{
-		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
-		{
-			if(_fe3d->server_isRunning())
-			{
-				_throwRuntimeError("cannot access `fe3d:vsync` functionality as a networking server");
-				return true;
-			}
-
-			const auto result = _fe3d->misc_isVsyncEnabled();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:time_is_passed")

@@ -95,7 +95,10 @@ public:
 
 	const float getTotalDeltaTime() const;
 
+	const bool isRunning() const;
+
 private:
+	void _initialize();
 	void _update();
 	void _render();
 
@@ -145,6 +148,5 @@ private:
 
 	float _totalDeltaTime = 0.0f;
 
-	bool _isPaused = false;
 	bool _isRunning = false;
 };

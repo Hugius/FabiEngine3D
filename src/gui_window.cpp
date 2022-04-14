@@ -51,7 +51,7 @@ void GuiWindow::_updateHovering(bool isInteractable)
 {
 	_isHovered = false;
 
-	const auto cursorPosition = Tools::convertToNdc(_fe3d->misc_getCursorPosition());
+	const auto cursorPosition = Tools::convertToNdc(Tools::getCursorPosition());
 	const auto windowPosition = getPosition();
 	const auto windowSize = getSize();
 

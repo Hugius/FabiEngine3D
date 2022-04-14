@@ -1,4 +1,5 @@
 #include "world_editor.hpp"
+#include "tools.hpp"
 
 void WorldEditor::_updateReflectionEditing()
 {
@@ -20,7 +21,7 @@ void WorldEditor::_updateReflectionEditing()
 		{
 			const auto isHovered = (hoveredAabbId == ("@@camera_" + reflectionId));
 
-			if(isHovered && _fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
+			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 			{
 				_selectReflection(reflectionId);
 
@@ -45,7 +46,7 @@ void WorldEditor::_updateReflectionEditing()
 
 		if(!_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
 		{
-			if(_fe3d->misc_isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
+			if(Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeReflectionId.empty())
 				{

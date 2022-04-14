@@ -1,7 +1,6 @@
 #include "input_handler.hpp"
 
-#include <windows.h>
-#include <SDL.h>
+#include <shlobj_core.h>
 
 void InputHandler::update()
 {
@@ -11,12 +10,6 @@ void InputHandler::update()
 	_toggledKeyboardKeys.clear();
 	_horizontalMouseWheel = 0;
 	_verticalMouseWheel = 0;
-
-	SDL_Event event;
-
-	while(SDL_PollEvent(&event))
-	{
-	}
 
 	for(const auto button : _buttons)
 	{

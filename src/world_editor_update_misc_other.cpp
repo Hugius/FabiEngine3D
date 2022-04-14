@@ -1,5 +1,6 @@
 #include "world_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void WorldEditor::_updateCamera()
 {
@@ -7,7 +8,7 @@ void WorldEditor::_updateCamera()
 	{
 		if(_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT) && !_gui->getOverlay()->isFocused())
 		{
-			if(_fe3d->misc_isCursorInsideDisplay() && !_fe3d->camera_isFirstPersonEnabled())
+			if(Tools::isCursorInsideDisplay() && !_fe3d->camera_isFirstPersonEnabled())
 			{
 				_fe3d->camera_setFirstPersonEnabled(true);
 			}
@@ -21,7 +22,7 @@ void WorldEditor::_updateCamera()
 		{
 			_fe3d->camera_setFirstPersonEnabled(false);
 
-			if(_fe3d->misc_isCursorInsideWindow())
+			if(Tools::isCursorInsideWindow())
 			{
 				_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), true);
 			}
@@ -66,7 +67,7 @@ void WorldEditor::_updateCamera()
 
 void WorldEditor::_updateMiscellaneous()
 {
-	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideDisplay())
+	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
 		if(_fe3d->input_isKeyboardPressed(KeyType::KEY_F))
 		{
@@ -225,7 +226,6 @@ void WorldEditor::_updateWorldChoosing()
 				{
 					if(loadWorldFromFile(_currentWorldId))
 					{
-						_fe3d->misc_setVsyncEnabled(false);
 						_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 					}
 				}

@@ -53,7 +53,7 @@ void WorldEditor::_updateText3dPlacing()
 				return;
 			}
 
-			if(!_fe3d->misc_isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
+			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
 				return;

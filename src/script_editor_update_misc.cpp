@@ -1,5 +1,6 @@
 #include "script_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -202,7 +203,7 @@ void ScriptEditor::_updateDisplay()
 
 void ScriptEditor::_updateCamera()
 {
-	if(!_isWritingScript || _gui->getOverlay()->isFocused() || !_fe3d->misc_isCursorInsideDisplay())
+	if(!_isWritingScript || _gui->getOverlay()->isFocused() || !Tools::isCursorInsideDisplay())
 	{
 		return;
 	}
@@ -240,7 +241,7 @@ void ScriptEditor::_updateCursor()
 		return;
 	}
 
-	if(_fe3d->misc_isCursorInsideDisplay())
+	if(Tools::isCursorInsideDisplay())
 	{
 		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
 	}

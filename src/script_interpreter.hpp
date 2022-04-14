@@ -46,7 +46,7 @@ public:
 	void unload();
 
 	const bool hasThrownError() const;
-	const bool gameMustStop() const;
+	const bool mustStopApplication() const;
 
 private:
 	void _executeScript(const string & scriptId, ScriptType scriptType);

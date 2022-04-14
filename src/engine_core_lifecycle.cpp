@@ -4,6 +4,7 @@
 EngineCore::EngineCore()
 {
 	_libraryLoader = make_shared<LibraryLoader>();
+	_renderWindow = make_shared<RenderWindow>();
 	_timer = make_shared<Timer>();
 	_inputHandler = make_shared<InputHandler>();
 	_meshLoader = make_shared<MeshLoader>();
@@ -25,7 +26,6 @@ EngineCore::EngineCore()
 	_animation2dManager = make_shared<Animation2dManager>();
 	_sound3dManager = make_shared<Sound3dManager>();
 	_sound2dManager = make_shared<Sound2dManager>();
-	_renderWindow = make_shared<RenderWindow>(_libraryLoader->getWindowPointer());
 	_vertexBufferCache = make_shared<VertexBufferCache>();
 	_textureBufferCache = make_shared<TextureBufferCache>();
 	_waveBufferCache = make_shared<WaveBufferCache>();
@@ -102,7 +102,7 @@ EngineCore::EngineCore()
 	_sound2dPlayer->inject(_sound2dManager);
 
 	_timer->createClock("total");
-	_timer->createClock("coreUpdate");
+	_timer->createClock("mainUpdate");
 	_timer->createClock("physicsUpdate");
 	_timer->createClock("3dEntityUpdate");
 	_timer->createClock("2dEntityUpdate");
@@ -110,7 +110,6 @@ EngineCore::EngineCore()
 	_timer->createClock("animationUpdate");
 	_timer->createClock("soundUpdate");
 	_timer->createClock("networkUpdate");
-	_timer->createClock("miscUpdate");
 	_timer->createClock("depthPreRender");
 	_timer->createClock("shadowPreRender");
 	_timer->createClock("reflectionPreRender");
@@ -125,7 +124,7 @@ EngineCore::EngineCore()
 	_timer->createClock("2dEntityRender");
 	_timer->createClock("bufferSwap");
 
-	_updateDeltaTimes.insert({"coreUpdate", 0.0f});
+	_updateDeltaTimes.insert({"mainUpdate", 0.0f});
 	_updateDeltaTimes.insert({"physicsUpdate", 0.0f});
 	_updateDeltaTimes.insert({"3dEntityUpdate", 0.0f});
 	_updateDeltaTimes.insert({"2dEntityUpdate", 0.0f});
@@ -133,7 +132,6 @@ EngineCore::EngineCore()
 	_updateDeltaTimes.insert({"animationUpdate", 0.0f});
 	_updateDeltaTimes.insert({"soundUpdate", 0.0f});
 	_updateDeltaTimes.insert({"networkUpdate", 0.0f});
-	_updateDeltaTimes.insert({"miscUpdate", 0.0f});
 
 	_renderDeltaTimes.insert({"depthPreRender", 0.0f});
 	_renderDeltaTimes.insert({"shadowPreRender", 0.0f});
@@ -159,75 +157,8 @@ void EngineCore::start()
 
 	_isRunning = true;
 
-	string logoDirectoryPath;
-	if(Configuration::getInst().isApplicationExported())
-	{
-		logoDirectoryPath = "logo\\";
-	}
-	else
-	{
-		logoDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
-	}
+	_initialize();
 
-	_imageLoader->cacheImage(logoDirectoryPath + "logo.tga", true);
-
-	shared_ptr<Quad2dEntity> logo = make_shared<Quad2dEntity>("logo");
-	logo->setVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader->loadImage(logoDirectoryPath + "logo.tga")));
-	logo->setCentered(true);
-
-	SDL_DisplayMode DM;
-	SDL_GetDesktopDisplayMode(0, &DM);
-	const auto width = static_cast<float>(DM.w);
-	const auto height = static_cast<float>(DM.h);
-	const auto logoResolution = ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
-
-	const auto keyingColor = fvec3(0.2f);
-	_masterRenderer->setBackgroundColor(fvec4(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f));
-	_renderWindow->enableColorKeying(keyingColor);
-	_renderWindow->setSize(logoResolution);
-	_renderWindow->showWindow();
-	_masterRenderer->renderLogo(logo, logoResolution);
-	_renderWindow->swapBackBuffer();
-
-	_engineController->initialize();
-
-	if(_isRunning)
-	{
-		_renderWindow->disableColorKeying(keyingColor);
-
-		_masterRenderer->setBackgroundColor(fvec4(0.0f, 0.0f, 0.0f, 1.0f));
-
-		if(!_networkingServer->isRunning())
-		{
-			_renderWindow->showWindow();
-			_renderWindow->setSize(Configuration::getInst().getWindowSize());
-
-			if(Configuration::getInst().isWindowFullscreen())
-			{
-				_renderWindow->enableFullscreen();
-			}
-			if(!Configuration::getInst().isWindowBorderless())
-			{
-				_renderWindow->showBorder();
-			}
-			if(Configuration::getInst().isApplicationExported())
-			{
-				_renderWindow->setTitle(Configuration::getInst().getWindowTitle());
-			}
-
-			if(Configuration::getInst().isApplicationExported())
-			{
-				_renderWindow->setOpacity(1.0f);
-			}
-			else
-			{
-				_renderWindow->setOpacity(0.0f);
-			}
-		}
-	}
-
-	const auto millisecondsPerUpdate = (1000.0f / static_cast<float>(_timer->getUpdateCountPerSecond()));
 	float renderLag = 0.0f;
 
 	while(_isRunning)
@@ -244,6 +175,8 @@ void EngineCore::start()
 		}
 		else
 		{
+			const auto millisecondsPerUpdate = (1000.0f / _timer->getUpdateCountPerSecond());
+
 			renderLag += _totalDeltaTime;
 
 			if(renderLag > (millisecondsPerUpdate * 100.0f))
@@ -254,8 +187,6 @@ void EngineCore::start()
 			while(renderLag >= millisecondsPerUpdate)
 			{
 				_timer->increasePassedUpdateCount();
-
-				_inputHandler->update();
 
 				_update();
 
@@ -268,7 +199,7 @@ void EngineCore::start()
 			_render();
 
 			_timer->startClock("bufferSwap");
-			_renderWindow->swapBackBuffer();
+			_renderWindow->swapBuffer();
 			_timer->stopClock("bufferSwap");
 
 			_renderDeltaTimes.at("bufferSwap") = _timer->getClockDeltaTime("bufferSwap");

@@ -20,11 +20,7 @@
 - You can cancel any form by pressing `ESC`.
 - You can enter a value form by pressing `ENTER`.
 
-## 3. Known issues
-
-- There is a very rare bug when using the first person camera; if the cursor does not center anymore and the camera keeps spinning very fast, click on the window border once. This bug does not occur in fullscreen mode.
-
-## 4. Miscellaneous
+## 3. Miscellaneous
 
 - All quad2D/text2D entities are rendered on top of each other.
 - Centering the cursor might take 1 frame (or more) in time, because it might not be centered instantly by Microsoft Windows.

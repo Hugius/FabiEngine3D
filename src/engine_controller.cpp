@@ -229,15 +229,13 @@ void EngineController::initialize()
 		_fe3d->quad2d_setSize("@@cursor", fvec2(CURSOR_SIZE.x, (CURSOR_SIZE.y * Tools::getWindowAspectRatio())));
 		_fe3d->quad2d_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.tga");
 		_fe3d->misc_setCursorEntityId("@@cursor");
-		_fe3d->misc_setCursorVisible(false);
+		Tools::setCursorVisible(false);
 
 		_guiManager->initialize();
 		_leftViewportController->initialize();
 		_rightViewportController->initialize();
 		_bottomViewportController->initialize();
 		_topViewportController->initialize();
-
-		_fe3d->misc_setVsyncEnabled(true);
 	}
 }
 
@@ -264,9 +262,9 @@ void EngineController::update()
 		}
 		lastScreen = activeScreen;
 
-		_fe3d->quad2d_setPosition(_fe3d->misc_getCursorEntityId(), Tools::convertToNdc(_fe3d->misc_getCursorPosition()));
+		_fe3d->quad2d_setPosition(_fe3d->misc_getCursorEntityId(), Tools::convertToNdc(Tools::getCursorPosition()));
 		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
-		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), _fe3d->misc_isCursorInsideWindow());
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), Tools::isCursorInsideWindow());
 
 		_guiManager->update();
 

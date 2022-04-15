@@ -16,7 +16,7 @@ const bool NetworkingServer::_sendTcpMessageToClient(SOCKET socket, const string
 	{
 		abort();
 	}
-	if(_networkingHelper->_isMessageReserved(content) && !isReserved)
+	if(NetworkingHelper::_isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
@@ -60,7 +60,7 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string & clientIp, co
 	{
 		abort();
 	}
-	if(_networkingHelper->_isMessageReserved(content) && !isReserved)
+	if(NetworkingHelper::_isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
@@ -69,7 +69,7 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string & clientIp, co
 		abort();
 	}
 
-	auto socketAddress = _networkingHelper->_composeSocketAddress(clientIp, clientPort);
+	auto socketAddress = NetworkingHelper::_composeSocketAddress(clientIp, clientPort);
 
 	auto sendStatusCode = sendto(_udpSocket, content.c_str(), static_cast<int>(content.size()), 0, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
 
@@ -255,8 +255,8 @@ tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOC
 
 	const auto bufferLength = static_cast<int>(NetworkingHelper::MAX_UDP_BUFFER_SIZE);
 	const auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
-	const auto ip = _networkingHelper->_extractAddressIp(sourceAddress);
-	const auto port = _networkingHelper->_extractAddressPort(sourceAddress);
+	const auto ip = NetworkingHelper::_extractAddressIp(sourceAddress);
+	const auto port = NetworkingHelper::_extractAddressPort(sourceAddress);
 
 	if(receiveResult > 0)
 	{

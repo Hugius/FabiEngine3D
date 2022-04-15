@@ -21,7 +21,6 @@ public:
 	NetworkingServer();
 	~NetworkingServer();
 
-	void inject(shared_ptr<NetworkingHelper> networkingHelper);
 	void start(unsigned int maxClientCount);
 	void update();
 	void sendTcpMessageToClient(const string & username, const string & content);
@@ -67,8 +66,6 @@ private:
 	vector<string> _oldClientUsernames = {};
 	vector<NetworkingClientMessage> _pendingMessages = {};
 	vector<SOCKET> _clientSockets = {};
-
-	shared_ptr<NetworkingHelper> _networkingHelper = nullptr;
 
 	future<SOCKET> _connectionThread;
 

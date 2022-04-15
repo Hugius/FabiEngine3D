@@ -41,8 +41,8 @@ void NetworkingServer::update()
 			abort();
 		}
 
-		const auto clientIp = _networkingHelper->_extractPeerIp(clientSocket);
-		const auto clientPort = _networkingHelper->_extractPeerPort(clientSocket);
+		const auto clientIp = NetworkingHelper::_extractPeerIp(clientSocket);
+		const auto clientPort = NetworkingHelper::_extractPeerPort(clientSocket);
 
 		_clientSockets.push_back(clientSocket);
 		_clientIps.push_back(clientIp);
@@ -166,7 +166,7 @@ void NetworkingServer::update()
 		}
 	}
 
-	while(_networkingHelper->_isUdpMessageReady(_udpSocket))
+	while(NetworkingHelper::_isUdpMessageReady(_udpSocket))
 	{
 		const auto messageResult = _receiveUdpMessage(_udpSocket);
 		const auto messageStatusCode = get<0>(messageResult);

@@ -99,9 +99,9 @@ const bool NetworkingClient::_sendUdpMessageToServer(const string & content, boo
 	return true;
 }
 
-const int NetworkingClient::_waitForServerConnection(SOCKET socket, const string & ip, const string & port) const
+const int NetworkingClient::_waitForServerConnection(SOCKET socket, const string & ip) const
 {
-	auto socketAddress = NetworkingHelper::_composeSocketAddress(ip, port);
+	auto socketAddress = NetworkingHelper::_composeSocketAddress(ip, NetworkingHelper::SERVER_PORT);
 
 	auto connectStatusCode = connect(socket, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
 

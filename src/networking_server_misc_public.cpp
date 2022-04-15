@@ -5,11 +5,6 @@ const bool NetworkingServer::isRunning() const
 	return _isRunning;
 }
 
-void NetworkingServer::inject(shared_ptr<NetworkingHelper> networkingHelper)
-{
-	_networkingHelper = networkingHelper;
-}
-
 const bool NetworkingServer::isClientConnected(const string & username) const
 {
 	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientUsernames.size()); index++)
@@ -105,7 +100,7 @@ void NetworkingServer::sendTcpMessageToClient(const string & username, const str
 	{
 		abort();
 	}
-	if(_networkingHelper->_isMessageReserved(content))
+	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
@@ -139,7 +134,7 @@ void NetworkingServer::sendUdpMessageToClient(const string & username, const str
 	{
 		abort();
 	}
-	if(_networkingHelper->_isMessageReserved(content))
+	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
@@ -173,7 +168,7 @@ void NetworkingServer::broadcastTcpMessageToClients(const string & content)
 	{
 		abort();
 	}
-	if(_networkingHelper->_isMessageReserved(content))
+	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
@@ -201,7 +196,7 @@ void NetworkingServer::broadcastUdpMessageToClients(const string & content)
 	{
 		abort();
 	}
-	if(_networkingHelper->_isMessageReserved(content))
+	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}

@@ -27,7 +27,7 @@
     <ClCompile Include="..\..\..\src\custom_world_builder_loading.cpp">
       <Filter>Builder\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_utilities.cpp">
+    <ClCompile Include="..\..\..\src\world_helper.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +35,7 @@
     <ClInclude Include="..\..\..\src\custom_world_builder.hpp">
       <Filter>Builder\Main</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\world_utilities.hpp">
+    <ClInclude Include="..\..\..\src\world_helper.hpp">
       <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>

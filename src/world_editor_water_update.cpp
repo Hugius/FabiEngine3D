@@ -42,7 +42,7 @@ void WorldEditor::_updateWaterMenu()
 		{
 			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-			_worldUtilities->copyTemplateWater(selectedOptionId, ("@" + selectedOptionId));
+			_worldHelper->copyTemplateWater(selectedOptionId, ("@" + selectedOptionId));
 
 			_fe3d->water_select(selectedOptionId);
 		}

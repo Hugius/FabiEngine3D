@@ -23,7 +23,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 
 			if(_validateFe3dWater(args[0]->getString(), true))
 			{
-				_worldUtilities->copyTemplateWater(args[0]->getString(), ("@" + args[1]->getString()));
+				_worldHelper->copyTemplateWater(args[0]->getString(), ("@" + args[1]->getString()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

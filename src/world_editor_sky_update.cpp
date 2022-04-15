@@ -34,7 +34,7 @@ void WorldEditor::_updateSkyMenu()
 		{
 			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-			_worldUtilities->copyTemplateSky(selectedOptionId, ("@" + selectedOptionId));
+			_worldHelper->copyTemplateSky(selectedOptionId, ("@" + selectedOptionId));
 
 			_fe3d->sky_select(selectedOptionId);
 		}

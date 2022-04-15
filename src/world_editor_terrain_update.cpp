@@ -34,7 +34,7 @@ void WorldEditor::_updateTerrainMenu()
 		{
 			const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-			_worldUtilities->copyTemplateTerrain(selectedOptionId, ("@" + selectedOptionId));
+			_worldHelper->copyTemplateTerrain(selectedOptionId, ("@" + selectedOptionId));
 
 			_fe3d->terrain_select(selectedOptionId);
 		}

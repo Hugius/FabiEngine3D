@@ -11,7 +11,7 @@
 #include "animation2d_editor.hpp"
 #include "sound_editor.hpp"
 #include "transformation_type.hpp"
-#include "world_utilities.hpp"
+#include "world_helper.hpp"
 
 class WorldEditor final : public BaseEditor
 {
@@ -27,7 +27,7 @@ public:
 	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
 	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
 	void inject(shared_ptr<SoundEditor> soundEditor);
-	void inject(shared_ptr<WorldUtilities> worldUtilities);
+	void inject(shared_ptr<WorldHelper> worldHelper);
 	void update();
 	void clearLoadedWorld();
 
@@ -234,7 +234,7 @@ private:
 	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
 	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
-	shared_ptr<WorldUtilities> _worldUtilities = nullptr;
+	shared_ptr<WorldHelper> _worldHelper = nullptr;
 
 	string _currentTemplateModelId = "";
 	string _currentTemplateQuadId = "";

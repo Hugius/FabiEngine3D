@@ -1,11 +1,11 @@
-#include "world_utilities.hpp"
+#include "world_helper.hpp"
 
-void WorldUtilities::inject(shared_ptr<EngineInterface> fe3d)
+void WorldHelper::inject(shared_ptr<EngineInterface> fe3d)
 {
 	_fe3d = fe3d;
 }
 
-void WorldUtilities::copyTemplateSky(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateSky(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sky_isExisting(templateId))
 	{
@@ -20,7 +20,7 @@ void WorldUtilities::copyTemplateSky(const string & newId, const string & templa
 	_fe3d->sky_setColor(newId, _fe3d->sky_getColor(templateId));
 }
 
-void WorldUtilities::copyTemplateTerrain(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateTerrain(const string & newId, const string & templateId)
 {
 	if(!_fe3d->terrain_isExisting(templateId))
 	{
@@ -85,7 +85,7 @@ void WorldUtilities::copyTemplateTerrain(const string & newId, const string & te
 	}
 }
 
-void WorldUtilities::copyTemplateWater(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateWater(const string & newId, const string & templateId)
 {
 	if(!_fe3d->water_isExisting(templateId))
 	{
@@ -125,7 +125,7 @@ void WorldUtilities::copyTemplateWater(const string & newId, const string & temp
 	}
 }
 
-void WorldUtilities::copyTemplateModel(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateModel(const string & newId, const string & templateId)
 {
 	if(!_fe3d->model_isExisting(templateId))
 	{
@@ -194,7 +194,7 @@ void WorldUtilities::copyTemplateModel(const string & newId, const string & temp
 	}
 }
 
-void WorldUtilities::copyTemplateQuad(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateQuad(const string & newId, const string & templateId)
 {
 	if(!_fe3d->quad3d_isExisting(templateId))
 	{
@@ -230,7 +230,7 @@ void WorldUtilities::copyTemplateQuad(const string & newId, const string & templ
 	_fe3d->aabb_setParentType(newId, AabbParentType::QUAD3D);
 }
 
-void WorldUtilities::copyTemplateText(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateText(const string & newId, const string & templateId)
 {
 	if(!_fe3d->text3d_isExisting(templateId))
 	{
@@ -255,7 +255,7 @@ void WorldUtilities::copyTemplateText(const string & newId, const string & templ
 	_fe3d->aabb_setParentType(newId, AabbParentType::TEXT3D);
 }
 
-void WorldUtilities::copyTemplateSound(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateSound(const string & newId, const string & templateId)
 {
 	if(!_fe3d->sound2d_isExisting(templateId))
 	{

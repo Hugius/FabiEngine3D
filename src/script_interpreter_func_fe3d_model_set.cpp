@@ -23,7 +23,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 
 			if(_validateFe3dModel(args[1]->getString(), true))
 			{
-				_worldUtilities->copyTemplateModel(args[0]->getString(), ("@" + args[1]->getString()));
+				_worldHelper->copyTemplateModel(args[0]->getString(), ("@" + args[1]->getString()));
 
 				_fe3d->model_setBasePosition(args[0]->getString(), fvec3(args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal()));
 

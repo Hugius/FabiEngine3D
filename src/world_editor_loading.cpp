@@ -101,7 +101,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldUtilities->copyTemplateSky(skyId, templateId);
+			_worldHelper->copyTemplateSky(skyId, templateId);
 
 			_fe3d->sky_select(skyId);
 		}
@@ -119,7 +119,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldUtilities->copyTemplateTerrain(terrainId, templateId);
+			_worldHelper->copyTemplateTerrain(terrainId, templateId);
 
 			_fe3d->terrain_select(terrainId);
 		}
@@ -139,7 +139,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_worldUtilities->copyTemplateWater(waterId, templateId);
+			_worldHelper->copyTemplateWater(waterId, templateId);
 
 			_fe3d->water_setHeight(waterId, height);
 
@@ -182,7 +182,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_loadedModelIds.insert({modelId, templateId});
 
-			_worldUtilities->copyTemplateModel(modelId, templateId);
+			_worldHelper->copyTemplateModel(modelId, templateId);
 
 			_fe3d->model_setBasePosition(modelId, position);
 			_fe3d->model_setBaseRotation(modelId, rotation);
@@ -227,7 +227,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_loadedQuadIds.insert({quadId, templateId});
 
-			_worldUtilities->copyTemplateQuad(quadId, templateId);
+			_worldHelper->copyTemplateQuad(quadId, templateId);
 
 			_fe3d->quad3d_setPosition(quadId, position);
 			_fe3d->quad3d_setRotation(quadId, rotation);
@@ -265,7 +265,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_loadedTextIds.insert({textId, templateId});
 
-			_worldUtilities->copyTemplateText(textId, templateId);
+			_worldHelper->copyTemplateText(textId, templateId);
 
 			_fe3d->text3d_setPosition(textId, position);
 			_fe3d->text3d_setRotation(textId, rotation);
@@ -311,7 +311,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_loadedSoundIds.insert({soundId, templateId});
 
-			_worldUtilities->copyTemplateSound(soundId, templateId);
+			_worldHelper->copyTemplateSound(soundId, templateId);
 
 			_fe3d->sound3d_setPosition(soundId, position);
 			_fe3d->sound3d_setMaxVolume(soundId, maxVolume);

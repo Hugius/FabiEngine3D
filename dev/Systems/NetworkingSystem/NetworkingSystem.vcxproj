@@ -23,6 +23,7 @@
     <ClInclude Include="..\..\..\src\networking_client_message.hpp" />
     <ClInclude Include="..\..\..\src\networking_server_message.hpp" />
     <ClInclude Include="..\..\..\src\networking_server.hpp" />
+    <ClInclude Include="..\..\..\src\networking_helper.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\networking_client_misc_public.cpp" />
@@ -35,6 +36,7 @@
     <ClCompile Include="..\..\..\src\networking_server_update.cpp" />
     <ClCompile Include="..\..\..\src\networking_server_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\networking_server_message.cpp" />
+    <ClCompile Include="..\..\..\src\networking_helper.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

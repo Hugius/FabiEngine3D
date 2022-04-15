@@ -20,11 +20,11 @@ const bool NetworkingClient::_sendTcpMessageToServer(const string & content, boo
 	{
 		abort();
 	}
-	if(isMessageReserved(content) && !isReserved)
+	if(NetworkingHelper::_isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
-	if(content.size() > MAX_MESSAGE_SIZE)
+	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
@@ -68,16 +68,16 @@ const bool NetworkingClient::_sendUdpMessageToServer(const string & content, boo
 	{
 		abort();
 	}
-	if(isMessageReserved(content) && !isReserved)
+	if(NetworkingHelper::_isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
-	if(content.size() > MAX_MESSAGE_SIZE)
+	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
 
-	auto socketAddress = _composeSocketAddress(_serverIp, SERVER_PORT);
+	auto socketAddress = NetworkingHelper::_composeSocketAddress(_serverIp, NetworkingHelper::SERVER_PORT);
 
 	string message = (_username + ';' + content);
 
@@ -99,9 +99,9 @@ const bool NetworkingClient::_sendUdpMessageToServer(const string & content, boo
 	return true;
 }
 
-const int NetworkingClient::_waitForServerConnection(SOCKET socket, const string & ip) const
+const int NetworkingClient::_waitForServerConnection(SOCKET socket, const string & ip, const string & port) const
 {
-	auto socketAddress = _composeSocketAddress(ip, SERVER_PORT);
+	auto socketAddress = NetworkingHelper::_composeSocketAddress(ip, port);
 
 	auto connectStatusCode = connect(socket, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
 
@@ -187,9 +187,9 @@ const bool NetworkingClient::_setupUdp()
 
 tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET socket) const
 {
-	char buffer[TCP_BUFFER_BYTES];
-	int bufferLength = static_cast<int>(TCP_BUFFER_BYTES);
-	auto receiveResult = recv(socket, buffer, bufferLength, 0);
+	char buffer[NetworkingHelper::MAX_TCP_BUFFER_SIZE] = {};
+	const auto bufferLength = static_cast<int>(NetworkingHelper::MAX_TCP_BUFFER_SIZE);
+	const auto receiveResult = recv(socket, buffer, bufferLength, 0);
 
 	if(receiveResult > 0)
 	{
@@ -203,15 +203,14 @@ tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET s
 
 tuple<int, int, string, string, string> NetworkingClient::_receiveUdpMessage(SOCKET socket) const
 {
-	char buffer[UDP_BUFFER_BYTES];
-	int bufferLength = static_cast<int>(UDP_BUFFER_BYTES);
-	sockaddr_in sourceAddress = sockaddr_in();
-	int sourceAddressLength = sizeof(sourceAddress);
+	sockaddr_in sourceAddress = {};
+	char buffer[NetworkingHelper::MAX_UDP_BUFFER_SIZE] = {};
+	auto sourceAddressLength = static_cast<int>(sizeof(sourceAddress));
 
-	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
-
-	auto ip = _extractAddressIp(&sourceAddress);
-	auto port = _extractAddressPort(&sourceAddress);
+	const auto bufferLength = static_cast<int>(NetworkingHelper::MAX_UDP_BUFFER_SIZE);
+	const auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
+	const auto ip = NetworkingHelper::_extractAddressIp(sourceAddress);
+	const auto port = NetworkingHelper::_extractAddressPort(sourceAddress);
 
 	if(receiveResult > 0)
 	{
@@ -221,69 +220,4 @@ tuple<int, int, string, string, string> NetworkingClient::_receiveUdpMessage(SOC
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), "", ip, port);
 	}
-}
-
-const string NetworkingClient::_extractSocketIp(SOCKET socket) const
-{
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getsockname(socket, (sockaddr *)&socketAddress, &socketAddressLength);
-
-	return _extractAddressIp(&socketAddress);
-}
-
-const string NetworkingClient::_extractSocketPort(SOCKET socket) const
-{
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getsockname(socket, (sockaddr *)&socketAddress, &socketAddressLength);
-
-	return _extractAddressPort(&socketAddress);
-}
-
-const sockaddr_in NetworkingClient::_composeSocketAddress(const string & ip, const string & port) const
-{
-	sockaddr_in socketAddress = sockaddr_in();
-	socketAddress.sin_family = AF_INET;
-	InetPton(AF_INET, ip.c_str(), &socketAddress.sin_addr.s_addr);
-	socketAddress.sin_port = htons(static_cast<u_short>(stoi(port)));
-
-	return socketAddress;
-}
-
-const string NetworkingClient::_extractAddressIp(sockaddr_in * address) const
-{
-	char ip[IPV4_ADDRESS_LENGTH];
-
-	inet_ntop(AF_INET, &(address->sin_addr), ip, sizeof(ip));
-
-	return (ip);
-}
-
-const string NetworkingClient::_extractAddressPort(sockaddr_in * address) const
-{
-	return to_string(ntohs(address->sin_port));
-}
-
-const bool NetworkingClient::_isMessageReadyUDP(SOCKET socket) const
-{
-	fd_set socketSet = fd_set();
-	timeval timeInterval = {0, 1};
-	FD_ZERO(&socketSet);
-	FD_SET(socket, &socketSet);
-
-	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
-}
-
-const bool NetworkingClient::isMessageReserved(const string & message) const
-{
-	return
-		(
-		(message.substr(0, string("REQUEST").size()) == "REQUEST") ||
-		(message.substr(0, string("ACCEPT").size()) == "ACCEPT") ||
-		(message.substr(0, string("PING").size()) == "PING") ||
-		(message.substr(0, string("SERVER_FULL").size()) == "SERVER_FULL") ||
-		(message.substr(0, string("ALREADY_CONNECTED").size()) == "ALREADY_CONNECTED") ||
-		(message.substr(0, string("DISCONNECTED").size()) == "DISCONNECTED")
-		);
 }

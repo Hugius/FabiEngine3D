@@ -4,50 +4,35 @@
 
 void ScriptExecutor::start()
 {
+	Tools::setCursorVisible(true);
+
 	_scriptInterpreter->load();
 	_scriptInterpreter->executeInitializeScripts();
+
+	_validateExecution();
+
 	_isStarted = true;
 	_isRunning = true;
 	_mustSkipUpdate = true;
-	_wasCursorVisible = Tools::isCursorVisible();
-
-	_validateExecution();
 }
 
 void ScriptExecutor::update(bool isDebugging)
 {
-	if(_isStarted && _isRunning)
+	if(_isStarted)
 	{
-		if(!_mustSkipUpdate || isDebugging)
+		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), !_isRunning);
+
+		if(_isRunning)
 		{
-			_scriptInterpreter->executeUpdateScripts(isDebugging);
-		}
-		else
-		{
+			if(!_mustSkipUpdate || isDebugging)
+			{
+				_scriptInterpreter->executeUpdateScripts(isDebugging);
+
+				_validateExecution();
+			}
+
 			_mustSkipUpdate = false;
 		}
-
-		if(!Configuration::getInst().isApplicationExported())
-		{
-			const auto isCursorInsideDisplay = Tools::isCursorInsideDisplay();
-
-			_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), !isCursorInsideDisplay);
-
-			if(_wasCursorInsideDisplay && !isCursorInsideDisplay)
-			{
-				_wasCursorVisible = Tools::isCursorVisible();
-
-				Tools::setCursorVisible(false);
-			}
-			if(!_wasCursorInsideDisplay && isCursorInsideDisplay)
-			{
-				Tools::setCursorVisible(_wasCursorVisible);
-			}
-
-			_wasCursorInsideDisplay = isCursorInsideDisplay;
-		}
-
-		_validateExecution();
 	}
 }
 
@@ -55,6 +40,7 @@ void ScriptExecutor::pause()
 {
 	if(_isStarted && _isRunning)
 	{
+		_wasCursorVisible = Tools::isCursorVisible();
 		_wasFirstPersonEnabled = _fe3d->camera_isFirstPersonEnabled();
 		_wasThirdPersonEnabled = _fe3d->camera_isThirdPersonEnabled();
 
@@ -189,8 +175,9 @@ void ScriptExecutor::stop()
 	if(_isStarted)
 	{
 		_scriptInterpreter->executeTerminateScripts();
-
 		_scriptInterpreter->unload();
+
+		Tools::setCursorVisible(false);
 
 		_pausedSound3dIds.clear();
 		_pausedSound2dIds.clear();
@@ -198,7 +185,6 @@ void ScriptExecutor::stop()
 		_isStarted = false;
 		_isRunning = false;
 		_wasCursorVisible = false;
-		_wasCursorInsideDisplay = false;
 		_wasFirstPersonEnabled = false;
 		_wasThirdPersonEnabled = false;
 		_mustSkipUpdate = false;
@@ -242,7 +228,6 @@ void ScriptExecutor::_validateExecution()
 		_isStarted = false;
 		_isRunning = false;
 		_wasCursorVisible = false;
-		_wasCursorInsideDisplay = false;
 		_wasFirstPersonEnabled = false;
 		_wasThirdPersonEnabled = false;
 		_mustSkipUpdate = false;

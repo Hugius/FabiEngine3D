@@ -3,7 +3,6 @@
 
 EngineCore::EngineCore()
 {
-	_libraryLoader = make_shared<LibraryLoader>();
 	_renderWindow = make_shared<RenderWindow>();
 	_timer = make_shared<Timer>();
 	_inputHandler = make_shared<InputHandler>();
@@ -40,6 +39,7 @@ EngineCore::EngineCore()
 	_animation2dPlayer = make_shared<Animation2dPlayer>();
 	_sound3dPlayer = make_shared<Sound3dPlayer>();
 	_sound2dPlayer = make_shared<Sound2dPlayer>();
+	_networkingHelper = make_shared<NetworkingHelper>();
 	_networkingServer = make_shared<NetworkingServer>();
 	_networkingClient = make_shared<NetworkingClient>();
 

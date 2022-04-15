@@ -2,11 +2,6 @@
 #include "engine_controller.hpp"
 #include "tools.hpp"
 
-const shared_ptr<LibraryLoader> EngineCore::getLibraryLoader() const
-{
-	return _libraryLoader;
-}
-
 const shared_ptr<InputHandler> EngineCore::getInputHandler() const
 {
 	return _inputHandler;
@@ -175,6 +170,11 @@ const shared_ptr<Sound3dManager> EngineCore::getSound3dManager() const
 const shared_ptr<Sound2dPlayer> EngineCore::getSound2dPlayer() const
 {
 	return _sound2dPlayer;
+}
+
+const shared_ptr<NetworkingHelper> EngineCore::getNetworkingHelper() const
+{
+	return _networkingHelper;
 }
 
 const shared_ptr<Sound3dPlayer> EngineCore::getSound3dPlayer() const

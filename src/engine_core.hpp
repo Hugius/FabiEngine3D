@@ -28,7 +28,7 @@
 #include "sound3d_manager.hpp"
 #include "sound2d_player.hpp"
 #include "sound3d_player.hpp"
-#include "library_loader.hpp"
+#include "networking_helper.hpp"
 #include "networking_server.hpp"
 #include "networking_client.hpp"
 #include "vertex_buffer_cache.hpp"
@@ -53,7 +53,6 @@ public:
 	const unordered_map<string, float> & getUpdateDeltaTimes() const;
 	const unordered_map<string, float> & getRenderDeltaTimes() const;
 
-	const shared_ptr<LibraryLoader> getLibraryLoader() const;
 	const shared_ptr<InputHandler> getInputHandler() const;
 	const shared_ptr<MeshLoader> getMeshLoader() const;
 	const shared_ptr<ImageLoader> getImageLoader() const;
@@ -89,6 +88,7 @@ public:
 	const shared_ptr<Animation2dPlayer> getAnimation2dPlayer() const;
 	const shared_ptr<Sound3dPlayer> getSound3dPlayer() const;
 	const shared_ptr<Sound2dPlayer> getSound2dPlayer() const;
+	const shared_ptr<NetworkingHelper> getNetworkingHelper() const;
 	const shared_ptr<NetworkingServer> getNetworkingServer() const;
 	const shared_ptr<NetworkingClient> getNetworkingClient() const;
 	const shared_ptr<Timer> getTimer() const;
@@ -105,7 +105,6 @@ private:
 	unordered_map<string, float> _updateDeltaTimes;
 	unordered_map<string, float> _renderDeltaTimes;
 
-	shared_ptr<LibraryLoader> _libraryLoader = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
 	shared_ptr<InputHandler> _inputHandler = nullptr;
 	shared_ptr<MeshLoader> _meshLoader = nullptr;
@@ -142,6 +141,7 @@ private:
 	shared_ptr<Animation2dPlayer> _animation2dPlayer = nullptr;
 	shared_ptr<Sound3dPlayer> _sound3dPlayer = nullptr;
 	shared_ptr<Sound2dPlayer> _sound2dPlayer = nullptr;
+	shared_ptr<NetworkingHelper> _networkingHelper = nullptr;
 	shared_ptr<NetworkingServer> _networkingServer = nullptr;
 	shared_ptr<NetworkingClient> _networkingClient = nullptr;
 	shared_ptr<EngineController> _engineController = nullptr;

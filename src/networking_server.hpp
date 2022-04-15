@@ -1,6 +1,7 @@
 #pragma once
 
 #include "networking_client_message.hpp"
+#include "networking_helper.hpp"
 
 #include <future>
 #include <vector>
@@ -14,16 +15,13 @@ using std::future;
 using std::shared_ptr;
 using std::tuple;
 
-typedef unsigned __int64 SOCKET;
-
-struct sockaddr_in;
-
 class NetworkingServer final
 {
 public:
 	NetworkingServer();
 	~NetworkingServer();
 
+	void inject(shared_ptr<NetworkingHelper> networkingHelper);
 	void start(unsigned int maxClientCount);
 	void update();
 	void sendTcpMessageToClient(const string & username, const string & content);
@@ -43,11 +41,8 @@ public:
 	const string getOldClientIp() const;
 	const string getOldClientUsername() const;
 
-	const unsigned int getMaxMessageSize() const;
-
 	const bool isRunning() const;
 	const bool isClientConnected(const string & username) const;
-	const bool isMessageReserved(const string & message) const;
 
 private:
 	void _disconnectClient(SOCKET socket);
@@ -55,28 +50,12 @@ private:
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
 
-	const string _extractPeerIp(SOCKET socket) const;
-	const string _extractPeerPort(SOCKET socket) const;
-	const string _extractAddressIp(sockaddr_in * address) const;
-	const string _extractAddressPort(sockaddr_in * address) const;
-
 	const bool _setupTcp();
 	const bool _setupUdp();
 	const bool _sendTcpMessageToClient(SOCKET socket, const string & content, bool isReserved);
 	const bool _sendUdpMessageToClient(const string & clientIp, const string & clientPort, const string & content, bool isReserved) const;
-	const bool _isMessageReadyUDP(SOCKET socket) const;
 
 	const SOCKET _waitForClientConnection(SOCKET socket) const;
-	const sockaddr_in _composeSocketAddress(const string & ip, const string & port) const;
-
-	static inline const string SERVER_PORT = "61295";
-
-	static inline constexpr unsigned int PORT_DIGIT_COUNT = 5;
-	static inline constexpr unsigned int IPV4_ADDRESS_LENGTH = 16;
-	static inline constexpr unsigned int MAX_MESSAGE_SIZE = 128;
-	static inline constexpr unsigned int MAX_USERNAME_SIZE = 16;
-	static inline constexpr unsigned int TCP_BUFFER_BYTES = 8192;
-	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_SIZE);
 
 	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads = {};
 	vector<string> _tcpMessageBuilds = {};
@@ -88,6 +67,8 @@ private:
 	vector<string> _oldClientUsernames = {};
 	vector<NetworkingClientMessage> _pendingMessages = {};
 	vector<SOCKET> _clientSockets = {};
+
+	shared_ptr<NetworkingHelper> _networkingHelper = nullptr;
 
 	future<SOCKET> _connectionThread;
 

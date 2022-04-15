@@ -6,7 +6,7 @@
 
 #include <filesystem>
 #include <shlobj_core.h>
-
+#include <iostream>
 using std::max;
 using std::to_string;
 using std::filesystem::copy;
@@ -70,7 +70,15 @@ void Tools::setCursorPosition(const ivec2 & value)
 
 void Tools::setCursorVisible(bool value)
 {
-	ShowCursor(value);
+	if(value)
+	{
+		ShowCursor(true);
+	}
+	else
+	{
+		while(ShowCursor(false) > -1);
+	}
+
 }
 
 const vector<string> Tools::getFileNamesFromDirectory(const string & path)

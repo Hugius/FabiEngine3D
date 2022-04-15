@@ -63,9 +63,6 @@
     <ClInclude Include="..\..\..\src\tools.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\library_loader.hpp">
-      <Filter>Miscellaneous</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\network_protocol.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
@@ -105,9 +102,6 @@
       <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\tools.cpp">
-      <Filter>Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\library_loader.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\logger.cpp">

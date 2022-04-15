@@ -11,16 +11,6 @@ LRESULT CALLBACK processWindowMessage(HWND windowHandle, UINT message, WPARAM wP
 {
 	switch(message)
 	{
-		case WM_DESTROY:
-		{
-			ReleaseDC(windowHandle, windowContext);
-
-			wglDeleteContext(openglContext);
-
-			PostQuitMessage(0);
-
-			break;
-		}
 		case WM_CREATE:
 		{
 			PIXELFORMATDESCRIPTOR pixelFormatDescriptor = {};
@@ -69,6 +59,18 @@ LRESULT CALLBACK processWindowMessage(HWND windowHandle, UINT message, WPARAM wP
 
 			break;
 		}
+		case WM_DESTROY:
+		{
+			wglDeleteContext(openglContext);
+			ReleaseDC(windowHandle, windowContext);
+
+			openglContext = nullptr;
+			windowContext = nullptr;
+
+			PostQuitMessage(0);
+
+			break;
+		}
 		default:
 		{
 			return DefWindowProc(windowHandle, message, wParam, lParam);
@@ -97,6 +99,8 @@ RenderWindow::RenderWindow()
 	{
 		abort();
 	}
+
+	SetCursor(LoadCursor(nullptr, IDC_ARROW));
 
 	auto glewStatus = glewInit();
 
@@ -176,6 +180,11 @@ void RenderWindow::setKeyingColor(const fvec3 & value)
 
 void RenderWindow::setTitle(const string & value)
 {
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
 	if(value.size() > MAX_TITLE_LENGTH)
 	{
 		abort();
@@ -186,9 +195,9 @@ void RenderWindow::setTitle(const string & value)
 
 void RenderWindow::swapBuffer()
 {
-	if(_windowHandle == nullptr)
+	if(windowContext == nullptr)
 	{
-		abort();
+		return;
 	}
 
 	if(!wglSwapLayerBuffers(windowContext, WGL_SWAP_MAIN_PLANE))
@@ -199,6 +208,11 @@ void RenderWindow::swapBuffer()
 
 const string RenderWindow::getTitle() const
 {
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
 	char title[MAX_TITLE_LENGTH] = {};
 
 	GetWindowText(_windowHandle, title, MAX_TITLE_LENGTH);

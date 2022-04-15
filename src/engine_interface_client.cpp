@@ -53,7 +53,7 @@ const bool EngineInterface::client_isAcceptedByServer() const
 
 const bool EngineInterface::client_isMessageReserved(const string & message)
 {
-	return _core->getNetworkingClient()->isMessageReserved(message);
+	return _core->getNetworkingHelper()->isMessageReserved(message);
 }
 
 const unsigned int EngineInterface::client_getPingLatency() const
@@ -63,12 +63,12 @@ const unsigned int EngineInterface::client_getPingLatency() const
 
 const unsigned int EngineInterface::client_getMaxUsernameSize() const
 {
-	return _core->getNetworkingClient()->getMaxUsernameSize();
+	return _core->getNetworkingHelper()->getMaxUsernameSize();
 }
 
 const unsigned int EngineInterface::client_getMaxMessageSize() const
 {
-	return _core->getNetworkingClient()->getMaxMessageSize();
+	return _core->getNetworkingHelper()->getMaxMessageSize();
 }
 
 const bool EngineInterface::client_isValidIp(const string & ip) const

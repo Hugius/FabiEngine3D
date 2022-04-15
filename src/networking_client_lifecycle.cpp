@@ -29,11 +29,11 @@ void NetworkingClient::start(const string & username)
 	{
 		abort();
 	}
-	if(username.size() > MAX_USERNAME_SIZE)
+	if(username.size() > NetworkingHelper::MAX_USERNAME_SIZE)
 	{
 		abort();
 	}
-	if(isMessageReserved(username))
+	if(NetworkingHelper::_isMessageReserved(username))
 	{
 		abort();
 	}
@@ -77,7 +77,7 @@ void NetworkingClient::connectToServer(const string & ip)
 		return;
 	}
 
-	_connectionThread = async(launch::async, &NetworkingClient::_waitForServerConnection, this, _tcpSocket, ip);
+	_connectionThread = async(launch::async, &NetworkingClient::_waitForServerConnection, this, _tcpSocket, ip, NetworkingHelper::SERVER_PORT);
 
 	_serverIp = ip;
 	_isConnectingToServer = true;

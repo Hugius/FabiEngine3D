@@ -171,8 +171,6 @@ void ScriptInterpreter::load()
 
 	_fe3d->camera_reset();
 
-	Tools::setCursorVisible(true);
-
 	_checkEngineWarnings(lastLoggerMessageCount);
 
 	_fe3d->clock_create("scriptDebug");
@@ -352,8 +350,6 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d->clock_delete(clockId);
 	}
-
-	Tools::setCursorVisible(false);
 
 	_debuggingTimes.clear();
 	_localVariables.clear();

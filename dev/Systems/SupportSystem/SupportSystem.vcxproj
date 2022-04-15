@@ -33,7 +33,6 @@
     <ClInclude Include="..\..\..\src\pixel_format.hpp" />
     <ClInclude Include="..\..\..\src\input_handler.hpp" />
     <ClInclude Include="..\..\..\src\key_type.hpp" />
-    <ClInclude Include="..\..\..\src\library_loader.hpp" />
     <ClInclude Include="..\..\..\src\pointlight_shape.hpp" />
     <ClInclude Include="..\..\..\src\logger.hpp" />
     <ClInclude Include="..\..\..\src\log_message_type.hpp" />
@@ -51,7 +50,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\configuration.cpp" />
     <ClCompile Include="..\..\..\src\input_handler.cpp" />
-    <ClCompile Include="..\..\..\src\library_loader.cpp" />
     <ClCompile Include="..\..\..\src\logger.cpp" />
     <ClCompile Include="..\..\..\src\timer.cpp" />
     <ClCompile Include="..\..\..\src\tools.cpp" />

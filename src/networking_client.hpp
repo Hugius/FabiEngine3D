@@ -1,6 +1,7 @@
 #pragma once
 
 #include "networking_server_message.hpp"
+#include "networking_helper.hpp"
 
 #include <string>
 #include <future>
@@ -15,10 +16,6 @@ using std::vector;
 using std::future;
 using std::shared_ptr;
 using std::tuple;
-
-typedef unsigned __int64 SOCKET;
-
-struct sockaddr_in;
 
 class NetworkingClient final
 {
@@ -40,43 +37,25 @@ public:
 	const string & getServerIp() const;
 
 	const unsigned int getPingLatency() const;
-	const unsigned int getMaxUsernameSize() const;
-	const unsigned int getMaxMessageSize();
 
 	const bool isValidIp(const string & ip) const;
 	const bool isRunning() const;
 	const bool isConnectingToServer() const;
 	const bool isConnectedToServer() const;
 	const bool isAcceptedByServer() const;
-	const bool isMessageReserved(const string & message) const;
 
 private:
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
 
-	const string _extractSocketIp(SOCKET socket) const;
-	const string _extractSocketPort(SOCKET socket) const;
-	const string _extractAddressIp(sockaddr_in * address) const;
-	const string _extractAddressPort(sockaddr_in * address) const;
-
-	const int _waitForServerConnection(SOCKET socket, const string & ip) const;
+	const int _waitForServerConnection(SOCKET socket, const string & ip, const string & port) const;
 
 	const bool _setupTcp();
 	const bool _setupUdp();
-	const bool _isMessageReadyUDP(SOCKET socket) const;
 	const bool _sendTcpMessageToServer(const string & content, bool isReserved, bool mustBeAccepted);
 	const bool _sendUdpMessageToServer(const string & content, bool isReserved, bool mustBeAccepted) const;
 
-	const sockaddr_in _composeSocketAddress(const string & ip, const string & port) const;
-
-	static inline const string SERVER_PORT = "61295";
-
 	static inline constexpr unsigned int MAX_PING_COUNT = 10;
-	static inline constexpr unsigned int IPV4_ADDRESS_LENGTH = 16;
-	static inline constexpr unsigned int MAX_MESSAGE_SIZE = 128;
-	static inline constexpr unsigned int MAX_USERNAME_SIZE = 16;
-	static inline constexpr unsigned int TCP_BUFFER_BYTES = 8192;
-	static inline constexpr unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_SIZE);
 
 	vector<unsigned int> _pingLatencies = {};
 	vector<NetworkingServerMessage> _pendingMessages = {};

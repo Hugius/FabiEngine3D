@@ -76,11 +76,11 @@ void NetworkingClient::sendTcpMessageToServer(const string & content)
 	{
 		abort();
 	}
-	if(isMessageReserved(content))
+	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
-	if(content.size() > MAX_MESSAGE_SIZE)
+	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
@@ -102,24 +102,14 @@ void NetworkingClient::sendUdpMessageToServer(const string & content)
 	{
 		abort();
 	}
-	if(isMessageReserved(content))
+	if(NetworkingHelper::_isMessageReserved(content))
 	{
 		abort();
 	}
-	if(content.size() > MAX_MESSAGE_SIZE)
+	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
 
 	_sendUdpMessageToServer(content, false, true);
-}
-
-const unsigned int NetworkingClient::getMaxUsernameSize() const
-{
-	return MAX_USERNAME_SIZE;
-}
-
-const unsigned int NetworkingClient::getMaxMessageSize()
-{
-	return MAX_MESSAGE_SIZE;
 }

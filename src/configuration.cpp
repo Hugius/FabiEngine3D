@@ -14,10 +14,9 @@ Configuration::Configuration()
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = (rootPath + "configuration.fe3d");
 	const auto monitorSize = Tools::getMonitorSize();
 
-	auto file = ifstream(filePath);
+	auto file = ifstream(rootPath + "configuration.fe3d");
 
 	if(file)
 	{

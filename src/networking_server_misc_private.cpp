@@ -16,11 +16,11 @@ const bool NetworkingServer::_sendTcpMessageToClient(SOCKET socket, const string
 	{
 		abort();
 	}
-	if(isMessageReserved(content) && !isReserved)
+	if(_networkingHelper->_isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
-	if(content.size() > MAX_MESSAGE_SIZE)
+	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
@@ -60,16 +60,16 @@ const bool NetworkingServer::_sendUdpMessageToClient(const string & clientIp, co
 	{
 		abort();
 	}
-	if(isMessageReserved(content) && !isReserved)
+	if(_networkingHelper->_isMessageReserved(content) && !isReserved)
 	{
 		abort();
 	}
-	if(content.size() > MAX_MESSAGE_SIZE)
+	if(content.size() > NetworkingHelper::MAX_MESSAGE_SIZE)
 	{
 		abort();
 	}
 
-	auto socketAddress = _composeSocketAddress(clientIp, clientPort);
+	auto socketAddress = _networkingHelper->_composeSocketAddress(clientIp, clientPort);
 
 	auto sendStatusCode = sendto(_udpSocket, content.c_str(), static_cast<int>(content.size()), 0, reinterpret_cast<sockaddr *>(&socketAddress), sizeof(socketAddress));
 
@@ -98,7 +98,7 @@ const bool NetworkingServer::_setupTcp()
 	tcpHints.ai_protocol = IPPROTO_TCP;
 
 	addrinfo * tcpAddressInfo = nullptr;
-	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
+	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkingHelper::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
 	if(tcpInfoStatusCode != 0)
 	{
 		Logger::throwDebug(tcpInfoStatusCode);
@@ -154,7 +154,7 @@ const bool NetworkingServer::_setupUdp()
 	udpHints.ai_protocol = IPPROTO_UDP;
 
 	addrinfo * udpAddressInfo = nullptr;
-	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
+	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkingHelper::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
 	if(udpInfoStatusCode != 0)
 	{
 		Logger::throwDebug(udpInfoStatusCode);
@@ -232,35 +232,31 @@ const SOCKET NetworkingServer::_waitForClientConnection(SOCKET socket) const
 
 tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET socket) const
 {
-	char buffer[TCP_BUFFER_BYTES];
-	int bufferLength = static_cast<int>(TCP_BUFFER_BYTES);
-	auto receiveStatusCode = recv(socket, buffer, bufferLength, 0);
+	char buffer[NetworkingHelper::MAX_TCP_BUFFER_SIZE] = {};
 
-	if(receiveStatusCode > 0)
+	const auto bufferLength = static_cast<int>(NetworkingHelper::MAX_TCP_BUFFER_SIZE);
+	const auto receiveResult = recv(socket, buffer, bufferLength, 0);
+
+	if(receiveResult > 0)
 	{
-		return make_tuple(receiveStatusCode, 0, Tools::getTimeSinceEpochMS(), string(buffer, receiveStatusCode));
-	}
-	else if(receiveStatusCode == 0)
-	{
-		return make_tuple(receiveStatusCode, 0, Tools::getTimeSinceEpochMS(), "");
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult));
 	}
 	else
 	{
-		return make_tuple(receiveStatusCode, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
 	}
 }
 
 tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOCKET socket) const
 {
-	char buffer[UDP_BUFFER_BYTES];
-	int bufferLength = static_cast<int>(UDP_BUFFER_BYTES);
-	sockaddr_in sourceAddress = sockaddr_in();
-	int sourceAddressLength = sizeof(sourceAddress);
+	sockaddr_in sourceAddress = {};
+	char buffer[NetworkingHelper::MAX_UDP_BUFFER_SIZE] = {};
+	auto sourceAddressLength = static_cast<int>(sizeof(sourceAddress));
 
-	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
-
-	auto ip = _extractAddressIp(&sourceAddress);
-	auto port = _extractAddressPort(&sourceAddress);
+	const auto bufferLength = static_cast<int>(NetworkingHelper::MAX_UDP_BUFFER_SIZE);
+	const auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
+	const auto ip = _networkingHelper->_extractAddressIp(sourceAddress);
+	const auto port = _networkingHelper->_extractAddressPort(sourceAddress);
 
 	if(receiveResult > 0)
 	{
@@ -270,68 +266,4 @@ tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOC
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), "", ip, port);
 	}
-}
-
-const string NetworkingServer::_extractPeerIp(SOCKET socket) const
-{
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getpeername(socket, (sockaddr *)&socketAddress, &socketAddressLength);
-
-	return _extractAddressIp(&socketAddress);
-}
-
-const string NetworkingServer::_extractPeerPort(SOCKET socket) const
-{
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getpeername(socket, (sockaddr *)&socketAddress, &socketAddressLength);
-
-	return _extractAddressPort(&socketAddress);
-}
-
-const sockaddr_in NetworkingServer::_composeSocketAddress(const string & ip, const string & port) const
-{
-	sockaddr_in socketAddress = sockaddr_in();
-	socketAddress.sin_family = AF_INET;
-	InetPton(AF_INET, ip.c_str(), &socketAddress.sin_addr.s_addr);
-	socketAddress.sin_port = htons(static_cast<u_short>(stoi(port)));
-
-	return socketAddress;
-}
-
-const string NetworkingServer::_extractAddressIp(sockaddr_in * address) const
-{
-	char ip[IPV4_ADDRESS_LENGTH];
-	inet_ntop(AF_INET, &(address->sin_addr), ip, sizeof(ip));
-
-	return (ip);
-}
-
-const string NetworkingServer::_extractAddressPort(sockaddr_in * address) const
-{
-	return to_string(ntohs(address->sin_port));
-}
-
-const bool NetworkingServer::_isMessageReadyUDP(SOCKET socket) const
-{
-	fd_set socketSet = fd_set();
-	timeval timeInterval = {0, 1};
-	FD_ZERO(&socketSet);
-	FD_SET(socket, &socketSet);
-
-	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
-}
-
-const bool NetworkingServer::isMessageReserved(const string & message) const
-{
-	return
-		(
-		(message.substr(0, string("REQUEST").size()) == "REQUEST") ||
-		(message.substr(0, string("ACCEPT").size()) == "ACCEPT") ||
-		(message.substr(0, string("PING").size()) == "PING") ||
-		(message.substr(0, string("SERVER_FULL").size()) == "SERVER_FULL") ||
-		(message.substr(0, string("ALREADY_CONNECTED").size()) == "ALREADY_CONNECTED") ||
-		(message.substr(0, string("DISCONNECTED").size()) == "DISCONNECTED")
-		);
 }

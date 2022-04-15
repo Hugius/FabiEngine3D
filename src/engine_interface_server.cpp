@@ -53,7 +53,7 @@ const bool EngineInterface::server_isClientConnected(const string & username) co
 
 const bool EngineInterface::server_isMessageReserved(const string & message)
 {
-	return _core->getNetworkingServer()->isMessageReserved(message);
+	return _core->getNetworkingHelper()->isMessageReserved(message);
 }
 
 const string EngineInterface::server_getNewClientIp() const
@@ -78,7 +78,7 @@ const string EngineInterface::server_getOldClientUsername() const
 
 const unsigned int EngineInterface::server_getMaxMessageSize() const
 {
-	return _core->getNetworkingServer()->getMaxMessageSize();
+	return _core->getNetworkingHelper()->getMaxMessageSize();
 }
 
 const vector<NetworkingClientMessage> EngineInterface::server_getPendingMessages() const

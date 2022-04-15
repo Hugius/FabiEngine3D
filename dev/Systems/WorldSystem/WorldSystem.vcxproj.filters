@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Utilities">
-      <UniqueIdentifier>{994067c5-377f-4a2a-aec5-d062bcbbc78e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Builder">
       <UniqueIdentifier>{20526d98-3041-4c98-b3a3-584fd01bdd43}</UniqueIdentifier>
     </Filter>
@@ -15,6 +12,9 @@
     </Filter>
     <Filter Include="Builder\Persistence">
       <UniqueIdentifier>{17a9e7f9-7270-4bda-81f9-bb6718d77aba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{994067c5-377f-4a2a-aec5-d062bcbbc78e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,7 +28,7 @@
       <Filter>Builder\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_helper.cpp">
-      <Filter>Utilities</Filter>
+      <Filter>Helper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -36,7 +36,7 @@
       <Filter>Builder\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\world_helper.hpp">
-      <Filter>Utilities</Filter>
+      <Filter>Helper</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

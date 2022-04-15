@@ -72,7 +72,7 @@ void Tools::setCursorVisible(bool value)
 {
 	if(value)
 	{
-		ShowCursor(true);
+		while(ShowCursor(true) < 0);
 	}
 	else
 	{

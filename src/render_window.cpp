@@ -1,8 +1,11 @@
+#define GLEW_STATIC
+
 #include "render_window.hpp"
 #include "configuration.hpp"
 #include "logger.hpp"
 
 #include <glew.h>
+#include <wglew.h>
 
 HDC windowContext = nullptr;
 HGLRC openglContext = nullptr;
@@ -57,17 +60,18 @@ LRESULT CALLBACK processWindowMessage(HWND windowHandle, UINT message, WPARAM wP
 
 			wglMakeCurrent(windowContext, openglContext);
 
+			//wglSwapIntervalEXT(0);
+
 			break;
 		}
 		case WM_DESTROY:
 		{
 			wglDeleteContext(openglContext);
 			ReleaseDC(windowHandle, windowContext);
+			PostQuitMessage(0);
 
 			openglContext = nullptr;
 			windowContext = nullptr;
-
-			PostQuitMessage(0);
 
 			break;
 		}

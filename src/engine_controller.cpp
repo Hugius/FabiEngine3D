@@ -149,36 +149,33 @@ void EngineController::initialize()
 			return;
 		}
 
-		if(Configuration::getInst().isApplicationExported())
-		{
-			auto skyImagePaths = _skyEditor->getImagePathsFromFile();
-			auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
-			auto waterImagePaths = _waterEditor->getImagePathsFromFile();
-			auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
-			auto modelImagePaths = _modelEditor->getImagePathsFromFile();
-			auto quad3dImagePaths = _quad3dEditor->getImagePathsFromFile();
-			auto text3dImagePaths = _text3dEditor->getImagePathsFromFile();
-			auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
-			auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
-			auto audioPaths = _soundEditor->getAudioPathsFromFile();
+		auto skyImagePaths = _skyEditor->getImagePathsFromFile();
+		auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
+		auto waterImagePaths = _waterEditor->getImagePathsFromFile();
+		auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
+		auto modelImagePaths = _modelEditor->getImagePathsFromFile();
+		auto quad3dImagePaths = _quad3dEditor->getImagePathsFromFile();
+		auto text3dImagePaths = _text3dEditor->getImagePathsFromFile();
+		auto quad2dImagePaths = _quad2dEditor->getImagePathsFromFile();
+		auto text2dImagePaths = _text2dEditor->getImagePathsFromFile();
+		auto audioPaths = _soundEditor->getAudioPathsFromFile();
 
-			_fe3d->misc_cacheMeshes(modelMeshPaths, false);
+		_fe3d->misc_cacheMeshes(modelMeshPaths, false);
 
-			_fe3d->misc_cacheImages(terrainImagePaths, false);
+		_fe3d->misc_cacheImages(terrainImagePaths, false);
 
-			vector<string> imagePaths;
-			imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
-			imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
-			imagePaths.insert(imagePaths.end(), waterImagePaths.begin(), waterImagePaths.end());
-			imagePaths.insert(imagePaths.end(), modelImagePaths.begin(), modelImagePaths.end());
-			imagePaths.insert(imagePaths.end(), quad3dImagePaths.begin(), quad3dImagePaths.end());
-			imagePaths.insert(imagePaths.end(), text3dImagePaths.begin(), text3dImagePaths.end());
-			imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
-			imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
-			_fe3d->misc_cacheImages(imagePaths, false);
+		vector<string> imagePaths;
+		imagePaths.insert(imagePaths.end(), skyImagePaths.begin(), skyImagePaths.end());
+		imagePaths.insert(imagePaths.end(), terrainImagePaths.begin(), terrainImagePaths.end());
+		imagePaths.insert(imagePaths.end(), waterImagePaths.begin(), waterImagePaths.end());
+		imagePaths.insert(imagePaths.end(), modelImagePaths.begin(), modelImagePaths.end());
+		imagePaths.insert(imagePaths.end(), quad3dImagePaths.begin(), quad3dImagePaths.end());
+		imagePaths.insert(imagePaths.end(), text3dImagePaths.begin(), text3dImagePaths.end());
+		imagePaths.insert(imagePaths.end(), quad2dImagePaths.begin(), quad2dImagePaths.end());
+		imagePaths.insert(imagePaths.end(), text2dImagePaths.begin(), text2dImagePaths.end());
+		_fe3d->misc_cacheImages(imagePaths, false);
 
-			_fe3d->misc_cacheAudios(audioPaths, false);
-		}
+		_fe3d->misc_cacheAudios(audioPaths, false);
 
 		_scriptEditor->loadScriptFiles(true);
 

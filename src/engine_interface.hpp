@@ -977,7 +977,6 @@ public:
 	const bool clock_isPaused(const string & id) const;
 	const bool clock_isIdReserved(const string & id) const;
 
-	void misc_setWindowTitle(const string & value);
 	void misc_setVsyncEnabled(bool value);
 	void misc_setCursorEntityId(const string & value);
 	void misc_cacheMesh(const string & filePath, bool isCrucial);
@@ -995,7 +994,6 @@ public:
 
 	const unordered_map<string, float> & misc_getUpdateDeltaTimes() const;
 	const unordered_map<string, float> & misc_getRenderDeltaTimes() const;
-	const string misc_getWindowTitle() const;
 	const string misc_getCursorEntityId() const;
 	const string misc_getCpuName() const;
 	const string misc_getGpuName() const;

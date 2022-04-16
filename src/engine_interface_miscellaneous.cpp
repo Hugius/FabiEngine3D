@@ -6,11 +6,6 @@
 #include <chrono>
 #include <filesystem>
 
-void EngineInterface::misc_setWindowTitle(const string & value)
-{
-	_core->getRenderWindow()->setTitle(value);
-}
-
 void EngineInterface::misc_setVsyncEnabled(bool value)
 {
 	_core->getRenderWindow()->setVsyncEnabled(value);
@@ -155,11 +150,6 @@ const unordered_map<string, float> & EngineInterface::misc_getUpdateDeltaTimes()
 const unordered_map<string, float> & EngineInterface::misc_getRenderDeltaTimes() const
 {
 	return _core->getRenderDeltaTimes();
-}
-
-const string EngineInterface::misc_getWindowTitle() const
-{
-	return _core->getRenderWindow()->getTitle();
 }
 
 const string EngineInterface::misc_getCursorEntityId() const

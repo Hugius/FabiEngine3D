@@ -87,7 +87,7 @@ RenderWindow::RenderWindow()
 	WNDCLASS windowClass = {};
 	windowClass.lpfnWndProc = processWindowMessage;
 	windowClass.hInstance = GetModuleHandle(NULL);
-	windowClass.lpszClassName = "FabiEngine3D";
+	windowClass.lpszClassName = "RenderWindow";
 	windowClass.style = CS_OWNDC;
 
 	if(!RegisterClass(&windowClass))
@@ -95,7 +95,7 @@ RenderWindow::RenderWindow()
 		abort();
 	}
 
-	_windowHandle = CreateWindow(windowClass.lpszClassName, "FabiEngine3D", WS_POPUP, 0, 0, 0, 0, 0, 0, windowClass.hInstance, 0);
+	_windowHandle = CreateWindow(windowClass.lpszClassName, "RenderWindow", WS_POPUP, 0, 0, 0, 0, 0, 0, windowClass.hInstance, 0);
 
 	if(_windowHandle == nullptr)
 	{

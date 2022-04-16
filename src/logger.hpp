@@ -22,46 +22,34 @@ public:
 
 	template<typename T, typename...Rest> static void throwInfo(T first, Rest...rest)
 	{
-		if(Configuration::getInst().isApplicationExported())
-		{
-			return;
-		}
-
 		_printPrefix(LogMessageType::INFO);
+
 		_printMessage(first, rest...);
 	}
 
 	template<typename T, typename...Rest> static void throwDebug(T first, Rest...rest)
 	{
-		if(Configuration::getInst().isApplicationExported())
-		{
-			return;
-		}
-
 		_printPrefix(LogMessageType::DEBUG);
+
 		_printMessage(first, rest...);
 	}
 
 	template<typename T, typename...Rest> static void throwWarning(T first, Rest...rest)
 	{
-		if(Configuration::getInst().isApplicationExported())
-		{
-			return;
-		}
-
 		_printPrefix(LogMessageType::WARNING);
+
 		_printMessage(first, rest...);
+
+		while(Configuration::getInst().isApplicationExported())
+		{
+
+		}
 	}
 
 	template<typename T, typename...Rest> static void throwError(T first, Rest...rest)
 	{
-		if(Configuration::getInst().isApplicationExported())
-		{
-			exit(420);
-		}
-
-		cout << endl;
 		_printPrefix(LogMessageType::ERR);
+
 		_printMessage(first, rest...);
 
 		while(true)

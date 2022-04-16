@@ -5,6 +5,7 @@
 #include <windows.h>
 
 using std::istringstream;
+using std::clamp;
 
 Configuration::Configuration()
 {
@@ -20,19 +21,12 @@ Configuration::Configuration()
 
 	if(file)
 	{
+		_processOption(file, _windowTitle, "window_title");
 		_processOption(file, _windowSizeMultiplier.x, "window_width");
 		_processOption(file, _windowSizeMultiplier.y, "window_height");
-		_processOption(file, _windowTitle, "window_title");
 
-		if((_windowSizeMultiplier.x < 0.0f) || (_windowSizeMultiplier.x > 1.0f))
-		{
-			Logger::throwError("Configuration file @ option `window_width`: must be between 0.0 and 1.0");
-		}
-
-		if((_windowSizeMultiplier.y < 0.0f) || (_windowSizeMultiplier.y > 1.0f))
-		{
-			Logger::throwError("Configuration file @ option `window_height`: must be between 0.0 and 1.0");
-		}
+		_windowSizeMultiplier.x = clamp(_windowSizeMultiplier.x, 0.0f, 1.0f);
+		_windowSizeMultiplier.y = clamp(_windowSizeMultiplier.y, 0.0f, 1.0f);
 
 		_windowSize.x = static_cast<int>(static_cast<float>(monitorSize.x) * _windowSizeMultiplier.x);
 		_windowSize.y = static_cast<int>(static_cast<float>(monitorSize.y) * _windowSizeMultiplier.y);
@@ -45,6 +39,7 @@ Configuration::Configuration()
 	}
 	else
 	{
+		_windowTitle = "FabiEngine3D";
 		_windowSizeMultiplier = fvec2(1.0f);
 		_windowSize.x = static_cast<int>(static_cast<float>(monitorSize.x) * _windowSizeMultiplier.x);
 		_windowSize.y = static_cast<int>(static_cast<float>(monitorSize.y) * _windowSizeMultiplier.y);
@@ -77,7 +72,7 @@ void Configuration::_processOption(ifstream & file, string & option, const strin
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + name + "`: invalid option field");
+		Logger::throwError("Configuration file option `" + name + "` missing");
 	}
 }
 
@@ -101,7 +96,7 @@ void Configuration::_processOption(ifstream & file, float & option, const string
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + name + "`: invalid option field");
+		Logger::throwError("Configuration file option `" + name + "` missing");
 	}
 }
 
@@ -125,7 +120,7 @@ void Configuration::_processOption(ifstream & file, int & option, const string &
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + name + "`: invalid option field");
+		Logger::throwError("Configuration file option `" + name + "` missing");
 	}
 }
 
@@ -147,22 +142,11 @@ void Configuration::_processOption(ifstream & file, bool & option, const string 
 
 	if(field == name)
 	{
-		if(value == "true")
-		{
-			option = true;
-		}
-		else if(value == "false")
-		{
-			option = false;
-		}
-		else
-		{
-			Logger::throwError("Configuration file @ option `" + name + "`: invalid boolean value");
-		}
+		iss >> option;
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + name + "`: invalid option field");
+		Logger::throwError("Configuration file option `" + name + "` missing");
 	}
 }
 

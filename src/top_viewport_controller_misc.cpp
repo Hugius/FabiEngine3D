@@ -100,15 +100,6 @@ void TopViewportController::_setProject(const string & projectId)
 {
 	_currentProjectId = projectId;
 
-	if(_currentProjectId.empty())
-	{
-		_fe3d->misc_setWindowTitle("FabiEngine3D");
-	}
-	else
-	{
-		_fe3d->misc_setWindowTitle("FabiEngine3D - " + _currentProjectId);
-	}
-
 	_skyEditor->setCurrentProjectId(_currentProjectId);
 	_terrainEditor->setCurrentProjectId(_currentProjectId);
 	_waterEditor->setCurrentProjectId(_currentProjectId);

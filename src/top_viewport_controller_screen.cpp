@@ -237,8 +237,11 @@ void TopViewportController::_updateMiscScreenManagement()
 					const auto filePath = (exportDirectoryPath + "configuration.fe3d");
 
 					auto file = ofstream(filePath);
-					file << "window_width  = 0.75" << endl;
-					file << "window_height = 0.75" << endl;
+					file << "window_title  = My Game";
+					file << endl;
+					file << "window_width  = 0.75";
+					file << endl;
+					file << "window_height = 0.75";
 					file.close();
 				}
 			}

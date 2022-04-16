@@ -96,6 +96,21 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
+	else if(functionName == "fe3d:vsync_is_enabled")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_fe3d->server_isRunning())
+			{
+				_throwRuntimeError("cannot access `fe3d:vsync` functionality as a networking server");
+				return true;
+			}
+
+			const auto result = _fe3d->misc_isVsyncEnabled();
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+		}
+	}
 	else
 	{
 		return false;

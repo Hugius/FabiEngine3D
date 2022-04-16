@@ -60,8 +60,6 @@ LRESULT CALLBACK processWindowMessage(HWND windowHandle, UINT message, WPARAM wP
 
 			wglMakeCurrent(windowContext, openglContext);
 
-			//wglSwapIntervalEXT(0);
-
 			break;
 		}
 		case WM_DESTROY:
@@ -108,11 +106,7 @@ RenderWindow::RenderWindow()
 
 	auto glewStatus = glewInit();
 
-	if(glewStatus == GLEW_OK)
-	{
-		Logger::throwInfo("Initialized OpenGL");
-	}
-	else
+	if(glewStatus != GLEW_OK)
 	{
 		Logger::throwError("GLEW could not be initialized: ", reinterpret_cast<const char *>(glewGetErrorString(glewStatus)));
 	}
@@ -128,8 +122,6 @@ void RenderWindow::update()
 	if(!IsWindow(_windowHandle))
 	{
 		_windowHandle = nullptr;
-		windowContext = nullptr;
-		openglContext = nullptr;
 
 		return;
 	}
@@ -197,6 +189,16 @@ void RenderWindow::setTitle(const string & value)
 	SetWindowText(_windowHandle, value.c_str());
 }
 
+void RenderWindow::setVsyncEnabled(bool value)
+{
+	if(windowContext == nullptr)
+	{
+		abort();
+	}
+
+	wglSwapIntervalEXT(static_cast<int>(value));
+}
+
 void RenderWindow::swapBuffer()
 {
 	if(windowContext == nullptr)
@@ -222,6 +224,20 @@ const string RenderWindow::getTitle() const
 	GetWindowText(_windowHandle, title, MAX_TITLE_LENGTH);
 
 	return string(title);
+}
+
+const fvec3 RenderWindow::getKeyingColor() const
+{
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	COLORREF color = {};
+
+	GetLayeredWindowAttributes(_windowHandle, &color, nullptr, nullptr);
+
+	return fvec3(GetRValue(color), GetGValue(color), GetBValue(color));
 }
 
 void RenderWindow::setVisible(bool value)
@@ -265,4 +281,24 @@ const ivec2 RenderWindow::getSize() const
 const bool RenderWindow::isExisting() const
 {
 	return (_windowHandle != nullptr);
+}
+
+const bool RenderWindow::isVisible() const
+{
+	if(_windowHandle == nullptr)
+	{
+		abort();
+	}
+
+	return IsWindowVisible(_windowHandle);
+}
+
+const bool RenderWindow::isVsyncEnabled() const
+{
+	if(windowContext == nullptr)
+	{
+		abort();
+	}
+
+	return static_cast<bool>(wglGetSwapIntervalEXT());
 }

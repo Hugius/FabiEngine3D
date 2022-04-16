@@ -19,14 +19,19 @@ public:
 	void setColorKeyingEnabled(bool value);
 	void setKeyingColor(const fvec3 & value);
 	void setTitle(const string & value);
+	void setVsyncEnabled(bool value);
 	void swapBuffer();
 
 	const string getTitle() const;
+
+	const fvec3 getKeyingColor() const;
 
 	const ivec2 getPosition() const;
 	const ivec2 getSize() const;
 
 	const bool isExisting() const;
+	const bool isVisible() const;
+	const bool isVsyncEnabled() const;
 
 private:
 	static inline constexpr unsigned int MAX_TITLE_LENGTH = 100;

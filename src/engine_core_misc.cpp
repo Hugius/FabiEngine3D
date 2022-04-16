@@ -239,24 +239,28 @@ void EngineCore::_initialize()
 	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader->loadImage(logoPath)));
 	logo->setCentered(true);
 
-	_masterRenderer->setBackgroundColor(fvec4(keyingColor.r, keyingColor.g, keyingColor.b, 1.0f));
 	_renderWindow->setVisible(true);
 	_renderWindow->setColorKeyingEnabled(true);
 	_renderWindow->setKeyingColor(keyingColor);
 	_renderWindow->setPosition(logoPosition);
 	_renderWindow->setSize(logoSize);
+	_masterRenderer->setBackgroundColor(fvec4(keyingColor.r, keyingColor.g, keyingColor.b, 1.0f));
 	_masterRenderer->renderLogo(logo, logoSize);
 	_renderWindow->swapBuffer();
+	_masterRenderer->setBackgroundColor(fvec4(0.0f, 0.0f, 0.0f, 1.0f));
+	_renderWindow->setColorKeyingEnabled(false);
 
 	_engineController->initialize();
 
 	if(_isRunning)
 	{
-		_renderWindow->setColorKeyingEnabled(false);
-
-		_masterRenderer->setBackgroundColor(fvec4(0.0f, 0.0f, 0.0f, 1.0f));
-
-		if(!_networkingServer->isRunning())
+		if(_networkingServer->isRunning())
+		{
+			_renderWindow->setVisible(false);
+			_renderWindow->setPosition(fvec2(0.0f));
+			_renderWindow->setSize(fvec2(0.0f));
+		}
+		else
 		{
 			_renderWindow->setVisible(true);
 			_renderWindow->setPosition(windowPosition);

@@ -31,6 +31,7 @@ private:
 	bool _isStarted = false;
 	bool _isRunning = false;
 	bool _wasCursorVisible = false;
+	bool _wasVsyncEnabled = false;
 	bool _wasFirstPersonEnabled = false;
 	bool _wasThirdPersonEnabled = false;
 	bool _mustSkipUpdate = false;

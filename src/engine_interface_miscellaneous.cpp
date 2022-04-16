@@ -11,6 +11,11 @@ void EngineInterface::misc_setWindowTitle(const string & value)
 	_core->getRenderWindow()->setTitle(value);
 }
 
+void EngineInterface::misc_setVsyncEnabled(bool value)
+{
+	_core->getRenderWindow()->setVsyncEnabled(value);
+}
+
 void EngineInterface::misc_setCursorEntityId(const string & value)
 {
 	_core->getRenderStorage()->setCursorEntityId(value);
@@ -115,6 +120,11 @@ const unsigned int EngineInterface::misc_getUpdateCountPerSecond() const
 const unsigned int EngineInterface::misc_getPassedUpdateCount() const
 {
 	return _core->getTimer()->getPassedUpdateCount();
+}
+
+const bool EngineInterface::misc_isVsyncEnabled() const
+{
+	return _core->getRenderWindow()->isVsyncEnabled();
 }
 
 const float EngineInterface::misc_getTotalDeltaTime() const

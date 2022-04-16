@@ -171,9 +171,11 @@ void ScriptInterpreter::load()
 
 	_fe3d->camera_reset();
 
-	_checkEngineWarnings(lastLoggerMessageCount);
-
 	_fe3d->clock_create("scriptDebug");
+
+	_fe3d->misc_setVsyncEnabled(false);
+
+	_checkEngineWarnings(lastLoggerMessageCount);
 }
 
 void ScriptInterpreter::unload()
@@ -280,6 +282,13 @@ void ScriptInterpreter::unload()
 		_fe3d->sound2d_delete(id);
 	}
 
+	for(const auto & clockId : _fe3d->clock_getIds())
+	{
+		_fe3d->clock_delete(clockId);
+	}
+
+	_fe3d->misc_setVsyncEnabled(true);
+
 	_fe3d->camera_reset();
 
 	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
@@ -344,11 +353,6 @@ void ScriptInterpreter::unload()
 	if(_fe3d->client_isRunning())
 	{
 		_fe3d->client_stop();
-	}
-
-	for(const auto & clockId : _fe3d->clock_getIds())
-	{
-		_fe3d->clock_delete(clockId);
 	}
 
 	_debuggingTimes.clear();

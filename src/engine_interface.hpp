@@ -978,6 +978,7 @@ public:
 	const bool clock_isIdReserved(const string & id) const;
 
 	void misc_setWindowTitle(const string & value);
+	void misc_setVsyncEnabled(bool value);
 	void misc_setCursorEntityId(const string & value);
 	void misc_cacheMesh(const string & filePath, bool isCrucial);
 	void misc_cacheImage(const string & filePath, bool isCrucial);
@@ -1003,6 +1004,7 @@ public:
 	const unsigned int misc_getTriangleCount() const;
 	const unsigned int misc_getUpdateCountPerSecond() const;
 	const unsigned int misc_getPassedUpdateCount() const;
+	const bool misc_isVsyncEnabled() const;
 
 private:
 	shared_ptr<EngineCore> _core = nullptr;

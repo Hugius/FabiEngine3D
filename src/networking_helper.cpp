@@ -12,11 +12,7 @@ NetworkingHelper::NetworkingHelper()
 
 	auto winsockStatus = WSAStartup(MAKEWORD(2, 2), &winsockData);
 
-	if(winsockStatus == 0)
-	{
-		Logger::throwInfo("Initialized WinSock");
-	}
-	else
+	if(winsockStatus != 0)
 	{
 		Logger::throwError("WinSock could not be initialized: ", winsockStatus);
 	}

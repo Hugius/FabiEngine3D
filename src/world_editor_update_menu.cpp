@@ -93,42 +93,24 @@ void WorldEditor::_updateChoiceMenu()
 		{
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
-				_currentTemplateModelId = "";
-				_currentTemplateQuadId = "";
-				_currentTemplateTextId = "";
-				_currentTemplateSoundId = "";
-				_isPlacingPointlight = false;
-				_isPlacingSpotlight = false;
-				_isPlacingReflection = false;
-
 				saveWorldToFile();
-
-				clearLoadedWorld();
-
-				_currentWorldId = "";
-
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
-				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
-
-
 			}
-			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
-			{
-				_currentTemplateModelId = "";
-				_currentTemplateQuadId = "";
-				_currentTemplateTextId = "";
-				_currentTemplateSoundId = "";
-				_isPlacingPointlight = false;
-				_isPlacingSpotlight = false;
-				_isPlacingReflection = false;
 
-				clearLoadedWorld();
+			clearLoadedWorld();
 
-				_currentWorldId = "";
+			_fe3d->misc_setVsyncEnabled(true);
 
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
-				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
-			}
+			_currentWorldId = "";
+			_currentTemplateModelId = "";
+			_currentTemplateQuadId = "";
+			_currentTemplateTextId = "";
+			_currentTemplateSoundId = "";
+			_isPlacingPointlight = false;
+			_isPlacingSpotlight = false;
+			_isPlacingReflection = false;
+
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 		}
 	}
 }

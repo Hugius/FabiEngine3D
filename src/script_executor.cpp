@@ -41,6 +41,7 @@ void ScriptExecutor::pause()
 	if(_isStarted && _isRunning)
 	{
 		_wasCursorVisible = Tools::isCursorVisible();
+		_wasVsyncEnabled = _fe3d->misc_isVsyncEnabled();
 		_wasFirstPersonEnabled = _fe3d->camera_isFirstPersonEnabled();
 		_wasThirdPersonEnabled = _fe3d->camera_isThirdPersonEnabled();
 
@@ -75,6 +76,7 @@ void ScriptExecutor::pause()
 		}
 
 		Tools::setCursorVisible(false);
+		_fe3d->misc_setVsyncEnabled(true);
 		_fe3d->camera_setFirstPersonEnabled(false);
 		_fe3d->camera_setThirdPersonEnabled(false);
 
@@ -117,6 +119,7 @@ void ScriptExecutor::resume()
 	if(_isStarted && !_isRunning)
 	{
 		Tools::setCursorVisible(_wasCursorVisible);
+		_fe3d->misc_setVsyncEnabled(_wasVsyncEnabled);
 		_fe3d->camera_setFirstPersonEnabled(_wasFirstPersonEnabled);
 		_fe3d->camera_setThirdPersonEnabled(_wasThirdPersonEnabled);
 
@@ -185,6 +188,7 @@ void ScriptExecutor::stop()
 		_isStarted = false;
 		_isRunning = false;
 		_wasCursorVisible = false;
+		_wasVsyncEnabled = false;
 		_wasFirstPersonEnabled = false;
 		_wasThirdPersonEnabled = false;
 		_mustSkipUpdate = false;
@@ -222,12 +226,15 @@ void ScriptExecutor::_validateExecution()
 	{
 		_scriptInterpreter->unload();
 
+		Tools::setCursorVisible(false);
+
 		_pausedSound3dIds.clear();
 		_pausedSound2dIds.clear();
 		_pausedClockIds.clear();
 		_isStarted = false;
 		_isRunning = false;
 		_wasCursorVisible = false;
+		_wasVsyncEnabled = false;
 		_wasFirstPersonEnabled = false;
 		_wasThirdPersonEnabled = false;
 		_mustSkipUpdate = false;

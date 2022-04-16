@@ -302,3 +302,8 @@ const bool RenderWindow::isVsyncEnabled() const
 
 	return static_cast<bool>(wglGetSwapIntervalEXT());
 }
+
+const bool RenderWindow::isFocused() const
+{
+	return (GetFocus() == _windowHandle);
+}

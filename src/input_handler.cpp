@@ -2,7 +2,7 @@
 
 #include <shlobj_core.h>
 
-void InputHandler::update()
+void InputHandler::update(bool isFocused)
 {
 	_pressedMouseButtons.clear();
 	_pressedKeyboardKeys.clear();
@@ -10,6 +10,11 @@ void InputHandler::update()
 	_toggledKeyboardKeys.clear();
 	_horizontalMouseWheel = 0;
 	_verticalMouseWheel = 0;
+
+	if(!isFocused)
+	{
+		return;
+	}
 
 	for(const auto button : _buttons)
 	{

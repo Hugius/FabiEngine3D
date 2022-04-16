@@ -10,7 +10,7 @@ using std::vector;
 class InputHandler final
 {
 public:
-	void update();
+	void update(bool isFocused);
 
 	const int getHorizontalMouseWheel() const;
 	const int getVerticalMouseWheel() const;

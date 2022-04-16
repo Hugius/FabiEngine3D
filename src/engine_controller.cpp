@@ -277,15 +277,8 @@ void EngineController::update()
 
 void EngineController::terminate()
 {
-	if(Configuration::getInst().isApplicationExported())
+	if(_scriptExecutor->isRunning())
 	{
-		if(_scriptExecutor->isRunning())
-		{
-			_scriptExecutor->stop();
-		}
-	}
-	else
-	{
-
+		_scriptExecutor->stop();
 	}
 }

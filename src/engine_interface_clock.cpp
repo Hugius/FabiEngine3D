@@ -129,6 +129,7 @@ const bool EngineInterface::clock_isIdReserved(const string & id) const
 		id == "animationUpdate" ||
 		id == "soundUpdate" ||
 		id == "networkUpdate" ||
+		id == "miscUpdate" ||
 		id == "depthPreRender" ||
 		id == "shadowPreRender" ||
 		id == "reflectionPreRender" ||

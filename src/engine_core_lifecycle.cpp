@@ -110,6 +110,7 @@ EngineCore::EngineCore()
 	_timer->createClock("animationUpdate");
 	_timer->createClock("soundUpdate");
 	_timer->createClock("networkUpdate");
+	_timer->createClock("miscUpdate");
 	_timer->createClock("depthPreRender");
 	_timer->createClock("shadowPreRender");
 	_timer->createClock("reflectionPreRender");
@@ -132,6 +133,7 @@ EngineCore::EngineCore()
 	_updateDeltaTimes.insert({"animationUpdate", 0.0f});
 	_updateDeltaTimes.insert({"soundUpdate", 0.0f});
 	_updateDeltaTimes.insert({"networkUpdate", 0.0f});
+	_updateDeltaTimes.insert({"miscUpdate", 0.0f});
 
 	_renderDeltaTimes.insert({"depthPreRender", 0.0f});
 	_renderDeltaTimes.insert({"shadowPreRender", 0.0f});
@@ -167,11 +169,11 @@ void EngineCore::start()
 
 		if(Configuration::getInst().isApplicationExported() && _networkingServer->isRunning())
 		{
-			_timer->increasePassedUpdateCount();
-
 			_engineController->update();
 
 			_networkingServer->update();
+
+			_timer->increasePassedUpdateCount();
 		}
 		else
 		{
@@ -186,8 +188,6 @@ void EngineCore::start()
 
 			while(renderLag >= millisecondsPerUpdate)
 			{
-				_timer->increasePassedUpdateCount();
-
 				_update();
 
 				renderLag -= millisecondsPerUpdate;

@@ -36,7 +36,7 @@ void EngineCore::_update()
 
 	_timer->startClock("renderUpdate");
 	_renderWindow->update();
-	if(!_renderWindow->isExisting())
+	if(_renderWindow->isClosed())
 	{
 		stop();
 	}
@@ -58,6 +58,10 @@ void EngineCore::_update()
 	_networkingClient->update();
 	_timer->stopClock("networkUpdate");
 
+	_timer->startClock("miscUpdate");
+	_timer->increasePassedUpdateCount();
+	_timer->stopClock("miscUpdate");
+
 	_updateDeltaTimes.at("mainUpdate") = _timer->getClockDeltaTime("mainUpdate");
 	_updateDeltaTimes.at("physicsUpdate") = _timer->getClockDeltaTime("physicsUpdate");
 	_updateDeltaTimes.at("3dEntityUpdate") = _timer->getClockDeltaTime("3dEntityUpdate");
@@ -66,6 +70,7 @@ void EngineCore::_update()
 	_updateDeltaTimes.at("animationUpdate") = _timer->getClockDeltaTime("animationUpdate");
 	_updateDeltaTimes.at("soundUpdate") = _timer->getClockDeltaTime("soundUpdate");
 	_updateDeltaTimes.at("networkUpdate") = _timer->getClockDeltaTime("networkUpdate");
+	_updateDeltaTimes.at("miscUpdate") = _timer->getClockDeltaTime("miscUpdate");
 }
 
 void EngineCore::_render()

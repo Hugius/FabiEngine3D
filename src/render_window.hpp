@@ -29,7 +29,7 @@ public:
 	const ivec2 getPosition() const;
 	const ivec2 getSize() const;
 
-	const bool isExisting() const;
+	const bool isClosed() const;
 	const bool isVisible() const;
 	const bool isVsyncEnabled() const;
 

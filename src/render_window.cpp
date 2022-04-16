@@ -278,9 +278,9 @@ const ivec2 RenderWindow::getSize() const
 	return ivec2(rectangle.right, rectangle.bottom);
 }
 
-const bool RenderWindow::isExisting() const
+const bool RenderWindow::isClosed() const
 {
-	return (_windowHandle != nullptr);
+	return (_windowHandle == nullptr);
 }
 
 const bool RenderWindow::isVisible() const

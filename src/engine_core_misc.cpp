@@ -244,27 +244,29 @@ void EngineCore::_initialize()
 	_renderWindow->setKeyingColor(keyingColor);
 	_renderWindow->setPosition(logoPosition);
 	_renderWindow->setSize(logoSize);
+
 	_masterRenderer->setBackgroundColor(fvec4(keyingColor.r, keyingColor.g, keyingColor.b, 1.0f));
 	_masterRenderer->renderLogo(logo, logoSize);
-	_renderWindow->swapBuffer();
 	_masterRenderer->setBackgroundColor(fvec4(0.0f, 0.0f, 0.0f, 1.0f));
-	_renderWindow->setColorKeyingEnabled(false);
+
+	_renderWindow->swapBuffer();
 
 	_engineController->initialize();
 
 	if(_isRunning)
 	{
+		_update();
+
 		if(_networkingServer->isRunning())
 		{
 			_renderWindow->setVisible(false);
-			_renderWindow->setPosition(fvec2(0.0f));
-			_renderWindow->setSize(fvec2(0.0f));
 		}
 		else
 		{
-			_renderWindow->setVisible(true);
+			_renderWindow->setColorKeyingEnabled(false);
 			_renderWindow->setPosition(windowPosition);
 			_renderWindow->setSize(windowSize);
+			_renderWindow->swapBuffer();
 		}
 	}
 }

@@ -94,23 +94,40 @@ void WorldEditor::_updateChoiceMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveWorldToFile();
+				clearLoadedWorld();
+
+				_currentWorldId = "";
+				_currentTemplateModelId = "";
+				_currentTemplateQuadId = "";
+				_currentTemplateTextId = "";
+				_currentTemplateSoundId = "";
+				_isPlacingPointlight = false;
+				_isPlacingSpotlight = false;
+				_isPlacingReflection = false;
+
+				_fe3d->misc_setVsyncEnabled(true);
+
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 			}
+			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
+			{
+				clearLoadedWorld();
 
-			clearLoadedWorld();
+				_currentWorldId = "";
+				_currentTemplateModelId = "";
+				_currentTemplateQuadId = "";
+				_currentTemplateTextId = "";
+				_currentTemplateSoundId = "";
+				_isPlacingPointlight = false;
+				_isPlacingSpotlight = false;
+				_isPlacingReflection = false;
 
-			_fe3d->misc_setVsyncEnabled(true);
+				_fe3d->misc_setVsyncEnabled(true);
 
-			_currentWorldId = "";
-			_currentTemplateModelId = "";
-			_currentTemplateQuadId = "";
-			_currentTemplateTextId = "";
-			_currentTemplateSoundId = "";
-			_isPlacingPointlight = false;
-			_isPlacingSpotlight = false;
-			_isPlacingReflection = false;
-
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
-			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
+				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
+			}
 		}
 	}
 }

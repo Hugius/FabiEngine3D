@@ -1,4 +1,4 @@
-![logo](doc/image/logo.png)
+<img src="doc/image/logo.png" width="75%"/>
 
 ## Introduction
 

@@ -1,6 +1,5 @@
 #include "engine_core.hpp"
 #include "engine_controller.hpp"
-#include "tools.hpp"
 
 void EngineCore::_update()
 {
@@ -12,7 +11,7 @@ void EngineCore::_update()
 	_timer->startClock("physicsUpdate");
 	_camera->update();
 	_cameraCollisionResponder->update();
-	_raycastCalculator->update(Tools::getCursorPosition());
+	_raycastCalculator->update();
 	_raycastIntersector->update();
 	_camera->updateMatrices();
 	_timer->stopClock("physicsUpdate");

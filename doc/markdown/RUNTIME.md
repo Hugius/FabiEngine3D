@@ -22,6 +22,6 @@
 
 ### 2.2 Configuration File
 
+- `window_title`: string value; title of the application window.
 - `window_width`: decimal value between 0.0 and 1.0; A value of 1.0 means the full monitor width.
 - `window_height`: decimal value between 0.0 and 1.0; A value of 1.0 means the full monitor height.
-- `window_title`: string value; title of the application window.

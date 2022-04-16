@@ -184,13 +184,16 @@ const int Tools::parseInteger(const string & valueString)
 
 const string Tools::chooseExplorerFile(const string & startingDirectory, const string & fileType)
 {
-	string filter = fileType;
-	filter.push_back('\0');
-	filter += "*." + fileType + '\0';
+	const auto wasCursorVisible = isCursorVisible();
 
 	OPENFILENAME ofn;
 	char pathBuffer[256] = {};
 	char titleBuffer[100] = {};
+
+	string filter = fileType;
+	filter.push_back('\0');
+	filter += "*." + fileType + '\0';
+
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = nullptr;
@@ -204,19 +207,26 @@ const string Tools::chooseExplorerFile(const string & startingDirectory, const s
 	ofn.nMaxFileTitle = sizeof(titleBuffer);
 	ofn.lpstrInitialDir = startingDirectory.c_str();
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+	setCursorVisible(true);
 	GetOpenFileName(&ofn);
+	setCursorVisible(wasCursorVisible);
 
 	return ofn.lpstrFile;
 }
 
 const string Tools::chooseExplorerDirectory(const string & startingDirectory)
 {
+	const auto wasCursorVisible = isCursorVisible();
+
 	BROWSEINFO browseInfo = {};
 	browseInfo.ulFlags = (BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE);
 	browseInfo.lpfn = nullptr;
 	browseInfo.lParam = LPARAM(startingDirectory.c_str());
 
+	setCursorVisible(true);
 	LPITEMIDLIST pidl = SHBrowseForFolder(&browseInfo);
+	setCursorVisible(wasCursorVisible);
 
 	if(pidl != 0)
 	{

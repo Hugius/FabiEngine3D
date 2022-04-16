@@ -194,15 +194,7 @@ void EngineCore::start()
 				renderLag = max(0.0f, renderLag);
 			}
 
-			_renderStorage->resetTriangleCount();
-
 			_render();
-
-			_timer->startClock("bufferSwap");
-			_renderWindow->swapBuffer();
-			_timer->stopClock("bufferSwap");
-
-			_renderDeltaTimes.at("bufferSwap") = _timer->getClockDeltaTime("bufferSwap");
 		}
 
 		_timer->stopClock("total");

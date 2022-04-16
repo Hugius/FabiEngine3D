@@ -75,6 +75,8 @@ void EngineCore::_update()
 
 void EngineCore::_render()
 {
+	_renderStorage->resetTriangleCount();
+
 	_timer->startClock("depthPreRender");
 	_masterRenderer->captureWorldDepth();
 	_timer->stopClock("depthPreRender");
@@ -118,6 +120,10 @@ void EngineCore::_render()
 	_masterRenderer->render2dEntities();
 	_timer->stopClock("2dEntityRender");
 
+	_timer->startClock("bufferSwap");
+	_renderWindow->swapBuffer();
+	_timer->stopClock("bufferSwap");
+
 	_renderDeltaTimes.at("depthPreRender") = _timer->getClockDeltaTime("depthPreRender");
 	_renderDeltaTimes.at("shadowPreRender") = _timer->getClockDeltaTime("shadowPreRender");
 	_renderDeltaTimes.at("reflectionPreRender") = _timer->getClockDeltaTime("reflectionPreRender");
@@ -130,4 +136,5 @@ void EngineCore::_render()
 	_renderDeltaTimes.at("lensFlarePreRender") = _timer->getClockDeltaTime("lensFlarePreRender");
 	_renderDeltaTimes.at("motionBlurPreRender") = _timer->getClockDeltaTime("motionBlurPreRender");
 	_renderDeltaTimes.at("2dEntityRender") = _timer->getClockDeltaTime("2dEntityRender");
+	_renderDeltaTimes.at("bufferSwap") = _timer->getClockDeltaTime("bufferSwap");
 }

@@ -216,6 +216,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 			_processMiscFunctionCall(valueString);
 
 		_checkEngineWarnings(loggerMessageCount);
+
 		if(_hasThrownError)
 		{
 			return;

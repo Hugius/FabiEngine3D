@@ -137,6 +137,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 			_processMiscFunctionCall(valueString);
 
 		_checkEngineWarnings(loggerMessageCount);
+
 		if(_hasThrownError)
 		{
 			return;

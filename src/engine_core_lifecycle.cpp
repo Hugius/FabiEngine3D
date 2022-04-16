@@ -167,7 +167,7 @@ void EngineCore::start()
 	{
 		_timer->startClock("total");
 
-		if(Configuration::getInst().isApplicationExported() && _networkingServer->isRunning())
+		if(_networkingServer->isRunning())
 		{
 			_engineController->update();
 

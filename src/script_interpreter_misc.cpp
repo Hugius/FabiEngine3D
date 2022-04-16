@@ -119,12 +119,14 @@ const bool ScriptInterpreter::_validateSavesDirectory()
 void ScriptInterpreter::_throwStartupError(const string & message)
 {
 	Logger::throwWarning("ERROR @ script: " + message);
+
 	_hasThrownError = true;
 }
 
 void ScriptInterpreter::_throwRuntimeError(const string & message)
 {
 	Logger::throwWarning("ERROR @ script \"" + _currentScriptIdsStack.back() + "\" @ line " + to_string(_currentLineIndexStack.back() + 1) + ": " + message);
+
 	_hasThrownError = true;
 }
 

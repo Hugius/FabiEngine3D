@@ -7,7 +7,6 @@ class ScriptExecutor final
 public:
 	void inject(shared_ptr<EngineInterface> fe3d);
 	void inject(shared_ptr<ScriptInterpreter> scriptInterpreter);
-
 	void setCurrentProjectId(const string & projectId);
 	void start();
 	void update(bool isDebugging);
@@ -19,7 +18,7 @@ public:
 	const bool isRunning() const;
 
 private:
-	void _validateExecution();
+	void _stop(bool mustExecuteTerminationScripts);
 
 	vector<pair<string, unsigned int>> _pausedSound3dIds = {};
 	vector<pair<string, unsigned int>> _pausedSound2dIds = {};

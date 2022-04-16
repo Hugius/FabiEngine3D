@@ -118,6 +118,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		}
 
 		unsigned int countedSpaces = _countLeadingSpaces(scriptLineText);
+
 		if(_hasThrownError)
 		{
 			return;
@@ -452,6 +453,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		}
 		else if(scriptLineText == PASS_KEYWORD)
 		{
+			// Purposely left blank
 		}
 		else
 		{

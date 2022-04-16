@@ -11,6 +11,11 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
+			if(!Configuration::getInst().isApplicationExported())
+			{
+				_throwRuntimeError("networking server can only be started as exported application");
+				return true;
+			}
 			if(!_isExecutingInitialization)
 			{
 				_throwRuntimeError("networking server can only be started in an initialization script");
@@ -43,18 +48,11 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 		{
 			if(!_fe3d->server_isRunning())
 			{
-				_throwRuntimeError("networking server is already running");
+				_throwRuntimeError("networking server is not running");
 				return true;
 			}
 
-			if(Configuration::getInst().isApplicationExported())
-			{
-				_fe3d->application_stop();
-			}
-			else
-			{
-				_mustStopApplication = true;
-			}
+			_fe3d->application_stop();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

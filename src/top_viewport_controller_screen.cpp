@@ -115,7 +115,7 @@ void TopViewportController::_updateApplicationScreenManagement()
 		const auto isScriptRunning = _scriptExecutor->isRunning();
 
 		topScreen->getButton("start")->setHoverable(isInMainMenu && !isScriptEmpty && !isScriptRunning);
-		topScreen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning && !_fe3d->server_isRunning());
+		topScreen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning);
 		topScreen->getButton("restart")->setHoverable(isInMainMenu && isScriptStarted);
 		topScreen->getButton("stop")->setHoverable(isInMainMenu && isScriptStarted);
 		topScreen->getButton("debug")->setHoverable(isInMainMenu && isScriptStarted);
@@ -129,14 +129,7 @@ void TopViewportController::_updateApplicationScreenManagement()
 		{
 			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE))
 			{
-				if(_fe3d->server_isRunning())
-				{
-					_scriptExecutor->stop();
-				}
-				else
-				{
-					_scriptExecutor->pause();
-				}
+				_scriptExecutor->pause();
 			}
 		}
 

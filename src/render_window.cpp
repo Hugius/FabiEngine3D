@@ -112,6 +112,11 @@ RenderWindow::RenderWindow()
 	}
 }
 
+void RenderWindow::inject(shared_ptr<InputHandler> inputHandler)
+{
+	_inputHandler = inputHandler;
+}
+
 void RenderWindow::update()
 {
 	if(_windowHandle == nullptr)
@@ -126,11 +131,75 @@ void RenderWindow::update()
 		return;
 	}
 
-	MSG message = {};
+	MSG messageEvent = {};
 
-	while(PeekMessage(&message, _windowHandle, 0, 0, PM_REMOVE))
+	while(PeekMessage(&messageEvent, _windowHandle, 0, 0, PM_REMOVE))
 	{
-		DispatchMessage(&message);
+		switch(messageEvent.message)
+		{
+			case WM_LBUTTONDOWN:
+			{
+				_inputHandler->sendMouseDownEvent(ButtonType::BUTTON_LEFT);
+
+				break;
+			}
+			case WM_LBUTTONUP:
+			{
+				_inputHandler->sendMouseUpEvent(ButtonType::BUTTON_LEFT);
+
+				break;
+			}
+			case WM_MBUTTONDOWN:
+			{
+				_inputHandler->sendMouseDownEvent(ButtonType::BUTTON_MIDDLE);
+
+				break;
+			}
+			case WM_MBUTTONUP:
+			{
+				_inputHandler->sendMouseUpEvent(ButtonType::BUTTON_MIDDLE);
+
+				break;
+			}
+			case WM_RBUTTONDOWN:
+			{
+				_inputHandler->sendMouseDownEvent(ButtonType::BUTTON_RIGHT);
+
+				break;
+			}
+			case WM_RBUTTONUP:
+			{
+				_inputHandler->sendMouseUpEvent(ButtonType::BUTTON_RIGHT);
+
+				break;
+			}
+			case WM_MOUSEWHEEL:
+			{
+				//_inputHandler->sendKeyboardDownEvent(messageEvent.wParam);
+
+				break;
+			}
+			case WM_KEYDOWN:
+			{
+				std::cout << "keydown:" << messageEvent.wParam << std::endl;
+				_inputHandler->sendKeyboardDownEvent(KeyType(messageEvent.wParam));
+
+				break;
+			}
+			case WM_KEYUP:
+			{
+				std::cout << "keyup:" << messageEvent.wParam << std::endl;
+				_inputHandler->sendKeyboardUpEvent(KeyType(messageEvent.wParam));
+
+				break;
+			}
+			default:
+			{
+				DispatchMessage(&messageEvent);
+
+				break;
+			}
+		}
 	}
 }
 

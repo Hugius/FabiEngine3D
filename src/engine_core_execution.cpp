@@ -4,7 +4,7 @@
 void EngineCore::_update()
 {
 	_timer->startClock("mainUpdate");
-	_inputHandler->update(_renderWindow->isFocused());
+	_inputHandler->update();
 	_engineController->update();
 	_timer->stopClock("mainUpdate");
 

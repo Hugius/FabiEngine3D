@@ -1,10 +1,12 @@
 #pragma once
 
 #include "mathematics.hpp"
+#include "input_handler.hpp"
 
 #include <string>
 #include <windows.h>
 
+using std::shared_ptr;
 using std::string;
 
 class RenderWindow final
@@ -12,6 +14,7 @@ class RenderWindow final
 public:
 	RenderWindow();
 
+	void inject(shared_ptr<InputHandler> inputHandler);
 	void update();
 	void setPosition(const ivec2 & value);
 	void setSize(const ivec2 & value);
@@ -36,6 +39,8 @@ public:
 
 private:
 	static inline constexpr unsigned int MAX_TITLE_LENGTH = 100;
+
+	shared_ptr<InputHandler> _inputHandler = nullptr;
 
 	HWND _windowHandle = nullptr;
 };

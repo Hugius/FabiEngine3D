@@ -33,7 +33,7 @@ const bool EngineInterface::input_isMouseToggled(ButtonType button) const
 
 const int EngineInterface::input_getMouseWheelX() const
 {
-	return _core->getInputHandler()->getHorizontalMouseWheel();
+	return 0;
 }
 
 const int EngineInterface::input_getMouseWheelY() const

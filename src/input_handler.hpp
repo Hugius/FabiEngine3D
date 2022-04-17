@@ -10,9 +10,13 @@ using std::vector;
 class InputHandler final
 {
 public:
-	void update(bool isFocused);
+	void update();
+	//void sendWheelEvent();
+	void sendMouseDownEvent(ButtonType button);
+	void sendMouseUpEvent(ButtonType button);
+	void sendKeyboardDownEvent(KeyType key);
+	void sendKeyboardUpEvent(KeyType key);
 
-	const int getHorizontalMouseWheel() const;
 	const int getVerticalMouseWheel() const;
 
 	const bool isMouseHeld(ButtonType button) const;
@@ -23,13 +27,13 @@ public:
 	const bool isKeyboardToggled(KeyType key) const;
 
 private:
-	static inline const vector<ButtonType> _buttons =
+	static inline const vector<ButtonType> _mouseButtons =
 	{
 		ButtonType::BUTTON_LEFT,
 		ButtonType::BUTTON_MIDDLE,
 		ButtonType::BUTTON_RIGHT,
 	};
-	static inline const vector<KeyType> _keys =
+	static inline const vector<KeyType> _keyboardKeys =
 	{
 		KeyType::KEY_BACKSPACE,
 		KeyType::KEY_TAB,
@@ -138,11 +142,15 @@ private:
 		KeyType::KEY_QUOTE,
 	};
 
+	vector<ButtonType> _mouseDownEvents = {};
+	vector<ButtonType> _mouseUpEvents = {};
 	vector<ButtonType> _heldMouseButtons = {};
-	vector<KeyType> _heldKeyboardKeys = {};
 	vector<ButtonType> _pressedMouseButtons = {};
-	vector<KeyType> _pressedKeyboardKeys = {};
 	vector<ButtonType> _toggledMouseButtons = {};
+	vector<KeyType> _keyboardDownEvents = {};
+	vector<KeyType> _keyboardUpEvents = {};
+	vector<KeyType> _heldKeyboardKeys = {};
+	vector<KeyType> _pressedKeyboardKeys = {};
 	vector<KeyType> _toggledKeyboardKeys = {};
 
 	int _horizontalMouseWheel = 0;

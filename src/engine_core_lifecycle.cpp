@@ -43,6 +43,7 @@ EngineCore::EngineCore()
 	_networkingServer = make_shared<NetworkingServer>();
 	_networkingClient = make_shared<NetworkingClient>();
 
+	_renderWindow->inject(_inputHandler);
 	_skyEntityManager->inject(_renderStorage);
 	_terrainEntityManager->inject(_imageLoader);
 	_modelEntityManager->inject(_renderStorage);

@@ -59,13 +59,13 @@ void WorldEditor::_updateText3dPlacing()
 				return;
 			}
 
-			if(_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
+			if(_fe3d->input_isMouseHeld(MouseButton::BUTTON_RIGHT))
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
 				return;
 			}
 
-			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_MIDDLE))
+			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_MIDDLE))
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
 				_currentTemplateTextId = "";
@@ -76,7 +76,7 @@ void WorldEditor::_updateText3dPlacing()
 			_fe3d->text3d_setVisible(_currentTemplateTextId, true);
 			_fe3d->text3d_setPosition(_currentTemplateTextId, newPosition);
 
-			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 			{
 				auto newId = (_currentTemplateTextId.substr(1) + "_" + to_string(_idCounter));
 

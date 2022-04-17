@@ -8,7 +8,7 @@ void Quad2dEditor::_updateMiscellaneous()
 	{
 		if(!_currentQuadId.empty())
 		{
-			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_F))
+			if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_F))
 			{
 				_fe3d->quad2d_setWireframed(_currentQuadId, !_fe3d->quad2d_isWireframed(_currentQuadId));
 			}

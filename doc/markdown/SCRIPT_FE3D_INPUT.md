@@ -2,36 +2,46 @@
 
 ## Getters
 
-- `fe3d:input_is_key_down`(`STR` key) -----> `BOL`
-- `fe3d:input_is_key_pressed`(`STR` key) -----> `BOL`
-- `fe3d:input_is_mouse_down`(`STR` button) -----> `BOL`
+- `fe3d:input_is_mouse_scrolled`(`STR` button) -----> `BOL`
+- `fe3d:input_is_mouse_held`(`STR` button) -----> `BOL`
 - `fe3d:input_is_mouse_pressed`(`STR` button) -----> `BOL`
-- `fe3d:input_get_mousewheel_direction`() -----> `INT`
+- `fe3d:input_is_mouse_toggled`(`STR` button) -----> `BOL`
+- `fe3d:input_is_key_held`(`STR` key) -----> `BOL`
+- `fe3d:input_is_key_pressed`(`STR` key) -----> `BOL`
+- `fe3d:input_is_key_toggled`(`STR` key) -----> `BOL`
   
-## Mouse buttons
+## Mouse wheel
 
-- MOUSE_BUTTON_LEFT
-- MOUSE_BUTTON_MIDDLE
-- MOUSE_BUTTON_RIGHT
+- WHEEL_FORWARD
+- WHEEL_BACKWARD
 
-## Keyboard keys
+## Mouse button
 
-- KEY_SPACE
-- KEY_EXCLAMATION
-- KEY_DOUBLEQUOTE
-- KEY_HASH
-- KEY_PERCENT
-- KEY_DOLLAR
-- KEY_AMPERSAND
-- KEY_QUOTE
-- KEY_LEFTPARENTHESIS
-- KEY_RIGHTPARENTHESIS
-- KEY_ASTERISK
-- KEY_PLUS
-- KEY_COMMA
-- KEY_MINUS
-- KEY_PERIOD
-- KEY_SLASH
+- BUTTON_LEFT
+- BUTTON_MIDDLE
+- BUTTON_RIGHT
+
+## Keyboard key
+
+- KEY_BACKSPACE
+- KEY_TAB
+- KEY_ENTER
+- KEY_SHIFT
+- KEY_CONTROL
+- KEY_ALT
+- KEY_CAPSLOCK
+- KEY_ESCAPE
+- KEY_SPACEBAR
+- KEY_PAGEUP
+- KEY_PAGEDOWN
+- KEY_END
+- KEY_HOME
+- KEY_LEFT
+- KEY_UP
+- KEY_RIGHT
+- KEY_DOWN
+- KEY_INSERT
+- KEY_DELETE
 - KEY_0
 - KEY_1
 - KEY_2
@@ -42,19 +52,6 @@
 - KEY_7
 - KEY_8
 - KEY_9
-- KEY_COLON
-- KEY_SEMICOLON
-- KEY_LESS
-- KEY_EQUALS
-- KEY_GREATER
-- KEY_QUESTION
-- KEY_AT
-- KEY_LEFTBRACKET
-- KEY_BACKSLASH
-- KEY_RIGHTBRACKET
-- KEY_CARET
-- KEY_UNDERSCORE
-- KEY_BACKQUOTE
 - KEY_A
 - KEY_B
 - KEY_C
@@ -81,17 +78,21 @@
 - KEY_X
 - KEY_Y
 - KEY_Z
-- KEY_ENTER
-- KEY_ESCAPE
-- KEY_BACKSPACE
-- KEY_TAB
-- KEY_LALT
-- KEY_RALT
-- KEY_LCTRL
-- KEY_RCTRL
-- KEY_LSHIFT
-- KEY_RSHIFT
-- KEY_CAPSLOCK
+- KEY_NUMPAD0
+- KEY_NUMPAD1
+- KEY_NUMPAD2
+- KEY_NUMPAD3
+- KEY_NUMPAD4
+- KEY_NUMPAD5
+- KEY_NUMPAD6
+- KEY_NUMPAD7
+- KEY_NUMPAD8
+- KEY_NUMPAD9
+- KEY_MULTIPLY
+- KEY_ADD
+- KEY_SUBTRACT
+- KEY_DECIMAL
+- KEY_DIVIDE
 - KEY_F1
 - KEY_F2
 - KEY_F3
@@ -104,8 +105,26 @@
 - KEY_F10
 - KEY_F11
 - KEY_F12
-- KEY_RIGHT
-- KEY_LEFT
-- KEY_DOWN
-- KEY_UP
-- KEY_DELETE
+- KEY_F13
+- KEY_F14
+- KEY_F15
+- KEY_F16
+- KEY_F17
+- KEY_F18
+- KEY_F19
+- KEY_F20
+- KEY_F21
+- KEY_F22
+- KEY_F23
+- KEY_F24
+- KEY_SEMICOLON
+- KEY_PLUS
+- KEY_COMMA
+- KEY_MINUS
+- KEY_PERIOD
+- KEY_FORWARDSLASH
+- KEY_GRAVE
+- KEY_LEFTBRACKET
+- KEY_BACKWARDSLASH
+- KEY_RIGHTBRACKET
+- KEY_QUOTE

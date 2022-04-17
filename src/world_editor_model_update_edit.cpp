@@ -21,11 +21,11 @@ void WorldEditor::_updateModelEditing()
 		{
 			const auto isHovered = (hoveredAabbId.substr(0, modelId.size()) == modelId);
 
-			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
+			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButton::BUTTON_RIGHT))
 			{
 				_selectModel(modelId);
 
-				if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+				if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 				{
 					if(_selectedModelId != _activeModelId)
 					{
@@ -44,13 +44,13 @@ void WorldEditor::_updateModelEditing()
 			}
 		}
 
-		if(!_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
+		if(!_fe3d->input_isMouseHeld(MouseButton::BUTTON_RIGHT))
 		{
 			if(Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeModelId.empty())
 				{
-					if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && _selectedModelId.empty()) || _fe3d->input_isMouseHeld(ButtonType::BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && _selectedModelId.empty()) || _fe3d->input_isMouseHeld(MouseButton::BUTTON_MIDDLE))
 					{
 						_activeModelId = "";
 						rightWindow->setActiveScreen("main");
@@ -75,25 +75,25 @@ void WorldEditor::_updateModelEditing()
 
 			rightWindow->setActiveScreen("modelPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
+			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 			{
 				screen->getButton("position")->setHoverable(false);
 				screen->getButton("rotation")->setHoverable(true);
 				screen->getButton("size")->setHoverable(true);
 			}
-			else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
+			else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
 			{
 				screen->getButton("position")->setHoverable(true);
 				screen->getButton("rotation")->setHoverable(false);
 				screen->getButton("size")->setHoverable(true);
 			}
-			else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
+			else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 			{
 				screen->getButton("position")->setHoverable(true);
 				screen->getButton("rotation")->setHoverable(true);
 				screen->getButton("size")->setHoverable(false);
 			}
-			else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("animation")->isHovered())
+			else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 			{
 				if(currentAnimationIds.empty())
 				{
@@ -122,11 +122,11 @@ void WorldEditor::_updateModelEditing()
 					}
 				}
 			}
-			else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
+			else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 			{
 				_fe3d->model_setFrozen(_activeModelId, !_fe3d->model_isFrozen(_activeModelId));
 			}
-			else if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyType::KEY_DELETE))
+			else if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKey::KEY_DELETE))
 			{
 				if(!currentAnimationIds.empty())
 				{
@@ -144,7 +144,7 @@ void WorldEditor::_updateModelEditing()
 			{
 				const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-				if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+				if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 				{
 					if(!currentAnimationIds.empty())
 					{

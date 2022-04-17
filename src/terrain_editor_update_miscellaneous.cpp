@@ -13,28 +13,28 @@ void TerrainEditor::_updateMiscellaneousMenu()
 		const auto greenTextureRepeat = _fe3d->terrain_getGreenTextureRepeat(_currentTerrainId);
 		const auto blueTextureRepeat = _fe3d->terrain_getBlueTextureRepeat(_currentTerrainId);
 
-		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("maxHeight")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("maxHeight")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("maxHeight", "Max Height", maxHeight, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("redTextureRepeat")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("redTextureRepeat")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("redTextureRepeat", "Red Texture Repeat", redTextureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("greenTextureRepeat")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("greenTextureRepeat")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("greenTextureRepeat", "Green Texture Repeat", greenTextureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("blueTextureRepeat")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("blueTextureRepeat")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("blueTextureRepeat", "Blue Texture Repeat", blueTextureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}

@@ -139,57 +139,55 @@ void RenderWindow::update()
 		{
 			case WM_LBUTTONDOWN:
 			{
-				_inputHandler->sendMouseDownEvent(ButtonType::BUTTON_LEFT);
+				_inputHandler->sendMouseDownEvent(MouseButton::BUTTON_LEFT);
 
 				break;
 			}
 			case WM_LBUTTONUP:
 			{
-				_inputHandler->sendMouseUpEvent(ButtonType::BUTTON_LEFT);
+				_inputHandler->sendMouseUpEvent(MouseButton::BUTTON_LEFT);
 
 				break;
 			}
 			case WM_MBUTTONDOWN:
 			{
-				_inputHandler->sendMouseDownEvent(ButtonType::BUTTON_MIDDLE);
+				_inputHandler->sendMouseDownEvent(MouseButton::BUTTON_MIDDLE);
 
 				break;
 			}
 			case WM_MBUTTONUP:
 			{
-				_inputHandler->sendMouseUpEvent(ButtonType::BUTTON_MIDDLE);
+				_inputHandler->sendMouseUpEvent(MouseButton::BUTTON_MIDDLE);
 
 				break;
 			}
 			case WM_RBUTTONDOWN:
 			{
-				_inputHandler->sendMouseDownEvent(ButtonType::BUTTON_RIGHT);
+				_inputHandler->sendMouseDownEvent(MouseButton::BUTTON_RIGHT);
 
 				break;
 			}
 			case WM_RBUTTONUP:
 			{
-				_inputHandler->sendMouseUpEvent(ButtonType::BUTTON_RIGHT);
+				_inputHandler->sendMouseUpEvent(MouseButton::BUTTON_RIGHT);
 
 				break;
 			}
 			case WM_MOUSEWHEEL:
 			{
-				//_inputHandler->sendKeyboardDownEvent(messageEvent.wParam);
+				_inputHandler->sendMouseWheelEvent((messageEvent.wParam > 0) ? MouseWheel::WHEEL_FORWARD : MouseWheel::WHEEL_BACKWARD);
 
 				break;
 			}
 			case WM_KEYDOWN:
 			{
-				std::cout << "keydown:" << messageEvent.wParam << std::endl;
-				_inputHandler->sendKeyboardDownEvent(KeyType(messageEvent.wParam));
+				_inputHandler->sendKeyboardDownEvent(KeyboardKey(messageEvent.wParam));
 
 				break;
 			}
 			case WM_KEYUP:
 			{
-				std::cout << "keyup:" << messageEvent.wParam << std::endl;
-				_inputHandler->sendKeyboardUpEvent(KeyType(messageEvent.wParam));
+				_inputHandler->sendKeyboardUpEvent(KeyboardKey(messageEvent.wParam));
 
 				break;
 			}

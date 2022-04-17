@@ -9,7 +9,7 @@ void WorldEditor::_updateSoundMenu()
 
 	if(screen->getId() == "worldEditorMenuSound")
 	{
-		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			if(!_currentTemplateSoundId.empty())
 			{
@@ -26,11 +26,11 @@ void WorldEditor::_updateSoundMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSoundPlace");
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSoundChoice");
 
@@ -52,12 +52,12 @@ void WorldEditor::_updateSoundPlacingMenu()
 
 	if(screen->getId() == "worldEditorMenuSoundPlace")
 	{
-		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 		{
 			const auto hoveredOptionId = screen->getScrollingList("soundList")->getHoveredOptionId();
 
@@ -108,7 +108,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 
 		if(!hoveredOptionId.empty())
 		{
-			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 			{
 				_deactivateModel();
 				_deactivateQuad();
@@ -127,7 +127,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 			}
 		}
 
-		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSound");
 			return;

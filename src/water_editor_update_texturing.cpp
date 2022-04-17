@@ -10,12 +10,12 @@ void WaterEditor::_updateTexturingMenu()
 	{
 		const auto textureRepeat = _fe3d->water_getTextureRepeat(_currentWaterId);
 
-		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("dudvMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("dudvMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -47,7 +47,7 @@ void WaterEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->water_setDudvMap(_currentWaterId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -79,7 +79,7 @@ void WaterEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->water_setNormalMap(_currentWaterId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("displaceMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("displaceMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -111,13 +111,13 @@ void WaterEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->water_setDisplacementMap(_currentWaterId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d->water_setDudvMap(_currentWaterId, "");
 			_fe3d->water_setNormalMap(_currentWaterId, "");
 			_fe3d->water_setDisplacementMap(_currentWaterId, "");
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}

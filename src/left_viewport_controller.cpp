@@ -34,7 +34,7 @@ void LeftViewportController::update()
 
 	if(screen->getId() == "main")
 	{
-		if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("skyEditor")->isHovered())
+		if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("skyEditor")->isHovered())
 		{
 			if(_skyEditor->loadEntitiesFromFile())
 			{
@@ -42,7 +42,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("skyEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("terrainEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("terrainEditor")->isHovered())
 		{
 			if(_terrainEditor->loadEntitiesFromFile())
 			{
@@ -50,7 +50,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("terrainEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("waterEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("waterEditor")->isHovered())
 		{
 			if(_waterEditor->loadEntitiesFromFile())
 			{
@@ -58,7 +58,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("waterEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("modelEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("modelEditor")->isHovered())
 		{
 			if(_modelEditor->loadEntitiesFromFile())
 			{
@@ -66,7 +66,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("modelEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("quad3dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("quad3dEditor")->isHovered())
 		{
 			if(_quad3dEditor->loadEntitiesFromFile())
 			{
@@ -74,7 +74,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("quad3dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("text3dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("text3dEditor")->isHovered())
 		{
 			if(_text3dEditor->loadEntitiesFromFile())
 			{
@@ -82,7 +82,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("text3dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("quad2dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("quad2dEditor")->isHovered())
 		{
 			if(_quad2dEditor->loadEntitiesFromFile())
 			{
@@ -90,7 +90,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("quad2dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("text2dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("text2dEditor")->isHovered())
 		{
 			if(_text2dEditor->loadEntitiesFromFile())
 			{
@@ -98,7 +98,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("text2dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("animation2dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("animation2dEditor")->isHovered())
 		{
 			if(_animation2dEditor->loadAnimationsFromFile())
 			{
@@ -106,7 +106,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("animation2dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
 		{
 			if(_modelEditor->loadEntitiesFromFile() && _animation3dEditor->loadAnimationsFromFile())
 			{
@@ -114,7 +114,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("animation3dEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("soundEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("soundEditor")->isHovered())
 		{
 			if(_soundEditor->loadSoundsFromFile())
 			{
@@ -122,12 +122,12 @@ void LeftViewportController::update()
 				window->setActiveScreen("soundEditorMenuMain");
 			}
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("worldEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("worldEditor")->isHovered())
 		{
 			_worldEditor->load();
 			window->setActiveScreen("worldEditorMenuMain");
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("scriptEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("scriptEditor")->isHovered())
 		{
 			if(_scriptEditor->loadScriptFiles(true))
 			{

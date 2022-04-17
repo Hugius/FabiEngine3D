@@ -11,22 +11,22 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 		const auto intensity = _fe3d->graphics_getAmbientLightingIntensity();
 		const auto isEnabled = _fe3d->graphics_isAmbientLightingEnabled();
 
-		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsLighting");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			_fe3d->graphics_setAmbientLightingEnabled(!isEnabled);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
@@ -71,28 +71,28 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 		const auto position = _fe3d->graphics_getDirectionalLightingPosition();
 		const auto intensity = _fe3d->graphics_getDirectionalLightingIntensity();
 
-		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsLighting");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			_fe3d->graphics_setDirectionalLightingEnabled(!isEnabled);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("position")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("positionX", "X", position.x, fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("positionY", "Y", position.y, fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("positionZ", "Z", position.z, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("colorR", "Red", (color.r * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("colorG", "Green", (color.g * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("intensity", "Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}

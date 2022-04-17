@@ -1,7 +1,8 @@
 #pragma once
 
-#include "button_type.hpp"
-#include "key_type.hpp"
+#include "mouse_wheel.hpp"
+#include "mouse_button.hpp"
+#include "keyboard_key.hpp"
 #include "direction.hpp"
 #include "direction_order.hpp"
 #include "aabb_parent_type.hpp"
@@ -832,14 +833,13 @@ public:
 	const bool graphics_hasLensFlareMap() const;
 	const BloomType graphics_getBloomType() const;
 
-	const int input_getMouseWheelX() const;
-	const int input_getMouseWheelY() const;
-	const bool input_isMouseHeld(ButtonType button) const;
-	const bool input_isMousePressed(ButtonType button) const;
-	const bool input_isMouseToggled(ButtonType button) const;
-	const bool input_isKeyboardHeld(KeyType key) const;
-	const bool input_isKeyboardPressed(KeyType key) const;
-	const bool input_isKeyboardToggled(KeyType key) const;
+	const bool input_isMouseScrolled(MouseWheel wheel) const;
+	const bool input_isMouseHeld(MouseButton button) const;
+	const bool input_isMousePressed(MouseButton button) const;
+	const bool input_isMouseToggled(MouseButton button) const;
+	const bool input_isKeyboardHeld(KeyboardKey key) const;
+	const bool input_isKeyboardPressed(KeyboardKey key) const;
+	const bool input_isKeyboardToggled(KeyboardKey key) const;
 
 	void camera_reset();
 	void camera_setFirstPersonEnabled(bool value);

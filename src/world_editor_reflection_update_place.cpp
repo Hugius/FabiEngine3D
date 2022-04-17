@@ -71,14 +71,14 @@ void WorldEditor::_updateReflectionPlacing()
 				return;
 			}
 
-			if(_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
+			if(_fe3d->input_isMouseHeld(MouseButton::BUTTON_RIGHT))
 			{
 				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 				return;
 			}
 
-			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_MIDDLE))
+			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_MIDDLE))
 			{
 				_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
@@ -99,7 +99,7 @@ void WorldEditor::_updateReflectionPlacing()
 			_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, true);
 			_fe3d->model_setBasePosition(TEMPLATE_CAMERA_ID, newPosition);
 
-			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 			{
 				auto newId = ("reflection_" + to_string(_idCounter));
 				auto newModelId = ("@@camera_" + newId);

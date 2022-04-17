@@ -9,7 +9,7 @@ void WorldEditor::_updateText3dMenu()
 
 	if(screen->getId() == "worldEditorMenuText3d")
 	{
-		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			if(!_currentTemplateTextId.empty())
 			{
@@ -20,11 +20,11 @@ void WorldEditor::_updateText3dMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("place")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3dPlace");
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3dChoice");
 
@@ -46,12 +46,12 @@ void WorldEditor::_updateText3dPlacingMenu()
 
 	if(screen->getId() == "worldEditorMenuText3dPlace")
 	{
-		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3d");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 		{
 			const auto hoveredOptionId = screen->getScrollingList("textList")->getHoveredOptionId();
 
@@ -100,7 +100,7 @@ void WorldEditor::_updateText3dChoosingMenu()
 
 		if(!hoveredOptionId.empty())
 		{
-			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 			{
 				_deactivateModel();
 				_deactivateQuad();
@@ -119,7 +119,7 @@ void WorldEditor::_updateText3dChoosingMenu()
 			}
 		}
 
-		if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3d");
 			return;

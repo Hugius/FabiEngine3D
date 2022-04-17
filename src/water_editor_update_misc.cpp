@@ -6,17 +6,16 @@ void WaterEditor::_updateCamera()
 {
 	if(_fe3d->camera_isThirdPersonEnabled())
 	{
-		auto scrollOffset = _fe3d->input_getMouseWheelY();
-		auto cameraDistance = _fe3d->camera_getThirdPersonDistance();
-		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED));
-		_fe3d->camera_setThirdPersonDistance(cameraDistance);
+		const auto scrollOffset = (_fe3d->input_isMouseScrolled(MouseWheel::WHEEL_FORWARD) ? 1.0f : _fe3d->input_isMouseScrolled(MouseWheel::WHEEL_BACKWARD) ? -1.0f : 0.0f);
+
+		_fe3d->camera_setThirdPersonDistance(max(MIN_CAMERA_DISTANCE, _fe3d->camera_getThirdPersonDistance() - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED)));
 
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 	}
 
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isMousePressed(ButtonType::BUTTON_RIGHT))
+		if(_fe3d->input_isMousePressed(MouseButton::BUTTON_RIGHT))
 		{
 			_fe3d->camera_setThirdPersonEnabled(!_fe3d->camera_isThirdPersonEnabled());
 		}
@@ -32,14 +31,14 @@ void WaterEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isKeyboardPressed(KeyType::KEY_R))
+		if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_R))
 		{
 			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
 		}
 
 		if(!_currentWaterId.empty())
 		{
-			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_F))
+			if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_F))
 			{
 				_fe3d->water_setWireframed(_currentWaterId, !_fe3d->water_isWireframed(_currentWaterId));
 			}

@@ -8,7 +8,7 @@ void Text2dEditor::_updateMiscellaneous()
 	{
 		if(!_currentTextId.empty())
 		{
-			if(_fe3d->input_isKeyboardPressed(KeyType::KEY_F))
+			if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_F))
 			{
 				_fe3d->text2d_setWireframed(_currentTextId, !_fe3d->text2d_isWireframed(_currentTextId));
 			}

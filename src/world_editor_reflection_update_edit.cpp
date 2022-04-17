@@ -21,11 +21,11 @@ void WorldEditor::_updateReflectionEditing()
 		{
 			const auto isHovered = (hoveredAabbId == ("@@camera_" + reflectionId));
 
-			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
+			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButton::BUTTON_RIGHT))
 			{
 				_selectReflection(reflectionId);
 
-				if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+				if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 				{
 					if(_selectedReflectionId != _activeReflectionId)
 					{
@@ -44,13 +44,13 @@ void WorldEditor::_updateReflectionEditing()
 			}
 		}
 
-		if(!_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
+		if(!_fe3d->input_isMouseHeld(MouseButton::BUTTON_RIGHT))
 		{
 			if(Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeReflectionId.empty())
 				{
-					if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && _selectedReflectionId.empty()) || _fe3d->input_isMouseHeld(ButtonType::BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && _selectedReflectionId.empty()) || _fe3d->input_isMouseHeld(MouseButton::BUTTON_MIDDLE))
 					{
 						_activeReflectionId = "";
 						rightWindow->setActiveScreen("main");
@@ -74,7 +74,7 @@ void WorldEditor::_updateReflectionEditing()
 
 			rightWindow->setActiveScreen("reflectionPropertiesMenu");
 
-			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("exception")->isHovered())
+			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("exception")->isHovered())
 			{
 				vector<string> modelIds;
 
@@ -85,11 +85,11 @@ void WorldEditor::_updateReflectionEditing()
 
 				_gui->getOverlay()->openChoiceForm("selectException", "Select Exception", fvec2(0.0f, 0.1f), modelIds);
 			}
-			else if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("capture")->isHovered())
+			else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("capture")->isHovered())
 			{
 				_fe3d->reflection_capture(_activeReflectionId);
 			}
-			else if((_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyType::KEY_DELETE))
+			else if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKey::KEY_DELETE))
 			{
 				_fe3d->model_delete("@@camera_" + _activeReflectionId);
 				_fe3d->reflection_delete(_activeReflectionId);
@@ -103,7 +103,7 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
-				if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+				if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 				{
 					_fe3d->reflection_setExceptionEntityId(_activeReflectionId, selectedOptionId);
 				}

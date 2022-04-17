@@ -59,13 +59,13 @@ void WorldEditor::_updateQuad3dPlacing()
 				return;
 			}
 
-			if(_fe3d->input_isMouseHeld(ButtonType::BUTTON_RIGHT))
+			if(_fe3d->input_isMouseHeld(MouseButton::BUTTON_RIGHT))
 			{
 				_fe3d->quad3d_setVisible(_currentTemplateQuadId, false);
 				return;
 			}
 
-			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_MIDDLE))
+			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_MIDDLE))
 			{
 				_fe3d->quad3d_setVisible(_currentTemplateQuadId, false);
 				_currentTemplateQuadId = "";
@@ -76,7 +76,7 @@ void WorldEditor::_updateQuad3dPlacing()
 			_fe3d->quad3d_setVisible(_currentTemplateQuadId, true);
 			_fe3d->quad3d_setPosition(_currentTemplateQuadId, newPosition);
 
-			if(_fe3d->input_isMousePressed(ButtonType::BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
 			{
 				auto newId = (_currentTemplateQuadId.substr(1) + "_" + to_string(_idCounter));
 

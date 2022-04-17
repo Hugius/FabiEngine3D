@@ -1,42 +1,37 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-const bool EngineInterface::input_isKeyboardHeld(KeyType key) const
+const bool EngineInterface::input_isKeyboardHeld(KeyboardKey key) const
 {
 	return _core->getInputHandler()->isKeyboardHeld(key);
 }
 
-const bool EngineInterface::input_isKeyboardPressed(KeyType key) const
+const bool EngineInterface::input_isKeyboardPressed(KeyboardKey key) const
 {
 	return _core->getInputHandler()->isKeyboardPressed(key);
 }
 
-const bool EngineInterface::input_isKeyboardToggled(KeyType key) const
+const bool EngineInterface::input_isKeyboardToggled(KeyboardKey key) const
 {
 	return _core->getInputHandler()->isKeyboardToggled(key);
 }
 
-const bool EngineInterface::input_isMouseHeld(ButtonType button) const
+const bool EngineInterface::input_isMouseScrolled(MouseWheel wheel) const
+{
+	return _core->getInputHandler()->isMouseScrolled(wheel);
+}
+
+const bool EngineInterface::input_isMouseHeld(MouseButton button) const
 {
 	return _core->getInputHandler()->isMouseHeld(button);
 }
 
-const bool EngineInterface::input_isMousePressed(ButtonType button) const
+const bool EngineInterface::input_isMousePressed(MouseButton button) const
 {
 	return _core->getInputHandler()->isMousePressed(button);
 }
 
-const bool EngineInterface::input_isMouseToggled(ButtonType button) const
+const bool EngineInterface::input_isMouseToggled(MouseButton button) const
 {
 	return _core->getInputHandler()->isMouseToggled(button);
-}
-
-const int EngineInterface::input_getMouseWheelX() const
-{
-	return 0;
-}
-
-const int EngineInterface::input_getMouseWheelY() const
-{
-	return _core->getInputHandler()->getVerticalMouseWheel();
 }

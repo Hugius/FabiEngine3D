@@ -175,7 +175,20 @@ void RenderWindow::update()
 			}
 			case WM_MOUSEWHEEL:
 			{
-				_inputHandler->sendMouseWheelEvent((messageEvent.wParam > 0) ? MouseWheel::WHEEL_FORWARD : MouseWheel::WHEEL_BACKWARD);
+				const auto direction = GET_WHEEL_DELTA_WPARAM(messageEvent.wParam);
+
+				if(direction > 0)
+				{
+					_inputHandler->sendMouseWheelEvent(MouseWheel::WHEEL_FORWARD);
+				}
+				else if(direction < 0)
+				{
+					_inputHandler->sendMouseWheelEvent(MouseWheel::WHEEL_BACKWARD);
+				}
+				else
+				{
+					abort();
+				}
 
 				break;
 			}

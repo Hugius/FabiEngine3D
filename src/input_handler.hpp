@@ -1,8 +1,8 @@
 #pragma once
 
-#include "mouse_wheel.hpp"
-#include "mouse_button.hpp"
-#include "keyboard_key.hpp"
+#include "mouse_wheel_type.hpp"
+#include "mouse_button_type.hpp"
+#include "keyboard_key_type.hpp"
 
 #include <vector>
 
@@ -12,146 +12,146 @@ class InputHandler final
 {
 public:
 	void update();
-	void sendMouseWheelEvent(MouseWheel wheel);
-	void sendMouseDownEvent(MouseButton button);
-	void sendMouseUpEvent(MouseButton button);
-	void sendKeyboardDownEvent(KeyboardKey key);
-	void sendKeyboardUpEvent(KeyboardKey key);
+	void sendMouseWheelEvent(MouseWheelType wheel);
+	void sendMouseDownEvent(MouseButtonType button);
+	void sendMouseUpEvent(MouseButtonType button);
+	void sendKeyboardDownEvent(KeyboardKeyType key);
+	void sendKeyboardUpEvent(KeyboardKeyType key);
 
-	const bool isMouseScrolled(MouseWheel wheel) const;
-	const bool isMouseHeld(MouseButton button) const;
-	const bool isMousePressed(MouseButton button) const;
-	const bool isMouseToggled(MouseButton button) const;
-	const bool isKeyboardHeld(KeyboardKey key) const;
-	const bool isKeyboardPressed(KeyboardKey key) const;
-	const bool isKeyboardToggled(KeyboardKey key) const;
+	const bool isMouseScrolled(MouseWheelType wheel) const;
+	const bool isMouseHeld(MouseButtonType button) const;
+	const bool isMousePressed(MouseButtonType button) const;
+	const bool isMouseToggled(MouseButtonType button) const;
+	const bool isKeyboardHeld(KeyboardKeyType key) const;
+	const bool isKeyboardPressed(KeyboardKeyType key) const;
+	const bool isKeyboardToggled(KeyboardKeyType key) const;
 
 private:
-	static inline const vector<MouseButton> _mouseButtons =
+	static inline const vector<MouseButtonType> _mouseButtons =
 	{
-		MouseButton::BUTTON_LEFT,
-		MouseButton::BUTTON_MIDDLE,
-		MouseButton::BUTTON_RIGHT,
+		MouseButtonType::BUTTON_LEFT,
+		MouseButtonType::BUTTON_MIDDLE,
+		MouseButtonType::BUTTON_RIGHT,
 	};
-	static inline const vector<KeyboardKey> _keyboardKeys =
+	static inline const vector<KeyboardKeyType> _keyboardKeys =
 	{
-		KeyboardKey::KEY_BACKSPACE,
-		KeyboardKey::KEY_TAB,
-		KeyboardKey::KEY_ENTER,
-		KeyboardKey::KEY_SHIFT,
-		KeyboardKey::KEY_CONTROL,
-		KeyboardKey::KEY_ALT,
-		KeyboardKey::KEY_CAPSLOCK,
-		KeyboardKey::KEY_ESCAPE,
-		KeyboardKey::KEY_SPACEBAR,
-		KeyboardKey::KEY_PAGEUP,
-		KeyboardKey::KEY_PAGEDOWN,
-		KeyboardKey::KEY_END,
-		KeyboardKey::KEY_HOME,
-		KeyboardKey::KEY_LEFT,
-		KeyboardKey::KEY_UP,
-		KeyboardKey::KEY_RIGHT,
-		KeyboardKey::KEY_DOWN,
-		KeyboardKey::KEY_INSERT,
-		KeyboardKey::KEY_DELETE,
-		KeyboardKey::KEY_0,
-		KeyboardKey::KEY_1,
-		KeyboardKey::KEY_2,
-		KeyboardKey::KEY_3,
-		KeyboardKey::KEY_4,
-		KeyboardKey::KEY_5,
-		KeyboardKey::KEY_6,
-		KeyboardKey::KEY_7,
-		KeyboardKey::KEY_8,
-		KeyboardKey::KEY_9,
-		KeyboardKey::KEY_A,
-		KeyboardKey::KEY_B,
-		KeyboardKey::KEY_C,
-		KeyboardKey::KEY_D,
-		KeyboardKey::KEY_E,
-		KeyboardKey::KEY_F,
-		KeyboardKey::KEY_G,
-		KeyboardKey::KEY_H,
-		KeyboardKey::KEY_I,
-		KeyboardKey::KEY_J,
-		KeyboardKey::KEY_K,
-		KeyboardKey::KEY_L,
-		KeyboardKey::KEY_M,
-		KeyboardKey::KEY_N,
-		KeyboardKey::KEY_O,
-		KeyboardKey::KEY_P,
-		KeyboardKey::KEY_Q,
-		KeyboardKey::KEY_R,
-		KeyboardKey::KEY_S,
-		KeyboardKey::KEY_T,
-		KeyboardKey::KEY_U,
-		KeyboardKey::KEY_V,
-		KeyboardKey::KEY_W,
-		KeyboardKey::KEY_X,
-		KeyboardKey::KEY_Y,
-		KeyboardKey::KEY_Z,
-		KeyboardKey::KEY_NUMPAD0,
-		KeyboardKey::KEY_NUMPAD1,
-		KeyboardKey::KEY_NUMPAD2,
-		KeyboardKey::KEY_NUMPAD3,
-		KeyboardKey::KEY_NUMPAD4,
-		KeyboardKey::KEY_NUMPAD5,
-		KeyboardKey::KEY_NUMPAD6,
-		KeyboardKey::KEY_NUMPAD7,
-		KeyboardKey::KEY_NUMPAD8,
-		KeyboardKey::KEY_NUMPAD9,
-		KeyboardKey::KEY_MULTIPLY,
-		KeyboardKey::KEY_ADD,
-		KeyboardKey::KEY_SUBTRACT,
-		KeyboardKey::KEY_DECIMAL,
-		KeyboardKey::KEY_DIVIDE,
-		KeyboardKey::KEY_F1,
-		KeyboardKey::KEY_F2,
-		KeyboardKey::KEY_F3,
-		KeyboardKey::KEY_F4,
-		KeyboardKey::KEY_F5,
-		KeyboardKey::KEY_F6,
-		KeyboardKey::KEY_F7,
-		KeyboardKey::KEY_F8,
-		KeyboardKey::KEY_F9,
-		KeyboardKey::KEY_F10,
-		KeyboardKey::KEY_F11,
-		KeyboardKey::KEY_F12,
-		KeyboardKey::KEY_F13,
-		KeyboardKey::KEY_F14,
-		KeyboardKey::KEY_F15,
-		KeyboardKey::KEY_F16,
-		KeyboardKey::KEY_F17,
-		KeyboardKey::KEY_F18,
-		KeyboardKey::KEY_F19,
-		KeyboardKey::KEY_F20,
-		KeyboardKey::KEY_F21,
-		KeyboardKey::KEY_F22,
-		KeyboardKey::KEY_F23,
-		KeyboardKey::KEY_F24,
-		KeyboardKey::KEY_SEMICOLON,
-		KeyboardKey::KEY_EQUAL,
-		KeyboardKey::KEY_COMMA,
-		KeyboardKey::KEY_MINUS,
-		KeyboardKey::KEY_PERIOD,
-		KeyboardKey::KEY_FORWARDSLASH,
-		KeyboardKey::KEY_GRAVE,
-		KeyboardKey::KEY_LEFTBRACKET,
-		KeyboardKey::KEY_BACKWARDSLASH,
-		KeyboardKey::KEY_RIGHTBRACKET,
-		KeyboardKey::KEY_QUOTE,
+		KeyboardKeyType::KEY_BACKSPACE,
+		KeyboardKeyType::KEY_TAB,
+		KeyboardKeyType::KEY_ENTER,
+		KeyboardKeyType::KEY_SHIFT,
+		KeyboardKeyType::KEY_CONTROL,
+		KeyboardKeyType::KEY_ALT,
+		KeyboardKeyType::KEY_CAPSLOCK,
+		KeyboardKeyType::KEY_ESCAPE,
+		KeyboardKeyType::KEY_SPACEBAR,
+		KeyboardKeyType::KEY_PAGEUP,
+		KeyboardKeyType::KEY_PAGEDOWN,
+		KeyboardKeyType::KEY_END,
+		KeyboardKeyType::KEY_HOME,
+		KeyboardKeyType::KEY_LEFT,
+		KeyboardKeyType::KEY_UP,
+		KeyboardKeyType::KEY_RIGHT,
+		KeyboardKeyType::KEY_DOWN,
+		KeyboardKeyType::KEY_INSERT,
+		KeyboardKeyType::KEY_DELETE,
+		KeyboardKeyType::KEY_0,
+		KeyboardKeyType::KEY_1,
+		KeyboardKeyType::KEY_2,
+		KeyboardKeyType::KEY_3,
+		KeyboardKeyType::KEY_4,
+		KeyboardKeyType::KEY_5,
+		KeyboardKeyType::KEY_6,
+		KeyboardKeyType::KEY_7,
+		KeyboardKeyType::KEY_8,
+		KeyboardKeyType::KEY_9,
+		KeyboardKeyType::KEY_A,
+		KeyboardKeyType::KEY_B,
+		KeyboardKeyType::KEY_C,
+		KeyboardKeyType::KEY_D,
+		KeyboardKeyType::KEY_E,
+		KeyboardKeyType::KEY_F,
+		KeyboardKeyType::KEY_G,
+		KeyboardKeyType::KEY_H,
+		KeyboardKeyType::KEY_I,
+		KeyboardKeyType::KEY_J,
+		KeyboardKeyType::KEY_K,
+		KeyboardKeyType::KEY_L,
+		KeyboardKeyType::KEY_M,
+		KeyboardKeyType::KEY_N,
+		KeyboardKeyType::KEY_O,
+		KeyboardKeyType::KEY_P,
+		KeyboardKeyType::KEY_Q,
+		KeyboardKeyType::KEY_R,
+		KeyboardKeyType::KEY_S,
+		KeyboardKeyType::KEY_T,
+		KeyboardKeyType::KEY_U,
+		KeyboardKeyType::KEY_V,
+		KeyboardKeyType::KEY_W,
+		KeyboardKeyType::KEY_X,
+		KeyboardKeyType::KEY_Y,
+		KeyboardKeyType::KEY_Z,
+		KeyboardKeyType::KEY_NUMPAD0,
+		KeyboardKeyType::KEY_NUMPAD1,
+		KeyboardKeyType::KEY_NUMPAD2,
+		KeyboardKeyType::KEY_NUMPAD3,
+		KeyboardKeyType::KEY_NUMPAD4,
+		KeyboardKeyType::KEY_NUMPAD5,
+		KeyboardKeyType::KEY_NUMPAD6,
+		KeyboardKeyType::KEY_NUMPAD7,
+		KeyboardKeyType::KEY_NUMPAD8,
+		KeyboardKeyType::KEY_NUMPAD9,
+		KeyboardKeyType::KEY_MULTIPLY,
+		KeyboardKeyType::KEY_ADD,
+		KeyboardKeyType::KEY_SUBTRACT,
+		KeyboardKeyType::KEY_DECIMAL,
+		KeyboardKeyType::KEY_DIVIDE,
+		KeyboardKeyType::KEY_F1,
+		KeyboardKeyType::KEY_F2,
+		KeyboardKeyType::KEY_F3,
+		KeyboardKeyType::KEY_F4,
+		KeyboardKeyType::KEY_F5,
+		KeyboardKeyType::KEY_F6,
+		KeyboardKeyType::KEY_F7,
+		KeyboardKeyType::KEY_F8,
+		KeyboardKeyType::KEY_F9,
+		KeyboardKeyType::KEY_F10,
+		KeyboardKeyType::KEY_F11,
+		KeyboardKeyType::KEY_F12,
+		KeyboardKeyType::KEY_F13,
+		KeyboardKeyType::KEY_F14,
+		KeyboardKeyType::KEY_F15,
+		KeyboardKeyType::KEY_F16,
+		KeyboardKeyType::KEY_F17,
+		KeyboardKeyType::KEY_F18,
+		KeyboardKeyType::KEY_F19,
+		KeyboardKeyType::KEY_F20,
+		KeyboardKeyType::KEY_F21,
+		KeyboardKeyType::KEY_F22,
+		KeyboardKeyType::KEY_F23,
+		KeyboardKeyType::KEY_F24,
+		KeyboardKeyType::KEY_SEMICOLON,
+		KeyboardKeyType::KEY_EQUAL,
+		KeyboardKeyType::KEY_COMMA,
+		KeyboardKeyType::KEY_MINUS,
+		KeyboardKeyType::KEY_PERIOD,
+		KeyboardKeyType::KEY_FORWARDSLASH,
+		KeyboardKeyType::KEY_GRAVE,
+		KeyboardKeyType::KEY_LEFTBRACKET,
+		KeyboardKeyType::KEY_BACKWARDSLASH,
+		KeyboardKeyType::KEY_RIGHTBRACKET,
+		KeyboardKeyType::KEY_QUOTE,
 	};
 
-	vector<MouseWheel> _mouseWheelEvents = {};
-	vector<MouseWheel> _scrolledMouseWheels = {};
-	vector<MouseButton> _mouseDownEvents = {};
-	vector<MouseButton> _mouseUpEvents = {};
-	vector<MouseButton> _heldMouseButtons = {};
-	vector<MouseButton> _pressedMouseButtons = {};
-	vector<MouseButton> _toggledMouseButtons = {};
-	vector<KeyboardKey> _keyboardDownEvents = {};
-	vector<KeyboardKey> _keyboardUpEvents = {};
-	vector<KeyboardKey> _heldKeyboardKeys = {};
-	vector<KeyboardKey> _pressedKeyboardKeys = {};
-	vector<KeyboardKey> _toggledKeyboardKeys = {};
+	vector<MouseWheelType> _mouseWheelEvents = {};
+	vector<MouseWheelType> _scrolledMouseWheels = {};
+	vector<MouseButtonType> _mouseDownEvents = {};
+	vector<MouseButtonType> _mouseUpEvents = {};
+	vector<MouseButtonType> _heldMouseButtons = {};
+	vector<MouseButtonType> _pressedMouseButtons = {};
+	vector<MouseButtonType> _toggledMouseButtons = {};
+	vector<KeyboardKeyType> _keyboardDownEvents = {};
+	vector<KeyboardKeyType> _keyboardUpEvents = {};
+	vector<KeyboardKeyType> _heldKeyboardKeyTypes = {};
+	vector<KeyboardKeyType> _pressedKeyboardKeyTypes = {};
+	vector<KeyboardKeyType> _toggledKeyboardKeyTypes = {};
 };

@@ -1,6 +1,6 @@
 #include "networking_client_message.hpp"
 
-NetworkingClientMessage::NetworkingClientMessage(const string & username, const string & content, const NetworkProtocol protocol)
+NetworkingClientMessage::NetworkingClientMessage(const string & username, const string & content, const NetworkingProtocolType protocol)
 	:
 	_username(username),
 	_content(content),
@@ -19,7 +19,7 @@ const string & NetworkingClientMessage::getContent() const
 	return _content;
 }
 
-const NetworkProtocol NetworkingClientMessage::getProtocol() const
+const NetworkingProtocolType NetworkingClientMessage::getProtocol() const
 {
 	return _protocol;
 }

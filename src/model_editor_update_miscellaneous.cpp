@@ -16,20 +16,20 @@ void ModelEditor::_updateMiscellaneousMenu()
 		const auto isFaceCulled = (isPartSelected ? _fe3d->model_isFaceCulled(_currentModelId, _currentPartId) : false);
 		const auto levelOfDetailEntityId = (isNoPartSelected ? _fe3d->model_getLevelOfDetailEntityId(_currentModelId) : "");
 		const auto levelOfDetailDistance = (isNoPartSelected ? _fe3d->model_getLevelOfDetailDistance(_currentModelId) : 0.0f);
-		const auto rotationOrder = (isNoPartSelected ? _fe3d->model_getRotationOrder(_currentModelId) : DirectionOrder::XYZ);
+		const auto rotationOrder = (isNoPartSelected ? _fe3d->model_getRotationOrder(_currentModelId) : DirectionOrderType::XYZ);
 
-		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("sizeX", "X", (size.x * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			_gui->getOverlay()->openValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
 			if(_currentPartId.empty())
 			{
@@ -40,15 +40,15 @@ void ModelEditor::_updateMiscellaneousMenu()
 				_gui->getOverlay()->openValueForm("opacity", "Opacity", (_originalPartOpacity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("minTextureAlpha")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
 			_fe3d->model_setFaceCulled(_currentModelId, _currentPartId, !isFaceCulled);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("levelOfDetailEntityId")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("levelOfDetailEntityId")->isHovered())
 		{
 			if(levelOfDetailEntityId.empty())
 			{
@@ -59,35 +59,35 @@ void ModelEditor::_updateMiscellaneousMenu()
 				_gui->getOverlay()->openValueForm("levelOfDetailEntityId", "LOD Entity ID", levelOfDetailEntityId.substr(1, levelOfDetailEntityId.size() - 1), fvec2(0.0f, 0.1f), 5, true, true, false);
 			}
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("levelOfDetailDistance", "LOD Distance", levelOfDetailDistance, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{
-			if(rotationOrder == DirectionOrder::XYZ)
+			if(rotationOrder == DirectionOrderType::XYZ)
 			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrder::XZY);
+				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::XZY);
 			}
-			else if(rotationOrder == DirectionOrder::XZY)
+			else if(rotationOrder == DirectionOrderType::XZY)
 			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrder::YXZ);
+				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::YXZ);
 			}
-			else if(rotationOrder == DirectionOrder::YXZ)
+			else if(rotationOrder == DirectionOrderType::YXZ)
 			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrder::YZX);
+				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::YZX);
 			}
-			else if(rotationOrder == DirectionOrder::YZX)
+			else if(rotationOrder == DirectionOrderType::YZX)
 			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrder::ZXY);
+				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::ZXY);
 			}
-			else if(rotationOrder == DirectionOrder::ZXY)
+			else if(rotationOrder == DirectionOrderType::ZXY)
 			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrder::ZYX);
+				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::ZYX);
 			}
-			else if(rotationOrder == DirectionOrder::ZYX)
+			else if(rotationOrder == DirectionOrderType::ZYX)
 			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrder::XYZ);
+				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::XYZ);
 			}
 		}
 
@@ -156,32 +156,32 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 		switch(rotationOrder)
 		{
-			case DirectionOrder::XYZ:
+			case DirectionOrderType::XYZ:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: X Y Z");
 				break;
 			}
-			case DirectionOrder::XZY:
+			case DirectionOrderType::XZY:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: X Z Y");
 				break;
 			}
-			case DirectionOrder::YXZ:
+			case DirectionOrderType::YXZ:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: Y X Z");
 				break;
 			}
-			case DirectionOrder::YZX:
+			case DirectionOrderType::YZX:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: Y Z X");
 				break;
 			}
-			case DirectionOrder::ZXY:
+			case DirectionOrderType::ZXY:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: Z X Y");
 				break;
 			}
-			case DirectionOrder::ZYX:
+			case DirectionOrderType::ZYX:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: Z Y X");
 				break;

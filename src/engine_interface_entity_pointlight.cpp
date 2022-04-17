@@ -46,7 +46,7 @@ void EngineInterface::pointlight_setIntensity(const string & id, float value)
 	_core->getPointlightEntityManager()->getEntity(id)->setIntensity(value);
 }
 
-void EngineInterface::pointlight_setShape(const string & id, PointlightShape value)
+void EngineInterface::pointlight_setShape(const string & id, PointlightType value)
 {
 	return _core->getPointlightEntityManager()->getEntity(id)->setShape(value);
 }
@@ -61,7 +61,7 @@ const bool EngineInterface::pointlight_isVisible(const string & id) const
 	return _core->getPointlightEntityManager()->getEntity(id)->isVisible();
 }
 
-const PointlightShape EngineInterface::pointlight_getShape(const string & id) const
+const PointlightType EngineInterface::pointlight_getShape(const string & id) const
 {
 	return _core->getPointlightEntityManager()->getEntity(id)->getShape();
 }

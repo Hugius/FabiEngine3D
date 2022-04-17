@@ -363,7 +363,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->pointlight_setRadius(pointlightId, radius);
 			_fe3d->pointlight_setColor(pointlightId, color);
 			_fe3d->pointlight_setIntensity(pointlightId, intensity);
-			_fe3d->pointlight_setShape(pointlightId, PointlightShape(shape));
+			_fe3d->pointlight_setShape(pointlightId, PointlightType(shape));
 
 			_loadedPointlightIds.push_back(pointlightId);
 		}

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "pixel_format.hpp"
+#include "pixel_format_type.hpp"
 
 class Image final
 {
 public:
-	Image(unsigned char * pixels, unsigned int width, unsigned int height, PixelFormat pixelFormat);
+	Image(unsigned char * pixels, unsigned int width, unsigned int height, PixelFormatType pixelFormat);
 	~Image();
 
 	void flipX();
@@ -16,7 +16,7 @@ public:
 	const unsigned int getWidth() const;
 	const unsigned int getHeight() const;
 
-	const PixelFormat getPixelFormat() const;
+	const PixelFormatType getPixelFormat() const;
 
 private:
 	const unsigned char * _pixels;
@@ -24,5 +24,5 @@ private:
 	const unsigned int _width;
 	const unsigned int _height;
 
-	const PixelFormat _pixelFormat;
+	const PixelFormatType _pixelFormat;
 };

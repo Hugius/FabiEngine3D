@@ -60,7 +60,7 @@ void PointlightEntity::setIntensity(float value)
 	_intensity = max(0.0f, value);
 }
 
-void PointlightEntity::setShape(PointlightShape value)
+void PointlightEntity::setShape(PointlightType value)
 {
 	_shape = value;
 }
@@ -85,7 +85,7 @@ const float PointlightEntity::getIntensity() const
 	return _intensity;
 }
 
-const PointlightShape PointlightEntity::getShape() const
+const PointlightType PointlightEntity::getShape() const
 {
 	return _shape;
 }

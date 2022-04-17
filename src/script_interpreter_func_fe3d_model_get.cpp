@@ -1087,7 +1087,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 				switch(rotationOrder)
 				{
-					case DirectionOrder::XYZ:
+					case DirectionOrderType::XYZ:
 					{
 						const auto result = "XYZ";
 
@@ -1095,7 +1095,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 						break;
 					}
-					case DirectionOrder::XZY:
+					case DirectionOrderType::XZY:
 					{
 						const auto result = "XZY";
 
@@ -1103,7 +1103,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 						break;
 					}
-					case DirectionOrder::YXZ:
+					case DirectionOrderType::YXZ:
 					{
 						const auto result = "YXZ";
 
@@ -1111,7 +1111,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 						break;
 					}
-					case DirectionOrder::YZX:
+					case DirectionOrderType::YZX:
 					{
 						const auto result = "YZX";
 
@@ -1119,7 +1119,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 						break;
 					}
-					case DirectionOrder::ZXY:
+					case DirectionOrderType::ZXY:
 					{
 						const auto result = "ZXY";
 
@@ -1127,7 +1127,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 
 						break;
 					}
-					case DirectionOrder::ZYX:
+					case DirectionOrderType::ZYX:
 					{
 						const auto result = "ZYX";
 

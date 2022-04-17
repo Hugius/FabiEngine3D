@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 
-Image::Image(unsigned char * pixels, unsigned int width, unsigned int height, PixelFormat pixelFormat)
+Image::Image(unsigned char * pixels, unsigned int width, unsigned int height, PixelFormatType pixelFormat)
 	:
 	_pixels(pixels),
 	_width(width),
@@ -29,7 +29,7 @@ Image::~Image()
 
 void Image::flipX()
 {
-	const auto byteFormat = (_pixelFormat == PixelFormat::RGB ? 3 : 4);
+	const auto byteFormat = (_pixelFormat == PixelFormatType::RGB ? 3 : 4);
 	const auto size = (_width * _height * byteFormat);
 	auto newPixels = new unsigned char[size];
 
@@ -62,7 +62,7 @@ void Image::flipX()
 
 void Image::flipY()
 {
-	const auto byteFormat = (_pixelFormat == PixelFormat::RGB ? 3 : 4);
+	const auto byteFormat = (_pixelFormat == PixelFormatType::RGB ? 3 : 4);
 	const auto size = (_width * _height * byteFormat);
 	auto newPixels = new unsigned char[size];
 
@@ -108,7 +108,7 @@ const unsigned int Image::getHeight() const
 	return _height;
 }
 
-const PixelFormat Image::getPixelFormat() const
+const PixelFormatType Image::getPixelFormat() const
 {
 	return _pixelFormat;
 }

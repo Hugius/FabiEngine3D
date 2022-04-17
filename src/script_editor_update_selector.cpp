@@ -13,7 +13,7 @@ void ScriptEditor::_updateTextSelector()
 	const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 	const auto scriptFile = _script->getScriptFile(_currentScriptFileId);
 
-	if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && !hoveredAabbId.empty())
+	if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && !hoveredAabbId.empty())
 	{
 		auto cursorLineIndex = scriptFile->getCursorLineIndex();
 		auto cursorCharacterIndex = scriptFile->getCursorCharacterIndex();
@@ -45,13 +45,13 @@ void ScriptEditor::_updateTextSelector()
 		scriptFile->setCursorCharacterIndex(cursorCharacterIndex);
 	}
 
-	const auto isControlDown = _fe3d->input_isKeyboardHeld(KeyboardKey::KEY_CONTROL);
+	const auto isControlDown = _fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_CONTROL);
 	const auto cursorLineIndex = scriptFile->getCursorLineIndex();
 	const auto cursorCharacterIndex = scriptFile->getCursorCharacterIndex();
 
 	_fe3d->text3d_setVisible("cursor", true);
 
-	if(isControlDown && _fe3d->input_isKeyboardHeld(KeyboardKey::KEY_A) && !scriptFile->getLine(cursorLineIndex).empty())
+	if(isControlDown && _fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_A) && !scriptFile->getLine(cursorLineIndex).empty())
 	{
 		if(!(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::PART)))
 		{
@@ -81,7 +81,7 @@ void ScriptEditor::_updateTextSelector()
 		}
 	}
 
-	if(_fe3d->input_isMouseHeld(MouseButton::BUTTON_RIGHT) && hoveredAabbId.find('_') != string::npos)
+	if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT) && hoveredAabbId.find('_') != string::npos)
 	{
 		if(!(_fe3d->quad3d_isVisible("selection") && (_selectionType == ScriptSelectionType::FULL)))
 		{
@@ -128,7 +128,7 @@ void ScriptEditor::_updateTextSelector()
 		const auto firstSelectionCharacterIndex = static_cast<unsigned int>(stoi(_firstSelectionAabbId.substr(_firstSelectionAabbId.find('_') + 1)));
 		const auto secondSelectionCharacterIndex = static_cast<unsigned int>(stoi(_secondSelectionAabbId.substr(_secondSelectionAabbId.find('_') + 1)));
 
-		if(isControlDown && (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_C) || _fe3d->input_isKeyboardPressed(KeyboardKey::KEY_X)))
+		if(isControlDown && (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_C) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_X)))
 		{
 			const auto lineText = scriptFile->getLine(selectionLineIndex);
 
@@ -142,7 +142,7 @@ void ScriptEditor::_updateTextSelector()
 			}
 		}
 
-		if(isControlDown && (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_Z) || _fe3d->input_isKeyboardPressed(KeyboardKey::KEY_X)))
+		if(isControlDown && (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_Z) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_X)))
 		{
 			auto lineText = scriptFile->getLine(selectionLineIndex);
 
@@ -169,7 +169,7 @@ void ScriptEditor::_updateTextSelector()
 	}
 	else
 	{
-		if(isControlDown && _fe3d->input_isKeyboardPressed(KeyboardKey::KEY_V))
+		if(isControlDown && _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_V))
 		{
 			if(!_selectionClipboard.empty())
 			{

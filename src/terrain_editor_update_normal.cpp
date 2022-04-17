@@ -8,12 +8,12 @@ void TerrainEditor::_updateNormalMapMenu()
 
 	if(screen->getId() == "terrainEditorMenuNormalTexturing")
 	{
-		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -45,7 +45,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setNormalMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("redNormalMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("redNormalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -77,7 +77,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setRedNormalMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("greenNormalMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("greenNormalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -109,7 +109,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setGreenNormalMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("blueNormalMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("blueNormalMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -141,7 +141,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->terrain_setBlueNormalMap(_currentTerrainId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d->terrain_setNormalMap(_currentTerrainId, "");
 			_fe3d->terrain_setRedNormalMap(_currentTerrainId, "");

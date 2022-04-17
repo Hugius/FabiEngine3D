@@ -222,7 +222,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 				switch(shape)
 				{
-					case PointlightShape::CIRCLE:
+					case PointlightType::CIRCLE:
 					{
 						const auto result = "CIRCLE";
 
@@ -230,7 +230,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 
 						break;
 					}
-					case PointlightShape::SQUARE:
+					case PointlightType::SQUARE:
 					{
 						const auto result = "SQUARE";
 

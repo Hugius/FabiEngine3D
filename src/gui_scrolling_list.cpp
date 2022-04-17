@@ -232,7 +232,7 @@ void GuiScrollingList::_updateScrolling()
 	{
 		if(_isHovered)
 		{
-			_scrollingOffset += ((_fe3d->input_isMouseScrolled(MouseWheel::WHEEL_FORWARD) ? 1.0f : _fe3d->input_isMouseScrolled(MouseWheel::WHEEL_BACKWARD) ? -1.0f : 0.0f) * _scrollingSpeed);
+			_scrollingOffset += ((_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_FORWARD) ? 1.0f : _fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_BACKWARD) ? -1.0f : 0.0f) * _scrollingSpeed);
 		}
 
 		const auto totalHeight = ((static_cast<float>(_buttons.size()) * _characterSize.y * 1.5f) + (_characterSize.y * 0.5f));

@@ -6,15 +6,15 @@ void Quad3dEditor::_updateMainMenu()
 
 	if(screen->getId() == "quad3dEditorMenuMain")
 	{
-		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getOverlay()->openAnswerForm("back", "Save Changes?", "Yes", "No", fvec2(0.0f, 0.25f));
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("createQuad", "Create Quad3D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
 
@@ -25,7 +25,7 @@ void Quad3dEditor::_updateMainMenu()
 
 			_gui->getOverlay()->openChoiceForm("editQuad", "Edit Quad3D", fvec2(-0.5f, 0.1f), ids);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto ids = _loadedEntityIds;
 
@@ -60,7 +60,7 @@ void Quad3dEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "quad3dEditorMenuChoice")
 	{
-		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_fe3d->quad3d_setWireframed(_currentQuadId, false);
 			_fe3d->quad3d_setVisible(_currentQuadId, false);
@@ -69,15 +69,15 @@ void Quad3dEditor::_updateChoiceMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuMain");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuTexturing");
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuLighting");
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuMiscellaneous");
 		}

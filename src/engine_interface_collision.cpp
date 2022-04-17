@@ -41,7 +41,7 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
 	return result;
 }
 
-const vector<string> EngineInterface::collision_checkCameraWithAabbs(Direction direction) const
+const vector<string> EngineInterface::collision_checkCameraWithAabbs(DirectionType direction) const
 {
 	vector<string> result;
 
@@ -94,7 +94,7 @@ const bool EngineInterface::collision_isCameraAabbResponseEnabledZ() const
 	return _core->getCameraCollisionResponder()->isCameraAabbResponseEnabledZ();
 }
 
-const bool EngineInterface::collision_checkCameraWithAabb(const string & id, Direction direction) const
+const bool EngineInterface::collision_checkCameraWithAabb(const string & id, DirectionType direction) const
 {
 	if(_core->getAabbEntityManager()->getEntity(id)->hasCollided())
 	{

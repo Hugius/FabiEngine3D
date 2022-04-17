@@ -2,7 +2,7 @@
 
 #include "base_entity.hpp"
 #include "mathematics.hpp"
-#include "pointlight_shape.hpp"
+#include "pointlight_type.hpp"
 
 class PointlightEntity final : public BaseEntity
 {
@@ -16,7 +16,7 @@ public:
 	void setRadius(const fvec3 & value);
 	void setColor(const fvec3 & value);
 	void setIntensity(float value);
-	void setShape(PointlightShape value);
+	void setShape(PointlightType value);
 
 	const fvec3 & getPosition() const;
 	const fvec3 & getColor() const;
@@ -24,7 +24,7 @@ public:
 
 	const float getIntensity() const;
 
-	const PointlightShape getShape() const;
+	const PointlightType getShape() const;
 
 private:
 	fvec3 _position = fvec3(0.0f);
@@ -35,5 +35,5 @@ private:
 	float _positionTargetSpeed = 0.0f;
 	float _intensity = 1.0f;
 
-	PointlightShape _shape = PointlightShape::CIRCLE;
+	PointlightType _shape = PointlightType::CIRCLE;
 };

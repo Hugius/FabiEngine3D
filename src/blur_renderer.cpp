@@ -21,11 +21,11 @@ void BlurRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2dEntity> entity, shared_ptr<TextureBuffer> texture, unsigned int blurCount, float intensity, BlurDirection direction)
+const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2dEntity> entity, shared_ptr<TextureBuffer> texture, unsigned int blurCount, float intensity, BlurDirectionType direction)
 {
 	_shaderBuffer->uploadUniform("u_intensity", intensity);
 
-	if((direction == BlurDirection::BOTH) || (direction == BlurDirection::HORIZONTAL))
+	if((direction == BlurDirectionType::BOTH) || (direction == BlurDirectionType::HORIZONTAL))
 	{
 		_shaderBuffer->uploadUniform("u_isHorizontal", true);
 
@@ -38,7 +38,7 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 		}
 	}
 
-	if((direction == BlurDirection::BOTH) || (direction == BlurDirection::VERTICAL))
+	if((direction == BlurDirectionType::BOTH) || (direction == BlurDirectionType::VERTICAL))
 	{
 		_shaderBuffer->uploadUniform("u_isHorizontal", false);
 

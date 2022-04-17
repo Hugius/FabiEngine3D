@@ -1,6 +1,6 @@
 #pragma once
 
-enum class ScriptVariableScope
+enum class ScriptScopeType
 {
 	GLOBAL,
 	LOCAL

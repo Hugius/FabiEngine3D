@@ -3,7 +3,7 @@
 
 using std::initializer_list;
 
-void ScriptInterpreter::_processVariableCreation(const string & scriptLine, ScriptVariableScope scope)
+void ScriptInterpreter::_processVariableCreation(const string & scriptLine, ScriptScopeType scope)
 {
 	auto forbiddenVariableNames = {
 		META_KEYWORD,
@@ -41,7 +41,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 	};
 
 	bool isConstant = false;
-	if(scope == ScriptVariableScope::GLOBAL)
+	if(scope == ScriptScopeType::GLOBAL)
 	{
 		string possibleConstKeyword = scriptLine.substr(GLOBAL_KEYWORD.size(), CONST_KEYWORD.size() + 2);
 		isConstant = (possibleConstKeyword == (" " + CONST_KEYWORD + " "));
@@ -55,7 +55,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 	string words[3] = {"", "", ""};
 	unsigned int typeIndex = 0;
 	unsigned int wordIndex = 0;
-	typeIndex += static_cast<unsigned int>((scope == ScriptVariableScope::GLOBAL) ? (GLOBAL_KEYWORD.size() + 1) : 0);
+	typeIndex += static_cast<unsigned int>((scope == ScriptScopeType::GLOBAL) ? (GLOBAL_KEYWORD.size() + 1) : 0);
 	typeIndex += static_cast<unsigned int>(isConstant ? (CONST_KEYWORD.size() + 1) : 0);
 	for(const auto & character : scriptLine.substr(typeIndex))
 	{
@@ -119,13 +119,13 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		}
 	}
 
-	if(scope == ScriptVariableScope::GLOBAL && nameString[0] != '_')
+	if(scope == ScriptScopeType::GLOBAL && nameString[0] != '_')
 	{
 		_throwRuntimeError("global variables must start with '_'");
 		return;
 	}
 
-	if(scope == ScriptVariableScope::LOCAL && nameString[0] == '_')
+	if(scope == ScriptScopeType::LOCAL && nameString[0] == '_')
 	{
 		_throwRuntimeError("local variables cannot start with '_'");
 		return;
@@ -137,10 +137,10 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		return;
 	}
 
-	auto & variableList = ((scope == ScriptVariableScope::LOCAL) ? _localVariables[_executionDepth] : _globalVariables);
+	auto & variableList = ((scope == ScriptScopeType::LOCAL) ? _localVariables[_executionDepth] : _globalVariables);
 
-	if((scope == ScriptVariableScope::LOCAL && _isLocalVariableExisting(nameString)) ||
-	   (scope == ScriptVariableScope::GLOBAL && _isGlobalVariableExisting(nameString)))
+	if((scope == ScriptScopeType::LOCAL && _isLocalVariableExisting(nameString)) ||
+	   (scope == ScriptScopeType::GLOBAL && _isGlobalVariableExisting(nameString)))
 	{
 		_throwRuntimeError("variable \"" + nameString + "\" already defined");
 		return;

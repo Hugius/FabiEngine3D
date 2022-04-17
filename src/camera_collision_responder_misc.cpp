@@ -89,13 +89,13 @@ const bool CameraCollisionResponder::isCameraTerrainResponseEnabled() const
 	return _isCameraTerrainResponseEnabled;
 }
 
-const bool CameraCollisionResponder::_handleCollision(Direction direction) const
+const bool CameraCollisionResponder::_handleCollision(DirectionType direction) const
 {
 	for(const auto & [entityId, entity] : _aabbManager->getEntities())
 	{
 		switch(direction)
 		{
-			case Direction::X:
+			case DirectionType::X:
 			{
 				if(entity->isCollisionResponsive())
 				{
@@ -105,7 +105,7 @@ const bool CameraCollisionResponder::_handleCollision(Direction direction) const
 
 					if(hasCollided)
 					{
-						entity->setCollisionDirection(Direction::X);
+						entity->setCollisionDirection(DirectionType::X);
 						entity->setCollided(true);
 					}
 
@@ -118,7 +118,7 @@ const bool CameraCollisionResponder::_handleCollision(Direction direction) const
 
 				break;
 			}
-			case Direction::Y:
+			case DirectionType::Y:
 			{
 				if(entity->isCollisionResponsive())
 				{
@@ -128,7 +128,7 @@ const bool CameraCollisionResponder::_handleCollision(Direction direction) const
 
 					if(hasCollided)
 					{
-						entity->setCollisionDirection(Direction::Y);
+						entity->setCollisionDirection(DirectionType::Y);
 						entity->setCollided(true);
 					}
 
@@ -144,7 +144,7 @@ const bool CameraCollisionResponder::_handleCollision(Direction direction) const
 
 				break;
 			}
-			case Direction::Z:
+			case DirectionType::Z:
 			{
 				if(entity->isCollisionResponsive())
 				{
@@ -154,7 +154,7 @@ const bool CameraCollisionResponder::_handleCollision(Direction direction) const
 
 					if(hasCollided)
 					{
-						entity->setCollisionDirection(Direction::Z);
+						entity->setCollisionDirection(DirectionType::Z);
 						entity->setCollided(true);
 					}
 

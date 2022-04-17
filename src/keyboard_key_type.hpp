@@ -1,6 +1,6 @@
 #pragma once
 
-enum class KeyboardKey
+enum class KeyboardKeyType
 {
 	KEY_BACKSPACE = 0x08,
 	KEY_TAB = 0x09,

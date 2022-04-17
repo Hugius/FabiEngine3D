@@ -2,7 +2,7 @@
 
 #include "base_entity.hpp"
 #include "vertex_buffer.hpp"
-#include "direction.hpp"
+#include "direction_type.hpp"
 #include "texture_buffer.hpp"
 
 #include <array>

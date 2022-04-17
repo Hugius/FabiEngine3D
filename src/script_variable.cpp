@@ -1,6 +1,6 @@
 #include "script_variable.hpp"
 
-ScriptVariable::ScriptVariable(const string & id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>> & values)
+ScriptVariable::ScriptVariable(const string & id, ScriptScopeType scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>> & values)
 	:
 	_scope(scope),
 	_type(type),
@@ -20,7 +20,7 @@ const string & ScriptVariable::getId() const
 	return _id;
 }
 
-const ScriptVariableScope ScriptVariable::getScope() const
+const ScriptScopeType ScriptVariable::getScope() const
 {
 	return _scope;
 }

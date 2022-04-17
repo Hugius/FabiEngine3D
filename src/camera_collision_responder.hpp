@@ -5,7 +5,7 @@
 #include "terrain_entity_manager.hpp"
 #include "aabb_entity_manager.hpp"
 #include "box.hpp"
-#include "direction_order.hpp"
+#include "direction_order_type.hpp"
 
 class CameraCollisionResponder final
 {
@@ -33,7 +33,7 @@ public:
 	const bool isCameraTerrainResponseEnabled() const;
 
 private:
-	const bool _handleCollision(Direction direction) const;
+	const bool _handleCollision(DirectionType direction) const;
 
 	shared_ptr<Box> _cameraBox = nullptr;
 	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
@@ -52,5 +52,5 @@ private:
 	bool _isCameraTerrainResponseEnabled = false;
 	bool _isCameraUnderTerrain = false;
 
-	DirectionOrder _responseDirectionOrder = DirectionOrder::XYZ;
+	DirectionOrderType _responseDirectionOrder = DirectionOrderType::XYZ;
 };

@@ -93,7 +93,7 @@ void Quad3dEntity::updateTransformation()
 	auto rotationMatrix = Mathematics::createRotationMatrix(
 		Mathematics::convertToRadians(_rotation.x),
 		Mathematics::convertToRadians(_rotation.y),
-		Mathematics::convertToRadians(_rotation.z), DirectionOrder::YXZ);
+		Mathematics::convertToRadians(_rotation.z), DirectionOrderType::YXZ);
 	_transformation = (_transformation * rotationMatrix);
 
 	if(!_isCentered)

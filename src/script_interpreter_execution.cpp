@@ -394,11 +394,11 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			scriptLineText.substr(0, BOOLEAN_KEYWORD.size() + 1) == BOOLEAN_KEYWORD + " "
 			)
 		{
-			_processVariableCreation(scriptLineText, ScriptVariableScope::LOCAL);
+			_processVariableCreation(scriptLineText, ScriptScopeType::LOCAL);
 		}
 		else if(scriptLineText.substr(0, GLOBAL_KEYWORD.size() + 1) == GLOBAL_KEYWORD + " ")
 		{
-			_processVariableCreation(scriptLineText, ScriptVariableScope::GLOBAL);
+			_processVariableCreation(scriptLineText, ScriptScopeType::GLOBAL);
 		}
 		else if(scriptLineText.substr(0, EDIT_KEYWORD.size() + 1) == EDIT_KEYWORD + " ")
 		{

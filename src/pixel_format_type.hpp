@@ -1,6 +1,6 @@
 #pragma once
 
-enum class PixelFormat
+enum class PixelFormatType
 {
 	RGB,
 	RGBA

@@ -9,7 +9,7 @@
 #include "mat22.hpp"
 #include "mat33.hpp"
 #include "mat44.hpp"
-#include "direction_order.hpp"
+#include "direction_order_type.hpp"
 
 #include <vector>
 #include <random>
@@ -29,7 +29,7 @@ public:
 	static const mat44 createTranslationMatrixX(float value);
 	static const mat44 createTranslationMatrixY(float value);
 	static const mat44 createTranslationMatrixZ(float value);
-	static const mat44 createRotationMatrix(float x, float y, float z, DirectionOrder order);
+	static const mat44 createRotationMatrix(float x, float y, float z, DirectionOrderType order);
 	static const mat44 createRotationMatrixX(float angle);
 	static const mat44 createRotationMatrixY(float angle);
 	static const mat44 createRotationMatrixZ(float angle);

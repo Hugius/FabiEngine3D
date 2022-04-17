@@ -10,12 +10,12 @@ void Quad3dEditor::_updateTexturingMenu()
 	{
 		const auto textureRepeat = _fe3d->quad3d_getTextureRepeat(_currentQuadId);
 
-		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -47,7 +47,7 @@ void Quad3dEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->quad3d_setDiffuseMap(_currentQuadId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -79,12 +79,12 @@ void Quad3dEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->quad3d_setEmissionMap(_currentQuadId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d->quad3d_setDiffuseMap(_currentQuadId, "");
 			_fe3d->quad3d_setEmissionMap(_currentQuadId, "");
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}

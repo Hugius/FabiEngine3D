@@ -34,17 +34,17 @@ void GuiOverlay::_updateForms()
 
 	if(!_choiceFormId.empty())
 	{
-		if(!getChoiceFormOptionId().empty() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+		if(!getChoiceFormOptionId().empty() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
 			_mustCloseChoiceForm = true;
 		}
 
-		if(getButton("choice_form_cancel")->isHovered() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+		if(getButton("choice_form_cancel")->isHovered() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
 			_mustCloseChoiceForm = true;
 		}
 
-		if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE))
+		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE))
 		{
 			_mustCloseChoiceForm = true;
 		}
@@ -52,22 +52,22 @@ void GuiOverlay::_updateForms()
 
 	if(!_valueFormId.empty())
 	{
-		if(getButton("value_form_enter")->isHovered() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+		if(getButton("value_form_enter")->isHovered() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
 			_mustCloseValueForm = true;
 		}
 
-		if(getButton("value_form_cancel")->isHovered() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+		if(getButton("value_form_cancel")->isHovered() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
 			_mustCloseValueForm = true;
 		}
 
-		if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ENTER))
+		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ENTER))
 		{
 			_mustCloseValueForm = true;
 		}
 
-		if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE))
+		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE))
 		{
 			_mustCloseValueForm = true;
 		}
@@ -75,22 +75,22 @@ void GuiOverlay::_updateForms()
 
 	if(!_answerFormId.empty())
 	{
-		if(getButton("answer_form_left")->isHovered() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+		if(getButton("answer_form_left")->isHovered() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
 			_mustCloseAnswerForm = true;
 		}
 
-		if(getButton("answer_form_cancel")->isHovered() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+		if(getButton("answer_form_cancel")->isHovered() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
 			_mustCloseAnswerForm = true;
 		}
 
-		if(getButton("answer_form_right")->isHovered() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+		if(getButton("answer_form_right")->isHovered() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
 			_mustCloseAnswerForm = true;
 		}
 
-		if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE))
+		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE))
 		{
 			_mustCloseAnswerForm = true;
 		}
@@ -104,7 +104,7 @@ const bool GuiOverlay::isChoiceFormConfirmed() const
 		abort();
 	}
 
-	if(!getScrollingList("choice_form_list")->getHoveredOptionId().empty() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+	if(!getScrollingList("choice_form_list")->getHoveredOptionId().empty() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 	{
 		return true;
 	}
@@ -119,12 +119,12 @@ const bool GuiOverlay::isValueFormConfirmed() const
 		abort();
 	}
 
-	if(getButton("value_form_enter")->isHovered() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+	if(getButton("value_form_enter")->isHovered() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 	{
 		return true;
 	}
 
-	if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ENTER))
+	if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ENTER))
 	{
 		return true;
 	}
@@ -139,12 +139,12 @@ const bool GuiOverlay::isAnswerFormConfirmed() const
 		abort();
 	}
 
-	if(getButton("answer_form_left")->isHovered() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+	if(getButton("answer_form_left")->isHovered() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 	{
 		return true;
 	}
 
-	if(getButton("answer_form_right")->isHovered() && _fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+	if(getButton("answer_form_right")->isHovered() && _fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 	{
 		return true;
 	}

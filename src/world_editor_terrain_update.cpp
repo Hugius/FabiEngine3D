@@ -6,12 +6,12 @@ void WorldEditor::_updateTerrainMenu()
 
 	if(screen->getId() == "worldEditorMenuTerrain")
 	{
-		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("choose")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> terrainIds;
 
@@ -25,7 +25,7 @@ void WorldEditor::_updateTerrainMenu()
 
 			_gui->getOverlay()->openChoiceForm("selectTerrain", "Select Terrain", fvec2(0.0f, 0.1f), terrainIds);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_fe3d->terrain_delete(_fe3d->terrain_getSelectedId());
 		}

@@ -1,6 +1,6 @@
 #pragma once
 
-enum class LogMessageType
+enum class LoggerMessageType
 {
 	INFO,
 	ERR,

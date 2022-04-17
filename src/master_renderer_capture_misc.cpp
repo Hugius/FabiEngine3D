@@ -126,7 +126,7 @@ void MasterRenderer::captureDof()
 	if(_renderStorage->isDofEnabled())
 	{
 		_dofBlurRenderer->bind();
-		_renderStorage->setDofMap(_dofBlurRenderer->blurTexture(_renderSurface, _renderStorage->getFinalSceneTextureBuffer(), 2, 1.0f, BlurDirection::BOTH));
+		_renderStorage->setDofMap(_dofBlurRenderer->blurTexture(_renderSurface, _renderStorage->getFinalSceneTextureBuffer(), 2, 1.0f, BlurDirectionType::BOTH));
 		_dofBlurRenderer->unbind();
 
 		_dofCaptureBuffer->bind();
@@ -164,20 +164,20 @@ void MasterRenderer::captureMotionBlur()
 		const auto difference = (_renderStorage->getMotionBlurDifference() * _renderStorage->getMotionBlurIntensity());
 
 		bool hasMoved = false;
-		BlurDirection direction;
+		BlurDirectionType direction;
 
 		if(difference.x != 0.0f || difference.y != 0.0f)
 		{
 			if(difference.x >= difference.y)
 			{
 				hasMoved = true;
-				direction = BlurDirection::HORIZONTAL;
+				direction = BlurDirectionType::HORIZONTAL;
 				_renderStorage->setMotionBlurMixValue(difference.x);
 			}
 			else
 			{
 				hasMoved = true;
-				direction = BlurDirection::VERTICAL;
+				direction = BlurDirectionType::VERTICAL;
 				_renderStorage->setMotionBlurMixValue(difference.y);
 			}
 		}
@@ -236,11 +236,11 @@ void MasterRenderer::captureBloom()
 		}
 
 		_bloomBlurRendererHighQuality->bind();
-		_renderStorage->setBloomMap(_bloomBlurRendererHighQuality->blurTexture(_renderSurface, _renderStorage->getBloomTextureBuffer(), _renderStorage->getBloomBlurCount(), _renderStorage->getBloomIntensity(), BlurDirection::BOTH));
+		_renderStorage->setBloomMap(_bloomBlurRendererHighQuality->blurTexture(_renderSurface, _renderStorage->getBloomTextureBuffer(), _renderStorage->getBloomBlurCount(), _renderStorage->getBloomIntensity(), BlurDirectionType::BOTH));
 		_bloomBlurRendererHighQuality->unbind();
 
 		_bloomBlurRendererLowQuality->bind();
-		_renderStorage->setBloomMap(_bloomBlurRendererLowQuality->blurTexture(_renderSurface, _renderStorage->getBloomTextureBuffer(), _renderStorage->getBloomBlurCount(), _renderStorage->getBloomIntensity(), BlurDirection::BOTH));
+		_renderStorage->setBloomMap(_bloomBlurRendererLowQuality->blurTexture(_renderSurface, _renderStorage->getBloomTextureBuffer(), _renderStorage->getBloomBlurCount(), _renderStorage->getBloomIntensity(), BlurDirectionType::BOTH));
 		_bloomBlurRendererLowQuality->unbind();
 
 		_bloomCaptureBuffer->bind();

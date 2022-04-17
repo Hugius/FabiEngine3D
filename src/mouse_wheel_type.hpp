@@ -1,6 +1,6 @@
 #pragma once
 
-enum class MouseWheel
+enum class MouseWheelType
 {
 	WHEEL_FORWARD,
 	WHEEL_BACKWARD

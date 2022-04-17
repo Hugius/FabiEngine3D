@@ -61,7 +61,7 @@ void AabbEntity::updateTransformation()
 	_transformation = (translationMatrix * scalingMatrix);
 }
 
-void AabbEntity::setCollisionDirection(Direction value)
+void AabbEntity::setCollisionDirection(DirectionType value)
 {
 	_collisionDirection = value;
 }
@@ -194,7 +194,7 @@ const AabbParentType AabbEntity::getParentType() const
 	return _parentType;
 }
 
-const Direction AabbEntity::getCollisionDirection() const
+const DirectionType AabbEntity::getCollisionDirection() const
 {
 	return _collisionDirection;
 }

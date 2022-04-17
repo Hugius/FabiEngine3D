@@ -11,7 +11,7 @@ void SkyEditor::_updateCamera()
 
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isMousePressed(MouseButton::BUTTON_RIGHT))
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_RIGHT))
 		{
 			_fe3d->camera_setFirstPersonEnabled(!_fe3d->camera_isFirstPersonEnabled());
 		}
@@ -32,7 +32,7 @@ void SkyEditor::_updateMiscellaneous()
 	{
 		if(!_currentSkyId.empty())
 		{
-			if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_F))
+			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_F))
 			{
 				_fe3d->sky_setWireframed(_currentSkyId, !_fe3d->sky_isWireframed(_currentSkyId));
 			}

@@ -359,7 +359,7 @@ void ModelEntity::setFaceCulled(const string & partId, bool value)
 	_parts.at(partId)->isFaceCulled = value;
 }
 
-void ModelEntity::setRotationOrder(DirectionOrder value)
+void ModelEntity::setRotationOrder(DirectionOrderType value)
 {
 	_rotationOrder = value;
 }
@@ -704,7 +704,7 @@ const ReflectionType ModelEntity::getReflectionType(const string & partId) const
 	return _parts.at(partId)->reflectionType;
 }
 
-const DirectionOrder ModelEntity::getRotationOrder() const
+const DirectionOrderType ModelEntity::getRotationOrder() const
 {
 	return _rotationOrder;
 }

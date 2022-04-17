@@ -1,6 +1,6 @@
 #pragma once
 
-enum class Direction
+enum class DirectionType
 {
 	X,
 	Y,

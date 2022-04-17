@@ -85,19 +85,19 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 					}
 					else if(args[2]->getString() == "X")
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), Direction::X);
+						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), DirectionType::X);
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}
 					else if(args[2]->getString() == "Y")
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), Direction::Y);
+						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), DirectionType::Y);
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}
 					else if(args[2]->getString() == "Z")
 					{
-						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), Direction::Z);
+						const auto result = _fe3d->collision_checkCameraWithAabb((args[0]->getString() + "@" + args[1]->getString()), DirectionType::Z);
 
 						returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 					}
@@ -126,19 +126,19 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 				}
 				else if(args[1]->getString() == "X")
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), Direction::X);
+					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::X);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
 				else if(args[1]->getString() == "Y")
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), Direction::Y);
+					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::Y);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
 				else if(args[1]->getString() == "Z")
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), Direction::Z);
+					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::Z);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
@@ -166,19 +166,19 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 				}
 				else if(args[1]->getString() == "X")
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), Direction::X);
+					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::X);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
 				else if(args[1]->getString() == "Y")
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), Direction::Y);
+					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::Y);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
 				else if(args[1]->getString() == "Z")
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), Direction::Z);
+					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::Z);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
@@ -206,19 +206,19 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 				}
 				else if(args[1]->getString() == "X")
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), Direction::X);
+					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::X);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
 				else if(args[1]->getString() == "Y")
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), Direction::Y);
+					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::Y);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
 				else if(args[1]->getString() == "Z")
 				{
-					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), Direction::Z);
+					const auto result = _fe3d->collision_checkCameraWithAabb(args[0]->getString(), DirectionType::Z);
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 				}
@@ -244,15 +244,15 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 			}
 			else if(args[1]->getString() == "X")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::X);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::X);
 			}
 			else if(args[1]->getString() == "Y")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::Y);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::Y);
 			}
 			else if(args[1]->getString() == "Z")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::Z);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::Z);
 			}
 			else
 			{
@@ -300,15 +300,15 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 			}
 			else if(args[1]->getString() == "X")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::X);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::X);
 			}
 			else if(args[1]->getString() == "Y")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::Y);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::Y);
 			}
 			else if(args[1]->getString() == "Z")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::Z);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::Z);
 			}
 			else
 			{
@@ -339,15 +339,15 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 			}
 			else if(args[1]->getString() == "X")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::X);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::X);
 			}
 			else if(args[1]->getString() == "Y")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::Y);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::Y);
 			}
 			else if(args[1]->getString() == "Z")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::Z);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::Z);
 			}
 			else
 			{
@@ -378,15 +378,15 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 			}
 			else if(args[1]->getString() == "X")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::X);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::X);
 			}
 			else if(args[1]->getString() == "Y")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::Y);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::Y);
 			}
 			else if(args[1]->getString() == "Z")
 			{
-				aabbIds = _fe3d->collision_checkCameraWithAabbs(Direction::Z);
+				aabbIds = _fe3d->collision_checkCameraWithAabbs(DirectionType::Z);
 			}
 			else
 			{

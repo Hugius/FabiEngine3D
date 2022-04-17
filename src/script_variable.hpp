@@ -1,13 +1,13 @@
 #pragma once
 
 #include "script_value.hpp"
-#include "script_variable_scope.hpp"
+#include "script_scope_type.hpp"
 #include "script_variable_type.hpp"
 
 class ScriptVariable final
 {
 public:
-	ScriptVariable(const string & id, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>> & values);
+	ScriptVariable(const string & id, ScriptScopeType scope, ScriptVariableType type, bool isConstant, const vector<shared_ptr<ScriptValue>> & values);
 
 	void addValue(shared_ptr<ScriptValue> value);
 	void setValues(const vector<shared_ptr<ScriptValue>> & values);
@@ -23,7 +23,7 @@ public:
 
 	const bool isConstant() const;
 
-	const ScriptVariableScope getScope() const;
+	const ScriptScopeType getScope() const;
 	const ScriptVariableType getType() const;
 
 private:
@@ -31,7 +31,7 @@ private:
 
 	const bool _isConstant;
 
-	const ScriptVariableScope _scope;
+	const ScriptScopeType _scope;
 	const ScriptVariableType _type;
 
 	vector<shared_ptr<ScriptValue>> _values = {};

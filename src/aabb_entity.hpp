@@ -2,7 +2,7 @@
 
 #include "base_entity.hpp"
 #include "vertex_buffer.hpp"
-#include "direction.hpp"
+#include "direction_type.hpp"
 #include "aabb_parent_type.hpp"
 
 #include <memory>
@@ -27,7 +27,7 @@ public:
 	void scaleBaseTo(const fvec3 & target, float speed);
 	void setParentId(const string & value);
 	void setParentType(AabbParentType value);
-	void setCollisionDirection(Direction value);
+	void setCollisionDirection(DirectionType value);
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
 	void setCollided(bool value);
@@ -53,7 +53,7 @@ public:
 	const bool hasCollided() const;
 
 	const AabbParentType getParentType() const;
-	const Direction getCollisionDirection() const;
+	const DirectionType getCollisionDirection() const;
 
 private:
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
@@ -79,5 +79,5 @@ private:
 	bool _hasCollided = false;
 
 	AabbParentType _parentType = {};
-	Direction _collisionDirection = {};
+	DirectionType _collisionDirection = {};
 };

@@ -112,7 +112,7 @@ void NetworkingClient::update()
 					}
 					else if(_tcpMessageBuild == "SERVER_FULL")
 					{
-						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
+						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkingProtocolType::TCP));
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
@@ -120,7 +120,7 @@ void NetworkingClient::update()
 					}
 					else if(_tcpMessageBuild == "ALREADY_CONNECTED")
 					{
-						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
+						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkingProtocolType::TCP));
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
@@ -128,7 +128,7 @@ void NetworkingClient::update()
 					}
 					else if(_tcpMessageBuild == "DISCONNECTED")
 					{
-						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
+						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkingProtocolType::TCP));
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
@@ -136,7 +136,7 @@ void NetworkingClient::update()
 					}
 					else
 					{
-						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
+						_pendingMessages.push_back(NetworkingServerMessage(_tcpMessageBuild, NetworkingProtocolType::TCP));
 						_tcpMessageBuild = "";
 					}
 				}
@@ -181,7 +181,7 @@ void NetworkingClient::update()
 		{
 			if((messageIp == _serverIp) && (messagePort == NetworkingHelper::SERVER_PORT))
 			{
-				_pendingMessages.push_back(NetworkingServerMessage(messageContent, NetworkProtocol::UDP));
+				_pendingMessages.push_back(NetworkingServerMessage(messageContent, NetworkingProtocolType::UDP));
 			}
 		}
 		else if((messageStatusCode == 0) || (messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED) || (messageErrorCode == WSAEMSGSIZE))

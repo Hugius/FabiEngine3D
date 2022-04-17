@@ -1,6 +1,6 @@
 #pragma once
 
-enum class PointlightShape
+enum class PointlightType
 {
 	CIRCLE,
 	SQUARE

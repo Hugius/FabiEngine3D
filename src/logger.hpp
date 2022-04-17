@@ -1,6 +1,6 @@
 #pragma once
 
-#include "log_message_type.hpp"
+#include "logger_message_type.hpp"
 #include "configuration.hpp"
 
 #include <iostream>
@@ -22,21 +22,21 @@ public:
 
 	template<typename T, typename...Rest> static void throwInfo(T first, Rest...rest)
 	{
-		_printPrefix(LogMessageType::INFO);
+		_printPrefix(LoggerMessageType::INFO);
 
 		_printMessage(first, rest...);
 	}
 
 	template<typename T, typename...Rest> static void throwDebug(T first, Rest...rest)
 	{
-		_printPrefix(LogMessageType::DEBUG);
+		_printPrefix(LoggerMessageType::DEBUG);
 
 		_printMessage(first, rest...);
 	}
 
 	template<typename T, typename...Rest> static void throwWarning(T first, Rest...rest)
 	{
-		_printPrefix(LogMessageType::WARNING);
+		_printPrefix(LoggerMessageType::WARNING);
 
 		_printMessage(first, rest...);
 
@@ -48,7 +48,7 @@ public:
 
 	template<typename T, typename...Rest> static void throwError(T first, Rest...rest)
 	{
-		_printPrefix(LogMessageType::ERR);
+		_printPrefix(LoggerMessageType::ERR);
 
 		_printMessage(first, rest...);
 
@@ -81,7 +81,7 @@ private:
 		_messageCount++;
 	}
 
-	static void _printPrefix(LogMessageType type);
+	static void _printPrefix(LoggerMessageType type);
 
 	static inline vector<string> _messageQueue = {};
 

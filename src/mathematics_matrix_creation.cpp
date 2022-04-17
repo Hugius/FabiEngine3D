@@ -76,41 +76,41 @@ const mat44 Mathematics::createScalingMatrixZ(float value)
 	return result;
 }
 
-const mat44 Mathematics::createRotationMatrix(float x, float y, float z, DirectionOrder order)
+const mat44 Mathematics::createRotationMatrix(float x, float y, float z, DirectionOrderType order)
 {
 	mat44 result;
 
-	if(order == DirectionOrder::XYZ)
+	if(order == DirectionOrderType::XYZ)
 	{
 		result = (result * createRotationMatrixX(x));
 		result = (result * createRotationMatrixY(y));
 		result = (result * createRotationMatrixZ(z));
 	}
-	else if(order == DirectionOrder::XZY)
+	else if(order == DirectionOrderType::XZY)
 	{
 		result = (result * createRotationMatrixX(x));
 		result = (result * createRotationMatrixZ(z));
 		result = (result * createRotationMatrixY(y));
 	}
-	else if(order == DirectionOrder::YXZ)
+	else if(order == DirectionOrderType::YXZ)
 	{
 		result = (result * createRotationMatrixY(y));
 		result = (result * createRotationMatrixX(x));
 		result = (result * createRotationMatrixZ(z));
 	}
-	else if(order == DirectionOrder::YZX)
+	else if(order == DirectionOrderType::YZX)
 	{
 		result = (result * createRotationMatrixY(y));
 		result = (result * createRotationMatrixZ(z));
 		result = (result * createRotationMatrixX(x));
 	}
-	else if(order == DirectionOrder::ZXY)
+	else if(order == DirectionOrderType::ZXY)
 	{
 		result = (result * createRotationMatrixZ(z));
 		result = (result * createRotationMatrixX(x));
 		result = (result * createRotationMatrixY(y));
 	}
-	else if(order == DirectionOrder::ZYX)
+	else if(order == DirectionOrderType::ZYX)
 	{
 		result = (result * createRotationMatrixZ(z));
 		result = (result * createRotationMatrixY(y));

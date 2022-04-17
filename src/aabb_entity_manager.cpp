@@ -126,21 +126,21 @@ void AabbEntityManager::update()
 					const auto newAabbSize = (entity->getLocalSize() * parentEntity->getBaseSize());
 					const auto parentRotation = parentEntity->getBaseRotation();
 
-					Direction rotationDirection;
+					DirectionType rotationDirection;
 					float rotation = 0.0f;
 					if((parentRotation.x > parentRotation.y) && (parentRotation.x > parentRotation.z))
 					{
-						rotationDirection = Direction::X;
+						rotationDirection = DirectionType::X;
 						rotation = parentRotation.x;
 					}
 					if((parentRotation.y > parentRotation.x) && (parentRotation.y > parentRotation.z))
 					{
-						rotationDirection = Direction::Y;
+						rotationDirection = DirectionType::Y;
 						rotation = parentRotation.y;
 					}
 					if((parentRotation.z > parentRotation.x) && (parentRotation.z > parentRotation.y))
 					{
-						rotationDirection = Direction::Z;
+						rotationDirection = DirectionType::Z;
 						rotation = parentRotation.z;
 					}
 
@@ -151,15 +151,15 @@ void AabbEntityManager::update()
 
 					if(is90Degrees || is270Degrees)
 					{
-						if(rotationDirection == Direction::X)
+						if(rotationDirection == DirectionType::X)
 						{
 							entity->setBaseSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
 						}
-						else if(rotationDirection == Direction::Y)
+						else if(rotationDirection == DirectionType::Y)
 						{
 							entity->setBaseSize(fvec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
 						}
-						else if(rotationDirection == Direction::Z)
+						else if(rotationDirection == DirectionType::Z)
 						{
 							entity->setBaseSize(fvec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
 						}
@@ -177,7 +177,7 @@ void AabbEntityManager::update()
 					else
 					{
 						fvec3 localPosition;
-						if(rotationDirection == Direction::Y)
+						if(rotationDirection == DirectionType::Y)
 						{
 							localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
 						}
@@ -189,17 +189,17 @@ void AabbEntityManager::update()
 
 						mat44 rotationMatrix;
 						fvec3 rotationOffset;
-						if(rotationDirection == Direction::X)
+						if(rotationDirection == DirectionType::X)
 						{
 							rotationMatrix = Mathematics::createRotationMatrixX(Mathematics::convertToRadians(roundedRotation));
 							rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.z) * 0.5f), 0.0f);
 						}
-						else if(rotationDirection == Direction::Y)
+						else if(rotationDirection == DirectionType::Y)
 						{
 							rotationMatrix = Mathematics::createRotationMatrixY(Mathematics::convertToRadians(roundedRotation));
 							rotationOffset = fvec3(0.0f);
 						}
-						else if(rotationDirection == Direction::Z)
+						else if(rotationDirection == DirectionType::Z)
 						{
 							rotationMatrix = Mathematics::createRotationMatrixZ(Mathematics::convertToRadians(roundedRotation));
 							rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.x) * 0.5f), 0.0f);

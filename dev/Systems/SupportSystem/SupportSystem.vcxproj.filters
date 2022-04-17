@@ -15,16 +15,16 @@
     <ClInclude Include="..\..\..\src\speed_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\blur_direction.hpp">
+    <ClInclude Include="..\..\..\src\blur_direction_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\vertex_buffer_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\direction.hpp">
+    <ClInclude Include="..\..\..\src\direction_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\log_message_type.hpp">
+    <ClInclude Include="..\..\..\src\logger_message_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_condition_type.hpp">
@@ -36,13 +36,13 @@
     <ClInclude Include="..\..\..\src\script_value_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\script_variable_scope.hpp">
+    <ClInclude Include="..\..\..\src\script_scope_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_variable_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\keyboard_key.hpp">
+    <ClInclude Include="..\..\..\src\keyboard_key_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\transformation_type.hpp">
@@ -63,7 +63,7 @@
     <ClInclude Include="..\..\..\src\tools.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\network_protocol.hpp">
+    <ClInclude Include="..\..\..\src\networking_protocol_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\bloom_type.hpp">
@@ -72,13 +72,13 @@
     <ClInclude Include="..\..\..\src\reflection_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\pointlight_shape.hpp">
+    <ClInclude Include="..\..\..\src\pointlight_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\direction_order.hpp">
+    <ClInclude Include="..\..\..\src\direction_order_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\pixel_format.hpp">
+    <ClInclude Include="..\..\..\src\pixel_format_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\clock.hpp">
@@ -87,10 +87,10 @@
     <ClInclude Include="..\..\..\src\script_selection_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\mouse_button.hpp">
+    <ClInclude Include="..\..\..\src\mouse_button_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\mouse_wheel.hpp">
+    <ClInclude Include="..\..\..\src\mouse_wheel_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
   </ItemGroup>

@@ -132,7 +132,7 @@ void NetworkingServer::update()
 						}
 						else
 						{
-							_pendingMessages.push_back(NetworkingClientMessage(_clientUsernames[index], _tcpMessageBuilds[index], NetworkProtocol::TCP));
+							_pendingMessages.push_back(NetworkingClientMessage(_clientUsernames[index], _tcpMessageBuilds[index], NetworkingProtocolType::TCP));
 							_tcpMessageBuilds[index] = "";
 						}
 					}
@@ -188,7 +188,7 @@ void NetworkingServer::update()
 					{
 						if(username == _clientUsernames[index])
 						{
-							_pendingMessages.push_back(NetworkingClientMessage(username, content, NetworkProtocol::UDP));
+							_pendingMessages.push_back(NetworkingClientMessage(username, content, NetworkingProtocolType::UDP));
 							break;
 						}
 					}

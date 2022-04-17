@@ -139,37 +139,37 @@ void RenderWindow::update()
 		{
 			case WM_LBUTTONDOWN:
 			{
-				_inputHandler->sendMouseDownEvent(MouseButton::BUTTON_LEFT);
+				_inputHandler->sendMouseDownEvent(MouseButtonType::BUTTON_LEFT);
 
 				break;
 			}
 			case WM_LBUTTONUP:
 			{
-				_inputHandler->sendMouseUpEvent(MouseButton::BUTTON_LEFT);
+				_inputHandler->sendMouseUpEvent(MouseButtonType::BUTTON_LEFT);
 
 				break;
 			}
 			case WM_MBUTTONDOWN:
 			{
-				_inputHandler->sendMouseDownEvent(MouseButton::BUTTON_MIDDLE);
+				_inputHandler->sendMouseDownEvent(MouseButtonType::BUTTON_MIDDLE);
 
 				break;
 			}
 			case WM_MBUTTONUP:
 			{
-				_inputHandler->sendMouseUpEvent(MouseButton::BUTTON_MIDDLE);
+				_inputHandler->sendMouseUpEvent(MouseButtonType::BUTTON_MIDDLE);
 
 				break;
 			}
 			case WM_RBUTTONDOWN:
 			{
-				_inputHandler->sendMouseDownEvent(MouseButton::BUTTON_RIGHT);
+				_inputHandler->sendMouseDownEvent(MouseButtonType::BUTTON_RIGHT);
 
 				break;
 			}
 			case WM_RBUTTONUP:
 			{
-				_inputHandler->sendMouseUpEvent(MouseButton::BUTTON_RIGHT);
+				_inputHandler->sendMouseUpEvent(MouseButtonType::BUTTON_RIGHT);
 
 				break;
 			}
@@ -179,11 +179,11 @@ void RenderWindow::update()
 
 				if(direction > 0)
 				{
-					_inputHandler->sendMouseWheelEvent(MouseWheel::WHEEL_FORWARD);
+					_inputHandler->sendMouseWheelEvent(MouseWheelType::WHEEL_FORWARD);
 				}
 				else if(direction < 0)
 				{
-					_inputHandler->sendMouseWheelEvent(MouseWheel::WHEEL_BACKWARD);
+					_inputHandler->sendMouseWheelEvent(MouseWheelType::WHEEL_BACKWARD);
 				}
 				else
 				{
@@ -194,13 +194,13 @@ void RenderWindow::update()
 			}
 			case WM_KEYDOWN:
 			{
-				_inputHandler->sendKeyboardDownEvent(KeyboardKey(messageEvent.wParam));
+				_inputHandler->sendKeyboardDownEvent(KeyboardKeyType(messageEvent.wParam));
 
 				break;
 			}
 			case WM_KEYUP:
 			{
-				_inputHandler->sendKeyboardUpEvent(KeyboardKey(messageEvent.wParam));
+				_inputHandler->sendKeyboardUpEvent(KeyboardKeyType(messageEvent.wParam));
 
 				break;
 			}

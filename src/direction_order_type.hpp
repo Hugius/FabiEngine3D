@@ -1,6 +1,6 @@
 #pragma once
 
-enum class DirectionOrder
+enum class DirectionOrderType
 {
 	XYZ,
 	XZY,

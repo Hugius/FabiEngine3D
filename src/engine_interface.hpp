@@ -1,17 +1,17 @@
 #pragma once
 
-#include "mouse_wheel.hpp"
-#include "mouse_button.hpp"
-#include "keyboard_key.hpp"
-#include "direction.hpp"
-#include "direction_order.hpp"
+#include "mouse_wheel_type.hpp"
+#include "mouse_button_type.hpp"
+#include "keyboard_key_type.hpp"
+#include "direction_type.hpp"
+#include "direction_order_type.hpp"
 #include "aabb_parent_type.hpp"
 #include "networking_client_message.hpp"
 #include "networking_server_message.hpp"
 #include "mathematics.hpp"
 #include "bloom_type.hpp"
 #include "reflection_type.hpp"
-#include "pointlight_shape.hpp"
+#include "pointlight_type.hpp"
 #include "ray.hpp"
 #include "speed_type.hpp"
 #include "transformation_type.hpp"
@@ -253,7 +253,7 @@ public:
 	void model_setLevelOfDetailDistance(const string & id, float value);
 	void model_setTextureRepeat(const string & modelId, const string & partId, unsigned int value);
 	void model_setBright(const string & modelId, const string & partId, bool value);
-	void model_setRotationOrder(const string & id, DirectionOrder value);
+	void model_setRotationOrder(const string & id, DirectionOrderType value);
 	void model_startAnimation(const string & modelId, const string & animationId, int playCount);
 	void model_pauseAnimation(const string & modelId, const string & animationId);
 	void model_autopauseAnimation(const string & modelId, const string & animationId);
@@ -318,7 +318,7 @@ public:
 	const bool model_isAnimationPaused(const string & modelId, const string & animationId) const;
 	const bool model_isAnimationAutopaused(const string & modelId, const string & animationId) const;
 	const ReflectionType model_getReflectionType(const string & modelId, const string & partId) const;
-	const DirectionOrder model_getRotationOrder(const string & id) const;
+	const DirectionOrderType model_getRotationOrder(const string & id) const;
 
 	void quad3d_create(const string & id, bool isCentered);
 	void quad3d_delete(const string & id);
@@ -597,7 +597,7 @@ public:
 	void pointlight_setRadius(const string & id, const fvec3 & value);
 	void pointlight_setColor(const string & id, const fvec3 & value);
 	void pointlight_setIntensity(const string & id, float value);
-	void pointlight_setShape(const string & id, PointlightShape value);
+	void pointlight_setShape(const string & id, PointlightType value);
 
 	const vector<string> pointlight_getIds() const;
 	const fvec3 & pointlight_getPosition(const string & id) const;
@@ -607,7 +607,7 @@ public:
 	const unsigned int pointlight_getMaxEntityCount() const;
 	const bool pointlight_isExisting(const string & id) const;
 	const bool pointlight_isVisible(const string & id) const;
-	const PointlightShape pointlight_getShape(const string & id) const;
+	const PointlightType pointlight_getShape(const string & id) const;
 
 	void spotlight_create(const string & id);
 	void spotlight_delete(const string & id);
@@ -833,13 +833,13 @@ public:
 	const bool graphics_hasLensFlareMap() const;
 	const BloomType graphics_getBloomType() const;
 
-	const bool input_isMouseScrolled(MouseWheel wheel) const;
-	const bool input_isMouseHeld(MouseButton button) const;
-	const bool input_isMousePressed(MouseButton button) const;
-	const bool input_isMouseToggled(MouseButton button) const;
-	const bool input_isKeyboardHeld(KeyboardKey key) const;
-	const bool input_isKeyboardPressed(KeyboardKey key) const;
-	const bool input_isKeyboardToggled(KeyboardKey key) const;
+	const bool input_isMouseScrolled(MouseWheelType wheel) const;
+	const bool input_isMouseHeld(MouseButtonType button) const;
+	const bool input_isMousePressed(MouseButtonType button) const;
+	const bool input_isMouseToggled(MouseButtonType button) const;
+	const bool input_isKeyboardHeld(KeyboardKeyType key) const;
+	const bool input_isKeyboardPressed(KeyboardKeyType key) const;
+	const bool input_isKeyboardToggled(KeyboardKeyType key) const;
 
 	void camera_reset();
 	void camera_setFirstPersonEnabled(bool value);
@@ -911,7 +911,7 @@ public:
 	void collision_setCameraTerrainResponseSpeed(float value);
 
 	const vector<string> collision_checkCameraWithAabbs() const;
-	const vector<string> collision_checkCameraWithAabbs(Direction direction) const;
+	const vector<string> collision_checkCameraWithAabbs(DirectionType direction) const;
 	const float collision_getCameraTerrainResponseHeight() const;
 	const float collision_getCameraTerrainResponseSpeed() const;
 	const bool collision_isCameraAabbResponseEnabledX() const;
@@ -920,7 +920,7 @@ public:
 	const bool collision_isCameraTerrainResponseEnabled() const;
 	const bool collision_checkCameraWithTerrain() const;
 	const bool collision_checkCameraWithAabb(const string & id) const;
-	const bool collision_checkCameraWithAabb(const string & id, Direction direction) const;
+	const bool collision_checkCameraWithAabb(const string & id, DirectionType direction) const;
 
 	void server_start(unsigned int maxClientCount);
 	void server_sendTcpMessageToClient(const string & username, const string & content);

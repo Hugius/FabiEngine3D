@@ -371,7 +371,7 @@ void EngineInterface::model_setBright(const string & modelId, const string & par
 	_core->getModelEntityManager()->getEntity(modelId)->setBright(partId, value);
 }
 
-void EngineInterface::model_setRotationOrder(const string & id, DirectionOrder value)
+void EngineInterface::model_setRotationOrder(const string & id, DirectionOrderType value)
 {
 	_core->getModelEntityManager()->getEntity(id)->setRotationOrder(value);
 }
@@ -564,7 +564,7 @@ const ReflectionType EngineInterface::model_getReflectionType(const string & mod
 	return _core->getModelEntityManager()->getEntity(modelId)->getReflectionType(partId);
 }
 
-const DirectionOrder EngineInterface::model_getRotationOrder(const string & id) const
+const DirectionOrderType EngineInterface::model_getRotationOrder(const string & id) const
 {
 	return _core->getModelEntityManager()->getEntity(id)->getRotationOrder();
 }

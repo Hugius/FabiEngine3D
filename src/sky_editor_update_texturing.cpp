@@ -8,12 +8,12 @@ void SkyEditor::_updateTexturingMenu()
 
 	if(screen->getId() == "skyEditorMenuTexturing")
 	{
-		if((_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("leftMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("leftMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -45,7 +45,7 @@ void SkyEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setLeftCubeMap(_currentSkyId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("rightMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rightMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -77,7 +77,7 @@ void SkyEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setRightCubeMap(_currentSkyId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("bottomMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("bottomMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -109,7 +109,7 @@ void SkyEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setBottomCubeMap(_currentSkyId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("topMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("topMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -142,7 +142,7 @@ void SkyEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setTopCubeMap(_currentSkyId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("backMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("backMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -174,7 +174,7 @@ void SkyEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setBackCubeMap(_currentSkyId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("frontMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("frontMap")->isHovered())
 		{
 			if(getCurrentProjectId().empty())
 			{
@@ -206,7 +206,7 @@ void SkyEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setFrontCubeMap(_currentSkyId, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d->sky_setCubeMaps(_currentSkyId, {"", "", "", "", "", ""});
 		}

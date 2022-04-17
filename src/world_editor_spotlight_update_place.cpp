@@ -83,14 +83,14 @@ void WorldEditor::_updateSpotlightPlacing()
 				return;
 			}
 
-			if(_fe3d->input_isMouseHeld(MouseButton::BUTTON_RIGHT))
+			if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
 				return;
 			}
 
-			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_MIDDLE))
+			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
@@ -111,7 +111,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			_fe3d->model_setVisible(TEMPLATE_TORCH_ID, true);
 			_fe3d->model_setBasePosition(TEMPLATE_TORCH_ID, newPosition);
 
-			if(_fe3d->input_isMousePressed(MouseButton::BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
 				auto newId = ("spotlight_" + to_string(_idCounter));
 				auto newModelId = ("@@torch_" + newId);

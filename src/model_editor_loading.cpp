@@ -255,7 +255,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 				_fe3d->model_setBaseSize(modelId, size);
 				_fe3d->model_setLevelOfDetailEntityId(modelId, levelOfDetailEntityId);
 				_fe3d->model_setLevelOfDetailDistance(modelId, levelOfDetailDistance);
-				_fe3d->model_setRotationOrder(modelId, DirectionOrder(rotationOrder));
+				_fe3d->model_setRotationOrder(modelId, DirectionOrderType(rotationOrder));
 			}
 		}
 		else if(lineType == "PART")

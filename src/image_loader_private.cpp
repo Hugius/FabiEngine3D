@@ -106,5 +106,5 @@ shared_ptr<Image> ImageLoader::_loadImage(const string & filePath) const
 
 	fclose(file);
 
-	return make_shared<Image>(pixels, width, height, (bitsPerPixel == 24 ? PixelFormat::RGB : PixelFormat::RGBA));
+	return make_shared<Image>(pixels, width, height, (bitsPerPixel == 24 ? PixelFormatType::RGB : PixelFormatType::RGBA));
 }

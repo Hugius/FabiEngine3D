@@ -86,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string & functionNa
 		{
 			for(const auto & message : _fe3d->server_getPendingMessages())
 			{
-				const auto result = ((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP");
+				const auto result = ((message.getProtocol() == NetworkingProtocolType::TCP) ? "TCP" : "UDP");
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 			}

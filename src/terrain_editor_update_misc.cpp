@@ -8,7 +8,7 @@ void TerrainEditor::_updateCamera()
 {
 	if(_fe3d->camera_isThirdPersonEnabled())
 	{
-		const auto scrollOffset = (_fe3d->input_isMouseScrolled(MouseWheel::WHEEL_FORWARD) ? 1.0f : _fe3d->input_isMouseScrolled(MouseWheel::WHEEL_BACKWARD) ? -1.0f : 0.0f);
+		const auto scrollOffset = (_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_FORWARD) ? 1.0f : _fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_BACKWARD) ? -1.0f : 0.0f);
 
 		_fe3d->camera_setThirdPersonDistance(max(MIN_CAMERA_DISTANCE, _fe3d->camera_getThirdPersonDistance() - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED)));
 
@@ -17,7 +17,7 @@ void TerrainEditor::_updateCamera()
 
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isMousePressed(MouseButton::BUTTON_RIGHT))
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_RIGHT))
 		{
 			_fe3d->camera_setThirdPersonEnabled(!_fe3d->camera_isThirdPersonEnabled());
 		}
@@ -33,14 +33,14 @@ void TerrainEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_R))
+		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_R))
 		{
 			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
 		}
 
 		if(!_currentTerrainId.empty())
 		{
-			if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_F))
+			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_F))
 			{
 				_fe3d->terrain_setWireframed(_currentTerrainId, !_fe3d->terrain_isWireframed(_currentTerrainId));
 			}

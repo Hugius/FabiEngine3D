@@ -6,16 +6,16 @@ void ModelEditor::_updateCamera()
 {
 	if(_fe3d->camera_isThirdPersonEnabled())
 	{
-		const auto scrollOffset = (_fe3d->input_isMouseScrolled(MouseWheel::WHEEL_FORWARD) ? 1.0f : _fe3d->input_isMouseScrolled(MouseWheel::WHEEL_BACKWARD) ? -1.0f : 0.0f);
+		const auto scrollOffset = (_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_FORWARD) ? 1.0f : _fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_BACKWARD) ? -1.0f : 0.0f);
 
 		_fe3d->camera_setThirdPersonDistance(max(MIN_CAMERA_DISTANCE, _fe3d->camera_getThirdPersonDistance() - (scrollOffset * CAMERA_DISTANCE_SPEED)));
 
 		auto cameraLookat = _fe3d->camera_getThirdPersonLookat();
-		if(_fe3d->input_isKeyboardHeld(KeyboardKey::KEY_SPACEBAR))
+		if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SPACEBAR))
 		{
 			cameraLookat.y += CAMERA_LOOKAT_SPEED;
 		}
-		if(_fe3d->input_isKeyboardHeld(KeyboardKey::KEY_SHIFT))
+		if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SHIFT))
 		{
 			cameraLookat.y -= CAMERA_LOOKAT_SPEED;
 		}
@@ -32,7 +32,7 @@ void ModelEditor::_updateCamera()
 
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isMousePressed(MouseButton::BUTTON_RIGHT))
+		if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_RIGHT))
 		{
 			_fe3d->camera_setThirdPersonEnabled(!_fe3d->camera_isThirdPersonEnabled());
 		}
@@ -48,14 +48,14 @@ void ModelEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
-		if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_R))
+		if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_R))
 		{
 			_fe3d->model_setVisible("@@box", !_fe3d->model_isVisible("@@box"));
 		}
 
 		if(!_currentModelId.empty())
 		{
-			if(_fe3d->input_isKeyboardPressed(KeyboardKey::KEY_F))
+			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_F))
 			{
 				for(const auto & partId : _fe3d->model_getPartIds(_currentModelId))
 				{

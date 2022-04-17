@@ -76,7 +76,7 @@ public:
 	void setReflectionType(const string & partId, ReflectionType value);
 	void setWireframed(const string & partId, bool value);
 	void setFaceCulled(const string & partId, bool value);
-	void setRotationOrder(DirectionOrder value);
+	void setRotationOrder(DirectionOrderType value);
 	void setMinTextureAlpha(const string & partId, float value);
 
 	const vector<string> getPartIds() const;
@@ -136,7 +136,7 @@ public:
 	const bool isReflective(const string & partId) const;
 
 	const ReflectionType getReflectionType(const string & partId) const;
-	const DirectionOrder getRotationOrder() const;
+	const DirectionOrderType getRotationOrder() const;
 
 private:
 	void _correctPositionTarget(fvec3 & current, const fvec3 & target, float speed);
@@ -171,5 +171,5 @@ private:
 	bool _isReflected = true;
 	bool _isLevelOfDetailed = false;
 
-	DirectionOrder _rotationOrder = DirectionOrder::YXZ;
+	DirectionOrderType _rotationOrder = DirectionOrderType::YXZ;
 };

@@ -1,6 +1,6 @@
 #pragma once
 
-enum class BlurDirection
+enum class BlurDirectionType
 {
 	HORIZONTAL,
 	VERTICAL,

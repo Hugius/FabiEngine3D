@@ -1,6 +1,4 @@
 #include "bottom_viewport_controller.hpp"
-#include "logger.hpp"
-#include "configuration.hpp"
 
 using BVPC = BottomViewportController;
 
@@ -221,59 +219,6 @@ void BottomViewportController::_updateStatistics()
 			const auto text = (key + ": " + to_string(percentage) + "%");
 
 			statisticsScreen->getTextField(key)->setTextContent(text);
-		}
-	}
-
-	if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_C) && _gui->getBottomViewport()->getWindow("console")->isHovered())
-	{
-		if(!_scriptExecutor->isRunning() && !_gui->getOverlay()->isFocused() && !_scriptEditor->isWritingScript())
-		{
-			Logger::clearMessageQueue();
-
-			for(const auto & [key, message] : _consoleMessageQueue)
-			{
-				_deleteConsoleMessage(key);
-			}
-
-			_consoleMessageQueue.clear();
-		}
-	}
-
-	auto loggerMessages = Logger::getMessageQueue();
-
-	if(loggerMessages.size() > MAX_CONSOLE_MESSAGES)
-	{
-		reverse(loggerMessages.begin(), loggerMessages.end());
-
-		vector<string> newMessages;
-		for(unsigned int index = 0; index < (static_cast<unsigned int>(loggerMessages.size()) - MAX_CONSOLE_MESSAGES); index++)
-		{
-			newMessages.push_back(loggerMessages[index]);
-		}
-
-		Logger::clearMessageQueue();
-
-		for(const auto & [key, message] : _consoleMessageQueue)
-		{
-			_deleteConsoleMessage(key);
-		}
-
-		_consoleMessageQueue.clear();
-
-		reverse(newMessages.begin(), newMessages.end());
-
-		Logger::setCustomMessageQueue(newMessages);
-	}
-
-	loggerMessages = Logger::getMessageQueue();
-
-	if(_consoleMessageQueue.size() != loggerMessages.size())
-	{
-		auto synchronizationCount = (loggerMessages.size() - _consoleMessageQueue.size());
-
-		for(unsigned int index = (static_cast<unsigned int>(loggerMessages.size()) - static_cast<unsigned int>(synchronizationCount)); index < static_cast<unsigned int>(loggerMessages.size()); index++)
-		{
-			_addConsoleMessage(loggerMessages[index]);
 		}
 	}
 }

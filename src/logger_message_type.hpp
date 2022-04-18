@@ -3,7 +3,7 @@
 enum class LoggerMessageType
 {
 	INFO,
-	ERR,
 	DEBUG,
-	WARNING
+	WARNING,
+	ERR, // ERROR is reserved by system
 };

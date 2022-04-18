@@ -58,6 +58,5 @@ void BottomViewportController::initialize()
 void BottomViewportController::update()
 {
 	_updateStatistics();
-
 	_updateConsole();
 }

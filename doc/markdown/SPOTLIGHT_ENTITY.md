@@ -3,7 +3,7 @@
 ## 1. General
 
 - The spotlight entity is a 3D light in 3D space.
-- Emitted light is casted in a direction from a position.
+- Emitted light is cast in a direction from a position.
 - Only a maximum of 64 spotlight entities can exist.
 
 ## 2. Properties

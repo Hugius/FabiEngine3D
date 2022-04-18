@@ -7,7 +7,7 @@
 #### 1.1.1 General
 
 - Ambient lighting is a form of global illumination.
-- The lighting is not casted from a light source.
+- The lighting is not cast from a light source.
 - Real life light scattering is mimicked.
 
 #### 1.1.2 Properties
@@ -27,7 +27,7 @@
 #### 1.2.1 General
 
 - Directional lighting is light that comes from a directional light source.
-- The light is only casted from a certain direction.
+- The light is only cast from a certain direction.
 - Normal vectors are used to render this type of lighting.
 
 #### 1.2.2 Properties
@@ -53,7 +53,7 @@
 ### 1.4 Point Lighting
 
 - Point lighting is light that comes from a positional light source.
-- The light is casted in every direction by the light source.
+- The light is cast in every direction by the light source.
 - Normal vectors are used to render this type of lighting.
 
 ### 1.5 Spot Lighting
@@ -114,7 +114,7 @@
 
 #### 1.9.1 General
 
-- Shadows are casted from a directional shadow source.
+- Shadows are cast from a directional shadow source.
 - Shadow mapping is used to render this type of lighting.
 
 #### 1.9.2 Properties

@@ -181,13 +181,9 @@ void RenderWindow::update()
 				{
 					_inputHandler->sendMouseWheelEvent(MouseWheelType::WHEEL_FORWARD);
 				}
-				else if(direction < 0)
+				if(direction < 0)
 				{
 					_inputHandler->sendMouseWheelEvent(MouseWheelType::WHEEL_BACKWARD);
-				}
-				else
-				{
-					abort();
 				}
 
 				break;

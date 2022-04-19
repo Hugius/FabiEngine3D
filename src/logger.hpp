@@ -54,10 +54,8 @@ public:
 
 		}
 	}
-	static void setCustomMessageQueue(const vector<string> & customMessages);
-	static void clearMessageQueue();
 
-	static const vector<string> & getMessageQueue();
+	static const vector<string> & getMessageList();
 
 	static unsigned int getMessageCount();
 
@@ -73,7 +71,7 @@ private:
 		oss << first;
 		(oss << ... << rest);
 
-		_messageQueue.back() += oss.str();
+		_messageList.back() += oss.str();
 		_messageCount++;
 	}
 	static void _printPrefix(LoggerMessageType type);
@@ -86,7 +84,7 @@ private:
 	static inline constexpr unsigned int WARNING_COLOR = 13;
 	static inline constexpr unsigned int ERROR_COLOR = 12;
 
-	static inline vector<string> _messageQueue = {};
+	static inline vector<string> _messageList = {};
 
 	static inline unsigned int _messageCount = 0;
 };

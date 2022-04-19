@@ -31,7 +31,10 @@ private:
 	static inline constexpr unsigned int MESSAGE_TIME_SIZE = 10;
 
 	vector<string> _messageQueue = {};
+	vector<string> _messageHistory = {};
 
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
 	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
+
+	float _scrollingOffset = 0.0f;
 };

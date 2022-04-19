@@ -1,18 +1,20 @@
 #include "bottom_viewport_controller.hpp"
 #include "logger.hpp"
 
+using std::clamp;
+
 void BottomViewportController::_updateConsole()
 {
-	const auto loggerMessageList = Logger::getMessageQueue();
+	const auto loggerMessageList = Logger::getMessageList();
 	const auto loggerMessageCount = Logger::getMessageCount();
 
-	if(_messageQueue.size() != loggerMessageList.size())
+	if(_messageHistory.size() != loggerMessageList.size())
 	{
-		const auto synchronizationCount = static_cast<unsigned int>(loggerMessageList.size() - _messageQueue.size());
+		const auto synchronizationCount = static_cast<unsigned int>(loggerMessageList.size() - _messageHistory.size());
 
 		_clearConsole();
 
-		for(unsigned int index = loggerMessageCount - synchronizationCount; index < loggerMessageCount; index++)
+		for(unsigned int index = (loggerMessageCount - synchronizationCount); index < loggerMessageCount; index++)
 		{
 			if(_messageQueue.size() == MAX_MESSAGE_COUNT)
 			{
@@ -20,9 +22,32 @@ void BottomViewportController::_updateConsole()
 			}
 
 			_messageQueue.push_back(loggerMessageList[index]);
+			_messageHistory.push_back(loggerMessageList[index]);
 		}
 
 		_fillConsole();
+	}
+
+	if(_gui->getBottomViewport()->getWindow("console")->isHovered())
+	{
+		const auto totalHeight = (static_cast<float>(_messageQueue.size()) * CHAR_SIZE.y);
+
+		if(_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_FORWARD))
+		{
+			_scrollingOffset -= CHAR_SIZE.y;
+			_scrollingOffset = clamp(_scrollingOffset, -(totalHeight - 2.0f), 0.0f);
+
+			_clearConsole();
+			_fillConsole();
+		}
+		if(_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_BACKWARD))
+		{
+			_scrollingOffset += CHAR_SIZE.y;
+			_scrollingOffset = clamp(_scrollingOffset, -(totalHeight - 2.0f), 0.0f);
+
+			_clearConsole();
+			_fillConsole();
+		}
 	}
 }
 
@@ -39,13 +64,13 @@ void BottomViewportController::_fillConsole()
 		const auto messageText = _messageQueue[index];
 		const auto timeText = messageText.substr(0, MESSAGE_TIME_SIZE);
 		const auto contentText = messageText.substr(messageText.find(">") + 2);
-		const auto height = (-1.0f + (static_cast<float>(messageCount - index - 1) * CHAR_SIZE.y));
+		const auto isWarning = (messageText.substr(MESSAGE_TIME_SIZE, 7) == " [WARN]");
 		const auto timeSize = fvec2((static_cast<float>(MESSAGE_TIME_SIZE) * CHAR_SIZE.x), CHAR_SIZE.y);
 		const auto contentSize = fvec2((static_cast<float>(contentText.size()) * CHAR_SIZE.x), CHAR_SIZE.y);
-		const auto isWarning = (messageText.substr(MESSAGE_TIME_SIZE, 7) == " [WARN]");
+		const auto y = (-1.0f + _scrollingOffset + (static_cast<float>(messageCount - index - 1) * CHAR_SIZE.y));
 
-		screen->createTextField(("time_" + to_string(index)), fvec2(-1.0f, height), timeSize, timeText, TIME_COLOR, false);
-		screen->createTextField(("content_" + to_string(index)), fvec2((-1.0f + timeSize.x + CHAR_SIZE.x), height), contentSize, contentText, (isWarning ? WARN_COLOR : INFO_COLOR), false);
+		screen->createTextField(("time_" + to_string(index)), fvec2(-1.0f, y), timeSize, timeText, TIME_COLOR, false);
+		screen->createTextField(("content_" + to_string(index)), fvec2((-1.0f + timeSize.x + CHAR_SIZE.x), y), contentSize, contentText, (isWarning ? WARN_COLOR : INFO_COLOR), false);
 
 		screen->getTextField("time_" + to_string(index))->setMinPosition(minPosition);
 		screen->getTextField("time_" + to_string(index))->setMaxPosition(maxPosition);

@@ -2,20 +2,9 @@
 
 #include <windows.h>
 
-void Logger::setCustomMessageQueue(const vector<string> & customMessages)
+const vector<string> & Logger::getMessageList()
 {
-	_messageQueue = customMessages;
-}
-
-void Logger::clearMessageQueue()
-{
-	_messageCount = 0;
-	_messageQueue.clear();
-}
-
-const vector<string> & Logger::getMessageQueue()
-{
-	return _messageQueue;
+	return _messageList;
 }
 
 unsigned int Logger::getMessageCount()
@@ -69,5 +58,5 @@ void Logger::_printPrefix(LoggerMessageType type)
 	}
 
 	oss << " > ";
-	_messageQueue.push_back(oss.str());
+	_messageList.push_back(oss.str());
 }

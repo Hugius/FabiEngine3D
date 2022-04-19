@@ -133,11 +133,12 @@ void ScriptInterpreter::_throwRuntimeError(const string & message)
 void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount)
 {
 	auto messageCount = Logger::getMessageCount();
+
 	if(messageCount > lastLoggerMessageCount)
 	{
-		for(unsigned int index = lastLoggerMessageCount - 1; index < messageCount; index++)
+		for(unsigned int index = (lastLoggerMessageCount - 1); index < messageCount; index++)
 		{
-			if(Logger::getMessageQueue()[index].substr(0, string("[Warn]").size()) == "[Warn]")
+			if(Logger::getMessageList()[index].substr(0, string("[WARN]").size()) == "[WARN]")
 			{
 				_hasThrownError = true;
 			}

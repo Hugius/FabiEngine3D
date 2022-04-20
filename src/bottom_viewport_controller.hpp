@@ -29,7 +29,6 @@ private:
 	static inline const fvec2 CHAR_SIZE = fvec2(0.02f, 0.15f);
 
 	static inline constexpr unsigned int MAX_MESSAGE_COUNT = 100;
-	static inline constexpr unsigned int TIMESTAMP_SIZE = 10;
 
 	vector<shared_ptr<LoggerMessage>> _messageQueue = {};
 	vector<shared_ptr<LoggerMessage>> _messageHistory = {};

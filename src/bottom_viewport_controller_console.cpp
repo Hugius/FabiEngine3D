@@ -62,10 +62,10 @@ void BottomViewportController::_fillConsole()
 	for(unsigned int index = 0; index < messageCount; index++)
 	{
 		const auto message = _messageQueue[index];
+		const auto timestampText = ("[" + message->getTimestamp() + "]");
 		const auto contentText = message->getContent();
-		const auto timestampText = message->getTimestamp();
 		const auto isWarning = (message->getType() == LoggerMessageType::WARNING);
-		const auto timestampSize = fvec2((static_cast<float>(TIMESTAMP_SIZE) * CHAR_SIZE.x), CHAR_SIZE.y);
+		const auto timestampSize = fvec2((static_cast<float>(timestampText.size()) * CHAR_SIZE.x), CHAR_SIZE.y);
 		const auto contentSize = fvec2((static_cast<float>(contentText.size()) * CHAR_SIZE.x), CHAR_SIZE.y);
 		const auto y = (-1.0f + _scrollingOffset + (static_cast<float>(messageCount - index - 1) * CHAR_SIZE.y));
 

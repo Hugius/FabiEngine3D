@@ -1,10 +1,10 @@
 #pragma once
 
-#include "logger_message_type.hpp"
+#include "logger_message.hpp"
 #include "configuration.hpp"
 
 #include <iostream>
-
+#include <windows.h>
 #include <string>
 #include <vector>
 #include <sstream>
@@ -14,6 +14,7 @@ using std::vector;
 using std::string;
 using std::cout;
 using std::ostringstream;
+using std::shared_ptr;
 
 class Logger final
 {
@@ -22,21 +23,15 @@ public:
 
 	template<typename T, typename...Rest> static void throwInfo(T first, Rest...rest)
 	{
-		_printPrefix(LoggerMessageType::INFO);
-
-		_printMessage(first, rest...);
+		_print(LoggerMessageType::INFO, first, rest...);
 	}
 	template<typename T, typename...Rest> static void throwDebug(T first, Rest...rest)
 	{
-		_printPrefix(LoggerMessageType::DEBUG);
-
-		_printMessage(first, rest...);
+		_print(LoggerMessageType::DEBUG, first, rest...);
 	}
 	template<typename T, typename...Rest> static void throwWarning(T first, Rest...rest)
 	{
-		_printPrefix(LoggerMessageType::WARNING);
-
-		_printMessage(first, rest...);
+		_print(LoggerMessageType::WARNING, first, rest...);
 
 		while(Configuration::getInst().isApplicationExported())
 		{
@@ -45,9 +40,7 @@ public:
 	}
 	template<typename T, typename...Rest> static void throwError(T first, Rest...rest)
 	{
-		_printPrefix(LoggerMessageType::ERR);
-
-		_printMessage(first, rest...);
+		_print(LoggerMessageType::ERR, first, rest...);
 
 		while(true)
 		{
@@ -55,36 +48,85 @@ public:
 		}
 	}
 
-	static const vector<string> & getMessageList();
+	static const vector<shared_ptr<LoggerMessage>> & getMessageList()
+	{
+		return _messageList;
+	}
 
-	static unsigned int getMessageCount();
+	static unsigned int getMessageCount()
+	{
+		return _messageCount;
+	}
 
 private:
-	template<typename T, typename...Rest> static void _printMessage(T first, Rest&&...rest)
+	template<typename T, typename...Rest> static void _print(LoggerMessageType type, T first, Rest&&...rest)
 	{
-		ostringstream oss;
+		const auto console = GetStdHandle(STD_OUTPUT_HANDLE);
+
+		auto rawTimestamp = new char[9];
+		auto current = time(nullptr);
+		auto format = tm();
+		localtime_s(&format, &current);
+		strftime(rawTimestamp, 9, "%H:%M:%S", &format);
+		auto timestamp = string(rawTimestamp);
+		delete[] rawTimestamp;
+
+		SetConsoleTextAttribute(console, static_cast<DWORD>(TIMESTAMP_COLOR));
+
+		cout << "[" << timestamp << "] ";
+
+		if(type == LoggerMessageType::INFO)
+		{
+			SetConsoleTextAttribute(console, static_cast<DWORD>(INFO_COLOR));
+		}
+		if(type == LoggerMessageType::DEBUG)
+		{
+			SetConsoleTextAttribute(console, static_cast<DWORD>(DEBUG_COLOR));
+		}
+		if(type == LoggerMessageType::WARNING)
+		{
+			SetConsoleTextAttribute(console, static_cast<DWORD>(WARNING_COLOR));
+		}
+		if(type == LoggerMessageType::ERR)
+		{
+			SetConsoleTextAttribute(console, static_cast<DWORD>(ERROR_COLOR));
+		}
+
+		cout << "[" + TYPE_STRINGS[static_cast<unsigned int>(type)] + "]";
+
+		SetConsoleTextAttribute(console, CONTENT_COLOR);
+
+		if((type == LoggerMessageType::DEBUG) || (type == LoggerMessageType::ERR))
+		{
+			cout << "> ";
+		}
+		else
+		{
+			cout << " > ";
+		}
 
 		cout << first;
 		(cout << ... << rest);
 		cout << endl;
 
+		ostringstream oss = {};
 		oss << first;
 		(oss << ... << rest);
 
-		_messageList.back() += oss.str();
+		_messageList.push_back(make_shared<LoggerMessage>(type, timestamp, oss.str()));
 		_messageCount++;
 	}
-	static void _printPrefix(LoggerMessageType type);
 
 	static inline const string TYPE_STRINGS[4] = {"INFO", "DEBUG", "WARN", "ERROR"};
 
-	static inline constexpr unsigned int TIME_COLOR = 6;
+	static inline constexpr unsigned int TIMESTAMP_COLOR = 6;
 	static inline constexpr unsigned int INFO_COLOR = 2;
 	static inline constexpr unsigned int DEBUG_COLOR = 8;
 	static inline constexpr unsigned int WARNING_COLOR = 13;
 	static inline constexpr unsigned int ERROR_COLOR = 12;
+	static inline constexpr unsigned int CONTENT_COLOR = 15;
 
-	static inline vector<string> _messageList = {};
+	static inline vector<shared_ptr<LoggerMessage>> _messageList = {};
 
 	static inline unsigned int _messageCount = 0;
 };

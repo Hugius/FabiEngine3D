@@ -1,3 +1,5 @@
+#define WIN32_LEAN_AND_MEAN
+
 #include "networking_client.hpp"
 #include "logger.hpp"
 #include "tools.hpp"

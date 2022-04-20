@@ -61,19 +61,19 @@ void BottomViewportController::_fillConsole()
 
 	for(unsigned int index = 0; index < messageCount; index++)
 	{
-		const auto messageText = _messageQueue[index];
-		const auto timeText = messageText.substr(0, MESSAGE_TIME_SIZE);
-		const auto contentText = messageText.substr(messageText.find(">") + 2);
-		const auto isWarning = (messageText.substr(MESSAGE_TIME_SIZE, 7) == " [WARN]");
-		const auto timeSize = fvec2((static_cast<float>(MESSAGE_TIME_SIZE) * CHAR_SIZE.x), CHAR_SIZE.y);
+		const auto message = _messageQueue[index];
+		const auto contentText = message->getContent();
+		const auto timestampText = message->getTimestamp();
+		const auto isWarning = (message->getType() == LoggerMessageType::WARNING);
+		const auto timestampSize = fvec2((static_cast<float>(TIMESTAMP_SIZE) * CHAR_SIZE.x), CHAR_SIZE.y);
 		const auto contentSize = fvec2((static_cast<float>(contentText.size()) * CHAR_SIZE.x), CHAR_SIZE.y);
 		const auto y = (-1.0f + _scrollingOffset + (static_cast<float>(messageCount - index - 1) * CHAR_SIZE.y));
 
-		screen->createTextField(("time_" + to_string(index)), fvec2(-1.0f, y), timeSize, timeText, TIME_COLOR, false);
-		screen->createTextField(("content_" + to_string(index)), fvec2((-1.0f + timeSize.x + CHAR_SIZE.x), y), contentSize, contentText, (isWarning ? WARN_COLOR : INFO_COLOR), false);
+		screen->createTextField(("timestamp_" + to_string(index)), fvec2(-1.0f, y), timestampSize, timestampText, TIMESTAMP_COLOR, false);
+		screen->createTextField(("content_" + to_string(index)), fvec2((-1.0f + timestampSize.x + CHAR_SIZE.x), y), contentSize, contentText, (isWarning ? WARN_COLOR : INFO_COLOR), false);
 
-		screen->getTextField("time_" + to_string(index))->setMinPosition(minPosition);
-		screen->getTextField("time_" + to_string(index))->setMaxPosition(maxPosition);
+		screen->getTextField("timestamp_" + to_string(index))->setMinPosition(minPosition);
+		screen->getTextField("timestamp_" + to_string(index))->setMaxPosition(maxPosition);
 		screen->getTextField("content_" + to_string(index))->setMinPosition(minPosition);
 		screen->getTextField("content_" + to_string(index))->setMaxPosition(maxPosition);
 	}
@@ -86,7 +86,7 @@ void BottomViewportController::_clearConsole()
 
 	for(unsigned int index = 0; index < messageCount; index++)
 	{
-		screen->deleteTextField("time_" + to_string(index));
+		screen->deleteTextField("timestamp_" + to_string(index));
 		screen->deleteTextField("content_" + to_string(index));
 	}
 }

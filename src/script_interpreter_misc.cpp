@@ -138,7 +138,7 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 	{
 		for(unsigned int index = (lastLoggerMessageCount - 1); index < messageCount; index++)
 		{
-			if(Logger::getMessageList()[index].substr(0, string("[WARN]").size()) == "[WARN]")
+			if(Logger::getMessageList()[index]->getType() == LoggerMessageType::WARNING)
 			{
 				_hasThrownError = true;
 			}

@@ -93,6 +93,9 @@
     <ClInclude Include="..\..\..\src\mouse_wheel_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\logger_message.hpp">
+      <Filter>Miscellaneous</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\configuration.cpp">
@@ -107,7 +110,7 @@
     <ClCompile Include="..\..\..\src\tools.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\logger.cpp">
+    <ClCompile Include="..\..\..\src\logger_message.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>

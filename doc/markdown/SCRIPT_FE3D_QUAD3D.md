@@ -72,7 +72,6 @@
 - `fe3d:quad3d_get_rotation_z` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_size_x` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_size_y` (`STR` id) -----> `DEC`
-- `fe3d:quad3d_get_size_z` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_color_r` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_color_g` (`STR` id) -----> `DEC`
 - `fe3d:quad3d_get_color_b` (`STR` id) -----> `DEC`

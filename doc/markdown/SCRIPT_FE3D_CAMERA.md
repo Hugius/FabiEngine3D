@@ -12,6 +12,8 @@
 - `fe3d:camera_set_fov` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_cursor_sensitivity` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_first_person_enabled` (`BOL` value) -----> `NONE`
+- `fe3d:camera_set_first_person_yaw` (`DEC` value) -----> `NONE`
+- `fe3d:camera_set_first_person_pitch` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_min_first_person_pitch` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_max_first_person_pitch` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_third_person_enabled` (`BOL` value) -----> `NONE`

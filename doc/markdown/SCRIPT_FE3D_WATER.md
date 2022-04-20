@@ -4,6 +4,8 @@
 
 - `fe3d:water_place` (`STR` new_id, `STR` editor_id) -----> `NONE`
 - `fe3d:water_select` (`STR` id) -----> `NONE`
+- `fe3d:water_delete` (`STR` id) -----> `NONE`
+- `fe3d:water_delete_all` () -----> `NONE`
 - `fe3d:water_set_ripple_speed` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
 - `fe3d:water_set_wave_speed` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
 - `fe3d:water_set_max_depth` (`STR` id, `DEC` value) -----> `NONE`
@@ -26,6 +28,7 @@
 
 ## Getters
 
+- `fe3d:water_find_ids` (`STR` id) -----> `LIST`
 - `fe3d:water_is_reflective` (`STR` id) -----> `BOL`
 - `fe3d:water_is_refractive` (`STR` id) -----> `BOL`
 - `fe3d:water_is_specular` (`STR` id) -----> `BOL`
@@ -51,6 +54,7 @@
 - `fe3d:water_get_wireframe_color_g` (`STR` id) -----> `DEC`
 - `fe3d:water_get_wireframe_color_b` (`STR` id) -----> `DEC`
 - `fe3d:water_get_size` (`STR` id) -----> `DEC`
+- `fe3d:water_get_ids` () -----> `LIST`
 - `fe3d:water_get_texture_repeat` (`STR` id) -----> `INT`
 - `fe3d:water_get_wave_height` (`STR` id) -----> `DEC`
 - `fe3d:water_get_specular_shininess` (`STR` id) -----> `DEC`

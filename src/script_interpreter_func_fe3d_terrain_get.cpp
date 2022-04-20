@@ -13,6 +13,42 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string & functionN
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
+	else if(functionName == "fe3d:terrain_get_ids")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			for(const auto & result : _fe3d->terrain_getIds())
+			{
+				if(result[0] != '@')
+				{
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:terrain_find_ids")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_validateFe3dId(args[0]->getString()))
+			{
+				return true;
+			}
+
+			for(const auto & result : _fe3d->terrain_getIds())
+			{
+				if(result[0] != '@')
+				{
+					if(args[0]->getString() == result.substr(0, args[0]->getString().size()))
+					{
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+					}
+				}
+			}
+		}
+	}
 	else if(functionName == "fe3d:terrain_get_pixel_height")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};

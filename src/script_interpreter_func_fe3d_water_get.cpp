@@ -13,6 +13,42 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string & functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
 		}
 	}
+	else if(functionName == "fe3d:water_get_ids")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			for(const auto & result : _fe3d->water_getIds())
+			{
+				if(result[0] != '@')
+				{
+					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_find_ids")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(!_validateFe3dId(args[0]->getString()))
+			{
+				return true;
+			}
+
+			for(const auto & result : _fe3d->water_getIds())
+			{
+				if(result[0] != '@')
+				{
+					if(args[0]->getString() == result.substr(0, args[0]->getString().size()))
+					{
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+					}
+				}
+			}
+		}
+	}
 	else if(functionName == "fe3d:water_get_dudv_map_path")
 	{
 		auto types = {SVT::STRING};

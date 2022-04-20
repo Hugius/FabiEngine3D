@@ -4,6 +4,8 @@
 
 - `fe3d:sky_place` (`STR` new_id, `STR` editor_id) -----> `NONE`
 - `fe3d:sky_select` (`STR` id) -----> `NONE`
+- `fe3d:sky_delete` (`STR` id) -----> `NONE`
+- `fe3d:sky_delete_all` () -----> `NONE`
 - `fe3d:sky_set_lightness` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:sky_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:sky_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
@@ -18,6 +20,7 @@
 
 ## Getters
 
+- `fe3d:sky_find_ids` (`STR` id) -----> `LIST`
 - `fe3d:sky_is_wireframed` (`STR` id) -----> `BOL`
 - `fe3d:sky_has_left_cube_map` (`STR` id) -----> `BOL`
 - `fe3d:sky_has_right_cube_map` (`STR` id) -----> `BOL`
@@ -34,6 +37,7 @@
 - `fe3d:sky_get_wireframe_color_g` (`STR` id) -----> `DEC`
 - `fe3d:sky_get_wireframe_color_b` (`STR` id) -----> `DEC`
 - `fe3d:sky_get_rotation` (`STR` id) -----> `DEC`
+- `fe3d:sky_get_ids` () -----> `LIST`
 - `fe3d:sky_get_left_cube_map_path` (`STR` id) -----> `STR`
 - `fe3d:sky_get_right_cube_map_path` (`STR` id) -----> `STR`
 - `fe3d:sky_get_bottom_cube_map_path` (`STR` id) -----> `STR`

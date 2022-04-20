@@ -43,6 +43,35 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 			}
 		}
 	}
+	else if(functionName == "fe3d:sky_delete")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky(args[0]->getString(), false))
+			{
+				_fe3d->sky_delete(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_delete_all")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			for(const auto & id : _fe3d->sky_getIds())
+			{
+				if(id[0] != '@')
+				{
+					_fe3d->sky_delete(id);
+				}
+			}
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:sky_set_lightness")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};

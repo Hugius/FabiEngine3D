@@ -43,6 +43,35 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 			}
 		}
 	}
+	else if(functionName == "fe3d:water_delete")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater(args[0]->getString(), false))
+			{
+				_fe3d->water_delete(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_delete_all")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			for(const auto & id : _fe3d->water_getIds())
+			{
+				if(id[0] != '@')
+				{
+					_fe3d->water_delete(id);
+				}
+			}
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:water_set_ripple_speed")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};

@@ -43,6 +43,35 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 			}
 		}
 	}
+	else if(functionName == "fe3d:terrain_delete")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dTerrain(args[0]->getString(), false))
+			{
+				_fe3d->terrain_delete(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:terrain_delete_all")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			for(const auto & id : _fe3d->terrain_getIds())
+			{
+				if(id[0] != '@')
+				{
+					_fe3d->terrain_delete(id);
+				}
+			}
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:terrain_set_lightness")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};

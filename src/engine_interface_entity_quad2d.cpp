@@ -72,19 +72,19 @@ void EngineInterface::quad2d_setSize(const string & id, const fvec2 & size)
 	_core->getQuad2dEntityManager()->getEntity(id)->setSize(size);
 }
 
-void EngineInterface::quad2d_move(const string & id, const fvec2 & position)
+void EngineInterface::quad2d_move(const string & id, const fvec2 & change)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->move(position);
+	_core->getQuad2dEntityManager()->getEntity(id)->move(change);
 }
 
-void EngineInterface::quad2d_rotate(const string & id, float rotation)
+void EngineInterface::quad2d_rotate(const string & id, float change)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->rotate(rotation);
+	_core->getQuad2dEntityManager()->getEntity(id)->rotate(change);
 }
 
-void EngineInterface::quad2d_scale(const string & id, const fvec2 & size)
+void EngineInterface::quad2d_scale(const string & id, const fvec2 & change)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->scale(size);
+	_core->getQuad2dEntityManager()->getEntity(id)->scale(change);
 }
 
 void EngineInterface::quad2d_moveTo(const string & id, const fvec2 & target, float speed)

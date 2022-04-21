@@ -50,6 +50,45 @@ void AabbEntity::updateTarget()
 			_baseSize.z = _basePositionTarget.z;
 		}
 	}
+
+	if(_localPosition != _localPositionTarget)
+	{
+		auto speedMultiplier = Mathematics::normalize(_localPositionTarget - _localPosition);
+		_localPosition += (speedMultiplier * _localPositionTargetSpeed);
+
+		if(fabsf(_localPositionTarget.x - _localPosition.x) <= _localPositionTargetSpeed)
+		{
+			_localPosition.x = _localPositionTarget.x;
+		}
+		if(fabsf(_localPositionTarget.y - _localPosition.y) <= _localPositionTargetSpeed)
+		{
+			_localPosition.y = _localPositionTarget.y;
+		}
+		if(fabsf(_localPositionTarget.z - _localPosition.z) <= _localPositionTargetSpeed)
+		{
+			_localPosition.z = _localPositionTarget.z;
+		}
+	}
+
+	if(_localSize != _localSizeTarget)
+	{
+		auto speedMultiplier = Mathematics::normalize(_localSizeTarget - _localSize);
+		_localSize += (speedMultiplier * _localSizeTargetSpeed);
+
+		_localSize = fvec3(max(0.0f, _localSize.x), max(0.0f, _localSize.y), max(0.0f, _localSize.z));
+		if(fabsf(_localSizeTarget.x - _localSize.x) <= _localSizeTargetSpeed)
+		{
+			_localSize.x = _localPositionTarget.x;
+		}
+		if(fabsf(_localSizeTarget.y - _localSize.y) <= _localSizeTargetSpeed)
+		{
+			_localSize.y = _localPositionTarget.y;
+		}
+		if(fabsf(_localSizeTarget.z - _localSize.z) <= _localSizeTargetSpeed)
+		{
+			_localSize.z = _localPositionTarget.z;
+		}
+	}
 }
 
 void AabbEntity::updateTransformation()
@@ -127,6 +166,32 @@ void AabbEntity::scaleBaseTo(const fvec3 & target, float speed)
 {
 	_baseSizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
 	_baseSizeTargetSpeed = speed;
+}
+
+void AabbEntity::moveLocal(const fvec3 & value)
+{
+	_localPosition += value;
+	_localPositionTarget += value;
+}
+
+void AabbEntity::scaleLocal(const fvec3 & value)
+{
+	_localSize += value;
+	_localSizeTarget += value;
+	_localSize = fvec3(max(0.0f, _localSize.x), max(0.0f, _localSize.y), max(0.0f, _localSize.z));
+	_localSizeTarget = fvec3(max(0.0f, _localSizeTarget.x), max(0.0f, _localSizeTarget.y), max(0.0f, _localSizeTarget.z));
+}
+
+void AabbEntity::moveLocalTo(const fvec3 & target, float speed)
+{
+	_localPositionTarget = target;
+	_localPositionTargetSpeed = speed;
+}
+
+void AabbEntity::scaleLocalTo(const fvec3 & target, float speed)
+{
+	_localSizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
+	_localSizeTargetSpeed = speed;
 }
 
 void AabbEntity::setParentId(const string & value)

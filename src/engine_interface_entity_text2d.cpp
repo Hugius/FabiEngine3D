@@ -46,19 +46,19 @@ void EngineInterface::text2d_setSize(const string & id, const fvec2 & value)
 	_core->getText2dEntityManager()->getEntity(id)->setSize(value);
 }
 
-void EngineInterface::text2d_move(const string & id, const fvec2 & position)
+void EngineInterface::text2d_move(const string & id, const fvec2 & change)
 {
-	_core->getText2dEntityManager()->getEntity(id)->move(position);
+	_core->getText2dEntityManager()->getEntity(id)->move(change);
 }
 
-void EngineInterface::text2d_rotate(const string & id, float rotation)
+void EngineInterface::text2d_rotate(const string & id, float change)
 {
-	_core->getText2dEntityManager()->getEntity(id)->rotate(rotation);
+	_core->getText2dEntityManager()->getEntity(id)->rotate(change);
 }
 
-void EngineInterface::text2d_scale(const string & id, const fvec2 & size)
+void EngineInterface::text2d_scale(const string & id, const fvec2 & change)
 {
-	_core->getText2dEntityManager()->getEntity(id)->scale(size);
+	_core->getText2dEntityManager()->getEntity(id)->scale(change);
 }
 
 void EngineInterface::text2d_moveTo(const string & id, const fvec2 & target, float speed)

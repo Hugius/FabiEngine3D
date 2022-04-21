@@ -465,10 +465,14 @@ public:
 	void aabb_setBaseSize(const string & id, const fvec3 & value);
 	void aabb_setLocalPosition(const string & id, const fvec3 & value);
 	void aabb_setLocalSize(const string & id, const fvec3 & value);
-	void aabb_move(const string & id, const fvec3 & change);
-	void aabb_scale(const string & id, const fvec3 & change);
-	void aabb_moveTo(const string & id, const fvec3 & target, float speed);
-	void aabb_scaleTo(const string & id, const fvec3 & target, float speed);
+	void aabb_moveBase(const string & id, const fvec3 & change);
+	void aabb_scaleBase(const string & id, const fvec3 & change);
+	void aabb_moveBaseTo(const string & id, const fvec3 & target, float speed);
+	void aabb_scaleBaseTo(const string & id, const fvec3 & target, float speed);
+	void aabb_moveLocal(const string & id, const fvec3 & change);
+	void aabb_scaleLocal(const string & id, const fvec3 & change);
+	void aabb_moveLocalTo(const string & id, const fvec3 & target, float speed);
+	void aabb_scaleLocalTo(const string & id, const fvec3 & target, float speed);
 
 	const vector<string> aabb_getIds() const;
 	const string & aabb_getParentId(const string & id) const;
@@ -495,9 +499,9 @@ public:
 	void quad2d_setPosition(const string & id, const fvec2 & value);
 	void quad2d_setRotation(const string & id, float value);
 	void quad2d_setSize(const string & id, const fvec2 & value);
-	void quad2d_move(const string & id, const fvec2 & position);
-	void quad2d_rotate(const string & id, float rotation);
-	void quad2d_scale(const string & id, const fvec2 & size);
+	void quad2d_move(const string & id, const fvec2 & change);
+	void quad2d_rotate(const string & id, float change);
+	void quad2d_scale(const string & id, const fvec2 & change);
 	void quad2d_moveTo(const string & id, const fvec2 & target, float speed);
 	void quad2d_rotateTo(const string & id, float target, float speed);
 	void quad2d_scaleTo(const string & id, const fvec2 & target, float speed);
@@ -559,9 +563,9 @@ public:
 	void text2d_setPosition(const string & id, const fvec2 & value);
 	void text2d_setRotation(const string & id, float value);
 	void text2d_setSize(const string & id, const fvec2 & value);
-	void text2d_move(const string & id, const fvec2 & position);
-	void text2d_rotate(const string & id, float rotation);
-	void text2d_scale(const string & id, const fvec2 & size);
+	void text2d_move(const string & id, const fvec2 & change);
+	void text2d_rotate(const string & id, float change);
+	void text2d_scale(const string & id, const fvec2 & change);
 	void text2d_moveTo(const string & id, const fvec2 & target, float speed);
 	void text2d_rotateTo(const string & id, float target, float speed);
 	void text2d_scaleTo(const string & id, const fvec2 & target, float speed);

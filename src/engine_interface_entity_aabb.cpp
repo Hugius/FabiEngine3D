@@ -68,24 +68,44 @@ void EngineInterface::aabb_setBaseSize(const string & id, const fvec3 & value)
 	_core->getAabbEntityManager()->getEntity(id)->setBaseSize(value);
 }
 
-void EngineInterface::aabb_move(const string & id, const fvec3 & change)
+void EngineInterface::aabb_moveBase(const string & id, const fvec3 & change)
 {
 	_core->getAabbEntityManager()->getEntity(id)->moveBase(change);
 }
 
-void EngineInterface::aabb_scale(const string & id, const fvec3 & change)
+void EngineInterface::aabb_scaleBase(const string & id, const fvec3 & change)
 {
 	_core->getAabbEntityManager()->getEntity(id)->scaleBase(change);
 }
 
-void EngineInterface::aabb_moveTo(const string & id, const fvec3 & target, float speed)
+void EngineInterface::aabb_moveBaseTo(const string & id, const fvec3 & target, float speed)
 {
 	_core->getAabbEntityManager()->getEntity(id)->moveBaseTo(target, speed);
 }
 
-void EngineInterface::aabb_scaleTo(const string & id, const fvec3 & target, float speed)
+void EngineInterface::aabb_scaleBaseTo(const string & id, const fvec3 & target, float speed)
 {
 	_core->getAabbEntityManager()->getEntity(id)->scaleBaseTo(target, speed);
+}
+
+void EngineInterface::aabb_moveLocal(const string & id, const fvec3 & change)
+{
+	_core->getAabbEntityManager()->getEntity(id)->moveLocal(change);
+}
+
+void EngineInterface::aabb_scaleLocal(const string & id, const fvec3 & change)
+{
+	_core->getAabbEntityManager()->getEntity(id)->scaleLocal(change);
+}
+
+void EngineInterface::aabb_moveLocalTo(const string & id, const fvec3 & target, float speed)
+{
+	_core->getAabbEntityManager()->getEntity(id)->moveLocalTo(target, speed);
+}
+
+void EngineInterface::aabb_scaleLocalTo(const string & id, const fvec3 & target, float speed)
+{
+	_core->getAabbEntityManager()->getEntity(id)->scaleLocalTo(target, speed);
 }
 
 const fvec3 & EngineInterface::aabb_getBasePosition(const string & id) const

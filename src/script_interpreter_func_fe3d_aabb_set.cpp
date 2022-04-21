@@ -140,7 +140,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 					return true;
 				}
 
-				_fe3d->aabb_move(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
+				_fe3d->aabb_moveBase(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -160,7 +160,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 					return true;
 				}
 
-				_fe3d->aabb_scale(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
+				_fe3d->aabb_scaleBase(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -180,7 +180,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 					return true;
 				}
 
-				_fe3d->aabb_moveTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
+				_fe3d->aabb_moveBaseTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -200,7 +200,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 					return true;
 				}
 
-				_fe3d->aabb_scaleTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
+				_fe3d->aabb_scaleBaseTo(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

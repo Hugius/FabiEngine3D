@@ -25,6 +25,10 @@ public:
 	void scaleBase(const fvec3 & value);
 	void moveBaseTo(const fvec3 & target, float speed);
 	void scaleBaseTo(const fvec3 & target, float speed);
+	void moveLocal(const fvec3 & value);
+	void scaleLocal(const fvec3 & value);
+	void moveLocalTo(const fvec3 & target, float speed);
+	void scaleLocalTo(const fvec3 & target, float speed);
 	void setParentId(const string & value);
 	void setParentType(AabbParentType value);
 	void setCollisionDirection(DirectionType value);
@@ -62,16 +66,20 @@ private:
 
 	mat44 _transformation = mat44(1.0f);
 
-	fvec3 _localPosition = fvec3(0.0f);
-	fvec3 _localSize = fvec3(1.0f);
 	fvec3 _basePosition = fvec3(0.0f);
 	fvec3 _baseSize = fvec3(1.0f);
 	fvec3 _basePositionTarget = fvec3(0.0f);
 	fvec3 _baseSizeTarget = fvec3(1.0f);
+	fvec3 _localPosition = fvec3(0.0f);
+	fvec3 _localSize = fvec3(1.0f);
+	fvec3 _localPositionTarget = fvec3(0.0f);
+	fvec3 _localSizeTarget = fvec3(1.0f);
 	fvec3 _color = fvec3(1.0f);
 
 	float _basePositionTargetSpeed = 0.0f;
 	float _baseSizeTargetSpeed = 0.0f;
+	float _localPositionTargetSpeed = 0.0f;
+	float _localSizeTargetSpeed = 0.0f;
 
 	bool _isCentered = false;
 	bool _isRaycastResponsive = true;

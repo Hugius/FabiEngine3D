@@ -12,81 +12,86 @@ void AabbEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 
 void AabbEntity::updateTarget()
 {
-	if(_basePosition != _basePositionTarget)
+	if(hasParent())
 	{
-		auto speedMultiplier = Mathematics::normalize(_basePositionTarget - _basePosition);
-		_basePosition += (speedMultiplier * _basePositionTargetSpeed);
+		if(_localPosition != _localPositionTarget)
+		{
+			const auto speedMultiplier = Mathematics::normalize(_localPositionTarget - _localPosition);
+			_localPosition += (speedMultiplier * _localPositionTargetSpeed);
 
-		if(fabsf(_basePositionTarget.x - _basePosition.x) <= _basePositionTargetSpeed)
-		{
-			_basePosition.x = _basePositionTarget.x;
+			if(fabsf(_localPositionTarget.x - _localPosition.x) <= _localPositionTargetSpeed)
+			{
+				_localPosition.x = _localPositionTarget.x;
+			}
+			if(fabsf(_localPositionTarget.y - _localPosition.y) <= _localPositionTargetSpeed)
+			{
+				_localPosition.y = _localPositionTarget.y;
+			}
+			if(fabsf(_localPositionTarget.z - _localPosition.z) <= _localPositionTargetSpeed)
+			{
+				_localPosition.z = _localPositionTarget.z;
+			}
 		}
-		if(fabsf(_basePositionTarget.y - _basePosition.y) <= _basePositionTargetSpeed)
+
+		if(_localSize != _localSizeTarget)
 		{
-			_basePosition.y = _basePositionTarget.y;
-		}
-		if(fabsf(_basePositionTarget.z - _basePosition.z) <= _basePositionTargetSpeed)
-		{
-			_basePosition.z = _basePositionTarget.z;
+			const auto speedMultiplier = Mathematics::normalize(_localSizeTarget - _localSize);
+			_localSize += (speedMultiplier * _localSizeTargetSpeed);
+
+			_localSize = fvec3(max(0.0f, _localSize.x), max(0.0f, _localSize.y), max(0.0f, _localSize.z));
+			if(fabsf(_localSizeTarget.x - _localSize.x) <= _localSizeTargetSpeed)
+			{
+				_localSize.x = _localPositionTarget.x;
+			}
+			if(fabsf(_localSizeTarget.y - _localSize.y) <= _localSizeTargetSpeed)
+			{
+				_localSize.y = _localPositionTarget.y;
+			}
+			if(fabsf(_localSizeTarget.z - _localSize.z) <= _localSizeTargetSpeed)
+			{
+				_localSize.z = _localPositionTarget.z;
+			}
 		}
 	}
-
-	if(_baseSize != _baseSizeTarget)
+	else
 	{
-		auto speedMultiplier = Mathematics::normalize(_baseSizeTarget - _baseSize);
-		_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
+		if(_basePosition != _basePositionTarget)
+		{
+			const auto speedMultiplier = Mathematics::normalize(_basePositionTarget - _basePosition);
+			_basePosition += (speedMultiplier * _basePositionTargetSpeed);
 
-		_baseSize = fvec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
-		if(fabsf(_baseSizeTarget.x - _baseSize.x) <= _baseSizeTargetSpeed)
-		{
-			_baseSize.x = _basePositionTarget.x;
+			if(fabsf(_basePositionTarget.x - _basePosition.x) <= _basePositionTargetSpeed)
+			{
+				_basePosition.x = _basePositionTarget.x;
+			}
+			if(fabsf(_basePositionTarget.y - _basePosition.y) <= _basePositionTargetSpeed)
+			{
+				_basePosition.y = _basePositionTarget.y;
+			}
+			if(fabsf(_basePositionTarget.z - _basePosition.z) <= _basePositionTargetSpeed)
+			{
+				_basePosition.z = _basePositionTarget.z;
+			}
 		}
-		if(fabsf(_baseSizeTarget.y - _baseSize.y) <= _baseSizeTargetSpeed)
-		{
-			_baseSize.y = _basePositionTarget.y;
-		}
-		if(fabsf(_baseSizeTarget.z - _baseSize.z) <= _baseSizeTargetSpeed)
-		{
-			_baseSize.z = _basePositionTarget.z;
-		}
-	}
 
-	if(_localPosition != _localPositionTarget)
-	{
-		auto speedMultiplier = Mathematics::normalize(_localPositionTarget - _localPosition);
-		_localPosition += (speedMultiplier * _localPositionTargetSpeed);
+		if(_baseSize != _baseSizeTarget)
+		{
+			const auto speedMultiplier = Mathematics::normalize(_baseSizeTarget - _baseSize);
+			_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
 
-		if(fabsf(_localPositionTarget.x - _localPosition.x) <= _localPositionTargetSpeed)
-		{
-			_localPosition.x = _localPositionTarget.x;
-		}
-		if(fabsf(_localPositionTarget.y - _localPosition.y) <= _localPositionTargetSpeed)
-		{
-			_localPosition.y = _localPositionTarget.y;
-		}
-		if(fabsf(_localPositionTarget.z - _localPosition.z) <= _localPositionTargetSpeed)
-		{
-			_localPosition.z = _localPositionTarget.z;
-		}
-	}
-
-	if(_localSize != _localSizeTarget)
-	{
-		auto speedMultiplier = Mathematics::normalize(_localSizeTarget - _localSize);
-		_localSize += (speedMultiplier * _localSizeTargetSpeed);
-
-		_localSize = fvec3(max(0.0f, _localSize.x), max(0.0f, _localSize.y), max(0.0f, _localSize.z));
-		if(fabsf(_localSizeTarget.x - _localSize.x) <= _localSizeTargetSpeed)
-		{
-			_localSize.x = _localPositionTarget.x;
-		}
-		if(fabsf(_localSizeTarget.y - _localSize.y) <= _localSizeTargetSpeed)
-		{
-			_localSize.y = _localPositionTarget.y;
-		}
-		if(fabsf(_localSizeTarget.z - _localSize.z) <= _localSizeTargetSpeed)
-		{
-			_localSize.z = _localPositionTarget.z;
+			_baseSize = fvec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
+			if(fabsf(_baseSizeTarget.x - _baseSize.x) <= _baseSizeTargetSpeed)
+			{
+				_baseSize.x = _basePositionTarget.x;
+			}
+			if(fabsf(_baseSizeTarget.y - _baseSize.y) <= _baseSizeTargetSpeed)
+			{
+				_baseSize.y = _basePositionTarget.y;
+			}
+			if(fabsf(_baseSizeTarget.z - _baseSize.z) <= _baseSizeTargetSpeed)
+			{
+				_baseSize.z = _basePositionTarget.z;
+			}
 		}
 	}
 }

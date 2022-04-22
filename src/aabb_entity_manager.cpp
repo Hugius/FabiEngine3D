@@ -108,6 +108,8 @@ void AabbEntityManager::update()
 {
 	for(const auto & [entityId, entity] : _entities)
 	{
+		entity->updateTarget();
+
 		if(entity->hasParent())
 		{
 			switch(entity->getParentType())
@@ -364,10 +366,6 @@ void AabbEntityManager::update()
 					break;
 				}
 			}
-		}
-		else
-		{
-			entity->updateTarget();
 		}
 
 		if(entity->isVisible())

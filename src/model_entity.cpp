@@ -25,7 +25,7 @@ void ModelEntity::updateTarget()
 {
 	if(_basePosition != _basePositionTarget)
 	{
-		auto speedMultiplier = Mathematics::normalize(_basePositionTarget - _basePosition);
+		const auto speedMultiplier = Mathematics::normalize(_basePositionTarget - _basePosition);
 		_basePosition += (speedMultiplier * _basePositionTargetSpeed);
 		_correctPositionTarget(_basePosition, _basePositionTarget, _basePositionTargetSpeed);
 	}
@@ -46,7 +46,7 @@ void ModelEntity::updateTarget()
 
 	if(_baseSize != _baseSizeTarget)
 	{
-		auto speedMultiplier = Mathematics::normalize(_baseSizeTarget - _baseSize);
+		const auto speedMultiplier = Mathematics::normalize(_baseSizeTarget - _baseSize);
 		_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
 		_correctSizeTarget(_baseSize, _baseSizeTarget, _baseSizeTargetSpeed);
 	}
@@ -55,7 +55,7 @@ void ModelEntity::updateTarget()
 	{
 		if(part->position != part->positionTarget)
 		{
-			auto speedMultiplier = Mathematics::normalize(part->positionTarget - part->position);
+			const auto speedMultiplier = Mathematics::normalize(part->positionTarget - part->position);
 			part->position += (speedMultiplier * part->positionTargetSpeed);
 			_correctPositionTarget(part->position, part->positionTarget, part->positionTargetSpeed);
 		}
@@ -78,7 +78,7 @@ void ModelEntity::updateTarget()
 
 		if(part->size != part->sizeTarget)
 		{
-			auto speedMultiplier = Mathematics::normalize(part->sizeTarget - part->size);
+			const auto speedMultiplier = Mathematics::normalize(part->sizeTarget - part->size);
 			part->size += (speedMultiplier * part->sizeTargetSpeed);
 			_correctSizeTarget(part->size, part->sizeTarget, part->sizeTargetSpeed);
 		}

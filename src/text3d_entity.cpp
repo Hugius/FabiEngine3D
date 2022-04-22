@@ -10,7 +10,7 @@ void Text3dEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
-		auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
+		const auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
 
 		_position += (speedMultiplier * _positionTargetSpeed);
 
@@ -56,7 +56,7 @@ void Text3dEntity::updateTarget()
 
 	if(_size != _sizeTarget)
 	{
-		auto speedMultiplier = Mathematics::normalize(_sizeTarget - _size);
+		const auto speedMultiplier = Mathematics::normalize(_sizeTarget - _size);
 
 		_size += (speedMultiplier * _sizeTargetSpeed);
 

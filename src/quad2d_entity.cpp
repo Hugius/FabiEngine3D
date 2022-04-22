@@ -14,7 +14,7 @@ void Quad2dEntity::updateTarget()
 {
 	if(_position != _positionTarget)
 	{
-		auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
+		const auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
@@ -43,7 +43,7 @@ void Quad2dEntity::updateTarget()
 
 	if(_size != _sizeTarget)
 	{
-		auto speedMultiplier = Mathematics::normalize(_sizeTarget - _size);
+		const auto speedMultiplier = Mathematics::normalize(_sizeTarget - _size);
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
 		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));

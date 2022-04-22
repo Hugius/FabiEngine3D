@@ -57,4 +57,5 @@ public:
 	static const bool renameFile(const string & oldPath, const string & newPath);
 	static const bool deleteDirectory(const string & path);
 	static const bool deleteFile(const string & path);
+	static const bool isInteger(const string & valueString);
 };

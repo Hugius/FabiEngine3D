@@ -21,12 +21,17 @@ Configuration::Configuration()
 
 	if(file)
 	{
-		_processOption(file, _windowTitle, "window_title");
-		_processOption(file, _windowSizeMultiplier.x, "window_width");
-		_processOption(file, _windowSizeMultiplier.y, "window_height");
+		string title = "";
+		int width = 0;
+		int height = 0;
 
-		_windowSizeMultiplier.x = clamp(_windowSizeMultiplier.x, 0.0f, 1.0f);
-		_windowSizeMultiplier.y = clamp(_windowSizeMultiplier.y, 0.0f, 1.0f);
+		_processOption(file, "window_title", title);
+		_processOption(file, "window_width", width, 0, 100);
+		_processOption(file, "window_height", height, 0, 100);
+
+		_windowTitle = title;
+		_windowSizeMultiplier.x = (static_cast<float>(width) / 100.0f);
+		_windowSizeMultiplier.y = (static_cast<float>(height) / 100.0f);
 
 		_windowSize.x = static_cast<int>(static_cast<float>(monitorSize.x) * _windowSizeMultiplier.x);
 		_windowSize.y = static_cast<int>(static_cast<float>(monitorSize.y) * _windowSizeMultiplier.y);
@@ -52,101 +57,69 @@ Configuration::Configuration()
 	}
 }
 
-void Configuration::_processOption(ifstream & file, string & option, const string & name)
+void Configuration::_processOption(ifstream & file, const string & name, string & option)
 {
 	string line;
-	string field;
-	string equals;
 
 	getline(file, line);
 
-	istringstream iss(line);
-
-	iss
-		>> field
-		>> equals;
-
-	if(field == name)
+	if(line.size() < (name.size() + 4))
 	{
-		iss >> option;
+		Logger::throwError("Configuration file option `" + name + "` is corrupted");
 	}
-	else
+	if(line.substr(0, name.size()) != name)
 	{
-		Logger::throwError("Configuration file option `" + name + "` missing");
+		Logger::throwError("Configuration file option `" + name + "`: name is missing");
 	}
+	if(line.at(name.size()) != '=')
+	{
+		Logger::throwError("Configuration file option `" + name + "`: separator is missing");
+	}
+	if(line.at(name.size() + 1) != '"')
+	{
+		Logger::throwError("Configuration file option `" + name + "`: value is invalid");
+	}
+	if(line.back() != '"')
+	{
+		Logger::throwError("Configuration file option `" + name + "`: value is invalid");
+	}
+
+	option = line.substr(name.size() + 2);
+	option.pop_back();
 }
 
-void Configuration::_processOption(ifstream & file, float & option, const string & name)
+void Configuration::_processOption(ifstream & file, const string & name, int & option, int minValue, int maxValue)
 {
 	string line;
-	string field;
-	string equals;
 
 	getline(file, line);
 
-	istringstream iss(line);
-
-	iss
-		>> field
-		>> equals;
-
-	if(field == name)
+	if(line.size() < (name.size() + 2))
 	{
-		iss >> option;
+		Logger::throwError("Configuration file option `" + name + "` is corrupted");
 	}
-	else
+	if(line.substr(0, name.size()) != name)
 	{
-		Logger::throwError("Configuration file option `" + name + "` missing");
+		Logger::throwError("Configuration file option `" + name + "`: name is missing");
 	}
-}
-
-void Configuration::_processOption(ifstream & file, int & option, const string & name)
-{
-	string line;
-	string field;
-	string equals;
-
-	getline(file, line);
-
-	istringstream iss(line);
-
-	iss
-		>> field
-		>> equals;
-
-	if(field == name)
+	if(line.at(name.size()) != '=')
 	{
-		iss >> option;
+		Logger::throwError("Configuration file option `" + name + "`: separator is missing");
 	}
-	else
+	if(!Tools::isInteger(line.substr(name.size() + 1)))
 	{
-		Logger::throwError("Configuration file option `" + name + "` missing");
+		Logger::throwError("Configuration file option `" + name + "`: value is invalid");
 	}
-}
 
-void Configuration::_processOption(ifstream & file, bool & option, const string & name)
-{
-	string line;
-	string field;
-	string equals;
-	string value;
+	option = Tools::parseInteger(line.substr(name.size() + 1));
 
-	getline(file, line);
-
-	istringstream iss(line);
-
-	iss
-		>> field
-		>> equals
-		>> value;
-
-	if(field == name)
+	if(option < minValue)
 	{
-		iss >> option;
+		Logger::throwError("Configuration file option `" + name + "`: value is too low");
 	}
-	else
+	if(option > maxValue)
 	{
-		Logger::throwError("Configuration file option `" + name + "` missing");
+		Logger::throwError("Configuration file option `" + name + "`: value is too high");
 	}
 }
 

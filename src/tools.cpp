@@ -159,24 +159,9 @@ const long long Tools::getTimeSinceEpochMS()
 
 const int Tools::parseInteger(const string & valueString)
 {
-	if(valueString.empty())
+	if(!isInteger(valueString))
 	{
-		return 0;
-	}
-
-	unsigned int startingIndex = 0;
-
-	if(valueString[0] == '-')
-	{
-		startingIndex = 1;
-	}
-
-	for(unsigned int index = startingIndex; index < static_cast<unsigned int>(valueString.size()); index++)
-	{
-		if(!isdigit(valueString[index]))
-		{
-			abort();
-		}
+		abort();
 	}
 
 	return stoi(valueString);
@@ -407,6 +392,31 @@ const bool Tools::deleteFile(const string & path)
 	remove(path, error);
 
 	return (error.value() == 0);
+}
+
+const bool Tools::isInteger(const string & valueString)
+{
+	if(valueString.empty())
+	{
+		return false;
+	}
+
+	unsigned int startingIndex = 0;
+
+	if(valueString[0] == '-')
+	{
+		startingIndex = 1;
+	}
+
+	for(unsigned int index = startingIndex; index < static_cast<unsigned int>(valueString.size()); index++)
+	{
+		if(!isdigit(valueString[index]))
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 const fvec2 Tools::getMinViewportPosition()

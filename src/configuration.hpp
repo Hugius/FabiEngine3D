@@ -35,10 +35,8 @@ public:
 private:
 	Configuration();
 
-	void _processOption(ifstream & file, string & option, const string & name);
-	void _processOption(ifstream & file, float & option, const string & name);
-	void _processOption(ifstream & file, int & option, const string & name);
-	void _processOption(ifstream & file, bool & option, const string & name);
+	void _processOption(ifstream & file, const string & name, string & option);
+	void _processOption(ifstream & file, const string & name, int & option, int minValue, int maxValue);
 
 	static inline const fvec2 DISPLAY_POSITION_MULTIPLIER = fvec2(0.125f, 0.2f);
 	static inline const fvec2 DISPLAY_SIZE_MULTIPLIER = fvec2(0.75f, 0.75f);

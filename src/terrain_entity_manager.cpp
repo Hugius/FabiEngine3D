@@ -47,10 +47,10 @@ void TerrainEntityManager::createEntity(const string & id, const string & height
 	auto entity = make_shared<TerrainEntity>(id);
 
 	const auto size = min(min(image->getWidth(), image->getHeight()), static_cast<unsigned int>(MAX_SIZE));
-	const auto bitsPerPixel = ((image->getPixelFormat() == PixelFormatType::RGB) ? 3 : 4);
+	const auto bytesPerPixel = (image->getBitsPerPixel() / 8);
 
 	vector<float> pixels;
-	for(unsigned int index = 0; index < (size * size * bitsPerPixel); index += bitsPerPixel)
+	for(unsigned int index = 0; index < (size * size * bytesPerPixel); index += bytesPerPixel)
 	{
 		const auto red = (static_cast<float>(image->getPixels()[index + 0]) / 255.0f);
 		const auto green = (static_cast<float>(image->getPixels()[index + 1]) / 255.0f);

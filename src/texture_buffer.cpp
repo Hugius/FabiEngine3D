@@ -14,11 +14,11 @@ TextureBuffer::TextureBuffer(shared_ptr<Image> image)
 	glGenTextures(1, &_tboId);
 	glBindTexture(GL_TEXTURE_2D, _tboId);
 
-	if(image->getPixelFormat() == PixelFormatType::RGB)
+	if(image->getBitsPerPixel() == 24)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());
 	}
-	if(image->getPixelFormat() == PixelFormatType::RGBA)
+	if(image->getBitsPerPixel() == 32)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->getPixels());
 	}

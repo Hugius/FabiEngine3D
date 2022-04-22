@@ -79,9 +79,9 @@ shared_ptr<Image> ImageLoader::_loadImage(const string & filePath) const
 
 			if(bytesPerPixel == 3)
 			{
-				auto blue = static_cast<unsigned char>(getc(file));
-				auto green = static_cast<unsigned char>(getc(file));
-				auto red = static_cast<unsigned char>(getc(file));
+				const auto blue = static_cast<unsigned char>(getc(file));
+				const auto green = static_cast<unsigned char>(getc(file));
+				const auto red = static_cast<unsigned char>(getc(file));
 
 				pixels[index + 0] = red;
 				pixels[index + 1] = green;
@@ -89,10 +89,10 @@ shared_ptr<Image> ImageLoader::_loadImage(const string & filePath) const
 			}
 			if(bytesPerPixel == 4)
 			{
-				auto blue = static_cast<unsigned char>(getc(file));
-				auto green = static_cast<unsigned char>(getc(file));
-				auto red = static_cast<unsigned char>(getc(file));
-				auto alpha = static_cast<unsigned char>(getc(file));
+				const auto blue = static_cast<unsigned char>(getc(file));
+				const auto green = static_cast<unsigned char>(getc(file));
+				const auto red = static_cast<unsigned char>(getc(file));
+				const auto alpha = static_cast<unsigned char>(getc(file));
 
 				pixels[index + 0] = red;
 				pixels[index + 1] = green;
@@ -106,5 +106,5 @@ shared_ptr<Image> ImageLoader::_loadImage(const string & filePath) const
 
 	fclose(file);
 
-	return make_shared<Image>(pixels, width, height, (bitsPerPixel == 24 ? PixelFormatType::RGB : PixelFormatType::RGBA));
+	return make_shared<Image>(pixels, width, height, bitsPerPixel);
 }

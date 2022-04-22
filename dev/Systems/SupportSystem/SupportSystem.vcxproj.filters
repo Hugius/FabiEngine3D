@@ -78,9 +78,6 @@
     <ClInclude Include="..\..\..\src\direction_order_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\pixel_format_type.hpp">
-      <Filter>Enumeration</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\clock.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>

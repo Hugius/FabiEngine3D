@@ -32,7 +32,6 @@
     <ClInclude Include="..\..\..\src\configuration.hpp" />
     <ClInclude Include="..\..\..\src\direction_type.hpp" />
     <ClInclude Include="..\..\..\src\direction_order_type.hpp" />
-    <ClInclude Include="..\..\..\src\pixel_format_type.hpp" />
     <ClInclude Include="..\..\..\src\input_handler.hpp" />
     <ClInclude Include="..\..\..\src\keyboard_key_type.hpp" />
     <ClInclude Include="..\..\..\src\pointlight_type.hpp" />

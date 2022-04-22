@@ -1,5 +1,7 @@
 #pragma once
 
+#define GLEW_STATIC
+
 #include "vertex_buffer_type.hpp"
 #include "mathematics.hpp"
 

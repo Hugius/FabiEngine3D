@@ -1,5 +1,7 @@
 #pragma once
 
+#define GLEW_STATIC
+
 #include "mathematics.hpp" 
 
 #include <unordered_map>

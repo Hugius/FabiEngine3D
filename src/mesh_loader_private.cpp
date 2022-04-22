@@ -41,20 +41,24 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 		if(lineType == "FE3D_PART")
 		{
 			string id;
+
 			iss >> id;
 
-			selectedPartId = (id);
-
-			if(selectedPartId == "?")
+			if(id.empty() || (id == "?"))
 			{
 				return nullptr;
 			}
+
+			selectedPartId = id;
 
 			continue;
 		}
 		else if(lineType == "v")
 		{
-			float x, y, z;
+			float x;
+			float y;
+			float z;
+
 			iss
 				>> x
 				>> y
@@ -66,7 +70,9 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 		}
 		else if(lineType == "vt")
 		{
-			float x, y;
+			float x;
+			float y;
+
 			iss
 				>> x
 				>> y;
@@ -77,7 +83,10 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 		}
 		else if(lineType == "vn")
 		{
-			float x, y, z;
+			float x;
+			float y;
+			float z;
+
 			iss
 				>> x
 				>> y
@@ -90,6 +99,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 		else if(lineType == "f")
 		{
 			array<unsigned int, 9> indices = {};
+
 			iss
 				>> indices[0]
 				>> indices[1]
@@ -112,6 +122,7 @@ shared_ptr<Mesh> MeshLoader::_loadMesh(const string & filePath) const
 			}
 
 			bool isAlreadyExisting = false;
+
 			for(const auto & meshPart : meshParts)
 			{
 				if(meshPart->getName() == selectedPartId)

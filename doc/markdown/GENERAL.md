@@ -54,12 +54,12 @@
 
 ### 1.8 Miscellaneous
 
+- Mouse input
+- Keyboard input
 - Engine GUI
 - Editors
 - Realtime statistics
 - Realtime logging
-- Keyboard input
-- Mouse input
 
 ## 2. Folder Structure
 

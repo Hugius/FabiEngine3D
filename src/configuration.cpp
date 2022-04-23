@@ -71,11 +71,11 @@ void Configuration::_processOption(ifstream & file, const string & name, string 
 	{
 		Logger::throwError("Configuration file option `" + name + "`: name is missing");
 	}
-	if(line.at(name.size()) != '=')
+	if(line[name.size()] != '=')
 	{
 		Logger::throwError("Configuration file option `" + name + "`: separator is missing");
 	}
-	if(line.at(name.size() + 1) != '"')
+	if(line[name.size() + 1] != '"')
 	{
 		Logger::throwError("Configuration file option `" + name + "`: value is invalid");
 	}
@@ -102,7 +102,7 @@ void Configuration::_processOption(ifstream & file, const string & name, int & o
 	{
 		Logger::throwError("Configuration file option `" + name + "`: name is missing");
 	}
-	if(line.at(name.size()) != '=')
+	if(line[name.size()] != '=')
 	{
 		Logger::throwError("Configuration file option `" + name + "`: separator is missing");
 	}

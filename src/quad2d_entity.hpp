@@ -23,8 +23,8 @@ public:
 	void setOpacity(float value);
 	void setWireframeColor(const fvec3 & value);
 	void setColor(const fvec3 & value);
-	void setMinPosition(const fvec2 & value);
-	void setMaxPosition(const fvec2 & value);
+	void setMinClippingPosition(const fvec2 & value);
+	void setMaxClippingPosition(const fvec2 & value);
 	void setPosition(const fvec2 & value);
 	void setRotation(float value);
 	void setSize(const fvec2 & value);
@@ -53,8 +53,8 @@ public:
 
 	const fvec2 & getPosition() const;
 	const fvec2 & getSize() const;
-	const fvec2 & getMinPosition() const;
-	const fvec2 & getMaxPosition() const;
+	const fvec2 & getMinClippingPosition() const;
+	const fvec2 & getMaxClippingPosition() const;
 	const fvec2 & getUvMultiplier() const;
 	const fvec2 & getUvOffset() const;
 
@@ -80,8 +80,8 @@ private:
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
 
-	fvec2 _minPosition = fvec2(-1.0f);
-	fvec2 _maxPosition = fvec2(1.0f);
+	fvec2 _minClippingPosition = fvec2(-1.0f);
+	fvec2 _maxClippingPosition = fvec2(1.0f);
 	fvec2 _position = fvec2(0.0f);
 	fvec2 _size = fvec2(1.0f);
 	fvec2 _positionTarget = fvec2(0.0f);

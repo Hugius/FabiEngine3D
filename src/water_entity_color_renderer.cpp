@@ -163,12 +163,12 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 	_shaderBuffer->uploadUniform("u_isReflective", entity->isReflective());
 	_shaderBuffer->uploadUniform("u_isRefractive", entity->isRefractive());
 	_shaderBuffer->uploadUniform("u_color", entity->getColor());
-	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
-	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
-	_shaderBuffer->uploadUniform("u_minY", _renderStorage->getMinPosition().y);
-	_shaderBuffer->uploadUniform("u_maxY", _renderStorage->getMaxPosition().y);
-	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
-	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
+	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinClippingPosition().x);
+	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxClippingPosition().x);
+	_shaderBuffer->uploadUniform("u_minY", _renderStorage->getMinClippingPosition().y);
+	_shaderBuffer->uploadUniform("u_maxY", _renderStorage->getMaxClippingPosition().y);
+	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinClippingPosition().z);
+	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxClippingPosition().z);
 	_shaderBuffer->uploadUniform("u_hasDisplacementMap", (entity->getDisplacementTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_hasDudvMap", (entity->getDudvTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_hasNormalMap", (entity->getNormalTextureBuffer() != nullptr));

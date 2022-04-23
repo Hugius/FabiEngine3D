@@ -81,14 +81,14 @@ void GuiTextField::setOpacity(float value)
 	_fe3d->text2d_setOpacity(_entityId, value);
 }
 
-void GuiTextField::setMinPosition(const fvec2 & value)
+void GuiTextField::setMinClippingPosition(const fvec2 & value)
 {
-	_fe3d->text2d_setMinPosition(_entityId, value);
+	_fe3d->text2d_setMinClippingPosition(_entityId, value);
 }
 
-void GuiTextField::setMaxPosition(const fvec2 & value)
+void GuiTextField::setMaxClippingPosition(const fvec2 & value)
 {
-	_fe3d->text2d_setMaxPosition(_entityId, value);
+	_fe3d->text2d_setMaxClippingPosition(_entityId, value);
 }
 
 const fvec2 & GuiTextField::getPosition() const

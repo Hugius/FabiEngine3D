@@ -40,12 +40,12 @@ void AabbEntityDepthRenderer::render(const shared_ptr<AabbEntity> entity)
 	}
 
 	_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation());
-	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
-	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
-	_shaderBuffer->uploadUniform("u_minY", _renderStorage->getMinPosition().y);
-	_shaderBuffer->uploadUniform("u_maxY", _renderStorage->getMaxPosition().y);
-	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
-	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
+	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinClippingPosition().x);
+	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxClippingPosition().x);
+	_shaderBuffer->uploadUniform("u_minY", _renderStorage->getMinClippingPosition().y);
+	_shaderBuffer->uploadUniform("u_maxY", _renderStorage->getMaxClippingPosition().y);
+	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinClippingPosition().z);
+	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxClippingPosition().z);
 
 	glBindVertexArray(entity->getVertexBuffer()->getVaoId());
 

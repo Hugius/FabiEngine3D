@@ -56,8 +56,8 @@ void BottomViewportController::_fillConsole()
 	const auto window = _gui->getBottomViewport()->getWindow("console");
 	const auto screen = window->getScreen("main");
 	const auto messageCount = static_cast<unsigned int>(_messageQueue.size());
-	const auto minPosition = (window->getPosition() - (window->getSize() * 0.5f));
-	const auto maxPosition = (window->getPosition() + (window->getSize() * 0.5f));
+	const auto minClippingPosition = (window->getPosition() - (window->getSize() * 0.5f));
+	const auto maxClippingPosition = (window->getPosition() + (window->getSize() * 0.5f));
 
 	for(unsigned int index = 0; index < messageCount; index++)
 	{
@@ -72,10 +72,10 @@ void BottomViewportController::_fillConsole()
 		screen->createTextField(("timestamp_" + to_string(index)), fvec2(-1.0f, y), timestampSize, timestampText, TIMESTAMP_COLOR, false);
 		screen->createTextField(("content_" + to_string(index)), fvec2((-1.0f + timestampSize.x + CHAR_SIZE.x), y), contentSize, contentText, (isWarning ? WARN_COLOR : INFO_COLOR), false);
 
-		screen->getTextField("timestamp_" + to_string(index))->setMinPosition(minPosition);
-		screen->getTextField("timestamp_" + to_string(index))->setMaxPosition(maxPosition);
-		screen->getTextField("content_" + to_string(index))->setMinPosition(minPosition);
-		screen->getTextField("content_" + to_string(index))->setMaxPosition(maxPosition);
+		screen->getTextField("timestamp_" + to_string(index))->setMinClippingPosition(minClippingPosition);
+		screen->getTextField("timestamp_" + to_string(index))->setMaxClippingPosition(maxClippingPosition);
+		screen->getTextField("content_" + to_string(index))->setMinClippingPosition(minClippingPosition);
+		screen->getTextField("content_" + to_string(index))->setMaxClippingPosition(maxClippingPosition);
 	}
 }
 

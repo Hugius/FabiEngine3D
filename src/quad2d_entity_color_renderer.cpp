@@ -27,20 +27,20 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 
 	if(entity->isCentered())
 	{
-		if(((entity->getPosition().x - (entity->getSize().x * 0.5f)) > entity->getMaxPosition().x) ||
-		   ((entity->getPosition().x + (entity->getSize().x * 0.5f)) < entity->getMinPosition().x) ||
-		   ((entity->getPosition().y - (entity->getSize().y * 0.5f)) > entity->getMaxPosition().y) ||
-		   ((entity->getPosition().y + (entity->getSize().y * 0.5f)) < entity->getMinPosition().y))
+		if(((entity->getPosition().x - (entity->getSize().x * 0.5f)) > entity->getMaxClippingPosition().x) ||
+		   ((entity->getPosition().x + (entity->getSize().x * 0.5f)) < entity->getMinClippingPosition().x) ||
+		   ((entity->getPosition().y - (entity->getSize().y * 0.5f)) > entity->getMaxClippingPosition().y) ||
+		   ((entity->getPosition().y + (entity->getSize().y * 0.5f)) < entity->getMinClippingPosition().y))
 		{
 			return;
 		}
 	}
 	else
 	{
-		if((entity->getPosition().x > entity->getMaxPosition().x) ||
-		   ((entity->getPosition().x + entity->getSize().x) < entity->getMinPosition().x) ||
-		   (entity->getPosition().y > entity->getMaxPosition().y) ||
-		   ((entity->getPosition().y + entity->getSize().y) < entity->getMinPosition().y))
+		if((entity->getPosition().x > entity->getMaxClippingPosition().x) ||
+		   ((entity->getPosition().x + entity->getSize().x) < entity->getMinClippingPosition().x) ||
+		   (entity->getPosition().y > entity->getMaxClippingPosition().y) ||
+		   ((entity->getPosition().y + entity->getSize().y) < entity->getMinClippingPosition().y))
 		{
 			return;
 		}
@@ -53,8 +53,8 @@ void Quad2dEntityColorRenderer::render(const shared_ptr<Quad2dEntity> entity)
 	_shaderBuffer->uploadUniform("u_isVerticallyFlipped", entity->isVerticallyFlipped());
 	_shaderBuffer->uploadUniform("u_color", entity->getColor());
 	_shaderBuffer->uploadUniform("u_windowSize", fvec2(Configuration::getInst().getWindowSize()));
-	_shaderBuffer->uploadUniform("u_minPosition", entity->getMinPosition());
-	_shaderBuffer->uploadUniform("u_maxPosition", entity->getMaxPosition());
+	_shaderBuffer->uploadUniform("u_minClippingPosition", entity->getMinClippingPosition());
+	_shaderBuffer->uploadUniform("u_maxClippingPosition", entity->getMaxClippingPosition());
 	_shaderBuffer->uploadUniform("u_opacity", entity->getOpacity());
 	_shaderBuffer->uploadUniform("u_textureRepeat", static_cast<int>(entity->getTextureRepeat()));
 	_shaderBuffer->uploadUniform("u_hasDiffuseMap", (entity->getDiffuseTextureBuffer() != nullptr));

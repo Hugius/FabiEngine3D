@@ -496,8 +496,8 @@ public:
 	void quad2d_setDiffuseMap(const string & id, const string & value);
 	void quad2d_setColor(const string & id, const fvec3 & value);
 	void quad2d_setOpacity(const string & id, float value);
-	void quad2d_setMinPosition(const string & id, const fvec2 & value);
-	void quad2d_setMaxPosition(const string & id, const fvec2 & value);
+	void quad2d_setMinClippingPosition(const string & id, const fvec2 & value);
+	void quad2d_setMaxClippingPosition(const string & id, const fvec2 & value);
 	void quad2d_setPosition(const string & id, const fvec2 & value);
 	void quad2d_setRotation(const string & id, float value);
 	void quad2d_setSize(const string & id, const fvec2 & value);
@@ -531,8 +531,8 @@ public:
 	const fvec3 & quad2d_getColor(const string & id) const;
 	const fvec2 & quad2d_getPosition(const string & id) const;
 	const fvec2 & quad2d_getSize(const string & id) const;
-	const fvec2 & quad2d_getMinPosition(const string & id) const;
-	const fvec2 & quad2d_getMaxPosition(const string & id) const;
+	const fvec2 & quad2d_getMinClippingPosition(const string & id) const;
+	const fvec2 & quad2d_getMaxClippingPosition(const string & id) const;
 	const fvec2 & quad2d_getUvMultiplier(const string & id) const;
 	const fvec2 & quad2d_getUvOffset(const string & id) const;
 	const float quad2d_getRotation(const string & id) const;
@@ -560,8 +560,8 @@ public:
 	void text2d_setContent(const string & id, const string & value);
 	void text2d_setColor(const string & id, const fvec3 & value);
 	void text2d_setOpacity(const string & id, float value);
-	void text2d_setMinPosition(const string & id, const fvec2 & value);
-	void text2d_setMaxPosition(const string & id, const fvec2 & value);
+	void text2d_setMinClippingPosition(const string & id, const fvec2 & value);
+	void text2d_setMaxClippingPosition(const string & id, const fvec2 & value);
 	void text2d_setPosition(const string & id, const fvec2 & value);
 	void text2d_setRotation(const string & id, float value);
 	void text2d_setSize(const string & id, const fvec2 & value);
@@ -583,8 +583,8 @@ public:
 	const fvec3 & text2d_getWireframeColor(const string & id) const;
 	const fvec2 & text2d_getPosition(const string & id) const;
 	const fvec2 & text2d_getSize(const string & id) const;
-	const fvec2 & text2d_getMinPosition(const string & id) const;
-	const fvec2 & text2d_getMaxPosition(const string & id) const;
+	const fvec2 & text2d_getMinClippingPosition(const string & id) const;
+	const fvec2 & text2d_getMaxClippingPosition(const string & id) const;
 	const float text2d_getRotation(const string & id) const;
 	const float text2d_getOpacity(const string & id) const;
 	const bool text2d_isExisting(const string & id) const;

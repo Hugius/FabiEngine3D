@@ -41,12 +41,12 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		return;
 	}
 
-	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinPosition().x);
-	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxPosition().x);
-	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinPosition().y, entity->getMinHeight()));
-	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxPosition().y, entity->getMaxHeight()));
-	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinPosition().z);
-	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxPosition().z);
+	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinClippingPosition().x);
+	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxClippingPosition().x);
+	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClippingPosition().y, entity->getMinHeight()));
+	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClippingPosition().y, entity->getMaxHeight()));
+	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinClippingPosition().z);
+	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxClippingPosition().z);
 
 	for(const auto & partId : entity->getPartIds())
 	{

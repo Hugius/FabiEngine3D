@@ -14,8 +14,8 @@ public:
 	void setPosition(const fvec2 & value);
 	void setSize(const fvec2 & value);
 	void setOpacity(float value);
-	void setMinPosition(const fvec2 & value);
-	void setMaxPosition(const fvec2 & value);
+	void setMinClippingPosition(const fvec2 & value);
+	void setMaxClippingPosition(const fvec2 & value);
 
 	const string & getId() const;
 	const string & getParentId() const;

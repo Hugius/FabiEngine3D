@@ -112,14 +112,14 @@ void EngineInterface::quad2d_setOpacity(const string & id, float value)
 	_core->getQuad2dEntityManager()->getEntity(id)->setOpacity(value);
 }
 
-void EngineInterface::quad2d_setMinPosition(const string & id, const fvec2 & value)
+void EngineInterface::quad2d_setMinClippingPosition(const string & id, const fvec2 & value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setMinPosition(value);
+	_core->getQuad2dEntityManager()->getEntity(id)->setMinClippingPosition(value);
 }
 
-void EngineInterface::quad2d_setMaxPosition(const string & id, const fvec2 & value)
+void EngineInterface::quad2d_setMaxClippingPosition(const string & id, const fvec2 & value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setMaxPosition(value);
+	_core->getQuad2dEntityManager()->getEntity(id)->setMaxClippingPosition(value);
 }
 
 void EngineInterface::quad2d_setWireframed(const string & id, bool value)
@@ -294,14 +294,14 @@ const fvec2 & EngineInterface::quad2d_getSize(const string & id) const
 	return _core->getQuad2dEntityManager()->getEntity(id)->getSize();
 }
 
-const fvec2 & EngineInterface::quad2d_getMinPosition(const string & id) const
+const fvec2 & EngineInterface::quad2d_getMinClippingPosition(const string & id) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getMinPosition();
+	return _core->getQuad2dEntityManager()->getEntity(id)->getMinClippingPosition();
 }
 
-const fvec2 & EngineInterface::quad2d_getMaxPosition(const string & id) const
+const fvec2 & EngineInterface::quad2d_getMaxClippingPosition(const string & id) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getMaxPosition();
+	return _core->getQuad2dEntityManager()->getEntity(id)->getMaxClippingPosition();
 }
 
 const fvec2 & EngineInterface::quad2d_getUvMultiplier(const string & id) const

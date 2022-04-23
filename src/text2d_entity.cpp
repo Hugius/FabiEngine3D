@@ -118,8 +118,8 @@ void Text2dEntity::setContent(const string & value)
 			characterEntity->setOpacity(_opacity);
 			characterEntity->setWireframeColor(_wireframeColor);
 			characterEntity->setColor(_color);
-			characterEntity->setMinPosition(_minPosition);
-			characterEntity->setMaxPosition(_maxPosition);
+			characterEntity->setMinClippingPosition(_minClippingPosition);
+			characterEntity->setMaxClippingPosition(_maxClippingPosition);
 			characterEntity->setDepth(_depth);
 			characterEntity->setWireframed(_isWireframed);
 			characterEntity->setCentered(_isCentered);
@@ -132,23 +132,23 @@ void Text2dEntity::setContent(const string & value)
 	}
 }
 
-void Text2dEntity::setMinPosition(const fvec2 & value)
+void Text2dEntity::setMinClippingPosition(const fvec2 & value)
 {
-	_minPosition = value;
+	_minClippingPosition = value;
 
 	for(const auto & character : _characterEntities)
 	{
-		character->setMinPosition(_minPosition);
+		character->setMinClippingPosition(_minClippingPosition);
 	}
 }
 
-void Text2dEntity::setMaxPosition(const fvec2 & value)
+void Text2dEntity::setMaxClippingPosition(const fvec2 & value)
 {
-	_maxPosition = value;
+	_maxClippingPosition = value;
 
 	for(const auto & character : _characterEntities)
 	{
-		character->setMaxPosition(_maxPosition);
+		character->setMaxClippingPosition(_maxClippingPosition);
 	}
 }
 
@@ -405,14 +405,14 @@ const fvec2 & Text2dEntity::getSize() const
 	return _size;
 }
 
-const fvec2 & Text2dEntity::getMinPosition() const
+const fvec2 & Text2dEntity::getMinClippingPosition() const
 {
-	return _minPosition;
+	return _minClippingPosition;
 }
 
-const fvec2 & Text2dEntity::getMaxPosition() const
+const fvec2 & Text2dEntity::getMaxClippingPosition() const
 {
-	return _maxPosition;
+	return _maxClippingPosition;
 }
 
 const unsigned int Text2dEntity::getDepth() const

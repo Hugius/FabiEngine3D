@@ -56,8 +56,8 @@ void BottomViewportController::_fillConsole()
 	const auto window = _gui->getBottomViewport()->getWindow("console");
 	const auto screen = window->getScreen("main");
 	const auto messageCount = static_cast<unsigned int>(_messageQueue.size());
-	const auto minPosition = fvec2(-1.0f, window->getPosition().y - (window->getSize().y * 0.5f));
-	const auto maxPosition = fvec2(1.0f, window->getPosition().y + (window->getSize().y * 0.5f));
+	const auto minPosition = (window->getPosition() - (window->getSize() * 0.5f));
+	const auto maxPosition = (window->getPosition() + (window->getSize() * 0.5f));
 
 	for(unsigned int index = 0; index < messageCount; index++)
 	{

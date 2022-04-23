@@ -61,6 +61,8 @@ public:
 	void sky_setFrontCubeMap(const string & id, const string & value);
 	void sky_setLightness(const string & id, float value);
 	void sky_setRotation(const string & id, const fvec3 & value);
+	void sky_rotate(const string & id, const fvec3 & value);
+	void sky_rotateTo(const string & id, const fvec3 & target, float speed);
 	void sky_setColor(const string & id, const fvec3 & value);
 	void sky_setWireframed(const string & id, bool value);
 	void sky_setWireframeColor(const string & id, const fvec3 & value);

@@ -9,7 +9,9 @@
 - `fe3d:sky_set_lightness` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:sky_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:sky_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
-- `fe3d:sky_set_rotation` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:sky_set_rotation` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:sky_rotate` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:sky_rotate_to` (`STR` id, `DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:sky_set_wireframed` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:sky_set_left_cube_map` (`STR` id, `STR` file_path) -----> `NONE`
 - `fe3d:sky_set_right_cube_map` (`STR` id, `STR` file_path) -----> `NONE`
@@ -36,7 +38,9 @@
 - `fe3d:sky_get_wireframe_color_r` (`STR` id) -----> `DEC`
 - `fe3d:sky_get_wireframe_color_g` (`STR` id) -----> `DEC`
 - `fe3d:sky_get_wireframe_color_b` (`STR` id) -----> `DEC`
-- `fe3d:sky_get_rotation` (`STR` id) -----> `DEC`
+- `fe3d:sky_get_rotation_x` (`STR` id) -----> `DEC`
+- `fe3d:sky_get_rotation_y` (`STR` id) -----> `DEC`
+- `fe3d:sky_get_rotation_z` (`STR` id) -----> `DEC`
 - `fe3d:sky_get_ids` () -----> `LIST`
 - `fe3d:sky_get_left_cube_map_path` (`STR` id) -----> `STR`
 - `fe3d:sky_get_right_cube_map_path` (`STR` id) -----> `STR`

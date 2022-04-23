@@ -10,6 +10,35 @@ void SkyEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 	_vertexBuffer = value;
 }
 
+void SkyEntity::updateTarget()
+{
+	if(_rotation != _rotationTarget)
+	{
+		auto difference = Mathematics::calculateDifference(_rotation, _rotationTarget);
+		auto multiplier = fvec3(((difference.x < 180.0f) ? 1.0f : -1.0f), ((difference.y < 180.0f) ? 1.0f : -1.0f), ((difference.z < 180.0f) ? 1.0f : -1.0f));
+		auto speed = (fvec3(_rotationTargetSpeed) * multiplier);
+
+		_rotation.x += ((_rotation.x < _rotationTarget.x) ? speed.x : (_rotation.x > _rotationTarget.x) ? -speed.x : 0.0f);
+		_rotation.y += ((_rotation.y < _rotationTarget.y) ? speed.y : (_rotation.y > _rotationTarget.y) ? -speed.y : 0.0f);
+		_rotation.z += ((_rotation.z < _rotationTarget.z) ? speed.z : (_rotation.z > _rotationTarget.z) ? -speed.z : 0.0f);
+
+		_rotation = fvec3(Mathematics::limitAngle(_rotation.x), Mathematics::limitAngle(_rotation.y), Mathematics::limitAngle(_rotation.z));
+
+		if(Mathematics::calculateAngleDifference(_rotation.x, _rotationTarget.x) <= _rotationTargetSpeed)
+		{
+			_rotation.x = _rotationTarget.x;
+		}
+		if(Mathematics::calculateAngleDifference(_rotation.y, _rotationTarget.y) <= _rotationTargetSpeed)
+		{
+			_rotation.y = _rotationTarget.y;
+		}
+		if(Mathematics::calculateAngleDifference(_rotation.z, _rotationTarget.z) <= _rotationTargetSpeed)
+		{
+			_rotation.z = _rotationTarget.z;
+		}
+	}
+}
+
 void SkyEntity::updateTransformation()
 {
 	_transformation = Mathematics::createRotationMatrix(
@@ -41,6 +70,20 @@ void SkyEntity::setLightness(float value)
 void SkyEntity::setRotation(const fvec3 & value)
 {
 	_rotation = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
+}
+
+void SkyEntity::rotate(const fvec3 & value)
+{
+	_rotation += value;
+	_rotationTarget += value;
+	_rotation = fvec3(Mathematics::limitAngle(_rotation.x), Mathematics::limitAngle(_rotation.y), Mathematics::limitAngle(_rotation.z));
+	_rotationTarget = fvec3(Mathematics::limitAngle(_rotationTarget.x), Mathematics::limitAngle(_rotationTarget.y), Mathematics::limitAngle(_rotationTarget.z));
+}
+
+void SkyEntity::rotateTo(const fvec3 & target, float speed)
+{
+	_rotationTarget = fvec3(Mathematics::limitAngle(target.x), Mathematics::limitAngle(target.y), Mathematics::limitAngle(target.z));
+	_rotationTargetSpeed = speed;
 }
 
 void SkyEntity::setWireframed(bool value)

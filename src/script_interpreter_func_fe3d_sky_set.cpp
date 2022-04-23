@@ -128,6 +128,34 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 			}
 		}
 	}
+	else if(functionName == "fe3d:sky_rotate")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky(args[0]->getString(), false))
+			{
+				_fe3d->sky_rotate(_fe3d->sky_getSelectedId(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_rotate_to")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky(args[0]->getString(), false))
+			{
+				_fe3d->sky_rotateTo(_fe3d->sky_getSelectedId(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()), args[4]->getDecimal());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:sky_set_wireframed")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};

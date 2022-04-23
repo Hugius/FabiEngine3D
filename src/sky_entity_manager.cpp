@@ -120,6 +120,8 @@ void SkyEntityManager::update()
 
 	if(entity != nullptr)
 	{
+		entity->updateTarget();
+
 		if(entity->isVisible())
 		{
 			entity->updateTransformation();

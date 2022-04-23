@@ -123,6 +123,16 @@ void EngineInterface::sky_setRotation(const string & id, const fvec3 & value)
 	_core->getSkyEntityManager()->getEntity(id)->setRotation(value);
 }
 
+void EngineInterface::sky_rotate(const string & id, const fvec3 & value)
+{
+	_core->getSkyEntityManager()->getEntity(id)->rotate(value);
+}
+
+void EngineInterface::sky_rotateTo(const string & id, const fvec3 & target, float speed)
+{
+	_core->getSkyEntityManager()->getEntity(id)->rotateTo(target, speed);
+}
+
 void EngineInterface::sky_setColor(const string & id, const fvec3 & value)
 {
 	_core->getSkyEntityManager()->getEntity(id)->setColor(value);

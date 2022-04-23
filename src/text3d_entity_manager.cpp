@@ -112,15 +112,7 @@ void Text3dEntityManager::update()
 	{
 		entity->updateTarget();
 
-		if(!entity->isVisible())
-		{
-			continue;
-		}
-
-		const auto isFacingCameraHorizontally = entity->isFacingCameraHorizontally();
-		const auto isFacingCameraVertically = entity->isFacingCameraVertically();
-
-		if(isFacingCameraHorizontally || isFacingCameraVertically)
+		if(entity->isFacingCameraHorizontally() || entity->isFacingCameraVertically())
 		{
 			auto position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y * 0.5f), 0.0f));
 			auto direction = (position - _camera->getPosition());
@@ -129,13 +121,16 @@ void Text3dEntityManager::update()
 			auto degreesY = Mathematics::convertToDegrees(atan2f(direction.z, direction.x));
 
 			auto rotation = entity->getRotation();
-			rotation.x = (degreesX * static_cast<float>(isFacingCameraHorizontally));
-			rotation.y = ((-degreesY - 90.0f) * static_cast<float>(isFacingCameraVertically));
+			rotation.x = (degreesX * static_cast<float>(entity->isFacingCameraHorizontally()));
+			rotation.y = ((-degreesY - 90.0f) * static_cast<float>(entity->isFacingCameraVertically()));
 
 			entity->setRotation(rotation);
 		}
 
-		entity->updateCharacterEntities();
+		if(entity->isVisible())
+		{
+			entity->updateCharacterEntities();
+		}
 	}
 }
 

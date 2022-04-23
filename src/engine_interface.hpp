@@ -852,6 +852,7 @@ public:
 	void camera_followFrontXZ(float speed);
 	void camera_followFrontXYZ(float speed);
 	void camera_move(const fvec3 & speed);
+	void camera_moveTo(const fvec3 & target, float speed);
 	void camera_setPosition(const fvec3 & value);
 	void camera_setThirdPersonLookat(const fvec3 & value);
 	void camera_setThirdPersonDistance(float value);

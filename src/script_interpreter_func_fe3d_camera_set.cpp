@@ -15,6 +15,17 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string & functionNa
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:camera_move_to")
+	{
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->camera_moveTo(fvec3(args[0]->getDecimal(), args[1]->getDecimal(), args[2]->getDecimal()), args[3]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:camera_set_position")
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};

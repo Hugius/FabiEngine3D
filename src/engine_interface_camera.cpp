@@ -36,6 +36,11 @@ void EngineInterface::camera_move(const fvec3 & speed)
 	_core->getCamera()->move(speed);
 }
 
+void EngineInterface::camera_moveTo(const fvec3 & target, float speed)
+{
+	_core->getCamera()->moveTo(target, speed);
+}
+
 void EngineInterface::camera_setPosition(const fvec3 & value)
 {
 	_core->getCamera()->setPosition(value);

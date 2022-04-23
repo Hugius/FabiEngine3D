@@ -229,9 +229,15 @@ const bool Camera::isThirdPersonEnabled() const
 	return _isThirdPersonEnabled;
 }
 
-void Camera::move(const fvec3 & speed)
+void Camera::move(const fvec3 & value)
 {
-	_position += speed;
+	_position += value;
+}
+
+void Camera::moveTo(const fvec3 & target, float speed)
+{
+	_positionTarget = target;
+	_positionTargetSpeed = speed;
 }
 
 void Camera::setPosition(const fvec3 & value)

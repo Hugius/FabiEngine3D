@@ -15,7 +15,8 @@ public:
 	void reset();
 	void update();
 	void updateMatrices();
-	void move(const fvec3 & speed);
+	void move(const fvec3 & value);
+	void moveTo(const fvec3 & target, float speed);
 	void setPosition(const fvec3 & value);
 	void setThirdPersonLookat(const fvec3 & value);
 	void setThirdPersonDistance(float value);
@@ -92,6 +93,7 @@ private:
 	fvec3 _up = fvec3(0.0f);
 	fvec3 _front = fvec3(0.0f);
 	fvec3 _position = fvec3(0.0f);
+	fvec3 _positionTarget = fvec3(0.0f);
 	fvec3 _thirdPersonLookat = fvec3(0.0f);
 
 	float _near = 0.0f;
@@ -114,6 +116,7 @@ private:
 	float _minThirdPersonPitch = 0.0f;
 	float _maxThirdPersonPitch = 0.0f;
 	float _cursorSensitivity = 0.0f;
+	float _positionTargetSpeed = 0.0f;
 
 	bool _isThirdPersonEnabled = false;
 	bool _isFirstPersonEnabled = false;

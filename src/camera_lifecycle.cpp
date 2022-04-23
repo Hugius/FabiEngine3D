@@ -60,6 +60,25 @@ void Camera::update()
 	const auto currentCursorPosition = Tools::getCursorPosition();
 	const auto centerCursorPosition = Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
 
+	if(_position != _positionTarget)
+	{
+		const auto speedMultiplier = Mathematics::normalize(_positionTarget - _position);
+		_position += (speedMultiplier * _positionTargetSpeed);
+
+		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
+		{
+			_position.x = _positionTarget.x;
+		}
+		if(fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
+		{
+			_position.y = _positionTarget.y;
+		}
+		if(fabsf(_positionTarget.z - _position.z) <= _positionTargetSpeed)
+		{
+			_position.z = _positionTarget.z;
+		}
+	}
+
 	if(_isFirstPersonEnabled && !_mustCenterCursor)
 	{
 		auto xOffset = static_cast<float>(currentCursorPosition.x - centerCursorPosition.x);
@@ -135,6 +154,7 @@ void Camera::update()
 	if(_mustCenterCursor)
 	{
 		Tools::setCursorPosition(centerCursorPosition);
+
 		_mustCenterCursor = false;
 	}
 

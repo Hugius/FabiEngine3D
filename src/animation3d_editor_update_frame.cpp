@@ -84,6 +84,8 @@ void Animation3dEditor::_updateFrameMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("rotationOriginX", "X", (rotationOrigin.x * 1000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("rotationOriginY", "Y", (rotationOrigin.y * 1000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("rotationOriginZ", "Z", (rotationOrigin.z * 1000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "targetTransformationX") && _gui->getOverlay()->isValueFormConfirmed())
@@ -127,16 +129,12 @@ void Animation3dEditor::_updateFrameMenu()
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->animation3d_setRotationOrigin(_currentAnimationId, _currentFrameIndex, _currentPartId, fvec3((content / 1000.0f), rotationOrigin.y, rotationOrigin.z));
-
-			_gui->getOverlay()->openValueForm("rotationOriginY", "Y", (rotationOrigin.y * 1000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "rotationOriginY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->animation3d_setRotationOrigin(_currentAnimationId, _currentFrameIndex, _currentPartId, fvec3(rotationOrigin.x, (content / 1000.0f), rotationOrigin.z));
-
-			_gui->getOverlay()->openValueForm("rotationOriginZ", "Z", (rotationOrigin.z * 1000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "rotationOriginZ") && _gui->getOverlay()->isValueFormConfirmed())
 		{

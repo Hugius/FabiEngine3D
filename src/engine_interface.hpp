@@ -60,7 +60,7 @@ public:
 	void sky_setBackCubeMap(const string & id, const string & value);
 	void sky_setFrontCubeMap(const string & id, const string & value);
 	void sky_setLightness(const string & id, float value);
-	void sky_setRotation(const string & id, float value);
+	void sky_setRotation(const string & id, const fvec3 & value);
 	void sky_setColor(const string & id, const fvec3 & value);
 	void sky_setWireframed(const string & id, bool value);
 	void sky_setWireframeColor(const string & id, const fvec3 & value);
@@ -76,8 +76,8 @@ public:
 	const string sky_getSelectedId() const;
 	const fvec3 & sky_getWireframeColor(const string & id) const;
 	const fvec3 & sky_getColor(const string & id) const;
+	const fvec3 & sky_getRotation(const string & id) const;
 	const float sky_getLightness(const string & id) const;
-	const float sky_getRotation(const string & id) const;
 	const bool sky_isExisting(const string & id) const;
 	const bool sky_isVisible(const string & id) const;
 	const bool sky_isWireframed(const string & id) const;

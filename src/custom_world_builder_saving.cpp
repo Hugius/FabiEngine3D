@@ -43,7 +43,11 @@ const bool CustomWorldBuilder::saveWorldToFile(const string & fileName) const
 		}
 
 		file
-			<< rotation
+			<< rotation.x
+			<< " "
+			<< rotation.y
+			<< " "
+			<< rotation.z
 			<< " "
 			<< lightness
 			<< " "

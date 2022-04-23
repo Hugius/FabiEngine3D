@@ -20,7 +20,7 @@ public:
 	void setColor(const fvec3 & value);
 	void setCubeMap(shared_ptr<TextureBuffer> value);
 	void setLightness(float value);
-	void setRotation(float value);
+	void setRotation(const fvec3 & value);
 	void setWireframed(bool value);
 	void setWireframeColor(const fvec3 & value);
 
@@ -31,11 +31,11 @@ public:
 
 	const mat44 & getTransformation() const;
 
+	const fvec3 & getRotation() const;
 	const fvec3 & getWireframeColor() const;
 	const fvec3 & getColor() const;
 
 	const float getLightness() const;
-	const float getRotation() const;
 
 	const bool isWireframed() const;
 
@@ -47,11 +47,11 @@ private:
 
 	mat44 _transformation = mat44(1.0f);
 
+	fvec3 _rotation = fvec3(0.0f);
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
 
 	float _lightness = 1.0f;
-	float _rotation = 0.0f;
 
 	bool _isWireframed = false;
 };

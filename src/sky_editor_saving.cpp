@@ -50,7 +50,11 @@ const bool SkyEditor::saveEntitiesToFile() const
 		}
 
 		file
-			<< rotation
+			<< rotation.x
+			<< " "
+			<< rotation.y
+			<< " "
+			<< rotation.z
 			<< " "
 			<< lightness
 			<< " "

@@ -12,7 +12,10 @@ void SkyEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 
 void SkyEntity::updateTransformation()
 {
-	_transformation = Mathematics::createRotationMatrixY(Mathematics::convertToRadians(_rotation));
+	_transformation = Mathematics::createRotationMatrix(
+		Mathematics::convertToRadians(_rotation.x),
+		Mathematics::convertToRadians(_rotation.y),
+		Mathematics::convertToRadians(_rotation.z), DirectionOrderType::YXZ);
 }
 
 void SkyEntity::setCubeMapPaths(const array<string, 6> & value)
@@ -35,9 +38,9 @@ void SkyEntity::setLightness(float value)
 	_lightness = max(0.0f, value);
 }
 
-void SkyEntity::setRotation(float value)
+void SkyEntity::setRotation(const fvec3 & value)
 {
-	_rotation = Mathematics::limitAngle(value);
+	_rotation = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
 }
 
 void SkyEntity::setWireframed(bool value)
@@ -85,7 +88,7 @@ const float SkyEntity::getLightness() const
 	return _lightness;
 }
 
-const float SkyEntity::getRotation() const
+const fvec3 & SkyEntity::getRotation() const
 {
 	return _rotation;
 }

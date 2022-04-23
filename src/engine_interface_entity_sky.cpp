@@ -118,7 +118,7 @@ void EngineInterface::sky_setLightness(const string & id, float value)
 	_core->getSkyEntityManager()->getEntity(id)->setLightness(value);
 }
 
-void EngineInterface::sky_setRotation(const string & id, float value)
+void EngineInterface::sky_setRotation(const string & id, const fvec3 & value)
 {
 	_core->getSkyEntityManager()->getEntity(id)->setRotation(value);
 }
@@ -205,7 +205,7 @@ const float EngineInterface::sky_getLightness(const string & id) const
 	return _core->getSkyEntityManager()->getEntity(id)->getLightness();
 }
 
-const float EngineInterface::sky_getRotation(const string & id) const
+const fvec3 & EngineInterface::sky_getRotation(const string & id) const
 {
 	return _core->getSkyEntityManager()->getEntity(id)->getRotation();
 }

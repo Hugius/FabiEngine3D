@@ -92,7 +92,7 @@ const bool SkyEditor::loadEntitiesFromFile()
 		string skyId;
 		array<string, 6> cubeMapPaths{};
 		fvec3 color;
-		float rotation;
+		fvec3 rotation;
 		float lightness;
 
 		istringstream iss(line);
@@ -105,7 +105,9 @@ const bool SkyEditor::loadEntitiesFromFile()
 			>> cubeMapPaths[3]
 			>> cubeMapPaths[4]
 			>> cubeMapPaths[5]
-			>> rotation
+			>> rotation.x
+			>> rotation.y
+			>> rotation.z
 			>> lightness
 			>> color.r
 			>> color.g

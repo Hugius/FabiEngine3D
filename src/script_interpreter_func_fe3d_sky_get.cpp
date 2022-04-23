@@ -146,7 +146,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string & functionName,
 			}
 		}
 	}
-	else if(functionName == "fe3d:sky_get_rotation")
+	else if(functionName == "fe3d:sky_get_rotation_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -154,7 +154,35 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string & functionName,
 		{
 			if(_validateFe3dSky(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->sky_getRotation(_fe3d->sky_getSelectedId());
+				const auto result = _fe3d->sky_getRotation(_fe3d->sky_getSelectedId()).x;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_get_rotation_y")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->sky_getRotation(_fe3d->sky_getSelectedId()).y;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_get_rotation_z")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->sky_getRotation(_fe3d->sky_getSelectedId()).z;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}

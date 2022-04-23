@@ -116,13 +116,13 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	}
 	else if(functionName == "fe3d:sky_set_rotation")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSky(args[0]->getString(), false))
 			{
-				_fe3d->sky_setRotation(_fe3d->sky_getSelectedId(), args[1]->getDecimal());
+				_fe3d->sky_setRotation(_fe3d->sky_getSelectedId(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

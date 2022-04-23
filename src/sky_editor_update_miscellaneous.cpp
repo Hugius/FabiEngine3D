@@ -18,7 +18,9 @@ void SkyEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("rotation", "Rotation", rotation, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("rotationX", "X", rotation.x, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("rotationY", "Y", rotation.y, fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("rotationZ", "Z", rotation.z, fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
@@ -31,11 +33,23 @@ void SkyEditor::_updateMiscellaneousMenu()
 			_gui->getOverlay()->openValueForm("colorB", "Blue", (color.b * COLOR_MULTIPLIER), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
-		if((_gui->getOverlay()->getValueFormId() == "rotation") && _gui->getOverlay()->isValueFormConfirmed())
+		if((_gui->getOverlay()->getValueFormId() == "rotationX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->sky_setRotation(_currentSkyId, content);
+			_fe3d->sky_setRotation(_currentSkyId, fvec3(content, rotation.y, rotation.z));
+		}
+		if((_gui->getOverlay()->getValueFormId() == "rotationY") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->sky_setRotation(_currentSkyId, fvec3(rotation.x, content, rotation.z));
+		}
+		if((_gui->getOverlay()->getValueFormId() == "rotationZ") && _gui->getOverlay()->isValueFormConfirmed())
+		{
+			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
+
+			_fe3d->sky_setRotation(_currentSkyId, fvec3(rotation.x, rotation.y, content));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
 		{

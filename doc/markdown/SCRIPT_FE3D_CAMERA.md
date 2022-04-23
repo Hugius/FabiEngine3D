@@ -3,6 +3,7 @@
 ## Setters
 
 - `fe3d:camera_move` (`DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:camera_move_to` (`DEC` target_x, `DEC` target_y, `DEC` target_z, `DEC` speed) -----> `NONE`
 - `fe3d:camera_follow_right_xz` (`DEC` speed) -----> `NONE`
 - `fe3d:camera_follow_front_xz` (`DEC` speed) -----> `NONE`
 - `fe3d:camera_follow_front_xyz` (`DEC` speed) -----> `NONE`

@@ -9,7 +9,6 @@
 - The Z axis is depth (back & front).
 - The 3D coordinate system works with decimal values with XYZ(0,0,0) as the center coordinate. The range is infinite in both positive/negative directions.
 - The 2D coordinate system works with decimal values with XY(0,0) as the center coordinate. The range is between -1.0 and 1.0.
-- The maximum absolute render distance is fixed at 2500.0.
 - The reference box used in FabiEngine3D editors has a size of 1.0.
 
 ## 2. Camera angles
@@ -52,10 +51,10 @@
   - Constraints: between `0.0` and `150.0`
 - **Near**: the minimum visible distance
   - Type: `decimal`
-  - Constraints: fixed at `0.01`
+  - Constraints: at least `0.0`
 - **Far**: the maximum visible distance
   - Type: `decimal`
-  - Constraints: fixed at `2500.0`
+  - Constraints: at least `0.0`
 - **Yaw**: the horizontal rotation of the camera direction
   - Type: `decimal`
   - Constraints: between `0.0` and `360.0`

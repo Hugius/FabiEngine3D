@@ -49,6 +49,16 @@ void Camera::setThirdPersonEnabled(bool value)
 	_isThirdPersonEnabled = value;
 }
 
+void Camera::setNear(float value)
+{
+	_near = max(0.0f, value);
+}
+
+void Camera::setFar(float value)
+{
+	_far = max(0.0f, value);
+}
+
 void Camera::setFov(float value)
 {
 	_fov = clamp(value, 0.0f, MAX_FOV);
@@ -274,11 +284,11 @@ void Camera::updateMatrices()
 {
 	if(_isUpInverted)
 	{
-		_up = INVERTED_UP;
+		_up = NEGATIVE_UP;
 	}
 	else
 	{
-		_up = DEFAULT_UP;
+		_up = POSITIVE_UP;
 	}
 
 	_front.x = (cos(Mathematics::convertToRadians(_yaw)) * cos(Mathematics::convertToRadians(_pitch)));

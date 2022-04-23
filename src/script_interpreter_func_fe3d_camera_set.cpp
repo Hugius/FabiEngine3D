@@ -70,6 +70,28 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string & functionNa
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:camera_set_near")
+	{
+		auto types = {SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->camera_setNear(args[0]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:camera_set_far")
+	{
+		auto types = {SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			_fe3d->camera_setFar(args[0]->getDecimal());
+
+			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:camera_set_yaw")
 	{
 		auto types = {SVT::DECIMAL};

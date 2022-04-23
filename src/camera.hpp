@@ -38,6 +38,8 @@ public:
 	void followFrontXZ(float speed);
 	void setFirstPersonEnabled(bool value);
 	void setThirdPersonEnabled(bool value);
+	void setNear(float value);
+	void setFar(float value);
 	void invertUp();
 
 	const mat44 & getView() const;
@@ -70,11 +72,11 @@ public:
 	const bool isFirstPersonEnabled() const;
 
 private:
-	static inline const fvec3 DEFAULT_UP = fvec3(0.0f, 1.0f, 0.0f);
-	static inline const fvec3 INVERTED_UP = fvec3(0.0f, -1.0f, 0.0f);
+	static inline const fvec3 POSITIVE_UP = fvec3(0.0f, 1.0f, 0.0f);
+	static inline const fvec3 NEGATIVE_UP = fvec3(0.0f, -1.0f, 0.0f);
 
 	static inline constexpr float DEFAULT_NEAR = 0.01f;
-	static inline constexpr float DEFAULT_FAR = 2500.0f;
+	static inline constexpr float DEFAULT_FAR = 10000.0f;
 	static inline constexpr float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
 	static inline constexpr float DEFAULT_FOV = 90.0f;
 	static inline constexpr float MAX_FOV = 150.0f;

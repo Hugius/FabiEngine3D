@@ -858,6 +858,8 @@ public:
 	void camera_setPosition(const fvec3 & value);
 	void camera_setThirdPersonLookat(const fvec3 & value);
 	void camera_setThirdPersonDistance(float value);
+	void camera_setNear(float value);
+	void camera_setFar(float value);
 	void camera_setFov(float value);
 	void camera_setYaw(float value);
 	void camera_setPitch(float value);

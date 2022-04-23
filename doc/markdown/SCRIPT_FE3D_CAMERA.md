@@ -8,6 +8,8 @@
 - `fe3d:camera_follow_front_xz` (`DEC` speed) -----> `NONE`
 - `fe3d:camera_follow_front_xyz` (`DEC` speed) -----> `NONE`
 - `fe3d:camera_set_position` (`DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:camera_set_near` (`DEC` value) -----> `NONE`
+- `fe3d:camera_set_far` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_yaw` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_pitch` (`DEC` value) -----> `NONE`
 - `fe3d:camera_set_fov` (`DEC` value) -----> `NONE`

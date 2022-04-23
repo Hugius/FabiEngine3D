@@ -116,6 +116,16 @@ void EngineInterface::camera_setThirdPersonDistance(float value)
 	_core->getCamera()->setThirdPersonDistance(value);
 }
 
+void EngineInterface::camera_setNear(float value)
+{
+	_core->getCamera()->setNear(value);
+}
+
+void EngineInterface::camera_setFar(float value)
+{
+	_core->getCamera()->setFar(value);
+}
+
 const float EngineInterface::camera_getYaw() const
 {
 	return _core->getCamera()->getYaw();

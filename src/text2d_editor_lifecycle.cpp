@@ -38,11 +38,13 @@ void Text2dEditor::_loadGUI()
 	leftWindow->getScreen("text2dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Text"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Text", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text2dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	positions = Mathematics::calculateDistributedPositions(3, CH, false);
+	positions = Mathematics::calculateDistributedPositions(5, CH, false);
 	leftWindow->createScreen("text2dEditorMenuChoice");
 	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("color", fvec2(0.0f, positions[0]), TEXT_SIZE("Color"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Color", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("opacity", fvec2(0.0f, positions[1]), TEXT_SIZE("Opacity"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Opacity", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("isHorizontallyFlipped", fvec2(0.0f, positions[2]), TEXT_SIZE("Flipped X: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Flipped X: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("isVerticallyFlipped", fvec2(0.0f, positions[3]), TEXT_SIZE("Flipped Y: OFF"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Flipped Y: OFF", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text2dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 }
 
 void Text2dEditor::_unloadGUI()

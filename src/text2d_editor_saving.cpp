@@ -26,6 +26,8 @@ const bool Text2dEditor::saveEntitiesToFile() const
 		auto fontMapPath = _fe3d->text2d_getFontMapPath(textId);
 		auto color = _fe3d->text2d_getColor(textId);
 		auto opacity = _fe3d->text2d_getOpacity(textId);
+		auto isHorizontallyFlipped = _fe3d->text2d_isHorizontallyFlipped(textId);
+		auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(textId);
 
 		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -45,6 +47,10 @@ const bool Text2dEditor::saveEntitiesToFile() const
 			<< color.b
 			<< " "
 			<< opacity
+			<< " "
+			<< isHorizontallyFlipped
+			<< " "
+			<< isVerticallyFlipped
 			<< endl;
 	}
 

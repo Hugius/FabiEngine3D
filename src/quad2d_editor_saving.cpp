@@ -27,6 +27,8 @@ const bool Quad2dEditor::saveEntitiesToFile() const
 		auto color = _fe3d->quad2d_getColor(quadId);
 		auto opacity = _fe3d->quad2d_getOpacity(quadId);
 		auto textureRepeat = _fe3d->quad2d_getTextureRepeat(quadId);
+		auto isHorizontallyFlipped = _fe3d->quad2d_isHorizontallyFlipped(quadId);
+		auto isVerticallyFlipped = _fe3d->quad2d_isVerticallyFlipped(quadId);
 
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -48,6 +50,10 @@ const bool Quad2dEditor::saveEntitiesToFile() const
 			<< opacity
 			<< " "
 			<< textureRepeat
+			<< " "
+			<< isHorizontallyFlipped
+			<< " "
+			<< isVerticallyFlipped
 			<< endl;
 	}
 

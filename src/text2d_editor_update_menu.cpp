@@ -63,6 +63,8 @@ void Text2dEditor::_updateChoiceMenu()
 	{
 		const auto color = _fe3d->text2d_getColor(_currentTextId);
 		const auto opacity = _fe3d->text2d_getOpacity(_currentTextId);
+		const auto isHorizontallyFlipped = _fe3d->text2d_isHorizontallyFlipped(_currentTextId);
+		const auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(_currentTextId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -81,6 +83,14 @@ void Text2dEditor::_updateChoiceMenu()
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
 			_gui->getOverlay()->openValueForm("opacity", "Opacity", (opacity * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isHorizontallyFlipped")->isHovered())
+		{
+			_fe3d->text2d_setHorizontallyFlipped(_currentTextId, !isHorizontallyFlipped);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isVerticallyFlipped")->isHovered())
+		{
+			_fe3d->text2d_setVerticallyFlipped(_currentTextId, !isVerticallyFlipped);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
@@ -107,5 +117,8 @@ void Text2dEditor::_updateChoiceMenu()
 
 			_fe3d->text2d_setOpacity(_currentTextId, (content / 100.0f));
 		}
+
+		screen->getButton("isHorizontallyFlipped")->setTextContent(isHorizontallyFlipped ? "Flipped X: ON" : "Flipped X: OFF");
+		screen->getButton("isVerticallyFlipped")->setTextContent(isVerticallyFlipped ? "Flipped Y: ON" : "Flipped Y: OFF");
 	}
 }

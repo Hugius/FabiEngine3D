@@ -85,6 +85,8 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 		fvec3 color;
 		float opacity;
 		unsigned int textureRepeat;
+		bool isHorizontallyFlipped;
+		bool isVerticallyFlipped;
 
 		istringstream iss(line);
 
@@ -95,7 +97,9 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 			>> color.g
 			>> color.b
 			>> opacity
-			>> textureRepeat;
+			>> textureRepeat
+			>> isHorizontallyFlipped
+			>> isVerticallyFlipped;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 
@@ -114,6 +118,8 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 			_fe3d->quad2d_setColor(quadId, color);
 			_fe3d->quad2d_setOpacity(quadId, opacity);
 			_fe3d->quad2d_setTextureRepeat(quadId, textureRepeat);
+			_fe3d->quad2d_setHorizontallyFlipped(quadId, isHorizontallyFlipped);
+			_fe3d->quad2d_setVerticallyFlipped(quadId, isVerticallyFlipped);
 
 			if(!diffuseMapPath.empty())
 			{

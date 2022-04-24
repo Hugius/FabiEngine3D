@@ -84,6 +84,8 @@ const bool Text2dEditor::loadEntitiesFromFile()
 		string fontMapPath;
 		fvec3 color;
 		float opacity;
+		bool isHorizontallyFlipped;
+		bool isVerticallyFlipped;
 
 		istringstream iss(line);
 
@@ -93,7 +95,9 @@ const bool Text2dEditor::loadEntitiesFromFile()
 			>> color.r
 			>> color.g
 			>> color.b
-			>> opacity;
+			>> opacity
+			>> isHorizontallyFlipped
+			>> isVerticallyFlipped;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -117,6 +121,8 @@ const bool Text2dEditor::loadEntitiesFromFile()
 			_fe3d->text2d_setColor(textId, color);
 			_fe3d->text2d_setOpacity(textId, opacity);
 			_fe3d->text2d_setContent(textId, TEXT_CONTENT);
+			_fe3d->text2d_setHorizontallyFlipped(textId, isHorizontallyFlipped);
+			_fe3d->text2d_setVerticallyFlipped(textId, isVerticallyFlipped);
 		}
 	}
 

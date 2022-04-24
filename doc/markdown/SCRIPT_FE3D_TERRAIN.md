@@ -26,6 +26,8 @@
 - `fe3d:terrain_set_blue_repeat` (`STR` id, `INT` value) -----> `NONE`
 - `fe3d:terrain_set_specular` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:terrain_set_wireframed` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:terrain_set_min_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:terrain_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 
 ## Getters
 
@@ -53,6 +55,12 @@
 - `fe3d:terrain_get_red_normal_map_path` (`STR` id) -----> `STR`
 - `fe3d:terrain_get_green_normal_map_path` (`STR` id) -----> `STR`
 - `fe3d:terrain_get_blue_normal_map_path` (`STR` id) -----> `STR`
+- `fe3d:terrain_get_min_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:terrain_get_min_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:terrain_get_min_clip_position_z` (`STR` id) -----> `DEC`
+- `fe3d:terrain_get_max_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:terrain_get_max_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:terrain_get_max_clip_position_z` (`STR` id) -----> `DEC`
 - `fe3d:terrain_get_max_height` (`STR` id) -----> `DEC`
 - `fe3d:terrain_get_size` (`STR` id) -----> `DEC`
 - `fe3d:terrain_get_ids` () -----> `LIST`

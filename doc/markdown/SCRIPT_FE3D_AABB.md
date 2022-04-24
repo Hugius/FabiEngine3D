@@ -15,6 +15,8 @@
 - `fe3d:aabb_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:aabb_set_raycast_responsive` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:aabb_set_collision_responsive` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:aabb_set_min_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:aabb_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 
 ## Getters
 
@@ -33,3 +35,9 @@
 - `fe3d:aabb_get_color_r` (`STR` id) -----> `DEC`
 - `fe3d:aabb_get_color_g` (`STR` id) -----> `DEC`
 - `fe3d:aabb_get_color_b` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_min_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_min_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_min_clip_position_z` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_max_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_max_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:aabb_get_max_clip_position_z` (`STR` id) -----> `DEC`

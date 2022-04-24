@@ -25,6 +25,8 @@
 - `fe3d:water_set_specular` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:water_set_wireframed` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:water_set_edged` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:water_set_min_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:water_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 
 ## Getters
 
@@ -41,6 +43,12 @@
 - `fe3d:water_get_dudv_map_path` (`STR` id) -----> `STR`
 - `fe3d:water_get_displacement_map_path` (`STR` id) -----> `STR`
 - `fe3d:water_get_normal_map_path` (`STR` id) -----> `STR`
+- `fe3d:water_get_min_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:water_get_min_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:water_get_min_clip_position_z` (`STR` id) -----> `DEC`
+- `fe3d:water_get_max_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:water_get_max_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:water_get_max_clip_position_z` (`STR` id) -----> `DEC`
 - `fe3d:water_get_max_depth` (`STR` id) -----> `DEC`
 - `fe3d:water_get_ripple_speed_x` (`STR` id) -----> `DEC`
 - `fe3d:water_get_ripple_speed_y` (`STR` id) -----> `DEC`

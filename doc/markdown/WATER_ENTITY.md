@@ -28,6 +28,12 @@
 - **Wireframe Color**: the RGB color multiplier of the wireframe
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
+- **Min Clip Position**: the minimum position from which fragments are visible
+  - Type: `decimal3`
+  - Constraints: none
+- **Max Clip Position**: the maximum position to which fragments are visible
+  - Type: `decimal3`
+  - Constraints: none
 - **Ripple Speed**: the speed of the rippling movement
   - Type: `decimal2`
   - Constraints: none

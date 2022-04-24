@@ -24,6 +24,12 @@
 - **Color**: the RGB color multiplier of the fragments
   - Type: `decimal3`
   - Constraints: between `0.0` to `1.0`
+- **Min Clip Position**: the minimum position from which fragments are visible
+  - Type: `decimal3`
+  - Constraints: none
+- **Max Clip Position**: the maximum position to which fragments are visible
+  - Type: `decimal3`
+  - Constraints: none
 - **Raycast Responsive**: the mesh is responsive to raycasting
   - Type: `boolean`
   - Constraints: none

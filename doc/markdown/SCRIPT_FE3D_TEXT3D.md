@@ -32,6 +32,8 @@
 - `fe3d:text3d_set_facing_camera_horizontally` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_facing_camera_vertically` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:text3d_set_min_texture_alpha` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:text3d_set_min_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:text3d_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 
 ## Getters
 
@@ -45,6 +47,12 @@
 - `fe3d:text3d_is_wireframed` (`STR` id) -----> `BOL`
 - `fe3d:text3d_is_frozen` (`STR` id) -----> `BOL`
 - `fe3d:text3d_is_existing` (`STR` id) -----> `BOL`
+- `fe3d:text3d_get_min_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:text3d_get_min_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:text3d_get_min_clip_position_z` (`STR` id) -----> `DEC`
+- `fe3d:text3d_get_max_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:text3d_get_max_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:text3d_get_max_clip_position_z` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_position_x` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_position_y` (`STR` id) -----> `DEC`
 - `fe3d:text3d_get_position_z` (`STR` id) -----> `DEC`

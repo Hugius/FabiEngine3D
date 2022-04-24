@@ -32,6 +32,12 @@
 - **Wireframe Color**: the RGB color multiplier of the wireframe
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
+- **Min Clip Position**: the minimum position from which fragments are visible
+  - Type: `decimal3`
+  - Constraints: none
+- **Max Clip Position**: the maximum position to which fragments are visible
+  - Type: `decimal3`
+  - Constraints: none
 - **Size**: the XY size of the mesh
   - Type: `decimal2`
   - Constraints: at least `0.0`

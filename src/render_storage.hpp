@@ -30,8 +30,8 @@ public:
 	void setLensFlareMapPath(const string & value);
 	void setShadowView(const mat44 & value);
 	void setShadowProjection(const mat44 & value);
-	void setMinClippingPosition(const fvec3 & value);
-	void setMaxClippingPosition(const fvec3 & value);
+	void setMinClipPosition(const fvec3 & value);
+	void setMaxClipPosition(const fvec3 & value);
 	void setAmbientLightingEnabled(bool value);
 	void setAmbientLightingColor(const fvec3 & value);
 	void setAmbientLightingIntensity(float value);
@@ -114,8 +114,8 @@ public:
 	const mat44 & getShadowView() const;
 	const mat44 & getShadowProjection() const;
 
-	const fvec3 & getMinClippingPosition() const;
-	const fvec3 & getMaxClippingPosition() const;
+	const fvec3 & getMinClipPosition() const;
+	const fvec3 & getMaxClipPosition() const;
 	const fvec3 & getAmbientLightingColor() const;
 	const fvec3 & getDirectionalLightingColor() const;
 	const fvec3 & getDirectionalLightingPosition() const;
@@ -232,8 +232,8 @@ private:
 	mat44 _shadowView = mat44(1.0f);
 	mat44 _shadowProjection = mat44(1.0f);
 
-	fvec3 _minClippingPosition = fvec3(-FLT_MAX);
-	fvec3 _maxClippingPosition = fvec3(FLT_MAX);
+	fvec3 _minClipPosition = fvec3(-FLT_MAX);
+	fvec3 _maxClipPosition = fvec3(FLT_MAX);
 	fvec3 _directionalLightingPosition = fvec3(0.0f);
 	fvec3 _shadowPosition = fvec3(0.0f);
 	fvec3 _shadowPositionOffset = fvec3(0.0f);

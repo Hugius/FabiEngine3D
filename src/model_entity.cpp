@@ -429,14 +429,14 @@ void ModelEntity::setSpecularIntensity(const string & partId, float value)
 	_parts.at(partId)->specularIntensity = max(0.0f, value);
 }
 
-void ModelEntity::setMinClippingPosition(const fvec3 & value)
+void ModelEntity::setMinClipPosition(const fvec3 & value)
 {
-	_minClippingPosition = value;
+	_minClipPosition = value;
 }
 
-void ModelEntity::setMaxClippingPosition(const fvec3 & value)
+void ModelEntity::setMaxClipPosition(const fvec3 & value)
 {
-	_maxClippingPosition = value;
+	_maxClipPosition = value;
 }
 
 void ModelEntity::setLevelOfDetailDistance(float value)
@@ -602,14 +602,14 @@ const fvec3 & ModelEntity::getPartSize(const string & partId) const
 	return _parts.at(partId)->size;
 }
 
-const fvec3 & ModelEntity::getMinClippingPosition() const
+const fvec3 & ModelEntity::getMinClipPosition() const
 {
-	return _minClippingPosition;
+	return _minClipPosition;
 }
 
-const fvec3 & ModelEntity::getMaxClippingPosition() const
+const fvec3 & ModelEntity::getMaxClipPosition() const
 {
-	return _maxClippingPosition;
+	return _maxClipPosition;
 }
 
 const float ModelEntity::getCubeReflectionMixValue() const

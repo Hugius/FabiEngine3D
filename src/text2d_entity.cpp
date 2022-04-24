@@ -118,8 +118,8 @@ void Text2dEntity::setContent(const string & value)
 			characterEntity->setOpacity(_opacity);
 			characterEntity->setWireframeColor(_wireframeColor);
 			characterEntity->setColor(_color);
-			characterEntity->setMinClippingPosition(_minClippingPosition);
-			characterEntity->setMaxClippingPosition(_maxClippingPosition);
+			characterEntity->setMinClipPosition(_minClipPosition);
+			characterEntity->setMaxClipPosition(_maxClipPosition);
 			characterEntity->setDepth(_depth);
 			characterEntity->setWireframed(_isWireframed);
 			characterEntity->setCentered(_isCentered);
@@ -132,23 +132,23 @@ void Text2dEntity::setContent(const string & value)
 	}
 }
 
-void Text2dEntity::setMinClippingPosition(const fvec2 & value)
+void Text2dEntity::setMinClipPosition(const fvec2 & value)
 {
-	_minClippingPosition = value;
+	_minClipPosition = value;
 
 	for(const auto & character : _characterEntities)
 	{
-		character->setMinClippingPosition(_minClippingPosition);
+		character->setMinClipPosition(_minClipPosition);
 	}
 }
 
-void Text2dEntity::setMaxClippingPosition(const fvec2 & value)
+void Text2dEntity::setMaxClipPosition(const fvec2 & value)
 {
-	_maxClippingPosition = value;
+	_maxClipPosition = value;
 
 	for(const auto & character : _characterEntities)
 	{
-		character->setMaxClippingPosition(_maxClippingPosition);
+		character->setMaxClipPosition(_maxClipPosition);
 	}
 }
 
@@ -405,14 +405,14 @@ const fvec2 & Text2dEntity::getSize() const
 	return _size;
 }
 
-const fvec2 & Text2dEntity::getMinClippingPosition() const
+const fvec2 & Text2dEntity::getMinClipPosition() const
 {
-	return _minClippingPosition;
+	return _minClipPosition;
 }
 
-const fvec2 & Text2dEntity::getMaxClippingPosition() const
+const fvec2 & Text2dEntity::getMaxClipPosition() const
 {
-	return _maxClippingPosition;
+	return _maxClipPosition;
 }
 
 const unsigned int Text2dEntity::getDepth() const

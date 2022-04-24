@@ -18,8 +18,8 @@ public:
 	void setHoveredTextColor(const fvec3 & value);
 	void setPosition(const fvec2 & value);
 	void setSize(const fvec2 & value);
-	void setMinClippingPosition(const fvec2 & value);
-	void setMaxClippingPosition(const fvec2 & value);
+	void setMinClipPosition(const fvec2 & value);
+	void setMaxClipPosition(const fvec2 & value);
 	void setDiffuseMap(const string & value);
 	void setTextContent(const string & value);
 

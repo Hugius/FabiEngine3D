@@ -54,14 +54,14 @@ void GuiQuadField::setOpacity(float value)
 	_fe3d->quad2d_setOpacity(_entityId, value);
 }
 
-void GuiQuadField::setMinClippingPosition(const fvec2 & value)
+void GuiQuadField::setMinClipPosition(const fvec2 & value)
 {
-	_fe3d->quad2d_setMinClippingPosition(_entityId, value);
+	_fe3d->quad2d_setMinClipPosition(_entityId, value);
 }
 
-void GuiQuadField::setMaxClippingPosition(const fvec2 & value)
+void GuiQuadField::setMaxClipPosition(const fvec2 & value)
 {
-	_fe3d->quad2d_setMaxClippingPosition(_entityId, value);
+	_fe3d->quad2d_setMaxClipPosition(_entityId, value);
 }
 
 void GuiQuadField::setDiffuseMap(const string & value)

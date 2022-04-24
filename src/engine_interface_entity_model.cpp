@@ -436,14 +436,14 @@ void EngineInterface::model_setWireframeColor(const string & modelId, const stri
 	_core->getModelEntityManager()->getEntity(modelId)->setWireframeColor(partId, value);
 }
 
-void EngineInterface::model_setMinClippingPosition(const string & id, const fvec3 & value)
+void EngineInterface::model_setMinClipPosition(const string & id, const fvec3 & value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setMinClippingPosition(value);
+	_core->getModelEntityManager()->getEntity(id)->setMinClipPosition(value);
 }
 
-void EngineInterface::model_setMaxClippingPosition(const string & id, const fvec3 & value)
+void EngineInterface::model_setMaxClipPosition(const string & id, const fvec3 & value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setMaxClippingPosition(value);
+	_core->getModelEntityManager()->getEntity(id)->setMaxClipPosition(value);
 }
 
 void EngineInterface::model_setReflected(const string & id, bool value)
@@ -619,14 +619,14 @@ const fvec3 & EngineInterface::model_getWireframeColor(const string & modelId, c
 	return _core->getModelEntityManager()->getEntity(modelId)->getWireframeColor(partId);
 }
 
-const fvec3 & EngineInterface::model_getMinClippingPosition(const string & id) const
+const fvec3 & EngineInterface::model_getMinClipPosition(const string & id) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getMinClippingPosition();
+	return _core->getModelEntityManager()->getEntity(id)->getMinClipPosition();
 }
 
-const fvec3 & EngineInterface::model_getMaxClippingPosition(const string & id) const
+const fvec3 & EngineInterface::model_getMaxClipPosition(const string & id) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getMaxClippingPosition();
+	return _core->getModelEntityManager()->getEntity(id)->getMaxClipPosition();
 }
 
 const float EngineInterface::model_getLightness(const string & modelId, const string & partId) const

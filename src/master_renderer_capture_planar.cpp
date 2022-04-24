@@ -72,7 +72,7 @@ void MasterRenderer::capturePlanarReflections()
 	_camera->setPosition(originalCameraPosition);
 	_camera->setPitch(originalCameraPitch);
 
-	_renderStorage->setMinClippingPosition(fvec3(-FLT_MAX, _renderStorage->getPlanarReflectionHeight(), -FLT_MAX));
+	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX, _renderStorage->getPlanarReflectionHeight(), -FLT_MAX));
 	_renderStorage->setReflectionsEnabled(false);
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
@@ -106,7 +106,7 @@ void MasterRenderer::capturePlanarReflections()
 	_camera->updateMatrices();
 
 	_renderStorage->setPlanarReflectionMap(_planarReflectionCaptureBuffer->getTexture(0));
-	_renderStorage->setMinClippingPosition(fvec3(-FLT_MAX));
+	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX));
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
 	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);

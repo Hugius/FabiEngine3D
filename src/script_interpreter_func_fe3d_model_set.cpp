@@ -408,7 +408,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setMinClippingPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
+				_fe3d->model_setMinClipPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -422,7 +422,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				_fe3d->model_setMaxClippingPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
+				_fe3d->model_setMaxClipPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

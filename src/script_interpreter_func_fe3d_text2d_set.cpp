@@ -28,8 +28,8 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string & functionNa
 				_fe3d->text2d_create(args[0]->getString(), _fe3d->text2d_getFontMapPath("@" + args[1]->getString()), true);
 				_fe3d->text2d_setPosition(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(args[2]->getDecimal(), args[3]->getDecimal())));
 				_fe3d->text2d_setSize(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[4]->getDecimal(), args[5]->getDecimal())));
-				_fe3d->text2d_setMinClippingPosition(args[0]->getString(), Tools::getMinViewportPosition());
-				_fe3d->text2d_setMaxClippingPosition(args[0]->getString(), Tools::getMaxViewportPosition());
+				_fe3d->text2d_setMinClipPosition(args[0]->getString(), Tools::getMinViewportPosition());
+				_fe3d->text2d_setMaxClipPosition(args[0]->getString(), Tools::getMaxViewportPosition());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

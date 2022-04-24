@@ -80,14 +80,14 @@ void RenderStorage::setShadowProjection(const mat44 & value)
 	_shadowProjection = value;
 }
 
-void RenderStorage::setMinClippingPosition(const fvec3 & value)
+void RenderStorage::setMinClipPosition(const fvec3 & value)
 {
-	_minClippingPosition = value;
+	_minClipPosition = value;
 }
 
-void RenderStorage::setMaxClippingPosition(const fvec3 & value)
+void RenderStorage::setMaxClipPosition(const fvec3 & value)
 {
-	_maxClippingPosition = value;
+	_maxClipPosition = value;
 }
 
 void RenderStorage::setFlareSourceUv(const fvec2 & value)
@@ -483,14 +483,14 @@ const mat44 & RenderStorage::getShadowProjection() const
 	return _shadowProjection;
 }
 
-const fvec3 & RenderStorage::getMinClippingPosition() const
+const fvec3 & RenderStorage::getMinClipPosition() const
 {
-	return _minClippingPosition;
+	return _minClipPosition;
 }
 
-const fvec3 & RenderStorage::getMaxClippingPosition() const
+const fvec3 & RenderStorage::getMaxClipPosition() const
 {
-	return _maxClippingPosition;
+	return _maxClipPosition;
 }
 
 const fvec2 & RenderStorage::getFlareSourceUv() const

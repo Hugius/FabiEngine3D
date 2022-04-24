@@ -257,8 +257,8 @@ void GuiScrollingList::_updateScrolling()
 
 			button->setPosition(buttonPosition);
 			button->setSize(buttonSize);
-			button->setMinClippingPosition(fvec2(-1.0f, listPosition.y - (listSize.y * 0.5f)));
-			button->setMaxClippingPosition(fvec2(1.0f, listPosition.y + (listSize.y * 0.5f)));
+			button->setMinClipPosition(fvec2(-1.0f, listPosition.y - (listSize.y * 0.5f)));
+			button->setMaxClipPosition(fvec2(1.0f, listPosition.y + (listSize.y * 0.5f)));
 
 			yOffset += (_characterSize.y * 1.5f);
 		}

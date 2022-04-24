@@ -250,8 +250,8 @@ public:
 	void model_setMinTextureAlpha(const string & modelId, const string & partId, float value);
 	void model_setColor(const string & modelId, const string & partId, const fvec3 & value);
 	void model_setWireframeColor(const string & modelId, const string & partId, const fvec3 & value);
-	void model_setMinClippingPosition(const string & id, const fvec3 & value);
-	void model_setMaxClippingPosition(const string & id, const fvec3 & value);
+	void model_setMinClipPosition(const string & id, const fvec3 & value);
+	void model_setMaxClipPosition(const string & id, const fvec3 & value);
 	void model_setLevelOfDetailDistance(const string & id, float value);
 	void model_setTextureRepeat(const string & modelId, const string & partId, unsigned int value);
 	void model_setBright(const string & modelId, const string & partId, bool value);
@@ -285,8 +285,8 @@ public:
 	const fvec3 & model_getPartSize(const string & modelId, const string & partId) const;
 	const fvec3 & model_getColor(const string & modelId, const string & partId) const;
 	const fvec3 & model_getWireframeColor(const string & modelId, const string & partId) const;
-	const fvec3 & model_getMinClippingPosition(const string & id) const;
-	const fvec3 & model_getMaxClippingPosition(const string & id) const;
+	const fvec3 & model_getMinClipPosition(const string & id) const;
+	const fvec3 & model_getMaxClipPosition(const string & id) const;
 	const float model_getReflectivity(const string & modelId, const string & partId) const;
 	const float model_getLightness(const string & modelId, const string & partId) const;
 	const float model_getSpecularShininess(const string & modelId, const string & partId) const;
@@ -496,8 +496,8 @@ public:
 	void quad2d_setDiffuseMap(const string & id, const string & value);
 	void quad2d_setColor(const string & id, const fvec3 & value);
 	void quad2d_setOpacity(const string & id, float value);
-	void quad2d_setMinClippingPosition(const string & id, const fvec2 & value);
-	void quad2d_setMaxClippingPosition(const string & id, const fvec2 & value);
+	void quad2d_setMinClipPosition(const string & id, const fvec2 & value);
+	void quad2d_setMaxClipPosition(const string & id, const fvec2 & value);
 	void quad2d_setPosition(const string & id, const fvec2 & value);
 	void quad2d_setRotation(const string & id, float value);
 	void quad2d_setSize(const string & id, const fvec2 & value);
@@ -531,8 +531,8 @@ public:
 	const fvec3 & quad2d_getColor(const string & id) const;
 	const fvec2 & quad2d_getPosition(const string & id) const;
 	const fvec2 & quad2d_getSize(const string & id) const;
-	const fvec2 & quad2d_getMinClippingPosition(const string & id) const;
-	const fvec2 & quad2d_getMaxClippingPosition(const string & id) const;
+	const fvec2 & quad2d_getMinClipPosition(const string & id) const;
+	const fvec2 & quad2d_getMaxClipPosition(const string & id) const;
 	const fvec2 & quad2d_getUvMultiplier(const string & id) const;
 	const fvec2 & quad2d_getUvOffset(const string & id) const;
 	const float quad2d_getRotation(const string & id) const;
@@ -560,8 +560,8 @@ public:
 	void text2d_setContent(const string & id, const string & value);
 	void text2d_setColor(const string & id, const fvec3 & value);
 	void text2d_setOpacity(const string & id, float value);
-	void text2d_setMinClippingPosition(const string & id, const fvec2 & value);
-	void text2d_setMaxClippingPosition(const string & id, const fvec2 & value);
+	void text2d_setMinClipPosition(const string & id, const fvec2 & value);
+	void text2d_setMaxClipPosition(const string & id, const fvec2 & value);
 	void text2d_setPosition(const string & id, const fvec2 & value);
 	void text2d_setRotation(const string & id, float value);
 	void text2d_setSize(const string & id, const fvec2 & value);
@@ -583,8 +583,8 @@ public:
 	const fvec3 & text2d_getWireframeColor(const string & id) const;
 	const fvec2 & text2d_getPosition(const string & id) const;
 	const fvec2 & text2d_getSize(const string & id) const;
-	const fvec2 & text2d_getMinClippingPosition(const string & id) const;
-	const fvec2 & text2d_getMaxClippingPosition(const string & id) const;
+	const fvec2 & text2d_getMinClipPosition(const string & id) const;
+	const fvec2 & text2d_getMaxClipPosition(const string & id) const;
 	const float text2d_getRotation(const string & id) const;
 	const float text2d_getOpacity(const string & id) const;
 	const bool text2d_isExisting(const string & id) const;

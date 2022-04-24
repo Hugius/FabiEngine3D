@@ -67,7 +67,7 @@ void MasterRenderer::captureWaterReflections()
 	_camera->setPosition(originalCameraPosition);
 	_camera->setPitch(originalCameraPitch);
 
-	_renderStorage->setMinClippingPosition(fvec3(-FLT_MAX, (waterEntity->getHeight() - 1.0f), -FLT_MAX));
+	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX, (waterEntity->getHeight() - 1.0f), -FLT_MAX));
 	_renderStorage->setReflectionsEnabled(false);
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
@@ -107,7 +107,7 @@ void MasterRenderer::captureWaterReflections()
 	_camera->updateMatrices();
 
 	_renderStorage->setWaterReflectionMap(_waterReflectionCaptureBuffer->getTexture(0));
-	_renderStorage->setMinClippingPosition(fvec3(-FLT_MAX));
+	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX));
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
 	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);
@@ -137,7 +137,7 @@ void MasterRenderer::captureWaterRefractions()
 
 	const auto wasSkyExposureEnabled = _renderStorage->isSkyExposureEnabled();
 
-	_renderStorage->setMinClippingPosition(fvec3(-FLT_MAX, (waterEntity->getHeight() - 1.0f), -FLT_MAX));
+	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX, (waterEntity->getHeight() - 1.0f), -FLT_MAX));
 	_renderStorage->setReflectionsEnabled(false);
 	_renderStorage->setRefractionsEnabled(false);
 	_renderStorage->setSkyExposureEnabled(false);
@@ -153,7 +153,7 @@ void MasterRenderer::captureWaterRefractions()
 	_renderTransparentText3dEntities();
 
 	_renderStorage->setWaterRefractionMap(_waterRefractionCaptureBuffer->getTexture(0));
-	_renderStorage->setMinClippingPosition(fvec3(-FLT_MAX));
+	_renderStorage->setMinClipPosition(fvec3(-FLT_MAX));
 	_renderStorage->setReflectionsEnabled(true);
 	_renderStorage->setRefractionsEnabled(true);
 	_renderStorage->setSkyExposureEnabled(wasSkyExposureEnabled);

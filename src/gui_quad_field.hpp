@@ -13,8 +13,8 @@ public:
 	void setPosition(const fvec2 & value);
 	void setSize(const fvec2 & value);
 	void setOpacity(float value);
-	void setMinClippingPosition(const fvec2 & value);
-	void setMaxClippingPosition(const fvec2 & value);
+	void setMinClipPosition(const fvec2 & value);
+	void setMaxClipPosition(const fvec2 & value);
 	void setDiffuseMap(const string & value);
 
 	const string & getId() const;

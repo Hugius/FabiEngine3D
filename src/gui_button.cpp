@@ -113,16 +113,16 @@ void GuiButton::setSize(const fvec2 & value)
 	_textField->setSize(value);
 }
 
-void GuiButton::setMinClippingPosition(const fvec2 & value)
+void GuiButton::setMinClipPosition(const fvec2 & value)
 {
-	_quadField->setMinClippingPosition(value);
-	_textField->setMinClippingPosition(value);
+	_quadField->setMinClipPosition(value);
+	_textField->setMinClipPosition(value);
 }
 
-void GuiButton::setMaxClippingPosition(const fvec2 & value)
+void GuiButton::setMaxClipPosition(const fvec2 & value)
 {
-	_quadField->setMaxClippingPosition(value);
-	_textField->setMaxClippingPosition(value);
+	_quadField->setMaxClipPosition(value);
+	_textField->setMaxClipPosition(value);
 }
 
 void GuiButton::setDiffuseMap(const string & value)

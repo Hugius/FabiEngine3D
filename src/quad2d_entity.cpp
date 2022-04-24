@@ -160,14 +160,14 @@ void Quad2dEntity::scaleTo(const fvec2 & target, float speed)
 	_sizeTargetSpeed = speed;
 }
 
-void Quad2dEntity::setMinClippingPosition(const fvec2 & value)
+void Quad2dEntity::setMinClipPosition(const fvec2 & value)
 {
-	_minClippingPosition = fvec2(clamp(value.x, -1.0f, 1.0f), clamp(value.y, -1.0f, 1.0f));
+	_minClipPosition = fvec2(clamp(value.x, -1.0f, 1.0f), clamp(value.y, -1.0f, 1.0f));
 }
 
-void Quad2dEntity::setMaxClippingPosition(const fvec2 & value)
+void Quad2dEntity::setMaxClipPosition(const fvec2 & value)
 {
-	_maxClippingPosition = fvec2(clamp(value.x, -1.0f, 1.0f), clamp(value.y, -1.0f, 1.0f));
+	_maxClipPosition = fvec2(clamp(value.x, -1.0f, 1.0f), clamp(value.y, -1.0f, 1.0f));
 }
 
 void Quad2dEntity::setDepth(unsigned int value)
@@ -260,14 +260,14 @@ const fvec2 & Quad2dEntity::getSize() const
 	return _size;
 }
 
-const fvec2 & Quad2dEntity::getMinClippingPosition() const
+const fvec2 & Quad2dEntity::getMinClipPosition() const
 {
-	return _minClippingPosition;
+	return _minClipPosition;
 }
 
-const fvec2 & Quad2dEntity::getMaxClippingPosition() const
+const fvec2 & Quad2dEntity::getMaxClipPosition() const
 {
-	return _maxClippingPosition;
+	return _maxClipPosition;
 }
 
 const fvec2 & Quad2dEntity::getUvMultiplier() const

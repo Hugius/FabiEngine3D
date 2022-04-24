@@ -6,8 +6,8 @@ layout (location = 0) uniform sampler2D u_diffuseMap;
 
 uniform vec3 u_color;
 uniform vec2 u_windowSize;
-uniform vec2 u_minClippingPosition;
-uniform vec2 u_maxClippingPosition;
+uniform vec2 u_minClipPosition;
+uniform vec2 u_maxClipPosition;
 uniform vec3 u_wireframeColor;
 
 uniform float u_opacity;
@@ -30,7 +30,7 @@ void main()
 	vec2 normalizedPosition = (gl_FragCoord.xy / u_windowSize);
 	vec2 ndcPosition = ((normalizedPosition * 2.0f) - vec2(1.0f));
 
-	if((ndcPosition.x > u_maxClippingPosition.x) || (ndcPosition.y > u_maxClippingPosition.y) || (ndcPosition.x < u_minClippingPosition.x) || (ndcPosition.y < u_minClippingPosition.y))
+	if((ndcPosition.x > u_maxClipPosition.x) || (ndcPosition.y > u_maxClipPosition.y) || (ndcPosition.x < u_minClipPosition.x) || (ndcPosition.y < u_minClipPosition.y))
 	{
 		discard;
 	}

@@ -450,7 +450,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->model_getMinClippingPosition(args[0]->getString()).x;
+				const auto result = _fe3d->model_getMinClipPosition(args[0]->getString()).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -464,7 +464,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->model_getMinClippingPosition(args[0]->getString()).y;
+				const auto result = _fe3d->model_getMinClipPosition(args[0]->getString()).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -478,7 +478,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->model_getMinClippingPosition(args[0]->getString()).z;
+				const auto result = _fe3d->model_getMinClipPosition(args[0]->getString()).z;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -492,7 +492,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->model_getMaxClippingPosition(args[0]->getString()).x;
+				const auto result = _fe3d->model_getMaxClipPosition(args[0]->getString()).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -506,7 +506,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->model_getMaxClippingPosition(args[0]->getString()).y;
+				const auto result = _fe3d->model_getMaxClipPosition(args[0]->getString()).y;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
@@ -520,7 +520,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->model_getMaxClippingPosition(args[0]->getString()).z;
+				const auto result = _fe3d->model_getMaxClipPosition(args[0]->getString()).z;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}

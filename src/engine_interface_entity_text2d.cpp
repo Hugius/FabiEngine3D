@@ -96,14 +96,14 @@ void EngineInterface::text2d_setWireframeColor(const string & id, const fvec3 & 
 	_core->getText2dEntityManager()->getEntity(id)->setWireframeColor(value);
 }
 
-void EngineInterface::text2d_setMinClippingPosition(const string & id, const fvec2 & value)
+void EngineInterface::text2d_setMinClipPosition(const string & id, const fvec2 & value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setMinClippingPosition(value);
+	_core->getText2dEntityManager()->getEntity(id)->setMinClipPosition(value);
 }
 
-void EngineInterface::text2d_setMaxClippingPosition(const string & id, const fvec2 & value)
+void EngineInterface::text2d_setMaxClipPosition(const string & id, const fvec2 & value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setMaxClippingPosition(value);
+	_core->getText2dEntityManager()->getEntity(id)->setMaxClipPosition(value);
 }
 
 const bool EngineInterface::text2d_isExisting(const string & id) const
@@ -156,14 +156,14 @@ const fvec2 & EngineInterface::text2d_getSize(const string & id) const
 	return _core->getText2dEntityManager()->getEntity(id)->getSize();
 }
 
-const fvec2 & EngineInterface::text2d_getMinClippingPosition(const string & id) const
+const fvec2 & EngineInterface::text2d_getMinClipPosition(const string & id) const
 {
-	return  _core->getText2dEntityManager()->getEntity(id)->getMinClippingPosition();
+	return  _core->getText2dEntityManager()->getEntity(id)->getMinClipPosition();
 }
 
-const fvec2 & EngineInterface::text2d_getMaxClippingPosition(const string & id) const
+const fvec2 & EngineInterface::text2d_getMaxClipPosition(const string & id) const
 {
-	return  _core->getText2dEntityManager()->getEntity(id)->getMaxClippingPosition();
+	return  _core->getText2dEntityManager()->getEntity(id)->getMaxClipPosition();
 }
 
 const fvec3 & EngineInterface::text2d_getColor(const string & id) const

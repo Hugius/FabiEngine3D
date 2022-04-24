@@ -213,6 +213,34 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
+		_updateModelPlacing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateQuad3dPlacing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateText3dPlacing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updatePointlightPlacing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateSpotlightPlacing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateReflectionPlacing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateSoundPlacing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
 		_updateSkyMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
@@ -229,39 +257,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateModelPlacingMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateModelChoosingMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateModelPlacing();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateModelEditing();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
 		_updateQuad3dMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateQuad3dPlacingMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateQuad3dChoosingMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateQuad3dPlacing();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateQuad3dEditing();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -269,35 +265,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateText3dPlacingMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateText3dChoosingMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateText3dPlacing();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateText3dEditing();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
 		_updatePointlightMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updatePointlightChoosingMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updatePointlightPlacing();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updatePointlightEditing();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -305,31 +273,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSpotlightChoosingMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateSpotlightPlacing();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateSpotlightEditing();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
 		_updateReflectionMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateReflectionChoosingMenu();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateReflectionPlacing();
-	}
-	if(isLoaded() && !_currentWorldId.empty())
-	{
-		_updateReflectionEditing();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -337,7 +281,43 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
+		_updateModelPlacingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateQuad3dPlacingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateText3dPlacingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
 		_updateSoundPlacingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateModelChoosingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateQuad3dChoosingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateText3dChoosingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updatePointlightChoosingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateSpotlightChoosingMenu();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateReflectionChoosingMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -345,7 +325,27 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateSoundPlacing();
+		_updateModelEditing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateQuad3dEditing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateText3dEditing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updatePointlightEditing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateSpotlightEditing();
+	}
+	if(isLoaded() && !_currentWorldId.empty())
+	{
+		_updateReflectionEditing();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{

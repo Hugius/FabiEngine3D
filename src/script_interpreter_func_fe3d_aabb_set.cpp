@@ -74,6 +74,12 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
+				{
+					_throwRuntimeError("cannot access a bound AABB");
+					return true;
+				}
+
 				_fe3d->aabb_setMinClipPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
@@ -88,6 +94,12 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
+				if(!_fe3d->aabb_getParentId(args[0]->getString()).empty())
+				{
+					_throwRuntimeError("cannot access a bound AABB");
+					return true;
+				}
+
 				_fe3d->aabb_setMaxClipPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));

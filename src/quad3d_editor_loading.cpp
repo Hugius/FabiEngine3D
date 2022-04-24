@@ -38,6 +38,8 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 		fvec3 color;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
+		bool isHorizontallyFlipped;
+		bool isVerticallyFlipped;
 
 		istringstream iss(line);
 
@@ -50,6 +52,8 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 			>> color.b
 			>> isFacingCameraHorizontally
 			>> isFacingCameraVertically
+			>> isHorizontallyFlipped
+			>> isVerticallyFlipped
 			>> diffuseMapPath
 			>> emissionMapPath;
 
@@ -118,6 +122,8 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		unsigned int textureRepeat;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
+		bool isHorizontallyFlipped;
+		bool isVerticallyFlipped;
 		bool isReflected;
 		bool isShadowed;
 		bool isBright;
@@ -133,6 +139,8 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 			>> color.b
 			>> isFacingCameraHorizontally
 			>> isFacingCameraVertically
+			>> isHorizontallyFlipped
+			>> isVerticallyFlipped
 			>> diffuseMapPath
 			>> emissionMapPath
 			>> isReflected
@@ -160,6 +168,8 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		_fe3d->quad3d_setLightness(quadId, lightness);
 		_fe3d->quad3d_setFacingCameraHorizontally(quadId, isFacingCameraHorizontally);
 		_fe3d->quad3d_setFacingCameraVertically(quadId, isFacingCameraVertically);
+		_fe3d->quad3d_setHorizontallyFlipped(quadId, isHorizontallyFlipped);
+		_fe3d->quad3d_setVerticallyFlipped(quadId, isVerticallyFlipped);
 		_fe3d->quad3d_setShadowed(quadId, isShadowed);
 		_fe3d->quad3d_setReflected(quadId, isReflected);
 		_fe3d->quad3d_setTextureRepeat(quadId, textureRepeat);

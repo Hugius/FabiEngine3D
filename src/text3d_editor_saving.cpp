@@ -29,6 +29,8 @@ const bool Text3dEditor::saveEntitiesToFile() const
 		auto fontMapPath = _fe3d->text3d_getFontMapPath(textId);
 		auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(textId);
 		auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(textId);
+		auto isHorizontallyFlipped = _fe3d->text3d_isHorizontallyFlipped(textId);
+		auto isVerticallyFlipped = _fe3d->text3d_isVerticallyFlipped(textId);
 		auto isReflected = _fe3d->text3d_isReflected(textId);
 		auto isShadowed = _fe3d->text3d_isShadowed(textId);
 		auto lightness = _fe3d->text3d_getLightness(textId);
@@ -58,6 +60,10 @@ const bool Text3dEditor::saveEntitiesToFile() const
 			<< isFacingCameraHorizontally
 			<< " "
 			<< isFacingCameraVertically
+			<< " "
+			<< isHorizontallyFlipped
+			<< " "
+			<< isVerticallyFlipped
 			<< " "
 			<< fontMapPath
 			<< " "

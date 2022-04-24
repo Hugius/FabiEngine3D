@@ -10,6 +10,8 @@ void Text3dEditor::_updateMiscellaneousMenu()
 		const auto size = _fe3d->text3d_getSize(_currentTextId);
 		const auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(_currentTextId);
 		const auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(_currentTextId);
+		const auto isHorizontallyFlipped = _fe3d->text3d_isHorizontallyFlipped(_currentTextId);
+		const auto isVerticallyFlipped = _fe3d->text3d_isVerticallyFlipped(_currentTextId);
 		const auto opacity = _fe3d->text3d_getOpacity(_currentTextId);
 		const auto minTextureAlpha = _fe3d->text3d_getMinTextureAlpha(_currentTextId);
 
@@ -44,6 +46,14 @@ void Text3dEditor::_updateMiscellaneousMenu()
 
 				_fe3d->text3d_setRotation(_currentTextId, fvec3(rotation.x, 0.0f, rotation.z));
 			}
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isHorizontallyFlipped")->isHovered())
+		{
+			_fe3d->text3d_setHorizontallyFlipped(_currentTextId, !isHorizontallyFlipped);
+		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isVerticallyFlipped")->isHovered())
+		{
+			_fe3d->text3d_setVerticallyFlipped(_currentTextId, !isVerticallyFlipped);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
@@ -81,5 +91,7 @@ void Text3dEditor::_updateMiscellaneousMenu()
 
 		screen->getButton("isFacingCameraHorizontally")->setTextContent(isFacingCameraHorizontally ? "Facing X: ON" : "Facing X: OFF");
 		screen->getButton("isFacingCameraVertically")->setTextContent(isFacingCameraVertically ? "Facing Y: ON" : "Facing Y: OFF");
+		screen->getButton("isHorizontallyFlipped")->setTextContent(isHorizontallyFlipped ? "Flipped X: ON" : "Flipped X: OFF");
+		screen->getButton("isVerticallyFlipped")->setTextContent(isVerticallyFlipped ? "Flipped Y: ON" : "Flipped Y: OFF");
 	}
 }

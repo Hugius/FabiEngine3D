@@ -205,6 +205,8 @@ void WorldHelper::copyTemplateQuad(const string & newId, const string & template
 	_fe3d->quad3d_setSize(newId, _fe3d->quad3d_getSize(templateId));
 	_fe3d->quad3d_setFacingCameraHorizontally(newId, _fe3d->quad3d_isFacingCameraHorizontally(templateId));
 	_fe3d->quad3d_setFacingCameraVertically(newId, _fe3d->quad3d_isFacingCameraVertically(templateId));
+	_fe3d->quad3d_setHorizontallyFlipped(newId, _fe3d->quad3d_isHorizontallyFlipped(templateId));
+	_fe3d->quad3d_setVerticallyFlipped(newId, _fe3d->quad3d_isVerticallyFlipped(templateId));
 	_fe3d->quad3d_setColor(newId, _fe3d->quad3d_getColor(templateId));
 	_fe3d->quad3d_setBright(newId, _fe3d->quad3d_isBright(templateId));
 	_fe3d->quad3d_setTextureRepeat(newId, _fe3d->quad3d_getTextureRepeat(templateId));
@@ -241,6 +243,8 @@ void WorldHelper::copyTemplateText(const string & newId, const string & template
 	_fe3d->text3d_setSize(newId, _fe3d->text3d_getSize(templateId));
 	_fe3d->text3d_setFacingCameraHorizontally(newId, _fe3d->text3d_isFacingCameraHorizontally(templateId));
 	_fe3d->text3d_setFacingCameraVertically(newId, _fe3d->text3d_isFacingCameraVertically(templateId));
+	_fe3d->text3d_setHorizontallyFlipped(newId, _fe3d->text3d_isHorizontallyFlipped(templateId));
+	_fe3d->text3d_setVerticallyFlipped(newId, _fe3d->text3d_isVerticallyFlipped(templateId));
 	_fe3d->text3d_setColor(newId, _fe3d->text3d_getColor(templateId));
 	_fe3d->text3d_setShadowed(newId, _fe3d->text3d_isShadowed(templateId));
 	_fe3d->text3d_setReflected(newId, _fe3d->text3d_isReflected(templateId));

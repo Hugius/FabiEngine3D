@@ -37,6 +37,8 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 		fvec3 color;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
+		bool isHorizontallyFlipped;
+		bool isVerticallyFlipped;
 
 		istringstream iss(line);
 
@@ -49,6 +51,8 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 			>> color.b
 			>> isFacingCameraHorizontally
 			>> isFacingCameraVertically
+			>> isHorizontallyFlipped
+			>> isVerticallyFlipped
 			>> fontMapPath;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
@@ -101,6 +105,8 @@ const bool Text3dEditor::loadEntitiesFromFile()
 		float minTextureAlpha;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
+		bool isHorizontallyFlipped;
+		bool isVerticallyFlipped;
 		bool isReflected;
 		bool isShadowed;
 		bool isBright;
@@ -116,6 +122,8 @@ const bool Text3dEditor::loadEntitiesFromFile()
 			>> color.b
 			>> isFacingCameraHorizontally
 			>> isFacingCameraVertically
+			>> isHorizontallyFlipped
+			>> isVerticallyFlipped
 			>> fontMapPath
 			>> isReflected
 			>> isShadowed
@@ -146,6 +154,8 @@ const bool Text3dEditor::loadEntitiesFromFile()
 			_fe3d->text3d_setLightness(textId, lightness);
 			_fe3d->text3d_setFacingCameraHorizontally(textId, isFacingCameraHorizontally);
 			_fe3d->text3d_setFacingCameraVertically(textId, isFacingCameraVertically);
+			_fe3d->text3d_setHorizontallyFlipped(textId, isHorizontallyFlipped);
+			_fe3d->text3d_setVerticallyFlipped(textId, isVerticallyFlipped);
 			_fe3d->text3d_setShadowed(textId, isShadowed);
 			_fe3d->text3d_setReflected(textId, isReflected);
 			_fe3d->text3d_setBright(textId, isBright);

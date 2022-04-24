@@ -279,6 +279,16 @@ void Quad3dEntity::setMinTextureAlpha(float value)
 	_minTextureAlpha = value;
 }
 
+void Quad3dEntity::setHorizontallyFlipped(bool value)
+{
+	_isHorizontallyFlipped = value;
+}
+
+void Quad3dEntity::setVerticallyFlipped(bool value)
+{
+	_isVerticallyFlipped = value;
+}
+
 const shared_ptr<VertexBuffer> Quad3dEntity::getVertexBuffer() const
 {
 	return _vertexBuffer;
@@ -412,6 +422,16 @@ const bool Quad3dEntity::isWireframed() const
 const bool Quad3dEntity::isCentered() const
 {
 	return _isCentered;
+}
+
+const bool Quad3dEntity::isHorizontallyFlipped() const
+{
+	return _isHorizontallyFlipped;
+}
+
+const bool Quad3dEntity::isVerticallyFlipped() const
+{
+	return _isVerticallyFlipped;
 }
 
 const bool Quad3dEntity::isFrozen() const

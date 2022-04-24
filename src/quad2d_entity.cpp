@@ -225,7 +225,7 @@ const bool Quad2dEntity::isCentered() const
 	return _isCentered;
 }
 
-const bool Quad2dEntity::isFlippedHorizonally() const
+const bool Quad2dEntity::isHorizontallyFlipped() const
 {
 	return _isHorizontallyFlipped;
 }

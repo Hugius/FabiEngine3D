@@ -19,6 +19,9 @@ uniform float u_maxZ;
 
 uniform int u_textureRepeat;
 
+uniform bool u_isHorizontallyFlipped;
+uniform bool u_isVerticallyFlipped;
+
 out vec3 f_worldSpacePos;
 out vec2 f_uv;
 
@@ -29,8 +32,10 @@ void main()
 	vec4 clipSpacePosition  = (u_cameraProjection * viewSpacePosition);
 
     f_worldSpacePos = worldSpacePosition.xyz;
-	f_uv.x = ((u_uvOffset.x + (v_uv.x * u_uvMultiplier.x)) * float(u_textureRepeat));
-	f_uv.y = ((u_uvOffset.y + (v_uv.y * u_uvMultiplier.y)) * float(u_textureRepeat));
+	f_uv.x = (u_isHorizontallyFlipped ? (1.0f - v_uv.x) : v_uv.x);
+	f_uv.y = (u_isVerticallyFlipped ? (1.0f - v_uv.y) : v_uv.y);
+	f_uv.x = ((u_uvOffset.x + (f_uv.x * u_uvMultiplier.x)) * float(u_textureRepeat));
+	f_uv.y = ((u_uvOffset.y + (f_uv.y * u_uvMultiplier.y)) * float(u_textureRepeat));
 
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4( 1.0f,  0.0f,  0.0f, -u_minX));

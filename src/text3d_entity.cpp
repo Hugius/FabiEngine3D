@@ -323,6 +323,26 @@ void Text3dEntity::setFrozen(bool value)
 	}
 }
 
+void Text3dEntity::setHorizontallyFlipped(bool value)
+{
+	_isHorizontallyFlipped = value;
+
+	for(const auto & character : _characterEntities)
+	{
+		character->setHorizontallyFlipped(_isHorizontallyFlipped);
+	}
+}
+
+void Text3dEntity::setVerticallyFlipped(bool value)
+{
+	_isVerticallyFlipped = value;
+
+	for(const auto & character : _characterEntities)
+	{
+		character->setVerticallyFlipped(_isVerticallyFlipped);
+	}
+}
+
 void Text3dEntity::setVisible(bool value)
 {
 	_isVisible = value;
@@ -514,6 +534,16 @@ const bool Text3dEntity::isWireframed() const
 const bool Text3dEntity::isCentered() const
 {
 	return _isCentered;
+}
+
+const bool Text3dEntity::isHorizontallyFlipped() const
+{
+	return _isHorizontallyFlipped;
+}
+
+const bool Text3dEntity::isVerticallyFlipped() const
+{
+	return _isVerticallyFlipped;
 }
 
 const bool Text3dEntity::isFrozen() const

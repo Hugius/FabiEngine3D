@@ -380,7 +380,7 @@ const bool Text2dEntity::isCentered() const
 	return _isCentered;
 }
 
-const bool Text2dEntity::isFlippedHorizonally() const
+const bool Text2dEntity::isHorizontallyFlipped() const
 {
 	return _isHorizontallyFlipped;
 }

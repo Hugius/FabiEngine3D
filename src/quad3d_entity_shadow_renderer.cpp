@@ -51,6 +51,8 @@ void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
 	_shaderBuffer->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 	_shaderBuffer->uploadUniform("u_uvOffset", entity->getUvOffset());
 	_shaderBuffer->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha());
+	_shaderBuffer->uploadUniform("u_isHorizontallyFlipped", entity->isHorizontallyFlipped());
+	_shaderBuffer->uploadUniform("u_isVerticallyFlipped", entity->isVerticallyFlipped());
 
 	if(entity->getDiffuseTextureBuffer() != nullptr)
 	{

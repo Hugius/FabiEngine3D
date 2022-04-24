@@ -371,6 +371,8 @@ public:
 	void quad3d_setAnimationColumnIndex(const string & quadId, const string & animationId, unsigned int value);
 	void quad3d_setAnimationIntervalMultiplier(const string & quadId, const string & animationId, unsigned int value);
 	void quad3d_setAnimationIntervalDivider(const string & quadId, const string & animationId, unsigned int value);
+	void quad3d_setHorizontallyFlipped(const string & id, bool value);
+	void quad3d_setVerticallyFlipped(const string & id, bool value);
 
 	const vector<string> quad3d_getIds() const;
 	const vector<string> quad3d_getAnimationIds(const string & id) const;
@@ -410,6 +412,8 @@ public:
 	const bool quad3d_isAnimationStarted(const string & quadId, const string & animationId) const;
 	const bool quad3d_isAnimationPaused(const string & quadId, const string & animationId) const;
 	const bool quad3d_isAnimationAutopaused(const string & quadId, const string & animationId) const;
+	const bool quad3d_isHorizontallyFlipped(const string & id) const;
+	const bool quad3d_isVerticallyFlipped(const string & id) const;
 
 	void text3d_create(const string & id, const string & fontMapPath, bool isCentered);
 	void text3d_delete(const string & id);
@@ -438,6 +442,8 @@ public:
 	void text3d_setBright(const string & id, bool value);
 	void text3d_setWireframed(const string & id, bool value);
 	void text3d_setFrozen(const string & id, bool value);
+	void text3d_setHorizontallyFlipped(const string & id, bool value);
+	void text3d_setVerticallyFlipped(const string & id, bool value);
 
 	const vector<string> text3d_getIds() const;
 	const vector<string> text3d_getChildAabbIds(const string & id) const;
@@ -462,6 +468,8 @@ public:
 	const bool text3d_isBright(const string & id) const;
 	const bool text3d_isWireframed(const string & id) const;
 	const bool text3d_isFrozen(const string & id) const;
+	const bool text3d_isHorizontallyFlipped(const string & id) const;
+	const bool text3d_isVerticallyFlipped(const string & id) const;
 
 	void aabb_create(const string & id, bool isCentered);
 	void aabb_delete(const string & id);

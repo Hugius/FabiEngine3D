@@ -123,7 +123,7 @@ const bool EngineInterface::text2d_isCentered(const string & id) const
 
 const bool EngineInterface::text2d_isHorizontallyFlipped(const string & id) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->isFlippedHorizonally();
+	return _core->getText2dEntityManager()->getEntity(id)->isHorizontallyFlipped();
 }
 
 const bool EngineInterface::text2d_isVerticallyFlipped(const string & id) const

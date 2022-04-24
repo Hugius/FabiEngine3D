@@ -63,7 +63,7 @@ public:
 
 	const bool isWireframed() const;
 	const bool isCentered() const;
-	const bool isFlippedHorizonally() const;
+	const bool isHorizontallyFlipped() const;
 	const bool isVerticallyFlipped() const;
 
 private:

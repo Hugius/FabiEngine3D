@@ -48,6 +48,8 @@ public:
 	void setEmissionIntensity(float value);
 	void setFrozen(bool value);
 	void setMinTextureAlpha(float value);
+	void setHorizontallyFlipped(bool value);
+	void setVerticallyFlipped(bool value);
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
@@ -84,6 +86,8 @@ public:
 	const bool isFrozen() const;
 	const bool isWireframed() const;
 	const bool isCentered() const;
+	const bool isHorizontallyFlipped() const;
+	const bool isVerticallyFlipped() const;
 
 private:
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
@@ -127,4 +131,6 @@ private:
 	bool _isWireframed = false;
 	bool _isFrozen = false;
 	bool _isCentered = false;
+	bool _isHorizontallyFlipped = false;
+	bool _isVerticallyFlipped = false;
 };

@@ -228,6 +228,16 @@ void EngineInterface::quad3d_setAnimationIntervalDivider(const string & quadId, 
 	_core->getAnimation2dPlayer()->setQuad3dAnimationIntervalDivider(animationId, quadId, value);
 }
 
+void EngineInterface::quad3d_setHorizontallyFlipped(const string & id, bool value)
+{
+	_core->getQuad3dEntityManager()->getEntity(id)->setHorizontallyFlipped(value);
+}
+
+void EngineInterface::quad3d_setVerticallyFlipped(const string & id, bool value)
+{
+	_core->getQuad3dEntityManager()->getEntity(id)->setVerticallyFlipped(value);
+}
+
 void EngineInterface::quad3d_setFacingCameraHorizontally(const string & id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setFacingCameraHorizontally(value);
@@ -494,6 +504,16 @@ const bool EngineInterface::quad3d_isAnimationPaused(const string & quadId, cons
 const bool EngineInterface::quad3d_isAnimationAutopaused(const string & quadId, const string & animationId) const
 {
 	return _core->getAnimation2dPlayer()->isQuad3dAnimationAutopaused(animationId, quadId);
+}
+
+const bool EngineInterface::quad3d_isHorizontallyFlipped(const string & id) const
+{
+	return _core->getQuad3dEntityManager()->getEntity(id)->isHorizontallyFlipped();
+}
+
+const bool EngineInterface::quad3d_isVerticallyFlipped(const string & id) const
+{
+	return _core->getQuad3dEntityManager()->getEntity(id)->isVerticallyFlipped();
 }
 
 const bool EngineInterface::quad3d_isWireframed(const string & id) const

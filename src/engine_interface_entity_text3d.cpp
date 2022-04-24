@@ -110,6 +110,16 @@ void EngineInterface::text3d_setFrozen(const string & id, bool value)
 	_core->getText3dEntityManager()->getEntity(id)->setFrozen(value);
 }
 
+void EngineInterface::text3d_setHorizontallyFlipped(const string & id, bool value)
+{
+	_core->getText3dEntityManager()->getEntity(id)->setHorizontallyFlipped(value);
+}
+
+void EngineInterface::text3d_setVerticallyFlipped(const string & id, bool value)
+{
+	_core->getText3dEntityManager()->getEntity(id)->setVerticallyFlipped(value);
+}
+
 void EngineInterface::text3d_setFacingCameraHorizontally(const string & id, bool value)
 {
 	_core->getText3dEntityManager()->getEntity(id)->setFacingCameraHorizontally(value);
@@ -281,6 +291,16 @@ const bool EngineInterface::text3d_isBright(const string & id) const
 const bool EngineInterface::text3d_isFrozen(const string & id) const
 {
 	return _core->getText3dEntityManager()->getEntity(id)->isFrozen();
+}
+
+const bool EngineInterface::text3d_isHorizontallyFlipped(const string & id) const
+{
+	return _core->getText3dEntityManager()->getEntity(id)->isHorizontallyFlipped();
+}
+
+const bool EngineInterface::text3d_isVerticallyFlipped(const string & id) const
+{
+	return _core->getText3dEntityManager()->getEntity(id)->isVerticallyFlipped();
 }
 
 const bool EngineInterface::text3d_isWireframed(const string & id) const

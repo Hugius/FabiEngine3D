@@ -356,7 +356,7 @@ const bool EngineInterface::quad2d_isAnimationAutopaused(const string & quadId, 
 
 const bool EngineInterface::quad2d_isHorizontallyFlipped(const string & id) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->isFlippedHorizonally();
+	return _core->getQuad2dEntityManager()->getEntity(id)->isHorizontallyFlipped();
 }
 
 const bool EngineInterface::quad2d_isVerticallyFlipped(const string & id) const

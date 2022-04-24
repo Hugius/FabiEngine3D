@@ -133,8 +133,9 @@ void Animation2dEditor::_updateChoiceMenu()
 				abort();
 			}
 
+			const auto decision = ((_gui->getOverlay()->getAnswerFormDecision() == "Quad2D") ? "quad2d" : "quad3d");
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\" + _gui->getOverlay()->getAnswerFormDecision() + "\\diffuse_map\\");
+			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\" + decision + "\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

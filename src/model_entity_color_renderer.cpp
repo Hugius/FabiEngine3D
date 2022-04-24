@@ -143,12 +143,12 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		return;
 	}
 
-	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinClippingPosition().x);
-	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxClippingPosition().x);
-	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClippingPosition().y, entity->getMinHeight()));
-	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClippingPosition().y, entity->getMaxHeight()));
-	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinClippingPosition().z);
-	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxClippingPosition().z);
+	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClippingPosition().x, entity->getMinClippingPosition().x));
+	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClippingPosition().x, entity->getMaxClippingPosition().x));
+	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClippingPosition().y, entity->getMinClippingPosition().y));
+	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClippingPosition().y, entity->getMaxClippingPosition().y));
+	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClippingPosition().z, entity->getMinClippingPosition().z));
+	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClippingPosition().z, entity->getMaxClippingPosition().z));
 	_shaderBuffer->uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
 	_shaderBuffer->uploadUniform("u_cameraView", (entity->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
 

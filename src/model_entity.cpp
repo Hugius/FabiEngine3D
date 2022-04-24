@@ -429,14 +429,14 @@ void ModelEntity::setSpecularIntensity(const string & partId, float value)
 	_parts.at(partId)->specularIntensity = max(0.0f, value);
 }
 
-void ModelEntity::setMinHeight(float value)
+void ModelEntity::setMinClippingPosition(const fvec3 & value)
 {
-	_minHeight = value;
+	_minClippingPosition = value;
 }
 
-void ModelEntity::setMaxHeight(float value)
+void ModelEntity::setMaxClippingPosition(const fvec3 & value)
 {
-	_maxHeight = value;
+	_maxClippingPosition = value;
 }
 
 void ModelEntity::setLevelOfDetailDistance(float value)
@@ -602,6 +602,16 @@ const fvec3 & ModelEntity::getPartSize(const string & partId) const
 	return _parts.at(partId)->size;
 }
 
+const fvec3 & ModelEntity::getMinClippingPosition() const
+{
+	return _minClippingPosition;
+}
+
+const fvec3 & ModelEntity::getMaxClippingPosition() const
+{
+	return _maxClippingPosition;
+}
+
 const float ModelEntity::getCubeReflectionMixValue() const
 {
 	return _cubeReflectionMixValue;
@@ -737,16 +747,6 @@ const float ModelEntity::getSpecularShininess(const string & partId) const
 const float ModelEntity::getSpecularIntensity(const string & partId) const
 {
 	return _parts.at(partId)->specularIntensity;
-}
-
-const float ModelEntity::getMinHeight() const
-{
-	return _minHeight;
-}
-
-const float ModelEntity::getMaxHeight() const
-{
-	return _maxHeight;
 }
 
 const float ModelEntity::getLevelOfDetailDistance() const

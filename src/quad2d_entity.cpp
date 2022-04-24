@@ -162,12 +162,12 @@ void Quad2dEntity::scaleTo(const fvec2 & target, float speed)
 
 void Quad2dEntity::setMinClippingPosition(const fvec2 & value)
 {
-	_minClippingPosition = value;
+	_minClippingPosition = fvec2(clamp(value.x, -1.0f, 1.0f), clamp(value.y, -1.0f, 1.0f));
 }
 
 void Quad2dEntity::setMaxClippingPosition(const fvec2 & value)
 {
-	_maxClippingPosition = value;
+	_maxClippingPosition = fvec2(clamp(value.x, -1.0f, 1.0f), clamp(value.y, -1.0f, 1.0f));
 }
 
 void Quad2dEntity::setDepth(unsigned int value)

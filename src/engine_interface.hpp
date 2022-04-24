@@ -250,8 +250,8 @@ public:
 	void model_setMinTextureAlpha(const string & modelId, const string & partId, float value);
 	void model_setColor(const string & modelId, const string & partId, const fvec3 & value);
 	void model_setWireframeColor(const string & modelId, const string & partId, const fvec3 & value);
-	void model_setMinHeight(const string & id, float value);
-	void model_setMaxHeight(const string & id, float value);
+	void model_setMinClippingPosition(const string & id, const fvec3 & value);
+	void model_setMaxClippingPosition(const string & id, const fvec3 & value);
 	void model_setLevelOfDetailDistance(const string & id, float value);
 	void model_setTextureRepeat(const string & modelId, const string & partId, unsigned int value);
 	void model_setBright(const string & modelId, const string & partId, bool value);
@@ -285,13 +285,13 @@ public:
 	const fvec3 & model_getPartSize(const string & modelId, const string & partId) const;
 	const fvec3 & model_getColor(const string & modelId, const string & partId) const;
 	const fvec3 & model_getWireframeColor(const string & modelId, const string & partId) const;
+	const fvec3 & model_getMinClippingPosition(const string & id) const;
+	const fvec3 & model_getMaxClippingPosition(const string & id) const;
 	const float model_getReflectivity(const string & modelId, const string & partId) const;
 	const float model_getLightness(const string & modelId, const string & partId) const;
 	const float model_getSpecularShininess(const string & modelId, const string & partId) const;
 	const float model_getSpecularIntensity(const string & modelId, const string & partId) const;
 	const float model_getOpacity(const string & modelId, const string & partId) const;
-	const float model_getMinHeight(const string & id) const;
-	const float model_getMaxHeight(const string & id) const;
 	const float model_getLevelOfDetailDistance(const string & id) const;
 	const float model_getEmissionIntensity(const string & modelId, const string & partId) const;
 	const float model_getMinTextureAlpha(const string & modelId, const string & partId) const;

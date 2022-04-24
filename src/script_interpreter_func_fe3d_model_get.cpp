@@ -442,8 +442,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			}
 		}
 	}
-
-	else if(functionName == "fe3d:model_get_min_height")
+	else if(functionName == "fe3d:model_get_min_clip_position_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -451,13 +450,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->model_getMinHeight(args[0]->getString());
+				const auto result = _fe3d->model_getMinClippingPosition(args[0]->getString()).x;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_max_height")
+	else if(functionName == "fe3d:model_get_min_clip_position_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -465,7 +464,63 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 		{
 			if(_validateFe3dModel(args[0]->getString(), false))
 			{
-				const auto result = _fe3d->model_getMaxHeight(args[0]->getString());
+				const auto result = _fe3d->model_getMinClippingPosition(args[0]->getString()).y;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_min_clip_position_z")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->model_getMinClippingPosition(args[0]->getString()).z;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_max_clip_position_x")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->model_getMaxClippingPosition(args[0]->getString()).x;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_max_clip_position_y")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->model_getMaxClippingPosition(args[0]->getString()).y;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_max_clip_position_z")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->model_getMaxClippingPosition(args[0]->getString()).z;
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
 			}

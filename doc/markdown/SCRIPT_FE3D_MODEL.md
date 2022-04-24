@@ -32,8 +32,8 @@
 - `fe3d:model_set_part_rotation` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_part_rotation_origin` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_part_size` (`STR` model_id, `STR` part_id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
-- `fe3d:model_set_min_height` (`STR` id, `DEC` value) -----> `NONE`
-- `fe3d:model_set_max_height` (`STR` id, `DEC` value) -----> `NONE`
+- `fe3d:model_set_min_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:model_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:model_set_aabb_raycast_responsive` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_aabb_collision_responsive` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:model_set_texture_repeat` (`STR` model_id, `STR` part_id, `INT` value) -----> `NONE`
@@ -111,8 +111,12 @@
 - `fe3d:model_get_part_size_x` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_part_size_y` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_part_size_z` (`STR` model_id, `STR` part_id) -----> `DEC`
-- `fe3d:model_get_min_height` (`STR` id) -----> `DEC`
-- `fe3d:model_get_max_height` (`STR` id) -----> `DEC`
+- `fe3d:model_get_min_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:model_get_min_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:model_get_min_clip_position_z` (`STR` id) -----> `DEC`
+- `fe3d:model_get_max_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:model_get_max_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:model_get_max_clip_position_z` (`STR` id) -----> `DEC`
 - `fe3d:model_get_lightness` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_color_r` (`STR` model_id, `STR` part_id) -----> `DEC`
 - `fe3d:model_get_color_g` (`STR` model_id, `STR` part_id) -----> `DEC`

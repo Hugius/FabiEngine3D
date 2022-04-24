@@ -38,20 +38,17 @@
 - **Size**: the XYZ size multiplier of the mesh
   - Type: `decimal3`
   - Constraints: at least `0.0`
+- **Min Clip Position**: the minimum position from which fragments are visible
+  - Type: `decimal3`
+  - Constraints: none
+- **Max Clip Position**: the maximum position to which fragments are visible
+  - Type: `decimal3`
+  - Constraints: none
 - **LOD Distance**: the minimum distance by which the LOD model entity will appear/disappear
   - Type: `decimal`
   - Constraints: at least `0`
 - **Frozen**: the XYZ position of the mesh is not affected by the camera position
   - Type: `boolean`
-  - Constraints: none
-- **Rotation Order**: the order of directions in which the mesh is rotated
-  - Type: `enumeration`
-  - Constraints: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`
-- **Min Height**: the minimum Y position from which fragments are visible
-  - Type: `decimal`
-  - Constraints: none
-- **Max Height**: the maximum Y position to which fragments are visible
-  - Type: `decimal`
   - Constraints: none
 - **Shadowed**: the mesh is captured for shadows
   - Type: `boolean`
@@ -59,6 +56,9 @@
 - **Reflected**: the mesh is captured for reflections
   - Type: `boolean`
   - Constraints: none
+- **Rotation Order**: the order of directions in which the mesh is rotated
+  - Type: `enumeration`
+  - Constraints: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`
 
 ## 4. Part Properties
 

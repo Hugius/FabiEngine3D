@@ -331,16 +331,6 @@ void EngineInterface::model_setEmissionIntensity(const string & modelId, const s
 	_core->getModelEntityManager()->getEntity(modelId)->setEmissionIntensity(partId, value);
 }
 
-void EngineInterface::model_setMinHeight(const string & id, float value)
-{
-	_core->getModelEntityManager()->getEntity(id)->setMinHeight(value);
-}
-
-void EngineInterface::model_setMaxHeight(const string & id, float value)
-{
-	_core->getModelEntityManager()->getEntity(id)->setMaxHeight(value);
-}
-
 void EngineInterface::model_setLevelOfDetailDistance(const string & id, float value)
 {
 	_core->getModelEntityManager()->getEntity(id)->setLevelOfDetailDistance(value);
@@ -444,6 +434,16 @@ void EngineInterface::model_setColor(const string & modelId, const string & part
 void EngineInterface::model_setWireframeColor(const string & modelId, const string & partId, const fvec3 & value)
 {
 	_core->getModelEntityManager()->getEntity(modelId)->setWireframeColor(partId, value);
+}
+
+void EngineInterface::model_setMinClippingPosition(const string & id, const fvec3 & value)
+{
+	_core->getModelEntityManager()->getEntity(id)->setMinClippingPosition(value);
+}
+
+void EngineInterface::model_setMaxClippingPosition(const string & id, const fvec3 & value)
+{
+	_core->getModelEntityManager()->getEntity(id)->setMaxClippingPosition(value);
 }
 
 void EngineInterface::model_setReflected(const string & id, bool value)
@@ -619,6 +619,16 @@ const fvec3 & EngineInterface::model_getWireframeColor(const string & modelId, c
 	return _core->getModelEntityManager()->getEntity(modelId)->getWireframeColor(partId);
 }
 
+const fvec3 & EngineInterface::model_getMinClippingPosition(const string & id) const
+{
+	return _core->getModelEntityManager()->getEntity(id)->getMinClippingPosition();
+}
+
+const fvec3 & EngineInterface::model_getMaxClippingPosition(const string & id) const
+{
+	return _core->getModelEntityManager()->getEntity(id)->getMaxClippingPosition();
+}
+
 const float EngineInterface::model_getLightness(const string & modelId, const string & partId) const
 {
 	return _core->getModelEntityManager()->getEntity(modelId)->getLightness(partId);
@@ -642,16 +652,6 @@ const float EngineInterface::model_getSpecularIntensity(const string & modelId, 
 const float EngineInterface::model_getOpacity(const string & modelId, const string & partId) const
 {
 	return _core->getModelEntityManager()->getEntity(modelId)->getOpacity(partId);
-}
-
-const float EngineInterface::model_getMinHeight(const string & id) const
-{
-	return _core->getModelEntityManager()->getEntity(id)->getMinHeight();
-}
-
-const float EngineInterface::model_getMaxHeight(const string & id) const
-{
-	return _core->getModelEntityManager()->getEntity(id)->getMaxHeight();
 }
 
 const float EngineInterface::model_getLevelOfDetailDistance(const string & id) const

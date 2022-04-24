@@ -26,8 +26,8 @@ public:
 	void setPreviousReflectionEntityId(const string & value);
 	void setCurrentReflectionEntityId(const string & value);
 	void setCubeReflectionMixValue(float value);
-	void setMinHeight(float value);
-	void setMaxHeight(float value);
+	void setMinClippingPosition(const fvec3 & value);
+	void setMaxClippingPosition(const fvec3 & value);
 	void setLevelOfDetailDistance(float value);
 	void setBright(const string & partId, bool value);
 	void setVertexBuffer(const string & partId, shared_ptr<VertexBuffer> value);
@@ -110,10 +110,10 @@ public:
 	const fvec3 & getPartRotation(const string & partId) const;
 	const fvec3 & getPartRotationOrigin(const string & partId) const;
 	const fvec3 & getPartSize(const string & partId) const;
+	const fvec3 & getMinClippingPosition() const;
+	const fvec3 & getMaxClippingPosition() const;
 
 	const float getCubeReflectionMixValue() const;
-	const float getMinHeight() const;
-	const float getMaxHeight() const;
 	const float getLevelOfDetailDistance() const;
 	const float getReflectivity(const string & partId) const;
 	const float getLightness(const string & partId) const;
@@ -157,14 +157,14 @@ private:
 	fvec3 _basePositionTarget = fvec3(0.0f);
 	fvec3 _baseRotationTarget = fvec3(0.0f);
 	fvec3 _baseSizeTarget = fvec3(1.0f);
+	fvec3 _minClippingPosition = fvec3(-FLT_MAX);
+	fvec3 _maxClippingPosition = fvec3(FLT_MAX);
 
 	float _basePositionTargetSpeed = 0.0f;
 	float _baseRotationTargetSpeed = 0.0f;
 	float _baseSizeTargetSpeed = 0.0f;
 	float _cubeReflectionMixValue = 1.0f;
 	float _levelOfDetailDistance = 0.0f;
-	float _minHeight = -FLT_MAX;
-	float _maxHeight = FLT_MAX;
 
 	bool _isFrozen = false;
 	bool _isShadowed = true;

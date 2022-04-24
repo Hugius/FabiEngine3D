@@ -37,6 +37,8 @@ public:
 	void setCollided(bool value);
 	void setColor(const fvec3 & value);
 	void setCentered(bool value);
+	void setMinClipPosition(const fvec3 & value);
+	void setMaxClipPosition(const fvec3 & value);
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 
@@ -49,6 +51,8 @@ public:
 	const fvec3 & getBasePosition() const;
 	const fvec3 & getBaseSize() const;
 	const fvec3 & getColor() const;
+	const fvec3 & getMinClipPosition() const;
+	const fvec3 & getMaxClipPosition() const;
 
 	const bool isCentered() const;
 	const bool isRaycastResponsive() const;
@@ -75,6 +79,8 @@ private:
 	fvec3 _localPositionTarget = fvec3(0.0f);
 	fvec3 _localSizeTarget = fvec3(1.0f);
 	fvec3 _color = fvec3(1.0f);
+	fvec3 _minClipPosition = fvec3(-FLT_MAX);
+	fvec3 _maxClipPosition = fvec3(FLT_MAX);
 
 	float _basePositionTargetSpeed = 0.0f;
 	float _baseSizeTargetSpeed = 0.0f;

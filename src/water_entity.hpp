@@ -39,6 +39,8 @@ public:
 	void setRefractive(bool value);
 	void setWireframed(bool value);
 	void setWireframeColor(const fvec3 & value);
+	void setMinClipPosition(const fvec3 & value);
+	void setMaxClipPosition(const fvec3 & value);
 
 	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
 	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
@@ -52,6 +54,8 @@ public:
 
 	const fvec3 & getColor() const;
 	const fvec3 & getWireframeColor() const;
+	const fvec3 & getMinClipPosition() const;
+	const fvec3 & getMaxClipPosition() const;
 
 	const fvec2 & getRippleOffset() const;
 	const fvec2 & getRippleSpeed() const;
@@ -88,6 +92,8 @@ private:
 
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
+	fvec3 _minClipPosition = fvec3(-FLT_MAX);
+	fvec3 _maxClipPosition = fvec3(FLT_MAX);
 
 	fvec2 _rippleOffset = fvec2(0.0f);
 	fvec2 _rippleSpeed = fvec2(0.0f);

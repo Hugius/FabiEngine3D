@@ -249,14 +249,14 @@ void Quad3dEntity::setOpacity(float value)
 	_opacity = clamp(value, 0.0f, 1.0f);
 }
 
-void Quad3dEntity::setMinHeight(float value)
+void Quad3dEntity::setMinClipPosition(const fvec3 & value)
 {
-	_minHeight = value;
+	_minClipPosition = value;
 }
 
-void Quad3dEntity::setMaxHeight(float value)
+void Quad3dEntity::setMaxClipPosition(const fvec3 & value)
 {
-	_maxHeight = value;
+	_maxClipPosition = value;
 }
 
 void Quad3dEntity::setTextureRepeat(unsigned int value)
@@ -334,6 +334,16 @@ const fvec3 & Quad3dEntity::getWireframeColor() const
 	return _wireframeColor;
 }
 
+const fvec3 & Quad3dEntity::getMinClipPosition() const
+{
+	return _minClipPosition;
+}
+
+const fvec3 & Quad3dEntity::getMaxClipPosition() const
+{
+	return _maxClipPosition;
+}
+
 const string & Quad3dEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
@@ -352,16 +362,6 @@ const float Quad3dEntity::getLightness() const
 const float Quad3dEntity::getOpacity() const
 {
 	return _opacity;
-}
-
-const float Quad3dEntity::getMinHeight() const
-{
-	return _minHeight;
-}
-
-const float Quad3dEntity::getMaxHeight() const
-{
-	return _maxHeight;
 }
 
 const unsigned int Quad3dEntity::getTextureRepeat() const

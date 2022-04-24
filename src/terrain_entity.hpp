@@ -46,6 +46,8 @@ public:
 	void setSpecular(bool value);
 	void setWireframed(bool value);
 	void setWireframeColor(const fvec3 & value);
+	void setMinClipPosition(const fvec3 & value);
+	void setMaxClipPosition(const fvec3 & value);
 
 	const vector<float> & getPixels() const;
 
@@ -72,6 +74,8 @@ public:
 	const string & getBlueNormalMapPath() const;
 
 	const fvec3 & getWireframeColor() const;
+	const fvec3 & getMinClipPosition() const;
+	const fvec3 & getMaxClipPosition() const;
 
 	const float getSize() const;
 	const float getMaxHeight() const;
@@ -114,6 +118,8 @@ private:
 
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
+	fvec3 _minClipPosition = fvec3(-FLT_MAX);
+	fvec3 _maxClipPosition = fvec3(FLT_MAX);
 
 	float _maxHeight = 1.0f;
 	float _size = 0.0f;

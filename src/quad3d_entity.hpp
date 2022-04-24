@@ -42,8 +42,8 @@ public:
 	void setEmissionMapPath(const string & value);
 	void setLightness(float value);
 	void setOpacity(float value);
-	void setMinHeight(float value);
-	void setMaxHeight(float value);
+	void setMinClipPosition(const fvec3 & value);
+	void setMaxClipPosition(const fvec3 & value);
 	void setTextureRepeat(unsigned int value);
 	void setEmissionIntensity(float value);
 	void setFrozen(bool value);
@@ -62,6 +62,8 @@ public:
 	const fvec3 & getRotation() const;
 	const fvec3 & getColor() const;
 	const fvec3 & getWireframeColor() const;
+	const fvec3 & getMinClipPosition() const;
+	const fvec3 & getMaxClipPosition() const;
 
 	const fvec2 & getSize() const;
 	const fvec2 & getUvMultiplier() const;
@@ -69,8 +71,6 @@ public:
 
 	const float getLightness() const;
 	const float getOpacity() const;
-	const float getMinHeight() const;
-	const float getMaxHeight() const;
 	const float getEmissionIntensity() const;
 	const float getMinTextureAlpha() const;
 
@@ -101,6 +101,8 @@ private:
 	fvec3 _rotationTarget = fvec3(0.0f);
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
+	fvec3 _minClipPosition = fvec3(-FLT_MAX);
+	fvec3 _maxClipPosition = fvec3(FLT_MAX);
 
 	fvec2 _size = fvec2(1.0f);
 	fvec2 _sizeTarget = fvec2(1.0f);
@@ -114,8 +116,6 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 	float _lightness = 1.0f;
 	float _opacity = 1.0f;
-	float _minHeight = -FLT_MAX;
-	float _maxHeight = FLT_MAX;
 
 	unsigned int _textureRepeat = 1;
 

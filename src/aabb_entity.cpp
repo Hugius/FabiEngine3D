@@ -135,6 +135,16 @@ void AabbEntity::setCentered(bool value)
 	_isCentered = value;
 }
 
+void AabbEntity::setMinClipPosition(const fvec3 & value)
+{
+	_minClipPosition = value;
+}
+
+void AabbEntity::setMaxClipPosition(const fvec3 & value)
+{
+	_maxClipPosition = value;
+}
+
 void AabbEntity::setBasePosition(const fvec3 & value)
 {
 	_basePosition = value;
@@ -252,6 +262,16 @@ const fvec3 & AabbEntity::getBaseSize() const
 const fvec3 & AabbEntity::getColor() const
 {
 	return _color;
+}
+
+const fvec3 & AabbEntity::getMinClipPosition() const
+{
+	return _minClipPosition;
+}
+
+const fvec3 & AabbEntity::getMaxClipPosition() const
+{
+	return _maxClipPosition;
 }
 
 const string & AabbEntity::getParentId() const

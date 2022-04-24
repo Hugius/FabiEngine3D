@@ -132,8 +132,8 @@ void Text3dEntity::setContent(const string & value)
 			characterEntity->setReflected(_isReflected);
 			characterEntity->setBright(_isBright);
 			characterEntity->setLightness(_lightness);
-			characterEntity->setMinHeight(_minHeight);
-			characterEntity->setMaxHeight(_maxHeight);
+			characterEntity->setMinClipPosition(_minClipPosition);
+			characterEntity->setMaxClipPosition(_maxClipPosition);
 			characterEntity->setFrozen(_isFrozen);
 			characterEntity->setUvMultiplier(uvMultiplier);
 			characterEntity->setUvOffset(uvOffset);
@@ -283,23 +283,23 @@ void Text3dEntity::setOpacity(float value)
 	}
 }
 
-void Text3dEntity::setMinHeight(float value)
+void Text3dEntity::setMinClipPosition(const fvec3 & value)
 {
-	_minHeight = value;
+	_minClipPosition = value;
 
 	for(const auto & character : _characterEntities)
 	{
-		character->setMinHeight(_minHeight);
+		character->setMinClipPosition(_minClipPosition);
 	}
 }
 
-void Text3dEntity::setMaxHeight(float value)
+void Text3dEntity::setMaxClipPosition(const fvec3 & value)
 {
-	_maxHeight = value;
+	_maxClipPosition = value;
 
 	for(const auto & character : _characterEntities)
 	{
-		character->setMaxHeight(_maxHeight);
+		character->setMaxClipPosition(_maxClipPosition);
 	}
 }
 
@@ -456,6 +456,16 @@ const fvec3 & Text3dEntity::getWireframeColor() const
 	return _wireframeColor;
 }
 
+const fvec3 & Text3dEntity::getMinClipPosition() const
+{
+	return _minClipPosition;
+}
+
+const fvec3 & Text3dEntity::getMaxClipPosition() const
+{
+	return _maxClipPosition;
+}
+
 const float Text3dEntity::getMinTextureAlpha() const
 {
 	return _minTextureAlpha;
@@ -469,16 +479,6 @@ const float Text3dEntity::getLightness() const
 const float Text3dEntity::getOpacity() const
 {
 	return _opacity;
-}
-
-const float Text3dEntity::getMinHeight() const
-{
-	return _minHeight;
-}
-
-const float Text3dEntity::getMaxHeight() const
-{
-	return _maxHeight;
 }
 
 const bool Text3dEntity::isFacingCameraHorizontally() const

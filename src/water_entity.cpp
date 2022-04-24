@@ -120,6 +120,16 @@ void WaterEntity::setWireframeColor(const fvec3 & value)
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
+void WaterEntity::setMinClipPosition(const fvec3 & value)
+{
+	_minClipPosition = value;
+}
+
+void WaterEntity::setMaxClipPosition(const fvec3 & value)
+{
+	_maxClipPosition = value;
+}
+
 void WaterEntity::setSize(float value)
 {
 	_size = clamp(value, 0.0f, MAX_SIZE);
@@ -213,6 +223,16 @@ const fvec2 & WaterEntity::getWaveSpeed() const
 const fvec3 & WaterEntity::getWireframeColor() const
 {
 	return _wireframeColor;
+}
+
+const fvec3 & WaterEntity::getMinClipPosition() const
+{
+	return _minClipPosition;
+}
+
+const fvec3 & WaterEntity::getMaxClipPosition() const
+{
+	return _maxClipPosition;
 }
 
 const float WaterEntity::getWaveHeight() const

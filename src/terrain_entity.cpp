@@ -153,6 +153,16 @@ void TerrainEntity::setWireframeColor(const fvec3 & value)
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
+void TerrainEntity::setMinClipPosition(const fvec3 & value)
+{
+	_minClipPosition = value;
+}
+
+void TerrainEntity::setMaxClipPosition(const fvec3 & value)
+{
+	_maxClipPosition = value;
+}
+
 void TerrainEntity::setLightness(float value)
 {
 	_lightness = max(0.0f, value);
@@ -266,6 +276,16 @@ const string & TerrainEntity::getBlueNormalMapPath() const
 const fvec3 & TerrainEntity::getWireframeColor() const
 {
 	return _wireframeColor;
+}
+
+const fvec3 & TerrainEntity::getMinClipPosition() const
+{
+	return _minClipPosition;
+}
+
+const fvec3 & TerrainEntity::getMaxClipPosition() const
+{
+	return _maxClipPosition;
 }
 
 const unsigned int TerrainEntity::getTextureRepeat() const

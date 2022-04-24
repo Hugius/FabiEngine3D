@@ -354,6 +354,16 @@ void EngineInterface::terrain_setWireframeColor(const string & id, const fvec3 &
 	_core->getTerrainEntityManager()->getEntity(id)->setWireframeColor(value);
 }
 
+void EngineInterface::terrain_setMinClipPosition(const string & id, const fvec3 & value)
+{
+	_core->getTerrainEntityManager()->getEntity(id)->getMinClipPosition(value);
+}
+
+void EngineInterface::terrain_setMaxClipPosition(const string & id, const fvec3 & value)
+{
+	_core->getTerrainEntityManager()->getEntity(id)->getMaxClipPosition(value);
+}
+
 const bool EngineInterface::terrain_isExisting(const string & id) const
 {
 	return _core->getTerrainEntityManager()->isEntityExisting(id);
@@ -524,6 +534,16 @@ const string & EngineInterface::terrain_getBlueNormalMapPath(const string & id) 
 const fvec3 & EngineInterface::terrain_getWireframeColor(const string & id) const
 {
 	return _core->getTerrainEntityManager()->getEntity(id)->getWireframeColor();
+}
+
+const fvec3 & EngineInterface::terrain_getMinClipPosition(const string & id) const
+{
+	return _core->getTerrainEntityManager()->getEntity(id)->getMinClipPosition();
+}
+
+const fvec3 & EngineInterface::terrain_getMaxClipPosition(const string & id) const
+{
+	return _core->getTerrainEntityManager()->getEntity(id)->getMaxClipPosition();
 }
 
 const unsigned int EngineInterface::terrain_getRedTextureRepeat(const string & id) const

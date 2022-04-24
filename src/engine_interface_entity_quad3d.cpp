@@ -103,6 +103,16 @@ void EngineInterface::quad3d_setUvOffset(const string & id, const fvec2 & value)
 	_core->getQuad3dEntityManager()->getEntity(id)->setUvOffset(value);
 }
 
+void EngineInterface::quad3d_setMinClipPosition(const string & id, const fvec3 & value)
+{
+	_core->getQuad3dEntityManager()->getEntity(id)->setMinClipPosition(value);
+}
+
+void EngineInterface::quad3d_setMaxClipPosition(const string & id, const fvec3 & value)
+{
+	_core->getQuad3dEntityManager()->getEntity(id)->setMaxClipPosition(value);
+}
+
 void EngineInterface::quad3d_setDiffuseMap(const string & id, const string & value)
 {
 	if(value.empty())
@@ -243,16 +253,6 @@ void EngineInterface::quad3d_setBright(const string & id, bool value)
 	_core->getQuad3dEntityManager()->getEntity(id)->setBright(value);
 }
 
-void EngineInterface::quad3d_setMinHeight(const string & id, float value)
-{
-	_core->getQuad3dEntityManager()->getEntity(id)->setMinHeight(value);
-}
-
-void EngineInterface::quad3d_setMaxHeight(const string & id, float value)
-{
-	_core->getQuad3dEntityManager()->getEntity(id)->setMaxHeight(value);
-}
-
 void EngineInterface::quad3d_setLightness(const string & id, float value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setLightness(value);
@@ -281,16 +281,6 @@ void EngineInterface::quad3d_setMinTextureAlpha(const string & id, float value)
 const float EngineInterface::quad3d_getLightness(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getLightness();
-}
-
-const float EngineInterface::quad3d_getMinHeight(const string & id) const
-{
-	return _core->getQuad3dEntityManager()->getEntity(id)->getMinHeight();
-}
-
-const float EngineInterface::quad3d_getMaxHeight(const string & id) const
-{
-	return _core->getQuad3dEntityManager()->getEntity(id)->getMaxHeight();
 }
 
 const float EngineInterface::quad3d_getOpacity(const string & id) const
@@ -381,6 +371,16 @@ const fvec3 & EngineInterface::quad3d_getColor(const string & id) const
 const fvec3 & EngineInterface::quad3d_getWireframeColor(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->getWireframeColor();
+}
+
+const fvec3 & EngineInterface::quad3d_getMinClipPosition(const string & id) const
+{
+	return _core->getQuad3dEntityManager()->getEntity(id)->getMinClipPosition();
+}
+
+const fvec3 & EngineInterface::quad3d_getMaxClipPosition(const string & id) const
+{
+	return _core->getQuad3dEntityManager()->getEntity(id)->getMaxClipPosition();
 }
 
 const vector<string> EngineInterface::quad3d_getIds() const

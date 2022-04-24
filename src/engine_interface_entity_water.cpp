@@ -43,6 +43,16 @@ void EngineInterface::water_setTextureRepeat(const string & id, unsigned int val
 	_core->getWaterEntityManager()->getEntity(id)->setTextureRepeat(value);
 }
 
+void EngineInterface::water_setMinClipPosition(const string & id, const fvec3 & value)
+{
+	_core->getWaterEntityManager()->getEntity(id)->setMinClipPosition(value);
+}
+
+void EngineInterface::water_setMaxClipPosition(const string & id, const fvec3 & value)
+{
+	_core->getWaterEntityManager()->getEntity(id)->setMaxClipPosition(value);
+}
+
 void EngineInterface::water_setReflective(const string & id, bool value)
 {
 	_core->getWaterEntityManager()->getEntity(id)->setReflective(value);
@@ -333,4 +343,14 @@ const float EngineInterface::water_getMaxDepth(const string & id) const
 const fvec3 & EngineInterface::water_getColor(const string & id) const
 {
 	return _core->getWaterEntityManager()->getEntity(id)->getColor();
+}
+
+const fvec3 & EngineInterface::water_getMinClipPosition(const string & id) const
+{
+	return _core->getWaterEntityManager()->getEntity(id)->getMinClipPosition();
+}
+
+const fvec3 & EngineInterface::water_getMaxClipPosition(const string & id) const
+{
+	return _core->getWaterEntityManager()->getEntity(id)->getMaxClipPosition();
 }

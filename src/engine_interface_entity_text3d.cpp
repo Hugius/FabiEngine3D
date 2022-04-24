@@ -90,6 +90,16 @@ void EngineInterface::text3d_setWireframeColor(const string & id, const fvec3 & 
 	_core->getText3dEntityManager()->getEntity(id)->setWireframeColor(value);
 }
 
+void EngineInterface::text3d_setMinClipPosition(const string & id, const fvec3 & value)
+{
+	_core->getText3dEntityManager()->getEntity(id)->setMinClipPosition(value);
+}
+
+void EngineInterface::text3d_setMaxClipPosition(const string & id, const fvec3 & value)
+{
+	_core->getText3dEntityManager()->getEntity(id)->setMaxClipPosition(value);
+}
+
 void EngineInterface::text3d_setWireframed(const string & id, bool value)
 {
 	_core->getText3dEntityManager()->getEntity(id)->setWireframed(value);
@@ -125,16 +135,6 @@ void EngineInterface::text3d_setBright(const string & id, bool value)
 	_core->getText3dEntityManager()->getEntity(id)->setBright(value);
 }
 
-void EngineInterface::text3d_setMinHeight(const string & id, float value)
-{
-	_core->getText3dEntityManager()->getEntity(id)->setMinHeight(value);
-}
-
-void EngineInterface::text3d_setMaxHeight(const string & id, float value)
-{
-	_core->getText3dEntityManager()->getEntity(id)->setMaxHeight(value);
-}
-
 void EngineInterface::text3d_setLightness(const string & id, float value)
 {
 	_core->getText3dEntityManager()->getEntity(id)->setLightness(value);
@@ -153,16 +153,6 @@ void EngineInterface::text3d_setMinTextureAlpha(const string & id, float value)
 const float EngineInterface::text3d_getLightness(const string & id) const
 {
 	return _core->getText3dEntityManager()->getEntity(id)->getLightness();
-}
-
-const float EngineInterface::text3d_getMinHeight(const string & id) const
-{
-	return _core->getText3dEntityManager()->getEntity(id)->getMinHeight();
-}
-
-const float EngineInterface::text3d_getMaxHeight(const string & id) const
-{
-	return _core->getText3dEntityManager()->getEntity(id)->getMaxHeight();
 }
 
 const float EngineInterface::text3d_getOpacity(const string & id) const
@@ -208,6 +198,16 @@ const fvec3 & EngineInterface::text3d_getColor(const string & id) const
 const fvec3 & EngineInterface::text3d_getWireframeColor(const string & id) const
 {
 	return _core->getText3dEntityManager()->getEntity(id)->getWireframeColor();
+}
+
+const fvec3 & EngineInterface::text3d_getMinClipPosition(const string & id) const
+{
+	return _core->getText3dEntityManager()->getEntity(id)->getMinClipPosition();
+}
+
+const fvec3 & EngineInterface::text3d_getMaxClipPosition(const string & id) const
+{
+	return _core->getText3dEntityManager()->getEntity(id)->getMaxClipPosition();
 }
 
 const vector<string> EngineInterface::text3d_getIds() const

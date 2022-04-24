@@ -114,6 +114,8 @@ public:
 	void terrain_setSpecular(const string & id, bool value);
 	void terrain_setWireframed(const string & id, bool value);
 	void terrain_setWireframeColor(const string & id, const fvec3 & value);
+	void terrain_setMinClipPosition(const string & id, const fvec3 & value);
+	void terrain_setMaxClipPosition(const string & id, const fvec3 & value);
 
 	const vector<string> terrain_getIds() const;
 	const string terrain_getSelectedId() const;
@@ -128,6 +130,8 @@ public:
 	const string & terrain_getGreenNormalMapPath(const string & id) const;
 	const string & terrain_getBlueNormalMapPath(const string & id) const;
 	const fvec3 & terrain_getWireframeColor(const string & id) const;
+	const fvec3 & terrain_getMinClipPosition(const string & id) const;
+	const fvec3 & terrain_getMaxClipPosition(const string & id) const;
 	const float terrain_getMaxHeight(const string & id) const;
 	const float terrain_getLightness(const string & id) const;
 	const float terrain_getSize(const string & id) const;
@@ -176,6 +180,8 @@ public:
 	void water_setEdged(const string & id, bool value);
 	void water_setColor(const string & id, const fvec3 & value);
 	void water_setTextureRepeat(const string & id, unsigned int value);
+	void water_setMinClipPosition(const string & id, const fvec3 & value);
+	void water_setMaxClipPosition(const string & id, const fvec3 & value);
 
 	const vector<string> water_getIds() const;
 	const string & water_getDudvMapPath(const string & id) const;
@@ -184,6 +190,8 @@ public:
 	const string water_getSelectedId() const;
 	const fvec3 & water_getWireframeColor(const string & id) const;
 	const fvec3 & water_getColor(const string & id) const;
+	const fvec3 & water_getMinClipPosition(const string & id) const;
+	const fvec3 & water_getMaxClipPosition(const string & id) const;
 	const fvec2 & water_getRippleSpeed(const string & id) const;
 	const fvec2 & water_getWaveSpeed(const string & id) const;
 	const float water_getHeight(const string & id) const;
@@ -339,8 +347,8 @@ public:
 	void quad3d_setWireframeColor(const string & id, const fvec3 & value);
 	void quad3d_setUvMultiplier(const string & id, const fvec2 & value);
 	void quad3d_setUvOffset(const string & id, const fvec2 & value);
-	void quad3d_setMinHeight(const string & id, float value);
-	void quad3d_setMaxHeight(const string & id, float value);
+	void quad3d_setMinClipPosition(const string & id, const fvec3 & value);
+	void quad3d_setMaxClipPosition(const string & id, const fvec3 & value);
 	void quad3d_setLightness(const string & id, float value);
 	void quad3d_setOpacity(const string & id, float value);
 	void quad3d_setTextureRepeat(const string & id, unsigned int value);
@@ -373,12 +381,12 @@ public:
 	const fvec3 & quad3d_getRotation(const string & id) const;
 	const fvec3 & quad3d_getColor(const string & id) const;
 	const fvec3 & quad3d_getWireframeColor(const string & id) const;
+	const fvec3 & quad3d_getMinClipPosition(const string & id) const;
+	const fvec3 & quad3d_getMaxClipPosition(const string & id) const;
 	const fvec2 & quad3d_getSize(const string & id) const;
 	const fvec2 & quad3d_getUvMultiplier(const string & id) const;
 	const fvec2 & quad3d_getUvOffset(const string & id) const;
 	const float quad3d_getLightness(const string & id) const;
-	const float quad3d_getMinHeight(const string & id) const;
-	const float quad3d_getMaxHeight(const string & id) const;
 	const float quad3d_getOpacity(const string & id) const;
 	const float quad3d_getEmissionIntensity(const string & id) const;
 	const float quad3d_getMinTextureAlpha(const string & id) const;
@@ -417,8 +425,8 @@ public:
 	void text3d_scaleTo(const string & id, const fvec2 & target, float speed);
 	void text3d_setColor(const string & id, const fvec3 & value);
 	void text3d_setWireframeColor(const string & id, const fvec3 & value);
-	void text3d_setMinHeight(const string & id, float value);
-	void text3d_setMaxHeight(const string & id, float value);
+	void text3d_setMinClipPosition(const string & id, const fvec3 & value);
+	void text3d_setMaxClipPosition(const string & id, const fvec3 & value);
 	void text3d_setLightness(const string & id, float value);
 	void text3d_setOpacity(const string & id, float value);
 	void text3d_setMinTextureAlpha(const string & id, float value);
@@ -439,10 +447,10 @@ public:
 	const fvec3 & text3d_getRotation(const string & id) const;
 	const fvec3 & text3d_getColor(const string & id) const;
 	const fvec3 & text3d_getWireframeColor(const string & id) const;
+	const fvec3 & text3d_getMinClipPosition(const string & id) const;
+	const fvec3 & text3d_getMaxClipPosition(const string & id) const;
 	const fvec2 & text3d_getSize(const string & id) const;
 	const float text3d_getLightness(const string & id) const;
-	const float text3d_getMinHeight(const string & id) const;
-	const float text3d_getMaxHeight(const string & id) const;
 	const float text3d_getOpacity(const string & id) const;
 	const float text3d_getMinTextureAlpha(const string & id) const;
 	const bool text3d_isExisting(const string & id) const;
@@ -475,6 +483,8 @@ public:
 	void aabb_scaleLocal(const string & id, const fvec3 & change);
 	void aabb_moveLocalTo(const string & id, const fvec3 & target, float speed);
 	void aabb_scaleLocalTo(const string & id, const fvec3 & target, float speed);
+	void aabb_setMinClipPosition(const string & id, const fvec3 & value);
+	void aabb_setMaxClipPosition(const string & id, const fvec3 & value);
 
 	const vector<string> aabb_getIds() const;
 	const string & aabb_getParentId(const string & id) const;
@@ -483,6 +493,8 @@ public:
 	const fvec3 & aabb_getLocalPosition(const string & id) const;
 	const fvec3 & aabb_getLocalSize(const string & id) const;
 	const fvec3 & aabb_getColor(const string & id) const;
+	const fvec3 & aabb_getMinClipPosition(const string & id) const;
+	const fvec3 & aabb_getMaxClipPosition(const string & id) const;
 	const bool aabb_isRaycastResponsive(const string & id) const;
 	const bool aabb_isCollisionResponsive(const string & id) const;
 	const bool aabb_isExisting(const string & id) const;

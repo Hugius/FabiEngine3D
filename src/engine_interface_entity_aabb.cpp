@@ -108,6 +108,16 @@ void EngineInterface::aabb_scaleLocalTo(const string & id, const fvec3 & target,
 	_core->getAabbEntityManager()->getEntity(id)->scaleLocalTo(target, speed);
 }
 
+void EngineInterface::aabb_setMinClipPosition(const string & id, const fvec3 & value)
+{
+	_core->getAabbEntityManager()->getEntity(id)->setMinClipPosition(value);
+}
+
+void EngineInterface::aabb_setMaxClipPosition(const string & id, const fvec3 & value)
+{
+	_core->getAabbEntityManager()->getEntity(id)->setMaxClipPosition(value);
+}
+
 const fvec3 & EngineInterface::aabb_getBasePosition(const string & id) const
 {
 	return _core->getAabbEntityManager()->getEntity(id)->getBasePosition();
@@ -131,6 +141,16 @@ const fvec3 & EngineInterface::aabb_getLocalSize(const string & id) const
 const fvec3 & EngineInterface::aabb_getColor(const string & id) const
 {
 	return _core->getAabbEntityManager()->getEntity(id)->getColor();
+}
+
+const fvec3 & EngineInterface::aabb_getMinClipPosition(const string & id) const
+{
+	return _core->getAabbEntityManager()->getEntity(id)->getMinClipPosition();
+}
+
+const fvec3 & EngineInterface::aabb_getMaxClipPosition(const string & id) const
+{
+	return _core->getAabbEntityManager()->getEntity(id)->getMaxClipPosition();
 }
 
 const bool EngineInterface::aabb_isRaycastResponsive(const string & id) const

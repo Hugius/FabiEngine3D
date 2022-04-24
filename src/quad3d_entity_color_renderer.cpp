@@ -62,12 +62,12 @@ void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 	_shaderBuffer->uploadUniform("u_color", entity->getColor());
 	_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor());
 	_shaderBuffer->uploadUniform("u_lightness", entity->getLightness());
-	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinClipPosition().x);
-	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxClipPosition().x);
-	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, entity->getMinHeight()));
-	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, entity->getMaxHeight()));
-	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinClipPosition().z);
-	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxClipPosition().z);
+	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, entity->getMinClipPosition().x));
+	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, entity->getMaxClipPosition().x));
+	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, entity->getMinClipPosition().y));
+	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, entity->getMaxClipPosition().y));
+	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, entity->getMinClipPosition().z));
+	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, entity->getMaxClipPosition().z));
 	_shaderBuffer->uploadUniform("u_opacity", entity->getOpacity());
 	_shaderBuffer->uploadUniform("u_isBright", entity->isBright());
 	_shaderBuffer->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());

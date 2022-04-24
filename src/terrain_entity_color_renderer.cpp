@@ -157,12 +157,12 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 	_shaderBuffer->uploadUniform("u_hasGreenNormalMap", (entity->getGreenNormalTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_hasBlueNormalMap", (entity->getBlueNormalTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor());
-	_shaderBuffer->uploadUniform("u_minX", _renderStorage->getMinClipPosition().x);
-	_shaderBuffer->uploadUniform("u_maxX", _renderStorage->getMaxClipPosition().x);
-	_shaderBuffer->uploadUniform("u_minY", _renderStorage->getMinClipPosition().y);
-	_shaderBuffer->uploadUniform("u_maxY", _renderStorage->getMaxClipPosition().y);
-	_shaderBuffer->uploadUniform("u_minZ", _renderStorage->getMinClipPosition().z);
-	_shaderBuffer->uploadUniform("u_maxZ", _renderStorage->getMaxClipPosition().z);
+	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, entity->getMinClipPosition().x));
+	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, entity->getMaxClipPosition().x));
+	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, entity->getMinClipPosition().y));
+	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, entity->getMaxClipPosition().y));
+	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, entity->getMinClipPosition().z));
+	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, entity->getMaxClipPosition().z));
 
 	if(entity->getDiffuseTextureBuffer() != nullptr)
 	{

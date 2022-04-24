@@ -256,29 +256,29 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string & functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad3d_set_min_height")
+	else if(functionName == "fe3d:quad3d_set_min_clip_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setMinHeight(args[0]->getString(), args[1]->getDecimal());
+				_fe3d->quad3d_setMinClipPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad3d_set_max_height")
+	else if(functionName == "fe3d:quad3d_set_max_clip_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad3d(args[0]->getString(), false))
 			{
-				_fe3d->quad3d_setMaxHeight(args[0]->getString(), args[1]->getDecimal());
+				_fe3d->quad3d_setMaxClipPosition(args[0]->getString(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}

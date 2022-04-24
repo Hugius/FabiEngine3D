@@ -146,9 +146,9 @@ private:
 	const bool _validateFe3dModelPart(const string & modelId, const string & partId);
 	const bool _validateFe3dQuad3d(const string & id, bool isTemplate);
 	const bool _validateFe3dText3d(const string & id, bool isTemplate);
+	const bool _validateFe3dAabb(const string & id);
 	const bool _validateFe3dQuad2d(const string & id, bool isTemplate);
 	const bool _validateFe3dText2d(const string & id, bool isTemplate);
-	const bool _validateFe3dAabb(const string & id);
 	const bool _validateFe3dPointlight(const string & id);
 	const bool _validateFe3dSpotlight(const string & id);
 	const bool _validateFe3dReflection(const string & id);

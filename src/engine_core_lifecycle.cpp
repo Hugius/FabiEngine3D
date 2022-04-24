@@ -15,9 +15,9 @@ EngineCore::EngineCore()
 	_modelEntityManager = make_shared<ModelEntityManager>();
 	_quad3dEntityManager = make_shared<Quad3dEntityManager>();
 	_text3dEntityManager = make_shared<Text3dEntityManager>();
+	_aabbEntityManager = make_shared<AabbEntityManager>();
 	_quad2dEntityManager = make_shared<Quad2dEntityManager>();
 	_text2dEntityManager = make_shared<Text2dEntityManager>();
-	_aabbEntityManager = make_shared<AabbEntityManager>();
 	_pointlightEntityManager = make_shared<PointlightEntityManager>();
 	_spotlightEntityManager = make_shared<SpotlightEntityManager>();
 	_reflectionEntityManager = make_shared<ReflectionEntityManager>();
@@ -78,9 +78,9 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_modelEntityManager);
 	_masterRenderer->inject(_quad3dEntityManager);
 	_masterRenderer->inject(_text3dEntityManager);
+	_masterRenderer->inject(_aabbEntityManager);
 	_masterRenderer->inject(_quad2dEntityManager);
 	_masterRenderer->inject(_text2dEntityManager);
-	_masterRenderer->inject(_aabbEntityManager);
 	_masterRenderer->inject(_pointlightEntityManager);
 	_masterRenderer->inject(_spotlightEntityManager);
 	_masterRenderer->inject(_reflectionEntityManager);

@@ -52,6 +52,90 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string & functionName
 			returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
 		}
 	}
+	else if(functionName == "fe3d:aabb_get_min_clip_position_x")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString()))
+			{
+				const auto result = _fe3d->aabb_getMinClipPosition(args[0]->getString()).x;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:aabb_get_min_clip_position_y")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString()))
+			{
+				const auto result = _fe3d->aabb_getMinClipPosition(args[0]->getString()).y;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:aabb_get_min_clip_position_z")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString()))
+			{
+				const auto result = _fe3d->aabb_getMinClipPosition(args[0]->getString()).z;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:aabb_get_max_clip_position_x")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString()))
+			{
+				const auto result = _fe3d->aabb_getMaxClipPosition(args[0]->getString()).x;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:aabb_get_max_clip_position_y")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString()))
+			{
+				const auto result = _fe3d->aabb_getMaxClipPosition(args[0]->getString()).y;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:aabb_get_max_clip_position_z")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAabb(args[0]->getString()))
+			{
+				const auto result = _fe3d->aabb_getMaxClipPosition(args[0]->getString()).z;
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::DECIMAL, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:aabb_is_visible")
 	{
 		auto types = {SVT::STRING};

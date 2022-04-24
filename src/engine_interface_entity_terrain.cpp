@@ -356,12 +356,12 @@ void EngineInterface::terrain_setWireframeColor(const string & id, const fvec3 &
 
 void EngineInterface::terrain_setMinClipPosition(const string & id, const fvec3 & value)
 {
-	_core->getTerrainEntityManager()->getEntity(id)->getMinClipPosition(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setMinClipPosition(value);
 }
 
 void EngineInterface::terrain_setMaxClipPosition(const string & id, const fvec3 & value)
 {
-	_core->getTerrainEntityManager()->getEntity(id)->getMaxClipPosition(value);
+	_core->getTerrainEntityManager()->getEntity(id)->setMaxClipPosition(value);
 }
 
 const bool EngineInterface::terrain_isExisting(const string & id) const

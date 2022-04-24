@@ -22,6 +22,8 @@
 - `fe3d:text2d_set_horizontally_flipped` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:text2d_set_vertically_flipped` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:text2d_set_content` (`STR` id, `STR` value) -----> `NONE`
+- `fe3d:text2d_set_min_clip_position` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
+- `fe3d:text2d_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
 
 ## Getters
 
@@ -46,3 +48,7 @@
 - `fe3d:text2d_get_ids` () -----> `LIST`
 - `fe3d:text2d_get_content` (`STR` id) -----> `STR`
 - `fe3d:text2d_get_font_map_path` (`STR` id) -----> `STR`
+- `fe3d:text2d_get_min_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:text2d_get_min_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:text2d_get_max_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:text2d_get_max_clip_position_y` (`STR` id) -----> `DEC`

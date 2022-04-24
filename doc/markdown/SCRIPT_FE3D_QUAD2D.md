@@ -34,6 +34,8 @@
 - `fe3d:quad2d_set_animation_column_index` (`STR` quad_id, `STR` animation_id, `INT` value) -----> `NONE`
 - `fe3d:quad2d_set_animation_interval_multiplier` (`STR` quad_id, `STR` animation_id, `INT` value) -----> `NONE`
 - `fe3d:quad2d_set_animation_interval_divider` (`STR` quad_id, `STR` animation_id, `INT` value) -----> `NONE`
+- `fe3d:quad2d_set_min_clip_position` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
+- `fe3d:quad2d_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y) -----> `NONE`
 
 ## Getters
 
@@ -71,3 +73,7 @@
 - `fe3d:quad2d_get_animation_play_count` (`STR` quad_id, `STR` animation_id) -----> `INT`
 - `fe3d:quad2d_get_animation_interval_multiplier` (`STR` quad_id, `STR` animation_id) -----> `INT`
 - `fe3d:quad2d_get_animation_interval_divider` (`STR` quad_id, `STR` animation_id) -----> `INT`
+- `fe3d:quad2d_get_min_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:quad2d_get_min_clip_position_y` (`STR` id) -----> `DEC`
+- `fe3d:quad2d_get_max_clip_position_x` (`STR` id) -----> `DEC`
+- `fe3d:quad2d_get_max_clip_position_y` (`STR` id) -----> `DEC`

@@ -28,9 +28,9 @@ public:
 	void setPosition(const fvec2 & value);
 	void setRotation(float value);
 	void setSize(const fvec2 & value);
-	void move(const fvec2 & value);
-	void rotate(float value);
-	void scale(const fvec2 & value);
+	void move(const fvec2 & change);
+	void rotate(float change);
+	void scale(const fvec2 & change);
 	void moveTo(const fvec2 & target, float speed);
 	void rotateTo(float target, float speed);
 	void scaleTo(const fvec2 & target, float speed);

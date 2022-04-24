@@ -15,7 +15,7 @@ public:
 	void reset();
 	void update();
 	void updateMatrices();
-	void move(const fvec3 & value);
+	void move(const fvec3 & change);
 	void moveTo(const fvec3 & target, float speed);
 	void setPosition(const fvec3 & value);
 	void setThirdPersonLookat(const fvec3 & value);

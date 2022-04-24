@@ -38,10 +38,10 @@ void ReflectionEntity::setPosition(const fvec3 & value)
 	_positionTarget = value;
 }
 
-void ReflectionEntity::move(const fvec3 & value)
+void ReflectionEntity::move(const fvec3 & change)
 {
-	_position += value;
-	_positionTarget += value;
+	_position += change;
+	_positionTarget += change;
 }
 
 void ReflectionEntity::moveTo(const fvec3 & target, float speed)

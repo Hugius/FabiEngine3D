@@ -41,10 +41,10 @@ void SpotlightEntity::setPosition(const fvec3 & value)
 	_positionTarget = value;
 }
 
-void SpotlightEntity::move(const fvec3 & value)
+void SpotlightEntity::move(const fvec3 & change)
 {
-	_position += value;
-	_positionTarget += value;
+	_position += change;
+	_positionTarget += change;
 }
 
 void SpotlightEntity::moveTo(const fvec3 & target, float speed)

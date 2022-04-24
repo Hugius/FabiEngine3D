@@ -22,7 +22,7 @@ public:
 	void setCubeMap(shared_ptr<TextureBuffer> value);
 	void setLightness(float value);
 	void setRotation(const fvec3 & value);
-	void rotate(const fvec3 & value);
+	void rotate(const fvec3 & change);
 	void rotateTo(const fvec3 & target, float speed);
 	void setWireframed(bool value);
 	void setWireframeColor(const fvec3 & value);

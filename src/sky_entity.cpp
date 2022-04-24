@@ -72,10 +72,10 @@ void SkyEntity::setRotation(const fvec3 & value)
 	_rotation = fvec3(Mathematics::limitAngle(value.x), Mathematics::limitAngle(value.y), Mathematics::limitAngle(value.z));
 }
 
-void SkyEntity::rotate(const fvec3 & value)
+void SkyEntity::rotate(const fvec3 & change)
 {
-	_rotation += value;
-	_rotationTarget += value;
+	_rotation += change;
+	_rotationTarget += change;
 	_rotation = fvec3(Mathematics::limitAngle(_rotation.x), Mathematics::limitAngle(_rotation.y), Mathematics::limitAngle(_rotation.z));
 	_rotationTarget = fvec3(Mathematics::limitAngle(_rotationTarget.x), Mathematics::limitAngle(_rotationTarget.y), Mathematics::limitAngle(_rotationTarget.z));
 }

@@ -371,24 +371,24 @@ void Text3dEntity::setSize(const fvec2 & value)
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Text3dEntity::move(const fvec3 & value)
+void Text3dEntity::move(const fvec3 & change)
 {
-	_position += value;
-	_positionTarget += value;
+	_position += change;
+	_positionTarget += change;
 }
 
-void Text3dEntity::rotate(const fvec3 & value)
+void Text3dEntity::rotate(const fvec3 & change)
 {
-	_rotation += value;
-	_rotationTarget += value;
+	_rotation += change;
+	_rotationTarget += change;
 	_rotation = fvec3(Mathematics::limitAngle(_rotation.x), Mathematics::limitAngle(_rotation.y), Mathematics::limitAngle(_rotation.z));
 	_rotationTarget = fvec3(Mathematics::limitAngle(_rotationTarget.x), Mathematics::limitAngle(_rotationTarget.y), Mathematics::limitAngle(_rotationTarget.z));
 }
 
-void Text3dEntity::scale(const fvec2 & value)
+void Text3dEntity::scale(const fvec2 & change)
 {
-	_size += value;
-	_sizeTarget += value;
+	_size += change;
+	_sizeTarget += change;
 	_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }

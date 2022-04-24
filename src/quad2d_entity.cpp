@@ -120,24 +120,24 @@ void Quad2dEntity::setSize(const fvec2 & value)
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void Quad2dEntity::move(const fvec2 & value)
+void Quad2dEntity::move(const fvec2 & change)
 {
-	_position += value;
-	_positionTarget += value;
+	_position += change;
+	_positionTarget += change;
 }
 
-void Quad2dEntity::rotate(float value)
+void Quad2dEntity::rotate(float change)
 {
-	_rotation += value;
-	_rotationTarget += value;
+	_rotation += change;
+	_rotationTarget += change;
 	_rotation = Mathematics::limitAngle(_rotation);
 	_rotationTarget = Mathematics::limitAngle(_rotationTarget);
 }
 
-void Quad2dEntity::scale(const fvec2 & value)
+void Quad2dEntity::scale(const fvec2 & change)
 {
-	_size += value;
-	_sizeTarget += value;
+	_size += change;
+	_sizeTarget += change;
 	_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }

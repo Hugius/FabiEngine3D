@@ -17,7 +17,7 @@ public:
 	void capture();
 	void setCaptured();
 	void setPosition(const fvec3 & value);
-	void move(const fvec3 & value);
+	void move(const fvec3 & change);
 	void moveTo(const fvec3 & target, float speed);
 	void setCubeMap(shared_ptr<TextureBuffer> value);
 	void setExceptionEntityId(const string & id);

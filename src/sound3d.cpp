@@ -33,10 +33,10 @@ void Sound3d::setPosition(const fvec3 & value)
 	_positionTarget = value;
 }
 
-void Sound3d::move(const fvec3 & value)
+void Sound3d::move(const fvec3 & change)
 {
-	_position += value;
-	_positionTarget += value;
+	_position += change;
+	_positionTarget += change;
 }
 
 void Sound3d::moveTo(const fvec3 & target, float speed)

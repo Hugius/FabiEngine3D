@@ -172,6 +172,34 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:text3d_is_horizontally_flipped")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText3d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->text3d_isHorizontallyFlipped(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text3d_is_vertically_flipped")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText3d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->text3d_isVerticallyFlipped(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:text3d_get_wireframe_color_r")
 	{
 		auto types = {SVT::STRING};

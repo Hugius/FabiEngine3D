@@ -48,6 +48,8 @@
 - `fe3d:quad3d_set_animation_interval_divider` (`STR` quad_id, `STR` animation_id, `INT` value) -----> `NONE`
 - `fe3d:quad3d_set_min_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:quad3d_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
+- `fe3d:quad3d_set_horizontally_flipped` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:quad3d_set_vertically_flipped` (`STR` id, `BOL` value) -----> `NONE`
 
 ## Getters
 
@@ -61,6 +63,8 @@
 - `fe3d:quad3d_is_wireframed` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_is_frozen` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_is_existing` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_horizontally_flipped` (`STR` id) -----> `BOL`
+- `fe3d:quad3d_is_vertically_flipped` (`STR` id) -----> `BOL`
 - `fe3d:quad3d_is_animation_started` (`STR` quad_id, `STR` animation_id) -----> `BOL`
 - `fe3d:quad3d_is_animation_paused` (`STR` quad_id, `STR` animation_id) -----> `BOL`
 - `fe3d:quad3d_is_animation_autopaused` (`STR` quad_id, `STR` animation_id) -----> `BOL`

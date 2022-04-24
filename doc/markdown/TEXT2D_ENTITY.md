@@ -42,7 +42,7 @@
 - **Opacity**: the opacity of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Horizontally Flipped**: the characters horizontally flipped
+- **Horizontally Flipped**: the characters are horizontally flipped
   - Type: `boolean`
   - Constraints: none
 - **Vertically Flipped**: the characters are vertically flipped

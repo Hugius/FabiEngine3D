@@ -214,6 +214,34 @@ const bool ScriptInterpreter::_executeFe3dQuad3dGetter(const string & functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:quad3d_is_horizontally_flipped")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->quad3d_isHorizontallyFlipped(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:quad3d_is_vertically_flipped")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
+			{
+				const auto result = _fe3d->quad3d_isVerticallyFlipped(args[0]->getString());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:quad3d_get_min_clip_position_x")
 	{
 		auto types = {SVT::STRING};

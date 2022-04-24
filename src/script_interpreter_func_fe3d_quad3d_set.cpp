@@ -74,6 +74,34 @@ const bool ScriptInterpreter::_executeFe3dQuad3dSetter(const string & functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:quad3d_set_horizontally_flipped")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
+			{
+				_fe3d->quad3d_setHorizontallyFlipped(args[0]->getString(), args[1]->getBoolean());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:quad3d_set_vertically_flipped")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad3d(args[0]->getString(), false))
+			{
+				_fe3d->quad3d_setVerticallyFlipped(args[0]->getString(), args[1]->getBoolean());
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:quad3d_set_diffuse_map")
 	{
 		auto types = {SVT::STRING, SVT::STRING};

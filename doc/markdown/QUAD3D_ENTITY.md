@@ -89,3 +89,9 @@
 - **Frozen**: the XYZ position of the mesh is not affected by the camera position
   - Type: `boolean`
   - Constraints: none
+- **Horizontally Flipped**: the diffuse map is horizontally flipped
+  - Type: `boolean`
+  - Constraints: none
+- **Vertically Flipped**: the diffuse map is vertically flipped
+  - Type: `boolean`
+  - Constraints: none

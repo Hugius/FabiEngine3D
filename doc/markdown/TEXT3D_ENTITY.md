@@ -75,3 +75,9 @@
 - **Frozen**: the XYZ position of the mesh is not affected by the camera position
   - Type: `boolean`
   - Constraints: none
+- **Horizontally Flipped**: the characters are horizontally flipped
+  - Type: `boolean`
+  - Constraints: none
+- **Vertically Flipped**: the characters are vertically flipped
+  - Type: `boolean`
+  - Constraints: none

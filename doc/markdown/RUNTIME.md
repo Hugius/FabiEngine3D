@@ -3,7 +3,7 @@
 ## 1. Application Preview
 
 - You can play/pause/resume/stop/debug the application preview.
-- All changes made through scripting will be reset when the preview is stopped (unless persisted in a file).
+- All changes made through scripting will be reset if the preview is stopped (unless persisted in a file).
 - You can pause the runtime with `ESC`.
 - If the application is paused you can start a debugging frame which logs a performance report about your script execution.
 

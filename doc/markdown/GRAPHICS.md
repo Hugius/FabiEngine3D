@@ -284,7 +284,7 @@
 
 #### 3.2.1 General
 
-- Sky exposure is an effect that makes the sky very bright when not looking at it.
+- Sky exposure is an effect that makes the sky very bright if not looking at it.
 
 #### 3.2.2 Properties
 
@@ -303,7 +303,7 @@
 #### 3.3.1 General
 
 - Anisotropic filtering is the process of keeping the texture quality.
-- Without this effect textures are blurry when viewed from oblique camera angles.
+- Without this effect textures are blurry if viewed from oblique camera angles.
 - Anisotropic filtering is always enabled.
 
 #### 3.3.2 Properties

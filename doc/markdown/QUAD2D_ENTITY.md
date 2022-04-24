@@ -34,6 +34,12 @@
 - **UV Offset**: the XY offset of the texture coordinates
   - Type: `decimal2`
   - Constraints: between `0.0` and `1.0`
+- **Min Clip Position**: the minimum position from which fragments are visible
+  - Type: `decimal2`
+  - Constraints: none
+- **Max Clip Position**: the maximum position to which fragments are visible
+  - Type: `decimal2`
+  - Constraints: none
 - **Rotation**: the rotation of the mesh around the Z axis
   - Type: `decimal`
   - Constraints: between `0.0` and `360.0`

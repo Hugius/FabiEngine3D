@@ -32,8 +32,6 @@ public:
 	static const fvec2 convertPositionRelativeFromDisplay(const fvec2 & position);
 	static const fvec2 convertSizeRelativeToDisplay(const fvec2 & size);
 	static const fvec2 convertSizeRelativeFromDisplay(const fvec2 & size);
-	static const fvec2 getMinViewportPosition();
-	static const fvec2 getMaxViewportPosition();
 
 	static const ivec2 convertFromNdc(const fvec2 & position);
 	static const ivec2 getCursorPosition();

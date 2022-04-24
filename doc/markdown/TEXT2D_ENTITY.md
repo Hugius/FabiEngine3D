@@ -30,6 +30,12 @@
 - **Size**: the XY size of the mesh
   - Type: `decimal2`
   - Constraints: at least `0.0`
+- **Min Clip Position**: the minimum position from which fragments are visible
+  - Type: `decimal2`
+  - Constraints: none
+- **Max Clip Position**: the maximum position to which fragments are visible
+  - Type: `decimal2`
+  - Constraints: none
 - **Rotation**: the rotation of the mesh around the Z axis
   - Type: `decimal`
   - Constraints: between `0.0` and `360.0`

@@ -10,7 +10,7 @@
 - AABB Entities are invisible by default.
 - AABB entities can be bound to a parent (model/quad3D entity).
 - Bound AABB entities follow the transformation of their parent.
-- Bound AABB entities are invisible when their parent is invisible.
+- Bound AABB entities are invisible and unresponsive if their parent is invisible.
 - Bound AABB entities cannot directly be accessed or deleted.
 
 ## 2. Properties

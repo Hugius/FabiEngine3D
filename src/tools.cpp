@@ -419,32 +419,6 @@ const bool Tools::isInteger(const string & valueString)
 	return true;
 }
 
-const fvec2 Tools::getMinViewportPosition()
-{
-	if(Configuration::getInst().isApplicationExported())
-	{
-		return fvec2(0.0f);
-	}
-
-	const auto rawPosition = Configuration::getInst().getDisplayPosition();
-	const auto result = convertToNdc(rawPosition);
-
-	return result;
-}
-
-const fvec2 Tools::getMaxViewportPosition()
-{
-	if(Configuration::getInst().isApplicationExported())
-	{
-		return fvec2(1.0f);
-	}
-
-	const auto rawPosition = (Configuration::getInst().getDisplayPosition() + Configuration::getInst().getDisplaySize());
-	const auto result = convertToNdc(rawPosition);
-
-	return result;
-}
-
 const fvec2 Tools::convertPositionRelativeToDisplay(const fvec2 & position)
 {
 	if(Configuration::getInst().isApplicationExported())

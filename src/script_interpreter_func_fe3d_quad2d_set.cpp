@@ -2,6 +2,8 @@
 #include "configuration.hpp"
 #include "tools.hpp"
 
+using std::clamp;
+
 using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues)
@@ -29,8 +31,8 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 				_fe3d->quad2d_setDiffuseMap(args[0]->getString(), _fe3d->quad2d_getDiffuseMapPath("@" + args[1]->getString()));
 				_fe3d->quad2d_setPosition(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(args[2]->getDecimal(), args[3]->getDecimal())));
 				_fe3d->quad2d_setSize(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(args[4]->getDecimal(), args[5]->getDecimal())));
-				_fe3d->quad2d_setMinClipPosition(args[0]->getString(), Tools::getMinViewportPosition());
-				_fe3d->quad2d_setMaxClipPosition(args[0]->getString(), Tools::getMaxViewportPosition());
+				_fe3d->quad2d_setMinClipPosition(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(-1.0f)));
+				_fe3d->quad2d_setMaxClipPosition(args[0]->getString(), Tools::convertSizeRelativeToDisplay(fvec2(1.0f)));
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
@@ -62,6 +64,34 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 			}
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:quad2d_set_min_clip_position")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad2d(args[0]->getString(), false))
+			{
+				_fe3d->quad2d_setMinClipPosition(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(clamp(args[1]->getDecimal(), -1.0f, 1.0f), clamp(args[2]->getDecimal(), -1.0f, 1.0f))));
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:quad2d_set_max_clip_position")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad2d(args[0]->getString(), false))
+			{
+				_fe3d->quad2d_setMaxClipPosition(args[0]->getString(), Tools::convertPositionRelativeToDisplay(fvec2(clamp(args[1]->getDecimal(), -1.0f, 1.0f), clamp(args[2]->getDecimal(), -1.0f, 1.0f))));
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
 		}
 	}
 	else if(functionName == "fe3d:quad2d_set_visible")

@@ -11,7 +11,7 @@
 - [Text2D](SCRIPT_FE3D_TEXT2D.md)
 - [Pointlight](SCRIPT_FE3D_POINTLIGHT.md)
 - [Spotlight](SCRIPT_FE3D_SPOTLIGHT.md)
-- [Reflection](SCRIPT_FE3D_REFLECTION.md)
+- [Captor](SCRIPT_FE3D_CAPTOR.md)
 - [Sound3D](SCRIPT_FE3D_SOUND3D.md)
 - [Sound2D](SCRIPT_FE3D_SOUND2D.md)
 - [Graphics](SCRIPT_FE3D_GRAPHICS.md)

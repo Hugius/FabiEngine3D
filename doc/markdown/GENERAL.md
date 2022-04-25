@@ -11,7 +11,7 @@
 
 ### 1.2 Rendering
 
-- **3D Entities**: sky, terrain, water, model, quad3D, text3D
+- **3D Entities**: sky, terrain, water, model, quad3D, text3D, AABB
 - **2D Entities**: quad2D, text2D
 - **Textures**: blend, cube, diffuse, displacement, dudv, emission, flare, font, height, normal, reflection, specular
 - **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting

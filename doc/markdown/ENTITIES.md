@@ -31,4 +31,4 @@
 - [Text2D Entity](TEXT2D_ENTITY.md) (**2D**)
 - [Pointlight Entity](POINTLIGHT_ENTITY.md) (**3D**)
 - [Spotlight Entity](SPOTLIGHT_ENTITY.md) (**3D**)
-- [Reflection Entity](REFLECTION_ENTITY.md) (**3D**)
+- [Captor Entity](CAPTOR_ENTITY.md) (**3D**)

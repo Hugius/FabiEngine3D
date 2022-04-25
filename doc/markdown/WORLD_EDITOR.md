@@ -67,11 +67,11 @@
 - If a terrain entity is selected, you can place the spotlight entity on top of the terrain entity with your mouse.
 - If no terrain entity is selected, you must specify the position of the spotlight entity.
 
-## 11. Reflections
+## 11. Captors
 
-- You can place/edit/delete reflection entities in the world.
-- If a terrain entity is selected, you can place the reflection entity on top of the terrain entity with your mouse.
-- If no terrain entity is selected, you must specify the position of the reflection entity.
+- You can place/edit/delete captor entities in the world.
+- If a terrain entity is selected, you can place the captor entity on top of the terrain entity with your mouse.
+- If no terrain entity is selected, you must specify the position of the captor entity.
 
 ## 12. Settings
 

@@ -20,7 +20,7 @@
 - Rendering spotlight entities
 - Rendering complex meshes
 - Rendering high quality shadows
-- Capturing reflection entities
+- Capturing captor entities
 - Loading high resolution textures
 - Loading complex meshes
 
@@ -30,5 +30,5 @@
 - Lower the graphics/lighting quality to improve performance if necessary.
 - Clear the messages in the logging console if a lot of messages are printed.
 - Make sure your GPU is giving the maximum computing power to the engine, so check your graphics card settings.
-- Capturing a reflection entity can take some time (especially when loading a world).
+- Capturing a captor entity can take some time (especially when loading a world).
 - Use the face culling optimization in model entities as much as possible.

@@ -1,8 +1,8 @@
-# Reflection Entity
+# Captor Entity
 
 ## 1. General
 
-- The reflection entity is a 3D captor in 3D space.
+- The captor entity is a 3D "camera" in 3D space.
 - Everything around the entity is captured into an internal cube map.
 - The cube map is used for cube reflections.
 

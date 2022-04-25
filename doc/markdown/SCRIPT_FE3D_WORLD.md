@@ -14,7 +14,7 @@
 - `fe3d:world_add_custom_aabb` (`STR` id) -----> `NONE`
 - `fe3d:world_add_custom_pointlight` (`STR` id) -----> `NONE`
 - `fe3d:world_add_custom_spotlight` (`STR` id) -----> `NONE`
-- `fe3d:world_add_custom_reflection` (`STR` id) -----> `NONE`
+- `fe3d:world_add_custom_captor` (`STR` id) -----> `NONE`
 - `fe3d:world_add_custom_sound3d` (`STR` id) -----> `NONE`
 - `fe3d:world_add_custom_graphics` () -----> `NONE`
 - `fe3d:world_save_custom` (`STR` id) -----> `NONE`

@@ -33,7 +33,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 			}
 			if(args[0]->getInteger() <= 0)
 			{
-				_throwRuntimeError("client count is too high");
+				_throwRuntimeError("client count is too low");
 				return true;
 			}
 

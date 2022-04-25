@@ -1,5 +1,6 @@
 #include "animation2d_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void Animation2dEditor::_updateMiscellaneous()
 {
@@ -102,5 +103,43 @@ void Animation2dEditor::_updateAnimationDeleting()
 		{
 			_currentAnimationId = "";
 		}
+	}
+}
+
+void Animation2dEditor::_updateImageChoosing()
+{
+	if(_gui->getOverlay()->getAnswerFormId() == "preview" && _gui->getOverlay()->isAnswerFormConfirmed())
+	{
+		if(getCurrentProjectId().empty())
+		{
+			abort();
+		}
+
+		const auto decision = ((_gui->getOverlay()->getAnswerFormDecision() == "Quad2D") ? "quad2d" : "quad3d");
+		const auto rootPath = Tools::getRootDirectoryPath();
+		const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\" + decision + "\\diffuse_map\\");
+
+		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+		{
+			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+			return;
+		}
+
+		const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
+		if(filePath.empty())
+		{
+			return;
+		}
+
+		if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
+		{
+			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+			return;
+		}
+
+		const string finalFilePath = filePath.substr(rootPath.size());
+		_fe3d->misc_clearImageCache(finalFilePath);
+		_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, finalFilePath);
+		_isPreviewTextureChosen = true;
 	}
 }

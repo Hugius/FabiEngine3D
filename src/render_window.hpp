@@ -35,7 +35,6 @@ public:
 	const bool isClosed() const;
 	const bool isVisible() const;
 	const bool isVsyncEnabled() const;
-	const bool isFocused() const;
 
 private:
 	static inline constexpr unsigned int MAX_TITLE_LENGTH = 100;

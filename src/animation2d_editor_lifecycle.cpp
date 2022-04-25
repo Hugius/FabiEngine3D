@@ -89,6 +89,10 @@ void Animation2dEditor::update()
 	}
 	if(isLoaded())
 	{
+		_updateImageChoosing();
+	}
+	if(isLoaded())
+	{
 		_updateMiscellaneous();
 	}
 }

@@ -65,6 +65,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		const auto rowCount = _fe3d->animation2d_getRowCount(_currentAnimationId);
 		const auto columnCount = _fe3d->animation2d_getColumnCount(_currentAnimationId);
 		const auto interval = _fe3d->animation2d_getInterval(_currentAnimationId);
+		const auto isAnimationStarted = _fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD_ID, _currentAnimationId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -126,48 +127,11 @@ void Animation2dEditor::_updateChoiceMenu()
 			_fe3d->animation2d_setInterval(_currentAnimationId, content);
 		}
 
-		if(_gui->getOverlay()->getAnswerFormId() == "preview" && _gui->getOverlay()->isAnswerFormConfirmed())
-		{
-			if(getCurrentProjectId().empty())
-			{
-				abort();
-			}
-
-			const auto decision = ((_gui->getOverlay()->getAnswerFormDecision() == "Quad2D") ? "quad2d" : "quad3d");
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = ("projects\\" + getCurrentProjectId() + "\\assets\\image\\entity\\" + decision + "\\diffuse_map\\");
-
-			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
-			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
-				return;
-			}
-
-			const auto filePath = Tools::chooseExplorerFile((rootPath + targetDirectoryPath), "TGA");
-			if(filePath.empty())
-			{
-				return;
-			}
-
-			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
-			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
-				return;
-			}
-
-			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, finalFilePath);
-			_isPreviewTextureChosen = true;
-		}
-
-		const auto isStarted = _fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD_ID, _currentAnimationId);
-
-		screen->getButton("preview")->setHoverable(!isStarted);
-		screen->getButton("rowCount")->setHoverable(_isPreviewTextureChosen && !isStarted);
-		screen->getButton("columnCount")->setHoverable(_isPreviewTextureChosen && !isStarted);
-		screen->getButton("interval")->setHoverable(_isPreviewTextureChosen && !isStarted);
-		screen->getButton("start")->setHoverable(_isPreviewTextureChosen && !isStarted);
-		screen->getButton("stop")->setHoverable(_isPreviewTextureChosen && isStarted);
+		screen->getButton("preview")->setHoverable(!isAnimationStarted);
+		screen->getButton("rowCount")->setHoverable(_isPreviewTextureChosen && !isAnimationStarted);
+		screen->getButton("columnCount")->setHoverable(_isPreviewTextureChosen && !isAnimationStarted);
+		screen->getButton("interval")->setHoverable(_isPreviewTextureChosen && !isAnimationStarted);
+		screen->getButton("start")->setHoverable(_isPreviewTextureChosen && !isAnimationStarted);
+		screen->getButton("stop")->setHoverable(_isPreviewTextureChosen && isAnimationStarted);
 	}
 }

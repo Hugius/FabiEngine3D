@@ -26,6 +26,7 @@ private:
 	void _updateAnimationCreating();
 	void _updateAnimationChoosing();
 	void _updateAnimationDeleting();
+	void _updateImageChoosing();
 	void _updateMiscellaneous();
 
 	static inline const string PREVIEW_QUAD_ID = "@@preview_quad3d";

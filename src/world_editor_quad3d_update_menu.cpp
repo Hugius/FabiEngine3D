@@ -92,6 +92,7 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 			if(!_fe3d->quad3d_isExisting(optionId))
 			{
 				screen->getScrollingList("quadList")->deleteOption(optionId);
+
 				break;
 			}
 		}

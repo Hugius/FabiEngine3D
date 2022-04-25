@@ -180,6 +180,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 				if(entity->getOpacity(partId) < 1.0f)
 				{
 					isTransparent = true;
+
 					break;
 				}
 			}

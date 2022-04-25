@@ -92,6 +92,7 @@ void WorldEditor::_updateText3dChoosingMenu()
 			if(!_fe3d->text3d_isExisting(optionId))
 			{
 				screen->getScrollingList("textList")->deleteOption(optionId);
+
 				break;
 			}
 		}

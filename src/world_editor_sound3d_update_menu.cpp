@@ -100,6 +100,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 			if(!_fe3d->sound3d_isExisting(optionId))
 			{
 				screen->getScrollingList("soundList")->deleteOption(optionId);
+
 				break;
 			}
 		}

@@ -71,31 +71,37 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 				case DirectionOrderType::XYZ:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::XZY);
+
 					break;
 				}
 				case DirectionOrderType::XZY:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::YXZ);
+
 					break;
 				}
 				case DirectionOrderType::YXZ:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::YZX);
+
 					break;
 				}
 				case DirectionOrderType::YZX:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::ZXY);
+
 					break;
 				}
 				case DirectionOrderType::ZXY:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::ZYX);
+
 					break;
 				}
 				case DirectionOrderType::ZYX:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::XYZ);
+
 					break;
 				}
 			}
@@ -136,31 +142,37 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 			case DirectionOrderType::XYZ:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: X Y Z");
+
 				break;
 			}
 			case DirectionOrderType::XZY:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: X Z Y");
+
 				break;
 			}
 			case DirectionOrderType::YXZ:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: Y X Z");
+
 				break;
 			}
 			case DirectionOrderType::YZX:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: Y Z X");
+
 				break;
 			}
 			case DirectionOrderType::ZXY:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: Z X Y");
+
 				break;
 			}
 			case DirectionOrderType::ZYX:
 			{
 				screen->getButton("rotationOrder")->setTextContent("Rotation: Z Y X");
+
 				break;
 			}
 		}

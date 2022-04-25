@@ -72,6 +72,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 			if(!_fe3d->pointlight_isExisting(optionId))
 			{
 				screen->getScrollingList("pointlightList")->deleteOption(optionId);
+
 				break;
 			}
 		}

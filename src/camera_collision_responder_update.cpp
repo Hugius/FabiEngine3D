@@ -48,6 +48,7 @@ void CameraCollisionResponder::update()
 				xPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
 				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
 				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
+
 				break;
 			}
 			case DirectionOrderType::XZY:
@@ -56,6 +57,7 @@ void CameraCollisionResponder::update()
 				xPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
 				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
 				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
+
 				break;
 			}
 			case DirectionOrderType::YXZ:
@@ -64,6 +66,7 @@ void CameraCollisionResponder::update()
 				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
 				xPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
 				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
+
 				break;
 			}
 			case DirectionOrderType::YZX:
@@ -72,6 +75,7 @@ void CameraCollisionResponder::update()
 				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
 				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
 				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
+
 				break;
 			}
 			case DirectionOrderType::ZXY:
@@ -80,6 +84,7 @@ void CameraCollisionResponder::update()
 				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
 				xPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
 				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
+
 				break;
 			}
 			case DirectionOrderType::ZYX:
@@ -88,6 +93,7 @@ void CameraCollisionResponder::update()
 				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
 				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
 				xPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
+
 				break;
 			}
 		}

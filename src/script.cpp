@@ -108,6 +108,7 @@ const unordered_map<string, unsigned int> Script::findKeyword(const string & key
 				if(line.substr(index, keyword.size()) == keyword)
 				{
 					result.insert({scriptFileId, lineNumber + 1});
+
 					break;
 				}
 			}

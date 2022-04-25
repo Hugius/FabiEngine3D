@@ -93,6 +93,7 @@ void WorldEditor::_updateModelChoosingMenu()
 			if(!_fe3d->model_isExisting(optionId))
 			{
 				screen->getScrollingList("modelList")->deleteOption(optionId);
+
 				break;
 			}
 		}

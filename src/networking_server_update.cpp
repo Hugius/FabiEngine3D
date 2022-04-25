@@ -191,6 +191,7 @@ void NetworkingServer::update()
 						if(username == _clientUsernames[index])
 						{
 							_pendingMessages.push_back(NetworkingClientMessage(username, content, NetworkingProtocolType::UDP));
+
 							break;
 						}
 					}

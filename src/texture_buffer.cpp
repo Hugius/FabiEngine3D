@@ -43,6 +43,7 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6> & images)
 		if(image != nullptr)
 		{
 			imageSize = image->getWidth();
+
 			break;
 		}
 	}

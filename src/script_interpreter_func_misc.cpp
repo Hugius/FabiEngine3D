@@ -138,6 +138,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				   (listVariable->getValue(index)->getString() == args[1]->getString()))
 				{
 					result = true;
+
 					break;
 				}
 
@@ -146,6 +147,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				   (listVariable->getValue(index)->getDecimal() == args[1]->getDecimal()))
 				{
 					result = true;
+
 					break;
 				}
 
@@ -154,6 +156,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				   (listVariable->getValue(index)->getInteger() == args[1]->getInteger()))
 				{
 					result = true;
+
 					break;
 				}
 
@@ -162,6 +165,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				   (listVariable->getValue(index)->getBoolean() == args[1]->getBoolean()))
 				{
 					result = true;
+
 					break;
 				}
 			}
@@ -203,6 +207,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				   (listVariable->getValue(index)->getString() == args[1]->getString()))
 				{
 					result = index;
+
 					break;
 				}
 
@@ -211,6 +216,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				   (listVariable->getValue(index)->getDecimal() == args[1]->getDecimal()))
 				{
 					result = index;
+
 					break;
 				}
 
@@ -219,6 +225,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				   (listVariable->getValue(index)->getInteger() == args[1]->getInteger()))
 				{
 					result = index;
+
 					break;
 				}
 
@@ -227,6 +234,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				   (listVariable->getValue(index)->getBoolean() == args[1]->getBoolean()))
 				{
 					result = index;
+
 					break;
 				}
 			}

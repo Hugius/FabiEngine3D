@@ -72,6 +72,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 			if(!_fe3d->reflection_isExisting(optionId))
 			{
 				screen->getScrollingList("reflectionList")->deleteOption(optionId);
+
 				break;
 			}
 		}

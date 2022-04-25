@@ -72,6 +72,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 			if(!_fe3d->spotlight_isExisting(optionId))
 			{
 				screen->getScrollingList("spotlightList")->deleteOption(optionId);
+
 				break;
 			}
 		}

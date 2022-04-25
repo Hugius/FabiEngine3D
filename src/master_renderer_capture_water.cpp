@@ -41,6 +41,7 @@ void MasterRenderer::captureWaterReflections()
 			{
 				entity->setVisible(false);
 				savedModelEntityIds.push_back(entity->getId());
+
 				break;
 			}
 		}

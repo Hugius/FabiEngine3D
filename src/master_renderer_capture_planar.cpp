@@ -14,6 +14,7 @@ void MasterRenderer::capturePlanarReflections()
 				{
 					entity->setVisible(false);
 					reflectiveModelEntities.push_back(entity);
+
 					break;
 				}
 			}

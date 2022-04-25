@@ -495,11 +495,13 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 				case BloomType::EVERYTHING:
 				{
 					_fe3d->graphics_setBloomType(BloomType::PARTS);
+
 					break;
 				}
 				case BloomType::PARTS:
 				{
 					_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
+
 					break;
 				}
 			}

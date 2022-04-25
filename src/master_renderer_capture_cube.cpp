@@ -86,36 +86,42 @@ void MasterRenderer::captureCubeReflections()
 					{
 						_camera->setYaw(0.0f);
 						_camera->setPitch(0.0f);
+
 						break;
 					}
 					case 1:
 					{
 						_camera->setYaw(180.0f);
 						_camera->setPitch(0.0f);
+
 						break;
 					}
 					case 2:
 					{
 						_camera->setYaw(90.0f);
 						_camera->setPitch(90.0f);
+
 						break;
 					}
 					case 3:
 					{
 						_camera->setYaw(90.0f);
 						_camera->setPitch(-90.0f);
+
 						break;
 					}
 					case 4:
 					{
 						_camera->setYaw(90.0f);
 						_camera->setPitch(0.0f);
+
 						break;
 					}
 					case 5:
 					{
 						_camera->setYaw(270.0f);
 						_camera->setPitch(0.0f);
+
 						break;
 					}
 				}

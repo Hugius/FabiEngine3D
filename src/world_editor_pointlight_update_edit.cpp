@@ -99,11 +99,13 @@ void WorldEditor::_updatePointlightEditing()
 					case PointlightType::CIRCLE:
 					{
 						_fe3d->pointlight_setShape(_activePointlightId, PointlightType::SQUARE);
+
 						break;
 					}
 					case PointlightType::SQUARE:
 					{
 						_fe3d->pointlight_setShape(_activePointlightId, PointlightType::CIRCLE);
+
 						break;
 					}
 				}

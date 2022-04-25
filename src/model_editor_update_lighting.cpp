@@ -72,11 +72,13 @@ void ModelEditor::_updateLightingMenu()
 				case ReflectionType::CUBE:
 				{
 					_fe3d->model_setReflectionType(_currentModelId, _currentPartId, ReflectionType::PLANAR);
+
 					break;
 				}
 				case ReflectionType::PLANAR:
 				{
 					_fe3d->model_setReflectionType(_currentModelId, _currentPartId, ReflectionType::CUBE);
+
 					break;
 				}
 			}
@@ -163,11 +165,13 @@ void ModelEditor::_updateLightingMenu()
 			case ReflectionType::CUBE:
 			{
 				screen->getButton("reflectionType")->setTextContent("Type: CUBE");
+
 				break;
 			}
 			case ReflectionType::PLANAR:
 			{
 				screen->getButton("reflectionType")->setTextContent("Type: PLANAR");
+
 				break;
 			}
 		}

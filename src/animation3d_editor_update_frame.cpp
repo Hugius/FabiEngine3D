@@ -52,16 +52,19 @@ void Animation3dEditor::_updateFrameMenu()
 				case TransformationType::MOVEMENT:
 				{
 					_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, TransformationType::ROTATION);
+
 					break;
 				}
 				case TransformationType::ROTATION:
 				{
 					_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, TransformationType::SCALING);
+
 					break;
 				}
 				case TransformationType::SCALING:
 				{
 					_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, TransformationType::MOVEMENT);
+
 					break;
 				}
 			}
@@ -79,11 +82,13 @@ void Animation3dEditor::_updateFrameMenu()
 				case SpeedType::LINEAR:
 				{
 					_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, SpeedType::EXPONENTIAL);
+
 					break;
 				}
 				case SpeedType::EXPONENTIAL:
 				{
 					_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, SpeedType::INSTANTLY);
+
 					break;
 				}
 				case SpeedType::INSTANTLY:
@@ -161,16 +166,19 @@ void Animation3dEditor::_updateFrameMenu()
 			case TransformationType::MOVEMENT:
 			{
 				screen->getButton("transformationType")->setTextContent("Type: MOVE");
+
 				break;
 			}
 			case TransformationType::ROTATION:
 			{
 				screen->getButton("transformationType")->setTextContent("Type: ROTATE");
+
 				break;
 			}
 			case TransformationType::SCALING:
 			{
 				screen->getButton("transformationType")->setTextContent("Type: SCALE");
+
 				break;
 			}
 		}
@@ -179,16 +187,19 @@ void Animation3dEditor::_updateFrameMenu()
 			case SpeedType::LINEAR:
 			{
 				screen->getButton("speedType")->setTextContent("Type: LINEAR");
+
 				break;
 			}
 			case SpeedType::EXPONENTIAL:
 			{
 				screen->getButton("speedType")->setTextContent("Type: EXPONENT");
+
 				break;
 			}
 			case SpeedType::INSTANTLY:
 			{
 				screen->getButton("speedType")->setTextContent("Type: INSTANT");
+
 				break;
 			}
 		}

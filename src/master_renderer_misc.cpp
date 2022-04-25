@@ -35,6 +35,7 @@ const string MasterRenderer::getCpuName() const
 		if(nameString[index] != 0)
 		{
 			result = nameString.substr(index);
+
 			break;
 		}
 	}

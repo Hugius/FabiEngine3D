@@ -40,26 +40,32 @@ void SkyEditor::_updateMiscellaneousMenu()
 				case DirectionOrderType::XYZ:
 				{
 					_fe3d->sky_setRotationOrder(_currentSkyId, DirectionOrderType::XZY);
+					break;
 				}
 				case DirectionOrderType::XZY:
 				{
 					_fe3d->sky_setRotationOrder(_currentSkyId, DirectionOrderType::YXZ);
+					break;
 				}
 				case DirectionOrderType::YXZ:
 				{
 					_fe3d->sky_setRotationOrder(_currentSkyId, DirectionOrderType::YZX);
+					break;
 				}
 				case DirectionOrderType::YZX:
 				{
 					_fe3d->sky_setRotationOrder(_currentSkyId, DirectionOrderType::ZXY);
+					break;
 				}
 				case DirectionOrderType::ZXY:
 				{
 					_fe3d->sky_setRotationOrder(_currentSkyId, DirectionOrderType::ZYX);
+					break;
 				}
 				case DirectionOrderType::ZYX:
 				{
 					_fe3d->sky_setRotationOrder(_currentSkyId, DirectionOrderType::XYZ);
+					break;
 				}
 			}
 		}

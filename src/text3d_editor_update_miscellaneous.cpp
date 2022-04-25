@@ -71,26 +71,32 @@ void Text3dEditor::_updateMiscellaneousMenu()
 				case DirectionOrderType::XYZ:
 				{
 					_fe3d->text3d_setRotationOrder(_currentTextId, DirectionOrderType::XZY);
+					break;
 				}
 				case DirectionOrderType::XZY:
 				{
 					_fe3d->text3d_setRotationOrder(_currentTextId, DirectionOrderType::YXZ);
+					break;
 				}
 				case DirectionOrderType::YXZ:
 				{
 					_fe3d->text3d_setRotationOrder(_currentTextId, DirectionOrderType::YZX);
+					break;
 				}
 				case DirectionOrderType::YZX:
 				{
 					_fe3d->text3d_setRotationOrder(_currentTextId, DirectionOrderType::ZXY);
+					break;
 				}
 				case DirectionOrderType::ZXY:
 				{
 					_fe3d->text3d_setRotationOrder(_currentTextId, DirectionOrderType::ZYX);
+					break;
 				}
 				case DirectionOrderType::ZYX:
 				{
 					_fe3d->text3d_setRotationOrder(_currentTextId, DirectionOrderType::XYZ);
+					break;
 				}
 			}
 		}

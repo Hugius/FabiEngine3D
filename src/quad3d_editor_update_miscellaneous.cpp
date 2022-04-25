@@ -71,26 +71,32 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 				case DirectionOrderType::XYZ:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::XZY);
+					break;
 				}
 				case DirectionOrderType::XZY:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::YXZ);
+					break;
 				}
 				case DirectionOrderType::YXZ:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::YZX);
+					break;
 				}
 				case DirectionOrderType::YZX:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::ZXY);
+					break;
 				}
 				case DirectionOrderType::ZXY:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::ZYX);
+					break;
 				}
 				case DirectionOrderType::ZYX:
 				{
 					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::XYZ);
+					break;
 				}
 			}
 		}

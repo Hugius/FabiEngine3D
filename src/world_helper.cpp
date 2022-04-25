@@ -18,6 +18,7 @@ void WorldHelper::copyTemplateSky(const string & newId, const string & templateI
 	_fe3d->sky_setLightness(newId, _fe3d->sky_getLightness(templateId));
 	_fe3d->sky_setRotation(newId, _fe3d->sky_getRotation(templateId));
 	_fe3d->sky_setColor(newId, _fe3d->sky_getColor(templateId));
+	_fe3d->sky_setRotationOrder(newId, _fe3d->sky_getRotationOrder(templateId));
 }
 
 void WorldHelper::copyTemplateTerrain(const string & newId, const string & templateId)
@@ -216,6 +217,7 @@ void WorldHelper::copyTemplateQuad(const string & newId, const string & template
 	_fe3d->quad3d_setLightness(newId, _fe3d->quad3d_getLightness(templateId));
 	_fe3d->quad3d_setOpacity(newId, _fe3d->quad3d_getOpacity(templateId));
 	_fe3d->quad3d_setMinTextureAlpha(newId, _fe3d->quad3d_getMinTextureAlpha(templateId));
+	_fe3d->quad3d_setRotationOrder(newId, _fe3d->quad3d_getRotationOrder(templateId));
 
 	if(_fe3d->quad3d_hasDiffuseMap(templateId))
 	{
@@ -253,6 +255,7 @@ void WorldHelper::copyTemplateText(const string & newId, const string & template
 	_fe3d->text3d_setOpacity(newId, _fe3d->text3d_getOpacity(templateId));
 	_fe3d->text3d_setContent(newId, _fe3d->text3d_getContent(templateId));
 	_fe3d->text3d_setMinTextureAlpha(newId, _fe3d->text3d_getMinTextureAlpha(templateId));
+	_fe3d->text3d_setRotationOrder(newId, _fe3d->text3d_getRotationOrder(templateId));
 
 	_fe3d->aabb_create(newId, false);
 	_fe3d->aabb_setParentId(newId, newId);

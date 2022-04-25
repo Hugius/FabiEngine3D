@@ -546,6 +546,70 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:text3d_get_rotation_order")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText3d(args[0]->getString(), false))
+			{
+				const auto rotationOrder = _fe3d->text3d_getRotationOrder(args[0]->getString());
+
+				switch(rotationOrder)
+				{
+					case DirectionOrderType::XYZ:
+					{
+						const auto result = "XYZ";
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+						break;
+					}
+					case DirectionOrderType::XZY:
+					{
+						const auto result = "XZY";
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+						break;
+					}
+					case DirectionOrderType::YXZ:
+					{
+						const auto result = "YXZ";
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+						break;
+					}
+					case DirectionOrderType::YZX:
+					{
+						const auto result = "YZX";
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+						break;
+					}
+					case DirectionOrderType::ZXY:
+					{
+						const auto result = "ZXY";
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+						break;
+					}
+					case DirectionOrderType::ZYX:
+					{
+						const auto result = "ZYX";
+
+						returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, result));
+
+						break;
+					}
+				}
+			}
+		}
+	}
 	else
 	{
 		return false;

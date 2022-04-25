@@ -50,6 +50,7 @@
 - `fe3d:quad3d_set_max_clip_position` (`STR` id, `DEC` x, `DEC` y, `DEC` z) -----> `NONE`
 - `fe3d:quad3d_set_horizontally_flipped` (`STR` id, `BOL` value) -----> `NONE`
 - `fe3d:quad3d_set_vertically_flipped` (`STR` id, `BOL` value) -----> `NONE`
+- `fe3d:quad3d_set_rotation_order` (`STR` id, `STR` value) -----> `NONE`
 
 ## Getters
 
@@ -109,3 +110,4 @@
 - `fe3d:quad3d_get_animation_play_count` (`STR` quad_id, `STR` animation_id) -----> `INT`
 - `fe3d:quad3d_get_animation_interval_multiplier` (`STR` quad_id, `STR` animation_id) -----> `INT`
 - `fe3d:quad3d_get_animation_interval_divider` (`STR` quad_id, `STR` animation_id) -----> `INT`
+- `fe3d:quad3d_get_rotation_order` (`STR` id) -----> `STR`

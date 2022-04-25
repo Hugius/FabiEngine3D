@@ -44,7 +44,7 @@ void SkyEntity::updateTransformation()
 	_transformation = Mathematics::createRotationMatrix(
 		Mathematics::convertToRadians(_rotation.x),
 		Mathematics::convertToRadians(_rotation.y),
-		Mathematics::convertToRadians(_rotation.z), DirectionOrderType::YXZ);
+		Mathematics::convertToRadians(_rotation.z), _rotationOrder);
 }
 
 void SkyEntity::setCubeMapPaths(const array<string, 6> & value)
@@ -96,6 +96,11 @@ void SkyEntity::setWireframeColor(const fvec3 & value)
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
+void SkyEntity::setRotationOrder(DirectionOrderType value)
+{
+	_rotationOrder = value;
+}
+
 const shared_ptr<VertexBuffer> SkyEntity::getVertexBuffer() const
 {
 	return _vertexBuffer;
@@ -139,4 +144,9 @@ const fvec3 & SkyEntity::getRotation() const
 const bool SkyEntity::isWireframed() const
 {
 	return _isWireframed;
+}
+
+const DirectionOrderType SkyEntity::getRotationOrder() const
+{
+	return _rotationOrder;
 }

@@ -238,6 +238,11 @@ void EngineInterface::quad3d_setVerticallyFlipped(const string & id, bool value)
 	_core->getQuad3dEntityManager()->getEntity(id)->setVerticallyFlipped(value);
 }
 
+void EngineInterface::quad3d_setRotationOrder(const string & id, DirectionOrderType value)
+{
+	_core->getQuad3dEntityManager()->getEntity(id)->setRotationOrder(value);
+}
+
 void EngineInterface::quad3d_setFacingCameraHorizontally(const string & id, bool value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setFacingCameraHorizontally(value);
@@ -514,6 +519,11 @@ const bool EngineInterface::quad3d_isHorizontallyFlipped(const string & id) cons
 const bool EngineInterface::quad3d_isVerticallyFlipped(const string & id) const
 {
 	return _core->getQuad3dEntityManager()->getEntity(id)->isVerticallyFlipped();
+}
+
+const DirectionOrderType EngineInterface::quad3d_getRotationOrder(const string & id) const
+{
+	return _core->getQuad3dEntityManager()->getEntity(id)->getRotationOrder();
 }
 
 const bool EngineInterface::quad3d_isWireframed(const string & id) const

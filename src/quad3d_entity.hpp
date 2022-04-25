@@ -50,6 +50,7 @@ public:
 	void setMinTextureAlpha(float value);
 	void setHorizontallyFlipped(bool value);
 	void setVerticallyFlipped(bool value);
+	void setRotationOrder(DirectionOrderType value);
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;
@@ -88,6 +89,8 @@ public:
 	const bool isCentered() const;
 	const bool isHorizontallyFlipped() const;
 	const bool isVerticallyFlipped() const;
+
+	const DirectionOrderType getRotationOrder() const;
 
 private:
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
@@ -133,4 +136,6 @@ private:
 	bool _isCentered = false;
 	bool _isHorizontallyFlipped = false;
 	bool _isVerticallyFlipped = false;
+
+	DirectionOrderType _rotationOrder = DirectionOrderType::YXZ;
 };

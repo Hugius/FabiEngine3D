@@ -120,6 +120,11 @@ void EngineInterface::text3d_setVerticallyFlipped(const string & id, bool value)
 	_core->getText3dEntityManager()->getEntity(id)->setVerticallyFlipped(value);
 }
 
+void EngineInterface::text3d_setRotationOrder(const string & id, DirectionOrderType value)
+{
+	_core->getText3dEntityManager()->getEntity(id)->setRotationOrder(value);
+}
+
 void EngineInterface::text3d_setFacingCameraHorizontally(const string & id, bool value)
 {
 	_core->getText3dEntityManager()->getEntity(id)->setFacingCameraHorizontally(value);
@@ -301,6 +306,11 @@ const bool EngineInterface::text3d_isHorizontallyFlipped(const string & id) cons
 const bool EngineInterface::text3d_isVerticallyFlipped(const string & id) const
 {
 	return _core->getText3dEntityManager()->getEntity(id)->isVerticallyFlipped();
+}
+
+const DirectionOrderType EngineInterface::text3d_getRotationOrder(const string & id) const
+{
+	return _core->getText3dEntityManager()->getEntity(id)->getRotationOrder();
 }
 
 const bool EngineInterface::text3d_isWireframed(const string & id) const

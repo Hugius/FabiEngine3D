@@ -45,6 +45,7 @@ public:
 	void setFrozen(bool value);
 	void setHorizontallyFlipped(bool value);
 	void setVerticallyFlipped(bool value);
+	void setRotationOrder(DirectionOrderType value);
 	void setVisible(bool value) override;
 
 	const vector<shared_ptr<Quad3dEntity>> & getCharacterEntities() const;
@@ -82,6 +83,8 @@ public:
 	const bool isCentered() const;
 	const bool isHorizontallyFlipped() const;
 	const bool isVerticallyFlipped() const;
+
+	const DirectionOrderType getRotationOrder() const;
 
 private:
 	static inline const unordered_map<char, ivec2> _fontMapIndices =
@@ -227,4 +230,6 @@ private:
 	bool _isCentered = false;
 	bool _isHorizontallyFlipped = false;
 	bool _isVerticallyFlipped = false;
+
+	DirectionOrderType _rotationOrder = DirectionOrderType::YXZ;
 };

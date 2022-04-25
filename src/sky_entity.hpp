@@ -26,6 +26,7 @@ public:
 	void rotateTo(const fvec3 & target, float speed);
 	void setWireframed(bool value);
 	void setWireframeColor(const fvec3 & value);
+	void setRotationOrder(DirectionOrderType value);
 
 	const array<string, 6> & getCubeMapPaths() const;
 
@@ -41,6 +42,8 @@ public:
 	const float getLightness() const;
 
 	const bool isWireframed() const;
+
+	const DirectionOrderType getRotationOrder() const;
 
 private:
 	array<string, 6> _cubeMapPaths = {"", "", "", "", "", ""};
@@ -59,4 +62,6 @@ private:
 	float _lightness = 1.0f;
 
 	bool _isWireframed = false;
+
+	DirectionOrderType _rotationOrder = DirectionOrderType::YXZ;
 };

@@ -78,7 +78,7 @@ void Text3dEntity::updateCharacterEntities()
 	const auto rotationMatrix = Mathematics::createRotationMatrix(
 		Mathematics::convertToRadians(_rotation.x),
 		Mathematics::convertToRadians(_rotation.y),
-		Mathematics::convertToRadians(_rotation.z), DirectionOrderType::YXZ);
+		Mathematics::convertToRadians(_rotation.z), _rotationOrder);
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
@@ -343,6 +343,11 @@ void Text3dEntity::setVerticallyFlipped(bool value)
 	}
 }
 
+void Text3dEntity::setRotationOrder(DirectionOrderType value)
+{
+	_rotationOrder = value;
+}
+
 void Text3dEntity::setVisible(bool value)
 {
 	_isVisible = value;
@@ -544,6 +549,11 @@ const bool Text3dEntity::isHorizontallyFlipped() const
 const bool Text3dEntity::isVerticallyFlipped() const
 {
 	return _isVerticallyFlipped;
+}
+
+const DirectionOrderType Text3dEntity::getRotationOrder() const
+{
+	return _rotationOrder;
 }
 
 const bool Text3dEntity::isFrozen() const

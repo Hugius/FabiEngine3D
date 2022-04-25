@@ -148,6 +148,11 @@ void EngineInterface::sky_setWireframeColor(const string & id, const fvec3 & val
 	_core->getSkyEntityManager()->getEntity(id)->setWireframeColor(value);
 }
 
+void EngineInterface::sky_setRotationOrder(const string & id, DirectionOrderType value)
+{
+	_core->getSkyEntityManager()->getEntity(id)->setRotationOrder(value);
+}
+
 const string EngineInterface::sky_getSelectedId() const
 {
 	if(_core->getSkyEntityManager()->getSelectedEntity() == nullptr)
@@ -268,4 +273,9 @@ const bool EngineInterface::sky_hasBackCubeMap(const string & id) const
 const bool EngineInterface::sky_hasFrontCubeMap(const string & id) const
 {
 	return ((_core->getSkyEntityManager()->getEntity(id)->getCubeTextureBuffer() != nullptr) && !_core->getSkyEntityManager()->getEntity(id)->getCubeMapPaths()[5].empty());
+}
+
+const DirectionOrderType EngineInterface::sky_getRotationOrder(const string & id) const
+{
+	return _core->getSkyEntityManager()->getEntity(id)->getRotationOrder();
 }

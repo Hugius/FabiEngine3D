@@ -66,6 +66,7 @@ public:
 	void sky_setColor(const string & id, const fvec3 & value);
 	void sky_setWireframed(const string & id, bool value);
 	void sky_setWireframeColor(const string & id, const fvec3 & value);
+	void sky_setRotationOrder(const string & id, DirectionOrderType value);
 
 	const vector<string> sky_getIds() const;
 	const array<string, 6> & sky_getCubeMapPaths(const string & id) const;
@@ -89,6 +90,7 @@ public:
 	const bool sky_hasBottomCubeMap(const string & id) const;
 	const bool sky_hasBackCubeMap(const string & id) const;
 	const bool sky_hasFrontCubeMap(const string & id) const;
+	const DirectionOrderType sky_getRotationOrder(const string & id) const;
 
 	void terrain_create(const string & id, const string & heightMapPath);
 	void terrain_delete(const string & id);
@@ -373,6 +375,7 @@ public:
 	void quad3d_setAnimationIntervalDivider(const string & quadId, const string & animationId, unsigned int value);
 	void quad3d_setHorizontallyFlipped(const string & id, bool value);
 	void quad3d_setVerticallyFlipped(const string & id, bool value);
+	void quad3d_setRotationOrder(const string & id, DirectionOrderType value);
 
 	const vector<string> quad3d_getIds() const;
 	const vector<string> quad3d_getAnimationIds(const string & id) const;
@@ -414,6 +417,7 @@ public:
 	const bool quad3d_isAnimationAutopaused(const string & quadId, const string & animationId) const;
 	const bool quad3d_isHorizontallyFlipped(const string & id) const;
 	const bool quad3d_isVerticallyFlipped(const string & id) const;
+	const DirectionOrderType quad3d_getRotationOrder(const string & id) const;
 
 	void text3d_create(const string & id, const string & fontMapPath, bool isCentered);
 	void text3d_delete(const string & id);
@@ -444,6 +448,7 @@ public:
 	void text3d_setFrozen(const string & id, bool value);
 	void text3d_setHorizontallyFlipped(const string & id, bool value);
 	void text3d_setVerticallyFlipped(const string & id, bool value);
+	void text3d_setRotationOrder(const string & id, DirectionOrderType value);
 
 	const vector<string> text3d_getIds() const;
 	const vector<string> text3d_getChildAabbIds(const string & id) const;
@@ -470,6 +475,7 @@ public:
 	const bool text3d_isFrozen(const string & id) const;
 	const bool text3d_isHorizontallyFlipped(const string & id) const;
 	const bool text3d_isVerticallyFlipped(const string & id) const;
+	const DirectionOrderType text3d_getRotationOrder(const string & id) const;
 
 	void aabb_create(const string & id, bool isCentered);
 	void aabb_delete(const string & id);

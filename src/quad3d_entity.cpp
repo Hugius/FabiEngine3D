@@ -93,7 +93,7 @@ void Quad3dEntity::updateTransformation()
 	auto rotationMatrix = Mathematics::createRotationMatrix(
 		Mathematics::convertToRadians(_rotation.x),
 		Mathematics::convertToRadians(_rotation.y),
-		Mathematics::convertToRadians(_rotation.z), DirectionOrderType::YXZ);
+		Mathematics::convertToRadians(_rotation.z), _rotationOrder);
 	_transformation = (_transformation * rotationMatrix);
 
 	if(!_isCentered)
@@ -289,6 +289,11 @@ void Quad3dEntity::setVerticallyFlipped(bool value)
 	_isVerticallyFlipped = value;
 }
 
+void Quad3dEntity::setRotationOrder(DirectionOrderType value)
+{
+	_rotationOrder = value;
+}
+
 const shared_ptr<VertexBuffer> Quad3dEntity::getVertexBuffer() const
 {
 	return _vertexBuffer;
@@ -432,6 +437,11 @@ const bool Quad3dEntity::isHorizontallyFlipped() const
 const bool Quad3dEntity::isVerticallyFlipped() const
 {
 	return _isVerticallyFlipped;
+}
+
+const DirectionOrderType Quad3dEntity::getRotationOrder() const
+{
+	return _rotationOrder;
 }
 
 const bool Quad3dEntity::isFrozen() const

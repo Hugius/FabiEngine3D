@@ -19,6 +19,7 @@
 - `fe3d:sky_set_top_cube_map` (`STR` id, `STR` file_path) -----> `NONE`
 - `fe3d:sky_set_back_cube_map` (`STR` id, `STR` file_path) -----> `NONE`
 - `fe3d:sky_set_front_cube_map` (`STR` id, `STR` file_path) -----> `NONE`
+- `fe3d:sky_set_rotation_order` (`STR` id, `STR` value) -----> `NONE`
 
 ## Getters
 
@@ -48,3 +49,4 @@
 - `fe3d:sky_get_top_cube_map_path` (`STR` id) -----> `STR`
 - `fe3d:sky_get_back_cube_map_path` (`STR` id) -----> `STR`
 - `fe3d:sky_get_front_cube_map_path` (`STR` id) -----> `STR`
+- `fe3d:sky_get_rotation_order` (`STR` id) -----> `STR`

@@ -254,6 +254,58 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 			}
 		}
 	}
+	else if(functionName == "fe3d:sky_set_rotation_order")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky(args[0]->getString(), false))
+			{
+				if(args[1]->getString() == "XYZ")
+				{
+					_fe3d->sky_setRotationOrder(args[0]->getString(), DirectionOrderType::XYZ);
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				}
+				else if(args[1]->getString() == "XZY")
+				{
+					_fe3d->sky_setRotationOrder(args[0]->getString(), DirectionOrderType::XZY);
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				}
+				else if(args[1]->getString() == "YXZ")
+				{
+					_fe3d->sky_setRotationOrder(args[0]->getString(), DirectionOrderType::YXZ);
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				}
+				else if(args[1]->getString() == "YZX")
+				{
+					_fe3d->sky_setRotationOrder(args[0]->getString(), DirectionOrderType::YZX);
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				}
+				else if(args[1]->getString() == "ZXY")
+				{
+					_fe3d->sky_setRotationOrder(args[0]->getString(), DirectionOrderType::ZXY);
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				}
+				else if(args[1]->getString() == "ZYX")
+				{
+					_fe3d->sky_setRotationOrder(args[0]->getString(), DirectionOrderType::ZYX);
+
+					returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				}
+				else
+				{
+					_throwRuntimeError("rotation order is invalid");
+					return true;
+				}
+			}
+		}
+	}
 	else
 	{
 		return false;

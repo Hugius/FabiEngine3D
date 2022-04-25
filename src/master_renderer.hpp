@@ -30,7 +30,7 @@
 #include "aabb_entity_manager.hpp"
 #include "pointlight_entity_manager.hpp"
 #include "spotlight_entity_manager.hpp"
-#include "reflection_entity_manager.hpp"
+#include "captor_entity_manager.hpp"
 #include "quad2d_entity_manager.hpp"
 #include "text2d_entity_manager.hpp"
 #include "aabb_entity_depth_renderer.hpp"
@@ -53,7 +53,7 @@ public:
 	void inject(shared_ptr<AabbEntityManager> aabbEntityManager);
 	void inject(shared_ptr<PointlightEntityManager> pointlightEntityManager);
 	void inject(shared_ptr<SpotlightEntityManager> spotlightEntityManager);
-	void inject(shared_ptr<ReflectionEntityManager> reflectionEntityManager);
+	void inject(shared_ptr<CaptorEntityManager> captorEntityManager);
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<Timer> timer);
@@ -154,7 +154,7 @@ private:
 	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
 	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
 	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
-	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
+	shared_ptr<CaptorEntityManager> _captorEntityManager = nullptr;
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<Timer> _timer = nullptr;

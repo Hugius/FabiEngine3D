@@ -87,7 +87,7 @@
     <ClCompile Include="..\..\..\src\engine_interface_entity_quad3d.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_interface_entity_reflection.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_captor.cpp">
       <Filter>Interface\Entity\3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_interface_entity_sky.cpp">

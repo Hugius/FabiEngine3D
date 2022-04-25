@@ -107,9 +107,9 @@ void WorldEditor::clearLoadedWorld()
 		}
 	}
 
-	for(const auto & id : _loadedReflectionIds)
+	for(const auto & id : _loadedCaptorIds)
 	{
-		_fe3d->reflection_delete(id);
+		_fe3d->captor_delete(id);
 
 		if(isLoaded())
 		{
@@ -132,7 +132,7 @@ void WorldEditor::clearLoadedWorld()
 	_loadedTextIds.clear();
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
-	_loadedReflectionIds.clear();
+	_loadedCaptorIds.clear();
 	_loadedSoundIds.clear();
 	_loadedWorldId = "";
 	_idCounter = 0;

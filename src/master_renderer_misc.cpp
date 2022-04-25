@@ -143,9 +143,9 @@ void MasterRenderer::inject(shared_ptr<SpotlightEntityManager> spotlightEntityMa
 	_spotlightEntityManager = spotlightEntityManager;
 }
 
-void MasterRenderer::inject(shared_ptr<ReflectionEntityManager> reflectionEntityManager)
+void MasterRenderer::inject(shared_ptr<CaptorEntityManager> captorEntityManager)
 {
-	_reflectionEntityManager = reflectionEntityManager;
+	_captorEntityManager = captorEntityManager;
 }
 
 void MasterRenderer::inject(shared_ptr<RenderStorage> renderStorage)

@@ -30,7 +30,7 @@ void WorldEditor::_updatePointlightMenu()
 			_deactivateSound();
 			_deactivatePointlight();
 			_deactivateSpotlight();
-			_deactivateReflection();
+			_deactivateCaptor();
 
 			_isPlacingPointlight = true;
 			_fe3d->model_setVisible(TEMPLATE_LAMP_ID, true);
@@ -88,7 +88,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateReflection();
+				_deactivateCaptor();
 
 				_activatePointlight(hoveredOptionId);
 			}

@@ -136,7 +136,7 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 	_shaderBuffer->uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, const unordered_map<string, shared_ptr<ReflectionEntity>> & reflectionEntities)
+void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, const unordered_map<string, shared_ptr<CaptorEntity>> & captorEntities)
 {
 	if(!entity->isVisible())
 	{
@@ -152,20 +152,20 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 	_shaderBuffer->uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
 	_shaderBuffer->uploadUniform("u_cameraView", (entity->isFrozen() ? mat44(mat33(_camera->getView())) : _camera->getView()));
 
-	if(!entity->getPreviousReflectionEntityId().empty())
+	if(!entity->getPreviousCaptorEntityId().empty())
 	{
-		if(reflectionEntities.at(entity->getPreviousReflectionEntityId())->getCubeTextureBuffer() != nullptr)
+		if(captorEntities.at(entity->getPreviousCaptorEntityId())->getCubeTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getPreviousReflectionEntityId())->getCubeTextureBuffer()->getTboId());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, captorEntities.at(entity->getPreviousCaptorEntityId())->getCubeTextureBuffer()->getTboId());
 		}
 	}
-	if(!entity->getCurrentReflectionEntityId().empty())
+	if(!entity->getCurrentCaptorEntityId().empty())
 	{
-		if(reflectionEntities.at(entity->getCurrentReflectionEntityId())->getCubeTextureBuffer() != nullptr)
+		if(captorEntities.at(entity->getCurrentCaptorEntityId())->getCubeTextureBuffer() != nullptr)
 		{
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getCurrentReflectionEntityId())->getCubeTextureBuffer()->getTboId());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, captorEntities.at(entity->getCurrentCaptorEntityId())->getCubeTextureBuffer()->getTboId());
 		}
 	}
 
@@ -274,12 +274,12 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		}
 	}
 
-	if(entity->getPreviousReflectionEntityId().empty())
+	if(entity->getPreviousCaptorEntityId().empty())
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
-	if(entity->getCurrentReflectionEntityId().empty())
+	if(entity->getCurrentCaptorEntityId().empty())
 	{
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);

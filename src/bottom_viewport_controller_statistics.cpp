@@ -148,17 +148,17 @@ void BottomViewportController::_updateStatistics()
 	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0))
 	{
 		unsigned int entityCount = 0;
-		for(const auto & entityId : _fe3d->reflection_getIds())
+		for(const auto & entityId : _fe3d->captor_getIds())
 		{
-			if(_fe3d->reflection_isVisible(entityId))
+			if(_fe3d->captor_isVisible(entityId))
 			{
 				entityCount++;
 			}
 		}
 
-		const auto text = ("Reflection Entities: " + to_string(entityCount));
+		const auto text = ("Captor Entities: " + to_string(entityCount));
 
-		statisticsScreen->getTextField("reflectionEntityCount")->setTextContent(text);
+		statisticsScreen->getTextField("captorEntityCount")->setTextContent(text);
 	}
 
 	if((_fe3d->misc_getPassedUpdateCount() == 0) || ((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0))

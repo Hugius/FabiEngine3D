@@ -4,7 +4,7 @@
 #include "mesh_loader.hpp"
 #include "timer.hpp"
 #include "model_entity.hpp"
-#include "reflection_entity_manager.hpp"
+#include "captor_entity_manager.hpp"
 #include "vertex_buffer_cache.hpp"
 #include "camera.hpp"
 
@@ -18,7 +18,7 @@ public:
 	void inject(shared_ptr<RenderStorage> renderStorage);
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<Timer> timer);
-	void inject(shared_ptr<ReflectionEntityManager> reflectionManager);
+	void inject(shared_ptr<CaptorEntityManager> captorEntityManager);
 	void inject(shared_ptr<MeshLoader> meshLoader);
 	void inject(shared_ptr<VertexBufferCache> vertexBufferCache);
 	void update();
@@ -41,7 +41,7 @@ private:
 	shared_ptr<RenderStorage> _renderStorage = nullptr;
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
-	shared_ptr<ReflectionEntityManager> _reflectionManager = nullptr;
+	shared_ptr<CaptorEntityManager> _captorEntityManager = nullptr;
 	shared_ptr<MeshLoader> _meshLoader = nullptr;
 	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
 };

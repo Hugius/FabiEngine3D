@@ -341,14 +341,14 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & reflectionId : _loadedReflectionIds)
+	for(const auto & captorId : _loadedCaptorIds)
 	{
-		auto position = _fe3d->reflection_getPosition(reflectionId);
-		auto exceptionEntityId = _fe3d->reflection_getExceptionEntityId(reflectionId);
+		auto position = _fe3d->captor_getPosition(captorId);
+		auto exceptionEntityId = _fe3d->captor_getExceptionEntityId(captorId);
 
 		file
-			<< "REFLECTION "
-			<< reflectionId
+			<< "CAPTOR "
+			<< captorId
 			<< " "
 			<< position.x
 			<< " "

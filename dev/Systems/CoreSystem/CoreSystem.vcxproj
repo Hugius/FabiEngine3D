@@ -165,7 +165,7 @@
     <ClCompile Include="..\..\..\src\engine_interface_entity_quad2d.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_model.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_pointlight.cpp" />
-    <ClCompile Include="..\..\..\src\engine_interface_entity_reflection.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_captor.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_sky.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_terrain.cpp" />
     <ClCompile Include="..\..\..\src\engine_interface_entity_text2d.cpp" />

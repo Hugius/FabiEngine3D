@@ -120,14 +120,14 @@ void CustomWorldBuilder::addSpotlight(const string & id)
 	_addedSpotlightIds.push_back(id);
 }
 
-void CustomWorldBuilder::addReflection(const string & id)
+void CustomWorldBuilder::addCaptor(const string & id)
 {
-	if(find(_addedReflectionIds.begin(), _addedReflectionIds.end(), id) != _addedReflectionIds.end())
+	if(find(_addedCaptorIds.begin(), _addedCaptorIds.end(), id) != _addedCaptorIds.end())
 	{
 		abort();
 	}
 
-	_addedReflectionIds.push_back(id);
+	_addedCaptorIds.push_back(id);
 }
 
 void CustomWorldBuilder::clearLoadedWorld()
@@ -228,9 +228,9 @@ void CustomWorldBuilder::clearLoadedWorld()
 		_fe3d->spotlight_delete(id);
 	}
 
-	for(const auto & id : _loadedReflectionIds)
+	for(const auto & id : _loadedCaptorIds)
 	{
-		_fe3d->reflection_delete(id);
+		_fe3d->captor_delete(id);
 	}
 
 	for(const auto & id : _loadedSound3dIds)
@@ -247,7 +247,7 @@ void CustomWorldBuilder::clearLoadedWorld()
 	_loadedAabbIds.clear();
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
-	_loadedReflectionIds.clear();
+	_loadedCaptorIds.clear();
 	_loadedSound3dIds.clear();
 	_loadedWorldId = "";
 	_isGraphicsLoaded = false;
@@ -303,9 +303,9 @@ const bool CustomWorldBuilder::isSpotlightAdded(const string & id) const
 	return find(_addedSpotlightIds.begin(), _addedSpotlightIds.end(), id) != _addedSpotlightIds.end();
 }
 
-const bool CustomWorldBuilder::isReflectionAdded(const string & id) const
+const bool CustomWorldBuilder::isCaptorAdded(const string & id) const
 {
-	return find(_addedReflectionIds.begin(), _addedReflectionIds.end(), id) != _addedReflectionIds.end();
+	return find(_addedCaptorIds.begin(), _addedCaptorIds.end(), id) != _addedCaptorIds.end();
 }
 
 const bool CustomWorldBuilder::isSound3dAdded(const string & id) const
@@ -329,7 +329,7 @@ void CustomWorldBuilder::resetWorldBuild()
 	_addedAabbIds.clear();
 	_addedPointlightIds.clear();
 	_addedSpotlightIds.clear();
-	_addedReflectionIds.clear();
+	_addedCaptorIds.clear();
 	_addedSound3dIds.clear();
 	_isGraphicsAdded = false;
 }

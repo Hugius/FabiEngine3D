@@ -23,8 +23,8 @@ public:
 	void setFrozen(bool value);
 	void setLevelOfDetailed(bool value);
 	void setLevelOfDetailEntityId(const string & value);
-	void setPreviousReflectionEntityId(const string & value);
-	void setCurrentReflectionEntityId(const string & value);
+	void setPreviousCaptorEntityId(const string & value);
+	void setCurrentCaptorEntityId(const string & value);
 	void setCubeReflectionMixValue(float value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
@@ -90,8 +90,8 @@ public:
 
 	const string & getMeshPath() const;
 	const string & getLevelOfDetailEntityId() const;
-	const string & getPreviousReflectionEntityId() const;
-	const string & getCurrentReflectionEntityId() const;
+	const string & getPreviousCaptorEntityId() const;
+	const string & getCurrentCaptorEntityId() const;
 	const string & getDiffuseMapPath(const string & partId) const;
 	const string & getEmissionMapPath(const string & partId) const;
 	const string & getSpecularMapPath(const string & partId) const;
@@ -147,8 +147,8 @@ private:
 
 	string _meshPath = "";
 	string _levelOfDetailEntityId = "";
-	string _previousReflectionEntityId = "";
-	string _currentReflectionEntityId = "";
+	string _previousCaptorEntityId = "";
+	string _currentCaptorEntityId = "";
 
 	fvec3 _basePosition = fvec3(0.0f);
 	fvec3 _baseRotation = fvec3(0.0f);

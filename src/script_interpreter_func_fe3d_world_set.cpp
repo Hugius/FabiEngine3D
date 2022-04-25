@@ -204,19 +204,19 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:world_add_custom_reflection")
+	else if(functionName == "fe3d:world_add_custom_captor")
 	{
 		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_customWorldBuilder->isReflectionAdded(args[0]->getString()))
+			if(_customWorldBuilder->isCaptorAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
 				return true;
 			}
 
-			_customWorldBuilder->addReflection(args[0]->getString());
+			_customWorldBuilder->addCaptor(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

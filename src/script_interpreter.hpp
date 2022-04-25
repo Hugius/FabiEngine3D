@@ -112,8 +112,8 @@ private:
 	const bool _executeFe3dPointlightGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSpotlightSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSpotlightGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
-	const bool _executeFe3dReflectionSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
-	const bool _executeFe3dReflectionGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
+	const bool _executeFe3dCaptorSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
+	const bool _executeFe3dCaptorGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSound3dSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSound3dGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSound2dSetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
@@ -151,7 +151,7 @@ private:
 	const bool _validateFe3dText2d(const string & id, bool isTemplate);
 	const bool _validateFe3dPointlight(const string & id);
 	const bool _validateFe3dSpotlight(const string & id);
-	const bool _validateFe3dReflection(const string & id);
+	const bool _validateFe3dCaptor(const string & id);
 	const bool _validateFe3dSound3d(const string & id, bool isTemplate);
 	const bool _validateFe3dSound2d(const string & id, bool isTemplate);
 	const bool _validateFe3dAnimation2d(const string & id);

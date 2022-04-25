@@ -38,9 +38,9 @@ void ModelEntityManager::inject(shared_ptr<Timer> timer)
 	_timer = timer;
 }
 
-void ModelEntityManager::inject(shared_ptr<ReflectionEntityManager> reflectionManager)
+void ModelEntityManager::inject(shared_ptr<CaptorEntityManager> captorEntityManager)
 {
-	_reflectionManager = reflectionManager;
+	_captorEntityManager = captorEntityManager;
 }
 
 void ModelEntityManager::inject(shared_ptr<MeshLoader> meshLoader)
@@ -164,46 +164,46 @@ void ModelEntityManager::update()
 			entity->setLevelOfDetailed((absolsuteDistance > entity->getLevelOfDetailDistance()));
 		}
 
-		if(_reflectionManager->getEntities().find(entity->getPreviousReflectionEntityId()) == _reflectionManager->getEntities().end())
+		if(_captorEntityManager->getEntities().find(entity->getPreviousCaptorEntityId()) == _captorEntityManager->getEntities().end())
 		{
-			entity->setPreviousReflectionEntityId("");
+			entity->setPreviousCaptorEntityId("");
 			entity->setCubeReflectionMixValue(1.0f);
 		}
-		if(_reflectionManager->getEntities().find(entity->getCurrentReflectionEntityId()) == _reflectionManager->getEntities().end())
+		if(_captorEntityManager->getEntities().find(entity->getCurrentCaptorEntityId()) == _captorEntityManager->getEntities().end())
 		{
-			entity->setCurrentReflectionEntityId("");
+			entity->setCurrentCaptorEntityId("");
 			entity->setCubeReflectionMixValue(1.0f);
 		}
-		if(entity->getPreviousReflectionEntityId() == entity->getCurrentReflectionEntityId())
+		if(entity->getPreviousCaptorEntityId() == entity->getCurrentCaptorEntityId())
 		{
-			entity->setPreviousReflectionEntityId("");
+			entity->setPreviousCaptorEntityId("");
 			entity->setCubeReflectionMixValue(1.0f);
 		}
 
 		if((_renderStorage->getCubeReflectionInterval() == 0) || (_timer->getPassedUpdateCount() % _renderStorage->getCubeReflectionInterval()) == 0)
 		{
-			map<float, shared_ptr<ReflectionEntity>> orderedReflectionEntities;
+			map<float, shared_ptr<CaptorEntity>> orderedCaptorEntities;
 
-			for(const auto & [reflectionEntityId, reflectionEntity] : _reflectionManager->getEntities())
+			for(const auto & [captorEntityId, captorEntity] : _captorEntityManager->getEntities())
 			{
-				if(reflectionEntity->isVisible())
+				if(captorEntity->isVisible())
 				{
-					const auto absoluteDistance = Mathematics::calculateDistance(entity->getBasePosition(), reflectionEntity->getPosition());
+					const auto absoluteDistance = Mathematics::calculateDistance(entity->getBasePosition(), captorEntity->getPosition());
 
-					orderedReflectionEntities.insert({absoluteDistance, reflectionEntity});
+					orderedCaptorEntities.insert({absoluteDistance, captorEntity});
 				}
 			}
 
-			if(!orderedReflectionEntities.empty())
+			if(!orderedCaptorEntities.empty())
 			{
-				const auto closestReflectionEntityId = orderedReflectionEntities.begin()->second->getId();
+				const auto closestCaptorEntityId = orderedCaptorEntities.begin()->second->getId();
 
-				if(entity->getCurrentReflectionEntityId() != closestReflectionEntityId)
+				if(entity->getCurrentCaptorEntityId() != closestCaptorEntityId)
 				{
-					entity->setPreviousReflectionEntityId(entity->getCurrentReflectionEntityId());
-					entity->setCurrentReflectionEntityId(closestReflectionEntityId);
+					entity->setPreviousCaptorEntityId(entity->getCurrentCaptorEntityId());
+					entity->setCurrentCaptorEntityId(closestCaptorEntityId);
 
-					if(!entity->getPreviousReflectionEntityId().empty())
+					if(!entity->getPreviousCaptorEntityId().empty())
 					{
 						entity->setCubeReflectionMixValue(0.0f);
 					}

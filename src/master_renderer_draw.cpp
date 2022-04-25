@@ -143,7 +143,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 				levelOfDetailEntity->setVisible(entity->isVisible());
 				levelOfDetailEntity->updateTransformation();
 
-				_modelEntityColorRenderer->render(levelOfDetailEntity, _reflectionEntityManager->getEntities());
+				_modelEntityColorRenderer->render(levelOfDetailEntity, _captorEntityManager->getEntities());
 
 				levelOfDetailEntity->setBasePosition(originalPosition);
 				levelOfDetailEntity->setBaseRotation(originalRotation);
@@ -153,7 +153,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer->render(entity, _reflectionEntityManager->getEntities());
+				_modelEntityColorRenderer->render(entity, _captorEntityManager->getEntities());
 			}
 		}
 
@@ -204,7 +204,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 				levelOfDetailEntity->setVisible(entity->isVisible());
 				levelOfDetailEntity->updateTransformation();
 
-				_modelEntityColorRenderer->render(levelOfDetailEntity, _reflectionEntityManager->getEntities());
+				_modelEntityColorRenderer->render(levelOfDetailEntity, _captorEntityManager->getEntities());
 
 				levelOfDetailEntity->setBasePosition(originalPosition);
 				levelOfDetailEntity->setBaseRotation(originalRotation);
@@ -214,7 +214,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer->render(entity, _reflectionEntityManager->getEntities());
+				_modelEntityColorRenderer->render(entity, _captorEntityManager->getEntities());
 			}
 		}
 

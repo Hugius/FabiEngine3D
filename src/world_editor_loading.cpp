@@ -421,13 +421,13 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_loadedSpotlightIds.push_back(spotlightId);
 		}
-		else if(lineType == "REFLECTION")
+		else if(lineType == "CAPTOR")
 		{
-			string reflectionId, exceptionEntityId;
+			string captorId, exceptionEntityId;
 			fvec3 position;
 
 			iss
-				>> reflectionId
+				>> captorId
 				>> position.x
 				>> position.y
 				>> position.z
@@ -435,7 +435,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			if(isLoaded())
 			{
-				const string newModelId = ("@@camera_" + reflectionId);
+				const string newModelId = ("@@camera_" + captorId);
 				_fe3d->model_create(newModelId, "engine\\assets\\mesh\\camera.obj");
 				_fe3d->model_setBasePosition(newModelId, position);
 				_fe3d->model_setBaseSize(newModelId, DEFAULT_CAMERA_SIZE);
@@ -449,12 +449,12 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				_fe3d->aabb_setCollisionResponsive(newModelId, false);
 			}
 
-			_fe3d->reflection_create(reflectionId);
-			_fe3d->reflection_setPosition(reflectionId, position);
-			_fe3d->reflection_setExceptionEntityId(reflectionId, (_fe3d->model_isExisting(exceptionEntityId) ? exceptionEntityId : ""));
-			_fe3d->reflection_capture(reflectionId);
+			_fe3d->captor_create(captorId);
+			_fe3d->captor_setPosition(captorId, position);
+			_fe3d->captor_setExceptionEntityId(captorId, (_fe3d->model_isExisting(exceptionEntityId) ? exceptionEntityId : ""));
+			_fe3d->captor_capture(captorId);
 
-			_loadedReflectionIds.push_back(reflectionId);
+			_loadedCaptorIds.push_back(captorId);
 		}
 		else if(lineType == "LIGHTING_AMBIENT")
 		{

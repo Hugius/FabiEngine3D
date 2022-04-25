@@ -17,7 +17,7 @@ public:
 	void addAabb(const string & id);
 	void addPointlight(const string & id);
 	void addSpotlight(const string & id);
-	void addReflection(const string & id);
+	void addCaptor(const string & id);
 	void addSound(const string & id);
 	void addGraphics();
 	void clearLoadedWorld();
@@ -35,7 +35,7 @@ public:
 	const bool isAabbAdded(const string & id) const;
 	const bool isPointlightAdded(const string & id) const;
 	const bool isSpotlightAdded(const string & id) const;
-	const bool isReflectionAdded(const string & id) const;
+	const bool isCaptorAdded(const string & id) const;
 	const bool isSound3dAdded(const string & id) const;
 	const bool isGraphicsAdded() const;
 
@@ -49,7 +49,7 @@ private:
 	vector<string> _addedAabbIds = {};
 	vector<string> _addedPointlightIds = {};
 	vector<string> _addedSpotlightIds = {};
-	vector<string> _addedReflectionIds = {};
+	vector<string> _addedCaptorIds = {};
 	vector<string> _addedSound3dIds = {};
 	vector<string> _loadedSkyIds = {};
 	vector<string> _loadedTerrainIds = {};
@@ -60,7 +60,7 @@ private:
 	vector<string> _loadedAabbIds = {};
 	vector<string> _loadedPointlightIds = {};
 	vector<string> _loadedSpotlightIds = {};
-	vector<string> _loadedReflectionIds = {};
+	vector<string> _loadedCaptorIds = {};
 	vector<string> _loadedSound3dIds = {};
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;

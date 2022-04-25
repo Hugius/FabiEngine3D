@@ -37,7 +37,7 @@ void BottomViewportController::initialize()
 	statisticsScreen->createTextField("quad3dEntityCount", fvec2(-1.0f, -0.35f), CHAR_SIZE, "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("aabbEntityCount", fvec2(-1.0f, -0.5f), CHAR_SIZE, "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("lightEntityCount", fvec2(-1.0f, -0.65f), CHAR_SIZE, "", fvec3(1.0f), false);
-	statisticsScreen->createTextField("reflectionEntityCount", fvec2(-1.0f, -0.8f), CHAR_SIZE, "", fvec3(1.0f), false);
+	statisticsScreen->createTextField("captorEntityCount", fvec2(-1.0f, -0.8f), CHAR_SIZE, "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("quad2dEntityCount", fvec2(-1.0f, -0.95f), CHAR_SIZE, "", fvec3(1.0f), false);
 
 	int uCounter = 1;

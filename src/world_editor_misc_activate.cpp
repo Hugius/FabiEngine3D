@@ -89,18 +89,18 @@ void WorldEditor::_activateSpotlight(const string & id)
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Spotlight: " + _activeSpotlightId);
 }
 
-void WorldEditor::_activateReflection(const string & id)
+void WorldEditor::_activateCaptor(const string & id)
 {
-	_activeReflectionId = id;
+	_activeCaptorId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	const auto position = _fe3d->reflection_getPosition(_activeReflectionId);
+	const auto position = _fe3d->captor_getPosition(_activeCaptorId);
 
-	rightWindow->getScreen("reflectionPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("reflectionPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("reflectionPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	rightWindow->getScreen("captorPropertiesMenu")->getInputBox("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("captorPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("captorPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Reflection: " + _activeReflectionId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Captor: " + _activeCaptorId);
 }
 
 void WorldEditor::_activateSound(const string & id)
@@ -171,14 +171,14 @@ void WorldEditor::_deactivateSpotlight()
 	_activeSpotlightId = "";
 }
 
-void WorldEditor::_deactivateReflection()
+void WorldEditor::_deactivateCaptor()
 {
-	if(!_activeReflectionId.empty())
+	if(!_activeCaptorId.empty())
 	{
-		_deselectReflection(_activeReflectionId);
+		_deselectCaptor(_activeCaptorId);
 	}
 
-	_activeReflectionId = "";
+	_activeCaptorId = "";
 }
 
 void WorldEditor::_deactivateSound()

@@ -17,7 +17,7 @@
 #include "aabb_entity_manager.hpp"
 #include "pointlight_entity_manager.hpp"
 #include "spotlight_entity_manager.hpp"
-#include "reflection_entity_manager.hpp"
+#include "captor_entity_manager.hpp"
 #include "quad2d_entity_manager.hpp"
 #include "text2d_entity_manager.hpp"
 #include "raycast_calculator.hpp"
@@ -68,7 +68,7 @@ public:
 	const shared_ptr<Text2dEntityManager> getText2dEntityManager() const;
 	const shared_ptr<PointlightEntityManager> getPointlightEntityManager() const;
 	const shared_ptr<SpotlightEntityManager> getSpotlightEntityManager() const;
-	const shared_ptr<ReflectionEntityManager> getReflectionEntityManager() const;
+	const shared_ptr<CaptorEntityManager> getCaptorEntityManager() const;
 	const shared_ptr<Animation3dManager> getAnimation3dManager() const;
 	const shared_ptr<Animation2dManager> getAnimation2dManager() const;
 	const shared_ptr<Sound3dManager> getSound3dManager() const;
@@ -121,7 +121,7 @@ private:
 	shared_ptr<Text2dEntityManager> _text2dEntityManager = nullptr;
 	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
 	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
-	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
+	shared_ptr<CaptorEntityManager> _captorEntityManager = nullptr;
 	shared_ptr<Animation3dManager> _animation3dManager = nullptr;
 	shared_ptr<Animation2dManager> _animation2dManager = nullptr;
 	shared_ptr<Sound3dManager> _sound3dManager = nullptr;

@@ -74,9 +74,9 @@
     <ClCompile Include="..\..\..\src\world_editor_text3d_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_text3d_update_place.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_update_misc_highlight.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_reflection_update_edit.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_reflection_update_menu.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_reflection_update_place.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_captor_update_edit.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_captor_update_menu.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_captor_update_place.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_settings_update_lighting.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_sky_update.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_spotlight_update_edit.cpp" />

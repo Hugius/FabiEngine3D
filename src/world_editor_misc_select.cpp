@@ -35,11 +35,11 @@ void WorldEditor::_selectSpotlight(const string & id)
 	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Spotlight: " + _selectedSpotlightId);
 }
 
-void WorldEditor::_selectReflection(const string & id)
+void WorldEditor::_selectCaptor(const string & id)
 {
-	_selectedReflectionId = id;
+	_selectedCaptorId = id;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Reflection: " + _selectedReflectionId);
+	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Captor: " + _selectedCaptorId);
 }
 
 void WorldEditor::_selectSound(const string & id)
@@ -79,7 +79,7 @@ void WorldEditor::_deselectSpotlight(const string & id)
 	_fe3d->aabb_setLocalSize(("@@torch_" + id), DEFAULT_TORCH_AABB_SIZE);
 }
 
-void WorldEditor::_deselectReflection(const string & id)
+void WorldEditor::_deselectCaptor(const string & id)
 {
 	_fe3d->model_setBaseSize(("@@camera_" + id), DEFAULT_CAMERA_SIZE);
 	_fe3d->aabb_setLocalSize(("@@camera_" + id), DEFAULT_CAMERA_AABB_SIZE);

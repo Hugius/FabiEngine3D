@@ -132,7 +132,7 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text2d_set.cpp">
       <Filter>Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_set.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_captor_set.cpp">
       <Filter>Interpreter\Function\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_condition_statement.cpp">
@@ -150,7 +150,7 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_get.cpp">
       <Filter>Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_get.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_captor_get.cpp">
       <Filter>Interpreter\Function\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad2d_get.cpp">

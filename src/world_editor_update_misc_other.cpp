@@ -152,7 +152,7 @@ void WorldEditor::_updateMiscellaneous()
 							 !_selectedTextId.empty() ||
 							 !_selectedPointlightId.empty() ||
 							 !_selectedSpotlightId.empty() ||
-							 !_selectedReflectionId.empty() ||
+							 !_selectedCaptorId.empty() ||
 							 !_selectedSoundId.empty());
 
 	const auto isActive = (!_activeModelId.empty() ||
@@ -160,7 +160,7 @@ void WorldEditor::_updateMiscellaneous()
 						   !_activeTextId.empty() ||
 						   !_activePointlightId.empty() ||
 						   !_activeSpotlightId.empty() ||
-						   !_activeReflectionId.empty() ||
+						   !_activeCaptorId.empty() ||
 						   !_activeSoundId.empty());
 
 	_gui->getOverlay()->getTextField("selectedId")->setVisible(isSelected);

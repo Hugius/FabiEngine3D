@@ -257,9 +257,9 @@ void ScriptInterpreter::unload()
 		_fe3d->spotlight_delete(id);
 	}
 
-	for(const auto & id : _fe3d->reflection_getIds())
+	for(const auto & id : _fe3d->captor_getIds())
 	{
-		_fe3d->reflection_delete(id);
+		_fe3d->captor_delete(id);
 	}
 
 	for(const auto & id : _fe3d->animation3d_getIds())

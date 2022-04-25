@@ -334,14 +334,14 @@ void ModelEntity::setLevelOfDetailEntityId(const string & value)
 	_levelOfDetailEntityId = value;
 }
 
-void ModelEntity::setPreviousReflectionEntityId(const string & value)
+void ModelEntity::setPreviousCaptorEntityId(const string & value)
 {
-	_previousReflectionEntityId = value;
+	_previousCaptorEntityId = value;
 }
 
-void ModelEntity::setCurrentReflectionEntityId(const string & value)
+void ModelEntity::setCurrentCaptorEntityId(const string & value)
 {
-	_currentReflectionEntityId = value;
+	_currentCaptorEntityId = value;
 }
 
 void ModelEntity::setCubeReflectionMixValue(float value)
@@ -657,14 +657,14 @@ const string & ModelEntity::getLevelOfDetailEntityId() const
 	return _levelOfDetailEntityId;
 }
 
-const string & ModelEntity::getPreviousReflectionEntityId() const
+const string & ModelEntity::getPreviousCaptorEntityId() const
 {
-	return _previousReflectionEntityId;
+	return _previousCaptorEntityId;
 }
 
-const string & ModelEntity::getCurrentReflectionEntityId() const
+const string & ModelEntity::getCurrentCaptorEntityId() const
 {
-	return _currentReflectionEntityId;
+	return _currentCaptorEntityId;
 }
 
 const vector<string> ModelEntity::getPartIds() const

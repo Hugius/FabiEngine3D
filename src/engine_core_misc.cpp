@@ -77,9 +77,9 @@ const shared_ptr<SpotlightEntityManager> EngineCore::getSpotlightEntityManager()
 	return _spotlightEntityManager;
 }
 
-const shared_ptr<ReflectionEntityManager> EngineCore::getReflectionEntityManager() const
+const shared_ptr<CaptorEntityManager> EngineCore::getCaptorEntityManager() const
 {
-	return _reflectionEntityManager;
+	return _captorEntityManager;
 }
 
 const shared_ptr<Animation3dManager> EngineCore::getAnimation3dManager() const

@@ -30,7 +30,7 @@ void WorldEditor::_updateSpotlightMenu()
 			_deactivateSound();
 			_deactivatePointlight();
 			_deactivateSpotlight();
-			_deactivateReflection();
+			_deactivateCaptor();
 
 			_isPlacingSpotlight = true;
 			_fe3d->model_setVisible(TEMPLATE_TORCH_ID, true);
@@ -88,7 +88,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateReflection();
+				_deactivateCaptor();
 
 				_activateSpotlight(hoveredOptionId);
 			}

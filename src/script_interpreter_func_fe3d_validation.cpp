@@ -195,16 +195,16 @@ const bool ScriptInterpreter::_validateFe3dModelPart(const string & modelId, con
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dReflection(const string & id)
+const bool ScriptInterpreter::_validateFe3dCaptor(const string & id)
 {
 	if(!_validateFe3dId(id))
 	{
 		return false;
 	}
 
-	if(!_fe3d->reflection_isExisting(id))
+	if(!_fe3d->captor_isExisting(id))
 	{
-		_throwRuntimeError("reflection does not exist");
+		_throwRuntimeError("captor does not exist");
 		return false;
 	}
 

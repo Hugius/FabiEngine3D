@@ -63,7 +63,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 				_deactivateText();
 				_deactivateSound();
 				_deactivatePointlight();
-				_deactivateReflection();
+				_deactivateCaptor();
 
 				_currentTemplateTextId = hoveredOptionId;
 				_fe3d->text3d_setVisible(_currentTemplateTextId, true);
@@ -108,7 +108,7 @@ void WorldEditor::_updateText3dChoosingMenu()
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateReflection();
+				_deactivateCaptor();
 
 				_activateText(hoveredOptionId);
 			}

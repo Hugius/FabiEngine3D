@@ -4,7 +4,7 @@ using std::make_shared;
 
 void MasterRenderer::captureCubeReflections()
 {
-	if(_reflectionEntityManager->getEntities().empty())
+	if(_captorEntityManager->getEntities().empty())
 	{
 		return;
 	}
@@ -56,7 +56,7 @@ void MasterRenderer::captureCubeReflections()
 	_renderStorage->setSkyExposureEnabled(false);
 	_renderStorage->setShadowInterval(0);
 
-	for(const auto & [entityId, entity] : _reflectionEntityManager->getEntities())
+	for(const auto & [entityId, entity] : _captorEntityManager->getEntities())
 	{
 		if(entity->mustCapture())
 		{

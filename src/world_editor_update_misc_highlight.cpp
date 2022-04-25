@@ -151,7 +151,7 @@ void WorldEditor::_updateSpotlightHighlighting(const string & id, int & directio
 	_fe3d->model_setBaseSize(("@@torch_" + id), (size + speed));
 }
 
-void WorldEditor::_updateReflectionHighlighting(const string & id, int & direction)
+void WorldEditor::_updateCaptorHighlighting(const string & id, int & direction)
 {
 	if(id.empty())
 	{
@@ -165,14 +165,14 @@ void WorldEditor::_updateReflectionHighlighting(const string & id, int & directi
 		direction *= -1;
 	}
 
-	if(_fe3d->model_getBaseSize("@@camera_" + id).y > (DEFAULT_CAMERA_SIZE.y * REFLECTION_SIZE_INCREASE))
+	if(_fe3d->model_getBaseSize("@@camera_" + id).y > (DEFAULT_CAMERA_SIZE.y * CAPTOR_SIZE_INCREASE))
 	{
-		_fe3d->model_setBaseSize(("@@camera_" + id), (DEFAULT_CAMERA_SIZE * REFLECTION_SIZE_INCREASE));
+		_fe3d->model_setBaseSize(("@@camera_" + id), (DEFAULT_CAMERA_SIZE * CAPTOR_SIZE_INCREASE));
 		direction *= -1;
 	}
 
 	const auto size = _fe3d->model_getBaseSize("@@camera_" + id);
-	fvec3 speed = (fvec3(REFLECTION_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
-	speed *= ((DEFAULT_CAMERA_SIZE * REFLECTION_SIZE_INCREASE) - DEFAULT_CAMERA_SIZE);
+	fvec3 speed = (fvec3(CAPTOR_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
+	speed *= ((DEFAULT_CAMERA_SIZE * CAPTOR_SIZE_INCREASE) - DEFAULT_CAMERA_SIZE);
 	_fe3d->model_setBaseSize(("@@camera_" + id), (size + speed));
 }

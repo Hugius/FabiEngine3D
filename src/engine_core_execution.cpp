@@ -25,7 +25,7 @@ void EngineCore::_update()
 	_aabbEntityManager->update();
 	_pointlightEntityManager->update();
 	_spotlightEntityManager->update();
-	_reflectionEntityManager->update();
+	_captorEntityManager->update();
 	_timer->stopClock("3dEntityUpdate");
 
 	_timer->startClock("2dEntityUpdate");

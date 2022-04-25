@@ -76,9 +76,6 @@
     <Filter Include="World Editor\Update\Pointlight">
       <UniqueIdentifier>{6ec4ef62-8c51-427c-9abf-329dbdc1b9b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="World Editor\Update\Reflection">
-      <UniqueIdentifier>{22fd3606-00be-4ca6-8682-ac1f43f7a6ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World Editor\Update\Settings">
       <UniqueIdentifier>{27269715-c8cf-44f4-9496-444ba01514e4}</UniqueIdentifier>
     </Filter>
@@ -234,6 +231,9 @@
     </Filter>
     <Filter Include="World Editor\Main">
       <UniqueIdentifier>{d3d88ca1-85ef-42ec-895f-8e025772dd50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Update\Captor">
+      <UniqueIdentifier>{22fd3606-00be-4ca6-8682-ac1f43f7a6ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -447,14 +447,14 @@
     <ClCompile Include="..\..\..\src\world_editor_settings_update_lighting.cpp">
       <Filter>World Editor\Update\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_reflection_update_menu.cpp">
-      <Filter>World Editor\Update\Reflection</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_captor_update_menu.cpp">
+      <Filter>World Editor\Update\Captor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_reflection_update_place.cpp">
-      <Filter>World Editor\Update\Reflection</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_captor_update_place.cpp">
+      <Filter>World Editor\Update\Captor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_reflection_update_edit.cpp">
-      <Filter>World Editor\Update\Reflection</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_captor_update_edit.cpp">
+      <Filter>World Editor\Update\Captor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_editor_update_normal.cpp">
       <Filter>Terrain Editor\Update</Filter>

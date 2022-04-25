@@ -30,11 +30,11 @@ void EngineInterface::model_delete(const string & id)
 		}
 	}
 
-	for(const auto & reflectionId : reflection_getIds())
+	for(const auto & captorId : captor_getIds())
 	{
-		if(id == reflection_getExceptionEntityId(reflectionId))
+		if(id == captor_getExceptionEntityId(captorId))
 		{
-			reflection_setExceptionEntityId(reflectionId, "");
+			captor_setExceptionEntityId(captorId, "");
 		}
 	}
 

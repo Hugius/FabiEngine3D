@@ -80,9 +80,9 @@ void WorldEditor::_updateChoiceMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlight");
 		}
-		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("reflection")->isHovered())
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("captor")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuReflection");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuCaptor");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("settings")->isHovered())
 		{
@@ -103,7 +103,7 @@ void WorldEditor::_updateChoiceMenu()
 				_currentTemplateSoundId = "";
 				_isPlacingPointlight = false;
 				_isPlacingSpotlight = false;
-				_isPlacingReflection = false;
+				_isPlacingCaptor = false;
 
 				_fe3d->misc_setVsyncEnabled(true);
 
@@ -121,7 +121,7 @@ void WorldEditor::_updateChoiceMenu()
 				_currentTemplateSoundId = "";
 				_isPlacingPointlight = false;
 				_isPlacingSpotlight = false;
-				_isPlacingReflection = false;
+				_isPlacingCaptor = false;
 
 				_fe3d->misc_setVsyncEnabled(true);
 

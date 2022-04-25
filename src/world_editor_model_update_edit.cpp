@@ -3,7 +3,7 @@
 
 void WorldEditor::_updateModelEditing()
 {
-	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelId.empty() && _currentTemplateQuadId.empty() && _currentTemplateSoundId.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingCaptor)
 	{
 		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();

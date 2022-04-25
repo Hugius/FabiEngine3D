@@ -20,7 +20,7 @@ EngineCore::EngineCore()
 	_text2dEntityManager = make_shared<Text2dEntityManager>();
 	_pointlightEntityManager = make_shared<PointlightEntityManager>();
 	_spotlightEntityManager = make_shared<SpotlightEntityManager>();
-	_reflectionEntityManager = make_shared<ReflectionEntityManager>();
+	_captorEntityManager = make_shared<CaptorEntityManager>();
 	_animation3dManager = make_shared<Animation3dManager>();
 	_animation2dManager = make_shared<Animation2dManager>();
 	_sound3dManager = make_shared<Sound3dManager>();
@@ -49,7 +49,7 @@ EngineCore::EngineCore()
 	_modelEntityManager->inject(_renderStorage);
 	_modelEntityManager->inject(_camera);
 	_modelEntityManager->inject(_timer);
-	_modelEntityManager->inject(_reflectionEntityManager);
+	_modelEntityManager->inject(_captorEntityManager);
 	_modelEntityManager->inject(_meshLoader);
 	_modelEntityManager->inject(_vertexBufferCache);
 	_quad3dEntityManager->inject(_renderStorage);
@@ -83,7 +83,7 @@ EngineCore::EngineCore()
 	_masterRenderer->inject(_text2dEntityManager);
 	_masterRenderer->inject(_pointlightEntityManager);
 	_masterRenderer->inject(_spotlightEntityManager);
-	_masterRenderer->inject(_reflectionEntityManager);
+	_masterRenderer->inject(_captorEntityManager);
 	_camera->inject(_renderWindow);
 	_raycastCalculator->inject(_camera);
 	_raycastIntersector->inject(_raycastCalculator);

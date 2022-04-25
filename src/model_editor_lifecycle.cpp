@@ -53,8 +53,8 @@ void ModelEditor::_load()
 	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
 	_fe3d->model_setShadowed("@@grid", false);
 
-	_fe3d->reflection_create("@@reflection");
-	_fe3d->reflection_capture("@@reflection");
+	_fe3d->captor_create("@@captor");
+	_fe3d->captor_capture("@@captor");
 
 	_gui->getOverlay()->createTextField("modelId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 	_gui->getOverlay()->createTextField("aabbId", fvec2(0.0f, 0.75f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
@@ -93,7 +93,7 @@ void ModelEditor::_unload()
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
 
-	_fe3d->reflection_delete("@@reflection");
+	_fe3d->captor_delete("@@captor");
 
 	_gui->getOverlay()->deleteTextField("modelId");
 	_gui->getOverlay()->deleteTextField("aabbId");

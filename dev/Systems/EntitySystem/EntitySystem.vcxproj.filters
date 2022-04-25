@@ -39,7 +39,7 @@
     <ClCompile Include="..\..\..\src\quad3d_entity.cpp">
       <Filter>Data\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\reflection_entity.cpp">
+    <ClCompile Include="..\..\..\src\captor_entity.cpp">
       <Filter>Data\3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_entity.cpp">
@@ -75,7 +75,7 @@
     <ClCompile Include="..\..\..\src\quad3d_entity_manager.cpp">
       <Filter>Manager\3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\reflection_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\captor_entity_manager.cpp">
       <Filter>Manager\3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_entity_manager.cpp">
@@ -119,7 +119,7 @@
     <ClInclude Include="..\..\..\src\quad3d_entity.hpp">
       <Filter>Data\3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\reflection_entity.hpp">
+    <ClInclude Include="..\..\..\src\captor_entity.hpp">
       <Filter>Data\3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sky_entity.hpp">
@@ -155,7 +155,7 @@
     <ClInclude Include="..\..\..\src\quad3d_entity_manager.hpp">
       <Filter>Manager\3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\reflection_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\captor_entity_manager.hpp">
       <Filter>Manager\3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sky_entity_manager.hpp">

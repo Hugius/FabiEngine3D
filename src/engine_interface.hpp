@@ -667,20 +667,20 @@ public:
 	const bool spotlight_isExisting(const string & id) const;
 	const bool spotlight_isVisible(const string & id) const;
 
-	void reflection_create(const string & id);
-	void reflection_delete(const string & id);
-	void reflection_setVisible(const string & id, bool value);
-	void reflection_setPosition(const string & id, const fvec3 & value);
-	void reflection_move(const string & id, const fvec3 & change);
-	void reflection_moveTo(const string & id, const fvec3 & target, float speed);
-	void reflection_capture(const string & id);
-	void reflection_setExceptionEntityId(const string & id, const string & value);
+	void captor_create(const string & id);
+	void captor_delete(const string & id);
+	void captor_setVisible(const string & id, bool value);
+	void captor_setPosition(const string & id, const fvec3 & value);
+	void captor_move(const string & id, const fvec3 & change);
+	void captor_moveTo(const string & id, const fvec3 & target, float speed);
+	void captor_capture(const string & id);
+	void captor_setExceptionEntityId(const string & id, const string & value);
 
-	const vector<string> reflection_getIds() const;
-	const string & reflection_getExceptionEntityId(const string & id) const;
-	const fvec3 & reflection_getPosition(const string & id) const;
-	const bool reflection_isExisting(const string & id) const;
-	const bool reflection_isVisible(const string & id) const;
+	const vector<string> captor_getIds() const;
+	const string & captor_getExceptionEntityId(const string & id) const;
+	const fvec3 & captor_getPosition(const string & id) const;
+	const bool captor_isExisting(const string & id) const;
+	const bool captor_isVisible(const string & id) const;
 
 	void animation3d_create(const string & id);
 	void animation3d_delete(const string & id);

@@ -70,7 +70,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateReflection();
+				_deactivateCaptor();
 
 				_currentTemplateSoundId = hoveredOptionId;
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, true);
@@ -116,7 +116,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateSpotlight();
-				_deactivateReflection();
+				_deactivateCaptor();
 
 				_activateSound(hoveredOptionId);
 			}

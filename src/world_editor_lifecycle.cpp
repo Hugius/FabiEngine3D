@@ -67,8 +67,8 @@ void WorldEditor::_load()
 	_fe3d->model_setShadowed(TEMPLATE_CAMERA_ID, false);
 	_fe3d->model_setReflected(TEMPLATE_CAMERA_ID, false);
 	_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
-	_fe3d->reflection_create(TEMPLATE_REFLECTION_ID);
-	_fe3d->reflection_setVisible(TEMPLATE_REFLECTION_ID, false);
+	_fe3d->captor_create(TEMPLATE_CAPTOR_ID);
+	_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 
 	_soundEditor->loadSoundsFromFile();
 	_fe3d->model_create(TEMPLATE_SPEAKER_ID, SPEAKER_MODEL_PATH);
@@ -108,7 +108,7 @@ void WorldEditor::_unload()
 
 	_fe3d->pointlight_delete(TEMPLATE_POINTLIGHT_ID);
 	_fe3d->spotlight_delete(TEMPLATE_SPOTLIGHT_ID);
-	_fe3d->reflection_delete(TEMPLATE_REFLECTION_ID);
+	_fe3d->captor_delete(TEMPLATE_CAPTOR_ID);
 
 	for(const auto & id : _soundEditor->getLoadedSoundIds())
 	{
@@ -139,7 +139,7 @@ void WorldEditor::_unload()
 	_loadedAabbIds.clear();
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
-	_loadedReflectionIds.clear();
+	_loadedCaptorIds.clear();
 	_currentTemplateModelId = "";
 	_selectedModelId = "";
 	_activeModelId = "";
@@ -153,8 +153,8 @@ void WorldEditor::_unload()
 	_activePointlightId = "";
 	_selectedSpotlightId = "";
 	_activeSpotlightId = "";
-	_selectedReflectionId = "";
-	_activeReflectionId = "";
+	_selectedCaptorId = "";
+	_activeCaptorId = "";
 	_currentTemplateSoundId = "";
 	_selectedSoundId = "";
 	_activeSoundId = "";
@@ -171,8 +171,8 @@ void WorldEditor::_unload()
 	_activePointlightHighlightDirection = 1;
 	_selectedSpotlightHighlightDirection = 1;
 	_activeSpotlightHighlightDirection = 1;
-	_selectedReflectionHighlightDirection = 1;
-	_activeReflectionHighlightDirection = 1;
+	_selectedCaptorHighlightDirection = 1;
+	_activeCaptorHighlightDirection = 1;
 	_selectedSoundHighlightDirection = 1;
 	_activeSoundHighlightDirection = 1;
 	_dontResetSelectedModel = false;
@@ -180,11 +180,11 @@ void WorldEditor::_unload()
 	_dontResetSelectedText3d = false;
 	_dontResetSelectedPointlight = false;
 	_dontResetSelectedSpotlight = false;
-	_dontResetSelectedReflection = false;
+	_dontResetSelectedCaptor = false;
 	_dontResetSelectedSound = false;
 	_isPlacingPointlight = false;
 	_isPlacingSpotlight = false;
-	_isPlacingReflection = false;
+	_isPlacingCaptor = false;
 	_isWireframeModeEnabled = false;
 	_isAabbModeEnabled = false;
 }
@@ -233,7 +233,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateReflectionPlacing();
+		_updateCaptorPlacing();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -273,7 +273,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateReflectionMenu();
+		_updateCaptorMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -317,7 +317,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateReflectionChoosingMenu();
+		_updateCaptorChoosingMenu();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
@@ -345,7 +345,7 @@ void WorldEditor::update()
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{
-		_updateReflectionEditing();
+		_updateCaptorEditing();
 	}
 	if(isLoaded() && !_currentWorldId.empty())
 	{

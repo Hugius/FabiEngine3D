@@ -67,13 +67,18 @@ void ModelEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("reflectionType")->isHovered())
 		{
-			if(reflectionType == ReflectionType::CUBE)
+			switch(reflectionType)
 			{
-				_fe3d->model_setReflectionType(_currentModelId, _currentPartId, ReflectionType::PLANAR);
-			}
-			else
-			{
-				_fe3d->model_setReflectionType(_currentModelId, _currentPartId, ReflectionType::CUBE);
+				case ReflectionType::CUBE:
+				{
+					_fe3d->model_setReflectionType(_currentModelId, _currentPartId, ReflectionType::PLANAR);
+					break;
+				}
+				case ReflectionType::PLANAR:
+				{
+					_fe3d->model_setReflectionType(_currentModelId, _currentPartId, ReflectionType::CUBE);
+					break;
+				}
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("reflectivity")->isHovered())

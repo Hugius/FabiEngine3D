@@ -65,29 +65,38 @@ void ModelEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{
-			if(rotationOrder == DirectionOrderType::XYZ)
+			switch(rotationOrder)
 			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::XZY);
-			}
-			else if(rotationOrder == DirectionOrderType::XZY)
-			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::YXZ);
-			}
-			else if(rotationOrder == DirectionOrderType::YXZ)
-			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::YZX);
-			}
-			else if(rotationOrder == DirectionOrderType::YZX)
-			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::ZXY);
-			}
-			else if(rotationOrder == DirectionOrderType::ZXY)
-			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::ZYX);
-			}
-			else if(rotationOrder == DirectionOrderType::ZYX)
-			{
-				_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::XYZ);
+				case DirectionOrderType::XYZ:
+				{
+					_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::XZY);
+					break;
+				}
+				case DirectionOrderType::XZY:
+				{
+					_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::YXZ);
+					break;
+				}
+				case DirectionOrderType::YXZ:
+				{
+					_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::YZX);
+					break;
+				}
+				case DirectionOrderType::YZX:
+				{
+					_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::ZXY);
+					break;
+				}
+				case DirectionOrderType::ZXY:
+				{
+					_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::ZYX);
+					break;
+				}
+				case DirectionOrderType::ZYX:
+				{
+					_fe3d->model_setRotationOrder(_currentModelId, DirectionOrderType::XYZ);
+					break;
+				}
 			}
 		}
 

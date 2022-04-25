@@ -490,13 +490,18 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("type")->isHovered())
 		{
-			if(type == BloomType::EVERYTHING)
+			switch(type)
 			{
-				_fe3d->graphics_setBloomType(BloomType::PARTS);
-			}
-			else
-			{
-				_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
+				case BloomType::EVERYTHING:
+				{
+					_fe3d->graphics_setBloomType(BloomType::PARTS);
+					break;
+				}
+				case BloomType::PARTS:
+				{
+					_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
+					break;
+				}
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("intensity")->isHovered())

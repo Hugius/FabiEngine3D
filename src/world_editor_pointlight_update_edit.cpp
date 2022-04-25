@@ -94,13 +94,18 @@ void WorldEditor::_updatePointlightEditing()
 			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("shape")->isHovered())
 			{
-				if(_fe3d->pointlight_getShape(_activePointlightId) == PointlightType::CIRCLE)
+				switch(_fe3d->pointlight_getShape(_activePointlightId))
 				{
-					_fe3d->pointlight_setShape(_activePointlightId, PointlightType::SQUARE);
-				}
-				else
-				{
-					_fe3d->pointlight_setShape(_activePointlightId, PointlightType::CIRCLE);
+					case PointlightType::CIRCLE:
+					{
+						_fe3d->pointlight_setShape(_activePointlightId, PointlightType::SQUARE);
+						break;
+					}
+					case PointlightType::SQUARE:
+					{
+						_fe3d->pointlight_setShape(_activePointlightId, PointlightType::CIRCLE);
+						break;
+					}
 				}
 			}
 			else if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered()) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_DELETE))

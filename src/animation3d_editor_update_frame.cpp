@@ -47,17 +47,23 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("transformationType")->isHovered())
 		{
-			if(transformationType == TransformationType::MOVEMENT)
+			switch(transformationType)
 			{
-				_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, TransformationType::ROTATION);
-			}
-			else if(transformationType == TransformationType::ROTATION)
-			{
-				_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, TransformationType::SCALING);
-			}
-			else if(transformationType == TransformationType::SCALING)
-			{
-				_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, TransformationType::MOVEMENT);
+				case TransformationType::MOVEMENT:
+				{
+					_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, TransformationType::ROTATION);
+					break;
+				}
+				case TransformationType::ROTATION:
+				{
+					_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, TransformationType::SCALING);
+					break;
+				}
+				case TransformationType::SCALING:
+				{
+					_fe3d->animation3d_setTransformationType(_currentAnimationId, _currentFrameIndex, _currentPartId, TransformationType::MOVEMENT);
+					break;
+				}
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("speed")->isHovered())
@@ -68,17 +74,23 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("speedType")->isHovered())
 		{
-			if(speedType == SpeedType::LINEAR)
+			switch(speedType)
 			{
-				_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, SpeedType::EXPONENTIAL);
-			}
-			else if(speedType == SpeedType::EXPONENTIAL)
-			{
-				_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, SpeedType::INSTANTLY);
-			}
-			else
-			{
-				_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, SpeedType::LINEAR);
+				case SpeedType::LINEAR:
+				{
+					_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, SpeedType::EXPONENTIAL);
+					break;
+				}
+				case SpeedType::EXPONENTIAL:
+				{
+					_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, SpeedType::INSTANTLY);
+					break;
+				}
+				case SpeedType::INSTANTLY:
+				{
+					_fe3d->animation3d_setSpeedType(_currentAnimationId, _currentFrameIndex, _currentPartId, SpeedType::LINEAR);
+					break;
+				}
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())

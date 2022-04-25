@@ -108,7 +108,7 @@ void Animation2dEditor::_updateAnimationDeleting()
 
 void Animation2dEditor::_updateImageChoosing()
 {
-	if(_gui->getOverlay()->getAnswerFormId() == "preview" && _gui->getOverlay()->isAnswerFormConfirmed())
+	if((_gui->getOverlay()->getAnswerFormId() == "preview") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(getCurrentProjectId().empty())
 		{

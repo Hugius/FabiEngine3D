@@ -147,6 +147,8 @@ void NetworkingClient::update()
 					_tcpMessageBuild += character;
 				}
 			}
+
+			_tcpMessageThread = async(launch::async, &NetworkingClient::_waitForTcpMessage, this, _tcpSocket);
 		}
 		else if(messageStatusCode == 0)
 		{
@@ -166,8 +168,6 @@ void NetworkingClient::update()
 				abort();
 			}
 		}
-
-		_tcpMessageThread = async(launch::async, &NetworkingClient::_waitForTcpMessage, this, _tcpSocket);
 	}
 
 	while(NetworkingHelper::_isUdpMessageReady(_udpSocket))

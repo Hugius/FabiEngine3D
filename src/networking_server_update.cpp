@@ -143,6 +143,8 @@ void NetworkingServer::update()
 						_tcpMessageBuilds[index] += character;
 					}
 				}
+
+				_tcpMessageThreads[index] = async(launch::async, &NetworkingServer::_waitForTcpMessage, this, _clientSockets[index]);
 			}
 			else if(messageStatusCode == 0)
 			{
@@ -152,6 +154,7 @@ void NetworkingServer::update()
 			else
 			{
 				auto code = messageErrorCode;
+
 				if((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT))
 				{
 					_disconnectClient(_clientSockets[index]);
@@ -163,8 +166,6 @@ void NetworkingServer::update()
 					abort();
 				}
 			}
-
-			_tcpMessageThreads[index] = async(launch::async, &NetworkingServer::_waitForTcpMessage, this, _clientSockets[index]);
 		}
 	}
 

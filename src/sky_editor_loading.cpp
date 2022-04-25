@@ -94,6 +94,7 @@ const bool SkyEditor::loadEntitiesFromFile()
 		fvec3 color;
 		fvec3 rotation;
 		float lightness;
+		unsigned int rotationOrder;
 
 		istringstream iss(line);
 
@@ -111,7 +112,8 @@ const bool SkyEditor::loadEntitiesFromFile()
 			>> lightness
 			>> color.r
 			>> color.g
-			>> color.b;
+			>> color.b
+			>> rotationOrder;
 
 		for(auto & cubeMapPath : cubeMapPaths)
 		{
@@ -136,6 +138,7 @@ const bool SkyEditor::loadEntitiesFromFile()
 		_fe3d->sky_setLightness(skyId, lightness);
 		_fe3d->sky_setRotation(skyId, rotation);
 		_fe3d->sky_setColor(skyId, color);
+		_fe3d->sky_setRotationOrder(skyId, DirectionOrderType(rotationOrder));
 	}
 
 	file.close();

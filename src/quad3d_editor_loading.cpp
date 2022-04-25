@@ -120,6 +120,7 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		float minTextureAlpha;
 		float emissionIntensity;
 		unsigned int textureRepeat;
+		unsigned int rotationOrder;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
 		bool isHorizontallyFlipped;
@@ -150,7 +151,8 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 			>> isBright
 			>> emissionIntensity
 			>> opacity
-			>> minTextureAlpha;
+			>> minTextureAlpha
+			>> rotationOrder;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -177,6 +179,7 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		_fe3d->quad3d_setOpacity(quadId, opacity);
 		_fe3d->quad3d_setEmissionIntensity(quadId, emissionIntensity);
 		_fe3d->quad3d_setMinTextureAlpha(quadId, minTextureAlpha);
+		_fe3d->quad3d_setRotationOrder(quadId, DirectionOrderType(rotationOrder));
 
 		if(!diffuseMapPath.empty())
 		{

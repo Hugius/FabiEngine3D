@@ -14,6 +14,7 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		const auto isVerticallyFlipped = _fe3d->quad3d_isVerticallyFlipped(_currentQuadId);
 		const auto opacity = _fe3d->quad3d_getOpacity(_currentQuadId);
 		const auto minTextureAlpha = _fe3d->quad3d_getMinTextureAlpha(_currentQuadId);
+		const auto rotationOrder = _fe3d->quad3d_getRotationOrder(_currentQuadId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -63,6 +64,36 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		{
 			_gui->getOverlay()->openValueForm("minTextureAlpha", "Min Texture Alpha", (minTextureAlpha * 100.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
+		{
+			switch(rotationOrder)
+			{
+				case DirectionOrderType::XYZ:
+				{
+					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::XZY);
+				}
+				case DirectionOrderType::XZY:
+				{
+					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::YXZ);
+				}
+				case DirectionOrderType::YXZ:
+				{
+					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::YZX);
+				}
+				case DirectionOrderType::YZX:
+				{
+					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::ZXY);
+				}
+				case DirectionOrderType::ZXY:
+				{
+					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::ZYX);
+				}
+				case DirectionOrderType::ZYX:
+				{
+					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::XYZ);
+				}
+			}
+		}
 
 		if((_gui->getOverlay()->getValueFormId() == "sizeX") && _gui->getOverlay()->isValueFormConfirmed())
 		{
@@ -93,5 +124,39 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		screen->getButton("isFacingCameraVertically")->setTextContent(isFacingCameraVertically ? "Facing Y: ON" : "Facing Y: OFF");
 		screen->getButton("isHorizontallyFlipped")->setTextContent(isHorizontallyFlipped ? "Flipped X: ON" : "Flipped X: OFF");
 		screen->getButton("isVerticallyFlipped")->setTextContent(isVerticallyFlipped ? "Flipped Y: ON" : "Flipped Y: OFF");
+
+		switch(rotationOrder)
+		{
+			case DirectionOrderType::XYZ:
+			{
+				screen->getButton("rotationOrder")->setTextContent("Rotation: X Y Z");
+				break;
+			}
+			case DirectionOrderType::XZY:
+			{
+				screen->getButton("rotationOrder")->setTextContent("Rotation: X Z Y");
+				break;
+			}
+			case DirectionOrderType::YXZ:
+			{
+				screen->getButton("rotationOrder")->setTextContent("Rotation: Y X Z");
+				break;
+			}
+			case DirectionOrderType::YZX:
+			{
+				screen->getButton("rotationOrder")->setTextContent("Rotation: Y Z X");
+				break;
+			}
+			case DirectionOrderType::ZXY:
+			{
+				screen->getButton("rotationOrder")->setTextContent("Rotation: Z X Y");
+				break;
+			}
+			case DirectionOrderType::ZYX:
+			{
+				screen->getButton("rotationOrder")->setTextContent("Rotation: Z Y X");
+				break;
+			}
+		}
 	}
 }

@@ -103,6 +103,7 @@ const bool Text3dEditor::loadEntitiesFromFile()
 		float lightness;
 		float opacity;
 		float minTextureAlpha;
+		unsigned int rotationOrder;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
 		bool isHorizontallyFlipped;
@@ -130,7 +131,8 @@ const bool Text3dEditor::loadEntitiesFromFile()
 			>> lightness
 			>> isBright
 			>> opacity
-			>> minTextureAlpha;
+			>> minTextureAlpha
+			>> rotationOrder;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -161,6 +163,7 @@ const bool Text3dEditor::loadEntitiesFromFile()
 			_fe3d->text3d_setBright(textId, isBright);
 			_fe3d->text3d_setOpacity(textId, opacity);
 			_fe3d->text3d_setMinTextureAlpha(textId, minTextureAlpha);
+			_fe3d->text3d_setRotationOrder(textId, DirectionOrderType(rotationOrder));
 		}
 	}
 

@@ -142,7 +142,18 @@ const string Tools::getRootDirectoryPath()
 
 	rootPath = absolute(rootPath).string();
 
-	rootPath = rootPath.substr(0, (rootPath.size() - string("binaries\\fe3d.exe").size()));
+	reverse(rootPath.begin(), rootPath.end());
+
+	for(unsigned int index = 0; index < rootPath.size(); index++)
+	{
+		if(rootPath[index] == '\\')
+		{
+			rootPath = rootPath.substr(index + string("binaries\\").size());
+			break;
+		}
+	}
+
+	reverse(rootPath.begin(), rootPath.end());
 
 	return rootPath;
 }

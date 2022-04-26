@@ -119,12 +119,12 @@ private:
 
 	static inline const string TYPE_STRINGS[4] = {"INFO", "DEBUG", "WARN", "ERROR"};
 
-	static inline constexpr unsigned int TIMESTAMP_COLOR = 6;
-	static inline constexpr unsigned int INFO_COLOR = 2;
-	static inline constexpr unsigned int DEBUG_COLOR = 8;
-	static inline constexpr unsigned int WARNING_COLOR = 13;
-	static inline constexpr unsigned int ERROR_COLOR = 12;
-	static inline constexpr unsigned int CONTENT_COLOR = 15;
+	static inline constexpr int TIMESTAMP_COLOR = 6;
+	static inline constexpr int INFO_COLOR = 2;
+	static inline constexpr int DEBUG_COLOR = 8;
+	static inline constexpr int WARNING_COLOR = 13;
+	static inline constexpr int ERROR_COLOR = 12;
+	static inline constexpr int CONTENT_COLOR = 15;
 
 	static inline vector<shared_ptr<LoggerMessage>> _messageList = {};
 

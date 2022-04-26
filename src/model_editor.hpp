@@ -52,7 +52,7 @@ private:
 	static inline constexpr float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline constexpr float PART_HIGHLIGHT_SPEED = 0.025f;
 
-	static inline constexpr unsigned int GRID_REPEAT = 10;
+	static inline constexpr int GRID_REPEAT = 10;
 
 	vector<string> _loadedEntityIds = {};
 

@@ -55,7 +55,7 @@ private:
 	const bool _sendTcpMessageToServer(const string & content, bool isReserved, bool mustBeAccepted);
 	const bool _sendUdpMessageToServer(const string & content, bool isReserved, bool mustBeAccepted) const;
 
-	static inline constexpr unsigned int MAX_PING_COUNT = 10;
+	static inline constexpr int MAX_PING_COUNT = 10;
 
 	vector<unsigned int> _pingLatencies = {};
 	vector<NetworkingServerMessage> _pendingMessages = {};

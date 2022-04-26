@@ -315,9 +315,9 @@ private:
 	static inline const string PULLING_KEYWORD = "PULL";
 	static inline const string PASS_KEYWORD = "PASS";
 
-	static inline constexpr unsigned int SPACES_PER_INDENT = 4;
-	static inline constexpr unsigned int MAX_ITERATIONS_PER_LOOP = 1000;
-	static inline constexpr unsigned int MAX_EXECUTION_DEPTH = 10;
+	static inline constexpr int SPACES_PER_INDENT = 4;
+	static inline constexpr int MAX_ITERATIONS_PER_LOOP = 1000;
+	static inline constexpr int MAX_EXECUTION_DEPTH = 10;
 
 	unordered_map<string, float> _debuggingTimes = {};
 	unordered_map<unsigned int, unordered_map<string, shared_ptr<ScriptVariable>>> _localVariables = {};

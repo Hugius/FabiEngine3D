@@ -26,7 +26,7 @@ public:
 	const bool isEntitiesExisting() const;
 
 private:
-	static inline constexpr unsigned int MAX_ENTITY_COUNT = 64;
+	static inline constexpr int MAX_ENTITY_COUNT = 64;
 
 	unordered_map<string, shared_ptr<PointlightEntity>> _entities = {};
 };

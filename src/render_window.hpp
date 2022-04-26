@@ -37,7 +37,7 @@ public:
 	const bool isVsyncEnabled() const;
 
 private:
-	static inline constexpr unsigned int MAX_TITLE_LENGTH = 100;
+	static inline constexpr int MAX_TITLE_LENGTH = 100;
 
 	shared_ptr<InputHandler> _inputHandler = nullptr;
 

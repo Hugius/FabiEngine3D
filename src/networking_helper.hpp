@@ -37,9 +37,9 @@ private:
 
 	static inline const string SERVER_PORT = "61295";
 
-	static inline constexpr unsigned int IP_ADDRESS_SIZE = 16;
-	static inline constexpr unsigned int MAX_USERNAME_SIZE = 16;
-	static inline constexpr unsigned int MAX_MESSAGE_SIZE = 128;
-	static inline constexpr unsigned int MAX_TCP_BUFFER_SIZE = 8192;
-	static inline constexpr unsigned int MAX_UDP_BUFFER_SIZE = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_SIZE);
+	static inline constexpr int IP_ADDRESS_SIZE = 16;
+	static inline constexpr int MAX_USERNAME_SIZE = 16;
+	static inline constexpr int MAX_MESSAGE_SIZE = 128;
+	static inline constexpr int MAX_TCP_BUFFER_SIZE = 8192;
+	static inline constexpr int MAX_UDP_BUFFER_SIZE = (MAX_USERNAME_SIZE + 1 + MAX_MESSAGE_SIZE);
 };

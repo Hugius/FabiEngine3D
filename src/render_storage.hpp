@@ -197,20 +197,20 @@ public:
 	const BloomType getBloomType() const;
 
 private:
-	static inline constexpr unsigned int MIN_BLOOM_QUALITY = 1;
-	static inline constexpr unsigned int MAX_BLOOM_QUALITY = 5;
-	static inline constexpr unsigned int MIN_DOF_QUALITY = 1;
-	static inline constexpr unsigned int MAX_DOF_QUALITY = 5;
-	static inline constexpr unsigned int MIN_MOTION_BLUR_QUALITY = 1;
-	static inline constexpr unsigned int MAX_MOTION_BLUR_QUALITY = 5;
-	static inline constexpr unsigned int MIN_ANISOTROPIC_FILTERING_QUALITY = 1;
-	static inline constexpr unsigned int MAX_ANISOTROPIC_FILTERING_QUALITY = 16;
-	static inline constexpr unsigned int MIN_SHADOW_QUALITY = 2048;
-	static inline constexpr unsigned int MAX_SHADOW_QUALITY = 16384;
-	static inline constexpr unsigned int MIN_REFLECTION_QUALITY = 128;
-	static inline constexpr unsigned int MAX_REFLECTION_QUALITY = 1024;
-	static inline constexpr unsigned int MIN_REFRACTION_QUALITY = 128;
-	static inline constexpr unsigned int MAX_REFRACTION_QUALITY = 1024;
+	static inline constexpr int MIN_BLOOM_QUALITY = 1;
+	static inline constexpr int MAX_BLOOM_QUALITY = 5;
+	static inline constexpr int MIN_DOF_QUALITY = 1;
+	static inline constexpr int MAX_DOF_QUALITY = 5;
+	static inline constexpr int MIN_MOTION_BLUR_QUALITY = 1;
+	static inline constexpr int MAX_MOTION_BLUR_QUALITY = 5;
+	static inline constexpr int MIN_ANISOTROPIC_FILTERING_QUALITY = 1;
+	static inline constexpr int MAX_ANISOTROPIC_FILTERING_QUALITY = 16;
+	static inline constexpr int MIN_SHADOW_QUALITY = 2048;
+	static inline constexpr int MAX_SHADOW_QUALITY = 16384;
+	static inline constexpr int MIN_REFLECTION_QUALITY = 128;
+	static inline constexpr int MAX_REFLECTION_QUALITY = 1024;
+	static inline constexpr int MIN_REFRACTION_QUALITY = 128;
+	static inline constexpr int MAX_REFRACTION_QUALITY = 1024;
 
 	shared_ptr<TextureBuffer> _primarySceneTextureBuffer = nullptr;
 	shared_ptr<TextureBuffer> _secondarySceneTextureBuffer = nullptr;

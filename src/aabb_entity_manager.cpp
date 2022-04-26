@@ -45,8 +45,8 @@ constexpr float standingBufferData[] =
 	-0.5f, 0.0f, -0.5f
 };
 
-constexpr unsigned int centeredBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
-constexpr unsigned int standingBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
+constexpr int centeredBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
+constexpr int standingBufferDataCount = static_cast<int>(sizeof(centeredBufferData) / sizeof(float));
 
 AabbEntityManager::AabbEntityManager()
 	:

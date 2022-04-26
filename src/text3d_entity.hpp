@@ -186,8 +186,8 @@ private:
 		{'~', ivec2(14, 0)}
 	};
 
-	static inline constexpr unsigned int FONT_MAP_ROW_COUNT = 6;
-	static inline constexpr unsigned int FONT_MAP_COLUMN_COUNT = 16;
+	static inline constexpr int FONT_MAP_ROW_COUNT = 6;
+	static inline constexpr int FONT_MAP_COLUMN_COUNT = 16;
 
 	vector<shared_ptr<Quad3dEntity>> _characterEntities = {};
 

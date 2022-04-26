@@ -44,7 +44,7 @@ private:
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 5.0f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 
-	static inline constexpr unsigned int GRID_REPEAT = 10;
+	static inline constexpr int GRID_REPEAT = 10;
 
 	vector <string> _loadedEntityIds = {};
 

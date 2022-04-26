@@ -57,8 +57,8 @@ private:
 	static inline constexpr float AABB_DEPTH = 0.0001f;
 	static inline constexpr float CAMERA_DISTANCE = 10.0f;
 
-	static inline constexpr unsigned int MAX_LINE_COUNT = 99;
-	static inline constexpr unsigned int BLOOM_QUALITY = 1;
+	static inline constexpr int MAX_LINE_COUNT = 99;
+	static inline constexpr int BLOOM_QUALITY = 1;
 
 	vector<string> _loadedQuadIds = {};
 	vector<string> _loadedTextIds = {};

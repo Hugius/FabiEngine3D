@@ -47,7 +47,7 @@ void Quad3dEntityShadowRenderer::render(const shared_ptr<Quad3dEntity> entity)
 	_shaderBuffer->uploadUniform("u_maxX", min(_renderStorage->getMaxClipPosition().x, entity->getMaxClipPosition().x));
 	_shaderBuffer->uploadUniform("u_maxY", min(_renderStorage->getMaxClipPosition().y, entity->getMaxClipPosition().y));
 	_shaderBuffer->uploadUniform("u_maxZ", min(_renderStorage->getMaxClipPosition().z, entity->getMaxClipPosition().z));
-	_shaderBuffer->uploadUniform("u_textureRepeat", static_cast<int>(entity->getTextureRepeat()));
+	_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 	_shaderBuffer->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 	_shaderBuffer->uploadUniform("u_uvOffset", entity->getUvOffset());
 	_shaderBuffer->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha());

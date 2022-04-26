@@ -99,7 +99,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			const auto result = static_cast<int>(listVariable->getValueCount());
+			const auto result = listVariable->getValueCount();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -399,7 +399,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			for(int index = (static_cast<int>(listVariable->getValueCount()) - 1); index > -1; index--)
+			for(int index = (listVariable->getValueCount() - 1); index > -1; index--)
 			{
 				returnValues.push_back(listVariable->getValue(index));
 			}

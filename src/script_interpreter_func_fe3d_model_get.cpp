@@ -689,7 +689,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 			{
 				if(_validateFe3dModelPart(args[0]->getString(), args[1]->getString()))
 				{
-					const auto result = static_cast<int>(_fe3d->model_getTextureRepeat(args[0]->getString(), args[1]->getString()));
+					const auto result = _fe3d->model_getTextureRepeat(args[0]->getString(), args[1]->getString());
 
 					returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 				}
@@ -1302,7 +1302,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 					return true;
 				}
 
-				const auto result = static_cast<int>(_fe3d->model_getAnimationFrameIndex(args[0]->getString(), args[1]->getString()));
+				const auto result = _fe3d->model_getAnimationFrameIndex(args[0]->getString(), args[1]->getString());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}

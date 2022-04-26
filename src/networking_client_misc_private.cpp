@@ -199,8 +199,8 @@ const bool NetworkingClient::_setupUdp()
 tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET socket) const
 {
 	char buffer[NetworkingHelper::MAX_TCP_BUFFER_SIZE] = {};
-	const auto bufferLength = static_cast<int>(NetworkingHelper::MAX_TCP_BUFFER_SIZE);
-	const auto receiveResult = recv(socket, buffer, bufferLength, 0);
+
+	const auto receiveResult = recv(socket, buffer, NetworkingHelper::MAX_TCP_BUFFER_SIZE, 0);
 
 	if(receiveResult > 0)
 	{
@@ -218,8 +218,7 @@ tuple<int, int, string, string, string> NetworkingClient::_receiveUdpMessage(SOC
 	char buffer[NetworkingHelper::MAX_UDP_BUFFER_SIZE] = {};
 	auto sourceAddressLength = static_cast<int>(sizeof(sourceAddress));
 
-	const auto bufferLength = static_cast<int>(NetworkingHelper::MAX_UDP_BUFFER_SIZE);
-	const auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
+	const auto receiveResult = recvfrom(socket, buffer, NetworkingHelper::MAX_UDP_BUFFER_SIZE, 0, reinterpret_cast<sockaddr *>(&sourceAddress), &sourceAddressLength);
 	const auto ip = NetworkingHelper::_extractAddressIp(sourceAddress);
 	const auto port = NetworkingHelper::_extractAddressPort(sourceAddress);
 

@@ -178,7 +178,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 					return true;
 				}
 
-				const auto result = static_cast<int>(_fe3d->sound3d_getTime(args[0]->getString(), args[1]->getInteger()));
+				const auto result = _fe3d->sound3d_getTime(args[0]->getString(), args[1]->getInteger());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
@@ -194,7 +194,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string & functionN
 			{
 				const auto result = _fe3d->sound3d_getStartedCount(args[0]->getString());
 
-				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, static_cast<int>(result)));
+				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
 		}
 	}

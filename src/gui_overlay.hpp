@@ -34,7 +34,6 @@ public:
 	void openChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles);
 	void openValueForm(const string & id, const string & title, const string & value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
 	void openValueForm(const string & id, const string & title, float value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
-	void openValueForm(const string & id, const string & title, unsigned int value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
 	void openValueForm(const string & id, const string & title, int value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
 	void openAnswerForm(const string & id, const string & title, const string & left, const string & right, const fvec2 & position);
 

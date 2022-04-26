@@ -127,7 +127,7 @@ const int Mathematics::calculateAverage(const vector<int> & values)
 		total += value;
 	}
 
-	return static_cast<int>(total / values.size());
+	return (total / static_cast<int>(values.size()));
 }
 
 const float Mathematics::convertToRadians(float angle)

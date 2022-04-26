@@ -51,7 +51,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity)
 	for(const auto & partId : entity->getPartIds())
 	{
 		_shaderBuffer->uploadUniform("u_transformation", entity->getTransformation(partId));
-		_shaderBuffer->uploadUniform("u_textureRepeat", static_cast<int>(entity->getTextureRepeat(partId)));
+		_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partId));
 		_shaderBuffer->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha(partId));
 
 		if(entity->isFaceCulled(partId))

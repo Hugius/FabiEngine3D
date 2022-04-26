@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getCubeReflectionQuality());
+			const auto result = _fe3d->graphics_getCubeReflectionQuality();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -134,7 +134,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getPlanarReflectionQuality());
+			const auto result = _fe3d->graphics_getPlanarReflectionQuality();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -143,7 +143,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getPlanarRefractionQuality());
+			const auto result = _fe3d->graphics_getPlanarRefractionQuality();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -152,7 +152,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getPlanarReflectionHeight());
+			const auto result = _fe3d->graphics_getPlanarReflectionHeight();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -233,7 +233,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getShadowQuality());
+			const auto result = _fe3d->graphics_getShadowQuality();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -242,7 +242,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getShadowInterval());
+			const auto result = _fe3d->graphics_getShadowInterval();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -323,7 +323,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getDofQuality());
+			const auto result = _fe3d->graphics_getDofQuality();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -377,7 +377,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getMotionBlurQuality());
+			const auto result = _fe3d->graphics_getMotionBlurQuality();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -449,7 +449,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getBloomQuality());
+			const auto result = _fe3d->graphics_getBloomQuality();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -458,7 +458,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getBloomBlurCount());
+			const auto result = _fe3d->graphics_getBloomBlurCount();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}
@@ -532,7 +532,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string & function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->graphics_getAnisotropicFilteringQuality());
+			const auto result = _fe3d->graphics_getAnisotropicFilteringQuality();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}

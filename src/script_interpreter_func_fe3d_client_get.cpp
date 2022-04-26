@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string & functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			const auto result = static_cast<int>(_fe3d->client_getPingLatency());
+			const auto result = _fe3d->client_getPingLatency();
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 		}

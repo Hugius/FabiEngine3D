@@ -117,7 +117,7 @@ void TextureBuffer::loadAnisotropicFiltering(unsigned int quality)
 {
 	glBindTexture(GL_TEXTURE_2D, _tboId);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, static_cast<int>(quality));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, quality);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 

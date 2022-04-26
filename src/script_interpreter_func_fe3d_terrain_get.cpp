@@ -534,7 +534,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string & functionN
 		{
 			if(_validateFe3dTerrain(args[0]->getString(), false))
 			{
-				const auto result = static_cast<int>(_fe3d->terrain_getTextureRepeat(_fe3d->terrain_getSelectedId()));
+				const auto result = _fe3d->terrain_getTextureRepeat(_fe3d->terrain_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
@@ -548,7 +548,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string & functionN
 		{
 			if(_validateFe3dTerrain(args[0]->getString(), false))
 			{
-				const auto result = static_cast<int>(_fe3d->terrain_getRedTextureRepeat(_fe3d->terrain_getSelectedId()));
+				const auto result = _fe3d->terrain_getRedTextureRepeat(_fe3d->terrain_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
@@ -562,7 +562,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string & functionN
 		{
 			if(_validateFe3dTerrain(args[0]->getString(), false))
 			{
-				const auto result = static_cast<int>(_fe3d->terrain_getGreenTextureRepeat(_fe3d->terrain_getSelectedId()));
+				const auto result = _fe3d->terrain_getGreenTextureRepeat(_fe3d->terrain_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}
@@ -576,7 +576,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string & functionN
 		{
 			if(_validateFe3dTerrain(args[0]->getString(), false))
 			{
-				const auto result = static_cast<int>(_fe3d->terrain_getBlueTextureRepeat(_fe3d->terrain_getSelectedId()));
+				const auto result = _fe3d->terrain_getBlueTextureRepeat(_fe3d->terrain_getSelectedId());
 
 				returnValues.push_back(make_shared<ScriptValue>(SVT::INTEGER, result));
 			}

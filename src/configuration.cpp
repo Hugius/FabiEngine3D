@@ -35,8 +35,8 @@ Configuration::Configuration()
 
 		_windowSize.x = static_cast<int>(static_cast<float>(monitorSize.x) * _windowSizeMultiplier.x);
 		_windowSize.y = static_cast<int>(static_cast<float>(monitorSize.y) * _windowSizeMultiplier.y);
-		_displaySize.x = static_cast<int>(static_cast<float>(_windowSize.x));
-		_displaySize.y = static_cast<int>(static_cast<float>(_windowSize.y));
+		_displaySize.x = _windowSize.x;
+		_displaySize.y = _windowSize.y;
 		_displayPosition.x = 0;
 		_displayPosition.y = 0;
 

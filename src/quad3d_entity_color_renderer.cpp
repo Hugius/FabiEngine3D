@@ -71,7 +71,7 @@ void Quad3dEntityColorRenderer::render(const shared_ptr<Quad3dEntity> entity)
 	_shaderBuffer->uploadUniform("u_opacity", entity->getOpacity());
 	_shaderBuffer->uploadUniform("u_isBright", entity->isBright());
 	_shaderBuffer->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
-	_shaderBuffer->uploadUniform("u_textureRepeat", static_cast<int>(entity->getTextureRepeat()));
+	_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 	_shaderBuffer->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 	_shaderBuffer->uploadUniform("u_uvOffset", entity->getUvOffset());
 	_shaderBuffer->uploadUniform("u_minTextureAlpha", entity->getMinTextureAlpha());

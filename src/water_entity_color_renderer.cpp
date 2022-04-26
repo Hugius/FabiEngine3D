@@ -155,7 +155,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 	_shaderBuffer->uploadUniform("u_waveHeight", entity->getWaveHeight());
 	_shaderBuffer->uploadUniform("u_maxDepth", entity->getMaxDepth());
 	_shaderBuffer->uploadUniform("u_height", entity->getHeight());
-	_shaderBuffer->uploadUniform("u_textureRepeat", static_cast<int>(entity->getTextureRepeat()));
+	_shaderBuffer->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 	_shaderBuffer->uploadUniform("u_specularShininess", entity->getSpecularShininess());
 	_shaderBuffer->uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
 	_shaderBuffer->uploadUniform("u_isEdged", entity->isEdged());

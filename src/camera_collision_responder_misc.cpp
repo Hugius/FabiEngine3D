@@ -112,6 +112,7 @@ const bool CameraCollisionResponder::_handleCollision(DirectionType direction) c
 					if(_isCameraAabbResponseEnabledX && hasCollided)
 					{
 						_camera->setPosition(fvec3(_lastCameraPosition.x, middle.y, middle.z));
+
 						return true;
 					}
 				}
@@ -137,6 +138,7 @@ const bool CameraCollisionResponder::_handleCollision(DirectionType direction) c
 						if(!_isCameraUnderTerrain)
 						{
 							_camera->setPosition(fvec3(middle.x, _lastCameraPosition.y, middle.z));
+
 							return true;
 						}
 					}
@@ -161,6 +163,7 @@ const bool CameraCollisionResponder::_handleCollision(DirectionType direction) c
 					if(_isCameraAabbResponseEnabledZ && hasCollided)
 					{
 						_camera->setPosition(fvec3(middle.x, middle.y, _lastCameraPosition.z));
+
 						return true;
 					}
 				}

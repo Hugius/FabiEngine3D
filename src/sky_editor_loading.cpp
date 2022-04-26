@@ -83,6 +83,7 @@ const bool SkyEditor::loadEntitiesFromFile()
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sky.fe3d` does not exist");
+
 		return false;
 	}
 

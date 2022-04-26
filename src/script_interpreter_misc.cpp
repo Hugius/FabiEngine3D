@@ -55,21 +55,25 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 	if(_hasPassedLoopStatement && isScopeDepthInvalid)
 	{
 		_throwRuntimeError("incorrect indentation after LOOP statement");
+
 		return false;
 	}
 	else if(_hasPassedIfStatement && isScopeDepthInvalid)
 	{
 		_throwRuntimeError("incorrect indentation after IF statement");
+
 		return false;
 	}
 	else if(_hasPassedElifStatement && isScopeDepthInvalid)
 	{
 		_throwRuntimeError("incorrect indentation after ELIF statement");
+
 		return false;
 	}
 	else if(_hasPassedElseStatement && isScopeDepthInvalid)
 	{
 		_throwRuntimeError("incorrect indentation after ELSE statement");
+
 		return false;
 	}
 	else if(currentLineScopeDepth < scopeDepth)
@@ -85,6 +89,7 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 		else
 		{
 			_throwRuntimeError("unnecessary indentation before statement");
+
 			return false;
 		}
 	}
@@ -110,6 +115,7 @@ const bool ScriptInterpreter::_validateSavesDirectory()
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
 		_throwRuntimeError("Project corrupted: directory `saves\\` does not exist");
+
 		return false;
 	}
 

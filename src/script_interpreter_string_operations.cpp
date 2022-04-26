@@ -135,6 +135,7 @@ const bool ScriptInterpreter::_validateKeyInputString(const string & inputString
 	if(keyboard_key_typeS.find(inputString) == keyboard_key_typeS.end())
 	{
 		_throwRuntimeError("invalid keyboard key");
+
 		return false;
 	}
 
@@ -146,6 +147,7 @@ const bool ScriptInterpreter::_validateMouseInputString(const string & inputStri
 	if(mouse_button_typeS.find(inputString) == mouse_button_typeS.end())
 	{
 		_throwRuntimeError("invalid mouse button");
+
 		return false;
 	}
 

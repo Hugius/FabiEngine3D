@@ -36,6 +36,7 @@ const bool NetworkingServer::_sendTcpMessageToClient(SOCKET socket, const string
 		if(WSAGetLastError() == WSAECONNRESET || WSAGetLastError() == WSAECONNABORTED)
 		{
 			_disconnectClient(socket);
+
 			return false;
 		}
 		else if(WSAGetLastError() == WSAENOBUFS)
@@ -129,7 +130,9 @@ const bool NetworkingServer::_setupTcp()
 		if(WSAGetLastError() == WSAEADDRINUSE)
 		{
 			Logger::throwInfo("Current machine is already hosting a networking server");
+
 			freeaddrinfo(tcpAddressInfo);
+
 			return false;
 		}
 		else
@@ -189,7 +192,9 @@ const bool NetworkingServer::_setupUdp()
 		if(WSAGetLastError() == WSAEADDRINUSE)
 		{
 			Logger::throwInfo("Current machine is already hosting a networking server");
+
 			freeaddrinfo(udpAddressInfo);
+
 			return false;
 		}
 		else

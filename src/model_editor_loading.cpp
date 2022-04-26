@@ -198,6 +198,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` does not exist");
+
 		return false;
 	}
 

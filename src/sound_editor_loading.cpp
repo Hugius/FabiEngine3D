@@ -73,6 +73,7 @@ const bool SoundEditor::loadSoundsFromFile()
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sound.fe3d` does not exist");
+
 		return false;
 	}
 

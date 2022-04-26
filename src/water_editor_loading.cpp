@@ -103,6 +103,7 @@ const bool WaterEditor::loadEntitiesFromFile()
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `water.fe3d` does not exist");
+
 		return false;
 	}
 

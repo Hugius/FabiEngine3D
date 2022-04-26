@@ -90,6 +90,7 @@ const bool Text3dEditor::loadEntitiesFromFile()
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `text3d.fe3d` does not exist");
+
 		return false;
 	}
 

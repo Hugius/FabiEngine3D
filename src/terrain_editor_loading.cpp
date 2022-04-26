@@ -213,6 +213,7 @@ const bool TerrainEditor::loadEntitiesFromFile()
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `terrain.fe3d` does not exist");
+
 		return false;
 	}
 

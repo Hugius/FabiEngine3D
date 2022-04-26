@@ -74,6 +74,7 @@ const bool Text2dEditor::loadEntitiesFromFile()
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `text2d.fe3d` does not exist");
+
 		return false;
 	}
 

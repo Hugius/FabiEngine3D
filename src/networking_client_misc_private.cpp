@@ -40,6 +40,7 @@ const bool NetworkingClient::_sendTcpMessageToServer(const string & content, boo
 		if((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED))
 		{
 			disconnectFromServer(mustBeAccepted);
+
 			return false;
 		}
 		else if(WSAGetLastError() == WSAENOBUFS)

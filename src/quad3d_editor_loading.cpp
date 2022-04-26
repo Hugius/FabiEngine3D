@@ -104,6 +104,7 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `quad3d.fe3d` does not exist");
+
 		return false;
 	}
 

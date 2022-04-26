@@ -22,6 +22,7 @@ const bool Animation2dEditor::loadAnimationsFromFile()
 	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `animation2d.fe3d` does not exist");
+
 		return false;
 	}
 

@@ -5,18 +5,21 @@ const bool ScriptInterpreter::_validateListIndex(const shared_ptr<ScriptVariable
 	if(list->getType() == ScriptVariableType::SINGLE)
 	{
 		_throwRuntimeError("variable \"" + list->getId() + "\" not of type LIST");
+
 		return false;
 	}
 
 	if(index < 0)
 	{
 		_throwRuntimeError("LIST index negative");
+
 		return false;
 	}
 
 	if(index >= list->getValueCount())
 	{
 		_throwRuntimeError("LIST index out of range");
+
 		return false;
 	}
 
@@ -32,11 +35,13 @@ const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<Scr
 	else if(values.size() < count)
 	{
 		_throwRuntimeError("not enough arguments");
+
 		return false;
 	}
 	else
 	{
 		_throwRuntimeError("too many arguments");
+
 		return false;
 	}
 }
@@ -48,6 +53,7 @@ const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<Scr
 		if(values[index]->getType() != types[index])
 		{
 			_throwRuntimeError("incorrect argument type");
+
 			return false;
 		}
 	}

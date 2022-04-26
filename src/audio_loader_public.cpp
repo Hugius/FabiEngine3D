@@ -70,7 +70,7 @@ void AudioLoader::cacheAudios(const vector<string> & filePaths, bool isCrucial)
 	vector<future<shared_ptr<Audio>>> threads;
 	vector<string> threadFilePaths;
 	vector<bool> threadStatuses;
-	unsigned int finishedThreadCount = 0;
+	int finishedThreadCount = 0;
 
 	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
@@ -87,7 +87,7 @@ void AudioLoader::cacheAudios(const vector<string> & filePaths, bool isCrucial)
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		for(unsigned int index = 0; index < static_cast<int>(threadStatuses.size()); index++)
+		for(int index = 0; index < static_cast<int>(threadStatuses.size()); index++)
 		{
 			if(!threadStatuses[index])
 			{

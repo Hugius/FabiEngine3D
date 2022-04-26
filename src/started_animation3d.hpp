@@ -48,8 +48,7 @@ private:
 
 	float _speedMultiplier = 1.0f;
 
-	unsigned int _frameIndex = 0;
-
+	int _frameIndex = 0;
 	int _playCount = 0;
 
 	bool _isPaused = false;

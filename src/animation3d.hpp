@@ -16,27 +16,27 @@ public:
 	void createPart(const string & partId);
 	void deletePart(const string & partId);
 	void deleteParts();
-	void createFrame(unsigned int index);
-	void deleteFrame(unsigned int index);
+	void createFrame(int index);
+	void deleteFrame(int index);
 	void deleteFrames();
-	void setTargetTransformation(unsigned int frameIndex, const string & partId, const fvec3 & value);
-	void setRotationOrigin(unsigned int frameIndex, const string & partId, const fvec3 & value);
-	void setSpeed(unsigned int frameIndex, const string & partId, const fvec3 & value);
-	void setSpeedType(unsigned int frameIndex, const string & partId, SpeedType value);
-	void setTransformationType(unsigned int frameIndex, const string & partId, TransformationType value);
+	void setTargetTransformation(int frameIndex, const string & partId, const fvec3 & value);
+	void setRotationOrigin(int frameIndex, const string & partId, const fvec3 & value);
+	void setSpeed(int frameIndex, const string & partId, const fvec3 & value);
+	void setSpeedType(int frameIndex, const string & partId, SpeedType value);
+	void setTransformationType(int frameIndex, const string & partId, TransformationType value);
 
 	const vector<string> & getPartIds() const;
 
 	const string & getId() const;
 
-	const fvec3 & getTargetTransformation(unsigned int frameIndex, const string & partId) const;
-	const fvec3 & getRotationOrigin(unsigned int frameIndex, const string & partId) const;
-	const fvec3 & getSpeed(unsigned int frameIndex, const string & partId) const;
+	const fvec3 & getTargetTransformation(int frameIndex, const string & partId) const;
+	const fvec3 & getRotationOrigin(int frameIndex, const string & partId) const;
+	const fvec3 & getSpeed(int frameIndex, const string & partId) const;
 
 	const int getFrameCount() const;
 
-	const SpeedType & getSpeedType(unsigned int frameIndex, const string & partId) const;
-	const TransformationType & getTransformationType(unsigned int frameIndex, const string & partId) const;
+	const SpeedType & getSpeedType(int frameIndex, const string & partId) const;
+	const TransformationType & getTransformationType(int frameIndex, const string & partId) const;
 
 private:
 	const string _id;

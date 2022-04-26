@@ -104,7 +104,7 @@ const bool Text3dEditor::loadEntitiesFromFile()
 		float lightness;
 		float opacity;
 		float minTextureAlpha;
-		unsigned int rotationOrder;
+		int rotationOrder;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
 		bool isHorizontallyFlipped;

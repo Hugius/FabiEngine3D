@@ -31,9 +31,9 @@ void CameraCollisionResponder::update()
 
 	if(_isCameraAabbResponseEnabledX || _isCameraAabbResponseEnabledY || _isCameraAabbResponseEnabledZ)
 	{
-		unsigned int xPriority = 0;
-		unsigned int yPriority = 0;
-		unsigned int zPriority = 0;
+		int xPriority = 0;
+		int yPriority = 0;
+		int zPriority = 0;
 
 		for(const auto & [entityId, entity] : _aabbManager->getEntities())
 		{

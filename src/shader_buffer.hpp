@@ -39,7 +39,7 @@ private:
 	void _uploadUniform(const int & uniformId, const mat33 & data);
 	void _uploadUniform(const int & uniformId, const mat44 & data);
 
-	unordered_map<string, unsigned int> _uniformCache = {};
+	unordered_map<string, int> _uniformCache = {};
 
-	unsigned int _programId = 0;
+	int _programId = 0;
 };

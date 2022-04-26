@@ -20,8 +20,8 @@ public:
 private:
 	void _stop(bool mustExecuteTerminationScripts);
 
-	vector<pair<string, unsigned int>> _pausedSound3dIds = {};
-	vector<pair<string, unsigned int>> _pausedSound2dIds = {};
+	vector<pair<string, int>> _pausedSound3dIds = {};
+	vector<pair<string, int>> _pausedSound2dIds = {};
 	vector<string> _pausedClockIds = {};
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;

@@ -1,6 +1,6 @@
 #include "vertex_buffer.hpp"
 
-VertexBuffer::VertexBuffer(VertexBufferType type, const float data[], unsigned int dataCount)
+VertexBuffer::VertexBuffer(VertexBufferType type, const float data[], int dataCount)
 {
 	_bufferType = type;
 

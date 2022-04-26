@@ -22,7 +22,7 @@ public:
 private:
 	const string _id;
 
-	unsigned int _rowCount = 1;
-	unsigned int _columnCount = 1;
-	unsigned int _interval = 0;
+	int _rowCount = 1;
+	int _columnCount = 1;
+	int _interval = 0;
 };

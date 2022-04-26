@@ -95,7 +95,7 @@ const bool SkyEditor::loadEntitiesFromFile()
 		fvec3 color;
 		fvec3 rotation;
 		float lightness;
-		unsigned int rotationOrder;
+		int rotationOrder;
 
 		istringstream iss(line);
 

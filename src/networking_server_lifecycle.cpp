@@ -21,7 +21,7 @@ NetworkingServer::~NetworkingServer()
 	}
 }
 
-void NetworkingServer::start(unsigned int maxClientCount)
+void NetworkingServer::start(int maxClientCount)
 {
 	if(_isRunning)
 	{

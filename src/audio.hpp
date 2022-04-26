@@ -3,7 +3,7 @@
 class Audio final
 {
 public:
-	Audio(unsigned char * samples, unsigned int sampleCount, unsigned int channelCount, unsigned int sampleRate, unsigned int byteRate, unsigned int bytesPerBlock, unsigned int bitsPerSample);
+	Audio(unsigned char * samples, int sampleCount, int channelCount, int sampleRate, int byteRate, int bytesPerBlock, int bitsPerSample);
 	~Audio();
 
 	const unsigned char * getSamples() const;

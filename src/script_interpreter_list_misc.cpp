@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-const bool ScriptInterpreter::_validateListIndex(const shared_ptr<ScriptVariable> list, unsigned int index)
+const bool ScriptInterpreter::_validateListIndex(const shared_ptr<ScriptVariable> list, int index)
 {
 	if(list->getType() == ScriptVariableType::SINGLE)
 	{
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_validateListIndex(const shared_ptr<ScriptVariable
 	return true;
 }
 
-const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<ScriptValue>> & values, unsigned int count)
+const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<ScriptValue>> & values, int count)
 {
 	if(values.size() == count)
 	{
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<Scr
 
 const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<ScriptValue>> & values, const vector<ScriptValueType> & types)
 {
-	for(unsigned int index = 0; index < static_cast<int>(values.size()); index++)
+	for(int index = 0; index < static_cast<int>(values.size()); index++)
 	{
 		if(values[index]->getType() != types[index])
 		{
@@ -210,7 +210,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 		return;
 	}
 
-	unsigned int index;
+	int index;
 	if(_isIntegerValue(indexString))
 	{
 		index = stoi(_limitIntegerString(indexString));

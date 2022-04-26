@@ -42,7 +42,7 @@ void Sound3dPlayer::startSound(const string & id, int playCount)
 	header->lpData = new char[header->dwBufferLength];
 	header->dwFlags = 0;
 
-	for(unsigned int index = 0; index < header->dwBufferLength; index++)
+	for(int index = 0; index < header->dwBufferLength; index++)
 	{
 		header->lpData[index] = waveBuffer->getHeader()->lpData[index];
 	}
@@ -131,7 +131,7 @@ void Sound3dPlayer::startSound(const string & id, int playCount)
 	_startedSounds.at(id).push_back(newSound);
 }
 
-void Sound3dPlayer::pauseSound(const string & id, unsigned int index)
+void Sound3dPlayer::pauseSound(const string & id, int index)
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -167,7 +167,7 @@ void Sound3dPlayer::pauseSound(const string & id, unsigned int index)
 	}
 }
 
-void Sound3dPlayer::resumeSound(const string & id, unsigned int index)
+void Sound3dPlayer::resumeSound(const string & id, int index)
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -203,7 +203,7 @@ void Sound3dPlayer::resumeSound(const string & id, unsigned int index)
 	}
 }
 
-void Sound3dPlayer::stopSound(const string & id, unsigned int index)
+void Sound3dPlayer::stopSound(const string & id, int index)
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{

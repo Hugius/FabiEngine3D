@@ -30,9 +30,9 @@ const bool Animation2dEditor::loadAnimationsFromFile()
 	while(getline(file, line))
 	{
 		string animationId;
-		unsigned int rowCount;
-		unsigned int columnCount;
-		unsigned int interval;
+		int rowCount;
+		int columnCount;
+		int interval;
 
 		istringstream iss(line);
 

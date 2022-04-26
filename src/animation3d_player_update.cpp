@@ -25,7 +25,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 		const auto animation = _animation3dManager->getAnimation(splitKey.first);
 		const auto model = _modelEntityManager->getEntity(splitKey.second);
 
-		unsigned int finishedPartCount = 0;
+		int finishedPartCount = 0;
 		for(const auto & partId : startedAnimation->getPartIds())
 		{
 			auto totalMovement = startedAnimation->getTotalMovement(partId);

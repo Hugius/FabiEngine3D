@@ -19,12 +19,12 @@ void EngineInterface::animation3d_delete(const string & id)
 	_core->getAnimation3dManager()->deleteAnimation(id);
 }
 
-void EngineInterface::animation3d_createFrame(const string & animationId, unsigned int index)
+void EngineInterface::animation3d_createFrame(const string & animationId, int index)
 {
 	_core->getAnimation3dManager()->getAnimation(animationId)->createFrame(index);
 }
 
-void EngineInterface::animation3d_deleteFrame(const string & animationId, unsigned int index)
+void EngineInterface::animation3d_deleteFrame(const string & animationId, int index)
 {
 	_core->getAnimation3dManager()->getAnimation(animationId)->deleteFrame(index);
 }
@@ -49,27 +49,27 @@ void EngineInterface::animation3d_deleteParts(const string & animationId)
 	_core->getAnimation3dManager()->getAnimation(animationId)->deleteParts();
 }
 
-void EngineInterface::animation3d_setTargetTransformation(const string & animationId, unsigned int frameIndex, const string & partId, const fvec3 & value)
+void EngineInterface::animation3d_setTargetTransformation(const string & animationId, int frameIndex, const string & partId, const fvec3 & value)
 {
 	_core->getAnimation3dManager()->getAnimation(animationId)->setTargetTransformation(frameIndex, partId, value);
 }
 
-void EngineInterface::animation3d_setRotationOrigin(const string & animationId, unsigned int frameIndex, const string & partId, const fvec3 & value)
+void EngineInterface::animation3d_setRotationOrigin(const string & animationId, int frameIndex, const string & partId, const fvec3 & value)
 {
 	_core->getAnimation3dManager()->getAnimation(animationId)->setRotationOrigin(frameIndex, partId, value);
 }
 
-void EngineInterface::animation3d_setSpeed(const string & animationId, unsigned int frameIndex, const string & partId, const fvec3 & value)
+void EngineInterface::animation3d_setSpeed(const string & animationId, int frameIndex, const string & partId, const fvec3 & value)
 {
 	_core->getAnimation3dManager()->getAnimation(animationId)->setSpeed(frameIndex, partId, value);
 }
 
-void EngineInterface::animation3d_setSpeedType(const string & animationId, unsigned int frameIndex, const string & partId, SpeedType value)
+void EngineInterface::animation3d_setSpeedType(const string & animationId, int frameIndex, const string & partId, SpeedType value)
 {
 	_core->getAnimation3dManager()->getAnimation(animationId)->setSpeedType(frameIndex, partId, value);
 }
 
-void EngineInterface::animation3d_setTransformationType(const string & animationId, unsigned int frameIndex, const string & partId, TransformationType value)
+void EngineInterface::animation3d_setTransformationType(const string & animationId, int frameIndex, const string & partId, TransformationType value)
 {
 	_core->getAnimation3dManager()->getAnimation(animationId)->setTransformationType(frameIndex, partId, value);
 }
@@ -91,27 +91,27 @@ const vector<string> & EngineInterface::animation3d_getPartIds(const string & an
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getPartIds();
 }
 
-const fvec3 & EngineInterface::animation3d_getTargetTransformation(const string & animationId, unsigned int frameIndex, const string & partId) const
+const fvec3 & EngineInterface::animation3d_getTargetTransformation(const string & animationId, int frameIndex, const string & partId) const
 {
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getTargetTransformation(frameIndex, partId);
 }
 
-const fvec3 & EngineInterface::animation3d_getRotationOrigin(const string & animationId, unsigned int frameIndex, const string & partId) const
+const fvec3 & EngineInterface::animation3d_getRotationOrigin(const string & animationId, int frameIndex, const string & partId) const
 {
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getRotationOrigin(frameIndex, partId);
 }
 
-const fvec3 & EngineInterface::animation3d_getSpeed(const string & animationId, unsigned int frameIndex, const string & partId) const
+const fvec3 & EngineInterface::animation3d_getSpeed(const string & animationId, int frameIndex, const string & partId) const
 {
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getSpeed(frameIndex, partId);
 }
 
-const SpeedType & EngineInterface::animation3d_getSpeedType(const string & animationId, unsigned int frameIndex, const string & partId) const
+const SpeedType & EngineInterface::animation3d_getSpeedType(const string & animationId, int frameIndex, const string & partId) const
 {
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getSpeedType(frameIndex, partId);
 }
 
-const TransformationType & EngineInterface::animation3d_getTransformationType(const string & animationId, unsigned int frameIndex, const string & partId) const
+const TransformationType & EngineInterface::animation3d_getTransformationType(const string & animationId, int frameIndex, const string & partId) const
 {
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getTransformationType(frameIndex, partId);
 }

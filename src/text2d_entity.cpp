@@ -58,7 +58,7 @@ void Text2dEntity::updateCharacterEntities()
 {
 	const auto rotationMatrix = Mathematics::createRotationMatrixZ(Mathematics::convertToRadians(_rotation));
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
-	unsigned int index = 0;
+	int index = 0;
 
 	if(_isHorizontallyFlipped)
 	{

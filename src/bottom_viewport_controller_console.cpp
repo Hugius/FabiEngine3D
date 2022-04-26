@@ -14,7 +14,7 @@ void BottomViewportController::_updateConsole()
 
 		_clearConsole();
 
-		for(unsigned int index = (loggerMessageCount - synchronizationCount); index < loggerMessageCount; index++)
+		for(int index = (loggerMessageCount - synchronizationCount); index < loggerMessageCount; index++)
 		{
 			if(_messageQueue.size() == MAX_MESSAGE_COUNT)
 			{
@@ -59,7 +59,7 @@ void BottomViewportController::_fillConsole()
 	const auto minClipPosition = (window->getPosition() - (window->getSize() * 0.5f));
 	const auto maxClipPosition = (window->getPosition() + (window->getSize() * 0.5f));
 
-	for(unsigned int index = 0; index < messageCount; index++)
+	for(int index = 0; index < messageCount; index++)
 	{
 		const auto message = _messageQueue[index];
 		const auto timestampText = ("[" + message->getTimestamp() + "]");
@@ -84,7 +84,7 @@ void BottomViewportController::_clearConsole()
 	const auto screen = _gui->getBottomViewport()->getWindow("console")->getScreen("main");
 	const auto messageCount = static_cast<int>(_messageQueue.size());
 
-	for(unsigned int index = 0; index < messageCount; index++)
+	for(int index = 0; index < messageCount; index++)
 	{
 		screen->deleteTextField("timestamp_" + to_string(index));
 		screen->deleteTextField("content_" + to_string(index));

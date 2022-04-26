@@ -68,7 +68,7 @@ void MasterRenderer::captureCubeReflections()
 
 			_camera->setPosition(entity->getPosition());
 
-			unsigned int textureId;
+			int textureId;
 			glGenTextures(1, &textureId);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -78,7 +78,7 @@ void MasterRenderer::captureCubeReflections()
 			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-			for(unsigned int index = 0; index < 6; index++)
+			for(int index = 0; index < 6; index++)
 			{
 				switch(index)
 				{

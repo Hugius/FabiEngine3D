@@ -120,8 +120,8 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		float opacity;
 		float minTextureAlpha;
 		float emissionIntensity;
-		unsigned int textureRepeat;
-		unsigned int rotationOrder;
+		int textureRepeat;
+		int rotationOrder;
 		bool isFacingCameraHorizontally;
 		bool isFacingCameraVertically;
 		bool isHorizontallyFlipped;

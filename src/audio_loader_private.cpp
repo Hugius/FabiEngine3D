@@ -48,11 +48,11 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 		return nullptr;
 	}
 
-	unsigned int channelCount = 0;
-	unsigned int sampleRate = 0;
-	unsigned int byteRate = 0;
-	unsigned int bytesPerBlock = 0;
-	unsigned int bitsPerSample = 0;
+	int channelCount = 0;
+	int sampleRate = 0;
+	int byteRate = 0;
+	int bytesPerBlock = 0;
+	int bitsPerSample = 0;
 
 	while(true)
 	{
@@ -110,7 +110,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 		{
 			const auto samples = new unsigned char[subChunkSize];
 
-			for(unsigned int index = 0; index < subChunkSize; index++)
+			for(int index = 0; index < subChunkSize; index++)
 			{
 				samples[index] = static_cast<unsigned char>(getc(file));
 			}
@@ -121,7 +121,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 		}
 		else
 		{
-			for(unsigned int index = 0; index < subChunkSize; index++)
+			for(int index = 0; index < subChunkSize; index++)
 			{
 				const auto temp = getc(file);
 			}

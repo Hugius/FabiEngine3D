@@ -3,7 +3,7 @@
 void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 {
 	string words[2] = {"", ""};
-	unsigned int wordIndex = 0;
+	int wordIndex = 0;
 	for(const auto & character : scriptLine)
 	{
 		if(character == ' ')
@@ -66,7 +66,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 	const auto leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	unsigned int leftValueIndex = 0;
+	int leftValueIndex = 0;
 	if(isAccessingLeftList)
 	{
 		if(!_validateListIndex(leftVariable, leftListIndex))
@@ -187,7 +187,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 
 		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
-		unsigned int rightValueIndex = 0;
+		int rightValueIndex = 0;
 		if(isAccessingRightList)
 		{
 			if(!_validateListIndex(rightVariable, rightListIndex))

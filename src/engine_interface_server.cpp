@@ -1,7 +1,7 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::server_start(unsigned int maxClientCount)
+void EngineInterface::server_start(int maxClientCount)
 {
 	_core->getNetworkingServer()->start(maxClientCount);
 }

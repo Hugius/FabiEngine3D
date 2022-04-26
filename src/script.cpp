@@ -51,7 +51,7 @@ const int Script::getScriptFileCount() const
 
 const int Script::getTotalLineCount() const
 {
-	unsigned int total = 0;
+	int total = 0;
 
 	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
 	{
@@ -93,17 +93,17 @@ const vector<string> Script::getScriptFileIds() const
 	return result;
 }
 
-const unordered_map<string, unsigned int> Script::findKeyword(const string & keyword) const
+const unordered_map<string, int> Script::findKeyword(const string & keyword) const
 {
-	unordered_map<string, unsigned int> result;
+	unordered_map<string, int> result;
 
 	for(const auto & [scriptFileId, scriptFile] : _scriptFiles)
 	{
-		for(unsigned int lineNumber = 0; lineNumber < static_cast<int>(scriptFile->getLines().size()); lineNumber++)
+		for(int lineNumber = 0; lineNumber < static_cast<int>(scriptFile->getLines().size()); lineNumber++)
 		{
 			const auto line = scriptFile->getLines()[lineNumber];
 
-			for(unsigned int index = 0; index < static_cast<int>(line.size()); index++)
+			for(int index = 0; index < static_cast<int>(line.size()); index++)
 			{
 				if(line.substr(index, keyword.size()) == keyword)
 				{

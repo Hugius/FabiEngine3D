@@ -122,7 +122,7 @@ const bool WaterEditor::loadEntitiesFromFile()
 		float specularShininess;
 		float specularIntensity;
 		float maxDepth;
-		unsigned int textureRepeat;
+		int textureRepeat;
 		bool isSpecular;
 		bool isReflective;
 		bool isRefractive;

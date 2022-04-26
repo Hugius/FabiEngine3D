@@ -42,7 +42,7 @@ class ModelEntityPart final
 	float emissionIntensity = 1.0f;
 	float minTextureAlpha = 1.0f;
 
-	unsigned int textureRepeat = 1;
+	int textureRepeat = 1;
 
 	bool isSpecular = false;
 	bool isReflective = false;

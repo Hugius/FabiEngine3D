@@ -18,7 +18,7 @@ const bool Sound3dPlayer::isDeviceConnected() const
 	return (waveOutGetNumDevs() > 0);
 }
 
-const bool Sound3dPlayer::isSoundStarted(const string & id, unsigned int index) const
+const bool Sound3dPlayer::isSoundStarted(const string & id, int index) const
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -33,7 +33,7 @@ const bool Sound3dPlayer::isSoundStarted(const string & id, unsigned int index) 
 	return (index < _startedSounds.at(id).size());
 }
 
-const bool Sound3dPlayer::isSoundPaused(const string & id, unsigned int index) const
+const bool Sound3dPlayer::isSoundPaused(const string & id, int index) const
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -47,7 +47,7 @@ const bool Sound3dPlayer::isSoundPaused(const string & id, unsigned int index) c
 	return _startedSounds.at(id)[index]->isPaused();
 }
 
-const float Sound3dPlayer::getSoundVolume(const string & id, unsigned int index) const
+const float Sound3dPlayer::getSoundVolume(const string & id, int index) const
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -61,7 +61,7 @@ const float Sound3dPlayer::getSoundVolume(const string & id, unsigned int index)
 	return _startedSounds.at(id)[index]->getVolume();
 }
 
-const float Sound3dPlayer::getSoundLeftIntensity(const string & id, unsigned int index) const
+const float Sound3dPlayer::getSoundLeftIntensity(const string & id, int index) const
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -75,7 +75,7 @@ const float Sound3dPlayer::getSoundLeftIntensity(const string & id, unsigned int
 	return _startedSounds.at(id)[index]->getLeftIntensity();
 }
 
-const float Sound3dPlayer::getSoundRightIntensity(const string & id, unsigned int index) const
+const float Sound3dPlayer::getSoundRightIntensity(const string & id, int index) const
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -89,7 +89,7 @@ const float Sound3dPlayer::getSoundRightIntensity(const string & id, unsigned in
 	return _startedSounds.at(id)[index]->getRightIntensity();
 }
 
-const int Sound3dPlayer::getPlayCount(const string & id, unsigned int index) const
+const int Sound3dPlayer::getPlayCount(const string & id, int index) const
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -123,14 +123,14 @@ void Sound3dPlayer::_terminateSounds()
 {
 	for(const auto & [soundId, instances] : _startedSounds)
 	{
-		for(unsigned int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
+		for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 		{
 			_terminateSound(soundId, instanceIndex);
 		}
 	}
 }
 
-void Sound3dPlayer::_terminateSound(const string & id, unsigned int index)
+void Sound3dPlayer::_terminateSound(const string & id, int index)
 {
 	if(!_volumeThreadQueue.empty())
 	{
@@ -157,9 +157,9 @@ void Sound3dPlayer::_terminateSound(const string & id, unsigned int index)
 	}
 }
 
-void Sound3dPlayer::_updateSamplesVolume(unsigned int sampleCount, short * originalSamples, short * startedSamples, float volume, float leftIntensity, float rightIntensity)
+void Sound3dPlayer::_updateSamplesVolume(int sampleCount, short * originalSamples, short * startedSamples, float volume, float leftIntensity, float rightIntensity)
 {
-	for(unsigned int sampleIndex = 0; sampleIndex < sampleCount; sampleIndex++)
+	for(int sampleIndex = 0; sampleIndex < sampleCount; sampleIndex++)
 	{
 		if(((sampleIndex + 1) % 2) == 0)
 		{
@@ -172,7 +172,7 @@ void Sound3dPlayer::_updateSamplesVolume(unsigned int sampleCount, short * origi
 	}
 }
 
-const int Sound3dPlayer::getSoundTime(const string & id, unsigned int index) const
+const int Sound3dPlayer::getSoundTime(const string & id, int index) const
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{

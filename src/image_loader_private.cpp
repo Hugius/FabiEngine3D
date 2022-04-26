@@ -71,9 +71,9 @@ shared_ptr<Image> ImageLoader::_loadImage(const string & filePath) const
 	const auto size = (width * height * bytesPerPixel);
 	const auto pixels = new unsigned char[size];
 
-	for(unsigned int y = 0; y < height; y++)
+	for(int y = 0; y < height; y++)
 	{
-		for(unsigned int x = 0; x < width; x++)
+		for(int x = 0; x < width; x++)
 		{
 			const auto index = ((y * width * bytesPerPixel) + (x * bytesPerPixel));
 

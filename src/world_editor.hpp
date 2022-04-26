@@ -259,8 +259,7 @@ private:
 
 	float _editorSpeed = 1.0f;
 
-	unsigned int _idCounter = 0;
-
+	int _idCounter = 0;
 	int _selectedModelHighlightDirection = 1;
 	int _activeModelHighlightDirection = 1;
 	int _selectedQuad3dHighlightDirection = 1;

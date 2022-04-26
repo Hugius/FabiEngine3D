@@ -8,7 +8,7 @@ using std::clamp;
 
 void Sound3dPlayer::update()
 {
-	vector<pair<string, unsigned int>> soundsToStop;
+	vector<pair<string, int>> soundsToStop;
 
 	for(auto & [soundId, instances] : _startedSounds)
 	{
@@ -25,7 +25,7 @@ void Sound3dPlayer::update()
 		const auto leftIntensity = ((dotProduct * 0.5f) + 0.5f);
 		const auto rightIntensity = (1.0f - leftIntensity);
 
-		for(unsigned int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
+		for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 		{
 			if((instances[instanceIndex]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
 			{
@@ -110,7 +110,7 @@ void Sound3dPlayer::update()
 	{
 		for(auto & [soundId, instances] : _startedSounds)
 		{
-			for(unsigned int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
+			for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 			{
 				_volumeThreadQueue.push_back({soundId, instanceIndex});
 			}

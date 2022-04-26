@@ -148,7 +148,7 @@ void ScriptInterpreter::load()
 	{
 		auto scriptFile = _script->getScriptFile(scriptId);
 
-		for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
+		for(int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 		{
 			auto scriptLineText = scriptFile->getLine(lineIndex);
 			auto scriptLineTextStream = istringstream(scriptLineText);
@@ -157,7 +157,7 @@ void ScriptInterpreter::load()
 
 			if(noWhiteSpace.substr(0, 3) == "///")
 			{
-				unsigned int charIndex;
+				int charIndex;
 				for(charIndex = 0; charIndex < static_cast<int>(scriptLineText.size()); charIndex++)
 				{
 					if(scriptLineText[charIndex] != ' ')

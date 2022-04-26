@@ -85,7 +85,7 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 		string diffuseMapPath;
 		fvec3 color;
 		float opacity;
-		unsigned int textureRepeat;
+		int textureRepeat;
 		bool isHorizontallyFlipped;
 		bool isVerticallyFlipped;
 

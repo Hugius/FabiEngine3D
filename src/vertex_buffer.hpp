@@ -13,7 +13,7 @@ using std::vector;
 class VertexBuffer final
 {
 public:
-	VertexBuffer(VertexBufferType type, const float data[], unsigned int dataCount);
+	VertexBuffer(VertexBufferType type, const float data[], int dataCount);
 	VertexBuffer(float x, float y, float w, float h, bool isCentered);
 	~VertexBuffer();
 
@@ -24,9 +24,9 @@ public:
 	const VertexBufferType getBufferType() const;
 
 private:
-	unsigned int _vertexCount = 0;
-	unsigned int _vaoId = 0;
-	unsigned int _vboId = 0;
+	int _vertexCount = 0;
+	int _vaoId = 0;
+	int _vboId = 0;
 
 	VertexBufferType _bufferType = {};
 };

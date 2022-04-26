@@ -75,11 +75,11 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		_fe3d->clock_start("scriptDebug");
 	}
 
-	vector<unsigned int> loopScopeDepths;
-	vector<unsigned int> loopLineIndices;
-	vector<unsigned int> loopIterationCounts;
+	vector<int> loopScopeDepths;
+	vector<int> loopLineIndices;
+	vector<int> loopIterationCounts;
 	vector<ScriptConditionStatement> conditionStatements;
-	unsigned int scopeDepth = 0;
+	int scopeDepth = 0;
 
 	_executionDepth++;
 	_currentScriptIdsStack.push_back(scriptId);
@@ -100,7 +100,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 
 	auto scriptFile = _script->getScriptFile(scriptId);
 
-	for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
+	for(int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
 		auto lastLoggerMessageCount = Logger::getMessageCount();
 
@@ -118,7 +118,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			continue;
 		}
 
-		unsigned int countedSpaces = _countLeadingSpaces(scriptLineText);
+		int countedSpaces = _countLeadingSpaces(scriptLineText);
 
 		if(_hasThrownError)
 		{
@@ -136,7 +136,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			return;
 		}
 
-		unsigned int currentLineScopeDepth = countedSpaces / SPACES_PER_INDENT;
+		int currentLineScopeDepth = countedSpaces / SPACES_PER_INDENT;
 
 		bool isEndOfLoop = false;
 		if(!loopLineIndices.empty())

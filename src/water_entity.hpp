@@ -107,7 +107,7 @@ private:
 	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;
 
-	unsigned int _textureRepeat = 1;
+	int _textureRepeat = 1;
 
 	bool _isSpecular = false;
 	bool _isEdged = 1.0f;

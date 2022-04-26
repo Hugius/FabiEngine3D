@@ -21,7 +21,7 @@ public:
 	NetworkingServer();
 	~NetworkingServer();
 
-	void start(unsigned int maxClientCount);
+	void start(int maxClientCount);
 	void update();
 	void sendTcpMessageToClient(const string & username, const string & content);
 	void sendUdpMessageToClient(const string & username, const string & content);
@@ -72,7 +72,7 @@ private:
 	string _newClientIp = "";
 	string _newClientUsername = "";
 
-	unsigned int _maxClientCount = 0;
+	int _maxClientCount = 0;
 
 	bool _isRunning = false;
 

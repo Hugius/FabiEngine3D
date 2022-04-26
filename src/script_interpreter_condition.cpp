@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 	vector<bool> conditions;
 	string elementBuild = "";
 	string comparisonOperator = "";
-	unsigned int characterIndex = 0;
+	int characterIndex = 0;
 	bool isBuildingString = false;
 	bool mustBeValue = true;
 	bool mustBeComparisonOperator = false;
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 				const auto variable = (_isLocalVariableExisting(elementString) ? _getLocalVariable(elementString) : _getGlobalVariable(elementString));
 
-				unsigned int valueIndex = 0;
+				int valueIndex = 0;
 				if(isAccessingList)
 				{
 					if(!_validateListIndex(variable, listIndex))
@@ -203,7 +203,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 	bool finalCondition = conditions[0];
 	string currentLogicOperator = "";
-	for(unsigned int index = 1; index < static_cast<int>(conditions.size()); index++)
+	for(int index = 1; index < static_cast<int>(conditions.size()); index++)
 	{
 		if(currentLogicOperator.empty())
 		{
@@ -325,9 +325,9 @@ const bool ScriptInterpreter::_compareValues(shared_ptr<ScriptValue> firstValue,
 	return false;
 }
 
-const int ScriptInterpreter::_getLastConditionStatementIndex(const vector<ScriptConditionStatement> & statements, unsigned int scopeDepth) const
+const int ScriptInterpreter::_getLastConditionStatementIndex(const vector<ScriptConditionStatement> & statements, int scopeDepth) const
 {
-	unsigned int index = static_cast<int>(statements.size());
+	int index = static_cast<int>(statements.size());
 
 	while(index--)
 	{

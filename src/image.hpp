@@ -3,7 +3,7 @@
 class Image final
 {
 public:
-	Image(unsigned char * pixels, unsigned int width, unsigned int height, unsigned int bitsPerPixel);
+	Image(unsigned char * pixels, int width, int height, int bitsPerPixel);
 	~Image();
 
 	void flipX();

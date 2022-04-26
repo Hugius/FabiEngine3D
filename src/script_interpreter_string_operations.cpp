@@ -34,14 +34,14 @@ const bool ScriptInterpreter::_isDecimalValue(const string & valueString) const
 		return false;
 	}
 
-	unsigned int startingIndex = 0;
+	int startingIndex = 0;
 	if(valueString[0] == '-')
 	{
 		startingIndex = 1;
 	}
 
 	unsigned dots = 0;
-	for(unsigned int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
+	for(int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
 	{
 		if(!isdigit(valueString[index]) && valueString[index] != '.')
 		{
@@ -64,13 +64,13 @@ const bool ScriptInterpreter::_isIntegerValue(const string & valueString) const
 		return false;
 	}
 
-	unsigned int startingIndex = 0;
+	int startingIndex = 0;
 	if(valueString[0] == '-')
 	{
 		startingIndex = 1;
 	}
 
-	for(unsigned int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
+	for(int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
 	{
 		if(!isdigit(valueString[index]))
 		{

@@ -83,7 +83,7 @@ void Animation3dEditor::_updateMiscellaneous()
 
 						if(_currentFrameIndex > 0)
 						{
-							for(unsigned int frameIndex = 1; frameIndex <= _currentFrameIndex; frameIndex++)
+							for(int frameIndex = 1; frameIndex <= _currentFrameIndex; frameIndex++)
 							{
 								for(const auto & partId : _fe3d->animation3d_getPartIds(_currentAnimationId))
 								{

@@ -18,7 +18,7 @@ const mat22 Mathematics::invertMatrix(const mat22 & matrix)
 
 	mat22 result;
 
-	for(unsigned int index = 0; index < 4; index++)
+	for(int index = 0; index < 4; index++)
 	{
 		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
 	}
@@ -30,7 +30,7 @@ const mat22 Mathematics::transposeMatrix(const mat22 & matrix)
 {
 	mat22 result;
 
-	for(unsigned int rowIndex = 0; rowIndex < 2; rowIndex++)
+	for(int rowIndex = 0; rowIndex < 2; rowIndex++)
 	{
 		for(unsigned columnIndex = 0; columnIndex < 2; columnIndex++)
 		{
@@ -64,7 +64,7 @@ const mat33 Mathematics::invertMatrix(const mat33 & matrix)
 
 	mat33 result;
 
-	for(unsigned int index = 0; index < 9; index++)
+	for(int index = 0; index < 9; index++)
 	{
 		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
 	}
@@ -198,7 +198,7 @@ const mat44 Mathematics::invertMatrix(const mat44 & matrix)
 
 	mat44 result;
 
-	for(unsigned int index = 0; index < 16; index++)
+	for(int index = 0; index < 16; index++)
 	{
 		result.f[index] = (tempMatrix.f[index] * (1.0f / determinant));
 	}
@@ -210,7 +210,7 @@ const mat33 Mathematics::transposeMatrix(const mat33 & matrix)
 {
 	mat33 result;
 
-	for(unsigned int rowIndex = 0; rowIndex < 3; rowIndex++)
+	for(int rowIndex = 0; rowIndex < 3; rowIndex++)
 	{
 		for(unsigned columnIndex = 0; columnIndex < 3; columnIndex++)
 		{
@@ -225,9 +225,9 @@ const mat44 Mathematics::transposeMatrix(const mat44 & matrix)
 {
 	mat44 result;
 
-	for(unsigned int rowIndex = 0; rowIndex < 4; rowIndex++)
+	for(int rowIndex = 0; rowIndex < 4; rowIndex++)
 	{
-		for(unsigned int columnIndex = 0; columnIndex < 4; columnIndex++)
+		for(int columnIndex = 0; columnIndex < 4; columnIndex++)
 		{
 			result.m[rowIndex][columnIndex] = matrix.m[columnIndex][rowIndex];
 		}

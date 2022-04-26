@@ -22,7 +22,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 		return {};
 	}
 
-	unsigned int index = 0;
+	int index = 0;
 	for(const auto & character : listString)
 	{
 		if(hasFinishedValue)
@@ -205,7 +205,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 
 					const auto variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
 
-					unsigned int valueIndex = 0;
+					int valueIndex = 0;
 					if(isAccessingList)
 					{
 						if(!_validateListIndex(variable, listIndex))

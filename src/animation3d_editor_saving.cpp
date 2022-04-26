@@ -48,9 +48,9 @@ const bool Animation3dEditor::saveAnimationsToFile() const
 				<< " ";
 		}
 
-		for(unsigned int frameIndex = 0; frameIndex < frameCount; frameIndex++)
+		for(int frameIndex = 0; frameIndex < frameCount; frameIndex++)
 		{
-			for(unsigned int partIndex = 0; partIndex < partCount; partIndex++)
+			for(int partIndex = 0; partIndex < partCount; partIndex++)
 			{
 				auto targetTransformation = _fe3d->animation3d_getTargetTransformation(animationId, frameIndex, partIds[partIndex]);
 				auto rotationOrigin = _fe3d->animation3d_getRotationOrigin(animationId, frameIndex, partIds[partIndex]);

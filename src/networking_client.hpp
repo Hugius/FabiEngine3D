@@ -57,7 +57,7 @@ private:
 
 	static inline constexpr int MAX_PING_COUNT = 10;
 
-	vector<unsigned int> _pingLatencies = {};
+	vector<int> _pingLatencies = {};
 	vector<NetworkingServerMessage> _pendingMessages = {};
 
 	future<tuple<int, int, long long, string>> _tcpMessageThread = {};

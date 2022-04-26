@@ -5,7 +5,7 @@ void GuiScreen::createScrollingList(const string & id, const fvec2 & position, c
 	_scrollingLists.insert({id, make_shared<GuiScrollingList>(_fe3d, id, (_parentId + "_" + _id), _convertPosition(position), _convertSize(size), color, defaultQuadColor, hoveredQuadColor, defaultTextColor, hoveredTextColor, characterSize, scrollingSpeed, isCentered)});
 }
 
-void GuiScreen::createInputBox(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered)
+void GuiScreen::createInputBox(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & hoverColor, const fvec3 & textColor, const fvec3 & textHoverColor, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered)
 {
 	_inputBoxes.insert({id, make_shared<GuiInputBox>(_fe3d, (_parentId + "_" + _id), id, _convertPosition(position), _convertSize(size), color, hoverColor, textColor, textHoverColor, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed, isCentered)});
 }

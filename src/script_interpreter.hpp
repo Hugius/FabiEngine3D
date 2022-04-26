@@ -58,7 +58,7 @@ private:
 	void _processListPull(const string & scriptLine);
 	void _throwStartupError(const string & message);
 	void _throwRuntimeError(const string & message);
-	void _checkEngineWarnings(unsigned int lastLoggerMessageCount);
+	void _checkEngineWarnings(int lastLoggerMessageCount);
 	void _performArithmeticOperation(shared_ptr<ScriptValue> leftValue, const string & operatorString, shared_ptr<ScriptValue> rightValue);
 
 	const vector<shared_ptr<ScriptValue>> _extractValuesFromListString(const string & listString);
@@ -75,7 +75,7 @@ private:
 	const int _countLeadingSpaces(const string & scriptLineText);
 
 	const int _extractListIndexFromString(const string & valueString, bool & isAccessingList);
-	const int _getLastConditionStatementIndex(const vector<ScriptConditionStatement> & statements, unsigned int scopeDepth) const;
+	const int _getLastConditionStatementIndex(const vector<ScriptConditionStatement> & statements, int scopeDepth) const;
 
 	const bool _isListValue(const string & valueString) const;
 	const bool _isStringValue(const string & valueString) const;
@@ -87,8 +87,8 @@ private:
 	const bool _checkConditionString(const string & conditionString);
 	const bool _validateCondition(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue);
 	const bool _compareValues(shared_ptr<ScriptValue> firstValue, const string & comparisonOperator, shared_ptr<ScriptValue> secondValue) const;
-	const bool _validateListIndex(const shared_ptr<ScriptVariable> list, unsigned int index);
-	const bool _validateArgumentCount(const vector<shared_ptr<ScriptValue>> & values, unsigned int count);
+	const bool _validateListIndex(const shared_ptr<ScriptVariable> list, int index);
+	const bool _validateArgumentCount(const vector<shared_ptr<ScriptValue>> & values, int count);
 	const bool _validateArgumentTypes(const vector<shared_ptr<ScriptValue>> & values, const vector<ScriptValueType> & types);
 	const bool _executeFe3dSkySetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
 	const bool _executeFe3dSkyGetter(const string & functionName, const vector<shared_ptr<ScriptValue>> & args, vector<shared_ptr<ScriptValue>> & returnValues);
@@ -157,7 +157,7 @@ private:
 	const bool _validateFe3dAnimation2d(const string & id);
 	const bool _validateFe3dAnimation3d(const string & id);
 	const bool _validateFe3dId(const string & id);
-	const bool _validateScopeChange(unsigned int countedSpaces, const string & scriptLineText, unsigned int & scopeDepth);
+	const bool _validateScopeChange(int countedSpaces, const string & scriptLineText, int & scopeDepth);
 	const bool _validateKeyInputString(const string & inputString);
 	const bool _validateMouseInputString(const string & inputString);
 	const bool _validateSavesDirectory();
@@ -320,7 +320,7 @@ private:
 	static inline constexpr int MAX_EXECUTION_DEPTH = 10;
 
 	unordered_map<string, float> _debuggingTimes = {};
-	unordered_map<unsigned int, unordered_map<string, shared_ptr<ScriptVariable>>> _localVariables = {};
+	unordered_map<int, unordered_map<string, shared_ptr<ScriptVariable>>> _localVariables = {};
 	unordered_map<string, shared_ptr<ScriptVariable>> _globalVariables = {};
 
 	vector<string> _currentScriptIdsStack = {};
@@ -328,7 +328,7 @@ private:
 	vector<string> _initializeScriptIds = {};
 	vector<string> _updateScriptIds = {};
 	vector<string> _terminateScriptIds = {};
-	vector<unsigned int> _currentLineIndexStack = {};
+	vector<int> _currentLineIndexStack = {};
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 	shared_ptr<Script> _script = nullptr;
@@ -352,8 +352,8 @@ private:
 	string _updateEntryId = "";
 	string _terminateEntryId = "";
 
-	unsigned int _engineFunctionCallCount = 0;
-	unsigned int _executionDepth = 0;
+	int _engineFunctionCallCount = 0;
+	int _executionDepth = 0;
 
 	bool _hasThrownError = false;
 	bool _mustStopApplication = false;

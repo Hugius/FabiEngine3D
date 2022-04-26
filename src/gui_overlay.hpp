@@ -17,7 +17,7 @@ public:
 	void update(bool isInteractable);
 	void setFocused(bool value);
 	void createScrollingList(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & color, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, const fvec2 & characterSize, float scrollingSpeed, bool isCentered);
-	void createInputBox(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered);
+	void createInputBox(const string & id, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered);
 	void createButton(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const string & textContent, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, bool isCentered);
 	void createQuadField(const string & id, const fvec2 & position, const fvec2 & size, const string & diffuseMapPath, const fvec3 & color, bool isCentered);
 	void createTextField(const string & id, const fvec2 & position, const fvec2 & size, const string & textContent, const fvec3 & textColor, bool isCentered);
@@ -32,9 +32,9 @@ public:
 	void deleteQuadFields();
 	void deleteTextFields();
 	void openChoiceForm(const string & id, const string & title, const fvec2 & position, const vector<string> & buttonTitles);
-	void openValueForm(const string & id, const string & title, const string & value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
-	void openValueForm(const string & id, const string & title, float value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
-	void openValueForm(const string & id, const string & title, int value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
+	void openValueForm(const string & id, const string & title, const string & value, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
+	void openValueForm(const string & id, const string & title, float value, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
+	void openValueForm(const string & id, const string & title, int value, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed);
 	void openAnswerForm(const string & id, const string & title, const string & left, const string & right, const fvec2 & position);
 
 	const unordered_map<string, shared_ptr<GuiScrollingList>> & getScrollingLists() const;
@@ -144,7 +144,7 @@ private:
 	unordered_map<string, shared_ptr<GuiQuadField>> _quadFields = {};
 	unordered_map<string, shared_ptr<GuiTextField>> _textFields = {};
 
-	vector<tuple<string, string, string, fvec2, unsigned int, bool, bool, bool>> _valueFormQueue = {};
+	vector<tuple<string, string, string, fvec2, int, bool, bool, bool>> _valueFormQueue = {};
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 

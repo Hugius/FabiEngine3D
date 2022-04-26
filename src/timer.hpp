@@ -39,5 +39,5 @@ private:
 
 	unordered_map<string, unique_ptr<Clock>> _clocks;
 
-	unsigned int _passedUpdateCount = 0;
+	int _passedUpdateCount = 0;
 };

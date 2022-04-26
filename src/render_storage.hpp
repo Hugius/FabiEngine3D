@@ -267,19 +267,19 @@ private:
 	float _skyExposureSpeed = 0.0f;
 	float _skyExposureLightness = 0.0f;
 
-	unsigned int _bloomQuality = MIN_BLOOM_QUALITY;
-	unsigned int _dofQuality = MIN_DOF_QUALITY;
-	unsigned int _motionBlurQuality = MIN_MOTION_BLUR_QUALITY;
-	unsigned int _shadowQuality = MIN_SHADOW_QUALITY;
-	unsigned int _cubeReflectionQuality = MIN_REFLECTION_QUALITY;
-	unsigned int _planarReflectionQuality = MIN_REFLECTION_QUALITY;
-	unsigned int _planarRefractionQuality = MIN_REFRACTION_QUALITY;
-	unsigned int _anisotropicFilteringQuality = MIN_ANISOTROPIC_FILTERING_QUALITY;
-	unsigned int _bloomBlurCount = 0;
-	unsigned int _triangleCount = 0;
-	unsigned int _guiDepth = 0;
-	unsigned int _shadowInterval = 0;
-	unsigned int _cubeReflectionInterval = 0;
+	int _bloomQuality = MIN_BLOOM_QUALITY;
+	int _dofQuality = MIN_DOF_QUALITY;
+	int _motionBlurQuality = MIN_MOTION_BLUR_QUALITY;
+	int _shadowQuality = MIN_SHADOW_QUALITY;
+	int _cubeReflectionQuality = MIN_REFLECTION_QUALITY;
+	int _planarReflectionQuality = MIN_REFLECTION_QUALITY;
+	int _planarRefractionQuality = MIN_REFRACTION_QUALITY;
+	int _anisotropicFilteringQuality = MIN_ANISOTROPIC_FILTERING_QUALITY;
+	int _bloomBlurCount = 0;
+	int _triangleCount = 0;
+	int _guiDepth = 0;
+	int _shadowInterval = 0;
+	int _cubeReflectionInterval = 0;
 
 	bool _isReflectionsEnabled = true;
 	bool _isRefractionsEnabled = true;

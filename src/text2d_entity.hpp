@@ -194,7 +194,7 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 	float _opacity = 1.0f;
 
-	unsigned int _depth = 0;
+	int _depth = 0;
 
 	bool _isCentered = false;
 	bool _isHorizontallyFlipped = false;

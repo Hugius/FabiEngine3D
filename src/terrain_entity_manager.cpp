@@ -50,7 +50,7 @@ void TerrainEntityManager::createEntity(const string & id, const string & height
 	const auto bytesPerPixel = (image->getBitsPerPixel() / 8);
 
 	vector<float> pixels;
-	for(unsigned int index = 0; index < (size * size * bytesPerPixel); index += bytesPerPixel)
+	for(int index = 0; index < (size * size * bytesPerPixel); index += bytesPerPixel)
 	{
 		const auto red = (static_cast<float>(image->getPixels()[index + 0]) / 255.0f);
 		const auto green = (static_cast<float>(image->getPixels()[index + 1]) / 255.0f);
@@ -154,9 +154,9 @@ void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, f
 	vector<fvec3> positions;
 	vector<fvec2> uvs;
 	vector<fvec3> normals;
-	for(unsigned int z = 0; z < (static_cast<int>(size) - 1); z++)
+	for(int z = 0; z < (static_cast<int>(size) - 1); z++)
 	{
-		for(unsigned int x = 0; x < (static_cast<int>(size) - 1); x++)
+		for(int x = 0; x < (static_cast<int>(size) - 1); x++)
 		{
 			auto topLeftIndex = ((z * static_cast<int>(size)) + x);
 			auto topRightIndex = (topLeftIndex + 1);
@@ -190,7 +190,7 @@ void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, f
 	}
 
 	vector<fvec3> tangents;
-	for(unsigned int index = 0; index < static_cast<int>(positions.size()); index += 3)
+	for(int index = 0; index < static_cast<int>(positions.size()); index += 3)
 	{
 		const auto pos1 = positions[index + 0];
 		const auto pos2 = positions[index + 1];
@@ -216,7 +216,7 @@ void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, f
 	}
 
 	vector<float> bufferData;
-	for(unsigned int index = 0; index < static_cast<int>(positions.size()); index++)
+	for(int index = 0; index < static_cast<int>(positions.size()); index++)
 	{
 		bufferData.push_back(positions[index].x);
 		bufferData.push_back(positions[index].y);

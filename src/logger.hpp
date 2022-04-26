@@ -53,7 +53,7 @@ public:
 		return _messageList;
 	}
 
-	static unsigned int getMessageCount()
+	static int getMessageCount()
 	{
 		return _messageCount;
 	}
@@ -128,5 +128,5 @@ private:
 
 	static inline vector<shared_ptr<LoggerMessage>> _messageList = {};
 
-	static inline unsigned int _messageCount = 0;
+	static inline int _messageCount = 0;
 };

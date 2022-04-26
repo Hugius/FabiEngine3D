@@ -338,7 +338,7 @@ void MasterRenderer::_renderGUI()
 	{
 		_quad2dEntityColorRenderer->bind();
 
-		map<unsigned int, shared_ptr<BaseEntity>> orderedQuad2dEntities;
+		map<int, shared_ptr<BaseEntity>> orderedQuad2dEntities;
 		for(const auto & [entityId, entity] : _quad2dEntityManager->getEntities())
 		{
 			if(entity->getId() != _renderStorage->getCursorEntityId())

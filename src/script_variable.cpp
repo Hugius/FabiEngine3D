@@ -40,7 +40,7 @@ void ScriptVariable::setValues(const vector<shared_ptr<ScriptValue>> & values)
 	_values = values;
 }
 
-void ScriptVariable::setValue(shared_ptr<ScriptValue> value, unsigned int index)
+void ScriptVariable::setValue(shared_ptr<ScriptValue> value, int index)
 {
 	if(index >= _values.size())
 	{
@@ -60,7 +60,7 @@ void ScriptVariable::addValue(shared_ptr<ScriptValue> value)
 	_values.push_back(value);
 }
 
-void ScriptVariable::deleteValue(unsigned int index)
+void ScriptVariable::deleteValue(int index)
 {
 	if(index >= _values.size())
 	{
@@ -75,7 +75,7 @@ void ScriptVariable::deleteValues()
 	_values.clear();
 }
 
-const shared_ptr<ScriptValue> ScriptVariable::getValue(unsigned int index) const
+const shared_ptr<ScriptValue> ScriptVariable::getValue(int index) const
 {
 	if(index >= _values.size())
 	{

@@ -88,7 +88,7 @@ void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<s
 		}
 	}
 
-	for(unsigned int index = 0; index < static_cast<int>(visibleEntities.size()); index++)
+	for(int index = 0; index < static_cast<int>(visibleEntities.size()); index++)
 	{
 		_shaderBuffer->uploadUniform("u_pointlightPositions[" + to_string(index) + "]", visibleEntities[index]->getPosition());
 		_shaderBuffer->uploadUniform("u_pointlightColors[" + to_string(index) + "]", visibleEntities[index]->getColor());
@@ -111,7 +111,7 @@ void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<st
 		}
 	}
 
-	for(unsigned int index = 0; index < static_cast<int>(visibleEntities.size()); index++)
+	for(int index = 0; index < static_cast<int>(visibleEntities.size()); index++)
 	{
 		_shaderBuffer->uploadUniform("u_spotlightPositions[" + to_string(index) + "]", visibleEntities[index]->getPosition());
 		_shaderBuffer->uploadUniform("u_spotlightFronts[" + to_string(index) + "]", visibleEntities[index]->getFront());

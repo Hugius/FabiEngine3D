@@ -24,7 +24,7 @@ const int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
 {
 	int countedSpaces = 0;
 
-	for(unsigned int index = 0; index < static_cast<int>(scriptLineText.size()); index++)
+	for(int index = 0; index < static_cast<int>(scriptLineText.size()); index++)
 	{
 		if(scriptLineText[index] == ' ')
 		{
@@ -47,7 +47,7 @@ const int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
 	return countedSpaces;
 }
 
-const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string & scriptLineText, unsigned int & scopeDepth)
+const bool ScriptInterpreter::_validateScopeChange(int countedSpaces, const string & scriptLineText, int & scopeDepth)
 {
 	const int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
 	const bool isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
@@ -136,13 +136,13 @@ void ScriptInterpreter::_throwRuntimeError(const string & message)
 	_hasThrownError = true;
 }
 
-void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount)
+void ScriptInterpreter::_checkEngineWarnings(int lastLoggerMessageCount)
 {
 	auto messageCount = Logger::getMessageCount();
 
 	if(messageCount > lastLoggerMessageCount)
 	{
-		for(unsigned int index = (lastLoggerMessageCount - 1); index < messageCount; index++)
+		for(int index = (lastLoggerMessageCount - 1); index < messageCount; index++)
 		{
 			if(Logger::getMessageList()[index]->getType() == LoggerMessageType::WARNING)
 			{

@@ -10,12 +10,12 @@ ScriptFile::ScriptFile(const string & id)
 	}
 }
 
-void ScriptFile::createLine(unsigned int index, const string & textContent)
+void ScriptFile::createLine(int index, const string & textContent)
 {
 	_lines.insert(_lines.begin() + index, textContent);
 }
 
-void ScriptFile::editLine(unsigned int index, const string & textContent)
+void ScriptFile::editLine(int index, const string & textContent)
 {
 	if(index >= _lines.size())
 	{
@@ -27,7 +27,7 @@ void ScriptFile::editLine(unsigned int index, const string & textContent)
 	}
 }
 
-void ScriptFile::deleteLine(unsigned int index)
+void ScriptFile::deleteLine(int index)
 {
 	if(index >= _lines.size())
 	{
@@ -59,7 +59,7 @@ const string & ScriptFile::getId() const
 	return _id;
 }
 
-const string & ScriptFile::getLine(unsigned int index) const
+const string & ScriptFile::getLine(int index) const
 {
 	if(index >= _lines.size())
 	{

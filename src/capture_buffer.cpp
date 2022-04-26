@@ -10,7 +10,7 @@ CaptureBuffer::~CaptureBuffer()
 	glDeleteBuffers(1, &_rboId);
 }
 
-CaptureBuffer::CaptureBuffer(const ivec2 & position, const ivec2 & size, unsigned int count, bool isTextureClamped)
+CaptureBuffer::CaptureBuffer(const ivec2 & position, const ivec2 & size, int count, bool isTextureClamped)
 {
 	_position = position;
 	_size = size;
@@ -19,9 +19,9 @@ CaptureBuffer::CaptureBuffer(const ivec2 & position, const ivec2 & size, unsigne
 
 	bind();
 
-	for(unsigned int index = 0; index < count; index++)
+	for(int index = 0; index < count; index++)
 	{
-		unsigned int textureId;
+		int textureId;
 		glGenTextures(1, &textureId);
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _size.x, _size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
@@ -42,8 +42,8 @@ CaptureBuffer::CaptureBuffer(const ivec2 & position, const ivec2 & size, unsigne
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _rboId);
 
-	vector<unsigned int> attachments;
-	for(unsigned int index = 0; index < count; index++)
+	vector<int> attachments;
+	for(int index = 0; index < count; index++)
 	{
 		attachments.push_back(GL_COLOR_ATTACHMENT0 + index);
 	}
@@ -66,7 +66,7 @@ CaptureBuffer::CaptureBuffer(const ivec2 & position, const ivec2 & size)
 
 	bind();
 
-	unsigned int textureId;
+	int textureId;
 	glGenTextures(1, &textureId);
 	_textures.push_back(make_shared<TextureBuffer>(textureId));
 
@@ -126,7 +126,7 @@ const int CaptureBuffer::getRboId() const
 	return _rboId;
 }
 
-const shared_ptr<TextureBuffer> CaptureBuffer::getTexture(unsigned int index) const
+const shared_ptr<TextureBuffer> CaptureBuffer::getTexture(int index) const
 {
 	return _textures[index];
 }

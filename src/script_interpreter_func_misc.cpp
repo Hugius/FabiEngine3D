@@ -68,11 +68,11 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 				return {};
 			}
 
-			for(unsigned int index = 0; index < firstListVariable->getValueCount(); index++)
+			for(int index = 0; index < firstListVariable->getValueCount(); index++)
 			{
 				returnValues.push_back(firstListVariable->getValue(index));
 			}
-			for(unsigned int index = 0; index < secondListVariable->getValueCount(); index++)
+			for(int index = 0; index < secondListVariable->getValueCount(); index++)
 			{
 				returnValues.push_back(secondListVariable->getValue(index));
 			}
@@ -131,7 +131,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			}
 
 			bool result = false;
-			for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
+			for(int index = 0; index < listVariable->getValueCount(); index++)
 			{
 				if((args[1]->getType() == SVT::STRING) &&
 				   (listVariable->getValue(index)->getType() == SVT::STRING) &&
@@ -200,7 +200,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			}
 
 			int result = -1;
-			for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
+			for(int index = 0; index < listVariable->getValueCount(); index++)
 			{
 				if((args[1]->getType() == SVT::STRING) &&
 				   (listVariable->getValue(index)->getType() == SVT::STRING) &&
@@ -270,7 +270,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			}
 
 			auto type = listVariable->getValue(0)->getType();
-			for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
+			for(int index = 0; index < listVariable->getValueCount(); index++)
 			{
 				if(listVariable->getValue(index)->getType() != type)
 				{
@@ -282,7 +282,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(type == ScriptValueType::INTEGER)
 			{
 				vector<int> rawValues;
-				for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
+				for(int index = 0; index < listVariable->getValueCount(); index++)
 				{
 					rawValues.push_back(listVariable->getValue(index)->getInteger());
 				}
@@ -294,7 +294,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			else if(type == ScriptValueType::DECIMAL)
 			{
 				vector<float> rawValues;
-				for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
+				for(int index = 0; index < listVariable->getValueCount(); index++)
 				{
 					rawValues.push_back(listVariable->getValue(index)->getDecimal());
 				}
@@ -338,7 +338,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			}
 
 			auto type = listVariable->getValue(0)->getType();
-			for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
+			for(int index = 0; index < listVariable->getValueCount(); index++)
 			{
 				if(listVariable->getValue(index)->getType() != type)
 				{
@@ -350,7 +350,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			if(type == ScriptValueType::INTEGER)
 			{
 				vector<int> rawValues;
-				for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
+				for(int index = 0; index < listVariable->getValueCount(); index++)
 				{
 					rawValues.push_back(listVariable->getValue(index)->getInteger());
 				}
@@ -362,7 +362,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			else if(type == ScriptValueType::DECIMAL)
 			{
 				vector<float> rawValues;
-				for(unsigned int index = 0; index < listVariable->getValueCount(); index++)
+				for(int index = 0; index < listVariable->getValueCount(); index++)
 				{
 					rawValues.push_back(listVariable->getValue(index)->getDecimal());
 				}
@@ -473,7 +473,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			const auto delimiter = args[1]->getString();
 
 			string result = "";
-			for(unsigned int index = 0; index < static_cast<int>(fullString.size()); index++)
+			for(int index = 0; index < static_cast<int>(fullString.size()); index++)
 			{
 				if(fullString[index] == delimiter.back())
 				{

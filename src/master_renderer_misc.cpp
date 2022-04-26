@@ -23,14 +23,14 @@ const string MasterRenderer::getCpuName() const
 	memcpy(model + 32, CPUInfo, sizeof(CPUInfo));
 
 	string nameString;
-	for(unsigned int index = 0; index < 48; index++)
+	for(int index = 0; index < 48; index++)
 	{
 		nameString.push_back(model[index]);
 	}
 
 	string result;
 	reverse(nameString.begin(), nameString.end());
-	for(unsigned int index = 0; index < static_cast<int>(nameString.size()); index++)
+	for(int index = 0; index < static_cast<int>(nameString.size()); index++)
 	{
 		if(nameString[index] != 0)
 		{

@@ -144,7 +144,7 @@ const string Tools::getRootDirectoryPath()
 
 	reverse(rootPath.begin(), rootPath.end());
 
-	for(unsigned int index = 0; index < rootPath.size(); index++)
+	for(int index = 0; index < rootPath.size(); index++)
 	{
 		if(rootPath[index] == '\\')
 		{
@@ -288,7 +288,7 @@ const vector<string> Tools::splitStringIntoMultiple(const string & mergedString,
 
 	string tempString = "";
 
-	for(unsigned int index = 0; index < static_cast<int>(mergedString.size()); index++)
+	for(int index = 0; index < static_cast<int>(mergedString.size()); index++)
 	{
 		if(mergedString[index] == delimiter)
 		{
@@ -412,14 +412,14 @@ const bool Tools::isInteger(const string & valueString)
 		return false;
 	}
 
-	unsigned int startingIndex = 0;
+	int startingIndex = 0;
 
 	if(valueString[0] == '-')
 	{
 		startingIndex = 1;
 	}
 
-	for(unsigned int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
+	for(int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
 	{
 		if(!isdigit(valueString[index]))
 		{

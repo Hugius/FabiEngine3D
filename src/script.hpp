@@ -10,7 +10,7 @@ public:
 	void deleteScriptFile(const string & id);
 	void clear();
 
-	const unordered_map<string, unsigned int> findKeyword(const string & keyword) const;
+	const unordered_map<string, int> findKeyword(const string & keyword) const;
 
 	const vector<string> getScriptFileIds() const;
 

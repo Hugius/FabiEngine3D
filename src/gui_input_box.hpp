@@ -6,7 +6,7 @@
 class GuiInputBox final
 {
 public:
-	GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered);
+	GuiInputBox(shared_ptr<EngineInterface> fe3d, const string & id, const string & parentId, const fvec2 & position, const fvec2 & size, const fvec3 & defaultQuadColor, const fvec3 & hoveredQuadColor, const fvec3 & defaultTextColor, const fvec3 & hoveredTextColor, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed, bool isCentered);
 
 	void update(bool isInteractable);
 	void setActive(bool value);
@@ -56,7 +56,7 @@ private:
 	fvec3 _defaultTextColor = fvec3(0.0f);
 	fvec3 _hoveredTextColor = fvec3(0.0f);
 
-	unsigned int _maxCharacterCount = 0;
+	int _maxCharacterCount = 0;
 
 	bool _isHovered = false;
 	bool _isHoverable = true;

@@ -218,7 +218,7 @@ const bool ModelEditor::loadEntitiesFromFile()
 			string levelOfDetailEntityId;
 			fvec3 size;
 			float levelOfDetailDistance;
-			unsigned int rotationOrder;
+			int rotationOrder;
 			bool isShadowed;
 			bool isReflected;
 
@@ -276,8 +276,8 @@ const bool ModelEditor::loadEntitiesFromFile()
 			float emissionIntensity;
 			float opacity;
 			float minTextureAlpha;
-			unsigned int reflectionType;
-			unsigned int textureRepeat;
+			int reflectionType;
+			int textureRepeat;
 			bool isSpecular;
 			bool isReflective;
 			bool isFaceCulled;

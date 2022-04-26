@@ -124,7 +124,7 @@ private:
 	float _lightness = 1.0f;
 	float _opacity = 1.0f;
 
-	unsigned int _textureRepeat = 1;
+	int _textureRepeat = 1;
 
 	bool _isFacingCameraHorizontally = false;
 	bool _isFacingCameraVertically = false;

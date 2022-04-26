@@ -31,8 +31,8 @@ const bool Animation3dEditor::loadAnimationsFromFile()
 	while(getline(file, line))
 	{
 		string animationId;
-		unsigned int partCount;
-		unsigned int frameCount;
+		int partCount;
+		int frameCount;
 
 		istringstream iss(line);
 
@@ -46,7 +46,7 @@ const bool Animation3dEditor::loadAnimationsFromFile()
 
 		_fe3d->animation3d_create(animationId);
 
-		for(unsigned int partIndex = 0; partIndex < partCount; partIndex++)
+		for(int partIndex = 0; partIndex < partCount; partIndex++)
 		{
 			string partId;
 
@@ -62,11 +62,11 @@ const bool Animation3dEditor::loadAnimationsFromFile()
 
 		const auto partIds = _fe3d->animation3d_getPartIds(animationId);
 
-		for(unsigned int frameIndex = 0; frameIndex < frameCount; frameIndex++)
+		for(int frameIndex = 0; frameIndex < frameCount; frameIndex++)
 		{
 			_fe3d->animation3d_createFrame(animationId, frameIndex);
 
-			for(unsigned int partIndex = 0; partIndex < partCount; partIndex++)
+			for(int partIndex = 0; partIndex < partCount; partIndex++)
 			{
 				fvec3 targetTransformation;
 				fvec3 rotationOrigin;

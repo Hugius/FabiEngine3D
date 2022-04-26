@@ -152,7 +152,7 @@ const bool GuiOverlay::isAnswerFormConfirmed() const
 	return false;
 }
 
-void GuiOverlay::openValueForm(const string & id, const string & title, const string & valueString, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
+void GuiOverlay::openValueForm(const string & id, const string & title, const string & valueString, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
 {
 	if(!_valueFormId.empty())
 	{
@@ -176,12 +176,12 @@ void GuiOverlay::openValueForm(const string & id, const string & title, const st
 	_isFocused = true;
 }
 
-void GuiOverlay::openValueForm(const string & id, const string & title, float value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
+void GuiOverlay::openValueForm(const string & id, const string & title, float value, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
 {
 	openValueForm(id, title, to_string(static_cast<int>(value)), position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed);
 }
 
-void GuiOverlay::openValueForm(const string & id, const string & title, int value, const fvec2 & position, unsigned int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
+void GuiOverlay::openValueForm(const string & id, const string & title, int value, const fvec2 & position, int maxCharacterCount, bool isLettersAllowed, bool isNumbersAllowed, bool isSpecialsAllowed)
 {
 	openValueForm(id, title, to_string(value), position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed);
 }

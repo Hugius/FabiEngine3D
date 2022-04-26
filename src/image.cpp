@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 
-Image::Image(unsigned char * pixels, unsigned int width, unsigned int height, unsigned int bitsPerPixel)
+Image::Image(unsigned char * pixels, int width, int height, int bitsPerPixel)
 	:
 	_pixels(pixels),
 	_width(width),

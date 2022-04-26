@@ -155,7 +155,7 @@ const bool Mathematics::isNormalized(const fvec4 & vector)
 	return (calculateMagnitude(vector) == 1.0f);
 }
 
-const vector<float> Mathematics::calculateDistributedPositions(unsigned int count, float size, bool isAscending)
+const vector<float> Mathematics::calculateDistributedPositions(int count, float size, bool isAscending)
 {
 	vector<float> result;
 
@@ -166,7 +166,7 @@ const vector<float> Mathematics::calculateDistributedPositions(unsigned int coun
 	{
 		auto position = (-1.0f + (gapSpace + (size * 0.5f)));
 
-		for(unsigned int index = 0; index < count; index++)
+		for(int index = 0; index < count; index++)
 		{
 			result.push_back(position);
 
@@ -177,7 +177,7 @@ const vector<float> Mathematics::calculateDistributedPositions(unsigned int coun
 	{
 		auto position = (1.0f - (gapSpace + (size * 0.5f)));
 
-		for(unsigned int index = 0; index < count; index++)
+		for(int index = 0; index < count; index++)
 		{
 			result.push_back(position);
 

@@ -11,7 +11,7 @@ void WorldEditor::_updateModelHighlighting(const string & id, int & direction)
 
 	auto partIds = _fe3d->model_getPartIds(id);
 
-	for(unsigned int index = 0; index < static_cast<int>(partIds.size()); index++)
+	for(int index = 0; index < static_cast<int>(partIds.size()); index++)
 	{
 		auto opacity = _fe3d->model_getOpacity(id, partIds[index]);
 

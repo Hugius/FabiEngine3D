@@ -4,7 +4,7 @@
 void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 {
 	string words[2] = {"", ""};
-	unsigned int wordIndex = 0;
+	int wordIndex = 0;
 	for(const auto & character : scriptLine.substr(EDIT_KEYWORD.size() + 1))
 	{
 		if(character == ' ')
@@ -79,7 +79,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		return;
 	}
 
-	unsigned int leftValueIndex = 0;
+	int leftValueIndex = 0;
 	if(isAccessingLeftList)
 	{
 		if(_validateListIndex(leftVariable, leftListIndex))
@@ -229,7 +229,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 
 		const auto rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
-		unsigned int rightValueIndex = 0;
+		int rightValueIndex = 0;
 		if(isAccessingRightList)
 		{
 			if(!_validateListIndex(rightVariable, rightListIndex))
@@ -243,7 +243,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		if((leftVariable->getType() == ScriptVariableType::MULTIPLE) && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
 			vector<shared_ptr<ScriptValue>> values = {};
-			for(unsigned int index = 0; index < rightVariable->getValueCount(); index++)
+			for(int index = 0; index < rightVariable->getValueCount(); index++)
 			{
 				values.push_back(rightVariable->getValue(index));
 			}

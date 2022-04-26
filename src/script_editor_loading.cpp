@@ -52,7 +52,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		_script->createScriptFile(scriptFileId);
 
 		string line;
-		unsigned int cursorLineIndex, cursorCharIndex;
+		int cursorLineIndex, cursorCharIndex;
 
 		getline(file, line);
 
@@ -65,7 +65,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		_script->getScriptFile(scriptFileId)->setCursorLineIndex(cursorLineIndex);
 		_script->getScriptFile(scriptFileId)->setCursorCharacterIndex(cursorCharIndex);
 
-		unsigned int lineIndex = 0;
+		int lineIndex = 0;
 		while(getline(file, line))
 		{
 			_script->getScriptFile(scriptFileId)->createLine(lineIndex, line);

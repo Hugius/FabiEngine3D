@@ -65,8 +65,7 @@ private:
 
 	float _originalPartOpacity = 0.0f;
 
-	unsigned int _currentFrameIndex = 0;
-
+	int _currentFrameIndex = 0;
 	int _selectedPartHighlightDirection = 1;
 
 	bool _mustUpdateCurrentFramePreview = true;

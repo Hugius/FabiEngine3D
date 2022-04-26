@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-Audio::Audio(unsigned char * samples, unsigned int sampleCount, unsigned int channelCount, unsigned int sampleRate, unsigned int byteRate, unsigned int bytesPerBlock, unsigned int bitsPerSample)
+Audio::Audio(unsigned char * samples, int sampleCount, int channelCount, int sampleRate, int byteRate, int bytesPerBlock, int bitsPerSample)
 	:
 	_samples(samples),
 	_sampleCount(sampleCount),

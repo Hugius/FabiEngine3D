@@ -80,7 +80,7 @@ void Text3dEntity::updateCharacterEntities()
 		Mathematics::convertToRadians(_rotation.y),
 		Mathematics::convertToRadians(_rotation.z), _rotationOrder);
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
-	unsigned int index = 0;
+	int index = 0;
 
 	for(const auto & character : _characterEntities)
 	{

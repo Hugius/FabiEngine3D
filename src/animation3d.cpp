@@ -55,7 +55,7 @@ void Animation3d::deleteParts()
 	}
 }
 
-void Animation3d::createFrame(unsigned int index)
+void Animation3d::createFrame(int index)
 {
 	_frames.insert((_frames.begin() + index), make_unique<Animation3dFrame>());
 
@@ -69,7 +69,7 @@ void Animation3d::createFrame(unsigned int index)
 	}
 }
 
-void Animation3d::deleteFrame(unsigned int index)
+void Animation3d::deleteFrame(int index)
 {
 	_frames.erase(_frames.begin() + index);
 }
@@ -94,52 +94,52 @@ const int Animation3d::getFrameCount() const
 	return static_cast<int>(_frames.size());
 }
 
-void Animation3d::setTargetTransformation(unsigned int frameIndex, const string & partId, const fvec3 & value)
+void Animation3d::setTargetTransformation(int frameIndex, const string & partId, const fvec3 & value)
 {
 	_frames[frameIndex]->targetTransformations.at(partId) = value;
 }
 
-void Animation3d::setRotationOrigin(unsigned int frameIndex, const string & partId, const fvec3 & value)
+void Animation3d::setRotationOrigin(int frameIndex, const string & partId, const fvec3 & value)
 {
 	_frames[frameIndex]->rotationOrigins.at(partId) = value;
 }
 
-void Animation3d::setSpeed(unsigned int frameIndex, const string & partId, const fvec3 & value)
+void Animation3d::setSpeed(int frameIndex, const string & partId, const fvec3 & value)
 {
 	_frames[frameIndex]->speeds.at(partId) = value;
 }
 
-void Animation3d::setSpeedType(unsigned int frameIndex, const string & partId, SpeedType value)
+void Animation3d::setSpeedType(int frameIndex, const string & partId, SpeedType value)
 {
 	_frames[frameIndex]->speedTypes.at(partId) = value;
 }
 
-void Animation3d::setTransformationType(unsigned int frameIndex, const string & partId, TransformationType value)
+void Animation3d::setTransformationType(int frameIndex, const string & partId, TransformationType value)
 {
 	_frames[frameIndex]->transformationTypes.at(partId) = value;
 }
 
-const fvec3 & Animation3d::getTargetTransformation(unsigned int frameIndex, const string & partId) const
+const fvec3 & Animation3d::getTargetTransformation(int frameIndex, const string & partId) const
 {
 	return _frames[frameIndex]->targetTransformations.at(partId);
 }
 
-const fvec3 & Animation3d::getRotationOrigin(unsigned int frameIndex, const string & partId) const
+const fvec3 & Animation3d::getRotationOrigin(int frameIndex, const string & partId) const
 {
 	return _frames[frameIndex]->rotationOrigins.at(partId);
 }
 
-const fvec3 & Animation3d::getSpeed(unsigned int frameIndex, const string & partId) const
+const fvec3 & Animation3d::getSpeed(int frameIndex, const string & partId) const
 {
 	return _frames[frameIndex]->speeds.at(partId);
 }
 
-const SpeedType & Animation3d::getSpeedType(unsigned int frameIndex, const string & partId) const
+const SpeedType & Animation3d::getSpeedType(int frameIndex, const string & partId) const
 {
 	return _frames[frameIndex]->speedTypes.at(partId);
 }
 
-const TransformationType & Animation3d::getTransformationType(unsigned int frameIndex, const string & partId) const
+const TransformationType & Animation3d::getTransformationType(int frameIndex, const string & partId) const
 {
 	return _frames[frameIndex]->transformationTypes.at(partId);
 }

@@ -325,7 +325,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			fvec3 radius;
 			fvec3 color;
 			float intensity;
-			unsigned int shape;
+			int shape;
 
 			iss
 				>> pointlightId
@@ -500,8 +500,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			fvec3 position;
 			fvec3 center;
 			bool isFollowingCamera;
-			unsigned int interval;
-			unsigned int quality;
+			int interval;
+			int quality;
 
 			iss
 				>> size
@@ -528,8 +528,8 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "GRAPHICS_REFLECTIONS")
 		{
 			float planarHeight;
-			unsigned int cubeQuality;
-			unsigned int planarQuality;
+			int cubeQuality;
+			int planarQuality;
 
 			iss
 				>> planarHeight
@@ -542,7 +542,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "GRAPHICS_REFRACTIONS")
 		{
-			unsigned int planarQuality;
+			int planarQuality;
 
 			iss >> planarQuality;
 
@@ -553,7 +553,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			bool isDynamic;
 			float blurDistance;
 			float maxDistance;
-			unsigned int quality;
+			int quality;
 
 			iss
 				>> isDynamic
@@ -629,9 +629,9 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		else if(lineType == "GRAPHICS_BLOOM")
 		{
 			float intensity;
-			unsigned int type;
-			unsigned int blurCount;
-			unsigned int quality;
+			int type;
+			int blurCount;
+			int quality;
 
 			iss
 				>> type

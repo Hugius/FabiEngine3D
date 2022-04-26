@@ -5,7 +5,7 @@
 class ScriptConditionStatement final
 {
 public:
-	ScriptConditionStatement(unsigned int scopeDepth, bool isTrue);
+	ScriptConditionStatement(int scopeDepth, bool isTrue);
 
 	void setTrue();
 	void setFalse();

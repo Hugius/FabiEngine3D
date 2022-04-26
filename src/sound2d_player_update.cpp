@@ -7,11 +7,11 @@ using std::chrono::seconds;
 
 void Sound2dPlayer::update()
 {
-	vector<pair<string, unsigned int>> soundsToStop;
+	vector<pair<string, int>> soundsToStop;
 
 	for(auto & [soundId, instances] : _startedSounds)
 	{
-		for(unsigned int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
+		for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 		{
 			if((instances[instanceIndex]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
 			{
@@ -92,7 +92,7 @@ void Sound2dPlayer::update()
 	{
 		for(auto & [soundId, instances] : _startedSounds)
 		{
-			for(unsigned int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
+			for(int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 			{
 				_volumeThreadQueue.push_back({soundId, instanceIndex});
 			}

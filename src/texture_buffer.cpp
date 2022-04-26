@@ -2,7 +2,7 @@
 
 using std::min;
 
-TextureBuffer::TextureBuffer(unsigned int tboId)
+TextureBuffer::TextureBuffer(int tboId)
 	:
 	_tboId(tboId)
 {
@@ -37,7 +37,7 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6> & images)
 
 	glBindTexture(GL_TEXTURE_CUBE_MAP, _tboId);
 
-	unsigned int imageSize = 1;
+	int imageSize = 1;
 	for(const auto & image : images)
 	{
 		if(image != nullptr)
@@ -48,7 +48,7 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6> & images)
 		}
 	}
 
-	for(unsigned int index = 0; index < static_cast<int>(images.size()); index++)
+	for(int index = 0; index < static_cast<int>(images.size()); index++)
 	{
 		const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(index));
 
@@ -56,7 +56,7 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6> & images)
 		{
 			unsigned char * pixels = new unsigned char[imageSize * imageSize * 3];
 
-			for(unsigned int index = 0; index < (imageSize * imageSize * 3); index++)
+			for(int index = 0; index < (imageSize * imageSize * 3); index++)
 			{
 				pixels[index] = 255;
 			}
@@ -113,7 +113,7 @@ void TextureBuffer::loadMipMapping()
 	_isMipMapped = true;
 }
 
-void TextureBuffer::loadAnisotropicFiltering(unsigned int quality)
+void TextureBuffer::loadAnisotropicFiltering(int quality)
 {
 	glBindTexture(GL_TEXTURE_2D, _tboId);
 

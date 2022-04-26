@@ -28,12 +28,11 @@ public:
 	const bool isAutopaused() const;
 
 private:
-	unsigned int _rowIndex = 0;
-	unsigned int _columnIndex = 0;
-	unsigned int _updateCount = 0;
-	unsigned int _intervalMultiplier = 1;
-	unsigned int _intervalDivider = 1;
-
+	int _rowIndex = 0;
+	int _columnIndex = 0;
+	int _updateCount = 0;
+	int _intervalMultiplier = 1;
+	int _intervalDivider = 1;
 	int _playCount = 0;
 
 	bool _isPaused = false;

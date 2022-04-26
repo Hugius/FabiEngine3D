@@ -21,7 +21,7 @@ void BlurRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2dEntity> entity, shared_ptr<TextureBuffer> texture, unsigned int blurCount, float intensity, BlurDirectionType direction)
+const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2dEntity> entity, shared_ptr<TextureBuffer> texture, int blurCount, float intensity, BlurDirectionType direction)
 {
 	_shaderBuffer->uploadUniform("u_intensity", intensity);
 
@@ -29,7 +29,7 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 	{
 		_shaderBuffer->uploadUniform("u_isHorizontal", true);
 
-		for(unsigned int index = 0; index < blurCount; index++)
+		for(int index = 0; index < blurCount; index++)
 		{
 			_captureBuffer->bind();
 			_render(entity, texture);
@@ -42,7 +42,7 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<Quad2
 	{
 		_shaderBuffer->uploadUniform("u_isHorizontal", false);
 
-		for(unsigned int index = 0; index < blurCount; index++)
+		for(int index = 0; index < blurCount; index++)
 		{
 			_captureBuffer->bind();
 			_render(entity, texture);

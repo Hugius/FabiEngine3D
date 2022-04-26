@@ -21,7 +21,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 
 	for(int index = 0; index < 12; index++)
 	{
-		chunkHeaderData[index] = static_cast<unsigned int>(getc(file));
+		chunkHeaderData[index] = static_cast<unsigned char>(getc(file));
 	}
 
 	string chunkId = "";
@@ -60,7 +60,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 
 		for(int index = 0; index < 8; index++)
 		{
-			subChunkHeaderData[index] = static_cast<unsigned int>(getc(file));
+			subChunkHeaderData[index] = static_cast<unsigned char>(getc(file));
 		}
 
 		string subChunkId = "";
@@ -76,7 +76,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 			auto subChunkBodyData = new unsigned char[16];
 			for(int index = 0; index < 16; index++)
 			{
-				subChunkBodyData[index] = static_cast<unsigned int>(getc(file));
+				subChunkBodyData[index] = static_cast<unsigned char>(getc(file));
 			}
 
 			// 1 = PCM

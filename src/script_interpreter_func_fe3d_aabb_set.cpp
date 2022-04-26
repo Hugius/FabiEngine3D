@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_validateFe3dId(args[0]->getString()))
 			{
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -110,7 +110,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -130,7 +130,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -150,7 +150,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -190,7 +190,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -210,7 +210,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -230,7 +230,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -250,7 +250,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -270,7 +270,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{
@@ -290,7 +290,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string & functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAabb(args[0]->getString()))
 			{

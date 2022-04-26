@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_validateFe3dId(args[0]->getString()))
 			{
@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_validateFe3dId(args[0]->getString()))
 			{
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -74,7 +74,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -102,7 +102,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -130,7 +130,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -144,7 +144,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -158,7 +158,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -172,7 +172,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -200,7 +200,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{
@@ -214,7 +214,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dPointlight(args[0]->getString()))
 			{

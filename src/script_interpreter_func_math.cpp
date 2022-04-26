@@ -40,7 +40,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = tan(Mathematics::convertToRadians(args[0]->getDecimal()));
 
@@ -51,7 +51,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = sin(Mathematics::convertToRadians(args[0]->getDecimal()));
 
@@ -62,7 +62,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = cos(Mathematics::convertToRadians(args[0]->getDecimal()));
 
@@ -73,7 +73,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = Mathematics::convertToDegrees(atan(args[0]->getDecimal()));
 
@@ -84,7 +84,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = Mathematics::convertToDegrees(asin(args[0]->getDecimal()));
 
@@ -95,7 +95,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = Mathematics::convertToDegrees(acos(args[0]->getDecimal()));
 
@@ -106,7 +106,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = Mathematics::convertToDegrees(atan2(args[0]->getDecimal(), args[1]->getDecimal()));
 
@@ -186,7 +186,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = round(args[0]->getDecimal());
 
@@ -197,7 +197,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = floor(args[0]->getDecimal());
 
@@ -208,7 +208,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = ceil(args[0]->getDecimal());
 
@@ -242,7 +242,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = sqrtf(args[0]->getDecimal());
 
@@ -285,7 +285,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = ((args[0]->getInteger() % 2) == 0);
 
@@ -296,7 +296,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = Mathematics::calculateAngleDifference(args[0]->getDecimal(), args[1]->getDecimal());
 
@@ -307,7 +307,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = Mathematics::calculateReferenceAngle(args[0]->getDecimal());
 
@@ -318,7 +318,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto first = fvec3(args[0]->getDecimal(), args[1]->getDecimal(), args[2]->getDecimal());
 			const auto second = fvec3(args[3]->getDecimal(), args[4]->getDecimal(), args[5]->getDecimal());

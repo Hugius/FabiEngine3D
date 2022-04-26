@@ -18,177 +18,198 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto isExported = Configuration::getInst().isApplicationExported();
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto newDirectoryPath = (directoryPath + args[0]->getString());
-
-			if(Tools::isDirectoryExisting(newDirectoryPath))
+			if(_validateSavesDirectory())
 			{
-				_throwRuntimeError("cannot create directory");
-				return true;
+				const auto isExported = Configuration::getInst().isApplicationExported();
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+				const auto newDirectoryPath = (directoryPath + args[0]->getString());
+
+				if(Tools::isDirectoryExisting(newDirectoryPath))
+				{
+					_throwRuntimeError("cannot create directory");
+					return true;
+				}
+
+				Tools::createDirectory(newDirectoryPath);
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
-
-			Tools::createDirectory(newDirectoryPath);
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:directory_delete")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto isExported = Configuration::getInst().isApplicationExported();
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto newDirectoryPath = (directoryPath + args[0]->getString());
-
-			if(!Tools::deleteDirectory(newDirectoryPath))
+			if(_validateSavesDirectory())
 			{
-				_throwRuntimeError("cannot delete directory");
-				return true;
-			}
+				const auto isExported = Configuration::getInst().isApplicationExported();
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+				const auto newDirectoryPath = (directoryPath + args[0]->getString());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				if(!Tools::deleteDirectory(newDirectoryPath))
+				{
+					_throwRuntimeError("cannot delete directory");
+					return true;
+				}
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
 		}
 	}
 	else if(functionName == "fe3d:file_create")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, 2) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, 2))
 		{
-			const auto isExported = Configuration::getInst().isApplicationExported();
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto filePath = (directoryPath + args[0]->getString());
-
-			if(Tools::isFileExisting(filePath))
+			if(_validateSavesDirectory())
 			{
-				_throwRuntimeError("cannot create file");
-				return true;
+				const auto isExported = Configuration::getInst().isApplicationExported();
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+				const auto filePath = (directoryPath + args[0]->getString());
+
+				if(Tools::isFileExisting(filePath))
+				{
+					_throwRuntimeError("cannot create file");
+					return true;
+				}
+
+				auto file = ofstream(filePath);
+
+				file.close();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
-
-			auto file = ofstream(filePath);
-
-			file.close();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:file_delete")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto isExported = Configuration::getInst().isApplicationExported();
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto filePath = (directoryPath + args[0]->getString());
-
-			if(!Tools::deleteFile(filePath))
+			if(_validateSavesDirectory())
 			{
-				_throwRuntimeError("cannot delete file");
-				return true;
-			}
+				const auto isExported = Configuration::getInst().isApplicationExported();
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+				const auto filePath = (directoryPath + args[0]->getString());
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				if(!Tools::deleteFile(filePath))
+				{
+					_throwRuntimeError("cannot delete file");
+					return true;
+				}
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
 		}
 	}
 	else if(functionName == "fe3d:file_write")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, 2) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, 2))
 		{
-			const auto isExported = Configuration::getInst().isApplicationExported();
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto filePath = (directoryPath + args[0]->getString());
-
-			auto file = ofstream(filePath, ios::app);
-
-			if(!file)
+			if(_validateSavesDirectory())
 			{
-				_throwRuntimeError("cannot open file");
-				return true;
-			}
+				const auto isExported = Configuration::getInst().isApplicationExported();
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+				const auto filePath = (directoryPath + args[0]->getString());
 
-			if(args[1]->getType() == SVT::STRING)
-			{
-				file << args[1]->getString();
-			}
-			else if(args[1]->getType() == SVT::DECIMAL)
-			{
-				file << to_string(args[1]->getDecimal());
-			}
-			else if(args[1]->getType() == SVT::INTEGER)
-			{
-				file << to_string(args[1]->getInteger());
-			}
-			else if(args[1]->getType() == SVT::BOOLEAN)
-			{
-				file << (args[1]->getBoolean() ? "<true>" : "<false>");
-			}
+				auto file = ofstream(filePath, ios::app);
 
-			file.close();
+				if(!file)
+				{
+					_throwRuntimeError("cannot open file");
+					return true;
+				}
 
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+				if(args[1]->getType() == SVT::STRING)
+				{
+					file << args[1]->getString();
+				}
+				else if(args[1]->getType() == SVT::DECIMAL)
+				{
+					file << to_string(args[1]->getDecimal());
+				}
+				else if(args[1]->getType() == SVT::INTEGER)
+				{
+					file << to_string(args[1]->getInteger());
+				}
+				else if(args[1]->getType() == SVT::BOOLEAN)
+				{
+					file << (args[1]->getBoolean() ? "<true>" : "<false>");
+				}
+
+				file.close();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
 		}
 	}
 	else if(functionName == "fe3d:file_add_new_line")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto isExported = Configuration::getInst().isApplicationExported();
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto filePath = (directoryPath + args[0]->getString());
-
-			auto file = ofstream(filePath, ios::app);
-
-			if(!file)
+			if(_validateSavesDirectory())
 			{
-				_throwRuntimeError("cannot open file");
-				return true;
+				const auto isExported = Configuration::getInst().isApplicationExported();
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+				const auto filePath = (directoryPath + args[0]->getString());
+
+				auto file = ofstream(filePath, ios::app);
+
+				if(!file)
+				{
+					_throwRuntimeError("cannot open file");
+					return true;
+				}
+
+				file << endl;
+
+				file.close();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
-
-			file << endl;
-
-			file.close();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:file_clear")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			const auto isExported = Configuration::getInst().isApplicationExported();
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
-			const auto filePath = (directoryPath + args[0]->getString());
-
-			auto file = ofstream(filePath, ios::trunc);
-
-			if(!file)
+			if(_validateSavesDirectory())
 			{
-				_throwRuntimeError("cannot open file");
-				return true;
+				const auto isExported = Configuration::getInst().isApplicationExported();
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectId + "\\")) + "saves\\");
+				const auto filePath = (directoryPath + args[0]->getString());
+
+				auto file = ofstream(filePath, ios::trunc);
+
+				if(!file)
+				{
+					_throwRuntimeError("cannot open file");
+					return true;
+				}
+
+				file.close();
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 			}
-
-			file.close();
-
-			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}
 	}
 	else

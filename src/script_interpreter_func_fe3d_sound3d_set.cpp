@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_validateFe3dId(args[0]->getString()))
 			{
@@ -33,7 +33,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 			{
@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
@@ -112,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
@@ -137,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
@@ -157,7 +157,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
@@ -171,7 +171,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
@@ -185,7 +185,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
@@ -199,7 +199,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{
@@ -213,7 +213,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dSound3d(args[0]->getString(), false))
 			{

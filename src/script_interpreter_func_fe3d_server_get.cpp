@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = _fe3d->server_isClientConnected(args[0]->getString());
 

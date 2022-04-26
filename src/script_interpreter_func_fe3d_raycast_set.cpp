@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 	{
 		auto types = {SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->raycast_setTerrainIntersectionEnabled(args[0]->getBoolean());
 
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->raycast_setTerrainIntersectionDistance(args[0]->getDecimal());
 
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->raycast_setTerrainIntersectionPrecision(args[0]->getDecimal());
 
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetter(const string & functionN
 	{
 		auto types = {SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->raycast_setTerrainIntersectionEnabled(args[0]->getBoolean());
 

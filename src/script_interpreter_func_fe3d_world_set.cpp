@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_worldEditor->getLoadedWorldId().empty() || !_customWorldBuilder->getLoadedWorldId().empty())
 			{
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isSkyAdded(args[0]->getString()))
 			{
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isTerrainAdded(args[0]->getString()))
 			{
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isWaterAdded(args[0]->getString()))
 			{
@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isModelAdded(args[0]->getString()))
 			{
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isQuad3dAdded(args[0]->getString()))
 			{
@@ -140,7 +140,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isText3dAdded(args[0]->getString()))
 			{
@@ -157,7 +157,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isAabbAdded(args[0]->getString()))
 			{
@@ -174,7 +174,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isPointlightAdded(args[0]->getString()))
 			{
@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isSpotlightAdded(args[0]->getString()))
 			{
@@ -208,7 +208,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isCaptorAdded(args[0]->getString()))
 			{
@@ -225,7 +225,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_customWorldBuilder->isSound3dAdded(args[0]->getString()))
 			{
@@ -257,7 +257,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_customWorldBuilder->saveWorldToFile(args[0]->getString());
 
@@ -268,7 +268,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_worldEditor->getLoadedWorldId().empty() || !_customWorldBuilder->getLoadedWorldId().empty())
 			{
@@ -304,7 +304,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto isExported = Configuration::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();

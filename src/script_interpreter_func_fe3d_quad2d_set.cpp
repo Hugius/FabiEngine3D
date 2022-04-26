@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_validateFe3dId(args[0]->getString()))
 			{
@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -112,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -139,7 +139,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -153,7 +153,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -182,7 +182,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -196,7 +196,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -210,7 +210,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -224,7 +224,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -238,7 +238,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -253,7 +253,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -267,7 +267,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -281,7 +281,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -295,7 +295,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -309,7 +309,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -323,7 +323,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -337,7 +337,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -351,7 +351,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -365,7 +365,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dQuad2d(args[0]->getString(), false))
 			{
@@ -379,7 +379,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
@@ -404,7 +404,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
@@ -430,7 +430,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
@@ -455,7 +455,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
@@ -480,7 +480,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
@@ -500,7 +500,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
@@ -520,7 +520,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
@@ -540,7 +540,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{
@@ -560,7 +560,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dAnimation2d(args[0]->getString()) && _validateFe3dQuad2d(args[1]->getString(), false))
 			{

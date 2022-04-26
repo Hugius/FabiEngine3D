@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -50,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -134,7 +134,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -162,7 +162,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -176,7 +176,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -190,7 +190,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -204,7 +204,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -218,7 +218,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -232,7 +232,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -246,7 +246,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -260,7 +260,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -274,7 +274,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -288,7 +288,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -302,7 +302,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -316,7 +316,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -330,7 +330,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -344,7 +344,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -358,7 +358,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -372,7 +372,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -386,7 +386,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -400,7 +400,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -414,7 +414,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -428,7 +428,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -442,7 +442,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -456,7 +456,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_validateFe3dId(args[0]->getString()))
 			{
@@ -472,7 +472,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_validateFe3dId(args[0]->getString()))
 			{
@@ -508,7 +508,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -522,7 +522,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -536,7 +536,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{
@@ -550,7 +550,7 @@ const bool ScriptInterpreter::_executeFe3dText3dGetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dText3d(args[0]->getString(), false))
 			{

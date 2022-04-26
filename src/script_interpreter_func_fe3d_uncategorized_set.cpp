@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 	{
 		auto types = {SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_fe3d->server_isRunning())
 			{
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_fe3d->server_isRunning())
 			{
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 	{
 		auto types = {SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_fe3d->server_isRunning())
 			{

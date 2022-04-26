@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedGetter(const string & fun
 	{
 		auto types = {SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			const auto result = ((_fe3d->misc_getPassedUpdateCount() % args[0]->getInteger()) == 0);
 

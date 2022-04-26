@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->collision_setCameraBox(args[0]->getDecimal(), args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal(), args[4]->getDecimal(), args[5]->getDecimal());
 
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 	{
 		auto types = {SVT::BOOLEAN, SVT::BOOLEAN, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->collision_setCameraAabbResponseEnabled(args[0]->getBoolean(), args[1]->getBoolean(), args[2]->getBoolean());
 
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 	{
 		auto types = {SVT::BOOLEAN};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->collision_setCameraTerrainResponseEnabled(args[0]->getBoolean());
 
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->collision_setCameraTerrainResponseHeight(args[0]->getDecimal());
 
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string & functio
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			_fe3d->collision_setCameraTerrainResponseSpeed(args[0]->getDecimal());
 

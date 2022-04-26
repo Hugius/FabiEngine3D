@@ -9,7 +9,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	{
 		auto types = {SVT::INTEGER};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!Configuration::getInst().isApplicationExported())
 			{
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_fe3d->server_isRunning())
 			{
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_fe3d->server_isRunning())
 			{
@@ -140,7 +140,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_fe3d->server_isRunning())
 			{
@@ -172,7 +172,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_fe3d->server_isRunning())
 			{
@@ -204,7 +204,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string & functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(!_fe3d->server_isRunning())
 			{

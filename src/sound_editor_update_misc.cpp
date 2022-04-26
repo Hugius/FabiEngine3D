@@ -36,18 +36,21 @@ void SoundEditor::_updateSoundCreating()
 		if(newSoundId.empty())
 		{
 			Logger::throwWarning("Sound ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newSoundId.begin(), newSoundId.end(), isspace))
 		{
 			Logger::throwWarning("Sound ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newSoundId.begin(), newSoundId.end(), isupper))
 		{
 			Logger::throwWarning("Sound ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -56,6 +59,7 @@ void SoundEditor::_updateSoundCreating()
 		if(find(_loadedSoundIds.begin(), _loadedSoundIds.end(), newSoundId) != _loadedSoundIds.end())
 		{
 			Logger::throwWarning("Sound already exists");
+
 			return;
 		}
 
@@ -70,6 +74,7 @@ void SoundEditor::_updateSoundCreating()
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{
 			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+
 			return;
 		}
 
@@ -82,6 +87,7 @@ void SoundEditor::_updateSoundCreating()
 		if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
 		{
 			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+
 			return;
 		}
 

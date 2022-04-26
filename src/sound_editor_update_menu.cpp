@@ -44,12 +44,14 @@ void SoundEditor::_updateMainMenu()
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveSoundsToFile();
 				unload();
+
 				return;
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
+
 				return;
 			}
 		}
@@ -72,6 +74,7 @@ void SoundEditor::_updateChoiceMenu()
 			_currentSoundId = "";
 			_gui->getOverlay()->getTextField("soundId")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuMain");
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("play")->isHovered())

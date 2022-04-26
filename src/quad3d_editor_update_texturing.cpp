@@ -13,6 +13,7 @@ void Quad3dEditor::_updateTexturingMenu()
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuChoice");
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
@@ -28,6 +29,7 @@ void Quad3dEditor::_updateTexturingMenu()
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+
 				return;
 			}
 
@@ -40,6 +42,7 @@ void Quad3dEditor::_updateTexturingMenu()
 			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+
 				return;
 			}
 
@@ -60,6 +63,7 @@ void Quad3dEditor::_updateTexturingMenu()
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+
 				return;
 			}
 
@@ -72,6 +76,7 @@ void Quad3dEditor::_updateTexturingMenu()
 			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+
 				return;
 			}
 

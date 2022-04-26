@@ -44,12 +44,14 @@ void ModelEditor::_updateMainMenu()
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveEntitiesToFile();
 				unload();
+
 				return;
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
+
 				return;
 			}
 		}
@@ -79,6 +81,7 @@ void ModelEditor::_updateChoiceMenu()
 			_gui->getOverlay()->getTextField("modelId")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			_currentModelId = "";
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("part")->isHovered())

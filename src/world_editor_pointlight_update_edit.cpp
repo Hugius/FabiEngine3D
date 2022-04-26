@@ -117,6 +117,7 @@ void WorldEditor::_updatePointlightEditing()
 				_loadedPointlightIds.erase(remove(_loadedPointlightIds.begin(), _loadedPointlightIds.end(), _activePointlightId), _loadedPointlightIds.end());
 				_activePointlightId = "";
 				rightWindow->setActiveScreen("main");
+
 				return;
 			}
 

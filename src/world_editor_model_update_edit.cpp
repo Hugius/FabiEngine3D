@@ -137,6 +137,7 @@ void WorldEditor::_updateModelEditing()
 				_loadedModelIds.erase(_activeModelId);
 				rightWindow->setActiveScreen("main");
 				_activeModelId = "";
+
 				return;
 			}
 

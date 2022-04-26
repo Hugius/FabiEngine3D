@@ -5,6 +5,7 @@ void WorldEditor::_updateModelHighlighting(const string & id, int & direction)
 	if(id.empty())
 	{
 		direction = 1;
+
 		return;
 	}
 
@@ -32,6 +33,7 @@ void WorldEditor::_updateQuad3dHighlighting(const string & id, int & direction)
 	if(id.empty())
 	{
 		direction = 1;
+
 		return;
 	}
 
@@ -55,6 +57,7 @@ void WorldEditor::_updateText3dHighlighting(const string & id, int & direction)
 	if(id.empty())
 	{
 		direction = 1;
+
 		return;
 	}
 
@@ -78,6 +81,7 @@ void WorldEditor::_updateSoundHighlighting(const string & id, int & direction)
 	if(id.empty())
 	{
 		direction = 1;
+
 		return;
 	}
 
@@ -104,6 +108,7 @@ void WorldEditor::_updatePointlightHighlighting(const string & id, int & directi
 	if(id.empty())
 	{
 		direction = 1;
+
 		return;
 	}
 
@@ -130,6 +135,7 @@ void WorldEditor::_updateSpotlightHighlighting(const string & id, int & directio
 	if(id.empty())
 	{
 		direction = 1;
+
 		return;
 	}
 
@@ -156,6 +162,7 @@ void WorldEditor::_updateCaptorHighlighting(const string & id, int & direction)
 	if(id.empty())
 	{
 		direction = 1;
+
 		return;
 	}
 

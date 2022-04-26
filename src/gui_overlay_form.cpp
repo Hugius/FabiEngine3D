@@ -157,6 +157,7 @@ void GuiOverlay::openValueForm(const string & id, const string & title, const st
 	if(!_valueFormId.empty())
 	{
 		_valueFormQueue.push_back(make_tuple(id, title, valueString, position, maxCharacterCount, isLettersAllowed, isNumbersAllowed, isSpecialsAllowed));
+
 		return;
 	}
 

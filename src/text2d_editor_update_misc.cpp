@@ -25,18 +25,21 @@ void Text2dEditor::_updateTextCreating()
 		if(newTextId.empty())
 		{
 			Logger::throwWarning("Text ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newTextId.begin(), newTextId.end(), isspace))
 		{
 			Logger::throwWarning("Text ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newTextId.begin(), newTextId.end(), isupper))
 		{
 			Logger::throwWarning("Text ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -45,6 +48,7 @@ void Text2dEditor::_updateTextCreating()
 		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newTextId) != _loadedEntityIds.end())
 		{
 			Logger::throwWarning("Text already exists");
+
 			return;
 		}
 
@@ -59,6 +63,7 @@ void Text2dEditor::_updateTextCreating()
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{
 			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+
 			return;
 		}
 
@@ -71,6 +76,7 @@ void Text2dEditor::_updateTextCreating()
 		if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
 		{
 			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+
 			return;
 		}
 

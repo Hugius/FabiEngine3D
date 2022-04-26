@@ -49,18 +49,21 @@ void SkyEditor::_updateSkyCreating()
 		if(newSkyId.empty())
 		{
 			Logger::throwWarning("Sky ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newSkyId.begin(), newSkyId.end(), isspace))
 		{
 			Logger::throwWarning("Sky ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newSkyId.begin(), newSkyId.end(), isupper))
 		{
 			Logger::throwWarning("Sky ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -69,6 +72,7 @@ void SkyEditor::_updateSkyCreating()
 		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newSkyId) != _loadedEntityIds.end())
 		{
 			Logger::throwWarning("Sky already exists");
+
 			return;
 		}
 

@@ -96,6 +96,7 @@ void WorldEditor::_updateCaptorEditing()
 				_loadedCaptorIds.erase(remove(_loadedCaptorIds.begin(), _loadedCaptorIds.end(), _activeCaptorId), _loadedCaptorIds.end());
 				_activeCaptorId = "";
 				rightWindow->setActiveScreen("main");
+
 				return;
 			}
 

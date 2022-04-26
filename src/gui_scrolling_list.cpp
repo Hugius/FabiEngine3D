@@ -56,6 +56,7 @@ void GuiScrollingList::deleteOption(const string & id)
 		if(id == _buttons[index]->getId())
 		{
 			_buttons.erase(_buttons.begin() + index);
+
 			return;
 		}
 	}

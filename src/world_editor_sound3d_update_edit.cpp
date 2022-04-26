@@ -83,6 +83,7 @@ void WorldEditor::_updateSoundEditing()
 				_loadedSoundIds.erase(_activeSoundId);
 				_activeSoundId = "";
 				rightWindow->setActiveScreen("main");
+
 				return;
 			}
 

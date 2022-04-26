@@ -30,6 +30,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	   operatorString != NEGATION_KEYWORD)
 	{
 		_throwRuntimeError("invalid arithmetic operator");
+
 		return;
 	}
 
@@ -37,6 +38,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	if(nameString.empty())
 	{
 		_throwRuntimeError("variable name missing");
+
 		return;
 	}
 
@@ -58,6 +60,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwRuntimeError("variable \"" + nameString + "\" does not exist");
+
 		return;
 	}
 
@@ -77,22 +80,26 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	if(leftVariable->isConstant())
 	{
 		_throwRuntimeError("CONST variables cannot be changed");
+
 		return;
 	}
 
 	if(!isAccessingLeftList && (leftVariable->getType() == ScriptVariableType::MULTIPLE))
 	{
 		_throwRuntimeError("arithmetic not allowed on LIST values");
+
 		return;
 	}
 	else if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::STRING)
 	{
 		_throwRuntimeError("arithmetic not allowed on STR values");
+
 		return;
 	}
 	else if(leftVariable->getValue(leftValueIndex)->getType() == ScriptValueType::BOOLEAN)
 	{
 		_throwRuntimeError("arithmetic not allowed on BOOL values");
+
 		return;
 	}
 
@@ -103,6 +110,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 			auto integer = leftVariable->getValue(leftValueIndex)->getInteger();
 			integer *= -1;
 			leftVariable->getValue(leftValueIndex)->setInteger(integer);
+
 			return;
 		}
 		else
@@ -110,6 +118,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 			auto decimal = leftVariable->getValue(leftValueIndex)->getDecimal();
 			decimal *= -1.0f;
 			leftVariable->getValue(leftValueIndex)->setDecimal(decimal);
+
 			return;
 		}
 	}
@@ -118,6 +127,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	if(scriptLine.size() < minLineSize)
 	{
 		_throwRuntimeError("value missing");
+
 		return;
 	}
 
@@ -126,11 +136,13 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	if(_isListValue(valueString))
 	{
 		_throwRuntimeError("arithmetic not allowed on LIST values");
+
 		return;
 	}
 	else if(_isStringValue(valueString))
 	{
 		_throwRuntimeError("arithmetic not allowed on STR values");
+
 		return;
 	}
 	else if(_isDecimalValue(valueString))
@@ -146,6 +158,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 	else if(_isBooleanValue(valueString))
 	{
 		_throwRuntimeError("arithmetic not allowed on BOOL values");
+
 		return;
 	}
 	else
@@ -168,6 +181,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
 			_throwRuntimeError("variable \"" + valueString + "\" does not exist");
+
 			return;
 		}
 
@@ -187,16 +201,19 @@ void ScriptInterpreter::_processVariableArithmetic(const string & scriptLine)
 		if(!isAccessingRightList && (rightVariable->getType() == ScriptVariableType::MULTIPLE))
 		{
 			_throwRuntimeError("arithmetic not allowed on LIST values");
+
 			return;
 		}
 		else if(rightVariable->getValue(rightValueIndex)->getType() == ScriptValueType::STRING)
 		{
 			_throwRuntimeError("arithmetic not allowed on STR values");
+
 			return;
 		}
 		else if(rightVariable->getValue(rightValueIndex)->getType() == ScriptValueType::BOOLEAN)
 		{
 			_throwRuntimeError("arithmetic not allowed on BOOL values");
+
 			return;
 		}
 
@@ -267,6 +284,7 @@ void ScriptInterpreter::_performArithmeticOperation(shared_ptr<ScriptValue> left
 	else
 	{
 		_throwRuntimeError("value types not matching");
+
 		return;
 	}
 }

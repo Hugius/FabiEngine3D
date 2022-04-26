@@ -128,6 +128,7 @@ void WorldEditor::_updateQuad3dEditing()
 				_loadedQuadIds.erase(_activeQuadId);
 				_activeQuadId = "";
 				rightWindow->setActiveScreen("main");
+
 				return;
 			}
 

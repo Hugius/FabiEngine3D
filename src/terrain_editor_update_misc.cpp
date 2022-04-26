@@ -57,18 +57,21 @@ void TerrainEditor::_updateTerrainCreating()
 		if(newTerrainId.empty())
 		{
 			Logger::throwWarning("Terrain ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newTerrainId.begin(), newTerrainId.end(), isspace))
 		{
 			Logger::throwWarning("Terrain ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newTerrainId.begin(), newTerrainId.end(), isupper))
 		{
 			Logger::throwWarning("Terrain ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -77,6 +80,7 @@ void TerrainEditor::_updateTerrainCreating()
 		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newTerrainId) != _loadedEntityIds.end())
 		{
 			Logger::throwWarning("Terrain already exists");
+
 			return;
 		}
 
@@ -91,6 +95,7 @@ void TerrainEditor::_updateTerrainCreating()
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{
 			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+
 			return;
 		}
 
@@ -103,6 +108,7 @@ void TerrainEditor::_updateTerrainCreating()
 		if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
 		{
 			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+
 			return;
 		}
 

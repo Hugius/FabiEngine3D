@@ -69,6 +69,7 @@ void WaterEditor::_updateChoiceMenu()
 			_fe3d->water_setWireframed(_currentWaterId, false);
 			_fe3d->water_select("");
 			_currentWaterId = "";
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("texturing")->isHovered())

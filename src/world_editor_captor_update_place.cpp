@@ -68,6 +68,7 @@ void WorldEditor::_updateCaptorPlacing()
 			{
 				_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
+
 				return;
 			}
 
@@ -75,6 +76,7 @@ void WorldEditor::_updateCaptorPlacing()
 			{
 				_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
+
 				return;
 			}
 
@@ -83,6 +85,7 @@ void WorldEditor::_updateCaptorPlacing()
 				_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 				_isPlacingCaptor = false;
+
 				return;
 			}
 
@@ -90,6 +93,7 @@ void WorldEditor::_updateCaptorPlacing()
 			{
 				_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
+
 				return;
 			}
 

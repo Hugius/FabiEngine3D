@@ -74,6 +74,7 @@ void Quad2dEditor::_updateChoiceMenu()
 			_gui->getOverlay()->getTextField("quadId")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuMain");
 			_currentQuadId = "";
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
@@ -89,6 +90,7 @@ void Quad2dEditor::_updateChoiceMenu()
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+
 				return;
 			}
 
@@ -101,6 +103,7 @@ void Quad2dEditor::_updateChoiceMenu()
 			if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+
 				return;
 			}
 

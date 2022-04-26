@@ -91,6 +91,7 @@ void WorldEditor::_updateSpotlightEditing()
 				_loadedSpotlightIds.erase(remove(_loadedSpotlightIds.begin(), _loadedSpotlightIds.end(), _activeSpotlightId), _loadedSpotlightIds.end());
 				_activeSpotlightId = "";
 				rightWindow->setActiveScreen("main");
+
 				return;
 			}
 

@@ -52,18 +52,21 @@ void WorldEditor::_updateModelPlacing()
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
+
 				return;
 			}
 
 			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
+
 				return;
 			}
 
 			if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
+
 				return;
 			}
 
@@ -71,6 +74,7 @@ void WorldEditor::_updateModelPlacing()
 			{
 				_fe3d->model_setVisible(_currentTemplateModelId, false);
 				_currentTemplateModelId = "";
+
 				return;
 			}
 

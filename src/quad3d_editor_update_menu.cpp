@@ -67,6 +67,7 @@ void Quad3dEditor::_updateChoiceMenu()
 			_gui->getOverlay()->getTextField("quadId")->setVisible(false);
 			_currentQuadId = "";
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuMain");
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("texturing")->isHovered())

@@ -72,6 +72,7 @@ void Text2dEditor::_updateChoiceMenu()
 			_gui->getOverlay()->getTextField("textId")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuMain");
 			_currentTextId = "";
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())

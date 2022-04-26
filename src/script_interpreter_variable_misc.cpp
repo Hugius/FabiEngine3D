@@ -20,12 +20,14 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwRuntimeError("variable \"" + nameString + "\" does not exist");
+
 		return;
 	}
 
 	if(scriptLine.size() < (CASTING_KEYWORD.size() + nameString.size() + 3))
 	{
 		_throwRuntimeError("type missing");
+
 		return;
 	}
 
@@ -36,12 +38,14 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 	if(variable->getType() == ScriptVariableType::MULTIPLE)
 	{
 		_throwRuntimeError("LIST variables cannot be typecasted");
+
 		return;
 	}
 
 	if(variable->isConstant())
 	{
 		_throwRuntimeError("CONST variables cannot be typecasted");
+
 		return;
 	}
 
@@ -79,6 +83,7 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 		if(!_isBooleanValue(variable->getValue()->getString()))
 		{
 			_throwRuntimeError("invalid boolean string");
+
 			return;
 		}
 
@@ -90,6 +95,7 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 		if(!_isIntegerValue(variable->getValue()->getString()))
 		{
 			_throwRuntimeError("invalid integer string");
+
 			return;
 		}
 
@@ -100,6 +106,7 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 		if(!_isDecimalValue(variable->getValue()->getString()))
 		{
 			_throwRuntimeError("invalid decimal string");
+
 			return;
 		}
 
@@ -108,6 +115,7 @@ void ScriptInterpreter::_processVariableTypecast(const string & scriptLine)
 	else
 	{
 		_throwRuntimeError("invalid casting type");
+
 		return;
 	}
 }

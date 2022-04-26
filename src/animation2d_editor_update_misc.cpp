@@ -23,18 +23,21 @@ void Animation2dEditor::_updateAnimationCreating()
 		if(newAnimationId.empty())
 		{
 			Logger::throwWarning("Animation ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newAnimationId.begin(), newAnimationId.end(), isspace))
 		{
 			Logger::throwWarning("Animation ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newAnimationId.begin(), newAnimationId.end(), isupper))
 		{
 			Logger::throwWarning("Animation ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -43,6 +46,7 @@ void Animation2dEditor::_updateAnimationCreating()
 		if(find(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), newAnimationId) != _loadedAnimationIds.end())
 		{
 			Logger::throwWarning("Animation already exists");
+
 			return;
 		}
 
@@ -122,6 +126,7 @@ void Animation2dEditor::_updateImageChoosing()
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{
 			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+
 			return;
 		}
 
@@ -134,6 +139,7 @@ void Animation2dEditor::_updateImageChoosing()
 		if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
 		{
 			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+
 			return;
 		}
 

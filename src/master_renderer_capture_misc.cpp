@@ -6,6 +6,7 @@ void MasterRenderer::captureWorldDepth()
 	if(!_renderStorage->isDofEnabled() && !_renderStorage->isLensFlareEnabled())
 	{
 		_renderStorage->setDepthMap(nullptr);
+
 		return;
 	}
 

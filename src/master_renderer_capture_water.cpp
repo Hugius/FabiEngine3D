@@ -7,12 +7,14 @@ void MasterRenderer::captureWaterReflections()
 	if((waterEntity == nullptr) || !waterEntity->isReflective())
 	{
 		_renderStorage->setWaterReflectionMap(nullptr);
+
 		return;
 	}
 
 	if(_camera->getPosition().y < waterEntity->getHeight())
 	{
 		_renderStorage->setWaterReflectionMap(nullptr);
+
 		return;
 	}
 
@@ -123,12 +125,14 @@ void MasterRenderer::captureWaterRefractions()
 	if((waterEntity == nullptr) || !waterEntity->isRefractive())
 	{
 		_renderStorage->setWaterRefractionMap(nullptr);
+
 		return;
 	}
 
 	if(_camera->getPosition().y > waterEntity->getHeight())
 	{
 		_renderStorage->setWaterRefractionMap(nullptr);
+
 		return;
 	}
 

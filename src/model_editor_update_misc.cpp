@@ -102,18 +102,21 @@ void ModelEditor::_updateModelCreating()
 		if(newModelId.empty())
 		{
 			Logger::throwWarning("Model ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newModelId.begin(), newModelId.end(), isspace))
 		{
 			Logger::throwWarning("Model ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newModelId.begin(), newModelId.end(), isupper))
 		{
 			Logger::throwWarning("Model ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -122,6 +125,7 @@ void ModelEditor::_updateModelCreating()
 		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newModelId) != _loadedEntityIds.end())
 		{
 			Logger::throwWarning("Model already exists");
+
 			return;
 		}
 
@@ -136,6 +140,7 @@ void ModelEditor::_updateModelCreating()
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{
 			Logger::throwWarning("Directory `" + targetDirectoryPath + "` does not exist");
+
 			return;
 		}
 
@@ -148,6 +153,7 @@ void ModelEditor::_updateModelCreating()
 		if((filePath.size() > (rootPath.size() + targetDirectoryPath.size())) && (filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath))
 		{
 			Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`");
+
 			return;
 		}
 
@@ -275,24 +281,28 @@ void ModelEditor::_updateAabbCreating()
 		if(newAabbId.empty())
 		{
 			Logger::throwWarning("AABB ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newAabbId.begin(), newAabbId.end(), isspace))
 		{
 			Logger::throwWarning("AABB ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newAabbId.begin(), newAabbId.end(), isupper))
 		{
 			Logger::throwWarning("AABB ID cannot contain any capitals");
+
 			return;
 		}
 
 		if(_fe3d->aabb_isExisting(_currentModelId + "@" + newAabbId))
 		{
 			Logger::throwWarning("AABB already exists");
+
 			return;
 		}
 

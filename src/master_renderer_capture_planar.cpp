@@ -24,6 +24,7 @@ void MasterRenderer::capturePlanarReflections()
 	if(reflectiveModelEntities.empty())
 	{
 		_renderStorage->setPlanarReflectionMap(nullptr);
+
 		return;
 	}
 

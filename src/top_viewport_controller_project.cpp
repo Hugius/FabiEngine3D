@@ -17,30 +17,35 @@ void TopViewportController::_updateProjectCreating()
 		if(!Tools::isDirectoryExisting(projectDirectoryPath))
 		{
 			Logger::throwWarning("Directory `projects\\` does not exist");
+
 			return;
 		}
 
 		if(newProjectId.empty())
 		{
 			Logger::throwWarning("Project ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newProjectId.begin(), newProjectId.end(), isspace))
 		{
 			Logger::throwWarning("Project ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newProjectId.begin(), newProjectId.end(), isupper))
 		{
 			Logger::throwWarning("Project ID cannot contain any capitals");
+
 			return;
 		}
 
 		if(Tools::isDirectoryExisting(newProjectDirectoryPath))
 		{
 			Logger::throwWarning("Project already exists");
+
 			return;
 		}
 
@@ -171,12 +176,14 @@ void TopViewportController::_updateProjectDeleting()
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
 				Logger::throwWarning("Project does not exist");
+
 				return;
 			}
 
 			if(!Tools::deleteDirectory(directoryPath))
 			{
 				Logger::throwWarning("Project deletion failed");
+
 				return;
 			}
 

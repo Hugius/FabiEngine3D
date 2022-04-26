@@ -35,6 +35,7 @@ void WorldEditor::_updatePointlightPlacing()
 				if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxEntityCount())
 				{
 					Logger::throwWarning("pointlight maximum is reached");
+
 					return;
 				}
 
@@ -77,6 +78,7 @@ void WorldEditor::_updatePointlightPlacing()
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+
 				return;
 			}
 
@@ -84,6 +86,7 @@ void WorldEditor::_updatePointlightPlacing()
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+
 				return;
 			}
 
@@ -92,6 +95,7 @@ void WorldEditor::_updatePointlightPlacing()
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				_isPlacingPointlight = false;
+
 				return;
 			}
 
@@ -99,6 +103,7 @@ void WorldEditor::_updatePointlightPlacing()
 			{
 				_fe3d->pointlight_setVisible(TEMPLATE_POINTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
+
 				return;
 			}
 
@@ -118,6 +123,7 @@ void WorldEditor::_updatePointlightPlacing()
 				if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxEntityCount())
 				{
 					Logger::throwWarning("pointlight maximum is reached");
+
 					return;
 				}
 

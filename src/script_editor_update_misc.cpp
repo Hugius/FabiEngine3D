@@ -56,12 +56,14 @@ void ScriptEditor::_updateMenu()
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveScriptFiles();
 				unload();
+
 				return;
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
+
 				return;
 			}
 		}
@@ -83,18 +85,21 @@ void ScriptEditor::_updateScriptFileCreating()
 		if(newScriptFileId.empty())
 		{
 			Logger::throwWarning("Script file ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
 		{
 			Logger::throwWarning("Script file ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isupper))
 		{
 			Logger::throwWarning("Script file ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -102,6 +107,7 @@ void ScriptEditor::_updateScriptFileCreating()
 		if(find(existingScriptFileIds.begin(), existingScriptFileIds.end(), newScriptFileId) != existingScriptFileIds.end())
 		{
 			Logger::throwWarning("Script already exists");
+
 			return;
 		}
 
@@ -140,18 +146,21 @@ void ScriptEditor::_updateScriptFileRenaming()
 		if(newScriptFileId.empty())
 		{
 			Logger::throwWarning("Script file ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isspace))
 		{
 			Logger::throwWarning("Script file ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newScriptFileId.begin(), newScriptFileId.end(), isupper))
 		{
 			Logger::throwWarning("Script file ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -175,6 +184,7 @@ void ScriptEditor::_updateScriptSearching()
 		if(searchResult.empty())
 		{
 			Logger::throwWarning("Keyword not found in scripts");
+
 			return;
 		}
 

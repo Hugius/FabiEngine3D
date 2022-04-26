@@ -18,12 +18,14 @@ void ScriptInterpreter::load()
 		if(scriptFile->getLineCount() == 0)
 		{
 			_throwStartupError("no`script_type` found in script \"" + scriptId + "\"");
+
 			return;
 		}
 
 		if(scriptFile->getLineCount() < 2)
 		{
 			_throwStartupError("no`script_state` found in script \"" + scriptId + "\"");
+
 			return;
 		}
 
@@ -46,6 +48,7 @@ void ScriptInterpreter::load()
 		else
 		{
 			_throwStartupError("incorrect `script_type` in script \"" + scriptId + "\"");
+
 			return;
 		}
 
@@ -60,6 +63,7 @@ void ScriptInterpreter::load()
 				else
 				{
 					_throwStartupError("too many `script_state_entry` found for `script_type_initialize` scripts");
+
 					return;
 				}
 			}
@@ -72,6 +76,7 @@ void ScriptInterpreter::load()
 				else
 				{
 					_throwStartupError("too many `script_state_entry` found for `script_type_update` scripts");
+
 					return;
 				}
 			}
@@ -84,6 +89,7 @@ void ScriptInterpreter::load()
 				else
 				{
 					_throwStartupError("too many `script_state_entry` found for `script_type_terminate` scripts");
+
 					return;
 				}
 			}
@@ -95,6 +101,7 @@ void ScriptInterpreter::load()
 		else
 		{
 			_throwStartupError("incorrect `script_state` in script \"" + scriptId + "\"");
+
 			return;
 		}
 	}
@@ -102,32 +109,38 @@ void ScriptInterpreter::load()
 	if(_initializeScriptIds.empty())
 	{
 		_throwStartupError("no`script_type_initialize` scripts found");
+
 		return;
 	}
 	if(_updateScriptIds.empty())
 	{
 		_throwStartupError("no`script_type_update` scripts found");
+
 		return;
 	}
 	if(_terminateScriptIds.empty())
 	{
 		_throwStartupError("no`script_type_terminate` scripts found");
+
 		return;
 	}
 
 	if(_initEntryId.empty())
 	{
 		_throwStartupError("no`script_state_entry` found for `script_type_initialize` scripts");
+
 		return;
 	}
 	if(_updateEntryId.empty())
 	{
 		_throwStartupError("no`script_state_entry` found for `script_type_update` scripts");
+
 		return;
 	}
 	if(_terminateEntryId.empty())
 	{
 		_throwStartupError("no`script_state_entry` found for `script_type_terminate` scripts");
+
 		return;
 	}
 

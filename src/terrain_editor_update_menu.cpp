@@ -68,6 +68,7 @@ void TerrainEditor::_updateChoiceMenu()
 			_fe3d->terrain_setWireframed(_currentTerrainId, false);
 			_fe3d->terrain_select("");
 			_currentTerrainId = "";
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("diffuseTexturing")->isHovered())

@@ -102,6 +102,7 @@ void WorldEditor::_updateText3dEditing()
 				_loadedTextIds.erase(_activeTextId);
 				_activeTextId = "";
 				rightWindow->setActiveScreen("main");
+
 				return;
 			}
 

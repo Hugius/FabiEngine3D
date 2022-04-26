@@ -67,6 +67,7 @@ void Text3dEditor::_updateChoiceMenu()
 			_gui->getOverlay()->getTextField("textId")->setVisible(false);
 			_currentTextId = "";
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuMain");
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("lighting")->isHovered())

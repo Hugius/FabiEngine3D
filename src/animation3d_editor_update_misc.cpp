@@ -180,18 +180,21 @@ void Animation3dEditor::_updateAnimationCreating()
 		if(newAnimationId.empty())
 		{
 			Logger::throwWarning("Animation ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newAnimationId.begin(), newAnimationId.end(), isspace))
 		{
 			Logger::throwWarning("Animation ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newAnimationId.begin(), newAnimationId.end(), isupper))
 		{
 			Logger::throwWarning("Animation ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -200,6 +203,7 @@ void Animation3dEditor::_updateAnimationCreating()
 		if(find(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), newAnimationId) != _loadedAnimationIds.end())
 		{
 			Logger::throwWarning("Animation already exists");
+
 			return;
 		}
 
@@ -297,6 +301,7 @@ void Animation3dEditor::_updateModelChoosing()
 				if(!hasAllParts)
 				{
 					Logger::throwWarning("Preview model does not have the required animation parts");
+
 					return;
 				}
 

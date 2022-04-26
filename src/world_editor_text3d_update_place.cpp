@@ -50,18 +50,21 @@ void WorldEditor::_updateText3dPlacing()
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
+
 				return;
 			}
 
 			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
+
 				return;
 			}
 
 			if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
+
 				return;
 			}
 
@@ -69,6 +72,7 @@ void WorldEditor::_updateText3dPlacing()
 			{
 				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
 				_currentTemplateTextId = "";
+
 				return;
 			}
 

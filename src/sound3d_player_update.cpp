@@ -48,6 +48,7 @@ void Sound3dPlayer::update()
 						if(writeResult == MMSYSERR_NODRIVER)
 						{
 							_terminateSounds();
+
 							return;
 						}
 						else
@@ -74,6 +75,7 @@ void Sound3dPlayer::update()
 			if(unprepareResult == MMSYSERR_NODRIVER)
 			{
 				_terminateSounds();
+
 				return;
 			}
 			else
@@ -90,6 +92,7 @@ void Sound3dPlayer::update()
 			if(closeResult == MMSYSERR_NODRIVER)
 			{
 				_terminateSounds();
+
 				return;
 			}
 			else

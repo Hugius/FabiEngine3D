@@ -89,6 +89,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 	if(_executionDepth >= MAX_EXECUTION_DEPTH)
 	{
 		_throwRuntimeError("maximum amount of execution layers reached, perhaps infinite recursion?");
+
 		return;
 	}
 
@@ -131,6 +132,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		else
 		{
 			_throwRuntimeError("invalid indentation");
+
 			return;
 		}
 
@@ -144,6 +146,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 				{
 					_throwRuntimeError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
+
 					return;
 				}
 				else
@@ -159,6 +162,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 				{
 					_throwRuntimeError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
+
 					return;
 				}
 				else
@@ -197,6 +201,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			   scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD)
 			{
 				_throwRuntimeError("no LOOP/IF/ELIF/ELSE statement allowed as last line");
+
 				return;
 			}
 		}
@@ -204,6 +209,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		if(scriptLineText.substr(0, META_KEYWORD.size()) == META_KEYWORD)
 		{
 			_throwRuntimeError("META keyword is only allowed on line 1 and 2");
+
 			return;
 		}
 		else if(scriptLineText.substr(0, 5) == "fe3d:")
@@ -238,6 +244,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				)
 			{
 				_throwRuntimeError("script is not of the same type");
+
 				return;
 			}
 
@@ -262,6 +269,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			else
 			{
 				_throwRuntimeError("script does not exist");
+
 				return;
 			}
 		}
@@ -278,6 +286,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			else
 			{
 				_throwRuntimeError("LOOP statement must end with ':'");
+
 				return;
 			}
 		}
@@ -303,6 +312,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			else
 			{
 				_throwRuntimeError("IF statement must end with ':'");
+
 				return;
 			}
 		}
@@ -334,12 +344,14 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 				else
 				{
 					_throwRuntimeError("ELIF statement can only come after IF or ELIF statement");
+
 					return;
 				}
 			}
 			else
 			{
 				_throwRuntimeError("ELIF statement must end with ':'");
+
 				return;
 			}
 		}
@@ -369,18 +381,21 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 					else
 					{
 						_throwRuntimeError("ELSE statement cannot have condition");
+
 						return;
 					}
 				}
 				else
 				{
 					_throwRuntimeError("ELSE statement can only come after IF or ELIF statement");
+
 					return;
 				}
 			}
 			else
 			{
 				_throwRuntimeError("ELSE statement must end with ':'");
+
 				return;
 			}
 		}
@@ -433,6 +448,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 			if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 			{
 				_throwRuntimeError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
+
 				return;
 			}
 			else
@@ -458,6 +474,7 @@ void ScriptInterpreter::_executeScript(const string & scriptId, ScriptType scrip
 		else
 		{
 			_throwRuntimeError("invalid statement");
+
 			return;
 		}
 

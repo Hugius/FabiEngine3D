@@ -35,6 +35,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxEntityCount())
 				{
 					Logger::throwWarning("spotlight maximum is reached");
+
 					return;
 				}
 
@@ -80,6 +81,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+
 				return;
 			}
 
@@ -87,6 +89,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+
 				return;
 			}
 
@@ -95,6 +98,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
 				_isPlacingSpotlight = false;
+
 				return;
 			}
 
@@ -102,6 +106,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_SPOTLIGHT_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
+
 				return;
 			}
 
@@ -121,6 +126,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxEntityCount())
 				{
 					Logger::throwWarning("spotlight maximum is reached");
+
 					return;
 				}
 

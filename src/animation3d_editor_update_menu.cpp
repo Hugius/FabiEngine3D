@@ -99,6 +99,7 @@ void Animation3dEditor::_updateChoiceMenu()
 			_gui->getOverlay()->getTextField("animationId")->setVisible(false);
 			_gui->getOverlay()->getTextField("animationFrame")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("preview")->isHovered())

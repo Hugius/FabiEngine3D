@@ -178,18 +178,21 @@ void WorldEditor::_updateWorldCreating()
 		if(newWorldId.empty())
 		{
 			Logger::throwWarning("World ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newWorldId.begin(), newWorldId.end(), isspace))
 		{
 			Logger::throwWarning("World ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newWorldId.begin(), newWorldId.end(), isupper))
 		{
 			Logger::throwWarning("World ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -198,6 +201,7 @@ void WorldEditor::_updateWorldCreating()
 		if(find(worldNames.begin(), worldNames.end(), newWorldId) != worldNames.end())
 		{
 			Logger::throwWarning("World already exists");
+
 			return;
 		}
 

@@ -155,6 +155,7 @@ void NetworkingClient::update()
 		else if(messageStatusCode == 0)
 		{
 			disconnectFromServer(false);
+
 			return;
 		}
 		else
@@ -162,6 +163,7 @@ void NetworkingClient::update()
 			if((messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED) || (messageErrorCode == WSAETIMEDOUT))
 			{
 				disconnectFromServer(false);
+
 				return;
 			}
 			else

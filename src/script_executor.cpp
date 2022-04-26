@@ -17,11 +17,13 @@ void ScriptExecutor::start()
 	if(_scriptInterpreter->hasThrownError())
 	{
 		_stop(false);
+
 		return;
 	}
 	if(_scriptInterpreter->mustStopApplication())
 	{
 		_stop(true);
+
 		return;
 	}
 
@@ -48,11 +50,13 @@ void ScriptExecutor::update(bool isDebugging)
 				if(_scriptInterpreter->hasThrownError())
 				{
 					_stop(false);
+
 					return;
 				}
 				if(_scriptInterpreter->mustStopApplication())
 				{
 					_stop(true);
+
 					return;
 				}
 			}

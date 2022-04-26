@@ -44,12 +44,14 @@ void SkyEditor::_updateMainMenu()
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				saveEntitiesToFile();
 				unload();
+
 				return;
 			}
 			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 			{
 				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 				unload();
+
 				return;
 			}
 		}
@@ -69,6 +71,7 @@ void SkyEditor::_updateChoiceMenu()
 			_fe3d->sky_setWireframed(_currentSkyId, false);
 			_fe3d->sky_select("");
 			_currentSkyId = "";
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("texturing")->isHovered())

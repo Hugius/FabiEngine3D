@@ -146,6 +146,7 @@ void EngineController::initialize()
 		if(_topViewportController->isProjectCorrupted(rootPath))
 		{
 			_fe3d->application_stop();
+
 			return;
 		}
 

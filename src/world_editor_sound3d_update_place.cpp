@@ -72,41 +72,50 @@ void WorldEditor::_updateSoundPlacing()
 			if(!_fe3d->raycast_isPointOnTerrainValid())
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
+
 				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
+
 				return;
 			}
 
 			if(!Tools::isCursorInsideDisplay() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
+
 				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
+
 				return;
 			}
 
 			if(_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
+
 				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
+
 				return;
 			}
 
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_MIDDLE))
 			{
 				_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
+
 				if(_fe3d->sound3d_isStarted(_currentTemplateSoundId, 0))
 				{
 					_fe3d->sound3d_stop(_currentTemplateSoundId, 0);
 				}
+
 				_currentTemplateSoundId = "";
+
 				return;
 			}
 

@@ -116,6 +116,7 @@ void NetworkingServer::sendTcpMessageToClient(const string & username, const str
 			if(username == _clientUsernames[index])
 			{
 				_sendTcpMessageToClient(_clientSockets[index], content, false);
+
 				return;
 			}
 		}
@@ -150,6 +151,7 @@ void NetworkingServer::sendUdpMessageToClient(const string & username, const str
 			if(username == _clientUsernames[index])
 			{
 				_sendUdpMessageToClient(_clientIps[index], _udpClientPorts[index], content, false);
+
 				return;
 			}
 		}
@@ -228,6 +230,7 @@ void NetworkingServer::disconnectClient(const string & username)
 			if(username == _clientUsernames[index])
 			{
 				_sendTcpMessageToClient(_clientSockets[index], "DISCONNECTED", true);
+
 				return;
 			}
 		}
@@ -248,6 +251,7 @@ void NetworkingServer::disconnectClients()
 		if(!_clientUsernames[index].empty())
 		{
 			_sendTcpMessageToClient(_clientSockets[index], "DISCONNECTED", true);
+
 			return;
 		}
 	}

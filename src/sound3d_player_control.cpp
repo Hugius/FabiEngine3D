@@ -26,6 +26,7 @@ void Sound3dPlayer::startSound(const string & id, int playCount)
 		if(openResult == MMSYSERR_BADDEVICEID)
 		{
 			_terminateSounds();
+
 			return;
 		}
 		else
@@ -52,6 +53,7 @@ void Sound3dPlayer::startSound(const string & id, int playCount)
 		if(prepareResult == MMSYSERR_NODRIVER)
 		{
 			_terminateSounds();
+
 			return;
 		}
 		else
@@ -68,6 +70,7 @@ void Sound3dPlayer::startSound(const string & id, int playCount)
 		if(writeResult == MMSYSERR_NODRIVER)
 		{
 			_terminateSounds();
+
 			return;
 		}
 		else if(writeResult == MMSYSERR_NOMEM)
@@ -78,6 +81,7 @@ void Sound3dPlayer::startSound(const string & id, int playCount)
 				if(unprepareResult == MMSYSERR_NODRIVER)
 				{
 					_terminateSounds();
+
 					return;
 				}
 				else
@@ -94,6 +98,7 @@ void Sound3dPlayer::startSound(const string & id, int playCount)
 				if(closeResult == MMSYSERR_NODRIVER)
 				{
 					_terminateSounds();
+
 					return;
 				}
 				else
@@ -150,6 +155,7 @@ void Sound3dPlayer::pauseSound(const string & id, unsigned int index)
 		if(pauseResult == MMSYSERR_NODRIVER)
 		{
 			_terminateSounds();
+
 			return;
 		}
 		else
@@ -185,6 +191,7 @@ void Sound3dPlayer::resumeSound(const string & id, unsigned int index)
 		if(restartResult == MMSYSERR_NODRIVER)
 		{
 			_terminateSounds();
+
 			return;
 		}
 		else
@@ -213,6 +220,7 @@ void Sound3dPlayer::stopSound(const string & id, unsigned int index)
 		if(resetResult == MMSYSERR_NODRIVER)
 		{
 			_terminateSounds();
+
 			return;
 		}
 		else
@@ -229,6 +237,7 @@ void Sound3dPlayer::stopSound(const string & id, unsigned int index)
 		if(unprepareResult == MMSYSERR_NODRIVER)
 		{
 			_terminateSounds();
+
 			return;
 		}
 		else
@@ -245,6 +254,7 @@ void Sound3dPlayer::stopSound(const string & id, unsigned int index)
 		if(closeResult == MMSYSERR_NODRIVER)
 		{
 			_terminateSounds();
+
 			return;
 		}
 		else

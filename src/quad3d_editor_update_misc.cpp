@@ -74,18 +74,21 @@ void Quad3dEditor::_updateQuad3dCreating()
 		if(newQuadId.empty())
 		{
 			Logger::throwWarning("Quad ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newQuadId.begin(), newQuadId.end(), isspace))
 		{
 			Logger::throwWarning("Quad ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newQuadId.begin(), newQuadId.end(), isupper))
 		{
 			Logger::throwWarning("Quad ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -94,6 +97,7 @@ void Quad3dEditor::_updateQuad3dCreating()
 		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newQuadId) != _loadedEntityIds.end())
 		{
 			Logger::throwWarning("Quad already exists");
+
 			return;
 		}
 

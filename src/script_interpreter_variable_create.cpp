@@ -80,12 +80,14 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 	if(typeString.empty())
 	{
 		_throwRuntimeError("variable type missing");
+
 		return;
 	}
 
 	if(nameString.empty())
 	{
 		_throwRuntimeError("variable name missing");
+
 		return;
 	}
 
@@ -96,6 +98,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 	   typeString != BOOLEAN_KEYWORD)
 	{
 		_throwRuntimeError("invalid variable type");
+
 		return;
 	}
 
@@ -122,18 +125,21 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 	if(scope == ScriptScopeType::GLOBAL && nameString[0] != '_')
 	{
 		_throwRuntimeError("global variables must start with '_'");
+
 		return;
 	}
 
 	if(scope == ScriptScopeType::LOCAL && nameString[0] == '_')
 	{
 		_throwRuntimeError("local variables cannot start with '_'");
+
 		return;
 	}
 
 	if(!isValidName)
 	{
 		_throwRuntimeError("forbidden variable name");
+
 		return;
 	}
 
@@ -143,12 +149,14 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 	   (scope == ScriptScopeType::GLOBAL && _isGlobalVariableExisting(nameString)))
 	{
 		_throwRuntimeError("variable \"" + nameString + "\" already defined");
+
 		return;
 	}
 
 	if(equalSignString != "=")
 	{
 		_throwRuntimeError("equal sign missing");
+
 		return;
 	}
 
@@ -156,6 +164,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 	if(scriptLine.size() < minLineSize)
 	{
 		_throwRuntimeError("value missing");
+
 		return;
 	}
 
@@ -227,6 +236,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 			if(value->getType() == ScriptValueType::EMPTY)
 			{
 				_throwRuntimeError("function returned empty value");
+
 				return;
 			}
 		}
@@ -238,16 +248,19 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		else if(returnValues.empty())
 		{
 			_throwRuntimeError("function returned no values");
+
 			return;
 		}
 		else if(returnValues.size() > 1)
 		{
 			_throwRuntimeError("function returned too many values");
+
 			return;
 		}
 		else if(returnValues[0]->getType() == ScriptValueType::EMPTY)
 		{
 			_throwRuntimeError("function must return value");
+
 			return;
 		}
 		else if((typeString == STRING_KEYWORD) && (returnValues[0]->getType() == ScriptValueType::STRING))
@@ -269,6 +282,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		else
 		{
 			_throwRuntimeError("function returned incorrect value type");
+
 			return;
 		}
 	}
@@ -292,6 +306,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
 			_throwRuntimeError("variable \"" + valueString + "\" does not exist");
+
 			return;
 		}
 
@@ -345,6 +360,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		else
 		{
 			_throwRuntimeError("value types not matching");
+
 			return;
 		}
 	}

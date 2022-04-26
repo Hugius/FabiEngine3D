@@ -55,18 +55,21 @@ void WaterEditor::_updateWaterCreating()
 		if(newWaterId.empty())
 		{
 			Logger::throwWarning("Water ID cannot be empty");
+
 			return;
 		}
 
 		if(any_of(newWaterId.begin(), newWaterId.end(), isspace))
 		{
 			Logger::throwWarning("Water ID cannot contain any spaces");
+
 			return;
 		}
 
 		if(any_of(newWaterId.begin(), newWaterId.end(), isupper))
 		{
 			Logger::throwWarning("Water ID cannot contain any capitals");
+
 			return;
 		}
 
@@ -75,6 +78,7 @@ void WaterEditor::_updateWaterCreating()
 		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newWaterId) != _loadedEntityIds.end())
 		{
 			Logger::throwWarning("Water already exists");
+
 			return;
 		}
 

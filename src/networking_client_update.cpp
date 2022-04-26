@@ -21,6 +21,7 @@ void NetworkingClient::update()
 	if(_mustDisconnectFromServer)
 	{
 		disconnectFromServer(false);
+
 		return;
 	}
 
@@ -51,6 +52,7 @@ void NetworkingClient::update()
 			else
 			{
 				Logger::throwDebug(connectionErrorCode);
+
 				abort();
 			}
 		}
@@ -165,6 +167,7 @@ void NetworkingClient::update()
 			else
 			{
 				Logger::throwDebug(messageErrorCode);
+
 				abort();
 			}
 		}
@@ -193,6 +196,7 @@ void NetworkingClient::update()
 		else
 		{
 			Logger::throwDebug(messageErrorCode);
+
 			abort();
 		}
 	}

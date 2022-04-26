@@ -21,6 +21,7 @@ void main()
 	if(u_isWireframed)
 	{
 		o_finalColor = vec4(u_wireframeColor, 1.0f);
+
 		return;
 	}
 

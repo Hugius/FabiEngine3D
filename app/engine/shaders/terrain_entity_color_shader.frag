@@ -94,6 +94,7 @@ void main()
 	{
 		o_primaryColor = vec4(u_wireframeColor, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
 		return;
 	}
 

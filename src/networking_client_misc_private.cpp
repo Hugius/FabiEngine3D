@@ -49,6 +49,7 @@ const bool NetworkingClient::_sendTcpMessageToServer(const string & content, boo
 		else
 		{
 			Logger::throwDebug(WSAGetLastError());
+
 			abort();
 		}
 	}
@@ -94,6 +95,7 @@ const bool NetworkingClient::_sendUdpMessageToServer(const string & content, boo
 		else
 		{
 			Logger::throwDebug(WSAGetLastError());
+
 			abort();
 		}
 	}
@@ -130,6 +132,7 @@ const bool NetworkingClient::_setupTcp()
 	if(tcpInfoStatusCode != 0)
 	{
 		Logger::throwDebug(tcpInfoStatusCode);
+
 		abort();
 	}
 
@@ -137,6 +140,7 @@ const bool NetworkingClient::_setupTcp()
 	if(_tcpSocket == INVALID_SOCKET)
 	{
 		Logger::throwDebug(WSAGetLastError());
+
 		abort();
 	}
 
@@ -144,6 +148,7 @@ const bool NetworkingClient::_setupTcp()
 	if(tcpBindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwDebug(WSAGetLastError());
+
 		abort();
 	}
 
@@ -165,6 +170,7 @@ const bool NetworkingClient::_setupUdp()
 	if(udpInfoStatusCode != 0)
 	{
 		Logger::throwDebug(udpInfoStatusCode);
+
 		abort();
 	}
 
@@ -172,6 +178,7 @@ const bool NetworkingClient::_setupUdp()
 	if(_udpSocket == INVALID_SOCKET)
 	{
 		Logger::throwDebug(WSAGetLastError());
+
 		abort();
 	}
 
@@ -179,6 +186,7 @@ const bool NetworkingClient::_setupUdp()
 	if(udpBindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwDebug(WSAGetLastError());
+
 		abort();
 	}
 

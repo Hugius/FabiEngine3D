@@ -31,6 +31,7 @@ void Sound2dPlayer::startSound(const string & id, int playCount)
 		else
 		{
 			Logger::throwDebug(openResult);
+
 			abort();
 		}
 	}
@@ -56,6 +57,7 @@ void Sound2dPlayer::startSound(const string & id, int playCount)
 		else
 		{
 			Logger::throwDebug(prepareResult);
+
 			abort();
 		}
 	}
@@ -81,6 +83,7 @@ void Sound2dPlayer::startSound(const string & id, int playCount)
 				else
 				{
 					Logger::throwDebug(unprepareResult);
+
 					abort();
 				}
 			}
@@ -96,6 +99,7 @@ void Sound2dPlayer::startSound(const string & id, int playCount)
 				else
 				{
 					Logger::throwDebug(closeResult);
+
 					abort();
 				}
 			}
@@ -105,6 +109,7 @@ void Sound2dPlayer::startSound(const string & id, int playCount)
 		else
 		{
 			Logger::throwDebug(writeResult);
+
 			abort();
 		}
 	}
@@ -150,6 +155,7 @@ void Sound2dPlayer::pauseSound(const string & id, unsigned int index)
 		else
 		{
 			Logger::throwDebug(pauseResult);
+
 			abort();
 		}
 	}
@@ -184,6 +190,7 @@ void Sound2dPlayer::resumeSound(const string & id, unsigned int index)
 		else
 		{
 			Logger::throwDebug(restartResult);
+
 			abort();
 		}
 	}
@@ -211,6 +218,7 @@ void Sound2dPlayer::stopSound(const string & id, unsigned int index)
 		else
 		{
 			Logger::throwDebug(resetResult);
+
 			abort();
 		}
 	}
@@ -226,6 +234,7 @@ void Sound2dPlayer::stopSound(const string & id, unsigned int index)
 		else
 		{
 			Logger::throwDebug(unprepareResult);
+
 			abort();
 		}
 	}
@@ -241,6 +250,7 @@ void Sound2dPlayer::stopSound(const string & id, unsigned int index)
 		else
 		{
 			Logger::throwDebug(closeResult);
+
 			abort();
 		}
 	}

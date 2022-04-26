@@ -40,6 +40,7 @@ void NetworkingServer::update()
 		if(clientSocket == INVALID_SOCKET)
 		{
 			Logger::throwDebug(WSAGetLastError());
+
 			abort();
 		}
 
@@ -153,9 +154,7 @@ void NetworkingServer::update()
 			}
 			else
 			{
-				auto code = messageErrorCode;
-
-				if((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT))
+				if((messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED) || (messageErrorCode == WSAETIMEDOUT))
 				{
 					_disconnectClient(_clientSockets[index]);
 					index--;
@@ -163,6 +162,7 @@ void NetworkingServer::update()
 				else
 				{
 					Logger::throwDebug(messageErrorCode);
+
 					abort();
 				}
 			}
@@ -206,6 +206,7 @@ void NetworkingServer::update()
 		else
 		{
 			Logger::throwDebug(messageErrorCode);
+
 			abort();
 		}
 	}

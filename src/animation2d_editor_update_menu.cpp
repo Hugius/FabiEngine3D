@@ -81,6 +81,7 @@ void Animation2dEditor::_updateChoiceMenu()
 			_isPreviewTextureChosen = false;
 			_gui->getOverlay()->getTextField("animationId")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
+
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("preview")->isHovered())

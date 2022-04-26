@@ -62,6 +62,7 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 
 		Logger::throwDebug(shaderName);
 		Logger::throwDebug(log);
+
 		abort();
 	}
 
@@ -78,6 +79,7 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 
 		Logger::throwDebug(shaderName);
 		Logger::throwDebug(log);
+
 		abort();
 	}
 
@@ -95,6 +97,7 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 
 		Logger::throwDebug(shaderName);
 		Logger::throwDebug(log);
+
 		abort();
 	}
 
@@ -124,6 +127,7 @@ const unsigned int ShaderBuffer::getUniformId(const string & name)
 	if(id == -1)
 	{
 		Logger::throwDebug(name);
+
 		abort();
 	}
 

@@ -27,6 +27,7 @@ void main()
 	{
         o_finalColor.rgb = texture(u_sceneMap, f_uv).rgb;
 		o_finalColor.a = 1.0f;
+
 		return;
     }
 

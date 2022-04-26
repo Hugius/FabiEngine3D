@@ -53,6 +53,7 @@ void Sound3dPlayer::update()
 						else
 						{
 							Logger::throwDebug(writeResult);
+
 							abort();
 						}
 					}
@@ -78,6 +79,7 @@ void Sound3dPlayer::update()
 			else
 			{
 				Logger::throwDebug(unprepareResult);
+
 				abort();
 			}
 		}
@@ -93,6 +95,7 @@ void Sound3dPlayer::update()
 			else
 			{
 				Logger::throwDebug(closeResult);
+
 				abort();
 			}
 		}

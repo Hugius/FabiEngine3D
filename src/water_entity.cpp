@@ -52,7 +52,7 @@ void WaterEntity::setRippleOffset(const fvec2 & value)
 
 void WaterEntity::setTextureRepeat(unsigned int value)
 {
-	_textureRepeat = max(unsigned int(1), value);
+	_textureRepeat = max(1, value);
 }
 
 void WaterEntity::setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value)

@@ -297,5 +297,5 @@ void Quad2dEntity::setCentered(bool value)
 
 void Quad2dEntity::setTextureRepeat(unsigned int value)
 {
-	_textureRepeat = max(unsigned int(1), value);
+	_textureRepeat = max(1, value);
 }

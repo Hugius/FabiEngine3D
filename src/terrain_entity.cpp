@@ -110,22 +110,22 @@ void TerrainEntity::setBlueNormalMapPath(const string & filePath)
 
 void TerrainEntity::setTextureRepeat(unsigned int value)
 {
-	_textureRepeat = max(unsigned int(1), value);
+	_textureRepeat = max(1, value);
 }
 
 void TerrainEntity::setRedTextureRepeat(unsigned int value)
 {
-	_redTextureRepeat = max(unsigned int(1), value);
+	_redTextureRepeat = max(1, value);
 }
 
 void TerrainEntity::setGreenTextureRepeat(unsigned int value)
 {
-	_greenTextureRepeat = max(unsigned int(1), value);
+	_greenTextureRepeat = max(1, value);
 }
 
 void TerrainEntity::setBlueTextureRepeat(unsigned int value)
 {
-	_blueTextureRepeat = max(unsigned int(1), value);
+	_blueTextureRepeat = max(1, value);
 }
 
 void TerrainEntity::setSize(float value)

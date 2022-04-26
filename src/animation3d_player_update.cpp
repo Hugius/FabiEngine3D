@@ -371,7 +371,7 @@ void Animation3dPlayer::_updateModelAnimationExecution()
 				startedAnimation->setPaused(true);
 			}
 
-			if(startedAnimation->getFrameIndex() == (animation->getFrameCount() - unsigned int(1)))
+			if(startedAnimation->getFrameIndex() == (animation->getFrameCount() - 1))
 			{
 				startedAnimation->setFrameIndex(0);
 

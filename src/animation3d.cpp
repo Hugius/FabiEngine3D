@@ -91,7 +91,7 @@ const vector<string> & Animation3d::getPartIds() const
 
 const unsigned int Animation3d::getFrameCount() const
 {
-	return static_cast<unsigned int>(_frames.size());
+	return static_cast<int>(_frames.size());
 }
 
 void Animation3d::setTargetTransformation(unsigned int frameIndex, const string & partId, const fvec3 & value)

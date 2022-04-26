@@ -34,7 +34,7 @@ void ScriptEditor::_updateTextSelector()
 
 		if(hoveredCharacterIndex == -1)
 		{
-			cursorCharacterIndex = static_cast<unsigned int>(scriptFile->getLine(cursorLineIndex).size());
+			cursorCharacterIndex = static_cast<int>(scriptFile->getLine(cursorLineIndex).size());
 		}
 		else
 		{
@@ -124,9 +124,9 @@ void ScriptEditor::_updateTextSelector()
 
 	if(_fe3d->quad3d_isVisible("selection"))
 	{
-		const auto selectionLineIndex = static_cast<unsigned int>(stoi(_firstSelectionAabbId.substr(0, _firstSelectionAabbId.find('_'))));
-		const auto firstSelectionCharacterIndex = static_cast<unsigned int>(stoi(_firstSelectionAabbId.substr(_firstSelectionAabbId.find('_') + 1)));
-		const auto secondSelectionCharacterIndex = static_cast<unsigned int>(stoi(_secondSelectionAabbId.substr(_secondSelectionAabbId.find('_') + 1)));
+		const auto selectionLineIndex = stoi(_firstSelectionAabbId.substr(0, _firstSelectionAabbId.find('_')));
+		const auto firstSelectionCharacterIndex = stoi(_firstSelectionAabbId.substr(_firstSelectionAabbId.find('_') + 1));
+		const auto secondSelectionCharacterIndex = stoi(_secondSelectionAabbId.substr(_secondSelectionAabbId.find('_') + 1));
 
 		if(isControlDown && (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_C) || _fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_X)))
 		{
@@ -159,7 +159,7 @@ void ScriptEditor::_updateTextSelector()
 
 			if((selectionLineIndex == cursorLineIndex) && (cursorCharacterIndex > lineText.size()))
 			{
-				scriptFile->setCursorCharacterIndex(static_cast<unsigned int>(lineText.size()));
+				scriptFile->setCursorCharacterIndex(static_cast<int>(lineText.size()));
 			}
 
 			_hasTextChanged = true;
@@ -179,7 +179,7 @@ void ScriptEditor::_updateTextSelector()
 
 				scriptFile->editLine(cursorLineIndex, (firstPart + _selectionClipboard + secondPart));
 
-				scriptFile->setCursorCharacterIndex(cursorCharacterIndex + static_cast<unsigned int>(_selectionClipboard.size()));
+				scriptFile->setCursorCharacterIndex(cursorCharacterIndex + static_cast<int>(_selectionClipboard.size()));
 
 				_hasTextChanged = true;
 			}

@@ -33,7 +33,7 @@ const bool ModelEditor::saveEntitiesToFile() const
 		auto modelSize = _fe3d->model_getBaseSize(modelId);
 		auto levelOfDetailEntityId = _fe3d->model_getLevelOfDetailEntityId(modelId);
 		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(modelId);
-		auto rotationOrder = static_cast<unsigned int>(_fe3d->model_getRotationOrder(modelId));
+		auto rotationOrder = static_cast<int>(_fe3d->model_getRotationOrder(modelId));
 		auto isShadowed = _fe3d->model_isShadowed(modelId);
 		auto isReflected = _fe3d->model_isReflected(modelId);
 
@@ -83,7 +83,7 @@ const bool ModelEditor::saveEntitiesToFile() const
 			auto color = _fe3d->model_getColor(modelId, partId);
 			auto textureRepeat = _fe3d->model_getTextureRepeat(modelId, partId);
 			auto isReflective = _fe3d->model_isReflective(modelId, partId);
-			auto reflectionType = static_cast<unsigned int>(_fe3d->model_getReflectionType(modelId, partId));
+			auto reflectionType = static_cast<int>(_fe3d->model_getReflectionType(modelId, partId));
 			auto isFaceCulled = _fe3d->model_isFaceCulled(modelId, partId);
 			auto isBright = _fe3d->model_isBright(modelId, partId);
 			auto emissionIntensity = _fe3d->model_getEmissionIntensity(modelId, partId);

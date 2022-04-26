@@ -212,7 +212,7 @@ const bool NetworkingServer::_setupUdp()
 
 void NetworkingServer::_disconnectClient(SOCKET socket)
 {
-	for(unsigned int index = 0; index < static_cast<unsigned int>(_clientSockets.size()); index++)
+	for(unsigned int index = 0; index < static_cast<int>(_clientSockets.size()); index++)
 	{
 		if(socket == _clientSockets[index])
 		{

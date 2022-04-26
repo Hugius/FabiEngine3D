@@ -108,7 +108,7 @@ const unsigned int Mathematics::calculateAverage(const vector<unsigned int> & va
 		total += value;
 	}
 
-	return static_cast<unsigned int>(total / values.size());
+	return (total / static_cast<int>(values.size()));
 }
 
 const unsigned int Mathematics::getRandomNumber(unsigned int min, unsigned int max)

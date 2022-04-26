@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_validateArgumentCount(const vector<shared_ptr<Scr
 
 const bool ScriptInterpreter::_validateArgumentTypes(const vector<shared_ptr<ScriptValue>> & values, const vector<ScriptValueType> & types)
 {
-	for(unsigned int index = 0; index < static_cast<unsigned int>(values.size()); index++)
+	for(unsigned int index = 0; index < static_cast<int>(values.size()); index++)
 	{
 		if(values[index]->getType() != types[index])
 		{
@@ -213,7 +213,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 	unsigned int index;
 	if(_isIntegerValue(indexString))
 	{
-		index = static_cast<unsigned int>(stoi(_limitIntegerString(indexString)));
+		index = stoi(_limitIntegerString(indexString));
 	}
 	else
 	{
@@ -226,7 +226,7 @@ void ScriptInterpreter::_processListPull(const string & scriptLine)
 			return;
 		}
 
-		index = static_cast<unsigned int>(indexVariable->getValue()->getInteger());
+		index = indexVariable->getValue()->getInteger();
 	}
 
 	if(!_validateListIndex(listVariable, index))

@@ -73,7 +73,7 @@ const string & ScriptFile::getLine(unsigned int index) const
 
 const unsigned int ScriptFile::getLineCount() const
 {
-	return static_cast<unsigned int>(_lines.size());
+	return static_cast<int>(_lines.size());
 }
 
 const unsigned int ScriptFile::getCursorLineIndex() const

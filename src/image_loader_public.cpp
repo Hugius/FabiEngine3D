@@ -87,7 +87,7 @@ void ImageLoader::cacheImages(const vector<string> & filePaths, bool isCrucial)
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		for(unsigned int index = 0; index < static_cast<unsigned int>(threadStatuses.size()); index++)
+		for(unsigned int index = 0; index < static_cast<int>(threadStatuses.size()); index++)
 		{
 			if(!threadStatuses[index])
 			{

@@ -64,9 +64,9 @@ shared_ptr<Image> ImageLoader::_loadImage(const string & filePath) const
 		return nullptr;
 	}
 
-	const auto width = static_cast<unsigned int>(rawWidth);
-	const auto height = static_cast<unsigned int>(rawHeight);
-	const auto bitsPerPixel = static_cast<unsigned int>(rawFormat);
+	const auto width = static_cast<int>(rawWidth);
+	const auto height = static_cast<int>(rawHeight);
+	const auto bitsPerPixel = static_cast<int>(rawFormat);
 	const auto bytesPerPixel = (bitsPerPixel / 8);
 	const auto size = (width * height * bytesPerPixel);
 	const auto pixels = new unsigned char[size];

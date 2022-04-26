@@ -73,7 +73,7 @@ void ModelEntityManager::createEntity(const string & id, const string & meshPath
 	{
 		vector<float> bufferData;
 
-		for(unsigned int index = 0; index < static_cast<unsigned int>(part->getPositions().size()); index++)
+		for(unsigned int index = 0; index < static_cast<int>(part->getPositions().size()); index++)
 		{
 			bufferData.push_back(part->getPositions()[index].x);
 			bufferData.push_back(part->getPositions()[index].y);
@@ -97,7 +97,7 @@ void ModelEntityManager::createEntity(const string & id, const string & meshPath
 
 		if(vertexBuffer == nullptr)
 		{
-			vertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<unsigned int>(bufferData.size()));
+			vertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<int>(bufferData.size()));
 
 			_vertexBufferCache->storeBuffer(meshPath, part->getName(), vertexBuffer);
 		}

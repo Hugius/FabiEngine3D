@@ -35,7 +35,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 		return nullptr;
 	}
 
-	const auto chunkSize = static_cast<unsigned int>((chunkHeaderData[7] << 24) | (chunkHeaderData[6] << 16) | (chunkHeaderData[5] << 8) | chunkHeaderData[4]);
+	const auto chunkSize = static_cast<int>((chunkHeaderData[7] << 24) | (chunkHeaderData[6] << 16) | (chunkHeaderData[5] << 8) | chunkHeaderData[4]);
 
 	string format = "";
 	format.push_back(chunkHeaderData[8]);
@@ -69,7 +69,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 		subChunkId.push_back(subChunkHeaderData[2]);
 		subChunkId.push_back(subChunkHeaderData[3]);
 
-		const auto subChunkSize = static_cast<unsigned int>((subChunkHeaderData[7] << 24) | (subChunkHeaderData[6] << 16) | (subChunkHeaderData[5] << 8) | subChunkHeaderData[4]);
+		const auto subChunkSize = static_cast<int>((subChunkHeaderData[7] << 24) | (subChunkHeaderData[6] << 16) | (subChunkHeaderData[5] << 8) | subChunkHeaderData[4]);
 
 		if(subChunkId == "fmt ")
 		{
@@ -80,7 +80,7 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 			}
 
 			// 1 = PCM
-			const auto compressionFormat = static_cast<unsigned int>((subChunkBodyData[1] << 8) | subChunkBodyData[0]);
+			const auto compressionFormat = static_cast<int>((subChunkBodyData[1] << 8) | subChunkBodyData[0]);
 			if(compressionFormat != 1)
 			{
 				return nullptr;
@@ -88,19 +88,19 @@ shared_ptr<Audio> AudioLoader::_loadAudio(const string & filePath) const
 
 			// 1 = mono
 			// 2 = stereo
-			channelCount = static_cast<unsigned int>((subChunkBodyData[3] << 8) | subChunkBodyData[2]);
+			channelCount = static_cast<int>((subChunkBodyData[3] << 8) | subChunkBodyData[2]);
 			if(channelCount != 2)
 			{
 				return nullptr;
 			}
 
-			sampleRate = static_cast<unsigned int>((subChunkBodyData[7] << 24) | (subChunkBodyData[6] << 16) | (subChunkBodyData[5] << 8) | subChunkBodyData[4]);
+			sampleRate = static_cast<int>((subChunkBodyData[7] << 24) | (subChunkBodyData[6] << 16) | (subChunkBodyData[5] << 8) | subChunkBodyData[4]);
 
-			byteRate = static_cast<unsigned int>((subChunkBodyData[11] << 24) | (subChunkBodyData[10] << 16) | (subChunkBodyData[9] << 8) | subChunkBodyData[8]);
+			byteRate = static_cast<int>((subChunkBodyData[11] << 24) | (subChunkBodyData[10] << 16) | (subChunkBodyData[9] << 8) | subChunkBodyData[8]);
 
-			bytesPerBlock = static_cast<unsigned int>((subChunkBodyData[13] << 8) | subChunkBodyData[12]);
+			bytesPerBlock = static_cast<int>((subChunkBodyData[13] << 8) | subChunkBodyData[12]);
 
-			bitsPerSample = static_cast<unsigned int>((subChunkBodyData[15] << 8) | subChunkBodyData[14]);
+			bitsPerSample = static_cast<int>((subChunkBodyData[15] << 8) | subChunkBodyData[14]);
 			if(bitsPerSample != 16)
 			{
 				return nullptr;

@@ -17,7 +17,7 @@ void Sound2dPlayer::_terminateSounds()
 {
 	for(const auto & [soundId, instances] : _startedSounds)
 	{
-		for(unsigned int instanceIndex = 0; instanceIndex < static_cast<unsigned int>(instances.size()); instanceIndex++)
+		for(unsigned int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 		{
 			_terminateSound(soundId, instanceIndex);
 		}
@@ -163,7 +163,7 @@ const unsigned int Sound2dPlayer::getStartedSoundCount(const string & id) const
 		return 0;
 	}
 
-	return static_cast<unsigned int>(_startedSounds.at(id).size());
+	return static_cast<int>(_startedSounds.at(id).size());
 }
 
 const unsigned int Sound2dPlayer::getSoundTime(const string & id, unsigned int index) const
@@ -184,7 +184,7 @@ const unsigned int Sound2dPlayer::getSoundTime(const string & id, unsigned int i
 
 	const auto sampleIndex = currentSoundTime->u.sample;
 	const auto sampleRate = _sound2dManager->getSound(id)->getWaveBuffer()->getFormat()->nSamplesPerSec;
-	const auto result = static_cast<unsigned int>(static_cast<float>(sampleIndex) / static_cast<float>(sampleRate));
+	const auto result = static_cast<int>(static_cast<float>(sampleIndex) / static_cast<float>(sampleRate));
 
 	delete currentSoundTime;
 

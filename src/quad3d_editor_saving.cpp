@@ -40,7 +40,7 @@ const bool Quad3dEditor::saveEntitiesToFile() const
 		auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(quadId);
 		auto opacity = _fe3d->quad3d_getOpacity(quadId);
 		auto minTextureAlpha = _fe3d->quad3d_getMinTextureAlpha(quadId);
-		auto rotationOrder = static_cast<unsigned int>(_fe3d->quad3d_getRotationOrder(quadId));
+		auto rotationOrder = static_cast<int>(_fe3d->quad3d_getRotationOrder(quadId));
 
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 		emissionMapPath = (emissionMapPath.empty() ? "" : emissionMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));

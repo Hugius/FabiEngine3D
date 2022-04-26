@@ -59,7 +59,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 	if(isAccessingLeftList)
 	{
 		auto isOpeningBracketFound = find(nameString.begin(), nameString.end(), '[');
-		auto bracketIndex = static_cast<unsigned int>(distance(nameString.begin(), isOpeningBracketFound));
+		auto bracketIndex = static_cast<int>(distance(nameString.begin(), isOpeningBracketFound));
 		nameString = nameString.substr(0, bracketIndex);
 	}
 
@@ -216,7 +216,7 @@ void ScriptInterpreter::_processVariableAlteration(const string & scriptLine)
 		if(isAccessingRightList)
 		{
 			auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
-			auto bracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
+			auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
 			valueString = valueString.substr(0, bracketIndex);
 		}
 

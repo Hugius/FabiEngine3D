@@ -49,7 +49,7 @@ constexpr float bufferData[] =
 	1.0f, -1.0f, 1.0f
 };
 
-constexpr unsigned int bufferDataCount = static_cast<unsigned int>(sizeof(bufferData) / sizeof(float));
+constexpr unsigned int bufferDataCount = static_cast<int>(sizeof(bufferData) / sizeof(float));
 
 SkyEntityManager::SkyEntityManager()
 	:

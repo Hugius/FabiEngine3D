@@ -111,13 +111,13 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		}
 		if((_gui->getOverlay()->getValueFormId() == "interval") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
+			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->graphics_setShadowInterval(content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "quality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
+			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->graphics_setShadowQuality(content);
 		}
@@ -164,13 +164,13 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 		}
 		if((_gui->getOverlay()->getValueFormId() == "cubeQuality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
+			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->graphics_setCubeReflectionQuality(content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "planarQuality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
+			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->graphics_setPlanarReflectionQuality(content);
 		}
@@ -198,7 +198,7 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "planarQuality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
+			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->graphics_setPlanarRefractionQuality(content);
 		}
@@ -258,7 +258,7 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		}
 		if((_gui->getOverlay()->getValueFormId() == "quality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
+			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->graphics_setDofQuality(content);
 		}
@@ -537,13 +537,13 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		}
 		if((_gui->getOverlay()->getValueFormId() == "blurCount") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
+			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->graphics_setBloomBlurCount(content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "quality") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
+			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->graphics_setBloomQuality(content);
 		}

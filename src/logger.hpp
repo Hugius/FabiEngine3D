@@ -92,7 +92,7 @@ private:
 			SetConsoleTextAttribute(console, static_cast<DWORD>(ERROR_COLOR));
 		}
 
-		cout << "[" + TYPE_STRINGS[static_cast<unsigned int>(type)] + "]";
+		cout << "[" + TYPE_STRINGS[static_cast<int>(type)] + "]";
 
 		SetConsoleTextAttribute(console, CONTENT_COLOR);
 

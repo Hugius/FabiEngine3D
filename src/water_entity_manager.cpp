@@ -172,8 +172,8 @@ void WaterEntityManager::_loadVertexBuffer(shared_ptr<WaterEntity> entity, float
 		}
 	}
 
-	const auto lowQualityBufferDataCount = static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float));
-	const auto highQualityBufferDataCount = static_cast<unsigned int>(highQualityBufferData.size());
+	const auto lowQualityBufferDataCount = static_cast<int>(sizeof(lowQualityBufferData) / sizeof(float));
+	const auto highQualityBufferDataCount = static_cast<int>(highQualityBufferData.size());
 
 	entity->setLowQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
 	entity->setHighQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &highQualityBufferData[0], highQualityBufferDataCount));

@@ -35,7 +35,7 @@ void InputHandler::update()
 
 	for(const auto & button : _mouseUpEvents)
 	{
-		for(unsigned int index = 0; index < static_cast<unsigned int>(_heldMouseButtons.size()); index++)
+		for(unsigned int index = 0; index < static_cast<int>(_heldMouseButtons.size()); index++)
 		{
 			if(button == _heldMouseButtons[index])
 			{
@@ -48,7 +48,7 @@ void InputHandler::update()
 
 	for(const auto & key : _keyboardUpEvents)
 	{
-		for(unsigned int index = 0; index < static_cast<unsigned int>(_heldKeyboardKeyTypes.size()); index++)
+		for(unsigned int index = 0; index < static_cast<int>(_heldKeyboardKeyTypes.size()); index++)
 		{
 			if(key == _heldKeyboardKeyTypes[index])
 			{

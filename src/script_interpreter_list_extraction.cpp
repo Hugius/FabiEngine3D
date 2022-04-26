@@ -193,7 +193,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_extractValuesFromListS
 					if(isAccessingList)
 					{
 						auto isOpeningBracketFound = find(currentValueString.begin(), currentValueString.end(), '[');
-						auto bracketIndex = static_cast<unsigned int>(distance(currentValueString.begin(), isOpeningBracketFound));
+						auto bracketIndex = static_cast<int>(distance(currentValueString.begin(), isOpeningBracketFound));
 						currentValueString = currentValueString.substr(0, bracketIndex);
 					}
 

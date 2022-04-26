@@ -45,54 +45,54 @@ void CameraCollisionResponder::update()
 			case DirectionOrderType::XYZ:
 			{
 				xPriority = 3; yPriority = 2; zPriority = 1;
-				xPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
-				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
-				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
+				xPriority *= static_cast<int>(_handleCollision(DirectionType::X));
+				yPriority *= static_cast<int>(_handleCollision(DirectionType::Y));
+				zPriority *= static_cast<int>(_handleCollision(DirectionType::Z));
 
 				break;
 			}
 			case DirectionOrderType::XZY:
 			{
 				xPriority = 3; zPriority = 2; yPriority = 1;
-				xPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
-				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
-				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
+				xPriority *= static_cast<int>(_handleCollision(DirectionType::X));
+				zPriority *= static_cast<int>(_handleCollision(DirectionType::Z));
+				yPriority *= static_cast<int>(_handleCollision(DirectionType::Y));
 
 				break;
 			}
 			case DirectionOrderType::YXZ:
 			{
 				yPriority = 3; xPriority = 1; zPriority = 2;
-				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
-				xPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
-				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
+				yPriority *= static_cast<int>(_handleCollision(DirectionType::Y));
+				xPriority *= static_cast<int>(_handleCollision(DirectionType::X));
+				zPriority *= static_cast<int>(_handleCollision(DirectionType::Z));
 
 				break;
 			}
 			case DirectionOrderType::YZX:
 			{
 				yPriority = 3; zPriority = 2; xPriority = 1;
-				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
-				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
-				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
+				yPriority *= static_cast<int>(_handleCollision(DirectionType::Y));
+				zPriority *= static_cast<int>(_handleCollision(DirectionType::Z));
+				zPriority *= static_cast<int>(_handleCollision(DirectionType::X));
 
 				break;
 			}
 			case DirectionOrderType::ZXY:
 			{
 				zPriority = 3; xPriority = 2; yPriority = 1;
-				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
-				xPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
-				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
+				zPriority *= static_cast<int>(_handleCollision(DirectionType::Z));
+				xPriority *= static_cast<int>(_handleCollision(DirectionType::X));
+				yPriority *= static_cast<int>(_handleCollision(DirectionType::Y));
 
 				break;
 			}
 			case DirectionOrderType::ZYX:
 			{
 				zPriority = 3; yPriority = 2; xPriority = 1;
-				zPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Z));
-				yPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::Y));
-				xPriority *= static_cast<unsigned int>(_handleCollision(DirectionType::X));
+				zPriority *= static_cast<int>(_handleCollision(DirectionType::Z));
+				yPriority *= static_cast<int>(_handleCollision(DirectionType::Y));
+				xPriority *= static_cast<int>(_handleCollision(DirectionType::X));
 
 				break;
 			}

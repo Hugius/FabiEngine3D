@@ -46,7 +46,7 @@ void TerrainEntityManager::createEntity(const string & id, const string & height
 
 	auto entity = make_shared<TerrainEntity>(id);
 
-	const auto size = min(min(image->getWidth(), image->getHeight()), static_cast<unsigned int>(MAX_SIZE));
+	const auto size = min(min(image->getWidth(), image->getHeight()), static_cast<int>(MAX_SIZE));
 	const auto bytesPerPixel = (image->getBitsPerPixel() / 8);
 
 	vector<float> pixels;
@@ -125,7 +125,6 @@ void TerrainEntityManager::loadVertexBuffer(const string & id)
 void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float> & pixels)
 {
 	const auto halfSize = (size * 0.5f);
-	const auto uSize = static_cast<unsigned int>(size);
 
 	vector<fvec3> tempPositions;
 	vector<fvec2> tempUvs;
@@ -155,13 +154,13 @@ void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, f
 	vector<fvec3> positions;
 	vector<fvec2> uvs;
 	vector<fvec3> normals;
-	for(unsigned int z = 0; z < (uSize - 1); z++)
+	for(unsigned int z = 0; z < (static_cast<int>(size) - 1); z++)
 	{
-		for(unsigned int x = 0; x < (uSize - 1); x++)
+		for(unsigned int x = 0; x < (static_cast<int>(size) - 1); x++)
 		{
-			auto topLeftIndex = ((z * uSize) + x);
+			auto topLeftIndex = ((z * static_cast<int>(size)) + x);
 			auto topRightIndex = (topLeftIndex + 1);
-			auto bottomLeftIndex = (((z + 1) * uSize) + x);
+			auto bottomLeftIndex = (((z + 1) * static_cast<int>(size)) + x);
 			auto bottomRightIndex = (bottomLeftIndex + 1);
 
 			positions.push_back(tempPositions[topLeftIndex]);
@@ -191,7 +190,7 @@ void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, f
 	}
 
 	vector<fvec3> tangents;
-	for(unsigned int index = 0; index < static_cast<unsigned int>(positions.size()); index += 3)
+	for(unsigned int index = 0; index < static_cast<int>(positions.size()); index += 3)
 	{
 		const auto pos1 = positions[index + 0];
 		const auto pos2 = positions[index + 1];
@@ -217,7 +216,7 @@ void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, f
 	}
 
 	vector<float> bufferData;
-	for(unsigned int index = 0; index < static_cast<unsigned int>(positions.size()); index++)
+	for(unsigned int index = 0; index < static_cast<int>(positions.size()); index++)
 	{
 		bufferData.push_back(positions[index].x);
 		bufferData.push_back(positions[index].y);
@@ -235,7 +234,7 @@ void TerrainEntityManager::_loadVertexBuffer(shared_ptr<TerrainEntity> entity, f
 		bufferData.push_back(tangents[index].z);
 	}
 
-	auto bufferDataCount = static_cast<unsigned int>(bufferData.size());
+	auto bufferDataCount = static_cast<int>(bufferData.size());
 
 	entity->setVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], bufferDataCount));
 }
@@ -274,7 +273,7 @@ float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float 
 		return 0.0f;
 	}
 
-	const auto index = (static_cast<unsigned int>(z) * static_cast<unsigned int>(size)) + static_cast<unsigned int>(x);
+	const auto index = (static_cast<int>(z) * static_cast<int>(size)) + static_cast<int>(x);
 
 	return (pixels[index] * maxHeight);
 }

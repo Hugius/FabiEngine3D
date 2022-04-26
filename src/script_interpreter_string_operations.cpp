@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_isDecimalValue(const string & valueString) const
 	}
 
 	unsigned dots = 0;
-	for(unsigned int index = startingIndex; index < static_cast<unsigned int>(valueString.size()); index++)
+	for(unsigned int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
 	{
 		if(!isdigit(valueString[index]) && valueString[index] != '.')
 		{
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_isIntegerValue(const string & valueString) const
 		startingIndex = 1;
 	}
 
-	for(unsigned int index = startingIndex; index < static_cast<unsigned int>(valueString.size()); index++)
+	for(unsigned int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
 	{
 		if(!isdigit(valueString[index]))
 		{
@@ -95,8 +95,8 @@ const int ScriptInterpreter::_extractListIndexFromString(const string & valueStr
 		return -1;
 	}
 
-	auto openingBracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
-	auto closingBracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
+	auto openingBracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
+	auto closingBracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
 	if((openingBracketIndex == 0) || (closingBracketIndex == 0) || (openingBracketIndex > closingBracketIndex))
 	{
 		return -1;
@@ -176,7 +176,7 @@ const string ScriptInterpreter::_limitIntegerString(const string & valueString) 
 
 const string ScriptInterpreter::_limitDecimalString(const string & valueString) const
 {
-	auto dotIndex = static_cast<unsigned int>(valueString.find('.'));
+	auto dotIndex = static_cast<int>(valueString.find('.'));
 	string intString = valueString.substr(0, dotIndex);
 
 	if(valueString[0] == '-')

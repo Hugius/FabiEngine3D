@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 				if(isAccessingList)
 				{
 					auto isOpeningBracketFound = find(elementString.begin(), elementString.end(), '[');
-					auto bracketIndex = static_cast<unsigned int>(distance(elementString.begin(), isOpeningBracketFound));
+					auto bracketIndex = static_cast<int>(distance(elementString.begin(), isOpeningBracketFound));
 					elementString = elementString.substr(0, bracketIndex);
 				}
 
@@ -203,7 +203,7 @@ const bool ScriptInterpreter::_checkConditionString(const string & conditionStri
 
 	bool finalCondition = conditions[0];
 	string currentLogicOperator = "";
-	for(unsigned int index = 1; index < static_cast<unsigned int>(conditions.size()); index++)
+	for(unsigned int index = 1; index < static_cast<int>(conditions.size()); index++)
 	{
 		if(currentLogicOperator.empty())
 		{
@@ -327,7 +327,7 @@ const bool ScriptInterpreter::_compareValues(shared_ptr<ScriptValue> firstValue,
 
 const int ScriptInterpreter::_getLastConditionStatementIndex(const vector<ScriptConditionStatement> & statements, unsigned int scopeDepth) const
 {
-	unsigned int index = static_cast<unsigned int>(statements.size());
+	unsigned int index = static_cast<int>(statements.size());
 
 	while(index--)
 	{

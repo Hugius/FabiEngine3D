@@ -21,7 +21,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 		return {};
 	}
 
-	auto parenthesisIndex = static_cast<unsigned int>(distance(scriptLine.begin(), openingParanthesisFound));
+	auto parenthesisIndex = static_cast<int>(distance(scriptLine.begin(), openingParanthesisFound));
 	string argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1));
 	argumentString.pop_back();
 	auto args = _extractValuesFromListString(argumentString);
@@ -473,7 +473,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMiscFunctionCal
 			const auto delimiter = args[1]->getString();
 
 			string result = "";
-			for(unsigned int index = 0; index < static_cast<unsigned int>(fullString.size()); index++)
+			for(unsigned int index = 0; index < static_cast<int>(fullString.size()); index++)
 			{
 				if(fullString[index] == delimiter.back())
 				{

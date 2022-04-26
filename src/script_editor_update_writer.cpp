@@ -21,7 +21,7 @@ void ScriptEditor::_updateTextWriter()
 			if(cursorLineIndex > 0)
 			{
 				cursorLineIndex--;
-				cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
+				cursorCharacterIndex = static_cast<int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
 			}
 		}
 
@@ -60,7 +60,7 @@ void ScriptEditor::_updateTextWriter()
 
 			if(cursorCharacterIndex > _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size())
 			{
-				cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
+				cursorCharacterIndex = static_cast<int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
 			}
 		}
 
@@ -78,7 +78,7 @@ void ScriptEditor::_updateTextWriter()
 
 			if(cursorCharacterIndex > _script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size())
 			{
-				cursorCharacterIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
+				cursorCharacterIndex = static_cast<int>(_script->getScriptFile(_currentScriptFileId)->getLine(cursorLineIndex).size());
 			}
 		}
 
@@ -147,7 +147,7 @@ void ScriptEditor::_updateTextWriter()
 				_script->getScriptFile(_currentScriptFileId)->deleteLine(cursorLineIndex);
 				cursorLineIndex--;
 				_script->getScriptFile(_currentScriptFileId)->editLine(cursorLineIndex, previousLineText + currentLineText);
-				cursorCharacterIndex = static_cast<unsigned int>(previousLineText.size());
+				cursorCharacterIndex = static_cast<int>(previousLineText.size());
 				_hasTextChanged = true;
 			}
 		}

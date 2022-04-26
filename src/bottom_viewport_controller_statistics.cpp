@@ -13,7 +13,7 @@ void BottomViewportController::_updateStatistics()
 		sort(fpsList.begin(), fpsList.end());
 
 		const auto fps = (fpsList.empty() ? 0.0f : fpsList[_fe3d->misc_getUpdateCountPerSecond() / 2]);
-		const auto text = ("FPS: " + to_string(static_cast<unsigned int>(fps)));
+		const auto text = ("FPS: " + to_string(static_cast<int>(fps)));
 
 		statisticsScreen->getTextField("fps")->setTextContent(text);
 
@@ -196,7 +196,7 @@ void BottomViewportController::_updateStatistics()
 
 		for(const auto & [key, deltaTime] : deltaTimes)
 		{
-			const auto percentage = static_cast<unsigned int>((deltaTime / totalDeltaTime) * 100.0f);
+			const auto percentage = static_cast<int>((deltaTime / totalDeltaTime) * 100.0f);
 			const auto text = (key + ": " + to_string(percentage) + "%");
 
 			statisticsScreen->getTextField(key)->setTextContent(text);
@@ -215,7 +215,7 @@ void BottomViewportController::_updateStatistics()
 
 		for(const auto & [key, deltaTime] : deltaTimes)
 		{
-			const auto percentage = static_cast<unsigned int>((deltaTime / totalDeltaTime) * 100.0f);
+			const auto percentage = static_cast<int>((deltaTime / totalDeltaTime) * 100.0f);
 			const auto text = (key + ": " + to_string(percentage) + "%");
 
 			statisticsScreen->getTextField(key)->setTextContent(text);

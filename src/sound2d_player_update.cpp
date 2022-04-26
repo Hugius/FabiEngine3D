@@ -11,7 +11,7 @@ void Sound2dPlayer::update()
 
 	for(auto & [soundId, instances] : _startedSounds)
 	{
-		for(unsigned int instanceIndex = 0; instanceIndex < static_cast<unsigned int>(instances.size()); instanceIndex++)
+		for(unsigned int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 		{
 			if((instances[instanceIndex]->getHeader()->dwFlags & WHDR_DONE) == WHDR_DONE)
 			{
@@ -92,7 +92,7 @@ void Sound2dPlayer::update()
 	{
 		for(auto & [soundId, instances] : _startedSounds)
 		{
-			for(unsigned int instanceIndex = 0; instanceIndex < static_cast<unsigned int>(instances.size()); instanceIndex++)
+			for(unsigned int instanceIndex = 0; instanceIndex < static_cast<int>(instances.size()); instanceIndex++)
 			{
 				_volumeThreadQueue.push_back({soundId, instanceIndex});
 			}

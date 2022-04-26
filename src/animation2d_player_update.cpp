@@ -20,7 +20,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 		const auto animation = _animation2dManager->getAnimation(splitKey.first);
 		const auto quad = _quad3dEntityManager->getEntity(splitKey.second);
-		const auto interval = static_cast<unsigned int>((animation->getInterval() * startedAnimation->getIntervalMultiplier()) / startedAnimation->getIntervalDivider());
+		const auto interval = static_cast<int>(static_cast<float>(animation->getInterval() * startedAnimation->getIntervalMultiplier()) / static_cast<float>(startedAnimation->getIntervalDivider()));
 
 		if(!startedAnimation->isPaused())
 		{
@@ -91,10 +91,11 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 		const auto animation = _animation2dManager->getAnimation(splitKey.first);
 		const auto quad = _quad2dEntityManager->getEntity(splitKey.second);
+		const auto interval = static_cast<int>(static_cast<float>(animation->getInterval()) / static_cast<float>(startedAnimation->getIntervalDivider()));
 
 		if(!startedAnimation->isPaused())
 		{
-			if(startedAnimation->getUpdateCount() == static_cast<unsigned int>(animation->getInterval() / startedAnimation->getIntervalDivider()))
+			if(startedAnimation->getUpdateCount() == interval)
 			{
 				startedAnimation->setUpdateCount(0);
 

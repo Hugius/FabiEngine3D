@@ -28,7 +28,7 @@ const bool SkyEditor::saveEntitiesToFile() const
 		auto rotation = _fe3d->sky_getRotation(skyId);
 		auto lightness = _fe3d->sky_getLightness(skyId);
 		auto color = _fe3d->sky_getColor(skyId);
-		auto rotationOrder = static_cast<unsigned int>(_fe3d->sky_getRotationOrder(skyId));
+		auto rotationOrder = static_cast<int>(_fe3d->sky_getRotationOrder(skyId));
 
 		for(auto & cubeMapPath : cubeMapPaths)
 		{

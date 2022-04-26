@@ -23,7 +23,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processMathFunctionCal
 		return {};
 	}
 
-	auto parenthesisIndex = static_cast<unsigned int>(distance(scriptLine.begin(), openingParanthesisFound));
+	auto parenthesisIndex = static_cast<int>(distance(scriptLine.begin(), openingParanthesisFound));
 	string argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1));
 	argumentString.pop_back();
 	vector<shared_ptr<ScriptValue>> returnValues;

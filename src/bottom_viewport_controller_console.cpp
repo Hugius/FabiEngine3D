@@ -10,7 +10,7 @@ void BottomViewportController::_updateConsole()
 
 	if(_messageHistory.size() != loggerMessageList.size())
 	{
-		const auto synchronizationCount = static_cast<unsigned int>(loggerMessageList.size() - _messageHistory.size());
+		const auto synchronizationCount = static_cast<int>(loggerMessageList.size() - _messageHistory.size());
 
 		_clearConsole();
 
@@ -55,7 +55,7 @@ void BottomViewportController::_fillConsole()
 {
 	const auto window = _gui->getBottomViewport()->getWindow("console");
 	const auto screen = window->getScreen("main");
-	const auto messageCount = static_cast<unsigned int>(_messageQueue.size());
+	const auto messageCount = static_cast<int>(_messageQueue.size());
 	const auto minClipPosition = (window->getPosition() - (window->getSize() * 0.5f));
 	const auto maxClipPosition = (window->getPosition() + (window->getSize() * 0.5f));
 
@@ -82,7 +82,7 @@ void BottomViewportController::_fillConsole()
 void BottomViewportController::_clearConsole()
 {
 	const auto screen = _gui->getBottomViewport()->getWindow("console")->getScreen("main");
-	const auto messageCount = static_cast<unsigned int>(_messageQueue.size());
+	const auto messageCount = static_cast<int>(_messageQueue.size());
 
 	for(unsigned int index = 0; index < messageCount; index++)
 	{

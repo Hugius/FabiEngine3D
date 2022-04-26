@@ -17,7 +17,7 @@ const vector<shared_ptr<ScriptValue>> ScriptInterpreter::_processFe3dFunctionCal
 		return {};
 	}
 
-	auto parenthesisIndex = static_cast<unsigned int>(distance(scriptLine.begin(), openingParanthesisFound));
+	auto parenthesisIndex = static_cast<int>(distance(scriptLine.begin(), openingParanthesisFound));
 	string argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1));
 	argumentString.pop_back();
 	auto args = _extractValuesFromListString(argumentString);

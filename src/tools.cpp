@@ -288,7 +288,7 @@ const vector<string> Tools::splitStringIntoMultiple(const string & mergedString,
 
 	string tempString = "";
 
-	for(unsigned int index = 0; index < static_cast<unsigned int>(mergedString.size()); index++)
+	for(unsigned int index = 0; index < static_cast<int>(mergedString.size()); index++)
 	{
 		if(mergedString[index] == delimiter)
 		{
@@ -419,7 +419,7 @@ const bool Tools::isInteger(const string & valueString)
 		startingIndex = 1;
 	}
 
-	for(unsigned int index = startingIndex; index < static_cast<unsigned int>(valueString.size()); index++)
+	for(unsigned int index = startingIndex; index < static_cast<int>(valueString.size()); index++)
 	{
 		if(!isdigit(valueString[index]))
 		{

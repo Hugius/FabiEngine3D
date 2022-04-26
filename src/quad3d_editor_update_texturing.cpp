@@ -96,7 +96,7 @@ void Quad3dEditor::_updateTexturingMenu()
 
 		if((_gui->getOverlay()->getValueFormId() == "textureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
-			const auto content = static_cast<unsigned int>(max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent())));
+			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
 			_fe3d->quad3d_setTextureRepeat(_currentQuadId, textureRepeat);
 		}

@@ -55,8 +55,8 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 	string words[3] = {"", "", ""};
 	unsigned int typeIndex = 0;
 	unsigned int wordIndex = 0;
-	typeIndex += static_cast<unsigned int>((scope == ScriptScopeType::GLOBAL) ? (GLOBAL_KEYWORD.size() + 1) : 0);
-	typeIndex += static_cast<unsigned int>(isConstant ? (CONST_KEYWORD.size() + 1) : 0);
+	typeIndex += ((scope == ScriptScopeType::GLOBAL) ? static_cast<int>(GLOBAL_KEYWORD.size() + 1) : 0);
+	typeIndex += (isConstant ? static_cast<int>(CONST_KEYWORD.size() + 1) : 0);
 	for(const auto & character : scriptLine.substr(typeIndex))
 	{
 		if(character == ' ')
@@ -299,7 +299,7 @@ void ScriptInterpreter::_processVariableCreation(const string & scriptLine, Scri
 		if(isAccessingList)
 		{
 			auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
-			auto bracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
+			auto bracketIndex = static_cast<int>(distance(valueString.begin(), isOpeningBracketFound));
 			valueString = valueString.substr(0, bracketIndex);
 		}
 

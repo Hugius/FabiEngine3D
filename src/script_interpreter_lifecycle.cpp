@@ -158,7 +158,7 @@ void ScriptInterpreter::load()
 			if(noWhiteSpace.substr(0, 3) == "///")
 			{
 				unsigned int charIndex;
-				for(charIndex = 0; charIndex < static_cast<unsigned int>(scriptLineText.size()); charIndex++)
+				for(charIndex = 0; charIndex < static_cast<int>(scriptLineText.size()); charIndex++)
 				{
 					if(scriptLineText[charIndex] != ' ')
 					{

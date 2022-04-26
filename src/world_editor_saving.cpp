@@ -273,7 +273,7 @@ const bool WorldEditor::saveWorldToFile() const
 		auto radius = _fe3d->pointlight_getRadius(pointlightId);
 		auto color = _fe3d->pointlight_getColor(pointlightId);
 		auto intensity = _fe3d->pointlight_getIntensity(pointlightId);
-		auto shape = static_cast<unsigned int>(_fe3d->pointlight_getShape(pointlightId));
+		auto shape = static_cast<int>(_fe3d->pointlight_getShape(pointlightId));
 
 		file
 			<< "POINTLIGHT "
@@ -537,7 +537,7 @@ const bool WorldEditor::saveWorldToFile() const
 
 	if(_fe3d->graphics_isBloomEnabled())
 	{
-		auto type = static_cast<unsigned int>(_fe3d->graphics_getBloomType());
+		auto type = static_cast<int>(_fe3d->graphics_getBloomType());
 		auto intensity = _fe3d->graphics_getBloomIntensity();
 		auto blurCount = _fe3d->graphics_getBloomBlurCount();
 		auto quality = _fe3d->graphics_getBloomQuality();

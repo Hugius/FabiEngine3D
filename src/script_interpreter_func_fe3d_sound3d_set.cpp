@@ -18,6 +18,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 			if(_fe3d->sound3d_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("sound already exists");
+
 				return true;
 			}
 
@@ -67,11 +68,13 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 			if(_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 			{
 				_throwRuntimeError("sound2D is already started");
+
 				return true;
 			}
 			if((args[1]->getInteger() == 0) || (args[1]->getInteger() < -1))
 			{
 				_throwRuntimeError("play count is invalid");
+
 				return true;
 			}
 
@@ -94,11 +97,13 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is not started");
+
 					return true;
 				}
 				if(_fe3d->sound3d_isPaused(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is already paused");
+
 					return true;
 				}
 
@@ -119,11 +124,13 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is not started");
+
 					return true;
 				}
 				if(!_fe3d->sound3d_isPaused(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is not paused");
+
 					return true;
 				}
 
@@ -144,6 +151,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 				if(!_fe3d->sound3d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is not started");
+
 					return true;
 				}
 
@@ -231,6 +239,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string & functionN
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:sound3d` functionality as a networking server");
+
 		return true;
 	}
 

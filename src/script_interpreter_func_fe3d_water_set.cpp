@@ -18,6 +18,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 			if(_fe3d->water_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("water already exists");
+
 				return true;
 			}
 
@@ -374,6 +375,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string & functionNam
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:water` functionality as a networking server");
+
 		return true;
 	}
 

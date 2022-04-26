@@ -22,6 +22,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string & functionNa
 			if(_fe3d->text2d_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("text2D already exists");
+
 				return true;
 			}
 
@@ -342,6 +343,7 @@ const bool ScriptInterpreter::_executeFe3dText2dSetter(const string & functionNa
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:text2d` functionality as a networking server");
+
 		return true;
 	}
 

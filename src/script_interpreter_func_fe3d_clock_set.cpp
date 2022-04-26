@@ -19,11 +19,13 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 			if(_fe3d->clock_isIdReserved(args[0]->getString()))
 			{
 				_throwRuntimeError("clock ID is reserved");
+
 				return true;
 			}
 			if(_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is already existing");
+
 				return true;
 			}
 
@@ -41,11 +43,13 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 			if(_fe3d->clock_isIdReserved(args[0]->getString()))
 			{
 				_throwRuntimeError("clock ID is reserved");
+
 				return true;
 			}
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
+
 				return true;
 			}
 
@@ -63,16 +67,19 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 			if(_fe3d->clock_isIdReserved(args[0]->getString()))
 			{
 				_throwRuntimeError("clock ID is reserved");
+
 				return true;
 			}
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
+
 				return true;
 			}
 			if(_fe3d->clock_isStarted(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is already started");
+
 				return true;
 			}
 
@@ -90,21 +97,25 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 			if(_fe3d->clock_isIdReserved(args[0]->getString()))
 			{
 				_throwRuntimeError("clock ID is reserved");
+
 				return true;
 			}
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
+
 				return true;
 			}
 			if(!_fe3d->clock_isStarted(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not started");
+
 				return true;
 			}
 			if(_fe3d->clock_isPaused(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is already paused");
+
 				return true;
 			}
 
@@ -122,21 +133,25 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 			if(_fe3d->clock_isIdReserved(args[0]->getString()))
 			{
 				_throwRuntimeError("clock ID is reserved");
+
 				return true;
 			}
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
+
 				return true;
 			}
 			if(!_fe3d->clock_isStarted(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not started");
+
 				return true;
 			}
 			if(!_fe3d->clock_isPaused(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not paused");
+
 				return true;
 			}
 
@@ -154,16 +169,19 @@ const bool ScriptInterpreter::_executeFe3dClockSetter(const string & functionNam
 			if(_fe3d->clock_isIdReserved(args[0]->getString()))
 			{
 				_throwRuntimeError("clock ID is reserved");
+
 				return true;
 			}
 			if(!_fe3d->clock_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not existing");
+
 				return true;
 			}
 			if(!_fe3d->clock_isStarted(args[0]->getString()))
 			{
 				_throwRuntimeError("clock is not started");
+
 				return true;
 			}
 

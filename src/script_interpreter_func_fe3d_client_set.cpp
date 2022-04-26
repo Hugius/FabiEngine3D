@@ -13,26 +13,31 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 			if(_fe3d->client_isRunning())
 			{
 				_throwRuntimeError("networking client is already running");
+
 				return true;
 			}
 			if(args[0]->getString().empty())
 			{
 				_throwRuntimeError("username is empty");
+
 				return true;
 			}
 			if(args[0]->getString().size() > _fe3d->client_getMaxUsernameSize())
 			{
 				_throwRuntimeError("username is too long");
+
 				return true;
 			}
 			if(_fe3d->client_isMessageReserved(args[0]->getString()))
 			{
 				_throwRuntimeError("username is reserved");
+
 				return true;
 			}
 			if(find(args[0]->getString().begin(), args[0]->getString().end(), ';') != args[0]->getString().end())
 			{
 				_throwRuntimeError("username cannot contain ':'");
+
 				return true;
 			}
 
@@ -50,21 +55,25 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 			if(!_fe3d->client_isRunning())
 			{
 				_throwRuntimeError("networking client is not running");
+
 				return true;
 			}
 			if(_fe3d->client_isConnectedToServer())
 			{
 				_throwRuntimeError("networking client is already connected");
+
 				return true;
 			}
 			if(_fe3d->client_isConnectingToServer())
 			{
 				_throwRuntimeError("networking client is already connecting");
+
 				return true;
 			}
 			if(!_fe3d->client_isValidIp(args[0]->getString()))
 			{
 				_throwRuntimeError("server IP is invalid");
+
 				return true;
 			}
 
@@ -80,16 +89,19 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 			if(!_fe3d->client_isRunning())
 			{
 				_throwRuntimeError("networking client is not running");
+
 				return true;
 			}
 			if(!_fe3d->client_isConnectedToServer())
 			{
 				_throwRuntimeError("networking client is not connected");
+
 				return true;
 			}
 			if(!_fe3d->client_isAcceptedByServer())
 			{
 				_throwRuntimeError("networking client is not accepted");
+
 				return true;
 			}
 
@@ -105,6 +117,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 			if(!_fe3d->client_isRunning())
 			{
 				_throwRuntimeError("networking client is not running");
+
 				return true;
 			}
 
@@ -122,31 +135,37 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 			if(!_fe3d->client_isRunning())
 			{
 				_throwRuntimeError("networking client is not running");
+
 				return true;
 			}
 			if(!_fe3d->client_isConnectedToServer())
 			{
 				_throwRuntimeError("networking client is not connected");
+
 				return true;
 			}
 			if(!_fe3d->client_isAcceptedByServer())
 			{
 				_throwRuntimeError("networking client is not accepted");
+
 				return true;
 			}
 			if(find(args[0]->getString().begin(), args[0]->getString().end(), ';') != args[0]->getString().end())
 			{
 				_throwRuntimeError("message cannot contain ':'");
+
 				return true;
 			}
 			if(_fe3d->client_isMessageReserved(args[0]->getString()))
 			{
 				_throwRuntimeError("message is reserved");
+
 				return true;
 			}
 			if(args[0]->getString().size() > _fe3d->client_getMaxMessageSize())
 			{
 				_throwRuntimeError("message is too long");
+
 				return true;
 			}
 
@@ -164,31 +183,37 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 			if(!_fe3d->client_isRunning())
 			{
 				_throwRuntimeError("networking client is not running");
+
 				return true;
 			}
 			if(!_fe3d->client_isConnectedToServer())
 			{
 				_throwRuntimeError("networking client is not connected");
+
 				return true;
 			}
 			if(!_fe3d->client_isAcceptedByServer())
 			{
 				_throwRuntimeError("networking client is not accepted");
+
 				return true;
 			}
 			if(find(args[0]->getString().begin(), args[0]->getString().end(), ';') != args[0]->getString().end())
 			{
 				_throwRuntimeError("message cannot contain ':'");
+
 				return true;
 			}
 			if(_fe3d->client_isMessageReserved(args[0]->getString()))
 			{
 				_throwRuntimeError("message is reserved");
+
 				return true;
 			}
 			if(args[0]->getString().size() > _fe3d->client_getMaxMessageSize())
 			{
 				_throwRuntimeError("message is too long");
+
 				return true;
 			}
 
@@ -205,6 +230,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string & functionNa
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:client` functionality as a networking server");
+
 		return true;
 	}
 

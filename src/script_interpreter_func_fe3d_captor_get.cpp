@@ -134,6 +134,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorGetter(const string & functionNa
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:captor` functionality as a networking server");
+
 		return true;
 	}
 

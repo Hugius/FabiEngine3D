@@ -18,6 +18,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 			if(_fe3d->terrain_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("terrain already exists");
+
 				return true;
 			}
 
@@ -388,6 +389,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:terrain` functionality as a networking server");
+
 		return true;
 	}
 

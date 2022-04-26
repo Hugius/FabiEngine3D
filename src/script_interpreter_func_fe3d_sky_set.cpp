@@ -18,6 +18,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 			if(_fe3d->sky_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already exists");
+
 				return true;
 			}
 
@@ -301,6 +302,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 				else
 				{
 					_throwRuntimeError("rotation order is invalid");
+
 					return true;
 				}
 			}
@@ -314,6 +316,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string & functionName,
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:sky` functionality as a networking server");
+
 		return true;
 	}
 

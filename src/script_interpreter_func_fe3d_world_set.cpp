@@ -15,12 +15,14 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(!_worldEditor->getLoadedWorldId().empty() || !_customWorldBuilder->getLoadedWorldId().empty())
 			{
 				_throwRuntimeError("there is already a world loaded");
+
 				return true;
 			}
 
 			if(!_worldEditor->loadWorldFromFile(args[0]->getString()))
 			{
 				_throwRuntimeError("cannot load world");
+
 				return true;
 			}
 
@@ -34,6 +36,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(!_worldEditor->getLoadedWorldId().empty())
 			{
 				_throwRuntimeError("no editor world is loaded");
+
 				return true;
 			}
 
@@ -60,6 +63,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isSkyAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -77,6 +81,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isTerrainAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -94,6 +99,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isWaterAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -111,6 +117,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isModelAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -128,6 +135,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isQuad3dAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -145,6 +153,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isText3dAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -162,6 +171,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isAabbAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -179,6 +189,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isPointlightAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -196,6 +207,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isSpotlightAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -213,6 +225,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isCaptorAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -230,6 +243,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isSound3dAdded(args[0]->getString()))
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -245,6 +259,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(_customWorldBuilder->isGraphicsAdded())
 			{
 				_throwRuntimeError("sky already added");
+
 				return true;
 			}
 
@@ -273,12 +288,14 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(!_worldEditor->getLoadedWorldId().empty() || !_customWorldBuilder->getLoadedWorldId().empty())
 			{
 				_throwRuntimeError("there is already a world loaded");
+
 				return true;
 			}
 
 			if(!_customWorldBuilder->loadWorldFromFile(args[0]->getString()))
 			{
 				_throwRuntimeError("cannot load world");
+
 				return true;
 			}
 
@@ -292,6 +309,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(!_customWorldBuilder->getLoadedWorldId().empty())
 			{
 				_throwRuntimeError("no custom world is loaded");
+
 				return true;
 			}
 
@@ -314,6 +332,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 			if(!Tools::deleteFile(filePath))
 			{
 				_throwRuntimeError("cannot delete custom world");
+
 				return true;
 			}
 
@@ -328,6 +347,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:world` functionality as a networking server");
+
 		return true;
 	}
 

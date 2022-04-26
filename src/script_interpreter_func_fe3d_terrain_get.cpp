@@ -618,6 +618,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string & functionN
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:terrain` functionality as a networking server");
+
 		return true;
 	}
 

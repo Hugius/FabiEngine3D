@@ -274,6 +274,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string & functio
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:spotlight` functionality as a networking server");
+
 		return true;
 	}
 

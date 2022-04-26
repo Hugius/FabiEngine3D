@@ -30,6 +30,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				if(Tools::isDirectoryExisting(newDirectoryPath))
 				{
 					_throwRuntimeError("cannot create directory");
+
 					return true;
 				}
 
@@ -55,6 +56,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				if(!Tools::deleteDirectory(newDirectoryPath))
 				{
 					_throwRuntimeError("cannot delete directory");
+
 					return true;
 				}
 
@@ -78,6 +80,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				if(Tools::isFileExisting(filePath))
 				{
 					_throwRuntimeError("cannot create file");
+
 					return true;
 				}
 
@@ -105,6 +108,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				if(!Tools::deleteFile(filePath))
 				{
 					_throwRuntimeError("cannot delete file");
+
 					return true;
 				}
 
@@ -130,6 +134,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				if(!file)
 				{
 					_throwRuntimeError("cannot open file");
+
 					return true;
 				}
 
@@ -174,6 +179,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				if(!file)
 				{
 					_throwRuntimeError("cannot open file");
+
 					return true;
 				}
 
@@ -203,6 +209,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string & functi
 				if(!file)
 				{
 					_throwRuntimeError("cannot open file");
+
 					return true;
 				}
 

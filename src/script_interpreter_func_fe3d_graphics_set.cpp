@@ -455,6 +455,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 			else
 			{
 				_throwRuntimeError("bloom type is invalid");
+
 				return true;
 			}
 		}
@@ -533,6 +534,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string & function
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:graphics` functionality as a networking server");
+
 		return true;
 	}
 

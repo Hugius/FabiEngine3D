@@ -104,6 +104,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 					else
 					{
 						_throwRuntimeError("direction is invalid");
+
 						return true;
 					}
 				}
@@ -145,6 +146,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 				else
 				{
 					_throwRuntimeError("direction is invalid");
+
 					return true;
 				}
 			}
@@ -185,6 +187,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 				else
 				{
 					_throwRuntimeError("direction is invalid");
+
 					return true;
 				}
 			}
@@ -225,6 +228,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 				else
 				{
 					_throwRuntimeError("direction is invalid");
+
 					return true;
 				}
 			}
@@ -257,6 +261,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 			else
 			{
 				_throwRuntimeError("direction is invalid");
+
 				return true;
 			}
 
@@ -313,6 +318,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 			else
 			{
 				_throwRuntimeError("direction is invalid");
+
 				return true;
 			}
 
@@ -352,6 +358,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 			else
 			{
 				_throwRuntimeError("direction is invalid");
+
 				return true;
 			}
 
@@ -391,6 +398,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 			else
 			{
 				_throwRuntimeError("direction is invalid");
+
 				return true;
 			}
 
@@ -411,6 +419,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:collision` functionality as a networking server");
+
 		return true;
 	}
 

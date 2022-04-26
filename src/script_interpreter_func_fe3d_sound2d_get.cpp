@@ -95,6 +95,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 				if(!_fe3d->sound2d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is not started");
+
 					return true;
 				}
 
@@ -115,6 +116,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 				if(!_fe3d->sound2d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is not started");
+
 					return true;
 				}
 
@@ -135,6 +137,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 				if(!_fe3d->sound2d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is not started");
+
 					return true;
 				}
 
@@ -155,6 +158,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 				if(!_fe3d->sound2d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is not started");
+
 					return true;
 				}
 
@@ -175,6 +179,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 				if(!_fe3d->sound2d_isStarted(args[0]->getString(), args[1]->getInteger()))
 				{
 					_throwRuntimeError("sound2D is not started");
+
 					return true;
 				}
 
@@ -215,6 +220,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string & functionN
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:sound2d` functionality as a networking server");
+
 		return true;
 	}
 

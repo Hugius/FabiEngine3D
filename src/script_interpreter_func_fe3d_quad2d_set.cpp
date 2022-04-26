@@ -22,6 +22,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 			if(_fe3d->quad2d_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("quad2D already exists");
+
 				return true;
 			}
 
@@ -386,11 +387,13 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 				if(_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is already started");
+
 					return true;
 				}
 				if(args[2]->getInteger() < -1)
 				{
 					_throwRuntimeError("play count is invalid");
+
 					return true;
 				}
 
@@ -411,12 +414,14 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 
 				}
 				if(_fe3d->quad2d_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation already paused");
+
 					return true;
 				}
 
@@ -437,11 +442,13 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 				if(_fe3d->quad2d_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation already paused");
+
 					return true;
 				}
 
@@ -462,11 +469,13 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 				if(!_fe3d->quad2d_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation not paused");
+
 					return true;
 				}
 
@@ -487,6 +496,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -507,6 +517,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -527,6 +538,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -547,6 +559,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -567,6 +580,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 				if(!_fe3d->quad2d_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -584,6 +598,7 @@ const bool ScriptInterpreter::_executeFe3dQuad2dSetter(const string & functionNa
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:quad2d` functionality as a networking server");
+
 		return true;
 	}
 

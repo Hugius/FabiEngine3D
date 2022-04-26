@@ -66,6 +66,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string & functi
 				if(!file)
 				{
 					_throwRuntimeError("cannot open file");
+
 					return true;
 				}
 

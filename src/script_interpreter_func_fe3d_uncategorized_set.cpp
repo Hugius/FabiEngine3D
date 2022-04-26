@@ -66,6 +66,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 			if(_fe3d->server_isRunning())
 			{
 				_throwRuntimeError("cannot access `fe3d:cursor` functionality as a networking server");
+
 				return true;
 			}
 
@@ -83,6 +84,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 			if(_fe3d->server_isRunning())
 			{
 				_throwRuntimeError("cannot access `fe3d:cursor` functionality as a networking server");
+
 				return true;
 			}
 
@@ -100,6 +102,7 @@ const bool ScriptInterpreter::_executeFe3dUncategorizedSetter(const string & fun
 			if(_fe3d->server_isRunning())
 			{
 				_throwRuntimeError("cannot access `fe3d:vsync` functionality as a networking server");
+
 				return true;
 			}
 

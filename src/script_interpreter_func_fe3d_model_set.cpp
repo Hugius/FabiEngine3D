@@ -18,6 +18,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 			if(_fe3d->model_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("model already exists");
+
 				return true;
 			}
 
@@ -441,6 +442,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				if(aabbIds.empty())
 				{
 					_throwRuntimeError("model has no bound AABBs");
+
 					return true;
 				}
 
@@ -466,6 +468,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				if(aabbIds.empty())
 				{
 					_throwRuntimeError("model has no bound AABBs");
+
 					return true;
 				}
 
@@ -896,6 +899,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 					else
 					{
 						_throwRuntimeError("reflection type is invalid");
+
 						return true;
 					}
 				}
@@ -949,6 +953,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				else
 				{
 					_throwRuntimeError("rotation order is invalid");
+
 					return true;
 				}
 			}
@@ -965,11 +970,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				if(_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is already started");
+
 					return true;
 				}
 				if((args[2]->getInteger() == 0) || (args[2]->getInteger() < -1))
 				{
 					_throwRuntimeError("play count is invalid");
+
 					return true;
 				}
 
@@ -980,6 +987,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 						if(!_fe3d->model_hasPart(args[0]->getString(), partId))
 						{
 							_throwRuntimeError("model does not have the required animation parts");
+
 							return true;
 						}
 					}
@@ -1002,11 +1010,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 				if(_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is already paused");
+
 					return true;
 				}
 
@@ -1027,11 +1037,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 				if(_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is already paused");
+
 					return true;
 				}
 
@@ -1052,11 +1064,13 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 				if(!_fe3d->model_isAnimationPaused(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not paused");
+
 					return true;
 				}
 
@@ -1077,6 +1091,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -1097,6 +1112,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -1117,6 +1133,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -1134,6 +1151,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string & functionNam
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:model` functionality as a networking server");
+
 		return true;
 	}
 

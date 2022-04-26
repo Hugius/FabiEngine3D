@@ -1219,6 +1219,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -1239,6 +1240,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -1259,6 +1261,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -1279,6 +1282,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -1299,6 +1303,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 				if(!_fe3d->model_isAnimationStarted(args[0]->getString(), args[1]->getString()))
 				{
 					_throwRuntimeError("animation is not started");
+
 					return true;
 				}
 
@@ -1316,6 +1321,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string & functionNam
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:model` functionality as a networking server");
+
 		return true;
 	}
 

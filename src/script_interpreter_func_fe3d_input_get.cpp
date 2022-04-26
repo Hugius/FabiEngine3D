@@ -107,6 +107,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string & functionNam
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:input` functionality as a networking server");
+
 		return true;
 	}
 

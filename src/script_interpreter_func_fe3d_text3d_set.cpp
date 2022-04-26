@@ -18,6 +18,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string & functionNa
 			if(_fe3d->text3d_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("text3D already exists");
+
 				return true;
 			}
 
@@ -339,6 +340,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string & functionNa
 				if(aabbIds.empty())
 				{
 					_throwRuntimeError("text3D has no bound AABBs");
+
 					return true;
 				}
 
@@ -364,6 +366,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string & functionNa
 				if(aabbIds.empty())
 				{
 					_throwRuntimeError("text3D has no bound AABBs");
+
 					return true;
 				}
 
@@ -535,6 +538,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string & functionNa
 				else
 				{
 					_throwRuntimeError("rotation order is invalid");
+
 					return true;
 				}
 			}
@@ -548,6 +552,7 @@ const bool ScriptInterpreter::_executeFe3dText3dSetter(const string & functionNa
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:text3d` functionality as a networking server");
+
 		return true;
 	}
 

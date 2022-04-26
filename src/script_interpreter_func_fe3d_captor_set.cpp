@@ -18,6 +18,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 			if(_fe3d->captor_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("captor already exists");
+
 				return true;
 			}
 
@@ -147,6 +148,7 @@ const bool ScriptInterpreter::_executeFe3dCaptorSetter(const string & functionNa
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:captor` functionality as a networking server");
+
 		return true;
 	}
 

@@ -18,12 +18,14 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 			if(_fe3d->pointlight_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("pointlight already exists");
+
 				return true;
 			}
 
 			if(_fe3d->pointlight_getIds().size() == _fe3d->pointlight_getMaxEntityCount())
 			{
 				_throwRuntimeError("pointlight maximum is reached");
+
 				return true;
 			}
 
@@ -186,6 +188,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 				else
 				{
 					_throwRuntimeError("shape is invalid");
+
 					return true;
 				}
 			}
@@ -199,6 +202,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string & functi
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:pointlight` functionality as a networking server");
+
 		return true;
 	}
 

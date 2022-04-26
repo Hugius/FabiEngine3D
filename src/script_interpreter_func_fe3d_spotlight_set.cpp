@@ -18,12 +18,14 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string & functio
 			if(_fe3d->spotlight_isExisting(args[0]->getString()))
 			{
 				_throwRuntimeError("spotlight already exists");
+
 				return true;
 			}
 
 			if(_fe3d->spotlight_getIds().size() == _fe3d->spotlight_getMaxEntityCount())
 			{
 				_throwRuntimeError("spotlight maximum is reached");
+
 				return true;
 			}
 
@@ -216,6 +218,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string & functio
 	if(_fe3d->server_isRunning())
 	{
 		_throwRuntimeError("cannot access `fe3d:spotlight` functionality as a networking server");
+
 		return true;
 	}
 

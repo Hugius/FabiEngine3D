@@ -99,25 +99,6 @@ const float Mathematics::calculateAverage(const vector<float> & values)
 	return (total / static_cast<float>(values.size()));
 }
 
-const unsigned int Mathematics::calculateAverage(const vector<unsigned int> & values)
-{
-	unsigned int total = 0;
-
-	for(const auto & value : values)
-	{
-		total += value;
-	}
-
-	return (total / static_cast<int>(values.size()));
-}
-
-const unsigned int Mathematics::getRandomNumber(unsigned int min, unsigned int max)
-{
-	uniform_int_distribution<unsigned int> dist(min, max);
-
-	return dist(_generator);
-}
-
 const int Mathematics::calculateAverage(const vector<int> & values)
 {
 	int total = 0;

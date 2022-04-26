@@ -83,9 +83,6 @@ public:
 	static const float getPI();
 	static const float getRandomNumber(float min, float max);
 
-	static const unsigned int calculateAverage(const vector<unsigned int> & values);
-	static const unsigned int getRandomNumber(unsigned int min, unsigned int max);
-
 	static const int calculateAverage(const vector<int> & values);
 	static const int getRandomNumber(int min, int max);
 

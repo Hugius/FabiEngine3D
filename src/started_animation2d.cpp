@@ -59,17 +59,17 @@ void StartedAnimation2d::setAutopaused(bool value)
 
 void StartedAnimation2d::setRowIndex(unsigned int value)
 {
-	_rowIndex = value;
+	_rowIndex = max(0, value);
 }
 
 void StartedAnimation2d::setColumnIndex(unsigned int value)
 {
-	_columnIndex = value;
+	_columnIndex = max(0, value);
 }
 
 void StartedAnimation2d::setUpdateCount(unsigned int value)
 {
-	_updateCount = value;
+	_updateCount = max(0, value);
 }
 
 void StartedAnimation2d::setIntervalMultiplier(unsigned int value)

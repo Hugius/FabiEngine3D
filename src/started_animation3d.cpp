@@ -62,7 +62,7 @@ void StartedAnimation3d::setSpeedMultiplier(float value)
 
 void StartedAnimation3d::setFrameIndex(unsigned int value)
 {
-	_frameIndex = value;
+	_frameIndex = max(0, value);
 }
 
 void StartedAnimation3d::setTotalMovement(const string & partId, const fvec3 & value)

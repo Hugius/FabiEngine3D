@@ -44,5 +44,5 @@ void Animation2d::setColumnCount(unsigned int value)
 
 void Animation2d::setInterval(unsigned int value)
 {
-	_interval = value;
+	_interval = max(0, value);
 }

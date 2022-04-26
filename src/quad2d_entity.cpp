@@ -172,7 +172,7 @@ void Quad2dEntity::setMaxClipPosition(const fvec2 & value)
 
 void Quad2dEntity::setDepth(unsigned int value)
 {
-	_depth = value;
+	_depth = max(0, value);
 }
 
 void Quad2dEntity::setUvMultiplier(const fvec2 & value)

@@ -242,14 +242,14 @@ void RenderStorage::setDofBlurDistance(float value)
 
 void RenderStorage::setBloomBlurCount(unsigned int value)
 {
-	_bloomBlurCount = value;
+	_bloomBlurCount = max(0, value);
 }
 
 void RenderStorage::increaseTriangleCount(unsigned int value)
 {
 	if(_isTriangleCountingEnabled)
 	{
-		_triangleCount += value;
+		_triangleCount = max(0, (_triangleCount + value));
 	}
 }
 
@@ -355,7 +355,7 @@ void RenderStorage::setBloomType(BloomType value)
 
 void RenderStorage::setGuiDepth(unsigned int value)
 {
-	_guiDepth = value;
+	_guiDepth = max(0, value);
 }
 
 void RenderStorage::setAnisotropicFilteringQuality(unsigned int value)
@@ -395,7 +395,7 @@ void RenderStorage::setSkyExposureEnabled(bool value)
 
 void RenderStorage::setShadowInterval(unsigned int value)
 {
-	_shadowInterval = value;
+	_shadowInterval = max(0, value);
 }
 
 void RenderStorage::setShadowsFollowingCamera(bool value)
@@ -405,7 +405,7 @@ void RenderStorage::setShadowsFollowingCamera(bool value)
 
 void RenderStorage::setCubeReflectionInterval(unsigned int value)
 {
-	_cubeReflectionInterval = value;
+	_cubeReflectionInterval = max(0, value);
 }
 
 const shared_ptr<TextureBuffer> RenderStorage::getPlanarReflectionTextureBuffer() const

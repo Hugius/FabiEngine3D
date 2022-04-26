@@ -649,7 +649,7 @@ void GuiInputBox::setHoverable(bool value)
 
 void GuiInputBox::setMaxCharacterCount(unsigned int value)
 {
-	_maxCharacterCount = value;
+	_maxCharacterCount = max(0, value);
 }
 
 const string GuiInputBox::getId() const

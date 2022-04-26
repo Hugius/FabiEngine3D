@@ -259,7 +259,7 @@ void Quad3dEntity::setMaxClipPosition(const fvec3 & value)
 	_maxClipPosition = value;
 }
 
-void Quad3dEntity::setTextureRepeat(unsigned int value)
+void Quad3dEntity::setTextureRepeat(int value)
 {
 	_textureRepeat = max(1, value);
 }

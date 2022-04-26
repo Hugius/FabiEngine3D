@@ -13,7 +13,7 @@ public:
 	void setTextContent(const string & value);
 	void setVisible(bool value);
 	void setHoverable(bool value);
-	void setMaxCharacterCount(unsigned int value);
+	void setMaxCharacterCount(int value);
 
 	const string getId() const;
 	const string getParentId() const;

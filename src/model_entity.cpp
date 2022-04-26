@@ -449,7 +449,7 @@ void ModelEntity::setOpacity(const string & partId, float value)
 	_parts.at(partId)->opacity = clamp(value, 0.0f, 1.0f);
 }
 
-void ModelEntity::setTextureRepeat(const string & partId, unsigned int value)
+void ModelEntity::setTextureRepeat(const string & partId, int value)
 {
 	_parts.at(partId)->textureRepeat = max(1, value);
 }

@@ -51,7 +51,7 @@ void EngineInterface::graphics_setLensFlareEnabled(bool value)
 	_core->getRenderStorage()->setLensFlareEnabled(value);
 }
 
-void EngineInterface::graphics_setCubeReflectionInterval(unsigned int value)
+void EngineInterface::graphics_setCubeReflectionInterval(int value)
 {
 	_core->getRenderStorage()->setCubeReflectionInterval(value);
 }
@@ -61,28 +61,28 @@ void EngineInterface::graphics_setPlanarReflectionHeight(float value)
 	_core->getRenderStorage()->setPlanarReflectionHeight(value);
 }
 
-void EngineInterface::graphics_setBloomQuality(unsigned int value)
+void EngineInterface::graphics_setBloomQuality(int value)
 {
 	_core->getRenderStorage()->setBloomQuality(value);
 
 	_core->getMasterRenderer()->reloadBloomBlurQuality();
 }
 
-void EngineInterface::graphics_setDofQuality(unsigned int value)
+void EngineInterface::graphics_setDofQuality(int value)
 {
 	_core->getRenderStorage()->setDofQuality(value);
 
 	_core->getMasterRenderer()->reloadDofBlurQuality();
 }
 
-void EngineInterface::graphics_setMotionBlurQuality(unsigned int value)
+void EngineInterface::graphics_setMotionBlurQuality(int value)
 {
 	_core->getRenderStorage()->setMotionBlurQuality(value);
 
 	_core->getMasterRenderer()->reloadMotionBlurBlurQuality();
 }
 
-void EngineInterface::graphics_setAnisotropicFilteringQuality(unsigned int value)
+void EngineInterface::graphics_setAnisotropicFilteringQuality(int value)
 {
 	const auto minQuality = _core->getRenderStorage()->getMinAnisotropicFilteringQuality();
 	const auto maxQuality = _core->getRenderStorage()->getMaxAnisotropicFilteringQuality();
@@ -106,14 +106,14 @@ void EngineInterface::graphics_setAnisotropicFilteringQuality(unsigned int value
 	}
 }
 
-void EngineInterface::graphics_setCubeReflectionQuality(unsigned int value)
+void EngineInterface::graphics_setCubeReflectionQuality(int value)
 {
 	_core->getRenderStorage()->setCubeReflectionQuality(value);
 
 	_core->getMasterRenderer()->reloadCubeReflectionQuality();
 }
 
-void EngineInterface::graphics_setPlanarReflectionQuality(unsigned int value)
+void EngineInterface::graphics_setPlanarReflectionQuality(int value)
 {
 	_core->getRenderStorage()->setPlanarReflectionQuality(value);
 
@@ -121,14 +121,14 @@ void EngineInterface::graphics_setPlanarReflectionQuality(unsigned int value)
 	_core->getMasterRenderer()->reloadWaterReflectionQuality();
 }
 
-void EngineInterface::graphics_setPlanarRefractionQuality(unsigned int value)
+void EngineInterface::graphics_setPlanarRefractionQuality(int value)
 {
 	_core->getRenderStorage()->setPlanarRefractionQuality(value);
 
 	_core->getMasterRenderer()->reloadWaterRefractionQuality();
 }
 
-void EngineInterface::graphics_setShadowQuality(unsigned int value)
+void EngineInterface::graphics_setShadowQuality(int value)
 {
 	_core->getRenderStorage()->setShadowQuality(value);
 
@@ -205,7 +205,7 @@ void EngineInterface::graphics_setShadowLightness(float value)
 	_core->getRenderStorage()->setShadowLightness(value);
 }
 
-void EngineInterface::graphics_setShadowInterval(unsigned int value)
+void EngineInterface::graphics_setShadowInterval(int value)
 {
 	_core->getRenderStorage()->setShadowInterval(value);
 }
@@ -220,7 +220,7 @@ void EngineInterface::graphics_setBloomIntensity(float value)
 	_core->getRenderStorage()->setBloomIntensity(value);
 }
 
-void EngineInterface::graphics_setBloomBlurCount(unsigned int value)
+void EngineInterface::graphics_setBloomBlurCount(int value)
 {
 	_core->getRenderStorage()->setBloomBlurCount(value);
 }

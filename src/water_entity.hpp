@@ -26,7 +26,7 @@ public:
 	void setDudvMapPath(const string & value);
 	void setNormalMapPath(const string & value);
 	void setDisplacementMapPath(const string & value);
-	void setTextureRepeat(unsigned int value);
+	void setTextureRepeat(int value);
 	void setWaveHeight(float value);
 	void setSpecularShininess(float value);
 	void setSpecularIntensity(float value);

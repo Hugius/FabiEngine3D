@@ -50,7 +50,7 @@ void WaterEntity::setRippleOffset(const fvec2 & value)
 	_rippleOffset = value;
 }
 
-void WaterEntity::setTextureRepeat(unsigned int value)
+void WaterEntity::setTextureRepeat(int value)
 {
 	_textureRepeat = max(1, value);
 }

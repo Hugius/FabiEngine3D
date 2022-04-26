@@ -16,7 +16,7 @@ public:
 	void setPaused(bool value);
 	void setAutopaused(bool value);
 	void setSpeedMultiplier(float value);
-	void setFrameIndex(unsigned int value);
+	void setFrameIndex(int value);
 	void setTotalMovement(const string & partId, const fvec3 & value);
 	void setTotalRotation(const string & partId, const fvec3 & value);
 	void setTotalScaling(const string & partId, const fvec3 & value);

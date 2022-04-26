@@ -351,7 +351,7 @@ void EngineInterface::model_scalePartTo(const string & modelId, const string & p
 	_core->getModelEntityManager()->getEntity(modelId)->scalePartTo(partId, target, speed);
 }
 
-void EngineInterface::model_setTextureRepeat(const string & modelId, const string & partId, unsigned int value)
+void EngineInterface::model_setTextureRepeat(const string & modelId, const string & partId, int value)
 {
 	_core->getModelEntityManager()->getEntity(modelId)->setTextureRepeat(partId, value);
 }
@@ -396,7 +396,7 @@ void EngineInterface::model_setAnimationSpeedMultiplier(const string & modelId, 
 	_core->getAnimation3dPlayer()->setModelAnimationSpeedMultiplier(animationId, modelId, value);
 }
 
-void EngineInterface::model_setAnimationFrameIndex(const string & modelId, const string & animationId, unsigned int value)
+void EngineInterface::model_setAnimationFrameIndex(const string & modelId, const string & animationId, int value)
 {
 	_core->getAnimation3dPlayer()->setModelAnimationFrameIndex(animationId, modelId, value);
 }

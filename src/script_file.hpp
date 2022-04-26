@@ -11,8 +11,8 @@ public:
 	void editLine(unsigned int index, const string & textContent);
 	void deleteLine(unsigned int index);
 	void setLines(const vector<string> & value);
-	void setCursorLineIndex(unsigned int value);
-	void setCursorCharacterIndex(unsigned int value);
+	void setCursorLineIndex(int value);
+	void setCursorCharacterIndex(int value);
 
 	const vector<string> & getLines() const;
 

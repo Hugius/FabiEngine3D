@@ -60,7 +60,7 @@ void StartedAnimation3d::setSpeedMultiplier(float value)
 	_speedMultiplier = max(0.0f, value);
 }
 
-void StartedAnimation3d::setFrameIndex(unsigned int value)
+void StartedAnimation3d::setFrameIndex(int value)
 {
 	_frameIndex = max(0, value);
 }

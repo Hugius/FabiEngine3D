@@ -146,7 +146,7 @@ void Animation3dPlayer::setModelAnimationSpeedMultiplier(const string & animatio
 	_startedModelAnimations.at(mergedId)->setSpeedMultiplier(value);
 }
 
-void Animation3dPlayer::setModelAnimationFrameIndex(const string & animationId, const string & modelId, unsigned int value)
+void Animation3dPlayer::setModelAnimationFrameIndex(const string & animationId, const string & modelId, int value)
 {
 	const auto mergedId = Tools::mergeStrings(animationId, modelId, DELIMITER);
 

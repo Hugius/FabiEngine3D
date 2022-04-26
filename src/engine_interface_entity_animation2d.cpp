@@ -27,17 +27,17 @@ void EngineInterface::animation2d_delete(const string & id)
 	_core->getAnimation2dManager()->deleteAnimation(id);
 }
 
-void EngineInterface::animation2d_setRowCount(const string & id, unsigned int value)
+void EngineInterface::animation2d_setRowCount(const string & id, int value)
 {
 	_core->getAnimation2dManager()->getAnimation(id)->setRowCount(value);
 }
 
-void EngineInterface::animation2d_setColumnCount(const string & id, unsigned int value)
+void EngineInterface::animation2d_setColumnCount(const string & id, int value)
 {
 	_core->getAnimation2dManager()->getAnimation(id)->setColumnCount(value);
 }
 
-void EngineInterface::animation2d_setInterval(const string & id, unsigned int value)
+void EngineInterface::animation2d_setInterval(const string & id, int value)
 {
 	_core->getAnimation2dManager()->getAnimation(id)->setInterval(value);
 }

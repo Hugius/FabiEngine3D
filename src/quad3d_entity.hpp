@@ -44,7 +44,7 @@ public:
 	void setOpacity(float value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
-	void setTextureRepeat(unsigned int value);
+	void setTextureRepeat(int value);
 	void setEmissionIntensity(float value);
 	void setFrozen(bool value);
 	void setMinTextureAlpha(float value);

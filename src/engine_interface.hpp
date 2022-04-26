@@ -105,11 +105,11 @@ public:
 	void terrain_setRedNormalMap(const string & id, const string & value);
 	void terrain_setGreenNormalMap(const string & id, const string & value);
 	void terrain_setBlueNormalMap(const string & id, const string & value);
-	void terrain_setRedTextureRepeat(const string & id, unsigned int value);
-	void terrain_setGreenTextureRepeat(const string & id, unsigned int value);
-	void terrain_setBlueTextureRepeat(const string & id, unsigned int value);
+	void terrain_setRedTextureRepeat(const string & id, int value);
+	void terrain_setGreenTextureRepeat(const string & id, int value);
+	void terrain_setBlueTextureRepeat(const string & id, int value);
 	void terrain_setMaxHeight(const string & id, float value);
-	void terrain_setTextureRepeat(const string & id, unsigned int value);
+	void terrain_setTextureRepeat(const string & id, int value);
 	void terrain_setLightness(const string & id, float value);
 	void terrain_setSpecularShininess(const string & id, float value);
 	void terrain_setSpecularIntensity(const string & id, float value);
@@ -181,7 +181,7 @@ public:
 	void water_setMaxDepth(const string & id, float value);
 	void water_setEdged(const string & id, bool value);
 	void water_setColor(const string & id, const fvec3 & value);
-	void water_setTextureRepeat(const string & id, unsigned int value);
+	void water_setTextureRepeat(const string & id, int value);
 	void water_setMinClipPosition(const string & id, const fvec3 & value);
 	void water_setMaxClipPosition(const string & id, const fvec3 & value);
 
@@ -263,7 +263,7 @@ public:
 	void model_setMinClipPosition(const string & id, const fvec3 & value);
 	void model_setMaxClipPosition(const string & id, const fvec3 & value);
 	void model_setLevelOfDetailDistance(const string & id, float value);
-	void model_setTextureRepeat(const string & modelId, const string & partId, unsigned int value);
+	void model_setTextureRepeat(const string & modelId, const string & partId, int value);
 	void model_setBright(const string & modelId, const string & partId, bool value);
 	void model_setRotationOrder(const string & id, DirectionOrderType value);
 	void model_startAnimation(const string & modelId, const string & animationId, int playCount);
@@ -272,7 +272,7 @@ public:
 	void model_resumeAnimation(const string & modelId, const string & animationId);
 	void model_stopAnimation(const string & modelId, const string & animationId);
 	void model_setAnimationSpeedMultiplier(const string & modelId, const string & animationId, float value);
-	void model_setAnimationFrameIndex(const string & modelId, const string & animationId, unsigned int value);
+	void model_setAnimationFrameIndex(const string & modelId, const string & animationId, int value);
 
 	const vector<string> model_getIds() const;
 	const vector<string> model_getPartIds(const string & id) const;
@@ -353,7 +353,7 @@ public:
 	void quad3d_setMaxClipPosition(const string & id, const fvec3 & value);
 	void quad3d_setLightness(const string & id, float value);
 	void quad3d_setOpacity(const string & id, float value);
-	void quad3d_setTextureRepeat(const string & id, unsigned int value);
+	void quad3d_setTextureRepeat(const string & id, int value);
 	void quad3d_setEmissionIntensity(const string & id, float value);
 	void quad3d_setMinTextureAlpha(const string & id, float value);
 	void quad3d_setVisible(const string & id, bool value);
@@ -369,10 +369,10 @@ public:
 	void quad3d_autopauseAnimation(const string & quadId, const string & animationId);
 	void quad3d_resumeAnimation(const string & quadId, const string & animationId);
 	void quad3d_stopAnimation(const string & quadId, const string & animationId);
-	void quad3d_setAnimationRowIndex(const string & quadId, const string & animationId, unsigned int value);
-	void quad3d_setAnimationColumnIndex(const string & quadId, const string & animationId, unsigned int value);
-	void quad3d_setAnimationIntervalMultiplier(const string & quadId, const string & animationId, unsigned int value);
-	void quad3d_setAnimationIntervalDivider(const string & quadId, const string & animationId, unsigned int value);
+	void quad3d_setAnimationRowIndex(const string & quadId, const string & animationId, int value);
+	void quad3d_setAnimationColumnIndex(const string & quadId, const string & animationId, int value);
+	void quad3d_setAnimationIntervalMultiplier(const string & quadId, const string & animationId, int value);
+	void quad3d_setAnimationIntervalDivider(const string & quadId, const string & animationId, int value);
 	void quad3d_setHorizontallyFlipped(const string & id, bool value);
 	void quad3d_setVerticallyFlipped(const string & id, bool value);
 	void quad3d_setRotationOrder(const string & id, DirectionOrderType value);
@@ -544,11 +544,11 @@ public:
 	void quad2d_autopauseAnimation(const string & quadId, const string & animationId);
 	void quad2d_resumeAnimation(const string & quadId, const string & animationId);
 	void quad2d_stopAnimation(const string & quadId, const string & animationId);
-	void quad2d_setAnimationRowIndex(const string & animationId, const string & quadId, unsigned int value);
-	void quad2d_setAnimationColumnIndex(const string & animationId, const string & quadId, unsigned int value);
-	void quad2d_setAnimationIntervalMultiplier(const string & animationId, const string & quadId, unsigned int value);
-	void quad2d_setAnimationIntervalDivider(const string & animationId, const string & quadId, unsigned int value);
-	void quad2d_setTextureRepeat(const string & id, unsigned int value);
+	void quad2d_setAnimationRowIndex(const string & animationId, const string & quadId, int value);
+	void quad2d_setAnimationColumnIndex(const string & animationId, const string & quadId, int value);
+	void quad2d_setAnimationIntervalMultiplier(const string & animationId, const string & quadId, int value);
+	void quad2d_setAnimationIntervalDivider(const string & animationId, const string & quadId, int value);
+	void quad2d_setTextureRepeat(const string & id, int value);
 
 	const vector<string> quad2d_getIds() const;
 	const vector<string> quad2d_getAnimationIds(const string & id) const;
@@ -708,9 +708,9 @@ public:
 
 	void animation2d_create(const string & id);
 	void animation2d_delete(const string & id);
-	void animation2d_setRowCount(const string & id, unsigned int value);
-	void animation2d_setColumnCount(const string & id, unsigned int value);
-	void animation2d_setInterval(const string & id, unsigned int value);
+	void animation2d_setRowCount(const string & id, int value);
+	void animation2d_setColumnCount(const string & id, int value);
+	void animation2d_setInterval(const string & id, int value);
 
 	const vector<string> animation2d_getIds() const;
 	const unsigned int animation2d_getRowCount(const string & id) const;
@@ -777,11 +777,11 @@ public:
 	void graphics_setDofEnabled(bool value);
 	void graphics_setMotionBlurEnabled(bool value);
 	void graphics_setLensFlareEnabled(bool value);
-	void graphics_setCubeReflectionInterval(unsigned int value);
-	void graphics_setCubeReflectionQuality(unsigned int value);
-	void graphics_setPlanarReflectionQuality(unsigned int value);
-	void graphics_setPlanarRefractionQuality(unsigned int value);
-	void graphics_setAnisotropicFilteringQuality(unsigned int value);
+	void graphics_setCubeReflectionInterval(int value);
+	void graphics_setCubeReflectionQuality(int value);
+	void graphics_setPlanarReflectionQuality(int value);
+	void graphics_setPlanarRefractionQuality(int value);
+	void graphics_setAnisotropicFilteringQuality(int value);
 	void graphics_setAmbientLightingColor(const fvec3 & value);
 	void graphics_setAmbientLightingIntensity(float value);
 	void graphics_setDirectionalLightingPosition(const fvec3 & value);
@@ -796,21 +796,21 @@ public:
 	void graphics_setShadowLookatOffset(const fvec3 & value);
 	void graphics_setShadowSize(float value);
 	void graphics_setShadowLightness(float value);
-	void graphics_setShadowQuality(unsigned int value);
-	void graphics_setShadowInterval(unsigned int value);
+	void graphics_setShadowQuality(int value);
+	void graphics_setShadowInterval(int value);
 	void graphics_setShadowFollowingCamera(bool value);
 	void graphics_setBloomIntensity(float value);
-	void graphics_setBloomBlurCount(unsigned int value);
+	void graphics_setBloomBlurCount(int value);
 	void graphics_setBloomType(BloomType value);
-	void graphics_setBloomQuality(unsigned int value);
+	void graphics_setBloomQuality(int value);
 	void graphics_setSkyExposureIntensity(float value);
 	void graphics_setSkyExposureSpeed(float value);
 	void graphics_setDofDynamicDistance(float value);
 	void graphics_setDofBlurDistance(float value);
 	void graphics_setDofDynamic(bool value);
-	void graphics_setDofQuality(unsigned int value);
+	void graphics_setDofQuality(int value);
 	void graphics_setMotionBlurIntensity(float value);
-	void graphics_setMotionBlurQuality(unsigned int value);
+	void graphics_setMotionBlurQuality(int value);
 	void graphics_setLensFlareMap(const string & value);
 	void graphics_setLensFlareIntensity(float value);
 	void graphics_setLensFlareSensitivity(float value);

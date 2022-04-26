@@ -16,7 +16,7 @@ public:
 	void resumeModelAnimation(const string & animationId, const string & modelId);
 	void stopModelAnimation(const string & animationId, const string & modelId);
 	void setModelAnimationSpeedMultiplier(const string & animationId, const string & modelId, float value);
-	void setModelAnimationFrameIndex(const string & animationId, const string & modelId, unsigned int value);
+	void setModelAnimationFrameIndex(const string & animationId, const string & modelId, int value);
 
 	const vector<pair<string, string>> getStartedModelAnimationIds() const;
 

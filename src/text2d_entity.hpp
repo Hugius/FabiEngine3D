@@ -35,7 +35,7 @@ public:
 	void moveTo(const fvec2 & target, float speed);
 	void rotateTo(float target, float speed);
 	void scaleTo(const fvec2 & target, float speed);
-	void setDepth(unsigned int value);
+	void setDepth(int value);
 	void setWireframed(bool value);
 	void setCentered(bool value);
 	void setVisible(bool value) override;

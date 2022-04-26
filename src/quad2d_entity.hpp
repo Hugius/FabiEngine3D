@@ -34,12 +34,12 @@ public:
 	void moveTo(const fvec2 & target, float speed);
 	void rotateTo(float target, float speed);
 	void scaleTo(const fvec2 & target, float speed);
-	void setDepth(unsigned int value);
+	void setDepth(int value);
 	void setUvMultiplier(const fvec2 & value);
 	void setUvOffset(const fvec2 & value);
 	void setWireframed(bool value);
 	void setCentered(bool value);
-	void setTextureRepeat(unsigned int value);
+	void setTextureRepeat(int value);
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const shared_ptr<TextureBuffer> getDiffuseTextureBuffer() const;

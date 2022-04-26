@@ -32,17 +32,17 @@ const unsigned int Animation2d::getInterval() const
 	return _interval;
 }
 
-void Animation2d::setRowCount(unsigned int value)
+void Animation2d::setRowCount(int value)
 {
 	_rowCount = max(1, value);
 }
 
-void Animation2d::setColumnCount(unsigned int value)
+void Animation2d::setColumnCount(int value)
 {
 	_columnCount = max(1, value);
 }
 
-void Animation2d::setInterval(unsigned int value)
+void Animation2d::setInterval(int value)
 {
 	_interval = max(0, value);
 }

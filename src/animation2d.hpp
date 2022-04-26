@@ -9,9 +9,9 @@ class Animation2d final
 public:
 	Animation2d(const string & id);
 
-	void setRowCount(unsigned int value);
-	void setColumnCount(unsigned int value);
-	void setInterval(unsigned int value);
+	void setRowCount(int value);
+	void setColumnCount(int value);
+	void setInterval(int value);
 
 	const string & getId() const;
 

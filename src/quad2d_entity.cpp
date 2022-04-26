@@ -170,7 +170,7 @@ void Quad2dEntity::setMaxClipPosition(const fvec2 & value)
 	_maxClipPosition = fvec2(clamp(value.x, -1.0f, 1.0f), clamp(value.y, -1.0f, 1.0f));
 }
 
-void Quad2dEntity::setDepth(unsigned int value)
+void Quad2dEntity::setDepth(int value)
 {
 	_depth = max(0, value);
 }
@@ -295,7 +295,7 @@ void Quad2dEntity::setCentered(bool value)
 	_isCentered = value;
 }
 
-void Quad2dEntity::setTextureRepeat(unsigned int value)
+void Quad2dEntity::setTextureRepeat(int value)
 {
 	_textureRepeat = max(1, value);
 }

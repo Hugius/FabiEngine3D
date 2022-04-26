@@ -152,7 +152,7 @@ void Text2dEntity::setMaxClipPosition(const fvec2 & value)
 	}
 }
 
-void Text2dEntity::setDepth(unsigned int value)
+void Text2dEntity::setDepth(int value)
 {
 	_depth = max(0, value);
 

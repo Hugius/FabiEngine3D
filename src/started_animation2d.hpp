@@ -10,11 +10,11 @@ public:
 	void setPlayCount(int value);
 	void setPaused(bool value);
 	void setAutopaused(bool value);
-	void setRowIndex(unsigned int value);
-	void setColumnIndex(unsigned int value);
-	void setUpdateCount(unsigned int value);
-	void setIntervalMultiplier(unsigned int value);
-	void setIntervalDivider(unsigned int value);
+	void setRowIndex(int value);
+	void setColumnIndex(int value);
+	void setUpdateCount(int value);
+	void setIntervalMultiplier(int value);
+	void setIntervalDivider(int value);
 
 	const unsigned int getUpdateCount() const;
 	const unsigned int getRowIndex() const;

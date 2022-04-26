@@ -27,14 +27,14 @@ public:
 	void resumeQuad2dAnimation(const string & animationId, const string & quadId);
 	void stopQuad3dAnimation(const string & animationId, const string & quadId);
 	void stopQuad2dAnimation(const string & animationId, const string & quadId);
-	void setQuad3dAnimationRowIndex(const string & animationId, const string & quadId, unsigned int value);
-	void setQuad2dAnimationRowIndex(const string & animationId, const string & quadId, unsigned int value);
-	void setQuad3dAnimationColumnIndex(const string & animationId, const string & quadId, unsigned int value);
-	void setQuad2dAnimationColumnIndex(const string & animationId, const string & quadId, unsigned int value);
-	void setQuad3dAnimationIntervalMultiplier(const string & animationId, const string & quadId, unsigned int value);
-	void setQuad2dAnimationIntervalMultiplier(const string & animationId, const string & quadId, unsigned int value);
-	void setQuad3dAnimationIntervalDivider(const string & animationId, const string & quadId, unsigned int value);
-	void setQuad2dAnimationIntervalDivider(const string & animationId, const string & quadId, unsigned int value);
+	void setQuad3dAnimationRowIndex(const string & animationId, const string & quadId, int value);
+	void setQuad2dAnimationRowIndex(const string & animationId, const string & quadId, int value);
+	void setQuad3dAnimationColumnIndex(const string & animationId, const string & quadId, int value);
+	void setQuad2dAnimationColumnIndex(const string & animationId, const string & quadId, int value);
+	void setQuad3dAnimationIntervalMultiplier(const string & animationId, const string & quadId, int value);
+	void setQuad2dAnimationIntervalMultiplier(const string & animationId, const string & quadId, int value);
+	void setQuad3dAnimationIntervalDivider(const string & animationId, const string & quadId, int value);
+	void setQuad2dAnimationIntervalDivider(const string & animationId, const string & quadId, int value);
 
 	const vector<pair<string, string>> getStartedQuad3dAnimationIds() const;
 	const vector<pair<string, string>> getStartedQuad2dAnimationIds() const;

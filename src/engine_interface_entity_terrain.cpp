@@ -34,7 +34,7 @@ void EngineInterface::terrain_setMaxHeight(const string & id, float value)
 	_core->getTerrainEntityManager()->loadVertexBuffer(id);
 }
 
-void EngineInterface::terrain_setTextureRepeat(const string & id, unsigned int value)
+void EngineInterface::terrain_setTextureRepeat(const string & id, int value)
 {
 	_core->getTerrainEntityManager()->getEntity(id)->setTextureRepeat(value);
 }
@@ -309,17 +309,17 @@ void EngineInterface::terrain_setBlueNormalMap(const string & id, const string &
 	}
 }
 
-void EngineInterface::terrain_setRedTextureRepeat(const string & id, unsigned int value)
+void EngineInterface::terrain_setRedTextureRepeat(const string & id, int value)
 {
 	_core->getTerrainEntityManager()->getEntity(id)->setRedTextureRepeat(value);
 }
 
-void EngineInterface::terrain_setGreenTextureRepeat(const string & id, unsigned int value)
+void EngineInterface::terrain_setGreenTextureRepeat(const string & id, int value)
 {
 	_core->getTerrainEntityManager()->getEntity(id)->setGreenTextureRepeat(value);
 }
 
-void EngineInterface::terrain_setBlueTextureRepeat(const string & id, unsigned int value)
+void EngineInterface::terrain_setBlueTextureRepeat(const string & id, int value)
 {
 	_core->getTerrainEntityManager()->getEntity(id)->setBlueTextureRepeat(value);
 }

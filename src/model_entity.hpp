@@ -69,7 +69,7 @@ public:
 	void setSpecularShininess(const string & partId, float value);
 	void setSpecularIntensity(const string & partId, float value);
 	void setOpacity(const string & partId, float value);
-	void setTextureRepeat(const string & partId, unsigned int value);
+	void setTextureRepeat(const string & partId, int value);
 	void setEmissionIntensity(const string & partId, float value);
 	void setSpecular(const string & partId, bool value);
 	void setReflective(const string & partId, bool value);

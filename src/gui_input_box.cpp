@@ -647,7 +647,7 @@ void GuiInputBox::setHoverable(bool value)
 	_textField->setOpacity(_isHoverable ? FULL_OPACITY : PART_OPACITY);
 }
 
-void GuiInputBox::setMaxCharacterCount(unsigned int value)
+void GuiInputBox::setMaxCharacterCount(int value)
 {
 	_maxCharacterCount = max(0, value);
 }

@@ -208,22 +208,22 @@ void EngineInterface::quad3d_stopAnimation(const string & quadId, const string &
 	_core->getAnimation2dPlayer()->stopQuad3dAnimation(animationId, quadId);
 }
 
-void EngineInterface::quad3d_setAnimationRowIndex(const string & quadId, const string & animationId, unsigned int value)
+void EngineInterface::quad3d_setAnimationRowIndex(const string & quadId, const string & animationId, int value)
 {
 	_core->getAnimation2dPlayer()->setQuad3dAnimationRowIndex(animationId, quadId, value);
 }
 
-void EngineInterface::quad3d_setAnimationColumnIndex(const string & quadId, const string & animationId, unsigned int value)
+void EngineInterface::quad3d_setAnimationColumnIndex(const string & quadId, const string & animationId, int value)
 {
 	_core->getAnimation2dPlayer()->setQuad3dAnimationColumnIndex(animationId, quadId, value);
 }
 
-void EngineInterface::quad3d_setAnimationIntervalMultiplier(const string & quadId, const string & animationId, unsigned int value)
+void EngineInterface::quad3d_setAnimationIntervalMultiplier(const string & quadId, const string & animationId, int value)
 {
 	_core->getAnimation2dPlayer()->setQuad3dAnimationIntervalMultiplier(animationId, quadId, value);
 }
 
-void EngineInterface::quad3d_setAnimationIntervalDivider(const string & quadId, const string & animationId, unsigned int value)
+void EngineInterface::quad3d_setAnimationIntervalDivider(const string & quadId, const string & animationId, int value)
 {
 	_core->getAnimation2dPlayer()->setQuad3dAnimationIntervalDivider(animationId, quadId, value);
 }
@@ -278,7 +278,7 @@ void EngineInterface::quad3d_setOpacity(const string & id, float value)
 	_core->getQuad3dEntityManager()->getEntity(id)->setOpacity(value);
 }
 
-void EngineInterface::quad3d_setTextureRepeat(const string & id, unsigned int value)
+void EngineInterface::quad3d_setTextureRepeat(const string & id, int value)
 {
 	_core->getQuad3dEntityManager()->getEntity(id)->setTextureRepeat(value);
 }

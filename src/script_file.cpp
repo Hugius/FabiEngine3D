@@ -44,12 +44,12 @@ void ScriptFile::setLines(const vector<string> & value)
 	_lines = value;
 }
 
-void ScriptFile::setCursorLineIndex(unsigned int value)
+void ScriptFile::setCursorLineIndex(int value)
 {
 	_cursorLineIndex = max(0, value);
 }
 
-void ScriptFile::setCursorCharacterIndex(unsigned int value)
+void ScriptFile::setCursorCharacterIndex(int value)
 {
 	_cursorCharacterIndex = max(0, value);
 }

@@ -125,7 +125,7 @@ void Animation2dPlayer::stopQuad3dAnimation(const string & animationId, const st
 	_startedQuad3dAnimations.erase(mergedId);
 }
 
-void Animation2dPlayer::setQuad3dAnimationRowIndex(const string & animationId, const string & quadId, unsigned int value)
+void Animation2dPlayer::setQuad3dAnimationRowIndex(const string & animationId, const string & quadId, int value)
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -145,7 +145,7 @@ void Animation2dPlayer::setQuad3dAnimationRowIndex(const string & animationId, c
 	_startedQuad3dAnimations.at(mergedId)->setRowIndex(value);
 }
 
-void Animation2dPlayer::setQuad3dAnimationColumnIndex(const string & animationId, const string & quadId, unsigned int value)
+void Animation2dPlayer::setQuad3dAnimationColumnIndex(const string & animationId, const string & quadId, int value)
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -165,7 +165,7 @@ void Animation2dPlayer::setQuad3dAnimationColumnIndex(const string & animationId
 	_startedQuad3dAnimations.at(mergedId)->setColumnIndex(value);
 }
 
-void Animation2dPlayer::setQuad3dAnimationIntervalMultiplier(const string & animationId, const string & quadId, unsigned int value)
+void Animation2dPlayer::setQuad3dAnimationIntervalMultiplier(const string & animationId, const string & quadId, int value)
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -185,7 +185,7 @@ void Animation2dPlayer::setQuad3dAnimationIntervalMultiplier(const string & anim
 	_startedQuad3dAnimations.at(mergedId)->setIntervalMultiplier(value);
 }
 
-void Animation2dPlayer::setQuad3dAnimationIntervalDivider(const string & animationId, const string & quadId, unsigned int value)
+void Animation2dPlayer::setQuad3dAnimationIntervalDivider(const string & animationId, const string & quadId, int value)
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -327,7 +327,7 @@ void Animation2dPlayer::stopQuad2dAnimation(const string & animationId, const st
 	_startedQuad2dAnimations.erase(mergedId);
 }
 
-void Animation2dPlayer::setQuad2dAnimationRowIndex(const string & animationId, const string & quadId, unsigned int value)
+void Animation2dPlayer::setQuad2dAnimationRowIndex(const string & animationId, const string & quadId, int value)
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -347,7 +347,7 @@ void Animation2dPlayer::setQuad2dAnimationRowIndex(const string & animationId, c
 	_startedQuad2dAnimations.at(mergedId)->setRowIndex(value);
 }
 
-void Animation2dPlayer::setQuad2dAnimationColumnIndex(const string & animationId, const string & quadId, unsigned int value)
+void Animation2dPlayer::setQuad2dAnimationColumnIndex(const string & animationId, const string & quadId, int value)
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -367,7 +367,7 @@ void Animation2dPlayer::setQuad2dAnimationColumnIndex(const string & animationId
 	_startedQuad2dAnimations.at(mergedId)->setColumnIndex(value);
 }
 
-void Animation2dPlayer::setQuad2dAnimationIntervalMultiplier(const string & animationId, const string & quadId, unsigned int value)
+void Animation2dPlayer::setQuad2dAnimationIntervalMultiplier(const string & animationId, const string & quadId, int value)
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -387,7 +387,7 @@ void Animation2dPlayer::setQuad2dAnimationIntervalMultiplier(const string & anim
 	_startedQuad2dAnimations.at(mergedId)->setIntervalMultiplier(value);
 }
 
-void Animation2dPlayer::setQuad2dAnimationIntervalDivider(const string & animationId, const string & quadId, unsigned int value)
+void Animation2dPlayer::setQuad2dAnimationIntervalDivider(const string & animationId, const string & quadId, int value)
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 

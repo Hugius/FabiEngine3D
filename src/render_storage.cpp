@@ -185,17 +185,17 @@ void RenderStorage::setMotionBlurDifference(const fvec2 & value)
 	_motionBlurDifference = value;
 }
 
-void RenderStorage::setBloomQuality(unsigned int value)
+void RenderStorage::setBloomQuality(int value)
 {
 	_bloomQuality = clamp(value, MIN_BLOOM_QUALITY, MAX_BLOOM_QUALITY);
 }
 
-void RenderStorage::setDofQuality(unsigned int value)
+void RenderStorage::setDofQuality(int value)
 {
 	_dofQuality = clamp(value, MIN_DOF_QUALITY, MAX_DOF_QUALITY);
 }
 
-void RenderStorage::setMotionBlurQuality(unsigned int value)
+void RenderStorage::setMotionBlurQuality(int value)
 {
 	_motionBlurQuality = clamp(value, MIN_MOTION_BLUR_QUALITY, MAX_MOTION_BLUR_QUALITY);
 }
@@ -240,12 +240,12 @@ void RenderStorage::setDofBlurDistance(float value)
 	_dofBlurDistance = max(0.0f, value);
 }
 
-void RenderStorage::setBloomBlurCount(unsigned int value)
+void RenderStorage::setBloomBlurCount(int value)
 {
 	_bloomBlurCount = max(0, value);
 }
 
-void RenderStorage::increaseTriangleCount(unsigned int value)
+void RenderStorage::increaseTriangleCount(int value)
 {
 	if(_isTriangleCountingEnabled)
 	{
@@ -253,22 +253,22 @@ void RenderStorage::increaseTriangleCount(unsigned int value)
 	}
 }
 
-void RenderStorage::setShadowQuality(unsigned int value)
+void RenderStorage::setShadowQuality(int value)
 {
 	_shadowQuality = clamp(value, MIN_SHADOW_QUALITY, MAX_SHADOW_QUALITY);
 }
 
-void RenderStorage::setCubeReflectionQuality(unsigned int value)
+void RenderStorage::setCubeReflectionQuality(int value)
 {
 	_cubeReflectionQuality = clamp(value, MIN_REFLECTION_QUALITY, MAX_REFLECTION_QUALITY);
 }
 
-void RenderStorage::setPlanarReflectionQuality(unsigned int value)
+void RenderStorage::setPlanarReflectionQuality(int value)
 {
 	_planarReflectionQuality = clamp(value, MIN_REFLECTION_QUALITY, MAX_REFLECTION_QUALITY);
 }
 
-void RenderStorage::setPlanarRefractionQuality(unsigned int value)
+void RenderStorage::setPlanarRefractionQuality(int value)
 {
 	_planarRefractionQuality = clamp(value, MIN_REFRACTION_QUALITY, MAX_REFRACTION_QUALITY);
 }
@@ -353,12 +353,12 @@ void RenderStorage::setBloomType(BloomType value)
 	_bloomType = value;
 }
 
-void RenderStorage::setGuiDepth(unsigned int value)
+void RenderStorage::setGuiDepth(int value)
 {
 	_guiDepth = max(0, value);
 }
 
-void RenderStorage::setAnisotropicFilteringQuality(unsigned int value)
+void RenderStorage::setAnisotropicFilteringQuality(int value)
 {
 	_anisotropicFilteringQuality = clamp(value, MIN_ANISOTROPIC_FILTERING_QUALITY, MAX_ANISOTROPIC_FILTERING_QUALITY);
 }
@@ -393,7 +393,7 @@ void RenderStorage::setSkyExposureEnabled(bool value)
 	_isSkyExposureEnabled = value;
 }
 
-void RenderStorage::setShadowInterval(unsigned int value)
+void RenderStorage::setShadowInterval(int value)
 {
 	_shadowInterval = max(0, value);
 }
@@ -403,7 +403,7 @@ void RenderStorage::setShadowsFollowingCamera(bool value)
 	_isShadowsFollowingCamera = value;
 }
 
-void RenderStorage::setCubeReflectionInterval(unsigned int value)
+void RenderStorage::setCubeReflectionInterval(int value)
 {
 	_cubeReflectionInterval = max(0, value);
 }

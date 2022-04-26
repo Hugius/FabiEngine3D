@@ -57,27 +57,27 @@ void StartedAnimation2d::setAutopaused(bool value)
 	_isAutopaused = value;
 }
 
-void StartedAnimation2d::setRowIndex(unsigned int value)
+void StartedAnimation2d::setRowIndex(int value)
 {
 	_rowIndex = max(0, value);
 }
 
-void StartedAnimation2d::setColumnIndex(unsigned int value)
+void StartedAnimation2d::setColumnIndex(int value)
 {
 	_columnIndex = max(0, value);
 }
 
-void StartedAnimation2d::setUpdateCount(unsigned int value)
+void StartedAnimation2d::setUpdateCount(int value)
 {
 	_updateCount = max(0, value);
 }
 
-void StartedAnimation2d::setIntervalMultiplier(unsigned int value)
+void StartedAnimation2d::setIntervalMultiplier(int value)
 {
 	_intervalMultiplier = max(1, value);
 }
 
-void StartedAnimation2d::setIntervalDivider(unsigned int value)
+void StartedAnimation2d::setIntervalDivider(int value)
 {
 	_intervalDivider = max(1, value);
 }

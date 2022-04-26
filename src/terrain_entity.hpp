@@ -34,10 +34,10 @@ public:
 	void setGreenNormalMapPath(const string & value);
 	void setBlueNormalMap(shared_ptr<TextureBuffer> value);
 	void setBlueNormalMapPath(const string & value);
-	void setTextureRepeat(unsigned int value);
-	void setRedTextureRepeat(unsigned int value);
-	void setGreenTextureRepeat(unsigned int value);
-	void setBlueTextureRepeat(unsigned int value);
+	void setTextureRepeat(int value);
+	void setRedTextureRepeat(int value);
+	void setGreenTextureRepeat(int value);
+	void setBlueTextureRepeat(int value);
 	void setSize(float value);
 	void setMaxHeight(float value);
 	void setLightness(float value);

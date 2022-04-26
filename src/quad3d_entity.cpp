@@ -379,7 +379,7 @@ const float Quad3dEntity::getOpacity() const
 	return _opacity;
 }
 
-const unsigned int Quad3dEntity::getTextureRepeat() const
+const int Quad3dEntity::getTextureRepeat() const
 {
 	return _textureRepeat;
 }

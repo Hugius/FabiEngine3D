@@ -116,12 +116,12 @@ const ivec2 & CaptureBuffer::getSize() const
 	return _size;
 }
 
-const unsigned int CaptureBuffer::getFboId() const
+const int CaptureBuffer::getFboId() const
 {
 	return _fboId;
 }
 
-const unsigned int CaptureBuffer::getRboId() const
+const int CaptureBuffer::getRboId() const
 {
 	return _rboId;
 }

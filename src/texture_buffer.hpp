@@ -22,7 +22,7 @@ public:
 	void loadMipMapping();
 	void loadAnisotropicFiltering(unsigned int quality);
 
-	const unsigned int getTboId() const;
+	const int getTboId() const;
 
 	const bool isMipMapped() const;
 	const bool isAnisotropicallyFiltered() const;

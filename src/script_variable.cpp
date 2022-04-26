@@ -85,7 +85,7 @@ const shared_ptr<ScriptValue> ScriptVariable::getValue(unsigned int index) const
 	return _values[index];
 }
 
-const unsigned int ScriptVariable::getValueCount() const
+const int ScriptVariable::getValueCount() const
 {
 	return static_cast<int>(_values.size());
 }

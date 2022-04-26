@@ -151,7 +151,7 @@ const int Sound2dPlayer::getPlayCount(const string & id, unsigned int index) con
 	return _startedSounds.at(id)[index]->getPlayCount();
 }
 
-const unsigned int Sound2dPlayer::getStartedSoundCount(const string & id) const
+const int Sound2dPlayer::getStartedSoundCount(const string & id) const
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{
@@ -166,7 +166,7 @@ const unsigned int Sound2dPlayer::getStartedSoundCount(const string & id) const
 	return static_cast<int>(_startedSounds.at(id).size());
 }
 
-const unsigned int Sound2dPlayer::getSoundTime(const string & id, unsigned int index) const
+const int Sound2dPlayer::getSoundTime(const string & id, unsigned int index) const
 {
 	if(!_sound2dManager->isSoundExisting(id))
 	{

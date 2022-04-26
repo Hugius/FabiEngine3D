@@ -103,7 +103,7 @@ const int Sound3dPlayer::getPlayCount(const string & id, unsigned int index) con
 	return _startedSounds.at(id)[index]->getPlayCount();
 }
 
-const unsigned int Sound3dPlayer::getStartedSoundCount(const string & id) const
+const int Sound3dPlayer::getStartedSoundCount(const string & id) const
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{
@@ -172,7 +172,7 @@ void Sound3dPlayer::_updateSamplesVolume(unsigned int sampleCount, short * origi
 	}
 }
 
-const unsigned int Sound3dPlayer::getSoundTime(const string & id, unsigned int index) const
+const int Sound3dPlayer::getSoundTime(const string & id, unsigned int index) const
 {
 	if(!_sound3dManager->isSoundExisting(id))
 	{

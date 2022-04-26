@@ -27,8 +27,8 @@ public:
 
 	const float getClockDeltaTime(const string & id) const;
 
-	const unsigned int getUpdateCountPerSecond() const;
-	const unsigned int getPassedUpdateCount() const;
+	const int getUpdateCountPerSecond() const;
+	const int getPassedUpdateCount() const;
 
 	const bool isClockExisting(const string & id) const;
 	const bool isClockStarted(const string & id) const;

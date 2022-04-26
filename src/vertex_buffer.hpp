@@ -17,9 +17,9 @@ public:
 	VertexBuffer(float x, float y, float w, float h, bool isCentered);
 	~VertexBuffer();
 
-	const unsigned int getVertexCount() const;
-	const unsigned int getVaoId() const;
-	const unsigned int getVboId() const;
+	const int getVertexCount() const;
+	const int getVaoId() const;
+	const int getVboId() const;
 
 	const VertexBufferType getBufferType() const;
 

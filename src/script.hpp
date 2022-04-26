@@ -16,8 +16,8 @@ public:
 
 	const shared_ptr<ScriptFile> getScriptFile(const string & id) const;
 
-	const unsigned int getScriptFileCount() const;
-	const unsigned int getTotalLineCount() const;
+	const int getScriptFileCount() const;
+	const int getTotalLineCount() const;
 
 	const bool isScriptFileExisting(const string & id) const;
 	const bool isEmpty();

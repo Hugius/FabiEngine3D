@@ -116,7 +116,7 @@ const TransformationType & EngineInterface::animation3d_getTransformationType(co
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getTransformationType(frameIndex, partId);
 }
 
-const unsigned int EngineInterface::animation3d_getFrameCount(const string & animationId)
+const int EngineInterface::animation3d_getFrameCount(const string & animationId)
 {
 	return _core->getAnimation3dManager()->getAnimation(animationId)->getFrameCount();
 }

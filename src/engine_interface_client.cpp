@@ -56,17 +56,17 @@ const bool EngineInterface::client_isMessageReserved(const string & message)
 	return _core->getNetworkingHelper()->isMessageReserved(message);
 }
 
-const unsigned int EngineInterface::client_getPingLatency() const
+const int EngineInterface::client_getPingLatency() const
 {
 	return _core->getNetworkingClient()->getPingLatency();
 }
 
-const unsigned int EngineInterface::client_getMaxUsernameSize() const
+const int EngineInterface::client_getMaxUsernameSize() const
 {
 	return _core->getNetworkingHelper()->getMaxUsernameSize();
 }
 
-const unsigned int EngineInterface::client_getMaxMessageSize() const
+const int EngineInterface::client_getMaxMessageSize() const
 {
 	return _core->getNetworkingHelper()->getMaxMessageSize();
 }

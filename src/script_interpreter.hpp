@@ -72,7 +72,7 @@ private:
 	const string _limitIntegerString(const string & valueString) const;
 	const string _limitDecimalString(const string & valueString) const;
 
-	const unsigned int _countLeadingSpaces(const string & scriptLineText);
+	const int _countLeadingSpaces(const string & scriptLineText);
 
 	const int _extractListIndexFromString(const string & valueString, bool & isAccessingList);
 	const int _getLastConditionStatementIndex(const vector<ScriptConditionStatement> & statements, unsigned int scopeDepth) const;

@@ -12,7 +12,7 @@ const float StartedAnimation3d::getSpeedMultiplier() const
 	return _speedMultiplier;
 }
 
-const unsigned int StartedAnimation3d::getFrameIndex() const
+const int StartedAnimation3d::getFrameIndex() const
 {
 	return _frameIndex;
 }

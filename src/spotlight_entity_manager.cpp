@@ -64,7 +64,7 @@ void SpotlightEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const unsigned int SpotlightEntityManager::getMaxEntityCount() const
+const int SpotlightEntityManager::getMaxEntityCount() const
 {
 	return MAX_ENTITY_COUNT;
 }

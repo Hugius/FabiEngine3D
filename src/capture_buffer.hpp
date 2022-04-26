@@ -22,8 +22,8 @@ public:
 	const ivec2 & getPosition() const;
 	const ivec2 & getSize() const;
 
-	const unsigned int getFboId() const;
-	const unsigned int getRboId() const;
+	const int getFboId() const;
+	const int getRboId() const;
 
 private:
 	vector<shared_ptr<TextureBuffer>> _textures = {};

@@ -89,7 +89,7 @@ const vector<string> & Animation3d::getPartIds() const
 	return _partIds;
 }
 
-const unsigned int Animation3d::getFrameCount() const
+const int Animation3d::getFrameCount() const
 {
 	return static_cast<int>(_frames.size());
 }

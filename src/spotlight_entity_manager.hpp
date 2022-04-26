@@ -20,7 +20,7 @@ public:
 
 	const shared_ptr<SpotlightEntity> getEntity(const string & id) const;
 
-	const unsigned int getMaxEntityCount() const;
+	const int getMaxEntityCount() const;
 
 	const bool isEntityExisting(const string & id) const;
 	const bool isEntitiesExisting() const;

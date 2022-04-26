@@ -25,12 +25,12 @@ NetworkingHelper::~NetworkingHelper()
 	WSACleanup();
 }
 
-const unsigned int NetworkingHelper::getMaxUsernameSize() const
+const int NetworkingHelper::getMaxUsernameSize() const
 {
 	return MAX_USERNAME_SIZE;
 }
 
-const unsigned int NetworkingHelper::getMaxMessageSize() const
+const int NetworkingHelper::getMaxMessageSize() const
 {
 	return MAX_MESSAGE_SIZE;
 }

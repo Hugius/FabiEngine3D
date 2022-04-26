@@ -123,7 +123,7 @@ public:
 	const float getEmissionIntensity(const string & partId) const;
 	const float getMinTextureAlpha(const string & partId) const;
 
-	const unsigned int getTextureRepeat(const string & partId) const;
+	const int getTextureRepeat(const string & partId) const;
 
 	const bool isFrozen() const;
 	const bool isLevelOfDetailed() const;

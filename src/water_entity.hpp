@@ -69,7 +69,7 @@ public:
 	const float getSpecularIntensity() const;
 	const float getSize() const;
 
-	const unsigned int getTextureRepeat() const;
+	const int getTextureRepeat() const;
 
 	const bool isSpecular() const;
 	const bool isReflective() const;

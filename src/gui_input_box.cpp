@@ -623,7 +623,7 @@ const fvec2 & GuiInputBox::getSize() const
 	return _quadField->getSize();
 }
 
-const unsigned int GuiInputBox::getMaxCharacterCount() const
+const int GuiInputBox::getMaxCharacterCount() const
 {
 	return _maxCharacterCount;
 }

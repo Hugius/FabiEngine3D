@@ -84,7 +84,7 @@ const int Animation2dPlayer::getQuad2dAnimationPlayCount(const string & animatio
 	return _startedQuad2dAnimations.at(mergedId)->getPlayCount();
 }
 
-const unsigned int Animation2dPlayer::getQuad3dAnimationRowIndex(const string & animationId, const string & quadId) const
+const int Animation2dPlayer::getQuad3dAnimationRowIndex(const string & animationId, const string & quadId) const
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -104,7 +104,7 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationRowIndex(const string & 
 	return _startedQuad3dAnimations.at(mergedId)->getRowIndex();
 }
 
-const unsigned int Animation2dPlayer::getQuad2dAnimationRowIndex(const string & animationId, const string & quadId) const
+const int Animation2dPlayer::getQuad2dAnimationRowIndex(const string & animationId, const string & quadId) const
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -124,7 +124,7 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationRowIndex(const string & 
 	return _startedQuad2dAnimations.at(mergedId)->getRowIndex();
 }
 
-const unsigned int Animation2dPlayer::getQuad3dAnimationColumnIndex(const string & animationId, const string & quadId) const
+const int Animation2dPlayer::getQuad3dAnimationColumnIndex(const string & animationId, const string & quadId) const
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -144,7 +144,7 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationColumnIndex(const string
 	return _startedQuad3dAnimations.at(mergedId)->getColumnIndex();
 }
 
-const unsigned int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string & animationId, const string & quadId) const
+const int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string & animationId, const string & quadId) const
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -164,7 +164,7 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationColumnIndex(const string
 	return _startedQuad2dAnimations.at(mergedId)->getColumnIndex();
 }
 
-const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const
+const int Animation2dPlayer::getQuad3dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -184,7 +184,7 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalMultiplier(const
 	return _startedQuad2dAnimations.at(mergedId)->getIntervalMultiplier();
 }
 
-const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const
+const int Animation2dPlayer::getQuad2dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -204,7 +204,7 @@ const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalMultiplier(const
 	return _startedQuad2dAnimations.at(mergedId)->getIntervalMultiplier();
 }
 
-const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const string & animationId, const string & quadId) const
+const int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const string & animationId, const string & quadId) const
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 
@@ -224,7 +224,7 @@ const unsigned int Animation2dPlayer::getQuad3dAnimationIntervalDivider(const st
 	return _startedQuad2dAnimations.at(mergedId)->getIntervalDivider();
 }
 
-const unsigned int Animation2dPlayer::getQuad2dAnimationIntervalDivider(const string & animationId, const string & quadId) const
+const int Animation2dPlayer::getQuad2dAnimationIntervalDivider(const string & animationId, const string & quadId) const
 {
 	const auto mergedId = Tools::mergeStrings(animationId, quadId, DELIMITER);
 

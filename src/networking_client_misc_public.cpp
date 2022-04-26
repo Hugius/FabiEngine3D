@@ -39,7 +39,7 @@ const bool NetworkingClient::isAcceptedByServer() const
 	return _isAcceptedByServer;
 }
 
-const unsigned int NetworkingClient::getPingLatency() const
+const int NetworkingClient::getPingLatency() const
 {
 	if(_pingLatencies.empty())
 	{

@@ -98,17 +98,17 @@ const unsigned char * Image::getPixels() const
 	return _pixels;
 }
 
-const unsigned int Image::getWidth() const
+const int Image::getWidth() const
 {
 	return _width;
 }
 
-const unsigned int Image::getHeight() const
+const int Image::getHeight() const
 {
 	return _height;
 }
 
-const unsigned int Image::getBitsPerPixel() const
+const int Image::getBitsPerPixel() const
 {
 	return _bitsPerPixel;
 }

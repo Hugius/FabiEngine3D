@@ -415,7 +415,7 @@ const fvec2 & Text2dEntity::getMaxClipPosition() const
 	return _maxClipPosition;
 }
 
-const unsigned int Text2dEntity::getDepth() const
+const int Text2dEntity::getDepth() const
 {
 	return _depth;
 }

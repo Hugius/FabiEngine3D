@@ -39,14 +39,14 @@ public:
 	const vector<pair<string, string>> getStartedQuad3dAnimationIds() const;
 	const vector<pair<string, string>> getStartedQuad2dAnimationIds() const;
 
-	const unsigned int getQuad3dAnimationRowIndex(const string & animationId, const string & quadId) const;
-	const unsigned int getQuad2dAnimationRowIndex(const string & animationId, const string & quadId) const;
-	const unsigned int getQuad3dAnimationColumnIndex(const string & animationId, const string & quadId) const;
-	const unsigned int getQuad2dAnimationColumnIndex(const string & animationId, const string & quadId) const;
-	const unsigned int getQuad3dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const;
-	const unsigned int getQuad2dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const;
-	const unsigned int getQuad3dAnimationIntervalDivider(const string & animationId, const string & quadId) const;
-	const unsigned int getQuad2dAnimationIntervalDivider(const string & animationId, const string & quadId) const;
+	const int getQuad3dAnimationRowIndex(const string & animationId, const string & quadId) const;
+	const int getQuad2dAnimationRowIndex(const string & animationId, const string & quadId) const;
+	const int getQuad3dAnimationColumnIndex(const string & animationId, const string & quadId) const;
+	const int getQuad2dAnimationColumnIndex(const string & animationId, const string & quadId) const;
+	const int getQuad3dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const;
+	const int getQuad2dAnimationIntervalMultiplier(const string & animationId, const string & quadId) const;
+	const int getQuad3dAnimationIntervalDivider(const string & animationId, const string & quadId) const;
+	const int getQuad2dAnimationIntervalDivider(const string & animationId, const string & quadId) const;
 
 	const int getQuad3dAnimationPlayCount(const string & animationId, const string & quadId) const;
 	const int getQuad2dAnimationPlayCount(const string & animationId, const string & quadId) const;

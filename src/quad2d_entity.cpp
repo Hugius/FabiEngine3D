@@ -250,7 +250,7 @@ const float Quad2dEntity::getRotation() const
 	return _rotation;
 }
 
-const unsigned int Quad2dEntity::getTextureRepeat() const
+const int Quad2dEntity::getTextureRepeat() const
 {
 	return _textureRepeat;
 }
@@ -280,7 +280,7 @@ const fvec2 & Quad2dEntity::getUvOffset() const
 	return _uvOffset;
 }
 
-const unsigned int Quad2dEntity::getDepth() const
+const int Quad2dEntity::getDepth() const
 {
 	return _depth;
 }

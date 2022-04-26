@@ -33,7 +33,7 @@ public:
 	const fvec3 & getRotationOrigin(unsigned int frameIndex, const string & partId) const;
 	const fvec3 & getSpeed(unsigned int frameIndex, const string & partId) const;
 
-	const unsigned int getFrameCount() const;
+	const int getFrameCount() const;
 
 	const SpeedType & getSpeedType(unsigned int frameIndex, const string & partId) const;
 	const TransformationType & getTransformationType(unsigned int frameIndex, const string & partId) const;

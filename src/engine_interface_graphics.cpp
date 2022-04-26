@@ -358,22 +358,22 @@ const bool EngineInterface::graphics_isShadowCircleEnabled() const
 	return _core->getRenderStorage()->isShadowCircleEnabled();
 }
 
-const unsigned int EngineInterface::graphics_getShadowQuality() const
+const int EngineInterface::graphics_getShadowQuality() const
 {
 	return _core->getRenderStorage()->getShadowQuality();
 }
 
-const unsigned int EngineInterface::graphics_getCubeReflectionQuality() const
+const int EngineInterface::graphics_getCubeReflectionQuality() const
 {
 	return _core->getRenderStorage()->getCubeReflectionQuality();
 }
 
-const unsigned int EngineInterface::graphics_getPlanarReflectionQuality() const
+const int EngineInterface::graphics_getPlanarReflectionQuality() const
 {
 	return _core->getRenderStorage()->getPlanarReflectionQuality();
 }
 
-const unsigned int EngineInterface::graphics_getPlanarRefractionQuality() const
+const int EngineInterface::graphics_getPlanarRefractionQuality() const
 {
 	return _core->getRenderStorage()->getPlanarRefractionQuality();
 }
@@ -468,12 +468,12 @@ const float EngineInterface::graphics_getBloomIntensity() const
 	return _core->getRenderStorage()->getBloomIntensity();
 }
 
-const unsigned int EngineInterface::graphics_getBloomBlurCount() const
+const int EngineInterface::graphics_getBloomBlurCount() const
 {
 	return _core->getRenderStorage()->getBloomBlurCount();
 }
 
-const unsigned int EngineInterface::graphics_getShadowInterval() const
+const int EngineInterface::graphics_getShadowInterval() const
 {
 	return _core->getRenderStorage()->getShadowInterval();
 }
@@ -513,17 +513,17 @@ const float EngineInterface::graphics_getMotionBlurIntensity() const
 	return _core->getRenderStorage()->getMotionBlurIntensity();
 }
 
-const unsigned int EngineInterface::graphics_getBloomQuality() const
+const int EngineInterface::graphics_getBloomQuality() const
 {
 	return _core->getRenderStorage()->getBloomQuality();
 }
 
-const unsigned int EngineInterface::graphics_getDofQuality() const
+const int EngineInterface::graphics_getDofQuality() const
 {
 	return _core->getRenderStorage()->getDofQuality();
 }
 
-const unsigned int EngineInterface::graphics_getMotionBlurQuality() const
+const int EngineInterface::graphics_getMotionBlurQuality() const
 {
 	return _core->getRenderStorage()->getMotionBlurQuality();
 }
@@ -533,7 +533,7 @@ const BloomType EngineInterface::graphics_getBloomType() const
 	return _core->getRenderStorage()->getBloomType();
 }
 
-const unsigned int EngineInterface::graphics_getAnisotropicFilteringQuality() const
+const int EngineInterface::graphics_getAnisotropicFilteringQuality() const
 {
 	return _core->getRenderStorage()->getAnisotropicFilteringQuality();
 }

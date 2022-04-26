@@ -659,7 +659,7 @@ const float EngineInterface::model_getLevelOfDetailDistance(const string & id) c
 	return _core->getModelEntityManager()->getEntity(id)->getLevelOfDetailDistance();
 }
 
-const unsigned int EngineInterface::model_getTextureRepeat(const string & modelId, const string & partId) const
+const int EngineInterface::model_getTextureRepeat(const string & modelId, const string & partId) const
 {
 	return _core->getModelEntityManager()->getEntity(modelId)->getTextureRepeat(partId);
 }
@@ -684,7 +684,7 @@ const int EngineInterface::model_getAnimationPlayCount(const string & modelId, c
 	return _core->getAnimation3dPlayer()->getModelAnimationPlayCount(animationId, modelId);
 }
 
-const unsigned int EngineInterface::model_getAnimationFrameIndex(const string & modelId, const string & animationId) const
+const int EngineInterface::model_getAnimationFrameIndex(const string & modelId, const string & animationId) const
 {
 	return _core->getAnimation3dPlayer()->getModelAnimationFrameIndex(animationId, modelId);
 }

@@ -583,17 +583,17 @@ const float RenderStorage::getMotionBlurMixValue() const
 	return _motionBlurMixValue;
 }
 
-const unsigned int RenderStorage::getBloomQuality() const
+const int RenderStorage::getBloomQuality() const
 {
 	return _bloomQuality;
 }
 
-const unsigned int RenderStorage::getDofQuality() const
+const int RenderStorage::getDofQuality() const
 {
 	return _dofQuality;
 }
 
-const unsigned int RenderStorage::getMotionBlurQuality() const
+const int RenderStorage::getMotionBlurQuality() const
 {
 	return _motionBlurQuality;
 }
@@ -638,122 +638,122 @@ const float RenderStorage::getDofBlurDistance() const
 	return _dofBlurDistance;
 }
 
-const unsigned int RenderStorage::getBloomBlurCount() const
+const int RenderStorage::getBloomBlurCount() const
 {
 	return _bloomBlurCount;
 }
 
-const unsigned int RenderStorage::getTriangleCount() const
+const int RenderStorage::getTriangleCount() const
 {
 	return _triangleCount;
 }
 
-const unsigned int RenderStorage::getGuiDepth() const
+const int RenderStorage::getGuiDepth() const
 {
 	return _guiDepth;
 }
 
-const unsigned int RenderStorage::getAnisotropicFilteringQuality() const
+const int RenderStorage::getAnisotropicFilteringQuality() const
 {
 	return _anisotropicFilteringQuality;
 }
 
-const unsigned int RenderStorage::getShadowInterval() const
+const int RenderStorage::getShadowInterval() const
 {
 	return _shadowInterval;
 }
 
-const unsigned int RenderStorage::getCubeReflectionInterval() const
+const int RenderStorage::getCubeReflectionInterval() const
 {
 	return _cubeReflectionInterval;
 }
 
-const unsigned int RenderStorage::getShadowQuality() const
+const int RenderStorage::getShadowQuality() const
 {
 	return _shadowQuality;
 }
 
-const unsigned int RenderStorage::getCubeReflectionQuality() const
+const int RenderStorage::getCubeReflectionQuality() const
 {
 	return _cubeReflectionQuality;
 }
 
-const unsigned int RenderStorage::getPlanarReflectionQuality() const
+const int RenderStorage::getPlanarReflectionQuality() const
 {
 	return _planarReflectionQuality;
 }
 
-const unsigned int RenderStorage::getPlanarRefractionQuality() const
+const int RenderStorage::getPlanarRefractionQuality() const
 {
 	return _planarRefractionQuality;
 }
 
-const unsigned int RenderStorage::getMinBloomQuality() const
+const int RenderStorage::getMinBloomQuality() const
 {
 	return MIN_BLOOM_QUALITY;
 }
 
-const unsigned int RenderStorage::getMinDofQuality() const
+const int RenderStorage::getMinDofQuality() const
 {
 	return MIN_DOF_QUALITY;
 }
 
-const unsigned int RenderStorage::getMinMotionBlurQuality() const
+const int RenderStorage::getMinMotionBlurQuality() const
 {
 	return MIN_MOTION_BLUR_QUALITY;
 }
 
-const unsigned int RenderStorage::getMinShadowQuality() const
+const int RenderStorage::getMinShadowQuality() const
 {
 	return MIN_SHADOW_QUALITY;
 }
 
-const unsigned int RenderStorage::getMinReflectionQuality() const
+const int RenderStorage::getMinReflectionQuality() const
 {
 	return MIN_REFLECTION_QUALITY;
 }
 
-const unsigned int RenderStorage::getMinRefractionQuality() const
+const int RenderStorage::getMinRefractionQuality() const
 {
 	return MIN_REFRACTION_QUALITY;
 }
 
-const unsigned int RenderStorage::getMinAnisotropicFilteringQuality() const
+const int RenderStorage::getMinAnisotropicFilteringQuality() const
 {
 	return MIN_ANISOTROPIC_FILTERING_QUALITY;
 }
 
-const unsigned int RenderStorage::getMaxBloomQuality() const
+const int RenderStorage::getMaxBloomQuality() const
 {
 	return MAX_BLOOM_QUALITY;
 }
 
-const unsigned int RenderStorage::getMaxDofQuality() const
+const int RenderStorage::getMaxDofQuality() const
 {
 	return MAX_DOF_QUALITY;
 }
 
-const unsigned int RenderStorage::getMaxMotionBlurQuality() const
+const int RenderStorage::getMaxMotionBlurQuality() const
 {
 	return MAX_MOTION_BLUR_QUALITY;
 }
 
-const unsigned int RenderStorage::getMaxShadowQuality() const
+const int RenderStorage::getMaxShadowQuality() const
 {
 	return MAX_SHADOW_QUALITY;
 }
 
-const unsigned int RenderStorage::getMaxReflectionQuality() const
+const int RenderStorage::getMaxReflectionQuality() const
 {
 	return MAX_REFLECTION_QUALITY;
 }
 
-const unsigned int RenderStorage::getMaxRefractionQuality() const
+const int RenderStorage::getMaxRefractionQuality() const
 {
 	return MAX_REFRACTION_QUALITY;
 }
 
-const unsigned int RenderStorage::getMaxAnisotropicFilteringQuality() const
+const int RenderStorage::getMaxAnisotropicFilteringQuality() const
 {
 	return MAX_ANISOTROPIC_FILTERING_QUALITY;
 }

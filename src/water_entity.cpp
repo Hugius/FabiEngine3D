@@ -190,7 +190,7 @@ const fvec2 & WaterEntity::getRippleOffset() const
 	return _rippleOffset;
 }
 
-const unsigned int WaterEntity::getTextureRepeat() const
+const int WaterEntity::getTextureRepeat() const
 {
 	return _textureRepeat;
 }

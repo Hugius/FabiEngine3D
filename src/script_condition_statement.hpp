@@ -11,7 +11,7 @@ public:
 	void setFalse();
 	void setType(ScriptConditionType type);
 
-	const unsigned int getScopeDepth() const;
+	const int getScopeDepth() const;
 
 	const bool isTrue() const;
 	const bool isFalse() const;
@@ -19,7 +19,7 @@ public:
 	const ScriptConditionType getType() const;
 
 private:
-	const unsigned int _scopeDepth;
+	const int _scopeDepth;
 
 	bool _conditionResult = false;
 

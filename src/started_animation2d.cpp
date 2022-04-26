@@ -7,27 +7,27 @@ const int StartedAnimation2d::getPlayCount() const
 	return _playCount;
 }
 
-const unsigned int StartedAnimation2d::getUpdateCount() const
+const int StartedAnimation2d::getUpdateCount() const
 {
 	return _updateCount;
 }
 
-const unsigned int StartedAnimation2d::getRowIndex() const
+const int StartedAnimation2d::getRowIndex() const
 {
 	return _rowIndex;
 }
 
-const unsigned int StartedAnimation2d::getColumnIndex() const
+const int StartedAnimation2d::getColumnIndex() const
 {
 	return _columnIndex;
 }
 
-const unsigned int StartedAnimation2d::getIntervalMultiplier() const
+const int StartedAnimation2d::getIntervalMultiplier() const
 {
 	return _intervalMultiplier;
 }
 
-const unsigned int StartedAnimation2d::getIntervalDivider() const
+const int StartedAnimation2d::getIntervalDivider() const
 {
 	return _intervalDivider;
 }

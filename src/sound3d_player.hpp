@@ -32,8 +32,8 @@ public:
 	const float getSoundLeftIntensity(const string & id, unsigned int index) const;
 	const float getSoundRightIntensity(const string & id, unsigned int index) const;
 
-	const unsigned int getStartedSoundCount(const string & id) const;
-	const unsigned int getSoundTime(const string & id, unsigned int index) const;
+	const int getStartedSoundCount(const string & id) const;
+	const int getSoundTime(const string & id, unsigned int index) const;
 
 	const int getPlayCount(const string & id, unsigned int index) const;
 

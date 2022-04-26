@@ -140,10 +140,10 @@ public:
 	const float terrain_getPixelHeight(const string & id, float x, float z) const;
 	const float terrain_getSpecularShininess(const string & id) const;
 	const float terrain_getSpecularIntensity(const string & id) const;
-	const unsigned int terrain_getTextureRepeat(const string & id) const;
-	const unsigned int terrain_getRedTextureRepeat(const string & id) const;
-	const unsigned int terrain_getGreenTextureRepeat(const string & id) const;
-	const unsigned int terrain_getBlueTextureRepeat(const string & id) const;
+	const int terrain_getTextureRepeat(const string & id) const;
+	const int terrain_getRedTextureRepeat(const string & id) const;
+	const int terrain_getGreenTextureRepeat(const string & id) const;
+	const int terrain_getBlueTextureRepeat(const string & id) const;
 	const bool terrain_isExisting(const string & id) const;
 	const bool terrain_isVisible(const string & id) const;
 	const bool terrain_isSpecular(const string & id) const;
@@ -202,7 +202,7 @@ public:
 	const float water_getWaveHeight(const string & id) const;
 	const float water_getSpecularShininess(const string & id) const;
 	const float water_getSpecularIntensity(const string & id) const;
-	const unsigned int water_getTextureRepeat(const string & id) const;
+	const int water_getTextureRepeat(const string & id) const;
 	const bool water_isEdged(const string & id) const;
 	const bool water_isExisting(const string & id) const;
 	const bool water_isVisible(const string & id) const;
@@ -307,8 +307,8 @@ public:
 	const float model_getMinTextureAlpha(const string & modelId, const string & partId) const;
 	const float model_getAnimationSpeedMultiplier(const string & modelId, const string & animationId) const;
 	const int model_getAnimationPlayCount(const string & modelId, const string & animationId) const;
-	const unsigned int model_getTextureRepeat(const string & modelId, const string & partId) const;
-	const unsigned int model_getAnimationFrameIndex(const string & modelId, const string & animationId) const;
+	const int model_getTextureRepeat(const string & modelId, const string & partId) const;
+	const int model_getAnimationFrameIndex(const string & modelId, const string & animationId) const;
 	const bool model_isExisting(const string & id) const;
 	const bool model_isVisible(const string & id) const;
 	const bool model_isMultiParted(const string & id) const;
@@ -396,11 +396,11 @@ public:
 	const float quad3d_getEmissionIntensity(const string & id) const;
 	const float quad3d_getMinTextureAlpha(const string & id) const;
 	const int quad3d_getAnimationPlayCount(const string & quadId, const string & animationId) const;
-	const unsigned int quad3d_getTextureRepeat(const string & id) const;
-	const unsigned int quad3d_getAnimationRowIndex(const string & quadId, const string & animationId) const;
-	const unsigned int quad3d_getAnimationColumnIndex(const string & quadId, const string & animationId) const;
-	const unsigned int quad3d_getAnimationIntervalMultiplier(const string & quadId, const string & animationId) const;
-	const unsigned int quad3d_getAnimationIntervalDivider(const string & quadId, const string & animationId) const;
+	const int quad3d_getTextureRepeat(const string & id) const;
+	const int quad3d_getAnimationRowIndex(const string & quadId, const string & animationId) const;
+	const int quad3d_getAnimationColumnIndex(const string & quadId, const string & animationId) const;
+	const int quad3d_getAnimationIntervalMultiplier(const string & quadId, const string & animationId) const;
+	const int quad3d_getAnimationIntervalDivider(const string & quadId, const string & animationId) const;
 	const bool quad3d_isExisting(const string & id) const;
 	const bool quad3d_isVisible(const string & id) const;
 	const bool quad3d_isFacingCameraHorizontally(const string & id) const;
@@ -564,11 +564,11 @@ public:
 	const float quad2d_getRotation(const string & id) const;
 	const float quad2d_getOpacity(const string & id) const;
 	const int quad2d_getAnimationPlayCount(const string & quadId, const string & animationId) const;
-	const unsigned int quad2d_getTextureRepeat(const string & id) const;
-	const unsigned int quad2d_getAnimationRowIndex(const string & quadId, const string & animationId) const;
-	const unsigned int quad2d_getAnimationColumnIndex(const string & quadId, const string & animationId) const;
-	const unsigned int quad2d_getAnimationIntervalMultiplier(const string & quadId, const string & animationId) const;
-	const unsigned int quad2d_getAnimationIntervalDivider(const string & quadId, const string & animationId) const;
+	const int quad2d_getTextureRepeat(const string & id) const;
+	const int quad2d_getAnimationRowIndex(const string & quadId, const string & animationId) const;
+	const int quad2d_getAnimationColumnIndex(const string & quadId, const string & animationId) const;
+	const int quad2d_getAnimationIntervalMultiplier(const string & quadId, const string & animationId) const;
+	const int quad2d_getAnimationIntervalDivider(const string & quadId, const string & animationId) const;
 	const bool quad2d_isExisting(const string & id) const;
 	const bool quad2d_isVisible(const string & id) const;
 	const bool quad2d_isCentered(const string & id) const;
@@ -636,7 +636,7 @@ public:
 	const fvec3 & pointlight_getRadius(const string & id) const;
 	const fvec3 & pointlight_getColor(const string & id) const;
 	const float pointlight_getIntensity(const string & id) const;
-	const unsigned int pointlight_getMaxEntityCount() const;
+	const int pointlight_getMaxEntityCount() const;
 	const bool pointlight_isExisting(const string & id) const;
 	const bool pointlight_isVisible(const string & id) const;
 	const PointlightType pointlight_getShape(const string & id) const;
@@ -663,7 +663,7 @@ public:
 	const float spotlight_getIntensity(const string & id) const;
 	const float spotlight_getAngle(const string & id) const;
 	const float spotlight_getDistance(const string & id) const;
-	const unsigned int spotlight_getMaxEntityCount() const;
+	const int spotlight_getMaxEntityCount() const;
 	const bool spotlight_isExisting(const string & id) const;
 	const bool spotlight_isVisible(const string & id) const;
 
@@ -703,7 +703,7 @@ public:
 	const fvec3 & animation3d_getSpeed(const string & animationId, unsigned int frameIndex, const string & partId) const;
 	const SpeedType & animation3d_getSpeedType(const string & animationId, unsigned int frameIndex, const string & partId) const;
 	const TransformationType & animation3d_getTransformationType(const string & animationId, unsigned int frameIndex, const string & partId) const;
-	const unsigned int animation3d_getFrameCount(const string & animationId);
+	const int animation3d_getFrameCount(const string & animationId);
 	const bool animation3d_isExisting(const string & id) const;
 
 	void animation2d_create(const string & id);
@@ -713,9 +713,9 @@ public:
 	void animation2d_setInterval(const string & id, int value);
 
 	const vector<string> animation2d_getIds() const;
-	const unsigned int animation2d_getRowCount(const string & id) const;
-	const unsigned int animation2d_getColumnCount(const string & id) const;
-	const unsigned int animation2d_getInterval(const string & id) const;
+	const int animation2d_getRowCount(const string & id) const;
+	const int animation2d_getColumnCount(const string & id) const;
+	const int animation2d_getInterval(const string & id) const;
 	const bool animation2d_isExisting(const string & id) const;
 
 	void sound3d_create(const string & id, const string & audioPath);
@@ -738,8 +738,8 @@ public:
 	const float sound3d_getVolume(const string & id, unsigned int index) const;
 	const float sound3d_getLeftIntensity(const string & id, unsigned int index) const;
 	const float sound3d_getRightIntensity(const string & id, unsigned int index) const;
-	const unsigned int sound3d_getStartedCount(const string & id) const;
-	const unsigned int sound3d_getTime(const string & id, unsigned int index) const;
+	const int sound3d_getStartedCount(const string & id) const;
+	const int sound3d_getTime(const string & id, unsigned int index) const;
 	const bool sound3d_isExisting(const string & id) const;
 	const bool sound3d_isStarted(const string & id, unsigned int index) const;
 	const bool sound3d_isPaused(const string & id, unsigned int index) const;
@@ -760,8 +760,8 @@ public:
 	const float sound2d_getVolume(const string & id, unsigned int index) const;
 	const float sound2d_getLeftIntensity(const string & id, unsigned int index) const;
 	const float sound2d_getRightIntensity(const string & id, unsigned int index) const;
-	const unsigned int sound2d_getStartedCount(const string & id) const;
-	const unsigned int sound2d_getTime(const string & id, unsigned int index) const;
+	const int sound2d_getStartedCount(const string & id) const;
+	const int sound2d_getTime(const string & id, unsigned int index) const;
 	const bool sound2d_isExisting(const string & id) const;
 	const bool sound2d_isStarted(const string & id, unsigned int index) const;
 	const bool sound2d_isPaused(const string & id, unsigned int index) const;
@@ -839,16 +839,16 @@ public:
 	const float graphics_getLensFlareIntensity() const;
 	const float graphics_getLensFlareSensitivity() const;
 	const float graphics_getMotionBlurIntensity() const;
-	const unsigned int graphics_getBloomQuality() const;
-	const unsigned int graphics_getDofQuality() const;
-	const unsigned int graphics_getMotionBlurQuality() const;
-	const unsigned int graphics_getAnisotropicFilteringQuality() const;
-	const unsigned int graphics_getShadowQuality() const;
-	const unsigned int graphics_getCubeReflectionQuality() const;
-	const unsigned int graphics_getPlanarReflectionQuality() const;
-	const unsigned int graphics_getPlanarRefractionQuality() const;
-	const unsigned int graphics_getBloomBlurCount() const;
-	const unsigned int graphics_getShadowInterval() const;
+	const int graphics_getBloomQuality() const;
+	const int graphics_getDofQuality() const;
+	const int graphics_getMotionBlurQuality() const;
+	const int graphics_getAnisotropicFilteringQuality() const;
+	const int graphics_getShadowQuality() const;
+	const int graphics_getCubeReflectionQuality() const;
+	const int graphics_getPlanarReflectionQuality() const;
+	const int graphics_getPlanarRefractionQuality() const;
+	const int graphics_getBloomBlurCount() const;
+	const int graphics_getShadowInterval() const;
 	const bool graphics_isAntiAliasingEnabled() const;
 	const bool graphics_isAmbientLightingEnabled() const;
 	const bool graphics_isDirectionalLightingEnabled() const;
@@ -973,7 +973,7 @@ public:
 	const string server_getNewClientUsername() const;
 	const string server_getOldClientIp() const;
 	const string server_getOldClientUsername() const;
-	const unsigned int server_getMaxMessageSize() const;
+	const int server_getMaxMessageSize() const;
 	const bool server_isRunning() const;
 	const bool server_isClientConnected(const string & username) const;
 	const bool server_isMessageReserved(const string & message);
@@ -988,9 +988,9 @@ public:
 	const vector<NetworkingServerMessage> client_getPendingMessages() const;
 	const string client_getUsername() const;
 	const string client_getServerIp() const;
-	const unsigned int client_getPingLatency() const;
-	const unsigned int client_getMaxUsernameSize() const;
-	const unsigned int client_getMaxMessageSize() const;
+	const int client_getPingLatency() const;
+	const int client_getMaxUsernameSize() const;
+	const int client_getMaxMessageSize() const;
 	const bool client_isValidIp(const string & ip) const;
 	const bool client_isRunning() const;
 	const bool client_isConnectingToServer() const;
@@ -1034,9 +1034,9 @@ public:
 	const string misc_getGpuName() const;
 	const string misc_getOpenglVersion() const;
 	const float misc_getTotalDeltaTime() const;
-	const unsigned int misc_getTriangleCount() const;
-	const unsigned int misc_getUpdateCountPerSecond() const;
-	const unsigned int misc_getPassedUpdateCount() const;
+	const int misc_getTriangleCount() const;
+	const int misc_getUpdateCountPerSecond() const;
+	const int misc_getPassedUpdateCount() const;
 	const bool misc_isVsyncEnabled() const;
 
 private:

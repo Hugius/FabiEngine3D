@@ -128,12 +128,12 @@ const float EngineInterface::sound3d_getRightIntensity(const string & id, unsign
 	return _core->getSound3dPlayer()->getSoundRightIntensity(id, index);
 }
 
-const unsigned int EngineInterface::sound3d_getStartedCount(const string & id) const
+const int EngineInterface::sound3d_getStartedCount(const string & id) const
 {
 	return _core->getSound3dPlayer()->getStartedSoundCount(id);
 }
 
-const unsigned int EngineInterface::sound3d_getTime(const string & id, unsigned int index) const
+const int EngineInterface::sound3d_getTime(const string & id, unsigned int index) const
 {
 	return _core->getSound3dPlayer()->getSoundTime(id, index);
 }

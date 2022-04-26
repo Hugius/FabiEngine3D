@@ -102,17 +102,17 @@ void EngineInterface::misc_cacheAudios(const vector<string> & filePaths, bool is
 	_core->getAudioLoader()->cacheAudios(filePaths, isCrucial);
 }
 
-const unsigned int EngineInterface::misc_getTriangleCount() const
+const int EngineInterface::misc_getTriangleCount() const
 {
 	return _core->getRenderStorage()->getTriangleCount();
 }
 
-const unsigned int EngineInterface::misc_getUpdateCountPerSecond() const
+const int EngineInterface::misc_getUpdateCountPerSecond() const
 {
 	return _core->getTimer()->getUpdateCountPerSecond();
 }
 
-const unsigned int EngineInterface::misc_getPassedUpdateCount() const
+const int EngineInterface::misc_getPassedUpdateCount() const
 {
 	return _core->getTimer()->getPassedUpdateCount();
 }

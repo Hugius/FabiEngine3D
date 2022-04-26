@@ -20,7 +20,7 @@ const bool ScriptInterpreter::mustStopApplication() const
 	return _mustStopApplication;
 }
 
-const unsigned int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
+const int ScriptInterpreter::_countLeadingSpaces(const string & scriptLineText)
 {
 	int countedSpaces = 0;
 
@@ -49,7 +49,7 @@ const unsigned int ScriptInterpreter::_countLeadingSpaces(const string & scriptL
 
 const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string & scriptLineText, unsigned int & scopeDepth)
 {
-	const unsigned int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
+	const int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
 	const bool isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
 
 	if(_hasPassedLoopStatement && isScopeDepthInvalid)

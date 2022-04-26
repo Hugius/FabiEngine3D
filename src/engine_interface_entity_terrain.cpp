@@ -394,7 +394,7 @@ const float EngineInterface::terrain_getMaxHeight(const string & id) const
 	return _core->getTerrainEntityManager()->getEntity(id)->getMaxHeight();
 }
 
-const unsigned int EngineInterface::terrain_getTextureRepeat(const string & id) const
+const int EngineInterface::terrain_getTextureRepeat(const string & id) const
 {
 	return _core->getTerrainEntityManager()->getEntity(id)->getTextureRepeat();
 }
@@ -546,17 +546,17 @@ const fvec3 & EngineInterface::terrain_getMaxClipPosition(const string & id) con
 	return _core->getTerrainEntityManager()->getEntity(id)->getMaxClipPosition();
 }
 
-const unsigned int EngineInterface::terrain_getRedTextureRepeat(const string & id) const
+const int EngineInterface::terrain_getRedTextureRepeat(const string & id) const
 {
 	return _core->getTerrainEntityManager()->getEntity(id)->getRedTextureRepeat();
 }
 
-const unsigned int EngineInterface::terrain_getGreenTextureRepeat(const string & id) const
+const int EngineInterface::terrain_getGreenTextureRepeat(const string & id) const
 {
 	return _core->getTerrainEntityManager()->getEntity(id)->getGreenTextureRepeat();
 }
 
-const unsigned int EngineInterface::terrain_getBlueTextureRepeat(const string & id) const
+const int EngineInterface::terrain_getBlueTextureRepeat(const string & id) const
 {
 	return _core->getTerrainEntityManager()->getEntity(id)->getBlueTextureRepeat();
 }

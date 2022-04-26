@@ -168,12 +168,12 @@ const vector<string> Timer::getClockIds() const
 	return result;
 }
 
-const unsigned int Timer::getUpdateCountPerSecond() const
+const int Timer::getUpdateCountPerSecond() const
 {
 	return UPDATES_PER_SECOND;
 }
 
-const unsigned int Timer::getPassedUpdateCount() const
+const int Timer::getPassedUpdateCount() const
 {
 	return _passedUpdateCount;
 }

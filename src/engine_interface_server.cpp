@@ -76,7 +76,7 @@ const string EngineInterface::server_getOldClientUsername() const
 	return _core->getNetworkingServer()->getOldClientUsername();
 }
 
-const unsigned int EngineInterface::server_getMaxMessageSize() const
+const int EngineInterface::server_getMaxMessageSize() const
 {
 	return _core->getNetworkingHelper()->getMaxMessageSize();
 }

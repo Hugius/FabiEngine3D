@@ -103,12 +103,12 @@ const float EngineInterface::sound2d_getRightIntensity(const string & id, unsign
 	return _core->getSound2dPlayer()->getSoundRightIntensity(id, index);
 }
 
-const unsigned int EngineInterface::sound2d_getStartedCount(const string & id) const
+const int EngineInterface::sound2d_getStartedCount(const string & id) const
 {
 	return _core->getSound2dPlayer()->getStartedSoundCount(id);
 }
 
-const unsigned int EngineInterface::sound2d_getTime(const string & id, unsigned int index) const
+const int EngineInterface::sound2d_getTime(const string & id, unsigned int index) const
 {
 	return _core->getSound2dPlayer()->getSoundTime(id, index);
 }

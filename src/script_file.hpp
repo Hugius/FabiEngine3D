@@ -19,9 +19,9 @@ public:
 	const string & getId() const;
 	const string & getLine(unsigned int index) const;
 
-	const unsigned int getLineCount() const;
-	const unsigned int getCursorLineIndex() const;
-	const unsigned int getCursorCharacterIndex() const;
+	const int getLineCount() const;
+	const int getCursorLineIndex() const;
+	const int getCursorCharacterIndex() const;
 
 private:
 	const string _id;

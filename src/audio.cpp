@@ -28,32 +28,32 @@ const unsigned char * Audio::getSamples() const
 	return _samples;
 }
 
-const unsigned int Audio::getBitsPerSample() const
+const int Audio::getBitsPerSample() const
 {
 	return _bitsPerSample;
 }
 
-const unsigned int Audio::getSampleCount() const
+const int Audio::getSampleCount() const
 {
 	return _sampleCount;
 }
 
-const unsigned int Audio::getByteRate() const
+const int Audio::getByteRate() const
 {
 	return _byteRate;
 }
 
-const unsigned int Audio::getBytesPerBlock() const
+const int Audio::getBytesPerBlock() const
 {
 	return _bytesPerBlock;
 }
 
-const unsigned int Audio::getSampleRate() const
+const int Audio::getSampleRate() const
 {
 	return _sampleRate;
 }
 
-const unsigned int Audio::getChannelCount() const
+const int Audio::getChannelCount() const
 {
 	return _channelCount;
 }

@@ -44,12 +44,12 @@ void Script::clear()
 	_scriptFiles.clear();
 }
 
-const unsigned int Script::getScriptFileCount() const
+const int Script::getScriptFileCount() const
 {
 	return static_cast<int>(_scriptFiles.size());
 }
 
-const unsigned int Script::getTotalLineCount() const
+const int Script::getTotalLineCount() const
 {
 	unsigned int total = 0;
 

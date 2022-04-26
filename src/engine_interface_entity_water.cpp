@@ -280,7 +280,7 @@ const float EngineInterface::water_getSize(const string & id) const
 	return _core->getWaterEntityManager()->getEntity(id)->getSize();
 }
 
-const unsigned int EngineInterface::water_getTextureRepeat(const string & id) const
+const int EngineInterface::water_getTextureRepeat(const string & id) const
 {
 	return _core->getWaterEntityManager()->getEntity(id)->getTextureRepeat();
 }

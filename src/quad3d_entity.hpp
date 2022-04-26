@@ -77,7 +77,7 @@ public:
 	const float getEmissionIntensity() const;
 	const float getMinTextureAlpha() const;
 
-	const unsigned int getTextureRepeat() const;
+	const int getTextureRepeat() const;
 
 	const bool isFacingCameraHorizontally() const;
 	const bool isFacingCameraVertically() const;

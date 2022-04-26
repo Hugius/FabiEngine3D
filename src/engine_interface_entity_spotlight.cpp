@@ -113,7 +113,7 @@ const float EngineInterface::spotlight_getDistance(const string & id) const
 	return _core->getSpotlightEntityManager()->getEntity(id)->getDistance();
 }
 
-const unsigned int EngineInterface::spotlight_getMaxEntityCount() const
+const int EngineInterface::spotlight_getMaxEntityCount() const
 {
 	return _core->getSpotlightEntityManager()->getMaxEntityCount();
 }

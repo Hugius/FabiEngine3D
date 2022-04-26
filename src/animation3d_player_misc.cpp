@@ -65,7 +65,7 @@ const int Animation3dPlayer::getModelAnimationPlayCount(const string & animation
 	return _startedModelAnimations.at(mergedId)->getPlayCount();
 }
 
-const unsigned int Animation3dPlayer::getModelAnimationFrameIndex(const string & animationId, const string & modelId) const
+const int Animation3dPlayer::getModelAnimationFrameIndex(const string & animationId, const string & modelId) const
 {
 	const auto mergedId = Tools::mergeStrings(animationId, modelId, DELIMITER);
 

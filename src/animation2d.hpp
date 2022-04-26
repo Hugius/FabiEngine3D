@@ -15,9 +15,9 @@ public:
 
 	const string & getId() const;
 
-	const unsigned int getRowCount() const;
-	const unsigned int getColumnCount() const;
-	const unsigned int getInterval() const;
+	const int getRowCount() const;
+	const int getColumnCount() const;
+	const int getInterval() const;
 
 private:
 	const string _id;

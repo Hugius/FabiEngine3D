@@ -83,10 +83,10 @@ public:
 	const float getSpecularShininess() const;
 	const float getSpecularIntensity() const;
 
-	const unsigned int getRedTextureRepeat() const;
-	const unsigned int getGreenTextureRepeat() const;
-	const unsigned int getBlueTextureRepeat() const;
-	const unsigned int getTextureRepeat() const;
+	const int getRedTextureRepeat() const;
+	const int getGreenTextureRepeat() const;
+	const int getBlueTextureRepeat() const;
+	const int getTextureRepeat() const;
 
 	const bool isSpecular() const;
 	const bool isWireframed() const;

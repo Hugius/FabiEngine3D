@@ -288,22 +288,22 @@ const fvec3 & TerrainEntity::getMaxClipPosition() const
 	return _maxClipPosition;
 }
 
-const unsigned int TerrainEntity::getTextureRepeat() const
+const int TerrainEntity::getTextureRepeat() const
 {
 	return _textureRepeat;
 }
 
-const unsigned int TerrainEntity::getRedTextureRepeat() const
+const int TerrainEntity::getRedTextureRepeat() const
 {
 	return _redTextureRepeat;
 }
 
-const unsigned int TerrainEntity::getGreenTextureRepeat() const
+const int TerrainEntity::getGreenTextureRepeat() const
 {
 	return _greenTextureRepeat;
 }
 
-const unsigned int TerrainEntity::getBlueTextureRepeat() const
+const int TerrainEntity::getBlueTextureRepeat() const
 {
 	return _blueTextureRepeat;
 }

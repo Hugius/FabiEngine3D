@@ -25,19 +25,19 @@ public:
 	void bind();
 	void unbind();
 
-	const unsigned int getProgramId() const;
-	const unsigned int getUniformId(const string & name);
+	const int getProgramId() const;
+	const int getUniformId(const string & name);
 
 private:
-	void _uploadUniform(const unsigned int & uniformId, const bool & data);
-	void _uploadUniform(const unsigned int & uniformId, const int & data);
-	void _uploadUniform(const unsigned int & uniformId, const float & data);
-	void _uploadUniform(const unsigned int & uniformId, const fvec2 & data);
-	void _uploadUniform(const unsigned int & uniformId, const fvec3 & data);
-	void _uploadUniform(const unsigned int & uniformId, const fvec4 & data);
-	void _uploadUniform(const unsigned int & uniformId, const mat22 & data);
-	void _uploadUniform(const unsigned int & uniformId, const mat33 & data);
-	void _uploadUniform(const unsigned int & uniformId, const mat44 & data);
+	void _uploadUniform(const int & uniformId, const bool & data);
+	void _uploadUniform(const int & uniformId, const int & data);
+	void _uploadUniform(const int & uniformId, const float & data);
+	void _uploadUniform(const int & uniformId, const fvec2 & data);
+	void _uploadUniform(const int & uniformId, const fvec3 & data);
+	void _uploadUniform(const int & uniformId, const fvec4 & data);
+	void _uploadUniform(const int & uniformId, const mat22 & data);
+	void _uploadUniform(const int & uniformId, const mat33 & data);
+	void _uploadUniform(const int & uniformId, const mat44 & data);
 
 	unordered_map<string, unsigned int> _uniformCache = {};
 

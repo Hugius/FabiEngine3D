@@ -22,7 +22,7 @@ void ScriptConditionStatement::setType(ScriptConditionType type)
 	_type = type;
 }
 
-const unsigned int ScriptConditionStatement::getScopeDepth() const
+const int ScriptConditionStatement::getScopeDepth() const
 {
 	return _scopeDepth;
 }

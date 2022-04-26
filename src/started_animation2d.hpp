@@ -16,11 +16,11 @@ public:
 	void setIntervalMultiplier(int value);
 	void setIntervalDivider(int value);
 
-	const unsigned int getUpdateCount() const;
-	const unsigned int getRowIndex() const;
-	const unsigned int getColumnIndex() const;
-	const unsigned int getIntervalMultiplier() const;
-	const unsigned int getIntervalDivider() const;
+	const int getUpdateCount() const;
+	const int getRowIndex() const;
+	const int getColumnIndex() const;
+	const int getIntervalMultiplier() const;
+	const int getIntervalDivider() const;
 
 	const int getPlayCount() const;
 

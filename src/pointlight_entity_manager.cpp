@@ -51,7 +51,7 @@ void PointlightEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const unsigned int PointlightEntityManager::getMaxEntityCount() const
+const int PointlightEntityManager::getMaxEntityCount() const
 {
 	return MAX_ENTITY_COUNT;
 }

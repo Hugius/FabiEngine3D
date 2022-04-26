@@ -36,7 +36,7 @@ public:
 	const string & getUsername() const;
 	const string & getServerIp() const;
 
-	const unsigned int getPingLatency() const;
+	const int getPingLatency() const;
 
 	const bool isValidIp(const string & ip) const;
 	const bool isRunning() const;

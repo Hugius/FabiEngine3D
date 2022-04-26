@@ -19,7 +19,7 @@ public:
 
 	const string & getId() const;
 
-	const unsigned int getValueCount() const;
+	const int getValueCount() const;
 
 	const bool isConstant() const;
 

@@ -11,16 +11,16 @@ public:
 
 	const unsigned char * getPixels() const;
 
-	const unsigned int getWidth() const;
-	const unsigned int getHeight() const;
+	const int getWidth() const;
+	const int getHeight() const;
 
-	const unsigned int getBitsPerPixel() const;
+	const int getBitsPerPixel() const;
 
 private:
 	const unsigned char * _pixels;
 
-	const unsigned int _width;
-	const unsigned int _height;
+	const int _width;
+	const int _height;
 
-	const unsigned int _bitsPerPixel;
+	const int _bitsPerPixel;
 };

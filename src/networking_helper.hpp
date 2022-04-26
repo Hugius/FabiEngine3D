@@ -17,8 +17,8 @@ public:
 	NetworkingHelper();
 	~NetworkingHelper();
 
-	const unsigned int getMaxUsernameSize() const;
-	const unsigned int getMaxMessageSize() const;
+	const int getMaxUsernameSize() const;
+	const int getMaxMessageSize() const;
 
 	const bool isMessageReserved(const string & message) const;
 

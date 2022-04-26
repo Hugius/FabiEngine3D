@@ -17,17 +17,17 @@ const string & Animation2d::getId() const
 	return _id;
 }
 
-const unsigned int Animation2d::getRowCount() const
+const int Animation2d::getRowCount() const
 {
 	return _rowCount;
 }
 
-const unsigned int Animation2d::getColumnCount() const
+const int Animation2d::getColumnCount() const
 {
 	return _columnCount;
 }
 
-const unsigned int Animation2d::getInterval() const
+const int Animation2d::getInterval() const
 {
 	return _interval;
 }

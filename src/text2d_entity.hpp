@@ -59,7 +59,7 @@ public:
 	const float getOpacity() const;
 	const float getRotation() const;
 
-	const unsigned int getDepth() const;
+	const int getDepth() const;
 
 	const bool isWireframed() const;
 	const bool isCentered() const;

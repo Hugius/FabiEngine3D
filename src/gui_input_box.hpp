@@ -27,7 +27,7 @@ public:
 	const fvec2 & getPosition() const;
 	const fvec2 & getSize() const;
 
-	const unsigned int getMaxCharacterCount() const;
+	const int getMaxCharacterCount() const;
 
 	const bool isHovered() const;
 	const bool isHoverable() const;

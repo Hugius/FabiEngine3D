@@ -769,7 +769,7 @@ const float ModelEntity::getOpacity(const string & partId) const
 	return _parts.at(partId)->opacity;
 }
 
-const unsigned int ModelEntity::getTextureRepeat(const string & partId) const
+const int ModelEntity::getTextureRepeat(const string & partId) const
 {
 	return _parts.at(partId)->textureRepeat;
 }

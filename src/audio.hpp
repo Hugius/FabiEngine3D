@@ -8,20 +8,20 @@ public:
 
 	const unsigned char * getSamples() const;
 
-	const unsigned int getSampleCount() const;
-	const unsigned int getByteRate() const;
-	const unsigned int getBytesPerBlock() const;
-	const unsigned int getSampleRate() const;
-	const unsigned int getBitsPerSample() const;
-	const unsigned int getChannelCount() const;
+	const int getSampleCount() const;
+	const int getByteRate() const;
+	const int getBytesPerBlock() const;
+	const int getSampleRate() const;
+	const int getBitsPerSample() const;
+	const int getChannelCount() const;
 
 private:
 	const unsigned char * _samples;
 
-	const unsigned int _sampleCount;
-	const unsigned int _sampleRate;
-	const unsigned int _byteRate;
-	const unsigned int _bytesPerBlock;
-	const unsigned int _bitsPerSample;
-	const unsigned int _channelCount;
+	const int _sampleCount;
+	const int _sampleRate;
+	const int _byteRate;
+	const int _bytesPerBlock;
+	const int _bitsPerSample;
+	const int _channelCount;
 };

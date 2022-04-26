@@ -71,17 +71,17 @@ const string & ScriptFile::getLine(unsigned int index) const
 	}
 }
 
-const unsigned int ScriptFile::getLineCount() const
+const int ScriptFile::getLineCount() const
 {
 	return static_cast<int>(_lines.size());
 }
 
-const unsigned int ScriptFile::getCursorLineIndex() const
+const int ScriptFile::getCursorLineIndex() const
 {
 	return _cursorLineIndex;
 }
 
-const unsigned int ScriptFile::getCursorCharacterIndex() const
+const int ScriptFile::getCursorCharacterIndex() const
 {
 	return _cursorCharacterIndex;
 }

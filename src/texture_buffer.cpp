@@ -85,7 +85,7 @@ TextureBuffer::~TextureBuffer()
 	glDeleteTextures(1, &_tboId);
 }
 
-const unsigned int TextureBuffer::getTboId() const
+const int TextureBuffer::getTboId() const
 {
 	return _tboId;
 }

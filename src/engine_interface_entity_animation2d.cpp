@@ -54,7 +54,7 @@ const vector<string> EngineInterface::animation2d_getIds() const
 	return result;
 }
 
-const unsigned int EngineInterface::animation2d_getInterval(const string & id) const
+const int EngineInterface::animation2d_getInterval(const string & id) const
 {
 	return _core->getAnimation2dManager()->getAnimation(id)->getInterval();
 }
@@ -64,12 +64,12 @@ const bool EngineInterface::animation2d_isExisting(const string & id) const
 	return _core->getAnimation2dManager()->isAnimationExisting(id);
 }
 
-const unsigned int EngineInterface::animation2d_getRowCount(const string & id) const
+const int EngineInterface::animation2d_getRowCount(const string & id) const
 {
 	return _core->getAnimation2dManager()->getAnimation(id)->getRowCount();
 }
 
-const unsigned int EngineInterface::animation2d_getColumnCount(const string & id) const
+const int EngineInterface::animation2d_getColumnCount(const string & id) const
 {
 	return _core->getAnimation2dManager()->getAnimation(id)->getColumnCount();
 }

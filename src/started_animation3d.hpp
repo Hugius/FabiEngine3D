@@ -31,7 +31,7 @@ public:
 
 	const float getSpeedMultiplier() const;
 
-	const unsigned int getFrameIndex() const;
+	const int getFrameIndex() const;
 
 	const int getPlayCount() const;
 

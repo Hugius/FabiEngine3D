@@ -2,7 +2,7 @@
 
 using std::min;
 
-TextureBuffer::TextureBuffer(int tboId)
+TextureBuffer::TextureBuffer(unsigned int tboId)
 	:
 	_tboId(tboId)
 {
@@ -85,7 +85,7 @@ TextureBuffer::~TextureBuffer()
 	glDeleteTextures(1, &_tboId);
 }
 
-const int TextureBuffer::getTboId() const
+const unsigned int TextureBuffer::getTboId() const
 {
 	return _tboId;
 }

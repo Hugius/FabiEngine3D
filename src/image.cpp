@@ -33,9 +33,9 @@ void Image::flipX()
 	const auto size = (_width * _height * byteFormat);
 	auto newPixels = new unsigned char[size];
 
-	for(unsigned y = 0; y < _height; y++)
+	for(int y = 0; y < _height; y++)
 	{
-		for(unsigned x = 0; x < _width; x++)
+		for(int x = 0; x < _width; x++)
 		{
 			const auto index1 = ((x * byteFormat) + (y * _width * byteFormat));
 			const auto index2 = (((_width - x - 1) * byteFormat) + (y * _width * byteFormat));
@@ -66,9 +66,9 @@ void Image::flipY()
 	const auto size = (_width * _height * byteFormat);
 	auto newPixels = new unsigned char[size];
 
-	for(unsigned y = 0; y < _height; y++)
+	for(int y = 0; y < _height; y++)
 	{
-		for(unsigned x = 0; x < _width; x++)
+		for(int x = 0; x < _width; x++)
 		{
 			const auto index1 = ((x * byteFormat) + (y * _width * byteFormat));
 			const auto index2 = ((x * byteFormat) + ((_height - y - 1) * _width * byteFormat));

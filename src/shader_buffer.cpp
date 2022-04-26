@@ -44,12 +44,13 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 	vertexFile.close();
 	fragmentFile.close();
 
-	auto vertexCodeString = vertexStream.str();
-	auto fragmentCodeString = fragmentStream.str();
-	auto vertexCode = vertexCodeString.c_str();
-	auto fragmentCode = fragmentCodeString.c_str();
+	const auto vertexCodeString = vertexStream.str();
+	const auto vertexCode = vertexCodeString.c_str();
+	const auto vertexId = glCreateShader(GL_VERTEX_SHADER);
+	const auto fragmentCodeString = fragmentStream.str();
+	const auto fragmentCode = fragmentCodeString.c_str();
+	const auto fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
 
-	auto vertexId = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexId, 1, &vertexCode, nullptr);
 	glCompileShader(vertexId);
 
@@ -66,7 +67,6 @@ ShaderBuffer::ShaderBuffer(const string & vertexFileName, const string & fragmen
 		abort();
 	}
 
-	auto fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentId, 1, &fragmentCode, nullptr);
 	glCompileShader(fragmentId);
 
@@ -146,7 +146,7 @@ void ShaderBuffer::unbind()
 	glUseProgram(0);
 }
 
-const int ShaderBuffer::getProgramId() const
+const unsigned int ShaderBuffer::getProgramId() const
 {
 	return _programId;
 }

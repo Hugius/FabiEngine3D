@@ -42,7 +42,7 @@ void Sound2dPlayer::startSound(const string & id, int playCount)
 	header->lpData = new char[header->dwBufferLength];
 	header->dwFlags = 0;
 
-	for(int index = 0; index < header->dwBufferLength; index++)
+	for(int index = 0; index < static_cast<int>(header->dwBufferLength); index++)
 	{
 		header->lpData[index] = waveBuffer->getHeader()->lpData[index];
 	}

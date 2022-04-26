@@ -25,7 +25,7 @@ public:
 	void bind();
 	void unbind();
 
-	const int getProgramId() const;
+	const unsigned int getProgramId() const;
 	const int getUniformId(const string & name);
 
 private:
@@ -39,7 +39,7 @@ private:
 	void _uploadUniform(const int & uniformId, const mat33 & data);
 	void _uploadUniform(const int & uniformId, const mat44 & data);
 
-	unordered_map<string, int> _uniformCache = {};
+	unordered_map<string, unsigned int> _uniformCache = {};
 
-	int _programId = 0;
+	unsigned int _programId = 0;
 };

@@ -17,16 +17,18 @@ public:
 	VertexBuffer(float x, float y, float w, float h, bool isCentered);
 	~VertexBuffer();
 
+	const unsigned int getVaoId() const;
+	const unsigned int getVboId() const;
+
 	const int getVertexCount() const;
-	const int getVaoId() const;
-	const int getVboId() const;
 
 	const VertexBufferType getBufferType() const;
 
 private:
+	unsigned int _vaoId = 0;
+	unsigned int _vboId = 0;
+
 	int _vertexCount = 0;
-	int _vaoId = 0;
-	int _vboId = 0;
 
 	VertexBufferType _bufferType = {};
 };

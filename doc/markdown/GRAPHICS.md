@@ -40,7 +40,7 @@
   - Constraints: between `0.0` to `1.0`
 - **Intensity**: the intensity of the light emitted by the directional lighting
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Enabled**: directional lighting is enabled
   - Type: `boolean`
   - Constraints: none
@@ -127,10 +127,10 @@
   - Constraints: none
 - **Size**: the size of the shadowed area
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Lightness**: the lightness of the shadows
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Quality**: the quality of the shadow map
   - Type: `integer`
   - Constraints: between `2048` and `16384`
@@ -155,9 +155,9 @@
 
 #### 2.1.2 Properties
 
-- **Strength**: the strength of the motion blur movement
+- **Intensity**: the intensity of the motion blur movement
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Quality**: the quality of the motion blur effect
   - Type: `integer`
   - Constraints: between `1` and `5`
@@ -176,10 +176,10 @@
 
 - **Dynamic Distance**: the minimum distance where dynamic DOF starts
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Blur Distance**: the minimum distance where the blurring starts
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Quality**: the quality of the DOF effect
   - Type: `integer`
   - Constraints: between `1` and `5`
@@ -208,10 +208,10 @@
   - Constraints: none
 - **Intensity**: the intensity of the lens flare effect
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Sensitivity**: the sensitivity of the lens flare effect
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Enabled**: the lens flare effect is enabled
   - Type: `boolean`
   - Constraints: none
@@ -266,10 +266,10 @@
 
 - **Min Distance**: the minimum distance where the fog starts
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Max Distance**: the minimum distance where the fog ends
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Thickness**: the thickness percentage of the fog
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
@@ -290,10 +290,10 @@
 
 - **Intensity**: the intensity of the sky exposure effect
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Speed**: the speed with which the sky exposure changes
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Enabled**: the sky exposure effect is enabled
   - Type: `boolean`
   - Constraints: none

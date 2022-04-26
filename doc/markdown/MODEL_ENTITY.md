@@ -46,7 +46,7 @@
   - Constraints: none
 - **LOD Distance**: the minimum distance by which the LOD model entity will appear/disappear
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Frozen**: the XYZ position of the mesh is not affected by the camera position
   - Type: `boolean`
   - Constraints: none

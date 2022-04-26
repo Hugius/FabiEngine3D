@@ -95,4 +95,4 @@
 
 - **Editor Speed**: the speed with which the camera moves and the XYZ fields change
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`

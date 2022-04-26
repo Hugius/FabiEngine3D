@@ -44,7 +44,7 @@
   - Constraints: at least `-1`
 - **Speed Multiplier**: the speed multiplier of the animation
   - Type: `decimal`
-  - Constraints: at least `0`
+  - Constraints: at least `0.0`
 - **Frame Index**: the index of the current animation frame
   - Type: `integer`
   - Constraints: at least `0`

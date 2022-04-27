@@ -7,12 +7,12 @@ void Quad3dEditor::_updateLightingMenu()
 
 	if(screen->getId() == "quad3dEditorMenuLighting")
 	{
-		const auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(_currentQuadId);
-		const auto lightness = _fe3d->quad3d_getLightness(_currentQuadId);
-		const auto isBright = _fe3d->quad3d_isBright(_currentQuadId);
-		const auto isReflected = _fe3d->quad3d_isReflected(_currentQuadId);
-		const auto isShadowed = _fe3d->quad3d_isShadowed(_currentQuadId);
-		const auto color = _fe3d->quad3d_getColor(_currentQuadId);
+		const auto emissionIntensity = _fe3d->quad3d_getEmissionIntensity(_currentQuad3dId);
+		const auto lightness = _fe3d->quad3d_getLightness(_currentQuad3dId);
+		const auto isBright = _fe3d->quad3d_isBright(_currentQuad3dId);
+		const auto isReflected = _fe3d->quad3d_isReflected(_currentQuad3dId);
+		const auto isShadowed = _fe3d->quad3d_isShadowed(_currentQuad3dId);
+		const auto color = _fe3d->quad3d_getColor(_currentQuad3dId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -36,46 +36,46 @@ void Quad3dEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
 		{
-			_fe3d->quad3d_setBright(_currentQuadId, !isBright);
+			_fe3d->quad3d_setBright(_currentQuad3dId, !isBright);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isShadowed")->isHovered())
 		{
-			_fe3d->quad3d_setShadowed(_currentQuadId, !isShadowed);
+			_fe3d->quad3d_setShadowed(_currentQuad3dId, !isShadowed);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isReflected")->isHovered())
 		{
-			_fe3d->quad3d_setReflected(_currentQuadId, !isReflected);
+			_fe3d->quad3d_setReflected(_currentQuad3dId, !isReflected);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad3d_setColor(_currentQuadId, fvec3((content / COLOR_MULTIPLIER), color.g, color.b));
+			_fe3d->quad3d_setColor(_currentQuad3dId, fvec3((content / COLOR_MULTIPLIER), color.g, color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad3d_setColor(_currentQuadId, fvec3(color.r, (content / COLOR_MULTIPLIER), color.b));
+			_fe3d->quad3d_setColor(_currentQuad3dId, fvec3(color.r, (content / COLOR_MULTIPLIER), color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad3d_setColor(_currentQuadId, fvec3(color.r, color.g, (content / COLOR_MULTIPLIER)));
+			_fe3d->quad3d_setColor(_currentQuad3dId, fvec3(color.r, color.g, (content / COLOR_MULTIPLIER)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "lightness") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad3d_setLightness(_currentQuadId, (content / 100.0f));
+			_fe3d->quad3d_setLightness(_currentQuad3dId, (content / 100.0f));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "emissionIntensity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad3d_setEmissionIntensity(_currentQuadId, (content / 100.0f));
+			_fe3d->quad3d_setEmissionIntensity(_currentQuad3dId, (content / 100.0f));
 		}
 
 		screen->getButton("isBright")->setTextContent(isBright ? "Bright: ON" : "Bright: OFF");

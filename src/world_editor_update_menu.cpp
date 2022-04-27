@@ -112,18 +112,18 @@ void WorldEditor::_updateChoiceMenu()
 
 			_currentWorldId = "";
 			_currentTemplateModelId = "";
-			_currentTemplateQuadId = "";
+			_currentTemplateQuad3dId = "";
 			_currentTemplateTextId = "";
 			_currentTemplateSoundId = "";
 			_selectedModelId = "";
-			_selectedQuadId = "";
+			_selectedQuad3dId = "";
 			_selectedTextId = "";
 			_selectedPointlightId = "";
 			_selectedSpotlightId = "";
 			_selectedCaptorId = "";
 			_selectedSoundId = "";
 			_activeModelId = "";
-			_activeQuadId = "";
+			_activeQuad3dId = "";
 			_activeTextId = "";
 			_activePointlightId = "";
 			_activeSpotlightId = "";

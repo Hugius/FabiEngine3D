@@ -18,7 +18,7 @@ void ScriptEditor::_createScriptDisplayEntities()
 	_fe3d->quad3d_setColor(separatorId, SEPARATOR_COLOR);
 	_fe3d->quad3d_setBright(separatorId, true);
 
-	_loadedQuadIds.push_back(separatorId);
+	_loadedQuad3dIds.push_back(separatorId);
 
 	for(int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 	{
@@ -36,7 +36,7 @@ void ScriptEditor::_createScriptDisplayEntities()
 		_fe3d->text3d_setColor(lineNumberId, LINE_NUMBER_COLOR);
 		_fe3d->text3d_setBright(lineNumberId, true);
 
-		_loadedTextIds.push_back(lineNumberId);
+		_loadedText3dIds.push_back(lineNumberId);
 
 		const auto lineTextId = ("text_" + to_string(lineIndex));
 		const auto lineTextString = _script->getScriptFile(_currentScriptFileId)->getLine(lineIndex);
@@ -57,7 +57,7 @@ void ScriptEditor::_createScriptDisplayEntities()
 		_fe3d->text3d_setColor(lineTextId, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
 		_fe3d->text3d_setBright(lineTextId, true);
 
-		_loadedTextIds.push_back(lineTextId);
+		_loadedText3dIds.push_back(lineTextId);
 
 		const auto lineAabbId = to_string(lineIndex);
 		const auto lineAabbOffset = fvec3(0.0f, 0.0f, -AABB_DEPTH);
@@ -90,12 +90,12 @@ void ScriptEditor::_createScriptDisplayEntities()
 
 void ScriptEditor::_deleteScriptDisplayEntities()
 {
-	for(const auto & id : _loadedQuadIds)
+	for(const auto & id : _loadedQuad3dIds)
 	{
 		_fe3d->quad3d_delete(id);
 	}
 
-	for(const auto & id : _loadedTextIds)
+	for(const auto & id : _loadedText3dIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
@@ -105,8 +105,8 @@ void ScriptEditor::_deleteScriptDisplayEntities()
 		_fe3d->aabb_delete(id);
 	}
 
-	_loadedQuadIds.clear();
-	_loadedTextIds.clear();
+	_loadedQuad3dIds.clear();
+	_loadedText3dIds.clear();
 	_loadedAabbIds.clear();
 }
 

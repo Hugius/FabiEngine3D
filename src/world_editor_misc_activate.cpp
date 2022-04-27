@@ -20,10 +20,10 @@ void WorldEditor::_activateModel(const string & id)
 
 void WorldEditor::_activateQuad(const string & id)
 {
-	_activeQuadId = id;
+	_activeQuad3dId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	const auto position = _fe3d->quad3d_getPosition(_activeQuadId);
+	const auto position = _fe3d->quad3d_getPosition(_activeQuad3dId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
@@ -33,7 +33,7 @@ void WorldEditor::_activateQuad(const string & id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("quad3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Quad3D: " + _activeQuadId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Quad3D: " + _activeQuad3dId);
 }
 
 void WorldEditor::_activateText(const string & id)
@@ -133,12 +133,12 @@ void WorldEditor::_deactivateModel()
 
 void WorldEditor::_deactivateQuad()
 {
-	if(!_activeQuadId.empty())
+	if(!_activeQuad3dId.empty())
 	{
-		_deselectQuad(_activeQuadId);
+		_deselectQuad(_activeQuad3dId);
 	}
 
-	_activeQuadId = "";
+	_activeQuad3dId = "";
 }
 
 void WorldEditor::_deactivateText()

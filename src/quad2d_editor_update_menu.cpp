@@ -62,18 +62,18 @@ void Quad2dEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "quad2dEditorMenuChoice")
 	{
-		const auto color = _fe3d->quad2d_getColor(_currentQuadId);
-		const auto opacity = _fe3d->quad2d_getOpacity(_currentQuadId);
-		const auto textureRepeat = _fe3d->quad2d_getTextureRepeat(_currentQuadId);
-		const auto isHorizontallyFlipped = _fe3d->quad2d_isHorizontallyFlipped(_currentQuadId);
-		const auto isVerticallyFlipped = _fe3d->quad2d_isVerticallyFlipped(_currentQuadId);
+		const auto color = _fe3d->quad2d_getColor(_currentQuad2dId);
+		const auto opacity = _fe3d->quad2d_getOpacity(_currentQuad2dId);
+		const auto textureRepeat = _fe3d->quad2d_getTextureRepeat(_currentQuad2dId);
+		const auto isHorizontallyFlipped = _fe3d->quad2d_isHorizontallyFlipped(_currentQuad2dId);
+		const auto isVerticallyFlipped = _fe3d->quad2d_isVerticallyFlipped(_currentQuad2dId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->quad2d_setVisible(_currentQuadId, false);
-			_gui->getOverlay()->getTextField("quadId")->setVisible(false);
+			_fe3d->quad2d_setVisible(_currentQuad2dId, false);
+			_gui->getOverlay()->getTextField("quad2dId")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuMain");
-			_currentQuadId = "";
+			_currentQuad2dId = "";
 
 			return;
 		}
@@ -109,7 +109,7 @@ void Quad2dEditor::_updateChoiceMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->quad2d_setDiffuseMap(_currentQuadId, finalFilePath);
+			_fe3d->quad2d_setDiffuseMap(_currentQuad2dId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
@@ -127,42 +127,42 @@ void Quad2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isHorizontallyFlipped")->isHovered())
 		{
-			_fe3d->quad2d_setHorizontallyFlipped(_currentQuadId, !isHorizontallyFlipped);
+			_fe3d->quad2d_setHorizontallyFlipped(_currentQuad2dId, !isHorizontallyFlipped);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isVerticallyFlipped")->isHovered())
 		{
-			_fe3d->quad2d_setVerticallyFlipped(_currentQuadId, !isVerticallyFlipped);
+			_fe3d->quad2d_setVerticallyFlipped(_currentQuad2dId, !isVerticallyFlipped);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad2d_setColor(_currentQuadId, fvec3((content / COLOR_MULTIPLIER), color.g, color.b));
+			_fe3d->quad2d_setColor(_currentQuad2dId, fvec3((content / COLOR_MULTIPLIER), color.g, color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad2d_setColor(_currentQuadId, fvec3(color.r, (content / COLOR_MULTIPLIER), color.b));
+			_fe3d->quad2d_setColor(_currentQuad2dId, fvec3(color.r, (content / COLOR_MULTIPLIER), color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad2d_setColor(_currentQuadId, fvec3(color.r, color.g, (content / COLOR_MULTIPLIER)));
+			_fe3d->quad2d_setColor(_currentQuad2dId, fvec3(color.r, color.g, (content / COLOR_MULTIPLIER)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad2d_setOpacity(_currentQuadId, (content / 100.0f));
+			_fe3d->quad2d_setOpacity(_currentQuad2dId, (content / 100.0f));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "textureRepeat") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad2d_setTextureRepeat(_currentQuadId, content);
+			_fe3d->quad2d_setTextureRepeat(_currentQuad2dId, content);
 		}
 
 		screen->getButton("isHorizontallyFlipped")->setTextContent(isHorizontallyFlipped ? "Flipped X: ON" : "Flipped X: OFF");

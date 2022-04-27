@@ -62,10 +62,10 @@ void Quad3dEditor::_updateChoiceMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->quad3d_setWireframed(_currentQuadId, false);
-			_fe3d->quad3d_setVisible(_currentQuadId, false);
-			_gui->getOverlay()->getTextField("quadId")->setVisible(false);
-			_currentQuadId = "";
+			_fe3d->quad3d_setWireframed(_currentQuad3dId, false);
+			_fe3d->quad3d_setVisible(_currentQuad3dId, false);
+			_gui->getOverlay()->getTextField("quad3dId")->setVisible(false);
+			_currentQuad3dId = "";
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuMain");
 
 			return;

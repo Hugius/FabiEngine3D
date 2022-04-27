@@ -9,9 +9,9 @@ void WorldEditor::_selectModel(const string & id)
 
 void WorldEditor::_selectQuad(const string & id)
 {
-	_selectedQuadId = id;
+	_selectedQuad3dId = id;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Quad3D: " + _selectedQuadId);
+	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Quad3D: " + _selectedQuad3dId);
 }
 
 void WorldEditor::_selectText(const string & id)

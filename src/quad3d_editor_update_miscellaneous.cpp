@@ -7,14 +7,14 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 
 	if(screen->getId() == "quad3dEditorMenuMiscellaneous")
 	{
-		const auto size = _fe3d->quad3d_getSize(_currentQuadId);
-		const auto isFacingCameraHorizontally = _fe3d->quad3d_isFacingCameraHorizontally(_currentQuadId);
-		const auto isFacingCameraVertically = _fe3d->quad3d_isFacingCameraVertically(_currentQuadId);
-		const auto isHorizontallyFlipped = _fe3d->quad3d_isHorizontallyFlipped(_currentQuadId);
-		const auto isVerticallyFlipped = _fe3d->quad3d_isVerticallyFlipped(_currentQuadId);
-		const auto opacity = _fe3d->quad3d_getOpacity(_currentQuadId);
-		const auto minTextureAlpha = _fe3d->quad3d_getMinTextureAlpha(_currentQuadId);
-		const auto rotationOrder = _fe3d->quad3d_getRotationOrder(_currentQuadId);
+		const auto size = _fe3d->quad3d_getSize(_currentQuad3dId);
+		const auto isFacingCameraHorizontally = _fe3d->quad3d_isFacingCameraHorizontally(_currentQuad3dId);
+		const auto isFacingCameraVertically = _fe3d->quad3d_isFacingCameraVertically(_currentQuad3dId);
+		const auto isHorizontallyFlipped = _fe3d->quad3d_isHorizontallyFlipped(_currentQuad3dId);
+		const auto isVerticallyFlipped = _fe3d->quad3d_isVerticallyFlipped(_currentQuad3dId);
+		const auto opacity = _fe3d->quad3d_getOpacity(_currentQuad3dId);
+		const auto minTextureAlpha = _fe3d->quad3d_getMinTextureAlpha(_currentQuad3dId);
+		const auto rotationOrder = _fe3d->quad3d_getRotationOrder(_currentQuad3dId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -29,33 +29,33 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFacingCameraHorizontally")->isHovered())
 		{
-			_fe3d->quad3d_setFacingCameraHorizontally(_currentQuadId, !isFacingCameraHorizontally);
+			_fe3d->quad3d_setFacingCameraHorizontally(_currentQuad3dId, !isFacingCameraHorizontally);
 
 			if(isFacingCameraHorizontally)
 			{
-				auto rotation = _fe3d->quad3d_getRotation(_currentQuadId);
+				auto rotation = _fe3d->quad3d_getRotation(_currentQuad3dId);
 
-				_fe3d->quad3d_setRotation(_currentQuadId, fvec3(0.0f, rotation.y, 0.0f));
+				_fe3d->quad3d_setRotation(_currentQuad3dId, fvec3(0.0f, rotation.y, 0.0f));
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isFacingCameraVertically")->isHovered())
 		{
-			_fe3d->quad3d_setFacingCameraVertically(_currentQuadId, !isFacingCameraVertically);
+			_fe3d->quad3d_setFacingCameraVertically(_currentQuad3dId, !isFacingCameraVertically);
 
 			if(isFacingCameraVertically)
 			{
-				auto rotation = _fe3d->quad3d_getRotation(_currentQuadId);
+				auto rotation = _fe3d->quad3d_getRotation(_currentQuad3dId);
 
-				_fe3d->quad3d_setRotation(_currentQuadId, fvec3(rotation.x, 0.0f, rotation.z));
+				_fe3d->quad3d_setRotation(_currentQuad3dId, fvec3(rotation.x, 0.0f, rotation.z));
 			}
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isHorizontallyFlipped")->isHovered())
 		{
-			_fe3d->quad3d_setHorizontallyFlipped(_currentQuadId, !isHorizontallyFlipped);
+			_fe3d->quad3d_setHorizontallyFlipped(_currentQuad3dId, !isHorizontallyFlipped);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isVerticallyFlipped")->isHovered())
 		{
-			_fe3d->quad3d_setVerticallyFlipped(_currentQuadId, !isVerticallyFlipped);
+			_fe3d->quad3d_setVerticallyFlipped(_currentQuad3dId, !isVerticallyFlipped);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("opacity")->isHovered())
 		{
@@ -71,37 +71,37 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 			{
 				case DirectionOrderType::XYZ:
 				{
-					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::XZY);
+					_fe3d->quad3d_setRotationOrder(_currentQuad3dId, DirectionOrderType::XZY);
 
 					break;
 				}
 				case DirectionOrderType::XZY:
 				{
-					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::YXZ);
+					_fe3d->quad3d_setRotationOrder(_currentQuad3dId, DirectionOrderType::YXZ);
 
 					break;
 				}
 				case DirectionOrderType::YXZ:
 				{
-					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::YZX);
+					_fe3d->quad3d_setRotationOrder(_currentQuad3dId, DirectionOrderType::YZX);
 
 					break;
 				}
 				case DirectionOrderType::YZX:
 				{
-					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::ZXY);
+					_fe3d->quad3d_setRotationOrder(_currentQuad3dId, DirectionOrderType::ZXY);
 
 					break;
 				}
 				case DirectionOrderType::ZXY:
 				{
-					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::ZYX);
+					_fe3d->quad3d_setRotationOrder(_currentQuad3dId, DirectionOrderType::ZYX);
 
 					break;
 				}
 				case DirectionOrderType::ZYX:
 				{
-					_fe3d->quad3d_setRotationOrder(_currentQuadId, DirectionOrderType::XYZ);
+					_fe3d->quad3d_setRotationOrder(_currentQuad3dId, DirectionOrderType::XYZ);
 
 					break;
 				}
@@ -112,25 +112,25 @@ void Quad3dEditor::_updateMiscellaneousMenu()
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad3d_setSize(_currentQuadId, fvec2((content / 100.0f), size.y));
+			_fe3d->quad3d_setSize(_currentQuad3dId, fvec2((content / 100.0f), size.y));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "sizeY") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad3d_setSize(_currentQuadId, fvec2(size.x, (content / 100.0f)));
+			_fe3d->quad3d_setSize(_currentQuad3dId, fvec2(size.x, (content / 100.0f)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad3d_setOpacity(_currentQuadId, (content / 100.0f));
+			_fe3d->quad3d_setOpacity(_currentQuad3dId, (content / 100.0f));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "minTextureAlpha") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad3d_setMinTextureAlpha(_currentQuadId, (content / 100.0f));
+			_fe3d->quad3d_setMinTextureAlpha(_currentQuad3dId, (content / 100.0f));
 		}
 
 		screen->getButton("isFacingCameraHorizontally")->setTextContent(isFacingCameraHorizontally ? "Facing X: ON" : "Facing X: OFF");

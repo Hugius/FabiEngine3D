@@ -175,12 +175,12 @@ const bool WorldEditor::saveWorldToFile() const
 		file << endl;
 	}
 
-	for(const auto & [quadId, templateId] : _loadedQuadIds)
+	for(const auto & [quad3dId, templateId] : _loadedQuad3dIds)
 	{
-		auto startedAnimationIds = _fe3d->quad3d_getAnimationIds(quadId);
-		auto position = _fe3d->quad3d_getPosition(quadId);
-		auto rotation = _fe3d->quad3d_getRotation(quadId);
-		auto size = _fe3d->quad3d_getSize(quadId);
+		auto startedAnimationIds = _fe3d->quad3d_getAnimationIds(quad3dId);
+		auto position = _fe3d->quad3d_getPosition(quad3dId);
+		auto rotation = _fe3d->quad3d_getRotation(quad3dId);
+		auto size = _fe3d->quad3d_getSize(quad3dId);
 		auto animationId = (startedAnimationIds.empty() ? "" : startedAnimationIds[0]);
 
 		animationId = (animationId.empty()) ? "?" : animationId;
@@ -189,7 +189,7 @@ const bool WorldEditor::saveWorldToFile() const
 
 		file
 			<< "QUAD3D "
-			<< quadId
+			<< quad3dId
 			<< " "
 			<< templateId
 			<< " "

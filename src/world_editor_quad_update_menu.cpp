@@ -11,10 +11,10 @@ void WorldEditor::_updateQuad3dMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateQuadId.empty())
+			if(!_currentTemplateQuad3dId.empty())
 			{
-				_fe3d->quad3d_setVisible(_currentTemplateQuadId, false);
-				_currentTemplateQuadId = "";
+				_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, false);
+				_currentTemplateQuad3dId = "";
 			}
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -31,13 +31,13 @@ void WorldEditor::_updateQuad3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quadList")->deleteOptions();
 
-			for(auto & [placedId, templateId] : _loadedQuadIds)
+			for(auto & [placedId, templateId] : _loadedQuad3dIds)
 			{
 				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quadList")->createOption(placedId, placedId);
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateQuadId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateQuad3dId.empty());
 	}
 }
 
@@ -67,13 +67,13 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 				_deactivatePointlight();
 				_deactivateCaptor();
 
-				_currentTemplateQuadId = hoveredOptionId;
-				_fe3d->quad3d_setVisible(_currentTemplateQuadId, true);
+				_currentTemplateQuad3dId = hoveredOptionId;
+				_fe3d->quad3d_setVisible(_currentTemplateQuad3dId, true);
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
-					_fe3d->quad3d_setPosition(_currentTemplateQuadId, fvec3(0.0f));
+					_fe3d->quad3d_setPosition(_currentTemplateQuad3dId, fvec3(0.0f));
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);

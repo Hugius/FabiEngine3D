@@ -196,7 +196,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "QUAD3D")
 		{
-			string quadId;
+			string quad3dId;
 			string templateId;
 			string animationId;
 			fvec3 position;
@@ -204,7 +204,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			fvec2 size;
 
 			iss
-				>> quadId
+				>> quad3dId
 				>> templateId
 				>> position.x
 				>> position.y
@@ -225,17 +225,17 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_loadedQuadIds.insert({quadId, templateId});
+			_loadedQuad3dIds.insert({quad3dId, templateId});
 
-			_worldHelper->copyTemplateQuad(quadId, templateId);
+			_worldHelper->copyTemplateQuad(quad3dId, templateId);
 
-			_fe3d->quad3d_setPosition(quadId, position);
-			_fe3d->quad3d_setRotation(quadId, rotation);
-			_fe3d->quad3d_setSize(quadId, size);
+			_fe3d->quad3d_setPosition(quad3dId, position);
+			_fe3d->quad3d_setRotation(quad3dId, rotation);
+			_fe3d->quad3d_setSize(quad3dId, size);
 
 			if(_fe3d->animation2d_isExisting(animationId))
 			{
-				_fe3d->quad3d_startAnimation(quadId, animationId, -1);
+				_fe3d->quad3d_startAnimation(quad3dId, animationId, -1);
 			}
 		}
 		else if(lineType == "TEXT3D")

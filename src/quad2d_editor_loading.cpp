@@ -30,13 +30,13 @@ const vector<string> Quad2dEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string quadId;
+		string quad2dId;
 		string diffuseMapPath;
 
 		istringstream iss(line);
 
 		iss
-			>> quadId
+			>> quad2dId
 			>> diffuseMapPath;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -81,7 +81,7 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string quadId;
+		string quad2dId;
 		string diffuseMapPath;
 		fvec3 color;
 		float opacity;
@@ -92,7 +92,7 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 		istringstream iss(line);
 
 		iss
-			>> quadId
+			>> quad2dId
 			>> diffuseMapPath
 			>> color.r
 			>> color.g
@@ -106,21 +106,21 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
-		_fe3d->quad2d_create(quadId, true);
+		_fe3d->quad2d_create(quad2dId, true);
 
-		if(_fe3d->quad2d_isExisting(quadId))
+		if(_fe3d->quad2d_isExisting(quad2dId))
 		{
-			_loadedEntityIds.push_back(quadId);
+			_loadedEntityIds.push_back(quad2dId);
 			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
-			_fe3d->quad2d_setVisible(quadId, false);
-			_fe3d->quad2d_setPosition(quadId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-			_fe3d->quad2d_setSize(quadId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
-			_fe3d->quad2d_setColor(quadId, color);
-			_fe3d->quad2d_setOpacity(quadId, opacity);
-			_fe3d->quad2d_setTextureRepeat(quadId, textureRepeat);
-			_fe3d->quad2d_setHorizontallyFlipped(quadId, isHorizontallyFlipped);
-			_fe3d->quad2d_setVerticallyFlipped(quadId, isVerticallyFlipped);
+			_fe3d->quad2d_setVisible(quad2dId, false);
+			_fe3d->quad2d_setPosition(quad2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
+			_fe3d->quad2d_setSize(quad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->quad2d_setColor(quad2dId, color);
+			_fe3d->quad2d_setOpacity(quad2dId, opacity);
+			_fe3d->quad2d_setTextureRepeat(quad2dId, textureRepeat);
+			_fe3d->quad2d_setHorizontallyFlipped(quad2dId, isHorizontallyFlipped);
+			_fe3d->quad2d_setVerticallyFlipped(quad2dId, isVerticallyFlipped);
 
 			if(!diffuseMapPath.empty())
 			{
@@ -129,7 +129,7 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 					diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 				}
 
-				_fe3d->quad2d_setDiffuseMap(quadId, diffuseMapPath);
+				_fe3d->quad2d_setDiffuseMap(quad2dId, diffuseMapPath);
 			}
 		}
 	}

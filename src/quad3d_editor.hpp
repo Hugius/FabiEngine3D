@@ -48,6 +48,6 @@ private:
 
 	vector<string> _loadedEntityIds = {};
 
-	string _hoveredQuadId = "";
-	string _currentQuadId = "";
+	string _hoveredQuad3dId = "";
+	string _currentQuad3dId = "";
 };

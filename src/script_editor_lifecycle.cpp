@@ -33,12 +33,12 @@ void ScriptEditor::_load()
 
 void ScriptEditor::_unload()
 {
-	for(const auto & id : _loadedQuadIds)
+	for(const auto & id : _loadedQuad3dIds)
 	{
 		_fe3d->quad3d_delete(id);
 	}
 
-	for(const auto & id : _loadedTextIds)
+	for(const auto & id : _loadedText3dIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
@@ -64,8 +64,8 @@ void ScriptEditor::_unload()
 
 	_script->clear();
 
-	_loadedQuadIds.clear();
-	_loadedTextIds.clear();
+	_loadedQuad3dIds.clear();
+	_loadedText3dIds.clear();
 	_loadedAabbIds.clear();
 	_currentScriptFileId = "";
 	_firstSelectionAabbId = "";

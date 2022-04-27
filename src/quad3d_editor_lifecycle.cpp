@@ -47,7 +47,7 @@ void Quad3dEditor::_load()
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
-	_gui->getOverlay()->createTextField("quadId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("quad3dId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void Quad3dEditor::_unload()
@@ -80,7 +80,7 @@ void Quad3dEditor::_unload()
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
 
-	_gui->getOverlay()->deleteTextField("quadId");
+	_gui->getOverlay()->deleteTextField("quad3dId");
 
 	_loadedEntityIds.clear();
 }

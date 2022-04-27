@@ -31,14 +31,14 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string quadId;
+		string quad3dId;
 		string diffuseMapPath;
 		string emissionMapPath;
 
 		istringstream iss(line);
 
 		iss
-			>> quadId
+			>> quad3dId
 			>> diffuseMapPath
 			>> emissionMapPath;
 
@@ -96,7 +96,7 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string quadId;
+		string quad3dId;
 		string diffuseMapPath;
 		string emissionMapPath;
 		fvec2 size;
@@ -119,7 +119,7 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		istringstream iss(line);
 
 		iss
-			>> quadId
+			>> quad3dId
 			>> diffuseMapPath
 			>> emissionMapPath
 			>> size.x
@@ -148,32 +148,32 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-		_loadedEntityIds.push_back(quadId);
+		_loadedEntityIds.push_back(quad3dId);
 		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
 
-		_fe3d->quad3d_create(quadId, false);
-		_fe3d->quad3d_setVisible(quadId, false);
-		_fe3d->quad3d_setSize(quadId, size);
-		_fe3d->quad3d_setColor(quadId, color);
-		_fe3d->quad3d_setLightness(quadId, lightness);
-		_fe3d->quad3d_setFacingCameraHorizontally(quadId, isFacingCameraHorizontally);
-		_fe3d->quad3d_setFacingCameraVertically(quadId, isFacingCameraVertically);
-		_fe3d->quad3d_setHorizontallyFlipped(quadId, isHorizontallyFlipped);
-		_fe3d->quad3d_setVerticallyFlipped(quadId, isVerticallyFlipped);
-		_fe3d->quad3d_setShadowed(quadId, isShadowed);
-		_fe3d->quad3d_setReflected(quadId, isReflected);
-		_fe3d->quad3d_setTextureRepeat(quadId, textureRepeat);
-		_fe3d->quad3d_setBright(quadId, isBright);
-		_fe3d->quad3d_setOpacity(quadId, opacity);
-		_fe3d->quad3d_setEmissionIntensity(quadId, emissionIntensity);
-		_fe3d->quad3d_setMinTextureAlpha(quadId, minTextureAlpha);
-		_fe3d->quad3d_setRotationOrder(quadId, DirectionOrderType(rotationOrder));
+		_fe3d->quad3d_create(quad3dId, false);
+		_fe3d->quad3d_setVisible(quad3dId, false);
+		_fe3d->quad3d_setSize(quad3dId, size);
+		_fe3d->quad3d_setColor(quad3dId, color);
+		_fe3d->quad3d_setLightness(quad3dId, lightness);
+		_fe3d->quad3d_setFacingCameraHorizontally(quad3dId, isFacingCameraHorizontally);
+		_fe3d->quad3d_setFacingCameraVertically(quad3dId, isFacingCameraVertically);
+		_fe3d->quad3d_setHorizontallyFlipped(quad3dId, isHorizontallyFlipped);
+		_fe3d->quad3d_setVerticallyFlipped(quad3dId, isVerticallyFlipped);
+		_fe3d->quad3d_setShadowed(quad3dId, isShadowed);
+		_fe3d->quad3d_setReflected(quad3dId, isReflected);
+		_fe3d->quad3d_setTextureRepeat(quad3dId, textureRepeat);
+		_fe3d->quad3d_setBright(quad3dId, isBright);
+		_fe3d->quad3d_setOpacity(quad3dId, opacity);
+		_fe3d->quad3d_setEmissionIntensity(quad3dId, emissionIntensity);
+		_fe3d->quad3d_setMinTextureAlpha(quad3dId, minTextureAlpha);
+		_fe3d->quad3d_setRotationOrder(quad3dId, DirectionOrderType(rotationOrder));
 
 		if(hasAabb)
 		{
-			_fe3d->aabb_create(quadId, false);
-			_fe3d->aabb_setParentId(quadId, quadId);
-			_fe3d->aabb_setParentType(quadId, AabbParentType::QUAD3D);
+			_fe3d->aabb_create(quad3dId, false);
+			_fe3d->aabb_setParentId(quad3dId, quad3dId);
+			_fe3d->aabb_setParentType(quad3dId, AabbParentType::QUAD3D);
 		}
 
 		if(!diffuseMapPath.empty())
@@ -183,7 +183,7 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 				diffuseMapPath = ("projects\\" + getCurrentProjectId() + "\\" + diffuseMapPath);
 			}
 
-			_fe3d->quad3d_setDiffuseMap(quadId, diffuseMapPath);
+			_fe3d->quad3d_setDiffuseMap(quad3dId, diffuseMapPath);
 		}
 
 		if(!emissionMapPath.empty())
@@ -193,7 +193,7 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 				emissionMapPath = ("projects\\" + getCurrentProjectId() + "\\" + emissionMapPath);
 			}
 
-			_fe3d->quad3d_setEmissionMap(quadId, emissionMapPath);
+			_fe3d->quad3d_setEmissionMap(quad3dId, emissionMapPath);
 		}
 	}
 

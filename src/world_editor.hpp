@@ -216,7 +216,7 @@ private:
 	static inline constexpr float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
 
 	unordered_map<string, string> _loadedModelIds = {};
-	unordered_map<string, string> _loadedQuadIds = {};
+	unordered_map<string, string> _loadedQuad3dIds = {};
 	unordered_map<string, string> _loadedTextIds = {};
 	unordered_map<string, string> _loadedSoundIds = {};
 
@@ -239,18 +239,18 @@ private:
 	string _loadedWorldId = "";
 	string _currentWorldId = "";
 	string _currentTemplateModelId = "";
-	string _currentTemplateQuadId = "";
+	string _currentTemplateQuad3dId = "";
 	string _currentTemplateTextId = "";
 	string _currentTemplateSoundId = "";
 	string _selectedModelId = "";
-	string _selectedQuadId = "";
+	string _selectedQuad3dId = "";
 	string _selectedTextId = "";
 	string _selectedPointlightId = "";
 	string _selectedSpotlightId = "";
 	string _selectedCaptorId = "";
 	string _selectedSoundId = "";
 	string _activeModelId = "";
-	string _activeQuadId = "";
+	string _activeQuad3dId = "";
 	string _activeTextId = "";
 	string _activePointlightId = "";
 	string _activeSpotlightId = "";

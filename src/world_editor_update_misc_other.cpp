@@ -108,11 +108,11 @@ void WorldEditor::_updateMiscellaneous()
 		}
 	}
 
-	for(const auto & [quadId, templateId] : _loadedQuadIds)
+	for(const auto & [quad3dId, templateId] : _loadedQuad3dIds)
 	{
-		_fe3d->quad3d_setWireframed(quadId, _isWireframeModeEnabled);
+		_fe3d->quad3d_setWireframed(quad3dId, _isWireframeModeEnabled);
 
-		for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(quadId))
+		for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(quad3dId))
 		{
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
@@ -148,7 +148,7 @@ void WorldEditor::_updateMiscellaneous()
 	}
 
 	const auto isSelected = (!_selectedModelId.empty() ||
-							 !_selectedQuadId.empty() ||
+							 !_selectedQuad3dId.empty() ||
 							 !_selectedTextId.empty() ||
 							 !_selectedPointlightId.empty() ||
 							 !_selectedSpotlightId.empty() ||
@@ -156,7 +156,7 @@ void WorldEditor::_updateMiscellaneous()
 							 !_selectedSoundId.empty());
 
 	const auto isActive = (!_activeModelId.empty() ||
-						   !_activeQuadId.empty() ||
+						   !_activeQuad3dId.empty() ||
 						   !_activeTextId.empty() ||
 						   !_activePointlightId.empty() ||
 						   !_activeSpotlightId.empty() ||

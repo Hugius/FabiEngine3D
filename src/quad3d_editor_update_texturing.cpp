@@ -8,7 +8,7 @@ void Quad3dEditor::_updateTexturingMenu()
 
 	if(screen->getId() == "quad3dEditorMenuTexturing")
 	{
-		const auto textureRepeat = _fe3d->quad3d_getTextureRepeat(_currentQuadId);
+		const auto textureRepeat = _fe3d->quad3d_getTextureRepeat(_currentQuad3dId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
@@ -48,7 +48,7 @@ void Quad3dEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->quad3d_setDiffuseMap(_currentQuadId, finalFilePath);
+			_fe3d->quad3d_setDiffuseMap(_currentQuad3dId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
@@ -82,12 +82,12 @@ void Quad3dEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->quad3d_setEmissionMap(_currentQuadId, finalFilePath);
+			_fe3d->quad3d_setEmissionMap(_currentQuad3dId, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d->quad3d_setDiffuseMap(_currentQuadId, "");
-			_fe3d->quad3d_setEmissionMap(_currentQuadId, "");
+			_fe3d->quad3d_setDiffuseMap(_currentQuad3dId, "");
+			_fe3d->quad3d_setEmissionMap(_currentQuad3dId, "");
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
@@ -98,7 +98,7 @@ void Quad3dEditor::_updateTexturingMenu()
 		{
 			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->quad3d_setTextureRepeat(_currentQuadId, textureRepeat);
+			_fe3d->quad3d_setTextureRepeat(_currentQuad3dId, textureRepeat);
 		}
 	}
 }

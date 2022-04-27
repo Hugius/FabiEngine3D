@@ -32,6 +32,6 @@ private:
 
 	vector<string> _loadedEntityIds = {};
 
-	string _currentQuadId = "";
-	string _hoveredQuadId = "";
+	string _currentQuad2dId = "";
+	string _hoveredQuad2dId = "";
 };

@@ -21,14 +21,14 @@ const bool Quad2dEditor::saveEntitiesToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\quad2d.fe3d");
 
-	for(const auto & quadId : _loadedEntityIds)
+	for(const auto & quad2dId : _loadedEntityIds)
 	{
-		auto diffuseMapPath = _fe3d->quad2d_getDiffuseMapPath(quadId);
-		auto color = _fe3d->quad2d_getColor(quadId);
-		auto opacity = _fe3d->quad2d_getOpacity(quadId);
-		auto textureRepeat = _fe3d->quad2d_getTextureRepeat(quadId);
-		auto isHorizontallyFlipped = _fe3d->quad2d_isHorizontallyFlipped(quadId);
-		auto isVerticallyFlipped = _fe3d->quad2d_isVerticallyFlipped(quadId);
+		auto diffuseMapPath = _fe3d->quad2d_getDiffuseMapPath(quad2dId);
+		auto color = _fe3d->quad2d_getColor(quad2dId);
+		auto opacity = _fe3d->quad2d_getOpacity(quad2dId);
+		auto textureRepeat = _fe3d->quad2d_getTextureRepeat(quad2dId);
+		auto isHorizontallyFlipped = _fe3d->quad2d_isHorizontallyFlipped(quad2dId);
+		auto isVerticallyFlipped = _fe3d->quad2d_isVerticallyFlipped(quad2dId);
 
 		diffuseMapPath = (diffuseMapPath.empty() ? "" : diffuseMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -37,7 +37,7 @@ const bool Quad2dEditor::saveEntitiesToFile() const
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 
 		file
-			<< quadId
+			<< quad2dId
 			<< " "
 			<< diffuseMapPath
 			<< " "

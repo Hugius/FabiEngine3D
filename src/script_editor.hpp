@@ -60,8 +60,8 @@ private:
 	static inline constexpr int MAX_LINE_COUNT = 99;
 	static inline constexpr int BLOOM_QUALITY = 1;
 
-	vector<string> _loadedQuadIds = {};
-	vector<string> _loadedTextIds = {};
+	vector<string> _loadedQuad3dIds = {};
+	vector<string> _loadedText3dIds = {};
 	vector<string> _loadedAabbIds = {};
 
 	shared_ptr<Script> _script = nullptr;

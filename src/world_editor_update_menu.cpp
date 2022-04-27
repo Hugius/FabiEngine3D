@@ -97,40 +97,66 @@ void WorldEditor::_updateChoiceMenu()
 			if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 			{
 				saveWorldToFile();
-				clearLoadedWorld();
-
-				_currentWorldId = "";
-				_currentTemplateModelId = "";
-				_currentTemplateQuadId = "";
-				_currentTemplateTextId = "";
-				_currentTemplateSoundId = "";
-				_isPlacingPointlight = false;
-				_isPlacingSpotlight = false;
-				_isPlacingCaptor = false;
-
-				_fe3d->misc_setVsyncEnabled(true);
-
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
-				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 			}
-			if(_gui->getOverlay()->getAnswerFormDecision() == "No")
-			{
-				clearLoadedWorld();
 
-				_currentWorldId = "";
-				_currentTemplateModelId = "";
-				_currentTemplateQuadId = "";
-				_currentTemplateTextId = "";
-				_currentTemplateSoundId = "";
-				_isPlacingPointlight = false;
-				_isPlacingSpotlight = false;
-				_isPlacingCaptor = false;
+			clearLoadedWorld();
 
-				_fe3d->misc_setVsyncEnabled(true);
+			_fe3d->camera_reset();
+			_fe3d->misc_setVsyncEnabled(true);
 
-				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
-				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
-			}
+			_gui->getOverlay()->getTextField("selectedId")->setVisible(false);
+			_gui->getOverlay()->getTextField("activeId")->setVisible(false);
+
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuMain");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
+
+			_currentWorldId = "";
+			_currentTemplateModelId = "";
+			_currentTemplateQuadId = "";
+			_currentTemplateTextId = "";
+			_currentTemplateSoundId = "";
+			_selectedModelId = "";
+			_selectedQuadId = "";
+			_selectedTextId = "";
+			_selectedPointlightId = "";
+			_selectedSpotlightId = "";
+			_selectedCaptorId = "";
+			_selectedSoundId = "";
+			_activeModelId = "";
+			_activeQuadId = "";
+			_activeTextId = "";
+			_activePointlightId = "";
+			_activeSpotlightId = "";
+			_activeCaptorId = "";
+			_activeSoundId = "";
+			_editorSpeed = 1.0f;
+			_idCounter = 0;
+			_selectedModelHighlightDirection = 1;
+			_selectedQuad3dHighlightDirection = 1;
+			_selectedText3dHighlightDirection = 1;
+			_selectedPointlightHighlightDirection = 1;
+			_selectedSpotlightHighlightDirection = 1;
+			_selectedCaptorHighlightDirection = 1;
+			_selectedSoundHighlightDirection = 1;
+			_activeModelHighlightDirection = 1;
+			_activeQuad3dHighlightDirection = 1;
+			_activeText3dHighlightDirection = 1;
+			_activePointlightHighlightDirection = 1;
+			_activeSpotlightHighlightDirection = 1;
+			_activeCaptorHighlightDirection = 1;
+			_activeSoundHighlightDirection = 1;
+			_dontResetSelectedModel = false;
+			_dontResetSelectedQuad3d = false;
+			_dontResetSelectedText3d = false;
+			_dontResetSelectedPointlight = false;
+			_dontResetSelectedSpotlight = false;
+			_dontResetSelectedCaptor = false;
+			_dontResetSelectedSound = false;
+			_isPlacingPointlight = false;
+			_isPlacingSpotlight = false;
+			_isPlacingCaptor = false;
+			_isWireframeModeEnabled = false;
+			_isAabbModeEnabled = false;
 		}
 	}
 }

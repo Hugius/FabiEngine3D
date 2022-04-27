@@ -14,12 +14,12 @@ void Quad2dEditor::_load()
 
 void Quad2dEditor::_unload()
 {
-	_fe3d->camera_reset();
-
 	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->quad2d_delete(id);
 	}
+
+	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField("quadId");
 

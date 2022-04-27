@@ -14,12 +14,12 @@ void Text2dEditor::_load()
 
 void Text2dEditor::_unload()
 {
-	_fe3d->camera_reset();
-
 	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->text2d_delete(id);
 	}
+
+	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField("textId");
 

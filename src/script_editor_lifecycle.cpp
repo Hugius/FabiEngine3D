@@ -7,19 +7,6 @@
 
 void ScriptEditor::_load()
 {
-	_fe3d->camera_setFov(CAMERA_FOV);
-	_fe3d->camera_setYaw(CAMERA_YAW);
-	_fe3d->camera_setPitch(CAMERA_PITCH);
-	_fe3d->camera_setPosition(fvec3(0.0f, 0.0f, CAMERA_DISTANCE));
-
-	_fe3d->raycast_setAabbIntersectionEnabled(true);
-
-	_fe3d->graphics_setBloomEnabled(true);
-	_fe3d->graphics_setBloomType(BloomType::PARTS);
-	_fe3d->graphics_setBloomIntensity(0.95f);
-	_fe3d->graphics_setBloomBlurCount(2);
-	_fe3d->graphics_setBloomQuality(BLOOM_QUALITY);
-
 	_fe3d->quad3d_create("selection", true);
 	_fe3d->quad3d_setVisible("selection", false);
 	_fe3d->quad3d_setColor("selection", SELECTION_COLOR);
@@ -29,24 +16,23 @@ void ScriptEditor::_load()
 	_fe3d->text3d_setContent("cursor", "|");
 	_fe3d->text3d_setSize("cursor", CHAR_SIZE);
 	_fe3d->text3d_setMinTextureAlpha("cursor", 0.05f);
+
+	_fe3d->graphics_setBloomEnabled(true);
+	_fe3d->graphics_setBloomType(BloomType::PARTS);
+	_fe3d->graphics_setBloomIntensity(0.95f);
+	_fe3d->graphics_setBloomBlurCount(2);
+	_fe3d->graphics_setBloomQuality(BLOOM_QUALITY);
+
+	_fe3d->camera_setFov(CAMERA_FOV);
+	_fe3d->camera_setYaw(CAMERA_YAW);
+	_fe3d->camera_setPitch(CAMERA_PITCH);
+	_fe3d->camera_setPosition(fvec3(0.0f, 0.0f, CAMERA_DISTANCE));
+
+	_fe3d->raycast_setAabbIntersectionEnabled(true);
 }
 
 void ScriptEditor::_unload()
 {
-	_fe3d->camera_reset();
-
-	_fe3d->raycast_setAabbIntersectionEnabled(false);
-
-	_fe3d->graphics_setBloomEnabled(false);
-	_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
-	_fe3d->graphics_setBloomIntensity(0.0f);
-	_fe3d->graphics_setBloomBlurCount(0);
-	_fe3d->graphics_setBloomQuality(0);
-
-	_fe3d->quad3d_delete("selection");
-
-	_fe3d->text3d_delete("cursor");
-
 	for(const auto & id : _loadedQuadIds)
 	{
 		_fe3d->quad3d_delete(id);
@@ -61,6 +47,20 @@ void ScriptEditor::_unload()
 	{
 		_fe3d->aabb_delete(id);
 	}
+
+	_fe3d->quad3d_delete("selection");
+
+	_fe3d->text3d_delete("cursor");
+
+	_fe3d->graphics_setBloomEnabled(false);
+	_fe3d->graphics_setBloomType(BloomType::EVERYTHING);
+	_fe3d->graphics_setBloomIntensity(0.0f);
+	_fe3d->graphics_setBloomBlurCount(0);
+	_fe3d->graphics_setBloomQuality(0);
+
+	_fe3d->camera_reset();
+
+	_fe3d->raycast_setAabbIntersectionEnabled(false);
 
 	_script->clear();
 

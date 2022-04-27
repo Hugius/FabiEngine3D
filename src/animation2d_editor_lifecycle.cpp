@@ -7,28 +7,29 @@
 
 void Animation2dEditor::_load()
 {
-	_fe3d->camera_setYaw(270.0f);
-
-	_fe3d->graphics_setAntiAliasingEnabled(true);
-
 	_fe3d->quad3d_create(PREVIEW_QUAD_ID, true);
 	_fe3d->quad3d_setPosition(PREVIEW_QUAD_ID, PREVIEW_QUAD_POSITION);
 	_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
+
+	_fe3d->graphics_setAntiAliasingEnabled(true);
+
+	_fe3d->camera_setYaw(270.0f);
 
 	_gui->getOverlay()->createTextField("animationId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void Animation2dEditor::_unload()
 {
-	_fe3d->camera_reset();
-	_fe3d->graphics_setAntiAliasingEnabled(false);
-
-	_fe3d->quad3d_delete(PREVIEW_QUAD_ID);
-
 	for(const auto & id : _loadedAnimationIds)
 	{
 		_fe3d->animation2d_delete(id);
 	}
+
+	_fe3d->graphics_setAntiAliasingEnabled(false);
+
+	_fe3d->camera_reset();
+
+	_fe3d->quad3d_delete(PREVIEW_QUAD_ID);
 
 	_gui->getOverlay()->deleteTextField("animationId");
 

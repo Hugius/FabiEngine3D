@@ -7,6 +7,11 @@
 
 void SoundEditor::_load()
 {
+	_fe3d->quad3d_create("@@icon", true);
+	_fe3d->quad3d_setPosition("@@icon", ICON_QUAD_POSITION);
+	_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
+	_fe3d->quad3d_setBright("@@icon", true);
+
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
 	_fe3d->graphics_setBloomEnabled(true);
@@ -17,22 +22,17 @@ void SoundEditor::_load()
 
 	_fe3d->camera_setYaw(270.0f);
 
-	_fe3d->quad3d_create("@@icon", true);
-	_fe3d->quad3d_setPosition("@@icon", ICON_QUAD_POSITION);
-	_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
-	_fe3d->quad3d_setBright("@@icon", true);
-
 	_gui->getOverlay()->createTextField("soundId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void SoundEditor::_unload()
 {
-	_fe3d->camera_reset();
-
 	for(const auto & id : _loadedSoundIds)
 	{
 		_fe3d->sound2d_delete(id);
 	}
+
+	_fe3d->quad3d_delete("@@icon");
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
@@ -42,7 +42,7 @@ void SoundEditor::_unload()
 	_fe3d->graphics_setBloomBlurCount(0);
 	_fe3d->graphics_setBloomQuality(0);
 
-	_fe3d->quad3d_delete("@@icon");
+	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField("soundId");
 

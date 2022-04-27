@@ -229,9 +229,12 @@ void WorldHelper::copyTemplateQuad(const string & newId, const string & template
 		_fe3d->quad3d_setEmissionMap(newId, _fe3d->quad3d_getEmissionMapPath(templateId));
 	}
 
-	_fe3d->aabb_create(newId, false);
-	_fe3d->aabb_setParentId(newId, newId);
-	_fe3d->aabb_setParentType(newId, AabbParentType::QUAD);
+	if(_fe3d->aabb_isExisting(templateId))
+	{
+		_fe3d->aabb_create(newId, false);
+		_fe3d->aabb_setParentId(newId, newId);
+		_fe3d->aabb_setParentType(newId, AabbParentType::QUAD);
+	}
 }
 
 void WorldHelper::copyTemplateText(const string & newId, const string & templateId)
@@ -257,9 +260,12 @@ void WorldHelper::copyTemplateText(const string & newId, const string & template
 	_fe3d->text3d_setMinTextureAlpha(newId, _fe3d->text3d_getMinTextureAlpha(templateId));
 	_fe3d->text3d_setRotationOrder(newId, _fe3d->text3d_getRotationOrder(templateId));
 
-	_fe3d->aabb_create(newId, false);
-	_fe3d->aabb_setParentId(newId, newId);
-	_fe3d->aabb_setParentType(newId, AabbParentType::TEXT);
+	if(_fe3d->aabb_isExisting(templateId))
+	{
+		_fe3d->aabb_create(newId, false);
+		_fe3d->aabb_setParentId(newId, newId);
+		_fe3d->aabb_setParentType(newId, AabbParentType::TEXT);
+	}
 }
 
 void WorldHelper::copyTemplateSound(const string & newId, const string & templateId)

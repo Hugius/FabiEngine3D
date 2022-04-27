@@ -7,24 +7,6 @@
 
 void TerrainEditor::_load()
 {
-	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
-	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
-	_fe3d->camera_setThirdPersonEnabled(true);
-	_fe3d->camera_setThirdPersonYaw(INITIAL_CAMERA_YAW);
-	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
-	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
-	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-
-	_fe3d->graphics_setAntiAliasingEnabled(true);
-	_fe3d->graphics_setAnisotropicFilteringQuality(16);
-	_fe3d->graphics_setAmbientLightingEnabled(true);
-	_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
-	_fe3d->graphics_setAmbientLightingIntensity(1.0f);
-	_fe3d->graphics_setDirectionalLightingEnabled(true);
-	_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
-	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));
-	_fe3d->graphics_setDirectionalLightingIntensity(3.0f);
-
 	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d->model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d->model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.tga");
@@ -37,17 +19,36 @@ void TerrainEditor::_load()
 	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
 	_fe3d->model_setShadowed("@@grid", false);
 
+	_fe3d->graphics_setAntiAliasingEnabled(true);
+	_fe3d->graphics_setAnisotropicFilteringQuality(16);
+	_fe3d->graphics_setAmbientLightingEnabled(true);
+	_fe3d->graphics_setAmbientLightingColor(fvec3(1.0f));
+	_fe3d->graphics_setAmbientLightingIntensity(1.0f);
+	_fe3d->graphics_setDirectionalLightingEnabled(true);
+	_fe3d->graphics_setDirectionalLightingColor(fvec3(1.0f));
+	_fe3d->graphics_setDirectionalLightingPosition(fvec3(10000.0f));
+	_fe3d->graphics_setDirectionalLightingIntensity(3.0f);
+
+	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
+	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
+	_fe3d->camera_setThirdPersonEnabled(true);
+	_fe3d->camera_setThirdPersonYaw(INITIAL_CAMERA_YAW);
+	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
+	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
+	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
+
 	_gui->getOverlay()->createTextField("terrainId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void TerrainEditor::_unload()
 {
-	_fe3d->camera_reset();
-
 	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->terrain_delete(id);
 	}
+
+	_fe3d->model_delete("@@box");
+	_fe3d->model_delete("@@grid");
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
@@ -59,8 +60,7 @@ void TerrainEditor::_unload()
 	_fe3d->graphics_setDirectionalLightingPosition(fvec3(0.0f));
 	_fe3d->graphics_setDirectionalLightingIntensity(0.0f);
 
-	_fe3d->model_delete("@@box");
-	_fe3d->model_delete("@@grid");
+	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField("terrainId");
 

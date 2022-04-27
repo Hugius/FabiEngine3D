@@ -7,13 +7,17 @@
 
 void Text3dEditor::_load()
 {
-	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
-	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
-	_fe3d->camera_setThirdPersonEnabled(true);
-	_fe3d->camera_setThirdPersonYaw(INITIAL_CAMERA_YAW);
-	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
-	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
-	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
+	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
+	_fe3d->model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
+	_fe3d->model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.tga");
+	_fe3d->model_setFaceCulled("@@box", "", true);
+	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
+	_fe3d->model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
+	_fe3d->model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
+	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
+	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
+	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
+	_fe3d->model_setShadowed("@@grid", false);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
@@ -35,29 +39,26 @@ void Text3dEditor::_load()
 	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE / 2.0f));
 	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE / 2.0f)));
 
-	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
-	_fe3d->model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d->model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.tga");
-	_fe3d->model_setFaceCulled("@@box", "", true);
-	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
-	_fe3d->model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d->model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
-	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
-	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
-	_fe3d->model_setShadowed("@@grid", false);
+	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
+	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
+	_fe3d->camera_setThirdPersonEnabled(true);
+	_fe3d->camera_setThirdPersonYaw(INITIAL_CAMERA_YAW);
+	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
+	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
+	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
 	_gui->getOverlay()->createTextField("textId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void Text3dEditor::_unload()
 {
-	_fe3d->camera_reset();
-
 	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
+
+	_fe3d->model_delete("@@box");
+	_fe3d->model_delete("@@grid");
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
@@ -77,8 +78,7 @@ void Text3dEditor::_unload()
 	_fe3d->graphics_setShadowLightness(0.0f);
 	_fe3d->graphics_setShadowQuality(0);
 
-	_fe3d->model_delete("@@box");
-	_fe3d->model_delete("@@grid");
+	_fe3d->camera_reset();
 
 	_gui->getOverlay()->deleteTextField("textId");
 

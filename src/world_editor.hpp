@@ -261,18 +261,18 @@ private:
 
 	int _idCounter = 0;
 	int _selectedModelHighlightDirection = 1;
-	int _activeModelHighlightDirection = 1;
 	int _selectedQuad3dHighlightDirection = 1;
-	int _activeQuad3dHighlightDirection = 1;
 	int _selectedText3dHighlightDirection = 1;
-	int _activeText3dHighlightDirection = 1;
 	int _selectedPointlightHighlightDirection = 1;
-	int _activePointlightHighlightDirection = 1;
 	int _selectedSpotlightHighlightDirection = 1;
-	int _activeSpotlightHighlightDirection = 1;
 	int _selectedCaptorHighlightDirection = 1;
-	int _activeCaptorHighlightDirection = 1;
 	int _selectedSoundHighlightDirection = 1;
+	int _activeModelHighlightDirection = 1;
+	int _activeQuad3dHighlightDirection = 1;
+	int _activeText3dHighlightDirection = 1;
+	int _activePointlightHighlightDirection = 1;
+	int _activeSpotlightHighlightDirection = 1;
+	int _activeCaptorHighlightDirection = 1;
 	int _activeSoundHighlightDirection = 1;
 
 	bool _dontResetSelectedModel = false;

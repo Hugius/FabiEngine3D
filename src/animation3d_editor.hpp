@@ -60,7 +60,6 @@ private:
 	string _hoveredPartId = "";
 	string _previewModelId = "";
 
-	fvec3 _cameraLookatPosition = fvec3(0.0f);
 	fvec3 _initialModelSize = fvec3(0.0f);
 
 	float _originalPartOpacity = 0.0f;

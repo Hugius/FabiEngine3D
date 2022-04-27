@@ -24,8 +24,6 @@ void Quad2dEditor::_unload()
 	_gui->getOverlay()->deleteTextField("quadId");
 
 	_loadedEntityIds.clear();
-	_currentQuadId = "";
-	_hoveredQuadId = "";
 }
 
 void Quad2dEditor::_loadGUI()

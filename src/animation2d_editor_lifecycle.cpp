@@ -33,8 +33,6 @@ void Animation2dEditor::_unload()
 	_gui->getOverlay()->deleteTextField("animationId");
 
 	_loadedAnimationIds.clear();
-	_hoveredAnimationId = "";
-	_currentAnimationId = "";
 }
 
 void Animation2dEditor::_loadGUI()

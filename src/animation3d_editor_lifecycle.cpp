@@ -97,15 +97,6 @@ void Animation3dEditor::_unload()
 	_gui->getOverlay()->deleteTextField("animationFrame");
 
 	_loadedAnimationIds.clear();
-	_currentAnimationId = "";
-	_currentPartId = "";
-	_hoveredModelId = "";
-	_hoveredPartId = "";
-	_cameraLookatPosition = fvec3(0.0f);
-	_originalPartOpacity = 0.0f;
-	_selectedPartHighlightDirection = 1;
-	_currentFrameIndex = 0;
-	_mustUpdateCurrentFramePreview = true;
 }
 
 void Animation3dEditor::_loadGUI()

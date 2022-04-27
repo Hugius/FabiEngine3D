@@ -100,13 +100,6 @@ void ModelEditor::_unload()
 	_gui->getOverlay()->deleteTextField("aabbId");
 
 	_loadedEntityIds.clear();
-	_currentModelId = "";
-	_currentPartId = "";
-	_currentAabbId = "";
-	_hoveredModelId = "";
-	_hoveredPartId = "";
-	_hoveredAabbId = "";
-	_originalPartOpacity = 0.0f;
 	_selectedPartHighlightDirection = 1;
 }
 

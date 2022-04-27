@@ -67,7 +67,6 @@ void WaterEditor::_unload()
 	_fe3d->camera_setThirdPersonEnabled(false);
 
 	_loadedEntityIds.clear();
-	_currentWaterId = "";
 }
 
 void WaterEditor::_loadGUI()

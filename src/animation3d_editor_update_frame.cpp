@@ -205,9 +205,7 @@ void Animation3dEditor::_updateFrameMenu()
 			}
 		}
 
-		if((_gui->getOverlay()->getValueFormId() == "rotationOriginX") &&
-		   (_gui->getOverlay()->getValueFormId() == "rotationOriginY") &&
-		   (_gui->getOverlay()->getValueFormId() == "rotationOriginZ"))
+		if((_gui->getOverlay()->getValueFormId() == "rotationOriginX") && (_gui->getOverlay()->getValueFormId() == "rotationOriginY") && (_gui->getOverlay()->getValueFormId() == "rotationOriginZ"))
 		{
 			if(_currentPartId.empty())
 			{
@@ -217,6 +215,7 @@ void Animation3dEditor::_updateFrameMenu()
 			{
 				_fe3d->model_rotatePart(_previewModelId, _currentPartId, _fe3d->animation3d_getSpeed(_currentAnimationId, _currentFrameIndex, _currentPartId));
 			}
+
 			_mustUpdateCurrentFramePreview = false;
 		}
 		else

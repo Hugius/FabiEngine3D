@@ -83,8 +83,6 @@ void Text3dEditor::_unload()
 	_gui->getOverlay()->deleteTextField("textId");
 
 	_loadedEntityIds.clear();
-	_hoveredTextId = "";
-	_currentTextId = "";
 }
 
 void Text3dEditor::_loadGUI()

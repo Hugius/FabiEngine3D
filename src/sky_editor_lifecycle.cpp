@@ -32,7 +32,6 @@ void SkyEditor::_unload()
 	_gui->getOverlay()->deleteTextField("skyId");
 
 	_loadedEntityIds.clear();
-	_currentSkyId = "";
 }
 
 void SkyEditor::_loadGUI()

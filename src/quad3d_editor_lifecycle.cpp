@@ -85,8 +85,6 @@ void Quad3dEditor::_unload()
 	_gui->getOverlay()->deleteTextField("quadId");
 
 	_loadedEntityIds.clear();
-	_hoveredQuadId = "";
-	_currentQuadId = "";
 }
 
 void Quad3dEditor::_loadGUI()

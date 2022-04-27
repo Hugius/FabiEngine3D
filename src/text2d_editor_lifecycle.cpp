@@ -24,8 +24,6 @@ void Text2dEditor::_unload()
 	_gui->getOverlay()->deleteTextField("textId");
 
 	_loadedEntityIds.clear();
-	_currentTextId = "";
-	_hoveredTextId = "";
 }
 
 void Text2dEditor::_loadGUI()

@@ -65,7 +65,6 @@ void TerrainEditor::_unload()
 	_gui->getOverlay()->deleteTextField("terrainId");
 
 	_loadedEntityIds.clear();
-	_currentTerrainId = "";
 }
 
 void TerrainEditor::_loadGUI()

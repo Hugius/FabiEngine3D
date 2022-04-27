@@ -195,7 +195,7 @@ void WorldHelper::copyTemplateModel(const string & newId, const string & templat
 	}
 }
 
-void WorldHelper::copyTemplateQuad(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateQuad3d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->quad3d_isExisting(templateId))
 	{

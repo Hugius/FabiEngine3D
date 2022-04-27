@@ -66,11 +66,11 @@ void Quad2dEditor::update()
 	}
 	if(isLoaded())
 	{
-		_updateQuadCreating();
+		_updateQuad2dCreating();
 	}
 	if(isLoaded())
 	{
-		_updateQuadChoosing();
+		_updateQuad2dChoosing();
 	}
 	if(isLoaded())
 	{

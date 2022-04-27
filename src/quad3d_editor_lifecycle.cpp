@@ -179,11 +179,11 @@ void Quad3dEditor::update()
 	}
 	if(isLoaded())
 	{
-		_updateQuadCreating();
+		_updateQuad3dCreating();
 	}
 	if(isLoaded())
 	{
-		_updateQuadChoosing();
+		_updateQuad3dChoosing();
 	}
 	if(isLoaded())
 	{

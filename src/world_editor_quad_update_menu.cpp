@@ -29,11 +29,11 @@ void WorldEditor::_updateQuad3dMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuQuad3dChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quadList")->deleteOptions();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->deleteOptions();
 
 			for(auto & [placedId, templateId] : _loadedQuad3dIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quadList")->createOption(placedId, placedId);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dChoice")->getScrollingList("quad3dList")->createOption(placedId, placedId);
 			}
 		}
 
@@ -55,14 +55,14 @@ void WorldEditor::_updateQuad3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("quadList")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("quad3dList")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
 				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 				_deactivateModel();
-				_deactivateQuad();
+				_deactivateQuad3d();
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateCaptor();
@@ -89,34 +89,34 @@ void WorldEditor::_updateQuad3dChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuQuad3dChoice")
 	{
-		for(const auto & optionId : screen->getScrollingList("quadList")->getOptionIds())
+		for(const auto & optionId : screen->getScrollingList("quad3dList")->getOptionIds())
 		{
 			if(!_fe3d->quad3d_isExisting(optionId))
 			{
-				screen->getScrollingList("quadList")->deleteOption(optionId);
+				screen->getScrollingList("quad3dList")->deleteOption(optionId);
 
 				break;
 			}
 		}
 
-		const auto hoveredOptionId = screen->getScrollingList("quadList")->getHoveredOptionId();
+		const auto hoveredOptionId = screen->getScrollingList("quad3dList")->getHoveredOptionId();
 
 		if(!hoveredOptionId.empty())
 		{
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
 				_deactivateModel();
-				_deactivateQuad();
+				_deactivateQuad3d();
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateSpotlight();
 				_deactivateCaptor();
 
-				_activateQuad(hoveredOptionId);
+				_activateQuad3d(hoveredOptionId);
 			}
 			else
 			{
-				_selectQuad(hoveredOptionId);
+				_selectQuad3d(hoveredOptionId);
 
 				_dontResetSelectedQuad3d = true;
 			}

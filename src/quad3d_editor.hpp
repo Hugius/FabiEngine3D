@@ -27,8 +27,8 @@ private:
 	void _updateLightingMenu();
 	void _updateMiscellaneousMenu();
 	void _updateAabbMenu();
-	void _updateQuadCreating();
-	void _updateQuadChoosing();
+	void _updateQuad3dCreating();
+	void _updateQuad3dChoosing();
 	void _updateQuadDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();

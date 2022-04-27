@@ -23,8 +23,8 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateQuadCreating();
-	void _updateQuadChoosing();
+	void _updateQuad2dCreating();
+	void _updateQuad2dChoosing();
 	void _updateQuadDeleting();
 	void _updateMiscellaneous();
 

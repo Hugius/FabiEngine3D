@@ -70,7 +70,7 @@ void WorldEditor::_load()
 
 	for(const auto & id : _quad3dEditor->getLoadedEntityIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace")->getScrollingList("quadList")->createOption(id, id.substr(1));
+		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuQuad3dPlace")->getScrollingList("quad3dList")->createOption(id, id.substr(1));
 	}
 
 	for(const auto & id : _text3dEditor->getLoadedEntityIds())

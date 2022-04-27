@@ -27,7 +27,7 @@ void WorldEditor::_updateSpotlightMenu()
 			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 			_deactivateModel();
-			_deactivateQuad();
+			_deactivateQuad3d();
 			_deactivateSound();
 			_deactivatePointlight();
 			_deactivateSpotlight();
@@ -85,7 +85,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
 				_deactivateModel();
-				_deactivateQuad();
+				_deactivateQuad3d();
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateSpotlight();

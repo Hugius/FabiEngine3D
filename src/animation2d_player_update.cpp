@@ -19,7 +19,7 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 		const auto animation = _animation2dManager->getAnimation(splitKey.first);
-		const auto quad = _quad3dEntityManager->getEntity(splitKey.second);
+		const auto quad3d = _quad3dEntityManager->getEntity(splitKey.second);
 		const auto interval = static_cast<int>(static_cast<float>(animation->getInterval() * startedAnimation->getIntervalMultiplier()) / static_cast<float>(startedAnimation->getIntervalDivider()));
 
 		if(!startedAnimation->isPaused())
@@ -72,8 +72,8 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 		const auto uvOffset = fvec2((static_cast<float>(startedAnimation->getColumnIndex()) * uvMultiplier.x),
 									(static_cast<float>(animation->getRowCount() - startedAnimation->getRowIndex() - 1) * uvMultiplier.y));
 
-		quad->setUvMultiplier(uvMultiplier);
-		quad->setUvOffset(uvOffset);
+		quad3d->setUvMultiplier(uvMultiplier);
+		quad3d->setUvOffset(uvOffset);
 	}
 
 	for(const auto & mergedId : quad3dAnimationsToStop)
@@ -90,7 +90,7 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 		const auto animation = _animation2dManager->getAnimation(splitKey.first);
-		const auto quad = _quad2dEntityManager->getEntity(splitKey.second);
+		const auto quad2d = _quad2dEntityManager->getEntity(splitKey.second);
 		const auto interval = static_cast<int>(static_cast<float>(animation->getInterval()) / static_cast<float>(startedAnimation->getIntervalDivider()));
 
 		if(!startedAnimation->isPaused())
@@ -138,8 +138,8 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 		const auto uvOffset = fvec2((static_cast<float>(startedAnimation->getColumnIndex()) * uvMultiplier.x),
 									(static_cast<float>(animation->getRowCount() - startedAnimation->getRowIndex() - 1) * uvMultiplier.y));
 
-		quad->setUvMultiplier(uvMultiplier);
-		quad->setUvOffset(uvOffset);
+		quad2d->setUvMultiplier(uvMultiplier);
+		quad2d->setUvOffset(uvOffset);
 	}
 
 	for(const auto & mergedId : quad2dAnimationsToStop)

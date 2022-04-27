@@ -60,7 +60,7 @@ void CustomWorldBuilder::addModel(const string & id)
 	_addedModelIds.push_back(id);
 }
 
-void CustomWorldBuilder::addQuad(const string & id)
+void CustomWorldBuilder::addQuad3d(const string & id)
 {
 	if(find(_addedQuad3dIds.begin(), _addedQuad3dIds.end(), id) != _addedQuad3dIds.end())
 	{

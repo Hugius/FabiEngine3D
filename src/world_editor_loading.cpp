@@ -227,7 +227,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_loadedQuad3dIds.insert({quad3dId, templateId});
 
-			_worldHelper->copyTemplateQuad(quad3dId, templateId);
+			_worldHelper->copyTemplateQuad3d(quad3dId, templateId);
 
 			_fe3d->quad3d_setPosition(quad3dId, position);
 			_fe3d->quad3d_setRotation(quad3dId, rotation);

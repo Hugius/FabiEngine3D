@@ -106,7 +106,7 @@ void WorldEditor::_updateText3dChoosingMenu()
 			if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 			{
 				_deactivateModel();
-				_deactivateQuad();
+				_deactivateQuad3d();
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateSpotlight();

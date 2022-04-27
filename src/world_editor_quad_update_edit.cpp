@@ -23,13 +23,13 @@ void WorldEditor::_updateQuad3dEditing()
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectQuad(quad3dId);
+				_selectQuad3d(quad3dId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
 					if(_selectedQuad3dId != _activeQuad3dId)
 					{
-						_activateQuad(_selectedQuad3dId);
+						_activateQuad3d(_selectedQuad3dId);
 					}
 				}
 
@@ -39,7 +39,7 @@ void WorldEditor::_updateQuad3dEditing()
 			{
 				if((quad3dId != _selectedQuad3dId) && (quad3dId != _activeQuad3dId))
 				{
-					_deselectQuad(quad3dId);
+					_deselectQuad3d(quad3dId);
 				}
 			}
 		}

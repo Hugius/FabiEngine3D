@@ -7,7 +7,7 @@ void WorldEditor::_selectModel(const string & id)
 	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Model: " + _selectedModelId);
 }
 
-void WorldEditor::_selectQuad(const string & id)
+void WorldEditor::_selectQuad3d(const string & id)
 {
 	_selectedQuad3dId = id;
 
@@ -57,7 +57,7 @@ void WorldEditor::_deselectModel(const string & id)
 	}
 }
 
-void WorldEditor::_deselectQuad(const string & id)
+void WorldEditor::_deselectQuad3d(const string & id)
 {
 	_fe3d->quad3d_setOpacity(id, 1.0f);
 }

@@ -12,7 +12,7 @@ public:
 	void addTerrain(const string & id);
 	void addWater(const string & id);
 	void addModel(const string & id);
-	void addQuad(const string & id);
+	void addQuad3d(const string & id);
 	void addText(const string & id);
 	void addAabb(const string & id);
 	void addPointlight(const string & id);

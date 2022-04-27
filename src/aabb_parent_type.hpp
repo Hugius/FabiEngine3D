@@ -3,6 +3,6 @@
 enum class AabbParentType
 {
 	MODEL,
-	QUAD3D,
-	TEXT3D
+	QUAD,
+	TEXT
 };

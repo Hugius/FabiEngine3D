@@ -173,7 +173,7 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		{
 			_fe3d->aabb_create(quadId, false);
 			_fe3d->aabb_setParentId(quadId, quadId);
-			_fe3d->aabb_setParentType(quadId, AabbParentType::QUAD3D);
+			_fe3d->aabb_setParentType(quadId, AabbParentType::QUAD);
 		}
 
 		if(!diffuseMapPath.empty())

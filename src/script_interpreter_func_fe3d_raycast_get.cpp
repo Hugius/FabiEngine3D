@@ -179,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 			{
 				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::QUAD3D)
+					if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::QUAD)
 					{
 						result = _fe3d->aabb_getParentId(aabbId);
 					}
@@ -200,7 +200,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string & functionN
 			{
 				if(_fe3d->aabb_hasParent(aabbId))
 				{
-					if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::TEXT3D)
+					if(_fe3d->aabb_getParentType(aabbId) == AabbParentType::TEXT)
 					{
 						result = _fe3d->aabb_getParentId(aabbId);
 					}

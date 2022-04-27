@@ -157,7 +157,7 @@ const bool Text3dEditor::loadEntitiesFromFile()
 			{
 				_fe3d->aabb_create(textId, false);
 				_fe3d->aabb_setParentId(textId, textId);
-				_fe3d->aabb_setParentType(textId, AabbParentType::TEXT3D);
+				_fe3d->aabb_setParentType(textId, AabbParentType::TEXT);
 			}
 		}
 	}

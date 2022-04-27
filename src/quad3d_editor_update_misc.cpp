@@ -51,7 +51,7 @@ void Quad3dEditor::_updateMiscellaneous()
 	}
 }
 
-void Quad3dEditor::_updateQuad3dCreating()
+void Quad3dEditor::_updateQuadCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createQuad") && _gui->getOverlay()->isValueFormConfirmed())
 	{
@@ -99,7 +99,7 @@ void Quad3dEditor::_updateQuad3dCreating()
 	}
 }
 
-void Quad3dEditor::_updateQuad3dChoosing()
+void Quad3dEditor::_updateQuadChoosing()
 {
 	if((_gui->getOverlay()->getChoiceFormId() == "editQuad") || (_gui->getOverlay()->getChoiceFormId() == "deleteQuad"))
 	{
@@ -144,7 +144,7 @@ void Quad3dEditor::_updateQuad3dChoosing()
 	}
 }
 
-void Quad3dEditor::_updateQuad3dDeleting()
+void Quad3dEditor::_updateQuadDeleting()
 {
 	if((_gui->getOverlay()->getAnswerFormId() == "deleteQuad") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{

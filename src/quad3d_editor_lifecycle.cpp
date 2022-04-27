@@ -182,15 +182,15 @@ void Quad3dEditor::update()
 	}
 	if(isLoaded())
 	{
-		_updateQuad3dCreating();
+		_updateQuadCreating();
 	}
 	if(isLoaded())
 	{
-		_updateQuad3dChoosing();
+		_updateQuadChoosing();
 	}
 	if(isLoaded())
 	{
-		_updateQuad3dDeleting();
+		_updateQuadDeleting();
 	}
 	if(isLoaded())
 	{

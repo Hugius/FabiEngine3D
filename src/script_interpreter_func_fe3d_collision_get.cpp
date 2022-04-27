@@ -324,7 +324,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 
 			for(const auto & aabbId : aabbIds)
 			{
-				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::QUAD3D))
+				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::QUAD))
 				{
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, aabbId));
 				}
@@ -364,7 +364,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string & functio
 
 			for(const auto & aabbId : aabbIds)
 			{
-				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::TEXT3D))
+				if(_fe3d->aabb_hasParent(aabbId) && (_fe3d->aabb_getParentType(aabbId) == AabbParentType::TEXT))
 				{
 					returnValues.push_back(make_shared<ScriptValue>(SVT::STRING, aabbId));
 				}

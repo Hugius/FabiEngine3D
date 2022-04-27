@@ -333,13 +333,13 @@
     <ClCompile Include="..\..\..\src\world_editor_misc_other.cpp">
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_edit.cpp">
+    <ClCompile Include="..\..\..\src\world_editor_quad_update_edit.cpp">
       <Filter>World Editor\Update\Quad</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_menu.cpp">
+    <ClCompile Include="..\..\..\src\world_editor_quad_update_menu.cpp">
       <Filter>World Editor\Update\Quad</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_place.cpp">
+    <ClCompile Include="..\..\..\src\world_editor_quad_update_place.cpp">
       <Filter>World Editor\Update\Quad</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_model_update_edit.cpp">
@@ -612,13 +612,13 @@
     <ClCompile Include="..\..\..\src\text3d_editor_misc.cpp">
       <Filter>Text3D Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_text3d_update_place.cpp">
+    <ClCompile Include="..\..\..\src\world_editor_text_update_place.cpp">
       <Filter>World Editor\Update\Text</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_text3d_update_edit.cpp">
+    <ClCompile Include="..\..\..\src\world_editor_text_update_edit.cpp">
       <Filter>World Editor\Update\Text</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_text3d_update_menu.cpp">
+    <ClCompile Include="..\..\..\src\world_editor_text_update_menu.cpp">
       <Filter>World Editor\Update\Text</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_loading.cpp">

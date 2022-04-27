@@ -25,7 +25,7 @@ void Text3dEditor::_updateAabbMenu()
 		{
 			_fe3d->aabb_create(_currentTextId, false);
 			_fe3d->aabb_setParentId(_currentTextId, _currentTextId);
-			_fe3d->aabb_setParentType(_currentTextId, AabbParentType::TEXT3D);
+			_fe3d->aabb_setParentType(_currentTextId, AabbParentType::TEXT);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{

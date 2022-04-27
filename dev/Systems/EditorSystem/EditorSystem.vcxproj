@@ -72,9 +72,9 @@
     <ClCompile Include="..\..\..\src\text2d_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\text2d_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_activate.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_text3d_update_edit.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_text3d_update_menu.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_text3d_update_place.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_text_update_edit.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_text_update_menu.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_text_update_place.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_update_misc_highlight.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_captor_update_edit.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_captor_update_menu.cpp" />
@@ -123,9 +123,9 @@
     <ClCompile Include="..\..\..\src\model_editor_update_texturing.cpp" />
     <ClCompile Include="..\..\..\src\model_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\model_editor_update_miscellaneous.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_edit.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_place.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_quad3d_update_menu.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_quad_update_edit.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_quad_update_place.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_quad_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_update_misc_other.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_water_update.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_gui.cpp" />

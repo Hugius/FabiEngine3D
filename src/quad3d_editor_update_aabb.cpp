@@ -25,7 +25,7 @@ void Quad3dEditor::_updateAabbMenu()
 		{
 			_fe3d->aabb_create(_currentQuadId, false);
 			_fe3d->aabb_setParentId(_currentQuadId, _currentQuadId);
-			_fe3d->aabb_setParentType(_currentQuadId, AabbParentType::QUAD3D);
+			_fe3d->aabb_setParentType(_currentQuadId, AabbParentType::QUAD);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{

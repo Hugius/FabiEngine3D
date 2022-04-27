@@ -19,7 +19,7 @@ void EngineInterface::text3d_delete(const string & id)
 		{
 			if(id == entity->getParentId())
 			{
-				if(entity->getParentType() == AabbParentType::TEXT3D)
+				if(entity->getParentType() == AabbParentType::TEXT)
 				{
 					aabb_delete(entityId);
 				}
@@ -247,7 +247,7 @@ const vector<string> EngineInterface::text3d_getChildAabbIds(const string & id) 
 		{
 			if(id == entity->getParentId())
 			{
-				if(entity->getParentType() == AabbParentType::TEXT3D)
+				if(entity->getParentType() == AabbParentType::TEXT)
 				{
 					result.push_back(entity->getId());
 				}

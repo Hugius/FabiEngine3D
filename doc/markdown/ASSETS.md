@@ -50,7 +50,6 @@
 
 <img src="../image/blend_map.png" width="25%"/>
 
-- Blend map assets must be placed in `~\projects\<your_project>\assets\image\blend_map\`.
 - Bit depth: **24**
 - Blend maps are used to render and mix multiple textures onto a terrain mesh.
 - Each pixel (R,G,B) of the blend map corresponds to a different diffuse/normal map.
@@ -71,7 +70,6 @@
 <img src="../image/skybox_back.png" width="25%"/>
 <img src="../image/skybox_front.png" width="25%"/>
 
-- Cube map assets must be placed in `~\projects\<your_project>\assets\image\cube_map\`
 - Recommended bit depth: **24**
 - Cube maps are used to render a skybox around the camera.
 - A cube map consists of 6 images: left, right, bottom, top, back, front.
@@ -83,7 +81,6 @@
 
 <img src="../image/diffuse_map.png" width="25%"/>
 
-- Diffuse map assets must be placed in `~\projects\<your_project>\assets\image\diffuse_map\`
 - Recommended bit depth: **24/32**
 - Diffuse maps are used to render a variety of colors to a mesh.
 
@@ -91,7 +88,6 @@
 
 <img src="../image/displacement_map.png" width="25%"/>
 
-- Displacement map assets must be placed in `~\projects\<your_project>\assets\image\displacement_map\`
 - Recommended bit depth: **24**
 - Displacement maps are used to create waves in a water mesh.
 - RGB pixels are automatically averaged to calculate their intensity.
@@ -101,7 +97,6 @@
 
 <img src="../image/dudv_map.png" width="25%"/>
 
-- DUDV map assets must be placed in `~\projects\<your_project>\assets\image\dudv_map\`
 - Recommended bit depth: **24**
 - DUDV maps are used to create ripples in a water texture.
 
@@ -109,7 +104,6 @@
 
 <img src="../image/emission_map.png" width="25%"/>
 
-- Emission map assets must be placed in `~\projects\<your_project>\assets\image\emission_map\`
 - Recommended bit depth: **24**
 - Emission maps are used to make certain parts of a mesh appear brighter.
 
@@ -117,7 +111,6 @@
 
 <img src="../image/flare_map.png" width="25%"/>
 
-- Flare map assets must be placed in `~\projects\<your_project>\assets\image\flare_map\`
 - Recommended bit depth: **24**
 - Flare maps are used in the [lens flare effect](GRAPHICS.md).
 - The pixel colors in the flare map are added to the 3D rendering pixels in the post-processing pipeline
@@ -126,7 +119,6 @@
 
 <img src="../image/font_map.png" width="50%"/>
 
-- Font map assets must be placed in `~\projects\<your_project>\assets\image\font_map\`
 - Recommended bit depth: **32**
 - Font maps are used to render text.
 - A [font generator](http://www.codehead.co.uk/cbfg/) must be used to create font maps.
@@ -136,7 +128,6 @@
 
 <img src="../image/height_map.png" width="25%"/>
 
-- Height map assets must be placed in `~\projects\<your_project>\assets\image\height_map\`.
 - Recommended bit depth: **24**
 - A maximum resolution of 1024 pixels is recommended.
 - A resolution where the width equals the height is recommended.
@@ -148,7 +139,6 @@
 
 <img src="../image/normal_map.png" width="25%"/>
 
-- Normal map assets must be placed in `~\projects\<your_project>\assets\image\normal_map\`
 - Recommended bit depth: **24**
 - Normal maps are used for more detailed lighting effects on a mesh.
 
@@ -156,7 +146,6 @@
 
 <img src="../image/reflection_map.png" width="25%"/>
 
-- Reflection map assets must be placed in `~\projects\<your_project>\assets\image\reflection_map\`
 - Recommended bit depth: **24**
 - Reflection maps are used to specify which parts of a mesh are reflective.
 
@@ -164,6 +153,5 @@
 
 <img src="../image/specular_map.png" width="25%"/>
 
-- Specular map assets must be placed in `~\projects\<your_project>\assets\image\specular_map\`
 - Recommended bit depth: **24**
 - Specular maps are used to specify which parts of a mesh are specular lighted.

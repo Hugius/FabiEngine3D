@@ -22,7 +22,7 @@ const bool Text3dEditor::saveEntitiesToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\text3d.fe3d");
 
-	for(const auto & textId : _loadedEntityIds)
+	for(const auto & textId : _loadedText3dIds)
 	{
 		auto size = _fe3d->text3d_getSize(textId);
 		auto color = _fe3d->text3d_getColor(textId);

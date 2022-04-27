@@ -41,8 +41,8 @@ const bool Animation3dEditor::loadAnimationsFromFile()
 			>> partCount
 			>> frameCount;
 
-		_loadedAnimationIds.push_back(animationId);
-		sort(_loadedAnimationIds.begin(), _loadedAnimationIds.end());
+		_loadedAnimation3dIds.push_back(animationId);
+		sort(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end());
 
 		_fe3d->animation3d_create(animationId);
 

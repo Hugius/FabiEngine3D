@@ -4,15 +4,15 @@
 
 const vector<string> & SkyEditor::getLoadedEntityIds() const
 {
-	return _loadedEntityIds;
+	return _loadedSkyIds;
 }
 
 void SkyEditor::deleteLoadedEntities()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedSkyIds)
 	{
 		_fe3d->sky_delete(id);
 	}
 
-	_loadedEntityIds.clear();
+	_loadedSkyIds.clear();
 }

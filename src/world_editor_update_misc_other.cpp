@@ -118,7 +118,7 @@ void WorldEditor::_updateMiscellaneous()
 		}
 	}
 
-	for(const auto & [textId, templateId] : _loadedTextIds)
+	for(const auto & [textId, templateId] : _loadedText3dIds)
 	{
 		_fe3d->text3d_setWireframed(textId, _isWireframeModeEnabled);
 
@@ -149,7 +149,7 @@ void WorldEditor::_updateMiscellaneous()
 
 	const auto isSelected = (!_selectedModelId.empty() ||
 							 !_selectedQuad3dId.empty() ||
-							 !_selectedTextId.empty() ||
+							 !_selectedText3dId.empty() ||
 							 !_selectedPointlightId.empty() ||
 							 !_selectedSpotlightId.empty() ||
 							 !_selectedCaptorId.empty() ||
@@ -157,7 +157,7 @@ void WorldEditor::_updateMiscellaneous()
 
 	const auto isActive = (!_activeModelId.empty() ||
 						   !_activeQuad3dId.empty() ||
-						   !_activeTextId.empty() ||
+						   !_activeText3dId.empty() ||
 						   !_activePointlightId.empty() ||
 						   !_activeSpotlightId.empty() ||
 						   !_activeCaptorId.empty() ||

@@ -33,7 +33,7 @@ private:
 
 	static inline const fvec3 PREVIEW_QUAD_POSITION = fvec3(0.0f, 0.0f, -0.75f);
 
-	vector<string> _loadedAnimationIds = {};
+	vector<string> _loadedAnimation2dIds = {};
 
 	string _hoveredAnimationId = "";
 	string _currentAnimationId = "";

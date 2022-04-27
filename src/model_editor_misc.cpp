@@ -4,15 +4,15 @@
 
 const vector<string> & ModelEditor::getLoadedEntityIds() const
 {
-	return _loadedEntityIds;
+	return _loadedModelIds;
 }
 
 void ModelEditor::deleteLoadedEntities()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedModelIds)
 	{
 		_fe3d->model_delete(id);
 	}
 
-	_loadedEntityIds.clear();
+	_loadedModelIds.clear();
 }

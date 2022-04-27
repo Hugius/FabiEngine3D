@@ -32,7 +32,7 @@ private:
 
 	static inline const fvec2 TEXT_SIZE = fvec2(1.0f, 0.2f);
 
-	vector<string> _loadedEntityIds = {};
+	vector<string> _loadedText2dIds = {};
 
 	string _currentTextId = "";
 	string _hoveredTextId = "";

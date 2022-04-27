@@ -50,7 +50,7 @@ private:
 	static inline constexpr int GRID_REPEAT = 10;
 	static inline constexpr int MAX_FRAME_COUNT = 100;
 
-	vector<string> _loadedAnimationIds = {};
+	vector<string> _loadedAnimation3dIds = {};
 
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 

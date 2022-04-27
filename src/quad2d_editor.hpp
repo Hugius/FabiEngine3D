@@ -30,7 +30,7 @@ private:
 
 	static inline const fvec2 QUAD_SIZE = fvec2(0.75f);
 
-	vector<string> _loadedEntityIds = {};
+	vector<string> _loadedQuad2dIds = {};
 
 	string _currentQuad2dId = "";
 	string _hoveredQuad2dId = "";

@@ -21,7 +21,7 @@ const bool Quad2dEditor::saveEntitiesToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\quad2d.fe3d");
 
-	for(const auto & quad2dId : _loadedEntityIds)
+	for(const auto & quad2dId : _loadedQuad2dIds)
 	{
 		auto diffuseMapPath = _fe3d->quad2d_getDiffuseMapPath(quad2dId);
 		auto color = _fe3d->quad2d_getColor(quad2dId);

@@ -249,8 +249,8 @@ const bool ModelEditor::loadEntitiesFromFile()
 
 			if(_fe3d->model_isExisting(modelId))
 			{
-				_loadedEntityIds.push_back(modelId);
-				sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+				_loadedModelIds.push_back(modelId);
+				sort(_loadedModelIds.begin(), _loadedModelIds.end());
 
 				_fe3d->model_setVisible(modelId, false);
 				_fe3d->model_setBaseSize(modelId, size);

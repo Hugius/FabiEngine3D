@@ -42,7 +42,7 @@ void WaterEditor::_load()
 
 void WaterEditor::_unload()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedWaterIds)
 	{
 		_fe3d->water_delete(id);
 	}
@@ -64,7 +64,7 @@ void WaterEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("waterId");
 
-	_loadedEntityIds.clear();
+	_loadedWaterIds.clear();
 }
 
 void WaterEditor::_loadGUI()

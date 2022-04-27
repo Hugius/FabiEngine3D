@@ -47,7 +47,7 @@ private:
 
 	static inline constexpr int GRID_REPEAT = 10;
 
-	vector<string> _loadedEntityIds = {};
+	vector<string> _loadedText3dIds = {};
 
 	string _hoveredTextId = "";
 	string _currentTextId = "";

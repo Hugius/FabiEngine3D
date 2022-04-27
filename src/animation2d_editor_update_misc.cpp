@@ -43,7 +43,7 @@ void Animation2dEditor::_updateAnimationCreating()
 
 		newAnimationId = ("@" + newAnimationId);
 
-		if(find(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), newAnimationId) != _loadedAnimationIds.end())
+		if(find(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end(), newAnimationId) != _loadedAnimation2dIds.end())
 		{
 			Logger::throwWarning("Animation already exists");
 
@@ -51,8 +51,8 @@ void Animation2dEditor::_updateAnimationCreating()
 		}
 
 		_currentAnimationId = newAnimationId;
-		_loadedAnimationIds.push_back(newAnimationId);
-		sort(_loadedAnimationIds.begin(), _loadedAnimationIds.end());
+		_loadedAnimation2dIds.push_back(newAnimationId);
+		sort(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end());
 
 		_fe3d->animation2d_create(newAnimationId);
 
@@ -100,7 +100,7 @@ void Animation2dEditor::_updateAnimationDeleting()
 
 			_fe3d->animation2d_delete(_currentAnimationId);
 
-			_loadedAnimationIds.erase(remove(_loadedAnimationIds.begin(), _loadedAnimationIds.end(), _currentAnimationId), _loadedAnimationIds.end());
+			_loadedAnimation2dIds.erase(remove(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end(), _currentAnimationId), _loadedAnimation2dIds.end());
 			_currentAnimationId = "";
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")

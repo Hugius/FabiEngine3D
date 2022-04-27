@@ -54,7 +54,7 @@ private:
 
 	static inline constexpr int GRID_REPEAT = 10;
 
-	vector<string> _loadedEntityIds = {};
+	vector<string> _loadedModelIds = {};
 
 	string _currentModelId = "";
 	string _currentPartId = "";

@@ -42,7 +42,7 @@ void TerrainEditor::_load()
 
 void TerrainEditor::_unload()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedTerrainIds)
 	{
 		_fe3d->terrain_delete(id);
 	}
@@ -64,7 +64,7 @@ void TerrainEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("terrainId");
 
-	_loadedEntityIds.clear();
+	_loadedTerrainIds.clear();
 }
 
 void TerrainEditor::_loadGUI()

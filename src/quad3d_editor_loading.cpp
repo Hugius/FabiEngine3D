@@ -148,8 +148,8 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-		_loadedEntityIds.push_back(quad3dId);
-		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+		_loadedQuad3dIds.push_back(quad3dId);
+		sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
 
 		_fe3d->quad3d_create(quad3dId, false);
 		_fe3d->quad3d_setVisible(quad3dId, false);

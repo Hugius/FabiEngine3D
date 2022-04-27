@@ -18,7 +18,7 @@ void WaterEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedEntityIds;
+			auto ids = _loadedWaterIds;
 
 			for(auto & id : ids)
 			{
@@ -29,7 +29,7 @@ void WaterEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedEntityIds;
+			auto ids = _loadedWaterIds;
 
 			for(auto & id : ids)
 			{

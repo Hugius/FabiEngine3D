@@ -14,11 +14,11 @@ void WorldEditor::_selectQuad3d(const string & id)
 	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Quad3D: " + _selectedQuad3dId);
 }
 
-void WorldEditor::_selectText(const string & id)
+void WorldEditor::_selectText3d(const string & id)
 {
-	_selectedTextId = id;
+	_selectedText3dId = id;
 
-	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Text3D: " + _selectedTextId);
+	_gui->getOverlay()->getTextField("selectedId")->setTextContent("Selected Text3D: " + _selectedText3dId);
 }
 
 void WorldEditor::_selectPointlight(const string & id)
@@ -62,7 +62,7 @@ void WorldEditor::_deselectQuad3d(const string & id)
 	_fe3d->quad3d_setOpacity(id, 1.0f);
 }
 
-void WorldEditor::_deselectText(const string & id)
+void WorldEditor::_deselectText3d(const string & id)
 {
 	_fe3d->text3d_setOpacity(id, 1.0f);
 }

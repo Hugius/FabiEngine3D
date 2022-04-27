@@ -52,7 +52,7 @@ void Quad3dEditor::_load()
 
 void Quad3dEditor::_unload()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedQuad3dIds)
 	{
 		_fe3d->quad3d_delete(id);
 	}
@@ -82,7 +82,7 @@ void Quad3dEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("quad3dId");
 
-	_loadedEntityIds.clear();
+	_loadedQuad3dIds.clear();
 }
 
 void Quad3dEditor::_loadGUI()

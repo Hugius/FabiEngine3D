@@ -20,7 +20,7 @@ void Animation2dEditor::_load()
 
 void Animation2dEditor::_unload()
 {
-	for(const auto & id : _loadedAnimationIds)
+	for(const auto & id : _loadedAnimation2dIds)
 	{
 		_fe3d->animation2d_delete(id);
 	}
@@ -33,7 +33,7 @@ void Animation2dEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("animationId");
 
-	_loadedAnimationIds.clear();
+	_loadedAnimation2dIds.clear();
 }
 
 void Animation2dEditor::_loadGUI()

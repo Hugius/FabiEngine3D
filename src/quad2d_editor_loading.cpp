@@ -110,8 +110,8 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 
 		if(_fe3d->quad2d_isExisting(quad2dId))
 		{
-			_loadedEntityIds.push_back(quad2dId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+			_loadedQuad2dIds.push_back(quad2dId);
+			sort(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end());
 
 			_fe3d->quad2d_setVisible(quad2dId, false);
 			_fe3d->quad2d_setPosition(quad2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));

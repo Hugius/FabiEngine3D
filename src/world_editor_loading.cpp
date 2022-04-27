@@ -265,7 +265,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_loadedTextIds.insert({textId, templateId});
+			_loadedText3dIds.insert({textId, templateId});
 
 			_worldHelper->copyTemplateText(textId, templateId);
 

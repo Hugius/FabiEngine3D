@@ -36,12 +36,12 @@ void WorldEditor::_activateQuad3d(const string & id)
 	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Quad3D: " + _activeQuad3dId);
 }
 
-void WorldEditor::_activateText(const string & id)
+void WorldEditor::_activateText3d(const string & id)
 {
-	_activeTextId = id;
+	_activeText3dId = id;
 
 	const auto rightWindow = _gui->getRightViewport()->getWindow("main");
-	const auto position = _fe3d->text3d_getPosition(_activeTextId);
+	const auto position = _fe3d->text3d_getPosition(_activeText3dId);
 
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getButton("rotation")->setHoverable(true);
@@ -51,7 +51,7 @@ void WorldEditor::_activateText(const string & id)
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputBox("y")->setTextContent(to_string(static_cast<int>(position.y)));
 	_gui->getRightViewport()->getWindow("main")->getScreen("text3dPropertiesMenu")->getInputBox("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
-	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Text3D: " + _activeTextId);
+	_gui->getOverlay()->getTextField("activeId")->setTextContent("Active Text3D: " + _activeText3dId);
 }
 
 void WorldEditor::_activatePointlight(const string & id)
@@ -141,14 +141,14 @@ void WorldEditor::_deactivateQuad3d()
 	_activeQuad3dId = "";
 }
 
-void WorldEditor::_deactivateText()
+void WorldEditor::_deactivateText3d()
 {
-	if(!_activeTextId.empty())
+	if(!_activeText3dId.empty())
 	{
-		_deselectText(_activeTextId);
+		_deselectText3d(_activeText3dId);
 	}
 
-	_activeTextId = "";
+	_activeText3dId = "";
 }
 
 void WorldEditor::_deactivatePointlight()

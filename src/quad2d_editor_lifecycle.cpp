@@ -14,7 +14,7 @@ void Quad2dEditor::_load()
 
 void Quad2dEditor::_unload()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedQuad2dIds)
 	{
 		_fe3d->quad2d_delete(id);
 	}
@@ -23,7 +23,7 @@ void Quad2dEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("quad2dId");
 
-	_loadedEntityIds.clear();
+	_loadedQuad2dIds.clear();
 }
 
 void Quad2dEditor::_loadGUI()

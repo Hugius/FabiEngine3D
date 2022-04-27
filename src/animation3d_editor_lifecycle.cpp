@@ -60,7 +60,7 @@ void Animation3dEditor::_unload()
 {
 	_modelEditor->deleteLoadedEntities();
 
-	for(const auto & id : _loadedAnimationIds)
+	for(const auto & id : _loadedAnimation3dIds)
 	{
 		_fe3d->animation3d_delete(id);
 	}
@@ -96,7 +96,7 @@ void Animation3dEditor::_unload()
 	_gui->getOverlay()->deleteTextField("animationId");
 	_gui->getOverlay()->deleteTextField("animationFrame");
 
-	_loadedAnimationIds.clear();
+	_loadedAnimation3dIds.clear();
 }
 
 void Animation3dEditor::_loadGUI()

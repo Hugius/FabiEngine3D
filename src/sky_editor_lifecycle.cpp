@@ -18,7 +18,7 @@ void SkyEditor::_load()
 
 void SkyEditor::_unload()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedSkyIds)
 	{
 		_fe3d->sky_delete(id);
 	}
@@ -31,7 +31,7 @@ void SkyEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("skyId");
 
-	_loadedEntityIds.clear();
+	_loadedSkyIds.clear();
 }
 
 void SkyEditor::_loadGUI()

@@ -113,8 +113,8 @@ const bool Text2dEditor::loadEntitiesFromFile()
 
 		if(_fe3d->text2d_isExisting(textId))
 		{
-			_loadedEntityIds.push_back(textId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+			_loadedText2dIds.push_back(textId);
+			sort(_loadedText2dIds.begin(), _loadedText2dIds.end());
 
 			_fe3d->text2d_setVisible(textId, false);
 			_fe3d->text2d_setPosition(textId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));

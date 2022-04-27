@@ -42,8 +42,8 @@ const bool Animation2dEditor::loadAnimationsFromFile()
 			>> columnCount
 			>> interval;
 
-		_loadedAnimationIds.push_back(animationId);
-		sort(_loadedAnimationIds.begin(), _loadedAnimationIds.end());
+		_loadedAnimation2dIds.push_back(animationId);
+		sort(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end());
 
 		_fe3d->animation2d_create(animationId);
 		_fe3d->animation2d_setRowCount(animationId, rowCount);

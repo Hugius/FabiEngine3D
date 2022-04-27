@@ -4,15 +4,15 @@
 
 const vector<string> & WaterEditor::getLoadedEntityIds() const
 {
-	return _loadedEntityIds;
+	return _loadedWaterIds;
 }
 
 void WaterEditor::deleteLoadedEntities()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedWaterIds)
 	{
 		_fe3d->water_delete(id);
 	}
 
-	_loadedEntityIds.clear();
+	_loadedWaterIds.clear();
 }

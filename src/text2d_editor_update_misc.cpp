@@ -45,7 +45,7 @@ void Text2dEditor::_updateTextCreating()
 
 		newTextId = ("@" + newTextId);
 
-		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newTextId) != _loadedEntityIds.end())
+		if(find(_loadedText2dIds.begin(), _loadedText2dIds.end(), newTextId) != _loadedText2dIds.end())
 		{
 			Logger::throwWarning("Text already exists");
 
@@ -88,8 +88,8 @@ void Text2dEditor::_updateTextCreating()
 		if(_fe3d->text2d_isExisting(newTextId))
 		{
 			_currentTextId = newTextId;
-			_loadedEntityIds.push_back(newTextId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+			_loadedText2dIds.push_back(newTextId);
+			sort(_loadedText2dIds.begin(), _loadedText2dIds.end());
 
 			_fe3d->text2d_setPosition(newTextId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
 			_fe3d->text2d_setSize(newTextId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
@@ -154,7 +154,7 @@ void Text2dEditor::_updateTextDeleting()
 		{
 			_fe3d->text2d_delete(_currentTextId);
 
-			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentTextId), _loadedEntityIds.end());
+			_loadedText2dIds.erase(remove(_loadedText2dIds.begin(), _loadedText2dIds.end(), _currentTextId), _loadedText2dIds.end());
 			_currentTextId = "";
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")

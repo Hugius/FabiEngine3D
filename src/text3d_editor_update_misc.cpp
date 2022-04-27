@@ -80,7 +80,7 @@ void Text3dEditor::_updateTextCreating()
 
 		newTextId = ("@" + newTextId);
 
-		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newTextId) != _loadedEntityIds.end())
+		if(find(_loadedText3dIds.begin(), _loadedText3dIds.end(), newTextId) != _loadedText3dIds.end())
 		{
 			Logger::throwWarning("Text already exists");
 
@@ -123,8 +123,8 @@ void Text3dEditor::_updateTextCreating()
 		if(_fe3d->text3d_isExisting(newTextId))
 		{
 			_currentTextId = newTextId;
-			_loadedEntityIds.push_back(newTextId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+			_loadedText3dIds.push_back(newTextId);
+			sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuChoice");
 			_gui->getOverlay()->getTextField("textId")->setTextContent("Text3D: " + newTextId.substr(1));
@@ -188,7 +188,7 @@ void Text3dEditor::_updateTextDeleting()
 		{
 			_fe3d->text3d_delete(_currentTextId);
 
-			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentTextId), _loadedEntityIds.end());
+			_loadedText3dIds.erase(remove(_loadedText3dIds.begin(), _loadedText3dIds.end(), _currentTextId), _loadedText3dIds.end());
 			_currentTextId = "";
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")

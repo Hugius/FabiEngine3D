@@ -45,7 +45,7 @@ void Quad2dEditor::_updateQuad2dCreating()
 
 		newQuad2dId = ("@" + newQuad2dId);
 
-		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newQuad2dId) != _loadedEntityIds.end())
+		if(find(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end(), newQuad2dId) != _loadedQuad2dIds.end())
 		{
 			Logger::throwWarning("Quad already exists");
 
@@ -62,8 +62,8 @@ void Quad2dEditor::_updateQuad2dCreating()
 		if(_fe3d->quad2d_isExisting(newQuad2dId))
 		{
 			_currentQuad2dId = newQuad2dId;
-			_loadedEntityIds.push_back(newQuad2dId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+			_loadedQuad2dIds.push_back(newQuad2dId);
+			sort(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end());
 
 			_fe3d->quad2d_setPosition(newQuad2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
 			_fe3d->quad2d_setSize(newQuad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
@@ -130,7 +130,7 @@ void Quad2dEditor::_updateQuadDeleting()
 		{
 			_fe3d->quad2d_delete(_currentQuad2dId);
 
-			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentQuad2dId), _loadedEntityIds.end());
+			_loadedQuad2dIds.erase(remove(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end(), _currentQuad2dId), _loadedQuad2dIds.end());
 			_currentQuad2dId = "";
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")

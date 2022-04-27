@@ -44,7 +44,7 @@ private:
 
 	static inline constexpr int GRID_REPEAT = 200;
 
-	vector <string> _loadedEntityIds = {};
+	vector <string> _loadedWaterIds = {};
 
 	string _currentWaterId = "";
 };

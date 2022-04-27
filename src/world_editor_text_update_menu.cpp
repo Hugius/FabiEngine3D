@@ -11,10 +11,10 @@ void WorldEditor::_updateText3dMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(!_currentTemplateTextId.empty())
+			if(!_currentTemplateText3dId.empty())
 			{
-				_fe3d->text3d_setVisible(_currentTemplateTextId, false);
-				_currentTemplateTextId = "";
+				_fe3d->text3d_setVisible(_currentTemplateText3dId, false);
+				_currentTemplateText3dId = "";
 			}
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -31,13 +31,13 @@ void WorldEditor::_updateText3dMenu()
 
 			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("textList")->deleteOptions();
 
-			for(auto & [placedId, templateId] : _loadedTextIds)
+			for(auto & [placedId, templateId] : _loadedText3dIds)
 			{
 				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("textList")->createOption(placedId, placedId);
 			}
 		}
 
-		screen->getButton("choice")->setHoverable(_currentTemplateTextId.empty());
+		screen->getButton("choice")->setHoverable(_currentTemplateText3dId.empty());
 	}
 }
 
@@ -62,18 +62,18 @@ void WorldEditor::_updateText3dPlacingMenu()
 				_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 				_deactivateModel();
-				_deactivateText();
+				_deactivateText3d();
 				_deactivateSound();
 				_deactivatePointlight();
 				_deactivateCaptor();
 
-				_currentTemplateTextId = hoveredOptionId;
-				_fe3d->text3d_setVisible(_currentTemplateTextId, true);
+				_currentTemplateText3dId = hoveredOptionId;
+				_fe3d->text3d_setVisible(_currentTemplateText3dId, true);
 				Tools::setCursorPosition(Tools::convertFromNdc(Tools::convertPositionRelativeToDisplay(fvec2(0.0f))));
 
 				if(_fe3d->terrain_getSelectedId().empty())
 				{
-					_fe3d->text3d_setPosition(_currentTemplateTextId, fvec3(0.0f));
+					_fe3d->text3d_setPosition(_currentTemplateText3dId, fvec3(0.0f));
 					_gui->getOverlay()->openValueForm("positionX", "X", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
 					_gui->getOverlay()->openValueForm("positionZ", "Z", 0.0f, fvec2(0.0f, 0.1f), 5, false, true, false);
@@ -112,11 +112,11 @@ void WorldEditor::_updateText3dChoosingMenu()
 				_deactivateSpotlight();
 				_deactivateCaptor();
 
-				_activateText(hoveredOptionId);
+				_activateText3d(hoveredOptionId);
 			}
 			else
 			{
-				_selectText(hoveredOptionId);
+				_selectText3d(hoveredOptionId);
 
 				_dontResetSelectedText3d = true;
 			}

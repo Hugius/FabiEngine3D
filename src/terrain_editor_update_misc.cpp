@@ -77,7 +77,7 @@ void TerrainEditor::_updateTerrainCreating()
 
 		newTerrainId = ("@" + newTerrainId);
 
-		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newTerrainId) != _loadedEntityIds.end())
+		if(find(_loadedTerrainIds.begin(), _loadedTerrainIds.end(), newTerrainId) != _loadedTerrainIds.end())
 		{
 			Logger::throwWarning("Terrain already exists");
 
@@ -122,8 +122,8 @@ void TerrainEditor::_updateTerrainCreating()
 			_fe3d->terrain_select(newTerrainId);
 
 			_currentTerrainId = newTerrainId;
-			_loadedEntityIds.push_back(newTerrainId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+			_loadedTerrainIds.push_back(newTerrainId);
+			sort(_loadedTerrainIds.begin(), _loadedTerrainIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			_gui->getOverlay()->getTextField("terrainId")->setTextContent("Terrain: " + newTerrainId.substr(1));
@@ -174,7 +174,7 @@ void TerrainEditor::_updateTerrainDeleting()
 		{
 			_fe3d->terrain_delete(_currentTerrainId);
 
-			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentTerrainId), _loadedEntityIds.end());
+			_loadedTerrainIds.erase(remove(_loadedTerrainIds.begin(), _loadedTerrainIds.end(), _currentTerrainId), _loadedTerrainIds.end());
 			_currentTerrainId = "";
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")

@@ -7,15 +7,15 @@ void Animation3dEditor::inject(shared_ptr<ModelEditor> modelEditor)
 
 const vector<string> & Animation3dEditor::getLoadedAnimationIds() const
 {
-	return _loadedAnimationIds;
+	return _loadedAnimation3dIds;
 }
 
 void Animation3dEditor::deleteLoadedAnimations()
 {
-	for(const auto & id : _loadedAnimationIds)
+	for(const auto & id : _loadedAnimation3dIds)
 	{
 		_fe3d->animation3d_delete(id);
 	}
 
-	_loadedAnimationIds.clear();
+	_loadedAnimation3dIds.clear();
 }

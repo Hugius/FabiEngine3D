@@ -80,7 +80,7 @@ void Quad3dEditor::_updateQuad3dCreating()
 
 		newQuad3dId = ("@" + newQuad3dId);
 
-		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newQuad3dId) != _loadedEntityIds.end())
+		if(find(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end(), newQuad3dId) != _loadedQuad3dIds.end())
 		{
 			Logger::throwWarning("Quad already exists");
 
@@ -88,8 +88,8 @@ void Quad3dEditor::_updateQuad3dCreating()
 		}
 
 		_currentQuad3dId = newQuad3dId;
-		_loadedEntityIds.push_back(newQuad3dId);
-		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+		_loadedQuad3dIds.push_back(newQuad3dId);
+		sort(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end());
 
 		_fe3d->quad3d_create(newQuad3dId, false);
 
@@ -152,7 +152,7 @@ void Quad3dEditor::_updateQuadDeleting()
 		{
 			_fe3d->quad3d_delete(_currentQuad3dId);
 
-			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentQuad3dId), _loadedEntityIds.end());
+			_loadedQuad3dIds.erase(remove(_loadedQuad3dIds.begin(), _loadedQuad3dIds.end(), _currentQuad3dId), _loadedQuad3dIds.end());
 			_currentQuad3dId = "";
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")

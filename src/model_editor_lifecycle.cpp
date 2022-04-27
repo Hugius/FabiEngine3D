@@ -63,7 +63,7 @@ void ModelEditor::_load()
 
 void ModelEditor::_unload()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedModelIds)
 	{
 		_fe3d->model_delete(id);
 	}
@@ -99,7 +99,7 @@ void ModelEditor::_unload()
 	_gui->getOverlay()->deleteTextField("modelId");
 	_gui->getOverlay()->deleteTextField("aabbId");
 
-	_loadedEntityIds.clear();
+	_loadedModelIds.clear();
 }
 
 void ModelEditor::_loadGUI()

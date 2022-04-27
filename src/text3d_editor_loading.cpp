@@ -135,8 +135,8 @@ const bool Text3dEditor::loadEntitiesFromFile()
 
 		if(_fe3d->text3d_isExisting(textId))
 		{
-			_loadedEntityIds.push_back(textId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+			_loadedText3dIds.push_back(textId);
+			sort(_loadedText3dIds.begin(), _loadedText3dIds.end());
 
 			_fe3d->text3d_setVisible(textId, false);
 			_fe3d->text3d_setSize(textId, size);

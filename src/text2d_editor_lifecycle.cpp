@@ -14,7 +14,7 @@ void Text2dEditor::_load()
 
 void Text2dEditor::_unload()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedText2dIds)
 	{
 		_fe3d->text2d_delete(id);
 	}
@@ -23,7 +23,7 @@ void Text2dEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("textId");
 
-	_loadedEntityIds.clear();
+	_loadedText2dIds.clear();
 }
 
 void Text2dEditor::_loadGUI()

@@ -4,15 +4,15 @@
 
 const vector<string> & Text3dEditor::getLoadedEntityIds() const
 {
-	return _loadedEntityIds;
+	return _loadedText3dIds;
 }
 
 void Text3dEditor::deleteLoadedEntities()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedText3dIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
 
-	_loadedEntityIds.clear();
+	_loadedText3dIds.clear();
 }

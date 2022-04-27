@@ -296,8 +296,8 @@ const bool TerrainEditor::loadEntitiesFromFile()
 
 		if(_fe3d->terrain_isExisting(terrainId))
 		{
-			_loadedEntityIds.push_back(terrainId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+			_loadedTerrainIds.push_back(terrainId);
+			sort(_loadedTerrainIds.begin(), _loadedTerrainIds.end());
 
 			_fe3d->terrain_setMaxHeight(terrainId, maxHeight);
 			_fe3d->terrain_setTextureRepeat(terrainId, textureRepeat);

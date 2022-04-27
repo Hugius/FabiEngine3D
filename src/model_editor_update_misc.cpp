@@ -108,7 +108,7 @@ void ModelEditor::_updateModelCreating()
 
 		newModelId = ("@" + newModelId);
 
-		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newModelId) != _loadedEntityIds.end())
+		if(find(_loadedModelIds.begin(), _loadedModelIds.end(), newModelId) != _loadedModelIds.end())
 		{
 			Logger::throwWarning("Model already exists");
 
@@ -151,8 +151,8 @@ void ModelEditor::_updateModelCreating()
 		if(_fe3d->model_isExisting(newModelId))
 		{
 			_currentModelId = newModelId;
-			_loadedEntityIds.push_back(newModelId);
-			sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+			_loadedModelIds.push_back(newModelId);
+			sort(_loadedModelIds.begin(), _loadedModelIds.end());
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			_gui->getOverlay()->getTextField("modelId")->setTextContent("Model: " + newModelId.substr(1));
@@ -214,7 +214,7 @@ void ModelEditor::_updateModelDeleting()
 		{
 			_fe3d->model_delete(_currentModelId);
 
-			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentModelId), _loadedEntityIds.end());
+			_loadedModelIds.erase(remove(_loadedModelIds.begin(), _loadedModelIds.end(), _currentModelId), _loadedModelIds.end());
 			_currentModelId = "";
 
 		}

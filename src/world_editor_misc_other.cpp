@@ -82,7 +82,7 @@ void WorldEditor::clearLoadedWorld()
 		_fe3d->quad3d_delete(placedId);
 	}
 
-	for(const auto & [placedId, templateId] : _loadedTextIds)
+	for(const auto & [placedId, templateId] : _loadedText3dIds)
 	{
 		_fe3d->text3d_delete(placedId);
 	}
@@ -129,7 +129,7 @@ void WorldEditor::clearLoadedWorld()
 
 	_loadedModelIds.clear();
 	_loadedQuad3dIds.clear();
-	_loadedTextIds.clear();
+	_loadedText3dIds.clear();
 	_loadedPointlightIds.clear();
 	_loadedSpotlightIds.clear();
 	_loadedCaptorIds.clear();

@@ -161,8 +161,8 @@ const bool WaterEditor::loadEntitiesFromFile()
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
-		_loadedEntityIds.push_back(waterId);
-		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+		_loadedWaterIds.push_back(waterId);
+		sort(_loadedWaterIds.begin(), _loadedWaterIds.end());
 
 		_fe3d->water_create(waterId);
 		_fe3d->water_setSize(waterId, size);

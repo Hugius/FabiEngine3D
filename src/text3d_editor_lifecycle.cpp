@@ -52,7 +52,7 @@ void Text3dEditor::_load()
 
 void Text3dEditor::_unload()
 {
-	for(const auto & id : _loadedEntityIds)
+	for(const auto & id : _loadedText3dIds)
 	{
 		_fe3d->text3d_delete(id);
 	}
@@ -82,7 +82,7 @@ void Text3dEditor::_unload()
 
 	_gui->getOverlay()->deleteTextField("textId");
 
-	_loadedEntityIds.clear();
+	_loadedText3dIds.clear();
 }
 
 void Text3dEditor::_loadGUI()

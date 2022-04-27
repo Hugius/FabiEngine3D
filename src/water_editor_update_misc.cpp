@@ -75,7 +75,7 @@ void WaterEditor::_updateWaterCreating()
 
 		newWaterId = ("@" + newWaterId);
 
-		if(find(_loadedEntityIds.begin(), _loadedEntityIds.end(), newWaterId) != _loadedEntityIds.end())
+		if(find(_loadedWaterIds.begin(), _loadedWaterIds.end(), newWaterId) != _loadedWaterIds.end())
 		{
 			Logger::throwWarning("Water already exists");
 
@@ -83,8 +83,8 @@ void WaterEditor::_updateWaterCreating()
 		}
 
 		_currentWaterId = newWaterId;
-		_loadedEntityIds.push_back(newWaterId);
-		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+		_loadedWaterIds.push_back(newWaterId);
+		sort(_loadedWaterIds.begin(), _loadedWaterIds.end());
 
 		_fe3d->water_create(newWaterId);
 		_fe3d->water_select(newWaterId);
@@ -137,7 +137,7 @@ void WaterEditor::_updateWaterDeleting()
 		{
 			_fe3d->water_delete(_currentWaterId);
 
-			_loadedEntityIds.erase(remove(_loadedEntityIds.begin(), _loadedEntityIds.end(), _currentWaterId), _loadedEntityIds.end());
+			_loadedWaterIds.erase(remove(_loadedWaterIds.begin(), _loadedWaterIds.end(), _currentWaterId), _loadedWaterIds.end());
 			_currentWaterId = "";
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")

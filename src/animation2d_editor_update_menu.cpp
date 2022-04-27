@@ -18,7 +18,7 @@ void Animation2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _loadedAnimationIds;
+			auto ids = _loadedAnimation2dIds;
 
 			for(auto & id : ids)
 			{
@@ -29,7 +29,7 @@ void Animation2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _loadedAnimationIds;
+			auto ids = _loadedAnimation2dIds;
 
 			for(auto & id : ids)
 			{

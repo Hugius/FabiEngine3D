@@ -131,8 +131,8 @@ const bool SkyEditor::loadEntitiesFromFile()
 			}
 		}
 
-		_loadedEntityIds.push_back(skyId);
-		sort(_loadedEntityIds.begin(), _loadedEntityIds.end());
+		_loadedSkyIds.push_back(skyId);
+		sort(_loadedSkyIds.begin(), _loadedSkyIds.end());
 
 		_fe3d->sky_create(skyId);
 		_fe3d->sky_setCubeMaps(skyId, cubeMapPaths);

@@ -324,6 +324,11 @@ void RenderWindow::setVisible(bool value)
 	}
 
 	ShowWindow(_windowHandle, (value ? SW_SHOW : SW_HIDE));
+
+	if(value)
+	{
+		SetFocus(_windowHandle);
+	}
 }
 
 const ivec2 RenderWindow::getPosition() const

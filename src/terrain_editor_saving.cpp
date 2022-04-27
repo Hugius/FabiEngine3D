@@ -79,12 +79,6 @@ const bool TerrainEditor::saveEntitiesToFile() const
 			<< " "
 			<< diffuseMapPath
 			<< " "
-			<< maxHeight
-			<< " "
-			<< textureRepeat
-			<< " "
-			<< lightness
-			<< " "
 			<< blendMapPath
 			<< " "
 			<< redDiffuseMapPath
@@ -93,12 +87,6 @@ const bool TerrainEditor::saveEntitiesToFile() const
 			<< " "
 			<< blueDiffuseMapPath
 			<< " "
-			<< redTextureRepeat
-			<< " "
-			<< greenTextureRepeat
-			<< " "
-			<< blueTextureRepeat
-			<< " "
 			<< normalMapPath
 			<< " "
 			<< redNormalMapPath
@@ -106,6 +94,18 @@ const bool TerrainEditor::saveEntitiesToFile() const
 			<< greenNormalMapPath
 			<< " "
 			<< blueNormalMapPath
+			<< " "
+			<< maxHeight
+			<< " "
+			<< textureRepeat
+			<< " "
+			<< lightness
+			<< " "
+			<< redTextureRepeat
+			<< " "
+			<< greenTextureRepeat
+			<< " "
+			<< blueTextureRepeat
 			<< " "
 			<< isSpecular
 			<< " "

@@ -48,6 +48,8 @@ const bool Text3dEditor::saveEntitiesToFile() const
 		file
 			<< textId
 			<< " "
+			<< fontMapPath
+			<< " "
 			<< size.x
 			<< " "
 			<< size.y
@@ -65,8 +67,6 @@ const bool Text3dEditor::saveEntitiesToFile() const
 			<< isHorizontallyFlipped
 			<< " "
 			<< isVerticallyFlipped
-			<< " "
-			<< fontMapPath
 			<< " "
 			<< isReflected
 			<< " "

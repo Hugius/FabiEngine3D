@@ -34,26 +34,11 @@ const vector<string> Quad3dEditor::getImagePathsFromFile() const
 		string quadId;
 		string diffuseMapPath;
 		string emissionMapPath;
-		fvec2 size;
-		fvec3 color;
-		bool isFacingCameraHorizontally;
-		bool isFacingCameraVertically;
-		bool isHorizontallyFlipped;
-		bool isVerticallyFlipped;
 
 		istringstream iss(line);
 
 		iss
 			>> quadId
-			>> size.x
-			>> size.y
-			>> color.r
-			>> color.g
-			>> color.b
-			>> isFacingCameraHorizontally
-			>> isFacingCameraVertically
-			>> isHorizontallyFlipped
-			>> isVerticallyFlipped
 			>> diffuseMapPath
 			>> emissionMapPath;
 
@@ -134,6 +119,8 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 
 		iss
 			>> quadId
+			>> diffuseMapPath
+			>> emissionMapPath
 			>> size.x
 			>> size.y
 			>> color.r
@@ -143,8 +130,6 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 			>> isFacingCameraVertically
 			>> isHorizontallyFlipped
 			>> isVerticallyFlipped
-			>> diffuseMapPath
-			>> emissionMapPath
 			>> isReflected
 			>> isShadowed
 			>> lightness

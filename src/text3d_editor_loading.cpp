@@ -33,26 +33,11 @@ const vector<string> Text3dEditor::getImagePathsFromFile() const
 	{
 		string textId;
 		string fontMapPath;
-		fvec2 size;
-		fvec3 color;
-		bool isFacingCameraHorizontally;
-		bool isFacingCameraVertically;
-		bool isHorizontallyFlipped;
-		bool isVerticallyFlipped;
 
 		istringstream iss(line);
 
 		iss
 			>> textId
-			>> size.x
-			>> size.y
-			>> color.r
-			>> color.g
-			>> color.b
-			>> isFacingCameraHorizontally
-			>> isFacingCameraVertically
-			>> isHorizontallyFlipped
-			>> isVerticallyFlipped
 			>> fontMapPath;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
@@ -117,6 +102,7 @@ const bool Text3dEditor::loadEntitiesFromFile()
 
 		iss
 			>> textId
+			>> fontMapPath
 			>> size.x
 			>> size.y
 			>> color.r
@@ -126,7 +112,6 @@ const bool Text3dEditor::loadEntitiesFromFile()
 			>> isFacingCameraVertically
 			>> isHorizontallyFlipped
 			>> isVerticallyFlipped
-			>> fontMapPath
 			>> isReflected
 			>> isShadowed
 			>> lightness

@@ -54,6 +54,10 @@ const bool Quad3dEditor::saveEntitiesToFile() const
 		file
 			<< quadId
 			<< " "
+			<< diffuseMapPath
+			<< " "
+			<< emissionMapPath
+			<< " "
 			<< size.x
 			<< " "
 			<< size.y
@@ -71,10 +75,6 @@ const bool Quad3dEditor::saveEntitiesToFile() const
 			<< isHorizontallyFlipped
 			<< " "
 			<< isVerticallyFlipped
-			<< " "
-			<< diffuseMapPath
-			<< " "
-			<< emissionMapPath
 			<< " "
 			<< isReflected
 			<< " "

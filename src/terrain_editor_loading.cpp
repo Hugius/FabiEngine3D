@@ -55,20 +55,20 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 			>> terrainId
 			>> heightMapPath
 			>> diffuseMapPath
-			>> maxHeight
-			>> textureRepeat
-			>> lightness
 			>> blendMapPath
 			>> redDiffuseMapPath
 			>> greenDiffuseMapPath
 			>> blueDiffuseMapPath
-			>> redTextureRepeat
-			>> greenTextureRepeat
-			>> blueTextureRepeat
 			>> normalMapPath
 			>> redNormalMapPath
 			>> greenNormalMapPath
-			>> blueNormalMapPath;
+			>> blueNormalMapPath
+			>> maxHeight
+			>> textureRepeat
+			>> lightness
+			>> redTextureRepeat
+			>> greenTextureRepeat
+			>> blueTextureRepeat;
 
 		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -247,20 +247,20 @@ const bool TerrainEditor::loadEntitiesFromFile()
 			>> terrainId
 			>> heightMapPath
 			>> diffuseMapPath
-			>> maxHeight
-			>> textureRepeat
-			>> lightness
 			>> blendMapPath
 			>> redDiffuseMapPath
 			>> greenDiffuseMapPath
 			>> blueDiffuseMapPath
-			>> redTextureRepeat
-			>> greenTextureRepeat
-			>> blueTextureRepeat
 			>> normalMapPath
 			>> redNormalMapPath
 			>> greenNormalMapPath
 			>> blueNormalMapPath
+			>> maxHeight
+			>> textureRepeat
+			>> lightness
+			>> redTextureRepeat
+			>> greenTextureRepeat
+			>> blueTextureRepeat
 			>> isSpecular
 			>> specularShininess
 			>> specularIntensity;

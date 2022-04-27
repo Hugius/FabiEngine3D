@@ -237,7 +237,7 @@ void WorldHelper::copyTemplateQuad3d(const string & newId, const string & templa
 	}
 }
 
-void WorldHelper::copyTemplateText(const string & newId, const string & templateId)
+void WorldHelper::copyTemplateText3d(const string & newId, const string & templateId)
 {
 	if(!_fe3d->text3d_isExisting(templateId))
 	{

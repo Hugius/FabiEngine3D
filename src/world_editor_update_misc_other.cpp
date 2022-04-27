@@ -118,11 +118,11 @@ void WorldEditor::_updateMiscellaneous()
 		}
 	}
 
-	for(const auto & [textId, templateId] : _loadedText3dIds)
+	for(const auto & [text3dId, templateId] : _loadedText3dIds)
 	{
-		_fe3d->text3d_setWireframed(textId, _isWireframeModeEnabled);
+		_fe3d->text3d_setWireframed(text3dId, _isWireframeModeEnabled);
 
-		for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(textId))
+		for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(text3dId))
 		{
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}

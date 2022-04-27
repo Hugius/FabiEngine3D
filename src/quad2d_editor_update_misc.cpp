@@ -66,7 +66,7 @@ void Quad2dEditor::_updateQuad2dCreating()
 			sort(_loadedQuad2dIds.begin(), _loadedQuad2dIds.end());
 
 			_fe3d->quad2d_setPosition(newQuad2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-			_fe3d->quad2d_setSize(newQuad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->quad2d_setSize(newQuad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD2D_SIZE.x, (QUAD2D_SIZE.y * Tools::getWindowAspectRatio()))));
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad2dEditorMenuChoice");
 			_gui->getOverlay()->getTextField("quad2dId")->setTextContent("Quad2D: " + newQuad2dId.substr(1));

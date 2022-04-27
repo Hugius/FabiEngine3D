@@ -23,9 +23,9 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateTextCreating();
-	void _updateTextChoosing();
-	void _updateTextDeleting();
+	void _updateText2dCreating();
+	void _updateText2dChoosing();
+	void _updateText2dDeleting();
 	void _updateMiscellaneous();
 
 	static inline const string TEXT_CONTENT = "Text123";
@@ -34,6 +34,6 @@ private:
 
 	vector<string> _loadedText2dIds = {};
 
-	string _currentTextId = "";
-	string _hoveredTextId = "";
+	string _currentText2dId = "";
+	string _hoveredText2dId = "";
 };

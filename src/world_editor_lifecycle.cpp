@@ -75,7 +75,7 @@ void WorldEditor::_load()
 
 	for(const auto & id : _text3dEditor->getLoadedEntityIds())
 	{
-		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("textList")->createOption(id, id.substr(1));
+		_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dPlace")->getScrollingList("text3dList")->createOption(id, id.substr(1));
 	}
 
 	for(const auto & id : _soundEditor->getLoadedSoundIds())

@@ -240,7 +240,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		}
 		else if(lineType == "TEXT3D")
 		{
-			string textId;
+			string text3dId;
 			string templateId;
 			string content;
 			fvec3 position;
@@ -248,7 +248,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			fvec2 size;
 
 			iss
-				>> textId
+				>> text3dId
 				>> templateId
 				>> content
 				>> position.x
@@ -265,14 +265,14 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				continue;
 			}
 
-			_loadedText3dIds.insert({textId, templateId});
+			_loadedText3dIds.insert({text3dId, templateId});
 
-			_worldHelper->copyTemplateText(textId, templateId);
+			_worldHelper->copyTemplateText3d(text3dId, templateId);
 
-			_fe3d->text3d_setContent(textId, content);
-			_fe3d->text3d_setPosition(textId, position);
-			_fe3d->text3d_setRotation(textId, rotation);
-			_fe3d->text3d_setSize(textId, size);
+			_fe3d->text3d_setContent(text3dId, content);
+			_fe3d->text3d_setPosition(text3dId, position);
+			_fe3d->text3d_setRotation(text3dId, rotation);
+			_fe3d->text3d_setSize(text3dId, size);
 		}
 		else if(lineType == "SOUND")
 		{

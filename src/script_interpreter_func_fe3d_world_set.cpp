@@ -157,7 +157,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string & functionNam
 				return true;
 			}
 
-			_customWorldBuilder->addText(args[0]->getString());
+			_customWorldBuilder->addText3d(args[0]->getString());
 
 			returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
 		}

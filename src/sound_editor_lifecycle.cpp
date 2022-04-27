@@ -7,10 +7,10 @@
 
 void SoundEditor::_load()
 {
-	_fe3d->quad3d_create("@@icon", true);
-	_fe3d->quad3d_setPosition("@@icon", ICON_QUAD_POSITION);
-	_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
-	_fe3d->quad3d_setBright("@@icon", true);
+	_fe3d->quad3d_create("@@status", true);
+	_fe3d->quad3d_setPosition("@@status", STATUS_QUAD3D_POSITION);
+	_fe3d->quad3d_setDiffuseMap("@@status", "engine\\assets\\image\\diffuse_map\\stop.tga");
+	_fe3d->quad3d_setBright("@@status", true);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
@@ -32,7 +32,7 @@ void SoundEditor::_unload()
 		_fe3d->sound2d_delete(id);
 	}
 
-	_fe3d->quad3d_delete("@@icon");
+	_fe3d->quad3d_delete("@@status");
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);

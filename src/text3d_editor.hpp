@@ -26,9 +26,9 @@ private:
 	void _updateLightingMenu();
 	void _updateMiscellaneousMenu();
 	void _updateAabbMenu();
-	void _updateTextCreating();
-	void _updateTextChoosing();
-	void _updateTextDeleting();
+	void _updateText3dCreating();
+	void _updateText3dChoosing();
+	void _updateText3dDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
@@ -49,6 +49,6 @@ private:
 
 	vector<string> _loadedText3dIds = {};
 
-	string _hoveredTextId = "";
-	string _currentTextId = "";
+	string _hoveredText3dId = "";
+	string _currentText3dId = "";
 };

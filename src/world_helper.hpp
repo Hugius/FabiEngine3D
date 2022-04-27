@@ -11,7 +11,7 @@ public:
 	void copyTemplateWater(const string & newId, const string & templateId);
 	void copyTemplateModel(const string & newId, const string & templateId);
 	void copyTemplateQuad3d(const string & newId, const string & templateId);
-	void copyTemplateText(const string & newId, const string & templateId);
+	void copyTemplateText3d(const string & newId, const string & templateId);
 	void copyTemplateSound(const string & newId, const string & templateId);
 
 private:

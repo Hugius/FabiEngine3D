@@ -21,13 +21,13 @@ const bool Text2dEditor::saveEntitiesToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\text2d.fe3d");
 
-	for(const auto & textId : _loadedText2dIds)
+	for(const auto & text2dId : _loadedText2dIds)
 	{
-		auto fontMapPath = _fe3d->text2d_getFontMapPath(textId);
-		auto color = _fe3d->text2d_getColor(textId);
-		auto opacity = _fe3d->text2d_getOpacity(textId);
-		auto isHorizontallyFlipped = _fe3d->text2d_isHorizontallyFlipped(textId);
-		auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(textId);
+		auto fontMapPath = _fe3d->text2d_getFontMapPath(text2dId);
+		auto color = _fe3d->text2d_getColor(text2dId);
+		auto opacity = _fe3d->text2d_getOpacity(text2dId);
+		auto isHorizontallyFlipped = _fe3d->text2d_isHorizontallyFlipped(text2dId);
+		auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(text2dId);
 
 		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -36,7 +36,7 @@ const bool Text2dEditor::saveEntitiesToFile() const
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
 		file
-			<< textId
+			<< text2dId
 			<< " "
 			<< fontMapPath
 			<< " "

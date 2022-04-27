@@ -22,23 +22,23 @@ const bool Text3dEditor::saveEntitiesToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\text3d.fe3d");
 
-	for(const auto & textId : _loadedText3dIds)
+	for(const auto & text3dId : _loadedText3dIds)
 	{
-		auto size = _fe3d->text3d_getSize(textId);
-		auto color = _fe3d->text3d_getColor(textId);
-		auto fontMapPath = _fe3d->text3d_getFontMapPath(textId);
-		auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(textId);
-		auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(textId);
-		auto isHorizontallyFlipped = _fe3d->text3d_isHorizontallyFlipped(textId);
-		auto isVerticallyFlipped = _fe3d->text3d_isVerticallyFlipped(textId);
-		auto isReflected = _fe3d->text3d_isReflected(textId);
-		auto isShadowed = _fe3d->text3d_isShadowed(textId);
-		auto lightness = _fe3d->text3d_getLightness(textId);
-		auto isBright = _fe3d->text3d_isBright(textId);
-		auto opacity = _fe3d->text3d_getOpacity(textId);
-		auto minTextureAlpha = _fe3d->text3d_getMinTextureAlpha(textId);
-		auto rotationOrder = static_cast<int>(_fe3d->text3d_getRotationOrder(textId));
-		auto hasAabb = _fe3d->aabb_isExisting(textId);
+		auto size = _fe3d->text3d_getSize(text3dId);
+		auto color = _fe3d->text3d_getColor(text3dId);
+		auto fontMapPath = _fe3d->text3d_getFontMapPath(text3dId);
+		auto isFacingCameraHorizontally = _fe3d->text3d_isFacingCameraHorizontally(text3dId);
+		auto isFacingCameraVertically = _fe3d->text3d_isFacingCameraVertically(text3dId);
+		auto isHorizontallyFlipped = _fe3d->text3d_isHorizontallyFlipped(text3dId);
+		auto isVerticallyFlipped = _fe3d->text3d_isVerticallyFlipped(text3dId);
+		auto isReflected = _fe3d->text3d_isReflected(text3dId);
+		auto isShadowed = _fe3d->text3d_isShadowed(text3dId);
+		auto lightness = _fe3d->text3d_getLightness(text3dId);
+		auto isBright = _fe3d->text3d_isBright(text3dId);
+		auto opacity = _fe3d->text3d_getOpacity(text3dId);
+		auto minTextureAlpha = _fe3d->text3d_getMinTextureAlpha(text3dId);
+		auto rotationOrder = static_cast<int>(_fe3d->text3d_getRotationOrder(text3dId));
+		auto hasAabb = _fe3d->aabb_isExisting(text3dId);
 
 		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -47,7 +47,7 @@ const bool Text3dEditor::saveEntitiesToFile() const
 		replace(fontMapPath.begin(), fontMapPath.end(), ' ', '?');
 
 		file
-			<< textId
+			<< text3dId
 			<< " "
 			<< fontMapPath
 			<< " "

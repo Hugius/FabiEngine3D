@@ -10,21 +10,21 @@ void SoundEditor::_updateMiscellaneous()
 		{
 			if(_fe3d->sound2d_isPaused(_currentSoundId, 0))
 			{
-				_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\pause.tga");
+				_fe3d->quad3d_setDiffuseMap("@@status", "engine\\assets\\image\\diffuse_map\\pause.tga");
 			}
 			else
 			{
-				_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\start.tga");
+				_fe3d->quad3d_setDiffuseMap("@@status", "engine\\assets\\image\\diffuse_map\\start.tga");
 			}
 		}
 		else
 		{
-			_fe3d->quad3d_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
+			_fe3d->quad3d_setDiffuseMap("@@status", "engine\\assets\\image\\diffuse_map\\stop.tga");
 		}
 	}
 
-	_fe3d->quad3d_setVisible("@@icon", _fe3d->sound2d_isExisting(_currentSoundId));
-	_fe3d->quad3d_rotate("@@icon", fvec3(0.0f, 0.5f, 0.0f));
+	_fe3d->quad3d_setVisible("@@status", _fe3d->sound2d_isExisting(_currentSoundId));
+	_fe3d->quad3d_rotate("@@status", fvec3(0.0f, 0.5f, 0.0f));
 }
 
 void SoundEditor::_updateSoundCreating()

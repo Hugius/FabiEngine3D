@@ -28,7 +28,7 @@ private:
 	void _updateSoundDeleting();
 	void _updateMiscellaneous();
 
-	static inline const fvec3 ICON_QUAD_POSITION = fvec3(0.0f, 0.0f, -1.5f);
+	static inline const fvec3 STATUS_QUAD3D_POSITION = fvec3(0.0f, 0.0f, -1.5f);
 
 	vector<string> _loadedSoundIds = {};
 

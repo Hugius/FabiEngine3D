@@ -9,7 +9,7 @@ void Text2dEditor::_load()
 {
 	_fe3d->camera_setYaw(270.0f);
 
-	_gui->getOverlay()->createTextField("textId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("text2dId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void Text2dEditor::_unload()
@@ -21,7 +21,7 @@ void Text2dEditor::_unload()
 
 	_fe3d->camera_reset();
 
-	_gui->getOverlay()->deleteTextField("textId");
+	_gui->getOverlay()->deleteTextField("text2dId");
 
 	_loadedText2dIds.clear();
 }
@@ -64,14 +64,14 @@ void Text2dEditor::update()
 	}
 	if(isLoaded())
 	{
-		_updateTextCreating();
+		_updateText2dCreating();
 	}
 	if(isLoaded())
 	{
-		_updateTextChoosing();
+		_updateText2dChoosing();
 	}
 	if(isLoaded())
 	{
-		_updateTextDeleting();
+		_updateText2dDeleting();
 	}
 }

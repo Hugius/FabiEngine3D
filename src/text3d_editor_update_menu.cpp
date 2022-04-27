@@ -62,10 +62,10 @@ void Text3dEditor::_updateChoiceMenu()
 	{
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->text3d_setWireframed(_currentTextId, false);
-			_fe3d->text3d_setVisible(_currentTextId, false);
-			_gui->getOverlay()->getTextField("textId")->setVisible(false);
-			_currentTextId = "";
+			_fe3d->text3d_setWireframed(_currentText3dId, false);
+			_fe3d->text3d_setVisible(_currentText3dId, false);
+			_gui->getOverlay()->getTextField("text3dId")->setVisible(false);
+			_currentText3dId = "";
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text3dEditorMenuMain");
 
 			return;

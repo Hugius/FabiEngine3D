@@ -30,13 +30,13 @@ const vector<string> Text2dEditor::getImagePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		string textId;
+		string text2dId;
 		string fontMapPath;
 
 		istringstream iss(line);
 
 		iss
-			>> textId
+			>> text2dId
 			>> fontMapPath;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
@@ -81,7 +81,7 @@ const bool Text2dEditor::loadEntitiesFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string textId;
+		string text2dId;
 		string fontMapPath;
 		fvec3 color;
 		float opacity;
@@ -91,7 +91,7 @@ const bool Text2dEditor::loadEntitiesFromFile()
 		istringstream iss(line);
 
 		iss
-			>> textId
+			>> text2dId
 			>> fontMapPath
 			>> color.r
 			>> color.g
@@ -109,21 +109,21 @@ const bool Text2dEditor::loadEntitiesFromFile()
 			fontMapPath = ("projects\\" + getCurrentProjectId() + "\\" + fontMapPath);
 		}
 
-		_fe3d->text2d_create(textId, fontMapPath, true);
+		_fe3d->text2d_create(text2dId, fontMapPath, true);
 
-		if(_fe3d->text2d_isExisting(textId))
+		if(_fe3d->text2d_isExisting(text2dId))
 		{
-			_loadedText2dIds.push_back(textId);
+			_loadedText2dIds.push_back(text2dId);
 			sort(_loadedText2dIds.begin(), _loadedText2dIds.end());
 
-			_fe3d->text2d_setVisible(textId, false);
-			_fe3d->text2d_setPosition(textId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-			_fe3d->text2d_setSize(textId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
-			_fe3d->text2d_setColor(textId, color);
-			_fe3d->text2d_setOpacity(textId, opacity);
-			_fe3d->text2d_setContent(textId, TEXT_CONTENT);
-			_fe3d->text2d_setHorizontallyFlipped(textId, isHorizontallyFlipped);
-			_fe3d->text2d_setVerticallyFlipped(textId, isVerticallyFlipped);
+			_fe3d->text2d_setVisible(text2dId, false);
+			_fe3d->text2d_setPosition(text2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
+			_fe3d->text2d_setSize(text2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->text2d_setColor(text2dId, color);
+			_fe3d->text2d_setOpacity(text2dId, opacity);
+			_fe3d->text2d_setContent(text2dId, TEXT_CONTENT);
+			_fe3d->text2d_setHorizontallyFlipped(text2dId, isHorizontallyFlipped);
+			_fe3d->text2d_setVerticallyFlipped(text2dId, isVerticallyFlipped);
 		}
 	}
 

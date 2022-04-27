@@ -6,46 +6,46 @@ void Text2dEditor::_updateMiscellaneous()
 {
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())
 	{
-		if(!_currentTextId.empty())
+		if(!_currentText2dId.empty())
 		{
 			if(_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_F))
 			{
-				_fe3d->text2d_setWireframed(_currentTextId, !_fe3d->text2d_isWireframed(_currentTextId));
+				_fe3d->text2d_setWireframed(_currentText2dId, !_fe3d->text2d_isWireframed(_currentText2dId));
 			}
 		}
 	}
 }
 
-void Text2dEditor::_updateTextCreating()
+void Text2dEditor::_updateText2dCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createText") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newTextId = _gui->getOverlay()->getValueFormContent();
+		auto newText2dId = _gui->getOverlay()->getValueFormContent();
 
-		if(newTextId.empty())
+		if(newText2dId.empty())
 		{
 			Logger::throwWarning("Text ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newTextId.begin(), newTextId.end(), isspace))
+		if(any_of(newText2dId.begin(), newText2dId.end(), isspace))
 		{
 			Logger::throwWarning("Text ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newTextId.begin(), newTextId.end(), isupper))
+		if(any_of(newText2dId.begin(), newText2dId.end(), isupper))
 		{
 			Logger::throwWarning("Text ID cannot contain any capitals");
 
 			return;
 		}
 
-		newTextId = ("@" + newTextId);
+		newText2dId = ("@" + newText2dId);
 
-		if(find(_loadedText2dIds.begin(), _loadedText2dIds.end(), newTextId) != _loadedText2dIds.end())
+		if(find(_loadedText2dIds.begin(), _loadedText2dIds.end(), newText2dId) != _loadedText2dIds.end())
 		{
 			Logger::throwWarning("Text already exists");
 
@@ -83,25 +83,25 @@ void Text2dEditor::_updateTextCreating()
 		const string finalFilePath = filePath.substr(rootPath.size());
 		_fe3d->misc_clearImageCache(finalFilePath);
 
-		_fe3d->text2d_create(newTextId, finalFilePath, true);
+		_fe3d->text2d_create(newText2dId, finalFilePath, true);
 
-		if(_fe3d->text2d_isExisting(newTextId))
+		if(_fe3d->text2d_isExisting(newText2dId))
 		{
-			_currentTextId = newTextId;
-			_loadedText2dIds.push_back(newTextId);
+			_currentText2dId = newText2dId;
+			_loadedText2dIds.push_back(newText2dId);
 			sort(_loadedText2dIds.begin(), _loadedText2dIds.end());
 
-			_fe3d->text2d_setPosition(newTextId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-			_fe3d->text2d_setSize(newTextId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->text2d_setPosition(newText2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
+			_fe3d->text2d_setSize(newText2dId, Tools::convertSizeRelativeToDisplay(fvec2(TEXT_SIZE.x, (TEXT_SIZE.y * Tools::getWindowAspectRatio()))));
 
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
-			_gui->getOverlay()->getTextField("textId")->setTextContent("Text: " + newTextId.substr(1));
-			_gui->getOverlay()->getTextField("textId")->setVisible(true);
+			_gui->getOverlay()->getTextField("text2dId")->setTextContent("Text2D: " + newText2dId.substr(1));
+			_gui->getOverlay()->getTextField("text2dId")->setVisible(true);
 		}
 	}
 }
 
-void Text2dEditor::_updateTextChoosing()
+void Text2dEditor::_updateText2dChoosing()
 {
 	if((_gui->getOverlay()->getChoiceFormId() == "editText") || (_gui->getOverlay()->getChoiceFormId() == "deleteText"))
 	{
@@ -109,24 +109,24 @@ void Text2dEditor::_updateTextChoosing()
 
 		if(selectedOptionId.empty())
 		{
-			if(!_hoveredTextId.empty())
+			if(!_hoveredText2dId.empty())
 			{
-				_fe3d->text2d_setVisible(_hoveredTextId, false);
-				_hoveredTextId = "";
+				_fe3d->text2d_setVisible(_hoveredText2dId, false);
+				_hoveredText2dId = "";
 			}
 		}
 		else
 		{
-			if(_hoveredTextId.empty())
+			if(_hoveredText2dId.empty())
 			{
-				_hoveredTextId = ("@" + selectedOptionId);
-				_fe3d->text2d_setVisible(_hoveredTextId, true);
+				_hoveredText2dId = ("@" + selectedOptionId);
+				_fe3d->text2d_setVisible(_hoveredText2dId, true);
 			}
 
 			if(_gui->getOverlay()->isChoiceFormConfirmed())
 			{
-				_currentTextId = _hoveredTextId;
-				_hoveredTextId = "";
+				_currentText2dId = _hoveredText2dId;
+				_hoveredText2dId = "";
 
 				if(_gui->getOverlay()->getChoiceFormId() == "deleteText")
 				{
@@ -136,30 +136,30 @@ void Text2dEditor::_updateTextChoosing()
 				{
 					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuChoice");
 
-					_gui->getOverlay()->getTextField("textId")->setTextContent("Text: " + _currentTextId.substr(1));
-					_gui->getOverlay()->getTextField("textId")->setVisible(true);
+					_gui->getOverlay()->getTextField("text2dId")->setTextContent("Text2D: " + _currentText2dId.substr(1));
+					_gui->getOverlay()->getTextField("text2dId")->setVisible(true);
 				}
 
-				_fe3d->text2d_setVisible(_currentTextId, true);
+				_fe3d->text2d_setVisible(_currentText2dId, true);
 			}
 		}
 	}
 }
 
-void Text2dEditor::_updateTextDeleting()
+void Text2dEditor::_updateText2dDeleting()
 {
 	if((_gui->getOverlay()->getAnswerFormId() == "deleteText") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{
-			_fe3d->text2d_delete(_currentTextId);
+			_fe3d->text2d_delete(_currentText2dId);
 
-			_loadedText2dIds.erase(remove(_loadedText2dIds.begin(), _loadedText2dIds.end(), _currentTextId), _loadedText2dIds.end());
-			_currentTextId = "";
+			_loadedText2dIds.erase(remove(_loadedText2dIds.begin(), _loadedText2dIds.end(), _currentText2dId), _loadedText2dIds.end());
+			_currentText2dId = "";
 		}
 		if(_gui->getOverlay()->getAnswerFormDecision() == "No")
 		{
-			_currentTextId = "";
+			_currentText2dId = "";
 		}
 	}
 }

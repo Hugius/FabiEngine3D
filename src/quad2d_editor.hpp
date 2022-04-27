@@ -28,7 +28,7 @@ private:
 	void _updateQuadDeleting();
 	void _updateMiscellaneous();
 
-	static inline const fvec2 QUAD_SIZE = fvec2(0.75f);
+	static inline const fvec2 QUAD2D_SIZE = fvec2(0.75f);
 
 	vector<string> _loadedQuad2dIds = {};
 

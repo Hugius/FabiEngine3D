@@ -61,17 +61,17 @@ void Text2dEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "text2dEditorMenuChoice")
 	{
-		const auto color = _fe3d->text2d_getColor(_currentTextId);
-		const auto opacity = _fe3d->text2d_getOpacity(_currentTextId);
-		const auto isHorizontallyFlipped = _fe3d->text2d_isHorizontallyFlipped(_currentTextId);
-		const auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(_currentTextId);
+		const auto color = _fe3d->text2d_getColor(_currentText2dId);
+		const auto opacity = _fe3d->text2d_getOpacity(_currentText2dId);
+		const auto isHorizontallyFlipped = _fe3d->text2d_isHorizontallyFlipped(_currentText2dId);
+		const auto isVerticallyFlipped = _fe3d->text2d_isVerticallyFlipped(_currentText2dId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_fe3d->text2d_setVisible(_currentTextId, false);
-			_gui->getOverlay()->getTextField("textId")->setVisible(false);
+			_fe3d->text2d_setVisible(_currentText2dId, false);
+			_gui->getOverlay()->getTextField("text2dId")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("text2dEditorMenuMain");
-			_currentTextId = "";
+			_currentText2dId = "";
 
 			return;
 		}
@@ -87,36 +87,36 @@ void Text2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isHorizontallyFlipped")->isHovered())
 		{
-			_fe3d->text2d_setHorizontallyFlipped(_currentTextId, !isHorizontallyFlipped);
+			_fe3d->text2d_setHorizontallyFlipped(_currentText2dId, !isHorizontallyFlipped);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("isVerticallyFlipped")->isHovered())
 		{
-			_fe3d->text2d_setVerticallyFlipped(_currentTextId, !isVerticallyFlipped);
+			_fe3d->text2d_setVerticallyFlipped(_currentText2dId, !isVerticallyFlipped);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "colorR") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->text2d_setColor(_currentTextId, fvec3((content / COLOR_MULTIPLIER), color.g, color.b));
+			_fe3d->text2d_setColor(_currentText2dId, fvec3((content / COLOR_MULTIPLIER), color.g, color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorG") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->text2d_setColor(_currentTextId, fvec3(color.r, (content / COLOR_MULTIPLIER), color.b));
+			_fe3d->text2d_setColor(_currentText2dId, fvec3(color.r, (content / COLOR_MULTIPLIER), color.b));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "colorB") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->text2d_setColor(_currentTextId, fvec3(color.r, color.g, (content / COLOR_MULTIPLIER)));
+			_fe3d->text2d_setColor(_currentText2dId, fvec3(color.r, color.g, (content / COLOR_MULTIPLIER)));
 		}
 		if((_gui->getOverlay()->getValueFormId() == "opacity") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = static_cast<float>(Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->text2d_setOpacity(_currentTextId, (content / 100.0f));
+			_fe3d->text2d_setOpacity(_currentText2dId, (content / 100.0f));
 		}
 
 		screen->getButton("isHorizontallyFlipped")->setTextContent(isHorizontallyFlipped ? "Flipped X: ON" : "Flipped X: OFF");

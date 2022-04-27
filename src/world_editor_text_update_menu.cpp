@@ -29,11 +29,11 @@ void WorldEditor::_updateText3dMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuText3dChoice");
 
-			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("textList")->deleteOptions();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->deleteOptions();
 
 			for(auto & [placedId, templateId] : _loadedText3dIds)
 			{
-				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("textList")->createOption(placedId, placedId);
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuText3dChoice")->getScrollingList("text3dList")->createOption(placedId, placedId);
 			}
 		}
 
@@ -55,7 +55,7 @@ void WorldEditor::_updateText3dPlacingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 		{
-			const auto hoveredOptionId = screen->getScrollingList("textList")->getHoveredOptionId();
+			const auto hoveredOptionId = screen->getScrollingList("text3dList")->getHoveredOptionId();
 
 			if(!hoveredOptionId.empty())
 			{
@@ -89,17 +89,17 @@ void WorldEditor::_updateText3dChoosingMenu()
 
 	if(screen->getId() == "worldEditorMenuText3dChoice")
 	{
-		for(const auto & optionId : screen->getScrollingList("textList")->getOptionIds())
+		for(const auto & optionId : screen->getScrollingList("text3dList")->getOptionIds())
 		{
 			if(!_fe3d->text3d_isExisting(optionId))
 			{
-				screen->getScrollingList("textList")->deleteOption(optionId);
+				screen->getScrollingList("text3dList")->deleteOption(optionId);
 
 				break;
 			}
 		}
 
-		const auto hoveredOptionId = screen->getScrollingList("textList")->getHoveredOptionId();
+		const auto hoveredOptionId = screen->getScrollingList("text3dList")->getHoveredOptionId();
 
 		if(!hoveredOptionId.empty())
 		{

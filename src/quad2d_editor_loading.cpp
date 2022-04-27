@@ -115,7 +115,7 @@ const bool Quad2dEditor::loadEntitiesFromFile()
 
 			_fe3d->quad2d_setVisible(quad2dId, false);
 			_fe3d->quad2d_setPosition(quad2dId, Tools::convertPositionRelativeToDisplay(fvec2(0.0f)));
-			_fe3d->quad2d_setSize(quad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD_SIZE.x, (QUAD_SIZE.y * Tools::getWindowAspectRatio()))));
+			_fe3d->quad2d_setSize(quad2dId, Tools::convertSizeRelativeToDisplay(fvec2(QUAD2D_SIZE.x, (QUAD2D_SIZE.y * Tools::getWindowAspectRatio()))));
 			_fe3d->quad2d_setColor(quad2dId, color);
 			_fe3d->quad2d_setOpacity(quad2dId, opacity);
 			_fe3d->quad2d_setTextureRepeat(quad2dId, textureRepeat);

@@ -13,7 +13,7 @@ public:
 	void addWater(const string & id);
 	void addModel(const string & id);
 	void addQuad3d(const string & id);
-	void addText(const string & id);
+	void addText3d(const string & id);
 	void addAabb(const string & id);
 	void addPointlight(const string & id);
 	void addSpotlight(const string & id);

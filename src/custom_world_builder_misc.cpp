@@ -70,7 +70,7 @@ void CustomWorldBuilder::addQuad3d(const string & id)
 	_addedQuad3dIds.push_back(id);
 }
 
-void CustomWorldBuilder::addText(const string & id)
+void CustomWorldBuilder::addText3d(const string & id)
 {
 	if(find(_addedText3dIds.begin(), _addedText3dIds.end(), id) != _addedText3dIds.end())
 	{

@@ -33,13 +33,13 @@ void WaterEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("rippleSpeed")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("rippleSpeedX", "X", (rippleSpeed.x * 100000.0f), fvec2(-0.15f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("rippleSpeedY", "Y", (rippleSpeed.y * 100000.0f), fvec2(0.15f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("rippleSpeedX", "X", (rippleSpeed.x * 100000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("rippleSpeedY", "Y", (rippleSpeed.y * 100000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("waveSpeed")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("waveSpeedX", "X", (waveSpeed.x * 100000.0f), fvec2(-0.15f, 0.1f), 5, false, true, false);
-			_gui->getOverlay()->openValueForm("waveSpeedY", "Y", (waveSpeed.y * 100000.0f), fvec2(0.15f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("waveSpeedX", "X", (waveSpeed.x * 100000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
+			_gui->getOverlay()->openValueForm("waveSpeedY", "Y", (waveSpeed.y * 100000.0f), fvec2(0.0f, 0.1f), 5, false, true, false);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "size") && _gui->getOverlay()->isValueFormConfirmed())

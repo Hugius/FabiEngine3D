@@ -82,5 +82,9 @@ void Quad3dEditor::_updateChoiceMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuMiscellaneous");
 		}
+		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("aabb")->isHovered())
+		{
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quad3dEditorMenuAabb");
+		}
 	}
 }

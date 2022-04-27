@@ -38,6 +38,7 @@ const bool Text3dEditor::saveEntitiesToFile() const
 		auto opacity = _fe3d->text3d_getOpacity(textId);
 		auto minTextureAlpha = _fe3d->text3d_getMinTextureAlpha(textId);
 		auto rotationOrder = static_cast<int>(_fe3d->text3d_getRotationOrder(textId));
+		auto hasAabb = _fe3d->aabb_isExisting(textId);
 
 		fontMapPath = (fontMapPath.empty() ? "" : fontMapPath.substr(("projects\\" + getCurrentProjectId() + "\\").size()));
 
@@ -81,6 +82,8 @@ const bool Text3dEditor::saveEntitiesToFile() const
 			<< minTextureAlpha
 			<< " "
 			<< rotationOrder
+			<< " "
+			<< hasAabb
 			<< endl;
 	}
 

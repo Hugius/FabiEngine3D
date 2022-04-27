@@ -97,6 +97,7 @@ const bool Text3dEditor::loadEntitiesFromFile()
 		bool isReflected;
 		bool isShadowed;
 		bool isBright;
+		bool hasAabb;
 
 		istringstream iss(line);
 
@@ -118,7 +119,8 @@ const bool Text3dEditor::loadEntitiesFromFile()
 			>> isBright
 			>> opacity
 			>> minTextureAlpha
-			>> rotationOrder;
+			>> rotationOrder
+			>> hasAabb;
 
 		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 
@@ -150,6 +152,13 @@ const bool Text3dEditor::loadEntitiesFromFile()
 			_fe3d->text3d_setOpacity(textId, opacity);
 			_fe3d->text3d_setMinTextureAlpha(textId, minTextureAlpha);
 			_fe3d->text3d_setRotationOrder(textId, DirectionOrderType(rotationOrder));
+
+			if(hasAabb)
+			{
+				_fe3d->aabb_create(textId, false);
+				_fe3d->aabb_setParentId(textId, textId);
+				_fe3d->aabb_setParentType(textId, AabbParentType::TEXT3D);
+			}
 		}
 	}
 

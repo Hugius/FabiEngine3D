@@ -148,12 +148,6 @@
     <Filter Include="Text3D Editor\Update">
       <UniqueIdentifier>{4e32693d-6add-4779-8f69-fa7232b8dafe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="World Editor\Update\Text3D">
-      <UniqueIdentifier>{e883bcb7-32af-4b5b-93f3-8630d13b2807}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World Editor\Update\Quad3D">
-      <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quad3D Editor">
       <UniqueIdentifier>{063d7b87-4367-42d9-9cd8-ec43b6c6859d}</UniqueIdentifier>
     </Filter>
@@ -165,9 +159,6 @@
     </Filter>
     <Filter Include="Quad3D Editor\Update">
       <UniqueIdentifier>{4ff3dc37-6430-4a6e-b964-a56600422763}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World Editor\Update\Sound3D">
-      <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Animation2D Editor">
       <UniqueIdentifier>{15c1e9e5-2d94-4e16-9b6f-83da55e5b739}</UniqueIdentifier>
@@ -234,6 +225,15 @@
     </Filter>
     <Filter Include="World Editor\Update\Captor">
       <UniqueIdentifier>{22fd3606-00be-4ca6-8682-ac1f43f7a6ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Update\Quad">
+      <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Update\Sound">
+      <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Update\Text">
+      <UniqueIdentifier>{e883bcb7-32af-4b5b-93f3-8630d13b2807}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -334,13 +334,13 @@
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_quad3d_update_edit.cpp">
-      <Filter>World Editor\Update\Quad3D</Filter>
+      <Filter>World Editor\Update\Quad</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_quad3d_update_menu.cpp">
-      <Filter>World Editor\Update\Quad3D</Filter>
+      <Filter>World Editor\Update\Quad</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_quad3d_update_place.cpp">
-      <Filter>World Editor\Update\Quad3D</Filter>
+      <Filter>World Editor\Update\Quad</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_model_update_edit.cpp">
       <Filter>World Editor\Update\Model</Filter>
@@ -352,13 +352,13 @@
       <Filter>World Editor\Update\Model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_sound3d_update_edit.cpp">
-      <Filter>World Editor\Update\Sound3D</Filter>
+      <Filter>World Editor\Update\Sound</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_sound3d_update_place.cpp">
-      <Filter>World Editor\Update\Sound3D</Filter>
+      <Filter>World Editor\Update\Sound</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_sound3d_update_menu.cpp">
-      <Filter>World Editor\Update\Sound3D</Filter>
+      <Filter>World Editor\Update\Sound</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_lifecycle.cpp">
       <Filter>Script Editor\Main</Filter>
@@ -613,13 +613,13 @@
       <Filter>Text3D Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_text3d_update_place.cpp">
-      <Filter>World Editor\Update\Text3D</Filter>
+      <Filter>World Editor\Update\Text</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_text3d_update_edit.cpp">
-      <Filter>World Editor\Update\Text3D</Filter>
+      <Filter>World Editor\Update\Text</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_text3d_update_menu.cpp">
-      <Filter>World Editor\Update\Text3D</Filter>
+      <Filter>World Editor\Update\Text</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_loading.cpp">
       <Filter>World Editor\Persistence</Filter>
@@ -629,6 +629,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_update_selector.cpp">
       <Filter>Script Editor\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\quad3d_editor_update_aabb.cpp">
+      <Filter>Quad3D Editor\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\text3d_editor_update_aabb.cpp">
+      <Filter>Text3D Editor\Update</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

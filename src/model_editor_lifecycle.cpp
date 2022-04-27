@@ -173,7 +173,7 @@ void ModelEditor::_loadGUI()
 	leftWindow->createScreen("modelEditorMenuAabbMain");
 	leftWindow->getScreen("modelEditorMenuAabbMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuAabbMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("modelEditorMenuAabbMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("modelEditorMenuAabbMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("modelEditorMenuAabbMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(3, CH, false);

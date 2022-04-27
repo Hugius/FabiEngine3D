@@ -25,6 +25,7 @@ private:
 	void _updateChoiceMenu();
 	void _updateLightingMenu();
 	void _updateMiscellaneousMenu();
+	void _updateAabbMenu();
 	void _updateTextCreating();
 	void _updateTextChoosing();
 	void _updateTextDeleting();

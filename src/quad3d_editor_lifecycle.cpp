@@ -99,12 +99,13 @@ void Quad3dEditor::_loadGUI()
 	leftWindow->getScreen("quad3dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Quad3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Quad3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("quad3dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	positions = Mathematics::calculateDistributedPositions(4, CH, false);
+	positions = Mathematics::calculateDistributedPositions(5, CH, false);
 	leftWindow->createScreen("quad3dEditorMenuChoice");
 	leftWindow->getScreen("quad3dEditorMenuChoice")->createButton("texturing", fvec2(0.0f, positions[0]), TEXT_SIZE("Texturing"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Texturing", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("quad3dEditorMenuChoice")->createButton("lighting", fvec2(0.0f, positions[1]), TEXT_SIZE("Lighting"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lighting", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("quad3dEditorMenuChoice")->createButton("miscellaneous", fvec2(0.0f, positions[2]), TEXT_SIZE("Miscellaneous"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Miscellaneous", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("quad3dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad3dEditorMenuChoice")->createButton("aabb", fvec2(0.0f, positions[3]), TEXT_SIZE("AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad3dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[4]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(5, CH, false);
 	leftWindow->createScreen("quad3dEditorMenuTexturing");
@@ -135,6 +136,12 @@ void Quad3dEditor::_loadGUI()
 	leftWindow->getScreen("quad3dEditorMenuMiscellaneous")->createButton("minTextureAlpha", fvec2(0.0f, positions[6]), TEXT_SIZE("Min Alpha"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Min Alpha", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("quad3dEditorMenuMiscellaneous")->createButton("rotationOrder", fvec2(0.0f, positions[7]), TEXT_SIZE("Rotation: Y X Z"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rotation : Y X Z", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("quad3dEditorMenuMiscellaneous")->createButton("back", fvec2(0.0f, positions[8]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
+	positions = Mathematics::calculateDistributedPositions(3, CH, false);
+	leftWindow->createScreen("quad3dEditorMenuAabb");
+	leftWindow->getScreen("quad3dEditorMenuAabb")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad3dEditorMenuAabb")->createButton("delete", fvec2(0.0f, positions[1]), TEXT_SIZE("Delete AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("quad3dEditorMenuAabb")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 }
 
 void Quad3dEditor::_unloadGUI()
@@ -144,6 +151,7 @@ void Quad3dEditor::_unloadGUI()
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad3dEditorMenuTexturing");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad3dEditorMenuLighting");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad3dEditorMenuMiscellaneous");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quad3dEditorMenuAabb");
 }
 
 void Quad3dEditor::update()
@@ -167,6 +175,10 @@ void Quad3dEditor::update()
 	if(isLoaded())
 	{
 		_updateMiscellaneousMenu();
+	}
+	if(isLoaded())
+	{
+		_updateAabbMenu();
 	}
 	if(isLoaded())
 	{

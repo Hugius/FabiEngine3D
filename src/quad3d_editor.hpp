@@ -26,6 +26,7 @@ private:
 	void _updateTexturingMenu();
 	void _updateLightingMenu();
 	void _updateMiscellaneousMenu();
+	void _updateAabbMenu();
 	void _updateQuad3dCreating();
 	void _updateQuad3dChoosing();
 	void _updateQuad3dDeleting();

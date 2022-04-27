@@ -114,6 +114,7 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		bool isReflected;
 		bool isShadowed;
 		bool isBright;
+		bool hasAabb;
 
 		istringstream iss(line);
 
@@ -138,7 +139,8 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 			>> emissionIntensity
 			>> opacity
 			>> minTextureAlpha
-			>> rotationOrder;
+			>> rotationOrder
+			>> hasAabb;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -166,6 +168,13 @@ const bool Quad3dEditor::loadEntitiesFromFile()
 		_fe3d->quad3d_setEmissionIntensity(quadId, emissionIntensity);
 		_fe3d->quad3d_setMinTextureAlpha(quadId, minTextureAlpha);
 		_fe3d->quad3d_setRotationOrder(quadId, DirectionOrderType(rotationOrder));
+
+		if(hasAabb)
+		{
+			_fe3d->aabb_create(quadId, false);
+			_fe3d->aabb_setParentId(quadId, quadId);
+			_fe3d->aabb_setParentType(quadId, AabbParentType::QUAD3D);
+		}
 
 		if(!diffuseMapPath.empty())
 		{

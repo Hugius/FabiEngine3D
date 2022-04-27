@@ -99,11 +99,12 @@ void Text3dEditor::_loadGUI()
 	leftWindow->getScreen("text3dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Text3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Text3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
-	positions = Mathematics::calculateDistributedPositions(3, CH, false);
+	positions = Mathematics::calculateDistributedPositions(4, CH, false);
 	leftWindow->createScreen("text3dEditorMenuChoice");
 	leftWindow->getScreen("text3dEditorMenuChoice")->createButton("lighting", fvec2(0.0f, positions[0]), TEXT_SIZE("Lighting"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Lighting", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuChoice")->createButton("miscellaneous", fvec2(0.0f, positions[1]), TEXT_SIZE("Miscellaneous"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Miscellaneous", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("text3dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuChoice")->createButton("aabb", fvec2(0.0f, positions[2]), TEXT_SIZE("AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(6, CH, false);
 	leftWindow->createScreen("text3dEditorMenuLighting");
@@ -125,6 +126,12 @@ void Text3dEditor::_loadGUI()
 	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("minTextureAlpha", fvec2(0.0f, positions[6]), TEXT_SIZE("Min Alpha"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Min Alpha", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("rotationOrder", fvec2(0.0f, positions[7]), TEXT_SIZE("Rotation: Y X Z"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Rotation : Y X Z", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("text3dEditorMenuMiscellaneous")->createButton("back", fvec2(0.0f, positions[8]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+
+	positions = Mathematics::calculateDistributedPositions(3, CH, false);
+	leftWindow->createScreen("text3dEditorMenuAabb");
+	leftWindow->getScreen("text3dEditorMenuAabb")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuAabb")->createButton("delete", fvec2(0.0f, positions[1]), TEXT_SIZE("Delete AABB"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete AABB", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("text3dEditorMenuAabb")->createButton("back", fvec2(0.0f, positions[2]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 }
 
 void Text3dEditor::_unloadGUI()
@@ -133,6 +140,7 @@ void Text3dEditor::_unloadGUI()
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text3dEditorMenuChoice");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text3dEditorMenuLighting");
 	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text3dEditorMenuMiscellaneous");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("text3dEditorMenuAabb");
 }
 
 void Text3dEditor::update()
@@ -152,6 +160,10 @@ void Text3dEditor::update()
 	if(isLoaded())
 	{
 		_updateMiscellaneousMenu();
+	}
+	if(isLoaded())
+	{
+		_updateAabbMenu();
 	}
 	if(isLoaded())
 	{

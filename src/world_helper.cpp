@@ -233,7 +233,7 @@ void WorldHelper::copyTemplateQuad(const string & newId, const string & template
 	{
 		_fe3d->aabb_create(newId, false);
 		_fe3d->aabb_setParentId(newId, newId);
-		_fe3d->aabb_setParentType(newId, AabbParentType::QUAD);
+		_fe3d->aabb_setParentType(newId, AabbParentType::QUAD3D);
 	}
 }
 
@@ -264,7 +264,7 @@ void WorldHelper::copyTemplateText(const string & newId, const string & template
 	{
 		_fe3d->aabb_create(newId, false);
 		_fe3d->aabb_setParentId(newId, newId);
-		_fe3d->aabb_setParentType(newId, AabbParentType::TEXT);
+		_fe3d->aabb_setParentType(newId, AabbParentType::TEXT3D);
 	}
 }
 

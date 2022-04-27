@@ -221,7 +221,7 @@ void AabbEntityManager::update()
 
 					break;
 				}
-				case AabbParentType::QUAD:
+				case AabbParentType::QUAD3D:
 				{
 					auto foundPair = _quad3dEntityManager->getEntities().find(entity->getParentId());
 
@@ -293,7 +293,7 @@ void AabbEntityManager::update()
 
 					break;
 				}
-				case AabbParentType::TEXT:
+				case AabbParentType::TEXT3D:
 				{
 					auto foundPair = _text3dEntityManager->getEntities().find(entity->getParentId());
 

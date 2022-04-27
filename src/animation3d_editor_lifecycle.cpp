@@ -52,8 +52,8 @@ void Animation3dEditor::_load()
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
-	_gui->getOverlay()->createTextField("animationId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
-	_gui->getOverlay()->createTextField("animationFrame", fvec2(0.0f, 0.75f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("animation3dId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("animation3dFrame", fvec2(0.0f, 0.75f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }
 
 void Animation3dEditor::_unload()
@@ -93,8 +93,8 @@ void Animation3dEditor::_unload()
 
 	_fe3d->captor_delete("@@captor");
 
-	_gui->getOverlay()->deleteTextField("animationId");
-	_gui->getOverlay()->deleteTextField("animationFrame");
+	_gui->getOverlay()->deleteTextField("animation3dId");
+	_gui->getOverlay()->deleteTextField("animation3dFrame");
 
 	_loadedAnimation3dIds.clear();
 }
@@ -105,9 +105,9 @@ void Animation3dEditor::_loadGUI()
 
 	auto positions = Mathematics::calculateDistributedPositions(4, CH, false);
 	leftWindow->createScreen("animation3dEditorMenuMain");
-	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Animation"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Animation", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Animation"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Animation", TEXT_COLOR, TEXT_HOVER_COLOR, true);
-	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Animation"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Animation", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("create3d", fvec2(0.0f, positions[0]), TEXT_SIZE("Create Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Create Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("edit3d", fvec2(0.0f, positions[1]), TEXT_SIZE("Edit Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Edit Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
+	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("delete3d", fvec2(0.0f, positions[2]), TEXT_SIZE("Delete Animation3D"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Delete Animation3D", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 	leftWindow->getScreen("animation3dEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), TEXT_SIZE("Go Back"), "", BUTTON_COLOR, BUTTON_HOVER_COLOR, "Go Back", TEXT_COLOR, TEXT_HOVER_COLOR, true);
 
 	positions = Mathematics::calculateDistributedPositions(7, CH, false);
@@ -156,15 +156,15 @@ void Animation3dEditor::update()
 	}
 	if(isLoaded())
 	{
-		_updateAnimationCreating();
+		_updateAnimation3dCreating();
 	}
 	if(isLoaded())
 	{
-		_updateAnimationChoosing();
+		_updateAnimation3dChoosing();
 	}
 	if(isLoaded())
 	{
-		_updateAnimationDeleting();
+		_updateAnimation3dDeleting();
 	}
 	if(isLoaded())
 	{

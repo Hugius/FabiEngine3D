@@ -53,7 +53,7 @@ void Text3dEditor::_updateMiscellaneous()
 
 void Text3dEditor::_updateText3dCreating()
 {
-	if((_gui->getOverlay()->getValueFormId() == "createText") && _gui->getOverlay()->isValueFormConfirmed())
+	if((_gui->getOverlay()->getValueFormId() == "createText3d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
 		auto newText3dId = _gui->getOverlay()->getValueFormContent();
 
@@ -135,7 +135,7 @@ void Text3dEditor::_updateText3dCreating()
 
 void Text3dEditor::_updateText3dChoosing()
 {
-	if((_gui->getOverlay()->getChoiceFormId() == "editText") || (_gui->getOverlay()->getChoiceFormId() == "deleteText"))
+	if((_gui->getOverlay()->getChoiceFormId() == "editText3d") || (_gui->getOverlay()->getChoiceFormId() == "deleteText3d"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
@@ -162,9 +162,9 @@ void Text3dEditor::_updateText3dChoosing()
 				_currentText3dId = _hoveredText3dId;
 				_hoveredText3dId = "";
 
-				if(_gui->getOverlay()->getChoiceFormId() == "deleteText")
+				if(_gui->getOverlay()->getChoiceFormId() == "deleteText3d")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteText", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteText3d", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -182,7 +182,7 @@ void Text3dEditor::_updateText3dChoosing()
 
 void Text3dEditor::_updateText3dDeleting()
 {
-	if((_gui->getOverlay()->getAnswerFormId() == "deleteText") && _gui->getOverlay()->isAnswerFormConfirmed())
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteText3d") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{

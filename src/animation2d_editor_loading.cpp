@@ -29,7 +29,7 @@ const bool Animation2dEditor::loadAnimationsFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string animationId;
+		string animation2dId;
 		int rowCount;
 		int columnCount;
 		int interval;
@@ -37,18 +37,18 @@ const bool Animation2dEditor::loadAnimationsFromFile()
 		istringstream iss(line);
 
 		iss
-			>> animationId
+			>> animation2dId
 			>> rowCount
 			>> columnCount
 			>> interval;
 
-		_loadedAnimation2dIds.push_back(animationId);
+		_loadedAnimation2dIds.push_back(animation2dId);
 		sort(_loadedAnimation2dIds.begin(), _loadedAnimation2dIds.end());
 
-		_fe3d->animation2d_create(animationId);
-		_fe3d->animation2d_setRowCount(animationId, rowCount);
-		_fe3d->animation2d_setColumnCount(animationId, columnCount);
-		_fe3d->animation2d_setInterval(animationId, interval);
+		_fe3d->animation2d_create(animation2dId);
+		_fe3d->animation2d_setRowCount(animation2dId, rowCount);
+		_fe3d->animation2d_setColumnCount(animation2dId, columnCount);
+		_fe3d->animation2d_setInterval(animation2dId, interval);
 	}
 
 	file.close();

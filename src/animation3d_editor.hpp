@@ -27,9 +27,9 @@ private:
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateFrameMenu();
-	void _updateAnimationCreating();
-	void _updateAnimationChoosing();
-	void _updateAnimationDeleting();
+	void _updateAnimation3dCreating();
+	void _updateAnimation3dChoosing();
+	void _updateAnimation3dDeleting();
 	void _updateModelChoosing();
 	void _updatePartChoosing();
 	void _updateCamera();
@@ -54,7 +54,7 @@ private:
 
 	shared_ptr<ModelEditor> _modelEditor = nullptr;
 
-	string _currentAnimationId = "";
+	string _currentAnimation3dId = "";
 	string _currentPartId = "";
 	string _hoveredModelId = "";
 	string _hoveredPartId = "";

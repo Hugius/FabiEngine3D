@@ -23,9 +23,9 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateAnimationCreating();
-	void _updateAnimationChoosing();
-	void _updateAnimationDeleting();
+	void _updateAnimation2dCreating();
+	void _updateAnimation2dChoosing();
+	void _updateAnimation2dDeleting();
 	void _updateImageChoosing();
 	void _updateMiscellaneous();
 
@@ -35,8 +35,8 @@ private:
 
 	vector<string> _loadedAnimation2dIds = {};
 
-	string _hoveredAnimationId = "";
-	string _currentAnimationId = "";
+	string _hoveredAnimation2dId = "";
+	string _currentAnimation2dId = "";
 
 	bool _isPreviewTextureChosen = false;
 };

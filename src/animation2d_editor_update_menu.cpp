@@ -14,7 +14,7 @@ void Animation2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createAnimation", "Create Animation", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createAnimation2d", "Create Animation2D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -25,7 +25,7 @@ void Animation2dEditor::_updateMainMenu()
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editAnimation", "Edit Animation", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editAnimation2d", "Edit Animation2D", fvec2(0.0f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -36,7 +36,7 @@ void Animation2dEditor::_updateMainMenu()
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteAnimation", "Delete Animation", fvec2(0.0f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteAnimation2d", "Delete Animation2D", fvec2(0.0f, 0.1f), ids);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())
@@ -62,24 +62,24 @@ void Animation2dEditor::_updateChoiceMenu()
 
 	if(screen->getId() == "animation2dEditorMenuChoice")
 	{
-		const auto rowCount = _fe3d->animation2d_getRowCount(_currentAnimationId);
-		const auto columnCount = _fe3d->animation2d_getColumnCount(_currentAnimationId);
-		const auto interval = _fe3d->animation2d_getInterval(_currentAnimationId);
-		const auto isAnimationStarted = _fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD_ID, _currentAnimationId);
+		const auto rowCount = _fe3d->animation2d_getRowCount(_currentAnimation2dId);
+		const auto columnCount = _fe3d->animation2d_getColumnCount(_currentAnimation2dId);
+		const auto interval = _fe3d->animation2d_getInterval(_currentAnimation2dId);
+		const auto isStarted = _fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD_ID, _currentAnimation2dId);
 
 		if((_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyboardPressed(KeyboardKeyType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			if(_fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD_ID, _currentAnimationId))
+			if(_fe3d->quad3d_isAnimationStarted(PREVIEW_QUAD_ID, _currentAnimation2dId))
 			{
-				_fe3d->quad3d_stopAnimation(PREVIEW_QUAD_ID, _currentAnimationId);
+				_fe3d->quad3d_stopAnimation(PREVIEW_QUAD_ID, _currentAnimation2dId);
 			}
 
 			_fe3d->quad3d_setDiffuseMap(PREVIEW_QUAD_ID, "");
 			_fe3d->quad3d_setVisible(PREVIEW_QUAD_ID, false);
 
-			_currentAnimationId = "";
+			_currentAnimation2dId = "";
 			_isPreviewTextureChosen = false;
-			_gui->getOverlay()->getTextField("animationId")->setVisible(false);
+			_gui->getOverlay()->getTextField("animation2dId")->setVisible(false);
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 
 			return;
@@ -102,37 +102,37 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
-			_fe3d->quad3d_startAnimation(PREVIEW_QUAD_ID, _currentAnimationId, 1);
+			_fe3d->quad3d_startAnimation(PREVIEW_QUAD_ID, _currentAnimation2dId, 1);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
-			_fe3d->quad3d_stopAnimation(PREVIEW_QUAD_ID, _currentAnimationId);
+			_fe3d->quad3d_stopAnimation(PREVIEW_QUAD_ID, _currentAnimation2dId);
 		}
 
 		if((_gui->getOverlay()->getValueFormId() == "rowCount") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->animation2d_setRowCount(_currentAnimationId, content);
+			_fe3d->animation2d_setRowCount(_currentAnimation2dId, content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "columnCount") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->animation2d_setColumnCount(_currentAnimationId, content);
+			_fe3d->animation2d_setColumnCount(_currentAnimation2dId, content);
 		}
 		if((_gui->getOverlay()->getValueFormId() == "interval") && _gui->getOverlay()->isValueFormConfirmed())
 		{
 			const auto content = max(0, Tools::parseInteger(_gui->getOverlay()->getValueFormContent()));
 
-			_fe3d->animation2d_setInterval(_currentAnimationId, content);
+			_fe3d->animation2d_setInterval(_currentAnimation2dId, content);
 		}
 
-		screen->getButton("preview")->setHoverable(!isAnimationStarted);
-		screen->getButton("rowCount")->setHoverable(_isPreviewTextureChosen && !isAnimationStarted);
-		screen->getButton("columnCount")->setHoverable(_isPreviewTextureChosen && !isAnimationStarted);
-		screen->getButton("interval")->setHoverable(_isPreviewTextureChosen && !isAnimationStarted);
-		screen->getButton("start")->setHoverable(_isPreviewTextureChosen && !isAnimationStarted);
-		screen->getButton("stop")->setHoverable(_isPreviewTextureChosen && isAnimationStarted);
+		screen->getButton("preview")->setHoverable(!isStarted);
+		screen->getButton("rowCount")->setHoverable(_isPreviewTextureChosen && !isStarted);
+		screen->getButton("columnCount")->setHoverable(_isPreviewTextureChosen && !isStarted);
+		screen->getButton("interval")->setHoverable(_isPreviewTextureChosen && !isStarted);
+		screen->getButton("start")->setHoverable(_isPreviewTextureChosen && !isStarted);
+		screen->getButton("stop")->setHoverable(_isPreviewTextureChosen && isStarted);
 	}
 }

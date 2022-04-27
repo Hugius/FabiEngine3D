@@ -13,7 +13,7 @@ void Text2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui->getOverlay()->openValueForm("createText", "Create Text", "", fvec2(0.0f, 0.1f), 10, true, true, false);
+			_gui->getOverlay()->openValueForm("createText2d", "Create Text2D", "", fvec2(0.0f, 0.1f), 10, true, true, false);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
@@ -24,7 +24,7 @@ void Text2dEditor::_updateMainMenu()
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("editText", "Edit Text", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("editText2d", "Edit Text2D", fvec2(-0.5f, 0.1f), ids);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -35,7 +35,7 @@ void Text2dEditor::_updateMainMenu()
 				id = id.substr(1);
 			}
 
-			_gui->getOverlay()->openChoiceForm("deleteText", "Delete Text", fvec2(-0.5f, 0.1f), ids);
+			_gui->getOverlay()->openChoiceForm("deleteText2d", "Delete Text2D", fvec2(-0.5f, 0.1f), ids);
 		}
 
 		if((_gui->getOverlay()->getAnswerFormId() == "back") && _gui->getOverlay()->isAnswerFormConfirmed())

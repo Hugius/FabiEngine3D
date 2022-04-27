@@ -18,7 +18,7 @@ void Text2dEditor::_updateMiscellaneous()
 
 void Text2dEditor::_updateText2dCreating()
 {
-	if((_gui->getOverlay()->getValueFormId() == "createText") && _gui->getOverlay()->isValueFormConfirmed())
+	if((_gui->getOverlay()->getValueFormId() == "createText2d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
 		auto newText2dId = _gui->getOverlay()->getValueFormContent();
 
@@ -103,7 +103,7 @@ void Text2dEditor::_updateText2dCreating()
 
 void Text2dEditor::_updateText2dChoosing()
 {
-	if((_gui->getOverlay()->getChoiceFormId() == "editText") || (_gui->getOverlay()->getChoiceFormId() == "deleteText"))
+	if((_gui->getOverlay()->getChoiceFormId() == "editText2d") || (_gui->getOverlay()->getChoiceFormId() == "deleteText2d"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
@@ -128,9 +128,9 @@ void Text2dEditor::_updateText2dChoosing()
 				_currentText2dId = _hoveredText2dId;
 				_hoveredText2dId = "";
 
-				if(_gui->getOverlay()->getChoiceFormId() == "deleteText")
+				if(_gui->getOverlay()->getChoiceFormId() == "deleteText2d")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteText", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteText2d", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -148,7 +148,7 @@ void Text2dEditor::_updateText2dChoosing()
 
 void Text2dEditor::_updateText2dDeleting()
 {
-	if((_gui->getOverlay()->getAnswerFormId() == "deleteText") && _gui->getOverlay()->isAnswerFormConfirmed())
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteText2d") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{

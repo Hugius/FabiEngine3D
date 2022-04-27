@@ -21,14 +21,14 @@ const bool Animation2dEditor::saveAnimationsToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation2d.fe3d");
 
-	for(const auto & animationId : _loadedAnimation2dIds)
+	for(const auto & animation2dId : _loadedAnimation2dIds)
 	{
-		auto rowCount = _fe3d->animation2d_getRowCount(animationId);
-		auto columnCount = _fe3d->animation2d_getColumnCount(animationId);
-		auto interval = _fe3d->animation2d_getInterval(animationId);
+		auto rowCount = _fe3d->animation2d_getRowCount(animation2dId);
+		auto columnCount = _fe3d->animation2d_getColumnCount(animation2dId);
+		auto interval = _fe3d->animation2d_getInterval(animation2dId);
 
 		file
-			<< animationId
+			<< animation2dId
 			<< " "
 			<< rowCount
 			<< " "

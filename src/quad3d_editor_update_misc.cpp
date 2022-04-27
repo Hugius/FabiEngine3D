@@ -53,7 +53,7 @@ void Quad3dEditor::_updateMiscellaneous()
 
 void Quad3dEditor::_updateQuad3dCreating()
 {
-	if((_gui->getOverlay()->getValueFormId() == "createQuad") && _gui->getOverlay()->isValueFormConfirmed())
+	if((_gui->getOverlay()->getValueFormId() == "createQuad3d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
 		auto newQuad3dId = _gui->getOverlay()->getValueFormContent();
 
@@ -101,7 +101,7 @@ void Quad3dEditor::_updateQuad3dCreating()
 
 void Quad3dEditor::_updateQuad3dChoosing()
 {
-	if((_gui->getOverlay()->getChoiceFormId() == "editQuad") || (_gui->getOverlay()->getChoiceFormId() == "deleteQuad"))
+	if((_gui->getOverlay()->getChoiceFormId() == "editQuad3d") || (_gui->getOverlay()->getChoiceFormId() == "deleteQuad3d"))
 	{
 		const auto selectedOptionId = _gui->getOverlay()->getChoiceFormOptionId();
 
@@ -126,9 +126,9 @@ void Quad3dEditor::_updateQuad3dChoosing()
 				_currentQuad3dId = _hoveredQuad3dId;
 				_hoveredQuad3dId = "";
 
-				if(_gui->getOverlay()->getChoiceFormId() == "deleteQuad")
+				if(_gui->getOverlay()->getChoiceFormId() == "deleteQuad3d")
 				{
-					_gui->getOverlay()->openAnswerForm("deleteQuad", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
+					_gui->getOverlay()->openAnswerForm("deleteQuad3d", "Are You Sure?", "Yes", "No", fvec2(0.0f, 0.25f));
 				}
 				else
 				{
@@ -146,7 +146,7 @@ void Quad3dEditor::_updateQuad3dChoosing()
 
 void Quad3dEditor::_updateQuadDeleting()
 {
-	if((_gui->getOverlay()->getAnswerFormId() == "deleteQuad") && _gui->getOverlay()->isAnswerFormConfirmed())
+	if((_gui->getOverlay()->getAnswerFormId() == "deleteQuad3d") && _gui->getOverlay()->isAnswerFormConfirmed())
 	{
 		if(_gui->getOverlay()->getAnswerFormDecision() == "Yes")
 		{

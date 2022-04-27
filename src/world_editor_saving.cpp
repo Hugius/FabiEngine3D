@@ -213,17 +213,20 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & [textID, templateId] : _loadedTextIds)
+	for(const auto & [textId, templateId] : _loadedTextIds)
 	{
-		auto position = _fe3d->text3d_getPosition(textID);
-		auto rotation = _fe3d->text3d_getRotation(textID);
-		auto size = _fe3d->text3d_getSize(textID);
+		auto content = _fe3d->text3d_getContent(textId);
+		auto position = _fe3d->text3d_getPosition(textId);
+		auto rotation = _fe3d->text3d_getRotation(textId);
+		auto size = _fe3d->text3d_getSize(textId);
 
 		file
 			<< "TEXT3D "
-			<< textID
+			<< textId
 			<< " "
 			<< templateId
+			<< " "
+			<< content
 			<< " "
 			<< position.x
 			<< " "

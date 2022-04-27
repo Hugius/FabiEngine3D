@@ -92,6 +92,10 @@ void WorldEditor::_updateText3dEditing()
 				screen->getButton("rotation")->setHoverable(true);
 				screen->getButton("size")->setHoverable(false);
 			}
+			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("content")->isHovered())
+			{
+				_gui->getOverlay()->openValueForm("content", "Content", "", fvec2(0.0f, 0.1f), 10, true, true, true);
+			}
 			else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 			{
 				_fe3d->text3d_setFrozen(_activeTextId, !_fe3d->text3d_isFrozen(_activeTextId));
@@ -104,6 +108,11 @@ void WorldEditor::_updateText3dEditing()
 				rightWindow->setActiveScreen("main");
 
 				return;
+			}
+
+			if((_gui->getOverlay()->getValueFormId() == "content") && _gui->getOverlay()->isValueFormConfirmed())
+			{
+				_fe3d->text3d_setContent(_activeTextId, _gui->getOverlay()->getValueFormContent());
 			}
 
 			auto position = _fe3d->text3d_getPosition(_activeTextId);

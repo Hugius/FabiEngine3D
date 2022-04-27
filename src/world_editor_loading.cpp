@@ -242,6 +242,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		{
 			string textId;
 			string templateId;
+			string content;
 			fvec3 position;
 			fvec3 rotation;
 			fvec2 size;
@@ -249,6 +250,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			iss
 				>> textId
 				>> templateId
+				>> content
 				>> position.x
 				>> position.y
 				>> position.z
@@ -267,6 +269,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 
 			_worldHelper->copyTemplateText(textId, templateId);
 
+			_fe3d->text3d_setContent(textId, content);
 			_fe3d->text3d_setPosition(textId, position);
 			_fe3d->text3d_setRotation(textId, rotation);
 			_fe3d->text3d_setSize(textId, size);

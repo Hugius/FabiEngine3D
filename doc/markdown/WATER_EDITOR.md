@@ -10,8 +10,9 @@
 ## 2. Controls
 
 - Move camera with your mouse
+- Hold `Q` to zoom camera in
+- Hold `E` to zoom camera out
 - Press `RMB` to toggle camera
-- Scroll `MMB` to zoom camera
 - Press `R` to toggle reference box
 - Press `F` to toggle wireframe rendering
 - Press `ESC` to go back

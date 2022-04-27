@@ -6,9 +6,9 @@ void WaterEditor::_updateCamera()
 {
 	if(_fe3d->camera_isThirdPersonEnabled())
 	{
-		const auto scrollOffset = (_fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_FORWARD) ? 1.0f : _fe3d->input_isMouseScrolled(MouseWheelType::WHEEL_BACKWARD) ? -1.0f : 0.0f);
+		const auto distanceOffset = (static_cast<float>(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_Q)) - static_cast<float>(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_E)));
 
-		_fe3d->camera_setThirdPersonDistance(max(MIN_CAMERA_DISTANCE, _fe3d->camera_getThirdPersonDistance() - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED)));
+		_fe3d->camera_setThirdPersonDistance(max(MIN_CAMERA_DISTANCE, (_fe3d->camera_getThirdPersonDistance() - (distanceOffset * CAMERA_DISTANCE_SPEED))));
 
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
 	}

@@ -32,6 +32,8 @@ void Animation3dEditor::_load()
 	_fe3d->graphics_setShadowsEnabled(true);
 	_fe3d->graphics_setShadowLightness(0.25f);
 	_fe3d->graphics_setShadowQuality(16384);
+	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE / 2.0f));
+	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE / 2.0f)));
 	_fe3d->graphics_setCubeReflectionQuality(1024);
 	_fe3d->graphics_setPlanarReflectionQuality(1024);
 	_fe3d->graphics_setPlanarRefractionQuality(1024);

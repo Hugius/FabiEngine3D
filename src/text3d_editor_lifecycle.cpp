@@ -33,6 +33,8 @@ void Text3dEditor::_load()
 	_fe3d->graphics_setShadowsEnabled(true);
 	_fe3d->graphics_setShadowLightness(0.25f);
 	_fe3d->graphics_setShadowQuality(16384);
+	_fe3d->graphics_setShadowPositionOffset(fvec3(GRID_SIZE / 2.0f));
+	_fe3d->graphics_setShadowSize(Mathematics::calculateMagnitude(fvec3(GRID_SIZE / 2.0f)));
 
 	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d->model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));

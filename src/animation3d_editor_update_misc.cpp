@@ -6,27 +6,14 @@ void Animation3dEditor::_updateCamera()
 {
 	if(_fe3d->camera_isThirdPersonEnabled())
 	{
+		const auto cameraLookat = _fe3d->camera_getThirdPersonLookat();
 		const auto distanceOffset = (static_cast<float>(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_Q)) - static_cast<float>(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_E)));
+		const auto lookatOffset = (static_cast<float>(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SPACEBAR)) - static_cast<float>(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SHIFT)));
 
 		_fe3d->camera_setThirdPersonDistance(max(MIN_CAMERA_DISTANCE, (_fe3d->camera_getThirdPersonDistance() - (distanceOffset * CAMERA_DISTANCE_SPEED))));
-
-		auto cameraLookat = _fe3d->camera_getThirdPersonLookat();
-		if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SPACEBAR))
-		{
-			cameraLookat.y += CAMERA_LOOKAT_SPEED;
-		}
-		if(_fe3d->input_isKeyboardHeld(KeyboardKeyType::KEY_SHIFT))
-		{
-			cameraLookat.y -= CAMERA_LOOKAT_SPEED;
-		}
-		_fe3d->camera_setThirdPersonLookat(cameraLookat);
+		_fe3d->camera_setThirdPersonLookat(fvec3(cameraLookat.x, max(-GRID_Y_OFFSET, (cameraLookat.y + (lookatOffset * CAMERA_LOOKAT_SPEED))), cameraLookat.z));
 
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), false);
-
-		const auto distance = _fe3d->camera_getThirdPersonDistance();
-		_fe3d->graphics_setShadowPositionOffset(fvec3(cameraLookat + fvec3(distance)));
-		_fe3d->graphics_setShadowLookatOffset(cameraLookat);
-		_fe3d->graphics_setShadowSize(distance * 2.0f);
 	}
 
 	if(!_gui->getOverlay()->isFocused() && Tools::isCursorInsideDisplay())

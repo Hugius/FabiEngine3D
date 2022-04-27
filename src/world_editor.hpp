@@ -236,26 +236,26 @@ private:
 	shared_ptr<SoundEditor> _soundEditor = nullptr;
 	shared_ptr<WorldHelper> _worldHelper = nullptr;
 
+	string _loadedWorldId = "";
+	string _currentWorldId = "";
 	string _currentTemplateModelId = "";
 	string _currentTemplateQuadId = "";
 	string _currentTemplateTextId = "";
 	string _currentTemplateSoundId = "";
 	string _selectedModelId = "";
-	string _activeModelId = "";
 	string _selectedQuadId = "";
-	string _activeQuadId = "";
 	string _selectedTextId = "";
-	string _activeTextId = "";
 	string _selectedPointlightId = "";
-	string _activePointlightId = "";
 	string _selectedSpotlightId = "";
-	string _activeSpotlightId = "";
 	string _selectedCaptorId = "";
-	string _activeCaptorId = "";
 	string _selectedSoundId = "";
+	string _activeModelId = "";
+	string _activeQuadId = "";
+	string _activeTextId = "";
+	string _activePointlightId = "";
+	string _activeSpotlightId = "";
+	string _activeCaptorId = "";
 	string _activeSoundId = "";
-	string _loadedWorldId = "";
-	string _currentWorldId = "";
 
 	float _editorSpeed = 1.0f;
 

@@ -7,7 +7,7 @@ void WorldEditor::_updateCaptorPlacing()
 	{
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
-			const auto newPosition = _fe3d->captor_getPosition(TEMPLATE_CAMERA_ID);
+			const auto newPosition = _fe3d->captor_getPosition(TEMPLATE_CAPTOR_ID);
 
 			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{

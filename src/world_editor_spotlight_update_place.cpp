@@ -8,7 +8,7 @@ void WorldEditor::_updateSpotlightPlacing()
 	{
 		if(_fe3d->terrain_getSelectedId().empty())
 		{
-			const auto newPosition = _fe3d->spotlight_getPosition(TEMPLATE_TORCH_ID);
+			const auto newPosition = _fe3d->spotlight_getPosition(TEMPLATE_SPOTLIGHT_ID);
 
 			if((_gui->getOverlay()->getValueFormId() == "positionX") && _gui->getOverlay()->isValueFormConfirmed())
 			{

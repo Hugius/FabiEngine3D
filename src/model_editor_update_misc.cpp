@@ -260,7 +260,7 @@ void ModelEditor::_updatePartChoosing()
 
 void ModelEditor::_updateAabbCreating()
 {
-	if((_gui->getOverlay()->getValueFormId() == "aabbCreate") && _gui->getOverlay()->isValueFormConfirmed())
+	if((_gui->getOverlay()->getValueFormId() == "createAabb") && _gui->getOverlay()->isValueFormConfirmed())
 	{
 		const auto newAabbId = _gui->getOverlay()->getValueFormContent();
 

@@ -252,14 +252,6 @@ void EngineController::update()
 	}
 	else
 	{
-		static string lastScreen = "";
-		string activeScreen = _guiManager->getLeftViewport()->getWindow("main")->getActiveScreen()->getId();
-		if(activeScreen == "main" && lastScreen != "main")
-		{
-			_fe3d->camera_reset();
-		}
-		lastScreen = activeScreen;
-
 		_fe3d->quad2d_setPosition(_fe3d->misc_getCursorEntityId(), Tools::convertToNdc(Tools::getCursorPosition()));
 		_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
 		_fe3d->quad2d_setVisible(_fe3d->misc_getCursorEntityId(), Tools::isCursorInsideWindow());

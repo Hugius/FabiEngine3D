@@ -7,7 +7,6 @@
 
 void SkyEditor::_load()
 {
-	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 
 	_fe3d->graphics_setMotionBlurEnabled(true);
@@ -19,6 +18,8 @@ void SkyEditor::_load()
 
 void SkyEditor::_unload()
 {
+	_fe3d->camera_reset();
+
 	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->sky_delete(id);
@@ -29,8 +30,6 @@ void SkyEditor::_unload()
 	_fe3d->graphics_setMotionBlurQuality(5);
 
 	_gui->getOverlay()->deleteTextField("skyId");
-
-	_fe3d->camera_setThirdPersonEnabled(false);
 
 	_loadedEntityIds.clear();
 	_currentSkyId = "";

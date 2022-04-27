@@ -15,7 +15,6 @@ void SoundEditor::_load()
 	_fe3d->graphics_setBloomBlurCount(5);
 	_fe3d->graphics_setBloomQuality(5);
 
-	_fe3d->camera_reset();
 	_fe3d->camera_setYaw(270.0f);
 
 	_fe3d->quad3d_create("@@icon", true);
@@ -28,6 +27,8 @@ void SoundEditor::_load()
 
 void SoundEditor::_unload()
 {
+	_fe3d->camera_reset();
+
 	for(const auto & id : _loadedSoundIds)
 	{
 		_fe3d->sound2d_delete(id);

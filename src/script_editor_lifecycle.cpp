@@ -7,7 +7,6 @@
 
 void ScriptEditor::_load()
 {
-	_fe3d->camera_reset();
 	_fe3d->camera_setFov(CAMERA_FOV);
 	_fe3d->camera_setYaw(CAMERA_YAW);
 	_fe3d->camera_setPitch(CAMERA_PITCH);

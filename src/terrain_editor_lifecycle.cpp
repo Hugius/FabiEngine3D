@@ -7,7 +7,6 @@
 
 void TerrainEditor::_load()
 {
-	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonEnabled(true);
@@ -43,6 +42,8 @@ void TerrainEditor::_load()
 
 void TerrainEditor::_unload()
 {
+	_fe3d->camera_reset();
+
 	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->terrain_delete(id);
@@ -62,8 +63,6 @@ void TerrainEditor::_unload()
 	_fe3d->model_delete("@@grid");
 
 	_gui->getOverlay()->deleteTextField("terrainId");
-
-	_fe3d->camera_setThirdPersonEnabled(false);
 
 	_loadedEntityIds.clear();
 	_currentTerrainId = "";

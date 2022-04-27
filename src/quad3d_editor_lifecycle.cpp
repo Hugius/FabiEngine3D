@@ -7,7 +7,6 @@
 
 void Quad3dEditor::_load()
 {
-	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonEnabled(true);
@@ -53,6 +52,8 @@ void Quad3dEditor::_load()
 
 void Quad3dEditor::_unload()
 {
+	_fe3d->camera_reset();
+
 	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->quad3d_delete(id);

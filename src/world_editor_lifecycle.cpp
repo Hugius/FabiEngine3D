@@ -4,8 +4,6 @@
 
 void WorldEditor::_load()
 {
-	_fe3d->camera_reset();
-
 	_fe3d->graphics_setAntiAliasingEnabled(true);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);
 
@@ -98,6 +96,8 @@ void WorldEditor::_load()
 
 void WorldEditor::_unload()
 {
+	_fe3d->camera_reset();
+
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);
 

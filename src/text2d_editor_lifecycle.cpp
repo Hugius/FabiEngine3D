@@ -7,7 +7,6 @@
 
 void Text2dEditor::_load()
 {
-	_fe3d->camera_reset();
 	_fe3d->camera_setYaw(270.0f);
 
 	_gui->getOverlay()->createTextField("textId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
@@ -15,6 +14,8 @@ void Text2dEditor::_load()
 
 void Text2dEditor::_unload()
 {
+	_fe3d->camera_reset();
+
 	for(const auto & id : _loadedEntityIds)
 	{
 		_fe3d->text2d_delete(id);

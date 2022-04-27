@@ -7,7 +7,6 @@
 
 void Animation3dEditor::_load()
 {
-	_fe3d->camera_reset();
 	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	_fe3d->camera_setThirdPersonEnabled(true);
 	_fe3d->camera_setThirdPersonYaw(INITIAL_CAMERA_YAW);
@@ -59,14 +58,14 @@ void Animation3dEditor::_load()
 
 void Animation3dEditor::_unload()
 {
+	_fe3d->camera_reset();
+
 	_modelEditor->deleteLoadedEntities();
 
 	for(const auto & id : _loadedAnimationIds)
 	{
 		_fe3d->animation3d_delete(id);
 	}
-
-	_fe3d->camera_setThirdPersonEnabled(false);
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(16);

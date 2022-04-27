@@ -7,7 +7,6 @@
 
 void Animation2dEditor::_load()
 {
-	_fe3d->camera_reset();
 	_fe3d->camera_setYaw(270.0f);
 
 	_fe3d->graphics_setAntiAliasingEnabled(true);
@@ -21,6 +20,7 @@ void Animation2dEditor::_load()
 
 void Animation2dEditor::_unload()
 {
+	_fe3d->camera_reset();
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 
 	_fe3d->quad3d_delete(PREVIEW_QUAD_ID);

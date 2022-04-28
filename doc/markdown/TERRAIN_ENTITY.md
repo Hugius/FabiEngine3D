@@ -44,6 +44,9 @@
 - **Blue Normal Map Path**: the path of the blue normal map file
   - Type: `string`
   - Constraints: none
+- **Color**: the RGB color multiplier of the fragments
+  - Type: `decimal3`
+  - Constraints: between `0.0` and `1.0`
 - **Wireframe Color**: the RGB color multiplier of the wireframe
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`

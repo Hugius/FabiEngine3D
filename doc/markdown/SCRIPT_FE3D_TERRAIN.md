@@ -18,6 +18,7 @@
 - `fe3d:terrain_set_green_normal_map` (`STR` id, `STR` file_path) -----> `NONE`
 - `fe3d:terrain_set_blue_normal_map` (`STR` id, `STR` file_path) -----> `NONE`
 - `fe3d:terrain_set_wireframe_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
+- `fe3d:terrain_set_color` (`STR` id, `DEC` r, `DEC` g, `DEC` b) -----> `NONE`
 - `fe3d:terrain_set_specular_shininess` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:terrain_set_specular_intensity` (`STR` id, `DEC` value) -----> `NONE`
 - `fe3d:terrain_set_texture_repeat` (`STR` id, `INT` value) -----> `NONE`
@@ -70,6 +71,9 @@
 - `fe3d:terrain_get_wireframe_color_r` (`STR` id) -----> `DEC`
 - `fe3d:terrain_get_wireframe_color_g` (`STR` id) -----> `DEC`
 - `fe3d:terrain_get_wireframe_color_b` (`STR` id) -----> `DEC`
+- `fe3d:terrain_get_color_r` (`STR` id) -----> `DEC`
+- `fe3d:terrain_get_color_g` (`STR` id) -----> `DEC`
+- `fe3d:terrain_get_color_b` (`STR` id) -----> `DEC`
 - `fe3d:terrain_get_texture_repeat` (`STR` id) -----> `INT`
 - `fe3d:terrain_get_red_repeat` (`STR` id) -----> `INT`
 - `fe3d:terrain_get_green_repeat` (`STR` id) -----> `INT`

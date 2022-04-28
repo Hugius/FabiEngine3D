@@ -354,6 +354,11 @@ void EngineInterface::terrain_setWireframeColor(const string & terrainId, const 
 	_core->getTerrainEntityManager()->getEntity(terrainId)->setWireframeColor(value);
 }
 
+void EngineInterface::terrain_setColor(const string & terrainId, const fvec3 & value)
+{
+	_core->getTerrainEntityManager()->getEntity(terrainId)->setColor(value);
+}
+
 void EngineInterface::terrain_setMinClipPosition(const string & terrainId, const fvec3 & value)
 {
 	_core->getTerrainEntityManager()->getEntity(terrainId)->setMinClipPosition(value);
@@ -534,6 +539,11 @@ const string & EngineInterface::terrain_getBlueNormalMapPath(const string & terr
 const fvec3 & EngineInterface::terrain_getWireframeColor(const string & terrainId) const
 {
 	return _core->getTerrainEntityManager()->getEntity(terrainId)->getWireframeColor();
+}
+
+const fvec3 & EngineInterface::terrain_getColor(const string & terrainId) const
+{
+	return _core->getTerrainEntityManager()->getEntity(terrainId)->getColor();
 }
 
 const fvec3 & EngineInterface::terrain_getMinClipPosition(const string & terrainId) const

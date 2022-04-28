@@ -269,6 +269,20 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string & functionN
 			}
 		}
 	}
+	else if(functionName == "fe3d:terrain_set_color")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dTerrain(args[0]->getString(), false))
+			{
+				_fe3d->terrain_setColor(_fe3d->terrain_getSelectedId(), fvec3(args[1]->getDecimal(), args[2]->getDecimal(), args[3]->getDecimal()));
+
+				returnValues.push_back(make_shared<ScriptValue>(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:terrain_set_specular_shininess")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};

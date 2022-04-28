@@ -42,12 +42,6 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 		string redDiffuseMapPath;
 		string greenDiffuseMapPath;
 		string blueDiffuseMapPath;
-		float maxHeight;
-		float lightness;
-		int textureRepeat;
-		int redTextureRepeat;
-		int greenTextureRepeat;
-		int blueTextureRepeat;
 
 		istringstream iss(line);
 
@@ -62,13 +56,7 @@ const vector<string> TerrainEditor::getImagePathsFromFile() const
 			>> normalMapPath
 			>> redNormalMapPath
 			>> greenNormalMapPath
-			>> blueNormalMapPath
-			>> maxHeight
-			>> textureRepeat
-			>> lightness
-			>> redTextureRepeat
-			>> greenTextureRepeat
-			>> blueTextureRepeat;
+			>> blueNormalMapPath;
 
 		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -231,6 +219,7 @@ const bool TerrainEditor::loadEntitiesFromFile()
 		string redDiffuseMapPath;
 		string greenDiffuseMapPath;
 		string blueDiffuseMapPath;
+		fvec3 color;
 		float maxHeight;
 		float lightness;
 		float specularShininess;
@@ -258,6 +247,9 @@ const bool TerrainEditor::loadEntitiesFromFile()
 			>> maxHeight
 			>> textureRepeat
 			>> lightness
+			>> color.r
+			>> color.g
+			>> color.b
 			>> redTextureRepeat
 			>> greenTextureRepeat
 			>> blueTextureRepeat
@@ -302,6 +294,7 @@ const bool TerrainEditor::loadEntitiesFromFile()
 			_fe3d->terrain_setMaxHeight(terrainId, maxHeight);
 			_fe3d->terrain_setTextureRepeat(terrainId, textureRepeat);
 			_fe3d->terrain_setLightness(terrainId, lightness);
+			_fe3d->terrain_setColor(terrainId, color);
 			_fe3d->terrain_setRedTextureRepeat(terrainId, redTextureRepeat);
 			_fe3d->terrain_setGreenTextureRepeat(terrainId, greenTextureRepeat);
 			_fe3d->terrain_setBlueTextureRepeat(terrainId, blueTextureRepeat);

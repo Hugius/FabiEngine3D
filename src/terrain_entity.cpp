@@ -153,6 +153,11 @@ void TerrainEntity::setWireframeColor(const fvec3 & value)
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
+void TerrainEntity::setColor(const fvec3 & value)
+{
+	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+}
+
 void TerrainEntity::setMinClipPosition(const fvec3 & value)
 {
 	_minClipPosition = value;
@@ -271,6 +276,11 @@ const string & TerrainEntity::getGreenNormalMapPath() const
 const string & TerrainEntity::getBlueNormalMapPath() const
 {
 	return _blueNormalMapPath;
+}
+
+const fvec3 & TerrainEntity::getColor() const
+{
+	return _color;
 }
 
 const fvec3 & TerrainEntity::getWireframeColor() const

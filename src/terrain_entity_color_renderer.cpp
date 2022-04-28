@@ -157,6 +157,7 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 	_shaderBuffer->uploadUniform("u_hasGreenNormalMap", (entity->getGreenNormalTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_hasBlueNormalMap", (entity->getBlueNormalTextureBuffer() != nullptr));
 	_shaderBuffer->uploadUniform("u_wireframeColor", entity->getWireframeColor());
+	_shaderBuffer->uploadUniform("u_color", entity->getColor());
 	_shaderBuffer->uploadUniform("u_minX", max(_renderStorage->getMinClipPosition().x, entity->getMinClipPosition().x));
 	_shaderBuffer->uploadUniform("u_minY", max(_renderStorage->getMinClipPosition().y, entity->getMinClipPosition().y));
 	_shaderBuffer->uploadUniform("u_minZ", max(_renderStorage->getMinClipPosition().z, entity->getMinClipPosition().z));

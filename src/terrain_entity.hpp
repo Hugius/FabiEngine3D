@@ -46,6 +46,7 @@ public:
 	void setSpecular(bool value);
 	void setWireframed(bool value);
 	void setWireframeColor(const fvec3 & value);
+	void setColor(const fvec3 & value);
 	void setMinClipPosition(const fvec3 & value);
 	void setMaxClipPosition(const fvec3 & value);
 
@@ -73,6 +74,7 @@ public:
 	const string & getGreenNormalMapPath() const;
 	const string & getBlueNormalMapPath() const;
 
+	const fvec3 & getColor() const;
 	const fvec3 & getWireframeColor() const;
 	const fvec3 & getMinClipPosition() const;
 	const fvec3 & getMaxClipPosition() const;

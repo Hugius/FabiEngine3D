@@ -32,6 +32,7 @@ const bool TerrainEditor::saveEntitiesToFile() const
 		auto maxHeight = _fe3d->terrain_getMaxHeight(terrainId);
 		auto textureRepeat = _fe3d->terrain_getTextureRepeat(terrainId);
 		auto lightness = _fe3d->terrain_getLightness(terrainId);
+		auto color = _fe3d->terrain_getColor(terrainId);
 		auto specularShininess = _fe3d->terrain_getSpecularShininess(terrainId);
 		auto specularIntensity = _fe3d->terrain_getSpecularIntensity(terrainId);
 		auto redTextureRepeat = _fe3d->terrain_getRedTextureRepeat(terrainId);
@@ -100,6 +101,12 @@ const bool TerrainEditor::saveEntitiesToFile() const
 			<< textureRepeat
 			<< " "
 			<< lightness
+			<< " "
+			<< color.r
+			<< " "
+			<< color.g
+			<< " "
+			<< color.b
 			<< " "
 			<< redTextureRepeat
 			<< " "

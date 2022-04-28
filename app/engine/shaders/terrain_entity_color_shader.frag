@@ -34,6 +34,7 @@ uniform vec3 u_directionalLightingPosition;
 uniform vec3 u_shadowLookat;
 uniform vec3 u_fogColor;
 uniform vec3 u_wireframeColor;
+uniform vec3 u_color;
 
 uniform float u_pointlightIntensities[MAX_POINTLIGHT_COUNT];
 uniform float u_spotlightIntensities[MAX_SPOTLIGHT_COUNT];
@@ -109,6 +110,7 @@ void main()
 
 	vec3 primaryColor = vec3(0.0f);
 	primaryColor += calculateDiffuseMapping();
+	primaryColor *= u_color;
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 

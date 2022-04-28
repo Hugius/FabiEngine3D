@@ -116,6 +116,7 @@ public:
 	void terrain_setSpecular(const string & terrainId, bool value);
 	void terrain_setWireframed(const string & terrainId, bool value);
 	void terrain_setWireframeColor(const string & terrainId, const fvec3 & value);
+	void terrain_setColor(const string & terrainId, const fvec3 & value);
 	void terrain_setMinClipPosition(const string & terrainId, const fvec3 & value);
 	void terrain_setMaxClipPosition(const string & terrainId, const fvec3 & value);
 
@@ -132,6 +133,7 @@ public:
 	const string & terrain_getGreenNormalMapPath(const string & terrainId) const;
 	const string & terrain_getBlueNormalMapPath(const string & terrainId) const;
 	const fvec3 & terrain_getWireframeColor(const string & terrainId) const;
+	const fvec3 & terrain_getColor(const string & terrainId) const;
 	const fvec3 & terrain_getMinClipPosition(const string & terrainId) const;
 	const fvec3 & terrain_getMaxClipPosition(const string & terrainId) const;
 	const float terrain_getMaxHeight(const string & terrainId) const;

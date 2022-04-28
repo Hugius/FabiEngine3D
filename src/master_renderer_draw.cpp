@@ -112,13 +112,13 @@ void MasterRenderer::_renderOpaqueModelEntities()
 
 		_modelEntityColorRenderer->processSpotlights(_spotlightEntityManager->getEntities());
 
-		for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
+		for(const auto & [modelId, model] : _modelEntityManager->getEntities())
 		{
 			bool isTransparent = false;
 
-			for(const auto & partId : entity->getPartIds())
+			for(const auto & partId : model->getPartIds())
 			{
-				if(entity->getOpacity(partId) < 1.0f)
+				if(model->getOpacity(partId) < 1.0f)
 				{
 					isTransparent = true;
 				}
@@ -129,18 +129,18 @@ void MasterRenderer::_renderOpaqueModelEntities()
 				continue;
 			}
 
-			if(entity->isLevelOfDetailed())
+			if(model->isLevelOfDetailed())
 			{
-				const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(entity->getLevelOfDetailEntityId())->second;
+				const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId())->second;
 				const auto originalPosition = levelOfDetailEntity->getBasePosition();
 				const auto originalRotation = levelOfDetailEntity->getBaseRotation();
 				const auto originalSize = levelOfDetailEntity->getBaseSize();
 				const auto originalVisibility = levelOfDetailEntity->isVisible();
 
-				levelOfDetailEntity->setBasePosition(entity->getBasePosition());
-				levelOfDetailEntity->setBaseRotation(entity->getBaseRotation());
-				levelOfDetailEntity->setBaseSize(entity->getBaseSize());
-				levelOfDetailEntity->setVisible(entity->isVisible());
+				levelOfDetailEntity->setBasePosition(model->getBasePosition());
+				levelOfDetailEntity->setBaseRotation(model->getBaseRotation());
+				levelOfDetailEntity->setBaseSize(model->getBaseSize());
+				levelOfDetailEntity->setVisible(model->isVisible());
 				levelOfDetailEntity->updateTransformation();
 
 				_modelEntityColorRenderer->render(levelOfDetailEntity, _captorEntityManager->getEntities());
@@ -153,7 +153,7 @@ void MasterRenderer::_renderOpaqueModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer->render(entity, _captorEntityManager->getEntities());
+				_modelEntityColorRenderer->render(model, _captorEntityManager->getEntities());
 			}
 		}
 
@@ -171,13 +171,13 @@ void MasterRenderer::_renderTransparentModelEntities()
 
 		_modelEntityColorRenderer->processSpotlights(_spotlightEntityManager->getEntities());
 
-		for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
+		for(const auto & [modelId, model] : _modelEntityManager->getEntities())
 		{
 			bool isTransparent = false;
 
-			for(const auto & partId : entity->getPartIds())
+			for(const auto & partId : model->getPartIds())
 			{
-				if(entity->getOpacity(partId) < 1.0f)
+				if(model->getOpacity(partId) < 1.0f)
 				{
 					isTransparent = true;
 
@@ -190,18 +190,18 @@ void MasterRenderer::_renderTransparentModelEntities()
 				continue;
 			}
 
-			if(entity->isLevelOfDetailed())
+			if(model->isLevelOfDetailed())
 			{
-				const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(entity->getLevelOfDetailEntityId())->second;
+				const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId())->second;
 				const auto originalPosition = levelOfDetailEntity->getBasePosition();
 				const auto originalRotation = levelOfDetailEntity->getBaseRotation();
 				const auto originalSize = levelOfDetailEntity->getBaseSize();
 				const auto originalVisibility = levelOfDetailEntity->isVisible();
 
-				levelOfDetailEntity->setBasePosition(entity->getBasePosition());
-				levelOfDetailEntity->setBaseRotation(entity->getBaseRotation());
-				levelOfDetailEntity->setBaseSize(entity->getBaseSize());
-				levelOfDetailEntity->setVisible(entity->isVisible());
+				levelOfDetailEntity->setBasePosition(model->getBasePosition());
+				levelOfDetailEntity->setBaseRotation(model->getBaseRotation());
+				levelOfDetailEntity->setBaseSize(model->getBaseSize());
+				levelOfDetailEntity->setVisible(model->isVisible());
 				levelOfDetailEntity->updateTransformation();
 
 				_modelEntityColorRenderer->render(levelOfDetailEntity, _captorEntityManager->getEntities());
@@ -214,7 +214,7 @@ void MasterRenderer::_renderTransparentModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer->render(entity, _captorEntityManager->getEntities());
+				_modelEntityColorRenderer->render(model, _captorEntityManager->getEntities());
 			}
 		}
 
@@ -228,14 +228,14 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
 		{
-			if(entity->getOpacity() < 1.0f)
+			if(quad3d->getOpacity() < 1.0f)
 			{
 				continue;
 			}
 
-			_quad3dEntityColorRenderer->render(entity);
+			_quad3dEntityColorRenderer->render(quad3d);
 		}
 
 		_quad3dEntityColorRenderer->unbind();
@@ -248,14 +248,14 @@ void MasterRenderer::_renderTransparentQuad3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
 		{
-			if(entity->getOpacity() == 1.0f)
+			if(quad3d->getOpacity() == 1.0f)
 			{
 				continue;
 			}
 
-			_quad3dEntityColorRenderer->render(entity);
+			_quad3dEntityColorRenderer->render(quad3d);
 		}
 
 		_quad3dEntityColorRenderer->unbind();
@@ -268,14 +268,14 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
+		for(const auto & [text3dId, text3d] : _text3dEntityManager->getEntities())
 		{
-			if(entity->getOpacity() < 1.0f)
+			if(text3d->getOpacity() < 1.0f)
 			{
 				continue;
 			}
 
-			for(const auto & characterEntity : entity->getCharacterEntities())
+			for(const auto & characterEntity : text3d->getCharacterEntities())
 			{
 				_quad3dEntityColorRenderer->render(characterEntity);
 			}
@@ -291,14 +291,14 @@ void MasterRenderer::_renderTransparentText3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
+		for(const auto & [text3dId, text3d] : _text3dEntityManager->getEntities())
 		{
-			if(entity->getOpacity() == 1.0f)
+			if(text3d->getOpacity() == 1.0f)
 			{
 				continue;
 			}
 
-			for(const auto & characterEntity : entity->getCharacterEntities())
+			for(const auto & characterEntity : text3d->getCharacterEntities())
 			{
 				_quad3dEntityColorRenderer->render(characterEntity);
 			}
@@ -314,9 +314,9 @@ void MasterRenderer::_renderAabbEntities()
 	{
 		_aabbEntityColorRenderer->bind();
 
-		for(const auto & [aabbId, entity] : _aabbEntityManager->getEntities())
+		for(const auto & [aabbId, aabb] : _aabbEntityManager->getEntities())
 		{
-			_aabbEntityColorRenderer->render(entity);
+			_aabbEntityColorRenderer->render(aabb);
 		}
 
 		_aabbEntityColorRenderer->unbind();
@@ -339,22 +339,22 @@ void MasterRenderer::_renderGUI()
 		_quad2dEntityColorRenderer->bind();
 
 		map<int, shared_ptr<BaseEntity>> orderedQuad2dEntities;
-		for(const auto & [quad2dId, entity] : _quad2dEntityManager->getEntities())
+		for(const auto & [quad2dId, quad2d] : _quad2dEntityManager->getEntities())
 		{
-			if(entity->getId() != _renderStorage->getCursorEntityId())
+			if(quad2d->getId() != _renderStorage->getCursorEntityId())
 			{
-				orderedQuad2dEntities.insert({entity->getDepth(), entity});
+				orderedQuad2dEntities.insert({quad2d->getDepth(), quad2d});
 			}
 		}
-		for(const auto & [text2dId, entity] : _text2dEntityManager->getEntities())
+		for(const auto & [text2dId, text2d] : _text2dEntityManager->getEntities())
 		{
-			orderedQuad2dEntities.insert({entity->getDepth(), entity});
+			orderedQuad2dEntities.insert({text2d->getDepth(), text2d});
 		}
 
-		for(const auto & [quad2dId, entity] : orderedQuad2dEntities)
+		for(const auto & [quad2dId, quad2d] : orderedQuad2dEntities)
 		{
-			auto castedQuad2dEntity = dynamic_pointer_cast<Quad2dEntity>(entity);
-			auto castedText2dEntity = dynamic_pointer_cast<Text2dEntity>(entity);
+			auto castedQuad2dEntity = dynamic_pointer_cast<Quad2dEntity>(quad2d);
+			auto castedText2dEntity = dynamic_pointer_cast<Text2dEntity>(quad2d);
 
 			if(castedQuad2dEntity != nullptr)
 			{

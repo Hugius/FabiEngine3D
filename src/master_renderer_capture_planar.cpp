@@ -4,16 +4,16 @@ void MasterRenderer::capturePlanarReflections()
 {
 	vector<shared_ptr<ModelEntity>> reflectiveModelEntities;
 
-	for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
+	for(const auto & [modelId, model] : _modelEntityManager->getEntities())
 	{
-		for(const auto & partId : entity->getPartIds())
+		for(const auto & partId : model->getPartIds())
 		{
-			if(entity->isReflective(partId) && entity->isVisible())
+			if(model->isReflective(partId) && model->isVisible())
 			{
-				if(entity->getReflectionType(partId) == ReflectionType::PLANAR)
+				if(model->getReflectionType(partId) == ReflectionType::PLANAR)
 				{
-					entity->setVisible(false);
-					reflectiveModelEntities.push_back(entity);
+					model->setVisible(false);
+					reflectiveModelEntities.push_back(model);
 
 					break;
 				}
@@ -34,32 +34,32 @@ void MasterRenderer::capturePlanarReflections()
 
 	vector<shared_ptr<ModelEntity>> savedModelEntities;
 	savedModelEntities.insert(savedModelEntities.end(), reflectiveModelEntities.begin(), reflectiveModelEntities.end());
-	for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
+	for(const auto & [modelId, model] : _modelEntityManager->getEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if(!model->isReflected() && model->isVisible())
 		{
-			entity->setVisible(false);
-			savedModelEntities.push_back(entity);
+			model->setVisible(false);
+			savedModelEntities.push_back(model);
 		}
 	}
 
 	vector<shared_ptr<Quad3dEntity>> savedQuad3dEntities;
-	for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
+	for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
-			entity->setVisible(false);
-			savedQuad3dEntities.push_back(entity);
+			quad3d->setVisible(false);
+			savedQuad3dEntities.push_back(quad3d);
 		}
 	}
 
 	vector<shared_ptr<Text3dEntity>> savedText3dEntities;
-	for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
+	for(const auto & [text3dId, text3d] : _text3dEntityManager->getEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if(!text3d->isReflected() && text3d->isVisible())
 		{
-			entity->setVisible(false);
-			savedText3dEntities.push_back(entity);
+			text3d->setVisible(false);
+			savedText3dEntities.push_back(text3d);
 		}
 	}
 

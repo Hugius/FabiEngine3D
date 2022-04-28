@@ -10,32 +10,32 @@ void MasterRenderer::captureCubeReflections()
 	}
 
 	vector<shared_ptr<ModelEntity>> savedModelEntities;
-	for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
+	for(const auto & [modelId, model] : _modelEntityManager->getEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if(!model->isReflected() && model->isVisible())
 		{
-			entity->setVisible(false);
-			savedModelEntities.push_back(entity);
+			model->setVisible(false);
+			savedModelEntities.push_back(model);
 		}
 	}
 
 	vector<shared_ptr<Quad3dEntity>> savedQuad3dEntities;
-	for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
+	for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
-			entity->setVisible(false);
-			savedQuad3dEntities.push_back(entity);
+			quad3d->setVisible(false);
+			savedQuad3dEntities.push_back(quad3d);
 		}
 	}
 
 	vector<shared_ptr<Text3dEntity>> savedText3dEntities;
-	for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
+	for(const auto & [text3dId, text3d] : _text3dEntityManager->getEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if(!text3d->isReflected() && text3d->isVisible())
 		{
-			entity->setVisible(false);
-			savedText3dEntities.push_back(entity);
+			text3d->setVisible(false);
+			savedText3dEntities.push_back(text3d);
 		}
 	}
 
@@ -56,17 +56,17 @@ void MasterRenderer::captureCubeReflections()
 	_renderStorage->setSkyExposureEnabled(false);
 	_renderStorage->setShadowInterval(0);
 
-	for(const auto & [captorId, entity] : _captorEntityManager->getEntities())
+	for(const auto & [captorId, captor] : _captorEntityManager->getEntities())
 	{
-		if(entity->mustCapture())
+		if(captor->mustCapture())
 		{
-			const auto wasExceptionEntityVisible = (entity->getExceptionEntityId().empty() ? false : _modelEntityManager->getEntity(entity->getExceptionEntityId())->isVisible());
-			if(!entity->getExceptionEntityId().empty())
+			const auto wasExceptionEntityVisible = (captor->getExceptionEntityId().empty() ? false : _modelEntityManager->getEntity(captor->getExceptionEntityId())->isVisible());
+			if(!captor->getExceptionEntityId().empty())
 			{
-				_modelEntityManager->getEntity(entity->getExceptionEntityId())->setVisible(false);
+				_modelEntityManager->getEntity(captor->getExceptionEntityId())->setVisible(false);
 			}
 
-			_camera->setPosition(entity->getPosition());
+			_camera->setPosition(captor->getPosition());
 
 			unsigned int textureId;
 			glGenTextures(1, &textureId);
@@ -161,12 +161,12 @@ void MasterRenderer::captureCubeReflections()
 				delete[] data;
 			}
 
-			entity->setCubeMap(make_shared<TextureBuffer>(textureId));
-			entity->setCaptured();
+			captor->setCubeMap(make_shared<TextureBuffer>(textureId));
+			captor->setCaptured();
 
-			if(!entity->getExceptionEntityId().empty())
+			if(!captor->getExceptionEntityId().empty())
 			{
-				_modelEntityManager->getEntity(entity->getExceptionEntityId())->setVisible(wasExceptionEntityVisible);
+				_modelEntityManager->getEntity(captor->getExceptionEntityId())->setVisible(wasExceptionEntityVisible);
 			}
 		}
 	}

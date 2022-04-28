@@ -91,22 +91,22 @@ const bool CameraCollisionResponder::isCameraTerrainResponseEnabled() const
 
 const bool CameraCollisionResponder::_handleCollision(DirectionType direction) const
 {
-	for(const auto & [aabbId, entity] : _aabbManager->getEntities())
+	for(const auto & [aabbId, aabb] : _aabbManager->getEntities())
 	{
 		switch(direction)
 		{
 			case DirectionType::X:
 			{
-				if(entity->isCollisionResponsive())
+				if(aabb->isCollisionResponsive())
 				{
 					const fvec3 middle = _camera->getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _cameraCollisionDetector->checkX(entity->getBasePosition(), entity->getBaseSize(), middle, middleChange, _cameraBox);
+					auto hasCollided = _cameraCollisionDetector->checkX(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{
-						entity->setCollisionDirection(DirectionType::X);
-						entity->setCollided(true);
+						aabb->setCollisionDirection(DirectionType::X);
+						aabb->setCollided(true);
 					}
 
 					if(_isCameraAabbResponseEnabledX && hasCollided)
@@ -121,16 +121,16 @@ const bool CameraCollisionResponder::_handleCollision(DirectionType direction) c
 			}
 			case DirectionType::Y:
 			{
-				if(entity->isCollisionResponsive())
+				if(aabb->isCollisionResponsive())
 				{
 					const fvec3 middle = _camera->getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _cameraCollisionDetector->checkY(entity->getBasePosition(), entity->getBaseSize(), middle, middleChange, _cameraBox);
+					auto hasCollided = _cameraCollisionDetector->checkY(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{
-						entity->setCollisionDirection(DirectionType::Y);
-						entity->setCollided(true);
+						aabb->setCollisionDirection(DirectionType::Y);
+						aabb->setCollided(true);
 					}
 
 					if(_isCameraAabbResponseEnabledY && hasCollided)
@@ -148,16 +148,16 @@ const bool CameraCollisionResponder::_handleCollision(DirectionType direction) c
 			}
 			case DirectionType::Z:
 			{
-				if(entity->isCollisionResponsive())
+				if(aabb->isCollisionResponsive())
 				{
 					const fvec3 middle = _camera->getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _cameraCollisionDetector->checkZ(entity->getBasePosition(), entity->getBaseSize(), middle, middleChange, _cameraBox);
+					auto hasCollided = _cameraCollisionDetector->checkZ(aabb->getBasePosition(), aabb->getBaseSize(), middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{
-						entity->setCollisionDirection(DirectionType::Z);
-						entity->setCollided(true);
+						aabb->setCollisionDirection(DirectionType::Z);
+						aabb->setCollided(true);
 					}
 
 					if(_isCameraAabbResponseEnabledZ && hasCollided)

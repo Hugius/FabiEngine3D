@@ -22,15 +22,15 @@ void RaycastIntersector::update()
 	_closestAabbId = "";
 	_aabbIntersections.clear();
 
-	for(const auto & [aabbId, entity] : _aabbManager->getEntities())
+	for(const auto & [aabbId, aabb] : _aabbManager->getEntities())
 	{
-		if(!_isAabbIntersectionEnabled || !entity->isRaycastResponsive())
+		if(!_isAabbIntersectionEnabled || !aabb->isRaycastResponsive())
 		{
-			_aabbIntersections.insert({entity->getId(), -1.0f});
+			_aabbIntersections.insert({aabb->getId(), -1.0f});
 			continue;
 		}
 
-		auto distanceToAabb = _calculateDistanceToAabb(entity);
+		auto distanceToAabb = _calculateDistanceToAabb(aabb);
 
 		if(_isTerrainIntersectionEnabled)
 		{
@@ -46,13 +46,13 @@ void RaycastIntersector::update()
 			}
 		}
 
-		_aabbIntersections.insert({entity->getId(), distanceToAabb});
+		_aabbIntersections.insert({aabb->getId(), distanceToAabb});
 
 		if(distanceToAabb != -1.0f)
 		{
 			if(_closestAabbId.empty() || (distanceToAabb < _aabbIntersections.at(_closestAabbId)))
 			{
-				_closestAabbId = entity->getId();
+				_closestAabbId = aabb->getId();
 			}
 		}
 	}

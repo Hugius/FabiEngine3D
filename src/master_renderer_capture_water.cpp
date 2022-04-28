@@ -23,26 +23,26 @@ void MasterRenderer::captureWaterReflections()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	vector<string> savedModelEntityIds;
-	for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
+	for(const auto & [modelId, model] : _modelEntityManager->getEntities())
 	{
-		if(!entity->isVisible())
+		if(!model->isVisible())
 		{
 			continue;
 		}
 
-		if(!entity->isReflected())
+		if(!model->isReflected())
 		{
-			entity->setVisible(false);
-			savedModelEntityIds.push_back(entity->getId());
+			model->setVisible(false);
+			savedModelEntityIds.push_back(model->getId());
 			continue;
 		}
 
-		for(const auto & partId : entity->getPartIds())
+		for(const auto & partId : model->getPartIds())
 		{
-			if(entity->isReflective(partId) && (entity->getReflectionType(partId) == ReflectionType::PLANAR))
+			if(model->isReflective(partId) && (model->getReflectionType(partId) == ReflectionType::PLANAR))
 			{
-				entity->setVisible(false);
-				savedModelEntityIds.push_back(entity->getId());
+				model->setVisible(false);
+				savedModelEntityIds.push_back(model->getId());
 
 				break;
 			}
@@ -50,12 +50,12 @@ void MasterRenderer::captureWaterReflections()
 	}
 
 	vector<string> savedQuad3dEntityIds;
-	for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
+	for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if(!quad3d->isReflected() && quad3d->isVisible())
 		{
-			entity->setVisible(false);
-			savedQuad3dEntityIds.push_back(entity->getId());
+			quad3d->setVisible(false);
+			savedQuad3dEntityIds.push_back(quad3d->getId());
 		}
 	}
 
@@ -87,22 +87,22 @@ void MasterRenderer::captureWaterReflections()
 
 	for(const auto & savedId : savedModelEntityIds)
 	{
-		for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
+		for(const auto & [modelId, model] : _modelEntityManager->getEntities())
 		{
-			if(entity->getId() == savedId)
+			if(model->getId() == savedId)
 			{
-				entity->setVisible(true);
+				model->setVisible(true);
 			}
 		}
 	}
 
 	for(const auto & savedId : savedQuad3dEntityIds)
 	{
-		for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
 		{
-			if(entity->getId() == savedId)
+			if(quad3d->getId() == savedId)
 			{
-				entity->setVisible(true);
+				quad3d->setVisible(true);
 			}
 		}
 	}

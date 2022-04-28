@@ -256,9 +256,9 @@ const vector<string> EngineInterface::quad2d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [quad2dId, entity] : _core->getQuad2dEntityManager()->getEntities())
+	for(const auto & [quad2dId, quad2d] : _core->getQuad2dEntityManager()->getEntities())
 	{
-		result.push_back(entity->getId());
+		result.push_back(quad2d->getId());
 	}
 
 	return result;

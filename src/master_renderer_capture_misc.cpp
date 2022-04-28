@@ -36,24 +36,24 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_modelEntityDepthRenderer->bind();
 
-		for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
+		for(const auto & [modelId, model] : _modelEntityManager->getEntities())
 		{
-			if(entity->isLevelOfDetailed())
+			if(model->isLevelOfDetailed())
 			{
-				auto foundPair = _modelEntityManager->getEntities().find(entity->getLevelOfDetailEntityId());
+				auto foundPair = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId());
 
 				if(foundPair != _modelEntityManager->getEntities().end())
 				{
-					const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(entity->getLevelOfDetailEntityId())->second;
+					const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId())->second;
 					const auto originalPosition = levelOfDetailEntity->getBasePosition();
 					const auto originalRotation = levelOfDetailEntity->getBaseRotation();
 					const auto originalSize = levelOfDetailEntity->getBaseSize();
 					const auto originalVisibility = levelOfDetailEntity->isVisible();
 
-					levelOfDetailEntity->setBasePosition(entity->getBasePosition());
-					levelOfDetailEntity->setBaseRotation(entity->getBaseRotation());
-					levelOfDetailEntity->setBaseSize(entity->getBaseSize());
-					levelOfDetailEntity->setVisible(entity->isVisible());
+					levelOfDetailEntity->setBasePosition(model->getBasePosition());
+					levelOfDetailEntity->setBaseRotation(model->getBaseRotation());
+					levelOfDetailEntity->setBaseSize(model->getBaseSize());
+					levelOfDetailEntity->setVisible(model->isVisible());
 					levelOfDetailEntity->updateTransformation();
 
 					_modelEntityDepthRenderer->render(levelOfDetailEntity);
@@ -71,7 +71,7 @@ void MasterRenderer::captureWorldDepth()
 			}
 			else
 			{
-				_modelEntityDepthRenderer->render(entity);
+				_modelEntityDepthRenderer->render(model);
 			}
 		}
 
@@ -82,9 +82,9 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
 		{
-			_quad3dEntityDepthRenderer->render(entity);
+			_quad3dEntityDepthRenderer->render(quad3d);
 		}
 
 		_quad3dEntityDepthRenderer->unbind();
@@ -94,9 +94,9 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
+		for(const auto & [text3dId, text3d] : _text3dEntityManager->getEntities())
 		{
-			for(const auto & characterEntity : entity->getCharacterEntities())
+			for(const auto & characterEntity : text3d->getCharacterEntities())
 			{
 				_quad3dEntityDepthRenderer->render(characterEntity);
 			}
@@ -109,9 +109,9 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_aabbEntityDepthRenderer->bind();
 
-		for(const auto & [aabbId, entity] : _aabbEntityManager->getEntities())
+		for(const auto & [aabbId, aabb] : _aabbEntityManager->getEntities())
 		{
-			_aabbEntityDepthRenderer->render(entity);
+			_aabbEntityDepthRenderer->render(aabb);
 		}
 
 		_aabbEntityDepthRenderer->unbind();
@@ -270,24 +270,24 @@ void MasterRenderer::captureShadows()
 		{
 			_modelEntityShadowRenderer->bind();
 
-			for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
+			for(const auto & [modelId, model] : _modelEntityManager->getEntities())
 			{
-				if(entity->isLevelOfDetailed())
+				if(model->isLevelOfDetailed())
 				{
-					auto foundPair = _modelEntityManager->getEntities().find(entity->getLevelOfDetailEntityId());
+					auto foundPair = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId());
 
 					if(foundPair != _modelEntityManager->getEntities().end())
 					{
-						const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(entity->getLevelOfDetailEntityId())->second;
+						const auto levelOfDetailEntity = _modelEntityManager->getEntities().find(model->getLevelOfDetailEntityId())->second;
 						const auto originalPosition = levelOfDetailEntity->getBasePosition();
 						const auto originalRotation = levelOfDetailEntity->getBaseRotation();
 						const auto originalSize = levelOfDetailEntity->getBaseSize();
 						const auto originalVisibility = levelOfDetailEntity->isVisible();
 
-						levelOfDetailEntity->setBasePosition(entity->getBasePosition());
-						levelOfDetailEntity->setBaseRotation(entity->getBaseRotation());
-						levelOfDetailEntity->setBaseSize(entity->getBaseSize());
-						levelOfDetailEntity->setVisible(entity->isVisible());
+						levelOfDetailEntity->setBasePosition(model->getBasePosition());
+						levelOfDetailEntity->setBaseRotation(model->getBaseRotation());
+						levelOfDetailEntity->setBaseSize(model->getBaseSize());
+						levelOfDetailEntity->setVisible(model->isVisible());
 						levelOfDetailEntity->updateTransformation();
 
 						_modelEntityShadowRenderer->render(levelOfDetailEntity);
@@ -305,7 +305,7 @@ void MasterRenderer::captureShadows()
 				}
 				else
 				{
-					_modelEntityShadowRenderer->render(entity);
+					_modelEntityShadowRenderer->render(model);
 				}
 			}
 
@@ -316,9 +316,9 @@ void MasterRenderer::captureShadows()
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
+			for(const auto & [quad3dId, quad3d] : _quad3dEntityManager->getEntities())
 			{
-				_quad3dEntityShadowRenderer->render(entity);
+				_quad3dEntityShadowRenderer->render(quad3d);
 			}
 
 			_quad3dEntityShadowRenderer->unbind();
@@ -328,9 +328,9 @@ void MasterRenderer::captureShadows()
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
+			for(const auto & [text3dId, text3d] : _text3dEntityManager->getEntities())
 			{
-				for(const auto & characterEntity : entity->getCharacterEntities())
+				for(const auto & characterEntity : text3d->getCharacterEntities())
 				{
 					_quad3dEntityShadowRenderer->render(characterEntity);
 				}

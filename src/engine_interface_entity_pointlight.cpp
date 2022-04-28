@@ -95,9 +95,9 @@ const vector<string> EngineInterface::pointlight_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [pointlightId, entity] : _core->getPointlightEntityManager()->getEntities())
+	for(const auto & [pointlightId, pointlight] : _core->getPointlightEntityManager()->getEntities())
 	{
-		result.push_back(entity->getId());
+		result.push_back(pointlight->getId());
 	}
 
 	return result;

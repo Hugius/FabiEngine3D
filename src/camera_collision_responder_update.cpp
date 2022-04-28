@@ -35,9 +35,9 @@ void CameraCollisionResponder::update()
 		int yPriority = 0;
 		int zPriority = 0;
 
-		for(const auto & [aabbId, entity] : _aabbManager->getEntities())
+		for(const auto & [aabbId, aabb] : _aabbManager->getEntities())
 		{
-			entity->setCollided(false);
+			aabb->setCollided(false);
 		}
 
 		switch(_responseDirectionOrder)

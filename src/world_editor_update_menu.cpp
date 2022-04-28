@@ -157,6 +157,7 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingCaptor = false;
 			_isWireframeModeEnabled = false;
 			_isAabbModeEnabled = false;
+			_isGridModeEnabled = false;
 		}
 	}
 }

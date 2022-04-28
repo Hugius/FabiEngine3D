@@ -214,6 +214,10 @@ private:
 	static inline constexpr float DEFAULT_SPOTLIGHT_DISTANCE = 10.0f;
 	static inline constexpr float DEFAULT_SOUND_MAX_VOLUME = 1.0f;
 	static inline constexpr float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
+	static inline constexpr float GRID_Y_OFFSET = 0.001f;
+	static inline constexpr float GRID_SIZE = 50.0f;
+
+	static inline constexpr int GRID_REPEAT = 10;
 
 	unordered_map<string, string> _loadedModelIds = {};
 	unordered_map<string, string> _loadedQuad3dIds = {};
@@ -287,4 +291,5 @@ private:
 	bool _isPlacingCaptor = false;
 	bool _isWireframeModeEnabled = false;
 	bool _isAabbModeEnabled = false;
+	bool _isGridModeEnabled = false;
 };

@@ -51,17 +51,25 @@ void WorldEditor::_load()
 	_fe3d->captor_create(TEMPLATE_CAPTOR_ID);
 	_fe3d->captor_setVisible(TEMPLATE_CAPTOR_ID, false);
 
-	_fe3d->graphics_setAntiAliasingEnabled(true);
-	_fe3d->graphics_setAnisotropicFilteringQuality(16);
-	_fe3d->collision_setCameraAabbResponseEnabled(true, true, true);
-	_fe3d->raycast_setAabbIntersectionEnabled(true);
-
 	for(const auto & id : _soundEditor->getLoadedSoundIds())
 	{
 		_fe3d->sound3d_create(id, _fe3d->sound2d_getAudioPath(id));
 		_fe3d->sound3d_setMaxVolume(id, DEFAULT_SOUND_MAX_VOLUME);
 		_fe3d->sound3d_setMaxDistance(id, DEFAULT_SOUND_MAX_DISTANCE);
 	}
+
+	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
+	_fe3d->model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
+	_fe3d->model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
+	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
+	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
+	_fe3d->model_setMinTextureAlpha("@@grid", "", 0.1f);
+	_fe3d->model_setShadowed("@@grid", false);
+
+	_fe3d->graphics_setAntiAliasingEnabled(true);
+	_fe3d->graphics_setAnisotropicFilteringQuality(16);
+	_fe3d->collision_setCameraAabbResponseEnabled(true, true, true);
+	_fe3d->raycast_setAabbIntersectionEnabled(true);
 
 	for(const auto & id : _modelEditor->getLoadedEntityIds())
 	{

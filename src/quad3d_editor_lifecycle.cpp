@@ -8,11 +8,9 @@
 void Quad3dEditor::_load()
 {
 	_fe3d->model_create("@@box", "engine\\assets\\mesh\\box.obj");
-	_fe3d->model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d->model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.tga");
 	_fe3d->model_setFaceCulled("@@box", "", true);
 	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
-	_fe3d->model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d->model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
@@ -45,7 +43,6 @@ void Quad3dEditor::_load()
 	_fe3d->camera_setThirdPersonYaw(INITIAL_CAMERA_YAW);
 	_fe3d->camera_setThirdPersonPitch(INITIAL_CAMERA_PITCH);
 	_fe3d->camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
-	_fe3d->camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
 	_gui->getOverlay()->createTextField("quad3dId", fvec2(0.0f, 0.85f), fvec2(0.025f, 0.1f), " ", fvec3(1.0f), true);
 }

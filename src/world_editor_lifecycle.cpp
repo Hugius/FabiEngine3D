@@ -59,7 +59,6 @@ void WorldEditor::_load()
 	}
 
 	_fe3d->model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
-	_fe3d->model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d->model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d->model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.tga");
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_REPEAT);
@@ -99,10 +98,7 @@ void WorldEditor::_load()
 
 void WorldEditor::_unload()
 {
-	for(const auto & id : _soundEditor->getLoadedSoundIds())
-	{
-		_fe3d->sound3d_delete(id);
-	}
+	const auto soundIds = _soundEditor->getLoadedSoundIds();
 
 	_skyEditor->deleteLoadedEntities();
 	_terrainEditor->deleteLoadedEntities();
@@ -124,6 +120,13 @@ void WorldEditor::_unload()
 	_fe3d->spotlight_delete(TEMPLATE_SPOTLIGHT_ID);
 
 	_fe3d->captor_delete(TEMPLATE_CAPTOR_ID);
+
+	for(const auto & id : soundIds)
+	{
+		_fe3d->sound3d_delete(id);
+	}
+
+	_fe3d->model_delete("@@grid");
 
 	_fe3d->graphics_setAntiAliasingEnabled(false);
 	_fe3d->graphics_setAnisotropicFilteringQuality(0);

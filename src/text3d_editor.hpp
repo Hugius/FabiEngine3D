@@ -39,7 +39,6 @@ private:
 	static inline constexpr float INITIAL_CAMERA_PITCH = 45.0f;
 	static inline constexpr float INITIAL_CAMERA_DISTANCE = 2.5f;
 	static inline constexpr float MIN_CAMERA_PITCH = 1.0f;
-	static inline constexpr float GRID_Y_OFFSET = 0.001f;
 	static inline constexpr float GRID_SIZE = 50.0f;
 	static inline constexpr float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline constexpr float CAMERA_DISTANCE_SPEED = 0.05f;

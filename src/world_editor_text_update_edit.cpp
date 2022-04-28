@@ -17,13 +17,13 @@ void WorldEditor::_updateText3dEditing()
 			_dontResetSelectedText3d = false;
 		}
 
-		for(const auto & [text3dId, templateId] : _loadedText3dIds)
+		for(const auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
 		{
-			const auto isHovered = (hoveredAabbId == text3dId);
+			const auto isHovered = (hoveredAabbId == placedText3dId);
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectText3d(text3dId);
+				_selectText3d(placedText3dId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -37,9 +37,9 @@ void WorldEditor::_updateText3dEditing()
 			}
 			else
 			{
-				if((text3dId != _selectedText3dId) && (text3dId != _activeText3dId))
+				if((placedText3dId != _selectedText3dId) && (placedText3dId != _activeText3dId))
 				{
-					_deselectText3d(text3dId);
+					_deselectText3d(placedText3dId);
 				}
 			}
 		}

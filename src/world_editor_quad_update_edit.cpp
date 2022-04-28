@@ -17,13 +17,13 @@ void WorldEditor::_updateQuad3dEditing()
 		const auto rightWindow = _gui->getRightViewport()->getWindow("main");
 		const auto hoveredAabbId = _fe3d->raycast_getClosestAabbId();
 
-		for(const auto & [quad3dId, templateId] : _loadedQuad3dIds)
+		for(const auto & [placedQuad3dId, templateQuad3dId] : _loadedQuad3dIds)
 		{
-			const auto isHovered = (hoveredAabbId == quad3dId);
+			const auto isHovered = (hoveredAabbId == placedQuad3dId);
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectQuad3d(quad3dId);
+				_selectQuad3d(placedQuad3dId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -37,9 +37,9 @@ void WorldEditor::_updateQuad3dEditing()
 			}
 			else
 			{
-				if((quad3dId != _selectedQuad3dId) && (quad3dId != _activeQuad3dId))
+				if((placedQuad3dId != _selectedQuad3dId) && (placedQuad3dId != _activeQuad3dId))
 				{
-					_deselectQuad3d(quad3dId);
+					_deselectQuad3d(placedQuad3dId);
 				}
 			}
 		}

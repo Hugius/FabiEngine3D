@@ -17,13 +17,13 @@ void WorldEditor::_updateModelEditing()
 			_dontResetSelectedModel = false;
 		}
 
-		for(const auto & [modelId, templateId] : _loadedModelIds)
+		for(const auto & [placedModelId, templateModelId] : _loadedModelIds)
 		{
-			const auto isHovered = (hoveredAabbId.substr(0, modelId.size()) == modelId);
+			const auto isHovered = (hoveredAabbId.substr(0, placedModelId.size()) == placedModelId);
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectModel(modelId);
+				_selectModel(placedModelId);
 
 				if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT))
 				{
@@ -37,9 +37,9 @@ void WorldEditor::_updateModelEditing()
 			}
 			else
 			{
-				if((modelId != _selectedModelId) && (modelId != _activeModelId))
+				if((placedModelId != _selectedModelId) && (placedModelId != _activeModelId))
 				{
-					_deselectModel(modelId);
+					_deselectModel(placedModelId);
 				}
 			}
 		}

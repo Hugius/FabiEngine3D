@@ -13,16 +13,16 @@ void Animation3dPlayer::inject(shared_ptr<ModelEntityManager> modelEntityManager
 
 const vector<pair<string, string>> Animation3dPlayer::getStartedModelAnimationIds() const
 {
-	vector<pair<string, string>> ids;
+	vector<pair<string, string>> result;
 
 	for(const auto & [mergedId, animation] : _startedModelAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 
-		ids.push_back(splitKey);
+		result.push_back(splitKey);
 	}
 
-	return ids;
+	return result;
 }
 
 const float Animation3dPlayer::getModelAnimationSpeedMultiplier(const string & animation3dId, const string & modelId) const

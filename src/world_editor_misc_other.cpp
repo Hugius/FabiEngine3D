@@ -72,19 +72,19 @@ void WorldEditor::clearLoadedWorld()
 		_fe3d->water_delete(_fe3d->water_getSelectedId());
 	}
 
-	for(const auto & [placedId, templateId] : _loadedModelIds)
+	for(const auto & [placedModelId, templateModelId] : _loadedModelIds)
 	{
-		_fe3d->model_delete(placedId);
+		_fe3d->model_delete(placedModelId);
 	}
 
-	for(const auto & [placedId, templateId] : _loadedQuad3dIds)
+	for(const auto & [placedQuad3dId, templateQuad3d] : _loadedQuad3dIds)
 	{
-		_fe3d->quad3d_delete(placedId);
+		_fe3d->quad3d_delete(placedQuad3dId);
 	}
 
-	for(const auto & [placedId, templateId] : _loadedText3dIds)
+	for(const auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
 	{
-		_fe3d->text3d_delete(placedId);
+		_fe3d->text3d_delete(placedText3dId);
 	}
 
 	for(const auto & pointlightId : _loadedPointlightIds)
@@ -117,13 +117,13 @@ void WorldEditor::clearLoadedWorld()
 		}
 	}
 
-	for(const auto & [placedId, templateId] : _loadedSoundIds)
+	for(const auto & [placedSoundId, templateSoundId] : _loadedSoundIds)
 	{
-		_fe3d->sound3d_delete(placedId);
+		_fe3d->sound3d_delete(placedSoundId);
 
 		if(isLoaded())
 		{
-			_fe3d->model_delete("@@speaker_" + placedId);
+			_fe3d->model_delete("@@speaker_" + placedSoundId);
 		}
 	}
 

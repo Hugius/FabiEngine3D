@@ -22,15 +22,15 @@ void WorldEditor::_updateMainMenu()
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto ids = _getWorldIds();
-			sort(ids.begin(), ids.end());
-			_gui->getOverlay()->openChoiceForm("editWorld", "Edit World", fvec2(0.0f, 0.1f), ids);
+			auto worldIds = _getWorldIds();
+			sort(worldIds.begin(), worldIds.end());
+			_gui->getOverlay()->openChoiceForm("editWorld", "Edit World", fvec2(0.0f, 0.1f), worldIds);
 		}
 		else if(_fe3d->input_isMousePressed(MouseButtonType::BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto ids = _getWorldIds();
-			sort(ids.begin(), ids.end());
-			_gui->getOverlay()->openChoiceForm("deleteWorld", "Delete World", fvec2(0.0f, 0.1f), ids);
+			auto worldIds = _getWorldIds();
+			sort(worldIds.begin(), worldIds.end());
+			_gui->getOverlay()->openChoiceForm("deleteWorld", "Delete World", fvec2(0.0f, 0.1f), worldIds);
 		}
 	}
 }

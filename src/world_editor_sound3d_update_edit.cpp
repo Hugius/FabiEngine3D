@@ -17,13 +17,13 @@ void WorldEditor::_updateSoundEditing()
 			_dontResetSelectedSound = false;
 		}
 
-		for(const auto & [soundId, templateId] : _loadedSoundIds)
+		for(const auto & [placedSoundId, templateSoundId] : _loadedSoundIds)
 		{
-			const auto isHovered = (hoveredAabbId == ("@@speaker_" + soundId));
+			const auto isHovered = (hoveredAabbId == ("@@speaker_" + placedSoundId));
 
 			if(isHovered && Tools::isCursorInsideDisplay() && !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseHeld(MouseButtonType::BUTTON_RIGHT))
 			{
-				_selectSound(soundId);
+				_selectSound(placedSoundId);
 
 				_fe3d->quad2d_setDiffuseMap(_fe3d->misc_getCursorEntityId(), "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 
@@ -39,9 +39,9 @@ void WorldEditor::_updateSoundEditing()
 			}
 			else
 			{
-				if((soundId != _selectedSoundId) && (soundId != _activeSoundId))
+				if((placedSoundId != _selectedSoundId) && (placedSoundId != _activeSoundId))
 				{
-					_deselectSound(soundId);
+					_deselectSound(placedSoundId);
 				}
 			}
 		}

@@ -100,34 +100,34 @@ void WorldEditor::_updateMiscellaneous()
 		_fe3d->water_setWireframed(_fe3d->water_getSelectedId(), _isWireframeModeEnabled);
 	}
 
-	for(const auto & [modelId, templateId] : _loadedModelIds)
+	for(const auto & [placedModelId, templateModelId] : _loadedModelIds)
 	{
-		for(const auto & partId : _fe3d->model_getPartIds(modelId))
+		for(const auto & partId : _fe3d->model_getPartIds(placedModelId))
 		{
-			_fe3d->model_setWireframed(modelId, partId, _isWireframeModeEnabled);
+			_fe3d->model_setWireframed(placedModelId, partId, _isWireframeModeEnabled);
 		}
 
-		for(const auto & aabbId : _fe3d->model_getChildAabbIds(modelId))
-		{
-			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
-		}
-	}
-
-	for(const auto & [quad3dId, templateId] : _loadedQuad3dIds)
-	{
-		_fe3d->quad3d_setWireframed(quad3dId, _isWireframeModeEnabled);
-
-		for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(quad3dId))
+		for(const auto & aabbId : _fe3d->model_getChildAabbIds(placedModelId))
 		{
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}
 	}
 
-	for(const auto & [text3dId, templateId] : _loadedText3dIds)
+	for(const auto & [placedQuad3dId, templateQuad3dId] : _loadedQuad3dIds)
 	{
-		_fe3d->text3d_setWireframed(text3dId, _isWireframeModeEnabled);
+		_fe3d->quad3d_setWireframed(placedQuad3dId, _isWireframeModeEnabled);
 
-		for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(text3dId))
+		for(const auto & aabbId : _fe3d->quad3d_getChildAabbIds(placedQuad3dId))
+		{
+			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
+		}
+	}
+
+	for(const auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
+	{
+		_fe3d->text3d_setWireframed(placedText3dId, _isWireframeModeEnabled);
+
+		for(const auto & aabbId : _fe3d->text3d_getChildAabbIds(placedText3dId))
 		{
 			_fe3d->aabb_setVisible(aabbId, _isAabbModeEnabled);
 		}

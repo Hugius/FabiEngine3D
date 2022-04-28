@@ -116,28 +116,28 @@ const bool WorldEditor::saveWorldToFile() const
 		}
 	}
 
-	for(const auto & [modelId, templateId] : _loadedModelIds)
+	for(const auto & [placedModelId, templateModelId] : _loadedModelIds)
 	{
-		auto startedAnimation3dIds = _fe3d->model_getAnimationIds(modelId);
+		auto startedAnimation3dIds = _fe3d->model_getAnimationIds(placedModelId);
 
 		if(!startedAnimation3dIds.empty())
 		{
-			for(const auto & partId : _fe3d->model_getPartIds(modelId))
+			for(const auto & partId : _fe3d->model_getPartIds(placedModelId))
 			{
 				if(!partId.empty())
 				{
-					_fe3d->model_setPartPosition(modelId, partId, fvec3(0.0f));
-					_fe3d->model_setPartRotationOrigin(modelId, partId, fvec3(0.0f));
-					_fe3d->model_setPartRotation(modelId, partId, fvec3(0.0f));
-					_fe3d->model_setPartSize(modelId, partId, fvec3(1.0f));
+					_fe3d->model_setPartPosition(placedModelId, partId, fvec3(0.0f));
+					_fe3d->model_setPartRotationOrigin(placedModelId, partId, fvec3(0.0f));
+					_fe3d->model_setPartRotation(placedModelId, partId, fvec3(0.0f));
+					_fe3d->model_setPartSize(placedModelId, partId, fvec3(1.0f));
 				}
 			}
 		}
 
-		auto position = _fe3d->model_getBasePosition(modelId);
-		auto rotation = _fe3d->model_getBaseRotation(modelId);
-		auto size = _fe3d->model_getBaseSize(modelId);
-		auto isFrozen = _fe3d->model_isFrozen(modelId);
+		auto position = _fe3d->model_getBasePosition(placedModelId);
+		auto rotation = _fe3d->model_getBaseRotation(placedModelId);
+		auto size = _fe3d->model_getBaseSize(placedModelId);
+		auto isFrozen = _fe3d->model_isFrozen(placedModelId);
 		auto animation3dId = (startedAnimation3dIds.empty()) ? "" : startedAnimation3dIds[0];
 
 		animation3dId = (animation3dId.empty()) ? "?" : animation3dId;
@@ -146,9 +146,9 @@ const bool WorldEditor::saveWorldToFile() const
 
 		file
 			<< "MODEL "
-			<< modelId
+			<< placedModelId
 			<< " "
-			<< templateId
+			<< templateModelId
 			<< " "
 			<< position.x
 			<< " "
@@ -175,12 +175,12 @@ const bool WorldEditor::saveWorldToFile() const
 		file << endl;
 	}
 
-	for(const auto & [quad3dId, templateId] : _loadedQuad3dIds)
+	for(const auto & [placedQuad3dId, templateQuad3dId] : _loadedQuad3dIds)
 	{
-		auto startedAnimation2dIds = _fe3d->quad3d_getAnimationIds(quad3dId);
-		auto position = _fe3d->quad3d_getPosition(quad3dId);
-		auto rotation = _fe3d->quad3d_getRotation(quad3dId);
-		auto size = _fe3d->quad3d_getSize(quad3dId);
+		auto startedAnimation2dIds = _fe3d->quad3d_getAnimationIds(placedQuad3dId);
+		auto position = _fe3d->quad3d_getPosition(placedQuad3dId);
+		auto rotation = _fe3d->quad3d_getRotation(placedQuad3dId);
+		auto size = _fe3d->quad3d_getSize(placedQuad3dId);
 		auto animation2dId = (startedAnimation2dIds.empty() ? "" : startedAnimation2dIds[0]);
 
 		animation2dId = (animation2dId.empty()) ? "?" : animation2dId;
@@ -189,9 +189,9 @@ const bool WorldEditor::saveWorldToFile() const
 
 		file
 			<< "QUAD3D "
-			<< quad3dId
+			<< placedQuad3dId
 			<< " "
-			<< templateId
+			<< templateQuad3dId
 			<< " "
 			<< position.x
 			<< " "
@@ -213,18 +213,18 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & [text3dId, templateId] : _loadedText3dIds)
+	for(const auto & [placedText3dId, templateText3dId] : _loadedText3dIds)
 	{
-		auto content = _fe3d->text3d_getContent(text3dId);
-		auto position = _fe3d->text3d_getPosition(text3dId);
-		auto rotation = _fe3d->text3d_getRotation(text3dId);
-		auto size = _fe3d->text3d_getSize(text3dId);
+		auto content = _fe3d->text3d_getContent(placedText3dId);
+		auto position = _fe3d->text3d_getPosition(placedText3dId);
+		auto rotation = _fe3d->text3d_getRotation(placedText3dId);
+		auto size = _fe3d->text3d_getSize(placedText3dId);
 
 		file
 			<< "TEXT3D "
-			<< text3dId
+			<< placedText3dId
 			<< " "
-			<< templateId
+			<< templateText3dId
 			<< " "
 			<< content
 			<< " "
@@ -246,17 +246,17 @@ const bool WorldEditor::saveWorldToFile() const
 			<< endl;
 	}
 
-	for(const auto & [soundId, templateId] : _loadedSoundIds)
+	for(const auto & [placedSoundId, templateSoundId] : _loadedSoundIds)
 	{
-		auto position = _fe3d->sound3d_getPosition(soundId);
-		auto maxVolume = _fe3d->sound3d_getMaxVolume(soundId);
-		auto maxDistance = _fe3d->sound3d_getMaxDistance(soundId);
+		auto position = _fe3d->sound3d_getPosition(placedSoundId);
+		auto maxVolume = _fe3d->sound3d_getMaxVolume(placedSoundId);
+		auto maxDistance = _fe3d->sound3d_getMaxDistance(placedSoundId);
 
 		file
 			<< "SOUND "
-			<< soundId
+			<< placedSoundId
 			<< " "
-			<< templateId
+			<< templateSoundId
 			<< " "
 			<< position.x
 			<< " "

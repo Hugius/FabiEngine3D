@@ -88,9 +88,9 @@ void ModelEditor::_updateChoiceMenu()
 		{
 			if(_currentPartId.empty())
 			{
-				auto ids = _fe3d->model_getPartIds(_currentModelId);
-				sort(ids.begin(), ids.end());
-				_gui->getOverlay()->openChoiceForm("selectPart", "Select Part", fvec2(-0.5f, 0.1f), ids);
+				auto partIds = _fe3d->model_getPartIds(_currentModelId);
+				sort(partIds.begin(), partIds.end());
+				_gui->getOverlay()->openChoiceForm("selectPart", "Select Part", fvec2(-0.5f, 0.1f), partIds);
 			}
 			else
 			{

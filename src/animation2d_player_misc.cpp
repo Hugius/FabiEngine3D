@@ -18,30 +18,30 @@ void Animation2dPlayer::inject(shared_ptr<Quad2dEntityManager> quad2dEntityManag
 
 const vector<pair<string, string>> Animation2dPlayer::getStartedQuad3dAnimationIds() const
 {
-	vector<pair<string, string>> ids;
+	vector<pair<string, string>> result;
 
 	for(const auto & [mergedId, animation] : _startedQuad3dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 
-		ids.push_back(splitKey);
+		result.push_back(splitKey);
 	}
 
-	return ids;
+	return result;
 }
 
 const vector<pair<string, string>> Animation2dPlayer::getStartedQuad2dAnimationIds() const
 {
-	vector<pair<string, string>> ids;
+	vector<pair<string, string>> result;
 
 	for(const auto & [mergedId, animation] : _startedQuad2dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
 
-		ids.push_back(splitKey);
+		result.push_back(splitKey);
 	}
 
-	return ids;
+	return result;
 }
 
 const int Animation2dPlayer::getQuad3dAnimationPlayCount(const string & animation2dId, const string & quad3dId) const

@@ -1,184 +1,184 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::text2d_create(const string & id, const string & fontMapPath, bool isCentered)
+void EngineInterface::text2d_create(const string & text2dId, const string & fontMapPath, bool isCentered)
 {
-	_core->getText2dEntityManager()->createEntity(id, fontMapPath, isCentered);
+	_core->getText2dEntityManager()->createEntity(text2dId, fontMapPath, isCentered);
 }
 
-void EngineInterface::text2d_delete(const string & id)
+void EngineInterface::text2d_delete(const string & text2dId)
 {
-	_core->getText2dEntityManager()->deleteEntity(id);
+	_core->getText2dEntityManager()->deleteEntity(text2dId);
 }
 
-void EngineInterface::text2d_setVisible(const string & id, bool value)
+void EngineInterface::text2d_setVisible(const string & text2dId, bool value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setVisible(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setVisible(value);
 }
 
-void EngineInterface::text2d_setContent(const string & id, const string & value)
+void EngineInterface::text2d_setContent(const string & text2dId, const string & value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setContent(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setContent(value);
 }
 
-void EngineInterface::text2d_setColor(const string & id, const fvec3 & value)
+void EngineInterface::text2d_setColor(const string & text2dId, const fvec3 & value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setColor(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setColor(value);
 }
 
-void EngineInterface::text2d_setOpacity(const string & id, float value)
+void EngineInterface::text2d_setOpacity(const string & text2dId, float value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setOpacity(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setOpacity(value);
 }
 
-void EngineInterface::text2d_setPosition(const string & id, const fvec2 & value)
+void EngineInterface::text2d_setPosition(const string & text2dId, const fvec2 & value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setPosition(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setPosition(value);
 }
 
-void EngineInterface::text2d_setRotation(const string & id, float value)
+void EngineInterface::text2d_setRotation(const string & text2dId, float value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setRotation(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setRotation(value);
 }
 
-void EngineInterface::text2d_setSize(const string & id, const fvec2 & value)
+void EngineInterface::text2d_setSize(const string & text2dId, const fvec2 & value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setSize(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setSize(value);
 }
 
-void EngineInterface::text2d_move(const string & id, const fvec2 & change)
+void EngineInterface::text2d_move(const string & text2dId, const fvec2 & change)
 {
-	_core->getText2dEntityManager()->getEntity(id)->move(change);
+	_core->getText2dEntityManager()->getEntity(text2dId)->move(change);
 }
 
-void EngineInterface::text2d_rotate(const string & id, float change)
+void EngineInterface::text2d_rotate(const string & text2dId, float change)
 {
-	_core->getText2dEntityManager()->getEntity(id)->rotate(change);
+	_core->getText2dEntityManager()->getEntity(text2dId)->rotate(change);
 }
 
-void EngineInterface::text2d_scale(const string & id, const fvec2 & change)
+void EngineInterface::text2d_scale(const string & text2dId, const fvec2 & change)
 {
-	_core->getText2dEntityManager()->getEntity(id)->scale(change);
+	_core->getText2dEntityManager()->getEntity(text2dId)->scale(change);
 }
 
-void EngineInterface::text2d_moveTo(const string & id, const fvec2 & target, float speed)
+void EngineInterface::text2d_moveTo(const string & text2dId, const fvec2 & target, float speed)
 {
-	_core->getText2dEntityManager()->getEntity(id)->moveTo(target, speed);
+	_core->getText2dEntityManager()->getEntity(text2dId)->moveTo(target, speed);
 }
 
-void EngineInterface::text2d_rotateTo(const string & id, float target, float speed)
+void EngineInterface::text2d_rotateTo(const string & text2dId, float target, float speed)
 {
-	_core->getText2dEntityManager()->getEntity(id)->rotateTo(target, speed);
+	_core->getText2dEntityManager()->getEntity(text2dId)->rotateTo(target, speed);
 }
 
-void EngineInterface::text2d_scaleTo(const string & id, const fvec2 & target, float speed)
+void EngineInterface::text2d_scaleTo(const string & text2dId, const fvec2 & target, float speed)
 {
-	_core->getText2dEntityManager()->getEntity(id)->scaleTo(target, speed);
+	_core->getText2dEntityManager()->getEntity(text2dId)->scaleTo(target, speed);
 }
 
-void EngineInterface::text2d_setHorizontallyFlipped(const string & id, bool value)
+void EngineInterface::text2d_setHorizontallyFlipped(const string & text2dId, bool value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setHorizontallyFlipped(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setHorizontallyFlipped(value);
 }
 
-void EngineInterface::text2d_setVerticallyFlipped(const string & id, bool value)
+void EngineInterface::text2d_setVerticallyFlipped(const string & text2dId, bool value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setVerticallyFlipped(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setVerticallyFlipped(value);
 }
 
-void EngineInterface::text2d_setWireframed(const string & id, bool value)
+void EngineInterface::text2d_setWireframed(const string & text2dId, bool value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setWireframed(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setWireframed(value);
 }
 
-void EngineInterface::text2d_setWireframeColor(const string & id, const fvec3 & value)
+void EngineInterface::text2d_setWireframeColor(const string & text2dId, const fvec3 & value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setWireframeColor(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setWireframeColor(value);
 }
 
-void EngineInterface::text2d_setMinClipPosition(const string & id, const fvec2 & value)
+void EngineInterface::text2d_setMinClipPosition(const string & text2dId, const fvec2 & value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setMinClipPosition(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setMinClipPosition(value);
 }
 
-void EngineInterface::text2d_setMaxClipPosition(const string & id, const fvec2 & value)
+void EngineInterface::text2d_setMaxClipPosition(const string & text2dId, const fvec2 & value)
 {
-	_core->getText2dEntityManager()->getEntity(id)->setMaxClipPosition(value);
+	_core->getText2dEntityManager()->getEntity(text2dId)->setMaxClipPosition(value);
 }
 
-const bool EngineInterface::text2d_isExisting(const string & id) const
+const bool EngineInterface::text2d_isExisting(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->isEntityExisting(id);
+	return _core->getText2dEntityManager()->isEntityExisting(text2dId);
 }
 
-const bool EngineInterface::text2d_isVisible(const string & id) const
+const bool EngineInterface::text2d_isVisible(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->isVisible();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->isVisible();
 }
 
-const bool EngineInterface::text2d_isCentered(const string & id) const
+const bool EngineInterface::text2d_isCentered(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->isCentered();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->isCentered();
 }
 
-const bool EngineInterface::text2d_isHorizontallyFlipped(const string & id) const
+const bool EngineInterface::text2d_isHorizontallyFlipped(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->isHorizontallyFlipped();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->isHorizontallyFlipped();
 }
 
-const bool EngineInterface::text2d_isVerticallyFlipped(const string & id) const
+const bool EngineInterface::text2d_isVerticallyFlipped(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->isVerticallyFlipped();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->isVerticallyFlipped();
 }
 
-const bool EngineInterface::text2d_isWireframed(const string & id) const
+const bool EngineInterface::text2d_isWireframed(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->isWireframed();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->isWireframed();
 }
 
-const fvec2 & EngineInterface::text2d_getPosition(const string & id) const
+const fvec2 & EngineInterface::text2d_getPosition(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->getPosition();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->getPosition();
 }
 
-const float EngineInterface::text2d_getRotation(const string & id) const
+const float EngineInterface::text2d_getRotation(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->getRotation();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->getRotation();
 }
 
-const float EngineInterface::text2d_getOpacity(const string & id) const
+const float EngineInterface::text2d_getOpacity(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->getOpacity();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->getOpacity();
 }
 
-const fvec2 & EngineInterface::text2d_getSize(const string & id) const
+const fvec2 & EngineInterface::text2d_getSize(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->getSize();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->getSize();
 }
 
-const fvec2 & EngineInterface::text2d_getMinClipPosition(const string & id) const
+const fvec2 & EngineInterface::text2d_getMinClipPosition(const string & text2dId) const
 {
-	return  _core->getText2dEntityManager()->getEntity(id)->getMinClipPosition();
+	return  _core->getText2dEntityManager()->getEntity(text2dId)->getMinClipPosition();
 }
 
-const fvec2 & EngineInterface::text2d_getMaxClipPosition(const string & id) const
+const fvec2 & EngineInterface::text2d_getMaxClipPosition(const string & text2dId) const
 {
-	return  _core->getText2dEntityManager()->getEntity(id)->getMaxClipPosition();
+	return  _core->getText2dEntityManager()->getEntity(text2dId)->getMaxClipPosition();
 }
 
-const fvec3 & EngineInterface::text2d_getColor(const string & id) const
+const fvec3 & EngineInterface::text2d_getColor(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->getColor();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->getColor();
 }
 
-const fvec3 & EngineInterface::text2d_getWireframeColor(const string & id) const
+const fvec3 & EngineInterface::text2d_getWireframeColor(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->getWireframeColor();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->getWireframeColor();
 }
 
-const string & EngineInterface::text2d_getContent(const string & id) const
+const string & EngineInterface::text2d_getContent(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->getContent();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->getContent();
 }
 
 const vector<string> EngineInterface::text2d_getIds() const
@@ -193,7 +193,7 @@ const vector<string> EngineInterface::text2d_getIds() const
 	return result;
 }
 
-const string & EngineInterface::text2d_getFontMapPath(const string & id) const
+const string & EngineInterface::text2d_getFontMapPath(const string & text2dId) const
 {
-	return _core->getText2dEntityManager()->getEntity(id)->getFontMapPath();
+	return _core->getText2dEntityManager()->getEntity(text2dId)->getFontMapPath();
 }

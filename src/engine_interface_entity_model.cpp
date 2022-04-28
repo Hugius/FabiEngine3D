@@ -1,16 +1,16 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::model_create(const string & id, const string & meshPath)
+void EngineInterface::model_create(const string & modelId, const string & meshPath)
 {
-	_core->getModelEntityManager()->createEntity(id, meshPath);
+	_core->getModelEntityManager()->createEntity(modelId, meshPath);
 }
 
-void EngineInterface::model_delete(const string & id)
+void EngineInterface::model_delete(const string & modelId)
 {
 	for(const auto & [animation3dId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimationIds())
 	{
-		if(id == modelId)
+		if(modelId == modelId)
 		{
 			model_stopAnimation(modelId, animation3dId);
 		}
@@ -20,7 +20,7 @@ void EngineInterface::model_delete(const string & id)
 	{
 		if(entity->hasParent())
 		{
-			if(id == entity->getParentId())
+			if(modelId == entity->getParentId())
 			{
 				if(entity->getParentType() == AabbParentType::MODEL)
 				{
@@ -32,18 +32,18 @@ void EngineInterface::model_delete(const string & id)
 
 	for(const auto & captorId : captor_getIds())
 	{
-		if(id == captor_getExceptionEntityId(captorId))
+		if(modelId == captor_getExceptionEntityId(captorId))
 		{
 			captor_setExceptionEntityId(captorId, "");
 		}
 	}
 
-	_core->getModelEntityManager()->deleteEntity(id);
+	_core->getModelEntityManager()->deleteEntity(modelId);
 }
 
-void EngineInterface::model_setVisible(const string & id, bool value)
+void EngineInterface::model_setVisible(const string & modelId, bool value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setVisible(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setVisible(value);
 }
 
 void EngineInterface::model_setDiffuseMap(const string & modelId, const string & partId, const string & value)
@@ -196,9 +196,9 @@ void EngineInterface::model_setReflectionMap(const string & modelId, const strin
 	}
 }
 
-void EngineInterface::model_setLevelOfDetailEntityId(const string & id, const string & value)
+void EngineInterface::model_setLevelOfDetailEntityId(const string & modelId, const string & value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setLevelOfDetailEntityId(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setLevelOfDetailEntityId(value);
 }
 
 void EngineInterface::model_setFaceCulled(const string & modelId, const string & partId, bool value)
@@ -221,24 +221,24 @@ void EngineInterface::model_setReflective(const string & modelId, const string &
 	_core->getModelEntityManager()->getEntity(modelId)->setReflective(partId, value);
 }
 
-void EngineInterface::model_setBasePosition(const string & id, const fvec3 & value)
+void EngineInterface::model_setBasePosition(const string & modelId, const fvec3 & value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setBasePosition(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setBasePosition(value);
 }
 
-void EngineInterface::model_setBaseRotation(const string & id, const fvec3 & value)
+void EngineInterface::model_setBaseRotation(const string & modelId, const fvec3 & value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setBaseRotation(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setBaseRotation(value);
 }
 
-void EngineInterface::model_setBaseRotationOrigin(const string & id, const fvec3 & value)
+void EngineInterface::model_setBaseRotationOrigin(const string & modelId, const fvec3 & value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setBaseRotationOrigin(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setBaseRotationOrigin(value);
 }
 
-void EngineInterface::model_setBaseSize(const string & id, const fvec3 & value)
+void EngineInterface::model_setBaseSize(const string & modelId, const fvec3 & value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setBaseSize(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setBaseSize(value);
 }
 
 void EngineInterface::model_setPartPosition(const string & modelId, const string & partId, const fvec3 & value)
@@ -261,19 +261,19 @@ void EngineInterface::model_setPartSize(const string & modelId, const string & p
 	_core->getModelEntityManager()->getEntity(modelId)->setPartSize(partId, value);
 }
 
-void EngineInterface::model_moveBase(const string & id, const fvec3 & change)
+void EngineInterface::model_moveBase(const string & modelId, const fvec3 & change)
 {
-	_core->getModelEntityManager()->getEntity(id)->moveBase(change);
+	_core->getModelEntityManager()->getEntity(modelId)->moveBase(change);
 }
 
-void EngineInterface::model_rotateBase(const string & id, const fvec3 & change)
+void EngineInterface::model_rotateBase(const string & modelId, const fvec3 & change)
 {
-	_core->getModelEntityManager()->getEntity(id)->rotateBase(change);
+	_core->getModelEntityManager()->getEntity(modelId)->rotateBase(change);
 }
 
-void EngineInterface::model_scaleBase(const string & id, const fvec3 & change)
+void EngineInterface::model_scaleBase(const string & modelId, const fvec3 & change)
 {
-	_core->getModelEntityManager()->getEntity(id)->scaleBase(change);
+	_core->getModelEntityManager()->getEntity(modelId)->scaleBase(change);
 }
 
 void EngineInterface::model_movePart(const string & modelId, const string & partId, const fvec3 & change)
@@ -291,19 +291,19 @@ void EngineInterface::model_scalePart(const string & modelId, const string & par
 	_core->getModelEntityManager()->getEntity(modelId)->scalePart(partId, change);
 }
 
-void EngineInterface::model_moveBaseTo(const string & id, const fvec3 & target, float speed)
+void EngineInterface::model_moveBaseTo(const string & modelId, const fvec3 & target, float speed)
 {
-	_core->getModelEntityManager()->getEntity(id)->moveBaseTo(target, speed);
+	_core->getModelEntityManager()->getEntity(modelId)->moveBaseTo(target, speed);
 }
 
-void EngineInterface::model_rotateBaseTo(const string & id, const fvec3 & target, float speed)
+void EngineInterface::model_rotateBaseTo(const string & modelId, const fvec3 & target, float speed)
 {
-	_core->getModelEntityManager()->getEntity(id)->rotateBaseTo(target, speed);
+	_core->getModelEntityManager()->getEntity(modelId)->rotateBaseTo(target, speed);
 }
 
-void EngineInterface::model_scaleBaseTo(const string & id, const fvec3 & target, float speed)
+void EngineInterface::model_scaleBaseTo(const string & modelId, const fvec3 & target, float speed)
 {
-	_core->getModelEntityManager()->getEntity(id)->scaleBaseTo(target, speed);
+	_core->getModelEntityManager()->getEntity(modelId)->scaleBaseTo(target, speed);
 }
 
 void EngineInterface::model_setSpecularShininess(const string & modelId, const string & partId, float value)
@@ -331,9 +331,9 @@ void EngineInterface::model_setEmissionIntensity(const string & modelId, const s
 	_core->getModelEntityManager()->getEntity(modelId)->setEmissionIntensity(partId, value);
 }
 
-void EngineInterface::model_setLevelOfDetailDistance(const string & id, float value)
+void EngineInterface::model_setLevelOfDetailDistance(const string & modelId, float value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setLevelOfDetailDistance(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setLevelOfDetailDistance(value);
 }
 
 void EngineInterface::model_movePartTo(const string & modelId, const string & partId, const fvec3 & target, float speed)
@@ -361,9 +361,9 @@ void EngineInterface::model_setBright(const string & modelId, const string & par
 	_core->getModelEntityManager()->getEntity(modelId)->setBright(partId, value);
 }
 
-void EngineInterface::model_setRotationOrder(const string & id, DirectionOrderType value)
+void EngineInterface::model_setRotationOrder(const string & modelId, DirectionOrderType value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setRotationOrder(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setRotationOrder(value);
 }
 
 void EngineInterface::model_startAnimation(const string & modelId, const string & animation3dId, int playCount)
@@ -401,9 +401,9 @@ void EngineInterface::model_setAnimationFrameIndex(const string & modelId, const
 	_core->getAnimation3dPlayer()->setModelAnimationFrameIndex(animation3dId, modelId, value);
 }
 
-void EngineInterface::model_setFrozen(const string & id, bool value)
+void EngineInterface::model_setFrozen(const string & modelId, bool value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setFrozen(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setFrozen(value);
 }
 
 void EngineInterface::model_setWireframed(const string & modelId, const string & partId, bool value)
@@ -421,9 +421,9 @@ void EngineInterface::model_setMinTextureAlpha(const string & modelId, const str
 	_core->getModelEntityManager()->getEntity(modelId)->setMinTextureAlpha(partId, value);
 }
 
-void EngineInterface::model_setShadowed(const string & id, bool value)
+void EngineInterface::model_setShadowed(const string & modelId, bool value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setShadowed(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setShadowed(value);
 }
 
 void EngineInterface::model_setColor(const string & modelId, const string & partId, const fvec3 & value)
@@ -436,34 +436,34 @@ void EngineInterface::model_setWireframeColor(const string & modelId, const stri
 	_core->getModelEntityManager()->getEntity(modelId)->setWireframeColor(partId, value);
 }
 
-void EngineInterface::model_setMinClipPosition(const string & id, const fvec3 & value)
+void EngineInterface::model_setMinClipPosition(const string & modelId, const fvec3 & value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setMinClipPosition(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setMinClipPosition(value);
 }
 
-void EngineInterface::model_setMaxClipPosition(const string & id, const fvec3 & value)
+void EngineInterface::model_setMaxClipPosition(const string & modelId, const fvec3 & value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setMaxClipPosition(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setMaxClipPosition(value);
 }
 
-void EngineInterface::model_setReflected(const string & id, bool value)
+void EngineInterface::model_setReflected(const string & modelId, bool value)
 {
-	_core->getModelEntityManager()->getEntity(id)->setReflected(value);
+	_core->getModelEntityManager()->getEntity(modelId)->setReflected(value);
 }
 
-const bool EngineInterface::model_isExisting(const string & id) const
+const bool EngineInterface::model_isExisting(const string & modelId) const
 {
-	return _core->getModelEntityManager()->isEntityExisting(id);
+	return _core->getModelEntityManager()->isEntityExisting(modelId);
 }
 
-const bool EngineInterface::model_isVisible(const string & id) const
+const bool EngineInterface::model_isVisible(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->isVisible();
+	return _core->getModelEntityManager()->getEntity(modelId)->isVisible();
 }
 
-const bool EngineInterface::model_isMultiParted(const string & id) const
+const bool EngineInterface::model_isMultiParted(const string & modelId) const
 {
-	return (_core->getModelEntityManager()->getEntity(id)->getPartIds().size() > 1);
+	return (_core->getModelEntityManager()->getEntity(modelId)->getPartIds().size() > 1);
 }
 
 const bool EngineInterface::model_isFaceCulled(const string & modelId, const string & partId) const
@@ -476,19 +476,19 @@ const bool EngineInterface::model_isSpecular(const string & modelId, const strin
 	return _core->getModelEntityManager()->getEntity(modelId)->isSpecular(partId);
 }
 
-const bool EngineInterface::model_isShadowed(const string & id) const
+const bool EngineInterface::model_isShadowed(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->isShadowed();
+	return _core->getModelEntityManager()->getEntity(modelId)->isShadowed();
 }
 
-const bool EngineInterface::model_isReflected(const string & id) const
+const bool EngineInterface::model_isReflected(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->isReflected();
+	return _core->getModelEntityManager()->getEntity(modelId)->isReflected();
 }
 
-const bool EngineInterface::model_isFrozen(const string & id) const
+const bool EngineInterface::model_isFrozen(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->isFrozen();
+	return _core->getModelEntityManager()->getEntity(modelId)->isFrozen();
 }
 
 const bool EngineInterface::model_isWireframed(const string & modelId, const string & partId) const
@@ -564,29 +564,29 @@ const ReflectionType EngineInterface::model_getReflectionType(const string & mod
 	return _core->getModelEntityManager()->getEntity(modelId)->getReflectionType(partId);
 }
 
-const DirectionOrderType EngineInterface::model_getRotationOrder(const string & id) const
+const DirectionOrderType EngineInterface::model_getRotationOrder(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getRotationOrder();
+	return _core->getModelEntityManager()->getEntity(modelId)->getRotationOrder();
 }
 
-const fvec3 & EngineInterface::model_getBasePosition(const string & id) const
+const fvec3 & EngineInterface::model_getBasePosition(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getBasePosition();
+	return _core->getModelEntityManager()->getEntity(modelId)->getBasePosition();
 }
 
-const fvec3 & EngineInterface::model_getBaseRotation(const string & id) const
+const fvec3 & EngineInterface::model_getBaseRotation(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getBaseRotation();
+	return _core->getModelEntityManager()->getEntity(modelId)->getBaseRotation();
 }
 
-const fvec3 & EngineInterface::model_getBaseRotationOrigin(const string & id) const
+const fvec3 & EngineInterface::model_getBaseRotationOrigin(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getBaseRotationOrigin();
+	return _core->getModelEntityManager()->getEntity(modelId)->getBaseRotationOrigin();
 }
 
-const fvec3 & EngineInterface::model_getBaseSize(const string & id) const
+const fvec3 & EngineInterface::model_getBaseSize(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getBaseSize();
+	return _core->getModelEntityManager()->getEntity(modelId)->getBaseSize();
 }
 
 const fvec3 & EngineInterface::model_getPartPosition(const string & modelId, const string & partId) const
@@ -619,14 +619,14 @@ const fvec3 & EngineInterface::model_getWireframeColor(const string & modelId, c
 	return _core->getModelEntityManager()->getEntity(modelId)->getWireframeColor(partId);
 }
 
-const fvec3 & EngineInterface::model_getMinClipPosition(const string & id) const
+const fvec3 & EngineInterface::model_getMinClipPosition(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getMinClipPosition();
+	return _core->getModelEntityManager()->getEntity(modelId)->getMinClipPosition();
 }
 
-const fvec3 & EngineInterface::model_getMaxClipPosition(const string & id) const
+const fvec3 & EngineInterface::model_getMaxClipPosition(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getMaxClipPosition();
+	return _core->getModelEntityManager()->getEntity(modelId)->getMaxClipPosition();
 }
 
 const float EngineInterface::model_getLightness(const string & modelId, const string & partId) const
@@ -654,9 +654,9 @@ const float EngineInterface::model_getOpacity(const string & modelId, const stri
 	return _core->getModelEntityManager()->getEntity(modelId)->getOpacity(partId);
 }
 
-const float EngineInterface::model_getLevelOfDetailDistance(const string & id) const
+const float EngineInterface::model_getLevelOfDetailDistance(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getLevelOfDetailDistance();
+	return _core->getModelEntityManager()->getEntity(modelId)->getLevelOfDetailDistance();
 }
 
 const int EngineInterface::model_getTextureRepeat(const string & modelId, const string & partId) const
@@ -689,9 +689,9 @@ const int EngineInterface::model_getAnimationFrameIndex(const string & modelId, 
 	return _core->getAnimation3dPlayer()->getModelAnimationFrameIndex(animation3dId, modelId);
 }
 
-const string & EngineInterface::model_getMeshPath(const string & id) const
+const string & EngineInterface::model_getMeshPath(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getMeshPath();
+	return _core->getModelEntityManager()->getEntity(modelId)->getMeshPath();
 }
 
 const string & EngineInterface::model_getDiffuseMapPath(const string & modelId, const string & partId) const
@@ -719,23 +719,23 @@ const string & EngineInterface::model_getNormalMapPath(const string & modelId, c
 	return _core->getModelEntityManager()->getEntity(modelId)->getNormalMapPath(partId);
 }
 
-const string & EngineInterface::model_getLevelOfDetailEntityId(const string & id) const
+const string & EngineInterface::model_getLevelOfDetailEntityId(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getLevelOfDetailEntityId();
+	return _core->getModelEntityManager()->getEntity(modelId)->getLevelOfDetailEntityId();
 }
 
-const vector<string> EngineInterface::model_getPartIds(const string & id) const
+const vector<string> EngineInterface::model_getPartIds(const string & modelId) const
 {
-	return _core->getModelEntityManager()->getEntity(id)->getPartIds();
+	return _core->getModelEntityManager()->getEntity(modelId)->getPartIds();
 }
 
-const vector<string> EngineInterface::model_getAnimationIds(const string & id) const
+const vector<string> EngineInterface::model_getAnimationIds(const string & modelId) const
 {
 	vector<string> result;
 
 	for(const auto & [animation3dId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimationIds())
 	{
-		if(id == modelId)
+		if(modelId == modelId)
 		{
 			result.push_back(animation3dId);
 		}
@@ -756,7 +756,7 @@ const vector<string> EngineInterface::model_getIds() const
 	return result;
 }
 
-const vector<string> EngineInterface::model_getChildAabbIds(const string & id)
+const vector<string> EngineInterface::model_getChildAabbIds(const string & modelId)
 {
 	vector<string> result;
 
@@ -764,7 +764,7 @@ const vector<string> EngineInterface::model_getChildAabbIds(const string & id)
 	{
 		if(entity->hasParent())
 		{
-			if(id == entity->getParentId())
+			if(modelId == entity->getParentId())
 			{
 				if(entity->getParentType() == AabbParentType::MODEL)
 				{

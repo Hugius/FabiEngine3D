@@ -1,64 +1,64 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::clock_create(const string & id)
+void EngineInterface::clock_create(const string & clockId)
 {
-	if(clock_isIdReserved(id))
+	if(clock_isIdReserved(clockId))
 	{
 		abort();
 	}
 
-	_core->getTimer()->createClock(id);
+	_core->getTimer()->createClock(clockId);
 }
 
-void EngineInterface::clock_delete(const string & id)
+void EngineInterface::clock_delete(const string & clockId)
 {
-	if(clock_isIdReserved(id))
+	if(clock_isIdReserved(clockId))
 	{
 		abort();
 	}
 
-	_core->getTimer()->deleteClock(id);
+	_core->getTimer()->deleteClock(clockId);
 }
 
-void EngineInterface::clock_start(const string & id)
+void EngineInterface::clock_start(const string & clockId)
 {
-	if(clock_isIdReserved(id))
+	if(clock_isIdReserved(clockId))
 	{
 		abort();
 	}
 
-	_core->getTimer()->startClock(id);
+	_core->getTimer()->startClock(clockId);
 }
 
-void EngineInterface::clock_pause(const string & id)
+void EngineInterface::clock_pause(const string & clockId)
 {
-	if(clock_isIdReserved(id))
+	if(clock_isIdReserved(clockId))
 	{
 		abort();
 	}
 
-	_core->getTimer()->pauseClock(id);
+	_core->getTimer()->pauseClock(clockId);
 }
 
-void EngineInterface::clock_resume(const string & id)
+void EngineInterface::clock_resume(const string & clockId)
 {
-	if(clock_isIdReserved(id))
+	if(clock_isIdReserved(clockId))
 	{
 		abort();
 	}
 
-	_core->getTimer()->resumeClock(id);
+	_core->getTimer()->resumeClock(clockId);
 }
 
-void EngineInterface::clock_stop(const string & id)
+void EngineInterface::clock_stop(const string & clockId)
 {
-	if(clock_isIdReserved(id))
+	if(clock_isIdReserved(clockId))
 	{
 		abort();
 	}
 
-	_core->getTimer()->stopClock(id);
+	_core->getTimer()->stopClock(clockId);
 }
 
 const vector<string> EngineInterface::clock_getIds() const
@@ -76,72 +76,72 @@ const vector<string> EngineInterface::clock_getIds() const
 	return result;
 }
 
-const float EngineInterface::clock_getDeltaTime(const string & id) const
+const float EngineInterface::clock_getDeltaTime(const string & clockId) const
 {
-	if(clock_isIdReserved(id))
+	if(clock_isIdReserved(clockId))
 	{
 		abort();
 	}
 
-	return _core->getTimer()->getClockDeltaTime(id);
+	return _core->getTimer()->getClockDeltaTime(clockId);
 }
 
-const bool EngineInterface::clock_isExisting(const string & id) const
+const bool EngineInterface::clock_isExisting(const string & clockId) const
 {
-	if(clock_isIdReserved(id))
+	if(clock_isIdReserved(clockId))
 	{
 		abort();
 	}
 
-	return _core->getTimer()->isClockExisting(id);
+	return _core->getTimer()->isClockExisting(clockId);
 }
 
-const bool EngineInterface::clock_isStarted(const string & id) const
+const bool EngineInterface::clock_isStarted(const string & clockId) const
 {
-	if(clock_isIdReserved(id))
+	if(clock_isIdReserved(clockId))
 	{
 		abort();
 	}
 
-	return _core->getTimer()->isClockStarted(id);
+	return _core->getTimer()->isClockStarted(clockId);
 }
 
-const bool EngineInterface::clock_isPaused(const string & id) const
+const bool EngineInterface::clock_isPaused(const string & clockId) const
 {
-	if(clock_isIdReserved(id))
+	if(clock_isIdReserved(clockId))
 	{
 		abort();
 	}
 
-	return _core->getTimer()->isClockPaused(id);
+	return _core->getTimer()->isClockPaused(clockId);
 }
 
-const bool EngineInterface::clock_isIdReserved(const string & id) const
+const bool EngineInterface::clock_isIdReserved(const string & clockId) const
 {
 	return
 		(
-		id == "total" ||
-		id == "mainUpdate" ||
-		id == "physicsUpdate" ||
-		id == "3dEntityUpdate" ||
-		id == "2dEntityUpdate" ||
-		id == "renderUpdate" ||
-		id == "animationUpdate" ||
-		id == "soundUpdate" ||
-		id == "networkUpdate" ||
-		id == "miscUpdate" ||
-		id == "depthPreRender" ||
-		id == "shadowPreRender" ||
-		id == "reflectionPreRender" ||
-		id == "refractionPreRender" ||
-		id == "waterPreRender" ||
-		id == "3dEntityRender" ||
-		id == "antiAliasingPostRender" ||
-		id == "bloomPreRender" ||
-		id == "dofPreRender" ||
-		id == "lensFlarePreRender" ||
-		id == "motionBlurPreRender" ||
-		id == "2dEntityRender" ||
-		id == "bufferSwap"
+		clockId == "total" ||
+		clockId == "mainUpdate" ||
+		clockId == "physicsUpdate" ||
+		clockId == "3dEntityUpdate" ||
+		clockId == "2dEntityUpdate" ||
+		clockId == "renderUpdate" ||
+		clockId == "animationUpdate" ||
+		clockId == "soundUpdate" ||
+		clockId == "networkUpdate" ||
+		clockId == "miscUpdate" ||
+		clockId == "depthPreRender" ||
+		clockId == "shadowPreRender" ||
+		clockId == "reflectionPreRender" ||
+		clockId == "refractionPreRender" ||
+		clockId == "waterPreRender" ||
+		clockId == "3dEntityRender" ||
+		clockId == "antiAliasingPostRender" ||
+		clockId == "bloomPreRender" ||
+		clockId == "dofPreRender" ||
+		clockId == "lensFlarePreRender" ||
+		clockId == "motionBlurPreRender" ||
+		clockId == "2dEntityRender" ||
+		clockId == "bufferSwap"
 		);
 }

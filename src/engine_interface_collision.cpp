@@ -64,9 +64,9 @@ const bool EngineInterface::collision_checkCameraWithTerrain() const
 	return _core->getCameraCollisionResponder()->isCameraUnderTerrain();
 }
 
-const bool EngineInterface::collision_checkCameraWithAabb(const string & id) const
+const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId) const
 {
-	return _core->getAabbEntityManager()->getEntity(id)->hasCollided();
+	return _core->getAabbEntityManager()->getEntity(aabbId)->hasCollided();
 }
 
 const float EngineInterface::collision_getCameraTerrainResponseHeight() const
@@ -94,11 +94,11 @@ const bool EngineInterface::collision_isCameraAabbResponseEnabledZ() const
 	return _core->getCameraCollisionResponder()->isCameraAabbResponseEnabledZ();
 }
 
-const bool EngineInterface::collision_checkCameraWithAabb(const string & id, DirectionType direction) const
+const bool EngineInterface::collision_checkCameraWithAabb(const string & aabbId, DirectionType direction) const
 {
-	if(_core->getAabbEntityManager()->getEntity(id)->hasCollided())
+	if(_core->getAabbEntityManager()->getEntity(aabbId)->hasCollided())
 	{
-		if(direction == _core->getAabbEntityManager()->getEntity(id)->getCollisionDirection())
+		if(direction == _core->getAabbEntityManager()->getEntity(aabbId)->getCollisionDirection())
 		{
 			return true;
 		}

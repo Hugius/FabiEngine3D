@@ -1,23 +1,23 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::text3d_create(const string & id, const string & fontMapPath, bool isCentered)
+void EngineInterface::text3d_create(const string & text3dId, const string & fontMapPath, bool isCentered)
 {
-	_core->getText3dEntityManager()->createEntity(id, fontMapPath, isCentered);
+	_core->getText3dEntityManager()->createEntity(text3dId, fontMapPath, isCentered);
 }
 
-void EngineInterface::text3d_setContent(const string & id, const string & value)
+void EngineInterface::text3d_setContent(const string & text3dId, const string & value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setContent(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setContent(value);
 }
 
-void EngineInterface::text3d_delete(const string & id)
+void EngineInterface::text3d_delete(const string & text3dId)
 {
 	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasParent())
 		{
-			if(id == entity->getParentId())
+			if(text3dId == entity->getParentId())
 			{
 				if(entity->getParentType() == AabbParentType::TEXT3D)
 				{
@@ -27,202 +27,202 @@ void EngineInterface::text3d_delete(const string & id)
 		}
 	}
 
-	_core->getText3dEntityManager()->deleteEntity(id);
+	_core->getText3dEntityManager()->deleteEntity(text3dId);
 }
 
-void EngineInterface::text3d_setVisible(const string & id, bool value)
+void EngineInterface::text3d_setVisible(const string & text3dId, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setVisible(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setVisible(value);
 }
 
-void EngineInterface::text3d_move(const string & id, const fvec3 & change)
+void EngineInterface::text3d_move(const string & text3dId, const fvec3 & change)
 {
-	_core->getText3dEntityManager()->getEntity(id)->move(change);
+	_core->getText3dEntityManager()->getEntity(text3dId)->move(change);
 }
 
-void EngineInterface::text3d_rotate(const string & id, const fvec3 & change)
+void EngineInterface::text3d_rotate(const string & text3dId, const fvec3 & change)
 {
-	_core->getText3dEntityManager()->getEntity(id)->rotate(change);
+	_core->getText3dEntityManager()->getEntity(text3dId)->rotate(change);
 }
 
-void EngineInterface::text3d_scale(const string & id, const fvec2 & change)
+void EngineInterface::text3d_scale(const string & text3dId, const fvec2 & change)
 {
-	_core->getText3dEntityManager()->getEntity(id)->scale(change);
+	_core->getText3dEntityManager()->getEntity(text3dId)->scale(change);
 }
 
-void EngineInterface::text3d_moveTo(const string & id, const fvec3 & target, float speed)
+void EngineInterface::text3d_moveTo(const string & text3dId, const fvec3 & target, float speed)
 {
-	_core->getText3dEntityManager()->getEntity(id)->moveTo(target, speed);
+	_core->getText3dEntityManager()->getEntity(text3dId)->moveTo(target, speed);
 }
 
-void EngineInterface::text3d_rotateTo(const string & id, const fvec3 & target, float speed)
+void EngineInterface::text3d_rotateTo(const string & text3dId, const fvec3 & target, float speed)
 {
-	_core->getText3dEntityManager()->getEntity(id)->rotateTo(target, speed);
+	_core->getText3dEntityManager()->getEntity(text3dId)->rotateTo(target, speed);
 }
 
-void EngineInterface::text3d_scaleTo(const string & id, const fvec2 & target, float speed)
+void EngineInterface::text3d_scaleTo(const string & text3dId, const fvec2 & target, float speed)
 {
-	_core->getText3dEntityManager()->getEntity(id)->scaleTo(target, speed);
+	_core->getText3dEntityManager()->getEntity(text3dId)->scaleTo(target, speed);
 }
 
-void EngineInterface::text3d_setPosition(const string & id, const fvec3 & value)
+void EngineInterface::text3d_setPosition(const string & text3dId, const fvec3 & value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setPosition(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setPosition(value);
 }
 
-void EngineInterface::text3d_setRotation(const string & id, const fvec3 & value)
+void EngineInterface::text3d_setRotation(const string & text3dId, const fvec3 & value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setRotation(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setRotation(value);
 }
 
-void EngineInterface::text3d_setSize(const string & id, const fvec2 & value)
+void EngineInterface::text3d_setSize(const string & text3dId, const fvec2 & value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setSize(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setSize(value);
 }
 
-void EngineInterface::text3d_setColor(const string & id, const fvec3 & value)
+void EngineInterface::text3d_setColor(const string & text3dId, const fvec3 & value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setColor(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setColor(value);
 }
 
-void EngineInterface::text3d_setWireframeColor(const string & id, const fvec3 & value)
+void EngineInterface::text3d_setWireframeColor(const string & text3dId, const fvec3 & value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setWireframeColor(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setWireframeColor(value);
 }
 
-void EngineInterface::text3d_setMinClipPosition(const string & id, const fvec3 & value)
+void EngineInterface::text3d_setMinClipPosition(const string & text3dId, const fvec3 & value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setMinClipPosition(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setMinClipPosition(value);
 }
 
-void EngineInterface::text3d_setMaxClipPosition(const string & id, const fvec3 & value)
+void EngineInterface::text3d_setMaxClipPosition(const string & text3dId, const fvec3 & value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setMaxClipPosition(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setMaxClipPosition(value);
 }
 
-void EngineInterface::text3d_setWireframed(const string & id, bool value)
+void EngineInterface::text3d_setWireframed(const string & text3dId, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setWireframed(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setWireframed(value);
 }
 
-void EngineInterface::text3d_setFrozen(const string & id, bool value)
+void EngineInterface::text3d_setFrozen(const string & text3dId, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setFrozen(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setFrozen(value);
 }
 
-void EngineInterface::text3d_setHorizontallyFlipped(const string & id, bool value)
+void EngineInterface::text3d_setHorizontallyFlipped(const string & text3dId, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setHorizontallyFlipped(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setHorizontallyFlipped(value);
 }
 
-void EngineInterface::text3d_setVerticallyFlipped(const string & id, bool value)
+void EngineInterface::text3d_setVerticallyFlipped(const string & text3dId, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setVerticallyFlipped(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setVerticallyFlipped(value);
 }
 
-void EngineInterface::text3d_setRotationOrder(const string & id, DirectionOrderType value)
+void EngineInterface::text3d_setRotationOrder(const string & text3dId, DirectionOrderType value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setRotationOrder(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setRotationOrder(value);
 }
 
-void EngineInterface::text3d_setFacingCameraHorizontally(const string & id, bool value)
+void EngineInterface::text3d_setFacingCameraHorizontally(const string & text3dId, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setFacingCameraHorizontally(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setFacingCameraHorizontally(value);
 }
 
-void EngineInterface::text3d_setFacingCameraVertically(const string & id, bool value)
+void EngineInterface::text3d_setFacingCameraVertically(const string & text3dId, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setFacingCameraVertically(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setFacingCameraVertically(value);
 }
 
-void EngineInterface::text3d_setShadowed(const string & id, bool value)
+void EngineInterface::text3d_setShadowed(const string & text3dId, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setShadowed(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setShadowed(value);
 }
 
-void EngineInterface::text3d_setReflected(const string & id, bool value)
+void EngineInterface::text3d_setReflected(const string & text3dId, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setReflected(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setReflected(value);
 }
 
-void EngineInterface::text3d_setBright(const string & id, bool value)
+void EngineInterface::text3d_setBright(const string & text3dId, bool value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setBright(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setBright(value);
 }
 
-void EngineInterface::text3d_setLightness(const string & id, float value)
+void EngineInterface::text3d_setLightness(const string & text3dId, float value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setLightness(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setLightness(value);
 }
 
-void EngineInterface::text3d_setOpacity(const string & id, float value)
+void EngineInterface::text3d_setOpacity(const string & text3dId, float value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setOpacity(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setOpacity(value);
 }
 
-void EngineInterface::text3d_setMinTextureAlpha(const string & id, float value)
+void EngineInterface::text3d_setMinTextureAlpha(const string & text3dId, float value)
 {
-	_core->getText3dEntityManager()->getEntity(id)->setMinTextureAlpha(value);
+	_core->getText3dEntityManager()->getEntity(text3dId)->setMinTextureAlpha(value);
 }
 
-const float EngineInterface::text3d_getLightness(const string & id) const
+const float EngineInterface::text3d_getLightness(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getLightness();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getLightness();
 }
 
-const float EngineInterface::text3d_getOpacity(const string & id) const
+const float EngineInterface::text3d_getOpacity(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getOpacity();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getOpacity();
 }
 
-const float EngineInterface::text3d_getMinTextureAlpha(const string & id) const
+const float EngineInterface::text3d_getMinTextureAlpha(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getMinTextureAlpha();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getMinTextureAlpha();
 }
 
-const bool EngineInterface::text3d_isExisting(const string & id) const
+const bool EngineInterface::text3d_isExisting(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->isEntityExisting(id);
+	return _core->getText3dEntityManager()->isEntityExisting(text3dId);
 }
 
-const bool EngineInterface::text3d_isVisible(const string & id) const
+const bool EngineInterface::text3d_isVisible(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isVisible();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->isVisible();
 }
 
-const fvec3 & EngineInterface::text3d_getPosition(const string & id) const
+const fvec3 & EngineInterface::text3d_getPosition(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getPosition();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getPosition();
 }
 
-const fvec3 & EngineInterface::text3d_getRotation(const string & id) const
+const fvec3 & EngineInterface::text3d_getRotation(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getRotation();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getRotation();
 }
 
-const fvec2 & EngineInterface::text3d_getSize(const string & id) const
+const fvec2 & EngineInterface::text3d_getSize(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getSize();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getSize();
 }
 
-const fvec3 & EngineInterface::text3d_getColor(const string & id) const
+const fvec3 & EngineInterface::text3d_getColor(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getColor();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getColor();
 }
 
-const fvec3 & EngineInterface::text3d_getWireframeColor(const string & id) const
+const fvec3 & EngineInterface::text3d_getWireframeColor(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getWireframeColor();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getWireframeColor();
 }
 
-const fvec3 & EngineInterface::text3d_getMinClipPosition(const string & id) const
+const fvec3 & EngineInterface::text3d_getMinClipPosition(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getMinClipPosition();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getMinClipPosition();
 }
 
-const fvec3 & EngineInterface::text3d_getMaxClipPosition(const string & id) const
+const fvec3 & EngineInterface::text3d_getMaxClipPosition(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getMaxClipPosition();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getMaxClipPosition();
 }
 
 const vector<string> EngineInterface::text3d_getIds() const
@@ -237,7 +237,7 @@ const vector<string> EngineInterface::text3d_getIds() const
 	return result;
 }
 
-const vector<string> EngineInterface::text3d_getChildAabbIds(const string & id) const
+const vector<string> EngineInterface::text3d_getChildAabbIds(const string & text3dId) const
 {
 	vector<string> result;
 
@@ -245,7 +245,7 @@ const vector<string> EngineInterface::text3d_getChildAabbIds(const string & id) 
 	{
 		if(entity->hasParent())
 		{
-			if(id == entity->getParentId())
+			if(text3dId == entity->getParentId())
 			{
 				if(entity->getParentType() == AabbParentType::TEXT3D)
 				{
@@ -258,62 +258,62 @@ const vector<string> EngineInterface::text3d_getChildAabbIds(const string & id) 
 	return result;
 }
 
-const string & EngineInterface::text3d_getFontMapPath(const string & id) const
+const string & EngineInterface::text3d_getFontMapPath(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getFontMapPath();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getFontMapPath();
 }
 
-const string & EngineInterface::text3d_getContent(const string & id) const
+const string & EngineInterface::text3d_getContent(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getContent();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getContent();
 }
 
-const bool EngineInterface::text3d_isFacingCameraHorizontally(const string & id) const
+const bool EngineInterface::text3d_isFacingCameraHorizontally(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isFacingCameraHorizontally();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->isFacingCameraHorizontally();
 }
 
-const bool EngineInterface::text3d_isFacingCameraVertically(const string & id) const
+const bool EngineInterface::text3d_isFacingCameraVertically(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isFacingCameraVertically();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->isFacingCameraVertically();
 }
 
-const bool EngineInterface::text3d_isShadowed(const string & id) const
+const bool EngineInterface::text3d_isShadowed(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isShadowed();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->isShadowed();
 }
 
-const bool EngineInterface::text3d_isReflected(const string & id) const
+const bool EngineInterface::text3d_isReflected(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isReflected();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->isReflected();
 }
 
-const bool EngineInterface::text3d_isBright(const string & id) const
+const bool EngineInterface::text3d_isBright(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isBright();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->isBright();
 }
 
-const bool EngineInterface::text3d_isFrozen(const string & id) const
+const bool EngineInterface::text3d_isFrozen(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isFrozen();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->isFrozen();
 }
 
-const bool EngineInterface::text3d_isHorizontallyFlipped(const string & id) const
+const bool EngineInterface::text3d_isHorizontallyFlipped(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isHorizontallyFlipped();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->isHorizontallyFlipped();
 }
 
-const bool EngineInterface::text3d_isVerticallyFlipped(const string & id) const
+const bool EngineInterface::text3d_isVerticallyFlipped(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isVerticallyFlipped();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->isVerticallyFlipped();
 }
 
-const DirectionOrderType EngineInterface::text3d_getRotationOrder(const string & id) const
+const DirectionOrderType EngineInterface::text3d_getRotationOrder(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->getRotationOrder();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->getRotationOrder();
 }
 
-const bool EngineInterface::text3d_isWireframed(const string & id) const
+const bool EngineInterface::text3d_isWireframed(const string & text3dId) const
 {
-	return _core->getText3dEntityManager()->getEntity(id)->isWireframed();
+	return _core->getText3dEntityManager()->getEntity(text3dId)->isWireframed();
 }

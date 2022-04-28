@@ -1,40 +1,40 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::quad2d_create(const string & id, bool isCentered)
+void EngineInterface::quad2d_create(const string & quad2dId, bool isCentered)
 {
-	_core->getQuad2dEntityManager()->createEntity(id, isCentered);
+	_core->getQuad2dEntityManager()->createEntity(quad2dId, isCentered);
 }
 
-void EngineInterface::quad2d_delete(const string & id)
+void EngineInterface::quad2d_delete(const string & quad2dId)
 {
 	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
 	{
-		if(id == quad2dId)
+		if(quad2dId == quad2dId)
 		{
 			quad2d_stopAnimation(quad2dId, animation2dId);
 		}
 	}
 
-	if(id == _core->getRenderStorage()->getCursorEntityId())
+	if(quad2dId == _core->getRenderStorage()->getCursorEntityId())
 	{
 		_core->getRenderStorage()->setCursorEntityId("");
 	}
 
-	_core->getQuad2dEntityManager()->deleteEntity(id);
+	_core->getQuad2dEntityManager()->deleteEntity(quad2dId);
 }
 
-void EngineInterface::quad2d_setVisible(const string & id, bool value)
+void EngineInterface::quad2d_setVisible(const string & quad2dId, bool value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setVisible(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setVisible(value);
 }
 
-void EngineInterface::quad2d_setDiffuseMap(const string & id, const string & value)
+void EngineInterface::quad2d_setDiffuseMap(const string & quad2dId, const string & value)
 {
 	if(value.empty())
 	{
-		_core->getQuad2dEntityManager()->getEntity(id)->setDiffuseMap(nullptr);
-		_core->getQuad2dEntityManager()->getEntity(id)->setDiffuseMapPath("");
+		_core->getQuad2dEntityManager()->getEntity(quad2dId)->setDiffuseMap(nullptr);
+		_core->getQuad2dEntityManager()->getEntity(quad2dId)->setDiffuseMapPath("");
 	}
 	else
 	{
@@ -52,94 +52,94 @@ void EngineInterface::quad2d_setDiffuseMap(const string & id, const string & val
 			}
 		}
 
-		_core->getQuad2dEntityManager()->getEntity(id)->setDiffuseMap(texture);
-		_core->getQuad2dEntityManager()->getEntity(id)->setDiffuseMapPath(value);
+		_core->getQuad2dEntityManager()->getEntity(quad2dId)->setDiffuseMap(texture);
+		_core->getQuad2dEntityManager()->getEntity(quad2dId)->setDiffuseMapPath(value);
 	}
 }
 
-void EngineInterface::quad2d_setPosition(const string & id, const fvec2 & position)
+void EngineInterface::quad2d_setPosition(const string & quad2dId, const fvec2 & position)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setPosition(position);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setPosition(position);
 }
 
-void EngineInterface::quad2d_setRotation(const string & id, float rotation)
+void EngineInterface::quad2d_setRotation(const string & quad2dId, float rotation)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setRotation(rotation);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setRotation(rotation);
 }
 
-void EngineInterface::quad2d_setSize(const string & id, const fvec2 & size)
+void EngineInterface::quad2d_setSize(const string & quad2dId, const fvec2 & size)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setSize(size);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setSize(size);
 }
 
-void EngineInterface::quad2d_move(const string & id, const fvec2 & change)
+void EngineInterface::quad2d_move(const string & quad2dId, const fvec2 & change)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->move(change);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->move(change);
 }
 
-void EngineInterface::quad2d_rotate(const string & id, float change)
+void EngineInterface::quad2d_rotate(const string & quad2dId, float change)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->rotate(change);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->rotate(change);
 }
 
-void EngineInterface::quad2d_scale(const string & id, const fvec2 & change)
+void EngineInterface::quad2d_scale(const string & quad2dId, const fvec2 & change)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->scale(change);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->scale(change);
 }
 
-void EngineInterface::quad2d_moveTo(const string & id, const fvec2 & target, float speed)
+void EngineInterface::quad2d_moveTo(const string & quad2dId, const fvec2 & target, float speed)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->moveTo(target, speed);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->moveTo(target, speed);
 }
 
-void EngineInterface::quad2d_rotateTo(const string & id, float target, float speed)
+void EngineInterface::quad2d_rotateTo(const string & quad2dId, float target, float speed)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->rotateTo(target, speed);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->rotateTo(target, speed);
 }
 
-void EngineInterface::quad2d_scaleTo(const string & id, const fvec2 & target, float speed)
+void EngineInterface::quad2d_scaleTo(const string & quad2dId, const fvec2 & target, float speed)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->scaleTo(target, speed);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->scaleTo(target, speed);
 }
 
-void EngineInterface::quad2d_setColor(const string & id, const fvec3 & value)
+void EngineInterface::quad2d_setColor(const string & quad2dId, const fvec3 & value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setColor(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setColor(value);
 }
 
-void EngineInterface::quad2d_setOpacity(const string & id, float value)
+void EngineInterface::quad2d_setOpacity(const string & quad2dId, float value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setOpacity(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setOpacity(value);
 }
 
-void EngineInterface::quad2d_setMinClipPosition(const string & id, const fvec2 & value)
+void EngineInterface::quad2d_setMinClipPosition(const string & quad2dId, const fvec2 & value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setMinClipPosition(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setMinClipPosition(value);
 }
 
-void EngineInterface::quad2d_setMaxClipPosition(const string & id, const fvec2 & value)
+void EngineInterface::quad2d_setMaxClipPosition(const string & quad2dId, const fvec2 & value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setMaxClipPosition(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setMaxClipPosition(value);
 }
 
-void EngineInterface::quad2d_setWireframed(const string & id, bool value)
+void EngineInterface::quad2d_setWireframed(const string & quad2dId, bool value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setWireframed(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setWireframed(value);
 }
 
-void EngineInterface::quad2d_setWireframeColor(const string & id, const fvec3 & value)
+void EngineInterface::quad2d_setWireframeColor(const string & quad2dId, const fvec3 & value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setWireframeColor(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setWireframeColor(value);
 }
 
-void EngineInterface::quad2d_setUvMultiplier(const string & id, const fvec2 & value)
+void EngineInterface::quad2d_setUvMultiplier(const string & quad2dId, const fvec2 & value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setUvMultiplier(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setUvMultiplier(value);
 }
 
-void EngineInterface::quad2d_setUvOffset(const string & id, const fvec2 & value)
+void EngineInterface::quad2d_setUvOffset(const string & quad2dId, const fvec2 & value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setUvOffset(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setUvOffset(value);
 }
 
 void EngineInterface::quad2d_startAnimation(const string & quad2dId, const string & animation2dId, int playCount)
@@ -187,44 +187,44 @@ void EngineInterface::quad2d_setAnimationIntervalDivider(const string & animatio
 	_core->getAnimation2dPlayer()->setQuad2dAnimationIntervalDivider(animation2dId, quad2dId, value);
 }
 
-void EngineInterface::quad2d_setTextureRepeat(const string & id, int value)
+void EngineInterface::quad2d_setTextureRepeat(const string & quad2dId, int value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setTextureRepeat(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setTextureRepeat(value);
 }
 
-void EngineInterface::quad2d_setHorizontallyFlipped(const string & id, bool value)
+void EngineInterface::quad2d_setHorizontallyFlipped(const string & quad2dId, bool value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setHorizontallyFlipped(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setHorizontallyFlipped(value);
 }
 
-void EngineInterface::quad2d_setVerticallyFlipped(const string & id, bool value)
+void EngineInterface::quad2d_setVerticallyFlipped(const string & quad2dId, bool value)
 {
-	_core->getQuad2dEntityManager()->getEntity(id)->setVerticallyFlipped(value);
+	_core->getQuad2dEntityManager()->getEntity(quad2dId)->setVerticallyFlipped(value);
 }
 
-const bool EngineInterface::quad2d_isExisting(const string & id) const
+const bool EngineInterface::quad2d_isExisting(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->isEntityExisting(id);
+	return _core->getQuad2dEntityManager()->isEntityExisting(quad2dId);
 }
 
-const fvec2 & EngineInterface::quad2d_getPosition(const string & id) const
+const fvec2 & EngineInterface::quad2d_getPosition(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getPosition();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getPosition();
 }
 
-const float EngineInterface::quad2d_getRotation(const string & id) const
+const float EngineInterface::quad2d_getRotation(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getRotation();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getRotation();
 }
 
-const float EngineInterface::quad2d_getOpacity(const string & id) const
+const float EngineInterface::quad2d_getOpacity(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getOpacity();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getOpacity();
 }
 
-const int EngineInterface::quad2d_getTextureRepeat(const string & id) const
+const int EngineInterface::quad2d_getTextureRepeat(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getTextureRepeat();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getTextureRepeat();
 }
 
 const int EngineInterface::quad2d_getAnimationPlayCount(const string & quad2dId, const string & animation2dId) const
@@ -264,13 +264,13 @@ const vector<string> EngineInterface::quad2d_getIds() const
 	return result;
 }
 
-const vector<string> EngineInterface::quad2d_getAnimationIds(const string & id) const
+const vector<string> EngineInterface::quad2d_getAnimationIds(const string & quad2dId) const
 {
 	vector<string> result;
 
 	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
 	{
-		if(id == quad2dId)
+		if(quad2dId == quad2dId)
 		{
 			result.push_back(animation2dId);
 		}
@@ -279,64 +279,64 @@ const vector<string> EngineInterface::quad2d_getAnimationIds(const string & id) 
 	return result;
 }
 
-const string & EngineInterface::quad2d_getDiffuseMapPath(const string & id) const
+const string & EngineInterface::quad2d_getDiffuseMapPath(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getDiffuseMapPath();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getDiffuseMapPath();
 }
 
-const fvec3 & EngineInterface::quad2d_getWireframeColor(const string & id) const
+const fvec3 & EngineInterface::quad2d_getWireframeColor(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getWireframeColor();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getWireframeColor();
 }
 
-const fvec2 & EngineInterface::quad2d_getSize(const string & id) const
+const fvec2 & EngineInterface::quad2d_getSize(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getSize();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getSize();
 }
 
-const fvec2 & EngineInterface::quad2d_getMinClipPosition(const string & id) const
+const fvec2 & EngineInterface::quad2d_getMinClipPosition(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getMinClipPosition();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getMinClipPosition();
 }
 
-const fvec2 & EngineInterface::quad2d_getMaxClipPosition(const string & id) const
+const fvec2 & EngineInterface::quad2d_getMaxClipPosition(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getMaxClipPosition();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getMaxClipPosition();
 }
 
-const fvec2 & EngineInterface::quad2d_getUvMultiplier(const string & id) const
+const fvec2 & EngineInterface::quad2d_getUvMultiplier(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getUvMultiplier();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getUvMultiplier();
 }
 
-const fvec2 & EngineInterface::quad2d_getUvOffset(const string & id) const
+const fvec2 & EngineInterface::quad2d_getUvOffset(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getUvOffset();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getUvOffset();
 }
 
-const fvec3 & EngineInterface::quad2d_getColor(const string & id) const
+const fvec3 & EngineInterface::quad2d_getColor(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->getColor();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->getColor();
 }
 
-const bool EngineInterface::quad2d_isVisible(const string & id) const
+const bool EngineInterface::quad2d_isVisible(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->isVisible();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->isVisible();
 }
 
-const bool EngineInterface::quad2d_isCentered(const string & id) const
+const bool EngineInterface::quad2d_isCentered(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->isCentered();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->isCentered();
 }
 
-const bool EngineInterface::quad2d_hasDiffuseMap(const string & id) const
+const bool EngineInterface::quad2d_hasDiffuseMap(const string & quad2dId) const
 {
-	return (_core->getQuad2dEntityManager()->getEntity(id)->getDiffuseTextureBuffer() != nullptr);
+	return (_core->getQuad2dEntityManager()->getEntity(quad2dId)->getDiffuseTextureBuffer() != nullptr);
 }
 
-const bool EngineInterface::quad2d_isWireframed(const string & id) const
+const bool EngineInterface::quad2d_isWireframed(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->isWireframed();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->isWireframed();
 }
 
 const bool EngineInterface::quad2d_isAnimationStarted(const string & quad2dId, const string & animation2dId) const
@@ -354,12 +354,12 @@ const bool EngineInterface::quad2d_isAnimationAutopaused(const string & quad2dId
 	return _core->getAnimation2dPlayer()->isQuad2dAnimationAutopaused(animation2dId, quad2dId);
 }
 
-const bool EngineInterface::quad2d_isHorizontallyFlipped(const string & id) const
+const bool EngineInterface::quad2d_isHorizontallyFlipped(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->isHorizontallyFlipped();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->isHorizontallyFlipped();
 }
 
-const bool EngineInterface::quad2d_isVerticallyFlipped(const string & id) const
+const bool EngineInterface::quad2d_isVerticallyFlipped(const string & quad2dId) const
 {
-	return _core->getQuad2dEntityManager()->getEntity(id)->isVerticallyFlipped();
+	return _core->getQuad2dEntityManager()->getEntity(quad2dId)->isVerticallyFlipped();
 }

@@ -1,54 +1,54 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::sound2d_create(const string & id, const string & audioPath)
+void EngineInterface::sound2d_create(const string & sound2dId, const string & audioPath)
 {
-	_core->getSound2dManager()->createSound(id, audioPath);
+	_core->getSound2dManager()->createSound(sound2dId, audioPath);
 }
 
-void EngineInterface::sound2d_delete(const string & id)
+void EngineInterface::sound2d_delete(const string & sound2dId)
 {
-	for(int index = 0; index < _core->getSound2dPlayer()->getStartedSoundCount(id); index++)
+	for(int index = 0; index < _core->getSound2dPlayer()->getStartedSoundCount(sound2dId); index++)
 	{
-		sound2d_stop(id, index);
+		sound2d_stop(sound2dId, index);
 	}
 
-	_core->getSound2dManager()->deleteSound(id);
+	_core->getSound2dManager()->deleteSound(sound2dId);
 }
 
-void EngineInterface::sound2d_start(const string & id, int playCount)
+void EngineInterface::sound2d_start(const string & sound2dId, int playCount)
 {
-	_core->getSound2dPlayer()->startSound(id, playCount);
+	_core->getSound2dPlayer()->startSound(sound2dId, playCount);
 }
 
-void EngineInterface::sound2d_pause(const string & id, int index)
+void EngineInterface::sound2d_pause(const string & sound2dId, int index)
 {
-	_core->getSound2dPlayer()->pauseSound(id, index);
+	_core->getSound2dPlayer()->pauseSound(sound2dId, index);
 }
 
-void EngineInterface::sound2d_resume(const string & id, int index)
+void EngineInterface::sound2d_resume(const string & sound2dId, int index)
 {
-	_core->getSound2dPlayer()->resumeSound(id, index);
+	_core->getSound2dPlayer()->resumeSound(sound2dId, index);
 }
 
-void EngineInterface::sound2d_stop(const string & id, int index)
+void EngineInterface::sound2d_stop(const string & sound2dId, int index)
 {
-	_core->getSound2dPlayer()->stopSound(id, index);
+	_core->getSound2dPlayer()->stopSound(sound2dId, index);
 }
 
-void EngineInterface::sound2d_setVolume(const string & id, int index, float value)
+void EngineInterface::sound2d_setVolume(const string & sound2dId, int index, float value)
 {
-	_core->getSound2dPlayer()->setSoundVolume(id, index, value);
+	_core->getSound2dPlayer()->setSoundVolume(sound2dId, index, value);
 }
 
-void EngineInterface::sound2d_setLeftIntensity(const string & id, int index, float value)
+void EngineInterface::sound2d_setLeftIntensity(const string & sound2dId, int index, float value)
 {
-	_core->getSound2dPlayer()->setSoundLeftIntensity(id, index, value);
+	_core->getSound2dPlayer()->setSoundLeftIntensity(sound2dId, index, value);
 }
 
-void EngineInterface::sound2d_setRightIntensity(const string & id, int index, float value)
+void EngineInterface::sound2d_setRightIntensity(const string & sound2dId, int index, float value)
 {
-	_core->getSound2dPlayer()->setSoundRightIntensity(id, index, value);
+	_core->getSound2dPlayer()->setSoundRightIntensity(sound2dId, index, value);
 }
 
 const vector<string> EngineInterface::sound2d_getIds() const
@@ -63,24 +63,24 @@ const vector<string> EngineInterface::sound2d_getIds() const
 	return result;
 }
 
-const string & EngineInterface::sound2d_getAudioPath(const string & id) const
+const string & EngineInterface::sound2d_getAudioPath(const string & sound2dId) const
 {
-	return _core->getSound2dManager()->getSound(id)->getAudioPath();
+	return _core->getSound2dManager()->getSound(sound2dId)->getAudioPath();
 }
 
-const bool EngineInterface::sound2d_isExisting(const string & id) const
+const bool EngineInterface::sound2d_isExisting(const string & sound2dId) const
 {
-	return _core->getSound2dManager()->isSoundExisting(id);
+	return _core->getSound2dManager()->isSoundExisting(sound2dId);
 }
 
-const bool EngineInterface::sound2d_isStarted(const string & id, int index) const
+const bool EngineInterface::sound2d_isStarted(const string & sound2dId, int index) const
 {
-	return _core->getSound2dPlayer()->isSoundStarted(id, index);
+	return _core->getSound2dPlayer()->isSoundStarted(sound2dId, index);
 }
 
-const bool EngineInterface::sound2d_isPaused(const string & id, int index) const
+const bool EngineInterface::sound2d_isPaused(const string & sound2dId, int index) const
 {
-	return _core->getSound2dPlayer()->isSoundPaused(id, index);
+	return _core->getSound2dPlayer()->isSoundPaused(sound2dId, index);
 }
 
 const bool EngineInterface::sound2d_isDeviceConnected() const
@@ -88,27 +88,27 @@ const bool EngineInterface::sound2d_isDeviceConnected() const
 	return _core->getSound2dPlayer()->isDeviceConnected();
 }
 
-const float EngineInterface::sound2d_getVolume(const string & id, int index) const
+const float EngineInterface::sound2d_getVolume(const string & sound2dId, int index) const
 {
-	return _core->getSound2dPlayer()->getSoundVolume(id, index);
+	return _core->getSound2dPlayer()->getSoundVolume(sound2dId, index);
 }
 
-const float EngineInterface::sound2d_getLeftIntensity(const string & id, int index) const
+const float EngineInterface::sound2d_getLeftIntensity(const string & sound2dId, int index) const
 {
-	return _core->getSound2dPlayer()->getSoundLeftIntensity(id, index);
+	return _core->getSound2dPlayer()->getSoundLeftIntensity(sound2dId, index);
 }
 
-const float EngineInterface::sound2d_getRightIntensity(const string & id, int index) const
+const float EngineInterface::sound2d_getRightIntensity(const string & sound2dId, int index) const
 {
-	return _core->getSound2dPlayer()->getSoundRightIntensity(id, index);
+	return _core->getSound2dPlayer()->getSoundRightIntensity(sound2dId, index);
 }
 
-const int EngineInterface::sound2d_getStartedCount(const string & id) const
+const int EngineInterface::sound2d_getStartedCount(const string & sound2dId) const
 {
-	return _core->getSound2dPlayer()->getStartedSoundCount(id);
+	return _core->getSound2dPlayer()->getStartedSoundCount(sound2dId);
 }
 
-const int EngineInterface::sound2d_getTime(const string & id, int index) const
+const int EngineInterface::sound2d_getTime(const string & sound2dId, int index) const
 {
-	return _core->getSound2dPlayer()->getSoundTime(id, index);
+	return _core->getSound2dPlayer()->getSoundTime(sound2dId, index);
 }

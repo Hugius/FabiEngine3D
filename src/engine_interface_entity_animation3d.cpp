@@ -1,22 +1,22 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::animation3d_create(const string & id)
+void EngineInterface::animation3d_create(const string & animation3dId)
 {
-	_core->getAnimation3dManager()->createAnimation(id);
+	_core->getAnimation3dManager()->createAnimation(animation3dId);
 }
 
-void EngineInterface::animation3d_delete(const string & id)
+void EngineInterface::animation3d_delete(const string & animation3dId)
 {
 	for(const auto & [animation3dId, modelId] : _core->getAnimation3dPlayer()->getStartedModelAnimationIds())
 	{
-		if(id == animation3dId)
+		if(animation3dId == animation3dId)
 		{
 			model_stopAnimation(modelId, animation3dId);
 		}
 	}
 
-	_core->getAnimation3dManager()->deleteAnimation(id);
+	_core->getAnimation3dManager()->deleteAnimation(animation3dId);
 }
 
 void EngineInterface::animation3d_createFrame(const string & animation3dId, int index)
@@ -78,9 +78,9 @@ const vector<string> EngineInterface::animation3d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [entityId, entity] : _core->getAnimation3dManager()->getAnimations())
+	for(const auto & [animation3dId, animation] : _core->getAnimation3dManager()->getAnimations())
 	{
-		result.push_back(entity->getId());
+		result.push_back(animation->getId());
 	}
 
 	return result;
@@ -121,7 +121,7 @@ const int EngineInterface::animation3d_getFrameCount(const string & animation3dI
 	return _core->getAnimation3dManager()->getAnimation(animation3dId)->getFrameCount();
 }
 
-const bool EngineInterface::animation3d_isExisting(const string & id) const
+const bool EngineInterface::animation3d_isExisting(const string & animation3dId) const
 {
-	return _core->getAnimation3dManager()->isAnimationExisting(id);
+	return _core->getAnimation3dManager()->isAnimationExisting(animation3dId);
 }

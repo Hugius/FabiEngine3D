@@ -1,16 +1,16 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::animation2d_create(const string & id)
+void EngineInterface::animation2d_create(const string & animation2dId)
 {
-	_core->getAnimation2dManager()->createAnimation(id);
+	_core->getAnimation2dManager()->createAnimation(animation2dId);
 }
 
-void EngineInterface::animation2d_delete(const string & id)
+void EngineInterface::animation2d_delete(const string & animation2dId)
 {
 	for(const auto & [animation2dId, quad3dId] : _core->getAnimation2dPlayer()->getStartedQuad3dAnimationIds())
 	{
-		if(id == animation2dId)
+		if(animation2dId == animation2dId)
 		{
 			quad3d_stopAnimation(quad3dId, animation2dId);
 		}
@@ -18,58 +18,58 @@ void EngineInterface::animation2d_delete(const string & id)
 
 	for(const auto & [animation2dId, quad2dId] : _core->getAnimation2dPlayer()->getStartedQuad2dAnimationIds())
 	{
-		if(id == animation2dId)
+		if(animation2dId == animation2dId)
 		{
 			quad2d_stopAnimation(quad2dId, animation2dId);
 		}
 	}
 
-	_core->getAnimation2dManager()->deleteAnimation(id);
+	_core->getAnimation2dManager()->deleteAnimation(animation2dId);
 }
 
-void EngineInterface::animation2d_setRowCount(const string & id, int value)
+void EngineInterface::animation2d_setRowCount(const string & animation2dId, int value)
 {
-	_core->getAnimation2dManager()->getAnimation(id)->setRowCount(value);
+	_core->getAnimation2dManager()->getAnimation(animation2dId)->setRowCount(value);
 }
 
-void EngineInterface::animation2d_setColumnCount(const string & id, int value)
+void EngineInterface::animation2d_setColumnCount(const string & animation2dId, int value)
 {
-	_core->getAnimation2dManager()->getAnimation(id)->setColumnCount(value);
+	_core->getAnimation2dManager()->getAnimation(animation2dId)->setColumnCount(value);
 }
 
-void EngineInterface::animation2d_setInterval(const string & id, int value)
+void EngineInterface::animation2d_setInterval(const string & animation2dId, int value)
 {
-	_core->getAnimation2dManager()->getAnimation(id)->setInterval(value);
+	_core->getAnimation2dManager()->getAnimation(animation2dId)->setInterval(value);
 }
 
 const vector<string> EngineInterface::animation2d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [entityId, entity] : _core->getAnimation2dManager()->getAnimations())
+	for(const auto & [animation2dId, animation] : _core->getAnimation2dManager()->getAnimations())
 	{
-		result.push_back(entity->getId());
+		result.push_back(animation->getId());
 	}
 
 	return result;
 }
 
-const int EngineInterface::animation2d_getInterval(const string & id) const
+const int EngineInterface::animation2d_getInterval(const string & animation2dId) const
 {
-	return _core->getAnimation2dManager()->getAnimation(id)->getInterval();
+	return _core->getAnimation2dManager()->getAnimation(animation2dId)->getInterval();
 }
 
-const bool EngineInterface::animation2d_isExisting(const string & id) const
+const bool EngineInterface::animation2d_isExisting(const string & animation2dId) const
 {
-	return _core->getAnimation2dManager()->isAnimationExisting(id);
+	return _core->getAnimation2dManager()->isAnimationExisting(animation2dId);
 }
 
-const int EngineInterface::animation2d_getRowCount(const string & id) const
+const int EngineInterface::animation2d_getRowCount(const string & animation2dId) const
 {
-	return _core->getAnimation2dManager()->getAnimation(id)->getRowCount();
+	return _core->getAnimation2dManager()->getAnimation(animation2dId)->getRowCount();
 }
 
-const int EngineInterface::animation2d_getColumnCount(const string & id) const
+const int EngineInterface::animation2d_getColumnCount(const string & animation2dId) const
 {
-	return _core->getAnimation2dManager()->getAnimation(id)->getColumnCount();
+	return _core->getAnimation2dManager()->getAnimation(animation2dId)->getColumnCount();
 }

@@ -1,84 +1,84 @@
 #include "engine_interface.hpp"
 #include "engine_core.hpp"
 
-void EngineInterface::water_create(const string & id)
+void EngineInterface::water_create(const string & waterId)
 {
-	_core->getWaterEntityManager()->createEntity(id);
+	_core->getWaterEntityManager()->createEntity(waterId);
 }
 
-void EngineInterface::water_delete(const string & id)
+void EngineInterface::water_delete(const string & waterId)
 {
-	_core->getWaterEntityManager()->deleteEntity(id);
+	_core->getWaterEntityManager()->deleteEntity(waterId);
 }
 
-void EngineInterface::water_setVisible(const string & id, bool value)
+void EngineInterface::water_setVisible(const string & waterId, bool value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setVisible(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setVisible(value);
 }
 
-void EngineInterface::water_select(const string & id)
+void EngineInterface::water_select(const string & waterId)
 {
-	_core->getWaterEntityManager()->selectEntity(id);
+	_core->getWaterEntityManager()->selectEntity(waterId);
 }
 
-void EngineInterface::water_setHeight(const string & id, float value)
+void EngineInterface::water_setHeight(const string & waterId, float value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setHeight(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setHeight(value);
 }
 
-void EngineInterface::water_setSize(const string & id, float value)
+void EngineInterface::water_setSize(const string & waterId, float value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setSize(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setSize(value);
 
-	_core->getWaterEntityManager()->loadVertexBuffer(id);
+	_core->getWaterEntityManager()->loadVertexBuffer(waterId);
 }
 
-void EngineInterface::water_setSpecular(const string & id, bool value)
+void EngineInterface::water_setSpecular(const string & waterId, bool value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setSpecular(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setSpecular(value);
 }
 
-void EngineInterface::water_setTextureRepeat(const string & id, int value)
+void EngineInterface::water_setTextureRepeat(const string & waterId, int value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setTextureRepeat(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setTextureRepeat(value);
 }
 
-void EngineInterface::water_setMinClipPosition(const string & id, const fvec3 & value)
+void EngineInterface::water_setMinClipPosition(const string & waterId, const fvec3 & value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setMinClipPosition(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setMinClipPosition(value);
 }
 
-void EngineInterface::water_setMaxClipPosition(const string & id, const fvec3 & value)
+void EngineInterface::water_setMaxClipPosition(const string & waterId, const fvec3 & value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setMaxClipPosition(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setMaxClipPosition(value);
 }
 
-void EngineInterface::water_setReflective(const string & id, bool value)
+void EngineInterface::water_setReflective(const string & waterId, bool value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setReflective(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setReflective(value);
 }
 
-void EngineInterface::water_setRefractive(const string & id, bool value)
+void EngineInterface::water_setRefractive(const string & waterId, bool value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setRefractive(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setRefractive(value);
 }
 
-void EngineInterface::water_setWireframed(const string & id, bool value)
+void EngineInterface::water_setWireframed(const string & waterId, bool value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setWireframed(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setWireframed(value);
 }
 
-void EngineInterface::water_setWireframeColor(const string & id, const fvec3 & value)
+void EngineInterface::water_setWireframeColor(const string & waterId, const fvec3 & value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setWireframeColor(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setWireframeColor(value);
 }
 
-void EngineInterface::water_setDudvMap(const string & id, const string & value)
+void EngineInterface::water_setDudvMap(const string & waterId, const string & value)
 {
 	if(value.empty())
 	{
-		_core->getWaterEntityManager()->getEntity(id)->setDudvMap(nullptr);
-		_core->getWaterEntityManager()->getEntity(id)->setDudvMapPath("");
+		_core->getWaterEntityManager()->getEntity(waterId)->setDudvMap(nullptr);
+		_core->getWaterEntityManager()->getEntity(waterId)->setDudvMapPath("");
 	}
 	else
 	{
@@ -98,17 +98,17 @@ void EngineInterface::water_setDudvMap(const string & id, const string & value)
 			}
 		}
 
-		_core->getWaterEntityManager()->getEntity(id)->setDudvMap(texture);
-		_core->getWaterEntityManager()->getEntity(id)->setDudvMapPath(value);
+		_core->getWaterEntityManager()->getEntity(waterId)->setDudvMap(texture);
+		_core->getWaterEntityManager()->getEntity(waterId)->setDudvMapPath(value);
 	}
 }
 
-void EngineInterface::water_setNormalMap(const string & id, const string & value)
+void EngineInterface::water_setNormalMap(const string & waterId, const string & value)
 {
 	if(value.empty())
 	{
-		_core->getWaterEntityManager()->getEntity(id)->setNormalMap(nullptr);
-		_core->getWaterEntityManager()->getEntity(id)->setNormalMapPath("");
+		_core->getWaterEntityManager()->getEntity(waterId)->setNormalMap(nullptr);
+		_core->getWaterEntityManager()->getEntity(waterId)->setNormalMapPath("");
 	}
 	else
 	{
@@ -128,17 +128,17 @@ void EngineInterface::water_setNormalMap(const string & id, const string & value
 			}
 		}
 
-		_core->getWaterEntityManager()->getEntity(id)->setNormalMap(texture);
-		_core->getWaterEntityManager()->getEntity(id)->setNormalMapPath(value);
+		_core->getWaterEntityManager()->getEntity(waterId)->setNormalMap(texture);
+		_core->getWaterEntityManager()->getEntity(waterId)->setNormalMapPath(value);
 	}
 }
 
-void EngineInterface::water_setDisplacementMap(const string & id, const string & value)
+void EngineInterface::water_setDisplacementMap(const string & waterId, const string & value)
 {
 	if(value.empty())
 	{
-		_core->getWaterEntityManager()->getEntity(id)->setDisplacementMap(nullptr);
-		_core->getWaterEntityManager()->getEntity(id)->setDisplacementMapPath("");
+		_core->getWaterEntityManager()->getEntity(waterId)->setDisplacementMap(nullptr);
+		_core->getWaterEntityManager()->getEntity(waterId)->setDisplacementMapPath("");
 	}
 	else
 	{
@@ -158,94 +158,94 @@ void EngineInterface::water_setDisplacementMap(const string & id, const string &
 			}
 		}
 
-		_core->getWaterEntityManager()->getEntity(id)->setDisplacementMap(texture);
-		_core->getWaterEntityManager()->getEntity(id)->setDisplacementMapPath(value);
+		_core->getWaterEntityManager()->getEntity(waterId)->setDisplacementMap(texture);
+		_core->getWaterEntityManager()->getEntity(waterId)->setDisplacementMapPath(value);
 	}
 }
 
-void EngineInterface::water_setWaveHeight(const string & id, float value)
+void EngineInterface::water_setWaveHeight(const string & waterId, float value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setWaveHeight(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setWaveHeight(value);
 }
 
-void EngineInterface::water_setSpecularShininess(const string & id, float value)
+void EngineInterface::water_setSpecularShininess(const string & waterId, float value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setSpecularShininess(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setSpecularShininess(value);
 }
 
-void EngineInterface::water_setSpecularIntensity(const string & id, float value)
+void EngineInterface::water_setSpecularIntensity(const string & waterId, float value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setSpecularIntensity(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setSpecularIntensity(value);
 }
 
-void EngineInterface::water_setMaxDepth(const string & id, float value)
+void EngineInterface::water_setMaxDepth(const string & waterId, float value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setMaxDepth(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setMaxDepth(value);
 }
 
-void EngineInterface::water_setRippleSpeed(const string & id, const fvec2 & value)
+void EngineInterface::water_setRippleSpeed(const string & waterId, const fvec2 & value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setRippleSpeed(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setRippleSpeed(value);
 }
 
-void EngineInterface::water_setWaveSpeed(const string & id, const fvec2 & value)
+void EngineInterface::water_setWaveSpeed(const string & waterId, const fvec2 & value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setWaveSpeed(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setWaveSpeed(value);
 }
 
-void EngineInterface::water_setColor(const string & id, const fvec3 & value)
+void EngineInterface::water_setColor(const string & waterId, const fvec3 & value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setColor(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setColor(value);
 }
 
-void EngineInterface::water_setEdged(const string & id, bool value)
+void EngineInterface::water_setEdged(const string & waterId, bool value)
 {
-	_core->getWaterEntityManager()->getEntity(id)->setEdged(value);
+	_core->getWaterEntityManager()->getEntity(waterId)->setEdged(value);
 }
 
-const bool EngineInterface::water_isExisting(const string & id) const
+const bool EngineInterface::water_isExisting(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->isEntityExisting(id);
+	return _core->getWaterEntityManager()->isEntityExisting(waterId);
 }
 
-const bool EngineInterface::water_isVisible(const string & id) const
+const bool EngineInterface::water_isVisible(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->isVisible();
+	return _core->getWaterEntityManager()->getEntity(waterId)->isVisible();
 }
 
-const bool EngineInterface::water_isSpecular(const string & id) const
+const bool EngineInterface::water_isSpecular(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->isSpecular();
+	return _core->getWaterEntityManager()->getEntity(waterId)->isSpecular();
 }
 
-const bool EngineInterface::water_isReflective(const string & id) const
+const bool EngineInterface::water_isReflective(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->isReflective();
+	return _core->getWaterEntityManager()->getEntity(waterId)->isReflective();
 }
 
-const bool EngineInterface::water_isRefractive(const string & id) const
+const bool EngineInterface::water_isRefractive(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->isRefractive();
+	return _core->getWaterEntityManager()->getEntity(waterId)->isRefractive();
 }
 
-const bool EngineInterface::water_isWireframed(const string & id) const
+const bool EngineInterface::water_isWireframed(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->isWireframed();
+	return _core->getWaterEntityManager()->getEntity(waterId)->isWireframed();
 }
 
-const bool EngineInterface::water_hasDudvMap(const string & id) const
+const bool EngineInterface::water_hasDudvMap(const string & waterId) const
 {
-	return (_core->getWaterEntityManager()->getEntity(id)->getDudvTextureBuffer() != nullptr);
+	return (_core->getWaterEntityManager()->getEntity(waterId)->getDudvTextureBuffer() != nullptr);
 }
 
-const bool EngineInterface::water_hasNormalMap(const string & id) const
+const bool EngineInterface::water_hasNormalMap(const string & waterId) const
 {
-	return (_core->getWaterEntityManager()->getEntity(id)->getNormalTextureBuffer() != nullptr);
+	return (_core->getWaterEntityManager()->getEntity(waterId)->getNormalTextureBuffer() != nullptr);
 }
 
-const bool EngineInterface::water_hasDisplacementMap(const string & id) const
+const bool EngineInterface::water_hasDisplacementMap(const string & waterId) const
 {
-	return (_core->getWaterEntityManager()->getEntity(id)->getDisplacementTextureBuffer() != nullptr);
+	return (_core->getWaterEntityManager()->getEntity(waterId)->getDisplacementTextureBuffer() != nullptr);
 }
 
 const string EngineInterface::water_getSelectedId() const
@@ -258,9 +258,9 @@ const string EngineInterface::water_getSelectedId() const
 	return _core->getWaterEntityManager()->getSelectedEntity()->getId();
 }
 
-const fvec3 & EngineInterface::water_getWireframeColor(const string & id) const
+const fvec3 & EngineInterface::water_getWireframeColor(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getWireframeColor();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getWireframeColor();
 }
 
 const vector<string> EngineInterface::water_getIds() const
@@ -275,82 +275,82 @@ const vector<string> EngineInterface::water_getIds() const
 	return result;
 }
 
-const float EngineInterface::water_getSize(const string & id) const
+const float EngineInterface::water_getSize(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getSize();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getSize();
 }
 
-const int EngineInterface::water_getTextureRepeat(const string & id) const
+const int EngineInterface::water_getTextureRepeat(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getTextureRepeat();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getTextureRepeat();
 }
 
-const fvec2 & EngineInterface::water_getRippleSpeed(const string & id) const
+const fvec2 & EngineInterface::water_getRippleSpeed(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getRippleSpeed();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getRippleSpeed();
 }
 
-const fvec2 & EngineInterface::water_getWaveSpeed(const string & id) const
+const fvec2 & EngineInterface::water_getWaveSpeed(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getWaveSpeed();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getWaveSpeed();
 }
 
-const float EngineInterface::water_getWaveHeight(const string & id) const
+const float EngineInterface::water_getWaveHeight(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getWaveHeight();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getWaveHeight();
 }
 
-const float EngineInterface::water_getSpecularShininess(const string & id) const
+const float EngineInterface::water_getSpecularShininess(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getSpecularShininess();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getSpecularShininess();
 }
 
-const float EngineInterface::water_getSpecularIntensity(const string & id) const
+const float EngineInterface::water_getSpecularIntensity(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getSpecularIntensity();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getSpecularIntensity();
 }
 
-const bool EngineInterface::water_isEdged(const string & id) const
+const bool EngineInterface::water_isEdged(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->isEdged();
+	return _core->getWaterEntityManager()->getEntity(waterId)->isEdged();
 }
 
-const string & EngineInterface::water_getDudvMapPath(const string & id) const
+const string & EngineInterface::water_getDudvMapPath(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getDudvMapPath();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getDudvMapPath();
 }
 
-const string & EngineInterface::water_getNormalMapPath(const string & id) const
+const string & EngineInterface::water_getNormalMapPath(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getNormalMapPath();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getNormalMapPath();
 }
 
-const string & EngineInterface::water_getDisplacementMapPath(const string & id) const
+const string & EngineInterface::water_getDisplacementMapPath(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getDisplacementMapPath();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getDisplacementMapPath();
 }
 
-const float EngineInterface::water_getHeight(const string & id) const
+const float EngineInterface::water_getHeight(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getHeight();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getHeight();
 }
 
-const float EngineInterface::water_getMaxDepth(const string & id) const
+const float EngineInterface::water_getMaxDepth(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getMaxDepth();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getMaxDepth();
 }
 
-const fvec3 & EngineInterface::water_getColor(const string & id) const
+const fvec3 & EngineInterface::water_getColor(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getColor();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getColor();
 }
 
-const fvec3 & EngineInterface::water_getMinClipPosition(const string & id) const
+const fvec3 & EngineInterface::water_getMinClipPosition(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getMinClipPosition();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getMinClipPosition();
 }
 
-const fvec3 & EngineInterface::water_getMaxClipPosition(const string & id) const
+const fvec3 & EngineInterface::water_getMaxClipPosition(const string & waterId) const
 {
-	return _core->getWaterEntityManager()->getEntity(id)->getMaxClipPosition();
+	return _core->getWaterEntityManager()->getEntity(waterId)->getMaxClipPosition();
 }

@@ -56,9 +56,9 @@ const float EngineInterface::raycast_getDistanceToTerrain()
 	return _core->getRaycastIntersector()->getDistanceToTerrain();
 }
 
-const float EngineInterface::raycast_getDistanceToAabb(const string & id)
+const float EngineInterface::raycast_getDistanceToAabb(const string & aabbId)
 {
-	return _core->getRaycastIntersector()->getDistanceToAabb(id);
+	return _core->getRaycastIntersector()->getDistanceToAabb(aabbId);
 }
 
 const bool EngineInterface::raycast_isPointOnTerrainValid() const

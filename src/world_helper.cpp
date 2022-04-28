@@ -33,6 +33,7 @@ void WorldHelper::copyTemplateTerrain(const string & newId, const string & templ
 	_fe3d->terrain_setMaxHeight(newId, _fe3d->terrain_getMaxHeight(templateId));
 	_fe3d->terrain_setTextureRepeat(newId, _fe3d->terrain_getTextureRepeat(templateId));
 	_fe3d->terrain_setLightness(newId, _fe3d->terrain_getLightness(templateId));
+	_fe3d->terrain_setColor(newId, _fe3d->terrain_getColor(templateId));
 	_fe3d->terrain_setRedTextureRepeat(newId, _fe3d->terrain_getRedTextureRepeat(templateId));
 	_fe3d->terrain_setGreenTextureRepeat(newId, _fe3d->terrain_getGreenTextureRepeat(templateId));
 	_fe3d->terrain_setBlueTextureRepeat(newId, _fe3d->terrain_getBlueTextureRepeat(templateId));

@@ -16,7 +16,7 @@ void EngineInterface::model_delete(const string & modelId)
 		}
 	}
 
-	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [aabbId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasParent())
 		{
@@ -24,7 +24,7 @@ void EngineInterface::model_delete(const string & modelId)
 			{
 				if(entity->getParentType() == AabbParentType::MODEL)
 				{
-					aabb_delete(entityId);
+					aabb_delete(aabbId);
 				}
 			}
 		}
@@ -748,7 +748,7 @@ const vector<string> EngineInterface::model_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [entityId, entity] : _core->getModelEntityManager()->getEntities())
+	for(const auto & [modelId, entity] : _core->getModelEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}
@@ -760,7 +760,7 @@ const vector<string> EngineInterface::model_getChildAabbIds(const string & model
 {
 	vector<string> result;
 
-	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [aabbId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasParent())
 		{

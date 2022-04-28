@@ -36,7 +36,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_modelEntityDepthRenderer->bind();
 
-		for(const auto & [entityId, entity] : _modelEntityManager->getEntities())
+		for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
 		{
 			if(entity->isLevelOfDetailed())
 			{
@@ -82,7 +82,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto & [entityId, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
 		{
 			_quad3dEntityDepthRenderer->render(entity);
 		}
@@ -94,7 +94,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_quad3dEntityDepthRenderer->bind();
 
-		for(const auto & [entityId, entity] : _text3dEntityManager->getEntities())
+		for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
 		{
 			for(const auto & characterEntity : entity->getCharacterEntities())
 			{
@@ -109,7 +109,7 @@ void MasterRenderer::captureWorldDepth()
 	{
 		_aabbEntityDepthRenderer->bind();
 
-		for(const auto & [entityId, entity] : _aabbEntityManager->getEntities())
+		for(const auto & [aabbId, entity] : _aabbEntityManager->getEntities())
 		{
 			_aabbEntityDepthRenderer->render(entity);
 		}
@@ -270,7 +270,7 @@ void MasterRenderer::captureShadows()
 		{
 			_modelEntityShadowRenderer->bind();
 
-			for(const auto & [entityId, entity] : _modelEntityManager->getEntities())
+			for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
 			{
 				if(entity->isLevelOfDetailed())
 				{
@@ -316,7 +316,7 @@ void MasterRenderer::captureShadows()
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto & [entityId, entity] : _quad3dEntityManager->getEntities())
+			for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
 			{
 				_quad3dEntityShadowRenderer->render(entity);
 			}
@@ -328,7 +328,7 @@ void MasterRenderer::captureShadows()
 		{
 			_quad3dEntityShadowRenderer->bind();
 
-			for(const auto & [entityId, entity] : _text3dEntityManager->getEntities())
+			for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
 			{
 				for(const auto & characterEntity : entity->getCharacterEntities())
 				{

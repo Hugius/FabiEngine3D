@@ -76,9 +76,9 @@ void MasterRenderer::_renderTerrainEntity()
 	{
 		_terrainEntityColorRenderer->bind();
 
-		_terrainEntityColorRenderer->processPointlightEntities(_pointlightEntityManager->getEntities());
+		_terrainEntityColorRenderer->processPointlights(_pointlightEntityManager->getEntities());
 
-		_terrainEntityColorRenderer->processSpotlightEntities(_spotlightEntityManager->getEntities());
+		_terrainEntityColorRenderer->processSpotlights(_spotlightEntityManager->getEntities());
 
 		_terrainEntityColorRenderer->render(_terrainEntityManager->getSelectedEntity());
 
@@ -92,9 +92,9 @@ void MasterRenderer::_renderWaterEntity()
 	{
 		_waterEntityColorRenderer->bind();
 
-		_waterEntityColorRenderer->processPointlightEntities(_pointlightEntityManager->getEntities());
+		_waterEntityColorRenderer->processPointlights(_pointlightEntityManager->getEntities());
 
-		_waterEntityColorRenderer->processSpotlightEntities(_spotlightEntityManager->getEntities());
+		_waterEntityColorRenderer->processSpotlights(_spotlightEntityManager->getEntities());
 
 		_waterEntityColorRenderer->render(_waterEntityManager->getSelectedEntity());
 
@@ -108,11 +108,11 @@ void MasterRenderer::_renderOpaqueModelEntities()
 	{
 		_modelEntityColorRenderer->bind();
 
-		_modelEntityColorRenderer->processPointlightEntities(_pointlightEntityManager->getEntities());
+		_modelEntityColorRenderer->processPointlights(_pointlightEntityManager->getEntities());
 
-		_modelEntityColorRenderer->processSpotlightEntities(_spotlightEntityManager->getEntities());
+		_modelEntityColorRenderer->processSpotlights(_spotlightEntityManager->getEntities());
 
-		for(const auto & [entityId, entity] : _modelEntityManager->getEntities())
+		for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
 		{
 			bool isTransparent = false;
 
@@ -167,11 +167,11 @@ void MasterRenderer::_renderTransparentModelEntities()
 	{
 		_modelEntityColorRenderer->bind();
 
-		_modelEntityColorRenderer->processPointlightEntities(_pointlightEntityManager->getEntities());
+		_modelEntityColorRenderer->processPointlights(_pointlightEntityManager->getEntities());
 
-		_modelEntityColorRenderer->processSpotlightEntities(_spotlightEntityManager->getEntities());
+		_modelEntityColorRenderer->processSpotlights(_spotlightEntityManager->getEntities());
 
-		for(const auto & [entityId, entity] : _modelEntityManager->getEntities())
+		for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
 		{
 			bool isTransparent = false;
 
@@ -228,7 +228,7 @@ void MasterRenderer::_renderOpaqueQuad3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [entityId, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
 		{
 			if(entity->getOpacity() < 1.0f)
 			{
@@ -248,7 +248,7 @@ void MasterRenderer::_renderTransparentQuad3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [entityId, entity] : _quad3dEntityManager->getEntities())
+		for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
 		{
 			if(entity->getOpacity() == 1.0f)
 			{
@@ -268,7 +268,7 @@ void MasterRenderer::_renderOpaqueText3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [entityId, entity] : _text3dEntityManager->getEntities())
+		for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
 		{
 			if(entity->getOpacity() < 1.0f)
 			{
@@ -291,7 +291,7 @@ void MasterRenderer::_renderTransparentText3dEntities()
 	{
 		_quad3dEntityColorRenderer->bind();
 
-		for(const auto & [entityId, entity] : _text3dEntityManager->getEntities())
+		for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
 		{
 			if(entity->getOpacity() == 1.0f)
 			{
@@ -314,7 +314,7 @@ void MasterRenderer::_renderAabbEntities()
 	{
 		_aabbEntityColorRenderer->bind();
 
-		for(const auto & [entityId, entity] : _aabbEntityManager->getEntities())
+		for(const auto & [aabbId, entity] : _aabbEntityManager->getEntities())
 		{
 			_aabbEntityColorRenderer->render(entity);
 		}
@@ -339,19 +339,19 @@ void MasterRenderer::_renderGUI()
 		_quad2dEntityColorRenderer->bind();
 
 		map<int, shared_ptr<BaseEntity>> orderedQuad2dEntities;
-		for(const auto & [entityId, entity] : _quad2dEntityManager->getEntities())
+		for(const auto & [quad2dId, entity] : _quad2dEntityManager->getEntities())
 		{
 			if(entity->getId() != _renderStorage->getCursorEntityId())
 			{
 				orderedQuad2dEntities.insert({entity->getDepth(), entity});
 			}
 		}
-		for(const auto & [entityId, entity] : _text2dEntityManager->getEntities())
+		for(const auto & [text2dId, entity] : _text2dEntityManager->getEntities())
 		{
 			orderedQuad2dEntities.insert({entity->getDepth(), entity});
 		}
 
-		for(const auto & [entityId, entity] : orderedQuad2dEntities)
+		for(const auto & [quad2dId, entity] : orderedQuad2dEntities)
 		{
 			auto castedQuad2dEntity = dynamic_pointer_cast<Quad2dEntity>(entity);
 			auto castedText2dEntity = dynamic_pointer_cast<Text2dEntity>(entity);

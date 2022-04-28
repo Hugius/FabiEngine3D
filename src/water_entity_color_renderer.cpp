@@ -90,7 +90,7 @@ void WaterEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>> & entities)
+void WaterEntityColorRenderer::processPointlights(const unordered_map<string, shared_ptr<PointlightEntity>> & entities)
 {
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
@@ -113,7 +113,7 @@ void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<str
 	//_shader->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities)
+void WaterEntityColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities)
 {
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)

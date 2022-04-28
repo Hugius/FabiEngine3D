@@ -15,7 +15,7 @@ class ModelEntityColorRenderer final : public BaseRenderer
 public:
 	void bind();
 	void unbind();
-	void processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>> & entities);
-	void processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities);
+	void processPointlights(const unordered_map<string, shared_ptr<PointlightEntity>> & entities);
+	void processSpotlights(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities);
 	void render(const shared_ptr<ModelEntity> entity, const unordered_map<string, shared_ptr<CaptorEntity>> & captorEntities);
 };

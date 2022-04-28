@@ -77,7 +77,7 @@ void TerrainEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>> & entities)
+void TerrainEntityColorRenderer::processPointlights(const unordered_map<string, shared_ptr<PointlightEntity>> & entities)
 {
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
@@ -100,7 +100,7 @@ void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<s
 	_shaderBuffer->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities)
+void TerrainEntityColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities)
 {
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)

@@ -45,7 +45,7 @@ const vector<string> EngineInterface::captor_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [entityId, entity] : _core->getCaptorEntityManager()->getEntities())
+	for(const auto & [captorId, entity] : _core->getCaptorEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}

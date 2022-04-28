@@ -65,7 +65,7 @@ const vector<string> EngineInterface::spotlight_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [entityId, entity] : _core->getSpotlightEntityManager()->getEntities())
+	for(const auto & [spotlightId, entity] : _core->getSpotlightEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}

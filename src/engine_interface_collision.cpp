@@ -30,7 +30,7 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs() const
 {
 	vector<string> result;
 
-	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [aabbId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasCollided())
 		{
@@ -45,7 +45,7 @@ const vector<string> EngineInterface::collision_checkCameraWithAabbs(DirectionTy
 {
 	vector<string> result;
 
-	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [aabbId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasCollided())
 		{

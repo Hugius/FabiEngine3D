@@ -16,7 +16,7 @@ void EngineInterface::quad3d_delete(const string & quad3dId)
 		}
 	}
 
-	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [aabbId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasParent())
 		{
@@ -24,7 +24,7 @@ void EngineInterface::quad3d_delete(const string & quad3dId)
 			{
 				if(entity->getParentType() == AabbParentType::QUAD3D)
 				{
-					aabb_delete(entityId);
+					aabb_delete(aabbId);
 				}
 			}
 		}
@@ -402,7 +402,7 @@ const vector<string> EngineInterface::quad3d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [entityId, entity] : _core->getQuad3dEntityManager()->getEntities())
+	for(const auto & [quad3dId, entity] : _core->getQuad3dEntityManager()->getEntities())
 	{
 		result.push_back(entity->getId());
 	}
@@ -429,7 +429,7 @@ const vector<string> EngineInterface::quad3d_getChildAabbIds(const string & quad
 {
 	vector<string> result;
 
-	for(const auto & [entityId, entity] : _core->getAabbEntityManager()->getEntities())
+	for(const auto & [aabbId, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(entity->hasParent())
 		{

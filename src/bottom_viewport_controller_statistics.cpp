@@ -77,9 +77,9 @@ void BottomViewportController::_updateStatistics()
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
 	{
 		int entityCount = 0;
-		for(const auto & entityId : _fe3d->model_getIds())
+		for(const auto & modelId : _fe3d->model_getIds())
 		{
-			if(_fe3d->model_isVisible(entityId))
+			if(_fe3d->model_isVisible(modelId))
 			{
 				entityCount++;
 			}
@@ -93,9 +93,9 @@ void BottomViewportController::_updateStatistics()
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
 	{
 		int entityCount = 0;
-		for(const auto & entityId : _fe3d->quad3d_getIds())
+		for(const auto & quad3dId : _fe3d->quad3d_getIds())
 		{
-			if(_fe3d->quad3d_isVisible(entityId))
+			if(_fe3d->quad3d_isVisible(quad3dId))
 			{
 				entityCount++;
 			}
@@ -109,9 +109,9 @@ void BottomViewportController::_updateStatistics()
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
 	{
 		int entityCount = 0;
-		for(const auto & entityId : _fe3d->aabb_getIds())
+		for(const auto & aabbId : _fe3d->aabb_getIds())
 		{
-			if(_fe3d->aabb_isVisible(entityId))
+			if(_fe3d->aabb_isVisible(aabbId))
 			{
 				entityCount++;
 			}
@@ -125,16 +125,16 @@ void BottomViewportController::_updateStatistics()
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
 	{
 		int entityCount = 0;
-		for(const auto & entityId : _fe3d->pointlight_getIds())
+		for(const auto & pointlightId : _fe3d->pointlight_getIds())
 		{
-			if(_fe3d->pointlight_isVisible(entityId))
+			if(_fe3d->pointlight_isVisible(pointlightId))
 			{
 				entityCount++;
 			}
 		}
-		for(const auto & entityId : _fe3d->spotlight_getIds())
+		for(const auto & spotlightId : _fe3d->spotlight_getIds())
 		{
-			if(_fe3d->spotlight_isVisible(entityId))
+			if(_fe3d->spotlight_isVisible(spotlightId))
 			{
 				entityCount++;
 			}
@@ -148,9 +148,9 @@ void BottomViewportController::_updateStatistics()
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
 	{
 		int entityCount = 0;
-		for(const auto & entityId : _fe3d->captor_getIds())
+		for(const auto & captorId : _fe3d->captor_getIds())
 		{
-			if(_fe3d->captor_isVisible(entityId))
+			if(_fe3d->captor_isVisible(captorId))
 			{
 				entityCount++;
 			}
@@ -164,16 +164,16 @@ void BottomViewportController::_updateStatistics()
 	if((_fe3d->misc_getPassedUpdateCount() % (_fe3d->misc_getUpdateCountPerSecond() / 10)) == 0)
 	{
 		int entityCount = 0;
-		for(const auto & entityId : _fe3d->quad2d_getIds())
+		for(const auto & quad2dId : _fe3d->quad2d_getIds())
 		{
-			if(_fe3d->quad2d_isVisible(entityId))
+			if(_fe3d->quad2d_isVisible(quad2dId))
 			{
 				entityCount++;
 			}
 		}
-		for(const auto & entityId : _fe3d->text2d_getIds())
+		for(const auto & text2dId : _fe3d->text2d_getIds())
 		{
-			if(_fe3d->text2d_isVisible(entityId))
+			if(_fe3d->text2d_isVisible(text2dId))
 			{
 				entityCount++;
 			}

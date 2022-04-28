@@ -10,7 +10,7 @@ void MasterRenderer::captureCubeReflections()
 	}
 
 	vector<shared_ptr<ModelEntity>> savedModelEntities;
-	for(const auto & [entityId, entity] : _modelEntityManager->getEntities())
+	for(const auto & [modelId, entity] : _modelEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -20,7 +20,7 @@ void MasterRenderer::captureCubeReflections()
 	}
 
 	vector<shared_ptr<Quad3dEntity>> savedQuad3dEntities;
-	for(const auto & [entityId, entity] : _quad3dEntityManager->getEntities())
+	for(const auto & [quad3dId, entity] : _quad3dEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -30,7 +30,7 @@ void MasterRenderer::captureCubeReflections()
 	}
 
 	vector<shared_ptr<Text3dEntity>> savedText3dEntities;
-	for(const auto & [entityId, entity] : _text3dEntityManager->getEntities())
+	for(const auto & [text3dId, entity] : _text3dEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -56,7 +56,7 @@ void MasterRenderer::captureCubeReflections()
 	_renderStorage->setSkyExposureEnabled(false);
 	_renderStorage->setShadowInterval(0);
 
-	for(const auto & [entityId, entity] : _captorEntityManager->getEntities())
+	for(const auto & [captorId, entity] : _captorEntityManager->getEntities())
 	{
 		if(entity->mustCapture())
 		{

@@ -91,7 +91,7 @@ const bool CameraCollisionResponder::isCameraTerrainResponseEnabled() const
 
 const bool CameraCollisionResponder::_handleCollision(DirectionType direction) const
 {
-	for(const auto & [entityId, entity] : _aabbManager->getEntities())
+	for(const auto & [aabbId, entity] : _aabbManager->getEntities())
 	{
 		switch(direction)
 		{

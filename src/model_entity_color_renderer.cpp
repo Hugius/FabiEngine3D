@@ -89,7 +89,7 @@ void ModelEntityColorRenderer::unbind()
 	_shaderBuffer->unbind();
 }
 
-void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>> & entities)
+void ModelEntityColorRenderer::processPointlights(const unordered_map<string, shared_ptr<PointlightEntity>> & entities)
 {
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)
@@ -112,7 +112,7 @@ void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<str
 	_shaderBuffer->uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities)
+void ModelEntityColorRenderer::processSpotlights(const unordered_map<string, shared_ptr<SpotlightEntity>> & entities)
 {
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
 	for(const auto & [entityId, entity] : entities)

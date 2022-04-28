@@ -8,7 +8,7 @@
 using std::string;
 using std::shared_ptr;
 
-class Sound2d
+class Sound2d final
 {
 public:
 	Sound2d(const string & id);

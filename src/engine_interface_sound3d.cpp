@@ -65,7 +65,7 @@ const vector<string> EngineInterface::sound3d_getIds() const
 {
 	vector<string> result;
 
-	for(const auto & [soundId, sound] : _core->getSound3dManager()->getSounds())
+	for(const auto & [sound3dId, sound] : _core->getSound3dManager()->getSounds())
 	{
 		result.push_back(sound->getId());
 	}

@@ -30,21 +30,21 @@ const bool Animation3dEditor::loadAnimationsFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		string animationId;
+		string animation3dId;
 		int partCount;
 		int frameCount;
 
 		istringstream iss(line);
 
 		iss
-			>> animationId
+			>> animation3dId
 			>> partCount
 			>> frameCount;
 
-		_loadedAnimation3dIds.push_back(animationId);
+		_loadedAnimation3dIds.push_back(animation3dId);
 		sort(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end());
 
-		_fe3d->animation3d_create(animationId);
+		_fe3d->animation3d_create(animation3dId);
 
 		for(int partIndex = 0; partIndex < partCount; partIndex++)
 		{
@@ -57,14 +57,14 @@ const bool Animation3dEditor::loadAnimationsFromFile()
 				partId = "";
 			}
 
-			_fe3d->animation3d_createPart(animationId, partId);
+			_fe3d->animation3d_createPart(animation3dId, partId);
 		}
 
-		const auto partIds = _fe3d->animation3d_getPartIds(animationId);
+		const auto partIds = _fe3d->animation3d_getPartIds(animation3dId);
 
 		for(int frameIndex = 0; frameIndex < frameCount; frameIndex++)
 		{
-			_fe3d->animation3d_createFrame(animationId, frameIndex);
+			_fe3d->animation3d_createFrame(animation3dId, frameIndex);
 
 			for(int partIndex = 0; partIndex < partCount; partIndex++)
 			{
@@ -87,11 +87,11 @@ const bool Animation3dEditor::loadAnimationsFromFile()
 					>> speedType
 					>> transformationType;
 
-				_fe3d->animation3d_setTargetTransformation(animationId, frameIndex, partIds[partIndex], targetTransformation);
-				_fe3d->animation3d_setRotationOrigin(animationId, frameIndex, partIds[partIndex], rotationOrigin);
-				_fe3d->animation3d_setSpeed(animationId, frameIndex, partIds[partIndex], speed);
-				_fe3d->animation3d_setSpeedType(animationId, frameIndex, partIds[partIndex], SpeedType(speedType));
-				_fe3d->animation3d_setTransformationType(animationId, frameIndex, partIds[partIndex], TransformationType(transformationType));
+				_fe3d->animation3d_setTargetTransformation(animation3dId, frameIndex, partIds[partIndex], targetTransformation);
+				_fe3d->animation3d_setRotationOrigin(animation3dId, frameIndex, partIds[partIndex], rotationOrigin);
+				_fe3d->animation3d_setSpeed(animation3dId, frameIndex, partIds[partIndex], speed);
+				_fe3d->animation3d_setSpeedType(animation3dId, frameIndex, partIds[partIndex], SpeedType(speedType));
+				_fe3d->animation3d_setTransformationType(animation3dId, frameIndex, partIds[partIndex], TransformationType(transformationType));
 			}
 		}
 	}

@@ -9,9 +9,9 @@ void Animation3dManager::createAnimation(const string & id)
 		abort();
 	}
 
-	auto animation = make_shared<Animation3d>(id);
+	auto animation3d = make_shared<Animation3d>(id);
 
-	_animations.insert({id, animation});
+	_animations.insert({id, animation3d});
 }
 
 void Animation3dManager::deleteAnimation(const string & id)

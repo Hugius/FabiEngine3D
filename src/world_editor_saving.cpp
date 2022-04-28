@@ -118,9 +118,9 @@ const bool WorldEditor::saveWorldToFile() const
 
 	for(const auto & [modelId, templateId] : _loadedModelIds)
 	{
-		auto startedAnimationIds = _fe3d->model_getAnimationIds(modelId);
+		auto startedAnimation3dIds = _fe3d->model_getAnimationIds(modelId);
 
-		if(!startedAnimationIds.empty())
+		if(!startedAnimation3dIds.empty())
 		{
 			for(const auto & partId : _fe3d->model_getPartIds(modelId))
 			{
@@ -138,11 +138,11 @@ const bool WorldEditor::saveWorldToFile() const
 		auto rotation = _fe3d->model_getBaseRotation(modelId);
 		auto size = _fe3d->model_getBaseSize(modelId);
 		auto isFrozen = _fe3d->model_isFrozen(modelId);
-		auto animationId = (startedAnimationIds.empty()) ? "" : startedAnimationIds[0];
+		auto animation3dId = (startedAnimation3dIds.empty()) ? "" : startedAnimation3dIds[0];
 
-		animationId = (animationId.empty()) ? "?" : animationId;
+		animation3dId = (animation3dId.empty()) ? "?" : animation3dId;
 
-		replace(animationId.begin(), animationId.end(), ' ', '?');
+		replace(animation3dId.begin(), animation3dId.end(), ' ', '?');
 
 		file
 			<< "MODEL "
@@ -170,22 +170,22 @@ const bool WorldEditor::saveWorldToFile() const
 			<< " "
 			<< isFrozen
 			<< " "
-			<< animationId;
+			<< animation3dId;
 
 		file << endl;
 	}
 
 	for(const auto & [quad3dId, templateId] : _loadedQuad3dIds)
 	{
-		auto startedAnimationIds = _fe3d->quad3d_getAnimationIds(quad3dId);
+		auto startedAnimation2dIds = _fe3d->quad3d_getAnimationIds(quad3dId);
 		auto position = _fe3d->quad3d_getPosition(quad3dId);
 		auto rotation = _fe3d->quad3d_getRotation(quad3dId);
 		auto size = _fe3d->quad3d_getSize(quad3dId);
-		auto animationId = (startedAnimationIds.empty() ? "" : startedAnimationIds[0]);
+		auto animation2dId = (startedAnimation2dIds.empty() ? "" : startedAnimation2dIds[0]);
 
-		animationId = (animationId.empty()) ? "?" : animationId;
+		animation2dId = (animation2dId.empty()) ? "?" : animation2dId;
 
-		replace(animationId.begin(), animationId.end(), ' ', '?');
+		replace(animation2dId.begin(), animation2dId.end(), ' ', '?');
 
 		file
 			<< "QUAD3D "
@@ -209,7 +209,7 @@ const bool WorldEditor::saveWorldToFile() const
 			<< " "
 			<< size.y
 			<< " "
-			<< animationId
+			<< animation2dId
 			<< endl;
 	}
 

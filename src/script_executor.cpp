@@ -78,24 +78,24 @@ void ScriptExecutor::pause()
 	_wasFirstPersonEnabled = _fe3d->camera_isFirstPersonEnabled();
 	_wasThirdPersonEnabled = _fe3d->camera_isThirdPersonEnabled();
 
-	for(const auto & soundId : _fe3d->sound3d_getIds())
+	for(const auto & sound3dId : _fe3d->sound3d_getIds())
 	{
-		for(int index = 0; index < _fe3d->sound3d_getStartedCount(soundId); index++)
+		for(int index = 0; index < _fe3d->sound3d_getStartedCount(sound3dId); index++)
 		{
-			if(_fe3d->sound3d_isStarted(soundId, index) && _fe3d->sound3d_isPaused(soundId, index))
+			if(_fe3d->sound3d_isStarted(sound3dId, index) && _fe3d->sound3d_isPaused(sound3dId, index))
 			{
-				_pausedSound3dIds.push_back({soundId, index});
+				_pausedSound3dIds.push_back({sound3dId, index});
 			}
 		}
 	}
 
-	for(const auto & soundId : _fe3d->sound2d_getIds())
+	for(const auto & sound2dId : _fe3d->sound2d_getIds())
 	{
-		for(int index = 0; index < _fe3d->sound2d_getStartedCount(soundId); index++)
+		for(int index = 0; index < _fe3d->sound2d_getStartedCount(sound2dId); index++)
 		{
-			if(_fe3d->sound2d_isStarted(soundId, index) && _fe3d->sound2d_isPaused(soundId, index))
+			if(_fe3d->sound2d_isStarted(sound2dId, index) && _fe3d->sound2d_isPaused(sound2dId, index))
 			{
-				_pausedSound2dIds.push_back({soundId, index});
+				_pausedSound2dIds.push_back({sound2dId, index});
 			}
 		}
 	}
@@ -113,24 +113,24 @@ void ScriptExecutor::pause()
 	_fe3d->camera_setFirstPersonEnabled(false);
 	_fe3d->camera_setThirdPersonEnabled(false);
 
-	for(const auto & soundId : _fe3d->sound3d_getIds())
+	for(const auto & sound3dId : _fe3d->sound3d_getIds())
 	{
-		for(int index = 0; index < _fe3d->sound3d_getStartedCount(soundId); index++)
+		for(int index = 0; index < _fe3d->sound3d_getStartedCount(sound3dId); index++)
 		{
-			if(_fe3d->sound3d_isStarted(soundId, index) && !_fe3d->sound3d_isPaused(soundId, index))
+			if(_fe3d->sound3d_isStarted(sound3dId, index) && !_fe3d->sound3d_isPaused(sound3dId, index))
 			{
-				_fe3d->sound3d_pause(soundId, index);
+				_fe3d->sound3d_pause(sound3dId, index);
 			}
 		}
 	}
 
-	for(const auto & soundId : _fe3d->sound2d_getIds())
+	for(const auto & sound2dId : _fe3d->sound2d_getIds())
 	{
-		for(int index = 0; index < _fe3d->sound2d_getStartedCount(soundId); index++)
+		for(int index = 0; index < _fe3d->sound2d_getStartedCount(sound2dId); index++)
 		{
-			if(_fe3d->sound2d_isStarted(soundId, index) && !_fe3d->sound2d_isPaused(soundId, index))
+			if(_fe3d->sound2d_isStarted(sound2dId, index) && !_fe3d->sound2d_isPaused(sound2dId, index))
 			{
-				_fe3d->sound2d_pause(soundId, index);
+				_fe3d->sound2d_pause(sound2dId, index);
 			}
 		}
 	}
@@ -158,24 +158,24 @@ void ScriptExecutor::resume()
 	_fe3d->camera_setFirstPersonEnabled(_wasFirstPersonEnabled);
 	_fe3d->camera_setThirdPersonEnabled(_wasThirdPersonEnabled);
 
-	for(const auto & soundId : _fe3d->sound3d_getIds())
+	for(const auto & sound3dId : _fe3d->sound3d_getIds())
 	{
-		for(int index = 0; index < _fe3d->sound3d_getStartedCount(soundId); index++)
+		for(int index = 0; index < _fe3d->sound3d_getStartedCount(sound3dId); index++)
 		{
-			if(_fe3d->sound3d_isStarted(soundId, index) && _fe3d->sound3d_isPaused(soundId, index))
+			if(_fe3d->sound3d_isStarted(sound3dId, index) && _fe3d->sound3d_isPaused(sound3dId, index))
 			{
-				_fe3d->sound3d_resume(soundId, index);
+				_fe3d->sound3d_resume(sound3dId, index);
 			}
 		}
 	}
 
-	for(const auto & soundId : _fe3d->sound2d_getIds())
+	for(const auto & sound2dId : _fe3d->sound2d_getIds())
 	{
-		for(int index = 0; index < _fe3d->sound2d_getStartedCount(soundId); index++)
+		for(int index = 0; index < _fe3d->sound2d_getStartedCount(sound2dId); index++)
 		{
-			if(_fe3d->sound2d_isStarted(soundId, index) && _fe3d->sound2d_isPaused(soundId, index))
+			if(_fe3d->sound2d_isStarted(sound2dId, index) && _fe3d->sound2d_isPaused(sound2dId, index))
 			{
-				_fe3d->sound2d_resume(soundId, index);
+				_fe3d->sound2d_resume(sound2dId, index);
 			}
 		}
 	}
@@ -188,14 +188,14 @@ void ScriptExecutor::resume()
 		}
 	}
 
-	for(const auto & [soundId, index] : _pausedSound3dIds)
+	for(const auto & [sound3dId, index] : _pausedSound3dIds)
 	{
-		_fe3d->sound3d_pause(soundId, index);
+		_fe3d->sound3d_pause(sound3dId, index);
 	}
 
-	for(const auto & [soundId, index] : _pausedSound2dIds)
+	for(const auto & [sound2dId, index] : _pausedSound2dIds)
 	{
-		_fe3d->sound2d_pause(soundId, index);
+		_fe3d->sound2d_pause(sound2dId, index);
 	}
 
 	for(const auto & clockId : _pausedClockIds)

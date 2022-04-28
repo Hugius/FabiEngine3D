@@ -162,46 +162,46 @@ void Animation3dEditor::_updateAnimation3dCreating()
 {
 	if((_gui->getOverlay()->getValueFormId() == "createAnimation3d") && _gui->getOverlay()->isValueFormConfirmed())
 	{
-		auto newAnimationId = _gui->getOverlay()->getValueFormContent();
+		auto newAnimation3dId = _gui->getOverlay()->getValueFormContent();
 
-		if(newAnimationId.empty())
+		if(newAnimation3dId.empty())
 		{
-			Logger::throwWarning("Animation ID cannot be empty");
+			Logger::throwWarning("Animation3D ID cannot be empty");
 
 			return;
 		}
 
-		if(any_of(newAnimationId.begin(), newAnimationId.end(), isspace))
+		if(any_of(newAnimation3dId.begin(), newAnimation3dId.end(), isspace))
 		{
-			Logger::throwWarning("Animation ID cannot contain any spaces");
+			Logger::throwWarning("Animation3D ID cannot contain any spaces");
 
 			return;
 		}
 
-		if(any_of(newAnimationId.begin(), newAnimationId.end(), isupper))
+		if(any_of(newAnimation3dId.begin(), newAnimation3dId.end(), isupper))
 		{
-			Logger::throwWarning("Animation ID cannot contain any capitals");
+			Logger::throwWarning("Animation3D ID cannot contain any capitals");
 
 			return;
 		}
 
-		newAnimationId = ("@" + newAnimationId);
+		newAnimation3dId = ("@" + newAnimation3dId);
 
-		if(find(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end(), newAnimationId) != _loadedAnimation3dIds.end())
+		if(find(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end(), newAnimation3dId) != _loadedAnimation3dIds.end())
 		{
-			Logger::throwWarning("Animation already exists");
+			Logger::throwWarning("Animation3D already exists");
 
 			return;
 		}
 
-		_currentAnimation3dId = newAnimationId;
-		_loadedAnimation3dIds.push_back(newAnimationId);
+		_currentAnimation3dId = newAnimation3dId;
+		_loadedAnimation3dIds.push_back(newAnimation3dId);
 		sort(_loadedAnimation3dIds.begin(), _loadedAnimation3dIds.end());
 
-		_fe3d->animation3d_create(newAnimationId);
+		_fe3d->animation3d_create(newAnimation3dId);
 
 		_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
-		_gui->getOverlay()->getTextField("animation3dId")->setTextContent("Animation3D: " + newAnimationId);
+		_gui->getOverlay()->getTextField("animation3dId")->setTextContent("Animation3D: " + newAnimation3dId);
 		_gui->getOverlay()->getTextField("animation3dId")->setVisible(true);
 		_gui->getOverlay()->getTextField("animation3dFrame")->setVisible(true);
 	}
@@ -287,7 +287,7 @@ void Animation3dEditor::_updateModelChoosing()
 
 				if(!hasAllParts)
 				{
-					Logger::throwWarning("Preview model does not have the required animation parts");
+					Logger::throwWarning("Preview model does not have the required animation3D parts");
 
 					return;
 				}

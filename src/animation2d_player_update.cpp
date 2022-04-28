@@ -18,9 +18,9 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 	for(auto & [mergedId, startedAnimation] : _startedQuad3dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
-		const auto animation = _animation2dManager->getAnimation(splitKey.first);
+		const auto animation2d = _animation2dManager->getAnimation(splitKey.first);
 		const auto quad3d = _quad3dEntityManager->getEntity(splitKey.second);
-		const auto interval = static_cast<int>(static_cast<float>(animation->getInterval() * startedAnimation->getIntervalMultiplier()) / static_cast<float>(startedAnimation->getIntervalDivider()));
+		const auto interval = static_cast<int>(static_cast<float>(animation2d->getInterval() * startedAnimation->getIntervalMultiplier()) / static_cast<float>(startedAnimation->getIntervalDivider()));
 
 		if(!startedAnimation->isPaused())
 		{
@@ -28,11 +28,11 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 			{
 				startedAnimation->setUpdateCount(0);
 
-				if(startedAnimation->getColumnIndex() >= (animation->getColumnCount() - 1))
+				if(startedAnimation->getColumnIndex() >= (animation2d->getColumnCount() - 1))
 				{
 					startedAnimation->setColumnIndex(0);
 
-					if(startedAnimation->getRowIndex() >= (animation->getRowCount() - 1))
+					if(startedAnimation->getRowIndex() >= (animation2d->getRowCount() - 1))
 					{
 						startedAnimation->setRowIndex(0);
 
@@ -67,10 +67,10 @@ void Animation2dPlayer::_updateQuad3dAnimationExecution()
 			}
 		}
 
-		const auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation->getColumnCount())),
-										(1.0f / static_cast<float>(animation->getRowCount())));
+		const auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation2d->getColumnCount())),
+										(1.0f / static_cast<float>(animation2d->getRowCount())));
 		const auto uvOffset = fvec2((static_cast<float>(startedAnimation->getColumnIndex()) * uvMultiplier.x),
-									(static_cast<float>(animation->getRowCount() - startedAnimation->getRowIndex() - 1) * uvMultiplier.y));
+									(static_cast<float>(animation2d->getRowCount() - startedAnimation->getRowIndex() - 1) * uvMultiplier.y));
 
 		quad3d->setUvMultiplier(uvMultiplier);
 		quad3d->setUvOffset(uvOffset);
@@ -89,9 +89,9 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 	for(auto & [mergedId, startedAnimation] : _startedQuad2dAnimations)
 	{
 		const auto splitKey = Tools::splitStringIntoTwo(mergedId, DELIMITER);
-		const auto animation = _animation2dManager->getAnimation(splitKey.first);
+		const auto animation2d = _animation2dManager->getAnimation(splitKey.first);
 		const auto quad2d = _quad2dEntityManager->getEntity(splitKey.second);
-		const auto interval = static_cast<int>(static_cast<float>(animation->getInterval()) / static_cast<float>(startedAnimation->getIntervalDivider()));
+		const auto interval = static_cast<int>(static_cast<float>(animation2d->getInterval()) / static_cast<float>(startedAnimation->getIntervalDivider()));
 
 		if(!startedAnimation->isPaused())
 		{
@@ -99,11 +99,11 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 			{
 				startedAnimation->setUpdateCount(0);
 
-				if(startedAnimation->getColumnIndex() >= (animation->getColumnCount() - 1))
+				if(startedAnimation->getColumnIndex() >= (animation2d->getColumnCount() - 1))
 				{
 					startedAnimation->setColumnIndex(0);
 
-					if(startedAnimation->getRowIndex() >= (animation->getRowCount() - 1))
+					if(startedAnimation->getRowIndex() >= (animation2d->getRowCount() - 1))
 					{
 						startedAnimation->setRowIndex(0);
 
@@ -133,10 +133,10 @@ void Animation2dPlayer::_updateQuad2dAnimationExecution()
 			}
 		}
 
-		const auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation->getColumnCount())),
-										(1.0f / static_cast<float>(animation->getRowCount())));
+		const auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation2d->getColumnCount())),
+										(1.0f / static_cast<float>(animation2d->getRowCount())));
 		const auto uvOffset = fvec2((static_cast<float>(startedAnimation->getColumnIndex()) * uvMultiplier.x),
-									(static_cast<float>(animation->getRowCount() - startedAnimation->getRowIndex() - 1) * uvMultiplier.y));
+									(static_cast<float>(animation2d->getRowCount() - startedAnimation->getRowIndex() - 1) * uvMultiplier.y));
 
 		quad2d->setUvMultiplier(uvMultiplier);
 		quad2d->setUvOffset(uvOffset);

@@ -22,14 +22,14 @@ const bool Animation3dEditor::saveAnimationsToFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	auto file = ofstream(rootPath + "projects\\" + getCurrentProjectId() + "\\data\\animation3d.fe3d");
 
-	for(const auto & animationId : _loadedAnimation3dIds)
+	for(const auto & animation3dId : _loadedAnimation3dIds)
 	{
-		const auto partIds = _fe3d->animation3d_getPartIds(animationId);
+		const auto partIds = _fe3d->animation3d_getPartIds(animation3dId);
 		const auto partCount = partIds.size();
-		const auto frameCount = _fe3d->animation3d_getFrameCount(animationId);
+		const auto frameCount = _fe3d->animation3d_getFrameCount(animation3dId);
 
 		file
-			<< animationId
+			<< animation3dId
 			<< " "
 			<< partCount
 			<< " "
@@ -52,11 +52,11 @@ const bool Animation3dEditor::saveAnimationsToFile() const
 		{
 			for(int partIndex = 0; partIndex < partCount; partIndex++)
 			{
-				auto targetTransformation = _fe3d->animation3d_getTargetTransformation(animationId, frameIndex, partIds[partIndex]);
-				auto rotationOrigin = _fe3d->animation3d_getRotationOrigin(animationId, frameIndex, partIds[partIndex]);
-				auto speed = _fe3d->animation3d_getSpeed(animationId, frameIndex, partIds[partIndex]);
-				auto speedType = static_cast<int>(_fe3d->animation3d_getSpeedType(animationId, frameIndex, partIds[partIndex]));
-				auto transformationType = static_cast<int>(_fe3d->animation3d_getTransformationType(animationId, frameIndex, partIds[partIndex]));
+				auto targetTransformation = _fe3d->animation3d_getTargetTransformation(animation3dId, frameIndex, partIds[partIndex]);
+				auto rotationOrigin = _fe3d->animation3d_getRotationOrigin(animation3dId, frameIndex, partIds[partIndex]);
+				auto speed = _fe3d->animation3d_getSpeed(animation3dId, frameIndex, partIds[partIndex]);
+				auto speedType = static_cast<int>(_fe3d->animation3d_getSpeedType(animation3dId, frameIndex, partIds[partIndex]));
+				auto transformationType = static_cast<int>(_fe3d->animation3d_getTransformationType(animation3dId, frameIndex, partIds[partIndex]));
 
 				file
 					<< targetTransformation.x

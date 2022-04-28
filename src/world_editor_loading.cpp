@@ -149,7 +149,7 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 		{
 			string modelId;
 			string templateId;
-			string animationId;
+			string animation3dId;
 			fvec3 position;
 			fvec3 rotation;
 			fvec3 size;
@@ -169,11 +169,11 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> size.y
 				>> size.z
 				>> isFrozen
-				>> animationId;
+				>> animation3dId;
 
-			animationId = (animationId == "?") ? "" : animationId;
+			animation3dId = (animation3dId == "?") ? "" : animation3dId;
 
-			replace(animationId.begin(), animationId.end(), '?', ' ');
+			replace(animation3dId.begin(), animation3dId.end(), '?', ' ');
 
 			if(!_fe3d->model_isExisting(templateId))
 			{
@@ -189,16 +189,16 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->model_setBaseSize(modelId, size);
 			_fe3d->model_setFrozen(modelId, isFrozen);
 
-			if(_fe3d->animation3d_isExisting(animationId))
+			if(_fe3d->animation3d_isExisting(animation3dId))
 			{
-				_fe3d->model_startAnimation(modelId, animationId, -1);
+				_fe3d->model_startAnimation(modelId, animation3dId, -1);
 			}
 		}
 		else if(lineType == "QUAD3D")
 		{
 			string quad3dId;
 			string templateId;
-			string animationId;
+			string animation2dId;
 			fvec3 position;
 			fvec3 rotation;
 			fvec2 size;
@@ -214,11 +214,11 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 				>> rotation.z
 				>> size.x
 				>> size.y
-				>> animationId;
+				>> animation2dId;
 
-			animationId = (animationId == "?") ? "" : animationId;
+			animation2dId = (animation2dId == "?") ? "" : animation2dId;
 
-			replace(animationId.begin(), animationId.end(), '?', ' ');
+			replace(animation2dId.begin(), animation2dId.end(), '?', ' ');
 
 			if(!_fe3d->quad3d_isExisting(templateId))
 			{
@@ -233,9 +233,9 @@ const bool WorldEditor::loadWorldFromFile(const string & fileName)
 			_fe3d->quad3d_setRotation(quad3dId, rotation);
 			_fe3d->quad3d_setSize(quad3dId, size);
 
-			if(_fe3d->animation2d_isExisting(animationId))
+			if(_fe3d->animation2d_isExisting(animation2dId))
 			{
-				_fe3d->quad3d_startAnimation(quad3dId, animationId, -1);
+				_fe3d->quad3d_startAnimation(quad3dId, animation2dId, -1);
 			}
 		}
 		else if(lineType == "TEXT3D")
